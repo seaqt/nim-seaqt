@@ -17,12 +17,12 @@ QScrollerProperties* QScrollerProperties_new() {
 	return new (std::nothrow) QScrollerProperties();
 }
 
-QScrollerProperties* QScrollerProperties_new2(QScrollerProperties* sp) {
-	return new (std::nothrow) QScrollerProperties(*sp);
+QScrollerProperties* QScrollerProperties_new_from(QScrollerProperties* from) {
+	return new (std::nothrow) QScrollerProperties(*from);
 }
 
-void QScrollerProperties_operatorAssign(QScrollerProperties* self, QScrollerProperties* sp) {
-	self->operator=(*sp);
+void QScrollerProperties_operatorAssign(QScrollerProperties* self, QScrollerProperties* from) {
+	self->operator=(*from);
 }
 
 bool QScrollerProperties_operatorEqual(const QScrollerProperties* self, QScrollerProperties* sp) {

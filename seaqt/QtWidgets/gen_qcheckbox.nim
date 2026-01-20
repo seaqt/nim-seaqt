@@ -75,7 +75,7 @@ type cQCheckBox*{.exportc: "QCheckBox", incompleteStruct.} = object
 proc fcQCheckBox_metaObject(self: pointer): pointer {.importc: "QCheckBox_metaObject".}
 proc fcQCheckBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QCheckBox_metacast".}
 proc fcQCheckBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCheckBox_metacall".}
-proc fcQCheckBox_tr(s: cstring): struct_seaqt_string {.importc: "QCheckBox_tr".}
+proc fcQCheckBox_trS(s: cstring): struct_seaqt_string {.importc: "QCheckBox_tr_s".}
 proc fcQCheckBox_sizeHint(self: pointer): pointer {.importc: "QCheckBox_sizeHint".}
 proc fcQCheckBox_minimumSizeHint(self: pointer): pointer {.importc: "QCheckBox_minimumSizeHint".}
 proc fcQCheckBox_setTristate(self: pointer): void {.importc: "QCheckBox_setTristate".}
@@ -84,9 +84,9 @@ proc fcQCheckBox_checkState(self: pointer): cint {.importc: "QCheckBox_checkStat
 proc fcQCheckBox_setCheckState(self: pointer, state: cint): void {.importc: "QCheckBox_setCheckState".}
 proc fcQCheckBox_stateChanged(self: pointer, param1: cint): void {.importc: "QCheckBox_stateChanged".}
 proc fcQCheckBox_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCheckBox_connect_stateChanged".}
-proc fcQCheckBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCheckBox_tr2".}
-proc fcQCheckBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCheckBox_tr3".}
-proc fcQCheckBox_setTristateWithBool(self: pointer, y: bool): void {.importc: "QCheckBox_setTristateWithBool".}
+proc fcQCheckBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCheckBox_tr_s_c".}
+proc fcQCheckBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCheckBox_tr_s_c_n".}
+proc fcQCheckBox_setTristateY(self: pointer, y: bool): void {.importc: "QCheckBox_setTristate_y".}
 proc fcQCheckBox_vdata(self: pointer): ptr pointer {.importc: "QCheckBox_vdata".}
 proc fvdata_cQCheckBox(self: pointer): pointer {.importc: "vdata_QCheckBox".}
 
@@ -209,10 +209,10 @@ proc fcQCheckBox_protectedbase_sender(self: pointer): pointer {.importc: "QCheck
 proc fcQCheckBox_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCheckBox_protectedbase_senderSignalIndex".}
 proc fcQCheckBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCheckBox_protectedbase_receivers".}
 proc fcQCheckBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCheckBox_protectedbase_isSignalConnected".}
-proc fcQCheckBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new".}
-proc fcQCheckBox_new2(vtbl: pointer, vdata: csize_t): ptr cQCheckBox {.importc: "QCheckBox_new2".}
-proc fcQCheckBox_new3(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQCheckBox {.importc: "QCheckBox_new3".}
-proc fcQCheckBox_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new4".}
+proc fcQCheckBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new_parent".}
+proc fcQCheckBox_new2(vtbl: pointer, vdata: csize_t): ptr cQCheckBox {.importc: "QCheckBox_new".}
+proc fcQCheckBox_new3(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQCheckBox {.importc: "QCheckBox_new_text".}
+proc fcQCheckBox_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new_text_parent".}
 proc fcQCheckBox_staticMetaObject(): pointer {.importc: "QCheckBox_staticMetaObject".}
 
 proc metaObject*(self: gen_qcheckbox_types.QCheckBox): gen_qobjectdefs_types.QMetaObject =
@@ -225,7 +225,7 @@ proc metacall*(self: gen_qcheckbox_types.QCheckBox, param1: cint, param2: cint, 
   fcQCheckBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcheckbox_types.QCheckBox, s: cstring): string =
-  let v_ms = fcQCheckBox_tr(s)
+  let v_ms = fcQCheckBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -269,19 +269,19 @@ proc onStateChanged*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxstateCh
   fcQCheckBox_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQCheckBox_slot_callback_stateChanged, fcQCheckBox_slot_callback_stateChanged_release)
 
 proc tr*(_: type gen_qcheckbox_types.QCheckBox, s: cstring, c: cstring): string =
-  let v_ms = fcQCheckBox_tr2(s, c)
+  let v_ms = fcQCheckBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcheckbox_types.QCheckBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCheckBox_tr3(s, c, n)
+  let v_ms = fcQCheckBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setTristate*(self: gen_qcheckbox_types.QCheckBox, y: bool): void =
-  fcQCheckBox_setTristateWithBool(self.h, y)
+  fcQCheckBox_setTristateY(self.h, y)
 
 type QCheckBoxmetaObjectProc* = proc(self: QCheckBox): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QCheckBoxmetacastProc* = proc(self: QCheckBox, param1: cstring): pointer {.raises: [], gcsafe.}

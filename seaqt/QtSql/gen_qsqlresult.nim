@@ -62,10 +62,10 @@ proc fcQSqlResult_protectedbase_isSelect(self: pointer): bool {.importc: "QSqlRe
 proc fcQSqlResult_protectedbase_isForwardOnly(self: pointer): bool {.importc: "QSqlResult_protectedbase_isForwardOnly".}
 proc fcQSqlResult_protectedbase_driver(self: pointer): pointer {.importc: "QSqlResult_protectedbase_driver".}
 proc fcQSqlResult_protectedbase_addBindValue(self: pointer, val: pointer, typeVal: cint): void {.importc: "QSqlResult_protectedbase_addBindValue".}
-proc fcQSqlResult_protectedbase_boundValue(self: pointer, placeholder: struct_seaqt_string): pointer {.importc: "QSqlResult_protectedbase_boundValue".}
-proc fcQSqlResult_protectedbase_boundValueWithPos(self: pointer, pos: cint): pointer {.importc: "QSqlResult_protectedbase_boundValueWithPos".}
-proc fcQSqlResult_protectedbase_bindValueType(self: pointer, placeholder: struct_seaqt_string): cint {.importc: "QSqlResult_protectedbase_bindValueType".}
-proc fcQSqlResult_protectedbase_bindValueTypeWithPos(self: pointer, pos: cint): cint {.importc: "QSqlResult_protectedbase_bindValueTypeWithPos".}
+proc fcQSqlResult_protectedbase_boundValue_placeholder(self: pointer, placeholder: struct_seaqt_string): pointer {.importc: "QSqlResult_protectedbase_boundValue_placeholder".}
+proc fcQSqlResult_protectedbase_boundValue_pos(self: pointer, pos: cint): pointer {.importc: "QSqlResult_protectedbase_boundValue_pos".}
+proc fcQSqlResult_protectedbase_bindValueType_placeholder(self: pointer, placeholder: struct_seaqt_string): cint {.importc: "QSqlResult_protectedbase_bindValueType_placeholder".}
+proc fcQSqlResult_protectedbase_bindValueType_pos(self: pointer, pos: cint): cint {.importc: "QSqlResult_protectedbase_bindValueType_pos".}
 proc fcQSqlResult_protectedbase_boundValueCount(self: pointer): cint {.importc: "QSqlResult_protectedbase_boundValueCount".}
 proc fcQSqlResult_protectedbase_boundValues(self: pointer): struct_seaqt_array {.importc: "QSqlResult_protectedbase_boundValues".}
 proc fcQSqlResult_protectedbase_executedQuery(self: pointer): struct_seaqt_string {.importc: "QSqlResult_protectedbase_executedQuery".}
@@ -110,16 +110,16 @@ proc addBindValue*(self: gen_qsqlresult_types.QSqlResult, val: gen_qvariant_type
   fcQSqlResult_protectedbase_addBindValue(self.h, val.h, cint(typeVal))
 
 proc boundValue*(self: gen_qsqlresult_types.QSqlResult, placeholder: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlResult_protectedbase_boundValue(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))), owned: true)
+  gen_qvariant_types.QVariant(h: fcQSqlResult_protectedbase_boundValue_placeholder(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))), owned: true)
 
 proc boundValue*(self: gen_qsqlresult_types.QSqlResult, pos: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlResult_protectedbase_boundValueWithPos(self.h, pos), owned: true)
+  gen_qvariant_types.QVariant(h: fcQSqlResult_protectedbase_boundValue_pos(self.h, pos), owned: true)
 
 proc bindValueType*(self: gen_qsqlresult_types.QSqlResult, placeholder: openArray[char]): cint =
-  cint(fcQSqlResult_protectedbase_bindValueType(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))))
+  cint(fcQSqlResult_protectedbase_bindValueType_placeholder(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))))
 
 proc bindValueType*(self: gen_qsqlresult_types.QSqlResult, pos: cint): cint =
-  cint(fcQSqlResult_protectedbase_bindValueTypeWithPos(self.h, pos))
+  cint(fcQSqlResult_protectedbase_bindValueType_pos(self.h, pos))
 
 proc boundValueCount*(self: gen_qsqlresult_types.QSqlResult): cint =
   fcQSqlResult_protectedbase_boundValueCount(self.h)

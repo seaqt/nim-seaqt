@@ -21,12 +21,12 @@ QWebEngineScript* QWebEngineScript_new() {
 	return new (std::nothrow) QWebEngineScript();
 }
 
-QWebEngineScript* QWebEngineScript_new2(QWebEngineScript* other) {
-	return new (std::nothrow) QWebEngineScript(*other);
+QWebEngineScript* QWebEngineScript_new_from(QWebEngineScript* from) {
+	return new (std::nothrow) QWebEngineScript(*from);
 }
 
-void QWebEngineScript_operatorAssign(QWebEngineScript* self, QWebEngineScript* other) {
-	self->operator=(*other);
+void QWebEngineScript_operatorAssign(QWebEngineScript* self, QWebEngineScript* from) {
+	self->operator=(*from);
 }
 
 struct seaqt_string QWebEngineScript_name(const QWebEngineScript* self) {

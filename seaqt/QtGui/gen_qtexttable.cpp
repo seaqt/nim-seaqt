@@ -33,12 +33,12 @@ QTextTableCell* QTextTableCell_new() {
 	return new (std::nothrow) QTextTableCell();
 }
 
-QTextTableCell* QTextTableCell_new2(QTextTableCell* o) {
-	return new (std::nothrow) QTextTableCell(*o);
+QTextTableCell* QTextTableCell_new_from(QTextTableCell* from) {
+	return new (std::nothrow) QTextTableCell(*from);
 }
 
-void QTextTableCell_operatorAssign(QTextTableCell* self, QTextTableCell* o) {
-	self->operator=(*o);
+void QTextTableCell_operatorAssign(QTextTableCell* self, QTextTableCell* from) {
+	self->operator=(*from);
 }
 
 void QTextTableCell_setFormat(QTextTableCell* self, QTextCharFormat* format) {
@@ -275,7 +275,7 @@ int QTextTable_metacall(QTextTable* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTextTable_tr(const char* s) {
+struct seaqt_string QTextTable_tr_s(const char* s) {
 	QString _ret = QTextTable::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -314,11 +314,11 @@ void QTextTable_removeColumns(QTextTable* self, int pos, int num) {
 	self->removeColumns(static_cast<int>(pos), static_cast<int>(num));
 }
 
-void QTextTable_mergeCells(QTextTable* self, int row, int col, int numRows, int numCols) {
+void QTextTable_mergeCells_row_col_numRows_numCols(QTextTable* self, int row, int col, int numRows, int numCols) {
 	self->mergeCells(static_cast<int>(row), static_cast<int>(col), static_cast<int>(numRows), static_cast<int>(numCols));
 }
 
-void QTextTable_mergeCellsWithCursor(QTextTable* self, QTextCursor* cursor) {
+void QTextTable_mergeCells_cursor(QTextTable* self, QTextCursor* cursor) {
 	self->mergeCells(*cursor);
 }
 
@@ -334,15 +334,15 @@ int QTextTable_columns(const QTextTable* self) {
 	return self->columns();
 }
 
-QTextTableCell* QTextTable_cellAt(const QTextTable* self, int row, int col) {
+QTextTableCell* QTextTable_cellAt_row_col(const QTextTable* self, int row, int col) {
 	return new QTextTableCell(self->cellAt(static_cast<int>(row), static_cast<int>(col)));
 }
 
-QTextTableCell* QTextTable_cellAtWithPosition(const QTextTable* self, int position) {
+QTextTableCell* QTextTable_cellAt_position(const QTextTable* self, int position) {
 	return new QTextTableCell(self->cellAt(static_cast<int>(position)));
 }
 
-QTextTableCell* QTextTable_cellAtWithQTextCursor(const QTextTable* self, QTextCursor* c) {
+QTextTableCell* QTextTable_cellAt_c(const QTextTable* self, QTextCursor* c) {
 	return new QTextTableCell(self->cellAt(*c));
 }
 
@@ -362,7 +362,7 @@ QTextTableFormat* QTextTable_format(const QTextTable* self) {
 	return new QTextTableFormat(self->format());
 }
 
-struct seaqt_string QTextTable_tr2(const char* s, const char* c) {
+struct seaqt_string QTextTable_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTextTable::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -373,7 +373,7 @@ struct seaqt_string QTextTable_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextTable_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTextTable_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextTable::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

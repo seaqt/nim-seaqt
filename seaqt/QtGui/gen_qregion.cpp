@@ -20,32 +20,32 @@ QRegion* QRegion_new() {
 	return new (std::nothrow) QRegion();
 }
 
-QRegion* QRegion_new2(int x, int y, int w, int h) {
+QRegion* QRegion_new_x_y_w_h(int x, int y, int w, int h) {
 	return new (std::nothrow) QRegion(static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h));
 }
 
-QRegion* QRegion_new3(QRect* r) {
+QRegion* QRegion_new_r(QRect* r) {
 	return new (std::nothrow) QRegion(*r);
 }
 
-QRegion* QRegion_new4(QRegion* region) {
-	return new (std::nothrow) QRegion(*region);
+QRegion* QRegion_new_from(QRegion* from) {
+	return new (std::nothrow) QRegion(*from);
 }
 
-QRegion* QRegion_new5(QBitmap* bitmap) {
+QRegion* QRegion_new_bitmap(QBitmap* bitmap) {
 	return new (std::nothrow) QRegion(*bitmap);
 }
 
-QRegion* QRegion_new6(int x, int y, int w, int h, int t) {
+QRegion* QRegion_new_x_y_w_h_t(int x, int y, int w, int h, int t) {
 	return new (std::nothrow) QRegion(static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h), static_cast<QRegion::RegionType>(t));
 }
 
-QRegion* QRegion_new7(QRect* r, int t) {
+QRegion* QRegion_new_r_t(QRect* r, int t) {
 	return new (std::nothrow) QRegion(*r, static_cast<QRegion::RegionType>(t));
 }
 
-void QRegion_operatorAssign(QRegion* self, QRegion* param1) {
-	self->operator=(*param1);
+void QRegion_operatorAssign(QRegion* self, QRegion* from) {
+	self->operator=(*from);
 }
 
 void QRegion_swap(QRegion* self, QRegion* other) {
@@ -80,43 +80,43 @@ QRect* QRegion_cend(const QRegion* self) {
 	return const_cast<QRect*>(static_cast<const QRect*>(_ret));
 }
 
-bool QRegion_contains(const QRegion* self, QPoint* p) {
+bool QRegion_contains_p(const QRegion* self, QPoint* p) {
 	return self->contains(*p);
 }
 
-bool QRegion_containsWithQRect(const QRegion* self, QRect* r) {
+bool QRegion_contains_r(const QRegion* self, QRect* r) {
 	return self->contains(*r);
 }
 
-void QRegion_translate(QRegion* self, int dx, int dy) {
+void QRegion_translate_dx_dy(QRegion* self, int dx, int dy) {
 	self->translate(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-void QRegion_translateWithQPoint(QRegion* self, QPoint* p) {
+void QRegion_translate_p(QRegion* self, QPoint* p) {
 	self->translate(*p);
 }
 
-QRegion* QRegion_translated(const QRegion* self, int dx, int dy) {
+QRegion* QRegion_translated_dx_dy(const QRegion* self, int dx, int dy) {
 	return new QRegion(self->translated(static_cast<int>(dx), static_cast<int>(dy)));
 }
 
-QRegion* QRegion_translatedWithQPoint(const QRegion* self, QPoint* p) {
+QRegion* QRegion_translated_p(const QRegion* self, QPoint* p) {
 	return new QRegion(self->translated(*p));
 }
 
-QRegion* QRegion_united(const QRegion* self, QRegion* r) {
+QRegion* QRegion_united_QRegion(const QRegion* self, QRegion* r) {
 	return new QRegion(self->united(*r));
 }
 
-QRegion* QRegion_unitedWithQRect(const QRegion* self, QRect* r) {
+QRegion* QRegion_united_QRect(const QRegion* self, QRect* r) {
 	return new QRegion(self->united(*r));
 }
 
-QRegion* QRegion_intersected(const QRegion* self, QRegion* r) {
+QRegion* QRegion_intersected_QRegion(const QRegion* self, QRegion* r) {
 	return new QRegion(self->intersected(*r));
 }
 
-QRegion* QRegion_intersectedWithQRect(const QRegion* self, QRect* r) {
+QRegion* QRegion_intersected_QRect(const QRegion* self, QRect* r) {
 	return new QRegion(self->intersected(*r));
 }
 
@@ -128,11 +128,11 @@ QRegion* QRegion_xored(const QRegion* self, QRegion* r) {
 	return new QRegion(self->xored(*r));
 }
 
-bool QRegion_intersects(const QRegion* self, QRegion* r) {
+bool QRegion_intersects_QRegion(const QRegion* self, QRegion* r) {
 	return self->intersects(*r);
 }
 
-bool QRegion_intersectsWithQRect(const QRegion* self, QRect* r) {
+bool QRegion_intersects_QRect(const QRegion* self, QRect* r) {
 	return self->intersects(*r);
 }
 
@@ -152,19 +152,19 @@ QRegion* QRegion_operatorBitwiseOr(const QRegion* self, QRegion* r) {
 	return new QRegion(self->operator|(*r));
 }
 
-QRegion* QRegion_operatorPlus(const QRegion* self, QRegion* r) {
+QRegion* QRegion_operatorPlus_QRegion(const QRegion* self, QRegion* r) {
 	return new QRegion(self->operator+(*r));
 }
 
-QRegion* QRegion_operatorPlusWithQRect(const QRegion* self, QRect* r) {
+QRegion* QRegion_operatorPlus_QRect(const QRegion* self, QRect* r) {
 	return new QRegion(self->operator+(*r));
 }
 
-QRegion* QRegion_operatorBitwiseAnd(const QRegion* self, QRegion* r) {
+QRegion* QRegion_operatorBitwiseAnd_QRegion(const QRegion* self, QRegion* r) {
 	return new QRegion(self->operator&(*r));
 }
 
-QRegion* QRegion_operatorBitwiseAndWithQRect(const QRegion* self, QRect* r) {
+QRegion* QRegion_operatorBitwiseAnd_QRect(const QRegion* self, QRect* r) {
 	return new QRegion(self->operator&(*r));
 }
 
@@ -180,23 +180,23 @@ void QRegion_operatorBitwiseOrAssign(QRegion* self, QRegion* r) {
 	self->operator|=(*r);
 }
 
-QRegion* QRegion_operatorPlusAssign(QRegion* self, QRegion* r) {
+QRegion* QRegion_operatorPlusAssign_QRegion(QRegion* self, QRegion* r) {
 	QRegion& _ret = self->operator+=(*r);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QRegion* QRegion_operatorPlusAssignWithQRect(QRegion* self, QRect* r) {
+QRegion* QRegion_operatorPlusAssign_QRect(QRegion* self, QRect* r) {
 	QRegion& _ret = self->operator+=(*r);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-void QRegion_operatorBitwiseAndAssign(QRegion* self, QRegion* r) {
+void QRegion_operatorBitwiseAndAssign_QRegion(QRegion* self, QRegion* r) {
 	self->operator&=(*r);
 }
 
-void QRegion_operatorBitwiseAndAssignWithQRect(QRegion* self, QRect* r) {
+void QRegion_operatorBitwiseAndAssign_QRect(QRegion* self, QRect* r) {
 	self->operator&=(*r);
 }
 

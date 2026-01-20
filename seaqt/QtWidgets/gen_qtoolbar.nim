@@ -77,7 +77,7 @@ type cQToolBar*{.exportc: "QToolBar", incompleteStruct.} = object
 proc fcQToolBar_metaObject(self: pointer): pointer {.importc: "QToolBar_metaObject".}
 proc fcQToolBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QToolBar_metacast".}
 proc fcQToolBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QToolBar_metacall".}
-proc fcQToolBar_tr(s: cstring): struct_seaqt_string {.importc: "QToolBar_tr".}
+proc fcQToolBar_trS(s: cstring): struct_seaqt_string {.importc: "QToolBar_tr_s".}
 proc fcQToolBar_setMovable(self: pointer, movable: bool): void {.importc: "QToolBar_setMovable".}
 proc fcQToolBar_isMovable(self: pointer): bool {.importc: "QToolBar_isMovable".}
 proc fcQToolBar_setAllowedAreas(self: pointer, areas: cint): void {.importc: "QToolBar_setAllowedAreas".}
@@ -91,8 +91,8 @@ proc fcQToolBar_insertSeparator(self: pointer, before: pointer): pointer {.impor
 proc fcQToolBar_addWidget(self: pointer, widget: pointer): pointer {.importc: "QToolBar_addWidget".}
 proc fcQToolBar_insertWidget(self: pointer, before: pointer, widget: pointer): pointer {.importc: "QToolBar_insertWidget".}
 proc fcQToolBar_actionGeometry(self: pointer, action: pointer): pointer {.importc: "QToolBar_actionGeometry".}
-proc fcQToolBar_actionAt(self: pointer, p: pointer): pointer {.importc: "QToolBar_actionAt".}
-proc fcQToolBar_actionAt2(self: pointer, x: cint, y: cint): pointer {.importc: "QToolBar_actionAt2".}
+proc fcQToolBar_actionAtP(self: pointer, p: pointer): pointer {.importc: "QToolBar_actionAt_p".}
+proc fcQToolBar_actionAtXY(self: pointer, x: cint, y: cint): pointer {.importc: "QToolBar_actionAt_x_y".}
 proc fcQToolBar_toggleViewAction(self: pointer): pointer {.importc: "QToolBar_toggleViewAction".}
 proc fcQToolBar_iconSize(self: pointer): pointer {.importc: "QToolBar_iconSize".}
 proc fcQToolBar_toolButtonStyle(self: pointer): cint {.importc: "QToolBar_toolButtonStyle".}
@@ -118,8 +118,8 @@ proc fcQToolBar_topLevelChanged(self: pointer, topLevel: bool): void {.importc: 
 proc fcQToolBar_connect_topLevelChanged(self: pointer, slot: int, callback: proc (slot: int, topLevel: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_topLevelChanged".}
 proc fcQToolBar_visibilityChanged(self: pointer, visible: bool): void {.importc: "QToolBar_visibilityChanged".}
 proc fcQToolBar_connect_visibilityChanged(self: pointer, slot: int, callback: proc (slot: int, visible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_visibilityChanged".}
-proc fcQToolBar_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QToolBar_tr2".}
-proc fcQToolBar_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QToolBar_tr3".}
+proc fcQToolBar_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QToolBar_tr_s_c".}
+proc fcQToolBar_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QToolBar_tr_s_c_n".}
 proc fcQToolBar_vdata(self: pointer): ptr pointer {.importc: "QToolBar_vdata".}
 proc fvdata_cQToolBar(self: pointer): pointer {.importc: "vdata_QToolBar".}
 
@@ -236,10 +236,10 @@ proc fcQToolBar_protectedbase_sender(self: pointer): pointer {.importc: "QToolBa
 proc fcQToolBar_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QToolBar_protectedbase_senderSignalIndex".}
 proc fcQToolBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QToolBar_protectedbase_receivers".}
 proc fcQToolBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QToolBar_protectedbase_isSignalConnected".}
-proc fcQToolBar_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQToolBar {.importc: "QToolBar_new".}
-proc fcQToolBar_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): ptr cQToolBar {.importc: "QToolBar_new2".}
-proc fcQToolBar_new3(vtbl: pointer, vdata: csize_t): ptr cQToolBar {.importc: "QToolBar_new3".}
-proc fcQToolBar_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQToolBar {.importc: "QToolBar_new4".}
+proc fcQToolBar_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQToolBar {.importc: "QToolBar_new_parent".}
+proc fcQToolBar_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): ptr cQToolBar {.importc: "QToolBar_new_title".}
+proc fcQToolBar_new3(vtbl: pointer, vdata: csize_t): ptr cQToolBar {.importc: "QToolBar_new".}
+proc fcQToolBar_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQToolBar {.importc: "QToolBar_new_title_parent".}
 proc fcQToolBar_staticMetaObject(): pointer {.importc: "QToolBar_staticMetaObject".}
 
 proc metaObject*(self: gen_qtoolbar_types.QToolBar): gen_qobjectdefs_types.QMetaObject =
@@ -252,7 +252,7 @@ proc metacall*(self: gen_qtoolbar_types.QToolBar, param1: cint, param2: cint, pa
   fcQToolBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtoolbar_types.QToolBar, s: cstring): string =
-  let v_ms = fcQToolBar_tr(s)
+  let v_ms = fcQToolBar_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -297,10 +297,10 @@ proc actionGeometry*(self: gen_qtoolbar_types.QToolBar, action: gen_qaction_type
   gen_qrect_types.QRect(h: fcQToolBar_actionGeometry(self.h, action.h), owned: true)
 
 proc actionAt*(self: gen_qtoolbar_types.QToolBar, p: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQToolBar_actionAt(self.h, p.h), owned: false)
+  gen_qaction_types.QAction(h: fcQToolBar_actionAtP(self.h, p.h), owned: false)
 
 proc actionAt*(self: gen_qtoolbar_types.QToolBar, x: cint, y: cint): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQToolBar_actionAt2(self.h, x, y), owned: false)
+  gen_qaction_types.QAction(h: fcQToolBar_actionAtXY(self.h, x, y), owned: false)
 
 proc toggleViewAction*(self: gen_qtoolbar_types.QToolBar): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQToolBar_toggleViewAction(self.h), owned: false)
@@ -490,13 +490,13 @@ proc onVisibilityChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarvisib
   fcQToolBar_connect_visibilityChanged(self.h, cast[int](addr tmp[]), fcQToolBar_slot_callback_visibilityChanged, fcQToolBar_slot_callback_visibilityChanged_release)
 
 proc tr*(_: type gen_qtoolbar_types.QToolBar, s: cstring, c: cstring): string =
-  let v_ms = fcQToolBar_tr2(s, c)
+  let v_ms = fcQToolBar_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtoolbar_types.QToolBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQToolBar_tr3(s, c, n)
+  let v_ms = fcQToolBar_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

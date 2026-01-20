@@ -211,7 +211,7 @@ VirtualQQuickTransform* QQuickTransform_new(const QQuickTransform_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQQuickTransform(vtbl) : nullptr;
 }
 
-VirtualQQuickTransform* QQuickTransform_new2(const QQuickTransform_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQQuickTransform* QQuickTransform_new_parent(const QQuickTransform_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickTransform>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickTransform(vtbl, parent) : nullptr;
 }
@@ -232,7 +232,7 @@ int QQuickTransform_metacall(QQuickTransform* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickTransform_tr(const char* s) {
+struct seaqt_string QQuickTransform_tr_s(const char* s) {
 	QString _ret = QQuickTransform::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -255,7 +255,7 @@ void QQuickTransform_applyTo(const QQuickTransform* self, QMatrix4x4* matrix) {
 	self->applyTo(matrix);
 }
 
-struct seaqt_string QQuickTransform_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickTransform_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickTransform::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -266,7 +266,7 @@ struct seaqt_string QQuickTransform_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickTransform_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickTransform_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickTransform::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -918,7 +918,7 @@ public:
 	friend bool QQuickItem_protectedbase_widthValid(const VirtualQQuickItem* self);
 	friend bool QQuickItem_protectedbase_heightValid(const VirtualQQuickItem* self);
 	friend void QQuickItem_protectedbase_setImplicitSize(VirtualQQuickItem* self, double param1, double param2);
-	friend void QQuickItem_protectedbase_updateInputMethodWithQueries(VirtualQQuickItem* self, int queries);
+	friend void QQuickItem_protectedbase_updateInputMethod_queries(VirtualQQuickItem* self, int queries);
 	friend QObject* QQuickItem_protectedbase_sender(const VirtualQQuickItem* self);
 	friend int QQuickItem_protectedbase_senderSignalIndex(const VirtualQQuickItem* self);
 	friend int QQuickItem_protectedbase_receivers(const VirtualQQuickItem* self, const char* signal);
@@ -930,7 +930,7 @@ VirtualQQuickItem* QQuickItem_new(const QQuickItem_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQQuickItem(vtbl) : nullptr;
 }
 
-VirtualQQuickItem* QQuickItem_new2(const QQuickItem_VTable* vtbl, size_t vdata, QQuickItem* parent) {
+VirtualQQuickItem* QQuickItem_new_parent(const QQuickItem_VTable* vtbl, size_t vdata, QQuickItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickItem(vtbl, parent) : nullptr;
 }
@@ -952,7 +952,7 @@ int QQuickItem_metacall(QQuickItem* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickItem_tr(const char* s) {
+struct seaqt_string QQuickItem_tr_s(const char* s) {
 	QString _ret = QQuickItem::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1213,7 +1213,7 @@ int QQuickItem_flags(const QQuickItem* self) {
 	return static_cast<int>(_ret);
 }
 
-void QQuickItem_setFlag(QQuickItem* self, int flag) {
+void QQuickItem_setFlag_flag(QQuickItem* self, int flag) {
 	self->setFlag(static_cast<QQuickItem::Flag>(flag));
 }
 
@@ -1241,11 +1241,11 @@ bool QQuickItem_hasFocus(const QQuickItem* self) {
 	return self->hasFocus();
 }
 
-void QQuickItem_setFocus(QQuickItem* self, bool focus) {
+void QQuickItem_setFocus_focus(QQuickItem* self, bool focus) {
 	self->setFocus(focus);
 }
 
-void QQuickItem_setFocus2(QQuickItem* self, bool focus, int reason) {
+void QQuickItem_setFocus_focus_reason(QQuickItem* self, bool focus, int reason) {
 	self->setFocus(focus, static_cast<Qt::FocusReason>(reason));
 }
 
@@ -1348,7 +1348,7 @@ void QQuickItem_setKeepTouchGrab(QQuickItem* self, bool keepTouchGrab) {
 	self->setKeepTouchGrab(keepTouchGrab);
 }
 
-bool QQuickItem_grabToImage(QQuickItem* self, QJSValue* callback) {
+bool QQuickItem_grabToImage_callback(QQuickItem* self, QJSValue* callback) {
 	return self->grabToImage(*callback);
 }
 
@@ -1368,7 +1368,7 @@ QTransform* QQuickItem_itemTransform(const QQuickItem* self, QQuickItem* param1,
 	return new QTransform(self->itemTransform(param1, param2));
 }
 
-QPointF* QQuickItem_mapToItem(const QQuickItem* self, QQuickItem* item, QPointF* point) {
+QPointF* QQuickItem_mapToItem_QQuickItem_QPointF(const QQuickItem* self, QQuickItem* item, QPointF* point) {
 	return new QPointF(self->mapToItem(item, *point));
 }
 
@@ -1376,7 +1376,7 @@ QPointF* QQuickItem_mapToScene(const QQuickItem* self, QPointF* point) {
 	return new QPointF(self->mapToScene(*point));
 }
 
-QPointF* QQuickItem_mapToGlobal(const QQuickItem* self, QPointF* point) {
+QPointF* QQuickItem_mapToGlobal_QPointF(const QQuickItem* self, QPointF* point) {
 	return new QPointF(self->mapToGlobal(*point));
 }
 
@@ -1388,7 +1388,7 @@ QRectF* QQuickItem_mapRectToScene(const QQuickItem* self, QRectF* rect) {
 	return new QRectF(self->mapRectToScene(*rect));
 }
 
-QPointF* QQuickItem_mapFromItem(const QQuickItem* self, QQuickItem* item, QPointF* point) {
+QPointF* QQuickItem_mapFromItem_QQuickItem_QPointF(const QQuickItem* self, QQuickItem* item, QPointF* point) {
 	return new QPointF(self->mapFromItem(item, *point));
 }
 
@@ -1396,7 +1396,7 @@ QPointF* QQuickItem_mapFromScene(const QQuickItem* self, QPointF* point) {
 	return new QPointF(self->mapFromScene(*point));
 }
 
-QPointF* QQuickItem_mapFromGlobal(const QQuickItem* self, QPointF* point) {
+QPointF* QQuickItem_mapFromGlobal_QPointF(const QQuickItem* self, QPointF* point) {
 	return new QPointF(self->mapFromGlobal(*point));
 }
 
@@ -1416,7 +1416,7 @@ void QQuickItem_forceActiveFocus(QQuickItem* self) {
 	self->forceActiveFocus();
 }
 
-void QQuickItem_forceActiveFocusWithReason(QQuickItem* self, int reason) {
+void QQuickItem_forceActiveFocus_reason(QQuickItem* self, int reason) {
 	self->forceActiveFocus(static_cast<Qt::FocusReason>(reason));
 }
 
@@ -1911,7 +1911,7 @@ void QQuickItem_connect_paletteCreated(QQuickItem* self, intptr_t slot, void (*c
 	QQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::paletteCreated), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQuickItem_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickItem_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickItem::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1922,7 +1922,7 @@ struct seaqt_string QQuickItem_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickItem_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickItem_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickItem::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1933,15 +1933,15 @@ struct seaqt_string QQuickItem_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QQuickItem_setFlag2(QQuickItem* self, int flag, bool enabled) {
+void QQuickItem_setFlag_flag_enabled(QQuickItem* self, int flag, bool enabled) {
 	self->setFlag(static_cast<QQuickItem::Flag>(flag), enabled);
 }
 
-bool QQuickItem_grabToImage3(QQuickItem* self, QJSValue* callback, QSize* targetSize) {
+bool QQuickItem_grabToImage_callback_targetSize(QQuickItem* self, QJSValue* callback, QSize* targetSize) {
 	return self->grabToImage(*callback, *targetSize);
 }
 
-QQuickItem* QQuickItem_nextItemInFocusChainWithForward(QQuickItem* self, bool forward) {
+QQuickItem* QQuickItem_nextItemInFocusChain_forward(QQuickItem* self, bool forward) {
 	return self->nextItemInFocusChain(forward);
 }
 
@@ -2189,7 +2189,7 @@ void QQuickItem_protectedbase_setImplicitSize(VirtualQQuickItem* self, double pa
 	self->setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
 }
 
-void QQuickItem_protectedbase_updateInputMethodWithQueries(VirtualQQuickItem* self, int queries) {
+void QQuickItem_protectedbase_updateInputMethod_queries(VirtualQQuickItem* self, int queries) {
 	self->updateInputMethod(static_cast<Qt::InputMethodQueries>(queries));
 }
 
@@ -2213,19 +2213,19 @@ void QQuickItem_delete(QQuickItem* self) {
 	delete self;
 }
 
-QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new(QQuickItem* v) {
+QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_QQuickItem(QQuickItem* v) {
 	return new (std::nothrow) QQuickItem__ItemChangeData(v);
 }
 
-QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new2(QQuickWindow* v) {
+QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_QQuickWindow(QQuickWindow* v) {
 	return new (std::nothrow) QQuickItem__ItemChangeData(v);
 }
 
-QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new3(double v) {
+QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_qreal(double v) {
 	return new (std::nothrow) QQuickItem__ItemChangeData(static_cast<qreal>(v));
 }
 
-QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new4(bool v) {
+QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_bool(bool v) {
 	return new (std::nothrow) QQuickItem__ItemChangeData(v);
 }
 

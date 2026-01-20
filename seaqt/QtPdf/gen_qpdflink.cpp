@@ -24,12 +24,12 @@ QPdfLink* QPdfLink_new() {
 	return new (std::nothrow) QPdfLink();
 }
 
-QPdfLink* QPdfLink_new2(QPdfLink* other) {
-	return new (std::nothrow) QPdfLink(*other);
+QPdfLink* QPdfLink_new_from(QPdfLink* from) {
+	return new (std::nothrow) QPdfLink(*from);
 }
 
-void QPdfLink_operatorAssign(QPdfLink* self, QPdfLink* other) {
-	self->operator=(*other);
+void QPdfLink_operatorAssign(QPdfLink* self, QPdfLink* from) {
+	self->operator=(*from);
 }
 
 void QPdfLink_swap(QPdfLink* self, QPdfLink* other) {
@@ -107,7 +107,7 @@ void QPdfLink_copyToClipboard(const QPdfLink* self) {
 	self->copyToClipboard();
 }
 
-void QPdfLink_copyToClipboardWithMode(const QPdfLink* self, int mode) {
+void QPdfLink_copyToClipboard_mode(const QPdfLink* self, int mode) {
 	self->copyToClipboard(static_cast<QClipboard::Mode>(mode));
 }
 

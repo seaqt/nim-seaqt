@@ -18,12 +18,12 @@ QQuickGraphicsConfiguration* QQuickGraphicsConfiguration_new() {
 	return new (std::nothrow) QQuickGraphicsConfiguration();
 }
 
-QQuickGraphicsConfiguration* QQuickGraphicsConfiguration_new2(QQuickGraphicsConfiguration* other) {
-	return new (std::nothrow) QQuickGraphicsConfiguration(*other);
+QQuickGraphicsConfiguration* QQuickGraphicsConfiguration_new_from(QQuickGraphicsConfiguration* from) {
+	return new (std::nothrow) QQuickGraphicsConfiguration(*from);
 }
 
-void QQuickGraphicsConfiguration_operatorAssign(QQuickGraphicsConfiguration* self, QQuickGraphicsConfiguration* other) {
-	self->operator=(*other);
+void QQuickGraphicsConfiguration_operatorAssign(QQuickGraphicsConfiguration* self, QQuickGraphicsConfiguration* from) {
+	self->operator=(*from);
 }
 
 struct seaqt_array /* of struct seaqt_string */  QQuickGraphicsConfiguration_preferredInstanceExtensions() {

@@ -144,18 +144,18 @@ typedef struct QPrintPreviewWidget_VTable{
 void* QPrintPreviewWidget_vdata(VirtualQPrintPreviewWidget* self);
 VirtualQPrintPreviewWidget* vdata_QPrintPreviewWidget(void* vdata);
 
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new2(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer);
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new3(const QPrintPreviewWidget_VTable* vtbl, size_t vdata);
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new4(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new5(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent, int flags);
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new6(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_parent(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_printer(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer);
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new(const QPrintPreviewWidget_VTable* vtbl, size_t vdata);
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_printer_parent(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_printer_parent_flags(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent, int flags);
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_parent_flags(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
 
 void QPrintPreviewWidget_virtbase(QPrintPreviewWidget* src, QWidget** outptr_QWidget);
 QMetaObject* QPrintPreviewWidget_metaObject(const QPrintPreviewWidget* self);
 void* QPrintPreviewWidget_metacast(QPrintPreviewWidget* self, const char* param1);
 int QPrintPreviewWidget_metacall(QPrintPreviewWidget* self, int param1, int param2, void** param3);
-struct seaqt_string QPrintPreviewWidget_tr(const char* s);
+struct seaqt_string QPrintPreviewWidget_tr_s(const char* s);
 double QPrintPreviewWidget_zoomFactor(const QPrintPreviewWidget* self);
 int QPrintPreviewWidget_orientation(const QPrintPreviewWidget* self);
 int QPrintPreviewWidget_viewMode(const QPrintPreviewWidget* self);
@@ -183,10 +183,10 @@ void QPrintPreviewWidget_paintRequested(QPrintPreviewWidget* self, QPrinter* pri
 void QPrintPreviewWidget_connect_paintRequested(QPrintPreviewWidget* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t));
 void QPrintPreviewWidget_previewChanged(QPrintPreviewWidget* self);
 void QPrintPreviewWidget_connect_previewChanged(QPrintPreviewWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QPrintPreviewWidget_tr2(const char* s, const char* c);
-struct seaqt_string QPrintPreviewWidget_tr3(const char* s, const char* c, int n);
-void QPrintPreviewWidget_zoomInWithZoom(QPrintPreviewWidget* self, double zoom);
-void QPrintPreviewWidget_zoomOutWithZoom(QPrintPreviewWidget* self, double zoom);
+struct seaqt_string QPrintPreviewWidget_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPrintPreviewWidget_tr_s_c_n(const char* s, const char* c, int n);
+void QPrintPreviewWidget_zoomIn_zoom(QPrintPreviewWidget* self, double zoom);
+void QPrintPreviewWidget_zoomOut_zoom(QPrintPreviewWidget* self, double zoom);
 
 QMetaObject* QPrintPreviewWidget_virtualbase_metaObject(const VirtualQPrintPreviewWidget* self);
 void* QPrintPreviewWidget_virtualbase_metacast(VirtualQPrintPreviewWidget* self, const char* param1);

@@ -130,35 +130,35 @@ proc fcQStandardItem_setRowCount(self: pointer, rows: cint): void {.importc: "QS
 proc fcQStandardItem_columnCount(self: pointer): cint {.importc: "QStandardItem_columnCount".}
 proc fcQStandardItem_setColumnCount(self: pointer, columns: cint): void {.importc: "QStandardItem_setColumnCount".}
 proc fcQStandardItem_hasChildren(self: pointer): bool {.importc: "QStandardItem_hasChildren".}
-proc fcQStandardItem_child(self: pointer, row: cint): pointer {.importc: "QStandardItem_child".}
-proc fcQStandardItem_setChild(self: pointer, row: cint, column: cint, item: pointer): void {.importc: "QStandardItem_setChild".}
-proc fcQStandardItem_setChild2(self: pointer, row: cint, item: pointer): void {.importc: "QStandardItem_setChild2".}
-proc fcQStandardItem_insertRow(self: pointer, row: cint, items: struct_seaqt_array): void {.importc: "QStandardItem_insertRow".}
+proc fcQStandardItem_childRow(self: pointer, row: cint): pointer {.importc: "QStandardItem_child_row".}
+proc fcQStandardItem_setChildRowColumnItem(self: pointer, row: cint, column: cint, item: pointer): void {.importc: "QStandardItem_setChild_row_column_item".}
+proc fcQStandardItem_setChildRowItem(self: pointer, row: cint, item: pointer): void {.importc: "QStandardItem_setChild_row_item".}
+proc fcQStandardItem_insertRowRowItems(self: pointer, row: cint, items: struct_seaqt_array): void {.importc: "QStandardItem_insertRow_row_items".}
 proc fcQStandardItem_insertColumn(self: pointer, column: cint, items: struct_seaqt_array): void {.importc: "QStandardItem_insertColumn".}
-proc fcQStandardItem_insertRows(self: pointer, row: cint, items: struct_seaqt_array): void {.importc: "QStandardItem_insertRows".}
-proc fcQStandardItem_insertRows2(self: pointer, row: cint, count: cint): void {.importc: "QStandardItem_insertRows2".}
+proc fcQStandardItem_insertRowsRowItems(self: pointer, row: cint, items: struct_seaqt_array): void {.importc: "QStandardItem_insertRows_row_items".}
+proc fcQStandardItem_insertRowsRowCount(self: pointer, row: cint, count: cint): void {.importc: "QStandardItem_insertRows_row_count".}
 proc fcQStandardItem_insertColumns(self: pointer, column: cint, count: cint): void {.importc: "QStandardItem_insertColumns".}
 proc fcQStandardItem_removeRow(self: pointer, row: cint): void {.importc: "QStandardItem_removeRow".}
 proc fcQStandardItem_removeColumn(self: pointer, column: cint): void {.importc: "QStandardItem_removeColumn".}
 proc fcQStandardItem_removeRows(self: pointer, row: cint, count: cint): void {.importc: "QStandardItem_removeRows".}
 proc fcQStandardItem_removeColumns(self: pointer, column: cint, count: cint): void {.importc: "QStandardItem_removeColumns".}
-proc fcQStandardItem_appendRow(self: pointer, items: struct_seaqt_array): void {.importc: "QStandardItem_appendRow".}
+proc fcQStandardItem_appendRowItems(self: pointer, items: struct_seaqt_array): void {.importc: "QStandardItem_appendRow_items".}
 proc fcQStandardItem_appendRows(self: pointer, items: struct_seaqt_array): void {.importc: "QStandardItem_appendRows".}
 proc fcQStandardItem_appendColumn(self: pointer, items: struct_seaqt_array): void {.importc: "QStandardItem_appendColumn".}
-proc fcQStandardItem_insertRow2(self: pointer, row: cint, item: pointer): void {.importc: "QStandardItem_insertRow2".}
-proc fcQStandardItem_appendRowWithItem(self: pointer, item: pointer): void {.importc: "QStandardItem_appendRowWithItem".}
-proc fcQStandardItem_takeChild(self: pointer, row: cint): pointer {.importc: "QStandardItem_takeChild".}
+proc fcQStandardItem_insertRowRowItem(self: pointer, row: cint, item: pointer): void {.importc: "QStandardItem_insertRow_row_item".}
+proc fcQStandardItem_appendRowItem(self: pointer, item: pointer): void {.importc: "QStandardItem_appendRow_item".}
+proc fcQStandardItem_takeChildRow(self: pointer, row: cint): pointer {.importc: "QStandardItem_takeChild_row".}
 proc fcQStandardItem_takeRow(self: pointer, row: cint): struct_seaqt_array {.importc: "QStandardItem_takeRow".}
 proc fcQStandardItem_takeColumn(self: pointer, column: cint): struct_seaqt_array {.importc: "QStandardItem_takeColumn".}
-proc fcQStandardItem_sortChildren(self: pointer, column: cint): void {.importc: "QStandardItem_sortChildren".}
+proc fcQStandardItem_sortChildrenColumn(self: pointer, column: cint): void {.importc: "QStandardItem_sortChildren_column".}
 proc fcQStandardItem_clone(self: pointer): pointer {.importc: "QStandardItem_clone".}
 proc fcQStandardItem_typeX(self: pointer): cint {.importc: "QStandardItem_type".}
 proc fcQStandardItem_read(self: pointer, inVal: pointer): void {.importc: "QStandardItem_read".}
 proc fcQStandardItem_write(self: pointer, outVal: pointer): void {.importc: "QStandardItem_write".}
 proc fcQStandardItem_operatorLesser(self: pointer, other: pointer): bool {.importc: "QStandardItem_operatorLesser".}
-proc fcQStandardItem_child2(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItem_child2".}
-proc fcQStandardItem_takeChild2(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItem_takeChild2".}
-proc fcQStandardItem_sortChildren2(self: pointer, column: cint, order: cint): void {.importc: "QStandardItem_sortChildren2".}
+proc fcQStandardItem_childRowColumn(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItem_child_row_column".}
+proc fcQStandardItem_takeChildRowColumn(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItem_takeChild_row_column".}
+proc fcQStandardItem_sortChildrenColumnOrder(self: pointer, column: cint, order: cint): void {.importc: "QStandardItem_sortChildren_column_order".}
 proc fcQStandardItem_vdata(self: pointer): ptr pointer {.importc: "QStandardItem_vdata".}
 proc fvdata_cQStandardItem(self: pointer): pointer {.importc: "vdata_QStandardItem".}
 
@@ -182,14 +182,14 @@ proc fcQStandardItem_virtualbase_write(self: pointer, outVal: pointer): void {.i
 proc fcQStandardItem_virtualbase_operatorLesser(self: pointer, other: pointer): bool {.importc: "QStandardItem_virtualbase_operatorLesser".}
 proc fcQStandardItem_protectedbase_emitDataChanged(self: pointer): void {.importc: "QStandardItem_protectedbase_emitDataChanged".}
 proc fcQStandardItem_new(vtbl: pointer, vdata: csize_t): ptr cQStandardItem {.importc: "QStandardItem_new".}
-proc fcQStandardItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQStandardItem {.importc: "QStandardItem_new2".}
-proc fcQStandardItem_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQStandardItem {.importc: "QStandardItem_new3".}
-proc fcQStandardItem_new4(vtbl: pointer, vdata: csize_t, rows: cint): ptr cQStandardItem {.importc: "QStandardItem_new4".}
-proc fcQStandardItem_new5(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint): ptr cQStandardItem {.importc: "QStandardItem_new5".}
+proc fcQStandardItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQStandardItem {.importc: "QStandardItem_new_text".}
+proc fcQStandardItem_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQStandardItem {.importc: "QStandardItem_new_icon_text".}
+proc fcQStandardItem_new4(vtbl: pointer, vdata: csize_t, rows: cint): ptr cQStandardItem {.importc: "QStandardItem_new_rows".}
+proc fcQStandardItem_new5(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint): ptr cQStandardItem {.importc: "QStandardItem_new_rows_columns".}
 proc fcQStandardItemModel_metaObject(self: pointer): pointer {.importc: "QStandardItemModel_metaObject".}
 proc fcQStandardItemModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QStandardItemModel_metacast".}
 proc fcQStandardItemModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStandardItemModel_metacall".}
-proc fcQStandardItemModel_tr(s: cstring): struct_seaqt_string {.importc: "QStandardItemModel_tr".}
+proc fcQStandardItemModel_trS(s: cstring): struct_seaqt_string {.importc: "QStandardItemModel_tr_s".}
 proc fcQStandardItemModel_setItemRoleNames(self: pointer, roleNames: struct_seaqt_map): void {.importc: "QStandardItemModel_setItemRoleNames".}
 proc fcQStandardItemModel_roleNames(self: pointer): struct_seaqt_map {.importc: "QStandardItemModel_roleNames".}
 proc fcQStandardItemModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QStandardItemModel_index".}
@@ -215,9 +215,9 @@ proc fcQStandardItemModel_clear(self: pointer): void {.importc: "QStandardItemMo
 proc fcQStandardItemModel_sort(self: pointer, column: cint, order: cint): void {.importc: "QStandardItemModel_sort".}
 proc fcQStandardItemModel_itemFromIndex(self: pointer, index: pointer): pointer {.importc: "QStandardItemModel_itemFromIndex".}
 proc fcQStandardItemModel_indexFromItem(self: pointer, item: pointer): pointer {.importc: "QStandardItemModel_indexFromItem".}
-proc fcQStandardItemModel_item(self: pointer, row: cint): pointer {.importc: "QStandardItemModel_item".}
-proc fcQStandardItemModel_setItem(self: pointer, row: cint, column: cint, item: pointer): void {.importc: "QStandardItemModel_setItem".}
-proc fcQStandardItemModel_setItem2(self: pointer, row: cint, item: pointer): void {.importc: "QStandardItemModel_setItem2".}
+proc fcQStandardItemModel_itemRow(self: pointer, row: cint): pointer {.importc: "QStandardItemModel_item_row".}
+proc fcQStandardItemModel_setItemRowColumnItem(self: pointer, row: cint, column: cint, item: pointer): void {.importc: "QStandardItemModel_setItem_row_column_item".}
+proc fcQStandardItemModel_setItemRowItem(self: pointer, row: cint, item: pointer): void {.importc: "QStandardItemModel_setItem_row_item".}
 proc fcQStandardItemModel_invisibleRootItem(self: pointer): pointer {.importc: "QStandardItemModel_invisibleRootItem".}
 proc fcQStandardItemModel_horizontalHeaderItem(self: pointer, column: cint): pointer {.importc: "QStandardItemModel_horizontalHeaderItem".}
 proc fcQStandardItemModel_setHorizontalHeaderItem(self: pointer, column: cint, item: pointer): void {.importc: "QStandardItemModel_setHorizontalHeaderItem".}
@@ -227,22 +227,22 @@ proc fcQStandardItemModel_setHorizontalHeaderLabels(self: pointer, labels: struc
 proc fcQStandardItemModel_setVerticalHeaderLabels(self: pointer, labels: struct_seaqt_array): void {.importc: "QStandardItemModel_setVerticalHeaderLabels".}
 proc fcQStandardItemModel_setRowCount(self: pointer, rows: cint): void {.importc: "QStandardItemModel_setRowCount".}
 proc fcQStandardItemModel_setColumnCount(self: pointer, columns: cint): void {.importc: "QStandardItemModel_setColumnCount".}
-proc fcQStandardItemModel_appendRow(self: pointer, items: struct_seaqt_array): void {.importc: "QStandardItemModel_appendRow".}
+proc fcQStandardItemModel_appendRowItems(self: pointer, items: struct_seaqt_array): void {.importc: "QStandardItemModel_appendRow_items".}
 proc fcQStandardItemModel_appendColumn(self: pointer, items: struct_seaqt_array): void {.importc: "QStandardItemModel_appendColumn".}
-proc fcQStandardItemModel_appendRowWithItem(self: pointer, item: pointer): void {.importc: "QStandardItemModel_appendRowWithItem".}
-proc fcQStandardItemModel_insertRow(self: pointer, row: cint, items: struct_seaqt_array): void {.importc: "QStandardItemModel_insertRow".}
-proc fcQStandardItemModel_insertColumn(self: pointer, column: cint, items: struct_seaqt_array): void {.importc: "QStandardItemModel_insertColumn".}
-proc fcQStandardItemModel_insertRow2(self: pointer, row: cint, item: pointer): void {.importc: "QStandardItemModel_insertRow2".}
-proc fcQStandardItemModel_insertRowWithRow(self: pointer, row: cint): bool {.importc: "QStandardItemModel_insertRowWithRow".}
-proc fcQStandardItemModel_insertColumnWithColumn(self: pointer, column: cint): bool {.importc: "QStandardItemModel_insertColumnWithColumn".}
-proc fcQStandardItemModel_takeItem(self: pointer, row: cint): pointer {.importc: "QStandardItemModel_takeItem".}
+proc fcQStandardItemModel_appendRowItem(self: pointer, item: pointer): void {.importc: "QStandardItemModel_appendRow_item".}
+proc fcQStandardItemModel_insertRowRowItems(self: pointer, row: cint, items: struct_seaqt_array): void {.importc: "QStandardItemModel_insertRow_row_items".}
+proc fcQStandardItemModel_insertColumnColumnItems(self: pointer, column: cint, items: struct_seaqt_array): void {.importc: "QStandardItemModel_insertColumn_column_items".}
+proc fcQStandardItemModel_insertRowRowItem(self: pointer, row: cint, item: pointer): void {.importc: "QStandardItemModel_insertRow_row_item".}
+proc fcQStandardItemModel_insertRowRow(self: pointer, row: cint): bool {.importc: "QStandardItemModel_insertRow_row".}
+proc fcQStandardItemModel_insertColumnColumn(self: pointer, column: cint): bool {.importc: "QStandardItemModel_insertColumn_column".}
+proc fcQStandardItemModel_takeItemRow(self: pointer, row: cint): pointer {.importc: "QStandardItemModel_takeItem_row".}
 proc fcQStandardItemModel_takeRow(self: pointer, row: cint): struct_seaqt_array {.importc: "QStandardItemModel_takeRow".}
 proc fcQStandardItemModel_takeColumn(self: pointer, column: cint): struct_seaqt_array {.importc: "QStandardItemModel_takeColumn".}
 proc fcQStandardItemModel_takeHorizontalHeaderItem(self: pointer, column: cint): pointer {.importc: "QStandardItemModel_takeHorizontalHeaderItem".}
 proc fcQStandardItemModel_takeVerticalHeaderItem(self: pointer, row: cint): pointer {.importc: "QStandardItemModel_takeVerticalHeaderItem".}
 proc fcQStandardItemModel_itemPrototype(self: pointer): pointer {.importc: "QStandardItemModel_itemPrototype".}
 proc fcQStandardItemModel_setItemPrototype(self: pointer, item: pointer): void {.importc: "QStandardItemModel_setItemPrototype".}
-proc fcQStandardItemModel_findItems(self: pointer, text: struct_seaqt_string): struct_seaqt_array {.importc: "QStandardItemModel_findItems".}
+proc fcQStandardItemModel_findItemsText(self: pointer, text: struct_seaqt_string): struct_seaqt_array {.importc: "QStandardItemModel_findItems_text".}
 proc fcQStandardItemModel_sortRole(self: pointer): cint {.importc: "QStandardItemModel_sortRole".}
 proc fcQStandardItemModel_setSortRole(self: pointer, role: cint): void {.importc: "QStandardItemModel_setSortRole".}
 proc fcQStandardItemModel_mimeTypes(self: pointer): struct_seaqt_array {.importc: "QStandardItemModel_mimeTypes".}
@@ -250,14 +250,14 @@ proc fcQStandardItemModel_mimeData(self: pointer, indexes: struct_seaqt_array): 
 proc fcQStandardItemModel_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QStandardItemModel_dropMimeData".}
 proc fcQStandardItemModel_itemChanged(self: pointer, item: pointer): void {.importc: "QStandardItemModel_itemChanged".}
 proc fcQStandardItemModel_connect_itemChanged(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStandardItemModel_connect_itemChanged".}
-proc fcQStandardItemModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStandardItemModel_tr2".}
-proc fcQStandardItemModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStandardItemModel_tr3".}
-proc fcQStandardItemModel_item2(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItemModel_item2".}
-proc fcQStandardItemModel_insertRow3(self: pointer, row: cint, parent: pointer): bool {.importc: "QStandardItemModel_insertRow3".}
-proc fcQStandardItemModel_insertColumn2(self: pointer, column: cint, parent: pointer): bool {.importc: "QStandardItemModel_insertColumn2".}
-proc fcQStandardItemModel_takeItem2(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItemModel_takeItem2".}
-proc fcQStandardItemModel_findItems2(self: pointer, text: struct_seaqt_string, flags: cint): struct_seaqt_array {.importc: "QStandardItemModel_findItems2".}
-proc fcQStandardItemModel_findItems3(self: pointer, text: struct_seaqt_string, flags: cint, column: cint): struct_seaqt_array {.importc: "QStandardItemModel_findItems3".}
+proc fcQStandardItemModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStandardItemModel_tr_s_c".}
+proc fcQStandardItemModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStandardItemModel_tr_s_c_n".}
+proc fcQStandardItemModel_itemRowColumn(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItemModel_item_row_column".}
+proc fcQStandardItemModel_insertRowRowParent(self: pointer, row: cint, parent: pointer): bool {.importc: "QStandardItemModel_insertRow_row_parent".}
+proc fcQStandardItemModel_insertColumnColumnParent(self: pointer, column: cint, parent: pointer): bool {.importc: "QStandardItemModel_insertColumn_column_parent".}
+proc fcQStandardItemModel_takeItemRowColumn(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItemModel_takeItem_row_column".}
+proc fcQStandardItemModel_findItemsTextFlags(self: pointer, text: struct_seaqt_string, flags: cint): struct_seaqt_array {.importc: "QStandardItemModel_findItems_text_flags".}
+proc fcQStandardItemModel_findItemsTextFlagsColumn(self: pointer, text: struct_seaqt_string, flags: cint, column: cint): struct_seaqt_array {.importc: "QStandardItemModel_findItems_text_flags_column".}
 proc fcQStandardItemModel_vdata(self: pointer): ptr pointer {.importc: "QStandardItemModel_vdata".}
 proc fvdata_cQStandardItemModel(self: pointer): pointer {.importc: "vdata_QStandardItemModel".}
 
@@ -357,7 +357,7 @@ proc fcQStandardItemModel_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQStandardItemModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStandardItemModel_virtualbase_customEvent".}
 proc fcQStandardItemModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStandardItemModel_virtualbase_connectNotify".}
 proc fcQStandardItemModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStandardItemModel_virtualbase_disconnectNotify".}
-proc fcQStandardItemModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItemModel_protectedbase_createIndex".}
+proc fcQStandardItemModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItemModel_protectedbase_createIndex_row_column".}
 proc fcQStandardItemModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QStandardItemModel_protectedbase_encodeData".}
 proc fcQStandardItemModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QStandardItemModel_protectedbase_decodeData".}
 proc fcQStandardItemModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QStandardItemModel_protectedbase_beginInsertRows".}
@@ -382,9 +382,9 @@ proc fcQStandardItemModel_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQStandardItemModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStandardItemModel_protectedbase_receivers".}
 proc fcQStandardItemModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStandardItemModel_protectedbase_isSignalConnected".}
 proc fcQStandardItemModel_new(vtbl: pointer, vdata: csize_t): ptr cQStandardItemModel {.importc: "QStandardItemModel_new".}
-proc fcQStandardItemModel_new2(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint): ptr cQStandardItemModel {.importc: "QStandardItemModel_new2".}
-proc fcQStandardItemModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStandardItemModel {.importc: "QStandardItemModel_new3".}
-proc fcQStandardItemModel_new4(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint, parent: pointer): ptr cQStandardItemModel {.importc: "QStandardItemModel_new4".}
+proc fcQStandardItemModel_new2(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint): ptr cQStandardItemModel {.importc: "QStandardItemModel_new_rows_columns".}
+proc fcQStandardItemModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStandardItemModel {.importc: "QStandardItemModel_new_parent".}
+proc fcQStandardItemModel_new4(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint, parent: pointer): ptr cQStandardItemModel {.importc: "QStandardItemModel_new_rows_columns_parent".}
 proc fcQStandardItemModel_staticMetaObject(): pointer {.importc: "QStandardItemModel_staticMetaObject".}
 
 proc data*(self: gen_qstandarditemmodel_types.QStandardItem, role: cint): gen_qvariant_types.QVariant =
@@ -580,20 +580,20 @@ proc hasChildren*(self: gen_qstandarditemmodel_types.QStandardItem): bool =
   fcQStandardItem_hasChildren(self.h)
 
 proc child*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_child(self.h, row), owned: false)
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_childRow(self.h, row), owned: false)
 
 proc setChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, column: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
-  fcQStandardItem_setChild(self.h, row, column, item.h)
+  fcQStandardItem_setChildRowColumnItem(self.h, row, column, item.h)
 
 proc setChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
-  fcQStandardItem_setChild2(self.h, row, item.h)
+  fcQStandardItem_setChildRowItem(self.h, row, item.h)
 
 proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  fcQStandardItem_insertRow(self.h, row, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
+  fcQStandardItem_insertRowRowItems(self.h, row, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
@@ -607,10 +607,10 @@ proc insertRows*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, it
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  fcQStandardItem_insertRows(self.h, row, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
+  fcQStandardItem_insertRowsRowItems(self.h, row, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc insertRows*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, count: cint): void =
-  fcQStandardItem_insertRows2(self.h, row, count)
+  fcQStandardItem_insertRowsRowCount(self.h, row, count)
 
 proc insertColumns*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint, count: cint): void =
   fcQStandardItem_insertColumns(self.h, column, count)
@@ -632,7 +632,7 @@ proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItem, items: openArr
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  fcQStandardItem_appendRow(self.h, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
+  fcQStandardItem_appendRowItems(self.h, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc appendRows*(self: gen_qstandarditemmodel_types.QStandardItem, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
@@ -649,13 +649,13 @@ proc appendColumn*(self: gen_qstandarditemmodel_types.QStandardItem, items: open
   fcQStandardItem_appendColumn(self.h, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
-  fcQStandardItem_insertRow2(self.h, row, item.h)
+  fcQStandardItem_insertRowRowItem(self.h, row, item.h)
 
 proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItem, item: gen_qstandarditemmodel_types.QStandardItem): void =
-  fcQStandardItem_appendRowWithItem(self.h, item.h)
+  fcQStandardItem_appendRowItem(self.h, item.h)
 
 proc takeChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_takeChild(self.h, row), owned: false)
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_takeChildRow(self.h, row), owned: false)
 
 proc takeRow*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
   var v_ma = fcQStandardItem_takeRow(self.h, row)
@@ -676,7 +676,7 @@ proc takeColumn*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint)
   vx_ret
 
 proc sortChildren*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint): void =
-  fcQStandardItem_sortChildren(self.h, column)
+  fcQStandardItem_sortChildrenColumn(self.h, column)
 
 proc clone*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qstandarditemmodel_types.QStandardItem =
   gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_clone(self.h), owned: false)
@@ -694,13 +694,13 @@ proc operatorLesser*(self: gen_qstandarditemmodel_types.QStandardItem, other: ge
   fcQStandardItem_operatorLesser(self.h, other.h)
 
 proc child*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_child2(self.h, row, column), owned: false)
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_childRowColumn(self.h, row, column), owned: false)
 
 proc takeChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_takeChild2(self.h, row, column), owned: false)
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_takeChildRowColumn(self.h, row, column), owned: false)
 
 proc sortChildren*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint, order: cint): void =
-  fcQStandardItem_sortChildren2(self.h, column, cint(order))
+  fcQStandardItem_sortChildrenColumnOrder(self.h, column, cint(order))
 
 type QStandardItemdataProc* = proc(self: QStandardItem, role: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QStandardItemmultiDataProc* = proc(self: QStandardItem, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void {.raises: [], gcsafe.}
@@ -1075,7 +1075,7 @@ proc metacall*(self: gen_qstandarditemmodel_types.QStandardItemModel, param1: ci
   fcQStandardItemModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstandarditemmodel_types.QStandardItemModel, s: cstring): string =
-  let v_ms = fcQStandardItemModel_tr(s)
+  let v_ms = fcQStandardItemModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1205,13 +1205,13 @@ proc indexFromItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, item:
   gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_indexFromItem(self.h, item.h), owned: true)
 
 proc item*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_item(self.h, row), owned: false)
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_itemRow(self.h, row), owned: false)
 
 proc setItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
-  fcQStandardItemModel_setItem(self.h, row, column, item.h)
+  fcQStandardItemModel_setItemRowColumnItem(self.h, row, column, item.h)
 
 proc setItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
-  fcQStandardItemModel_setItem2(self.h, row, item.h)
+  fcQStandardItemModel_setItemRowItem(self.h, row, item.h)
 
 proc invisibleRootItem*(self: gen_qstandarditemmodel_types.QStandardItemModel): gen_qstandarditemmodel_types.QStandardItem =
   gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_invisibleRootItem(self.h), owned: false)
@@ -1253,7 +1253,7 @@ proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, items: op
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  fcQStandardItemModel_appendRow(self.h, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
+  fcQStandardItemModel_appendRowItems(self.h, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc appendColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
@@ -1263,33 +1263,33 @@ proc appendColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, items:
   fcQStandardItemModel_appendColumn(self.h, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, item: gen_qstandarditemmodel_types.QStandardItem): void =
-  fcQStandardItemModel_appendRowWithItem(self.h, item.h)
+  fcQStandardItemModel_appendRowItem(self.h, item.h)
 
 proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  fcQStandardItemModel_insertRow(self.h, row, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
+  fcQStandardItemModel_insertRowRowItems(self.h, row, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint, items: openArray[gen_qstandarditemmodel_types.QStandardItem]): void =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  fcQStandardItemModel_insertColumn(self.h, column, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
+  fcQStandardItemModel_insertColumnColumnItems(self.h, column, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
-  fcQStandardItemModel_insertRow2(self.h, row, item.h)
+  fcQStandardItemModel_insertRowRowItem(self.h, row, item.h)
 
 proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): bool =
-  fcQStandardItemModel_insertRowWithRow(self.h, row)
+  fcQStandardItemModel_insertRowRow(self.h, row)
 
 proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint): bool =
-  fcQStandardItemModel_insertColumnWithColumn(self.h, column)
+  fcQStandardItemModel_insertColumnColumn(self.h, column)
 
 proc takeItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItem(self.h, row), owned: false)
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItemRow(self.h, row), owned: false)
 
 proc takeRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
   var v_ma = fcQStandardItemModel_takeRow(self.h, row)
@@ -1322,7 +1322,7 @@ proc setItemPrototype*(self: gen_qstandarditemmodel_types.QStandardItemModel, it
   fcQStandardItemModel_setItemPrototype(self.h, item.h)
 
 proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: openArray[char]): seq[gen_qstandarditemmodel_types.QStandardItem] =
-  var v_ma = fcQStandardItemModel_findItems(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  var v_ma = fcQStandardItemModel_findItemsText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1379,31 +1379,31 @@ proc onItemChanged*(self: gen_qstandarditemmodel_types.QStandardItemModel, slot:
   fcQStandardItemModel_connect_itemChanged(self.h, cast[int](addr tmp[]), fcQStandardItemModel_slot_callback_itemChanged, fcQStandardItemModel_slot_callback_itemChanged_release)
 
 proc tr*(_: type gen_qstandarditemmodel_types.QStandardItemModel, s: cstring, c: cstring): string =
-  let v_ms = fcQStandardItemModel_tr2(s, c)
+  let v_ms = fcQStandardItemModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstandarditemmodel_types.QStandardItemModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStandardItemModel_tr3(s, c, n)
+  let v_ms = fcQStandardItemModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc item*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_item2(self.h, row, column), owned: false)
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_itemRowColumn(self.h, row, column), owned: false)
 
 proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQStandardItemModel_insertRow3(self.h, row, parent.h)
+  fcQStandardItemModel_insertRowRowParent(self.h, row, parent.h)
 
 proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQStandardItemModel_insertColumn2(self.h, column, parent.h)
+  fcQStandardItemModel_insertColumnColumnParent(self.h, column, parent.h)
 
 proc takeItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItem2(self.h, row, column), owned: false)
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItemRowColumn(self.h, row, column), owned: false)
 
 proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: openArray[char], flags: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
-  var v_ma = fcQStandardItemModel_findItems2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
+  var v_ma = fcQStandardItemModel_findItemsTextFlags(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1412,7 +1412,7 @@ proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: ope
   vx_ret
 
 proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: openArray[char], flags: cint, column: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
-  var v_ma = fcQStandardItemModel_findItems3(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags), column)
+  var v_ma = fcQStandardItemModel_findItemsTextFlagsColumn(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags), column)
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -2654,7 +2654,7 @@ proc fcQStandardItemModel_method_callback_disconnectNotify(self: pointer, signal
 
 
 proc createIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

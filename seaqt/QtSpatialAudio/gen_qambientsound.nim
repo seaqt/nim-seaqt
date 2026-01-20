@@ -64,7 +64,7 @@ type cQAmbientSound*{.exportc: "QAmbientSound", incompleteStruct.} = object
 proc fcQAmbientSound_metaObject(self: pointer): pointer {.importc: "QAmbientSound_metaObject".}
 proc fcQAmbientSound_metacast(self: pointer, param1: cstring): pointer {.importc: "QAmbientSound_metacast".}
 proc fcQAmbientSound_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAmbientSound_metacall".}
-proc fcQAmbientSound_tr(s: cstring): struct_seaqt_string {.importc: "QAmbientSound_tr".}
+proc fcQAmbientSound_trS(s: cstring): struct_seaqt_string {.importc: "QAmbientSound_tr_s".}
 proc fcQAmbientSound_setSource(self: pointer, url: pointer): void {.importc: "QAmbientSound_setSource".}
 proc fcQAmbientSound_source(self: pointer): pointer {.importc: "QAmbientSound_source".}
 proc fcQAmbientSound_loops(self: pointer): cint {.importc: "QAmbientSound_loops".}
@@ -85,8 +85,8 @@ proc fcQAmbientSound_connect_volumeChanged(self: pointer, slot: int, callback: p
 proc fcQAmbientSound_play(self: pointer): void {.importc: "QAmbientSound_play".}
 proc fcQAmbientSound_pause(self: pointer): void {.importc: "QAmbientSound_pause".}
 proc fcQAmbientSound_stop(self: pointer): void {.importc: "QAmbientSound_stop".}
-proc fcQAmbientSound_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAmbientSound_tr2".}
-proc fcQAmbientSound_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAmbientSound_tr3".}
+proc fcQAmbientSound_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAmbientSound_tr_s_c".}
+proc fcQAmbientSound_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAmbientSound_tr_s_c_n".}
 proc fcQAmbientSound_vdata(self: pointer): ptr pointer {.importc: "QAmbientSound_vdata".}
 proc fvdata_cQAmbientSound(self: pointer): pointer {.importc: "vdata_QAmbientSound".}
 
@@ -129,7 +129,7 @@ proc metacall*(self: gen_qambientsound_types.QAmbientSound, param1: cint, param2
   fcQAmbientSound_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qambientsound_types.QAmbientSound, s: cstring): string =
-  let v_ms = fcQAmbientSound_tr(s)
+  let v_ms = fcQAmbientSound_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -243,13 +243,13 @@ proc stop*(self: gen_qambientsound_types.QAmbientSound): void =
   fcQAmbientSound_stop(self.h)
 
 proc tr*(_: type gen_qambientsound_types.QAmbientSound, s: cstring, c: cstring): string =
-  let v_ms = fcQAmbientSound_tr2(s, c)
+  let v_ms = fcQAmbientSound_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qambientsound_types.QAmbientSound, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAmbientSound_tr3(s, c, n)
+  let v_ms = fcQAmbientSound_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

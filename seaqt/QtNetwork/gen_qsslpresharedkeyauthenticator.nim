@@ -39,7 +39,7 @@ export gen_qsslpresharedkeyauthenticator_types
 
 type cQSslPreSharedKeyAuthenticator*{.exportc: "QSslPreSharedKeyAuthenticator", incompleteStruct.} = object
 
-proc fcQSslPreSharedKeyAuthenticator_operatorAssign(self: pointer, authenticator: pointer): void {.importc: "QSslPreSharedKeyAuthenticator_operatorAssign".}
+proc fcQSslPreSharedKeyAuthenticator_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSslPreSharedKeyAuthenticator_operatorAssign".}
 proc fcQSslPreSharedKeyAuthenticator_swap(self: pointer, other: pointer): void {.importc: "QSslPreSharedKeyAuthenticator_swap".}
 proc fcQSslPreSharedKeyAuthenticator_identityHint(self: pointer): struct_seaqt_string {.importc: "QSslPreSharedKeyAuthenticator_identityHint".}
 proc fcQSslPreSharedKeyAuthenticator_setIdentity(self: pointer, identity: struct_seaqt_string): void {.importc: "QSslPreSharedKeyAuthenticator_setIdentity".}
@@ -49,10 +49,10 @@ proc fcQSslPreSharedKeyAuthenticator_setPreSharedKey(self: pointer, preSharedKey
 proc fcQSslPreSharedKeyAuthenticator_preSharedKey(self: pointer): struct_seaqt_string {.importc: "QSslPreSharedKeyAuthenticator_preSharedKey".}
 proc fcQSslPreSharedKeyAuthenticator_maximumPreSharedKeyLength(self: pointer): cint {.importc: "QSslPreSharedKeyAuthenticator_maximumPreSharedKeyLength".}
 proc fcQSslPreSharedKeyAuthenticator_new(): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new".}
-proc fcQSslPreSharedKeyAuthenticator_new2(authenticator: pointer): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new2".}
+proc fcQSslPreSharedKeyAuthenticator_new2(fromVal: pointer): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new_from".}
 
-proc operatorAssign*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): void =
-  fcQSslPreSharedKeyAuthenticator_operatorAssign(self.h, authenticator.h)
+proc operatorAssign*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, fromVal: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): void =
+  fcQSslPreSharedKeyAuthenticator_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, other: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): void =
   fcQSslPreSharedKeyAuthenticator_swap(self.h, other.h)
@@ -91,6 +91,6 @@ proc create*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAut
   let tmp = gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator,
-    authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
-  let tmp = gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new2(authenticator.h), owned: true)
+    fromVal: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
+  let tmp = gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new2(fromVal.h), owned: true)
   tmp

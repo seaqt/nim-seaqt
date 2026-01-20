@@ -816,7 +816,7 @@ public:
 	friend void QSqlQueryModel_protectedbase_beginResetModel(VirtualQSqlQueryModel* self);
 	friend void QSqlQueryModel_protectedbase_endResetModel(VirtualQSqlQueryModel* self);
 	friend void QSqlQueryModel_protectedbase_setLastError(VirtualQSqlQueryModel* self, QSqlError* error);
-	friend QModelIndex* QSqlQueryModel_protectedbase_createIndex(const VirtualQSqlQueryModel* self, int row, int column);
+	friend QModelIndex* QSqlQueryModel_protectedbase_createIndex_row_column(const VirtualQSqlQueryModel* self, int row, int column);
 	friend void QSqlQueryModel_protectedbase_encodeData(const VirtualQSqlQueryModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QSqlQueryModel_protectedbase_decodeData(VirtualQSqlQueryModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend bool QSqlQueryModel_protectedbase_beginMoveRows(VirtualQSqlQueryModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
@@ -837,7 +837,7 @@ VirtualQSqlQueryModel* QSqlQueryModel_new(const QSqlQueryModel_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQSqlQueryModel(vtbl) : nullptr;
 }
 
-VirtualQSqlQueryModel* QSqlQueryModel_new2(const QSqlQueryModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSqlQueryModel* QSqlQueryModel_new_parent(const QSqlQueryModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSqlQueryModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSqlQueryModel(vtbl, parent) : nullptr;
 }
@@ -858,7 +858,7 @@ int QSqlQueryModel_metacall(QSqlQueryModel* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSqlQueryModel_tr(const char* s) {
+struct seaqt_string QSqlQueryModel_tr_s(const char* s) {
 	QString _ret = QSqlQueryModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -877,11 +877,11 @@ int QSqlQueryModel_columnCount(const QSqlQueryModel* self, QModelIndex* parent) 
 	return self->columnCount(*parent);
 }
 
-QSqlRecord* QSqlQueryModel_record(const QSqlQueryModel* self, int row) {
+QSqlRecord* QSqlQueryModel_record_row(const QSqlQueryModel* self, int row) {
 	return new QSqlRecord(self->record(static_cast<int>(row)));
 }
 
-QSqlRecord* QSqlQueryModel_record2(const QSqlQueryModel* self) {
+QSqlRecord* QSqlQueryModel_record(const QSqlQueryModel* self) {
 	return new QSqlRecord(self->record());
 }
 
@@ -905,11 +905,11 @@ bool QSqlQueryModel_removeColumns(QSqlQueryModel* self, int column, int count, Q
 	return self->removeColumns(static_cast<int>(column), static_cast<int>(count), *parent);
 }
 
-void QSqlQueryModel_setQuery(QSqlQueryModel* self, QSqlQuery* query) {
+void QSqlQueryModel_setQuery_QSqlQuery(QSqlQueryModel* self, QSqlQuery* query) {
 	self->setQuery(*query);
 }
 
-void QSqlQueryModel_setQueryWithQuery(QSqlQueryModel* self, struct seaqt_string query) {
+void QSqlQueryModel_setQuery_QString(QSqlQueryModel* self, struct seaqt_string query) {
 	QString query_QString = QString::fromUtf8(query.data, query.len);
 	self->setQuery(query_QString);
 }
@@ -957,7 +957,7 @@ struct seaqt_map /* of int to struct seaqt_string */  QSqlQueryModel_roleNames(c
 	return _out;
 }
 
-struct seaqt_string QSqlQueryModel_tr2(const char* s, const char* c) {
+struct seaqt_string QSqlQueryModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSqlQueryModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -968,7 +968,7 @@ struct seaqt_string QSqlQueryModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSqlQueryModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSqlQueryModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSqlQueryModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -979,7 +979,7 @@ struct seaqt_string QSqlQueryModel_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QSqlQueryModel_setQuery2(QSqlQueryModel* self, struct seaqt_string query, QSqlDatabase* db) {
+void QSqlQueryModel_setQuery_QString_QSqlDatabase(QSqlQueryModel* self, struct seaqt_string query, QSqlDatabase* db) {
 	QString query_QString = QString::fromUtf8(query.data, query.len);
 	self->setQuery(query_QString, *db);
 }
@@ -1345,7 +1345,7 @@ void QSqlQueryModel_protectedbase_setLastError(VirtualQSqlQueryModel* self, QSql
 	self->setLastError(*error);
 }
 
-QModelIndex* QSqlQueryModel_protectedbase_createIndex(const VirtualQSqlQueryModel* self, int row, int column) {
+QModelIndex* QSqlQueryModel_protectedbase_createIndex_row_column(const VirtualQSqlQueryModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

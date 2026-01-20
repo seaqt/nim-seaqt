@@ -40,8 +40,8 @@ export gen_qpropertyprivate_types
 type cQUntypedPropertyData*{.exportc: "QUntypedPropertyData", incompleteStruct.} = object
 type cQPropertyProxyBindingData*{.exportc: "QPropertyProxyBindingData", incompleteStruct.} = object
 
-proc fcQPropertyProxyBindingData_dPtr(self: pointer): uint {.importc: "QPropertyProxyBindingData_dPtr".}
-proc fcQPropertyProxyBindingData_setDPtr(self: pointer, d_ptr: uint): void {.importc: "QPropertyProxyBindingData_setDPtr".}
+proc fcQPropertyProxyBindingData_dPtr(self: pointer): uint {.importc: "QPropertyProxyBindingData_d_ptr".}
+proc fcQPropertyProxyBindingData_setDPtr(self: pointer, d_ptr: uint): void {.importc: "QPropertyProxyBindingData_setD_ptr".}
 proc fcQPropertyProxyBindingData_originalBindingData(self: pointer): pointer {.importc: "QPropertyProxyBindingData_originalBindingData".}
 proc fcQPropertyProxyBindingData_setOriginalBindingData(self: pointer, originalBindingData: pointer): void {.importc: "QPropertyProxyBindingData_setOriginalBindingData".}
 proc fcQPropertyProxyBindingData_propertyData(self: pointer): pointer {.importc: "QPropertyProxyBindingData_propertyData".}

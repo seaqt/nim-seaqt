@@ -55,13 +55,13 @@ void* QVideoSink_vdata(VirtualQVideoSink* self);
 VirtualQVideoSink* vdata_QVideoSink(void* vdata);
 
 VirtualQVideoSink* QVideoSink_new(const QVideoSink_VTable* vtbl, size_t vdata);
-VirtualQVideoSink* QVideoSink_new2(const QVideoSink_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQVideoSink* QVideoSink_new_parent(const QVideoSink_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QVideoSink_virtbase(QVideoSink* src, QObject** outptr_QObject);
 QMetaObject* QVideoSink_metaObject(const QVideoSink* self);
 void* QVideoSink_metacast(QVideoSink* self, const char* param1);
 int QVideoSink_metacall(QVideoSink* self, int param1, int param2, void** param3);
-struct seaqt_string QVideoSink_tr(const char* s);
+struct seaqt_string QVideoSink_tr_s(const char* s);
 QSize* QVideoSink_videoSize(const QVideoSink* self);
 struct seaqt_string QVideoSink_subtitleText(const QVideoSink* self);
 void QVideoSink_setSubtitleText(QVideoSink* self, struct seaqt_string subtitle);
@@ -73,8 +73,8 @@ void QVideoSink_subtitleTextChanged(const QVideoSink* self, struct seaqt_string 
 void QVideoSink_connect_subtitleTextChanged(QVideoSink* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
 void QVideoSink_videoSizeChanged(QVideoSink* self);
 void QVideoSink_connect_videoSizeChanged(QVideoSink* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QVideoSink_tr2(const char* s, const char* c);
-struct seaqt_string QVideoSink_tr3(const char* s, const char* c, int n);
+struct seaqt_string QVideoSink_tr_s_c(const char* s, const char* c);
+struct seaqt_string QVideoSink_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QVideoSink_virtualbase_metaObject(const VirtualQVideoSink* self);
 void* QVideoSink_virtualbase_metacast(VirtualQVideoSink* self, const char* param1);

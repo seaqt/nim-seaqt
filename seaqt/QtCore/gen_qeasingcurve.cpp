@@ -19,16 +19,16 @@ QEasingCurve* QEasingCurve_new() {
 	return new (std::nothrow) QEasingCurve();
 }
 
-QEasingCurve* QEasingCurve_new2(QEasingCurve* other) {
-	return new (std::nothrow) QEasingCurve(*other);
+QEasingCurve* QEasingCurve_new_from(QEasingCurve* from) {
+	return new (std::nothrow) QEasingCurve(*from);
 }
 
-QEasingCurve* QEasingCurve_new3(int type) {
+QEasingCurve* QEasingCurve_new_type(int type) {
 	return new (std::nothrow) QEasingCurve(static_cast<QEasingCurve::Type>(type));
 }
 
-void QEasingCurve_operatorAssign(QEasingCurve* self, QEasingCurve* other) {
-	self->operator=(*other);
+void QEasingCurve_operatorAssign(QEasingCurve* self, QEasingCurve* from) {
+	self->operator=(*from);
 }
 
 void QEasingCurve_swap(QEasingCurve* self, QEasingCurve* other) {

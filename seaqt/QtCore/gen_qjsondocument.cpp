@@ -57,20 +57,20 @@ QJsonDocument* QJsonDocument_new() {
 	return new (std::nothrow) QJsonDocument();
 }
 
-QJsonDocument* QJsonDocument_new2(QJsonObject* object) {
+QJsonDocument* QJsonDocument_new_object(QJsonObject* object) {
 	return new (std::nothrow) QJsonDocument(*object);
 }
 
-QJsonDocument* QJsonDocument_new3(QJsonArray* array) {
+QJsonDocument* QJsonDocument_new_array(QJsonArray* array) {
 	return new (std::nothrow) QJsonDocument(*array);
 }
 
-QJsonDocument* QJsonDocument_new4(QJsonDocument* other) {
-	return new (std::nothrow) QJsonDocument(*other);
+QJsonDocument* QJsonDocument_new_from(QJsonDocument* from) {
+	return new (std::nothrow) QJsonDocument(*from);
 }
 
-void QJsonDocument_operatorAssign(QJsonDocument* self, QJsonDocument* other) {
-	self->operator=(*other);
+void QJsonDocument_operatorAssign(QJsonDocument* self, QJsonDocument* from) {
+	self->operator=(*from);
 }
 
 void QJsonDocument_swap(QJsonDocument* self, QJsonDocument* other) {
@@ -85,7 +85,7 @@ QVariant* QJsonDocument_toVariant(const QJsonDocument* self) {
 	return new QVariant(self->toVariant());
 }
 
-QJsonDocument* QJsonDocument_fromJson(struct seaqt_string json) {
+QJsonDocument* QJsonDocument_fromJson_json(struct seaqt_string json) {
 	QByteArray json_QByteArray(json.data, json.len);
 	return new QJsonDocument(QJsonDocument::fromJson(json_QByteArray));
 }
@@ -127,12 +127,12 @@ void QJsonDocument_setArray(QJsonDocument* self, QJsonArray* array) {
 	self->setArray(*array);
 }
 
-QJsonValue* QJsonDocument_operatorSubscript(const QJsonDocument* self, struct seaqt_string key) {
+QJsonValue* QJsonDocument_operatorSubscript_QString(const QJsonDocument* self, struct seaqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	return new QJsonValue(self->operator[](key_QString));
 }
 
-QJsonValue* QJsonDocument_operatorSubscriptWithQsizetype(const QJsonDocument* self, ptrdiff_t i) {
+QJsonValue* QJsonDocument_operatorSubscript_qsizetype(const QJsonDocument* self, ptrdiff_t i) {
 	return new QJsonValue(self->operator[]((qsizetype)(i)));
 }
 
@@ -148,12 +148,12 @@ bool QJsonDocument_isNull(const QJsonDocument* self) {
 	return self->isNull();
 }
 
-QJsonDocument* QJsonDocument_fromJson2(struct seaqt_string json, QJsonParseError* error) {
+QJsonDocument* QJsonDocument_fromJson_json_error(struct seaqt_string json, QJsonParseError* error) {
 	QByteArray json_QByteArray(json.data, json.len);
 	return new QJsonDocument(QJsonDocument::fromJson(json_QByteArray, error));
 }
 
-struct seaqt_string QJsonDocument_toJsonWithFormat(const QJsonDocument* self, int format) {
+struct seaqt_string QJsonDocument_toJson_format(const QJsonDocument* self, int format) {
 	QByteArray _qb = self->toJson(static_cast<QJsonDocument::JsonFormat>(format));
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();

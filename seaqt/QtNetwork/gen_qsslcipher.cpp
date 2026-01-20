@@ -19,22 +19,22 @@ QSslCipher* QSslCipher_new() {
 	return new (std::nothrow) QSslCipher();
 }
 
-QSslCipher* QSslCipher_new2(struct seaqt_string name) {
+QSslCipher* QSslCipher_new_name(struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return new (std::nothrow) QSslCipher(name_QString);
 }
 
-QSslCipher* QSslCipher_new3(struct seaqt_string name, int protocol) {
+QSslCipher* QSslCipher_new_name_protocol(struct seaqt_string name, int protocol) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return new (std::nothrow) QSslCipher(name_QString, static_cast<QSsl::SslProtocol>(protocol));
 }
 
-QSslCipher* QSslCipher_new4(QSslCipher* other) {
-	return new (std::nothrow) QSslCipher(*other);
+QSslCipher* QSslCipher_new_from(QSslCipher* from) {
+	return new (std::nothrow) QSslCipher(*from);
 }
 
-void QSslCipher_operatorAssign(QSslCipher* self, QSslCipher* other) {
-	self->operator=(*other);
+void QSslCipher_operatorAssign(QSslCipher* self, QSslCipher* from) {
+	self->operator=(*from);
 }
 
 void QSslCipher_swap(QSslCipher* self, QSslCipher* other) {

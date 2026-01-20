@@ -152,18 +152,18 @@ typedef struct QCommandLinkButton_VTable{
 void* QCommandLinkButton_vdata(VirtualQCommandLinkButton* self);
 VirtualQCommandLinkButton* vdata_QCommandLinkButton(void* vdata);
 
-VirtualQCommandLinkButton* QCommandLinkButton_new(const QCommandLinkButton_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQCommandLinkButton* QCommandLinkButton_new2(const QCommandLinkButton_VTable* vtbl, size_t vdata);
-VirtualQCommandLinkButton* QCommandLinkButton_new3(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text);
-VirtualQCommandLinkButton* QCommandLinkButton_new4(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, struct seaqt_string description);
-VirtualQCommandLinkButton* QCommandLinkButton_new5(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent);
-VirtualQCommandLinkButton* QCommandLinkButton_new6(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, struct seaqt_string description, QWidget* parent);
+VirtualQCommandLinkButton* QCommandLinkButton_new_parent(const QCommandLinkButton_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQCommandLinkButton* QCommandLinkButton_new(const QCommandLinkButton_VTable* vtbl, size_t vdata);
+VirtualQCommandLinkButton* QCommandLinkButton_new_text(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text);
+VirtualQCommandLinkButton* QCommandLinkButton_new_text_description(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, struct seaqt_string description);
+VirtualQCommandLinkButton* QCommandLinkButton_new_text_parent(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent);
+VirtualQCommandLinkButton* QCommandLinkButton_new_text_description_parent(const QCommandLinkButton_VTable* vtbl, size_t vdata, struct seaqt_string text, struct seaqt_string description, QWidget* parent);
 
 void QCommandLinkButton_virtbase(QCommandLinkButton* src, QPushButton** outptr_QPushButton);
 QMetaObject* QCommandLinkButton_metaObject(const QCommandLinkButton* self);
 void* QCommandLinkButton_metacast(QCommandLinkButton* self, const char* param1);
 int QCommandLinkButton_metacall(QCommandLinkButton* self, int param1, int param2, void** param3);
-struct seaqt_string QCommandLinkButton_tr(const char* s);
+struct seaqt_string QCommandLinkButton_tr_s(const char* s);
 struct seaqt_string QCommandLinkButton_description(const QCommandLinkButton* self);
 void QCommandLinkButton_setDescription(QCommandLinkButton* self, struct seaqt_string description);
 QSize* QCommandLinkButton_sizeHint(const QCommandLinkButton* self);
@@ -172,8 +172,8 @@ QSize* QCommandLinkButton_minimumSizeHint(const QCommandLinkButton* self);
 void QCommandLinkButton_initStyleOption(const QCommandLinkButton* self, QStyleOptionButton* option);
 bool QCommandLinkButton_event(QCommandLinkButton* self, QEvent* e);
 void QCommandLinkButton_paintEvent(QCommandLinkButton* self, QPaintEvent* param1);
-struct seaqt_string QCommandLinkButton_tr2(const char* s, const char* c);
-struct seaqt_string QCommandLinkButton_tr3(const char* s, const char* c, int n);
+struct seaqt_string QCommandLinkButton_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCommandLinkButton_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QCommandLinkButton_virtualbase_metaObject(const VirtualQCommandLinkButton* self);
 void* QCommandLinkButton_virtualbase_metacast(VirtualQCommandLinkButton* self, const char* param1);

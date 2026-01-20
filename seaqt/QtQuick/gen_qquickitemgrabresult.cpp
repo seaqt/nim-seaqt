@@ -37,7 +37,7 @@ int QQuickItemGrabResult_metacall(QQuickItemGrabResult* self, int param1, int pa
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickItemGrabResult_tr(const char* s) {
+struct seaqt_string QQuickItemGrabResult_tr_s(const char* s) {
 	QString _ret = QQuickItemGrabResult::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -56,12 +56,12 @@ QUrl* QQuickItemGrabResult_url(const QQuickItemGrabResult* self) {
 	return new QUrl(self->url());
 }
 
-bool QQuickItemGrabResult_saveToFile(const QQuickItemGrabResult* self, struct seaqt_string fileName) {
+bool QQuickItemGrabResult_saveToFile_QString(const QQuickItemGrabResult* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->saveToFile(fileName_QString);
 }
 
-bool QQuickItemGrabResult_saveToFileWithFileName(const QQuickItemGrabResult* self, QUrl* fileName) {
+bool QQuickItemGrabResult_saveToFile_QUrl(const QQuickItemGrabResult* self, QUrl* fileName) {
 	return self->saveToFile(*fileName);
 }
 
@@ -80,7 +80,7 @@ void QQuickItemGrabResult_connect_ready(QQuickItemGrabResult* self, intptr_t slo
 	QQuickItemGrabResult::connect(self, static_cast<void (QQuickItemGrabResult::*)()>(&QQuickItemGrabResult::ready), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQuickItemGrabResult_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickItemGrabResult_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickItemGrabResult::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -91,7 +91,7 @@ struct seaqt_string QQuickItemGrabResult_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickItemGrabResult_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickItemGrabResult_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickItemGrabResult::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

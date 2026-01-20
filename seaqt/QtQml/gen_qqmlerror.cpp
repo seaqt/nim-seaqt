@@ -21,12 +21,12 @@ QQmlError* QQmlError_new() {
 	return new (std::nothrow) QQmlError();
 }
 
-QQmlError* QQmlError_new2(QQmlError* param1) {
-	return new (std::nothrow) QQmlError(*param1);
+QQmlError* QQmlError_new_from(QQmlError* from) {
+	return new (std::nothrow) QQmlError(*from);
 }
 
-void QQmlError_operatorAssign(QQmlError* self, QQmlError* param1) {
-	self->operator=(*param1);
+void QQmlError_operatorAssign(QQmlError* self, QQmlError* from) {
+	self->operator=(*from);
 }
 
 void QQmlError_swap(QQmlError* self, QQmlError* other) {

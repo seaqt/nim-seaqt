@@ -135,15 +135,15 @@ type cQKeySequence*{.exportc: "QKeySequence", incompleteStruct.} = object
 proc fcQKeySequence_count(self: pointer): cint {.importc: "QKeySequence_count".}
 proc fcQKeySequence_isEmpty(self: pointer): bool {.importc: "QKeySequence_isEmpty".}
 proc fcQKeySequence_toString(self: pointer): struct_seaqt_string {.importc: "QKeySequence_toString".}
-proc fcQKeySequence_fromString(str: struct_seaqt_string): pointer {.importc: "QKeySequence_fromString".}
-proc fcQKeySequence_listFromString(str: struct_seaqt_string): struct_seaqt_array {.importc: "QKeySequence_listFromString".}
-proc fcQKeySequence_listToString(list: struct_seaqt_array): struct_seaqt_string {.importc: "QKeySequence_listToString".}
+proc fcQKeySequence_fromStringStr(str: struct_seaqt_string): pointer {.importc: "QKeySequence_fromString_str".}
+proc fcQKeySequence_listFromStringStr(str: struct_seaqt_string): struct_seaqt_array {.importc: "QKeySequence_listFromString_str".}
+proc fcQKeySequence_listToStringList(list: struct_seaqt_array): struct_seaqt_string {.importc: "QKeySequence_listToString_list".}
 proc fcQKeySequence_matches(self: pointer, seqVal: pointer): cint {.importc: "QKeySequence_matches".}
 proc fcQKeySequence_mnemonic(text: struct_seaqt_string): pointer {.importc: "QKeySequence_mnemonic".}
 proc fcQKeySequence_keyBindings(key: cint): struct_seaqt_array {.importc: "QKeySequence_keyBindings".}
 proc fcQKeySequence_ToQVariant(self: pointer): pointer {.importc: "QKeySequence_ToQVariant".}
 proc fcQKeySequence_operatorSubscript(self: pointer, i: cuint): pointer {.importc: "QKeySequence_operatorSubscript".}
-proc fcQKeySequence_operatorAssign(self: pointer, other: pointer): void {.importc: "QKeySequence_operatorAssign".}
+proc fcQKeySequence_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QKeySequence_operatorAssign".}
 proc fcQKeySequence_swap(self: pointer, other: pointer): void {.importc: "QKeySequence_swap".}
 proc fcQKeySequence_operatorEqual(self: pointer, other: pointer): bool {.importc: "QKeySequence_operatorEqual".}
 proc fcQKeySequence_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QKeySequence_operatorNotEqual".}
@@ -152,23 +152,23 @@ proc fcQKeySequence_operatorGreater(self: pointer, other: pointer): bool {.impor
 proc fcQKeySequence_operatorLesserOrEqual(self: pointer, other: pointer): bool {.importc: "QKeySequence_operatorLesserOrEqual".}
 proc fcQKeySequence_operatorGreaterOrEqual(self: pointer, other: pointer): bool {.importc: "QKeySequence_operatorGreaterOrEqual".}
 proc fcQKeySequence_isDetached(self: pointer): bool {.importc: "QKeySequence_isDetached".}
-proc fcQKeySequence_toStringWithFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QKeySequence_toStringWithFormat".}
-proc fcQKeySequence_fromString2(str: struct_seaqt_string, format: cint): pointer {.importc: "QKeySequence_fromString2".}
-proc fcQKeySequence_listFromString2(str: struct_seaqt_string, format: cint): struct_seaqt_array {.importc: "QKeySequence_listFromString2".}
-proc fcQKeySequence_listToString2(list: struct_seaqt_array, format: cint): struct_seaqt_string {.importc: "QKeySequence_listToString2".}
+proc fcQKeySequence_toStringFormat(self: pointer, format: cint): struct_seaqt_string {.importc: "QKeySequence_toString_format".}
+proc fcQKeySequence_fromStringStrFormat(str: struct_seaqt_string, format: cint): pointer {.importc: "QKeySequence_fromString_str_format".}
+proc fcQKeySequence_listFromStringStrFormat(str: struct_seaqt_string, format: cint): struct_seaqt_array {.importc: "QKeySequence_listFromString_str_format".}
+proc fcQKeySequence_listToStringListFormat(list: struct_seaqt_array, format: cint): struct_seaqt_string {.importc: "QKeySequence_listToString_list_format".}
 proc fcQKeySequence_new(): ptr cQKeySequence {.importc: "QKeySequence_new".}
-proc fcQKeySequence_new2(key: struct_seaqt_string): ptr cQKeySequence {.importc: "QKeySequence_new2".}
-proc fcQKeySequence_new3(k1: cint): ptr cQKeySequence {.importc: "QKeySequence_new3".}
-proc fcQKeySequence_new4(k1: pointer): ptr cQKeySequence {.importc: "QKeySequence_new4".}
-proc fcQKeySequence_new5(ks: pointer): ptr cQKeySequence {.importc: "QKeySequence_new5".}
-proc fcQKeySequence_new6(key: cint): ptr cQKeySequence {.importc: "QKeySequence_new6".}
-proc fcQKeySequence_new7(key: struct_seaqt_string, format: cint): ptr cQKeySequence {.importc: "QKeySequence_new7".}
-proc fcQKeySequence_new8(k1: cint, k2: cint): ptr cQKeySequence {.importc: "QKeySequence_new8".}
-proc fcQKeySequence_new9(k1: cint, k2: cint, k3: cint): ptr cQKeySequence {.importc: "QKeySequence_new9".}
-proc fcQKeySequence_new10(k1: cint, k2: cint, k3: cint, k4: cint): ptr cQKeySequence {.importc: "QKeySequence_new10".}
-proc fcQKeySequence_new11(k1: pointer, k2: pointer): ptr cQKeySequence {.importc: "QKeySequence_new11".}
-proc fcQKeySequence_new12(k1: pointer, k2: pointer, k3: pointer): ptr cQKeySequence {.importc: "QKeySequence_new12".}
-proc fcQKeySequence_new13(k1: pointer, k2: pointer, k3: pointer, k4: pointer): ptr cQKeySequence {.importc: "QKeySequence_new13".}
+proc fcQKeySequence_new2(key: struct_seaqt_string): ptr cQKeySequence {.importc: "QKeySequence_new_QString".}
+proc fcQKeySequence_new3(k1: cint): ptr cQKeySequence {.importc: "QKeySequence_new_int".}
+proc fcQKeySequence_new4(k1: pointer): ptr cQKeySequence {.importc: "QKeySequence_new_QKeyCombination".}
+proc fcQKeySequence_new5(fromVal: pointer): ptr cQKeySequence {.importc: "QKeySequence_new_QKeySequence".}
+proc fcQKeySequence_new6(key: cint): ptr cQKeySequence {.importc: "QKeySequence_new_QKeySequence_StandardKey".}
+proc fcQKeySequence_new7(key: struct_seaqt_string, format: cint): ptr cQKeySequence {.importc: "QKeySequence_new_QString_QKeySequence_SequenceFormat".}
+proc fcQKeySequence_new8(k1: cint, k2: cint): ptr cQKeySequence {.importc: "QKeySequence_new_int_int".}
+proc fcQKeySequence_new9(k1: cint, k2: cint, k3: cint): ptr cQKeySequence {.importc: "QKeySequence_new_int_int_int".}
+proc fcQKeySequence_new10(k1: cint, k2: cint, k3: cint, k4: cint): ptr cQKeySequence {.importc: "QKeySequence_new_int_int_int_int".}
+proc fcQKeySequence_new11(k1: pointer, k2: pointer): ptr cQKeySequence {.importc: "QKeySequence_new_QKeyCombination_QKeyCombination".}
+proc fcQKeySequence_new12(k1: pointer, k2: pointer, k3: pointer): ptr cQKeySequence {.importc: "QKeySequence_new_QKeyCombination_QKeyCombination_QKeyCombination".}
+proc fcQKeySequence_new13(k1: pointer, k2: pointer, k3: pointer, k4: pointer): ptr cQKeySequence {.importc: "QKeySequence_new_QKeyCombination_QKeyCombination_QKeyCombination_QKeyCombination".}
 proc fcQKeySequence_staticMetaObject(): pointer {.importc: "QKeySequence_staticMetaObject".}
 
 proc count*(self: gen_qkeysequence_types.QKeySequence): cint =
@@ -184,10 +184,10 @@ proc toString*(self: gen_qkeysequence_types.QKeySequence): string =
   vx_ret
 
 proc fromString*(_: type gen_qkeysequence_types.QKeySequence, str: openArray[char]): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromString(struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))), owned: true)
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromStringStr(struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str)))), owned: true)
 
 proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: openArray[char]): seq[gen_qkeysequence_types.QKeySequence] =
-  var v_ma = fcQKeySequence_listFromString(struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  var v_ma = fcQKeySequence_listFromStringStr(struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
   var vx_ret = newSeq[gen_qkeysequence_types.QKeySequence](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -200,7 +200,7 @@ proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: openArray[
   for i in 0..<len(list):
     list_CArray[i] = list[i].h
 
-  let v_ms = fcQKeySequence_listToString(struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0])))
+  let v_ms = fcQKeySequence_listToStringList(struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0])))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -226,8 +226,8 @@ proc ToQVariant*(self: gen_qkeysequence_types.QKeySequence): gen_qvariant_types.
 proc operatorSubscript*(self: gen_qkeysequence_types.QKeySequence, i: cuint): gen_qnamespace_types.QKeyCombination =
   gen_qnamespace_types.QKeyCombination(h: fcQKeySequence_operatorSubscript(self.h, i), owned: true)
 
-proc operatorAssign*(self: gen_qkeysequence_types.QKeySequence, other: gen_qkeysequence_types.QKeySequence): void =
-  fcQKeySequence_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qkeysequence_types.QKeySequence, fromVal: gen_qkeysequence_types.QKeySequence): void =
+  fcQKeySequence_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qkeysequence_types.QKeySequence, other: gen_qkeysequence_types.QKeySequence): void =
   fcQKeySequence_swap(self.h, other.h)
@@ -254,16 +254,16 @@ proc isDetached*(self: gen_qkeysequence_types.QKeySequence): bool =
   fcQKeySequence_isDetached(self.h)
 
 proc toString*(self: gen_qkeysequence_types.QKeySequence, format: cint): string =
-  let v_ms = fcQKeySequence_toStringWithFormat(self.h, cint(format))
+  let v_ms = fcQKeySequence_toStringFormat(self.h, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc fromString*(_: type gen_qkeysequence_types.QKeySequence, str: openArray[char], format: cint): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromString2(struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format)), owned: true)
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_fromStringStrFormat(struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format)), owned: true)
 
 proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: openArray[char], format: cint): seq[gen_qkeysequence_types.QKeySequence] =
-  var v_ma = fcQKeySequence_listFromString2(struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format))
+  var v_ma = fcQKeySequence_listFromStringStrFormat(struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), cint(format))
   var vx_ret = newSeq[gen_qkeysequence_types.QKeySequence](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -276,7 +276,7 @@ proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: openArray[
   for i in 0..<len(list):
     list_CArray[i] = list[i].h
 
-  let v_ms = fcQKeySequence_listToString2(struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0])), cint(format))
+  let v_ms = fcQKeySequence_listToStringListFormat(struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0])), cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -297,8 +297,8 @@ proc create*(T: type gen_qkeysequence_types.QKeySequence,
   let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new4(k1.h), owned: true)
   tmp
 proc create*(T: type gen_qkeysequence_types.QKeySequence,
-    ks: gen_qkeysequence_types.QKeySequence): gen_qkeysequence_types.QKeySequence =
-  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new5(ks.h), owned: true)
+    fromVal: gen_qkeysequence_types.QKeySequence): gen_qkeysequence_types.QKeySequence =
+  let tmp = gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new5(fromVal.h), owned: true)
   tmp
 proc create2*(T: type gen_qkeysequence_types.QKeySequence,
     key: cint): gen_qkeysequence_types.QKeySequence =

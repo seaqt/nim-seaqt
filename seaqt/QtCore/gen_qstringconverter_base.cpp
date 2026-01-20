@@ -42,7 +42,7 @@ QStringConverterBase__State* QStringConverterBase__State_new() {
 	return new (std::nothrow) QStringConverterBase__State();
 }
 
-QStringConverterBase__State* QStringConverterBase__State_new2(int f) {
+QStringConverterBase__State* QStringConverterBase__State_new_f(int f) {
 	return new (std::nothrow) QStringConverterBase__State(static_cast<QStringConverterBase::Flags>(f));
 }
 

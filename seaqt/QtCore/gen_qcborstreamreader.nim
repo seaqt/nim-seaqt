@@ -73,9 +73,9 @@ type cQCborStreamReader*{.exportc: "QCborStreamReader", incompleteStruct.} = obj
 
 proc fcQCborStreamReader_setDevice(self: pointer, device: pointer): void {.importc: "QCborStreamReader_setDevice".}
 proc fcQCborStreamReader_device(self: pointer): pointer {.importc: "QCborStreamReader_device".}
-proc fcQCborStreamReader_addData(self: pointer, data: struct_seaqt_string): void {.importc: "QCborStreamReader_addData".}
-proc fcQCborStreamReader_addData2(self: pointer, data: cstring, len: int64): void {.importc: "QCborStreamReader_addData2".}
-proc fcQCborStreamReader_addData3(self: pointer, data: ptr uint8, len: int64): void {.importc: "QCborStreamReader_addData3".}
+proc fcQCborStreamReader_addData_QByteArray(self: pointer, data: struct_seaqt_string): void {.importc: "QCborStreamReader_addData_QByteArray".}
+proc fcQCborStreamReader_addDataCharQsizetype(self: pointer, data: cstring, len: int64): void {.importc: "QCborStreamReader_addData_char_qsizetype".}
+proc fcQCborStreamReader_addDataQuint8Qsizetype(self: pointer, data: ptr uint8, len: int64): void {.importc: "QCborStreamReader_addData_quint8_qsizetype".}
 proc fcQCborStreamReader_reparse(self: pointer): void {.importc: "QCborStreamReader_reparse".}
 proc fcQCborStreamReader_clear(self: pointer): void {.importc: "QCborStreamReader_clear".}
 proc fcQCborStreamReader_reset(self: pointer): void {.importc: "QCborStreamReader_reset".}
@@ -100,7 +100,7 @@ proc fcQCborStreamReader_isFloat16(self: pointer): bool {.importc: "QCborStreamR
 proc fcQCborStreamReader_isFloat(self: pointer): bool {.importc: "QCborStreamReader_isFloat".}
 proc fcQCborStreamReader_isDouble(self: pointer): bool {.importc: "QCborStreamReader_isDouble".}
 proc fcQCborStreamReader_isInvalid(self: pointer): bool {.importc: "QCborStreamReader_isInvalid".}
-proc fcQCborStreamReader_isSimpleTypeWithSt(self: pointer, st: cint): bool {.importc: "QCborStreamReader_isSimpleTypeWithSt".}
+proc fcQCborStreamReader_isSimpleTypeSt(self: pointer, st: cint): bool {.importc: "QCborStreamReader_isSimpleType_st".}
 proc fcQCborStreamReader_isFalse(self: pointer): bool {.importc: "QCborStreamReader_isFalse".}
 proc fcQCborStreamReader_isTrue(self: pointer): bool {.importc: "QCborStreamReader_isTrue".}
 proc fcQCborStreamReader_isBool(self: pointer): bool {.importc: "QCborStreamReader_isBool".}
@@ -120,12 +120,12 @@ proc fcQCborStreamReader_toSimpleType(self: pointer): cint {.importc: "QCborStre
 proc fcQCborStreamReader_toFloat(self: pointer): float32 {.importc: "QCborStreamReader_toFloat".}
 proc fcQCborStreamReader_toDouble(self: pointer): float64 {.importc: "QCborStreamReader_toDouble".}
 proc fcQCborStreamReader_toInteger(self: pointer): clonglong {.importc: "QCborStreamReader_toInteger".}
-proc fcQCborStreamReader_nextWithMaxRecursion(self: pointer, maxRecursion: cint): bool {.importc: "QCborStreamReader_nextWithMaxRecursion".}
+proc fcQCborStreamReader_nextMaxRecursion(self: pointer, maxRecursion: cint): bool {.importc: "QCborStreamReader_next_maxRecursion".}
 proc fcQCborStreamReader_new(): ptr cQCborStreamReader {.importc: "QCborStreamReader_new".}
-proc fcQCborStreamReader_new2(data: cstring, len: int64): ptr cQCborStreamReader {.importc: "QCborStreamReader_new2".}
-proc fcQCborStreamReader_new3(data: ptr uint8, len: int64): ptr cQCborStreamReader {.importc: "QCborStreamReader_new3".}
-proc fcQCborStreamReader_new4(data: struct_seaqt_string): ptr cQCborStreamReader {.importc: "QCborStreamReader_new4".}
-proc fcQCborStreamReader_new5(device: pointer): ptr cQCborStreamReader {.importc: "QCborStreamReader_new5".}
+proc fcQCborStreamReader_new2(data: cstring, len: int64): ptr cQCborStreamReader {.importc: "QCborStreamReader_new_char_qsizetype".}
+proc fcQCborStreamReader_new3(data: ptr uint8, len: int64): ptr cQCborStreamReader {.importc: "QCborStreamReader_new_quint8_qsizetype".}
+proc fcQCborStreamReader_new4(data: struct_seaqt_string): ptr cQCborStreamReader {.importc: "QCborStreamReader_new_QByteArray".}
+proc fcQCborStreamReader_new5(device: pointer): ptr cQCborStreamReader {.importc: "QCborStreamReader_new_QIODevice".}
 proc fcQCborStreamReader_staticMetaObject(): pointer {.importc: "QCborStreamReader_staticMetaObject".}
 
 proc setDevice*(self: gen_qcborstreamreader_types.QCborStreamReader, device: gen_qiodevice_types.QIODevice): void =
@@ -135,13 +135,13 @@ proc device*(self: gen_qcborstreamreader_types.QCborStreamReader): gen_qiodevice
   gen_qiodevice_types.QIODevice(h: fcQCborStreamReader_device(self.h), owned: false)
 
 proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: openArray[byte]): void =
-  fcQCborStreamReader_addData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQCborStreamReader_addData_QByteArray(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: cstring, len: int64): void =
-  fcQCborStreamReader_addData2(self.h, data, len)
+  fcQCborStreamReader_addDataCharQsizetype(self.h, data, len)
 
 proc addData*(self: gen_qcborstreamreader_types.QCborStreamReader, data: ptr uint8, len: int64): void =
-  fcQCborStreamReader_addData3(self.h, data, len)
+  fcQCborStreamReader_addDataQuint8Qsizetype(self.h, data, len)
 
 proc reparse*(self: gen_qcborstreamreader_types.QCborStreamReader): void =
   fcQCborStreamReader_reparse(self.h)
@@ -216,7 +216,7 @@ proc isInvalid*(self: gen_qcborstreamreader_types.QCborStreamReader): bool =
   fcQCborStreamReader_isInvalid(self.h)
 
 proc isSimpleType*(self: gen_qcborstreamreader_types.QCborStreamReader, st: cint): bool =
-  fcQCborStreamReader_isSimpleTypeWithSt(self.h, cint(st))
+  fcQCborStreamReader_isSimpleTypeSt(self.h, cint(st))
 
 proc isFalse*(self: gen_qcborstreamreader_types.QCborStreamReader): bool =
   fcQCborStreamReader_isFalse(self.h)
@@ -276,7 +276,7 @@ proc toInteger*(self: gen_qcborstreamreader_types.QCborStreamReader): clonglong 
   fcQCborStreamReader_toInteger(self.h)
 
 proc next*(self: gen_qcborstreamreader_types.QCborStreamReader, maxRecursion: cint): bool =
-  fcQCborStreamReader_nextWithMaxRecursion(self.h, maxRecursion)
+  fcQCborStreamReader_nextMaxRecursion(self.h, maxRecursion)
 
 proc create*(T: type gen_qcborstreamreader_types.QCborStreamReader): gen_qcborstreamreader_types.QCborStreamReader =
   let tmp = gen_qcborstreamreader_types.QCborStreamReader(h: fcQCborStreamReader_new(), owned: true)

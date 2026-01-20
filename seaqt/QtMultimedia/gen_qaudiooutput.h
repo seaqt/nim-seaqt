@@ -53,15 +53,15 @@ void* QAudioOutput_vdata(VirtualQAudioOutput* self);
 VirtualQAudioOutput* vdata_QAudioOutput(void* vdata);
 
 VirtualQAudioOutput* QAudioOutput_new(const QAudioOutput_VTable* vtbl, size_t vdata);
-VirtualQAudioOutput* QAudioOutput_new2(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDevice* device);
-VirtualQAudioOutput* QAudioOutput_new3(const QAudioOutput_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQAudioOutput* QAudioOutput_new4(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDevice* device, QObject* parent);
+VirtualQAudioOutput* QAudioOutput_new_device(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDevice* device);
+VirtualQAudioOutput* QAudioOutput_new_parent(const QAudioOutput_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAudioOutput* QAudioOutput_new_device_parent(const QAudioOutput_VTable* vtbl, size_t vdata, QAudioDevice* device, QObject* parent);
 
 void QAudioOutput_virtbase(QAudioOutput* src, QObject** outptr_QObject);
 QMetaObject* QAudioOutput_metaObject(const QAudioOutput* self);
 void* QAudioOutput_metacast(QAudioOutput* self, const char* param1);
 int QAudioOutput_metacall(QAudioOutput* self, int param1, int param2, void** param3);
-struct seaqt_string QAudioOutput_tr(const char* s);
+struct seaqt_string QAudioOutput_tr_s(const char* s);
 QAudioDevice* QAudioOutput_device(const QAudioOutput* self);
 float QAudioOutput_volume(const QAudioOutput* self);
 bool QAudioOutput_isMuted(const QAudioOutput* self);
@@ -74,8 +74,8 @@ void QAudioOutput_volumeChanged(QAudioOutput* self, float volume);
 void QAudioOutput_connect_volumeChanged(QAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, float), void (*release)(intptr_t));
 void QAudioOutput_mutedChanged(QAudioOutput* self, bool muted);
 void QAudioOutput_connect_mutedChanged(QAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-struct seaqt_string QAudioOutput_tr2(const char* s, const char* c);
-struct seaqt_string QAudioOutput_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAudioOutput_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAudioOutput_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAudioOutput_virtualbase_metaObject(const VirtualQAudioOutput* self);
 void* QAudioOutput_virtualbase_metacast(VirtualQAudioOutput* self, const char* param1);

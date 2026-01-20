@@ -19,16 +19,16 @@ QSurfaceFormat* QSurfaceFormat_new() {
 	return new (std::nothrow) QSurfaceFormat();
 }
 
-QSurfaceFormat* QSurfaceFormat_new2(int options) {
+QSurfaceFormat* QSurfaceFormat_new_options(int options) {
 	return new (std::nothrow) QSurfaceFormat(static_cast<QSurfaceFormat::FormatOptions>(options));
 }
 
-QSurfaceFormat* QSurfaceFormat_new3(QSurfaceFormat* other) {
-	return new (std::nothrow) QSurfaceFormat(*other);
+QSurfaceFormat* QSurfaceFormat_new_from(QSurfaceFormat* from) {
+	return new (std::nothrow) QSurfaceFormat(*from);
 }
 
-void QSurfaceFormat_operatorAssign(QSurfaceFormat* self, QSurfaceFormat* other) {
-	self->operator=(*other);
+void QSurfaceFormat_operatorAssign(QSurfaceFormat* self, QSurfaceFormat* from) {
+	self->operator=(*from);
 }
 
 void QSurfaceFormat_setDepthBufferSize(QSurfaceFormat* self, int size) {
@@ -164,7 +164,7 @@ void QSurfaceFormat_setOptions(QSurfaceFormat* self, int options) {
 	self->setOptions(static_cast<QSurfaceFormat::FormatOptions>(options));
 }
 
-void QSurfaceFormat_setOption(QSurfaceFormat* self, int option) {
+void QSurfaceFormat_setOption_option(QSurfaceFormat* self, int option) {
 	self->setOption(static_cast<QSurfaceFormat::FormatOption>(option));
 }
 
@@ -191,11 +191,11 @@ QColorSpace* QSurfaceFormat_colorSpace(const QSurfaceFormat* self) {
 	return const_cast<QColorSpace*>(&_ret);
 }
 
-void QSurfaceFormat_setColorSpace(QSurfaceFormat* self, QColorSpace* colorSpace) {
+void QSurfaceFormat_setColorSpace_QColorSpace(QSurfaceFormat* self, QColorSpace* colorSpace) {
 	self->setColorSpace(*colorSpace);
 }
 
-void QSurfaceFormat_setColorSpaceWithColorSpace(QSurfaceFormat* self, int colorSpace) {
+void QSurfaceFormat_setColorSpace_QSurfaceFormat_ColorSpace(QSurfaceFormat* self, int colorSpace) {
 	self->setColorSpace(static_cast<QSurfaceFormat::ColorSpace>(colorSpace));
 }
 
@@ -207,7 +207,7 @@ QSurfaceFormat* QSurfaceFormat_defaultFormat() {
 	return new QSurfaceFormat(QSurfaceFormat::defaultFormat());
 }
 
-void QSurfaceFormat_setOption2(QSurfaceFormat* self, int option, bool on) {
+void QSurfaceFormat_setOption_option_on(QSurfaceFormat* self, int option, bool on) {
 	self->setOption(static_cast<QSurfaceFormat::FormatOption>(option), on);
 }
 

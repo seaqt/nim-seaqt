@@ -23,7 +23,7 @@ typedef struct QSharedData QSharedData;
 #endif
 
 QSharedData* QSharedData_new();
-QSharedData* QSharedData_new2(QSharedData* param1);
+QSharedData* QSharedData_new_from(QSharedData* from);
 
 void QSharedData_delete(QSharedData* self);
 

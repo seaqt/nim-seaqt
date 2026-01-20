@@ -66,7 +66,7 @@ type cQStringListModel*{.exportc: "QStringListModel", incompleteStruct.} = objec
 proc fcQStringListModel_metaObject(self: pointer): pointer {.importc: "QStringListModel_metaObject".}
 proc fcQStringListModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QStringListModel_metacast".}
 proc fcQStringListModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStringListModel_metacall".}
-proc fcQStringListModel_tr(s: cstring): struct_seaqt_string {.importc: "QStringListModel_tr".}
+proc fcQStringListModel_trS(s: cstring): struct_seaqt_string {.importc: "QStringListModel_tr_s".}
 proc fcQStringListModel_rowCount(self: pointer, parent: pointer): cint {.importc: "QStringListModel_rowCount".}
 proc fcQStringListModel_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QStringListModel_sibling".}
 proc fcQStringListModel_data(self: pointer, index: pointer, role: cint): pointer {.importc: "QStringListModel_data".}
@@ -82,8 +82,8 @@ proc fcQStringListModel_sort(self: pointer, column: cint, order: cint): void {.i
 proc fcQStringListModel_stringList(self: pointer): struct_seaqt_array {.importc: "QStringListModel_stringList".}
 proc fcQStringListModel_setStringList(self: pointer, strings: struct_seaqt_array): void {.importc: "QStringListModel_setStringList".}
 proc fcQStringListModel_supportedDropActions(self: pointer): cint {.importc: "QStringListModel_supportedDropActions".}
-proc fcQStringListModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStringListModel_tr2".}
-proc fcQStringListModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStringListModel_tr3".}
+proc fcQStringListModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStringListModel_tr_s_c".}
+proc fcQStringListModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStringListModel_tr_s_c_n".}
 proc fcQStringListModel_vdata(self: pointer): ptr pointer {.importc: "QStringListModel_vdata".}
 proc fvdata_cQStringListModel(self: pointer): pointer {.importc: "vdata_QStringListModel".}
 
@@ -177,7 +177,7 @@ proc fcQStringListModel_virtualbase_childEvent(self: pointer, event: pointer): v
 proc fcQStringListModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStringListModel_virtualbase_customEvent".}
 proc fcQStringListModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStringListModel_virtualbase_connectNotify".}
 proc fcQStringListModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStringListModel_virtualbase_disconnectNotify".}
-proc fcQStringListModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QStringListModel_protectedbase_createIndex".}
+proc fcQStringListModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QStringListModel_protectedbase_createIndex_row_column".}
 proc fcQStringListModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QStringListModel_protectedbase_encodeData".}
 proc fcQStringListModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QStringListModel_protectedbase_decodeData".}
 proc fcQStringListModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QStringListModel_protectedbase_beginInsertRows".}
@@ -202,9 +202,9 @@ proc fcQStringListModel_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQStringListModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStringListModel_protectedbase_receivers".}
 proc fcQStringListModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStringListModel_protectedbase_isSignalConnected".}
 proc fcQStringListModel_new(vtbl: pointer, vdata: csize_t): ptr cQStringListModel {.importc: "QStringListModel_new".}
-proc fcQStringListModel_new2(vtbl: pointer, vdata: csize_t, strings: struct_seaqt_array): ptr cQStringListModel {.importc: "QStringListModel_new2".}
-proc fcQStringListModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new3".}
-proc fcQStringListModel_new4(vtbl: pointer, vdata: csize_t, strings: struct_seaqt_array, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new4".}
+proc fcQStringListModel_new2(vtbl: pointer, vdata: csize_t, strings: struct_seaqt_array): ptr cQStringListModel {.importc: "QStringListModel_new_strings".}
+proc fcQStringListModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new_parent".}
+proc fcQStringListModel_new4(vtbl: pointer, vdata: csize_t, strings: struct_seaqt_array, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new_strings_parent".}
 proc fcQStringListModel_staticMetaObject(): pointer {.importc: "QStringListModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qstringlistmodel_types.QStringListModel): gen_qobjectdefs_types.QMetaObject =
@@ -217,7 +217,7 @@ proc metacall*(self: gen_qstringlistmodel_types.QStringListModel, param1: cint, 
   fcQStringListModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstringlistmodel_types.QStringListModel, s: cstring): string =
-  let v_ms = fcQStringListModel_tr(s)
+  let v_ms = fcQStringListModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -304,13 +304,13 @@ proc supportedDropActions*(self: gen_qstringlistmodel_types.QStringListModel): c
   cint(fcQStringListModel_supportedDropActions(self.h))
 
 proc tr*(_: type gen_qstringlistmodel_types.QStringListModel, s: cstring, c: cstring): string =
-  let v_ms = fcQStringListModel_tr2(s, c)
+  let v_ms = fcQStringListModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstringlistmodel_types.QStringListModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStringListModel_tr3(s, c, n)
+  let v_ms = fcQStringListModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1483,7 +1483,7 @@ proc fcQStringListModel_method_callback_disconnectNotify(self: pointer, signal: 
 
 
 proc createIndex*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qstringlistmodel_types.QStringListModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

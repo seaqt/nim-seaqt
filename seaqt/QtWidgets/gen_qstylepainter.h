@@ -38,20 +38,20 @@ typedef struct QStylePainter QStylePainter;
 typedef struct QWidget QWidget;
 #endif
 
-QStylePainter* QStylePainter_new(QWidget* w);
-QStylePainter* QStylePainter_new2();
-QStylePainter* QStylePainter_new3(QPaintDevice* pd, QWidget* w);
+QStylePainter* QStylePainter_new_w(QWidget* w);
+QStylePainter* QStylePainter_new();
+QStylePainter* QStylePainter_new_pd_w(QPaintDevice* pd, QWidget* w);
 
 void QStylePainter_virtbase(QStylePainter* src, QPainter** outptr_QPainter);
-bool QStylePainter_begin(QStylePainter* self, QWidget* w);
-bool QStylePainter_begin2(QStylePainter* self, QPaintDevice* pd, QWidget* w);
+bool QStylePainter_begin_w(QStylePainter* self, QWidget* w);
+bool QStylePainter_begin_pd_w(QStylePainter* self, QPaintDevice* pd, QWidget* w);
 void QStylePainter_drawPrimitive(QStylePainter* self, int pe, QStyleOption* opt);
 void QStylePainter_drawControl(QStylePainter* self, int ce, QStyleOption* opt);
 void QStylePainter_drawComplexControl(QStylePainter* self, int cc, QStyleOptionComplex* opt);
-void QStylePainter_drawItemText(QStylePainter* self, QRect* r, int flags, QPalette* pal, bool enabled, struct seaqt_string text);
+void QStylePainter_drawItemText_r_flags_pal_enabled_text(QStylePainter* self, QRect* r, int flags, QPalette* pal, bool enabled, struct seaqt_string text);
 void QStylePainter_drawItemPixmap(QStylePainter* self, QRect* r, int flags, QPixmap* pixmap);
 QStyle* QStylePainter_style(const QStylePainter* self);
-void QStylePainter_drawItemText2(QStylePainter* self, QRect* r, int flags, QPalette* pal, bool enabled, struct seaqt_string text, int textRole);
+void QStylePainter_drawItemText_r_flags_pal_enabled_text_textRole(QStylePainter* self, QRect* r, int flags, QPalette* pal, bool enabled, struct seaqt_string text, int textRole);
 
 void QStylePainter_delete(QStylePainter* self);
 

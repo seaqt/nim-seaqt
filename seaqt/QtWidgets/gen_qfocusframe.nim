@@ -73,11 +73,11 @@ type cQFocusFrame*{.exportc: "QFocusFrame", incompleteStruct.} = object
 proc fcQFocusFrame_metaObject(self: pointer): pointer {.importc: "QFocusFrame_metaObject".}
 proc fcQFocusFrame_metacast(self: pointer, param1: cstring): pointer {.importc: "QFocusFrame_metacast".}
 proc fcQFocusFrame_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFocusFrame_metacall".}
-proc fcQFocusFrame_tr(s: cstring): struct_seaqt_string {.importc: "QFocusFrame_tr".}
+proc fcQFocusFrame_trS(s: cstring): struct_seaqt_string {.importc: "QFocusFrame_tr_s".}
 proc fcQFocusFrame_setWidget(self: pointer, widget: pointer): void {.importc: "QFocusFrame_setWidget".}
 proc fcQFocusFrame_widget(self: pointer): pointer {.importc: "QFocusFrame_widget".}
-proc fcQFocusFrame_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFocusFrame_tr2".}
-proc fcQFocusFrame_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFocusFrame_tr3".}
+proc fcQFocusFrame_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFocusFrame_tr_s_c".}
+proc fcQFocusFrame_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFocusFrame_tr_s_c_n".}
 proc fcQFocusFrame_vdata(self: pointer): ptr pointer {.importc: "QFocusFrame_vdata".}
 proc fvdata_cQFocusFrame(self: pointer): pointer {.importc: "vdata_QFocusFrame".}
 
@@ -194,8 +194,8 @@ proc fcQFocusFrame_protectedbase_sender(self: pointer): pointer {.importc: "QFoc
 proc fcQFocusFrame_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QFocusFrame_protectedbase_senderSignalIndex".}
 proc fcQFocusFrame_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFocusFrame_protectedbase_receivers".}
 proc fcQFocusFrame_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFocusFrame_protectedbase_isSignalConnected".}
-proc fcQFocusFrame_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFocusFrame {.importc: "QFocusFrame_new".}
-proc fcQFocusFrame_new2(vtbl: pointer, vdata: csize_t): ptr cQFocusFrame {.importc: "QFocusFrame_new2".}
+proc fcQFocusFrame_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFocusFrame {.importc: "QFocusFrame_new_parent".}
+proc fcQFocusFrame_new2(vtbl: pointer, vdata: csize_t): ptr cQFocusFrame {.importc: "QFocusFrame_new".}
 proc fcQFocusFrame_staticMetaObject(): pointer {.importc: "QFocusFrame_staticMetaObject".}
 
 proc metaObject*(self: gen_qfocusframe_types.QFocusFrame): gen_qobjectdefs_types.QMetaObject =
@@ -208,7 +208,7 @@ proc metacall*(self: gen_qfocusframe_types.QFocusFrame, param1: cint, param2: ci
   fcQFocusFrame_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfocusframe_types.QFocusFrame, s: cstring): string =
-  let v_ms = fcQFocusFrame_tr(s)
+  let v_ms = fcQFocusFrame_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -220,13 +220,13 @@ proc widget*(self: gen_qfocusframe_types.QFocusFrame): gen_qwidget_types.QWidget
   gen_qwidget_types.QWidget(h: fcQFocusFrame_widget(self.h), owned: false)
 
 proc tr*(_: type gen_qfocusframe_types.QFocusFrame, s: cstring, c: cstring): string =
-  let v_ms = fcQFocusFrame_tr2(s, c)
+  let v_ms = fcQFocusFrame_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfocusframe_types.QFocusFrame, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFocusFrame_tr3(s, c, n)
+  let v_ms = fcQFocusFrame_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

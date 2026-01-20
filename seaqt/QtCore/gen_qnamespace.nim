@@ -1516,7 +1516,7 @@ type cQInternal*{.exportc: "QInternal", incompleteStruct.} = object
 type cQKeyCombination*{.exportc: "QKeyCombination", incompleteStruct.} = object
 
 proc fcDisambiguated_t_new(): ptr cDisambiguated_t {.importc: "Disambiguated_t_new".}
-proc fcDisambiguated_t_new2(param1: pointer): ptr cDisambiguated_t {.importc: "Disambiguated_t_new2".}
+proc fcDisambiguated_t_new2(fromVal: pointer): ptr cDisambiguated_t {.importc: "Disambiguated_t_new_from".}
 proc fcQInternal_activateCallbacks(param1: cint, param2: pointer): bool {.importc: "QInternal_activateCallbacks".}
 proc fcQKeyCombination_keyboardModifiers(self: pointer): cint {.importc: "QKeyCombination_keyboardModifiers".}
 proc fcQKeyCombination_key(self: pointer): cint {.importc: "QKeyCombination_key".}
@@ -1524,19 +1524,19 @@ proc fcQKeyCombination_fromCombined(combined: cint): pointer {.importc: "QKeyCom
 proc fcQKeyCombination_toCombined(self: pointer): cint {.importc: "QKeyCombination_toCombined".}
 proc fcQKeyCombination_ToInt(self: pointer): cint {.importc: "QKeyCombination_ToInt".}
 proc fcQKeyCombination_new(): ptr cQKeyCombination {.importc: "QKeyCombination_new".}
-proc fcQKeyCombination_new2(modifiers: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new2".}
-proc fcQKeyCombination_new3(modifiers: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new3".}
-proc fcQKeyCombination_new4(param1: pointer): ptr cQKeyCombination {.importc: "QKeyCombination_new4".}
-proc fcQKeyCombination_new5(key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new5".}
-proc fcQKeyCombination_new6(modifiers: cint, key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new6".}
-proc fcQKeyCombination_new7(modifiers: cint, key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new7".}
+proc fcQKeyCombination_new2(modifiers: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new_Qt_Modifiers".}
+proc fcQKeyCombination_new3(modifiers: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new_Qt_KeyboardModifiers".}
+proc fcQKeyCombination_new4(fromVal: pointer): ptr cQKeyCombination {.importc: "QKeyCombination_new_QKeyCombination".}
+proc fcQKeyCombination_new5(key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new_Qt_Key".}
+proc fcQKeyCombination_new6(modifiers: cint, key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new_Qt_Modifiers_Qt_Key".}
+proc fcQKeyCombination_new7(modifiers: cint, key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new_Qt_KeyboardModifiers_Qt_Key".}
 
 proc create*(T: type gen_qnamespace_types.Disambiguated_t): gen_qnamespace_types.Disambiguated_t =
   let tmp = gen_qnamespace_types.Disambiguated_t(h: fcDisambiguated_t_new(), owned: true)
   tmp
 proc create*(T: type gen_qnamespace_types.Disambiguated_t,
-    param1: gen_qnamespace_types.Disambiguated_t): gen_qnamespace_types.Disambiguated_t =
-  let tmp = gen_qnamespace_types.Disambiguated_t(h: fcDisambiguated_t_new2(param1.h), owned: true)
+    fromVal: gen_qnamespace_types.Disambiguated_t): gen_qnamespace_types.Disambiguated_t =
+  let tmp = gen_qnamespace_types.Disambiguated_t(h: fcDisambiguated_t_new2(fromVal.h), owned: true)
   tmp
 proc activateCallbacks*(_: type gen_qnamespace_types.QInternal, param1: cint, param2: pointer): bool =
   fcQInternal_activateCallbacks(cint(param1), param2)
@@ -1568,8 +1568,8 @@ proc create2*(T: type gen_qnamespace_types.QKeyCombination,
   let tmp = gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new3(cint(modifiers)), owned: true)
   tmp
 proc create*(T: type gen_qnamespace_types.QKeyCombination,
-    param1: gen_qnamespace_types.QKeyCombination): gen_qnamespace_types.QKeyCombination =
-  let tmp = gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new4(param1.h), owned: true)
+    fromVal: gen_qnamespace_types.QKeyCombination): gen_qnamespace_types.QKeyCombination =
+  let tmp = gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new4(fromVal.h), owned: true)
   tmp
 proc create3*(T: type gen_qnamespace_types.QKeyCombination,
     key: cint): gen_qnamespace_types.QKeyCombination =

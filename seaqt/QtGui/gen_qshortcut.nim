@@ -57,11 +57,11 @@ type cQShortcut*{.exportc: "QShortcut", incompleteStruct.} = object
 proc fcQShortcut_metaObject(self: pointer): pointer {.importc: "QShortcut_metaObject".}
 proc fcQShortcut_metacast(self: pointer, param1: cstring): pointer {.importc: "QShortcut_metacast".}
 proc fcQShortcut_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QShortcut_metacall".}
-proc fcQShortcut_tr(s: cstring): struct_seaqt_string {.importc: "QShortcut_tr".}
+proc fcQShortcut_trS(s: cstring): struct_seaqt_string {.importc: "QShortcut_tr_s".}
 proc fcQShortcut_setKey(self: pointer, key: pointer): void {.importc: "QShortcut_setKey".}
 proc fcQShortcut_key(self: pointer): pointer {.importc: "QShortcut_key".}
-proc fcQShortcut_setKeys(self: pointer, key: cint): void {.importc: "QShortcut_setKeys".}
-proc fcQShortcut_setKeysWithKeys(self: pointer, keys: struct_seaqt_array): void {.importc: "QShortcut_setKeysWithKeys".}
+proc fcQShortcut_setKeysKey(self: pointer, key: cint): void {.importc: "QShortcut_setKeys_key".}
+proc fcQShortcut_setKeysKeys(self: pointer, keys: struct_seaqt_array): void {.importc: "QShortcut_setKeys_keys".}
 proc fcQShortcut_keys(self: pointer): struct_seaqt_array {.importc: "QShortcut_keys".}
 proc fcQShortcut_setEnabled(self: pointer, enable: bool): void {.importc: "QShortcut_setEnabled".}
 proc fcQShortcut_isEnabled(self: pointer): bool {.importc: "QShortcut_isEnabled".}
@@ -76,8 +76,8 @@ proc fcQShortcut_activated(self: pointer): void {.importc: "QShortcut_activated"
 proc fcQShortcut_connect_activated(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QShortcut_connect_activated".}
 proc fcQShortcut_activatedAmbiguously(self: pointer): void {.importc: "QShortcut_activatedAmbiguously".}
 proc fcQShortcut_connect_activatedAmbiguously(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QShortcut_connect_activatedAmbiguously".}
-proc fcQShortcut_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QShortcut_tr2".}
-proc fcQShortcut_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QShortcut_tr3".}
+proc fcQShortcut_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QShortcut_tr_s_c".}
+proc fcQShortcut_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QShortcut_tr_s_c_n".}
 proc fcQShortcut_vdata(self: pointer): ptr pointer {.importc: "QShortcut_vdata".}
 proc fvdata_cQShortcut(self: pointer): pointer {.importc: "vdata_QShortcut".}
 
@@ -107,15 +107,15 @@ proc fcQShortcut_protectedbase_sender(self: pointer): pointer {.importc: "QShort
 proc fcQShortcut_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QShortcut_protectedbase_senderSignalIndex".}
 proc fcQShortcut_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QShortcut_protectedbase_receivers".}
 proc fcQShortcut_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QShortcut_protectedbase_isSignalConnected".}
-proc fcQShortcut_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new".}
-proc fcQShortcut_new2(vtbl: pointer, vdata: csize_t, key: pointer, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new2".}
-proc fcQShortcut_new3(vtbl: pointer, vdata: csize_t, key: cint, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new3".}
-proc fcQShortcut_new4(vtbl: pointer, vdata: csize_t, key: pointer, parent: pointer, member: cstring): ptr cQShortcut {.importc: "QShortcut_new4".}
-proc fcQShortcut_new5(vtbl: pointer, vdata: csize_t, key: pointer, parent: pointer, member: cstring, ambiguousMember: cstring): ptr cQShortcut {.importc: "QShortcut_new5".}
-proc fcQShortcut_new6(vtbl: pointer, vdata: csize_t, key: pointer, parent: pointer, member: cstring, ambiguousMember: cstring, context: cint): ptr cQShortcut {.importc: "QShortcut_new6".}
-proc fcQShortcut_new7(vtbl: pointer, vdata: csize_t, key: cint, parent: pointer, member: cstring): ptr cQShortcut {.importc: "QShortcut_new7".}
-proc fcQShortcut_new8(vtbl: pointer, vdata: csize_t, key: cint, parent: pointer, member: cstring, ambiguousMember: cstring): ptr cQShortcut {.importc: "QShortcut_new8".}
-proc fcQShortcut_new9(vtbl: pointer, vdata: csize_t, key: cint, parent: pointer, member: cstring, ambiguousMember: cstring, context: cint): ptr cQShortcut {.importc: "QShortcut_new9".}
+proc fcQShortcut_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new_QObject".}
+proc fcQShortcut_new2(vtbl: pointer, vdata: csize_t, key: pointer, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new_QKeySequence_QObject".}
+proc fcQShortcut_new3(vtbl: pointer, vdata: csize_t, key: cint, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new_QKeySequence_StandardKey_QObject".}
+proc fcQShortcut_new4(vtbl: pointer, vdata: csize_t, key: pointer, parent: pointer, member: cstring): ptr cQShortcut {.importc: "QShortcut_new_QKeySequence_QObject_char".}
+proc fcQShortcut_new5(vtbl: pointer, vdata: csize_t, key: pointer, parent: pointer, member: cstring, ambiguousMember: cstring): ptr cQShortcut {.importc: "QShortcut_new_QKeySequence_QObject_char_char".}
+proc fcQShortcut_new6(vtbl: pointer, vdata: csize_t, key: pointer, parent: pointer, member: cstring, ambiguousMember: cstring, context: cint): ptr cQShortcut {.importc: "QShortcut_new_QKeySequence_QObject_char_char_Qt_ShortcutContext".}
+proc fcQShortcut_new7(vtbl: pointer, vdata: csize_t, key: cint, parent: pointer, member: cstring): ptr cQShortcut {.importc: "QShortcut_new_QKeySequence_StandardKey_QObject_char".}
+proc fcQShortcut_new8(vtbl: pointer, vdata: csize_t, key: cint, parent: pointer, member: cstring, ambiguousMember: cstring): ptr cQShortcut {.importc: "QShortcut_new_QKeySequence_StandardKey_QObject_char_char".}
+proc fcQShortcut_new9(vtbl: pointer, vdata: csize_t, key: cint, parent: pointer, member: cstring, ambiguousMember: cstring, context: cint): ptr cQShortcut {.importc: "QShortcut_new_QKeySequence_StandardKey_QObject_char_char_Qt_ShortcutContext".}
 proc fcQShortcut_staticMetaObject(): pointer {.importc: "QShortcut_staticMetaObject".}
 
 proc metaObject*(self: gen_qshortcut_types.QShortcut): gen_qobjectdefs_types.QMetaObject =
@@ -128,7 +128,7 @@ proc metacall*(self: gen_qshortcut_types.QShortcut, param1: cint, param2: cint, 
   fcQShortcut_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qshortcut_types.QShortcut, s: cstring): string =
-  let v_ms = fcQShortcut_tr(s)
+  let v_ms = fcQShortcut_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -140,14 +140,14 @@ proc key*(self: gen_qshortcut_types.QShortcut): gen_qkeysequence_types.QKeySeque
   gen_qkeysequence_types.QKeySequence(h: fcQShortcut_key(self.h), owned: true)
 
 proc setKeys*(self: gen_qshortcut_types.QShortcut, key: cint): void =
-  fcQShortcut_setKeys(self.h, cint(key))
+  fcQShortcut_setKeysKey(self.h, cint(key))
 
 proc setKeys*(self: gen_qshortcut_types.QShortcut, keys: openArray[gen_qkeysequence_types.QKeySequence]): void =
   var keys_CArray = newSeq[pointer](len(keys))
   for i in 0..<len(keys):
     keys_CArray[i] = keys[i].h
 
-  fcQShortcut_setKeysWithKeys(self.h, struct_seaqt_array(len: csize_t(len(keys)), data: if len(keys) == 0: nil else: addr(keys_CArray[0])))
+  fcQShortcut_setKeysKeys(self.h, struct_seaqt_array(len: csize_t(len(keys)), data: if len(keys) == 0: nil else: addr(keys_CArray[0])))
 
 proc keys*(self: gen_qshortcut_types.QShortcut): seq[gen_qkeysequence_types.QKeySequence] =
   var v_ma = fcQShortcut_keys(self.h)
@@ -225,13 +225,13 @@ proc onActivatedAmbiguously*(self: gen_qshortcut_types.QShortcut, slot: QShortcu
   fcQShortcut_connect_activatedAmbiguously(self.h, cast[int](addr tmp[]), fcQShortcut_slot_callback_activatedAmbiguously, fcQShortcut_slot_callback_activatedAmbiguously_release)
 
 proc tr*(_: type gen_qshortcut_types.QShortcut, s: cstring, c: cstring): string =
-  let v_ms = fcQShortcut_tr2(s, c)
+  let v_ms = fcQShortcut_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qshortcut_types.QShortcut, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQShortcut_tr3(s, c, n)
+  let v_ms = fcQShortcut_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

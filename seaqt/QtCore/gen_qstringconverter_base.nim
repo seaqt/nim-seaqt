@@ -79,7 +79,7 @@ proc fcQStringConverterBaseState_setRemainingChars(self: pointer, remainingChars
 proc fcQStringConverterBaseState_invalidChars(self: pointer): int64 {.importc: "QStringConverterBase__State_invalidChars".}
 proc fcQStringConverterBaseState_setInvalidChars(self: pointer, invalidChars: int64): void {.importc: "QStringConverterBase__State_setInvalidChars".}
 proc fcQStringConverterBaseState_new(): ptr cQStringConverterBaseState {.importc: "QStringConverterBase__State_new".}
-proc fcQStringConverterBaseState_new2(f: cint): ptr cQStringConverterBaseState {.importc: "QStringConverterBase__State_new2".}
+proc fcQStringConverterBaseState_new2(f: cint): ptr cQStringConverterBaseState {.importc: "QStringConverterBase__State_new_f".}
 
 proc isValid*(self: gen_qstringconverter_base_types.QStringConverter): bool =
   fcQStringConverter_isValid(self.h)

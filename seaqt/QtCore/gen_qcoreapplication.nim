@@ -67,9 +67,9 @@ type cQCoreApplication*{.exportc: "QCoreApplication", incompleteStruct.} = objec
 proc fcQCoreApplication_metaObject(self: pointer): pointer {.importc: "QCoreApplication_metaObject".}
 proc fcQCoreApplication_metacast(self: pointer, param1: cstring): pointer {.importc: "QCoreApplication_metacast".}
 proc fcQCoreApplication_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCoreApplication_metacall".}
-proc fcQCoreApplication_tr(s: cstring): struct_seaqt_string {.importc: "QCoreApplication_tr".}
+proc fcQCoreApplication_trS(s: cstring): struct_seaqt_string {.importc: "QCoreApplication_tr_s".}
 proc fcQCoreApplication_arguments(): struct_seaqt_array {.importc: "QCoreApplication_arguments".}
-proc fcQCoreApplication_setAttribute(attribute: cint): void {.importc: "QCoreApplication_setAttribute".}
+proc fcQCoreApplication_setAttributeAttribute(attribute: cint): void {.importc: "QCoreApplication_setAttribute_attribute".}
 proc fcQCoreApplication_testAttribute(attribute: cint): bool {.importc: "QCoreApplication_testAttribute".}
 proc fcQCoreApplication_setOrganizationDomain(orgDomain: struct_seaqt_string): void {.importc: "QCoreApplication_setOrganizationDomain".}
 proc fcQCoreApplication_organizationDomain(): struct_seaqt_string {.importc: "QCoreApplication_organizationDomain".}
@@ -84,11 +84,11 @@ proc fcQCoreApplication_isSetuidAllowed(): bool {.importc: "QCoreApplication_isS
 proc fcQCoreApplication_instance(): pointer {.importc: "QCoreApplication_instance".}
 proc fcQCoreApplication_exec(): cint {.importc: "QCoreApplication_exec".}
 proc fcQCoreApplication_processEvents(): void {.importc: "QCoreApplication_processEvents".}
-proc fcQCoreApplication_processEvents2(flags: cint, maxtime: cint): void {.importc: "QCoreApplication_processEvents2".}
+proc fcQCoreApplication_processEventsFlagsMaxtime(flags: cint, maxtime: cint): void {.importc: "QCoreApplication_processEvents_flags_maxtime".}
 proc fcQCoreApplication_sendEvent(receiver: pointer, event: pointer): bool {.importc: "QCoreApplication_sendEvent".}
-proc fcQCoreApplication_postEvent(receiver: pointer, event: pointer): void {.importc: "QCoreApplication_postEvent".}
+proc fcQCoreApplication_postEventReceiverEvent(receiver: pointer, event: pointer): void {.importc: "QCoreApplication_postEvent_receiver_event".}
 proc fcQCoreApplication_sendPostedEvents(): void {.importc: "QCoreApplication_sendPostedEvents".}
-proc fcQCoreApplication_removePostedEvents(receiver: pointer): void {.importc: "QCoreApplication_removePostedEvents".}
+proc fcQCoreApplication_removePostedEventsReceiver(receiver: pointer): void {.importc: "QCoreApplication_removePostedEvents_receiver".}
 proc fcQCoreApplication_eventDispatcher(): pointer {.importc: "QCoreApplication_eventDispatcher".}
 proc fcQCoreApplication_setEventDispatcher(eventDispatcher: pointer): void {.importc: "QCoreApplication_setEventDispatcher".}
 proc fcQCoreApplication_notify(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QCoreApplication_notify".}
@@ -103,7 +103,7 @@ proc fcQCoreApplication_addLibraryPath(param1: struct_seaqt_string): void {.impo
 proc fcQCoreApplication_removeLibraryPath(param1: struct_seaqt_string): void {.importc: "QCoreApplication_removeLibraryPath".}
 proc fcQCoreApplication_installTranslator(messageFile: pointer): bool {.importc: "QCoreApplication_installTranslator".}
 proc fcQCoreApplication_removeTranslator(messageFile: pointer): bool {.importc: "QCoreApplication_removeTranslator".}
-proc fcQCoreApplication_translate(context: cstring, key: cstring): struct_seaqt_string {.importc: "QCoreApplication_translate".}
+proc fcQCoreApplication_translateContextKey(context: cstring, key: cstring): struct_seaqt_string {.importc: "QCoreApplication_translate_context_key".}
 proc fcQCoreApplication_installNativeEventFilter(self: pointer, filterObj: pointer): void {.importc: "QCoreApplication_installNativeEventFilter".}
 proc fcQCoreApplication_connect_installNativeEventFilter(self: pointer, slot: int, callback: proc (slot: int, filterObj: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_installNativeEventFilter".}
 proc fcQCoreApplication_removeNativeEventFilter(self: pointer, filterObj: pointer): void {.importc: "QCoreApplication_removeNativeEventFilter".}
@@ -120,17 +120,17 @@ proc fcQCoreApplication_applicationNameChanged(self: pointer): void {.importc: "
 proc fcQCoreApplication_connect_applicationNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_applicationNameChanged".}
 proc fcQCoreApplication_applicationVersionChanged(self: pointer): void {.importc: "QCoreApplication_applicationVersionChanged".}
 proc fcQCoreApplication_connect_applicationVersionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_applicationVersionChanged".}
-proc fcQCoreApplication_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCoreApplication_tr2".}
-proc fcQCoreApplication_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCoreApplication_tr3".}
-proc fcQCoreApplication_setAttribute2(attribute: cint, on: bool): void {.importc: "QCoreApplication_setAttribute2".}
-proc fcQCoreApplication_processEventsWithFlags(flags: cint): void {.importc: "QCoreApplication_processEventsWithFlags".}
-proc fcQCoreApplication_postEvent2(receiver: pointer, event: pointer, priority: cint): void {.importc: "QCoreApplication_postEvent2".}
-proc fcQCoreApplication_sendPostedEventsWithReceiver(receiver: pointer): void {.importc: "QCoreApplication_sendPostedEventsWithReceiver".}
-proc fcQCoreApplication_sendPostedEvents2(receiver: pointer, event_type: cint): void {.importc: "QCoreApplication_sendPostedEvents2".}
-proc fcQCoreApplication_removePostedEvents2(receiver: pointer, eventType: cint): void {.importc: "QCoreApplication_removePostedEvents2".}
-proc fcQCoreApplication_translate2(context: cstring, key: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QCoreApplication_translate2".}
-proc fcQCoreApplication_translate3(context: cstring, key: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QCoreApplication_translate3".}
-proc fcQCoreApplication_exitWithRetcode(retcode: cint): void {.importc: "QCoreApplication_exitWithRetcode".}
+proc fcQCoreApplication_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCoreApplication_tr_s_c".}
+proc fcQCoreApplication_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCoreApplication_tr_s_c_n".}
+proc fcQCoreApplication_setAttributeAttributeOn(attribute: cint, on: bool): void {.importc: "QCoreApplication_setAttribute_attribute_on".}
+proc fcQCoreApplication_processEventsFlags(flags: cint): void {.importc: "QCoreApplication_processEvents_flags".}
+proc fcQCoreApplication_postEventReceiverEventPriority(receiver: pointer, event: pointer, priority: cint): void {.importc: "QCoreApplication_postEvent_receiver_event_priority".}
+proc fcQCoreApplication_sendPostedEventsReceiver(receiver: pointer): void {.importc: "QCoreApplication_sendPostedEvents_receiver".}
+proc fcQCoreApplication_sendPostedEventsReceiverEventType(receiver: pointer, event_type: cint): void {.importc: "QCoreApplication_sendPostedEvents_receiver_event_type".}
+proc fcQCoreApplication_removePostedEventsReceiverEventType(receiver: pointer, eventType: cint): void {.importc: "QCoreApplication_removePostedEvents_receiver_eventType".}
+proc fcQCoreApplication_translateContextKeyDisambiguation(context: cstring, key: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QCoreApplication_translate_context_key_disambiguation".}
+proc fcQCoreApplication_translateContextKeyDisambiguationN(context: cstring, key: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QCoreApplication_translate_context_key_disambiguation_n".}
+proc fcQCoreApplication_exitRetcode(retcode: cint): void {.importc: "QCoreApplication_exit_retcode".}
 proc fcQCoreApplication_vdata(self: pointer): ptr pointer {.importc: "QCoreApplication_vdata".}
 proc fvdata_cQCoreApplication(self: pointer): pointer {.importc: "vdata_QCoreApplication".}
 
@@ -163,8 +163,8 @@ proc fcQCoreApplication_protectedbase_sender(self: pointer): pointer {.importc: 
 proc fcQCoreApplication_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCoreApplication_protectedbase_senderSignalIndex".}
 proc fcQCoreApplication_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCoreApplication_protectedbase_receivers".}
 proc fcQCoreApplication_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCoreApplication_protectedbase_isSignalConnected".}
-proc fcQCoreApplication_new(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray): ptr cQCoreApplication {.importc: "QCoreApplication_new".}
-proc fcQCoreApplication_new2(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQCoreApplication {.importc: "QCoreApplication_new2".}
+proc fcQCoreApplication_new(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray): ptr cQCoreApplication {.importc: "QCoreApplication_new_int_char".}
+proc fcQCoreApplication_new2(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQCoreApplication {.importc: "QCoreApplication_new_int_char_int".}
 proc fcQCoreApplication_staticMetaObject(): pointer {.importc: "QCoreApplication_staticMetaObject".}
 
 proc metaObject*(self: gen_qcoreapplication_types.QCoreApplication): gen_qobjectdefs_types.QMetaObject =
@@ -177,7 +177,7 @@ proc metacall*(self: gen_qcoreapplication_types.QCoreApplication, param1: cint, 
   fcQCoreApplication_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring): string =
-  let v_ms = fcQCoreApplication_tr(s)
+  let v_ms = fcQCoreApplication_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -195,7 +195,7 @@ proc arguments*(_: type gen_qcoreapplication_types.QCoreApplication): seq[string
   vx_ret
 
 proc setAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint): void =
-  fcQCoreApplication_setAttribute(cint(attribute))
+  fcQCoreApplication_setAttributeAttribute(cint(attribute))
 
 proc testAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint): bool =
   fcQCoreApplication_testAttribute(cint(attribute))
@@ -252,19 +252,19 @@ proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_processEvents()
 
 proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication, flags: cint, maxtime: cint): void =
-  fcQCoreApplication_processEvents2(cint(flags), maxtime)
+  fcQCoreApplication_processEventsFlagsMaxtime(cint(flags), maxtime)
 
 proc sendEvent*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQCoreApplication_sendEvent(receiver.h, event.h)
 
 proc postEvent*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): void =
-  fcQCoreApplication_postEvent(receiver.h, event.h)
+  fcQCoreApplication_postEventReceiverEvent(receiver.h, event.h)
 
 proc sendPostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication): void =
   fcQCoreApplication_sendPostedEvents()
 
 proc removePostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject): void =
-  fcQCoreApplication_removePostedEvents(receiver.h)
+  fcQCoreApplication_removePostedEventsReceiver(receiver.h)
 
 proc eventDispatcher*(_: type gen_qcoreapplication_types.QCoreApplication): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
   gen_qabstracteventdispatcher_types.QAbstractEventDispatcher(h: fcQCoreApplication_eventDispatcher(), owned: false)
@@ -328,7 +328,7 @@ proc removeTranslator*(_: type gen_qcoreapplication_types.QCoreApplication, mess
   fcQCoreApplication_removeTranslator(messageFile.h)
 
 proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring): string =
-  let v_ms = fcQCoreApplication_translate(context, key)
+  let v_ms = fcQCoreApplication_translateContextKey(context, key)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -458,49 +458,49 @@ proc onApplicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplicat
   fcQCoreApplication_connect_applicationVersionChanged(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_applicationVersionChanged, fcQCoreApplication_slot_callback_applicationVersionChanged_release)
 
 proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring): string =
-  let v_ms = fcQCoreApplication_tr2(s, c)
+  let v_ms = fcQCoreApplication_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCoreApplication_tr3(s, c, n)
+  let v_ms = fcQCoreApplication_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint, on: bool): void =
-  fcQCoreApplication_setAttribute2(cint(attribute), on)
+  fcQCoreApplication_setAttributeAttributeOn(cint(attribute), on)
 
 proc processEvents*(_: type gen_qcoreapplication_types.QCoreApplication, flags: cint): void =
-  fcQCoreApplication_processEventsWithFlags(cint(flags))
+  fcQCoreApplication_processEventsFlags(cint(flags))
 
 proc postEvent*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent, priority: cint): void =
-  fcQCoreApplication_postEvent2(receiver.h, event.h, priority)
+  fcQCoreApplication_postEventReceiverEventPriority(receiver.h, event.h, priority)
 
 proc sendPostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject): void =
-  fcQCoreApplication_sendPostedEventsWithReceiver(receiver.h)
+  fcQCoreApplication_sendPostedEventsReceiver(receiver.h)
 
 proc sendPostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, event_type: cint): void =
-  fcQCoreApplication_sendPostedEvents2(receiver.h, event_type)
+  fcQCoreApplication_sendPostedEventsReceiverEventType(receiver.h, event_type)
 
 proc removePostedEvents*(_: type gen_qcoreapplication_types.QCoreApplication, receiver: gen_qobject_types.QObject, eventType: cint): void =
-  fcQCoreApplication_removePostedEvents2(receiver.h, eventType)
+  fcQCoreApplication_removePostedEventsReceiverEventType(receiver.h, eventType)
 
 proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring, disambiguation: cstring): string =
-  let v_ms = fcQCoreApplication_translate2(context, key, disambiguation)
+  let v_ms = fcQCoreApplication_translateContextKeyDisambiguation(context, key, disambiguation)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cstring, key: cstring, disambiguation: cstring, n: cint): string =
-  let v_ms = fcQCoreApplication_translate3(context, key, disambiguation, n)
+  let v_ms = fcQCoreApplication_translateContextKeyDisambiguationN(context, key, disambiguation, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc exit*(_: type gen_qcoreapplication_types.QCoreApplication, retcode: cint): void =
-  fcQCoreApplication_exitWithRetcode(retcode)
+  fcQCoreApplication_exitRetcode(retcode)
 
 type QCoreApplicationmetaObjectProc* = proc(self: QCoreApplication): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QCoreApplicationmetacastProc* = proc(self: QCoreApplication, param1: cstring): pointer {.raises: [], gcsafe.}

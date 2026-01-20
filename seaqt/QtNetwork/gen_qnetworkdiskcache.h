@@ -68,13 +68,13 @@ void* QNetworkDiskCache_vdata(VirtualQNetworkDiskCache* self);
 VirtualQNetworkDiskCache* vdata_QNetworkDiskCache(void* vdata);
 
 VirtualQNetworkDiskCache* QNetworkDiskCache_new(const QNetworkDiskCache_VTable* vtbl, size_t vdata);
-VirtualQNetworkDiskCache* QNetworkDiskCache_new2(const QNetworkDiskCache_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQNetworkDiskCache* QNetworkDiskCache_new_parent(const QNetworkDiskCache_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QNetworkDiskCache_virtbase(QNetworkDiskCache* src, QAbstractNetworkCache** outptr_QAbstractNetworkCache);
 QMetaObject* QNetworkDiskCache_metaObject(const QNetworkDiskCache* self);
 void* QNetworkDiskCache_metacast(QNetworkDiskCache* self, const char* param1);
 int QNetworkDiskCache_metacall(QNetworkDiskCache* self, int param1, int param2, void** param3);
-struct seaqt_string QNetworkDiskCache_tr(const char* s);
+struct seaqt_string QNetworkDiskCache_tr_s(const char* s);
 struct seaqt_string QNetworkDiskCache_cacheDirectory(const QNetworkDiskCache* self);
 void QNetworkDiskCache_setCacheDirectory(QNetworkDiskCache* self, struct seaqt_string cacheDir);
 long long QNetworkDiskCache_maximumCacheSize(const QNetworkDiskCache* self);
@@ -89,8 +89,8 @@ void QNetworkDiskCache_insert(QNetworkDiskCache* self, QIODevice* device);
 QNetworkCacheMetaData* QNetworkDiskCache_fileMetaData(const QNetworkDiskCache* self, struct seaqt_string fileName);
 void QNetworkDiskCache_clear(QNetworkDiskCache* self);
 long long QNetworkDiskCache_expire(QNetworkDiskCache* self);
-struct seaqt_string QNetworkDiskCache_tr2(const char* s, const char* c);
-struct seaqt_string QNetworkDiskCache_tr3(const char* s, const char* c, int n);
+struct seaqt_string QNetworkDiskCache_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkDiskCache_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QNetworkDiskCache_virtualbase_metaObject(const VirtualQNetworkDiskCache* self);
 void* QNetworkDiskCache_virtualbase_metacast(VirtualQNetworkDiskCache* self, const char* param1);

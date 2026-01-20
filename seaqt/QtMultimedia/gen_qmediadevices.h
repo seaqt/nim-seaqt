@@ -55,13 +55,13 @@ void* QMediaDevices_vdata(VirtualQMediaDevices* self);
 VirtualQMediaDevices* vdata_QMediaDevices(void* vdata);
 
 VirtualQMediaDevices* QMediaDevices_new(const QMediaDevices_VTable* vtbl, size_t vdata);
-VirtualQMediaDevices* QMediaDevices_new2(const QMediaDevices_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQMediaDevices* QMediaDevices_new_parent(const QMediaDevices_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QMediaDevices_virtbase(QMediaDevices* src, QObject** outptr_QObject);
 QMetaObject* QMediaDevices_metaObject(const QMediaDevices* self);
 void* QMediaDevices_metacast(QMediaDevices* self, const char* param1);
 int QMediaDevices_metacall(QMediaDevices* self, int param1, int param2, void** param3);
-struct seaqt_string QMediaDevices_tr(const char* s);
+struct seaqt_string QMediaDevices_tr_s(const char* s);
 struct seaqt_array /* of QAudioDevice* */  QMediaDevices_audioInputs();
 struct seaqt_array /* of QAudioDevice* */  QMediaDevices_audioOutputs();
 struct seaqt_array /* of QCameraDevice* */  QMediaDevices_videoInputs();
@@ -74,8 +74,8 @@ void QMediaDevices_audioOutputsChanged(QMediaDevices* self);
 void QMediaDevices_connect_audioOutputsChanged(QMediaDevices* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QMediaDevices_videoInputsChanged(QMediaDevices* self);
 void QMediaDevices_connect_videoInputsChanged(QMediaDevices* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QMediaDevices_tr2(const char* s, const char* c);
-struct seaqt_string QMediaDevices_tr3(const char* s, const char* c, int n);
+struct seaqt_string QMediaDevices_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMediaDevices_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QMediaDevices_virtualbase_metaObject(const VirtualQMediaDevices* self);
 void* QMediaDevices_virtualbase_metacast(VirtualQMediaDevices* self, const char* param1);

@@ -21,8 +21,8 @@ QJSPrimitiveUndefined* QJSPrimitiveUndefined_new() {
 	return new (std::nothrow) QJSPrimitiveUndefined();
 }
 
-QJSPrimitiveUndefined* QJSPrimitiveUndefined_new2(QJSPrimitiveUndefined* param1) {
-	return new (std::nothrow) QJSPrimitiveUndefined(*param1);
+QJSPrimitiveUndefined* QJSPrimitiveUndefined_new_from(QJSPrimitiveUndefined* from) {
+	return new (std::nothrow) QJSPrimitiveUndefined(*from);
 }
 
 void QJSPrimitiveUndefined_delete(QJSPrimitiveUndefined* self) {
@@ -33,8 +33,8 @@ QJSPrimitiveNull* QJSPrimitiveNull_new() {
 	return new (std::nothrow) QJSPrimitiveNull();
 }
 
-QJSPrimitiveNull* QJSPrimitiveNull_new2(QJSPrimitiveNull* param1) {
-	return new (std::nothrow) QJSPrimitiveNull(*param1);
+QJSPrimitiveNull* QJSPrimitiveNull_new_from(QJSPrimitiveNull* from) {
+	return new (std::nothrow) QJSPrimitiveNull(*from);
 }
 
 void QJSPrimitiveNull_delete(QJSPrimitiveNull* self) {
@@ -45,41 +45,41 @@ QJSPrimitiveValue* QJSPrimitiveValue_new() {
 	return new (std::nothrow) QJSPrimitiveValue();
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new2(QJSPrimitiveUndefined* undefined) {
+QJSPrimitiveValue* QJSPrimitiveValue_new_QJSPrimitiveUndefined(QJSPrimitiveUndefined* undefined) {
 	return new (std::nothrow) QJSPrimitiveValue(*undefined);
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new3(QJSPrimitiveNull* null) {
+QJSPrimitiveValue* QJSPrimitiveValue_new_QJSPrimitiveNull(QJSPrimitiveNull* null) {
 	return new (std::nothrow) QJSPrimitiveValue(*null);
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new4(bool value) {
+QJSPrimitiveValue* QJSPrimitiveValue_new_bool(bool value) {
 	return new (std::nothrow) QJSPrimitiveValue(value);
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new5(int value) {
+QJSPrimitiveValue* QJSPrimitiveValue_new_int(int value) {
 	return new (std::nothrow) QJSPrimitiveValue(static_cast<int>(value));
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new6(double value) {
+QJSPrimitiveValue* QJSPrimitiveValue_new_double(double value) {
 	return new (std::nothrow) QJSPrimitiveValue(static_cast<double>(value));
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new7(struct seaqt_string string) {
+QJSPrimitiveValue* QJSPrimitiveValue_new_QString(struct seaqt_string string) {
 	QString string_QString = QString::fromUtf8(string.data, string.len);
 	return new (std::nothrow) QJSPrimitiveValue(string_QString);
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new8(QMetaType* type, const void* value) {
+QJSPrimitiveValue* QJSPrimitiveValue_new_QMetaType_void(QMetaType* type, const void* value) {
 	return new (std::nothrow) QJSPrimitiveValue(*type, value);
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new9(QVariant* variant) {
+QJSPrimitiveValue* QJSPrimitiveValue_new_QVariant(QVariant* variant) {
 	return new (std::nothrow) QJSPrimitiveValue(*variant);
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_new10(QJSPrimitiveValue* param1) {
-	return new (std::nothrow) QJSPrimitiveValue(*param1);
+QJSPrimitiveValue* QJSPrimitiveValue_new_QJSPrimitiveValue(QJSPrimitiveValue* from) {
+	return new (std::nothrow) QJSPrimitiveValue(*from);
 }
 
 uint8_t QJSPrimitiveValue_type(const QJSPrimitiveValue* self) {
@@ -120,7 +120,7 @@ QJSPrimitiveValue* QJSPrimitiveValue_operatorPlusPlus(QJSPrimitiveValue* self) {
 	return &_ret;
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_operatorPlusPlusWithInt(QJSPrimitiveValue* self, int param1) {
+QJSPrimitiveValue* QJSPrimitiveValue_operatorPlusPlus_int(QJSPrimitiveValue* self, int param1) {
 	return new QJSPrimitiveValue(self->operator++(static_cast<int>(param1)));
 }
 
@@ -130,7 +130,7 @@ QJSPrimitiveValue* QJSPrimitiveValue_operatorMinusMinus(QJSPrimitiveValue* self)
 	return &_ret;
 }
 
-QJSPrimitiveValue* QJSPrimitiveValue_operatorMinusMinusWithInt(QJSPrimitiveValue* self, int param1) {
+QJSPrimitiveValue* QJSPrimitiveValue_operatorMinusMinus_int(QJSPrimitiveValue* self, int param1) {
 	return new QJSPrimitiveValue(self->operator--(static_cast<int>(param1)));
 }
 
@@ -150,8 +150,8 @@ bool QJSPrimitiveValue_equals(const QJSPrimitiveValue* self, QJSPrimitiveValue* 
 	return self->equals(*other);
 }
 
-void QJSPrimitiveValue_operatorAssign(QJSPrimitiveValue* self, QJSPrimitiveValue* param1) {
-	self->operator=(*param1);
+void QJSPrimitiveValue_operatorAssign(QJSPrimitiveValue* self, QJSPrimitiveValue* from) {
+	self->operator=(*from);
 }
 
 void QJSPrimitiveValue_delete(QJSPrimitiveValue* self) {

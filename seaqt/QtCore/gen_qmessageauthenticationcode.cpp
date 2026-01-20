@@ -14,11 +14,11 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QMessageAuthenticationCode* QMessageAuthenticationCode_new(int method) {
+QMessageAuthenticationCode* QMessageAuthenticationCode_new_method(int method) {
 	return new (std::nothrow) QMessageAuthenticationCode(static_cast<QCryptographicHash::Algorithm>(method));
 }
 
-QMessageAuthenticationCode* QMessageAuthenticationCode_new2(int method, struct seaqt_string key) {
+QMessageAuthenticationCode* QMessageAuthenticationCode_new_method_key(int method, struct seaqt_string key) {
 	QByteArray key_QByteArray(key.data, key.len);
 	return new (std::nothrow) QMessageAuthenticationCode(static_cast<QCryptographicHash::Algorithm>(method), key_QByteArray);
 }
@@ -32,16 +32,16 @@ void QMessageAuthenticationCode_setKey(QMessageAuthenticationCode* self, struct 
 	self->setKey(key_QByteArray);
 }
 
-void QMessageAuthenticationCode_addData(QMessageAuthenticationCode* self, const char* data, ptrdiff_t length) {
+void QMessageAuthenticationCode_addData_data_length(QMessageAuthenticationCode* self, const char* data, ptrdiff_t length) {
 	self->addData(data, (qsizetype)(length));
 }
 
-void QMessageAuthenticationCode_addDataWithData(QMessageAuthenticationCode* self, struct seaqt_string data) {
+void QMessageAuthenticationCode_addData_data(QMessageAuthenticationCode* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->addData(data_QByteArray);
 }
 
-bool QMessageAuthenticationCode_addDataWithDevice(QMessageAuthenticationCode* self, QIODevice* device) {
+bool QMessageAuthenticationCode_addData_device(QMessageAuthenticationCode* self, QIODevice* device) {
 	return self->addData(device);
 }
 

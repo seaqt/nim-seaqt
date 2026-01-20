@@ -89,7 +89,7 @@ type cQNetworkAccessManager*{.exportc: "QNetworkAccessManager", incompleteStruct
 proc fcQNetworkAccessManager_metaObject(self: pointer): pointer {.importc: "QNetworkAccessManager_metaObject".}
 proc fcQNetworkAccessManager_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkAccessManager_metacast".}
 proc fcQNetworkAccessManager_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkAccessManager_metacall".}
-proc fcQNetworkAccessManager_tr(s: cstring): struct_seaqt_string {.importc: "QNetworkAccessManager_tr".}
+proc fcQNetworkAccessManager_trS(s: cstring): struct_seaqt_string {.importc: "QNetworkAccessManager_tr_s".}
 proc fcQNetworkAccessManager_supportedSchemes(self: pointer): struct_seaqt_array {.importc: "QNetworkAccessManager_supportedSchemes".}
 proc fcQNetworkAccessManager_clearAccessCache(self: pointer): void {.importc: "QNetworkAccessManager_clearAccessCache".}
 proc fcQNetworkAccessManager_clearConnectionCache(self: pointer): void {.importc: "QNetworkAccessManager_clearConnectionCache".}
@@ -103,25 +103,25 @@ proc fcQNetworkAccessManager_cookieJar(self: pointer): pointer {.importc: "QNetw
 proc fcQNetworkAccessManager_setCookieJar(self: pointer, cookieJar: pointer): void {.importc: "QNetworkAccessManager_setCookieJar".}
 proc fcQNetworkAccessManager_setStrictTransportSecurityEnabled(self: pointer, enabled: bool): void {.importc: "QNetworkAccessManager_setStrictTransportSecurityEnabled".}
 proc fcQNetworkAccessManager_isStrictTransportSecurityEnabled(self: pointer): bool {.importc: "QNetworkAccessManager_isStrictTransportSecurityEnabled".}
-proc fcQNetworkAccessManager_enableStrictTransportSecurityStore(self: pointer, enabled: bool): void {.importc: "QNetworkAccessManager_enableStrictTransportSecurityStore".}
+proc fcQNetworkAccessManager_enableStrictTransportSecurityStoreEnabled(self: pointer, enabled: bool): void {.importc: "QNetworkAccessManager_enableStrictTransportSecurityStore_enabled".}
 proc fcQNetworkAccessManager_isStrictTransportSecurityStoreEnabled(self: pointer): bool {.importc: "QNetworkAccessManager_isStrictTransportSecurityStoreEnabled".}
 proc fcQNetworkAccessManager_addStrictTransportSecurityHosts(self: pointer, knownHosts: struct_seaqt_array): void {.importc: "QNetworkAccessManager_addStrictTransportSecurityHosts".}
 proc fcQNetworkAccessManager_strictTransportSecurityHosts(self: pointer): struct_seaqt_array {.importc: "QNetworkAccessManager_strictTransportSecurityHosts".}
 proc fcQNetworkAccessManager_head(self: pointer, request: pointer): pointer {.importc: "QNetworkAccessManager_head".}
 proc fcQNetworkAccessManager_get(self: pointer, request: pointer): pointer {.importc: "QNetworkAccessManager_get".}
-proc fcQNetworkAccessManager_post(self: pointer, request: pointer, data: pointer): pointer {.importc: "QNetworkAccessManager_post".}
-proc fcQNetworkAccessManager_post2(self: pointer, request: pointer, data: struct_seaqt_string): pointer {.importc: "QNetworkAccessManager_post2".}
-proc fcQNetworkAccessManager_put(self: pointer, request: pointer, data: pointer): pointer {.importc: "QNetworkAccessManager_put".}
-proc fcQNetworkAccessManager_put2(self: pointer, request: pointer, data: struct_seaqt_string): pointer {.importc: "QNetworkAccessManager_put2".}
+proc fcQNetworkAccessManager_post_QNetworkRequest_QIODevice(self: pointer, request: pointer, data: pointer): pointer {.importc: "QNetworkAccessManager_post_QNetworkRequest_QIODevice".}
+proc fcQNetworkAccessManager_post_QNetworkRequest_QByteArray(self: pointer, request: pointer, data: struct_seaqt_string): pointer {.importc: "QNetworkAccessManager_post_QNetworkRequest_QByteArray".}
+proc fcQNetworkAccessManager_put_QNetworkRequest_QIODevice(self: pointer, request: pointer, data: pointer): pointer {.importc: "QNetworkAccessManager_put_QNetworkRequest_QIODevice".}
+proc fcQNetworkAccessManager_put_QNetworkRequest_QByteArray(self: pointer, request: pointer, data: struct_seaqt_string): pointer {.importc: "QNetworkAccessManager_put_QNetworkRequest_QByteArray".}
 proc fcQNetworkAccessManager_deleteResource(self: pointer, request: pointer): pointer {.importc: "QNetworkAccessManager_deleteResource".}
-proc fcQNetworkAccessManager_sendCustomRequest(self: pointer, request: pointer, verb: struct_seaqt_string): pointer {.importc: "QNetworkAccessManager_sendCustomRequest".}
-proc fcQNetworkAccessManager_sendCustomRequest2(self: pointer, request: pointer, verb: struct_seaqt_string, data: struct_seaqt_string): pointer {.importc: "QNetworkAccessManager_sendCustomRequest2".}
-proc fcQNetworkAccessManager_post3(self: pointer, request: pointer, multiPart: pointer): pointer {.importc: "QNetworkAccessManager_post3".}
-proc fcQNetworkAccessManager_put3(self: pointer, request: pointer, multiPart: pointer): pointer {.importc: "QNetworkAccessManager_put3".}
-proc fcQNetworkAccessManager_sendCustomRequest3(self: pointer, request: pointer, verb: struct_seaqt_string, multiPart: pointer): pointer {.importc: "QNetworkAccessManager_sendCustomRequest3".}
-proc fcQNetworkAccessManager_connectToHostEncrypted(self: pointer, hostName: struct_seaqt_string): void {.importc: "QNetworkAccessManager_connectToHostEncrypted".}
-proc fcQNetworkAccessManager_connectToHostEncrypted2(self: pointer, hostName: struct_seaqt_string, port: cushort, sslConfiguration: pointer, peerName: struct_seaqt_string): void {.importc: "QNetworkAccessManager_connectToHostEncrypted2".}
-proc fcQNetworkAccessManager_connectToHost(self: pointer, hostName: struct_seaqt_string): void {.importc: "QNetworkAccessManager_connectToHost".}
+proc fcQNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray(self: pointer, request: pointer, verb: struct_seaqt_string): pointer {.importc: "QNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray".}
+proc fcQNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QByteArray(self: pointer, request: pointer, verb: struct_seaqt_string, data: struct_seaqt_string): pointer {.importc: "QNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QByteArray".}
+proc fcQNetworkAccessManager_post_QNetworkRequest_QHttpMultiPart(self: pointer, request: pointer, multiPart: pointer): pointer {.importc: "QNetworkAccessManager_post_QNetworkRequest_QHttpMultiPart".}
+proc fcQNetworkAccessManager_put_QNetworkRequest_QHttpMultiPart(self: pointer, request: pointer, multiPart: pointer): pointer {.importc: "QNetworkAccessManager_put_QNetworkRequest_QHttpMultiPart".}
+proc fcQNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QHttpMultiPart(self: pointer, request: pointer, verb: struct_seaqt_string, multiPart: pointer): pointer {.importc: "QNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QHttpMultiPart".}
+proc fcQNetworkAccessManager_connectToHostEncryptedHostName(self: pointer, hostName: struct_seaqt_string): void {.importc: "QNetworkAccessManager_connectToHostEncrypted_hostName".}
+proc fcQNetworkAccessManager_connectToHostEncryptedHostNamePortSslConfigurationPeerName(self: pointer, hostName: struct_seaqt_string, port: cushort, sslConfiguration: pointer, peerName: struct_seaqt_string): void {.importc: "QNetworkAccessManager_connectToHostEncrypted_hostName_port_sslConfiguration_peerName".}
+proc fcQNetworkAccessManager_connectToHostHostName(self: pointer, hostName: struct_seaqt_string): void {.importc: "QNetworkAccessManager_connectToHost_hostName".}
 proc fcQNetworkAccessManager_setRedirectPolicy(self: pointer, policy: cint): void {.importc: "QNetworkAccessManager_setRedirectPolicy".}
 proc fcQNetworkAccessManager_redirectPolicy(self: pointer): cint {.importc: "QNetworkAccessManager_redirectPolicy".}
 proc fcQNetworkAccessManager_autoDeleteReplies(self: pointer): bool {.importc: "QNetworkAccessManager_autoDeleteReplies".}
@@ -140,14 +140,14 @@ proc fcQNetworkAccessManager_sslErrors(self: pointer, reply: pointer, errors: st
 proc fcQNetworkAccessManager_connect_sslErrors(self: pointer, slot: int, callback: proc (slot: int, reply: pointer, errors: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QNetworkAccessManager_connect_sslErrors".}
 proc fcQNetworkAccessManager_preSharedKeyAuthenticationRequired(self: pointer, reply: pointer, authenticator: pointer): void {.importc: "QNetworkAccessManager_preSharedKeyAuthenticationRequired".}
 proc fcQNetworkAccessManager_connect_preSharedKeyAuthenticationRequired(self: pointer, slot: int, callback: proc (slot: int, reply: pointer, authenticator: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QNetworkAccessManager_connect_preSharedKeyAuthenticationRequired".}
-proc fcQNetworkAccessManager_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNetworkAccessManager_tr2".}
-proc fcQNetworkAccessManager_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNetworkAccessManager_tr3".}
-proc fcQNetworkAccessManager_enableStrictTransportSecurityStore2(self: pointer, enabled: bool, storeDir: struct_seaqt_string): void {.importc: "QNetworkAccessManager_enableStrictTransportSecurityStore2".}
-proc fcQNetworkAccessManager_sendCustomRequest4(self: pointer, request: pointer, verb: struct_seaqt_string, data: pointer): pointer {.importc: "QNetworkAccessManager_sendCustomRequest4".}
-proc fcQNetworkAccessManager_connectToHostEncrypted3(self: pointer, hostName: struct_seaqt_string, port: cushort): void {.importc: "QNetworkAccessManager_connectToHostEncrypted3".}
-proc fcQNetworkAccessManager_connectToHostEncrypted4(self: pointer, hostName: struct_seaqt_string, port: cushort, sslConfiguration: pointer): void {.importc: "QNetworkAccessManager_connectToHostEncrypted4".}
-proc fcQNetworkAccessManager_connectToHost2(self: pointer, hostName: struct_seaqt_string, port: cushort): void {.importc: "QNetworkAccessManager_connectToHost2".}
-proc fcQNetworkAccessManager_setTransferTimeoutWithTimeout(self: pointer, timeout: cint): void {.importc: "QNetworkAccessManager_setTransferTimeoutWithTimeout".}
+proc fcQNetworkAccessManager_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNetworkAccessManager_tr_s_c".}
+proc fcQNetworkAccessManager_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNetworkAccessManager_tr_s_c_n".}
+proc fcQNetworkAccessManager_enableStrictTransportSecurityStoreEnabledStoreDir(self: pointer, enabled: bool, storeDir: struct_seaqt_string): void {.importc: "QNetworkAccessManager_enableStrictTransportSecurityStore_enabled_storeDir".}
+proc fcQNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QIODevice(self: pointer, request: pointer, verb: struct_seaqt_string, data: pointer): pointer {.importc: "QNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QIODevice".}
+proc fcQNetworkAccessManager_connectToHostEncryptedHostNamePort(self: pointer, hostName: struct_seaqt_string, port: cushort): void {.importc: "QNetworkAccessManager_connectToHostEncrypted_hostName_port".}
+proc fcQNetworkAccessManager_connectToHostEncryptedHostNamePortSslConfiguration(self: pointer, hostName: struct_seaqt_string, port: cushort, sslConfiguration: pointer): void {.importc: "QNetworkAccessManager_connectToHostEncrypted_hostName_port_sslConfiguration".}
+proc fcQNetworkAccessManager_connectToHostHostNamePort(self: pointer, hostName: struct_seaqt_string, port: cushort): void {.importc: "QNetworkAccessManager_connectToHost_hostName_port".}
+proc fcQNetworkAccessManager_setTransferTimeoutTimeout(self: pointer, timeout: cint): void {.importc: "QNetworkAccessManager_setTransferTimeout_timeout".}
 proc fcQNetworkAccessManager_vdata(self: pointer): ptr pointer {.importc: "QNetworkAccessManager_vdata".}
 proc fvdata_cQNetworkAccessManager(self: pointer): pointer {.importc: "vdata_QNetworkAccessManager".}
 
@@ -183,7 +183,7 @@ proc fcQNetworkAccessManager_protectedbase_senderSignalIndex(self: pointer): cin
 proc fcQNetworkAccessManager_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkAccessManager_protectedbase_receivers".}
 proc fcQNetworkAccessManager_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkAccessManager_protectedbase_isSignalConnected".}
 proc fcQNetworkAccessManager_new(vtbl: pointer, vdata: csize_t): ptr cQNetworkAccessManager {.importc: "QNetworkAccessManager_new".}
-proc fcQNetworkAccessManager_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQNetworkAccessManager {.importc: "QNetworkAccessManager_new2".}
+proc fcQNetworkAccessManager_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQNetworkAccessManager {.importc: "QNetworkAccessManager_new_parent".}
 proc fcQNetworkAccessManager_staticMetaObject(): pointer {.importc: "QNetworkAccessManager_staticMetaObject".}
 
 proc metaObject*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager): gen_qobjectdefs_types.QMetaObject =
@@ -196,7 +196,7 @@ proc metacall*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, para
   fcQNetworkAccessManager_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qnetworkaccessmanager_types.QNetworkAccessManager, s: cstring): string =
-  let v_ms = fcQNetworkAccessManager_tr(s)
+  let v_ms = fcQNetworkAccessManager_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -250,7 +250,7 @@ proc isStrictTransportSecurityEnabled*(self: gen_qnetworkaccessmanager_types.QNe
   fcQNetworkAccessManager_isStrictTransportSecurityEnabled(self.h)
 
 proc enableStrictTransportSecurityStore*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, enabled: bool): void =
-  fcQNetworkAccessManager_enableStrictTransportSecurityStore(self.h, enabled)
+  fcQNetworkAccessManager_enableStrictTransportSecurityStoreEnabled(self.h, enabled)
 
 proc isStrictTransportSecurityStoreEnabled*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager): bool =
   fcQNetworkAccessManager_isStrictTransportSecurityStoreEnabled(self.h)
@@ -278,43 +278,43 @@ proc get*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: 
   gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_get(self.h, request.h), owned: false)
 
 proc post*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, data: gen_qiodevice_types.QIODevice): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_post(self.h, request.h, data.h), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_post_QNetworkRequest_QIODevice(self.h, request.h, data.h), owned: false)
 
 proc post*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, data: openArray[byte]): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_post2(self.h, request.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_post_QNetworkRequest_QByteArray(self.h, request.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: false)
 
 proc put*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, data: gen_qiodevice_types.QIODevice): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_put(self.h, request.h, data.h), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_put_QNetworkRequest_QIODevice(self.h, request.h, data.h), owned: false)
 
 proc put*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, data: openArray[byte]): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_put2(self.h, request.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_put_QNetworkRequest_QByteArray(self.h, request.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: false)
 
 proc deleteResource*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest): gen_qnetworkreply_types.QNetworkReply =
   gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_deleteResource(self.h, request.h), owned: false)
 
 proc sendCustomRequest*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, verb: openArray[byte]): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_sendCustomRequest(self.h, request.h, struct_seaqt_string(data: if len(verb) > 0: addr verb[0] else: nil, len: csize_t(len(verb)))), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray(self.h, request.h, struct_seaqt_string(data: if len(verb) > 0: addr verb[0] else: nil, len: csize_t(len(verb)))), owned: false)
 
 proc sendCustomRequest*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, verb: openArray[byte], data: openArray[byte]): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_sendCustomRequest2(self.h, request.h, struct_seaqt_string(data: if len(verb) > 0: addr verb[0] else: nil, len: csize_t(len(verb))), struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QByteArray(self.h, request.h, struct_seaqt_string(data: if len(verb) > 0: addr verb[0] else: nil, len: csize_t(len(verb))), struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data)))), owned: false)
 
 proc post*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, multiPart: gen_qhttpmultipart_types.QHttpMultiPart): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_post3(self.h, request.h, multiPart.h), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_post_QNetworkRequest_QHttpMultiPart(self.h, request.h, multiPart.h), owned: false)
 
 proc put*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, multiPart: gen_qhttpmultipart_types.QHttpMultiPart): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_put3(self.h, request.h, multiPart.h), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_put_QNetworkRequest_QHttpMultiPart(self.h, request.h, multiPart.h), owned: false)
 
 proc sendCustomRequest*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, verb: openArray[byte], multiPart: gen_qhttpmultipart_types.QHttpMultiPart): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_sendCustomRequest3(self.h, request.h, struct_seaqt_string(data: if len(verb) > 0: addr verb[0] else: nil, len: csize_t(len(verb))), multiPart.h), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QHttpMultiPart(self.h, request.h, struct_seaqt_string(data: if len(verb) > 0: addr verb[0] else: nil, len: csize_t(len(verb))), multiPart.h), owned: false)
 
 proc connectToHostEncrypted*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, hostName: openArray[char]): void =
-  fcQNetworkAccessManager_connectToHostEncrypted(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))))
+  fcQNetworkAccessManager_connectToHostEncryptedHostName(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))))
 
 proc connectToHostEncrypted*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, hostName: openArray[char], port: cushort, sslConfiguration: gen_qsslconfiguration_types.QSslConfiguration, peerName: openArray[char]): void =
-  fcQNetworkAccessManager_connectToHostEncrypted2(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, sslConfiguration.h, struct_seaqt_string(data: if len(peerName) > 0: addr peerName[0] else: nil, len: csize_t(len(peerName))))
+  fcQNetworkAccessManager_connectToHostEncryptedHostNamePortSslConfigurationPeerName(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, sslConfiguration.h, struct_seaqt_string(data: if len(peerName) > 0: addr peerName[0] else: nil, len: csize_t(len(peerName))))
 
 proc connectToHost*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, hostName: openArray[char]): void =
-  fcQNetworkAccessManager_connectToHost(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))))
+  fcQNetworkAccessManager_connectToHostHostName(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))))
 
 proc setRedirectPolicy*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, policy: cint): void =
   fcQNetworkAccessManager_setRedirectPolicy(self.h, cint(policy))
@@ -473,34 +473,34 @@ proc onPreSharedKeyAuthenticationRequired*(self: gen_qnetworkaccessmanager_types
   fcQNetworkAccessManager_connect_preSharedKeyAuthenticationRequired(self.h, cast[int](addr tmp[]), fcQNetworkAccessManager_slot_callback_preSharedKeyAuthenticationRequired, fcQNetworkAccessManager_slot_callback_preSharedKeyAuthenticationRequired_release)
 
 proc tr*(_: type gen_qnetworkaccessmanager_types.QNetworkAccessManager, s: cstring, c: cstring): string =
-  let v_ms = fcQNetworkAccessManager_tr2(s, c)
+  let v_ms = fcQNetworkAccessManager_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qnetworkaccessmanager_types.QNetworkAccessManager, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQNetworkAccessManager_tr3(s, c, n)
+  let v_ms = fcQNetworkAccessManager_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc enableStrictTransportSecurityStore*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, enabled: bool, storeDir: openArray[char]): void =
-  fcQNetworkAccessManager_enableStrictTransportSecurityStore2(self.h, enabled, struct_seaqt_string(data: if len(storeDir) > 0: addr storeDir[0] else: nil, len: csize_t(len(storeDir))))
+  fcQNetworkAccessManager_enableStrictTransportSecurityStoreEnabledStoreDir(self.h, enabled, struct_seaqt_string(data: if len(storeDir) > 0: addr storeDir[0] else: nil, len: csize_t(len(storeDir))))
 
 proc sendCustomRequest*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest, verb: openArray[byte], data: gen_qiodevice_types.QIODevice): gen_qnetworkreply_types.QNetworkReply =
-  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_sendCustomRequest4(self.h, request.h, struct_seaqt_string(data: if len(verb) > 0: addr verb[0] else: nil, len: csize_t(len(verb))), data.h), owned: false)
+  gen_qnetworkreply_types.QNetworkReply(h: fcQNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QIODevice(self.h, request.h, struct_seaqt_string(data: if len(verb) > 0: addr verb[0] else: nil, len: csize_t(len(verb))), data.h), owned: false)
 
 proc connectToHostEncrypted*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, hostName: openArray[char], port: cushort): void =
-  fcQNetworkAccessManager_connectToHostEncrypted3(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port)
+  fcQNetworkAccessManager_connectToHostEncryptedHostNamePort(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port)
 
 proc connectToHostEncrypted*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, hostName: openArray[char], port: cushort, sslConfiguration: gen_qsslconfiguration_types.QSslConfiguration): void =
-  fcQNetworkAccessManager_connectToHostEncrypted4(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, sslConfiguration.h)
+  fcQNetworkAccessManager_connectToHostEncryptedHostNamePortSslConfiguration(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, sslConfiguration.h)
 
 proc connectToHost*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, hostName: openArray[char], port: cushort): void =
-  fcQNetworkAccessManager_connectToHost2(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port)
+  fcQNetworkAccessManager_connectToHostHostNamePort(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port)
 
 proc setTransferTimeout*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, timeout: cint): void =
-  fcQNetworkAccessManager_setTransferTimeoutWithTimeout(self.h, timeout)
+  fcQNetworkAccessManager_setTransferTimeoutTimeout(self.h, timeout)
 
 type QNetworkAccessManagermetaObjectProc* = proc(self: QNetworkAccessManager): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QNetworkAccessManagermetacastProc* = proc(self: QNetworkAccessManager, param1: cstring): pointer {.raises: [], gcsafe.}

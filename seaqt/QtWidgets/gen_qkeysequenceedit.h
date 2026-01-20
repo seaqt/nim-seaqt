@@ -144,16 +144,16 @@ typedef struct QKeySequenceEdit_VTable{
 void* QKeySequenceEdit_vdata(VirtualQKeySequenceEdit* self);
 VirtualQKeySequenceEdit* vdata_QKeySequenceEdit(void* vdata);
 
-VirtualQKeySequenceEdit* QKeySequenceEdit_new(const QKeySequenceEdit_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQKeySequenceEdit* QKeySequenceEdit_new2(const QKeySequenceEdit_VTable* vtbl, size_t vdata);
-VirtualQKeySequenceEdit* QKeySequenceEdit_new3(const QKeySequenceEdit_VTable* vtbl, size_t vdata, QKeySequence* keySequence);
-VirtualQKeySequenceEdit* QKeySequenceEdit_new4(const QKeySequenceEdit_VTable* vtbl, size_t vdata, QKeySequence* keySequence, QWidget* parent);
+VirtualQKeySequenceEdit* QKeySequenceEdit_new_parent(const QKeySequenceEdit_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQKeySequenceEdit* QKeySequenceEdit_new(const QKeySequenceEdit_VTable* vtbl, size_t vdata);
+VirtualQKeySequenceEdit* QKeySequenceEdit_new_keySequence(const QKeySequenceEdit_VTable* vtbl, size_t vdata, QKeySequence* keySequence);
+VirtualQKeySequenceEdit* QKeySequenceEdit_new_keySequence_parent(const QKeySequenceEdit_VTable* vtbl, size_t vdata, QKeySequence* keySequence, QWidget* parent);
 
 void QKeySequenceEdit_virtbase(QKeySequenceEdit* src, QWidget** outptr_QWidget);
 QMetaObject* QKeySequenceEdit_metaObject(const QKeySequenceEdit* self);
 void* QKeySequenceEdit_metacast(QKeySequenceEdit* self, const char* param1);
 int QKeySequenceEdit_metacall(QKeySequenceEdit* self, int param1, int param2, void** param3);
-struct seaqt_string QKeySequenceEdit_tr(const char* s);
+struct seaqt_string QKeySequenceEdit_tr_s(const char* s);
 QKeySequence* QKeySequenceEdit_keySequence(const QKeySequenceEdit* self);
 void QKeySequenceEdit_setClearButtonEnabled(QKeySequenceEdit* self, bool enable);
 bool QKeySequenceEdit_isClearButtonEnabled(const QKeySequenceEdit* self);
@@ -168,8 +168,8 @@ void QKeySequenceEdit_keyPressEvent(QKeySequenceEdit* self, QKeyEvent* param1);
 void QKeySequenceEdit_keyReleaseEvent(QKeySequenceEdit* self, QKeyEvent* param1);
 void QKeySequenceEdit_timerEvent(QKeySequenceEdit* self, QTimerEvent* param1);
 void QKeySequenceEdit_focusOutEvent(QKeySequenceEdit* self, QFocusEvent* param1);
-struct seaqt_string QKeySequenceEdit_tr2(const char* s, const char* c);
-struct seaqt_string QKeySequenceEdit_tr3(const char* s, const char* c, int n);
+struct seaqt_string QKeySequenceEdit_tr_s_c(const char* s, const char* c);
+struct seaqt_string QKeySequenceEdit_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QKeySequenceEdit_virtualbase_metaObject(const VirtualQKeySequenceEdit* self);
 void* QKeySequenceEdit_virtualbase_metacast(VirtualQKeySequenceEdit* self, const char* param1);

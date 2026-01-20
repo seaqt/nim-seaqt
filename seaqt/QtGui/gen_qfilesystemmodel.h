@@ -62,7 +62,7 @@ typedef struct QFileSystemModel_VTable{
 	QMetaObject* (*metaObject)(const VirtualQFileSystemModel* self);
 	void* (*metacast)(VirtualQFileSystemModel* self, const char* param1);
 	int (*metacall)(VirtualQFileSystemModel* self, int param1, int param2, void** param3);
-	QModelIndex* (*index)(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent);
+	QModelIndex* (*index_row_column_parent)(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent);
 	QModelIndex* (*parent)(const VirtualQFileSystemModel* self, QModelIndex* child);
 	QModelIndex* (*sibling)(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* idx);
 	bool (*hasChildren)(const VirtualQFileSystemModel* self, QModelIndex* parent);
@@ -112,21 +112,21 @@ void* QFileSystemModel_vdata(VirtualQFileSystemModel* self);
 VirtualQFileSystemModel* vdata_QFileSystemModel(void* vdata);
 
 VirtualQFileSystemModel* QFileSystemModel_new(const QFileSystemModel_VTable* vtbl, size_t vdata);
-VirtualQFileSystemModel* QFileSystemModel_new2(const QFileSystemModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQFileSystemModel* QFileSystemModel_new_parent(const QFileSystemModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QFileSystemModel_virtbase(QFileSystemModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QFileSystemModel_metaObject(const QFileSystemModel* self);
 void* QFileSystemModel_metacast(QFileSystemModel* self, const char* param1);
 int QFileSystemModel_metacall(QFileSystemModel* self, int param1, int param2, void** param3);
-struct seaqt_string QFileSystemModel_tr(const char* s);
+struct seaqt_string QFileSystemModel_tr_s(const char* s);
 void QFileSystemModel_rootPathChanged(QFileSystemModel* self, struct seaqt_string newPath);
 void QFileSystemModel_connect_rootPathChanged(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
 void QFileSystemModel_fileRenamed(QFileSystemModel* self, struct seaqt_string path, struct seaqt_string oldName, struct seaqt_string newName);
 void QFileSystemModel_connect_fileRenamed(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, struct seaqt_string, struct seaqt_string), void (*release)(intptr_t));
 void QFileSystemModel_directoryLoaded(QFileSystemModel* self, struct seaqt_string path);
 void QFileSystemModel_connect_directoryLoaded(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
-QModelIndex* QFileSystemModel_index(const QFileSystemModel* self, int row, int column, QModelIndex* parent);
-QModelIndex* QFileSystemModel_indexWithPath(const QFileSystemModel* self, struct seaqt_string path);
+QModelIndex* QFileSystemModel_index_row_column_parent(const QFileSystemModel* self, int row, int column, QModelIndex* parent);
+QModelIndex* QFileSystemModel_index_path(const QFileSystemModel* self, struct seaqt_string path);
 QModelIndex* QFileSystemModel_parent(const QFileSystemModel* self, QModelIndex* child);
 QModelIndex* QFileSystemModel_sibling(const QFileSystemModel* self, int row, int column, QModelIndex* idx);
 bool QFileSystemModel_hasChildren(const QFileSystemModel* self, QModelIndex* parent);
@@ -160,7 +160,7 @@ void QFileSystemModel_setNameFilterDisables(QFileSystemModel* self, bool enable)
 bool QFileSystemModel_nameFilterDisables(const QFileSystemModel* self);
 void QFileSystemModel_setNameFilters(QFileSystemModel* self, struct seaqt_array /* of struct seaqt_string */  filters);
 struct seaqt_array /* of struct seaqt_string */  QFileSystemModel_nameFilters(const QFileSystemModel* self);
-void QFileSystemModel_setOption(QFileSystemModel* self, int option);
+void QFileSystemModel_setOption_option(QFileSystemModel* self, int option);
 bool QFileSystemModel_testOption(const QFileSystemModel* self, int option);
 void QFileSystemModel_setOptions(QFileSystemModel* self, int options);
 int QFileSystemModel_options(const QFileSystemModel* self);
@@ -178,16 +178,16 @@ QFileInfo* QFileSystemModel_fileInfo(const QFileSystemModel* self, QModelIndex* 
 bool QFileSystemModel_remove(QFileSystemModel* self, QModelIndex* index);
 void QFileSystemModel_timerEvent(QFileSystemModel* self, QTimerEvent* event);
 bool QFileSystemModel_event(QFileSystemModel* self, QEvent* event);
-struct seaqt_string QFileSystemModel_tr2(const char* s, const char* c);
-struct seaqt_string QFileSystemModel_tr3(const char* s, const char* c, int n);
-QModelIndex* QFileSystemModel_index2(const QFileSystemModel* self, struct seaqt_string path, int column);
-QVariant* QFileSystemModel_myComputerWithRole(const QFileSystemModel* self, int role);
-void QFileSystemModel_setOption2(QFileSystemModel* self, int option, bool on);
+struct seaqt_string QFileSystemModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QFileSystemModel_tr_s_c_n(const char* s, const char* c, int n);
+QModelIndex* QFileSystemModel_index_path_column(const QFileSystemModel* self, struct seaqt_string path, int column);
+QVariant* QFileSystemModel_myComputer_role(const QFileSystemModel* self, int role);
+void QFileSystemModel_setOption_option_on(QFileSystemModel* self, int option, bool on);
 
 QMetaObject* QFileSystemModel_virtualbase_metaObject(const VirtualQFileSystemModel* self);
 void* QFileSystemModel_virtualbase_metacast(VirtualQFileSystemModel* self, const char* param1);
 int QFileSystemModel_virtualbase_metacall(VirtualQFileSystemModel* self, int param1, int param2, void** param3);
-QModelIndex* QFileSystemModel_virtualbase_index(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent);
+QModelIndex* QFileSystemModel_virtualbase_index_row_column_parent(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent);
 QModelIndex* QFileSystemModel_virtualbase_parent(const VirtualQFileSystemModel* self, QModelIndex* child);
 QModelIndex* QFileSystemModel_virtualbase_sibling(const VirtualQFileSystemModel* self, int row, int column, QModelIndex* idx);
 bool QFileSystemModel_virtualbase_hasChildren(const VirtualQFileSystemModel* self, QModelIndex* parent);
@@ -232,7 +232,7 @@ void QFileSystemModel_virtualbase_customEvent(VirtualQFileSystemModel* self, QEv
 void QFileSystemModel_virtualbase_connectNotify(VirtualQFileSystemModel* self, QMetaMethod* signal);
 void QFileSystemModel_virtualbase_disconnectNotify(VirtualQFileSystemModel* self, QMetaMethod* signal);
 
-QModelIndex* QFileSystemModel_protectedbase_createIndex(const VirtualQFileSystemModel* self, int row, int column);
+QModelIndex* QFileSystemModel_protectedbase_createIndex_row_column(const VirtualQFileSystemModel* self, int row, int column);
 void QFileSystemModel_protectedbase_encodeData(const VirtualQFileSystemModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QFileSystemModel_protectedbase_decodeData(VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QFileSystemModel_protectedbase_beginInsertRows(VirtualQFileSystemModel* self, QModelIndex* parent, int first, int last);

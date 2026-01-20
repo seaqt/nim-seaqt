@@ -25,10 +25,10 @@ typedef struct QGeoPositionInfo QGeoPositionInfo;
 #endif
 
 QGeoPositionInfo* QGeoPositionInfo_new();
-QGeoPositionInfo* QGeoPositionInfo_new2(QGeoCoordinate* coordinate, QDateTime* updateTime);
-QGeoPositionInfo* QGeoPositionInfo_new3(QGeoPositionInfo* other);
+QGeoPositionInfo* QGeoPositionInfo_new_coordinate_updateTime(QGeoCoordinate* coordinate, QDateTime* updateTime);
+QGeoPositionInfo* QGeoPositionInfo_new_from(QGeoPositionInfo* from);
 
-void QGeoPositionInfo_operatorAssign(QGeoPositionInfo* self, QGeoPositionInfo* other);
+void QGeoPositionInfo_operatorAssign(QGeoPositionInfo* self, QGeoPositionInfo* from);
 void QGeoPositionInfo_swap(QGeoPositionInfo* self, QGeoPositionInfo* other);
 bool QGeoPositionInfo_isValid(const QGeoPositionInfo* self);
 void QGeoPositionInfo_setTimestamp(QGeoPositionInfo* self, QDateTime* timestamp);

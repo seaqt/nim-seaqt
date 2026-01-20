@@ -153,17 +153,17 @@ typedef struct QMenuBar_VTable{
 void* QMenuBar_vdata(VirtualQMenuBar* self);
 VirtualQMenuBar* vdata_QMenuBar(void* vdata);
 
-VirtualQMenuBar* QMenuBar_new(const QMenuBar_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQMenuBar* QMenuBar_new2(const QMenuBar_VTable* vtbl, size_t vdata);
+VirtualQMenuBar* QMenuBar_new_parent(const QMenuBar_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQMenuBar* QMenuBar_new(const QMenuBar_VTable* vtbl, size_t vdata);
 
 void QMenuBar_virtbase(QMenuBar* src, QWidget** outptr_QWidget);
 QMetaObject* QMenuBar_metaObject(const QMenuBar* self);
 void* QMenuBar_metacast(QMenuBar* self, const char* param1);
 int QMenuBar_metacall(QMenuBar* self, int param1, int param2, void** param3);
-struct seaqt_string QMenuBar_tr(const char* s);
-QAction* QMenuBar_addMenu(QMenuBar* self, QMenu* menu);
-QMenu* QMenuBar_addMenuWithTitle(QMenuBar* self, struct seaqt_string title);
-QMenu* QMenuBar_addMenu2(QMenuBar* self, QIcon* icon, struct seaqt_string title);
+struct seaqt_string QMenuBar_tr_s(const char* s);
+QAction* QMenuBar_addMenu_menu(QMenuBar* self, QMenu* menu);
+QMenu* QMenuBar_addMenu_title(QMenuBar* self, struct seaqt_string title);
+QMenu* QMenuBar_addMenu_icon_title(QMenuBar* self, QIcon* icon, struct seaqt_string title);
 QAction* QMenuBar_addSeparator(QMenuBar* self);
 QAction* QMenuBar_insertSeparator(QMenuBar* self, QAction* before);
 QAction* QMenuBar_insertMenu(QMenuBar* self, QAction* before, QMenu* menu);
@@ -177,7 +177,7 @@ QSize* QMenuBar_minimumSizeHint(const QMenuBar* self);
 int QMenuBar_heightForWidth(const QMenuBar* self, int param1);
 QRect* QMenuBar_actionGeometry(const QMenuBar* self, QAction* param1);
 QAction* QMenuBar_actionAt(const QMenuBar* self, QPoint* param1);
-void QMenuBar_setCornerWidget(QMenuBar* self, QWidget* w);
+void QMenuBar_setCornerWidget_w(QMenuBar* self, QWidget* w);
 QWidget* QMenuBar_cornerWidget(const QMenuBar* self);
 bool QMenuBar_isNativeMenuBar(const QMenuBar* self);
 void QMenuBar_setNativeMenuBar(QMenuBar* self, bool nativeMenuBar);
@@ -201,10 +201,10 @@ void QMenuBar_timerEvent(QMenuBar* self, QTimerEvent* param1);
 bool QMenuBar_eventFilter(QMenuBar* self, QObject* param1, QEvent* param2);
 bool QMenuBar_event(QMenuBar* self, QEvent* param1);
 void QMenuBar_initStyleOption(const QMenuBar* self, QStyleOptionMenuItem* option, QAction* action);
-struct seaqt_string QMenuBar_tr2(const char* s, const char* c);
-struct seaqt_string QMenuBar_tr3(const char* s, const char* c, int n);
-void QMenuBar_setCornerWidget2(QMenuBar* self, QWidget* w, int corner);
-QWidget* QMenuBar_cornerWidgetWithCorner(const QMenuBar* self, int corner);
+struct seaqt_string QMenuBar_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMenuBar_tr_s_c_n(const char* s, const char* c, int n);
+void QMenuBar_setCornerWidget_w_corner(QMenuBar* self, QWidget* w, int corner);
+QWidget* QMenuBar_cornerWidget_corner(const QMenuBar* self, int corner);
 
 QMetaObject* QMenuBar_virtualbase_metaObject(const VirtualQMenuBar* self);
 void* QMenuBar_virtualbase_metacast(VirtualQMenuBar* self, const char* param1);

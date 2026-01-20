@@ -17,12 +17,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QPdfSelection* QPdfSelection_new(QPdfSelection* other) {
-	return new (std::nothrow) QPdfSelection(*other);
+QPdfSelection* QPdfSelection_new(QPdfSelection* from) {
+	return new (std::nothrow) QPdfSelection(*from);
 }
 
-void QPdfSelection_operatorAssign(QPdfSelection* self, QPdfSelection* other) {
-	self->operator=(*other);
+void QPdfSelection_operatorAssign(QPdfSelection* self, QPdfSelection* from) {
+	self->operator=(*from);
 }
 
 void QPdfSelection_swap(QPdfSelection* self, QPdfSelection* other) {
@@ -60,7 +60,7 @@ void QPdfSelection_copyToClipboard(const QPdfSelection* self) {
 	self->copyToClipboard();
 }
 
-void QPdfSelection_copyToClipboardWithMode(const QPdfSelection* self, int mode) {
+void QPdfSelection_copyToClipboard_mode(const QPdfSelection* self, int mode) {
 	self->copyToClipboard(static_cast<QClipboard::Mode>(mode));
 }
 

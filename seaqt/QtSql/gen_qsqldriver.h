@@ -88,13 +88,13 @@ void* QSqlDriver_vdata(VirtualQSqlDriver* self);
 VirtualQSqlDriver* vdata_QSqlDriver(void* vdata);
 
 VirtualQSqlDriver* QSqlDriver_new(const QSqlDriver_VTable* vtbl, size_t vdata);
-VirtualQSqlDriver* QSqlDriver_new2(const QSqlDriver_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSqlDriver* QSqlDriver_new_parent(const QSqlDriver_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSqlDriver_virtbase(QSqlDriver* src, QObject** outptr_QObject);
 QMetaObject* QSqlDriver_metaObject(const QSqlDriver* self);
 void* QSqlDriver_metacast(QSqlDriver* self, const char* param1);
 int QSqlDriver_metacall(QSqlDriver* self, int param1, int param2, void** param3);
-struct seaqt_string QSqlDriver_tr(const char* s);
+struct seaqt_string QSqlDriver_tr_s(const char* s);
 bool QSqlDriver_isOpen(const QSqlDriver* self);
 bool QSqlDriver_isOpenError(const QSqlDriver* self);
 bool QSqlDriver_beginTransaction(QSqlDriver* self);
@@ -127,8 +127,8 @@ void QSqlDriver_connect_notification(QSqlDriver* self, intptr_t slot, void (*cal
 void QSqlDriver_setOpen(QSqlDriver* self, bool o);
 void QSqlDriver_setOpenError(QSqlDriver* self, bool e);
 void QSqlDriver_setLastError(QSqlDriver* self, QSqlError* e);
-struct seaqt_string QSqlDriver_tr2(const char* s, const char* c);
-struct seaqt_string QSqlDriver_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSqlDriver_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSqlDriver_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSqlDriver_virtualbase_metaObject(const VirtualQSqlDriver* self);
 void* QSqlDriver_virtualbase_metacast(VirtualQSqlDriver* self, const char* param1);

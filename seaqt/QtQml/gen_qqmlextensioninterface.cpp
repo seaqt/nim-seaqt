@@ -21,7 +21,7 @@ public:
 	friend void* QQmlTypesExtensionInterface_vdata(VirtualQQmlTypesExtensionInterface* self);
 	friend VirtualQQmlTypesExtensionInterface* vdata_QQmlTypesExtensionInterface(void* vdata);
 
-	VirtualQQmlTypesExtensionInterface(const QQmlTypesExtensionInterface_VTable* vtbl, const QQmlTypesExtensionInterface& param1): QQmlTypesExtensionInterface(param1), vtbl(vtbl) {}
+	VirtualQQmlTypesExtensionInterface(const QQmlTypesExtensionInterface_VTable* vtbl, const QQmlTypesExtensionInterface& from): QQmlTypesExtensionInterface(from), vtbl(vtbl) {}
 
 	virtual ~VirtualQQmlTypesExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(this); }
 
@@ -37,17 +37,17 @@ public:
 
 };
 
-VirtualQQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(const QQmlTypesExtensionInterface_VTable* vtbl, size_t vdata, QQmlTypesExtensionInterface* param1) {
+VirtualQQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(const QQmlTypesExtensionInterface_VTable* vtbl, size_t vdata, QQmlTypesExtensionInterface* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlTypesExtensionInterface>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQQmlTypesExtensionInterface(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQQmlTypesExtensionInterface(vtbl, *from) : nullptr;
 }
 
 void QQmlTypesExtensionInterface_registerTypes(QQmlTypesExtensionInterface* self, const char* uri) {
 	self->registerTypes(uri);
 }
 
-void QQmlTypesExtensionInterface_operatorAssign(QQmlTypesExtensionInterface* self, QQmlTypesExtensionInterface* param1) {
-	self->operator=(*param1);
+void QQmlTypesExtensionInterface_operatorAssign(QQmlTypesExtensionInterface* self, QQmlTypesExtensionInterface* from) {
+	self->operator=(*from);
 }
 
 void* QQmlTypesExtensionInterface_vdata(VirtualQQmlTypesExtensionInterface* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQQmlTypesExtensionInterface>()); }
@@ -63,7 +63,7 @@ public:
 	friend void* QQmlExtensionInterface_vdata(VirtualQQmlExtensionInterface* self);
 	friend VirtualQQmlExtensionInterface* vdata_QQmlExtensionInterface(void* vdata);
 
-	VirtualQQmlExtensionInterface(const QQmlExtensionInterface_VTable* vtbl, const QQmlExtensionInterface& param1): QQmlExtensionInterface(param1), vtbl(vtbl) {}
+	VirtualQQmlExtensionInterface(const QQmlExtensionInterface_VTable* vtbl, const QQmlExtensionInterface& from): QQmlExtensionInterface(from), vtbl(vtbl) {}
 
 	virtual ~VirtualQQmlExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(this); }
 
@@ -89,9 +89,9 @@ public:
 
 };
 
-VirtualQQmlExtensionInterface* QQmlExtensionInterface_new(const QQmlExtensionInterface_VTable* vtbl, size_t vdata, QQmlExtensionInterface* param1) {
+VirtualQQmlExtensionInterface* QQmlExtensionInterface_new(const QQmlExtensionInterface_VTable* vtbl, size_t vdata, QQmlExtensionInterface* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlExtensionInterface>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQQmlExtensionInterface(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQQmlExtensionInterface(vtbl, *from) : nullptr;
 }
 
 void QQmlExtensionInterface_virtbase(QQmlExtensionInterface* src, QQmlTypesExtensionInterface** outptr_QQmlTypesExtensionInterface) {
@@ -102,8 +102,8 @@ void QQmlExtensionInterface_initializeEngine(QQmlExtensionInterface* self, QQmlE
 	self->initializeEngine(engine, uri);
 }
 
-void QQmlExtensionInterface_operatorAssign(QQmlExtensionInterface* self, QQmlExtensionInterface* param1) {
-	self->operator=(*param1);
+void QQmlExtensionInterface_operatorAssign(QQmlExtensionInterface* self, QQmlExtensionInterface* from) {
+	self->operator=(*from);
 }
 
 void* QQmlExtensionInterface_vdata(VirtualQQmlExtensionInterface* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQQmlExtensionInterface>()); }
@@ -117,8 +117,8 @@ void QQmlEngineExtensionInterface_initializeEngine(QQmlEngineExtensionInterface*
 	self->initializeEngine(engine, uri);
 }
 
-void QQmlEngineExtensionInterface_operatorAssign(QQmlEngineExtensionInterface* self, QQmlEngineExtensionInterface* param1) {
-	self->operator=(*param1);
+void QQmlEngineExtensionInterface_operatorAssign(QQmlEngineExtensionInterface* self, QQmlEngineExtensionInterface* from) {
+	self->operator=(*from);
 }
 
 void QQmlEngineExtensionInterface_delete(QQmlEngineExtensionInterface* self) {

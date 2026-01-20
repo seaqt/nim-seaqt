@@ -22,19 +22,19 @@ QGeoCircle* QGeoCircle_new() {
 	return new (std::nothrow) QGeoCircle();
 }
 
-QGeoCircle* QGeoCircle_new2(QGeoCoordinate* center) {
+QGeoCircle* QGeoCircle_new_center(QGeoCoordinate* center) {
 	return new (std::nothrow) QGeoCircle(*center);
 }
 
-QGeoCircle* QGeoCircle_new3(QGeoCircle* other) {
+QGeoCircle* QGeoCircle_new_from(QGeoCircle* from) {
+	return new (std::nothrow) QGeoCircle(*from);
+}
+
+QGeoCircle* QGeoCircle_new_other(QGeoShape* other) {
 	return new (std::nothrow) QGeoCircle(*other);
 }
 
-QGeoCircle* QGeoCircle_new4(QGeoShape* other) {
-	return new (std::nothrow) QGeoCircle(*other);
-}
-
-QGeoCircle* QGeoCircle_new5(QGeoCoordinate* center, double radius) {
+QGeoCircle* QGeoCircle_new_center_radius(QGeoCoordinate* center, double radius) {
 	return new (std::nothrow) QGeoCircle(*center, static_cast<qreal>(radius));
 }
 
@@ -42,8 +42,8 @@ void QGeoCircle_virtbase(QGeoCircle* src, QGeoShape** outptr_QGeoShape) {
 	*outptr_QGeoShape = static_cast<QGeoShape*>(src);
 }
 
-void QGeoCircle_operatorAssign(QGeoCircle* self, QGeoCircle* other) {
-	self->operator=(*other);
+void QGeoCircle_operatorAssign(QGeoCircle* self, QGeoCircle* from) {
+	self->operator=(*from);
 }
 
 void QGeoCircle_setCenter(QGeoCircle* self, QGeoCoordinate* center) {

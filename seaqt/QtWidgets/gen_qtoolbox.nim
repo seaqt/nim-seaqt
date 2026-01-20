@@ -77,11 +77,11 @@ type cQToolBox*{.exportc: "QToolBox", incompleteStruct.} = object
 proc fcQToolBox_metaObject(self: pointer): pointer {.importc: "QToolBox_metaObject".}
 proc fcQToolBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QToolBox_metacast".}
 proc fcQToolBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QToolBox_metacall".}
-proc fcQToolBox_tr(s: cstring): struct_seaqt_string {.importc: "QToolBox_tr".}
-proc fcQToolBox_addItem(self: pointer, widget: pointer, text: struct_seaqt_string): cint {.importc: "QToolBox_addItem".}
-proc fcQToolBox_addItem2(self: pointer, widget: pointer, icon: pointer, text: struct_seaqt_string): cint {.importc: "QToolBox_addItem2".}
-proc fcQToolBox_insertItem(self: pointer, index: cint, widget: pointer, text: struct_seaqt_string): cint {.importc: "QToolBox_insertItem".}
-proc fcQToolBox_insertItem2(self: pointer, index: cint, widget: pointer, icon: pointer, text: struct_seaqt_string): cint {.importc: "QToolBox_insertItem2".}
+proc fcQToolBox_trS(s: cstring): struct_seaqt_string {.importc: "QToolBox_tr_s".}
+proc fcQToolBox_addItemWidgetText(self: pointer, widget: pointer, text: struct_seaqt_string): cint {.importc: "QToolBox_addItem_widget_text".}
+proc fcQToolBox_addItemWidgetIconText(self: pointer, widget: pointer, icon: pointer, text: struct_seaqt_string): cint {.importc: "QToolBox_addItem_widget_icon_text".}
+proc fcQToolBox_insertItemIndexWidgetText(self: pointer, index: cint, widget: pointer, text: struct_seaqt_string): cint {.importc: "QToolBox_insertItem_index_widget_text".}
+proc fcQToolBox_insertItemIndexWidgetIconText(self: pointer, index: cint, widget: pointer, icon: pointer, text: struct_seaqt_string): cint {.importc: "QToolBox_insertItem_index_widget_icon_text".}
 proc fcQToolBox_removeItem(self: pointer, index: cint): void {.importc: "QToolBox_removeItem".}
 proc fcQToolBox_setItemEnabled(self: pointer, index: cint, enabled: bool): void {.importc: "QToolBox_setItemEnabled".}
 proc fcQToolBox_isItemEnabled(self: pointer, index: cint): bool {.importc: "QToolBox_isItemEnabled".}
@@ -100,8 +100,8 @@ proc fcQToolBox_setCurrentIndex(self: pointer, index: cint): void {.importc: "QT
 proc fcQToolBox_setCurrentWidget(self: pointer, widget: pointer): void {.importc: "QToolBox_setCurrentWidget".}
 proc fcQToolBox_currentChanged(self: pointer, index: cint): void {.importc: "QToolBox_currentChanged".}
 proc fcQToolBox_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBox_connect_currentChanged".}
-proc fcQToolBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QToolBox_tr2".}
-proc fcQToolBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QToolBox_tr3".}
+proc fcQToolBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QToolBox_tr_s_c".}
+proc fcQToolBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QToolBox_tr_s_c_n".}
 proc fcQToolBox_vdata(self: pointer): ptr pointer {.importc: "QToolBox_vdata".}
 proc fvdata_cQToolBox(self: pointer): pointer {.importc: "vdata_QToolBox".}
 
@@ -223,9 +223,9 @@ proc fcQToolBox_protectedbase_sender(self: pointer): pointer {.importc: "QToolBo
 proc fcQToolBox_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QToolBox_protectedbase_senderSignalIndex".}
 proc fcQToolBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QToolBox_protectedbase_receivers".}
 proc fcQToolBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QToolBox_protectedbase_isSignalConnected".}
-proc fcQToolBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQToolBox {.importc: "QToolBox_new".}
-proc fcQToolBox_new2(vtbl: pointer, vdata: csize_t): ptr cQToolBox {.importc: "QToolBox_new2".}
-proc fcQToolBox_new3(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQToolBox {.importc: "QToolBox_new3".}
+proc fcQToolBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQToolBox {.importc: "QToolBox_new_parent".}
+proc fcQToolBox_new2(vtbl: pointer, vdata: csize_t): ptr cQToolBox {.importc: "QToolBox_new".}
+proc fcQToolBox_new3(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQToolBox {.importc: "QToolBox_new_parent_f".}
 proc fcQToolBox_staticMetaObject(): pointer {.importc: "QToolBox_staticMetaObject".}
 
 proc metaObject*(self: gen_qtoolbox_types.QToolBox): gen_qobjectdefs_types.QMetaObject =
@@ -238,22 +238,22 @@ proc metacall*(self: gen_qtoolbox_types.QToolBox, param1: cint, param2: cint, pa
   fcQToolBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtoolbox_types.QToolBox, s: cstring): string =
-  let v_ms = fcQToolBox_tr(s)
+  let v_ms = fcQToolBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addItem*(self: gen_qtoolbox_types.QToolBox, widget: gen_qwidget_types.QWidget, text: openArray[char]): cint =
-  fcQToolBox_addItem(self.h, widget.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQToolBox_addItemWidgetText(self.h, widget.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc addItem*(self: gen_qtoolbox_types.QToolBox, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: openArray[char]): cint =
-  fcQToolBox_addItem2(self.h, widget.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQToolBox_addItemWidgetIconText(self.h, widget.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc insertItem*(self: gen_qtoolbox_types.QToolBox, index: cint, widget: gen_qwidget_types.QWidget, text: openArray[char]): cint =
-  fcQToolBox_insertItem(self.h, index, widget.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQToolBox_insertItemIndexWidgetText(self.h, index, widget.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc insertItem*(self: gen_qtoolbox_types.QToolBox, index: cint, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, text: openArray[char]): cint =
-  fcQToolBox_insertItem2(self.h, index, widget.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQToolBox_insertItemIndexWidgetIconText(self.h, index, widget.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc removeItem*(self: gen_qtoolbox_types.QToolBox, index: cint): void =
   fcQToolBox_removeItem(self.h, index)
@@ -330,13 +330,13 @@ proc onCurrentChanged*(self: gen_qtoolbox_types.QToolBox, slot: QToolBoxcurrentC
   fcQToolBox_connect_currentChanged(self.h, cast[int](addr tmp[]), fcQToolBox_slot_callback_currentChanged, fcQToolBox_slot_callback_currentChanged_release)
 
 proc tr*(_: type gen_qtoolbox_types.QToolBox, s: cstring, c: cstring): string =
-  let v_ms = fcQToolBox_tr2(s, c)
+  let v_ms = fcQToolBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtoolbox_types.QToolBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQToolBox_tr3(s, c, n)
+  let v_ms = fcQToolBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

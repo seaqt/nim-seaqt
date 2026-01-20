@@ -179,27 +179,27 @@ VirtualQAudioSink* QAudioSink_new(const QAudioSink_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQAudioSink(vtbl) : nullptr;
 }
 
-VirtualQAudioSink* QAudioSink_new2(const QAudioSink_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo) {
+VirtualQAudioSink* QAudioSink_new_audioDeviceInfo(const QAudioSink_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSink>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSink(vtbl, *audioDeviceInfo) : nullptr;
 }
 
-VirtualQAudioSink* QAudioSink_new3(const QAudioSink_VTable* vtbl, size_t vdata, QAudioFormat* format) {
+VirtualQAudioSink* QAudioSink_new_format(const QAudioSink_VTable* vtbl, size_t vdata, QAudioFormat* format) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSink>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSink(vtbl, *format) : nullptr;
 }
 
-VirtualQAudioSink* QAudioSink_new4(const QAudioSink_VTable* vtbl, size_t vdata, QAudioFormat* format, QObject* parent) {
+VirtualQAudioSink* QAudioSink_new_format_parent(const QAudioSink_VTable* vtbl, size_t vdata, QAudioFormat* format, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSink>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSink(vtbl, *format, parent) : nullptr;
 }
 
-VirtualQAudioSink* QAudioSink_new5(const QAudioSink_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo, QAudioFormat* format) {
+VirtualQAudioSink* QAudioSink_new_audioDeviceInfo_format(const QAudioSink_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo, QAudioFormat* format) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSink>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSink(vtbl, *audioDeviceInfo, *format) : nullptr;
 }
 
-VirtualQAudioSink* QAudioSink_new6(const QAudioSink_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo, QAudioFormat* format, QObject* parent) {
+VirtualQAudioSink* QAudioSink_new_audioDeviceInfo_format_parent(const QAudioSink_VTable* vtbl, size_t vdata, QAudioDevice* audioDeviceInfo, QAudioFormat* format, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioSink>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioSink(vtbl, *audioDeviceInfo, *format, parent) : nullptr;
 }
@@ -220,7 +220,7 @@ int QAudioSink_metacall(QAudioSink* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAudioSink_tr(const char* s) {
+struct seaqt_string QAudioSink_tr_s(const char* s) {
 	QString _ret = QAudioSink::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -239,11 +239,11 @@ QAudioFormat* QAudioSink_format(const QAudioSink* self) {
 	return new QAudioFormat(self->format());
 }
 
-void QAudioSink_start(QAudioSink* self, QIODevice* device) {
+void QAudioSink_start_device(QAudioSink* self, QIODevice* device) {
 	self->start(device);
 }
 
-QIODevice* QAudioSink_start2(QAudioSink* self) {
+QIODevice* QAudioSink_start(QAudioSink* self) {
 	return self->start();
 }
 
@@ -323,7 +323,7 @@ void QAudioSink_connect_stateChanged(QAudioSink* self, intptr_t slot, void (*cal
 	QAudioSink::connect(self, static_cast<void (QAudioSink::*)(QAudio::State)>(&QAudioSink::stateChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAudioSink_tr2(const char* s, const char* c) {
+struct seaqt_string QAudioSink_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAudioSink::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -334,7 +334,7 @@ struct seaqt_string QAudioSink_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioSink_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAudioSink_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioSink::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

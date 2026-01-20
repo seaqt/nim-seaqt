@@ -177,7 +177,7 @@ VirtualQMediaRecorder* QMediaRecorder_new(const QMediaRecorder_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQMediaRecorder(vtbl) : nullptr;
 }
 
-VirtualQMediaRecorder* QMediaRecorder_new2(const QMediaRecorder_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQMediaRecorder* QMediaRecorder_new_parent(const QMediaRecorder_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMediaRecorder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMediaRecorder(vtbl, parent) : nullptr;
 }
@@ -198,7 +198,7 @@ int QMediaRecorder_metacall(QMediaRecorder* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMediaRecorder_tr(const char* s) {
+struct seaqt_string QMediaRecorder_tr_s(const char* s) {
 	QString _ret = QMediaRecorder::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -281,11 +281,11 @@ QSize* QMediaRecorder_videoResolution(const QMediaRecorder* self) {
 	return new QSize(self->videoResolution());
 }
 
-void QMediaRecorder_setVideoResolution(QMediaRecorder* self, QSize* videoResolution) {
+void QMediaRecorder_setVideoResolution_videoResolution(QMediaRecorder* self, QSize* videoResolution) {
 	self->setVideoResolution(*videoResolution);
 }
 
-void QMediaRecorder_setVideoResolution2(QMediaRecorder* self, int width, int height) {
+void QMediaRecorder_setVideoResolution_width_height(QMediaRecorder* self, int width, int height) {
 	self->setVideoResolution(static_cast<int>(width), static_cast<int>(height));
 }
 
@@ -616,7 +616,7 @@ void QMediaRecorder_connect_audioSampleRateChanged(QMediaRecorder* self, intptr_
 	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::audioSampleRateChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMediaRecorder_tr2(const char* s, const char* c) {
+struct seaqt_string QMediaRecorder_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMediaRecorder::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -627,7 +627,7 @@ struct seaqt_string QMediaRecorder_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMediaRecorder_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMediaRecorder_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaRecorder::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

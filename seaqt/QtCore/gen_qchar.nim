@@ -365,8 +365,8 @@ type cQLatin1Char*{.exportc: "QLatin1Char", incompleteStruct.} = object
 type cQChar*{.exportc: "QChar", incompleteStruct.} = object
 
 proc fcQLatin1Char_toLatin1(self: pointer): cchar {.importc: "QLatin1Char_toLatin1".}
-proc fcQLatin1Char_new(c: cchar): ptr cQLatin1Char {.importc: "QLatin1Char_new".}
-proc fcQLatin1Char_new2(param1: pointer): ptr cQLatin1Char {.importc: "QLatin1Char_new2".}
+proc fcQLatin1Char_new(c: cchar): ptr cQLatin1Char {.importc: "QLatin1Char_new_c".}
+proc fcQLatin1Char_new2(fromVal: pointer): ptr cQLatin1Char {.importc: "QLatin1Char_new_from".}
 proc fcQChar_category(self: pointer): cint {.importc: "QChar_category".}
 proc fcQChar_direction(self: pointer): cint {.importc: "QChar_direction".}
 proc fcQChar_joiningType(self: pointer): cint {.importc: "QChar_joiningType".}
@@ -407,16 +407,16 @@ proc fcQChar_setCell(self: pointer, acell: uint8): void {.importc: "QChar_setCel
 proc fcQChar_setRow(self: pointer, arow: uint8): void {.importc: "QChar_setRow".}
 proc fcQChar_currentUnicodeVersion(): cint {.importc: "QChar_currentUnicodeVersion".}
 proc fcQChar_new(): ptr cQChar {.importc: "QChar_new".}
-proc fcQChar_new2(rc: cushort): ptr cQChar {.importc: "QChar_new2".}
-proc fcQChar_new3(c: uint8, r: uint8): ptr cQChar {.importc: "QChar_new3".}
-proc fcQChar_new4(rc: cshort): ptr cQChar {.importc: "QChar_new4".}
-proc fcQChar_new5(rc: cuint): ptr cQChar {.importc: "QChar_new5".}
-proc fcQChar_new6(rc: cint): ptr cQChar {.importc: "QChar_new6".}
-proc fcQChar_new7(s: cint): ptr cQChar {.importc: "QChar_new7".}
-proc fcQChar_new8(ch: pointer): ptr cQChar {.importc: "QChar_new8".}
-proc fcQChar_new9(c: cchar): ptr cQChar {.importc: "QChar_new9".}
-proc fcQChar_new10(c: uint8): ptr cQChar {.importc: "QChar_new10".}
-proc fcQChar_new11(param1: pointer): ptr cQChar {.importc: "QChar_new11".}
+proc fcQChar_new2(rc: cushort): ptr cQChar {.importc: "QChar_new_ushort".}
+proc fcQChar_new3(c: uint8, r: uint8): ptr cQChar {.importc: "QChar_new_uchar_uchar".}
+proc fcQChar_new4(rc: cshort): ptr cQChar {.importc: "QChar_new_short".}
+proc fcQChar_new5(rc: cuint): ptr cQChar {.importc: "QChar_new_uint".}
+proc fcQChar_new6(rc: cint): ptr cQChar {.importc: "QChar_new_int".}
+proc fcQChar_new7(s: cint): ptr cQChar {.importc: "QChar_new_QChar_SpecialCharacter".}
+proc fcQChar_new8(ch: pointer): ptr cQChar {.importc: "QChar_new_QLatin1Char".}
+proc fcQChar_new9(c: cchar): ptr cQChar {.importc: "QChar_new_char".}
+proc fcQChar_new10(c: uint8): ptr cQChar {.importc: "QChar_new_uchar".}
+proc fcQChar_new11(fromVal: pointer): ptr cQChar {.importc: "QChar_new_QChar".}
 
 proc toLatin1*(self: gen_qchar_types.QLatin1Char): cchar =
   fcQLatin1Char_toLatin1(self.h)
@@ -426,8 +426,8 @@ proc create*(T: type gen_qchar_types.QLatin1Char,
   let tmp = gen_qchar_types.QLatin1Char(h: fcQLatin1Char_new(c), owned: true)
   tmp
 proc create*(T: type gen_qchar_types.QLatin1Char,
-    param1: gen_qchar_types.QLatin1Char): gen_qchar_types.QLatin1Char =
-  let tmp = gen_qchar_types.QLatin1Char(h: fcQLatin1Char_new2(param1.h), owned: true)
+    fromVal: gen_qchar_types.QLatin1Char): gen_qchar_types.QLatin1Char =
+  let tmp = gen_qchar_types.QLatin1Char(h: fcQLatin1Char_new2(fromVal.h), owned: true)
   tmp
 proc category*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_category(self.h))
@@ -589,6 +589,6 @@ proc create*(T: type gen_qchar_types.QChar,
   let tmp = gen_qchar_types.QChar(h: fcQChar_new10(c), owned: true)
   tmp
 proc create*(T: type gen_qchar_types.QChar,
-    param1: gen_qchar_types.QChar): gen_qchar_types.QChar =
-  let tmp = gen_qchar_types.QChar(h: fcQChar_new11(param1.h), owned: true)
+    fromVal: gen_qchar_types.QChar): gen_qchar_types.QChar =
+  let tmp = gen_qchar_types.QChar(h: fcQChar_new11(fromVal.h), owned: true)
   tmp

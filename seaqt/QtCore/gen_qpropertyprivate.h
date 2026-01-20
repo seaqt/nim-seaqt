@@ -24,8 +24,8 @@ typedef struct QUntypedPropertyData QUntypedPropertyData;
 
 void QUntypedPropertyData_delete(QUntypedPropertyData* self);
 
-uintptr_t QPropertyProxyBindingData_dPtr(const QPropertyProxyBindingData* self);
-void QPropertyProxyBindingData_setDPtr(QPropertyProxyBindingData* self, uintptr_t d_ptr);
+uintptr_t QPropertyProxyBindingData_d_ptr(const QPropertyProxyBindingData* self);
+void QPropertyProxyBindingData_setD_ptr(QPropertyProxyBindingData* self, uintptr_t d_ptr);
 const void* QPropertyProxyBindingData_originalBindingData(const QPropertyProxyBindingData* self);
 void QPropertyProxyBindingData_setOriginalBindingData(QPropertyProxyBindingData* self, const void* originalBindingData);
 QUntypedPropertyData* QPropertyProxyBindingData_propertyData(const QPropertyProxyBindingData* self);

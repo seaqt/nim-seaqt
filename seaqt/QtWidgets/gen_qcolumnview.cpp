@@ -671,7 +671,7 @@ public:
 	friend struct seaqt_array /* of QModelIndex* */  QColumnView_virtualbase_selectedIndexes(const VirtualQColumnView* self);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QColumnView::edit(index, trigger, event);
 		}
 
@@ -681,11 +681,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QColumnView_virtualbase_edit2(VirtualQColumnView* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QColumnView_virtualbase_edit_index_trigger_event(VirtualQColumnView* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1328,7 +1328,7 @@ public:
 	friend void QColumnView_protectedbase_stopAutoScroll(VirtualQColumnView* self);
 	friend void QColumnView_protectedbase_doAutoScroll(VirtualQColumnView* self);
 	friend int QColumnView_protectedbase_dropIndicatorPosition(const VirtualQColumnView* self);
-	friend void QColumnView_protectedbase_setViewportMargins(VirtualQColumnView* self, int left, int top, int right, int bottom);
+	friend void QColumnView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQColumnView* self, int left, int top, int right, int bottom);
 	friend QMargins* QColumnView_protectedbase_viewportMargins(const VirtualQColumnView* self);
 	friend void QColumnView_protectedbase_drawFrame(VirtualQColumnView* self, QPainter* param1);
 	friend void QColumnView_protectedbase_updateMicroFocus(VirtualQColumnView* self);
@@ -1342,12 +1342,12 @@ public:
 	friend bool QColumnView_protectedbase_isSignalConnected(const VirtualQColumnView* self, QMetaMethod* signal);
 };
 
-VirtualQColumnView* QColumnView_new(const QColumnView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQColumnView* QColumnView_new_parent(const QColumnView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQColumnView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQColumnView(vtbl, parent) : nullptr;
 }
 
-VirtualQColumnView* QColumnView_new2(const QColumnView_VTable* vtbl, size_t vdata) {
+VirtualQColumnView* QColumnView_new(const QColumnView_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQColumnView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQColumnView(vtbl) : nullptr;
 }
@@ -1368,7 +1368,7 @@ int QColumnView_metacall(QColumnView* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QColumnView_tr(const char* s) {
+struct seaqt_string QColumnView_tr_s(const char* s) {
 	QString _ret = QColumnView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1468,7 +1468,7 @@ struct seaqt_array /* of int */  QColumnView_columnWidths(const QColumnView* sel
 	return _out;
 }
 
-struct seaqt_string QColumnView_tr2(const char* s, const char* c) {
+struct seaqt_string QColumnView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QColumnView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1479,7 +1479,7 @@ struct seaqt_string QColumnView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QColumnView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QColumnView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QColumnView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1725,7 +1725,7 @@ struct seaqt_array /* of QModelIndex* */  QColumnView_virtualbase_selectedIndexe
 	return _out;
 }
 
-bool QColumnView_virtualbase_edit2(VirtualQColumnView* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QColumnView_virtualbase_edit_index_trigger_event(VirtualQColumnView* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QColumnView::edit(*index, static_cast<VirtualQColumnView::EditTrigger>(trigger), event);
 }
@@ -2037,7 +2037,7 @@ int QColumnView_protectedbase_dropIndicatorPosition(const VirtualQColumnView* se
 	return static_cast<int>(_ret);
 }
 
-void QColumnView_protectedbase_setViewportMargins(VirtualQColumnView* self, int left, int top, int right, int bottom) {
+void QColumnView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQColumnView* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

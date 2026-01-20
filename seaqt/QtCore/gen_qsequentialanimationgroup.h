@@ -61,13 +61,13 @@ void* QSequentialAnimationGroup_vdata(VirtualQSequentialAnimationGroup* self);
 VirtualQSequentialAnimationGroup* vdata_QSequentialAnimationGroup(void* vdata);
 
 VirtualQSequentialAnimationGroup* QSequentialAnimationGroup_new(const QSequentialAnimationGroup_VTable* vtbl, size_t vdata);
-VirtualQSequentialAnimationGroup* QSequentialAnimationGroup_new2(const QSequentialAnimationGroup_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSequentialAnimationGroup* QSequentialAnimationGroup_new_parent(const QSequentialAnimationGroup_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSequentialAnimationGroup_virtbase(QSequentialAnimationGroup* src, QAnimationGroup** outptr_QAnimationGroup);
 QMetaObject* QSequentialAnimationGroup_metaObject(const QSequentialAnimationGroup* self);
 void* QSequentialAnimationGroup_metacast(QSequentialAnimationGroup* self, const char* param1);
 int QSequentialAnimationGroup_metacall(QSequentialAnimationGroup* self, int param1, int param2, void** param3);
-struct seaqt_string QSequentialAnimationGroup_tr(const char* s);
+struct seaqt_string QSequentialAnimationGroup_tr_s(const char* s);
 QPauseAnimation* QSequentialAnimationGroup_addPause(QSequentialAnimationGroup* self, int msecs);
 QPauseAnimation* QSequentialAnimationGroup_insertPause(QSequentialAnimationGroup* self, int index, int msecs);
 QAbstractAnimation* QSequentialAnimationGroup_currentAnimation(const QSequentialAnimationGroup* self);
@@ -78,8 +78,8 @@ bool QSequentialAnimationGroup_event(QSequentialAnimationGroup* self, QEvent* ev
 void QSequentialAnimationGroup_updateCurrentTime(QSequentialAnimationGroup* self, int param1);
 void QSequentialAnimationGroup_updateState(QSequentialAnimationGroup* self, int newState, int oldState);
 void QSequentialAnimationGroup_updateDirection(QSequentialAnimationGroup* self, int direction);
-struct seaqt_string QSequentialAnimationGroup_tr2(const char* s, const char* c);
-struct seaqt_string QSequentialAnimationGroup_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSequentialAnimationGroup_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSequentialAnimationGroup_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSequentialAnimationGroup_virtualbase_metaObject(const VirtualQSequentialAnimationGroup* self);
 void* QSequentialAnimationGroup_virtualbase_metacast(VirtualQSequentialAnimationGroup* self, const char* param1);

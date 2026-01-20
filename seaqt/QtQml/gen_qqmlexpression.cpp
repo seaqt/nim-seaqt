@@ -182,34 +182,34 @@ VirtualQQmlExpression* QQmlExpression_new(const QQmlExpression_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQQmlExpression(vtbl) : nullptr;
 }
 
-VirtualQQmlExpression* QQmlExpression_new2(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlContext* param1, QObject* param2, struct seaqt_string param3) {
+VirtualQQmlExpression* QQmlExpression_new_QQmlContext_QObject_QString(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlContext* param1, QObject* param2, struct seaqt_string param3) {
 	QString param3_QString = QString::fromUtf8(param3.data, param3.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlExpression>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlExpression(vtbl, param1, param2, param3_QString) : nullptr;
 }
 
-VirtualQQmlExpression* QQmlExpression_new3(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlScriptString* param1) {
+VirtualQQmlExpression* QQmlExpression_new_QQmlScriptString(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlScriptString* param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlExpression>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlExpression(vtbl, *param1) : nullptr;
 }
 
-VirtualQQmlExpression* QQmlExpression_new4(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlContext* param1, QObject* param2, struct seaqt_string param3, QObject* param4) {
+VirtualQQmlExpression* QQmlExpression_new_QQmlContext_QObject_QString_QObject(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlContext* param1, QObject* param2, struct seaqt_string param3, QObject* param4) {
 	QString param3_QString = QString::fromUtf8(param3.data, param3.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlExpression>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlExpression(vtbl, param1, param2, param3_QString, param4) : nullptr;
 }
 
-VirtualQQmlExpression* QQmlExpression_new5(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlScriptString* param1, QQmlContext* param2) {
+VirtualQQmlExpression* QQmlExpression_new_QQmlScriptString_QQmlContext(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlScriptString* param1, QQmlContext* param2) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlExpression>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlExpression(vtbl, *param1, param2) : nullptr;
 }
 
-VirtualQQmlExpression* QQmlExpression_new6(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlScriptString* param1, QQmlContext* param2, QObject* param3) {
+VirtualQQmlExpression* QQmlExpression_new_QQmlScriptString_QQmlContext_QObject(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlScriptString* param1, QQmlContext* param2, QObject* param3) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlExpression>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlExpression(vtbl, *param1, param2, param3) : nullptr;
 }
 
-VirtualQQmlExpression* QQmlExpression_new7(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlScriptString* param1, QQmlContext* param2, QObject* param3, QObject* param4) {
+VirtualQQmlExpression* QQmlExpression_new_QQmlScriptString_QQmlContext_QObject_QObject(const QQmlExpression_VTable* vtbl, size_t vdata, QQmlScriptString* param1, QQmlContext* param2, QObject* param3, QObject* param4) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlExpression>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlExpression(vtbl, *param1, param2, param3, param4) : nullptr;
 }
@@ -230,7 +230,7 @@ int QQmlExpression_metacall(QQmlExpression* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQmlExpression_tr(const char* s) {
+struct seaqt_string QQmlExpression_tr_s(const char* s) {
 	QString _ret = QQmlExpression::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -292,7 +292,7 @@ int QQmlExpression_columnNumber(const QQmlExpression* self) {
 	return self->columnNumber();
 }
 
-void QQmlExpression_setSourceLocation(QQmlExpression* self, struct seaqt_string fileName, int line) {
+void QQmlExpression_setSourceLocation_fileName_line(QQmlExpression* self, struct seaqt_string fileName, int line) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	self->setSourceLocation(fileName_QString, static_cast<int>(line));
 }
@@ -332,7 +332,7 @@ void QQmlExpression_connect_valueChanged(QQmlExpression* self, intptr_t slot, vo
 	QQmlExpression::connect(self, static_cast<void (QQmlExpression::*)()>(&QQmlExpression::valueChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQmlExpression_tr2(const char* s, const char* c) {
+struct seaqt_string QQmlExpression_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQmlExpression::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -343,7 +343,7 @@ struct seaqt_string QQmlExpression_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlExpression_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQmlExpression_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlExpression::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -354,12 +354,12 @@ struct seaqt_string QQmlExpression_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QQmlExpression_setSourceLocation2(QQmlExpression* self, struct seaqt_string fileName, int line, int column) {
+void QQmlExpression_setSourceLocation_fileName_line_column(QQmlExpression* self, struct seaqt_string fileName, int line, int column) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	self->setSourceLocation(fileName_QString, static_cast<int>(line), static_cast<int>(column));
 }
 
-QVariant* QQmlExpression_evaluateWithValueIsUndefined(QQmlExpression* self, bool* valueIsUndefined) {
+QVariant* QQmlExpression_evaluate_valueIsUndefined(QQmlExpression* self, bool* valueIsUndefined) {
 	return new QVariant(self->evaluate(valueIsUndefined));
 }
 

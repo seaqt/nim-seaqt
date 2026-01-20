@@ -23,13 +23,13 @@ typedef struct QTextBoundaryFinder QTextBoundaryFinder;
 #endif
 
 QTextBoundaryFinder* QTextBoundaryFinder_new();
-QTextBoundaryFinder* QTextBoundaryFinder_new2(QTextBoundaryFinder* other);
-QTextBoundaryFinder* QTextBoundaryFinder_new3(int type, struct seaqt_string string);
-QTextBoundaryFinder* QTextBoundaryFinder_new4(int type, QChar* chars, ptrdiff_t length);
-QTextBoundaryFinder* QTextBoundaryFinder_new5(int type, QChar* chars, ptrdiff_t length, unsigned char* buffer);
-QTextBoundaryFinder* QTextBoundaryFinder_new6(int type, QChar* chars, ptrdiff_t length, unsigned char* buffer, ptrdiff_t bufferSize);
+QTextBoundaryFinder* QTextBoundaryFinder_new_from(QTextBoundaryFinder* from);
+QTextBoundaryFinder* QTextBoundaryFinder_new_type_string(int type, struct seaqt_string string);
+QTextBoundaryFinder* QTextBoundaryFinder_new_type_chars_length(int type, QChar* chars, ptrdiff_t length);
+QTextBoundaryFinder* QTextBoundaryFinder_new_type_chars_length_buffer(int type, QChar* chars, ptrdiff_t length, unsigned char* buffer);
+QTextBoundaryFinder* QTextBoundaryFinder_new_type_chars_length_buffer_bufferSize(int type, QChar* chars, ptrdiff_t length, unsigned char* buffer, ptrdiff_t bufferSize);
 
-void QTextBoundaryFinder_operatorAssign(QTextBoundaryFinder* self, QTextBoundaryFinder* other);
+void QTextBoundaryFinder_operatorAssign(QTextBoundaryFinder* self, QTextBoundaryFinder* from);
 bool QTextBoundaryFinder_isValid(const QTextBoundaryFinder* self);
 int QTextBoundaryFinder_type(const QTextBoundaryFinder* self);
 struct seaqt_string QTextBoundaryFinder_string(const QTextBoundaryFinder* self);

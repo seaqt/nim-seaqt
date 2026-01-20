@@ -79,7 +79,7 @@ type cQProgressDialog*{.exportc: "QProgressDialog", incompleteStruct.} = object
 proc fcQProgressDialog_metaObject(self: pointer): pointer {.importc: "QProgressDialog_metaObject".}
 proc fcQProgressDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QProgressDialog_metacast".}
 proc fcQProgressDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProgressDialog_metacall".}
-proc fcQProgressDialog_tr(s: cstring): struct_seaqt_string {.importc: "QProgressDialog_tr".}
+proc fcQProgressDialog_trS(s: cstring): struct_seaqt_string {.importc: "QProgressDialog_tr_s".}
 proc fcQProgressDialog_setLabel(self: pointer, label: pointer): void {.importc: "QProgressDialog_setLabel".}
 proc fcQProgressDialog_setCancelButton(self: pointer, button: pointer): void {.importc: "QProgressDialog_setCancelButton".}
 proc fcQProgressDialog_setBar(self: pointer, bar: pointer): void {.importc: "QProgressDialog_setBar".}
@@ -105,8 +105,8 @@ proc fcQProgressDialog_setCancelButtonText(self: pointer, text: struct_seaqt_str
 proc fcQProgressDialog_setMinimumDuration(self: pointer, ms: cint): void {.importc: "QProgressDialog_setMinimumDuration".}
 proc fcQProgressDialog_canceled(self: pointer): void {.importc: "QProgressDialog_canceled".}
 proc fcQProgressDialog_connect_canceled(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProgressDialog_connect_canceled".}
-proc fcQProgressDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProgressDialog_tr2".}
-proc fcQProgressDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProgressDialog_tr3".}
+proc fcQProgressDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProgressDialog_tr_s_c".}
+proc fcQProgressDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProgressDialog_tr_s_c_n".}
 proc fcQProgressDialog_vdata(self: pointer): ptr pointer {.importc: "QProgressDialog_vdata".}
 proc fvdata_cQProgressDialog(self: pointer): pointer {.importc: "vdata_QProgressDialog".}
 
@@ -233,12 +233,12 @@ proc fcQProgressDialog_protectedbase_sender(self: pointer): pointer {.importc: "
 proc fcQProgressDialog_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QProgressDialog_protectedbase_senderSignalIndex".}
 proc fcQProgressDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QProgressDialog_protectedbase_receivers".}
 proc fcQProgressDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QProgressDialog_protectedbase_isSignalConnected".}
-proc fcQProgressDialog_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQProgressDialog {.importc: "QProgressDialog_new".}
-proc fcQProgressDialog_new2(vtbl: pointer, vdata: csize_t): ptr cQProgressDialog {.importc: "QProgressDialog_new2".}
-proc fcQProgressDialog_new3(vtbl: pointer, vdata: csize_t, labelText: struct_seaqt_string, cancelButtonText: struct_seaqt_string, minimum: cint, maximum: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new3".}
-proc fcQProgressDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new4".}
-proc fcQProgressDialog_new5(vtbl: pointer, vdata: csize_t, labelText: struct_seaqt_string, cancelButtonText: struct_seaqt_string, minimum: cint, maximum: cint, parent: pointer): ptr cQProgressDialog {.importc: "QProgressDialog_new5".}
-proc fcQProgressDialog_new6(vtbl: pointer, vdata: csize_t, labelText: struct_seaqt_string, cancelButtonText: struct_seaqt_string, minimum: cint, maximum: cint, parent: pointer, flags: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new6".}
+proc fcQProgressDialog_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQProgressDialog {.importc: "QProgressDialog_new_parent".}
+proc fcQProgressDialog_new2(vtbl: pointer, vdata: csize_t): ptr cQProgressDialog {.importc: "QProgressDialog_new".}
+proc fcQProgressDialog_new3(vtbl: pointer, vdata: csize_t, labelText: struct_seaqt_string, cancelButtonText: struct_seaqt_string, minimum: cint, maximum: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new_labelText_cancelButtonText_minimum_maximum".}
+proc fcQProgressDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new_parent_flags".}
+proc fcQProgressDialog_new5(vtbl: pointer, vdata: csize_t, labelText: struct_seaqt_string, cancelButtonText: struct_seaqt_string, minimum: cint, maximum: cint, parent: pointer): ptr cQProgressDialog {.importc: "QProgressDialog_new_labelText_cancelButtonText_minimum_maximum_parent".}
+proc fcQProgressDialog_new6(vtbl: pointer, vdata: csize_t, labelText: struct_seaqt_string, cancelButtonText: struct_seaqt_string, minimum: cint, maximum: cint, parent: pointer, flags: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new_labelText_cancelButtonText_minimum_maximum_parent_flags".}
 proc fcQProgressDialog_staticMetaObject(): pointer {.importc: "QProgressDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qprogressdialog_types.QProgressDialog): gen_qobjectdefs_types.QMetaObject =
@@ -251,7 +251,7 @@ proc metacall*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint, pa
   fcQProgressDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring): string =
-  let v_ms = fcQProgressDialog_tr(s)
+  let v_ms = fcQProgressDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -347,13 +347,13 @@ proc onCanceled*(self: gen_qprogressdialog_types.QProgressDialog, slot: QProgres
   fcQProgressDialog_connect_canceled(self.h, cast[int](addr tmp[]), fcQProgressDialog_slot_callback_canceled, fcQProgressDialog_slot_callback_canceled_release)
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQProgressDialog_tr2(s, c)
+  let v_ms = fcQProgressDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQProgressDialog_tr3(s, c, n)
+  let v_ms = fcQProgressDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

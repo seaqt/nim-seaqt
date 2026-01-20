@@ -77,7 +77,7 @@ type cQStyledItemDelegate*{.exportc: "QStyledItemDelegate", incompleteStruct.} =
 proc fcQStyledItemDelegate_metaObject(self: pointer): pointer {.importc: "QStyledItemDelegate_metaObject".}
 proc fcQStyledItemDelegate_metacast(self: pointer, param1: cstring): pointer {.importc: "QStyledItemDelegate_metacast".}
 proc fcQStyledItemDelegate_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStyledItemDelegate_metacall".}
-proc fcQStyledItemDelegate_tr(s: cstring): struct_seaqt_string {.importc: "QStyledItemDelegate_tr".}
+proc fcQStyledItemDelegate_trS(s: cstring): struct_seaqt_string {.importc: "QStyledItemDelegate_tr_s".}
 proc fcQStyledItemDelegate_paint(self: pointer, painter: pointer, option: pointer, index: pointer): void {.importc: "QStyledItemDelegate_paint".}
 proc fcQStyledItemDelegate_sizeHint(self: pointer, option: pointer, index: pointer): pointer {.importc: "QStyledItemDelegate_sizeHint".}
 proc fcQStyledItemDelegate_createEditor(self: pointer, parent: pointer, option: pointer, index: pointer): pointer {.importc: "QStyledItemDelegate_createEditor".}
@@ -87,8 +87,8 @@ proc fcQStyledItemDelegate_updateEditorGeometry(self: pointer, editor: pointer, 
 proc fcQStyledItemDelegate_itemEditorFactory(self: pointer): pointer {.importc: "QStyledItemDelegate_itemEditorFactory".}
 proc fcQStyledItemDelegate_setItemEditorFactory(self: pointer, factory: pointer): void {.importc: "QStyledItemDelegate_setItemEditorFactory".}
 proc fcQStyledItemDelegate_displayText(self: pointer, value: pointer, locale: pointer): struct_seaqt_string {.importc: "QStyledItemDelegate_displayText".}
-proc fcQStyledItemDelegate_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStyledItemDelegate_tr2".}
-proc fcQStyledItemDelegate_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStyledItemDelegate_tr3".}
+proc fcQStyledItemDelegate_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStyledItemDelegate_tr_s_c".}
+proc fcQStyledItemDelegate_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStyledItemDelegate_tr_s_c_n".}
 proc fcQStyledItemDelegate_vdata(self: pointer): ptr pointer {.importc: "QStyledItemDelegate_vdata".}
 proc fvdata_cQStyledItemDelegate(self: pointer): pointer {.importc: "vdata_QStyledItemDelegate".}
 
@@ -143,7 +143,7 @@ proc fcQStyledItemDelegate_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQStyledItemDelegate_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStyledItemDelegate_protectedbase_receivers".}
 proc fcQStyledItemDelegate_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStyledItemDelegate_protectedbase_isSignalConnected".}
 proc fcQStyledItemDelegate_new(vtbl: pointer, vdata: csize_t): ptr cQStyledItemDelegate {.importc: "QStyledItemDelegate_new".}
-proc fcQStyledItemDelegate_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStyledItemDelegate {.importc: "QStyledItemDelegate_new2".}
+proc fcQStyledItemDelegate_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStyledItemDelegate {.importc: "QStyledItemDelegate_new_parent".}
 proc fcQStyledItemDelegate_staticMetaObject(): pointer {.importc: "QStyledItemDelegate_staticMetaObject".}
 
 proc metaObject*(self: gen_qstyleditemdelegate_types.QStyledItemDelegate): gen_qobjectdefs_types.QMetaObject =
@@ -156,7 +156,7 @@ proc metacall*(self: gen_qstyleditemdelegate_types.QStyledItemDelegate, param1: 
   fcQStyledItemDelegate_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstyleditemdelegate_types.QStyledItemDelegate, s: cstring): string =
-  let v_ms = fcQStyledItemDelegate_tr(s)
+  let v_ms = fcQStyledItemDelegate_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -192,13 +192,13 @@ proc displayText*(self: gen_qstyleditemdelegate_types.QStyledItemDelegate, value
   vx_ret
 
 proc tr*(_: type gen_qstyleditemdelegate_types.QStyledItemDelegate, s: cstring, c: cstring): string =
-  let v_ms = fcQStyledItemDelegate_tr2(s, c)
+  let v_ms = fcQStyledItemDelegate_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstyleditemdelegate_types.QStyledItemDelegate, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStyledItemDelegate_tr3(s, c, n)
+  let v_ms = fcQStyledItemDelegate_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

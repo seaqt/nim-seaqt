@@ -79,7 +79,7 @@ type cQCommonStyle*{.exportc: "QCommonStyle", incompleteStruct.} = object
 proc fcQCommonStyle_metaObject(self: pointer): pointer {.importc: "QCommonStyle_metaObject".}
 proc fcQCommonStyle_metacast(self: pointer, param1: cstring): pointer {.importc: "QCommonStyle_metacast".}
 proc fcQCommonStyle_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCommonStyle_metacall".}
-proc fcQCommonStyle_tr(s: cstring): struct_seaqt_string {.importc: "QCommonStyle_tr".}
+proc fcQCommonStyle_trS(s: cstring): struct_seaqt_string {.importc: "QCommonStyle_tr_s".}
 proc fcQCommonStyle_drawPrimitive(self: pointer, pe: cint, opt: pointer, p: pointer, w: pointer): void {.importc: "QCommonStyle_drawPrimitive".}
 proc fcQCommonStyle_drawControl(self: pointer, element: cint, opt: pointer, p: pointer, w: pointer): void {.importc: "QCommonStyle_drawControl".}
 proc fcQCommonStyle_subElementRect(self: pointer, r: cint, opt: pointer, widget: pointer): pointer {.importc: "QCommonStyle_subElementRect".}
@@ -93,13 +93,13 @@ proc fcQCommonStyle_standardIcon(self: pointer, standardIcon: cint, opt: pointer
 proc fcQCommonStyle_standardPixmap(self: pointer, sp: cint, opt: pointer, widget: pointer): pointer {.importc: "QCommonStyle_standardPixmap".}
 proc fcQCommonStyle_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.importc: "QCommonStyle_generatedIconPixmap".}
 proc fcQCommonStyle_layoutSpacing(self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.importc: "QCommonStyle_layoutSpacing".}
-proc fcQCommonStyle_polish(self: pointer, param1: pointer): void {.importc: "QCommonStyle_polish".}
-proc fcQCommonStyle_polishWithApp(self: pointer, app: pointer): void {.importc: "QCommonStyle_polishWithApp".}
-proc fcQCommonStyle_polishWithWidget(self: pointer, widget: pointer): void {.importc: "QCommonStyle_polishWithWidget".}
-proc fcQCommonStyle_unpolish(self: pointer, widget: pointer): void {.importc: "QCommonStyle_unpolish".}
-proc fcQCommonStyle_unpolishWithApplication(self: pointer, application: pointer): void {.importc: "QCommonStyle_unpolishWithApplication".}
-proc fcQCommonStyle_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCommonStyle_tr2".}
-proc fcQCommonStyle_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCommonStyle_tr3".}
+proc fcQCommonStyle_polish_QPalette(self: pointer, param1: pointer): void {.importc: "QCommonStyle_polish_QPalette".}
+proc fcQCommonStyle_polish_QApplication(self: pointer, app: pointer): void {.importc: "QCommonStyle_polish_QApplication".}
+proc fcQCommonStyle_polish_QWidget(self: pointer, widget: pointer): void {.importc: "QCommonStyle_polish_QWidget".}
+proc fcQCommonStyle_unpolishWidget(self: pointer, widget: pointer): void {.importc: "QCommonStyle_unpolish_widget".}
+proc fcQCommonStyle_unpolishApplication(self: pointer, application: pointer): void {.importc: "QCommonStyle_unpolish_application".}
+proc fcQCommonStyle_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCommonStyle_tr_s_c".}
+proc fcQCommonStyle_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCommonStyle_tr_s_c_n".}
 proc fcQCommonStyle_vdata(self: pointer): ptr pointer {.importc: "QCommonStyle_vdata".}
 proc fvdata_cQCommonStyle(self: pointer): pointer {.importc: "vdata_QCommonStyle".}
 
@@ -121,11 +121,11 @@ type cQCommonStyleVTable {.pure.} = object
   standardPixmap*: proc(self: pointer, sp: cint, opt: pointer, widget: pointer): pointer {.cdecl, raises: [], gcsafe.}
   generatedIconPixmap*: proc(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl, raises: [], gcsafe.}
   layoutSpacing*: proc(self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.cdecl, raises: [], gcsafe.}
-  polish*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  polishWithApp*: proc(self: pointer, app: pointer): void {.cdecl, raises: [], gcsafe.}
-  polishWithWidget*: proc(self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
-  unpolish*: proc(self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
-  unpolishWithApplication*: proc(self: pointer, application: pointer): void {.cdecl, raises: [], gcsafe.}
+  polish_QPalette*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  polish_QApplication*: proc(self: pointer, app: pointer): void {.cdecl, raises: [], gcsafe.}
+  polish_QWidget*: proc(self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  unpolishWidget*: proc(self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  unpolishApplication*: proc(self: pointer, application: pointer): void {.cdecl, raises: [], gcsafe.}
   itemTextRect*: proc(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_seaqt_string): pointer {.cdecl, raises: [], gcsafe.}
   itemPixmapRect*: proc(self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl, raises: [], gcsafe.}
   drawItemText*: proc(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_seaqt_string, textRole: cint): void {.cdecl, raises: [], gcsafe.}
@@ -154,11 +154,11 @@ proc fcQCommonStyle_virtualbase_standardIcon(self: pointer, standardIcon: cint, 
 proc fcQCommonStyle_virtualbase_standardPixmap(self: pointer, sp: cint, opt: pointer, widget: pointer): pointer {.importc: "QCommonStyle_virtualbase_standardPixmap".}
 proc fcQCommonStyle_virtualbase_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.importc: "QCommonStyle_virtualbase_generatedIconPixmap".}
 proc fcQCommonStyle_virtualbase_layoutSpacing(self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.importc: "QCommonStyle_virtualbase_layoutSpacing".}
-proc fcQCommonStyle_virtualbase_polish(self: pointer, param1: pointer): void {.importc: "QCommonStyle_virtualbase_polish".}
-proc fcQCommonStyle_virtualbase_polishWithApp(self: pointer, app: pointer): void {.importc: "QCommonStyle_virtualbase_polishWithApp".}
-proc fcQCommonStyle_virtualbase_polishWithWidget(self: pointer, widget: pointer): void {.importc: "QCommonStyle_virtualbase_polishWithWidget".}
-proc fcQCommonStyle_virtualbase_unpolish(self: pointer, widget: pointer): void {.importc: "QCommonStyle_virtualbase_unpolish".}
-proc fcQCommonStyle_virtualbase_unpolishWithApplication(self: pointer, application: pointer): void {.importc: "QCommonStyle_virtualbase_unpolishWithApplication".}
+proc fcQCommonStyle_virtualbase_polish_QPalette(self: pointer, param1: pointer): void {.importc: "QCommonStyle_virtualbase_polish_QPalette".}
+proc fcQCommonStyle_virtualbase_polish_QApplication(self: pointer, app: pointer): void {.importc: "QCommonStyle_virtualbase_polish_QApplication".}
+proc fcQCommonStyle_virtualbase_polish_QWidget(self: pointer, widget: pointer): void {.importc: "QCommonStyle_virtualbase_polish_QWidget".}
+proc fcQCommonStyle_virtualbase_unpolishWidget(self: pointer, widget: pointer): void {.importc: "QCommonStyle_virtualbase_unpolish_widget".}
+proc fcQCommonStyle_virtualbase_unpolishApplication(self: pointer, application: pointer): void {.importc: "QCommonStyle_virtualbase_unpolish_application".}
 proc fcQCommonStyle_virtualbase_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_seaqt_string): pointer {.importc: "QCommonStyle_virtualbase_itemTextRect".}
 proc fcQCommonStyle_virtualbase_itemPixmapRect(self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.importc: "QCommonStyle_virtualbase_itemPixmapRect".}
 proc fcQCommonStyle_virtualbase_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_seaqt_string, textRole: cint): void {.importc: "QCommonStyle_virtualbase_drawItemText".}
@@ -188,7 +188,7 @@ proc metacall*(self: gen_qcommonstyle_types.QCommonStyle, param1: cint, param2: 
   fcQCommonStyle_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring): string =
-  let v_ms = fcQCommonStyle_tr(s)
+  let v_ms = fcQCommonStyle_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -233,28 +233,28 @@ proc layoutSpacing*(self: gen_qcommonstyle_types.QCommonStyle, control1: cint, c
   fcQCommonStyle_layoutSpacing(self.h, cint(control1), cint(control2), cint(orientation), option.h, widget.h)
 
 proc polish*(self: gen_qcommonstyle_types.QCommonStyle, param1: gen_qpalette_types.QPalette): void =
-  fcQCommonStyle_polish(self.h, param1.h)
+  fcQCommonStyle_polish_QPalette(self.h, param1.h)
 
 proc polish*(self: gen_qcommonstyle_types.QCommonStyle, app: gen_qapplication_types.QApplication): void =
-  fcQCommonStyle_polishWithApp(self.h, app.h)
+  fcQCommonStyle_polish_QApplication(self.h, app.h)
 
 proc polish*(self: gen_qcommonstyle_types.QCommonStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQCommonStyle_polishWithWidget(self.h, widget.h)
+  fcQCommonStyle_polish_QWidget(self.h, widget.h)
 
 proc unpolish*(self: gen_qcommonstyle_types.QCommonStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQCommonStyle_unpolish(self.h, widget.h)
+  fcQCommonStyle_unpolishWidget(self.h, widget.h)
 
 proc unpolish*(self: gen_qcommonstyle_types.QCommonStyle, application: gen_qapplication_types.QApplication): void =
-  fcQCommonStyle_unpolishWithApplication(self.h, application.h)
+  fcQCommonStyle_unpolishApplication(self.h, application.h)
 
 proc tr*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring, c: cstring): string =
-  let v_ms = fcQCommonStyle_tr2(s, c)
+  let v_ms = fcQCommonStyle_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCommonStyle_tr3(s, c, n)
+  let v_ms = fcQCommonStyle_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -275,11 +275,11 @@ type QCommonStylestandardIconProc* = proc(self: QCommonStyle, standardIcon: cint
 type QCommonStylestandardPixmapProc* = proc(self: QCommonStyle, sp: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
 type QCommonStylegeneratedIconPixmapProc* = proc(self: QCommonStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
 type QCommonStylelayoutSpacingProc* = proc(self: QCommonStyle, control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
-type QCommonStylepolishProc* = proc(self: QCommonStyle, param1: gen_qpalette_types.QPalette): void {.raises: [], gcsafe.}
-type QCommonStylepolishWithAppProc* = proc(self: QCommonStyle, app: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
-type QCommonStylepolishWithWidgetProc* = proc(self: QCommonStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
-type QCommonStyleunpolishProc* = proc(self: QCommonStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
-type QCommonStyleunpolishWithApplicationProc* = proc(self: QCommonStyle, application: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
+type QCommonStylepolish_QPaletteProc* = proc(self: QCommonStyle, param1: gen_qpalette_types.QPalette): void {.raises: [], gcsafe.}
+type QCommonStylepolish_QApplicationProc* = proc(self: QCommonStyle, app: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
+type QCommonStylepolish_QWidgetProc* = proc(self: QCommonStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QCommonStyleunpolishWidgetProc* = proc(self: QCommonStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QCommonStyleunpolishApplicationProc* = proc(self: QCommonStyle, application: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
 type QCommonStyleitemTextRectProc* = proc(self: QCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QCommonStyleitemPixmapRectProc* = proc(self: QCommonStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect {.raises: [], gcsafe.}
 type QCommonStyledrawItemTextProc* = proc(self: QCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void {.raises: [], gcsafe.}
@@ -311,11 +311,11 @@ type QCommonStyleVTable* {.inheritable, pure.} = object
   standardPixmap*: QCommonStylestandardPixmapProc
   generatedIconPixmap*: QCommonStylegeneratedIconPixmapProc
   layoutSpacing*: QCommonStylelayoutSpacingProc
-  polish*: QCommonStylepolishProc
-  polishWithApp*: QCommonStylepolishWithAppProc
-  polishWithWidget*: QCommonStylepolishWithWidgetProc
-  unpolish*: QCommonStyleunpolishProc
-  unpolishWithApplication*: QCommonStyleunpolishWithApplicationProc
+  polish_QPalette*: QCommonStylepolish_QPaletteProc
+  polish_QApplication*: QCommonStylepolish_QApplicationProc
+  polish_QWidget*: QCommonStylepolish_QWidgetProc
+  unpolishWidget*: QCommonStyleunpolishWidgetProc
+  unpolishApplication*: QCommonStyleunpolishApplicationProc
   itemTextRect*: QCommonStyleitemTextRectProc
   itemPixmapRect*: QCommonStyleitemPixmapRectProc
   drawItemText*: QCommonStyledrawItemTextProc
@@ -378,19 +378,19 @@ proc QCommonStylelayoutSpacing*(self: gen_qcommonstyle_types.QCommonStyle, contr
   fcQCommonStyle_virtualbase_layoutSpacing(self.h, cint(control1), cint(control2), cint(orientation), option.h, widget.h)
 
 proc QCommonStylepolish*(self: gen_qcommonstyle_types.QCommonStyle, param1: gen_qpalette_types.QPalette): void =
-  fcQCommonStyle_virtualbase_polish(self.h, param1.h)
+  fcQCommonStyle_virtualbase_polish_QPalette(self.h, param1.h)
 
 proc QCommonStylepolish*(self: gen_qcommonstyle_types.QCommonStyle, app: gen_qapplication_types.QApplication): void =
-  fcQCommonStyle_virtualbase_polishWithApp(self.h, app.h)
+  fcQCommonStyle_virtualbase_polish_QApplication(self.h, app.h)
 
 proc QCommonStylepolish*(self: gen_qcommonstyle_types.QCommonStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQCommonStyle_virtualbase_polishWithWidget(self.h, widget.h)
+  fcQCommonStyle_virtualbase_polish_QWidget(self.h, widget.h)
 
 proc QCommonStyleunpolish*(self: gen_qcommonstyle_types.QCommonStyle, widget: gen_qwidget_types.QWidget): void =
-  fcQCommonStyle_virtualbase_unpolish(self.h, widget.h)
+  fcQCommonStyle_virtualbase_unpolishWidget(self.h, widget.h)
 
 proc QCommonStyleunpolish*(self: gen_qcommonstyle_types.QCommonStyle, application: gen_qapplication_types.QApplication): void =
-  fcQCommonStyle_virtualbase_unpolishWithApplication(self.h, application.h)
+  fcQCommonStyle_virtualbase_unpolishApplication(self.h, application.h)
 
 proc QCommonStyleitemTextRect*(self: gen_qcommonstyle_types.QCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
@@ -595,35 +595,35 @@ proc fcQCommonStyle_vtable_callback_layoutSpacing(self: pointer, control1: cint,
   var virtualReturn = vtbl[].layoutSpacing(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc fcQCommonStyle_vtable_callback_polish(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQCommonStyle_vtable_callback_polish_QPalette(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = gen_qpalette_types.QPalette(h: param1, owned: false)
-  vtbl[].polish(self, slotval1)
+  vtbl[].polish_QPalette(self, slotval1)
 
-proc fcQCommonStyle_vtable_callback_polishWithApp(self: pointer, app: pointer): void {.cdecl.} =
+proc fcQCommonStyle_vtable_callback_polish_QApplication(self: pointer, app: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
-  vtbl[].polishWithApp(self, slotval1)
+  vtbl[].polish_QApplication(self, slotval1)
 
-proc fcQCommonStyle_vtable_callback_polishWithWidget(self: pointer, widget: pointer): void {.cdecl.} =
+proc fcQCommonStyle_vtable_callback_polish_QWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
-  vtbl[].polishWithWidget(self, slotval1)
+  vtbl[].polish_QWidget(self, slotval1)
 
-proc fcQCommonStyle_vtable_callback_unpolish(self: pointer, widget: pointer): void {.cdecl.} =
+proc fcQCommonStyle_vtable_callback_unpolishWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
-  vtbl[].unpolish(self, slotval1)
+  vtbl[].unpolishWidget(self, slotval1)
 
-proc fcQCommonStyle_vtable_callback_unpolishWithApplication(self: pointer, application: pointer): void {.cdecl.} =
+proc fcQCommonStyle_vtable_callback_unpolishApplication(self: pointer, application: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
-  vtbl[].unpolishWithApplication(self, slotval1)
+  vtbl[].unpolishApplication(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
@@ -952,27 +952,27 @@ proc fcQCommonStyle_method_callback_layoutSpacing(self: pointer, control1: cint,
   var virtualReturn = inst.layoutSpacing(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc fcQCommonStyle_method_callback_polish(self: pointer, param1: pointer): void {.cdecl.} =
+proc fcQCommonStyle_method_callback_polish_QPalette(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = gen_qpalette_types.QPalette(h: param1, owned: false)
   inst.polish(slotval1)
 
-proc fcQCommonStyle_method_callback_polishWithApp(self: pointer, app: pointer): void {.cdecl.} =
+proc fcQCommonStyle_method_callback_polish_QApplication(self: pointer, app: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
   inst.polish(slotval1)
 
-proc fcQCommonStyle_method_callback_polishWithWidget(self: pointer, widget: pointer): void {.cdecl.} =
+proc fcQCommonStyle_method_callback_polish_QWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.polish(slotval1)
 
-proc fcQCommonStyle_method_callback_unpolish(self: pointer, widget: pointer): void {.cdecl.} =
+proc fcQCommonStyle_method_callback_unpolishWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.unpolish(slotval1)
 
-proc fcQCommonStyle_method_callback_unpolishWithApplication(self: pointer, application: pointer): void {.cdecl.} =
+proc fcQCommonStyle_method_callback_unpolishApplication(self: pointer, application: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   inst.unpolish(slotval1)
@@ -1124,16 +1124,16 @@ proc create*(T: type gen_qcommonstyle_types.QCommonStyle,
     vtbl[].vtbl.generatedIconPixmap = fcQCommonStyle_vtable_callback_generatedIconPixmap
   if not isNil(vtbl[].layoutSpacing):
     vtbl[].vtbl.layoutSpacing = fcQCommonStyle_vtable_callback_layoutSpacing
-  if not isNil(vtbl[].polish):
-    vtbl[].vtbl.polish = fcQCommonStyle_vtable_callback_polish
-  if not isNil(vtbl[].polishWithApp):
-    vtbl[].vtbl.polishWithApp = fcQCommonStyle_vtable_callback_polishWithApp
-  if not isNil(vtbl[].polishWithWidget):
-    vtbl[].vtbl.polishWithWidget = fcQCommonStyle_vtable_callback_polishWithWidget
-  if not isNil(vtbl[].unpolish):
-    vtbl[].vtbl.unpolish = fcQCommonStyle_vtable_callback_unpolish
-  if not isNil(vtbl[].unpolishWithApplication):
-    vtbl[].vtbl.unpolishWithApplication = fcQCommonStyle_vtable_callback_unpolishWithApplication
+  if not isNil(vtbl[].polish_QPalette):
+    vtbl[].vtbl.polish_QPalette = fcQCommonStyle_vtable_callback_polish_QPalette
+  if not isNil(vtbl[].polish_QApplication):
+    vtbl[].vtbl.polish_QApplication = fcQCommonStyle_vtable_callback_polish_QApplication
+  if not isNil(vtbl[].polish_QWidget):
+    vtbl[].vtbl.polish_QWidget = fcQCommonStyle_vtable_callback_polish_QWidget
+  if not isNil(vtbl[].unpolishWidget):
+    vtbl[].vtbl.unpolishWidget = fcQCommonStyle_vtable_callback_unpolishWidget
+  if not isNil(vtbl[].unpolishApplication):
+    vtbl[].vtbl.unpolishApplication = fcQCommonStyle_vtable_callback_unpolishApplication
   if not isNil(vtbl[].itemTextRect):
     vtbl[].vtbl.itemTextRect = fcQCommonStyle_vtable_callback_itemTextRect
   if not isNil(vtbl[].itemPixmapRect):
@@ -1183,11 +1183,11 @@ const cQCommonStyle_mvtbl = cQCommonStyleVTable(
   standardPixmap: fcQCommonStyle_method_callback_standardPixmap,
   generatedIconPixmap: fcQCommonStyle_method_callback_generatedIconPixmap,
   layoutSpacing: fcQCommonStyle_method_callback_layoutSpacing,
-  polish: fcQCommonStyle_method_callback_polish,
-  polishWithApp: fcQCommonStyle_method_callback_polishWithApp,
-  polishWithWidget: fcQCommonStyle_method_callback_polishWithWidget,
-  unpolish: fcQCommonStyle_method_callback_unpolish,
-  unpolishWithApplication: fcQCommonStyle_method_callback_unpolishWithApplication,
+  polish_QPalette: fcQCommonStyle_method_callback_polish_QPalette,
+  polish_QApplication: fcQCommonStyle_method_callback_polish_QApplication,
+  polish_QWidget: fcQCommonStyle_method_callback_polish_QWidget,
+  unpolishWidget: fcQCommonStyle_method_callback_unpolishWidget,
+  unpolishApplication: fcQCommonStyle_method_callback_unpolishApplication,
   itemTextRect: fcQCommonStyle_method_callback_itemTextRect,
   itemPixmapRect: fcQCommonStyle_method_callback_itemPixmapRect,
   drawItemText: fcQCommonStyle_method_callback_drawItemText,

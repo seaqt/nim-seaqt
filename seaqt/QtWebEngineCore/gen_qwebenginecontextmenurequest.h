@@ -34,7 +34,7 @@ void QWebEngineContextMenuRequest_virtbase(QWebEngineContextMenuRequest* src, QO
 QMetaObject* QWebEngineContextMenuRequest_metaObject(const QWebEngineContextMenuRequest* self);
 void* QWebEngineContextMenuRequest_metacast(QWebEngineContextMenuRequest* self, const char* param1);
 int QWebEngineContextMenuRequest_metacall(QWebEngineContextMenuRequest* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineContextMenuRequest_tr(const char* s);
+struct seaqt_string QWebEngineContextMenuRequest_tr_s(const char* s);
 QPoint* QWebEngineContextMenuRequest_position(const QWebEngineContextMenuRequest* self);
 struct seaqt_string QWebEngineContextMenuRequest_selectedText(const QWebEngineContextMenuRequest* self);
 struct seaqt_string QWebEngineContextMenuRequest_linkText(const QWebEngineContextMenuRequest* self);
@@ -48,8 +48,8 @@ bool QWebEngineContextMenuRequest_isAccepted(const QWebEngineContextMenuRequest*
 void QWebEngineContextMenuRequest_setAccepted(QWebEngineContextMenuRequest* self, bool accepted);
 int QWebEngineContextMenuRequest_mediaFlags(const QWebEngineContextMenuRequest* self);
 int QWebEngineContextMenuRequest_editFlags(const QWebEngineContextMenuRequest* self);
-struct seaqt_string QWebEngineContextMenuRequest_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineContextMenuRequest_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineContextMenuRequest_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineContextMenuRequest_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebEngineContextMenuRequest_staticMetaObject();
 void QWebEngineContextMenuRequest_delete(QWebEngineContextMenuRequest* self);

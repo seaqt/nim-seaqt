@@ -66,7 +66,7 @@ VirtualQQmlIncubator* QQmlIncubator_new(const QQmlIncubator_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQQmlIncubator(vtbl) : nullptr;
 }
 
-VirtualQQmlIncubator* QQmlIncubator_new2(const QQmlIncubator_VTable* vtbl, size_t vdata, int param1) {
+VirtualQQmlIncubator* QQmlIncubator_new_QQmlIncubator_IncubationMode(const QQmlIncubator_VTable* vtbl, size_t vdata, int param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlIncubator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlIncubator(vtbl, static_cast<QQmlIncubator::IncubationMode>(param1)) : nullptr;
 }

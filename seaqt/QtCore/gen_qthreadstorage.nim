@@ -44,7 +44,7 @@ proc fcQThreadStorageData_set(self: pointer, p: pointer): pointer {.importc: "QT
 proc fcQThreadStorageData_finish(param1: pointer): void {.importc: "QThreadStorageData_finish".}
 proc fcQThreadStorageData_id(self: pointer): cint {.importc: "QThreadStorageData_id".}
 proc fcQThreadStorageData_setId(self: pointer, id: cint): void {.importc: "QThreadStorageData_setId".}
-proc fcQThreadStorageData_new(param1: pointer): ptr cQThreadStorageData {.importc: "QThreadStorageData_new".}
+proc fcQThreadStorageData_new(fromVal: pointer): ptr cQThreadStorageData {.importc: "QThreadStorageData_new_from".}
 
 proc get*(self: gen_qthreadstorage_types.QThreadStorageData): pointer =
   fcQThreadStorageData_get(self.h)
@@ -62,6 +62,6 @@ proc setId*(self: gen_qthreadstorage_types.QThreadStorageData, id: cint): void =
   fcQThreadStorageData_setId(self.h, id)
 
 proc create*(T: type gen_qthreadstorage_types.QThreadStorageData,
-    param1: gen_qthreadstorage_types.QThreadStorageData): gen_qthreadstorage_types.QThreadStorageData =
-  let tmp = gen_qthreadstorage_types.QThreadStorageData(h: fcQThreadStorageData_new(param1.h), owned: true)
+    fromVal: gen_qthreadstorage_types.QThreadStorageData): gen_qthreadstorage_types.QThreadStorageData =
+  let tmp = gen_qthreadstorage_types.QThreadStorageData(h: fcQThreadStorageData_new(fromVal.h), owned: true)
   tmp

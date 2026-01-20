@@ -23,10 +23,10 @@ typedef struct QWebEngineUrlScheme QWebEngineUrlScheme;
 #endif
 
 QWebEngineUrlScheme* QWebEngineUrlScheme_new();
-QWebEngineUrlScheme* QWebEngineUrlScheme_new2(struct seaqt_string name);
-QWebEngineUrlScheme* QWebEngineUrlScheme_new3(QWebEngineUrlScheme* that);
+QWebEngineUrlScheme* QWebEngineUrlScheme_new_name(struct seaqt_string name);
+QWebEngineUrlScheme* QWebEngineUrlScheme_new_from(QWebEngineUrlScheme* from);
 
-void QWebEngineUrlScheme_operatorAssign(QWebEngineUrlScheme* self, QWebEngineUrlScheme* that);
+void QWebEngineUrlScheme_operatorAssign(QWebEngineUrlScheme* self, QWebEngineUrlScheme* from);
 bool QWebEngineUrlScheme_operatorEqual(const QWebEngineUrlScheme* self, QWebEngineUrlScheme* that);
 bool QWebEngineUrlScheme_operatorNotEqual(const QWebEngineUrlScheme* self, QWebEngineUrlScheme* that);
 struct seaqt_string QWebEngineUrlScheme_name(const QWebEngineUrlScheme* self);

@@ -71,7 +71,7 @@ proc fcQLayoutItem_spacerItem(self: pointer): pointer {.importc: "QLayoutItem_sp
 proc fcQLayoutItem_alignment(self: pointer): cint {.importc: "QLayoutItem_alignment".}
 proc fcQLayoutItem_setAlignment(self: pointer, a: cint): void {.importc: "QLayoutItem_setAlignment".}
 proc fcQLayoutItem_controlTypes(self: pointer): cint {.importc: "QLayoutItem_controlTypes".}
-proc fcQLayoutItem_operatorAssign(self: pointer, param1: pointer): void {.importc: "QLayoutItem_operatorAssign".}
+proc fcQLayoutItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QLayoutItem_operatorAssign".}
 proc fcQLayoutItem_vdata(self: pointer): ptr pointer {.importc: "QLayoutItem_vdata".}
 proc fvdata_cQLayoutItem(self: pointer): pointer {.importc: "vdata_QLayoutItem".}
 
@@ -101,9 +101,9 @@ proc fcQLayoutItem_virtualbase_layout(self: pointer): pointer {.importc: "QLayou
 proc fcQLayoutItem_virtualbase_spacerItem(self: pointer): pointer {.importc: "QLayoutItem_virtualbase_spacerItem".}
 proc fcQLayoutItem_virtualbase_controlTypes(self: pointer): cint {.importc: "QLayoutItem_virtualbase_controlTypes".}
 proc fcQLayoutItem_new(vtbl: pointer, vdata: csize_t): ptr cQLayoutItem {.importc: "QLayoutItem_new".}
-proc fcQLayoutItem_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQLayoutItem {.importc: "QLayoutItem_new2".}
-proc fcQLayoutItem_new3(vtbl: pointer, vdata: csize_t, alignment: cint): ptr cQLayoutItem {.importc: "QLayoutItem_new3".}
-proc fcQSpacerItem_changeSize(self: pointer, w: cint, h: cint): void {.importc: "QSpacerItem_changeSize".}
+proc fcQLayoutItem_new2(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQLayoutItem {.importc: "QLayoutItem_new_from".}
+proc fcQLayoutItem_new3(vtbl: pointer, vdata: csize_t, alignment: cint): ptr cQLayoutItem {.importc: "QLayoutItem_new_alignment".}
+proc fcQSpacerItem_changeSizeWH(self: pointer, w: cint, h: cint): void {.importc: "QSpacerItem_changeSize_w_h".}
 proc fcQSpacerItem_sizeHint(self: pointer): pointer {.importc: "QSpacerItem_sizeHint".}
 proc fcQSpacerItem_minimumSize(self: pointer): pointer {.importc: "QSpacerItem_minimumSize".}
 proc fcQSpacerItem_maximumSize(self: pointer): pointer {.importc: "QSpacerItem_maximumSize".}
@@ -113,9 +113,9 @@ proc fcQSpacerItem_setGeometry(self: pointer, geometry: pointer): void {.importc
 proc fcQSpacerItem_geometry(self: pointer): pointer {.importc: "QSpacerItem_geometry".}
 proc fcQSpacerItem_spacerItem(self: pointer): pointer {.importc: "QSpacerItem_spacerItem".}
 proc fcQSpacerItem_sizePolicy(self: pointer): pointer {.importc: "QSpacerItem_sizePolicy".}
-proc fcQSpacerItem_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSpacerItem_operatorAssign".}
-proc fcQSpacerItem_changeSize2(self: pointer, w: cint, h: cint, hData: cint): void {.importc: "QSpacerItem_changeSize2".}
-proc fcQSpacerItem_changeSize3(self: pointer, w: cint, h: cint, hData: cint, vData: cint): void {.importc: "QSpacerItem_changeSize3".}
+proc fcQSpacerItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSpacerItem_operatorAssign".}
+proc fcQSpacerItem_changeSizeWHHData(self: pointer, w: cint, h: cint, hData: cint): void {.importc: "QSpacerItem_changeSize_w_h_hData".}
+proc fcQSpacerItem_changeSizeWHHDataVData(self: pointer, w: cint, h: cint, hData: cint, vData: cint): void {.importc: "QSpacerItem_changeSize_w_h_hData_vData".}
 proc fcQSpacerItem_vdata(self: pointer): ptr pointer {.importc: "QSpacerItem_vdata".}
 proc fvdata_cQSpacerItem(self: pointer): pointer {.importc: "vdata_QSpacerItem".}
 
@@ -151,10 +151,10 @@ proc fcQSpacerItem_virtualbase_invalidate(self: pointer): void {.importc: "QSpac
 proc fcQSpacerItem_virtualbase_widget(self: pointer): pointer {.importc: "QSpacerItem_virtualbase_widget".}
 proc fcQSpacerItem_virtualbase_layout(self: pointer): pointer {.importc: "QSpacerItem_virtualbase_layout".}
 proc fcQSpacerItem_virtualbase_controlTypes(self: pointer): cint {.importc: "QSpacerItem_virtualbase_controlTypes".}
-proc fcQSpacerItem_new(vtbl: pointer, vdata: csize_t, w: cint, h: cint): ptr cQSpacerItem {.importc: "QSpacerItem_new".}
-proc fcQSpacerItem_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQSpacerItem {.importc: "QSpacerItem_new2".}
-proc fcQSpacerItem_new3(vtbl: pointer, vdata: csize_t, w: cint, h: cint, hData: cint): ptr cQSpacerItem {.importc: "QSpacerItem_new3".}
-proc fcQSpacerItem_new4(vtbl: pointer, vdata: csize_t, w: cint, h: cint, hData: cint, vData: cint): ptr cQSpacerItem {.importc: "QSpacerItem_new4".}
+proc fcQSpacerItem_new(vtbl: pointer, vdata: csize_t, w: cint, h: cint): ptr cQSpacerItem {.importc: "QSpacerItem_new_w_h".}
+proc fcQSpacerItem_new2(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQSpacerItem {.importc: "QSpacerItem_new_from".}
+proc fcQSpacerItem_new3(vtbl: pointer, vdata: csize_t, w: cint, h: cint, hData: cint): ptr cQSpacerItem {.importc: "QSpacerItem_new_w_h_hData".}
+proc fcQSpacerItem_new4(vtbl: pointer, vdata: csize_t, w: cint, h: cint, hData: cint, vData: cint): ptr cQSpacerItem {.importc: "QSpacerItem_new_w_h_hData_vData".}
 proc fcQWidgetItem_sizeHint(self: pointer): pointer {.importc: "QWidgetItem_sizeHint".}
 proc fcQWidgetItem_minimumSize(self: pointer): pointer {.importc: "QWidgetItem_minimumSize".}
 proc fcQWidgetItem_maximumSize(self: pointer): pointer {.importc: "QWidgetItem_maximumSize".}
@@ -295,8 +295,8 @@ proc setAlignment*(self: gen_qlayoutitem_types.QLayoutItem, a: cint): void =
 proc controlTypes*(self: gen_qlayoutitem_types.QLayoutItem): cint =
   cint(fcQLayoutItem_controlTypes(self.h))
 
-proc operatorAssign*(self: gen_qlayoutitem_types.QLayoutItem, param1: gen_qlayoutitem_types.QLayoutItem): void =
-  fcQLayoutItem_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qlayoutitem_types.QLayoutItem, fromVal: gen_qlayoutitem_types.QLayoutItem): void =
+  fcQLayoutItem_operatorAssign(self.h, fromVal.h)
 
 type QLayoutItemsizeHintProc* = proc(self: QLayoutItem): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QLayoutItemminimumSizeProc* = proc(self: QLayoutItem): gen_qsize_types.QSize {.raises: [], gcsafe.}
@@ -642,7 +642,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
   fcQLayoutItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
-    param1: gen_qlayoutitem_types.QLayoutItem,
+    fromVal: gen_qlayoutitem_types.QLayoutItem,
     vtbl: ref QLayoutItemVTable = nil): gen_qlayoutitem_types.QLayoutItem =
   let vtbl = if vtbl == nil: new QLayoutItemVTable else: vtbl
   GC_ref(vtbl)
@@ -679,7 +679,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
     vtbl[].vtbl.spacerItem = fcQLayoutItem_vtable_callback_spacerItem
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQLayoutItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QLayoutItem(h: fcQLayoutItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qlayoutitem_types.QLayoutItem(h: fcQLayoutItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQLayoutItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
@@ -753,10 +753,10 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
   inst[].owned = true
 
 proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
-    param1: gen_qlayoutitem_types.QLayoutItem,
+    fromVal: gen_qlayoutitem_types.QLayoutItem,
     inst: VirtualQLayoutItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQLayoutItem_new2(addr(cQLayoutItem_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQLayoutItem_new2(addr(cQLayoutItem_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQLayoutItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
@@ -769,7 +769,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
   inst[].owned = true
 
 proc changeSize*(self: gen_qlayoutitem_types.QSpacerItem, w: cint, h: cint): void =
-  fcQSpacerItem_changeSize(self.h, w, h)
+  fcQSpacerItem_changeSizeWH(self.h, w, h)
 
 proc sizeHint*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSpacerItem_sizeHint(self.h), owned: true)
@@ -798,14 +798,14 @@ proc spacerItem*(self: gen_qlayoutitem_types.QSpacerItem): gen_qlayoutitem_types
 proc sizePolicy*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsizepolicy_types.QSizePolicy =
   gen_qsizepolicy_types.QSizePolicy(h: fcQSpacerItem_sizePolicy(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qlayoutitem_types.QSpacerItem, param1: gen_qlayoutitem_types.QSpacerItem): void =
-  fcQSpacerItem_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qlayoutitem_types.QSpacerItem, fromVal: gen_qlayoutitem_types.QSpacerItem): void =
+  fcQSpacerItem_operatorAssign(self.h, fromVal.h)
 
 proc changeSize*(self: gen_qlayoutitem_types.QSpacerItem, w: cint, h: cint, hData: cint): void =
-  fcQSpacerItem_changeSize2(self.h, w, h, cint(hData))
+  fcQSpacerItem_changeSizeWHHData(self.h, w, h, cint(hData))
 
 proc changeSize*(self: gen_qlayoutitem_types.QSpacerItem, w: cint, h: cint, hData: cint, vData: cint): void =
-  fcQSpacerItem_changeSize3(self.h, w, h, cint(hData), cint(vData))
+  fcQSpacerItem_changeSizeWHHDataVData(self.h, w, h, cint(hData), cint(vData))
 
 type QSpacerItemsizeHintProc* = proc(self: QSpacerItem): gen_qsize_types.QSize {.raises: [], gcsafe.}
 type QSpacerItemminimumSizeProc* = proc(self: QSpacerItem): gen_qsize_types.QSize {.raises: [], gcsafe.}
@@ -1173,7 +1173,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
   fcQSpacerItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
-    param1: gen_qlayoutitem_types.QSpacerItem,
+    fromVal: gen_qlayoutitem_types.QSpacerItem,
     vtbl: ref QSpacerItemVTable = nil): gen_qlayoutitem_types.QSpacerItem =
   let vtbl = if vtbl == nil: new QSpacerItemVTable else: vtbl
   GC_ref(vtbl)
@@ -1210,7 +1210,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
     vtbl[].vtbl.layout = fcQSpacerItem_vtable_callback_layout
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQSpacerItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQSpacerItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
@@ -1326,10 +1326,10 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
   inst[].owned = true
 
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
-    param1: gen_qlayoutitem_types.QSpacerItem,
+    fromVal: gen_qlayoutitem_types.QSpacerItem,
     inst: VirtualQSpacerItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQSpacerItem_new2(addr(cQSpacerItem_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQSpacerItem_new2(addr(cQSpacerItem_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQSpacerItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 

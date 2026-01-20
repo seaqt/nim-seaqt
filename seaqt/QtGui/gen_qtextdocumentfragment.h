@@ -25,22 +25,22 @@ typedef struct QTextDocumentFragment QTextDocumentFragment;
 #endif
 
 QTextDocumentFragment* QTextDocumentFragment_new();
-QTextDocumentFragment* QTextDocumentFragment_new2(QTextDocument* document);
-QTextDocumentFragment* QTextDocumentFragment_new3(QTextCursor* range);
-QTextDocumentFragment* QTextDocumentFragment_new4(QTextDocumentFragment* rhs);
+QTextDocumentFragment* QTextDocumentFragment_new_document(QTextDocument* document);
+QTextDocumentFragment* QTextDocumentFragment_new_range(QTextCursor* range);
+QTextDocumentFragment* QTextDocumentFragment_new_from(QTextDocumentFragment* from);
 
-void QTextDocumentFragment_operatorAssign(QTextDocumentFragment* self, QTextDocumentFragment* rhs);
+void QTextDocumentFragment_operatorAssign(QTextDocumentFragment* self, QTextDocumentFragment* from);
 bool QTextDocumentFragment_isEmpty(const QTextDocumentFragment* self);
 struct seaqt_string QTextDocumentFragment_toPlainText(const QTextDocumentFragment* self);
 struct seaqt_string QTextDocumentFragment_toRawText(const QTextDocumentFragment* self);
 struct seaqt_string QTextDocumentFragment_toHtml(const QTextDocumentFragment* self);
 struct seaqt_string QTextDocumentFragment_toMarkdown(const QTextDocumentFragment* self);
 QTextDocumentFragment* QTextDocumentFragment_fromPlainText(struct seaqt_string plainText);
-QTextDocumentFragment* QTextDocumentFragment_fromHtml(struct seaqt_string html);
-QTextDocumentFragment* QTextDocumentFragment_fromMarkdown(struct seaqt_string markdown);
-struct seaqt_string QTextDocumentFragment_toMarkdownWithFeatures(const QTextDocumentFragment* self, int features);
-QTextDocumentFragment* QTextDocumentFragment_fromHtml2(struct seaqt_string html, QTextDocument* resourceProvider);
-QTextDocumentFragment* QTextDocumentFragment_fromMarkdown2(struct seaqt_string markdown, int features);
+QTextDocumentFragment* QTextDocumentFragment_fromHtml_html(struct seaqt_string html);
+QTextDocumentFragment* QTextDocumentFragment_fromMarkdown_markdown(struct seaqt_string markdown);
+struct seaqt_string QTextDocumentFragment_toMarkdown_features(const QTextDocumentFragment* self, int features);
+QTextDocumentFragment* QTextDocumentFragment_fromHtml_html_resourceProvider(struct seaqt_string html, QTextDocument* resourceProvider);
+QTextDocumentFragment* QTextDocumentFragment_fromMarkdown_markdown_features(struct seaqt_string markdown, int features);
 
 void QTextDocumentFragment_delete(QTextDocumentFragment* self);
 

@@ -221,9 +221,9 @@ proc fcQPrinter_virtualbase_redirected(self: pointer, offset: pointer): pointer 
 proc fcQPrinter_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QPrinter_virtualbase_sharedPainter".}
 proc fcQPrinter_protectedbase_setEngines(self: pointer, printEngine: pointer, paintEngine: pointer): void {.importc: "QPrinter_protectedbase_setEngines".}
 proc fcQPrinter_new(vtbl: pointer, vdata: csize_t): ptr cQPrinter {.importc: "QPrinter_new".}
-proc fcQPrinter_new2(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrinter {.importc: "QPrinter_new2".}
-proc fcQPrinter_new3(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQPrinter {.importc: "QPrinter_new3".}
-proc fcQPrinter_new4(vtbl: pointer, vdata: csize_t, printer: pointer, mode: cint): ptr cQPrinter {.importc: "QPrinter_new4".}
+proc fcQPrinter_new2(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrinter {.importc: "QPrinter_new_printer".}
+proc fcQPrinter_new3(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQPrinter {.importc: "QPrinter_new_mode".}
+proc fcQPrinter_new4(vtbl: pointer, vdata: csize_t, printer: pointer, mode: cint): ptr cQPrinter {.importc: "QPrinter_new_printer_mode".}
 
 proc devType*(self: gen_qprinter_types.QPrinter): cint =
   fcQPrinter_devType(self.h)

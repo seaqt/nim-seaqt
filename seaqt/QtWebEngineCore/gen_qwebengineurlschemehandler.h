@@ -54,16 +54,16 @@ void* QWebEngineUrlSchemeHandler_vdata(VirtualQWebEngineUrlSchemeHandler* self);
 VirtualQWebEngineUrlSchemeHandler* vdata_QWebEngineUrlSchemeHandler(void* vdata);
 
 VirtualQWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new(const QWebEngineUrlSchemeHandler_VTable* vtbl, size_t vdata);
-VirtualQWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new2(const QWebEngineUrlSchemeHandler_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new_parent(const QWebEngineUrlSchemeHandler_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QWebEngineUrlSchemeHandler_virtbase(QWebEngineUrlSchemeHandler* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineUrlSchemeHandler_metaObject(const QWebEngineUrlSchemeHandler* self);
 void* QWebEngineUrlSchemeHandler_metacast(QWebEngineUrlSchemeHandler* self, const char* param1);
 int QWebEngineUrlSchemeHandler_metacall(QWebEngineUrlSchemeHandler* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineUrlSchemeHandler_tr(const char* s);
+struct seaqt_string QWebEngineUrlSchemeHandler_tr_s(const char* s);
 void QWebEngineUrlSchemeHandler_requestStarted(QWebEngineUrlSchemeHandler* self, QWebEngineUrlRequestJob* param1);
-struct seaqt_string QWebEngineUrlSchemeHandler_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineUrlSchemeHandler_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineUrlSchemeHandler_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineUrlSchemeHandler_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWebEngineUrlSchemeHandler_virtualbase_metaObject(const VirtualQWebEngineUrlSchemeHandler* self);
 void* QWebEngineUrlSchemeHandler_virtualbase_metacast(VirtualQWebEngineUrlSchemeHandler* self, const char* param1);

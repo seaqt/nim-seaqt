@@ -82,7 +82,7 @@ type cQMdiSubWindow*{.exportc: "QMdiSubWindow", incompleteStruct.} = object
 proc fcQMdiSubWindow_metaObject(self: pointer): pointer {.importc: "QMdiSubWindow_metaObject".}
 proc fcQMdiSubWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QMdiSubWindow_metacast".}
 proc fcQMdiSubWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMdiSubWindow_metacall".}
-proc fcQMdiSubWindow_tr(s: cstring): struct_seaqt_string {.importc: "QMdiSubWindow_tr".}
+proc fcQMdiSubWindow_trS(s: cstring): struct_seaqt_string {.importc: "QMdiSubWindow_tr_s".}
 proc fcQMdiSubWindow_sizeHint(self: pointer): pointer {.importc: "QMdiSubWindow_sizeHint".}
 proc fcQMdiSubWindow_minimumSizeHint(self: pointer): pointer {.importc: "QMdiSubWindow_minimumSizeHint".}
 proc fcQMdiSubWindow_setWidget(self: pointer, widget: pointer): void {.importc: "QMdiSubWindow_setWidget".}
@@ -90,7 +90,7 @@ proc fcQMdiSubWindow_widget(self: pointer): pointer {.importc: "QMdiSubWindow_wi
 proc fcQMdiSubWindow_maximizedButtonsWidget(self: pointer): pointer {.importc: "QMdiSubWindow_maximizedButtonsWidget".}
 proc fcQMdiSubWindow_maximizedSystemMenuIconWidget(self: pointer): pointer {.importc: "QMdiSubWindow_maximizedSystemMenuIconWidget".}
 proc fcQMdiSubWindow_isShaded(self: pointer): bool {.importc: "QMdiSubWindow_isShaded".}
-proc fcQMdiSubWindow_setOption(self: pointer, option: cint): void {.importc: "QMdiSubWindow_setOption".}
+proc fcQMdiSubWindow_setOptionOption(self: pointer, option: cint): void {.importc: "QMdiSubWindow_setOption_option".}
 proc fcQMdiSubWindow_testOption(self: pointer, param1: cint): bool {.importc: "QMdiSubWindow_testOption".}
 proc fcQMdiSubWindow_setKeyboardSingleStep(self: pointer, step: cint): void {.importc: "QMdiSubWindow_setKeyboardSingleStep".}
 proc fcQMdiSubWindow_keyboardSingleStep(self: pointer): cint {.importc: "QMdiSubWindow_keyboardSingleStep".}
@@ -105,9 +105,9 @@ proc fcQMdiSubWindow_aboutToActivate(self: pointer): void {.importc: "QMdiSubWin
 proc fcQMdiSubWindow_connect_aboutToActivate(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMdiSubWindow_connect_aboutToActivate".}
 proc fcQMdiSubWindow_showSystemMenu(self: pointer): void {.importc: "QMdiSubWindow_showSystemMenu".}
 proc fcQMdiSubWindow_showShaded(self: pointer): void {.importc: "QMdiSubWindow_showShaded".}
-proc fcQMdiSubWindow_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMdiSubWindow_tr2".}
-proc fcQMdiSubWindow_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMdiSubWindow_tr3".}
-proc fcQMdiSubWindow_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QMdiSubWindow_setOption2".}
+proc fcQMdiSubWindow_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMdiSubWindow_tr_s_c".}
+proc fcQMdiSubWindow_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMdiSubWindow_tr_s_c_n".}
+proc fcQMdiSubWindow_setOptionOptionOn(self: pointer, option: cint, on: bool): void {.importc: "QMdiSubWindow_setOption_option_on".}
 proc fcQMdiSubWindow_vdata(self: pointer): ptr pointer {.importc: "QMdiSubWindow_vdata".}
 proc fvdata_cQMdiSubWindow(self: pointer): pointer {.importc: "vdata_QMdiSubWindow".}
 
@@ -222,9 +222,9 @@ proc fcQMdiSubWindow_protectedbase_sender(self: pointer): pointer {.importc: "QM
 proc fcQMdiSubWindow_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMdiSubWindow_protectedbase_senderSignalIndex".}
 proc fcQMdiSubWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMdiSubWindow_protectedbase_receivers".}
 proc fcQMdiSubWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMdiSubWindow_protectedbase_isSignalConnected".}
-proc fcQMdiSubWindow_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new".}
-proc fcQMdiSubWindow_new2(vtbl: pointer, vdata: csize_t): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new2".}
-proc fcQMdiSubWindow_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new3".}
+proc fcQMdiSubWindow_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new_parent".}
+proc fcQMdiSubWindow_new2(vtbl: pointer, vdata: csize_t): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new".}
+proc fcQMdiSubWindow_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new_parent_flags".}
 proc fcQMdiSubWindow_staticMetaObject(): pointer {.importc: "QMdiSubWindow_staticMetaObject".}
 
 proc metaObject*(self: gen_qmdisubwindow_types.QMdiSubWindow): gen_qobjectdefs_types.QMetaObject =
@@ -237,7 +237,7 @@ proc metacall*(self: gen_qmdisubwindow_types.QMdiSubWindow, param1: cint, param2
   fcQMdiSubWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmdisubwindow_types.QMdiSubWindow, s: cstring): string =
-  let v_ms = fcQMdiSubWindow_tr(s)
+  let v_ms = fcQMdiSubWindow_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -264,7 +264,7 @@ proc isShaded*(self: gen_qmdisubwindow_types.QMdiSubWindow): bool =
   fcQMdiSubWindow_isShaded(self.h)
 
 proc setOption*(self: gen_qmdisubwindow_types.QMdiSubWindow, option: cint): void =
-  fcQMdiSubWindow_setOption(self.h, cint(option))
+  fcQMdiSubWindow_setOptionOption(self.h, cint(option))
 
 proc testOption*(self: gen_qmdisubwindow_types.QMdiSubWindow, param1: cint): bool =
   fcQMdiSubWindow_testOption(self.h, cint(param1))
@@ -337,19 +337,19 @@ proc showShaded*(self: gen_qmdisubwindow_types.QMdiSubWindow): void =
   fcQMdiSubWindow_showShaded(self.h)
 
 proc tr*(_: type gen_qmdisubwindow_types.QMdiSubWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQMdiSubWindow_tr2(s, c)
+  let v_ms = fcQMdiSubWindow_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmdisubwindow_types.QMdiSubWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMdiSubWindow_tr3(s, c, n)
+  let v_ms = fcQMdiSubWindow_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setOption*(self: gen_qmdisubwindow_types.QMdiSubWindow, option: cint, on: bool): void =
-  fcQMdiSubWindow_setOption2(self.h, cint(option), on)
+  fcQMdiSubWindow_setOptionOptionOn(self.h, cint(option), on)
 
 type QMdiSubWindowmetaObjectProc* = proc(self: QMdiSubWindow): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMdiSubWindowmetacastProc* = proc(self: QMdiSubWindow, param1: cstring): pointer {.raises: [], gcsafe.}

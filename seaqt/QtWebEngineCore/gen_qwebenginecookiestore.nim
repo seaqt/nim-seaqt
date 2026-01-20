@@ -55,9 +55,9 @@ type cQWebEngineCookieStoreFilterRequest*{.exportc: "QWebEngineCookieStore__Filt
 proc fcQWebEngineCookieStore_metaObject(self: pointer): pointer {.importc: "QWebEngineCookieStore_metaObject".}
 proc fcQWebEngineCookieStore_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineCookieStore_metacast".}
 proc fcQWebEngineCookieStore_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineCookieStore_metacall".}
-proc fcQWebEngineCookieStore_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineCookieStore_tr".}
-proc fcQWebEngineCookieStore_setCookie(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_setCookie".}
-proc fcQWebEngineCookieStore_deleteCookie(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_deleteCookie".}
+proc fcQWebEngineCookieStore_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineCookieStore_tr_s".}
+proc fcQWebEngineCookieStore_setCookieCookie(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_setCookie_cookie".}
+proc fcQWebEngineCookieStore_deleteCookieCookie(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_deleteCookie_cookie".}
 proc fcQWebEngineCookieStore_deleteSessionCookies(self: pointer): void {.importc: "QWebEngineCookieStore_deleteSessionCookies".}
 proc fcQWebEngineCookieStore_deleteAllCookies(self: pointer): void {.importc: "QWebEngineCookieStore_deleteAllCookies".}
 proc fcQWebEngineCookieStore_loadAllCookies(self: pointer): void {.importc: "QWebEngineCookieStore_loadAllCookies".}
@@ -65,10 +65,10 @@ proc fcQWebEngineCookieStore_cookieAdded(self: pointer, cookie: pointer): void {
 proc fcQWebEngineCookieStore_connect_cookieAdded(self: pointer, slot: int, callback: proc (slot: int, cookie: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineCookieStore_connect_cookieAdded".}
 proc fcQWebEngineCookieStore_cookieRemoved(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_cookieRemoved".}
 proc fcQWebEngineCookieStore_connect_cookieRemoved(self: pointer, slot: int, callback: proc (slot: int, cookie: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineCookieStore_connect_cookieRemoved".}
-proc fcQWebEngineCookieStore_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineCookieStore_tr2".}
-proc fcQWebEngineCookieStore_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineCookieStore_tr3".}
-proc fcQWebEngineCookieStore_setCookie2(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_setCookie2".}
-proc fcQWebEngineCookieStore_deleteCookie2(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_deleteCookie2".}
+proc fcQWebEngineCookieStore_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineCookieStore_tr_s_c".}
+proc fcQWebEngineCookieStore_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineCookieStore_tr_s_c_n".}
+proc fcQWebEngineCookieStore_setCookieCookieOrigin(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_setCookie_cookie_origin".}
+proc fcQWebEngineCookieStore_deleteCookieCookieOrigin(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_deleteCookie_cookie_origin".}
 proc fcQWebEngineCookieStore_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineCookieStore_protectedbase_sender".}
 proc fcQWebEngineCookieStore_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineCookieStore_protectedbase_senderSignalIndex".}
 proc fcQWebEngineCookieStore_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineCookieStore_protectedbase_receivers".}
@@ -80,12 +80,12 @@ proc fcQWebEngineCookieStoreFilterRequest_origin(self: pointer): pointer {.impor
 proc fcQWebEngineCookieStoreFilterRequest_setOrigin(self: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore__FilterRequest_setOrigin".}
 proc fcQWebEngineCookieStoreFilterRequest_thirdParty(self: pointer): bool {.importc: "QWebEngineCookieStore__FilterRequest_thirdParty".}
 proc fcQWebEngineCookieStoreFilterRequest_setThirdParty(self: pointer, thirdParty: bool): void {.importc: "QWebEngineCookieStore__FilterRequest_setThirdParty".}
-proc fcQWebEngineCookieStoreFilterRequest_ReservedFlag(self: pointer): bool {.importc: "QWebEngineCookieStore__FilterRequest_ReservedFlag".}
-proc fcQWebEngineCookieStoreFilterRequest_setReservedFlag(self: pointer, x_reservedFlag: bool): void {.importc: "QWebEngineCookieStore__FilterRequest_setReservedFlag".}
-proc fcQWebEngineCookieStoreFilterRequest_ReservedType(self: pointer): cushort {.importc: "QWebEngineCookieStore__FilterRequest_ReservedType".}
-proc fcQWebEngineCookieStoreFilterRequest_setReservedType(self: pointer, x_reservedType: cushort): void {.importc: "QWebEngineCookieStore__FilterRequest_setReservedType".}
-proc fcQWebEngineCookieStoreFilterRequest_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebEngineCookieStore__FilterRequest_operatorAssign".}
-proc fcQWebEngineCookieStoreFilterRequest_new(param1: pointer): ptr cQWebEngineCookieStoreFilterRequest {.importc: "QWebEngineCookieStore__FilterRequest_new".}
+proc fcQWebEngineCookieStoreFilterRequest_ReservedFlag(self: pointer): bool {.importc: "QWebEngineCookieStore__FilterRequest__reservedFlag".}
+proc fcQWebEngineCookieStoreFilterRequest_setReservedFlag(self: pointer, x_reservedFlag: bool): void {.importc: "QWebEngineCookieStore__FilterRequest_set_reservedFlag".}
+proc fcQWebEngineCookieStoreFilterRequest_ReservedType(self: pointer): cushort {.importc: "QWebEngineCookieStore__FilterRequest__reservedType".}
+proc fcQWebEngineCookieStoreFilterRequest_setReservedType(self: pointer, x_reservedType: cushort): void {.importc: "QWebEngineCookieStore__FilterRequest_set_reservedType".}
+proc fcQWebEngineCookieStoreFilterRequest_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineCookieStore__FilterRequest_operatorAssign".}
+proc fcQWebEngineCookieStoreFilterRequest_new(fromVal: pointer): ptr cQWebEngineCookieStoreFilterRequest {.importc: "QWebEngineCookieStore__FilterRequest_new".}
 
 proc metaObject*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineCookieStore_metaObject(self.h), owned: false)
@@ -97,16 +97,16 @@ proc metacall*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, para
   fcQWebEngineCookieStore_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieStore, s: cstring): string =
-  let v_ms = fcQWebEngineCookieStore_tr(s)
+  let v_ms = fcQWebEngineCookieStore_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setCookie*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, cookie: gen_qnetworkcookie_types.QNetworkCookie): void =
-  fcQWebEngineCookieStore_setCookie(self.h, cookie.h)
+  fcQWebEngineCookieStore_setCookieCookie(self.h, cookie.h)
 
 proc deleteCookie*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, cookie: gen_qnetworkcookie_types.QNetworkCookie): void =
-  fcQWebEngineCookieStore_deleteCookie(self.h, cookie.h)
+  fcQWebEngineCookieStore_deleteCookieCookie(self.h, cookie.h)
 
 proc deleteSessionCookies*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore): void =
   fcQWebEngineCookieStore_deleteSessionCookies(self.h)
@@ -158,22 +158,22 @@ proc onCookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStor
   fcQWebEngineCookieStore_connect_cookieRemoved(self.h, cast[int](addr tmp[]), fcQWebEngineCookieStore_slot_callback_cookieRemoved, fcQWebEngineCookieStore_slot_callback_cookieRemoved_release)
 
 proc tr*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieStore, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineCookieStore_tr2(s, c)
+  let v_ms = fcQWebEngineCookieStore_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieStore, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineCookieStore_tr3(s, c, n)
+  let v_ms = fcQWebEngineCookieStore_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setCookie*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, cookie: gen_qnetworkcookie_types.QNetworkCookie, origin: gen_qurl_types.QUrl): void =
-  fcQWebEngineCookieStore_setCookie2(self.h, cookie.h, origin.h)
+  fcQWebEngineCookieStore_setCookieCookieOrigin(self.h, cookie.h, origin.h)
 
 proc deleteCookie*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, cookie: gen_qnetworkcookie_types.QNetworkCookie, origin: gen_qurl_types.QUrl): void =
-  fcQWebEngineCookieStore_deleteCookie2(self.h, cookie.h, origin.h)
+  fcQWebEngineCookieStore_deleteCookieCookieOrigin(self.h, cookie.h, origin.h)
 
 proc sender*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineCookieStore_protectedbase_sender(self.h), owned: false)
@@ -219,10 +219,10 @@ proc ReservedType*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFi
 proc setReservedType*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest, x_reservedType: cushort): void =
   fcQWebEngineCookieStoreFilterRequest_setReservedType(self.h, x_reservedType)
 
-proc operatorAssign*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest, param1: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest): void =
-  fcQWebEngineCookieStoreFilterRequest_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest, fromVal: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest): void =
+  fcQWebEngineCookieStoreFilterRequest_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest,
-    param1: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest): gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest =
-  let tmp = gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest(h: fcQWebEngineCookieStoreFilterRequest_new(param1.h), owned: true)
+    fromVal: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest): gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest =
+  let tmp = gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest(h: fcQWebEngineCookieStoreFilterRequest_new(fromVal.h), owned: true)
   tmp

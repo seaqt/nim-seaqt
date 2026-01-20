@@ -170,20 +170,20 @@ typedef struct QDateTimeEdit_VTable{
 void* QDateTimeEdit_vdata(VirtualQDateTimeEdit* self);
 VirtualQDateTimeEdit* vdata_QDateTimeEdit(void* vdata);
 
-VirtualQDateTimeEdit* QDateTimeEdit_new(const QDateTimeEdit_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDateTimeEdit* QDateTimeEdit_new2(const QDateTimeEdit_VTable* vtbl, size_t vdata);
-VirtualQDateTimeEdit* QDateTimeEdit_new3(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDateTime* dt);
-VirtualQDateTimeEdit* QDateTimeEdit_new4(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDate* d);
-VirtualQDateTimeEdit* QDateTimeEdit_new5(const QDateTimeEdit_VTable* vtbl, size_t vdata, QTime* t);
-VirtualQDateTimeEdit* QDateTimeEdit_new6(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDateTime* dt, QWidget* parent);
-VirtualQDateTimeEdit* QDateTimeEdit_new7(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDate* d, QWidget* parent);
-VirtualQDateTimeEdit* QDateTimeEdit_new8(const QDateTimeEdit_VTable* vtbl, size_t vdata, QTime* t, QWidget* parent);
+VirtualQDateTimeEdit* QDateTimeEdit_new_parent(const QDateTimeEdit_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDateTimeEdit* QDateTimeEdit_new(const QDateTimeEdit_VTable* vtbl, size_t vdata);
+VirtualQDateTimeEdit* QDateTimeEdit_new_dt(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDateTime* dt);
+VirtualQDateTimeEdit* QDateTimeEdit_new_d(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDate* d);
+VirtualQDateTimeEdit* QDateTimeEdit_new_t(const QDateTimeEdit_VTable* vtbl, size_t vdata, QTime* t);
+VirtualQDateTimeEdit* QDateTimeEdit_new_dt_parent(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDateTime* dt, QWidget* parent);
+VirtualQDateTimeEdit* QDateTimeEdit_new_d_parent(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDate* d, QWidget* parent);
+VirtualQDateTimeEdit* QDateTimeEdit_new_t_parent(const QDateTimeEdit_VTable* vtbl, size_t vdata, QTime* t, QWidget* parent);
 
 void QDateTimeEdit_virtbase(QDateTimeEdit* src, QAbstractSpinBox** outptr_QAbstractSpinBox);
 QMetaObject* QDateTimeEdit_metaObject(const QDateTimeEdit* self);
 void* QDateTimeEdit_metacast(QDateTimeEdit* self, const char* param1);
 int QDateTimeEdit_metacall(QDateTimeEdit* self, int param1, int param2, void** param3);
-struct seaqt_string QDateTimeEdit_tr(const char* s);
+struct seaqt_string QDateTimeEdit_tr_s(const char* s);
 QDateTime* QDateTimeEdit_dateTime(const QDateTimeEdit* self);
 QDate* QDateTimeEdit_date(const QDateTimeEdit* self);
 QTime* QDateTimeEdit_time(const QDateTimeEdit* self);
@@ -252,8 +252,8 @@ int QDateTimeEdit_stepEnabled(const QDateTimeEdit* self);
 void QDateTimeEdit_mousePressEvent(QDateTimeEdit* self, QMouseEvent* event);
 void QDateTimeEdit_paintEvent(QDateTimeEdit* self, QPaintEvent* event);
 void QDateTimeEdit_initStyleOption(const QDateTimeEdit* self, QStyleOptionSpinBox* option);
-struct seaqt_string QDateTimeEdit_tr2(const char* s, const char* c);
-struct seaqt_string QDateTimeEdit_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDateTimeEdit_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDateTimeEdit_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDateTimeEdit_virtualbase_metaObject(const VirtualQDateTimeEdit* self);
 void* QDateTimeEdit_virtualbase_metacast(VirtualQDateTimeEdit* self, const char* param1);
@@ -395,20 +395,20 @@ typedef struct QTimeEdit_VTable{
 void* QTimeEdit_vdata(VirtualQTimeEdit* self);
 VirtualQTimeEdit* vdata_QTimeEdit(void* vdata);
 
-VirtualQTimeEdit* QTimeEdit_new(const QTimeEdit_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQTimeEdit* QTimeEdit_new2(const QTimeEdit_VTable* vtbl, size_t vdata);
-VirtualQTimeEdit* QTimeEdit_new3(const QTimeEdit_VTable* vtbl, size_t vdata, QTime* time);
-VirtualQTimeEdit* QTimeEdit_new4(const QTimeEdit_VTable* vtbl, size_t vdata, QTime* time, QWidget* parent);
+VirtualQTimeEdit* QTimeEdit_new_parent(const QTimeEdit_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQTimeEdit* QTimeEdit_new(const QTimeEdit_VTable* vtbl, size_t vdata);
+VirtualQTimeEdit* QTimeEdit_new_time(const QTimeEdit_VTable* vtbl, size_t vdata, QTime* time);
+VirtualQTimeEdit* QTimeEdit_new_time_parent(const QTimeEdit_VTable* vtbl, size_t vdata, QTime* time, QWidget* parent);
 
 void QTimeEdit_virtbase(QTimeEdit* src, QDateTimeEdit** outptr_QDateTimeEdit);
 QMetaObject* QTimeEdit_metaObject(const QTimeEdit* self);
 void* QTimeEdit_metacast(QTimeEdit* self, const char* param1);
 int QTimeEdit_metacall(QTimeEdit* self, int param1, int param2, void** param3);
-struct seaqt_string QTimeEdit_tr(const char* s);
+struct seaqt_string QTimeEdit_tr_s(const char* s);
 void QTimeEdit_userTimeChanged(QTimeEdit* self, QTime* time);
 void QTimeEdit_connect_userTimeChanged(QTimeEdit* self, intptr_t slot, void (*callback)(intptr_t, QTime*), void (*release)(intptr_t));
-struct seaqt_string QTimeEdit_tr2(const char* s, const char* c);
-struct seaqt_string QTimeEdit_tr3(const char* s, const char* c, int n);
+struct seaqt_string QTimeEdit_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTimeEdit_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTimeEdit_virtualbase_metaObject(const VirtualQTimeEdit* self);
 void* QTimeEdit_virtualbase_metacast(VirtualQTimeEdit* self, const char* param1);
@@ -550,20 +550,20 @@ typedef struct QDateEdit_VTable{
 void* QDateEdit_vdata(VirtualQDateEdit* self);
 VirtualQDateEdit* vdata_QDateEdit(void* vdata);
 
-VirtualQDateEdit* QDateEdit_new(const QDateEdit_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDateEdit* QDateEdit_new2(const QDateEdit_VTable* vtbl, size_t vdata);
-VirtualQDateEdit* QDateEdit_new3(const QDateEdit_VTable* vtbl, size_t vdata, QDate* date);
-VirtualQDateEdit* QDateEdit_new4(const QDateEdit_VTable* vtbl, size_t vdata, QDate* date, QWidget* parent);
+VirtualQDateEdit* QDateEdit_new_parent(const QDateEdit_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDateEdit* QDateEdit_new(const QDateEdit_VTable* vtbl, size_t vdata);
+VirtualQDateEdit* QDateEdit_new_date(const QDateEdit_VTable* vtbl, size_t vdata, QDate* date);
+VirtualQDateEdit* QDateEdit_new_date_parent(const QDateEdit_VTable* vtbl, size_t vdata, QDate* date, QWidget* parent);
 
 void QDateEdit_virtbase(QDateEdit* src, QDateTimeEdit** outptr_QDateTimeEdit);
 QMetaObject* QDateEdit_metaObject(const QDateEdit* self);
 void* QDateEdit_metacast(QDateEdit* self, const char* param1);
 int QDateEdit_metacall(QDateEdit* self, int param1, int param2, void** param3);
-struct seaqt_string QDateEdit_tr(const char* s);
+struct seaqt_string QDateEdit_tr_s(const char* s);
 void QDateEdit_userDateChanged(QDateEdit* self, QDate* date);
 void QDateEdit_connect_userDateChanged(QDateEdit* self, intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t));
-struct seaqt_string QDateEdit_tr2(const char* s, const char* c);
-struct seaqt_string QDateEdit_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDateEdit_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDateEdit_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDateEdit_virtualbase_metaObject(const VirtualQDateEdit* self);
 void* QDateEdit_virtualbase_metacast(VirtualQDateEdit* self, const char* param1);

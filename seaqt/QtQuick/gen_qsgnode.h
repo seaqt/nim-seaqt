@@ -74,11 +74,11 @@ void QSGNode_markDirty(QSGNode* self, int bits);
 int QSGNode_dirtyState(const QSGNode* self);
 bool QSGNode_isSubtreeBlocked(const QSGNode* self);
 int QSGNode_flags(const QSGNode* self);
-void QSGNode_setFlag(QSGNode* self, int param1);
-void QSGNode_setFlags(QSGNode* self, int param1);
+void QSGNode_setFlag_QSGNode_Flag(QSGNode* self, int param1);
+void QSGNode_setFlags_QSGNode_Flags(QSGNode* self, int param1);
 void QSGNode_preprocess(QSGNode* self);
-void QSGNode_setFlag2(QSGNode* self, int param1, bool param2);
-void QSGNode_setFlags2(QSGNode* self, int param1, bool param2);
+void QSGNode_setFlag_QSGNode_Flag_bool(QSGNode* self, int param1, bool param2);
+void QSGNode_setFlags_QSGNode_Flags_bool(QSGNode* self, int param1, bool param2);
 
 bool QSGNode_virtualbase_isSubtreeBlocked(const VirtualQSGNode* self);
 void QSGNode_virtualbase_preprocess(VirtualQSGNode* self);
@@ -87,8 +87,8 @@ void QSGNode_delete(QSGNode* self);
 
 void QSGBasicGeometryNode_virtbase(QSGBasicGeometryNode* src, QSGNode** outptr_QSGNode);
 void QSGBasicGeometryNode_setGeometry(QSGBasicGeometryNode* self, QSGGeometry* geometry);
-QSGGeometry* QSGBasicGeometryNode_geometry(const QSGBasicGeometryNode* self);
-QSGGeometry* QSGBasicGeometryNode_geometry2(QSGBasicGeometryNode* self);
+QSGGeometry* QSGBasicGeometryNode_geometry_const(const QSGBasicGeometryNode* self);
+QSGGeometry* QSGBasicGeometryNode_geometry(QSGBasicGeometryNode* self);
 QMatrix4x4* QSGBasicGeometryNode_matrix(const QSGBasicGeometryNode* self);
 QSGClipNode* QSGBasicGeometryNode_clipList(const QSGBasicGeometryNode* self);
 void QSGBasicGeometryNode_setRendererMatrix(QSGBasicGeometryNode* self, QMatrix4x4* m);
@@ -222,7 +222,7 @@ void QSGNodeVisitor_enterOpacityNode(QSGNodeVisitor* self, QSGOpacityNode* param
 void QSGNodeVisitor_leaveOpacityNode(QSGNodeVisitor* self, QSGOpacityNode* param1);
 void QSGNodeVisitor_visitNode(QSGNodeVisitor* self, QSGNode* n);
 void QSGNodeVisitor_visitChildren(QSGNodeVisitor* self, QSGNode* n);
-void QSGNodeVisitor_operatorAssign(QSGNodeVisitor* self, QSGNodeVisitor* param1);
+void QSGNodeVisitor_operatorAssign(QSGNodeVisitor* self, QSGNodeVisitor* from);
 
 void QSGNodeVisitor_delete(QSGNodeVisitor* self);
 

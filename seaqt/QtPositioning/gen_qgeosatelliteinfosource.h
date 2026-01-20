@@ -68,11 +68,11 @@ void QGeoSatelliteInfoSource_virtbase(QGeoSatelliteInfoSource* src, QObject** ou
 QMetaObject* QGeoSatelliteInfoSource_metaObject(const QGeoSatelliteInfoSource* self);
 void* QGeoSatelliteInfoSource_metacast(QGeoSatelliteInfoSource* self, const char* param1);
 int QGeoSatelliteInfoSource_metacall(QGeoSatelliteInfoSource* self, int param1, int param2, void** param3);
-struct seaqt_string QGeoSatelliteInfoSource_tr(const char* s);
-QGeoSatelliteInfoSource* QGeoSatelliteInfoSource_createDefaultSource(QObject* parent);
-QGeoSatelliteInfoSource* QGeoSatelliteInfoSource_createSource(struct seaqt_string sourceName, QObject* parent);
-QGeoSatelliteInfoSource* QGeoSatelliteInfoSource_createDefaultSource2(struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent);
-QGeoSatelliteInfoSource* QGeoSatelliteInfoSource_createSource2(struct seaqt_string sourceName, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent);
+struct seaqt_string QGeoSatelliteInfoSource_tr_s(const char* s);
+QGeoSatelliteInfoSource* QGeoSatelliteInfoSource_createDefaultSource_QObject(QObject* parent);
+QGeoSatelliteInfoSource* QGeoSatelliteInfoSource_createSource_QString_QObject(struct seaqt_string sourceName, QObject* parent);
+QGeoSatelliteInfoSource* QGeoSatelliteInfoSource_createDefaultSource_QVariantMap_QObject(struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent);
+QGeoSatelliteInfoSource* QGeoSatelliteInfoSource_createSource_QString_QVariantMap_QObject(struct seaqt_string sourceName, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters, QObject* parent);
 struct seaqt_array /* of struct seaqt_string */  QGeoSatelliteInfoSource_availableSources();
 struct seaqt_string QGeoSatelliteInfoSource_sourceName(const QGeoSatelliteInfoSource* self);
 void QGeoSatelliteInfoSource_setUpdateInterval(QGeoSatelliteInfoSource* self, int msec);
@@ -90,8 +90,8 @@ void QGeoSatelliteInfoSource_satellitesInUseUpdated(QGeoSatelliteInfoSource* sel
 void QGeoSatelliteInfoSource_connect_satellitesInUseUpdated(QGeoSatelliteInfoSource* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QGeoSatelliteInfo* */ ), void (*release)(intptr_t));
 void QGeoSatelliteInfoSource_errorOccurred(QGeoSatelliteInfoSource* self, int param1);
 void QGeoSatelliteInfoSource_connect_errorOccurred(QGeoSatelliteInfoSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QGeoSatelliteInfoSource_tr2(const char* s, const char* c);
-struct seaqt_string QGeoSatelliteInfoSource_tr3(const char* s, const char* c, int n);
+struct seaqt_string QGeoSatelliteInfoSource_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGeoSatelliteInfoSource_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGeoSatelliteInfoSource_virtualbase_metaObject(const VirtualQGeoSatelliteInfoSource* self);
 void* QGeoSatelliteInfoSource_virtualbase_metacast(VirtualQGeoSatelliteInfoSource* self, const char* param1);

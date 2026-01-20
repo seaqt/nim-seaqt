@@ -336,12 +336,12 @@ public:
 	friend bool QNmeaPositionInfoSource_protectedbase_isSignalConnected(const VirtualQNmeaPositionInfoSource* self, QMetaMethod* signal);
 };
 
-VirtualQNmeaPositionInfoSource* QNmeaPositionInfoSource_new(const QNmeaPositionInfoSource_VTable* vtbl, size_t vdata, int updateMode) {
+VirtualQNmeaPositionInfoSource* QNmeaPositionInfoSource_new_updateMode(const QNmeaPositionInfoSource_VTable* vtbl, size_t vdata, int updateMode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNmeaPositionInfoSource>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQNmeaPositionInfoSource(vtbl, static_cast<QNmeaPositionInfoSource::UpdateMode>(updateMode)) : nullptr;
 }
 
-VirtualQNmeaPositionInfoSource* QNmeaPositionInfoSource_new2(const QNmeaPositionInfoSource_VTable* vtbl, size_t vdata, int updateMode, QObject* parent) {
+VirtualQNmeaPositionInfoSource* QNmeaPositionInfoSource_new_updateMode_parent(const QNmeaPositionInfoSource_VTable* vtbl, size_t vdata, int updateMode, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNmeaPositionInfoSource>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQNmeaPositionInfoSource(vtbl, static_cast<QNmeaPositionInfoSource::UpdateMode>(updateMode), parent) : nullptr;
 }
@@ -362,7 +362,7 @@ int QNmeaPositionInfoSource_metacall(QNmeaPositionInfoSource* self, int param1, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QNmeaPositionInfoSource_tr(const char* s) {
+struct seaqt_string QNmeaPositionInfoSource_tr_s(const char* s) {
 	QString _ret = QNmeaPositionInfoSource::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -428,7 +428,7 @@ void QNmeaPositionInfoSource_requestUpdate(QNmeaPositionInfoSource* self, int ti
 	self->requestUpdate(static_cast<int>(timeout));
 }
 
-struct seaqt_string QNmeaPositionInfoSource_tr2(const char* s, const char* c) {
+struct seaqt_string QNmeaPositionInfoSource_tr_s_c(const char* s, const char* c) {
 	QString _ret = QNmeaPositionInfoSource::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -439,7 +439,7 @@ struct seaqt_string QNmeaPositionInfoSource_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QNmeaPositionInfoSource_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QNmeaPositionInfoSource_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QNmeaPositionInfoSource::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

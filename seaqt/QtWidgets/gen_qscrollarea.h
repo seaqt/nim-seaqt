@@ -155,14 +155,14 @@ typedef struct QScrollArea_VTable{
 void* QScrollArea_vdata(VirtualQScrollArea* self);
 VirtualQScrollArea* vdata_QScrollArea(void* vdata);
 
-VirtualQScrollArea* QScrollArea_new(const QScrollArea_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQScrollArea* QScrollArea_new2(const QScrollArea_VTable* vtbl, size_t vdata);
+VirtualQScrollArea* QScrollArea_new_parent(const QScrollArea_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQScrollArea* QScrollArea_new(const QScrollArea_VTable* vtbl, size_t vdata);
 
 void QScrollArea_virtbase(QScrollArea* src, QAbstractScrollArea** outptr_QAbstractScrollArea);
 QMetaObject* QScrollArea_metaObject(const QScrollArea* self);
 void* QScrollArea_metacast(QScrollArea* self, const char* param1);
 int QScrollArea_metacall(QScrollArea* self, int param1, int param2, void** param3);
-struct seaqt_string QScrollArea_tr(const char* s);
+struct seaqt_string QScrollArea_tr_s(const char* s);
 QWidget* QScrollArea_widget(const QScrollArea* self);
 void QScrollArea_setWidget(QScrollArea* self, QWidget* widget);
 QWidget* QScrollArea_takeWidget(QScrollArea* self);
@@ -172,19 +172,19 @@ QSize* QScrollArea_sizeHint(const QScrollArea* self);
 bool QScrollArea_focusNextPrevChild(QScrollArea* self, bool next);
 int QScrollArea_alignment(const QScrollArea* self);
 void QScrollArea_setAlignment(QScrollArea* self, int alignment);
-void QScrollArea_ensureVisible(QScrollArea* self, int x, int y);
-void QScrollArea_ensureWidgetVisible(QScrollArea* self, QWidget* childWidget);
+void QScrollArea_ensureVisible_x_y(QScrollArea* self, int x, int y);
+void QScrollArea_ensureWidgetVisible_childWidget(QScrollArea* self, QWidget* childWidget);
 bool QScrollArea_event(QScrollArea* self, QEvent* param1);
 bool QScrollArea_eventFilter(QScrollArea* self, QObject* param1, QEvent* param2);
 void QScrollArea_resizeEvent(QScrollArea* self, QResizeEvent* param1);
 void QScrollArea_scrollContentsBy(QScrollArea* self, int dx, int dy);
 QSize* QScrollArea_viewportSizeHint(const QScrollArea* self);
-struct seaqt_string QScrollArea_tr2(const char* s, const char* c);
-struct seaqt_string QScrollArea_tr3(const char* s, const char* c, int n);
-void QScrollArea_ensureVisible2(QScrollArea* self, int x, int y, int xmargin);
-void QScrollArea_ensureVisible3(QScrollArea* self, int x, int y, int xmargin, int ymargin);
-void QScrollArea_ensureWidgetVisible2(QScrollArea* self, QWidget* childWidget, int xmargin);
-void QScrollArea_ensureWidgetVisible3(QScrollArea* self, QWidget* childWidget, int xmargin, int ymargin);
+struct seaqt_string QScrollArea_tr_s_c(const char* s, const char* c);
+struct seaqt_string QScrollArea_tr_s_c_n(const char* s, const char* c, int n);
+void QScrollArea_ensureVisible_x_y_xmargin(QScrollArea* self, int x, int y, int xmargin);
+void QScrollArea_ensureVisible_x_y_xmargin_ymargin(QScrollArea* self, int x, int y, int xmargin, int ymargin);
+void QScrollArea_ensureWidgetVisible_childWidget_xmargin(QScrollArea* self, QWidget* childWidget, int xmargin);
+void QScrollArea_ensureWidgetVisible_childWidget_xmargin_ymargin(QScrollArea* self, QWidget* childWidget, int xmargin, int ymargin);
 
 QMetaObject* QScrollArea_virtualbase_metaObject(const VirtualQScrollArea* self);
 void* QScrollArea_virtualbase_metacast(VirtualQScrollArea* self, const char* param1);
@@ -242,7 +242,7 @@ void QScrollArea_virtualbase_customEvent(VirtualQScrollArea* self, QEvent* event
 void QScrollArea_virtualbase_connectNotify(VirtualQScrollArea* self, QMetaMethod* signal);
 void QScrollArea_virtualbase_disconnectNotify(VirtualQScrollArea* self, QMetaMethod* signal);
 
-void QScrollArea_protectedbase_setViewportMargins(VirtualQScrollArea* self, int left, int top, int right, int bottom);
+void QScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQScrollArea* self, int left, int top, int right, int bottom);
 QMargins* QScrollArea_protectedbase_viewportMargins(const VirtualQScrollArea* self);
 void QScrollArea_protectedbase_drawFrame(VirtualQScrollArea* self, QPainter* param1);
 void QScrollArea_protectedbase_updateMicroFocus(VirtualQScrollArea* self);

@@ -61,11 +61,11 @@ void QSGSimpleTextureNode_virtbase(QSGSimpleTextureNode* src, QSGGeometryNode** 
 	*outptr_QSGGeometryNode = static_cast<QSGGeometryNode*>(src);
 }
 
-void QSGSimpleTextureNode_setRect(QSGSimpleTextureNode* self, QRectF* rect) {
+void QSGSimpleTextureNode_setRect_rect(QSGSimpleTextureNode* self, QRectF* rect) {
 	self->setRect(*rect);
 }
 
-void QSGSimpleTextureNode_setRect2(QSGSimpleTextureNode* self, double x, double y, double w, double h) {
+void QSGSimpleTextureNode_setRect_x_y_w_h(QSGSimpleTextureNode* self, double x, double y, double w, double h) {
 	self->setRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -73,11 +73,11 @@ QRectF* QSGSimpleTextureNode_rect(const QSGSimpleTextureNode* self) {
 	return new QRectF(self->rect());
 }
 
-void QSGSimpleTextureNode_setSourceRect(QSGSimpleTextureNode* self, QRectF* r) {
+void QSGSimpleTextureNode_setSourceRect_r(QSGSimpleTextureNode* self, QRectF* r) {
 	self->setSourceRect(*r);
 }
 
-void QSGSimpleTextureNode_setSourceRect2(QSGSimpleTextureNode* self, double x, double y, double w, double h) {
+void QSGSimpleTextureNode_setSourceRect_x_y_w_h(QSGSimpleTextureNode* self, double x, double y, double w, double h) {
 	self->setSourceRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 

@@ -17,19 +17,19 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QOperatingSystemVersionBase* QOperatingSystemVersionBase_new(int osType, int vmajor) {
+QOperatingSystemVersionBase* QOperatingSystemVersionBase_new_osType_vmajor(int osType, int vmajor) {
 	return new (std::nothrow) QOperatingSystemVersionBase(static_cast<QOperatingSystemVersionBase::OSType>(osType), static_cast<int>(vmajor));
 }
 
-QOperatingSystemVersionBase* QOperatingSystemVersionBase_new2(QOperatingSystemVersionBase* param1) {
-	return new (std::nothrow) QOperatingSystemVersionBase(*param1);
+QOperatingSystemVersionBase* QOperatingSystemVersionBase_new_from(QOperatingSystemVersionBase* from) {
+	return new (std::nothrow) QOperatingSystemVersionBase(*from);
 }
 
-QOperatingSystemVersionBase* QOperatingSystemVersionBase_new3(int osType, int vmajor, int vminor) {
+QOperatingSystemVersionBase* QOperatingSystemVersionBase_new_osType_vmajor_vminor(int osType, int vmajor, int vminor) {
 	return new (std::nothrow) QOperatingSystemVersionBase(static_cast<QOperatingSystemVersionBase::OSType>(osType), static_cast<int>(vmajor), static_cast<int>(vminor));
 }
 
-QOperatingSystemVersionBase* QOperatingSystemVersionBase_new4(int osType, int vmajor, int vminor, int vmicro) {
+QOperatingSystemVersionBase* QOperatingSystemVersionBase_new_osType_vmajor_vminor_vmicro(int osType, int vmajor, int vminor, int vmicro) {
 	return new (std::nothrow) QOperatingSystemVersionBase(static_cast<QOperatingSystemVersionBase::OSType>(osType), static_cast<int>(vmajor), static_cast<int>(vminor), static_cast<int>(vmicro));
 }
 
@@ -37,7 +37,7 @@ QOperatingSystemVersionBase* QOperatingSystemVersionBase_current() {
 	return new QOperatingSystemVersionBase(QOperatingSystemVersionBase::current());
 }
 
-struct seaqt_string QOperatingSystemVersionBase_name(QOperatingSystemVersionBase* osversion) {
+struct seaqt_string QOperatingSystemVersionBase_name_osversion(QOperatingSystemVersionBase* osversion) {
 	QString _ret = QOperatingSystemVersionBase::name(*osversion);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -78,7 +78,7 @@ int QOperatingSystemVersionBase_type(const QOperatingSystemVersionBase* self) {
 	return static_cast<int>(_ret);
 }
 
-struct seaqt_string QOperatingSystemVersionBase_name2(const QOperatingSystemVersionBase* self) {
+struct seaqt_string QOperatingSystemVersionBase_name(const QOperatingSystemVersionBase* self) {
 	QString _ret = self->name();
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -93,23 +93,23 @@ void QOperatingSystemVersionBase_delete(QOperatingSystemVersionBase* self) {
 	delete self;
 }
 
-QOperatingSystemVersion* QOperatingSystemVersion_new(QOperatingSystemVersionBase* osversion) {
+QOperatingSystemVersion* QOperatingSystemVersion_new_osversion(QOperatingSystemVersionBase* osversion) {
 	return new (std::nothrow) QOperatingSystemVersion(*osversion);
 }
 
-QOperatingSystemVersion* QOperatingSystemVersion_new2(int osType, int vmajor) {
+QOperatingSystemVersion* QOperatingSystemVersion_new_osType_vmajor(int osType, int vmajor) {
 	return new (std::nothrow) QOperatingSystemVersion(static_cast<QOperatingSystemVersion::OSType>(osType), static_cast<int>(vmajor));
 }
 
-QOperatingSystemVersion* QOperatingSystemVersion_new3(QOperatingSystemVersion* param1) {
-	return new (std::nothrow) QOperatingSystemVersion(*param1);
+QOperatingSystemVersion* QOperatingSystemVersion_new_from(QOperatingSystemVersion* from) {
+	return new (std::nothrow) QOperatingSystemVersion(*from);
 }
 
-QOperatingSystemVersion* QOperatingSystemVersion_new4(int osType, int vmajor, int vminor) {
+QOperatingSystemVersion* QOperatingSystemVersion_new_osType_vmajor_vminor(int osType, int vmajor, int vminor) {
 	return new (std::nothrow) QOperatingSystemVersion(static_cast<QOperatingSystemVersion::OSType>(osType), static_cast<int>(vmajor), static_cast<int>(vminor));
 }
 
-QOperatingSystemVersion* QOperatingSystemVersion_new5(int osType, int vmajor, int vminor, int vmicro) {
+QOperatingSystemVersion* QOperatingSystemVersion_new_osType_vmajor_vminor_vmicro(int osType, int vmajor, int vminor, int vmicro) {
 	return new (std::nothrow) QOperatingSystemVersion(static_cast<QOperatingSystemVersion::OSType>(osType), static_cast<int>(vmajor), static_cast<int>(vminor), static_cast<int>(vmicro));
 }
 

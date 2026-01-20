@@ -22,16 +22,16 @@ QMediaFormat* QMediaFormat_new() {
 	return new (std::nothrow) QMediaFormat();
 }
 
-QMediaFormat* QMediaFormat_new2(QMediaFormat* other) {
-	return new (std::nothrow) QMediaFormat(*other);
+QMediaFormat* QMediaFormat_new_from(QMediaFormat* from) {
+	return new (std::nothrow) QMediaFormat(*from);
 }
 
-QMediaFormat* QMediaFormat_new3(int format) {
+QMediaFormat* QMediaFormat_new_format(int format) {
 	return new (std::nothrow) QMediaFormat(static_cast<QMediaFormat::FileFormat>(format));
 }
 
-void QMediaFormat_operatorAssign(QMediaFormat* self, QMediaFormat* other) {
-	self->operator=(*other);
+void QMediaFormat_operatorAssign(QMediaFormat* self, QMediaFormat* from) {
+	self->operator=(*from);
 }
 
 void QMediaFormat_swap(QMediaFormat* self, QMediaFormat* other) {

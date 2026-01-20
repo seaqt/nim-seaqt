@@ -25,10 +25,10 @@ typedef struct QMetaObject QMetaObject;
 #endif
 
 QAudioDevice* QAudioDevice_new();
-QAudioDevice* QAudioDevice_new2(QAudioDevice* other);
+QAudioDevice* QAudioDevice_new_from(QAudioDevice* from);
 
 void QAudioDevice_swap(QAudioDevice* self, QAudioDevice* other);
-void QAudioDevice_operatorAssign(QAudioDevice* self, QAudioDevice* other);
+void QAudioDevice_operatorAssign(QAudioDevice* self, QAudioDevice* from);
 bool QAudioDevice_operatorEqual(const QAudioDevice* self, QAudioDevice* other);
 bool QAudioDevice_operatorNotEqual(const QAudioDevice* self, QAudioDevice* other);
 bool QAudioDevice_isNull(const QAudioDevice* self);

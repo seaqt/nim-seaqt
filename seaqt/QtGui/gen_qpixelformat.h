@@ -21,10 +21,10 @@ typedef struct QPixelFormat QPixelFormat;
 #endif
 
 QPixelFormat* QPixelFormat_new();
-QPixelFormat* QPixelFormat_new2(int colorModel, unsigned char firstSize, unsigned char secondSize, unsigned char thirdSize, unsigned char fourthSize, unsigned char fifthSize, unsigned char alphaSize, int alphaUsage, int alphaPosition, int premultiplied, int typeInterpretation);
-QPixelFormat* QPixelFormat_new3(QPixelFormat* param1);
-QPixelFormat* QPixelFormat_new4(int colorModel, unsigned char firstSize, unsigned char secondSize, unsigned char thirdSize, unsigned char fourthSize, unsigned char fifthSize, unsigned char alphaSize, int alphaUsage, int alphaPosition, int premultiplied, int typeInterpretation, int byteOrder);
-QPixelFormat* QPixelFormat_new5(int colorModel, unsigned char firstSize, unsigned char secondSize, unsigned char thirdSize, unsigned char fourthSize, unsigned char fifthSize, unsigned char alphaSize, int alphaUsage, int alphaPosition, int premultiplied, int typeInterpretation, int byteOrder, unsigned char subEnum);
+QPixelFormat* QPixelFormat_new_colorModel_firstSize_secondSize_thirdSize_fourthSize_fifthSize_alphaSize_alphaUsage_alphaPosition_premultiplied_typeInterpretation(int colorModel, unsigned char firstSize, unsigned char secondSize, unsigned char thirdSize, unsigned char fourthSize, unsigned char fifthSize, unsigned char alphaSize, int alphaUsage, int alphaPosition, int premultiplied, int typeInterpretation);
+QPixelFormat* QPixelFormat_new_from(QPixelFormat* from);
+QPixelFormat* QPixelFormat_new_colorModel_firstSize_secondSize_thirdSize_fourthSize_fifthSize_alphaSize_alphaUsage_alphaPosition_premultiplied_typeInterpretation_byteOrder(int colorModel, unsigned char firstSize, unsigned char secondSize, unsigned char thirdSize, unsigned char fourthSize, unsigned char fifthSize, unsigned char alphaSize, int alphaUsage, int alphaPosition, int premultiplied, int typeInterpretation, int byteOrder);
+QPixelFormat* QPixelFormat_new_colorModel_firstSize_secondSize_thirdSize_fourthSize_fifthSize_alphaSize_alphaUsage_alphaPosition_premultiplied_typeInterpretation_byteOrder_subEnum(int colorModel, unsigned char firstSize, unsigned char secondSize, unsigned char thirdSize, unsigned char fourthSize, unsigned char fifthSize, unsigned char alphaSize, int alphaUsage, int alphaPosition, int premultiplied, int typeInterpretation, int byteOrder, unsigned char subEnum);
 
 int QPixelFormat_colorModel(const QPixelFormat* self);
 unsigned char QPixelFormat_channelCount(const QPixelFormat* self);

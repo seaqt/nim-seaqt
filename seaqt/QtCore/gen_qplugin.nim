@@ -53,26 +53,26 @@ proc fcQPluginMetaData_setSize(self: pointer, size: csize_t): void {.importc: "Q
 proc fcQStaticPlugin_metaData(self: pointer): pointer {.importc: "QStaticPlugin_metaData".}
 proc fcQPluginMetaDataHeader_version(self: pointer): uint8 {.importc: "QPluginMetaData__Header_version".}
 proc fcQPluginMetaDataHeader_setVersion(self: pointer, version: uint8): void {.importc: "QPluginMetaData__Header_setVersion".}
-proc fcQPluginMetaDataHeader_majorVersion(self: pointer): uint8 {.importc: "QPluginMetaData__Header_majorVersion".}
-proc fcQPluginMetaDataHeader_setQtMajorVersion(self: pointer, qt_major_version: uint8): void {.importc: "QPluginMetaData__Header_setQtMajorVersion".}
-proc fcQPluginMetaDataHeader_minorVersion(self: pointer): uint8 {.importc: "QPluginMetaData__Header_minorVersion".}
-proc fcQPluginMetaDataHeader_setQtMinorVersion(self: pointer, qt_minor_version: uint8): void {.importc: "QPluginMetaData__Header_setQtMinorVersion".}
-proc fcQPluginMetaDataHeader_pluginArchRequirements(self: pointer): uint8 {.importc: "QPluginMetaData__Header_pluginArchRequirements".}
-proc fcQPluginMetaDataHeader_setPluginArchRequirements(self: pointer, plugin_arch_requirements: uint8): void {.importc: "QPluginMetaData__Header_setPluginArchRequirements".}
-proc fcQPluginMetaDataHeader_new(param1: pointer): ptr cQPluginMetaDataHeader {.importc: "QPluginMetaData__Header_new".}
+proc fcQPluginMetaDataHeader_majorVersion(self: pointer): uint8 {.importc: "QPluginMetaData__Header_major_version".}
+proc fcQPluginMetaDataHeader_setQtMajorVersion(self: pointer, qt_major_version: uint8): void {.importc: "QPluginMetaData__Header_setQt_major_version".}
+proc fcQPluginMetaDataHeader_minorVersion(self: pointer): uint8 {.importc: "QPluginMetaData__Header_minor_version".}
+proc fcQPluginMetaDataHeader_setQtMinorVersion(self: pointer, qt_minor_version: uint8): void {.importc: "QPluginMetaData__Header_setQt_minor_version".}
+proc fcQPluginMetaDataHeader_pluginArchRequirements(self: pointer): uint8 {.importc: "QPluginMetaData__Header_plugin_arch_requirements".}
+proc fcQPluginMetaDataHeader_setPluginArchRequirements(self: pointer, plugin_arch_requirements: uint8): void {.importc: "QPluginMetaData__Header_setPlugin_arch_requirements".}
+proc fcQPluginMetaDataHeader_new(fromVal: pointer): ptr cQPluginMetaDataHeader {.importc: "QPluginMetaData__Header_new".}
 proc fcQPluginMetaDataMagicHeader_header(self: pointer): pointer {.importc: "QPluginMetaData__MagicHeader_header".}
 proc fcQPluginMetaDataMagicHeader_setHeader(self: pointer, header: pointer): void {.importc: "QPluginMetaData__MagicHeader_setHeader".}
 proc fcQPluginMetaDataMagicHeader_new(): ptr cQPluginMetaDataMagicHeader {.importc: "QPluginMetaData__MagicHeader_new".}
-proc fcQPluginMetaDataElfNoteHeader_nNamesz(self: pointer): cuint {.importc: "QPluginMetaData__ElfNoteHeader_nNamesz".}
-proc fcQPluginMetaDataElfNoteHeader_setNNamesz(self: pointer, n_namesz: cuint): void {.importc: "QPluginMetaData__ElfNoteHeader_setNNamesz".}
-proc fcQPluginMetaDataElfNoteHeader_nDescsz(self: pointer): cuint {.importc: "QPluginMetaData__ElfNoteHeader_nDescsz".}
-proc fcQPluginMetaDataElfNoteHeader_setNDescsz(self: pointer, n_descsz: cuint): void {.importc: "QPluginMetaData__ElfNoteHeader_setNDescsz".}
-proc fcQPluginMetaDataElfNoteHeader_nType(self: pointer): cuint {.importc: "QPluginMetaData__ElfNoteHeader_nType".}
-proc fcQPluginMetaDataElfNoteHeader_setNType(self: pointer, n_type: cuint): void {.importc: "QPluginMetaData__ElfNoteHeader_setNType".}
+proc fcQPluginMetaDataElfNoteHeader_nNamesz(self: pointer): cuint {.importc: "QPluginMetaData__ElfNoteHeader_n_namesz".}
+proc fcQPluginMetaDataElfNoteHeader_setNNamesz(self: pointer, n_namesz: cuint): void {.importc: "QPluginMetaData__ElfNoteHeader_setN_namesz".}
+proc fcQPluginMetaDataElfNoteHeader_nDescsz(self: pointer): cuint {.importc: "QPluginMetaData__ElfNoteHeader_n_descsz".}
+proc fcQPluginMetaDataElfNoteHeader_setNDescsz(self: pointer, n_descsz: cuint): void {.importc: "QPluginMetaData__ElfNoteHeader_setN_descsz".}
+proc fcQPluginMetaDataElfNoteHeader_nType(self: pointer): cuint {.importc: "QPluginMetaData__ElfNoteHeader_n_type".}
+proc fcQPluginMetaDataElfNoteHeader_setNType(self: pointer, n_type: cuint): void {.importc: "QPluginMetaData__ElfNoteHeader_setN_type".}
 proc fcQPluginMetaDataElfNoteHeader_header(self: pointer): pointer {.importc: "QPluginMetaData__ElfNoteHeader_header".}
 proc fcQPluginMetaDataElfNoteHeader_setHeader(self: pointer, header: pointer): void {.importc: "QPluginMetaData__ElfNoteHeader_setHeader".}
-proc fcQPluginMetaDataElfNoteHeader_new(payloadSize: cuint): ptr cQPluginMetaDataElfNoteHeader {.importc: "QPluginMetaData__ElfNoteHeader_new".}
-proc fcQPluginMetaDataElfNoteHeader_new2(param1: pointer): ptr cQPluginMetaDataElfNoteHeader {.importc: "QPluginMetaData__ElfNoteHeader_new2".}
+proc fcQPluginMetaDataElfNoteHeader_new(payloadSize: cuint): ptr cQPluginMetaDataElfNoteHeader {.importc: "QPluginMetaData__ElfNoteHeader_new_payloadSize".}
+proc fcQPluginMetaDataElfNoteHeader_new2(fromVal: pointer): ptr cQPluginMetaDataElfNoteHeader {.importc: "QPluginMetaData__ElfNoteHeader_new_from".}
 
 proc archRequirements*(_: type gen_qplugin_types.QPluginMetaData): uint8 =
   fcQPluginMetaData_archRequirements()
@@ -111,8 +111,8 @@ proc setPluginArchRequirements*(self: gen_qplugin_types.QPluginMetaDataHeader, p
   fcQPluginMetaDataHeader_setPluginArchRequirements(self.h, plugin_arch_requirements)
 
 proc create*(T: type gen_qplugin_types.QPluginMetaDataHeader,
-    param1: gen_qplugin_types.QPluginMetaDataHeader): gen_qplugin_types.QPluginMetaDataHeader =
-  let tmp = gen_qplugin_types.QPluginMetaDataHeader(h: fcQPluginMetaDataHeader_new(param1.h), owned: true)
+    fromVal: gen_qplugin_types.QPluginMetaDataHeader): gen_qplugin_types.QPluginMetaDataHeader =
+  let tmp = gen_qplugin_types.QPluginMetaDataHeader(h: fcQPluginMetaDataHeader_new(fromVal.h), owned: true)
   tmp
 proc header*(self: gen_qplugin_types.QPluginMetaDataMagicHeader): gen_qplugin_types.QPluginMetaDataHeader =
   gen_qplugin_types.QPluginMetaDataHeader(h: fcQPluginMetaDataMagicHeader_header(self.h), owned: true)
@@ -152,6 +152,6 @@ proc create*(T: type gen_qplugin_types.QPluginMetaDataElfNoteHeader,
   let tmp = gen_qplugin_types.QPluginMetaDataElfNoteHeader(h: fcQPluginMetaDataElfNoteHeader_new(payloadSize), owned: true)
   tmp
 proc create*(T: type gen_qplugin_types.QPluginMetaDataElfNoteHeader,
-    param1: gen_qplugin_types.QPluginMetaDataElfNoteHeader): gen_qplugin_types.QPluginMetaDataElfNoteHeader =
-  let tmp = gen_qplugin_types.QPluginMetaDataElfNoteHeader(h: fcQPluginMetaDataElfNoteHeader_new2(param1.h), owned: true)
+    fromVal: gen_qplugin_types.QPluginMetaDataElfNoteHeader): gen_qplugin_types.QPluginMetaDataElfNoteHeader =
+  let tmp = gen_qplugin_types.QPluginMetaDataElfNoteHeader(h: fcQPluginMetaDataElfNoteHeader_new2(fromVal.h), owned: true)
   tmp

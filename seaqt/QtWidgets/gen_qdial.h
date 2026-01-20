@@ -148,14 +148,14 @@ typedef struct QDial_VTable{
 void* QDial_vdata(VirtualQDial* self);
 VirtualQDial* vdata_QDial(void* vdata);
 
-VirtualQDial* QDial_new(const QDial_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDial* QDial_new2(const QDial_VTable* vtbl, size_t vdata);
+VirtualQDial* QDial_new_parent(const QDial_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDial* QDial_new(const QDial_VTable* vtbl, size_t vdata);
 
 void QDial_virtbase(QDial* src, QAbstractSlider** outptr_QAbstractSlider);
 QMetaObject* QDial_metaObject(const QDial* self);
 void* QDial_metacast(QDial* self, const char* param1);
 int QDial_metacall(QDial* self, int param1, int param2, void** param3);
-struct seaqt_string QDial_tr(const char* s);
+struct seaqt_string QDial_tr_s(const char* s);
 bool QDial_wrapping(const QDial* self);
 int QDial_notchSize(const QDial* self);
 void QDial_setNotchTarget(QDial* self, double target);
@@ -173,8 +173,8 @@ void QDial_mouseReleaseEvent(QDial* self, QMouseEvent* me);
 void QDial_mouseMoveEvent(QDial* self, QMouseEvent* me);
 void QDial_sliderChange(QDial* self, int change);
 void QDial_initStyleOption(const QDial* self, QStyleOptionSlider* option);
-struct seaqt_string QDial_tr2(const char* s, const char* c);
-struct seaqt_string QDial_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDial_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDial_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDial_virtualbase_metaObject(const VirtualQDial* self);
 void* QDial_virtualbase_metacast(VirtualQDial* self, const char* param1);
@@ -229,7 +229,7 @@ void QDial_virtualbase_customEvent(VirtualQDial* self, QEvent* event);
 void QDial_virtualbase_connectNotify(VirtualQDial* self, QMetaMethod* signal);
 void QDial_virtualbase_disconnectNotify(VirtualQDial* self, QMetaMethod* signal);
 
-void QDial_protectedbase_setRepeatAction(VirtualQDial* self, int action);
+void QDial_protectedbase_setRepeatAction_action(VirtualQDial* self, int action);
 int QDial_protectedbase_repeatAction(const VirtualQDial* self);
 void QDial_protectedbase_updateMicroFocus(VirtualQDial* self);
 void QDial_protectedbase_create(VirtualQDial* self);

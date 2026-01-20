@@ -698,42 +698,42 @@ public:
 	friend bool QDialogButtonBox_protectedbase_isSignalConnected(const VirtualQDialogButtonBox* self, QMetaMethod* signal);
 };
 
-VirtualQDialogButtonBox* QDialogButtonBox_new(const QDialogButtonBox_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDialogButtonBox* QDialogButtonBox_new_parent(const QDialogButtonBox_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDialogButtonBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDialogButtonBox(vtbl, parent) : nullptr;
 }
 
-VirtualQDialogButtonBox* QDialogButtonBox_new2(const QDialogButtonBox_VTable* vtbl, size_t vdata) {
+VirtualQDialogButtonBox* QDialogButtonBox_new(const QDialogButtonBox_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDialogButtonBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDialogButtonBox(vtbl) : nullptr;
 }
 
-VirtualQDialogButtonBox* QDialogButtonBox_new3(const QDialogButtonBox_VTable* vtbl, size_t vdata, int orientation) {
+VirtualQDialogButtonBox* QDialogButtonBox_new_orientation(const QDialogButtonBox_VTable* vtbl, size_t vdata, int orientation) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDialogButtonBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDialogButtonBox(vtbl, static_cast<Qt::Orientation>(orientation)) : nullptr;
 }
 
-VirtualQDialogButtonBox* QDialogButtonBox_new4(const QDialogButtonBox_VTable* vtbl, size_t vdata, int buttons) {
+VirtualQDialogButtonBox* QDialogButtonBox_new_buttons(const QDialogButtonBox_VTable* vtbl, size_t vdata, int buttons) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDialogButtonBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDialogButtonBox(vtbl, static_cast<QDialogButtonBox::StandardButtons>(buttons)) : nullptr;
 }
 
-VirtualQDialogButtonBox* QDialogButtonBox_new5(const QDialogButtonBox_VTable* vtbl, size_t vdata, int buttons, int orientation) {
+VirtualQDialogButtonBox* QDialogButtonBox_new_buttons_orientation(const QDialogButtonBox_VTable* vtbl, size_t vdata, int buttons, int orientation) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDialogButtonBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDialogButtonBox(vtbl, static_cast<QDialogButtonBox::StandardButtons>(buttons), static_cast<Qt::Orientation>(orientation)) : nullptr;
 }
 
-VirtualQDialogButtonBox* QDialogButtonBox_new6(const QDialogButtonBox_VTable* vtbl, size_t vdata, int orientation, QWidget* parent) {
+VirtualQDialogButtonBox* QDialogButtonBox_new_orientation_parent(const QDialogButtonBox_VTable* vtbl, size_t vdata, int orientation, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDialogButtonBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDialogButtonBox(vtbl, static_cast<Qt::Orientation>(orientation), parent) : nullptr;
 }
 
-VirtualQDialogButtonBox* QDialogButtonBox_new7(const QDialogButtonBox_VTable* vtbl, size_t vdata, int buttons, QWidget* parent) {
+VirtualQDialogButtonBox* QDialogButtonBox_new_buttons_parent(const QDialogButtonBox_VTable* vtbl, size_t vdata, int buttons, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDialogButtonBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDialogButtonBox(vtbl, static_cast<QDialogButtonBox::StandardButtons>(buttons), parent) : nullptr;
 }
 
-VirtualQDialogButtonBox* QDialogButtonBox_new8(const QDialogButtonBox_VTable* vtbl, size_t vdata, int buttons, int orientation, QWidget* parent) {
+VirtualQDialogButtonBox* QDialogButtonBox_new_buttons_orientation_parent(const QDialogButtonBox_VTable* vtbl, size_t vdata, int buttons, int orientation, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDialogButtonBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDialogButtonBox(vtbl, static_cast<QDialogButtonBox::StandardButtons>(buttons), static_cast<Qt::Orientation>(orientation), parent) : nullptr;
 }
@@ -754,7 +754,7 @@ int QDialogButtonBox_metacall(QDialogButtonBox* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDialogButtonBox_tr(const char* s) {
+struct seaqt_string QDialogButtonBox_tr_s(const char* s) {
 	QString _ret = QDialogButtonBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -774,16 +774,16 @@ int QDialogButtonBox_orientation(const QDialogButtonBox* self) {
 	return static_cast<int>(_ret);
 }
 
-void QDialogButtonBox_addButton(QDialogButtonBox* self, QAbstractButton* button, int role) {
+void QDialogButtonBox_addButton_button_role(QDialogButtonBox* self, QAbstractButton* button, int role) {
 	self->addButton(button, static_cast<QDialogButtonBox::ButtonRole>(role));
 }
 
-QPushButton* QDialogButtonBox_addButton2(QDialogButtonBox* self, struct seaqt_string text, int role) {
+QPushButton* QDialogButtonBox_addButton_text_role(QDialogButtonBox* self, struct seaqt_string text, int role) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addButton(text_QString, static_cast<QDialogButtonBox::ButtonRole>(role));
 }
 
-QPushButton* QDialogButtonBox_addButtonWithButton(QDialogButtonBox* self, int button) {
+QPushButton* QDialogButtonBox_addButton_button(QDialogButtonBox* self, int button) {
 	return self->addButton(static_cast<QDialogButtonBox::StandardButton>(button));
 }
 
@@ -900,7 +900,7 @@ void QDialogButtonBox_connect_rejected(QDialogButtonBox* self, intptr_t slot, vo
 	QDialogButtonBox::connect(self, static_cast<void (QDialogButtonBox::*)()>(&QDialogButtonBox::rejected), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDialogButtonBox_tr2(const char* s, const char* c) {
+struct seaqt_string QDialogButtonBox_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDialogButtonBox::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -911,7 +911,7 @@ struct seaqt_string QDialogButtonBox_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDialogButtonBox_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDialogButtonBox_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDialogButtonBox::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

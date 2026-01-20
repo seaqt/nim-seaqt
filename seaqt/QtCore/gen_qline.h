@@ -27,9 +27,9 @@ typedef struct QPointF QPointF;
 #endif
 
 QLine* QLine_new();
-QLine* QLine_new2(QPoint* pt1, QPoint* pt2);
-QLine* QLine_new3(int x1, int y1, int x2, int y2);
-QLine* QLine_new4(QLine* param1);
+QLine* QLine_new_pt1_pt2(QPoint* pt1, QPoint* pt2);
+QLine* QLine_new_x1_y1_x2_y2(int x1, int y1, int x2, int y2);
+QLine* QLine_new_from(QLine* from);
 
 bool QLine_isNull(const QLine* self);
 QPoint* QLine_p1(const QLine* self);
@@ -40,10 +40,10 @@ int QLine_x2(const QLine* self);
 int QLine_y2(const QLine* self);
 int QLine_dx(const QLine* self);
 int QLine_dy(const QLine* self);
-void QLine_translate(QLine* self, QPoint* p);
-void QLine_translate2(QLine* self, int dx, int dy);
-QLine* QLine_translated(const QLine* self, QPoint* p);
-QLine* QLine_translated2(const QLine* self, int dx, int dy);
+void QLine_translate_p(QLine* self, QPoint* p);
+void QLine_translate_dx_dy(QLine* self, int dx, int dy);
+QLine* QLine_translated_p(const QLine* self, QPoint* p);
+QLine* QLine_translated_dx_dy(const QLine* self, int dx, int dy);
 QPoint* QLine_center(const QLine* self);
 void QLine_setP1(QLine* self, QPoint* p1);
 void QLine_setP2(QLine* self, QPoint* p2);
@@ -56,10 +56,10 @@ QLineF* QLine_toLineF(const QLine* self);
 void QLine_delete(QLine* self);
 
 QLineF* QLineF_new();
-QLineF* QLineF_new2(QPointF* pt1, QPointF* pt2);
-QLineF* QLineF_new3(double x1, double y1, double x2, double y2);
-QLineF* QLineF_new4(QLine* line);
-QLineF* QLineF_new5(QLineF* param1);
+QLineF* QLineF_new_pt1_pt2(QPointF* pt1, QPointF* pt2);
+QLineF* QLineF_new_x1_y1_x2_y2(double x1, double y1, double x2, double y2);
+QLineF* QLineF_new_line(QLine* line);
+QLineF* QLineF_new_from(QLineF* from);
 
 QLineF* QLineF_fromPolar(double length, double angle);
 bool QLineF_isNull(const QLineF* self);
@@ -78,12 +78,12 @@ void QLineF_setAngle(QLineF* self, double angle);
 double QLineF_angleTo(const QLineF* self, QLineF* l);
 QLineF* QLineF_unitVector(const QLineF* self);
 QLineF* QLineF_normalVector(const QLineF* self);
-int QLineF_intersects(const QLineF* self, QLineF* l);
+int QLineF_intersects_l(const QLineF* self, QLineF* l);
 QPointF* QLineF_pointAt(const QLineF* self, double t);
-void QLineF_translate(QLineF* self, QPointF* p);
-void QLineF_translate2(QLineF* self, double dx, double dy);
-QLineF* QLineF_translated(const QLineF* self, QPointF* p);
-QLineF* QLineF_translated2(const QLineF* self, double dx, double dy);
+void QLineF_translate_p(QLineF* self, QPointF* p);
+void QLineF_translate_dx_dy(QLineF* self, double dx, double dy);
+QLineF* QLineF_translated_p(const QLineF* self, QPointF* p);
+QLineF* QLineF_translated_dx_dy(const QLineF* self, double dx, double dy);
 QPointF* QLineF_center(const QLineF* self);
 void QLineF_setP1(QLineF* self, QPointF* p1);
 void QLineF_setP2(QLineF* self, QPointF* p2);
@@ -92,7 +92,7 @@ void QLineF_setLine(QLineF* self, double x1, double y1, double x2, double y2);
 bool QLineF_operatorEqual(const QLineF* self, QLineF* d);
 bool QLineF_operatorNotEqual(const QLineF* self, QLineF* d);
 QLine* QLineF_toLine(const QLineF* self);
-int QLineF_intersects2(const QLineF* self, QLineF* l, QPointF* intersectionPoint);
+int QLineF_intersects_l_intersectionPoint(const QLineF* self, QLineF* l, QPointF* intersectionPoint);
 
 void QLineF_delete(QLineF* self);
 

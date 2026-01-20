@@ -722,22 +722,22 @@ public:
 	friend bool QSplitter_protectedbase_isSignalConnected(const VirtualQSplitter* self, QMetaMethod* signal);
 };
 
-VirtualQSplitter* QSplitter_new(const QSplitter_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQSplitter* QSplitter_new_QWidget(const QSplitter_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplitter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplitter(vtbl, parent) : nullptr;
 }
 
-VirtualQSplitter* QSplitter_new2(const QSplitter_VTable* vtbl, size_t vdata) {
+VirtualQSplitter* QSplitter_new(const QSplitter_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplitter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplitter(vtbl) : nullptr;
 }
 
-VirtualQSplitter* QSplitter_new3(const QSplitter_VTable* vtbl, size_t vdata, int param1) {
+VirtualQSplitter* QSplitter_new_Qt_Orientation(const QSplitter_VTable* vtbl, size_t vdata, int param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplitter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplitter(vtbl, static_cast<Qt::Orientation>(param1)) : nullptr;
 }
 
-VirtualQSplitter* QSplitter_new4(const QSplitter_VTable* vtbl, size_t vdata, int param1, QWidget* parent) {
+VirtualQSplitter* QSplitter_new_Qt_Orientation_QWidget(const QSplitter_VTable* vtbl, size_t vdata, int param1, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplitter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplitter(vtbl, static_cast<Qt::Orientation>(param1), parent) : nullptr;
 }
@@ -758,7 +758,7 @@ int QSplitter_metacall(QSplitter* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSplitter_tr(const char* s) {
+struct seaqt_string QSplitter_tr_s(const char* s) {
 	QString _ret = QSplitter::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -912,7 +912,7 @@ void QSplitter_connect_splitterMoved(QSplitter* self, intptr_t slot, void (*call
 	QSplitter::connect(self, static_cast<void (QSplitter::*)(int, int)>(&QSplitter::splitterMoved), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QSplitter_tr2(const char* s, const char* c) {
+struct seaqt_string QSplitter_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSplitter::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -923,7 +923,7 @@ struct seaqt_string QSplitter_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSplitter_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSplitter_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSplitter::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -934,7 +934,7 @@ struct seaqt_string QSplitter_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QSplitter_setOpaqueResizeWithOpaque(QSplitter* self, bool opaque) {
+void QSplitter_setOpaqueResize_opaque(QSplitter* self, bool opaque) {
 	self->setOpaqueResize(opaque);
 }
 
@@ -1922,7 +1922,7 @@ int QSplitterHandle_metacall(QSplitterHandle* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSplitterHandle_tr(const char* s) {
+struct seaqt_string QSplitterHandle_tr_s(const char* s) {
 	QString _ret = QSplitterHandle::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1954,7 +1954,7 @@ QSize* QSplitterHandle_sizeHint(const QSplitterHandle* self) {
 	return new QSize(self->sizeHint());
 }
 
-struct seaqt_string QSplitterHandle_tr2(const char* s, const char* c) {
+struct seaqt_string QSplitterHandle_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSplitterHandle::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1965,7 +1965,7 @@ struct seaqt_string QSplitterHandle_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSplitterHandle_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSplitterHandle_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSplitterHandle::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

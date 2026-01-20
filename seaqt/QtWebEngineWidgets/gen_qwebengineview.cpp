@@ -719,32 +719,32 @@ public:
 	friend bool QWebEngineView_protectedbase_isSignalConnected(const VirtualQWebEngineView* self, QMetaMethod* signal);
 };
 
-VirtualQWebEngineView* QWebEngineView_new(const QWebEngineView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQWebEngineView* QWebEngineView_new_parent(const QWebEngineView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineView(vtbl, parent) : nullptr;
 }
 
-VirtualQWebEngineView* QWebEngineView_new2(const QWebEngineView_VTable* vtbl, size_t vdata) {
+VirtualQWebEngineView* QWebEngineView_new(const QWebEngineView_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineView(vtbl) : nullptr;
 }
 
-VirtualQWebEngineView* QWebEngineView_new3(const QWebEngineView_VTable* vtbl, size_t vdata, QWebEngineProfile* profile) {
+VirtualQWebEngineView* QWebEngineView_new_profile(const QWebEngineView_VTable* vtbl, size_t vdata, QWebEngineProfile* profile) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineView(vtbl, profile) : nullptr;
 }
 
-VirtualQWebEngineView* QWebEngineView_new4(const QWebEngineView_VTable* vtbl, size_t vdata, QWebEnginePage* page) {
+VirtualQWebEngineView* QWebEngineView_new_page(const QWebEngineView_VTable* vtbl, size_t vdata, QWebEnginePage* page) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineView(vtbl, page) : nullptr;
 }
 
-VirtualQWebEngineView* QWebEngineView_new5(const QWebEngineView_VTable* vtbl, size_t vdata, QWebEngineProfile* profile, QWidget* parent) {
+VirtualQWebEngineView* QWebEngineView_new_profile_parent(const QWebEngineView_VTable* vtbl, size_t vdata, QWebEngineProfile* profile, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineView(vtbl, profile, parent) : nullptr;
 }
 
-VirtualQWebEngineView* QWebEngineView_new6(const QWebEngineView_VTable* vtbl, size_t vdata, QWebEnginePage* page, QWidget* parent) {
+VirtualQWebEngineView* QWebEngineView_new_page_parent(const QWebEngineView_VTable* vtbl, size_t vdata, QWebEnginePage* page, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEngineView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEngineView(vtbl, page, parent) : nullptr;
 }
@@ -765,7 +765,7 @@ int QWebEngineView_metacall(QWebEngineView* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebEngineView_tr(const char* s) {
+struct seaqt_string QWebEngineView_tr_s(const char* s) {
 	QString _ret = QWebEngineView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -788,20 +788,20 @@ void QWebEngineView_setPage(QWebEngineView* self, QWebEnginePage* page) {
 	self->setPage(page);
 }
 
-void QWebEngineView_load(QWebEngineView* self, QUrl* url) {
+void QWebEngineView_load_url(QWebEngineView* self, QUrl* url) {
 	self->load(*url);
 }
 
-void QWebEngineView_loadWithRequest(QWebEngineView* self, QWebEngineHttpRequest* request) {
+void QWebEngineView_load_request(QWebEngineView* self, QWebEngineHttpRequest* request) {
 	self->load(*request);
 }
 
-void QWebEngineView_setHtml(QWebEngineView* self, struct seaqt_string html) {
+void QWebEngineView_setHtml_html(QWebEngineView* self, struct seaqt_string html) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString);
 }
 
-void QWebEngineView_setContent(QWebEngineView* self, struct seaqt_string data) {
+void QWebEngineView_setContent_data(QWebEngineView* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->setContent(data_QByteArray);
 }
@@ -856,7 +856,7 @@ QAction* QWebEngineView_pageAction(const QWebEngineView* self, int action) {
 	return self->pageAction(static_cast<QWebEnginePage::WebAction>(action));
 }
 
-void QWebEngineView_triggerPageAction(QWebEngineView* self, int action) {
+void QWebEngineView_triggerPageAction_action(QWebEngineView* self, int action) {
 	self->triggerPageAction(static_cast<QWebEnginePage::WebAction>(action));
 }
 
@@ -869,7 +869,7 @@ void QWebEngineView_setZoomFactor(QWebEngineView* self, double factor) {
 	self->setZoomFactor(static_cast<qreal>(factor));
 }
 
-void QWebEngineView_findText(QWebEngineView* self, struct seaqt_string subString) {
+void QWebEngineView_findText_subString(QWebEngineView* self, struct seaqt_string subString) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	self->findText(subString_QString);
 }
@@ -890,7 +890,7 @@ QWebEngineContextMenuRequest* QWebEngineView_lastContextMenuRequest(const QWebEn
 	return self->lastContextMenuRequest();
 }
 
-void QWebEngineView_printToPdf(QWebEngineView* self, struct seaqt_string filePath) {
+void QWebEngineView_printToPdf_filePath(QWebEngineView* self, struct seaqt_string filePath) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->printToPdf(filePath_QString);
 }
@@ -1129,7 +1129,7 @@ void QWebEngineView_connect_printFinished(QWebEngineView* self, intptr_t slot, v
 	QWebEngineView::connect(self, static_cast<void (QWebEngineView::*)(bool)>(&QWebEngineView::printFinished), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebEngineView_tr2(const char* s, const char* c) {
+struct seaqt_string QWebEngineView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebEngineView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1140,7 +1140,7 @@ struct seaqt_string QWebEngineView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebEngineView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebEngineView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebEngineView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1151,38 +1151,38 @@ struct seaqt_string QWebEngineView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QWebEngineView_setHtml2(QWebEngineView* self, struct seaqt_string html, QUrl* baseUrl) {
+void QWebEngineView_setHtml_html_baseUrl(QWebEngineView* self, struct seaqt_string html, QUrl* baseUrl) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString, *baseUrl);
 }
 
-void QWebEngineView_setContent2(QWebEngineView* self, struct seaqt_string data, struct seaqt_string mimeType) {
+void QWebEngineView_setContent_data_mimeType(QWebEngineView* self, struct seaqt_string data, struct seaqt_string mimeType) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString);
 }
 
-void QWebEngineView_setContent3(QWebEngineView* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
+void QWebEngineView_setContent_data_mimeType_baseUrl(QWebEngineView* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString, *baseUrl);
 }
 
-void QWebEngineView_triggerPageAction2(QWebEngineView* self, int action, bool checked) {
+void QWebEngineView_triggerPageAction_action_checked(QWebEngineView* self, int action, bool checked) {
 	self->triggerPageAction(static_cast<QWebEnginePage::WebAction>(action), checked);
 }
 
-void QWebEngineView_findText2(QWebEngineView* self, struct seaqt_string subString, int options) {
+void QWebEngineView_findText_subString_options(QWebEngineView* self, struct seaqt_string subString, int options) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	self->findText(subString_QString, static_cast<QWebEnginePage::FindFlags>(options));
 }
 
-void QWebEngineView_printToPdf2(QWebEngineView* self, struct seaqt_string filePath, QPageLayout* layout) {
+void QWebEngineView_printToPdf_filePath_layout(QWebEngineView* self, struct seaqt_string filePath, QPageLayout* layout) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->printToPdf(filePath_QString, *layout);
 }
 
-void QWebEngineView_printToPdf3(QWebEngineView* self, struct seaqt_string filePath, QPageLayout* layout, QPageRanges* ranges) {
+void QWebEngineView_printToPdf_filePath_layout_ranges(QWebEngineView* self, struct seaqt_string filePath, QPageLayout* layout, QPageRanges* ranges) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->printToPdf(filePath_QString, *layout, *ranges);
 }

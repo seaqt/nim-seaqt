@@ -39,13 +39,13 @@ export gen_qquickgraphicsdevice_types
 
 type cQQuickGraphicsDevice*{.exportc: "QQuickGraphicsDevice", incompleteStruct.} = object
 
-proc fcQQuickGraphicsDevice_operatorAssign(self: pointer, other: pointer): void {.importc: "QQuickGraphicsDevice_operatorAssign".}
+proc fcQQuickGraphicsDevice_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQuickGraphicsDevice_operatorAssign".}
 proc fcQQuickGraphicsDevice_isNull(self: pointer): bool {.importc: "QQuickGraphicsDevice_isNull".}
 proc fcQQuickGraphicsDevice_new(): ptr cQQuickGraphicsDevice {.importc: "QQuickGraphicsDevice_new".}
-proc fcQQuickGraphicsDevice_new2(other: pointer): ptr cQQuickGraphicsDevice {.importc: "QQuickGraphicsDevice_new2".}
+proc fcQQuickGraphicsDevice_new2(fromVal: pointer): ptr cQQuickGraphicsDevice {.importc: "QQuickGraphicsDevice_new_from".}
 
-proc operatorAssign*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, other: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): void =
-  fcQQuickGraphicsDevice_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, fromVal: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): void =
+  fcQQuickGraphicsDevice_operatorAssign(self.h, fromVal.h)
 
 proc isNull*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): bool =
   fcQQuickGraphicsDevice_isNull(self.h)
@@ -54,6 +54,6 @@ proc create*(T: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): gen_q
   let tmp = gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new(), owned: true)
   tmp
 proc create*(T: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice,
-    other: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
-  let tmp = gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new2(other.h), owned: true)
+    fromVal: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
+  let tmp = gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new2(fromVal.h), owned: true)
   tmp

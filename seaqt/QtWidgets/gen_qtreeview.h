@@ -168,7 +168,7 @@ typedef struct QTreeView_VTable{
 	void (*closeEditor)(VirtualQTreeView* self, QWidget* editor, int hint);
 	void (*commitData)(VirtualQTreeView* self, QWidget* editor);
 	void (*editorDestroyed)(VirtualQTreeView* self, QObject* editor);
-	bool (*edit2)(VirtualQTreeView* self, QModelIndex* index, int trigger, QEvent* event);
+	bool (*edit_index_trigger_event)(VirtualQTreeView* self, QModelIndex* index, int trigger, QEvent* event);
 	int (*selectionCommand)(const VirtualQTreeView* self, QModelIndex* index, QEvent* event);
 	void (*startDrag)(VirtualQTreeView* self, int supportedActions);
 	void (*initViewItemOption)(const VirtualQTreeView* self, QStyleOptionViewItem* option);
@@ -216,14 +216,14 @@ typedef struct QTreeView_VTable{
 void* QTreeView_vdata(VirtualQTreeView* self);
 VirtualQTreeView* vdata_QTreeView(void* vdata);
 
-VirtualQTreeView* QTreeView_new(const QTreeView_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQTreeView* QTreeView_new2(const QTreeView_VTable* vtbl, size_t vdata);
+VirtualQTreeView* QTreeView_new_parent(const QTreeView_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQTreeView* QTreeView_new(const QTreeView_VTable* vtbl, size_t vdata);
 
 void QTreeView_virtbase(QTreeView* src, QAbstractItemView** outptr_QAbstractItemView);
 QMetaObject* QTreeView_metaObject(const QTreeView* self);
 void* QTreeView_metacast(QTreeView* self, const char* param1);
 int QTreeView_metacall(QTreeView* self, int param1, int param2, void** param3);
-struct seaqt_string QTreeView_tr(const char* s);
+struct seaqt_string QTreeView_tr_s(const char* s);
 void QTreeView_setModel(QTreeView* self, QAbstractItemModel* model);
 void QTreeView_setRootIndex(QTreeView* self, QModelIndex* index);
 void QTreeView_setSelectionModel(QTreeView* self, QItemSelectionModel* selectionModel);
@@ -287,7 +287,7 @@ void QTreeView_collapse(QTreeView* self, QModelIndex* index);
 void QTreeView_resizeColumnToContents(QTreeView* self, int column);
 void QTreeView_sortByColumn(QTreeView* self, int column, int order);
 void QTreeView_expandAll(QTreeView* self);
-void QTreeView_expandRecursively(QTreeView* self, QModelIndex* index);
+void QTreeView_expandRecursively_index(QTreeView* self, QModelIndex* index);
 void QTreeView_collapseAll(QTreeView* self);
 void QTreeView_expandToDepth(QTreeView* self, int depth);
 void QTreeView_verticalScrollbarValueChanged(QTreeView* self, int value);
@@ -319,9 +319,9 @@ void QTreeView_horizontalScrollbarAction(QTreeView* self, int action);
 bool QTreeView_isIndexHidden(const QTreeView* self, QModelIndex* index);
 void QTreeView_selectionChanged(QTreeView* self, QItemSelection* selected, QItemSelection* deselected);
 void QTreeView_currentChanged(QTreeView* self, QModelIndex* current, QModelIndex* previous);
-struct seaqt_string QTreeView_tr2(const char* s, const char* c);
-struct seaqt_string QTreeView_tr3(const char* s, const char* c, int n);
-void QTreeView_expandRecursively2(QTreeView* self, QModelIndex* index, int depth);
+struct seaqt_string QTreeView_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTreeView_tr_s_c_n(const char* s, const char* c, int n);
+void QTreeView_expandRecursively_index_depth(QTreeView* self, QModelIndex* index, int depth);
 
 QMetaObject* QTreeView_virtualbase_metaObject(const VirtualQTreeView* self);
 void* QTreeView_virtualbase_metacast(VirtualQTreeView* self, const char* param1);
@@ -376,7 +376,7 @@ void QTreeView_virtualbase_horizontalScrollbarValueChanged(VirtualQTreeView* sel
 void QTreeView_virtualbase_closeEditor(VirtualQTreeView* self, QWidget* editor, int hint);
 void QTreeView_virtualbase_commitData(VirtualQTreeView* self, QWidget* editor);
 void QTreeView_virtualbase_editorDestroyed(VirtualQTreeView* self, QObject* editor);
-bool QTreeView_virtualbase_edit2(VirtualQTreeView* self, QModelIndex* index, int trigger, QEvent* event);
+bool QTreeView_virtualbase_edit_index_trigger_event(VirtualQTreeView* self, QModelIndex* index, int trigger, QEvent* event);
 int QTreeView_virtualbase_selectionCommand(const VirtualQTreeView* self, QModelIndex* index, QEvent* event);
 void QTreeView_virtualbase_startDrag(VirtualQTreeView* self, int supportedActions);
 void QTreeView_virtualbase_initViewItemOption(const VirtualQTreeView* self, QStyleOptionViewItem* option);
@@ -439,7 +439,7 @@ void QTreeView_protectedbase_startAutoScroll(VirtualQTreeView* self);
 void QTreeView_protectedbase_stopAutoScroll(VirtualQTreeView* self);
 void QTreeView_protectedbase_doAutoScroll(VirtualQTreeView* self);
 int QTreeView_protectedbase_dropIndicatorPosition(const VirtualQTreeView* self);
-void QTreeView_protectedbase_setViewportMargins(VirtualQTreeView* self, int left, int top, int right, int bottom);
+void QTreeView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTreeView* self, int left, int top, int right, int bottom);
 QMargins* QTreeView_protectedbase_viewportMargins(const VirtualQTreeView* self);
 void QTreeView_protectedbase_drawFrame(VirtualQTreeView* self, QPainter* param1);
 void QTreeView_protectedbase_updateMicroFocus(VirtualQTreeView* self);

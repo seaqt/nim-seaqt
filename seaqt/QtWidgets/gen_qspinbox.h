@@ -158,14 +158,14 @@ typedef struct QSpinBox_VTable{
 void* QSpinBox_vdata(VirtualQSpinBox* self);
 VirtualQSpinBox* vdata_QSpinBox(void* vdata);
 
-VirtualQSpinBox* QSpinBox_new(const QSpinBox_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQSpinBox* QSpinBox_new2(const QSpinBox_VTable* vtbl, size_t vdata);
+VirtualQSpinBox* QSpinBox_new_parent(const QSpinBox_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQSpinBox* QSpinBox_new(const QSpinBox_VTable* vtbl, size_t vdata);
 
 void QSpinBox_virtbase(QSpinBox* src, QAbstractSpinBox** outptr_QAbstractSpinBox);
 QMetaObject* QSpinBox_metaObject(const QSpinBox* self);
 void* QSpinBox_metacast(QSpinBox* self, const char* param1);
 int QSpinBox_metacall(QSpinBox* self, int param1, int param2, void** param3);
-struct seaqt_string QSpinBox_tr(const char* s);
+struct seaqt_string QSpinBox_tr_s(const char* s);
 int QSpinBox_value(const QSpinBox* self);
 struct seaqt_string QSpinBox_prefix(const QSpinBox* self);
 void QSpinBox_setPrefix(QSpinBox* self, struct seaqt_string prefix);
@@ -193,8 +193,8 @@ void QSpinBox_valueChanged(QSpinBox* self, int param1);
 void QSpinBox_connect_valueChanged(QSpinBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QSpinBox_textChanged(QSpinBox* self, struct seaqt_string param1);
 void QSpinBox_connect_textChanged(QSpinBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QSpinBox_tr2(const char* s, const char* c);
-struct seaqt_string QSpinBox_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSpinBox_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSpinBox_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSpinBox_virtualbase_metaObject(const VirtualQSpinBox* self);
 void* QSpinBox_virtualbase_metacast(VirtualQSpinBox* self, const char* param1);
@@ -336,14 +336,14 @@ typedef struct QDoubleSpinBox_VTable{
 void* QDoubleSpinBox_vdata(VirtualQDoubleSpinBox* self);
 VirtualQDoubleSpinBox* vdata_QDoubleSpinBox(void* vdata);
 
-VirtualQDoubleSpinBox* QDoubleSpinBox_new(const QDoubleSpinBox_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDoubleSpinBox* QDoubleSpinBox_new2(const QDoubleSpinBox_VTable* vtbl, size_t vdata);
+VirtualQDoubleSpinBox* QDoubleSpinBox_new_parent(const QDoubleSpinBox_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDoubleSpinBox* QDoubleSpinBox_new(const QDoubleSpinBox_VTable* vtbl, size_t vdata);
 
 void QDoubleSpinBox_virtbase(QDoubleSpinBox* src, QAbstractSpinBox** outptr_QAbstractSpinBox);
 QMetaObject* QDoubleSpinBox_metaObject(const QDoubleSpinBox* self);
 void* QDoubleSpinBox_metacast(QDoubleSpinBox* self, const char* param1);
 int QDoubleSpinBox_metacall(QDoubleSpinBox* self, int param1, int param2, void** param3);
-struct seaqt_string QDoubleSpinBox_tr(const char* s);
+struct seaqt_string QDoubleSpinBox_tr_s(const char* s);
 double QDoubleSpinBox_value(const QDoubleSpinBox* self);
 struct seaqt_string QDoubleSpinBox_prefix(const QDoubleSpinBox* self);
 void QDoubleSpinBox_setPrefix(QDoubleSpinBox* self, struct seaqt_string prefix);
@@ -370,8 +370,8 @@ void QDoubleSpinBox_valueChanged(QDoubleSpinBox* self, double param1);
 void QDoubleSpinBox_connect_valueChanged(QDoubleSpinBox* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t));
 void QDoubleSpinBox_textChanged(QDoubleSpinBox* self, struct seaqt_string param1);
 void QDoubleSpinBox_connect_textChanged(QDoubleSpinBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QDoubleSpinBox_tr2(const char* s, const char* c);
-struct seaqt_string QDoubleSpinBox_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDoubleSpinBox_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDoubleSpinBox_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDoubleSpinBox_virtualbase_metaObject(const VirtualQDoubleSpinBox* self);
 void* QDoubleSpinBox_virtualbase_metacast(VirtualQDoubleSpinBox* self, const char* param1);

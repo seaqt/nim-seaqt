@@ -93,25 +93,25 @@ proc fcQSGGeometry_defaultAttributes_TexturedPoint2D(): pointer {.importc: "QSGG
 proc fcQSGGeometry_defaultAttributes_ColoredPoint2D(): pointer {.importc: "QSGGeometry_defaultAttributes_ColoredPoint2D".}
 proc fcQSGGeometry_setDrawingMode(self: pointer, mode: cuint): void {.importc: "QSGGeometry_setDrawingMode".}
 proc fcQSGGeometry_drawingMode(self: pointer): cuint {.importc: "QSGGeometry_drawingMode".}
-proc fcQSGGeometry_allocate(self: pointer, vertexCount: cint): void {.importc: "QSGGeometry_allocate".}
+proc fcQSGGeometry_allocateVertexCount(self: pointer, vertexCount: cint): void {.importc: "QSGGeometry_allocate_vertexCount".}
 proc fcQSGGeometry_vertexCount(self: pointer): cint {.importc: "QSGGeometry_vertexCount".}
 proc fcQSGGeometry_vertexData(self: pointer): pointer {.importc: "QSGGeometry_vertexData".}
 proc fcQSGGeometry_vertexDataAsPoint2D(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsPoint2D".}
 proc fcQSGGeometry_vertexDataAsTexturedPoint2D(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsTexturedPoint2D".}
 proc fcQSGGeometry_vertexDataAsColoredPoint2D(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsColoredPoint2D".}
-proc fcQSGGeometry_vertexData2(self: pointer): pointer {.importc: "QSGGeometry_vertexData2".}
-proc fcQSGGeometry_vertexDataAsPoint2D2(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsPoint2D2".}
-proc fcQSGGeometry_vertexDataAsTexturedPoint2D2(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsTexturedPoint2D2".}
-proc fcQSGGeometry_vertexDataAsColoredPoint2D2(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsColoredPoint2D2".}
+proc fcQSGGeometry_vertexDataConst(self: pointer): pointer {.importc: "QSGGeometry_vertexData_const".}
+proc fcQSGGeometry_vertexDataAsPoint2DConst(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsPoint2D_const".}
+proc fcQSGGeometry_vertexDataAsTexturedPoint2DConst(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsTexturedPoint2D_const".}
+proc fcQSGGeometry_vertexDataAsColoredPoint2DConst(self: pointer): pointer {.importc: "QSGGeometry_vertexDataAsColoredPoint2D_const".}
 proc fcQSGGeometry_indexType(self: pointer): cint {.importc: "QSGGeometry_indexType".}
 proc fcQSGGeometry_indexCount(self: pointer): cint {.importc: "QSGGeometry_indexCount".}
 proc fcQSGGeometry_indexData(self: pointer): pointer {.importc: "QSGGeometry_indexData".}
 proc fcQSGGeometry_indexDataAsUInt(self: pointer): ptr cuint {.importc: "QSGGeometry_indexDataAsUInt".}
 proc fcQSGGeometry_indexDataAsUShort(self: pointer): ptr cushort {.importc: "QSGGeometry_indexDataAsUShort".}
 proc fcQSGGeometry_sizeOfIndex(self: pointer): cint {.importc: "QSGGeometry_sizeOfIndex".}
-proc fcQSGGeometry_indexData2(self: pointer): pointer {.importc: "QSGGeometry_indexData2".}
-proc fcQSGGeometry_indexDataAsUInt2(self: pointer): ptr cuint {.importc: "QSGGeometry_indexDataAsUInt2".}
-proc fcQSGGeometry_indexDataAsUShort2(self: pointer): ptr cushort {.importc: "QSGGeometry_indexDataAsUShort2".}
+proc fcQSGGeometry_indexDataConst(self: pointer): pointer {.importc: "QSGGeometry_indexData_const".}
+proc fcQSGGeometry_indexDataAsUIntConst(self: pointer): ptr cuint {.importc: "QSGGeometry_indexDataAsUInt_const".}
+proc fcQSGGeometry_indexDataAsUShortConst(self: pointer): ptr cushort {.importc: "QSGGeometry_indexDataAsUShort_const".}
 proc fcQSGGeometry_attributeCount(self: pointer): cint {.importc: "QSGGeometry_attributeCount".}
 proc fcQSGGeometry_attributes(self: pointer): pointer {.importc: "QSGGeometry_attributes".}
 proc fcQSGGeometry_sizeOfVertex(self: pointer): cint {.importc: "QSGGeometry_sizeOfVertex".}
@@ -126,10 +126,10 @@ proc fcQSGGeometry_markIndexDataDirty(self: pointer): void {.importc: "QSGGeomet
 proc fcQSGGeometry_markVertexDataDirty(self: pointer): void {.importc: "QSGGeometry_markVertexDataDirty".}
 proc fcQSGGeometry_lineWidth(self: pointer): float32 {.importc: "QSGGeometry_lineWidth".}
 proc fcQSGGeometry_setLineWidth(self: pointer, w: float32): void {.importc: "QSGGeometry_setLineWidth".}
-proc fcQSGGeometry_allocate2(self: pointer, vertexCount: cint, indexCount: cint): void {.importc: "QSGGeometry_allocate2".}
-proc fcQSGGeometry_new(attribs: pointer, vertexCount: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new".}
-proc fcQSGGeometry_new2(attribs: pointer, vertexCount: cint, indexCount: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new2".}
-proc fcQSGGeometry_new3(attribs: pointer, vertexCount: cint, indexCount: cint, indexType: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new3".}
+proc fcQSGGeometry_allocateVertexCountIndexCount(self: pointer, vertexCount: cint, indexCount: cint): void {.importc: "QSGGeometry_allocate_vertexCount_indexCount".}
+proc fcQSGGeometry_new(attribs: pointer, vertexCount: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new_attribs_vertexCount".}
+proc fcQSGGeometry_new2(attribs: pointer, vertexCount: cint, indexCount: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new_attribs_vertexCount_indexCount".}
+proc fcQSGGeometry_new3(attribs: pointer, vertexCount: cint, indexCount: cint, indexType: cint): ptr cQSGGeometry {.importc: "QSGGeometry_new_attribs_vertexCount_indexCount_indexType".}
 proc fcQSGGeometryAttribute_position(self: pointer): cint {.importc: "QSGGeometry__Attribute_position".}
 proc fcQSGGeometryAttribute_setPosition(self: pointer, position: cint): void {.importc: "QSGGeometry__Attribute_setPosition".}
 proc fcQSGGeometryAttribute_tupleSize(self: pointer): cint {.importc: "QSGGeometry__Attribute_tupleSize".}
@@ -142,9 +142,9 @@ proc fcQSGGeometryAttribute_attributeType(self: pointer): cint {.importc: "QSGGe
 proc fcQSGGeometryAttribute_setAttributeType(self: pointer, attributeType: cint): void {.importc: "QSGGeometry__Attribute_setAttributeType".}
 proc fcQSGGeometryAttribute_reserved(self: pointer): cuint {.importc: "QSGGeometry__Attribute_reserved".}
 proc fcQSGGeometryAttribute_setReserved(self: pointer, reserved: cuint): void {.importc: "QSGGeometry__Attribute_setReserved".}
-proc fcQSGGeometryAttribute_createX(pos: cint, tupleSize: cint, primitiveType: cint): pointer {.importc: "QSGGeometry__Attribute_create".}
+proc fcQSGGeometryAttribute_createPosTupleSizePrimitiveType(pos: cint, tupleSize: cint, primitiveType: cint): pointer {.importc: "QSGGeometry__Attribute_create_pos_tupleSize_primitiveType".}
 proc fcQSGGeometryAttribute_createWithAttributeType(pos: cint, tupleSize: cint, primitiveType: cint, attributeType: cint): pointer {.importc: "QSGGeometry__Attribute_createWithAttributeType".}
-proc fcQSGGeometryAttribute_create2(pos: cint, tupleSize: cint, primitiveType: cint, isPosition: bool): pointer {.importc: "QSGGeometry__Attribute_create2".}
+proc fcQSGGeometryAttribute_createPosTupleSizePrimitiveTypeIsPosition(pos: cint, tupleSize: cint, primitiveType: cint, isPosition: bool): pointer {.importc: "QSGGeometry__Attribute_create_pos_tupleSize_primitiveType_isPosition".}
 proc fcQSGGeometryAttributeSet_count(self: pointer): cint {.importc: "QSGGeometry__AttributeSet_count".}
 proc fcQSGGeometryAttributeSet_setCount(self: pointer, count: cint): void {.importc: "QSGGeometry__AttributeSet_setCount".}
 proc fcQSGGeometryAttributeSet_stride(self: pointer): cint {.importc: "QSGGeometry__AttributeSet_stride".}
@@ -195,7 +195,7 @@ proc drawingMode*(self: gen_qsggeometry_types.QSGGeometry): cuint =
   fcQSGGeometry_drawingMode(self.h)
 
 proc allocate*(self: gen_qsggeometry_types.QSGGeometry, vertexCount: cint): void =
-  fcQSGGeometry_allocate(self.h, vertexCount)
+  fcQSGGeometry_allocateVertexCount(self.h, vertexCount)
 
 proc vertexCount*(self: gen_qsggeometry_types.QSGGeometry): cint =
   fcQSGGeometry_vertexCount(self.h)
@@ -213,16 +213,16 @@ proc vertexDataAsColoredPoint2D*(self: gen_qsggeometry_types.QSGGeometry): gen_q
   gen_qsggeometry_types.QSGGeometryColoredPoint2D(h: fcQSGGeometry_vertexDataAsColoredPoint2D(self.h), owned: false)
 
 proc vertexData2*(self: gen_qsggeometry_types.QSGGeometry): pointer =
-  fcQSGGeometry_vertexData2(self.h)
+  fcQSGGeometry_vertexDataConst(self.h)
 
 proc vertexDataAsPoint2D2*(self: gen_qsggeometry_types.QSGGeometry): gen_qsggeometry_types.QSGGeometryPoint2D =
-  gen_qsggeometry_types.QSGGeometryPoint2D(h: fcQSGGeometry_vertexDataAsPoint2D2(self.h), owned: false)
+  gen_qsggeometry_types.QSGGeometryPoint2D(h: fcQSGGeometry_vertexDataAsPoint2DConst(self.h), owned: false)
 
 proc vertexDataAsTexturedPoint2D2*(self: gen_qsggeometry_types.QSGGeometry): gen_qsggeometry_types.QSGGeometryTexturedPoint2D =
-  gen_qsggeometry_types.QSGGeometryTexturedPoint2D(h: fcQSGGeometry_vertexDataAsTexturedPoint2D2(self.h), owned: false)
+  gen_qsggeometry_types.QSGGeometryTexturedPoint2D(h: fcQSGGeometry_vertexDataAsTexturedPoint2DConst(self.h), owned: false)
 
 proc vertexDataAsColoredPoint2D2*(self: gen_qsggeometry_types.QSGGeometry): gen_qsggeometry_types.QSGGeometryColoredPoint2D =
-  gen_qsggeometry_types.QSGGeometryColoredPoint2D(h: fcQSGGeometry_vertexDataAsColoredPoint2D2(self.h), owned: false)
+  gen_qsggeometry_types.QSGGeometryColoredPoint2D(h: fcQSGGeometry_vertexDataAsColoredPoint2DConst(self.h), owned: false)
 
 proc indexType*(self: gen_qsggeometry_types.QSGGeometry): cint =
   fcQSGGeometry_indexType(self.h)
@@ -243,13 +243,13 @@ proc sizeOfIndex*(self: gen_qsggeometry_types.QSGGeometry): cint =
   fcQSGGeometry_sizeOfIndex(self.h)
 
 proc indexData2*(self: gen_qsggeometry_types.QSGGeometry): pointer =
-  fcQSGGeometry_indexData2(self.h)
+  fcQSGGeometry_indexDataConst(self.h)
 
 proc indexDataAsUInt2*(self: gen_qsggeometry_types.QSGGeometry): ptr cuint =
-  fcQSGGeometry_indexDataAsUInt2(self.h)
+  fcQSGGeometry_indexDataAsUIntConst(self.h)
 
 proc indexDataAsUShort2*(self: gen_qsggeometry_types.QSGGeometry): ptr cushort =
-  fcQSGGeometry_indexDataAsUShort2(self.h)
+  fcQSGGeometry_indexDataAsUShortConst(self.h)
 
 proc attributeCount*(self: gen_qsggeometry_types.QSGGeometry): cint =
   fcQSGGeometry_attributeCount(self.h)
@@ -294,7 +294,7 @@ proc setLineWidth*(self: gen_qsggeometry_types.QSGGeometry, w: float32): void =
   fcQSGGeometry_setLineWidth(self.h, w)
 
 proc allocate*(self: gen_qsggeometry_types.QSGGeometry, vertexCount: cint, indexCount: cint): void =
-  fcQSGGeometry_allocate2(self.h, vertexCount, indexCount)
+  fcQSGGeometry_allocateVertexCountIndexCount(self.h, vertexCount, indexCount)
 
 proc create*(T: type gen_qsggeometry_types.QSGGeometry,
     attribs: gen_qsggeometry_types.QSGGeometryAttributeSet, vertexCount: cint): gen_qsggeometry_types.QSGGeometry =
@@ -345,13 +345,13 @@ proc setReserved*(self: gen_qsggeometry_types.QSGGeometryAttribute, reserved: cu
   fcQSGGeometryAttribute_setReserved(self.h, reserved)
 
 proc createX*(_: type gen_qsggeometry_types.QSGGeometryAttribute, pos: cint, tupleSize: cint, primitiveType: cint): gen_qsggeometry_types.QSGGeometryAttribute =
-  gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_createX(pos, tupleSize, primitiveType), owned: true)
+  gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_createPosTupleSizePrimitiveType(pos, tupleSize, primitiveType), owned: true)
 
 proc createWithAttributeType*(_: type gen_qsggeometry_types.QSGGeometryAttribute, pos: cint, tupleSize: cint, primitiveType: cint, attributeType: cint): gen_qsggeometry_types.QSGGeometryAttribute =
   gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_createWithAttributeType(pos, tupleSize, primitiveType, cint(attributeType)), owned: true)
 
 proc createX*(_: type gen_qsggeometry_types.QSGGeometryAttribute, pos: cint, tupleSize: cint, primitiveType: cint, isPosition: bool): gen_qsggeometry_types.QSGGeometryAttribute =
-  gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_create2(pos, tupleSize, primitiveType, isPosition), owned: true)
+  gen_qsggeometry_types.QSGGeometryAttribute(h: fcQSGGeometryAttribute_createPosTupleSizePrimitiveTypeIsPosition(pos, tupleSize, primitiveType, isPosition), owned: true)
 
 proc count*(self: gen_qsggeometry_types.QSGGeometryAttributeSet): cint =
   fcQSGGeometryAttributeSet_count(self.h)

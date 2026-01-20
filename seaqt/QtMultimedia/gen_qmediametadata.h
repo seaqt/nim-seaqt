@@ -24,8 +24,8 @@ typedef struct QMetaObject QMetaObject;
 typedef struct QVariant QVariant;
 #endif
 
-QMediaMetaData* QMediaMetaData_new(QMediaMetaData* param1);
-QMediaMetaData* QMediaMetaData_new2();
+QMediaMetaData* QMediaMetaData_new_from(QMediaMetaData* from);
+QMediaMetaData* QMediaMetaData_new();
 
 QVariant* QMediaMetaData_value(const QMediaMetaData* self, int k);
 void QMediaMetaData_insert(QMediaMetaData* self, int k, QVariant* value);
@@ -36,7 +36,7 @@ void QMediaMetaData_clear(QMediaMetaData* self);
 bool QMediaMetaData_isEmpty(const QMediaMetaData* self);
 struct seaqt_string QMediaMetaData_stringValue(const QMediaMetaData* self, int k);
 struct seaqt_string QMediaMetaData_metaDataKeyToString(int k);
-void QMediaMetaData_operatorAssign(QMediaMetaData* self, QMediaMetaData* param1);
+void QMediaMetaData_operatorAssign(QMediaMetaData* self, QMediaMetaData* from);
 
 const QMetaObject* QMediaMetaData_staticMetaObject();
 void QMediaMetaData_delete(QMediaMetaData* self);

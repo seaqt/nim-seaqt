@@ -24,7 +24,7 @@ QGeoPolygon* QGeoPolygon_new() {
 	return new (std::nothrow) QGeoPolygon();
 }
 
-QGeoPolygon* QGeoPolygon_new2(struct seaqt_array /* of QGeoCoordinate* */  path) {
+QGeoPolygon* QGeoPolygon_new_path(struct seaqt_array /* of QGeoCoordinate* */  path) {
 	QList<QGeoCoordinate> path_QList;
 	path_QList.reserve(path.len);
 	QGeoCoordinate** path_arr = static_cast<QGeoCoordinate**>(path.data);
@@ -34,11 +34,11 @@ QGeoPolygon* QGeoPolygon_new2(struct seaqt_array /* of QGeoCoordinate* */  path)
 	return new (std::nothrow) QGeoPolygon(path_QList);
 }
 
-QGeoPolygon* QGeoPolygon_new3(QGeoPolygon* other) {
-	return new (std::nothrow) QGeoPolygon(*other);
+QGeoPolygon* QGeoPolygon_new_from(QGeoPolygon* from) {
+	return new (std::nothrow) QGeoPolygon(*from);
 }
 
-QGeoPolygon* QGeoPolygon_new4(QGeoShape* other) {
+QGeoPolygon* QGeoPolygon_new_other(QGeoShape* other) {
 	return new (std::nothrow) QGeoPolygon(*other);
 }
 
@@ -46,8 +46,8 @@ void QGeoPolygon_virtbase(QGeoPolygon* src, QGeoShape** outptr_QGeoShape) {
 	*outptr_QGeoShape = static_cast<QGeoShape*>(src);
 }
 
-void QGeoPolygon_operatorAssign(QGeoPolygon* self, QGeoPolygon* other) {
-	self->operator=(*other);
+void QGeoPolygon_operatorAssign(QGeoPolygon* self, QGeoPolygon* from) {
+	self->operator=(*from);
 }
 
 void QGeoPolygon_setPerimeter(QGeoPolygon* self, struct seaqt_array /* of QGeoCoordinate* */  path) {
@@ -73,11 +73,11 @@ struct seaqt_array /* of QGeoCoordinate* */  QGeoPolygon_perimeter(const QGeoPol
 	return _out;
 }
 
-void QGeoPolygon_addHole(QGeoPolygon* self, QVariant* holePath) {
+void QGeoPolygon_addHole_QVariant(QGeoPolygon* self, QVariant* holePath) {
 	self->addHole(*holePath);
 }
 
-void QGeoPolygon_addHoleWithHolePath(QGeoPolygon* self, struct seaqt_array /* of QGeoCoordinate* */  holePath) {
+void QGeoPolygon_addHole_QListOfQGeoCoordinate(QGeoPolygon* self, struct seaqt_array /* of QGeoCoordinate* */  holePath) {
 	QList<QGeoCoordinate> holePath_QList;
 	holePath_QList.reserve(holePath.len);
 	QGeoCoordinate** holePath_arr = static_cast<QGeoCoordinate**>(holePath.data);
@@ -159,11 +159,11 @@ bool QGeoPolygon_containsCoordinate(const QGeoPolygon* self, QGeoCoordinate* coo
 	return self->containsCoordinate(*coordinate);
 }
 
-void QGeoPolygon_removeCoordinate(QGeoPolygon* self, QGeoCoordinate* coordinate) {
+void QGeoPolygon_removeCoordinate_coordinate(QGeoPolygon* self, QGeoCoordinate* coordinate) {
 	self->removeCoordinate(*coordinate);
 }
 
-void QGeoPolygon_removeCoordinateWithIndex(QGeoPolygon* self, ptrdiff_t index) {
+void QGeoPolygon_removeCoordinate_index(QGeoPolygon* self, ptrdiff_t index) {
 	self->removeCoordinate((qsizetype)(index));
 }
 
@@ -178,11 +178,11 @@ struct seaqt_string QGeoPolygon_toString(const QGeoPolygon* self) {
 	return _ms;
 }
 
-double QGeoPolygon_lengthWithIndexFrom(const QGeoPolygon* self, ptrdiff_t indexFrom) {
+double QGeoPolygon_length_indexFrom(const QGeoPolygon* self, ptrdiff_t indexFrom) {
 	return self->length((qsizetype)(indexFrom));
 }
 
-double QGeoPolygon_length2(const QGeoPolygon* self, ptrdiff_t indexFrom, ptrdiff_t indexTo) {
+double QGeoPolygon_length_indexFrom_indexTo(const QGeoPolygon* self, ptrdiff_t indexFrom, ptrdiff_t indexTo) {
 	return self->length((qsizetype)(indexFrom), (qsizetype)(indexTo));
 }
 

@@ -54,14 +54,14 @@ type cQAccessibleBridgePlugin*{.exportc: "QAccessibleBridgePlugin", incompleteSt
 
 proc fcQAccessibleBridge_setRootObject(self: pointer, rootObject: pointer): void {.importc: "QAccessibleBridge_setRootObject".}
 proc fcQAccessibleBridge_notifyAccessibilityUpdate(self: pointer, event: pointer): void {.importc: "QAccessibleBridge_notifyAccessibilityUpdate".}
-proc fcQAccessibleBridge_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleBridge_operatorAssign".}
+proc fcQAccessibleBridge_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAccessibleBridge_operatorAssign".}
 proc fcQAccessibleBridgePlugin_metaObject(self: pointer): pointer {.importc: "QAccessibleBridgePlugin_metaObject".}
 proc fcQAccessibleBridgePlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QAccessibleBridgePlugin_metacast".}
 proc fcQAccessibleBridgePlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAccessibleBridgePlugin_metacall".}
-proc fcQAccessibleBridgePlugin_tr(s: cstring): struct_seaqt_string {.importc: "QAccessibleBridgePlugin_tr".}
+proc fcQAccessibleBridgePlugin_trS(s: cstring): struct_seaqt_string {.importc: "QAccessibleBridgePlugin_tr_s".}
 proc fcQAccessibleBridgePlugin_createX(self: pointer, key: struct_seaqt_string): pointer {.importc: "QAccessibleBridgePlugin_create".}
-proc fcQAccessibleBridgePlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAccessibleBridgePlugin_tr2".}
-proc fcQAccessibleBridgePlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAccessibleBridgePlugin_tr3".}
+proc fcQAccessibleBridgePlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAccessibleBridgePlugin_tr_s_c".}
+proc fcQAccessibleBridgePlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAccessibleBridgePlugin_tr_s_c_n".}
 proc fcQAccessibleBridgePlugin_vdata(self: pointer): ptr pointer {.importc: "QAccessibleBridgePlugin_vdata".}
 proc fvdata_cQAccessibleBridgePlugin(self: pointer): pointer {.importc: "vdata_QAccessibleBridgePlugin".}
 
@@ -93,7 +93,7 @@ proc fcQAccessibleBridgePlugin_protectedbase_senderSignalIndex(self: pointer): c
 proc fcQAccessibleBridgePlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAccessibleBridgePlugin_protectedbase_receivers".}
 proc fcQAccessibleBridgePlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAccessibleBridgePlugin_protectedbase_isSignalConnected".}
 proc fcQAccessibleBridgePlugin_new(vtbl: pointer, vdata: csize_t): ptr cQAccessibleBridgePlugin {.importc: "QAccessibleBridgePlugin_new".}
-proc fcQAccessibleBridgePlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAccessibleBridgePlugin {.importc: "QAccessibleBridgePlugin_new2".}
+proc fcQAccessibleBridgePlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAccessibleBridgePlugin {.importc: "QAccessibleBridgePlugin_new_parent".}
 proc fcQAccessibleBridgePlugin_staticMetaObject(): pointer {.importc: "QAccessibleBridgePlugin_staticMetaObject".}
 
 proc setRootObject*(self: gen_qaccessiblebridge_types.QAccessibleBridge, rootObject: gen_qaccessible_types.QAccessibleInterface): void =
@@ -102,8 +102,8 @@ proc setRootObject*(self: gen_qaccessiblebridge_types.QAccessibleBridge, rootObj
 proc notifyAccessibilityUpdate*(self: gen_qaccessiblebridge_types.QAccessibleBridge, event: gen_qaccessible_types.QAccessibleEvent): void =
   fcQAccessibleBridge_notifyAccessibilityUpdate(self.h, event.h)
 
-proc operatorAssign*(self: gen_qaccessiblebridge_types.QAccessibleBridge, param1: gen_qaccessiblebridge_types.QAccessibleBridge): void =
-  fcQAccessibleBridge_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qaccessiblebridge_types.QAccessibleBridge, fromVal: gen_qaccessiblebridge_types.QAccessibleBridge): void =
+  fcQAccessibleBridge_operatorAssign(self.h, fromVal.h)
 
 proc metaObject*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAccessibleBridgePlugin_metaObject(self.h), owned: false)
@@ -115,7 +115,7 @@ proc metacall*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, param1
   fcQAccessibleBridgePlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring): string =
-  let v_ms = fcQAccessibleBridgePlugin_tr(s)
+  let v_ms = fcQAccessibleBridgePlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -124,13 +124,13 @@ proc createX*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, key: op
   gen_qaccessiblebridge_types.QAccessibleBridge(h: fcQAccessibleBridgePlugin_createX(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQAccessibleBridgePlugin_tr2(s, c)
+  let v_ms = fcQAccessibleBridgePlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAccessibleBridgePlugin_tr3(s, c, n)
+  let v_ms = fcQAccessibleBridgePlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

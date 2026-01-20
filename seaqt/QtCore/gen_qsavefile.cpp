@@ -417,24 +417,24 @@ public:
 	friend bool QSaveFile_protectedbase_isSignalConnected(const VirtualQSaveFile* self, QMetaMethod* signal);
 };
 
-VirtualQSaveFile* QSaveFile_new(const QSaveFile_VTable* vtbl, size_t vdata, struct seaqt_string name) {
+VirtualQSaveFile* QSaveFile_new_name(const QSaveFile_VTable* vtbl, size_t vdata, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSaveFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSaveFile(vtbl, name_QString) : nullptr;
 }
 
-VirtualQSaveFile* QSaveFile_new2(const QSaveFile_VTable* vtbl, size_t vdata) {
+VirtualQSaveFile* QSaveFile_new(const QSaveFile_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSaveFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSaveFile(vtbl) : nullptr;
 }
 
-VirtualQSaveFile* QSaveFile_new3(const QSaveFile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent) {
+VirtualQSaveFile* QSaveFile_new_name_parent(const QSaveFile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSaveFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSaveFile(vtbl, name_QString, parent) : nullptr;
 }
 
-VirtualQSaveFile* QSaveFile_new4(const QSaveFile_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSaveFile* QSaveFile_new_parent(const QSaveFile_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSaveFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSaveFile(vtbl, parent) : nullptr;
 }
@@ -455,7 +455,7 @@ int QSaveFile_metacall(QSaveFile* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSaveFile_tr(const char* s) {
+struct seaqt_string QSaveFile_tr_s(const char* s) {
 	QString _ret = QSaveFile::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -502,7 +502,7 @@ bool QSaveFile_directWriteFallback(const QSaveFile* self) {
 	return self->directWriteFallback();
 }
 
-struct seaqt_string QSaveFile_tr2(const char* s, const char* c) {
+struct seaqt_string QSaveFile_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSaveFile::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -513,7 +513,7 @@ struct seaqt_string QSaveFile_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSaveFile_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSaveFile_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSaveFile::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

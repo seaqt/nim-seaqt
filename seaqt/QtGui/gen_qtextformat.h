@@ -55,8 +55,8 @@ typedef struct QVariant QVariant;
 #endif
 
 QTextLength* QTextLength_new();
-QTextLength* QTextLength_new2(int type, double value);
-QTextLength* QTextLength_new3(QTextLength* param1);
+QTextLength* QTextLength_new_type_value(int type, double value);
+QTextLength* QTextLength_new_from(QTextLength* from);
 
 int QTextLength_type(const QTextLength* self);
 double QTextLength_value(const QTextLength* self, double maximumLength);
@@ -64,15 +64,15 @@ double QTextLength_rawValue(const QTextLength* self);
 bool QTextLength_operatorEqual(const QTextLength* self, QTextLength* other);
 bool QTextLength_operatorNotEqual(const QTextLength* self, QTextLength* other);
 QVariant* QTextLength_ToQVariant(const QTextLength* self);
-void QTextLength_operatorAssign(QTextLength* self, QTextLength* param1);
+void QTextLength_operatorAssign(QTextLength* self, QTextLength* from);
 
 void QTextLength_delete(QTextLength* self);
 
 QTextFormat* QTextFormat_new();
-QTextFormat* QTextFormat_new2(int type);
-QTextFormat* QTextFormat_new3(QTextFormat* rhs);
+QTextFormat* QTextFormat_new_type(int type);
+QTextFormat* QTextFormat_new_from(QTextFormat* from);
 
-void QTextFormat_operatorAssign(QTextFormat* self, QTextFormat* rhs);
+void QTextFormat_operatorAssign(QTextFormat* self, QTextFormat* from);
 void QTextFormat_swap(QTextFormat* self, QTextFormat* other);
 void QTextFormat_merge(QTextFormat* self, QTextFormat* other);
 bool QTextFormat_isValid(const QTextFormat* self);
@@ -81,7 +81,7 @@ int QTextFormat_type(const QTextFormat* self);
 int QTextFormat_objectIndex(const QTextFormat* self);
 void QTextFormat_setObjectIndex(QTextFormat* self, int object);
 QVariant* QTextFormat_property(const QTextFormat* self, int propertyId);
-void QTextFormat_setProperty(QTextFormat* self, int propertyId, QVariant* value);
+void QTextFormat_setProperty_propertyId_value(QTextFormat* self, int propertyId, QVariant* value);
 void QTextFormat_clearProperty(QTextFormat* self, int propertyId);
 bool QTextFormat_hasProperty(const QTextFormat* self, int propertyId);
 bool QTextFormat_boolProperty(const QTextFormat* self, int propertyId);
@@ -93,7 +93,7 @@ QPen* QTextFormat_penProperty(const QTextFormat* self, int propertyId);
 QBrush* QTextFormat_brushProperty(const QTextFormat* self, int propertyId);
 QTextLength* QTextFormat_lengthProperty(const QTextFormat* self, int propertyId);
 struct seaqt_array /* of QTextLength* */  QTextFormat_lengthVectorProperty(const QTextFormat* self, int propertyId);
-void QTextFormat_setProperty2(QTextFormat* self, int propertyId, struct seaqt_array /* of QTextLength* */  lengths);
+void QTextFormat_setProperty_propertyId_lengths(QTextFormat* self, int propertyId, struct seaqt_array /* of QTextLength* */  lengths);
 struct seaqt_map /* of int to QVariant* */  QTextFormat_properties(const QTextFormat* self);
 int QTextFormat_propertyCount(const QTextFormat* self);
 void QTextFormat_setObjectType(QTextFormat* self, int type);
@@ -128,11 +128,11 @@ const QMetaObject* QTextFormat_staticMetaObject();
 void QTextFormat_delete(QTextFormat* self);
 
 QTextCharFormat* QTextCharFormat_new();
-QTextCharFormat* QTextCharFormat_new2(QTextCharFormat* param1);
+QTextCharFormat* QTextCharFormat_new_from(QTextCharFormat* from);
 
 void QTextCharFormat_virtbase(QTextCharFormat* src, QTextFormat** outptr_QTextFormat);
 bool QTextCharFormat_isValid(const QTextCharFormat* self);
-void QTextCharFormat_setFont(QTextCharFormat* self, QFont* font);
+void QTextCharFormat_setFont_font(QTextCharFormat* self, QFont* font);
 QFont* QTextCharFormat_font(const QTextCharFormat* self);
 void QTextCharFormat_setFontFamily(QTextCharFormat* self, struct seaqt_string family);
 struct seaqt_string QTextCharFormat_fontFamily(const QTextCharFormat* self);
@@ -166,7 +166,7 @@ void QTextCharFormat_setFontFixedPitch(QTextCharFormat* self, bool fixedPitch);
 bool QTextCharFormat_fontFixedPitch(const QTextCharFormat* self);
 void QTextCharFormat_setFontStretch(QTextCharFormat* self, int factor);
 int QTextCharFormat_fontStretch(const QTextCharFormat* self);
-void QTextCharFormat_setFontStyleHint(QTextCharFormat* self, int hint);
+void QTextCharFormat_setFontStyleHint_hint(QTextCharFormat* self, int hint);
 void QTextCharFormat_setFontStyleStrategy(QTextCharFormat* self, int strategy);
 int QTextCharFormat_fontStyleHint(const QTextCharFormat* self);
 int QTextCharFormat_fontStyleStrategy(const QTextCharFormat* self);
@@ -198,14 +198,14 @@ void QTextCharFormat_setTableCellRowSpan(QTextCharFormat* self, int tableCellRow
 int QTextCharFormat_tableCellRowSpan(const QTextCharFormat* self);
 void QTextCharFormat_setTableCellColumnSpan(QTextCharFormat* self, int tableCellColumnSpan);
 int QTextCharFormat_tableCellColumnSpan(const QTextCharFormat* self);
-void QTextCharFormat_operatorAssign(QTextCharFormat* self, QTextCharFormat* param1);
-void QTextCharFormat_setFont2(QTextCharFormat* self, QFont* font, int behavior);
-void QTextCharFormat_setFontStyleHint2(QTextCharFormat* self, int hint, int strategy);
+void QTextCharFormat_operatorAssign(QTextCharFormat* self, QTextCharFormat* from);
+void QTextCharFormat_setFont_font_behavior(QTextCharFormat* self, QFont* font, int behavior);
+void QTextCharFormat_setFontStyleHint_hint_strategy(QTextCharFormat* self, int hint, int strategy);
 
 void QTextCharFormat_delete(QTextCharFormat* self);
 
 QTextBlockFormat* QTextBlockFormat_new();
-QTextBlockFormat* QTextBlockFormat_new2(QTextBlockFormat* param1);
+QTextBlockFormat* QTextBlockFormat_new_from(QTextBlockFormat* from);
 
 void QTextBlockFormat_virtbase(QTextBlockFormat* src, QTextFormat** outptr_QTextFormat);
 bool QTextBlockFormat_isValid(const QTextBlockFormat* self);
@@ -226,8 +226,8 @@ int QTextBlockFormat_indent(const QTextBlockFormat* self);
 void QTextBlockFormat_setHeadingLevel(QTextBlockFormat* self, int alevel);
 int QTextBlockFormat_headingLevel(const QTextBlockFormat* self);
 void QTextBlockFormat_setLineHeight(QTextBlockFormat* self, double height, int heightType);
-double QTextBlockFormat_lineHeight(const QTextBlockFormat* self, double scriptLineHeight, double scaling);
-double QTextBlockFormat_lineHeight2(const QTextBlockFormat* self);
+double QTextBlockFormat_lineHeight_scriptLineHeight_scaling(const QTextBlockFormat* self, double scriptLineHeight, double scaling);
+double QTextBlockFormat_lineHeight(const QTextBlockFormat* self);
 int QTextBlockFormat_lineHeightType(const QTextBlockFormat* self);
 void QTextBlockFormat_setNonBreakableLines(QTextBlockFormat* self, bool b);
 bool QTextBlockFormat_nonBreakableLines(const QTextBlockFormat* self);
@@ -237,12 +237,12 @@ void QTextBlockFormat_setTabPositions(QTextBlockFormat* self, struct seaqt_array
 struct seaqt_array /* of QTextOption__Tab* */  QTextBlockFormat_tabPositions(const QTextBlockFormat* self);
 void QTextBlockFormat_setMarker(QTextBlockFormat* self, int marker);
 int QTextBlockFormat_marker(const QTextBlockFormat* self);
-void QTextBlockFormat_operatorAssign(QTextBlockFormat* self, QTextBlockFormat* param1);
+void QTextBlockFormat_operatorAssign(QTextBlockFormat* self, QTextBlockFormat* from);
 
 void QTextBlockFormat_delete(QTextBlockFormat* self);
 
 QTextListFormat* QTextListFormat_new();
-QTextListFormat* QTextListFormat_new2(QTextListFormat* param1);
+QTextListFormat* QTextListFormat_new_from(QTextListFormat* from);
 
 void QTextListFormat_virtbase(QTextListFormat* src, QTextFormat** outptr_QTextFormat);
 bool QTextListFormat_isValid(const QTextListFormat* self);
@@ -254,7 +254,7 @@ void QTextListFormat_setNumberPrefix(QTextListFormat* self, struct seaqt_string 
 struct seaqt_string QTextListFormat_numberPrefix(const QTextListFormat* self);
 void QTextListFormat_setNumberSuffix(QTextListFormat* self, struct seaqt_string numberSuffix);
 struct seaqt_string QTextListFormat_numberSuffix(const QTextListFormat* self);
-void QTextListFormat_operatorAssign(QTextListFormat* self, QTextListFormat* param1);
+void QTextListFormat_operatorAssign(QTextListFormat* self, QTextListFormat* from);
 
 void QTextListFormat_delete(QTextListFormat* self);
 
@@ -268,14 +268,14 @@ void QTextImageFormat_setWidth(QTextImageFormat* self, double width);
 double QTextImageFormat_width(const QTextImageFormat* self);
 void QTextImageFormat_setHeight(QTextImageFormat* self, double height);
 double QTextImageFormat_height(const QTextImageFormat* self);
-void QTextImageFormat_setQuality(QTextImageFormat* self, int quality);
-void QTextImageFormat_setQuality2(QTextImageFormat* self);
+void QTextImageFormat_setQuality_quality(QTextImageFormat* self, int quality);
+void QTextImageFormat_setQuality(QTextImageFormat* self);
 int QTextImageFormat_quality(const QTextImageFormat* self);
 
 void QTextImageFormat_delete(QTextImageFormat* self);
 
 QTextFrameFormat* QTextFrameFormat_new();
-QTextFrameFormat* QTextFrameFormat_new2(QTextFrameFormat* param1);
+QTextFrameFormat* QTextFrameFormat_new_from(QTextFrameFormat* from);
 
 void QTextFrameFormat_virtbase(QTextFrameFormat* src, QTextFormat** outptr_QTextFormat);
 bool QTextFrameFormat_isValid(const QTextFrameFormat* self);
@@ -299,15 +299,15 @@ void QTextFrameFormat_setRightMargin(QTextFrameFormat* self, double margin);
 double QTextFrameFormat_rightMargin(const QTextFrameFormat* self);
 void QTextFrameFormat_setPadding(QTextFrameFormat* self, double padding);
 double QTextFrameFormat_padding(const QTextFrameFormat* self);
-void QTextFrameFormat_setWidth(QTextFrameFormat* self, double width);
-void QTextFrameFormat_setWidthWithLength(QTextFrameFormat* self, QTextLength* length);
+void QTextFrameFormat_setWidth_width(QTextFrameFormat* self, double width);
+void QTextFrameFormat_setWidth_length(QTextFrameFormat* self, QTextLength* length);
 QTextLength* QTextFrameFormat_width(const QTextFrameFormat* self);
-void QTextFrameFormat_setHeight(QTextFrameFormat* self, double height);
-void QTextFrameFormat_setHeightWithHeight(QTextFrameFormat* self, QTextLength* height);
+void QTextFrameFormat_setHeight_qreal(QTextFrameFormat* self, double height);
+void QTextFrameFormat_setHeight_QTextLength(QTextFrameFormat* self, QTextLength* height);
 QTextLength* QTextFrameFormat_height(const QTextFrameFormat* self);
 void QTextFrameFormat_setPageBreakPolicy(QTextFrameFormat* self, int flags);
 int QTextFrameFormat_pageBreakPolicy(const QTextFrameFormat* self);
-void QTextFrameFormat_operatorAssign(QTextFrameFormat* self, QTextFrameFormat* param1);
+void QTextFrameFormat_operatorAssign(QTextFrameFormat* self, QTextFrameFormat* from);
 
 void QTextFrameFormat_delete(QTextFrameFormat* self);
 

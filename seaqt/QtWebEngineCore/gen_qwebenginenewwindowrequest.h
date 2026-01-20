@@ -36,14 +36,14 @@ void QWebEngineNewWindowRequest_virtbase(QWebEngineNewWindowRequest* src, QObjec
 QMetaObject* QWebEngineNewWindowRequest_metaObject(const QWebEngineNewWindowRequest* self);
 void* QWebEngineNewWindowRequest_metacast(QWebEngineNewWindowRequest* self, const char* param1);
 int QWebEngineNewWindowRequest_metacall(QWebEngineNewWindowRequest* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineNewWindowRequest_tr(const char* s);
+struct seaqt_string QWebEngineNewWindowRequest_tr_s(const char* s);
 int QWebEngineNewWindowRequest_destination(const QWebEngineNewWindowRequest* self);
 QUrl* QWebEngineNewWindowRequest_requestedUrl(const QWebEngineNewWindowRequest* self);
 QRect* QWebEngineNewWindowRequest_requestedGeometry(const QWebEngineNewWindowRequest* self);
 bool QWebEngineNewWindowRequest_isUserInitiated(const QWebEngineNewWindowRequest* self);
 void QWebEngineNewWindowRequest_openIn(QWebEngineNewWindowRequest* self, QWebEnginePage* param1);
-struct seaqt_string QWebEngineNewWindowRequest_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineNewWindowRequest_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineNewWindowRequest_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineNewWindowRequest_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebEngineNewWindowRequest_staticMetaObject();
 void QWebEngineNewWindowRequest_delete(QWebEngineNewWindowRequest* self);

@@ -18,8 +18,8 @@ QPdfDocumentRenderOptions* QPdfDocumentRenderOptions_new() {
 	return new (std::nothrow) QPdfDocumentRenderOptions();
 }
 
-QPdfDocumentRenderOptions* QPdfDocumentRenderOptions_new2(QPdfDocumentRenderOptions* param1) {
-	return new (std::nothrow) QPdfDocumentRenderOptions(*param1);
+QPdfDocumentRenderOptions* QPdfDocumentRenderOptions_new_from(QPdfDocumentRenderOptions* from) {
+	return new (std::nothrow) QPdfDocumentRenderOptions(*from);
 }
 
 int QPdfDocumentRenderOptions_rotation(const QPdfDocumentRenderOptions* self) {

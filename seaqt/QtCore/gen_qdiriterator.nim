@@ -58,15 +58,15 @@ proc fcQDirIterator_fileName(self: pointer): struct_seaqt_string {.importc: "QDi
 proc fcQDirIterator_filePath(self: pointer): struct_seaqt_string {.importc: "QDirIterator_filePath".}
 proc fcQDirIterator_fileInfo(self: pointer): pointer {.importc: "QDirIterator_fileInfo".}
 proc fcQDirIterator_path(self: pointer): struct_seaqt_string {.importc: "QDirIterator_path".}
-proc fcQDirIterator_new(dir: pointer): ptr cQDirIterator {.importc: "QDirIterator_new".}
-proc fcQDirIterator_new2(path: struct_seaqt_string): ptr cQDirIterator {.importc: "QDirIterator_new2".}
-proc fcQDirIterator_new3(path: struct_seaqt_string, filter: cint): ptr cQDirIterator {.importc: "QDirIterator_new3".}
-proc fcQDirIterator_new4(path: struct_seaqt_string, nameFilters: struct_seaqt_array): ptr cQDirIterator {.importc: "QDirIterator_new4".}
-proc fcQDirIterator_new5(dir: pointer, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new5".}
-proc fcQDirIterator_new6(path: struct_seaqt_string, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new6".}
-proc fcQDirIterator_new7(path: struct_seaqt_string, filter: cint, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new7".}
-proc fcQDirIterator_new8(path: struct_seaqt_string, nameFilters: struct_seaqt_array, filters: cint): ptr cQDirIterator {.importc: "QDirIterator_new8".}
-proc fcQDirIterator_new9(path: struct_seaqt_string, nameFilters: struct_seaqt_array, filters: cint, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new9".}
+proc fcQDirIterator_new(dir: pointer): ptr cQDirIterator {.importc: "QDirIterator_new_dir".}
+proc fcQDirIterator_new2(path: struct_seaqt_string): ptr cQDirIterator {.importc: "QDirIterator_new_path".}
+proc fcQDirIterator_new3(path: struct_seaqt_string, filter: cint): ptr cQDirIterator {.importc: "QDirIterator_new_path_filter".}
+proc fcQDirIterator_new4(path: struct_seaqt_string, nameFilters: struct_seaqt_array): ptr cQDirIterator {.importc: "QDirIterator_new_path_nameFilters".}
+proc fcQDirIterator_new5(dir: pointer, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new_dir_flags".}
+proc fcQDirIterator_new6(path: struct_seaqt_string, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new_path_flags".}
+proc fcQDirIterator_new7(path: struct_seaqt_string, filter: cint, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new_path_filter_flags".}
+proc fcQDirIterator_new8(path: struct_seaqt_string, nameFilters: struct_seaqt_array, filters: cint): ptr cQDirIterator {.importc: "QDirIterator_new_path_nameFilters_filters".}
+proc fcQDirIterator_new9(path: struct_seaqt_string, nameFilters: struct_seaqt_array, filters: cint, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new_path_nameFilters_filters_flags".}
 
 proc next*(self: gen_qdiriterator_types.QDirIterator): string =
   let v_ms = fcQDirIterator_next(self.h)

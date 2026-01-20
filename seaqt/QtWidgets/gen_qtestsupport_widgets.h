@@ -46,18 +46,18 @@ typedef struct QTest__QTouchEventWidgetSequence_VTable{
 void* QTest__QTouchEventWidgetSequence_vdata(VirtualQTestQTouchEventWidgetSequence* self);
 VirtualQTestQTouchEventWidgetSequence* vdata_QTest__QTouchEventWidgetSequence(void* vdata);
 
-VirtualQTestQTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_new(const QTest__QTouchEventWidgetSequence_VTable* vtbl, size_t vdata, QTest__QTouchEventWidgetSequence* param1);
+VirtualQTestQTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_new(const QTest__QTouchEventWidgetSequence_VTable* vtbl, size_t vdata, QTest__QTouchEventWidgetSequence* from);
 
 void QTest__QTouchEventWidgetSequence_virtbase(QTest__QTouchEventWidgetSequence* src, QTest__QTouchEventSequence** outptr_QTest__QTouchEventSequence);
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_press(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt);
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt);
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt);
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_press_touchId_pt(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt);
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move_touchId_pt(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt);
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release_touchId_pt(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt);
 QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_stationary(QTest__QTouchEventWidgetSequence* self, int touchId);
 bool QTest__QTouchEventWidgetSequence_commit(QTest__QTouchEventWidgetSequence* self, bool processEvents);
-void QTest__QTouchEventWidgetSequence_operatorAssign(QTest__QTouchEventWidgetSequence* self, QTest__QTouchEventWidgetSequence* param1);
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_press2(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget);
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move2(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget);
-QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release2(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget);
+void QTest__QTouchEventWidgetSequence_operatorAssign(QTest__QTouchEventWidgetSequence* self, QTest__QTouchEventWidgetSequence* from);
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_press_touchId_pt_widget(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget);
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move_touchId_pt_widget(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget);
+QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release_touchId_pt_widget(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget);
 
 QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_virtualbase_stationary(VirtualQTestQTouchEventWidgetSequence* self, int touchId);
 bool QTest__QTouchEventWidgetSequence_virtualbase_commit(VirtualQTestQTouchEventWidgetSequence* self, bool processEvents);

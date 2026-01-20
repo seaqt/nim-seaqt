@@ -18,17 +18,17 @@ QWebEngineUrlScheme* QWebEngineUrlScheme_new() {
 	return new (std::nothrow) QWebEngineUrlScheme();
 }
 
-QWebEngineUrlScheme* QWebEngineUrlScheme_new2(struct seaqt_string name) {
+QWebEngineUrlScheme* QWebEngineUrlScheme_new_name(struct seaqt_string name) {
 	QByteArray name_QByteArray(name.data, name.len);
 	return new (std::nothrow) QWebEngineUrlScheme(name_QByteArray);
 }
 
-QWebEngineUrlScheme* QWebEngineUrlScheme_new3(QWebEngineUrlScheme* that) {
-	return new (std::nothrow) QWebEngineUrlScheme(*that);
+QWebEngineUrlScheme* QWebEngineUrlScheme_new_from(QWebEngineUrlScheme* from) {
+	return new (std::nothrow) QWebEngineUrlScheme(*from);
 }
 
-void QWebEngineUrlScheme_operatorAssign(QWebEngineUrlScheme* self, QWebEngineUrlScheme* that) {
-	self->operator=(*that);
+void QWebEngineUrlScheme_operatorAssign(QWebEngineUrlScheme* self, QWebEngineUrlScheme* from) {
+	self->operator=(*from);
 }
 
 bool QWebEngineUrlScheme_operatorEqual(const QWebEngineUrlScheme* self, QWebEngineUrlScheme* that) {

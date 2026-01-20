@@ -58,11 +58,11 @@ export
 
 type cQSGImageNode*{.exportc: "QSGImageNode", incompleteStruct.} = object
 
-proc fcQSGImageNode_setRect(self: pointer, rect: pointer): void {.importc: "QSGImageNode_setRect".}
-proc fcQSGImageNode_setRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGImageNode_setRect2".}
+proc fcQSGImageNode_setRectRect(self: pointer, rect: pointer): void {.importc: "QSGImageNode_setRect_rect".}
+proc fcQSGImageNode_setRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGImageNode_setRect_x_y_w_h".}
 proc fcQSGImageNode_rect(self: pointer): pointer {.importc: "QSGImageNode_rect".}
-proc fcQSGImageNode_setSourceRect(self: pointer, r: pointer): void {.importc: "QSGImageNode_setSourceRect".}
-proc fcQSGImageNode_setSourceRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGImageNode_setSourceRect2".}
+proc fcQSGImageNode_setSourceRectR(self: pointer, r: pointer): void {.importc: "QSGImageNode_setSourceRect_r".}
+proc fcQSGImageNode_setSourceRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGImageNode_setSourceRect_x_y_w_h".}
 proc fcQSGImageNode_sourceRect(self: pointer): pointer {.importc: "QSGImageNode_sourceRect".}
 proc fcQSGImageNode_setTexture(self: pointer, texture: pointer): void {.importc: "QSGImageNode_setTexture".}
 proc fcQSGImageNode_texture(self: pointer): pointer {.importc: "QSGImageNode_texture".}
@@ -79,19 +79,19 @@ proc fcQSGImageNode_ownsTexture(self: pointer): bool {.importc: "QSGImageNode_ow
 proc fcQSGImageNode_rebuildGeometry(g: pointer, texture: pointer, rect: pointer, sourceRect: pointer, texCoordMode: cint): void {.importc: "QSGImageNode_rebuildGeometry".}
 
 proc setRect*(self: gen_qsgimagenode_types.QSGImageNode, rect: gen_qrect_types.QRectF): void =
-  fcQSGImageNode_setRect(self.h, rect.h)
+  fcQSGImageNode_setRectRect(self.h, rect.h)
 
 proc setRect*(self: gen_qsgimagenode_types.QSGImageNode, x: float64, y: float64, w: float64, h: float64): void =
-  fcQSGImageNode_setRect2(self.h, x, y, w, h)
+  fcQSGImageNode_setRectXYWH(self.h, x, y, w, h)
 
 proc rect*(self: gen_qsgimagenode_types.QSGImageNode): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQSGImageNode_rect(self.h), owned: true)
 
 proc setSourceRect*(self: gen_qsgimagenode_types.QSGImageNode, r: gen_qrect_types.QRectF): void =
-  fcQSGImageNode_setSourceRect(self.h, r.h)
+  fcQSGImageNode_setSourceRectR(self.h, r.h)
 
 proc setSourceRect*(self: gen_qsgimagenode_types.QSGImageNode, x: float64, y: float64, w: float64, h: float64): void =
-  fcQSGImageNode_setSourceRect2(self.h, x, y, w, h)
+  fcQSGImageNode_setSourceRectXYWH(self.h, x, y, w, h)
 
 proc sourceRect*(self: gen_qsgimagenode_types.QSGImageNode): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQSGImageNode_sourceRect(self.h), owned: true)

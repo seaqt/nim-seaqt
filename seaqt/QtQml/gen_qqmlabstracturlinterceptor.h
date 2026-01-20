@@ -34,7 +34,7 @@ VirtualQQmlAbstractUrlInterceptor* vdata_QQmlAbstractUrlInterceptor(void* vdata)
 VirtualQQmlAbstractUrlInterceptor* QQmlAbstractUrlInterceptor_new(const QQmlAbstractUrlInterceptor_VTable* vtbl, size_t vdata);
 
 QUrl* QQmlAbstractUrlInterceptor_intercept(QQmlAbstractUrlInterceptor* self, QUrl* path, int type);
-void QQmlAbstractUrlInterceptor_operatorAssign(QQmlAbstractUrlInterceptor* self, QQmlAbstractUrlInterceptor* param1);
+void QQmlAbstractUrlInterceptor_operatorAssign(QQmlAbstractUrlInterceptor* self, QQmlAbstractUrlInterceptor* from);
 
 QUrl* QQmlAbstractUrlInterceptor_virtualbase_intercept(VirtualQQmlAbstractUrlInterceptor* self, QUrl* path, int type);
 

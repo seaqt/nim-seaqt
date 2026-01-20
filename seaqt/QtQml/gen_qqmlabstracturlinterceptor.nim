@@ -51,7 +51,7 @@ export
 type cQQmlAbstractUrlInterceptor*{.exportc: "QQmlAbstractUrlInterceptor", incompleteStruct.} = object
 
 proc fcQQmlAbstractUrlInterceptor_intercept(self: pointer, path: pointer, typeVal: cint): pointer {.importc: "QQmlAbstractUrlInterceptor_intercept".}
-proc fcQQmlAbstractUrlInterceptor_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlAbstractUrlInterceptor_operatorAssign".}
+proc fcQQmlAbstractUrlInterceptor_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlAbstractUrlInterceptor_operatorAssign".}
 proc fcQQmlAbstractUrlInterceptor_vdata(self: pointer): ptr pointer {.importc: "QQmlAbstractUrlInterceptor_vdata".}
 proc fvdata_cQQmlAbstractUrlInterceptor(self: pointer): pointer {.importc: "vdata_QQmlAbstractUrlInterceptor".}
 
@@ -63,8 +63,8 @@ proc fcQQmlAbstractUrlInterceptor_new(vtbl: pointer, vdata: csize_t): ptr cQQmlA
 proc intercept*(self: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor, path: gen_qurl_types.QUrl, typeVal: cint): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQQmlAbstractUrlInterceptor_intercept(self.h, path.h, cint(typeVal)), owned: true)
 
-proc operatorAssign*(self: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor, param1: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor): void =
-  fcQQmlAbstractUrlInterceptor_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor, fromVal: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor): void =
+  fcQQmlAbstractUrlInterceptor_operatorAssign(self.h, fromVal.h)
 
 type QQmlAbstractUrlInterceptorinterceptProc* = proc(self: QQmlAbstractUrlInterceptor, path: gen_qurl_types.QUrl, typeVal: cint): gen_qurl_types.QUrl {.raises: [], gcsafe.}
 

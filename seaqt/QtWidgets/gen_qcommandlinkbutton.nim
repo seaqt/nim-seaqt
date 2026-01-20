@@ -75,15 +75,15 @@ type cQCommandLinkButton*{.exportc: "QCommandLinkButton", incompleteStruct.} = o
 proc fcQCommandLinkButton_metaObject(self: pointer): pointer {.importc: "QCommandLinkButton_metaObject".}
 proc fcQCommandLinkButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QCommandLinkButton_metacast".}
 proc fcQCommandLinkButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCommandLinkButton_metacall".}
-proc fcQCommandLinkButton_tr(s: cstring): struct_seaqt_string {.importc: "QCommandLinkButton_tr".}
+proc fcQCommandLinkButton_trS(s: cstring): struct_seaqt_string {.importc: "QCommandLinkButton_tr_s".}
 proc fcQCommandLinkButton_description(self: pointer): struct_seaqt_string {.importc: "QCommandLinkButton_description".}
 proc fcQCommandLinkButton_setDescription(self: pointer, description: struct_seaqt_string): void {.importc: "QCommandLinkButton_setDescription".}
 proc fcQCommandLinkButton_sizeHint(self: pointer): pointer {.importc: "QCommandLinkButton_sizeHint".}
 proc fcQCommandLinkButton_heightForWidth(self: pointer, param1: cint): cint {.importc: "QCommandLinkButton_heightForWidth".}
 proc fcQCommandLinkButton_minimumSizeHint(self: pointer): pointer {.importc: "QCommandLinkButton_minimumSizeHint".}
 proc fcQCommandLinkButton_initStyleOption(self: pointer, option: pointer): void {.importc: "QCommandLinkButton_initStyleOption".}
-proc fcQCommandLinkButton_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCommandLinkButton_tr2".}
-proc fcQCommandLinkButton_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCommandLinkButton_tr3".}
+proc fcQCommandLinkButton_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCommandLinkButton_tr_s_c".}
+proc fcQCommandLinkButton_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCommandLinkButton_tr_s_c_n".}
 proc fcQCommandLinkButton_vdata(self: pointer): ptr pointer {.importc: "QCommandLinkButton_vdata".}
 proc fvdata_cQCommandLinkButton(self: pointer): pointer {.importc: "vdata_QCommandLinkButton".}
 
@@ -206,12 +206,12 @@ proc fcQCommandLinkButton_protectedbase_sender(self: pointer): pointer {.importc
 proc fcQCommandLinkButton_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCommandLinkButton_protectedbase_senderSignalIndex".}
 proc fcQCommandLinkButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCommandLinkButton_protectedbase_receivers".}
 proc fcQCommandLinkButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCommandLinkButton_protectedbase_isSignalConnected".}
-proc fcQCommandLinkButton_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new".}
-proc fcQCommandLinkButton_new2(vtbl: pointer, vdata: csize_t): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new2".}
-proc fcQCommandLinkButton_new3(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new3".}
-proc fcQCommandLinkButton_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, description: struct_seaqt_string): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new4".}
-proc fcQCommandLinkButton_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new5".}
-proc fcQCommandLinkButton_new6(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, description: struct_seaqt_string, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new6".}
+proc fcQCommandLinkButton_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new_parent".}
+proc fcQCommandLinkButton_new2(vtbl: pointer, vdata: csize_t): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new".}
+proc fcQCommandLinkButton_new3(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new_text".}
+proc fcQCommandLinkButton_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, description: struct_seaqt_string): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new_text_description".}
+proc fcQCommandLinkButton_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new_text_parent".}
+proc fcQCommandLinkButton_new6(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, description: struct_seaqt_string, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new_text_description_parent".}
 proc fcQCommandLinkButton_staticMetaObject(): pointer {.importc: "QCommandLinkButton_staticMetaObject".}
 
 proc metaObject*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qobjectdefs_types.QMetaObject =
@@ -224,7 +224,7 @@ proc metacall*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: ci
   fcQCommandLinkButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcommandlinkbutton_types.QCommandLinkButton, s: cstring): string =
-  let v_ms = fcQCommandLinkButton_tr(s)
+  let v_ms = fcQCommandLinkButton_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -251,13 +251,13 @@ proc initStyleOption*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, opt
   fcQCommandLinkButton_initStyleOption(self.h, option.h)
 
 proc tr*(_: type gen_qcommandlinkbutton_types.QCommandLinkButton, s: cstring, c: cstring): string =
-  let v_ms = fcQCommandLinkButton_tr2(s, c)
+  let v_ms = fcQCommandLinkButton_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcommandlinkbutton_types.QCommandLinkButton, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCommandLinkButton_tr3(s, c, n)
+  let v_ms = fcQCommandLinkButton_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -27,12 +27,12 @@ QSslConfiguration* QSslConfiguration_new() {
 	return new (std::nothrow) QSslConfiguration();
 }
 
-QSslConfiguration* QSslConfiguration_new2(QSslConfiguration* other) {
-	return new (std::nothrow) QSslConfiguration(*other);
+QSslConfiguration* QSslConfiguration_new_from(QSslConfiguration* from) {
+	return new (std::nothrow) QSslConfiguration(*from);
 }
 
-void QSslConfiguration_operatorAssign(QSslConfiguration* self, QSslConfiguration* other) {
-	self->operator=(*other);
+void QSslConfiguration_operatorAssign(QSslConfiguration* self, QSslConfiguration* from) {
+	self->operator=(*from);
 }
 
 void QSslConfiguration_swap(QSslConfiguration* self, QSslConfiguration* other) {
@@ -155,7 +155,7 @@ struct seaqt_array /* of QSslCipher* */  QSslConfiguration_ciphers(const QSslCon
 	return _out;
 }
 
-void QSslConfiguration_setCiphers(QSslConfiguration* self, struct seaqt_array /* of QSslCipher* */  ciphers) {
+void QSslConfiguration_setCiphers_QListOfQSslCipher(QSslConfiguration* self, struct seaqt_array /* of QSslCipher* */  ciphers) {
 	QList<QSslCipher> ciphers_QList;
 	ciphers_QList.reserve(ciphers.len);
 	QSslCipher** ciphers_arr = static_cast<QSslCipher**>(ciphers.data);
@@ -165,7 +165,7 @@ void QSslConfiguration_setCiphers(QSslConfiguration* self, struct seaqt_array /*
 	self->setCiphers(ciphers_QList);
 }
 
-void QSslConfiguration_setCiphersWithCiphers(QSslConfiguration* self, struct seaqt_string ciphers) {
+void QSslConfiguration_setCiphers_QString(QSslConfiguration* self, struct seaqt_string ciphers) {
 	QString ciphers_QString = QString::fromUtf8(ciphers.data, ciphers.len);
 	self->setCiphers(ciphers_QString);
 }
@@ -206,7 +206,7 @@ void QSslConfiguration_setCaCertificates(QSslConfiguration* self, struct seaqt_a
 	self->setCaCertificates(certificates_QList);
 }
 
-bool QSslConfiguration_addCaCertificates(QSslConfiguration* self, struct seaqt_string path) {
+bool QSslConfiguration_addCaCertificates_path(QSslConfiguration* self, struct seaqt_string path) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	return self->addCaCertificates(path_QString);
 }
@@ -215,7 +215,7 @@ void QSslConfiguration_addCaCertificate(QSslConfiguration* self, QSslCertificate
 	self->addCaCertificate(*certificate);
 }
 
-void QSslConfiguration_addCaCertificatesWithCertificates(QSslConfiguration* self, struct seaqt_array /* of QSslCertificate* */  certificates) {
+void QSslConfiguration_addCaCertificates_certificates(QSslConfiguration* self, struct seaqt_array /* of QSslCertificate* */  certificates) {
 	QList<QSslCertificate> certificates_QList;
 	certificates_QList.reserve(certificates.len);
 	QSslCertificate** certificates_arr = static_cast<QSslCertificate**>(certificates.data);
@@ -444,12 +444,12 @@ int QSslConfiguration_nextProtocolNegotiationStatus(const QSslConfiguration* sel
 	return static_cast<int>(_ret);
 }
 
-bool QSslConfiguration_addCaCertificates2(QSslConfiguration* self, struct seaqt_string path, int format) {
+bool QSslConfiguration_addCaCertificates_path_format(QSslConfiguration* self, struct seaqt_string path, int format) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	return self->addCaCertificates(path_QString, static_cast<QSsl::EncodingFormat>(format));
 }
 
-bool QSslConfiguration_addCaCertificates3(QSslConfiguration* self, struct seaqt_string path, int format, int syntax) {
+bool QSslConfiguration_addCaCertificates_path_format_syntax(QSslConfiguration* self, struct seaqt_string path, int format, int syntax) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	return self->addCaCertificates(path_QString, static_cast<QSsl::EncodingFormat>(format), static_cast<QSslCertificate::PatternSyntax>(syntax));
 }

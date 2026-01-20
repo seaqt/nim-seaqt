@@ -53,15 +53,15 @@ void* QAudioEngine_vdata(VirtualQAudioEngine* self);
 VirtualQAudioEngine* vdata_QAudioEngine(void* vdata);
 
 VirtualQAudioEngine* QAudioEngine_new(const QAudioEngine_VTable* vtbl, size_t vdata);
-VirtualQAudioEngine* QAudioEngine_new2(const QAudioEngine_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQAudioEngine* QAudioEngine_new3(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate);
-VirtualQAudioEngine* QAudioEngine_new4(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate, QObject* parent);
+VirtualQAudioEngine* QAudioEngine_new_parent(const QAudioEngine_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAudioEngine* QAudioEngine_new_sampleRate(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate);
+VirtualQAudioEngine* QAudioEngine_new_sampleRate_parent(const QAudioEngine_VTable* vtbl, size_t vdata, int sampleRate, QObject* parent);
 
 void QAudioEngine_virtbase(QAudioEngine* src, QObject** outptr_QObject);
 QMetaObject* QAudioEngine_metaObject(const QAudioEngine* self);
 void* QAudioEngine_metacast(QAudioEngine* self, const char* param1);
 int QAudioEngine_metacall(QAudioEngine* self, int param1, int param2, void** param3);
-struct seaqt_string QAudioEngine_tr(const char* s);
+struct seaqt_string QAudioEngine_tr_s(const char* s);
 void QAudioEngine_setOutputMode(QAudioEngine* self, int mode);
 int QAudioEngine_outputMode(const QAudioEngine* self);
 int QAudioEngine_sampleRate(const QAudioEngine* self);
@@ -89,8 +89,8 @@ void QAudioEngine_start(QAudioEngine* self);
 void QAudioEngine_stop(QAudioEngine* self);
 void QAudioEngine_pause(QAudioEngine* self);
 void QAudioEngine_resume(QAudioEngine* self);
-struct seaqt_string QAudioEngine_tr2(const char* s, const char* c);
-struct seaqt_string QAudioEngine_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAudioEngine_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAudioEngine_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAudioEngine_virtualbase_metaObject(const VirtualQAudioEngine* self);
 void* QAudioEngine_virtualbase_metacast(VirtualQAudioEngine* self, const char* param1);

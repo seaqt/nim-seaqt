@@ -67,7 +67,7 @@ type cQMediaCaptureSession*{.exportc: "QMediaCaptureSession", incompleteStruct.}
 proc fcQMediaCaptureSession_metaObject(self: pointer): pointer {.importc: "QMediaCaptureSession_metaObject".}
 proc fcQMediaCaptureSession_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaCaptureSession_metacast".}
 proc fcQMediaCaptureSession_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaCaptureSession_metacall".}
-proc fcQMediaCaptureSession_tr(s: cstring): struct_seaqt_string {.importc: "QMediaCaptureSession_tr".}
+proc fcQMediaCaptureSession_trS(s: cstring): struct_seaqt_string {.importc: "QMediaCaptureSession_tr_s".}
 proc fcQMediaCaptureSession_audioInput(self: pointer): pointer {.importc: "QMediaCaptureSession_audioInput".}
 proc fcQMediaCaptureSession_setAudioInput(self: pointer, input: pointer): void {.importc: "QMediaCaptureSession_setAudioInput".}
 proc fcQMediaCaptureSession_camera(self: pointer): pointer {.importc: "QMediaCaptureSession_camera".}
@@ -94,8 +94,8 @@ proc fcQMediaCaptureSession_videoOutputChanged(self: pointer): void {.importc: "
 proc fcQMediaCaptureSession_connect_videoOutputChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_videoOutputChanged".}
 proc fcQMediaCaptureSession_audioOutputChanged(self: pointer): void {.importc: "QMediaCaptureSession_audioOutputChanged".}
 proc fcQMediaCaptureSession_connect_audioOutputChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_audioOutputChanged".}
-proc fcQMediaCaptureSession_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaCaptureSession_tr2".}
-proc fcQMediaCaptureSession_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaCaptureSession_tr3".}
+proc fcQMediaCaptureSession_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaCaptureSession_tr_s_c".}
+proc fcQMediaCaptureSession_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaCaptureSession_tr_s_c_n".}
 proc fcQMediaCaptureSession_vdata(self: pointer): ptr pointer {.importc: "QMediaCaptureSession_vdata".}
 proc fvdata_cQMediaCaptureSession(self: pointer): pointer {.importc: "vdata_QMediaCaptureSession".}
 
@@ -126,7 +126,7 @@ proc fcQMediaCaptureSession_protectedbase_senderSignalIndex(self: pointer): cint
 proc fcQMediaCaptureSession_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaCaptureSession_protectedbase_receivers".}
 proc fcQMediaCaptureSession_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaCaptureSession_protectedbase_isSignalConnected".}
 proc fcQMediaCaptureSession_new(vtbl: pointer, vdata: csize_t): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new".}
-proc fcQMediaCaptureSession_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new2".}
+proc fcQMediaCaptureSession_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new_parent".}
 proc fcQMediaCaptureSession_staticMetaObject(): pointer {.importc: "QMediaCaptureSession_staticMetaObject".}
 
 proc metaObject*(self: gen_qmediacapturesession_types.QMediaCaptureSession): gen_qobjectdefs_types.QMetaObject =
@@ -139,7 +139,7 @@ proc metacall*(self: gen_qmediacapturesession_types.QMediaCaptureSession, param1
   fcQMediaCaptureSession_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediacapturesession_types.QMediaCaptureSession, s: cstring): string =
-  let v_ms = fcQMediaCaptureSession_tr(s)
+  let v_ms = fcQMediaCaptureSession_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -295,13 +295,13 @@ proc onAudioOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSes
   fcQMediaCaptureSession_connect_audioOutputChanged(self.h, cast[int](addr tmp[]), fcQMediaCaptureSession_slot_callback_audioOutputChanged, fcQMediaCaptureSession_slot_callback_audioOutputChanged_release)
 
 proc tr*(_: type gen_qmediacapturesession_types.QMediaCaptureSession, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaCaptureSession_tr2(s, c)
+  let v_ms = fcQMediaCaptureSession_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediacapturesession_types.QMediaCaptureSession, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaCaptureSession_tr3(s, c, n)
+  let v_ms = fcQMediaCaptureSession_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

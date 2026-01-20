@@ -16,16 +16,16 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QFontInfo* QFontInfo_new(QFont* param1) {
+QFontInfo* QFontInfo_new_QFont(QFont* param1) {
 	return new (std::nothrow) QFontInfo(*param1);
 }
 
-QFontInfo* QFontInfo_new2(QFontInfo* param1) {
-	return new (std::nothrow) QFontInfo(*param1);
+QFontInfo* QFontInfo_new_QFontInfo(QFontInfo* from) {
+	return new (std::nothrow) QFontInfo(*from);
 }
 
-void QFontInfo_operatorAssign(QFontInfo* self, QFontInfo* param1) {
-	self->operator=(*param1);
+void QFontInfo_operatorAssign(QFontInfo* self, QFontInfo* from) {
+	self->operator=(*from);
 }
 
 void QFontInfo_swap(QFontInfo* self, QFontInfo* other) {

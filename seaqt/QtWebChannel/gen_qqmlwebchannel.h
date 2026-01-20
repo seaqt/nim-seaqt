@@ -55,18 +55,18 @@ void* QQmlWebChannel_vdata(VirtualQQmlWebChannel* self);
 VirtualQQmlWebChannel* vdata_QQmlWebChannel(void* vdata);
 
 VirtualQQmlWebChannel* QQmlWebChannel_new(const QQmlWebChannel_VTable* vtbl, size_t vdata);
-VirtualQQmlWebChannel* QQmlWebChannel_new2(const QQmlWebChannel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQQmlWebChannel* QQmlWebChannel_new_parent(const QQmlWebChannel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QQmlWebChannel_virtbase(QQmlWebChannel* src, QWebChannel** outptr_QWebChannel);
 QMetaObject* QQmlWebChannel_metaObject(const QQmlWebChannel* self);
 void* QQmlWebChannel_metacast(QQmlWebChannel* self, const char* param1);
 int QQmlWebChannel_metacall(QQmlWebChannel* self, int param1, int param2, void** param3);
-struct seaqt_string QQmlWebChannel_tr(const char* s);
+struct seaqt_string QQmlWebChannel_tr_s(const char* s);
 void QQmlWebChannel_registerObjects(QQmlWebChannel* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  objects);
 void QQmlWebChannel_connectTo(QQmlWebChannel* self, QObject* transport);
 void QQmlWebChannel_disconnectFrom(QQmlWebChannel* self, QObject* transport);
-struct seaqt_string QQmlWebChannel_tr2(const char* s, const char* c);
-struct seaqt_string QQmlWebChannel_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQmlWebChannel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQmlWebChannel_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQmlWebChannel_virtualbase_metaObject(const VirtualQQmlWebChannel* self);
 void* QQmlWebChannel_virtualbase_metacast(VirtualQQmlWebChannel* self, const char* param1);

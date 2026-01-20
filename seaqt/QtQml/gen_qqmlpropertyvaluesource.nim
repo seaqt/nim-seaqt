@@ -44,7 +44,7 @@ export
 type cQQmlPropertyValueSource*{.exportc: "QQmlPropertyValueSource", incompleteStruct.} = object
 
 proc fcQQmlPropertyValueSource_setTarget(self: pointer, target: pointer): void {.importc: "QQmlPropertyValueSource_setTarget".}
-proc fcQQmlPropertyValueSource_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlPropertyValueSource_operatorAssign".}
+proc fcQQmlPropertyValueSource_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlPropertyValueSource_operatorAssign".}
 proc fcQQmlPropertyValueSource_vdata(self: pointer): ptr pointer {.importc: "QQmlPropertyValueSource_vdata".}
 proc fvdata_cQQmlPropertyValueSource(self: pointer): pointer {.importc: "vdata_QQmlPropertyValueSource".}
 
@@ -56,8 +56,8 @@ proc fcQQmlPropertyValueSource_new(vtbl: pointer, vdata: csize_t): ptr cQQmlProp
 proc setTarget*(self: gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource, target: gen_qqmlproperty_types.QQmlProperty): void =
   fcQQmlPropertyValueSource_setTarget(self.h, target.h)
 
-proc operatorAssign*(self: gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource, param1: gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource): void =
-  fcQQmlPropertyValueSource_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource, fromVal: gen_qqmlpropertyvaluesource_types.QQmlPropertyValueSource): void =
+  fcQQmlPropertyValueSource_operatorAssign(self.h, fromVal.h)
 
 type QQmlPropertyValueSourcesetTargetProc* = proc(self: QQmlPropertyValueSource, target: gen_qqmlproperty_types.QQmlProperty): void {.raises: [], gcsafe.}
 

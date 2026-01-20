@@ -191,7 +191,7 @@ int QSpatialSound_metacall(QSpatialSound* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSpatialSound_tr(const char* s) {
+struct seaqt_string QSpatialSound_tr_s(const char* s) {
 	QString _ret = QSpatialSound::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -541,7 +541,7 @@ void QSpatialSound_stop(QSpatialSound* self) {
 	self->stop();
 }
 
-struct seaqt_string QSpatialSound_tr2(const char* s, const char* c) {
+struct seaqt_string QSpatialSound_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSpatialSound::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -552,7 +552,7 @@ struct seaqt_string QSpatialSound_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSpatialSound_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSpatialSound_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSpatialSound::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

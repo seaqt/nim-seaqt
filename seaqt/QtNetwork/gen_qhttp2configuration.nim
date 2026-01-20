@@ -39,7 +39,7 @@ export gen_qhttp2configuration_types
 
 type cQHttp2Configuration*{.exportc: "QHttp2Configuration", incompleteStruct.} = object
 
-proc fcQHttp2Configuration_operatorAssign(self: pointer, other: pointer): void {.importc: "QHttp2Configuration_operatorAssign".}
+proc fcQHttp2Configuration_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QHttp2Configuration_operatorAssign".}
 proc fcQHttp2Configuration_setServerPushEnabled(self: pointer, enable: bool): void {.importc: "QHttp2Configuration_setServerPushEnabled".}
 proc fcQHttp2Configuration_serverPushEnabled(self: pointer): bool {.importc: "QHttp2Configuration_serverPushEnabled".}
 proc fcQHttp2Configuration_setHuffmanCompressionEnabled(self: pointer, enable: bool): void {.importc: "QHttp2Configuration_setHuffmanCompressionEnabled".}
@@ -52,10 +52,10 @@ proc fcQHttp2Configuration_setMaxFrameSize(self: pointer, size: cuint): bool {.i
 proc fcQHttp2Configuration_maxFrameSize(self: pointer): cuint {.importc: "QHttp2Configuration_maxFrameSize".}
 proc fcQHttp2Configuration_swap(self: pointer, other: pointer): void {.importc: "QHttp2Configuration_swap".}
 proc fcQHttp2Configuration_new(): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new".}
-proc fcQHttp2Configuration_new2(other: pointer): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new2".}
+proc fcQHttp2Configuration_new2(fromVal: pointer): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new_from".}
 
-proc operatorAssign*(self: gen_qhttp2configuration_types.QHttp2Configuration, other: gen_qhttp2configuration_types.QHttp2Configuration): void =
-  fcQHttp2Configuration_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qhttp2configuration_types.QHttp2Configuration, fromVal: gen_qhttp2configuration_types.QHttp2Configuration): void =
+  fcQHttp2Configuration_operatorAssign(self.h, fromVal.h)
 
 proc setServerPushEnabled*(self: gen_qhttp2configuration_types.QHttp2Configuration, enable: bool): void =
   fcQHttp2Configuration_setServerPushEnabled(self.h, enable)
@@ -94,6 +94,6 @@ proc create*(T: type gen_qhttp2configuration_types.QHttp2Configuration): gen_qht
   let tmp = gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new(), owned: true)
   tmp
 proc create*(T: type gen_qhttp2configuration_types.QHttp2Configuration,
-    other: gen_qhttp2configuration_types.QHttp2Configuration): gen_qhttp2configuration_types.QHttp2Configuration =
-  let tmp = gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new2(other.h), owned: true)
+    fromVal: gen_qhttp2configuration_types.QHttp2Configuration): gen_qhttp2configuration_types.QHttp2Configuration =
+  let tmp = gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new2(fromVal.h), owned: true)
   tmp

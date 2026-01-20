@@ -89,18 +89,18 @@ VirtualQUndoCommand* QUndoCommand_new(const QUndoCommand_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQUndoCommand(vtbl) : nullptr;
 }
 
-VirtualQUndoCommand* QUndoCommand_new2(const QUndoCommand_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQUndoCommand* QUndoCommand_new_text(const QUndoCommand_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUndoCommand>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQUndoCommand(vtbl, text_QString) : nullptr;
 }
 
-VirtualQUndoCommand* QUndoCommand_new3(const QUndoCommand_VTable* vtbl, size_t vdata, QUndoCommand* parent) {
+VirtualQUndoCommand* QUndoCommand_new_parent(const QUndoCommand_VTable* vtbl, size_t vdata, QUndoCommand* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUndoCommand>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQUndoCommand(vtbl, parent) : nullptr;
 }
 
-VirtualQUndoCommand* QUndoCommand_new4(const QUndoCommand_VTable* vtbl, size_t vdata, struct seaqt_string text, QUndoCommand* parent) {
+VirtualQUndoCommand* QUndoCommand_new_text_parent(const QUndoCommand_VTable* vtbl, size_t vdata, struct seaqt_string text, QUndoCommand* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUndoCommand>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQUndoCommand(vtbl, text_QString, parent) : nullptr;
@@ -343,7 +343,7 @@ VirtualQUndoStack* QUndoStack_new(const QUndoStack_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQUndoStack(vtbl) : nullptr;
 }
 
-VirtualQUndoStack* QUndoStack_new2(const QUndoStack_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQUndoStack* QUndoStack_new_parent(const QUndoStack_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUndoStack>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQUndoStack(vtbl, parent) : nullptr;
 }
@@ -364,7 +364,7 @@ int QUndoStack_metacall(QUndoStack* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QUndoStack_tr(const char* s) {
+struct seaqt_string QUndoStack_tr_s(const char* s) {
 	QString _ret = QUndoStack::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -432,11 +432,11 @@ struct seaqt_string QUndoStack_text(const QUndoStack* self, int idx) {
 	return _ms;
 }
 
-QAction* QUndoStack_createUndoAction(const QUndoStack* self, QObject* parent) {
+QAction* QUndoStack_createUndoAction_parent(const QUndoStack* self, QObject* parent) {
 	return self->createUndoAction(parent);
 }
 
-QAction* QUndoStack_createRedoAction(const QUndoStack* self, QObject* parent) {
+QAction* QUndoStack_createRedoAction_parent(const QUndoStack* self, QObject* parent) {
 	return self->createRedoAction(parent);
 }
 
@@ -609,7 +609,7 @@ void QUndoStack_connect_redoTextChanged(QUndoStack* self, intptr_t slot, void (*
 	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::redoTextChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QUndoStack_tr2(const char* s, const char* c) {
+struct seaqt_string QUndoStack_tr_s_c(const char* s, const char* c) {
 	QString _ret = QUndoStack::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -620,7 +620,7 @@ struct seaqt_string QUndoStack_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QUndoStack_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QUndoStack_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QUndoStack::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -631,17 +631,17 @@ struct seaqt_string QUndoStack_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QAction* QUndoStack_createUndoAction2(const QUndoStack* self, QObject* parent, struct seaqt_string prefix) {
+QAction* QUndoStack_createUndoAction_parent_prefix(const QUndoStack* self, QObject* parent, struct seaqt_string prefix) {
 	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
 	return self->createUndoAction(parent, prefix_QString);
 }
 
-QAction* QUndoStack_createRedoAction2(const QUndoStack* self, QObject* parent, struct seaqt_string prefix) {
+QAction* QUndoStack_createRedoAction_parent_prefix(const QUndoStack* self, QObject* parent, struct seaqt_string prefix) {
 	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
 	return self->createRedoAction(parent, prefix_QString);
 }
 
-void QUndoStack_setActiveWithActive(QUndoStack* self, bool active) {
+void QUndoStack_setActive_active(QUndoStack* self, bool active) {
 	self->setActive(active);
 }
 

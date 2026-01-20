@@ -102,11 +102,11 @@ proc fcQSizePolicy_retainSizeWhenHidden(self: pointer): bool {.importc: "QSizePo
 proc fcQSizePolicy_setRetainSizeWhenHidden(self: pointer, retainSize: bool): void {.importc: "QSizePolicy_setRetainSizeWhenHidden".}
 proc fcQSizePolicy_transpose(self: pointer): void {.importc: "QSizePolicy_transpose".}
 proc fcQSizePolicy_transposed(self: pointer): pointer {.importc: "QSizePolicy_transposed".}
-proc fcQSizePolicy_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSizePolicy_operatorAssign".}
+proc fcQSizePolicy_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSizePolicy_operatorAssign".}
 proc fcQSizePolicy_new(): ptr cQSizePolicy {.importc: "QSizePolicy_new".}
-proc fcQSizePolicy_new2(horizontal: cint, vertical: cint): ptr cQSizePolicy {.importc: "QSizePolicy_new2".}
-proc fcQSizePolicy_new3(param1: pointer): ptr cQSizePolicy {.importc: "QSizePolicy_new3".}
-proc fcQSizePolicy_new4(horizontal: cint, vertical: cint, typeVal: cint): ptr cQSizePolicy {.importc: "QSizePolicy_new4".}
+proc fcQSizePolicy_new2(horizontal: cint, vertical: cint): ptr cQSizePolicy {.importc: "QSizePolicy_new_horizontal_vertical".}
+proc fcQSizePolicy_new3(fromVal: pointer): ptr cQSizePolicy {.importc: "QSizePolicy_new_from".}
+proc fcQSizePolicy_new4(horizontal: cint, vertical: cint, typeVal: cint): ptr cQSizePolicy {.importc: "QSizePolicy_new_horizontal_vertical_type".}
 proc fcQSizePolicy_staticMetaObject(): pointer {.importc: "QSizePolicy_staticMetaObject".}
 
 proc horizontalPolicy*(self: gen_qsizepolicy_types.QSizePolicy): cint =
@@ -175,8 +175,8 @@ proc transpose*(self: gen_qsizepolicy_types.QSizePolicy): void =
 proc transposed*(self: gen_qsizepolicy_types.QSizePolicy): gen_qsizepolicy_types.QSizePolicy =
   gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_transposed(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qsizepolicy_types.QSizePolicy, param1: gen_qsizepolicy_types.QSizePolicy): void =
-  fcQSizePolicy_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qsizepolicy_types.QSizePolicy, fromVal: gen_qsizepolicy_types.QSizePolicy): void =
+  fcQSizePolicy_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qsizepolicy_types.QSizePolicy): gen_qsizepolicy_types.QSizePolicy =
   let tmp = gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new(), owned: true)
@@ -186,8 +186,8 @@ proc create*(T: type gen_qsizepolicy_types.QSizePolicy,
   let tmp = gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new2(cint(horizontal), cint(vertical)), owned: true)
   tmp
 proc create*(T: type gen_qsizepolicy_types.QSizePolicy,
-    param1: gen_qsizepolicy_types.QSizePolicy): gen_qsizepolicy_types.QSizePolicy =
-  let tmp = gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new3(param1.h), owned: true)
+    fromVal: gen_qsizepolicy_types.QSizePolicy): gen_qsizepolicy_types.QSizePolicy =
+  let tmp = gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qsizepolicy_types.QSizePolicy,
     horizontal: cint, vertical: cint, typeVal: cint): gen_qsizepolicy_types.QSizePolicy =

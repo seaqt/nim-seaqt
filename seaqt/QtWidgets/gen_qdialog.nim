@@ -76,7 +76,7 @@ type cQDialog*{.exportc: "QDialog", incompleteStruct.} = object
 proc fcQDialog_metaObject(self: pointer): pointer {.importc: "QDialog_metaObject".}
 proc fcQDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QDialog_metacast".}
 proc fcQDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDialog_metacall".}
-proc fcQDialog_tr(s: cstring): struct_seaqt_string {.importc: "QDialog_tr".}
+proc fcQDialog_trS(s: cstring): struct_seaqt_string {.importc: "QDialog_tr_s".}
 proc fcQDialog_resultX(self: pointer): cint {.importc: "QDialog_result".}
 proc fcQDialog_setVisible(self: pointer, visible: bool): void {.importc: "QDialog_setVisible".}
 proc fcQDialog_sizeHint(self: pointer): pointer {.importc: "QDialog_sizeHint".}
@@ -96,8 +96,8 @@ proc fcQDialog_exec(self: pointer): cint {.importc: "QDialog_exec".}
 proc fcQDialog_done(self: pointer, param1: cint): void {.importc: "QDialog_done".}
 proc fcQDialog_accept(self: pointer): void {.importc: "QDialog_accept".}
 proc fcQDialog_reject(self: pointer): void {.importc: "QDialog_reject".}
-proc fcQDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDialog_tr2".}
-proc fcQDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDialog_tr3".}
+proc fcQDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDialog_tr_s_c".}
+proc fcQDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDialog_tr_s_c_n".}
 proc fcQDialog_vdata(self: pointer): ptr pointer {.importc: "QDialog_vdata".}
 proc fvdata_cQDialog(self: pointer): pointer {.importc: "vdata_QDialog".}
 
@@ -223,9 +223,9 @@ proc fcQDialog_protectedbase_sender(self: pointer): pointer {.importc: "QDialog_
 proc fcQDialog_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDialog_protectedbase_senderSignalIndex".}
 proc fcQDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDialog_protectedbase_receivers".}
 proc fcQDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDialog_protectedbase_isSignalConnected".}
-proc fcQDialog_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDialog {.importc: "QDialog_new".}
-proc fcQDialog_new2(vtbl: pointer, vdata: csize_t): ptr cQDialog {.importc: "QDialog_new2".}
-proc fcQDialog_new3(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQDialog {.importc: "QDialog_new3".}
+proc fcQDialog_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDialog {.importc: "QDialog_new_parent".}
+proc fcQDialog_new2(vtbl: pointer, vdata: csize_t): ptr cQDialog {.importc: "QDialog_new".}
+proc fcQDialog_new3(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQDialog {.importc: "QDialog_new_parent_f".}
 proc fcQDialog_staticMetaObject(): pointer {.importc: "QDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qdialog_types.QDialog): gen_qobjectdefs_types.QMetaObject =
@@ -238,7 +238,7 @@ proc metacall*(self: gen_qdialog_types.QDialog, param1: cint, param2: cint, para
   fcQDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdialog_types.QDialog, s: cstring): string =
-  let v_ms = fcQDialog_tr(s)
+  let v_ms = fcQDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -339,13 +339,13 @@ proc reject*(self: gen_qdialog_types.QDialog): void =
   fcQDialog_reject(self.h)
 
 proc tr*(_: type gen_qdialog_types.QDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQDialog_tr2(s, c)
+  let v_ms = fcQDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdialog_types.QDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDialog_tr3(s, c, n)
+  let v_ms = fcQDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

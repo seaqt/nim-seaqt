@@ -38,7 +38,7 @@ const char* QStringConverter_nameForEncoding(int e);
 
 
 QStringConverterBase__State* QStringConverterBase__State_new();
-QStringConverterBase__State* QStringConverterBase__State_new2(int f);
+QStringConverterBase__State* QStringConverterBase__State_new_f(int f);
 
 void QStringConverterBase__State_clear(QStringConverterBase__State* self);
 void QStringConverterBase__State_reset(QStringConverterBase__State* self);

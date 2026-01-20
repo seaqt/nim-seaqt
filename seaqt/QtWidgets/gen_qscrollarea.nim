@@ -77,7 +77,7 @@ type cQScrollArea*{.exportc: "QScrollArea", incompleteStruct.} = object
 proc fcQScrollArea_metaObject(self: pointer): pointer {.importc: "QScrollArea_metaObject".}
 proc fcQScrollArea_metacast(self: pointer, param1: cstring): pointer {.importc: "QScrollArea_metacast".}
 proc fcQScrollArea_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScrollArea_metacall".}
-proc fcQScrollArea_tr(s: cstring): struct_seaqt_string {.importc: "QScrollArea_tr".}
+proc fcQScrollArea_trS(s: cstring): struct_seaqt_string {.importc: "QScrollArea_tr_s".}
 proc fcQScrollArea_widget(self: pointer): pointer {.importc: "QScrollArea_widget".}
 proc fcQScrollArea_setWidget(self: pointer, widget: pointer): void {.importc: "QScrollArea_setWidget".}
 proc fcQScrollArea_takeWidget(self: pointer): pointer {.importc: "QScrollArea_takeWidget".}
@@ -87,14 +87,14 @@ proc fcQScrollArea_sizeHint(self: pointer): pointer {.importc: "QScrollArea_size
 proc fcQScrollArea_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QScrollArea_focusNextPrevChild".}
 proc fcQScrollArea_alignment(self: pointer): cint {.importc: "QScrollArea_alignment".}
 proc fcQScrollArea_setAlignment(self: pointer, alignment: cint): void {.importc: "QScrollArea_setAlignment".}
-proc fcQScrollArea_ensureVisible(self: pointer, x: cint, y: cint): void {.importc: "QScrollArea_ensureVisible".}
-proc fcQScrollArea_ensureWidgetVisible(self: pointer, childWidget: pointer): void {.importc: "QScrollArea_ensureWidgetVisible".}
-proc fcQScrollArea_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScrollArea_tr2".}
-proc fcQScrollArea_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScrollArea_tr3".}
-proc fcQScrollArea_ensureVisible2(self: pointer, x: cint, y: cint, xmargin: cint): void {.importc: "QScrollArea_ensureVisible2".}
-proc fcQScrollArea_ensureVisible3(self: pointer, x: cint, y: cint, xmargin: cint, ymargin: cint): void {.importc: "QScrollArea_ensureVisible3".}
-proc fcQScrollArea_ensureWidgetVisible2(self: pointer, childWidget: pointer, xmargin: cint): void {.importc: "QScrollArea_ensureWidgetVisible2".}
-proc fcQScrollArea_ensureWidgetVisible3(self: pointer, childWidget: pointer, xmargin: cint, ymargin: cint): void {.importc: "QScrollArea_ensureWidgetVisible3".}
+proc fcQScrollArea_ensureVisibleXY(self: pointer, x: cint, y: cint): void {.importc: "QScrollArea_ensureVisible_x_y".}
+proc fcQScrollArea_ensureWidgetVisibleChildWidget(self: pointer, childWidget: pointer): void {.importc: "QScrollArea_ensureWidgetVisible_childWidget".}
+proc fcQScrollArea_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScrollArea_tr_s_c".}
+proc fcQScrollArea_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScrollArea_tr_s_c_n".}
+proc fcQScrollArea_ensureVisibleXYXmargin(self: pointer, x: cint, y: cint, xmargin: cint): void {.importc: "QScrollArea_ensureVisible_x_y_xmargin".}
+proc fcQScrollArea_ensureVisibleXYXmarginYmargin(self: pointer, x: cint, y: cint, xmargin: cint, ymargin: cint): void {.importc: "QScrollArea_ensureVisible_x_y_xmargin_ymargin".}
+proc fcQScrollArea_ensureWidgetVisibleChildWidgetXmargin(self: pointer, childWidget: pointer, xmargin: cint): void {.importc: "QScrollArea_ensureWidgetVisible_childWidget_xmargin".}
+proc fcQScrollArea_ensureWidgetVisibleChildWidgetXmarginYmargin(self: pointer, childWidget: pointer, xmargin: cint, ymargin: cint): void {.importc: "QScrollArea_ensureWidgetVisible_childWidget_xmargin_ymargin".}
 proc fcQScrollArea_vdata(self: pointer): ptr pointer {.importc: "QScrollArea_vdata".}
 proc fvdata_cQScrollArea(self: pointer): pointer {.importc: "vdata_QScrollArea".}
 
@@ -210,7 +210,7 @@ proc fcQScrollArea_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQScrollArea_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QScrollArea_virtualbase_customEvent".}
 proc fcQScrollArea_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QScrollArea_virtualbase_connectNotify".}
 proc fcQScrollArea_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QScrollArea_virtualbase_disconnectNotify".}
-proc fcQScrollArea_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QScrollArea_protectedbase_setViewportMargins".}
+proc fcQScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QScrollArea_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQScrollArea_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QScrollArea_protectedbase_viewportMargins".}
 proc fcQScrollArea_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QScrollArea_protectedbase_drawFrame".}
 proc fcQScrollArea_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QScrollArea_protectedbase_updateMicroFocus".}
@@ -222,8 +222,8 @@ proc fcQScrollArea_protectedbase_sender(self: pointer): pointer {.importc: "QScr
 proc fcQScrollArea_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QScrollArea_protectedbase_senderSignalIndex".}
 proc fcQScrollArea_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScrollArea_protectedbase_receivers".}
 proc fcQScrollArea_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScrollArea_protectedbase_isSignalConnected".}
-proc fcQScrollArea_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScrollArea {.importc: "QScrollArea_new".}
-proc fcQScrollArea_new2(vtbl: pointer, vdata: csize_t): ptr cQScrollArea {.importc: "QScrollArea_new2".}
+proc fcQScrollArea_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScrollArea {.importc: "QScrollArea_new_parent".}
+proc fcQScrollArea_new2(vtbl: pointer, vdata: csize_t): ptr cQScrollArea {.importc: "QScrollArea_new".}
 proc fcQScrollArea_staticMetaObject(): pointer {.importc: "QScrollArea_staticMetaObject".}
 
 proc metaObject*(self: gen_qscrollarea_types.QScrollArea): gen_qobjectdefs_types.QMetaObject =
@@ -236,7 +236,7 @@ proc metacall*(self: gen_qscrollarea_types.QScrollArea, param1: cint, param2: ci
   fcQScrollArea_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscrollarea_types.QScrollArea, s: cstring): string =
-  let v_ms = fcQScrollArea_tr(s)
+  let v_ms = fcQScrollArea_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -269,34 +269,34 @@ proc setAlignment*(self: gen_qscrollarea_types.QScrollArea, alignment: cint): vo
   fcQScrollArea_setAlignment(self.h, cint(alignment))
 
 proc ensureVisible*(self: gen_qscrollarea_types.QScrollArea, x: cint, y: cint): void =
-  fcQScrollArea_ensureVisible(self.h, x, y)
+  fcQScrollArea_ensureVisibleXY(self.h, x, y)
 
 proc ensureWidgetVisible*(self: gen_qscrollarea_types.QScrollArea, childWidget: gen_qwidget_types.QWidget): void =
-  fcQScrollArea_ensureWidgetVisible(self.h, childWidget.h)
+  fcQScrollArea_ensureWidgetVisibleChildWidget(self.h, childWidget.h)
 
 proc tr*(_: type gen_qscrollarea_types.QScrollArea, s: cstring, c: cstring): string =
-  let v_ms = fcQScrollArea_tr2(s, c)
+  let v_ms = fcQScrollArea_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qscrollarea_types.QScrollArea, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScrollArea_tr3(s, c, n)
+  let v_ms = fcQScrollArea_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc ensureVisible*(self: gen_qscrollarea_types.QScrollArea, x: cint, y: cint, xmargin: cint): void =
-  fcQScrollArea_ensureVisible2(self.h, x, y, xmargin)
+  fcQScrollArea_ensureVisibleXYXmargin(self.h, x, y, xmargin)
 
 proc ensureVisible*(self: gen_qscrollarea_types.QScrollArea, x: cint, y: cint, xmargin: cint, ymargin: cint): void =
-  fcQScrollArea_ensureVisible3(self.h, x, y, xmargin, ymargin)
+  fcQScrollArea_ensureVisibleXYXmarginYmargin(self.h, x, y, xmargin, ymargin)
 
 proc ensureWidgetVisible*(self: gen_qscrollarea_types.QScrollArea, childWidget: gen_qwidget_types.QWidget, xmargin: cint): void =
-  fcQScrollArea_ensureWidgetVisible2(self.h, childWidget.h, xmargin)
+  fcQScrollArea_ensureWidgetVisibleChildWidgetXmargin(self.h, childWidget.h, xmargin)
 
 proc ensureWidgetVisible*(self: gen_qscrollarea_types.QScrollArea, childWidget: gen_qwidget_types.QWidget, xmargin: cint, ymargin: cint): void =
-  fcQScrollArea_ensureWidgetVisible3(self.h, childWidget.h, xmargin, ymargin)
+  fcQScrollArea_ensureWidgetVisibleChildWidgetXmarginYmargin(self.h, childWidget.h, xmargin, ymargin)
 
 type QScrollAreametaObjectProc* = proc(self: QScrollArea): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QScrollAreametacastProc* = proc(self: QScrollArea, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1387,7 +1387,7 @@ proc fcQScrollArea_method_callback_disconnectNotify(self: pointer, signal: point
 
 
 proc setViewportMargins*(self: gen_qscrollarea_types.QScrollArea, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQScrollArea_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qscrollarea_types.QScrollArea): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQScrollArea_protectedbase_viewportMargins(self.h), owned: true)

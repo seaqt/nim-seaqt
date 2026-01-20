@@ -135,19 +135,19 @@ public:
 	friend QVariant* QTextEdit_virtualbase_loadResource(VirtualQTextEdit* self, int type, QUrl* name);
 
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery property) const override {
-		if (vtbl->inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery_property == 0) {
 			return QTextEdit::inputMethodQuery(property);
 		}
 
 		Qt::InputMethodQuery property_ret = property;
 		int sigval1 = static_cast<int>(property_ret);
-		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery_property(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QTextEdit_virtualbase_inputMethodQuery(const VirtualQTextEdit* self, int property);
+	friend QVariant* QTextEdit_virtualbase_inputMethodQuery_property(const VirtualQTextEdit* self, int property);
 
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
@@ -826,7 +826,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QTextEdit_protectedbase_zoomInF(VirtualQTextEdit* self, float range);
-	friend void QTextEdit_protectedbase_setViewportMargins(VirtualQTextEdit* self, int left, int top, int right, int bottom);
+	friend void QTextEdit_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTextEdit* self, int left, int top, int right, int bottom);
 	friend QMargins* QTextEdit_protectedbase_viewportMargins(const VirtualQTextEdit* self);
 	friend void QTextEdit_protectedbase_drawFrame(VirtualQTextEdit* self, QPainter* param1);
 	friend void QTextEdit_protectedbase_updateMicroFocus(VirtualQTextEdit* self);
@@ -840,23 +840,23 @@ public:
 	friend bool QTextEdit_protectedbase_isSignalConnected(const VirtualQTextEdit* self, QMetaMethod* signal);
 };
 
-VirtualQTextEdit* QTextEdit_new(const QTextEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQTextEdit* QTextEdit_new_parent(const QTextEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTextEdit(vtbl, parent) : nullptr;
 }
 
-VirtualQTextEdit* QTextEdit_new2(const QTextEdit_VTable* vtbl, size_t vdata) {
+VirtualQTextEdit* QTextEdit_new(const QTextEdit_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTextEdit(vtbl) : nullptr;
 }
 
-VirtualQTextEdit* QTextEdit_new3(const QTextEdit_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQTextEdit* QTextEdit_new_text(const QTextEdit_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTextEdit(vtbl, text_QString) : nullptr;
 }
 
-VirtualQTextEdit* QTextEdit_new4(const QTextEdit_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
+VirtualQTextEdit* QTextEdit_new_text_parent(const QTextEdit_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTextEdit(vtbl, text_QString, parent) : nullptr;
@@ -878,7 +878,7 @@ int QTextEdit_metacall(QTextEdit* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTextEdit_tr(const char* s) {
+struct seaqt_string QTextEdit_tr_s(const char* s) {
 	QString _ret = QTextEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1062,12 +1062,12 @@ void QTextEdit_setWordWrapMode(QTextEdit* self, int policy) {
 	self->setWordWrapMode(static_cast<QTextOption::WrapMode>(policy));
 }
 
-bool QTextEdit_find(QTextEdit* self, struct seaqt_string exp) {
+bool QTextEdit_find_QString(QTextEdit* self, struct seaqt_string exp) {
 	QString exp_QString = QString::fromUtf8(exp.data, exp.len);
 	return self->find(exp_QString);
 }
 
-bool QTextEdit_findWithExp(QTextEdit* self, QRegularExpression* exp) {
+bool QTextEdit_find_QRegularExpression(QTextEdit* self, QRegularExpression* exp) {
 	return self->find(*exp);
 }
 
@@ -1116,7 +1116,7 @@ QMenu* QTextEdit_createStandardContextMenu(QTextEdit* self) {
 	return self->createStandardContextMenu();
 }
 
-QMenu* QTextEdit_createStandardContextMenuWithPosition(QTextEdit* self, QPoint* position) {
+QMenu* QTextEdit_createStandardContextMenu_position(QTextEdit* self, QPoint* position) {
 	return self->createStandardContextMenu(*position);
 }
 
@@ -1124,11 +1124,11 @@ QTextCursor* QTextEdit_cursorForPosition(const QTextEdit* self, QPoint* pos) {
 	return new QTextCursor(self->cursorForPosition(*pos));
 }
 
-QRect* QTextEdit_cursorRect(const QTextEdit* self, QTextCursor* cursor) {
+QRect* QTextEdit_cursorRect_cursor(const QTextEdit* self, QTextCursor* cursor) {
 	return new QRect(self->cursorRect(*cursor));
 }
 
-QRect* QTextEdit_cursorRect2(const QTextEdit* self) {
+QRect* QTextEdit_cursorRect(const QTextEdit* self) {
 	return new QRect(self->cursorRect());
 }
 
@@ -1199,7 +1199,7 @@ struct seaqt_array /* of QTextEdit__ExtraSelection* */  QTextEdit_extraSelection
 	return _out;
 }
 
-void QTextEdit_moveCursor(QTextEdit* self, int operation) {
+void QTextEdit_moveCursor_operation(QTextEdit* self, int operation) {
 	self->moveCursor(static_cast<QTextCursor::MoveOperation>(operation));
 }
 
@@ -1211,11 +1211,11 @@ void QTextEdit_print(const QTextEdit* self, QPagedPaintDevice* printer) {
 	self->print(printer);
 }
 
-QVariant* QTextEdit_inputMethodQuery(const QTextEdit* self, int property) {
+QVariant* QTextEdit_inputMethodQuery_property(const QTextEdit* self, int property) {
 	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(property)));
 }
 
-QVariant* QTextEdit_inputMethodQuery2(const QTextEdit* self, int query, QVariant* argument) {
+QVariant* QTextEdit_inputMethodQuery_query_argument(const QTextEdit* self, int query, QVariant* argument) {
 	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(query), *argument));
 }
 
@@ -1443,7 +1443,7 @@ void QTextEdit_connect_cursorPositionChanged(QTextEdit* self, intptr_t slot, voi
 	QTextEdit::connect(self, static_cast<void (QTextEdit::*)()>(&QTextEdit::cursorPositionChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QTextEdit_tr2(const char* s, const char* c) {
+struct seaqt_string QTextEdit_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTextEdit::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1454,7 +1454,7 @@ struct seaqt_string QTextEdit_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextEdit_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTextEdit_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextEdit::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1465,16 +1465,16 @@ struct seaqt_string QTextEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QTextEdit_find2(QTextEdit* self, struct seaqt_string exp, int options) {
+bool QTextEdit_find_QString_QTextDocument_FindFlags(QTextEdit* self, struct seaqt_string exp, int options) {
 	QString exp_QString = QString::fromUtf8(exp.data, exp.len);
 	return self->find(exp_QString, static_cast<QTextDocument::FindFlags>(options));
 }
 
-bool QTextEdit_find3(QTextEdit* self, QRegularExpression* exp, int options) {
+bool QTextEdit_find_QRegularExpression_QTextDocument_FindFlags(QTextEdit* self, QRegularExpression* exp, int options) {
 	return self->find(*exp, static_cast<QTextDocument::FindFlags>(options));
 }
 
-struct seaqt_string QTextEdit_toMarkdownWithFeatures(const QTextEdit* self, int features) {
+struct seaqt_string QTextEdit_toMarkdown_features(const QTextEdit* self, int features) {
 	QString _ret = self->toMarkdown(static_cast<QTextDocument::MarkdownFeatures>(features));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1485,15 +1485,15 @@ struct seaqt_string QTextEdit_toMarkdownWithFeatures(const QTextEdit* self, int 
 	return _ms;
 }
 
-void QTextEdit_moveCursor2(QTextEdit* self, int operation, int mode) {
+void QTextEdit_moveCursor_operation_mode(QTextEdit* self, int operation, int mode) {
 	self->moveCursor(static_cast<QTextCursor::MoveOperation>(operation), static_cast<QTextCursor::MoveMode>(mode));
 }
 
-void QTextEdit_zoomInWithRange(QTextEdit* self, int range) {
+void QTextEdit_zoomIn_range(QTextEdit* self, int range) {
 	self->zoomIn(static_cast<int>(range));
 }
 
-void QTextEdit_zoomOutWithRange(QTextEdit* self, int range) {
+void QTextEdit_zoomOut_range(QTextEdit* self, int range) {
 	self->zoomOut(static_cast<int>(range));
 }
 
@@ -1521,7 +1521,7 @@ QVariant* QTextEdit_virtualbase_loadResource(VirtualQTextEdit* self, int type, Q
 	return new QVariant(self->QTextEdit::loadResource(static_cast<int>(type), *name));
 }
 
-QVariant* QTextEdit_virtualbase_inputMethodQuery(const VirtualQTextEdit* self, int property) {
+QVariant* QTextEdit_virtualbase_inputMethodQuery_property(const VirtualQTextEdit* self, int property) {
 
 	return new QVariant(self->QTextEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(property)));
 }
@@ -1806,7 +1806,7 @@ void QTextEdit_protectedbase_zoomInF(VirtualQTextEdit* self, float range) {
 	self->zoomInF(static_cast<float>(range));
 }
 
-void QTextEdit_protectedbase_setViewportMargins(VirtualQTextEdit* self, int left, int top, int right, int bottom) {
+void QTextEdit_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTextEdit* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
@@ -1858,8 +1858,8 @@ void QTextEdit_delete(QTextEdit* self) {
 	delete self;
 }
 
-QTextEdit__ExtraSelection* QTextEdit__ExtraSelection_new(QTextEdit__ExtraSelection* param1) {
-	return new (std::nothrow) QTextEdit__ExtraSelection(*param1);
+QTextEdit__ExtraSelection* QTextEdit__ExtraSelection_new(QTextEdit__ExtraSelection* from) {
+	return new (std::nothrow) QTextEdit__ExtraSelection(*from);
 }
 
 QTextCursor* QTextEdit__ExtraSelection_cursor(const QTextEdit__ExtraSelection* self) {
@@ -1878,8 +1878,8 @@ void QTextEdit__ExtraSelection_setFormat(QTextEdit__ExtraSelection* self, QTextC
 	self->format = *format;
 }
 
-void QTextEdit__ExtraSelection_operatorAssign(QTextEdit__ExtraSelection* self, QTextEdit__ExtraSelection* param1) {
-	self->operator=(*param1);
+void QTextEdit__ExtraSelection_operatorAssign(QTextEdit__ExtraSelection* self, QTextEdit__ExtraSelection* from) {
+	self->operator=(*from);
 }
 
 void QTextEdit__ExtraSelection_delete(QTextEdit__ExtraSelection* self) {

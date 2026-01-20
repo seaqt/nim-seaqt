@@ -281,19 +281,19 @@ public:
 	friend void QTextBrowser_virtualbase_doSetSource(VirtualQTextBrowser* self, QUrl* name, int type);
 
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery property) const override {
-		if (vtbl->inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery_property == 0) {
 			return QTextBrowser::inputMethodQuery(property);
 		}
 
 		Qt::InputMethodQuery property_ret = property;
 		int sigval1 = static_cast<int>(property_ret);
-		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery_property(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QTextBrowser_virtualbase_inputMethodQuery(const VirtualQTextBrowser* self, int property);
+	friend QVariant* QTextBrowser_virtualbase_inputMethodQuery_property(const VirtualQTextBrowser* self, int property);
 
 	virtual void timerEvent(QTimerEvent* e) override {
 		if (vtbl->timerEvent == 0) {
@@ -876,7 +876,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QTextBrowser_protectedbase_zoomInF(VirtualQTextBrowser* self, float range);
-	friend void QTextBrowser_protectedbase_setViewportMargins(VirtualQTextBrowser* self, int left, int top, int right, int bottom);
+	friend void QTextBrowser_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTextBrowser* self, int left, int top, int right, int bottom);
 	friend QMargins* QTextBrowser_protectedbase_viewportMargins(const VirtualQTextBrowser* self);
 	friend void QTextBrowser_protectedbase_drawFrame(VirtualQTextBrowser* self, QPainter* param1);
 	friend void QTextBrowser_protectedbase_updateMicroFocus(VirtualQTextBrowser* self);
@@ -890,12 +890,12 @@ public:
 	friend bool QTextBrowser_protectedbase_isSignalConnected(const VirtualQTextBrowser* self, QMetaMethod* signal);
 };
 
-VirtualQTextBrowser* QTextBrowser_new(const QTextBrowser_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQTextBrowser* QTextBrowser_new_parent(const QTextBrowser_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextBrowser>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTextBrowser(vtbl, parent) : nullptr;
 }
 
-VirtualQTextBrowser* QTextBrowser_new2(const QTextBrowser_VTable* vtbl, size_t vdata) {
+VirtualQTextBrowser* QTextBrowser_new(const QTextBrowser_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTextBrowser>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTextBrowser(vtbl) : nullptr;
 }
@@ -916,7 +916,7 @@ int QTextBrowser_metacall(QTextBrowser* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTextBrowser_tr(const char* s) {
+struct seaqt_string QTextBrowser_tr_s(const char* s) {
 	QString _ret = QTextBrowser::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1022,7 +1022,7 @@ void QTextBrowser_setOpenLinks(QTextBrowser* self, bool open) {
 	self->setOpenLinks(open);
 }
 
-void QTextBrowser_setSource(QTextBrowser* self, QUrl* name) {
+void QTextBrowser_setSource_name(QTextBrowser* self, QUrl* name) {
 	self->setSource(*name);
 }
 
@@ -1143,7 +1143,7 @@ void QTextBrowser_connect_anchorClicked(QTextBrowser* self, intptr_t slot, void 
 	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(const QUrl&)>(&QTextBrowser::anchorClicked), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QTextBrowser_tr2(const char* s, const char* c) {
+struct seaqt_string QTextBrowser_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTextBrowser::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1154,7 +1154,7 @@ struct seaqt_string QTextBrowser_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextBrowser_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTextBrowser_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextBrowser::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1165,7 +1165,7 @@ struct seaqt_string QTextBrowser_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QTextBrowser_setSource2(QTextBrowser* self, QUrl* name, int type) {
+void QTextBrowser_setSource_name_type(QTextBrowser* self, QUrl* name, int type) {
 	self->setSource(*name, static_cast<QTextDocument::ResourceType>(type));
 }
 
@@ -1258,7 +1258,7 @@ void QTextBrowser_virtualbase_doSetSource(VirtualQTextBrowser* self, QUrl* name,
 	self->QTextBrowser::doSetSource(*name, static_cast<QTextDocument::ResourceType>(type));
 }
 
-QVariant* QTextBrowser_virtualbase_inputMethodQuery(const VirtualQTextBrowser* self, int property) {
+QVariant* QTextBrowser_virtualbase_inputMethodQuery_property(const VirtualQTextBrowser* self, int property) {
 
 	return new QVariant(self->QTextBrowser::inputMethodQuery(static_cast<Qt::InputMethodQuery>(property)));
 }
@@ -1503,7 +1503,7 @@ void QTextBrowser_protectedbase_zoomInF(VirtualQTextBrowser* self, float range) 
 	self->zoomInF(static_cast<float>(range));
 }
 
-void QTextBrowser_protectedbase_setViewportMargins(VirtualQTextBrowser* self, int left, int top, int right, int bottom) {
+void QTextBrowser_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTextBrowser* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

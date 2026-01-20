@@ -205,28 +205,28 @@ public:
 	}
 
 	virtual int indexOf(const QWidget* param1) const override {
-		if (vtbl->indexOf == 0) {
+		if (vtbl->indexOf_QWidget == 0) {
 			return QLayout::indexOf(param1);
 		}
 
 		QWidget* sigval1 = (QWidget*) param1;
-		int callback_return_value = vtbl->indexOf(this, sigval1);
+		int callback_return_value = vtbl->indexOf_QWidget(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_indexOf(const VirtualQLayout* self, QWidget* param1);
+	friend int QLayout_virtualbase_indexOf_QWidget(const VirtualQLayout* self, QWidget* param1);
 
 	virtual int indexOf(const QLayoutItem* param1) const override {
-		if (vtbl->indexOfWithQLayoutItem == 0) {
+		if (vtbl->indexOf_QLayoutItem == 0) {
 			return QLayout::indexOf(param1);
 		}
 
 		QLayoutItem* sigval1 = (QLayoutItem*) param1;
-		int callback_return_value = vtbl->indexOfWithQLayoutItem(this, sigval1);
+		int callback_return_value = vtbl->indexOf_QLayoutItem(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLayout_virtualbase_indexOfWithQLayoutItem(const VirtualQLayout* self, QLayoutItem* param1);
+	friend int QLayout_virtualbase_indexOf_QLayoutItem(const VirtualQLayout* self, QLayoutItem* param1);
 
 	virtual int count() const override {
 		if (vtbl->count == 0) {
@@ -454,12 +454,12 @@ public:
 	friend bool QLayout_protectedbase_isSignalConnected(const VirtualQLayout* self, QMetaMethod* signal);
 };
 
-VirtualQLayout* QLayout_new(const QLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQLayout* QLayout_new_parent(const QLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLayout(vtbl, parent) : nullptr;
 }
 
-VirtualQLayout* QLayout_new2(const QLayout_VTable* vtbl, size_t vdata) {
+VirtualQLayout* QLayout_new(const QLayout_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLayout(vtbl) : nullptr;
 }
@@ -481,7 +481,7 @@ int QLayout_metacall(QLayout* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QLayout_tr(const char* s) {
+struct seaqt_string QLayout_tr_s(const char* s) {
 	QString _ret = QLayout::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -500,11 +500,11 @@ void QLayout_setSpacing(QLayout* self, int spacing) {
 	self->setSpacing(static_cast<int>(spacing));
 }
 
-void QLayout_setContentsMargins(QLayout* self, int left, int top, int right, int bottom) {
+void QLayout_setContentsMargins_left_top_right_bottom(QLayout* self, int left, int top, int right, int bottom) {
 	self->setContentsMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
-void QLayout_setContentsMarginsWithMargins(QLayout* self, QMargins* margins) {
+void QLayout_setContentsMargins_margins(QLayout* self, QMargins* margins) {
 	self->setContentsMargins(*margins);
 }
 
@@ -524,11 +524,11 @@ QRect* QLayout_contentsRect(const QLayout* self) {
 	return new QRect(self->contentsRect());
 }
 
-bool QLayout_setAlignment(QLayout* self, QWidget* w, int alignment) {
+bool QLayout_setAlignment_w_alignment(QLayout* self, QWidget* w, int alignment) {
 	return self->setAlignment(w, static_cast<Qt::Alignment>(alignment));
 }
 
-bool QLayout_setAlignment2(QLayout* self, QLayout* l, int alignment) {
+bool QLayout_setAlignment_l_alignment(QLayout* self, QLayout* l, int alignment) {
 	return self->setAlignment(l, static_cast<Qt::Alignment>(alignment));
 }
 
@@ -610,11 +610,11 @@ QLayoutItem* QLayout_takeAt(QLayout* self, int index) {
 	return self->takeAt(static_cast<int>(index));
 }
 
-int QLayout_indexOf(const QLayout* self, QWidget* param1) {
+int QLayout_indexOf_QWidget(const QLayout* self, QWidget* param1) {
 	return self->indexOf(param1);
 }
 
-int QLayout_indexOfWithQLayoutItem(const QLayout* self, QLayoutItem* param1) {
+int QLayout_indexOf_QLayoutItem(const QLayout* self, QLayoutItem* param1) {
 	return self->indexOf(param1);
 }
 
@@ -671,7 +671,7 @@ QSize* QLayout_closestAcceptableSize(QWidget* w, QSize* s) {
 	return new QSize(QLayout::closestAcceptableSize(w, *s));
 }
 
-struct seaqt_string QLayout_tr2(const char* s, const char* c) {
+struct seaqt_string QLayout_tr_s_c(const char* s, const char* c) {
 	QString _ret = QLayout::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -682,7 +682,7 @@ struct seaqt_string QLayout_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLayout_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QLayout_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLayout::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -753,12 +753,12 @@ void QLayout_virtualbase_setGeometry(VirtualQLayout* self, QRect* geometry) {
 	self->QLayout::setGeometry(*geometry);
 }
 
-int QLayout_virtualbase_indexOf(const VirtualQLayout* self, QWidget* param1) {
+int QLayout_virtualbase_indexOf_QWidget(const VirtualQLayout* self, QWidget* param1) {
 
 	return self->QLayout::indexOf(param1);
 }
 
-int QLayout_virtualbase_indexOfWithQLayoutItem(const VirtualQLayout* self, QLayoutItem* param1) {
+int QLayout_virtualbase_indexOf_QLayoutItem(const VirtualQLayout* self, QLayoutItem* param1) {
 
 	return self->QLayout::indexOf(param1);
 }

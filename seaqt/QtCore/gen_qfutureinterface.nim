@@ -64,7 +64,7 @@ export
 
 type cQFutureInterfaceBase*{.exportc: "QFutureInterfaceBase", incompleteStruct.} = object
 
-proc fcQFutureInterfaceBase_operatorAssign(self: pointer, other: pointer): void {.importc: "QFutureInterfaceBase_operatorAssign".}
+proc fcQFutureInterfaceBase_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QFutureInterfaceBase_operatorAssign".}
 proc fcQFutureInterfaceBase_reportStarted(self: pointer): void {.importc: "QFutureInterfaceBase_reportStarted".}
 proc fcQFutureInterfaceBase_reportFinished(self: pointer): void {.importc: "QFutureInterfaceBase_reportFinished".}
 proc fcQFutureInterfaceBase_reportCanceled(self: pointer): void {.importc: "QFutureInterfaceBase_reportCanceled".}
@@ -124,13 +124,13 @@ proc fcQFutureInterfaceBase_protectedbase_runContinuation(self: pointer): void {
 proc fcQFutureInterfaceBase_protectedbase_setLaunchAsync(self: pointer, value: bool): void {.importc: "QFutureInterfaceBase_protectedbase_setLaunchAsync".}
 proc fcQFutureInterfaceBase_protectedbase_launchAsync(self: pointer): bool {.importc: "QFutureInterfaceBase_protectedbase_launchAsync".}
 proc fcQFutureInterfaceBase_protectedbase_isRunningOrPending(self: pointer): bool {.importc: "QFutureInterfaceBase_protectedbase_isRunningOrPending".}
-proc fcQFutureInterfaceBase_protectedbase_cancelWithMode(self: pointer, mode: cint): void {.importc: "QFutureInterfaceBase_protectedbase_cancelWithMode".}
+proc fcQFutureInterfaceBase_protectedbase_cancel_mode(self: pointer, mode: cint): void {.importc: "QFutureInterfaceBase_protectedbase_cancel_mode".}
 proc fcQFutureInterfaceBase_new(): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new".}
-proc fcQFutureInterfaceBase_new2(other: pointer): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new2".}
-proc fcQFutureInterfaceBase_new3(initialState: cint): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new3".}
+proc fcQFutureInterfaceBase_new2(fromVal: pointer): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new_from".}
+proc fcQFutureInterfaceBase_new3(initialState: cint): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new_initialState".}
 
-proc operatorAssign*(self: gen_qfutureinterface_types.QFutureInterfaceBase, other: gen_qfutureinterface_types.QFutureInterfaceBase): void =
-  fcQFutureInterfaceBase_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qfutureinterface_types.QFutureInterfaceBase, fromVal: gen_qfutureinterface_types.QFutureInterfaceBase): void =
+  fcQFutureInterfaceBase_operatorAssign(self.h, fromVal.h)
 
 proc reportStarted*(self: gen_qfutureinterface_types.QFutureInterfaceBase): void =
   fcQFutureInterfaceBase_reportStarted(self.h)
@@ -313,14 +313,14 @@ proc isRunningOrPending*(self: gen_qfutureinterface_types.QFutureInterfaceBase):
   fcQFutureInterfaceBase_protectedbase_isRunningOrPending(self.h)
 
 proc cancel*(self: gen_qfutureinterface_types.QFutureInterfaceBase, mode: cint): void =
-  fcQFutureInterfaceBase_protectedbase_cancelWithMode(self.h, cint(mode))
+  fcQFutureInterfaceBase_protectedbase_cancel_mode(self.h, cint(mode))
 
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
   let tmp = gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new(), owned: true)
   tmp
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase,
-    other: gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
-  let tmp = gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new2(other.h), owned: true)
+    fromVal: gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
+  let tmp = gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase,
     initialState: cint): gen_qfutureinterface_types.QFutureInterfaceBase =

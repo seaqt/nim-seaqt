@@ -710,23 +710,23 @@ public:
 	friend bool QMenu_protectedbase_isSignalConnected(const VirtualQMenu* self, QMetaMethod* signal);
 };
 
-VirtualQMenu* QMenu_new(const QMenu_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQMenu* QMenu_new_parent(const QMenu_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMenu>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMenu(vtbl, parent) : nullptr;
 }
 
-VirtualQMenu* QMenu_new2(const QMenu_VTable* vtbl, size_t vdata) {
+VirtualQMenu* QMenu_new(const QMenu_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMenu>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMenu(vtbl) : nullptr;
 }
 
-VirtualQMenu* QMenu_new3(const QMenu_VTable* vtbl, size_t vdata, struct seaqt_string title) {
+VirtualQMenu* QMenu_new_title(const QMenu_VTable* vtbl, size_t vdata, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMenu>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMenu(vtbl, title_QString) : nullptr;
 }
 
-VirtualQMenu* QMenu_new4(const QMenu_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent) {
+VirtualQMenu* QMenu_new_title_parent(const QMenu_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMenu>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMenu(vtbl, title_QString, parent) : nullptr;
@@ -748,7 +748,7 @@ int QMenu_metacall(QMenu* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMenu_tr(const char* s) {
+struct seaqt_string QMenu_tr_s(const char* s) {
 	QString _ret = QMenu::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -759,16 +759,16 @@ struct seaqt_string QMenu_tr(const char* s) {
 	return _ms;
 }
 
-QAction* QMenu_addMenu(QMenu* self, QMenu* menu) {
+QAction* QMenu_addMenu_menu(QMenu* self, QMenu* menu) {
 	return self->addMenu(menu);
 }
 
-QMenu* QMenu_addMenuWithTitle(QMenu* self, struct seaqt_string title) {
+QMenu* QMenu_addMenu_title(QMenu* self, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return self->addMenu(title_QString);
 }
 
-QMenu* QMenu_addMenu2(QMenu* self, QIcon* icon, struct seaqt_string title) {
+QMenu* QMenu_addMenu_icon_title(QMenu* self, QIcon* icon, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return self->addMenu(*icon, title_QString);
 }
@@ -777,12 +777,12 @@ QAction* QMenu_addSeparator(QMenu* self) {
 	return self->addSeparator();
 }
 
-QAction* QMenu_addSection(QMenu* self, struct seaqt_string text) {
+QAction* QMenu_addSection_text(QMenu* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addSection(text_QString);
 }
 
-QAction* QMenu_addSection2(QMenu* self, QIcon* icon, struct seaqt_string text) {
+QAction* QMenu_addSection_icon_text(QMenu* self, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addSection(*icon, text_QString);
 }
@@ -795,12 +795,12 @@ QAction* QMenu_insertSeparator(QMenu* self, QAction* before) {
 	return self->insertSeparator(before);
 }
 
-QAction* QMenu_insertSection(QMenu* self, QAction* before, struct seaqt_string text) {
+QAction* QMenu_insertSection_before_text(QMenu* self, QAction* before, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->insertSection(before, text_QString);
 }
 
-QAction* QMenu_insertSection2(QMenu* self, QAction* before, QIcon* icon, struct seaqt_string text) {
+QAction* QMenu_insertSection_before_icon_text(QMenu* self, QAction* before, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->insertSection(before, *icon, text_QString);
 }
@@ -829,7 +829,7 @@ void QMenu_showTearOffMenu(QMenu* self) {
 	self->showTearOffMenu();
 }
 
-void QMenu_showTearOffMenuWithPos(QMenu* self, QPoint* pos) {
+void QMenu_showTearOffMenu_pos(QMenu* self, QPoint* pos) {
 	self->showTearOffMenu(*pos);
 }
 
@@ -853,7 +853,7 @@ QAction* QMenu_activeAction(const QMenu* self) {
 	return self->activeAction();
 }
 
-void QMenu_popup(QMenu* self, QPoint* pos) {
+void QMenu_popup_pos(QMenu* self, QPoint* pos) {
 	self->popup(*pos);
 }
 
@@ -861,11 +861,11 @@ QAction* QMenu_exec(QMenu* self) {
 	return self->exec();
 }
 
-QAction* QMenu_execWithPos(QMenu* self, QPoint* pos) {
+QAction* QMenu_exec_pos(QMenu* self, QPoint* pos) {
 	return self->exec(*pos);
 }
 
-QAction* QMenu_exec2(struct seaqt_array /* of QAction* */  actions, QPoint* pos) {
+QAction* QMenu_exec_actions_pos(struct seaqt_array /* of QAction* */  actions, QPoint* pos) {
 	QList<QAction *> actions_QList;
 	actions_QList.reserve(actions.len);
 	QAction** actions_arr = static_cast<QAction**>(actions.data);
@@ -1001,7 +1001,7 @@ void QMenu_connect_hovered(QMenu* self, intptr_t slot, void (*callback)(intptr_t
 	QMenu::connect(self, static_cast<void (QMenu::*)(QAction*)>(&QMenu::hovered), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMenu_tr2(const char* s, const char* c) {
+struct seaqt_string QMenu_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMenu::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1012,7 +1012,7 @@ struct seaqt_string QMenu_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMenu_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMenu_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMenu::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1023,15 +1023,15 @@ struct seaqt_string QMenu_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QMenu_popup2(QMenu* self, QPoint* pos, QAction* at) {
+void QMenu_popup_pos_at(QMenu* self, QPoint* pos, QAction* at) {
 	self->popup(*pos, at);
 }
 
-QAction* QMenu_exec3(QMenu* self, QPoint* pos, QAction* at) {
+QAction* QMenu_exec_pos_at(QMenu* self, QPoint* pos, QAction* at) {
 	return self->exec(*pos, at);
 }
 
-QAction* QMenu_exec4(struct seaqt_array /* of QAction* */  actions, QPoint* pos, QAction* at) {
+QAction* QMenu_exec_actions_pos_at(struct seaqt_array /* of QAction* */  actions, QPoint* pos, QAction* at) {
 	QList<QAction *> actions_QList;
 	actions_QList.reserve(actions.len);
 	QAction** actions_arr = static_cast<QAction**>(actions.data);
@@ -1041,7 +1041,7 @@ QAction* QMenu_exec4(struct seaqt_array /* of QAction* */  actions, QPoint* pos,
 	return QMenu::exec(actions_QList, *pos, at);
 }
 
-QAction* QMenu_exec5(struct seaqt_array /* of QAction* */  actions, QPoint* pos, QAction* at, QWidget* parent) {
+QAction* QMenu_exec_actions_pos_at_parent(struct seaqt_array /* of QAction* */  actions, QPoint* pos, QAction* at, QWidget* parent) {
 	QList<QAction *> actions_QList;
 	actions_QList.reserve(actions.len);
 	QAction** actions_arr = static_cast<QAction**>(actions.data);

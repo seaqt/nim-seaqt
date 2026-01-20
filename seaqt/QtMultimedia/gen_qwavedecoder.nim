@@ -59,7 +59,7 @@ type cQWaveDecoder*{.exportc: "QWaveDecoder", incompleteStruct.} = object
 proc fcQWaveDecoder_metaObject(self: pointer): pointer {.importc: "QWaveDecoder_metaObject".}
 proc fcQWaveDecoder_metacast(self: pointer, param1: cstring): pointer {.importc: "QWaveDecoder_metacast".}
 proc fcQWaveDecoder_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWaveDecoder_metacall".}
-proc fcQWaveDecoder_tr(s: cstring): struct_seaqt_string {.importc: "QWaveDecoder_tr".}
+proc fcQWaveDecoder_trS(s: cstring): struct_seaqt_string {.importc: "QWaveDecoder_tr_s".}
 proc fcQWaveDecoder_audioFormat(self: pointer): pointer {.importc: "QWaveDecoder_audioFormat".}
 proc fcQWaveDecoder_getDevice(self: pointer): pointer {.importc: "QWaveDecoder_getDevice".}
 proc fcQWaveDecoder_duration(self: pointer): cint {.importc: "QWaveDecoder_duration".}
@@ -75,8 +75,8 @@ proc fcQWaveDecoder_formatKnown(self: pointer): void {.importc: "QWaveDecoder_fo
 proc fcQWaveDecoder_connect_formatKnown(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWaveDecoder_connect_formatKnown".}
 proc fcQWaveDecoder_parsingError(self: pointer): void {.importc: "QWaveDecoder_parsingError".}
 proc fcQWaveDecoder_connect_parsingError(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWaveDecoder_connect_parsingError".}
-proc fcQWaveDecoder_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWaveDecoder_tr2".}
-proc fcQWaveDecoder_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWaveDecoder_tr3".}
+proc fcQWaveDecoder_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWaveDecoder_tr_s_c".}
+proc fcQWaveDecoder_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWaveDecoder_tr_s_c_n".}
 proc fcQWaveDecoder_vdata(self: pointer): ptr pointer {.importc: "QWaveDecoder_vdata".}
 proc fvdata_cQWaveDecoder(self: pointer): pointer {.importc: "vdata_QWaveDecoder".}
 
@@ -138,10 +138,10 @@ proc fcQWaveDecoder_protectedbase_sender(self: pointer): pointer {.importc: "QWa
 proc fcQWaveDecoder_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWaveDecoder_protectedbase_senderSignalIndex".}
 proc fcQWaveDecoder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWaveDecoder_protectedbase_receivers".}
 proc fcQWaveDecoder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWaveDecoder_protectedbase_isSignalConnected".}
-proc fcQWaveDecoder_new(vtbl: pointer, vdata: csize_t, device: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new".}
-proc fcQWaveDecoder_new2(vtbl: pointer, vdata: csize_t, device: pointer, format: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new2".}
-proc fcQWaveDecoder_new3(vtbl: pointer, vdata: csize_t, device: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new3".}
-proc fcQWaveDecoder_new4(vtbl: pointer, vdata: csize_t, device: pointer, format: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new4".}
+proc fcQWaveDecoder_new(vtbl: pointer, vdata: csize_t, device: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new_device".}
+proc fcQWaveDecoder_new2(vtbl: pointer, vdata: csize_t, device: pointer, format: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new_device_format".}
+proc fcQWaveDecoder_new3(vtbl: pointer, vdata: csize_t, device: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new_device_parent".}
+proc fcQWaveDecoder_new4(vtbl: pointer, vdata: csize_t, device: pointer, format: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new_device_format_parent".}
 proc fcQWaveDecoder_staticMetaObject(): pointer {.importc: "QWaveDecoder_staticMetaObject".}
 
 proc metaObject*(self: gen_qwavedecoder_types.QWaveDecoder): gen_qobjectdefs_types.QMetaObject =
@@ -154,7 +154,7 @@ proc metacall*(self: gen_qwavedecoder_types.QWaveDecoder, param1: cint, param2: 
   fcQWaveDecoder_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwavedecoder_types.QWaveDecoder, s: cstring): string =
-  let v_ms = fcQWaveDecoder_tr(s)
+  let v_ms = fcQWaveDecoder_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -229,13 +229,13 @@ proc onParsingError*(self: gen_qwavedecoder_types.QWaveDecoder, slot: QWaveDecod
   fcQWaveDecoder_connect_parsingError(self.h, cast[int](addr tmp[]), fcQWaveDecoder_slot_callback_parsingError, fcQWaveDecoder_slot_callback_parsingError_release)
 
 proc tr*(_: type gen_qwavedecoder_types.QWaveDecoder, s: cstring, c: cstring): string =
-  let v_ms = fcQWaveDecoder_tr2(s, c)
+  let v_ms = fcQWaveDecoder_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwavedecoder_types.QWaveDecoder, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWaveDecoder_tr3(s, c, n)
+  let v_ms = fcQWaveDecoder_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

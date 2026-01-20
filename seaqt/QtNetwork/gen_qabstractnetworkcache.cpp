@@ -31,12 +31,12 @@ QNetworkCacheMetaData* QNetworkCacheMetaData_new() {
 	return new (std::nothrow) QNetworkCacheMetaData();
 }
 
-QNetworkCacheMetaData* QNetworkCacheMetaData_new2(QNetworkCacheMetaData* other) {
-	return new (std::nothrow) QNetworkCacheMetaData(*other);
+QNetworkCacheMetaData* QNetworkCacheMetaData_new_from(QNetworkCacheMetaData* from) {
+	return new (std::nothrow) QNetworkCacheMetaData(*from);
 }
 
-void QNetworkCacheMetaData_operatorAssign(QNetworkCacheMetaData* self, QNetworkCacheMetaData* other) {
-	self->operator=(*other);
+void QNetworkCacheMetaData_operatorAssign(QNetworkCacheMetaData* self, QNetworkCacheMetaData* from) {
+	self->operator=(*from);
 }
 
 void QNetworkCacheMetaData_swap(QNetworkCacheMetaData* self, QNetworkCacheMetaData* other) {
@@ -187,7 +187,7 @@ int QAbstractNetworkCache_metacall(QAbstractNetworkCache* self, int param1, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractNetworkCache_tr(const char* s) {
+struct seaqt_string QAbstractNetworkCache_tr_s(const char* s) {
 	QString _ret = QAbstractNetworkCache::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -231,7 +231,7 @@ void QAbstractNetworkCache_clear(QAbstractNetworkCache* self) {
 	self->clear();
 }
 
-struct seaqt_string QAbstractNetworkCache_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractNetworkCache_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractNetworkCache::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -242,7 +242,7 @@ struct seaqt_string QAbstractNetworkCache_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractNetworkCache_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractNetworkCache_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractNetworkCache::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

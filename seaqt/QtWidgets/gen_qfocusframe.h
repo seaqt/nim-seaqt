@@ -145,22 +145,22 @@ typedef struct QFocusFrame_VTable{
 void* QFocusFrame_vdata(VirtualQFocusFrame* self);
 VirtualQFocusFrame* vdata_QFocusFrame(void* vdata);
 
-VirtualQFocusFrame* QFocusFrame_new(const QFocusFrame_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQFocusFrame* QFocusFrame_new2(const QFocusFrame_VTable* vtbl, size_t vdata);
+VirtualQFocusFrame* QFocusFrame_new_parent(const QFocusFrame_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQFocusFrame* QFocusFrame_new(const QFocusFrame_VTable* vtbl, size_t vdata);
 
 void QFocusFrame_virtbase(QFocusFrame* src, QWidget** outptr_QWidget);
 QMetaObject* QFocusFrame_metaObject(const QFocusFrame* self);
 void* QFocusFrame_metacast(QFocusFrame* self, const char* param1);
 int QFocusFrame_metacall(QFocusFrame* self, int param1, int param2, void** param3);
-struct seaqt_string QFocusFrame_tr(const char* s);
+struct seaqt_string QFocusFrame_tr_s(const char* s);
 void QFocusFrame_setWidget(QFocusFrame* self, QWidget* widget);
 QWidget* QFocusFrame_widget(const QFocusFrame* self);
 bool QFocusFrame_event(QFocusFrame* self, QEvent* e);
 bool QFocusFrame_eventFilter(QFocusFrame* self, QObject* param1, QEvent* param2);
 void QFocusFrame_paintEvent(QFocusFrame* self, QPaintEvent* param1);
 void QFocusFrame_initStyleOption(const QFocusFrame* self, QStyleOption* option);
-struct seaqt_string QFocusFrame_tr2(const char* s, const char* c);
-struct seaqt_string QFocusFrame_tr3(const char* s, const char* c, int n);
+struct seaqt_string QFocusFrame_tr_s_c(const char* s, const char* c);
+struct seaqt_string QFocusFrame_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QFocusFrame_virtualbase_metaObject(const VirtualQFocusFrame* self);
 void* QFocusFrame_virtualbase_metacast(VirtualQFocusFrame* self, const char* param1);

@@ -171,16 +171,16 @@ QAccessibleHyperlinkInterface* QAccessibleInterface_hyperlinkInterface(QAccessib
 	return self->hyperlinkInterface();
 }
 
-void QAccessibleInterface_virtualHook(QAccessibleInterface* self, int id, void* data) {
+void QAccessibleInterface_virtual_hook(QAccessibleInterface* self, int id, void* data) {
 	self->virtual_hook(static_cast<int>(id), data);
 }
 
-void* QAccessibleInterface_interfaceCast(QAccessibleInterface* self, int param1) {
+void* QAccessibleInterface_interface_cast(QAccessibleInterface* self, int param1) {
 	return self->interface_cast(static_cast<QAccessible::InterfaceType>(param1));
 }
 
-void QAccessibleInterface_operatorAssign(QAccessibleInterface* self, QAccessibleInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleInterface_operatorAssign(QAccessibleInterface* self, QAccessibleInterface* from) {
+	self->operator=(*from);
 }
 
 void QAccessibleTextInterface_selection(const QAccessibleTextInterface* self, int selectionIndex, int* startOffset, int* endOffset) {
@@ -282,8 +282,8 @@ struct seaqt_string QAccessibleTextInterface_attributes(const QAccessibleTextInt
 	return _ms;
 }
 
-void QAccessibleTextInterface_operatorAssign(QAccessibleTextInterface* self, QAccessibleTextInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleTextInterface_operatorAssign(QAccessibleTextInterface* self, QAccessibleTextInterface* from) {
+	self->operator=(*from);
 }
 
 void QAccessibleTextInterface_delete(QAccessibleTextInterface* self) {
@@ -304,8 +304,8 @@ void QAccessibleEditableTextInterface_replaceText(QAccessibleEditableTextInterfa
 	self->replaceText(static_cast<int>(startOffset), static_cast<int>(endOffset), text_QString);
 }
 
-void QAccessibleEditableTextInterface_operatorAssign(QAccessibleEditableTextInterface* self, QAccessibleEditableTextInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleEditableTextInterface_operatorAssign(QAccessibleEditableTextInterface* self, QAccessibleEditableTextInterface* from) {
+	self->operator=(*from);
 }
 
 void QAccessibleEditableTextInterface_delete(QAccessibleEditableTextInterface* self) {
@@ -332,8 +332,8 @@ QVariant* QAccessibleValueInterface_minimumStepSize(const QAccessibleValueInterf
 	return new QVariant(self->minimumStepSize());
 }
 
-void QAccessibleValueInterface_operatorAssign(QAccessibleValueInterface* self, QAccessibleValueInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleValueInterface_operatorAssign(QAccessibleValueInterface* self, QAccessibleValueInterface* from) {
+	self->operator=(*from);
 }
 
 void QAccessibleValueInterface_delete(QAccessibleValueInterface* self) {
@@ -390,8 +390,8 @@ QAccessibleInterface* QAccessibleTableCellInterface_table(const QAccessibleTable
 	return self->table();
 }
 
-void QAccessibleTableCellInterface_operatorAssign(QAccessibleTableCellInterface* self, QAccessibleTableCellInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleTableCellInterface_operatorAssign(QAccessibleTableCellInterface* self, QAccessibleTableCellInterface* from) {
+	self->operator=(*from);
 }
 
 void QAccessibleTableCellInterface_delete(QAccessibleTableCellInterface* self) {
@@ -519,15 +519,15 @@ void QAccessibleTableInterface_modelChange(QAccessibleTableInterface* self, QAcc
 	self->modelChange(event);
 }
 
-void QAccessibleTableInterface_operatorAssign(QAccessibleTableInterface* self, QAccessibleTableInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleTableInterface_operatorAssign(QAccessibleTableInterface* self, QAccessibleTableInterface* from) {
+	self->operator=(*from);
 }
 
 void QAccessibleTableInterface_delete(QAccessibleTableInterface* self) {
 	delete self;
 }
 
-struct seaqt_string QAccessibleActionInterface_tr(const char* sourceText) {
+struct seaqt_string QAccessibleActionInterface_tr_sourceText(const char* sourceText) {
 	QString _ret = QAccessibleActionInterface::tr(sourceText);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -740,11 +740,11 @@ struct seaqt_string QAccessibleActionInterface_previousPageAction() {
 	return _ms;
 }
 
-void QAccessibleActionInterface_operatorAssign(QAccessibleActionInterface* self, QAccessibleActionInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleActionInterface_operatorAssign(QAccessibleActionInterface* self, QAccessibleActionInterface* from) {
+	self->operator=(*from);
 }
 
-struct seaqt_string QAccessibleActionInterface_tr2(const char* sourceText, const char* disambiguation) {
+struct seaqt_string QAccessibleActionInterface_tr_sourceText_disambiguation(const char* sourceText, const char* disambiguation) {
 	QString _ret = QAccessibleActionInterface::tr(sourceText, disambiguation);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -755,7 +755,7 @@ struct seaqt_string QAccessibleActionInterface_tr2(const char* sourceText, const
 	return _ms;
 }
 
-struct seaqt_string QAccessibleActionInterface_tr3(const char* sourceText, const char* disambiguation, int n) {
+struct seaqt_string QAccessibleActionInterface_tr_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n) {
 	QString _ret = QAccessibleActionInterface::tr(sourceText, disambiguation, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -789,8 +789,8 @@ QPoint* QAccessibleImageInterface_imagePosition(const QAccessibleImageInterface*
 	return new QPoint(self->imagePosition());
 }
 
-void QAccessibleImageInterface_operatorAssign(QAccessibleImageInterface* self, QAccessibleImageInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleImageInterface_operatorAssign(QAccessibleImageInterface* self, QAccessibleImageInterface* from) {
+	self->operator=(*from);
 }
 
 void QAccessibleImageInterface_delete(QAccessibleImageInterface* self) {
@@ -831,8 +831,8 @@ bool QAccessibleHyperlinkInterface_isValid(const QAccessibleHyperlinkInterface* 
 	return self->isValid();
 }
 
-void QAccessibleHyperlinkInterface_operatorAssign(QAccessibleHyperlinkInterface* self, QAccessibleHyperlinkInterface* param1) {
-	self->operator=(*param1);
+void QAccessibleHyperlinkInterface_operatorAssign(QAccessibleHyperlinkInterface* self, QAccessibleHyperlinkInterface* from) {
+	self->operator=(*from);
 }
 
 void QAccessibleHyperlinkInterface_delete(QAccessibleHyperlinkInterface* self) {
@@ -864,12 +864,12 @@ public:
 
 };
 
-VirtualQAccessibleEvent* QAccessibleEvent_new(const QAccessibleEvent_VTable* vtbl, size_t vdata, QObject* obj, int typ) {
+VirtualQAccessibleEvent* QAccessibleEvent_new_obj_typ(const QAccessibleEvent_VTable* vtbl, size_t vdata, QObject* obj, int typ) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleEvent(vtbl, obj, static_cast<QAccessible::Event>(typ)) : nullptr;
 }
 
-VirtualQAccessibleEvent* QAccessibleEvent_new2(const QAccessibleEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int typ) {
+VirtualQAccessibleEvent* QAccessibleEvent_new_iface_typ(const QAccessibleEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int typ) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleEvent(vtbl, iface, static_cast<QAccessible::Event>(typ)) : nullptr;
 }
@@ -937,12 +937,12 @@ public:
 
 };
 
-VirtualQAccessibleStateChangeEvent* QAccessibleStateChangeEvent_new(const QAccessibleStateChangeEvent_VTable* vtbl, size_t vdata, QObject* obj, QAccessible__State* state) {
+VirtualQAccessibleStateChangeEvent* QAccessibleStateChangeEvent_new_obj_state(const QAccessibleStateChangeEvent_VTable* vtbl, size_t vdata, QObject* obj, QAccessible__State* state) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleStateChangeEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleStateChangeEvent(vtbl, obj, *state) : nullptr;
 }
 
-VirtualQAccessibleStateChangeEvent* QAccessibleStateChangeEvent_new2(const QAccessibleStateChangeEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, QAccessible__State* state) {
+VirtualQAccessibleStateChangeEvent* QAccessibleStateChangeEvent_new_iface_state(const QAccessibleStateChangeEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, QAccessible__State* state) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleStateChangeEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleStateChangeEvent(vtbl, iface, *state) : nullptr;
 }
@@ -992,12 +992,12 @@ public:
 
 };
 
-VirtualQAccessibleTextCursorEvent* QAccessibleTextCursorEvent_new(const QAccessibleTextCursorEvent_VTable* vtbl, size_t vdata, QObject* obj, int cursorPos) {
+VirtualQAccessibleTextCursorEvent* QAccessibleTextCursorEvent_new_obj_cursorPos(const QAccessibleTextCursorEvent_VTable* vtbl, size_t vdata, QObject* obj, int cursorPos) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextCursorEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextCursorEvent(vtbl, obj, static_cast<int>(cursorPos)) : nullptr;
 }
 
-VirtualQAccessibleTextCursorEvent* QAccessibleTextCursorEvent_new2(const QAccessibleTextCursorEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int cursorPos) {
+VirtualQAccessibleTextCursorEvent* QAccessibleTextCursorEvent_new_iface_cursorPos(const QAccessibleTextCursorEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int cursorPos) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextCursorEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextCursorEvent(vtbl, iface, static_cast<int>(cursorPos)) : nullptr;
 }
@@ -1051,12 +1051,12 @@ public:
 
 };
 
-VirtualQAccessibleTextSelectionEvent* QAccessibleTextSelectionEvent_new(const QAccessibleTextSelectionEvent_VTable* vtbl, size_t vdata, QObject* obj, int start, int end) {
+VirtualQAccessibleTextSelectionEvent* QAccessibleTextSelectionEvent_new_obj_start_end(const QAccessibleTextSelectionEvent_VTable* vtbl, size_t vdata, QObject* obj, int start, int end) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextSelectionEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextSelectionEvent(vtbl, obj, static_cast<int>(start), static_cast<int>(end)) : nullptr;
 }
 
-VirtualQAccessibleTextSelectionEvent* QAccessibleTextSelectionEvent_new2(const QAccessibleTextSelectionEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int start, int end) {
+VirtualQAccessibleTextSelectionEvent* QAccessibleTextSelectionEvent_new_iface_start_end(const QAccessibleTextSelectionEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int start, int end) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextSelectionEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextSelectionEvent(vtbl, iface, static_cast<int>(start), static_cast<int>(end)) : nullptr;
 }
@@ -1114,13 +1114,13 @@ public:
 
 };
 
-VirtualQAccessibleTextInsertEvent* QAccessibleTextInsertEvent_new(const QAccessibleTextInsertEvent_VTable* vtbl, size_t vdata, QObject* obj, int position, struct seaqt_string text) {
+VirtualQAccessibleTextInsertEvent* QAccessibleTextInsertEvent_new_obj_position_text(const QAccessibleTextInsertEvent_VTable* vtbl, size_t vdata, QObject* obj, int position, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextInsertEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextInsertEvent(vtbl, obj, static_cast<int>(position), text_QString) : nullptr;
 }
 
-VirtualQAccessibleTextInsertEvent* QAccessibleTextInsertEvent_new2(const QAccessibleTextInsertEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int position, struct seaqt_string text) {
+VirtualQAccessibleTextInsertEvent* QAccessibleTextInsertEvent_new_iface_position_text(const QAccessibleTextInsertEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int position, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextInsertEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextInsertEvent(vtbl, iface, static_cast<int>(position), text_QString) : nullptr;
@@ -1182,13 +1182,13 @@ public:
 
 };
 
-VirtualQAccessibleTextRemoveEvent* QAccessibleTextRemoveEvent_new(const QAccessibleTextRemoveEvent_VTable* vtbl, size_t vdata, QObject* obj, int position, struct seaqt_string text) {
+VirtualQAccessibleTextRemoveEvent* QAccessibleTextRemoveEvent_new_obj_position_text(const QAccessibleTextRemoveEvent_VTable* vtbl, size_t vdata, QObject* obj, int position, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextRemoveEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextRemoveEvent(vtbl, obj, static_cast<int>(position), text_QString) : nullptr;
 }
 
-VirtualQAccessibleTextRemoveEvent* QAccessibleTextRemoveEvent_new2(const QAccessibleTextRemoveEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int position, struct seaqt_string text) {
+VirtualQAccessibleTextRemoveEvent* QAccessibleTextRemoveEvent_new_iface_position_text(const QAccessibleTextRemoveEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int position, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextRemoveEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextRemoveEvent(vtbl, iface, static_cast<int>(position), text_QString) : nullptr;
@@ -1250,14 +1250,14 @@ public:
 
 };
 
-VirtualQAccessibleTextUpdateEvent* QAccessibleTextUpdateEvent_new(const QAccessibleTextUpdateEvent_VTable* vtbl, size_t vdata, QObject* obj, int position, struct seaqt_string oldText, struct seaqt_string text) {
+VirtualQAccessibleTextUpdateEvent* QAccessibleTextUpdateEvent_new_obj_position_oldText_text(const QAccessibleTextUpdateEvent_VTable* vtbl, size_t vdata, QObject* obj, int position, struct seaqt_string oldText, struct seaqt_string text) {
 	QString oldText_QString = QString::fromUtf8(oldText.data, oldText.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextUpdateEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTextUpdateEvent(vtbl, obj, static_cast<int>(position), oldText_QString, text_QString) : nullptr;
 }
 
-VirtualQAccessibleTextUpdateEvent* QAccessibleTextUpdateEvent_new2(const QAccessibleTextUpdateEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int position, struct seaqt_string oldText, struct seaqt_string text) {
+VirtualQAccessibleTextUpdateEvent* QAccessibleTextUpdateEvent_new_iface_position_oldText_text(const QAccessibleTextUpdateEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int position, struct seaqt_string oldText, struct seaqt_string text) {
 	QString oldText_QString = QString::fromUtf8(oldText.data, oldText.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTextUpdateEvent>() + vdata, std::nothrow);
@@ -1331,12 +1331,12 @@ public:
 
 };
 
-VirtualQAccessibleValueChangeEvent* QAccessibleValueChangeEvent_new(const QAccessibleValueChangeEvent_VTable* vtbl, size_t vdata, QObject* obj, QVariant* val) {
+VirtualQAccessibleValueChangeEvent* QAccessibleValueChangeEvent_new_obj_val(const QAccessibleValueChangeEvent_VTable* vtbl, size_t vdata, QObject* obj, QVariant* val) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleValueChangeEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleValueChangeEvent(vtbl, obj, *val) : nullptr;
 }
 
-VirtualQAccessibleValueChangeEvent* QAccessibleValueChangeEvent_new2(const QAccessibleValueChangeEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, QVariant* val) {
+VirtualQAccessibleValueChangeEvent* QAccessibleValueChangeEvent_new_iface_val(const QAccessibleValueChangeEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, QVariant* val) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleValueChangeEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleValueChangeEvent(vtbl, iface, *val) : nullptr;
 }
@@ -1390,12 +1390,12 @@ public:
 
 };
 
-VirtualQAccessibleTableModelChangeEvent* QAccessibleTableModelChangeEvent_new(const QAccessibleTableModelChangeEvent_VTable* vtbl, size_t vdata, QObject* obj, int changeType) {
+VirtualQAccessibleTableModelChangeEvent* QAccessibleTableModelChangeEvent_new_obj_changeType(const QAccessibleTableModelChangeEvent_VTable* vtbl, size_t vdata, QObject* obj, int changeType) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTableModelChangeEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTableModelChangeEvent(vtbl, obj, static_cast<QAccessibleTableModelChangeEvent::ModelChangeType>(changeType)) : nullptr;
 }
 
-VirtualQAccessibleTableModelChangeEvent* QAccessibleTableModelChangeEvent_new2(const QAccessibleTableModelChangeEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int changeType) {
+VirtualQAccessibleTableModelChangeEvent* QAccessibleTableModelChangeEvent_new_iface_changeType(const QAccessibleTableModelChangeEvent_VTable* vtbl, size_t vdata, QAccessibleInterface* iface, int changeType) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAccessibleTableModelChangeEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAccessibleTableModelChangeEvent(vtbl, iface, static_cast<QAccessibleTableModelChangeEvent::ModelChangeType>(changeType)) : nullptr;
 }

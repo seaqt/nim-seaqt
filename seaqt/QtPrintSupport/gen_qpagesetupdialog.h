@@ -151,21 +151,21 @@ typedef struct QPageSetupDialog_VTable{
 void* QPageSetupDialog_vdata(VirtualQPageSetupDialog* self);
 VirtualQPageSetupDialog* vdata_QPageSetupDialog(void* vdata);
 
-VirtualQPageSetupDialog* QPageSetupDialog_new(const QPageSetupDialog_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQPageSetupDialog* QPageSetupDialog_new2(const QPageSetupDialog_VTable* vtbl, size_t vdata, QPrinter* printer);
-VirtualQPageSetupDialog* QPageSetupDialog_new3(const QPageSetupDialog_VTable* vtbl, size_t vdata);
-VirtualQPageSetupDialog* QPageSetupDialog_new4(const QPageSetupDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
+VirtualQPageSetupDialog* QPageSetupDialog_new_parent(const QPageSetupDialog_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQPageSetupDialog* QPageSetupDialog_new_printer(const QPageSetupDialog_VTable* vtbl, size_t vdata, QPrinter* printer);
+VirtualQPageSetupDialog* QPageSetupDialog_new(const QPageSetupDialog_VTable* vtbl, size_t vdata);
+VirtualQPageSetupDialog* QPageSetupDialog_new_printer_parent(const QPageSetupDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
 
 void QPageSetupDialog_virtbase(QPageSetupDialog* src, QDialog** outptr_QDialog);
 QMetaObject* QPageSetupDialog_metaObject(const QPageSetupDialog* self);
 void* QPageSetupDialog_metacast(QPageSetupDialog* self, const char* param1);
 int QPageSetupDialog_metacall(QPageSetupDialog* self, int param1, int param2, void** param3);
-struct seaqt_string QPageSetupDialog_tr(const char* s);
+struct seaqt_string QPageSetupDialog_tr_s(const char* s);
 int QPageSetupDialog_exec(QPageSetupDialog* self);
 void QPageSetupDialog_done(QPageSetupDialog* self, int result);
 QPrinter* QPageSetupDialog_printer(QPageSetupDialog* self);
-struct seaqt_string QPageSetupDialog_tr2(const char* s, const char* c);
-struct seaqt_string QPageSetupDialog_tr3(const char* s, const char* c, int n);
+struct seaqt_string QPageSetupDialog_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPageSetupDialog_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPageSetupDialog_virtualbase_metaObject(const VirtualQPageSetupDialog* self);
 void* QPageSetupDialog_virtualbase_metacast(VirtualQPageSetupDialog* self, const char* param1);

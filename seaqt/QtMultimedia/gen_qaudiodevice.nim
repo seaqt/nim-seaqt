@@ -52,7 +52,7 @@ export
 type cQAudioDevice*{.exportc: "QAudioDevice", incompleteStruct.} = object
 
 proc fcQAudioDevice_swap(self: pointer, other: pointer): void {.importc: "QAudioDevice_swap".}
-proc fcQAudioDevice_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioDevice_operatorAssign".}
+proc fcQAudioDevice_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAudioDevice_operatorAssign".}
 proc fcQAudioDevice_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAudioDevice_operatorEqual".}
 proc fcQAudioDevice_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAudioDevice_operatorNotEqual".}
 proc fcQAudioDevice_isNull(self: pointer): bool {.importc: "QAudioDevice_isNull".}
@@ -69,14 +69,14 @@ proc fcQAudioDevice_maximumChannelCount(self: pointer): cint {.importc: "QAudioD
 proc fcQAudioDevice_supportedSampleFormats(self: pointer): struct_seaqt_array {.importc: "QAudioDevice_supportedSampleFormats".}
 proc fcQAudioDevice_channelConfiguration(self: pointer): cint {.importc: "QAudioDevice_channelConfiguration".}
 proc fcQAudioDevice_new(): ptr cQAudioDevice {.importc: "QAudioDevice_new".}
-proc fcQAudioDevice_new2(other: pointer): ptr cQAudioDevice {.importc: "QAudioDevice_new2".}
+proc fcQAudioDevice_new2(fromVal: pointer): ptr cQAudioDevice {.importc: "QAudioDevice_new_from".}
 proc fcQAudioDevice_staticMetaObject(): pointer {.importc: "QAudioDevice_staticMetaObject".}
 
 proc swap*(self: gen_qaudiodevice_types.QAudioDevice, other: gen_qaudiodevice_types.QAudioDevice): void =
   fcQAudioDevice_swap(self.h, other.h)
 
-proc operatorAssign*(self: gen_qaudiodevice_types.QAudioDevice, other: gen_qaudiodevice_types.QAudioDevice): void =
-  fcQAudioDevice_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qaudiodevice_types.QAudioDevice, fromVal: gen_qaudiodevice_types.QAudioDevice): void =
+  fcQAudioDevice_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qaudiodevice_types.QAudioDevice, other: gen_qaudiodevice_types.QAudioDevice): bool =
   fcQAudioDevice_operatorEqual(self.h, other.h)
@@ -139,8 +139,8 @@ proc create*(T: type gen_qaudiodevice_types.QAudioDevice): gen_qaudiodevice_type
   let tmp = gen_qaudiodevice_types.QAudioDevice(h: fcQAudioDevice_new(), owned: true)
   tmp
 proc create*(T: type gen_qaudiodevice_types.QAudioDevice,
-    other: gen_qaudiodevice_types.QAudioDevice): gen_qaudiodevice_types.QAudioDevice =
-  let tmp = gen_qaudiodevice_types.QAudioDevice(h: fcQAudioDevice_new2(other.h), owned: true)
+    fromVal: gen_qaudiodevice_types.QAudioDevice): gen_qaudiodevice_types.QAudioDevice =
+  let tmp = gen_qaudiodevice_types.QAudioDevice(h: fcQAudioDevice_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qaudiodevice_types.QAudioDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioDevice_staticMetaObject())

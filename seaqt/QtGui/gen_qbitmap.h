@@ -53,25 +53,25 @@ void* QBitmap_vdata(VirtualQBitmap* self);
 VirtualQBitmap* vdata_QBitmap(void* vdata);
 
 VirtualQBitmap* QBitmap_new(const QBitmap_VTable* vtbl, size_t vdata);
-VirtualQBitmap* QBitmap_new2(const QBitmap_VTable* vtbl, size_t vdata, QPixmap* param1);
-VirtualQBitmap* QBitmap_new3(const QBitmap_VTable* vtbl, size_t vdata, int w, int h);
-VirtualQBitmap* QBitmap_new4(const QBitmap_VTable* vtbl, size_t vdata, QSize* param1);
-VirtualQBitmap* QBitmap_new5(const QBitmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName);
-VirtualQBitmap* QBitmap_new6(const QBitmap_VTable* vtbl, size_t vdata, QBitmap* param1);
-VirtualQBitmap* QBitmap_new7(const QBitmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format);
+VirtualQBitmap* QBitmap_new_QPixmap(const QBitmap_VTable* vtbl, size_t vdata, QPixmap* param1);
+VirtualQBitmap* QBitmap_new_int_int(const QBitmap_VTable* vtbl, size_t vdata, int w, int h);
+VirtualQBitmap* QBitmap_new_QSize(const QBitmap_VTable* vtbl, size_t vdata, QSize* param1);
+VirtualQBitmap* QBitmap_new_QString(const QBitmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName);
+VirtualQBitmap* QBitmap_new_QBitmap(const QBitmap_VTable* vtbl, size_t vdata, QBitmap* from);
+VirtualQBitmap* QBitmap_new_QString_char(const QBitmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format);
 
 void QBitmap_virtbase(QBitmap* src, QPixmap** outptr_QPixmap);
-void QBitmap_operatorAssign(QBitmap* self, QPixmap* param1);
+void QBitmap_operatorAssign_QPixmap(QBitmap* self, QPixmap* param1);
 void QBitmap_swap(QBitmap* self, QBitmap* other);
 QVariant* QBitmap_ToQVariant(const QBitmap* self);
 void QBitmap_clear(QBitmap* self);
-QBitmap* QBitmap_fromImage(QImage* image);
-QBitmap* QBitmap_fromData(QSize* size, const unsigned char* bits);
+QBitmap* QBitmap_fromImage_image(QImage* image);
+QBitmap* QBitmap_fromData_size_bits(QSize* size, const unsigned char* bits);
 QBitmap* QBitmap_fromPixmap(QPixmap* pixmap);
 QBitmap* QBitmap_transformed(const QBitmap* self, QTransform* matrix);
-void QBitmap_operatorAssignWithQBitmap(QBitmap* self, QBitmap* param1);
-QBitmap* QBitmap_fromImage2(QImage* image, int flags);
-QBitmap* QBitmap_fromData2(QSize* size, const unsigned char* bits, int monoFormat);
+void QBitmap_operatorAssign_QBitmap(QBitmap* self, QBitmap* from);
+QBitmap* QBitmap_fromImage_image_flags(QImage* image, int flags);
+QBitmap* QBitmap_fromData_size_bits_monoFormat(QSize* size, const unsigned char* bits, int monoFormat);
 
 int QBitmap_virtualbase_devType(const VirtualQBitmap* self);
 QPaintEngine* QBitmap_virtualbase_paintEngine(const VirtualQBitmap* self);

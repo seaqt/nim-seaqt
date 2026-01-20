@@ -41,7 +41,7 @@ typedef struct QTimerEvent QTimerEvent;
 #endif
 
 QPointingDeviceUniqueId* QPointingDeviceUniqueId_new();
-QPointingDeviceUniqueId* QPointingDeviceUniqueId_new2(QPointingDeviceUniqueId* param1);
+QPointingDeviceUniqueId* QPointingDeviceUniqueId_new_from(QPointingDeviceUniqueId* from);
 
 QPointingDeviceUniqueId* QPointingDeviceUniqueId_fromNumericId(long long id);
 bool QPointingDeviceUniqueId_isValid(const QPointingDeviceUniqueId* self);
@@ -69,17 +69,17 @@ void* QPointingDevice_vdata(VirtualQPointingDevice* self);
 VirtualQPointingDevice* vdata_QPointingDevice(void* vdata);
 
 VirtualQPointingDevice* QPointingDevice_new(const QPointingDevice_VTable* vtbl, size_t vdata);
-VirtualQPointingDevice* QPointingDevice_new2(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount);
-VirtualQPointingDevice* QPointingDevice_new3(const QPointingDevice_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQPointingDevice* QPointingDevice_new4(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName);
-VirtualQPointingDevice* QPointingDevice_new5(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName, QPointingDeviceUniqueId* uniqueId);
-VirtualQPointingDevice* QPointingDevice_new6(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName, QPointingDeviceUniqueId* uniqueId, QObject* parent);
+VirtualQPointingDevice* QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount);
+VirtualQPointingDevice* QPointingDevice_new_parent(const QPointingDevice_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPointingDevice* QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName);
+VirtualQPointingDevice* QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName_uniqueId(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName, QPointingDeviceUniqueId* uniqueId);
+VirtualQPointingDevice* QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName_uniqueId_parent(const QPointingDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int devType, int pType, int caps, int maxPoints, int buttonCount, struct seaqt_string seatName, QPointingDeviceUniqueId* uniqueId, QObject* parent);
 
 void QPointingDevice_virtbase(QPointingDevice* src, QInputDevice** outptr_QInputDevice);
 QMetaObject* QPointingDevice_metaObject(const QPointingDevice* self);
 void* QPointingDevice_metacast(QPointingDevice* self, const char* param1);
 int QPointingDevice_metacall(QPointingDevice* self, int param1, int param2, void** param3);
-struct seaqt_string QPointingDevice_tr(const char* s);
+struct seaqt_string QPointingDevice_tr_s(const char* s);
 void QPointingDevice_setType(QPointingDevice* self, int devType);
 void QPointingDevice_setCapabilities(QPointingDevice* self, int caps);
 void QPointingDevice_setMaximumTouchPoints(QPointingDevice* self, int c);
@@ -91,9 +91,9 @@ QPointingDevice* QPointingDevice_primaryPointingDevice();
 bool QPointingDevice_operatorEqual(const QPointingDevice* self, QPointingDevice* other);
 void QPointingDevice_grabChanged(const QPointingDevice* self, QObject* grabber, int transition, QPointerEvent* event, QEventPoint* point);
 void QPointingDevice_connect_grabChanged(QPointingDevice* self, intptr_t slot, void (*callback)(intptr_t, QObject*, int, QPointerEvent*, QEventPoint*), void (*release)(intptr_t));
-struct seaqt_string QPointingDevice_tr2(const char* s, const char* c);
-struct seaqt_string QPointingDevice_tr3(const char* s, const char* c, int n);
-QPointingDevice* QPointingDevice_primaryPointingDeviceWithSeatName(struct seaqt_string seatName);
+struct seaqt_string QPointingDevice_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPointingDevice_tr_s_c_n(const char* s, const char* c, int n);
+QPointingDevice* QPointingDevice_primaryPointingDevice_seatName(struct seaqt_string seatName);
 
 QMetaObject* QPointingDevice_virtualbase_metaObject(const VirtualQPointingDevice* self);
 void* QPointingDevice_virtualbase_metacast(VirtualQPointingDevice* self, const char* param1);

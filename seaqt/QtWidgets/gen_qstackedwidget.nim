@@ -75,7 +75,7 @@ type cQStackedWidget*{.exportc: "QStackedWidget", incompleteStruct.} = object
 proc fcQStackedWidget_metaObject(self: pointer): pointer {.importc: "QStackedWidget_metaObject".}
 proc fcQStackedWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QStackedWidget_metacast".}
 proc fcQStackedWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStackedWidget_metacall".}
-proc fcQStackedWidget_tr(s: cstring): struct_seaqt_string {.importc: "QStackedWidget_tr".}
+proc fcQStackedWidget_trS(s: cstring): struct_seaqt_string {.importc: "QStackedWidget_tr_s".}
 proc fcQStackedWidget_addWidget(self: pointer, w: pointer): cint {.importc: "QStackedWidget_addWidget".}
 proc fcQStackedWidget_insertWidget(self: pointer, index: cint, w: pointer): cint {.importc: "QStackedWidget_insertWidget".}
 proc fcQStackedWidget_removeWidget(self: pointer, w: pointer): void {.importc: "QStackedWidget_removeWidget".}
@@ -90,8 +90,8 @@ proc fcQStackedWidget_currentChanged(self: pointer, param1: cint): void {.import
 proc fcQStackedWidget_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStackedWidget_connect_currentChanged".}
 proc fcQStackedWidget_widgetRemoved(self: pointer, index: cint): void {.importc: "QStackedWidget_widgetRemoved".}
 proc fcQStackedWidget_connect_widgetRemoved(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStackedWidget_connect_widgetRemoved".}
-proc fcQStackedWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStackedWidget_tr2".}
-proc fcQStackedWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStackedWidget_tr3".}
+proc fcQStackedWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStackedWidget_tr_s_c".}
+proc fcQStackedWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStackedWidget_tr_s_c_n".}
 proc fcQStackedWidget_vdata(self: pointer): ptr pointer {.importc: "QStackedWidget_vdata".}
 proc fvdata_cQStackedWidget(self: pointer): pointer {.importc: "vdata_QStackedWidget".}
 
@@ -209,8 +209,8 @@ proc fcQStackedWidget_protectedbase_sender(self: pointer): pointer {.importc: "Q
 proc fcQStackedWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QStackedWidget_protectedbase_senderSignalIndex".}
 proc fcQStackedWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStackedWidget_protectedbase_receivers".}
 proc fcQStackedWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStackedWidget_protectedbase_isSignalConnected".}
-proc fcQStackedWidget_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStackedWidget {.importc: "QStackedWidget_new".}
-proc fcQStackedWidget_new2(vtbl: pointer, vdata: csize_t): ptr cQStackedWidget {.importc: "QStackedWidget_new2".}
+proc fcQStackedWidget_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStackedWidget {.importc: "QStackedWidget_new_parent".}
+proc fcQStackedWidget_new2(vtbl: pointer, vdata: csize_t): ptr cQStackedWidget {.importc: "QStackedWidget_new".}
 proc fcQStackedWidget_staticMetaObject(): pointer {.importc: "QStackedWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qstackedwidget_types.QStackedWidget): gen_qobjectdefs_types.QMetaObject =
@@ -223,7 +223,7 @@ proc metacall*(self: gen_qstackedwidget_types.QStackedWidget, param1: cint, para
   fcQStackedWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstackedwidget_types.QStackedWidget, s: cstring): string =
-  let v_ms = fcQStackedWidget_tr(s)
+  let v_ms = fcQStackedWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -299,13 +299,13 @@ proc onWidgetRemoved*(self: gen_qstackedwidget_types.QStackedWidget, slot: QStac
   fcQStackedWidget_connect_widgetRemoved(self.h, cast[int](addr tmp[]), fcQStackedWidget_slot_callback_widgetRemoved, fcQStackedWidget_slot_callback_widgetRemoved_release)
 
 proc tr*(_: type gen_qstackedwidget_types.QStackedWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQStackedWidget_tr2(s, c)
+  let v_ms = fcQStackedWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstackedwidget_types.QStackedWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStackedWidget_tr3(s, c, n)
+  let v_ms = fcQStackedWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

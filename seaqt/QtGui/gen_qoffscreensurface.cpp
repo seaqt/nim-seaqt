@@ -215,12 +215,12 @@ VirtualQOffscreenSurface* QOffscreenSurface_new(const QOffscreenSurface_VTable* 
 	return _mem_ ? new (_mem_)VirtualQOffscreenSurface(vtbl) : nullptr;
 }
 
-VirtualQOffscreenSurface* QOffscreenSurface_new2(const QOffscreenSurface_VTable* vtbl, size_t vdata, QScreen* screen) {
+VirtualQOffscreenSurface* QOffscreenSurface_new_screen(const QOffscreenSurface_VTable* vtbl, size_t vdata, QScreen* screen) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQOffscreenSurface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQOffscreenSurface(vtbl, screen) : nullptr;
 }
 
-VirtualQOffscreenSurface* QOffscreenSurface_new3(const QOffscreenSurface_VTable* vtbl, size_t vdata, QScreen* screen, QObject* parent) {
+VirtualQOffscreenSurface* QOffscreenSurface_new_screen_parent(const QOffscreenSurface_VTable* vtbl, size_t vdata, QScreen* screen, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQOffscreenSurface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQOffscreenSurface(vtbl, screen, parent) : nullptr;
 }
@@ -242,7 +242,7 @@ int QOffscreenSurface_metacall(QOffscreenSurface* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QOffscreenSurface_tr(const char* s) {
+struct seaqt_string QOffscreenSurface_tr_s(const char* s) {
 	QString _ret = QOffscreenSurface::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -310,7 +310,7 @@ void QOffscreenSurface_connect_screenChanged(QOffscreenSurface* self, intptr_t s
 	QOffscreenSurface::connect(self, static_cast<void (QOffscreenSurface::*)(QScreen*)>(&QOffscreenSurface::screenChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QOffscreenSurface_tr2(const char* s, const char* c) {
+struct seaqt_string QOffscreenSurface_tr_s_c(const char* s, const char* c) {
 	QString _ret = QOffscreenSurface::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -321,7 +321,7 @@ struct seaqt_string QOffscreenSurface_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QOffscreenSurface_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QOffscreenSurface_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QOffscreenSurface::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

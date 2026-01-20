@@ -182,30 +182,30 @@ VirtualQAction* QAction_new(const QAction_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQAction(vtbl) : nullptr;
 }
 
-VirtualQAction* QAction_new2(const QAction_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQAction* QAction_new_text(const QAction_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAction>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAction(vtbl, text_QString) : nullptr;
 }
 
-VirtualQAction* QAction_new3(const QAction_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text) {
+VirtualQAction* QAction_new_icon_text(const QAction_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAction>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAction(vtbl, *icon, text_QString) : nullptr;
 }
 
-VirtualQAction* QAction_new4(const QAction_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAction* QAction_new_parent(const QAction_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAction>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAction(vtbl, parent) : nullptr;
 }
 
-VirtualQAction* QAction_new5(const QAction_VTable* vtbl, size_t vdata, struct seaqt_string text, QObject* parent) {
+VirtualQAction* QAction_new_text_parent(const QAction_VTable* vtbl, size_t vdata, struct seaqt_string text, QObject* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAction>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAction(vtbl, text_QString, parent) : nullptr;
 }
 
-VirtualQAction* QAction_new6(const QAction_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QObject* parent) {
+VirtualQAction* QAction_new_icon_text_parent(const QAction_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QObject* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAction>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAction(vtbl, *icon, text_QString, parent) : nullptr;
@@ -227,7 +227,7 @@ int QAction_metacall(QAction* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAction_tr(const char* s) {
+struct seaqt_string QAction_tr_s(const char* s) {
 	QString _ret = QAction::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -372,7 +372,7 @@ QKeySequence* QAction_shortcut(const QAction* self) {
 	return new QKeySequence(self->shortcut());
 }
 
-void QAction_setShortcuts(QAction* self, struct seaqt_array /* of QKeySequence* */  shortcuts) {
+void QAction_setShortcuts_QListOfQKeySequence(QAction* self, struct seaqt_array /* of QKeySequence* */  shortcuts) {
 	QList<QKeySequence> shortcuts_QList;
 	shortcuts_QList.reserve(shortcuts.len);
 	QKeySequence** shortcuts_arr = static_cast<QKeySequence**>(shortcuts.data);
@@ -382,7 +382,7 @@ void QAction_setShortcuts(QAction* self, struct seaqt_array /* of QKeySequence* 
 	self->setShortcuts(shortcuts_QList);
 }
 
-void QAction_setShortcutsWithShortcuts(QAction* self, int shortcuts) {
+void QAction_setShortcuts_QKeySequence_StandardKey(QAction* self, int shortcuts) {
 	self->setShortcuts(static_cast<QKeySequence::StandardKey>(shortcuts));
 }
 
@@ -625,7 +625,7 @@ void QAction_connect_toggled(QAction* self, intptr_t slot, void (*callback)(intp
 	QAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::toggled), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAction_tr2(const char* s, const char* c) {
+struct seaqt_string QAction_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAction::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -636,7 +636,7 @@ struct seaqt_string QAction_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAction_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAction_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAction::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -647,15 +647,15 @@ struct seaqt_string QAction_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QAction_showStatusTextWithObject(QAction* self, QObject* object) {
+bool QAction_showStatusText_object(QAction* self, QObject* object) {
 	return self->showStatusText(object);
 }
 
-void QAction_triggeredWithChecked(QAction* self, bool checked) {
+void QAction_triggered_checked(QAction* self, bool checked) {
 	self->triggered(checked);
 }
 
-void QAction_connect_triggeredWithChecked(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QAction_connect_triggered_checked(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);

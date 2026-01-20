@@ -59,7 +59,7 @@ type cQVideoSink*{.exportc: "QVideoSink", incompleteStruct.} = object
 proc fcQVideoSink_metaObject(self: pointer): pointer {.importc: "QVideoSink_metaObject".}
 proc fcQVideoSink_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoSink_metacast".}
 proc fcQVideoSink_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoSink_metacall".}
-proc fcQVideoSink_tr(s: cstring): struct_seaqt_string {.importc: "QVideoSink_tr".}
+proc fcQVideoSink_trS(s: cstring): struct_seaqt_string {.importc: "QVideoSink_tr_s".}
 proc fcQVideoSink_videoSize(self: pointer): pointer {.importc: "QVideoSink_videoSize".}
 proc fcQVideoSink_subtitleText(self: pointer): struct_seaqt_string {.importc: "QVideoSink_subtitleText".}
 proc fcQVideoSink_setSubtitleText(self: pointer, subtitle: struct_seaqt_string): void {.importc: "QVideoSink_setSubtitleText".}
@@ -71,8 +71,8 @@ proc fcQVideoSink_subtitleTextChanged(self: pointer, subtitleText: struct_seaqt_
 proc fcQVideoSink_connect_subtitleTextChanged(self: pointer, slot: int, callback: proc (slot: int, subtitleText: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoSink_connect_subtitleTextChanged".}
 proc fcQVideoSink_videoSizeChanged(self: pointer): void {.importc: "QVideoSink_videoSizeChanged".}
 proc fcQVideoSink_connect_videoSizeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoSink_connect_videoSizeChanged".}
-proc fcQVideoSink_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoSink_tr2".}
-proc fcQVideoSink_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoSink_tr3".}
+proc fcQVideoSink_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoSink_tr_s_c".}
+proc fcQVideoSink_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoSink_tr_s_c_n".}
 proc fcQVideoSink_vdata(self: pointer): ptr pointer {.importc: "QVideoSink_vdata".}
 proc fvdata_cQVideoSink(self: pointer): pointer {.importc: "vdata_QVideoSink".}
 
@@ -103,7 +103,7 @@ proc fcQVideoSink_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQVideoSink_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoSink_protectedbase_receivers".}
 proc fcQVideoSink_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoSink_protectedbase_isSignalConnected".}
 proc fcQVideoSink_new(vtbl: pointer, vdata: csize_t): ptr cQVideoSink {.importc: "QVideoSink_new".}
-proc fcQVideoSink_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVideoSink {.importc: "QVideoSink_new2".}
+proc fcQVideoSink_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVideoSink {.importc: "QVideoSink_new_parent".}
 proc fcQVideoSink_staticMetaObject(): pointer {.importc: "QVideoSink_staticMetaObject".}
 
 proc metaObject*(self: gen_qvideosink_types.QVideoSink): gen_qobjectdefs_types.QMetaObject =
@@ -116,7 +116,7 @@ proc metacall*(self: gen_qvideosink_types.QVideoSink, param1: cint, param2: cint
   fcQVideoSink_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring): string =
-  let v_ms = fcQVideoSink_tr(s)
+  let v_ms = fcQVideoSink_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -201,13 +201,13 @@ proc onVideoSizeChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSink
   fcQVideoSink_connect_videoSizeChanged(self.h, cast[int](addr tmp[]), fcQVideoSink_slot_callback_videoSizeChanged, fcQVideoSink_slot_callback_videoSizeChanged_release)
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoSink_tr2(s, c)
+  let v_ms = fcQVideoSink_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoSink_tr3(s, c, n)
+  let v_ms = fcQVideoSink_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

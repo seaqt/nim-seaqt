@@ -45,16 +45,16 @@ export
 
 type cQWebEngineFullScreenRequest*{.exportc: "QWebEngineFullScreenRequest", incompleteStruct.} = object
 
-proc fcQWebEngineFullScreenRequest_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineFullScreenRequest_operatorAssign".}
+proc fcQWebEngineFullScreenRequest_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineFullScreenRequest_operatorAssign".}
 proc fcQWebEngineFullScreenRequest_reject(self: pointer): void {.importc: "QWebEngineFullScreenRequest_reject".}
 proc fcQWebEngineFullScreenRequest_accept(self: pointer): void {.importc: "QWebEngineFullScreenRequest_accept".}
 proc fcQWebEngineFullScreenRequest_toggleOn(self: pointer): bool {.importc: "QWebEngineFullScreenRequest_toggleOn".}
 proc fcQWebEngineFullScreenRequest_origin(self: pointer): pointer {.importc: "QWebEngineFullScreenRequest_origin".}
-proc fcQWebEngineFullScreenRequest_new(other: pointer): ptr cQWebEngineFullScreenRequest {.importc: "QWebEngineFullScreenRequest_new".}
+proc fcQWebEngineFullScreenRequest_new(fromVal: pointer): ptr cQWebEngineFullScreenRequest {.importc: "QWebEngineFullScreenRequest_new".}
 proc fcQWebEngineFullScreenRequest_staticMetaObject(): pointer {.importc: "QWebEngineFullScreenRequest_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest, other: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): void =
-  fcQWebEngineFullScreenRequest_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest, fromVal: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): void =
+  fcQWebEngineFullScreenRequest_operatorAssign(self.h, fromVal.h)
 
 proc reject*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): void =
   fcQWebEngineFullScreenRequest_reject(self.h)
@@ -69,8 +69,8 @@ proc origin*(self: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenReq
   gen_qurl_types.QUrl(h: fcQWebEngineFullScreenRequest_origin(self.h), owned: true)
 
 proc create*(T: type gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest,
-    other: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest =
-  let tmp = gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest(h: fcQWebEngineFullScreenRequest_new(other.h), owned: true)
+    fromVal: gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest =
+  let tmp = gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest(h: fcQWebEngineFullScreenRequest_new(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebenginefullscreenrequest_types.QWebEngineFullScreenRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineFullScreenRequest_staticMetaObject())

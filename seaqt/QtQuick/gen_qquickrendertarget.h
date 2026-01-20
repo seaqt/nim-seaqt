@@ -25,21 +25,21 @@ typedef struct QSize QSize;
 #endif
 
 QQuickRenderTarget* QQuickRenderTarget_new();
-QQuickRenderTarget* QQuickRenderTarget_new2(QQuickRenderTarget* other);
+QQuickRenderTarget* QQuickRenderTarget_new_from(QQuickRenderTarget* from);
 
-void QQuickRenderTarget_operatorAssign(QQuickRenderTarget* self, QQuickRenderTarget* other);
+void QQuickRenderTarget_operatorAssign(QQuickRenderTarget* self, QQuickRenderTarget* from);
 bool QQuickRenderTarget_isNull(const QQuickRenderTarget* self);
 double QQuickRenderTarget_devicePixelRatio(const QQuickRenderTarget* self);
 void QQuickRenderTarget_setDevicePixelRatio(QQuickRenderTarget* self, double ratio);
 bool QQuickRenderTarget_mirrorVertically(const QQuickRenderTarget* self);
 void QQuickRenderTarget_setMirrorVertically(QQuickRenderTarget* self, bool enable);
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture(unsigned int textureId, unsigned int format, QSize* pixelSize);
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture2(unsigned int textureId, QSize* pixelSize);
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer(unsigned int renderbufferId, QSize* pixelSize);
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture_textureId_format_pixelSize(unsigned int textureId, unsigned int format, QSize* pixelSize);
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture_textureId_pixelSize(unsigned int textureId, QSize* pixelSize);
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer_renderbufferId_pixelSize(unsigned int renderbufferId, QSize* pixelSize);
 QQuickRenderTarget* QQuickRenderTarget_fromPaintDevice(QPaintDevice* device);
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture3(unsigned int textureId, unsigned int format, QSize* pixelSize, int sampleCount);
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture4(unsigned int textureId, QSize* pixelSize, int sampleCount);
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer2(unsigned int renderbufferId, QSize* pixelSize, int sampleCount);
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture_textureId_format_pixelSize_sampleCount(unsigned int textureId, unsigned int format, QSize* pixelSize, int sampleCount);
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture_textureId_pixelSize_sampleCount(unsigned int textureId, QSize* pixelSize, int sampleCount);
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer_renderbufferId_pixelSize_sampleCount(unsigned int renderbufferId, QSize* pixelSize, int sampleCount);
 
 void QQuickRenderTarget_delete(QQuickRenderTarget* self);
 

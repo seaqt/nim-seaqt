@@ -33,12 +33,12 @@ typedef struct QVector2D QVector2D;
 #endif
 
 QEventPoint* QEventPoint_new();
-QEventPoint* QEventPoint_new2(int pointId, uint8_t state, QPointF* scenePosition, QPointF* globalPosition);
-QEventPoint* QEventPoint_new3(QEventPoint* other);
-QEventPoint* QEventPoint_new4(int id);
-QEventPoint* QEventPoint_new5(int id, QPointingDevice* device);
+QEventPoint* QEventPoint_new_pointId_state_scenePosition_globalPosition(int pointId, uint8_t state, QPointF* scenePosition, QPointF* globalPosition);
+QEventPoint* QEventPoint_new_from(QEventPoint* from);
+QEventPoint* QEventPoint_new_id(int id);
+QEventPoint* QEventPoint_new_id_device(int id, QPointingDevice* device);
 
-void QEventPoint_operatorAssign(QEventPoint* self, QEventPoint* other);
+void QEventPoint_operatorAssign(QEventPoint* self, QEventPoint* from);
 bool QEventPoint_operatorEqual(const QEventPoint* self, QEventPoint* other);
 bool QEventPoint_operatorNotEqual(const QEventPoint* self, QEventPoint* other);
 void QEventPoint_swap(QEventPoint* self, QEventPoint* other);
@@ -81,7 +81,7 @@ double QEventPoint_rotation(const QEventPoint* self);
 QSizeF* QEventPoint_ellipseDiameters(const QEventPoint* self);
 bool QEventPoint_isAccepted(const QEventPoint* self);
 void QEventPoint_setAccepted(QEventPoint* self);
-void QEventPoint_setAcceptedWithAccepted(QEventPoint* self, bool accepted);
+void QEventPoint_setAccepted_accepted(QEventPoint* self, bool accepted);
 
 const QMetaObject* QEventPoint_staticMetaObject();
 void QEventPoint_delete(QEventPoint* self);

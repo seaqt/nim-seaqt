@@ -60,19 +60,19 @@ void* QSctpServer_vdata(VirtualQSctpServer* self);
 VirtualQSctpServer* vdata_QSctpServer(void* vdata);
 
 VirtualQSctpServer* QSctpServer_new(const QSctpServer_VTable* vtbl, size_t vdata);
-VirtualQSctpServer* QSctpServer_new2(const QSctpServer_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSctpServer* QSctpServer_new_parent(const QSctpServer_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSctpServer_virtbase(QSctpServer* src, QTcpServer** outptr_QTcpServer);
 QMetaObject* QSctpServer_metaObject(const QSctpServer* self);
 void* QSctpServer_metacast(QSctpServer* self, const char* param1);
 int QSctpServer_metacall(QSctpServer* self, int param1, int param2, void** param3);
-struct seaqt_string QSctpServer_tr(const char* s);
+struct seaqt_string QSctpServer_tr_s(const char* s);
 void QSctpServer_setMaximumChannelCount(QSctpServer* self, int count);
 int QSctpServer_maximumChannelCount(const QSctpServer* self);
 QSctpSocket* QSctpServer_nextPendingDatagramConnection(QSctpServer* self);
 void QSctpServer_incomingConnection(QSctpServer* self, intptr_t handle);
-struct seaqt_string QSctpServer_tr2(const char* s, const char* c);
-struct seaqt_string QSctpServer_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSctpServer_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSctpServer_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSctpServer_virtualbase_metaObject(const VirtualQSctpServer* self);
 void* QSctpServer_virtualbase_metacast(VirtualQSctpServer* self, const char* param1);

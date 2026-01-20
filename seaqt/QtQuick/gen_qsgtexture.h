@@ -68,7 +68,7 @@ void QSGTexture_virtbase(QSGTexture* src, QObject** outptr_QObject);
 QMetaObject* QSGTexture_metaObject(const QSGTexture* self);
 void* QSGTexture_metacast(QSGTexture* self, const char* param1);
 int QSGTexture_metacall(QSGTexture* self, int param1, int param2, void** param3);
-struct seaqt_string QSGTexture_tr(const char* s);
+struct seaqt_string QSGTexture_tr_s(const char* s);
 long long QSGTexture_comparisonKey(const QSGTexture* self);
 QSize* QSGTexture_textureSize(const QSGTexture* self);
 bool QSGTexture_hasAlphaChannel(const QSGTexture* self);
@@ -86,8 +86,8 @@ int QSGTexture_horizontalWrapMode(const QSGTexture* self);
 void QSGTexture_setVerticalWrapMode(QSGTexture* self, int vwrap);
 int QSGTexture_verticalWrapMode(const QSGTexture* self);
 QRectF* QSGTexture_convertToNormalizedSourceRect(const QSGTexture* self, QRectF* rect);
-struct seaqt_string QSGTexture_tr2(const char* s, const char* c);
-struct seaqt_string QSGTexture_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSGTexture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSGTexture_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSGTexture_virtualbase_metaObject(const VirtualQSGTexture* self);
 void* QSGTexture_virtualbase_metacast(VirtualQSGTexture* self, const char* param1);
@@ -146,10 +146,10 @@ void QSGDynamicTexture_virtbase(QSGDynamicTexture* src, QSGTexture** outptr_QSGT
 QMetaObject* QSGDynamicTexture_metaObject(const QSGDynamicTexture* self);
 void* QSGDynamicTexture_metacast(QSGDynamicTexture* self, const char* param1);
 int QSGDynamicTexture_metacall(QSGDynamicTexture* self, int param1, int param2, void** param3);
-struct seaqt_string QSGDynamicTexture_tr(const char* s);
+struct seaqt_string QSGDynamicTexture_tr_s(const char* s);
 bool QSGDynamicTexture_updateTexture(QSGDynamicTexture* self);
-struct seaqt_string QSGDynamicTexture_tr2(const char* s, const char* c);
-struct seaqt_string QSGDynamicTexture_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSGDynamicTexture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSGDynamicTexture_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSGDynamicTexture_virtualbase_metaObject(const VirtualQSGDynamicTexture* self);
 void* QSGDynamicTexture_virtualbase_metacast(VirtualQSGDynamicTexture* self, const char* param1);

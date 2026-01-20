@@ -66,13 +66,13 @@ export
 
 type cQPageLayout*{.exportc: "QPageLayout", incompleteStruct.} = object
 
-proc fcQPageLayout_operatorAssign(self: pointer, other: pointer): void {.importc: "QPageLayout_operatorAssign".}
+proc fcQPageLayout_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPageLayout_operatorAssign".}
 proc fcQPageLayout_swap(self: pointer, other: pointer): void {.importc: "QPageLayout_swap".}
 proc fcQPageLayout_isEquivalentTo(self: pointer, other: pointer): bool {.importc: "QPageLayout_isEquivalentTo".}
 proc fcQPageLayout_isValid(self: pointer): bool {.importc: "QPageLayout_isValid".}
 proc fcQPageLayout_setMode(self: pointer, mode: cint): void {.importc: "QPageLayout_setMode".}
 proc fcQPageLayout_mode(self: pointer): cint {.importc: "QPageLayout_mode".}
-proc fcQPageLayout_setPageSize(self: pointer, pageSize: pointer): void {.importc: "QPageLayout_setPageSize".}
+proc fcQPageLayout_setPageSizePageSize(self: pointer, pageSize: pointer): void {.importc: "QPageLayout_setPageSize_pageSize".}
 proc fcQPageLayout_pageSize(self: pointer): pointer {.importc: "QPageLayout_pageSize".}
 proc fcQPageLayout_setOrientation(self: pointer, orientation: cint): void {.importc: "QPageLayout_setOrientation".}
 proc fcQPageLayout_orientation(self: pointer): cint {.importc: "QPageLayout_orientation".}
@@ -84,29 +84,29 @@ proc fcQPageLayout_setRightMargin(self: pointer, rightMargin: float64): bool {.i
 proc fcQPageLayout_setTopMargin(self: pointer, topMargin: float64): bool {.importc: "QPageLayout_setTopMargin".}
 proc fcQPageLayout_setBottomMargin(self: pointer, bottomMargin: float64): bool {.importc: "QPageLayout_setBottomMargin".}
 proc fcQPageLayout_margins(self: pointer): pointer {.importc: "QPageLayout_margins".}
-proc fcQPageLayout_marginsWithUnits(self: pointer, units: cint): pointer {.importc: "QPageLayout_marginsWithUnits".}
+proc fcQPageLayout_marginsUnits(self: pointer, units: cint): pointer {.importc: "QPageLayout_margins_units".}
 proc fcQPageLayout_marginsPoints(self: pointer): pointer {.importc: "QPageLayout_marginsPoints".}
 proc fcQPageLayout_marginsPixels(self: pointer, resolution: cint): pointer {.importc: "QPageLayout_marginsPixels".}
 proc fcQPageLayout_setMinimumMargins(self: pointer, minMargins: pointer): void {.importc: "QPageLayout_setMinimumMargins".}
 proc fcQPageLayout_minimumMargins(self: pointer): pointer {.importc: "QPageLayout_minimumMargins".}
 proc fcQPageLayout_maximumMargins(self: pointer): pointer {.importc: "QPageLayout_maximumMargins".}
 proc fcQPageLayout_fullRect(self: pointer): pointer {.importc: "QPageLayout_fullRect".}
-proc fcQPageLayout_fullRectWithUnits(self: pointer, units: cint): pointer {.importc: "QPageLayout_fullRectWithUnits".}
+proc fcQPageLayout_fullRectUnits(self: pointer, units: cint): pointer {.importc: "QPageLayout_fullRect_units".}
 proc fcQPageLayout_fullRectPoints(self: pointer): pointer {.importc: "QPageLayout_fullRectPoints".}
 proc fcQPageLayout_fullRectPixels(self: pointer, resolution: cint): pointer {.importc: "QPageLayout_fullRectPixels".}
 proc fcQPageLayout_paintRect(self: pointer): pointer {.importc: "QPageLayout_paintRect".}
-proc fcQPageLayout_paintRectWithUnits(self: pointer, units: cint): pointer {.importc: "QPageLayout_paintRectWithUnits".}
+proc fcQPageLayout_paintRectUnits(self: pointer, units: cint): pointer {.importc: "QPageLayout_paintRect_units".}
 proc fcQPageLayout_paintRectPoints(self: pointer): pointer {.importc: "QPageLayout_paintRectPoints".}
 proc fcQPageLayout_paintRectPixels(self: pointer, resolution: cint): pointer {.importc: "QPageLayout_paintRectPixels".}
-proc fcQPageLayout_setPageSize2(self: pointer, pageSize: pointer, minMargins: pointer): void {.importc: "QPageLayout_setPageSize2".}
+proc fcQPageLayout_setPageSizePageSizeMinMargins(self: pointer, pageSize: pointer, minMargins: pointer): void {.importc: "QPageLayout_setPageSize_pageSize_minMargins".}
 proc fcQPageLayout_new(): ptr cQPageLayout {.importc: "QPageLayout_new".}
-proc fcQPageLayout_new2(pageSize: pointer, orientation: cint, margins: pointer): ptr cQPageLayout {.importc: "QPageLayout_new2".}
-proc fcQPageLayout_new3(other: pointer): ptr cQPageLayout {.importc: "QPageLayout_new3".}
-proc fcQPageLayout_new4(pageSize: pointer, orientation: cint, margins: pointer, units: cint): ptr cQPageLayout {.importc: "QPageLayout_new4".}
-proc fcQPageLayout_new5(pageSize: pointer, orientation: cint, margins: pointer, units: cint, minMargins: pointer): ptr cQPageLayout {.importc: "QPageLayout_new5".}
+proc fcQPageLayout_new2(pageSize: pointer, orientation: cint, margins: pointer): ptr cQPageLayout {.importc: "QPageLayout_new_pageSize_orientation_margins".}
+proc fcQPageLayout_new3(fromVal: pointer): ptr cQPageLayout {.importc: "QPageLayout_new_from".}
+proc fcQPageLayout_new4(pageSize: pointer, orientation: cint, margins: pointer, units: cint): ptr cQPageLayout {.importc: "QPageLayout_new_pageSize_orientation_margins_units".}
+proc fcQPageLayout_new5(pageSize: pointer, orientation: cint, margins: pointer, units: cint, minMargins: pointer): ptr cQPageLayout {.importc: "QPageLayout_new_pageSize_orientation_margins_units_minMargins".}
 
-proc operatorAssign*(self: gen_qpagelayout_types.QPageLayout, other: gen_qpagelayout_types.QPageLayout): void =
-  fcQPageLayout_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qpagelayout_types.QPageLayout, fromVal: gen_qpagelayout_types.QPageLayout): void =
+  fcQPageLayout_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qpagelayout_types.QPageLayout, other: gen_qpagelayout_types.QPageLayout): void =
   fcQPageLayout_swap(self.h, other.h)
@@ -124,7 +124,7 @@ proc mode*(self: gen_qpagelayout_types.QPageLayout): cint =
   cint(fcQPageLayout_mode(self.h))
 
 proc setPageSize*(self: gen_qpagelayout_types.QPageLayout, pageSize: gen_qpagesize_types.QPageSize): void =
-  fcQPageLayout_setPageSize(self.h, pageSize.h)
+  fcQPageLayout_setPageSizePageSize(self.h, pageSize.h)
 
 proc pageSize*(self: gen_qpagelayout_types.QPageLayout): gen_qpagesize_types.QPageSize =
   gen_qpagesize_types.QPageSize(h: fcQPageLayout_pageSize(self.h), owned: true)
@@ -160,7 +160,7 @@ proc margins*(self: gen_qpagelayout_types.QPageLayout): gen_qmargins_types.QMarg
   gen_qmargins_types.QMarginsF(h: fcQPageLayout_margins(self.h), owned: true)
 
 proc margins*(self: gen_qpagelayout_types.QPageLayout, units: cint): gen_qmargins_types.QMarginsF =
-  gen_qmargins_types.QMarginsF(h: fcQPageLayout_marginsWithUnits(self.h, cint(units)), owned: true)
+  gen_qmargins_types.QMarginsF(h: fcQPageLayout_marginsUnits(self.h, cint(units)), owned: true)
 
 proc marginsPoints*(self: gen_qpagelayout_types.QPageLayout): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQPageLayout_marginsPoints(self.h), owned: true)
@@ -181,7 +181,7 @@ proc fullRect*(self: gen_qpagelayout_types.QPageLayout): gen_qrect_types.QRectF 
   gen_qrect_types.QRectF(h: fcQPageLayout_fullRect(self.h), owned: true)
 
 proc fullRect*(self: gen_qpagelayout_types.QPageLayout, units: cint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPageLayout_fullRectWithUnits(self.h, cint(units)), owned: true)
+  gen_qrect_types.QRectF(h: fcQPageLayout_fullRectUnits(self.h, cint(units)), owned: true)
 
 proc fullRectPoints*(self: gen_qpagelayout_types.QPageLayout): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPageLayout_fullRectPoints(self.h), owned: true)
@@ -193,7 +193,7 @@ proc paintRect*(self: gen_qpagelayout_types.QPageLayout): gen_qrect_types.QRectF
   gen_qrect_types.QRectF(h: fcQPageLayout_paintRect(self.h), owned: true)
 
 proc paintRect*(self: gen_qpagelayout_types.QPageLayout, units: cint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPageLayout_paintRectWithUnits(self.h, cint(units)), owned: true)
+  gen_qrect_types.QRectF(h: fcQPageLayout_paintRectUnits(self.h, cint(units)), owned: true)
 
 proc paintRectPoints*(self: gen_qpagelayout_types.QPageLayout): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPageLayout_paintRectPoints(self.h), owned: true)
@@ -202,7 +202,7 @@ proc paintRectPixels*(self: gen_qpagelayout_types.QPageLayout, resolution: cint)
   gen_qrect_types.QRect(h: fcQPageLayout_paintRectPixels(self.h, resolution), owned: true)
 
 proc setPageSize*(self: gen_qpagelayout_types.QPageLayout, pageSize: gen_qpagesize_types.QPageSize, minMargins: gen_qmargins_types.QMarginsF): void =
-  fcQPageLayout_setPageSize2(self.h, pageSize.h, minMargins.h)
+  fcQPageLayout_setPageSizePageSizeMinMargins(self.h, pageSize.h, minMargins.h)
 
 proc create*(T: type gen_qpagelayout_types.QPageLayout): gen_qpagelayout_types.QPageLayout =
   let tmp = gen_qpagelayout_types.QPageLayout(h: fcQPageLayout_new(), owned: true)
@@ -212,8 +212,8 @@ proc create*(T: type gen_qpagelayout_types.QPageLayout,
   let tmp = gen_qpagelayout_types.QPageLayout(h: fcQPageLayout_new2(pageSize.h, cint(orientation), margins.h), owned: true)
   tmp
 proc create*(T: type gen_qpagelayout_types.QPageLayout,
-    other: gen_qpagelayout_types.QPageLayout): gen_qpagelayout_types.QPageLayout =
-  let tmp = gen_qpagelayout_types.QPageLayout(h: fcQPageLayout_new3(other.h), owned: true)
+    fromVal: gen_qpagelayout_types.QPageLayout): gen_qpagelayout_types.QPageLayout =
+  let tmp = gen_qpagelayout_types.QPageLayout(h: fcQPageLayout_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qpagelayout_types.QPageLayout,
     pageSize: gen_qpagesize_types.QPageSize, orientation: cint, margins: gen_qmargins_types.QMarginsF, units: cint): gen_qpagelayout_types.QPageLayout =

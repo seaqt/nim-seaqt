@@ -20,12 +20,12 @@ QQmlScriptString* QQmlScriptString_new() {
 	return new (std::nothrow) QQmlScriptString();
 }
 
-QQmlScriptString* QQmlScriptString_new2(QQmlScriptString* param1) {
-	return new (std::nothrow) QQmlScriptString(*param1);
+QQmlScriptString* QQmlScriptString_new_from(QQmlScriptString* from) {
+	return new (std::nothrow) QQmlScriptString(*from);
 }
 
-void QQmlScriptString_operatorAssign(QQmlScriptString* self, QQmlScriptString* param1) {
-	self->operator=(*param1);
+void QQmlScriptString_operatorAssign(QQmlScriptString* self, QQmlScriptString* from) {
+	self->operator=(*from);
 }
 
 bool QQmlScriptString_operatorEqual(const QQmlScriptString* self, QQmlScriptString* param1) {

@@ -25,11 +25,11 @@ typedef struct QUrlQuery QUrlQuery;
 #endif
 
 QUrlQuery* QUrlQuery_new();
-QUrlQuery* QUrlQuery_new2(QUrl* url);
-QUrlQuery* QUrlQuery_new3(struct seaqt_string queryString);
-QUrlQuery* QUrlQuery_new4(QUrlQuery* other);
+QUrlQuery* QUrlQuery_new_url(QUrl* url);
+QUrlQuery* QUrlQuery_new_queryString(struct seaqt_string queryString);
+QUrlQuery* QUrlQuery_new_from(QUrlQuery* from);
 
-void QUrlQuery_operatorAssign(QUrlQuery* self, QUrlQuery* other);
+void QUrlQuery_operatorAssign(QUrlQuery* self, QUrlQuery* from);
 bool QUrlQuery_operatorEqual(const QUrlQuery* self, QUrlQuery* other);
 bool QUrlQuery_operatorNotEqual(const QUrlQuery* self, QUrlQuery* other);
 void QUrlQuery_swap(QUrlQuery* self, QUrlQuery* other);
@@ -47,14 +47,14 @@ struct seaqt_array /* of struct seaqt_map  tuple of struct seaqt_string and stru
 bool QUrlQuery_hasQueryItem(const QUrlQuery* self, struct seaqt_string key);
 void QUrlQuery_addQueryItem(QUrlQuery* self, struct seaqt_string key, struct seaqt_string value);
 void QUrlQuery_removeQueryItem(QUrlQuery* self, struct seaqt_string key);
-struct seaqt_string QUrlQuery_queryItemValue(const QUrlQuery* self, struct seaqt_string key);
-struct seaqt_array /* of struct seaqt_string */  QUrlQuery_allQueryItemValues(const QUrlQuery* self, struct seaqt_string key);
+struct seaqt_string QUrlQuery_queryItemValue_key(const QUrlQuery* self, struct seaqt_string key);
+struct seaqt_array /* of struct seaqt_string */  QUrlQuery_allQueryItemValues_key(const QUrlQuery* self, struct seaqt_string key);
 void QUrlQuery_removeAllQueryItems(QUrlQuery* self, struct seaqt_string key);
-struct seaqt_string QUrlQuery_queryWithEncoding(const QUrlQuery* self, unsigned int encoding);
-struct seaqt_string QUrlQuery_toStringWithEncoding(const QUrlQuery* self, unsigned int encoding);
-struct seaqt_array /* of struct seaqt_map  tuple of struct seaqt_string and struct seaqt_string   */  QUrlQuery_queryItemsWithEncoding(const QUrlQuery* self, unsigned int encoding);
-struct seaqt_string QUrlQuery_queryItemValue2(const QUrlQuery* self, struct seaqt_string key, unsigned int encoding);
-struct seaqt_array /* of struct seaqt_string */  QUrlQuery_allQueryItemValues2(const QUrlQuery* self, struct seaqt_string key, unsigned int encoding);
+struct seaqt_string QUrlQuery_query_encoding(const QUrlQuery* self, unsigned int encoding);
+struct seaqt_string QUrlQuery_toString_encoding(const QUrlQuery* self, unsigned int encoding);
+struct seaqt_array /* of struct seaqt_map  tuple of struct seaqt_string and struct seaqt_string   */  QUrlQuery_queryItems_encoding(const QUrlQuery* self, unsigned int encoding);
+struct seaqt_string QUrlQuery_queryItemValue_key_encoding(const QUrlQuery* self, struct seaqt_string key, unsigned int encoding);
+struct seaqt_array /* of struct seaqt_string */  QUrlQuery_allQueryItemValues_key_encoding(const QUrlQuery* self, struct seaqt_string key, unsigned int encoding);
 
 void QUrlQuery_delete(QUrlQuery* self);
 

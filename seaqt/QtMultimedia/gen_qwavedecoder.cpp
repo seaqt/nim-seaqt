@@ -350,22 +350,22 @@ public:
 	friend bool QWaveDecoder_protectedbase_isSignalConnected(const VirtualQWaveDecoder* self, QMetaMethod* signal);
 };
 
-VirtualQWaveDecoder* QWaveDecoder_new(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device) {
+VirtualQWaveDecoder* QWaveDecoder_new_device(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWaveDecoder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWaveDecoder(vtbl, device) : nullptr;
 }
 
-VirtualQWaveDecoder* QWaveDecoder_new2(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QAudioFormat* format) {
+VirtualQWaveDecoder* QWaveDecoder_new_device_format(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QAudioFormat* format) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWaveDecoder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWaveDecoder(vtbl, device, *format) : nullptr;
 }
 
-VirtualQWaveDecoder* QWaveDecoder_new3(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QObject* parent) {
+VirtualQWaveDecoder* QWaveDecoder_new_device_parent(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWaveDecoder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWaveDecoder(vtbl, device, parent) : nullptr;
 }
 
-VirtualQWaveDecoder* QWaveDecoder_new4(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QAudioFormat* format, QObject* parent) {
+VirtualQWaveDecoder* QWaveDecoder_new_device_format_parent(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QAudioFormat* format, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWaveDecoder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWaveDecoder(vtbl, device, *format, parent) : nullptr;
 }
@@ -386,7 +386,7 @@ int QWaveDecoder_metacall(QWaveDecoder* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWaveDecoder_tr(const char* s) {
+struct seaqt_string QWaveDecoder_tr_s(const char* s) {
 	QString _ret = QWaveDecoder::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -475,7 +475,7 @@ void QWaveDecoder_connect_parsingError(QWaveDecoder* self, intptr_t slot, void (
 	QWaveDecoder::connect(self, static_cast<void (QWaveDecoder::*)()>(&QWaveDecoder::parsingError), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWaveDecoder_tr2(const char* s, const char* c) {
+struct seaqt_string QWaveDecoder_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWaveDecoder::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -486,7 +486,7 @@ struct seaqt_string QWaveDecoder_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWaveDecoder_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWaveDecoder_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWaveDecoder::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

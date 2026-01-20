@@ -120,7 +120,7 @@ typedef struct QTextBrowser_VTable{
 	bool (*focusNextPrevChild)(VirtualQTextBrowser* self, bool next);
 	void (*paintEvent)(VirtualQTextBrowser* self, QPaintEvent* e);
 	void (*doSetSource)(VirtualQTextBrowser* self, QUrl* name, int type);
-	QVariant* (*inputMethodQuery)(const VirtualQTextBrowser* self, int property);
+	QVariant* (*inputMethodQuery_property)(const VirtualQTextBrowser* self, int property);
 	void (*timerEvent)(VirtualQTextBrowser* self, QTimerEvent* e);
 	void (*keyReleaseEvent)(VirtualQTextBrowser* self, QKeyEvent* e);
 	void (*resizeEvent)(VirtualQTextBrowser* self, QResizeEvent* e);
@@ -173,14 +173,14 @@ typedef struct QTextBrowser_VTable{
 void* QTextBrowser_vdata(VirtualQTextBrowser* self);
 VirtualQTextBrowser* vdata_QTextBrowser(void* vdata);
 
-VirtualQTextBrowser* QTextBrowser_new(const QTextBrowser_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQTextBrowser* QTextBrowser_new2(const QTextBrowser_VTable* vtbl, size_t vdata);
+VirtualQTextBrowser* QTextBrowser_new_parent(const QTextBrowser_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQTextBrowser* QTextBrowser_new(const QTextBrowser_VTable* vtbl, size_t vdata);
 
 void QTextBrowser_virtbase(QTextBrowser* src, QTextEdit** outptr_QTextEdit);
 QMetaObject* QTextBrowser_metaObject(const QTextBrowser* self);
 void* QTextBrowser_metacast(QTextBrowser* self, const char* param1);
 int QTextBrowser_metacall(QTextBrowser* self, int param1, int param2, void** param3);
-struct seaqt_string QTextBrowser_tr(const char* s);
+struct seaqt_string QTextBrowser_tr_s(const char* s);
 QUrl* QTextBrowser_source(const QTextBrowser* self);
 int QTextBrowser_sourceType(const QTextBrowser* self);
 struct seaqt_array /* of struct seaqt_string */  QTextBrowser_searchPaths(const QTextBrowser* self);
@@ -197,7 +197,7 @@ bool QTextBrowser_openExternalLinks(const QTextBrowser* self);
 void QTextBrowser_setOpenExternalLinks(QTextBrowser* self, bool open);
 bool QTextBrowser_openLinks(const QTextBrowser* self);
 void QTextBrowser_setOpenLinks(QTextBrowser* self, bool open);
-void QTextBrowser_setSource(QTextBrowser* self, QUrl* name);
+void QTextBrowser_setSource_name(QTextBrowser* self, QUrl* name);
 void QTextBrowser_backward(QTextBrowser* self);
 void QTextBrowser_forward(QTextBrowser* self);
 void QTextBrowser_home(QTextBrowser* self);
@@ -223,9 +223,9 @@ void QTextBrowser_focusOutEvent(QTextBrowser* self, QFocusEvent* ev);
 bool QTextBrowser_focusNextPrevChild(QTextBrowser* self, bool next);
 void QTextBrowser_paintEvent(QTextBrowser* self, QPaintEvent* e);
 void QTextBrowser_doSetSource(QTextBrowser* self, QUrl* name, int type);
-struct seaqt_string QTextBrowser_tr2(const char* s, const char* c);
-struct seaqt_string QTextBrowser_tr3(const char* s, const char* c, int n);
-void QTextBrowser_setSource2(QTextBrowser* self, QUrl* name, int type);
+struct seaqt_string QTextBrowser_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTextBrowser_tr_s_c_n(const char* s, const char* c, int n);
+void QTextBrowser_setSource_name_type(QTextBrowser* self, QUrl* name, int type);
 
 QMetaObject* QTextBrowser_virtualbase_metaObject(const VirtualQTextBrowser* self);
 void* QTextBrowser_virtualbase_metacast(VirtualQTextBrowser* self, const char* param1);
@@ -244,7 +244,7 @@ void QTextBrowser_virtualbase_focusOutEvent(VirtualQTextBrowser* self, QFocusEve
 bool QTextBrowser_virtualbase_focusNextPrevChild(VirtualQTextBrowser* self, bool next);
 void QTextBrowser_virtualbase_paintEvent(VirtualQTextBrowser* self, QPaintEvent* e);
 void QTextBrowser_virtualbase_doSetSource(VirtualQTextBrowser* self, QUrl* name, int type);
-QVariant* QTextBrowser_virtualbase_inputMethodQuery(const VirtualQTextBrowser* self, int property);
+QVariant* QTextBrowser_virtualbase_inputMethodQuery_property(const VirtualQTextBrowser* self, int property);
 void QTextBrowser_virtualbase_timerEvent(VirtualQTextBrowser* self, QTimerEvent* e);
 void QTextBrowser_virtualbase_keyReleaseEvent(VirtualQTextBrowser* self, QKeyEvent* e);
 void QTextBrowser_virtualbase_resizeEvent(VirtualQTextBrowser* self, QResizeEvent* e);
@@ -294,7 +294,7 @@ void QTextBrowser_virtualbase_connectNotify(VirtualQTextBrowser* self, QMetaMeth
 void QTextBrowser_virtualbase_disconnectNotify(VirtualQTextBrowser* self, QMetaMethod* signal);
 
 void QTextBrowser_protectedbase_zoomInF(VirtualQTextBrowser* self, float range);
-void QTextBrowser_protectedbase_setViewportMargins(VirtualQTextBrowser* self, int left, int top, int right, int bottom);
+void QTextBrowser_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTextBrowser* self, int left, int top, int right, int bottom);
 QMargins* QTextBrowser_protectedbase_viewportMargins(const VirtualQTextBrowser* self);
 void QTextBrowser_protectedbase_drawFrame(VirtualQTextBrowser* self, QPainter* param1);
 void QTextBrowser_protectedbase_updateMicroFocus(VirtualQTextBrowser* self);

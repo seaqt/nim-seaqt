@@ -87,7 +87,7 @@ type cQColumnView*{.exportc: "QColumnView", incompleteStruct.} = object
 proc fcQColumnView_metaObject(self: pointer): pointer {.importc: "QColumnView_metaObject".}
 proc fcQColumnView_metacast(self: pointer, param1: cstring): pointer {.importc: "QColumnView_metacast".}
 proc fcQColumnView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QColumnView_metacall".}
-proc fcQColumnView_tr(s: cstring): struct_seaqt_string {.importc: "QColumnView_tr".}
+proc fcQColumnView_trS(s: cstring): struct_seaqt_string {.importc: "QColumnView_tr_s".}
 proc fcQColumnView_updatePreviewWidget(self: pointer, index: pointer): void {.importc: "QColumnView_updatePreviewWidget".}
 proc fcQColumnView_connect_updatePreviewWidget(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QColumnView_connect_updatePreviewWidget".}
 proc fcQColumnView_indexAt(self: pointer, point: pointer): pointer {.importc: "QColumnView_indexAt".}
@@ -104,8 +104,8 @@ proc fcQColumnView_previewWidget(self: pointer): pointer {.importc: "QColumnView
 proc fcQColumnView_setPreviewWidget(self: pointer, widget: pointer): void {.importc: "QColumnView_setPreviewWidget".}
 proc fcQColumnView_setColumnWidths(self: pointer, list: struct_seaqt_array): void {.importc: "QColumnView_setColumnWidths".}
 proc fcQColumnView_columnWidths(self: pointer): struct_seaqt_array {.importc: "QColumnView_columnWidths".}
-proc fcQColumnView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QColumnView_tr2".}
-proc fcQColumnView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QColumnView_tr3".}
+proc fcQColumnView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QColumnView_tr_s_c".}
+proc fcQColumnView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QColumnView_tr_s_c_n".}
 proc fcQColumnView_vdata(self: pointer): ptr pointer {.importc: "QColumnView_vdata".}
 proc fvdata_cQColumnView(self: pointer): pointer {.importc: "vdata_QColumnView".}
 
@@ -154,7 +154,7 @@ type cQColumnViewVTable {.pure.} = object
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   selectedIndexes*: proc(self: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   startDrag*: proc(self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
   initViewItemOption*: proc(self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -249,7 +249,7 @@ proc fcQColumnView_virtualbase_closeEditor(self: pointer, editor: pointer, hint:
 proc fcQColumnView_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QColumnView_virtualbase_commitData".}
 proc fcQColumnView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QColumnView_virtualbase_editorDestroyed".}
 proc fcQColumnView_virtualbase_selectedIndexes(self: pointer): struct_seaqt_array {.importc: "QColumnView_virtualbase_selectedIndexes".}
-proc fcQColumnView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QColumnView_virtualbase_edit2".}
+proc fcQColumnView_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QColumnView_virtualbase_edit_index_trigger_event".}
 proc fcQColumnView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QColumnView_virtualbase_selectionCommand".}
 proc fcQColumnView_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QColumnView_virtualbase_startDrag".}
 proc fcQColumnView_virtualbase_initViewItemOption(self: pointer, option: pointer): void {.importc: "QColumnView_virtualbase_initViewItemOption".}
@@ -313,7 +313,7 @@ proc fcQColumnView_protectedbase_startAutoScroll(self: pointer): void {.importc:
 proc fcQColumnView_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QColumnView_protectedbase_stopAutoScroll".}
 proc fcQColumnView_protectedbase_doAutoScroll(self: pointer): void {.importc: "QColumnView_protectedbase_doAutoScroll".}
 proc fcQColumnView_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QColumnView_protectedbase_dropIndicatorPosition".}
-proc fcQColumnView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QColumnView_protectedbase_setViewportMargins".}
+proc fcQColumnView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QColumnView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQColumnView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QColumnView_protectedbase_viewportMargins".}
 proc fcQColumnView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QColumnView_protectedbase_drawFrame".}
 proc fcQColumnView_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QColumnView_protectedbase_updateMicroFocus".}
@@ -325,8 +325,8 @@ proc fcQColumnView_protectedbase_sender(self: pointer): pointer {.importc: "QCol
 proc fcQColumnView_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QColumnView_protectedbase_senderSignalIndex".}
 proc fcQColumnView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QColumnView_protectedbase_receivers".}
 proc fcQColumnView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QColumnView_protectedbase_isSignalConnected".}
-proc fcQColumnView_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQColumnView {.importc: "QColumnView_new".}
-proc fcQColumnView_new2(vtbl: pointer, vdata: csize_t): ptr cQColumnView {.importc: "QColumnView_new2".}
+proc fcQColumnView_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQColumnView {.importc: "QColumnView_new_parent".}
+proc fcQColumnView_new2(vtbl: pointer, vdata: csize_t): ptr cQColumnView {.importc: "QColumnView_new".}
 proc fcQColumnView_staticMetaObject(): pointer {.importc: "QColumnView_staticMetaObject".}
 
 proc metaObject*(self: gen_qcolumnview_types.QColumnView): gen_qobjectdefs_types.QMetaObject =
@@ -339,7 +339,7 @@ proc metacall*(self: gen_qcolumnview_types.QColumnView, param1: cint, param2: ci
   fcQColumnView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcolumnview_types.QColumnView, s: cstring): string =
-  let v_ms = fcQColumnView_tr(s)
+  let v_ms = fcQColumnView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -417,13 +417,13 @@ proc columnWidths*(self: gen_qcolumnview_types.QColumnView): seq[cint] =
   vx_ret
 
 proc tr*(_: type gen_qcolumnview_types.QColumnView, s: cstring, c: cstring): string =
-  let v_ms = fcQColumnView_tr2(s, c)
+  let v_ms = fcQColumnView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcolumnview_types.QColumnView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQColumnView_tr3(s, c, n)
+  let v_ms = fcQColumnView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -471,7 +471,7 @@ type QColumnViewcloseEditorProc* = proc(self: QColumnView, editor: gen_qwidget_t
 type QColumnViewcommitDataProc* = proc(self: QColumnView, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QColumnVieweditorDestroyedProc* = proc(self: QColumnView, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
 type QColumnViewselectedIndexesProc* = proc(self: QColumnView): seq[gen_qabstractitemmodel_types.QModelIndex] {.raises: [], gcsafe.}
-type QColumnViewedit2Proc* = proc(self: QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QColumnVieweditIndexTriggerEventProc* = proc(self: QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QColumnViewselectionCommandProc* = proc(self: QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QColumnViewstartDragProc* = proc(self: QColumnView, supportedActions: cint): void {.raises: [], gcsafe.}
 type QColumnViewinitViewItemOptionProc* = proc(self: QColumnView, option: gen_qstyleoption_types.QStyleOptionViewItem): void {.raises: [], gcsafe.}
@@ -569,7 +569,7 @@ type QColumnViewVTable* {.inheritable, pure.} = object
   commitData*: QColumnViewcommitDataProc
   editorDestroyed*: QColumnVieweditorDestroyedProc
   selectedIndexes*: QColumnViewselectedIndexesProc
-  edit2*: QColumnViewedit2Proc
+  editIndexTriggerEvent*: QColumnVieweditIndexTriggerEventProc
   selectionCommand*: QColumnViewselectionCommandProc
   startDrag*: QColumnViewstartDragProc
   initViewItemOption*: QColumnViewinitViewItemOptionProc
@@ -762,7 +762,7 @@ proc QColumnViewselectedIndexes*(self: gen_qcolumnview_types.QColumnView): seq[g
   vx_ret
 
 proc QColumnViewedit*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQColumnView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQColumnView_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QColumnViewselectionCommand*(self: gen_qcolumnview_types.QColumnView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQColumnView_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -1240,13 +1240,13 @@ proc fcQColumnView_vtable_callback_selectedIndexes(self: pointer): struct_seaqt_
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc fcQColumnView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QColumnViewVTable](fcQColumnView_vdata(self)[])
   let self = QColumnView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQColumnView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -2059,7 +2059,7 @@ proc fcQColumnView_method_callback_selectedIndexes(self: pointer): struct_seaqt_
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc fcQColumnView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQColumnView_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQColumnView](fcQColumnView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2391,7 +2391,7 @@ proc dropIndicatorPosition*(self: gen_qcolumnview_types.QColumnView): cint =
   cint(fcQColumnView_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qcolumnview_types.QColumnView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQColumnView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQColumnView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qcolumnview_types.QColumnView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQColumnView_protectedbase_viewportMargins(self.h), owned: true)
@@ -2520,8 +2520,8 @@ proc create*(T: type gen_qcolumnview_types.QColumnView,
     vtbl[].vtbl.editorDestroyed = fcQColumnView_vtable_callback_editorDestroyed
   if not isNil(vtbl[].selectedIndexes):
     vtbl[].vtbl.selectedIndexes = fcQColumnView_vtable_callback_selectedIndexes
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQColumnView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQColumnView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQColumnView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -2720,8 +2720,8 @@ proc create*(T: type gen_qcolumnview_types.QColumnView,
     vtbl[].vtbl.editorDestroyed = fcQColumnView_vtable_callback_editorDestroyed
   if not isNil(vtbl[].selectedIndexes):
     vtbl[].vtbl.selectedIndexes = fcQColumnView_vtable_callback_selectedIndexes
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQColumnView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQColumnView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQColumnView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -2876,7 +2876,7 @@ const cQColumnView_mvtbl = cQColumnViewVTable(
   commitData: fcQColumnView_method_callback_commitData,
   editorDestroyed: fcQColumnView_method_callback_editorDestroyed,
   selectedIndexes: fcQColumnView_method_callback_selectedIndexes,
-  edit2: fcQColumnView_method_callback_edit2,
+  editIndexTriggerEvent: fcQColumnView_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQColumnView_method_callback_selectionCommand,
   startDrag: fcQColumnView_method_callback_startDrag,
   initViewItemOption: fcQColumnView_method_callback_initViewItemOption,

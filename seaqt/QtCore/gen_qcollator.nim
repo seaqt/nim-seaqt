@@ -46,11 +46,11 @@ export
 type cQCollatorSortKey*{.exportc: "QCollatorSortKey", incompleteStruct.} = object
 type cQCollator*{.exportc: "QCollator", incompleteStruct.} = object
 
-proc fcQCollatorSortKey_operatorAssign(self: pointer, other: pointer): void {.importc: "QCollatorSortKey_operatorAssign".}
+proc fcQCollatorSortKey_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QCollatorSortKey_operatorAssign".}
 proc fcQCollatorSortKey_swap(self: pointer, other: pointer): void {.importc: "QCollatorSortKey_swap".}
 proc fcQCollatorSortKey_compare(self: pointer, key: pointer): cint {.importc: "QCollatorSortKey_compare".}
-proc fcQCollatorSortKey_new(other: pointer): ptr cQCollatorSortKey {.importc: "QCollatorSortKey_new".}
-proc fcQCollator_operatorAssign(self: pointer, param1: pointer): void {.importc: "QCollator_operatorAssign".}
+proc fcQCollatorSortKey_new(fromVal: pointer): ptr cQCollatorSortKey {.importc: "QCollatorSortKey_new".}
+proc fcQCollator_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QCollator_operatorAssign".}
 proc fcQCollator_swap(self: pointer, other: pointer): void {.importc: "QCollator_swap".}
 proc fcQCollator_setLocale(self: pointer, locale: pointer): void {.importc: "QCollator_setLocale".}
 proc fcQCollator_locale(self: pointer): pointer {.importc: "QCollator_locale".}
@@ -60,16 +60,16 @@ proc fcQCollator_setNumericMode(self: pointer, on: bool): void {.importc: "QColl
 proc fcQCollator_numericMode(self: pointer): bool {.importc: "QCollator_numericMode".}
 proc fcQCollator_setIgnorePunctuation(self: pointer, on: bool): void {.importc: "QCollator_setIgnorePunctuation".}
 proc fcQCollator_ignorePunctuation(self: pointer): bool {.importc: "QCollator_ignorePunctuation".}
-proc fcQCollator_compare(self: pointer, s1: struct_seaqt_string, s2: struct_seaqt_string): cint {.importc: "QCollator_compare".}
-proc fcQCollator_compare2(self: pointer, s1: pointer, len1: int64, s2: pointer, len2: int64): cint {.importc: "QCollator_compare2".}
-proc fcQCollator_operatorCall(self: pointer, s1: struct_seaqt_string, s2: struct_seaqt_string): bool {.importc: "QCollator_operatorCall".}
+proc fcQCollator_compare_QString_QString(self: pointer, s1: struct_seaqt_string, s2: struct_seaqt_string): cint {.importc: "QCollator_compare_QString_QString".}
+proc fcQCollator_compare_QCharQsizetype_QCharQsizetype(self: pointer, s1: pointer, len1: int64, s2: pointer, len2: int64): cint {.importc: "QCollator_compare_QChar_qsizetype_QChar_qsizetype".}
+proc fcQCollator_operatorCall_QString_QString(self: pointer, s1: struct_seaqt_string, s2: struct_seaqt_string): bool {.importc: "QCollator_operatorCall_QString_QString".}
 proc fcQCollator_sortKey(self: pointer, stringVal: struct_seaqt_string): pointer {.importc: "QCollator_sortKey".}
 proc fcQCollator_new(): ptr cQCollator {.importc: "QCollator_new".}
-proc fcQCollator_new2(locale: pointer): ptr cQCollator {.importc: "QCollator_new2".}
-proc fcQCollator_new3(param1: pointer): ptr cQCollator {.importc: "QCollator_new3".}
+proc fcQCollator_new2(locale: pointer): ptr cQCollator {.importc: "QCollator_new_locale".}
+proc fcQCollator_new3(fromVal: pointer): ptr cQCollator {.importc: "QCollator_new_from".}
 
-proc operatorAssign*(self: gen_qcollator_types.QCollatorSortKey, other: gen_qcollator_types.QCollatorSortKey): void =
-  fcQCollatorSortKey_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qcollator_types.QCollatorSortKey, fromVal: gen_qcollator_types.QCollatorSortKey): void =
+  fcQCollatorSortKey_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qcollator_types.QCollatorSortKey, other: gen_qcollator_types.QCollatorSortKey): void =
   fcQCollatorSortKey_swap(self.h, other.h)
@@ -78,11 +78,11 @@ proc compare*(self: gen_qcollator_types.QCollatorSortKey, key: gen_qcollator_typ
   fcQCollatorSortKey_compare(self.h, key.h)
 
 proc create*(T: type gen_qcollator_types.QCollatorSortKey,
-    other: gen_qcollator_types.QCollatorSortKey): gen_qcollator_types.QCollatorSortKey =
-  let tmp = gen_qcollator_types.QCollatorSortKey(h: fcQCollatorSortKey_new(other.h), owned: true)
+    fromVal: gen_qcollator_types.QCollatorSortKey): gen_qcollator_types.QCollatorSortKey =
+  let tmp = gen_qcollator_types.QCollatorSortKey(h: fcQCollatorSortKey_new(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qcollator_types.QCollator, param1: gen_qcollator_types.QCollator): void =
-  fcQCollator_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qcollator_types.QCollator, fromVal: gen_qcollator_types.QCollator): void =
+  fcQCollator_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qcollator_types.QCollator, other: gen_qcollator_types.QCollator): void =
   fcQCollator_swap(self.h, other.h)
@@ -112,13 +112,13 @@ proc ignorePunctuation*(self: gen_qcollator_types.QCollator): bool =
   fcQCollator_ignorePunctuation(self.h)
 
 proc compare*(self: gen_qcollator_types.QCollator, s1: openArray[char], s2: openArray[char]): cint =
-  fcQCollator_compare(self.h, struct_seaqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_seaqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
+  fcQCollator_compare_QString_QString(self.h, struct_seaqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_seaqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
 
 proc compare*(self: gen_qcollator_types.QCollator, s1: gen_qchar_types.QChar, len1: int64, s2: gen_qchar_types.QChar, len2: int64): cint =
-  fcQCollator_compare2(self.h, s1.h, len1, s2.h, len2)
+  fcQCollator_compare_QCharQsizetype_QCharQsizetype(self.h, s1.h, len1, s2.h, len2)
 
 proc operatorCall*(self: gen_qcollator_types.QCollator, s1: openArray[char], s2: openArray[char]): bool =
-  fcQCollator_operatorCall(self.h, struct_seaqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_seaqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
+  fcQCollator_operatorCall_QString_QString(self.h, struct_seaqt_string(data: if len(s1) > 0: addr s1[0] else: nil, len: csize_t(len(s1))), struct_seaqt_string(data: if len(s2) > 0: addr s2[0] else: nil, len: csize_t(len(s2))))
 
 proc sortKey*(self: gen_qcollator_types.QCollator, stringVal: openArray[char]): gen_qcollator_types.QCollatorSortKey =
   gen_qcollator_types.QCollatorSortKey(h: fcQCollator_sortKey(self.h, struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal)))), owned: true)
@@ -131,6 +131,6 @@ proc create*(T: type gen_qcollator_types.QCollator,
   let tmp = gen_qcollator_types.QCollator(h: fcQCollator_new2(locale.h), owned: true)
   tmp
 proc create*(T: type gen_qcollator_types.QCollator,
-    param1: gen_qcollator_types.QCollator): gen_qcollator_types.QCollator =
-  let tmp = gen_qcollator_types.QCollator(h: fcQCollator_new3(param1.h), owned: true)
+    fromVal: gen_qcollator_types.QCollator): gen_qcollator_types.QCollator =
+  let tmp = gen_qcollator_types.QCollator(h: fcQCollator_new3(fromVal.h), owned: true)
   tmp

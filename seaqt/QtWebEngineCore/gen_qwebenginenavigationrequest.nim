@@ -70,7 +70,7 @@ type cQWebEngineNavigationRequest*{.exportc: "QWebEngineNavigationRequest", inco
 proc fcQWebEngineNavigationRequest_metaObject(self: pointer): pointer {.importc: "QWebEngineNavigationRequest_metaObject".}
 proc fcQWebEngineNavigationRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNavigationRequest_metacast".}
 proc fcQWebEngineNavigationRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNavigationRequest_metacall".}
-proc fcQWebEngineNavigationRequest_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineNavigationRequest_tr".}
+proc fcQWebEngineNavigationRequest_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineNavigationRequest_tr_s".}
 proc fcQWebEngineNavigationRequest_url(self: pointer): pointer {.importc: "QWebEngineNavigationRequest_url".}
 proc fcQWebEngineNavigationRequest_isMainFrame(self: pointer): bool {.importc: "QWebEngineNavigationRequest_isMainFrame".}
 proc fcQWebEngineNavigationRequest_navigationType(self: pointer): cint {.importc: "QWebEngineNavigationRequest_navigationType".}
@@ -78,8 +78,8 @@ proc fcQWebEngineNavigationRequest_accept(self: pointer): void {.importc: "QWebE
 proc fcQWebEngineNavigationRequest_reject(self: pointer): void {.importc: "QWebEngineNavigationRequest_reject".}
 proc fcQWebEngineNavigationRequest_actionChanged(self: pointer): void {.importc: "QWebEngineNavigationRequest_actionChanged".}
 proc fcQWebEngineNavigationRequest_connect_actionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineNavigationRequest_connect_actionChanged".}
-proc fcQWebEngineNavigationRequest_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineNavigationRequest_tr2".}
-proc fcQWebEngineNavigationRequest_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineNavigationRequest_tr3".}
+proc fcQWebEngineNavigationRequest_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineNavigationRequest_tr_s_c".}
+proc fcQWebEngineNavigationRequest_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineNavigationRequest_tr_s_c_n".}
 proc fcQWebEngineNavigationRequest_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineNavigationRequest_protectedbase_sender".}
 proc fcQWebEngineNavigationRequest_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineNavigationRequest_protectedbase_senderSignalIndex".}
 proc fcQWebEngineNavigationRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNavigationRequest_protectedbase_receivers".}
@@ -96,7 +96,7 @@ proc metacall*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationR
   fcQWebEngineNavigationRequest_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, s: cstring): string =
-  let v_ms = fcQWebEngineNavigationRequest_tr(s)
+  let v_ms = fcQWebEngineNavigationRequest_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -135,13 +135,13 @@ proc onActionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavi
   fcQWebEngineNavigationRequest_connect_actionChanged(self.h, cast[int](addr tmp[]), fcQWebEngineNavigationRequest_slot_callback_actionChanged, fcQWebEngineNavigationRequest_slot_callback_actionChanged_release)
 
 proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineNavigationRequest_tr2(s, c)
+  let v_ms = fcQWebEngineNavigationRequest_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineNavigationRequest_tr3(s, c, n)
+  let v_ms = fcQWebEngineNavigationRequest_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -145,14 +145,14 @@ void* QQuickWindow_vdata(VirtualQQuickWindow* self);
 VirtualQQuickWindow* vdata_QQuickWindow(void* vdata);
 
 VirtualQQuickWindow* QQuickWindow_new(const QQuickWindow_VTable* vtbl, size_t vdata);
-VirtualQQuickWindow* QQuickWindow_new2(const QQuickWindow_VTable* vtbl, size_t vdata, QQuickRenderControl* renderControl);
-VirtualQQuickWindow* QQuickWindow_new3(const QQuickWindow_VTable* vtbl, size_t vdata, QWindow* parent);
+VirtualQQuickWindow* QQuickWindow_new_renderControl(const QQuickWindow_VTable* vtbl, size_t vdata, QQuickRenderControl* renderControl);
+VirtualQQuickWindow* QQuickWindow_new_parent(const QQuickWindow_VTable* vtbl, size_t vdata, QWindow* parent);
 
 void QQuickWindow_virtbase(QQuickWindow* src, QWindow** outptr_QWindow);
 QMetaObject* QQuickWindow_metaObject(const QQuickWindow* self);
 void* QQuickWindow_metacast(QQuickWindow* self, const char* param1);
 int QQuickWindow_metacall(QQuickWindow* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickWindow_tr(const char* s);
+struct seaqt_string QQuickWindow_tr_s(const char* s);
 QQuickItem* QQuickWindow_contentItem(const QQuickWindow* self);
 QQuickItem* QQuickWindow_activeFocusItem(const QQuickWindow* self);
 QObject* QQuickWindow_focusObject(const QQuickWindow* self);
@@ -165,8 +165,8 @@ void QQuickWindow_beginExternalCommands(QQuickWindow* self);
 void QQuickWindow_endExternalCommands(QQuickWindow* self);
 QQmlIncubationController* QQuickWindow_incubationController(const QQuickWindow* self);
 QAccessibleInterface* QQuickWindow_accessibleRoot(const QQuickWindow* self);
-QSGTexture* QQuickWindow_createTextureFromImage(const QQuickWindow* self, QImage* image);
-QSGTexture* QQuickWindow_createTextureFromImage2(const QQuickWindow* self, QImage* image, int options);
+QSGTexture* QQuickWindow_createTextureFromImage_image(const QQuickWindow* self, QImage* image);
+QSGTexture* QQuickWindow_createTextureFromImage_image_options(const QQuickWindow* self, QImage* image, int options);
 void QQuickWindow_setColor(QQuickWindow* self, QColor* color);
 QColor* QQuickWindow_color(const QQuickWindow* self);
 bool QQuickWindow_hasDefaultAlphaBuffer();
@@ -246,8 +246,8 @@ void QQuickWindow_mouseDoubleClickEvent(QQuickWindow* self, QMouseEvent* param1)
 void QQuickWindow_mouseMoveEvent(QQuickWindow* self, QMouseEvent* param1);
 void QQuickWindow_wheelEvent(QQuickWindow* self, QWheelEvent* param1);
 void QQuickWindow_tabletEvent(QQuickWindow* self, QTabletEvent* param1);
-struct seaqt_string QQuickWindow_tr2(const char* s, const char* c);
-struct seaqt_string QQuickWindow_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQuickWindow_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickWindow_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQuickWindow_virtualbase_metaObject(const VirtualQQuickWindow* self);
 void* QQuickWindow_virtualbase_metacast(VirtualQQuickWindow* self, const char* param1);

@@ -147,15 +147,15 @@ typedef struct QDialog_VTable{
 void* QDialog_vdata(VirtualQDialog* self);
 VirtualQDialog* vdata_QDialog(void* vdata);
 
-VirtualQDialog* QDialog_new(const QDialog_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDialog* QDialog_new2(const QDialog_VTable* vtbl, size_t vdata);
-VirtualQDialog* QDialog_new3(const QDialog_VTable* vtbl, size_t vdata, QWidget* parent, int f);
+VirtualQDialog* QDialog_new_parent(const QDialog_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDialog* QDialog_new(const QDialog_VTable* vtbl, size_t vdata);
+VirtualQDialog* QDialog_new_parent_f(const QDialog_VTable* vtbl, size_t vdata, QWidget* parent, int f);
 
 void QDialog_virtbase(QDialog* src, QWidget** outptr_QWidget);
 QMetaObject* QDialog_metaObject(const QDialog* self);
 void* QDialog_metacast(QDialog* self, const char* param1);
 int QDialog_metacall(QDialog* self, int param1, int param2, void** param3);
-struct seaqt_string QDialog_tr(const char* s);
+struct seaqt_string QDialog_tr_s(const char* s);
 int QDialog_result(const QDialog* self);
 void QDialog_setVisible(QDialog* self, bool visible);
 QSize* QDialog_sizeHint(const QDialog* self);
@@ -181,8 +181,8 @@ void QDialog_showEvent(QDialog* self, QShowEvent* param1);
 void QDialog_resizeEvent(QDialog* self, QResizeEvent* param1);
 void QDialog_contextMenuEvent(QDialog* self, QContextMenuEvent* param1);
 bool QDialog_eventFilter(QDialog* self, QObject* param1, QEvent* param2);
-struct seaqt_string QDialog_tr2(const char* s, const char* c);
-struct seaqt_string QDialog_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDialog_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDialog_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDialog_virtualbase_metaObject(const VirtualQDialog* self);
 void* QDialog_virtualbase_metacast(VirtualQDialog* self, const char* param1);

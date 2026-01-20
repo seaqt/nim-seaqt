@@ -706,22 +706,22 @@ public:
 	friend bool QLCDNumber_protectedbase_isSignalConnected(const VirtualQLCDNumber* self, QMetaMethod* signal);
 };
 
-VirtualQLCDNumber* QLCDNumber_new(const QLCDNumber_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQLCDNumber* QLCDNumber_new_parent(const QLCDNumber_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLCDNumber>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLCDNumber(vtbl, parent) : nullptr;
 }
 
-VirtualQLCDNumber* QLCDNumber_new2(const QLCDNumber_VTable* vtbl, size_t vdata) {
+VirtualQLCDNumber* QLCDNumber_new(const QLCDNumber_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLCDNumber>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLCDNumber(vtbl) : nullptr;
 }
 
-VirtualQLCDNumber* QLCDNumber_new3(const QLCDNumber_VTable* vtbl, size_t vdata, unsigned int numDigits) {
+VirtualQLCDNumber* QLCDNumber_new_numDigits(const QLCDNumber_VTable* vtbl, size_t vdata, unsigned int numDigits) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLCDNumber>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLCDNumber(vtbl, static_cast<uint>(numDigits)) : nullptr;
 }
 
-VirtualQLCDNumber* QLCDNumber_new4(const QLCDNumber_VTable* vtbl, size_t vdata, unsigned int numDigits, QWidget* parent) {
+VirtualQLCDNumber* QLCDNumber_new_numDigits_parent(const QLCDNumber_VTable* vtbl, size_t vdata, unsigned int numDigits, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLCDNumber>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLCDNumber(vtbl, static_cast<uint>(numDigits), parent) : nullptr;
 }
@@ -742,7 +742,7 @@ int QLCDNumber_metacall(QLCDNumber* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QLCDNumber_tr(const char* s) {
+struct seaqt_string QLCDNumber_tr_s(const char* s) {
 	QString _ret = QLCDNumber::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -765,11 +765,11 @@ void QLCDNumber_setDigitCount(QLCDNumber* self, int nDigits) {
 	self->setDigitCount(static_cast<int>(nDigits));
 }
 
-bool QLCDNumber_checkOverflow(const QLCDNumber* self, double num) {
+bool QLCDNumber_checkOverflow_double(const QLCDNumber* self, double num) {
 	return self->checkOverflow(static_cast<double>(num));
 }
 
-bool QLCDNumber_checkOverflowWithNum(const QLCDNumber* self, int num) {
+bool QLCDNumber_checkOverflow_int(const QLCDNumber* self, int num) {
 	return self->checkOverflow(static_cast<int>(num));
 }
 
@@ -803,16 +803,16 @@ QSize* QLCDNumber_sizeHint(const QLCDNumber* self) {
 	return new QSize(self->sizeHint());
 }
 
-void QLCDNumber_display(QLCDNumber* self, struct seaqt_string str) {
+void QLCDNumber_display_QString(QLCDNumber* self, struct seaqt_string str) {
 	QString str_QString = QString::fromUtf8(str.data, str.len);
 	self->display(str_QString);
 }
 
-void QLCDNumber_displayWithNum(QLCDNumber* self, int num) {
+void QLCDNumber_display_int(QLCDNumber* self, int num) {
 	self->display(static_cast<int>(num));
 }
 
-void QLCDNumber_display2(QLCDNumber* self, double num) {
+void QLCDNumber_display_double(QLCDNumber* self, double num) {
 	self->display(static_cast<double>(num));
 }
 
@@ -851,7 +851,7 @@ void QLCDNumber_connect_overflow(QLCDNumber* self, intptr_t slot, void (*callbac
 	QLCDNumber::connect(self, static_cast<void (QLCDNumber::*)()>(&QLCDNumber::overflow), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QLCDNumber_tr2(const char* s, const char* c) {
+struct seaqt_string QLCDNumber_tr_s_c(const char* s, const char* c) {
 	QString _ret = QLCDNumber::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -862,7 +862,7 @@ struct seaqt_string QLCDNumber_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLCDNumber_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QLCDNumber_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLCDNumber::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

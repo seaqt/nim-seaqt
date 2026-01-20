@@ -60,8 +60,8 @@ void* QLayoutItem_vdata(VirtualQLayoutItem* self);
 VirtualQLayoutItem* vdata_QLayoutItem(void* vdata);
 
 VirtualQLayoutItem* QLayoutItem_new(const QLayoutItem_VTable* vtbl, size_t vdata);
-VirtualQLayoutItem* QLayoutItem_new2(const QLayoutItem_VTable* vtbl, size_t vdata, QLayoutItem* param1);
-VirtualQLayoutItem* QLayoutItem_new3(const QLayoutItem_VTable* vtbl, size_t vdata, int alignment);
+VirtualQLayoutItem* QLayoutItem_new_from(const QLayoutItem_VTable* vtbl, size_t vdata, QLayoutItem* from);
+VirtualQLayoutItem* QLayoutItem_new_alignment(const QLayoutItem_VTable* vtbl, size_t vdata, int alignment);
 
 QSize* QLayoutItem_sizeHint(const QLayoutItem* self);
 QSize* QLayoutItem_minimumSize(const QLayoutItem* self);
@@ -80,7 +80,7 @@ QSpacerItem* QLayoutItem_spacerItem(QLayoutItem* self);
 int QLayoutItem_alignment(const QLayoutItem* self);
 void QLayoutItem_setAlignment(QLayoutItem* self, int a);
 int QLayoutItem_controlTypes(const QLayoutItem* self);
-void QLayoutItem_operatorAssign(QLayoutItem* self, QLayoutItem* param1);
+void QLayoutItem_operatorAssign(QLayoutItem* self, QLayoutItem* from);
 
 QSize* QLayoutItem_virtualbase_sizeHint(const VirtualQLayoutItem* self);
 QSize* QLayoutItem_virtualbase_minimumSize(const VirtualQLayoutItem* self);
@@ -123,13 +123,13 @@ typedef struct QSpacerItem_VTable{
 void* QSpacerItem_vdata(VirtualQSpacerItem* self);
 VirtualQSpacerItem* vdata_QSpacerItem(void* vdata);
 
-VirtualQSpacerItem* QSpacerItem_new(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h);
-VirtualQSpacerItem* QSpacerItem_new2(const QSpacerItem_VTable* vtbl, size_t vdata, QSpacerItem* param1);
-VirtualQSpacerItem* QSpacerItem_new3(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h, int hData);
-VirtualQSpacerItem* QSpacerItem_new4(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h, int hData, int vData);
+VirtualQSpacerItem* QSpacerItem_new_w_h(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h);
+VirtualQSpacerItem* QSpacerItem_new_from(const QSpacerItem_VTable* vtbl, size_t vdata, QSpacerItem* from);
+VirtualQSpacerItem* QSpacerItem_new_w_h_hData(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h, int hData);
+VirtualQSpacerItem* QSpacerItem_new_w_h_hData_vData(const QSpacerItem_VTable* vtbl, size_t vdata, int w, int h, int hData, int vData);
 
 void QSpacerItem_virtbase(QSpacerItem* src, QLayoutItem** outptr_QLayoutItem);
-void QSpacerItem_changeSize(QSpacerItem* self, int w, int h);
+void QSpacerItem_changeSize_w_h(QSpacerItem* self, int w, int h);
 QSize* QSpacerItem_sizeHint(const QSpacerItem* self);
 QSize* QSpacerItem_minimumSize(const QSpacerItem* self);
 QSize* QSpacerItem_maximumSize(const QSpacerItem* self);
@@ -139,9 +139,9 @@ void QSpacerItem_setGeometry(QSpacerItem* self, QRect* geometry);
 QRect* QSpacerItem_geometry(const QSpacerItem* self);
 QSpacerItem* QSpacerItem_spacerItem(QSpacerItem* self);
 QSizePolicy* QSpacerItem_sizePolicy(const QSpacerItem* self);
-void QSpacerItem_operatorAssign(QSpacerItem* self, QSpacerItem* param1);
-void QSpacerItem_changeSize2(QSpacerItem* self, int w, int h, int hData);
-void QSpacerItem_changeSize3(QSpacerItem* self, int w, int h, int hData, int vData);
+void QSpacerItem_operatorAssign(QSpacerItem* self, QSpacerItem* from);
+void QSpacerItem_changeSize_w_h_hData(QSpacerItem* self, int w, int h, int hData);
+void QSpacerItem_changeSize_w_h_hData_vData(QSpacerItem* self, int w, int h, int hData, int vData);
 
 QSize* QSpacerItem_virtualbase_sizeHint(const VirtualQSpacerItem* self);
 QSize* QSpacerItem_virtualbase_minimumSize(const VirtualQSpacerItem* self);

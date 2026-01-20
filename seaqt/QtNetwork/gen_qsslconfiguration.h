@@ -33,9 +33,9 @@ typedef struct QVariant QVariant;
 #endif
 
 QSslConfiguration* QSslConfiguration_new();
-QSslConfiguration* QSslConfiguration_new2(QSslConfiguration* other);
+QSslConfiguration* QSslConfiguration_new_from(QSslConfiguration* from);
 
-void QSslConfiguration_operatorAssign(QSslConfiguration* self, QSslConfiguration* other);
+void QSslConfiguration_operatorAssign(QSslConfiguration* self, QSslConfiguration* from);
 void QSslConfiguration_swap(QSslConfiguration* self, QSslConfiguration* other);
 bool QSslConfiguration_operatorEqual(const QSslConfiguration* self, QSslConfiguration* other);
 bool QSslConfiguration_operatorNotEqual(const QSslConfiguration* self, QSslConfiguration* other);
@@ -57,14 +57,14 @@ int QSslConfiguration_sessionProtocol(const QSslConfiguration* self);
 QSslKey* QSslConfiguration_privateKey(const QSslConfiguration* self);
 void QSslConfiguration_setPrivateKey(QSslConfiguration* self, QSslKey* key);
 struct seaqt_array /* of QSslCipher* */  QSslConfiguration_ciphers(const QSslConfiguration* self);
-void QSslConfiguration_setCiphers(QSslConfiguration* self, struct seaqt_array /* of QSslCipher* */  ciphers);
-void QSslConfiguration_setCiphersWithCiphers(QSslConfiguration* self, struct seaqt_string ciphers);
+void QSslConfiguration_setCiphers_QListOfQSslCipher(QSslConfiguration* self, struct seaqt_array /* of QSslCipher* */  ciphers);
+void QSslConfiguration_setCiphers_QString(QSslConfiguration* self, struct seaqt_string ciphers);
 struct seaqt_array /* of QSslCipher* */  QSslConfiguration_supportedCiphers();
 struct seaqt_array /* of QSslCertificate* */  QSslConfiguration_caCertificates(const QSslConfiguration* self);
 void QSslConfiguration_setCaCertificates(QSslConfiguration* self, struct seaqt_array /* of QSslCertificate* */  certificates);
-bool QSslConfiguration_addCaCertificates(QSslConfiguration* self, struct seaqt_string path);
+bool QSslConfiguration_addCaCertificates_path(QSslConfiguration* self, struct seaqt_string path);
 void QSslConfiguration_addCaCertificate(QSslConfiguration* self, QSslCertificate* certificate);
-void QSslConfiguration_addCaCertificatesWithCertificates(QSslConfiguration* self, struct seaqt_array /* of QSslCertificate* */  certificates);
+void QSslConfiguration_addCaCertificates_certificates(QSslConfiguration* self, struct seaqt_array /* of QSslCertificate* */  certificates);
 struct seaqt_array /* of QSslCertificate* */  QSslConfiguration_systemCaCertificates();
 void QSslConfiguration_setSslOption(QSslConfiguration* self, int option, bool on);
 bool QSslConfiguration_testSslOption(const QSslConfiguration* self, int option);
@@ -97,8 +97,8 @@ void QSslConfiguration_setAllowedNextProtocols(QSslConfiguration* self, struct s
 struct seaqt_array /* of struct seaqt_string */  QSslConfiguration_allowedNextProtocols(const QSslConfiguration* self);
 struct seaqt_string QSslConfiguration_nextNegotiatedProtocol(const QSslConfiguration* self);
 int QSslConfiguration_nextProtocolNegotiationStatus(const QSslConfiguration* self);
-bool QSslConfiguration_addCaCertificates2(QSslConfiguration* self, struct seaqt_string path, int format);
-bool QSslConfiguration_addCaCertificates3(QSslConfiguration* self, struct seaqt_string path, int format, int syntax);
+bool QSslConfiguration_addCaCertificates_path_format(QSslConfiguration* self, struct seaqt_string path, int format);
+bool QSslConfiguration_addCaCertificates_path_format_syntax(QSslConfiguration* self, struct seaqt_string path, int format, int syntax);
 
 void QSslConfiguration_delete(QSslConfiguration* self);
 

@@ -21,12 +21,12 @@ QPageRanges* QPageRanges_new() {
 	return new (std::nothrow) QPageRanges();
 }
 
-QPageRanges* QPageRanges_new2(QPageRanges* other) {
-	return new (std::nothrow) QPageRanges(*other);
+QPageRanges* QPageRanges_new_from(QPageRanges* from) {
+	return new (std::nothrow) QPageRanges(*from);
 }
 
-void QPageRanges_operatorAssign(QPageRanges* self, QPageRanges* other) {
-	self->operator=(*other);
+void QPageRanges_operatorAssign(QPageRanges* self, QPageRanges* from) {
+	self->operator=(*from);
 }
 
 void QPageRanges_swap(QPageRanges* self, QPageRanges* other) {
@@ -102,8 +102,8 @@ QPageRanges__Range* QPageRanges__Range_new() {
 	return new (std::nothrow) QPageRanges__Range();
 }
 
-QPageRanges__Range* QPageRanges__Range_new2(QPageRanges__Range* param1) {
-	return new (std::nothrow) QPageRanges__Range(*param1);
+QPageRanges__Range* QPageRanges__Range_new_from(QPageRanges__Range* from) {
+	return new (std::nothrow) QPageRanges__Range(*from);
 }
 
 int QPageRanges__Range_from(const QPageRanges__Range* self) {

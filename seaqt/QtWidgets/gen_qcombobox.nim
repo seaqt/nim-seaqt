@@ -103,7 +103,7 @@ type cQComboBox*{.exportc: "QComboBox", incompleteStruct.} = object
 proc fcQComboBox_metaObject(self: pointer): pointer {.importc: "QComboBox_metaObject".}
 proc fcQComboBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QComboBox_metacast".}
 proc fcQComboBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QComboBox_metacall".}
-proc fcQComboBox_tr(s: cstring): struct_seaqt_string {.importc: "QComboBox_tr".}
+proc fcQComboBox_trS(s: cstring): struct_seaqt_string {.importc: "QComboBox_tr_s".}
 proc fcQComboBox_maxVisibleItems(self: pointer): cint {.importc: "QComboBox_maxVisibleItems".}
 proc fcQComboBox_setMaxVisibleItems(self: pointer, maxItems: cint): void {.importc: "QComboBox_setMaxVisibleItems".}
 proc fcQComboBox_count(self: pointer): cint {.importc: "QComboBox_count".}
@@ -113,8 +113,8 @@ proc fcQComboBox_duplicatesEnabled(self: pointer): bool {.importc: "QComboBox_du
 proc fcQComboBox_setDuplicatesEnabled(self: pointer, enable: bool): void {.importc: "QComboBox_setDuplicatesEnabled".}
 proc fcQComboBox_setFrame(self: pointer, frame: bool): void {.importc: "QComboBox_setFrame".}
 proc fcQComboBox_hasFrame(self: pointer): bool {.importc: "QComboBox_hasFrame".}
-proc fcQComboBox_findText(self: pointer, text: struct_seaqt_string): cint {.importc: "QComboBox_findText".}
-proc fcQComboBox_findData(self: pointer, data: pointer): cint {.importc: "QComboBox_findData".}
+proc fcQComboBox_findTextText(self: pointer, text: struct_seaqt_string): cint {.importc: "QComboBox_findText_text".}
+proc fcQComboBox_findDataData(self: pointer, data: pointer): cint {.importc: "QComboBox_findData_data".}
 proc fcQComboBox_insertPolicy(self: pointer): cint {.importc: "QComboBox_insertPolicy".}
 proc fcQComboBox_setInsertPolicy(self: pointer, policy: cint): void {.importc: "QComboBox_setInsertPolicy".}
 proc fcQComboBox_sizeAdjustPolicy(self: pointer): cint {.importc: "QComboBox_sizeAdjustPolicy".}
@@ -146,18 +146,18 @@ proc fcQComboBox_currentText(self: pointer): struct_seaqt_string {.importc: "QCo
 proc fcQComboBox_currentData(self: pointer): pointer {.importc: "QComboBox_currentData".}
 proc fcQComboBox_itemText(self: pointer, index: cint): struct_seaqt_string {.importc: "QComboBox_itemText".}
 proc fcQComboBox_itemIcon(self: pointer, index: cint): pointer {.importc: "QComboBox_itemIcon".}
-proc fcQComboBox_itemData(self: pointer, index: cint): pointer {.importc: "QComboBox_itemData".}
-proc fcQComboBox_addItem(self: pointer, text: struct_seaqt_string): void {.importc: "QComboBox_addItem".}
-proc fcQComboBox_addItem2(self: pointer, icon: pointer, text: struct_seaqt_string): void {.importc: "QComboBox_addItem2".}
+proc fcQComboBox_itemDataIndex(self: pointer, index: cint): pointer {.importc: "QComboBox_itemData_index".}
+proc fcQComboBox_addItemText(self: pointer, text: struct_seaqt_string): void {.importc: "QComboBox_addItem_text".}
+proc fcQComboBox_addItemIconText(self: pointer, icon: pointer, text: struct_seaqt_string): void {.importc: "QComboBox_addItem_icon_text".}
 proc fcQComboBox_addItems(self: pointer, texts: struct_seaqt_array): void {.importc: "QComboBox_addItems".}
-proc fcQComboBox_insertItem(self: pointer, index: cint, text: struct_seaqt_string): void {.importc: "QComboBox_insertItem".}
-proc fcQComboBox_insertItem2(self: pointer, index: cint, icon: pointer, text: struct_seaqt_string): void {.importc: "QComboBox_insertItem2".}
+proc fcQComboBox_insertItemIndexText(self: pointer, index: cint, text: struct_seaqt_string): void {.importc: "QComboBox_insertItem_index_text".}
+proc fcQComboBox_insertItemIndexIconText(self: pointer, index: cint, icon: pointer, text: struct_seaqt_string): void {.importc: "QComboBox_insertItem_index_icon_text".}
 proc fcQComboBox_insertItems(self: pointer, index: cint, texts: struct_seaqt_array): void {.importc: "QComboBox_insertItems".}
 proc fcQComboBox_insertSeparator(self: pointer, index: cint): void {.importc: "QComboBox_insertSeparator".}
 proc fcQComboBox_removeItem(self: pointer, index: cint): void {.importc: "QComboBox_removeItem".}
 proc fcQComboBox_setItemText(self: pointer, index: cint, text: struct_seaqt_string): void {.importc: "QComboBox_setItemText".}
 proc fcQComboBox_setItemIcon(self: pointer, index: cint, icon: pointer): void {.importc: "QComboBox_setItemIcon".}
-proc fcQComboBox_setItemData(self: pointer, index: cint, value: pointer): void {.importc: "QComboBox_setItemData".}
+proc fcQComboBox_setItemDataIndexValue(self: pointer, index: cint, value: pointer): void {.importc: "QComboBox_setItemData_index_value".}
 proc fcQComboBox_view(self: pointer): pointer {.importc: "QComboBox_view".}
 proc fcQComboBox_setView(self: pointer, itemView: pointer): void {.importc: "QComboBox_setView".}
 proc fcQComboBox_sizeHint(self: pointer): pointer {.importc: "QComboBox_sizeHint".}
@@ -165,8 +165,8 @@ proc fcQComboBox_minimumSizeHint(self: pointer): pointer {.importc: "QComboBox_m
 proc fcQComboBox_showPopup(self: pointer): void {.importc: "QComboBox_showPopup".}
 proc fcQComboBox_hidePopup(self: pointer): void {.importc: "QComboBox_hidePopup".}
 proc fcQComboBox_event(self: pointer, event: pointer): bool {.importc: "QComboBox_event".}
-proc fcQComboBox_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QComboBox_inputMethodQuery".}
-proc fcQComboBox_inputMethodQuery2(self: pointer, query: cint, argument: pointer): pointer {.importc: "QComboBox_inputMethodQuery2".}
+proc fcQComboBox_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QComboBox_inputMethodQuery_Qt_InputMethodQuery".}
+proc fcQComboBox_inputMethodQuery_Qt_InputMethodQuery_QVariant(self: pointer, query: cint, argument: pointer): pointer {.importc: "QComboBox_inputMethodQuery_Qt_InputMethodQuery_QVariant".}
 proc fcQComboBox_clear(self: pointer): void {.importc: "QComboBox_clear".}
 proc fcQComboBox_clearEditText(self: pointer): void {.importc: "QComboBox_clearEditText".}
 proc fcQComboBox_setEditText(self: pointer, text: struct_seaqt_string): void {.importc: "QComboBox_setEditText".}
@@ -186,18 +186,18 @@ proc fcQComboBox_currentIndexChanged(self: pointer, index: cint): void {.importc
 proc fcQComboBox_connect_currentIndexChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_currentIndexChanged".}
 proc fcQComboBox_currentTextChanged(self: pointer, param1: struct_seaqt_string): void {.importc: "QComboBox_currentTextChanged".}
 proc fcQComboBox_connect_currentTextChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_currentTextChanged".}
-proc fcQComboBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QComboBox_tr2".}
-proc fcQComboBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QComboBox_tr3".}
-proc fcQComboBox_findText2(self: pointer, text: struct_seaqt_string, flags: cint): cint {.importc: "QComboBox_findText2".}
-proc fcQComboBox_findData2(self: pointer, data: pointer, role: cint): cint {.importc: "QComboBox_findData2".}
-proc fcQComboBox_findData3(self: pointer, data: pointer, role: cint, flags: cint): cint {.importc: "QComboBox_findData3".}
-proc fcQComboBox_currentDataWithRole(self: pointer, role: cint): pointer {.importc: "QComboBox_currentDataWithRole".}
-proc fcQComboBox_itemData2(self: pointer, index: cint, role: cint): pointer {.importc: "QComboBox_itemData2".}
-proc fcQComboBox_addItem3(self: pointer, text: struct_seaqt_string, userData: pointer): void {.importc: "QComboBox_addItem3".}
-proc fcQComboBox_addItem4(self: pointer, icon: pointer, text: struct_seaqt_string, userData: pointer): void {.importc: "QComboBox_addItem4".}
-proc fcQComboBox_insertItem3(self: pointer, index: cint, text: struct_seaqt_string, userData: pointer): void {.importc: "QComboBox_insertItem3".}
-proc fcQComboBox_insertItem4(self: pointer, index: cint, icon: pointer, text: struct_seaqt_string, userData: pointer): void {.importc: "QComboBox_insertItem4".}
-proc fcQComboBox_setItemData2(self: pointer, index: cint, value: pointer, role: cint): void {.importc: "QComboBox_setItemData2".}
+proc fcQComboBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QComboBox_tr_s_c".}
+proc fcQComboBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QComboBox_tr_s_c_n".}
+proc fcQComboBox_findTextTextFlags(self: pointer, text: struct_seaqt_string, flags: cint): cint {.importc: "QComboBox_findText_text_flags".}
+proc fcQComboBox_findDataDataRole(self: pointer, data: pointer, role: cint): cint {.importc: "QComboBox_findData_data_role".}
+proc fcQComboBox_findDataDataRoleFlags(self: pointer, data: pointer, role: cint, flags: cint): cint {.importc: "QComboBox_findData_data_role_flags".}
+proc fcQComboBox_currentDataRole(self: pointer, role: cint): pointer {.importc: "QComboBox_currentData_role".}
+proc fcQComboBox_itemDataIndexRole(self: pointer, index: cint, role: cint): pointer {.importc: "QComboBox_itemData_index_role".}
+proc fcQComboBox_addItemTextUserData(self: pointer, text: struct_seaqt_string, userData: pointer): void {.importc: "QComboBox_addItem_text_userData".}
+proc fcQComboBox_addItemIconTextUserData(self: pointer, icon: pointer, text: struct_seaqt_string, userData: pointer): void {.importc: "QComboBox_addItem_icon_text_userData".}
+proc fcQComboBox_insertItemIndexTextUserData(self: pointer, index: cint, text: struct_seaqt_string, userData: pointer): void {.importc: "QComboBox_insertItem_index_text_userData".}
+proc fcQComboBox_insertItemIndexIconTextUserData(self: pointer, index: cint, icon: pointer, text: struct_seaqt_string, userData: pointer): void {.importc: "QComboBox_insertItem_index_icon_text_userData".}
+proc fcQComboBox_setItemDataIndexValueRole(self: pointer, index: cint, value: pointer, role: cint): void {.importc: "QComboBox_setItemData_index_value_role".}
 proc fcQComboBox_vdata(self: pointer): ptr pointer {.importc: "QComboBox_vdata".}
 proc fvdata_cQComboBox(self: pointer): pointer {.importc: "vdata_QComboBox".}
 
@@ -212,7 +212,7 @@ type cQComboBoxVTable {.pure.} = object
   showPopup*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   hidePopup*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery_Qt_InputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
   focusInEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
   focusOutEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
   changeEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -266,7 +266,7 @@ proc fcQComboBox_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: 
 proc fcQComboBox_virtualbase_showPopup(self: pointer): void {.importc: "QComboBox_virtualbase_showPopup".}
 proc fcQComboBox_virtualbase_hidePopup(self: pointer): void {.importc: "QComboBox_virtualbase_hidePopup".}
 proc fcQComboBox_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QComboBox_virtualbase_event".}
-proc fcQComboBox_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QComboBox_virtualbase_inputMethodQuery".}
+proc fcQComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery".}
 proc fcQComboBox_virtualbase_focusInEvent(self: pointer, e: pointer): void {.importc: "QComboBox_virtualbase_focusInEvent".}
 proc fcQComboBox_virtualbase_focusOutEvent(self: pointer, e: pointer): void {.importc: "QComboBox_virtualbase_focusOutEvent".}
 proc fcQComboBox_virtualbase_changeEvent(self: pointer, e: pointer): void {.importc: "QComboBox_virtualbase_changeEvent".}
@@ -320,8 +320,8 @@ proc fcQComboBox_protectedbase_sender(self: pointer): pointer {.importc: "QCombo
 proc fcQComboBox_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QComboBox_protectedbase_senderSignalIndex".}
 proc fcQComboBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QComboBox_protectedbase_receivers".}
 proc fcQComboBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QComboBox_protectedbase_isSignalConnected".}
-proc fcQComboBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQComboBox {.importc: "QComboBox_new".}
-proc fcQComboBox_new2(vtbl: pointer, vdata: csize_t): ptr cQComboBox {.importc: "QComboBox_new2".}
+proc fcQComboBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQComboBox {.importc: "QComboBox_new_parent".}
+proc fcQComboBox_new2(vtbl: pointer, vdata: csize_t): ptr cQComboBox {.importc: "QComboBox_new".}
 proc fcQComboBox_staticMetaObject(): pointer {.importc: "QComboBox_staticMetaObject".}
 
 proc metaObject*(self: gen_qcombobox_types.QComboBox): gen_qobjectdefs_types.QMetaObject =
@@ -334,7 +334,7 @@ proc metacall*(self: gen_qcombobox_types.QComboBox, param1: cint, param2: cint, 
   fcQComboBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcombobox_types.QComboBox, s: cstring): string =
-  let v_ms = fcQComboBox_tr(s)
+  let v_ms = fcQComboBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -367,10 +367,10 @@ proc hasFrame*(self: gen_qcombobox_types.QComboBox): bool =
   fcQComboBox_hasFrame(self.h)
 
 proc findText*(self: gen_qcombobox_types.QComboBox, text: openArray[char]): cint =
-  fcQComboBox_findText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQComboBox_findTextText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc findData*(self: gen_qcombobox_types.QComboBox, data: gen_qvariant_types.QVariant): cint =
-  fcQComboBox_findData(self.h, data.h)
+  fcQComboBox_findDataData(self.h, data.h)
 
 proc insertPolicy*(self: gen_qcombobox_types.QComboBox): cint =
   cint(fcQComboBox_insertPolicy(self.h))
@@ -475,13 +475,13 @@ proc itemIcon*(self: gen_qcombobox_types.QComboBox, index: cint): gen_qicon_type
   gen_qicon_types.QIcon(h: fcQComboBox_itemIcon(self.h, index), owned: true)
 
 proc itemData*(self: gen_qcombobox_types.QComboBox, index: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQComboBox_itemData(self.h, index), owned: true)
+  gen_qvariant_types.QVariant(h: fcQComboBox_itemDataIndex(self.h, index), owned: true)
 
 proc addItem*(self: gen_qcombobox_types.QComboBox, text: openArray[char]): void =
-  fcQComboBox_addItem(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQComboBox_addItemText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc addItem*(self: gen_qcombobox_types.QComboBox, icon: gen_qicon_types.QIcon, text: openArray[char]): void =
-  fcQComboBox_addItem2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQComboBox_addItemIconText(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc addItems*(self: gen_qcombobox_types.QComboBox, texts: openArray[string]): void =
   var texts_CArray = newSeq[struct_seaqt_string](len(texts))
@@ -491,10 +491,10 @@ proc addItems*(self: gen_qcombobox_types.QComboBox, texts: openArray[string]): v
   fcQComboBox_addItems(self.h, struct_seaqt_array(len: csize_t(len(texts)), data: if len(texts) == 0: nil else: addr(texts_CArray[0])))
 
 proc insertItem*(self: gen_qcombobox_types.QComboBox, index: cint, text: openArray[char]): void =
-  fcQComboBox_insertItem(self.h, index, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQComboBox_insertItemIndexText(self.h, index, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc insertItem*(self: gen_qcombobox_types.QComboBox, index: cint, icon: gen_qicon_types.QIcon, text: openArray[char]): void =
-  fcQComboBox_insertItem2(self.h, index, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQComboBox_insertItemIndexIconText(self.h, index, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc insertItems*(self: gen_qcombobox_types.QComboBox, index: cint, texts: openArray[string]): void =
   var texts_CArray = newSeq[struct_seaqt_string](len(texts))
@@ -516,7 +516,7 @@ proc setItemIcon*(self: gen_qcombobox_types.QComboBox, index: cint, icon: gen_qi
   fcQComboBox_setItemIcon(self.h, index, icon.h)
 
 proc setItemData*(self: gen_qcombobox_types.QComboBox, index: cint, value: gen_qvariant_types.QVariant): void =
-  fcQComboBox_setItemData(self.h, index, value.h)
+  fcQComboBox_setItemDataIndexValue(self.h, index, value.h)
 
 proc view*(self: gen_qcombobox_types.QComboBox): gen_qabstractitemview_types.QAbstractItemView =
   gen_qabstractitemview_types.QAbstractItemView(h: fcQComboBox_view(self.h), owned: false)
@@ -540,10 +540,10 @@ proc event*(self: gen_qcombobox_types.QComboBox, event: gen_qcoreevent_types.QEv
   fcQComboBox_event(self.h, event.h)
 
 proc inputMethodQuery*(self: gen_qcombobox_types.QComboBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQComboBox_inputMethodQuery(self.h, cint(param1)), owned: true)
+  gen_qvariant_types.QVariant(h: fcQComboBox_inputMethodQuery_Qt_InputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc inputMethodQuery*(self: gen_qcombobox_types.QComboBox, query: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQComboBox_inputMethodQuery2(self.h, cint(query), argument.h), owned: true)
+  gen_qvariant_types.QVariant(h: fcQComboBox_inputMethodQuery_Qt_InputMethodQuery_QVariant(self.h, cint(query), argument.h), owned: true)
 
 proc clear*(self: gen_qcombobox_types.QComboBox): void =
   fcQComboBox_clear(self.h)
@@ -713,46 +713,46 @@ proc onCurrentTextChanged*(self: gen_qcombobox_types.QComboBox, slot: QComboBoxc
   fcQComboBox_connect_currentTextChanged(self.h, cast[int](addr tmp[]), fcQComboBox_slot_callback_currentTextChanged, fcQComboBox_slot_callback_currentTextChanged_release)
 
 proc tr*(_: type gen_qcombobox_types.QComboBox, s: cstring, c: cstring): string =
-  let v_ms = fcQComboBox_tr2(s, c)
+  let v_ms = fcQComboBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcombobox_types.QComboBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQComboBox_tr3(s, c, n)
+  let v_ms = fcQComboBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc findText*(self: gen_qcombobox_types.QComboBox, text: openArray[char], flags: cint): cint =
-  fcQComboBox_findText2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
+  fcQComboBox_findTextTextFlags(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
 
 proc findData*(self: gen_qcombobox_types.QComboBox, data: gen_qvariant_types.QVariant, role: cint): cint =
-  fcQComboBox_findData2(self.h, data.h, role)
+  fcQComboBox_findDataDataRole(self.h, data.h, role)
 
 proc findData*(self: gen_qcombobox_types.QComboBox, data: gen_qvariant_types.QVariant, role: cint, flags: cint): cint =
-  fcQComboBox_findData3(self.h, data.h, role, cint(flags))
+  fcQComboBox_findDataDataRoleFlags(self.h, data.h, role, cint(flags))
 
 proc currentData*(self: gen_qcombobox_types.QComboBox, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQComboBox_currentDataWithRole(self.h, role), owned: true)
+  gen_qvariant_types.QVariant(h: fcQComboBox_currentDataRole(self.h, role), owned: true)
 
 proc itemData*(self: gen_qcombobox_types.QComboBox, index: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQComboBox_itemData2(self.h, index, role), owned: true)
+  gen_qvariant_types.QVariant(h: fcQComboBox_itemDataIndexRole(self.h, index, role), owned: true)
 
 proc addItem*(self: gen_qcombobox_types.QComboBox, text: openArray[char], userData: gen_qvariant_types.QVariant): void =
-  fcQComboBox_addItem3(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), userData.h)
+  fcQComboBox_addItemTextUserData(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), userData.h)
 
 proc addItem*(self: gen_qcombobox_types.QComboBox, icon: gen_qicon_types.QIcon, text: openArray[char], userData: gen_qvariant_types.QVariant): void =
-  fcQComboBox_addItem4(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), userData.h)
+  fcQComboBox_addItemIconTextUserData(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), userData.h)
 
 proc insertItem*(self: gen_qcombobox_types.QComboBox, index: cint, text: openArray[char], userData: gen_qvariant_types.QVariant): void =
-  fcQComboBox_insertItem3(self.h, index, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), userData.h)
+  fcQComboBox_insertItemIndexTextUserData(self.h, index, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), userData.h)
 
 proc insertItem*(self: gen_qcombobox_types.QComboBox, index: cint, icon: gen_qicon_types.QIcon, text: openArray[char], userData: gen_qvariant_types.QVariant): void =
-  fcQComboBox_insertItem4(self.h, index, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), userData.h)
+  fcQComboBox_insertItemIndexIconTextUserData(self.h, index, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), userData.h)
 
 proc setItemData*(self: gen_qcombobox_types.QComboBox, index: cint, value: gen_qvariant_types.QVariant, role: cint): void =
-  fcQComboBox_setItemData2(self.h, index, value.h, role)
+  fcQComboBox_setItemDataIndexValueRole(self.h, index, value.h, role)
 
 type QComboBoxmetaObjectProc* = proc(self: QComboBox): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QComboBoxmetacastProc* = proc(self: QComboBox, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -763,7 +763,7 @@ type QComboBoxminimumSizeHintProc* = proc(self: QComboBox): gen_qsize_types.QSiz
 type QComboBoxshowPopupProc* = proc(self: QComboBox): void {.raises: [], gcsafe.}
 type QComboBoxhidePopupProc* = proc(self: QComboBox): void {.raises: [], gcsafe.}
 type QComboBoxeventProc* = proc(self: QComboBox, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
-type QComboBoxinputMethodQueryProc* = proc(self: QComboBox, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QComboBoxinputMethodQuery_Qt_InputMethodQueryProc* = proc(self: QComboBox, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QComboBoxfocusInEventProc* = proc(self: QComboBox, e: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
 type QComboBoxfocusOutEventProc* = proc(self: QComboBox, e: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
 type QComboBoxchangeEventProc* = proc(self: QComboBox, e: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
@@ -820,7 +820,7 @@ type QComboBoxVTable* {.inheritable, pure.} = object
   showPopup*: QComboBoxshowPopupProc
   hidePopup*: QComboBoxhidePopupProc
   event*: QComboBoxeventProc
-  inputMethodQuery*: QComboBoxinputMethodQueryProc
+  inputMethodQuery_Qt_InputMethodQuery*: QComboBoxinputMethodQuery_Qt_InputMethodQueryProc
   focusInEvent*: QComboBoxfocusInEventProc
   focusOutEvent*: QComboBoxfocusOutEventProc
   changeEvent*: QComboBoxchangeEventProc
@@ -894,7 +894,7 @@ proc QComboBoxevent*(self: gen_qcombobox_types.QComboBox, event: gen_qcoreevent_
   fcQComboBox_virtualbase_event(self.h, event.h)
 
 proc QComboBoxinputMethodQuery*(self: gen_qcombobox_types.QComboBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQComboBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+  gen_qvariant_types.QVariant(h: fcQComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QComboBoxfocusInEvent*(self: gen_qcombobox_types.QComboBox, e: gen_qevent_types.QFocusEvent): void =
   fcQComboBox_virtualbase_focusInEvent(self.h, e.h)
@@ -1095,11 +1095,11 @@ proc fcQComboBox_vtable_callback_event(self: pointer, event: pointer): bool {.cd
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc fcQComboBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQComboBox_vtable_callback_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QComboBoxVTable](fcQComboBox_vdata(self)[])
   let self = QComboBox(h: self)
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  var virtualReturn = vtbl[].inputMethodQuery_Qt_InputMethodQuery(self, slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1559,7 +1559,7 @@ proc fcQComboBox_method_callback_event(self: pointer, event: pointer): bool {.cd
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-proc fcQComboBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQComboBox_method_callback_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQComboBox](fcQComboBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1863,8 +1863,8 @@ proc create*(T: type gen_qcombobox_types.QComboBox,
     vtbl[].vtbl.hidePopup = fcQComboBox_vtable_callback_hidePopup
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQComboBox_vtable_callback_event
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQComboBox_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQuery_Qt_InputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery_Qt_InputMethodQuery = fcQComboBox_vtable_callback_inputMethodQuery_Qt_InputMethodQuery
   if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = fcQComboBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
@@ -1981,8 +1981,8 @@ proc create*(T: type gen_qcombobox_types.QComboBox,
     vtbl[].vtbl.hidePopup = fcQComboBox_vtable_callback_hidePopup
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQComboBox_vtable_callback_event
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQComboBox_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQuery_Qt_InputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery_Qt_InputMethodQuery = fcQComboBox_vtable_callback_inputMethodQuery_Qt_InputMethodQuery
   if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = fcQComboBox_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
@@ -2089,7 +2089,7 @@ const cQComboBox_mvtbl = cQComboBoxVTable(
   showPopup: fcQComboBox_method_callback_showPopup,
   hidePopup: fcQComboBox_method_callback_hidePopup,
   event: fcQComboBox_method_callback_event,
-  inputMethodQuery: fcQComboBox_method_callback_inputMethodQuery,
+  inputMethodQuery_Qt_InputMethodQuery: fcQComboBox_method_callback_inputMethodQuery_Qt_InputMethodQuery,
   focusInEvent: fcQComboBox_method_callback_focusInEvent,
   focusOutEvent: fcQComboBox_method_callback_focusOutEvent,
   changeEvent: fcQComboBox_method_callback_changeEvent,

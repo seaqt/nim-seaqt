@@ -75,11 +75,11 @@ type cQScrollBar*{.exportc: "QScrollBar", incompleteStruct.} = object
 proc fcQScrollBar_metaObject(self: pointer): pointer {.importc: "QScrollBar_metaObject".}
 proc fcQScrollBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QScrollBar_metacast".}
 proc fcQScrollBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScrollBar_metacall".}
-proc fcQScrollBar_tr(s: cstring): struct_seaqt_string {.importc: "QScrollBar_tr".}
+proc fcQScrollBar_trS(s: cstring): struct_seaqt_string {.importc: "QScrollBar_tr_s".}
 proc fcQScrollBar_sizeHint(self: pointer): pointer {.importc: "QScrollBar_sizeHint".}
 proc fcQScrollBar_event(self: pointer, event: pointer): bool {.importc: "QScrollBar_event".}
-proc fcQScrollBar_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScrollBar_tr2".}
-proc fcQScrollBar_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScrollBar_tr3".}
+proc fcQScrollBar_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScrollBar_tr_s_c".}
+proc fcQScrollBar_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScrollBar_tr_s_c_n".}
 proc fcQScrollBar_vdata(self: pointer): ptr pointer {.importc: "QScrollBar_vdata".}
 proc fvdata_cQScrollBar(self: pointer): pointer {.importc: "vdata_QScrollBar".}
 
@@ -189,7 +189,7 @@ proc fcQScrollBar_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQScrollBar_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QScrollBar_virtualbase_customEvent".}
 proc fcQScrollBar_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QScrollBar_virtualbase_connectNotify".}
 proc fcQScrollBar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QScrollBar_virtualbase_disconnectNotify".}
-proc fcQScrollBar_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QScrollBar_protectedbase_setRepeatAction".}
+proc fcQScrollBar_protectedbase_setRepeatAction_action(self: pointer, action: cint): void {.importc: "QScrollBar_protectedbase_setRepeatAction_action".}
 proc fcQScrollBar_protectedbase_repeatAction(self: pointer): cint {.importc: "QScrollBar_protectedbase_repeatAction".}
 proc fcQScrollBar_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QScrollBar_protectedbase_updateMicroFocus".}
 proc fcQScrollBar_protectedbase_create(self: pointer): void {.importc: "QScrollBar_protectedbase_create".}
@@ -200,10 +200,10 @@ proc fcQScrollBar_protectedbase_sender(self: pointer): pointer {.importc: "QScro
 proc fcQScrollBar_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QScrollBar_protectedbase_senderSignalIndex".}
 proc fcQScrollBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScrollBar_protectedbase_receivers".}
 proc fcQScrollBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScrollBar_protectedbase_isSignalConnected".}
-proc fcQScrollBar_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScrollBar {.importc: "QScrollBar_new".}
-proc fcQScrollBar_new2(vtbl: pointer, vdata: csize_t): ptr cQScrollBar {.importc: "QScrollBar_new2".}
-proc fcQScrollBar_new3(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQScrollBar {.importc: "QScrollBar_new3".}
-proc fcQScrollBar_new4(vtbl: pointer, vdata: csize_t, param1: cint, parent: pointer): ptr cQScrollBar {.importc: "QScrollBar_new4".}
+proc fcQScrollBar_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScrollBar {.importc: "QScrollBar_new_QWidget".}
+proc fcQScrollBar_new2(vtbl: pointer, vdata: csize_t): ptr cQScrollBar {.importc: "QScrollBar_new".}
+proc fcQScrollBar_new3(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQScrollBar {.importc: "QScrollBar_new_Qt_Orientation".}
+proc fcQScrollBar_new4(vtbl: pointer, vdata: csize_t, param1: cint, parent: pointer): ptr cQScrollBar {.importc: "QScrollBar_new_Qt_Orientation_QWidget".}
 proc fcQScrollBar_staticMetaObject(): pointer {.importc: "QScrollBar_staticMetaObject".}
 
 proc metaObject*(self: gen_qscrollbar_types.QScrollBar): gen_qobjectdefs_types.QMetaObject =
@@ -216,7 +216,7 @@ proc metacall*(self: gen_qscrollbar_types.QScrollBar, param1: cint, param2: cint
   fcQScrollBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscrollbar_types.QScrollBar, s: cstring): string =
-  let v_ms = fcQScrollBar_tr(s)
+  let v_ms = fcQScrollBar_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -228,13 +228,13 @@ proc event*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.Q
   fcQScrollBar_event(self.h, event.h)
 
 proc tr*(_: type gen_qscrollbar_types.QScrollBar, s: cstring, c: cstring): string =
-  let v_ms = fcQScrollBar_tr2(s, c)
+  let v_ms = fcQScrollBar_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qscrollbar_types.QScrollBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScrollBar_tr3(s, c, n)
+  let v_ms = fcQScrollBar_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1264,7 +1264,7 @@ proc fcQScrollBar_method_callback_disconnectNotify(self: pointer, signal: pointe
 
 
 proc setRepeatAction*(self: gen_qscrollbar_types.QScrollBar, action: cint): void =
-  fcQScrollBar_protectedbase_setRepeatAction(self.h, cint(action))
+  fcQScrollBar_protectedbase_setRepeatAction_action(self.h, cint(action))
 
 proc repeatAction*(self: gen_qscrollbar_types.QScrollBar): cint =
   cint(fcQScrollBar_protectedbase_repeatAction(self.h))

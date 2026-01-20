@@ -162,7 +162,7 @@ VirtualQGraphicsLayout* QGraphicsLayout_new(const QGraphicsLayout_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQGraphicsLayout(vtbl) : nullptr;
 }
 
-VirtualQGraphicsLayout* QGraphicsLayout_new2(const QGraphicsLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent) {
+VirtualQGraphicsLayout* QGraphicsLayout_new_parent(const QGraphicsLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLayout(vtbl, parent) : nullptr;
 }

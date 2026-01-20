@@ -21,12 +21,12 @@ QVideoFrameFormat* QVideoFrameFormat_new() {
 	return new (std::nothrow) QVideoFrameFormat();
 }
 
-QVideoFrameFormat* QVideoFrameFormat_new2(QSize* size, int pixelFormat) {
+QVideoFrameFormat* QVideoFrameFormat_new_size_pixelFormat(QSize* size, int pixelFormat) {
 	return new (std::nothrow) QVideoFrameFormat(*size, static_cast<QVideoFrameFormat::PixelFormat>(pixelFormat));
 }
 
-QVideoFrameFormat* QVideoFrameFormat_new3(QVideoFrameFormat* format) {
-	return new (std::nothrow) QVideoFrameFormat(*format);
+QVideoFrameFormat* QVideoFrameFormat_new_from(QVideoFrameFormat* from) {
+	return new (std::nothrow) QVideoFrameFormat(*from);
 }
 
 void QVideoFrameFormat_swap(QVideoFrameFormat* self, QVideoFrameFormat* other) {
@@ -37,8 +37,8 @@ void QVideoFrameFormat_detach(QVideoFrameFormat* self) {
 	self->detach();
 }
 
-void QVideoFrameFormat_operatorAssign(QVideoFrameFormat* self, QVideoFrameFormat* format) {
-	self->operator=(*format);
+void QVideoFrameFormat_operatorAssign(QVideoFrameFormat* self, QVideoFrameFormat* from) {
+	self->operator=(*from);
 }
 
 bool QVideoFrameFormat_operatorEqual(const QVideoFrameFormat* self, QVideoFrameFormat* format) {
@@ -62,11 +62,11 @@ QSize* QVideoFrameFormat_frameSize(const QVideoFrameFormat* self) {
 	return new QSize(self->frameSize());
 }
 
-void QVideoFrameFormat_setFrameSize(QVideoFrameFormat* self, QSize* size) {
+void QVideoFrameFormat_setFrameSize_size(QVideoFrameFormat* self, QSize* size) {
 	self->setFrameSize(*size);
 }
 
-void QVideoFrameFormat_setFrameSize2(QVideoFrameFormat* self, int width, int height) {
+void QVideoFrameFormat_setFrameSize_width_height(QVideoFrameFormat* self, int width, int height) {
 	self->setFrameSize(static_cast<int>(width), static_cast<int>(height));
 }
 

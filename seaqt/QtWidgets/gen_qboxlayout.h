@@ -70,7 +70,7 @@ typedef struct QBoxLayout_VTable{
 	int (*count)(const VirtualQBoxLayout* self);
 	void (*setGeometry)(VirtualQBoxLayout* self, QRect* geometry);
 	QRect* (*geometry)(const VirtualQBoxLayout* self);
-	int (*indexOf)(const VirtualQBoxLayout* self, QWidget* param1);
+	int (*indexOf_QWidget)(const VirtualQBoxLayout* self, QWidget* param1);
 	bool (*isEmpty)(const VirtualQBoxLayout* self);
 	int (*controlTypes)(const VirtualQBoxLayout* self);
 	QLayoutItem* (*replaceWidget)(VirtualQBoxLayout* self, QWidget* from, QWidget* to, int options);
@@ -89,33 +89,33 @@ typedef struct QBoxLayout_VTable{
 void* QBoxLayout_vdata(VirtualQBoxLayout* self);
 VirtualQBoxLayout* vdata_QBoxLayout(void* vdata);
 
-VirtualQBoxLayout* QBoxLayout_new(const QBoxLayout_VTable* vtbl, size_t vdata, int param1);
-VirtualQBoxLayout* QBoxLayout_new2(const QBoxLayout_VTable* vtbl, size_t vdata, int param1, QWidget* parent);
+VirtualQBoxLayout* QBoxLayout_new_QBoxLayout_Direction(const QBoxLayout_VTable* vtbl, size_t vdata, int param1);
+VirtualQBoxLayout* QBoxLayout_new_QBoxLayout_Direction_QWidget(const QBoxLayout_VTable* vtbl, size_t vdata, int param1, QWidget* parent);
 
 void QBoxLayout_virtbase(QBoxLayout* src, QLayout** outptr_QLayout);
 QMetaObject* QBoxLayout_metaObject(const QBoxLayout* self);
 void* QBoxLayout_metacast(QBoxLayout* self, const char* param1);
 int QBoxLayout_metacall(QBoxLayout* self, int param1, int param2, void** param3);
-struct seaqt_string QBoxLayout_tr(const char* s);
+struct seaqt_string QBoxLayout_tr_s(const char* s);
 int QBoxLayout_direction(const QBoxLayout* self);
 void QBoxLayout_setDirection(QBoxLayout* self, int direction);
 void QBoxLayout_addSpacing(QBoxLayout* self, int size);
 void QBoxLayout_addStretch(QBoxLayout* self);
 void QBoxLayout_addSpacerItem(QBoxLayout* self, QSpacerItem* spacerItem);
-void QBoxLayout_addWidget(QBoxLayout* self, QWidget* param1);
-void QBoxLayout_addLayout(QBoxLayout* self, QLayout* layout);
+void QBoxLayout_addWidget_QWidget(QBoxLayout* self, QWidget* param1);
+void QBoxLayout_addLayout_layout(QBoxLayout* self, QLayout* layout);
 void QBoxLayout_addStrut(QBoxLayout* self, int param1);
 void QBoxLayout_addItem(QBoxLayout* self, QLayoutItem* param1);
 void QBoxLayout_insertSpacing(QBoxLayout* self, int index, int size);
-void QBoxLayout_insertStretch(QBoxLayout* self, int index);
+void QBoxLayout_insertStretch_index(QBoxLayout* self, int index);
 void QBoxLayout_insertSpacerItem(QBoxLayout* self, int index, QSpacerItem* spacerItem);
-void QBoxLayout_insertWidget(QBoxLayout* self, int index, QWidget* widget);
-void QBoxLayout_insertLayout(QBoxLayout* self, int index, QLayout* layout);
+void QBoxLayout_insertWidget_index_widget(QBoxLayout* self, int index, QWidget* widget);
+void QBoxLayout_insertLayout_index_layout(QBoxLayout* self, int index, QLayout* layout);
 void QBoxLayout_insertItem(QBoxLayout* self, int index, QLayoutItem* param2);
 int QBoxLayout_spacing(const QBoxLayout* self);
 void QBoxLayout_setSpacing(QBoxLayout* self, int spacing);
-bool QBoxLayout_setStretchFactor(QBoxLayout* self, QWidget* w, int stretch);
-bool QBoxLayout_setStretchFactor2(QBoxLayout* self, QLayout* l, int stretch);
+bool QBoxLayout_setStretchFactor_w_stretch(QBoxLayout* self, QWidget* w, int stretch);
+bool QBoxLayout_setStretchFactor_l_stretch(QBoxLayout* self, QLayout* l, int stretch);
 void QBoxLayout_setStretch(QBoxLayout* self, int index, int stretch);
 int QBoxLayout_stretch(const QBoxLayout* self, int index);
 QSize* QBoxLayout_sizeHint(const QBoxLayout* self);
@@ -130,16 +130,16 @@ QLayoutItem* QBoxLayout_itemAt(const QBoxLayout* self, int param1);
 QLayoutItem* QBoxLayout_takeAt(QBoxLayout* self, int param1);
 int QBoxLayout_count(const QBoxLayout* self);
 void QBoxLayout_setGeometry(QBoxLayout* self, QRect* geometry);
-struct seaqt_string QBoxLayout_tr2(const char* s, const char* c);
-struct seaqt_string QBoxLayout_tr3(const char* s, const char* c, int n);
-void QBoxLayout_addStretchWithStretch(QBoxLayout* self, int stretch);
-void QBoxLayout_addWidget2(QBoxLayout* self, QWidget* param1, int stretch);
-void QBoxLayout_addWidget3(QBoxLayout* self, QWidget* param1, int stretch, int alignment);
-void QBoxLayout_addLayout2(QBoxLayout* self, QLayout* layout, int stretch);
-void QBoxLayout_insertStretch2(QBoxLayout* self, int index, int stretch);
-void QBoxLayout_insertWidget2(QBoxLayout* self, int index, QWidget* widget, int stretch);
-void QBoxLayout_insertWidget3(QBoxLayout* self, int index, QWidget* widget, int stretch, int alignment);
-void QBoxLayout_insertLayout2(QBoxLayout* self, int index, QLayout* layout, int stretch);
+struct seaqt_string QBoxLayout_tr_s_c(const char* s, const char* c);
+struct seaqt_string QBoxLayout_tr_s_c_n(const char* s, const char* c, int n);
+void QBoxLayout_addStretch_stretch(QBoxLayout* self, int stretch);
+void QBoxLayout_addWidget_QWidget_int(QBoxLayout* self, QWidget* param1, int stretch);
+void QBoxLayout_addWidget_QWidget_int_Qt_Alignment(QBoxLayout* self, QWidget* param1, int stretch, int alignment);
+void QBoxLayout_addLayout_layout_stretch(QBoxLayout* self, QLayout* layout, int stretch);
+void QBoxLayout_insertStretch_index_stretch(QBoxLayout* self, int index, int stretch);
+void QBoxLayout_insertWidget_index_widget_stretch(QBoxLayout* self, int index, QWidget* widget, int stretch);
+void QBoxLayout_insertWidget_index_widget_stretch_alignment(QBoxLayout* self, int index, QWidget* widget, int stretch, int alignment);
+void QBoxLayout_insertLayout_index_layout_stretch(QBoxLayout* self, int index, QLayout* layout, int stretch);
 
 QMetaObject* QBoxLayout_virtualbase_metaObject(const VirtualQBoxLayout* self);
 void* QBoxLayout_virtualbase_metacast(VirtualQBoxLayout* self, const char* param1);
@@ -160,7 +160,7 @@ QLayoutItem* QBoxLayout_virtualbase_takeAt(VirtualQBoxLayout* self, int param1);
 int QBoxLayout_virtualbase_count(const VirtualQBoxLayout* self);
 void QBoxLayout_virtualbase_setGeometry(VirtualQBoxLayout* self, QRect* geometry);
 QRect* QBoxLayout_virtualbase_geometry(const VirtualQBoxLayout* self);
-int QBoxLayout_virtualbase_indexOf(const VirtualQBoxLayout* self, QWidget* param1);
+int QBoxLayout_virtualbase_indexOf_QWidget(const VirtualQBoxLayout* self, QWidget* param1);
 bool QBoxLayout_virtualbase_isEmpty(const VirtualQBoxLayout* self);
 int QBoxLayout_virtualbase_controlTypes(const VirtualQBoxLayout* self);
 QLayoutItem* QBoxLayout_virtualbase_replaceWidget(VirtualQBoxLayout* self, QWidget* from, QWidget* to, int options);
@@ -210,7 +210,7 @@ typedef struct QHBoxLayout_VTable{
 	int (*count)(const VirtualQHBoxLayout* self);
 	void (*setGeometry)(VirtualQHBoxLayout* self, QRect* geometry);
 	QRect* (*geometry)(const VirtualQHBoxLayout* self);
-	int (*indexOf)(const VirtualQHBoxLayout* self, QWidget* param1);
+	int (*indexOf_QWidget)(const VirtualQHBoxLayout* self, QWidget* param1);
 	bool (*isEmpty)(const VirtualQHBoxLayout* self);
 	int (*controlTypes)(const VirtualQHBoxLayout* self);
 	QLayoutItem* (*replaceWidget)(VirtualQHBoxLayout* self, QWidget* from, QWidget* to, int options);
@@ -229,16 +229,16 @@ typedef struct QHBoxLayout_VTable{
 void* QHBoxLayout_vdata(VirtualQHBoxLayout* self);
 VirtualQHBoxLayout* vdata_QHBoxLayout(void* vdata);
 
-VirtualQHBoxLayout* QHBoxLayout_new(const QHBoxLayout_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQHBoxLayout* QHBoxLayout_new2(const QHBoxLayout_VTable* vtbl, size_t vdata);
+VirtualQHBoxLayout* QHBoxLayout_new_parent(const QHBoxLayout_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQHBoxLayout* QHBoxLayout_new(const QHBoxLayout_VTable* vtbl, size_t vdata);
 
 void QHBoxLayout_virtbase(QHBoxLayout* src, QBoxLayout** outptr_QBoxLayout);
 QMetaObject* QHBoxLayout_metaObject(const QHBoxLayout* self);
 void* QHBoxLayout_metacast(QHBoxLayout* self, const char* param1);
 int QHBoxLayout_metacall(QHBoxLayout* self, int param1, int param2, void** param3);
-struct seaqt_string QHBoxLayout_tr(const char* s);
-struct seaqt_string QHBoxLayout_tr2(const char* s, const char* c);
-struct seaqt_string QHBoxLayout_tr3(const char* s, const char* c, int n);
+struct seaqt_string QHBoxLayout_tr_s(const char* s);
+struct seaqt_string QHBoxLayout_tr_s_c(const char* s, const char* c);
+struct seaqt_string QHBoxLayout_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QHBoxLayout_virtualbase_metaObject(const VirtualQHBoxLayout* self);
 void* QHBoxLayout_virtualbase_metacast(VirtualQHBoxLayout* self, const char* param1);
@@ -259,7 +259,7 @@ QLayoutItem* QHBoxLayout_virtualbase_takeAt(VirtualQHBoxLayout* self, int param1
 int QHBoxLayout_virtualbase_count(const VirtualQHBoxLayout* self);
 void QHBoxLayout_virtualbase_setGeometry(VirtualQHBoxLayout* self, QRect* geometry);
 QRect* QHBoxLayout_virtualbase_geometry(const VirtualQHBoxLayout* self);
-int QHBoxLayout_virtualbase_indexOf(const VirtualQHBoxLayout* self, QWidget* param1);
+int QHBoxLayout_virtualbase_indexOf_QWidget(const VirtualQHBoxLayout* self, QWidget* param1);
 bool QHBoxLayout_virtualbase_isEmpty(const VirtualQHBoxLayout* self);
 int QHBoxLayout_virtualbase_controlTypes(const VirtualQHBoxLayout* self);
 QLayoutItem* QHBoxLayout_virtualbase_replaceWidget(VirtualQHBoxLayout* self, QWidget* from, QWidget* to, int options);
@@ -309,7 +309,7 @@ typedef struct QVBoxLayout_VTable{
 	int (*count)(const VirtualQVBoxLayout* self);
 	void (*setGeometry)(VirtualQVBoxLayout* self, QRect* geometry);
 	QRect* (*geometry)(const VirtualQVBoxLayout* self);
-	int (*indexOf)(const VirtualQVBoxLayout* self, QWidget* param1);
+	int (*indexOf_QWidget)(const VirtualQVBoxLayout* self, QWidget* param1);
 	bool (*isEmpty)(const VirtualQVBoxLayout* self);
 	int (*controlTypes)(const VirtualQVBoxLayout* self);
 	QLayoutItem* (*replaceWidget)(VirtualQVBoxLayout* self, QWidget* from, QWidget* to, int options);
@@ -328,16 +328,16 @@ typedef struct QVBoxLayout_VTable{
 void* QVBoxLayout_vdata(VirtualQVBoxLayout* self);
 VirtualQVBoxLayout* vdata_QVBoxLayout(void* vdata);
 
-VirtualQVBoxLayout* QVBoxLayout_new(const QVBoxLayout_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQVBoxLayout* QVBoxLayout_new2(const QVBoxLayout_VTable* vtbl, size_t vdata);
+VirtualQVBoxLayout* QVBoxLayout_new_parent(const QVBoxLayout_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQVBoxLayout* QVBoxLayout_new(const QVBoxLayout_VTable* vtbl, size_t vdata);
 
 void QVBoxLayout_virtbase(QVBoxLayout* src, QBoxLayout** outptr_QBoxLayout);
 QMetaObject* QVBoxLayout_metaObject(const QVBoxLayout* self);
 void* QVBoxLayout_metacast(QVBoxLayout* self, const char* param1);
 int QVBoxLayout_metacall(QVBoxLayout* self, int param1, int param2, void** param3);
-struct seaqt_string QVBoxLayout_tr(const char* s);
-struct seaqt_string QVBoxLayout_tr2(const char* s, const char* c);
-struct seaqt_string QVBoxLayout_tr3(const char* s, const char* c, int n);
+struct seaqt_string QVBoxLayout_tr_s(const char* s);
+struct seaqt_string QVBoxLayout_tr_s_c(const char* s, const char* c);
+struct seaqt_string QVBoxLayout_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QVBoxLayout_virtualbase_metaObject(const VirtualQVBoxLayout* self);
 void* QVBoxLayout_virtualbase_metacast(VirtualQVBoxLayout* self, const char* param1);
@@ -358,7 +358,7 @@ QLayoutItem* QVBoxLayout_virtualbase_takeAt(VirtualQVBoxLayout* self, int param1
 int QVBoxLayout_virtualbase_count(const VirtualQVBoxLayout* self);
 void QVBoxLayout_virtualbase_setGeometry(VirtualQVBoxLayout* self, QRect* geometry);
 QRect* QVBoxLayout_virtualbase_geometry(const VirtualQVBoxLayout* self);
-int QVBoxLayout_virtualbase_indexOf(const VirtualQVBoxLayout* self, QWidget* param1);
+int QVBoxLayout_virtualbase_indexOf_QWidget(const VirtualQVBoxLayout* self, QWidget* param1);
 bool QVBoxLayout_virtualbase_isEmpty(const VirtualQVBoxLayout* self);
 int QVBoxLayout_virtualbase_controlTypes(const VirtualQVBoxLayout* self);
 QLayoutItem* QVBoxLayout_virtualbase_replaceWidget(VirtualQVBoxLayout* self, QWidget* from, QWidget* to, int options);

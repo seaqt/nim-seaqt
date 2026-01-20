@@ -24,23 +24,23 @@ QNetworkCookie* QNetworkCookie_new() {
 	return new (std::nothrow) QNetworkCookie();
 }
 
-QNetworkCookie* QNetworkCookie_new2(QNetworkCookie* other) {
-	return new (std::nothrow) QNetworkCookie(*other);
+QNetworkCookie* QNetworkCookie_new_from(QNetworkCookie* from) {
+	return new (std::nothrow) QNetworkCookie(*from);
 }
 
-QNetworkCookie* QNetworkCookie_new3(struct seaqt_string name) {
+QNetworkCookie* QNetworkCookie_new_name(struct seaqt_string name) {
 	QByteArray name_QByteArray(name.data, name.len);
 	return new (std::nothrow) QNetworkCookie(name_QByteArray);
 }
 
-QNetworkCookie* QNetworkCookie_new4(struct seaqt_string name, struct seaqt_string value) {
+QNetworkCookie* QNetworkCookie_new_name_value(struct seaqt_string name, struct seaqt_string value) {
 	QByteArray name_QByteArray(name.data, name.len);
 	QByteArray value_QByteArray(value.data, value.len);
 	return new (std::nothrow) QNetworkCookie(name_QByteArray, value_QByteArray);
 }
 
-void QNetworkCookie_operatorAssign(QNetworkCookie* self, QNetworkCookie* other) {
-	self->operator=(*other);
+void QNetworkCookie_operatorAssign(QNetworkCookie* self, QNetworkCookie* from) {
+	self->operator=(*from);
 }
 
 void QNetworkCookie_swap(QNetworkCookie* self, QNetworkCookie* other) {
@@ -183,7 +183,7 @@ struct seaqt_array /* of QNetworkCookie* */  QNetworkCookie_parseCookies(struct 
 	return _out;
 }
 
-struct seaqt_string QNetworkCookie_toRawFormWithForm(const QNetworkCookie* self, int form) {
+struct seaqt_string QNetworkCookie_toRawForm_form(const QNetworkCookie* self, int form) {
 	QByteArray _qb = self->toRawForm(static_cast<QNetworkCookie::RawForm>(form));
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();

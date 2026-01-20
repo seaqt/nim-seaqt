@@ -49,19 +49,19 @@ proc fcQMargins_setLeft(self: pointer, left: cint): void {.importc: "QMargins_se
 proc fcQMargins_setTop(self: pointer, top: cint): void {.importc: "QMargins_setTop".}
 proc fcQMargins_setRight(self: pointer, right: cint): void {.importc: "QMargins_setRight".}
 proc fcQMargins_setBottom(self: pointer, bottom: cint): void {.importc: "QMargins_setBottom".}
-proc fcQMargins_operatorPlusAssign(self: pointer, margins: pointer): pointer {.importc: "QMargins_operatorPlusAssign".}
-proc fcQMargins_operatorMinusAssign(self: pointer, margins: pointer): pointer {.importc: "QMargins_operatorMinusAssign".}
-proc fcQMargins_operatorPlusAssignWithInt(self: pointer, param1: cint): pointer {.importc: "QMargins_operatorPlusAssignWithInt".}
-proc fcQMargins_operatorMinusAssignWithInt(self: pointer, param1: cint): pointer {.importc: "QMargins_operatorMinusAssignWithInt".}
-proc fcQMargins_operatorMultiplyAssign(self: pointer, param1: cint): pointer {.importc: "QMargins_operatorMultiplyAssign".}
-proc fcQMargins_operatorDivideAssign(self: pointer, param1: cint): pointer {.importc: "QMargins_operatorDivideAssign".}
-proc fcQMargins_operatorMultiplyAssignWithQreal(self: pointer, param1: float64): pointer {.importc: "QMargins_operatorMultiplyAssignWithQreal".}
-proc fcQMargins_operatorDivideAssignWithQreal(self: pointer, param1: float64): pointer {.importc: "QMargins_operatorDivideAssignWithQreal".}
+proc fcQMargins_operatorPlusAssign_QMargins(self: pointer, margins: pointer): pointer {.importc: "QMargins_operatorPlusAssign_QMargins".}
+proc fcQMargins_operatorMinusAssign_QMargins(self: pointer, margins: pointer): pointer {.importc: "QMargins_operatorMinusAssign_QMargins".}
+proc fcQMargins_operatorPlusAssignInt(self: pointer, param1: cint): pointer {.importc: "QMargins_operatorPlusAssign_int".}
+proc fcQMargins_operatorMinusAssignInt(self: pointer, param1: cint): pointer {.importc: "QMargins_operatorMinusAssign_int".}
+proc fcQMargins_operatorMultiplyAssignInt(self: pointer, param1: cint): pointer {.importc: "QMargins_operatorMultiplyAssign_int".}
+proc fcQMargins_operatorDivideAssignInt(self: pointer, param1: cint): pointer {.importc: "QMargins_operatorDivideAssign_int".}
+proc fcQMargins_operatorMultiplyAssignQreal(self: pointer, param1: float64): pointer {.importc: "QMargins_operatorMultiplyAssign_qreal".}
+proc fcQMargins_operatorDivideAssignQreal(self: pointer, param1: float64): pointer {.importc: "QMargins_operatorDivideAssign_qreal".}
 proc fcQMargins_toMarginsF(self: pointer): pointer {.importc: "QMargins_toMarginsF".}
-proc fcQMargins_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMargins_operatorAssign".}
+proc fcQMargins_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMargins_operatorAssign".}
 proc fcQMargins_new(): ptr cQMargins {.importc: "QMargins_new".}
-proc fcQMargins_new2(left: cint, top: cint, right: cint, bottom: cint): ptr cQMargins {.importc: "QMargins_new2".}
-proc fcQMargins_new3(param1: pointer): ptr cQMargins {.importc: "QMargins_new3".}
+proc fcQMargins_new2(left: cint, top: cint, right: cint, bottom: cint): ptr cQMargins {.importc: "QMargins_new_left_top_right_bottom".}
+proc fcQMargins_new3(fromVal: pointer): ptr cQMargins {.importc: "QMargins_new_from".}
 proc fcQMarginsF_isNull(self: pointer): bool {.importc: "QMarginsF_isNull".}
 proc fcQMarginsF_left(self: pointer): float64 {.importc: "QMarginsF_left".}
 proc fcQMarginsF_top(self: pointer): float64 {.importc: "QMarginsF_top".}
@@ -71,18 +71,18 @@ proc fcQMarginsF_setLeft(self: pointer, aleft: float64): void {.importc: "QMargi
 proc fcQMarginsF_setTop(self: pointer, atop: float64): void {.importc: "QMarginsF_setTop".}
 proc fcQMarginsF_setRight(self: pointer, aright: float64): void {.importc: "QMarginsF_setRight".}
 proc fcQMarginsF_setBottom(self: pointer, abottom: float64): void {.importc: "QMarginsF_setBottom".}
-proc fcQMarginsF_operatorPlusAssign(self: pointer, margins: pointer): pointer {.importc: "QMarginsF_operatorPlusAssign".}
-proc fcQMarginsF_operatorMinusAssign(self: pointer, margins: pointer): pointer {.importc: "QMarginsF_operatorMinusAssign".}
-proc fcQMarginsF_operatorPlusAssignWithAddend(self: pointer, addend: float64): pointer {.importc: "QMarginsF_operatorPlusAssignWithAddend".}
-proc fcQMarginsF_operatorMinusAssignWithSubtrahend(self: pointer, subtrahend: float64): pointer {.importc: "QMarginsF_operatorMinusAssignWithSubtrahend".}
+proc fcQMarginsF_operatorPlusAssignMargins(self: pointer, margins: pointer): pointer {.importc: "QMarginsF_operatorPlusAssign_margins".}
+proc fcQMarginsF_operatorMinusAssignMargins(self: pointer, margins: pointer): pointer {.importc: "QMarginsF_operatorMinusAssign_margins".}
+proc fcQMarginsF_operatorPlusAssignAddend(self: pointer, addend: float64): pointer {.importc: "QMarginsF_operatorPlusAssign_addend".}
+proc fcQMarginsF_operatorMinusAssignSubtrahend(self: pointer, subtrahend: float64): pointer {.importc: "QMarginsF_operatorMinusAssign_subtrahend".}
 proc fcQMarginsF_operatorMultiplyAssign(self: pointer, factor: float64): pointer {.importc: "QMarginsF_operatorMultiplyAssign".}
 proc fcQMarginsF_operatorDivideAssign(self: pointer, divisor: float64): pointer {.importc: "QMarginsF_operatorDivideAssign".}
 proc fcQMarginsF_toMargins(self: pointer): pointer {.importc: "QMarginsF_toMargins".}
-proc fcQMarginsF_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMarginsF_operatorAssign".}
+proc fcQMarginsF_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMarginsF_operatorAssign".}
 proc fcQMarginsF_new(): ptr cQMarginsF {.importc: "QMarginsF_new".}
-proc fcQMarginsF_new2(left: float64, top: float64, right: float64, bottom: float64): ptr cQMarginsF {.importc: "QMarginsF_new2".}
-proc fcQMarginsF_new3(margins: pointer): ptr cQMarginsF {.importc: "QMarginsF_new3".}
-proc fcQMarginsF_new4(param1: pointer): ptr cQMarginsF {.importc: "QMarginsF_new4".}
+proc fcQMarginsF_new2(left: float64, top: float64, right: float64, bottom: float64): ptr cQMarginsF {.importc: "QMarginsF_new_left_top_right_bottom".}
+proc fcQMarginsF_new3(margins: pointer): ptr cQMarginsF {.importc: "QMarginsF_new_margins".}
+proc fcQMarginsF_new4(fromVal: pointer): ptr cQMarginsF {.importc: "QMarginsF_new_from".}
 
 proc isNull*(self: gen_qmargins_types.QMargins): bool =
   fcQMargins_isNull(self.h)
@@ -112,34 +112,34 @@ proc setBottom*(self: gen_qmargins_types.QMargins, bottom: cint): void =
   fcQMargins_setBottom(self.h, bottom)
 
 proc operatorPlusAssign*(self: gen_qmargins_types.QMargins, margins: gen_qmargins_types.QMargins): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMargins_operatorPlusAssign(self.h, margins.h), owned: false)
+  gen_qmargins_types.QMargins(h: fcQMargins_operatorPlusAssign_QMargins(self.h, margins.h), owned: false)
 
 proc operatorMinusAssign*(self: gen_qmargins_types.QMargins, margins: gen_qmargins_types.QMargins): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMargins_operatorMinusAssign(self.h, margins.h), owned: false)
+  gen_qmargins_types.QMargins(h: fcQMargins_operatorMinusAssign_QMargins(self.h, margins.h), owned: false)
 
 proc operatorPlusAssign*(self: gen_qmargins_types.QMargins, param1: cint): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMargins_operatorPlusAssignWithInt(self.h, param1), owned: false)
+  gen_qmargins_types.QMargins(h: fcQMargins_operatorPlusAssignInt(self.h, param1), owned: false)
 
 proc operatorMinusAssign*(self: gen_qmargins_types.QMargins, param1: cint): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMargins_operatorMinusAssignWithInt(self.h, param1), owned: false)
+  gen_qmargins_types.QMargins(h: fcQMargins_operatorMinusAssignInt(self.h, param1), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qmargins_types.QMargins, param1: cint): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMargins_operatorMultiplyAssign(self.h, param1), owned: false)
+  gen_qmargins_types.QMargins(h: fcQMargins_operatorMultiplyAssignInt(self.h, param1), owned: false)
 
 proc operatorDivideAssign*(self: gen_qmargins_types.QMargins, param1: cint): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMargins_operatorDivideAssign(self.h, param1), owned: false)
+  gen_qmargins_types.QMargins(h: fcQMargins_operatorDivideAssignInt(self.h, param1), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qmargins_types.QMargins, param1: float64): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMargins_operatorMultiplyAssignWithQreal(self.h, param1), owned: false)
+  gen_qmargins_types.QMargins(h: fcQMargins_operatorMultiplyAssignQreal(self.h, param1), owned: false)
 
 proc operatorDivideAssign*(self: gen_qmargins_types.QMargins, param1: float64): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMargins_operatorDivideAssignWithQreal(self.h, param1), owned: false)
+  gen_qmargins_types.QMargins(h: fcQMargins_operatorDivideAssignQreal(self.h, param1), owned: false)
 
 proc toMarginsF*(self: gen_qmargins_types.QMargins): gen_qmargins_types.QMarginsF =
   gen_qmargins_types.QMarginsF(h: fcQMargins_toMarginsF(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qmargins_types.QMargins, param1: gen_qmargins_types.QMargins): void =
-  fcQMargins_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qmargins_types.QMargins, fromVal: gen_qmargins_types.QMargins): void =
+  fcQMargins_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qmargins_types.QMargins): gen_qmargins_types.QMargins =
   let tmp = gen_qmargins_types.QMargins(h: fcQMargins_new(), owned: true)
@@ -149,8 +149,8 @@ proc create*(T: type gen_qmargins_types.QMargins,
   let tmp = gen_qmargins_types.QMargins(h: fcQMargins_new2(left, top, right, bottom), owned: true)
   tmp
 proc create*(T: type gen_qmargins_types.QMargins,
-    param1: gen_qmargins_types.QMargins): gen_qmargins_types.QMargins =
-  let tmp = gen_qmargins_types.QMargins(h: fcQMargins_new3(param1.h), owned: true)
+    fromVal: gen_qmargins_types.QMargins): gen_qmargins_types.QMargins =
+  let tmp = gen_qmargins_types.QMargins(h: fcQMargins_new3(fromVal.h), owned: true)
   tmp
 proc isNull*(self: gen_qmargins_types.QMarginsF): bool =
   fcQMarginsF_isNull(self.h)
@@ -180,16 +180,16 @@ proc setBottom*(self: gen_qmargins_types.QMarginsF, abottom: float64): void =
   fcQMarginsF_setBottom(self.h, abottom)
 
 proc operatorPlusAssign*(self: gen_qmargins_types.QMarginsF, margins: gen_qmargins_types.QMarginsF): gen_qmargins_types.QMarginsF =
-  gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorPlusAssign(self.h, margins.h), owned: false)
+  gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorPlusAssignMargins(self.h, margins.h), owned: false)
 
 proc operatorMinusAssign*(self: gen_qmargins_types.QMarginsF, margins: gen_qmargins_types.QMarginsF): gen_qmargins_types.QMarginsF =
-  gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorMinusAssign(self.h, margins.h), owned: false)
+  gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorMinusAssignMargins(self.h, margins.h), owned: false)
 
 proc operatorPlusAssign*(self: gen_qmargins_types.QMarginsF, addend: float64): gen_qmargins_types.QMarginsF =
-  gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorPlusAssignWithAddend(self.h, addend), owned: false)
+  gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorPlusAssignAddend(self.h, addend), owned: false)
 
 proc operatorMinusAssign*(self: gen_qmargins_types.QMarginsF, subtrahend: float64): gen_qmargins_types.QMarginsF =
-  gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorMinusAssignWithSubtrahend(self.h, subtrahend), owned: false)
+  gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorMinusAssignSubtrahend(self.h, subtrahend), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qmargins_types.QMarginsF, factor: float64): gen_qmargins_types.QMarginsF =
   gen_qmargins_types.QMarginsF(h: fcQMarginsF_operatorMultiplyAssign(self.h, factor), owned: false)
@@ -200,8 +200,8 @@ proc operatorDivideAssign*(self: gen_qmargins_types.QMarginsF, divisor: float64)
 proc toMargins*(self: gen_qmargins_types.QMarginsF): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQMarginsF_toMargins(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qmargins_types.QMarginsF, param1: gen_qmargins_types.QMarginsF): void =
-  fcQMarginsF_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qmargins_types.QMarginsF, fromVal: gen_qmargins_types.QMarginsF): void =
+  fcQMarginsF_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qmargins_types.QMarginsF): gen_qmargins_types.QMarginsF =
   let tmp = gen_qmargins_types.QMarginsF(h: fcQMarginsF_new(), owned: true)
@@ -215,6 +215,6 @@ proc create*(T: type gen_qmargins_types.QMarginsF,
   let tmp = gen_qmargins_types.QMarginsF(h: fcQMarginsF_new3(margins.h), owned: true)
   tmp
 proc create*(T: type gen_qmargins_types.QMarginsF,
-    param1: gen_qmargins_types.QMarginsF): gen_qmargins_types.QMarginsF =
-  let tmp = gen_qmargins_types.QMarginsF(h: fcQMarginsF_new4(param1.h), owned: true)
+    fromVal: gen_qmargins_types.QMarginsF): gen_qmargins_types.QMarginsF =
+  let tmp = gen_qmargins_types.QMarginsF(h: fcQMarginsF_new4(fromVal.h), owned: true)
   tmp

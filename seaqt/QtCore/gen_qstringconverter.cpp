@@ -21,19 +21,19 @@ QStringEncoder* QStringEncoder_new() {
 	return new (std::nothrow) QStringEncoder();
 }
 
-QStringEncoder* QStringEncoder_new2(int encoding) {
+QStringEncoder* QStringEncoder_new_encoding(int encoding) {
 	return new (std::nothrow) QStringEncoder(static_cast<QStringConverter::Encoding>(encoding));
 }
 
-QStringEncoder* QStringEncoder_new3(const char* name) {
+QStringEncoder* QStringEncoder_new_name(const char* name) {
 	return new (std::nothrow) QStringEncoder(name);
 }
 
-QStringEncoder* QStringEncoder_new4(int encoding, int flags) {
+QStringEncoder* QStringEncoder_new_encoding_flags(int encoding, int flags) {
 	return new (std::nothrow) QStringEncoder(static_cast<QStringConverter::Encoding>(encoding), static_cast<QStringConverterBase::Flags>(flags));
 }
 
-QStringEncoder* QStringEncoder_new5(const char* name, int flags) {
+QStringEncoder* QStringEncoder_new_name_flags(const char* name, int flags) {
 	return new (std::nothrow) QStringEncoder(name, static_cast<QStringConverterBase::Flags>(flags));
 }
 
@@ -50,23 +50,23 @@ void QStringEncoder_delete(QStringEncoder* self) {
 	delete self;
 }
 
-QStringDecoder* QStringDecoder_new(int encoding) {
+QStringDecoder* QStringDecoder_new_encoding(int encoding) {
 	return new (std::nothrow) QStringDecoder(static_cast<QStringConverter::Encoding>(encoding));
 }
 
-QStringDecoder* QStringDecoder_new2() {
+QStringDecoder* QStringDecoder_new() {
 	return new (std::nothrow) QStringDecoder();
 }
 
-QStringDecoder* QStringDecoder_new3(const char* name) {
+QStringDecoder* QStringDecoder_new_name(const char* name) {
 	return new (std::nothrow) QStringDecoder(name);
 }
 
-QStringDecoder* QStringDecoder_new4(int encoding, int flags) {
+QStringDecoder* QStringDecoder_new_encoding_flags(int encoding, int flags) {
 	return new (std::nothrow) QStringDecoder(static_cast<QStringConverter::Encoding>(encoding), static_cast<QStringConverterBase::Flags>(flags));
 }
 
-QStringDecoder* QStringDecoder_new5(const char* name, int f) {
+QStringDecoder* QStringDecoder_new_name_f(const char* name, int f) {
 	return new (std::nothrow) QStringDecoder(name, static_cast<QStringConverterBase::Flags>(f));
 }
 

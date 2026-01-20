@@ -65,13 +65,13 @@ type cQSyntaxHighlighter*{.exportc: "QSyntaxHighlighter", incompleteStruct.} = o
 proc fcQSyntaxHighlighter_metaObject(self: pointer): pointer {.importc: "QSyntaxHighlighter_metaObject".}
 proc fcQSyntaxHighlighter_metacast(self: pointer, param1: cstring): pointer {.importc: "QSyntaxHighlighter_metacast".}
 proc fcQSyntaxHighlighter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSyntaxHighlighter_metacall".}
-proc fcQSyntaxHighlighter_tr(s: cstring): struct_seaqt_string {.importc: "QSyntaxHighlighter_tr".}
+proc fcQSyntaxHighlighter_trS(s: cstring): struct_seaqt_string {.importc: "QSyntaxHighlighter_tr_s".}
 proc fcQSyntaxHighlighter_setDocument(self: pointer, doc: pointer): void {.importc: "QSyntaxHighlighter_setDocument".}
 proc fcQSyntaxHighlighter_document(self: pointer): pointer {.importc: "QSyntaxHighlighter_document".}
 proc fcQSyntaxHighlighter_rehighlight(self: pointer): void {.importc: "QSyntaxHighlighter_rehighlight".}
 proc fcQSyntaxHighlighter_rehighlightBlock(self: pointer, blockVal: pointer): void {.importc: "QSyntaxHighlighter_rehighlightBlock".}
-proc fcQSyntaxHighlighter_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSyntaxHighlighter_tr2".}
-proc fcQSyntaxHighlighter_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSyntaxHighlighter_tr3".}
+proc fcQSyntaxHighlighter_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSyntaxHighlighter_tr_s_c".}
+proc fcQSyntaxHighlighter_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSyntaxHighlighter_tr_s_c_n".}
 proc fcQSyntaxHighlighter_vdata(self: pointer): ptr pointer {.importc: "QSyntaxHighlighter_vdata".}
 proc fvdata_cQSyntaxHighlighter(self: pointer): pointer {.importc: "vdata_QSyntaxHighlighter".}
 
@@ -98,9 +98,9 @@ proc fcQSyntaxHighlighter_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQSyntaxHighlighter_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSyntaxHighlighter_virtualbase_customEvent".}
 proc fcQSyntaxHighlighter_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSyntaxHighlighter_virtualbase_connectNotify".}
 proc fcQSyntaxHighlighter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSyntaxHighlighter_virtualbase_disconnectNotify".}
-proc fcQSyntaxHighlighter_protectedbase_setFormat(self: pointer, start: cint, count: cint, format: pointer): void {.importc: "QSyntaxHighlighter_protectedbase_setFormat".}
-proc fcQSyntaxHighlighter_protectedbase_setFormat2(self: pointer, start: cint, count: cint, color: pointer): void {.importc: "QSyntaxHighlighter_protectedbase_setFormat2".}
-proc fcQSyntaxHighlighter_protectedbase_setFormat3(self: pointer, start: cint, count: cint, font: pointer): void {.importc: "QSyntaxHighlighter_protectedbase_setFormat3".}
+proc fcQSyntaxHighlighter_protectedbase_setFormat_start_count_format(self: pointer, start: cint, count: cint, format: pointer): void {.importc: "QSyntaxHighlighter_protectedbase_setFormat_start_count_format".}
+proc fcQSyntaxHighlighter_protectedbase_setFormat_start_count_color(self: pointer, start: cint, count: cint, color: pointer): void {.importc: "QSyntaxHighlighter_protectedbase_setFormat_start_count_color".}
+proc fcQSyntaxHighlighter_protectedbase_setFormat_start_count_font(self: pointer, start: cint, count: cint, font: pointer): void {.importc: "QSyntaxHighlighter_protectedbase_setFormat_start_count_font".}
 proc fcQSyntaxHighlighter_protectedbase_format(self: pointer, pos: cint): pointer {.importc: "QSyntaxHighlighter_protectedbase_format".}
 proc fcQSyntaxHighlighter_protectedbase_previousBlockState(self: pointer): cint {.importc: "QSyntaxHighlighter_protectedbase_previousBlockState".}
 proc fcQSyntaxHighlighter_protectedbase_currentBlockState(self: pointer): cint {.importc: "QSyntaxHighlighter_protectedbase_currentBlockState".}
@@ -112,8 +112,8 @@ proc fcQSyntaxHighlighter_protectedbase_sender(self: pointer): pointer {.importc
 proc fcQSyntaxHighlighter_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSyntaxHighlighter_protectedbase_senderSignalIndex".}
 proc fcQSyntaxHighlighter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSyntaxHighlighter_protectedbase_receivers".}
 proc fcQSyntaxHighlighter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSyntaxHighlighter_protectedbase_isSignalConnected".}
-proc fcQSyntaxHighlighter_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSyntaxHighlighter {.importc: "QSyntaxHighlighter_new".}
-proc fcQSyntaxHighlighter_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSyntaxHighlighter {.importc: "QSyntaxHighlighter_new2".}
+proc fcQSyntaxHighlighter_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSyntaxHighlighter {.importc: "QSyntaxHighlighter_new_QObject".}
+proc fcQSyntaxHighlighter_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSyntaxHighlighter {.importc: "QSyntaxHighlighter_new_QTextDocument".}
 proc fcQSyntaxHighlighter_staticMetaObject(): pointer {.importc: "QSyntaxHighlighter_staticMetaObject".}
 
 proc metaObject*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qobjectdefs_types.QMetaObject =
@@ -126,7 +126,7 @@ proc metacall*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, param1: ci
   fcQSyntaxHighlighter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring): string =
-  let v_ms = fcQSyntaxHighlighter_tr(s)
+  let v_ms = fcQSyntaxHighlighter_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -144,13 +144,13 @@ proc rehighlightBlock*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, bl
   fcQSyntaxHighlighter_rehighlightBlock(self.h, blockVal.h)
 
 proc tr*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring, c: cstring): string =
-  let v_ms = fcQSyntaxHighlighter_tr2(s, c)
+  let v_ms = fcQSyntaxHighlighter_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSyntaxHighlighter_tr3(s, c, n)
+  let v_ms = fcQSyntaxHighlighter_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -387,13 +387,13 @@ proc fcQSyntaxHighlighter_method_callback_disconnectNotify(self: pointer, signal
 
 
 proc setFormat*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, start: cint, count: cint, format: gen_qtextformat_types.QTextCharFormat): void =
-  fcQSyntaxHighlighter_protectedbase_setFormat(self.h, start, count, format.h)
+  fcQSyntaxHighlighter_protectedbase_setFormat_start_count_format(self.h, start, count, format.h)
 
 proc setFormat*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, start: cint, count: cint, color: gen_qcolor_types.QColor): void =
-  fcQSyntaxHighlighter_protectedbase_setFormat2(self.h, start, count, color.h)
+  fcQSyntaxHighlighter_protectedbase_setFormat_start_count_color(self.h, start, count, color.h)
 
 proc setFormat*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, start: cint, count: cint, font: gen_qfont_types.QFont): void =
-  fcQSyntaxHighlighter_protectedbase_setFormat3(self.h, start, count, font.h)
+  fcQSyntaxHighlighter_protectedbase_setFormat_start_count_font(self.h, start, count, font.h)
 
 proc format*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, pos: cint): gen_qtextformat_types.QTextCharFormat =
   gen_qtextformat_types.QTextCharFormat(h: fcQSyntaxHighlighter_protectedbase_format(self.h, pos), owned: true)

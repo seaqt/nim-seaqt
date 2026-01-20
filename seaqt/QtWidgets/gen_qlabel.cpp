@@ -711,34 +711,34 @@ public:
 	friend bool QLabel_protectedbase_isSignalConnected(const VirtualQLabel* self, QMetaMethod* signal);
 };
 
-VirtualQLabel* QLabel_new(const QLabel_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQLabel* QLabel_new_parent(const QLabel_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLabel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLabel(vtbl, parent) : nullptr;
 }
 
-VirtualQLabel* QLabel_new2(const QLabel_VTable* vtbl, size_t vdata) {
+VirtualQLabel* QLabel_new(const QLabel_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLabel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLabel(vtbl) : nullptr;
 }
 
-VirtualQLabel* QLabel_new3(const QLabel_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQLabel* QLabel_new_text(const QLabel_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLabel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLabel(vtbl, text_QString) : nullptr;
 }
 
-VirtualQLabel* QLabel_new4(const QLabel_VTable* vtbl, size_t vdata, QWidget* parent, int f) {
+VirtualQLabel* QLabel_new_parent_f(const QLabel_VTable* vtbl, size_t vdata, QWidget* parent, int f) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLabel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLabel(vtbl, parent, static_cast<Qt::WindowFlags>(f)) : nullptr;
 }
 
-VirtualQLabel* QLabel_new5(const QLabel_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
+VirtualQLabel* QLabel_new_text_parent(const QLabel_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLabel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLabel(vtbl, text_QString, parent) : nullptr;
 }
 
-VirtualQLabel* QLabel_new6(const QLabel_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent, int f) {
+VirtualQLabel* QLabel_new_text_parent_f(const QLabel_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent, int f) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLabel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLabel(vtbl, text_QString, parent, static_cast<Qt::WindowFlags>(f)) : nullptr;
@@ -760,7 +760,7 @@ int QLabel_metacall(QLabel* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QLabel_tr(const char* s) {
+struct seaqt_string QLabel_tr_s(const char* s) {
 	QString _ret = QLabel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -782,19 +782,19 @@ struct seaqt_string QLabel_text(const QLabel* self) {
 	return _ms;
 }
 
-QPixmap* QLabel_pixmap(const QLabel* self, int param1) {
+QPixmap* QLabel_pixmap_Qt_ReturnByValueConstant(const QLabel* self, int param1) {
 	return new QPixmap(self->pixmap(static_cast<Qt::ReturnByValueConstant>(param1)));
 }
 
-QPixmap* QLabel_pixmap2(const QLabel* self) {
+QPixmap* QLabel_pixmap(const QLabel* self) {
 	return new QPixmap(self->pixmap());
 }
 
-QPicture* QLabel_picture(const QLabel* self, int param1) {
+QPicture* QLabel_picture_Qt_ReturnByValueConstant(const QLabel* self, int param1) {
 	return new QPicture(self->picture(static_cast<Qt::ReturnByValueConstant>(param1)));
 }
 
-QPicture* QLabel_picture2(const QLabel* self) {
+QPicture* QLabel_picture(const QLabel* self) {
 	return new QPicture(self->picture());
 }
 
@@ -929,11 +929,11 @@ void QLabel_setMovie(QLabel* self, QMovie* movie) {
 	self->setMovie(movie);
 }
 
-void QLabel_setNum(QLabel* self, int num) {
+void QLabel_setNum_int(QLabel* self, int num) {
 	self->setNum(static_cast<int>(num));
 }
 
-void QLabel_setNumWithNum(QLabel* self, double num) {
+void QLabel_setNum_double(QLabel* self, double num) {
 	self->setNum(static_cast<double>(num));
 }
 
@@ -989,7 +989,7 @@ void QLabel_connect_linkHovered(QLabel* self, intptr_t slot, void (*callback)(in
 	QLabel::connect(self, static_cast<void (QLabel::*)(const QString&)>(&QLabel::linkHovered), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QLabel_tr2(const char* s, const char* c) {
+struct seaqt_string QLabel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QLabel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1000,7 +1000,7 @@ struct seaqt_string QLabel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLabel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QLabel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLabel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

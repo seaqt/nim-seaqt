@@ -124,17 +124,17 @@ void* QRasterWindow_vdata(VirtualQRasterWindow* self);
 VirtualQRasterWindow* vdata_QRasterWindow(void* vdata);
 
 VirtualQRasterWindow* QRasterWindow_new(const QRasterWindow_VTable* vtbl, size_t vdata);
-VirtualQRasterWindow* QRasterWindow_new2(const QRasterWindow_VTable* vtbl, size_t vdata, QWindow* parent);
+VirtualQRasterWindow* QRasterWindow_new_parent(const QRasterWindow_VTable* vtbl, size_t vdata, QWindow* parent);
 
 void QRasterWindow_virtbase(QRasterWindow* src, QPaintDeviceWindow** outptr_QPaintDeviceWindow);
 QMetaObject* QRasterWindow_metaObject(const QRasterWindow* self);
 void* QRasterWindow_metacast(QRasterWindow* self, const char* param1);
 int QRasterWindow_metacall(QRasterWindow* self, int param1, int param2, void** param3);
-struct seaqt_string QRasterWindow_tr(const char* s);
+struct seaqt_string QRasterWindow_tr_s(const char* s);
 int QRasterWindow_metric(const QRasterWindow* self, int metric);
 QPaintDevice* QRasterWindow_redirected(const QRasterWindow* self, QPoint* param1);
-struct seaqt_string QRasterWindow_tr2(const char* s, const char* c);
-struct seaqt_string QRasterWindow_tr3(const char* s, const char* c, int n);
+struct seaqt_string QRasterWindow_tr_s_c(const char* s, const char* c);
+struct seaqt_string QRasterWindow_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QRasterWindow_virtualbase_metaObject(const VirtualQRasterWindow* self);
 void* QRasterWindow_virtualbase_metacast(VirtualQRasterWindow* self, const char* param1);

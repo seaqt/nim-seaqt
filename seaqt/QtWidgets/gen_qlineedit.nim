@@ -99,7 +99,7 @@ type cQLineEdit*{.exportc: "QLineEdit", incompleteStruct.} = object
 proc fcQLineEdit_metaObject(self: pointer): pointer {.importc: "QLineEdit_metaObject".}
 proc fcQLineEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QLineEdit_metacast".}
 proc fcQLineEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLineEdit_metacall".}
-proc fcQLineEdit_tr(s: cstring): struct_seaqt_string {.importc: "QLineEdit_tr".}
+proc fcQLineEdit_trS(s: cstring): struct_seaqt_string {.importc: "QLineEdit_tr_s".}
 proc fcQLineEdit_text(self: pointer): struct_seaqt_string {.importc: "QLineEdit_text".}
 proc fcQLineEdit_displayText(self: pointer): struct_seaqt_string {.importc: "QLineEdit_displayText".}
 proc fcQLineEdit_placeholderText(self: pointer): struct_seaqt_string {.importc: "QLineEdit_placeholderText".}
@@ -125,8 +125,8 @@ proc fcQLineEdit_setCursorPosition(self: pointer, cursorPosition: cint): void {.
 proc fcQLineEdit_cursorPositionAt(self: pointer, pos: pointer): cint {.importc: "QLineEdit_cursorPositionAt".}
 proc fcQLineEdit_setAlignment(self: pointer, flag: cint): void {.importc: "QLineEdit_setAlignment".}
 proc fcQLineEdit_alignment(self: pointer): cint {.importc: "QLineEdit_alignment".}
-proc fcQLineEdit_cursorForward(self: pointer, mark: bool): void {.importc: "QLineEdit_cursorForward".}
-proc fcQLineEdit_cursorBackward(self: pointer, mark: bool): void {.importc: "QLineEdit_cursorBackward".}
+proc fcQLineEdit_cursorForwardMark(self: pointer, mark: bool): void {.importc: "QLineEdit_cursorForward_mark".}
+proc fcQLineEdit_cursorBackwardMark(self: pointer, mark: bool): void {.importc: "QLineEdit_cursorBackward_mark".}
 proc fcQLineEdit_cursorWordForward(self: pointer, mark: bool): void {.importc: "QLineEdit_cursorWordForward".}
 proc fcQLineEdit_cursorWordBackward(self: pointer, mark: bool): void {.importc: "QLineEdit_cursorWordBackward".}
 proc fcQLineEdit_backspace(self: pointer): void {.importc: "QLineEdit_backspace".}
@@ -150,11 +150,11 @@ proc fcQLineEdit_cursorMoveStyle(self: pointer): cint {.importc: "QLineEdit_curs
 proc fcQLineEdit_inputMask(self: pointer): struct_seaqt_string {.importc: "QLineEdit_inputMask".}
 proc fcQLineEdit_setInputMask(self: pointer, inputMask: struct_seaqt_string): void {.importc: "QLineEdit_setInputMask".}
 proc fcQLineEdit_hasAcceptableInput(self: pointer): bool {.importc: "QLineEdit_hasAcceptableInput".}
-proc fcQLineEdit_setTextMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QLineEdit_setTextMargins".}
-proc fcQLineEdit_setTextMarginsWithMargins(self: pointer, margins: pointer): void {.importc: "QLineEdit_setTextMarginsWithMargins".}
+proc fcQLineEdit_setTextMarginsLeftTopRightBottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QLineEdit_setTextMargins_left_top_right_bottom".}
+proc fcQLineEdit_setTextMarginsMargins(self: pointer, margins: pointer): void {.importc: "QLineEdit_setTextMargins_margins".}
 proc fcQLineEdit_textMargins(self: pointer): pointer {.importc: "QLineEdit_textMargins".}
-proc fcQLineEdit_addAction(self: pointer, action: pointer, position: cint): void {.importc: "QLineEdit_addAction".}
-proc fcQLineEdit_addAction2(self: pointer, icon: pointer, position: cint): pointer {.importc: "QLineEdit_addAction2".}
+proc fcQLineEdit_addActionActionPosition(self: pointer, action: pointer, position: cint): void {.importc: "QLineEdit_addAction_action_position".}
+proc fcQLineEdit_addActionIconPosition(self: pointer, icon: pointer, position: cint): pointer {.importc: "QLineEdit_addAction_icon_position".}
 proc fcQLineEdit_setText(self: pointer, text: struct_seaqt_string): void {.importc: "QLineEdit_setText".}
 proc fcQLineEdit_clear(self: pointer): void {.importc: "QLineEdit_clear".}
 proc fcQLineEdit_selectAll(self: pointer): void {.importc: "QLineEdit_selectAll".}
@@ -180,14 +180,14 @@ proc fcQLineEdit_selectionChanged(self: pointer): void {.importc: "QLineEdit_sel
 proc fcQLineEdit_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLineEdit_connect_selectionChanged".}
 proc fcQLineEdit_inputRejected(self: pointer): void {.importc: "QLineEdit_inputRejected".}
 proc fcQLineEdit_connect_inputRejected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLineEdit_connect_inputRejected".}
-proc fcQLineEdit_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QLineEdit_inputMethodQuery".}
-proc fcQLineEdit_inputMethodQuery2(self: pointer, property: cint, argument: pointer): pointer {.importc: "QLineEdit_inputMethodQuery2".}
+proc fcQLineEdit_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QLineEdit_inputMethodQuery_Qt_InputMethodQuery".}
+proc fcQLineEdit_inputMethodQuery_Qt_InputMethodQuery_QVariant(self: pointer, property: cint, argument: pointer): pointer {.importc: "QLineEdit_inputMethodQuery_Qt_InputMethodQuery_QVariant".}
 proc fcQLineEdit_timerEvent(self: pointer, param1: pointer): void {.importc: "QLineEdit_timerEvent".}
 proc fcQLineEdit_event(self: pointer, param1: pointer): bool {.importc: "QLineEdit_event".}
-proc fcQLineEdit_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLineEdit_tr2".}
-proc fcQLineEdit_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLineEdit_tr3".}
-proc fcQLineEdit_cursorForward2(self: pointer, mark: bool, steps: cint): void {.importc: "QLineEdit_cursorForward2".}
-proc fcQLineEdit_cursorBackward2(self: pointer, mark: bool, steps: cint): void {.importc: "QLineEdit_cursorBackward2".}
+proc fcQLineEdit_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLineEdit_tr_s_c".}
+proc fcQLineEdit_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLineEdit_tr_s_c_n".}
+proc fcQLineEdit_cursorForwardMarkSteps(self: pointer, mark: bool, steps: cint): void {.importc: "QLineEdit_cursorForward_mark_steps".}
+proc fcQLineEdit_cursorBackwardMarkSteps(self: pointer, mark: bool, steps: cint): void {.importc: "QLineEdit_cursorBackward_mark_steps".}
 proc fcQLineEdit_vdata(self: pointer): ptr pointer {.importc: "QLineEdit_vdata".}
 proc fvdata_cQLineEdit(self: pointer): pointer {.importc: "vdata_QLineEdit".}
 
@@ -215,7 +215,7 @@ type cQLineEditVTable {.pure.} = object
   contextMenuEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
   inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
   initStyleOption*: proc(self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery_Qt_InputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
   timerEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
   devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
@@ -266,7 +266,7 @@ proc fcQLineEdit_virtualbase_changeEvent(self: pointer, param1: pointer): void {
 proc fcQLineEdit_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void {.importc: "QLineEdit_virtualbase_contextMenuEvent".}
 proc fcQLineEdit_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QLineEdit_virtualbase_inputMethodEvent".}
 proc fcQLineEdit_virtualbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QLineEdit_virtualbase_initStyleOption".}
-proc fcQLineEdit_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QLineEdit_virtualbase_inputMethodQuery".}
+proc fcQLineEdit_virtualbase_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QLineEdit_virtualbase_inputMethodQuery_Qt_InputMethodQuery".}
 proc fcQLineEdit_virtualbase_timerEvent(self: pointer, param1: pointer): void {.importc: "QLineEdit_virtualbase_timerEvent".}
 proc fcQLineEdit_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QLineEdit_virtualbase_event".}
 proc fcQLineEdit_virtualbase_devType(self: pointer): cint {.importc: "QLineEdit_virtualbase_devType".}
@@ -305,10 +305,10 @@ proc fcQLineEdit_protectedbase_sender(self: pointer): pointer {.importc: "QLineE
 proc fcQLineEdit_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QLineEdit_protectedbase_senderSignalIndex".}
 proc fcQLineEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLineEdit_protectedbase_receivers".}
 proc fcQLineEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLineEdit_protectedbase_isSignalConnected".}
-proc fcQLineEdit_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLineEdit {.importc: "QLineEdit_new".}
-proc fcQLineEdit_new2(vtbl: pointer, vdata: csize_t): ptr cQLineEdit {.importc: "QLineEdit_new2".}
-proc fcQLineEdit_new3(vtbl: pointer, vdata: csize_t, param1: struct_seaqt_string): ptr cQLineEdit {.importc: "QLineEdit_new3".}
-proc fcQLineEdit_new4(vtbl: pointer, vdata: csize_t, param1: struct_seaqt_string, parent: pointer): ptr cQLineEdit {.importc: "QLineEdit_new4".}
+proc fcQLineEdit_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLineEdit {.importc: "QLineEdit_new_QWidget".}
+proc fcQLineEdit_new2(vtbl: pointer, vdata: csize_t): ptr cQLineEdit {.importc: "QLineEdit_new".}
+proc fcQLineEdit_new3(vtbl: pointer, vdata: csize_t, param1: struct_seaqt_string): ptr cQLineEdit {.importc: "QLineEdit_new_QString".}
+proc fcQLineEdit_new4(vtbl: pointer, vdata: csize_t, param1: struct_seaqt_string, parent: pointer): ptr cQLineEdit {.importc: "QLineEdit_new_QString_QWidget".}
 proc fcQLineEdit_staticMetaObject(): pointer {.importc: "QLineEdit_staticMetaObject".}
 
 proc metaObject*(self: gen_qlineedit_types.QLineEdit): gen_qobjectdefs_types.QMetaObject =
@@ -321,7 +321,7 @@ proc metacall*(self: gen_qlineedit_types.QLineEdit, param1: cint, param2: cint, 
   fcQLineEdit_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlineedit_types.QLineEdit, s: cstring): string =
-  let v_ms = fcQLineEdit_tr(s)
+  let v_ms = fcQLineEdit_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -411,10 +411,10 @@ proc alignment*(self: gen_qlineedit_types.QLineEdit): cint =
   cint(fcQLineEdit_alignment(self.h))
 
 proc cursorForward*(self: gen_qlineedit_types.QLineEdit, mark: bool): void =
-  fcQLineEdit_cursorForward(self.h, mark)
+  fcQLineEdit_cursorForwardMark(self.h, mark)
 
 proc cursorBackward*(self: gen_qlineedit_types.QLineEdit, mark: bool): void =
-  fcQLineEdit_cursorBackward(self.h, mark)
+  fcQLineEdit_cursorBackwardMark(self.h, mark)
 
 proc cursorWordForward*(self: gen_qlineedit_types.QLineEdit, mark: bool): void =
   fcQLineEdit_cursorWordForward(self.h, mark)
@@ -492,19 +492,19 @@ proc hasAcceptableInput*(self: gen_qlineedit_types.QLineEdit): bool =
   fcQLineEdit_hasAcceptableInput(self.h)
 
 proc setTextMargins*(self: gen_qlineedit_types.QLineEdit, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQLineEdit_setTextMargins(self.h, left, top, right, bottom)
+  fcQLineEdit_setTextMarginsLeftTopRightBottom(self.h, left, top, right, bottom)
 
 proc setTextMargins*(self: gen_qlineedit_types.QLineEdit, margins: gen_qmargins_types.QMargins): void =
-  fcQLineEdit_setTextMarginsWithMargins(self.h, margins.h)
+  fcQLineEdit_setTextMarginsMargins(self.h, margins.h)
 
 proc textMargins*(self: gen_qlineedit_types.QLineEdit): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQLineEdit_textMargins(self.h), owned: true)
 
 proc addAction*(self: gen_qlineedit_types.QLineEdit, action: gen_qaction_types.QAction, position: cint): void =
-  fcQLineEdit_addAction(self.h, action.h, cint(position))
+  fcQLineEdit_addActionActionPosition(self.h, action.h, cint(position))
 
 proc addAction*(self: gen_qlineedit_types.QLineEdit, icon: gen_qicon_types.QIcon, position: cint): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQLineEdit_addAction2(self.h, icon.h, cint(position)), owned: false)
+  gen_qaction_types.QAction(h: fcQLineEdit_addActionIconPosition(self.h, icon.h, cint(position)), owned: false)
 
 proc setText*(self: gen_qlineedit_types.QLineEdit, text: openArray[char]): void =
   fcQLineEdit_setText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
@@ -680,10 +680,10 @@ proc onInputRejected*(self: gen_qlineedit_types.QLineEdit, slot: QLineEditinputR
   fcQLineEdit_connect_inputRejected(self.h, cast[int](addr tmp[]), fcQLineEdit_slot_callback_inputRejected, fcQLineEdit_slot_callback_inputRejected_release)
 
 proc inputMethodQuery*(self: gen_qlineedit_types.QLineEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQLineEdit_inputMethodQuery(self.h, cint(param1)), owned: true)
+  gen_qvariant_types.QVariant(h: fcQLineEdit_inputMethodQuery_Qt_InputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc inputMethodQuery*(self: gen_qlineedit_types.QLineEdit, property: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQLineEdit_inputMethodQuery2(self.h, cint(property), argument.h), owned: true)
+  gen_qvariant_types.QVariant(h: fcQLineEdit_inputMethodQuery_Qt_InputMethodQuery_QVariant(self.h, cint(property), argument.h), owned: true)
 
 proc timerEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcoreevent_types.QTimerEvent): void =
   fcQLineEdit_timerEvent(self.h, param1.h)
@@ -692,22 +692,22 @@ proc event*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcoreevent_types.QE
   fcQLineEdit_event(self.h, param1.h)
 
 proc tr*(_: type gen_qlineedit_types.QLineEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQLineEdit_tr2(s, c)
+  let v_ms = fcQLineEdit_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlineedit_types.QLineEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLineEdit_tr3(s, c, n)
+  let v_ms = fcQLineEdit_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc cursorForward*(self: gen_qlineedit_types.QLineEdit, mark: bool, steps: cint): void =
-  fcQLineEdit_cursorForward2(self.h, mark, steps)
+  fcQLineEdit_cursorForwardMarkSteps(self.h, mark, steps)
 
 proc cursorBackward*(self: gen_qlineedit_types.QLineEdit, mark: bool, steps: cint): void =
-  fcQLineEdit_cursorBackward2(self.h, mark, steps)
+  fcQLineEdit_cursorBackwardMarkSteps(self.h, mark, steps)
 
 type QLineEditmetaObjectProc* = proc(self: QLineEdit): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QLineEditmetacastProc* = proc(self: QLineEdit, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -731,7 +731,7 @@ type QLineEditchangeEventProc* = proc(self: QLineEdit, param1: gen_qcoreevent_ty
 type QLineEditcontextMenuEventProc* = proc(self: QLineEdit, param1: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
 type QLineEditinputMethodEventProc* = proc(self: QLineEdit, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
 type QLineEditinitStyleOptionProc* = proc(self: QLineEdit, option: gen_qstyleoption_types.QStyleOptionFrame): void {.raises: [], gcsafe.}
-type QLineEditinputMethodQueryProc* = proc(self: QLineEdit, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QLineEditinputMethodQuery_Qt_InputMethodQueryProc* = proc(self: QLineEdit, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QLineEdittimerEventProc* = proc(self: QLineEdit, param1: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QLineEditeventProc* = proc(self: QLineEdit, param1: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QLineEditdevTypeProc* = proc(self: QLineEdit): cint {.raises: [], gcsafe.}
@@ -785,7 +785,7 @@ type QLineEditVTable* {.inheritable, pure.} = object
   contextMenuEvent*: QLineEditcontextMenuEventProc
   inputMethodEvent*: QLineEditinputMethodEventProc
   initStyleOption*: QLineEditinitStyleOptionProc
-  inputMethodQuery*: QLineEditinputMethodQueryProc
+  inputMethodQuery_Qt_InputMethodQuery*: QLineEditinputMethodQuery_Qt_InputMethodQueryProc
   timerEvent*: QLineEdittimerEventProc
   event*: QLineEditeventProc
   devType*: QLineEditdevTypeProc
@@ -882,7 +882,7 @@ proc QLineEditinitStyleOption*(self: gen_qlineedit_types.QLineEdit, option: gen_
   fcQLineEdit_virtualbase_initStyleOption(self.h, option.h)
 
 proc QLineEditinputMethodQuery*(self: gen_qlineedit_types.QLineEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQLineEdit_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
+  gen_qvariant_types.QVariant(h: fcQLineEdit_virtualbase_inputMethodQuery_Qt_InputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QLineEdittimerEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcoreevent_types.QTimerEvent): void =
   fcQLineEdit_virtualbase_timerEvent(self.h, param1.h)
@@ -1114,11 +1114,11 @@ proc fcQLineEdit_vtable_callback_initStyleOption(self: pointer, option: pointer)
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
-proc fcQLineEdit_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQLineEdit_vtable_callback_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](fcQLineEdit_vdata(self)[])
   let self = QLineEdit(h: self)
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  var virtualReturn = vtbl[].inputMethodQuery_Qt_InputMethodQuery(self, slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1543,7 +1543,7 @@ proc fcQLineEdit_method_callback_initStyleOption(self: pointer, option: pointer)
   let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
-proc fcQLineEdit_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+proc fcQLineEdit_method_callback_inputMethodQuery_Qt_InputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQLineEdit](fcQLineEdit_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1797,8 +1797,8 @@ proc create*(T: type gen_qlineedit_types.QLineEdit,
     vtbl[].vtbl.inputMethodEvent = fcQLineEdit_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = fcQLineEdit_vtable_callback_initStyleOption
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQLineEdit_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQuery_Qt_InputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery_Qt_InputMethodQuery = fcQLineEdit_vtable_callback_inputMethodQuery_Qt_InputMethodQuery
   if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = fcQLineEdit_vtable_callback_timerEvent
   if not isNil(vtbl[].event):
@@ -1909,8 +1909,8 @@ proc create*(T: type gen_qlineedit_types.QLineEdit,
     vtbl[].vtbl.inputMethodEvent = fcQLineEdit_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = fcQLineEdit_vtable_callback_initStyleOption
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQLineEdit_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQuery_Qt_InputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery_Qt_InputMethodQuery = fcQLineEdit_vtable_callback_inputMethodQuery_Qt_InputMethodQuery
   if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = fcQLineEdit_vtable_callback_timerEvent
   if not isNil(vtbl[].event):
@@ -2022,8 +2022,8 @@ proc create*(T: type gen_qlineedit_types.QLineEdit,
     vtbl[].vtbl.inputMethodEvent = fcQLineEdit_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = fcQLineEdit_vtable_callback_initStyleOption
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQLineEdit_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQuery_Qt_InputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery_Qt_InputMethodQuery = fcQLineEdit_vtable_callback_inputMethodQuery_Qt_InputMethodQuery
   if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = fcQLineEdit_vtable_callback_timerEvent
   if not isNil(vtbl[].event):
@@ -2135,8 +2135,8 @@ proc create*(T: type gen_qlineedit_types.QLineEdit,
     vtbl[].vtbl.inputMethodEvent = fcQLineEdit_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = fcQLineEdit_vtable_callback_initStyleOption
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQLineEdit_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQuery_Qt_InputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery_Qt_InputMethodQuery = fcQLineEdit_vtable_callback_inputMethodQuery_Qt_InputMethodQuery
   if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = fcQLineEdit_vtable_callback_timerEvent
   if not isNil(vtbl[].event):
@@ -2224,7 +2224,7 @@ const cQLineEdit_mvtbl = cQLineEditVTable(
   contextMenuEvent: fcQLineEdit_method_callback_contextMenuEvent,
   inputMethodEvent: fcQLineEdit_method_callback_inputMethodEvent,
   initStyleOption: fcQLineEdit_method_callback_initStyleOption,
-  inputMethodQuery: fcQLineEdit_method_callback_inputMethodQuery,
+  inputMethodQuery_Qt_InputMethodQuery: fcQLineEdit_method_callback_inputMethodQuery_Qt_InputMethodQuery,
   timerEvent: fcQLineEdit_method_callback_timerEvent,
   event: fcQLineEdit_method_callback_event,
   devType: fcQLineEdit_method_callback_devType,

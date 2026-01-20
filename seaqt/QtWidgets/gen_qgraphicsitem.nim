@@ -246,14 +246,14 @@ proc fcQGraphicsItem_isWidget(self: pointer): bool {.importc: "QGraphicsItem_isW
 proc fcQGraphicsItem_isWindow(self: pointer): bool {.importc: "QGraphicsItem_isWindow".}
 proc fcQGraphicsItem_isPanel(self: pointer): bool {.importc: "QGraphicsItem_isPanel".}
 proc fcQGraphicsItem_toGraphicsObject(self: pointer): pointer {.importc: "QGraphicsItem_toGraphicsObject".}
-proc fcQGraphicsItem_toGraphicsObject2(self: pointer): pointer {.importc: "QGraphicsItem_toGraphicsObject2".}
+proc fcQGraphicsItem_toGraphicsObjectConst(self: pointer): pointer {.importc: "QGraphicsItem_toGraphicsObject_const".}
 proc fcQGraphicsItem_group(self: pointer): pointer {.importc: "QGraphicsItem_group".}
 proc fcQGraphicsItem_setGroup(self: pointer, group: pointer): void {.importc: "QGraphicsItem_setGroup".}
 proc fcQGraphicsItem_flags(self: pointer): cint {.importc: "QGraphicsItem_flags".}
-proc fcQGraphicsItem_setFlag(self: pointer, flag: cint): void {.importc: "QGraphicsItem_setFlag".}
+proc fcQGraphicsItem_setFlagFlag(self: pointer, flag: cint): void {.importc: "QGraphicsItem_setFlag_flag".}
 proc fcQGraphicsItem_setFlags(self: pointer, flags: cint): void {.importc: "QGraphicsItem_setFlags".}
 proc fcQGraphicsItem_cacheMode(self: pointer): cint {.importc: "QGraphicsItem_cacheMode".}
-proc fcQGraphicsItem_setCacheMode(self: pointer, mode: cint): void {.importc: "QGraphicsItem_setCacheMode".}
+proc fcQGraphicsItem_setCacheModeMode(self: pointer, mode: cint): void {.importc: "QGraphicsItem_setCacheMode_mode".}
 proc fcQGraphicsItem_panelModality(self: pointer): cint {.importc: "QGraphicsItem_panelModality".}
 proc fcQGraphicsItem_setPanelModality(self: pointer, panelModality: cint): void {.importc: "QGraphicsItem_setPanelModality".}
 proc fcQGraphicsItem_isBlockedByModalPanel(self: pointer): bool {.importc: "QGraphicsItem_isBlockedByModalPanel".}
@@ -308,16 +308,16 @@ proc fcQGraphicsItem_setX(self: pointer, x: float64): void {.importc: "QGraphics
 proc fcQGraphicsItem_y(self: pointer): float64 {.importc: "QGraphicsItem_y".}
 proc fcQGraphicsItem_setY(self: pointer, y: float64): void {.importc: "QGraphicsItem_setY".}
 proc fcQGraphicsItem_scenePos(self: pointer): pointer {.importc: "QGraphicsItem_scenePos".}
-proc fcQGraphicsItem_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsItem_setPos".}
-proc fcQGraphicsItem_setPos2(self: pointer, x: float64, y: float64): void {.importc: "QGraphicsItem_setPos2".}
+proc fcQGraphicsItem_setPosPos(self: pointer, pos: pointer): void {.importc: "QGraphicsItem_setPos_pos".}
+proc fcQGraphicsItem_setPosXY(self: pointer, x: float64, y: float64): void {.importc: "QGraphicsItem_setPos_x_y".}
 proc fcQGraphicsItem_moveBy(self: pointer, dx: float64, dy: float64): void {.importc: "QGraphicsItem_moveBy".}
 proc fcQGraphicsItem_ensureVisible(self: pointer): void {.importc: "QGraphicsItem_ensureVisible".}
-proc fcQGraphicsItem_ensureVisible2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsItem_ensureVisible2".}
+proc fcQGraphicsItem_ensureVisibleXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsItem_ensureVisible_x_y_w_h".}
 proc fcQGraphicsItem_transform(self: pointer): pointer {.importc: "QGraphicsItem_transform".}
 proc fcQGraphicsItem_sceneTransform(self: pointer): pointer {.importc: "QGraphicsItem_sceneTransform".}
 proc fcQGraphicsItem_deviceTransform(self: pointer, viewportTransform: pointer): pointer {.importc: "QGraphicsItem_deviceTransform".}
-proc fcQGraphicsItem_itemTransform(self: pointer, other: pointer): pointer {.importc: "QGraphicsItem_itemTransform".}
-proc fcQGraphicsItem_setTransform(self: pointer, matrix: pointer): void {.importc: "QGraphicsItem_setTransform".}
+proc fcQGraphicsItem_itemTransformOther(self: pointer, other: pointer): pointer {.importc: "QGraphicsItem_itemTransform_other".}
+proc fcQGraphicsItem_setTransformMatrix(self: pointer, matrix: pointer): void {.importc: "QGraphicsItem_setTransform_matrix".}
 proc fcQGraphicsItem_resetTransform(self: pointer): void {.importc: "QGraphicsItem_resetTransform".}
 proc fcQGraphicsItem_setRotation(self: pointer, angle: float64): void {.importc: "QGraphicsItem_setRotation".}
 proc fcQGraphicsItem_rotation(self: pointer): float64 {.importc: "QGraphicsItem_rotation".}
@@ -326,8 +326,8 @@ proc fcQGraphicsItem_scale(self: pointer): float64 {.importc: "QGraphicsItem_sca
 proc fcQGraphicsItem_transformations(self: pointer): struct_seaqt_array {.importc: "QGraphicsItem_transformations".}
 proc fcQGraphicsItem_setTransformations(self: pointer, transformations: struct_seaqt_array): void {.importc: "QGraphicsItem_setTransformations".}
 proc fcQGraphicsItem_transformOriginPoint(self: pointer): pointer {.importc: "QGraphicsItem_transformOriginPoint".}
-proc fcQGraphicsItem_setTransformOriginPoint(self: pointer, origin: pointer): void {.importc: "QGraphicsItem_setTransformOriginPoint".}
-proc fcQGraphicsItem_setTransformOriginPoint2(self: pointer, ax: float64, ay: float64): void {.importc: "QGraphicsItem_setTransformOriginPoint2".}
+proc fcQGraphicsItem_setTransformOriginPointOrigin(self: pointer, origin: pointer): void {.importc: "QGraphicsItem_setTransformOriginPoint_origin".}
+proc fcQGraphicsItem_setTransformOriginPointAxAy(self: pointer, ax: float64, ay: float64): void {.importc: "QGraphicsItem_setTransformOriginPoint_ax_ay".}
 proc fcQGraphicsItem_advance(self: pointer, phase: cint): void {.importc: "QGraphicsItem_advance".}
 proc fcQGraphicsItem_zValue(self: pointer): float64 {.importc: "QGraphicsItem_zValue".}
 proc fcQGraphicsItem_setZValue(self: pointer, z: float64): void {.importc: "QGraphicsItem_setZValue".}
@@ -343,7 +343,7 @@ proc fcQGraphicsItem_collidesWithItem(self: pointer, other: pointer, mode: cint)
 proc fcQGraphicsItem_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.importc: "QGraphicsItem_collidesWithPath".}
 proc fcQGraphicsItem_collidingItems(self: pointer): struct_seaqt_array {.importc: "QGraphicsItem_collidingItems".}
 proc fcQGraphicsItem_isObscured(self: pointer): bool {.importc: "QGraphicsItem_isObscured".}
-proc fcQGraphicsItem_isObscured2(self: pointer, x: float64, y: float64, w: float64, h: float64): bool {.importc: "QGraphicsItem_isObscured2".}
+proc fcQGraphicsItem_isObscuredXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): bool {.importc: "QGraphicsItem_isObscured_x_y_w_h".}
 proc fcQGraphicsItem_isObscuredBy(self: pointer, item: pointer): bool {.importc: "QGraphicsItem_isObscuredBy".}
 proc fcQGraphicsItem_opaqueArea(self: pointer): pointer {.importc: "QGraphicsItem_opaqueArea".}
 proc fcQGraphicsItem_boundingRegion(self: pointer, itemToDeviceTransform: pointer): pointer {.importc: "QGraphicsItem_boundingRegion".}
@@ -351,38 +351,38 @@ proc fcQGraphicsItem_boundingRegionGranularity(self: pointer): float64 {.importc
 proc fcQGraphicsItem_setBoundingRegionGranularity(self: pointer, granularity: float64): void {.importc: "QGraphicsItem_setBoundingRegionGranularity".}
 proc fcQGraphicsItem_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsItem_paint".}
 proc fcQGraphicsItem_update(self: pointer): void {.importc: "QGraphicsItem_update".}
-proc fcQGraphicsItem_update2(self: pointer, x: float64, y: float64, width: float64, height: float64): void {.importc: "QGraphicsItem_update2".}
-proc fcQGraphicsItem_scroll(self: pointer, dx: float64, dy: float64): void {.importc: "QGraphicsItem_scroll".}
-proc fcQGraphicsItem_mapToItem(self: pointer, item: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapToItem".}
-proc fcQGraphicsItem_mapToParent(self: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapToParent".}
-proc fcQGraphicsItem_mapToScene(self: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapToScene".}
-proc fcQGraphicsItem_mapRectToItem(self: pointer, item: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectToItem".}
-proc fcQGraphicsItem_mapRectToParent(self: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectToParent".}
-proc fcQGraphicsItem_mapRectToScene(self: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectToScene".}
-proc fcQGraphicsItem_mapToItem4(self: pointer, item: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapToItem4".}
-proc fcQGraphicsItem_mapToParentWithPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapToParentWithPath".}
-proc fcQGraphicsItem_mapToSceneWithPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapToSceneWithPath".}
-proc fcQGraphicsItem_mapFromItem(self: pointer, item: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapFromItem".}
-proc fcQGraphicsItem_mapFromParent(self: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapFromParent".}
-proc fcQGraphicsItem_mapFromScene(self: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapFromScene".}
-proc fcQGraphicsItem_mapRectFromItem(self: pointer, item: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectFromItem".}
-proc fcQGraphicsItem_mapRectFromParent(self: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectFromParent".}
-proc fcQGraphicsItem_mapRectFromScene(self: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectFromScene".}
-proc fcQGraphicsItem_mapFromItem4(self: pointer, item: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapFromItem4".}
-proc fcQGraphicsItem_mapFromParentWithPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapFromParentWithPath".}
-proc fcQGraphicsItem_mapFromSceneWithPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapFromSceneWithPath".}
-proc fcQGraphicsItem_mapToItem5(self: pointer, item: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapToItem5".}
-proc fcQGraphicsItem_mapToParent2(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapToParent2".}
-proc fcQGraphicsItem_mapToScene2(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapToScene2".}
-proc fcQGraphicsItem_mapRectToItem2(self: pointer, item: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectToItem2".}
-proc fcQGraphicsItem_mapRectToParent2(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectToParent2".}
-proc fcQGraphicsItem_mapRectToScene2(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectToScene2".}
-proc fcQGraphicsItem_mapFromItem5(self: pointer, item: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapFromItem5".}
-proc fcQGraphicsItem_mapFromParent2(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapFromParent2".}
-proc fcQGraphicsItem_mapFromScene2(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapFromScene2".}
-proc fcQGraphicsItem_mapRectFromItem2(self: pointer, item: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectFromItem2".}
-proc fcQGraphicsItem_mapRectFromParent2(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectFromParent2".}
-proc fcQGraphicsItem_mapRectFromScene2(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectFromScene2".}
+proc fcQGraphicsItem_updateXYWidthHeight(self: pointer, x: float64, y: float64, width: float64, height: float64): void {.importc: "QGraphicsItem_update_x_y_width_height".}
+proc fcQGraphicsItem_scrollDxDy(self: pointer, dx: float64, dy: float64): void {.importc: "QGraphicsItem_scroll_dx_dy".}
+proc fcQGraphicsItem_mapToItemItemPoint(self: pointer, item: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapToItem_item_point".}
+proc fcQGraphicsItem_mapToParentPoint(self: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapToParent_point".}
+proc fcQGraphicsItem_mapToScenePoint(self: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapToScene_point".}
+proc fcQGraphicsItem_mapRectToItemItemRect(self: pointer, item: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectToItem_item_rect".}
+proc fcQGraphicsItem_mapRectToParentRect(self: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectToParent_rect".}
+proc fcQGraphicsItem_mapRectToSceneRect(self: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectToScene_rect".}
+proc fcQGraphicsItem_mapToItemItemPath(self: pointer, item: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapToItem_item_path".}
+proc fcQGraphicsItem_mapToParentPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapToParent_path".}
+proc fcQGraphicsItem_mapToScenePath(self: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapToScene_path".}
+proc fcQGraphicsItem_mapFromItemItemPoint(self: pointer, item: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapFromItem_item_point".}
+proc fcQGraphicsItem_mapFromParentPoint(self: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapFromParent_point".}
+proc fcQGraphicsItem_mapFromScenePoint(self: pointer, point: pointer): pointer {.importc: "QGraphicsItem_mapFromScene_point".}
+proc fcQGraphicsItem_mapRectFromItemItemRect(self: pointer, item: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectFromItem_item_rect".}
+proc fcQGraphicsItem_mapRectFromParentRect(self: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectFromParent_rect".}
+proc fcQGraphicsItem_mapRectFromSceneRect(self: pointer, rect: pointer): pointer {.importc: "QGraphicsItem_mapRectFromScene_rect".}
+proc fcQGraphicsItem_mapFromItemItemPath(self: pointer, item: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapFromItem_item_path".}
+proc fcQGraphicsItem_mapFromParentPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapFromParent_path".}
+proc fcQGraphicsItem_mapFromScenePath(self: pointer, path: pointer): pointer {.importc: "QGraphicsItem_mapFromScene_path".}
+proc fcQGraphicsItem_mapToItemItemXY(self: pointer, item: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapToItem_item_x_y".}
+proc fcQGraphicsItem_mapToParentXY(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapToParent_x_y".}
+proc fcQGraphicsItem_mapToSceneXY(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapToScene_x_y".}
+proc fcQGraphicsItem_mapRectToItemItemXYWH(self: pointer, item: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectToItem_item_x_y_w_h".}
+proc fcQGraphicsItem_mapRectToParentXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectToParent_x_y_w_h".}
+proc fcQGraphicsItem_mapRectToSceneXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectToScene_x_y_w_h".}
+proc fcQGraphicsItem_mapFromItemItemXY(self: pointer, item: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapFromItem_item_x_y".}
+proc fcQGraphicsItem_mapFromParentXY(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapFromParent_x_y".}
+proc fcQGraphicsItem_mapFromSceneXY(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsItem_mapFromScene_x_y".}
+proc fcQGraphicsItem_mapRectFromItemItemXYWH(self: pointer, item: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectFromItem_item_x_y_w_h".}
+proc fcQGraphicsItem_mapRectFromParentXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectFromParent_x_y_w_h".}
+proc fcQGraphicsItem_mapRectFromSceneXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): pointer {.importc: "QGraphicsItem_mapRectFromScene_x_y_w_h".}
 proc fcQGraphicsItem_isAncestorOf(self: pointer, child: pointer): bool {.importc: "QGraphicsItem_isAncestorOf".}
 proc fcQGraphicsItem_commonAncestorItem(self: pointer, other: pointer): pointer {.importc: "QGraphicsItem_commonAncestorItem".}
 proc fcQGraphicsItem_isUnderMouse(self: pointer): bool {.importc: "QGraphicsItem_isUnderMouse".}
@@ -393,20 +393,20 @@ proc fcQGraphicsItem_setInputMethodHints(self: pointer, hints: cint): void {.imp
 proc fcQGraphicsItem_typeX(self: pointer): cint {.importc: "QGraphicsItem_type".}
 proc fcQGraphicsItem_installSceneEventFilter(self: pointer, filterItem: pointer): void {.importc: "QGraphicsItem_installSceneEventFilter".}
 proc fcQGraphicsItem_removeSceneEventFilter(self: pointer, filterItem: pointer): void {.importc: "QGraphicsItem_removeSceneEventFilter".}
-proc fcQGraphicsItem_setFlag2(self: pointer, flag: cint, enabled: bool): void {.importc: "QGraphicsItem_setFlag2".}
-proc fcQGraphicsItem_setCacheMode2(self: pointer, mode: cint, cacheSize: pointer): void {.importc: "QGraphicsItem_setCacheMode2".}
-proc fcQGraphicsItem_setFocusWithFocusReason(self: pointer, focusReason: cint): void {.importc: "QGraphicsItem_setFocusWithFocusReason".}
-proc fcQGraphicsItem_ensureVisibleWithRect(self: pointer, rect: pointer): void {.importc: "QGraphicsItem_ensureVisibleWithRect".}
-proc fcQGraphicsItem_ensureVisible3(self: pointer, rect: pointer, xmargin: cint): void {.importc: "QGraphicsItem_ensureVisible3".}
-proc fcQGraphicsItem_ensureVisible4(self: pointer, rect: pointer, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsItem_ensureVisible4".}
-proc fcQGraphicsItem_ensureVisible5(self: pointer, x: float64, y: float64, w: float64, h: float64, xmargin: cint): void {.importc: "QGraphicsItem_ensureVisible5".}
-proc fcQGraphicsItem_ensureVisible6(self: pointer, x: float64, y: float64, w: float64, h: float64, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsItem_ensureVisible6".}
-proc fcQGraphicsItem_itemTransform2(self: pointer, other: pointer, ok: ptr bool): pointer {.importc: "QGraphicsItem_itemTransform2".}
-proc fcQGraphicsItem_setTransform2(self: pointer, matrix: pointer, combine: bool): void {.importc: "QGraphicsItem_setTransform2".}
-proc fcQGraphicsItem_collidingItemsWithMode(self: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsItem_collidingItemsWithMode".}
-proc fcQGraphicsItem_isObscuredWithRect(self: pointer, rect: pointer): bool {.importc: "QGraphicsItem_isObscuredWithRect".}
-proc fcQGraphicsItem_updateWithRect(self: pointer, rect: pointer): void {.importc: "QGraphicsItem_updateWithRect".}
-proc fcQGraphicsItem_scroll2(self: pointer, dx: float64, dy: float64, rect: pointer): void {.importc: "QGraphicsItem_scroll2".}
+proc fcQGraphicsItem_setFlagFlagEnabled(self: pointer, flag: cint, enabled: bool): void {.importc: "QGraphicsItem_setFlag_flag_enabled".}
+proc fcQGraphicsItem_setCacheModeModeCacheSize(self: pointer, mode: cint, cacheSize: pointer): void {.importc: "QGraphicsItem_setCacheMode_mode_cacheSize".}
+proc fcQGraphicsItem_setFocusFocusReason(self: pointer, focusReason: cint): void {.importc: "QGraphicsItem_setFocus_focusReason".}
+proc fcQGraphicsItem_ensureVisibleRect(self: pointer, rect: pointer): void {.importc: "QGraphicsItem_ensureVisible_rect".}
+proc fcQGraphicsItem_ensureVisibleRectXmargin(self: pointer, rect: pointer, xmargin: cint): void {.importc: "QGraphicsItem_ensureVisible_rect_xmargin".}
+proc fcQGraphicsItem_ensureVisibleRectXmarginYmargin(self: pointer, rect: pointer, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsItem_ensureVisible_rect_xmargin_ymargin".}
+proc fcQGraphicsItem_ensureVisibleXYWHXmargin(self: pointer, x: float64, y: float64, w: float64, h: float64, xmargin: cint): void {.importc: "QGraphicsItem_ensureVisible_x_y_w_h_xmargin".}
+proc fcQGraphicsItem_ensureVisibleXYWHXmarginYmargin(self: pointer, x: float64, y: float64, w: float64, h: float64, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsItem_ensureVisible_x_y_w_h_xmargin_ymargin".}
+proc fcQGraphicsItem_itemTransformOtherOk(self: pointer, other: pointer, ok: ptr bool): pointer {.importc: "QGraphicsItem_itemTransform_other_ok".}
+proc fcQGraphicsItem_setTransformMatrixCombine(self: pointer, matrix: pointer, combine: bool): void {.importc: "QGraphicsItem_setTransform_matrix_combine".}
+proc fcQGraphicsItem_collidingItemsMode(self: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsItem_collidingItems_mode".}
+proc fcQGraphicsItem_isObscuredRect(self: pointer, rect: pointer): bool {.importc: "QGraphicsItem_isObscured_rect".}
+proc fcQGraphicsItem_updateRect(self: pointer, rect: pointer): void {.importc: "QGraphicsItem_update_rect".}
+proc fcQGraphicsItem_scrollDxDyRect(self: pointer, dx: float64, dy: float64, rect: pointer): void {.importc: "QGraphicsItem_scroll_dx_dy_rect".}
 proc fcQGraphicsItem_vdata(self: pointer): ptr pointer {.importc: "QGraphicsItem_vdata".}
 proc fvdata_cQGraphicsItem(self: pointer): pointer {.importc: "vdata_QGraphicsItem".}
 
@@ -485,12 +485,12 @@ proc fcQGraphicsItem_protectedbase_addToIndex(self: pointer): void {.importc: "Q
 proc fcQGraphicsItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsItem {.importc: "QGraphicsItem_new".}
-proc fcQGraphicsItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsItem {.importc: "QGraphicsItem_new2".}
+proc fcQGraphicsItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsItem {.importc: "QGraphicsItem_new_parent".}
 proc fcQGraphicsObject_metaObject(self: pointer): pointer {.importc: "QGraphicsObject_metaObject".}
 proc fcQGraphicsObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsObject_metacast".}
 proc fcQGraphicsObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsObject_metacall".}
-proc fcQGraphicsObject_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsObject_tr".}
-proc fcQGraphicsObject_grabGesture(self: pointer, typeVal: cint): void {.importc: "QGraphicsObject_grabGesture".}
+proc fcQGraphicsObject_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsObject_tr_s".}
+proc fcQGraphicsObject_grabGestureType(self: pointer, typeVal: cint): void {.importc: "QGraphicsObject_grabGesture_type".}
 proc fcQGraphicsObject_ungrabGesture(self: pointer, typeVal: cint): void {.importc: "QGraphicsObject_ungrabGesture".}
 proc fcQGraphicsObject_parentChanged(self: pointer): void {.importc: "QGraphicsObject_parentChanged".}
 proc fcQGraphicsObject_connect_parentChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_parentChanged".}
@@ -516,9 +516,9 @@ proc fcQGraphicsObject_widthChanged(self: pointer): void {.importc: "QGraphicsOb
 proc fcQGraphicsObject_connect_widthChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_widthChanged".}
 proc fcQGraphicsObject_heightChanged(self: pointer): void {.importc: "QGraphicsObject_heightChanged".}
 proc fcQGraphicsObject_connect_heightChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_heightChanged".}
-proc fcQGraphicsObject_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsObject_tr2".}
-proc fcQGraphicsObject_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsObject_tr3".}
-proc fcQGraphicsObject_grabGesture2(self: pointer, typeVal: cint, flags: cint): void {.importc: "QGraphicsObject_grabGesture2".}
+proc fcQGraphicsObject_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsObject_tr_s_c".}
+proc fcQGraphicsObject_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsObject_tr_s_c_n".}
+proc fcQGraphicsObject_grabGestureTypeFlags(self: pointer, typeVal: cint, flags: cint): void {.importc: "QGraphicsObject_grabGesture_type_flags".}
 proc fcQGraphicsObject_vdata(self: pointer): ptr pointer {.importc: "QGraphicsObject_vdata".}
 proc fvdata_cQGraphicsObject(self: pointer): pointer {.importc: "vdata_QGraphicsObject".}
 
@@ -621,7 +621,7 @@ proc fcQGraphicsObject_protectedbase_addToIndex(self: pointer): void {.importc: 
 proc fcQGraphicsObject_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsObject_protectedbase_removeFromIndex".}
 proc fcQGraphicsObject_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsObject_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsObject_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsObject {.importc: "QGraphicsObject_new".}
-proc fcQGraphicsObject_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsObject {.importc: "QGraphicsObject_new2".}
+proc fcQGraphicsObject_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsObject {.importc: "QGraphicsObject_new_parent".}
 proc fcQGraphicsObject_staticMetaObject(): pointer {.importc: "QGraphicsObject_staticMetaObject".}
 proc fcQAbstractGraphicsShapeItem_pen(self: pointer): pointer {.importc: "QAbstractGraphicsShapeItem_pen".}
 proc fcQAbstractGraphicsShapeItem_setPen(self: pointer, pen: pointer): void {.importc: "QAbstractGraphicsShapeItem_setPen".}
@@ -707,7 +707,7 @@ proc fcQAbstractGraphicsShapeItem_protectedbase_addToIndex(self: pointer): void 
 proc fcQAbstractGraphicsShapeItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QAbstractGraphicsShapeItem_protectedbase_removeFromIndex".}
 proc fcQAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange".}
 proc fcQAbstractGraphicsShapeItem_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractGraphicsShapeItem {.importc: "QAbstractGraphicsShapeItem_new".}
-proc fcQAbstractGraphicsShapeItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractGraphicsShapeItem {.importc: "QAbstractGraphicsShapeItem_new2".}
+proc fcQAbstractGraphicsShapeItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractGraphicsShapeItem {.importc: "QAbstractGraphicsShapeItem_new_parent".}
 proc fcQGraphicsPathItem_path(self: pointer): pointer {.importc: "QGraphicsPathItem_path".}
 proc fcQGraphicsPathItem_setPath(self: pointer, path: pointer): void {.importc: "QGraphicsPathItem_setPath".}
 proc fcQGraphicsPathItem_boundingRect(self: pointer): pointer {.importc: "QGraphicsPathItem_boundingRect".}
@@ -797,12 +797,12 @@ proc fcQGraphicsPathItem_protectedbase_addToIndex(self: pointer): void {.importc
 proc fcQGraphicsPathItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsPathItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsPathItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsPathItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsPathItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new".}
-proc fcQGraphicsPathItem_new2(vtbl: pointer, vdata: csize_t, path: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new2".}
-proc fcQGraphicsPathItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new3".}
-proc fcQGraphicsPathItem_new4(vtbl: pointer, vdata: csize_t, path: pointer, parent: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new4".}
+proc fcQGraphicsPathItem_new2(vtbl: pointer, vdata: csize_t, path: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new_path".}
+proc fcQGraphicsPathItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new_parent".}
+proc fcQGraphicsPathItem_new4(vtbl: pointer, vdata: csize_t, path: pointer, parent: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new_path_parent".}
 proc fcQGraphicsRectItem_rect(self: pointer): pointer {.importc: "QGraphicsRectItem_rect".}
-proc fcQGraphicsRectItem_setRect(self: pointer, rect: pointer): void {.importc: "QGraphicsRectItem_setRect".}
-proc fcQGraphicsRectItem_setRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsRectItem_setRect2".}
+proc fcQGraphicsRectItem_setRectRect(self: pointer, rect: pointer): void {.importc: "QGraphicsRectItem_setRect_rect".}
+proc fcQGraphicsRectItem_setRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsRectItem_setRect_x_y_w_h".}
 proc fcQGraphicsRectItem_boundingRect(self: pointer): pointer {.importc: "QGraphicsRectItem_boundingRect".}
 proc fcQGraphicsRectItem_shape(self: pointer): pointer {.importc: "QGraphicsRectItem_shape".}
 proc fcQGraphicsRectItem_contains(self: pointer, point: pointer): bool {.importc: "QGraphicsRectItem_contains".}
@@ -890,14 +890,14 @@ proc fcQGraphicsRectItem_protectedbase_addToIndex(self: pointer): void {.importc
 proc fcQGraphicsRectItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsRectItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsRectItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsRectItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsRectItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new".}
-proc fcQGraphicsRectItem_new2(vtbl: pointer, vdata: csize_t, rect: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new2".}
-proc fcQGraphicsRectItem_new3(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new3".}
-proc fcQGraphicsRectItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new4".}
-proc fcQGraphicsRectItem_new5(vtbl: pointer, vdata: csize_t, rect: pointer, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new5".}
-proc fcQGraphicsRectItem_new6(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new6".}
+proc fcQGraphicsRectItem_new2(vtbl: pointer, vdata: csize_t, rect: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new_rect".}
+proc fcQGraphicsRectItem_new3(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new_x_y_w_h".}
+proc fcQGraphicsRectItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new_parent".}
+proc fcQGraphicsRectItem_new5(vtbl: pointer, vdata: csize_t, rect: pointer, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new_rect_parent".}
+proc fcQGraphicsRectItem_new6(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64, parent: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new_x_y_w_h_parent".}
 proc fcQGraphicsEllipseItem_rect(self: pointer): pointer {.importc: "QGraphicsEllipseItem_rect".}
-proc fcQGraphicsEllipseItem_setRect(self: pointer, rect: pointer): void {.importc: "QGraphicsEllipseItem_setRect".}
-proc fcQGraphicsEllipseItem_setRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsEllipseItem_setRect2".}
+proc fcQGraphicsEllipseItem_setRectRect(self: pointer, rect: pointer): void {.importc: "QGraphicsEllipseItem_setRect_rect".}
+proc fcQGraphicsEllipseItem_setRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsEllipseItem_setRect_x_y_w_h".}
 proc fcQGraphicsEllipseItem_startAngle(self: pointer): cint {.importc: "QGraphicsEllipseItem_startAngle".}
 proc fcQGraphicsEllipseItem_setStartAngle(self: pointer, angle: cint): void {.importc: "QGraphicsEllipseItem_setStartAngle".}
 proc fcQGraphicsEllipseItem_spanAngle(self: pointer): cint {.importc: "QGraphicsEllipseItem_spanAngle".}
@@ -989,11 +989,11 @@ proc fcQGraphicsEllipseItem_protectedbase_addToIndex(self: pointer): void {.impo
 proc fcQGraphicsEllipseItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsEllipseItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsEllipseItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsEllipseItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsEllipseItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new".}
-proc fcQGraphicsEllipseItem_new2(vtbl: pointer, vdata: csize_t, rect: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new2".}
-proc fcQGraphicsEllipseItem_new3(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new3".}
-proc fcQGraphicsEllipseItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new4".}
-proc fcQGraphicsEllipseItem_new5(vtbl: pointer, vdata: csize_t, rect: pointer, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new5".}
-proc fcQGraphicsEllipseItem_new6(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new6".}
+proc fcQGraphicsEllipseItem_new2(vtbl: pointer, vdata: csize_t, rect: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new_rect".}
+proc fcQGraphicsEllipseItem_new3(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new_x_y_w_h".}
+proc fcQGraphicsEllipseItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new_parent".}
+proc fcQGraphicsEllipseItem_new5(vtbl: pointer, vdata: csize_t, rect: pointer, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new_rect_parent".}
+proc fcQGraphicsEllipseItem_new6(vtbl: pointer, vdata: csize_t, x: float64, y: float64, w: float64, h: float64, parent: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new_x_y_w_h_parent".}
 proc fcQGraphicsPolygonItem_fillRule(self: pointer): cint {.importc: "QGraphicsPolygonItem_fillRule".}
 proc fcQGraphicsPolygonItem_setFillRule(self: pointer, rule: cint): void {.importc: "QGraphicsPolygonItem_setFillRule".}
 proc fcQGraphicsPolygonItem_boundingRect(self: pointer): pointer {.importc: "QGraphicsPolygonItem_boundingRect".}
@@ -1083,12 +1083,12 @@ proc fcQGraphicsPolygonItem_protectedbase_addToIndex(self: pointer): void {.impo
 proc fcQGraphicsPolygonItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsPolygonItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsPolygonItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsPolygonItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsPolygonItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsPolygonItem {.importc: "QGraphicsPolygonItem_new".}
-proc fcQGraphicsPolygonItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPolygonItem {.importc: "QGraphicsPolygonItem_new2".}
+proc fcQGraphicsPolygonItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPolygonItem {.importc: "QGraphicsPolygonItem_new_parent".}
 proc fcQGraphicsLineItem_pen(self: pointer): pointer {.importc: "QGraphicsLineItem_pen".}
 proc fcQGraphicsLineItem_setPen(self: pointer, pen: pointer): void {.importc: "QGraphicsLineItem_setPen".}
 proc fcQGraphicsLineItem_line(self: pointer): pointer {.importc: "QGraphicsLineItem_line".}
-proc fcQGraphicsLineItem_setLine(self: pointer, line: pointer): void {.importc: "QGraphicsLineItem_setLine".}
-proc fcQGraphicsLineItem_setLine2(self: pointer, x1: float64, y1: float64, x2: float64, y2: float64): void {.importc: "QGraphicsLineItem_setLine2".}
+proc fcQGraphicsLineItem_setLineLine(self: pointer, line: pointer): void {.importc: "QGraphicsLineItem_setLine_line".}
+proc fcQGraphicsLineItem_setLineX1Y1X2Y2(self: pointer, x1: float64, y1: float64, x2: float64, y2: float64): void {.importc: "QGraphicsLineItem_setLine_x1_y1_x2_y2".}
 proc fcQGraphicsLineItem_boundingRect(self: pointer): pointer {.importc: "QGraphicsLineItem_boundingRect".}
 proc fcQGraphicsLineItem_shape(self: pointer): pointer {.importc: "QGraphicsLineItem_shape".}
 proc fcQGraphicsLineItem_contains(self: pointer, point: pointer): bool {.importc: "QGraphicsLineItem_contains".}
@@ -1176,18 +1176,18 @@ proc fcQGraphicsLineItem_protectedbase_addToIndex(self: pointer): void {.importc
 proc fcQGraphicsLineItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsLineItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsLineItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsLineItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsLineItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new".}
-proc fcQGraphicsLineItem_new2(vtbl: pointer, vdata: csize_t, line: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new2".}
-proc fcQGraphicsLineItem_new3(vtbl: pointer, vdata: csize_t, x1: float64, y1: float64, x2: float64, y2: float64): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new3".}
-proc fcQGraphicsLineItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new4".}
-proc fcQGraphicsLineItem_new5(vtbl: pointer, vdata: csize_t, line: pointer, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new5".}
-proc fcQGraphicsLineItem_new6(vtbl: pointer, vdata: csize_t, x1: float64, y1: float64, x2: float64, y2: float64, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new6".}
+proc fcQGraphicsLineItem_new2(vtbl: pointer, vdata: csize_t, line: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new_line".}
+proc fcQGraphicsLineItem_new3(vtbl: pointer, vdata: csize_t, x1: float64, y1: float64, x2: float64, y2: float64): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new_x1_y1_x2_y2".}
+proc fcQGraphicsLineItem_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new_parent".}
+proc fcQGraphicsLineItem_new5(vtbl: pointer, vdata: csize_t, line: pointer, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new_line_parent".}
+proc fcQGraphicsLineItem_new6(vtbl: pointer, vdata: csize_t, x1: float64, y1: float64, x2: float64, y2: float64, parent: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new_x1_y1_x2_y2_parent".}
 proc fcQGraphicsPixmapItem_pixmap(self: pointer): pointer {.importc: "QGraphicsPixmapItem_pixmap".}
 proc fcQGraphicsPixmapItem_setPixmap(self: pointer, pixmap: pointer): void {.importc: "QGraphicsPixmapItem_setPixmap".}
 proc fcQGraphicsPixmapItem_transformationMode(self: pointer): cint {.importc: "QGraphicsPixmapItem_transformationMode".}
 proc fcQGraphicsPixmapItem_setTransformationMode(self: pointer, mode: cint): void {.importc: "QGraphicsPixmapItem_setTransformationMode".}
 proc fcQGraphicsPixmapItem_offset(self: pointer): pointer {.importc: "QGraphicsPixmapItem_offset".}
-proc fcQGraphicsPixmapItem_setOffset(self: pointer, offset: pointer): void {.importc: "QGraphicsPixmapItem_setOffset".}
-proc fcQGraphicsPixmapItem_setOffset2(self: pointer, x: float64, y: float64): void {.importc: "QGraphicsPixmapItem_setOffset2".}
+proc fcQGraphicsPixmapItem_setOffsetOffset(self: pointer, offset: pointer): void {.importc: "QGraphicsPixmapItem_setOffset_offset".}
+proc fcQGraphicsPixmapItem_setOffsetXY(self: pointer, x: float64, y: float64): void {.importc: "QGraphicsPixmapItem_setOffset_x_y".}
 proc fcQGraphicsPixmapItem_boundingRect(self: pointer): pointer {.importc: "QGraphicsPixmapItem_boundingRect".}
 proc fcQGraphicsPixmapItem_shape(self: pointer): pointer {.importc: "QGraphicsPixmapItem_shape".}
 proc fcQGraphicsPixmapItem_contains(self: pointer, point: pointer): bool {.importc: "QGraphicsPixmapItem_contains".}
@@ -1277,13 +1277,13 @@ proc fcQGraphicsPixmapItem_protectedbase_addToIndex(self: pointer): void {.impor
 proc fcQGraphicsPixmapItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsPixmapItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsPixmapItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsPixmapItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsPixmapItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new".}
-proc fcQGraphicsPixmapItem_new2(vtbl: pointer, vdata: csize_t, pixmap: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new2".}
-proc fcQGraphicsPixmapItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new3".}
-proc fcQGraphicsPixmapItem_new4(vtbl: pointer, vdata: csize_t, pixmap: pointer, parent: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new4".}
+proc fcQGraphicsPixmapItem_new2(vtbl: pointer, vdata: csize_t, pixmap: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new_pixmap".}
+proc fcQGraphicsPixmapItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new_parent".}
+proc fcQGraphicsPixmapItem_new4(vtbl: pointer, vdata: csize_t, pixmap: pointer, parent: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new_pixmap_parent".}
 proc fcQGraphicsTextItem_metaObject(self: pointer): pointer {.importc: "QGraphicsTextItem_metaObject".}
 proc fcQGraphicsTextItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsTextItem_metacast".}
 proc fcQGraphicsTextItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsTextItem_metacall".}
-proc fcQGraphicsTextItem_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsTextItem_tr".}
+proc fcQGraphicsTextItem_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsTextItem_tr_s".}
 proc fcQGraphicsTextItem_toHtml(self: pointer): struct_seaqt_string {.importc: "QGraphicsTextItem_toHtml".}
 proc fcQGraphicsTextItem_setHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QGraphicsTextItem_setHtml".}
 proc fcQGraphicsTextItem_toPlainText(self: pointer): struct_seaqt_string {.importc: "QGraphicsTextItem_toPlainText".}
@@ -1316,8 +1316,8 @@ proc fcQGraphicsTextItem_linkActivated(self: pointer, param1: struct_seaqt_strin
 proc fcQGraphicsTextItem_connect_linkActivated(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsTextItem_connect_linkActivated".}
 proc fcQGraphicsTextItem_linkHovered(self: pointer, param1: struct_seaqt_string): void {.importc: "QGraphicsTextItem_linkHovered".}
 proc fcQGraphicsTextItem_connect_linkHovered(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsTextItem_connect_linkHovered".}
-proc fcQGraphicsTextItem_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsTextItem_tr2".}
-proc fcQGraphicsTextItem_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsTextItem_tr3".}
+proc fcQGraphicsTextItem_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsTextItem_tr_s_c".}
+proc fcQGraphicsTextItem_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsTextItem_tr_s_c_n".}
 proc fcQGraphicsTextItem_vdata(self: pointer): ptr pointer {.importc: "QGraphicsTextItem_vdata".}
 proc fvdata_cQGraphicsTextItem(self: pointer): pointer {.importc: "vdata_QGraphicsTextItem".}
 
@@ -1422,9 +1422,9 @@ proc fcQGraphicsTextItem_protectedbase_addToIndex(self: pointer): void {.importc
 proc fcQGraphicsTextItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsTextItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsTextItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsTextItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsTextItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new".}
-proc fcQGraphicsTextItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new2".}
-proc fcQGraphicsTextItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new3".}
-proc fcQGraphicsTextItem_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new4".}
+proc fcQGraphicsTextItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new_text".}
+proc fcQGraphicsTextItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new_parent".}
+proc fcQGraphicsTextItem_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new_text_parent".}
 proc fcQGraphicsTextItem_staticMetaObject(): pointer {.importc: "QGraphicsTextItem_staticMetaObject".}
 proc fcQGraphicsSimpleTextItem_setText(self: pointer, text: struct_seaqt_string): void {.importc: "QGraphicsSimpleTextItem_setText".}
 proc fcQGraphicsSimpleTextItem_text(self: pointer): struct_seaqt_string {.importc: "QGraphicsSimpleTextItem_text".}
@@ -1517,9 +1517,9 @@ proc fcQGraphicsSimpleTextItem_protectedbase_addToIndex(self: pointer): void {.i
 proc fcQGraphicsSimpleTextItem_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsSimpleTextItem_protectedbase_removeFromIndex".}
 proc fcQGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsSimpleTextItem_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new".}
-proc fcQGraphicsSimpleTextItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new2".}
-proc fcQGraphicsSimpleTextItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new3".}
-proc fcQGraphicsSimpleTextItem_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new4".}
+proc fcQGraphicsSimpleTextItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new_text".}
+proc fcQGraphicsSimpleTextItem_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new_parent".}
+proc fcQGraphicsSimpleTextItem_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new_text_parent".}
 proc fcQGraphicsItemGroup_addToGroup(self: pointer, item: pointer): void {.importc: "QGraphicsItemGroup_addToGroup".}
 proc fcQGraphicsItemGroup_removeFromGroup(self: pointer, item: pointer): void {.importc: "QGraphicsItemGroup_removeFromGroup".}
 proc fcQGraphicsItemGroup_boundingRect(self: pointer): pointer {.importc: "QGraphicsItemGroup_boundingRect".}
@@ -1607,7 +1607,7 @@ proc fcQGraphicsItemGroup_protectedbase_addToIndex(self: pointer): void {.import
 proc fcQGraphicsItemGroup_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsItemGroup_protectedbase_removeFromIndex".}
 proc fcQGraphicsItemGroup_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsItemGroup_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsItemGroup_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsItemGroup {.importc: "QGraphicsItemGroup_new".}
-proc fcQGraphicsItemGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsItemGroup {.importc: "QGraphicsItemGroup_new2".}
+proc fcQGraphicsItemGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsItemGroup {.importc: "QGraphicsItemGroup_new_parent".}
 
 proc scene*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsscene_types.QGraphicsScene =
   gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsItem_scene(self.h), owned: false)
@@ -1658,7 +1658,7 @@ proc toGraphicsObject*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphi
   gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_toGraphicsObject(self.h), owned: false)
 
 proc toGraphicsObject2*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsObject =
-  gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_toGraphicsObject2(self.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsObject(h: fcQGraphicsItem_toGraphicsObjectConst(self.h), owned: false)
 
 proc group*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicsitem_types.QGraphicsItemGroup =
   gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsItem_group(self.h), owned: false)
@@ -1670,7 +1670,7 @@ proc flags*(self: gen_qgraphicsitem_types.QGraphicsItem): cint =
   cint(fcQGraphicsItem_flags(self.h))
 
 proc setFlag*(self: gen_qgraphicsitem_types.QGraphicsItem, flag: cint): void =
-  fcQGraphicsItem_setFlag(self.h, cint(flag))
+  fcQGraphicsItem_setFlagFlag(self.h, cint(flag))
 
 proc setFlags*(self: gen_qgraphicsitem_types.QGraphicsItem, flags: cint): void =
   fcQGraphicsItem_setFlags(self.h, cint(flags))
@@ -1679,7 +1679,7 @@ proc cacheMode*(self: gen_qgraphicsitem_types.QGraphicsItem): cint =
   cint(fcQGraphicsItem_cacheMode(self.h))
 
 proc setCacheMode*(self: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): void =
-  fcQGraphicsItem_setCacheMode(self.h, cint(mode))
+  fcQGraphicsItem_setCacheModeMode(self.h, cint(mode))
 
 proc panelModality*(self: gen_qgraphicsitem_types.QGraphicsItem): cint =
   cint(fcQGraphicsItem_panelModality(self.h))
@@ -1847,10 +1847,10 @@ proc scenePos*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpoint_types.QP
   gen_qpoint_types.QPointF(h: fcQGraphicsItem_scenePos(self.h), owned: true)
 
 proc setPos*(self: gen_qgraphicsitem_types.QGraphicsItem, pos: gen_qpoint_types.QPointF): void =
-  fcQGraphicsItem_setPos(self.h, pos.h)
+  fcQGraphicsItem_setPosPos(self.h, pos.h)
 
 proc setPos*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): void =
-  fcQGraphicsItem_setPos2(self.h, x, y)
+  fcQGraphicsItem_setPosXY(self.h, x, y)
 
 proc moveBy*(self: gen_qgraphicsitem_types.QGraphicsItem, dx: float64, dy: float64): void =
   fcQGraphicsItem_moveBy(self.h, dx, dy)
@@ -1859,7 +1859,7 @@ proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItem_ensureVisible(self.h)
 
 proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsItem_ensureVisible2(self.h, x, y, w, h)
+  fcQGraphicsItem_ensureVisibleXYWH(self.h, x, y, w, h)
 
 proc transform*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQGraphicsItem_transform(self.h), owned: true)
@@ -1871,10 +1871,10 @@ proc deviceTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, viewportTrans
   gen_qtransform_types.QTransform(h: fcQGraphicsItem_deviceTransform(self.h, viewportTransform.h), owned: true)
 
 proc itemTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, other: gen_qgraphicsitem_types.QGraphicsItem): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQGraphicsItem_itemTransform(self.h, other.h), owned: true)
+  gen_qtransform_types.QTransform(h: fcQGraphicsItem_itemTransformOther(self.h, other.h), owned: true)
 
 proc setTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, matrix: gen_qtransform_types.QTransform): void =
-  fcQGraphicsItem_setTransform(self.h, matrix.h)
+  fcQGraphicsItem_setTransformMatrix(self.h, matrix.h)
 
 proc resetTransform*(self: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItem_resetTransform(self.h)
@@ -1911,10 +1911,10 @@ proc transformOriginPoint*(self: gen_qgraphicsitem_types.QGraphicsItem): gen_qpo
   gen_qpoint_types.QPointF(h: fcQGraphicsItem_transformOriginPoint(self.h), owned: true)
 
 proc setTransformOriginPoint*(self: gen_qgraphicsitem_types.QGraphicsItem, origin: gen_qpoint_types.QPointF): void =
-  fcQGraphicsItem_setTransformOriginPoint(self.h, origin.h)
+  fcQGraphicsItem_setTransformOriginPointOrigin(self.h, origin.h)
 
 proc setTransformOriginPoint*(self: gen_qgraphicsitem_types.QGraphicsItem, ax: float64, ay: float64): void =
-  fcQGraphicsItem_setTransformOriginPoint2(self.h, ax, ay)
+  fcQGraphicsItem_setTransformOriginPointAxAy(self.h, ax, ay)
 
 proc advance*(self: gen_qgraphicsitem_types.QGraphicsItem, phase: cint): void =
   fcQGraphicsItem_advance(self.h, phase)
@@ -1968,7 +1968,7 @@ proc isObscured*(self: gen_qgraphicsitem_types.QGraphicsItem): bool =
   fcQGraphicsItem_isObscured(self.h)
 
 proc isObscured*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): bool =
-  fcQGraphicsItem_isObscured2(self.h, x, y, w, h)
+  fcQGraphicsItem_isObscuredXYWH(self.h, x, y, w, h)
 
 proc isObscuredBy*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
   fcQGraphicsItem_isObscuredBy(self.h, item.h)
@@ -1992,100 +1992,100 @@ proc update*(self: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsItem_update(self.h)
 
 proc update*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, width: float64, height: float64): void =
-  fcQGraphicsItem_update2(self.h, x, y, width, height)
+  fcQGraphicsItem_updateXYWidthHeight(self.h, x, y, width, height)
 
 proc scroll*(self: gen_qgraphicsitem_types.QGraphicsItem, dx: float64, dy: float64): void =
-  fcQGraphicsItem_scroll(self.h, dx, dy)
+  fcQGraphicsItem_scrollDxDy(self.h, dx, dy)
 
 proc mapToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToItem(self.h, item.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToItemItemPoint(self.h, item.h, point.h), owned: true)
 
 proc mapToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToParent(self.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToParentPoint(self.h, point.h), owned: true)
 
 proc mapToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToScene(self.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToScenePoint(self.h, point.h), owned: true)
 
 proc mapRectToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToItem(self.h, item.h, rect.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToItemItemRect(self.h, item.h, rect.h), owned: true)
 
 proc mapRectToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToParent(self.h, rect.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToParentRect(self.h, rect.h), owned: true)
 
 proc mapRectToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToScene(self.h, rect.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToSceneRect(self.h, rect.h), owned: true)
 
 proc mapToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToItem4(self.h, item.h, path.h), owned: true)
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToItemItemPath(self.h, item.h, path.h), owned: true)
 
 proc mapToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToParentWithPath(self.h, path.h), owned: true)
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToParentPath(self.h, path.h), owned: true)
 
 proc mapToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToSceneWithPath(self.h, path.h), owned: true)
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapToScenePath(self.h, path.h), owned: true)
 
 proc mapFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromItem(self.h, item.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromItemItemPoint(self.h, item.h, point.h), owned: true)
 
 proc mapFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromParent(self.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromParentPoint(self.h, point.h), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromScene(self.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromScenePoint(self.h, point.h), owned: true)
 
 proc mapRectFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromItem(self.h, item.h, rect.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromItemItemRect(self.h, item.h, rect.h), owned: true)
 
 proc mapRectFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromParent(self.h, rect.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromParentRect(self.h, rect.h), owned: true)
 
 proc mapRectFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromScene(self.h, rect.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromSceneRect(self.h, rect.h), owned: true)
 
 proc mapFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromItem4(self.h, item.h, path.h), owned: true)
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromItemItemPath(self.h, item.h, path.h), owned: true)
 
 proc mapFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromParentWithPath(self.h, path.h), owned: true)
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromParentPath(self.h, path.h), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromSceneWithPath(self.h, path.h), owned: true)
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsItem_mapFromScenePath(self.h, path.h), owned: true)
 
 proc mapToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToItem5(self.h, item.h, x, y), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToItemItemXY(self.h, item.h, x, y), owned: true)
 
 proc mapToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToParent2(self.h, x, y), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToParentXY(self.h, x, y), owned: true)
 
 proc mapToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToScene2(self.h, x, y), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapToSceneXY(self.h, x, y), owned: true)
 
 proc mapRectToItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToItem2(self.h, item.h, x, y, w, h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToItemItemXYWH(self.h, item.h, x, y, w, h), owned: true)
 
 proc mapRectToParent*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToParent2(self.h, x, y, w, h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToParentXYWH(self.h, x, y, w, h), owned: true)
 
 proc mapRectToScene*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToScene2(self.h, x, y, w, h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectToSceneXYWH(self.h, x, y, w, h), owned: true)
 
 proc mapFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromItem5(self.h, item.h, x, y), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromItemItemXY(self.h, item.h, x, y), owned: true)
 
 proc mapFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromParent2(self.h, x, y), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromParentXY(self.h, x, y), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromScene2(self.h, x, y), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsItem_mapFromSceneXY(self.h, x, y), owned: true)
 
 proc mapRectFromItem*(self: gen_qgraphicsitem_types.QGraphicsItem, item: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromItem2(self.h, item.h, x, y, w, h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromItemItemXYWH(self.h, item.h, x, y, w, h), owned: true)
 
 proc mapRectFromParent*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromParent2(self.h, x, y, w, h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromParentXYWH(self.h, x, y, w, h), owned: true)
 
 proc mapRectFromScene*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromScene2(self.h, x, y, w, h), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsItem_mapRectFromSceneXYWH(self.h, x, y, w, h), owned: true)
 
 proc isAncestorOf*(self: gen_qgraphicsitem_types.QGraphicsItem, child: gen_qgraphicsitem_types.QGraphicsItem): bool =
   fcQGraphicsItem_isAncestorOf(self.h, child.h)
@@ -2118,37 +2118,37 @@ proc removeSceneEventFilter*(self: gen_qgraphicsitem_types.QGraphicsItem, filter
   fcQGraphicsItem_removeSceneEventFilter(self.h, filterItem.h)
 
 proc setFlag*(self: gen_qgraphicsitem_types.QGraphicsItem, flag: cint, enabled: bool): void =
-  fcQGraphicsItem_setFlag2(self.h, cint(flag), enabled)
+  fcQGraphicsItem_setFlagFlagEnabled(self.h, cint(flag), enabled)
 
 proc setCacheMode*(self: gen_qgraphicsitem_types.QGraphicsItem, mode: cint, cacheSize: gen_qsize_types.QSize): void =
-  fcQGraphicsItem_setCacheMode2(self.h, cint(mode), cacheSize.h)
+  fcQGraphicsItem_setCacheModeModeCacheSize(self.h, cint(mode), cacheSize.h)
 
 proc setFocus*(self: gen_qgraphicsitem_types.QGraphicsItem, focusReason: cint): void =
-  fcQGraphicsItem_setFocusWithFocusReason(self.h, cint(focusReason))
+  fcQGraphicsItem_setFocusFocusReason(self.h, cint(focusReason))
 
 proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsItem_ensureVisibleWithRect(self.h, rect.h)
+  fcQGraphicsItem_ensureVisibleRect(self.h, rect.h)
 
 proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF, xmargin: cint): void =
-  fcQGraphicsItem_ensureVisible3(self.h, rect.h, xmargin)
+  fcQGraphicsItem_ensureVisibleRectXmargin(self.h, rect.h, xmargin)
 
 proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF, xmargin: cint, ymargin: cint): void =
-  fcQGraphicsItem_ensureVisible4(self.h, rect.h, xmargin, ymargin)
+  fcQGraphicsItem_ensureVisibleRectXmarginYmargin(self.h, rect.h, xmargin, ymargin)
 
 proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64, xmargin: cint): void =
-  fcQGraphicsItem_ensureVisible5(self.h, x, y, w, h, xmargin)
+  fcQGraphicsItem_ensureVisibleXYWHXmargin(self.h, x, y, w, h, xmargin)
 
 proc ensureVisible*(self: gen_qgraphicsitem_types.QGraphicsItem, x: float64, y: float64, w: float64, h: float64, xmargin: cint, ymargin: cint): void =
-  fcQGraphicsItem_ensureVisible6(self.h, x, y, w, h, xmargin, ymargin)
+  fcQGraphicsItem_ensureVisibleXYWHXmarginYmargin(self.h, x, y, w, h, xmargin, ymargin)
 
 proc itemTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, other: gen_qgraphicsitem_types.QGraphicsItem, ok: ptr bool): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQGraphicsItem_itemTransform2(self.h, other.h, ok), owned: true)
+  gen_qtransform_types.QTransform(h: fcQGraphicsItem_itemTransformOtherOk(self.h, other.h, ok), owned: true)
 
 proc setTransform*(self: gen_qgraphicsitem_types.QGraphicsItem, matrix: gen_qtransform_types.QTransform, combine: bool): void =
-  fcQGraphicsItem_setTransform2(self.h, matrix.h, combine)
+  fcQGraphicsItem_setTransformMatrixCombine(self.h, matrix.h, combine)
 
 proc collidingItems*(self: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsItem_collidingItemsWithMode(self.h, cint(mode))
+  var v_ma = fcQGraphicsItem_collidingItemsMode(self.h, cint(mode))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -2157,13 +2157,13 @@ proc collidingItems*(self: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): s
   vx_ret
 
 proc isObscured*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): bool =
-  fcQGraphicsItem_isObscuredWithRect(self.h, rect.h)
+  fcQGraphicsItem_isObscuredRect(self.h, rect.h)
 
 proc update*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsItem_updateWithRect(self.h, rect.h)
+  fcQGraphicsItem_updateRect(self.h, rect.h)
 
 proc scroll*(self: gen_qgraphicsitem_types.QGraphicsItem, dx: float64, dy: float64, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsItem_scroll2(self.h, dx, dy, rect.h)
+  fcQGraphicsItem_scrollDxDyRect(self.h, dx, dy, rect.h)
 
 type QGraphicsItemadvanceProc* = proc(self: QGraphicsItem, phase: cint): void {.raises: [], gcsafe.}
 type QGraphicsItemboundingRectProc* = proc(self: QGraphicsItem): gen_qrect_types.QRectF {.raises: [], gcsafe.}
@@ -3109,13 +3109,13 @@ proc metacall*(self: gen_qgraphicsitem_types.QGraphicsObject, param1: cint, para
   fcQGraphicsObject_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsObject, s: cstring): string =
-  let v_ms = fcQGraphicsObject_tr(s)
+  let v_ms = fcQGraphicsObject_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc grabGesture*(self: gen_qgraphicsitem_types.QGraphicsObject, typeVal: cint): void =
-  fcQGraphicsObject_grabGesture(self.h, cint(typeVal))
+  fcQGraphicsObject_grabGestureType(self.h, cint(typeVal))
 
 proc ungrabGesture*(self: gen_qgraphicsitem_types.QGraphicsObject, typeVal: cint): void =
   fcQGraphicsObject_ungrabGesture(self.h, cint(typeVal))
@@ -3337,19 +3337,19 @@ proc onHeightChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGrap
   fcQGraphicsObject_connect_heightChanged(self.h, cast[int](addr tmp[]), fcQGraphicsObject_slot_callback_heightChanged, fcQGraphicsObject_slot_callback_heightChanged_release)
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsObject, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsObject_tr2(s, c)
+  let v_ms = fcQGraphicsObject_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsObject, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsObject_tr3(s, c, n)
+  let v_ms = fcQGraphicsObject_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc grabGesture*(self: gen_qgraphicsitem_types.QGraphicsObject, typeVal: cint, flags: cint): void =
-  fcQGraphicsObject_grabGesture2(self.h, cint(typeVal), cint(flags))
+  fcQGraphicsObject_grabGestureTypeFlags(self.h, cint(typeVal), cint(flags))
 
 type QGraphicsObjectmetaObjectProc* = proc(self: QGraphicsObject): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGraphicsObjectmetacastProc* = proc(self: QGraphicsObject, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -6650,10 +6650,10 @@ proc rect*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qrect_types.QRe
   gen_qrect_types.QRectF(h: fcQGraphicsRectItem_rect(self.h), owned: true)
 
 proc setRect*(self: gen_qgraphicsitem_types.QGraphicsRectItem, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsRectItem_setRect(self.h, rect.h)
+  fcQGraphicsRectItem_setRectRect(self.h, rect.h)
 
 proc setRect*(self: gen_qgraphicsitem_types.QGraphicsRectItem, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsRectItem_setRect2(self.h, x, y, w, h)
+  fcQGraphicsRectItem_setRectXYWH(self.h, x, y, w, h)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsRectItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQGraphicsRectItem_boundingRect(self.h), owned: true)
@@ -7976,10 +7976,10 @@ proc rect*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): gen_qrect_types.
   gen_qrect_types.QRectF(h: fcQGraphicsEllipseItem_rect(self.h), owned: true)
 
 proc setRect*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsEllipseItem_setRect(self.h, rect.h)
+  fcQGraphicsEllipseItem_setRectRect(self.h, rect.h)
 
 proc setRect*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsEllipseItem_setRect2(self.h, x, y, w, h)
+  fcQGraphicsEllipseItem_setRectXYWH(self.h, x, y, w, h)
 
 proc startAngle*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem): cint =
   fcQGraphicsEllipseItem_startAngle(self.h)
@@ -10287,10 +10287,10 @@ proc line*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qline_types.QLi
   gen_qline_types.QLineF(h: fcQGraphicsLineItem_line(self.h), owned: true)
 
 proc setLine*(self: gen_qgraphicsitem_types.QGraphicsLineItem, line: gen_qline_types.QLineF): void =
-  fcQGraphicsLineItem_setLine(self.h, line.h)
+  fcQGraphicsLineItem_setLineLine(self.h, line.h)
 
 proc setLine*(self: gen_qgraphicsitem_types.QGraphicsLineItem, x1: float64, y1: float64, x2: float64, y2: float64): void =
-  fcQGraphicsLineItem_setLine2(self.h, x1, y1, x2, y2)
+  fcQGraphicsLineItem_setLineX1Y1X2Y2(self.h, x1, y1, x2, y2)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsLineItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQGraphicsLineItem_boundingRect(self.h), owned: true)
@@ -11625,10 +11625,10 @@ proc offset*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qpoint_type
   gen_qpoint_types.QPointF(h: fcQGraphicsPixmapItem_offset(self.h), owned: true)
 
 proc setOffset*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, offset: gen_qpoint_types.QPointF): void =
-  fcQGraphicsPixmapItem_setOffset(self.h, offset.h)
+  fcQGraphicsPixmapItem_setOffsetOffset(self.h, offset.h)
 
 proc setOffset*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, x: float64, y: float64): void =
-  fcQGraphicsPixmapItem_setOffset2(self.h, x, y)
+  fcQGraphicsPixmapItem_setOffsetXY(self.h, x, y)
 
 proc boundingRect*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQGraphicsPixmapItem_boundingRect(self.h), owned: true)
@@ -12785,7 +12785,7 @@ proc metacall*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: cint, pa
   fcQGraphicsTextItem_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsTextItem, s: cstring): string =
-  let v_ms = fcQGraphicsTextItem_tr(s)
+  let v_ms = fcQGraphicsTextItem_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -12927,13 +12927,13 @@ proc onLinkHovered*(self: gen_qgraphicsitem_types.QGraphicsTextItem, slot: QGrap
   fcQGraphicsTextItem_connect_linkHovered(self.h, cast[int](addr tmp[]), fcQGraphicsTextItem_slot_callback_linkHovered, fcQGraphicsTextItem_slot_callback_linkHovered_release)
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsTextItem, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsTextItem_tr2(s, c)
+  let v_ms = fcQGraphicsTextItem_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsTextItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsTextItem_tr3(s, c, n)
+  let v_ms = fcQGraphicsTextItem_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

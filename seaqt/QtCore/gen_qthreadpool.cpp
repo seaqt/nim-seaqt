@@ -174,7 +174,7 @@ VirtualQThreadPool* QThreadPool_new(const QThreadPool_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQThreadPool(vtbl) : nullptr;
 }
 
-VirtualQThreadPool* QThreadPool_new2(const QThreadPool_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQThreadPool* QThreadPool_new_parent(const QThreadPool_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQThreadPool>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQThreadPool(vtbl, parent) : nullptr;
 }
@@ -195,7 +195,7 @@ int QThreadPool_metacall(QThreadPool* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QThreadPool_tr(const char* s) {
+struct seaqt_string QThreadPool_tr_s(const char* s) {
 	QString _ret = QThreadPool::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -210,15 +210,15 @@ QThreadPool* QThreadPool_globalInstance() {
 	return QThreadPool::globalInstance();
 }
 
-void QThreadPool_start(QThreadPool* self, QRunnable* runnable) {
+void QThreadPool_start_runnable(QThreadPool* self, QRunnable* runnable) {
 	self->start(runnable);
 }
 
-bool QThreadPool_tryStart(QThreadPool* self, QRunnable* runnable) {
+bool QThreadPool_tryStart_runnable(QThreadPool* self, QRunnable* runnable) {
 	return self->tryStart(runnable);
 }
 
-void QThreadPool_startOnReservedThread(QThreadPool* self, QRunnable* runnable) {
+void QThreadPool_startOnReservedThread_runnable(QThreadPool* self, QRunnable* runnable) {
 	self->startOnReservedThread(runnable);
 }
 
@@ -284,7 +284,7 @@ bool QThreadPool_tryTake(QThreadPool* self, QRunnable* runnable) {
 	return self->tryTake(runnable);
 }
 
-struct seaqt_string QThreadPool_tr2(const char* s, const char* c) {
+struct seaqt_string QThreadPool_tr_s_c(const char* s, const char* c) {
 	QString _ret = QThreadPool::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -295,7 +295,7 @@ struct seaqt_string QThreadPool_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QThreadPool_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QThreadPool_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QThreadPool::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -306,11 +306,11 @@ struct seaqt_string QThreadPool_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QThreadPool_start2(QThreadPool* self, QRunnable* runnable, int priority) {
+void QThreadPool_start_runnable_priority(QThreadPool* self, QRunnable* runnable, int priority) {
 	self->start(runnable, static_cast<int>(priority));
 }
 
-bool QThreadPool_waitForDoneWithMsecs(QThreadPool* self, int msecs) {
+bool QThreadPool_waitForDone_msecs(QThreadPool* self, int msecs) {
 	return self->waitForDone(static_cast<int>(msecs));
 }
 

@@ -185,12 +185,12 @@ public:
 	friend bool QCoreApplication_protectedbase_isSignalConnected(const VirtualQCoreApplication* self, QMetaMethod* signal);
 };
 
-VirtualQCoreApplication* QCoreApplication_new(const QCoreApplication_VTable* vtbl, size_t vdata, int* argc, char** argv) {
+VirtualQCoreApplication* QCoreApplication_new_int_char(const QCoreApplication_VTable* vtbl, size_t vdata, int* argc, char** argv) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCoreApplication>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCoreApplication(vtbl, static_cast<int&>(*argc), argv) : nullptr;
 }
 
-VirtualQCoreApplication* QCoreApplication_new2(const QCoreApplication_VTable* vtbl, size_t vdata, int* argc, char** argv, int param3) {
+VirtualQCoreApplication* QCoreApplication_new_int_char_int(const QCoreApplication_VTable* vtbl, size_t vdata, int* argc, char** argv, int param3) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCoreApplication>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCoreApplication(vtbl, static_cast<int&>(*argc), argv, static_cast<int>(param3)) : nullptr;
 }
@@ -211,7 +211,7 @@ int QCoreApplication_metacall(QCoreApplication* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCoreApplication_tr(const char* s) {
+struct seaqt_string QCoreApplication_tr_s(const char* s) {
 	QString _ret = QCoreApplication::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -242,7 +242,7 @@ struct seaqt_array /* of struct seaqt_string */  QCoreApplication_arguments() {
 	return _out;
 }
 
-void QCoreApplication_setAttribute(int attribute) {
+void QCoreApplication_setAttribute_attribute(int attribute) {
 	QCoreApplication::setAttribute(static_cast<Qt::ApplicationAttribute>(attribute));
 }
 
@@ -334,7 +334,7 @@ void QCoreApplication_processEvents() {
 	QCoreApplication::processEvents();
 }
 
-void QCoreApplication_processEvents2(int flags, int maxtime) {
+void QCoreApplication_processEvents_flags_maxtime(int flags, int maxtime) {
 	QCoreApplication::processEvents(static_cast<QEventLoop::ProcessEventsFlags>(flags), static_cast<int>(maxtime));
 }
 
@@ -342,7 +342,7 @@ bool QCoreApplication_sendEvent(QObject* receiver, QEvent* event) {
 	return QCoreApplication::sendEvent(receiver, event);
 }
 
-void QCoreApplication_postEvent(QObject* receiver, QEvent* event) {
+void QCoreApplication_postEvent_receiver_event(QObject* receiver, QEvent* event) {
 	QCoreApplication::postEvent(receiver, event);
 }
 
@@ -350,7 +350,7 @@ void QCoreApplication_sendPostedEvents() {
 	QCoreApplication::sendPostedEvents();
 }
 
-void QCoreApplication_removePostedEvents(QObject* receiver) {
+void QCoreApplication_removePostedEvents_receiver(QObject* receiver) {
 	QCoreApplication::removePostedEvents(receiver);
 }
 
@@ -450,7 +450,7 @@ bool QCoreApplication_removeTranslator(QTranslator* messageFile) {
 	return QCoreApplication::removeTranslator(messageFile);
 }
 
-struct seaqt_string QCoreApplication_translate(const char* context, const char* key) {
+struct seaqt_string QCoreApplication_translate_context_key(const char* context, const char* key) {
 	QString _ret = QCoreApplication::translate(context, key);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -569,7 +569,7 @@ void QCoreApplication_connect_applicationVersionChanged(QCoreApplication* self, 
 	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationVersionChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QCoreApplication_tr2(const char* s, const char* c) {
+struct seaqt_string QCoreApplication_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCoreApplication::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -580,7 +580,7 @@ struct seaqt_string QCoreApplication_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCoreApplication_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCoreApplication_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCoreApplication::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -591,31 +591,31 @@ struct seaqt_string QCoreApplication_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QCoreApplication_setAttribute2(int attribute, bool on) {
+void QCoreApplication_setAttribute_attribute_on(int attribute, bool on) {
 	QCoreApplication::setAttribute(static_cast<Qt::ApplicationAttribute>(attribute), on);
 }
 
-void QCoreApplication_processEventsWithFlags(int flags) {
+void QCoreApplication_processEvents_flags(int flags) {
 	QCoreApplication::processEvents(static_cast<QEventLoop::ProcessEventsFlags>(flags));
 }
 
-void QCoreApplication_postEvent2(QObject* receiver, QEvent* event, int priority) {
+void QCoreApplication_postEvent_receiver_event_priority(QObject* receiver, QEvent* event, int priority) {
 	QCoreApplication::postEvent(receiver, event, static_cast<int>(priority));
 }
 
-void QCoreApplication_sendPostedEventsWithReceiver(QObject* receiver) {
+void QCoreApplication_sendPostedEvents_receiver(QObject* receiver) {
 	QCoreApplication::sendPostedEvents(receiver);
 }
 
-void QCoreApplication_sendPostedEvents2(QObject* receiver, int event_type) {
+void QCoreApplication_sendPostedEvents_receiver_event_type(QObject* receiver, int event_type) {
 	QCoreApplication::sendPostedEvents(receiver, static_cast<int>(event_type));
 }
 
-void QCoreApplication_removePostedEvents2(QObject* receiver, int eventType) {
+void QCoreApplication_removePostedEvents_receiver_eventType(QObject* receiver, int eventType) {
 	QCoreApplication::removePostedEvents(receiver, static_cast<int>(eventType));
 }
 
-struct seaqt_string QCoreApplication_translate2(const char* context, const char* key, const char* disambiguation) {
+struct seaqt_string QCoreApplication_translate_context_key_disambiguation(const char* context, const char* key, const char* disambiguation) {
 	QString _ret = QCoreApplication::translate(context, key, disambiguation);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -626,7 +626,7 @@ struct seaqt_string QCoreApplication_translate2(const char* context, const char*
 	return _ms;
 }
 
-struct seaqt_string QCoreApplication_translate3(const char* context, const char* key, const char* disambiguation, int n) {
+struct seaqt_string QCoreApplication_translate_context_key_disambiguation_n(const char* context, const char* key, const char* disambiguation, int n) {
 	QString _ret = QCoreApplication::translate(context, key, disambiguation, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -637,7 +637,7 @@ struct seaqt_string QCoreApplication_translate3(const char* context, const char*
 	return _ms;
 }
 
-void QCoreApplication_exitWithRetcode(int retcode) {
+void QCoreApplication_exit_retcode(int retcode) {
 	QCoreApplication::exit(static_cast<int>(retcode));
 }
 

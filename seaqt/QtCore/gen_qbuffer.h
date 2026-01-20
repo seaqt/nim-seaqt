@@ -72,17 +72,17 @@ void* QBuffer_vdata(VirtualQBuffer* self);
 VirtualQBuffer* vdata_QBuffer(void* vdata);
 
 VirtualQBuffer* QBuffer_new(const QBuffer_VTable* vtbl, size_t vdata);
-VirtualQBuffer* QBuffer_new2(const QBuffer_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQBuffer* QBuffer_new_parent(const QBuffer_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QBuffer_virtbase(QBuffer* src, QIODevice** outptr_QIODevice);
 QMetaObject* QBuffer_metaObject(const QBuffer* self);
 void* QBuffer_metacast(QBuffer* self, const char* param1);
 int QBuffer_metacall(QBuffer* self, int param1, int param2, void** param3);
-struct seaqt_string QBuffer_tr(const char* s);
+struct seaqt_string QBuffer_tr_s(const char* s);
 struct seaqt_string QBuffer_buffer(QBuffer* self);
-struct seaqt_string QBuffer_buffer2(const QBuffer* self);
-void QBuffer_setData(QBuffer* self, struct seaqt_string data);
-void QBuffer_setData2(QBuffer* self, const char* data, int len);
+struct seaqt_string QBuffer_buffer_const(const QBuffer* self);
+void QBuffer_setData_data(QBuffer* self, struct seaqt_string data);
+void QBuffer_setData_data_len(QBuffer* self, const char* data, int len);
 struct seaqt_string QBuffer_data(const QBuffer* self);
 bool QBuffer_open(QBuffer* self, int openMode);
 void QBuffer_close(QBuffer* self);
@@ -95,8 +95,8 @@ void QBuffer_connectNotify(QBuffer* self, QMetaMethod* param1);
 void QBuffer_disconnectNotify(QBuffer* self, QMetaMethod* param1);
 long long QBuffer_readData(QBuffer* self, char* data, long long maxlen);
 long long QBuffer_writeData(QBuffer* self, const char* data, long long len);
-struct seaqt_string QBuffer_tr2(const char* s, const char* c);
-struct seaqt_string QBuffer_tr3(const char* s, const char* c, int n);
+struct seaqt_string QBuffer_tr_s_c(const char* s, const char* c);
+struct seaqt_string QBuffer_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QBuffer_virtualbase_metaObject(const VirtualQBuffer* self);
 void* QBuffer_virtualbase_metacast(VirtualQBuffer* self, const char* param1);

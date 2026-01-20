@@ -16,8 +16,8 @@ QAudioFormat* QAudioFormat_new() {
 	return new (std::nothrow) QAudioFormat();
 }
 
-QAudioFormat* QAudioFormat_new2(QAudioFormat* param1) {
-	return new (std::nothrow) QAudioFormat(*param1);
+QAudioFormat* QAudioFormat_new_from(QAudioFormat* from) {
+	return new (std::nothrow) QAudioFormat(*from);
 }
 
 bool QAudioFormat_isValid(const QAudioFormat* self) {

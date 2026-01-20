@@ -495,12 +495,12 @@ VirtualQWindow* QWindow_new(const QWindow_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQWindow(vtbl) : nullptr;
 }
 
-VirtualQWindow* QWindow_new2(const QWindow_VTable* vtbl, size_t vdata, QWindow* parent) {
+VirtualQWindow* QWindow_new_parent(const QWindow_VTable* vtbl, size_t vdata, QWindow* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWindow(vtbl, parent) : nullptr;
 }
 
-VirtualQWindow* QWindow_new3(const QWindow_VTable* vtbl, size_t vdata, QScreen* screen) {
+VirtualQWindow* QWindow_new_screen(const QWindow_VTable* vtbl, size_t vdata, QScreen* screen) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWindow(vtbl, screen) : nullptr;
 }
@@ -522,7 +522,7 @@ int QWindow_metacall(QWindow* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWindow_tr(const char* s) {
+struct seaqt_string QWindow_tr_s(const char* s) {
 	QString _ret = QWindow::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -610,7 +610,7 @@ int QWindow_flags(const QWindow* self) {
 	return static_cast<int>(_ret);
 }
 
-void QWindow_setFlag(QWindow* self, int param1) {
+void QWindow_setFlag_Qt_WindowType(QWindow* self, int param1) {
 	self->setFlag(static_cast<Qt::WindowType>(param1));
 }
 
@@ -691,7 +691,7 @@ QWindow* QWindow_transientParent(const QWindow* self) {
 	return self->transientParent();
 }
 
-bool QWindow_isAncestorOf(const QWindow* self, QWindow* child) {
+bool QWindow_isAncestorOf_child(const QWindow* self, QWindow* child) {
 	return self->isAncestorOf(child);
 }
 
@@ -791,19 +791,19 @@ QPoint* QWindow_position(const QWindow* self) {
 	return new QPoint(self->position());
 }
 
-void QWindow_setPosition(QWindow* self, QPoint* pt) {
+void QWindow_setPosition_pt(QWindow* self, QPoint* pt) {
 	self->setPosition(*pt);
 }
 
-void QWindow_setPosition2(QWindow* self, int posx, int posy) {
+void QWindow_setPosition_posx_posy(QWindow* self, int posx, int posy) {
 	self->setPosition(static_cast<int>(posx), static_cast<int>(posy));
 }
 
-void QWindow_resize(QWindow* self, QSize* newSize) {
+void QWindow_resize_newSize(QWindow* self, QSize* newSize) {
 	self->resize(*newSize);
 }
 
-void QWindow_resize2(QWindow* self, int w, int h) {
+void QWindow_resize_w_h(QWindow* self, int w, int h) {
 	self->resize(static_cast<int>(w), static_cast<int>(h));
 }
 
@@ -859,19 +859,19 @@ QObject* QWindow_focusObject(const QWindow* self) {
 	return self->focusObject();
 }
 
-QPointF* QWindow_mapToGlobal(const QWindow* self, QPointF* pos) {
+QPointF* QWindow_mapToGlobal_QPointF(const QWindow* self, QPointF* pos) {
 	return new QPointF(self->mapToGlobal(*pos));
 }
 
-QPointF* QWindow_mapFromGlobal(const QWindow* self, QPointF* pos) {
+QPointF* QWindow_mapFromGlobal_QPointF(const QWindow* self, QPointF* pos) {
 	return new QPointF(self->mapFromGlobal(*pos));
 }
 
-QPoint* QWindow_mapToGlobalWithPos(const QWindow* self, QPoint* pos) {
+QPoint* QWindow_mapToGlobal_QPoint(const QWindow* self, QPoint* pos) {
 	return new QPoint(self->mapToGlobal(*pos));
 }
 
-QPoint* QWindow_mapFromGlobalWithPos(const QWindow* self, QPoint* pos) {
+QPoint* QWindow_mapFromGlobal_QPoint(const QWindow* self, QPoint* pos) {
 	return new QPoint(self->mapFromGlobal(*pos));
 }
 
@@ -964,11 +964,11 @@ void QWindow_setHeight(QWindow* self, int arg) {
 	self->setHeight(static_cast<int>(arg));
 }
 
-void QWindow_setGeometry(QWindow* self, int posx, int posy, int w, int h) {
+void QWindow_setGeometry_posx_posy_w_h(QWindow* self, int posx, int posy, int w, int h) {
 	self->setGeometry(static_cast<int>(posx), static_cast<int>(posy), static_cast<int>(w), static_cast<int>(h));
 }
 
-void QWindow_setGeometryWithRect(QWindow* self, QRect* rect) {
+void QWindow_setGeometry_rect(QWindow* self, QRect* rect) {
 	self->setGeometry(*rect);
 }
 
@@ -1312,7 +1312,7 @@ void QWindow_connect_transientParentChanged(QWindow* self, intptr_t slot, void (
 	QWindow::connect(self, static_cast<void (QWindow::*)(QWindow*)>(&QWindow::transientParentChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWindow_tr2(const char* s, const char* c) {
+struct seaqt_string QWindow_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWindow::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1323,7 +1323,7 @@ struct seaqt_string QWindow_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWindow_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWindow_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWindow::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1334,15 +1334,15 @@ struct seaqt_string QWindow_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QWindow* QWindow_parentWithMode(const QWindow* self, int mode) {
+QWindow* QWindow_parent_mode(const QWindow* self, int mode) {
 	return self->parent(static_cast<QWindow::AncestorMode>(mode));
 }
 
-void QWindow_setFlag2(QWindow* self, int param1, bool on) {
+void QWindow_setFlag_Qt_WindowType_bool(QWindow* self, int param1, bool on) {
 	self->setFlag(static_cast<Qt::WindowType>(param1), on);
 }
 
-bool QWindow_isAncestorOf2(const QWindow* self, QWindow* child, int mode) {
+bool QWindow_isAncestorOf_child_mode(const QWindow* self, QWindow* child, int mode) {
 	return self->isAncestorOf(child, static_cast<QWindow::AncestorMode>(mode));
 }
 

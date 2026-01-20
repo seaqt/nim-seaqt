@@ -149,21 +149,21 @@ typedef struct QErrorMessage_VTable{
 void* QErrorMessage_vdata(VirtualQErrorMessage* self);
 VirtualQErrorMessage* vdata_QErrorMessage(void* vdata);
 
-VirtualQErrorMessage* QErrorMessage_new(const QErrorMessage_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQErrorMessage* QErrorMessage_new2(const QErrorMessage_VTable* vtbl, size_t vdata);
+VirtualQErrorMessage* QErrorMessage_new_parent(const QErrorMessage_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQErrorMessage* QErrorMessage_new(const QErrorMessage_VTable* vtbl, size_t vdata);
 
 void QErrorMessage_virtbase(QErrorMessage* src, QDialog** outptr_QDialog);
 QMetaObject* QErrorMessage_metaObject(const QErrorMessage* self);
 void* QErrorMessage_metacast(QErrorMessage* self, const char* param1);
 int QErrorMessage_metacall(QErrorMessage* self, int param1, int param2, void** param3);
-struct seaqt_string QErrorMessage_tr(const char* s);
+struct seaqt_string QErrorMessage_tr_s(const char* s);
 QErrorMessage* QErrorMessage_qtHandler();
-void QErrorMessage_showMessage(QErrorMessage* self, struct seaqt_string message);
-void QErrorMessage_showMessage2(QErrorMessage* self, struct seaqt_string message, struct seaqt_string type);
+void QErrorMessage_showMessage_message(QErrorMessage* self, struct seaqt_string message);
+void QErrorMessage_showMessage_message_type(QErrorMessage* self, struct seaqt_string message, struct seaqt_string type);
 void QErrorMessage_done(QErrorMessage* self, int param1);
 void QErrorMessage_changeEvent(QErrorMessage* self, QEvent* e);
-struct seaqt_string QErrorMessage_tr2(const char* s, const char* c);
-struct seaqt_string QErrorMessage_tr3(const char* s, const char* c, int n);
+struct seaqt_string QErrorMessage_tr_s_c(const char* s, const char* c);
+struct seaqt_string QErrorMessage_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QErrorMessage_virtualbase_metaObject(const VirtualQErrorMessage* self);
 void* QErrorMessage_virtualbase_metacast(VirtualQErrorMessage* self, const char* param1);

@@ -114,16 +114,16 @@ public:
 	friend void QFormLayout_virtualbase_addItem(VirtualQFormLayout* self, QLayoutItem* item);
 
 	virtual QLayoutItem* itemAt(int index) const override {
-		if (vtbl->itemAtWithIndex == 0) {
+		if (vtbl->itemAt_index == 0) {
 			return QFormLayout::itemAt(index);
 		}
 
 		int sigval1 = index;
-		QLayoutItem* callback_return_value = vtbl->itemAtWithIndex(this, sigval1);
+		QLayoutItem* callback_return_value = vtbl->itemAt_index(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend QLayoutItem* QFormLayout_virtualbase_itemAtWithIndex(const VirtualQFormLayout* self, int index);
+	friend QLayoutItem* QFormLayout_virtualbase_itemAt_index(const VirtualQFormLayout* self, int index);
 
 	virtual QLayoutItem* takeAt(int index) override {
 		if (vtbl->takeAt == 0) {
@@ -260,16 +260,16 @@ public:
 	friend QSize* QFormLayout_virtualbase_maximumSize(const VirtualQFormLayout* self);
 
 	virtual int indexOf(const QWidget* param1) const override {
-		if (vtbl->indexOf == 0) {
+		if (vtbl->indexOf_QWidget == 0) {
 			return QFormLayout::indexOf(param1);
 		}
 
 		QWidget* sigval1 = (QWidget*) param1;
-		int callback_return_value = vtbl->indexOf(this, sigval1);
+		int callback_return_value = vtbl->indexOf_QWidget(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFormLayout_virtualbase_indexOf(const VirtualQFormLayout* self, QWidget* param1);
+	friend int QFormLayout_virtualbase_indexOf_QWidget(const VirtualQFormLayout* self, QWidget* param1);
 
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
@@ -454,12 +454,12 @@ public:
 	friend bool QFormLayout_protectedbase_isSignalConnected(const VirtualQFormLayout* self, QMetaMethod* signal);
 };
 
-VirtualQFormLayout* QFormLayout_new(const QFormLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQFormLayout* QFormLayout_new_parent(const QFormLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFormLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFormLayout(vtbl, parent) : nullptr;
 }
 
-VirtualQFormLayout* QFormLayout_new2(const QFormLayout_VTable* vtbl, size_t vdata) {
+VirtualQFormLayout* QFormLayout_new(const QFormLayout_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFormLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFormLayout(vtbl) : nullptr;
 }
@@ -480,7 +480,7 @@ int QFormLayout_metacall(QFormLayout* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFormLayout_tr(const char* s) {
+struct seaqt_string QFormLayout_tr_s(const char* s) {
 	QString _ret = QFormLayout::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -551,79 +551,79 @@ void QFormLayout_setSpacing(QFormLayout* self, int spacing) {
 	self->setSpacing(static_cast<int>(spacing));
 }
 
-void QFormLayout_addRow(QFormLayout* self, QWidget* label, QWidget* field) {
+void QFormLayout_addRow_QWidget_QWidget(QFormLayout* self, QWidget* label, QWidget* field) {
 	self->addRow(label, field);
 }
 
-void QFormLayout_addRow2(QFormLayout* self, QWidget* label, QLayout* field) {
+void QFormLayout_addRow_QWidget_QLayout(QFormLayout* self, QWidget* label, QLayout* field) {
 	self->addRow(label, field);
 }
 
-void QFormLayout_addRow3(QFormLayout* self, struct seaqt_string labelText, QWidget* field) {
+void QFormLayout_addRow_QString_QWidget(QFormLayout* self, struct seaqt_string labelText, QWidget* field) {
 	QString labelText_QString = QString::fromUtf8(labelText.data, labelText.len);
 	self->addRow(labelText_QString, field);
 }
 
-void QFormLayout_addRow4(QFormLayout* self, struct seaqt_string labelText, QLayout* field) {
+void QFormLayout_addRow_QString_QLayout(QFormLayout* self, struct seaqt_string labelText, QLayout* field) {
 	QString labelText_QString = QString::fromUtf8(labelText.data, labelText.len);
 	self->addRow(labelText_QString, field);
 }
 
-void QFormLayout_addRowWithWidget(QFormLayout* self, QWidget* widget) {
+void QFormLayout_addRow_QWidget(QFormLayout* self, QWidget* widget) {
 	self->addRow(widget);
 }
 
-void QFormLayout_addRowWithLayout(QFormLayout* self, QLayout* layout) {
+void QFormLayout_addRow_QLayout(QFormLayout* self, QLayout* layout) {
 	self->addRow(layout);
 }
 
-void QFormLayout_insertRow(QFormLayout* self, int row, QWidget* label, QWidget* field) {
+void QFormLayout_insertRow_int_QWidget_QWidget(QFormLayout* self, int row, QWidget* label, QWidget* field) {
 	self->insertRow(static_cast<int>(row), label, field);
 }
 
-void QFormLayout_insertRow2(QFormLayout* self, int row, QWidget* label, QLayout* field) {
+void QFormLayout_insertRow_int_QWidget_QLayout(QFormLayout* self, int row, QWidget* label, QLayout* field) {
 	self->insertRow(static_cast<int>(row), label, field);
 }
 
-void QFormLayout_insertRow3(QFormLayout* self, int row, struct seaqt_string labelText, QWidget* field) {
+void QFormLayout_insertRow_int_QString_QWidget(QFormLayout* self, int row, struct seaqt_string labelText, QWidget* field) {
 	QString labelText_QString = QString::fromUtf8(labelText.data, labelText.len);
 	self->insertRow(static_cast<int>(row), labelText_QString, field);
 }
 
-void QFormLayout_insertRow4(QFormLayout* self, int row, struct seaqt_string labelText, QLayout* field) {
+void QFormLayout_insertRow_int_QString_QLayout(QFormLayout* self, int row, struct seaqt_string labelText, QLayout* field) {
 	QString labelText_QString = QString::fromUtf8(labelText.data, labelText.len);
 	self->insertRow(static_cast<int>(row), labelText_QString, field);
 }
 
-void QFormLayout_insertRow5(QFormLayout* self, int row, QWidget* widget) {
+void QFormLayout_insertRow_int_QWidget(QFormLayout* self, int row, QWidget* widget) {
 	self->insertRow(static_cast<int>(row), widget);
 }
 
-void QFormLayout_insertRow6(QFormLayout* self, int row, QLayout* layout) {
+void QFormLayout_insertRow_int_QLayout(QFormLayout* self, int row, QLayout* layout) {
 	self->insertRow(static_cast<int>(row), layout);
 }
 
-void QFormLayout_removeRow(QFormLayout* self, int row) {
+void QFormLayout_removeRow_row(QFormLayout* self, int row) {
 	self->removeRow(static_cast<int>(row));
 }
 
-void QFormLayout_removeRowWithWidget(QFormLayout* self, QWidget* widget) {
+void QFormLayout_removeRow_widget(QFormLayout* self, QWidget* widget) {
 	self->removeRow(widget);
 }
 
-void QFormLayout_removeRowWithLayout(QFormLayout* self, QLayout* layout) {
+void QFormLayout_removeRow_layout(QFormLayout* self, QLayout* layout) {
 	self->removeRow(layout);
 }
 
-QFormLayout__TakeRowResult* QFormLayout_takeRow(QFormLayout* self, int row) {
+QFormLayout__TakeRowResult* QFormLayout_takeRow_row(QFormLayout* self, int row) {
 	return new QFormLayout::TakeRowResult(self->takeRow(static_cast<int>(row)));
 }
 
-QFormLayout__TakeRowResult* QFormLayout_takeRowWithWidget(QFormLayout* self, QWidget* widget) {
+QFormLayout__TakeRowResult* QFormLayout_takeRow_widget(QFormLayout* self, QWidget* widget) {
 	return new QFormLayout::TakeRowResult(self->takeRow(widget));
 }
 
-QFormLayout__TakeRowResult* QFormLayout_takeRowWithLayout(QFormLayout* self, QLayout* layout) {
+QFormLayout__TakeRowResult* QFormLayout_takeRow_layout(QFormLayout* self, QLayout* layout) {
 	return new QFormLayout::TakeRowResult(self->takeRow(layout));
 }
 
@@ -639,39 +639,39 @@ void QFormLayout_setLayout(QFormLayout* self, int row, int role, QLayout* layout
 	self->setLayout(static_cast<int>(row), static_cast<QFormLayout::ItemRole>(role), layout);
 }
 
-void QFormLayout_setRowVisible(QFormLayout* self, int row, bool on) {
+void QFormLayout_setRowVisible_row_on(QFormLayout* self, int row, bool on) {
 	self->setRowVisible(static_cast<int>(row), on);
 }
 
-void QFormLayout_setRowVisible2(QFormLayout* self, QWidget* widget, bool on) {
+void QFormLayout_setRowVisible_widget_on(QFormLayout* self, QWidget* widget, bool on) {
 	self->setRowVisible(widget, on);
 }
 
-void QFormLayout_setRowVisible3(QFormLayout* self, QLayout* layout, bool on) {
+void QFormLayout_setRowVisible_layout_on(QFormLayout* self, QLayout* layout, bool on) {
 	self->setRowVisible(layout, on);
 }
 
-bool QFormLayout_isRowVisible(const QFormLayout* self, int row) {
+bool QFormLayout_isRowVisible_row(const QFormLayout* self, int row) {
 	return self->isRowVisible(static_cast<int>(row));
 }
 
-bool QFormLayout_isRowVisibleWithWidget(const QFormLayout* self, QWidget* widget) {
+bool QFormLayout_isRowVisible_widget(const QFormLayout* self, QWidget* widget) {
 	return self->isRowVisible(widget);
 }
 
-bool QFormLayout_isRowVisibleWithLayout(const QFormLayout* self, QLayout* layout) {
+bool QFormLayout_isRowVisible_layout(const QFormLayout* self, QLayout* layout) {
 	return self->isRowVisible(layout);
 }
 
-QLayoutItem* QFormLayout_itemAt(const QFormLayout* self, int row, int role) {
+QLayoutItem* QFormLayout_itemAt_row_role(const QFormLayout* self, int row, int role) {
 	return self->itemAt(static_cast<int>(row), static_cast<QFormLayout::ItemRole>(role));
 }
 
-QWidget* QFormLayout_labelForField(const QFormLayout* self, QWidget* field) {
+QWidget* QFormLayout_labelForField_QWidget(const QFormLayout* self, QWidget* field) {
 	return self->labelForField(field);
 }
 
-QWidget* QFormLayout_labelForFieldWithField(const QFormLayout* self, QLayout* field) {
+QWidget* QFormLayout_labelForField_QLayout(const QFormLayout* self, QLayout* field) {
 	return self->labelForField(field);
 }
 
@@ -679,7 +679,7 @@ void QFormLayout_addItem(QFormLayout* self, QLayoutItem* item) {
 	self->addItem(item);
 }
 
-QLayoutItem* QFormLayout_itemAtWithIndex(const QFormLayout* self, int index) {
+QLayoutItem* QFormLayout_itemAt_index(const QFormLayout* self, int index) {
 	return self->itemAt(static_cast<int>(index));
 }
 
@@ -724,7 +724,7 @@ int QFormLayout_rowCount(const QFormLayout* self) {
 	return self->rowCount();
 }
 
-struct seaqt_string QFormLayout_tr2(const char* s, const char* c) {
+struct seaqt_string QFormLayout_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFormLayout::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -735,7 +735,7 @@ struct seaqt_string QFormLayout_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFormLayout_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFormLayout_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFormLayout::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -780,7 +780,7 @@ void QFormLayout_virtualbase_addItem(VirtualQFormLayout* self, QLayoutItem* item
 	self->QFormLayout::addItem(item);
 }
 
-QLayoutItem* QFormLayout_virtualbase_itemAtWithIndex(const VirtualQFormLayout* self, int index) {
+QLayoutItem* QFormLayout_virtualbase_itemAt_index(const VirtualQFormLayout* self, int index) {
 
 	return self->QFormLayout::itemAt(static_cast<int>(index));
 }
@@ -841,7 +841,7 @@ QSize* QFormLayout_virtualbase_maximumSize(const VirtualQFormLayout* self) {
 	return new QSize(self->QFormLayout::maximumSize());
 }
 
-int QFormLayout_virtualbase_indexOf(const VirtualQFormLayout* self, QWidget* param1) {
+int QFormLayout_virtualbase_indexOf_QWidget(const VirtualQFormLayout* self, QWidget* param1) {
 
 	return self->QFormLayout::indexOf(param1);
 }

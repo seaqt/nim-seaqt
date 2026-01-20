@@ -71,21 +71,21 @@ void* QDtlsClientVerifier_vdata(VirtualQDtlsClientVerifier* self);
 VirtualQDtlsClientVerifier* vdata_QDtlsClientVerifier(void* vdata);
 
 VirtualQDtlsClientVerifier* QDtlsClientVerifier_new(const QDtlsClientVerifier_VTable* vtbl, size_t vdata);
-VirtualQDtlsClientVerifier* QDtlsClientVerifier_new2(const QDtlsClientVerifier_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQDtlsClientVerifier* QDtlsClientVerifier_new_parent(const QDtlsClientVerifier_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QDtlsClientVerifier_virtbase(QDtlsClientVerifier* src, QObject** outptr_QObject);
 QMetaObject* QDtlsClientVerifier_metaObject(const QDtlsClientVerifier* self);
 void* QDtlsClientVerifier_metacast(QDtlsClientVerifier* self, const char* param1);
 int QDtlsClientVerifier_metacall(QDtlsClientVerifier* self, int param1, int param2, void** param3);
-struct seaqt_string QDtlsClientVerifier_tr(const char* s);
+struct seaqt_string QDtlsClientVerifier_tr_s(const char* s);
 bool QDtlsClientVerifier_setCookieGeneratorParameters(QDtlsClientVerifier* self, QDtlsClientVerifier__GeneratorParameters* params);
 QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier_cookieGeneratorParameters(const QDtlsClientVerifier* self);
 bool QDtlsClientVerifier_verifyClient(QDtlsClientVerifier* self, QUdpSocket* socket, struct seaqt_string dgram, QHostAddress* address, unsigned short port);
 struct seaqt_string QDtlsClientVerifier_verifiedHello(const QDtlsClientVerifier* self);
 unsigned char QDtlsClientVerifier_dtlsError(const QDtlsClientVerifier* self);
 struct seaqt_string QDtlsClientVerifier_dtlsErrorString(const QDtlsClientVerifier* self);
-struct seaqt_string QDtlsClientVerifier_tr2(const char* s, const char* c);
-struct seaqt_string QDtlsClientVerifier_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDtlsClientVerifier_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDtlsClientVerifier_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDtlsClientVerifier_virtualbase_metaObject(const VirtualQDtlsClientVerifier* self);
 void* QDtlsClientVerifier_virtualbase_metacast(VirtualQDtlsClientVerifier* self, const char* param1);
@@ -124,15 +124,15 @@ typedef struct QDtls_VTable{
 void* QDtls_vdata(VirtualQDtls* self);
 VirtualQDtls* vdata_QDtls(void* vdata);
 
-VirtualQDtls* QDtls_new(const QDtls_VTable* vtbl, size_t vdata, int mode);
-VirtualQDtls* QDtls_new2(const QDtls_VTable* vtbl, size_t vdata, int mode, QObject* parent);
+VirtualQDtls* QDtls_new_mode(const QDtls_VTable* vtbl, size_t vdata, int mode);
+VirtualQDtls* QDtls_new_mode_parent(const QDtls_VTable* vtbl, size_t vdata, int mode, QObject* parent);
 
 void QDtls_virtbase(QDtls* src, QObject** outptr_QObject);
 QMetaObject* QDtls_metaObject(const QDtls* self);
 void* QDtls_metacast(QDtls* self, const char* param1);
 int QDtls_metacall(QDtls* self, int param1, int param2, void** param3);
-struct seaqt_string QDtls_tr(const char* s);
-bool QDtls_setPeer(QDtls* self, QHostAddress* address, unsigned short port);
+struct seaqt_string QDtls_tr_s(const char* s);
+bool QDtls_setPeer_address_port(QDtls* self, QHostAddress* address, unsigned short port);
 bool QDtls_setPeerVerificationName(QDtls* self, struct seaqt_string name);
 QHostAddress* QDtls_peerAddress(const QDtls* self);
 unsigned short QDtls_peerPort(const QDtls* self);
@@ -145,7 +145,7 @@ QDtlsClientVerifier__GeneratorParameters* QDtls_cookieGeneratorParameters(const 
 bool QDtls_setDtlsConfiguration(QDtls* self, QSslConfiguration* configuration);
 QSslConfiguration* QDtls_dtlsConfiguration(const QDtls* self);
 int QDtls_handshakeState(const QDtls* self);
-bool QDtls_doHandshake(QDtls* self, QUdpSocket* socket);
+bool QDtls_doHandshake_socket(QDtls* self, QUdpSocket* socket);
 bool QDtls_handleTimeout(QDtls* self, QUdpSocket* socket);
 bool QDtls_resumeHandshake(QDtls* self, QUdpSocket* socket);
 bool QDtls_abortHandshake(QDtls* self, QUdpSocket* socket);
@@ -163,10 +163,10 @@ void QDtls_pskRequired(QDtls* self, QSslPreSharedKeyAuthenticator* authenticator
 void QDtls_connect_pskRequired(QDtls* self, intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t));
 void QDtls_handshakeTimeout(QDtls* self);
 void QDtls_connect_handshakeTimeout(QDtls* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QDtls_tr2(const char* s, const char* c);
-struct seaqt_string QDtls_tr3(const char* s, const char* c, int n);
-bool QDtls_setPeer2(QDtls* self, QHostAddress* address, unsigned short port, struct seaqt_string verificationName);
-bool QDtls_doHandshake2(QDtls* self, QUdpSocket* socket, struct seaqt_string dgram);
+struct seaqt_string QDtls_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDtls_tr_s_c_n(const char* s, const char* c, int n);
+bool QDtls_setPeer_address_port_verificationName(QDtls* self, QHostAddress* address, unsigned short port, struct seaqt_string verificationName);
+bool QDtls_doHandshake_socket_dgram(QDtls* self, QUdpSocket* socket, struct seaqt_string dgram);
 
 QMetaObject* QDtls_virtualbase_metaObject(const VirtualQDtls* self);
 void* QDtls_virtualbase_metacast(VirtualQDtls* self, const char* param1);
@@ -188,14 +188,14 @@ const QMetaObject* QDtls_staticMetaObject();
 void QDtls_delete(QDtls* self);
 
 QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new();
-QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new2(int a, struct seaqt_string s);
-QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new3(QDtlsClientVerifier__GeneratorParameters* param1);
+QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new_a_s(int a, struct seaqt_string s);
+QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new_from(QDtlsClientVerifier__GeneratorParameters* from);
 
 int QDtlsClientVerifier__GeneratorParameters_hash(const QDtlsClientVerifier__GeneratorParameters* self);
 void QDtlsClientVerifier__GeneratorParameters_setHash(QDtlsClientVerifier__GeneratorParameters* self, int hash);
 struct seaqt_string QDtlsClientVerifier__GeneratorParameters_secret(const QDtlsClientVerifier__GeneratorParameters* self);
 void QDtlsClientVerifier__GeneratorParameters_setSecret(QDtlsClientVerifier__GeneratorParameters* self, struct seaqt_string secret);
-void QDtlsClientVerifier__GeneratorParameters_operatorAssign(QDtlsClientVerifier__GeneratorParameters* self, QDtlsClientVerifier__GeneratorParameters* param1);
+void QDtlsClientVerifier__GeneratorParameters_operatorAssign(QDtlsClientVerifier__GeneratorParameters* self, QDtlsClientVerifier__GeneratorParameters* from);
 
 void QDtlsClientVerifier__GeneratorParameters_delete(QDtlsClientVerifier__GeneratorParameters* self);
 

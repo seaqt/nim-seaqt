@@ -61,10 +61,10 @@ type cQGraphicsRotation*{.exportc: "QGraphicsRotation", incompleteStruct.} = obj
 proc fcQGraphicsTransform_metaObject(self: pointer): pointer {.importc: "QGraphicsTransform_metaObject".}
 proc fcQGraphicsTransform_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsTransform_metacast".}
 proc fcQGraphicsTransform_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsTransform_metacall".}
-proc fcQGraphicsTransform_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsTransform_tr".}
+proc fcQGraphicsTransform_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsTransform_tr_s".}
 proc fcQGraphicsTransform_applyTo(self: pointer, matrix: pointer): void {.importc: "QGraphicsTransform_applyTo".}
-proc fcQGraphicsTransform_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsTransform_tr2".}
-proc fcQGraphicsTransform_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsTransform_tr3".}
+proc fcQGraphicsTransform_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsTransform_tr_s_c".}
+proc fcQGraphicsTransform_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsTransform_tr_s_c_n".}
 proc fcQGraphicsTransform_vdata(self: pointer): ptr pointer {.importc: "QGraphicsTransform_vdata".}
 proc fvdata_cQGraphicsTransform(self: pointer): pointer {.importc: "vdata_QGraphicsTransform".}
 
@@ -97,12 +97,12 @@ proc fcQGraphicsTransform_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQGraphicsTransform_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsTransform_protectedbase_receivers".}
 proc fcQGraphicsTransform_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsTransform_protectedbase_isSignalConnected".}
 proc fcQGraphicsTransform_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsTransform {.importc: "QGraphicsTransform_new".}
-proc fcQGraphicsTransform_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsTransform {.importc: "QGraphicsTransform_new2".}
+proc fcQGraphicsTransform_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsTransform {.importc: "QGraphicsTransform_new_parent".}
 proc fcQGraphicsTransform_staticMetaObject(): pointer {.importc: "QGraphicsTransform_staticMetaObject".}
 proc fcQGraphicsScale_metaObject(self: pointer): pointer {.importc: "QGraphicsScale_metaObject".}
 proc fcQGraphicsScale_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsScale_metacast".}
 proc fcQGraphicsScale_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsScale_metacall".}
-proc fcQGraphicsScale_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsScale_tr".}
+proc fcQGraphicsScale_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsScale_tr_s".}
 proc fcQGraphicsScale_origin(self: pointer): pointer {.importc: "QGraphicsScale_origin".}
 proc fcQGraphicsScale_setOrigin(self: pointer, point: pointer): void {.importc: "QGraphicsScale_setOrigin".}
 proc fcQGraphicsScale_xScale(self: pointer): float64 {.importc: "QGraphicsScale_xScale".}
@@ -122,8 +122,8 @@ proc fcQGraphicsScale_zScaleChanged(self: pointer): void {.importc: "QGraphicsSc
 proc fcQGraphicsScale_connect_zScaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScale_connect_zScaleChanged".}
 proc fcQGraphicsScale_scaleChanged(self: pointer): void {.importc: "QGraphicsScale_scaleChanged".}
 proc fcQGraphicsScale_connect_scaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScale_connect_scaleChanged".}
-proc fcQGraphicsScale_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsScale_tr2".}
-proc fcQGraphicsScale_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsScale_tr3".}
+proc fcQGraphicsScale_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsScale_tr_s_c".}
+proc fcQGraphicsScale_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsScale_tr_s_c_n".}
 proc fcQGraphicsScale_vdata(self: pointer): ptr pointer {.importc: "QGraphicsScale_vdata".}
 proc fvdata_cQGraphicsScale(self: pointer): pointer {.importc: "vdata_QGraphicsScale".}
 
@@ -157,19 +157,19 @@ proc fcQGraphicsScale_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQGraphicsScale_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsScale_protectedbase_receivers".}
 proc fcQGraphicsScale_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsScale_protectedbase_isSignalConnected".}
 proc fcQGraphicsScale_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsScale {.importc: "QGraphicsScale_new".}
-proc fcQGraphicsScale_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsScale {.importc: "QGraphicsScale_new2".}
+proc fcQGraphicsScale_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsScale {.importc: "QGraphicsScale_new_parent".}
 proc fcQGraphicsScale_staticMetaObject(): pointer {.importc: "QGraphicsScale_staticMetaObject".}
 proc fcQGraphicsRotation_metaObject(self: pointer): pointer {.importc: "QGraphicsRotation_metaObject".}
 proc fcQGraphicsRotation_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsRotation_metacast".}
 proc fcQGraphicsRotation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsRotation_metacall".}
-proc fcQGraphicsRotation_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsRotation_tr".}
+proc fcQGraphicsRotation_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsRotation_tr_s".}
 proc fcQGraphicsRotation_origin(self: pointer): pointer {.importc: "QGraphicsRotation_origin".}
 proc fcQGraphicsRotation_setOrigin(self: pointer, point: pointer): void {.importc: "QGraphicsRotation_setOrigin".}
 proc fcQGraphicsRotation_angle(self: pointer): float64 {.importc: "QGraphicsRotation_angle".}
 proc fcQGraphicsRotation_setAngle(self: pointer, angle: float64): void {.importc: "QGraphicsRotation_setAngle".}
 proc fcQGraphicsRotation_axis(self: pointer): pointer {.importc: "QGraphicsRotation_axis".}
-proc fcQGraphicsRotation_setAxis(self: pointer, axis: pointer): void {.importc: "QGraphicsRotation_setAxis".}
-proc fcQGraphicsRotation_setAxisWithAxis(self: pointer, axis: cint): void {.importc: "QGraphicsRotation_setAxisWithAxis".}
+proc fcQGraphicsRotation_setAxis_QVector3D(self: pointer, axis: pointer): void {.importc: "QGraphicsRotation_setAxis_QVector3D".}
+proc fcQGraphicsRotation_setAxis_Qt_Axis(self: pointer, axis: cint): void {.importc: "QGraphicsRotation_setAxis_Qt_Axis".}
 proc fcQGraphicsRotation_applyTo(self: pointer, matrix: pointer): void {.importc: "QGraphicsRotation_applyTo".}
 proc fcQGraphicsRotation_originChanged(self: pointer): void {.importc: "QGraphicsRotation_originChanged".}
 proc fcQGraphicsRotation_connect_originChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsRotation_connect_originChanged".}
@@ -177,8 +177,8 @@ proc fcQGraphicsRotation_angleChanged(self: pointer): void {.importc: "QGraphics
 proc fcQGraphicsRotation_connect_angleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsRotation_connect_angleChanged".}
 proc fcQGraphicsRotation_axisChanged(self: pointer): void {.importc: "QGraphicsRotation_axisChanged".}
 proc fcQGraphicsRotation_connect_axisChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsRotation_connect_axisChanged".}
-proc fcQGraphicsRotation_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsRotation_tr2".}
-proc fcQGraphicsRotation_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsRotation_tr3".}
+proc fcQGraphicsRotation_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsRotation_tr_s_c".}
+proc fcQGraphicsRotation_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsRotation_tr_s_c_n".}
 proc fcQGraphicsRotation_vdata(self: pointer): ptr pointer {.importc: "QGraphicsRotation_vdata".}
 proc fvdata_cQGraphicsRotation(self: pointer): pointer {.importc: "vdata_QGraphicsRotation".}
 
@@ -212,7 +212,7 @@ proc fcQGraphicsRotation_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQGraphicsRotation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsRotation_protectedbase_receivers".}
 proc fcQGraphicsRotation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsRotation_protectedbase_isSignalConnected".}
 proc fcQGraphicsRotation_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsRotation {.importc: "QGraphicsRotation_new".}
-proc fcQGraphicsRotation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsRotation {.importc: "QGraphicsRotation_new2".}
+proc fcQGraphicsRotation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsRotation {.importc: "QGraphicsRotation_new_parent".}
 proc fcQGraphicsRotation_staticMetaObject(): pointer {.importc: "QGraphicsRotation_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicstransform_types.QGraphicsTransform): gen_qobjectdefs_types.QMetaObject =
@@ -225,7 +225,7 @@ proc metacall*(self: gen_qgraphicstransform_types.QGraphicsTransform, param1: ci
   fcQGraphicsTransform_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsTransform, s: cstring): string =
-  let v_ms = fcQGraphicsTransform_tr(s)
+  let v_ms = fcQGraphicsTransform_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -234,13 +234,13 @@ proc applyTo*(self: gen_qgraphicstransform_types.QGraphicsTransform, matrix: gen
   fcQGraphicsTransform_applyTo(self.h, matrix.h)
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsTransform, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsTransform_tr2(s, c)
+  let v_ms = fcQGraphicsTransform_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsTransform, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsTransform_tr3(s, c, n)
+  let v_ms = fcQGraphicsTransform_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -595,7 +595,7 @@ proc metacall*(self: gen_qgraphicstransform_types.QGraphicsScale, param1: cint, 
   fcQGraphicsScale_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsScale, s: cstring): string =
-  let v_ms = fcQGraphicsScale_tr(s)
+  let v_ms = fcQGraphicsScale_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -718,13 +718,13 @@ proc onScaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, slot: QG
   fcQGraphicsScale_connect_scaleChanged(self.h, cast[int](addr tmp[]), fcQGraphicsScale_slot_callback_scaleChanged, fcQGraphicsScale_slot_callback_scaleChanged_release)
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsScale, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsScale_tr2(s, c)
+  let v_ms = fcQGraphicsScale_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsScale, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsScale_tr3(s, c, n)
+  let v_ms = fcQGraphicsScale_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1082,7 +1082,7 @@ proc metacall*(self: gen_qgraphicstransform_types.QGraphicsRotation, param1: cin
   fcQGraphicsRotation_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsRotation, s: cstring): string =
-  let v_ms = fcQGraphicsRotation_tr(s)
+  let v_ms = fcQGraphicsRotation_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1103,10 +1103,10 @@ proc axis*(self: gen_qgraphicstransform_types.QGraphicsRotation): gen_qvectornd_
   gen_qvectornd_types.QVector3D(h: fcQGraphicsRotation_axis(self.h), owned: true)
 
 proc setAxis*(self: gen_qgraphicstransform_types.QGraphicsRotation, axis: gen_qvectornd_types.QVector3D): void =
-  fcQGraphicsRotation_setAxis(self.h, axis.h)
+  fcQGraphicsRotation_setAxis_QVector3D(self.h, axis.h)
 
 proc setAxis*(self: gen_qgraphicstransform_types.QGraphicsRotation, axis: cint): void =
-  fcQGraphicsRotation_setAxisWithAxis(self.h, cint(axis))
+  fcQGraphicsRotation_setAxis_Qt_Axis(self.h, cint(axis))
 
 proc applyTo*(self: gen_qgraphicstransform_types.QGraphicsRotation, matrix: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQGraphicsRotation_applyTo(self.h, matrix.h)
@@ -1166,13 +1166,13 @@ proc onAxisChanged*(self: gen_qgraphicstransform_types.QGraphicsRotation, slot: 
   fcQGraphicsRotation_connect_axisChanged(self.h, cast[int](addr tmp[]), fcQGraphicsRotation_slot_callback_axisChanged, fcQGraphicsRotation_slot_callback_axisChanged_release)
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsRotation, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsRotation_tr2(s, c)
+  let v_ms = fcQGraphicsRotation_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsRotation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsRotation_tr3(s, c, n)
+  let v_ms = fcQGraphicsRotation_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

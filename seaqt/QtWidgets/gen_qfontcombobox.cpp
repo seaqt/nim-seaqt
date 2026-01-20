@@ -175,19 +175,19 @@ public:
 	friend void QFontComboBox_virtualbase_hidePopup(VirtualQFontComboBox* self);
 
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (vtbl->inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery_Qt_InputMethodQuery == 0) {
 			return QFontComboBox::inputMethodQuery(param1);
 		}
 
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery_Qt_InputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QFontComboBox_virtualbase_inputMethodQuery(const VirtualQFontComboBox* self, int param1);
+	friend QVariant* QFontComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(const VirtualQFontComboBox* self, int param1);
 
 	virtual void focusInEvent(QFocusEvent* e) override {
 		if (vtbl->focusInEvent == 0) {
@@ -739,12 +739,12 @@ public:
 	friend bool QFontComboBox_protectedbase_isSignalConnected(const VirtualQFontComboBox* self, QMetaMethod* signal);
 };
 
-VirtualQFontComboBox* QFontComboBox_new(const QFontComboBox_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQFontComboBox* QFontComboBox_new_parent(const QFontComboBox_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFontComboBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFontComboBox(vtbl, parent) : nullptr;
 }
 
-VirtualQFontComboBox* QFontComboBox_new2(const QFontComboBox_VTable* vtbl, size_t vdata) {
+VirtualQFontComboBox* QFontComboBox_new(const QFontComboBox_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFontComboBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFontComboBox(vtbl) : nullptr;
 }
@@ -765,7 +765,7 @@ int QFontComboBox_metacall(QFontComboBox* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFontComboBox_tr(const char* s) {
+struct seaqt_string QFontComboBox_tr_s(const char* s) {
 	QString _ret = QFontComboBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -863,7 +863,7 @@ void QFontComboBox_connect_currentFontChanged(QFontComboBox* self, intptr_t slot
 	QFontComboBox::connect(self, static_cast<void (QFontComboBox::*)(const QFont&)>(&QFontComboBox::currentFontChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QFontComboBox_tr2(const char* s, const char* c) {
+struct seaqt_string QFontComboBox_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFontComboBox::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -874,7 +874,7 @@ struct seaqt_string QFontComboBox_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFontComboBox_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFontComboBox_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFontComboBox::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -934,7 +934,7 @@ void QFontComboBox_virtualbase_hidePopup(VirtualQFontComboBox* self) {
 	self->QFontComboBox::hidePopup();
 }
 
-QVariant* QFontComboBox_virtualbase_inputMethodQuery(const VirtualQFontComboBox* self, int param1) {
+QVariant* QFontComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(const VirtualQFontComboBox* self, int param1) {
 
 	return new QVariant(self->QFontComboBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }

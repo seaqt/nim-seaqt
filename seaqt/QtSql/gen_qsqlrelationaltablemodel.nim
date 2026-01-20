@@ -83,14 +83,14 @@ proc fcQSqlRelation_tableName(self: pointer): struct_seaqt_string {.importc: "QS
 proc fcQSqlRelation_indexColumn(self: pointer): struct_seaqt_string {.importc: "QSqlRelation_indexColumn".}
 proc fcQSqlRelation_displayColumn(self: pointer): struct_seaqt_string {.importc: "QSqlRelation_displayColumn".}
 proc fcQSqlRelation_isValid(self: pointer): bool {.importc: "QSqlRelation_isValid".}
-proc fcQSqlRelation_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSqlRelation_operatorAssign".}
+proc fcQSqlRelation_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSqlRelation_operatorAssign".}
 proc fcQSqlRelation_new(): ptr cQSqlRelation {.importc: "QSqlRelation_new".}
-proc fcQSqlRelation_new2(aTableName: struct_seaqt_string, indexCol: struct_seaqt_string, displayCol: struct_seaqt_string): ptr cQSqlRelation {.importc: "QSqlRelation_new2".}
-proc fcQSqlRelation_new3(param1: pointer): ptr cQSqlRelation {.importc: "QSqlRelation_new3".}
+proc fcQSqlRelation_new2(aTableName: struct_seaqt_string, indexCol: struct_seaqt_string, displayCol: struct_seaqt_string): ptr cQSqlRelation {.importc: "QSqlRelation_new_aTableName_indexCol_displayCol".}
+proc fcQSqlRelation_new3(fromVal: pointer): ptr cQSqlRelation {.importc: "QSqlRelation_new_from".}
 proc fcQSqlRelationalTableModel_metaObject(self: pointer): pointer {.importc: "QSqlRelationalTableModel_metaObject".}
 proc fcQSqlRelationalTableModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QSqlRelationalTableModel_metacast".}
 proc fcQSqlRelationalTableModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSqlRelationalTableModel_metacall".}
-proc fcQSqlRelationalTableModel_tr(s: cstring): struct_seaqt_string {.importc: "QSqlRelationalTableModel_tr".}
+proc fcQSqlRelationalTableModel_trS(s: cstring): struct_seaqt_string {.importc: "QSqlRelationalTableModel_tr_s".}
 proc fcQSqlRelationalTableModel_data(self: pointer, item: pointer, role: cint): pointer {.importc: "QSqlRelationalTableModel_data".}
 proc fcQSqlRelationalTableModel_setData(self: pointer, item: pointer, value: pointer, role: cint): bool {.importc: "QSqlRelationalTableModel_setData".}
 proc fcQSqlRelationalTableModel_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QSqlRelationalTableModel_removeColumns".}
@@ -102,8 +102,8 @@ proc fcQSqlRelationalTableModel_relation(self: pointer, column: cint): pointer {
 proc fcQSqlRelationalTableModel_relationModel(self: pointer, column: cint): pointer {.importc: "QSqlRelationalTableModel_relationModel".}
 proc fcQSqlRelationalTableModel_setJoinMode(self: pointer, joinMode: cint): void {.importc: "QSqlRelationalTableModel_setJoinMode".}
 proc fcQSqlRelationalTableModel_revertRow(self: pointer, row: cint): void {.importc: "QSqlRelationalTableModel_revertRow".}
-proc fcQSqlRelationalTableModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlRelationalTableModel_tr2".}
-proc fcQSqlRelationalTableModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlRelationalTableModel_tr3".}
+proc fcQSqlRelationalTableModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlRelationalTableModel_tr_s_c".}
+proc fcQSqlRelationalTableModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlRelationalTableModel_tr_s_c_n".}
 proc fcQSqlRelationalTableModel_vdata(self: pointer): ptr pointer {.importc: "QSqlRelationalTableModel_vdata".}
 proc fvdata_cQSqlRelationalTableModel(self: pointer): pointer {.importc: "vdata_QSqlRelationalTableModel".}
 
@@ -247,7 +247,7 @@ proc fcQSqlRelationalTableModel_protectedbase_endRemoveColumns(self: pointer): v
 proc fcQSqlRelationalTableModel_protectedbase_beginResetModel(self: pointer): void {.importc: "QSqlRelationalTableModel_protectedbase_beginResetModel".}
 proc fcQSqlRelationalTableModel_protectedbase_endResetModel(self: pointer): void {.importc: "QSqlRelationalTableModel_protectedbase_endResetModel".}
 proc fcQSqlRelationalTableModel_protectedbase_setLastError(self: pointer, error: pointer): void {.importc: "QSqlRelationalTableModel_protectedbase_setLastError".}
-proc fcQSqlRelationalTableModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QSqlRelationalTableModel_protectedbase_createIndex".}
+proc fcQSqlRelationalTableModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QSqlRelationalTableModel_protectedbase_createIndex_row_column".}
 proc fcQSqlRelationalTableModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QSqlRelationalTableModel_protectedbase_encodeData".}
 proc fcQSqlRelationalTableModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QSqlRelationalTableModel_protectedbase_decodeData".}
 proc fcQSqlRelationalTableModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QSqlRelationalTableModel_protectedbase_beginMoveRows".}
@@ -262,8 +262,8 @@ proc fcQSqlRelationalTableModel_protectedbase_senderSignalIndex(self: pointer): 
 proc fcQSqlRelationalTableModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSqlRelationalTableModel_protectedbase_receivers".}
 proc fcQSqlRelationalTableModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSqlRelationalTableModel_protectedbase_isSignalConnected".}
 proc fcQSqlRelationalTableModel_new(vtbl: pointer, vdata: csize_t): ptr cQSqlRelationalTableModel {.importc: "QSqlRelationalTableModel_new".}
-proc fcQSqlRelationalTableModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlRelationalTableModel {.importc: "QSqlRelationalTableModel_new2".}
-proc fcQSqlRelationalTableModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer, db: pointer): ptr cQSqlRelationalTableModel {.importc: "QSqlRelationalTableModel_new3".}
+proc fcQSqlRelationalTableModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlRelationalTableModel {.importc: "QSqlRelationalTableModel_new_parent".}
+proc fcQSqlRelationalTableModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer, db: pointer): ptr cQSqlRelationalTableModel {.importc: "QSqlRelationalTableModel_new_parent_db".}
 proc fcQSqlRelationalTableModel_staticMetaObject(): pointer {.importc: "QSqlRelationalTableModel_staticMetaObject".}
 
 proc swap*(self: gen_qsqlrelationaltablemodel_types.QSqlRelation, other: gen_qsqlrelationaltablemodel_types.QSqlRelation): void =
@@ -290,8 +290,8 @@ proc displayColumn*(self: gen_qsqlrelationaltablemodel_types.QSqlRelation): stri
 proc isValid*(self: gen_qsqlrelationaltablemodel_types.QSqlRelation): bool =
   fcQSqlRelation_isValid(self.h)
 
-proc operatorAssign*(self: gen_qsqlrelationaltablemodel_types.QSqlRelation, param1: gen_qsqlrelationaltablemodel_types.QSqlRelation): void =
-  fcQSqlRelation_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qsqlrelationaltablemodel_types.QSqlRelation, fromVal: gen_qsqlrelationaltablemodel_types.QSqlRelation): void =
+  fcQSqlRelation_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qsqlrelationaltablemodel_types.QSqlRelation): gen_qsqlrelationaltablemodel_types.QSqlRelation =
   let tmp = gen_qsqlrelationaltablemodel_types.QSqlRelation(h: fcQSqlRelation_new(), owned: true)
@@ -301,8 +301,8 @@ proc create*(T: type gen_qsqlrelationaltablemodel_types.QSqlRelation,
   let tmp = gen_qsqlrelationaltablemodel_types.QSqlRelation(h: fcQSqlRelation_new2(struct_seaqt_string(data: if len(aTableName) > 0: addr aTableName[0] else: nil, len: csize_t(len(aTableName))), struct_seaqt_string(data: if len(indexCol) > 0: addr indexCol[0] else: nil, len: csize_t(len(indexCol))), struct_seaqt_string(data: if len(displayCol) > 0: addr displayCol[0] else: nil, len: csize_t(len(displayCol)))), owned: true)
   tmp
 proc create*(T: type gen_qsqlrelationaltablemodel_types.QSqlRelation,
-    param1: gen_qsqlrelationaltablemodel_types.QSqlRelation): gen_qsqlrelationaltablemodel_types.QSqlRelation =
-  let tmp = gen_qsqlrelationaltablemodel_types.QSqlRelation(h: fcQSqlRelation_new3(param1.h), owned: true)
+    fromVal: gen_qsqlrelationaltablemodel_types.QSqlRelation): gen_qsqlrelationaltablemodel_types.QSqlRelation =
+  let tmp = gen_qsqlrelationaltablemodel_types.QSqlRelation(h: fcQSqlRelation_new3(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qsqlrelationaltablemodel_types.QSqlRelationalTableModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSqlRelationalTableModel_metaObject(self.h), owned: false)
@@ -314,7 +314,7 @@ proc metacall*(self: gen_qsqlrelationaltablemodel_types.QSqlRelationalTableModel
   fcQSqlRelationalTableModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsqlrelationaltablemodel_types.QSqlRelationalTableModel, s: cstring): string =
-  let v_ms = fcQSqlRelationalTableModel_tr(s)
+  let v_ms = fcQSqlRelationalTableModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -353,13 +353,13 @@ proc revertRow*(self: gen_qsqlrelationaltablemodel_types.QSqlRelationalTableMode
   fcQSqlRelationalTableModel_revertRow(self.h, row)
 
 proc tr*(_: type gen_qsqlrelationaltablemodel_types.QSqlRelationalTableModel, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlRelationalTableModel_tr2(s, c)
+  let v_ms = fcQSqlRelationalTableModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsqlrelationaltablemodel_types.QSqlRelationalTableModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlRelationalTableModel_tr3(s, c, n)
+  let v_ms = fcQSqlRelationalTableModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1952,7 +1952,7 @@ proc setLastError*(self: gen_qsqlrelationaltablemodel_types.QSqlRelationalTableM
   fcQSqlRelationalTableModel_protectedbase_setLastError(self.h, error.h)
 
 proc createIndex*(self: gen_qsqlrelationaltablemodel_types.QSqlRelationalTableModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlRelationalTableModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlRelationalTableModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qsqlrelationaltablemodel_types.QSqlRelationalTableModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

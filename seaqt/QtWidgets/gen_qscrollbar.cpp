@@ -707,7 +707,7 @@ public:
 	friend void QScrollBar_virtualbase_disconnectNotify(VirtualQScrollBar* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QScrollBar_protectedbase_setRepeatAction(VirtualQScrollBar* self, int action);
+	friend void QScrollBar_protectedbase_setRepeatAction_action(VirtualQScrollBar* self, int action);
 	friend int QScrollBar_protectedbase_repeatAction(const VirtualQScrollBar* self);
 	friend void QScrollBar_protectedbase_updateMicroFocus(VirtualQScrollBar* self);
 	friend void QScrollBar_protectedbase_create(VirtualQScrollBar* self);
@@ -720,22 +720,22 @@ public:
 	friend bool QScrollBar_protectedbase_isSignalConnected(const VirtualQScrollBar* self, QMetaMethod* signal);
 };
 
-VirtualQScrollBar* QScrollBar_new(const QScrollBar_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQScrollBar* QScrollBar_new_QWidget(const QScrollBar_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQScrollBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQScrollBar(vtbl, parent) : nullptr;
 }
 
-VirtualQScrollBar* QScrollBar_new2(const QScrollBar_VTable* vtbl, size_t vdata) {
+VirtualQScrollBar* QScrollBar_new(const QScrollBar_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQScrollBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQScrollBar(vtbl) : nullptr;
 }
 
-VirtualQScrollBar* QScrollBar_new3(const QScrollBar_VTable* vtbl, size_t vdata, int param1) {
+VirtualQScrollBar* QScrollBar_new_Qt_Orientation(const QScrollBar_VTable* vtbl, size_t vdata, int param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQScrollBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQScrollBar(vtbl, static_cast<Qt::Orientation>(param1)) : nullptr;
 }
 
-VirtualQScrollBar* QScrollBar_new4(const QScrollBar_VTable* vtbl, size_t vdata, int param1, QWidget* parent) {
+VirtualQScrollBar* QScrollBar_new_Qt_Orientation_QWidget(const QScrollBar_VTable* vtbl, size_t vdata, int param1, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQScrollBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQScrollBar(vtbl, static_cast<Qt::Orientation>(param1), parent) : nullptr;
 }
@@ -756,7 +756,7 @@ int QScrollBar_metacall(QScrollBar* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QScrollBar_tr(const char* s) {
+struct seaqt_string QScrollBar_tr_s(const char* s) {
 	QString _ret = QScrollBar::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -775,7 +775,7 @@ bool QScrollBar_event(QScrollBar* self, QEvent* event) {
 	return self->event(event);
 }
 
-struct seaqt_string QScrollBar_tr2(const char* s, const char* c) {
+struct seaqt_string QScrollBar_tr_s_c(const char* s, const char* c) {
 	QString _ret = QScrollBar::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -786,7 +786,7 @@ struct seaqt_string QScrollBar_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QScrollBar_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QScrollBar_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QScrollBar::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1062,7 +1062,7 @@ void QScrollBar_virtualbase_disconnectNotify(VirtualQScrollBar* self, QMetaMetho
 	self->QScrollBar::disconnectNotify(*signal);
 }
 
-void QScrollBar_protectedbase_setRepeatAction(VirtualQScrollBar* self, int action) {
+void QScrollBar_protectedbase_setRepeatAction_action(VirtualQScrollBar* self, int action) {
 	self->setRepeatAction(static_cast<VirtualQScrollBar::SliderAction>(action));
 }
 

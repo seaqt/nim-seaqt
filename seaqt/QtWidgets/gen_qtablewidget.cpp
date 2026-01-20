@@ -73,7 +73,7 @@ QTableWidgetSelectionRange* QTableWidgetSelectionRange_new() {
 	return new (std::nothrow) QTableWidgetSelectionRange();
 }
 
-QTableWidgetSelectionRange* QTableWidgetSelectionRange_new2(int top, int left, int bottom, int right) {
+QTableWidgetSelectionRange* QTableWidgetSelectionRange_new_top_left_bottom_right(int top, int left, int bottom, int right) {
 	return new (std::nothrow) QTableWidgetSelectionRange(static_cast<int>(top), static_cast<int>(left), static_cast<int>(bottom), static_cast<int>(right));
 }
 
@@ -114,7 +114,7 @@ public:
 	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl): QTableWidgetItem(), vtbl(vtbl) {}
 	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, const QString& text): QTableWidgetItem(text), vtbl(vtbl) {}
 	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, const QIcon& icon, const QString& text): QTableWidgetItem(icon, text), vtbl(vtbl) {}
-	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, const QTableWidgetItem& other): QTableWidgetItem(other), vtbl(vtbl) {}
+	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, const QTableWidgetItem& from): QTableWidgetItem(from), vtbl(vtbl) {}
 	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, int type): QTableWidgetItem(type), vtbl(vtbl) {}
 	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, const QString& text, int type): QTableWidgetItem(text, type), vtbl(vtbl) {}
 	VirtualQTableWidgetItem(const QTableWidgetItem_VTable* vtbl, const QIcon& icon, const QString& text, int type): QTableWidgetItem(icon, text, type), vtbl(vtbl) {}
@@ -211,35 +211,35 @@ VirtualQTableWidgetItem* QTableWidgetItem_new(const QTableWidgetItem_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQTableWidgetItem(vtbl) : nullptr;
 }
 
-VirtualQTableWidgetItem* QTableWidgetItem_new2(const QTableWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQTableWidgetItem* QTableWidgetItem_new_text(const QTableWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidgetItem(vtbl, text_QString) : nullptr;
 }
 
-VirtualQTableWidgetItem* QTableWidgetItem_new3(const QTableWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text) {
+VirtualQTableWidgetItem* QTableWidgetItem_new_icon_text(const QTableWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidgetItem(vtbl, *icon, text_QString) : nullptr;
 }
 
-VirtualQTableWidgetItem* QTableWidgetItem_new4(const QTableWidgetItem_VTable* vtbl, size_t vdata, QTableWidgetItem* other) {
+VirtualQTableWidgetItem* QTableWidgetItem_new_from(const QTableWidgetItem_VTable* vtbl, size_t vdata, QTableWidgetItem* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidgetItem>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQTableWidgetItem(vtbl, *other) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQTableWidgetItem(vtbl, *from) : nullptr;
 }
 
-VirtualQTableWidgetItem* QTableWidgetItem_new5(const QTableWidgetItem_VTable* vtbl, size_t vdata, int type) {
+VirtualQTableWidgetItem* QTableWidgetItem_new_type(const QTableWidgetItem_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidgetItem(vtbl, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTableWidgetItem* QTableWidgetItem_new6(const QTableWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text, int type) {
+VirtualQTableWidgetItem* QTableWidgetItem_new_text_type(const QTableWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text, int type) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidgetItem(vtbl, text_QString, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTableWidgetItem* QTableWidgetItem_new7(const QTableWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, int type) {
+VirtualQTableWidgetItem* QTableWidgetItem_new_icon_text_type(const QTableWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, int type) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidgetItem(vtbl, *icon, text_QString, static_cast<int>(type)) : nullptr;
@@ -362,15 +362,15 @@ int QTableWidgetItem_textAlignment(const QTableWidgetItem* self) {
 	return self->textAlignment();
 }
 
-void QTableWidgetItem_setTextAlignment(QTableWidgetItem* self, int alignment) {
+void QTableWidgetItem_setTextAlignment_int(QTableWidgetItem* self, int alignment) {
 	self->setTextAlignment(static_cast<int>(alignment));
 }
 
-void QTableWidgetItem_setTextAlignmentWithAlignment(QTableWidgetItem* self, int alignment) {
+void QTableWidgetItem_setTextAlignment_Qt_AlignmentFlag(QTableWidgetItem* self, int alignment) {
 	self->setTextAlignment(static_cast<Qt::AlignmentFlag>(alignment));
 }
 
-void QTableWidgetItem_setTextAlignment2(QTableWidgetItem* self, int alignment) {
+void QTableWidgetItem_setTextAlignment_Qt_Alignment(QTableWidgetItem* self, int alignment) {
 	self->setTextAlignment(static_cast<Qt::Alignment>(alignment));
 }
 
@@ -427,8 +427,8 @@ void QTableWidgetItem_write(const QTableWidgetItem* self, QDataStream* out) {
 	self->write(*out);
 }
 
-void QTableWidgetItem_operatorAssign(QTableWidgetItem* self, QTableWidgetItem* other) {
-	self->operator=(*other);
+void QTableWidgetItem_operatorAssign(QTableWidgetItem* self, QTableWidgetItem* from) {
+	self->operator=(*from);
 }
 
 int QTableWidgetItem_type(const QTableWidgetItem* self) {
@@ -1173,7 +1173,7 @@ public:
 	friend void QTableWidget_virtualbase_editorDestroyed(VirtualQTableWidget* self, QObject* editor);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QTableWidget::edit(index, trigger, event);
 		}
 
@@ -1183,11 +1183,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QTableWidget_virtualbase_edit2(VirtualQTableWidget* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QTableWidget_virtualbase_edit_index_trigger_event(VirtualQTableWidget* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1787,7 +1787,7 @@ public:
 	friend void QTableWidget_protectedbase_stopAutoScroll(VirtualQTableWidget* self);
 	friend void QTableWidget_protectedbase_doAutoScroll(VirtualQTableWidget* self);
 	friend int QTableWidget_protectedbase_dropIndicatorPosition(const VirtualQTableWidget* self);
-	friend void QTableWidget_protectedbase_setViewportMargins(VirtualQTableWidget* self, int left, int top, int right, int bottom);
+	friend void QTableWidget_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTableWidget* self, int left, int top, int right, int bottom);
 	friend QMargins* QTableWidget_protectedbase_viewportMargins(const VirtualQTableWidget* self);
 	friend void QTableWidget_protectedbase_drawFrame(VirtualQTableWidget* self, QPainter* param1);
 	friend void QTableWidget_protectedbase_updateMicroFocus(VirtualQTableWidget* self);
@@ -1801,22 +1801,22 @@ public:
 	friend bool QTableWidget_protectedbase_isSignalConnected(const VirtualQTableWidget* self, QMetaMethod* signal);
 };
 
-VirtualQTableWidget* QTableWidget_new(const QTableWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQTableWidget* QTableWidget_new_parent(const QTableWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidget(vtbl, parent) : nullptr;
 }
 
-VirtualQTableWidget* QTableWidget_new2(const QTableWidget_VTable* vtbl, size_t vdata) {
+VirtualQTableWidget* QTableWidget_new(const QTableWidget_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidget(vtbl) : nullptr;
 }
 
-VirtualQTableWidget* QTableWidget_new3(const QTableWidget_VTable* vtbl, size_t vdata, int rows, int columns) {
+VirtualQTableWidget* QTableWidget_new_rows_columns(const QTableWidget_VTable* vtbl, size_t vdata, int rows, int columns) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidget(vtbl, static_cast<int>(rows), static_cast<int>(columns)) : nullptr;
 }
 
-VirtualQTableWidget* QTableWidget_new4(const QTableWidget_VTable* vtbl, size_t vdata, int rows, int columns, QWidget* parent) {
+VirtualQTableWidget* QTableWidget_new_rows_columns_parent(const QTableWidget_VTable* vtbl, size_t vdata, int rows, int columns, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableWidget(vtbl, static_cast<int>(rows), static_cast<int>(columns), parent) : nullptr;
 }
@@ -1837,7 +1837,7 @@ int QTableWidget_metacall(QTableWidget* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTableWidget_tr(const char* s) {
+struct seaqt_string QTableWidget_tr_s(const char* s) {
 	QString _ret = QTableWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1963,23 +1963,23 @@ QTableWidgetItem* QTableWidget_currentItem(const QTableWidget* self) {
 	return self->currentItem();
 }
 
-void QTableWidget_setCurrentItem(QTableWidget* self, QTableWidgetItem* item) {
+void QTableWidget_setCurrentItem_item(QTableWidget* self, QTableWidgetItem* item) {
 	self->setCurrentItem(item);
 }
 
-void QTableWidget_setCurrentItem2(QTableWidget* self, QTableWidgetItem* item, int command) {
+void QTableWidget_setCurrentItem_item_command(QTableWidget* self, QTableWidgetItem* item, int command) {
 	self->setCurrentItem(item, static_cast<QItemSelectionModel::SelectionFlags>(command));
 }
 
-void QTableWidget_setCurrentCell(QTableWidget* self, int row, int column) {
+void QTableWidget_setCurrentCell_row_column(QTableWidget* self, int row, int column) {
 	self->setCurrentCell(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_setCurrentCell2(QTableWidget* self, int row, int column, int command) {
+void QTableWidget_setCurrentCell_row_column_command(QTableWidget* self, int row, int column, int command) {
 	self->setCurrentCell(static_cast<int>(row), static_cast<int>(column), static_cast<QItemSelectionModel::SelectionFlags>(command));
 }
 
-void QTableWidget_sortItems(QTableWidget* self, int column) {
+void QTableWidget_sortItems_column(QTableWidget* self, int column) {
 	self->sortItems(static_cast<int>(column));
 }
 
@@ -2071,11 +2071,11 @@ int QTableWidget_visualColumn(const QTableWidget* self, int logicalColumn) {
 	return self->visualColumn(static_cast<int>(logicalColumn));
 }
 
-QTableWidgetItem* QTableWidget_itemAt(const QTableWidget* self, QPoint* p) {
+QTableWidgetItem* QTableWidget_itemAt_p(const QTableWidget* self, QPoint* p) {
 	return self->itemAt(*p);
 }
 
-QTableWidgetItem* QTableWidget_itemAt2(const QTableWidget* self, int x, int y) {
+QTableWidgetItem* QTableWidget_itemAt_x_y(const QTableWidget* self, int x, int y) {
 	return self->itemAt(static_cast<int>(x), static_cast<int>(y));
 }
 
@@ -2091,7 +2091,7 @@ void QTableWidget_setItemPrototype(QTableWidget* self, QTableWidgetItem* item) {
 	self->setItemPrototype(item);
 }
 
-void QTableWidget_scrollToItem(QTableWidget* self, QTableWidgetItem* item) {
+void QTableWidget_scrollToItem_item(QTableWidget* self, QTableWidgetItem* item) {
 	self->scrollToItem(item);
 }
 
@@ -2368,7 +2368,7 @@ void QTableWidget_connect_currentCellChanged(QTableWidget* self, intptr_t slot, 
 	QTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int, int, int)>(&QTableWidget::currentCellChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QTableWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QTableWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTableWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2379,7 +2379,7 @@ struct seaqt_string QTableWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTableWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTableWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTableWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2390,11 +2390,11 @@ struct seaqt_string QTableWidget_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QTableWidget_sortItems2(QTableWidget* self, int column, int order) {
+void QTableWidget_sortItems_column_order(QTableWidget* self, int column, int order) {
 	self->sortItems(static_cast<int>(column), static_cast<Qt::SortOrder>(order));
 }
 
-void QTableWidget_scrollToItem2(QTableWidget* self, QTableWidgetItem* item, int hint) {
+void QTableWidget_scrollToItem_item_hint(QTableWidget* self, QTableWidgetItem* item, int hint) {
 	self->scrollToItem(item, static_cast<QAbstractItemView::ScrollHint>(hint));
 }
 
@@ -2686,7 +2686,7 @@ void QTableWidget_virtualbase_editorDestroyed(VirtualQTableWidget* self, QObject
 	self->QTableWidget::editorDestroyed(editor);
 }
 
-bool QTableWidget_virtualbase_edit2(VirtualQTableWidget* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QTableWidget_virtualbase_edit_index_trigger_event(VirtualQTableWidget* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QTableWidget::edit(*index, static_cast<VirtualQTableWidget::EditTrigger>(trigger), event);
 }
@@ -2998,7 +2998,7 @@ int QTableWidget_protectedbase_dropIndicatorPosition(const VirtualQTableWidget* 
 	return static_cast<int>(_ret);
 }
 
-void QTableWidget_protectedbase_setViewportMargins(VirtualQTableWidget* self, int left, int top, int right, int bottom) {
+void QTableWidget_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTableWidget* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

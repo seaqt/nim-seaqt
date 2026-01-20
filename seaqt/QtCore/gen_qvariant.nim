@@ -148,17 +148,17 @@ export
 type cQVariant*{.exportc: "QVariant", incompleteStruct.} = object
 type cQVariantConstPointer*{.exportc: "QVariantConstPointer", incompleteStruct.} = object
 
-proc fcQVariant_operatorAssign(self: pointer, other: pointer): void {.importc: "QVariant_operatorAssign".}
+proc fcQVariant_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVariant_operatorAssign".}
 proc fcQVariant_swap(self: pointer, other: pointer): void {.importc: "QVariant_swap".}
 proc fcQVariant_userType(self: pointer): cint {.importc: "QVariant_userType".}
 proc fcQVariant_typeId(self: pointer): cint {.importc: "QVariant_typeId".}
 proc fcQVariant_typeName(self: pointer): cstring {.importc: "QVariant_typeName".}
 proc fcQVariant_metaType(self: pointer): pointer {.importc: "QVariant_metaType".}
-proc fcQVariant_canConvert(self: pointer, targetType: pointer): bool {.importc: "QVariant_canConvert".}
-proc fcQVariant_convert(self: pointer, typeVal: pointer): bool {.importc: "QVariant_convert".}
+proc fcQVariant_canConvertTargetType(self: pointer, targetType: pointer): bool {.importc: "QVariant_canConvert_targetType".}
+proc fcQVariant_convertType(self: pointer, typeVal: pointer): bool {.importc: "QVariant_convert_type".}
 proc fcQVariant_canView(self: pointer, targetType: pointer): bool {.importc: "QVariant_canView".}
-proc fcQVariant_canConvertWithTargetTypeId(self: pointer, targetTypeId: cint): bool {.importc: "QVariant_canConvertWithTargetTypeId".}
-proc fcQVariant_convertWithTargetTypeId(self: pointer, targetTypeId: cint): bool {.importc: "QVariant_convertWithTargetTypeId".}
+proc fcQVariant_canConvertTargetTypeId(self: pointer, targetTypeId: cint): bool {.importc: "QVariant_canConvert_targetTypeId".}
+proc fcQVariant_convertTargetTypeId(self: pointer, targetTypeId: cint): bool {.importc: "QVariant_convert_targetTypeId".}
 proc fcQVariant_isValid(self: pointer): bool {.importc: "QVariant_isValid".}
 proc fcQVariant_isNull(self: pointer): bool {.importc: "QVariant_isNull".}
 proc fcQVariant_clear(self: pointer): void {.importc: "QVariant_clear".}
@@ -209,73 +209,73 @@ proc fcQVariant_typeToName(typeId: cint): cstring {.importc: "QVariant_typeToNam
 proc fcQVariant_nameToType(name: cstring): cint {.importc: "QVariant_nameToType".}
 proc fcQVariant_data(self: pointer): pointer {.importc: "QVariant_data".}
 proc fcQVariant_constData(self: pointer): pointer {.importc: "QVariant_constData".}
-proc fcQVariant_data2(self: pointer): pointer {.importc: "QVariant_data2".}
+proc fcQVariant_dataConst(self: pointer): pointer {.importc: "QVariant_data_const".}
 proc fcQVariant_setValue(self: pointer, avalue: pointer): void {.importc: "QVariant_setValue".}
 proc fcQVariant_compare(lhs: pointer, rhs: pointer): pointer {.importc: "QVariant_compare".}
-proc fcQVariant_toIntWithOk(self: pointer, ok: ptr bool): cint {.importc: "QVariant_toIntWithOk".}
-proc fcQVariant_toUIntWithOk(self: pointer, ok: ptr bool): cuint {.importc: "QVariant_toUIntWithOk".}
-proc fcQVariant_toLongLongWithOk(self: pointer, ok: ptr bool): clonglong {.importc: "QVariant_toLongLongWithOk".}
-proc fcQVariant_toULongLongWithOk(self: pointer, ok: ptr bool): culonglong {.importc: "QVariant_toULongLongWithOk".}
-proc fcQVariant_toDoubleWithOk(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toDoubleWithOk".}
-proc fcQVariant_toFloatWithOk(self: pointer, ok: ptr bool): float32 {.importc: "QVariant_toFloatWithOk".}
-proc fcQVariant_toRealWithOk(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toRealWithOk".}
+proc fcQVariant_toIntOk(self: pointer, ok: ptr bool): cint {.importc: "QVariant_toInt_ok".}
+proc fcQVariant_toUIntOk(self: pointer, ok: ptr bool): cuint {.importc: "QVariant_toUInt_ok".}
+proc fcQVariant_toLongLongOk(self: pointer, ok: ptr bool): clonglong {.importc: "QVariant_toLongLong_ok".}
+proc fcQVariant_toULongLongOk(self: pointer, ok: ptr bool): culonglong {.importc: "QVariant_toULongLong_ok".}
+proc fcQVariant_toDoubleOk(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toDouble_ok".}
+proc fcQVariant_toFloatOk(self: pointer, ok: ptr bool): float32 {.importc: "QVariant_toFloat_ok".}
+proc fcQVariant_toRealOk(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toReal_ok".}
 proc fcQVariant_fromValue(value: pointer): pointer {.importc: "QVariant_fromValue".}
-proc fcQVariant_protectedbase_create(self: pointer, typeVal: cint, copy: pointer): void {.importc: "QVariant_protectedbase_create".}
-proc fcQVariant_protectedbase_create2(self: pointer, typeVal: pointer, copy: pointer): void {.importc: "QVariant_protectedbase_create2".}
+proc fcQVariant_protectedbase_create_int_void(self: pointer, typeVal: cint, copy: pointer): void {.importc: "QVariant_protectedbase_create_int_void".}
+proc fcQVariant_protectedbase_create_QMetaType_void(self: pointer, typeVal: pointer, copy: pointer): void {.importc: "QVariant_protectedbase_create_QMetaType_void".}
 proc fcQVariant_protectedbase_equals(self: pointer, other: pointer): bool {.importc: "QVariant_protectedbase_equals".}
-proc fcQVariant_protectedbase_convert2(self: pointer, typeVal: cint, ptrVal: pointer): bool {.importc: "QVariant_protectedbase_convert2".}
+proc fcQVariant_protectedbase_convert_type_ptr(self: pointer, typeVal: cint, ptrVal: pointer): bool {.importc: "QVariant_protectedbase_convert_type_ptr".}
 proc fcQVariant_protectedbase_view(self: pointer, typeVal: cint, ptrVal: pointer): bool {.importc: "QVariant_protectedbase_view".}
 proc fcQVariant_new(): ptr cQVariant {.importc: "QVariant_new".}
-proc fcQVariant_new2(typeVal: pointer): ptr cQVariant {.importc: "QVariant_new2".}
-proc fcQVariant_new3(other: pointer): ptr cQVariant {.importc: "QVariant_new3".}
-proc fcQVariant_new4(i: cint): ptr cQVariant {.importc: "QVariant_new4".}
-proc fcQVariant_new5(ui: cuint): ptr cQVariant {.importc: "QVariant_new5".}
-proc fcQVariant_new6(ll: clonglong): ptr cQVariant {.importc: "QVariant_new6".}
-proc fcQVariant_new7(ull: culonglong): ptr cQVariant {.importc: "QVariant_new7".}
-proc fcQVariant_new8(b: bool): ptr cQVariant {.importc: "QVariant_new8".}
-proc fcQVariant_new9(d: float64): ptr cQVariant {.importc: "QVariant_new9".}
-proc fcQVariant_new10(f: float32): ptr cQVariant {.importc: "QVariant_new10".}
-proc fcQVariant_new11(str: cstring): ptr cQVariant {.importc: "QVariant_new11".}
-proc fcQVariant_new12(bytearray: struct_seaqt_string): ptr cQVariant {.importc: "QVariant_new12".}
-proc fcQVariant_new13(bitarray: pointer): ptr cQVariant {.importc: "QVariant_new13".}
-proc fcQVariant_new14(stringVal: struct_seaqt_string): ptr cQVariant {.importc: "QVariant_new14".}
-proc fcQVariant_new15(stringlist: struct_seaqt_array): ptr cQVariant {.importc: "QVariant_new15".}
-proc fcQVariant_new16(qchar: pointer): ptr cQVariant {.importc: "QVariant_new16".}
-proc fcQVariant_new17(date: pointer): ptr cQVariant {.importc: "QVariant_new17".}
-proc fcQVariant_new18(time: pointer): ptr cQVariant {.importc: "QVariant_new18".}
-proc fcQVariant_new19(datetime: pointer): ptr cQVariant {.importc: "QVariant_new19".}
-proc fcQVariant_new20(map: struct_seaqt_map): ptr cQVariant {.importc: "QVariant_new20".}
-proc fcQVariant_new21(hash: struct_seaqt_map): ptr cQVariant {.importc: "QVariant_new21".}
-proc fcQVariant_new22(size: pointer): ptr cQVariant {.importc: "QVariant_new22".}
-proc fcQVariant_new23(size: pointer): ptr cQVariant {.importc: "QVariant_new23".}
-proc fcQVariant_new24(pt: pointer): ptr cQVariant {.importc: "QVariant_new24".}
-proc fcQVariant_new25(pt: pointer): ptr cQVariant {.importc: "QVariant_new25".}
-proc fcQVariant_new26(line: pointer): ptr cQVariant {.importc: "QVariant_new26".}
-proc fcQVariant_new27(line: pointer): ptr cQVariant {.importc: "QVariant_new27".}
-proc fcQVariant_new28(rect: pointer): ptr cQVariant {.importc: "QVariant_new28".}
-proc fcQVariant_new29(rect: pointer): ptr cQVariant {.importc: "QVariant_new29".}
-proc fcQVariant_new30(locale: pointer): ptr cQVariant {.importc: "QVariant_new30".}
-proc fcQVariant_new31(re: pointer): ptr cQVariant {.importc: "QVariant_new31".}
-proc fcQVariant_new32(easing: pointer): ptr cQVariant {.importc: "QVariant_new32".}
-proc fcQVariant_new33(uuid: pointer): ptr cQVariant {.importc: "QVariant_new33".}
-proc fcQVariant_new34(url: pointer): ptr cQVariant {.importc: "QVariant_new34".}
-proc fcQVariant_new35(jsonValue: pointer): ptr cQVariant {.importc: "QVariant_new35".}
-proc fcQVariant_new36(jsonObject: pointer): ptr cQVariant {.importc: "QVariant_new36".}
-proc fcQVariant_new37(jsonArray: pointer): ptr cQVariant {.importc: "QVariant_new37".}
-proc fcQVariant_new38(jsonDocument: pointer): ptr cQVariant {.importc: "QVariant_new38".}
-proc fcQVariant_new39(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new39".}
-proc fcQVariant_new40(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new40".}
-proc fcQVariant_new41(typeVal: cint): ptr cQVariant {.importc: "QVariant_new41".}
-proc fcQVariant_new42(typeVal: pointer, copy: pointer): ptr cQVariant {.importc: "QVariant_new42".}
-proc fcQVariant_new43(list: struct_seaqt_array): ptr cQVariant {.importc: "QVariant_new43".}
+proc fcQVariant_new2(typeVal: pointer): ptr cQVariant {.importc: "QVariant_new_QMetaType".}
+proc fcQVariant_new3(fromVal: pointer): ptr cQVariant {.importc: "QVariant_new_QVariant".}
+proc fcQVariant_new4(i: cint): ptr cQVariant {.importc: "QVariant_new_int".}
+proc fcQVariant_new5(ui: cuint): ptr cQVariant {.importc: "QVariant_new_uint".}
+proc fcQVariant_new6(ll: clonglong): ptr cQVariant {.importc: "QVariant_new_qlonglong".}
+proc fcQVariant_new7(ull: culonglong): ptr cQVariant {.importc: "QVariant_new_qulonglong".}
+proc fcQVariant_new8(b: bool): ptr cQVariant {.importc: "QVariant_new_bool".}
+proc fcQVariant_new9(d: float64): ptr cQVariant {.importc: "QVariant_new_double".}
+proc fcQVariant_new10(f: float32): ptr cQVariant {.importc: "QVariant_new_float".}
+proc fcQVariant_new11(str: cstring): ptr cQVariant {.importc: "QVariant_new_char".}
+proc fcQVariant_new12(bytearray: struct_seaqt_string): ptr cQVariant {.importc: "QVariant_new_QByteArray".}
+proc fcQVariant_new13(bitarray: pointer): ptr cQVariant {.importc: "QVariant_new_QBitArray".}
+proc fcQVariant_new14(stringVal: struct_seaqt_string): ptr cQVariant {.importc: "QVariant_new_QString".}
+proc fcQVariant_new15(stringlist: struct_seaqt_array): ptr cQVariant {.importc: "QVariant_new_QStringList".}
+proc fcQVariant_new16(qchar: pointer): ptr cQVariant {.importc: "QVariant_new_QChar".}
+proc fcQVariant_new17(date: pointer): ptr cQVariant {.importc: "QVariant_new_QDate".}
+proc fcQVariant_new18(time: pointer): ptr cQVariant {.importc: "QVariant_new_QTime".}
+proc fcQVariant_new19(datetime: pointer): ptr cQVariant {.importc: "QVariant_new_QDateTime".}
+proc fcQVariant_new20(map: struct_seaqt_map): ptr cQVariant {.importc: "QVariant_new_QMapOfQString_QVariant".}
+proc fcQVariant_new21(hash: struct_seaqt_map): ptr cQVariant {.importc: "QVariant_new_QHashOfQString_QVariant".}
+proc fcQVariant_new22(size: pointer): ptr cQVariant {.importc: "QVariant_new_QSize".}
+proc fcQVariant_new23(size: pointer): ptr cQVariant {.importc: "QVariant_new_QSizeF".}
+proc fcQVariant_new24(pt: pointer): ptr cQVariant {.importc: "QVariant_new_QPoint".}
+proc fcQVariant_new25(pt: pointer): ptr cQVariant {.importc: "QVariant_new_QPointF".}
+proc fcQVariant_new26(line: pointer): ptr cQVariant {.importc: "QVariant_new_QLine".}
+proc fcQVariant_new27(line: pointer): ptr cQVariant {.importc: "QVariant_new_QLineF".}
+proc fcQVariant_new28(rect: pointer): ptr cQVariant {.importc: "QVariant_new_QRect".}
+proc fcQVariant_new29(rect: pointer): ptr cQVariant {.importc: "QVariant_new_QRectF".}
+proc fcQVariant_new30(locale: pointer): ptr cQVariant {.importc: "QVariant_new_QLocale".}
+proc fcQVariant_new31(re: pointer): ptr cQVariant {.importc: "QVariant_new_QRegularExpression".}
+proc fcQVariant_new32(easing: pointer): ptr cQVariant {.importc: "QVariant_new_QEasingCurve".}
+proc fcQVariant_new33(uuid: pointer): ptr cQVariant {.importc: "QVariant_new_QUuid".}
+proc fcQVariant_new34(url: pointer): ptr cQVariant {.importc: "QVariant_new_QUrl".}
+proc fcQVariant_new35(jsonValue: pointer): ptr cQVariant {.importc: "QVariant_new_QJsonValue".}
+proc fcQVariant_new36(jsonObject: pointer): ptr cQVariant {.importc: "QVariant_new_QJsonObject".}
+proc fcQVariant_new37(jsonArray: pointer): ptr cQVariant {.importc: "QVariant_new_QJsonArray".}
+proc fcQVariant_new38(jsonDocument: pointer): ptr cQVariant {.importc: "QVariant_new_QJsonDocument".}
+proc fcQVariant_new39(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new_QModelIndex".}
+proc fcQVariant_new40(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new_QPersistentModelIndex".}
+proc fcQVariant_new41(typeVal: cint): ptr cQVariant {.importc: "QVariant_new_QVariant_Type".}
+proc fcQVariant_new42(typeVal: pointer, copy: pointer): ptr cQVariant {.importc: "QVariant_new_QMetaType_void".}
+proc fcQVariant_new43(list: struct_seaqt_array): ptr cQVariant {.importc: "QVariant_new_QListOfQVariant".}
 proc fcQVariantConstPointer_operatorMultiply(self: pointer): pointer {.importc: "QVariantConstPointer_operatorMultiply".}
 proc fcQVariantConstPointer_operatorMinusGreater(self: pointer): pointer {.importc: "QVariantConstPointer_operatorMinusGreater".}
-proc fcQVariantConstPointer_operatorAssign(self: pointer, param1: pointer): void {.importc: "QVariantConstPointer_operatorAssign".}
-proc fcQVariantConstPointer_new(variant: pointer): ptr cQVariantConstPointer {.importc: "QVariantConstPointer_new".}
-proc fcQVariantConstPointer_new2(param1: pointer): ptr cQVariantConstPointer {.importc: "QVariantConstPointer_new2".}
+proc fcQVariantConstPointer_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVariantConstPointer_operatorAssign".}
+proc fcQVariantConstPointer_new(variant: pointer): ptr cQVariantConstPointer {.importc: "QVariantConstPointer_new_variant".}
+proc fcQVariantConstPointer_new2(fromVal: pointer): ptr cQVariantConstPointer {.importc: "QVariantConstPointer_new_from".}
 
-proc operatorAssign*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): void =
-  fcQVariant_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qvariant_types.QVariant, fromVal: gen_qvariant_types.QVariant): void =
+  fcQVariant_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): void =
   fcQVariant_swap(self.h, other.h)
@@ -293,19 +293,19 @@ proc metaType*(self: gen_qvariant_types.QVariant): gen_qmetatype_types.QMetaType
   gen_qmetatype_types.QMetaType(h: fcQVariant_metaType(self.h), owned: true)
 
 proc canConvert*(self: gen_qvariant_types.QVariant, targetType: gen_qmetatype_types.QMetaType): bool =
-  fcQVariant_canConvert(self.h, targetType.h)
+  fcQVariant_canConvertTargetType(self.h, targetType.h)
 
 proc convert*(self: gen_qvariant_types.QVariant, typeVal: gen_qmetatype_types.QMetaType): bool =
-  fcQVariant_convert(self.h, typeVal.h)
+  fcQVariant_convertType(self.h, typeVal.h)
 
 proc canView*(self: gen_qvariant_types.QVariant, targetType: gen_qmetatype_types.QMetaType): bool =
   fcQVariant_canView(self.h, targetType.h)
 
 proc canConvert*(self: gen_qvariant_types.QVariant, targetTypeId: cint): bool =
-  fcQVariant_canConvertWithTargetTypeId(self.h, targetTypeId)
+  fcQVariant_canConvertTargetTypeId(self.h, targetTypeId)
 
 proc convert*(self: gen_qvariant_types.QVariant, targetTypeId: cint): bool =
-  fcQVariant_convertWithTargetTypeId(self.h, targetTypeId)
+  fcQVariant_convertTargetTypeId(self.h, targetTypeId)
 
 proc isValid*(self: gen_qvariant_types.QVariant): bool =
   fcQVariant_isValid(self.h)
@@ -509,7 +509,7 @@ proc constData*(self: gen_qvariant_types.QVariant): pointer =
   fcQVariant_constData(self.h)
 
 proc data2*(self: gen_qvariant_types.QVariant): pointer =
-  fcQVariant_data2(self.h)
+  fcQVariant_dataConst(self.h)
 
 proc setValue*(self: gen_qvariant_types.QVariant, avalue: gen_qvariant_types.QVariant): void =
   fcQVariant_setValue(self.h, avalue.h)
@@ -518,40 +518,40 @@ proc compare*(_: type gen_qvariant_types.QVariant, lhs: gen_qvariant_types.QVari
   gen_qcompare_types.QPartialOrdering(h: fcQVariant_compare(lhs.h, rhs.h), owned: true)
 
 proc toInt*(self: gen_qvariant_types.QVariant, ok: ptr bool): cint =
-  fcQVariant_toIntWithOk(self.h, ok)
+  fcQVariant_toIntOk(self.h, ok)
 
 proc toUInt*(self: gen_qvariant_types.QVariant, ok: ptr bool): cuint =
-  fcQVariant_toUIntWithOk(self.h, ok)
+  fcQVariant_toUIntOk(self.h, ok)
 
 proc toLongLong*(self: gen_qvariant_types.QVariant, ok: ptr bool): clonglong =
-  fcQVariant_toLongLongWithOk(self.h, ok)
+  fcQVariant_toLongLongOk(self.h, ok)
 
 proc toULongLong*(self: gen_qvariant_types.QVariant, ok: ptr bool): culonglong =
-  fcQVariant_toULongLongWithOk(self.h, ok)
+  fcQVariant_toULongLongOk(self.h, ok)
 
 proc toDouble*(self: gen_qvariant_types.QVariant, ok: ptr bool): float64 =
-  fcQVariant_toDoubleWithOk(self.h, ok)
+  fcQVariant_toDoubleOk(self.h, ok)
 
 proc toFloat*(self: gen_qvariant_types.QVariant, ok: ptr bool): float32 =
-  fcQVariant_toFloatWithOk(self.h, ok)
+  fcQVariant_toFloatOk(self.h, ok)
 
 proc toReal*(self: gen_qvariant_types.QVariant, ok: ptr bool): float64 =
-  fcQVariant_toRealWithOk(self.h, ok)
+  fcQVariant_toRealOk(self.h, ok)
 
 proc fromValue*(_: type gen_qvariant_types.QVariant, value: gen_qobject_types.QObject): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariant_fromValue(value.h), owned: true)
 
 proc createX*(self: gen_qvariant_types.QVariant, typeVal: cint, copy: pointer): void =
-  fcQVariant_protectedbase_create(self.h, typeVal, copy)
+  fcQVariant_protectedbase_create_int_void(self.h, typeVal, copy)
 
 proc createX*(self: gen_qvariant_types.QVariant, typeVal: gen_qmetatype_types.QMetaType, copy: pointer): void =
-  fcQVariant_protectedbase_create2(self.h, typeVal.h, copy)
+  fcQVariant_protectedbase_create_QMetaType_void(self.h, typeVal.h, copy)
 
 proc equals*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): bool =
   fcQVariant_protectedbase_equals(self.h, other.h)
 
 proc convert*(self: gen_qvariant_types.QVariant, typeVal: cint, ptrVal: pointer): bool =
-  fcQVariant_protectedbase_convert2(self.h, typeVal, ptrVal)
+  fcQVariant_protectedbase_convert_type_ptr(self.h, typeVal, ptrVal)
 
 proc view*(self: gen_qvariant_types.QVariant, typeVal: cint, ptrVal: pointer): bool =
   fcQVariant_protectedbase_view(self.h, typeVal, ptrVal)
@@ -564,8 +564,8 @@ proc create*(T: type gen_qvariant_types.QVariant,
   let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new2(typeVal.h), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
-    other: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new3(other.h), owned: true)
+    fromVal: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
+  let tmp = gen_qvariant_types.QVariant(h: fcQVariant_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariant,
     i: cint): gen_qvariant_types.QVariant =
@@ -763,14 +763,14 @@ proc operatorMultiply*(self: gen_qvariant_types.QVariantConstPointer): gen_qvari
 proc operatorMinusGreater*(self: gen_qvariant_types.QVariantConstPointer): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariantConstPointer_operatorMinusGreater(self.h), owned: false)
 
-proc operatorAssign*(self: gen_qvariant_types.QVariantConstPointer, param1: gen_qvariant_types.QVariantConstPointer): void =
-  fcQVariantConstPointer_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qvariant_types.QVariantConstPointer, fromVal: gen_qvariant_types.QVariantConstPointer): void =
+  fcQVariantConstPointer_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qvariant_types.QVariantConstPointer,
     variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariantConstPointer =
   let tmp = gen_qvariant_types.QVariantConstPointer(h: fcQVariantConstPointer_new(variant.h), owned: true)
   tmp
 proc create*(T: type gen_qvariant_types.QVariantConstPointer,
-    param1: gen_qvariant_types.QVariantConstPointer): gen_qvariant_types.QVariantConstPointer =
-  let tmp = gen_qvariant_types.QVariantConstPointer(h: fcQVariantConstPointer_new2(param1.h), owned: true)
+    fromVal: gen_qvariant_types.QVariantConstPointer): gen_qvariant_types.QVariantConstPointer =
+  let tmp = gen_qvariant_types.QVariantConstPointer(h: fcQVariantConstPointer_new2(fromVal.h), owned: true)
   tmp

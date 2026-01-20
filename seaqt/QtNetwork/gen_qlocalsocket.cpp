@@ -380,7 +380,7 @@ VirtualQLocalSocket* QLocalSocket_new(const QLocalSocket_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQLocalSocket(vtbl) : nullptr;
 }
 
-VirtualQLocalSocket* QLocalSocket_new2(const QLocalSocket_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQLocalSocket* QLocalSocket_new_parent(const QLocalSocket_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQLocalSocket>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQLocalSocket(vtbl, parent) : nullptr;
 }
@@ -401,7 +401,7 @@ int QLocalSocket_metacall(QLocalSocket* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QLocalSocket_tr(const char* s) {
+struct seaqt_string QLocalSocket_tr_s(const char* s) {
 	QString _ret = QLocalSocket::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -416,7 +416,7 @@ void QLocalSocket_connectToServer(QLocalSocket* self) {
 	self->connectToServer();
 }
 
-void QLocalSocket_connectToServerWithName(QLocalSocket* self, struct seaqt_string name) {
+void QLocalSocket_connectToServer_name(QLocalSocket* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	self->connectToServer(name_QString);
 }
@@ -504,7 +504,7 @@ void QLocalSocket_setReadBufferSize(QLocalSocket* self, long long size) {
 	self->setReadBufferSize(static_cast<qint64>(size));
 }
 
-bool QLocalSocket_setSocketDescriptor(QLocalSocket* self, intptr_t socketDescriptor) {
+bool QLocalSocket_setSocketDescriptor_socketDescriptor(QLocalSocket* self, intptr_t socketDescriptor) {
 	return self->setSocketDescriptor((qintptr)(socketDescriptor));
 }
 
@@ -607,7 +607,7 @@ void QLocalSocket_connect_stateChanged(QLocalSocket* self, intptr_t slot, void (
 	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)(QLocalSocket::LocalSocketState)>(&QLocalSocket::stateChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QLocalSocket_tr2(const char* s, const char* c) {
+struct seaqt_string QLocalSocket_tr_s_c(const char* s, const char* c) {
 	QString _ret = QLocalSocket::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -618,7 +618,7 @@ struct seaqt_string QLocalSocket_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QLocalSocket_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QLocalSocket_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QLocalSocket::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -629,28 +629,28 @@ struct seaqt_string QLocalSocket_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QLocalSocket_connectToServerWithOpenMode(QLocalSocket* self, int openMode) {
+void QLocalSocket_connectToServer_openMode(QLocalSocket* self, int openMode) {
 	self->connectToServer(static_cast<QIODeviceBase::OpenMode>(openMode));
 }
 
-void QLocalSocket_connectToServer2(QLocalSocket* self, struct seaqt_string name, int openMode) {
+void QLocalSocket_connectToServer_name_openMode(QLocalSocket* self, struct seaqt_string name, int openMode) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	self->connectToServer(name_QString, static_cast<QIODeviceBase::OpenMode>(openMode));
 }
 
-bool QLocalSocket_setSocketDescriptor2(QLocalSocket* self, intptr_t socketDescriptor, int socketState) {
+bool QLocalSocket_setSocketDescriptor_socketDescriptor_socketState(QLocalSocket* self, intptr_t socketDescriptor, int socketState) {
 	return self->setSocketDescriptor((qintptr)(socketDescriptor), static_cast<QLocalSocket::LocalSocketState>(socketState));
 }
 
-bool QLocalSocket_setSocketDescriptor3(QLocalSocket* self, intptr_t socketDescriptor, int socketState, int openMode) {
+bool QLocalSocket_setSocketDescriptor_socketDescriptor_socketState_openMode(QLocalSocket* self, intptr_t socketDescriptor, int socketState, int openMode) {
 	return self->setSocketDescriptor((qintptr)(socketDescriptor), static_cast<QLocalSocket::LocalSocketState>(socketState), static_cast<QIODeviceBase::OpenMode>(openMode));
 }
 
-bool QLocalSocket_waitForConnectedWithMsecs(QLocalSocket* self, int msecs) {
+bool QLocalSocket_waitForConnected_msecs(QLocalSocket* self, int msecs) {
 	return self->waitForConnected(static_cast<int>(msecs));
 }
 
-bool QLocalSocket_waitForDisconnectedWithMsecs(QLocalSocket* self, int msecs) {
+bool QLocalSocket_waitForDisconnected_msecs(QLocalSocket* self, int msecs) {
 	return self->waitForDisconnected(static_cast<int>(msecs));
 }
 

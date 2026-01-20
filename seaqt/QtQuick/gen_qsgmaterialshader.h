@@ -55,10 +55,10 @@ VirtualQSGMaterialShader* QSGMaterialShader_new(const QSGMaterialShader_VTable* 
 bool QSGMaterialShader_updateUniformData(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 bool QSGMaterialShader_updateGraphicsPipelineState(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 int QSGMaterialShader_flags(const QSGMaterialShader* self);
-void QSGMaterialShader_setFlag(QSGMaterialShader* self, int flags);
+void QSGMaterialShader_setFlag_flags(QSGMaterialShader* self, int flags);
 void QSGMaterialShader_setFlags(QSGMaterialShader* self, int flags);
 int QSGMaterialShader_combinedImageSamplerCount(const QSGMaterialShader* self, int binding);
-void QSGMaterialShader_setFlag2(QSGMaterialShader* self, int flags, bool on);
+void QSGMaterialShader_setFlag_flags_on(QSGMaterialShader* self, int flags, bool on);
 
 bool QSGMaterialShader_virtualbase_updateUniformData(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 bool QSGMaterialShader_virtualbase_updateGraphicsPipelineState(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);

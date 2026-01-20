@@ -79,29 +79,29 @@ type cQDnsServiceRecord*{.exportc: "QDnsServiceRecord", incompleteStruct.} = obj
 type cQDnsTextRecord*{.exportc: "QDnsTextRecord", incompleteStruct.} = object
 type cQDnsLookup*{.exportc: "QDnsLookup", incompleteStruct.} = object
 
-proc fcQDnsDomainNameRecord_operatorAssign(self: pointer, other: pointer): void {.importc: "QDnsDomainNameRecord_operatorAssign".}
+proc fcQDnsDomainNameRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsDomainNameRecord_operatorAssign".}
 proc fcQDnsDomainNameRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsDomainNameRecord_swap".}
 proc fcQDnsDomainNameRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsDomainNameRecord_name".}
 proc fcQDnsDomainNameRecord_timeToLive(self: pointer): cuint {.importc: "QDnsDomainNameRecord_timeToLive".}
 proc fcQDnsDomainNameRecord_value(self: pointer): struct_seaqt_string {.importc: "QDnsDomainNameRecord_value".}
 proc fcQDnsDomainNameRecord_new(): ptr cQDnsDomainNameRecord {.importc: "QDnsDomainNameRecord_new".}
-proc fcQDnsDomainNameRecord_new2(other: pointer): ptr cQDnsDomainNameRecord {.importc: "QDnsDomainNameRecord_new2".}
-proc fcQDnsHostAddressRecord_operatorAssign(self: pointer, other: pointer): void {.importc: "QDnsHostAddressRecord_operatorAssign".}
+proc fcQDnsDomainNameRecord_new2(fromVal: pointer): ptr cQDnsDomainNameRecord {.importc: "QDnsDomainNameRecord_new_from".}
+proc fcQDnsHostAddressRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsHostAddressRecord_operatorAssign".}
 proc fcQDnsHostAddressRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsHostAddressRecord_swap".}
 proc fcQDnsHostAddressRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsHostAddressRecord_name".}
 proc fcQDnsHostAddressRecord_timeToLive(self: pointer): cuint {.importc: "QDnsHostAddressRecord_timeToLive".}
 proc fcQDnsHostAddressRecord_value(self: pointer): pointer {.importc: "QDnsHostAddressRecord_value".}
 proc fcQDnsHostAddressRecord_new(): ptr cQDnsHostAddressRecord {.importc: "QDnsHostAddressRecord_new".}
-proc fcQDnsHostAddressRecord_new2(other: pointer): ptr cQDnsHostAddressRecord {.importc: "QDnsHostAddressRecord_new2".}
-proc fcQDnsMailExchangeRecord_operatorAssign(self: pointer, other: pointer): void {.importc: "QDnsMailExchangeRecord_operatorAssign".}
+proc fcQDnsHostAddressRecord_new2(fromVal: pointer): ptr cQDnsHostAddressRecord {.importc: "QDnsHostAddressRecord_new_from".}
+proc fcQDnsMailExchangeRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsMailExchangeRecord_operatorAssign".}
 proc fcQDnsMailExchangeRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsMailExchangeRecord_swap".}
 proc fcQDnsMailExchangeRecord_exchange(self: pointer): struct_seaqt_string {.importc: "QDnsMailExchangeRecord_exchange".}
 proc fcQDnsMailExchangeRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsMailExchangeRecord_name".}
 proc fcQDnsMailExchangeRecord_preference(self: pointer): cushort {.importc: "QDnsMailExchangeRecord_preference".}
 proc fcQDnsMailExchangeRecord_timeToLive(self: pointer): cuint {.importc: "QDnsMailExchangeRecord_timeToLive".}
 proc fcQDnsMailExchangeRecord_new(): ptr cQDnsMailExchangeRecord {.importc: "QDnsMailExchangeRecord_new".}
-proc fcQDnsMailExchangeRecord_new2(other: pointer): ptr cQDnsMailExchangeRecord {.importc: "QDnsMailExchangeRecord_new2".}
-proc fcQDnsServiceRecord_operatorAssign(self: pointer, other: pointer): void {.importc: "QDnsServiceRecord_operatorAssign".}
+proc fcQDnsMailExchangeRecord_new2(fromVal: pointer): ptr cQDnsMailExchangeRecord {.importc: "QDnsMailExchangeRecord_new_from".}
+proc fcQDnsServiceRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsServiceRecord_operatorAssign".}
 proc fcQDnsServiceRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsServiceRecord_swap".}
 proc fcQDnsServiceRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsServiceRecord_name".}
 proc fcQDnsServiceRecord_port(self: pointer): cushort {.importc: "QDnsServiceRecord_port".}
@@ -110,18 +110,18 @@ proc fcQDnsServiceRecord_target(self: pointer): struct_seaqt_string {.importc: "
 proc fcQDnsServiceRecord_timeToLive(self: pointer): cuint {.importc: "QDnsServiceRecord_timeToLive".}
 proc fcQDnsServiceRecord_weight(self: pointer): cushort {.importc: "QDnsServiceRecord_weight".}
 proc fcQDnsServiceRecord_new(): ptr cQDnsServiceRecord {.importc: "QDnsServiceRecord_new".}
-proc fcQDnsServiceRecord_new2(other: pointer): ptr cQDnsServiceRecord {.importc: "QDnsServiceRecord_new2".}
-proc fcQDnsTextRecord_operatorAssign(self: pointer, other: pointer): void {.importc: "QDnsTextRecord_operatorAssign".}
+proc fcQDnsServiceRecord_new2(fromVal: pointer): ptr cQDnsServiceRecord {.importc: "QDnsServiceRecord_new_from".}
+proc fcQDnsTextRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsTextRecord_operatorAssign".}
 proc fcQDnsTextRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsTextRecord_swap".}
 proc fcQDnsTextRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsTextRecord_name".}
 proc fcQDnsTextRecord_timeToLive(self: pointer): cuint {.importc: "QDnsTextRecord_timeToLive".}
 proc fcQDnsTextRecord_values(self: pointer): struct_seaqt_array {.importc: "QDnsTextRecord_values".}
 proc fcQDnsTextRecord_new(): ptr cQDnsTextRecord {.importc: "QDnsTextRecord_new".}
-proc fcQDnsTextRecord_new2(other: pointer): ptr cQDnsTextRecord {.importc: "QDnsTextRecord_new2".}
+proc fcQDnsTextRecord_new2(fromVal: pointer): ptr cQDnsTextRecord {.importc: "QDnsTextRecord_new_from".}
 proc fcQDnsLookup_metaObject(self: pointer): pointer {.importc: "QDnsLookup_metaObject".}
 proc fcQDnsLookup_metacast(self: pointer, param1: cstring): pointer {.importc: "QDnsLookup_metacast".}
 proc fcQDnsLookup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDnsLookup_metacall".}
-proc fcQDnsLookup_tr(s: cstring): struct_seaqt_string {.importc: "QDnsLookup_tr".}
+proc fcQDnsLookup_trS(s: cstring): struct_seaqt_string {.importc: "QDnsLookup_tr_s".}
 proc fcQDnsLookup_error(self: pointer): cint {.importc: "QDnsLookup_error".}
 proc fcQDnsLookup_errorString(self: pointer): struct_seaqt_string {.importc: "QDnsLookup_errorString".}
 proc fcQDnsLookup_isFinished(self: pointer): bool {.importc: "QDnsLookup_isFinished".}
@@ -148,8 +148,8 @@ proc fcQDnsLookup_typeChanged(self: pointer, typeVal: cint): void {.importc: "QD
 proc fcQDnsLookup_connect_typeChanged(self: pointer, slot: int, callback: proc (slot: int, typeVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_typeChanged".}
 proc fcQDnsLookup_nameserverChanged(self: pointer, nameserver: pointer): void {.importc: "QDnsLookup_nameserverChanged".}
 proc fcQDnsLookup_connect_nameserverChanged(self: pointer, slot: int, callback: proc (slot: int, nameserver: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_nameserverChanged".}
-proc fcQDnsLookup_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDnsLookup_tr2".}
-proc fcQDnsLookup_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDnsLookup_tr3".}
+proc fcQDnsLookup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDnsLookup_tr_s_c".}
+proc fcQDnsLookup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDnsLookup_tr_s_c_n".}
 proc fcQDnsLookup_vdata(self: pointer): ptr pointer {.importc: "QDnsLookup_vdata".}
 proc fvdata_cQDnsLookup(self: pointer): pointer {.importc: "vdata_QDnsLookup".}
 
@@ -180,15 +180,15 @@ proc fcQDnsLookup_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQDnsLookup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDnsLookup_protectedbase_receivers".}
 proc fcQDnsLookup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDnsLookup_protectedbase_isSignalConnected".}
 proc fcQDnsLookup_new(vtbl: pointer, vdata: csize_t): ptr cQDnsLookup {.importc: "QDnsLookup_new".}
-proc fcQDnsLookup_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string): ptr cQDnsLookup {.importc: "QDnsLookup_new2".}
-proc fcQDnsLookup_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, nameserver: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new3".}
-proc fcQDnsLookup_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new4".}
-proc fcQDnsLookup_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new5".}
-proc fcQDnsLookup_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, nameserver: pointer, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new6".}
+proc fcQDnsLookup_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name".}
+proc fcQDnsLookup_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, nameserver: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_nameserver".}
+proc fcQDnsLookup_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_parent".}
+proc fcQDnsLookup_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_parent".}
+proc fcQDnsLookup_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, nameserver: pointer, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_nameserver_parent".}
 proc fcQDnsLookup_staticMetaObject(): pointer {.importc: "QDnsLookup_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qdnslookup_types.QDnsDomainNameRecord, other: gen_qdnslookup_types.QDnsDomainNameRecord): void =
-  fcQDnsDomainNameRecord_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsDomainNameRecord, fromVal: gen_qdnslookup_types.QDnsDomainNameRecord): void =
+  fcQDnsDomainNameRecord_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qdnslookup_types.QDnsDomainNameRecord, other: gen_qdnslookup_types.QDnsDomainNameRecord): void =
   fcQDnsDomainNameRecord_swap(self.h, other.h)
@@ -212,11 +212,11 @@ proc create*(T: type gen_qdnslookup_types.QDnsDomainNameRecord): gen_qdnslookup_
   let tmp = gen_qdnslookup_types.QDnsDomainNameRecord(h: fcQDnsDomainNameRecord_new(), owned: true)
   tmp
 proc create*(T: type gen_qdnslookup_types.QDnsDomainNameRecord,
-    other: gen_qdnslookup_types.QDnsDomainNameRecord): gen_qdnslookup_types.QDnsDomainNameRecord =
-  let tmp = gen_qdnslookup_types.QDnsDomainNameRecord(h: fcQDnsDomainNameRecord_new2(other.h), owned: true)
+    fromVal: gen_qdnslookup_types.QDnsDomainNameRecord): gen_qdnslookup_types.QDnsDomainNameRecord =
+  let tmp = gen_qdnslookup_types.QDnsDomainNameRecord(h: fcQDnsDomainNameRecord_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qdnslookup_types.QDnsHostAddressRecord, other: gen_qdnslookup_types.QDnsHostAddressRecord): void =
-  fcQDnsHostAddressRecord_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsHostAddressRecord, fromVal: gen_qdnslookup_types.QDnsHostAddressRecord): void =
+  fcQDnsHostAddressRecord_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qdnslookup_types.QDnsHostAddressRecord, other: gen_qdnslookup_types.QDnsHostAddressRecord): void =
   fcQDnsHostAddressRecord_swap(self.h, other.h)
@@ -237,11 +237,11 @@ proc create*(T: type gen_qdnslookup_types.QDnsHostAddressRecord): gen_qdnslookup
   let tmp = gen_qdnslookup_types.QDnsHostAddressRecord(h: fcQDnsHostAddressRecord_new(), owned: true)
   tmp
 proc create*(T: type gen_qdnslookup_types.QDnsHostAddressRecord,
-    other: gen_qdnslookup_types.QDnsHostAddressRecord): gen_qdnslookup_types.QDnsHostAddressRecord =
-  let tmp = gen_qdnslookup_types.QDnsHostAddressRecord(h: fcQDnsHostAddressRecord_new2(other.h), owned: true)
+    fromVal: gen_qdnslookup_types.QDnsHostAddressRecord): gen_qdnslookup_types.QDnsHostAddressRecord =
+  let tmp = gen_qdnslookup_types.QDnsHostAddressRecord(h: fcQDnsHostAddressRecord_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qdnslookup_types.QDnsMailExchangeRecord, other: gen_qdnslookup_types.QDnsMailExchangeRecord): void =
-  fcQDnsMailExchangeRecord_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsMailExchangeRecord, fromVal: gen_qdnslookup_types.QDnsMailExchangeRecord): void =
+  fcQDnsMailExchangeRecord_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qdnslookup_types.QDnsMailExchangeRecord, other: gen_qdnslookup_types.QDnsMailExchangeRecord): void =
   fcQDnsMailExchangeRecord_swap(self.h, other.h)
@@ -268,11 +268,11 @@ proc create*(T: type gen_qdnslookup_types.QDnsMailExchangeRecord): gen_qdnslooku
   let tmp = gen_qdnslookup_types.QDnsMailExchangeRecord(h: fcQDnsMailExchangeRecord_new(), owned: true)
   tmp
 proc create*(T: type gen_qdnslookup_types.QDnsMailExchangeRecord,
-    other: gen_qdnslookup_types.QDnsMailExchangeRecord): gen_qdnslookup_types.QDnsMailExchangeRecord =
-  let tmp = gen_qdnslookup_types.QDnsMailExchangeRecord(h: fcQDnsMailExchangeRecord_new2(other.h), owned: true)
+    fromVal: gen_qdnslookup_types.QDnsMailExchangeRecord): gen_qdnslookup_types.QDnsMailExchangeRecord =
+  let tmp = gen_qdnslookup_types.QDnsMailExchangeRecord(h: fcQDnsMailExchangeRecord_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qdnslookup_types.QDnsServiceRecord, other: gen_qdnslookup_types.QDnsServiceRecord): void =
-  fcQDnsServiceRecord_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsServiceRecord, fromVal: gen_qdnslookup_types.QDnsServiceRecord): void =
+  fcQDnsServiceRecord_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qdnslookup_types.QDnsServiceRecord, other: gen_qdnslookup_types.QDnsServiceRecord): void =
   fcQDnsServiceRecord_swap(self.h, other.h)
@@ -305,11 +305,11 @@ proc create*(T: type gen_qdnslookup_types.QDnsServiceRecord): gen_qdnslookup_typ
   let tmp = gen_qdnslookup_types.QDnsServiceRecord(h: fcQDnsServiceRecord_new(), owned: true)
   tmp
 proc create*(T: type gen_qdnslookup_types.QDnsServiceRecord,
-    other: gen_qdnslookup_types.QDnsServiceRecord): gen_qdnslookup_types.QDnsServiceRecord =
-  let tmp = gen_qdnslookup_types.QDnsServiceRecord(h: fcQDnsServiceRecord_new2(other.h), owned: true)
+    fromVal: gen_qdnslookup_types.QDnsServiceRecord): gen_qdnslookup_types.QDnsServiceRecord =
+  let tmp = gen_qdnslookup_types.QDnsServiceRecord(h: fcQDnsServiceRecord_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qdnslookup_types.QDnsTextRecord, other: gen_qdnslookup_types.QDnsTextRecord): void =
-  fcQDnsTextRecord_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsTextRecord, fromVal: gen_qdnslookup_types.QDnsTextRecord): void =
+  fcQDnsTextRecord_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qdnslookup_types.QDnsTextRecord, other: gen_qdnslookup_types.QDnsTextRecord): void =
   fcQDnsTextRecord_swap(self.h, other.h)
@@ -339,8 +339,8 @@ proc create*(T: type gen_qdnslookup_types.QDnsTextRecord): gen_qdnslookup_types.
   let tmp = gen_qdnslookup_types.QDnsTextRecord(h: fcQDnsTextRecord_new(), owned: true)
   tmp
 proc create*(T: type gen_qdnslookup_types.QDnsTextRecord,
-    other: gen_qdnslookup_types.QDnsTextRecord): gen_qdnslookup_types.QDnsTextRecord =
-  let tmp = gen_qdnslookup_types.QDnsTextRecord(h: fcQDnsTextRecord_new2(other.h), owned: true)
+    fromVal: gen_qdnslookup_types.QDnsTextRecord): gen_qdnslookup_types.QDnsTextRecord =
+  let tmp = gen_qdnslookup_types.QDnsTextRecord(h: fcQDnsTextRecord_new2(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qdnslookup_types.QDnsLookup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDnsLookup_metaObject(self.h), owned: false)
@@ -352,7 +352,7 @@ proc metacall*(self: gen_qdnslookup_types.QDnsLookup, param1: cint, param2: cint
   fcQDnsLookup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring): string =
-  let v_ms = fcQDnsLookup_tr(s)
+  let v_ms = fcQDnsLookup_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -541,13 +541,13 @@ proc onNameserverChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLooku
   fcQDnsLookup_connect_nameserverChanged(self.h, cast[int](addr tmp[]), fcQDnsLookup_slot_callback_nameserverChanged, fcQDnsLookup_slot_callback_nameserverChanged_release)
 
 proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring, c: cstring): string =
-  let v_ms = fcQDnsLookup_tr2(s, c)
+  let v_ms = fcQDnsLookup_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDnsLookup_tr3(s, c, n)
+  let v_ms = fcQDnsLookup_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

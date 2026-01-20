@@ -42,16 +42,16 @@ public:
 	friend int QGraphicsGridLayout_virtualbase_count(const VirtualQGraphicsGridLayout* self);
 
 	virtual QGraphicsLayoutItem* itemAt(int index) const override {
-		if (vtbl->itemAtWithIndex == 0) {
+		if (vtbl->itemAt_index == 0) {
 			return QGraphicsGridLayout::itemAt(index);
 		}
 
 		int sigval1 = index;
-		QGraphicsLayoutItem* callback_return_value = vtbl->itemAtWithIndex(this, sigval1);
+		QGraphicsLayoutItem* callback_return_value = vtbl->itemAt_index(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend QGraphicsLayoutItem* QGraphicsGridLayout_virtualbase_itemAtWithIndex(const VirtualQGraphicsGridLayout* self, int index);
+	friend QGraphicsLayoutItem* QGraphicsGridLayout_virtualbase_itemAt_index(const VirtualQGraphicsGridLayout* self, int index);
 
 	virtual void removeAt(int index) override {
 		if (vtbl->removeAt == 0) {
@@ -172,7 +172,7 @@ VirtualQGraphicsGridLayout* QGraphicsGridLayout_new(const QGraphicsGridLayout_VT
 	return _mem_ ? new (_mem_)VirtualQGraphicsGridLayout(vtbl) : nullptr;
 }
 
-VirtualQGraphicsGridLayout* QGraphicsGridLayout_new2(const QGraphicsGridLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent) {
+VirtualQGraphicsGridLayout* QGraphicsGridLayout_new_parent(const QGraphicsGridLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsGridLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsGridLayout(vtbl, parent) : nullptr;
 }
@@ -181,11 +181,11 @@ void QGraphicsGridLayout_virtbase(QGraphicsGridLayout* src, QGraphicsLayout** ou
 	*outptr_QGraphicsLayout = static_cast<QGraphicsLayout*>(src);
 }
 
-void QGraphicsGridLayout_addItem(QGraphicsGridLayout* self, QGraphicsLayoutItem* item, int row, int column, int rowSpan, int columnSpan) {
+void QGraphicsGridLayout_addItem_item_row_column_rowSpan_columnSpan(QGraphicsGridLayout* self, QGraphicsLayoutItem* item, int row, int column, int rowSpan, int columnSpan) {
 	self->addItem(item, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan), static_cast<int>(columnSpan));
 }
 
-void QGraphicsGridLayout_addItem2(QGraphicsGridLayout* self, QGraphicsLayoutItem* item, int row, int column) {
+void QGraphicsGridLayout_addItem_item_row_column(QGraphicsGridLayout* self, QGraphicsLayoutItem* item, int row, int column) {
 	self->addItem(item, static_cast<int>(row), static_cast<int>(column));
 }
 
@@ -342,7 +342,7 @@ int QGraphicsGridLayout_columnCount(const QGraphicsGridLayout* self) {
 	return self->columnCount();
 }
 
-QGraphicsLayoutItem* QGraphicsGridLayout_itemAt(const QGraphicsGridLayout* self, int row, int column) {
+QGraphicsLayoutItem* QGraphicsGridLayout_itemAt_row_column(const QGraphicsGridLayout* self, int row, int column) {
 	return self->itemAt(static_cast<int>(row), static_cast<int>(column));
 }
 
@@ -350,7 +350,7 @@ int QGraphicsGridLayout_count(const QGraphicsGridLayout* self) {
 	return self->count();
 }
 
-QGraphicsLayoutItem* QGraphicsGridLayout_itemAtWithIndex(const QGraphicsGridLayout* self, int index) {
+QGraphicsLayoutItem* QGraphicsGridLayout_itemAt_index(const QGraphicsGridLayout* self, int index) {
 	return self->itemAt(static_cast<int>(index));
 }
 
@@ -374,11 +374,11 @@ QSizeF* QGraphicsGridLayout_sizeHint(const QGraphicsGridLayout* self, int which,
 	return new QSizeF(self->sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
 }
 
-void QGraphicsGridLayout_addItem3(QGraphicsGridLayout* self, QGraphicsLayoutItem* item, int row, int column, int rowSpan, int columnSpan, int alignment) {
+void QGraphicsGridLayout_addItem_item_row_column_rowSpan_columnSpan_alignment(QGraphicsGridLayout* self, QGraphicsLayoutItem* item, int row, int column, int rowSpan, int columnSpan, int alignment) {
 	self->addItem(item, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan), static_cast<int>(columnSpan), static_cast<Qt::Alignment>(alignment));
 }
 
-void QGraphicsGridLayout_addItem4(QGraphicsGridLayout* self, QGraphicsLayoutItem* item, int row, int column, int alignment) {
+void QGraphicsGridLayout_addItem_item_row_column_alignment(QGraphicsGridLayout* self, QGraphicsLayoutItem* item, int row, int column, int alignment) {
 	self->addItem(item, static_cast<int>(row), static_cast<int>(column), static_cast<Qt::Alignment>(alignment));
 }
 
@@ -390,7 +390,7 @@ int QGraphicsGridLayout_virtualbase_count(const VirtualQGraphicsGridLayout* self
 	return self->QGraphicsGridLayout::count();
 }
 
-QGraphicsLayoutItem* QGraphicsGridLayout_virtualbase_itemAtWithIndex(const VirtualQGraphicsGridLayout* self, int index) {
+QGraphicsLayoutItem* QGraphicsGridLayout_virtualbase_itemAt_index(const VirtualQGraphicsGridLayout* self, int index) {
 
 	return self->QGraphicsGridLayout::itemAt(static_cast<int>(index));
 }
