@@ -1,4 +1,4 @@
-type QObjectData* {.inheritable, pure.} = object
+type QObjectData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QObjectData) =
   wasMoved(self)
   fcQObjectData_delete(h)
 
-type QObject* {.inheritable, pure.} = object
+type QObject* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -48,7 +48,7 @@ proc deleteLater*(self: sink QObject) =
   wasMoved(self)
   fcQObject_deleteLater(h)
 
-type QObjectUserData* {.inheritable, pure.} = object
+type QObjectUserData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -68,7 +68,7 @@ proc delete*(self: sink QObjectUserData) =
   wasMoved(self)
   fcQObjectUserData_delete(h)
 
-type QSignalBlocker* {.inheritable, pure.} = object
+type QSignalBlocker* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

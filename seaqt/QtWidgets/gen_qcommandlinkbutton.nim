@@ -211,10 +211,9 @@ proc fcQCommandLinkButton_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt
 proc fcQCommandLinkButton_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new5".}
 proc fcQCommandLinkButton_new6(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, description: struct_seaqt_string, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new6".}
 proc fcQCommandLinkButton_staticMetaObject(): pointer {.importc: "QCommandLinkButton_staticMetaObject".}
-proc fcQCommandLinkButton_delete(self: pointer) {.importc: "QCommandLinkButton_delete".}
 
 proc metaObject*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCommandLinkButton_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCommandLinkButton_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: cstring): pointer =
   fcQCommandLinkButton_metacast(self.h, param1)
@@ -320,7 +319,8 @@ type QCommandLinkButtonchildEventProc* = proc(self: QCommandLinkButton, event: g
 type QCommandLinkButtoncustomEventProc* = proc(self: QCommandLinkButton, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QCommandLinkButtonconnectNotifyProc* = proc(self: QCommandLinkButton, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QCommandLinkButtondisconnectNotifyProc* = proc(self: QCommandLinkButton, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QCommandLinkButtonVTable* = object
+
+type QCommandLinkButtonVTable* {.inheritable, pure.} = object
   vtbl: cQCommandLinkButtonVTable
   metaObject*: QCommandLinkButtonmetaObjectProc
   metacast*: QCommandLinkButtonmetacastProc
@@ -377,7 +377,7 @@ type QCommandLinkButtonVTable* = object
   disconnectNotify*: QCommandLinkButtondisconnectNotifyProc
 
 proc QCommandLinkButtonmetaObject*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCommandLinkButton_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCommandLinkButton_virtualbase_metaObject(self.h), owned: false)
 
 proc QCommandLinkButtonmetacast*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: cstring): pointer =
   fcQCommandLinkButton_virtualbase_metacast(self.h, param1)
@@ -386,13 +386,13 @@ proc QCommandLinkButtonmetacall*(self: gen_qcommandlinkbutton_types.QCommandLink
   fcQCommandLinkButton_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QCommandLinkButtonsizeHint*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCommandLinkButton_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCommandLinkButton_virtualbase_sizeHint(self.h), owned: true)
 
 proc QCommandLinkButtonheightForWidth*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: cint): cint =
   fcQCommandLinkButton_virtualbase_heightForWidth(self.h, param1)
 
 proc QCommandLinkButtonminimumSizeHint*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCommandLinkButton_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCommandLinkButton_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QCommandLinkButtonevent*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, e: gen_qcoreevent_types.QEvent): bool =
   fcQCommandLinkButton_virtualbase_event(self.h, e.h)
@@ -446,7 +446,7 @@ proc QCommandLinkButtonhasHeightForWidth*(self: gen_qcommandlinkbutton_types.QCo
   fcQCommandLinkButton_virtualbase_hasHeightForWidth(self.h)
 
 proc QCommandLinkButtonpaintEngine*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQCommandLinkButton_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQCommandLinkButton_virtualbase_paintEngine(self.h), owned: false)
 
 proc QCommandLinkButtonmouseDoubleClickEvent*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, event: gen_qevent_types.QMouseEvent): void =
   fcQCommandLinkButton_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -506,16 +506,16 @@ proc QCommandLinkButtoninitPainter*(self: gen_qcommandlinkbutton_types.QCommandL
   fcQCommandLinkButton_virtualbase_initPainter(self.h, painter.h)
 
 proc QCommandLinkButtonredirected*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQCommandLinkButton_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQCommandLinkButton_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QCommandLinkButtonsharedPainter*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQCommandLinkButton_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQCommandLinkButton_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QCommandLinkButtoninputMethodEvent*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQCommandLinkButton_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc QCommandLinkButtoninputMethodQuery*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQCommandLinkButton_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQCommandLinkButton_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QCommandLinkButtonfocusNextPrevChild*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, next: bool): bool =
   fcQCommandLinkButton_virtualbase_focusNextPrevChild(self.h, next)
@@ -540,7 +540,10 @@ proc fcQCommandLinkButton_vtable_callback_metaObject(self: pointer): pointer {.c
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
@@ -562,7 +565,10 @@ proc fcQCommandLinkButton_vtable_callback_sizeHint(self: pointer): pointer {.cde
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
@@ -575,43 +581,46 @@ proc fcQCommandLinkButton_vtable_callback_minimumSizeHint(self: pointer): pointe
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQCommandLinkButton_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: pos)
+  let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = vtbl[].hitButton(self, slotval1)
   virtualReturn
 
@@ -628,37 +637,37 @@ proc fcQCommandLinkButton_vtable_callback_nextCheckState(self: pointer): void {.
 proc fcQCommandLinkButton_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_devType(self: pointer): cint {.cdecl.} =
@@ -683,102 +692,105 @@ proc fcQCommandLinkButton_vtable_callback_paintEngine(self: pointer): pointer {.
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -803,26 +815,32 @@ proc fcQCommandLinkButton_vtable_callback_metric(self: pointer, param1: cint): c
 proc fcQCommandLinkButton_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
@@ -830,7 +848,10 @@ proc fcQCommandLinkButton_vtable_callback_inputMethodQuery(self: pointer, param1
   let self = QCommandLinkButton(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
@@ -842,33 +863,33 @@ proc fcQCommandLinkButton_vtable_callback_focusNextPrevChild(self: pointer, next
 proc fcQCommandLinkButton_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQCommandLinkButton_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQCommandLinkButton_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommandLinkButtonVTable](fcQCommandLinkButton_vdata(self)[])
   let self = QCommandLinkButton(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQCommandLinkButton* {.inheritable.} = ref object of QCommandLinkButton
@@ -984,7 +1005,10 @@ method disconnectNotify*(self: VirtualQCommandLinkButton, signal: gen_qmetaobjec
 proc fcQCommandLinkButton_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
@@ -1003,7 +1027,10 @@ proc fcQCommandLinkButton_method_callback_metacall(self: pointer, param1: cint, 
 proc fcQCommandLinkButton_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
@@ -1014,37 +1041,40 @@ proc fcQCommandLinkButton_method_callback_heightForWidth(self: pointer, param1: 
 proc fcQCommandLinkButton_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQCommandLinkButton_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_hitButton(self: pointer, pos: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: pos)
+  let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = inst.hitButton(slotval1)
   virtualReturn
 
@@ -1058,32 +1088,32 @@ proc fcQCommandLinkButton_method_callback_nextCheckState(self: pointer): void {.
 
 proc fcQCommandLinkButton_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_devType(self: pointer): cint {.cdecl.} =
@@ -1104,86 +1134,89 @@ proc fcQCommandLinkButton_method_callback_hasHeightForWidth(self: pointer): bool
 proc fcQCommandLinkButton_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1205,30 +1238,39 @@ proc fcQCommandLinkButton_method_callback_metric(self: pointer, param1: cint): c
 
 proc fcQCommandLinkButton_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQCommandLinkButton_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommandLinkButton_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
@@ -1238,29 +1280,29 @@ proc fcQCommandLinkButton_method_callback_focusNextPrevChild(self: pointer, next
 
 proc fcQCommandLinkButton_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQCommandLinkButton_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQCommandLinkButton_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQCommandLinkButton_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommandLinkButton](fcQCommandLinkButton_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1283,7 +1325,7 @@ proc focusPreviousChild*(self: gen_qcommandlinkbutton_types.QCommandLinkButton):
   fcQCommandLinkButton_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCommandLinkButton_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCommandLinkButton_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcommandlinkbutton_types.QCommandLinkButton): cint =
   fcQCommandLinkButton_protectedbase_senderSignalIndex(self.h)
@@ -1408,7 +1450,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
     vtbl[].vtbl.connectNotify = fcQCommandLinkButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCommandLinkButton_vtable_callback_disconnectNotify
-  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
@@ -1524,7 +1566,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
     vtbl[].vtbl.connectNotify = fcQCommandLinkButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCommandLinkButton_vtable_callback_disconnectNotify
-  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
@@ -1641,7 +1683,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
     vtbl[].vtbl.connectNotify = fcQCommandLinkButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCommandLinkButton_vtable_callback_disconnectNotify
-  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
@@ -1758,7 +1800,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
     vtbl[].vtbl.connectNotify = fcQCommandLinkButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCommandLinkButton_vtable_callback_disconnectNotify
-  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_seaqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description)))))
+  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_seaqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description)))), owned: true)
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
@@ -1875,7 +1917,7 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
     vtbl[].vtbl.connectNotify = fcQCommandLinkButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCommandLinkButton_vtable_callback_disconnectNotify
-  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h))
+  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
@@ -1992,13 +2034,14 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
     vtbl[].vtbl.connectNotify = fcQCommandLinkButton_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCommandLinkButton_vtable_callback_disconnectNotify
-  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_seaqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))), parent.h))
+  let tmp = gen_qcommandlinkbutton_types.QCommandLinkButton(h: fcQCommandLinkButton_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), struct_seaqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))), parent.h), owned: true)
   fcQCommandLinkButton_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQCommandLinkButton_mvtbl = cQCommandLinkButtonVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQCommandLinkButton()[])](self.fcQCommandLinkButton_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQCommandLinkButton_method_callback_metaObject,
   metacast: fcQCommandLinkButton_method_callback_metacast,
@@ -2103,5 +2146,3 @@ proc create*(T: type gen_qcommandlinkbutton_types.QCommandLinkButton,
 
 proc staticMetaObject*(_: type gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCommandLinkButton_staticMetaObject())
-proc delete*(self: gen_qcommandlinkbutton_types.QCommandLinkButton) =
-  fcQCommandLinkButton_delete(self.h)

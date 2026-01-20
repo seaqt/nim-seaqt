@@ -159,7 +159,7 @@ proc fcQCameraExposure_protectedbase_isSignalConnected(self: pointer, signal: po
 proc fcQCameraExposure_staticMetaObject(): pointer {.importc: "QCameraExposure_staticMetaObject".}
 
 proc metaObject*(self: gen_qcameraexposure_types.QCameraExposure): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraExposure_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraExposure_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameraexposure_types.QCameraExposure, param1: cstring): pointer =
   fcQCameraExposure_metacast(self.h, param1)
@@ -207,7 +207,7 @@ proc isMeteringModeSupported*(self: gen_qcameraexposure_types.QCameraExposure, m
   fcQCameraExposure_isMeteringModeSupported(self.h, cint(mode))
 
 proc spotMeteringPoint*(self: gen_qcameraexposure_types.QCameraExposure): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQCameraExposure_spotMeteringPoint(self.h))
+  gen_qpoint_types.QPointF(h: fcQCameraExposure_spotMeteringPoint(self.h), owned: true)
 
 proc setSpotMeteringPoint*(self: gen_qcameraexposure_types.QCameraExposure, point: gen_qpoint_types.QPointF): void =
   fcQCameraExposure_setSpotMeteringPoint(self.h, point.h)
@@ -475,7 +475,7 @@ proc supportedShutterSpeeds*(self: gen_qcameraexposure_types.QCameraExposure, co
   vx_ret
 
 proc sender*(self: gen_qcameraexposure_types.QCameraExposure): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraExposure_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraExposure_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameraexposure_types.QCameraExposure): cint =
   fcQCameraExposure_protectedbase_senderSignalIndex(self.h)

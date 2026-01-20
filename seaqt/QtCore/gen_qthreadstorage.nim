@@ -45,7 +45,6 @@ proc fcQThreadStorageData_finish(param1: pointer): void {.importc: "QThreadStora
 proc fcQThreadStorageData_id(self: pointer): cint {.importc: "QThreadStorageData_id".}
 proc fcQThreadStorageData_setId(self: pointer, id: cint): void {.importc: "QThreadStorageData_setId".}
 proc fcQThreadStorageData_new(param1: pointer): ptr cQThreadStorageData {.importc: "QThreadStorageData_new".}
-proc fcQThreadStorageData_delete(self: pointer) {.importc: "QThreadStorageData_delete".}
 
 proc get*(self: gen_qthreadstorage_types.QThreadStorageData): pointer =
   fcQThreadStorageData_get(self.h)
@@ -64,7 +63,5 @@ proc setId*(self: gen_qthreadstorage_types.QThreadStorageData, id: cint): void =
 
 proc create*(T: type gen_qthreadstorage_types.QThreadStorageData,
     param1: gen_qthreadstorage_types.QThreadStorageData): gen_qthreadstorage_types.QThreadStorageData =
-  let tmp = gen_qthreadstorage_types.QThreadStorageData(h: fcQThreadStorageData_new(param1.h))
+  let tmp = gen_qthreadstorage_types.QThreadStorageData(h: fcQThreadStorageData_new(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qthreadstorage_types.QThreadStorageData) =
-  fcQThreadStorageData_delete(self.h)

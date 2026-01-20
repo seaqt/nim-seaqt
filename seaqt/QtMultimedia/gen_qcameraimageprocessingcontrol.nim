@@ -89,10 +89,9 @@ proc fcQCameraImageProcessingControl_protectedbase_senderSignalIndex(self: point
 proc fcQCameraImageProcessingControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraImageProcessingControl_protectedbase_receivers".}
 proc fcQCameraImageProcessingControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraImageProcessingControl_protectedbase_isSignalConnected".}
 proc fcQCameraImageProcessingControl_staticMetaObject(): pointer {.importc: "QCameraImageProcessingControl_staticMetaObject".}
-proc fcQCameraImageProcessingControl_delete(self: pointer) {.importc: "QCameraImageProcessingControl_delete".}
 
 proc metaObject*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageProcessingControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageProcessingControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, param1: cstring): pointer =
   fcQCameraImageProcessingControl_metacast(self.h, param1)
@@ -119,7 +118,7 @@ proc isParameterValueSupported*(self: gen_qcameraimageprocessingcontrol_types.QC
   fcQCameraImageProcessingControl_isParameterValueSupported(self.h, cint(parameter), value.h)
 
 proc parameter*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, parameter: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQCameraImageProcessingControl_parameter(self.h, cint(parameter)))
+  gen_qvariant_types.QVariant(h: fcQCameraImageProcessingControl_parameter(self.h, cint(parameter)), owned: true)
 
 proc setParameter*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, parameter: cint, value: gen_qvariant_types.QVariant): void =
   fcQCameraImageProcessingControl_setParameter(self.h, cint(parameter), value.h)
@@ -149,7 +148,7 @@ proc trUtf8*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcess
   vx_ret
 
 proc sender*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraImageProcessingControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraImageProcessingControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl): cint =
   fcQCameraImageProcessingControl_protectedbase_senderSignalIndex(self.h)
@@ -162,5 +161,3 @@ proc isSignalConnected*(self: gen_qcameraimageprocessingcontrol_types.QCameraIma
 
 proc staticMetaObject*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageProcessingControl_staticMetaObject())
-proc delete*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl) =
-  fcQCameraImageProcessingControl_delete(self.h)

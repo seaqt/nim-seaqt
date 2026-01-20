@@ -39,7 +39,4 @@ export gen_qstringliteral_types
 
 type cQStringDataPtr*{.exportc: "QStringDataPtr", incompleteStruct.} = object
 
-proc fcQStringDataPtr_delete(self: pointer) {.importc: "QStringDataPtr_delete".}
 
-proc delete*(self: gen_qstringliteral_types.QStringDataPtr) =
-  fcQStringDataPtr_delete(self.h)

@@ -1,4 +1,4 @@
-type QSqlError* {.inheritable, pure.} = object
+type QSqlError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

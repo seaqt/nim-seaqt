@@ -82,7 +82,6 @@ proc fcQGeoPath_new3(other: pointer): ptr cQGeoPath {.importc: "QGeoPath_new3".}
 proc fcQGeoPath_new4(other: pointer): ptr cQGeoPath {.importc: "QGeoPath_new4".}
 proc fcQGeoPath_new5(path: struct_seaqt_array, width: ptr float64): ptr cQGeoPath {.importc: "QGeoPath_new5".}
 proc fcQGeoPath_staticMetaObject(): pointer {.importc: "QGeoPath_staticMetaObject".}
-proc fcQGeoPath_delete(self: pointer) {.importc: "QGeoPath_delete".}
 
 proc operatorAssign*(self: gen_qgeopath_types.QGeoPath, other: gen_qgeopath_types.QGeoPath): void =
   fcQGeoPath_operatorAssign(self.h, other.h)
@@ -105,7 +104,7 @@ proc path*(self: gen_qgeopath_types.QGeoPath): seq[gen_qgeocoordinate_types.QGeo
   var vx_ret = newSeq[gen_qgeocoordinate_types.QGeoCoordinate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgeocoordinate_types.QGeoCoordinate(h: v_outCast[i])
+    vx_ret[i] = gen_qgeocoordinate_types.QGeoCoordinate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -124,7 +123,7 @@ proc variantPath*(self: gen_qgeopath_types.QGeoPath): seq[gen_qvariant_types.QVa
   var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i])
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -138,7 +137,7 @@ proc translate*(self: gen_qgeopath_types.QGeoPath, degreesLatitude: float64, deg
   fcQGeoPath_translate(self.h, degreesLatitude, degreesLongitude)
 
 proc translated*(self: gen_qgeopath_types.QGeoPath, degreesLatitude: float64, degreesLongitude: float64): gen_qgeopath_types.QGeoPath =
-  gen_qgeopath_types.QGeoPath(h: fcQGeoPath_translated(self.h, degreesLatitude, degreesLongitude))
+  gen_qgeopath_types.QGeoPath(h: fcQGeoPath_translated(self.h, degreesLatitude, degreesLongitude), owned: true)
 
 proc length*(self: gen_qgeopath_types.QGeoPath): float64 =
   fcQGeoPath_length(self.h)
@@ -156,7 +155,7 @@ proc replaceCoordinate*(self: gen_qgeopath_types.QGeoPath, index: cint, coordina
   fcQGeoPath_replaceCoordinate(self.h, index, coordinate.h)
 
 proc coordinateAt*(self: gen_qgeopath_types.QGeoPath, index: cint): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoPath_coordinateAt(self.h, index))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoPath_coordinateAt(self.h, index), owned: true)
 
 proc containsCoordinate*(self: gen_qgeopath_types.QGeoPath, coordinate: gen_qgeocoordinate_types.QGeoCoordinate): bool =
   fcQGeoPath_containsCoordinate(self.h, coordinate.h)
@@ -180,7 +179,7 @@ proc length*(self: gen_qgeopath_types.QGeoPath, indexFrom: cint, indexTo: cint):
   fcQGeoPath_length2(self.h, indexFrom, indexTo)
 
 proc create*(T: type gen_qgeopath_types.QGeoPath): gen_qgeopath_types.QGeoPath =
-  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new())
+  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeopath_types.QGeoPath,
     path: openArray[gen_qgeocoordinate_types.QGeoCoordinate]): gen_qgeopath_types.QGeoPath =
@@ -188,15 +187,15 @@ proc create*(T: type gen_qgeopath_types.QGeoPath,
   for i in 0..<len(path):
     path_CArray[i] = path[i].h
 
-  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new2(struct_seaqt_array(len: csize_t(len(path)), data: if len(path) == 0: nil else: addr(path_CArray[0]))))
+  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new2(struct_seaqt_array(len: csize_t(len(path)), data: if len(path) == 0: nil else: addr(path_CArray[0]))), owned: true)
   tmp
 proc create*(T: type gen_qgeopath_types.QGeoPath,
     other: gen_qgeopath_types.QGeoPath): gen_qgeopath_types.QGeoPath =
-  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new3(other.h))
+  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qgeopath_types.QGeoPath,
     other: gen_qgeoshape_types.QGeoShape): gen_qgeopath_types.QGeoPath =
-  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new4(other.h))
+  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new4(other.h), owned: true)
   tmp
 proc create*(T: type gen_qgeopath_types.QGeoPath,
     path: openArray[gen_qgeocoordinate_types.QGeoCoordinate], width: ptr float64): gen_qgeopath_types.QGeoPath =
@@ -204,9 +203,7 @@ proc create*(T: type gen_qgeopath_types.QGeoPath,
   for i in 0..<len(path):
     path_CArray[i] = path[i].h
 
-  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new5(struct_seaqt_array(len: csize_t(len(path)), data: if len(path) == 0: nil else: addr(path_CArray[0])), width))
+  let tmp = gen_qgeopath_types.QGeoPath(h: fcQGeoPath_new5(struct_seaqt_array(len: csize_t(len(path)), data: if len(path) == 0: nil else: addr(path_CArray[0])), width), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qgeopath_types.QGeoPath): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoPath_staticMetaObject())
-proc delete*(self: gen_qgeopath_types.QGeoPath) =
-  fcQGeoPath_delete(self.h)

@@ -1,4 +1,4 @@
-type QWebElement* {.inheritable, pure.} = object
+type QWebElement* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QWebElement) =
   wasMoved(self)
   fcQWebElement_delete(h)
 
-type QWebElementCollection* {.inheritable, pure.} = object
+type QWebElementCollection* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QWebElementCollection) =
   wasMoved(self)
   fcQWebElementCollection_delete(h)
 
-type QWebElementCollectionconst_iterator* {.inheritable, pure.} = object
+type QWebElementCollectionconst_iterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QWebElementCollectionconst_iterator) =
   wasMoved(self)
   fcQWebElementCollectionconst_iterator_delete(h)
 
-type QWebElementCollectioniterator* {.inheritable, pure.} = object
+type QWebElementCollectioniterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

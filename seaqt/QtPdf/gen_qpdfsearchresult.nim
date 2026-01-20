@@ -57,7 +57,6 @@ proc fcQPdfSearchResult_operatorAssign(self: pointer, param1: pointer): void {.i
 proc fcQPdfSearchResult_new(): ptr cQPdfSearchResult {.importc: "QPdfSearchResult_new".}
 proc fcQPdfSearchResult_new2(param1: pointer): ptr cQPdfSearchResult {.importc: "QPdfSearchResult_new2".}
 proc fcQPdfSearchResult_staticMetaObject(): pointer {.importc: "QPdfSearchResult_staticMetaObject".}
-proc fcQPdfSearchResult_delete(self: pointer) {.importc: "QPdfSearchResult_delete".}
 
 proc contextBefore*(self: gen_qpdfsearchresult_types.QPdfSearchResult): string =
   let v_ms = fcQPdfSearchResult_contextBefore(self.h)
@@ -76,7 +75,7 @@ proc rectangles*(self: gen_qpdfsearchresult_types.QPdfSearchResult): seq[gen_qre
   var vx_ret = newSeq[gen_qrect_types.QRectF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qrect_types.QRectF(h: v_outCast[i])
+    vx_ret[i] = gen_qrect_types.QRectF(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -84,13 +83,11 @@ proc operatorAssign*(self: gen_qpdfsearchresult_types.QPdfSearchResult, param1: 
   fcQPdfSearchResult_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qpdfsearchresult_types.QPdfSearchResult): gen_qpdfsearchresult_types.QPdfSearchResult =
-  let tmp = gen_qpdfsearchresult_types.QPdfSearchResult(h: fcQPdfSearchResult_new())
+  let tmp = gen_qpdfsearchresult_types.QPdfSearchResult(h: fcQPdfSearchResult_new(), owned: true)
   tmp
 proc create*(T: type gen_qpdfsearchresult_types.QPdfSearchResult,
     param1: gen_qpdfsearchresult_types.QPdfSearchResult): gen_qpdfsearchresult_types.QPdfSearchResult =
-  let tmp = gen_qpdfsearchresult_types.QPdfSearchResult(h: fcQPdfSearchResult_new2(param1.h))
+  let tmp = gen_qpdfsearchresult_types.QPdfSearchResult(h: fcQPdfSearchResult_new2(param1.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpdfsearchresult_types.QPdfSearchResult): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfSearchResult_staticMetaObject())
-proc delete*(self: gen_qpdfsearchresult_types.QPdfSearchResult) =
-  fcQPdfSearchResult_delete(self.h)

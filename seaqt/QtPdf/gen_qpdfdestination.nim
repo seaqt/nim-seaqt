@@ -53,7 +53,6 @@ proc fcQPdfDestination_location(self: pointer): pointer {.importc: "QPdfDestinat
 proc fcQPdfDestination_zoom(self: pointer): float64 {.importc: "QPdfDestination_zoom".}
 proc fcQPdfDestination_new(other: pointer): ptr cQPdfDestination {.importc: "QPdfDestination_new".}
 proc fcQPdfDestination_staticMetaObject(): pointer {.importc: "QPdfDestination_staticMetaObject".}
-proc fcQPdfDestination_delete(self: pointer) {.importc: "QPdfDestination_delete".}
 
 proc operatorAssign*(self: gen_qpdfdestination_types.QPdfDestination, other: gen_qpdfdestination_types.QPdfDestination): void =
   fcQPdfDestination_operatorAssign(self.h, other.h)
@@ -68,16 +67,14 @@ proc page*(self: gen_qpdfdestination_types.QPdfDestination): cint =
   fcQPdfDestination_page(self.h)
 
 proc location*(self: gen_qpdfdestination_types.QPdfDestination): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQPdfDestination_location(self.h))
+  gen_qpoint_types.QPointF(h: fcQPdfDestination_location(self.h), owned: true)
 
 proc zoom*(self: gen_qpdfdestination_types.QPdfDestination): float64 =
   fcQPdfDestination_zoom(self.h)
 
 proc create*(T: type gen_qpdfdestination_types.QPdfDestination,
     other: gen_qpdfdestination_types.QPdfDestination): gen_qpdfdestination_types.QPdfDestination =
-  let tmp = gen_qpdfdestination_types.QPdfDestination(h: fcQPdfDestination_new(other.h))
+  let tmp = gen_qpdfdestination_types.QPdfDestination(h: fcQPdfDestination_new(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpdfdestination_types.QPdfDestination): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfDestination_staticMetaObject())
-proc delete*(self: gen_qpdfdestination_types.QPdfDestination) =
-  fcQPdfDestination_delete(self.h)

@@ -1,4 +1,4 @@
-type QNetworkDatagram* {.inheritable, pure.} = object
+type QNetworkDatagram* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

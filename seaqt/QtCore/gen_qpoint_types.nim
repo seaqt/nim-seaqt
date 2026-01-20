@@ -1,4 +1,4 @@
-type QPoint* {.inheritable, pure.} = object
+type QPoint* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QPoint) =
   wasMoved(self)
   fcQPoint_delete(h)
 
-type QPointF* {.inheritable, pure.} = object
+type QPointF* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

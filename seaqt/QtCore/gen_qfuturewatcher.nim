@@ -106,10 +106,9 @@ proc fcQFutureWatcherBase_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQFutureWatcherBase_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFutureWatcherBase_protectedbase_receivers".}
 proc fcQFutureWatcherBase_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFutureWatcherBase_protectedbase_isSignalConnected".}
 proc fcQFutureWatcherBase_staticMetaObject(): pointer {.importc: "QFutureWatcherBase_staticMetaObject".}
-proc fcQFutureWatcherBase_delete(self: pointer) {.importc: "QFutureWatcherBase_delete".}
 
 proc metaObject*(self: gen_qfuturewatcher_types.QFutureWatcherBase): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQFutureWatcherBase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFutureWatcherBase_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qfuturewatcher_types.QFutureWatcherBase, param1: cstring): pointer =
   fcQFutureWatcherBase_metacast(self.h, param1)
@@ -414,7 +413,7 @@ proc disconnectOutputInterface*(self: gen_qfuturewatcher_types.QFutureWatcherBas
   fcQFutureWatcherBase_protectedbase_disconnectOutputInterfaceWithPendingAssignment(self.h, pendingAssignment)
 
 proc sender*(self: gen_qfuturewatcher_types.QFutureWatcherBase): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQFutureWatcherBase_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQFutureWatcherBase_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qfuturewatcher_types.QFutureWatcherBase): cint =
   fcQFutureWatcherBase_protectedbase_senderSignalIndex(self.h)
@@ -427,5 +426,3 @@ proc isSignalConnected*(self: gen_qfuturewatcher_types.QFutureWatcherBase, signa
 
 proc staticMetaObject*(_: type gen_qfuturewatcher_types.QFutureWatcherBase): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFutureWatcherBase_staticMetaObject())
-proc delete*(self: gen_qfuturewatcher_types.QFutureWatcherBase) =
-  fcQFutureWatcherBase_delete(self.h)

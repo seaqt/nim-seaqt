@@ -1542,10 +1542,7 @@ export gen_qnamespace_types
 type cQInternal*{.exportc: "QInternal", incompleteStruct.} = object
 
 proc fcQInternal_activateCallbacks(param1: cint, param2: pointer): bool {.importc: "QInternal_activateCallbacks".}
-proc fcQInternal_delete(self: pointer) {.importc: "QInternal_delete".}
 
 proc activateCallbacks*(_: type gen_qnamespace_types.QInternal, param1: cint, param2: pointer): bool =
   fcQInternal_activateCallbacks(cint(param1), param2)
 
-proc delete*(self: gen_qnamespace_types.QInternal) =
-  fcQInternal_delete(self.h)

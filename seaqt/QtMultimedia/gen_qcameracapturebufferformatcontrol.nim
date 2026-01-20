@@ -71,10 +71,9 @@ proc fcQCameraCaptureBufferFormatControl_protectedbase_senderSignalIndex(self: p
 proc fcQCameraCaptureBufferFormatControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraCaptureBufferFormatControl_protectedbase_receivers".}
 proc fcQCameraCaptureBufferFormatControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraCaptureBufferFormatControl_protectedbase_isSignalConnected".}
 proc fcQCameraCaptureBufferFormatControl_staticMetaObject(): pointer {.importc: "QCameraCaptureBufferFormatControl_staticMetaObject".}
-proc fcQCameraCaptureBufferFormatControl_delete(self: pointer) {.importc: "QCameraCaptureBufferFormatControl_delete".}
 
 proc metaObject*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureBufferFormatControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureBufferFormatControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl, param1: cstring): pointer =
   fcQCameraCaptureBufferFormatControl_metacast(self.h, param1)
@@ -154,7 +153,7 @@ proc trUtf8*(_: type gen_qcameracapturebufferformatcontrol_types.QCameraCaptureB
   vx_ret
 
 proc sender*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraCaptureBufferFormatControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraCaptureBufferFormatControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl): cint =
   fcQCameraCaptureBufferFormatControl_protectedbase_senderSignalIndex(self.h)
@@ -167,5 +166,3 @@ proc isSignalConnected*(self: gen_qcameracapturebufferformatcontrol_types.QCamer
 
 proc staticMetaObject*(_: type gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureBufferFormatControl_staticMetaObject())
-proc delete*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl) =
-  fcQCameraCaptureBufferFormatControl_delete(self.h)

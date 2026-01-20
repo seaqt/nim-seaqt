@@ -113,7 +113,6 @@ proc fcQStringView_toULongLong2(self: pointer, ok: ptr bool, base: cint): culong
 proc fcQStringView_toFloatWithOk(self: pointer, ok: ptr bool): float32 {.importc: "QStringView_toFloatWithOk".}
 proc fcQStringView_toDoubleWithOk(self: pointer, ok: ptr bool): float64 {.importc: "QStringView_toDoubleWithOk".}
 proc fcQStringView_new(): ptr cQStringView {.importc: "QStringView_new".}
-proc fcQStringView_delete(self: pointer) {.importc: "QStringView_delete".}
 
 proc toString*(self: gen_qstringview_types.QStringView): string =
   let v_ms = fcQStringView_toString(self.h)
@@ -125,10 +124,10 @@ proc size*(self: gen_qstringview_types.QStringView): int64 =
   fcQStringView_size(self.h)
 
 proc data*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_data(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_data(self.h), owned: false)
 
 proc operatorSubscript*(self: gen_qstringview_types.QStringView, n: int64): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_operatorSubscript(self.h, n))
+  gen_qchar_types.QChar(h: fcQStringView_operatorSubscript(self.h, n), owned: true)
 
 proc toLatin1*(self: gen_qstringview_types.QStringView): seq[byte] =
   var v_bytearray = fcQStringView_toLatin1(self.h)
@@ -158,7 +157,7 @@ proc toUcs4*(self: gen_qstringview_types.QStringView): seq[cuint] =
   vx_ret
 
 proc at*(self: gen_qstringview_types.QStringView, n: int64): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_at(self.h, n))
+  gen_qchar_types.QChar(h: fcQStringView_at(self.h, n), owned: true)
 
 proc truncate*(self: gen_qstringview_types.QStringView, n: int64): void =
   fcQStringView_truncate(self.h, n)
@@ -233,25 +232,25 @@ proc toDouble*(self: gen_qstringview_types.QStringView): float64 =
   fcQStringView_toDouble(self.h)
 
 proc begin*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_begin(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_begin(self.h), owned: false)
 
 proc endX*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_endX(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_endX(self.h), owned: false)
 
 proc cbegin*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_cbegin(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_cbegin(self.h), owned: false)
 
 proc cend*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_cend(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_cend(self.h), owned: false)
 
 proc empty*(self: gen_qstringview_types.QStringView): bool =
   fcQStringView_empty(self.h)
 
 proc front*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_front(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_front(self.h), owned: true)
 
 proc back*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_back(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_back(self.h), owned: true)
 
 proc isNull*(self: gen_qstringview_types.QStringView): bool =
   fcQStringView_isNull(self.h)
@@ -263,10 +262,10 @@ proc length*(self: gen_qstringview_types.QStringView): cint =
   fcQStringView_length(self.h)
 
 proc first*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_first(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_first(self.h), owned: true)
 
 proc last*(self: gen_qstringview_types.QStringView): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStringView_last(self.h))
+  gen_qchar_types.QChar(h: fcQStringView_last(self.h), owned: true)
 
 proc indexOf*(self: gen_qstringview_types.QStringView, c: gen_qchar_types.QChar, fromVal: int64): int64 =
   fcQStringView_indexOf2(self.h, c.h, fromVal)
@@ -341,7 +340,5 @@ proc toDouble*(self: gen_qstringview_types.QStringView, ok: ptr bool): float64 =
   fcQStringView_toDoubleWithOk(self.h, ok)
 
 proc create*(T: type gen_qstringview_types.QStringView): gen_qstringview_types.QStringView =
-  let tmp = gen_qstringview_types.QStringView(h: fcQStringView_new())
+  let tmp = gen_qstringview_types.QStringView(h: fcQStringView_new(), owned: true)
   tmp
-proc delete*(self: gen_qstringview_types.QStringView) =
-  fcQStringView_delete(self.h)

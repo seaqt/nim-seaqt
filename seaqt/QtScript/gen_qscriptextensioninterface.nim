@@ -58,7 +58,6 @@ type cQScriptExtensionInterfaceVTable {.pure.} = object
   initialize*: proc(self: pointer, key: struct_seaqt_string, engine: pointer): void {.cdecl, raises: [], gcsafe.}
   keys*: proc(self: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
 proc fcQScriptExtensionInterface_new(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQScriptExtensionInterface {.importc: "QScriptExtensionInterface_new".}
-proc fcQScriptExtensionInterface_delete(self: pointer) {.importc: "QScriptExtensionInterface_delete".}
 
 proc initialize*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface, key: openArray[char], engine: gen_qscriptengine_types.QScriptEngine): void =
   fcQScriptExtensionInterface_initialize(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), engine.h)
@@ -68,7 +67,8 @@ proc operatorAssign*(self: gen_qscriptextensioninterface_types.QScriptExtensionI
 
 type QScriptExtensionInterfaceinitializeProc* = proc(self: QScriptExtensionInterface, key: openArray[char], engine: gen_qscriptengine_types.QScriptEngine): void {.raises: [], gcsafe.}
 type QScriptExtensionInterfacekeysProc* = proc(self: QScriptExtensionInterface): seq[string] {.raises: [], gcsafe.}
-type QScriptExtensionInterfaceVTable* = object
+
+type QScriptExtensionInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQScriptExtensionInterfaceVTable
   initialize*: QScriptExtensionInterfaceinitializeProc
   keys*: QScriptExtensionInterfacekeysProc
@@ -81,7 +81,7 @@ proc fcQScriptExtensionInterface_vtable_callback_initialize(self: pointer, key: 
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine)
+  let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine, owned: false)
   vtbl[].initialize(self, slotval1, slotval2)
 
 proc fcQScriptExtensionInterface_vtable_callback_keys(self: pointer): struct_seaqt_array {.cdecl.} =
@@ -110,7 +110,7 @@ proc fcQScriptExtensionInterface_method_callback_initialize(self: pointer, key: 
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine)
+  let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine, owned: false)
   inst.initialize(slotval1, slotval2)
 
 proc fcQScriptExtensionInterface_method_callback_keys(self: pointer): struct_seaqt_array {.cdecl.} =
@@ -137,13 +137,14 @@ proc create*(T: type gen_qscriptextensioninterface_types.QScriptExtensionInterfa
     vtbl[].vtbl.initialize = fcQScriptExtensionInterface_vtable_callback_initialize
   if not isNil(vtbl[].keys):
     vtbl[].vtbl.keys = fcQScriptExtensionInterface_vtable_callback_keys
-  let tmp = gen_qscriptextensioninterface_types.QScriptExtensionInterface(h: fcQScriptExtensionInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qscriptextensioninterface_types.QScriptExtensionInterface(h: fcQScriptExtensionInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQScriptExtensionInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQScriptExtensionInterface_mvtbl = cQScriptExtensionInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQScriptExtensionInterface()[])](self.fcQScriptExtensionInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   initialize: fcQScriptExtensionInterface_method_callback_initialize,
   keys: fcQScriptExtensionInterface_method_callback_keys,
@@ -156,5 +157,3 @@ proc create*(T: type gen_qscriptextensioninterface_types.QScriptExtensionInterfa
   fcQScriptExtensionInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface) =
-  fcQScriptExtensionInterface_delete(self.h)

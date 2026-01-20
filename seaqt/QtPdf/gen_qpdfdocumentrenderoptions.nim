@@ -55,7 +55,6 @@ proc fcQPdfDocumentRenderOptions_scaledSize(self: pointer): pointer {.importc: "
 proc fcQPdfDocumentRenderOptions_setScaledSize(self: pointer, s: pointer): void {.importc: "QPdfDocumentRenderOptions_setScaledSize".}
 proc fcQPdfDocumentRenderOptions_new(): ptr cQPdfDocumentRenderOptions {.importc: "QPdfDocumentRenderOptions_new".}
 proc fcQPdfDocumentRenderOptions_new2(param1: pointer): ptr cQPdfDocumentRenderOptions {.importc: "QPdfDocumentRenderOptions_new2".}
-proc fcQPdfDocumentRenderOptions_delete(self: pointer) {.importc: "QPdfDocumentRenderOptions_delete".}
 
 proc rotation*(self: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): cint =
   cint(fcQPdfDocumentRenderOptions_rotation(self.h))
@@ -70,23 +69,21 @@ proc setRenderFlags*(self: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRende
   fcQPdfDocumentRenderOptions_setRenderFlags(self.h, cint(r))
 
 proc scaledClipRect*(self: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPdfDocumentRenderOptions_scaledClipRect(self.h))
+  gen_qrect_types.QRect(h: fcQPdfDocumentRenderOptions_scaledClipRect(self.h), owned: true)
 
 proc setScaledClipRect*(self: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions, r: gen_qrect_types.QRect): void =
   fcQPdfDocumentRenderOptions_setScaledClipRect(self.h, r.h)
 
 proc scaledSize*(self: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPdfDocumentRenderOptions_scaledSize(self.h))
+  gen_qsize_types.QSize(h: fcQPdfDocumentRenderOptions_scaledSize(self.h), owned: true)
 
 proc setScaledSize*(self: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions, s: gen_qsize_types.QSize): void =
   fcQPdfDocumentRenderOptions_setScaledSize(self.h, s.h)
 
 proc create*(T: type gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions =
-  let tmp = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: fcQPdfDocumentRenderOptions_new())
+  let tmp = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: fcQPdfDocumentRenderOptions_new(), owned: true)
   tmp
 proc create*(T: type gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions,
     param1: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions =
-  let tmp = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: fcQPdfDocumentRenderOptions_new2(param1.h))
+  let tmp = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: fcQPdfDocumentRenderOptions_new2(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions) =
-  fcQPdfDocumentRenderOptions_delete(self.h)

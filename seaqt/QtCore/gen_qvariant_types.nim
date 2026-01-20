@@ -1,4 +1,4 @@
-type QVariant* {.inheritable, pure.} = object
+type QVariant* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QVariant) =
   wasMoved(self)
   fcQVariant_delete(h)
 
-type QVariantComparisonHelper* {.inheritable, pure.} = object
+type QVariantComparisonHelper* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QVariantComparisonHelper) =
   wasMoved(self)
   fcQVariantComparisonHelper_delete(h)
 
-type QVariantHandler* {.inheritable, pure.} = object
+type QVariantHandler* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QVariantHandler) =
   wasMoved(self)
   fcQVariantHandler_delete(h)
 
-type QSequentialIterableconst_iterator* {.inheritable, pure.} = object
+type QSequentialIterableconst_iterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -82,7 +82,7 @@ proc delete*(self: sink QSequentialIterableconst_iterator) =
   wasMoved(self)
   fcQSequentialIterableconst_iterator_delete(h)
 
-type QAssociativeIterableconst_iterator* {.inheritable, pure.} = object
+type QAssociativeIterableconst_iterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

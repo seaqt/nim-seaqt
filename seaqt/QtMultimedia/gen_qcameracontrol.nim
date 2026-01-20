@@ -89,10 +89,9 @@ proc fcQCameraControl_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQCameraControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraControl_protectedbase_receivers".}
 proc fcQCameraControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraControl_protectedbase_isSignalConnected".}
 proc fcQCameraControl_staticMetaObject(): pointer {.importc: "QCameraControl_staticMetaObject".}
-proc fcQCameraControl_delete(self: pointer) {.importc: "QCameraControl_delete".}
 
 proc metaObject*(self: gen_qcameracontrol_types.QCameraControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameracontrol_types.QCameraControl, param1: cstring): pointer =
   fcQCameraControl_metacast(self.h, param1)
@@ -243,7 +242,7 @@ proc trUtf8*(_: type gen_qcameracontrol_types.QCameraControl, s: cstring, c: cst
   vx_ret
 
 proc sender*(self: gen_qcameracontrol_types.QCameraControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameracontrol_types.QCameraControl): cint =
   fcQCameraControl_protectedbase_senderSignalIndex(self.h)
@@ -256,5 +255,3 @@ proc isSignalConnected*(self: gen_qcameracontrol_types.QCameraControl, signal: g
 
 proc staticMetaObject*(_: type gen_qcameracontrol_types.QCameraControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraControl_staticMetaObject())
-proc delete*(self: gen_qcameracontrol_types.QCameraControl) =
-  fcQCameraControl_delete(self.h)

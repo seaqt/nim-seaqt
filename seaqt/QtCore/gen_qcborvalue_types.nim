@@ -1,4 +1,4 @@
-type QCborParserError* {.inheritable, pure.} = object
+type QCborParserError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QCborParserError) =
   wasMoved(self)
   fcQCborParserError_delete(h)
 
-type QCborValue* {.inheritable, pure.} = object
+type QCborValue* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QCborValue) =
   wasMoved(self)
   fcQCborValue_delete(h)
 
-type QCborValueRef* {.inheritable, pure.} = object
+type QCborValueRef* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

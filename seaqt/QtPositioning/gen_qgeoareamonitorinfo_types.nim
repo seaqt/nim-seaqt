@@ -1,4 +1,4 @@
-type QGeoAreaMonitorInfo* {.inheritable, pure.} = object
+type QGeoAreaMonitorInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

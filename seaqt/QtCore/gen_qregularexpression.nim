@@ -96,7 +96,6 @@ proc fcQRegularExpression_new(): ptr cQRegularExpression {.importc: "QRegularExp
 proc fcQRegularExpression_new2(pattern: struct_seaqt_string): ptr cQRegularExpression {.importc: "QRegularExpression_new2".}
 proc fcQRegularExpression_new3(re: pointer): ptr cQRegularExpression {.importc: "QRegularExpression_new3".}
 proc fcQRegularExpression_new4(pattern: struct_seaqt_string, options: cint): ptr cQRegularExpression {.importc: "QRegularExpression_new4".}
-proc fcQRegularExpression_delete(self: pointer) {.importc: "QRegularExpression_delete".}
 proc fcQRegularExpressionMatch_operatorAssign(self: pointer, match: pointer): void {.importc: "QRegularExpressionMatch_operatorAssign".}
 proc fcQRegularExpressionMatch_swap(self: pointer, other: pointer): void {.importc: "QRegularExpressionMatch_swap".}
 proc fcQRegularExpressionMatch_regularExpression(self: pointer): pointer {.importc: "QRegularExpressionMatch_regularExpression".}
@@ -121,7 +120,6 @@ proc fcQRegularExpressionMatch_capturedLengthWithNth(self: pointer, nth: cint): 
 proc fcQRegularExpressionMatch_capturedEndWithNth(self: pointer, nth: cint): cint {.importc: "QRegularExpressionMatch_capturedEndWithNth".}
 proc fcQRegularExpressionMatch_new(): ptr cQRegularExpressionMatch {.importc: "QRegularExpressionMatch_new".}
 proc fcQRegularExpressionMatch_new2(match: pointer): ptr cQRegularExpressionMatch {.importc: "QRegularExpressionMatch_new2".}
-proc fcQRegularExpressionMatch_delete(self: pointer) {.importc: "QRegularExpressionMatch_delete".}
 proc fcQRegularExpressionMatchIterator_operatorAssign(self: pointer, iteratorVal: pointer): void {.importc: "QRegularExpressionMatchIterator_operatorAssign".}
 proc fcQRegularExpressionMatchIterator_swap(self: pointer, other: pointer): void {.importc: "QRegularExpressionMatchIterator_swap".}
 proc fcQRegularExpressionMatchIterator_isValid(self: pointer): bool {.importc: "QRegularExpressionMatchIterator_isValid".}
@@ -133,7 +131,6 @@ proc fcQRegularExpressionMatchIterator_matchType(self: pointer): cint {.importc:
 proc fcQRegularExpressionMatchIterator_matchOptions(self: pointer): cint {.importc: "QRegularExpressionMatchIterator_matchOptions".}
 proc fcQRegularExpressionMatchIterator_new(): ptr cQRegularExpressionMatchIterator {.importc: "QRegularExpressionMatchIterator_new".}
 proc fcQRegularExpressionMatchIterator_new2(iteratorVal: pointer): ptr cQRegularExpressionMatchIterator {.importc: "QRegularExpressionMatchIterator_new2".}
-proc fcQRegularExpressionMatchIterator_delete(self: pointer) {.importc: "QRegularExpressionMatchIterator_delete".}
 
 proc patternOptions*(self: gen_qregularexpression_types.QRegularExpression): cint =
   cint(fcQRegularExpression_patternOptions(self.h))
@@ -184,10 +181,10 @@ proc namedCaptureGroups*(self: gen_qregularexpression_types.QRegularExpression):
   vx_ret
 
 proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char]): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject)))))
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject)))), owned: true)
 
 proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char]): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject)))))
+  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject)))), owned: true)
 
 proc optimize*(self: gen_qregularexpression_types.QRegularExpression): void =
   fcQRegularExpression_optimize(self.h)
@@ -217,40 +214,38 @@ proc operatorNotEqual*(self: gen_qregularexpression_types.QRegularExpression, re
   fcQRegularExpression_operatorNotEqual(self.h, re.h)
 
 proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: cint): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match2(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset))
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match2(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset), owned: true)
 
 proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: cint, matchType: cint): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match3(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType)))
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match3(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType)), owned: true)
 
 proc match*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: cint, matchType: cint, matchOptions: cint): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match4(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType), cint(matchOptions)))
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpression_match4(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType), cint(matchOptions)), owned: true)
 
 proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: cint): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch2(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset))
+  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch2(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset), owned: true)
 
 proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: cint, matchType: cint): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch3(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType)))
+  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch3(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType)), owned: true)
 
 proc globalMatch*(self: gen_qregularexpression_types.QRegularExpression, subject: openArray[char], offset: cint, matchType: cint, matchOptions: cint): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch4(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType), cint(matchOptions)))
+  gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpression_globalMatch4(self.h, struct_seaqt_string(data: if len(subject) > 0: addr subject[0] else: nil, len: csize_t(len(subject))), offset, cint(matchType), cint(matchOptions)), owned: true)
 
 proc create*(T: type gen_qregularexpression_types.QRegularExpression): gen_qregularexpression_types.QRegularExpression =
-  let tmp = gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new())
+  let tmp = gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new(), owned: true)
   tmp
 proc create*(T: type gen_qregularexpression_types.QRegularExpression,
     pattern: openArray[char]): gen_qregularexpression_types.QRegularExpression =
-  let tmp = gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new2(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))))
+  let tmp = gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new2(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
   tmp
 proc create*(T: type gen_qregularexpression_types.QRegularExpression,
     re: gen_qregularexpression_types.QRegularExpression): gen_qregularexpression_types.QRegularExpression =
-  let tmp = gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new3(re.h))
+  let tmp = gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new3(re.h), owned: true)
   tmp
 proc create*(T: type gen_qregularexpression_types.QRegularExpression,
     pattern: openArray[char], options: cint): gen_qregularexpression_types.QRegularExpression =
-  let tmp = gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new4(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(options)))
+  let tmp = gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpression_new4(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(options)), owned: true)
   tmp
-proc delete*(self: gen_qregularexpression_types.QRegularExpression) =
-  fcQRegularExpression_delete(self.h)
 proc operatorAssign*(self: gen_qregularexpression_types.QRegularExpressionMatch, match: gen_qregularexpression_types.QRegularExpressionMatch): void =
   fcQRegularExpressionMatch_operatorAssign(self.h, match.h)
 
@@ -258,7 +253,7 @@ proc swap*(self: gen_qregularexpression_types.QRegularExpressionMatch, other: ge
   fcQRegularExpressionMatch_swap(self.h, other.h)
 
 proc regularExpression*(self: gen_qregularexpression_types.QRegularExpressionMatch): gen_qregularexpression_types.QRegularExpression =
-  gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpressionMatch_regularExpression(self.h))
+  gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpressionMatch_regularExpression(self.h), owned: true)
 
 proc matchType*(self: gen_qregularexpression_types.QRegularExpressionMatch): cint =
   cint(fcQRegularExpressionMatch_matchType(self.h))
@@ -336,14 +331,12 @@ proc capturedEnd*(self: gen_qregularexpression_types.QRegularExpressionMatch, nt
   fcQRegularExpressionMatch_capturedEndWithNth(self.h, nth)
 
 proc create*(T: type gen_qregularexpression_types.QRegularExpressionMatch): gen_qregularexpression_types.QRegularExpressionMatch =
-  let tmp = gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpressionMatch_new())
+  let tmp = gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpressionMatch_new(), owned: true)
   tmp
 proc create*(T: type gen_qregularexpression_types.QRegularExpressionMatch,
     match: gen_qregularexpression_types.QRegularExpressionMatch): gen_qregularexpression_types.QRegularExpressionMatch =
-  let tmp = gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpressionMatch_new2(match.h))
+  let tmp = gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpressionMatch_new2(match.h), owned: true)
   tmp
-proc delete*(self: gen_qregularexpression_types.QRegularExpressionMatch) =
-  fcQRegularExpressionMatch_delete(self.h)
 proc operatorAssign*(self: gen_qregularexpression_types.QRegularExpressionMatchIterator, iteratorVal: gen_qregularexpression_types.QRegularExpressionMatchIterator): void =
   fcQRegularExpressionMatchIterator_operatorAssign(self.h, iteratorVal.h)
 
@@ -357,13 +350,13 @@ proc hasNext*(self: gen_qregularexpression_types.QRegularExpressionMatchIterator
   fcQRegularExpressionMatchIterator_hasNext(self.h)
 
 proc next*(self: gen_qregularexpression_types.QRegularExpressionMatchIterator): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpressionMatchIterator_next(self.h))
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpressionMatchIterator_next(self.h), owned: true)
 
 proc peekNext*(self: gen_qregularexpression_types.QRegularExpressionMatchIterator): gen_qregularexpression_types.QRegularExpressionMatch =
-  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpressionMatchIterator_peekNext(self.h))
+  gen_qregularexpression_types.QRegularExpressionMatch(h: fcQRegularExpressionMatchIterator_peekNext(self.h), owned: true)
 
 proc regularExpression*(self: gen_qregularexpression_types.QRegularExpressionMatchIterator): gen_qregularexpression_types.QRegularExpression =
-  gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpressionMatchIterator_regularExpression(self.h))
+  gen_qregularexpression_types.QRegularExpression(h: fcQRegularExpressionMatchIterator_regularExpression(self.h), owned: true)
 
 proc matchType*(self: gen_qregularexpression_types.QRegularExpressionMatchIterator): cint =
   cint(fcQRegularExpressionMatchIterator_matchType(self.h))
@@ -372,11 +365,9 @@ proc matchOptions*(self: gen_qregularexpression_types.QRegularExpressionMatchIte
   cint(fcQRegularExpressionMatchIterator_matchOptions(self.h))
 
 proc create*(T: type gen_qregularexpression_types.QRegularExpressionMatchIterator): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  let tmp = gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpressionMatchIterator_new())
+  let tmp = gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpressionMatchIterator_new(), owned: true)
   tmp
 proc create*(T: type gen_qregularexpression_types.QRegularExpressionMatchIterator,
     iteratorVal: gen_qregularexpression_types.QRegularExpressionMatchIterator): gen_qregularexpression_types.QRegularExpressionMatchIterator =
-  let tmp = gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpressionMatchIterator_new2(iteratorVal.h))
+  let tmp = gen_qregularexpression_types.QRegularExpressionMatchIterator(h: fcQRegularExpressionMatchIterator_new2(iteratorVal.h), owned: true)
   tmp
-proc delete*(self: gen_qregularexpression_types.QRegularExpressionMatchIterator) =
-  fcQRegularExpressionMatchIterator_delete(self.h)

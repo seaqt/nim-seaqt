@@ -159,10 +159,9 @@ proc fcQPdfDocument_protectedbase_isSignalConnected(self: pointer, signal: point
 proc fcQPdfDocument_new(vtbl: pointer, vdata: csize_t): ptr cQPdfDocument {.importc: "QPdfDocument_new".}
 proc fcQPdfDocument_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfDocument {.importc: "QPdfDocument_new2".}
 proc fcQPdfDocument_staticMetaObject(): pointer {.importc: "QPdfDocument_staticMetaObject".}
-proc fcQPdfDocument_delete(self: pointer) {.importc: "QPdfDocument_delete".}
 
 proc metaObject*(self: gen_qpdfdocument_types.QPdfDocument): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPdfDocument_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfDocument_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpdfdocument_types.QPdfDocument, param1: cstring): pointer =
   fcQPdfDocument_metacast(self.h, param1)
@@ -201,7 +200,7 @@ proc password*(self: gen_qpdfdocument_types.QPdfDocument): string =
   vx_ret
 
 proc metaData*(self: gen_qpdfdocument_types.QPdfDocument, field: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPdfDocument_metaData(self.h, cint(field)))
+  gen_qvariant_types.QVariant(h: fcQPdfDocument_metaData(self.h, cint(field)), owned: true)
 
 proc error*(self: gen_qpdfdocument_types.QPdfDocument): cint =
   cint(fcQPdfDocument_error(self.h))
@@ -213,19 +212,19 @@ proc pageCount*(self: gen_qpdfdocument_types.QPdfDocument): cint =
   fcQPdfDocument_pageCount(self.h)
 
 proc pageSize*(self: gen_qpdfdocument_types.QPdfDocument, page: cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQPdfDocument_pageSize(self.h, page))
+  gen_qsize_types.QSizeF(h: fcQPdfDocument_pageSize(self.h, page), owned: true)
 
 proc render*(self: gen_qpdfdocument_types.QPdfDocument, page: cint, imageSize: gen_qsize_types.QSize): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQPdfDocument_render(self.h, page, imageSize.h))
+  gen_qimage_types.QImage(h: fcQPdfDocument_render(self.h, page, imageSize.h), owned: true)
 
 proc getSelection*(self: gen_qpdfdocument_types.QPdfDocument, page: cint, start: gen_qpoint_types.QPointF, endVal: gen_qpoint_types.QPointF): gen_qpdfselection_types.QPdfSelection =
-  gen_qpdfselection_types.QPdfSelection(h: fcQPdfDocument_getSelection(self.h, page, start.h, endVal.h))
+  gen_qpdfselection_types.QPdfSelection(h: fcQPdfDocument_getSelection(self.h, page, start.h, endVal.h), owned: true)
 
 proc getSelectionAtIndex*(self: gen_qpdfdocument_types.QPdfDocument, page: cint, startIndex: cint, maxLength: cint): gen_qpdfselection_types.QPdfSelection =
-  gen_qpdfselection_types.QPdfSelection(h: fcQPdfDocument_getSelectionAtIndex(self.h, page, startIndex, maxLength))
+  gen_qpdfselection_types.QPdfSelection(h: fcQPdfDocument_getSelectionAtIndex(self.h, page, startIndex, maxLength), owned: true)
 
 proc getAllText*(self: gen_qpdfdocument_types.QPdfDocument, page: cint): gen_qpdfselection_types.QPdfSelection =
-  gen_qpdfselection_types.QPdfSelection(h: fcQPdfDocument_getAllText(self.h, page))
+  gen_qpdfselection_types.QPdfSelection(h: fcQPdfDocument_getAllText(self.h, page), owned: true)
 
 proc passwordChanged*(self: gen_qpdfdocument_types.QPdfDocument): void =
   fcQPdfDocument_passwordChanged(self.h)
@@ -328,7 +327,7 @@ proc trUtf8*(_: type gen_qpdfdocument_types.QPdfDocument, s: cstring, c: cstring
   vx_ret
 
 proc render*(self: gen_qpdfdocument_types.QPdfDocument, page: cint, imageSize: gen_qsize_types.QSize, options: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQPdfDocument_render2(self.h, page, imageSize.h, options.h))
+  gen_qimage_types.QImage(h: fcQPdfDocument_render2(self.h, page, imageSize.h, options.h), owned: true)
 
 type QPdfDocumentmetaObjectProc* = proc(self: QPdfDocument): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPdfDocumentmetacastProc* = proc(self: QPdfDocument, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -340,7 +339,8 @@ type QPdfDocumentchildEventProc* = proc(self: QPdfDocument, event: gen_qcoreeven
 type QPdfDocumentcustomEventProc* = proc(self: QPdfDocument, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPdfDocumentconnectNotifyProc* = proc(self: QPdfDocument, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPdfDocumentdisconnectNotifyProc* = proc(self: QPdfDocument, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QPdfDocumentVTable* = object
+
+type QPdfDocumentVTable* {.inheritable, pure.} = object
   vtbl: cQPdfDocumentVTable
   metaObject*: QPdfDocumentmetaObjectProc
   metacast*: QPdfDocumentmetacastProc
@@ -354,7 +354,7 @@ type QPdfDocumentVTable* = object
   disconnectNotify*: QPdfDocumentdisconnectNotifyProc
 
 proc QPdfDocumentmetaObject*(self: gen_qpdfdocument_types.QPdfDocument): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPdfDocument_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfDocument_virtualbase_metaObject(self.h), owned: false)
 
 proc QPdfDocumentmetacast*(self: gen_qpdfdocument_types.QPdfDocument, param1: cstring): pointer =
   fcQPdfDocument_virtualbase_metacast(self.h, param1)
@@ -388,7 +388,10 @@ proc fcQPdfDocument_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
   let self = QPdfDocument(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfDocument_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
@@ -409,46 +412,46 @@ proc fcQPdfDocument_vtable_callback_metacall(self: pointer, param1: cint, param2
 proc fcQPdfDocument_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
   let self = QPdfDocument(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQPdfDocument_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
   let self = QPdfDocument(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQPdfDocument_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
   let self = QPdfDocument(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQPdfDocument_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
   let self = QPdfDocument(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQPdfDocument_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
   let self = QPdfDocument(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQPdfDocument_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
   let self = QPdfDocument(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQPdfDocument_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfDocumentVTable](fcQPdfDocument_vdata(self)[])
   let self = QPdfDocument(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQPdfDocument* {.inheritable.} = ref object of QPdfDocument
@@ -478,7 +481,10 @@ method disconnectNotify*(self: VirtualQPdfDocument, signal: gen_qmetaobject_type
 proc fcQPdfDocument_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfDocument_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
@@ -496,45 +502,45 @@ proc fcQPdfDocument_method_callback_metacall(self: pointer, param1: cint, param2
 
 proc fcQPdfDocument_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQPdfDocument_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQPdfDocument_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQPdfDocument_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQPdfDocument_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQPdfDocument_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQPdfDocument_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfDocument](fcQPdfDocument_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qpdfdocument_types.QPdfDocument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPdfDocument_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPdfDocument_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpdfdocument_types.QPdfDocument): cint =
   fcQPdfDocument_protectedbase_senderSignalIndex(self.h)
@@ -572,7 +578,7 @@ proc create*(T: type gen_qpdfdocument_types.QPdfDocument,
     vtbl[].vtbl.connectNotify = fcQPdfDocument_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPdfDocument_vtable_callback_disconnectNotify
-  let tmp = gen_qpdfdocument_types.QPdfDocument(h: fcQPdfDocument_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qpdfdocument_types.QPdfDocument(h: fcQPdfDocument_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQPdfDocument_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpdfdocument_types.QPdfDocument,
@@ -603,13 +609,14 @@ proc create*(T: type gen_qpdfdocument_types.QPdfDocument,
     vtbl[].vtbl.connectNotify = fcQPdfDocument_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPdfDocument_vtable_callback_disconnectNotify
-  let tmp = gen_qpdfdocument_types.QPdfDocument(h: fcQPdfDocument_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qpdfdocument_types.QPdfDocument(h: fcQPdfDocument_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQPdfDocument_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPdfDocument_mvtbl = cQPdfDocumentVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPdfDocument()[])](self.fcQPdfDocument_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQPdfDocument_method_callback_metaObject,
   metacast: fcQPdfDocument_method_callback_metacast,
@@ -639,5 +646,3 @@ proc create*(T: type gen_qpdfdocument_types.QPdfDocument,
 
 proc staticMetaObject*(_: type gen_qpdfdocument_types.QPdfDocument): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfDocument_staticMetaObject())
-proc delete*(self: gen_qpdfdocument_types.QPdfDocument) =
-  fcQPdfDocument_delete(self.h)

@@ -1,4 +1,4 @@
-type QVector4D* {.inheritable, pure.} = object
+type QVector4D* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

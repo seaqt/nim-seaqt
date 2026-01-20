@@ -1,4 +1,4 @@
-type QScriptValueIterator* {.inheritable, pure.} = object
+type QScriptValueIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

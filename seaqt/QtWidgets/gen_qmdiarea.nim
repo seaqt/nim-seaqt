@@ -268,10 +268,9 @@ proc fcQMdiArea_protectedbase_isSignalConnected(self: pointer, signal: pointer):
 proc fcQMdiArea_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMdiArea {.importc: "QMdiArea_new".}
 proc fcQMdiArea_new2(vtbl: pointer, vdata: csize_t): ptr cQMdiArea {.importc: "QMdiArea_new2".}
 proc fcQMdiArea_staticMetaObject(): pointer {.importc: "QMdiArea_staticMetaObject".}
-proc fcQMdiArea_delete(self: pointer) {.importc: "QMdiArea_delete".}
 
 proc metaObject*(self: gen_qmdiarea_types.QMdiArea): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMdiArea_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMdiArea_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmdiarea_types.QMdiArea, param1: cstring): pointer =
   fcQMdiArea_metacast(self.h, param1)
@@ -292,34 +291,34 @@ proc trUtf8*(_: type gen_qmdiarea_types.QMdiArea, s: cstring): string =
   vx_ret
 
 proc sizeHint*(self: gen_qmdiarea_types.QMdiArea): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMdiArea_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMdiArea_sizeHint(self.h), owned: true)
 
 proc minimumSizeHint*(self: gen_qmdiarea_types.QMdiArea): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMdiArea_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMdiArea_minimumSizeHint(self.h), owned: true)
 
 proc currentSubWindow*(self: gen_qmdiarea_types.QMdiArea): gen_qmdisubwindow_types.QMdiSubWindow =
-  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_currentSubWindow(self.h))
+  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_currentSubWindow(self.h), owned: false)
 
 proc activeSubWindow*(self: gen_qmdiarea_types.QMdiArea): gen_qmdisubwindow_types.QMdiSubWindow =
-  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_activeSubWindow(self.h))
+  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_activeSubWindow(self.h), owned: false)
 
 proc subWindowList*(self: gen_qmdiarea_types.QMdiArea): seq[gen_qmdisubwindow_types.QMdiSubWindow] =
   var v_ma = fcQMdiArea_subWindowList(self.h)
   var vx_ret = newSeq[gen_qmdisubwindow_types.QMdiSubWindow](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qmdisubwindow_types.QMdiSubWindow(h: v_outCast[i])
+    vx_ret[i] = gen_qmdisubwindow_types.QMdiSubWindow(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc addSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.QWidget): gen_qmdisubwindow_types.QMdiSubWindow =
-  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_addSubWindow(self.h, widget.h))
+  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_addSubWindow(self.h, widget.h), owned: false)
 
 proc removeSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.QWidget): void =
   fcQMdiArea_removeSubWindow(self.h, widget.h)
 
 proc background*(self: gen_qmdiarea_types.QMdiArea): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQMdiArea_background(self.h))
+  gen_qbrush_types.QBrush(h: fcQMdiArea_background(self.h), owned: true)
 
 proc setBackground*(self: gen_qmdiarea_types.QMdiArea, background: gen_qbrush_types.QBrush): void =
   fcQMdiArea_setBackground(self.h, background.h)
@@ -378,7 +377,7 @@ proc subWindowActivated*(self: gen_qmdiarea_types.QMdiArea, param1: gen_qmdisubw
 type QMdiAreasubWindowActivatedSlot* = proc(param1: gen_qmdisubwindow_types.QMdiSubWindow)
 proc fcQMdiArea_slot_callback_subWindowActivated(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMdiAreasubWindowActivatedSlot](cast[pointer](slot))
-  let slotval1 = gen_qmdisubwindow_types.QMdiSubWindow(h: param1)
+  let slotval1 = gen_qmdisubwindow_types.QMdiSubWindow(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
@@ -442,12 +441,12 @@ proc subWindowList*(self: gen_qmdiarea_types.QMdiArea, order: cint): seq[gen_qmd
   var vx_ret = newSeq[gen_qmdisubwindow_types.QMdiSubWindow](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qmdisubwindow_types.QMdiSubWindow(h: v_outCast[i])
+    vx_ret[i] = gen_qmdisubwindow_types.QMdiSubWindow(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc addSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.QWidget, flags: cint): gen_qmdisubwindow_types.QMdiSubWindow =
-  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_addSubWindow2(self.h, widget.h, cint(flags)))
+  gen_qmdisubwindow_types.QMdiSubWindow(h: fcQMdiArea_addSubWindow2(self.h, widget.h, cint(flags)), owned: false)
 
 proc setOption*(self: gen_qmdiarea_types.QMdiArea, option: cint, on: bool): void =
   fcQMdiArea_setOption2(self.h, cint(option), on)
@@ -506,7 +505,8 @@ type QMdiAreafocusNextPrevChildProc* = proc(self: QMdiArea, next: bool): bool {.
 type QMdiAreacustomEventProc* = proc(self: QMdiArea, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMdiAreaconnectNotifyProc* = proc(self: QMdiArea, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMdiAreadisconnectNotifyProc* = proc(self: QMdiArea, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QMdiAreaVTable* = object
+
+type QMdiAreaVTable* {.inheritable, pure.} = object
   vtbl: cQMdiAreaVTable
   metaObject*: QMdiAreametaObjectProc
   metacast*: QMdiAreametacastProc
@@ -564,7 +564,7 @@ type QMdiAreaVTable* = object
   disconnectNotify*: QMdiAreadisconnectNotifyProc
 
 proc QMdiAreametaObject*(self: gen_qmdiarea_types.QMdiArea): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMdiArea_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMdiArea_virtualbase_metaObject(self.h), owned: false)
 
 proc QMdiAreametacast*(self: gen_qmdiarea_types.QMdiArea, param1: cstring): pointer =
   fcQMdiArea_virtualbase_metacast(self.h, param1)
@@ -573,10 +573,10 @@ proc QMdiAreametacall*(self: gen_qmdiarea_types.QMdiArea, param1: cint, param2: 
   fcQMdiArea_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QMdiAreasizeHint*(self: gen_qmdiarea_types.QMdiArea): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMdiArea_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMdiArea_virtualbase_sizeHint(self.h), owned: true)
 
 proc QMdiAreaminimumSizeHint*(self: gen_qmdiarea_types.QMdiArea): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMdiArea_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMdiArea_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QMdiAreasetupViewport*(self: gen_qmdiarea_types.QMdiArea, viewport: gen_qwidget_types.QWidget): void =
   fcQMdiArea_virtualbase_setupViewport(self.h, viewport.h)
@@ -642,7 +642,7 @@ proc QMdiAreakeyPressEvent*(self: gen_qmdiarea_types.QMdiArea, param1: gen_qeven
   fcQMdiArea_virtualbase_keyPressEvent(self.h, param1.h)
 
 proc QMdiAreaviewportSizeHint*(self: gen_qmdiarea_types.QMdiArea): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMdiArea_virtualbase_viewportSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMdiArea_virtualbase_viewportSizeHint(self.h), owned: true)
 
 proc QMdiAreachangeEvent*(self: gen_qmdiarea_types.QMdiArea, param1: gen_qcoreevent_types.QEvent): void =
   fcQMdiArea_virtualbase_changeEvent(self.h, param1.h)
@@ -660,7 +660,7 @@ proc QMdiAreahasHeightForWidth*(self: gen_qmdiarea_types.QMdiArea): bool =
   fcQMdiArea_virtualbase_hasHeightForWidth(self.h)
 
 proc QMdiAreapaintEngine*(self: gen_qmdiarea_types.QMdiArea): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQMdiArea_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQMdiArea_virtualbase_paintEngine(self.h), owned: false)
 
 proc QMdiAreakeyReleaseEvent*(self: gen_qmdiarea_types.QMdiArea, event: gen_qevent_types.QKeyEvent): void =
   fcQMdiArea_virtualbase_keyReleaseEvent(self.h, event.h)
@@ -702,16 +702,16 @@ proc QMdiAreainitPainter*(self: gen_qmdiarea_types.QMdiArea, painter: gen_qpaint
   fcQMdiArea_virtualbase_initPainter(self.h, painter.h)
 
 proc QMdiArearedirected*(self: gen_qmdiarea_types.QMdiArea, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQMdiArea_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQMdiArea_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QMdiAreasharedPainter*(self: gen_qmdiarea_types.QMdiArea): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQMdiArea_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQMdiArea_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QMdiAreainputMethodEvent*(self: gen_qmdiarea_types.QMdiArea, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQMdiArea_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc QMdiAreainputMethodQuery*(self: gen_qmdiarea_types.QMdiArea, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMdiArea_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQMdiArea_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QMdiAreafocusNextPrevChild*(self: gen_qmdiarea_types.QMdiArea, next: bool): bool =
   fcQMdiArea_virtualbase_focusNextPrevChild(self.h, next)
@@ -730,7 +730,10 @@ proc fcQMdiArea_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
@@ -752,69 +755,75 @@ proc fcQMdiArea_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQMdiArea_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQMdiArea_vtable_callback_paintEvent(self: pointer, paintEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: paintEvent)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: paintEvent, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_childEvent(self: pointer, childEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: childEvent)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: childEvent, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_resizeEvent(self: pointer, resizeEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: resizeEvent)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: resizeEvent, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_timerEvent(self: pointer, timerEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: timerEvent)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: timerEvent, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_showEvent(self: pointer, showEvent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: showEvent)
+  let slotval1 = gen_qevent_types.QShowEvent(h: showEvent, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
@@ -828,79 +837,82 @@ proc fcQMdiArea_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: ci
 proc fcQMdiArea_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_devType(self: pointer): cint {.cdecl.} =
@@ -932,66 +944,69 @@ proc fcQMdiArea_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1016,26 +1031,32 @@ proc fcQMdiArea_vtable_callback_metric(self: pointer, param1: cint): cint {.cdec
 proc fcQMdiArea_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
@@ -1043,7 +1064,10 @@ proc fcQMdiArea_vtable_callback_inputMethodQuery(self: pointer, param1: cint): p
   let self = QMdiArea(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
@@ -1055,19 +1079,19 @@ proc fcQMdiArea_vtable_callback_focusNextPrevChild(self: pointer, next: bool): b
 proc fcQMdiArea_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQMdiArea_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMdiAreaVTable](fcQMdiArea_vdata(self)[])
   let self = QMdiArea(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQMdiArea* {.inheritable.} = ref object of QMdiArea
@@ -1185,7 +1209,10 @@ method disconnectNotify*(self: VirtualQMdiArea, signal: gen_qmetaobject_types.QM
 proc fcQMdiArea_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
@@ -1204,59 +1231,65 @@ proc fcQMdiArea_method_callback_metacall(self: pointer, param1: cint, param2: ci
 proc fcQMdiArea_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
 proc fcQMdiArea_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQMdiArea_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQMdiArea_method_callback_paintEvent(self: pointer, paintEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: paintEvent)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: paintEvent, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQMdiArea_method_callback_childEvent(self: pointer, childEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: childEvent)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: childEvent, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQMdiArea_method_callback_resizeEvent(self: pointer, resizeEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: resizeEvent)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: resizeEvent, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQMdiArea_method_callback_timerEvent(self: pointer, timerEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: timerEvent)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: timerEvent, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQMdiArea_method_callback_showEvent(self: pointer, showEvent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: showEvent)
+  let slotval1 = gen_qevent_types.QShowEvent(h: showEvent, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQMdiArea_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
@@ -1268,67 +1301,70 @@ proc fcQMdiArea_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: ci
 
 proc fcQMdiArea_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQMdiArea_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQMdiArea_method_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQMdiArea_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQMdiArea_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQMdiArea_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQMdiArea_method_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQMdiArea_method_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQMdiArea_method_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQMdiArea_method_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQMdiArea_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQMdiArea_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQMdiArea_method_callback_devType(self: pointer): cint {.cdecl.} =
@@ -1355,56 +1391,59 @@ proc fcQMdiArea_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.}
 proc fcQMdiArea_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQMdiArea_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQMdiArea_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQMdiArea_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQMdiArea_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQMdiArea_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQMdiArea_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQMdiArea_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQMdiArea_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQMdiArea_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQMdiArea_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1426,30 +1465,39 @@ proc fcQMdiArea_method_callback_metric(self: pointer, param1: cint): cint {.cdec
 
 proc fcQMdiArea_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQMdiArea_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQMdiArea_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMdiArea_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
@@ -1459,17 +1507,17 @@ proc fcQMdiArea_method_callback_focusNextPrevChild(self: pointer, next: bool): b
 
 proc fcQMdiArea_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQMdiArea_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQMdiArea_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMdiArea](fcQMdiArea_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1477,7 +1525,7 @@ proc setViewportMargins*(self: gen_qmdiarea_types.QMdiArea, left: cint, top: cin
   fcQMdiArea_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qmdiarea_types.QMdiArea): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQMdiArea_protectedbase_viewportMargins(self.h))
+  gen_qmargins_types.QMargins(h: fcQMdiArea_protectedbase_viewportMargins(self.h), owned: true)
 
 proc drawFrame*(self: gen_qmdiarea_types.QMdiArea, param1: gen_qpainter_types.QPainter): void =
   fcQMdiArea_protectedbase_drawFrame(self.h, param1.h)
@@ -1501,7 +1549,7 @@ proc focusPreviousChild*(self: gen_qmdiarea_types.QMdiArea): bool =
   fcQMdiArea_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qmdiarea_types.QMdiArea): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMdiArea_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMdiArea_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmdiarea_types.QMdiArea): cint =
   fcQMdiArea_protectedbase_senderSignalIndex(self.h)
@@ -1628,7 +1676,7 @@ proc create*(T: type gen_qmdiarea_types.QMdiArea,
     vtbl[].vtbl.connectNotify = fcQMdiArea_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMdiArea_vtable_callback_disconnectNotify
-  let tmp = gen_qmdiarea_types.QMdiArea(h: fcQMdiArea_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qmdiarea_types.QMdiArea(h: fcQMdiArea_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQMdiArea_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmdiarea_types.QMdiArea,
@@ -1746,13 +1794,14 @@ proc create*(T: type gen_qmdiarea_types.QMdiArea,
     vtbl[].vtbl.connectNotify = fcQMdiArea_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMdiArea_vtable_callback_disconnectNotify
-  let tmp = gen_qmdiarea_types.QMdiArea(h: fcQMdiArea_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qmdiarea_types.QMdiArea(h: fcQMdiArea_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQMdiArea_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQMdiArea_mvtbl = cQMdiAreaVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQMdiArea()[])](self.fcQMdiArea_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQMdiArea_method_callback_metaObject,
   metacast: fcQMdiArea_method_callback_metacast,
@@ -1826,5 +1875,3 @@ proc create*(T: type gen_qmdiarea_types.QMdiArea,
 
 proc staticMetaObject*(_: type gen_qmdiarea_types.QMdiArea): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMdiArea_staticMetaObject())
-proc delete*(self: gen_qmdiarea_types.QMdiArea) =
-  fcQMdiArea_delete(self.h)

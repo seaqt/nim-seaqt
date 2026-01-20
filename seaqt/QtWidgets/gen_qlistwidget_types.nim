@@ -1,4 +1,4 @@
-type QListWidgetItem* {.inheritable, pure.} = object
+type QListWidgetItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

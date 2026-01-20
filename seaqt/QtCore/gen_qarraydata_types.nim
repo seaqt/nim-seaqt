@@ -1,4 +1,4 @@
-type QArrayData* {.inheritable, pure.} = object
+type QArrayData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

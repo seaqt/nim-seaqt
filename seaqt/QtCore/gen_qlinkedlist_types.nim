@@ -1,4 +1,4 @@
-type QLinkedListData* {.inheritable, pure.} = object
+type QLinkedListData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

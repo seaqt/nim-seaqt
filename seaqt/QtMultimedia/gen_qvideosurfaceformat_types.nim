@@ -1,4 +1,4 @@
-type QVideoSurfaceFormat* {.inheritable, pure.} = object
+type QVideoSurfaceFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

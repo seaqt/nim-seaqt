@@ -1,4 +1,4 @@
-type QGeoAddress* {.inheritable, pure.} = object
+type QGeoAddress* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

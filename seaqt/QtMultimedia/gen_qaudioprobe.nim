@@ -106,10 +106,9 @@ proc fcQAudioProbe_protectedbase_isSignalConnected(self: pointer, signal: pointe
 proc fcQAudioProbe_new(vtbl: pointer, vdata: csize_t): ptr cQAudioProbe {.importc: "QAudioProbe_new".}
 proc fcQAudioProbe_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioProbe {.importc: "QAudioProbe_new2".}
 proc fcQAudioProbe_staticMetaObject(): pointer {.importc: "QAudioProbe_staticMetaObject".}
-proc fcQAudioProbe_delete(self: pointer) {.importc: "QAudioProbe_delete".}
 
 proc metaObject*(self: gen_qaudioprobe_types.QAudioProbe): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioProbe_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioProbe_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaudioprobe_types.QAudioProbe, param1: cstring): pointer =
   fcQAudioProbe_metacast(self.h, param1)
@@ -144,7 +143,7 @@ proc audioBufferProbed*(self: gen_qaudioprobe_types.QAudioProbe, buffer: gen_qau
 type QAudioProbeaudioBufferProbedSlot* = proc(buffer: gen_qaudiobuffer_types.QAudioBuffer)
 proc fcQAudioProbe_slot_callback_audioBufferProbed(slot: int, buffer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAudioProbeaudioBufferProbedSlot](cast[pointer](slot))
-  let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer)
+  let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer, owned: false)
 
   nimfunc[](slotval1)
 
@@ -210,7 +209,8 @@ type QAudioProbechildEventProc* = proc(self: QAudioProbe, event: gen_qcoreevent_
 type QAudioProbecustomEventProc* = proc(self: QAudioProbe, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAudioProbeconnectNotifyProc* = proc(self: QAudioProbe, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAudioProbedisconnectNotifyProc* = proc(self: QAudioProbe, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QAudioProbeVTable* = object
+
+type QAudioProbeVTable* {.inheritable, pure.} = object
   vtbl: cQAudioProbeVTable
   metaObject*: QAudioProbemetaObjectProc
   metacast*: QAudioProbemetacastProc
@@ -224,7 +224,7 @@ type QAudioProbeVTable* = object
   disconnectNotify*: QAudioProbedisconnectNotifyProc
 
 proc QAudioProbemetaObject*(self: gen_qaudioprobe_types.QAudioProbe): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioProbe_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioProbe_virtualbase_metaObject(self.h), owned: false)
 
 proc QAudioProbemetacast*(self: gen_qaudioprobe_types.QAudioProbe, param1: cstring): pointer =
   fcQAudioProbe_virtualbase_metacast(self.h, param1)
@@ -258,7 +258,10 @@ proc fcQAudioProbe_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} 
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
   let self = QAudioProbe(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAudioProbe_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
@@ -279,46 +282,46 @@ proc fcQAudioProbe_vtable_callback_metacall(self: pointer, param1: cint, param2:
 proc fcQAudioProbe_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
   let self = QAudioProbe(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQAudioProbe_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
   let self = QAudioProbe(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQAudioProbe_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
   let self = QAudioProbe(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQAudioProbe_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
   let self = QAudioProbe(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQAudioProbe_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
   let self = QAudioProbe(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQAudioProbe_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
   let self = QAudioProbe(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQAudioProbe_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioProbeVTable](fcQAudioProbe_vdata(self)[])
   let self = QAudioProbe(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAudioProbe* {.inheritable.} = ref object of QAudioProbe
@@ -348,7 +351,10 @@ method disconnectNotify*(self: VirtualQAudioProbe, signal: gen_qmetaobject_types
 proc fcQAudioProbe_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAudioProbe_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
@@ -366,45 +372,45 @@ proc fcQAudioProbe_method_callback_metacall(self: pointer, param1: cint, param2:
 
 proc fcQAudioProbe_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQAudioProbe_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQAudioProbe_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQAudioProbe_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQAudioProbe_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQAudioProbe_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQAudioProbe_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAudioProbe](fcQAudioProbe_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qaudioprobe_types.QAudioProbe): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAudioProbe_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAudioProbe_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qaudioprobe_types.QAudioProbe): cint =
   fcQAudioProbe_protectedbase_senderSignalIndex(self.h)
@@ -442,7 +448,7 @@ proc create*(T: type gen_qaudioprobe_types.QAudioProbe,
     vtbl[].vtbl.connectNotify = fcQAudioProbe_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAudioProbe_vtable_callback_disconnectNotify
-  let tmp = gen_qaudioprobe_types.QAudioProbe(h: fcQAudioProbe_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qaudioprobe_types.QAudioProbe(h: fcQAudioProbe_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQAudioProbe_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qaudioprobe_types.QAudioProbe,
@@ -473,13 +479,14 @@ proc create*(T: type gen_qaudioprobe_types.QAudioProbe,
     vtbl[].vtbl.connectNotify = fcQAudioProbe_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAudioProbe_vtable_callback_disconnectNotify
-  let tmp = gen_qaudioprobe_types.QAudioProbe(h: fcQAudioProbe_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qaudioprobe_types.QAudioProbe(h: fcQAudioProbe_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQAudioProbe_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQAudioProbe_mvtbl = cQAudioProbeVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQAudioProbe()[])](self.fcQAudioProbe_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQAudioProbe_method_callback_metaObject,
   metacast: fcQAudioProbe_method_callback_metacast,
@@ -509,5 +516,3 @@ proc create*(T: type gen_qaudioprobe_types.QAudioProbe,
 
 proc staticMetaObject*(_: type gen_qaudioprobe_types.QAudioProbe): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioProbe_staticMetaObject())
-proc delete*(self: gen_qaudioprobe_types.QAudioProbe) =
-  fcQAudioProbe_delete(self.h)

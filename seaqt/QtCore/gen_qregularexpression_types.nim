@@ -1,4 +1,4 @@
-type QRegularExpression* {.inheritable, pure.} = object
+type QRegularExpression* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QRegularExpression) =
   wasMoved(self)
   fcQRegularExpression_delete(h)
 
-type QRegularExpressionMatch* {.inheritable, pure.} = object
+type QRegularExpressionMatch* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QRegularExpressionMatch) =
   wasMoved(self)
   fcQRegularExpressionMatch_delete(h)
 
-type QRegularExpressionMatchIterator* {.inheritable, pure.} = object
+type QRegularExpressionMatchIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -60,10 +60,9 @@ proc fcQOperatingSystemVersion_name(self: pointer): struct_seaqt_string {.import
 proc fcQOperatingSystemVersion_new(osType: cint, vmajor: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new".}
 proc fcQOperatingSystemVersion_new2(osType: cint, vmajor: cint, vminor: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new2".}
 proc fcQOperatingSystemVersion_new3(osType: cint, vmajor: cint, vminor: cint, vmicro: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new3".}
-proc fcQOperatingSystemVersion_delete(self: pointer) {.importc: "QOperatingSystemVersion_delete".}
 
 proc current*(_: type gen_qoperatingsystemversion_types.QOperatingSystemVersion): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
-  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_current())
+  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_current(), owned: true)
 
 proc currentType*(_: type gen_qoperatingsystemversion_types.QOperatingSystemVersion): cint =
   cint(fcQOperatingSystemVersion_currentType())
@@ -91,15 +90,13 @@ proc name*(self: gen_qoperatingsystemversion_types.QOperatingSystemVersion): str
 
 proc create*(T: type gen_qoperatingsystemversion_types.QOperatingSystemVersion,
     osType: cint, vmajor: cint): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
-  let tmp = gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new(cint(osType), vmajor))
+  let tmp = gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new(cint(osType), vmajor), owned: true)
   tmp
 proc create*(T: type gen_qoperatingsystemversion_types.QOperatingSystemVersion,
     osType: cint, vmajor: cint, vminor: cint): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
-  let tmp = gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new2(cint(osType), vmajor, vminor))
+  let tmp = gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new2(cint(osType), vmajor, vminor), owned: true)
   tmp
 proc create*(T: type gen_qoperatingsystemversion_types.QOperatingSystemVersion,
     osType: cint, vmajor: cint, vminor: cint, vmicro: cint): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
-  let tmp = gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new3(cint(osType), vmajor, vminor, vmicro))
+  let tmp = gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new3(cint(osType), vmajor, vminor, vmicro), owned: true)
   tmp
-proc delete*(self: gen_qoperatingsystemversion_types.QOperatingSystemVersion) =
-  fcQOperatingSystemVersion_delete(self.h)

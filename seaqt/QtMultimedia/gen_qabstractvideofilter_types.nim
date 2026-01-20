@@ -1,4 +1,4 @@
-type QVideoFilterRunnable* {.inheritable, pure.} = object
+type QVideoFilterRunnable* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

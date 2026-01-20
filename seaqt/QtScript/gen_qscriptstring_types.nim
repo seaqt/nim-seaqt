@@ -1,4 +1,4 @@
-type QScriptString* {.inheritable, pure.} = object
+type QScriptString* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

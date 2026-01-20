@@ -1,4 +1,4 @@
-type QAbstractNativeEventFilter* {.inheritable, pure.} = object
+type QAbstractNativeEventFilter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

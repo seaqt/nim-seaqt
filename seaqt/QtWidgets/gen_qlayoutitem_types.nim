@@ -1,4 +1,4 @@
-type QLayoutItem* {.inheritable, pure.} = object
+type QLayoutItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

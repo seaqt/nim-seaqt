@@ -1,4 +1,4 @@
-type QAbstractVideoBuffer* {.inheritable, pure.} = object
+type QAbstractVideoBuffer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

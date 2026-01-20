@@ -1,4 +1,4 @@
-type QLibraryInfo* {.inheritable, pure.} = object
+type QLibraryInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -79,10 +79,9 @@ proc fcQMediaGaplessPlaybackControl_protectedbase_senderSignalIndex(self: pointe
 proc fcQMediaGaplessPlaybackControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaGaplessPlaybackControl_protectedbase_receivers".}
 proc fcQMediaGaplessPlaybackControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaGaplessPlaybackControl_protectedbase_isSignalConnected".}
 proc fcQMediaGaplessPlaybackControl_staticMetaObject(): pointer {.importc: "QMediaGaplessPlaybackControl_staticMetaObject".}
-proc fcQMediaGaplessPlaybackControl_delete(self: pointer) {.importc: "QMediaGaplessPlaybackControl_delete".}
 
 proc metaObject*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaGaplessPlaybackControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaGaplessPlaybackControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, param1: cstring): pointer =
   fcQMediaGaplessPlaybackControl_metacast(self.h, param1)
@@ -103,7 +102,7 @@ proc trUtf8*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybac
   vx_ret
 
 proc nextMedia*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaGaplessPlaybackControl_nextMedia(self.h))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaGaplessPlaybackControl_nextMedia(self.h), owned: true)
 
 proc setNextMedia*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, media: gen_qmediacontent_types.QMediaContent): void =
   fcQMediaGaplessPlaybackControl_setNextMedia(self.h, media.h)
@@ -143,7 +142,7 @@ proc nextMediaChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaples
 type QMediaGaplessPlaybackControlnextMediaChangedSlot* = proc(media: gen_qmediacontent_types.QMediaContent)
 proc fcQMediaGaplessPlaybackControl_slot_callback_nextMediaChanged(slot: int, media: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaGaplessPlaybackControlnextMediaChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qmediacontent_types.QMediaContent(h: media)
+  let slotval1 = gen_qmediacontent_types.QMediaContent(h: media, owned: false)
 
   nimfunc[](slotval1)
 
@@ -200,7 +199,7 @@ proc trUtf8*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybac
   vx_ret
 
 proc sender*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaGaplessPlaybackControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaGaplessPlaybackControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl): cint =
   fcQMediaGaplessPlaybackControl_protectedbase_senderSignalIndex(self.h)
@@ -213,5 +212,3 @@ proc isSignalConnected*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaple
 
 proc staticMetaObject*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaGaplessPlaybackControl_staticMetaObject())
-proc delete*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl) =
-  fcQMediaGaplessPlaybackControl_delete(self.h)

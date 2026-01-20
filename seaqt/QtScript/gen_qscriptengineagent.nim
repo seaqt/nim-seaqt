@@ -91,7 +91,6 @@ proc fcQScriptEngineAgent_virtualbase_exceptionCatch(self: pointer, scriptId: cl
 proc fcQScriptEngineAgent_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QScriptEngineAgent_virtualbase_supportsExtension".}
 proc fcQScriptEngineAgent_virtualbase_extension(self: pointer, extension: cint, argument: pointer): pointer {.importc: "QScriptEngineAgent_virtualbase_extension".}
 proc fcQScriptEngineAgent_new(vtbl: pointer, vdata: csize_t, engine: pointer): ptr cQScriptEngineAgent {.importc: "QScriptEngineAgent_new".}
-proc fcQScriptEngineAgent_delete(self: pointer) {.importc: "QScriptEngineAgent_delete".}
 
 proc scriptLoad*(self: gen_qscriptengineagent_types.QScriptEngineAgent, id: clonglong, program: openArray[char], fileName: openArray[char], baseLineNumber: cint): void =
   fcQScriptEngineAgent_scriptLoad(self.h, id, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), baseLineNumber)
@@ -124,10 +123,10 @@ proc supportsExtension*(self: gen_qscriptengineagent_types.QScriptEngineAgent, e
   fcQScriptEngineAgent_supportsExtension(self.h, cint(extension))
 
 proc extension*(self: gen_qscriptengineagent_types.QScriptEngineAgent, extension: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQScriptEngineAgent_extension(self.h, cint(extension), argument.h))
+  gen_qvariant_types.QVariant(h: fcQScriptEngineAgent_extension(self.h, cint(extension), argument.h), owned: true)
 
 proc engine*(self: gen_qscriptengineagent_types.QScriptEngineAgent): gen_qscriptengine_types.QScriptEngine =
-  gen_qscriptengine_types.QScriptEngine(h: fcQScriptEngineAgent_engine(self.h))
+  gen_qscriptengine_types.QScriptEngine(h: fcQScriptEngineAgent_engine(self.h), owned: false)
 
 type QScriptEngineAgentscriptLoadProc* = proc(self: QScriptEngineAgent, id: clonglong, program: openArray[char], fileName: openArray[char], baseLineNumber: cint): void {.raises: [], gcsafe.}
 type QScriptEngineAgentscriptUnloadProc* = proc(self: QScriptEngineAgent, id: clonglong): void {.raises: [], gcsafe.}
@@ -140,7 +139,8 @@ type QScriptEngineAgentexceptionThrowProc* = proc(self: QScriptEngineAgent, scri
 type QScriptEngineAgentexceptionCatchProc* = proc(self: QScriptEngineAgent, scriptId: clonglong, exception: gen_qscriptvalue_types.QScriptValue): void {.raises: [], gcsafe.}
 type QScriptEngineAgentsupportsExtensionProc* = proc(self: QScriptEngineAgent, extension: cint): bool {.raises: [], gcsafe.}
 type QScriptEngineAgentextensionProc* = proc(self: QScriptEngineAgent, extension: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QScriptEngineAgentVTable* = object
+
+type QScriptEngineAgentVTable* {.inheritable, pure.} = object
   vtbl: cQScriptEngineAgentVTable
   scriptLoad*: QScriptEngineAgentscriptLoadProc
   scriptUnload*: QScriptEngineAgentscriptUnloadProc
@@ -185,7 +185,7 @@ proc QScriptEngineAgentsupportsExtension*(self: gen_qscriptengineagent_types.QSc
   fcQScriptEngineAgent_virtualbase_supportsExtension(self.h, cint(extension))
 
 proc QScriptEngineAgentextension*(self: gen_qscriptengineagent_types.QScriptEngineAgent, extension: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQScriptEngineAgent_virtualbase_extension(self.h, cint(extension), argument.h))
+  gen_qvariant_types.QVariant(h: fcQScriptEngineAgent_virtualbase_extension(self.h, cint(extension), argument.h), owned: true)
 
 
 proc fcQScriptEngineAgent_vtable_callback_scriptLoad(self: pointer, id: clonglong, program: struct_seaqt_string, fileName: struct_seaqt_string, baseLineNumber: cint): void {.cdecl.} =
@@ -229,7 +229,7 @@ proc fcQScriptEngineAgent_vtable_callback_functionExit(self: pointer, scriptId: 
   let vtbl = cast[ptr QScriptEngineAgentVTable](fcQScriptEngineAgent_vdata(self)[])
   let self = QScriptEngineAgent(h: self)
   let slotval1 = scriptId
-  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: returnValue)
+  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: returnValue, owned: false)
   vtbl[].functionExit(self, slotval1, slotval2)
 
 proc fcQScriptEngineAgent_vtable_callback_positionChange(self: pointer, scriptId: clonglong, lineNumber: cint, columnNumber: cint): void {.cdecl.} =
@@ -244,7 +244,7 @@ proc fcQScriptEngineAgent_vtable_callback_exceptionThrow(self: pointer, scriptId
   let vtbl = cast[ptr QScriptEngineAgentVTable](fcQScriptEngineAgent_vdata(self)[])
   let self = QScriptEngineAgent(h: self)
   let slotval1 = scriptId
-  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: exception)
+  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: exception, owned: false)
   let slotval3 = hasHandler
   vtbl[].exceptionThrow(self, slotval1, slotval2, slotval3)
 
@@ -252,7 +252,7 @@ proc fcQScriptEngineAgent_vtable_callback_exceptionCatch(self: pointer, scriptId
   let vtbl = cast[ptr QScriptEngineAgentVTable](fcQScriptEngineAgent_vdata(self)[])
   let self = QScriptEngineAgent(h: self)
   let slotval1 = scriptId
-  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: exception)
+  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: exception, owned: false)
   vtbl[].exceptionCatch(self, slotval1, slotval2)
 
 proc fcQScriptEngineAgent_vtable_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
@@ -266,9 +266,12 @@ proc fcQScriptEngineAgent_vtable_callback_extension(self: pointer, extension: ci
   let vtbl = cast[ptr QScriptEngineAgentVTable](fcQScriptEngineAgent_vdata(self)[])
   let self = QScriptEngineAgent(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: argument)
+  let slotval2 = gen_qvariant_types.QVariant(h: argument, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQScriptEngineAgent* {.inheritable.} = ref object of QScriptEngineAgent
   vtbl*: cQScriptEngineAgentVTable
@@ -331,7 +334,7 @@ proc fcQScriptEngineAgent_method_callback_functionEntry(self: pointer, scriptId:
 proc fcQScriptEngineAgent_method_callback_functionExit(self: pointer, scriptId: clonglong, returnValue: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScriptEngineAgent](fcQScriptEngineAgent_vdata(self)[])
   let slotval1 = scriptId
-  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: returnValue)
+  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: returnValue, owned: false)
   inst.functionExit(slotval1, slotval2)
 
 proc fcQScriptEngineAgent_method_callback_positionChange(self: pointer, scriptId: clonglong, lineNumber: cint, columnNumber: cint): void {.cdecl.} =
@@ -344,14 +347,14 @@ proc fcQScriptEngineAgent_method_callback_positionChange(self: pointer, scriptId
 proc fcQScriptEngineAgent_method_callback_exceptionThrow(self: pointer, scriptId: clonglong, exception: pointer, hasHandler: bool): void {.cdecl.} =
   let inst = cast[VirtualQScriptEngineAgent](fcQScriptEngineAgent_vdata(self)[])
   let slotval1 = scriptId
-  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: exception)
+  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: exception, owned: false)
   let slotval3 = hasHandler
   inst.exceptionThrow(slotval1, slotval2, slotval3)
 
 proc fcQScriptEngineAgent_method_callback_exceptionCatch(self: pointer, scriptId: clonglong, exception: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScriptEngineAgent](fcQScriptEngineAgent_vdata(self)[])
   let slotval1 = scriptId
-  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: exception)
+  let slotval2 = gen_qscriptvalue_types.QScriptValue(h: exception, owned: false)
   inst.exceptionCatch(slotval1, slotval2)
 
 proc fcQScriptEngineAgent_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
@@ -363,9 +366,12 @@ proc fcQScriptEngineAgent_method_callback_supportsExtension(self: pointer, exten
 proc fcQScriptEngineAgent_method_callback_extension(self: pointer, extension: cint, argument: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScriptEngineAgent](fcQScriptEngineAgent_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: argument)
+  let slotval2 = gen_qvariant_types.QVariant(h: argument, owned: false)
   var virtualReturn = inst.extension(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qscriptengineagent_types.QScriptEngineAgent,
@@ -398,13 +404,14 @@ proc create*(T: type gen_qscriptengineagent_types.QScriptEngineAgent,
     vtbl[].vtbl.supportsExtension = fcQScriptEngineAgent_vtable_callback_supportsExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQScriptEngineAgent_vtable_callback_extension
-  let tmp = gen_qscriptengineagent_types.QScriptEngineAgent(h: fcQScriptEngineAgent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), engine.h))
+  let tmp = gen_qscriptengineagent_types.QScriptEngineAgent(h: fcQScriptEngineAgent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), engine.h), owned: true)
   fcQScriptEngineAgent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQScriptEngineAgent_mvtbl = cQScriptEngineAgentVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQScriptEngineAgent()[])](self.fcQScriptEngineAgent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   scriptLoad: fcQScriptEngineAgent_method_callback_scriptLoad,
   scriptUnload: fcQScriptEngineAgent_method_callback_scriptUnload,
@@ -426,5 +433,3 @@ proc create*(T: type gen_qscriptengineagent_types.QScriptEngineAgent,
   fcQScriptEngineAgent_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qscriptengineagent_types.QScriptEngineAgent) =
-  fcQScriptEngineAgent_delete(self.h)

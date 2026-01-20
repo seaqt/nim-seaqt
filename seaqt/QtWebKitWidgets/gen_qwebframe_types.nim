@@ -1,4 +1,4 @@
-type QWebHitTestResult* {.inheritable, pure.} = object
+type QWebHitTestResult* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

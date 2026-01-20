@@ -9,7 +9,7 @@ proc `=sink`(dest: var QWebPluginFactory, source: QWebPluginFactory) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QWebPluginFactoryMimeType* {.inheritable, pure.} = object
+type QWebPluginFactoryMimeType* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -33,7 +33,7 @@ proc delete*(self: sink QWebPluginFactoryMimeType) =
   wasMoved(self)
   fcQWebPluginFactoryMimeType_delete(h)
 
-type QWebPluginFactoryPlugin* {.inheritable, pure.} = object
+type QWebPluginFactoryPlugin* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -53,7 +53,7 @@ proc delete*(self: sink QWebPluginFactoryPlugin) =
   wasMoved(self)
   fcQWebPluginFactoryPlugin_delete(h)
 
-type QWebPluginFactoryExtensionOption* {.inheritable, pure.} = object
+type QWebPluginFactoryExtensionOption* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -73,7 +73,7 @@ proc delete*(self: sink QWebPluginFactoryExtensionOption) =
   wasMoved(self)
   fcQWebPluginFactoryExtensionOption_delete(h)
 
-type QWebPluginFactoryExtensionReturn* {.inheritable, pure.} = object
+type QWebPluginFactoryExtensionReturn* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

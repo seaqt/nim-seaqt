@@ -1,4 +1,4 @@
-type QPen* {.inheritable, pure.} = object
+type QPen* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
