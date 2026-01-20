@@ -35,7 +35,7 @@ int QRadioDataControl_metacall(QRadioDataControl* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QRadioDataControl_tr(const char* s) {
+struct seaqt_string QRadioDataControl_tr_s(const char* s) {
 	QString _ret = QRadioDataControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -46,7 +46,7 @@ struct seaqt_string QRadioDataControl_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QRadioDataControl_trUtf8(const char* s) {
+struct seaqt_string QRadioDataControl_trUtf8_s(const char* s) {
 	QString _ret = QRadioDataControl::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -259,11 +259,11 @@ void QRadioDataControl_connect_alternativeFrequenciesEnabledChanged(QRadioDataCo
 	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(bool)>(&QRadioDataControl::alternativeFrequenciesEnabledChanged), self, local_caller{slot, callback, release});
 }
 
-void QRadioDataControl_errorWithErr(QRadioDataControl* self, int err) {
+void QRadioDataControl_error_err(QRadioDataControl* self, int err) {
 	self->error(static_cast<QRadioData::Error>(err));
 }
 
-void QRadioDataControl_connect_errorWithErr(QRadioDataControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QRadioDataControl_connect_error_err(QRadioDataControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -276,7 +276,7 @@ void QRadioDataControl_connect_errorWithErr(QRadioDataControl* self, intptr_t sl
 	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QRadioData::Error)>(&QRadioDataControl::error), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QRadioDataControl_tr2(const char* s, const char* c) {
+struct seaqt_string QRadioDataControl_tr_s_c(const char* s, const char* c) {
 	QString _ret = QRadioDataControl::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -287,7 +287,7 @@ struct seaqt_string QRadioDataControl_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QRadioDataControl_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QRadioDataControl_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRadioDataControl::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -298,7 +298,7 @@ struct seaqt_string QRadioDataControl_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QRadioDataControl_trUtf82(const char* s, const char* c) {
+struct seaqt_string QRadioDataControl_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QRadioDataControl::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -309,7 +309,7 @@ struct seaqt_string QRadioDataControl_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QRadioDataControl_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QRadioDataControl_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRadioDataControl::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

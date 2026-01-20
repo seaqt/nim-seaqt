@@ -20,7 +20,7 @@ class QThreadStorageData;
 typedef struct QThreadStorageData QThreadStorageData;
 #endif
 
-QThreadStorageData* QThreadStorageData_new(QThreadStorageData* param1);
+QThreadStorageData* QThreadStorageData_new_from(QThreadStorageData* from);
 
 void** QThreadStorageData_get(const QThreadStorageData* self);
 void** QThreadStorageData_set(QThreadStorageData* self, void* p);

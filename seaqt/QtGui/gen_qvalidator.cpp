@@ -216,7 +216,7 @@ VirtualQValidator* QValidator_new(const QValidator_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQValidator(vtbl) : nullptr;
 }
 
-VirtualQValidator* QValidator_new2(const QValidator_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQValidator* QValidator_new_parent(const QValidator_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQValidator(vtbl, parent) : nullptr;
 }
@@ -237,7 +237,7 @@ int QValidator_metacall(QValidator* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QValidator_tr(const char* s) {
+struct seaqt_string QValidator_tr_s(const char* s) {
 	QString _ret = QValidator::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -248,7 +248,7 @@ struct seaqt_string QValidator_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QValidator_trUtf8(const char* s) {
+struct seaqt_string QValidator_trUtf8_s(const char* s) {
 	QString _ret = QValidator::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -293,7 +293,7 @@ void QValidator_connect_changed(QValidator* self, intptr_t slot, void (*callback
 	QValidator::connect(self, static_cast<void (QValidator::*)()>(&QValidator::changed), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QValidator_tr2(const char* s, const char* c) {
+struct seaqt_string QValidator_tr_s_c(const char* s, const char* c) {
 	QString _ret = QValidator::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -304,7 +304,7 @@ struct seaqt_string QValidator_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QValidator_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QValidator_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QValidator::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -315,7 +315,7 @@ struct seaqt_string QValidator_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QValidator_trUtf82(const char* s, const char* c) {
+struct seaqt_string QValidator_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QValidator::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -326,7 +326,7 @@ struct seaqt_string QValidator_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QValidator_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QValidator_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QValidator::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -622,17 +622,17 @@ VirtualQIntValidator* QIntValidator_new(const QIntValidator_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQIntValidator(vtbl) : nullptr;
 }
 
-VirtualQIntValidator* QIntValidator_new2(const QIntValidator_VTable* vtbl, size_t vdata, int bottom, int top) {
+VirtualQIntValidator* QIntValidator_new_bottom_top(const QIntValidator_VTable* vtbl, size_t vdata, int bottom, int top) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQIntValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQIntValidator(vtbl, static_cast<int>(bottom), static_cast<int>(top)) : nullptr;
 }
 
-VirtualQIntValidator* QIntValidator_new3(const QIntValidator_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQIntValidator* QIntValidator_new_parent(const QIntValidator_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQIntValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQIntValidator(vtbl, parent) : nullptr;
 }
 
-VirtualQIntValidator* QIntValidator_new4(const QIntValidator_VTable* vtbl, size_t vdata, int bottom, int top, QObject* parent) {
+VirtualQIntValidator* QIntValidator_new_bottom_top_parent(const QIntValidator_VTable* vtbl, size_t vdata, int bottom, int top, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQIntValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQIntValidator(vtbl, static_cast<int>(bottom), static_cast<int>(top), parent) : nullptr;
 }
@@ -653,7 +653,7 @@ int QIntValidator_metacall(QIntValidator* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QIntValidator_tr(const char* s) {
+struct seaqt_string QIntValidator_tr_s(const char* s) {
 	QString _ret = QIntValidator::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -664,7 +664,7 @@ struct seaqt_string QIntValidator_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QIntValidator_trUtf8(const char* s) {
+struct seaqt_string QIntValidator_trUtf8_s(const char* s) {
 	QString _ret = QIntValidator::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -738,7 +738,7 @@ void QIntValidator_connect_topChanged(QIntValidator* self, intptr_t slot, void (
 	QIntValidator::connect(self, static_cast<void (QIntValidator::*)(int)>(&QIntValidator::topChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QIntValidator_tr2(const char* s, const char* c) {
+struct seaqt_string QIntValidator_tr_s_c(const char* s, const char* c) {
 	QString _ret = QIntValidator::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -749,7 +749,7 @@ struct seaqt_string QIntValidator_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QIntValidator_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QIntValidator_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QIntValidator::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -760,7 +760,7 @@ struct seaqt_string QIntValidator_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QIntValidator_trUtf82(const char* s, const char* c) {
+struct seaqt_string QIntValidator_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QIntValidator::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -771,7 +771,7 @@ struct seaqt_string QIntValidator_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QIntValidator_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QIntValidator_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QIntValidator::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1080,17 +1080,17 @@ VirtualQDoubleValidator* QDoubleValidator_new(const QDoubleValidator_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQDoubleValidator(vtbl) : nullptr;
 }
 
-VirtualQDoubleValidator* QDoubleValidator_new2(const QDoubleValidator_VTable* vtbl, size_t vdata, double bottom, double top, int decimals) {
+VirtualQDoubleValidator* QDoubleValidator_new_bottom_top_decimals(const QDoubleValidator_VTable* vtbl, size_t vdata, double bottom, double top, int decimals) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDoubleValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDoubleValidator(vtbl, static_cast<double>(bottom), static_cast<double>(top), static_cast<int>(decimals)) : nullptr;
 }
 
-VirtualQDoubleValidator* QDoubleValidator_new3(const QDoubleValidator_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQDoubleValidator* QDoubleValidator_new_parent(const QDoubleValidator_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDoubleValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDoubleValidator(vtbl, parent) : nullptr;
 }
 
-VirtualQDoubleValidator* QDoubleValidator_new4(const QDoubleValidator_VTable* vtbl, size_t vdata, double bottom, double top, int decimals, QObject* parent) {
+VirtualQDoubleValidator* QDoubleValidator_new_bottom_top_decimals_parent(const QDoubleValidator_VTable* vtbl, size_t vdata, double bottom, double top, int decimals, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDoubleValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDoubleValidator(vtbl, static_cast<double>(bottom), static_cast<double>(top), static_cast<int>(decimals), parent) : nullptr;
 }
@@ -1111,7 +1111,7 @@ int QDoubleValidator_metacall(QDoubleValidator* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDoubleValidator_tr(const char* s) {
+struct seaqt_string QDoubleValidator_tr_s(const char* s) {
 	QString _ret = QDoubleValidator::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1122,7 +1122,7 @@ struct seaqt_string QDoubleValidator_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDoubleValidator_trUtf8(const char* s) {
+struct seaqt_string QDoubleValidator_trUtf8_s(const char* s) {
 	QString _ret = QDoubleValidator::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1241,7 +1241,7 @@ void QDoubleValidator_connect_notationChanged(QDoubleValidator* self, intptr_t s
 	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(QDoubleValidator::Notation)>(&QDoubleValidator::notationChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDoubleValidator_tr2(const char* s, const char* c) {
+struct seaqt_string QDoubleValidator_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDoubleValidator::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1252,7 +1252,7 @@ struct seaqt_string QDoubleValidator_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDoubleValidator_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDoubleValidator_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDoubleValidator::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1263,7 +1263,7 @@ struct seaqt_string QDoubleValidator_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDoubleValidator_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDoubleValidator_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDoubleValidator::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1274,7 +1274,7 @@ struct seaqt_string QDoubleValidator_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDoubleValidator_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDoubleValidator_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDoubleValidator::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1569,17 +1569,17 @@ VirtualQRegExpValidator* QRegExpValidator_new(const QRegExpValidator_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQRegExpValidator(vtbl) : nullptr;
 }
 
-VirtualQRegExpValidator* QRegExpValidator_new2(const QRegExpValidator_VTable* vtbl, size_t vdata, QRegExp* rx) {
+VirtualQRegExpValidator* QRegExpValidator_new_rx(const QRegExpValidator_VTable* vtbl, size_t vdata, QRegExp* rx) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRegExpValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRegExpValidator(vtbl, *rx) : nullptr;
 }
 
-VirtualQRegExpValidator* QRegExpValidator_new3(const QRegExpValidator_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQRegExpValidator* QRegExpValidator_new_parent(const QRegExpValidator_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRegExpValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRegExpValidator(vtbl, parent) : nullptr;
 }
 
-VirtualQRegExpValidator* QRegExpValidator_new4(const QRegExpValidator_VTable* vtbl, size_t vdata, QRegExp* rx, QObject* parent) {
+VirtualQRegExpValidator* QRegExpValidator_new_rx_parent(const QRegExpValidator_VTable* vtbl, size_t vdata, QRegExp* rx, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRegExpValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRegExpValidator(vtbl, *rx, parent) : nullptr;
 }
@@ -1600,7 +1600,7 @@ int QRegExpValidator_metacall(QRegExpValidator* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QRegExpValidator_tr(const char* s) {
+struct seaqt_string QRegExpValidator_tr_s(const char* s) {
 	QString _ret = QRegExpValidator::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1611,7 +1611,7 @@ struct seaqt_string QRegExpValidator_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QRegExpValidator_trUtf8(const char* s) {
+struct seaqt_string QRegExpValidator_trUtf8_s(const char* s) {
 	QString _ret = QRegExpValidator::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1656,7 +1656,7 @@ void QRegExpValidator_connect_regExpChanged(QRegExpValidator* self, intptr_t slo
 	QRegExpValidator::connect(self, static_cast<void (QRegExpValidator::*)(const QRegExp&)>(&QRegExpValidator::regExpChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QRegExpValidator_tr2(const char* s, const char* c) {
+struct seaqt_string QRegExpValidator_tr_s_c(const char* s, const char* c) {
 	QString _ret = QRegExpValidator::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1667,7 +1667,7 @@ struct seaqt_string QRegExpValidator_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QRegExpValidator_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QRegExpValidator_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRegExpValidator::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1678,7 +1678,7 @@ struct seaqt_string QRegExpValidator_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QRegExpValidator_trUtf82(const char* s, const char* c) {
+struct seaqt_string QRegExpValidator_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QRegExpValidator::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1689,7 +1689,7 @@ struct seaqt_string QRegExpValidator_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QRegExpValidator_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QRegExpValidator_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRegExpValidator::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1979,17 +1979,17 @@ VirtualQRegularExpressionValidator* QRegularExpressionValidator_new(const QRegul
 	return _mem_ ? new (_mem_)VirtualQRegularExpressionValidator(vtbl) : nullptr;
 }
 
-VirtualQRegularExpressionValidator* QRegularExpressionValidator_new2(const QRegularExpressionValidator_VTable* vtbl, size_t vdata, QRegularExpression* re) {
+VirtualQRegularExpressionValidator* QRegularExpressionValidator_new_re(const QRegularExpressionValidator_VTable* vtbl, size_t vdata, QRegularExpression* re) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRegularExpressionValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRegularExpressionValidator(vtbl, *re) : nullptr;
 }
 
-VirtualQRegularExpressionValidator* QRegularExpressionValidator_new3(const QRegularExpressionValidator_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQRegularExpressionValidator* QRegularExpressionValidator_new_parent(const QRegularExpressionValidator_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRegularExpressionValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRegularExpressionValidator(vtbl, parent) : nullptr;
 }
 
-VirtualQRegularExpressionValidator* QRegularExpressionValidator_new4(const QRegularExpressionValidator_VTable* vtbl, size_t vdata, QRegularExpression* re, QObject* parent) {
+VirtualQRegularExpressionValidator* QRegularExpressionValidator_new_re_parent(const QRegularExpressionValidator_VTable* vtbl, size_t vdata, QRegularExpression* re, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRegularExpressionValidator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRegularExpressionValidator(vtbl, *re, parent) : nullptr;
 }
@@ -2010,7 +2010,7 @@ int QRegularExpressionValidator_metacall(QRegularExpressionValidator* self, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QRegularExpressionValidator_tr(const char* s) {
+struct seaqt_string QRegularExpressionValidator_tr_s(const char* s) {
 	QString _ret = QRegularExpressionValidator::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2021,7 +2021,7 @@ struct seaqt_string QRegularExpressionValidator_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QRegularExpressionValidator_trUtf8(const char* s) {
+struct seaqt_string QRegularExpressionValidator_trUtf8_s(const char* s) {
 	QString _ret = QRegularExpressionValidator::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2064,7 +2064,7 @@ void QRegularExpressionValidator_connect_regularExpressionChanged(QRegularExpres
 	QRegularExpressionValidator::connect(self, static_cast<void (QRegularExpressionValidator::*)(const QRegularExpression&)>(&QRegularExpressionValidator::regularExpressionChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QRegularExpressionValidator_tr2(const char* s, const char* c) {
+struct seaqt_string QRegularExpressionValidator_tr_s_c(const char* s, const char* c) {
 	QString _ret = QRegularExpressionValidator::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2075,7 +2075,7 @@ struct seaqt_string QRegularExpressionValidator_tr2(const char* s, const char* c
 	return _ms;
 }
 
-struct seaqt_string QRegularExpressionValidator_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QRegularExpressionValidator_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRegularExpressionValidator::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2086,7 +2086,7 @@ struct seaqt_string QRegularExpressionValidator_tr3(const char* s, const char* c
 	return _ms;
 }
 
-struct seaqt_string QRegularExpressionValidator_trUtf82(const char* s, const char* c) {
+struct seaqt_string QRegularExpressionValidator_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QRegularExpressionValidator::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2097,7 +2097,7 @@ struct seaqt_string QRegularExpressionValidator_trUtf82(const char* s, const cha
 	return _ms;
 }
 
-struct seaqt_string QRegularExpressionValidator_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QRegularExpressionValidator_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRegularExpressionValidator::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -75,8 +75,8 @@ type cQDial*{.exportc: "QDial", incompleteStruct.} = object
 proc fcQDial_metaObject(self: pointer): pointer {.importc: "QDial_metaObject".}
 proc fcQDial_metacast(self: pointer, param1: cstring): pointer {.importc: "QDial_metacast".}
 proc fcQDial_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDial_metacall".}
-proc fcQDial_tr(s: cstring): struct_seaqt_string {.importc: "QDial_tr".}
-proc fcQDial_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDial_trUtf8".}
+proc fcQDial_trS(s: cstring): struct_seaqt_string {.importc: "QDial_tr_s".}
+proc fcQDial_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDial_trUtf8_s".}
 proc fcQDial_wrapping(self: pointer): bool {.importc: "QDial_wrapping".}
 proc fcQDial_notchSize(self: pointer): cint {.importc: "QDial_notchSize".}
 proc fcQDial_setNotchTarget(self: pointer, target: float64): void {.importc: "QDial_setNotchTarget".}
@@ -86,10 +86,10 @@ proc fcQDial_sizeHint(self: pointer): pointer {.importc: "QDial_sizeHint".}
 proc fcQDial_minimumSizeHint(self: pointer): pointer {.importc: "QDial_minimumSizeHint".}
 proc fcQDial_setNotchesVisible(self: pointer, visible: bool): void {.importc: "QDial_setNotchesVisible".}
 proc fcQDial_setWrapping(self: pointer, on: bool): void {.importc: "QDial_setWrapping".}
-proc fcQDial_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDial_tr2".}
-proc fcQDial_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDial_tr3".}
-proc fcQDial_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDial_trUtf82".}
-proc fcQDial_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDial_trUtf83".}
+proc fcQDial_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDial_tr_s_c".}
+proc fcQDial_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDial_tr_s_c_n".}
+proc fcQDial_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDial_trUtf8_s_c".}
+proc fcQDial_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDial_trUtf8_s_c_n".}
 proc fcQDial_vdata(self: pointer): ptr pointer {.importc: "QDial_vdata".}
 proc fvdata_cQDial(self: pointer): pointer {.importc: "vdata_QDial".}
 
@@ -198,7 +198,7 @@ proc fcQDial_virtualbase_customEvent(self: pointer, event: pointer): void {.impo
 proc fcQDial_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDial_virtualbase_connectNotify".}
 proc fcQDial_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDial_virtualbase_disconnectNotify".}
 proc fcQDial_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QDial_protectedbase_initStyleOption".}
-proc fcQDial_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QDial_protectedbase_setRepeatAction".}
+proc fcQDial_protectedbase_setRepeatAction_action(self: pointer, action: cint): void {.importc: "QDial_protectedbase_setRepeatAction_action".}
 proc fcQDial_protectedbase_repeatAction(self: pointer): cint {.importc: "QDial_protectedbase_repeatAction".}
 proc fcQDial_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QDial_protectedbase_updateMicroFocus".}
 proc fcQDial_protectedbase_create(self: pointer): void {.importc: "QDial_protectedbase_create".}
@@ -209,8 +209,8 @@ proc fcQDial_protectedbase_sender(self: pointer): pointer {.importc: "QDial_prot
 proc fcQDial_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDial_protectedbase_senderSignalIndex".}
 proc fcQDial_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDial_protectedbase_receivers".}
 proc fcQDial_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDial_protectedbase_isSignalConnected".}
-proc fcQDial_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDial {.importc: "QDial_new".}
-proc fcQDial_new2(vtbl: pointer, vdata: csize_t): ptr cQDial {.importc: "QDial_new2".}
+proc fcQDial_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDial {.importc: "QDial_new_parent".}
+proc fcQDial_new2(vtbl: pointer, vdata: csize_t): ptr cQDial {.importc: "QDial_new".}
 proc fcQDial_staticMetaObject(): pointer {.importc: "QDial_staticMetaObject".}
 
 proc metaObject*(self: gen_qdial_types.QDial): gen_qobjectdefs_types.QMetaObject =
@@ -223,13 +223,13 @@ proc metacall*(self: gen_qdial_types.QDial, param1: cint, param2: cint, param3: 
   fcQDial_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdial_types.QDial, s: cstring): string =
-  let v_ms = fcQDial_tr(s)
+  let v_ms = fcQDial_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdial_types.QDial, s: cstring): string =
-  let v_ms = fcQDial_trUtf8(s)
+  let v_ms = fcQDial_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -262,25 +262,25 @@ proc setWrapping*(self: gen_qdial_types.QDial, on: bool): void =
   fcQDial_setWrapping(self.h, on)
 
 proc tr*(_: type gen_qdial_types.QDial, s: cstring, c: cstring): string =
-  let v_ms = fcQDial_tr2(s, c)
+  let v_ms = fcQDial_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdial_types.QDial, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDial_tr3(s, c, n)
+  let v_ms = fcQDial_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdial_types.QDial, s: cstring, c: cstring): string =
-  let v_ms = fcQDial_trUtf82(s, c)
+  let v_ms = fcQDial_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdial_types.QDial, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDial_trUtf83(s, c, n)
+  let v_ms = fcQDial_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1295,7 +1295,7 @@ proc initStyleOption*(self: gen_qdial_types.QDial, option: gen_qstyleoption_type
   fcQDial_protectedbase_initStyleOption(self.h, option.h)
 
 proc setRepeatAction*(self: gen_qdial_types.QDial, action: cint): void =
-  fcQDial_protectedbase_setRepeatAction(self.h, cint(action))
+  fcQDial_protectedbase_setRepeatAction_action(self.h, cint(action))
 
 proc repeatAction*(self: gen_qdial_types.QDial): cint =
   cint(fcQDial_protectedbase_repeatAction(self.h))

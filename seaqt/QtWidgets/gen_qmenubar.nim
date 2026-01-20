@@ -81,12 +81,12 @@ type cQMenuBar*{.exportc: "QMenuBar", incompleteStruct.} = object
 proc fcQMenuBar_metaObject(self: pointer): pointer {.importc: "QMenuBar_metaObject".}
 proc fcQMenuBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QMenuBar_metacast".}
 proc fcQMenuBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMenuBar_metacall".}
-proc fcQMenuBar_tr(s: cstring): struct_seaqt_string {.importc: "QMenuBar_tr".}
-proc fcQMenuBar_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMenuBar_trUtf8".}
+proc fcQMenuBar_trS(s: cstring): struct_seaqt_string {.importc: "QMenuBar_tr_s".}
+proc fcQMenuBar_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMenuBar_trUtf8_s".}
 proc fcQMenuBar_addAction(self: pointer, text: struct_seaqt_string): pointer {.importc: "QMenuBar_addAction".}
-proc fcQMenuBar_addMenu(self: pointer, menu: pointer): pointer {.importc: "QMenuBar_addMenu".}
-proc fcQMenuBar_addMenuWithTitle(self: pointer, title: struct_seaqt_string): pointer {.importc: "QMenuBar_addMenuWithTitle".}
-proc fcQMenuBar_addMenu2(self: pointer, icon: pointer, title: struct_seaqt_string): pointer {.importc: "QMenuBar_addMenu2".}
+proc fcQMenuBar_addMenuMenu(self: pointer, menu: pointer): pointer {.importc: "QMenuBar_addMenu_menu".}
+proc fcQMenuBar_addMenuTitle(self: pointer, title: struct_seaqt_string): pointer {.importc: "QMenuBar_addMenu_title".}
+proc fcQMenuBar_addMenuIconTitle(self: pointer, icon: pointer, title: struct_seaqt_string): pointer {.importc: "QMenuBar_addMenu_icon_title".}
 proc fcQMenuBar_addSeparator(self: pointer): pointer {.importc: "QMenuBar_addSeparator".}
 proc fcQMenuBar_insertSeparator(self: pointer, before: pointer): pointer {.importc: "QMenuBar_insertSeparator".}
 proc fcQMenuBar_insertMenu(self: pointer, before: pointer, menu: pointer): pointer {.importc: "QMenuBar_insertMenu".}
@@ -100,7 +100,7 @@ proc fcQMenuBar_minimumSizeHint(self: pointer): pointer {.importc: "QMenuBar_min
 proc fcQMenuBar_heightForWidth(self: pointer, param1: cint): cint {.importc: "QMenuBar_heightForWidth".}
 proc fcQMenuBar_actionGeometry(self: pointer, param1: pointer): pointer {.importc: "QMenuBar_actionGeometry".}
 proc fcQMenuBar_actionAt(self: pointer, param1: pointer): pointer {.importc: "QMenuBar_actionAt".}
-proc fcQMenuBar_setCornerWidget(self: pointer, w: pointer): void {.importc: "QMenuBar_setCornerWidget".}
+proc fcQMenuBar_setCornerWidgetW(self: pointer, w: pointer): void {.importc: "QMenuBar_setCornerWidget_w".}
 proc fcQMenuBar_cornerWidget(self: pointer): pointer {.importc: "QMenuBar_cornerWidget".}
 proc fcQMenuBar_isNativeMenuBar(self: pointer): bool {.importc: "QMenuBar_isNativeMenuBar".}
 proc fcQMenuBar_setNativeMenuBar(self: pointer, nativeMenuBar: bool): void {.importc: "QMenuBar_setNativeMenuBar".}
@@ -109,12 +109,12 @@ proc fcQMenuBar_triggered(self: pointer, action: pointer): void {.importc: "QMen
 proc fcQMenuBar_connect_triggered(self: pointer, slot: int, callback: proc (slot: int, action: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMenuBar_connect_triggered".}
 proc fcQMenuBar_hovered(self: pointer, action: pointer): void {.importc: "QMenuBar_hovered".}
 proc fcQMenuBar_connect_hovered(self: pointer, slot: int, callback: proc (slot: int, action: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMenuBar_connect_hovered".}
-proc fcQMenuBar_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMenuBar_tr2".}
-proc fcQMenuBar_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMenuBar_tr3".}
-proc fcQMenuBar_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMenuBar_trUtf82".}
-proc fcQMenuBar_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMenuBar_trUtf83".}
-proc fcQMenuBar_setCornerWidget2(self: pointer, w: pointer, corner: cint): void {.importc: "QMenuBar_setCornerWidget2".}
-proc fcQMenuBar_cornerWidgetWithCorner(self: pointer, corner: cint): pointer {.importc: "QMenuBar_cornerWidgetWithCorner".}
+proc fcQMenuBar_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMenuBar_tr_s_c".}
+proc fcQMenuBar_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMenuBar_tr_s_c_n".}
+proc fcQMenuBar_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMenuBar_trUtf8_s_c".}
+proc fcQMenuBar_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMenuBar_trUtf8_s_c_n".}
+proc fcQMenuBar_setCornerWidgetWCorner(self: pointer, w: pointer, corner: cint): void {.importc: "QMenuBar_setCornerWidget_w_corner".}
+proc fcQMenuBar_cornerWidgetCorner(self: pointer, corner: cint): pointer {.importc: "QMenuBar_cornerWidget_corner".}
 proc fcQMenuBar_vdata(self: pointer): ptr pointer {.importc: "QMenuBar_vdata".}
 proc fvdata_cQMenuBar(self: pointer): pointer {.importc: "vdata_QMenuBar".}
 
@@ -230,8 +230,8 @@ proc fcQMenuBar_protectedbase_sender(self: pointer): pointer {.importc: "QMenuBa
 proc fcQMenuBar_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMenuBar_protectedbase_senderSignalIndex".}
 proc fcQMenuBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMenuBar_protectedbase_receivers".}
 proc fcQMenuBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMenuBar_protectedbase_isSignalConnected".}
-proc fcQMenuBar_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMenuBar {.importc: "QMenuBar_new".}
-proc fcQMenuBar_new2(vtbl: pointer, vdata: csize_t): ptr cQMenuBar {.importc: "QMenuBar_new2".}
+proc fcQMenuBar_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMenuBar {.importc: "QMenuBar_new_parent".}
+proc fcQMenuBar_new2(vtbl: pointer, vdata: csize_t): ptr cQMenuBar {.importc: "QMenuBar_new".}
 proc fcQMenuBar_staticMetaObject(): pointer {.importc: "QMenuBar_staticMetaObject".}
 
 proc metaObject*(self: gen_qmenubar_types.QMenuBar): gen_qobjectdefs_types.QMetaObject =
@@ -244,13 +244,13 @@ proc metacall*(self: gen_qmenubar_types.QMenuBar, param1: cint, param2: cint, pa
   fcQMenuBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring): string =
-  let v_ms = fcQMenuBar_tr(s)
+  let v_ms = fcQMenuBar_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenubar_types.QMenuBar, s: cstring): string =
-  let v_ms = fcQMenuBar_trUtf8(s)
+  let v_ms = fcQMenuBar_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -259,13 +259,13 @@ proc addAction*(self: gen_qmenubar_types.QMenuBar, text: openArray[char]): gen_q
   gen_qaction_types.QAction(h: fcQMenuBar_addAction(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addMenu*(self: gen_qmenubar_types.QMenuBar, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenuBar_addMenu(self.h, menu.h), owned: false)
+  gen_qaction_types.QAction(h: fcQMenuBar_addMenuMenu(self.h, menu.h), owned: false)
 
 proc addMenu*(self: gen_qmenubar_types.QMenuBar, title: openArray[char]): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQMenuBar_addMenuWithTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
+  gen_qmenu_types.QMenu(h: fcQMenuBar_addMenuTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addMenu*(self: gen_qmenubar_types.QMenuBar, icon: gen_qicon_types.QIcon, title: openArray[char]): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQMenuBar_addMenu2(self.h, icon.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
+  gen_qmenu_types.QMenu(h: fcQMenuBar_addMenuIconTitle(self.h, icon.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addSeparator*(self: gen_qmenubar_types.QMenuBar): gen_qaction_types.QAction =
   gen_qaction_types.QAction(h: fcQMenuBar_addSeparator(self.h), owned: false)
@@ -307,7 +307,7 @@ proc actionAt*(self: gen_qmenubar_types.QMenuBar, param1: gen_qpoint_types.QPoin
   gen_qaction_types.QAction(h: fcQMenuBar_actionAt(self.h, param1.h), owned: false)
 
 proc setCornerWidget*(self: gen_qmenubar_types.QMenuBar, w: gen_qwidget_types.QWidget): void =
-  fcQMenuBar_setCornerWidget(self.h, w.h)
+  fcQMenuBar_setCornerWidgetW(self.h, w.h)
 
 proc cornerWidget*(self: gen_qmenubar_types.QMenuBar): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQMenuBar_cornerWidget(self.h), owned: false)
@@ -362,34 +362,34 @@ proc onHovered*(self: gen_qmenubar_types.QMenuBar, slot: QMenuBarhoveredSlot) =
   fcQMenuBar_connect_hovered(self.h, cast[int](addr tmp[]), fcQMenuBar_slot_callback_hovered, fcQMenuBar_slot_callback_hovered_release)
 
 proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring): string =
-  let v_ms = fcQMenuBar_tr2(s, c)
+  let v_ms = fcQMenuBar_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMenuBar_tr3(s, c, n)
+  let v_ms = fcQMenuBar_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring): string =
-  let v_ms = fcQMenuBar_trUtf82(s, c)
+  let v_ms = fcQMenuBar_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMenuBar_trUtf83(s, c, n)
+  let v_ms = fcQMenuBar_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setCornerWidget*(self: gen_qmenubar_types.QMenuBar, w: gen_qwidget_types.QWidget, corner: cint): void =
-  fcQMenuBar_setCornerWidget2(self.h, w.h, cint(corner))
+  fcQMenuBar_setCornerWidgetWCorner(self.h, w.h, cint(corner))
 
 proc cornerWidget*(self: gen_qmenubar_types.QMenuBar, corner: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQMenuBar_cornerWidgetWithCorner(self.h, cint(corner)), owned: false)
+  gen_qwidget_types.QWidget(h: fcQMenuBar_cornerWidgetCorner(self.h, cint(corner)), owned: false)
 
 type QMenuBarmetaObjectProc* = proc(self: QMenuBar): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMenuBarmetacastProc* = proc(self: QMenuBar, param1: cstring): pointer {.raises: [], gcsafe.}

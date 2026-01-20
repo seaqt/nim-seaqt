@@ -76,14 +76,14 @@ void* QGraphicsEffect_vdata(VirtualQGraphicsEffect* self);
 VirtualQGraphicsEffect* vdata_QGraphicsEffect(void* vdata);
 
 VirtualQGraphicsEffect* QGraphicsEffect_new(const QGraphicsEffect_VTable* vtbl, size_t vdata);
-VirtualQGraphicsEffect* QGraphicsEffect_new2(const QGraphicsEffect_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGraphicsEffect* QGraphicsEffect_new_parent(const QGraphicsEffect_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QGraphicsEffect_virtbase(QGraphicsEffect* src, QObject** outptr_QObject);
 QMetaObject* QGraphicsEffect_metaObject(const QGraphicsEffect* self);
 void* QGraphicsEffect_metacast(QGraphicsEffect* self, const char* param1);
 int QGraphicsEffect_metacall(QGraphicsEffect* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsEffect_tr(const char* s);
-struct seaqt_string QGraphicsEffect_trUtf8(const char* s);
+struct seaqt_string QGraphicsEffect_tr_s(const char* s);
+struct seaqt_string QGraphicsEffect_trUtf8_s(const char* s);
 QRectF* QGraphicsEffect_boundingRectFor(const QGraphicsEffect* self, QRectF* sourceRect);
 QRectF* QGraphicsEffect_boundingRect(const QGraphicsEffect* self);
 bool QGraphicsEffect_isEnabled(const QGraphicsEffect* self);
@@ -93,10 +93,10 @@ void QGraphicsEffect_enabledChanged(QGraphicsEffect* self, bool enabled);
 void QGraphicsEffect_connect_enabledChanged(QGraphicsEffect* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QGraphicsEffect_draw(QGraphicsEffect* self, QPainter* painter);
 void QGraphicsEffect_sourceChanged(QGraphicsEffect* self, int flags);
-struct seaqt_string QGraphicsEffect_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsEffect_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGraphicsEffect_trUtf82(const char* s, const char* c);
-struct seaqt_string QGraphicsEffect_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsEffect_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsEffect_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsEffect_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsEffect_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsEffect_virtualbase_metaObject(const VirtualQGraphicsEffect* self);
 void* QGraphicsEffect_virtualbase_metacast(VirtualQGraphicsEffect* self, const char* param1);
@@ -117,10 +117,10 @@ bool QGraphicsEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsEffect* 
 QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsEffect* self);
 void QGraphicsEffect_protectedbase_drawSource(VirtualQGraphicsEffect* self, QPainter* painter);
 QPixmap* QGraphicsEffect_protectedbase_sourcePixmap(const VirtualQGraphicsEffect* self);
-QRectF* QGraphicsEffect_protectedbase_sourceBoundingRectWithSystem(const VirtualQGraphicsEffect* self, int system);
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmapWithSystem(const VirtualQGraphicsEffect* self, int system);
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmap2(const VirtualQGraphicsEffect* self, int system, QPoint* offset);
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmap3(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode);
+QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect_system(const VirtualQGraphicsEffect* self, int system);
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system(const VirtualQGraphicsEffect* self, int system);
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system_offset(const VirtualQGraphicsEffect* self, int system, QPoint* offset);
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system_offset_mode(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode);
 QObject* QGraphicsEffect_protectedbase_sender(const VirtualQGraphicsEffect* self);
 int QGraphicsEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsEffect* self);
 int QGraphicsEffect_protectedbase_receivers(const VirtualQGraphicsEffect* self, const char* signal);
@@ -151,14 +151,14 @@ void* QGraphicsColorizeEffect_vdata(VirtualQGraphicsColorizeEffect* self);
 VirtualQGraphicsColorizeEffect* vdata_QGraphicsColorizeEffect(void* vdata);
 
 VirtualQGraphicsColorizeEffect* QGraphicsColorizeEffect_new(const QGraphicsColorizeEffect_VTable* vtbl, size_t vdata);
-VirtualQGraphicsColorizeEffect* QGraphicsColorizeEffect_new2(const QGraphicsColorizeEffect_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGraphicsColorizeEffect* QGraphicsColorizeEffect_new_parent(const QGraphicsColorizeEffect_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QGraphicsColorizeEffect_virtbase(QGraphicsColorizeEffect* src, QGraphicsEffect** outptr_QGraphicsEffect);
 QMetaObject* QGraphicsColorizeEffect_metaObject(const QGraphicsColorizeEffect* self);
 void* QGraphicsColorizeEffect_metacast(QGraphicsColorizeEffect* self, const char* param1);
 int QGraphicsColorizeEffect_metacall(QGraphicsColorizeEffect* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsColorizeEffect_tr(const char* s);
-struct seaqt_string QGraphicsColorizeEffect_trUtf8(const char* s);
+struct seaqt_string QGraphicsColorizeEffect_tr_s(const char* s);
+struct seaqt_string QGraphicsColorizeEffect_trUtf8_s(const char* s);
 QColor* QGraphicsColorizeEffect_color(const QGraphicsColorizeEffect* self);
 double QGraphicsColorizeEffect_strength(const QGraphicsColorizeEffect* self);
 void QGraphicsColorizeEffect_setColor(QGraphicsColorizeEffect* self, QColor* c);
@@ -168,10 +168,10 @@ void QGraphicsColorizeEffect_connect_colorChanged(QGraphicsColorizeEffect* self,
 void QGraphicsColorizeEffect_strengthChanged(QGraphicsColorizeEffect* self, double strength);
 void QGraphicsColorizeEffect_connect_strengthChanged(QGraphicsColorizeEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t));
 void QGraphicsColorizeEffect_draw(QGraphicsColorizeEffect* self, QPainter* painter);
-struct seaqt_string QGraphicsColorizeEffect_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsColorizeEffect_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGraphicsColorizeEffect_trUtf82(const char* s, const char* c);
-struct seaqt_string QGraphicsColorizeEffect_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsColorizeEffect_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsColorizeEffect_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsColorizeEffect_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsColorizeEffect_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsColorizeEffect_virtualbase_metaObject(const VirtualQGraphicsColorizeEffect* self);
 void* QGraphicsColorizeEffect_virtualbase_metacast(VirtualQGraphicsColorizeEffect* self, const char* param1);
@@ -222,14 +222,14 @@ void* QGraphicsBlurEffect_vdata(VirtualQGraphicsBlurEffect* self);
 VirtualQGraphicsBlurEffect* vdata_QGraphicsBlurEffect(void* vdata);
 
 VirtualQGraphicsBlurEffect* QGraphicsBlurEffect_new(const QGraphicsBlurEffect_VTable* vtbl, size_t vdata);
-VirtualQGraphicsBlurEffect* QGraphicsBlurEffect_new2(const QGraphicsBlurEffect_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGraphicsBlurEffect* QGraphicsBlurEffect_new_parent(const QGraphicsBlurEffect_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QGraphicsBlurEffect_virtbase(QGraphicsBlurEffect* src, QGraphicsEffect** outptr_QGraphicsEffect);
 QMetaObject* QGraphicsBlurEffect_metaObject(const QGraphicsBlurEffect* self);
 void* QGraphicsBlurEffect_metacast(QGraphicsBlurEffect* self, const char* param1);
 int QGraphicsBlurEffect_metacall(QGraphicsBlurEffect* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsBlurEffect_tr(const char* s);
-struct seaqt_string QGraphicsBlurEffect_trUtf8(const char* s);
+struct seaqt_string QGraphicsBlurEffect_tr_s(const char* s);
+struct seaqt_string QGraphicsBlurEffect_trUtf8_s(const char* s);
 QRectF* QGraphicsBlurEffect_boundingRectFor(const QGraphicsBlurEffect* self, QRectF* rect);
 double QGraphicsBlurEffect_blurRadius(const QGraphicsBlurEffect* self);
 int QGraphicsBlurEffect_blurHints(const QGraphicsBlurEffect* self);
@@ -240,10 +240,10 @@ void QGraphicsBlurEffect_connect_blurRadiusChanged(QGraphicsBlurEffect* self, in
 void QGraphicsBlurEffect_blurHintsChanged(QGraphicsBlurEffect* self, int hints);
 void QGraphicsBlurEffect_connect_blurHintsChanged(QGraphicsBlurEffect* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QGraphicsBlurEffect_draw(QGraphicsBlurEffect* self, QPainter* painter);
-struct seaqt_string QGraphicsBlurEffect_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsBlurEffect_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGraphicsBlurEffect_trUtf82(const char* s, const char* c);
-struct seaqt_string QGraphicsBlurEffect_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsBlurEffect_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsBlurEffect_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsBlurEffect_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsBlurEffect_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsBlurEffect_virtualbase_metaObject(const VirtualQGraphicsBlurEffect* self);
 void* QGraphicsBlurEffect_virtualbase_metacast(VirtualQGraphicsBlurEffect* self, const char* param1);
@@ -294,23 +294,23 @@ void* QGraphicsDropShadowEffect_vdata(VirtualQGraphicsDropShadowEffect* self);
 VirtualQGraphicsDropShadowEffect* vdata_QGraphicsDropShadowEffect(void* vdata);
 
 VirtualQGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new(const QGraphicsDropShadowEffect_VTable* vtbl, size_t vdata);
-VirtualQGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new2(const QGraphicsDropShadowEffect_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new_parent(const QGraphicsDropShadowEffect_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QGraphicsDropShadowEffect_virtbase(QGraphicsDropShadowEffect* src, QGraphicsEffect** outptr_QGraphicsEffect);
 QMetaObject* QGraphicsDropShadowEffect_metaObject(const QGraphicsDropShadowEffect* self);
 void* QGraphicsDropShadowEffect_metacast(QGraphicsDropShadowEffect* self, const char* param1);
 int QGraphicsDropShadowEffect_metacall(QGraphicsDropShadowEffect* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsDropShadowEffect_tr(const char* s);
-struct seaqt_string QGraphicsDropShadowEffect_trUtf8(const char* s);
+struct seaqt_string QGraphicsDropShadowEffect_tr_s(const char* s);
+struct seaqt_string QGraphicsDropShadowEffect_trUtf8_s(const char* s);
 QRectF* QGraphicsDropShadowEffect_boundingRectFor(const QGraphicsDropShadowEffect* self, QRectF* rect);
 QPointF* QGraphicsDropShadowEffect_offset(const QGraphicsDropShadowEffect* self);
 double QGraphicsDropShadowEffect_xOffset(const QGraphicsDropShadowEffect* self);
 double QGraphicsDropShadowEffect_yOffset(const QGraphicsDropShadowEffect* self);
 double QGraphicsDropShadowEffect_blurRadius(const QGraphicsDropShadowEffect* self);
 QColor* QGraphicsDropShadowEffect_color(const QGraphicsDropShadowEffect* self);
-void QGraphicsDropShadowEffect_setOffset(QGraphicsDropShadowEffect* self, QPointF* ofs);
-void QGraphicsDropShadowEffect_setOffset2(QGraphicsDropShadowEffect* self, double dx, double dy);
-void QGraphicsDropShadowEffect_setOffsetWithQreal(QGraphicsDropShadowEffect* self, double d);
+void QGraphicsDropShadowEffect_setOffset_ofs(QGraphicsDropShadowEffect* self, QPointF* ofs);
+void QGraphicsDropShadowEffect_setOffset_dx_dy(QGraphicsDropShadowEffect* self, double dx, double dy);
+void QGraphicsDropShadowEffect_setOffset_d(QGraphicsDropShadowEffect* self, double d);
 void QGraphicsDropShadowEffect_setXOffset(QGraphicsDropShadowEffect* self, double dx);
 void QGraphicsDropShadowEffect_setYOffset(QGraphicsDropShadowEffect* self, double dy);
 void QGraphicsDropShadowEffect_setBlurRadius(QGraphicsDropShadowEffect* self, double blurRadius);
@@ -322,10 +322,10 @@ void QGraphicsDropShadowEffect_connect_blurRadiusChanged(QGraphicsDropShadowEffe
 void QGraphicsDropShadowEffect_colorChanged(QGraphicsDropShadowEffect* self, QColor* color);
 void QGraphicsDropShadowEffect_connect_colorChanged(QGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t));
 void QGraphicsDropShadowEffect_draw(QGraphicsDropShadowEffect* self, QPainter* painter);
-struct seaqt_string QGraphicsDropShadowEffect_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsDropShadowEffect_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGraphicsDropShadowEffect_trUtf82(const char* s, const char* c);
-struct seaqt_string QGraphicsDropShadowEffect_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsDropShadowEffect_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsDropShadowEffect_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsDropShadowEffect_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsDropShadowEffect_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsDropShadowEffect_virtualbase_metaObject(const VirtualQGraphicsDropShadowEffect* self);
 void* QGraphicsDropShadowEffect_virtualbase_metacast(VirtualQGraphicsDropShadowEffect* self, const char* param1);
@@ -376,14 +376,14 @@ void* QGraphicsOpacityEffect_vdata(VirtualQGraphicsOpacityEffect* self);
 VirtualQGraphicsOpacityEffect* vdata_QGraphicsOpacityEffect(void* vdata);
 
 VirtualQGraphicsOpacityEffect* QGraphicsOpacityEffect_new(const QGraphicsOpacityEffect_VTable* vtbl, size_t vdata);
-VirtualQGraphicsOpacityEffect* QGraphicsOpacityEffect_new2(const QGraphicsOpacityEffect_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGraphicsOpacityEffect* QGraphicsOpacityEffect_new_parent(const QGraphicsOpacityEffect_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QGraphicsOpacityEffect_virtbase(QGraphicsOpacityEffect* src, QGraphicsEffect** outptr_QGraphicsEffect);
 QMetaObject* QGraphicsOpacityEffect_metaObject(const QGraphicsOpacityEffect* self);
 void* QGraphicsOpacityEffect_metacast(QGraphicsOpacityEffect* self, const char* param1);
 int QGraphicsOpacityEffect_metacall(QGraphicsOpacityEffect* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsOpacityEffect_tr(const char* s);
-struct seaqt_string QGraphicsOpacityEffect_trUtf8(const char* s);
+struct seaqt_string QGraphicsOpacityEffect_tr_s(const char* s);
+struct seaqt_string QGraphicsOpacityEffect_trUtf8_s(const char* s);
 double QGraphicsOpacityEffect_opacity(const QGraphicsOpacityEffect* self);
 QBrush* QGraphicsOpacityEffect_opacityMask(const QGraphicsOpacityEffect* self);
 void QGraphicsOpacityEffect_setOpacity(QGraphicsOpacityEffect* self, double opacity);
@@ -393,10 +393,10 @@ void QGraphicsOpacityEffect_connect_opacityChanged(QGraphicsOpacityEffect* self,
 void QGraphicsOpacityEffect_opacityMaskChanged(QGraphicsOpacityEffect* self, QBrush* mask);
 void QGraphicsOpacityEffect_connect_opacityMaskChanged(QGraphicsOpacityEffect* self, intptr_t slot, void (*callback)(intptr_t, QBrush*), void (*release)(intptr_t));
 void QGraphicsOpacityEffect_draw(QGraphicsOpacityEffect* self, QPainter* painter);
-struct seaqt_string QGraphicsOpacityEffect_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsOpacityEffect_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGraphicsOpacityEffect_trUtf82(const char* s, const char* c);
-struct seaqt_string QGraphicsOpacityEffect_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsOpacityEffect_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsOpacityEffect_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsOpacityEffect_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsOpacityEffect_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsOpacityEffect_virtualbase_metaObject(const VirtualQGraphicsOpacityEffect* self);
 void* QGraphicsOpacityEffect_virtualbase_metacast(VirtualQGraphicsOpacityEffect* self, const char* param1);

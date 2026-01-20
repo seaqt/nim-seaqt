@@ -73,8 +73,8 @@ type cQKeySequenceEdit*{.exportc: "QKeySequenceEdit", incompleteStruct.} = objec
 proc fcQKeySequenceEdit_metaObject(self: pointer): pointer {.importc: "QKeySequenceEdit_metaObject".}
 proc fcQKeySequenceEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QKeySequenceEdit_metacast".}
 proc fcQKeySequenceEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QKeySequenceEdit_metacall".}
-proc fcQKeySequenceEdit_tr(s: cstring): struct_seaqt_string {.importc: "QKeySequenceEdit_tr".}
-proc fcQKeySequenceEdit_trUtf8(s: cstring): struct_seaqt_string {.importc: "QKeySequenceEdit_trUtf8".}
+proc fcQKeySequenceEdit_trS(s: cstring): struct_seaqt_string {.importc: "QKeySequenceEdit_tr_s".}
+proc fcQKeySequenceEdit_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QKeySequenceEdit_trUtf8_s".}
 proc fcQKeySequenceEdit_keySequence(self: pointer): pointer {.importc: "QKeySequenceEdit_keySequence".}
 proc fcQKeySequenceEdit_setKeySequence(self: pointer, keySequence: pointer): void {.importc: "QKeySequenceEdit_setKeySequence".}
 proc fcQKeySequenceEdit_clear(self: pointer): void {.importc: "QKeySequenceEdit_clear".}
@@ -82,10 +82,10 @@ proc fcQKeySequenceEdit_editingFinished(self: pointer): void {.importc: "QKeySeq
 proc fcQKeySequenceEdit_connect_editingFinished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QKeySequenceEdit_connect_editingFinished".}
 proc fcQKeySequenceEdit_keySequenceChanged(self: pointer, keySequence: pointer): void {.importc: "QKeySequenceEdit_keySequenceChanged".}
 proc fcQKeySequenceEdit_connect_keySequenceChanged(self: pointer, slot: int, callback: proc (slot: int, keySequence: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QKeySequenceEdit_connect_keySequenceChanged".}
-proc fcQKeySequenceEdit_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeySequenceEdit_tr2".}
-proc fcQKeySequenceEdit_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeySequenceEdit_tr3".}
-proc fcQKeySequenceEdit_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeySequenceEdit_trUtf82".}
-proc fcQKeySequenceEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeySequenceEdit_trUtf83".}
+proc fcQKeySequenceEdit_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeySequenceEdit_tr_s_c".}
+proc fcQKeySequenceEdit_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeySequenceEdit_tr_s_c_n".}
+proc fcQKeySequenceEdit_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeySequenceEdit_trUtf8_s_c".}
+proc fcQKeySequenceEdit_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeySequenceEdit_trUtf8_s_c_n".}
 proc fcQKeySequenceEdit_vdata(self: pointer): ptr pointer {.importc: "QKeySequenceEdit_vdata".}
 proc fvdata_cQKeySequenceEdit(self: pointer): pointer {.importc: "vdata_QKeySequenceEdit".}
 
@@ -200,10 +200,10 @@ proc fcQKeySequenceEdit_protectedbase_sender(self: pointer): pointer {.importc: 
 proc fcQKeySequenceEdit_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QKeySequenceEdit_protectedbase_senderSignalIndex".}
 proc fcQKeySequenceEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QKeySequenceEdit_protectedbase_receivers".}
 proc fcQKeySequenceEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QKeySequenceEdit_protectedbase_isSignalConnected".}
-proc fcQKeySequenceEdit_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new".}
-proc fcQKeySequenceEdit_new2(vtbl: pointer, vdata: csize_t): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new2".}
-proc fcQKeySequenceEdit_new3(vtbl: pointer, vdata: csize_t, keySequence: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new3".}
-proc fcQKeySequenceEdit_new4(vtbl: pointer, vdata: csize_t, keySequence: pointer, parent: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new4".}
+proc fcQKeySequenceEdit_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new_parent".}
+proc fcQKeySequenceEdit_new2(vtbl: pointer, vdata: csize_t): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new".}
+proc fcQKeySequenceEdit_new3(vtbl: pointer, vdata: csize_t, keySequence: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new_keySequence".}
+proc fcQKeySequenceEdit_new4(vtbl: pointer, vdata: csize_t, keySequence: pointer, parent: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new_keySequence_parent".}
 proc fcQKeySequenceEdit_staticMetaObject(): pointer {.importc: "QKeySequenceEdit_staticMetaObject".}
 
 proc metaObject*(self: gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qobjectdefs_types.QMetaObject =
@@ -216,13 +216,13 @@ proc metacall*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cint, 
   fcQKeySequenceEdit_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring): string =
-  let v_ms = fcQKeySequenceEdit_tr(s)
+  let v_ms = fcQKeySequenceEdit_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring): string =
-  let v_ms = fcQKeySequenceEdit_trUtf8(s)
+  let v_ms = fcQKeySequenceEdit_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -275,25 +275,25 @@ proc onKeySequenceChanged*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, sl
   fcQKeySequenceEdit_connect_keySequenceChanged(self.h, cast[int](addr tmp[]), fcQKeySequenceEdit_slot_callback_keySequenceChanged, fcQKeySequenceEdit_slot_callback_keySequenceChanged_release)
 
 proc tr*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQKeySequenceEdit_tr2(s, c)
+  let v_ms = fcQKeySequenceEdit_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQKeySequenceEdit_tr3(s, c, n)
+  let v_ms = fcQKeySequenceEdit_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring, c: cstring): string =
-  let v_ms = fcQKeySequenceEdit_trUtf82(s, c)
+  let v_ms = fcQKeySequenceEdit_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQKeySequenceEdit_trUtf83(s, c, n)
+  let v_ms = fcQKeySequenceEdit_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

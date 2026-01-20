@@ -692,17 +692,17 @@ public:
 	friend bool QFrame_protectedbase_isSignalConnected(const VirtualQFrame* self, QMetaMethod* signal);
 };
 
-VirtualQFrame* QFrame_new(const QFrame_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQFrame* QFrame_new_parent(const QFrame_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFrame>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFrame(vtbl, parent) : nullptr;
 }
 
-VirtualQFrame* QFrame_new2(const QFrame_VTable* vtbl, size_t vdata) {
+VirtualQFrame* QFrame_new(const QFrame_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFrame>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFrame(vtbl) : nullptr;
 }
 
-VirtualQFrame* QFrame_new3(const QFrame_VTable* vtbl, size_t vdata, QWidget* parent, int f) {
+VirtualQFrame* QFrame_new_parent_f(const QFrame_VTable* vtbl, size_t vdata, QWidget* parent, int f) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFrame>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFrame(vtbl, parent, static_cast<Qt::WindowFlags>(f)) : nullptr;
 }
@@ -723,7 +723,7 @@ int QFrame_metacall(QFrame* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFrame_tr(const char* s) {
+struct seaqt_string QFrame_tr_s(const char* s) {
 	QString _ret = QFrame::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -734,7 +734,7 @@ struct seaqt_string QFrame_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QFrame_trUtf8(const char* s) {
+struct seaqt_string QFrame_trUtf8_s(const char* s) {
 	QString _ret = QFrame::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -803,7 +803,7 @@ void QFrame_setFrameRect(QFrame* self, QRect* frameRect) {
 	self->setFrameRect(*frameRect);
 }
 
-struct seaqt_string QFrame_tr2(const char* s, const char* c) {
+struct seaqt_string QFrame_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFrame::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -814,7 +814,7 @@ struct seaqt_string QFrame_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFrame_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFrame_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFrame::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -825,7 +825,7 @@ struct seaqt_string QFrame_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QFrame_trUtf82(const char* s, const char* c) {
+struct seaqt_string QFrame_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QFrame::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -836,7 +836,7 @@ struct seaqt_string QFrame_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFrame_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QFrame_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFrame::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

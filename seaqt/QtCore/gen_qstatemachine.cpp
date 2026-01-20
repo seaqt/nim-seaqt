@@ -254,17 +254,17 @@ VirtualQStateMachine* QStateMachine_new(const QStateMachine_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQStateMachine(vtbl) : nullptr;
 }
 
-VirtualQStateMachine* QStateMachine_new2(const QStateMachine_VTable* vtbl, size_t vdata, int childMode) {
+VirtualQStateMachine* QStateMachine_new_childMode(const QStateMachine_VTable* vtbl, size_t vdata, int childMode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStateMachine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQStateMachine(vtbl, static_cast<QState::ChildMode>(childMode)) : nullptr;
 }
 
-VirtualQStateMachine* QStateMachine_new3(const QStateMachine_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQStateMachine* QStateMachine_new_parent(const QStateMachine_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStateMachine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQStateMachine(vtbl, parent) : nullptr;
 }
 
-VirtualQStateMachine* QStateMachine_new4(const QStateMachine_VTable* vtbl, size_t vdata, int childMode, QObject* parent) {
+VirtualQStateMachine* QStateMachine_new_childMode_parent(const QStateMachine_VTable* vtbl, size_t vdata, int childMode, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStateMachine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQStateMachine(vtbl, static_cast<QState::ChildMode>(childMode), parent) : nullptr;
 }
@@ -285,7 +285,7 @@ int QStateMachine_metacall(QStateMachine* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QStateMachine_tr(const char* s) {
+struct seaqt_string QStateMachine_tr_s(const char* s) {
 	QString _ret = QStateMachine::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -296,7 +296,7 @@ struct seaqt_string QStateMachine_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QStateMachine_trUtf8(const char* s) {
+struct seaqt_string QStateMachine_trUtf8_s(const char* s) {
 	QString _ret = QStateMachine::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -377,11 +377,11 @@ void QStateMachine_setGlobalRestorePolicy(QStateMachine* self, int restorePolicy
 	self->setGlobalRestorePolicy(static_cast<QState::RestorePolicy>(restorePolicy));
 }
 
-void QStateMachine_postEvent(QStateMachine* self, QEvent* event) {
+void QStateMachine_postEvent_event(QStateMachine* self, QEvent* event) {
 	self->postEvent(event);
 }
 
-int QStateMachine_postDelayedEvent(QStateMachine* self, QEvent* event, int delay) {
+int QStateMachine_postDelayedEvent_QEvent_int(QStateMachine* self, QEvent* event, int delay) {
 	return self->postDelayedEvent(event, static_cast<int>(delay));
 }
 
@@ -436,7 +436,7 @@ void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot, vo
 	QStateMachine::connect(self, static_cast<void (QStateMachine::*)(bool)>(&QStateMachine::runningChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QStateMachine_tr2(const char* s, const char* c) {
+struct seaqt_string QStateMachine_tr_s_c(const char* s, const char* c) {
 	QString _ret = QStateMachine::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -447,7 +447,7 @@ struct seaqt_string QStateMachine_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QStateMachine_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QStateMachine_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QStateMachine::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -458,7 +458,7 @@ struct seaqt_string QStateMachine_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QStateMachine_trUtf82(const char* s, const char* c) {
+struct seaqt_string QStateMachine_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QStateMachine::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -469,7 +469,7 @@ struct seaqt_string QStateMachine_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QStateMachine_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QStateMachine_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QStateMachine::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -480,7 +480,7 @@ struct seaqt_string QStateMachine_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QStateMachine_postEvent2(QStateMachine* self, QEvent* event, int priority) {
+void QStateMachine_postEvent_event_priority(QStateMachine* self, QEvent* event, int priority) {
 	self->postEvent(event, static_cast<QStateMachine::EventPriority>(priority));
 }
 
@@ -588,7 +588,7 @@ void QStateMachine_delete(QStateMachine* self) {
 	delete self;
 }
 
-QStateMachine__SignalEvent* QStateMachine__SignalEvent_new(QObject* sender, int signalIndex, struct seaqt_array /* of QVariant* */  arguments) {
+QStateMachine__SignalEvent* QStateMachine__SignalEvent_new_sender_signalIndex_arguments(QObject* sender, int signalIndex, struct seaqt_array /* of QVariant* */  arguments) {
 	QList<QVariant> arguments_QList;
 	arguments_QList.reserve(arguments.len);
 	QVariant** arguments_arr = static_cast<QVariant**>(arguments.data);
@@ -598,8 +598,8 @@ QStateMachine__SignalEvent* QStateMachine__SignalEvent_new(QObject* sender, int 
 	return new (std::nothrow) QStateMachine__SignalEvent(sender, static_cast<int>(signalIndex), arguments_QList);
 }
 
-QStateMachine__SignalEvent* QStateMachine__SignalEvent_new2(QStateMachine__SignalEvent* param1) {
-	return new (std::nothrow) QStateMachine__SignalEvent(*param1);
+QStateMachine__SignalEvent* QStateMachine__SignalEvent_new_from(QStateMachine__SignalEvent* from) {
+	return new (std::nothrow) QStateMachine__SignalEvent(*from);
 }
 
 void QStateMachine__SignalEvent_virtbase(QStateMachine__SignalEvent* src, QEvent** outptr_QEvent) {
@@ -627,20 +627,20 @@ struct seaqt_array /* of QVariant* */  QStateMachine__SignalEvent_arguments(cons
 	return _out;
 }
 
-void QStateMachine__SignalEvent_operatorAssign(QStateMachine__SignalEvent* self, QStateMachine__SignalEvent* param1) {
-	self->operator=(*param1);
+void QStateMachine__SignalEvent_operatorAssign(QStateMachine__SignalEvent* self, QStateMachine__SignalEvent* from) {
+	self->operator=(*from);
 }
 
 void QStateMachine__SignalEvent_delete(QStateMachine__SignalEvent* self) {
 	delete self;
 }
 
-QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new(QObject* object, QEvent* event) {
+QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new_object_event(QObject* object, QEvent* event) {
 	return new (std::nothrow) QStateMachine__WrappedEvent(object, event);
 }
 
-QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new2(QStateMachine__WrappedEvent* param1) {
-	return new (std::nothrow) QStateMachine__WrappedEvent(*param1);
+QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new_from(QStateMachine__WrappedEvent* from) {
+	return new (std::nothrow) QStateMachine__WrappedEvent(*from);
 }
 
 void QStateMachine__WrappedEvent_virtbase(QStateMachine__WrappedEvent* src, QEvent** outptr_QEvent) {
@@ -655,8 +655,8 @@ QEvent* QStateMachine__WrappedEvent_event(const QStateMachine__WrappedEvent* sel
 	return self->event();
 }
 
-void QStateMachine__WrappedEvent_operatorAssign(QStateMachine__WrappedEvent* self, QStateMachine__WrappedEvent* param1) {
-	self->operator=(*param1);
+void QStateMachine__WrappedEvent_operatorAssign(QStateMachine__WrappedEvent* self, QStateMachine__WrappedEvent* from) {
+	self->operator=(*from);
 }
 
 void QStateMachine__WrappedEvent_delete(QStateMachine__WrappedEvent* self) {

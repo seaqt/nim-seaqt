@@ -59,14 +59,14 @@ void* QAudioRecorder_vdata(VirtualQAudioRecorder* self);
 VirtualQAudioRecorder* vdata_QAudioRecorder(void* vdata);
 
 VirtualQAudioRecorder* QAudioRecorder_new(const QAudioRecorder_VTable* vtbl, size_t vdata);
-VirtualQAudioRecorder* QAudioRecorder_new2(const QAudioRecorder_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAudioRecorder* QAudioRecorder_new_parent(const QAudioRecorder_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAudioRecorder_virtbase(QAudioRecorder* src, QMediaRecorder** outptr_QMediaRecorder);
 QMetaObject* QAudioRecorder_metaObject(const QAudioRecorder* self);
 void* QAudioRecorder_metacast(QAudioRecorder* self, const char* param1);
 int QAudioRecorder_metacall(QAudioRecorder* self, int param1, int param2, void** param3);
-struct seaqt_string QAudioRecorder_tr(const char* s);
-struct seaqt_string QAudioRecorder_trUtf8(const char* s);
+struct seaqt_string QAudioRecorder_tr_s(const char* s);
+struct seaqt_string QAudioRecorder_trUtf8_s(const char* s);
 struct seaqt_array /* of struct seaqt_string */  QAudioRecorder_audioInputs(const QAudioRecorder* self);
 struct seaqt_string QAudioRecorder_defaultAudioInput(const QAudioRecorder* self);
 struct seaqt_string QAudioRecorder_audioInputDescription(const QAudioRecorder* self, struct seaqt_string name);
@@ -76,10 +76,10 @@ void QAudioRecorder_audioInputChanged(QAudioRecorder* self, struct seaqt_string 
 void QAudioRecorder_connect_audioInputChanged(QAudioRecorder* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
 void QAudioRecorder_availableAudioInputsChanged(QAudioRecorder* self);
 void QAudioRecorder_connect_availableAudioInputsChanged(QAudioRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QAudioRecorder_tr2(const char* s, const char* c);
-struct seaqt_string QAudioRecorder_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAudioRecorder_trUtf82(const char* s, const char* c);
-struct seaqt_string QAudioRecorder_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAudioRecorder_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAudioRecorder_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAudioRecorder_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAudioRecorder_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAudioRecorder_virtualbase_metaObject(const VirtualQAudioRecorder* self);
 void* QAudioRecorder_virtualbase_metacast(VirtualQAudioRecorder* self, const char* param1);

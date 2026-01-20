@@ -713,7 +713,7 @@ public:
 	// Wrappers to allow calling protected methods:
 	friend void QPdfSearchModel_protectedbase_updatePage(VirtualQPdfSearchModel* self, int page);
 	friend void QPdfSearchModel_protectedbase_resetInternalData(VirtualQPdfSearchModel* self);
-	friend QModelIndex* QPdfSearchModel_protectedbase_createIndex(const VirtualQPdfSearchModel* self, int row, int column);
+	friend QModelIndex* QPdfSearchModel_protectedbase_createIndex_row_column(const VirtualQPdfSearchModel* self, int row, int column);
 	friend void QPdfSearchModel_protectedbase_encodeData(const VirtualQPdfSearchModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QPdfSearchModel_protectedbase_decodeData(VirtualQPdfSearchModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QPdfSearchModel_protectedbase_beginInsertRows(VirtualQPdfSearchModel* self, QModelIndex* parent, int first, int last);
@@ -744,7 +744,7 @@ VirtualQPdfSearchModel* QPdfSearchModel_new(const QPdfSearchModel_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQPdfSearchModel(vtbl) : nullptr;
 }
 
-VirtualQPdfSearchModel* QPdfSearchModel_new2(const QPdfSearchModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPdfSearchModel* QPdfSearchModel_new_parent(const QPdfSearchModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPdfSearchModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPdfSearchModel(vtbl, parent) : nullptr;
 }
@@ -765,7 +765,7 @@ int QPdfSearchModel_metacall(QPdfSearchModel* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPdfSearchModel_tr(const char* s) {
+struct seaqt_string QPdfSearchModel_tr_s(const char* s) {
 	QString _ret = QPdfSearchModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -776,7 +776,7 @@ struct seaqt_string QPdfSearchModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QPdfSearchModel_trUtf8(const char* s) {
+struct seaqt_string QPdfSearchModel_trUtf8_s(const char* s) {
 	QString _ret = QPdfSearchModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -889,7 +889,7 @@ void QPdfSearchModel_connect_searchStringChanged(QPdfSearchModel* self, intptr_t
 	QPdfSearchModel::connect(self, static_cast<void (QPdfSearchModel::*)()>(&QPdfSearchModel::searchStringChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPdfSearchModel_tr2(const char* s, const char* c) {
+struct seaqt_string QPdfSearchModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPdfSearchModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -900,7 +900,7 @@ struct seaqt_string QPdfSearchModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfSearchModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPdfSearchModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfSearchModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -911,7 +911,7 @@ struct seaqt_string QPdfSearchModel_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QPdfSearchModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QPdfSearchModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QPdfSearchModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -922,7 +922,7 @@ struct seaqt_string QPdfSearchModel_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfSearchModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QPdfSearchModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfSearchModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1223,7 +1223,7 @@ void QPdfSearchModel_protectedbase_resetInternalData(VirtualQPdfSearchModel* sel
 	self->resetInternalData();
 }
 
-QModelIndex* QPdfSearchModel_protectedbase_createIndex(const VirtualQPdfSearchModel* self, int row, int column) {
+QModelIndex* QPdfSearchModel_protectedbase_createIndex_row_column(const VirtualQPdfSearchModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

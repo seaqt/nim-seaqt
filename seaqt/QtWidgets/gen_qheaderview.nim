@@ -93,8 +93,8 @@ type cQHeaderView*{.exportc: "QHeaderView", incompleteStruct.} = object
 proc fcQHeaderView_metaObject(self: pointer): pointer {.importc: "QHeaderView_metaObject".}
 proc fcQHeaderView_metacast(self: pointer, param1: cstring): pointer {.importc: "QHeaderView_metacast".}
 proc fcQHeaderView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHeaderView_metacall".}
-proc fcQHeaderView_tr(s: cstring): struct_seaqt_string {.importc: "QHeaderView_tr".}
-proc fcQHeaderView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QHeaderView_trUtf8".}
+proc fcQHeaderView_trS(s: cstring): struct_seaqt_string {.importc: "QHeaderView_tr_s".}
+proc fcQHeaderView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QHeaderView_trUtf8_s".}
 proc fcQHeaderView_setModel(self: pointer, model: pointer): void {.importc: "QHeaderView_setModel".}
 proc fcQHeaderView_orientation(self: pointer): cint {.importc: "QHeaderView_orientation".}
 proc fcQHeaderView_offset(self: pointer): cint {.importc: "QHeaderView_offset".}
@@ -103,16 +103,16 @@ proc fcQHeaderView_sizeHint(self: pointer): pointer {.importc: "QHeaderView_size
 proc fcQHeaderView_setVisible(self: pointer, v: bool): void {.importc: "QHeaderView_setVisible".}
 proc fcQHeaderView_sectionSizeHint(self: pointer, logicalIndex: cint): cint {.importc: "QHeaderView_sectionSizeHint".}
 proc fcQHeaderView_visualIndexAt(self: pointer, position: cint): cint {.importc: "QHeaderView_visualIndexAt".}
-proc fcQHeaderView_logicalIndexAt(self: pointer, position: cint): cint {.importc: "QHeaderView_logicalIndexAt".}
-proc fcQHeaderView_logicalIndexAt2(self: pointer, x: cint, y: cint): cint {.importc: "QHeaderView_logicalIndexAt2".}
-proc fcQHeaderView_logicalIndexAtWithPos(self: pointer, pos: pointer): cint {.importc: "QHeaderView_logicalIndexAtWithPos".}
+proc fcQHeaderView_logicalIndexAtPosition(self: pointer, position: cint): cint {.importc: "QHeaderView_logicalIndexAt_position".}
+proc fcQHeaderView_logicalIndexAtXY(self: pointer, x: cint, y: cint): cint {.importc: "QHeaderView_logicalIndexAt_x_y".}
+proc fcQHeaderView_logicalIndexAtPos(self: pointer, pos: pointer): cint {.importc: "QHeaderView_logicalIndexAt_pos".}
 proc fcQHeaderView_sectionSize(self: pointer, logicalIndex: cint): cint {.importc: "QHeaderView_sectionSize".}
 proc fcQHeaderView_sectionPosition(self: pointer, logicalIndex: cint): cint {.importc: "QHeaderView_sectionPosition".}
 proc fcQHeaderView_sectionViewportPosition(self: pointer, logicalIndex: cint): cint {.importc: "QHeaderView_sectionViewportPosition".}
 proc fcQHeaderView_moveSection(self: pointer, fromVal: cint, to: cint): void {.importc: "QHeaderView_moveSection".}
 proc fcQHeaderView_swapSections(self: pointer, first: cint, second: cint): void {.importc: "QHeaderView_swapSections".}
 proc fcQHeaderView_resizeSection(self: pointer, logicalIndex: cint, size: cint): void {.importc: "QHeaderView_resizeSection".}
-proc fcQHeaderView_resizeSections(self: pointer, mode: cint): void {.importc: "QHeaderView_resizeSections".}
+proc fcQHeaderView_resizeSectionsMode(self: pointer, mode: cint): void {.importc: "QHeaderView_resizeSections_mode".}
 proc fcQHeaderView_isSectionHidden(self: pointer, logicalIndex: cint): bool {.importc: "QHeaderView_isSectionHidden".}
 proc fcQHeaderView_setSectionHidden(self: pointer, logicalIndex: cint, hide: bool): void {.importc: "QHeaderView_setSectionHidden".}
 proc fcQHeaderView_hiddenSectionCount(self: pointer): cint {.importc: "QHeaderView_hiddenSectionCount".}
@@ -130,8 +130,8 @@ proc fcQHeaderView_sectionsClickable(self: pointer): bool {.importc: "QHeaderVie
 proc fcQHeaderView_setHighlightSections(self: pointer, highlight: bool): void {.importc: "QHeaderView_setHighlightSections".}
 proc fcQHeaderView_highlightSections(self: pointer): bool {.importc: "QHeaderView_highlightSections".}
 proc fcQHeaderView_sectionResizeMode(self: pointer, logicalIndex: cint): cint {.importc: "QHeaderView_sectionResizeMode".}
-proc fcQHeaderView_setSectionResizeMode(self: pointer, mode: cint): void {.importc: "QHeaderView_setSectionResizeMode".}
-proc fcQHeaderView_setSectionResizeMode2(self: pointer, logicalIndex: cint, mode: cint): void {.importc: "QHeaderView_setSectionResizeMode2".}
+proc fcQHeaderView_setSectionResizeModeMode(self: pointer, mode: cint): void {.importc: "QHeaderView_setSectionResizeMode_mode".}
+proc fcQHeaderView_setSectionResizeModeLogicalIndexMode(self: pointer, logicalIndex: cint, mode: cint): void {.importc: "QHeaderView_setSectionResizeMode_logicalIndex_mode".}
 proc fcQHeaderView_setResizeContentsPrecision(self: pointer, precision: cint): void {.importc: "QHeaderView_setResizeContentsPrecision".}
 proc fcQHeaderView_resizeContentsPrecision(self: pointer): cint {.importc: "QHeaderView_resizeContentsPrecision".}
 proc fcQHeaderView_stretchSectionCount(self: pointer): cint {.importc: "QHeaderView_stretchSectionCount".}
@@ -183,10 +183,10 @@ proc fcQHeaderView_geometriesChanged(self: pointer): void {.importc: "QHeaderVie
 proc fcQHeaderView_connect_geometriesChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QHeaderView_connect_geometriesChanged".}
 proc fcQHeaderView_sortIndicatorChanged(self: pointer, logicalIndex: cint, order: cint): void {.importc: "QHeaderView_sortIndicatorChanged".}
 proc fcQHeaderView_connect_sortIndicatorChanged(self: pointer, slot: int, callback: proc (slot: int, logicalIndex: cint, order: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QHeaderView_connect_sortIndicatorChanged".}
-proc fcQHeaderView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHeaderView_tr2".}
-proc fcQHeaderView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHeaderView_tr3".}
-proc fcQHeaderView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHeaderView_trUtf82".}
-proc fcQHeaderView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHeaderView_trUtf83".}
+proc fcQHeaderView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHeaderView_tr_s_c".}
+proc fcQHeaderView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHeaderView_tr_s_c_n".}
+proc fcQHeaderView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHeaderView_trUtf8_s_c".}
+proc fcQHeaderView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHeaderView_trUtf8_s_c_n".}
 proc fcQHeaderView_vdata(self: pointer): ptr pointer {.importc: "QHeaderView_vdata".}
 proc fvdata_cQHeaderView(self: pointer): pointer {.importc: "vdata_QHeaderView".}
 
@@ -242,7 +242,7 @@ type cQHeaderViewVTable {.pure.} = object
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   selectedIndexes*: proc(self: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   startDrag*: proc(self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
   viewOptions*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -336,7 +336,7 @@ proc fcQHeaderView_virtualbase_closeEditor(self: pointer, editor: pointer, hint:
 proc fcQHeaderView_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QHeaderView_virtualbase_commitData".}
 proc fcQHeaderView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QHeaderView_virtualbase_editorDestroyed".}
 proc fcQHeaderView_virtualbase_selectedIndexes(self: pointer): struct_seaqt_array {.importc: "QHeaderView_virtualbase_selectedIndexes".}
-proc fcQHeaderView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QHeaderView_virtualbase_edit2".}
+proc fcQHeaderView_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QHeaderView_virtualbase_edit_index_trigger_event".}
 proc fcQHeaderView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QHeaderView_virtualbase_selectionCommand".}
 proc fcQHeaderView_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QHeaderView_virtualbase_startDrag".}
 proc fcQHeaderView_virtualbase_viewOptions(self: pointer): pointer {.importc: "QHeaderView_virtualbase_viewOptions".}
@@ -381,12 +381,12 @@ proc fcQHeaderView_virtualbase_customEvent(self: pointer, event: pointer): void 
 proc fcQHeaderView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QHeaderView_virtualbase_connectNotify".}
 proc fcQHeaderView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QHeaderView_virtualbase_disconnectNotify".}
 proc fcQHeaderView_protectedbase_updateSection(self: pointer, logicalIndex: cint): void {.importc: "QHeaderView_protectedbase_updateSection".}
-proc fcQHeaderView_protectedbase_resizeSections2(self: pointer): void {.importc: "QHeaderView_protectedbase_resizeSections2".}
+proc fcQHeaderView_protectedbase_resizeSections(self: pointer): void {.importc: "QHeaderView_protectedbase_resizeSections".}
 proc fcQHeaderView_protectedbase_sectionsInserted(self: pointer, parent: pointer, logicalFirst: cint, logicalLast: cint): void {.importc: "QHeaderView_protectedbase_sectionsInserted".}
 proc fcQHeaderView_protectedbase_sectionsAboutToBeRemoved(self: pointer, parent: pointer, logicalFirst: cint, logicalLast: cint): void {.importc: "QHeaderView_protectedbase_sectionsAboutToBeRemoved".}
 proc fcQHeaderView_protectedbase_initialize(self: pointer): void {.importc: "QHeaderView_protectedbase_initialize".}
 proc fcQHeaderView_protectedbase_initializeSections(self: pointer): void {.importc: "QHeaderView_protectedbase_initializeSections".}
-proc fcQHeaderView_protectedbase_initializeSections2(self: pointer, start: cint, endVal: cint): void {.importc: "QHeaderView_protectedbase_initializeSections2".}
+proc fcQHeaderView_protectedbase_initializeSections_start_end(self: pointer, start: cint, endVal: cint): void {.importc: "QHeaderView_protectedbase_initializeSections_start_end".}
 proc fcQHeaderView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QHeaderView_protectedbase_initStyleOption".}
 proc fcQHeaderView_protectedbase_setHorizontalStepsPerItem(self: pointer, steps: cint): void {.importc: "QHeaderView_protectedbase_setHorizontalStepsPerItem".}
 proc fcQHeaderView_protectedbase_horizontalStepsPerItem(self: pointer): cint {.importc: "QHeaderView_protectedbase_horizontalStepsPerItem".}
@@ -403,7 +403,7 @@ proc fcQHeaderView_protectedbase_startAutoScroll(self: pointer): void {.importc:
 proc fcQHeaderView_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QHeaderView_protectedbase_stopAutoScroll".}
 proc fcQHeaderView_protectedbase_doAutoScroll(self: pointer): void {.importc: "QHeaderView_protectedbase_doAutoScroll".}
 proc fcQHeaderView_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QHeaderView_protectedbase_dropIndicatorPosition".}
-proc fcQHeaderView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QHeaderView_protectedbase_setViewportMargins".}
+proc fcQHeaderView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QHeaderView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQHeaderView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QHeaderView_protectedbase_viewportMargins".}
 proc fcQHeaderView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QHeaderView_protectedbase_drawFrame".}
 proc fcQHeaderView_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QHeaderView_protectedbase_updateMicroFocus".}
@@ -415,8 +415,8 @@ proc fcQHeaderView_protectedbase_sender(self: pointer): pointer {.importc: "QHea
 proc fcQHeaderView_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QHeaderView_protectedbase_senderSignalIndex".}
 proc fcQHeaderView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QHeaderView_protectedbase_receivers".}
 proc fcQHeaderView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QHeaderView_protectedbase_isSignalConnected".}
-proc fcQHeaderView_new(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQHeaderView {.importc: "QHeaderView_new".}
-proc fcQHeaderView_new2(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQHeaderView {.importc: "QHeaderView_new2".}
+proc fcQHeaderView_new(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQHeaderView {.importc: "QHeaderView_new_orientation".}
+proc fcQHeaderView_new2(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQHeaderView {.importc: "QHeaderView_new_orientation_parent".}
 proc fcQHeaderView_staticMetaObject(): pointer {.importc: "QHeaderView_staticMetaObject".}
 
 proc metaObject*(self: gen_qheaderview_types.QHeaderView): gen_qobjectdefs_types.QMetaObject =
@@ -429,13 +429,13 @@ proc metacall*(self: gen_qheaderview_types.QHeaderView, param1: cint, param2: ci
   fcQHeaderView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qheaderview_types.QHeaderView, s: cstring): string =
-  let v_ms = fcQHeaderView_tr(s)
+  let v_ms = fcQHeaderView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qheaderview_types.QHeaderView, s: cstring): string =
-  let v_ms = fcQHeaderView_trUtf8(s)
+  let v_ms = fcQHeaderView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -465,13 +465,13 @@ proc visualIndexAt*(self: gen_qheaderview_types.QHeaderView, position: cint): ci
   fcQHeaderView_visualIndexAt(self.h, position)
 
 proc logicalIndexAt*(self: gen_qheaderview_types.QHeaderView, position: cint): cint =
-  fcQHeaderView_logicalIndexAt(self.h, position)
+  fcQHeaderView_logicalIndexAtPosition(self.h, position)
 
 proc logicalIndexAt*(self: gen_qheaderview_types.QHeaderView, x: cint, y: cint): cint =
-  fcQHeaderView_logicalIndexAt2(self.h, x, y)
+  fcQHeaderView_logicalIndexAtXY(self.h, x, y)
 
 proc logicalIndexAt*(self: gen_qheaderview_types.QHeaderView, pos: gen_qpoint_types.QPoint): cint =
-  fcQHeaderView_logicalIndexAtWithPos(self.h, pos.h)
+  fcQHeaderView_logicalIndexAtPos(self.h, pos.h)
 
 proc sectionSize*(self: gen_qheaderview_types.QHeaderView, logicalIndex: cint): cint =
   fcQHeaderView_sectionSize(self.h, logicalIndex)
@@ -492,7 +492,7 @@ proc resizeSection*(self: gen_qheaderview_types.QHeaderView, logicalIndex: cint,
   fcQHeaderView_resizeSection(self.h, logicalIndex, size)
 
 proc resizeSections*(self: gen_qheaderview_types.QHeaderView, mode: cint): void =
-  fcQHeaderView_resizeSections(self.h, cint(mode))
+  fcQHeaderView_resizeSectionsMode(self.h, cint(mode))
 
 proc isSectionHidden*(self: gen_qheaderview_types.QHeaderView, logicalIndex: cint): bool =
   fcQHeaderView_isSectionHidden(self.h, logicalIndex)
@@ -546,10 +546,10 @@ proc sectionResizeMode*(self: gen_qheaderview_types.QHeaderView, logicalIndex: c
   cint(fcQHeaderView_sectionResizeMode(self.h, logicalIndex))
 
 proc setSectionResizeMode*(self: gen_qheaderview_types.QHeaderView, mode: cint): void =
-  fcQHeaderView_setSectionResizeMode(self.h, cint(mode))
+  fcQHeaderView_setSectionResizeModeMode(self.h, cint(mode))
 
 proc setSectionResizeMode*(self: gen_qheaderview_types.QHeaderView, logicalIndex: cint, mode: cint): void =
-  fcQHeaderView_setSectionResizeMode2(self.h, logicalIndex, cint(mode))
+  fcQHeaderView_setSectionResizeModeLogicalIndexMode(self.h, logicalIndex, cint(mode))
 
 proc setResizeContentsPrecision*(self: gen_qheaderview_types.QHeaderView, precision: cint): void =
   fcQHeaderView_setResizeContentsPrecision(self.h, precision)
@@ -858,25 +858,25 @@ proc onSortIndicatorChanged*(self: gen_qheaderview_types.QHeaderView, slot: QHea
   fcQHeaderView_connect_sortIndicatorChanged(self.h, cast[int](addr tmp[]), fcQHeaderView_slot_callback_sortIndicatorChanged, fcQHeaderView_slot_callback_sortIndicatorChanged_release)
 
 proc tr*(_: type gen_qheaderview_types.QHeaderView, s: cstring, c: cstring): string =
-  let v_ms = fcQHeaderView_tr2(s, c)
+  let v_ms = fcQHeaderView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qheaderview_types.QHeaderView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQHeaderView_tr3(s, c, n)
+  let v_ms = fcQHeaderView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qheaderview_types.QHeaderView, s: cstring, c: cstring): string =
-  let v_ms = fcQHeaderView_trUtf82(s, c)
+  let v_ms = fcQHeaderView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qheaderview_types.QHeaderView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQHeaderView_trUtf83(s, c, n)
+  let v_ms = fcQHeaderView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -931,7 +931,7 @@ type QHeaderViewcloseEditorProc* = proc(self: QHeaderView, editor: gen_qwidget_t
 type QHeaderViewcommitDataProc* = proc(self: QHeaderView, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QHeaderVieweditorDestroyedProc* = proc(self: QHeaderView, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
 type QHeaderViewselectedIndexesProc* = proc(self: QHeaderView): seq[gen_qabstractitemmodel_types.QModelIndex] {.raises: [], gcsafe.}
-type QHeaderViewedit2Proc* = proc(self: QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QHeaderVieweditIndexTriggerEventProc* = proc(self: QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QHeaderViewselectionCommandProc* = proc(self: QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QHeaderViewstartDragProc* = proc(self: QHeaderView, supportedActions: cint): void {.raises: [], gcsafe.}
 type QHeaderViewviewOptionsProc* = proc(self: QHeaderView): gen_qstyleoption_types.QStyleOptionViewItem {.raises: [], gcsafe.}
@@ -1028,7 +1028,7 @@ type QHeaderViewVTable* {.inheritable, pure.} = object
   commitData*: QHeaderViewcommitDataProc
   editorDestroyed*: QHeaderVieweditorDestroyedProc
   selectedIndexes*: QHeaderViewselectedIndexesProc
-  edit2*: QHeaderViewedit2Proc
+  editIndexTriggerEvent*: QHeaderVieweditIndexTriggerEventProc
   selectionCommand*: QHeaderViewselectionCommandProc
   startDrag*: QHeaderViewstartDragProc
   viewOptions*: QHeaderViewviewOptionsProc
@@ -1234,7 +1234,7 @@ proc QHeaderViewselectedIndexes*(self: gen_qheaderview_types.QHeaderView): seq[g
   vx_ret
 
 proc QHeaderViewedit*(self: gen_qheaderview_types.QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQHeaderView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQHeaderView_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QHeaderViewselectionCommand*(self: gen_qheaderview_types.QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQHeaderView_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -1730,13 +1730,13 @@ proc fcQHeaderView_vtable_callback_selectedIndexes(self: pointer): struct_seaqt_
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc fcQHeaderView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQHeaderView_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](fcQHeaderView_vdata(self)[])
   let self = QHeaderView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQHeaderView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -2535,7 +2535,7 @@ proc fcQHeaderView_method_callback_selectedIndexes(self: pointer): struct_seaqt_
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc fcQHeaderView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQHeaderView_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQHeaderView](fcQHeaderView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2795,7 +2795,7 @@ proc updateSection*(self: gen_qheaderview_types.QHeaderView, logicalIndex: cint)
   fcQHeaderView_protectedbase_updateSection(self.h, logicalIndex)
 
 proc resizeSections*(self: gen_qheaderview_types.QHeaderView): void =
-  fcQHeaderView_protectedbase_resizeSections2(self.h)
+  fcQHeaderView_protectedbase_resizeSections(self.h)
 
 proc sectionsInserted*(self: gen_qheaderview_types.QHeaderView, parent: gen_qabstractitemmodel_types.QModelIndex, logicalFirst: cint, logicalLast: cint): void =
   fcQHeaderView_protectedbase_sectionsInserted(self.h, parent.h, logicalFirst, logicalLast)
@@ -2810,7 +2810,7 @@ proc initializeSections*(self: gen_qheaderview_types.QHeaderView): void =
   fcQHeaderView_protectedbase_initializeSections(self.h)
 
 proc initializeSections*(self: gen_qheaderview_types.QHeaderView, start: cint, endVal: cint): void =
-  fcQHeaderView_protectedbase_initializeSections2(self.h, start, endVal)
+  fcQHeaderView_protectedbase_initializeSections_start_end(self.h, start, endVal)
 
 proc initStyleOption*(self: gen_qheaderview_types.QHeaderView, option: gen_qstyleoption_types.QStyleOptionHeader): void =
   fcQHeaderView_protectedbase_initStyleOption(self.h, option.h)
@@ -2861,7 +2861,7 @@ proc dropIndicatorPosition*(self: gen_qheaderview_types.QHeaderView): cint =
   cint(fcQHeaderView_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qheaderview_types.QHeaderView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQHeaderView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQHeaderView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qheaderview_types.QHeaderView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQHeaderView_protectedbase_viewportMargins(self.h), owned: true)
@@ -3004,8 +3004,8 @@ proc create*(T: type gen_qheaderview_types.QHeaderView,
     vtbl[].vtbl.editorDestroyed = fcQHeaderView_vtable_callback_editorDestroyed
   if not isNil(vtbl[].selectedIndexes):
     vtbl[].vtbl.selectedIndexes = fcQHeaderView_vtable_callback_selectedIndexes
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQHeaderView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQHeaderView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQHeaderView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -3203,8 +3203,8 @@ proc create*(T: type gen_qheaderview_types.QHeaderView,
     vtbl[].vtbl.editorDestroyed = fcQHeaderView_vtable_callback_editorDestroyed
   if not isNil(vtbl[].selectedIndexes):
     vtbl[].vtbl.selectedIndexes = fcQHeaderView_vtable_callback_selectedIndexes
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQHeaderView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQHeaderView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQHeaderView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -3350,7 +3350,7 @@ const cQHeaderView_mvtbl = cQHeaderViewVTable(
   commitData: fcQHeaderView_method_callback_commitData,
   editorDestroyed: fcQHeaderView_method_callback_editorDestroyed,
   selectedIndexes: fcQHeaderView_method_callback_selectedIndexes,
-  edit2: fcQHeaderView_method_callback_edit2,
+  editIndexTriggerEvent: fcQHeaderView_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQHeaderView_method_callback_selectionCommand,
   startDrag: fcQHeaderView_method_callback_startDrag,
   viewOptions: fcQHeaderView_method_callback_viewOptions,

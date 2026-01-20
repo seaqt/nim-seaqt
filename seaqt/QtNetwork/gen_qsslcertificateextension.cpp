@@ -20,12 +20,12 @@ QSslCertificateExtension* QSslCertificateExtension_new() {
 	return new (std::nothrow) QSslCertificateExtension();
 }
 
-QSslCertificateExtension* QSslCertificateExtension_new2(QSslCertificateExtension* other) {
-	return new (std::nothrow) QSslCertificateExtension(*other);
+QSslCertificateExtension* QSslCertificateExtension_new_from(QSslCertificateExtension* from) {
+	return new (std::nothrow) QSslCertificateExtension(*from);
 }
 
-void QSslCertificateExtension_operatorAssign(QSslCertificateExtension* self, QSslCertificateExtension* other) {
-	self->operator=(*other);
+void QSslCertificateExtension_operatorAssign(QSslCertificateExtension* self, QSslCertificateExtension* from) {
+	self->operator=(*from);
 }
 
 void QSslCertificateExtension_swap(QSslCertificateExtension* self, QSslCertificateExtension* other) {

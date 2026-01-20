@@ -96,8 +96,8 @@ type cQFrame*{.exportc: "QFrame", incompleteStruct.} = object
 proc fcQFrame_metaObject(self: pointer): pointer {.importc: "QFrame_metaObject".}
 proc fcQFrame_metacast(self: pointer, param1: cstring): pointer {.importc: "QFrame_metacast".}
 proc fcQFrame_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFrame_metacall".}
-proc fcQFrame_tr(s: cstring): struct_seaqt_string {.importc: "QFrame_tr".}
-proc fcQFrame_trUtf8(s: cstring): struct_seaqt_string {.importc: "QFrame_trUtf8".}
+proc fcQFrame_trS(s: cstring): struct_seaqt_string {.importc: "QFrame_tr_s".}
+proc fcQFrame_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QFrame_trUtf8_s".}
 proc fcQFrame_frameStyle(self: pointer): cint {.importc: "QFrame_frameStyle".}
 proc fcQFrame_setFrameStyle(self: pointer, frameStyle: cint): void {.importc: "QFrame_setFrameStyle".}
 proc fcQFrame_frameWidth(self: pointer): cint {.importc: "QFrame_frameWidth".}
@@ -112,10 +112,10 @@ proc fcQFrame_midLineWidth(self: pointer): cint {.importc: "QFrame_midLineWidth"
 proc fcQFrame_setMidLineWidth(self: pointer, midLineWidth: cint): void {.importc: "QFrame_setMidLineWidth".}
 proc fcQFrame_frameRect(self: pointer): pointer {.importc: "QFrame_frameRect".}
 proc fcQFrame_setFrameRect(self: pointer, frameRect: pointer): void {.importc: "QFrame_setFrameRect".}
-proc fcQFrame_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFrame_tr2".}
-proc fcQFrame_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFrame_tr3".}
-proc fcQFrame_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFrame_trUtf82".}
-proc fcQFrame_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFrame_trUtf83".}
+proc fcQFrame_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFrame_tr_s_c".}
+proc fcQFrame_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFrame_tr_s_c_n".}
+proc fcQFrame_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFrame_trUtf8_s_c".}
+proc fcQFrame_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFrame_trUtf8_s_c_n".}
 proc fcQFrame_vdata(self: pointer): ptr pointer {.importc: "QFrame_vdata".}
 proc fvdata_cQFrame(self: pointer): pointer {.importc: "vdata_QFrame".}
 
@@ -232,9 +232,9 @@ proc fcQFrame_protectedbase_sender(self: pointer): pointer {.importc: "QFrame_pr
 proc fcQFrame_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QFrame_protectedbase_senderSignalIndex".}
 proc fcQFrame_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFrame_protectedbase_receivers".}
 proc fcQFrame_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFrame_protectedbase_isSignalConnected".}
-proc fcQFrame_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFrame {.importc: "QFrame_new".}
-proc fcQFrame_new2(vtbl: pointer, vdata: csize_t): ptr cQFrame {.importc: "QFrame_new2".}
-proc fcQFrame_new3(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQFrame {.importc: "QFrame_new3".}
+proc fcQFrame_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFrame {.importc: "QFrame_new_parent".}
+proc fcQFrame_new2(vtbl: pointer, vdata: csize_t): ptr cQFrame {.importc: "QFrame_new".}
+proc fcQFrame_new3(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQFrame {.importc: "QFrame_new_parent_f".}
 proc fcQFrame_staticMetaObject(): pointer {.importc: "QFrame_staticMetaObject".}
 
 proc metaObject*(self: gen_qframe_types.QFrame): gen_qobjectdefs_types.QMetaObject =
@@ -247,13 +247,13 @@ proc metacall*(self: gen_qframe_types.QFrame, param1: cint, param2: cint, param3
   fcQFrame_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qframe_types.QFrame, s: cstring): string =
-  let v_ms = fcQFrame_tr(s)
+  let v_ms = fcQFrame_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qframe_types.QFrame, s: cstring): string =
-  let v_ms = fcQFrame_trUtf8(s)
+  let v_ms = fcQFrame_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -301,25 +301,25 @@ proc setFrameRect*(self: gen_qframe_types.QFrame, frameRect: gen_qrect_types.QRe
   fcQFrame_setFrameRect(self.h, frameRect.h)
 
 proc tr*(_: type gen_qframe_types.QFrame, s: cstring, c: cstring): string =
-  let v_ms = fcQFrame_tr2(s, c)
+  let v_ms = fcQFrame_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qframe_types.QFrame, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFrame_tr3(s, c, n)
+  let v_ms = fcQFrame_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qframe_types.QFrame, s: cstring, c: cstring): string =
-  let v_ms = fcQFrame_trUtf82(s, c)
+  let v_ms = fcQFrame_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qframe_types.QFrame, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFrame_trUtf83(s, c, n)
+  let v_ms = fcQFrame_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

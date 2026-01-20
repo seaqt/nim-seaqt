@@ -37,8 +37,8 @@ QSize* QSurface_size(const QSurface* self) {
 	return new QSize(self->size());
 }
 
-void QSurface_operatorAssign(QSurface* self, QSurface* param1) {
-	self->operator=(*param1);
+void QSurface_operatorAssign(QSurface* self, QSurface* from) {
+	self->operator=(*from);
 }
 
 const QMetaObject* QSurface_staticMetaObject() { return &QSurface::staticMetaObject; }

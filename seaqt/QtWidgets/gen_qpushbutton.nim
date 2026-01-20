@@ -79,8 +79,8 @@ type cQPushButton*{.exportc: "QPushButton", incompleteStruct.} = object
 proc fcQPushButton_metaObject(self: pointer): pointer {.importc: "QPushButton_metaObject".}
 proc fcQPushButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QPushButton_metacast".}
 proc fcQPushButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPushButton_metacall".}
-proc fcQPushButton_tr(s: cstring): struct_seaqt_string {.importc: "QPushButton_tr".}
-proc fcQPushButton_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPushButton_trUtf8".}
+proc fcQPushButton_trS(s: cstring): struct_seaqt_string {.importc: "QPushButton_tr_s".}
+proc fcQPushButton_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPushButton_trUtf8_s".}
 proc fcQPushButton_sizeHint(self: pointer): pointer {.importc: "QPushButton_sizeHint".}
 proc fcQPushButton_minimumSizeHint(self: pointer): pointer {.importc: "QPushButton_minimumSizeHint".}
 proc fcQPushButton_autoDefault(self: pointer): bool {.importc: "QPushButton_autoDefault".}
@@ -92,10 +92,10 @@ proc fcQPushButton_menu(self: pointer): pointer {.importc: "QPushButton_menu".}
 proc fcQPushButton_setFlat(self: pointer, flat: bool): void {.importc: "QPushButton_setFlat".}
 proc fcQPushButton_isFlat(self: pointer): bool {.importc: "QPushButton_isFlat".}
 proc fcQPushButton_showMenu(self: pointer): void {.importc: "QPushButton_showMenu".}
-proc fcQPushButton_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPushButton_tr2".}
-proc fcQPushButton_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPushButton_tr3".}
-proc fcQPushButton_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPushButton_trUtf82".}
-proc fcQPushButton_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPushButton_trUtf83".}
+proc fcQPushButton_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPushButton_tr_s_c".}
+proc fcQPushButton_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPushButton_tr_s_c_n".}
+proc fcQPushButton_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPushButton_trUtf8_s_c".}
+proc fcQPushButton_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPushButton_trUtf8_s_c_n".}
 proc fcQPushButton_vdata(self: pointer): ptr pointer {.importc: "QPushButton_vdata".}
 proc fvdata_cQPushButton(self: pointer): pointer {.importc: "vdata_QPushButton".}
 
@@ -217,12 +217,12 @@ proc fcQPushButton_protectedbase_sender(self: pointer): pointer {.importc: "QPus
 proc fcQPushButton_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QPushButton_protectedbase_senderSignalIndex".}
 proc fcQPushButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPushButton_protectedbase_receivers".}
 proc fcQPushButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPushButton_protectedbase_isSignalConnected".}
-proc fcQPushButton_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new".}
-proc fcQPushButton_new2(vtbl: pointer, vdata: csize_t): ptr cQPushButton {.importc: "QPushButton_new2".}
-proc fcQPushButton_new3(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQPushButton {.importc: "QPushButton_new3".}
-proc fcQPushButton_new4(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQPushButton {.importc: "QPushButton_new4".}
-proc fcQPushButton_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new5".}
-proc fcQPushButton_new6(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new6".}
+proc fcQPushButton_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new_parent".}
+proc fcQPushButton_new2(vtbl: pointer, vdata: csize_t): ptr cQPushButton {.importc: "QPushButton_new".}
+proc fcQPushButton_new3(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQPushButton {.importc: "QPushButton_new_text".}
+proc fcQPushButton_new4(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQPushButton {.importc: "QPushButton_new_icon_text".}
+proc fcQPushButton_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new_text_parent".}
+proc fcQPushButton_new6(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new_icon_text_parent".}
 proc fcQPushButton_staticMetaObject(): pointer {.importc: "QPushButton_staticMetaObject".}
 
 proc metaObject*(self: gen_qpushbutton_types.QPushButton): gen_qobjectdefs_types.QMetaObject =
@@ -235,13 +235,13 @@ proc metacall*(self: gen_qpushbutton_types.QPushButton, param1: cint, param2: ci
   fcQPushButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpushbutton_types.QPushButton, s: cstring): string =
-  let v_ms = fcQPushButton_tr(s)
+  let v_ms = fcQPushButton_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpushbutton_types.QPushButton, s: cstring): string =
-  let v_ms = fcQPushButton_trUtf8(s)
+  let v_ms = fcQPushButton_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -280,25 +280,25 @@ proc showMenu*(self: gen_qpushbutton_types.QPushButton): void =
   fcQPushButton_showMenu(self.h)
 
 proc tr*(_: type gen_qpushbutton_types.QPushButton, s: cstring, c: cstring): string =
-  let v_ms = fcQPushButton_tr2(s, c)
+  let v_ms = fcQPushButton_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpushbutton_types.QPushButton, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPushButton_tr3(s, c, n)
+  let v_ms = fcQPushButton_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpushbutton_types.QPushButton, s: cstring, c: cstring): string =
-  let v_ms = fcQPushButton_trUtf82(s, c)
+  let v_ms = fcQPushButton_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpushbutton_types.QPushButton, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPushButton_trUtf83(s, c, n)
+  let v_ms = fcQPushButton_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

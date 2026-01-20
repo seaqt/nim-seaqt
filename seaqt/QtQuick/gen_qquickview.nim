@@ -96,8 +96,8 @@ type cQQuickView*{.exportc: "QQuickView", incompleteStruct.} = object
 proc fcQQuickView_metaObject(self: pointer): pointer {.importc: "QQuickView_metaObject".}
 proc fcQQuickView_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickView_metacast".}
 proc fcQQuickView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickView_metacall".}
-proc fcQQuickView_tr(s: cstring): struct_seaqt_string {.importc: "QQuickView_tr".}
-proc fcQQuickView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQuickView_trUtf8".}
+proc fcQQuickView_trS(s: cstring): struct_seaqt_string {.importc: "QQuickView_tr_s".}
+proc fcQQuickView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQuickView_trUtf8_s".}
 proc fcQQuickView_source(self: pointer): pointer {.importc: "QQuickView_source".}
 proc fcQQuickView_engine(self: pointer): pointer {.importc: "QQuickView_engine".}
 proc fcQQuickView_rootContext(self: pointer): pointer {.importc: "QQuickView_rootContext".}
@@ -113,10 +113,10 @@ proc fcQQuickView_setInitialProperties(self: pointer, initialProperties: struct_
 proc fcQQuickView_setContent(self: pointer, url: pointer, component: pointer, item: pointer): void {.importc: "QQuickView_setContent".}
 proc fcQQuickView_statusChanged(self: pointer, param1: cint): void {.importc: "QQuickView_statusChanged".}
 proc fcQQuickView_connect_statusChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickView_connect_statusChanged".}
-proc fcQQuickView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickView_tr2".}
-proc fcQQuickView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickView_tr3".}
-proc fcQQuickView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickView_trUtf82".}
-proc fcQQuickView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickView_trUtf83".}
+proc fcQQuickView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickView_tr_s_c".}
+proc fcQQuickView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickView_tr_s_c_n".}
+proc fcQQuickView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickView_trUtf8_s_c".}
+proc fcQQuickView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickView_trUtf8_s_c_n".}
 proc fcQQuickView_vdata(self: pointer): ptr pointer {.importc: "QQuickView_vdata".}
 proc fvdata_cQQuickView(self: pointer): pointer {.importc: "vdata_QQuickView".}
 
@@ -191,11 +191,11 @@ proc fcQQuickView_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQQuickView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickView_protectedbase_receivers".}
 proc fcQQuickView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickView_protectedbase_isSignalConnected".}
 proc fcQQuickView_new(vtbl: pointer, vdata: csize_t): ptr cQQuickView {.importc: "QQuickView_new".}
-proc fcQQuickView_new2(vtbl: pointer, vdata: csize_t, engine: pointer, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new2".}
-proc fcQQuickView_new3(vtbl: pointer, vdata: csize_t, source: pointer): ptr cQQuickView {.importc: "QQuickView_new3".}
-proc fcQQuickView_new4(vtbl: pointer, vdata: csize_t, source: pointer, renderControl: pointer): ptr cQQuickView {.importc: "QQuickView_new4".}
-proc fcQQuickView_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new5".}
-proc fcQQuickView_new6(vtbl: pointer, vdata: csize_t, source: pointer, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new6".}
+proc fcQQuickView_new2(vtbl: pointer, vdata: csize_t, engine: pointer, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new_engine_parent".}
+proc fcQQuickView_new3(vtbl: pointer, vdata: csize_t, source: pointer): ptr cQQuickView {.importc: "QQuickView_new_source".}
+proc fcQQuickView_new4(vtbl: pointer, vdata: csize_t, source: pointer, renderControl: pointer): ptr cQQuickView {.importc: "QQuickView_new_source_renderControl".}
+proc fcQQuickView_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new_parent".}
+proc fcQQuickView_new6(vtbl: pointer, vdata: csize_t, source: pointer, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new_source_parent".}
 proc fcQQuickView_staticMetaObject(): pointer {.importc: "QQuickView_staticMetaObject".}
 
 proc metaObject*(self: gen_qquickview_types.QQuickView): gen_qobjectdefs_types.QMetaObject =
@@ -208,13 +208,13 @@ proc metacall*(self: gen_qquickview_types.QQuickView, param1: cint, param2: cint
   fcQQuickView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickview_types.QQuickView, s: cstring): string =
-  let v_ms = fcQQuickView_tr(s)
+  let v_ms = fcQQuickView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickview_types.QQuickView, s: cstring): string =
-  let v_ms = fcQQuickView_trUtf8(s)
+  let v_ms = fcQQuickView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -296,25 +296,25 @@ proc onStatusChanged*(self: gen_qquickview_types.QQuickView, slot: QQuickViewsta
   fcQQuickView_connect_statusChanged(self.h, cast[int](addr tmp[]), fcQQuickView_slot_callback_statusChanged, fcQQuickView_slot_callback_statusChanged_release)
 
 proc tr*(_: type gen_qquickview_types.QQuickView, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickView_tr2(s, c)
+  let v_ms = fcQQuickView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickview_types.QQuickView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickView_tr3(s, c, n)
+  let v_ms = fcQQuickView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickview_types.QQuickView, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickView_trUtf82(s, c)
+  let v_ms = fcQQuickView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickview_types.QQuickView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickView_trUtf83(s, c, n)
+  let v_ms = fcQQuickView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

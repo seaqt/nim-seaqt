@@ -75,8 +75,8 @@ type cQGeoAreaMonitorSource*{.exportc: "QGeoAreaMonitorSource", incompleteStruct
 proc fcQGeoAreaMonitorSource_metaObject(self: pointer): pointer {.importc: "QGeoAreaMonitorSource_metaObject".}
 proc fcQGeoAreaMonitorSource_metacast(self: pointer, param1: cstring): pointer {.importc: "QGeoAreaMonitorSource_metacast".}
 proc fcQGeoAreaMonitorSource_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGeoAreaMonitorSource_metacall".}
-proc fcQGeoAreaMonitorSource_tr(s: cstring): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_tr".}
-proc fcQGeoAreaMonitorSource_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_trUtf8".}
+proc fcQGeoAreaMonitorSource_trS(s: cstring): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_tr_s".}
+proc fcQGeoAreaMonitorSource_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_trUtf8_s".}
 proc fcQGeoAreaMonitorSource_createDefaultSource(parent: pointer): pointer {.importc: "QGeoAreaMonitorSource_createDefaultSource".}
 proc fcQGeoAreaMonitorSource_createSource(sourceName: struct_seaqt_string, parent: pointer): pointer {.importc: "QGeoAreaMonitorSource_createSource".}
 proc fcQGeoAreaMonitorSource_availableSources(): struct_seaqt_array {.importc: "QGeoAreaMonitorSource_availableSources".}
@@ -89,19 +89,19 @@ proc fcQGeoAreaMonitorSource_startMonitoring(self: pointer, monitor: pointer): b
 proc fcQGeoAreaMonitorSource_stopMonitoring(self: pointer, monitor: pointer): bool {.importc: "QGeoAreaMonitorSource_stopMonitoring".}
 proc fcQGeoAreaMonitorSource_requestUpdate(self: pointer, monitor: pointer, signal: cstring): bool {.importc: "QGeoAreaMonitorSource_requestUpdate".}
 proc fcQGeoAreaMonitorSource_activeMonitors(self: pointer): struct_seaqt_array {.importc: "QGeoAreaMonitorSource_activeMonitors".}
-proc fcQGeoAreaMonitorSource_activeMonitorsWithLookupArea(self: pointer, lookupArea: pointer): struct_seaqt_array {.importc: "QGeoAreaMonitorSource_activeMonitorsWithLookupArea".}
+proc fcQGeoAreaMonitorSource_activeMonitorsLookupArea(self: pointer, lookupArea: pointer): struct_seaqt_array {.importc: "QGeoAreaMonitorSource_activeMonitors_lookupArea".}
 proc fcQGeoAreaMonitorSource_areaEntered(self: pointer, monitor: pointer, update: pointer): void {.importc: "QGeoAreaMonitorSource_areaEntered".}
 proc fcQGeoAreaMonitorSource_connect_areaEntered(self: pointer, slot: int, callback: proc (slot: int, monitor: pointer, update: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoAreaMonitorSource_connect_areaEntered".}
 proc fcQGeoAreaMonitorSource_areaExited(self: pointer, monitor: pointer, update: pointer): void {.importc: "QGeoAreaMonitorSource_areaExited".}
 proc fcQGeoAreaMonitorSource_connect_areaExited(self: pointer, slot: int, callback: proc (slot: int, monitor: pointer, update: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoAreaMonitorSource_connect_areaExited".}
 proc fcQGeoAreaMonitorSource_monitorExpired(self: pointer, monitor: pointer): void {.importc: "QGeoAreaMonitorSource_monitorExpired".}
 proc fcQGeoAreaMonitorSource_connect_monitorExpired(self: pointer, slot: int, callback: proc (slot: int, monitor: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoAreaMonitorSource_connect_monitorExpired".}
-proc fcQGeoAreaMonitorSource_errorWithError(self: pointer, error: cint): void {.importc: "QGeoAreaMonitorSource_errorWithError".}
-proc fcQGeoAreaMonitorSource_connect_errorWithError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoAreaMonitorSource_connect_errorWithError".}
-proc fcQGeoAreaMonitorSource_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_tr2".}
-proc fcQGeoAreaMonitorSource_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_tr3".}
-proc fcQGeoAreaMonitorSource_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_trUtf82".}
-proc fcQGeoAreaMonitorSource_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_trUtf83".}
+proc fcQGeoAreaMonitorSource_errorError(self: pointer, error: cint): void {.importc: "QGeoAreaMonitorSource_error_error".}
+proc fcQGeoAreaMonitorSource_connect_errorError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGeoAreaMonitorSource_connect_error_error".}
+proc fcQGeoAreaMonitorSource_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_tr_s_c".}
+proc fcQGeoAreaMonitorSource_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_tr_s_c_n".}
+proc fcQGeoAreaMonitorSource_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_trUtf8_s_c".}
+proc fcQGeoAreaMonitorSource_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGeoAreaMonitorSource_trUtf8_s_c_n".}
 proc fcQGeoAreaMonitorSource_vdata(self: pointer): ptr pointer {.importc: "QGeoAreaMonitorSource_vdata".}
 proc fvdata_cQGeoAreaMonitorSource(self: pointer): pointer {.importc: "vdata_QGeoAreaMonitorSource".}
 
@@ -118,7 +118,7 @@ type cQGeoAreaMonitorSourceVTable {.pure.} = object
   stopMonitoring*: proc(self: pointer, monitor: pointer): bool {.cdecl, raises: [], gcsafe.}
   requestUpdate*: proc(self: pointer, monitor: pointer, signal: cstring): bool {.cdecl, raises: [], gcsafe.}
   activeMonitors*: proc(self: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
-  activeMonitorsWithLookupArea*: proc(self: pointer, lookupArea: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
+  activeMonitorsLookupArea*: proc(self: pointer, lookupArea: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
   event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -155,13 +155,13 @@ proc metacall*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, para
   fcQGeoAreaMonitorSource_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, s: cstring): string =
-  let v_ms = fcQGeoAreaMonitorSource_tr(s)
+  let v_ms = fcQGeoAreaMonitorSource_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, s: cstring): string =
-  let v_ms = fcQGeoAreaMonitorSource_trUtf8(s)
+  let v_ms = fcQGeoAreaMonitorSource_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -221,7 +221,7 @@ proc activeMonitors*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource
   vx_ret
 
 proc activeMonitors*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, lookupArea: gen_qgeoshape_types.QGeoShape): seq[gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo] =
-  var v_ma = fcQGeoAreaMonitorSource_activeMonitorsWithLookupArea(self.h, lookupArea.h)
+  var v_ma = fcQGeoAreaMonitorSource_activeMonitorsLookupArea(self.h, lookupArea.h)
   var vx_ret = newSeq[gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -294,45 +294,45 @@ proc onMonitorExpired*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSour
   fcQGeoAreaMonitorSource_connect_monitorExpired(self.h, cast[int](addr tmp[]), fcQGeoAreaMonitorSource_slot_callback_monitorExpired, fcQGeoAreaMonitorSource_slot_callback_monitorExpired_release)
 
 proc error*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, error: cint): void =
-  fcQGeoAreaMonitorSource_errorWithError(self.h, cint(error))
+  fcQGeoAreaMonitorSource_errorError(self.h, cint(error))
 
-type QGeoAreaMonitorSourceerrorWithErrorSlot* = proc(error: cint)
-proc fcQGeoAreaMonitorSource_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QGeoAreaMonitorSourceerrorWithErrorSlot](cast[pointer](slot))
+type QGeoAreaMonitorSourceerrorErrorSlot* = proc(error: cint)
+proc fcQGeoAreaMonitorSource_slot_callback_errorError(slot: int, error: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QGeoAreaMonitorSourceerrorErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc fcQGeoAreaMonitorSource_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QGeoAreaMonitorSourceerrorWithErrorSlot](cast[pointer](slot))
+proc fcQGeoAreaMonitorSource_slot_callback_errorError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGeoAreaMonitorSourceerrorErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onError*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, slot: QGeoAreaMonitorSourceerrorWithErrorSlot) =
-  var tmp = new QGeoAreaMonitorSourceerrorWithErrorSlot
+proc onError*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, slot: QGeoAreaMonitorSourceerrorErrorSlot) =
+  var tmp = new QGeoAreaMonitorSourceerrorErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGeoAreaMonitorSource_connect_errorWithError(self.h, cast[int](addr tmp[]), fcQGeoAreaMonitorSource_slot_callback_errorWithError, fcQGeoAreaMonitorSource_slot_callback_errorWithError_release)
+  fcQGeoAreaMonitorSource_connect_errorError(self.h, cast[int](addr tmp[]), fcQGeoAreaMonitorSource_slot_callback_errorError, fcQGeoAreaMonitorSource_slot_callback_errorError_release)
 
 proc tr*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, s: cstring, c: cstring): string =
-  let v_ms = fcQGeoAreaMonitorSource_tr2(s, c)
+  let v_ms = fcQGeoAreaMonitorSource_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGeoAreaMonitorSource_tr3(s, c, n)
+  let v_ms = fcQGeoAreaMonitorSource_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, s: cstring, c: cstring): string =
-  let v_ms = fcQGeoAreaMonitorSource_trUtf82(s, c)
+  let v_ms = fcQGeoAreaMonitorSource_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGeoAreaMonitorSource_trUtf83(s, c, n)
+  let v_ms = fcQGeoAreaMonitorSource_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -348,7 +348,7 @@ type QGeoAreaMonitorSourcestartMonitoringProc* = proc(self: QGeoAreaMonitorSourc
 type QGeoAreaMonitorSourcestopMonitoringProc* = proc(self: QGeoAreaMonitorSource, monitor: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): bool {.raises: [], gcsafe.}
 type QGeoAreaMonitorSourcerequestUpdateProc* = proc(self: QGeoAreaMonitorSource, monitor: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, signal: cstring): bool {.raises: [], gcsafe.}
 type QGeoAreaMonitorSourceactiveMonitorsProc* = proc(self: QGeoAreaMonitorSource): seq[gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo] {.raises: [], gcsafe.}
-type QGeoAreaMonitorSourceactiveMonitorsWithLookupAreaProc* = proc(self: QGeoAreaMonitorSource, lookupArea: gen_qgeoshape_types.QGeoShape): seq[gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo] {.raises: [], gcsafe.}
+type QGeoAreaMonitorSourceactiveMonitorsLookupAreaProc* = proc(self: QGeoAreaMonitorSource, lookupArea: gen_qgeoshape_types.QGeoShape): seq[gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo] {.raises: [], gcsafe.}
 type QGeoAreaMonitorSourceeventProc* = proc(self: QGeoAreaMonitorSource, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGeoAreaMonitorSourceeventFilterProc* = proc(self: QGeoAreaMonitorSource, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QGeoAreaMonitorSourcetimerEventProc* = proc(self: QGeoAreaMonitorSource, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
@@ -370,7 +370,7 @@ type QGeoAreaMonitorSourceVTable* {.inheritable, pure.} = object
   stopMonitoring*: QGeoAreaMonitorSourcestopMonitoringProc
   requestUpdate*: QGeoAreaMonitorSourcerequestUpdateProc
   activeMonitors*: QGeoAreaMonitorSourceactiveMonitorsProc
-  activeMonitorsWithLookupArea*: QGeoAreaMonitorSourceactiveMonitorsWithLookupAreaProc
+  activeMonitorsLookupArea*: QGeoAreaMonitorSourceactiveMonitorsLookupAreaProc
   event*: QGeoAreaMonitorSourceeventProc
   eventFilter*: QGeoAreaMonitorSourceeventFilterProc
   timerEvent*: QGeoAreaMonitorSourcetimerEventProc
@@ -503,11 +503,11 @@ proc fcQGeoAreaMonitorSource_vtable_callback_activeMonitors(self: pointer): stru
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc fcQGeoAreaMonitorSource_vtable_callback_activeMonitorsWithLookupArea(self: pointer, lookupArea: pointer): struct_seaqt_array {.cdecl.} =
+proc fcQGeoAreaMonitorSource_vtable_callback_activeMonitorsLookupArea(self: pointer, lookupArea: pointer): struct_seaqt_array {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
   let slotval1 = gen_qgeoshape_types.QGeoShape(h: lookupArea, owned: false)
-  var virtualReturn = vtbl[].activeMonitorsWithLookupArea(self, slotval1)
+  var virtualReturn = vtbl[].activeMonitorsLookupArea(self, slotval1)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn[i].owned = false # TODO move?
@@ -680,7 +680,7 @@ proc fcQGeoAreaMonitorSource_method_callback_activeMonitors(self: pointer): stru
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc fcQGeoAreaMonitorSource_method_callback_activeMonitorsWithLookupArea(self: pointer, lookupArea: pointer): struct_seaqt_array {.cdecl.} =
+proc fcQGeoAreaMonitorSource_method_callback_activeMonitorsLookupArea(self: pointer, lookupArea: pointer): struct_seaqt_array {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
   let slotval1 = gen_qgeoshape_types.QGeoShape(h: lookupArea, owned: false)
   var virtualReturn = inst.activeMonitors(slotval1)
@@ -774,8 +774,8 @@ proc create*(T: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource,
     vtbl[].vtbl.requestUpdate = fcQGeoAreaMonitorSource_vtable_callback_requestUpdate
   if not isNil(vtbl[].activeMonitors):
     vtbl[].vtbl.activeMonitors = fcQGeoAreaMonitorSource_vtable_callback_activeMonitors
-  if not isNil(vtbl[].activeMonitorsWithLookupArea):
-    vtbl[].vtbl.activeMonitorsWithLookupArea = fcQGeoAreaMonitorSource_vtable_callback_activeMonitorsWithLookupArea
+  if not isNil(vtbl[].activeMonitorsLookupArea):
+    vtbl[].vtbl.activeMonitorsLookupArea = fcQGeoAreaMonitorSource_vtable_callback_activeMonitorsLookupArea
   if not isNil(vtbl[].event):
     vtbl[].vtbl.event = fcQGeoAreaMonitorSource_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
@@ -810,7 +810,7 @@ const cQGeoAreaMonitorSource_mvtbl = cQGeoAreaMonitorSourceVTable(
   stopMonitoring: fcQGeoAreaMonitorSource_method_callback_stopMonitoring,
   requestUpdate: fcQGeoAreaMonitorSource_method_callback_requestUpdate,
   activeMonitors: fcQGeoAreaMonitorSource_method_callback_activeMonitors,
-  activeMonitorsWithLookupArea: fcQGeoAreaMonitorSource_method_callback_activeMonitorsWithLookupArea,
+  activeMonitorsLookupArea: fcQGeoAreaMonitorSource_method_callback_activeMonitorsLookupArea,
   event: fcQGeoAreaMonitorSource_method_callback_event,
   eventFilter: fcQGeoAreaMonitorSource_method_callback_eventFilter,
   timerEvent: fcQGeoAreaMonitorSource_method_callback_timerEvent,

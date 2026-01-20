@@ -24,12 +24,12 @@ QGeoLocation* QGeoLocation_new() {
 	return new (std::nothrow) QGeoLocation();
 }
 
-QGeoLocation* QGeoLocation_new2(QGeoLocation* other) {
-	return new (std::nothrow) QGeoLocation(*other);
+QGeoLocation* QGeoLocation_new_from(QGeoLocation* from) {
+	return new (std::nothrow) QGeoLocation(*from);
 }
 
-void QGeoLocation_operatorAssign(QGeoLocation* self, QGeoLocation* other) {
-	self->operator=(*other);
+void QGeoLocation_operatorAssign(QGeoLocation* self, QGeoLocation* from) {
+	self->operator=(*from);
 }
 
 bool QGeoLocation_operatorEqual(const QGeoLocation* self, QGeoLocation* other) {

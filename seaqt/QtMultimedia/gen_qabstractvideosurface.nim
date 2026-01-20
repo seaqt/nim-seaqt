@@ -69,8 +69,8 @@ type cQAbstractVideoSurface*{.exportc: "QAbstractVideoSurface", incompleteStruct
 proc fcQAbstractVideoSurface_metaObject(self: pointer): pointer {.importc: "QAbstractVideoSurface_metaObject".}
 proc fcQAbstractVideoSurface_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractVideoSurface_metacast".}
 proc fcQAbstractVideoSurface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractVideoSurface_metacall".}
-proc fcQAbstractVideoSurface_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractVideoSurface_tr".}
-proc fcQAbstractVideoSurface_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractVideoSurface_trUtf8".}
+proc fcQAbstractVideoSurface_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractVideoSurface_tr_s".}
+proc fcQAbstractVideoSurface_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractVideoSurface_trUtf8_s".}
 proc fcQAbstractVideoSurface_supportedPixelFormats(self: pointer, typeVal: cint): struct_seaqt_array {.importc: "QAbstractVideoSurface_supportedPixelFormats".}
 proc fcQAbstractVideoSurface_isFormatSupported(self: pointer, format: pointer): bool {.importc: "QAbstractVideoSurface_isFormatSupported".}
 proc fcQAbstractVideoSurface_nearestFormat(self: pointer, format: pointer): pointer {.importc: "QAbstractVideoSurface_nearestFormat".}
@@ -89,10 +89,10 @@ proc fcQAbstractVideoSurface_supportedFormatsChanged(self: pointer): void {.impo
 proc fcQAbstractVideoSurface_connect_supportedFormatsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractVideoSurface_connect_supportedFormatsChanged".}
 proc fcQAbstractVideoSurface_nativeResolutionChanged(self: pointer, resolution: pointer): void {.importc: "QAbstractVideoSurface_nativeResolutionChanged".}
 proc fcQAbstractVideoSurface_connect_nativeResolutionChanged(self: pointer, slot: int, callback: proc (slot: int, resolution: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractVideoSurface_connect_nativeResolutionChanged".}
-proc fcQAbstractVideoSurface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractVideoSurface_tr2".}
-proc fcQAbstractVideoSurface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractVideoSurface_tr3".}
-proc fcQAbstractVideoSurface_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractVideoSurface_trUtf82".}
-proc fcQAbstractVideoSurface_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractVideoSurface_trUtf83".}
+proc fcQAbstractVideoSurface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractVideoSurface_tr_s_c".}
+proc fcQAbstractVideoSurface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractVideoSurface_tr_s_c_n".}
+proc fcQAbstractVideoSurface_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractVideoSurface_trUtf8_s_c".}
+proc fcQAbstractVideoSurface_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractVideoSurface_trUtf8_s_c_n".}
 proc fcQAbstractVideoSurface_vdata(self: pointer): ptr pointer {.importc: "QAbstractVideoSurface_vdata".}
 proc fvdata_cQAbstractVideoSurface(self: pointer): pointer {.importc: "vdata_QAbstractVideoSurface".}
 
@@ -135,7 +135,7 @@ proc fcQAbstractVideoSurface_protectedbase_senderSignalIndex(self: pointer): cin
 proc fcQAbstractVideoSurface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractVideoSurface_protectedbase_receivers".}
 proc fcQAbstractVideoSurface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractVideoSurface_protectedbase_isSignalConnected".}
 proc fcQAbstractVideoSurface_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractVideoSurface {.importc: "QAbstractVideoSurface_new".}
-proc fcQAbstractVideoSurface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractVideoSurface {.importc: "QAbstractVideoSurface_new2".}
+proc fcQAbstractVideoSurface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractVideoSurface {.importc: "QAbstractVideoSurface_new_parent".}
 proc fcQAbstractVideoSurface_staticMetaObject(): pointer {.importc: "QAbstractVideoSurface_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface): gen_qobjectdefs_types.QMetaObject =
@@ -148,13 +148,13 @@ proc metacall*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface, para
   fcQAbstractVideoSurface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractvideosurface_types.QAbstractVideoSurface, s: cstring): string =
-  let v_ms = fcQAbstractVideoSurface_tr(s)
+  let v_ms = fcQAbstractVideoSurface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractvideosurface_types.QAbstractVideoSurface, s: cstring): string =
-  let v_ms = fcQAbstractVideoSurface_trUtf8(s)
+  let v_ms = fcQAbstractVideoSurface_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -274,25 +274,25 @@ proc onNativeResolutionChanged*(self: gen_qabstractvideosurface_types.QAbstractV
   fcQAbstractVideoSurface_connect_nativeResolutionChanged(self.h, cast[int](addr tmp[]), fcQAbstractVideoSurface_slot_callback_nativeResolutionChanged, fcQAbstractVideoSurface_slot_callback_nativeResolutionChanged_release)
 
 proc tr*(_: type gen_qabstractvideosurface_types.QAbstractVideoSurface, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractVideoSurface_tr2(s, c)
+  let v_ms = fcQAbstractVideoSurface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractvideosurface_types.QAbstractVideoSurface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractVideoSurface_tr3(s, c, n)
+  let v_ms = fcQAbstractVideoSurface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractvideosurface_types.QAbstractVideoSurface, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractVideoSurface_trUtf82(s, c)
+  let v_ms = fcQAbstractVideoSurface_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractvideosurface_types.QAbstractVideoSurface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractVideoSurface_trUtf83(s, c, n)
+  let v_ms = fcQAbstractVideoSurface_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

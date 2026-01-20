@@ -55,21 +55,21 @@ type cQSignalMapper*{.exportc: "QSignalMapper", incompleteStruct.} = object
 proc fcQSignalMapper_metaObject(self: pointer): pointer {.importc: "QSignalMapper_metaObject".}
 proc fcQSignalMapper_metacast(self: pointer, param1: cstring): pointer {.importc: "QSignalMapper_metacast".}
 proc fcQSignalMapper_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSignalMapper_metacall".}
-proc fcQSignalMapper_tr(s: cstring): struct_seaqt_string {.importc: "QSignalMapper_tr".}
-proc fcQSignalMapper_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSignalMapper_trUtf8".}
-proc fcQSignalMapper_setMapping(self: pointer, sender: pointer, id: cint): void {.importc: "QSignalMapper_setMapping".}
-proc fcQSignalMapper_setMapping2(self: pointer, sender: pointer, text: struct_seaqt_string): void {.importc: "QSignalMapper_setMapping2".}
-proc fcQSignalMapper_setMapping3(self: pointer, sender: pointer, objectVal: pointer): void {.importc: "QSignalMapper_setMapping3".}
+proc fcQSignalMapper_trS(s: cstring): struct_seaqt_string {.importc: "QSignalMapper_tr_s".}
+proc fcQSignalMapper_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSignalMapper_trUtf8_s".}
+proc fcQSignalMapper_setMappingSenderId(self: pointer, sender: pointer, id: cint): void {.importc: "QSignalMapper_setMapping_sender_id".}
+proc fcQSignalMapper_setMappingSenderText(self: pointer, sender: pointer, text: struct_seaqt_string): void {.importc: "QSignalMapper_setMapping_sender_text".}
+proc fcQSignalMapper_setMappingSenderObject(self: pointer, sender: pointer, objectVal: pointer): void {.importc: "QSignalMapper_setMapping_sender_object".}
 proc fcQSignalMapper_removeMappings(self: pointer, sender: pointer): void {.importc: "QSignalMapper_removeMappings".}
-proc fcQSignalMapper_mapping(self: pointer, id: cint): pointer {.importc: "QSignalMapper_mapping".}
-proc fcQSignalMapper_mappingWithText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QSignalMapper_mappingWithText".}
-proc fcQSignalMapper_mappingWithObject(self: pointer, objectVal: pointer): pointer {.importc: "QSignalMapper_mappingWithObject".}
-proc fcQSignalMapper_mapped(self: pointer, param1: cint): void {.importc: "QSignalMapper_mapped".}
-proc fcQSignalMapper_connect_mapped(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mapped".}
-proc fcQSignalMapper_mappedWithQString(self: pointer, param1: struct_seaqt_string): void {.importc: "QSignalMapper_mappedWithQString".}
-proc fcQSignalMapper_connect_mappedWithQString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mappedWithQString".}
-proc fcQSignalMapper_mappedWithQObject(self: pointer, param1: pointer): void {.importc: "QSignalMapper_mappedWithQObject".}
-proc fcQSignalMapper_connect_mappedWithQObject(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mappedWithQObject".}
+proc fcQSignalMapper_mappingId(self: pointer, id: cint): pointer {.importc: "QSignalMapper_mapping_id".}
+proc fcQSignalMapper_mappingText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QSignalMapper_mapping_text".}
+proc fcQSignalMapper_mappingObject(self: pointer, objectVal: pointer): pointer {.importc: "QSignalMapper_mapping_object".}
+proc fcQSignalMapper_mappedInt(self: pointer, param1: cint): void {.importc: "QSignalMapper_mapped_int".}
+proc fcQSignalMapper_connect_mappedInt(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mapped_int".}
+proc fcQSignalMapper_mapped_QString(self: pointer, param1: struct_seaqt_string): void {.importc: "QSignalMapper_mapped_QString".}
+proc fcQSignalMapper_connect_mapped_QString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mapped_QString".}
+proc fcQSignalMapper_mapped_QObject(self: pointer, param1: pointer): void {.importc: "QSignalMapper_mapped_QObject".}
+proc fcQSignalMapper_connect_mapped_QObject(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mapped_QObject".}
 proc fcQSignalMapper_mappedInt(self: pointer, param1: cint): void {.importc: "QSignalMapper_mappedInt".}
 proc fcQSignalMapper_connect_mappedInt(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mappedInt".}
 proc fcQSignalMapper_mappedString(self: pointer, param1: struct_seaqt_string): void {.importc: "QSignalMapper_mappedString".}
@@ -77,11 +77,11 @@ proc fcQSignalMapper_connect_mappedString(self: pointer, slot: int, callback: pr
 proc fcQSignalMapper_mappedObject(self: pointer, param1: pointer): void {.importc: "QSignalMapper_mappedObject".}
 proc fcQSignalMapper_connect_mappedObject(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalMapper_connect_mappedObject".}
 proc fcQSignalMapper_map(self: pointer): void {.importc: "QSignalMapper_map".}
-proc fcQSignalMapper_mapWithSender(self: pointer, sender: pointer): void {.importc: "QSignalMapper_mapWithSender".}
-proc fcQSignalMapper_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSignalMapper_tr2".}
-proc fcQSignalMapper_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSignalMapper_tr3".}
-proc fcQSignalMapper_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSignalMapper_trUtf82".}
-proc fcQSignalMapper_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSignalMapper_trUtf83".}
+proc fcQSignalMapper_mapSender(self: pointer, sender: pointer): void {.importc: "QSignalMapper_map_sender".}
+proc fcQSignalMapper_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSignalMapper_tr_s_c".}
+proc fcQSignalMapper_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSignalMapper_tr_s_c_n".}
+proc fcQSignalMapper_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSignalMapper_trUtf8_s_c".}
+proc fcQSignalMapper_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSignalMapper_trUtf8_s_c_n".}
 proc fcQSignalMapper_vdata(self: pointer): ptr pointer {.importc: "QSignalMapper_vdata".}
 proc fvdata_cQSignalMapper(self: pointer): pointer {.importc: "vdata_QSignalMapper".}
 
@@ -112,7 +112,7 @@ proc fcQSignalMapper_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQSignalMapper_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSignalMapper_protectedbase_receivers".}
 proc fcQSignalMapper_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSignalMapper_protectedbase_isSignalConnected".}
 proc fcQSignalMapper_new(vtbl: pointer, vdata: csize_t): ptr cQSignalMapper {.importc: "QSignalMapper_new".}
-proc fcQSignalMapper_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSignalMapper {.importc: "QSignalMapper_new2".}
+proc fcQSignalMapper_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSignalMapper {.importc: "QSignalMapper_new_parent".}
 proc fcQSignalMapper_staticMetaObject(): pointer {.importc: "QSignalMapper_staticMetaObject".}
 
 proc metaObject*(self: gen_qsignalmapper_types.QSignalMapper): gen_qobjectdefs_types.QMetaObject =
@@ -125,64 +125,64 @@ proc metacall*(self: gen_qsignalmapper_types.QSignalMapper, param1: cint, param2
   fcQSignalMapper_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsignalmapper_types.QSignalMapper, s: cstring): string =
-  let v_ms = fcQSignalMapper_tr(s)
+  let v_ms = fcQSignalMapper_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsignalmapper_types.QSignalMapper, s: cstring): string =
-  let v_ms = fcQSignalMapper_trUtf8(s)
+  let v_ms = fcQSignalMapper_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setMapping*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject, id: cint): void =
-  fcQSignalMapper_setMapping(self.h, sender.h, id)
+  fcQSignalMapper_setMappingSenderId(self.h, sender.h, id)
 
 proc setMapping*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject, text: openArray[char]): void =
-  fcQSignalMapper_setMapping2(self.h, sender.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQSignalMapper_setMappingSenderText(self.h, sender.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc setMapping*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject, objectVal: gen_qobject_types.QObject): void =
-  fcQSignalMapper_setMapping3(self.h, sender.h, objectVal.h)
+  fcQSignalMapper_setMappingSenderObject(self.h, sender.h, objectVal.h)
 
 proc removeMappings*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject): void =
   fcQSignalMapper_removeMappings(self.h, sender.h)
 
 proc mapping*(self: gen_qsignalmapper_types.QSignalMapper, id: cint): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSignalMapper_mapping(self.h, id), owned: false)
+  gen_qobject_types.QObject(h: fcQSignalMapper_mappingId(self.h, id), owned: false)
 
 proc mapping*(self: gen_qsignalmapper_types.QSignalMapper, text: openArray[char]): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSignalMapper_mappingWithText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qobject_types.QObject(h: fcQSignalMapper_mappingText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc mapping*(self: gen_qsignalmapper_types.QSignalMapper, objectVal: gen_qobject_types.QObject): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSignalMapper_mappingWithObject(self.h, objectVal.h), owned: false)
+  gen_qobject_types.QObject(h: fcQSignalMapper_mappingObject(self.h, objectVal.h), owned: false)
 
 proc mapped*(self: gen_qsignalmapper_types.QSignalMapper, param1: cint): void =
-  fcQSignalMapper_mapped(self.h, param1)
+  fcQSignalMapper_mappedInt(self.h, param1)
 
-type QSignalMappermappedSlot* = proc(param1: cint)
-proc fcQSignalMapper_slot_callback_mapped(slot: int, param1: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QSignalMappermappedSlot](cast[pointer](slot))
+type QSignalMappermappedIntSlot* = proc(param1: cint)
+proc fcQSignalMapper_slot_callback_mappedInt(slot: int, param1: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QSignalMappermappedIntSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc fcQSignalMapper_slot_callback_mapped_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QSignalMappermappedSlot](cast[pointer](slot))
+proc fcQSignalMapper_slot_callback_mappedInt_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSignalMappermappedIntSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onMapped*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalMappermappedSlot) =
-  var tmp = new QSignalMappermappedSlot
+proc onMapped*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalMappermappedIntSlot) =
+  var tmp = new QSignalMappermappedIntSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSignalMapper_connect_mapped(self.h, cast[int](addr tmp[]), fcQSignalMapper_slot_callback_mapped, fcQSignalMapper_slot_callback_mapped_release)
+  fcQSignalMapper_connect_mappedInt(self.h, cast[int](addr tmp[]), fcQSignalMapper_slot_callback_mappedInt, fcQSignalMapper_slot_callback_mappedInt_release)
 
 proc mapped*(self: gen_qsignalmapper_types.QSignalMapper, param1: openArray[char]): void =
-  fcQSignalMapper_mappedWithQString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+  fcQSignalMapper_mapped_QString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QSignalMappermappedWithQStringSlot* = proc(param1: openArray[char])
-proc fcQSignalMapper_slot_callback_mappedWithQString(slot: int, param1: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QSignalMappermappedWithQStringSlot](cast[pointer](slot))
+type QSignalMappermapped_QStringSlot* = proc(param1: openArray[char])
+proc fcQSignalMapper_slot_callback_mapped_QString(slot: int, param1: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QSignalMappermapped_QStringSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
@@ -190,35 +190,35 @@ proc fcQSignalMapper_slot_callback_mappedWithQString(slot: int, param1: struct_s
 
   nimfunc[](slotval1)
 
-proc fcQSignalMapper_slot_callback_mappedWithQString_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QSignalMappermappedWithQStringSlot](cast[pointer](slot))
+proc fcQSignalMapper_slot_callback_mapped_QString_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSignalMappermapped_QStringSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onMapped*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalMappermappedWithQStringSlot) =
-  var tmp = new QSignalMappermappedWithQStringSlot
+proc onMapped*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalMappermapped_QStringSlot) =
+  var tmp = new QSignalMappermapped_QStringSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSignalMapper_connect_mappedWithQString(self.h, cast[int](addr tmp[]), fcQSignalMapper_slot_callback_mappedWithQString, fcQSignalMapper_slot_callback_mappedWithQString_release)
+  fcQSignalMapper_connect_mapped_QString(self.h, cast[int](addr tmp[]), fcQSignalMapper_slot_callback_mapped_QString, fcQSignalMapper_slot_callback_mapped_QString_release)
 
 proc mapped*(self: gen_qsignalmapper_types.QSignalMapper, param1: gen_qobject_types.QObject): void =
-  fcQSignalMapper_mappedWithQObject(self.h, param1.h)
+  fcQSignalMapper_mapped_QObject(self.h, param1.h)
 
-type QSignalMappermappedWithQObjectSlot* = proc(param1: gen_qobject_types.QObject)
-proc fcQSignalMapper_slot_callback_mappedWithQObject(slot: int, param1: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QSignalMappermappedWithQObjectSlot](cast[pointer](slot))
+type QSignalMappermapped_QObjectSlot* = proc(param1: gen_qobject_types.QObject)
+proc fcQSignalMapper_slot_callback_mapped_QObject(slot: int, param1: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QSignalMappermapped_QObjectSlot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc fcQSignalMapper_slot_callback_mappedWithQObject_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QSignalMappermappedWithQObjectSlot](cast[pointer](slot))
+proc fcQSignalMapper_slot_callback_mapped_QObject_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSignalMappermapped_QObjectSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onMapped*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalMappermappedWithQObjectSlot) =
-  var tmp = new QSignalMappermappedWithQObjectSlot
+proc onMapped*(self: gen_qsignalmapper_types.QSignalMapper, slot: QSignalMappermapped_QObjectSlot) =
+  var tmp = new QSignalMappermapped_QObjectSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSignalMapper_connect_mappedWithQObject(self.h, cast[int](addr tmp[]), fcQSignalMapper_slot_callback_mappedWithQObject, fcQSignalMapper_slot_callback_mappedWithQObject_release)
+  fcQSignalMapper_connect_mapped_QObject(self.h, cast[int](addr tmp[]), fcQSignalMapper_slot_callback_mapped_QObject, fcQSignalMapper_slot_callback_mapped_QObject_release)
 
 proc mappedInt*(self: gen_qsignalmapper_types.QSignalMapper, param1: cint): void =
   fcQSignalMapper_mappedInt(self.h, param1)
@@ -287,28 +287,28 @@ proc map*(self: gen_qsignalmapper_types.QSignalMapper): void =
   fcQSignalMapper_map(self.h)
 
 proc map*(self: gen_qsignalmapper_types.QSignalMapper, sender: gen_qobject_types.QObject): void =
-  fcQSignalMapper_mapWithSender(self.h, sender.h)
+  fcQSignalMapper_mapSender(self.h, sender.h)
 
 proc tr*(_: type gen_qsignalmapper_types.QSignalMapper, s: cstring, c: cstring): string =
-  let v_ms = fcQSignalMapper_tr2(s, c)
+  let v_ms = fcQSignalMapper_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsignalmapper_types.QSignalMapper, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSignalMapper_tr3(s, c, n)
+  let v_ms = fcQSignalMapper_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsignalmapper_types.QSignalMapper, s: cstring, c: cstring): string =
-  let v_ms = fcQSignalMapper_trUtf82(s, c)
+  let v_ms = fcQSignalMapper_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsignalmapper_types.QSignalMapper, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSignalMapper_trUtf83(s, c, n)
+  let v_ms = fcQSignalMapper_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

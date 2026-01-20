@@ -55,16 +55,16 @@ void* QSoundEffect_vdata(VirtualQSoundEffect* self);
 VirtualQSoundEffect* vdata_QSoundEffect(void* vdata);
 
 VirtualQSoundEffect* QSoundEffect_new(const QSoundEffect_VTable* vtbl, size_t vdata);
-VirtualQSoundEffect* QSoundEffect_new2(const QSoundEffect_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDevice);
-VirtualQSoundEffect* QSoundEffect_new3(const QSoundEffect_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQSoundEffect* QSoundEffect_new4(const QSoundEffect_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDevice, QObject* parent);
+VirtualQSoundEffect* QSoundEffect_new_audioDevice(const QSoundEffect_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDevice);
+VirtualQSoundEffect* QSoundEffect_new_parent(const QSoundEffect_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSoundEffect* QSoundEffect_new_audioDevice_parent(const QSoundEffect_VTable* vtbl, size_t vdata, QAudioDeviceInfo* audioDevice, QObject* parent);
 
 void QSoundEffect_virtbase(QSoundEffect* src, QObject** outptr_QObject);
 QMetaObject* QSoundEffect_metaObject(const QSoundEffect* self);
 void* QSoundEffect_metacast(QSoundEffect* self, const char* param1);
 int QSoundEffect_metacall(QSoundEffect* self, int param1, int param2, void** param3);
-struct seaqt_string QSoundEffect_tr(const char* s);
-struct seaqt_string QSoundEffect_trUtf8(const char* s);
+struct seaqt_string QSoundEffect_tr_s(const char* s);
+struct seaqt_string QSoundEffect_trUtf8_s(const char* s);
 struct seaqt_array /* of struct seaqt_string */  QSoundEffect_supportedMimeTypes();
 QUrl* QSoundEffect_source(const QSoundEffect* self);
 void QSoundEffect_setSource(QSoundEffect* self, QUrl* url);
@@ -100,10 +100,10 @@ void QSoundEffect_categoryChanged(QSoundEffect* self);
 void QSoundEffect_connect_categoryChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QSoundEffect_play(QSoundEffect* self);
 void QSoundEffect_stop(QSoundEffect* self);
-struct seaqt_string QSoundEffect_tr2(const char* s, const char* c);
-struct seaqt_string QSoundEffect_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSoundEffect_trUtf82(const char* s, const char* c);
-struct seaqt_string QSoundEffect_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSoundEffect_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSoundEffect_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSoundEffect_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSoundEffect_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSoundEffect_virtualbase_metaObject(const VirtualQSoundEffect* self);
 void* QSoundEffect_virtualbase_metacast(VirtualQSoundEffect* self, const char* param1);

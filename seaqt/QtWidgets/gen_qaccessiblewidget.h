@@ -42,9 +42,9 @@ typedef struct QWidget QWidget;
 typedef struct QWindow QWindow;
 #endif
 
-QAccessibleWidget* QAccessibleWidget_new(QWidget* o);
-QAccessibleWidget* QAccessibleWidget_new2(QWidget* o, int r);
-QAccessibleWidget* QAccessibleWidget_new3(QWidget* o, int r, struct seaqt_string name);
+QAccessibleWidget* QAccessibleWidget_new_o(QWidget* o);
+QAccessibleWidget* QAccessibleWidget_new_o_r(QWidget* o, int r);
+QAccessibleWidget* QAccessibleWidget_new_o_r_name(QWidget* o, int r, struct seaqt_string name);
 
 void QAccessibleWidget_virtbase(QAccessibleWidget* src, QAccessibleObject** outptr_QAccessibleObject, QAccessibleActionInterface** outptr_QAccessibleActionInterface);
 bool QAccessibleWidget_isValid(const QAccessibleWidget* self);
@@ -61,7 +61,7 @@ int QAccessibleWidget_role(const QAccessibleWidget* self);
 QAccessible__State* QAccessibleWidget_state(const QAccessibleWidget* self);
 QColor* QAccessibleWidget_foregroundColor(const QAccessibleWidget* self);
 QColor* QAccessibleWidget_backgroundColor(const QAccessibleWidget* self);
-void* QAccessibleWidget_interfaceCast(QAccessibleWidget* self, int t);
+void* QAccessibleWidget_interface_cast(QAccessibleWidget* self, int t);
 struct seaqt_array /* of struct seaqt_string */  QAccessibleWidget_actionNames(const QAccessibleWidget* self);
 void QAccessibleWidget_doAction(QAccessibleWidget* self, struct seaqt_string actionName);
 struct seaqt_array /* of struct seaqt_string */  QAccessibleWidget_keyBindingsForAction(const QAccessibleWidget* self, struct seaqt_string actionName);

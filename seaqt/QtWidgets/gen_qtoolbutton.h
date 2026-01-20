@@ -151,15 +151,15 @@ typedef struct QToolButton_VTable{
 void* QToolButton_vdata(VirtualQToolButton* self);
 VirtualQToolButton* vdata_QToolButton(void* vdata);
 
-VirtualQToolButton* QToolButton_new(const QToolButton_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQToolButton* QToolButton_new2(const QToolButton_VTable* vtbl, size_t vdata);
+VirtualQToolButton* QToolButton_new_parent(const QToolButton_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQToolButton* QToolButton_new(const QToolButton_VTable* vtbl, size_t vdata);
 
 void QToolButton_virtbase(QToolButton* src, QAbstractButton** outptr_QAbstractButton);
 QMetaObject* QToolButton_metaObject(const QToolButton* self);
 void* QToolButton_metacast(QToolButton* self, const char* param1);
 int QToolButton_metacall(QToolButton* self, int param1, int param2, void** param3);
-struct seaqt_string QToolButton_tr(const char* s);
-struct seaqt_string QToolButton_trUtf8(const char* s);
+struct seaqt_string QToolButton_tr_s(const char* s);
+struct seaqt_string QToolButton_trUtf8_s(const char* s);
 QSize* QToolButton_sizeHint(const QToolButton* self);
 QSize* QToolButton_minimumSizeHint(const QToolButton* self);
 int QToolButton_toolButtonStyle(const QToolButton* self);
@@ -188,10 +188,10 @@ void QToolButton_timerEvent(QToolButton* self, QTimerEvent* param1);
 void QToolButton_changeEvent(QToolButton* self, QEvent* param1);
 bool QToolButton_hitButton(const QToolButton* self, QPoint* pos);
 void QToolButton_nextCheckState(QToolButton* self);
-struct seaqt_string QToolButton_tr2(const char* s, const char* c);
-struct seaqt_string QToolButton_tr3(const char* s, const char* c, int n);
-struct seaqt_string QToolButton_trUtf82(const char* s, const char* c);
-struct seaqt_string QToolButton_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QToolButton_tr_s_c(const char* s, const char* c);
+struct seaqt_string QToolButton_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QToolButton_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QToolButton_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QToolButton_virtualbase_metaObject(const VirtualQToolButton* self);
 void* QToolButton_virtualbase_metacast(VirtualQToolButton* self, const char* param1);

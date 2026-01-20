@@ -55,7 +55,7 @@ QVariant* QAbstractVideoBuffer_virtualbase_handle(const VirtualQAbstractVideoBuf
 void QAbstractVideoBuffer_delete(QAbstractVideoBuffer* self);
 
 void QAbstractPlanarVideoBuffer_virtbase(QAbstractPlanarVideoBuffer* src, QAbstractVideoBuffer** outptr_QAbstractVideoBuffer);
-unsigned char* QAbstractPlanarVideoBuffer_map(QAbstractPlanarVideoBuffer* self, int mode, int* numBytes, int* bytesPerLine);
+unsigned char* QAbstractPlanarVideoBuffer_map_mode_numBytes_bytesPerLine(QAbstractPlanarVideoBuffer* self, int mode, int* numBytes, int* bytesPerLine);
 
 void QAbstractPlanarVideoBuffer_delete(QAbstractPlanarVideoBuffer* self);
 

@@ -174,22 +174,22 @@ public:
 	friend bool QQmlContext_protectedbase_isSignalConnected(const VirtualQQmlContext* self, QMetaMethod* signal);
 };
 
-VirtualQQmlContext* QQmlContext_new(const QQmlContext_VTable* vtbl, size_t vdata, QQmlEngine* parent) {
+VirtualQQmlContext* QQmlContext_new_QQmlEngine(const QQmlContext_VTable* vtbl, size_t vdata, QQmlEngine* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlContext>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlContext(vtbl, parent) : nullptr;
 }
 
-VirtualQQmlContext* QQmlContext_new2(const QQmlContext_VTable* vtbl, size_t vdata, QQmlContext* parent) {
+VirtualQQmlContext* QQmlContext_new_QQmlContext(const QQmlContext_VTable* vtbl, size_t vdata, QQmlContext* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlContext>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlContext(vtbl, parent) : nullptr;
 }
 
-VirtualQQmlContext* QQmlContext_new3(const QQmlContext_VTable* vtbl, size_t vdata, QQmlEngine* parent, QObject* objParent) {
+VirtualQQmlContext* QQmlContext_new_QQmlEngine_QObject(const QQmlContext_VTable* vtbl, size_t vdata, QQmlEngine* parent, QObject* objParent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlContext>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlContext(vtbl, parent, objParent) : nullptr;
 }
 
-VirtualQQmlContext* QQmlContext_new4(const QQmlContext_VTable* vtbl, size_t vdata, QQmlContext* parent, QObject* objParent) {
+VirtualQQmlContext* QQmlContext_new_QQmlContext_QObject(const QQmlContext_VTable* vtbl, size_t vdata, QQmlContext* parent, QObject* objParent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlContext>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlContext(vtbl, parent, objParent) : nullptr;
 }
@@ -210,7 +210,7 @@ int QQmlContext_metacall(QQmlContext* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQmlContext_tr(const char* s) {
+struct seaqt_string QQmlContext_tr_s(const char* s) {
 	QString _ret = QQmlContext::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -221,7 +221,7 @@ struct seaqt_string QQmlContext_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QQmlContext_trUtf8(const char* s) {
+struct seaqt_string QQmlContext_trUtf8_s(const char* s) {
 	QString _ret = QQmlContext::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -257,12 +257,12 @@ QVariant* QQmlContext_contextProperty(const QQmlContext* self, struct seaqt_stri
 	return new QVariant(self->contextProperty(param1_QString));
 }
 
-void QQmlContext_setContextProperty(QQmlContext* self, struct seaqt_string param1, QObject* param2) {
+void QQmlContext_setContextProperty_QString_QObject(QQmlContext* self, struct seaqt_string param1, QObject* param2) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	self->setContextProperty(param1_QString, param2);
 }
 
-void QQmlContext_setContextProperty2(QQmlContext* self, struct seaqt_string param1, QVariant* param2) {
+void QQmlContext_setContextProperty_QString_QVariant(QQmlContext* self, struct seaqt_string param1, QVariant* param2) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	self->setContextProperty(param1_QString, *param2);
 }
@@ -300,7 +300,7 @@ QUrl* QQmlContext_baseUrl(const QQmlContext* self) {
 	return new QUrl(self->baseUrl());
 }
 
-struct seaqt_string QQmlContext_tr2(const char* s, const char* c) {
+struct seaqt_string QQmlContext_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQmlContext::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -311,7 +311,7 @@ struct seaqt_string QQmlContext_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlContext_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQmlContext_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlContext::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -322,7 +322,7 @@ struct seaqt_string QQmlContext_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QQmlContext_trUtf82(const char* s, const char* c) {
+struct seaqt_string QQmlContext_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QQmlContext::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -333,7 +333,7 @@ struct seaqt_string QQmlContext_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlContext_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QQmlContext_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlContext::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -418,8 +418,8 @@ void QQmlContext_delete(QQmlContext* self) {
 	delete self;
 }
 
-QQmlContext__PropertyPair* QQmlContext__PropertyPair_new(QQmlContext__PropertyPair* param1) {
-	return new (std::nothrow) QQmlContext__PropertyPair(*param1);
+QQmlContext__PropertyPair* QQmlContext__PropertyPair_new(QQmlContext__PropertyPair* from) {
+	return new (std::nothrow) QQmlContext__PropertyPair(*from);
 }
 
 struct seaqt_string QQmlContext__PropertyPair_name(const QQmlContext__PropertyPair* self) {
@@ -446,8 +446,8 @@ void QQmlContext__PropertyPair_setValue(QQmlContext__PropertyPair* self, QVarian
 	self->value = *value;
 }
 
-void QQmlContext__PropertyPair_operatorAssign(QQmlContext__PropertyPair* self, QQmlContext__PropertyPair* param1) {
-	self->operator=(*param1);
+void QQmlContext__PropertyPair_operatorAssign(QQmlContext__PropertyPair* self, QQmlContext__PropertyPair* from) {
+	self->operator=(*from);
 }
 
 void QQmlContext__PropertyPair_delete(QQmlContext__PropertyPair* self) {

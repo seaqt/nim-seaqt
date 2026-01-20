@@ -17,8 +17,8 @@ QMediaObject* QMediaBindableInterface_mediaObject(const QMediaBindableInterface*
 	return self->mediaObject();
 }
 
-void QMediaBindableInterface_operatorAssign(QMediaBindableInterface* self, QMediaBindableInterface* param1) {
-	self->operator=(*param1);
+void QMediaBindableInterface_operatorAssign(QMediaBindableInterface* self, QMediaBindableInterface* from) {
+	self->operator=(*from);
 }
 
 void QMediaBindableInterface_delete(QMediaBindableInterface* self) {

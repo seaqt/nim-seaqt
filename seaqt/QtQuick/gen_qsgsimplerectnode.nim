@@ -50,8 +50,8 @@ export
 
 type cQSGSimpleRectNode*{.exportc: "QSGSimpleRectNode", incompleteStruct.} = object
 
-proc fcQSGSimpleRectNode_setRect(self: pointer, rect: pointer): void {.importc: "QSGSimpleRectNode_setRect".}
-proc fcQSGSimpleRectNode_setRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGSimpleRectNode_setRect2".}
+proc fcQSGSimpleRectNode_setRectRect(self: pointer, rect: pointer): void {.importc: "QSGSimpleRectNode_setRect_rect".}
+proc fcQSGSimpleRectNode_setRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGSimpleRectNode_setRect_x_y_w_h".}
 proc fcQSGSimpleRectNode_rect(self: pointer): pointer {.importc: "QSGSimpleRectNode_rect".}
 proc fcQSGSimpleRectNode_setColor(self: pointer, color: pointer): void {.importc: "QSGSimpleRectNode_setColor".}
 proc fcQSGSimpleRectNode_color(self: pointer): pointer {.importc: "QSGSimpleRectNode_color".}
@@ -64,14 +64,14 @@ type cQSGSimpleRectNodeVTable {.pure.} = object
   preprocess*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
 proc fcQSGSimpleRectNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSGSimpleRectNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGSimpleRectNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGSimpleRectNode_virtualbase_preprocess".}
-proc fcQSGSimpleRectNode_new(vtbl: pointer, vdata: csize_t, rect: pointer, color: pointer): ptr cQSGSimpleRectNode {.importc: "QSGSimpleRectNode_new".}
-proc fcQSGSimpleRectNode_new2(vtbl: pointer, vdata: csize_t): ptr cQSGSimpleRectNode {.importc: "QSGSimpleRectNode_new2".}
+proc fcQSGSimpleRectNode_new(vtbl: pointer, vdata: csize_t, rect: pointer, color: pointer): ptr cQSGSimpleRectNode {.importc: "QSGSimpleRectNode_new_rect_color".}
+proc fcQSGSimpleRectNode_new2(vtbl: pointer, vdata: csize_t): ptr cQSGSimpleRectNode {.importc: "QSGSimpleRectNode_new".}
 
 proc setRect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, rect: gen_qrect_types.QRectF): void =
-  fcQSGSimpleRectNode_setRect(self.h, rect.h)
+  fcQSGSimpleRectNode_setRectRect(self.h, rect.h)
 
 proc setRect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, x: float64, y: float64, w: float64, h: float64): void =
-  fcQSGSimpleRectNode_setRect2(self.h, x, y, w, h)
+  fcQSGSimpleRectNode_setRectXYWH(self.h, x, y, w, h)
 
 proc rect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQSGSimpleRectNode_rect(self.h), owned: true)

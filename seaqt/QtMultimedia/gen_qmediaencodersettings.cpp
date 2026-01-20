@@ -24,12 +24,12 @@ QAudioEncoderSettings* QAudioEncoderSettings_new() {
 	return new (std::nothrow) QAudioEncoderSettings();
 }
 
-QAudioEncoderSettings* QAudioEncoderSettings_new2(QAudioEncoderSettings* other) {
-	return new (std::nothrow) QAudioEncoderSettings(*other);
+QAudioEncoderSettings* QAudioEncoderSettings_new_from(QAudioEncoderSettings* from) {
+	return new (std::nothrow) QAudioEncoderSettings(*from);
 }
 
-void QAudioEncoderSettings_operatorAssign(QAudioEncoderSettings* self, QAudioEncoderSettings* other) {
-	self->operator=(*other);
+void QAudioEncoderSettings_operatorAssign(QAudioEncoderSettings* self, QAudioEncoderSettings* from) {
+	self->operator=(*from);
 }
 
 bool QAudioEncoderSettings_operatorEqual(const QAudioEncoderSettings* self, QAudioEncoderSettings* other) {
@@ -156,12 +156,12 @@ QVideoEncoderSettings* QVideoEncoderSettings_new() {
 	return new (std::nothrow) QVideoEncoderSettings();
 }
 
-QVideoEncoderSettings* QVideoEncoderSettings_new2(QVideoEncoderSettings* other) {
-	return new (std::nothrow) QVideoEncoderSettings(*other);
+QVideoEncoderSettings* QVideoEncoderSettings_new_from(QVideoEncoderSettings* from) {
+	return new (std::nothrow) QVideoEncoderSettings(*from);
 }
 
-void QVideoEncoderSettings_operatorAssign(QVideoEncoderSettings* self, QVideoEncoderSettings* other) {
-	self->operator=(*other);
+void QVideoEncoderSettings_operatorAssign(QVideoEncoderSettings* self, QVideoEncoderSettings* from) {
+	self->operator=(*from);
 }
 
 bool QVideoEncoderSettings_operatorEqual(const QVideoEncoderSettings* self, QVideoEncoderSettings* other) {
@@ -205,11 +205,11 @@ QSize* QVideoEncoderSettings_resolution(const QVideoEncoderSettings* self) {
 	return new QSize(self->resolution());
 }
 
-void QVideoEncoderSettings_setResolution(QVideoEncoderSettings* self, QSize* resolution) {
+void QVideoEncoderSettings_setResolution_resolution(QVideoEncoderSettings* self, QSize* resolution) {
 	self->setResolution(*resolution);
 }
 
-void QVideoEncoderSettings_setResolution2(QVideoEncoderSettings* self, int width, int height) {
+void QVideoEncoderSettings_setResolution_width_height(QVideoEncoderSettings* self, int width, int height) {
 	self->setResolution(static_cast<int>(width), static_cast<int>(height));
 }
 
@@ -293,12 +293,12 @@ QImageEncoderSettings* QImageEncoderSettings_new() {
 	return new (std::nothrow) QImageEncoderSettings();
 }
 
-QImageEncoderSettings* QImageEncoderSettings_new2(QImageEncoderSettings* other) {
-	return new (std::nothrow) QImageEncoderSettings(*other);
+QImageEncoderSettings* QImageEncoderSettings_new_from(QImageEncoderSettings* from) {
+	return new (std::nothrow) QImageEncoderSettings(*from);
 }
 
-void QImageEncoderSettings_operatorAssign(QImageEncoderSettings* self, QImageEncoderSettings* other) {
-	self->operator=(*other);
+void QImageEncoderSettings_operatorAssign(QImageEncoderSettings* self, QImageEncoderSettings* from) {
+	self->operator=(*from);
 }
 
 bool QImageEncoderSettings_operatorEqual(const QImageEncoderSettings* self, QImageEncoderSettings* other) {
@@ -333,11 +333,11 @@ QSize* QImageEncoderSettings_resolution(const QImageEncoderSettings* self) {
 	return new QSize(self->resolution());
 }
 
-void QImageEncoderSettings_setResolution(QImageEncoderSettings* self, QSize* resolution) {
+void QImageEncoderSettings_setResolution_resolution(QImageEncoderSettings* self, QSize* resolution) {
 	self->setResolution(*resolution);
 }
 
-void QImageEncoderSettings_setResolution2(QImageEncoderSettings* self, int width, int height) {
+void QImageEncoderSettings_setResolution_width_height(QImageEncoderSettings* self, int width, int height) {
 	self->setResolution(static_cast<int>(width), static_cast<int>(height));
 }
 

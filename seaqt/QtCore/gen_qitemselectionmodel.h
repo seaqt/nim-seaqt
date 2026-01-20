@@ -43,11 +43,11 @@ typedef struct QTimerEvent QTimerEvent;
 #endif
 
 QItemSelectionRange* QItemSelectionRange_new();
-QItemSelectionRange* QItemSelectionRange_new2(QItemSelectionRange* other);
-QItemSelectionRange* QItemSelectionRange_new3(QModelIndex* topL, QModelIndex* bottomR);
-QItemSelectionRange* QItemSelectionRange_new4(QModelIndex* index);
+QItemSelectionRange* QItemSelectionRange_new_from(QItemSelectionRange* from);
+QItemSelectionRange* QItemSelectionRange_new_topL_bottomR(QModelIndex* topL, QModelIndex* bottomR);
+QItemSelectionRange* QItemSelectionRange_new_index(QModelIndex* index);
 
-void QItemSelectionRange_operatorAssign(QItemSelectionRange* self, QItemSelectionRange* other);
+void QItemSelectionRange_operatorAssign(QItemSelectionRange* self, QItemSelectionRange* from);
 void QItemSelectionRange_swap(QItemSelectionRange* self, QItemSelectionRange* other);
 int QItemSelectionRange_top(const QItemSelectionRange* self);
 int QItemSelectionRange_left(const QItemSelectionRange* self);
@@ -59,8 +59,8 @@ QPersistentModelIndex* QItemSelectionRange_topLeft(const QItemSelectionRange* se
 QPersistentModelIndex* QItemSelectionRange_bottomRight(const QItemSelectionRange* self);
 QModelIndex* QItemSelectionRange_parent(const QItemSelectionRange* self);
 QAbstractItemModel* QItemSelectionRange_model(const QItemSelectionRange* self);
-bool QItemSelectionRange_contains(const QItemSelectionRange* self, QModelIndex* index);
-bool QItemSelectionRange_contains2(const QItemSelectionRange* self, int row, int column, QModelIndex* parentIndex);
+bool QItemSelectionRange_contains_index(const QItemSelectionRange* self, QModelIndex* index);
+bool QItemSelectionRange_contains_row_column_parentIndex(const QItemSelectionRange* self, int row, int column, QModelIndex* parentIndex);
 bool QItemSelectionRange_intersects(const QItemSelectionRange* self, QItemSelectionRange* other);
 QItemSelectionRange* QItemSelectionRange_intersected(const QItemSelectionRange* self, QItemSelectionRange* other);
 bool QItemSelectionRange_operatorEqual(const QItemSelectionRange* self, QItemSelectionRange* other);
@@ -79,8 +79,8 @@ typedef struct QItemSelectionModel_VTable{
 	void* (*metacast)(VirtualQItemSelectionModel* self, const char* param1);
 	int (*metacall)(VirtualQItemSelectionModel* self, int param1, int param2, void** param3);
 	void (*setCurrentIndex)(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
-	void (*select)(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
-	void (*select2)(VirtualQItemSelectionModel* self, QItemSelection* selection, int command);
+	void (*select_index_command)(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
+	void (*select_selection_command)(VirtualQItemSelectionModel* self, QItemSelection* selection, int command);
 	void (*clear)(VirtualQItemSelectionModel* self);
 	void (*reset)(VirtualQItemSelectionModel* self);
 	void (*clearCurrentIndex)(VirtualQItemSelectionModel* self);
@@ -97,32 +97,32 @@ void* QItemSelectionModel_vdata(VirtualQItemSelectionModel* self);
 VirtualQItemSelectionModel* vdata_QItemSelectionModel(void* vdata);
 
 VirtualQItemSelectionModel* QItemSelectionModel_new(const QItemSelectionModel_VTable* vtbl, size_t vdata);
-VirtualQItemSelectionModel* QItemSelectionModel_new2(const QItemSelectionModel_VTable* vtbl, size_t vdata, QAbstractItemModel* model, QObject* parent);
-VirtualQItemSelectionModel* QItemSelectionModel_new3(const QItemSelectionModel_VTable* vtbl, size_t vdata, QAbstractItemModel* model);
+VirtualQItemSelectionModel* QItemSelectionModel_new_model_parent(const QItemSelectionModel_VTable* vtbl, size_t vdata, QAbstractItemModel* model, QObject* parent);
+VirtualQItemSelectionModel* QItemSelectionModel_new_model(const QItemSelectionModel_VTable* vtbl, size_t vdata, QAbstractItemModel* model);
 
 void QItemSelectionModel_virtbase(QItemSelectionModel* src, QObject** outptr_QObject);
 QMetaObject* QItemSelectionModel_metaObject(const QItemSelectionModel* self);
 void* QItemSelectionModel_metacast(QItemSelectionModel* self, const char* param1);
 int QItemSelectionModel_metacall(QItemSelectionModel* self, int param1, int param2, void** param3);
-struct seaqt_string QItemSelectionModel_tr(const char* s);
-struct seaqt_string QItemSelectionModel_trUtf8(const char* s);
+struct seaqt_string QItemSelectionModel_tr_s(const char* s);
+struct seaqt_string QItemSelectionModel_trUtf8_s(const char* s);
 QModelIndex* QItemSelectionModel_currentIndex(const QItemSelectionModel* self);
 bool QItemSelectionModel_isSelected(const QItemSelectionModel* self, QModelIndex* index);
-bool QItemSelectionModel_isRowSelected(const QItemSelectionModel* self, int row);
-bool QItemSelectionModel_isColumnSelected(const QItemSelectionModel* self, int column);
-bool QItemSelectionModel_rowIntersectsSelection(const QItemSelectionModel* self, int row);
-bool QItemSelectionModel_columnIntersectsSelection(const QItemSelectionModel* self, int column);
+bool QItemSelectionModel_isRowSelected_row(const QItemSelectionModel* self, int row);
+bool QItemSelectionModel_isColumnSelected_column(const QItemSelectionModel* self, int column);
+bool QItemSelectionModel_rowIntersectsSelection_row(const QItemSelectionModel* self, int row);
+bool QItemSelectionModel_columnIntersectsSelection_column(const QItemSelectionModel* self, int column);
 bool QItemSelectionModel_hasSelection(const QItemSelectionModel* self);
 struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedIndexes(const QItemSelectionModel* self);
 struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedRows(const QItemSelectionModel* self);
 struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedColumns(const QItemSelectionModel* self);
 QItemSelection* QItemSelectionModel_selection(const QItemSelectionModel* self);
-QAbstractItemModel* QItemSelectionModel_model(const QItemSelectionModel* self);
-QAbstractItemModel* QItemSelectionModel_model2(QItemSelectionModel* self);
+QAbstractItemModel* QItemSelectionModel_model_const(const QItemSelectionModel* self);
+QAbstractItemModel* QItemSelectionModel_model(QItemSelectionModel* self);
 void QItemSelectionModel_setModel(QItemSelectionModel* self, QAbstractItemModel* model);
 void QItemSelectionModel_setCurrentIndex(QItemSelectionModel* self, QModelIndex* index, int command);
-void QItemSelectionModel_select(QItemSelectionModel* self, QModelIndex* index, int command);
-void QItemSelectionModel_select2(QItemSelectionModel* self, QItemSelection* selection, int command);
+void QItemSelectionModel_select_index_command(QItemSelectionModel* self, QModelIndex* index, int command);
+void QItemSelectionModel_select_selection_command(QItemSelectionModel* self, QItemSelection* selection, int command);
 void QItemSelectionModel_clear(QItemSelectionModel* self);
 void QItemSelectionModel_reset(QItemSelectionModel* self);
 void QItemSelectionModel_clearSelection(QItemSelectionModel* self);
@@ -137,23 +137,23 @@ void QItemSelectionModel_currentColumnChanged(QItemSelectionModel* self, QModelI
 void QItemSelectionModel_connect_currentColumnChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t));
 void QItemSelectionModel_modelChanged(QItemSelectionModel* self, QAbstractItemModel* model);
 void QItemSelectionModel_connect_modelChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QAbstractItemModel*), void (*release)(intptr_t));
-struct seaqt_string QItemSelectionModel_tr2(const char* s, const char* c);
-struct seaqt_string QItemSelectionModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QItemSelectionModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QItemSelectionModel_trUtf83(const char* s, const char* c, int n);
-bool QItemSelectionModel_isRowSelected2(const QItemSelectionModel* self, int row, QModelIndex* parent);
-bool QItemSelectionModel_isColumnSelected2(const QItemSelectionModel* self, int column, QModelIndex* parent);
-bool QItemSelectionModel_rowIntersectsSelection2(const QItemSelectionModel* self, int row, QModelIndex* parent);
-bool QItemSelectionModel_columnIntersectsSelection2(const QItemSelectionModel* self, int column, QModelIndex* parent);
-struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedRowsWithColumn(const QItemSelectionModel* self, int column);
-struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedColumnsWithRow(const QItemSelectionModel* self, int row);
+struct seaqt_string QItemSelectionModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QItemSelectionModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QItemSelectionModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QItemSelectionModel_trUtf8_s_c_n(const char* s, const char* c, int n);
+bool QItemSelectionModel_isRowSelected_row_parent(const QItemSelectionModel* self, int row, QModelIndex* parent);
+bool QItemSelectionModel_isColumnSelected_column_parent(const QItemSelectionModel* self, int column, QModelIndex* parent);
+bool QItemSelectionModel_rowIntersectsSelection_row_parent(const QItemSelectionModel* self, int row, QModelIndex* parent);
+bool QItemSelectionModel_columnIntersectsSelection_column_parent(const QItemSelectionModel* self, int column, QModelIndex* parent);
+struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedRows_column(const QItemSelectionModel* self, int column);
+struct seaqt_array /* of QModelIndex* */  QItemSelectionModel_selectedColumns_row(const QItemSelectionModel* self, int row);
 
 QMetaObject* QItemSelectionModel_virtualbase_metaObject(const VirtualQItemSelectionModel* self);
 void* QItemSelectionModel_virtualbase_metacast(VirtualQItemSelectionModel* self, const char* param1);
 int QItemSelectionModel_virtualbase_metacall(VirtualQItemSelectionModel* self, int param1, int param2, void** param3);
 void QItemSelectionModel_virtualbase_setCurrentIndex(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
-void QItemSelectionModel_virtualbase_select(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
-void QItemSelectionModel_virtualbase_select2(VirtualQItemSelectionModel* self, QItemSelection* selection, int command);
+void QItemSelectionModel_virtualbase_select_index_command(VirtualQItemSelectionModel* self, QModelIndex* index, int command);
+void QItemSelectionModel_virtualbase_select_selection_command(VirtualQItemSelectionModel* self, QItemSelection* selection, int command);
 void QItemSelectionModel_virtualbase_clear(VirtualQItemSelectionModel* self);
 void QItemSelectionModel_virtualbase_reset(VirtualQItemSelectionModel* self);
 void QItemSelectionModel_virtualbase_clearCurrentIndex(VirtualQItemSelectionModel* self);
@@ -175,15 +175,15 @@ const QMetaObject* QItemSelectionModel_staticMetaObject();
 void QItemSelectionModel_delete(QItemSelectionModel* self);
 
 QItemSelection* QItemSelection_new();
-QItemSelection* QItemSelection_new2(QModelIndex* topLeft, QModelIndex* bottomRight);
-QItemSelection* QItemSelection_new3(QItemSelection* param1);
+QItemSelection* QItemSelection_new_topLeft_bottomRight(QModelIndex* topLeft, QModelIndex* bottomRight);
+QItemSelection* QItemSelection_new_from(QItemSelection* from);
 
 void QItemSelection_select(QItemSelection* self, QModelIndex* topLeft, QModelIndex* bottomRight);
 bool QItemSelection_contains(const QItemSelection* self, QModelIndex* index);
 struct seaqt_array /* of QModelIndex* */  QItemSelection_indexes(const QItemSelection* self);
 void QItemSelection_merge(QItemSelection* self, QItemSelection* other, int command);
 void QItemSelection_split(QItemSelectionRange* range, QItemSelectionRange* other, QItemSelection* result);
-void QItemSelection_operatorAssign(QItemSelection* self, QItemSelection* param1);
+void QItemSelection_operatorAssign(QItemSelection* self, QItemSelection* from);
 
 void QItemSelection_delete(QItemSelection* self);
 

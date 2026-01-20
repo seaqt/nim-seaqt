@@ -90,17 +90,17 @@ public:
 	friend struct seaqt_string QFile_virtualbase_fileName(const VirtualQFile* self);
 
 	virtual bool open(QIODevice::OpenMode flags) override {
-		if (vtbl->open == 0) {
+		if (vtbl->open_flags == 0) {
 			return QFile::open(flags);
 		}
 
 		QIODevice::OpenMode flags_ret = flags;
 		int sigval1 = static_cast<int>(flags_ret);
-		bool callback_return_value = vtbl->open(this, sigval1);
+		bool callback_return_value = vtbl->open_flags(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend bool QFile_virtualbase_open(VirtualQFile* self, int flags);
+	friend bool QFile_virtualbase_open_flags(VirtualQFile* self, int flags);
 
 	virtual qint64 size() const override {
 		if (vtbl->size == 0) {
@@ -114,17 +114,17 @@ public:
 	friend long long QFile_virtualbase_size(const VirtualQFile* self);
 
 	virtual bool resize(qint64 sz) override {
-		if (vtbl->resize == 0) {
+		if (vtbl->resize_sz == 0) {
 			return QFile::resize(sz);
 		}
 
 		qint64 sz_ret = sz;
 		long long sigval1 = static_cast<long long>(sz_ret);
-		bool callback_return_value = vtbl->resize(this, sigval1);
+		bool callback_return_value = vtbl->resize_sz(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend bool QFile_virtualbase_resize(VirtualQFile* self, long long sz);
+	friend bool QFile_virtualbase_resize_sz(VirtualQFile* self, long long sz);
 
 	virtual QFileDevice::Permissions permissions() const override {
 		if (vtbl->permissions == 0) {
@@ -138,17 +138,17 @@ public:
 	friend int QFile_virtualbase_permissions(const VirtualQFile* self);
 
 	virtual bool setPermissions(QFileDevice::Permissions permissionSpec) override {
-		if (vtbl->setPermissions == 0) {
+		if (vtbl->setPermissions_permissionSpec == 0) {
 			return QFile::setPermissions(permissionSpec);
 		}
 
 		QFileDevice::Permissions permissionSpec_ret = permissionSpec;
 		int sigval1 = static_cast<int>(permissionSpec_ret);
-		bool callback_return_value = vtbl->setPermissions(this, sigval1);
+		bool callback_return_value = vtbl->setPermissions_permissionSpec(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend bool QFile_virtualbase_setPermissions(VirtualQFile* self, int permissionSpec);
+	friend bool QFile_virtualbase_setPermissions_permissionSpec(VirtualQFile* self, int permissionSpec);
 
 	virtual void close() override {
 		if (vtbl->close == 0) {
@@ -420,18 +420,18 @@ VirtualQFile* QFile_new(const QFile_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQFile(vtbl) : nullptr;
 }
 
-VirtualQFile* QFile_new2(const QFile_VTable* vtbl, size_t vdata, struct seaqt_string name) {
+VirtualQFile* QFile_new_name(const QFile_VTable* vtbl, size_t vdata, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFile(vtbl, name_QString) : nullptr;
 }
 
-VirtualQFile* QFile_new3(const QFile_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQFile* QFile_new_parent(const QFile_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFile(vtbl, parent) : nullptr;
 }
 
-VirtualQFile* QFile_new4(const QFile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent) {
+VirtualQFile* QFile_new_name_parent(const QFile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFile(vtbl, name_QString, parent) : nullptr;
@@ -453,7 +453,7 @@ int QFile_metacall(QFile* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFile_tr(const char* s) {
+struct seaqt_string QFile_tr_s(const char* s) {
 	QString _ret = QFile::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -464,7 +464,7 @@ struct seaqt_string QFile_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QFile_trUtf8(const char* s) {
+struct seaqt_string QFile_trUtf8_s(const char* s) {
 	QString _ret = QFile::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -501,7 +501,7 @@ struct seaqt_string QFile_encodeName(struct seaqt_string fileName) {
 	return _ms;
 }
 
-struct seaqt_string QFile_decodeName(struct seaqt_string localFileName) {
+struct seaqt_string QFile_decodeName_QByteArray(struct seaqt_string localFileName) {
 	QByteArray localFileName_QByteArray(localFileName.data, localFileName.len);
 	QString _ret = QFile::decodeName(localFileName_QByteArray);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -513,7 +513,7 @@ struct seaqt_string QFile_decodeName(struct seaqt_string localFileName) {
 	return _ms;
 }
 
-struct seaqt_string QFile_decodeNameWithLocalFileName(const char* localFileName) {
+struct seaqt_string QFile_decodeName_char(const char* localFileName) {
 	QString _ret = QFile::decodeName(localFileName);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -528,7 +528,7 @@ bool QFile_exists(const QFile* self) {
 	return self->exists();
 }
 
-bool QFile_existsWithFileName(struct seaqt_string fileName) {
+bool QFile_exists_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return QFile::exists(fileName_QString);
 }
@@ -544,7 +544,7 @@ struct seaqt_string QFile_readLink(const QFile* self) {
 	return _ms;
 }
 
-struct seaqt_string QFile_readLinkWithFileName(struct seaqt_string fileName) {
+struct seaqt_string QFile_readLink_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString _ret = QFile::readLink(fileName_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -567,7 +567,7 @@ struct seaqt_string QFile_symLinkTarget(const QFile* self) {
 	return _ms;
 }
 
-struct seaqt_string QFile_symLinkTargetWithFileName(struct seaqt_string fileName) {
+struct seaqt_string QFile_symLinkTarget_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString _ret = QFile::symLinkTarget(fileName_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -583,7 +583,7 @@ bool QFile_remove(QFile* self) {
 	return self->remove();
 }
 
-bool QFile_removeWithFileName(struct seaqt_string fileName) {
+bool QFile_remove_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return QFile::remove(fileName_QString);
 }
@@ -592,49 +592,49 @@ bool QFile_moveToTrash(QFile* self) {
 	return self->moveToTrash();
 }
 
-bool QFile_moveToTrashWithFileName(struct seaqt_string fileName) {
+bool QFile_moveToTrash_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return QFile::moveToTrash(fileName_QString);
 }
 
-bool QFile_rename(QFile* self, struct seaqt_string newName) {
+bool QFile_rename_newName(QFile* self, struct seaqt_string newName) {
 	QString newName_QString = QString::fromUtf8(newName.data, newName.len);
 	return self->rename(newName_QString);
 }
 
-bool QFile_rename2(struct seaqt_string oldName, struct seaqt_string newName) {
+bool QFile_rename_oldName_newName(struct seaqt_string oldName, struct seaqt_string newName) {
 	QString oldName_QString = QString::fromUtf8(oldName.data, oldName.len);
 	QString newName_QString = QString::fromUtf8(newName.data, newName.len);
 	return QFile::rename(oldName_QString, newName_QString);
 }
 
-bool QFile_link(QFile* self, struct seaqt_string newName) {
+bool QFile_link_newName(QFile* self, struct seaqt_string newName) {
 	QString newName_QString = QString::fromUtf8(newName.data, newName.len);
 	return self->link(newName_QString);
 }
 
-bool QFile_link2(struct seaqt_string oldname, struct seaqt_string newName) {
+bool QFile_link_oldname_newName(struct seaqt_string oldname, struct seaqt_string newName) {
 	QString oldname_QString = QString::fromUtf8(oldname.data, oldname.len);
 	QString newName_QString = QString::fromUtf8(newName.data, newName.len);
 	return QFile::link(oldname_QString, newName_QString);
 }
 
-bool QFile_copy(QFile* self, struct seaqt_string newName) {
+bool QFile_copy_newName(QFile* self, struct seaqt_string newName) {
 	QString newName_QString = QString::fromUtf8(newName.data, newName.len);
 	return self->copy(newName_QString);
 }
 
-bool QFile_copy2(struct seaqt_string fileName, struct seaqt_string newName) {
+bool QFile_copy_fileName_newName(struct seaqt_string fileName, struct seaqt_string newName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString newName_QString = QString::fromUtf8(newName.data, newName.len);
 	return QFile::copy(fileName_QString, newName_QString);
 }
 
-bool QFile_open(QFile* self, int flags) {
+bool QFile_open_flags(QFile* self, int flags) {
 	return self->open(static_cast<QIODevice::OpenMode>(flags));
 }
 
-bool QFile_open3(QFile* self, int fd, int ioFlags) {
+bool QFile_open_fd_ioFlags(QFile* self, int fd, int ioFlags) {
 	return self->open(static_cast<int>(fd), static_cast<QIODevice::OpenMode>(ioFlags));
 }
 
@@ -643,11 +643,11 @@ long long QFile_size(const QFile* self) {
 	return static_cast<long long>(_ret);
 }
 
-bool QFile_resize(QFile* self, long long sz) {
+bool QFile_resize_sz(QFile* self, long long sz) {
 	return self->resize(static_cast<qint64>(sz));
 }
 
-bool QFile_resize2(struct seaqt_string filename, long long sz) {
+bool QFile_resize_filename_sz(struct seaqt_string filename, long long sz) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	return QFile::resize(filename_QString, static_cast<qint64>(sz));
 }
@@ -657,22 +657,22 @@ int QFile_permissions(const QFile* self) {
 	return static_cast<int>(_ret);
 }
 
-int QFile_permissionsWithFilename(struct seaqt_string filename) {
+int QFile_permissions_filename(struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	QFileDevice::Permissions _ret = QFile::permissions(filename_QString);
 	return static_cast<int>(_ret);
 }
 
-bool QFile_setPermissions(QFile* self, int permissionSpec) {
+bool QFile_setPermissions_permissionSpec(QFile* self, int permissionSpec) {
 	return self->setPermissions(static_cast<QFileDevice::Permissions>(permissionSpec));
 }
 
-bool QFile_setPermissions2(struct seaqt_string filename, int permissionSpec) {
+bool QFile_setPermissions_filename_permissionSpec(struct seaqt_string filename, int permissionSpec) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	return QFile::setPermissions(filename_QString, static_cast<QFileDevice::Permissions>(permissionSpec));
 }
 
-struct seaqt_string QFile_tr2(const char* s, const char* c) {
+struct seaqt_string QFile_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFile::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -683,7 +683,7 @@ struct seaqt_string QFile_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFile_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFile_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFile::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -694,7 +694,7 @@ struct seaqt_string QFile_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QFile_trUtf82(const char* s, const char* c) {
+struct seaqt_string QFile_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QFile::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -705,7 +705,7 @@ struct seaqt_string QFile_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFile_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QFile_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFile::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -716,7 +716,7 @@ struct seaqt_string QFile_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QFile_open5(QFile* self, int fd, int ioFlags, int handleFlags) {
+bool QFile_open_fd_ioFlags_handleFlags(QFile* self, int fd, int ioFlags, int handleFlags) {
 	return self->open(static_cast<int>(fd), static_cast<QIODevice::OpenMode>(ioFlags), static_cast<QFileDevice::FileHandleFlags>(handleFlags));
 }
 
@@ -751,7 +751,7 @@ struct seaqt_string QFile_virtualbase_fileName(const VirtualQFile* self) {
 	return _ms;
 }
 
-bool QFile_virtualbase_open(VirtualQFile* self, int flags) {
+bool QFile_virtualbase_open_flags(VirtualQFile* self, int flags) {
 
 	return self->QFile::open(static_cast<VirtualQFile::OpenMode>(flags));
 }
@@ -762,7 +762,7 @@ long long QFile_virtualbase_size(const VirtualQFile* self) {
 	return static_cast<long long>(_ret);
 }
 
-bool QFile_virtualbase_resize(VirtualQFile* self, long long sz) {
+bool QFile_virtualbase_resize_sz(VirtualQFile* self, long long sz) {
 
 	return self->QFile::resize(static_cast<qint64>(sz));
 }
@@ -773,7 +773,7 @@ int QFile_virtualbase_permissions(const VirtualQFile* self) {
 	return static_cast<int>(_ret);
 }
 
-bool QFile_virtualbase_setPermissions(VirtualQFile* self, int permissionSpec) {
+bool QFile_virtualbase_setPermissions_permissionSpec(VirtualQFile* self, int permissionSpec) {
 
 	return self->QFile::setPermissions(static_cast<VirtualQFile::Permissions>(permissionSpec));
 }

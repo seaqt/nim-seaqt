@@ -65,8 +65,8 @@ type cQGraphicsItemAnimation*{.exportc: "QGraphicsItemAnimation", incompleteStru
 proc fcQGraphicsItemAnimation_metaObject(self: pointer): pointer {.importc: "QGraphicsItemAnimation_metaObject".}
 proc fcQGraphicsItemAnimation_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsItemAnimation_metacast".}
 proc fcQGraphicsItemAnimation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsItemAnimation_metacall".}
-proc fcQGraphicsItemAnimation_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsItemAnimation_tr".}
-proc fcQGraphicsItemAnimation_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGraphicsItemAnimation_trUtf8".}
+proc fcQGraphicsItemAnimation_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsItemAnimation_tr_s".}
+proc fcQGraphicsItemAnimation_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGraphicsItemAnimation_trUtf8_s".}
 proc fcQGraphicsItemAnimation_item(self: pointer): pointer {.importc: "QGraphicsItemAnimation_item".}
 proc fcQGraphicsItemAnimation_setItem(self: pointer, item: pointer): void {.importc: "QGraphicsItemAnimation_setItem".}
 proc fcQGraphicsItemAnimation_timeLine(self: pointer): pointer {.importc: "QGraphicsItemAnimation_timeLine".}
@@ -94,10 +94,10 @@ proc fcQGraphicsItemAnimation_setShearAt(self: pointer, step: float64, sh: float
 proc fcQGraphicsItemAnimation_clear(self: pointer): void {.importc: "QGraphicsItemAnimation_clear".}
 proc fcQGraphicsItemAnimation_setStep(self: pointer, x: float64): void {.importc: "QGraphicsItemAnimation_setStep".}
 proc fcQGraphicsItemAnimation_reset(self: pointer): void {.importc: "QGraphicsItemAnimation_reset".}
-proc fcQGraphicsItemAnimation_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsItemAnimation_tr2".}
-proc fcQGraphicsItemAnimation_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsItemAnimation_tr3".}
-proc fcQGraphicsItemAnimation_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsItemAnimation_trUtf82".}
-proc fcQGraphicsItemAnimation_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsItemAnimation_trUtf83".}
+proc fcQGraphicsItemAnimation_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsItemAnimation_tr_s_c".}
+proc fcQGraphicsItemAnimation_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsItemAnimation_tr_s_c_n".}
+proc fcQGraphicsItemAnimation_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsItemAnimation_trUtf8_s_c".}
+proc fcQGraphicsItemAnimation_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsItemAnimation_trUtf8_s_c_n".}
 proc fcQGraphicsItemAnimation_vdata(self: pointer): ptr pointer {.importc: "QGraphicsItemAnimation_vdata".}
 proc fvdata_cQGraphicsItemAnimation(self: pointer): pointer {.importc: "vdata_QGraphicsItemAnimation".}
 
@@ -132,7 +132,7 @@ proc fcQGraphicsItemAnimation_protectedbase_senderSignalIndex(self: pointer): ci
 proc fcQGraphicsItemAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsItemAnimation_protectedbase_receivers".}
 proc fcQGraphicsItemAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsItemAnimation_protectedbase_isSignalConnected".}
 proc fcQGraphicsItemAnimation_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new".}
-proc fcQGraphicsItemAnimation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new2".}
+proc fcQGraphicsItemAnimation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new_parent".}
 proc fcQGraphicsItemAnimation_staticMetaObject(): pointer {.importc: "QGraphicsItemAnimation_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation): gen_qobjectdefs_types.QMetaObject =
@@ -145,13 +145,13 @@ proc metacall*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, pa
   fcQGraphicsItemAnimation_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, s: cstring): string =
-  let v_ms = fcQGraphicsItemAnimation_tr(s)
+  let v_ms = fcQGraphicsItemAnimation_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, s: cstring): string =
-  let v_ms = fcQGraphicsItemAnimation_trUtf8(s)
+  let v_ms = fcQGraphicsItemAnimation_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -313,25 +313,25 @@ proc reset*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation): void
   fcQGraphicsItemAnimation_reset(self.h)
 
 proc tr*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsItemAnimation_tr2(s, c)
+  let v_ms = fcQGraphicsItemAnimation_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsItemAnimation_tr3(s, c, n)
+  let v_ms = fcQGraphicsItemAnimation_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsItemAnimation_trUtf82(s, c)
+  let v_ms = fcQGraphicsItemAnimation_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsItemAnimation_trUtf83(s, c, n)
+  let v_ms = fcQGraphicsItemAnimation_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

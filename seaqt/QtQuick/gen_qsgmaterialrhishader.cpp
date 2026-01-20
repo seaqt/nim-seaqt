@@ -75,8 +75,8 @@ void QSGMaterialRhiShader__RenderState_delete(QSGMaterialRhiShader__RenderState*
 	delete self;
 }
 
-QSGMaterialRhiShader__GraphicsPipelineState* QSGMaterialRhiShader__GraphicsPipelineState_new(QSGMaterialRhiShader__GraphicsPipelineState* param1) {
-	return new (std::nothrow) QSGMaterialRhiShader__GraphicsPipelineState(*param1);
+QSGMaterialRhiShader__GraphicsPipelineState* QSGMaterialRhiShader__GraphicsPipelineState_new(QSGMaterialRhiShader__GraphicsPipelineState* from) {
+	return new (std::nothrow) QSGMaterialRhiShader__GraphicsPipelineState(*from);
 }
 
 bool QSGMaterialRhiShader__GraphicsPipelineState_blendEnable(const QSGMaterialRhiShader__GraphicsPipelineState* self) {
@@ -131,8 +131,8 @@ void QSGMaterialRhiShader__GraphicsPipelineState_setCullMode(QSGMaterialRhiShade
 	self->cullMode = static_cast<QSGMaterialRhiShader::GraphicsPipelineState::CullMode>(cullMode);
 }
 
-void QSGMaterialRhiShader__GraphicsPipelineState_operatorAssign(QSGMaterialRhiShader__GraphicsPipelineState* self, QSGMaterialRhiShader__GraphicsPipelineState* param1) {
-	self->operator=(*param1);
+void QSGMaterialRhiShader__GraphicsPipelineState_operatorAssign(QSGMaterialRhiShader__GraphicsPipelineState* self, QSGMaterialRhiShader__GraphicsPipelineState* from) {
+	self->operator=(*from);
 }
 
 void QSGMaterialRhiShader__GraphicsPipelineState_delete(QSGMaterialRhiShader__GraphicsPipelineState* self) {

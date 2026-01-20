@@ -101,14 +101,14 @@ type cQTabBar*{.exportc: "QTabBar", incompleteStruct.} = object
 proc fcQTabBar_metaObject(self: pointer): pointer {.importc: "QTabBar_metaObject".}
 proc fcQTabBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QTabBar_metacast".}
 proc fcQTabBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTabBar_metacall".}
-proc fcQTabBar_tr(s: cstring): struct_seaqt_string {.importc: "QTabBar_tr".}
-proc fcQTabBar_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTabBar_trUtf8".}
+proc fcQTabBar_trS(s: cstring): struct_seaqt_string {.importc: "QTabBar_tr_s".}
+proc fcQTabBar_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTabBar_trUtf8_s".}
 proc fcQTabBar_shape(self: pointer): cint {.importc: "QTabBar_shape".}
 proc fcQTabBar_setShape(self: pointer, shape: cint): void {.importc: "QTabBar_setShape".}
-proc fcQTabBar_addTab(self: pointer, text: struct_seaqt_string): cint {.importc: "QTabBar_addTab".}
-proc fcQTabBar_addTab2(self: pointer, icon: pointer, text: struct_seaqt_string): cint {.importc: "QTabBar_addTab2".}
-proc fcQTabBar_insertTab(self: pointer, index: cint, text: struct_seaqt_string): cint {.importc: "QTabBar_insertTab".}
-proc fcQTabBar_insertTab2(self: pointer, index: cint, icon: pointer, text: struct_seaqt_string): cint {.importc: "QTabBar_insertTab2".}
+proc fcQTabBar_addTabText(self: pointer, text: struct_seaqt_string): cint {.importc: "QTabBar_addTab_text".}
+proc fcQTabBar_addTabIconText(self: pointer, icon: pointer, text: struct_seaqt_string): cint {.importc: "QTabBar_addTab_icon_text".}
+proc fcQTabBar_insertTabIndexText(self: pointer, index: cint, text: struct_seaqt_string): cint {.importc: "QTabBar_insertTab_index_text".}
+proc fcQTabBar_insertTabIndexIconText(self: pointer, index: cint, icon: pointer, text: struct_seaqt_string): cint {.importc: "QTabBar_insertTab_index_icon_text".}
 proc fcQTabBar_removeTab(self: pointer, index: cint): void {.importc: "QTabBar_removeTab".}
 proc fcQTabBar_moveTab(self: pointer, fromVal: cint, to: cint): void {.importc: "QTabBar_moveTab".}
 proc fcQTabBar_isTabEnabled(self: pointer, index: cint): bool {.importc: "QTabBar_isTabEnabled".}
@@ -170,10 +170,10 @@ proc fcQTabBar_tabBarClicked(self: pointer, index: cint): void {.importc: "QTabB
 proc fcQTabBar_connect_tabBarClicked(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabBar_connect_tabBarClicked".}
 proc fcQTabBar_tabBarDoubleClicked(self: pointer, index: cint): void {.importc: "QTabBar_tabBarDoubleClicked".}
 proc fcQTabBar_connect_tabBarDoubleClicked(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabBar_connect_tabBarDoubleClicked".}
-proc fcQTabBar_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabBar_tr2".}
-proc fcQTabBar_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabBar_tr3".}
-proc fcQTabBar_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabBar_trUtf82".}
-proc fcQTabBar_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabBar_trUtf83".}
+proc fcQTabBar_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabBar_tr_s_c".}
+proc fcQTabBar_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabBar_tr_s_c_n".}
+proc fcQTabBar_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabBar_trUtf8_s_c".}
+proc fcQTabBar_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabBar_trUtf8_s_c_n".}
 proc fcQTabBar_vdata(self: pointer): ptr pointer {.importc: "QTabBar_vdata".}
 proc fvdata_cQTabBar(self: pointer): pointer {.importc: "vdata_QTabBar".}
 
@@ -299,8 +299,8 @@ proc fcQTabBar_protectedbase_sender(self: pointer): pointer {.importc: "QTabBar_
 proc fcQTabBar_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QTabBar_protectedbase_senderSignalIndex".}
 proc fcQTabBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTabBar_protectedbase_receivers".}
 proc fcQTabBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTabBar_protectedbase_isSignalConnected".}
-proc fcQTabBar_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTabBar {.importc: "QTabBar_new".}
-proc fcQTabBar_new2(vtbl: pointer, vdata: csize_t): ptr cQTabBar {.importc: "QTabBar_new2".}
+proc fcQTabBar_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTabBar {.importc: "QTabBar_new_parent".}
+proc fcQTabBar_new2(vtbl: pointer, vdata: csize_t): ptr cQTabBar {.importc: "QTabBar_new".}
 proc fcQTabBar_staticMetaObject(): pointer {.importc: "QTabBar_staticMetaObject".}
 
 proc metaObject*(self: gen_qtabbar_types.QTabBar): gen_qobjectdefs_types.QMetaObject =
@@ -313,13 +313,13 @@ proc metacall*(self: gen_qtabbar_types.QTabBar, param1: cint, param2: cint, para
   fcQTabBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtabbar_types.QTabBar, s: cstring): string =
-  let v_ms = fcQTabBar_tr(s)
+  let v_ms = fcQTabBar_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtabbar_types.QTabBar, s: cstring): string =
-  let v_ms = fcQTabBar_trUtf8(s)
+  let v_ms = fcQTabBar_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -331,16 +331,16 @@ proc setShape*(self: gen_qtabbar_types.QTabBar, shape: cint): void =
   fcQTabBar_setShape(self.h, cint(shape))
 
 proc addTab*(self: gen_qtabbar_types.QTabBar, text: openArray[char]): cint =
-  fcQTabBar_addTab(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQTabBar_addTabText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc addTab*(self: gen_qtabbar_types.QTabBar, icon: gen_qicon_types.QIcon, text: openArray[char]): cint =
-  fcQTabBar_addTab2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQTabBar_addTabIconText(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc insertTab*(self: gen_qtabbar_types.QTabBar, index: cint, text: openArray[char]): cint =
-  fcQTabBar_insertTab(self.h, index, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQTabBar_insertTabIndexText(self.h, index, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc insertTab*(self: gen_qtabbar_types.QTabBar, index: cint, icon: gen_qicon_types.QIcon, text: openArray[char]): cint =
-  fcQTabBar_insertTab2(self.h, index, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQTabBar_insertTabIndexIconText(self.h, index, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc removeTab*(self: gen_qtabbar_types.QTabBar, index: cint): void =
   fcQTabBar_removeTab(self.h, index)
@@ -610,25 +610,25 @@ proc onTabBarDoubleClicked*(self: gen_qtabbar_types.QTabBar, slot: QTabBartabBar
   fcQTabBar_connect_tabBarDoubleClicked(self.h, cast[int](addr tmp[]), fcQTabBar_slot_callback_tabBarDoubleClicked, fcQTabBar_slot_callback_tabBarDoubleClicked_release)
 
 proc tr*(_: type gen_qtabbar_types.QTabBar, s: cstring, c: cstring): string =
-  let v_ms = fcQTabBar_tr2(s, c)
+  let v_ms = fcQTabBar_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtabbar_types.QTabBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTabBar_tr3(s, c, n)
+  let v_ms = fcQTabBar_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtabbar_types.QTabBar, s: cstring, c: cstring): string =
-  let v_ms = fcQTabBar_trUtf82(s, c)
+  let v_ms = fcQTabBar_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtabbar_types.QTabBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTabBar_trUtf83(s, c, n)
+  let v_ms = fcQTabBar_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

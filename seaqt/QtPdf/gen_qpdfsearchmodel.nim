@@ -79,8 +79,8 @@ type cQPdfSearchModel*{.exportc: "QPdfSearchModel", incompleteStruct.} = object
 proc fcQPdfSearchModel_metaObject(self: pointer): pointer {.importc: "QPdfSearchModel_metaObject".}
 proc fcQPdfSearchModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfSearchModel_metacast".}
 proc fcQPdfSearchModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfSearchModel_metacall".}
-proc fcQPdfSearchModel_tr(s: cstring): struct_seaqt_string {.importc: "QPdfSearchModel_tr".}
-proc fcQPdfSearchModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPdfSearchModel_trUtf8".}
+proc fcQPdfSearchModel_trS(s: cstring): struct_seaqt_string {.importc: "QPdfSearchModel_tr_s".}
+proc fcQPdfSearchModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPdfSearchModel_trUtf8_s".}
 proc fcQPdfSearchModel_resultsOnPage(self: pointer, page: cint): struct_seaqt_array {.importc: "QPdfSearchModel_resultsOnPage".}
 proc fcQPdfSearchModel_resultAtIndex(self: pointer, index: cint): pointer {.importc: "QPdfSearchModel_resultAtIndex".}
 proc fcQPdfSearchModel_document(self: pointer): pointer {.importc: "QPdfSearchModel_document".}
@@ -94,10 +94,10 @@ proc fcQPdfSearchModel_documentChanged(self: pointer): void {.importc: "QPdfSear
 proc fcQPdfSearchModel_connect_documentChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfSearchModel_connect_documentChanged".}
 proc fcQPdfSearchModel_searchStringChanged(self: pointer): void {.importc: "QPdfSearchModel_searchStringChanged".}
 proc fcQPdfSearchModel_connect_searchStringChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfSearchModel_connect_searchStringChanged".}
-proc fcQPdfSearchModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfSearchModel_tr2".}
-proc fcQPdfSearchModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfSearchModel_tr3".}
-proc fcQPdfSearchModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfSearchModel_trUtf82".}
-proc fcQPdfSearchModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfSearchModel_trUtf83".}
+proc fcQPdfSearchModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfSearchModel_tr_s_c".}
+proc fcQPdfSearchModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfSearchModel_tr_s_c_n".}
+proc fcQPdfSearchModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfSearchModel_trUtf8_s_c".}
+proc fcQPdfSearchModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfSearchModel_trUtf8_s_c_n".}
 proc fcQPdfSearchModel_vdata(self: pointer): ptr pointer {.importc: "QPdfSearchModel_vdata".}
 proc fvdata_cQPdfSearchModel(self: pointer): pointer {.importc: "vdata_QPdfSearchModel".}
 
@@ -187,7 +187,7 @@ proc fcQPdfSearchModel_virtualbase_connectNotify(self: pointer, signal: pointer)
 proc fcQPdfSearchModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPdfSearchModel_virtualbase_disconnectNotify".}
 proc fcQPdfSearchModel_protectedbase_updatePage(self: pointer, page: cint): void {.importc: "QPdfSearchModel_protectedbase_updatePage".}
 proc fcQPdfSearchModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QPdfSearchModel_protectedbase_resetInternalData".}
-proc fcQPdfSearchModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QPdfSearchModel_protectedbase_createIndex".}
+proc fcQPdfSearchModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QPdfSearchModel_protectedbase_createIndex_row_column".}
 proc fcQPdfSearchModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QPdfSearchModel_protectedbase_encodeData".}
 proc fcQPdfSearchModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QPdfSearchModel_protectedbase_decodeData".}
 proc fcQPdfSearchModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QPdfSearchModel_protectedbase_beginInsertRows".}
@@ -212,7 +212,7 @@ proc fcQPdfSearchModel_protectedbase_senderSignalIndex(self: pointer): cint {.im
 proc fcQPdfSearchModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfSearchModel_protectedbase_receivers".}
 proc fcQPdfSearchModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfSearchModel_protectedbase_isSignalConnected".}
 proc fcQPdfSearchModel_new(vtbl: pointer, vdata: csize_t): ptr cQPdfSearchModel {.importc: "QPdfSearchModel_new".}
-proc fcQPdfSearchModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfSearchModel {.importc: "QPdfSearchModel_new2".}
+proc fcQPdfSearchModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfSearchModel {.importc: "QPdfSearchModel_new_parent".}
 proc fcQPdfSearchModel_staticMetaObject(): pointer {.importc: "QPdfSearchModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qpdfsearchmodel_types.QPdfSearchModel): gen_qobjectdefs_types.QMetaObject =
@@ -225,13 +225,13 @@ proc metacall*(self: gen_qpdfsearchmodel_types.QPdfSearchModel, param1: cint, pa
   fcQPdfSearchModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfsearchmodel_types.QPdfSearchModel, s: cstring): string =
-  let v_ms = fcQPdfSearchModel_tr(s)
+  let v_ms = fcQPdfSearchModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfsearchmodel_types.QPdfSearchModel, s: cstring): string =
-  let v_ms = fcQPdfSearchModel_trUtf8(s)
+  let v_ms = fcQPdfSearchModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -324,25 +324,25 @@ proc onSearchStringChanged*(self: gen_qpdfsearchmodel_types.QPdfSearchModel, slo
   fcQPdfSearchModel_connect_searchStringChanged(self.h, cast[int](addr tmp[]), fcQPdfSearchModel_slot_callback_searchStringChanged, fcQPdfSearchModel_slot_callback_searchStringChanged_release)
 
 proc tr*(_: type gen_qpdfsearchmodel_types.QPdfSearchModel, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfSearchModel_tr2(s, c)
+  let v_ms = fcQPdfSearchModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfsearchmodel_types.QPdfSearchModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfSearchModel_tr3(s, c, n)
+  let v_ms = fcQPdfSearchModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfsearchmodel_types.QPdfSearchModel, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfSearchModel_trUtf82(s, c)
+  let v_ms = fcQPdfSearchModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfsearchmodel_types.QPdfSearchModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfSearchModel_trUtf83(s, c, n)
+  let v_ms = fcQPdfSearchModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1465,7 +1465,7 @@ proc resetInternalData*(self: gen_qpdfsearchmodel_types.QPdfSearchModel): void =
   fcQPdfSearchModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qpdfsearchmodel_types.QPdfSearchModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQPdfSearchModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQPdfSearchModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qpdfsearchmodel_types.QPdfSearchModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

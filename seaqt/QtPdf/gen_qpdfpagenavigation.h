@@ -53,14 +53,14 @@ void* QPdfPageNavigation_vdata(VirtualQPdfPageNavigation* self);
 VirtualQPdfPageNavigation* vdata_QPdfPageNavigation(void* vdata);
 
 VirtualQPdfPageNavigation* QPdfPageNavigation_new(const QPdfPageNavigation_VTable* vtbl, size_t vdata);
-VirtualQPdfPageNavigation* QPdfPageNavigation_new2(const QPdfPageNavigation_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPdfPageNavigation* QPdfPageNavigation_new_parent(const QPdfPageNavigation_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QPdfPageNavigation_virtbase(QPdfPageNavigation* src, QObject** outptr_QObject);
 QMetaObject* QPdfPageNavigation_metaObject(const QPdfPageNavigation* self);
 void* QPdfPageNavigation_metacast(QPdfPageNavigation* self, const char* param1);
 int QPdfPageNavigation_metacall(QPdfPageNavigation* self, int param1, int param2, void** param3);
-struct seaqt_string QPdfPageNavigation_tr(const char* s);
-struct seaqt_string QPdfPageNavigation_trUtf8(const char* s);
+struct seaqt_string QPdfPageNavigation_tr_s(const char* s);
+struct seaqt_string QPdfPageNavigation_trUtf8_s(const char* s);
 QPdfDocument* QPdfPageNavigation_document(const QPdfPageNavigation* self);
 void QPdfPageNavigation_setDocument(QPdfPageNavigation* self, QPdfDocument* document);
 int QPdfPageNavigation_currentPage(const QPdfPageNavigation* self);
@@ -80,10 +80,10 @@ void QPdfPageNavigation_canGoToPreviousPageChanged(QPdfPageNavigation* self, boo
 void QPdfPageNavigation_connect_canGoToPreviousPageChanged(QPdfPageNavigation* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QPdfPageNavigation_canGoToNextPageChanged(QPdfPageNavigation* self, bool canGo);
 void QPdfPageNavigation_connect_canGoToNextPageChanged(QPdfPageNavigation* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-struct seaqt_string QPdfPageNavigation_tr2(const char* s, const char* c);
-struct seaqt_string QPdfPageNavigation_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPdfPageNavigation_trUtf82(const char* s, const char* c);
-struct seaqt_string QPdfPageNavigation_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QPdfPageNavigation_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPdfPageNavigation_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPdfPageNavigation_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPdfPageNavigation_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPdfPageNavigation_virtualbase_metaObject(const VirtualQPdfPageNavigation* self);
 void* QPdfPageNavigation_virtualbase_metacast(VirtualQPdfPageNavigation* self, const char* param1);

@@ -21,12 +21,12 @@ QMimeType* QMimeType_new() {
 	return new (std::nothrow) QMimeType();
 }
 
-QMimeType* QMimeType_new2(QMimeType* other) {
-	return new (std::nothrow) QMimeType(*other);
+QMimeType* QMimeType_new_from(QMimeType* from) {
+	return new (std::nothrow) QMimeType(*from);
 }
 
-void QMimeType_operatorAssign(QMimeType* self, QMimeType* other) {
-	self->operator=(*other);
+void QMimeType_operatorAssign(QMimeType* self, QMimeType* from) {
+	self->operator=(*from);
 }
 
 void QMimeType_swap(QMimeType* self, QMimeType* other) {

@@ -63,14 +63,14 @@ void* QAbstractVideoSurface_vdata(VirtualQAbstractVideoSurface* self);
 VirtualQAbstractVideoSurface* vdata_QAbstractVideoSurface(void* vdata);
 
 VirtualQAbstractVideoSurface* QAbstractVideoSurface_new(const QAbstractVideoSurface_VTable* vtbl, size_t vdata);
-VirtualQAbstractVideoSurface* QAbstractVideoSurface_new2(const QAbstractVideoSurface_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAbstractVideoSurface* QAbstractVideoSurface_new_parent(const QAbstractVideoSurface_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAbstractVideoSurface_virtbase(QAbstractVideoSurface* src, QObject** outptr_QObject);
 QMetaObject* QAbstractVideoSurface_metaObject(const QAbstractVideoSurface* self);
 void* QAbstractVideoSurface_metacast(QAbstractVideoSurface* self, const char* param1);
 int QAbstractVideoSurface_metacall(QAbstractVideoSurface* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractVideoSurface_tr(const char* s);
-struct seaqt_string QAbstractVideoSurface_trUtf8(const char* s);
+struct seaqt_string QAbstractVideoSurface_tr_s(const char* s);
+struct seaqt_string QAbstractVideoSurface_trUtf8_s(const char* s);
 struct seaqt_array /* of int */  QAbstractVideoSurface_supportedPixelFormats(const QAbstractVideoSurface* self, int type);
 bool QAbstractVideoSurface_isFormatSupported(const QAbstractVideoSurface* self, QVideoSurfaceFormat* format);
 QVideoSurfaceFormat* QAbstractVideoSurface_nearestFormat(const QAbstractVideoSurface* self, QVideoSurfaceFormat* format);
@@ -89,10 +89,10 @@ void QAbstractVideoSurface_supportedFormatsChanged(QAbstractVideoSurface* self);
 void QAbstractVideoSurface_connect_supportedFormatsChanged(QAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAbstractVideoSurface_nativeResolutionChanged(QAbstractVideoSurface* self, QSize* resolution);
 void QAbstractVideoSurface_connect_nativeResolutionChanged(QAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t));
-struct seaqt_string QAbstractVideoSurface_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractVideoSurface_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractVideoSurface_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractVideoSurface_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractVideoSurface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractVideoSurface_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractVideoSurface_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractVideoSurface_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractVideoSurface_virtualbase_metaObject(const VirtualQAbstractVideoSurface* self);
 void* QAbstractVideoSurface_virtualbase_metacast(VirtualQAbstractVideoSurface* self, const char* param1);

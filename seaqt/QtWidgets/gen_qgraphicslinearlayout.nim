@@ -61,7 +61,7 @@ proc fcQGraphicsLinearLayout_orientation(self: pointer): cint {.importc: "QGraph
 proc fcQGraphicsLinearLayout_addItem(self: pointer, item: pointer): void {.importc: "QGraphicsLinearLayout_addItem".}
 proc fcQGraphicsLinearLayout_addStretch(self: pointer): void {.importc: "QGraphicsLinearLayout_addStretch".}
 proc fcQGraphicsLinearLayout_insertItem(self: pointer, index: cint, item: pointer): void {.importc: "QGraphicsLinearLayout_insertItem".}
-proc fcQGraphicsLinearLayout_insertStretch(self: pointer, index: cint): void {.importc: "QGraphicsLinearLayout_insertStretch".}
+proc fcQGraphicsLinearLayout_insertStretchIndex(self: pointer, index: cint): void {.importc: "QGraphicsLinearLayout_insertStretch_index".}
 proc fcQGraphicsLinearLayout_removeItem(self: pointer, item: pointer): void {.importc: "QGraphicsLinearLayout_removeItem".}
 proc fcQGraphicsLinearLayout_removeAt(self: pointer, index: cint): void {.importc: "QGraphicsLinearLayout_removeAt".}
 proc fcQGraphicsLinearLayout_setSpacing(self: pointer, spacing: float64): void {.importc: "QGraphicsLinearLayout_setSpacing".}
@@ -78,9 +78,9 @@ proc fcQGraphicsLinearLayout_itemAt(self: pointer, index: cint): pointer {.impor
 proc fcQGraphicsLinearLayout_invalidate(self: pointer): void {.importc: "QGraphicsLinearLayout_invalidate".}
 proc fcQGraphicsLinearLayout_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.importc: "QGraphicsLinearLayout_sizeHint".}
 proc fcQGraphicsLinearLayout_dump(self: pointer): void {.importc: "QGraphicsLinearLayout_dump".}
-proc fcQGraphicsLinearLayout_addStretchWithStretch(self: pointer, stretch: cint): void {.importc: "QGraphicsLinearLayout_addStretchWithStretch".}
-proc fcQGraphicsLinearLayout_insertStretch2(self: pointer, index: cint, stretch: cint): void {.importc: "QGraphicsLinearLayout_insertStretch2".}
-proc fcQGraphicsLinearLayout_dumpWithIndent(self: pointer, indent: cint): void {.importc: "QGraphicsLinearLayout_dumpWithIndent".}
+proc fcQGraphicsLinearLayout_addStretchStretch(self: pointer, stretch: cint): void {.importc: "QGraphicsLinearLayout_addStretch_stretch".}
+proc fcQGraphicsLinearLayout_insertStretchIndexStretch(self: pointer, index: cint, stretch: cint): void {.importc: "QGraphicsLinearLayout_insertStretch_index_stretch".}
+proc fcQGraphicsLinearLayout_dumpIndent(self: pointer, indent: cint): void {.importc: "QGraphicsLinearLayout_dump_indent".}
 proc fcQGraphicsLinearLayout_vdata(self: pointer): ptr pointer {.importc: "QGraphicsLinearLayout_vdata".}
 proc fvdata_cQGraphicsLinearLayout(self: pointer): pointer {.importc: "vdata_QGraphicsLinearLayout".}
 
@@ -108,9 +108,9 @@ proc fcQGraphicsLinearLayout_protectedbase_addChildLayoutItem(self: pointer, lay
 proc fcQGraphicsLinearLayout_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsLinearLayout_protectedbase_setGraphicsItem".}
 proc fcQGraphicsLinearLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsLinearLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsLinearLayout_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new".}
-proc fcQGraphicsLinearLayout_new2(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new2".}
-proc fcQGraphicsLinearLayout_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new3".}
-proc fcQGraphicsLinearLayout_new4(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new4".}
+proc fcQGraphicsLinearLayout_new2(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new_orientation".}
+proc fcQGraphicsLinearLayout_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new_parent".}
+proc fcQGraphicsLinearLayout_new4(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new_orientation_parent".}
 
 proc setOrientation*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, orientation: cint): void =
   fcQGraphicsLinearLayout_setOrientation(self.h, cint(orientation))
@@ -128,7 +128,7 @@ proc insertItem*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, in
   fcQGraphicsLinearLayout_insertItem(self.h, index, item.h)
 
 proc insertStretch*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, index: cint): void =
-  fcQGraphicsLinearLayout_insertStretch(self.h, index)
+  fcQGraphicsLinearLayout_insertStretchIndex(self.h, index)
 
 proc removeItem*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, item: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
   fcQGraphicsLinearLayout_removeItem(self.h, item.h)
@@ -179,13 +179,13 @@ proc dump*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout): void =
   fcQGraphicsLinearLayout_dump(self.h)
 
 proc addStretch*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, stretch: cint): void =
-  fcQGraphicsLinearLayout_addStretchWithStretch(self.h, stretch)
+  fcQGraphicsLinearLayout_addStretchStretch(self.h, stretch)
 
 proc insertStretch*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, index: cint, stretch: cint): void =
-  fcQGraphicsLinearLayout_insertStretch2(self.h, index, stretch)
+  fcQGraphicsLinearLayout_insertStretchIndexStretch(self.h, index, stretch)
 
 proc dump*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, indent: cint): void =
-  fcQGraphicsLinearLayout_dumpWithIndent(self.h, indent)
+  fcQGraphicsLinearLayout_dumpIndent(self.h, indent)
 
 type QGraphicsLinearLayoutremoveAtProc* = proc(self: QGraphicsLinearLayout, index: cint): void {.raises: [], gcsafe.}
 type QGraphicsLinearLayoutsetGeometryProc* = proc(self: QGraphicsLinearLayout, rect: gen_qrect_types.QRectF): void {.raises: [], gcsafe.}

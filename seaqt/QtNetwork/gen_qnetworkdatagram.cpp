@@ -18,27 +18,27 @@ QNetworkDatagram* QNetworkDatagram_new() {
 	return new (std::nothrow) QNetworkDatagram();
 }
 
-QNetworkDatagram* QNetworkDatagram_new2(struct seaqt_string data) {
+QNetworkDatagram* QNetworkDatagram_new_data(struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new (std::nothrow) QNetworkDatagram(data_QByteArray);
 }
 
-QNetworkDatagram* QNetworkDatagram_new3(QNetworkDatagram* other) {
-	return new (std::nothrow) QNetworkDatagram(*other);
+QNetworkDatagram* QNetworkDatagram_new_from(QNetworkDatagram* from) {
+	return new (std::nothrow) QNetworkDatagram(*from);
 }
 
-QNetworkDatagram* QNetworkDatagram_new4(struct seaqt_string data, QHostAddress* destinationAddress) {
+QNetworkDatagram* QNetworkDatagram_new_data_destinationAddress(struct seaqt_string data, QHostAddress* destinationAddress) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new (std::nothrow) QNetworkDatagram(data_QByteArray, *destinationAddress);
 }
 
-QNetworkDatagram* QNetworkDatagram_new5(struct seaqt_string data, QHostAddress* destinationAddress, unsigned short port) {
+QNetworkDatagram* QNetworkDatagram_new_data_destinationAddress_port(struct seaqt_string data, QHostAddress* destinationAddress, unsigned short port) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new (std::nothrow) QNetworkDatagram(data_QByteArray, *destinationAddress, static_cast<quint16>(port));
 }
 
-void QNetworkDatagram_operatorAssign(QNetworkDatagram* self, QNetworkDatagram* other) {
-	self->operator=(*other);
+void QNetworkDatagram_operatorAssign(QNetworkDatagram* self, QNetworkDatagram* from) {
+	self->operator=(*from);
 }
 
 void QNetworkDatagram_swap(QNetworkDatagram* self, QNetworkDatagram* other) {
@@ -82,7 +82,7 @@ int QNetworkDatagram_destinationPort(const QNetworkDatagram* self) {
 	return self->destinationPort();
 }
 
-void QNetworkDatagram_setSender(QNetworkDatagram* self, QHostAddress* address) {
+void QNetworkDatagram_setSender_address(QNetworkDatagram* self, QHostAddress* address) {
 	self->setSender(*address);
 }
 
@@ -117,7 +117,7 @@ QNetworkDatagram* QNetworkDatagram_makeReply(const QNetworkDatagram* self, struc
 	return new QNetworkDatagram(self->makeReply(payload_QByteArray));
 }
 
-void QNetworkDatagram_setSender2(QNetworkDatagram* self, QHostAddress* address, unsigned short port) {
+void QNetworkDatagram_setSender_address_port(QNetworkDatagram* self, QHostAddress* address, unsigned short port) {
 	self->setSender(*address, static_cast<quint16>(port));
 }
 

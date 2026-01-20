@@ -99,7 +99,7 @@ typedef struct QFontComboBox_VTable{
 	QSize* (*minimumSizeHint)(const VirtualQFontComboBox* self);
 	void (*showPopup)(VirtualQFontComboBox* self);
 	void (*hidePopup)(VirtualQFontComboBox* self);
-	QVariant* (*inputMethodQuery)(const VirtualQFontComboBox* self, int param1);
+	QVariant* (*inputMethodQuery_Qt_InputMethodQuery)(const VirtualQFontComboBox* self, int param1);
 	void (*focusInEvent)(VirtualQFontComboBox* self, QFocusEvent* e);
 	void (*focusOutEvent)(VirtualQFontComboBox* self, QFocusEvent* e);
 	void (*changeEvent)(VirtualQFontComboBox* self, QEvent* e);
@@ -148,15 +148,15 @@ typedef struct QFontComboBox_VTable{
 void* QFontComboBox_vdata(VirtualQFontComboBox* self);
 VirtualQFontComboBox* vdata_QFontComboBox(void* vdata);
 
-VirtualQFontComboBox* QFontComboBox_new(const QFontComboBox_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQFontComboBox* QFontComboBox_new2(const QFontComboBox_VTable* vtbl, size_t vdata);
+VirtualQFontComboBox* QFontComboBox_new_parent(const QFontComboBox_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQFontComboBox* QFontComboBox_new(const QFontComboBox_VTable* vtbl, size_t vdata);
 
 void QFontComboBox_virtbase(QFontComboBox* src, QComboBox** outptr_QComboBox);
 QMetaObject* QFontComboBox_metaObject(const QFontComboBox* self);
 void* QFontComboBox_metacast(QFontComboBox* self, const char* param1);
 int QFontComboBox_metacall(QFontComboBox* self, int param1, int param2, void** param3);
-struct seaqt_string QFontComboBox_tr(const char* s);
-struct seaqt_string QFontComboBox_trUtf8(const char* s);
+struct seaqt_string QFontComboBox_tr_s(const char* s);
+struct seaqt_string QFontComboBox_trUtf8_s(const char* s);
 void QFontComboBox_setWritingSystem(QFontComboBox* self, int writingSystem);
 int QFontComboBox_writingSystem(const QFontComboBox* self);
 void QFontComboBox_setFontFilters(QFontComboBox* self, int filters);
@@ -167,10 +167,10 @@ void QFontComboBox_setCurrentFont(QFontComboBox* self, QFont* f);
 void QFontComboBox_currentFontChanged(QFontComboBox* self, QFont* f);
 void QFontComboBox_connect_currentFontChanged(QFontComboBox* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t));
 bool QFontComboBox_event(QFontComboBox* self, QEvent* e);
-struct seaqt_string QFontComboBox_tr2(const char* s, const char* c);
-struct seaqt_string QFontComboBox_tr3(const char* s, const char* c, int n);
-struct seaqt_string QFontComboBox_trUtf82(const char* s, const char* c);
-struct seaqt_string QFontComboBox_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QFontComboBox_tr_s_c(const char* s, const char* c);
+struct seaqt_string QFontComboBox_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QFontComboBox_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QFontComboBox_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QFontComboBox_virtualbase_metaObject(const VirtualQFontComboBox* self);
 void* QFontComboBox_virtualbase_metacast(VirtualQFontComboBox* self, const char* param1);
@@ -180,7 +180,7 @@ bool QFontComboBox_virtualbase_event(VirtualQFontComboBox* self, QEvent* e);
 QSize* QFontComboBox_virtualbase_minimumSizeHint(const VirtualQFontComboBox* self);
 void QFontComboBox_virtualbase_showPopup(VirtualQFontComboBox* self);
 void QFontComboBox_virtualbase_hidePopup(VirtualQFontComboBox* self);
-QVariant* QFontComboBox_virtualbase_inputMethodQuery(const VirtualQFontComboBox* self, int param1);
+QVariant* QFontComboBox_virtualbase_inputMethodQuery_Qt_InputMethodQuery(const VirtualQFontComboBox* self, int param1);
 void QFontComboBox_virtualbase_focusInEvent(VirtualQFontComboBox* self, QFocusEvent* e);
 void QFontComboBox_virtualbase_focusOutEvent(VirtualQFontComboBox* self, QFocusEvent* e);
 void QFontComboBox_virtualbase_changeEvent(VirtualQFontComboBox* self, QEvent* e);

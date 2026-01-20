@@ -111,8 +111,8 @@ type cQListView*{.exportc: "QListView", incompleteStruct.} = object
 proc fcQListView_metaObject(self: pointer): pointer {.importc: "QListView_metaObject".}
 proc fcQListView_metacast(self: pointer, param1: cstring): pointer {.importc: "QListView_metacast".}
 proc fcQListView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QListView_metacall".}
-proc fcQListView_tr(s: cstring): struct_seaqt_string {.importc: "QListView_tr".}
-proc fcQListView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QListView_trUtf8".}
+proc fcQListView_trS(s: cstring): struct_seaqt_string {.importc: "QListView_tr_s".}
+proc fcQListView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QListView_trUtf8_s".}
 proc fcQListView_setMovement(self: pointer, movement: cint): void {.importc: "QListView_setMovement".}
 proc fcQListView_movement(self: pointer): cint {.importc: "QListView_movement".}
 proc fcQListView_setFlow(self: pointer, flow: cint): void {.importc: "QListView_setFlow".}
@@ -152,10 +152,10 @@ proc fcQListView_reset(self: pointer): void {.importc: "QListView_reset".}
 proc fcQListView_setRootIndex(self: pointer, index: pointer): void {.importc: "QListView_setRootIndex".}
 proc fcQListView_indexesMoved(self: pointer, indexes: struct_seaqt_array): void {.importc: "QListView_indexesMoved".}
 proc fcQListView_connect_indexesMoved(self: pointer, slot: int, callback: proc (slot: int, indexes: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListView_connect_indexesMoved".}
-proc fcQListView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QListView_tr2".}
-proc fcQListView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QListView_tr3".}
-proc fcQListView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QListView_trUtf82".}
-proc fcQListView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QListView_trUtf83".}
+proc fcQListView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QListView_tr_s_c".}
+proc fcQListView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QListView_tr_s_c_n".}
+proc fcQListView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QListView_trUtf8_s_c".}
+proc fcQListView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QListView_trUtf8_s_c_n".}
 proc fcQListView_vdata(self: pointer): ptr pointer {.importc: "QListView_vdata".}
 proc fvdata_cQListView(self: pointer): pointer {.importc: "vdata_QListView".}
 
@@ -213,7 +213,7 @@ type cQListViewVTable {.pure.} = object
   closeEditor*: proc(self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
   viewportEvent*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -305,7 +305,7 @@ proc fcQListView_virtualbase_horizontalScrollbarValueChanged(self: pointer, valu
 proc fcQListView_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void {.importc: "QListView_virtualbase_closeEditor".}
 proc fcQListView_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QListView_virtualbase_commitData".}
 proc fcQListView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QListView_virtualbase_editorDestroyed".}
-proc fcQListView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QListView_virtualbase_edit2".}
+proc fcQListView_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QListView_virtualbase_edit_index_trigger_event".}
 proc fcQListView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QListView_virtualbase_selectionCommand".}
 proc fcQListView_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QListView_virtualbase_focusNextPrevChild".}
 proc fcQListView_virtualbase_viewportEvent(self: pointer, event: pointer): bool {.importc: "QListView_virtualbase_viewportEvent".}
@@ -364,7 +364,7 @@ proc fcQListView_protectedbase_startAutoScroll(self: pointer): void {.importc: "
 proc fcQListView_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QListView_protectedbase_stopAutoScroll".}
 proc fcQListView_protectedbase_doAutoScroll(self: pointer): void {.importc: "QListView_protectedbase_doAutoScroll".}
 proc fcQListView_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QListView_protectedbase_dropIndicatorPosition".}
-proc fcQListView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QListView_protectedbase_setViewportMargins".}
+proc fcQListView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QListView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQListView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QListView_protectedbase_viewportMargins".}
 proc fcQListView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QListView_protectedbase_drawFrame".}
 proc fcQListView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QListView_protectedbase_initStyleOption".}
@@ -377,8 +377,8 @@ proc fcQListView_protectedbase_sender(self: pointer): pointer {.importc: "QListV
 proc fcQListView_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QListView_protectedbase_senderSignalIndex".}
 proc fcQListView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QListView_protectedbase_receivers".}
 proc fcQListView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QListView_protectedbase_isSignalConnected".}
-proc fcQListView_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQListView {.importc: "QListView_new".}
-proc fcQListView_new2(vtbl: pointer, vdata: csize_t): ptr cQListView {.importc: "QListView_new2".}
+proc fcQListView_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQListView {.importc: "QListView_new_parent".}
+proc fcQListView_new2(vtbl: pointer, vdata: csize_t): ptr cQListView {.importc: "QListView_new".}
 proc fcQListView_staticMetaObject(): pointer {.importc: "QListView_staticMetaObject".}
 
 proc metaObject*(self: gen_qlistview_types.QListView): gen_qobjectdefs_types.QMetaObject =
@@ -391,13 +391,13 @@ proc metacall*(self: gen_qlistview_types.QListView, param1: cint, param2: cint, 
   fcQListView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlistview_types.QListView, s: cstring): string =
-  let v_ms = fcQListView_tr(s)
+  let v_ms = fcQListView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlistview_types.QListView, s: cstring): string =
-  let v_ms = fcQListView_trUtf8(s)
+  let v_ms = fcQListView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -544,25 +544,25 @@ proc onIndexesMoved*(self: gen_qlistview_types.QListView, slot: QListViewindexes
   fcQListView_connect_indexesMoved(self.h, cast[int](addr tmp[]), fcQListView_slot_callback_indexesMoved, fcQListView_slot_callback_indexesMoved_release)
 
 proc tr*(_: type gen_qlistview_types.QListView, s: cstring, c: cstring): string =
-  let v_ms = fcQListView_tr2(s, c)
+  let v_ms = fcQListView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlistview_types.QListView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQListView_tr3(s, c, n)
+  let v_ms = fcQListView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlistview_types.QListView, s: cstring, c: cstring): string =
-  let v_ms = fcQListView_trUtf82(s, c)
+  let v_ms = fcQListView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlistview_types.QListView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQListView_trUtf83(s, c, n)
+  let v_ms = fcQListView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -619,7 +619,7 @@ type QListViewhorizontalScrollbarValueChangedProc* = proc(self: QListView, value
 type QListViewcloseEditorProc* = proc(self: QListView, editor: gen_qwidget_types.QWidget, hint: cint): void {.raises: [], gcsafe.}
 type QListViewcommitDataProc* = proc(self: QListView, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QListVieweditorDestroyedProc* = proc(self: QListView, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
-type QListViewedit2Proc* = proc(self: QListView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QListVieweditIndexTriggerEventProc* = proc(self: QListView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QListViewselectionCommandProc* = proc(self: QListView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QListViewfocusNextPrevChildProc* = proc(self: QListView, next: bool): bool {.raises: [], gcsafe.}
 type QListViewviewportEventProc* = proc(self: QListView, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
@@ -714,7 +714,7 @@ type QListViewVTable* {.inheritable, pure.} = object
   closeEditor*: QListViewcloseEditorProc
   commitData*: QListViewcommitDataProc
   editorDestroyed*: QListVieweditorDestroyedProc
-  edit2*: QListViewedit2Proc
+  editIndexTriggerEvent*: QListVieweditIndexTriggerEventProc
   selectionCommand*: QListViewselectionCommandProc
   focusNextPrevChild*: QListViewfocusNextPrevChildProc
   viewportEvent*: QListViewviewportEventProc
@@ -922,7 +922,7 @@ proc QListVieweditorDestroyed*(self: gen_qlistview_types.QListView, editor: gen_
   fcQListView_virtualbase_editorDestroyed(self.h, editor.h)
 
 proc QListViewedit*(self: gen_qlistview_types.QListView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQListView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQListView_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QListViewselectionCommand*(self: gen_qlistview_types.QListView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQListView_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -1414,13 +1414,13 @@ proc fcQListView_vtable_callback_editorDestroyed(self: pointer, editor: pointer)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc fcQListView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQListView_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QListViewVTable](fcQListView_vdata(self)[])
   let self = QListView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQListView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -2195,7 +2195,7 @@ proc fcQListView_method_callback_editorDestroyed(self: pointer, editor: pointer)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-proc fcQListView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQListView_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQListView](fcQListView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2487,7 +2487,7 @@ proc dropIndicatorPosition*(self: gen_qlistview_types.QListView): cint =
   cint(fcQListView_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qlistview_types.QListView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQListView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQListView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qlistview_types.QListView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQListView_protectedbase_viewportMargins(self.h), owned: true)
@@ -2637,8 +2637,8 @@ proc create*(T: type gen_qlistview_types.QListView,
     vtbl[].vtbl.commitData = fcQListView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQListView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQListView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQListView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQListView_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -2831,8 +2831,8 @@ proc create*(T: type gen_qlistview_types.QListView,
     vtbl[].vtbl.commitData = fcQListView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQListView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQListView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQListView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQListView_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -2972,7 +2972,7 @@ const cQListView_mvtbl = cQListViewVTable(
   closeEditor: fcQListView_method_callback_closeEditor,
   commitData: fcQListView_method_callback_commitData,
   editorDestroyed: fcQListView_method_callback_editorDestroyed,
-  edit2: fcQListView_method_callback_edit2,
+  editIndexTriggerEvent: fcQListView_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQListView_method_callback_selectionCommand,
   focusNextPrevChild: fcQListView_method_callback_focusNextPrevChild,
   viewportEvent: fcQListView_method_callback_viewportEvent,

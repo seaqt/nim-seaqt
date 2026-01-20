@@ -64,7 +64,7 @@ export
 
 type cQQmlProperty*{.exportc: "QQmlProperty", incompleteStruct.} = object
 
-proc fcQQmlProperty_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlProperty_operatorAssign".}
+proc fcQQmlProperty_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlProperty_operatorAssign".}
 proc fcQQmlProperty_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QQmlProperty_operatorEqual".}
 proc fcQQmlProperty_typeX(self: pointer): cint {.importc: "QQmlProperty_type".}
 proc fcQQmlProperty_isValid(self: pointer): bool {.importc: "QQmlProperty_isValid".}
@@ -75,18 +75,18 @@ proc fcQQmlProperty_propertyTypeCategory(self: pointer): cint {.importc: "QQmlPr
 proc fcQQmlProperty_propertyTypeName(self: pointer): cstring {.importc: "QQmlProperty_propertyTypeName".}
 proc fcQQmlProperty_name(self: pointer): struct_seaqt_string {.importc: "QQmlProperty_name".}
 proc fcQQmlProperty_read(self: pointer): pointer {.importc: "QQmlProperty_read".}
-proc fcQQmlProperty_read2(param1: pointer, param2: struct_seaqt_string): pointer {.importc: "QQmlProperty_read2".}
-proc fcQQmlProperty_read3(param1: pointer, param2: struct_seaqt_string, param3: pointer): pointer {.importc: "QQmlProperty_read3".}
-proc fcQQmlProperty_read4(param1: pointer, param2: struct_seaqt_string, param3: pointer): pointer {.importc: "QQmlProperty_read4".}
-proc fcQQmlProperty_write(self: pointer, param1: pointer): bool {.importc: "QQmlProperty_write".}
-proc fcQQmlProperty_write2(param1: pointer, param2: struct_seaqt_string, param3: pointer): bool {.importc: "QQmlProperty_write2".}
-proc fcQQmlProperty_write3(param1: pointer, param2: struct_seaqt_string, param3: pointer, param4: pointer): bool {.importc: "QQmlProperty_write3".}
-proc fcQQmlProperty_write4(param1: pointer, param2: struct_seaqt_string, param3: pointer, param4: pointer): bool {.importc: "QQmlProperty_write4".}
+proc fcQQmlProperty_read_QObject_QString(param1: pointer, param2: struct_seaqt_string): pointer {.importc: "QQmlProperty_read_QObject_QString".}
+proc fcQQmlProperty_read_QObject_QString_QQmlContext(param1: pointer, param2: struct_seaqt_string, param3: pointer): pointer {.importc: "QQmlProperty_read_QObject_QString_QQmlContext".}
+proc fcQQmlProperty_read_QObject_QString_QQmlEngine(param1: pointer, param2: struct_seaqt_string, param3: pointer): pointer {.importc: "QQmlProperty_read_QObject_QString_QQmlEngine".}
+proc fcQQmlProperty_write_QVariant(self: pointer, param1: pointer): bool {.importc: "QQmlProperty_write_QVariant".}
+proc fcQQmlProperty_write_QObject_QString_QVariant(param1: pointer, param2: struct_seaqt_string, param3: pointer): bool {.importc: "QQmlProperty_write_QObject_QString_QVariant".}
+proc fcQQmlProperty_write_QObject_QString_QVariant_QQmlContext(param1: pointer, param2: struct_seaqt_string, param3: pointer, param4: pointer): bool {.importc: "QQmlProperty_write_QObject_QString_QVariant_QQmlContext".}
+proc fcQQmlProperty_write_QObject_QString_QVariant_QQmlEngine(param1: pointer, param2: struct_seaqt_string, param3: pointer, param4: pointer): bool {.importc: "QQmlProperty_write_QObject_QString_QVariant_QQmlEngine".}
 proc fcQQmlProperty_reset(self: pointer): bool {.importc: "QQmlProperty_reset".}
 proc fcQQmlProperty_hasNotifySignal(self: pointer): bool {.importc: "QQmlProperty_hasNotifySignal".}
 proc fcQQmlProperty_needsNotifySignal(self: pointer): bool {.importc: "QQmlProperty_needsNotifySignal".}
-proc fcQQmlProperty_connectNotifySignal(self: pointer, dest: pointer, slot: cstring): bool {.importc: "QQmlProperty_connectNotifySignal".}
-proc fcQQmlProperty_connectNotifySignal2(self: pointer, dest: pointer, methodVal: cint): bool {.importc: "QQmlProperty_connectNotifySignal2".}
+proc fcQQmlProperty_connectNotifySignalDestSlot(self: pointer, dest: pointer, slot: cstring): bool {.importc: "QQmlProperty_connectNotifySignal_dest_slot".}
+proc fcQQmlProperty_connectNotifySignalDestMethod(self: pointer, dest: pointer, methodVal: cint): bool {.importc: "QQmlProperty_connectNotifySignal_dest_method".}
 proc fcQQmlProperty_isWritable(self: pointer): bool {.importc: "QQmlProperty_isWritable".}
 proc fcQQmlProperty_isDesignable(self: pointer): bool {.importc: "QQmlProperty_isDesignable".}
 proc fcQQmlProperty_isResettable(self: pointer): bool {.importc: "QQmlProperty_isResettable".}
@@ -95,16 +95,16 @@ proc fcQQmlProperty_index(self: pointer): cint {.importc: "QQmlProperty_index".}
 proc fcQQmlProperty_property(self: pointer): pointer {.importc: "QQmlProperty_property".}
 proc fcQQmlProperty_methodX(self: pointer): pointer {.importc: "QQmlProperty_method".}
 proc fcQQmlProperty_new(): ptr cQQmlProperty {.importc: "QQmlProperty_new".}
-proc fcQQmlProperty_new2(param1: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new2".}
-proc fcQQmlProperty_new3(param1: pointer, param2: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new3".}
-proc fcQQmlProperty_new4(param1: pointer, param2: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new4".}
-proc fcQQmlProperty_new5(param1: pointer, param2: struct_seaqt_string): ptr cQQmlProperty {.importc: "QQmlProperty_new5".}
-proc fcQQmlProperty_new6(param1: pointer, param2: struct_seaqt_string, param3: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new6".}
-proc fcQQmlProperty_new7(param1: pointer, param2: struct_seaqt_string, param3: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new7".}
-proc fcQQmlProperty_new8(param1: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new8".}
+proc fcQQmlProperty_new2(param1: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new_QObject".}
+proc fcQQmlProperty_new3(param1: pointer, param2: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new_QObject_QQmlContext".}
+proc fcQQmlProperty_new4(param1: pointer, param2: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new_QObject_QQmlEngine".}
+proc fcQQmlProperty_new5(param1: pointer, param2: struct_seaqt_string): ptr cQQmlProperty {.importc: "QQmlProperty_new_QObject_QString".}
+proc fcQQmlProperty_new6(param1: pointer, param2: struct_seaqt_string, param3: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new_QObject_QString_QQmlContext".}
+proc fcQQmlProperty_new7(param1: pointer, param2: struct_seaqt_string, param3: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new_QObject_QString_QQmlEngine".}
+proc fcQQmlProperty_new8(fromVal: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new_QQmlProperty".}
 
-proc operatorAssign*(self: gen_qqmlproperty_types.QQmlProperty, param1: gen_qqmlproperty_types.QQmlProperty): void =
-  fcQQmlProperty_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlproperty_types.QQmlProperty, fromVal: gen_qqmlproperty_types.QQmlProperty): void =
+  fcQQmlProperty_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qqmlproperty_types.QQmlProperty, param1: gen_qqmlproperty_types.QQmlProperty): bool =
   fcQQmlProperty_operatorEqual(self.h, param1.h)
@@ -140,25 +140,25 @@ proc read*(self: gen_qqmlproperty_types.QQmlProperty): gen_qvariant_types.QVaria
   gen_qvariant_types.QVariant(h: fcQQmlProperty_read(self.h), owned: true)
 
 proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlProperty_read2(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2)))), owned: true)
+  gen_qvariant_types.QVariant(h: fcQQmlProperty_read_QObject_QString(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2)))), owned: true)
 
 proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qqmlcontext_types.QQmlContext): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlProperty_read3(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
+  gen_qvariant_types.QVariant(h: fcQQmlProperty_read_QObject_QString_QQmlContext(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
 
 proc read*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qqmlengine_types.QQmlEngine): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlProperty_read4(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
+  gen_qvariant_types.QVariant(h: fcQQmlProperty_read_QObject_QString_QQmlEngine(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
 
 proc write*(self: gen_qqmlproperty_types.QQmlProperty, param1: gen_qvariant_types.QVariant): bool =
-  fcQQmlProperty_write(self.h, param1.h)
+  fcQQmlProperty_write_QVariant(self.h, param1.h)
 
 proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qvariant_types.QVariant): bool =
-  fcQQmlProperty_write2(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h)
+  fcQQmlProperty_write_QObject_QString_QVariant(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h)
 
 proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qvariant_types.QVariant, param4: gen_qqmlcontext_types.QQmlContext): bool =
-  fcQQmlProperty_write3(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h, param4.h)
+  fcQQmlProperty_write_QObject_QString_QVariant_QQmlContext(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h, param4.h)
 
 proc write*(_: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: openArray[char], param3: gen_qvariant_types.QVariant, param4: gen_qqmlengine_types.QQmlEngine): bool =
-  fcQQmlProperty_write4(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h, param4.h)
+  fcQQmlProperty_write_QObject_QString_QVariant_QQmlEngine(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h, param4.h)
 
 proc reset*(self: gen_qqmlproperty_types.QQmlProperty): bool =
   fcQQmlProperty_reset(self.h)
@@ -170,10 +170,10 @@ proc needsNotifySignal*(self: gen_qqmlproperty_types.QQmlProperty): bool =
   fcQQmlProperty_needsNotifySignal(self.h)
 
 proc connectNotifySignal*(self: gen_qqmlproperty_types.QQmlProperty, dest: gen_qobject_types.QObject, slot: cstring): bool =
-  fcQQmlProperty_connectNotifySignal(self.h, dest.h, slot)
+  fcQQmlProperty_connectNotifySignalDestSlot(self.h, dest.h, slot)
 
 proc connectNotifySignal*(self: gen_qqmlproperty_types.QQmlProperty, dest: gen_qobject_types.QObject, methodVal: cint): bool =
-  fcQQmlProperty_connectNotifySignal2(self.h, dest.h, methodVal)
+  fcQQmlProperty_connectNotifySignalDestMethod(self.h, dest.h, methodVal)
 
 proc isWritable*(self: gen_qqmlproperty_types.QQmlProperty): bool =
   fcQQmlProperty_isWritable(self.h)
@@ -224,6 +224,6 @@ proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
   let tmp = gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new7(param1.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))), param3.h), owned: true)
   tmp
 proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
-    param1: gen_qqmlproperty_types.QQmlProperty): gen_qqmlproperty_types.QQmlProperty =
-  let tmp = gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new8(param1.h), owned: true)
+    fromVal: gen_qqmlproperty_types.QQmlProperty): gen_qqmlproperty_types.QQmlProperty =
+  let tmp = gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new8(fromVal.h), owned: true)
   tmp

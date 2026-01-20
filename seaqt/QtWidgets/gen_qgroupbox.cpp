@@ -691,23 +691,23 @@ public:
 	friend bool QGroupBox_protectedbase_isSignalConnected(const VirtualQGroupBox* self, QMetaMethod* signal);
 };
 
-VirtualQGroupBox* QGroupBox_new(const QGroupBox_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQGroupBox* QGroupBox_new_parent(const QGroupBox_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGroupBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGroupBox(vtbl, parent) : nullptr;
 }
 
-VirtualQGroupBox* QGroupBox_new2(const QGroupBox_VTable* vtbl, size_t vdata) {
+VirtualQGroupBox* QGroupBox_new(const QGroupBox_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGroupBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGroupBox(vtbl) : nullptr;
 }
 
-VirtualQGroupBox* QGroupBox_new3(const QGroupBox_VTable* vtbl, size_t vdata, struct seaqt_string title) {
+VirtualQGroupBox* QGroupBox_new_title(const QGroupBox_VTable* vtbl, size_t vdata, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGroupBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGroupBox(vtbl, title_QString) : nullptr;
 }
 
-VirtualQGroupBox* QGroupBox_new4(const QGroupBox_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent) {
+VirtualQGroupBox* QGroupBox_new_title_parent(const QGroupBox_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGroupBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGroupBox(vtbl, title_QString, parent) : nullptr;
@@ -729,7 +729,7 @@ int QGroupBox_metacall(QGroupBox* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGroupBox_tr(const char* s) {
+struct seaqt_string QGroupBox_tr_s(const char* s) {
 	QString _ret = QGroupBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -740,7 +740,7 @@ struct seaqt_string QGroupBox_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGroupBox_trUtf8(const char* s) {
+struct seaqt_string QGroupBox_trUtf8_s(const char* s) {
 	QString _ret = QGroupBox::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -835,7 +835,7 @@ void QGroupBox_connect_toggled(QGroupBox* self, intptr_t slot, void (*callback)(
 	QGroupBox::connect(self, static_cast<void (QGroupBox::*)(bool)>(&QGroupBox::toggled), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGroupBox_tr2(const char* s, const char* c) {
+struct seaqt_string QGroupBox_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGroupBox::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -846,7 +846,7 @@ struct seaqt_string QGroupBox_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGroupBox_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGroupBox_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGroupBox::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -857,7 +857,7 @@ struct seaqt_string QGroupBox_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QGroupBox_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGroupBox_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGroupBox::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -868,7 +868,7 @@ struct seaqt_string QGroupBox_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGroupBox_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGroupBox_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGroupBox::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -879,11 +879,11 @@ struct seaqt_string QGroupBox_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QGroupBox_clickedWithChecked(QGroupBox* self, bool checked) {
+void QGroupBox_clicked_checked(QGroupBox* self, bool checked) {
 	self->clicked(checked);
 }
 
-void QGroupBox_connect_clickedWithChecked(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QGroupBox_connect_clicked_checked(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);

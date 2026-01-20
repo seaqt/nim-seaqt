@@ -59,11 +59,11 @@ type cQThreadPool*{.exportc: "QThreadPool", incompleteStruct.} = object
 proc fcQThreadPool_metaObject(self: pointer): pointer {.importc: "QThreadPool_metaObject".}
 proc fcQThreadPool_metacast(self: pointer, param1: cstring): pointer {.importc: "QThreadPool_metacast".}
 proc fcQThreadPool_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QThreadPool_metacall".}
-proc fcQThreadPool_tr(s: cstring): struct_seaqt_string {.importc: "QThreadPool_tr".}
-proc fcQThreadPool_trUtf8(s: cstring): struct_seaqt_string {.importc: "QThreadPool_trUtf8".}
+proc fcQThreadPool_trS(s: cstring): struct_seaqt_string {.importc: "QThreadPool_tr_s".}
+proc fcQThreadPool_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QThreadPool_trUtf8_s".}
 proc fcQThreadPool_globalInstance(): pointer {.importc: "QThreadPool_globalInstance".}
-proc fcQThreadPool_start(self: pointer, runnable: pointer): void {.importc: "QThreadPool_start".}
-proc fcQThreadPool_tryStart(self: pointer, runnable: pointer): bool {.importc: "QThreadPool_tryStart".}
+proc fcQThreadPool_startRunnable(self: pointer, runnable: pointer): void {.importc: "QThreadPool_start_runnable".}
+proc fcQThreadPool_tryStartRunnable(self: pointer, runnable: pointer): bool {.importc: "QThreadPool_tryStart_runnable".}
 proc fcQThreadPool_expiryTimeout(self: pointer): cint {.importc: "QThreadPool_expiryTimeout".}
 proc fcQThreadPool_setExpiryTimeout(self: pointer, expiryTimeout: cint): void {.importc: "QThreadPool_setExpiryTimeout".}
 proc fcQThreadPool_maxThreadCount(self: pointer): cint {.importc: "QThreadPool_maxThreadCount".}
@@ -78,12 +78,12 @@ proc fcQThreadPool_clear(self: pointer): void {.importc: "QThreadPool_clear".}
 proc fcQThreadPool_contains(self: pointer, thread: pointer): bool {.importc: "QThreadPool_contains".}
 proc fcQThreadPool_cancel(self: pointer, runnable: pointer): void {.importc: "QThreadPool_cancel".}
 proc fcQThreadPool_tryTake(self: pointer, runnable: pointer): bool {.importc: "QThreadPool_tryTake".}
-proc fcQThreadPool_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QThreadPool_tr2".}
-proc fcQThreadPool_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QThreadPool_tr3".}
-proc fcQThreadPool_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QThreadPool_trUtf82".}
-proc fcQThreadPool_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QThreadPool_trUtf83".}
-proc fcQThreadPool_start2(self: pointer, runnable: pointer, priority: cint): void {.importc: "QThreadPool_start2".}
-proc fcQThreadPool_waitForDoneWithMsecs(self: pointer, msecs: cint): bool {.importc: "QThreadPool_waitForDoneWithMsecs".}
+proc fcQThreadPool_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QThreadPool_tr_s_c".}
+proc fcQThreadPool_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QThreadPool_tr_s_c_n".}
+proc fcQThreadPool_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QThreadPool_trUtf8_s_c".}
+proc fcQThreadPool_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QThreadPool_trUtf8_s_c_n".}
+proc fcQThreadPool_startRunnablePriority(self: pointer, runnable: pointer, priority: cint): void {.importc: "QThreadPool_start_runnable_priority".}
+proc fcQThreadPool_waitForDoneMsecs(self: pointer, msecs: cint): bool {.importc: "QThreadPool_waitForDone_msecs".}
 proc fcQThreadPool_vdata(self: pointer): ptr pointer {.importc: "QThreadPool_vdata".}
 proc fvdata_cQThreadPool(self: pointer): pointer {.importc: "vdata_QThreadPool".}
 
@@ -114,7 +114,7 @@ proc fcQThreadPool_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQThreadPool_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QThreadPool_protectedbase_receivers".}
 proc fcQThreadPool_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QThreadPool_protectedbase_isSignalConnected".}
 proc fcQThreadPool_new(vtbl: pointer, vdata: csize_t): ptr cQThreadPool {.importc: "QThreadPool_new".}
-proc fcQThreadPool_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQThreadPool {.importc: "QThreadPool_new2".}
+proc fcQThreadPool_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQThreadPool {.importc: "QThreadPool_new_parent".}
 proc fcQThreadPool_staticMetaObject(): pointer {.importc: "QThreadPool_staticMetaObject".}
 
 proc metaObject*(self: gen_qthreadpool_types.QThreadPool): gen_qobjectdefs_types.QMetaObject =
@@ -127,13 +127,13 @@ proc metacall*(self: gen_qthreadpool_types.QThreadPool, param1: cint, param2: ci
   fcQThreadPool_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qthreadpool_types.QThreadPool, s: cstring): string =
-  let v_ms = fcQThreadPool_tr(s)
+  let v_ms = fcQThreadPool_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qthreadpool_types.QThreadPool, s: cstring): string =
-  let v_ms = fcQThreadPool_trUtf8(s)
+  let v_ms = fcQThreadPool_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -142,10 +142,10 @@ proc globalInstance*(_: type gen_qthreadpool_types.QThreadPool): gen_qthreadpool
   gen_qthreadpool_types.QThreadPool(h: fcQThreadPool_globalInstance(), owned: false)
 
 proc start*(self: gen_qthreadpool_types.QThreadPool, runnable: gen_qrunnable_types.QRunnable): void =
-  fcQThreadPool_start(self.h, runnable.h)
+  fcQThreadPool_startRunnable(self.h, runnable.h)
 
 proc tryStart*(self: gen_qthreadpool_types.QThreadPool, runnable: gen_qrunnable_types.QRunnable): bool =
-  fcQThreadPool_tryStart(self.h, runnable.h)
+  fcQThreadPool_tryStartRunnable(self.h, runnable.h)
 
 proc expiryTimeout*(self: gen_qthreadpool_types.QThreadPool): cint =
   fcQThreadPool_expiryTimeout(self.h)
@@ -190,34 +190,34 @@ proc tryTake*(self: gen_qthreadpool_types.QThreadPool, runnable: gen_qrunnable_t
   fcQThreadPool_tryTake(self.h, runnable.h)
 
 proc tr*(_: type gen_qthreadpool_types.QThreadPool, s: cstring, c: cstring): string =
-  let v_ms = fcQThreadPool_tr2(s, c)
+  let v_ms = fcQThreadPool_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qthreadpool_types.QThreadPool, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQThreadPool_tr3(s, c, n)
+  let v_ms = fcQThreadPool_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qthreadpool_types.QThreadPool, s: cstring, c: cstring): string =
-  let v_ms = fcQThreadPool_trUtf82(s, c)
+  let v_ms = fcQThreadPool_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qthreadpool_types.QThreadPool, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQThreadPool_trUtf83(s, c, n)
+  let v_ms = fcQThreadPool_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc start*(self: gen_qthreadpool_types.QThreadPool, runnable: gen_qrunnable_types.QRunnable, priority: cint): void =
-  fcQThreadPool_start2(self.h, runnable.h, priority)
+  fcQThreadPool_startRunnablePriority(self.h, runnable.h, priority)
 
 proc waitForDone*(self: gen_qthreadpool_types.QThreadPool, msecs: cint): bool =
-  fcQThreadPool_waitForDoneWithMsecs(self.h, msecs)
+  fcQThreadPool_waitForDoneMsecs(self.h, msecs)
 
 type QThreadPoolmetaObjectProc* = proc(self: QThreadPool): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QThreadPoolmetacastProc* = proc(self: QThreadPool, param1: cstring): pointer {.raises: [], gcsafe.}

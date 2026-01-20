@@ -24,14 +24,14 @@ typedef struct QUrl QUrl;
 typedef struct QWebEngineCertificateError QWebEngineCertificateError;
 #endif
 
-QWebEngineCertificateError* QWebEngineCertificateError_new(int error, QUrl* url, bool overridable, struct seaqt_string errorDescription);
-QWebEngineCertificateError* QWebEngineCertificateError_new2(QWebEngineCertificateError* other);
+QWebEngineCertificateError* QWebEngineCertificateError_new_error_url_overridable_errorDescription(int error, QUrl* url, bool overridable, struct seaqt_string errorDescription);
+QWebEngineCertificateError* QWebEngineCertificateError_new_from(QWebEngineCertificateError* from);
 
 int QWebEngineCertificateError_error(const QWebEngineCertificateError* self);
 QUrl* QWebEngineCertificateError_url(const QWebEngineCertificateError* self);
 bool QWebEngineCertificateError_isOverridable(const QWebEngineCertificateError* self);
 struct seaqt_string QWebEngineCertificateError_errorDescription(const QWebEngineCertificateError* self);
-void QWebEngineCertificateError_operatorAssign(QWebEngineCertificateError* self, QWebEngineCertificateError* other);
+void QWebEngineCertificateError_operatorAssign(QWebEngineCertificateError* self, QWebEngineCertificateError* from);
 void QWebEngineCertificateError_defer(QWebEngineCertificateError* self);
 bool QWebEngineCertificateError_deferred(const QWebEngineCertificateError* self);
 void QWebEngineCertificateError_rejectCertificate(QWebEngineCertificateError* self);

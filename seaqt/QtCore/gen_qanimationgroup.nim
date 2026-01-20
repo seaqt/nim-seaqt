@@ -57,8 +57,8 @@ type cQAnimationGroup*{.exportc: "QAnimationGroup", incompleteStruct.} = object
 proc fcQAnimationGroup_metaObject(self: pointer): pointer {.importc: "QAnimationGroup_metaObject".}
 proc fcQAnimationGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QAnimationGroup_metacast".}
 proc fcQAnimationGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAnimationGroup_metacall".}
-proc fcQAnimationGroup_tr(s: cstring): struct_seaqt_string {.importc: "QAnimationGroup_tr".}
-proc fcQAnimationGroup_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAnimationGroup_trUtf8".}
+proc fcQAnimationGroup_trS(s: cstring): struct_seaqt_string {.importc: "QAnimationGroup_tr_s".}
+proc fcQAnimationGroup_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAnimationGroup_trUtf8_s".}
 proc fcQAnimationGroup_animationAt(self: pointer, index: cint): pointer {.importc: "QAnimationGroup_animationAt".}
 proc fcQAnimationGroup_animationCount(self: pointer): cint {.importc: "QAnimationGroup_animationCount".}
 proc fcQAnimationGroup_indexOfAnimation(self: pointer, animation: pointer): cint {.importc: "QAnimationGroup_indexOfAnimation".}
@@ -67,10 +67,10 @@ proc fcQAnimationGroup_insertAnimation(self: pointer, index: cint, animation: po
 proc fcQAnimationGroup_removeAnimation(self: pointer, animation: pointer): void {.importc: "QAnimationGroup_removeAnimation".}
 proc fcQAnimationGroup_takeAnimation(self: pointer, index: cint): pointer {.importc: "QAnimationGroup_takeAnimation".}
 proc fcQAnimationGroup_clear(self: pointer): void {.importc: "QAnimationGroup_clear".}
-proc fcQAnimationGroup_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAnimationGroup_tr2".}
-proc fcQAnimationGroup_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAnimationGroup_tr3".}
-proc fcQAnimationGroup_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAnimationGroup_trUtf82".}
-proc fcQAnimationGroup_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAnimationGroup_trUtf83".}
+proc fcQAnimationGroup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAnimationGroup_tr_s_c".}
+proc fcQAnimationGroup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAnimationGroup_tr_s_c_n".}
+proc fcQAnimationGroup_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAnimationGroup_trUtf8_s_c".}
+proc fcQAnimationGroup_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAnimationGroup_trUtf8_s_c_n".}
 proc fcQAnimationGroup_vdata(self: pointer): ptr pointer {.importc: "QAnimationGroup_vdata".}
 proc fvdata_cQAnimationGroup(self: pointer): pointer {.importc: "vdata_QAnimationGroup".}
 
@@ -107,7 +107,7 @@ proc fcQAnimationGroup_protectedbase_senderSignalIndex(self: pointer): cint {.im
 proc fcQAnimationGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAnimationGroup_protectedbase_receivers".}
 proc fcQAnimationGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAnimationGroup_protectedbase_isSignalConnected".}
 proc fcQAnimationGroup_new(vtbl: pointer, vdata: csize_t): ptr cQAnimationGroup {.importc: "QAnimationGroup_new".}
-proc fcQAnimationGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAnimationGroup {.importc: "QAnimationGroup_new2".}
+proc fcQAnimationGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAnimationGroup {.importc: "QAnimationGroup_new_parent".}
 proc fcQAnimationGroup_staticMetaObject(): pointer {.importc: "QAnimationGroup_staticMetaObject".}
 
 proc metaObject*(self: gen_qanimationgroup_types.QAnimationGroup): gen_qobjectdefs_types.QMetaObject =
@@ -120,13 +120,13 @@ proc metacall*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cint, pa
   fcQAnimationGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qanimationgroup_types.QAnimationGroup, s: cstring): string =
-  let v_ms = fcQAnimationGroup_tr(s)
+  let v_ms = fcQAnimationGroup_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qanimationgroup_types.QAnimationGroup, s: cstring): string =
-  let v_ms = fcQAnimationGroup_trUtf8(s)
+  let v_ms = fcQAnimationGroup_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -156,25 +156,25 @@ proc clear*(self: gen_qanimationgroup_types.QAnimationGroup): void =
   fcQAnimationGroup_clear(self.h)
 
 proc tr*(_: type gen_qanimationgroup_types.QAnimationGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQAnimationGroup_tr2(s, c)
+  let v_ms = fcQAnimationGroup_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qanimationgroup_types.QAnimationGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAnimationGroup_tr3(s, c, n)
+  let v_ms = fcQAnimationGroup_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qanimationgroup_types.QAnimationGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQAnimationGroup_trUtf82(s, c)
+  let v_ms = fcQAnimationGroup_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qanimationgroup_types.QAnimationGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAnimationGroup_trUtf83(s, c, n)
+  let v_ms = fcQAnimationGroup_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -800,12 +800,12 @@ public:
 	friend bool QSpinBox_protectedbase_isSignalConnected(const VirtualQSpinBox* self, QMetaMethod* signal);
 };
 
-VirtualQSpinBox* QSpinBox_new(const QSpinBox_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQSpinBox* QSpinBox_new_parent(const QSpinBox_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSpinBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSpinBox(vtbl, parent) : nullptr;
 }
 
-VirtualQSpinBox* QSpinBox_new2(const QSpinBox_VTable* vtbl, size_t vdata) {
+VirtualQSpinBox* QSpinBox_new(const QSpinBox_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSpinBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSpinBox(vtbl) : nullptr;
 }
@@ -826,7 +826,7 @@ int QSpinBox_metacall(QSpinBox* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSpinBox_tr(const char* s) {
+struct seaqt_string QSpinBox_tr_s(const char* s) {
 	QString _ret = QSpinBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -837,7 +837,7 @@ struct seaqt_string QSpinBox_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSpinBox_trUtf8(const char* s) {
+struct seaqt_string QSpinBox_trUtf8_s(const char* s) {
 	QString _ret = QSpinBox::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -944,11 +944,11 @@ void QSpinBox_setValue(QSpinBox* self, int val) {
 	self->setValue(static_cast<int>(val));
 }
 
-void QSpinBox_valueChanged(QSpinBox* self, int param1) {
+void QSpinBox_valueChanged_int(QSpinBox* self, int param1) {
 	self->valueChanged(static_cast<int>(param1));
 }
 
-void QSpinBox_connect_valueChanged(QSpinBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QSpinBox_connect_valueChanged_int(QSpinBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -984,12 +984,12 @@ void QSpinBox_connect_textChanged(QSpinBox* self, intptr_t slot, void (*callback
 	QSpinBox::connect(self, static_cast<void (QSpinBox::*)(const QString&)>(&QSpinBox::textChanged), self, local_caller{slot, callback, release});
 }
 
-void QSpinBox_valueChangedWithQString(QSpinBox* self, struct seaqt_string param1) {
+void QSpinBox_valueChanged_QString(QSpinBox* self, struct seaqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	self->valueChanged(param1_QString);
 }
 
-void QSpinBox_connect_valueChangedWithQString(QSpinBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+void QSpinBox_connect_valueChanged_QString(QSpinBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string);
@@ -1008,7 +1008,7 @@ void QSpinBox_connect_valueChangedWithQString(QSpinBox* self, intptr_t slot, voi
 	QSpinBox::connect(self, static_cast<void (QSpinBox::*)(const QString&)>(&QSpinBox::valueChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QSpinBox_tr2(const char* s, const char* c) {
+struct seaqt_string QSpinBox_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSpinBox::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1019,7 +1019,7 @@ struct seaqt_string QSpinBox_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSpinBox_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSpinBox_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSpinBox::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1030,7 +1030,7 @@ struct seaqt_string QSpinBox_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QSpinBox_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSpinBox_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSpinBox::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1041,7 +1041,7 @@ struct seaqt_string QSpinBox_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSpinBox_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSpinBox_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSpinBox::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2155,12 +2155,12 @@ public:
 	friend bool QDoubleSpinBox_protectedbase_isSignalConnected(const VirtualQDoubleSpinBox* self, QMetaMethod* signal);
 };
 
-VirtualQDoubleSpinBox* QDoubleSpinBox_new(const QDoubleSpinBox_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDoubleSpinBox* QDoubleSpinBox_new_parent(const QDoubleSpinBox_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDoubleSpinBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDoubleSpinBox(vtbl, parent) : nullptr;
 }
 
-VirtualQDoubleSpinBox* QDoubleSpinBox_new2(const QDoubleSpinBox_VTable* vtbl, size_t vdata) {
+VirtualQDoubleSpinBox* QDoubleSpinBox_new(const QDoubleSpinBox_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDoubleSpinBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDoubleSpinBox(vtbl) : nullptr;
 }
@@ -2181,7 +2181,7 @@ int QDoubleSpinBox_metacall(QDoubleSpinBox* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDoubleSpinBox_tr(const char* s) {
+struct seaqt_string QDoubleSpinBox_tr_s(const char* s) {
 	QString _ret = QDoubleSpinBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2192,7 +2192,7 @@ struct seaqt_string QDoubleSpinBox_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDoubleSpinBox_trUtf8(const char* s) {
+struct seaqt_string QDoubleSpinBox_trUtf8_s(const char* s) {
 	QString _ret = QDoubleSpinBox::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2326,11 +2326,11 @@ void QDoubleSpinBox_setValue(QDoubleSpinBox* self, double val) {
 	self->setValue(static_cast<double>(val));
 }
 
-void QDoubleSpinBox_valueChanged(QDoubleSpinBox* self, double param1) {
+void QDoubleSpinBox_valueChanged_double(QDoubleSpinBox* self, double param1) {
 	self->valueChanged(static_cast<double>(param1));
 }
 
-void QDoubleSpinBox_connect_valueChanged(QDoubleSpinBox* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+void QDoubleSpinBox_connect_valueChanged_double(QDoubleSpinBox* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, double);
@@ -2366,12 +2366,12 @@ void QDoubleSpinBox_connect_textChanged(QDoubleSpinBox* self, intptr_t slot, voi
 	QDoubleSpinBox::connect(self, static_cast<void (QDoubleSpinBox::*)(const QString&)>(&QDoubleSpinBox::textChanged), self, local_caller{slot, callback, release});
 }
 
-void QDoubleSpinBox_valueChangedWithQString(QDoubleSpinBox* self, struct seaqt_string param1) {
+void QDoubleSpinBox_valueChanged_QString(QDoubleSpinBox* self, struct seaqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 	self->valueChanged(param1_QString);
 }
 
-void QDoubleSpinBox_connect_valueChangedWithQString(QDoubleSpinBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+void QDoubleSpinBox_connect_valueChanged_QString(QDoubleSpinBox* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string);
@@ -2390,7 +2390,7 @@ void QDoubleSpinBox_connect_valueChangedWithQString(QDoubleSpinBox* self, intptr
 	QDoubleSpinBox::connect(self, static_cast<void (QDoubleSpinBox::*)(const QString&)>(&QDoubleSpinBox::valueChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDoubleSpinBox_tr2(const char* s, const char* c) {
+struct seaqt_string QDoubleSpinBox_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDoubleSpinBox::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2401,7 +2401,7 @@ struct seaqt_string QDoubleSpinBox_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDoubleSpinBox_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDoubleSpinBox_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDoubleSpinBox::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2412,7 +2412,7 @@ struct seaqt_string QDoubleSpinBox_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDoubleSpinBox_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDoubleSpinBox_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDoubleSpinBox::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2423,7 +2423,7 @@ struct seaqt_string QDoubleSpinBox_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDoubleSpinBox_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDoubleSpinBox_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDoubleSpinBox::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -76,27 +76,27 @@ type cQVBoxLayout*{.exportc: "QVBoxLayout", incompleteStruct.} = object
 proc fcQBoxLayout_metaObject(self: pointer): pointer {.importc: "QBoxLayout_metaObject".}
 proc fcQBoxLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QBoxLayout_metacast".}
 proc fcQBoxLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QBoxLayout_metacall".}
-proc fcQBoxLayout_tr(s: cstring): struct_seaqt_string {.importc: "QBoxLayout_tr".}
-proc fcQBoxLayout_trUtf8(s: cstring): struct_seaqt_string {.importc: "QBoxLayout_trUtf8".}
+proc fcQBoxLayout_trS(s: cstring): struct_seaqt_string {.importc: "QBoxLayout_tr_s".}
+proc fcQBoxLayout_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QBoxLayout_trUtf8_s".}
 proc fcQBoxLayout_direction(self: pointer): cint {.importc: "QBoxLayout_direction".}
 proc fcQBoxLayout_setDirection(self: pointer, direction: cint): void {.importc: "QBoxLayout_setDirection".}
 proc fcQBoxLayout_addSpacing(self: pointer, size: cint): void {.importc: "QBoxLayout_addSpacing".}
 proc fcQBoxLayout_addStretch(self: pointer): void {.importc: "QBoxLayout_addStretch".}
 proc fcQBoxLayout_addSpacerItem(self: pointer, spacerItem: pointer): void {.importc: "QBoxLayout_addSpacerItem".}
-proc fcQBoxLayout_addWidget(self: pointer, param1: pointer): void {.importc: "QBoxLayout_addWidget".}
-proc fcQBoxLayout_addLayout(self: pointer, layout: pointer): void {.importc: "QBoxLayout_addLayout".}
+proc fcQBoxLayout_addWidget_QWidget(self: pointer, param1: pointer): void {.importc: "QBoxLayout_addWidget_QWidget".}
+proc fcQBoxLayout_addLayoutLayout(self: pointer, layout: pointer): void {.importc: "QBoxLayout_addLayout_layout".}
 proc fcQBoxLayout_addStrut(self: pointer, param1: cint): void {.importc: "QBoxLayout_addStrut".}
 proc fcQBoxLayout_addItem(self: pointer, param1: pointer): void {.importc: "QBoxLayout_addItem".}
 proc fcQBoxLayout_insertSpacing(self: pointer, index: cint, size: cint): void {.importc: "QBoxLayout_insertSpacing".}
-proc fcQBoxLayout_insertStretch(self: pointer, index: cint): void {.importc: "QBoxLayout_insertStretch".}
+proc fcQBoxLayout_insertStretchIndex(self: pointer, index: cint): void {.importc: "QBoxLayout_insertStretch_index".}
 proc fcQBoxLayout_insertSpacerItem(self: pointer, index: cint, spacerItem: pointer): void {.importc: "QBoxLayout_insertSpacerItem".}
-proc fcQBoxLayout_insertWidget(self: pointer, index: cint, widget: pointer): void {.importc: "QBoxLayout_insertWidget".}
-proc fcQBoxLayout_insertLayout(self: pointer, index: cint, layout: pointer): void {.importc: "QBoxLayout_insertLayout".}
+proc fcQBoxLayout_insertWidgetIndexWidget(self: pointer, index: cint, widget: pointer): void {.importc: "QBoxLayout_insertWidget_index_widget".}
+proc fcQBoxLayout_insertLayoutIndexLayout(self: pointer, index: cint, layout: pointer): void {.importc: "QBoxLayout_insertLayout_index_layout".}
 proc fcQBoxLayout_insertItem(self: pointer, index: cint, param2: pointer): void {.importc: "QBoxLayout_insertItem".}
 proc fcQBoxLayout_spacing(self: pointer): cint {.importc: "QBoxLayout_spacing".}
 proc fcQBoxLayout_setSpacing(self: pointer, spacing: cint): void {.importc: "QBoxLayout_setSpacing".}
-proc fcQBoxLayout_setStretchFactor(self: pointer, w: pointer, stretch: cint): bool {.importc: "QBoxLayout_setStretchFactor".}
-proc fcQBoxLayout_setStretchFactor2(self: pointer, l: pointer, stretch: cint): bool {.importc: "QBoxLayout_setStretchFactor2".}
+proc fcQBoxLayout_setStretchFactorWStretch(self: pointer, w: pointer, stretch: cint): bool {.importc: "QBoxLayout_setStretchFactor_w_stretch".}
+proc fcQBoxLayout_setStretchFactorLStretch(self: pointer, l: pointer, stretch: cint): bool {.importc: "QBoxLayout_setStretchFactor_l_stretch".}
 proc fcQBoxLayout_setStretch(self: pointer, index: cint, stretch: cint): void {.importc: "QBoxLayout_setStretch".}
 proc fcQBoxLayout_stretch(self: pointer, index: cint): cint {.importc: "QBoxLayout_stretch".}
 proc fcQBoxLayout_sizeHint(self: pointer): pointer {.importc: "QBoxLayout_sizeHint".}
@@ -111,18 +111,18 @@ proc fcQBoxLayout_itemAt(self: pointer, param1: cint): pointer {.importc: "QBoxL
 proc fcQBoxLayout_takeAt(self: pointer, param1: cint): pointer {.importc: "QBoxLayout_takeAt".}
 proc fcQBoxLayout_count(self: pointer): cint {.importc: "QBoxLayout_count".}
 proc fcQBoxLayout_setGeometry(self: pointer, geometry: pointer): void {.importc: "QBoxLayout_setGeometry".}
-proc fcQBoxLayout_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QBoxLayout_tr2".}
-proc fcQBoxLayout_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QBoxLayout_tr3".}
-proc fcQBoxLayout_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QBoxLayout_trUtf82".}
-proc fcQBoxLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QBoxLayout_trUtf83".}
-proc fcQBoxLayout_addStretchWithStretch(self: pointer, stretch: cint): void {.importc: "QBoxLayout_addStretchWithStretch".}
-proc fcQBoxLayout_addWidget2(self: pointer, param1: pointer, stretch: cint): void {.importc: "QBoxLayout_addWidget2".}
-proc fcQBoxLayout_addWidget3(self: pointer, param1: pointer, stretch: cint, alignment: cint): void {.importc: "QBoxLayout_addWidget3".}
-proc fcQBoxLayout_addLayout2(self: pointer, layout: pointer, stretch: cint): void {.importc: "QBoxLayout_addLayout2".}
-proc fcQBoxLayout_insertStretch2(self: pointer, index: cint, stretch: cint): void {.importc: "QBoxLayout_insertStretch2".}
-proc fcQBoxLayout_insertWidget2(self: pointer, index: cint, widget: pointer, stretch: cint): void {.importc: "QBoxLayout_insertWidget2".}
-proc fcQBoxLayout_insertWidget3(self: pointer, index: cint, widget: pointer, stretch: cint, alignment: cint): void {.importc: "QBoxLayout_insertWidget3".}
-proc fcQBoxLayout_insertLayout2(self: pointer, index: cint, layout: pointer, stretch: cint): void {.importc: "QBoxLayout_insertLayout2".}
+proc fcQBoxLayout_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QBoxLayout_tr_s_c".}
+proc fcQBoxLayout_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QBoxLayout_tr_s_c_n".}
+proc fcQBoxLayout_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QBoxLayout_trUtf8_s_c".}
+proc fcQBoxLayout_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QBoxLayout_trUtf8_s_c_n".}
+proc fcQBoxLayout_addStretchStretch(self: pointer, stretch: cint): void {.importc: "QBoxLayout_addStretch_stretch".}
+proc fcQBoxLayout_addWidget_QWidgetInt(self: pointer, param1: pointer, stretch: cint): void {.importc: "QBoxLayout_addWidget_QWidget_int".}
+proc fcQBoxLayout_addWidget_QWidgetInt_Qt_Alignment(self: pointer, param1: pointer, stretch: cint, alignment: cint): void {.importc: "QBoxLayout_addWidget_QWidget_int_Qt_Alignment".}
+proc fcQBoxLayout_addLayoutLayoutStretch(self: pointer, layout: pointer, stretch: cint): void {.importc: "QBoxLayout_addLayout_layout_stretch".}
+proc fcQBoxLayout_insertStretchIndexStretch(self: pointer, index: cint, stretch: cint): void {.importc: "QBoxLayout_insertStretch_index_stretch".}
+proc fcQBoxLayout_insertWidgetIndexWidgetStretch(self: pointer, index: cint, widget: pointer, stretch: cint): void {.importc: "QBoxLayout_insertWidget_index_widget_stretch".}
+proc fcQBoxLayout_insertWidgetIndexWidgetStretchAlignment(self: pointer, index: cint, widget: pointer, stretch: cint, alignment: cint): void {.importc: "QBoxLayout_insertWidget_index_widget_stretch_alignment".}
+proc fcQBoxLayout_insertLayoutIndexLayoutStretch(self: pointer, index: cint, layout: pointer, stretch: cint): void {.importc: "QBoxLayout_insertLayout_index_layout_stretch".}
 proc fcQBoxLayout_vdata(self: pointer): ptr pointer {.importc: "QBoxLayout_vdata".}
 proc fvdata_cQBoxLayout(self: pointer): pointer {.importc: "vdata_QBoxLayout".}
 
@@ -145,7 +145,7 @@ type cQBoxLayoutVTable {.pure.} = object
   count*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   setGeometry*: proc(self: pointer, geometry: pointer): void {.cdecl, raises: [], gcsafe.}
   geometry*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  indexOf*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
+  indexOf_QWidget*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
   isEmpty*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   controlTypes*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   layout*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -175,7 +175,7 @@ proc fcQBoxLayout_virtualbase_takeAt(self: pointer, param1: cint): pointer {.imp
 proc fcQBoxLayout_virtualbase_count(self: pointer): cint {.importc: "QBoxLayout_virtualbase_count".}
 proc fcQBoxLayout_virtualbase_setGeometry(self: pointer, geometry: pointer): void {.importc: "QBoxLayout_virtualbase_setGeometry".}
 proc fcQBoxLayout_virtualbase_geometry(self: pointer): pointer {.importc: "QBoxLayout_virtualbase_geometry".}
-proc fcQBoxLayout_virtualbase_indexOf(self: pointer, param1: pointer): cint {.importc: "QBoxLayout_virtualbase_indexOf".}
+proc fcQBoxLayout_virtualbase_indexOf_QWidget(self: pointer, param1: pointer): cint {.importc: "QBoxLayout_virtualbase_indexOf_QWidget".}
 proc fcQBoxLayout_virtualbase_isEmpty(self: pointer): bool {.importc: "QBoxLayout_virtualbase_isEmpty".}
 proc fcQBoxLayout_virtualbase_controlTypes(self: pointer): cint {.importc: "QBoxLayout_virtualbase_controlTypes".}
 proc fcQBoxLayout_virtualbase_layout(self: pointer): pointer {.importc: "QBoxLayout_virtualbase_layout".}
@@ -197,18 +197,18 @@ proc fcQBoxLayout_protectedbase_sender(self: pointer): pointer {.importc: "QBoxL
 proc fcQBoxLayout_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QBoxLayout_protectedbase_senderSignalIndex".}
 proc fcQBoxLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QBoxLayout_protectedbase_receivers".}
 proc fcQBoxLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QBoxLayout_protectedbase_isSignalConnected".}
-proc fcQBoxLayout_new(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQBoxLayout {.importc: "QBoxLayout_new".}
-proc fcQBoxLayout_new2(vtbl: pointer, vdata: csize_t, param1: cint, parent: pointer): ptr cQBoxLayout {.importc: "QBoxLayout_new2".}
+proc fcQBoxLayout_new(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQBoxLayout {.importc: "QBoxLayout_new_QBoxLayout_Direction".}
+proc fcQBoxLayout_new2(vtbl: pointer, vdata: csize_t, param1: cint, parent: pointer): ptr cQBoxLayout {.importc: "QBoxLayout_new_QBoxLayout_Direction_QWidget".}
 proc fcQBoxLayout_staticMetaObject(): pointer {.importc: "QBoxLayout_staticMetaObject".}
 proc fcQHBoxLayout_metaObject(self: pointer): pointer {.importc: "QHBoxLayout_metaObject".}
 proc fcQHBoxLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QHBoxLayout_metacast".}
 proc fcQHBoxLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHBoxLayout_metacall".}
-proc fcQHBoxLayout_tr(s: cstring): struct_seaqt_string {.importc: "QHBoxLayout_tr".}
-proc fcQHBoxLayout_trUtf8(s: cstring): struct_seaqt_string {.importc: "QHBoxLayout_trUtf8".}
-proc fcQHBoxLayout_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHBoxLayout_tr2".}
-proc fcQHBoxLayout_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHBoxLayout_tr3".}
-proc fcQHBoxLayout_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHBoxLayout_trUtf82".}
-proc fcQHBoxLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHBoxLayout_trUtf83".}
+proc fcQHBoxLayout_trS(s: cstring): struct_seaqt_string {.importc: "QHBoxLayout_tr_s".}
+proc fcQHBoxLayout_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QHBoxLayout_trUtf8_s".}
+proc fcQHBoxLayout_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHBoxLayout_tr_s_c".}
+proc fcQHBoxLayout_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHBoxLayout_tr_s_c_n".}
+proc fcQHBoxLayout_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHBoxLayout_trUtf8_s_c".}
+proc fcQHBoxLayout_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHBoxLayout_trUtf8_s_c_n".}
 proc fcQHBoxLayout_vdata(self: pointer): ptr pointer {.importc: "QHBoxLayout_vdata".}
 proc fvdata_cQHBoxLayout(self: pointer): pointer {.importc: "vdata_QHBoxLayout".}
 
@@ -231,7 +231,7 @@ type cQHBoxLayoutVTable {.pure.} = object
   count*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   setGeometry*: proc(self: pointer, geometry: pointer): void {.cdecl, raises: [], gcsafe.}
   geometry*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  indexOf*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
+  indexOf_QWidget*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
   isEmpty*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   controlTypes*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   layout*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -261,7 +261,7 @@ proc fcQHBoxLayout_virtualbase_takeAt(self: pointer, param1: cint): pointer {.im
 proc fcQHBoxLayout_virtualbase_count(self: pointer): cint {.importc: "QHBoxLayout_virtualbase_count".}
 proc fcQHBoxLayout_virtualbase_setGeometry(self: pointer, geometry: pointer): void {.importc: "QHBoxLayout_virtualbase_setGeometry".}
 proc fcQHBoxLayout_virtualbase_geometry(self: pointer): pointer {.importc: "QHBoxLayout_virtualbase_geometry".}
-proc fcQHBoxLayout_virtualbase_indexOf(self: pointer, param1: pointer): cint {.importc: "QHBoxLayout_virtualbase_indexOf".}
+proc fcQHBoxLayout_virtualbase_indexOf_QWidget(self: pointer, param1: pointer): cint {.importc: "QHBoxLayout_virtualbase_indexOf_QWidget".}
 proc fcQHBoxLayout_virtualbase_isEmpty(self: pointer): bool {.importc: "QHBoxLayout_virtualbase_isEmpty".}
 proc fcQHBoxLayout_virtualbase_controlTypes(self: pointer): cint {.importc: "QHBoxLayout_virtualbase_controlTypes".}
 proc fcQHBoxLayout_virtualbase_layout(self: pointer): pointer {.importc: "QHBoxLayout_virtualbase_layout".}
@@ -283,18 +283,18 @@ proc fcQHBoxLayout_protectedbase_sender(self: pointer): pointer {.importc: "QHBo
 proc fcQHBoxLayout_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QHBoxLayout_protectedbase_senderSignalIndex".}
 proc fcQHBoxLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QHBoxLayout_protectedbase_receivers".}
 proc fcQHBoxLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QHBoxLayout_protectedbase_isSignalConnected".}
-proc fcQHBoxLayout_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQHBoxLayout {.importc: "QHBoxLayout_new".}
-proc fcQHBoxLayout_new2(vtbl: pointer, vdata: csize_t): ptr cQHBoxLayout {.importc: "QHBoxLayout_new2".}
+proc fcQHBoxLayout_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQHBoxLayout {.importc: "QHBoxLayout_new_parent".}
+proc fcQHBoxLayout_new2(vtbl: pointer, vdata: csize_t): ptr cQHBoxLayout {.importc: "QHBoxLayout_new".}
 proc fcQHBoxLayout_staticMetaObject(): pointer {.importc: "QHBoxLayout_staticMetaObject".}
 proc fcQVBoxLayout_metaObject(self: pointer): pointer {.importc: "QVBoxLayout_metaObject".}
 proc fcQVBoxLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QVBoxLayout_metacast".}
 proc fcQVBoxLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVBoxLayout_metacall".}
-proc fcQVBoxLayout_tr(s: cstring): struct_seaqt_string {.importc: "QVBoxLayout_tr".}
-proc fcQVBoxLayout_trUtf8(s: cstring): struct_seaqt_string {.importc: "QVBoxLayout_trUtf8".}
-proc fcQVBoxLayout_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVBoxLayout_tr2".}
-proc fcQVBoxLayout_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVBoxLayout_tr3".}
-proc fcQVBoxLayout_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVBoxLayout_trUtf82".}
-proc fcQVBoxLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVBoxLayout_trUtf83".}
+proc fcQVBoxLayout_trS(s: cstring): struct_seaqt_string {.importc: "QVBoxLayout_tr_s".}
+proc fcQVBoxLayout_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QVBoxLayout_trUtf8_s".}
+proc fcQVBoxLayout_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVBoxLayout_tr_s_c".}
+proc fcQVBoxLayout_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVBoxLayout_tr_s_c_n".}
+proc fcQVBoxLayout_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVBoxLayout_trUtf8_s_c".}
+proc fcQVBoxLayout_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVBoxLayout_trUtf8_s_c_n".}
 proc fcQVBoxLayout_vdata(self: pointer): ptr pointer {.importc: "QVBoxLayout_vdata".}
 proc fvdata_cQVBoxLayout(self: pointer): pointer {.importc: "vdata_QVBoxLayout".}
 
@@ -317,7 +317,7 @@ type cQVBoxLayoutVTable {.pure.} = object
   count*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   setGeometry*: proc(self: pointer, geometry: pointer): void {.cdecl, raises: [], gcsafe.}
   geometry*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  indexOf*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
+  indexOf_QWidget*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
   isEmpty*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   controlTypes*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   layout*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
@@ -347,7 +347,7 @@ proc fcQVBoxLayout_virtualbase_takeAt(self: pointer, param1: cint): pointer {.im
 proc fcQVBoxLayout_virtualbase_count(self: pointer): cint {.importc: "QVBoxLayout_virtualbase_count".}
 proc fcQVBoxLayout_virtualbase_setGeometry(self: pointer, geometry: pointer): void {.importc: "QVBoxLayout_virtualbase_setGeometry".}
 proc fcQVBoxLayout_virtualbase_geometry(self: pointer): pointer {.importc: "QVBoxLayout_virtualbase_geometry".}
-proc fcQVBoxLayout_virtualbase_indexOf(self: pointer, param1: pointer): cint {.importc: "QVBoxLayout_virtualbase_indexOf".}
+proc fcQVBoxLayout_virtualbase_indexOf_QWidget(self: pointer, param1: pointer): cint {.importc: "QVBoxLayout_virtualbase_indexOf_QWidget".}
 proc fcQVBoxLayout_virtualbase_isEmpty(self: pointer): bool {.importc: "QVBoxLayout_virtualbase_isEmpty".}
 proc fcQVBoxLayout_virtualbase_controlTypes(self: pointer): cint {.importc: "QVBoxLayout_virtualbase_controlTypes".}
 proc fcQVBoxLayout_virtualbase_layout(self: pointer): pointer {.importc: "QVBoxLayout_virtualbase_layout".}
@@ -369,8 +369,8 @@ proc fcQVBoxLayout_protectedbase_sender(self: pointer): pointer {.importc: "QVBo
 proc fcQVBoxLayout_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QVBoxLayout_protectedbase_senderSignalIndex".}
 proc fcQVBoxLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVBoxLayout_protectedbase_receivers".}
 proc fcQVBoxLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVBoxLayout_protectedbase_isSignalConnected".}
-proc fcQVBoxLayout_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVBoxLayout {.importc: "QVBoxLayout_new".}
-proc fcQVBoxLayout_new2(vtbl: pointer, vdata: csize_t): ptr cQVBoxLayout {.importc: "QVBoxLayout_new2".}
+proc fcQVBoxLayout_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVBoxLayout {.importc: "QVBoxLayout_new_parent".}
+proc fcQVBoxLayout_new2(vtbl: pointer, vdata: csize_t): ptr cQVBoxLayout {.importc: "QVBoxLayout_new".}
 proc fcQVBoxLayout_staticMetaObject(): pointer {.importc: "QVBoxLayout_staticMetaObject".}
 
 proc metaObject*(self: gen_qboxlayout_types.QBoxLayout): gen_qobjectdefs_types.QMetaObject =
@@ -383,13 +383,13 @@ proc metacall*(self: gen_qboxlayout_types.QBoxLayout, param1: cint, param2: cint
   fcQBoxLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qboxlayout_types.QBoxLayout, s: cstring): string =
-  let v_ms = fcQBoxLayout_tr(s)
+  let v_ms = fcQBoxLayout_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QBoxLayout, s: cstring): string =
-  let v_ms = fcQBoxLayout_trUtf8(s)
+  let v_ms = fcQBoxLayout_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -410,10 +410,10 @@ proc addSpacerItem*(self: gen_qboxlayout_types.QBoxLayout, spacerItem: gen_qlayo
   fcQBoxLayout_addSpacerItem(self.h, spacerItem.h)
 
 proc addWidget*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qwidget_types.QWidget): void =
-  fcQBoxLayout_addWidget(self.h, param1.h)
+  fcQBoxLayout_addWidget_QWidget(self.h, param1.h)
 
 proc addLayout*(self: gen_qboxlayout_types.QBoxLayout, layout: gen_qlayout_types.QLayout): void =
-  fcQBoxLayout_addLayout(self.h, layout.h)
+  fcQBoxLayout_addLayoutLayout(self.h, layout.h)
 
 proc addStrut*(self: gen_qboxlayout_types.QBoxLayout, param1: cint): void =
   fcQBoxLayout_addStrut(self.h, param1)
@@ -425,16 +425,16 @@ proc insertSpacing*(self: gen_qboxlayout_types.QBoxLayout, index: cint, size: ci
   fcQBoxLayout_insertSpacing(self.h, index, size)
 
 proc insertStretch*(self: gen_qboxlayout_types.QBoxLayout, index: cint): void =
-  fcQBoxLayout_insertStretch(self.h, index)
+  fcQBoxLayout_insertStretchIndex(self.h, index)
 
 proc insertSpacerItem*(self: gen_qboxlayout_types.QBoxLayout, index: cint, spacerItem: gen_qlayoutitem_types.QSpacerItem): void =
   fcQBoxLayout_insertSpacerItem(self.h, index, spacerItem.h)
 
 proc insertWidget*(self: gen_qboxlayout_types.QBoxLayout, index: cint, widget: gen_qwidget_types.QWidget): void =
-  fcQBoxLayout_insertWidget(self.h, index, widget.h)
+  fcQBoxLayout_insertWidgetIndexWidget(self.h, index, widget.h)
 
 proc insertLayout*(self: gen_qboxlayout_types.QBoxLayout, index: cint, layout: gen_qlayout_types.QLayout): void =
-  fcQBoxLayout_insertLayout(self.h, index, layout.h)
+  fcQBoxLayout_insertLayoutIndexLayout(self.h, index, layout.h)
 
 proc insertItem*(self: gen_qboxlayout_types.QBoxLayout, index: cint, param2: gen_qlayoutitem_types.QLayoutItem): void =
   fcQBoxLayout_insertItem(self.h, index, param2.h)
@@ -446,10 +446,10 @@ proc setSpacing*(self: gen_qboxlayout_types.QBoxLayout, spacing: cint): void =
   fcQBoxLayout_setSpacing(self.h, spacing)
 
 proc setStretchFactor*(self: gen_qboxlayout_types.QBoxLayout, w: gen_qwidget_types.QWidget, stretch: cint): bool =
-  fcQBoxLayout_setStretchFactor(self.h, w.h, stretch)
+  fcQBoxLayout_setStretchFactorWStretch(self.h, w.h, stretch)
 
 proc setStretchFactor*(self: gen_qboxlayout_types.QBoxLayout, l: gen_qlayout_types.QLayout, stretch: cint): bool =
-  fcQBoxLayout_setStretchFactor2(self.h, l.h, stretch)
+  fcQBoxLayout_setStretchFactorLStretch(self.h, l.h, stretch)
 
 proc setStretch*(self: gen_qboxlayout_types.QBoxLayout, index: cint, stretch: cint): void =
   fcQBoxLayout_setStretch(self.h, index, stretch)
@@ -494,52 +494,52 @@ proc setGeometry*(self: gen_qboxlayout_types.QBoxLayout, geometry: gen_qrect_typ
   fcQBoxLayout_setGeometry(self.h, geometry.h)
 
 proc tr*(_: type gen_qboxlayout_types.QBoxLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQBoxLayout_tr2(s, c)
+  let v_ms = fcQBoxLayout_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qboxlayout_types.QBoxLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQBoxLayout_tr3(s, c, n)
+  let v_ms = fcQBoxLayout_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QBoxLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQBoxLayout_trUtf82(s, c)
+  let v_ms = fcQBoxLayout_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QBoxLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQBoxLayout_trUtf83(s, c, n)
+  let v_ms = fcQBoxLayout_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addStretch*(self: gen_qboxlayout_types.QBoxLayout, stretch: cint): void =
-  fcQBoxLayout_addStretchWithStretch(self.h, stretch)
+  fcQBoxLayout_addStretchStretch(self.h, stretch)
 
 proc addWidget*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qwidget_types.QWidget, stretch: cint): void =
-  fcQBoxLayout_addWidget2(self.h, param1.h, stretch)
+  fcQBoxLayout_addWidget_QWidgetInt(self.h, param1.h, stretch)
 
 proc addWidget*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qwidget_types.QWidget, stretch: cint, alignment: cint): void =
-  fcQBoxLayout_addWidget3(self.h, param1.h, stretch, cint(alignment))
+  fcQBoxLayout_addWidget_QWidgetInt_Qt_Alignment(self.h, param1.h, stretch, cint(alignment))
 
 proc addLayout*(self: gen_qboxlayout_types.QBoxLayout, layout: gen_qlayout_types.QLayout, stretch: cint): void =
-  fcQBoxLayout_addLayout2(self.h, layout.h, stretch)
+  fcQBoxLayout_addLayoutLayoutStretch(self.h, layout.h, stretch)
 
 proc insertStretch*(self: gen_qboxlayout_types.QBoxLayout, index: cint, stretch: cint): void =
-  fcQBoxLayout_insertStretch2(self.h, index, stretch)
+  fcQBoxLayout_insertStretchIndexStretch(self.h, index, stretch)
 
 proc insertWidget*(self: gen_qboxlayout_types.QBoxLayout, index: cint, widget: gen_qwidget_types.QWidget, stretch: cint): void =
-  fcQBoxLayout_insertWidget2(self.h, index, widget.h, stretch)
+  fcQBoxLayout_insertWidgetIndexWidgetStretch(self.h, index, widget.h, stretch)
 
 proc insertWidget*(self: gen_qboxlayout_types.QBoxLayout, index: cint, widget: gen_qwidget_types.QWidget, stretch: cint, alignment: cint): void =
-  fcQBoxLayout_insertWidget3(self.h, index, widget.h, stretch, cint(alignment))
+  fcQBoxLayout_insertWidgetIndexWidgetStretchAlignment(self.h, index, widget.h, stretch, cint(alignment))
 
 proc insertLayout*(self: gen_qboxlayout_types.QBoxLayout, index: cint, layout: gen_qlayout_types.QLayout, stretch: cint): void =
-  fcQBoxLayout_insertLayout2(self.h, index, layout.h, stretch)
+  fcQBoxLayout_insertLayoutIndexLayoutStretch(self.h, index, layout.h, stretch)
 
 type QBoxLayoutmetaObjectProc* = proc(self: QBoxLayout): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QBoxLayoutmetacastProc* = proc(self: QBoxLayout, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -558,7 +558,7 @@ type QBoxLayouttakeAtProc* = proc(self: QBoxLayout, param1: cint): gen_qlayoutit
 type QBoxLayoutcountProc* = proc(self: QBoxLayout): cint {.raises: [], gcsafe.}
 type QBoxLayoutsetGeometryProc* = proc(self: QBoxLayout, geometry: gen_qrect_types.QRect): void {.raises: [], gcsafe.}
 type QBoxLayoutgeometryProc* = proc(self: QBoxLayout): gen_qrect_types.QRect {.raises: [], gcsafe.}
-type QBoxLayoutindexOfProc* = proc(self: QBoxLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QBoxLayoutindexOf_QWidgetProc* = proc(self: QBoxLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
 type QBoxLayoutisEmptyProc* = proc(self: QBoxLayout): bool {.raises: [], gcsafe.}
 type QBoxLayoutcontrolTypesProc* = proc(self: QBoxLayout): cint {.raises: [], gcsafe.}
 type QBoxLayoutlayoutProc* = proc(self: QBoxLayout): gen_qlayout_types.QLayout {.raises: [], gcsafe.}
@@ -591,7 +591,7 @@ type QBoxLayoutVTable* {.inheritable, pure.} = object
   count*: QBoxLayoutcountProc
   setGeometry*: QBoxLayoutsetGeometryProc
   geometry*: QBoxLayoutgeometryProc
-  indexOf*: QBoxLayoutindexOfProc
+  indexOf_QWidget*: QBoxLayoutindexOf_QWidgetProc
   isEmpty*: QBoxLayoutisEmptyProc
   controlTypes*: QBoxLayoutcontrolTypesProc
   layout*: QBoxLayoutlayoutProc
@@ -657,7 +657,7 @@ proc QBoxLayoutgeometry*(self: gen_qboxlayout_types.QBoxLayout): gen_qrect_types
   gen_qrect_types.QRect(h: fcQBoxLayout_virtualbase_geometry(self.h), owned: true)
 
 proc QBoxLayoutindexOf*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qwidget_types.QWidget): cint =
-  fcQBoxLayout_virtualbase_indexOf(self.h, param1.h)
+  fcQBoxLayout_virtualbase_indexOf_QWidget(self.h, param1.h)
 
 proc QBoxLayoutisEmpty*(self: gen_qboxlayout_types.QBoxLayout): bool =
   fcQBoxLayout_virtualbase_isEmpty(self.h)
@@ -826,11 +826,11 @@ proc fcQBoxLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQBoxLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQBoxLayout_vtable_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](fcQBoxLayout_vdata(self)[])
   let self = QBoxLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
-  var virtualReturn = vtbl[].indexOf(self, slotval1)
+  var virtualReturn = vtbl[].indexOf_QWidget(self, slotval1)
   virtualReturn
 
 proc fcQBoxLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
@@ -1094,7 +1094,7 @@ proc fcQBoxLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQBoxLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQBoxLayout_method_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQBoxLayout](fcQBoxLayout_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
@@ -1242,8 +1242,8 @@ proc create*(T: type gen_qboxlayout_types.QBoxLayout,
     vtbl[].vtbl.setGeometry = fcQBoxLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = fcQBoxLayout_vtable_callback_geometry
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQBoxLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQBoxLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQBoxLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -1313,8 +1313,8 @@ proc create*(T: type gen_qboxlayout_types.QBoxLayout,
     vtbl[].vtbl.setGeometry = fcQBoxLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = fcQBoxLayout_vtable_callback_geometry
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQBoxLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQBoxLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQBoxLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -1365,7 +1365,7 @@ const cQBoxLayout_mvtbl = cQBoxLayoutVTable(
   count: fcQBoxLayout_method_callback_count,
   setGeometry: fcQBoxLayout_method_callback_setGeometry,
   geometry: fcQBoxLayout_method_callback_geometry,
-  indexOf: fcQBoxLayout_method_callback_indexOf,
+  indexOf_QWidget: fcQBoxLayout_method_callback_indexOf_QWidget,
   isEmpty: fcQBoxLayout_method_callback_isEmpty,
   controlTypes: fcQBoxLayout_method_callback_controlTypes,
   layout: fcQBoxLayout_method_callback_layout,
@@ -1407,37 +1407,37 @@ proc metacall*(self: gen_qboxlayout_types.QHBoxLayout, param1: cint, param2: cin
   fcQHBoxLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qboxlayout_types.QHBoxLayout, s: cstring): string =
-  let v_ms = fcQHBoxLayout_tr(s)
+  let v_ms = fcQHBoxLayout_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QHBoxLayout, s: cstring): string =
-  let v_ms = fcQHBoxLayout_trUtf8(s)
+  let v_ms = fcQHBoxLayout_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qboxlayout_types.QHBoxLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQHBoxLayout_tr2(s, c)
+  let v_ms = fcQHBoxLayout_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qboxlayout_types.QHBoxLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQHBoxLayout_tr3(s, c, n)
+  let v_ms = fcQHBoxLayout_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QHBoxLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQHBoxLayout_trUtf82(s, c)
+  let v_ms = fcQHBoxLayout_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QHBoxLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQHBoxLayout_trUtf83(s, c, n)
+  let v_ms = fcQHBoxLayout_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1459,7 +1459,7 @@ type QHBoxLayouttakeAtProc* = proc(self: QHBoxLayout, param1: cint): gen_qlayout
 type QHBoxLayoutcountProc* = proc(self: QHBoxLayout): cint {.raises: [], gcsafe.}
 type QHBoxLayoutsetGeometryProc* = proc(self: QHBoxLayout, geometry: gen_qrect_types.QRect): void {.raises: [], gcsafe.}
 type QHBoxLayoutgeometryProc* = proc(self: QHBoxLayout): gen_qrect_types.QRect {.raises: [], gcsafe.}
-type QHBoxLayoutindexOfProc* = proc(self: QHBoxLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QHBoxLayoutindexOf_QWidgetProc* = proc(self: QHBoxLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
 type QHBoxLayoutisEmptyProc* = proc(self: QHBoxLayout): bool {.raises: [], gcsafe.}
 type QHBoxLayoutcontrolTypesProc* = proc(self: QHBoxLayout): cint {.raises: [], gcsafe.}
 type QHBoxLayoutlayoutProc* = proc(self: QHBoxLayout): gen_qlayout_types.QLayout {.raises: [], gcsafe.}
@@ -1492,7 +1492,7 @@ type QHBoxLayoutVTable* {.inheritable, pure.} = object
   count*: QHBoxLayoutcountProc
   setGeometry*: QHBoxLayoutsetGeometryProc
   geometry*: QHBoxLayoutgeometryProc
-  indexOf*: QHBoxLayoutindexOfProc
+  indexOf_QWidget*: QHBoxLayoutindexOf_QWidgetProc
   isEmpty*: QHBoxLayoutisEmptyProc
   controlTypes*: QHBoxLayoutcontrolTypesProc
   layout*: QHBoxLayoutlayoutProc
@@ -1558,7 +1558,7 @@ proc QHBoxLayoutgeometry*(self: gen_qboxlayout_types.QHBoxLayout): gen_qrect_typ
   gen_qrect_types.QRect(h: fcQHBoxLayout_virtualbase_geometry(self.h), owned: true)
 
 proc QHBoxLayoutindexOf*(self: gen_qboxlayout_types.QHBoxLayout, param1: gen_qwidget_types.QWidget): cint =
-  fcQHBoxLayout_virtualbase_indexOf(self.h, param1.h)
+  fcQHBoxLayout_virtualbase_indexOf_QWidget(self.h, param1.h)
 
 proc QHBoxLayoutisEmpty*(self: gen_qboxlayout_types.QHBoxLayout): bool =
   fcQHBoxLayout_virtualbase_isEmpty(self.h)
@@ -1727,11 +1727,11 @@ proc fcQHBoxLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQHBoxLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQHBoxLayout_vtable_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](fcQHBoxLayout_vdata(self)[])
   let self = QHBoxLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
-  var virtualReturn = vtbl[].indexOf(self, slotval1)
+  var virtualReturn = vtbl[].indexOf_QWidget(self, slotval1)
   virtualReturn
 
 proc fcQHBoxLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
@@ -1995,7 +1995,7 @@ proc fcQHBoxLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQHBoxLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQHBoxLayout_method_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQHBoxLayout](fcQHBoxLayout_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
@@ -2143,8 +2143,8 @@ proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
     vtbl[].vtbl.setGeometry = fcQHBoxLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = fcQHBoxLayout_vtable_callback_geometry
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQHBoxLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQHBoxLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQHBoxLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -2213,8 +2213,8 @@ proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
     vtbl[].vtbl.setGeometry = fcQHBoxLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = fcQHBoxLayout_vtable_callback_geometry
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQHBoxLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQHBoxLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQHBoxLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -2265,7 +2265,7 @@ const cQHBoxLayout_mvtbl = cQHBoxLayoutVTable(
   count: fcQHBoxLayout_method_callback_count,
   setGeometry: fcQHBoxLayout_method_callback_setGeometry,
   geometry: fcQHBoxLayout_method_callback_geometry,
-  indexOf: fcQHBoxLayout_method_callback_indexOf,
+  indexOf_QWidget: fcQHBoxLayout_method_callback_indexOf_QWidget,
   isEmpty: fcQHBoxLayout_method_callback_isEmpty,
   controlTypes: fcQHBoxLayout_method_callback_controlTypes,
   layout: fcQHBoxLayout_method_callback_layout,
@@ -2306,37 +2306,37 @@ proc metacall*(self: gen_qboxlayout_types.QVBoxLayout, param1: cint, param2: cin
   fcQVBoxLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qboxlayout_types.QVBoxLayout, s: cstring): string =
-  let v_ms = fcQVBoxLayout_tr(s)
+  let v_ms = fcQVBoxLayout_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QVBoxLayout, s: cstring): string =
-  let v_ms = fcQVBoxLayout_trUtf8(s)
+  let v_ms = fcQVBoxLayout_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qboxlayout_types.QVBoxLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQVBoxLayout_tr2(s, c)
+  let v_ms = fcQVBoxLayout_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qboxlayout_types.QVBoxLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVBoxLayout_tr3(s, c, n)
+  let v_ms = fcQVBoxLayout_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QVBoxLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQVBoxLayout_trUtf82(s, c)
+  let v_ms = fcQVBoxLayout_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qboxlayout_types.QVBoxLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVBoxLayout_trUtf83(s, c, n)
+  let v_ms = fcQVBoxLayout_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2358,7 +2358,7 @@ type QVBoxLayouttakeAtProc* = proc(self: QVBoxLayout, param1: cint): gen_qlayout
 type QVBoxLayoutcountProc* = proc(self: QVBoxLayout): cint {.raises: [], gcsafe.}
 type QVBoxLayoutsetGeometryProc* = proc(self: QVBoxLayout, geometry: gen_qrect_types.QRect): void {.raises: [], gcsafe.}
 type QVBoxLayoutgeometryProc* = proc(self: QVBoxLayout): gen_qrect_types.QRect {.raises: [], gcsafe.}
-type QVBoxLayoutindexOfProc* = proc(self: QVBoxLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QVBoxLayoutindexOf_QWidgetProc* = proc(self: QVBoxLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
 type QVBoxLayoutisEmptyProc* = proc(self: QVBoxLayout): bool {.raises: [], gcsafe.}
 type QVBoxLayoutcontrolTypesProc* = proc(self: QVBoxLayout): cint {.raises: [], gcsafe.}
 type QVBoxLayoutlayoutProc* = proc(self: QVBoxLayout): gen_qlayout_types.QLayout {.raises: [], gcsafe.}
@@ -2391,7 +2391,7 @@ type QVBoxLayoutVTable* {.inheritable, pure.} = object
   count*: QVBoxLayoutcountProc
   setGeometry*: QVBoxLayoutsetGeometryProc
   geometry*: QVBoxLayoutgeometryProc
-  indexOf*: QVBoxLayoutindexOfProc
+  indexOf_QWidget*: QVBoxLayoutindexOf_QWidgetProc
   isEmpty*: QVBoxLayoutisEmptyProc
   controlTypes*: QVBoxLayoutcontrolTypesProc
   layout*: QVBoxLayoutlayoutProc
@@ -2457,7 +2457,7 @@ proc QVBoxLayoutgeometry*(self: gen_qboxlayout_types.QVBoxLayout): gen_qrect_typ
   gen_qrect_types.QRect(h: fcQVBoxLayout_virtualbase_geometry(self.h), owned: true)
 
 proc QVBoxLayoutindexOf*(self: gen_qboxlayout_types.QVBoxLayout, param1: gen_qwidget_types.QWidget): cint =
-  fcQVBoxLayout_virtualbase_indexOf(self.h, param1.h)
+  fcQVBoxLayout_virtualbase_indexOf_QWidget(self.h, param1.h)
 
 proc QVBoxLayoutisEmpty*(self: gen_qboxlayout_types.QVBoxLayout): bool =
   fcQVBoxLayout_virtualbase_isEmpty(self.h)
@@ -2626,11 +2626,11 @@ proc fcQVBoxLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQVBoxLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQVBoxLayout_vtable_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](fcQVBoxLayout_vdata(self)[])
   let self = QVBoxLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
-  var virtualReturn = vtbl[].indexOf(self, slotval1)
+  var virtualReturn = vtbl[].indexOf_QWidget(self, slotval1)
   virtualReturn
 
 proc fcQVBoxLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
@@ -2894,7 +2894,7 @@ proc fcQVBoxLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQVBoxLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQVBoxLayout_method_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQVBoxLayout](fcQVBoxLayout_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
@@ -3042,8 +3042,8 @@ proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
     vtbl[].vtbl.setGeometry = fcQVBoxLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = fcQVBoxLayout_vtable_callback_geometry
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQVBoxLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQVBoxLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQVBoxLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -3112,8 +3112,8 @@ proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
     vtbl[].vtbl.setGeometry = fcQVBoxLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = fcQVBoxLayout_vtable_callback_geometry
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQVBoxLayout_vtable_callback_indexOf
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQVBoxLayout_vtable_callback_indexOf_QWidget
   if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = fcQVBoxLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
@@ -3164,7 +3164,7 @@ const cQVBoxLayout_mvtbl = cQVBoxLayoutVTable(
   count: fcQVBoxLayout_method_callback_count,
   setGeometry: fcQVBoxLayout_method_callback_setGeometry,
   geometry: fcQVBoxLayout_method_callback_geometry,
-  indexOf: fcQVBoxLayout_method_callback_indexOf,
+  indexOf_QWidget: fcQVBoxLayout_method_callback_indexOf_QWidget,
   isEmpty: fcQVBoxLayout_method_callback_isEmpty,
   controlTypes: fcQVBoxLayout_method_callback_controlTypes,
   layout: fcQVBoxLayout_method_callback_layout,

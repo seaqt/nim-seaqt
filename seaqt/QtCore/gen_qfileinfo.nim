@@ -47,15 +47,15 @@ export
 
 type cQFileInfo*{.exportc: "QFileInfo", incompleteStruct.} = object
 
-proc fcQFileInfo_operatorAssign(self: pointer, fileinfo: pointer): void {.importc: "QFileInfo_operatorAssign".}
+proc fcQFileInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QFileInfo_operatorAssign".}
 proc fcQFileInfo_swap(self: pointer, other: pointer): void {.importc: "QFileInfo_swap".}
 proc fcQFileInfo_operatorEqual(self: pointer, fileinfo: pointer): bool {.importc: "QFileInfo_operatorEqual".}
 proc fcQFileInfo_operatorNotEqual(self: pointer, fileinfo: pointer): bool {.importc: "QFileInfo_operatorNotEqual".}
-proc fcQFileInfo_setFile(self: pointer, file: struct_seaqt_string): void {.importc: "QFileInfo_setFile".}
-proc fcQFileInfo_setFileWithFile(self: pointer, file: pointer): void {.importc: "QFileInfo_setFileWithFile".}
-proc fcQFileInfo_setFile2(self: pointer, dir: pointer, file: struct_seaqt_string): void {.importc: "QFileInfo_setFile2".}
+proc fcQFileInfo_setFile_QString(self: pointer, file: struct_seaqt_string): void {.importc: "QFileInfo_setFile_QString".}
+proc fcQFileInfo_setFile_QFile(self: pointer, file: pointer): void {.importc: "QFileInfo_setFile_QFile".}
+proc fcQFileInfo_setFile_QDir_QString(self: pointer, dir: pointer, file: struct_seaqt_string): void {.importc: "QFileInfo_setFile_QDir_QString".}
 proc fcQFileInfo_exists(self: pointer): bool {.importc: "QFileInfo_exists".}
-proc fcQFileInfo_existsWithFile(file: struct_seaqt_string): bool {.importc: "QFileInfo_existsWithFile".}
+proc fcQFileInfo_existsFile(file: struct_seaqt_string): bool {.importc: "QFileInfo_exists_file".}
 proc fcQFileInfo_refresh(self: pointer): void {.importc: "QFileInfo_refresh".}
 proc fcQFileInfo_filePath(self: pointer): struct_seaqt_string {.importc: "QFileInfo_filePath".}
 proc fcQFileInfo_absoluteFilePath(self: pointer): struct_seaqt_string {.importc: "QFileInfo_absoluteFilePath".}
@@ -105,13 +105,13 @@ proc fcQFileInfo_fileTime(self: pointer, time: cint): pointer {.importc: "QFileI
 proc fcQFileInfo_caching(self: pointer): bool {.importc: "QFileInfo_caching".}
 proc fcQFileInfo_setCaching(self: pointer, on: bool): void {.importc: "QFileInfo_setCaching".}
 proc fcQFileInfo_new(): ptr cQFileInfo {.importc: "QFileInfo_new".}
-proc fcQFileInfo_new2(file: struct_seaqt_string): ptr cQFileInfo {.importc: "QFileInfo_new2".}
-proc fcQFileInfo_new3(file: pointer): ptr cQFileInfo {.importc: "QFileInfo_new3".}
-proc fcQFileInfo_new4(dir: pointer, file: struct_seaqt_string): ptr cQFileInfo {.importc: "QFileInfo_new4".}
-proc fcQFileInfo_new5(fileinfo: pointer): ptr cQFileInfo {.importc: "QFileInfo_new5".}
+proc fcQFileInfo_new2(file: struct_seaqt_string): ptr cQFileInfo {.importc: "QFileInfo_new_QString".}
+proc fcQFileInfo_new3(file: pointer): ptr cQFileInfo {.importc: "QFileInfo_new_QFile".}
+proc fcQFileInfo_new4(dir: pointer, file: struct_seaqt_string): ptr cQFileInfo {.importc: "QFileInfo_new_QDir_QString".}
+proc fcQFileInfo_new5(fromVal: pointer): ptr cQFileInfo {.importc: "QFileInfo_new_QFileInfo".}
 
-proc operatorAssign*(self: gen_qfileinfo_types.QFileInfo, fileinfo: gen_qfileinfo_types.QFileInfo): void =
-  fcQFileInfo_operatorAssign(self.h, fileinfo.h)
+proc operatorAssign*(self: gen_qfileinfo_types.QFileInfo, fromVal: gen_qfileinfo_types.QFileInfo): void =
+  fcQFileInfo_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qfileinfo_types.QFileInfo, other: gen_qfileinfo_types.QFileInfo): void =
   fcQFileInfo_swap(self.h, other.h)
@@ -123,19 +123,19 @@ proc operatorNotEqual*(self: gen_qfileinfo_types.QFileInfo, fileinfo: gen_qfilei
   fcQFileInfo_operatorNotEqual(self.h, fileinfo.h)
 
 proc setFile*(self: gen_qfileinfo_types.QFileInfo, file: openArray[char]): void =
-  fcQFileInfo_setFile(self.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
+  fcQFileInfo_setFile_QString(self.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc setFile*(self: gen_qfileinfo_types.QFileInfo, file: gen_qfile_types.QFile): void =
-  fcQFileInfo_setFileWithFile(self.h, file.h)
+  fcQFileInfo_setFile_QFile(self.h, file.h)
 
 proc setFile*(self: gen_qfileinfo_types.QFileInfo, dir: gen_qdir_types.QDir, file: openArray[char]): void =
-  fcQFileInfo_setFile2(self.h, dir.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
+  fcQFileInfo_setFile_QDir_QString(self.h, dir.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc exists*(self: gen_qfileinfo_types.QFileInfo): bool =
   fcQFileInfo_exists(self.h)
 
 proc exists*(_: type gen_qfileinfo_types.QFileInfo, file: openArray[char]): bool =
-  fcQFileInfo_existsWithFile(struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
+  fcQFileInfo_existsFile(struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc refresh*(self: gen_qfileinfo_types.QFileInfo): void =
   fcQFileInfo_refresh(self.h)
@@ -345,6 +345,6 @@ proc create*(T: type gen_qfileinfo_types.QFileInfo,
   let tmp = gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new4(dir.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
   tmp
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
-    fileinfo: gen_qfileinfo_types.QFileInfo): gen_qfileinfo_types.QFileInfo =
-  let tmp = gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new5(fileinfo.h), owned: true)
+    fromVal: gen_qfileinfo_types.QFileInfo): gen_qfileinfo_types.QFileInfo =
+  let tmp = gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new5(fromVal.h), owned: true)
   tmp

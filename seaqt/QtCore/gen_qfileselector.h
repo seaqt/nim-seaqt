@@ -53,23 +53,23 @@ void* QFileSelector_vdata(VirtualQFileSelector* self);
 VirtualQFileSelector* vdata_QFileSelector(void* vdata);
 
 VirtualQFileSelector* QFileSelector_new(const QFileSelector_VTable* vtbl, size_t vdata);
-VirtualQFileSelector* QFileSelector_new2(const QFileSelector_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQFileSelector* QFileSelector_new_parent(const QFileSelector_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QFileSelector_virtbase(QFileSelector* src, QObject** outptr_QObject);
 QMetaObject* QFileSelector_metaObject(const QFileSelector* self);
 void* QFileSelector_metacast(QFileSelector* self, const char* param1);
 int QFileSelector_metacall(QFileSelector* self, int param1, int param2, void** param3);
-struct seaqt_string QFileSelector_tr(const char* s);
-struct seaqt_string QFileSelector_trUtf8(const char* s);
-struct seaqt_string QFileSelector_select(const QFileSelector* self, struct seaqt_string filePath);
-QUrl* QFileSelector_selectWithFilePath(const QFileSelector* self, QUrl* filePath);
+struct seaqt_string QFileSelector_tr_s(const char* s);
+struct seaqt_string QFileSelector_trUtf8_s(const char* s);
+struct seaqt_string QFileSelector_select_QString(const QFileSelector* self, struct seaqt_string filePath);
+QUrl* QFileSelector_select_QUrl(const QFileSelector* self, QUrl* filePath);
 struct seaqt_array /* of struct seaqt_string */  QFileSelector_extraSelectors(const QFileSelector* self);
 void QFileSelector_setExtraSelectors(QFileSelector* self, struct seaqt_array /* of struct seaqt_string */  list);
 struct seaqt_array /* of struct seaqt_string */  QFileSelector_allSelectors(const QFileSelector* self);
-struct seaqt_string QFileSelector_tr2(const char* s, const char* c);
-struct seaqt_string QFileSelector_tr3(const char* s, const char* c, int n);
-struct seaqt_string QFileSelector_trUtf82(const char* s, const char* c);
-struct seaqt_string QFileSelector_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QFileSelector_tr_s_c(const char* s, const char* c);
+struct seaqt_string QFileSelector_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QFileSelector_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QFileSelector_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QFileSelector_virtualbase_metaObject(const VirtualQFileSelector* self);
 void* QFileSelector_virtualbase_metacast(VirtualQFileSelector* self, const char* param1);

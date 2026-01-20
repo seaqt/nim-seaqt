@@ -174,7 +174,7 @@ VirtualQNetworkConfigurationManager* QNetworkConfigurationManager_new(const QNet
 	return _mem_ ? new (_mem_)VirtualQNetworkConfigurationManager(vtbl) : nullptr;
 }
 
-VirtualQNetworkConfigurationManager* QNetworkConfigurationManager_new2(const QNetworkConfigurationManager_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQNetworkConfigurationManager* QNetworkConfigurationManager_new_parent(const QNetworkConfigurationManager_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNetworkConfigurationManager>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQNetworkConfigurationManager(vtbl, parent) : nullptr;
 }
@@ -195,7 +195,7 @@ int QNetworkConfigurationManager_metacall(QNetworkConfigurationManager* self, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QNetworkConfigurationManager_tr(const char* s) {
+struct seaqt_string QNetworkConfigurationManager_tr_s(const char* s) {
 	QString _ret = QNetworkConfigurationManager::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -206,7 +206,7 @@ struct seaqt_string QNetworkConfigurationManager_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QNetworkConfigurationManager_trUtf8(const char* s) {
+struct seaqt_string QNetworkConfigurationManager_trUtf8_s(const char* s) {
 	QString _ret = QNetworkConfigurationManager::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -337,7 +337,7 @@ void QNetworkConfigurationManager_connect_updateCompleted(QNetworkConfigurationM
 	QNetworkConfigurationManager::connect(self, static_cast<void (QNetworkConfigurationManager::*)()>(&QNetworkConfigurationManager::updateCompleted), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QNetworkConfigurationManager_tr2(const char* s, const char* c) {
+struct seaqt_string QNetworkConfigurationManager_tr_s_c(const char* s, const char* c) {
 	QString _ret = QNetworkConfigurationManager::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -348,7 +348,7 @@ struct seaqt_string QNetworkConfigurationManager_tr2(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QNetworkConfigurationManager_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QNetworkConfigurationManager_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QNetworkConfigurationManager::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -359,7 +359,7 @@ struct seaqt_string QNetworkConfigurationManager_tr3(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QNetworkConfigurationManager_trUtf82(const char* s, const char* c) {
+struct seaqt_string QNetworkConfigurationManager_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QNetworkConfigurationManager::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -370,7 +370,7 @@ struct seaqt_string QNetworkConfigurationManager_trUtf82(const char* s, const ch
 	return _ms;
 }
 
-struct seaqt_string QNetworkConfigurationManager_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QNetworkConfigurationManager_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QNetworkConfigurationManager::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -381,7 +381,7 @@ struct seaqt_string QNetworkConfigurationManager_trUtf83(const char* s, const ch
 	return _ms;
 }
 
-struct seaqt_array /* of QNetworkConfiguration* */  QNetworkConfigurationManager_allConfigurationsWithFlags(const QNetworkConfigurationManager* self, int flags) {
+struct seaqt_array /* of QNetworkConfiguration* */  QNetworkConfigurationManager_allConfigurations_flags(const QNetworkConfigurationManager* self, int flags) {
 	QList<QNetworkConfiguration> _ret = self->allConfigurations(static_cast<QNetworkConfiguration::StateFlags>(flags));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QNetworkConfiguration** _arr = static_cast<QNetworkConfiguration**>(malloc(sizeof(QNetworkConfiguration*) * _ret.length()));

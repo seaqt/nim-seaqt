@@ -54,7 +54,7 @@ typedef struct QGeoAreaMonitorSource_VTable{
 	bool (*stopMonitoring)(VirtualQGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor);
 	bool (*requestUpdate)(VirtualQGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor, const char* signal);
 	struct seaqt_array /* of QGeoAreaMonitorInfo* */  (*activeMonitors)(const VirtualQGeoAreaMonitorSource* self);
-	struct seaqt_array /* of QGeoAreaMonitorInfo* */  (*activeMonitorsWithLookupArea)(const VirtualQGeoAreaMonitorSource* self, QGeoShape* lookupArea);
+	struct seaqt_array /* of QGeoAreaMonitorInfo* */  (*activeMonitors_lookupArea)(const VirtualQGeoAreaMonitorSource* self, QGeoShape* lookupArea);
 	bool (*event)(VirtualQGeoAreaMonitorSource* self, QEvent* event);
 	bool (*eventFilter)(VirtualQGeoAreaMonitorSource* self, QObject* watched, QEvent* event);
 	void (*timerEvent)(VirtualQGeoAreaMonitorSource* self, QTimerEvent* event);
@@ -73,8 +73,8 @@ void QGeoAreaMonitorSource_virtbase(QGeoAreaMonitorSource* src, QObject** outptr
 QMetaObject* QGeoAreaMonitorSource_metaObject(const QGeoAreaMonitorSource* self);
 void* QGeoAreaMonitorSource_metacast(QGeoAreaMonitorSource* self, const char* param1);
 int QGeoAreaMonitorSource_metacall(QGeoAreaMonitorSource* self, int param1, int param2, void** param3);
-struct seaqt_string QGeoAreaMonitorSource_tr(const char* s);
-struct seaqt_string QGeoAreaMonitorSource_trUtf8(const char* s);
+struct seaqt_string QGeoAreaMonitorSource_tr_s(const char* s);
+struct seaqt_string QGeoAreaMonitorSource_trUtf8_s(const char* s);
 QGeoAreaMonitorSource* QGeoAreaMonitorSource_createDefaultSource(QObject* parent);
 QGeoAreaMonitorSource* QGeoAreaMonitorSource_createSource(struct seaqt_string sourceName, QObject* parent);
 struct seaqt_array /* of struct seaqt_string */  QGeoAreaMonitorSource_availableSources();
@@ -87,19 +87,19 @@ bool QGeoAreaMonitorSource_startMonitoring(QGeoAreaMonitorSource* self, QGeoArea
 bool QGeoAreaMonitorSource_stopMonitoring(QGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor);
 bool QGeoAreaMonitorSource_requestUpdate(QGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor, const char* signal);
 struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_activeMonitors(const QGeoAreaMonitorSource* self);
-struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_activeMonitorsWithLookupArea(const QGeoAreaMonitorSource* self, QGeoShape* lookupArea);
+struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_activeMonitors_lookupArea(const QGeoAreaMonitorSource* self, QGeoShape* lookupArea);
 void QGeoAreaMonitorSource_areaEntered(QGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor, QGeoPositionInfo* update);
 void QGeoAreaMonitorSource_connect_areaEntered(QGeoAreaMonitorSource* self, intptr_t slot, void (*callback)(intptr_t, QGeoAreaMonitorInfo*, QGeoPositionInfo*), void (*release)(intptr_t));
 void QGeoAreaMonitorSource_areaExited(QGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor, QGeoPositionInfo* update);
 void QGeoAreaMonitorSource_connect_areaExited(QGeoAreaMonitorSource* self, intptr_t slot, void (*callback)(intptr_t, QGeoAreaMonitorInfo*, QGeoPositionInfo*), void (*release)(intptr_t));
 void QGeoAreaMonitorSource_monitorExpired(QGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor);
 void QGeoAreaMonitorSource_connect_monitorExpired(QGeoAreaMonitorSource* self, intptr_t slot, void (*callback)(intptr_t, QGeoAreaMonitorInfo*), void (*release)(intptr_t));
-void QGeoAreaMonitorSource_errorWithError(QGeoAreaMonitorSource* self, int error);
-void QGeoAreaMonitorSource_connect_errorWithError(QGeoAreaMonitorSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QGeoAreaMonitorSource_tr2(const char* s, const char* c);
-struct seaqt_string QGeoAreaMonitorSource_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGeoAreaMonitorSource_trUtf82(const char* s, const char* c);
-struct seaqt_string QGeoAreaMonitorSource_trUtf83(const char* s, const char* c, int n);
+void QGeoAreaMonitorSource_error_error(QGeoAreaMonitorSource* self, int error);
+void QGeoAreaMonitorSource_connect_error_error(QGeoAreaMonitorSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+struct seaqt_string QGeoAreaMonitorSource_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGeoAreaMonitorSource_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGeoAreaMonitorSource_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGeoAreaMonitorSource_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGeoAreaMonitorSource_virtualbase_metaObject(const VirtualQGeoAreaMonitorSource* self);
 void* QGeoAreaMonitorSource_virtualbase_metacast(VirtualQGeoAreaMonitorSource* self, const char* param1);
@@ -112,7 +112,7 @@ bool QGeoAreaMonitorSource_virtualbase_startMonitoring(VirtualQGeoAreaMonitorSou
 bool QGeoAreaMonitorSource_virtualbase_stopMonitoring(VirtualQGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor);
 bool QGeoAreaMonitorSource_virtualbase_requestUpdate(VirtualQGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor, const char* signal);
 struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_virtualbase_activeMonitors(const VirtualQGeoAreaMonitorSource* self);
-struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_virtualbase_activeMonitorsWithLookupArea(const VirtualQGeoAreaMonitorSource* self, QGeoShape* lookupArea);
+struct seaqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_virtualbase_activeMonitors_lookupArea(const VirtualQGeoAreaMonitorSource* self, QGeoShape* lookupArea);
 bool QGeoAreaMonitorSource_virtualbase_event(VirtualQGeoAreaMonitorSource* self, QEvent* event);
 bool QGeoAreaMonitorSource_virtualbase_eventFilter(VirtualQGeoAreaMonitorSource* self, QObject* watched, QEvent* event);
 void QGeoAreaMonitorSource_virtualbase_timerEvent(VirtualQGeoAreaMonitorSource* self, QTimerEvent* event);

@@ -174,7 +174,7 @@ VirtualQButtonGroup* QButtonGroup_new(const QButtonGroup_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQButtonGroup(vtbl) : nullptr;
 }
 
-VirtualQButtonGroup* QButtonGroup_new2(const QButtonGroup_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQButtonGroup* QButtonGroup_new_parent(const QButtonGroup_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQButtonGroup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQButtonGroup(vtbl, parent) : nullptr;
 }
@@ -195,7 +195,7 @@ int QButtonGroup_metacall(QButtonGroup* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QButtonGroup_tr(const char* s) {
+struct seaqt_string QButtonGroup_tr_s(const char* s) {
 	QString _ret = QButtonGroup::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -206,7 +206,7 @@ struct seaqt_string QButtonGroup_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QButtonGroup_trUtf8(const char* s) {
+struct seaqt_string QButtonGroup_trUtf8_s(const char* s) {
 	QString _ret = QButtonGroup::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -225,7 +225,7 @@ bool QButtonGroup_exclusive(const QButtonGroup* self) {
 	return self->exclusive();
 }
 
-void QButtonGroup_addButton(QButtonGroup* self, QAbstractButton* param1) {
+void QButtonGroup_addButton_QAbstractButton(QButtonGroup* self, QAbstractButton* param1) {
 	self->addButton(param1);
 }
 
@@ -266,11 +266,11 @@ int QButtonGroup_checkedId(const QButtonGroup* self) {
 	return self->checkedId();
 }
 
-void QButtonGroup_buttonClicked(QButtonGroup* self, QAbstractButton* param1) {
+void QButtonGroup_buttonClicked_QAbstractButton(QButtonGroup* self, QAbstractButton* param1) {
 	self->buttonClicked(param1);
 }
 
-void QButtonGroup_connect_buttonClicked(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonClicked_QAbstractButton(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*);
@@ -282,11 +282,11 @@ void QButtonGroup_connect_buttonClicked(QButtonGroup* self, intptr_t slot, void 
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonClicked), self, local_caller{slot, callback, release});
 }
 
-void QButtonGroup_buttonPressed(QButtonGroup* self, QAbstractButton* param1) {
+void QButtonGroup_buttonPressed_QAbstractButton(QButtonGroup* self, QAbstractButton* param1) {
 	self->buttonPressed(param1);
 }
 
-void QButtonGroup_connect_buttonPressed(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonPressed_QAbstractButton(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*);
@@ -298,11 +298,11 @@ void QButtonGroup_connect_buttonPressed(QButtonGroup* self, intptr_t slot, void 
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonPressed), self, local_caller{slot, callback, release});
 }
 
-void QButtonGroup_buttonReleased(QButtonGroup* self, QAbstractButton* param1) {
+void QButtonGroup_buttonReleased_QAbstractButton(QButtonGroup* self, QAbstractButton* param1) {
 	self->buttonReleased(param1);
 }
 
-void QButtonGroup_connect_buttonReleased(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonReleased_QAbstractButton(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*);
@@ -314,11 +314,11 @@ void QButtonGroup_connect_buttonReleased(QButtonGroup* self, intptr_t slot, void
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonReleased), self, local_caller{slot, callback, release});
 }
 
-void QButtonGroup_buttonToggled(QButtonGroup* self, QAbstractButton* param1, bool param2) {
+void QButtonGroup_buttonToggled_QAbstractButton_bool(QButtonGroup* self, QAbstractButton* param1, bool param2) {
 	self->buttonToggled(param1, param2);
 }
 
-void QButtonGroup_connect_buttonToggled(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*, bool), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonToggled_QAbstractButton_bool(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*, bool);
@@ -396,11 +396,11 @@ void QButtonGroup_connect_idToggled(QButtonGroup* self, intptr_t slot, void (*ca
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int, bool)>(&QButtonGroup::idToggled), self, local_caller{slot, callback, release});
 }
 
-void QButtonGroup_buttonClickedWithInt(QButtonGroup* self, int param1) {
+void QButtonGroup_buttonClicked_int(QButtonGroup* self, int param1) {
 	self->buttonClicked(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_buttonClickedWithInt(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonClicked_int(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -412,11 +412,11 @@ void QButtonGroup_connect_buttonClickedWithInt(QButtonGroup* self, intptr_t slot
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), self, local_caller{slot, callback, release});
 }
 
-void QButtonGroup_buttonPressedWithInt(QButtonGroup* self, int param1) {
+void QButtonGroup_buttonPressed_int(QButtonGroup* self, int param1) {
 	self->buttonPressed(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_buttonPressedWithInt(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonPressed_int(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -428,11 +428,11 @@ void QButtonGroup_connect_buttonPressedWithInt(QButtonGroup* self, intptr_t slot
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonPressed), self, local_caller{slot, callback, release});
 }
 
-void QButtonGroup_buttonReleasedWithInt(QButtonGroup* self, int param1) {
+void QButtonGroup_buttonReleased_int(QButtonGroup* self, int param1) {
 	self->buttonReleased(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_buttonReleasedWithInt(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonReleased_int(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -444,11 +444,11 @@ void QButtonGroup_connect_buttonReleasedWithInt(QButtonGroup* self, intptr_t slo
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonReleased), self, local_caller{slot, callback, release});
 }
 
-void QButtonGroup_buttonToggled2(QButtonGroup* self, int param1, bool param2) {
+void QButtonGroup_buttonToggled_int_bool(QButtonGroup* self, int param1, bool param2) {
 	self->buttonToggled(static_cast<int>(param1), param2);
 }
 
-void QButtonGroup_connect_buttonToggled2(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonToggled_int_bool(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, bool);
@@ -461,7 +461,7 @@ void QButtonGroup_connect_buttonToggled2(QButtonGroup* self, intptr_t slot, void
 	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int, bool)>(&QButtonGroup::buttonToggled), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QButtonGroup_tr2(const char* s, const char* c) {
+struct seaqt_string QButtonGroup_tr_s_c(const char* s, const char* c) {
 	QString _ret = QButtonGroup::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -472,7 +472,7 @@ struct seaqt_string QButtonGroup_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QButtonGroup_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QButtonGroup_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QButtonGroup::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -483,7 +483,7 @@ struct seaqt_string QButtonGroup_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QButtonGroup_trUtf82(const char* s, const char* c) {
+struct seaqt_string QButtonGroup_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QButtonGroup::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -494,7 +494,7 @@ struct seaqt_string QButtonGroup_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QButtonGroup_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QButtonGroup_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QButtonGroup::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -505,7 +505,7 @@ struct seaqt_string QButtonGroup_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QButtonGroup_addButton2(QButtonGroup* self, QAbstractButton* param1, int id) {
+void QButtonGroup_addButton_QAbstractButton_int(QButtonGroup* self, QAbstractButton* param1, int id) {
 	self->addButton(param1, static_cast<int>(id));
 }
 

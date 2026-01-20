@@ -21,9 +21,9 @@ typedef struct QSslPreSharedKeyAuthenticator QSslPreSharedKeyAuthenticator;
 #endif
 
 QSslPreSharedKeyAuthenticator* QSslPreSharedKeyAuthenticator_new();
-QSslPreSharedKeyAuthenticator* QSslPreSharedKeyAuthenticator_new2(QSslPreSharedKeyAuthenticator* authenticator);
+QSslPreSharedKeyAuthenticator* QSslPreSharedKeyAuthenticator_new_from(QSslPreSharedKeyAuthenticator* from);
 
-void QSslPreSharedKeyAuthenticator_operatorAssign(QSslPreSharedKeyAuthenticator* self, QSslPreSharedKeyAuthenticator* authenticator);
+void QSslPreSharedKeyAuthenticator_operatorAssign(QSslPreSharedKeyAuthenticator* self, QSslPreSharedKeyAuthenticator* from);
 void QSslPreSharedKeyAuthenticator_swap(QSslPreSharedKeyAuthenticator* self, QSslPreSharedKeyAuthenticator* other);
 struct seaqt_string QSslPreSharedKeyAuthenticator_identityHint(const QSslPreSharedKeyAuthenticator* self);
 void QSslPreSharedKeyAuthenticator_setIdentity(QSslPreSharedKeyAuthenticator* self, struct seaqt_string identity);

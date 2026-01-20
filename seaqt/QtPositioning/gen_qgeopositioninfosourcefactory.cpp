@@ -27,7 +27,7 @@ public:
 	friend void* QGeoPositionInfoSourceFactory_vdata(VirtualQGeoPositionInfoSourceFactory* self);
 	friend VirtualQGeoPositionInfoSourceFactory* vdata_QGeoPositionInfoSourceFactory(void* vdata);
 
-	VirtualQGeoPositionInfoSourceFactory(const QGeoPositionInfoSourceFactory_VTable* vtbl, const QGeoPositionInfoSourceFactory& param1): QGeoPositionInfoSourceFactory(param1), vtbl(vtbl) {}
+	VirtualQGeoPositionInfoSourceFactory(const QGeoPositionInfoSourceFactory_VTable* vtbl, const QGeoPositionInfoSourceFactory& from): QGeoPositionInfoSourceFactory(from), vtbl(vtbl) {}
 
 	virtual ~VirtualQGeoPositionInfoSourceFactory() override { if(vtbl->destructor) vtbl->destructor(this); }
 
@@ -64,9 +64,9 @@ public:
 
 };
 
-VirtualQGeoPositionInfoSourceFactory* QGeoPositionInfoSourceFactory_new(const QGeoPositionInfoSourceFactory_VTable* vtbl, size_t vdata, QGeoPositionInfoSourceFactory* param1) {
+VirtualQGeoPositionInfoSourceFactory* QGeoPositionInfoSourceFactory_new(const QGeoPositionInfoSourceFactory_VTable* vtbl, size_t vdata, QGeoPositionInfoSourceFactory* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGeoPositionInfoSourceFactory>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQGeoPositionInfoSourceFactory(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQGeoPositionInfoSourceFactory(vtbl, *from) : nullptr;
 }
 
 QGeoPositionInfoSource* QGeoPositionInfoSourceFactory_positionInfoSource(QGeoPositionInfoSourceFactory* self, QObject* parent) {
@@ -81,8 +81,8 @@ QGeoAreaMonitorSource* QGeoPositionInfoSourceFactory_areaMonitor(QGeoPositionInf
 	return self->areaMonitor(parent);
 }
 
-void QGeoPositionInfoSourceFactory_operatorAssign(QGeoPositionInfoSourceFactory* self, QGeoPositionInfoSourceFactory* param1) {
-	self->operator=(*param1);
+void QGeoPositionInfoSourceFactory_operatorAssign(QGeoPositionInfoSourceFactory* self, QGeoPositionInfoSourceFactory* from) {
+	self->operator=(*from);
 }
 
 void* QGeoPositionInfoSourceFactory_vdata(VirtualQGeoPositionInfoSourceFactory* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQGeoPositionInfoSourceFactory>()); }
@@ -98,7 +98,7 @@ public:
 	friend void* QGeoPositionInfoSourceFactoryV2_vdata(VirtualQGeoPositionInfoSourceFactoryV2* self);
 	friend VirtualQGeoPositionInfoSourceFactoryV2* vdata_QGeoPositionInfoSourceFactoryV2(void* vdata);
 
-	VirtualQGeoPositionInfoSourceFactoryV2(const QGeoPositionInfoSourceFactoryV2_VTable* vtbl, const QGeoPositionInfoSourceFactoryV2& param1): QGeoPositionInfoSourceFactoryV2(param1), vtbl(vtbl) {}
+	VirtualQGeoPositionInfoSourceFactoryV2(const QGeoPositionInfoSourceFactoryV2_VTable* vtbl, const QGeoPositionInfoSourceFactoryV2& from): QGeoPositionInfoSourceFactoryV2(from), vtbl(vtbl) {}
 
 	virtual ~VirtualQGeoPositionInfoSourceFactoryV2() override { if(vtbl->destructor) vtbl->destructor(this); }
 
@@ -231,9 +231,9 @@ public:
 
 };
 
-VirtualQGeoPositionInfoSourceFactoryV2* QGeoPositionInfoSourceFactoryV2_new(const QGeoPositionInfoSourceFactoryV2_VTable* vtbl, size_t vdata, QGeoPositionInfoSourceFactoryV2* param1) {
+VirtualQGeoPositionInfoSourceFactoryV2* QGeoPositionInfoSourceFactoryV2_new(const QGeoPositionInfoSourceFactoryV2_VTable* vtbl, size_t vdata, QGeoPositionInfoSourceFactoryV2* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGeoPositionInfoSourceFactoryV2>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQGeoPositionInfoSourceFactoryV2(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQGeoPositionInfoSourceFactoryV2(vtbl, *from) : nullptr;
 }
 
 void QGeoPositionInfoSourceFactoryV2_virtbase(QGeoPositionInfoSourceFactoryV2* src, QGeoPositionInfoSourceFactory** outptr_QGeoPositionInfoSourceFactory) {
@@ -273,8 +273,8 @@ QGeoAreaMonitorSource* QGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters
 	return self->areaMonitorWithParameters(parent, parameters_QMap);
 }
 
-void QGeoPositionInfoSourceFactoryV2_operatorAssign(QGeoPositionInfoSourceFactoryV2* self, QGeoPositionInfoSourceFactoryV2* param1) {
-	self->operator=(*param1);
+void QGeoPositionInfoSourceFactoryV2_operatorAssign(QGeoPositionInfoSourceFactoryV2* self, QGeoPositionInfoSourceFactoryV2* from) {
+	self->operator=(*from);
 }
 
 void* QGeoPositionInfoSourceFactoryV2_vdata(VirtualQGeoPositionInfoSourceFactoryV2* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQGeoPositionInfoSourceFactoryV2>()); }

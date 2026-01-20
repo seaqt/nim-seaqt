@@ -89,7 +89,7 @@ proc fcQGraphicsLayout_protectedbase_addChildLayoutItem(self: pointer, layoutIte
 proc fcQGraphicsLayout_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsLayout_protectedbase_setGraphicsItem".}
 proc fcQGraphicsLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsLayout_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new".}
-proc fcQGraphicsLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new2".}
+proc fcQGraphicsLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new_parent".}
 
 proc setContentsMargins*(self: gen_qgraphicslayout_types.QGraphicsLayout, left: float64, top: float64, right: float64, bottom: float64): void =
   fcQGraphicsLayout_setContentsMargins(self.h, left, top, right, bottom)

@@ -32,8 +32,8 @@ void QRadioDataControl_virtbase(QRadioDataControl* src, QMediaControl** outptr_Q
 QMetaObject* QRadioDataControl_metaObject(const QRadioDataControl* self);
 void* QRadioDataControl_metacast(QRadioDataControl* self, const char* param1);
 int QRadioDataControl_metacall(QRadioDataControl* self, int param1, int param2, void** param3);
-struct seaqt_string QRadioDataControl_tr(const char* s);
-struct seaqt_string QRadioDataControl_trUtf8(const char* s);
+struct seaqt_string QRadioDataControl_tr_s(const char* s);
+struct seaqt_string QRadioDataControl_trUtf8_s(const char* s);
 struct seaqt_string QRadioDataControl_stationId(const QRadioDataControl* self);
 int QRadioDataControl_programType(const QRadioDataControl* self);
 struct seaqt_string QRadioDataControl_programTypeName(const QRadioDataControl* self);
@@ -55,12 +55,12 @@ void QRadioDataControl_radioTextChanged(QRadioDataControl* self, struct seaqt_st
 void QRadioDataControl_connect_radioTextChanged(QRadioDataControl* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
 void QRadioDataControl_alternativeFrequenciesEnabledChanged(QRadioDataControl* self, bool enabled);
 void QRadioDataControl_connect_alternativeFrequenciesEnabledChanged(QRadioDataControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-void QRadioDataControl_errorWithErr(QRadioDataControl* self, int err);
-void QRadioDataControl_connect_errorWithErr(QRadioDataControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QRadioDataControl_tr2(const char* s, const char* c);
-struct seaqt_string QRadioDataControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QRadioDataControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QRadioDataControl_trUtf83(const char* s, const char* c, int n);
+void QRadioDataControl_error_err(QRadioDataControl* self, int err);
+void QRadioDataControl_connect_error_err(QRadioDataControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+struct seaqt_string QRadioDataControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QRadioDataControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QRadioDataControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QRadioDataControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QRadioDataControl_staticMetaObject();
 void QRadioDataControl_delete(QRadioDataControl* self);

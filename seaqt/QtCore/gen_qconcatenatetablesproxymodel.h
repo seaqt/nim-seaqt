@@ -97,14 +97,14 @@ void* QConcatenateTablesProxyModel_vdata(VirtualQConcatenateTablesProxyModel* se
 VirtualQConcatenateTablesProxyModel* vdata_QConcatenateTablesProxyModel(void* vdata);
 
 VirtualQConcatenateTablesProxyModel* QConcatenateTablesProxyModel_new(const QConcatenateTablesProxyModel_VTable* vtbl, size_t vdata);
-VirtualQConcatenateTablesProxyModel* QConcatenateTablesProxyModel_new2(const QConcatenateTablesProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQConcatenateTablesProxyModel* QConcatenateTablesProxyModel_new_parent(const QConcatenateTablesProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QConcatenateTablesProxyModel_virtbase(QConcatenateTablesProxyModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QConcatenateTablesProxyModel_metaObject(const QConcatenateTablesProxyModel* self);
 void* QConcatenateTablesProxyModel_metacast(QConcatenateTablesProxyModel* self, const char* param1);
 int QConcatenateTablesProxyModel_metacall(QConcatenateTablesProxyModel* self, int param1, int param2, void** param3);
-struct seaqt_string QConcatenateTablesProxyModel_tr(const char* s);
-struct seaqt_string QConcatenateTablesProxyModel_trUtf8(const char* s);
+struct seaqt_string QConcatenateTablesProxyModel_tr_s(const char* s);
+struct seaqt_string QConcatenateTablesProxyModel_trUtf8_s(const char* s);
 struct seaqt_array /* of QAbstractItemModel* */  QConcatenateTablesProxyModel_sourceModels(const QConcatenateTablesProxyModel* self);
 void QConcatenateTablesProxyModel_addSourceModel(QConcatenateTablesProxyModel* self, QAbstractItemModel* sourceModel);
 void QConcatenateTablesProxyModel_removeSourceModel(QConcatenateTablesProxyModel* self, QAbstractItemModel* sourceModel);
@@ -125,10 +125,10 @@ QMimeData* QConcatenateTablesProxyModel_mimeData(const QConcatenateTablesProxyMo
 bool QConcatenateTablesProxyModel_canDropMimeData(const QConcatenateTablesProxyModel* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 bool QConcatenateTablesProxyModel_dropMimeData(QConcatenateTablesProxyModel* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 QSize* QConcatenateTablesProxyModel_span(const QConcatenateTablesProxyModel* self, QModelIndex* index);
-struct seaqt_string QConcatenateTablesProxyModel_tr2(const char* s, const char* c);
-struct seaqt_string QConcatenateTablesProxyModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QConcatenateTablesProxyModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QConcatenateTablesProxyModel_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QConcatenateTablesProxyModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QConcatenateTablesProxyModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QConcatenateTablesProxyModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QConcatenateTablesProxyModel_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QConcatenateTablesProxyModel_virtualbase_metaObject(const VirtualQConcatenateTablesProxyModel* self);
 void* QConcatenateTablesProxyModel_virtualbase_metacast(VirtualQConcatenateTablesProxyModel* self, const char* param1);
@@ -176,7 +176,7 @@ void QConcatenateTablesProxyModel_virtualbase_connectNotify(VirtualQConcatenateT
 void QConcatenateTablesProxyModel_virtualbase_disconnectNotify(VirtualQConcatenateTablesProxyModel* self, QMetaMethod* signal);
 
 void QConcatenateTablesProxyModel_protectedbase_resetInternalData(VirtualQConcatenateTablesProxyModel* self);
-QModelIndex* QConcatenateTablesProxyModel_protectedbase_createIndex(const VirtualQConcatenateTablesProxyModel* self, int row, int column);
+QModelIndex* QConcatenateTablesProxyModel_protectedbase_createIndex_row_column(const VirtualQConcatenateTablesProxyModel* self, int row, int column);
 void QConcatenateTablesProxyModel_protectedbase_encodeData(const VirtualQConcatenateTablesProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QConcatenateTablesProxyModel_protectedbase_decodeData(VirtualQConcatenateTablesProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QConcatenateTablesProxyModel_protectedbase_beginInsertRows(VirtualQConcatenateTablesProxyModel* self, QModelIndex* parent, int first, int last);

@@ -75,14 +75,14 @@ type cQRadioButton*{.exportc: "QRadioButton", incompleteStruct.} = object
 proc fcQRadioButton_metaObject(self: pointer): pointer {.importc: "QRadioButton_metaObject".}
 proc fcQRadioButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QRadioButton_metacast".}
 proc fcQRadioButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRadioButton_metacall".}
-proc fcQRadioButton_tr(s: cstring): struct_seaqt_string {.importc: "QRadioButton_tr".}
-proc fcQRadioButton_trUtf8(s: cstring): struct_seaqt_string {.importc: "QRadioButton_trUtf8".}
+proc fcQRadioButton_trS(s: cstring): struct_seaqt_string {.importc: "QRadioButton_tr_s".}
+proc fcQRadioButton_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QRadioButton_trUtf8_s".}
 proc fcQRadioButton_sizeHint(self: pointer): pointer {.importc: "QRadioButton_sizeHint".}
 proc fcQRadioButton_minimumSizeHint(self: pointer): pointer {.importc: "QRadioButton_minimumSizeHint".}
-proc fcQRadioButton_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRadioButton_tr2".}
-proc fcQRadioButton_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRadioButton_tr3".}
-proc fcQRadioButton_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRadioButton_trUtf82".}
-proc fcQRadioButton_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRadioButton_trUtf83".}
+proc fcQRadioButton_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRadioButton_tr_s_c".}
+proc fcQRadioButton_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRadioButton_tr_s_c_n".}
+proc fcQRadioButton_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRadioButton_trUtf8_s_c".}
+proc fcQRadioButton_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRadioButton_trUtf8_s_c_n".}
 proc fcQRadioButton_vdata(self: pointer): ptr pointer {.importc: "QRadioButton_vdata".}
 proc fvdata_cQRadioButton(self: pointer): pointer {.importc: "vdata_QRadioButton".}
 
@@ -204,10 +204,10 @@ proc fcQRadioButton_protectedbase_sender(self: pointer): pointer {.importc: "QRa
 proc fcQRadioButton_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QRadioButton_protectedbase_senderSignalIndex".}
 proc fcQRadioButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRadioButton_protectedbase_receivers".}
 proc fcQRadioButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRadioButton_protectedbase_isSignalConnected".}
-proc fcQRadioButton_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQRadioButton {.importc: "QRadioButton_new".}
-proc fcQRadioButton_new2(vtbl: pointer, vdata: csize_t): ptr cQRadioButton {.importc: "QRadioButton_new2".}
-proc fcQRadioButton_new3(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQRadioButton {.importc: "QRadioButton_new3".}
-proc fcQRadioButton_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQRadioButton {.importc: "QRadioButton_new4".}
+proc fcQRadioButton_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQRadioButton {.importc: "QRadioButton_new_parent".}
+proc fcQRadioButton_new2(vtbl: pointer, vdata: csize_t): ptr cQRadioButton {.importc: "QRadioButton_new".}
+proc fcQRadioButton_new3(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQRadioButton {.importc: "QRadioButton_new_text".}
+proc fcQRadioButton_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQRadioButton {.importc: "QRadioButton_new_text_parent".}
 proc fcQRadioButton_staticMetaObject(): pointer {.importc: "QRadioButton_staticMetaObject".}
 
 proc metaObject*(self: gen_qradiobutton_types.QRadioButton): gen_qobjectdefs_types.QMetaObject =
@@ -220,13 +220,13 @@ proc metacall*(self: gen_qradiobutton_types.QRadioButton, param1: cint, param2: 
   fcQRadioButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qradiobutton_types.QRadioButton, s: cstring): string =
-  let v_ms = fcQRadioButton_tr(s)
+  let v_ms = fcQRadioButton_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiobutton_types.QRadioButton, s: cstring): string =
-  let v_ms = fcQRadioButton_trUtf8(s)
+  let v_ms = fcQRadioButton_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -238,25 +238,25 @@ proc minimumSizeHint*(self: gen_qradiobutton_types.QRadioButton): gen_qsize_type
   gen_qsize_types.QSize(h: fcQRadioButton_minimumSizeHint(self.h), owned: true)
 
 proc tr*(_: type gen_qradiobutton_types.QRadioButton, s: cstring, c: cstring): string =
-  let v_ms = fcQRadioButton_tr2(s, c)
+  let v_ms = fcQRadioButton_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qradiobutton_types.QRadioButton, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRadioButton_tr3(s, c, n)
+  let v_ms = fcQRadioButton_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiobutton_types.QRadioButton, s: cstring, c: cstring): string =
-  let v_ms = fcQRadioButton_trUtf82(s, c)
+  let v_ms = fcQRadioButton_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qradiobutton_types.QRadioButton, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRadioButton_trUtf83(s, c, n)
+  let v_ms = fcQRadioButton_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

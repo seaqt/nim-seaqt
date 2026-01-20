@@ -59,16 +59,16 @@ void* QHistoryState_vdata(VirtualQHistoryState* self);
 VirtualQHistoryState* vdata_QHistoryState(void* vdata);
 
 VirtualQHistoryState* QHistoryState_new(const QHistoryState_VTable* vtbl, size_t vdata);
-VirtualQHistoryState* QHistoryState_new2(const QHistoryState_VTable* vtbl, size_t vdata, int type);
-VirtualQHistoryState* QHistoryState_new3(const QHistoryState_VTable* vtbl, size_t vdata, QState* parent);
-VirtualQHistoryState* QHistoryState_new4(const QHistoryState_VTable* vtbl, size_t vdata, int type, QState* parent);
+VirtualQHistoryState* QHistoryState_new_type(const QHistoryState_VTable* vtbl, size_t vdata, int type);
+VirtualQHistoryState* QHistoryState_new_parent(const QHistoryState_VTable* vtbl, size_t vdata, QState* parent);
+VirtualQHistoryState* QHistoryState_new_type_parent(const QHistoryState_VTable* vtbl, size_t vdata, int type, QState* parent);
 
 void QHistoryState_virtbase(QHistoryState* src, QAbstractState** outptr_QAbstractState);
 QMetaObject* QHistoryState_metaObject(const QHistoryState* self);
 void* QHistoryState_metacast(QHistoryState* self, const char* param1);
 int QHistoryState_metacall(QHistoryState* self, int param1, int param2, void** param3);
-struct seaqt_string QHistoryState_tr(const char* s);
-struct seaqt_string QHistoryState_trUtf8(const char* s);
+struct seaqt_string QHistoryState_tr_s(const char* s);
+struct seaqt_string QHistoryState_trUtf8_s(const char* s);
 QAbstractTransition* QHistoryState_defaultTransition(const QHistoryState* self);
 void QHistoryState_setDefaultTransition(QHistoryState* self, QAbstractTransition* transition);
 QAbstractState* QHistoryState_defaultState(const QHistoryState* self);
@@ -78,10 +78,10 @@ void QHistoryState_setHistoryType(QHistoryState* self, int type);
 void QHistoryState_onEntry(QHistoryState* self, QEvent* event);
 void QHistoryState_onExit(QHistoryState* self, QEvent* event);
 bool QHistoryState_event(QHistoryState* self, QEvent* e);
-struct seaqt_string QHistoryState_tr2(const char* s, const char* c);
-struct seaqt_string QHistoryState_tr3(const char* s, const char* c, int n);
-struct seaqt_string QHistoryState_trUtf82(const char* s, const char* c);
-struct seaqt_string QHistoryState_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QHistoryState_tr_s_c(const char* s, const char* c);
+struct seaqt_string QHistoryState_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QHistoryState_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QHistoryState_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QHistoryState_virtualbase_metaObject(const VirtualQHistoryState* self);
 void* QHistoryState_virtualbase_metacast(VirtualQHistoryState* self, const char* param1);

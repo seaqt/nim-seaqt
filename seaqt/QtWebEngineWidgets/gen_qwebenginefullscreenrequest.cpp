@@ -14,8 +14,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebEngineFullScreenRequest* QWebEngineFullScreenRequest_new(QWebEngineFullScreenRequest* param1) {
-	return new (std::nothrow) QWebEngineFullScreenRequest(*param1);
+QWebEngineFullScreenRequest* QWebEngineFullScreenRequest_new(QWebEngineFullScreenRequest* from) {
+	return new (std::nothrow) QWebEngineFullScreenRequest(*from);
 }
 
 void QWebEngineFullScreenRequest_reject(QWebEngineFullScreenRequest* self) {

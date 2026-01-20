@@ -91,18 +91,18 @@ proc fcQModelIndex_isValid(self: pointer): bool {.importc: "QModelIndex_isValid"
 proc fcQModelIndex_operatorEqual(self: pointer, other: pointer): bool {.importc: "QModelIndex_operatorEqual".}
 proc fcQModelIndex_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QModelIndex_operatorNotEqual".}
 proc fcQModelIndex_operatorLesser(self: pointer, other: pointer): bool {.importc: "QModelIndex_operatorLesser".}
-proc fcQModelIndex_operatorAssign(self: pointer, param1: pointer): void {.importc: "QModelIndex_operatorAssign".}
-proc fcQModelIndex_dataWithRole(self: pointer, role: cint): pointer {.importc: "QModelIndex_dataWithRole".}
+proc fcQModelIndex_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QModelIndex_operatorAssign".}
+proc fcQModelIndex_dataRole(self: pointer, role: cint): pointer {.importc: "QModelIndex_data_role".}
 proc fcQModelIndex_new(): ptr cQModelIndex {.importc: "QModelIndex_new".}
-proc fcQModelIndex_new2(param1: pointer): ptr cQModelIndex {.importc: "QModelIndex_new2".}
+proc fcQModelIndex_new2(fromVal: pointer): ptr cQModelIndex {.importc: "QModelIndex_new_from".}
 proc fcQPersistentModelIndex_operatorLesser(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorLesser".}
-proc fcQPersistentModelIndex_operatorEqual(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorEqual".}
-proc fcQPersistentModelIndex_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorNotEqual".}
-proc fcQPersistentModelIndex_operatorAssign(self: pointer, other: pointer): void {.importc: "QPersistentModelIndex_operatorAssign".}
+proc fcQPersistentModelIndex_operatorEqual_QPersistentModelIndex(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorEqual_QPersistentModelIndex".}
+proc fcQPersistentModelIndex_operatorNotEqual_QPersistentModelIndex(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorNotEqual_QPersistentModelIndex".}
+proc fcQPersistentModelIndex_operatorAssignFrom(self: pointer, fromVal: pointer): void {.importc: "QPersistentModelIndex_operatorAssign_from".}
 proc fcQPersistentModelIndex_swap(self: pointer, other: pointer): void {.importc: "QPersistentModelIndex_swap".}
-proc fcQPersistentModelIndex_operatorEqualWithOther(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorEqualWithOther".}
-proc fcQPersistentModelIndex_operatorNotEqualWithOther(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorNotEqualWithOther".}
-proc fcQPersistentModelIndex_operatorAssignWithOther(self: pointer, other: pointer): void {.importc: "QPersistentModelIndex_operatorAssignWithOther".}
+proc fcQPersistentModelIndex_operatorEqual_QModelIndex(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorEqual_QModelIndex".}
+proc fcQPersistentModelIndex_operatorNotEqual_QModelIndex(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorNotEqual_QModelIndex".}
+proc fcQPersistentModelIndex_operatorAssignOther(self: pointer, other: pointer): void {.importc: "QPersistentModelIndex_operatorAssign_other".}
 proc fcQPersistentModelIndex_ToConstQModelIndexBitwiseAnd(self: pointer): pointer {.importc: "QPersistentModelIndex_ToConstQModelIndexBitwiseAnd".}
 proc fcQPersistentModelIndex_row(self: pointer): cint {.importc: "QPersistentModelIndex_row".}
 proc fcQPersistentModelIndex_column(self: pointer): cint {.importc: "QPersistentModelIndex_column".}
@@ -115,16 +115,16 @@ proc fcQPersistentModelIndex_data(self: pointer): pointer {.importc: "QPersisten
 proc fcQPersistentModelIndex_flags(self: pointer): cint {.importc: "QPersistentModelIndex_flags".}
 proc fcQPersistentModelIndex_model(self: pointer): pointer {.importc: "QPersistentModelIndex_model".}
 proc fcQPersistentModelIndex_isValid(self: pointer): bool {.importc: "QPersistentModelIndex_isValid".}
-proc fcQPersistentModelIndex_dataWithRole(self: pointer, role: cint): pointer {.importc: "QPersistentModelIndex_dataWithRole".}
+proc fcQPersistentModelIndex_dataRole(self: pointer, role: cint): pointer {.importc: "QPersistentModelIndex_data_role".}
 proc fcQPersistentModelIndex_new(): ptr cQPersistentModelIndex {.importc: "QPersistentModelIndex_new".}
-proc fcQPersistentModelIndex_new2(index: pointer): ptr cQPersistentModelIndex {.importc: "QPersistentModelIndex_new2".}
-proc fcQPersistentModelIndex_new3(other: pointer): ptr cQPersistentModelIndex {.importc: "QPersistentModelIndex_new3".}
+proc fcQPersistentModelIndex_new2(index: pointer): ptr cQPersistentModelIndex {.importc: "QPersistentModelIndex_new_index".}
+proc fcQPersistentModelIndex_new3(fromVal: pointer): ptr cQPersistentModelIndex {.importc: "QPersistentModelIndex_new_from".}
 proc fcQAbstractItemModel_metaObject(self: pointer): pointer {.importc: "QAbstractItemModel_metaObject".}
 proc fcQAbstractItemModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractItemModel_metacast".}
 proc fcQAbstractItemModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractItemModel_metacall".}
-proc fcQAbstractItemModel_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractItemModel_tr".}
-proc fcQAbstractItemModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractItemModel_trUtf8".}
-proc fcQAbstractItemModel_hasIndex(self: pointer, row: cint, column: cint): bool {.importc: "QAbstractItemModel_hasIndex".}
+proc fcQAbstractItemModel_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractItemModel_tr_s".}
+proc fcQAbstractItemModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractItemModel_trUtf8_s".}
+proc fcQAbstractItemModel_hasIndexRowColumn(self: pointer, row: cint, column: cint): bool {.importc: "QAbstractItemModel_hasIndex_row_column".}
 proc fcQAbstractItemModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QAbstractItemModel_index".}
 proc fcQAbstractItemModel_parent(self: pointer, child: pointer): pointer {.importc: "QAbstractItemModel_parent".}
 proc fcQAbstractItemModel_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QAbstractItemModel_sibling".}
@@ -149,10 +149,10 @@ proc fcQAbstractItemModel_removeRows(self: pointer, row: cint, count: cint, pare
 proc fcQAbstractItemModel_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QAbstractItemModel_removeColumns".}
 proc fcQAbstractItemModel_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QAbstractItemModel_moveRows".}
 proc fcQAbstractItemModel_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QAbstractItemModel_moveColumns".}
-proc fcQAbstractItemModel_insertRow(self: pointer, row: cint): bool {.importc: "QAbstractItemModel_insertRow".}
-proc fcQAbstractItemModel_insertColumn(self: pointer, column: cint): bool {.importc: "QAbstractItemModel_insertColumn".}
-proc fcQAbstractItemModel_removeRow(self: pointer, row: cint): bool {.importc: "QAbstractItemModel_removeRow".}
-proc fcQAbstractItemModel_removeColumn(self: pointer, column: cint): bool {.importc: "QAbstractItemModel_removeColumn".}
+proc fcQAbstractItemModel_insertRowRow(self: pointer, row: cint): bool {.importc: "QAbstractItemModel_insertRow_row".}
+proc fcQAbstractItemModel_insertColumnColumn(self: pointer, column: cint): bool {.importc: "QAbstractItemModel_insertColumn_column".}
+proc fcQAbstractItemModel_removeRowRow(self: pointer, row: cint): bool {.importc: "QAbstractItemModel_removeRow_row".}
+proc fcQAbstractItemModel_removeColumnColumn(self: pointer, column: cint): bool {.importc: "QAbstractItemModel_removeColumn_column".}
 proc fcQAbstractItemModel_moveRow(self: pointer, sourceParent: pointer, sourceRow: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QAbstractItemModel_moveRow".}
 proc fcQAbstractItemModel_moveColumn(self: pointer, sourceParent: pointer, sourceColumn: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QAbstractItemModel_moveColumn".}
 proc fcQAbstractItemModel_fetchMore(self: pointer, parent: pointer): void {.importc: "QAbstractItemModel_fetchMore".}
@@ -163,9 +163,9 @@ proc fcQAbstractItemModel_buddy(self: pointer, index: pointer): pointer {.import
 proc fcQAbstractItemModel_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_seaqt_array {.importc: "QAbstractItemModel_match".}
 proc fcQAbstractItemModel_span(self: pointer, index: pointer): pointer {.importc: "QAbstractItemModel_span".}
 proc fcQAbstractItemModel_roleNames(self: pointer): struct_seaqt_map {.importc: "QAbstractItemModel_roleNames".}
-proc fcQAbstractItemModel_checkIndex(self: pointer, index: pointer): bool {.importc: "QAbstractItemModel_checkIndex".}
-proc fcQAbstractItemModel_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer): void {.importc: "QAbstractItemModel_dataChanged".}
-proc fcQAbstractItemModel_connect_dataChanged(self: pointer, slot: int, callback: proc (slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_dataChanged".}
+proc fcQAbstractItemModel_checkIndexIndex(self: pointer, index: pointer): bool {.importc: "QAbstractItemModel_checkIndex_index".}
+proc fcQAbstractItemModel_dataChangedTopLeftBottomRight(self: pointer, topLeft: pointer, bottomRight: pointer): void {.importc: "QAbstractItemModel_dataChanged_topLeft_bottomRight".}
+proc fcQAbstractItemModel_connect_dataChangedTopLeftBottomRight(self: pointer, slot: int, callback: proc (slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_dataChanged_topLeft_bottomRight".}
 proc fcQAbstractItemModel_headerDataChanged(self: pointer, orientation: cint, first: cint, last: cint): void {.importc: "QAbstractItemModel_headerDataChanged".}
 proc fcQAbstractItemModel_connect_headerDataChanged(self: pointer, slot: int, callback: proc (slot: int, orientation: cint, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_headerDataChanged".}
 proc fcQAbstractItemModel_layoutChanged(self: pointer): void {.importc: "QAbstractItemModel_layoutChanged".}
@@ -174,26 +174,26 @@ proc fcQAbstractItemModel_layoutAboutToBeChanged(self: pointer): void {.importc:
 proc fcQAbstractItemModel_connect_layoutAboutToBeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged".}
 proc fcQAbstractItemModel_submit(self: pointer): bool {.importc: "QAbstractItemModel_submit".}
 proc fcQAbstractItemModel_revert(self: pointer): void {.importc: "QAbstractItemModel_revert".}
-proc fcQAbstractItemModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractItemModel_tr2".}
-proc fcQAbstractItemModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractItemModel_tr3".}
-proc fcQAbstractItemModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractItemModel_trUtf82".}
-proc fcQAbstractItemModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractItemModel_trUtf83".}
-proc fcQAbstractItemModel_hasIndex2(self: pointer, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_hasIndex2".}
-proc fcQAbstractItemModel_insertRow2(self: pointer, row: cint, parent: pointer): bool {.importc: "QAbstractItemModel_insertRow2".}
-proc fcQAbstractItemModel_insertColumn2(self: pointer, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_insertColumn2".}
-proc fcQAbstractItemModel_removeRow2(self: pointer, row: cint, parent: pointer): bool {.importc: "QAbstractItemModel_removeRow2".}
-proc fcQAbstractItemModel_removeColumn2(self: pointer, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_removeColumn2".}
-proc fcQAbstractItemModel_checkIndex2(self: pointer, index: pointer, options: cint): bool {.importc: "QAbstractItemModel_checkIndex2".}
-proc fcQAbstractItemModel_dataChanged2(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_seaqt_array): void {.importc: "QAbstractItemModel_dataChanged2".}
-proc fcQAbstractItemModel_connect_dataChanged2(self: pointer, slot: int, callback: proc (slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_dataChanged2".}
-proc fcQAbstractItemModel_layoutChangedWithParents(self: pointer, parents: struct_seaqt_array): void {.importc: "QAbstractItemModel_layoutChangedWithParents".}
-proc fcQAbstractItemModel_connect_layoutChangedWithParents(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutChangedWithParents".}
-proc fcQAbstractItemModel_layoutChanged2(self: pointer, parents: struct_seaqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutChanged2".}
-proc fcQAbstractItemModel_connect_layoutChanged2(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutChanged2".}
-proc fcQAbstractItemModel_layoutAboutToBeChangedWithParents(self: pointer, parents: struct_seaqt_array): void {.importc: "QAbstractItemModel_layoutAboutToBeChangedWithParents".}
-proc fcQAbstractItemModel_connect_layoutAboutToBeChangedWithParents(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChangedWithParents".}
-proc fcQAbstractItemModel_layoutAboutToBeChanged2(self: pointer, parents: struct_seaqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged2".}
-proc fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged2".}
+proc fcQAbstractItemModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractItemModel_tr_s_c".}
+proc fcQAbstractItemModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractItemModel_tr_s_c_n".}
+proc fcQAbstractItemModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractItemModel_trUtf8_s_c".}
+proc fcQAbstractItemModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractItemModel_trUtf8_s_c_n".}
+proc fcQAbstractItemModel_hasIndexRowColumnParent(self: pointer, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_hasIndex_row_column_parent".}
+proc fcQAbstractItemModel_insertRowRowParent(self: pointer, row: cint, parent: pointer): bool {.importc: "QAbstractItemModel_insertRow_row_parent".}
+proc fcQAbstractItemModel_insertColumnColumnParent(self: pointer, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_insertColumn_column_parent".}
+proc fcQAbstractItemModel_removeRowRowParent(self: pointer, row: cint, parent: pointer): bool {.importc: "QAbstractItemModel_removeRow_row_parent".}
+proc fcQAbstractItemModel_removeColumnColumnParent(self: pointer, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_removeColumn_column_parent".}
+proc fcQAbstractItemModel_checkIndexIndexOptions(self: pointer, index: pointer, options: cint): bool {.importc: "QAbstractItemModel_checkIndex_index_options".}
+proc fcQAbstractItemModel_dataChangedTopLeftBottomRightRoles(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_seaqt_array): void {.importc: "QAbstractItemModel_dataChanged_topLeft_bottomRight_roles".}
+proc fcQAbstractItemModel_connect_dataChangedTopLeftBottomRightRoles(self: pointer, slot: int, callback: proc (slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_dataChanged_topLeft_bottomRight_roles".}
+proc fcQAbstractItemModel_layoutChangedParents(self: pointer, parents: struct_seaqt_array): void {.importc: "QAbstractItemModel_layoutChanged_parents".}
+proc fcQAbstractItemModel_connect_layoutChangedParents(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutChanged_parents".}
+proc fcQAbstractItemModel_layoutChangedParentsHint(self: pointer, parents: struct_seaqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutChanged_parents_hint".}
+proc fcQAbstractItemModel_connect_layoutChangedParentsHint(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutChanged_parents_hint".}
+proc fcQAbstractItemModel_layoutAboutToBeChangedParents(self: pointer, parents: struct_seaqt_array): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged_parents".}
+proc fcQAbstractItemModel_connect_layoutAboutToBeChangedParents(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged_parents".}
+proc fcQAbstractItemModel_layoutAboutToBeChangedParentsHint(self: pointer, parents: struct_seaqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged_parents_hint".}
+proc fcQAbstractItemModel_connect_layoutAboutToBeChangedParentsHint(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged_parents_hint".}
 proc fcQAbstractItemModel_vdata(self: pointer): ptr pointer {.importc: "QAbstractItemModel_vdata".}
 proc fvdata_cQAbstractItemModel(self: pointer): pointer {.importc: "vdata_QAbstractItemModel".}
 
@@ -283,8 +283,8 @@ proc fcQAbstractItemModel_virtualbase_customEvent(self: pointer, event: pointer)
 proc fcQAbstractItemModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemModel_virtualbase_connectNotify".}
 proc fcQAbstractItemModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemModel_virtualbase_disconnectNotify".}
 proc fcQAbstractItemModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_resetInternalData".}
-proc fcQAbstractItemModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex".}
-proc fcQAbstractItemModel_protectedbase_createIndex2(self: pointer, row: cint, column: cint, id: uint): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex2".}
+proc fcQAbstractItemModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex_row_column".}
+proc fcQAbstractItemModel_protectedbase_createIndex_row_column_id(self: pointer, row: cint, column: cint, id: uint): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex_row_column_id".}
 proc fcQAbstractItemModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QAbstractItemModel_protectedbase_encodeData".}
 proc fcQAbstractItemModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractItemModel_protectedbase_decodeData".}
 proc fcQAbstractItemModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginInsertRows".}
@@ -304,27 +304,27 @@ proc fcQAbstractItemModel_protectedbase_endResetModel(self: pointer): void {.imp
 proc fcQAbstractItemModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QAbstractItemModel_protectedbase_changePersistentIndex".}
 proc fcQAbstractItemModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_seaqt_array, to: struct_seaqt_array): void {.importc: "QAbstractItemModel_protectedbase_changePersistentIndexList".}
 proc fcQAbstractItemModel_protectedbase_persistentIndexList(self: pointer): struct_seaqt_array {.importc: "QAbstractItemModel_protectedbase_persistentIndexList".}
-proc fcQAbstractItemModel_protectedbase_createIndex3(self: pointer, row: cint, column: cint, data: pointer): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex3".}
+proc fcQAbstractItemModel_protectedbase_createIndex_row_column_data(self: pointer, row: cint, column: cint, data: pointer): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex_row_column_data".}
 proc fcQAbstractItemModel_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractItemModel_protectedbase_sender".}
 proc fcQAbstractItemModel_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractItemModel_protectedbase_senderSignalIndex".}
 proc fcQAbstractItemModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractItemModel_protectedbase_receivers".}
 proc fcQAbstractItemModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractItemModel_protectedbase_isSignalConnected".}
 proc fcQAbstractItemModel_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new".}
-proc fcQAbstractItemModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new2".}
+proc fcQAbstractItemModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new_parent".}
 proc fcQAbstractItemModel_staticMetaObject(): pointer {.importc: "QAbstractItemModel_staticMetaObject".}
 proc fcQAbstractTableModel_metaObject(self: pointer): pointer {.importc: "QAbstractTableModel_metaObject".}
 proc fcQAbstractTableModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractTableModel_metacast".}
 proc fcQAbstractTableModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractTableModel_metacall".}
-proc fcQAbstractTableModel_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractTableModel_tr".}
-proc fcQAbstractTableModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractTableModel_trUtf8".}
+proc fcQAbstractTableModel_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractTableModel_tr_s".}
+proc fcQAbstractTableModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractTableModel_trUtf8_s".}
 proc fcQAbstractTableModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QAbstractTableModel_index".}
 proc fcQAbstractTableModel_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QAbstractTableModel_sibling".}
 proc fcQAbstractTableModel_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractTableModel_dropMimeData".}
 proc fcQAbstractTableModel_flags(self: pointer, index: pointer): cint {.importc: "QAbstractTableModel_flags".}
-proc fcQAbstractTableModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTableModel_tr2".}
-proc fcQAbstractTableModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTableModel_tr3".}
-proc fcQAbstractTableModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTableModel_trUtf82".}
-proc fcQAbstractTableModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTableModel_trUtf83".}
+proc fcQAbstractTableModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTableModel_tr_s_c".}
+proc fcQAbstractTableModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTableModel_tr_s_c_n".}
+proc fcQAbstractTableModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTableModel_trUtf8_s_c".}
+proc fcQAbstractTableModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTableModel_trUtf8_s_c_n".}
 proc fcQAbstractTableModel_vdata(self: pointer): ptr pointer {.importc: "QAbstractTableModel_vdata".}
 proc fvdata_cQAbstractTableModel(self: pointer): pointer {.importc: "vdata_QAbstractTableModel".}
 
@@ -412,7 +412,7 @@ proc fcQAbstractTableModel_virtualbase_customEvent(self: pointer, event: pointer
 proc fcQAbstractTableModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTableModel_virtualbase_connectNotify".}
 proc fcQAbstractTableModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTableModel_virtualbase_disconnectNotify".}
 proc fcQAbstractTableModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_resetInternalData".}
-proc fcQAbstractTableModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractTableModel_protectedbase_createIndex".}
+proc fcQAbstractTableModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractTableModel_protectedbase_createIndex_row_column".}
 proc fcQAbstractTableModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QAbstractTableModel_protectedbase_encodeData".}
 proc fcQAbstractTableModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractTableModel_protectedbase_decodeData".}
 proc fcQAbstractTableModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginInsertRows".}
@@ -437,21 +437,21 @@ proc fcQAbstractTableModel_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQAbstractTableModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractTableModel_protectedbase_receivers".}
 proc fcQAbstractTableModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractTableModel_protectedbase_isSignalConnected".}
 proc fcQAbstractTableModel_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new".}
-proc fcQAbstractTableModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new2".}
+proc fcQAbstractTableModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new_parent".}
 proc fcQAbstractTableModel_staticMetaObject(): pointer {.importc: "QAbstractTableModel_staticMetaObject".}
 proc fcQAbstractListModel_metaObject(self: pointer): pointer {.importc: "QAbstractListModel_metaObject".}
 proc fcQAbstractListModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractListModel_metacast".}
 proc fcQAbstractListModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractListModel_metacall".}
-proc fcQAbstractListModel_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractListModel_tr".}
-proc fcQAbstractListModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractListModel_trUtf8".}
+proc fcQAbstractListModel_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractListModel_tr_s".}
+proc fcQAbstractListModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractListModel_trUtf8_s".}
 proc fcQAbstractListModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QAbstractListModel_index".}
 proc fcQAbstractListModel_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QAbstractListModel_sibling".}
 proc fcQAbstractListModel_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractListModel_dropMimeData".}
 proc fcQAbstractListModel_flags(self: pointer, index: pointer): cint {.importc: "QAbstractListModel_flags".}
-proc fcQAbstractListModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractListModel_tr2".}
-proc fcQAbstractListModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractListModel_tr3".}
-proc fcQAbstractListModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractListModel_trUtf82".}
-proc fcQAbstractListModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractListModel_trUtf83".}
+proc fcQAbstractListModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractListModel_tr_s_c".}
+proc fcQAbstractListModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractListModel_tr_s_c_n".}
+proc fcQAbstractListModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractListModel_trUtf8_s_c".}
+proc fcQAbstractListModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractListModel_trUtf8_s_c_n".}
 proc fcQAbstractListModel_vdata(self: pointer): ptr pointer {.importc: "QAbstractListModel_vdata".}
 proc fvdata_cQAbstractListModel(self: pointer): pointer {.importc: "vdata_QAbstractListModel".}
 
@@ -538,7 +538,7 @@ proc fcQAbstractListModel_virtualbase_customEvent(self: pointer, event: pointer)
 proc fcQAbstractListModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractListModel_virtualbase_connectNotify".}
 proc fcQAbstractListModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractListModel_virtualbase_disconnectNotify".}
 proc fcQAbstractListModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QAbstractListModel_protectedbase_resetInternalData".}
-proc fcQAbstractListModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractListModel_protectedbase_createIndex".}
+proc fcQAbstractListModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractListModel_protectedbase_createIndex_row_column".}
 proc fcQAbstractListModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QAbstractListModel_protectedbase_encodeData".}
 proc fcQAbstractListModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractListModel_protectedbase_decodeData".}
 proc fcQAbstractListModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginInsertRows".}
@@ -563,7 +563,7 @@ proc fcQAbstractListModel_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQAbstractListModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractListModel_protectedbase_receivers".}
 proc fcQAbstractListModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractListModel_protectedbase_isSignalConnected".}
 proc fcQAbstractListModel_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractListModel {.importc: "QAbstractListModel_new".}
-proc fcQAbstractListModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractListModel {.importc: "QAbstractListModel_new2".}
+proc fcQAbstractListModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractListModel {.importc: "QAbstractListModel_new_parent".}
 proc fcQAbstractListModel_staticMetaObject(): pointer {.importc: "QAbstractListModel_staticMetaObject".}
 
 proc row*(self: gen_qabstractitemmodel_types.QModelIndex): cint =
@@ -614,42 +614,42 @@ proc operatorNotEqual*(self: gen_qabstractitemmodel_types.QModelIndex, other: ge
 proc operatorLesser*(self: gen_qabstractitemmodel_types.QModelIndex, other: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQModelIndex_operatorLesser(self.h, other.h)
 
-proc operatorAssign*(self: gen_qabstractitemmodel_types.QModelIndex, param1: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQModelIndex_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qabstractitemmodel_types.QModelIndex, fromVal: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQModelIndex_operatorAssign(self.h, fromVal.h)
 
 proc data*(self: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQModelIndex_dataWithRole(self.h, role), owned: true)
+  gen_qvariant_types.QVariant(h: fcQModelIndex_dataRole(self.h, role), owned: true)
 
 proc create*(T: type gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   let tmp = gen_qabstractitemmodel_types.QModelIndex(h: fcQModelIndex_new(), owned: true)
   tmp
 proc create*(T: type gen_qabstractitemmodel_types.QModelIndex,
-    param1: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  let tmp = gen_qabstractitemmodel_types.QModelIndex(h: fcQModelIndex_new2(param1.h), owned: true)
+    fromVal: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
+  let tmp = gen_qabstractitemmodel_types.QModelIndex(h: fcQModelIndex_new2(fromVal.h), owned: true)
   tmp
 proc operatorLesser*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QPersistentModelIndex): bool =
   fcQPersistentModelIndex_operatorLesser(self.h, other.h)
 
 proc operatorEqual*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QPersistentModelIndex): bool =
-  fcQPersistentModelIndex_operatorEqual(self.h, other.h)
+  fcQPersistentModelIndex_operatorEqual_QPersistentModelIndex(self.h, other.h)
 
 proc operatorNotEqual*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QPersistentModelIndex): bool =
-  fcQPersistentModelIndex_operatorNotEqual(self.h, other.h)
+  fcQPersistentModelIndex_operatorNotEqual_QPersistentModelIndex(self.h, other.h)
 
-proc operatorAssign*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QPersistentModelIndex): void =
-  fcQPersistentModelIndex_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, fromVal: gen_qabstractitemmodel_types.QPersistentModelIndex): void =
+  fcQPersistentModelIndex_operatorAssignFrom(self.h, fromVal.h)
 
 proc swap*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QPersistentModelIndex): void =
   fcQPersistentModelIndex_swap(self.h, other.h)
 
 proc operatorEqual*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQPersistentModelIndex_operatorEqualWithOther(self.h, other.h)
+  fcQPersistentModelIndex_operatorEqual_QModelIndex(self.h, other.h)
 
 proc operatorNotEqual*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQPersistentModelIndex_operatorNotEqualWithOther(self.h, other.h)
+  fcQPersistentModelIndex_operatorNotEqual_QModelIndex(self.h, other.h)
 
 proc operatorAssign*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQPersistentModelIndex_operatorAssignWithOther(self.h, other.h)
+  fcQPersistentModelIndex_operatorAssignOther(self.h, other.h)
 
 proc ToConstQModelIndexBitwiseAnd*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQPersistentModelIndex_ToConstQModelIndexBitwiseAnd(self.h), owned: false)
@@ -688,7 +688,7 @@ proc isValid*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): bool =
   fcQPersistentModelIndex_isValid(self.h)
 
 proc data*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPersistentModelIndex_dataWithRole(self.h, role), owned: true)
+  gen_qvariant_types.QVariant(h: fcQPersistentModelIndex_dataRole(self.h, role), owned: true)
 
 proc create*(T: type gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qabstractitemmodel_types.QPersistentModelIndex =
   let tmp = gen_qabstractitemmodel_types.QPersistentModelIndex(h: fcQPersistentModelIndex_new(), owned: true)
@@ -698,8 +698,8 @@ proc create*(T: type gen_qabstractitemmodel_types.QPersistentModelIndex,
   let tmp = gen_qabstractitemmodel_types.QPersistentModelIndex(h: fcQPersistentModelIndex_new2(index.h), owned: true)
   tmp
 proc create*(T: type gen_qabstractitemmodel_types.QPersistentModelIndex,
-    other: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qabstractitemmodel_types.QPersistentModelIndex =
-  let tmp = gen_qabstractitemmodel_types.QPersistentModelIndex(h: fcQPersistentModelIndex_new3(other.h), owned: true)
+    fromVal: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qabstractitemmodel_types.QPersistentModelIndex =
+  let tmp = gen_qabstractitemmodel_types.QPersistentModelIndex(h: fcQPersistentModelIndex_new3(fromVal.h), owned: true)
   tmp
 proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractItemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemModel_metaObject(self.h), owned: false)
@@ -711,19 +711,19 @@ proc metacall*(self: gen_qabstractitemmodel_types.QAbstractItemModel, param1: ci
   fcQAbstractItemModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractItemModel, s: cstring): string =
-  let v_ms = fcQAbstractItemModel_tr(s)
+  let v_ms = fcQAbstractItemModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractItemModel, s: cstring): string =
-  let v_ms = fcQAbstractItemModel_trUtf8(s)
+  let v_ms = fcQAbstractItemModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc hasIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint): bool =
-  fcQAbstractItemModel_hasIndex(self.h, row, column)
+  fcQAbstractItemModel_hasIndexRowColumn(self.h, row, column)
 
 proc index*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_index(self.h, row, column, parent.h), owned: true)
@@ -834,16 +834,16 @@ proc moveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, sourceP
   fcQAbstractItemModel_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
 
 proc insertRow*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint): bool =
-  fcQAbstractItemModel_insertRow(self.h, row)
+  fcQAbstractItemModel_insertRowRow(self.h, row)
 
 proc insertColumn*(self: gen_qabstractitemmodel_types.QAbstractItemModel, column: cint): bool =
-  fcQAbstractItemModel_insertColumn(self.h, column)
+  fcQAbstractItemModel_insertColumnColumn(self.h, column)
 
 proc removeRow*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint): bool =
-  fcQAbstractItemModel_removeRow(self.h, row)
+  fcQAbstractItemModel_removeRowRow(self.h, row)
 
 proc removeColumn*(self: gen_qabstractitemmodel_types.QAbstractItemModel, column: cint): bool =
-  fcQAbstractItemModel_removeColumn(self.h, column)
+  fcQAbstractItemModel_removeColumnColumn(self.h, column)
 
 proc moveRow*(self: gen_qabstractitemmodel_types.QAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
   fcQAbstractItemModel_moveRow(self.h, sourceParent.h, sourceRow, destinationParent.h, destinationChild)
@@ -897,29 +897,29 @@ proc roleNames*(self: gen_qabstractitemmodel_types.QAbstractItemModel): Table[ci
   vx_ret
 
 proc checkIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQAbstractItemModel_checkIndex(self.h, index.h)
+  fcQAbstractItemModel_checkIndexIndex(self.h, index.h)
 
 proc dataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQAbstractItemModel_dataChanged(self.h, topLeft.h, bottomRight.h)
+  fcQAbstractItemModel_dataChangedTopLeftBottomRight(self.h, topLeft.h, bottomRight.h)
 
-type QAbstractItemModeldataChangedSlot* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex)
-proc fcQAbstractItemModel_slot_callback_dataChanged(slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QAbstractItemModeldataChangedSlot](cast[pointer](slot))
+type QAbstractItemModeldataChangedTopLeftBottomRightSlot* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex)
+proc fcQAbstractItemModel_slot_callback_dataChangedTopLeftBottomRight(slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModeldataChangedTopLeftBottomRightSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
 
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
-proc fcQAbstractItemModel_slot_callback_dataChanged_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QAbstractItemModeldataChangedSlot](cast[pointer](slot))
+proc fcQAbstractItemModel_slot_callback_dataChangedTopLeftBottomRight_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModeldataChangedTopLeftBottomRightSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModeldataChangedSlot) =
-  var tmp = new QAbstractItemModeldataChangedSlot
+proc onDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModeldataChangedTopLeftBottomRightSlot) =
+  var tmp = new QAbstractItemModeldataChangedTopLeftBottomRightSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_dataChanged(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_dataChanged, fcQAbstractItemModel_slot_callback_dataChanged_release)
+  fcQAbstractItemModel_connect_dataChangedTopLeftBottomRight(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_dataChangedTopLeftBottomRight, fcQAbstractItemModel_slot_callback_dataChangedTopLeftBottomRight_release)
 
 proc headerDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, orientation: cint, first: cint, last: cint): void =
   fcQAbstractItemModel_headerDataChanged(self.h, cint(orientation), first, last)
@@ -988,57 +988,57 @@ proc revert*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_revert(self.h)
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractItemModel, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractItemModel_tr2(s, c)
+  let v_ms = fcQAbstractItemModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractItemModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractItemModel_tr3(s, c, n)
+  let v_ms = fcQAbstractItemModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractItemModel, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractItemModel_trUtf82(s, c)
+  let v_ms = fcQAbstractItemModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractItemModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractItemModel_trUtf83(s, c, n)
+  let v_ms = fcQAbstractItemModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc hasIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQAbstractItemModel_hasIndex2(self.h, row, column, parent.h)
+  fcQAbstractItemModel_hasIndexRowColumnParent(self.h, row, column, parent.h)
 
 proc insertRow*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQAbstractItemModel_insertRow2(self.h, row, parent.h)
+  fcQAbstractItemModel_insertRowRowParent(self.h, row, parent.h)
 
 proc insertColumn*(self: gen_qabstractitemmodel_types.QAbstractItemModel, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQAbstractItemModel_insertColumn2(self.h, column, parent.h)
+  fcQAbstractItemModel_insertColumnColumnParent(self.h, column, parent.h)
 
 proc removeRow*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQAbstractItemModel_removeRow2(self.h, row, parent.h)
+  fcQAbstractItemModel_removeRowRowParent(self.h, row, parent.h)
 
 proc removeColumn*(self: gen_qabstractitemmodel_types.QAbstractItemModel, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQAbstractItemModel_removeColumn2(self.h, column, parent.h)
+  fcQAbstractItemModel_removeColumnColumnParent(self.h, column, parent.h)
 
 proc checkIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex, options: cint): bool =
-  fcQAbstractItemModel_checkIndex2(self.h, index.h, cint(options))
+  fcQAbstractItemModel_checkIndexIndexOptions(self.h, index.h, cint(options))
 
 proc dataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint]): void =
   var roles_CArray = newSeq[cint](len(roles))
   for i in 0..<len(roles):
     roles_CArray[i] = roles[i]
 
-  fcQAbstractItemModel_dataChanged2(self.h, topLeft.h, bottomRight.h, struct_seaqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
+  fcQAbstractItemModel_dataChangedTopLeftBottomRightRoles(self.h, topLeft.h, bottomRight.h, struct_seaqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
 
-type QAbstractItemModeldataChanged2Slot* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint])
-proc fcQAbstractItemModel_slot_callback_dataChanged2(slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_seaqt_array) {.cdecl.} =
-  let nimfunc = cast[ptr QAbstractItemModeldataChanged2Slot](cast[pointer](slot))
+type QAbstractItemModeldataChangedTopLeftBottomRightRolesSlot* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: openArray[cint])
+proc fcQAbstractItemModel_slot_callback_dataChangedTopLeftBottomRightRoles(slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_seaqt_array) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModeldataChangedTopLeftBottomRightRolesSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
 
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
@@ -1053,26 +1053,26 @@ proc fcQAbstractItemModel_slot_callback_dataChanged2(slot: int, topLeft: pointer
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc fcQAbstractItemModel_slot_callback_dataChanged2_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QAbstractItemModeldataChanged2Slot](cast[pointer](slot))
+proc fcQAbstractItemModel_slot_callback_dataChangedTopLeftBottomRightRoles_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModeldataChangedTopLeftBottomRightRolesSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModeldataChanged2Slot) =
-  var tmp = new QAbstractItemModeldataChanged2Slot
+proc onDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModeldataChangedTopLeftBottomRightRolesSlot) =
+  var tmp = new QAbstractItemModeldataChangedTopLeftBottomRightRolesSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_dataChanged2(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_dataChanged2, fcQAbstractItemModel_slot_callback_dataChanged2_release)
+  fcQAbstractItemModel_connect_dataChangedTopLeftBottomRightRoles(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_dataChangedTopLeftBottomRightRoles, fcQAbstractItemModel_slot_callback_dataChangedTopLeftBottomRightRoles_release)
 
 proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex]): void =
   var parents_CArray = newSeq[pointer](len(parents))
   for i in 0..<len(parents):
     parents_CArray[i] = parents[i].h
 
-  fcQAbstractItemModel_layoutChangedWithParents(self.h, struct_seaqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])))
+  fcQAbstractItemModel_layoutChangedParents(self.h, struct_seaqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])))
 
-type QAbstractItemModellayoutChangedWithParentsSlot* = proc(parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex])
-proc fcQAbstractItemModel_slot_callback_layoutChangedWithParents(slot: int, parents: struct_seaqt_array) {.cdecl.} =
-  let nimfunc = cast[ptr QAbstractItemModellayoutChangedWithParentsSlot](cast[pointer](slot))
+type QAbstractItemModellayoutChangedParentsSlot* = proc(parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex])
+proc fcQAbstractItemModel_slot_callback_layoutChangedParents(slot: int, parents: struct_seaqt_array) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModellayoutChangedParentsSlot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
   let vparents_outCast = cast[ptr UncheckedArray[pointer]](vparents_ma.data)
@@ -1083,26 +1083,26 @@ proc fcQAbstractItemModel_slot_callback_layoutChangedWithParents(slot: int, pare
 
   nimfunc[](slotval1)
 
-proc fcQAbstractItemModel_slot_callback_layoutChangedWithParents_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QAbstractItemModellayoutChangedWithParentsSlot](cast[pointer](slot))
+proc fcQAbstractItemModel_slot_callback_layoutChangedParents_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutChangedParentsSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onLayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutChangedWithParentsSlot) =
-  var tmp = new QAbstractItemModellayoutChangedWithParentsSlot
+proc onLayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutChangedParentsSlot) =
+  var tmp = new QAbstractItemModellayoutChangedParentsSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutChangedWithParents(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutChangedWithParents, fcQAbstractItemModel_slot_callback_layoutChangedWithParents_release)
+  fcQAbstractItemModel_connect_layoutChangedParents(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutChangedParents, fcQAbstractItemModel_slot_callback_layoutChangedParents_release)
 
 proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint): void =
   var parents_CArray = newSeq[pointer](len(parents))
   for i in 0..<len(parents):
     parents_CArray[i] = parents[i].h
 
-  fcQAbstractItemModel_layoutChanged2(self.h, struct_seaqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])), cint(hint))
+  fcQAbstractItemModel_layoutChangedParentsHint(self.h, struct_seaqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])), cint(hint))
 
-type QAbstractItemModellayoutChanged2Slot* = proc(parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint)
-proc fcQAbstractItemModel_slot_callback_layoutChanged2(slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QAbstractItemModellayoutChanged2Slot](cast[pointer](slot))
+type QAbstractItemModellayoutChangedParentsHintSlot* = proc(parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint)
+proc fcQAbstractItemModel_slot_callback_layoutChangedParentsHint(slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModellayoutChangedParentsHintSlot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
   let vparents_outCast = cast[ptr UncheckedArray[pointer]](vparents_ma.data)
@@ -1115,26 +1115,26 @@ proc fcQAbstractItemModel_slot_callback_layoutChanged2(slot: int, parents: struc
 
   nimfunc[](slotval1, slotval2)
 
-proc fcQAbstractItemModel_slot_callback_layoutChanged2_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QAbstractItemModellayoutChanged2Slot](cast[pointer](slot))
+proc fcQAbstractItemModel_slot_callback_layoutChangedParentsHint_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutChangedParentsHintSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onLayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutChanged2Slot) =
-  var tmp = new QAbstractItemModellayoutChanged2Slot
+proc onLayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutChangedParentsHintSlot) =
+  var tmp = new QAbstractItemModellayoutChangedParentsHintSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutChanged2(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutChanged2, fcQAbstractItemModel_slot_callback_layoutChanged2_release)
+  fcQAbstractItemModel_connect_layoutChangedParentsHint(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutChangedParentsHint, fcQAbstractItemModel_slot_callback_layoutChangedParentsHint_release)
 
 proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex]): void =
   var parents_CArray = newSeq[pointer](len(parents))
   for i in 0..<len(parents):
     parents_CArray[i] = parents[i].h
 
-  fcQAbstractItemModel_layoutAboutToBeChangedWithParents(self.h, struct_seaqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])))
+  fcQAbstractItemModel_layoutAboutToBeChangedParents(self.h, struct_seaqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])))
 
-type QAbstractItemModellayoutAboutToBeChangedWithParentsSlot* = proc(parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex])
-proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedWithParents(slot: int, parents: struct_seaqt_array) {.cdecl.} =
-  let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChangedWithParentsSlot](cast[pointer](slot))
+type QAbstractItemModellayoutAboutToBeChangedParentsSlot* = proc(parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex])
+proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParents(slot: int, parents: struct_seaqt_array) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChangedParentsSlot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
   let vparents_outCast = cast[ptr UncheckedArray[pointer]](vparents_ma.data)
@@ -1145,26 +1145,26 @@ proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedWithParents(slot: 
 
   nimfunc[](slotval1)
 
-proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedWithParents_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChangedWithParentsSlot](cast[pointer](slot))
+proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParents_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChangedParentsSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onLayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutAboutToBeChangedWithParentsSlot) =
-  var tmp = new QAbstractItemModellayoutAboutToBeChangedWithParentsSlot
+proc onLayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutAboutToBeChangedParentsSlot) =
+  var tmp = new QAbstractItemModellayoutAboutToBeChangedParentsSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutAboutToBeChangedWithParents(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedWithParents, fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedWithParents_release)
+  fcQAbstractItemModel_connect_layoutAboutToBeChangedParents(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParents, fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParents_release)
 
 proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint): void =
   var parents_CArray = newSeq[pointer](len(parents))
   for i in 0..<len(parents):
     parents_CArray[i] = parents[i].h
 
-  fcQAbstractItemModel_layoutAboutToBeChanged2(self.h, struct_seaqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])), cint(hint))
+  fcQAbstractItemModel_layoutAboutToBeChangedParentsHint(self.h, struct_seaqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])), cint(hint))
 
-type QAbstractItemModellayoutAboutToBeChanged2Slot* = proc(parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint)
-proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChanged2(slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChanged2Slot](cast[pointer](slot))
+type QAbstractItemModellayoutAboutToBeChangedParentsHintSlot* = proc(parents: openArray[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint)
+proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParentsHint(slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChangedParentsHintSlot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
   let vparents_outCast = cast[ptr UncheckedArray[pointer]](vparents_ma.data)
@@ -1177,15 +1177,15 @@ proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChanged2(slot: int, paren
 
   nimfunc[](slotval1, slotval2)
 
-proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChanged2_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChanged2Slot](cast[pointer](slot))
+proc fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParentsHint_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChangedParentsHintSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onLayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutAboutToBeChanged2Slot) =
-  var tmp = new QAbstractItemModellayoutAboutToBeChanged2Slot
+proc onLayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutAboutToBeChangedParentsHintSlot) =
+  var tmp = new QAbstractItemModellayoutAboutToBeChangedParentsHintSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutAboutToBeChanged2, fcQAbstractItemModel_slot_callback_layoutAboutToBeChanged2_release)
+  fcQAbstractItemModel_connect_layoutAboutToBeChangedParentsHint(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParentsHint, fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParentsHint_release)
 
 type QAbstractItemModelmetaObjectProc* = proc(self: QAbstractItemModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractItemModelmetacastProc* = proc(self: QAbstractItemModel, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -2353,10 +2353,10 @@ proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractItemModel): 
   fcQAbstractItemModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, id: uint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex2(self.h, row, column, id), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex_row_column_id(self.h, row, column, id), owned: true)
 
 proc encodeData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
@@ -2434,7 +2434,7 @@ proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractItemModel)
   vx_ret
 
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, data: pointer): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex3(self.h, row, column, data), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex_row_column_data(self.h, row, column, data), owned: true)
 
 proc sender*(self: gen_qabstractitemmodel_types.QAbstractItemModel): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractItemModel_protectedbase_sender(self.h), owned: false)
@@ -2723,13 +2723,13 @@ proc metacall*(self: gen_qabstractitemmodel_types.QAbstractTableModel, param1: c
   fcQAbstractTableModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractTableModel, s: cstring): string =
-  let v_ms = fcQAbstractTableModel_tr(s)
+  let v_ms = fcQAbstractTableModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractTableModel, s: cstring): string =
-  let v_ms = fcQAbstractTableModel_trUtf8(s)
+  let v_ms = fcQAbstractTableModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2747,25 +2747,25 @@ proc flags*(self: gen_qabstractitemmodel_types.QAbstractTableModel, index: gen_q
   cint(fcQAbstractTableModel_flags(self.h, index.h))
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractTableModel, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractTableModel_tr2(s, c)
+  let v_ms = fcQAbstractTableModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractTableModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractTableModel_tr3(s, c, n)
+  let v_ms = fcQAbstractTableModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractTableModel, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractTableModel_trUtf82(s, c)
+  let v_ms = fcQAbstractTableModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractTableModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractTableModel_trUtf83(s, c, n)
+  let v_ms = fcQAbstractTableModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -3896,7 +3896,7 @@ proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractTableModel):
   fcQAbstractTableModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractTableModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractTableModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
@@ -4250,13 +4250,13 @@ proc metacall*(self: gen_qabstractitemmodel_types.QAbstractListModel, param1: ci
   fcQAbstractListModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractListModel, s: cstring): string =
-  let v_ms = fcQAbstractListModel_tr(s)
+  let v_ms = fcQAbstractListModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractListModel, s: cstring): string =
-  let v_ms = fcQAbstractListModel_trUtf8(s)
+  let v_ms = fcQAbstractListModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -4274,25 +4274,25 @@ proc flags*(self: gen_qabstractitemmodel_types.QAbstractListModel, index: gen_qa
   cint(fcQAbstractListModel_flags(self.h, index.h))
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractListModel, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractListModel_tr2(s, c)
+  let v_ms = fcQAbstractListModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractListModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractListModel_tr3(s, c, n)
+  let v_ms = fcQAbstractListModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractListModel, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractListModel_trUtf82(s, c)
+  let v_ms = fcQAbstractListModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractListModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractListModel_trUtf83(s, c, n)
+  let v_ms = fcQAbstractListModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -5406,7 +5406,7 @@ proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractListModel): 
   fcQAbstractListModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractListModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractListModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qabstractitemmodel_types.QAbstractListModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

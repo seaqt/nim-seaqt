@@ -43,7 +43,7 @@ export
 
 type cQWebDatabase*{.exportc: "QWebDatabase", incompleteStruct.} = object
 
-proc fcQWebDatabase_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebDatabase_operatorAssign".}
+proc fcQWebDatabase_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebDatabase_operatorAssign".}
 proc fcQWebDatabase_name(self: pointer): struct_seaqt_string {.importc: "QWebDatabase_name".}
 proc fcQWebDatabase_displayName(self: pointer): struct_seaqt_string {.importc: "QWebDatabase_displayName".}
 proc fcQWebDatabase_expectedSize(self: pointer): clonglong {.importc: "QWebDatabase_expectedSize".}
@@ -52,10 +52,10 @@ proc fcQWebDatabase_fileName(self: pointer): struct_seaqt_string {.importc: "QWe
 proc fcQWebDatabase_origin(self: pointer): pointer {.importc: "QWebDatabase_origin".}
 proc fcQWebDatabase_removeDatabase(param1: pointer): void {.importc: "QWebDatabase_removeDatabase".}
 proc fcQWebDatabase_removeAllDatabases(): void {.importc: "QWebDatabase_removeAllDatabases".}
-proc fcQWebDatabase_new(other: pointer): ptr cQWebDatabase {.importc: "QWebDatabase_new".}
+proc fcQWebDatabase_new(fromVal: pointer): ptr cQWebDatabase {.importc: "QWebDatabase_new".}
 
-proc operatorAssign*(self: gen_qwebdatabase_types.QWebDatabase, other: gen_qwebdatabase_types.QWebDatabase): void =
-  fcQWebDatabase_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebdatabase_types.QWebDatabase, fromVal: gen_qwebdatabase_types.QWebDatabase): void =
+  fcQWebDatabase_operatorAssign(self.h, fromVal.h)
 
 proc name*(self: gen_qwebdatabase_types.QWebDatabase): string =
   let v_ms = fcQWebDatabase_name(self.h)
@@ -91,6 +91,6 @@ proc removeAllDatabases*(_: type gen_qwebdatabase_types.QWebDatabase): void =
   fcQWebDatabase_removeAllDatabases()
 
 proc create*(T: type gen_qwebdatabase_types.QWebDatabase,
-    other: gen_qwebdatabase_types.QWebDatabase): gen_qwebdatabase_types.QWebDatabase =
-  let tmp = gen_qwebdatabase_types.QWebDatabase(h: fcQWebDatabase_new(other.h), owned: true)
+    fromVal: gen_qwebdatabase_types.QWebDatabase): gen_qwebdatabase_types.QWebDatabase =
+  let tmp = gen_qwebdatabase_types.QWebDatabase(h: fcQWebDatabase_new(fromVal.h), owned: true)
   tmp

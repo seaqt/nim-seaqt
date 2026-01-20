@@ -192,12 +192,12 @@ public:
 	friend bool QApplication_protectedbase_isSignalConnected(const VirtualQApplication* self, QMetaMethod* signal);
 };
 
-VirtualQApplication* QApplication_new(const QApplication_VTable* vtbl, size_t vdata, int* argc, char** argv) {
+VirtualQApplication* QApplication_new_int_char(const QApplication_VTable* vtbl, size_t vdata, int* argc, char** argv) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQApplication>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQApplication(vtbl, static_cast<int&>(*argc), argv) : nullptr;
 }
 
-VirtualQApplication* QApplication_new2(const QApplication_VTable* vtbl, size_t vdata, int* argc, char** argv, int param3) {
+VirtualQApplication* QApplication_new_int_char_int(const QApplication_VTable* vtbl, size_t vdata, int* argc, char** argv, int param3) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQApplication>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQApplication(vtbl, static_cast<int&>(*argc), argv, static_cast<int>(param3)) : nullptr;
 }
@@ -218,7 +218,7 @@ int QApplication_metacall(QApplication* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QApplication_tr(const char* s) {
+struct seaqt_string QApplication_tr_s(const char* s) {
 	QString _ret = QApplication::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -229,7 +229,7 @@ struct seaqt_string QApplication_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QApplication_trUtf8(const char* s) {
+struct seaqt_string QApplication_trUtf8_s(const char* s) {
 	QString _ret = QApplication::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -244,11 +244,11 @@ QStyle* QApplication_style() {
 	return QApplication::style();
 }
 
-void QApplication_setStyle(QStyle* style) {
+void QApplication_setStyle_QStyle(QStyle* style) {
 	QApplication::setStyle(style);
 }
 
-QStyle* QApplication_setStyleWithStyle(struct seaqt_string style) {
+QStyle* QApplication_setStyle_QString(struct seaqt_string style) {
 	QString style_QString = QString::fromUtf8(style.data, style.len);
 	return QApplication::setStyle(style_QString);
 }
@@ -261,15 +261,15 @@ void QApplication_setColorSpec(int colorSpec) {
 	QApplication::setColorSpec(static_cast<int>(colorSpec));
 }
 
-QPalette* QApplication_palette(QWidget* param1) {
+QPalette* QApplication_palette_QWidget(QWidget* param1) {
 	return new QPalette(QApplication::palette(param1));
 }
 
-QPalette* QApplication_paletteWithClassName(const char* className) {
+QPalette* QApplication_palette_char(const char* className) {
 	return new QPalette(QApplication::palette(className));
 }
 
-void QApplication_setPalette(QPalette* param1) {
+void QApplication_setPalette_QPalette(QPalette* param1) {
 	QApplication::setPalette(*param1);
 }
 
@@ -277,15 +277,15 @@ QFont* QApplication_font() {
 	return new QFont(QApplication::font());
 }
 
-QFont* QApplication_fontWithQWidget(QWidget* param1) {
+QFont* QApplication_font_QWidget(QWidget* param1) {
 	return new QFont(QApplication::font(param1));
 }
 
-QFont* QApplication_fontWithClassName(const char* className) {
+QFont* QApplication_font_char(const char* className) {
 	return new QFont(QApplication::font(className));
 }
 
-void QApplication_setFont(QFont* param1) {
+void QApplication_setFont_QFont(QFont* param1) {
 	QApplication::setFont(*param1);
 }
 
@@ -351,19 +351,19 @@ void QApplication_setActiveWindow(QWidget* act) {
 	QApplication::setActiveWindow(act);
 }
 
-QWidget* QApplication_widgetAt(QPoint* p) {
+QWidget* QApplication_widgetAt_p(QPoint* p) {
 	return QApplication::widgetAt(*p);
 }
 
-QWidget* QApplication_widgetAt2(int x, int y) {
+QWidget* QApplication_widgetAt_x_y(int x, int y) {
 	return QApplication::widgetAt(static_cast<int>(x), static_cast<int>(y));
 }
 
-QWidget* QApplication_topLevelAt(QPoint* p) {
+QWidget* QApplication_topLevelAt_p(QPoint* p) {
 	return QApplication::topLevelAt(*p);
 }
 
-QWidget* QApplication_topLevelAt2(int x, int y) {
+QWidget* QApplication_topLevelAt_x_y(int x, int y) {
 	return QApplication::topLevelAt(static_cast<int>(x), static_cast<int>(y));
 }
 
@@ -371,7 +371,7 @@ void QApplication_beep() {
 	QApplication::beep();
 }
 
-void QApplication_alert(QWidget* widget) {
+void QApplication_alert_widget(QWidget* widget) {
 	QApplication::alert(widget);
 }
 
@@ -435,7 +435,7 @@ bool QApplication_isEffectEnabled(int param1) {
 	return QApplication::isEffectEnabled(static_cast<Qt::UIEffect>(param1));
 }
 
-void QApplication_setEffectEnabled(int param1) {
+void QApplication_setEffectEnabled_Qt_UIEffect(int param1) {
 	QApplication::setEffectEnabled(static_cast<Qt::UIEffect>(param1));
 }
 
@@ -496,7 +496,7 @@ void QApplication_aboutQt() {
 	QApplication::aboutQt();
 }
 
-struct seaqt_string QApplication_tr2(const char* s, const char* c) {
+struct seaqt_string QApplication_tr_s_c(const char* s, const char* c) {
 	QString _ret = QApplication::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -507,7 +507,7 @@ struct seaqt_string QApplication_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QApplication_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QApplication_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QApplication::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -518,7 +518,7 @@ struct seaqt_string QApplication_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QApplication_trUtf82(const char* s, const char* c) {
+struct seaqt_string QApplication_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QApplication::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -529,7 +529,7 @@ struct seaqt_string QApplication_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QApplication_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QApplication_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QApplication::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -540,19 +540,19 @@ struct seaqt_string QApplication_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QApplication_setPalette2(QPalette* param1, const char* className) {
+void QApplication_setPalette_QPalette_char(QPalette* param1, const char* className) {
 	QApplication::setPalette(*param1, className);
 }
 
-void QApplication_setFont2(QFont* param1, const char* className) {
+void QApplication_setFont_QFont_char(QFont* param1, const char* className) {
 	QApplication::setFont(*param1, className);
 }
 
-void QApplication_alert2(QWidget* widget, int duration) {
+void QApplication_alert_widget_duration(QWidget* widget, int duration) {
 	QApplication::alert(widget, static_cast<int>(duration));
 }
 
-void QApplication_setEffectEnabled2(int param1, bool enable) {
+void QApplication_setEffectEnabled_Qt_UIEffect_bool(int param1, bool enable) {
 	QApplication::setEffectEnabled(static_cast<Qt::UIEffect>(param1), enable);
 }
 

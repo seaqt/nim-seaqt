@@ -151,14 +151,14 @@ void* QWebPage_vdata(VirtualQWebPage* self);
 VirtualQWebPage* vdata_QWebPage(void* vdata);
 
 VirtualQWebPage* QWebPage_new(const QWebPage_VTable* vtbl, size_t vdata);
-VirtualQWebPage* QWebPage_new2(const QWebPage_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQWebPage* QWebPage_new_parent(const QWebPage_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QWebPage_virtbase(QWebPage* src, QObject** outptr_QObject);
 QMetaObject* QWebPage_metaObject(const QWebPage* self);
 void* QWebPage_metacast(QWebPage* self, const char* param1);
 int QWebPage_metacall(QWebPage* self, int param1, int param2, void** param3);
-struct seaqt_string QWebPage_tr(const char* s);
-struct seaqt_string QWebPage_trUtf8(const char* s);
+struct seaqt_string QWebPage_tr_s(const char* s);
+struct seaqt_string QWebPage_trUtf8_s(const char* s);
 QWebFrame* QWebPage_mainFrame(const QWebPage* self);
 QWebFrame* QWebPage_currentFrame(const QWebPage* self);
 QWebFrame* QWebPage_frameAt(const QWebPage* self, QPoint* pos);
@@ -195,7 +195,7 @@ void QWebPage_setActualVisibleContentRect(const QWebPage* self, QRect* rect);
 bool QWebPage_event(QWebPage* self, QEvent* param1);
 bool QWebPage_focusNextPrevChild(QWebPage* self, bool next);
 QVariant* QWebPage_inputMethodQuery(const QWebPage* self, int property);
-bool QWebPage_findText(QWebPage* self, struct seaqt_string subString);
+bool QWebPage_findText_subString(QWebPage* self, struct seaqt_string subString);
 void QWebPage_setForwardUnsupportedContent(QWebPage* self, bool forward);
 bool QWebPage_forwardUnsupportedContent(const QWebPage* self);
 void QWebPage_setLinkDelegationPolicy(QWebPage* self, int policy);
@@ -283,11 +283,11 @@ void QWebPage_javaScriptAlert(QWebPage* self, QWebFrame* originatingFrame, struc
 bool QWebPage_javaScriptConfirm(QWebPage* self, QWebFrame* originatingFrame, struct seaqt_string msg);
 void QWebPage_javaScriptConsoleMessage(QWebPage* self, struct seaqt_string message, int lineNumber, struct seaqt_string sourceID);
 struct seaqt_string QWebPage_userAgentForUrl(const QWebPage* self, QUrl* url);
-struct seaqt_string QWebPage_tr2(const char* s, const char* c);
-struct seaqt_string QWebPage_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebPage_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebPage_trUtf83(const char* s, const char* c, int n);
-bool QWebPage_findText2(QWebPage* self, struct seaqt_string subString, int options);
+struct seaqt_string QWebPage_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebPage_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebPage_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebPage_trUtf8_s_c_n(const char* s, const char* c, int n);
+bool QWebPage_findText_subString_options(QWebPage* self, struct seaqt_string subString, int options);
 
 QMetaObject* QWebPage_virtualbase_metaObject(const VirtualQWebPage* self);
 void* QWebPage_virtualbase_metacast(VirtualQWebPage* self, const char* param1);
@@ -321,9 +321,9 @@ const QMetaObject* QWebPage_staticMetaObject();
 void QWebPage_delete(QWebPage* self);
 
 QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new();
-QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new2(QWebPage__ViewportAttributes* other);
+QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new_from(QWebPage__ViewportAttributes* from);
 
-void QWebPage__ViewportAttributes_operatorAssign(QWebPage__ViewportAttributes* self, QWebPage__ViewportAttributes* other);
+void QWebPage__ViewportAttributes_operatorAssign(QWebPage__ViewportAttributes* self, QWebPage__ViewportAttributes* from);
 double QWebPage__ViewportAttributes_initialScaleFactor(const QWebPage__ViewportAttributes* self);
 double QWebPage__ViewportAttributes_minimumScaleFactor(const QWebPage__ViewportAttributes* self);
 double QWebPage__ViewportAttributes_maximumScaleFactor(const QWebPage__ViewportAttributes* self);
@@ -334,16 +334,16 @@ QSizeF* QWebPage__ViewportAttributes_size(const QWebPage__ViewportAttributes* se
 
 void QWebPage__ViewportAttributes_delete(QWebPage__ViewportAttributes* self);
 
-QWebPage__ExtensionOption* QWebPage__ExtensionOption_new(QWebPage__ExtensionOption* param1);
+QWebPage__ExtensionOption* QWebPage__ExtensionOption_new(QWebPage__ExtensionOption* from);
 
-void QWebPage__ExtensionOption_operatorAssign(QWebPage__ExtensionOption* self, QWebPage__ExtensionOption* param1);
+void QWebPage__ExtensionOption_operatorAssign(QWebPage__ExtensionOption* self, QWebPage__ExtensionOption* from);
 
 void QWebPage__ExtensionOption_delete(QWebPage__ExtensionOption* self);
 
-QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new(QWebPage__ExtensionReturn* param1);
-QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new2();
+QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new_from(QWebPage__ExtensionReturn* from);
+QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new();
 
-void QWebPage__ExtensionReturn_operatorAssign(QWebPage__ExtensionReturn* self, QWebPage__ExtensionReturn* param1);
+void QWebPage__ExtensionReturn_operatorAssign(QWebPage__ExtensionReturn* self, QWebPage__ExtensionReturn* from);
 
 void QWebPage__ExtensionReturn_delete(QWebPage__ExtensionReturn* self);
 
@@ -361,7 +361,7 @@ void QWebPage__ChooseMultipleFilesExtensionReturn_setFileNames(QWebPage__ChooseM
 
 void QWebPage__ChooseMultipleFilesExtensionReturn_delete(QWebPage__ChooseMultipleFilesExtensionReturn* self);
 
-QWebPage__ErrorPageExtensionOption* QWebPage__ErrorPageExtensionOption_new(QWebPage__ErrorPageExtensionOption* param1);
+QWebPage__ErrorPageExtensionOption* QWebPage__ErrorPageExtensionOption_new(QWebPage__ErrorPageExtensionOption* from);
 
 void QWebPage__ErrorPageExtensionOption_virtbase(QWebPage__ErrorPageExtensionOption* src, QWebPage__ExtensionOption** outptr_QWebPage__ExtensionOption);
 QUrl* QWebPage__ErrorPageExtensionOption_url(const QWebPage__ErrorPageExtensionOption* self);
@@ -374,12 +374,12 @@ int QWebPage__ErrorPageExtensionOption_error(const QWebPage__ErrorPageExtensionO
 void QWebPage__ErrorPageExtensionOption_setError(QWebPage__ErrorPageExtensionOption* self, int error);
 struct seaqt_string QWebPage__ErrorPageExtensionOption_errorString(const QWebPage__ErrorPageExtensionOption* self);
 void QWebPage__ErrorPageExtensionOption_setErrorString(QWebPage__ErrorPageExtensionOption* self, struct seaqt_string errorString);
-void QWebPage__ErrorPageExtensionOption_operatorAssign(QWebPage__ErrorPageExtensionOption* self, QWebPage__ErrorPageExtensionOption* param1);
+void QWebPage__ErrorPageExtensionOption_operatorAssign(QWebPage__ErrorPageExtensionOption* self, QWebPage__ErrorPageExtensionOption* from);
 
 void QWebPage__ErrorPageExtensionOption_delete(QWebPage__ErrorPageExtensionOption* self);
 
 QWebPage__ErrorPageExtensionReturn* QWebPage__ErrorPageExtensionReturn_new();
-QWebPage__ErrorPageExtensionReturn* QWebPage__ErrorPageExtensionReturn_new2(QWebPage__ErrorPageExtensionReturn* param1);
+QWebPage__ErrorPageExtensionReturn* QWebPage__ErrorPageExtensionReturn_new_from(QWebPage__ErrorPageExtensionReturn* from);
 
 void QWebPage__ErrorPageExtensionReturn_virtbase(QWebPage__ErrorPageExtensionReturn* src, QWebPage__ExtensionReturn** outptr_QWebPage__ExtensionReturn);
 struct seaqt_string QWebPage__ErrorPageExtensionReturn_contentType(const QWebPage__ErrorPageExtensionReturn* self);
@@ -390,7 +390,7 @@ QUrl* QWebPage__ErrorPageExtensionReturn_baseUrl(const QWebPage__ErrorPageExtens
 void QWebPage__ErrorPageExtensionReturn_setBaseUrl(QWebPage__ErrorPageExtensionReturn* self, QUrl* baseUrl);
 struct seaqt_string QWebPage__ErrorPageExtensionReturn_content(const QWebPage__ErrorPageExtensionReturn* self);
 void QWebPage__ErrorPageExtensionReturn_setContent(QWebPage__ErrorPageExtensionReturn* self, struct seaqt_string content);
-void QWebPage__ErrorPageExtensionReturn_operatorAssign(QWebPage__ErrorPageExtensionReturn* self, QWebPage__ErrorPageExtensionReturn* param1);
+void QWebPage__ErrorPageExtensionReturn_operatorAssign(QWebPage__ErrorPageExtensionReturn* self, QWebPage__ErrorPageExtensionReturn* from);
 
 void QWebPage__ErrorPageExtensionReturn_delete(QWebPage__ErrorPageExtensionReturn* self);
 

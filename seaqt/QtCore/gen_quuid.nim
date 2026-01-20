@@ -64,9 +64,9 @@ export gen_quuid_types
 type cQUuid*{.exportc: "QUuid", incompleteStruct.} = object
 
 proc fcQUuid_toString(self: pointer): struct_seaqt_string {.importc: "QUuid_toString".}
-proc fcQUuid_toStringWithMode(self: pointer, mode: cint): struct_seaqt_string {.importc: "QUuid_toStringWithMode".}
+proc fcQUuid_toStringMode(self: pointer, mode: cint): struct_seaqt_string {.importc: "QUuid_toString_mode".}
 proc fcQUuid_toByteArray(self: pointer): struct_seaqt_string {.importc: "QUuid_toByteArray".}
-proc fcQUuid_toByteArrayWithMode(self: pointer, mode: cint): struct_seaqt_string {.importc: "QUuid_toByteArrayWithMode".}
+proc fcQUuid_toByteArrayMode(self: pointer, mode: cint): struct_seaqt_string {.importc: "QUuid_toByteArray_mode".}
 proc fcQUuid_toRfc4122(self: pointer): struct_seaqt_string {.importc: "QUuid_toRfc4122".}
 proc fcQUuid_fromRfc4122(param1: struct_seaqt_string): pointer {.importc: "QUuid_fromRfc4122".}
 proc fcQUuid_isNull(self: pointer): bool {.importc: "QUuid_isNull".}
@@ -75,10 +75,10 @@ proc fcQUuid_operatorNotEqual(self: pointer, orig: pointer): bool {.importc: "QU
 proc fcQUuid_operatorLesser(self: pointer, other: pointer): bool {.importc: "QUuid_operatorLesser".}
 proc fcQUuid_operatorGreater(self: pointer, other: pointer): bool {.importc: "QUuid_operatorGreater".}
 proc fcQUuid_createUuid(): pointer {.importc: "QUuid_createUuid".}
-proc fcQUuid_createUuidV3(ns: pointer, baseData: struct_seaqt_string): pointer {.importc: "QUuid_createUuidV3".}
-proc fcQUuid_createUuidV5(ns: pointer, baseData: struct_seaqt_string): pointer {.importc: "QUuid_createUuidV5".}
-proc fcQUuid_createUuidV32(ns: pointer, baseData: struct_seaqt_string): pointer {.importc: "QUuid_createUuidV32".}
-proc fcQUuid_createUuidV52(ns: pointer, baseData: struct_seaqt_string): pointer {.importc: "QUuid_createUuidV52".}
+proc fcQUuid_createUuidV3_QUuid_QByteArray(ns: pointer, baseData: struct_seaqt_string): pointer {.importc: "QUuid_createUuidV3_QUuid_QByteArray".}
+proc fcQUuid_createUuidV5_QUuid_QByteArray(ns: pointer, baseData: struct_seaqt_string): pointer {.importc: "QUuid_createUuidV5_QUuid_QByteArray".}
+proc fcQUuid_createUuidV3_QUuid_QString(ns: pointer, baseData: struct_seaqt_string): pointer {.importc: "QUuid_createUuidV3_QUuid_QString".}
+proc fcQUuid_createUuidV5_QUuid_QString(ns: pointer, baseData: struct_seaqt_string): pointer {.importc: "QUuid_createUuidV5_QUuid_QString".}
 proc fcQUuid_variant(self: pointer): cint {.importc: "QUuid_variant".}
 proc fcQUuid_version(self: pointer): cint {.importc: "QUuid_version".}
 proc fcQUuid_data1(self: pointer): cuint {.importc: "QUuid_data1".}
@@ -88,11 +88,11 @@ proc fcQUuid_setData2(self: pointer, data2: cushort): void {.importc: "QUuid_set
 proc fcQUuid_data3(self: pointer): cushort {.importc: "QUuid_data3".}
 proc fcQUuid_setData3(self: pointer, data3: cushort): void {.importc: "QUuid_setData3".}
 proc fcQUuid_new(): ptr cQUuid {.importc: "QUuid_new".}
-proc fcQUuid_new2(l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): ptr cQUuid {.importc: "QUuid_new2".}
-proc fcQUuid_new3(param1: struct_seaqt_string): ptr cQUuid {.importc: "QUuid_new3".}
-proc fcQUuid_new4(param1: cstring): ptr cQUuid {.importc: "QUuid_new4".}
-proc fcQUuid_new5(param1: struct_seaqt_string): ptr cQUuid {.importc: "QUuid_new5".}
-proc fcQUuid_new6(param1: pointer): ptr cQUuid {.importc: "QUuid_new6".}
+proc fcQUuid_new2(l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): ptr cQUuid {.importc: "QUuid_new_uint_ushort_ushort_uchar_uchar_uchar_uchar_uchar_uchar_uchar_uchar".}
+proc fcQUuid_new3(param1: struct_seaqt_string): ptr cQUuid {.importc: "QUuid_new_QString".}
+proc fcQUuid_new4(param1: cstring): ptr cQUuid {.importc: "QUuid_new_char".}
+proc fcQUuid_new5(param1: struct_seaqt_string): ptr cQUuid {.importc: "QUuid_new_QByteArray".}
+proc fcQUuid_new6(fromVal: pointer): ptr cQUuid {.importc: "QUuid_new_QUuid".}
 
 proc toString*(self: gen_quuid_types.QUuid): string =
   let v_ms = fcQUuid_toString(self.h)
@@ -101,7 +101,7 @@ proc toString*(self: gen_quuid_types.QUuid): string =
   vx_ret
 
 proc toString*(self: gen_quuid_types.QUuid, mode: cint): string =
-  let v_ms = fcQUuid_toStringWithMode(self.h, cint(mode))
+  let v_ms = fcQUuid_toStringMode(self.h, cint(mode))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -113,7 +113,7 @@ proc toByteArray*(self: gen_quuid_types.QUuid): seq[byte] =
   vx_ret
 
 proc toByteArray*(self: gen_quuid_types.QUuid, mode: cint): seq[byte] =
-  var v_bytearray = fcQUuid_toByteArrayWithMode(self.h, cint(mode))
+  var v_bytearray = fcQUuid_toByteArrayMode(self.h, cint(mode))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -146,16 +146,16 @@ proc createUuid*(_: type gen_quuid_types.QUuid): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQUuid_createUuid(), owned: true)
 
 proc createUuidV3*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: openArray[byte]): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_createUuidV3(ns.h, struct_seaqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
+  gen_quuid_types.QUuid(h: fcQUuid_createUuidV3_QUuid_QByteArray(ns.h, struct_seaqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
 
 proc createUuidV5*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: openArray[byte]): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_createUuidV5(ns.h, struct_seaqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
+  gen_quuid_types.QUuid(h: fcQUuid_createUuidV5_QUuid_QByteArray(ns.h, struct_seaqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
 
 proc createUuidV3*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: openArray[char]): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_createUuidV32(ns.h, struct_seaqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
+  gen_quuid_types.QUuid(h: fcQUuid_createUuidV3_QUuid_QString(ns.h, struct_seaqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
 
 proc createUuidV5*(_: type gen_quuid_types.QUuid, ns: gen_quuid_types.QUuid, baseData: openArray[char]): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQUuid_createUuidV52(ns.h, struct_seaqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
+  gen_quuid_types.QUuid(h: fcQUuid_createUuidV5_QUuid_QString(ns.h, struct_seaqt_string(data: if len(baseData) > 0: addr baseData[0] else: nil, len: csize_t(len(baseData)))), owned: true)
 
 proc variant*(self: gen_quuid_types.QUuid): cint =
   cint(fcQUuid_variant(self.h))
@@ -201,6 +201,6 @@ proc create*(T: type gen_quuid_types.QUuid,
   let tmp = gen_quuid_types.QUuid(h: fcQUuid_new5(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: true)
   tmp
 proc create*(T: type gen_quuid_types.QUuid,
-    param1: gen_quuid_types.QUuid): gen_quuid_types.QUuid =
-  let tmp = gen_quuid_types.QUuid(h: fcQUuid_new6(param1.h), owned: true)
+    fromVal: gen_quuid_types.QUuid): gen_quuid_types.QUuid =
+  let tmp = gen_quuid_types.QUuid(h: fcQUuid_new6(fromVal.h), owned: true)
   tmp

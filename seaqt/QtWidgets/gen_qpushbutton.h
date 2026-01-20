@@ -151,19 +151,19 @@ typedef struct QPushButton_VTable{
 void* QPushButton_vdata(VirtualQPushButton* self);
 VirtualQPushButton* vdata_QPushButton(void* vdata);
 
-VirtualQPushButton* QPushButton_new(const QPushButton_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQPushButton* QPushButton_new2(const QPushButton_VTable* vtbl, size_t vdata);
-VirtualQPushButton* QPushButton_new3(const QPushButton_VTable* vtbl, size_t vdata, struct seaqt_string text);
-VirtualQPushButton* QPushButton_new4(const QPushButton_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text);
-VirtualQPushButton* QPushButton_new5(const QPushButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent);
-VirtualQPushButton* QPushButton_new6(const QPushButton_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QWidget* parent);
+VirtualQPushButton* QPushButton_new_parent(const QPushButton_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQPushButton* QPushButton_new(const QPushButton_VTable* vtbl, size_t vdata);
+VirtualQPushButton* QPushButton_new_text(const QPushButton_VTable* vtbl, size_t vdata, struct seaqt_string text);
+VirtualQPushButton* QPushButton_new_icon_text(const QPushButton_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text);
+VirtualQPushButton* QPushButton_new_text_parent(const QPushButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent);
+VirtualQPushButton* QPushButton_new_icon_text_parent(const QPushButton_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QWidget* parent);
 
 void QPushButton_virtbase(QPushButton* src, QAbstractButton** outptr_QAbstractButton);
 QMetaObject* QPushButton_metaObject(const QPushButton* self);
 void* QPushButton_metacast(QPushButton* self, const char* param1);
 int QPushButton_metacall(QPushButton* self, int param1, int param2, void** param3);
-struct seaqt_string QPushButton_tr(const char* s);
-struct seaqt_string QPushButton_trUtf8(const char* s);
+struct seaqt_string QPushButton_tr_s(const char* s);
+struct seaqt_string QPushButton_trUtf8_s(const char* s);
 QSize* QPushButton_sizeHint(const QPushButton* self);
 QSize* QPushButton_minimumSizeHint(const QPushButton* self);
 bool QPushButton_autoDefault(const QPushButton* self);
@@ -181,10 +181,10 @@ void QPushButton_keyPressEvent(QPushButton* self, QKeyEvent* param1);
 void QPushButton_focusInEvent(QPushButton* self, QFocusEvent* param1);
 void QPushButton_focusOutEvent(QPushButton* self, QFocusEvent* param1);
 bool QPushButton_hitButton(const QPushButton* self, QPoint* pos);
-struct seaqt_string QPushButton_tr2(const char* s, const char* c);
-struct seaqt_string QPushButton_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPushButton_trUtf82(const char* s, const char* c);
-struct seaqt_string QPushButton_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QPushButton_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPushButton_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPushButton_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPushButton_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPushButton_virtualbase_metaObject(const VirtualQPushButton* self);
 void* QPushButton_virtualbase_metacast(VirtualQPushButton* self, const char* param1);

@@ -21,24 +21,24 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QMatrix* QMatrix_new(int param1) {
+QMatrix* QMatrix_new_Qt_Initialization(int param1) {
 	return new (std::nothrow) QMatrix(static_cast<Qt::Initialization>(param1));
 }
 
-QMatrix* QMatrix_new2() {
+QMatrix* QMatrix_new() {
 	return new (std::nothrow) QMatrix();
 }
 
-QMatrix* QMatrix_new3(double m11, double m12, double m21, double m22, double dx, double dy) {
+QMatrix* QMatrix_new_qreal_qreal_qreal_qreal_qreal_qreal(double m11, double m12, double m21, double m22, double dx, double dy) {
 	return new (std::nothrow) QMatrix(static_cast<qreal>(m11), static_cast<qreal>(m12), static_cast<qreal>(m21), static_cast<qreal>(m22), static_cast<qreal>(dx), static_cast<qreal>(dy));
 }
 
-QMatrix* QMatrix_new4(QMatrix* other) {
-	return new (std::nothrow) QMatrix(*other);
+QMatrix* QMatrix_new_QMatrix(QMatrix* from) {
+	return new (std::nothrow) QMatrix(*from);
 }
 
-void QMatrix_operatorAssign(QMatrix* self, QMatrix* param1) {
-	self->operator=(*param1);
+void QMatrix_operatorAssign(QMatrix* self, QMatrix* from) {
+	self->operator=(*from);
 }
 
 void QMatrix_setMatrix(QMatrix* self, double m11, double m12, double m21, double m22, double dx, double dy) {
@@ -75,43 +75,43 @@ double QMatrix_dy(const QMatrix* self) {
 	return static_cast<double>(_ret);
 }
 
-void QMatrix_map(const QMatrix* self, int x, int y, int* tx, int* ty) {
+void QMatrix_map_int_int_int_int(const QMatrix* self, int x, int y, int* tx, int* ty) {
 	self->map(static_cast<int>(x), static_cast<int>(y), static_cast<int*>(tx), static_cast<int*>(ty));
 }
 
-void QMatrix_map2(const QMatrix* self, double x, double y, double* tx, double* ty) {
+void QMatrix_map_qreal_qreal_qreal_qreal(const QMatrix* self, double x, double y, double* tx, double* ty) {
 	self->map(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal*>(tx), static_cast<qreal*>(ty));
 }
 
-QRect* QMatrix_mapRect(const QMatrix* self, QRect* param1) {
+QRect* QMatrix_mapRect_QRect(const QMatrix* self, QRect* param1) {
 	return new QRect(self->mapRect(*param1));
 }
 
-QRectF* QMatrix_mapRectWithQRectF(const QMatrix* self, QRectF* param1) {
+QRectF* QMatrix_mapRect_QRectF(const QMatrix* self, QRectF* param1) {
 	return new QRectF(self->mapRect(*param1));
 }
 
-QPoint* QMatrix_mapWithQPoint(const QMatrix* self, QPoint* p) {
+QPoint* QMatrix_map_QPoint(const QMatrix* self, QPoint* p) {
 	return new QPoint(self->map(*p));
 }
 
-QPointF* QMatrix_mapWithQPointF(const QMatrix* self, QPointF* p) {
+QPointF* QMatrix_map_QPointF(const QMatrix* self, QPointF* p) {
 	return new QPointF(self->map(*p));
 }
 
-QLine* QMatrix_mapWithQLine(const QMatrix* self, QLine* l) {
+QLine* QMatrix_map_QLine(const QMatrix* self, QLine* l) {
 	return new QLine(self->map(*l));
 }
 
-QLineF* QMatrix_mapWithQLineF(const QMatrix* self, QLineF* l) {
+QLineF* QMatrix_map_QLineF(const QMatrix* self, QLineF* l) {
 	return new QLineF(self->map(*l));
 }
 
-QRegion* QMatrix_mapWithQRegion(const QMatrix* self, QRegion* r) {
+QRegion* QMatrix_map_QRegion(const QMatrix* self, QRegion* r) {
 	return new QRegion(self->map(*r));
 }
 
-QPainterPath* QMatrix_mapWithQPainterPath(const QMatrix* self, QPainterPath* p) {
+QPainterPath* QMatrix_map_QPainterPath(const QMatrix* self, QPainterPath* p) {
 	return new QPainterPath(self->map(*p));
 }
 
@@ -182,7 +182,7 @@ QVariant* QMatrix_ToQVariant(const QMatrix* self) {
 	return new QVariant(self->operator QVariant());
 }
 
-QMatrix* QMatrix_invertedWithInvertible(const QMatrix* self, bool* invertible) {
+QMatrix* QMatrix_inverted_invertible(const QMatrix* self, bool* invertible) {
 	return new QMatrix(self->inverted(invertible));
 }
 

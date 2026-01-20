@@ -22,8 +22,8 @@ QGeoShape* QGeoShape_new() {
 	return new (std::nothrow) QGeoShape();
 }
 
-QGeoShape* QGeoShape_new2(QGeoShape* other) {
-	return new (std::nothrow) QGeoShape(*other);
+QGeoShape* QGeoShape_new_from(QGeoShape* from) {
+	return new (std::nothrow) QGeoShape(*from);
 }
 
 int QGeoShape_type(const QGeoShape* self) {
@@ -63,8 +63,8 @@ bool QGeoShape_operatorNotEqual(const QGeoShape* self, QGeoShape* other) {
 	return (*self != *other);
 }
 
-void QGeoShape_operatorAssign(QGeoShape* self, QGeoShape* other) {
-	self->operator=(*other);
+void QGeoShape_operatorAssign(QGeoShape* self, QGeoShape* from) {
+	self->operator=(*from);
 }
 
 struct seaqt_string QGeoShape_toString(const QGeoShape* self) {

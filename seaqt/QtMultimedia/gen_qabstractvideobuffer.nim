@@ -81,7 +81,7 @@ type cQAbstractVideoBufferVTable {.pure.} = object
 proc fcQAbstractVideoBuffer_virtualbase_release(self: pointer): void {.importc: "QAbstractVideoBuffer_virtualbase_release".}
 proc fcQAbstractVideoBuffer_virtualbase_handle(self: pointer): pointer {.importc: "QAbstractVideoBuffer_virtualbase_handle".}
 proc fcQAbstractVideoBuffer_new(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQAbstractVideoBuffer {.importc: "QAbstractVideoBuffer_new".}
-proc fcQAbstractPlanarVideoBuffer_map(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.importc: "QAbstractPlanarVideoBuffer_map".}
+proc fcQAbstractPlanarVideoBuffer_mapModeNumBytesBytesPerLine(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.importc: "QAbstractPlanarVideoBuffer_map_mode_numBytes_bytesPerLine".}
 
 proc release*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer): void =
   fcQAbstractVideoBuffer_release(self.h)
@@ -242,5 +242,5 @@ proc create*(T: type gen_qabstractvideobuffer_types.QAbstractVideoBuffer,
   inst[].owned = true
 
 proc map*(self: gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 =
-  fcQAbstractPlanarVideoBuffer_map(self.h, cint(mode), numBytes, bytesPerLine)
+  fcQAbstractPlanarVideoBuffer_mapModeNumBytesBytesPerLine(self.h, cint(mode), numBytes, bytesPerLine)
 

@@ -151,32 +151,32 @@ typedef struct QPrintDialog_VTable{
 void* QPrintDialog_vdata(VirtualQPrintDialog* self);
 VirtualQPrintDialog* vdata_QPrintDialog(void* vdata);
 
-VirtualQPrintDialog* QPrintDialog_new(const QPrintDialog_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQPrintDialog* QPrintDialog_new2(const QPrintDialog_VTable* vtbl, size_t vdata, QPrinter* printer);
-VirtualQPrintDialog* QPrintDialog_new3(const QPrintDialog_VTable* vtbl, size_t vdata);
-VirtualQPrintDialog* QPrintDialog_new4(const QPrintDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
+VirtualQPrintDialog* QPrintDialog_new_parent(const QPrintDialog_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQPrintDialog* QPrintDialog_new_printer(const QPrintDialog_VTable* vtbl, size_t vdata, QPrinter* printer);
+VirtualQPrintDialog* QPrintDialog_new(const QPrintDialog_VTable* vtbl, size_t vdata);
+VirtualQPrintDialog* QPrintDialog_new_printer_parent(const QPrintDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
 
 void QPrintDialog_virtbase(QPrintDialog* src, QAbstractPrintDialog** outptr_QAbstractPrintDialog);
 QMetaObject* QPrintDialog_metaObject(const QPrintDialog* self);
 void* QPrintDialog_metacast(QPrintDialog* self, const char* param1);
 int QPrintDialog_metacall(QPrintDialog* self, int param1, int param2, void** param3);
-struct seaqt_string QPrintDialog_tr(const char* s);
-struct seaqt_string QPrintDialog_trUtf8(const char* s);
+struct seaqt_string QPrintDialog_tr_s(const char* s);
+struct seaqt_string QPrintDialog_trUtf8_s(const char* s);
 int QPrintDialog_exec(QPrintDialog* self);
 void QPrintDialog_accept(QPrintDialog* self);
 void QPrintDialog_done(QPrintDialog* self, int result);
-void QPrintDialog_setOption(QPrintDialog* self, int option);
+void QPrintDialog_setOption_option(QPrintDialog* self, int option);
 bool QPrintDialog_testOption(const QPrintDialog* self, int option);
 void QPrintDialog_setOptions(QPrintDialog* self, int options);
 int QPrintDialog_options(const QPrintDialog* self);
 void QPrintDialog_setVisible(QPrintDialog* self, bool visible);
 void QPrintDialog_accepted(QPrintDialog* self, QPrinter* printer);
 void QPrintDialog_connect_accepted(QPrintDialog* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t));
-struct seaqt_string QPrintDialog_tr2(const char* s, const char* c);
-struct seaqt_string QPrintDialog_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPrintDialog_trUtf82(const char* s, const char* c);
-struct seaqt_string QPrintDialog_trUtf83(const char* s, const char* c, int n);
-void QPrintDialog_setOption2(QPrintDialog* self, int option, bool on);
+struct seaqt_string QPrintDialog_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPrintDialog_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPrintDialog_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPrintDialog_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QPrintDialog_setOption_option_on(QPrintDialog* self, int option, bool on);
 
 QMetaObject* QPrintDialog_virtualbase_metaObject(const VirtualQPrintDialog* self);
 void* QPrintDialog_virtualbase_metacast(VirtualQPrintDialog* self, const char* param1);

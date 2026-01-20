@@ -116,8 +116,8 @@ proc fcQSGMaterialRhiShaderGraphicsPipelineState_blendConstant(self: pointer): p
 proc fcQSGMaterialRhiShaderGraphicsPipelineState_setBlendConstant(self: pointer, blendConstant: pointer): void {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_setBlendConstant".}
 proc fcQSGMaterialRhiShaderGraphicsPipelineState_cullMode(self: pointer): cint {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_cullMode".}
 proc fcQSGMaterialRhiShaderGraphicsPipelineState_setCullMode(self: pointer, cullMode: cint): void {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_setCullMode".}
-proc fcQSGMaterialRhiShaderGraphicsPipelineState_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_operatorAssign".}
-proc fcQSGMaterialRhiShaderGraphicsPipelineState_new(param1: pointer): ptr cQSGMaterialRhiShaderGraphicsPipelineState {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_new".}
+proc fcQSGMaterialRhiShaderGraphicsPipelineState_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_operatorAssign".}
+proc fcQSGMaterialRhiShaderGraphicsPipelineState_new(fromVal: pointer): ptr cQSGMaterialRhiShaderGraphicsPipelineState {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_new".}
 
 proc dirtyStates*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState): cint =
   cint(fcQSGMaterialRhiShaderRenderState_dirtyStates(self.h))
@@ -194,10 +194,10 @@ proc cullMode*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphics
 proc setCullMode*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState, cullMode: cint): void =
   fcQSGMaterialRhiShaderGraphicsPipelineState_setCullMode(self.h, cint(cullMode))
 
-proc operatorAssign*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState, param1: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState): void =
-  fcQSGMaterialRhiShaderGraphicsPipelineState_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState, fromVal: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState): void =
+  fcQSGMaterialRhiShaderGraphicsPipelineState_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState,
-    param1: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState): gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState =
-  let tmp = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState(h: fcQSGMaterialRhiShaderGraphicsPipelineState_new(param1.h), owned: true)
+    fromVal: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState): gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState =
+  let tmp = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState(h: fcQSGMaterialRhiShaderGraphicsPipelineState_new(fromVal.h), owned: true)
   tmp

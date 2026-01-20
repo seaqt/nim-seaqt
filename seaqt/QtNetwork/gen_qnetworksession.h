@@ -56,15 +56,15 @@ typedef struct QNetworkSession_VTable{
 void* QNetworkSession_vdata(VirtualQNetworkSession* self);
 VirtualQNetworkSession* vdata_QNetworkSession(void* vdata);
 
-VirtualQNetworkSession* QNetworkSession_new(const QNetworkSession_VTable* vtbl, size_t vdata, QNetworkConfiguration* connConfig);
-VirtualQNetworkSession* QNetworkSession_new2(const QNetworkSession_VTable* vtbl, size_t vdata, QNetworkConfiguration* connConfig, QObject* parent);
+VirtualQNetworkSession* QNetworkSession_new_connConfig(const QNetworkSession_VTable* vtbl, size_t vdata, QNetworkConfiguration* connConfig);
+VirtualQNetworkSession* QNetworkSession_new_connConfig_parent(const QNetworkSession_VTable* vtbl, size_t vdata, QNetworkConfiguration* connConfig, QObject* parent);
 
 void QNetworkSession_virtbase(QNetworkSession* src, QObject** outptr_QObject);
 QMetaObject* QNetworkSession_metaObject(const QNetworkSession* self);
 void* QNetworkSession_metacast(QNetworkSession* self, const char* param1);
 int QNetworkSession_metacall(QNetworkSession* self, int param1, int param2, void** param3);
-struct seaqt_string QNetworkSession_tr(const char* s);
-struct seaqt_string QNetworkSession_trUtf8(const char* s);
+struct seaqt_string QNetworkSession_tr_s(const char* s);
+struct seaqt_string QNetworkSession_trUtf8_s(const char* s);
 bool QNetworkSession_isOpen(const QNetworkSession* self);
 QNetworkConfiguration* QNetworkSession_configuration(const QNetworkSession* self);
 QNetworkInterface* QNetworkSession_interface(const QNetworkSession* self);
@@ -91,8 +91,8 @@ void QNetworkSession_opened(QNetworkSession* self);
 void QNetworkSession_connect_opened(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QNetworkSession_closed(QNetworkSession* self);
 void QNetworkSession_connect_closed(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-void QNetworkSession_errorWithQNetworkSessionSessionError(QNetworkSession* self, int param1);
-void QNetworkSession_connect_errorWithQNetworkSessionSessionError(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QNetworkSession_error_QNetworkSession_SessionError(QNetworkSession* self, int param1);
+void QNetworkSession_connect_error_QNetworkSession_SessionError(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QNetworkSession_preferredConfigurationChanged(QNetworkSession* self, QNetworkConfiguration* config, bool isSeamless);
 void QNetworkSession_connect_preferredConfigurationChanged(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, QNetworkConfiguration*, bool), void (*release)(intptr_t));
 void QNetworkSession_newConfigurationActivated(QNetworkSession* self);
@@ -101,11 +101,11 @@ void QNetworkSession_usagePoliciesChanged(QNetworkSession* self, int usagePolici
 void QNetworkSession_connect_usagePoliciesChanged(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QNetworkSession_connectNotify(QNetworkSession* self, QMetaMethod* signal);
 void QNetworkSession_disconnectNotify(QNetworkSession* self, QMetaMethod* signal);
-struct seaqt_string QNetworkSession_tr2(const char* s, const char* c);
-struct seaqt_string QNetworkSession_tr3(const char* s, const char* c, int n);
-struct seaqt_string QNetworkSession_trUtf82(const char* s, const char* c);
-struct seaqt_string QNetworkSession_trUtf83(const char* s, const char* c, int n);
-bool QNetworkSession_waitForOpenedWithMsecs(QNetworkSession* self, int msecs);
+struct seaqt_string QNetworkSession_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkSession_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QNetworkSession_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkSession_trUtf8_s_c_n(const char* s, const char* c, int n);
+bool QNetworkSession_waitForOpened_msecs(QNetworkSession* self, int msecs);
 
 QMetaObject* QNetworkSession_virtualbase_metaObject(const VirtualQNetworkSession* self);
 void* QNetworkSession_virtualbase_metacast(VirtualQNetworkSession* self, const char* param1);

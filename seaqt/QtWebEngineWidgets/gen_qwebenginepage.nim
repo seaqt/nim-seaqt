@@ -216,8 +216,8 @@ type cQWebEnginePage*{.exportc: "QWebEnginePage", incompleteStruct.} = object
 proc fcQWebEnginePage_metaObject(self: pointer): pointer {.importc: "QWebEnginePage_metaObject".}
 proc fcQWebEnginePage_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEnginePage_metacast".}
 proc fcQWebEnginePage_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEnginePage_metacall".}
-proc fcQWebEnginePage_tr(s: cstring): struct_seaqt_string {.importc: "QWebEnginePage_tr".}
-proc fcQWebEnginePage_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebEnginePage_trUtf8".}
+proc fcQWebEnginePage_trS(s: cstring): struct_seaqt_string {.importc: "QWebEnginePage_tr_s".}
+proc fcQWebEnginePage_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebEnginePage_trUtf8_s".}
 proc fcQWebEnginePage_history(self: pointer): pointer {.importc: "QWebEnginePage_history".}
 proc fcQWebEnginePage_setView(self: pointer, view: pointer): void {.importc: "QWebEnginePage_setView".}
 proc fcQWebEnginePage_view(self: pointer): pointer {.importc: "QWebEnginePage_view".}
@@ -228,14 +228,14 @@ proc fcQWebEnginePage_action(self: pointer, action: cint): pointer {.importc: "Q
 proc fcQWebEnginePage_triggerAction(self: pointer, action: cint, checked: bool): void {.importc: "QWebEnginePage_triggerAction".}
 proc fcQWebEnginePage_replaceMisspelledWord(self: pointer, replacement: struct_seaqt_string): void {.importc: "QWebEnginePage_replaceMisspelledWord".}
 proc fcQWebEnginePage_event(self: pointer, param1: pointer): bool {.importc: "QWebEnginePage_event".}
-proc fcQWebEnginePage_findText(self: pointer, subString: struct_seaqt_string): void {.importc: "QWebEnginePage_findText".}
+proc fcQWebEnginePage_findTextSubString(self: pointer, subString: struct_seaqt_string): void {.importc: "QWebEnginePage_findText_subString".}
 proc fcQWebEnginePage_createStandardContextMenu(self: pointer): pointer {.importc: "QWebEnginePage_createStandardContextMenu".}
 proc fcQWebEnginePage_setFeaturePermission(self: pointer, securityOrigin: pointer, feature: cint, policy: cint): void {.importc: "QWebEnginePage_setFeaturePermission".}
-proc fcQWebEnginePage_load(self: pointer, url: pointer): void {.importc: "QWebEnginePage_load".}
-proc fcQWebEnginePage_loadWithRequest(self: pointer, request: pointer): void {.importc: "QWebEnginePage_loadWithRequest".}
-proc fcQWebEnginePage_download(self: pointer, url: pointer): void {.importc: "QWebEnginePage_download".}
-proc fcQWebEnginePage_setHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QWebEnginePage_setHtml".}
-proc fcQWebEnginePage_setContent(self: pointer, data: struct_seaqt_string): void {.importc: "QWebEnginePage_setContent".}
+proc fcQWebEnginePage_loadUrl(self: pointer, url: pointer): void {.importc: "QWebEnginePage_load_url".}
+proc fcQWebEnginePage_loadRequest(self: pointer, request: pointer): void {.importc: "QWebEnginePage_load_request".}
+proc fcQWebEnginePage_downloadUrl(self: pointer, url: pointer): void {.importc: "QWebEnginePage_download_url".}
+proc fcQWebEnginePage_setHtmlHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QWebEnginePage_setHtml_html".}
+proc fcQWebEnginePage_setContentData(self: pointer, data: struct_seaqt_string): void {.importc: "QWebEnginePage_setContent_data".}
 proc fcQWebEnginePage_title(self: pointer): struct_seaqt_string {.importc: "QWebEnginePage_title".}
 proc fcQWebEnginePage_setUrl(self: pointer, url: pointer): void {.importc: "QWebEnginePage_setUrl".}
 proc fcQWebEnginePage_url(self: pointer): pointer {.importc: "QWebEnginePage_url".}
@@ -246,21 +246,21 @@ proc fcQWebEnginePage_zoomFactor(self: pointer): float64 {.importc: "QWebEngineP
 proc fcQWebEnginePage_setZoomFactor(self: pointer, factor: float64): void {.importc: "QWebEnginePage_setZoomFactor".}
 proc fcQWebEnginePage_scrollPosition(self: pointer): pointer {.importc: "QWebEnginePage_scrollPosition".}
 proc fcQWebEnginePage_contentsSize(self: pointer): pointer {.importc: "QWebEnginePage_contentsSize".}
-proc fcQWebEnginePage_runJavaScript(self: pointer, scriptSource: struct_seaqt_string): void {.importc: "QWebEnginePage_runJavaScript".}
-proc fcQWebEnginePage_runJavaScript2(self: pointer, scriptSource: struct_seaqt_string, worldId: cuint): void {.importc: "QWebEnginePage_runJavaScript2".}
+proc fcQWebEnginePage_runJavaScriptScriptSource(self: pointer, scriptSource: struct_seaqt_string): void {.importc: "QWebEnginePage_runJavaScript_scriptSource".}
+proc fcQWebEnginePage_runJavaScriptScriptSourceWorldId(self: pointer, scriptSource: struct_seaqt_string, worldId: cuint): void {.importc: "QWebEnginePage_runJavaScript_scriptSource_worldId".}
 proc fcQWebEnginePage_scripts(self: pointer): pointer {.importc: "QWebEnginePage_scripts".}
 proc fcQWebEnginePage_settings(self: pointer): pointer {.importc: "QWebEnginePage_settings".}
 proc fcQWebEnginePage_webChannel(self: pointer): pointer {.importc: "QWebEnginePage_webChannel".}
-proc fcQWebEnginePage_setWebChannel(self: pointer, webChannel: pointer): void {.importc: "QWebEnginePage_setWebChannel".}
-proc fcQWebEnginePage_setWebChannel2(self: pointer, param1: pointer, worldId: cuint): void {.importc: "QWebEnginePage_setWebChannel2".}
+proc fcQWebEnginePage_setWebChannel_QWebChannel(self: pointer, webChannel: pointer): void {.importc: "QWebEnginePage_setWebChannel_QWebChannel".}
+proc fcQWebEnginePage_setWebChannel_QWebChannelUint(self: pointer, param1: pointer, worldId: cuint): void {.importc: "QWebEnginePage_setWebChannel_QWebChannel_uint".}
 proc fcQWebEnginePage_backgroundColor(self: pointer): pointer {.importc: "QWebEnginePage_backgroundColor".}
 proc fcQWebEnginePage_setBackgroundColor(self: pointer, color: pointer): void {.importc: "QWebEnginePage_setBackgroundColor".}
-proc fcQWebEnginePage_save(self: pointer, filePath: struct_seaqt_string): void {.importc: "QWebEnginePage_save".}
+proc fcQWebEnginePage_saveFilePath(self: pointer, filePath: struct_seaqt_string): void {.importc: "QWebEnginePage_save_filePath".}
 proc fcQWebEnginePage_isAudioMuted(self: pointer): bool {.importc: "QWebEnginePage_isAudioMuted".}
 proc fcQWebEnginePage_setAudioMuted(self: pointer, muted: bool): void {.importc: "QWebEnginePage_setAudioMuted".}
 proc fcQWebEnginePage_recentlyAudible(self: pointer): bool {.importc: "QWebEnginePage_recentlyAudible".}
 proc fcQWebEnginePage_renderProcessPid(self: pointer): clonglong {.importc: "QWebEnginePage_renderProcessPid".}
-proc fcQWebEnginePage_printToPdf(self: pointer, filePath: struct_seaqt_string): void {.importc: "QWebEnginePage_printToPdf".}
+proc fcQWebEnginePage_printToPdfFilePath(self: pointer, filePath: struct_seaqt_string): void {.importc: "QWebEnginePage_printToPdf_filePath".}
 proc fcQWebEnginePage_setInspectedPage(self: pointer, page: pointer): void {.importc: "QWebEnginePage_setInspectedPage".}
 proc fcQWebEnginePage_inspectedPage(self: pointer): pointer {.importc: "QWebEnginePage_inspectedPage".}
 proc fcQWebEnginePage_setDevToolsPage(self: pointer, page: pointer): void {.importc: "QWebEnginePage_setDevToolsPage".}
@@ -332,17 +332,17 @@ proc fcQWebEnginePage_recommendedStateChanged(self: pointer, state: cint): void 
 proc fcQWebEnginePage_connect_recommendedStateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEnginePage_connect_recommendedStateChanged".}
 proc fcQWebEnginePage_findTextFinished(self: pointer, resultVal: pointer): void {.importc: "QWebEnginePage_findTextFinished".}
 proc fcQWebEnginePage_connect_findTextFinished(self: pointer, slot: int, callback: proc (slot: int, resultVal: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEnginePage_connect_findTextFinished".}
-proc fcQWebEnginePage_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEnginePage_tr2".}
-proc fcQWebEnginePage_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEnginePage_tr3".}
-proc fcQWebEnginePage_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEnginePage_trUtf82".}
-proc fcQWebEnginePage_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEnginePage_trUtf83".}
-proc fcQWebEnginePage_findText2(self: pointer, subString: struct_seaqt_string, options: cint): void {.importc: "QWebEnginePage_findText2".}
-proc fcQWebEnginePage_download2(self: pointer, url: pointer, filename: struct_seaqt_string): void {.importc: "QWebEnginePage_download2".}
-proc fcQWebEnginePage_setHtml2(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebEnginePage_setHtml2".}
-proc fcQWebEnginePage_setContent2(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QWebEnginePage_setContent2".}
-proc fcQWebEnginePage_setContent3(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebEnginePage_setContent3".}
-proc fcQWebEnginePage_save2(self: pointer, filePath: struct_seaqt_string, format: cint): void {.importc: "QWebEnginePage_save2".}
-proc fcQWebEnginePage_printToPdf2(self: pointer, filePath: struct_seaqt_string, layout: pointer): void {.importc: "QWebEnginePage_printToPdf2".}
+proc fcQWebEnginePage_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEnginePage_tr_s_c".}
+proc fcQWebEnginePage_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEnginePage_tr_s_c_n".}
+proc fcQWebEnginePage_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEnginePage_trUtf8_s_c".}
+proc fcQWebEnginePage_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEnginePage_trUtf8_s_c_n".}
+proc fcQWebEnginePage_findTextSubStringOptions(self: pointer, subString: struct_seaqt_string, options: cint): void {.importc: "QWebEnginePage_findText_subString_options".}
+proc fcQWebEnginePage_downloadUrlFilename(self: pointer, url: pointer, filename: struct_seaqt_string): void {.importc: "QWebEnginePage_download_url_filename".}
+proc fcQWebEnginePage_setHtmlHtmlBaseUrl(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebEnginePage_setHtml_html_baseUrl".}
+proc fcQWebEnginePage_setContentDataMimeType(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QWebEnginePage_setContent_data_mimeType".}
+proc fcQWebEnginePage_setContentDataMimeTypeBaseUrl(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebEnginePage_setContent_data_mimeType_baseUrl".}
+proc fcQWebEnginePage_saveFilePathFormat(self: pointer, filePath: struct_seaqt_string, format: cint): void {.importc: "QWebEnginePage_save_filePath_format".}
+proc fcQWebEnginePage_printToPdfFilePathLayout(self: pointer, filePath: struct_seaqt_string, layout: pointer): void {.importc: "QWebEnginePage_printToPdf_filePath_layout".}
 proc fcQWebEnginePage_vdata(self: pointer): ptr pointer {.importc: "QWebEnginePage_vdata".}
 proc fvdata_cQWebEnginePage(self: pointer): pointer {.importc: "vdata_QWebEnginePage".}
 
@@ -389,9 +389,9 @@ proc fcQWebEnginePage_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQWebEnginePage_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEnginePage_protectedbase_receivers".}
 proc fcQWebEnginePage_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEnginePage_protectedbase_isSignalConnected".}
 proc fcQWebEnginePage_new(vtbl: pointer, vdata: csize_t): ptr cQWebEnginePage {.importc: "QWebEnginePage_new".}
-proc fcQWebEnginePage_new2(vtbl: pointer, vdata: csize_t, profile: pointer): ptr cQWebEnginePage {.importc: "QWebEnginePage_new2".}
-proc fcQWebEnginePage_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebEnginePage {.importc: "QWebEnginePage_new3".}
-proc fcQWebEnginePage_new4(vtbl: pointer, vdata: csize_t, profile: pointer, parent: pointer): ptr cQWebEnginePage {.importc: "QWebEnginePage_new4".}
+proc fcQWebEnginePage_new2(vtbl: pointer, vdata: csize_t, profile: pointer): ptr cQWebEnginePage {.importc: "QWebEnginePage_new_profile".}
+proc fcQWebEnginePage_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebEnginePage {.importc: "QWebEnginePage_new_parent".}
+proc fcQWebEnginePage_new4(vtbl: pointer, vdata: csize_t, profile: pointer, parent: pointer): ptr cQWebEnginePage {.importc: "QWebEnginePage_new_profile_parent".}
 proc fcQWebEnginePage_staticMetaObject(): pointer {.importc: "QWebEnginePage_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qobjectdefs_types.QMetaObject =
@@ -404,13 +404,13 @@ proc metacall*(self: gen_qwebenginepage_types.QWebEnginePage, param1: cint, para
   fcQWebEnginePage_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring): string =
-  let v_ms = fcQWebEnginePage_tr(s)
+  let v_ms = fcQWebEnginePage_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring): string =
-  let v_ms = fcQWebEnginePage_trUtf8(s)
+  let v_ms = fcQWebEnginePage_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -449,7 +449,7 @@ proc event*(self: gen_qwebenginepage_types.QWebEnginePage, param1: gen_qcoreeven
   fcQWebEnginePage_event(self.h, param1.h)
 
 proc findText*(self: gen_qwebenginepage_types.QWebEnginePage, subString: openArray[char]): void =
-  fcQWebEnginePage_findText(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
+  fcQWebEnginePage_findTextSubString(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
 
 proc createStandardContextMenu*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qmenu_types.QMenu =
   gen_qmenu_types.QMenu(h: fcQWebEnginePage_createStandardContextMenu(self.h), owned: false)
@@ -458,19 +458,19 @@ proc setFeaturePermission*(self: gen_qwebenginepage_types.QWebEnginePage, securi
   fcQWebEnginePage_setFeaturePermission(self.h, securityOrigin.h, cint(feature), cint(policy))
 
 proc load*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl): void =
-  fcQWebEnginePage_load(self.h, url.h)
+  fcQWebEnginePage_loadUrl(self.h, url.h)
 
 proc load*(self: gen_qwebenginepage_types.QWebEnginePage, request: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): void =
-  fcQWebEnginePage_loadWithRequest(self.h, request.h)
+  fcQWebEnginePage_loadRequest(self.h, request.h)
 
 proc download*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl): void =
-  fcQWebEnginePage_download(self.h, url.h)
+  fcQWebEnginePage_downloadUrl(self.h, url.h)
 
 proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: openArray[char]): void =
-  fcQWebEnginePage_setHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
+  fcQWebEnginePage_setHtmlHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte]): void =
-  fcQWebEnginePage_setContent(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQWebEnginePage_setContentData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc title*(self: gen_qwebenginepage_types.QWebEnginePage): string =
   let v_ms = fcQWebEnginePage_title(self.h)
@@ -506,10 +506,10 @@ proc contentsSize*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qsize_typ
   gen_qsize_types.QSizeF(h: fcQWebEnginePage_contentsSize(self.h), owned: true)
 
 proc runJavaScript*(self: gen_qwebenginepage_types.QWebEnginePage, scriptSource: openArray[char]): void =
-  fcQWebEnginePage_runJavaScript(self.h, struct_seaqt_string(data: if len(scriptSource) > 0: addr scriptSource[0] else: nil, len: csize_t(len(scriptSource))))
+  fcQWebEnginePage_runJavaScriptScriptSource(self.h, struct_seaqt_string(data: if len(scriptSource) > 0: addr scriptSource[0] else: nil, len: csize_t(len(scriptSource))))
 
 proc runJavaScript*(self: gen_qwebenginepage_types.QWebEnginePage, scriptSource: openArray[char], worldId: cuint): void =
-  fcQWebEnginePage_runJavaScript2(self.h, struct_seaqt_string(data: if len(scriptSource) > 0: addr scriptSource[0] else: nil, len: csize_t(len(scriptSource))), worldId)
+  fcQWebEnginePage_runJavaScriptScriptSourceWorldId(self.h, struct_seaqt_string(data: if len(scriptSource) > 0: addr scriptSource[0] else: nil, len: csize_t(len(scriptSource))), worldId)
 
 proc scripts*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qwebenginescriptcollection_types.QWebEngineScriptCollection =
   gen_qwebenginescriptcollection_types.QWebEngineScriptCollection(h: fcQWebEnginePage_scripts(self.h), owned: false)
@@ -521,10 +521,10 @@ proc webChannel*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qwebchannel
   gen_qwebchannel_types.QWebChannel(h: fcQWebEnginePage_webChannel(self.h), owned: false)
 
 proc setWebChannel*(self: gen_qwebenginepage_types.QWebEnginePage, webChannel: gen_qwebchannel_types.QWebChannel): void =
-  fcQWebEnginePage_setWebChannel(self.h, webChannel.h)
+  fcQWebEnginePage_setWebChannel_QWebChannel(self.h, webChannel.h)
 
 proc setWebChannel*(self: gen_qwebenginepage_types.QWebEnginePage, param1: gen_qwebchannel_types.QWebChannel, worldId: cuint): void =
-  fcQWebEnginePage_setWebChannel2(self.h, param1.h, worldId)
+  fcQWebEnginePage_setWebChannel_QWebChannelUint(self.h, param1.h, worldId)
 
 proc backgroundColor*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qcolor_types.QColor =
   gen_qcolor_types.QColor(h: fcQWebEnginePage_backgroundColor(self.h), owned: true)
@@ -533,7 +533,7 @@ proc setBackgroundColor*(self: gen_qwebenginepage_types.QWebEnginePage, color: g
   fcQWebEnginePage_setBackgroundColor(self.h, color.h)
 
 proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char]): void =
-  fcQWebEnginePage_save(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
+  fcQWebEnginePage_saveFilePath(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc isAudioMuted*(self: gen_qwebenginepage_types.QWebEnginePage): bool =
   fcQWebEnginePage_isAudioMuted(self.h)
@@ -548,7 +548,7 @@ proc renderProcessPid*(self: gen_qwebenginepage_types.QWebEnginePage): clonglong
   fcQWebEnginePage_renderProcessPid(self.h)
 
 proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char]): void =
-  fcQWebEnginePage_printToPdf(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
+  fcQWebEnginePage_printToPdfFilePath(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc setInspectedPage*(self: gen_qwebenginepage_types.QWebEnginePage, page: gen_qwebenginepage_types.QWebEnginePage): void =
   fcQWebEnginePage_setInspectedPage(self.h, page.h)
@@ -1202,49 +1202,49 @@ proc onFindTextFinished*(self: gen_qwebenginepage_types.QWebEnginePage, slot: QW
   fcQWebEnginePage_connect_findTextFinished(self.h, cast[int](addr tmp[]), fcQWebEnginePage_slot_callback_findTextFinished, fcQWebEnginePage_slot_callback_findTextFinished_release)
 
 proc tr*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEnginePage_tr2(s, c)
+  let v_ms = fcQWebEnginePage_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEnginePage_tr3(s, c, n)
+  let v_ms = fcQWebEnginePage_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEnginePage_trUtf82(s, c)
+  let v_ms = fcQWebEnginePage_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginepage_types.QWebEnginePage, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEnginePage_trUtf83(s, c, n)
+  let v_ms = fcQWebEnginePage_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc findText*(self: gen_qwebenginepage_types.QWebEnginePage, subString: openArray[char], options: cint): void =
-  fcQWebEnginePage_findText2(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
+  fcQWebEnginePage_findTextSubStringOptions(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
 
 proc download*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl, filename: openArray[char]): void =
-  fcQWebEnginePage_download2(self.h, url.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
+  fcQWebEnginePage_downloadUrlFilename(self.h, url.h, struct_seaqt_string(data: if len(filename) > 0: addr filename[0] else: nil, len: csize_t(len(filename))))
 
 proc setHtml*(self: gen_qwebenginepage_types.QWebEnginePage, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebEnginePage_setHtml2(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
+  fcQWebEnginePage_setHtmlHtmlBaseUrl(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
 proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte], mimeType: openArray[char]): void =
-  fcQWebEnginePage_setContent2(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
+  fcQWebEnginePage_setContentDataMimeType(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 proc setContent*(self: gen_qwebenginepage_types.QWebEnginePage, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebEnginePage_setContent3(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
+  fcQWebEnginePage_setContentDataMimeTypeBaseUrl(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc save*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], format: cint): void =
-  fcQWebEnginePage_save2(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), cint(format))
+  fcQWebEnginePage_saveFilePathFormat(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), cint(format))
 
 proc printToPdf*(self: gen_qwebenginepage_types.QWebEnginePage, filePath: openArray[char], layout: gen_qpagelayout_types.QPageLayout): void =
-  fcQWebEnginePage_printToPdf2(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), layout.h)
+  fcQWebEnginePage_printToPdfFilePathLayout(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))), layout.h)
 
 type QWebEnginePagemetaObjectProc* = proc(self: QWebEnginePage): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebEnginePagemetacastProc* = proc(self: QWebEnginePage, param1: cstring): pointer {.raises: [], gcsafe.}

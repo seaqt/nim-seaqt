@@ -688,12 +688,12 @@ public:
 	friend bool QWebInspector_protectedbase_isSignalConnected(const VirtualQWebInspector* self, QMetaMethod* signal);
 };
 
-VirtualQWebInspector* QWebInspector_new(const QWebInspector_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQWebInspector* QWebInspector_new_parent(const QWebInspector_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebInspector>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebInspector(vtbl, parent) : nullptr;
 }
 
-VirtualQWebInspector* QWebInspector_new2(const QWebInspector_VTable* vtbl, size_t vdata) {
+VirtualQWebInspector* QWebInspector_new(const QWebInspector_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebInspector>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebInspector(vtbl) : nullptr;
 }
@@ -714,7 +714,7 @@ int QWebInspector_metacall(QWebInspector* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebInspector_tr(const char* s) {
+struct seaqt_string QWebInspector_tr_s(const char* s) {
 	QString _ret = QWebInspector::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -725,7 +725,7 @@ struct seaqt_string QWebInspector_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebInspector_trUtf8(const char* s) {
+struct seaqt_string QWebInspector_trUtf8_s(const char* s) {
 	QString _ret = QWebInspector::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -752,7 +752,7 @@ bool QWebInspector_event(QWebInspector* self, QEvent* param1) {
 	return self->event(param1);
 }
 
-struct seaqt_string QWebInspector_tr2(const char* s, const char* c) {
+struct seaqt_string QWebInspector_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebInspector::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -763,7 +763,7 @@ struct seaqt_string QWebInspector_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebInspector_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebInspector_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebInspector::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -774,7 +774,7 @@ struct seaqt_string QWebInspector_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebInspector_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebInspector_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebInspector::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -785,7 +785,7 @@ struct seaqt_string QWebInspector_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebInspector_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebInspector_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebInspector::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

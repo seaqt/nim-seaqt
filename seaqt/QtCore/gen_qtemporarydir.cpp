@@ -19,7 +19,7 @@ QTemporaryDir* QTemporaryDir_new() {
 	return new (std::nothrow) QTemporaryDir();
 }
 
-QTemporaryDir* QTemporaryDir_new2(struct seaqt_string templateName) {
+QTemporaryDir* QTemporaryDir_new_templateName(struct seaqt_string templateName) {
 	QString templateName_QString = QString::fromUtf8(templateName.data, templateName.len);
 	return new (std::nothrow) QTemporaryDir(templateName_QString);
 }

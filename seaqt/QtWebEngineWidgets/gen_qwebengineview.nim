@@ -85,14 +85,14 @@ type cQWebEngineView*{.exportc: "QWebEngineView", incompleteStruct.} = object
 proc fcQWebEngineView_metaObject(self: pointer): pointer {.importc: "QWebEngineView_metaObject".}
 proc fcQWebEngineView_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineView_metacast".}
 proc fcQWebEngineView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineView_metacall".}
-proc fcQWebEngineView_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineView_tr".}
-proc fcQWebEngineView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebEngineView_trUtf8".}
+proc fcQWebEngineView_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineView_tr_s".}
+proc fcQWebEngineView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebEngineView_trUtf8_s".}
 proc fcQWebEngineView_page(self: pointer): pointer {.importc: "QWebEngineView_page".}
 proc fcQWebEngineView_setPage(self: pointer, page: pointer): void {.importc: "QWebEngineView_setPage".}
-proc fcQWebEngineView_load(self: pointer, url: pointer): void {.importc: "QWebEngineView_load".}
-proc fcQWebEngineView_loadWithRequest(self: pointer, request: pointer): void {.importc: "QWebEngineView_loadWithRequest".}
-proc fcQWebEngineView_setHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QWebEngineView_setHtml".}
-proc fcQWebEngineView_setContent(self: pointer, data: struct_seaqt_string): void {.importc: "QWebEngineView_setContent".}
+proc fcQWebEngineView_loadUrl(self: pointer, url: pointer): void {.importc: "QWebEngineView_load_url".}
+proc fcQWebEngineView_loadRequest(self: pointer, request: pointer): void {.importc: "QWebEngineView_load_request".}
+proc fcQWebEngineView_setHtmlHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QWebEngineView_setHtml_html".}
+proc fcQWebEngineView_setContentData(self: pointer, data: struct_seaqt_string): void {.importc: "QWebEngineView_setContent_data".}
 proc fcQWebEngineView_history(self: pointer): pointer {.importc: "QWebEngineView_history".}
 proc fcQWebEngineView_title(self: pointer): struct_seaqt_string {.importc: "QWebEngineView_title".}
 proc fcQWebEngineView_setUrl(self: pointer, url: pointer): void {.importc: "QWebEngineView_setUrl".}
@@ -102,10 +102,10 @@ proc fcQWebEngineView_icon(self: pointer): pointer {.importc: "QWebEngineView_ic
 proc fcQWebEngineView_hasSelection(self: pointer): bool {.importc: "QWebEngineView_hasSelection".}
 proc fcQWebEngineView_selectedText(self: pointer): struct_seaqt_string {.importc: "QWebEngineView_selectedText".}
 proc fcQWebEngineView_pageAction(self: pointer, action: cint): pointer {.importc: "QWebEngineView_pageAction".}
-proc fcQWebEngineView_triggerPageAction(self: pointer, action: cint): void {.importc: "QWebEngineView_triggerPageAction".}
+proc fcQWebEngineView_triggerPageActionAction(self: pointer, action: cint): void {.importc: "QWebEngineView_triggerPageAction_action".}
 proc fcQWebEngineView_zoomFactor(self: pointer): float64 {.importc: "QWebEngineView_zoomFactor".}
 proc fcQWebEngineView_setZoomFactor(self: pointer, factor: float64): void {.importc: "QWebEngineView_setZoomFactor".}
-proc fcQWebEngineView_findText(self: pointer, subString: struct_seaqt_string): void {.importc: "QWebEngineView_findText".}
+proc fcQWebEngineView_findTextSubString(self: pointer, subString: struct_seaqt_string): void {.importc: "QWebEngineView_findText_subString".}
 proc fcQWebEngineView_sizeHint(self: pointer): pointer {.importc: "QWebEngineView_sizeHint".}
 proc fcQWebEngineView_settings(self: pointer): pointer {.importc: "QWebEngineView_settings".}
 proc fcQWebEngineView_stop(self: pointer): void {.importc: "QWebEngineView_stop".}
@@ -130,15 +130,15 @@ proc fcQWebEngineView_iconChanged(self: pointer, param1: pointer): void {.import
 proc fcQWebEngineView_connect_iconChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_iconChanged".}
 proc fcQWebEngineView_renderProcessTerminated(self: pointer, terminationStatus: cint, exitCode: cint): void {.importc: "QWebEngineView_renderProcessTerminated".}
 proc fcQWebEngineView_connect_renderProcessTerminated(self: pointer, slot: int, callback: proc (slot: int, terminationStatus: cint, exitCode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_renderProcessTerminated".}
-proc fcQWebEngineView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineView_tr2".}
-proc fcQWebEngineView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineView_tr3".}
-proc fcQWebEngineView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineView_trUtf82".}
-proc fcQWebEngineView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineView_trUtf83".}
-proc fcQWebEngineView_setHtml2(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebEngineView_setHtml2".}
-proc fcQWebEngineView_setContent2(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QWebEngineView_setContent2".}
-proc fcQWebEngineView_setContent3(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebEngineView_setContent3".}
-proc fcQWebEngineView_triggerPageAction2(self: pointer, action: cint, checked: bool): void {.importc: "QWebEngineView_triggerPageAction2".}
-proc fcQWebEngineView_findText2(self: pointer, subString: struct_seaqt_string, options: cint): void {.importc: "QWebEngineView_findText2".}
+proc fcQWebEngineView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineView_tr_s_c".}
+proc fcQWebEngineView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineView_tr_s_c_n".}
+proc fcQWebEngineView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineView_trUtf8_s_c".}
+proc fcQWebEngineView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineView_trUtf8_s_c_n".}
+proc fcQWebEngineView_setHtmlHtmlBaseUrl(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebEngineView_setHtml_html_baseUrl".}
+proc fcQWebEngineView_setContentDataMimeType(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QWebEngineView_setContent_data_mimeType".}
+proc fcQWebEngineView_setContentDataMimeTypeBaseUrl(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebEngineView_setContent_data_mimeType_baseUrl".}
+proc fcQWebEngineView_triggerPageActionActionChecked(self: pointer, action: cint, checked: bool): void {.importc: "QWebEngineView_triggerPageAction_action_checked".}
+proc fcQWebEngineView_findTextSubStringOptions(self: pointer, subString: struct_seaqt_string, options: cint): void {.importc: "QWebEngineView_findText_subString_options".}
 proc fcQWebEngineView_vdata(self: pointer): ptr pointer {.importc: "QWebEngineView_vdata".}
 proc fvdata_cQWebEngineView(self: pointer): pointer {.importc: "vdata_QWebEngineView".}
 
@@ -255,8 +255,8 @@ proc fcQWebEngineView_protectedbase_sender(self: pointer): pointer {.importc: "Q
 proc fcQWebEngineView_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineView_protectedbase_senderSignalIndex".}
 proc fcQWebEngineView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineView_protectedbase_receivers".}
 proc fcQWebEngineView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineView_protectedbase_isSignalConnected".}
-proc fcQWebEngineView_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebEngineView {.importc: "QWebEngineView_new".}
-proc fcQWebEngineView_new2(vtbl: pointer, vdata: csize_t): ptr cQWebEngineView {.importc: "QWebEngineView_new2".}
+proc fcQWebEngineView_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebEngineView {.importc: "QWebEngineView_new_parent".}
+proc fcQWebEngineView_new2(vtbl: pointer, vdata: csize_t): ptr cQWebEngineView {.importc: "QWebEngineView_new".}
 proc fcQWebEngineView_staticMetaObject(): pointer {.importc: "QWebEngineView_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebengineview_types.QWebEngineView): gen_qobjectdefs_types.QMetaObject =
@@ -269,13 +269,13 @@ proc metacall*(self: gen_qwebengineview_types.QWebEngineView, param1: cint, para
   fcQWebEngineView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring): string =
-  let v_ms = fcQWebEngineView_tr(s)
+  let v_ms = fcQWebEngineView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring): string =
-  let v_ms = fcQWebEngineView_trUtf8(s)
+  let v_ms = fcQWebEngineView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -287,16 +287,16 @@ proc setPage*(self: gen_qwebengineview_types.QWebEngineView, page: gen_qwebengin
   fcQWebEngineView_setPage(self.h, page.h)
 
 proc load*(self: gen_qwebengineview_types.QWebEngineView, url: gen_qurl_types.QUrl): void =
-  fcQWebEngineView_load(self.h, url.h)
+  fcQWebEngineView_loadUrl(self.h, url.h)
 
 proc load*(self: gen_qwebengineview_types.QWebEngineView, request: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): void =
-  fcQWebEngineView_loadWithRequest(self.h, request.h)
+  fcQWebEngineView_loadRequest(self.h, request.h)
 
 proc setHtml*(self: gen_qwebengineview_types.QWebEngineView, html: openArray[char]): void =
-  fcQWebEngineView_setHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
+  fcQWebEngineView_setHtmlHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: openArray[byte]): void =
-  fcQWebEngineView_setContent(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQWebEngineView_setContentData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc history*(self: gen_qwebengineview_types.QWebEngineView): gen_qwebenginehistory_types.QWebEngineHistory =
   gen_qwebenginehistory_types.QWebEngineHistory(h: fcQWebEngineView_history(self.h), owned: false)
@@ -332,7 +332,7 @@ proc pageAction*(self: gen_qwebengineview_types.QWebEngineView, action: cint): g
   gen_qaction_types.QAction(h: fcQWebEngineView_pageAction(self.h, cint(action)), owned: false)
 
 proc triggerPageAction*(self: gen_qwebengineview_types.QWebEngineView, action: cint): void =
-  fcQWebEngineView_triggerPageAction(self.h, cint(action))
+  fcQWebEngineView_triggerPageActionAction(self.h, cint(action))
 
 proc zoomFactor*(self: gen_qwebengineview_types.QWebEngineView): float64 =
   fcQWebEngineView_zoomFactor(self.h)
@@ -341,7 +341,7 @@ proc setZoomFactor*(self: gen_qwebengineview_types.QWebEngineView, factor: float
   fcQWebEngineView_setZoomFactor(self.h, factor)
 
 proc findText*(self: gen_qwebengineview_types.QWebEngineView, subString: openArray[char]): void =
-  fcQWebEngineView_findText(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
+  fcQWebEngineView_findTextSubString(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
 
 proc sizeHint*(self: gen_qwebengineview_types.QWebEngineView): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQWebEngineView_sizeHint(self.h), owned: true)
@@ -543,43 +543,43 @@ proc onRenderProcessTerminated*(self: gen_qwebengineview_types.QWebEngineView, s
   fcQWebEngineView_connect_renderProcessTerminated(self.h, cast[int](addr tmp[]), fcQWebEngineView_slot_callback_renderProcessTerminated, fcQWebEngineView_slot_callback_renderProcessTerminated_release)
 
 proc tr*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineView_tr2(s, c)
+  let v_ms = fcQWebEngineView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineView_tr3(s, c, n)
+  let v_ms = fcQWebEngineView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineView_trUtf82(s, c)
+  let v_ms = fcQWebEngineView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineView_trUtf83(s, c, n)
+  let v_ms = fcQWebEngineView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setHtml*(self: gen_qwebengineview_types.QWebEngineView, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebEngineView_setHtml2(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
+  fcQWebEngineView_setHtmlHtmlBaseUrl(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
 proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: openArray[byte], mimeType: openArray[char]): void =
-  fcQWebEngineView_setContent2(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
+  fcQWebEngineView_setContentDataMimeType(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 proc setContent*(self: gen_qwebengineview_types.QWebEngineView, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebEngineView_setContent3(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
+  fcQWebEngineView_setContentDataMimeTypeBaseUrl(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc triggerPageAction*(self: gen_qwebengineview_types.QWebEngineView, action: cint, checked: bool): void =
-  fcQWebEngineView_triggerPageAction2(self.h, cint(action), checked)
+  fcQWebEngineView_triggerPageActionActionChecked(self.h, cint(action), checked)
 
 proc findText*(self: gen_qwebengineview_types.QWebEngineView, subString: openArray[char], options: cint): void =
-  fcQWebEngineView_findText2(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
+  fcQWebEngineView_findTextSubStringOptions(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
 
 type QWebEngineViewmetaObjectProc* = proc(self: QWebEngineView): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebEngineViewmetacastProc* = proc(self: QWebEngineView, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -28,8 +28,8 @@ struct seaqt_string QItemEditorCreatorBase_valuePropertyName(const QItemEditorCr
 	return _ms;
 }
 
-void QItemEditorCreatorBase_operatorAssign(QItemEditorCreatorBase* self, QItemEditorCreatorBase* param1) {
-	self->operator=(*param1);
+void QItemEditorCreatorBase_operatorAssign(QItemEditorCreatorBase* self, QItemEditorCreatorBase* from) {
+	self->operator=(*from);
 }
 
 void QItemEditorCreatorBase_delete(QItemEditorCreatorBase* self) {
@@ -43,7 +43,7 @@ public:
 	friend VirtualQItemEditorFactory* vdata_QItemEditorFactory(void* vdata);
 
 	VirtualQItemEditorFactory(const QItemEditorFactory_VTable* vtbl): QItemEditorFactory(), vtbl(vtbl) {}
-	VirtualQItemEditorFactory(const QItemEditorFactory_VTable* vtbl, const QItemEditorFactory& param1): QItemEditorFactory(param1), vtbl(vtbl) {}
+	VirtualQItemEditorFactory(const QItemEditorFactory_VTable* vtbl, const QItemEditorFactory& from): QItemEditorFactory(from), vtbl(vtbl) {}
 
 	virtual ~VirtualQItemEditorFactory() override { if(vtbl->destructor) vtbl->destructor(this); }
 
@@ -82,9 +82,9 @@ VirtualQItemEditorFactory* QItemEditorFactory_new(const QItemEditorFactory_VTabl
 	return _mem_ ? new (_mem_)VirtualQItemEditorFactory(vtbl) : nullptr;
 }
 
-VirtualQItemEditorFactory* QItemEditorFactory_new2(const QItemEditorFactory_VTable* vtbl, size_t vdata, QItemEditorFactory* param1) {
+VirtualQItemEditorFactory* QItemEditorFactory_new_from(const QItemEditorFactory_VTable* vtbl, size_t vdata, QItemEditorFactory* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQItemEditorFactory>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQItemEditorFactory(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQItemEditorFactory(vtbl, *from) : nullptr;
 }
 
 QWidget* QItemEditorFactory_createEditor(const QItemEditorFactory* self, int userType, QWidget* parent) {
@@ -112,8 +112,8 @@ void QItemEditorFactory_setDefaultFactory(QItemEditorFactory* factory) {
 	QItemEditorFactory::setDefaultFactory(factory);
 }
 
-void QItemEditorFactory_operatorAssign(QItemEditorFactory* self, QItemEditorFactory* param1) {
-	self->operator=(*param1);
+void QItemEditorFactory_operatorAssign(QItemEditorFactory* self, QItemEditorFactory* from) {
+	self->operator=(*from);
 }
 
 void* QItemEditorFactory_vdata(VirtualQItemEditorFactory* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQItemEditorFactory>()); }

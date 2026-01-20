@@ -73,18 +73,18 @@ type cQSGAbstractRenderer*{.exportc: "QSGAbstractRenderer", incompleteStruct.} =
 proc fcQSGAbstractRenderer_metaObject(self: pointer): pointer {.importc: "QSGAbstractRenderer_metaObject".}
 proc fcQSGAbstractRenderer_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGAbstractRenderer_metacast".}
 proc fcQSGAbstractRenderer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGAbstractRenderer_metacall".}
-proc fcQSGAbstractRenderer_tr(s: cstring): struct_seaqt_string {.importc: "QSGAbstractRenderer_tr".}
-proc fcQSGAbstractRenderer_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSGAbstractRenderer_trUtf8".}
+proc fcQSGAbstractRenderer_trS(s: cstring): struct_seaqt_string {.importc: "QSGAbstractRenderer_tr_s".}
+proc fcQSGAbstractRenderer_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSGAbstractRenderer_trUtf8_s".}
 proc fcQSGAbstractRenderer_setRootNode(self: pointer, node: pointer): void {.importc: "QSGAbstractRenderer_setRootNode".}
 proc fcQSGAbstractRenderer_rootNode(self: pointer): pointer {.importc: "QSGAbstractRenderer_rootNode".}
-proc fcQSGAbstractRenderer_setDeviceRect(self: pointer, rect: pointer): void {.importc: "QSGAbstractRenderer_setDeviceRect".}
-proc fcQSGAbstractRenderer_setDeviceRectWithSize(self: pointer, size: pointer): void {.importc: "QSGAbstractRenderer_setDeviceRectWithSize".}
+proc fcQSGAbstractRenderer_setDeviceRectRect(self: pointer, rect: pointer): void {.importc: "QSGAbstractRenderer_setDeviceRect_rect".}
+proc fcQSGAbstractRenderer_setDeviceRectSize(self: pointer, size: pointer): void {.importc: "QSGAbstractRenderer_setDeviceRect_size".}
 proc fcQSGAbstractRenderer_deviceRect(self: pointer): pointer {.importc: "QSGAbstractRenderer_deviceRect".}
-proc fcQSGAbstractRenderer_setViewportRect(self: pointer, rect: pointer): void {.importc: "QSGAbstractRenderer_setViewportRect".}
-proc fcQSGAbstractRenderer_setViewportRectWithSize(self: pointer, size: pointer): void {.importc: "QSGAbstractRenderer_setViewportRectWithSize".}
+proc fcQSGAbstractRenderer_setViewportRectRect(self: pointer, rect: pointer): void {.importc: "QSGAbstractRenderer_setViewportRect_rect".}
+proc fcQSGAbstractRenderer_setViewportRectSize(self: pointer, size: pointer): void {.importc: "QSGAbstractRenderer_setViewportRect_size".}
 proc fcQSGAbstractRenderer_viewportRect(self: pointer): pointer {.importc: "QSGAbstractRenderer_viewportRect".}
-proc fcQSGAbstractRenderer_setProjectionMatrixToRect(self: pointer, rect: pointer): void {.importc: "QSGAbstractRenderer_setProjectionMatrixToRect".}
-proc fcQSGAbstractRenderer_setProjectionMatrixToRect2(self: pointer, rect: pointer, flags: cint): void {.importc: "QSGAbstractRenderer_setProjectionMatrixToRect2".}
+proc fcQSGAbstractRenderer_setProjectionMatrixToRectRect(self: pointer, rect: pointer): void {.importc: "QSGAbstractRenderer_setProjectionMatrixToRect_rect".}
+proc fcQSGAbstractRenderer_setProjectionMatrixToRectRectFlags(self: pointer, rect: pointer, flags: cint): void {.importc: "QSGAbstractRenderer_setProjectionMatrixToRect_rect_flags".}
 proc fcQSGAbstractRenderer_setProjectionMatrix(self: pointer, matrix: pointer): void {.importc: "QSGAbstractRenderer_setProjectionMatrix".}
 proc fcQSGAbstractRenderer_setProjectionMatrixWithNativeNDC(self: pointer, matrix: pointer): void {.importc: "QSGAbstractRenderer_setProjectionMatrixWithNativeNDC".}
 proc fcQSGAbstractRenderer_projectionMatrix(self: pointer): pointer {.importc: "QSGAbstractRenderer_projectionMatrix".}
@@ -96,10 +96,10 @@ proc fcQSGAbstractRenderer_clearMode(self: pointer): cint {.importc: "QSGAbstrac
 proc fcQSGAbstractRenderer_renderScene(self: pointer, fboId: cuint): void {.importc: "QSGAbstractRenderer_renderScene".}
 proc fcQSGAbstractRenderer_sceneGraphChanged(self: pointer): void {.importc: "QSGAbstractRenderer_sceneGraphChanged".}
 proc fcQSGAbstractRenderer_connect_sceneGraphChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSGAbstractRenderer_connect_sceneGraphChanged".}
-proc fcQSGAbstractRenderer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGAbstractRenderer_tr2".}
-proc fcQSGAbstractRenderer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGAbstractRenderer_tr3".}
-proc fcQSGAbstractRenderer_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGAbstractRenderer_trUtf82".}
-proc fcQSGAbstractRenderer_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGAbstractRenderer_trUtf83".}
+proc fcQSGAbstractRenderer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGAbstractRenderer_tr_s_c".}
+proc fcQSGAbstractRenderer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGAbstractRenderer_tr_s_c_n".}
+proc fcQSGAbstractRenderer_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGAbstractRenderer_trUtf8_s_c".}
+proc fcQSGAbstractRenderer_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGAbstractRenderer_trUtf8_s_c_n".}
 proc fcQSGAbstractRenderer_protectedbase_sender(self: pointer): pointer {.importc: "QSGAbstractRenderer_protectedbase_sender".}
 proc fcQSGAbstractRenderer_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSGAbstractRenderer_protectedbase_senderSignalIndex".}
 proc fcQSGAbstractRenderer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGAbstractRenderer_protectedbase_receivers".}
@@ -116,13 +116,13 @@ proc metacall*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, param1: 
   fcQSGAbstractRenderer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstring): string =
-  let v_ms = fcQSGAbstractRenderer_tr(s)
+  let v_ms = fcQSGAbstractRenderer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstring): string =
-  let v_ms = fcQSGAbstractRenderer_trUtf8(s)
+  let v_ms = fcQSGAbstractRenderer_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -134,28 +134,28 @@ proc rootNode*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer): gen_qsg
   gen_qsgnode_types.QSGRootNode(h: fcQSGAbstractRenderer_rootNode(self.h), owned: false)
 
 proc setDeviceRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, rect: gen_qrect_types.QRect): void =
-  fcQSGAbstractRenderer_setDeviceRect(self.h, rect.h)
+  fcQSGAbstractRenderer_setDeviceRectRect(self.h, rect.h)
 
 proc setDeviceRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, size: gen_qsize_types.QSize): void =
-  fcQSGAbstractRenderer_setDeviceRectWithSize(self.h, size.h)
+  fcQSGAbstractRenderer_setDeviceRectSize(self.h, size.h)
 
 proc deviceRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQSGAbstractRenderer_deviceRect(self.h), owned: true)
 
 proc setViewportRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, rect: gen_qrect_types.QRect): void =
-  fcQSGAbstractRenderer_setViewportRect(self.h, rect.h)
+  fcQSGAbstractRenderer_setViewportRectRect(self.h, rect.h)
 
 proc setViewportRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, size: gen_qsize_types.QSize): void =
-  fcQSGAbstractRenderer_setViewportRectWithSize(self.h, size.h)
+  fcQSGAbstractRenderer_setViewportRectSize(self.h, size.h)
 
 proc viewportRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQSGAbstractRenderer_viewportRect(self.h), owned: true)
 
 proc setProjectionMatrixToRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, rect: gen_qrect_types.QRectF): void =
-  fcQSGAbstractRenderer_setProjectionMatrixToRect(self.h, rect.h)
+  fcQSGAbstractRenderer_setProjectionMatrixToRectRect(self.h, rect.h)
 
 proc setProjectionMatrixToRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, rect: gen_qrect_types.QRectF, flags: cint): void =
-  fcQSGAbstractRenderer_setProjectionMatrixToRect2(self.h, rect.h, cint(flags))
+  fcQSGAbstractRenderer_setProjectionMatrixToRectRectFlags(self.h, rect.h, cint(flags))
 
 proc setProjectionMatrix*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, matrix: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQSGAbstractRenderer_setProjectionMatrix(self.h, matrix.h)
@@ -203,25 +203,25 @@ proc onSceneGraphChanged*(self: gen_qsgabstractrenderer_types.QSGAbstractRendere
   fcQSGAbstractRenderer_connect_sceneGraphChanged(self.h, cast[int](addr tmp[]), fcQSGAbstractRenderer_slot_callback_sceneGraphChanged, fcQSGAbstractRenderer_slot_callback_sceneGraphChanged_release)
 
 proc tr*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstring, c: cstring): string =
-  let v_ms = fcQSGAbstractRenderer_tr2(s, c)
+  let v_ms = fcQSGAbstractRenderer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGAbstractRenderer_tr3(s, c, n)
+  let v_ms = fcQSGAbstractRenderer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstring, c: cstring): string =
-  let v_ms = fcQSGAbstractRenderer_trUtf82(s, c)
+  let v_ms = fcQSGAbstractRenderer_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGAbstractRenderer_trUtf83(s, c, n)
+  let v_ms = fcQSGAbstractRenderer_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

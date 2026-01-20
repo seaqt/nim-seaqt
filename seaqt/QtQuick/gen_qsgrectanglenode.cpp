@@ -21,11 +21,11 @@ void QSGRectangleNode_virtbase(QSGRectangleNode* src, QSGGeometryNode** outptr_Q
 	*outptr_QSGGeometryNode = static_cast<QSGGeometryNode*>(src);
 }
 
-void QSGRectangleNode_setRect(QSGRectangleNode* self, QRectF* rect) {
+void QSGRectangleNode_setRect_rect(QSGRectangleNode* self, QRectF* rect) {
 	self->setRect(*rect);
 }
 
-void QSGRectangleNode_setRect2(QSGRectangleNode* self, double x, double y, double w, double h) {
+void QSGRectangleNode_setRect_x_y_w_h(QSGRectangleNode* self, double x, double y, double w, double h) {
 	self->setRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 

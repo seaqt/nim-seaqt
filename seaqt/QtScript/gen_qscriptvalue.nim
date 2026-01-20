@@ -80,7 +80,7 @@ export
 
 type cQScriptValue*{.exportc: "QScriptValue", incompleteStruct.} = object
 
-proc fcQScriptValue_operatorAssign(self: pointer, other: pointer): void {.importc: "QScriptValue_operatorAssign".}
+proc fcQScriptValue_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QScriptValue_operatorAssign".}
 proc fcQScriptValue_engine(self: pointer): pointer {.importc: "QScriptValue_engine".}
 proc fcQScriptValue_isValid(self: pointer): bool {.importc: "QScriptValue_isValid".}
 proc fcQScriptValue_isBool(self: pointer): bool {.importc: "QScriptValue_isBool".}
@@ -120,53 +120,53 @@ proc fcQScriptValue_prototype(self: pointer): pointer {.importc: "QScriptValue_p
 proc fcQScriptValue_setPrototype(self: pointer, prototype: pointer): void {.importc: "QScriptValue_setPrototype".}
 proc fcQScriptValue_scope(self: pointer): pointer {.importc: "QScriptValue_scope".}
 proc fcQScriptValue_setScope(self: pointer, scope: pointer): void {.importc: "QScriptValue_setScope".}
-proc fcQScriptValue_property(self: pointer, name: struct_seaqt_string): pointer {.importc: "QScriptValue_property".}
-proc fcQScriptValue_setProperty(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QScriptValue_setProperty".}
-proc fcQScriptValue_propertyWithArrayIndex(self: pointer, arrayIndex: cuint): pointer {.importc: "QScriptValue_propertyWithArrayIndex".}
-proc fcQScriptValue_setProperty2(self: pointer, arrayIndex: cuint, value: pointer): void {.importc: "QScriptValue_setProperty2".}
-proc fcQScriptValue_propertyWithName(self: pointer, name: pointer): pointer {.importc: "QScriptValue_propertyWithName".}
-proc fcQScriptValue_setProperty3(self: pointer, name: pointer, value: pointer): void {.importc: "QScriptValue_setProperty3".}
-proc fcQScriptValue_propertyFlags(self: pointer, name: struct_seaqt_string): cint {.importc: "QScriptValue_propertyFlags".}
-proc fcQScriptValue_propertyFlagsWithName(self: pointer, name: pointer): cint {.importc: "QScriptValue_propertyFlagsWithName".}
+proc fcQScriptValue_property_QString(self: pointer, name: struct_seaqt_string): pointer {.importc: "QScriptValue_property_QString".}
+proc fcQScriptValue_setProperty_QString_QScriptValue(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QScriptValue_setProperty_QString_QScriptValue".}
+proc fcQScriptValue_propertyQuint32(self: pointer, arrayIndex: cuint): pointer {.importc: "QScriptValue_property_quint32".}
+proc fcQScriptValue_setPropertyQuint32_QScriptValue(self: pointer, arrayIndex: cuint, value: pointer): void {.importc: "QScriptValue_setProperty_quint32_QScriptValue".}
+proc fcQScriptValue_property_QScriptString(self: pointer, name: pointer): pointer {.importc: "QScriptValue_property_QScriptString".}
+proc fcQScriptValue_setProperty_QScriptString_QScriptValue(self: pointer, name: pointer, value: pointer): void {.importc: "QScriptValue_setProperty_QScriptString_QScriptValue".}
+proc fcQScriptValue_propertyFlags_QString(self: pointer, name: struct_seaqt_string): cint {.importc: "QScriptValue_propertyFlags_QString".}
+proc fcQScriptValue_propertyFlags_QScriptString(self: pointer, name: pointer): cint {.importc: "QScriptValue_propertyFlags_QScriptString".}
 proc fcQScriptValue_call(self: pointer): pointer {.importc: "QScriptValue_call".}
-proc fcQScriptValue_call2(self: pointer, thisObject: pointer, arguments: pointer): pointer {.importc: "QScriptValue_call2".}
+proc fcQScriptValue_callThisObjectArguments(self: pointer, thisObject: pointer, arguments: pointer): pointer {.importc: "QScriptValue_call_thisObject_arguments".}
 proc fcQScriptValue_construct(self: pointer): pointer {.importc: "QScriptValue_construct".}
-proc fcQScriptValue_constructWithArguments(self: pointer, arguments: pointer): pointer {.importc: "QScriptValue_constructWithArguments".}
+proc fcQScriptValue_constructArguments(self: pointer, arguments: pointer): pointer {.importc: "QScriptValue_construct_arguments".}
 proc fcQScriptValue_data(self: pointer): pointer {.importc: "QScriptValue_data".}
 proc fcQScriptValue_setData(self: pointer, data: pointer): void {.importc: "QScriptValue_setData".}
 proc fcQScriptValue_scriptClass(self: pointer): pointer {.importc: "QScriptValue_scriptClass".}
 proc fcQScriptValue_setScriptClass(self: pointer, scriptClass: pointer): void {.importc: "QScriptValue_setScriptClass".}
 proc fcQScriptValue_objectId(self: pointer): clonglong {.importc: "QScriptValue_objectId".}
-proc fcQScriptValue_property2(self: pointer, name: struct_seaqt_string, mode: ptr cint): pointer {.importc: "QScriptValue_property2".}
-proc fcQScriptValue_setProperty4(self: pointer, name: struct_seaqt_string, value: pointer, flags: ptr cint): void {.importc: "QScriptValue_setProperty4".}
-proc fcQScriptValue_property3(self: pointer, arrayIndex: cuint, mode: ptr cint): pointer {.importc: "QScriptValue_property3".}
-proc fcQScriptValue_setProperty5(self: pointer, arrayIndex: cuint, value: pointer, flags: ptr cint): void {.importc: "QScriptValue_setProperty5".}
-proc fcQScriptValue_property4(self: pointer, name: pointer, mode: ptr cint): pointer {.importc: "QScriptValue_property4".}
-proc fcQScriptValue_setProperty6(self: pointer, name: pointer, value: pointer, flags: ptr cint): void {.importc: "QScriptValue_setProperty6".}
-proc fcQScriptValue_propertyFlags2(self: pointer, name: struct_seaqt_string, mode: ptr cint): cint {.importc: "QScriptValue_propertyFlags2".}
-proc fcQScriptValue_propertyFlags3(self: pointer, name: pointer, mode: ptr cint): cint {.importc: "QScriptValue_propertyFlags3".}
-proc fcQScriptValue_callWithThisObject(self: pointer, thisObject: pointer): pointer {.importc: "QScriptValue_callWithThisObject".}
-proc fcQScriptValue_call3(self: pointer, thisObject: pointer, args: struct_seaqt_array): pointer {.importc: "QScriptValue_call3".}
-proc fcQScriptValue_constructWithArgs(self: pointer, args: struct_seaqt_array): pointer {.importc: "QScriptValue_constructWithArgs".}
+proc fcQScriptValue_property_QString_QScriptValue_ResolveFlags(self: pointer, name: struct_seaqt_string, mode: ptr cint): pointer {.importc: "QScriptValue_property_QString_QScriptValue_ResolveFlags".}
+proc fcQScriptValue_setProperty_QString_QScriptValue_QScriptValue_PropertyFlags(self: pointer, name: struct_seaqt_string, value: pointer, flags: ptr cint): void {.importc: "QScriptValue_setProperty_QString_QScriptValue_QScriptValue_PropertyFlags".}
+proc fcQScriptValue_propertyQuint32_QScriptValue_ResolveFlags(self: pointer, arrayIndex: cuint, mode: ptr cint): pointer {.importc: "QScriptValue_property_quint32_QScriptValue_ResolveFlags".}
+proc fcQScriptValue_setPropertyQuint32_QScriptValue_QScriptValue_PropertyFlags(self: pointer, arrayIndex: cuint, value: pointer, flags: ptr cint): void {.importc: "QScriptValue_setProperty_quint32_QScriptValue_QScriptValue_PropertyFlags".}
+proc fcQScriptValue_property_QScriptString_QScriptValue_ResolveFlags(self: pointer, name: pointer, mode: ptr cint): pointer {.importc: "QScriptValue_property_QScriptString_QScriptValue_ResolveFlags".}
+proc fcQScriptValue_setProperty_QScriptString_QScriptValue_QScriptValue_PropertyFlags(self: pointer, name: pointer, value: pointer, flags: ptr cint): void {.importc: "QScriptValue_setProperty_QScriptString_QScriptValue_QScriptValue_PropertyFlags".}
+proc fcQScriptValue_propertyFlags_QString_QScriptValue_ResolveFlags(self: pointer, name: struct_seaqt_string, mode: ptr cint): cint {.importc: "QScriptValue_propertyFlags_QString_QScriptValue_ResolveFlags".}
+proc fcQScriptValue_propertyFlags_QScriptString_QScriptValue_ResolveFlags(self: pointer, name: pointer, mode: ptr cint): cint {.importc: "QScriptValue_propertyFlags_QScriptString_QScriptValue_ResolveFlags".}
+proc fcQScriptValue_callThisObject(self: pointer, thisObject: pointer): pointer {.importc: "QScriptValue_call_thisObject".}
+proc fcQScriptValue_callThisObjectArgs(self: pointer, thisObject: pointer, args: struct_seaqt_array): pointer {.importc: "QScriptValue_call_thisObject_args".}
+proc fcQScriptValue_constructArgs(self: pointer, args: struct_seaqt_array): pointer {.importc: "QScriptValue_construct_args".}
 proc fcQScriptValue_new(): ptr cQScriptValue {.importc: "QScriptValue_new".}
-proc fcQScriptValue_new2(other: pointer): ptr cQScriptValue {.importc: "QScriptValue_new2".}
-proc fcQScriptValue_new3(engine: pointer, val: cint): ptr cQScriptValue {.importc: "QScriptValue_new3".}
-proc fcQScriptValue_new4(engine: pointer, val: bool): ptr cQScriptValue {.importc: "QScriptValue_new4".}
-proc fcQScriptValue_new5(engine: pointer, val: cint): ptr cQScriptValue {.importc: "QScriptValue_new5".}
-proc fcQScriptValue_new6(engine: pointer, val: cuint): ptr cQScriptValue {.importc: "QScriptValue_new6".}
-proc fcQScriptValue_new7(engine: pointer, val: float64): ptr cQScriptValue {.importc: "QScriptValue_new7".}
-proc fcQScriptValue_new8(engine: pointer, val: struct_seaqt_string): ptr cQScriptValue {.importc: "QScriptValue_new8".}
-proc fcQScriptValue_new9(engine: pointer, val: cstring): ptr cQScriptValue {.importc: "QScriptValue_new9".}
-proc fcQScriptValue_new10(value: cint): ptr cQScriptValue {.importc: "QScriptValue_new10".}
-proc fcQScriptValue_new11(value: bool): ptr cQScriptValue {.importc: "QScriptValue_new11".}
-proc fcQScriptValue_new12(value: cint): ptr cQScriptValue {.importc: "QScriptValue_new12".}
-proc fcQScriptValue_new13(value: cuint): ptr cQScriptValue {.importc: "QScriptValue_new13".}
-proc fcQScriptValue_new14(value: float64): ptr cQScriptValue {.importc: "QScriptValue_new14".}
-proc fcQScriptValue_new15(value: struct_seaqt_string): ptr cQScriptValue {.importc: "QScriptValue_new15".}
-proc fcQScriptValue_new16(value: cstring): ptr cQScriptValue {.importc: "QScriptValue_new16".}
+proc fcQScriptValue_new2(fromVal: pointer): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptValue".}
+proc fcQScriptValue_new3(engine: pointer, val: cint): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptEngine_QScriptValue_SpecialValue".}
+proc fcQScriptValue_new4(engine: pointer, val: bool): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptEngine_bool".}
+proc fcQScriptValue_new5(engine: pointer, val: cint): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptEngine_int".}
+proc fcQScriptValue_new6(engine: pointer, val: cuint): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptEngine_uint".}
+proc fcQScriptValue_new7(engine: pointer, val: float64): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptEngine_qsreal".}
+proc fcQScriptValue_new8(engine: pointer, val: struct_seaqt_string): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptEngine_QString".}
+proc fcQScriptValue_new9(engine: pointer, val: cstring): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptEngine_char".}
+proc fcQScriptValue_new10(value: cint): ptr cQScriptValue {.importc: "QScriptValue_new_QScriptValue_SpecialValue".}
+proc fcQScriptValue_new11(value: bool): ptr cQScriptValue {.importc: "QScriptValue_new_bool".}
+proc fcQScriptValue_new12(value: cint): ptr cQScriptValue {.importc: "QScriptValue_new_int".}
+proc fcQScriptValue_new13(value: cuint): ptr cQScriptValue {.importc: "QScriptValue_new_uint".}
+proc fcQScriptValue_new14(value: float64): ptr cQScriptValue {.importc: "QScriptValue_new_qsreal".}
+proc fcQScriptValue_new15(value: struct_seaqt_string): ptr cQScriptValue {.importc: "QScriptValue_new_QString".}
+proc fcQScriptValue_new16(value: cstring): ptr cQScriptValue {.importc: "QScriptValue_new_char".}
 
-proc operatorAssign*(self: gen_qscriptvalue_types.QScriptValue, other: gen_qscriptvalue_types.QScriptValue): void =
-  fcQScriptValue_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qscriptvalue_types.QScriptValue, fromVal: gen_qscriptvalue_types.QScriptValue): void =
+  fcQScriptValue_operatorAssign(self.h, fromVal.h)
 
 proc engine*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptengine_types.QScriptEngine =
   gen_qscriptengine_types.QScriptEngine(h: fcQScriptValue_engine(self.h), owned: false)
@@ -289,40 +289,40 @@ proc setScope*(self: gen_qscriptvalue_types.QScriptValue, scope: gen_qscriptvalu
   fcQScriptValue_setScope(self.h, scope.h)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property_QString(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char], value: gen_qscriptvalue_types.QScriptValue): void =
-  fcQScriptValue_setProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
+  fcQScriptValue_setProperty_QString_QScriptValue(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, arrayIndex: cuint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_propertyWithArrayIndex(self.h, arrayIndex), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_propertyQuint32(self.h, arrayIndex), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, arrayIndex: cuint, value: gen_qscriptvalue_types.QScriptValue): void =
-  fcQScriptValue_setProperty2(self.h, arrayIndex, value.h)
+  fcQScriptValue_setPropertyQuint32_QScriptValue(self.h, arrayIndex, value.h)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_propertyWithName(self.h, name.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property_QScriptString(self.h, name.h), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, value: gen_qscriptvalue_types.QScriptValue): void =
-  fcQScriptValue_setProperty3(self.h, name.h, value.h)
+  fcQScriptValue_setProperty_QScriptString_QScriptValue(self.h, name.h, value.h)
 
 proc propertyFlags*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char]): cint =
-  cint(fcQScriptValue_propertyFlags(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  cint(fcQScriptValue_propertyFlags_QString(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
 
 proc propertyFlags*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString): cint =
-  cint(fcQScriptValue_propertyFlagsWithName(self.h, name.h))
+  cint(fcQScriptValue_propertyFlags_QScriptString(self.h, name.h))
 
 proc call*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call(self.h), owned: true)
 
 proc call*(self: gen_qscriptvalue_types.QScriptValue, thisObject: gen_qscriptvalue_types.QScriptValue, arguments: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call2(self.h, thisObject.h, arguments.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_callThisObjectArguments(self.h, thisObject.h, arguments.h), owned: true)
 
 proc construct*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_construct(self.h), owned: true)
 
 proc construct*(self: gen_qscriptvalue_types.QScriptValue, arguments: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_constructWithArguments(self.h, arguments.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_constructArguments(self.h, arguments.h), owned: true)
 
 proc data*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_data(self.h), owned: true)
@@ -340,52 +340,52 @@ proc objectId*(self: gen_qscriptvalue_types.QScriptValue): clonglong =
   fcQScriptValue_objectId(self.h)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char], mode: ptr cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), mode), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property_QString_QScriptValue_ResolveFlags(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), mode), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char], value: gen_qscriptvalue_types.QScriptValue, flags: ptr cint): void =
-  fcQScriptValue_setProperty4(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h, flags)
+  fcQScriptValue_setProperty_QString_QScriptValue_QScriptValue_PropertyFlags(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h, flags)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, arrayIndex: cuint, mode: ptr cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property3(self.h, arrayIndex, mode), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_propertyQuint32_QScriptValue_ResolveFlags(self.h, arrayIndex, mode), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, arrayIndex: cuint, value: gen_qscriptvalue_types.QScriptValue, flags: ptr cint): void =
-  fcQScriptValue_setProperty5(self.h, arrayIndex, value.h, flags)
+  fcQScriptValue_setPropertyQuint32_QScriptValue_QScriptValue_PropertyFlags(self.h, arrayIndex, value.h, flags)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, mode: ptr cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property4(self.h, name.h, mode), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property_QScriptString_QScriptValue_ResolveFlags(self.h, name.h, mode), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, value: gen_qscriptvalue_types.QScriptValue, flags: ptr cint): void =
-  fcQScriptValue_setProperty6(self.h, name.h, value.h, flags)
+  fcQScriptValue_setProperty_QScriptString_QScriptValue_QScriptValue_PropertyFlags(self.h, name.h, value.h, flags)
 
 proc propertyFlags*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char], mode: ptr cint): cint =
-  cint(fcQScriptValue_propertyFlags2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), mode))
+  cint(fcQScriptValue_propertyFlags_QString_QScriptValue_ResolveFlags(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), mode))
 
 proc propertyFlags*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, mode: ptr cint): cint =
-  cint(fcQScriptValue_propertyFlags3(self.h, name.h, mode))
+  cint(fcQScriptValue_propertyFlags_QScriptString_QScriptValue_ResolveFlags(self.h, name.h, mode))
 
 proc call*(self: gen_qscriptvalue_types.QScriptValue, thisObject: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_callWithThisObject(self.h, thisObject.h), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_callThisObject(self.h, thisObject.h), owned: true)
 
 proc call*(self: gen_qscriptvalue_types.QScriptValue, thisObject: gen_qscriptvalue_types.QScriptValue, args: openArray[gen_qscriptvalue_types.QScriptValue]): gen_qscriptvalue_types.QScriptValue =
   var args_CArray = newSeq[pointer](len(args))
   for i in 0..<len(args):
     args_CArray[i] = args[i].h
 
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call3(self.h, thisObject.h, struct_seaqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_callThisObjectArgs(self.h, thisObject.h, struct_seaqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))), owned: true)
 
 proc construct*(self: gen_qscriptvalue_types.QScriptValue, args: openArray[gen_qscriptvalue_types.QScriptValue]): gen_qscriptvalue_types.QScriptValue =
   var args_CArray = newSeq[pointer](len(args))
   for i in 0..<len(args):
     args_CArray[i] = args[i].h
 
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_constructWithArgs(self.h, struct_seaqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))), owned: true)
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_constructArgs(self.h, struct_seaqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))), owned: true)
 
 proc create*(T: type gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
   let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new(), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
-    other: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new2(other.h), owned: true)
+    fromVal: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     engine: gen_qscriptengine_types.QScriptEngine, val: cint): gen_qscriptvalue_types.QScriptValue =

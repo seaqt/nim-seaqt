@@ -750,32 +750,32 @@ public:
 	friend bool QPrintPreviewDialog_protectedbase_isSignalConnected(const VirtualQPrintPreviewDialog* self, QMetaMethod* signal);
 };
 
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_parent(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewDialog(vtbl, parent) : nullptr;
 }
 
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new2(const QPrintPreviewDialog_VTable* vtbl, size_t vdata) {
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new(const QPrintPreviewDialog_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewDialog(vtbl) : nullptr;
 }
 
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new3(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer) {
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_printer(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewDialog(vtbl, printer) : nullptr;
 }
 
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new4(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_parent_flags(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewDialog(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
 
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new5(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent) {
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_printer_parent(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewDialog(vtbl, printer, parent) : nullptr;
 }
 
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new6(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent, int flags) {
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_printer_parent_flags(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewDialog(vtbl, printer, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -796,7 +796,7 @@ int QPrintPreviewDialog_metacall(QPrintPreviewDialog* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPrintPreviewDialog_tr(const char* s) {
+struct seaqt_string QPrintPreviewDialog_tr_s(const char* s) {
 	QString _ret = QPrintPreviewDialog::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -807,7 +807,7 @@ struct seaqt_string QPrintPreviewDialog_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QPrintPreviewDialog_trUtf8(const char* s) {
+struct seaqt_string QPrintPreviewDialog_trUtf8_s(const char* s) {
 	QString _ret = QPrintPreviewDialog::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -846,7 +846,7 @@ void QPrintPreviewDialog_connect_paintRequested(QPrintPreviewDialog* self, intpt
 	QPrintPreviewDialog::connect(self, static_cast<void (QPrintPreviewDialog::*)(QPrinter*)>(&QPrintPreviewDialog::paintRequested), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPrintPreviewDialog_tr2(const char* s, const char* c) {
+struct seaqt_string QPrintPreviewDialog_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPrintPreviewDialog::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -857,7 +857,7 @@ struct seaqt_string QPrintPreviewDialog_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPrintPreviewDialog_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPrintPreviewDialog_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPrintPreviewDialog::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -868,7 +868,7 @@ struct seaqt_string QPrintPreviewDialog_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QPrintPreviewDialog_trUtf82(const char* s, const char* c) {
+struct seaqt_string QPrintPreviewDialog_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QPrintPreviewDialog::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -879,7 +879,7 @@ struct seaqt_string QPrintPreviewDialog_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPrintPreviewDialog_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QPrintPreviewDialog_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPrintPreviewDialog::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

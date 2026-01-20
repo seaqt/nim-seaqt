@@ -65,8 +65,8 @@ type cQMediaStreamsControl*{.exportc: "QMediaStreamsControl", incompleteStruct.}
 proc fcQMediaStreamsControl_metaObject(self: pointer): pointer {.importc: "QMediaStreamsControl_metaObject".}
 proc fcQMediaStreamsControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaStreamsControl_metacast".}
 proc fcQMediaStreamsControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaStreamsControl_metacall".}
-proc fcQMediaStreamsControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaStreamsControl_tr".}
-proc fcQMediaStreamsControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaStreamsControl_trUtf8".}
+proc fcQMediaStreamsControl_trS(s: cstring): struct_seaqt_string {.importc: "QMediaStreamsControl_tr_s".}
+proc fcQMediaStreamsControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaStreamsControl_trUtf8_s".}
 proc fcQMediaStreamsControl_streamCount(self: pointer): cint {.importc: "QMediaStreamsControl_streamCount".}
 proc fcQMediaStreamsControl_streamType(self: pointer, streamNumber: cint): cint {.importc: "QMediaStreamsControl_streamType".}
 proc fcQMediaStreamsControl_metaData(self: pointer, streamNumber: cint, key: struct_seaqt_string): pointer {.importc: "QMediaStreamsControl_metaData".}
@@ -76,10 +76,10 @@ proc fcQMediaStreamsControl_streamsChanged(self: pointer): void {.importc: "QMed
 proc fcQMediaStreamsControl_connect_streamsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaStreamsControl_connect_streamsChanged".}
 proc fcQMediaStreamsControl_activeStreamsChanged(self: pointer): void {.importc: "QMediaStreamsControl_activeStreamsChanged".}
 proc fcQMediaStreamsControl_connect_activeStreamsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaStreamsControl_connect_activeStreamsChanged".}
-proc fcQMediaStreamsControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaStreamsControl_tr2".}
-proc fcQMediaStreamsControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaStreamsControl_tr3".}
-proc fcQMediaStreamsControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaStreamsControl_trUtf82".}
-proc fcQMediaStreamsControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaStreamsControl_trUtf83".}
+proc fcQMediaStreamsControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaStreamsControl_tr_s_c".}
+proc fcQMediaStreamsControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaStreamsControl_tr_s_c_n".}
+proc fcQMediaStreamsControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaStreamsControl_trUtf8_s_c".}
+proc fcQMediaStreamsControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaStreamsControl_trUtf8_s_c_n".}
 proc fcQMediaStreamsControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaStreamsControl_protectedbase_sender".}
 proc fcQMediaStreamsControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaStreamsControl_protectedbase_senderSignalIndex".}
 proc fcQMediaStreamsControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaStreamsControl_protectedbase_receivers".}
@@ -96,13 +96,13 @@ proc metacall*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, param1
   fcQMediaStreamsControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring): string =
-  let v_ms = fcQMediaStreamsControl_tr(s)
+  let v_ms = fcQMediaStreamsControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring): string =
-  let v_ms = fcQMediaStreamsControl_trUtf8(s)
+  let v_ms = fcQMediaStreamsControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -159,25 +159,25 @@ proc onActiveStreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsC
   fcQMediaStreamsControl_connect_activeStreamsChanged(self.h, cast[int](addr tmp[]), fcQMediaStreamsControl_slot_callback_activeStreamsChanged, fcQMediaStreamsControl_slot_callback_activeStreamsChanged_release)
 
 proc tr*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaStreamsControl_tr2(s, c)
+  let v_ms = fcQMediaStreamsControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaStreamsControl_tr3(s, c, n)
+  let v_ms = fcQMediaStreamsControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaStreamsControl_trUtf82(s, c)
+  let v_ms = fcQMediaStreamsControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaStreamsControl_trUtf83(s, c, n)
+  let v_ms = fcQMediaStreamsControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

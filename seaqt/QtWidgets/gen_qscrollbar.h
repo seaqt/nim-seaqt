@@ -145,17 +145,17 @@ typedef struct QScrollBar_VTable{
 void* QScrollBar_vdata(VirtualQScrollBar* self);
 VirtualQScrollBar* vdata_QScrollBar(void* vdata);
 
-VirtualQScrollBar* QScrollBar_new(const QScrollBar_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQScrollBar* QScrollBar_new2(const QScrollBar_VTable* vtbl, size_t vdata);
-VirtualQScrollBar* QScrollBar_new3(const QScrollBar_VTable* vtbl, size_t vdata, int param1);
-VirtualQScrollBar* QScrollBar_new4(const QScrollBar_VTable* vtbl, size_t vdata, int param1, QWidget* parent);
+VirtualQScrollBar* QScrollBar_new_QWidget(const QScrollBar_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQScrollBar* QScrollBar_new(const QScrollBar_VTable* vtbl, size_t vdata);
+VirtualQScrollBar* QScrollBar_new_Qt_Orientation(const QScrollBar_VTable* vtbl, size_t vdata, int param1);
+VirtualQScrollBar* QScrollBar_new_Qt_Orientation_QWidget(const QScrollBar_VTable* vtbl, size_t vdata, int param1, QWidget* parent);
 
 void QScrollBar_virtbase(QScrollBar* src, QAbstractSlider** outptr_QAbstractSlider);
 QMetaObject* QScrollBar_metaObject(const QScrollBar* self);
 void* QScrollBar_metacast(QScrollBar* self, const char* param1);
 int QScrollBar_metacall(QScrollBar* self, int param1, int param2, void** param3);
-struct seaqt_string QScrollBar_tr(const char* s);
-struct seaqt_string QScrollBar_trUtf8(const char* s);
+struct seaqt_string QScrollBar_tr_s(const char* s);
+struct seaqt_string QScrollBar_trUtf8_s(const char* s);
 QSize* QScrollBar_sizeHint(const QScrollBar* self);
 bool QScrollBar_event(QScrollBar* self, QEvent* event);
 void QScrollBar_wheelEvent(QScrollBar* self, QWheelEvent* param1);
@@ -166,10 +166,10 @@ void QScrollBar_mouseMoveEvent(QScrollBar* self, QMouseEvent* param1);
 void QScrollBar_hideEvent(QScrollBar* self, QHideEvent* param1);
 void QScrollBar_sliderChange(QScrollBar* self, int change);
 void QScrollBar_contextMenuEvent(QScrollBar* self, QContextMenuEvent* param1);
-struct seaqt_string QScrollBar_tr2(const char* s, const char* c);
-struct seaqt_string QScrollBar_tr3(const char* s, const char* c, int n);
-struct seaqt_string QScrollBar_trUtf82(const char* s, const char* c);
-struct seaqt_string QScrollBar_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QScrollBar_tr_s_c(const char* s, const char* c);
+struct seaqt_string QScrollBar_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QScrollBar_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QScrollBar_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QScrollBar_virtualbase_metaObject(const VirtualQScrollBar* self);
 void* QScrollBar_virtualbase_metacast(VirtualQScrollBar* self, const char* param1);
@@ -224,7 +224,7 @@ void QScrollBar_virtualbase_connectNotify(VirtualQScrollBar* self, QMetaMethod* 
 void QScrollBar_virtualbase_disconnectNotify(VirtualQScrollBar* self, QMetaMethod* signal);
 
 void QScrollBar_protectedbase_initStyleOption(const VirtualQScrollBar* self, QStyleOptionSlider* option);
-void QScrollBar_protectedbase_setRepeatAction(VirtualQScrollBar* self, int action);
+void QScrollBar_protectedbase_setRepeatAction_action(VirtualQScrollBar* self, int action);
 int QScrollBar_protectedbase_repeatAction(const VirtualQScrollBar* self);
 void QScrollBar_protectedbase_updateMicroFocus(VirtualQScrollBar* self);
 void QScrollBar_protectedbase_create(VirtualQScrollBar* self);

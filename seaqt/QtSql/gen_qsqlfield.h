@@ -23,12 +23,12 @@ typedef struct QVariant QVariant;
 #endif
 
 QSqlField* QSqlField_new();
-QSqlField* QSqlField_new2(struct seaqt_string fieldName, int type, struct seaqt_string tableName);
-QSqlField* QSqlField_new3(QSqlField* other);
-QSqlField* QSqlField_new4(struct seaqt_string fieldName);
-QSqlField* QSqlField_new5(struct seaqt_string fieldName, int type);
+QSqlField* QSqlField_new_fieldName_type_tableName(struct seaqt_string fieldName, int type, struct seaqt_string tableName);
+QSqlField* QSqlField_new_from(QSqlField* from);
+QSqlField* QSqlField_new_fieldName(struct seaqt_string fieldName);
+QSqlField* QSqlField_new_fieldName_type(struct seaqt_string fieldName, int type);
 
-void QSqlField_operatorAssign(QSqlField* self, QSqlField* other);
+void QSqlField_operatorAssign(QSqlField* self, QSqlField* from);
 bool QSqlField_operatorEqual(const QSqlField* self, QSqlField* other);
 bool QSqlField_operatorNotEqual(const QSqlField* self, QSqlField* other);
 void QSqlField_setValue(QSqlField* self, QVariant* value);

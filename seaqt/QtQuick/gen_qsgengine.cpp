@@ -180,7 +180,7 @@ VirtualQSGEngine* QSGEngine_new(const QSGEngine_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQSGEngine(vtbl) : nullptr;
 }
 
-VirtualQSGEngine* QSGEngine_new2(const QSGEngine_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSGEngine* QSGEngine_new_parent(const QSGEngine_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSGEngine(vtbl, parent) : nullptr;
 }
@@ -201,7 +201,7 @@ int QSGEngine_metacall(QSGEngine* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSGEngine_tr(const char* s) {
+struct seaqt_string QSGEngine_tr_s(const char* s) {
 	QString _ret = QSGEngine::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -212,7 +212,7 @@ struct seaqt_string QSGEngine_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSGEngine_trUtf8(const char* s) {
+struct seaqt_string QSGEngine_trUtf8_s(const char* s) {
 	QString _ret = QSGEngine::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -231,11 +231,11 @@ QSGAbstractRenderer* QSGEngine_createRenderer(const QSGEngine* self) {
 	return self->createRenderer();
 }
 
-QSGTexture* QSGEngine_createTextureFromImage(const QSGEngine* self, QImage* image) {
+QSGTexture* QSGEngine_createTextureFromImage_image(const QSGEngine* self, QImage* image) {
 	return self->createTextureFromImage(*image);
 }
 
-QSGTexture* QSGEngine_createTextureFromId(const QSGEngine* self, unsigned int id, QSize* size) {
+QSGTexture* QSGEngine_createTextureFromId_id_size(const QSGEngine* self, unsigned int id, QSize* size) {
 	return self->createTextureFromId(static_cast<uint>(id), *size);
 }
 
@@ -255,7 +255,7 @@ QSGNinePatchNode* QSGEngine_createNinePatchNode(const QSGEngine* self) {
 	return self->createNinePatchNode();
 }
 
-struct seaqt_string QSGEngine_tr2(const char* s, const char* c) {
+struct seaqt_string QSGEngine_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSGEngine::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -266,7 +266,7 @@ struct seaqt_string QSGEngine_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSGEngine_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSGEngine_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSGEngine::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -277,7 +277,7 @@ struct seaqt_string QSGEngine_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QSGEngine_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSGEngine_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSGEngine::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -288,7 +288,7 @@ struct seaqt_string QSGEngine_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSGEngine_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSGEngine_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSGEngine::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -299,11 +299,11 @@ struct seaqt_string QSGEngine_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QSGTexture* QSGEngine_createTextureFromImage2(const QSGEngine* self, QImage* image, int options) {
+QSGTexture* QSGEngine_createTextureFromImage_image_options(const QSGEngine* self, QImage* image, int options) {
 	return self->createTextureFromImage(*image, static_cast<QSGEngine::CreateTextureOptions>(options));
 }
 
-QSGTexture* QSGEngine_createTextureFromId2(const QSGEngine* self, unsigned int id, QSize* size, int options) {
+QSGTexture* QSGEngine_createTextureFromId_id_size_options(const QSGEngine* self, unsigned int id, QSize* size, int options) {
 	return self->createTextureFromId(static_cast<uint>(id), *size, static_cast<QSGEngine::CreateTextureOptions>(options));
 }
 

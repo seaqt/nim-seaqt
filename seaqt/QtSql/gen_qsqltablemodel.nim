@@ -84,18 +84,18 @@ type cQSqlTableModel*{.exportc: "QSqlTableModel", incompleteStruct.} = object
 proc fcQSqlTableModel_metaObject(self: pointer): pointer {.importc: "QSqlTableModel_metaObject".}
 proc fcQSqlTableModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QSqlTableModel_metacast".}
 proc fcQSqlTableModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSqlTableModel_metacall".}
-proc fcQSqlTableModel_tr(s: cstring): struct_seaqt_string {.importc: "QSqlTableModel_tr".}
-proc fcQSqlTableModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSqlTableModel_trUtf8".}
+proc fcQSqlTableModel_trS(s: cstring): struct_seaqt_string {.importc: "QSqlTableModel_tr_s".}
+proc fcQSqlTableModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSqlTableModel_trUtf8_s".}
 proc fcQSqlTableModel_setTable(self: pointer, tableName: struct_seaqt_string): void {.importc: "QSqlTableModel_setTable".}
 proc fcQSqlTableModel_tableName(self: pointer): struct_seaqt_string {.importc: "QSqlTableModel_tableName".}
 proc fcQSqlTableModel_flags(self: pointer, index: pointer): cint {.importc: "QSqlTableModel_flags".}
 proc fcQSqlTableModel_record(self: pointer): pointer {.importc: "QSqlTableModel_record".}
-proc fcQSqlTableModel_recordWithRow(self: pointer, row: cint): pointer {.importc: "QSqlTableModel_recordWithRow".}
+proc fcQSqlTableModel_recordRow(self: pointer, row: cint): pointer {.importc: "QSqlTableModel_record_row".}
 proc fcQSqlTableModel_data(self: pointer, idx: pointer, role: cint): pointer {.importc: "QSqlTableModel_data".}
 proc fcQSqlTableModel_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.importc: "QSqlTableModel_setData".}
 proc fcQSqlTableModel_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.importc: "QSqlTableModel_headerData".}
 proc fcQSqlTableModel_isDirty(self: pointer): bool {.importc: "QSqlTableModel_isDirty".}
-proc fcQSqlTableModel_isDirtyWithIndex(self: pointer, index: pointer): bool {.importc: "QSqlTableModel_isDirtyWithIndex".}
+proc fcQSqlTableModel_isDirtyIndex(self: pointer, index: pointer): bool {.importc: "QSqlTableModel_isDirty_index".}
 proc fcQSqlTableModel_clear(self: pointer): void {.importc: "QSqlTableModel_clear".}
 proc fcQSqlTableModel_setEditStrategy(self: pointer, strategy: cint): void {.importc: "QSqlTableModel_setEditStrategy".}
 proc fcQSqlTableModel_editStrategy(self: pointer): cint {.importc: "QSqlTableModel_editStrategy".}
@@ -127,10 +127,10 @@ proc fcQSqlTableModel_beforeUpdate(self: pointer, row: cint, record: pointer): v
 proc fcQSqlTableModel_connect_beforeUpdate(self: pointer, slot: int, callback: proc (slot: int, row: cint, record: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSqlTableModel_connect_beforeUpdate".}
 proc fcQSqlTableModel_beforeDelete(self: pointer, row: cint): void {.importc: "QSqlTableModel_beforeDelete".}
 proc fcQSqlTableModel_connect_beforeDelete(self: pointer, slot: int, callback: proc (slot: int, row: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSqlTableModel_connect_beforeDelete".}
-proc fcQSqlTableModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlTableModel_tr2".}
-proc fcQSqlTableModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlTableModel_tr3".}
-proc fcQSqlTableModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlTableModel_trUtf82".}
-proc fcQSqlTableModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlTableModel_trUtf83".}
+proc fcQSqlTableModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlTableModel_tr_s_c".}
+proc fcQSqlTableModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlTableModel_tr_s_c_n".}
+proc fcQSqlTableModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlTableModel_trUtf8_s_c".}
+proc fcQSqlTableModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlTableModel_trUtf8_s_c_n".}
 proc fcQSqlTableModel_vdata(self: pointer): ptr pointer {.importc: "QSqlTableModel_vdata".}
 proc fvdata_cQSqlTableModel(self: pointer): pointer {.importc: "vdata_QSqlTableModel".}
 
@@ -265,7 +265,7 @@ proc fcQSqlTableModel_protectedbase_beginResetModel(self: pointer): void {.impor
 proc fcQSqlTableModel_protectedbase_endResetModel(self: pointer): void {.importc: "QSqlTableModel_protectedbase_endResetModel".}
 proc fcQSqlTableModel_protectedbase_setLastError(self: pointer, error: pointer): void {.importc: "QSqlTableModel_protectedbase_setLastError".}
 proc fcQSqlTableModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QSqlTableModel_protectedbase_resetInternalData".}
-proc fcQSqlTableModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QSqlTableModel_protectedbase_createIndex".}
+proc fcQSqlTableModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QSqlTableModel_protectedbase_createIndex_row_column".}
 proc fcQSqlTableModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QSqlTableModel_protectedbase_encodeData".}
 proc fcQSqlTableModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QSqlTableModel_protectedbase_decodeData".}
 proc fcQSqlTableModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QSqlTableModel_protectedbase_beginMoveRows".}
@@ -280,8 +280,8 @@ proc fcQSqlTableModel_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQSqlTableModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSqlTableModel_protectedbase_receivers".}
 proc fcQSqlTableModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSqlTableModel_protectedbase_isSignalConnected".}
 proc fcQSqlTableModel_new(vtbl: pointer, vdata: csize_t): ptr cQSqlTableModel {.importc: "QSqlTableModel_new".}
-proc fcQSqlTableModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlTableModel {.importc: "QSqlTableModel_new2".}
-proc fcQSqlTableModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer, db: pointer): ptr cQSqlTableModel {.importc: "QSqlTableModel_new3".}
+proc fcQSqlTableModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlTableModel {.importc: "QSqlTableModel_new_parent".}
+proc fcQSqlTableModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer, db: pointer): ptr cQSqlTableModel {.importc: "QSqlTableModel_new_parent_db".}
 proc fcQSqlTableModel_staticMetaObject(): pointer {.importc: "QSqlTableModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qsqltablemodel_types.QSqlTableModel): gen_qobjectdefs_types.QMetaObject =
@@ -294,13 +294,13 @@ proc metacall*(self: gen_qsqltablemodel_types.QSqlTableModel, param1: cint, para
   fcQSqlTableModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsqltablemodel_types.QSqlTableModel, s: cstring): string =
-  let v_ms = fcQSqlTableModel_tr(s)
+  let v_ms = fcQSqlTableModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqltablemodel_types.QSqlTableModel, s: cstring): string =
-  let v_ms = fcQSqlTableModel_trUtf8(s)
+  let v_ms = fcQSqlTableModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -321,7 +321,7 @@ proc record*(self: gen_qsqltablemodel_types.QSqlTableModel): gen_qsqlrecord_type
   gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_record(self.h), owned: true)
 
 proc record*(self: gen_qsqltablemodel_types.QSqlTableModel, row: cint): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_recordWithRow(self.h, row), owned: true)
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_recordRow(self.h, row), owned: true)
 
 proc data*(self: gen_qsqltablemodel_types.QSqlTableModel, idx: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQSqlTableModel_data(self.h, idx.h, role), owned: true)
@@ -336,7 +336,7 @@ proc isDirty*(self: gen_qsqltablemodel_types.QSqlTableModel): bool =
   fcQSqlTableModel_isDirty(self.h)
 
 proc isDirty*(self: gen_qsqltablemodel_types.QSqlTableModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fcQSqlTableModel_isDirtyWithIndex(self.h, index.h)
+  fcQSqlTableModel_isDirtyIndex(self.h, index.h)
 
 proc clear*(self: gen_qsqltablemodel_types.QSqlTableModel): void =
   fcQSqlTableModel_clear(self.h)
@@ -495,25 +495,25 @@ proc onBeforeDelete*(self: gen_qsqltablemodel_types.QSqlTableModel, slot: QSqlTa
   fcQSqlTableModel_connect_beforeDelete(self.h, cast[int](addr tmp[]), fcQSqlTableModel_slot_callback_beforeDelete, fcQSqlTableModel_slot_callback_beforeDelete_release)
 
 proc tr*(_: type gen_qsqltablemodel_types.QSqlTableModel, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlTableModel_tr2(s, c)
+  let v_ms = fcQSqlTableModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsqltablemodel_types.QSqlTableModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlTableModel_tr3(s, c, n)
+  let v_ms = fcQSqlTableModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqltablemodel_types.QSqlTableModel, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlTableModel_trUtf82(s, c)
+  let v_ms = fcQSqlTableModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqltablemodel_types.QSqlTableModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlTableModel_trUtf83(s, c, n)
+  let v_ms = fcQSqlTableModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2007,7 +2007,7 @@ proc resetInternalData*(self: gen_qsqltablemodel_types.QSqlTableModel): void =
   fcQSqlTableModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qsqltablemodel_types.QSqlTableModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qsqltablemodel_types.QSqlTableModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

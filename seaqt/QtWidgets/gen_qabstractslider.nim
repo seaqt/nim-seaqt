@@ -89,8 +89,8 @@ type cQAbstractSlider*{.exportc: "QAbstractSlider", incompleteStruct.} = object
 proc fcQAbstractSlider_metaObject(self: pointer): pointer {.importc: "QAbstractSlider_metaObject".}
 proc fcQAbstractSlider_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractSlider_metacast".}
 proc fcQAbstractSlider_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractSlider_metacall".}
-proc fcQAbstractSlider_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractSlider_tr".}
-proc fcQAbstractSlider_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractSlider_trUtf8".}
+proc fcQAbstractSlider_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractSlider_tr_s".}
+proc fcQAbstractSlider_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractSlider_trUtf8_s".}
 proc fcQAbstractSlider_orientation(self: pointer): cint {.importc: "QAbstractSlider_orientation".}
 proc fcQAbstractSlider_setMinimum(self: pointer, minimum: cint): void {.importc: "QAbstractSlider_setMinimum".}
 proc fcQAbstractSlider_minimum(self: pointer): cint {.importc: "QAbstractSlider_minimum".}
@@ -127,10 +127,10 @@ proc fcQAbstractSlider_rangeChanged(self: pointer, min: cint, max: cint): void {
 proc fcQAbstractSlider_connect_rangeChanged(self: pointer, slot: int, callback: proc (slot: int, min: cint, max: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSlider_connect_rangeChanged".}
 proc fcQAbstractSlider_actionTriggered(self: pointer, action: cint): void {.importc: "QAbstractSlider_actionTriggered".}
 proc fcQAbstractSlider_connect_actionTriggered(self: pointer, slot: int, callback: proc (slot: int, action: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSlider_connect_actionTriggered".}
-proc fcQAbstractSlider_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSlider_tr2".}
-proc fcQAbstractSlider_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSlider_tr3".}
-proc fcQAbstractSlider_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSlider_trUtf82".}
-proc fcQAbstractSlider_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSlider_trUtf83".}
+proc fcQAbstractSlider_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSlider_tr_s_c".}
+proc fcQAbstractSlider_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSlider_tr_s_c_n".}
+proc fcQAbstractSlider_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSlider_trUtf8_s_c".}
+proc fcQAbstractSlider_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSlider_trUtf8_s_c_n".}
 proc fcQAbstractSlider_vdata(self: pointer): ptr pointer {.importc: "QAbstractSlider_vdata".}
 proc fvdata_cQAbstractSlider(self: pointer): pointer {.importc: "vdata_QAbstractSlider".}
 
@@ -238,10 +238,10 @@ proc fcQAbstractSlider_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQAbstractSlider_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractSlider_virtualbase_customEvent".}
 proc fcQAbstractSlider_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractSlider_virtualbase_connectNotify".}
 proc fcQAbstractSlider_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractSlider_virtualbase_disconnectNotify".}
-proc fcQAbstractSlider_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction".}
+proc fcQAbstractSlider_protectedbase_setRepeatAction_action(self: pointer, action: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction_action".}
 proc fcQAbstractSlider_protectedbase_repeatAction(self: pointer): cint {.importc: "QAbstractSlider_protectedbase_repeatAction".}
-proc fcQAbstractSlider_protectedbase_setRepeatAction2(self: pointer, action: cint, thresholdTime: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction2".}
-proc fcQAbstractSlider_protectedbase_setRepeatAction3(self: pointer, action: cint, thresholdTime: cint, repeatTime: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction3".}
+proc fcQAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime(self: pointer, action: cint, thresholdTime: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime".}
+proc fcQAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime_repeatTime(self: pointer, action: cint, thresholdTime: cint, repeatTime: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime_repeatTime".}
 proc fcQAbstractSlider_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QAbstractSlider_protectedbase_updateMicroFocus".}
 proc fcQAbstractSlider_protectedbase_create(self: pointer): void {.importc: "QAbstractSlider_protectedbase_create".}
 proc fcQAbstractSlider_protectedbase_destroy(self: pointer): void {.importc: "QAbstractSlider_protectedbase_destroy".}
@@ -251,8 +251,8 @@ proc fcQAbstractSlider_protectedbase_sender(self: pointer): pointer {.importc: "
 proc fcQAbstractSlider_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractSlider_protectedbase_senderSignalIndex".}
 proc fcQAbstractSlider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractSlider_protectedbase_receivers".}
 proc fcQAbstractSlider_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractSlider_protectedbase_isSignalConnected".}
-proc fcQAbstractSlider_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractSlider {.importc: "QAbstractSlider_new".}
-proc fcQAbstractSlider_new2(vtbl: pointer, vdata: csize_t): ptr cQAbstractSlider {.importc: "QAbstractSlider_new2".}
+proc fcQAbstractSlider_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractSlider {.importc: "QAbstractSlider_new_parent".}
+proc fcQAbstractSlider_new2(vtbl: pointer, vdata: csize_t): ptr cQAbstractSlider {.importc: "QAbstractSlider_new".}
 proc fcQAbstractSlider_staticMetaObject(): pointer {.importc: "QAbstractSlider_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractslider_types.QAbstractSlider): gen_qobjectdefs_types.QMetaObject =
@@ -265,13 +265,13 @@ proc metacall*(self: gen_qabstractslider_types.QAbstractSlider, param1: cint, pa
   fcQAbstractSlider_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring): string =
-  let v_ms = fcQAbstractSlider_tr(s)
+  let v_ms = fcQAbstractSlider_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring): string =
-  let v_ms = fcQAbstractSlider_trUtf8(s)
+  let v_ms = fcQAbstractSlider_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -467,25 +467,25 @@ proc onActionTriggered*(self: gen_qabstractslider_types.QAbstractSlider, slot: Q
   fcQAbstractSlider_connect_actionTriggered(self.h, cast[int](addr tmp[]), fcQAbstractSlider_slot_callback_actionTriggered, fcQAbstractSlider_slot_callback_actionTriggered_release)
 
 proc tr*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractSlider_tr2(s, c)
+  let v_ms = fcQAbstractSlider_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractSlider_tr3(s, c, n)
+  let v_ms = fcQAbstractSlider_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractSlider_trUtf82(s, c)
+  let v_ms = fcQAbstractSlider_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractSlider_trUtf83(s, c, n)
+  let v_ms = fcQAbstractSlider_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1497,16 +1497,16 @@ proc fcQAbstractSlider_method_callback_disconnectNotify(self: pointer, signal: p
 
 
 proc setRepeatAction*(self: gen_qabstractslider_types.QAbstractSlider, action: cint): void =
-  fcQAbstractSlider_protectedbase_setRepeatAction(self.h, cint(action))
+  fcQAbstractSlider_protectedbase_setRepeatAction_action(self.h, cint(action))
 
 proc repeatAction*(self: gen_qabstractslider_types.QAbstractSlider): cint =
   cint(fcQAbstractSlider_protectedbase_repeatAction(self.h))
 
 proc setRepeatAction*(self: gen_qabstractslider_types.QAbstractSlider, action: cint, thresholdTime: cint): void =
-  fcQAbstractSlider_protectedbase_setRepeatAction2(self.h, cint(action), thresholdTime)
+  fcQAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime(self.h, cint(action), thresholdTime)
 
 proc setRepeatAction*(self: gen_qabstractslider_types.QAbstractSlider, action: cint, thresholdTime: cint, repeatTime: cint): void =
-  fcQAbstractSlider_protectedbase_setRepeatAction3(self.h, cint(action), thresholdTime, repeatTime)
+  fcQAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime_repeatTime(self.h, cint(action), thresholdTime, repeatTime)
 
 proc updateMicroFocus*(self: gen_qabstractslider_types.QAbstractSlider): void =
   fcQAbstractSlider_protectedbase_updateMicroFocus(self.h)

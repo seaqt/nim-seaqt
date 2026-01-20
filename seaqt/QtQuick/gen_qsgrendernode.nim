@@ -101,7 +101,7 @@ proc fcQSGRenderNodeRenderState_stencilValue(self: pointer): cint {.importc: "QS
 proc fcQSGRenderNodeRenderState_stencilEnabled(self: pointer): bool {.importc: "QSGRenderNode__RenderState_stencilEnabled".}
 proc fcQSGRenderNodeRenderState_clipRegion(self: pointer): pointer {.importc: "QSGRenderNode__RenderState_clipRegion".}
 proc fcQSGRenderNodeRenderState_get(self: pointer, state: cstring): pointer {.importc: "QSGRenderNode__RenderState_get".}
-proc fcQSGRenderNodeRenderState_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSGRenderNode__RenderState_operatorAssign".}
+proc fcQSGRenderNodeRenderState_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSGRenderNode__RenderState_operatorAssign".}
 
 proc changedStates*(self: gen_qsgrendernode_types.QSGRenderNode): cint =
   cint(fcQSGRenderNode_changedStates(self.h))
@@ -328,6 +328,6 @@ proc clipRegion*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState): gen_qr
 proc get*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, state: cstring): pointer =
   fcQSGRenderNodeRenderState_get(self.h, state)
 
-proc operatorAssign*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, param1: gen_qsgrendernode_types.QSGRenderNodeRenderState): void =
-  fcQSGRenderNodeRenderState_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, fromVal: gen_qsgrendernode_types.QSGRenderNodeRenderState): void =
+  fcQSGRenderNodeRenderState_operatorAssign(self.h, fromVal.h)
 

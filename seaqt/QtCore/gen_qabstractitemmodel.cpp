@@ -38,8 +38,8 @@ QModelIndex* QModelIndex_new() {
 	return new (std::nothrow) QModelIndex();
 }
 
-QModelIndex* QModelIndex_new2(QModelIndex* param1) {
-	return new (std::nothrow) QModelIndex(*param1);
+QModelIndex* QModelIndex_new_from(QModelIndex* from) {
+	return new (std::nothrow) QModelIndex(*from);
 }
 
 int QModelIndex_row(const QModelIndex* self) {
@@ -108,11 +108,11 @@ bool QModelIndex_operatorLesser(const QModelIndex* self, QModelIndex* other) {
 	return (*self < *other);
 }
 
-void QModelIndex_operatorAssign(QModelIndex* self, QModelIndex* param1) {
-	self->operator=(*param1);
+void QModelIndex_operatorAssign(QModelIndex* self, QModelIndex* from) {
+	self->operator=(*from);
 }
 
-QVariant* QModelIndex_dataWithRole(const QModelIndex* self, int role) {
+QVariant* QModelIndex_data_role(const QModelIndex* self, int role) {
 	return new QVariant(self->data(static_cast<int>(role)));
 }
 
@@ -124,43 +124,43 @@ QPersistentModelIndex* QPersistentModelIndex_new() {
 	return new (std::nothrow) QPersistentModelIndex();
 }
 
-QPersistentModelIndex* QPersistentModelIndex_new2(QModelIndex* index) {
+QPersistentModelIndex* QPersistentModelIndex_new_index(QModelIndex* index) {
 	return new (std::nothrow) QPersistentModelIndex(*index);
 }
 
-QPersistentModelIndex* QPersistentModelIndex_new3(QPersistentModelIndex* other) {
-	return new (std::nothrow) QPersistentModelIndex(*other);
+QPersistentModelIndex* QPersistentModelIndex_new_from(QPersistentModelIndex* from) {
+	return new (std::nothrow) QPersistentModelIndex(*from);
 }
 
 bool QPersistentModelIndex_operatorLesser(const QPersistentModelIndex* self, QPersistentModelIndex* other) {
 	return (*self < *other);
 }
 
-bool QPersistentModelIndex_operatorEqual(const QPersistentModelIndex* self, QPersistentModelIndex* other) {
+bool QPersistentModelIndex_operatorEqual_QPersistentModelIndex(const QPersistentModelIndex* self, QPersistentModelIndex* other) {
 	return (*self == *other);
 }
 
-bool QPersistentModelIndex_operatorNotEqual(const QPersistentModelIndex* self, QPersistentModelIndex* other) {
+bool QPersistentModelIndex_operatorNotEqual_QPersistentModelIndex(const QPersistentModelIndex* self, QPersistentModelIndex* other) {
 	return (*self != *other);
 }
 
-void QPersistentModelIndex_operatorAssign(QPersistentModelIndex* self, QPersistentModelIndex* other) {
-	self->operator=(*other);
+void QPersistentModelIndex_operatorAssign_from(QPersistentModelIndex* self, QPersistentModelIndex* from) {
+	self->operator=(*from);
 }
 
 void QPersistentModelIndex_swap(QPersistentModelIndex* self, QPersistentModelIndex* other) {
 	self->swap(*other);
 }
 
-bool QPersistentModelIndex_operatorEqualWithOther(const QPersistentModelIndex* self, QModelIndex* other) {
+bool QPersistentModelIndex_operatorEqual_QModelIndex(const QPersistentModelIndex* self, QModelIndex* other) {
 	return (*self == *other);
 }
 
-bool QPersistentModelIndex_operatorNotEqualWithOther(const QPersistentModelIndex* self, QModelIndex* other) {
+bool QPersistentModelIndex_operatorNotEqual_QModelIndex(const QPersistentModelIndex* self, QModelIndex* other) {
 	return (*self != *other);
 }
 
-void QPersistentModelIndex_operatorAssignWithOther(QPersistentModelIndex* self, QModelIndex* other) {
+void QPersistentModelIndex_operatorAssign_other(QPersistentModelIndex* self, QModelIndex* other) {
 	self->operator=(*other);
 }
 
@@ -216,7 +216,7 @@ bool QPersistentModelIndex_isValid(const QPersistentModelIndex* self) {
 	return self->isValid();
 }
 
-QVariant* QPersistentModelIndex_dataWithRole(const QPersistentModelIndex* self, int role) {
+QVariant* QPersistentModelIndex_data_role(const QPersistentModelIndex* self, int role) {
 	return new QVariant(self->data(static_cast<int>(role)));
 }
 
@@ -935,8 +935,8 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QAbstractItemModel_protectedbase_resetInternalData(VirtualQAbstractItemModel* self);
-	friend QModelIndex* QAbstractItemModel_protectedbase_createIndex(const VirtualQAbstractItemModel* self, int row, int column);
-	friend QModelIndex* QAbstractItemModel_protectedbase_createIndex2(const VirtualQAbstractItemModel* self, int row, int column, uintptr_t id);
+	friend QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column(const VirtualQAbstractItemModel* self, int row, int column);
+	friend QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column_id(const VirtualQAbstractItemModel* self, int row, int column, uintptr_t id);
 	friend void QAbstractItemModel_protectedbase_encodeData(const VirtualQAbstractItemModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QAbstractItemModel_protectedbase_decodeData(VirtualQAbstractItemModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QAbstractItemModel_protectedbase_beginInsertRows(VirtualQAbstractItemModel* self, QModelIndex* parent, int first, int last);
@@ -956,7 +956,7 @@ public:
 	friend void QAbstractItemModel_protectedbase_changePersistentIndex(VirtualQAbstractItemModel* self, QModelIndex* from, QModelIndex* to);
 	friend void QAbstractItemModel_protectedbase_changePersistentIndexList(VirtualQAbstractItemModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to);
 	friend struct seaqt_array /* of QModelIndex* */  QAbstractItemModel_protectedbase_persistentIndexList(const VirtualQAbstractItemModel* self);
-	friend QModelIndex* QAbstractItemModel_protectedbase_createIndex3(const VirtualQAbstractItemModel* self, int row, int column, void* data);
+	friend QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column_data(const VirtualQAbstractItemModel* self, int row, int column, void* data);
 	friend QObject* QAbstractItemModel_protectedbase_sender(const VirtualQAbstractItemModel* self);
 	friend int QAbstractItemModel_protectedbase_senderSignalIndex(const VirtualQAbstractItemModel* self);
 	friend int QAbstractItemModel_protectedbase_receivers(const VirtualQAbstractItemModel* self, const char* signal);
@@ -968,7 +968,7 @@ VirtualQAbstractItemModel* QAbstractItemModel_new(const QAbstractItemModel_VTabl
 	return _mem_ ? new (_mem_)VirtualQAbstractItemModel(vtbl) : nullptr;
 }
 
-VirtualQAbstractItemModel* QAbstractItemModel_new2(const QAbstractItemModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAbstractItemModel* QAbstractItemModel_new_parent(const QAbstractItemModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractItemModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractItemModel(vtbl, parent) : nullptr;
 }
@@ -989,7 +989,7 @@ int QAbstractItemModel_metacall(QAbstractItemModel* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractItemModel_tr(const char* s) {
+struct seaqt_string QAbstractItemModel_tr_s(const char* s) {
 	QString _ret = QAbstractItemModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1000,7 +1000,7 @@ struct seaqt_string QAbstractItemModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractItemModel_trUtf8(const char* s) {
+struct seaqt_string QAbstractItemModel_trUtf8_s(const char* s) {
 	QString _ret = QAbstractItemModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1011,7 +1011,7 @@ struct seaqt_string QAbstractItemModel_trUtf8(const char* s) {
 	return _ms;
 }
 
-bool QAbstractItemModel_hasIndex(const QAbstractItemModel* self, int row, int column) {
+bool QAbstractItemModel_hasIndex_row_column(const QAbstractItemModel* self, int row, int column) {
 	return self->hasIndex(static_cast<int>(row), static_cast<int>(column));
 }
 
@@ -1155,19 +1155,19 @@ bool QAbstractItemModel_moveColumns(QAbstractItemModel* self, QModelIndex* sourc
 	return self->moveColumns(*sourceParent, static_cast<int>(sourceColumn), static_cast<int>(count), *destinationParent, static_cast<int>(destinationChild));
 }
 
-bool QAbstractItemModel_insertRow(QAbstractItemModel* self, int row) {
+bool QAbstractItemModel_insertRow_row(QAbstractItemModel* self, int row) {
 	return self->insertRow(static_cast<int>(row));
 }
 
-bool QAbstractItemModel_insertColumn(QAbstractItemModel* self, int column) {
+bool QAbstractItemModel_insertColumn_column(QAbstractItemModel* self, int column) {
 	return self->insertColumn(static_cast<int>(column));
 }
 
-bool QAbstractItemModel_removeRow(QAbstractItemModel* self, int row) {
+bool QAbstractItemModel_removeRow_row(QAbstractItemModel* self, int row) {
 	return self->removeRow(static_cast<int>(row));
 }
 
-bool QAbstractItemModel_removeColumn(QAbstractItemModel* self, int column) {
+bool QAbstractItemModel_removeColumn_column(QAbstractItemModel* self, int column) {
 	return self->removeColumn(static_cast<int>(column));
 }
 
@@ -1240,15 +1240,15 @@ struct seaqt_map /* of int to struct seaqt_string */  QAbstractItemModel_roleNam
 	return _out;
 }
 
-bool QAbstractItemModel_checkIndex(const QAbstractItemModel* self, QModelIndex* index) {
+bool QAbstractItemModel_checkIndex_index(const QAbstractItemModel* self, QModelIndex* index) {
 	return self->checkIndex(*index);
 }
 
-void QAbstractItemModel_dataChanged(QAbstractItemModel* self, QModelIndex* topLeft, QModelIndex* bottomRight) {
+void QAbstractItemModel_dataChanged_topLeft_bottomRight(QAbstractItemModel* self, QModelIndex* topLeft, QModelIndex* bottomRight) {
 	self->dataChanged(*topLeft, *bottomRight);
 }
 
-void QAbstractItemModel_connect_dataChanged(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+void QAbstractItemModel_connect_dataChanged_topLeft_bottomRight(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*, QModelIndex*);
@@ -1322,7 +1322,7 @@ void QAbstractItemModel_revert(QAbstractItemModel* self) {
 	self->revert();
 }
 
-struct seaqt_string QAbstractItemModel_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractItemModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractItemModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1333,7 +1333,7 @@ struct seaqt_string QAbstractItemModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractItemModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractItemModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractItemModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1344,7 +1344,7 @@ struct seaqt_string QAbstractItemModel_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-struct seaqt_string QAbstractItemModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAbstractItemModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractItemModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1355,7 +1355,7 @@ struct seaqt_string QAbstractItemModel_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractItemModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractItemModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractItemModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1366,31 +1366,31 @@ struct seaqt_string QAbstractItemModel_trUtf83(const char* s, const char* c, int
 	return _ms;
 }
 
-bool QAbstractItemModel_hasIndex2(const QAbstractItemModel* self, int row, int column, QModelIndex* parent) {
+bool QAbstractItemModel_hasIndex_row_column_parent(const QAbstractItemModel* self, int row, int column, QModelIndex* parent) {
 	return self->hasIndex(static_cast<int>(row), static_cast<int>(column), *parent);
 }
 
-bool QAbstractItemModel_insertRow2(QAbstractItemModel* self, int row, QModelIndex* parent) {
+bool QAbstractItemModel_insertRow_row_parent(QAbstractItemModel* self, int row, QModelIndex* parent) {
 	return self->insertRow(static_cast<int>(row), *parent);
 }
 
-bool QAbstractItemModel_insertColumn2(QAbstractItemModel* self, int column, QModelIndex* parent) {
+bool QAbstractItemModel_insertColumn_column_parent(QAbstractItemModel* self, int column, QModelIndex* parent) {
 	return self->insertColumn(static_cast<int>(column), *parent);
 }
 
-bool QAbstractItemModel_removeRow2(QAbstractItemModel* self, int row, QModelIndex* parent) {
+bool QAbstractItemModel_removeRow_row_parent(QAbstractItemModel* self, int row, QModelIndex* parent) {
 	return self->removeRow(static_cast<int>(row), *parent);
 }
 
-bool QAbstractItemModel_removeColumn2(QAbstractItemModel* self, int column, QModelIndex* parent) {
+bool QAbstractItemModel_removeColumn_column_parent(QAbstractItemModel* self, int column, QModelIndex* parent) {
 	return self->removeColumn(static_cast<int>(column), *parent);
 }
 
-bool QAbstractItemModel_checkIndex2(const QAbstractItemModel* self, QModelIndex* index, int options) {
+bool QAbstractItemModel_checkIndex_index_options(const QAbstractItemModel* self, QModelIndex* index, int options) {
 	return self->checkIndex(*index, static_cast<QAbstractItemModel::CheckIndexOptions>(options));
 }
 
-void QAbstractItemModel_dataChanged2(QAbstractItemModel* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct seaqt_array /* of int */  roles) {
+void QAbstractItemModel_dataChanged_topLeft_bottomRight_roles(QAbstractItemModel* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct seaqt_array /* of int */  roles) {
 	QVector<int> roles_QList;
 	roles_QList.reserve(roles.len);
 	int* roles_arr = static_cast<int*>(roles.data);
@@ -1400,7 +1400,7 @@ void QAbstractItemModel_dataChanged2(QAbstractItemModel* self, QModelIndex* topL
 	self->dataChanged(*topLeft, *bottomRight, roles_QList);
 }
 
-void QAbstractItemModel_connect_dataChanged2(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ ), void (*release)(intptr_t)) {
+void QAbstractItemModel_connect_dataChanged_topLeft_bottomRight_roles(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ ), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ );
@@ -1427,7 +1427,7 @@ void QAbstractItemModel_connect_dataChanged2(QAbstractItemModel* self, intptr_t 
 	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QModelIndex&, const QModelIndex&, const QVector<int>&)>(&QAbstractItemModel::dataChanged), self, local_caller{slot, callback, release});
 }
 
-void QAbstractItemModel_layoutChangedWithParents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents) {
+void QAbstractItemModel_layoutChanged_parents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents) {
 	QList<QPersistentModelIndex> parents_QList;
 	parents_QList.reserve(parents.len);
 	QPersistentModelIndex** parents_arr = static_cast<QPersistentModelIndex**>(parents.data);
@@ -1437,7 +1437,7 @@ void QAbstractItemModel_layoutChangedWithParents(QAbstractItemModel* self, struc
 	self->layoutChanged(parents_QList);
 }
 
-void QAbstractItemModel_connect_layoutChangedWithParents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) {
+void QAbstractItemModel_connect_layoutChanged_parents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ );
@@ -1458,7 +1458,7 @@ void QAbstractItemModel_connect_layoutChangedWithParents(QAbstractItemModel* sel
 	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutChanged), self, local_caller{slot, callback, release});
 }
 
-void QAbstractItemModel_layoutChanged2(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint) {
+void QAbstractItemModel_layoutChanged_parents_hint(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint) {
 	QList<QPersistentModelIndex> parents_QList;
 	parents_QList.reserve(parents.len);
 	QPersistentModelIndex** parents_arr = static_cast<QPersistentModelIndex**>(parents.data);
@@ -1468,7 +1468,7 @@ void QAbstractItemModel_layoutChanged2(QAbstractItemModel* self, struct seaqt_ar
 	self->layoutChanged(parents_QList, static_cast<QAbstractItemModel::LayoutChangeHint>(hint));
 }
 
-void QAbstractItemModel_connect_layoutChanged2(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) {
+void QAbstractItemModel_connect_layoutChanged_parents_hint(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int);
@@ -1491,7 +1491,7 @@ void QAbstractItemModel_connect_layoutChanged2(QAbstractItemModel* self, intptr_
 	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutChanged), self, local_caller{slot, callback, release});
 }
 
-void QAbstractItemModel_layoutAboutToBeChangedWithParents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents) {
+void QAbstractItemModel_layoutAboutToBeChanged_parents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents) {
 	QList<QPersistentModelIndex> parents_QList;
 	parents_QList.reserve(parents.len);
 	QPersistentModelIndex** parents_arr = static_cast<QPersistentModelIndex**>(parents.data);
@@ -1501,7 +1501,7 @@ void QAbstractItemModel_layoutAboutToBeChangedWithParents(QAbstractItemModel* se
 	self->layoutAboutToBeChanged(parents_QList);
 }
 
-void QAbstractItemModel_connect_layoutAboutToBeChangedWithParents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) {
+void QAbstractItemModel_connect_layoutAboutToBeChanged_parents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ );
@@ -1522,7 +1522,7 @@ void QAbstractItemModel_connect_layoutAboutToBeChangedWithParents(QAbstractItemM
 	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutAboutToBeChanged), self, local_caller{slot, callback, release});
 }
 
-void QAbstractItemModel_layoutAboutToBeChanged2(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint) {
+void QAbstractItemModel_layoutAboutToBeChanged_parents_hint(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint) {
 	QList<QPersistentModelIndex> parents_QList;
 	parents_QList.reserve(parents.len);
 	QPersistentModelIndex** parents_arr = static_cast<QPersistentModelIndex**>(parents.data);
@@ -1532,7 +1532,7 @@ void QAbstractItemModel_layoutAboutToBeChanged2(QAbstractItemModel* self, struct
 	self->layoutAboutToBeChanged(parents_QList, static_cast<QAbstractItemModel::LayoutChangeHint>(hint));
 }
 
-void QAbstractItemModel_connect_layoutAboutToBeChanged2(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) {
+void QAbstractItemModel_connect_layoutAboutToBeChanged_parents_hint(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int);
@@ -1831,11 +1831,11 @@ void QAbstractItemModel_protectedbase_resetInternalData(VirtualQAbstractItemMode
 	self->resetInternalData();
 }
 
-QModelIndex* QAbstractItemModel_protectedbase_createIndex(const VirtualQAbstractItemModel* self, int row, int column) {
+QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column(const VirtualQAbstractItemModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
-QModelIndex* QAbstractItemModel_protectedbase_createIndex2(const VirtualQAbstractItemModel* self, int row, int column, uintptr_t id) {
+QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column_id(const VirtualQAbstractItemModel* self, int row, int column, uintptr_t id) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column), static_cast<quintptr>(id)));
 }
 
@@ -1942,7 +1942,7 @@ struct seaqt_array /* of QModelIndex* */  QAbstractItemModel_protectedbase_persi
 	return _out;
 }
 
-QModelIndex* QAbstractItemModel_protectedbase_createIndex3(const VirtualQAbstractItemModel* self, int row, int column, void* data) {
+QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column_data(const VirtualQAbstractItemModel* self, int row, int column, void* data) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column), data));
 }
 
@@ -2651,7 +2651,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QAbstractTableModel_protectedbase_resetInternalData(VirtualQAbstractTableModel* self);
-	friend QModelIndex* QAbstractTableModel_protectedbase_createIndex(const VirtualQAbstractTableModel* self, int row, int column);
+	friend QModelIndex* QAbstractTableModel_protectedbase_createIndex_row_column(const VirtualQAbstractTableModel* self, int row, int column);
 	friend void QAbstractTableModel_protectedbase_encodeData(const VirtualQAbstractTableModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QAbstractTableModel_protectedbase_decodeData(VirtualQAbstractTableModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QAbstractTableModel_protectedbase_beginInsertRows(VirtualQAbstractTableModel* self, QModelIndex* parent, int first, int last);
@@ -2682,7 +2682,7 @@ VirtualQAbstractTableModel* QAbstractTableModel_new(const QAbstractTableModel_VT
 	return _mem_ ? new (_mem_)VirtualQAbstractTableModel(vtbl) : nullptr;
 }
 
-VirtualQAbstractTableModel* QAbstractTableModel_new2(const QAbstractTableModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAbstractTableModel* QAbstractTableModel_new_parent(const QAbstractTableModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractTableModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractTableModel(vtbl, parent) : nullptr;
 }
@@ -2703,7 +2703,7 @@ int QAbstractTableModel_metacall(QAbstractTableModel* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractTableModel_tr(const char* s) {
+struct seaqt_string QAbstractTableModel_tr_s(const char* s) {
 	QString _ret = QAbstractTableModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2714,7 +2714,7 @@ struct seaqt_string QAbstractTableModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractTableModel_trUtf8(const char* s) {
+struct seaqt_string QAbstractTableModel_trUtf8_s(const char* s) {
 	QString _ret = QAbstractTableModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2742,7 +2742,7 @@ int QAbstractTableModel_flags(const QAbstractTableModel* self, QModelIndex* inde
 	return static_cast<int>(_ret);
 }
 
-struct seaqt_string QAbstractTableModel_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractTableModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractTableModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2753,7 +2753,7 @@ struct seaqt_string QAbstractTableModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractTableModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractTableModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractTableModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2764,7 +2764,7 @@ struct seaqt_string QAbstractTableModel_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QAbstractTableModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAbstractTableModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractTableModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2775,7 +2775,7 @@ struct seaqt_string QAbstractTableModel_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractTableModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractTableModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractTableModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3062,7 +3062,7 @@ void QAbstractTableModel_protectedbase_resetInternalData(VirtualQAbstractTableMo
 	self->resetInternalData();
 }
 
-QModelIndex* QAbstractTableModel_protectedbase_createIndex(const VirtualQAbstractTableModel* self, int row, int column) {
+QModelIndex* QAbstractTableModel_protectedbase_createIndex_row_column(const VirtualQAbstractTableModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
@@ -3862,7 +3862,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QAbstractListModel_protectedbase_resetInternalData(VirtualQAbstractListModel* self);
-	friend QModelIndex* QAbstractListModel_protectedbase_createIndex(const VirtualQAbstractListModel* self, int row, int column);
+	friend QModelIndex* QAbstractListModel_protectedbase_createIndex_row_column(const VirtualQAbstractListModel* self, int row, int column);
 	friend void QAbstractListModel_protectedbase_encodeData(const VirtualQAbstractListModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QAbstractListModel_protectedbase_decodeData(VirtualQAbstractListModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QAbstractListModel_protectedbase_beginInsertRows(VirtualQAbstractListModel* self, QModelIndex* parent, int first, int last);
@@ -3893,7 +3893,7 @@ VirtualQAbstractListModel* QAbstractListModel_new(const QAbstractListModel_VTabl
 	return _mem_ ? new (_mem_)VirtualQAbstractListModel(vtbl) : nullptr;
 }
 
-VirtualQAbstractListModel* QAbstractListModel_new2(const QAbstractListModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAbstractListModel* QAbstractListModel_new_parent(const QAbstractListModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractListModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractListModel(vtbl, parent) : nullptr;
 }
@@ -3914,7 +3914,7 @@ int QAbstractListModel_metacall(QAbstractListModel* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractListModel_tr(const char* s) {
+struct seaqt_string QAbstractListModel_tr_s(const char* s) {
 	QString _ret = QAbstractListModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3925,7 +3925,7 @@ struct seaqt_string QAbstractListModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractListModel_trUtf8(const char* s) {
+struct seaqt_string QAbstractListModel_trUtf8_s(const char* s) {
 	QString _ret = QAbstractListModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3953,7 +3953,7 @@ int QAbstractListModel_flags(const QAbstractListModel* self, QModelIndex* index)
 	return static_cast<int>(_ret);
 }
 
-struct seaqt_string QAbstractListModel_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractListModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractListModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3964,7 +3964,7 @@ struct seaqt_string QAbstractListModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractListModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractListModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractListModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3975,7 +3975,7 @@ struct seaqt_string QAbstractListModel_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-struct seaqt_string QAbstractListModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAbstractListModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractListModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3986,7 +3986,7 @@ struct seaqt_string QAbstractListModel_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractListModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractListModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractListModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -4273,7 +4273,7 @@ void QAbstractListModel_protectedbase_resetInternalData(VirtualQAbstractListMode
 	self->resetInternalData();
 }
 
-QModelIndex* QAbstractListModel_protectedbase_createIndex(const VirtualQAbstractListModel* self, int row, int column) {
+QModelIndex* QAbstractListModel_protectedbase_createIndex_row_column(const VirtualQAbstractListModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

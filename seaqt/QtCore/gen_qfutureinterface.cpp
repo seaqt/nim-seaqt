@@ -22,11 +22,11 @@ QFutureInterfaceBase* QFutureInterfaceBase_new() {
 	return new (std::nothrow) QFutureInterfaceBase();
 }
 
-QFutureInterfaceBase* QFutureInterfaceBase_new2(QFutureInterfaceBase* other) {
-	return new (std::nothrow) QFutureInterfaceBase(*other);
+QFutureInterfaceBase* QFutureInterfaceBase_new_from(QFutureInterfaceBase* from) {
+	return new (std::nothrow) QFutureInterfaceBase(*from);
 }
 
-QFutureInterfaceBase* QFutureInterfaceBase_new3(int initialState) {
+QFutureInterfaceBase* QFutureInterfaceBase_new_initialState(int initialState) {
 	return new (std::nothrow) QFutureInterfaceBase(static_cast<QFutureInterfaceBase::State>(initialState));
 }
 
@@ -178,7 +178,7 @@ QMutex* QFutureInterfaceBase_mutex(const QFutureInterfaceBase* self) {
 	return self->mutex();
 }
 
-QMutex* QFutureInterfaceBase_mutexWithInt(const QFutureInterfaceBase* self, int param1) {
+QMutex* QFutureInterfaceBase_mutex_int(const QFutureInterfaceBase* self, int param1) {
 	QMutex& _ret = self->mutex(static_cast<int>(param1));
 	// Cast returned reference into pointer
 	return &_ret;
@@ -192,8 +192,8 @@ bool QFutureInterfaceBase_operatorNotEqual(const QFutureInterfaceBase* self, QFu
 	return (*self != *other);
 }
 
-void QFutureInterfaceBase_operatorAssign(QFutureInterfaceBase* self, QFutureInterfaceBase* other) {
-	self->operator=(*other);
+void QFutureInterfaceBase_operatorAssign(QFutureInterfaceBase* self, QFutureInterfaceBase* from) {
+	self->operator=(*from);
 }
 
 void QFutureInterfaceBase_delete(QFutureInterfaceBase* self) {

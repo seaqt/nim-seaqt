@@ -68,7 +68,7 @@ export
 type cQTextOption*{.exportc: "QTextOption", incompleteStruct.} = object
 type cQTextOptionTab*{.exportc: "QTextOption__Tab", incompleteStruct.} = object
 
-proc fcQTextOption_operatorAssign(self: pointer, o: pointer): void {.importc: "QTextOption_operatorAssign".}
+proc fcQTextOption_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextOption_operatorAssign".}
 proc fcQTextOption_setAlignment(self: pointer, alignment: cint): void {.importc: "QTextOption_setAlignment".}
 proc fcQTextOption_alignment(self: pointer): cint {.importc: "QTextOption_alignment".}
 proc fcQTextOption_setTextDirection(self: pointer, aDirection: cint): void {.importc: "QTextOption_setTextDirection".}
@@ -88,8 +88,8 @@ proc fcQTextOption_tabs(self: pointer): struct_seaqt_array {.importc: "QTextOpti
 proc fcQTextOption_setUseDesignMetrics(self: pointer, b: bool): void {.importc: "QTextOption_setUseDesignMetrics".}
 proc fcQTextOption_useDesignMetrics(self: pointer): bool {.importc: "QTextOption_useDesignMetrics".}
 proc fcQTextOption_new(): ptr cQTextOption {.importc: "QTextOption_new".}
-proc fcQTextOption_new2(alignment: cint): ptr cQTextOption {.importc: "QTextOption_new2".}
-proc fcQTextOption_new3(o: pointer): ptr cQTextOption {.importc: "QTextOption_new3".}
+proc fcQTextOption_new2(alignment: cint): ptr cQTextOption {.importc: "QTextOption_new_alignment".}
+proc fcQTextOption_new3(fromVal: pointer): ptr cQTextOption {.importc: "QTextOption_new_from".}
 proc fcQTextOptionTab_operatorEqual(self: pointer, other: pointer): bool {.importc: "QTextOption__Tab_operatorEqual".}
 proc fcQTextOptionTab_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QTextOption__Tab_operatorNotEqual".}
 proc fcQTextOptionTab_position(self: pointer): float64 {.importc: "QTextOption__Tab_position".}
@@ -99,12 +99,12 @@ proc fcQTextOptionTab_setType(self: pointer, typeVal: cint): void {.importc: "QT
 proc fcQTextOptionTab_delimiter(self: pointer): pointer {.importc: "QTextOption__Tab_delimiter".}
 proc fcQTextOptionTab_setDelimiter(self: pointer, delimiter: pointer): void {.importc: "QTextOption__Tab_setDelimiter".}
 proc fcQTextOptionTab_new(): ptr cQTextOptionTab {.importc: "QTextOption__Tab_new".}
-proc fcQTextOptionTab_new2(pos: float64, tabType: cint): ptr cQTextOptionTab {.importc: "QTextOption__Tab_new2".}
-proc fcQTextOptionTab_new3(param1: pointer): ptr cQTextOptionTab {.importc: "QTextOption__Tab_new3".}
-proc fcQTextOptionTab_new4(pos: float64, tabType: cint, delim: pointer): ptr cQTextOptionTab {.importc: "QTextOption__Tab_new4".}
+proc fcQTextOptionTab_new2(pos: float64, tabType: cint): ptr cQTextOptionTab {.importc: "QTextOption__Tab_new_pos_tabType".}
+proc fcQTextOptionTab_new3(fromVal: pointer): ptr cQTextOptionTab {.importc: "QTextOption__Tab_new_from".}
+proc fcQTextOptionTab_new4(pos: float64, tabType: cint, delim: pointer): ptr cQTextOptionTab {.importc: "QTextOption__Tab_new_pos_tabType_delim".}
 
-proc operatorAssign*(self: gen_qtextoption_types.QTextOption, o: gen_qtextoption_types.QTextOption): void =
-  fcQTextOption_operatorAssign(self.h, o.h)
+proc operatorAssign*(self: gen_qtextoption_types.QTextOption, fromVal: gen_qtextoption_types.QTextOption): void =
+  fcQTextOption_operatorAssign(self.h, fromVal.h)
 
 proc setAlignment*(self: gen_qtextoption_types.QTextOption, alignment: cint): void =
   fcQTextOption_setAlignment(self.h, cint(alignment))
@@ -188,8 +188,8 @@ proc create*(T: type gen_qtextoption_types.QTextOption,
   let tmp = gen_qtextoption_types.QTextOption(h: fcQTextOption_new2(cint(alignment)), owned: true)
   tmp
 proc create*(T: type gen_qtextoption_types.QTextOption,
-    o: gen_qtextoption_types.QTextOption): gen_qtextoption_types.QTextOption =
-  let tmp = gen_qtextoption_types.QTextOption(h: fcQTextOption_new3(o.h), owned: true)
+    fromVal: gen_qtextoption_types.QTextOption): gen_qtextoption_types.QTextOption =
+  let tmp = gen_qtextoption_types.QTextOption(h: fcQTextOption_new3(fromVal.h), owned: true)
   tmp
 proc operatorEqual*(self: gen_qtextoption_types.QTextOptionTab, other: gen_qtextoption_types.QTextOptionTab): bool =
   fcQTextOptionTab_operatorEqual(self.h, other.h)
@@ -223,8 +223,8 @@ proc create*(T: type gen_qtextoption_types.QTextOptionTab,
   let tmp = gen_qtextoption_types.QTextOptionTab(h: fcQTextOptionTab_new2(pos, cint(tabType)), owned: true)
   tmp
 proc create*(T: type gen_qtextoption_types.QTextOptionTab,
-    param1: gen_qtextoption_types.QTextOptionTab): gen_qtextoption_types.QTextOptionTab =
-  let tmp = gen_qtextoption_types.QTextOptionTab(h: fcQTextOptionTab_new3(param1.h), owned: true)
+    fromVal: gen_qtextoption_types.QTextOptionTab): gen_qtextoption_types.QTextOptionTab =
+  let tmp = gen_qtextoption_types.QTextOptionTab(h: fcQTextOptionTab_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qtextoption_types.QTextOptionTab,
     pos: float64, tabType: cint, delim: gen_qchar_types.QChar): gen_qtextoption_types.QTextOptionTab =

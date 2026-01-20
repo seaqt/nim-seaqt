@@ -636,7 +636,7 @@ VirtualQQuickFramebufferObject* QQuickFramebufferObject_new(const QQuickFramebuf
 	return _mem_ ? new (_mem_)VirtualQQuickFramebufferObject(vtbl) : nullptr;
 }
 
-VirtualQQuickFramebufferObject* QQuickFramebufferObject_new2(const QQuickFramebufferObject_VTable* vtbl, size_t vdata, QQuickItem* parent) {
+VirtualQQuickFramebufferObject* QQuickFramebufferObject_new_parent(const QQuickFramebufferObject_VTable* vtbl, size_t vdata, QQuickItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickFramebufferObject>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickFramebufferObject(vtbl, parent) : nullptr;
 }
@@ -657,7 +657,7 @@ int QQuickFramebufferObject_metacall(QQuickFramebufferObject* self, int param1, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickFramebufferObject_tr(const char* s) {
+struct seaqt_string QQuickFramebufferObject_tr_s(const char* s) {
 	QString _ret = QQuickFramebufferObject::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -668,7 +668,7 @@ struct seaqt_string QQuickFramebufferObject_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QQuickFramebufferObject_trUtf8(const char* s) {
+struct seaqt_string QQuickFramebufferObject_trUtf8_s(const char* s) {
 	QString _ret = QQuickFramebufferObject::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -743,7 +743,7 @@ void QQuickFramebufferObject_connect_mirrorVerticallyChanged(QQuickFramebufferOb
 	QQuickFramebufferObject::connect(self, static_cast<void (QQuickFramebufferObject::*)(bool)>(&QQuickFramebufferObject::mirrorVerticallyChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQuickFramebufferObject_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickFramebufferObject_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickFramebufferObject::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -754,7 +754,7 @@ struct seaqt_string QQuickFramebufferObject_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickFramebufferObject_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickFramebufferObject_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickFramebufferObject::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -765,7 +765,7 @@ struct seaqt_string QQuickFramebufferObject_tr3(const char* s, const char* c, in
 	return _ms;
 }
 
-struct seaqt_string QQuickFramebufferObject_trUtf82(const char* s, const char* c) {
+struct seaqt_string QQuickFramebufferObject_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QQuickFramebufferObject::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -776,7 +776,7 @@ struct seaqt_string QQuickFramebufferObject_trUtf82(const char* s, const char* c
 	return _ms;
 }
 
-struct seaqt_string QQuickFramebufferObject_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QQuickFramebufferObject_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickFramebufferObject::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1056,7 +1056,7 @@ void QQuickFramebufferObject_delete(QQuickFramebufferObject* self) {
 	delete self;
 }
 
-void QQuickFramebufferObject__Renderer_operatorAssign(QQuickFramebufferObject__Renderer* self, QQuickFramebufferObject__Renderer* param1) {
-	self->operator=(*param1);
+void QQuickFramebufferObject__Renderer_operatorAssign(QQuickFramebufferObject__Renderer* self, QQuickFramebufferObject__Renderer* from) {
+	self->operator=(*from);
 }
 

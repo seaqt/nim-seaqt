@@ -59,16 +59,16 @@ type cQSocketDescriptor*{.exportc: "QSocketDescriptor", incompleteStruct.} = obj
 proc fcQSocketNotifier_metaObject(self: pointer): pointer {.importc: "QSocketNotifier_metaObject".}
 proc fcQSocketNotifier_metacast(self: pointer, param1: cstring): pointer {.importc: "QSocketNotifier_metacast".}
 proc fcQSocketNotifier_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSocketNotifier_metacall".}
-proc fcQSocketNotifier_tr(s: cstring): struct_seaqt_string {.importc: "QSocketNotifier_tr".}
-proc fcQSocketNotifier_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSocketNotifier_trUtf8".}
+proc fcQSocketNotifier_trS(s: cstring): struct_seaqt_string {.importc: "QSocketNotifier_tr_s".}
+proc fcQSocketNotifier_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSocketNotifier_trUtf8_s".}
 proc fcQSocketNotifier_socket(self: pointer): uint {.importc: "QSocketNotifier_socket".}
 proc fcQSocketNotifier_typeX(self: pointer): cint {.importc: "QSocketNotifier_type".}
 proc fcQSocketNotifier_isEnabled(self: pointer): bool {.importc: "QSocketNotifier_isEnabled".}
 proc fcQSocketNotifier_setEnabled(self: pointer, enabled: bool): void {.importc: "QSocketNotifier_setEnabled".}
-proc fcQSocketNotifier_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSocketNotifier_tr2".}
-proc fcQSocketNotifier_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSocketNotifier_tr3".}
-proc fcQSocketNotifier_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSocketNotifier_trUtf82".}
-proc fcQSocketNotifier_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSocketNotifier_trUtf83".}
+proc fcQSocketNotifier_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSocketNotifier_tr_s_c".}
+proc fcQSocketNotifier_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSocketNotifier_tr_s_c_n".}
+proc fcQSocketNotifier_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSocketNotifier_trUtf8_s_c".}
+proc fcQSocketNotifier_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSocketNotifier_trUtf8_s_c_n".}
 proc fcQSocketNotifier_vdata(self: pointer): ptr pointer {.importc: "QSocketNotifier_vdata".}
 proc fvdata_cQSocketNotifier(self: pointer): pointer {.importc: "vdata_QSocketNotifier".}
 
@@ -98,14 +98,14 @@ proc fcQSocketNotifier_protectedbase_sender(self: pointer): pointer {.importc: "
 proc fcQSocketNotifier_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSocketNotifier_protectedbase_senderSignalIndex".}
 proc fcQSocketNotifier_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSocketNotifier_protectedbase_receivers".}
 proc fcQSocketNotifier_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSocketNotifier_protectedbase_isSignalConnected".}
-proc fcQSocketNotifier_new(vtbl: pointer, vdata: csize_t, socket: uint, param2: cint): ptr cQSocketNotifier {.importc: "QSocketNotifier_new".}
-proc fcQSocketNotifier_new2(vtbl: pointer, vdata: csize_t, socket: uint, param2: cint, parent: pointer): ptr cQSocketNotifier {.importc: "QSocketNotifier_new2".}
+proc fcQSocketNotifier_new(vtbl: pointer, vdata: csize_t, socket: uint, param2: cint): ptr cQSocketNotifier {.importc: "QSocketNotifier_new_qintptr_QSocketNotifier_Type".}
+proc fcQSocketNotifier_new2(vtbl: pointer, vdata: csize_t, socket: uint, param2: cint, parent: pointer): ptr cQSocketNotifier {.importc: "QSocketNotifier_new_qintptr_QSocketNotifier_Type_QObject".}
 proc fcQSocketNotifier_staticMetaObject(): pointer {.importc: "QSocketNotifier_staticMetaObject".}
 proc fcQSocketDescriptor_ToInt(self: pointer): cint {.importc: "QSocketDescriptor_ToInt".}
 proc fcQSocketDescriptor_isValid(self: pointer): bool {.importc: "QSocketDescriptor_isValid".}
 proc fcQSocketDescriptor_new(): ptr cQSocketDescriptor {.importc: "QSocketDescriptor_new".}
-proc fcQSocketDescriptor_new2(param1: pointer): ptr cQSocketDescriptor {.importc: "QSocketDescriptor_new2".}
-proc fcQSocketDescriptor_new3(descriptor: cint): ptr cQSocketDescriptor {.importc: "QSocketDescriptor_new3".}
+proc fcQSocketDescriptor_new2(fromVal: pointer): ptr cQSocketDescriptor {.importc: "QSocketDescriptor_new_from".}
+proc fcQSocketDescriptor_new3(descriptor: cint): ptr cQSocketDescriptor {.importc: "QSocketDescriptor_new_descriptor".}
 
 proc metaObject*(self: gen_qsocketnotifier_types.QSocketNotifier): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSocketNotifier_metaObject(self.h), owned: false)
@@ -117,13 +117,13 @@ proc metacall*(self: gen_qsocketnotifier_types.QSocketNotifier, param1: cint, pa
   fcQSocketNotifier_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsocketnotifier_types.QSocketNotifier, s: cstring): string =
-  let v_ms = fcQSocketNotifier_tr(s)
+  let v_ms = fcQSocketNotifier_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsocketnotifier_types.QSocketNotifier, s: cstring): string =
-  let v_ms = fcQSocketNotifier_trUtf8(s)
+  let v_ms = fcQSocketNotifier_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -141,25 +141,25 @@ proc setEnabled*(self: gen_qsocketnotifier_types.QSocketNotifier, enabled: bool)
   fcQSocketNotifier_setEnabled(self.h, enabled)
 
 proc tr*(_: type gen_qsocketnotifier_types.QSocketNotifier, s: cstring, c: cstring): string =
-  let v_ms = fcQSocketNotifier_tr2(s, c)
+  let v_ms = fcQSocketNotifier_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsocketnotifier_types.QSocketNotifier, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSocketNotifier_tr3(s, c, n)
+  let v_ms = fcQSocketNotifier_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsocketnotifier_types.QSocketNotifier, s: cstring, c: cstring): string =
-  let v_ms = fcQSocketNotifier_trUtf82(s, c)
+  let v_ms = fcQSocketNotifier_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsocketnotifier_types.QSocketNotifier, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSocketNotifier_trUtf83(s, c, n)
+  let v_ms = fcQSocketNotifier_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -493,8 +493,8 @@ proc create*(T: type gen_qsocketnotifier_types.QSocketDescriptor): gen_qsocketno
   let tmp = gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new(), owned: true)
   tmp
 proc create*(T: type gen_qsocketnotifier_types.QSocketDescriptor,
-    param1: gen_qsocketnotifier_types.QSocketDescriptor): gen_qsocketnotifier_types.QSocketDescriptor =
-  let tmp = gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new2(param1.h), owned: true)
+    fromVal: gen_qsocketnotifier_types.QSocketDescriptor): gen_qsocketnotifier_types.QSocketDescriptor =
+  let tmp = gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qsocketnotifier_types.QSocketDescriptor,
     descriptor: cint): gen_qsocketnotifier_types.QSocketDescriptor =

@@ -29,9 +29,9 @@ typedef struct QVideoEncoderSettings QVideoEncoderSettings;
 #endif
 
 QAudioEncoderSettings* QAudioEncoderSettings_new();
-QAudioEncoderSettings* QAudioEncoderSettings_new2(QAudioEncoderSettings* other);
+QAudioEncoderSettings* QAudioEncoderSettings_new_from(QAudioEncoderSettings* from);
 
-void QAudioEncoderSettings_operatorAssign(QAudioEncoderSettings* self, QAudioEncoderSettings* other);
+void QAudioEncoderSettings_operatorAssign(QAudioEncoderSettings* self, QAudioEncoderSettings* from);
 bool QAudioEncoderSettings_operatorEqual(const QAudioEncoderSettings* self, QAudioEncoderSettings* other);
 bool QAudioEncoderSettings_operatorNotEqual(const QAudioEncoderSettings* self, QAudioEncoderSettings* other);
 bool QAudioEncoderSettings_isNull(const QAudioEncoderSettings* self);
@@ -55,9 +55,9 @@ void QAudioEncoderSettings_setEncodingOptions(QAudioEncoderSettings* self, struc
 void QAudioEncoderSettings_delete(QAudioEncoderSettings* self);
 
 QVideoEncoderSettings* QVideoEncoderSettings_new();
-QVideoEncoderSettings* QVideoEncoderSettings_new2(QVideoEncoderSettings* other);
+QVideoEncoderSettings* QVideoEncoderSettings_new_from(QVideoEncoderSettings* from);
 
-void QVideoEncoderSettings_operatorAssign(QVideoEncoderSettings* self, QVideoEncoderSettings* other);
+void QVideoEncoderSettings_operatorAssign(QVideoEncoderSettings* self, QVideoEncoderSettings* from);
 bool QVideoEncoderSettings_operatorEqual(const QVideoEncoderSettings* self, QVideoEncoderSettings* other);
 bool QVideoEncoderSettings_operatorNotEqual(const QVideoEncoderSettings* self, QVideoEncoderSettings* other);
 bool QVideoEncoderSettings_isNull(const QVideoEncoderSettings* self);
@@ -66,8 +66,8 @@ void QVideoEncoderSettings_setEncodingMode(QVideoEncoderSettings* self, int enco
 struct seaqt_string QVideoEncoderSettings_codec(const QVideoEncoderSettings* self);
 void QVideoEncoderSettings_setCodec(QVideoEncoderSettings* self, struct seaqt_string codec);
 QSize* QVideoEncoderSettings_resolution(const QVideoEncoderSettings* self);
-void QVideoEncoderSettings_setResolution(QVideoEncoderSettings* self, QSize* resolution);
-void QVideoEncoderSettings_setResolution2(QVideoEncoderSettings* self, int width, int height);
+void QVideoEncoderSettings_setResolution_resolution(QVideoEncoderSettings* self, QSize* resolution);
+void QVideoEncoderSettings_setResolution_width_height(QVideoEncoderSettings* self, int width, int height);
 double QVideoEncoderSettings_frameRate(const QVideoEncoderSettings* self);
 void QVideoEncoderSettings_setFrameRate(QVideoEncoderSettings* self, double rate);
 int QVideoEncoderSettings_bitRate(const QVideoEncoderSettings* self);
@@ -82,17 +82,17 @@ void QVideoEncoderSettings_setEncodingOptions(QVideoEncoderSettings* self, struc
 void QVideoEncoderSettings_delete(QVideoEncoderSettings* self);
 
 QImageEncoderSettings* QImageEncoderSettings_new();
-QImageEncoderSettings* QImageEncoderSettings_new2(QImageEncoderSettings* other);
+QImageEncoderSettings* QImageEncoderSettings_new_from(QImageEncoderSettings* from);
 
-void QImageEncoderSettings_operatorAssign(QImageEncoderSettings* self, QImageEncoderSettings* other);
+void QImageEncoderSettings_operatorAssign(QImageEncoderSettings* self, QImageEncoderSettings* from);
 bool QImageEncoderSettings_operatorEqual(const QImageEncoderSettings* self, QImageEncoderSettings* other);
 bool QImageEncoderSettings_operatorNotEqual(const QImageEncoderSettings* self, QImageEncoderSettings* other);
 bool QImageEncoderSettings_isNull(const QImageEncoderSettings* self);
 struct seaqt_string QImageEncoderSettings_codec(const QImageEncoderSettings* self);
 void QImageEncoderSettings_setCodec(QImageEncoderSettings* self, struct seaqt_string codec);
 QSize* QImageEncoderSettings_resolution(const QImageEncoderSettings* self);
-void QImageEncoderSettings_setResolution(QImageEncoderSettings* self, QSize* resolution);
-void QImageEncoderSettings_setResolution2(QImageEncoderSettings* self, int width, int height);
+void QImageEncoderSettings_setResolution_resolution(QImageEncoderSettings* self, QSize* resolution);
+void QImageEncoderSettings_setResolution_width_height(QImageEncoderSettings* self, int width, int height);
 int QImageEncoderSettings_quality(const QImageEncoderSettings* self);
 void QImageEncoderSettings_setQuality(QImageEncoderSettings* self, int quality);
 QVariant* QImageEncoderSettings_encodingOption(const QImageEncoderSettings* self, struct seaqt_string option);

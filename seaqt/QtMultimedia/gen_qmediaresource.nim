@@ -47,7 +47,7 @@ export
 
 type cQMediaResource*{.exportc: "QMediaResource", incompleteStruct.} = object
 
-proc fcQMediaResource_operatorAssign(self: pointer, other: pointer): void {.importc: "QMediaResource_operatorAssign".}
+proc fcQMediaResource_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMediaResource_operatorAssign".}
 proc fcQMediaResource_isNull(self: pointer): bool {.importc: "QMediaResource_isNull".}
 proc fcQMediaResource_operatorEqual(self: pointer, other: pointer): bool {.importc: "QMediaResource_operatorEqual".}
 proc fcQMediaResource_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QMediaResource_operatorNotEqual".}
@@ -71,17 +71,17 @@ proc fcQMediaResource_setChannelCount(self: pointer, channels: cint): void {.imp
 proc fcQMediaResource_videoBitRate(self: pointer): cint {.importc: "QMediaResource_videoBitRate".}
 proc fcQMediaResource_setVideoBitRate(self: pointer, rate: cint): void {.importc: "QMediaResource_setVideoBitRate".}
 proc fcQMediaResource_resolution(self: pointer): pointer {.importc: "QMediaResource_resolution".}
-proc fcQMediaResource_setResolution(self: pointer, resolution: pointer): void {.importc: "QMediaResource_setResolution".}
-proc fcQMediaResource_setResolution2(self: pointer, width: cint, height: cint): void {.importc: "QMediaResource_setResolution2".}
+proc fcQMediaResource_setResolutionResolution(self: pointer, resolution: pointer): void {.importc: "QMediaResource_setResolution_resolution".}
+proc fcQMediaResource_setResolutionWidthHeight(self: pointer, width: cint, height: cint): void {.importc: "QMediaResource_setResolution_width_height".}
 proc fcQMediaResource_new(): ptr cQMediaResource {.importc: "QMediaResource_new".}
-proc fcQMediaResource_new2(url: pointer): ptr cQMediaResource {.importc: "QMediaResource_new2".}
-proc fcQMediaResource_new3(request: pointer): ptr cQMediaResource {.importc: "QMediaResource_new3".}
-proc fcQMediaResource_new4(other: pointer): ptr cQMediaResource {.importc: "QMediaResource_new4".}
-proc fcQMediaResource_new5(url: pointer, mimeType: struct_seaqt_string): ptr cQMediaResource {.importc: "QMediaResource_new5".}
-proc fcQMediaResource_new6(request: pointer, mimeType: struct_seaqt_string): ptr cQMediaResource {.importc: "QMediaResource_new6".}
+proc fcQMediaResource_new2(url: pointer): ptr cQMediaResource {.importc: "QMediaResource_new_url".}
+proc fcQMediaResource_new3(request: pointer): ptr cQMediaResource {.importc: "QMediaResource_new_request".}
+proc fcQMediaResource_new4(fromVal: pointer): ptr cQMediaResource {.importc: "QMediaResource_new_from".}
+proc fcQMediaResource_new5(url: pointer, mimeType: struct_seaqt_string): ptr cQMediaResource {.importc: "QMediaResource_new_url_mimeType".}
+proc fcQMediaResource_new6(request: pointer, mimeType: struct_seaqt_string): ptr cQMediaResource {.importc: "QMediaResource_new_request_mimeType".}
 
-proc operatorAssign*(self: gen_qmediaresource_types.QMediaResource, other: gen_qmediaresource_types.QMediaResource): void =
-  fcQMediaResource_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qmediaresource_types.QMediaResource, fromVal: gen_qmediaresource_types.QMediaResource): void =
+  fcQMediaResource_operatorAssign(self.h, fromVal.h)
 
 proc isNull*(self: gen_qmediaresource_types.QMediaResource): bool =
   fcQMediaResource_isNull(self.h)
@@ -165,10 +165,10 @@ proc resolution*(self: gen_qmediaresource_types.QMediaResource): gen_qsize_types
   gen_qsize_types.QSize(h: fcQMediaResource_resolution(self.h), owned: true)
 
 proc setResolution*(self: gen_qmediaresource_types.QMediaResource, resolution: gen_qsize_types.QSize): void =
-  fcQMediaResource_setResolution(self.h, resolution.h)
+  fcQMediaResource_setResolutionResolution(self.h, resolution.h)
 
 proc setResolution*(self: gen_qmediaresource_types.QMediaResource, width: cint, height: cint): void =
-  fcQMediaResource_setResolution2(self.h, width, height)
+  fcQMediaResource_setResolutionWidthHeight(self.h, width, height)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource): gen_qmediaresource_types.QMediaResource =
   let tmp = gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new(), owned: true)
@@ -182,8 +182,8 @@ proc create*(T: type gen_qmediaresource_types.QMediaResource,
   let tmp = gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new3(request.h), owned: true)
   tmp
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
-    other: gen_qmediaresource_types.QMediaResource): gen_qmediaresource_types.QMediaResource =
-  let tmp = gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new4(other.h), owned: true)
+    fromVal: gen_qmediaresource_types.QMediaResource): gen_qmediaresource_types.QMediaResource =
+  let tmp = gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new4(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
     url: gen_qurl_types.QUrl, mimeType: openArray[char]): gen_qmediaresource_types.QMediaResource =

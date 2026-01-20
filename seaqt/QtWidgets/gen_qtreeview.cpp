@@ -775,7 +775,7 @@ public:
 	friend void QTreeView_virtualbase_editorDestroyed(VirtualQTreeView* self, QObject* editor);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QTreeView::edit(index, trigger, event);
 		}
 
@@ -785,11 +785,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QTreeView_virtualbase_edit2(VirtualQTreeView* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QTreeView_virtualbase_edit_index_trigger_event(VirtualQTreeView* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1335,7 +1335,7 @@ public:
 	friend void QTreeView_protectedbase_stopAutoScroll(VirtualQTreeView* self);
 	friend void QTreeView_protectedbase_doAutoScroll(VirtualQTreeView* self);
 	friend int QTreeView_protectedbase_dropIndicatorPosition(const VirtualQTreeView* self);
-	friend void QTreeView_protectedbase_setViewportMargins(VirtualQTreeView* self, int left, int top, int right, int bottom);
+	friend void QTreeView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTreeView* self, int left, int top, int right, int bottom);
 	friend QMargins* QTreeView_protectedbase_viewportMargins(const VirtualQTreeView* self);
 	friend void QTreeView_protectedbase_drawFrame(VirtualQTreeView* self, QPainter* param1);
 	friend void QTreeView_protectedbase_initStyleOption(const VirtualQTreeView* self, QStyleOptionFrame* option);
@@ -1350,12 +1350,12 @@ public:
 	friend bool QTreeView_protectedbase_isSignalConnected(const VirtualQTreeView* self, QMetaMethod* signal);
 };
 
-VirtualQTreeView* QTreeView_new(const QTreeView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQTreeView* QTreeView_new_parent(const QTreeView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeView(vtbl, parent) : nullptr;
 }
 
-VirtualQTreeView* QTreeView_new2(const QTreeView_VTable* vtbl, size_t vdata) {
+VirtualQTreeView* QTreeView_new(const QTreeView_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeView(vtbl) : nullptr;
 }
@@ -1376,7 +1376,7 @@ int QTreeView_metacall(QTreeView* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTreeView_tr(const char* s) {
+struct seaqt_string QTreeView_tr_s(const char* s) {
 	QString _ret = QTreeView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1387,7 +1387,7 @@ struct seaqt_string QTreeView_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTreeView_trUtf8(const char* s) {
+struct seaqt_string QTreeView_trUtf8_s(const char* s) {
 	QString _ret = QTreeView::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1669,11 +1669,11 @@ void QTreeView_resizeColumnToContents(QTreeView* self, int column) {
 	self->resizeColumnToContents(static_cast<int>(column));
 }
 
-void QTreeView_sortByColumn(QTreeView* self, int column) {
+void QTreeView_sortByColumn_column(QTreeView* self, int column) {
 	self->sortByColumn(static_cast<int>(column));
 }
 
-void QTreeView_sortByColumn2(QTreeView* self, int column, int order) {
+void QTreeView_sortByColumn_column_order(QTreeView* self, int column, int order) {
 	self->sortByColumn(static_cast<int>(column), static_cast<Qt::SortOrder>(order));
 }
 
@@ -1681,7 +1681,7 @@ void QTreeView_expandAll(QTreeView* self) {
 	self->expandAll();
 }
 
-void QTreeView_expandRecursively(QTreeView* self, QModelIndex* index) {
+void QTreeView_expandRecursively_index(QTreeView* self, QModelIndex* index) {
 	self->expandRecursively(*index);
 }
 
@@ -1693,7 +1693,7 @@ void QTreeView_expandToDepth(QTreeView* self, int depth) {
 	self->expandToDepth(static_cast<int>(depth));
 }
 
-struct seaqt_string QTreeView_tr2(const char* s, const char* c) {
+struct seaqt_string QTreeView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTreeView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1704,7 +1704,7 @@ struct seaqt_string QTreeView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTreeView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTreeView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTreeView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1715,7 +1715,7 @@ struct seaqt_string QTreeView_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTreeView_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTreeView_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTreeView::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1726,7 +1726,7 @@ struct seaqt_string QTreeView_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTreeView_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTreeView_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTreeView::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1737,7 +1737,7 @@ struct seaqt_string QTreeView_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QTreeView_expandRecursively2(QTreeView* self, QModelIndex* index, int depth) {
+void QTreeView_expandRecursively_index_depth(QTreeView* self, QModelIndex* index, int depth) {
 	self->expandRecursively(*index, static_cast<int>(depth));
 }
 
@@ -2016,7 +2016,7 @@ void QTreeView_virtualbase_editorDestroyed(VirtualQTreeView* self, QObject* edit
 	self->QTreeView::editorDestroyed(editor);
 }
 
-bool QTreeView_virtualbase_edit2(VirtualQTreeView* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QTreeView_virtualbase_edit_index_trigger_event(VirtualQTreeView* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QTreeView::edit(*index, static_cast<VirtualQTreeView::EditTrigger>(trigger), event);
 }
@@ -2327,7 +2327,7 @@ int QTreeView_protectedbase_dropIndicatorPosition(const VirtualQTreeView* self) 
 	return static_cast<int>(_ret);
 }
 
-void QTreeView_protectedbase_setViewportMargins(VirtualQTreeView* self, int left, int top, int right, int bottom) {
+void QTreeView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTreeView* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

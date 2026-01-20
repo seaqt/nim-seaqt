@@ -120,10 +120,10 @@ type cQFileDialog*{.exportc: "QFileDialog", incompleteStruct.} = object
 proc fcQFileDialog_metaObject(self: pointer): pointer {.importc: "QFileDialog_metaObject".}
 proc fcQFileDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileDialog_metacast".}
 proc fcQFileDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileDialog_metacall".}
-proc fcQFileDialog_tr(s: cstring): struct_seaqt_string {.importc: "QFileDialog_tr".}
-proc fcQFileDialog_trUtf8(s: cstring): struct_seaqt_string {.importc: "QFileDialog_trUtf8".}
-proc fcQFileDialog_setDirectory(self: pointer, directory: struct_seaqt_string): void {.importc: "QFileDialog_setDirectory".}
-proc fcQFileDialog_setDirectoryWithDirectory(self: pointer, directory: pointer): void {.importc: "QFileDialog_setDirectoryWithDirectory".}
+proc fcQFileDialog_trS(s: cstring): struct_seaqt_string {.importc: "QFileDialog_tr_s".}
+proc fcQFileDialog_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QFileDialog_trUtf8_s".}
+proc fcQFileDialog_setDirectory_QString(self: pointer, directory: struct_seaqt_string): void {.importc: "QFileDialog_setDirectory_QString".}
+proc fcQFileDialog_setDirectory_QDir(self: pointer, directory: pointer): void {.importc: "QFileDialog_setDirectory_QDir".}
 proc fcQFileDialog_directory(self: pointer): pointer {.importc: "QFileDialog_directory".}
 proc fcQFileDialog_setDirectoryUrl(self: pointer, directory: pointer): void {.importc: "QFileDialog_setDirectoryUrl".}
 proc fcQFileDialog_directoryUrl(self: pointer): pointer {.importc: "QFileDialog_directoryUrl".}
@@ -174,7 +174,7 @@ proc fcQFileDialog_setSupportedSchemes(self: pointer, schemes: struct_seaqt_arra
 proc fcQFileDialog_supportedSchemes(self: pointer): struct_seaqt_array {.importc: "QFileDialog_supportedSchemes".}
 proc fcQFileDialog_setProxyModel(self: pointer, model: pointer): void {.importc: "QFileDialog_setProxyModel".}
 proc fcQFileDialog_proxyModel(self: pointer): pointer {.importc: "QFileDialog_proxyModel".}
-proc fcQFileDialog_setOption(self: pointer, option: cint): void {.importc: "QFileDialog_setOption".}
+proc fcQFileDialog_setOptionOption(self: pointer, option: cint): void {.importc: "QFileDialog_setOption_option".}
 proc fcQFileDialog_testOption(self: pointer, option: cint): bool {.importc: "QFileDialog_testOption".}
 proc fcQFileDialog_setOptions(self: pointer, options: cint): void {.importc: "QFileDialog_setOptions".}
 proc fcQFileDialog_options(self: pointer): cint {.importc: "QFileDialog_options".}
@@ -206,44 +206,44 @@ proc fcQFileDialog_getExistingDirectoryUrl(): pointer {.importc: "QFileDialog_ge
 proc fcQFileDialog_getOpenFileNames(): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNames".}
 proc fcQFileDialog_getOpenFileUrls(): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrls".}
 proc fcQFileDialog_saveFileContent(fileContent: struct_seaqt_string, fileNameHint: struct_seaqt_string): void {.importc: "QFileDialog_saveFileContent".}
-proc fcQFileDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileDialog_tr2".}
-proc fcQFileDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileDialog_tr3".}
-proc fcQFileDialog_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileDialog_trUtf82".}
-proc fcQFileDialog_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileDialog_trUtf83".}
-proc fcQFileDialog_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QFileDialog_setOption2".}
-proc fcQFileDialog_getOpenFileNameWithParent(parent: pointer): struct_seaqt_string {.importc: "QFileDialog_getOpenFileNameWithParent".}
-proc fcQFileDialog_getOpenFileName2(parent: pointer, caption: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getOpenFileName2".}
-proc fcQFileDialog_getOpenFileName3(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getOpenFileName3".}
-proc fcQFileDialog_getOpenFileName4(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string, filter: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getOpenFileName4".}
-proc fcQFileDialog_getOpenFileUrlWithParent(parent: pointer): pointer {.importc: "QFileDialog_getOpenFileUrlWithParent".}
-proc fcQFileDialog_getOpenFileUrl2(parent: pointer, caption: struct_seaqt_string): pointer {.importc: "QFileDialog_getOpenFileUrl2".}
-proc fcQFileDialog_getOpenFileUrl3(parent: pointer, caption: struct_seaqt_string, dir: pointer): pointer {.importc: "QFileDialog_getOpenFileUrl3".}
-proc fcQFileDialog_getOpenFileUrl4(parent: pointer, caption: struct_seaqt_string, dir: pointer, filter: struct_seaqt_string): pointer {.importc: "QFileDialog_getOpenFileUrl4".}
-proc fcQFileDialog_getSaveFileNameWithParent(parent: pointer): struct_seaqt_string {.importc: "QFileDialog_getSaveFileNameWithParent".}
-proc fcQFileDialog_getSaveFileName2(parent: pointer, caption: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getSaveFileName2".}
-proc fcQFileDialog_getSaveFileName3(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getSaveFileName3".}
-proc fcQFileDialog_getSaveFileName4(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string, filter: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getSaveFileName4".}
-proc fcQFileDialog_getSaveFileUrlWithParent(parent: pointer): pointer {.importc: "QFileDialog_getSaveFileUrlWithParent".}
-proc fcQFileDialog_getSaveFileUrl2(parent: pointer, caption: struct_seaqt_string): pointer {.importc: "QFileDialog_getSaveFileUrl2".}
-proc fcQFileDialog_getSaveFileUrl3(parent: pointer, caption: struct_seaqt_string, dir: pointer): pointer {.importc: "QFileDialog_getSaveFileUrl3".}
-proc fcQFileDialog_getSaveFileUrl4(parent: pointer, caption: struct_seaqt_string, dir: pointer, filter: struct_seaqt_string): pointer {.importc: "QFileDialog_getSaveFileUrl4".}
-proc fcQFileDialog_getExistingDirectoryWithParent(parent: pointer): struct_seaqt_string {.importc: "QFileDialog_getExistingDirectoryWithParent".}
-proc fcQFileDialog_getExistingDirectory2(parent: pointer, caption: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getExistingDirectory2".}
-proc fcQFileDialog_getExistingDirectory3(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getExistingDirectory3".}
-proc fcQFileDialog_getExistingDirectory4(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string, options: cint): struct_seaqt_string {.importc: "QFileDialog_getExistingDirectory4".}
-proc fcQFileDialog_getExistingDirectoryUrlWithParent(parent: pointer): pointer {.importc: "QFileDialog_getExistingDirectoryUrlWithParent".}
-proc fcQFileDialog_getExistingDirectoryUrl2(parent: pointer, caption: struct_seaqt_string): pointer {.importc: "QFileDialog_getExistingDirectoryUrl2".}
-proc fcQFileDialog_getExistingDirectoryUrl3(parent: pointer, caption: struct_seaqt_string, dir: pointer): pointer {.importc: "QFileDialog_getExistingDirectoryUrl3".}
-proc fcQFileDialog_getExistingDirectoryUrl4(parent: pointer, caption: struct_seaqt_string, dir: pointer, options: cint): pointer {.importc: "QFileDialog_getExistingDirectoryUrl4".}
-proc fcQFileDialog_getExistingDirectoryUrl5(parent: pointer, caption: struct_seaqt_string, dir: pointer, options: cint, supportedSchemes: struct_seaqt_array): pointer {.importc: "QFileDialog_getExistingDirectoryUrl5".}
-proc fcQFileDialog_getOpenFileNamesWithParent(parent: pointer): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNamesWithParent".}
-proc fcQFileDialog_getOpenFileNames2(parent: pointer, caption: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNames2".}
-proc fcQFileDialog_getOpenFileNames3(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNames3".}
-proc fcQFileDialog_getOpenFileNames4(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string, filter: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNames4".}
-proc fcQFileDialog_getOpenFileUrlsWithParent(parent: pointer): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrlsWithParent".}
-proc fcQFileDialog_getOpenFileUrls2(parent: pointer, caption: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrls2".}
-proc fcQFileDialog_getOpenFileUrls3(parent: pointer, caption: struct_seaqt_string, dir: pointer): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrls3".}
-proc fcQFileDialog_getOpenFileUrls4(parent: pointer, caption: struct_seaqt_string, dir: pointer, filter: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrls4".}
+proc fcQFileDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileDialog_tr_s_c".}
+proc fcQFileDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileDialog_tr_s_c_n".}
+proc fcQFileDialog_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileDialog_trUtf8_s_c".}
+proc fcQFileDialog_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileDialog_trUtf8_s_c_n".}
+proc fcQFileDialog_setOptionOptionOn(self: pointer, option: cint, on: bool): void {.importc: "QFileDialog_setOption_option_on".}
+proc fcQFileDialog_getOpenFileNameParent(parent: pointer): struct_seaqt_string {.importc: "QFileDialog_getOpenFileName_parent".}
+proc fcQFileDialog_getOpenFileNameParentCaption(parent: pointer, caption: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getOpenFileName_parent_caption".}
+proc fcQFileDialog_getOpenFileNameParentCaptionDir(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getOpenFileName_parent_caption_dir".}
+proc fcQFileDialog_getOpenFileNameParentCaptionDirFilter(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string, filter: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getOpenFileName_parent_caption_dir_filter".}
+proc fcQFileDialog_getOpenFileUrlParent(parent: pointer): pointer {.importc: "QFileDialog_getOpenFileUrl_parent".}
+proc fcQFileDialog_getOpenFileUrlParentCaption(parent: pointer, caption: struct_seaqt_string): pointer {.importc: "QFileDialog_getOpenFileUrl_parent_caption".}
+proc fcQFileDialog_getOpenFileUrlParentCaptionDir(parent: pointer, caption: struct_seaqt_string, dir: pointer): pointer {.importc: "QFileDialog_getOpenFileUrl_parent_caption_dir".}
+proc fcQFileDialog_getOpenFileUrlParentCaptionDirFilter(parent: pointer, caption: struct_seaqt_string, dir: pointer, filter: struct_seaqt_string): pointer {.importc: "QFileDialog_getOpenFileUrl_parent_caption_dir_filter".}
+proc fcQFileDialog_getSaveFileNameParent(parent: pointer): struct_seaqt_string {.importc: "QFileDialog_getSaveFileName_parent".}
+proc fcQFileDialog_getSaveFileNameParentCaption(parent: pointer, caption: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getSaveFileName_parent_caption".}
+proc fcQFileDialog_getSaveFileNameParentCaptionDir(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getSaveFileName_parent_caption_dir".}
+proc fcQFileDialog_getSaveFileNameParentCaptionDirFilter(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string, filter: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getSaveFileName_parent_caption_dir_filter".}
+proc fcQFileDialog_getSaveFileUrlParent(parent: pointer): pointer {.importc: "QFileDialog_getSaveFileUrl_parent".}
+proc fcQFileDialog_getSaveFileUrlParentCaption(parent: pointer, caption: struct_seaqt_string): pointer {.importc: "QFileDialog_getSaveFileUrl_parent_caption".}
+proc fcQFileDialog_getSaveFileUrlParentCaptionDir(parent: pointer, caption: struct_seaqt_string, dir: pointer): pointer {.importc: "QFileDialog_getSaveFileUrl_parent_caption_dir".}
+proc fcQFileDialog_getSaveFileUrlParentCaptionDirFilter(parent: pointer, caption: struct_seaqt_string, dir: pointer, filter: struct_seaqt_string): pointer {.importc: "QFileDialog_getSaveFileUrl_parent_caption_dir_filter".}
+proc fcQFileDialog_getExistingDirectoryParent(parent: pointer): struct_seaqt_string {.importc: "QFileDialog_getExistingDirectory_parent".}
+proc fcQFileDialog_getExistingDirectoryParentCaption(parent: pointer, caption: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getExistingDirectory_parent_caption".}
+proc fcQFileDialog_getExistingDirectoryParentCaptionDir(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string): struct_seaqt_string {.importc: "QFileDialog_getExistingDirectory_parent_caption_dir".}
+proc fcQFileDialog_getExistingDirectoryParentCaptionDirOptions(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string, options: cint): struct_seaqt_string {.importc: "QFileDialog_getExistingDirectory_parent_caption_dir_options".}
+proc fcQFileDialog_getExistingDirectoryUrlParent(parent: pointer): pointer {.importc: "QFileDialog_getExistingDirectoryUrl_parent".}
+proc fcQFileDialog_getExistingDirectoryUrlParentCaption(parent: pointer, caption: struct_seaqt_string): pointer {.importc: "QFileDialog_getExistingDirectoryUrl_parent_caption".}
+proc fcQFileDialog_getExistingDirectoryUrlParentCaptionDir(parent: pointer, caption: struct_seaqt_string, dir: pointer): pointer {.importc: "QFileDialog_getExistingDirectoryUrl_parent_caption_dir".}
+proc fcQFileDialog_getExistingDirectoryUrlParentCaptionDirOptions(parent: pointer, caption: struct_seaqt_string, dir: pointer, options: cint): pointer {.importc: "QFileDialog_getExistingDirectoryUrl_parent_caption_dir_options".}
+proc fcQFileDialog_getExistingDirectoryUrlParentCaptionDirOptionsSupportedSchemes(parent: pointer, caption: struct_seaqt_string, dir: pointer, options: cint, supportedSchemes: struct_seaqt_array): pointer {.importc: "QFileDialog_getExistingDirectoryUrl_parent_caption_dir_options_supportedSchemes".}
+proc fcQFileDialog_getOpenFileNamesParent(parent: pointer): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNames_parent".}
+proc fcQFileDialog_getOpenFileNamesParentCaption(parent: pointer, caption: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNames_parent_caption".}
+proc fcQFileDialog_getOpenFileNamesParentCaptionDir(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNames_parent_caption_dir".}
+proc fcQFileDialog_getOpenFileNamesParentCaptionDirFilter(parent: pointer, caption: struct_seaqt_string, dir: struct_seaqt_string, filter: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileNames_parent_caption_dir_filter".}
+proc fcQFileDialog_getOpenFileUrlsParent(parent: pointer): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrls_parent".}
+proc fcQFileDialog_getOpenFileUrlsParentCaption(parent: pointer, caption: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrls_parent_caption".}
+proc fcQFileDialog_getOpenFileUrlsParentCaptionDir(parent: pointer, caption: struct_seaqt_string, dir: pointer): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrls_parent_caption_dir".}
+proc fcQFileDialog_getOpenFileUrlsParentCaptionDirFilter(parent: pointer, caption: struct_seaqt_string, dir: pointer, filter: struct_seaqt_string): struct_seaqt_array {.importc: "QFileDialog_getOpenFileUrls_parent_caption_dir_filter".}
 proc fcQFileDialog_vdata(self: pointer): ptr pointer {.importc: "QFileDialog_vdata".}
 proc fvdata_cQFileDialog(self: pointer): pointer {.importc: "vdata_QFileDialog".}
 
@@ -369,12 +369,12 @@ proc fcQFileDialog_protectedbase_sender(self: pointer): pointer {.importc: "QFil
 proc fcQFileDialog_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QFileDialog_protectedbase_senderSignalIndex".}
 proc fcQFileDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileDialog_protectedbase_receivers".}
 proc fcQFileDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileDialog_protectedbase_isSignalConnected".}
-proc fcQFileDialog_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileDialog {.importc: "QFileDialog_new".}
-proc fcQFileDialog_new2(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQFileDialog {.importc: "QFileDialog_new2".}
-proc fcQFileDialog_new3(vtbl: pointer, vdata: csize_t): ptr cQFileDialog {.importc: "QFileDialog_new3".}
-proc fcQFileDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer, caption: struct_seaqt_string): ptr cQFileDialog {.importc: "QFileDialog_new4".}
-proc fcQFileDialog_new5(vtbl: pointer, vdata: csize_t, parent: pointer, caption: struct_seaqt_string, directory: struct_seaqt_string): ptr cQFileDialog {.importc: "QFileDialog_new5".}
-proc fcQFileDialog_new6(vtbl: pointer, vdata: csize_t, parent: pointer, caption: struct_seaqt_string, directory: struct_seaqt_string, filter: struct_seaqt_string): ptr cQFileDialog {.importc: "QFileDialog_new6".}
+proc fcQFileDialog_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileDialog {.importc: "QFileDialog_new_parent".}
+proc fcQFileDialog_new2(vtbl: pointer, vdata: csize_t, parent: pointer, f: cint): ptr cQFileDialog {.importc: "QFileDialog_new_parent_f".}
+proc fcQFileDialog_new3(vtbl: pointer, vdata: csize_t): ptr cQFileDialog {.importc: "QFileDialog_new".}
+proc fcQFileDialog_new4(vtbl: pointer, vdata: csize_t, parent: pointer, caption: struct_seaqt_string): ptr cQFileDialog {.importc: "QFileDialog_new_parent_caption".}
+proc fcQFileDialog_new5(vtbl: pointer, vdata: csize_t, parent: pointer, caption: struct_seaqt_string, directory: struct_seaqt_string): ptr cQFileDialog {.importc: "QFileDialog_new_parent_caption_directory".}
+proc fcQFileDialog_new6(vtbl: pointer, vdata: csize_t, parent: pointer, caption: struct_seaqt_string, directory: struct_seaqt_string, filter: struct_seaqt_string): ptr cQFileDialog {.importc: "QFileDialog_new_parent_caption_directory_filter".}
 proc fcQFileDialog_staticMetaObject(): pointer {.importc: "QFileDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qfiledialog_types.QFileDialog): gen_qobjectdefs_types.QMetaObject =
@@ -387,22 +387,22 @@ proc metacall*(self: gen_qfiledialog_types.QFileDialog, param1: cint, param2: ci
   fcQFileDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfiledialog_types.QFileDialog, s: cstring): string =
-  let v_ms = fcQFileDialog_tr(s)
+  let v_ms = fcQFileDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfiledialog_types.QFileDialog, s: cstring): string =
-  let v_ms = fcQFileDialog_trUtf8(s)
+  let v_ms = fcQFileDialog_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setDirectory*(self: gen_qfiledialog_types.QFileDialog, directory: openArray[char]): void =
-  fcQFileDialog_setDirectory(self.h, struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
+  fcQFileDialog_setDirectory_QString(self.h, struct_seaqt_string(data: if len(directory) > 0: addr directory[0] else: nil, len: csize_t(len(directory))))
 
 proc setDirectory*(self: gen_qfiledialog_types.QFileDialog, directory: gen_qdir_types.QDir): void =
-  fcQFileDialog_setDirectoryWithDirectory(self.h, directory.h)
+  fcQFileDialog_setDirectory_QDir(self.h, directory.h)
 
 proc directory*(self: gen_qfiledialog_types.QFileDialog): gen_qdir_types.QDir =
   gen_qdir_types.QDir(h: fcQFileDialog_directory(self.h), owned: true)
@@ -647,7 +647,7 @@ proc proxyModel*(self: gen_qfiledialog_types.QFileDialog): gen_qabstractproxymod
   gen_qabstractproxymodel_types.QAbstractProxyModel(h: fcQFileDialog_proxyModel(self.h), owned: false)
 
 proc setOption*(self: gen_qfiledialog_types.QFileDialog, option: cint): void =
-  fcQFileDialog_setOption(self.h, cint(option))
+  fcQFileDialog_setOptionOption(self.h, cint(option))
 
 proc testOption*(self: gen_qfiledialog_types.QFileDialog, option: cint): bool =
   fcQFileDialog_testOption(self.h, cint(option))
@@ -928,149 +928,149 @@ proc saveFileContent*(_: type gen_qfiledialog_types.QFileDialog, fileContent: op
   fcQFileDialog_saveFileContent(struct_seaqt_string(data: if len(fileContent) > 0: addr fileContent[0] else: nil, len: csize_t(len(fileContent))), struct_seaqt_string(data: if len(fileNameHint) > 0: addr fileNameHint[0] else: nil, len: csize_t(len(fileNameHint))))
 
 proc tr*(_: type gen_qfiledialog_types.QFileDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQFileDialog_tr2(s, c)
+  let v_ms = fcQFileDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfiledialog_types.QFileDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFileDialog_tr3(s, c, n)
+  let v_ms = fcQFileDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfiledialog_types.QFileDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQFileDialog_trUtf82(s, c)
+  let v_ms = fcQFileDialog_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qfiledialog_types.QFileDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFileDialog_trUtf83(s, c, n)
+  let v_ms = fcQFileDialog_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setOption*(self: gen_qfiledialog_types.QFileDialog, option: cint, on: bool): void =
-  fcQFileDialog_setOption2(self.h, cint(option), on)
+  fcQFileDialog_setOptionOptionOn(self.h, cint(option), on)
 
 proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): string =
-  let v_ms = fcQFileDialog_getOpenFileNameWithParent(parent.h)
+  let v_ms = fcQFileDialog_getOpenFileNameParent(parent.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): string =
-  let v_ms = fcQFileDialog_getOpenFileName2(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
+  let v_ms = fcQFileDialog_getOpenFileNameParentCaption(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char]): string =
-  let v_ms = fcQFileDialog_getOpenFileName3(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
+  let v_ms = fcQFileDialog_getOpenFileNameParentCaptionDir(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getOpenFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char], filter: openArray[char]): string =
-  let v_ms = fcQFileDialog_getOpenFileName4(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
+  let v_ms = fcQFileDialog_getOpenFileNameParentCaptionDirFilter(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrlWithParent(parent.h), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrlParent(parent.h), owned: true)
 
 proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl2(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrlParentCaption(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
 
 proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl3(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrlParentCaptionDir(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
 
 proc getOpenFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, filter: openArray[char]): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrl4(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter)))), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getOpenFileUrlParentCaptionDirFilter(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter)))), owned: true)
 
 proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): string =
-  let v_ms = fcQFileDialog_getSaveFileNameWithParent(parent.h)
+  let v_ms = fcQFileDialog_getSaveFileNameParent(parent.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): string =
-  let v_ms = fcQFileDialog_getSaveFileName2(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
+  let v_ms = fcQFileDialog_getSaveFileNameParentCaption(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char]): string =
-  let v_ms = fcQFileDialog_getSaveFileName3(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
+  let v_ms = fcQFileDialog_getSaveFileNameParentCaptionDir(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getSaveFileName*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char], filter: openArray[char]): string =
-  let v_ms = fcQFileDialog_getSaveFileName4(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
+  let v_ms = fcQFileDialog_getSaveFileNameParentCaptionDirFilter(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrlWithParent(parent.h), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrlParent(parent.h), owned: true)
 
 proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl2(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrlParentCaption(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
 
 proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl3(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrlParentCaptionDir(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
 
 proc getSaveFileUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, filter: openArray[char]): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrl4(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter)))), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getSaveFileUrlParentCaptionDirFilter(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter)))), owned: true)
 
 proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): string =
-  let v_ms = fcQFileDialog_getExistingDirectoryWithParent(parent.h)
+  let v_ms = fcQFileDialog_getExistingDirectoryParent(parent.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): string =
-  let v_ms = fcQFileDialog_getExistingDirectory2(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
+  let v_ms = fcQFileDialog_getExistingDirectoryParentCaption(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char]): string =
-  let v_ms = fcQFileDialog_getExistingDirectory3(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
+  let v_ms = fcQFileDialog_getExistingDirectoryParentCaptionDir(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getExistingDirectory*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char], options: cint): string =
-  let v_ms = fcQFileDialog_getExistingDirectory4(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), cint(options))
+  let v_ms = fcQFileDialog_getExistingDirectoryParentCaptionDirOptions(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrlWithParent(parent.h), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrlParent(parent.h), owned: true)
 
 proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl2(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrlParentCaption(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption)))), owned: true)
 
 proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl3(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrlParentCaptionDir(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h), owned: true)
 
 proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, options: cint): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl4(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, cint(options)), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrlParentCaptionDirOptions(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, cint(options)), owned: true)
 
 proc getExistingDirectoryUrl*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, options: cint, supportedSchemes: openArray[string]): gen_qurl_types.QUrl =
   var supportedSchemes_CArray = newSeq[struct_seaqt_string](len(supportedSchemes))
   for i in 0..<len(supportedSchemes):
     supportedSchemes_CArray[i] = struct_seaqt_string(data: if len(supportedSchemes[i]) > 0: addr supportedSchemes[i][0] else: nil, len: csize_t(len(supportedSchemes[i])))
 
-  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrl5(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, cint(options), struct_seaqt_array(len: csize_t(len(supportedSchemes)), data: if len(supportedSchemes) == 0: nil else: addr(supportedSchemes_CArray[0]))), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileDialog_getExistingDirectoryUrlParentCaptionDirOptionsSupportedSchemes(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, cint(options), struct_seaqt_array(len: csize_t(len(supportedSchemes)), data: if len(supportedSchemes) == 0: nil else: addr(supportedSchemes_CArray[0]))), owned: true)
 
 proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): seq[string] =
-  var v_ma = fcQFileDialog_getOpenFileNamesWithParent(parent.h)
+  var v_ma = fcQFileDialog_getOpenFileNamesParent(parent.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1082,7 +1082,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
   vx_ret
 
 proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): seq[string] =
-  var v_ma = fcQFileDialog_getOpenFileNames2(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
+  var v_ma = fcQFileDialog_getOpenFileNamesParentCaption(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1094,7 +1094,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
   vx_ret
 
 proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char]): seq[string] =
-  var v_ma = fcQFileDialog_getOpenFileNames3(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
+  var v_ma = fcQFileDialog_getOpenFileNamesParentCaptionDir(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1106,7 +1106,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
   vx_ret
 
 proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: openArray[char], filter: openArray[char]): seq[string] =
-  var v_ma = fcQFileDialog_getOpenFileNames4(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
+  var v_ma = fcQFileDialog_getOpenFileNamesParentCaptionDirFilter(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), struct_seaqt_string(data: if len(dir) > 0: addr dir[0] else: nil, len: csize_t(len(dir))), struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1118,7 +1118,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): seq[gen_qurl_types.QUrl] =
-  var v_ma = fcQFileDialog_getOpenFileUrlsWithParent(parent.h)
+  var v_ma = fcQFileDialog_getOpenFileUrlsParent(parent.h)
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1127,7 +1127,7 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char]): seq[gen_qurl_types.QUrl] =
-  var v_ma = fcQFileDialog_getOpenFileUrls2(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
+  var v_ma = fcQFileDialog_getOpenFileUrlsParentCaption(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))))
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1136,7 +1136,7 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl): seq[gen_qurl_types.QUrl] =
-  var v_ma = fcQFileDialog_getOpenFileUrls3(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h)
+  var v_ma = fcQFileDialog_getOpenFileUrlsParentCaptionDir(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h)
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -1145,7 +1145,7 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: openArray[char], dir: gen_qurl_types.QUrl, filter: openArray[char]): seq[gen_qurl_types.QUrl] =
-  var v_ma = fcQFileDialog_getOpenFileUrls4(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
+  var v_ma = fcQFileDialog_getOpenFileUrlsParentCaptionDirFilter(parent.h, struct_seaqt_string(data: if len(caption) > 0: addr caption[0] else: nil, len: csize_t(len(caption))), dir.h, struct_seaqt_string(data: if len(filter) > 0: addr filter[0] else: nil, len: csize_t(len(filter))))
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:

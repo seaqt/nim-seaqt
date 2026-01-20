@@ -44,7 +44,7 @@ export
 
 type cQAuthenticator*{.exportc: "QAuthenticator", incompleteStruct.} = object
 
-proc fcQAuthenticator_operatorAssign(self: pointer, other: pointer): void {.importc: "QAuthenticator_operatorAssign".}
+proc fcQAuthenticator_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAuthenticator_operatorAssign".}
 proc fcQAuthenticator_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAuthenticator_operatorEqual".}
 proc fcQAuthenticator_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAuthenticator_operatorNotEqual".}
 proc fcQAuthenticator_user(self: pointer): struct_seaqt_string {.importc: "QAuthenticator_user".}
@@ -59,10 +59,10 @@ proc fcQAuthenticator_setOption(self: pointer, opt: struct_seaqt_string, value: 
 proc fcQAuthenticator_isNull(self: pointer): bool {.importc: "QAuthenticator_isNull".}
 proc fcQAuthenticator_detach(self: pointer): void {.importc: "QAuthenticator_detach".}
 proc fcQAuthenticator_new(): ptr cQAuthenticator {.importc: "QAuthenticator_new".}
-proc fcQAuthenticator_new2(other: pointer): ptr cQAuthenticator {.importc: "QAuthenticator_new2".}
+proc fcQAuthenticator_new2(fromVal: pointer): ptr cQAuthenticator {.importc: "QAuthenticator_new_from".}
 
-proc operatorAssign*(self: gen_qauthenticator_types.QAuthenticator, other: gen_qauthenticator_types.QAuthenticator): void =
-  fcQAuthenticator_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qauthenticator_types.QAuthenticator, fromVal: gen_qauthenticator_types.QAuthenticator): void =
+  fcQAuthenticator_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qauthenticator_types.QAuthenticator, other: gen_qauthenticator_types.QAuthenticator): bool =
   fcQAuthenticator_operatorEqual(self.h, other.h)
@@ -131,6 +131,6 @@ proc create*(T: type gen_qauthenticator_types.QAuthenticator): gen_qauthenticato
   let tmp = gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new(), owned: true)
   tmp
 proc create*(T: type gen_qauthenticator_types.QAuthenticator,
-    other: gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
-  let tmp = gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new2(other.h), owned: true)
+    fromVal: gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
+  let tmp = gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new2(fromVal.h), owned: true)
   tmp

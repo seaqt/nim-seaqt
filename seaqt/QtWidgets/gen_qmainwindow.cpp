@@ -705,17 +705,17 @@ public:
 	friend bool QMainWindow_protectedbase_isSignalConnected(const VirtualQMainWindow* self, QMetaMethod* signal);
 };
 
-VirtualQMainWindow* QMainWindow_new(const QMainWindow_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQMainWindow* QMainWindow_new_parent(const QMainWindow_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMainWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMainWindow(vtbl, parent) : nullptr;
 }
 
-VirtualQMainWindow* QMainWindow_new2(const QMainWindow_VTable* vtbl, size_t vdata) {
+VirtualQMainWindow* QMainWindow_new(const QMainWindow_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMainWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMainWindow(vtbl) : nullptr;
 }
 
-VirtualQMainWindow* QMainWindow_new3(const QMainWindow_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQMainWindow* QMainWindow_new_parent_flags(const QMainWindow_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMainWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMainWindow(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -736,7 +736,7 @@ int QMainWindow_metacall(QMainWindow* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMainWindow_tr(const char* s) {
+struct seaqt_string QMainWindow_tr_s(const char* s) {
 	QString _ret = QMainWindow::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -747,7 +747,7 @@ struct seaqt_string QMainWindow_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QMainWindow_trUtf8(const char* s) {
+struct seaqt_string QMainWindow_trUtf8_s(const char* s) {
 	QString _ret = QMainWindow::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -875,15 +875,15 @@ void QMainWindow_insertToolBarBreak(QMainWindow* self, QToolBar* before) {
 	self->insertToolBarBreak(before);
 }
 
-void QMainWindow_addToolBar(QMainWindow* self, int area, QToolBar* toolbar) {
+void QMainWindow_addToolBar_area_toolbar(QMainWindow* self, int area, QToolBar* toolbar) {
 	self->addToolBar(static_cast<Qt::ToolBarArea>(area), toolbar);
 }
 
-void QMainWindow_addToolBarWithToolbar(QMainWindow* self, QToolBar* toolbar) {
+void QMainWindow_addToolBar_toolbar(QMainWindow* self, QToolBar* toolbar) {
 	self->addToolBar(toolbar);
 }
 
-QToolBar* QMainWindow_addToolBarWithTitle(QMainWindow* self, struct seaqt_string title) {
+QToolBar* QMainWindow_addToolBar_title(QMainWindow* self, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return self->addToolBar(title_QString);
 }
@@ -913,11 +913,11 @@ bool QMainWindow_toolBarBreak(const QMainWindow* self, QToolBar* toolbar) {
 	return self->toolBarBreak(toolbar);
 }
 
-void QMainWindow_addDockWidget(QMainWindow* self, int area, QDockWidget* dockwidget) {
+void QMainWindow_addDockWidget_area_dockwidget(QMainWindow* self, int area, QDockWidget* dockwidget) {
 	self->addDockWidget(static_cast<Qt::DockWidgetArea>(area), dockwidget);
 }
 
-void QMainWindow_addDockWidget2(QMainWindow* self, int area, QDockWidget* dockwidget, int orientation) {
+void QMainWindow_addDockWidget_area_dockwidget_orientation(QMainWindow* self, int area, QDockWidget* dockwidget, int orientation) {
 	self->addDockWidget(static_cast<Qt::DockWidgetArea>(area), dockwidget, static_cast<Qt::Orientation>(orientation));
 }
 
@@ -980,7 +980,7 @@ struct seaqt_string QMainWindow_saveState(const QMainWindow* self) {
 	return _ms;
 }
 
-bool QMainWindow_restoreState(QMainWindow* self, struct seaqt_string state) {
+bool QMainWindow_restoreState_state(QMainWindow* self, struct seaqt_string state) {
 	QByteArray state_QByteArray(state.data, state.len);
 	return self->restoreState(state_QByteArray);
 }
@@ -1052,7 +1052,7 @@ void QMainWindow_connect_tabifiedDockWidgetActivated(QMainWindow* self, intptr_t
 	QMainWindow::connect(self, static_cast<void (QMainWindow::*)(QDockWidget*)>(&QMainWindow::tabifiedDockWidgetActivated), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMainWindow_tr2(const char* s, const char* c) {
+struct seaqt_string QMainWindow_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMainWindow::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1063,7 +1063,7 @@ struct seaqt_string QMainWindow_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMainWindow_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMainWindow_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMainWindow::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1074,7 +1074,7 @@ struct seaqt_string QMainWindow_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QMainWindow_trUtf82(const char* s, const char* c) {
+struct seaqt_string QMainWindow_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QMainWindow::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1085,7 +1085,7 @@ struct seaqt_string QMainWindow_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMainWindow_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QMainWindow_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMainWindow::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1096,11 +1096,11 @@ struct seaqt_string QMainWindow_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QMainWindow_addToolBarBreakWithArea(QMainWindow* self, int area) {
+void QMainWindow_addToolBarBreak_area(QMainWindow* self, int area) {
 	self->addToolBarBreak(static_cast<Qt::ToolBarArea>(area));
 }
 
-struct seaqt_string QMainWindow_saveStateWithVersion(const QMainWindow* self, int version) {
+struct seaqt_string QMainWindow_saveState_version(const QMainWindow* self, int version) {
 	QByteArray _qb = self->saveState(static_cast<int>(version));
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();
@@ -1109,7 +1109,7 @@ struct seaqt_string QMainWindow_saveStateWithVersion(const QMainWindow* self, in
 	return _ms;
 }
 
-bool QMainWindow_restoreState2(QMainWindow* self, struct seaqt_string state, int version) {
+bool QMainWindow_restoreState_state_version(QMainWindow* self, struct seaqt_string state, int version) {
 	QByteArray state_QByteArray(state.data, state.len);
 	return self->restoreState(state_QByteArray, static_cast<int>(version));
 }

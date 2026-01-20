@@ -95,7 +95,7 @@ export
 
 type cQVideoFrame*{.exportc: "QVideoFrame", incompleteStruct.} = object
 
-proc fcQVideoFrame_operatorAssign(self: pointer, other: pointer): void {.importc: "QVideoFrame_operatorAssign".}
+proc fcQVideoFrame_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QVideoFrame_operatorAssign".}
 proc fcQVideoFrame_operatorEqual(self: pointer, other: pointer): bool {.importc: "QVideoFrame_operatorEqual".}
 proc fcQVideoFrame_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QVideoFrame_operatorNotEqual".}
 proc fcQVideoFrame_isValid(self: pointer): bool {.importc: "QVideoFrame_isValid".}
@@ -113,11 +113,11 @@ proc fcQVideoFrame_mapMode(self: pointer): cint {.importc: "QVideoFrame_mapMode"
 proc fcQVideoFrame_map(self: pointer, mode: cint): bool {.importc: "QVideoFrame_map".}
 proc fcQVideoFrame_unmap(self: pointer): void {.importc: "QVideoFrame_unmap".}
 proc fcQVideoFrame_bytesPerLine(self: pointer): cint {.importc: "QVideoFrame_bytesPerLine".}
-proc fcQVideoFrame_bytesPerLineWithPlane(self: pointer, plane: cint): cint {.importc: "QVideoFrame_bytesPerLineWithPlane".}
+proc fcQVideoFrame_bytesPerLinePlane(self: pointer, plane: cint): cint {.importc: "QVideoFrame_bytesPerLine_plane".}
 proc fcQVideoFrame_bits(self: pointer): ptr uint8 {.importc: "QVideoFrame_bits".}
-proc fcQVideoFrame_bitsWithPlane(self: pointer, plane: cint): ptr uint8 {.importc: "QVideoFrame_bitsWithPlane".}
-proc fcQVideoFrame_bits2(self: pointer): ptr uint8 {.importc: "QVideoFrame_bits2".}
-proc fcQVideoFrame_bits3(self: pointer, plane: cint): ptr uint8 {.importc: "QVideoFrame_bits3".}
+proc fcQVideoFrame_bitsInt(self: pointer, plane: cint): ptr uint8 {.importc: "QVideoFrame_bits_int".}
+proc fcQVideoFrame_bitsConst(self: pointer): ptr uint8 {.importc: "QVideoFrame_bits_const".}
+proc fcQVideoFrame_bitsConstInt(self: pointer, plane: cint): ptr uint8 {.importc: "QVideoFrame_bits_const_int".}
 proc fcQVideoFrame_mappedBytes(self: pointer): cint {.importc: "QVideoFrame_mappedBytes".}
 proc fcQVideoFrame_planeCount(self: pointer): cint {.importc: "QVideoFrame_planeCount".}
 proc fcQVideoFrame_handle(self: pointer): pointer {.importc: "QVideoFrame_handle".}
@@ -132,12 +132,12 @@ proc fcQVideoFrame_image(self: pointer): pointer {.importc: "QVideoFrame_image".
 proc fcQVideoFrame_pixelFormatFromImageFormat(format: cint): cint {.importc: "QVideoFrame_pixelFormatFromImageFormat".}
 proc fcQVideoFrame_imageFormatFromPixelFormat(format: cint): cint {.importc: "QVideoFrame_imageFormatFromPixelFormat".}
 proc fcQVideoFrame_new(): ptr cQVideoFrame {.importc: "QVideoFrame_new".}
-proc fcQVideoFrame_new2(bytes: cint, size: pointer, bytesPerLine: cint, format: cint): ptr cQVideoFrame {.importc: "QVideoFrame_new2".}
-proc fcQVideoFrame_new3(image: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new3".}
-proc fcQVideoFrame_new4(other: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new4".}
+proc fcQVideoFrame_new2(bytes: cint, size: pointer, bytesPerLine: cint, format: cint): ptr cQVideoFrame {.importc: "QVideoFrame_new_bytes_size_bytesPerLine_format".}
+proc fcQVideoFrame_new3(image: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new_image".}
+proc fcQVideoFrame_new4(fromVal: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new_from".}
 
-proc operatorAssign*(self: gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): void =
-  fcQVideoFrame_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qvideoframe_types.QVideoFrame, fromVal: gen_qvideoframe_types.QVideoFrame): void =
+  fcQVideoFrame_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): bool =
   fcQVideoFrame_operatorEqual(self.h, other.h)
@@ -191,19 +191,19 @@ proc bytesPerLine*(self: gen_qvideoframe_types.QVideoFrame): cint =
   fcQVideoFrame_bytesPerLine(self.h)
 
 proc bytesPerLine*(self: gen_qvideoframe_types.QVideoFrame, plane: cint): cint =
-  fcQVideoFrame_bytesPerLineWithPlane(self.h, plane)
+  fcQVideoFrame_bytesPerLinePlane(self.h, plane)
 
 proc bits*(self: gen_qvideoframe_types.QVideoFrame): ptr uint8 =
   fcQVideoFrame_bits(self.h)
 
 proc bits*(self: gen_qvideoframe_types.QVideoFrame, plane: cint): ptr uint8 =
-  fcQVideoFrame_bitsWithPlane(self.h, plane)
+  fcQVideoFrame_bitsInt(self.h, plane)
 
 proc bits2*(self: gen_qvideoframe_types.QVideoFrame): ptr uint8 =
-  fcQVideoFrame_bits2(self.h)
+  fcQVideoFrame_bitsConst(self.h)
 
 proc bits2*(self: gen_qvideoframe_types.QVideoFrame, plane: cint): ptr uint8 =
-  fcQVideoFrame_bits3(self.h, plane)
+  fcQVideoFrame_bitsConstInt(self.h, plane)
 
 proc mappedBytes*(self: gen_qvideoframe_types.QVideoFrame): cint =
   fcQVideoFrame_mappedBytes(self.h)
@@ -271,6 +271,6 @@ proc create*(T: type gen_qvideoframe_types.QVideoFrame,
   let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new3(image.h), owned: true)
   tmp
 proc create*(T: type gen_qvideoframe_types.QVideoFrame,
-    other: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
-  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new4(other.h), owned: true)
+    fromVal: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
+  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new4(fromVal.h), owned: true)
   tmp

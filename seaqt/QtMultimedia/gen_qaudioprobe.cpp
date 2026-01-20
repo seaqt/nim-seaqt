@@ -175,7 +175,7 @@ VirtualQAudioProbe* QAudioProbe_new(const QAudioProbe_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQAudioProbe(vtbl) : nullptr;
 }
 
-VirtualQAudioProbe* QAudioProbe_new2(const QAudioProbe_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAudioProbe* QAudioProbe_new_parent(const QAudioProbe_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioProbe>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioProbe(vtbl, parent) : nullptr;
 }
@@ -196,7 +196,7 @@ int QAudioProbe_metacall(QAudioProbe* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAudioProbe_tr(const char* s) {
+struct seaqt_string QAudioProbe_tr_s(const char* s) {
 	QString _ret = QAudioProbe::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -207,7 +207,7 @@ struct seaqt_string QAudioProbe_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAudioProbe_trUtf8(const char* s) {
+struct seaqt_string QAudioProbe_trUtf8_s(const char* s) {
 	QString _ret = QAudioProbe::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -218,11 +218,11 @@ struct seaqt_string QAudioProbe_trUtf8(const char* s) {
 	return _ms;
 }
 
-bool QAudioProbe_setSource(QAudioProbe* self, QMediaObject* source) {
+bool QAudioProbe_setSource_QMediaObject(QAudioProbe* self, QMediaObject* source) {
 	return self->setSource(source);
 }
 
-bool QAudioProbe_setSourceWithSource(QAudioProbe* self, QMediaRecorder* source) {
+bool QAudioProbe_setSource_QMediaRecorder(QAudioProbe* self, QMediaRecorder* source) {
 	return self->setSource(source);
 }
 
@@ -263,7 +263,7 @@ void QAudioProbe_connect_flush(QAudioProbe* self, intptr_t slot, void (*callback
 	QAudioProbe::connect(self, static_cast<void (QAudioProbe::*)()>(&QAudioProbe::flush), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAudioProbe_tr2(const char* s, const char* c) {
+struct seaqt_string QAudioProbe_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAudioProbe::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -274,7 +274,7 @@ struct seaqt_string QAudioProbe_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioProbe_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAudioProbe_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioProbe::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -285,7 +285,7 @@ struct seaqt_string QAudioProbe_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QAudioProbe_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAudioProbe_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAudioProbe::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -296,7 +296,7 @@ struct seaqt_string QAudioProbe_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioProbe_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAudioProbe_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioProbe::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

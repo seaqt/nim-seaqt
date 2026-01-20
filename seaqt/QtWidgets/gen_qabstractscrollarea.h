@@ -152,15 +152,15 @@ typedef struct QAbstractScrollArea_VTable{
 void* QAbstractScrollArea_vdata(VirtualQAbstractScrollArea* self);
 VirtualQAbstractScrollArea* vdata_QAbstractScrollArea(void* vdata);
 
-VirtualQAbstractScrollArea* QAbstractScrollArea_new(const QAbstractScrollArea_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQAbstractScrollArea* QAbstractScrollArea_new2(const QAbstractScrollArea_VTable* vtbl, size_t vdata);
+VirtualQAbstractScrollArea* QAbstractScrollArea_new_parent(const QAbstractScrollArea_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQAbstractScrollArea* QAbstractScrollArea_new(const QAbstractScrollArea_VTable* vtbl, size_t vdata);
 
 void QAbstractScrollArea_virtbase(QAbstractScrollArea* src, QFrame** outptr_QFrame);
 QMetaObject* QAbstractScrollArea_metaObject(const QAbstractScrollArea* self);
 void* QAbstractScrollArea_metacast(QAbstractScrollArea* self, const char* param1);
 int QAbstractScrollArea_metacall(QAbstractScrollArea* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractScrollArea_tr(const char* s);
-struct seaqt_string QAbstractScrollArea_trUtf8(const char* s);
+struct seaqt_string QAbstractScrollArea_tr_s(const char* s);
+struct seaqt_string QAbstractScrollArea_trUtf8_s(const char* s);
 int QAbstractScrollArea_verticalScrollBarPolicy(const QAbstractScrollArea* self);
 void QAbstractScrollArea_setVerticalScrollBarPolicy(QAbstractScrollArea* self, int verticalScrollBarPolicy);
 QScrollBar* QAbstractScrollArea_verticalScrollBar(const QAbstractScrollArea* self);
@@ -199,10 +199,10 @@ void QAbstractScrollArea_dropEvent(QAbstractScrollArea* self, QDropEvent* param1
 void QAbstractScrollArea_keyPressEvent(QAbstractScrollArea* self, QKeyEvent* param1);
 void QAbstractScrollArea_scrollContentsBy(QAbstractScrollArea* self, int dx, int dy);
 QSize* QAbstractScrollArea_viewportSizeHint(const QAbstractScrollArea* self);
-struct seaqt_string QAbstractScrollArea_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractScrollArea_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractScrollArea_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractScrollArea_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractScrollArea_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractScrollArea_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractScrollArea_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractScrollArea_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractScrollArea_virtualbase_metaObject(const VirtualQAbstractScrollArea* self);
 void* QAbstractScrollArea_virtualbase_metacast(VirtualQAbstractScrollArea* self, const char* param1);
@@ -259,8 +259,8 @@ void QAbstractScrollArea_virtualbase_customEvent(VirtualQAbstractScrollArea* sel
 void QAbstractScrollArea_virtualbase_connectNotify(VirtualQAbstractScrollArea* self, QMetaMethod* signal);
 void QAbstractScrollArea_virtualbase_disconnectNotify(VirtualQAbstractScrollArea* self, QMetaMethod* signal);
 
-void QAbstractScrollArea_protectedbase_setViewportMargins(VirtualQAbstractScrollArea* self, int left, int top, int right, int bottom);
-void QAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(VirtualQAbstractScrollArea* self, QMargins* margins);
+void QAbstractScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQAbstractScrollArea* self, int left, int top, int right, int bottom);
+void QAbstractScrollArea_protectedbase_setViewportMargins_margins(VirtualQAbstractScrollArea* self, QMargins* margins);
 QMargins* QAbstractScrollArea_protectedbase_viewportMargins(const VirtualQAbstractScrollArea* self);
 void QAbstractScrollArea_protectedbase_drawFrame(VirtualQAbstractScrollArea* self, QPainter* param1);
 void QAbstractScrollArea_protectedbase_initStyleOption(const VirtualQAbstractScrollArea* self, QStyleOptionFrame* option);

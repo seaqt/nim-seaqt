@@ -265,7 +265,7 @@ struct seaqt_string QWebSettings_cssMediaType(const QWebSettings* self) {
 	return _ms;
 }
 
-void QWebSettings_enablePersistentStorageWithPath(struct seaqt_string path) {
+void QWebSettings_enablePersistentStorage_path(struct seaqt_string path) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	QWebSettings::enablePersistentStorage(path_QString);
 }

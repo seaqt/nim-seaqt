@@ -81,8 +81,8 @@ type cQMediaPlaylist*{.exportc: "QMediaPlaylist", incompleteStruct.} = object
 proc fcQMediaPlaylist_metaObject(self: pointer): pointer {.importc: "QMediaPlaylist_metaObject".}
 proc fcQMediaPlaylist_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaPlaylist_metacast".}
 proc fcQMediaPlaylist_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaPlaylist_metacall".}
-proc fcQMediaPlaylist_tr(s: cstring): struct_seaqt_string {.importc: "QMediaPlaylist_tr".}
-proc fcQMediaPlaylist_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaPlaylist_trUtf8".}
+proc fcQMediaPlaylist_trS(s: cstring): struct_seaqt_string {.importc: "QMediaPlaylist_tr_s".}
+proc fcQMediaPlaylist_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaPlaylist_trUtf8_s".}
 proc fcQMediaPlaylist_mediaObject(self: pointer): pointer {.importc: "QMediaPlaylist_mediaObject".}
 proc fcQMediaPlaylist_playbackMode(self: pointer): cint {.importc: "QMediaPlaylist_playbackMode".}
 proc fcQMediaPlaylist_setPlaybackMode(self: pointer, mode: cint): void {.importc: "QMediaPlaylist_setPlaybackMode".}
@@ -94,19 +94,19 @@ proc fcQMediaPlaylist_media(self: pointer, index: cint): pointer {.importc: "QMe
 proc fcQMediaPlaylist_mediaCount(self: pointer): cint {.importc: "QMediaPlaylist_mediaCount".}
 proc fcQMediaPlaylist_isEmpty(self: pointer): bool {.importc: "QMediaPlaylist_isEmpty".}
 proc fcQMediaPlaylist_isReadOnly(self: pointer): bool {.importc: "QMediaPlaylist_isReadOnly".}
-proc fcQMediaPlaylist_addMedia(self: pointer, content: pointer): bool {.importc: "QMediaPlaylist_addMedia".}
-proc fcQMediaPlaylist_addMediaWithItems(self: pointer, items: struct_seaqt_array): bool {.importc: "QMediaPlaylist_addMediaWithItems".}
-proc fcQMediaPlaylist_insertMedia(self: pointer, index: cint, content: pointer): bool {.importc: "QMediaPlaylist_insertMedia".}
-proc fcQMediaPlaylist_insertMedia2(self: pointer, index: cint, items: struct_seaqt_array): bool {.importc: "QMediaPlaylist_insertMedia2".}
+proc fcQMediaPlaylist_addMediaContent(self: pointer, content: pointer): bool {.importc: "QMediaPlaylist_addMedia_content".}
+proc fcQMediaPlaylist_addMediaItems(self: pointer, items: struct_seaqt_array): bool {.importc: "QMediaPlaylist_addMedia_items".}
+proc fcQMediaPlaylist_insertMediaIndexContent(self: pointer, index: cint, content: pointer): bool {.importc: "QMediaPlaylist_insertMedia_index_content".}
+proc fcQMediaPlaylist_insertMediaIndexItems(self: pointer, index: cint, items: struct_seaqt_array): bool {.importc: "QMediaPlaylist_insertMedia_index_items".}
 proc fcQMediaPlaylist_moveMedia(self: pointer, fromVal: cint, to: cint): bool {.importc: "QMediaPlaylist_moveMedia".}
-proc fcQMediaPlaylist_removeMedia(self: pointer, pos: cint): bool {.importc: "QMediaPlaylist_removeMedia".}
-proc fcQMediaPlaylist_removeMedia2(self: pointer, start: cint, endVal: cint): bool {.importc: "QMediaPlaylist_removeMedia2".}
+proc fcQMediaPlaylist_removeMediaPos(self: pointer, pos: cint): bool {.importc: "QMediaPlaylist_removeMedia_pos".}
+proc fcQMediaPlaylist_removeMediaStartEnd(self: pointer, start: cint, endVal: cint): bool {.importc: "QMediaPlaylist_removeMedia_start_end".}
 proc fcQMediaPlaylist_clear(self: pointer): bool {.importc: "QMediaPlaylist_clear".}
-proc fcQMediaPlaylist_load(self: pointer, request: pointer): void {.importc: "QMediaPlaylist_load".}
-proc fcQMediaPlaylist_loadWithLocation(self: pointer, location: pointer): void {.importc: "QMediaPlaylist_loadWithLocation".}
-proc fcQMediaPlaylist_loadWithDevice(self: pointer, device: pointer): void {.importc: "QMediaPlaylist_loadWithDevice".}
-proc fcQMediaPlaylist_save(self: pointer, location: pointer): bool {.importc: "QMediaPlaylist_save".}
-proc fcQMediaPlaylist_save2(self: pointer, device: pointer, format: cstring): bool {.importc: "QMediaPlaylist_save2".}
+proc fcQMediaPlaylist_loadRequest(self: pointer, request: pointer): void {.importc: "QMediaPlaylist_load_request".}
+proc fcQMediaPlaylist_loadLocation(self: pointer, location: pointer): void {.importc: "QMediaPlaylist_load_location".}
+proc fcQMediaPlaylist_loadDevice(self: pointer, device: pointer): void {.importc: "QMediaPlaylist_load_device".}
+proc fcQMediaPlaylist_saveLocation(self: pointer, location: pointer): bool {.importc: "QMediaPlaylist_save_location".}
+proc fcQMediaPlaylist_saveDeviceFormat(self: pointer, device: pointer, format: cstring): bool {.importc: "QMediaPlaylist_save_device_format".}
 proc fcQMediaPlaylist_error(self: pointer): cint {.importc: "QMediaPlaylist_error".}
 proc fcQMediaPlaylist_errorString(self: pointer): struct_seaqt_string {.importc: "QMediaPlaylist_errorString".}
 proc fcQMediaPlaylist_shuffle(self: pointer): void {.importc: "QMediaPlaylist_shuffle".}
@@ -133,16 +133,16 @@ proc fcQMediaPlaylist_loaded(self: pointer): void {.importc: "QMediaPlaylist_loa
 proc fcQMediaPlaylist_connect_loaded(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_loaded".}
 proc fcQMediaPlaylist_loadFailed(self: pointer): void {.importc: "QMediaPlaylist_loadFailed".}
 proc fcQMediaPlaylist_connect_loadFailed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_loadFailed".}
-proc fcQMediaPlaylist_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlaylist_tr2".}
-proc fcQMediaPlaylist_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlaylist_tr3".}
-proc fcQMediaPlaylist_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlaylist_trUtf82".}
-proc fcQMediaPlaylist_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlaylist_trUtf83".}
-proc fcQMediaPlaylist_nextIndexWithSteps(self: pointer, steps: cint): cint {.importc: "QMediaPlaylist_nextIndexWithSteps".}
-proc fcQMediaPlaylist_previousIndexWithSteps(self: pointer, steps: cint): cint {.importc: "QMediaPlaylist_previousIndexWithSteps".}
-proc fcQMediaPlaylist_load2(self: pointer, request: pointer, format: cstring): void {.importc: "QMediaPlaylist_load2".}
-proc fcQMediaPlaylist_load3(self: pointer, location: pointer, format: cstring): void {.importc: "QMediaPlaylist_load3".}
-proc fcQMediaPlaylist_load4(self: pointer, device: pointer, format: cstring): void {.importc: "QMediaPlaylist_load4".}
-proc fcQMediaPlaylist_save3(self: pointer, location: pointer, format: cstring): bool {.importc: "QMediaPlaylist_save3".}
+proc fcQMediaPlaylist_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlaylist_tr_s_c".}
+proc fcQMediaPlaylist_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlaylist_tr_s_c_n".}
+proc fcQMediaPlaylist_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlaylist_trUtf8_s_c".}
+proc fcQMediaPlaylist_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlaylist_trUtf8_s_c_n".}
+proc fcQMediaPlaylist_nextIndexSteps(self: pointer, steps: cint): cint {.importc: "QMediaPlaylist_nextIndex_steps".}
+proc fcQMediaPlaylist_previousIndexSteps(self: pointer, steps: cint): cint {.importc: "QMediaPlaylist_previousIndex_steps".}
+proc fcQMediaPlaylist_loadRequestFormat(self: pointer, request: pointer, format: cstring): void {.importc: "QMediaPlaylist_load_request_format".}
+proc fcQMediaPlaylist_loadLocationFormat(self: pointer, location: pointer, format: cstring): void {.importc: "QMediaPlaylist_load_location_format".}
+proc fcQMediaPlaylist_loadDeviceFormat(self: pointer, device: pointer, format: cstring): void {.importc: "QMediaPlaylist_load_device_format".}
+proc fcQMediaPlaylist_saveLocationFormat(self: pointer, location: pointer, format: cstring): bool {.importc: "QMediaPlaylist_save_location_format".}
 proc fcQMediaPlaylist_vdata(self: pointer): ptr pointer {.importc: "QMediaPlaylist_vdata".}
 proc fvdata_cQMediaPlaylist(self: pointer): pointer {.importc: "vdata_QMediaPlaylist".}
 
@@ -177,7 +177,7 @@ proc fcQMediaPlaylist_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQMediaPlaylist_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlaylist_protectedbase_receivers".}
 proc fcQMediaPlaylist_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaPlaylist_protectedbase_isSignalConnected".}
 proc fcQMediaPlaylist_new(vtbl: pointer, vdata: csize_t): ptr cQMediaPlaylist {.importc: "QMediaPlaylist_new".}
-proc fcQMediaPlaylist_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaPlaylist {.importc: "QMediaPlaylist_new2".}
+proc fcQMediaPlaylist_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaPlaylist {.importc: "QMediaPlaylist_new_parent".}
 proc fcQMediaPlaylist_staticMetaObject(): pointer {.importc: "QMediaPlaylist_staticMetaObject".}
 
 proc metaObject*(self: gen_qmediaplaylist_types.QMediaPlaylist): gen_qobjectdefs_types.QMetaObject =
@@ -190,13 +190,13 @@ proc metacall*(self: gen_qmediaplaylist_types.QMediaPlaylist, param1: cint, para
   fcQMediaPlaylist_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring): string =
-  let v_ms = fcQMediaPlaylist_tr(s)
+  let v_ms = fcQMediaPlaylist_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring): string =
-  let v_ms = fcQMediaPlaylist_trUtf8(s)
+  let v_ms = fcQMediaPlaylist_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -235,51 +235,51 @@ proc isReadOnly*(self: gen_qmediaplaylist_types.QMediaPlaylist): bool =
   fcQMediaPlaylist_isReadOnly(self.h)
 
 proc addMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, content: gen_qmediacontent_types.QMediaContent): bool =
-  fcQMediaPlaylist_addMedia(self.h, content.h)
+  fcQMediaPlaylist_addMediaContent(self.h, content.h)
 
 proc addMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, items: openArray[gen_qmediacontent_types.QMediaContent]): bool =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  fcQMediaPlaylist_addMediaWithItems(self.h, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
+  fcQMediaPlaylist_addMediaItems(self.h, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc insertMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, index: cint, content: gen_qmediacontent_types.QMediaContent): bool =
-  fcQMediaPlaylist_insertMedia(self.h, index, content.h)
+  fcQMediaPlaylist_insertMediaIndexContent(self.h, index, content.h)
 
 proc insertMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, index: cint, items: openArray[gen_qmediacontent_types.QMediaContent]): bool =
   var items_CArray = newSeq[pointer](len(items))
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  fcQMediaPlaylist_insertMedia2(self.h, index, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
+  fcQMediaPlaylist_insertMediaIndexItems(self.h, index, struct_seaqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0])))
 
 proc moveMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, fromVal: cint, to: cint): bool =
   fcQMediaPlaylist_moveMedia(self.h, fromVal, to)
 
 proc removeMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, pos: cint): bool =
-  fcQMediaPlaylist_removeMedia(self.h, pos)
+  fcQMediaPlaylist_removeMediaPos(self.h, pos)
 
 proc removeMedia*(self: gen_qmediaplaylist_types.QMediaPlaylist, start: cint, endVal: cint): bool =
-  fcQMediaPlaylist_removeMedia2(self.h, start, endVal)
+  fcQMediaPlaylist_removeMediaStartEnd(self.h, start, endVal)
 
 proc clear*(self: gen_qmediaplaylist_types.QMediaPlaylist): bool =
   fcQMediaPlaylist_clear(self.h)
 
 proc load*(self: gen_qmediaplaylist_types.QMediaPlaylist, request: gen_qnetworkrequest_types.QNetworkRequest): void =
-  fcQMediaPlaylist_load(self.h, request.h)
+  fcQMediaPlaylist_loadRequest(self.h, request.h)
 
 proc load*(self: gen_qmediaplaylist_types.QMediaPlaylist, location: gen_qurl_types.QUrl): void =
-  fcQMediaPlaylist_loadWithLocation(self.h, location.h)
+  fcQMediaPlaylist_loadLocation(self.h, location.h)
 
 proc load*(self: gen_qmediaplaylist_types.QMediaPlaylist, device: gen_qiodevice_types.QIODevice): void =
-  fcQMediaPlaylist_loadWithDevice(self.h, device.h)
+  fcQMediaPlaylist_loadDevice(self.h, device.h)
 
 proc save*(self: gen_qmediaplaylist_types.QMediaPlaylist, location: gen_qurl_types.QUrl): bool =
-  fcQMediaPlaylist_save(self.h, location.h)
+  fcQMediaPlaylist_saveLocation(self.h, location.h)
 
 proc save*(self: gen_qmediaplaylist_types.QMediaPlaylist, device: gen_qiodevice_types.QIODevice, format: cstring): bool =
-  fcQMediaPlaylist_save2(self.h, device.h, format)
+  fcQMediaPlaylist_saveDeviceFormat(self.h, device.h, format)
 
 proc error*(self: gen_qmediaplaylist_types.QMediaPlaylist): cint =
   cint(fcQMediaPlaylist_error(self.h))
@@ -509,46 +509,46 @@ proc onLoadFailed*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPl
   fcQMediaPlaylist_connect_loadFailed(self.h, cast[int](addr tmp[]), fcQMediaPlaylist_slot_callback_loadFailed, fcQMediaPlaylist_slot_callback_loadFailed_release)
 
 proc tr*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaPlaylist_tr2(s, c)
+  let v_ms = fcQMediaPlaylist_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaPlaylist_tr3(s, c, n)
+  let v_ms = fcQMediaPlaylist_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaPlaylist_trUtf82(s, c)
+  let v_ms = fcQMediaPlaylist_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaPlaylist_trUtf83(s, c, n)
+  let v_ms = fcQMediaPlaylist_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc nextIndex*(self: gen_qmediaplaylist_types.QMediaPlaylist, steps: cint): cint =
-  fcQMediaPlaylist_nextIndexWithSteps(self.h, steps)
+  fcQMediaPlaylist_nextIndexSteps(self.h, steps)
 
 proc previousIndex*(self: gen_qmediaplaylist_types.QMediaPlaylist, steps: cint): cint =
-  fcQMediaPlaylist_previousIndexWithSteps(self.h, steps)
+  fcQMediaPlaylist_previousIndexSteps(self.h, steps)
 
 proc load*(self: gen_qmediaplaylist_types.QMediaPlaylist, request: gen_qnetworkrequest_types.QNetworkRequest, format: cstring): void =
-  fcQMediaPlaylist_load2(self.h, request.h, format)
+  fcQMediaPlaylist_loadRequestFormat(self.h, request.h, format)
 
 proc load*(self: gen_qmediaplaylist_types.QMediaPlaylist, location: gen_qurl_types.QUrl, format: cstring): void =
-  fcQMediaPlaylist_load3(self.h, location.h, format)
+  fcQMediaPlaylist_loadLocationFormat(self.h, location.h, format)
 
 proc load*(self: gen_qmediaplaylist_types.QMediaPlaylist, device: gen_qiodevice_types.QIODevice, format: cstring): void =
-  fcQMediaPlaylist_load4(self.h, device.h, format)
+  fcQMediaPlaylist_loadDeviceFormat(self.h, device.h, format)
 
 proc save*(self: gen_qmediaplaylist_types.QMediaPlaylist, location: gen_qurl_types.QUrl, format: cstring): bool =
-  fcQMediaPlaylist_save3(self.h, location.h, format)
+  fcQMediaPlaylist_saveLocationFormat(self.h, location.h, format)
 
 type QMediaPlaylistmetaObjectProc* = proc(self: QMediaPlaylist): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMediaPlaylistmetacastProc* = proc(self: QMediaPlaylist, param1: cstring): pointer {.raises: [], gcsafe.}

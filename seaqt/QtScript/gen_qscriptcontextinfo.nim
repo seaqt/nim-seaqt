@@ -50,7 +50,7 @@ export
 
 type cQScriptContextInfo*{.exportc: "QScriptContextInfo", incompleteStruct.} = object
 
-proc fcQScriptContextInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QScriptContextInfo_operatorAssign".}
+proc fcQScriptContextInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QScriptContextInfo_operatorAssign".}
 proc fcQScriptContextInfo_isNull(self: pointer): bool {.importc: "QScriptContextInfo_isNull".}
 proc fcQScriptContextInfo_scriptId(self: pointer): clonglong {.importc: "QScriptContextInfo_scriptId".}
 proc fcQScriptContextInfo_fileName(self: pointer): struct_seaqt_string {.importc: "QScriptContextInfo_fileName".}
@@ -64,12 +64,12 @@ proc fcQScriptContextInfo_functionEndLineNumber(self: pointer): cint {.importc: 
 proc fcQScriptContextInfo_functionMetaIndex(self: pointer): cint {.importc: "QScriptContextInfo_functionMetaIndex".}
 proc fcQScriptContextInfo_operatorEqual(self: pointer, other: pointer): bool {.importc: "QScriptContextInfo_operatorEqual".}
 proc fcQScriptContextInfo_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QScriptContextInfo_operatorNotEqual".}
-proc fcQScriptContextInfo_new(context: pointer): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new".}
-proc fcQScriptContextInfo_new2(other: pointer): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new2".}
-proc fcQScriptContextInfo_new3(): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new3".}
+proc fcQScriptContextInfo_new(context: pointer): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new_context".}
+proc fcQScriptContextInfo_new2(fromVal: pointer): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new_from".}
+proc fcQScriptContextInfo_new3(): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new".}
 
-proc operatorAssign*(self: gen_qscriptcontextinfo_types.QScriptContextInfo, other: gen_qscriptcontextinfo_types.QScriptContextInfo): void =
-  fcQScriptContextInfo_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qscriptcontextinfo_types.QScriptContextInfo, fromVal: gen_qscriptcontextinfo_types.QScriptContextInfo): void =
+  fcQScriptContextInfo_operatorAssign(self.h, fromVal.h)
 
 proc isNull*(self: gen_qscriptcontextinfo_types.QScriptContextInfo): bool =
   fcQScriptContextInfo_isNull(self.h)
@@ -130,8 +130,8 @@ proc create*(T: type gen_qscriptcontextinfo_types.QScriptContextInfo,
   let tmp = gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new(context.h), owned: true)
   tmp
 proc create*(T: type gen_qscriptcontextinfo_types.QScriptContextInfo,
-    other: gen_qscriptcontextinfo_types.QScriptContextInfo): gen_qscriptcontextinfo_types.QScriptContextInfo =
-  let tmp = gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new2(other.h), owned: true)
+    fromVal: gen_qscriptcontextinfo_types.QScriptContextInfo): gen_qscriptcontextinfo_types.QScriptContextInfo =
+  let tmp = gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qscriptcontextinfo_types.QScriptContextInfo): gen_qscriptcontextinfo_types.QScriptContextInfo =
   let tmp = gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new3(), owned: true)

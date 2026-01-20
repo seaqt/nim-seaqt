@@ -149,28 +149,28 @@ typedef struct QPrintPreviewDialog_VTable{
 void* QPrintPreviewDialog_vdata(VirtualQPrintPreviewDialog* self);
 VirtualQPrintPreviewDialog* vdata_QPrintPreviewDialog(void* vdata);
 
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new2(const QPrintPreviewDialog_VTable* vtbl, size_t vdata);
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new3(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer);
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new4(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new5(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
-VirtualQPrintPreviewDialog* QPrintPreviewDialog_new6(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent, int flags);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_parent(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new(const QPrintPreviewDialog_VTable* vtbl, size_t vdata);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_printer(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_parent_flags(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_printer_parent(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent);
+VirtualQPrintPreviewDialog* QPrintPreviewDialog_new_printer_parent_flags(const QPrintPreviewDialog_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent, int flags);
 
 void QPrintPreviewDialog_virtbase(QPrintPreviewDialog* src, QDialog** outptr_QDialog);
 QMetaObject* QPrintPreviewDialog_metaObject(const QPrintPreviewDialog* self);
 void* QPrintPreviewDialog_metacast(QPrintPreviewDialog* self, const char* param1);
 int QPrintPreviewDialog_metacall(QPrintPreviewDialog* self, int param1, int param2, void** param3);
-struct seaqt_string QPrintPreviewDialog_tr(const char* s);
-struct seaqt_string QPrintPreviewDialog_trUtf8(const char* s);
+struct seaqt_string QPrintPreviewDialog_tr_s(const char* s);
+struct seaqt_string QPrintPreviewDialog_trUtf8_s(const char* s);
 QPrinter* QPrintPreviewDialog_printer(QPrintPreviewDialog* self);
 void QPrintPreviewDialog_setVisible(QPrintPreviewDialog* self, bool visible);
 void QPrintPreviewDialog_done(QPrintPreviewDialog* self, int result);
 void QPrintPreviewDialog_paintRequested(QPrintPreviewDialog* self, QPrinter* printer);
 void QPrintPreviewDialog_connect_paintRequested(QPrintPreviewDialog* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t));
-struct seaqt_string QPrintPreviewDialog_tr2(const char* s, const char* c);
-struct seaqt_string QPrintPreviewDialog_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPrintPreviewDialog_trUtf82(const char* s, const char* c);
-struct seaqt_string QPrintPreviewDialog_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QPrintPreviewDialog_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPrintPreviewDialog_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPrintPreviewDialog_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPrintPreviewDialog_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPrintPreviewDialog_virtualbase_metaObject(const VirtualQPrintPreviewDialog* self);
 void* QPrintPreviewDialog_virtualbase_metacast(VirtualQPrintPreviewDialog* self, const char* param1);

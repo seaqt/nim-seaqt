@@ -148,15 +148,15 @@ typedef struct QVideoWidget_VTable{
 void* QVideoWidget_vdata(VirtualQVideoWidget* self);
 VirtualQVideoWidget* vdata_QVideoWidget(void* vdata);
 
-VirtualQVideoWidget* QVideoWidget_new(const QVideoWidget_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQVideoWidget* QVideoWidget_new2(const QVideoWidget_VTable* vtbl, size_t vdata);
+VirtualQVideoWidget* QVideoWidget_new_parent(const QVideoWidget_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQVideoWidget* QVideoWidget_new(const QVideoWidget_VTable* vtbl, size_t vdata);
 
 void QVideoWidget_virtbase(QVideoWidget* src, QWidget** outptr_QWidget, QMediaBindableInterface** outptr_QMediaBindableInterface);
 QMetaObject* QVideoWidget_metaObject(const QVideoWidget* self);
 void* QVideoWidget_metacast(QVideoWidget* self, const char* param1);
 int QVideoWidget_metacall(QVideoWidget* self, int param1, int param2, void** param3);
-struct seaqt_string QVideoWidget_tr(const char* s);
-struct seaqt_string QVideoWidget_trUtf8(const char* s);
+struct seaqt_string QVideoWidget_tr_s(const char* s);
+struct seaqt_string QVideoWidget_trUtf8_s(const char* s);
 QMediaObject* QVideoWidget_mediaObject(const QVideoWidget* self);
 QAbstractVideoSurface* QVideoWidget_videoSurface(const QVideoWidget* self);
 int QVideoWidget_aspectRatioMode(const QVideoWidget* self);
@@ -188,10 +188,10 @@ void QVideoWidget_resizeEvent(QVideoWidget* self, QResizeEvent* event);
 void QVideoWidget_moveEvent(QVideoWidget* self, QMoveEvent* event);
 void QVideoWidget_paintEvent(QVideoWidget* self, QPaintEvent* event);
 bool QVideoWidget_setMediaObject(QVideoWidget* self, QMediaObject* object);
-struct seaqt_string QVideoWidget_tr2(const char* s, const char* c);
-struct seaqt_string QVideoWidget_tr3(const char* s, const char* c, int n);
-struct seaqt_string QVideoWidget_trUtf82(const char* s, const char* c);
-struct seaqt_string QVideoWidget_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QVideoWidget_tr_s_c(const char* s, const char* c);
+struct seaqt_string QVideoWidget_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QVideoWidget_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QVideoWidget_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QVideoWidget_virtualbase_metaObject(const VirtualQVideoWidget* self);
 void* QVideoWidget_virtualbase_metacast(VirtualQVideoWidget* self, const char* param1);

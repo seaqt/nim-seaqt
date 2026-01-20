@@ -692,32 +692,32 @@ public:
 	friend bool QPrintPreviewWidget_protectedbase_isSignalConnected(const VirtualQPrintPreviewWidget* self, QMetaMethod* signal);
 };
 
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_parent(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewWidget(vtbl, parent) : nullptr;
 }
 
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new2(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer) {
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_printer(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewWidget(vtbl, printer) : nullptr;
 }
 
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new3(const QPrintPreviewWidget_VTable* vtbl, size_t vdata) {
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new(const QPrintPreviewWidget_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewWidget(vtbl) : nullptr;
 }
 
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new4(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent) {
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_printer_parent(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewWidget(vtbl, printer, parent) : nullptr;
 }
 
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new5(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent, int flags) {
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_printer_parent_flags(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QPrinter* printer, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewWidget(vtbl, printer, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
 
-VirtualQPrintPreviewWidget* QPrintPreviewWidget_new6(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQPrintPreviewWidget* QPrintPreviewWidget_new_parent_flags(const QPrintPreviewWidget_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrintPreviewWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrintPreviewWidget(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -738,7 +738,7 @@ int QPrintPreviewWidget_metacall(QPrintPreviewWidget* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPrintPreviewWidget_tr(const char* s) {
+struct seaqt_string QPrintPreviewWidget_tr_s(const char* s) {
 	QString _ret = QPrintPreviewWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -749,7 +749,7 @@ struct seaqt_string QPrintPreviewWidget_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QPrintPreviewWidget_trUtf8(const char* s) {
+struct seaqt_string QPrintPreviewWidget_trUtf8_s(const char* s) {
 	QString _ret = QPrintPreviewWidget::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -887,7 +887,7 @@ void QPrintPreviewWidget_connect_previewChanged(QPrintPreviewWidget* self, intpt
 	QPrintPreviewWidget::connect(self, static_cast<void (QPrintPreviewWidget::*)()>(&QPrintPreviewWidget::previewChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPrintPreviewWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QPrintPreviewWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPrintPreviewWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -898,7 +898,7 @@ struct seaqt_string QPrintPreviewWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPrintPreviewWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPrintPreviewWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPrintPreviewWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -909,7 +909,7 @@ struct seaqt_string QPrintPreviewWidget_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QPrintPreviewWidget_trUtf82(const char* s, const char* c) {
+struct seaqt_string QPrintPreviewWidget_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QPrintPreviewWidget::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -920,7 +920,7 @@ struct seaqt_string QPrintPreviewWidget_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPrintPreviewWidget_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QPrintPreviewWidget_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPrintPreviewWidget::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -931,11 +931,11 @@ struct seaqt_string QPrintPreviewWidget_trUtf83(const char* s, const char* c, in
 	return _ms;
 }
 
-void QPrintPreviewWidget_zoomInWithZoom(QPrintPreviewWidget* self, double zoom) {
+void QPrintPreviewWidget_zoomIn_zoom(QPrintPreviewWidget* self, double zoom) {
 	self->zoomIn(static_cast<qreal>(zoom));
 }
 
-void QPrintPreviewWidget_zoomOutWithZoom(QPrintPreviewWidget* self, double zoom) {
+void QPrintPreviewWidget_zoomOut_zoom(QPrintPreviewWidget* self, double zoom) {
 	self->zoomOut(static_cast<qreal>(zoom));
 }
 

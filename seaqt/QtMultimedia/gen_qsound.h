@@ -50,27 +50,27 @@ typedef struct QSound_VTable{
 void* QSound_vdata(VirtualQSound* self);
 VirtualQSound* vdata_QSound(void* vdata);
 
-VirtualQSound* QSound_new(const QSound_VTable* vtbl, size_t vdata, struct seaqt_string filename);
-VirtualQSound* QSound_new2(const QSound_VTable* vtbl, size_t vdata, struct seaqt_string filename, QObject* parent);
+VirtualQSound* QSound_new_filename(const QSound_VTable* vtbl, size_t vdata, struct seaqt_string filename);
+VirtualQSound* QSound_new_filename_parent(const QSound_VTable* vtbl, size_t vdata, struct seaqt_string filename, QObject* parent);
 
 void QSound_virtbase(QSound* src, QObject** outptr_QObject);
 QMetaObject* QSound_metaObject(const QSound* self);
 void* QSound_metacast(QSound* self, const char* param1);
 int QSound_metacall(QSound* self, int param1, int param2, void** param3);
-struct seaqt_string QSound_tr(const char* s);
-struct seaqt_string QSound_trUtf8(const char* s);
-void QSound_play(struct seaqt_string filename);
+struct seaqt_string QSound_tr_s(const char* s);
+struct seaqt_string QSound_trUtf8_s(const char* s);
+void QSound_play_filename(struct seaqt_string filename);
 int QSound_loops(const QSound* self);
 int QSound_loopsRemaining(const QSound* self);
 void QSound_setLoops(QSound* self, int loops);
 struct seaqt_string QSound_fileName(const QSound* self);
 bool QSound_isFinished(const QSound* self);
-void QSound_play2(QSound* self);
+void QSound_play(QSound* self);
 void QSound_stop(QSound* self);
-struct seaqt_string QSound_tr2(const char* s, const char* c);
-struct seaqt_string QSound_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSound_trUtf82(const char* s, const char* c);
-struct seaqt_string QSound_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSound_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSound_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSound_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSound_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSound_virtualbase_metaObject(const VirtualQSound* self);
 void* QSound_virtualbase_metacast(VirtualQSound* self, const char* param1);

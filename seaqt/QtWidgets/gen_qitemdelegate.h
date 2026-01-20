@@ -95,14 +95,14 @@ void* QItemDelegate_vdata(VirtualQItemDelegate* self);
 VirtualQItemDelegate* vdata_QItemDelegate(void* vdata);
 
 VirtualQItemDelegate* QItemDelegate_new(const QItemDelegate_VTable* vtbl, size_t vdata);
-VirtualQItemDelegate* QItemDelegate_new2(const QItemDelegate_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQItemDelegate* QItemDelegate_new_parent(const QItemDelegate_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QItemDelegate_virtbase(QItemDelegate* src, QAbstractItemDelegate** outptr_QAbstractItemDelegate);
 QMetaObject* QItemDelegate_metaObject(const QItemDelegate* self);
 void* QItemDelegate_metacast(QItemDelegate* self, const char* param1);
 int QItemDelegate_metacall(QItemDelegate* self, int param1, int param2, void** param3);
-struct seaqt_string QItemDelegate_tr(const char* s);
-struct seaqt_string QItemDelegate_trUtf8(const char* s);
+struct seaqt_string QItemDelegate_tr_s(const char* s);
+struct seaqt_string QItemDelegate_trUtf8_s(const char* s);
 bool QItemDelegate_hasClipping(const QItemDelegate* self);
 void QItemDelegate_setClipping(QItemDelegate* self, bool clip);
 void QItemDelegate_paint(const QItemDelegate* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
@@ -119,10 +119,10 @@ void QItemDelegate_drawFocus(const QItemDelegate* self, QPainter* painter, QStyl
 void QItemDelegate_drawCheck(const QItemDelegate* self, QPainter* painter, QStyleOptionViewItem* option, QRect* rect, int state);
 bool QItemDelegate_eventFilter(QItemDelegate* self, QObject* object, QEvent* event);
 bool QItemDelegate_editorEvent(QItemDelegate* self, QEvent* event, QAbstractItemModel* model, QStyleOptionViewItem* option, QModelIndex* index);
-struct seaqt_string QItemDelegate_tr2(const char* s, const char* c);
-struct seaqt_string QItemDelegate_tr3(const char* s, const char* c, int n);
-struct seaqt_string QItemDelegate_trUtf82(const char* s, const char* c);
-struct seaqt_string QItemDelegate_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QItemDelegate_tr_s_c(const char* s, const char* c);
+struct seaqt_string QItemDelegate_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QItemDelegate_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QItemDelegate_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QItemDelegate_virtualbase_metaObject(const VirtualQItemDelegate* self);
 void* QItemDelegate_virtualbase_metacast(VirtualQItemDelegate* self, const char* param1);

@@ -116,59 +116,59 @@ public:
 	}
 
 	virtual void drawRects(const QRect* rects, int rectCount) override {
-		if (vtbl->drawRects == 0) {
+		if (vtbl->drawRects_QRect_int == 0) {
 			QPaintEngine::drawRects(rects, rectCount);
 			return;
 		}
 
 		QRect* sigval1 = (QRect*) rects;
 		int sigval2 = rectCount;
-		vtbl->drawRects(this, sigval1, sigval2);
+		vtbl->drawRects_QRect_int(this, sigval1, sigval2);
 	}
 
-	friend void QPaintEngine_virtualbase_drawRects(VirtualQPaintEngine* self, QRect* rects, int rectCount);
+	friend void QPaintEngine_virtualbase_drawRects_QRect_int(VirtualQPaintEngine* self, QRect* rects, int rectCount);
 
 	virtual void drawRects(const QRectF* rects, int rectCount) override {
-		if (vtbl->drawRects2 == 0) {
+		if (vtbl->drawRects_QRectF_int == 0) {
 			QPaintEngine::drawRects(rects, rectCount);
 			return;
 		}
 
 		QRectF* sigval1 = (QRectF*) rects;
 		int sigval2 = rectCount;
-		vtbl->drawRects2(this, sigval1, sigval2);
+		vtbl->drawRects_QRectF_int(this, sigval1, sigval2);
 	}
 
-	friend void QPaintEngine_virtualbase_drawRects2(VirtualQPaintEngine* self, QRectF* rects, int rectCount);
+	friend void QPaintEngine_virtualbase_drawRects_QRectF_int(VirtualQPaintEngine* self, QRectF* rects, int rectCount);
 
 	virtual void drawLines(const QLine* lines, int lineCount) override {
-		if (vtbl->drawLines == 0) {
+		if (vtbl->drawLines_QLine_int == 0) {
 			QPaintEngine::drawLines(lines, lineCount);
 			return;
 		}
 
 		QLine* sigval1 = (QLine*) lines;
 		int sigval2 = lineCount;
-		vtbl->drawLines(this, sigval1, sigval2);
+		vtbl->drawLines_QLine_int(this, sigval1, sigval2);
 	}
 
-	friend void QPaintEngine_virtualbase_drawLines(VirtualQPaintEngine* self, QLine* lines, int lineCount);
+	friend void QPaintEngine_virtualbase_drawLines_QLine_int(VirtualQPaintEngine* self, QLine* lines, int lineCount);
 
 	virtual void drawLines(const QLineF* lines, int lineCount) override {
-		if (vtbl->drawLines2 == 0) {
+		if (vtbl->drawLines_QLineF_int == 0) {
 			QPaintEngine::drawLines(lines, lineCount);
 			return;
 		}
 
 		QLineF* sigval1 = (QLineF*) lines;
 		int sigval2 = lineCount;
-		vtbl->drawLines2(this, sigval1, sigval2);
+		vtbl->drawLines_QLineF_int(this, sigval1, sigval2);
 	}
 
-	friend void QPaintEngine_virtualbase_drawLines2(VirtualQPaintEngine* self, QLineF* lines, int lineCount);
+	friend void QPaintEngine_virtualbase_drawLines_QLineF_int(VirtualQPaintEngine* self, QLineF* lines, int lineCount);
 
 	virtual void drawEllipse(const QRectF& r) override {
-		if (vtbl->drawEllipse == 0) {
+		if (vtbl->drawEllipse_QRectF == 0) {
 			QPaintEngine::drawEllipse(r);
 			return;
 		}
@@ -176,13 +176,13 @@ public:
 		const QRectF& r_ret = r;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&r_ret);
-		vtbl->drawEllipse(this, sigval1);
+		vtbl->drawEllipse_QRectF(this, sigval1);
 	}
 
-	friend void QPaintEngine_virtualbase_drawEllipse(VirtualQPaintEngine* self, QRectF* r);
+	friend void QPaintEngine_virtualbase_drawEllipse_QRectF(VirtualQPaintEngine* self, QRectF* r);
 
 	virtual void drawEllipse(const QRect& r) override {
-		if (vtbl->drawEllipseWithQRect == 0) {
+		if (vtbl->drawEllipse_QRect == 0) {
 			QPaintEngine::drawEllipse(r);
 			return;
 		}
@@ -190,10 +190,10 @@ public:
 		const QRect& r_ret = r;
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&r_ret);
-		vtbl->drawEllipseWithQRect(this, sigval1);
+		vtbl->drawEllipse_QRect(this, sigval1);
 	}
 
-	friend void QPaintEngine_virtualbase_drawEllipseWithQRect(VirtualQPaintEngine* self, QRect* r);
+	friend void QPaintEngine_virtualbase_drawEllipse_QRect(VirtualQPaintEngine* self, QRect* r);
 
 	virtual void drawPath(const QPainterPath& path) override {
 		if (vtbl->drawPath == 0) {
@@ -210,33 +210,33 @@ public:
 	friend void QPaintEngine_virtualbase_drawPath(VirtualQPaintEngine* self, QPainterPath* path);
 
 	virtual void drawPoints(const QPointF* points, int pointCount) override {
-		if (vtbl->drawPoints == 0) {
+		if (vtbl->drawPoints_QPointF_int == 0) {
 			QPaintEngine::drawPoints(points, pointCount);
 			return;
 		}
 
 		QPointF* sigval1 = (QPointF*) points;
 		int sigval2 = pointCount;
-		vtbl->drawPoints(this, sigval1, sigval2);
+		vtbl->drawPoints_QPointF_int(this, sigval1, sigval2);
 	}
 
-	friend void QPaintEngine_virtualbase_drawPoints(VirtualQPaintEngine* self, QPointF* points, int pointCount);
+	friend void QPaintEngine_virtualbase_drawPoints_QPointF_int(VirtualQPaintEngine* self, QPointF* points, int pointCount);
 
 	virtual void drawPoints(const QPoint* points, int pointCount) override {
-		if (vtbl->drawPoints2 == 0) {
+		if (vtbl->drawPoints_QPoint_int == 0) {
 			QPaintEngine::drawPoints(points, pointCount);
 			return;
 		}
 
 		QPoint* sigval1 = (QPoint*) points;
 		int sigval2 = pointCount;
-		vtbl->drawPoints2(this, sigval1, sigval2);
+		vtbl->drawPoints_QPoint_int(this, sigval1, sigval2);
 	}
 
-	friend void QPaintEngine_virtualbase_drawPoints2(VirtualQPaintEngine* self, QPoint* points, int pointCount);
+	friend void QPaintEngine_virtualbase_drawPoints_QPoint_int(VirtualQPaintEngine* self, QPoint* points, int pointCount);
 
 	virtual void drawPolygon(const QPointF* points, int pointCount, QPaintEngine::PolygonDrawMode mode) override {
-		if (vtbl->drawPolygon == 0) {
+		if (vtbl->drawPolygon_QPointF_int_QPaintEngine_PolygonDrawMode == 0) {
 			QPaintEngine::drawPolygon(points, pointCount, mode);
 			return;
 		}
@@ -245,13 +245,13 @@ public:
 		int sigval2 = pointCount;
 		QPaintEngine::PolygonDrawMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
-		vtbl->drawPolygon(this, sigval1, sigval2, sigval3);
+		vtbl->drawPolygon_QPointF_int_QPaintEngine_PolygonDrawMode(this, sigval1, sigval2, sigval3);
 	}
 
-	friend void QPaintEngine_virtualbase_drawPolygon(VirtualQPaintEngine* self, QPointF* points, int pointCount, int mode);
+	friend void QPaintEngine_virtualbase_drawPolygon_QPointF_int_QPaintEngine_PolygonDrawMode(VirtualQPaintEngine* self, QPointF* points, int pointCount, int mode);
 
 	virtual void drawPolygon(const QPoint* points, int pointCount, QPaintEngine::PolygonDrawMode mode) override {
-		if (vtbl->drawPolygon2 == 0) {
+		if (vtbl->drawPolygon_QPoint_int_QPaintEngine_PolygonDrawMode == 0) {
 			QPaintEngine::drawPolygon(points, pointCount, mode);
 			return;
 		}
@@ -260,10 +260,10 @@ public:
 		int sigval2 = pointCount;
 		QPaintEngine::PolygonDrawMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
-		vtbl->drawPolygon2(this, sigval1, sigval2, sigval3);
+		vtbl->drawPolygon_QPoint_int_QPaintEngine_PolygonDrawMode(this, sigval1, sigval2, sigval3);
 	}
 
-	friend void QPaintEngine_virtualbase_drawPolygon2(VirtualQPaintEngine* self, QPoint* points, int pointCount, int mode);
+	friend void QPaintEngine_virtualbase_drawPolygon_QPoint_int_QPaintEngine_PolygonDrawMode(VirtualQPaintEngine* self, QPoint* points, int pointCount, int mode);
 
 	virtual void drawPixmap(const QRectF& r, const QPixmap& pm, const QRectF& sr) override {
 		if (vtbl->drawPixmap == 0) {
@@ -370,7 +370,7 @@ VirtualQPaintEngine* QPaintEngine_new(const QPaintEngine_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQPaintEngine(vtbl) : nullptr;
 }
 
-VirtualQPaintEngine* QPaintEngine_new2(const QPaintEngine_VTable* vtbl, size_t vdata, int features) {
+VirtualQPaintEngine* QPaintEngine_new_features(const QPaintEngine_VTable* vtbl, size_t vdata, int features) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPaintEngine>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPaintEngine(vtbl, static_cast<QPaintEngine::PaintEngineFeatures>(features)) : nullptr;
 }
@@ -395,27 +395,27 @@ void QPaintEngine_updateState(QPaintEngine* self, QPaintEngineState* state) {
 	self->updateState(*state);
 }
 
-void QPaintEngine_drawRects(QPaintEngine* self, QRect* rects, int rectCount) {
+void QPaintEngine_drawRects_QRect_int(QPaintEngine* self, QRect* rects, int rectCount) {
 	self->drawRects(rects, static_cast<int>(rectCount));
 }
 
-void QPaintEngine_drawRects2(QPaintEngine* self, QRectF* rects, int rectCount) {
+void QPaintEngine_drawRects_QRectF_int(QPaintEngine* self, QRectF* rects, int rectCount) {
 	self->drawRects(rects, static_cast<int>(rectCount));
 }
 
-void QPaintEngine_drawLines(QPaintEngine* self, QLine* lines, int lineCount) {
+void QPaintEngine_drawLines_QLine_int(QPaintEngine* self, QLine* lines, int lineCount) {
 	self->drawLines(lines, static_cast<int>(lineCount));
 }
 
-void QPaintEngine_drawLines2(QPaintEngine* self, QLineF* lines, int lineCount) {
+void QPaintEngine_drawLines_QLineF_int(QPaintEngine* self, QLineF* lines, int lineCount) {
 	self->drawLines(lines, static_cast<int>(lineCount));
 }
 
-void QPaintEngine_drawEllipse(QPaintEngine* self, QRectF* r) {
+void QPaintEngine_drawEllipse_QRectF(QPaintEngine* self, QRectF* r) {
 	self->drawEllipse(*r);
 }
 
-void QPaintEngine_drawEllipseWithQRect(QPaintEngine* self, QRect* r) {
+void QPaintEngine_drawEllipse_QRect(QPaintEngine* self, QRect* r) {
 	self->drawEllipse(*r);
 }
 
@@ -423,19 +423,19 @@ void QPaintEngine_drawPath(QPaintEngine* self, QPainterPath* path) {
 	self->drawPath(*path);
 }
 
-void QPaintEngine_drawPoints(QPaintEngine* self, QPointF* points, int pointCount) {
+void QPaintEngine_drawPoints_QPointF_int(QPaintEngine* self, QPointF* points, int pointCount) {
 	self->drawPoints(points, static_cast<int>(pointCount));
 }
 
-void QPaintEngine_drawPoints2(QPaintEngine* self, QPoint* points, int pointCount) {
+void QPaintEngine_drawPoints_QPoint_int(QPaintEngine* self, QPoint* points, int pointCount) {
 	self->drawPoints(points, static_cast<int>(pointCount));
 }
 
-void QPaintEngine_drawPolygon(QPaintEngine* self, QPointF* points, int pointCount, int mode) {
+void QPaintEngine_drawPolygon_QPointF_int_QPaintEngine_PolygonDrawMode(QPaintEngine* self, QPointF* points, int pointCount, int mode) {
 	self->drawPolygon(points, static_cast<int>(pointCount), static_cast<QPaintEngine::PolygonDrawMode>(mode));
 }
 
-void QPaintEngine_drawPolygon2(QPaintEngine* self, QPoint* points, int pointCount, int mode) {
+void QPaintEngine_drawPolygon_QPoint_int_QPaintEngine_PolygonDrawMode(QPaintEngine* self, QPoint* points, int pointCount, int mode) {
 	self->drawPolygon(points, static_cast<int>(pointCount), static_cast<QPaintEngine::PolygonDrawMode>(mode));
 }
 
@@ -488,7 +488,7 @@ int QPaintEngine_type(const QPaintEngine* self) {
 	return static_cast<int>(_ret);
 }
 
-void QPaintEngine_fixNegRect(QPaintEngine* self, int* x, int* y, int* w, int* h) {
+void QPaintEngine_fix_neg_rect(QPaintEngine* self, int* x, int* y, int* w, int* h) {
 	self->fix_neg_rect(static_cast<int*>(x), static_cast<int*>(y), static_cast<int*>(w), static_cast<int*>(h));
 }
 
@@ -523,32 +523,32 @@ bool QPaintEngine_isExtended(const QPaintEngine* self) {
 void* QPaintEngine_vdata(VirtualQPaintEngine* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQPaintEngine>()); }
 VirtualQPaintEngine* vdata_QPaintEngine(void* vdata) { return reinterpret_cast<VirtualQPaintEngine*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQPaintEngine>()); }
 
-void QPaintEngine_virtualbase_drawRects(VirtualQPaintEngine* self, QRect* rects, int rectCount) {
+void QPaintEngine_virtualbase_drawRects_QRect_int(VirtualQPaintEngine* self, QRect* rects, int rectCount) {
 
 	self->QPaintEngine::drawRects(rects, static_cast<int>(rectCount));
 }
 
-void QPaintEngine_virtualbase_drawRects2(VirtualQPaintEngine* self, QRectF* rects, int rectCount) {
+void QPaintEngine_virtualbase_drawRects_QRectF_int(VirtualQPaintEngine* self, QRectF* rects, int rectCount) {
 
 	self->QPaintEngine::drawRects(rects, static_cast<int>(rectCount));
 }
 
-void QPaintEngine_virtualbase_drawLines(VirtualQPaintEngine* self, QLine* lines, int lineCount) {
+void QPaintEngine_virtualbase_drawLines_QLine_int(VirtualQPaintEngine* self, QLine* lines, int lineCount) {
 
 	self->QPaintEngine::drawLines(lines, static_cast<int>(lineCount));
 }
 
-void QPaintEngine_virtualbase_drawLines2(VirtualQPaintEngine* self, QLineF* lines, int lineCount) {
+void QPaintEngine_virtualbase_drawLines_QLineF_int(VirtualQPaintEngine* self, QLineF* lines, int lineCount) {
 
 	self->QPaintEngine::drawLines(lines, static_cast<int>(lineCount));
 }
 
-void QPaintEngine_virtualbase_drawEllipse(VirtualQPaintEngine* self, QRectF* r) {
+void QPaintEngine_virtualbase_drawEllipse_QRectF(VirtualQPaintEngine* self, QRectF* r) {
 
 	self->QPaintEngine::drawEllipse(*r);
 }
 
-void QPaintEngine_virtualbase_drawEllipseWithQRect(VirtualQPaintEngine* self, QRect* r) {
+void QPaintEngine_virtualbase_drawEllipse_QRect(VirtualQPaintEngine* self, QRect* r) {
 
 	self->QPaintEngine::drawEllipse(*r);
 }
@@ -558,22 +558,22 @@ void QPaintEngine_virtualbase_drawPath(VirtualQPaintEngine* self, QPainterPath* 
 	self->QPaintEngine::drawPath(*path);
 }
 
-void QPaintEngine_virtualbase_drawPoints(VirtualQPaintEngine* self, QPointF* points, int pointCount) {
+void QPaintEngine_virtualbase_drawPoints_QPointF_int(VirtualQPaintEngine* self, QPointF* points, int pointCount) {
 
 	self->QPaintEngine::drawPoints(points, static_cast<int>(pointCount));
 }
 
-void QPaintEngine_virtualbase_drawPoints2(VirtualQPaintEngine* self, QPoint* points, int pointCount) {
+void QPaintEngine_virtualbase_drawPoints_QPoint_int(VirtualQPaintEngine* self, QPoint* points, int pointCount) {
 
 	self->QPaintEngine::drawPoints(points, static_cast<int>(pointCount));
 }
 
-void QPaintEngine_virtualbase_drawPolygon(VirtualQPaintEngine* self, QPointF* points, int pointCount, int mode) {
+void QPaintEngine_virtualbase_drawPolygon_QPointF_int_QPaintEngine_PolygonDrawMode(VirtualQPaintEngine* self, QPointF* points, int pointCount, int mode) {
 
 	self->QPaintEngine::drawPolygon(points, static_cast<int>(pointCount), static_cast<VirtualQPaintEngine::PolygonDrawMode>(mode));
 }
 
-void QPaintEngine_virtualbase_drawPolygon2(VirtualQPaintEngine* self, QPoint* points, int pointCount, int mode) {
+void QPaintEngine_virtualbase_drawPolygon_QPoint_int_QPaintEngine_PolygonDrawMode(VirtualQPaintEngine* self, QPoint* points, int pointCount, int mode) {
 
 	self->QPaintEngine::drawPolygon(points, static_cast<int>(pointCount), static_cast<VirtualQPaintEngine::PolygonDrawMode>(mode));
 }

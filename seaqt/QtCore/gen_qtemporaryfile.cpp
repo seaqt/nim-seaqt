@@ -90,17 +90,17 @@ public:
 	friend struct seaqt_string QTemporaryFile_virtualbase_fileName(const VirtualQTemporaryFile* self);
 
 	virtual bool open(QIODevice::OpenMode flags) override {
-		if (vtbl->openWithFlags == 0) {
+		if (vtbl->open_flags == 0) {
 			return QTemporaryFile::open(flags);
 		}
 
 		QIODevice::OpenMode flags_ret = flags;
 		int sigval1 = static_cast<int>(flags_ret);
-		bool callback_return_value = vtbl->openWithFlags(this, sigval1);
+		bool callback_return_value = vtbl->open_flags(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend bool QTemporaryFile_virtualbase_openWithFlags(VirtualQTemporaryFile* self, int flags);
+	friend bool QTemporaryFile_virtualbase_open_flags(VirtualQTemporaryFile* self, int flags);
 
 	virtual qint64 size() const override {
 		if (vtbl->size == 0) {
@@ -114,17 +114,17 @@ public:
 	friend long long QTemporaryFile_virtualbase_size(const VirtualQTemporaryFile* self);
 
 	virtual bool resize(qint64 sz) override {
-		if (vtbl->resize == 0) {
+		if (vtbl->resize_sz == 0) {
 			return QTemporaryFile::resize(sz);
 		}
 
 		qint64 sz_ret = sz;
 		long long sigval1 = static_cast<long long>(sz_ret);
-		bool callback_return_value = vtbl->resize(this, sigval1);
+		bool callback_return_value = vtbl->resize_sz(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend bool QTemporaryFile_virtualbase_resize(VirtualQTemporaryFile* self, long long sz);
+	friend bool QTemporaryFile_virtualbase_resize_sz(VirtualQTemporaryFile* self, long long sz);
 
 	virtual QFileDevice::Permissions permissions() const override {
 		if (vtbl->permissions == 0) {
@@ -138,17 +138,17 @@ public:
 	friend int QTemporaryFile_virtualbase_permissions(const VirtualQTemporaryFile* self);
 
 	virtual bool setPermissions(QFileDevice::Permissions permissionSpec) override {
-		if (vtbl->setPermissions == 0) {
+		if (vtbl->setPermissions_permissionSpec == 0) {
 			return QTemporaryFile::setPermissions(permissionSpec);
 		}
 
 		QFileDevice::Permissions permissionSpec_ret = permissionSpec;
 		int sigval1 = static_cast<int>(permissionSpec_ret);
-		bool callback_return_value = vtbl->setPermissions(this, sigval1);
+		bool callback_return_value = vtbl->setPermissions_permissionSpec(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend bool QTemporaryFile_virtualbase_setPermissions(VirtualQTemporaryFile* self, int permissionSpec);
+	friend bool QTemporaryFile_virtualbase_setPermissions_permissionSpec(VirtualQTemporaryFile* self, int permissionSpec);
 
 	virtual void close() override {
 		if (vtbl->close == 0) {
@@ -420,18 +420,18 @@ VirtualQTemporaryFile* QTemporaryFile_new(const QTemporaryFile_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQTemporaryFile(vtbl) : nullptr;
 }
 
-VirtualQTemporaryFile* QTemporaryFile_new2(const QTemporaryFile_VTable* vtbl, size_t vdata, struct seaqt_string templateName) {
+VirtualQTemporaryFile* QTemporaryFile_new_templateName(const QTemporaryFile_VTable* vtbl, size_t vdata, struct seaqt_string templateName) {
 	QString templateName_QString = QString::fromUtf8(templateName.data, templateName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTemporaryFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTemporaryFile(vtbl, templateName_QString) : nullptr;
 }
 
-VirtualQTemporaryFile* QTemporaryFile_new3(const QTemporaryFile_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQTemporaryFile* QTemporaryFile_new_parent(const QTemporaryFile_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTemporaryFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTemporaryFile(vtbl, parent) : nullptr;
 }
 
-VirtualQTemporaryFile* QTemporaryFile_new4(const QTemporaryFile_VTable* vtbl, size_t vdata, struct seaqt_string templateName, QObject* parent) {
+VirtualQTemporaryFile* QTemporaryFile_new_templateName_parent(const QTemporaryFile_VTable* vtbl, size_t vdata, struct seaqt_string templateName, QObject* parent) {
 	QString templateName_QString = QString::fromUtf8(templateName.data, templateName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTemporaryFile>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTemporaryFile(vtbl, templateName_QString, parent) : nullptr;
@@ -453,7 +453,7 @@ int QTemporaryFile_metacall(QTemporaryFile* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTemporaryFile_tr(const char* s) {
+struct seaqt_string QTemporaryFile_tr_s(const char* s) {
 	QString _ret = QTemporaryFile::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -464,7 +464,7 @@ struct seaqt_string QTemporaryFile_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTemporaryFile_trUtf8(const char* s) {
+struct seaqt_string QTemporaryFile_trUtf8_s(const char* s) {
 	QString _ret = QTemporaryFile::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -519,25 +519,25 @@ bool QTemporaryFile_rename(QTemporaryFile* self, struct seaqt_string newName) {
 	return self->rename(newName_QString);
 }
 
-QTemporaryFile* QTemporaryFile_createLocalFile(struct seaqt_string fileName) {
+QTemporaryFile* QTemporaryFile_createLocalFile_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return QTemporaryFile::createLocalFile(fileName_QString);
 }
 
-QTemporaryFile* QTemporaryFile_createLocalFileWithFile(QFile* file) {
+QTemporaryFile* QTemporaryFile_createLocalFile_file(QFile* file) {
 	return QTemporaryFile::createLocalFile(*file);
 }
 
-QTemporaryFile* QTemporaryFile_createNativeFile(struct seaqt_string fileName) {
+QTemporaryFile* QTemporaryFile_createNativeFile_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return QTemporaryFile::createNativeFile(fileName_QString);
 }
 
-QTemporaryFile* QTemporaryFile_createNativeFileWithFile(QFile* file) {
+QTemporaryFile* QTemporaryFile_createNativeFile_file(QFile* file) {
 	return QTemporaryFile::createNativeFile(*file);
 }
 
-struct seaqt_string QTemporaryFile_tr2(const char* s, const char* c) {
+struct seaqt_string QTemporaryFile_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTemporaryFile::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -548,7 +548,7 @@ struct seaqt_string QTemporaryFile_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTemporaryFile_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTemporaryFile_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTemporaryFile::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -559,7 +559,7 @@ struct seaqt_string QTemporaryFile_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTemporaryFile_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTemporaryFile_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTemporaryFile::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -570,7 +570,7 @@ struct seaqt_string QTemporaryFile_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTemporaryFile_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTemporaryFile_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTemporaryFile::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -612,7 +612,7 @@ struct seaqt_string QTemporaryFile_virtualbase_fileName(const VirtualQTemporaryF
 	return _ms;
 }
 
-bool QTemporaryFile_virtualbase_openWithFlags(VirtualQTemporaryFile* self, int flags) {
+bool QTemporaryFile_virtualbase_open_flags(VirtualQTemporaryFile* self, int flags) {
 
 	return self->QTemporaryFile::open(static_cast<VirtualQTemporaryFile::OpenMode>(flags));
 }
@@ -623,7 +623,7 @@ long long QTemporaryFile_virtualbase_size(const VirtualQTemporaryFile* self) {
 	return static_cast<long long>(_ret);
 }
 
-bool QTemporaryFile_virtualbase_resize(VirtualQTemporaryFile* self, long long sz) {
+bool QTemporaryFile_virtualbase_resize_sz(VirtualQTemporaryFile* self, long long sz) {
 
 	return self->QTemporaryFile::resize(static_cast<qint64>(sz));
 }
@@ -634,7 +634,7 @@ int QTemporaryFile_virtualbase_permissions(const VirtualQTemporaryFile* self) {
 	return static_cast<int>(_ret);
 }
 
-bool QTemporaryFile_virtualbase_setPermissions(VirtualQTemporaryFile* self, int permissionSpec) {
+bool QTemporaryFile_virtualbase_setPermissions_permissionSpec(VirtualQTemporaryFile* self, int permissionSpec) {
 
 	return self->QTemporaryFile::setPermissions(static_cast<VirtualQTemporaryFile::Permissions>(permissionSpec));
 }

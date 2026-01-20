@@ -83,8 +83,8 @@ type cQTextBrowser*{.exportc: "QTextBrowser", incompleteStruct.} = object
 proc fcQTextBrowser_metaObject(self: pointer): pointer {.importc: "QTextBrowser_metaObject".}
 proc fcQTextBrowser_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextBrowser_metacast".}
 proc fcQTextBrowser_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextBrowser_metacall".}
-proc fcQTextBrowser_tr(s: cstring): struct_seaqt_string {.importc: "QTextBrowser_tr".}
-proc fcQTextBrowser_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTextBrowser_trUtf8".}
+proc fcQTextBrowser_trS(s: cstring): struct_seaqt_string {.importc: "QTextBrowser_tr_s".}
+proc fcQTextBrowser_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTextBrowser_trUtf8_s".}
 proc fcQTextBrowser_source(self: pointer): pointer {.importc: "QTextBrowser_source".}
 proc fcQTextBrowser_sourceType(self: pointer): cint {.importc: "QTextBrowser_sourceType".}
 proc fcQTextBrowser_searchPaths(self: pointer): struct_seaqt_array {.importc: "QTextBrowser_searchPaths".}
@@ -101,8 +101,8 @@ proc fcQTextBrowser_openExternalLinks(self: pointer): bool {.importc: "QTextBrow
 proc fcQTextBrowser_setOpenExternalLinks(self: pointer, open: bool): void {.importc: "QTextBrowser_setOpenExternalLinks".}
 proc fcQTextBrowser_openLinks(self: pointer): bool {.importc: "QTextBrowser_openLinks".}
 proc fcQTextBrowser_setOpenLinks(self: pointer, open: bool): void {.importc: "QTextBrowser_setOpenLinks".}
-proc fcQTextBrowser_setSource(self: pointer, name: pointer): void {.importc: "QTextBrowser_setSource".}
-proc fcQTextBrowser_setSource2(self: pointer, name: pointer, typeVal: cint): void {.importc: "QTextBrowser_setSource2".}
+proc fcQTextBrowser_setSourceName(self: pointer, name: pointer): void {.importc: "QTextBrowser_setSource_name".}
+proc fcQTextBrowser_setSourceNameType(self: pointer, name: pointer, typeVal: cint): void {.importc: "QTextBrowser_setSource_name_type".}
 proc fcQTextBrowser_backward(self: pointer): void {.importc: "QTextBrowser_backward".}
 proc fcQTextBrowser_forward(self: pointer): void {.importc: "QTextBrowser_forward".}
 proc fcQTextBrowser_home(self: pointer): void {.importc: "QTextBrowser_home".}
@@ -115,16 +115,16 @@ proc fcQTextBrowser_historyChanged(self: pointer): void {.importc: "QTextBrowser
 proc fcQTextBrowser_connect_historyChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_historyChanged".}
 proc fcQTextBrowser_sourceChanged(self: pointer, param1: pointer): void {.importc: "QTextBrowser_sourceChanged".}
 proc fcQTextBrowser_connect_sourceChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_sourceChanged".}
-proc fcQTextBrowser_highlighted(self: pointer, param1: pointer): void {.importc: "QTextBrowser_highlighted".}
-proc fcQTextBrowser_connect_highlighted(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_highlighted".}
-proc fcQTextBrowser_highlightedWithQString(self: pointer, param1: struct_seaqt_string): void {.importc: "QTextBrowser_highlightedWithQString".}
-proc fcQTextBrowser_connect_highlightedWithQString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_highlightedWithQString".}
+proc fcQTextBrowser_highlighted_QUrl(self: pointer, param1: pointer): void {.importc: "QTextBrowser_highlighted_QUrl".}
+proc fcQTextBrowser_connect_highlighted_QUrl(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_highlighted_QUrl".}
+proc fcQTextBrowser_highlighted_QString(self: pointer, param1: struct_seaqt_string): void {.importc: "QTextBrowser_highlighted_QString".}
+proc fcQTextBrowser_connect_highlighted_QString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_highlighted_QString".}
 proc fcQTextBrowser_anchorClicked(self: pointer, param1: pointer): void {.importc: "QTextBrowser_anchorClicked".}
 proc fcQTextBrowser_connect_anchorClicked(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_anchorClicked".}
-proc fcQTextBrowser_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextBrowser_tr2".}
-proc fcQTextBrowser_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextBrowser_tr3".}
-proc fcQTextBrowser_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextBrowser_trUtf82".}
-proc fcQTextBrowser_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextBrowser_trUtf83".}
+proc fcQTextBrowser_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextBrowser_tr_s_c".}
+proc fcQTextBrowser_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextBrowser_tr_s_c_n".}
+proc fcQTextBrowser_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextBrowser_trUtf8_s_c".}
+proc fcQTextBrowser_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextBrowser_trUtf8_s_c_n".}
 proc fcQTextBrowser_vdata(self: pointer): ptr pointer {.importc: "QTextBrowser_vdata".}
 proc fvdata_cQTextBrowser(self: pointer): pointer {.importc: "vdata_QTextBrowser".}
 
@@ -134,7 +134,7 @@ type cQTextBrowserVTable {.pure.} = object
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
   loadResource*: proc(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  setSource*: proc(self: pointer, name: pointer): void {.cdecl, raises: [], gcsafe.}
+  setSourceName*: proc(self: pointer, name: pointer): void {.cdecl, raises: [], gcsafe.}
   backward*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   forward*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   home*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -147,7 +147,7 @@ type cQTextBrowserVTable {.pure.} = object
   focusOutEvent*: proc(self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
   focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
   paintEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(self: pointer, property: cint): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodQueryProperty*: proc(self: pointer, property: cint): pointer {.cdecl, raises: [], gcsafe.}
   timerEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
   keyReleaseEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
   resizeEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -198,7 +198,7 @@ proc fcQTextBrowser_virtualbase_metaObject(self: pointer): pointer {.importc: "Q
 proc fcQTextBrowser_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextBrowser_virtualbase_metacast".}
 proc fcQTextBrowser_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextBrowser_virtualbase_metacall".}
 proc fcQTextBrowser_virtualbase_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.importc: "QTextBrowser_virtualbase_loadResource".}
-proc fcQTextBrowser_virtualbase_setSource(self: pointer, name: pointer): void {.importc: "QTextBrowser_virtualbase_setSource".}
+proc fcQTextBrowser_virtualbase_setSourceName(self: pointer, name: pointer): void {.importc: "QTextBrowser_virtualbase_setSource_name".}
 proc fcQTextBrowser_virtualbase_backward(self: pointer): void {.importc: "QTextBrowser_virtualbase_backward".}
 proc fcQTextBrowser_virtualbase_forward(self: pointer): void {.importc: "QTextBrowser_virtualbase_forward".}
 proc fcQTextBrowser_virtualbase_home(self: pointer): void {.importc: "QTextBrowser_virtualbase_home".}
@@ -211,7 +211,7 @@ proc fcQTextBrowser_virtualbase_mouseReleaseEvent(self: pointer, ev: pointer): v
 proc fcQTextBrowser_virtualbase_focusOutEvent(self: pointer, ev: pointer): void {.importc: "QTextBrowser_virtualbase_focusOutEvent".}
 proc fcQTextBrowser_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QTextBrowser_virtualbase_focusNextPrevChild".}
 proc fcQTextBrowser_virtualbase_paintEvent(self: pointer, e: pointer): void {.importc: "QTextBrowser_virtualbase_paintEvent".}
-proc fcQTextBrowser_virtualbase_inputMethodQuery(self: pointer, property: cint): pointer {.importc: "QTextBrowser_virtualbase_inputMethodQuery".}
+proc fcQTextBrowser_virtualbase_inputMethodQueryProperty(self: pointer, property: cint): pointer {.importc: "QTextBrowser_virtualbase_inputMethodQuery_property".}
 proc fcQTextBrowser_virtualbase_timerEvent(self: pointer, e: pointer): void {.importc: "QTextBrowser_virtualbase_timerEvent".}
 proc fcQTextBrowser_virtualbase_keyReleaseEvent(self: pointer, e: pointer): void {.importc: "QTextBrowser_virtualbase_keyReleaseEvent".}
 proc fcQTextBrowser_virtualbase_resizeEvent(self: pointer, e: pointer): void {.importc: "QTextBrowser_virtualbase_resizeEvent".}
@@ -258,10 +258,10 @@ proc fcQTextBrowser_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQTextBrowser_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTextBrowser_virtualbase_customEvent".}
 proc fcQTextBrowser_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTextBrowser_virtualbase_connectNotify".}
 proc fcQTextBrowser_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTextBrowser_virtualbase_disconnectNotify".}
-proc fcQTextBrowser_protectedbase_doSetSource(self: pointer, name: pointer): void {.importc: "QTextBrowser_protectedbase_doSetSource".}
-proc fcQTextBrowser_protectedbase_doSetSource2(self: pointer, name: pointer, typeVal: cint): void {.importc: "QTextBrowser_protectedbase_doSetSource2".}
+proc fcQTextBrowser_protectedbase_doSetSource_name(self: pointer, name: pointer): void {.importc: "QTextBrowser_protectedbase_doSetSource_name".}
+proc fcQTextBrowser_protectedbase_doSetSource_name_type(self: pointer, name: pointer, typeVal: cint): void {.importc: "QTextBrowser_protectedbase_doSetSource_name_type".}
 proc fcQTextBrowser_protectedbase_zoomInF(self: pointer, range: float32): void {.importc: "QTextBrowser_protectedbase_zoomInF".}
-proc fcQTextBrowser_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTextBrowser_protectedbase_setViewportMargins".}
+proc fcQTextBrowser_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTextBrowser_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQTextBrowser_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QTextBrowser_protectedbase_viewportMargins".}
 proc fcQTextBrowser_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTextBrowser_protectedbase_drawFrame".}
 proc fcQTextBrowser_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QTextBrowser_protectedbase_initStyleOption".}
@@ -274,8 +274,8 @@ proc fcQTextBrowser_protectedbase_sender(self: pointer): pointer {.importc: "QTe
 proc fcQTextBrowser_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QTextBrowser_protectedbase_senderSignalIndex".}
 proc fcQTextBrowser_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextBrowser_protectedbase_receivers".}
 proc fcQTextBrowser_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextBrowser_protectedbase_isSignalConnected".}
-proc fcQTextBrowser_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTextBrowser {.importc: "QTextBrowser_new".}
-proc fcQTextBrowser_new2(vtbl: pointer, vdata: csize_t): ptr cQTextBrowser {.importc: "QTextBrowser_new2".}
+proc fcQTextBrowser_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTextBrowser {.importc: "QTextBrowser_new_parent".}
+proc fcQTextBrowser_new2(vtbl: pointer, vdata: csize_t): ptr cQTextBrowser {.importc: "QTextBrowser_new".}
 proc fcQTextBrowser_staticMetaObject(): pointer {.importc: "QTextBrowser_staticMetaObject".}
 
 proc metaObject*(self: gen_qtextbrowser_types.QTextBrowser): gen_qobjectdefs_types.QMetaObject =
@@ -288,13 +288,13 @@ proc metacall*(self: gen_qtextbrowser_types.QTextBrowser, param1: cint, param2: 
   fcQTextBrowser_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring): string =
-  let v_ms = fcQTextBrowser_tr(s)
+  let v_ms = fcQTextBrowser_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring): string =
-  let v_ms = fcQTextBrowser_trUtf8(s)
+  let v_ms = fcQTextBrowser_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -364,10 +364,10 @@ proc setOpenLinks*(self: gen_qtextbrowser_types.QTextBrowser, open: bool): void 
   fcQTextBrowser_setOpenLinks(self.h, open)
 
 proc setSource*(self: gen_qtextbrowser_types.QTextBrowser, name: gen_qurl_types.QUrl): void =
-  fcQTextBrowser_setSource(self.h, name.h)
+  fcQTextBrowser_setSourceName(self.h, name.h)
 
 proc setSource*(self: gen_qtextbrowser_types.QTextBrowser, name: gen_qurl_types.QUrl, typeVal: cint): void =
-  fcQTextBrowser_setSource2(self.h, name.h, cint(typeVal))
+  fcQTextBrowser_setSourceNameType(self.h, name.h, cint(typeVal))
 
 proc backward*(self: gen_qtextbrowser_types.QTextBrowser): void =
   fcQTextBrowser_backward(self.h)
@@ -460,31 +460,31 @@ proc onSourceChanged*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrow
   fcQTextBrowser_connect_sourceChanged(self.h, cast[int](addr tmp[]), fcQTextBrowser_slot_callback_sourceChanged, fcQTextBrowser_slot_callback_sourceChanged_release)
 
 proc highlighted*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qurl_types.QUrl): void =
-  fcQTextBrowser_highlighted(self.h, param1.h)
+  fcQTextBrowser_highlighted_QUrl(self.h, param1.h)
 
-type QTextBrowserhighlightedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc fcQTextBrowser_slot_callback_highlighted(slot: int, param1: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QTextBrowserhighlightedSlot](cast[pointer](slot))
+type QTextBrowserhighlighted_QUrlSlot* = proc(param1: gen_qurl_types.QUrl)
+proc fcQTextBrowser_slot_callback_highlighted_QUrl(slot: int, param1: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QTextBrowserhighlighted_QUrlSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc fcQTextBrowser_slot_callback_highlighted_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QTextBrowserhighlightedSlot](cast[pointer](slot))
+proc fcQTextBrowser_slot_callback_highlighted_QUrl_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextBrowserhighlighted_QUrlSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onHighlighted*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowserhighlightedSlot) =
-  var tmp = new QTextBrowserhighlightedSlot
+proc onHighlighted*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowserhighlighted_QUrlSlot) =
+  var tmp = new QTextBrowserhighlighted_QUrlSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextBrowser_connect_highlighted(self.h, cast[int](addr tmp[]), fcQTextBrowser_slot_callback_highlighted, fcQTextBrowser_slot_callback_highlighted_release)
+  fcQTextBrowser_connect_highlighted_QUrl(self.h, cast[int](addr tmp[]), fcQTextBrowser_slot_callback_highlighted_QUrl, fcQTextBrowser_slot_callback_highlighted_QUrl_release)
 
 proc highlighted*(self: gen_qtextbrowser_types.QTextBrowser, param1: openArray[char]): void =
-  fcQTextBrowser_highlightedWithQString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+  fcQTextBrowser_highlighted_QString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QTextBrowserhighlightedWithQStringSlot* = proc(param1: openArray[char])
-proc fcQTextBrowser_slot_callback_highlightedWithQString(slot: int, param1: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QTextBrowserhighlightedWithQStringSlot](cast[pointer](slot))
+type QTextBrowserhighlighted_QStringSlot* = proc(param1: openArray[char])
+proc fcQTextBrowser_slot_callback_highlighted_QString(slot: int, param1: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QTextBrowserhighlighted_QStringSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
@@ -492,15 +492,15 @@ proc fcQTextBrowser_slot_callback_highlightedWithQString(slot: int, param1: stru
 
   nimfunc[](slotval1)
 
-proc fcQTextBrowser_slot_callback_highlightedWithQString_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QTextBrowserhighlightedWithQStringSlot](cast[pointer](slot))
+proc fcQTextBrowser_slot_callback_highlighted_QString_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextBrowserhighlighted_QStringSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onHighlighted*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowserhighlightedWithQStringSlot) =
-  var tmp = new QTextBrowserhighlightedWithQStringSlot
+proc onHighlighted*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowserhighlighted_QStringSlot) =
+  var tmp = new QTextBrowserhighlighted_QStringSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextBrowser_connect_highlightedWithQString(self.h, cast[int](addr tmp[]), fcQTextBrowser_slot_callback_highlightedWithQString, fcQTextBrowser_slot_callback_highlightedWithQString_release)
+  fcQTextBrowser_connect_highlighted_QString(self.h, cast[int](addr tmp[]), fcQTextBrowser_slot_callback_highlighted_QString, fcQTextBrowser_slot_callback_highlighted_QString_release)
 
 proc anchorClicked*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qurl_types.QUrl): void =
   fcQTextBrowser_anchorClicked(self.h, param1.h)
@@ -523,25 +523,25 @@ proc onAnchorClicked*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrow
   fcQTextBrowser_connect_anchorClicked(self.h, cast[int](addr tmp[]), fcQTextBrowser_slot_callback_anchorClicked, fcQTextBrowser_slot_callback_anchorClicked_release)
 
 proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring): string =
-  let v_ms = fcQTextBrowser_tr2(s, c)
+  let v_ms = fcQTextBrowser_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextBrowser_tr3(s, c, n)
+  let v_ms = fcQTextBrowser_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring): string =
-  let v_ms = fcQTextBrowser_trUtf82(s, c)
+  let v_ms = fcQTextBrowser_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextBrowser_trUtf83(s, c, n)
+  let v_ms = fcQTextBrowser_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -550,7 +550,7 @@ type QTextBrowsermetaObjectProc* = proc(self: QTextBrowser): gen_qobjectdefs_typ
 type QTextBrowsermetacastProc* = proc(self: QTextBrowser, param1: cstring): pointer {.raises: [], gcsafe.}
 type QTextBrowsermetacallProc* = proc(self: QTextBrowser, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QTextBrowserloadResourceProc* = proc(self: QTextBrowser, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QTextBrowsersetSourceProc* = proc(self: QTextBrowser, name: gen_qurl_types.QUrl): void {.raises: [], gcsafe.}
+type QTextBrowsersetSourceNameProc* = proc(self: QTextBrowser, name: gen_qurl_types.QUrl): void {.raises: [], gcsafe.}
 type QTextBrowserbackwardProc* = proc(self: QTextBrowser): void {.raises: [], gcsafe.}
 type QTextBrowserforwardProc* = proc(self: QTextBrowser): void {.raises: [], gcsafe.}
 type QTextBrowserhomeProc* = proc(self: QTextBrowser): void {.raises: [], gcsafe.}
@@ -563,7 +563,7 @@ type QTextBrowsermouseReleaseEventProc* = proc(self: QTextBrowser, ev: gen_qeven
 type QTextBrowserfocusOutEventProc* = proc(self: QTextBrowser, ev: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
 type QTextBrowserfocusNextPrevChildProc* = proc(self: QTextBrowser, next: bool): bool {.raises: [], gcsafe.}
 type QTextBrowserpaintEventProc* = proc(self: QTextBrowser, e: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
-type QTextBrowserinputMethodQueryProc* = proc(self: QTextBrowser, property: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QTextBrowserinputMethodQueryPropertyProc* = proc(self: QTextBrowser, property: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QTextBrowsertimerEventProc* = proc(self: QTextBrowser, e: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QTextBrowserkeyReleaseEventProc* = proc(self: QTextBrowser, e: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
 type QTextBrowserresizeEventProc* = proc(self: QTextBrowser, e: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
@@ -617,7 +617,7 @@ type QTextBrowserVTable* {.inheritable, pure.} = object
   metacast*: QTextBrowsermetacastProc
   metacall*: QTextBrowsermetacallProc
   loadResource*: QTextBrowserloadResourceProc
-  setSource*: QTextBrowsersetSourceProc
+  setSourceName*: QTextBrowsersetSourceNameProc
   backward*: QTextBrowserbackwardProc
   forward*: QTextBrowserforwardProc
   home*: QTextBrowserhomeProc
@@ -630,7 +630,7 @@ type QTextBrowserVTable* {.inheritable, pure.} = object
   focusOutEvent*: QTextBrowserfocusOutEventProc
   focusNextPrevChild*: QTextBrowserfocusNextPrevChildProc
   paintEvent*: QTextBrowserpaintEventProc
-  inputMethodQuery*: QTextBrowserinputMethodQueryProc
+  inputMethodQueryProperty*: QTextBrowserinputMethodQueryPropertyProc
   timerEvent*: QTextBrowsertimerEventProc
   keyReleaseEvent*: QTextBrowserkeyReleaseEventProc
   resizeEvent*: QTextBrowserresizeEventProc
@@ -691,7 +691,7 @@ proc QTextBrowserloadResource*(self: gen_qtextbrowser_types.QTextBrowser, typeVa
   gen_qvariant_types.QVariant(h: fcQTextBrowser_virtualbase_loadResource(self.h, typeVal, name.h), owned: true)
 
 proc QTextBrowsersetSource*(self: gen_qtextbrowser_types.QTextBrowser, name: gen_qurl_types.QUrl): void =
-  fcQTextBrowser_virtualbase_setSource(self.h, name.h)
+  fcQTextBrowser_virtualbase_setSourceName(self.h, name.h)
 
 proc QTextBrowserbackward*(self: gen_qtextbrowser_types.QTextBrowser): void =
   fcQTextBrowser_virtualbase_backward(self.h)
@@ -730,7 +730,7 @@ proc QTextBrowserpaintEvent*(self: gen_qtextbrowser_types.QTextBrowser, e: gen_q
   fcQTextBrowser_virtualbase_paintEvent(self.h, e.h)
 
 proc QTextBrowserinputMethodQuery*(self: gen_qtextbrowser_types.QTextBrowser, property: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextBrowser_virtualbase_inputMethodQuery(self.h, cint(property)), owned: true)
+  gen_qvariant_types.QVariant(h: fcQTextBrowser_virtualbase_inputMethodQueryProperty(self.h, cint(property)), owned: true)
 
 proc QTextBrowsertimerEvent*(self: gen_qtextbrowser_types.QTextBrowser, e: gen_qcoreevent_types.QTimerEvent): void =
   fcQTextBrowser_virtualbase_timerEvent(self.h, e.h)
@@ -907,11 +907,11 @@ proc fcQTextBrowser_vtable_callback_loadResource(self: pointer, typeVal: cint, n
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQTextBrowser_vtable_callback_setSource(self: pointer, name: pointer): void {.cdecl.} =
+proc fcQTextBrowser_vtable_callback_setSourceName(self: pointer, name: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   let slotval1 = gen_qurl_types.QUrl(h: name, owned: false)
-  vtbl[].setSource(self, slotval1)
+  vtbl[].setSourceName(self, slotval1)
 
 proc fcQTextBrowser_vtable_callback_backward(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
@@ -983,11 +983,11 @@ proc fcQTextBrowser_vtable_callback_paintEvent(self: pointer, e: pointer): void 
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc fcQTextBrowser_vtable_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
+proc fcQTextBrowser_vtable_callback_inputMethodQueryProperty(self: pointer, property: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextBrowserVTable](fcQTextBrowser_vdata(self)[])
   let self = QTextBrowser(h: self)
   let slotval1 = cint(property)
-  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  var virtualReturn = vtbl[].inputMethodQueryProperty(self, slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1468,7 +1468,7 @@ proc fcQTextBrowser_method_callback_loadResource(self: pointer, typeVal: cint, n
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQTextBrowser_method_callback_setSource(self: pointer, name: pointer): void {.cdecl.} =
+proc fcQTextBrowser_method_callback_setSourceName(self: pointer, name: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   let slotval1 = gen_qurl_types.QUrl(h: name, owned: false)
   inst.setSource(slotval1)
@@ -1531,7 +1531,7 @@ proc fcQTextBrowser_method_callback_paintEvent(self: pointer, e: pointer): void 
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   inst.paintEvent(slotval1)
 
-proc fcQTextBrowser_method_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
+proc fcQTextBrowser_method_callback_inputMethodQueryProperty(self: pointer, property: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTextBrowser](fcQTextBrowser_vdata(self)[])
   let slotval1 = cint(property)
   var virtualReturn = inst.inputMethodQuery(slotval1)
@@ -1807,16 +1807,16 @@ proc fcQTextBrowser_method_callback_disconnectNotify(self: pointer, signal: poin
 
 
 proc doSetSource*(self: gen_qtextbrowser_types.QTextBrowser, name: gen_qurl_types.QUrl): void =
-  fcQTextBrowser_protectedbase_doSetSource(self.h, name.h)
+  fcQTextBrowser_protectedbase_doSetSource_name(self.h, name.h)
 
 proc doSetSource*(self: gen_qtextbrowser_types.QTextBrowser, name: gen_qurl_types.QUrl, typeVal: cint): void =
-  fcQTextBrowser_protectedbase_doSetSource2(self.h, name.h, cint(typeVal))
+  fcQTextBrowser_protectedbase_doSetSource_name_type(self.h, name.h, cint(typeVal))
 
 proc zoomInF*(self: gen_qtextbrowser_types.QTextBrowser, range: float32): void =
   fcQTextBrowser_protectedbase_zoomInF(self.h, range)
 
 proc setViewportMargins*(self: gen_qtextbrowser_types.QTextBrowser, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQTextBrowser_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQTextBrowser_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qtextbrowser_types.QTextBrowser): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQTextBrowser_protectedbase_viewportMargins(self.h), owned: true)
@@ -1870,8 +1870,8 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
     vtbl[].vtbl.metacall = fcQTextBrowser_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
     vtbl[].vtbl.loadResource = fcQTextBrowser_vtable_callback_loadResource
-  if not isNil(vtbl[].setSource):
-    vtbl[].vtbl.setSource = fcQTextBrowser_vtable_callback_setSource
+  if not isNil(vtbl[].setSourceName):
+    vtbl[].vtbl.setSourceName = fcQTextBrowser_vtable_callback_setSourceName
   if not isNil(vtbl[].backward):
     vtbl[].vtbl.backward = fcQTextBrowser_vtable_callback_backward
   if not isNil(vtbl[].forward):
@@ -1896,8 +1896,8 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
     vtbl[].vtbl.focusNextPrevChild = fcQTextBrowser_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = fcQTextBrowser_vtable_callback_paintEvent
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQTextBrowser_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQueryProperty):
+    vtbl[].vtbl.inputMethodQueryProperty = fcQTextBrowser_vtable_callback_inputMethodQueryProperty
   if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = fcQTextBrowser_vtable_callback_timerEvent
   if not isNil(vtbl[].keyReleaseEvent):
@@ -2008,8 +2008,8 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
     vtbl[].vtbl.metacall = fcQTextBrowser_vtable_callback_metacall
   if not isNil(vtbl[].loadResource):
     vtbl[].vtbl.loadResource = fcQTextBrowser_vtable_callback_loadResource
-  if not isNil(vtbl[].setSource):
-    vtbl[].vtbl.setSource = fcQTextBrowser_vtable_callback_setSource
+  if not isNil(vtbl[].setSourceName):
+    vtbl[].vtbl.setSourceName = fcQTextBrowser_vtable_callback_setSourceName
   if not isNil(vtbl[].backward):
     vtbl[].vtbl.backward = fcQTextBrowser_vtable_callback_backward
   if not isNil(vtbl[].forward):
@@ -2034,8 +2034,8 @@ proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
     vtbl[].vtbl.focusNextPrevChild = fcQTextBrowser_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = fcQTextBrowser_vtable_callback_paintEvent
-  if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = fcQTextBrowser_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].inputMethodQueryProperty):
+    vtbl[].vtbl.inputMethodQueryProperty = fcQTextBrowser_vtable_callback_inputMethodQueryProperty
   if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = fcQTextBrowser_vtable_callback_timerEvent
   if not isNil(vtbl[].keyReleaseEvent):
@@ -2141,7 +2141,7 @@ const cQTextBrowser_mvtbl = cQTextBrowserVTable(
   metacast: fcQTextBrowser_method_callback_metacast,
   metacall: fcQTextBrowser_method_callback_metacall,
   loadResource: fcQTextBrowser_method_callback_loadResource,
-  setSource: fcQTextBrowser_method_callback_setSource,
+  setSourceName: fcQTextBrowser_method_callback_setSourceName,
   backward: fcQTextBrowser_method_callback_backward,
   forward: fcQTextBrowser_method_callback_forward,
   home: fcQTextBrowser_method_callback_home,
@@ -2154,7 +2154,7 @@ const cQTextBrowser_mvtbl = cQTextBrowserVTable(
   focusOutEvent: fcQTextBrowser_method_callback_focusOutEvent,
   focusNextPrevChild: fcQTextBrowser_method_callback_focusNextPrevChild,
   paintEvent: fcQTextBrowser_method_callback_paintEvent,
-  inputMethodQuery: fcQTextBrowser_method_callback_inputMethodQuery,
+  inputMethodQueryProperty: fcQTextBrowser_method_callback_inputMethodQueryProperty,
   timerEvent: fcQTextBrowser_method_callback_timerEvent,
   keyReleaseEvent: fcQTextBrowser_method_callback_keyReleaseEvent,
   resizeEvent: fcQTextBrowser_method_callback_resizeEvent,

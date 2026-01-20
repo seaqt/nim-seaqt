@@ -75,15 +75,15 @@ type cQPageSetupDialog*{.exportc: "QPageSetupDialog", incompleteStruct.} = objec
 proc fcQPageSetupDialog_metaObject(self: pointer): pointer {.importc: "QPageSetupDialog_metaObject".}
 proc fcQPageSetupDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QPageSetupDialog_metacast".}
 proc fcQPageSetupDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPageSetupDialog_metacall".}
-proc fcQPageSetupDialog_tr(s: cstring): struct_seaqt_string {.importc: "QPageSetupDialog_tr".}
-proc fcQPageSetupDialog_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPageSetupDialog_trUtf8".}
+proc fcQPageSetupDialog_trS(s: cstring): struct_seaqt_string {.importc: "QPageSetupDialog_tr_s".}
+proc fcQPageSetupDialog_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPageSetupDialog_trUtf8_s".}
 proc fcQPageSetupDialog_exec(self: pointer): cint {.importc: "QPageSetupDialog_exec".}
 proc fcQPageSetupDialog_done(self: pointer, resultVal: cint): void {.importc: "QPageSetupDialog_done".}
 proc fcQPageSetupDialog_printer(self: pointer): pointer {.importc: "QPageSetupDialog_printer".}
-proc fcQPageSetupDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPageSetupDialog_tr2".}
-proc fcQPageSetupDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPageSetupDialog_tr3".}
-proc fcQPageSetupDialog_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPageSetupDialog_trUtf82".}
-proc fcQPageSetupDialog_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPageSetupDialog_trUtf83".}
+proc fcQPageSetupDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPageSetupDialog_tr_s_c".}
+proc fcQPageSetupDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPageSetupDialog_tr_s_c_n".}
+proc fcQPageSetupDialog_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPageSetupDialog_trUtf8_s_c".}
+proc fcQPageSetupDialog_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPageSetupDialog_trUtf8_s_c_n".}
 proc fcQPageSetupDialog_vdata(self: pointer): ptr pointer {.importc: "QPageSetupDialog_vdata".}
 proc fvdata_cQPageSetupDialog(self: pointer): pointer {.importc: "vdata_QPageSetupDialog".}
 
@@ -209,10 +209,10 @@ proc fcQPageSetupDialog_protectedbase_sender(self: pointer): pointer {.importc: 
 proc fcQPageSetupDialog_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QPageSetupDialog_protectedbase_senderSignalIndex".}
 proc fcQPageSetupDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPageSetupDialog_protectedbase_receivers".}
 proc fcQPageSetupDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPageSetupDialog_protectedbase_isSignalConnected".}
-proc fcQPageSetupDialog_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new".}
-proc fcQPageSetupDialog_new2(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new2".}
-proc fcQPageSetupDialog_new3(vtbl: pointer, vdata: csize_t): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new3".}
-proc fcQPageSetupDialog_new4(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new4".}
+proc fcQPageSetupDialog_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new_parent".}
+proc fcQPageSetupDialog_new2(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new_printer".}
+proc fcQPageSetupDialog_new3(vtbl: pointer, vdata: csize_t): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new".}
+proc fcQPageSetupDialog_new4(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new_printer_parent".}
 proc fcQPageSetupDialog_staticMetaObject(): pointer {.importc: "QPageSetupDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qobjectdefs_types.QMetaObject =
@@ -225,13 +225,13 @@ proc metacall*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: cint, 
   fcQPageSetupDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring): string =
-  let v_ms = fcQPageSetupDialog_tr(s)
+  let v_ms = fcQPageSetupDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring): string =
-  let v_ms = fcQPageSetupDialog_trUtf8(s)
+  let v_ms = fcQPageSetupDialog_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -246,25 +246,25 @@ proc printer*(self: gen_qpagesetupdialog_types.QPageSetupDialog): gen_qprinter_t
   gen_qprinter_types.QPrinter(h: fcQPageSetupDialog_printer(self.h), owned: false)
 
 proc tr*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQPageSetupDialog_tr2(s, c)
+  let v_ms = fcQPageSetupDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPageSetupDialog_tr3(s, c, n)
+  let v_ms = fcQPageSetupDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQPageSetupDialog_trUtf82(s, c)
+  let v_ms = fcQPageSetupDialog_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPageSetupDialog_trUtf83(s, c, n)
+  let v_ms = fcQPageSetupDialog_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

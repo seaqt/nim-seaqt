@@ -23,11 +23,11 @@ typedef struct QWebEngineHttpRequest QWebEngineHttpRequest;
 #endif
 
 QWebEngineHttpRequest* QWebEngineHttpRequest_new();
-QWebEngineHttpRequest* QWebEngineHttpRequest_new2(QWebEngineHttpRequest* other);
-QWebEngineHttpRequest* QWebEngineHttpRequest_new3(QUrl* url);
-QWebEngineHttpRequest* QWebEngineHttpRequest_new4(QUrl* url, int* method);
+QWebEngineHttpRequest* QWebEngineHttpRequest_new_from(QWebEngineHttpRequest* from);
+QWebEngineHttpRequest* QWebEngineHttpRequest_new_url(QUrl* url);
+QWebEngineHttpRequest* QWebEngineHttpRequest_new_url_method(QUrl* url, int* method);
 
-void QWebEngineHttpRequest_operatorAssign(QWebEngineHttpRequest* self, QWebEngineHttpRequest* other);
+void QWebEngineHttpRequest_operatorAssign(QWebEngineHttpRequest* self, QWebEngineHttpRequest* from);
 QWebEngineHttpRequest* QWebEngineHttpRequest_postRequest(QUrl* url, struct seaqt_map /* of struct seaqt_string to struct seaqt_string */  postData);
 void QWebEngineHttpRequest_swap(QWebEngineHttpRequest* self, QWebEngineHttpRequest* other);
 bool QWebEngineHttpRequest_operatorEqual(const QWebEngineHttpRequest* self, QWebEngineHttpRequest* other);

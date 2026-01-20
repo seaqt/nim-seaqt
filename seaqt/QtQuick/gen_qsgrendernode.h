@@ -82,7 +82,7 @@ int QSGRenderNode__RenderState_stencilValue(const QSGRenderNode__RenderState* se
 bool QSGRenderNode__RenderState_stencilEnabled(const QSGRenderNode__RenderState* self);
 QRegion* QSGRenderNode__RenderState_clipRegion(const QSGRenderNode__RenderState* self);
 void* QSGRenderNode__RenderState_get(const QSGRenderNode__RenderState* self, const char* state);
-void QSGRenderNode__RenderState_operatorAssign(QSGRenderNode__RenderState* self, QSGRenderNode__RenderState* param1);
+void QSGRenderNode__RenderState_operatorAssign(QSGRenderNode__RenderState* self, QSGRenderNode__RenderState* from);
 
 void QSGRenderNode__RenderState_delete(QSGRenderNode__RenderState* self);
 

@@ -82,7 +82,7 @@ export
 
 type cQWebEngineContextMenuData*{.exportc: "QWebEngineContextMenuData", incompleteStruct.} = object
 
-proc fcQWebEngineContextMenuData_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineContextMenuData_operatorAssign".}
+proc fcQWebEngineContextMenuData_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineContextMenuData_operatorAssign".}
 proc fcQWebEngineContextMenuData_isValid(self: pointer): bool {.importc: "QWebEngineContextMenuData_isValid".}
 proc fcQWebEngineContextMenuData_position(self: pointer): pointer {.importc: "QWebEngineContextMenuData_position".}
 proc fcQWebEngineContextMenuData_selectedText(self: pointer): struct_seaqt_string {.importc: "QWebEngineContextMenuData_selectedText".}
@@ -96,11 +96,11 @@ proc fcQWebEngineContextMenuData_spellCheckerSuggestions(self: pointer): struct_
 proc fcQWebEngineContextMenuData_mediaFlags(self: pointer): cint {.importc: "QWebEngineContextMenuData_mediaFlags".}
 proc fcQWebEngineContextMenuData_editFlags(self: pointer): cint {.importc: "QWebEngineContextMenuData_editFlags".}
 proc fcQWebEngineContextMenuData_new(): ptr cQWebEngineContextMenuData {.importc: "QWebEngineContextMenuData_new".}
-proc fcQWebEngineContextMenuData_new2(other: pointer): ptr cQWebEngineContextMenuData {.importc: "QWebEngineContextMenuData_new2".}
+proc fcQWebEngineContextMenuData_new2(fromVal: pointer): ptr cQWebEngineContextMenuData {.importc: "QWebEngineContextMenuData_new_from".}
 proc fcQWebEngineContextMenuData_staticMetaObject(): pointer {.importc: "QWebEngineContextMenuData_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData, other: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): void =
-  fcQWebEngineContextMenuData_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData, fromVal: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): void =
+  fcQWebEngineContextMenuData_operatorAssign(self.h, fromVal.h)
 
 proc isValid*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): bool =
   fcQWebEngineContextMenuData_isValid(self.h)
@@ -160,8 +160,8 @@ proc create*(T: type gen_qwebenginecontextmenudata_types.QWebEngineContextMenuDa
   let tmp = gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData(h: fcQWebEngineContextMenuData_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData,
-    other: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData =
-  let tmp = gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData(h: fcQWebEngineContextMenuData_new2(other.h), owned: true)
+    fromVal: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData =
+  let tmp = gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData(h: fcQWebEngineContextMenuData_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuData_staticMetaObject())

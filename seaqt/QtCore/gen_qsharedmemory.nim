@@ -72,30 +72,30 @@ type cQSharedMemory*{.exportc: "QSharedMemory", incompleteStruct.} = object
 proc fcQSharedMemory_metaObject(self: pointer): pointer {.importc: "QSharedMemory_metaObject".}
 proc fcQSharedMemory_metacast(self: pointer, param1: cstring): pointer {.importc: "QSharedMemory_metacast".}
 proc fcQSharedMemory_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSharedMemory_metacall".}
-proc fcQSharedMemory_tr(s: cstring): struct_seaqt_string {.importc: "QSharedMemory_tr".}
-proc fcQSharedMemory_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSharedMemory_trUtf8".}
+proc fcQSharedMemory_trS(s: cstring): struct_seaqt_string {.importc: "QSharedMemory_tr_s".}
+proc fcQSharedMemory_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSharedMemory_trUtf8_s".}
 proc fcQSharedMemory_setKey(self: pointer, key: struct_seaqt_string): void {.importc: "QSharedMemory_setKey".}
 proc fcQSharedMemory_key(self: pointer): struct_seaqt_string {.importc: "QSharedMemory_key".}
 proc fcQSharedMemory_setNativeKey(self: pointer, key: struct_seaqt_string): void {.importc: "QSharedMemory_setNativeKey".}
 proc fcQSharedMemory_nativeKey(self: pointer): struct_seaqt_string {.importc: "QSharedMemory_nativeKey".}
-proc fcQSharedMemory_createX(self: pointer, size: cint): bool {.importc: "QSharedMemory_create".}
+proc fcQSharedMemory_createSize(self: pointer, size: cint): bool {.importc: "QSharedMemory_create_size".}
 proc fcQSharedMemory_size(self: pointer): cint {.importc: "QSharedMemory_size".}
 proc fcQSharedMemory_attach(self: pointer): bool {.importc: "QSharedMemory_attach".}
 proc fcQSharedMemory_isAttached(self: pointer): bool {.importc: "QSharedMemory_isAttached".}
 proc fcQSharedMemory_detach(self: pointer): bool {.importc: "QSharedMemory_detach".}
 proc fcQSharedMemory_data(self: pointer): pointer {.importc: "QSharedMemory_data".}
 proc fcQSharedMemory_constData(self: pointer): pointer {.importc: "QSharedMemory_constData".}
-proc fcQSharedMemory_data2(self: pointer): pointer {.importc: "QSharedMemory_data2".}
+proc fcQSharedMemory_dataConst(self: pointer): pointer {.importc: "QSharedMemory_data_const".}
 proc fcQSharedMemory_lock(self: pointer): bool {.importc: "QSharedMemory_lock".}
 proc fcQSharedMemory_unlock(self: pointer): bool {.importc: "QSharedMemory_unlock".}
 proc fcQSharedMemory_error(self: pointer): cint {.importc: "QSharedMemory_error".}
 proc fcQSharedMemory_errorString(self: pointer): struct_seaqt_string {.importc: "QSharedMemory_errorString".}
-proc fcQSharedMemory_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSharedMemory_tr2".}
-proc fcQSharedMemory_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSharedMemory_tr3".}
-proc fcQSharedMemory_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSharedMemory_trUtf82".}
-proc fcQSharedMemory_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSharedMemory_trUtf83".}
-proc fcQSharedMemory_create2(self: pointer, size: cint, mode: cint): bool {.importc: "QSharedMemory_create2".}
-proc fcQSharedMemory_attachWithMode(self: pointer, mode: cint): bool {.importc: "QSharedMemory_attachWithMode".}
+proc fcQSharedMemory_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSharedMemory_tr_s_c".}
+proc fcQSharedMemory_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSharedMemory_tr_s_c_n".}
+proc fcQSharedMemory_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSharedMemory_trUtf8_s_c".}
+proc fcQSharedMemory_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSharedMemory_trUtf8_s_c_n".}
+proc fcQSharedMemory_createSizeMode(self: pointer, size: cint, mode: cint): bool {.importc: "QSharedMemory_create_size_mode".}
+proc fcQSharedMemory_attachMode(self: pointer, mode: cint): bool {.importc: "QSharedMemory_attach_mode".}
 proc fcQSharedMemory_vdata(self: pointer): ptr pointer {.importc: "QSharedMemory_vdata".}
 proc fvdata_cQSharedMemory(self: pointer): pointer {.importc: "vdata_QSharedMemory".}
 
@@ -126,9 +126,9 @@ proc fcQSharedMemory_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQSharedMemory_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSharedMemory_protectedbase_receivers".}
 proc fcQSharedMemory_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSharedMemory_protectedbase_isSignalConnected".}
 proc fcQSharedMemory_new(vtbl: pointer, vdata: csize_t): ptr cQSharedMemory {.importc: "QSharedMemory_new".}
-proc fcQSharedMemory_new2(vtbl: pointer, vdata: csize_t, key: struct_seaqt_string): ptr cQSharedMemory {.importc: "QSharedMemory_new2".}
-proc fcQSharedMemory_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new3".}
-proc fcQSharedMemory_new4(vtbl: pointer, vdata: csize_t, key: struct_seaqt_string, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new4".}
+proc fcQSharedMemory_new2(vtbl: pointer, vdata: csize_t, key: struct_seaqt_string): ptr cQSharedMemory {.importc: "QSharedMemory_new_key".}
+proc fcQSharedMemory_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new_parent".}
+proc fcQSharedMemory_new4(vtbl: pointer, vdata: csize_t, key: struct_seaqt_string, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new_key_parent".}
 proc fcQSharedMemory_staticMetaObject(): pointer {.importc: "QSharedMemory_staticMetaObject".}
 
 proc metaObject*(self: gen_qsharedmemory_types.QSharedMemory): gen_qobjectdefs_types.QMetaObject =
@@ -141,13 +141,13 @@ proc metacall*(self: gen_qsharedmemory_types.QSharedMemory, param1: cint, param2
   fcQSharedMemory_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring): string =
-  let v_ms = fcQSharedMemory_tr(s)
+  let v_ms = fcQSharedMemory_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring): string =
-  let v_ms = fcQSharedMemory_trUtf8(s)
+  let v_ms = fcQSharedMemory_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -171,7 +171,7 @@ proc nativeKey*(self: gen_qsharedmemory_types.QSharedMemory): string =
   vx_ret
 
 proc createX*(self: gen_qsharedmemory_types.QSharedMemory, size: cint): bool =
-  fcQSharedMemory_createX(self.h, size)
+  fcQSharedMemory_createSize(self.h, size)
 
 proc size*(self: gen_qsharedmemory_types.QSharedMemory): cint =
   fcQSharedMemory_size(self.h)
@@ -192,7 +192,7 @@ proc constData*(self: gen_qsharedmemory_types.QSharedMemory): pointer =
   fcQSharedMemory_constData(self.h)
 
 proc data2*(self: gen_qsharedmemory_types.QSharedMemory): pointer =
-  fcQSharedMemory_data2(self.h)
+  fcQSharedMemory_dataConst(self.h)
 
 proc lock*(self: gen_qsharedmemory_types.QSharedMemory): bool =
   fcQSharedMemory_lock(self.h)
@@ -210,34 +210,34 @@ proc errorString*(self: gen_qsharedmemory_types.QSharedMemory): string =
   vx_ret
 
 proc tr*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstring): string =
-  let v_ms = fcQSharedMemory_tr2(s, c)
+  let v_ms = fcQSharedMemory_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSharedMemory_tr3(s, c, n)
+  let v_ms = fcQSharedMemory_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstring): string =
-  let v_ms = fcQSharedMemory_trUtf82(s, c)
+  let v_ms = fcQSharedMemory_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsharedmemory_types.QSharedMemory, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSharedMemory_trUtf83(s, c, n)
+  let v_ms = fcQSharedMemory_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc createX*(self: gen_qsharedmemory_types.QSharedMemory, size: cint, mode: cint): bool =
-  fcQSharedMemory_create2(self.h, size, cint(mode))
+  fcQSharedMemory_createSizeMode(self.h, size, cint(mode))
 
 proc attach*(self: gen_qsharedmemory_types.QSharedMemory, mode: cint): bool =
-  fcQSharedMemory_attachWithMode(self.h, cint(mode))
+  fcQSharedMemory_attachMode(self.h, cint(mode))
 
 type QSharedMemorymetaObjectProc* = proc(self: QSharedMemory): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSharedMemorymetacastProc* = proc(self: QSharedMemory, param1: cstring): pointer {.raises: [], gcsafe.}

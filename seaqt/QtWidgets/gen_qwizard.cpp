@@ -796,17 +796,17 @@ public:
 	friend bool QWizard_protectedbase_isSignalConnected(const VirtualQWizard* self, QMetaMethod* signal);
 };
 
-VirtualQWizard* QWizard_new(const QWizard_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQWizard* QWizard_new_parent(const QWizard_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWizard>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWizard(vtbl, parent) : nullptr;
 }
 
-VirtualQWizard* QWizard_new2(const QWizard_VTable* vtbl, size_t vdata) {
+VirtualQWizard* QWizard_new(const QWizard_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWizard>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWizard(vtbl) : nullptr;
 }
 
-VirtualQWizard* QWizard_new3(const QWizard_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQWizard* QWizard_new_parent_flags(const QWizard_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWizard>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWizard(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -827,7 +827,7 @@ int QWizard_metacall(QWizard* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWizard_tr(const char* s) {
+struct seaqt_string QWizard_tr_s(const char* s) {
 	QString _ret = QWizard::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -838,7 +838,7 @@ struct seaqt_string QWizard_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWizard_trUtf8(const char* s) {
+struct seaqt_string QWizard_trUtf8_s(const char* s) {
 	QString _ret = QWizard::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -951,7 +951,7 @@ int QWizard_wizardStyle(const QWizard* self) {
 	return static_cast<int>(_ret);
 }
 
-void QWizard_setOption(QWizard* self, int option) {
+void QWizard_setOption_option(QWizard* self, int option) {
 	self->setOption(static_cast<QWizard::WizardOption>(option));
 }
 
@@ -1139,7 +1139,7 @@ void QWizard_restart(QWizard* self) {
 	self->restart();
 }
 
-struct seaqt_string QWizard_tr2(const char* s, const char* c) {
+struct seaqt_string QWizard_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWizard::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1150,7 +1150,7 @@ struct seaqt_string QWizard_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWizard_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWizard_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWizard::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1161,7 +1161,7 @@ struct seaqt_string QWizard_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWizard_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWizard_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWizard::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1172,7 +1172,7 @@ struct seaqt_string QWizard_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWizard_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWizard_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWizard::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1183,7 +1183,7 @@ struct seaqt_string QWizard_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QWizard_setOption2(QWizard* self, int option, bool on) {
+void QWizard_setOption_option_on(QWizard* self, int option, bool on) {
 	self->setOption(static_cast<QWizard::WizardOption>(option), on);
 }
 
@@ -2217,10 +2217,10 @@ public:
 	// Wrappers to allow calling protected methods:
 	friend void QWizardPage_protectedbase_setField(VirtualQWizardPage* self, struct seaqt_string name, QVariant* value);
 	friend QVariant* QWizardPage_protectedbase_field(const VirtualQWizardPage* self, struct seaqt_string name);
-	friend void QWizardPage_protectedbase_registerField(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget);
+	friend void QWizardPage_protectedbase_registerField_name_widget(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget);
 	friend QWizard* QWizardPage_protectedbase_wizard(const VirtualQWizardPage* self);
-	friend void QWizardPage_protectedbase_registerField2(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property);
-	friend void QWizardPage_protectedbase_registerField3(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property, const char* changedSignal);
+	friend void QWizardPage_protectedbase_registerField_name_widget_property(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property);
+	friend void QWizardPage_protectedbase_registerField_name_widget_property_changedSignal(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property, const char* changedSignal);
 	friend void QWizardPage_protectedbase_updateMicroFocus(VirtualQWizardPage* self);
 	friend void QWizardPage_protectedbase_create(VirtualQWizardPage* self);
 	friend void QWizardPage_protectedbase_destroy(VirtualQWizardPage* self);
@@ -2232,12 +2232,12 @@ public:
 	friend bool QWizardPage_protectedbase_isSignalConnected(const VirtualQWizardPage* self, QMetaMethod* signal);
 };
 
-VirtualQWizardPage* QWizardPage_new(const QWizardPage_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQWizardPage* QWizardPage_new_parent(const QWizardPage_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWizardPage>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWizardPage(vtbl, parent) : nullptr;
 }
 
-VirtualQWizardPage* QWizardPage_new2(const QWizardPage_VTable* vtbl, size_t vdata) {
+VirtualQWizardPage* QWizardPage_new(const QWizardPage_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWizardPage>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWizardPage(vtbl) : nullptr;
 }
@@ -2258,7 +2258,7 @@ int QWizardPage_metacall(QWizardPage* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWizardPage_tr(const char* s) {
+struct seaqt_string QWizardPage_tr_s(const char* s) {
 	QString _ret = QWizardPage::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2269,7 +2269,7 @@ struct seaqt_string QWizardPage_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWizardPage_trUtf8(const char* s) {
+struct seaqt_string QWizardPage_trUtf8_s(const char* s) {
 	QString _ret = QWizardPage::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2387,7 +2387,7 @@ void QWizardPage_connect_completeChanged(QWizardPage* self, intptr_t slot, void 
 	QWizardPage::connect(self, static_cast<void (QWizardPage::*)()>(&QWizardPage::completeChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWizardPage_tr2(const char* s, const char* c) {
+struct seaqt_string QWizardPage_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWizardPage::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2398,7 +2398,7 @@ struct seaqt_string QWizardPage_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWizardPage_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWizardPage_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWizardPage::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2409,7 +2409,7 @@ struct seaqt_string QWizardPage_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWizardPage_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWizardPage_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWizardPage::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2420,7 +2420,7 @@ struct seaqt_string QWizardPage_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWizardPage_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWizardPage_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWizardPage::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2721,7 +2721,7 @@ QVariant* QWizardPage_protectedbase_field(const VirtualQWizardPage* self, struct
 	return new QVariant(self->field(name_QString));
 }
 
-void QWizardPage_protectedbase_registerField(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget) {
+void QWizardPage_protectedbase_registerField_name_widget(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
 	self->registerField(name_QString, widget);
 }
@@ -2730,12 +2730,12 @@ QWizard* QWizardPage_protectedbase_wizard(const VirtualQWizardPage* self) {
 	return self->wizard();
 }
 
-void QWizardPage_protectedbase_registerField2(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property) {
+void QWizardPage_protectedbase_registerField_name_widget_property(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
 	self->registerField(name_QString, widget, property);
 }
 
-void QWizardPage_protectedbase_registerField3(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property, const char* changedSignal) {
+void QWizardPage_protectedbase_registerField_name_widget_property_changedSignal(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property, const char* changedSignal) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
 	self->registerField(name_QString, widget, property, changedSignal);
 }

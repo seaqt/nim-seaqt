@@ -84,7 +84,7 @@ proc fcQPrintEngine_newPage(self: pointer): bool {.importc: "QPrintEngine_newPag
 proc fcQPrintEngine_abort(self: pointer): bool {.importc: "QPrintEngine_abort".}
 proc fcQPrintEngine_metric(self: pointer, param1: cint): cint {.importc: "QPrintEngine_metric".}
 proc fcQPrintEngine_printerState(self: pointer): cint {.importc: "QPrintEngine_printerState".}
-proc fcQPrintEngine_operatorAssign(self: pointer, param1: pointer): void {.importc: "QPrintEngine_operatorAssign".}
+proc fcQPrintEngine_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QPrintEngine_operatorAssign".}
 
 proc setProperty*(self: gen_qprintengine_types.QPrintEngine, key: cint, value: gen_qvariant_types.QVariant): void =
   fcQPrintEngine_setProperty(self.h, cint(key), value.h)
@@ -104,6 +104,6 @@ proc metric*(self: gen_qprintengine_types.QPrintEngine, param1: cint): cint =
 proc printerState*(self: gen_qprintengine_types.QPrintEngine): cint =
   cint(fcQPrintEngine_printerState(self.h))
 
-proc operatorAssign*(self: gen_qprintengine_types.QPrintEngine, param1: gen_qprintengine_types.QPrintEngine): void =
-  fcQPrintEngine_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qprintengine_types.QPrintEngine, fromVal: gen_qprintengine_types.QPrintEngine): void =
+  fcQPrintEngine_operatorAssign(self.h, fromVal.h)
 

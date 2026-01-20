@@ -27,10 +27,10 @@ typedef struct QSizeF QSizeF;
 #endif
 
 QPrinterInfo* QPrinterInfo_new();
-QPrinterInfo* QPrinterInfo_new2(QPrinterInfo* other);
-QPrinterInfo* QPrinterInfo_new3(QPrinter* printer);
+QPrinterInfo* QPrinterInfo_new_from(QPrinterInfo* from);
+QPrinterInfo* QPrinterInfo_new_printer(QPrinter* printer);
 
-void QPrinterInfo_operatorAssign(QPrinterInfo* self, QPrinterInfo* other);
+void QPrinterInfo_operatorAssign(QPrinterInfo* self, QPrinterInfo* from);
 struct seaqt_string QPrinterInfo_printerName(const QPrinterInfo* self);
 struct seaqt_string QPrinterInfo_description(const QPrinterInfo* self);
 struct seaqt_string QPrinterInfo_location(const QPrinterInfo* self);

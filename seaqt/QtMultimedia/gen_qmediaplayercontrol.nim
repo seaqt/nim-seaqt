@@ -61,8 +61,8 @@ type cQMediaPlayerControl*{.exportc: "QMediaPlayerControl", incompleteStruct.} =
 proc fcQMediaPlayerControl_metaObject(self: pointer): pointer {.importc: "QMediaPlayerControl_metaObject".}
 proc fcQMediaPlayerControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaPlayerControl_metacast".}
 proc fcQMediaPlayerControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaPlayerControl_metacall".}
-proc fcQMediaPlayerControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaPlayerControl_tr".}
-proc fcQMediaPlayerControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaPlayerControl_trUtf8".}
+proc fcQMediaPlayerControl_trS(s: cstring): struct_seaqt_string {.importc: "QMediaPlayerControl_tr_s".}
+proc fcQMediaPlayerControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaPlayerControl_trUtf8_s".}
 proc fcQMediaPlayerControl_state(self: pointer): cint {.importc: "QMediaPlayerControl_state".}
 proc fcQMediaPlayerControl_mediaStatus(self: pointer): cint {.importc: "QMediaPlayerControl_mediaStatus".}
 proc fcQMediaPlayerControl_duration(self: pointer): clonglong {.importc: "QMediaPlayerControl_duration".}
@@ -113,10 +113,10 @@ proc fcQMediaPlayerControl_playbackRateChanged(self: pointer, rate: float64): vo
 proc fcQMediaPlayerControl_connect_playbackRateChanged(self: pointer, slot: int, callback: proc (slot: int, rate: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayerControl_connect_playbackRateChanged".}
 proc fcQMediaPlayerControl_error(self: pointer, error: cint, errorString: struct_seaqt_string): void {.importc: "QMediaPlayerControl_error".}
 proc fcQMediaPlayerControl_connect_error(self: pointer, slot: int, callback: proc (slot: int, error: cint, errorString: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayerControl_connect_error".}
-proc fcQMediaPlayerControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayerControl_tr2".}
-proc fcQMediaPlayerControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayerControl_tr3".}
-proc fcQMediaPlayerControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayerControl_trUtf82".}
-proc fcQMediaPlayerControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayerControl_trUtf83".}
+proc fcQMediaPlayerControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayerControl_tr_s_c".}
+proc fcQMediaPlayerControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayerControl_tr_s_c_n".}
+proc fcQMediaPlayerControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayerControl_trUtf8_s_c".}
+proc fcQMediaPlayerControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayerControl_trUtf8_s_c_n".}
 proc fcQMediaPlayerControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaPlayerControl_protectedbase_sender".}
 proc fcQMediaPlayerControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaPlayerControl_protectedbase_senderSignalIndex".}
 proc fcQMediaPlayerControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlayerControl_protectedbase_receivers".}
@@ -133,13 +133,13 @@ proc metacall*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, param1: 
   fcQMediaPlayerControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring): string =
-  let v_ms = fcQMediaPlayerControl_tr(s)
+  let v_ms = fcQMediaPlayerControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring): string =
-  let v_ms = fcQMediaPlayerControl_trUtf8(s)
+  let v_ms = fcQMediaPlayerControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -496,25 +496,25 @@ proc onError*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, slot: QMe
   fcQMediaPlayerControl_connect_error(self.h, cast[int](addr tmp[]), fcQMediaPlayerControl_slot_callback_error, fcQMediaPlayerControl_slot_callback_error_release)
 
 proc tr*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaPlayerControl_tr2(s, c)
+  let v_ms = fcQMediaPlayerControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaPlayerControl_tr3(s, c, n)
+  let v_ms = fcQMediaPlayerControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaPlayerControl_trUtf82(s, c)
+  let v_ms = fcQMediaPlayerControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaPlayerControl_trUtf83(s, c, n)
+  let v_ms = fcQMediaPlayerControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

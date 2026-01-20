@@ -116,8 +116,8 @@ type cQSqlDriver*{.exportc: "QSqlDriver", incompleteStruct.} = object
 proc fcQSqlDriver_metaObject(self: pointer): pointer {.importc: "QSqlDriver_metaObject".}
 proc fcQSqlDriver_metacast(self: pointer, param1: cstring): pointer {.importc: "QSqlDriver_metacast".}
 proc fcQSqlDriver_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSqlDriver_metacall".}
-proc fcQSqlDriver_tr(s: cstring): struct_seaqt_string {.importc: "QSqlDriver_tr".}
-proc fcQSqlDriver_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSqlDriver_trUtf8".}
+proc fcQSqlDriver_trS(s: cstring): struct_seaqt_string {.importc: "QSqlDriver_tr_s".}
+proc fcQSqlDriver_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSqlDriver_trUtf8_s".}
 proc fcQSqlDriver_isOpen(self: pointer): bool {.importc: "QSqlDriver_isOpen".}
 proc fcQSqlDriver_isOpenError(self: pointer): bool {.importc: "QSqlDriver_isOpenError".}
 proc fcQSqlDriver_beginTransaction(self: pointer): bool {.importc: "QSqlDriver_beginTransaction".}
@@ -144,14 +144,14 @@ proc fcQSqlDriver_setNumericalPrecisionPolicy(self: pointer, precisionPolicy: ci
 proc fcQSqlDriver_numericalPrecisionPolicy(self: pointer): cint {.importc: "QSqlDriver_numericalPrecisionPolicy".}
 proc fcQSqlDriver_dbmsType(self: pointer): cint {.importc: "QSqlDriver_dbmsType".}
 proc fcQSqlDriver_cancelQuery(self: pointer): bool {.importc: "QSqlDriver_cancelQuery".}
-proc fcQSqlDriver_notification(self: pointer, name: struct_seaqt_string): void {.importc: "QSqlDriver_notification".}
-proc fcQSqlDriver_connect_notification(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSqlDriver_connect_notification".}
-proc fcQSqlDriver_notification2(self: pointer, name: struct_seaqt_string, source: cint, payload: pointer): void {.importc: "QSqlDriver_notification2".}
-proc fcQSqlDriver_connect_notification2(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string, source: cint, payload: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSqlDriver_connect_notification2".}
-proc fcQSqlDriver_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlDriver_tr2".}
-proc fcQSqlDriver_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlDriver_tr3".}
-proc fcQSqlDriver_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlDriver_trUtf82".}
-proc fcQSqlDriver_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlDriver_trUtf83".}
+proc fcQSqlDriver_notificationName(self: pointer, name: struct_seaqt_string): void {.importc: "QSqlDriver_notification_name".}
+proc fcQSqlDriver_connect_notificationName(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSqlDriver_connect_notification_name".}
+proc fcQSqlDriver_notificationNameSourcePayload(self: pointer, name: struct_seaqt_string, source: cint, payload: pointer): void {.importc: "QSqlDriver_notification_name_source_payload".}
+proc fcQSqlDriver_connect_notificationNameSourcePayload(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string, source: cint, payload: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSqlDriver_connect_notification_name_source_payload".}
+proc fcQSqlDriver_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlDriver_tr_s_c".}
+proc fcQSqlDriver_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlDriver_tr_s_c_n".}
+proc fcQSqlDriver_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlDriver_trUtf8_s_c".}
+proc fcQSqlDriver_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlDriver_trUtf8_s_c_n".}
 proc fcQSqlDriver_vdata(self: pointer): ptr pointer {.importc: "QSqlDriver_vdata".}
 proc fvdata_cQSqlDriver(self: pointer): pointer {.importc: "vdata_QSqlDriver".}
 
@@ -226,7 +226,7 @@ proc fcQSqlDriver_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQSqlDriver_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSqlDriver_protectedbase_receivers".}
 proc fcQSqlDriver_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSqlDriver_protectedbase_isSignalConnected".}
 proc fcQSqlDriver_new(vtbl: pointer, vdata: csize_t): ptr cQSqlDriver {.importc: "QSqlDriver_new".}
-proc fcQSqlDriver_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlDriver {.importc: "QSqlDriver_new2".}
+proc fcQSqlDriver_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlDriver {.importc: "QSqlDriver_new_parent".}
 proc fcQSqlDriver_staticMetaObject(): pointer {.importc: "QSqlDriver_staticMetaObject".}
 
 proc metaObject*(self: gen_qsqldriver_types.QSqlDriver): gen_qobjectdefs_types.QMetaObject =
@@ -239,13 +239,13 @@ proc metacall*(self: gen_qsqldriver_types.QSqlDriver, param1: cint, param2: cint
   fcQSqlDriver_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring): string =
-  let v_ms = fcQSqlDriver_tr(s)
+  let v_ms = fcQSqlDriver_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring): string =
-  let v_ms = fcQSqlDriver_trUtf8(s)
+  let v_ms = fcQSqlDriver_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -359,11 +359,11 @@ proc cancelQuery*(self: gen_qsqldriver_types.QSqlDriver): bool =
   fcQSqlDriver_cancelQuery(self.h)
 
 proc notification*(self: gen_qsqldriver_types.QSqlDriver, name: openArray[char]): void =
-  fcQSqlDriver_notification(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQSqlDriver_notificationName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
-type QSqlDrivernotificationSlot* = proc(name: openArray[char])
-proc fcQSqlDriver_slot_callback_notification(slot: int, name: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QSqlDrivernotificationSlot](cast[pointer](slot))
+type QSqlDrivernotificationNameSlot* = proc(name: openArray[char])
+proc fcQSqlDriver_slot_callback_notificationName(slot: int, name: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QSqlDrivernotificationNameSlot](cast[pointer](slot))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
@@ -371,22 +371,22 @@ proc fcQSqlDriver_slot_callback_notification(slot: int, name: struct_seaqt_strin
 
   nimfunc[](slotval1)
 
-proc fcQSqlDriver_slot_callback_notification_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QSqlDrivernotificationSlot](cast[pointer](slot))
+proc fcQSqlDriver_slot_callback_notificationName_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSqlDrivernotificationNameSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onNotification*(self: gen_qsqldriver_types.QSqlDriver, slot: QSqlDrivernotificationSlot) =
-  var tmp = new QSqlDrivernotificationSlot
+proc onNotification*(self: gen_qsqldriver_types.QSqlDriver, slot: QSqlDrivernotificationNameSlot) =
+  var tmp = new QSqlDrivernotificationNameSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSqlDriver_connect_notification(self.h, cast[int](addr tmp[]), fcQSqlDriver_slot_callback_notification, fcQSqlDriver_slot_callback_notification_release)
+  fcQSqlDriver_connect_notificationName(self.h, cast[int](addr tmp[]), fcQSqlDriver_slot_callback_notificationName, fcQSqlDriver_slot_callback_notificationName_release)
 
 proc notification*(self: gen_qsqldriver_types.QSqlDriver, name: openArray[char], source: cint, payload: gen_qvariant_types.QVariant): void =
-  fcQSqlDriver_notification2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(source), payload.h)
+  fcQSqlDriver_notificationNameSourcePayload(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(source), payload.h)
 
-type QSqlDrivernotification2Slot* = proc(name: openArray[char], source: cint, payload: gen_qvariant_types.QVariant)
-proc fcQSqlDriver_slot_callback_notification2(slot: int, name: struct_seaqt_string, source: cint, payload: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QSqlDrivernotification2Slot](cast[pointer](slot))
+type QSqlDrivernotificationNameSourcePayloadSlot* = proc(name: openArray[char], source: cint, payload: gen_qvariant_types.QVariant)
+proc fcQSqlDriver_slot_callback_notificationNameSourcePayload(slot: int, name: struct_seaqt_string, source: cint, payload: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QSqlDrivernotificationNameSourcePayloadSlot](cast[pointer](slot))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
@@ -398,36 +398,36 @@ proc fcQSqlDriver_slot_callback_notification2(slot: int, name: struct_seaqt_stri
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc fcQSqlDriver_slot_callback_notification2_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QSqlDrivernotification2Slot](cast[pointer](slot))
+proc fcQSqlDriver_slot_callback_notificationNameSourcePayload_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSqlDrivernotificationNameSourcePayloadSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onNotification*(self: gen_qsqldriver_types.QSqlDriver, slot: QSqlDrivernotification2Slot) =
-  var tmp = new QSqlDrivernotification2Slot
+proc onNotification*(self: gen_qsqldriver_types.QSqlDriver, slot: QSqlDrivernotificationNameSourcePayloadSlot) =
+  var tmp = new QSqlDrivernotificationNameSourcePayloadSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSqlDriver_connect_notification2(self.h, cast[int](addr tmp[]), fcQSqlDriver_slot_callback_notification2, fcQSqlDriver_slot_callback_notification2_release)
+  fcQSqlDriver_connect_notificationNameSourcePayload(self.h, cast[int](addr tmp[]), fcQSqlDriver_slot_callback_notificationNameSourcePayload, fcQSqlDriver_slot_callback_notificationNameSourcePayload_release)
 
 proc tr*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlDriver_tr2(s, c)
+  let v_ms = fcQSqlDriver_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlDriver_tr3(s, c, n)
+  let v_ms = fcQSqlDriver_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlDriver_trUtf82(s, c)
+  let v_ms = fcQSqlDriver_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlDriver_trUtf83(s, c, n)
+  let v_ms = fcQSqlDriver_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

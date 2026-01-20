@@ -55,15 +55,15 @@ type cQMediaAvailabilityControl*{.exportc: "QMediaAvailabilityControl", incomple
 proc fcQMediaAvailabilityControl_metaObject(self: pointer): pointer {.importc: "QMediaAvailabilityControl_metaObject".}
 proc fcQMediaAvailabilityControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaAvailabilityControl_metacast".}
 proc fcQMediaAvailabilityControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaAvailabilityControl_metacall".}
-proc fcQMediaAvailabilityControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaAvailabilityControl_tr".}
-proc fcQMediaAvailabilityControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaAvailabilityControl_trUtf8".}
+proc fcQMediaAvailabilityControl_trS(s: cstring): struct_seaqt_string {.importc: "QMediaAvailabilityControl_tr_s".}
+proc fcQMediaAvailabilityControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaAvailabilityControl_trUtf8_s".}
 proc fcQMediaAvailabilityControl_availability(self: pointer): cint {.importc: "QMediaAvailabilityControl_availability".}
 proc fcQMediaAvailabilityControl_availabilityChanged(self: pointer, availability: cint): void {.importc: "QMediaAvailabilityControl_availabilityChanged".}
 proc fcQMediaAvailabilityControl_connect_availabilityChanged(self: pointer, slot: int, callback: proc (slot: int, availability: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaAvailabilityControl_connect_availabilityChanged".}
-proc fcQMediaAvailabilityControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaAvailabilityControl_tr2".}
-proc fcQMediaAvailabilityControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaAvailabilityControl_tr3".}
-proc fcQMediaAvailabilityControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaAvailabilityControl_trUtf82".}
-proc fcQMediaAvailabilityControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaAvailabilityControl_trUtf83".}
+proc fcQMediaAvailabilityControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaAvailabilityControl_tr_s_c".}
+proc fcQMediaAvailabilityControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaAvailabilityControl_tr_s_c_n".}
+proc fcQMediaAvailabilityControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaAvailabilityControl_trUtf8_s_c".}
+proc fcQMediaAvailabilityControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaAvailabilityControl_trUtf8_s_c_n".}
 proc fcQMediaAvailabilityControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaAvailabilityControl_protectedbase_sender".}
 proc fcQMediaAvailabilityControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaAvailabilityControl_protectedbase_senderSignalIndex".}
 proc fcQMediaAvailabilityControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaAvailabilityControl_protectedbase_receivers".}
@@ -80,13 +80,13 @@ proc metacall*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityContr
   fcQMediaAvailabilityControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, s: cstring): string =
-  let v_ms = fcQMediaAvailabilityControl_tr(s)
+  let v_ms = fcQMediaAvailabilityControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, s: cstring): string =
-  let v_ms = fcQMediaAvailabilityControl_trUtf8(s)
+  let v_ms = fcQMediaAvailabilityControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -115,25 +115,25 @@ proc onAvailabilityChanged*(self: gen_qmediaavailabilitycontrol_types.QMediaAvai
   fcQMediaAvailabilityControl_connect_availabilityChanged(self.h, cast[int](addr tmp[]), fcQMediaAvailabilityControl_slot_callback_availabilityChanged, fcQMediaAvailabilityControl_slot_callback_availabilityChanged_release)
 
 proc tr*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaAvailabilityControl_tr2(s, c)
+  let v_ms = fcQMediaAvailabilityControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaAvailabilityControl_tr3(s, c, n)
+  let v_ms = fcQMediaAvailabilityControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaAvailabilityControl_trUtf82(s, c)
+  let v_ms = fcQMediaAvailabilityControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaAvailabilityControl_trUtf83(s, c, n)
+  let v_ms = fcQMediaAvailabilityControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

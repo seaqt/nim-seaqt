@@ -388,17 +388,17 @@ VirtualQWebEnginePage* QWebEnginePage_new(const QWebEnginePage_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQWebEnginePage(vtbl) : nullptr;
 }
 
-VirtualQWebEnginePage* QWebEnginePage_new2(const QWebEnginePage_VTable* vtbl, size_t vdata, QWebEngineProfile* profile) {
+VirtualQWebEnginePage* QWebEnginePage_new_profile(const QWebEnginePage_VTable* vtbl, size_t vdata, QWebEngineProfile* profile) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEnginePage>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEnginePage(vtbl, profile) : nullptr;
 }
 
-VirtualQWebEnginePage* QWebEnginePage_new3(const QWebEnginePage_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQWebEnginePage* QWebEnginePage_new_parent(const QWebEnginePage_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEnginePage>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEnginePage(vtbl, parent) : nullptr;
 }
 
-VirtualQWebEnginePage* QWebEnginePage_new4(const QWebEnginePage_VTable* vtbl, size_t vdata, QWebEngineProfile* profile, QObject* parent) {
+VirtualQWebEnginePage* QWebEnginePage_new_profile_parent(const QWebEnginePage_VTable* vtbl, size_t vdata, QWebEngineProfile* profile, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEnginePage>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebEnginePage(vtbl, profile, parent) : nullptr;
 }
@@ -419,7 +419,7 @@ int QWebEnginePage_metacall(QWebEnginePage* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebEnginePage_tr(const char* s) {
+struct seaqt_string QWebEnginePage_tr_s(const char* s) {
 	QString _ret = QWebEnginePage::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -430,7 +430,7 @@ struct seaqt_string QWebEnginePage_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebEnginePage_trUtf8(const char* s) {
+struct seaqt_string QWebEnginePage_trUtf8_s(const char* s) {
 	QString _ret = QWebEnginePage::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -489,7 +489,7 @@ bool QWebEnginePage_event(QWebEnginePage* self, QEvent* param1) {
 	return self->event(param1);
 }
 
-void QWebEnginePage_findText(QWebEnginePage* self, struct seaqt_string subString) {
+void QWebEnginePage_findText_subString(QWebEnginePage* self, struct seaqt_string subString) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	self->findText(subString_QString);
 }
@@ -502,24 +502,24 @@ void QWebEnginePage_setFeaturePermission(QWebEnginePage* self, QUrl* securityOri
 	self->setFeaturePermission(*securityOrigin, static_cast<QWebEnginePage::Feature>(feature), static_cast<QWebEnginePage::PermissionPolicy>(policy));
 }
 
-void QWebEnginePage_load(QWebEnginePage* self, QUrl* url) {
+void QWebEnginePage_load_url(QWebEnginePage* self, QUrl* url) {
 	self->load(*url);
 }
 
-void QWebEnginePage_loadWithRequest(QWebEnginePage* self, QWebEngineHttpRequest* request) {
+void QWebEnginePage_load_request(QWebEnginePage* self, QWebEngineHttpRequest* request) {
 	self->load(*request);
 }
 
-void QWebEnginePage_download(QWebEnginePage* self, QUrl* url) {
+void QWebEnginePage_download_url(QWebEnginePage* self, QUrl* url) {
 	self->download(*url);
 }
 
-void QWebEnginePage_setHtml(QWebEnginePage* self, struct seaqt_string html) {
+void QWebEnginePage_setHtml_html(QWebEnginePage* self, struct seaqt_string html) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString);
 }
 
-void QWebEnginePage_setContent(QWebEnginePage* self, struct seaqt_string data) {
+void QWebEnginePage_setContent_data(QWebEnginePage* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->setContent(data_QByteArray);
 }
@@ -572,12 +572,12 @@ QSizeF* QWebEnginePage_contentsSize(const QWebEnginePage* self) {
 	return new QSizeF(self->contentsSize());
 }
 
-void QWebEnginePage_runJavaScript(QWebEnginePage* self, struct seaqt_string scriptSource) {
+void QWebEnginePage_runJavaScript_scriptSource(QWebEnginePage* self, struct seaqt_string scriptSource) {
 	QString scriptSource_QString = QString::fromUtf8(scriptSource.data, scriptSource.len);
 	self->runJavaScript(scriptSource_QString);
 }
 
-void QWebEnginePage_runJavaScript2(QWebEnginePage* self, struct seaqt_string scriptSource, unsigned int worldId) {
+void QWebEnginePage_runJavaScript_scriptSource_worldId(QWebEnginePage* self, struct seaqt_string scriptSource, unsigned int worldId) {
 	QString scriptSource_QString = QString::fromUtf8(scriptSource.data, scriptSource.len);
 	self->runJavaScript(scriptSource_QString, static_cast<quint32>(worldId));
 }
@@ -596,11 +596,11 @@ QWebChannel* QWebEnginePage_webChannel(const QWebEnginePage* self) {
 	return self->webChannel();
 }
 
-void QWebEnginePage_setWebChannel(QWebEnginePage* self, QWebChannel* webChannel) {
+void QWebEnginePage_setWebChannel_QWebChannel(QWebEnginePage* self, QWebChannel* webChannel) {
 	self->setWebChannel(webChannel);
 }
 
-void QWebEnginePage_setWebChannel2(QWebEnginePage* self, QWebChannel* param1, unsigned int worldId) {
+void QWebEnginePage_setWebChannel_QWebChannel_uint(QWebEnginePage* self, QWebChannel* param1, unsigned int worldId) {
 	self->setWebChannel(param1, static_cast<uint>(worldId));
 }
 
@@ -612,7 +612,7 @@ void QWebEnginePage_setBackgroundColor(QWebEnginePage* self, QColor* color) {
 	self->setBackgroundColor(*color);
 }
 
-void QWebEnginePage_save(const QWebEnginePage* self, struct seaqt_string filePath) {
+void QWebEnginePage_save_filePath(const QWebEnginePage* self, struct seaqt_string filePath) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->save(filePath_QString);
 }
@@ -634,7 +634,7 @@ long long QWebEnginePage_renderProcessPid(const QWebEnginePage* self) {
 	return static_cast<long long>(_ret);
 }
 
-void QWebEnginePage_printToPdf(QWebEnginePage* self, struct seaqt_string filePath) {
+void QWebEnginePage_printToPdf_filePath(QWebEnginePage* self, struct seaqt_string filePath) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->printToPdf(filePath_QString);
 }
@@ -1230,7 +1230,7 @@ void QWebEnginePage_connect_findTextFinished(QWebEnginePage* self, intptr_t slot
 	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QWebEngineFindTextResult&)>(&QWebEnginePage::findTextFinished), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebEnginePage_tr2(const char* s, const char* c) {
+struct seaqt_string QWebEnginePage_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebEnginePage::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1241,7 +1241,7 @@ struct seaqt_string QWebEnginePage_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebEnginePage_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebEnginePage_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebEnginePage::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1252,7 +1252,7 @@ struct seaqt_string QWebEnginePage_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebEnginePage_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebEnginePage_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebEnginePage::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1263,7 +1263,7 @@ struct seaqt_string QWebEnginePage_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebEnginePage_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebEnginePage_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebEnginePage::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1274,39 +1274,39 @@ struct seaqt_string QWebEnginePage_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-void QWebEnginePage_findText2(QWebEnginePage* self, struct seaqt_string subString, int options) {
+void QWebEnginePage_findText_subString_options(QWebEnginePage* self, struct seaqt_string subString, int options) {
 	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
 	self->findText(subString_QString, static_cast<QWebEnginePage::FindFlags>(options));
 }
 
-void QWebEnginePage_download2(QWebEnginePage* self, QUrl* url, struct seaqt_string filename) {
+void QWebEnginePage_download_url_filename(QWebEnginePage* self, QUrl* url, struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	self->download(*url, filename_QString);
 }
 
-void QWebEnginePage_setHtml2(QWebEnginePage* self, struct seaqt_string html, QUrl* baseUrl) {
+void QWebEnginePage_setHtml_html_baseUrl(QWebEnginePage* self, struct seaqt_string html, QUrl* baseUrl) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString, *baseUrl);
 }
 
-void QWebEnginePage_setContent2(QWebEnginePage* self, struct seaqt_string data, struct seaqt_string mimeType) {
+void QWebEnginePage_setContent_data_mimeType(QWebEnginePage* self, struct seaqt_string data, struct seaqt_string mimeType) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString);
 }
 
-void QWebEnginePage_setContent3(QWebEnginePage* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
+void QWebEnginePage_setContent_data_mimeType_baseUrl(QWebEnginePage* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString, *baseUrl);
 }
 
-void QWebEnginePage_save2(const QWebEnginePage* self, struct seaqt_string filePath, int format) {
+void QWebEnginePage_save_filePath_format(const QWebEnginePage* self, struct seaqt_string filePath, int format) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->save(filePath_QString, static_cast<QWebEngineDownloadItem::SavePageFormat>(format));
 }
 
-void QWebEnginePage_printToPdf2(QWebEnginePage* self, struct seaqt_string filePath, QPageLayout* layout) {
+void QWebEnginePage_printToPdf_filePath_layout(QWebEnginePage* self, struct seaqt_string filePath, QPageLayout* layout) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->printToPdf(filePath_QString, *layout);
 }

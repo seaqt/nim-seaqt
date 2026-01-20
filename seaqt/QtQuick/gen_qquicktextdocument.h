@@ -60,13 +60,13 @@ void QQuickTextDocument_virtbase(QQuickTextDocument* src, QObject** outptr_QObje
 QMetaObject* QQuickTextDocument_metaObject(const QQuickTextDocument* self);
 void* QQuickTextDocument_metacast(QQuickTextDocument* self, const char* param1);
 int QQuickTextDocument_metacall(QQuickTextDocument* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickTextDocument_tr(const char* s);
-struct seaqt_string QQuickTextDocument_trUtf8(const char* s);
+struct seaqt_string QQuickTextDocument_tr_s(const char* s);
+struct seaqt_string QQuickTextDocument_trUtf8_s(const char* s);
 QTextDocument* QQuickTextDocument_textDocument(const QQuickTextDocument* self);
-struct seaqt_string QQuickTextDocument_tr2(const char* s, const char* c);
-struct seaqt_string QQuickTextDocument_tr3(const char* s, const char* c, int n);
-struct seaqt_string QQuickTextDocument_trUtf82(const char* s, const char* c);
-struct seaqt_string QQuickTextDocument_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QQuickTextDocument_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickTextDocument_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QQuickTextDocument_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QQuickTextDocument_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQuickTextDocument_virtualbase_metaObject(const VirtualQQuickTextDocument* self);
 void* QQuickTextDocument_virtualbase_metacast(VirtualQQuickTextDocument* self, const char* param1);

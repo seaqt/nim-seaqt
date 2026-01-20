@@ -141,15 +141,15 @@ typedef struct QAbstractSlider_VTable{
 void* QAbstractSlider_vdata(VirtualQAbstractSlider* self);
 VirtualQAbstractSlider* vdata_QAbstractSlider(void* vdata);
 
-VirtualQAbstractSlider* QAbstractSlider_new(const QAbstractSlider_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQAbstractSlider* QAbstractSlider_new2(const QAbstractSlider_VTable* vtbl, size_t vdata);
+VirtualQAbstractSlider* QAbstractSlider_new_parent(const QAbstractSlider_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQAbstractSlider* QAbstractSlider_new(const QAbstractSlider_VTable* vtbl, size_t vdata);
 
 void QAbstractSlider_virtbase(QAbstractSlider* src, QWidget** outptr_QWidget);
 QMetaObject* QAbstractSlider_metaObject(const QAbstractSlider* self);
 void* QAbstractSlider_metacast(QAbstractSlider* self, const char* param1);
 int QAbstractSlider_metacall(QAbstractSlider* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractSlider_tr(const char* s);
-struct seaqt_string QAbstractSlider_trUtf8(const char* s);
+struct seaqt_string QAbstractSlider_tr_s(const char* s);
+struct seaqt_string QAbstractSlider_trUtf8_s(const char* s);
 int QAbstractSlider_orientation(const QAbstractSlider* self);
 void QAbstractSlider_setMinimum(QAbstractSlider* self, int minimum);
 int QAbstractSlider_minimum(const QAbstractSlider* self);
@@ -192,10 +192,10 @@ void QAbstractSlider_keyPressEvent(QAbstractSlider* self, QKeyEvent* ev);
 void QAbstractSlider_timerEvent(QAbstractSlider* self, QTimerEvent* param1);
 void QAbstractSlider_wheelEvent(QAbstractSlider* self, QWheelEvent* e);
 void QAbstractSlider_changeEvent(QAbstractSlider* self, QEvent* e);
-struct seaqt_string QAbstractSlider_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractSlider_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractSlider_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractSlider_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractSlider_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractSlider_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractSlider_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractSlider_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractSlider_virtualbase_metaObject(const VirtualQAbstractSlider* self);
 void* QAbstractSlider_virtualbase_metacast(VirtualQAbstractSlider* self, const char* param1);
@@ -249,10 +249,10 @@ void QAbstractSlider_virtualbase_customEvent(VirtualQAbstractSlider* self, QEven
 void QAbstractSlider_virtualbase_connectNotify(VirtualQAbstractSlider* self, QMetaMethod* signal);
 void QAbstractSlider_virtualbase_disconnectNotify(VirtualQAbstractSlider* self, QMetaMethod* signal);
 
-void QAbstractSlider_protectedbase_setRepeatAction(VirtualQAbstractSlider* self, int action);
+void QAbstractSlider_protectedbase_setRepeatAction_action(VirtualQAbstractSlider* self, int action);
 int QAbstractSlider_protectedbase_repeatAction(const VirtualQAbstractSlider* self);
-void QAbstractSlider_protectedbase_setRepeatAction2(VirtualQAbstractSlider* self, int action, int thresholdTime);
-void QAbstractSlider_protectedbase_setRepeatAction3(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime);
+void QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime(VirtualQAbstractSlider* self, int action, int thresholdTime);
+void QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime_repeatTime(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime);
 void QAbstractSlider_protectedbase_updateMicroFocus(VirtualQAbstractSlider* self);
 void QAbstractSlider_protectedbase_create(VirtualQAbstractSlider* self);
 void QAbstractSlider_protectedbase_destroy(VirtualQAbstractSlider* self);

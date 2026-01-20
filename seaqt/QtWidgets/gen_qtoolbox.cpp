@@ -717,17 +717,17 @@ public:
 	friend bool QToolBox_protectedbase_isSignalConnected(const VirtualQToolBox* self, QMetaMethod* signal);
 };
 
-VirtualQToolBox* QToolBox_new(const QToolBox_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQToolBox* QToolBox_new_parent(const QToolBox_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQToolBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQToolBox(vtbl, parent) : nullptr;
 }
 
-VirtualQToolBox* QToolBox_new2(const QToolBox_VTable* vtbl, size_t vdata) {
+VirtualQToolBox* QToolBox_new(const QToolBox_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQToolBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQToolBox(vtbl) : nullptr;
 }
 
-VirtualQToolBox* QToolBox_new3(const QToolBox_VTable* vtbl, size_t vdata, QWidget* parent, int f) {
+VirtualQToolBox* QToolBox_new_parent_f(const QToolBox_VTable* vtbl, size_t vdata, QWidget* parent, int f) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQToolBox>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQToolBox(vtbl, parent, static_cast<Qt::WindowFlags>(f)) : nullptr;
 }
@@ -748,7 +748,7 @@ int QToolBox_metacall(QToolBox* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QToolBox_tr(const char* s) {
+struct seaqt_string QToolBox_tr_s(const char* s) {
 	QString _ret = QToolBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -759,7 +759,7 @@ struct seaqt_string QToolBox_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QToolBox_trUtf8(const char* s) {
+struct seaqt_string QToolBox_trUtf8_s(const char* s) {
 	QString _ret = QToolBox::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -770,22 +770,22 @@ struct seaqt_string QToolBox_trUtf8(const char* s) {
 	return _ms;
 }
 
-int QToolBox_addItem(QToolBox* self, QWidget* widget, struct seaqt_string text) {
+int QToolBox_addItem_widget_text(QToolBox* self, QWidget* widget, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addItem(widget, text_QString);
 }
 
-int QToolBox_addItem2(QToolBox* self, QWidget* widget, QIcon* icon, struct seaqt_string text) {
+int QToolBox_addItem_widget_icon_text(QToolBox* self, QWidget* widget, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addItem(widget, *icon, text_QString);
 }
 
-int QToolBox_insertItem(QToolBox* self, int index, QWidget* widget, struct seaqt_string text) {
+int QToolBox_insertItem_index_widget_text(QToolBox* self, int index, QWidget* widget, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->insertItem(static_cast<int>(index), widget, text_QString);
 }
 
-int QToolBox_insertItem2(QToolBox* self, int index, QWidget* widget, QIcon* icon, struct seaqt_string text) {
+int QToolBox_insertItem_index_widget_icon_text(QToolBox* self, int index, QWidget* widget, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->insertItem(static_cast<int>(index), widget, *icon, text_QString);
 }
@@ -886,7 +886,7 @@ void QToolBox_connect_currentChanged(QToolBox* self, intptr_t slot, void (*callb
 	QToolBox::connect(self, static_cast<void (QToolBox::*)(int)>(&QToolBox::currentChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QToolBox_tr2(const char* s, const char* c) {
+struct seaqt_string QToolBox_tr_s_c(const char* s, const char* c) {
 	QString _ret = QToolBox::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -897,7 +897,7 @@ struct seaqt_string QToolBox_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QToolBox_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QToolBox_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QToolBox::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -908,7 +908,7 @@ struct seaqt_string QToolBox_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QToolBox_trUtf82(const char* s, const char* c) {
+struct seaqt_string QToolBox_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QToolBox::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -919,7 +919,7 @@ struct seaqt_string QToolBox_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QToolBox_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QToolBox_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QToolBox::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

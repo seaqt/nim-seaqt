@@ -69,7 +69,7 @@ export
 
 type cQSslCertificate*{.exportc: "QSslCertificate", incompleteStruct.} = object
 
-proc fcQSslCertificate_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslCertificate_operatorAssign".}
+proc fcQSslCertificate_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSslCertificate_operatorAssign".}
 proc fcQSslCertificate_swap(self: pointer, other: pointer): void {.importc: "QSslCertificate_swap".}
 proc fcQSslCertificate_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslCertificate_operatorEqual".}
 proc fcQSslCertificate_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSslCertificate_operatorNotEqual".}
@@ -80,10 +80,10 @@ proc fcQSslCertificate_clear(self: pointer): void {.importc: "QSslCertificate_cl
 proc fcQSslCertificate_version(self: pointer): struct_seaqt_string {.importc: "QSslCertificate_version".}
 proc fcQSslCertificate_serialNumber(self: pointer): struct_seaqt_string {.importc: "QSslCertificate_serialNumber".}
 proc fcQSslCertificate_digest(self: pointer): struct_seaqt_string {.importc: "QSslCertificate_digest".}
-proc fcQSslCertificate_issuerInfo(self: pointer, info: cint): struct_seaqt_array {.importc: "QSslCertificate_issuerInfo".}
-proc fcQSslCertificate_issuerInfoWithAttribute(self: pointer, attribute: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_issuerInfoWithAttribute".}
-proc fcQSslCertificate_subjectInfo(self: pointer, info: cint): struct_seaqt_array {.importc: "QSslCertificate_subjectInfo".}
-proc fcQSslCertificate_subjectInfoWithAttribute(self: pointer, attribute: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_subjectInfoWithAttribute".}
+proc fcQSslCertificate_issuerInfoInfo(self: pointer, info: cint): struct_seaqt_array {.importc: "QSslCertificate_issuerInfo_info".}
+proc fcQSslCertificate_issuerInfoAttribute(self: pointer, attribute: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_issuerInfo_attribute".}
+proc fcQSslCertificate_subjectInfoInfo(self: pointer, info: cint): struct_seaqt_array {.importc: "QSslCertificate_subjectInfo_info".}
+proc fcQSslCertificate_subjectInfoAttribute(self: pointer, attribute: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_subjectInfo_attribute".}
 proc fcQSslCertificate_issuerDisplayName(self: pointer): struct_seaqt_string {.importc: "QSslCertificate_issuerDisplayName".}
 proc fcQSslCertificate_subjectDisplayName(self: pointer): struct_seaqt_string {.importc: "QSslCertificate_subjectDisplayName".}
 proc fcQSslCertificate_subjectInfoAttributes(self: pointer): struct_seaqt_array {.importc: "QSslCertificate_subjectInfoAttributes".}
@@ -95,30 +95,30 @@ proc fcQSslCertificate_extensions(self: pointer): struct_seaqt_array {.importc: 
 proc fcQSslCertificate_toPem(self: pointer): struct_seaqt_string {.importc: "QSslCertificate_toPem".}
 proc fcQSslCertificate_toDer(self: pointer): struct_seaqt_string {.importc: "QSslCertificate_toDer".}
 proc fcQSslCertificate_toText(self: pointer): struct_seaqt_string {.importc: "QSslCertificate_toText".}
-proc fcQSslCertificate_fromPath(path: struct_seaqt_string, format: cint, syntax: cint): struct_seaqt_array {.importc: "QSslCertificate_fromPath".}
-proc fcQSslCertificate_fromPathWithPath(path: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_fromPathWithPath".}
-proc fcQSslCertificate_fromDevice(device: pointer): struct_seaqt_array {.importc: "QSslCertificate_fromDevice".}
-proc fcQSslCertificate_fromData(data: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_fromData".}
-proc fcQSslCertificate_verify(certificateChain: struct_seaqt_array): struct_seaqt_array {.importc: "QSslCertificate_verify".}
-proc fcQSslCertificate_importPkcs12(device: pointer, key: pointer, cert: pointer): bool {.importc: "QSslCertificate_importPkcs12".}
+proc fcQSslCertificate_fromPath_QString_QSsl_EncodingFormat_QRegExp_PatternSyntax(path: struct_seaqt_string, format: cint, syntax: cint): struct_seaqt_array {.importc: "QSslCertificate_fromPath_QString_QSsl_EncodingFormat_QRegExp_PatternSyntax".}
+proc fcQSslCertificate_fromPath_QString(path: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_fromPath_QString".}
+proc fcQSslCertificate_fromDeviceDevice(device: pointer): struct_seaqt_array {.importc: "QSslCertificate_fromDevice_device".}
+proc fcQSslCertificate_fromDataData(data: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_fromData_data".}
+proc fcQSslCertificate_verifyCertificateChain(certificateChain: struct_seaqt_array): struct_seaqt_array {.importc: "QSslCertificate_verify_certificateChain".}
+proc fcQSslCertificate_importPkcs12DeviceKeyCert(device: pointer, key: pointer, cert: pointer): bool {.importc: "QSslCertificate_importPkcs12_device_key_cert".}
 proc fcQSslCertificate_handle(self: pointer): pointer {.importc: "QSslCertificate_handle".}
-proc fcQSslCertificate_digestWithAlgorithm(self: pointer, algorithm: cint): struct_seaqt_string {.importc: "QSslCertificate_digestWithAlgorithm".}
-proc fcQSslCertificate_fromPath2(path: struct_seaqt_string, format: cint): struct_seaqt_array {.importc: "QSslCertificate_fromPath2".}
-proc fcQSslCertificate_fromPath3(path: struct_seaqt_string, format: cint, syntax: cint): struct_seaqt_array {.importc: "QSslCertificate_fromPath3".}
-proc fcQSslCertificate_fromDevice2(device: pointer, format: cint): struct_seaqt_array {.importc: "QSslCertificate_fromDevice2".}
-proc fcQSslCertificate_fromData2(data: struct_seaqt_string, format: cint): struct_seaqt_array {.importc: "QSslCertificate_fromData2".}
-proc fcQSslCertificate_verify2(certificateChain: struct_seaqt_array, hostName: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_verify2".}
-proc fcQSslCertificate_importPkcs122(device: pointer, key: pointer, cert: pointer, caCertificates: struct_seaqt_array): bool {.importc: "QSslCertificate_importPkcs122".}
-proc fcQSslCertificate_importPkcs123(device: pointer, key: pointer, cert: pointer, caCertificates: struct_seaqt_array, passPhrase: struct_seaqt_string): bool {.importc: "QSslCertificate_importPkcs123".}
-proc fcQSslCertificate_new(device: pointer): ptr cQSslCertificate {.importc: "QSslCertificate_new".}
-proc fcQSslCertificate_new2(): ptr cQSslCertificate {.importc: "QSslCertificate_new2".}
-proc fcQSslCertificate_new3(other: pointer): ptr cQSslCertificate {.importc: "QSslCertificate_new3".}
-proc fcQSslCertificate_new4(device: pointer, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new4".}
-proc fcQSslCertificate_new5(data: struct_seaqt_string): ptr cQSslCertificate {.importc: "QSslCertificate_new5".}
-proc fcQSslCertificate_new6(data: struct_seaqt_string, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new6".}
+proc fcQSslCertificate_digestAlgorithm(self: pointer, algorithm: cint): struct_seaqt_string {.importc: "QSslCertificate_digest_algorithm".}
+proc fcQSslCertificate_fromPath_QString_QSsl_EncodingFormat(path: struct_seaqt_string, format: cint): struct_seaqt_array {.importc: "QSslCertificate_fromPath_QString_QSsl_EncodingFormat".}
+proc fcQSslCertificate_fromPath_QString_QSsl_EncodingFormat_QSslCertificate_PatternSyntax(path: struct_seaqt_string, format: cint, syntax: cint): struct_seaqt_array {.importc: "QSslCertificate_fromPath_QString_QSsl_EncodingFormat_QSslCertificate_PatternSyntax".}
+proc fcQSslCertificate_fromDeviceDeviceFormat(device: pointer, format: cint): struct_seaqt_array {.importc: "QSslCertificate_fromDevice_device_format".}
+proc fcQSslCertificate_fromDataDataFormat(data: struct_seaqt_string, format: cint): struct_seaqt_array {.importc: "QSslCertificate_fromData_data_format".}
+proc fcQSslCertificate_verifyCertificateChainHostName(certificateChain: struct_seaqt_array, hostName: struct_seaqt_string): struct_seaqt_array {.importc: "QSslCertificate_verify_certificateChain_hostName".}
+proc fcQSslCertificate_importPkcs12DeviceKeyCertCaCertificates(device: pointer, key: pointer, cert: pointer, caCertificates: struct_seaqt_array): bool {.importc: "QSslCertificate_importPkcs12_device_key_cert_caCertificates".}
+proc fcQSslCertificate_importPkcs12DeviceKeyCertCaCertificatesPassPhrase(device: pointer, key: pointer, cert: pointer, caCertificates: struct_seaqt_array, passPhrase: struct_seaqt_string): bool {.importc: "QSslCertificate_importPkcs12_device_key_cert_caCertificates_passPhrase".}
+proc fcQSslCertificate_new(device: pointer): ptr cQSslCertificate {.importc: "QSslCertificate_new_device".}
+proc fcQSslCertificate_new2(): ptr cQSslCertificate {.importc: "QSslCertificate_new".}
+proc fcQSslCertificate_new3(fromVal: pointer): ptr cQSslCertificate {.importc: "QSslCertificate_new_from".}
+proc fcQSslCertificate_new4(device: pointer, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new_device_format".}
+proc fcQSslCertificate_new5(data: struct_seaqt_string): ptr cQSslCertificate {.importc: "QSslCertificate_new_data".}
+proc fcQSslCertificate_new6(data: struct_seaqt_string, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new_data_format".}
 
-proc operatorAssign*(self: gen_qsslcertificate_types.QSslCertificate, other: gen_qsslcertificate_types.QSslCertificate): void =
-  fcQSslCertificate_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsslcertificate_types.QSslCertificate, fromVal: gen_qsslcertificate_types.QSslCertificate): void =
+  fcQSslCertificate_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qsslcertificate_types.QSslCertificate, other: gen_qsslcertificate_types.QSslCertificate): void =
   fcQSslCertificate_swap(self.h, other.h)
@@ -160,7 +160,7 @@ proc digest*(self: gen_qsslcertificate_types.QSslCertificate): seq[byte] =
   vx_ret
 
 proc issuerInfo*(self: gen_qsslcertificate_types.QSslCertificate, info: cint): seq[string] =
-  var v_ma = fcQSslCertificate_issuerInfo(self.h, cint(info))
+  var v_ma = fcQSslCertificate_issuerInfoInfo(self.h, cint(info))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -172,7 +172,7 @@ proc issuerInfo*(self: gen_qsslcertificate_types.QSslCertificate, info: cint): s
   vx_ret
 
 proc issuerInfo*(self: gen_qsslcertificate_types.QSslCertificate, attribute: openArray[byte]): seq[string] =
-  var v_ma = fcQSslCertificate_issuerInfoWithAttribute(self.h, struct_seaqt_string(data: if len(attribute) > 0: addr attribute[0] else: nil, len: csize_t(len(attribute))))
+  var v_ma = fcQSslCertificate_issuerInfoAttribute(self.h, struct_seaqt_string(data: if len(attribute) > 0: addr attribute[0] else: nil, len: csize_t(len(attribute))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -184,7 +184,7 @@ proc issuerInfo*(self: gen_qsslcertificate_types.QSslCertificate, attribute: ope
   vx_ret
 
 proc subjectInfo*(self: gen_qsslcertificate_types.QSslCertificate, info: cint): seq[string] =
-  var v_ma = fcQSslCertificate_subjectInfo(self.h, cint(info))
+  var v_ma = fcQSslCertificate_subjectInfoInfo(self.h, cint(info))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -196,7 +196,7 @@ proc subjectInfo*(self: gen_qsslcertificate_types.QSslCertificate, info: cint): 
   vx_ret
 
 proc subjectInfo*(self: gen_qsslcertificate_types.QSslCertificate, attribute: openArray[byte]): seq[string] =
-  var v_ma = fcQSslCertificate_subjectInfoWithAttribute(self.h, struct_seaqt_string(data: if len(attribute) > 0: addr attribute[0] else: nil, len: csize_t(len(attribute))))
+  var v_ma = fcQSslCertificate_subjectInfoAttribute(self.h, struct_seaqt_string(data: if len(attribute) > 0: addr attribute[0] else: nil, len: csize_t(len(attribute))))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -280,7 +280,7 @@ proc toText*(self: gen_qsslcertificate_types.QSslCertificate): string =
   vx_ret
 
 proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: openArray[char], format: cint, syntax: cint): seq[gen_qsslcertificate_types.QSslCertificate] =
-  var v_ma = fcQSslCertificate_fromPath(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format), cint(syntax))
+  var v_ma = fcQSslCertificate_fromPath_QString_QSsl_EncodingFormat_QRegExp_PatternSyntax(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format), cint(syntax))
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -289,7 +289,7 @@ proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: openArra
   vx_ret
 
 proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: openArray[char]): seq[gen_qsslcertificate_types.QSslCertificate] =
-  var v_ma = fcQSslCertificate_fromPathWithPath(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
+  var v_ma = fcQSslCertificate_fromPath_QString(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -298,7 +298,7 @@ proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: openArra
   vx_ret
 
 proc fromDevice*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_qiodevice_types.QIODevice): seq[gen_qsslcertificate_types.QSslCertificate] =
-  var v_ma = fcQSslCertificate_fromDevice(device.h)
+  var v_ma = fcQSslCertificate_fromDeviceDevice(device.h)
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -307,7 +307,7 @@ proc fromDevice*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_
   vx_ret
 
 proc fromData*(_: type gen_qsslcertificate_types.QSslCertificate, data: openArray[byte]): seq[gen_qsslcertificate_types.QSslCertificate] =
-  var v_ma = fcQSslCertificate_fromData(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  var v_ma = fcQSslCertificate_fromDataData(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -320,7 +320,7 @@ proc verify*(_: type gen_qsslcertificate_types.QSslCertificate, certificateChain
   for i in 0..<len(certificateChain):
     certificateChain_CArray[i] = certificateChain[i].h
 
-  var v_ma = fcQSslCertificate_verify(struct_seaqt_array(len: csize_t(len(certificateChain)), data: if len(certificateChain) == 0: nil else: addr(certificateChain_CArray[0])))
+  var v_ma = fcQSslCertificate_verifyCertificateChain(struct_seaqt_array(len: csize_t(len(certificateChain)), data: if len(certificateChain) == 0: nil else: addr(certificateChain_CArray[0])))
   var vx_ret = newSeq[gen_qsslerror_types.QSslError](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -329,19 +329,19 @@ proc verify*(_: type gen_qsslcertificate_types.QSslCertificate, certificateChain
   vx_ret
 
 proc importPkcs12*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_qiodevice_types.QIODevice, key: gen_qsslkey_types.QSslKey, cert: gen_qsslcertificate_types.QSslCertificate): bool =
-  fcQSslCertificate_importPkcs12(device.h, key.h, cert.h)
+  fcQSslCertificate_importPkcs12DeviceKeyCert(device.h, key.h, cert.h)
 
 proc handle*(self: gen_qsslcertificate_types.QSslCertificate): pointer =
   fcQSslCertificate_handle(self.h)
 
 proc digest*(self: gen_qsslcertificate_types.QSslCertificate, algorithm: cint): seq[byte] =
-  var v_bytearray = fcQSslCertificate_digestWithAlgorithm(self.h, cint(algorithm))
+  var v_bytearray = fcQSslCertificate_digestAlgorithm(self.h, cint(algorithm))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: openArray[char], format: cint): seq[gen_qsslcertificate_types.QSslCertificate] =
-  var v_ma = fcQSslCertificate_fromPath2(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format))
+  var v_ma = fcQSslCertificate_fromPath_QString_QSsl_EncodingFormat(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format))
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -350,7 +350,7 @@ proc fromPath*(_: type gen_qsslcertificate_types.QSslCertificate, path: openArra
   vx_ret
 
 proc fromPath2*(_: type gen_qsslcertificate_types.QSslCertificate, path: openArray[char], format: cint, syntax: cint): seq[gen_qsslcertificate_types.QSslCertificate] =
-  var v_ma = fcQSslCertificate_fromPath3(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format), cint(syntax))
+  var v_ma = fcQSslCertificate_fromPath_QString_QSsl_EncodingFormat_QSslCertificate_PatternSyntax(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(format), cint(syntax))
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -359,7 +359,7 @@ proc fromPath2*(_: type gen_qsslcertificate_types.QSslCertificate, path: openArr
   vx_ret
 
 proc fromDevice*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_qiodevice_types.QIODevice, format: cint): seq[gen_qsslcertificate_types.QSslCertificate] =
-  var v_ma = fcQSslCertificate_fromDevice2(device.h, cint(format))
+  var v_ma = fcQSslCertificate_fromDeviceDeviceFormat(device.h, cint(format))
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -368,7 +368,7 @@ proc fromDevice*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_
   vx_ret
 
 proc fromData*(_: type gen_qsslcertificate_types.QSslCertificate, data: openArray[byte], format: cint): seq[gen_qsslcertificate_types.QSslCertificate] =
-  var v_ma = fcQSslCertificate_fromData2(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), cint(format))
+  var v_ma = fcQSslCertificate_fromDataDataFormat(struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), cint(format))
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -381,7 +381,7 @@ proc verify*(_: type gen_qsslcertificate_types.QSslCertificate, certificateChain
   for i in 0..<len(certificateChain):
     certificateChain_CArray[i] = certificateChain[i].h
 
-  var v_ma = fcQSslCertificate_verify2(struct_seaqt_array(len: csize_t(len(certificateChain)), data: if len(certificateChain) == 0: nil else: addr(certificateChain_CArray[0])), struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))))
+  var v_ma = fcQSslCertificate_verifyCertificateChainHostName(struct_seaqt_array(len: csize_t(len(certificateChain)), data: if len(certificateChain) == 0: nil else: addr(certificateChain_CArray[0])), struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))))
   var vx_ret = newSeq[gen_qsslerror_types.QSslError](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -394,14 +394,14 @@ proc importPkcs12*(_: type gen_qsslcertificate_types.QSslCertificate, device: ge
   for i in 0..<len(caCertificates):
     caCertificates_CArray[i] = caCertificates[i].h
 
-  fcQSslCertificate_importPkcs122(device.h, key.h, cert.h, struct_seaqt_array(len: csize_t(len(caCertificates)), data: if len(caCertificates) == 0: nil else: addr(caCertificates_CArray[0])))
+  fcQSslCertificate_importPkcs12DeviceKeyCertCaCertificates(device.h, key.h, cert.h, struct_seaqt_array(len: csize_t(len(caCertificates)), data: if len(caCertificates) == 0: nil else: addr(caCertificates_CArray[0])))
 
 proc importPkcs12*(_: type gen_qsslcertificate_types.QSslCertificate, device: gen_qiodevice_types.QIODevice, key: gen_qsslkey_types.QSslKey, cert: gen_qsslcertificate_types.QSslCertificate, caCertificates: openArray[gen_qsslcertificate_types.QSslCertificate], passPhrase: openArray[byte]): bool =
   var caCertificates_CArray = newSeq[pointer](len(caCertificates))
   for i in 0..<len(caCertificates):
     caCertificates_CArray[i] = caCertificates[i].h
 
-  fcQSslCertificate_importPkcs123(device.h, key.h, cert.h, struct_seaqt_array(len: csize_t(len(caCertificates)), data: if len(caCertificates) == 0: nil else: addr(caCertificates_CArray[0])), struct_seaqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
+  fcQSslCertificate_importPkcs12DeviceKeyCertCaCertificatesPassPhrase(device.h, key.h, cert.h, struct_seaqt_array(len: csize_t(len(caCertificates)), data: if len(caCertificates) == 0: nil else: addr(caCertificates_CArray[0])), struct_seaqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
 
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
     device: gen_qiodevice_types.QIODevice): gen_qsslcertificate_types.QSslCertificate =
@@ -411,8 +411,8 @@ proc create*(T: type gen_qsslcertificate_types.QSslCertificate): gen_qsslcertifi
   let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new2(), owned: true)
   tmp
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
-    other: gen_qsslcertificate_types.QSslCertificate): gen_qsslcertificate_types.QSslCertificate =
-  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new3(other.h), owned: true)
+    fromVal: gen_qsslcertificate_types.QSslCertificate): gen_qsslcertificate_types.QSslCertificate =
+  let tmp = gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
     device: gen_qiodevice_types.QIODevice, format: cint): gen_qsslcertificate_types.QSslCertificate =

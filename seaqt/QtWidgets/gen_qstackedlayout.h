@@ -63,7 +63,7 @@ typedef struct QStackedLayout_VTable{
 	QRect* (*geometry)(const VirtualQStackedLayout* self);
 	int (*expandingDirections)(const VirtualQStackedLayout* self);
 	QSize* (*maximumSize)(const VirtualQStackedLayout* self);
-	int (*indexOf)(const VirtualQStackedLayout* self, QWidget* param1);
+	int (*indexOf_QWidget)(const VirtualQStackedLayout* self, QWidget* param1);
 	bool (*isEmpty)(const VirtualQStackedLayout* self);
 	int (*controlTypes)(const VirtualQStackedLayout* self);
 	QLayout* (*layout)(VirtualQStackedLayout* self);
@@ -82,16 +82,16 @@ typedef struct QStackedLayout_VTable{
 void* QStackedLayout_vdata(VirtualQStackedLayout* self);
 VirtualQStackedLayout* vdata_QStackedLayout(void* vdata);
 
-VirtualQStackedLayout* QStackedLayout_new(const QStackedLayout_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQStackedLayout* QStackedLayout_new2(const QStackedLayout_VTable* vtbl, size_t vdata);
-VirtualQStackedLayout* QStackedLayout_new3(const QStackedLayout_VTable* vtbl, size_t vdata, QLayout* parentLayout);
+VirtualQStackedLayout* QStackedLayout_new_parent(const QStackedLayout_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQStackedLayout* QStackedLayout_new(const QStackedLayout_VTable* vtbl, size_t vdata);
+VirtualQStackedLayout* QStackedLayout_new_parentLayout(const QStackedLayout_VTable* vtbl, size_t vdata, QLayout* parentLayout);
 
 void QStackedLayout_virtbase(QStackedLayout* src, QLayout** outptr_QLayout);
 QMetaObject* QStackedLayout_metaObject(const QStackedLayout* self);
 void* QStackedLayout_metacast(QStackedLayout* self, const char* param1);
 int QStackedLayout_metacall(QStackedLayout* self, int param1, int param2, void** param3);
-struct seaqt_string QStackedLayout_tr(const char* s);
-struct seaqt_string QStackedLayout_trUtf8(const char* s);
+struct seaqt_string QStackedLayout_tr_s(const char* s);
+struct seaqt_string QStackedLayout_trUtf8_s(const char* s);
 int QStackedLayout_addWidget(QStackedLayout* self, QWidget* w);
 int QStackedLayout_insertWidget(QStackedLayout* self, int index, QWidget* w);
 QWidget* QStackedLayout_currentWidget(const QStackedLayout* self);
@@ -114,10 +114,10 @@ void QStackedLayout_currentChanged(QStackedLayout* self, int index);
 void QStackedLayout_connect_currentChanged(QStackedLayout* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QStackedLayout_setCurrentIndex(QStackedLayout* self, int index);
 void QStackedLayout_setCurrentWidget(QStackedLayout* self, QWidget* w);
-struct seaqt_string QStackedLayout_tr2(const char* s, const char* c);
-struct seaqt_string QStackedLayout_tr3(const char* s, const char* c, int n);
-struct seaqt_string QStackedLayout_trUtf82(const char* s, const char* c);
-struct seaqt_string QStackedLayout_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QStackedLayout_tr_s_c(const char* s, const char* c);
+struct seaqt_string QStackedLayout_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QStackedLayout_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QStackedLayout_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QStackedLayout_virtualbase_metaObject(const VirtualQStackedLayout* self);
 void* QStackedLayout_virtualbase_metacast(VirtualQStackedLayout* self, const char* param1);
@@ -135,7 +135,7 @@ void QStackedLayout_virtualbase_invalidate(VirtualQStackedLayout* self);
 QRect* QStackedLayout_virtualbase_geometry(const VirtualQStackedLayout* self);
 int QStackedLayout_virtualbase_expandingDirections(const VirtualQStackedLayout* self);
 QSize* QStackedLayout_virtualbase_maximumSize(const VirtualQStackedLayout* self);
-int QStackedLayout_virtualbase_indexOf(const VirtualQStackedLayout* self, QWidget* param1);
+int QStackedLayout_virtualbase_indexOf_QWidget(const VirtualQStackedLayout* self, QWidget* param1);
 bool QStackedLayout_virtualbase_isEmpty(const VirtualQStackedLayout* self);
 int QStackedLayout_virtualbase_controlTypes(const VirtualQStackedLayout* self);
 QLayout* QStackedLayout_virtualbase_layout(VirtualQStackedLayout* self);

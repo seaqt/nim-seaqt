@@ -130,8 +130,8 @@ type cQWizardPage*{.exportc: "QWizardPage", incompleteStruct.} = object
 proc fcQWizard_metaObject(self: pointer): pointer {.importc: "QWizard_metaObject".}
 proc fcQWizard_metacast(self: pointer, param1: cstring): pointer {.importc: "QWizard_metacast".}
 proc fcQWizard_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWizard_metacall".}
-proc fcQWizard_tr(s: cstring): struct_seaqt_string {.importc: "QWizard_tr".}
-proc fcQWizard_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWizard_trUtf8".}
+proc fcQWizard_trS(s: cstring): struct_seaqt_string {.importc: "QWizard_tr_s".}
+proc fcQWizard_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWizard_trUtf8_s".}
 proc fcQWizard_addPage(self: pointer, page: pointer): cint {.importc: "QWizard_addPage".}
 proc fcQWizard_setPage(self: pointer, id: cint, page: pointer): void {.importc: "QWizard_setPage".}
 proc fcQWizard_removePage(self: pointer, id: cint): void {.importc: "QWizard_removePage".}
@@ -150,7 +150,7 @@ proc fcQWizard_setField(self: pointer, name: struct_seaqt_string, value: pointer
 proc fcQWizard_field(self: pointer, name: struct_seaqt_string): pointer {.importc: "QWizard_field".}
 proc fcQWizard_setWizardStyle(self: pointer, style: cint): void {.importc: "QWizard_setWizardStyle".}
 proc fcQWizard_wizardStyle(self: pointer): cint {.importc: "QWizard_wizardStyle".}
-proc fcQWizard_setOption(self: pointer, option: cint): void {.importc: "QWizard_setOption".}
+proc fcQWizard_setOptionOption(self: pointer, option: cint): void {.importc: "QWizard_setOption_option".}
 proc fcQWizard_testOption(self: pointer, option: cint): bool {.importc: "QWizard_testOption".}
 proc fcQWizard_setOptions(self: pointer, options: cint): void {.importc: "QWizard_setOptions".}
 proc fcQWizard_options(self: pointer): cint {.importc: "QWizard_options".}
@@ -183,11 +183,11 @@ proc fcQWizard_connect_pageRemoved(self: pointer, slot: int, callback: proc (slo
 proc fcQWizard_back(self: pointer): void {.importc: "QWizard_back".}
 proc fcQWizard_next(self: pointer): void {.importc: "QWizard_next".}
 proc fcQWizard_restart(self: pointer): void {.importc: "QWizard_restart".}
-proc fcQWizard_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizard_tr2".}
-proc fcQWizard_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizard_tr3".}
-proc fcQWizard_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizard_trUtf82".}
-proc fcQWizard_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizard_trUtf83".}
-proc fcQWizard_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QWizard_setOption2".}
+proc fcQWizard_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizard_tr_s_c".}
+proc fcQWizard_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizard_tr_s_c_n".}
+proc fcQWizard_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizard_trUtf8_s_c".}
+proc fcQWizard_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizard_trUtf8_s_c_n".}
+proc fcQWizard_setOptionOptionOn(self: pointer, option: cint, on: bool): void {.importc: "QWizard_setOption_option_on".}
 proc fcQWizard_vdata(self: pointer): ptr pointer {.importc: "QWizard_vdata".}
 proc fvdata_cQWizard(self: pointer): pointer {.importc: "vdata_QWizard".}
 
@@ -321,15 +321,15 @@ proc fcQWizard_protectedbase_sender(self: pointer): pointer {.importc: "QWizard_
 proc fcQWizard_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWizard_protectedbase_senderSignalIndex".}
 proc fcQWizard_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWizard_protectedbase_receivers".}
 proc fcQWizard_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWizard_protectedbase_isSignalConnected".}
-proc fcQWizard_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWizard {.importc: "QWizard_new".}
-proc fcQWizard_new2(vtbl: pointer, vdata: csize_t): ptr cQWizard {.importc: "QWizard_new2".}
-proc fcQWizard_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQWizard {.importc: "QWizard_new3".}
+proc fcQWizard_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWizard {.importc: "QWizard_new_parent".}
+proc fcQWizard_new2(vtbl: pointer, vdata: csize_t): ptr cQWizard {.importc: "QWizard_new".}
+proc fcQWizard_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQWizard {.importc: "QWizard_new_parent_flags".}
 proc fcQWizard_staticMetaObject(): pointer {.importc: "QWizard_staticMetaObject".}
 proc fcQWizardPage_metaObject(self: pointer): pointer {.importc: "QWizardPage_metaObject".}
 proc fcQWizardPage_metacast(self: pointer, param1: cstring): pointer {.importc: "QWizardPage_metacast".}
 proc fcQWizardPage_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWizardPage_metacall".}
-proc fcQWizardPage_tr(s: cstring): struct_seaqt_string {.importc: "QWizardPage_tr".}
-proc fcQWizardPage_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWizardPage_trUtf8".}
+proc fcQWizardPage_trS(s: cstring): struct_seaqt_string {.importc: "QWizardPage_tr_s".}
+proc fcQWizardPage_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWizardPage_trUtf8_s".}
 proc fcQWizardPage_setTitle(self: pointer, title: struct_seaqt_string): void {.importc: "QWizardPage_setTitle".}
 proc fcQWizardPage_title(self: pointer): struct_seaqt_string {.importc: "QWizardPage_title".}
 proc fcQWizardPage_setSubTitle(self: pointer, subTitle: struct_seaqt_string): void {.importc: "QWizardPage_setSubTitle".}
@@ -349,10 +349,10 @@ proc fcQWizardPage_isComplete(self: pointer): bool {.importc: "QWizardPage_isCom
 proc fcQWizardPage_nextId(self: pointer): cint {.importc: "QWizardPage_nextId".}
 proc fcQWizardPage_completeChanged(self: pointer): void {.importc: "QWizardPage_completeChanged".}
 proc fcQWizardPage_connect_completeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWizardPage_connect_completeChanged".}
-proc fcQWizardPage_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizardPage_tr2".}
-proc fcQWizardPage_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizardPage_tr3".}
-proc fcQWizardPage_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizardPage_trUtf82".}
-proc fcQWizardPage_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizardPage_trUtf83".}
+proc fcQWizardPage_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizardPage_tr_s_c".}
+proc fcQWizardPage_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizardPage_tr_s_c_n".}
+proc fcQWizardPage_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizardPage_trUtf8_s_c".}
+proc fcQWizardPage_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizardPage_trUtf8_s_c_n".}
 proc fcQWizardPage_vdata(self: pointer): ptr pointer {.importc: "QWizardPage_vdata".}
 proc fvdata_cQWizardPage(self: pointer): pointer {.importc: "vdata_QWizardPage".}
 
@@ -470,10 +470,10 @@ proc fcQWizardPage_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQWizardPage_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWizardPage_virtualbase_disconnectNotify".}
 proc fcQWizardPage_protectedbase_setField(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QWizardPage_protectedbase_setField".}
 proc fcQWizardPage_protectedbase_field(self: pointer, name: struct_seaqt_string): pointer {.importc: "QWizardPage_protectedbase_field".}
-proc fcQWizardPage_protectedbase_registerField(self: pointer, name: struct_seaqt_string, widget: pointer): void {.importc: "QWizardPage_protectedbase_registerField".}
+proc fcQWizardPage_protectedbase_registerField_name_widget(self: pointer, name: struct_seaqt_string, widget: pointer): void {.importc: "QWizardPage_protectedbase_registerField_name_widget".}
 proc fcQWizardPage_protectedbase_wizard(self: pointer): pointer {.importc: "QWizardPage_protectedbase_wizard".}
-proc fcQWizardPage_protectedbase_registerField2(self: pointer, name: struct_seaqt_string, widget: pointer, property: cstring): void {.importc: "QWizardPage_protectedbase_registerField2".}
-proc fcQWizardPage_protectedbase_registerField3(self: pointer, name: struct_seaqt_string, widget: pointer, property: cstring, changedSignal: cstring): void {.importc: "QWizardPage_protectedbase_registerField3".}
+proc fcQWizardPage_protectedbase_registerField_name_widget_property(self: pointer, name: struct_seaqt_string, widget: pointer, property: cstring): void {.importc: "QWizardPage_protectedbase_registerField_name_widget_property".}
+proc fcQWizardPage_protectedbase_registerField_name_widget_property_changedSignal(self: pointer, name: struct_seaqt_string, widget: pointer, property: cstring, changedSignal: cstring): void {.importc: "QWizardPage_protectedbase_registerField_name_widget_property_changedSignal".}
 proc fcQWizardPage_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QWizardPage_protectedbase_updateMicroFocus".}
 proc fcQWizardPage_protectedbase_create(self: pointer): void {.importc: "QWizardPage_protectedbase_create".}
 proc fcQWizardPage_protectedbase_destroy(self: pointer): void {.importc: "QWizardPage_protectedbase_destroy".}
@@ -483,8 +483,8 @@ proc fcQWizardPage_protectedbase_sender(self: pointer): pointer {.importc: "QWiz
 proc fcQWizardPage_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWizardPage_protectedbase_senderSignalIndex".}
 proc fcQWizardPage_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWizardPage_protectedbase_receivers".}
 proc fcQWizardPage_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWizardPage_protectedbase_isSignalConnected".}
-proc fcQWizardPage_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWizardPage {.importc: "QWizardPage_new".}
-proc fcQWizardPage_new2(vtbl: pointer, vdata: csize_t): ptr cQWizardPage {.importc: "QWizardPage_new2".}
+proc fcQWizardPage_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWizardPage {.importc: "QWizardPage_new_parent".}
+proc fcQWizardPage_new2(vtbl: pointer, vdata: csize_t): ptr cQWizardPage {.importc: "QWizardPage_new".}
 proc fcQWizardPage_staticMetaObject(): pointer {.importc: "QWizardPage_staticMetaObject".}
 
 proc metaObject*(self: gen_qwizard_types.QWizard): gen_qobjectdefs_types.QMetaObject =
@@ -497,13 +497,13 @@ proc metacall*(self: gen_qwizard_types.QWizard, param1: cint, param2: cint, para
   fcQWizard_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwizard_types.QWizard, s: cstring): string =
-  let v_ms = fcQWizard_tr(s)
+  let v_ms = fcQWizard_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring): string =
-  let v_ms = fcQWizard_trUtf8(s)
+  let v_ms = fcQWizard_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -581,7 +581,7 @@ proc wizardStyle*(self: gen_qwizard_types.QWizard): cint =
   cint(fcQWizard_wizardStyle(self.h))
 
 proc setOption*(self: gen_qwizard_types.QWizard, option: cint): void =
-  fcQWizard_setOption(self.h, cint(option))
+  fcQWizard_setOptionOption(self.h, cint(option))
 
 proc testOption*(self: gen_qwizard_types.QWizard, option: cint): bool =
   fcQWizard_testOption(self.h, cint(option))
@@ -755,31 +755,31 @@ proc restart*(self: gen_qwizard_types.QWizard): void =
   fcQWizard_restart(self.h)
 
 proc tr*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring): string =
-  let v_ms = fcQWizard_tr2(s, c)
+  let v_ms = fcQWizard_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWizard_tr3(s, c, n)
+  let v_ms = fcQWizard_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring): string =
-  let v_ms = fcQWizard_trUtf82(s, c)
+  let v_ms = fcQWizard_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWizard_trUtf83(s, c, n)
+  let v_ms = fcQWizard_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setOption*(self: gen_qwizard_types.QWizard, option: cint, on: bool): void =
-  fcQWizard_setOption2(self.h, cint(option), on)
+  fcQWizard_setOptionOptionOn(self.h, cint(option), on)
 
 type QWizardmetaObjectProc* = proc(self: QWizard): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWizardmetacastProc* = proc(self: QWizard, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -2442,13 +2442,13 @@ proc metacall*(self: gen_qwizard_types.QWizardPage, param1: cint, param2: cint, 
   fcQWizardPage_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring): string =
-  let v_ms = fcQWizardPage_tr(s)
+  let v_ms = fcQWizardPage_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring): string =
-  let v_ms = fcQWizardPage_trUtf8(s)
+  let v_ms = fcQWizardPage_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2532,25 +2532,25 @@ proc onCompleteChanged*(self: gen_qwizard_types.QWizardPage, slot: QWizardPageco
   fcQWizardPage_connect_completeChanged(self.h, cast[int](addr tmp[]), fcQWizardPage_slot_callback_completeChanged, fcQWizardPage_slot_callback_completeChanged_release)
 
 proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring): string =
-  let v_ms = fcQWizardPage_tr2(s, c)
+  let v_ms = fcQWizardPage_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWizardPage_tr3(s, c, n)
+  let v_ms = fcQWizardPage_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring): string =
-  let v_ms = fcQWizardPage_trUtf82(s, c)
+  let v_ms = fcQWizardPage_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWizardPage_trUtf83(s, c, n)
+  let v_ms = fcQWizardPage_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -3636,16 +3636,16 @@ proc field*(self: gen_qwizard_types.QWizardPage, name: openArray[char]): gen_qva
   gen_qvariant_types.QVariant(h: fcQWizardPage_protectedbase_field(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget): void =
-  fcQWizardPage_protectedbase_registerField(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h)
+  fcQWizardPage_protectedbase_registerField_name_widget(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h)
 
 proc wizard*(self: gen_qwizard_types.QWizardPage): gen_qwizard_types.QWizard =
   gen_qwizard_types.QWizard(h: fcQWizardPage_protectedbase_wizard(self.h), owned: false)
 
 proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget, property: cstring): void =
-  fcQWizardPage_protectedbase_registerField2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property)
+  fcQWizardPage_protectedbase_registerField_name_widget_property(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property)
 
 proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget, property: cstring, changedSignal: cstring): void =
-  fcQWizardPage_protectedbase_registerField3(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property, changedSignal)
+  fcQWizardPage_protectedbase_registerField_name_widget_property_changedSignal(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property, changedSignal)
 
 proc updateMicroFocus*(self: gen_qwizard_types.QWizardPage): void =
   fcQWizardPage_protectedbase_updateMicroFocus(self.h)

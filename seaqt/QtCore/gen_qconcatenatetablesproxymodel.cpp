@@ -752,7 +752,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QConcatenateTablesProxyModel_protectedbase_resetInternalData(VirtualQConcatenateTablesProxyModel* self);
-	friend QModelIndex* QConcatenateTablesProxyModel_protectedbase_createIndex(const VirtualQConcatenateTablesProxyModel* self, int row, int column);
+	friend QModelIndex* QConcatenateTablesProxyModel_protectedbase_createIndex_row_column(const VirtualQConcatenateTablesProxyModel* self, int row, int column);
 	friend void QConcatenateTablesProxyModel_protectedbase_encodeData(const VirtualQConcatenateTablesProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QConcatenateTablesProxyModel_protectedbase_decodeData(VirtualQConcatenateTablesProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QConcatenateTablesProxyModel_protectedbase_beginInsertRows(VirtualQConcatenateTablesProxyModel* self, QModelIndex* parent, int first, int last);
@@ -783,7 +783,7 @@ VirtualQConcatenateTablesProxyModel* QConcatenateTablesProxyModel_new(const QCon
 	return _mem_ ? new (_mem_)VirtualQConcatenateTablesProxyModel(vtbl) : nullptr;
 }
 
-VirtualQConcatenateTablesProxyModel* QConcatenateTablesProxyModel_new2(const QConcatenateTablesProxyModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQConcatenateTablesProxyModel* QConcatenateTablesProxyModel_new_parent(const QConcatenateTablesProxyModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQConcatenateTablesProxyModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQConcatenateTablesProxyModel(vtbl, parent) : nullptr;
 }
@@ -804,7 +804,7 @@ int QConcatenateTablesProxyModel_metacall(QConcatenateTablesProxyModel* self, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QConcatenateTablesProxyModel_tr(const char* s) {
+struct seaqt_string QConcatenateTablesProxyModel_tr_s(const char* s) {
 	QString _ret = QConcatenateTablesProxyModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -815,7 +815,7 @@ struct seaqt_string QConcatenateTablesProxyModel_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QConcatenateTablesProxyModel_trUtf8(const char* s) {
+struct seaqt_string QConcatenateTablesProxyModel_trUtf8_s(const char* s) {
 	QString _ret = QConcatenateTablesProxyModel::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -958,7 +958,7 @@ QSize* QConcatenateTablesProxyModel_span(const QConcatenateTablesProxyModel* sel
 	return new QSize(self->span(*index));
 }
 
-struct seaqt_string QConcatenateTablesProxyModel_tr2(const char* s, const char* c) {
+struct seaqt_string QConcatenateTablesProxyModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QConcatenateTablesProxyModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -969,7 +969,7 @@ struct seaqt_string QConcatenateTablesProxyModel_tr2(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QConcatenateTablesProxyModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QConcatenateTablesProxyModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QConcatenateTablesProxyModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -980,7 +980,7 @@ struct seaqt_string QConcatenateTablesProxyModel_tr3(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QConcatenateTablesProxyModel_trUtf82(const char* s, const char* c) {
+struct seaqt_string QConcatenateTablesProxyModel_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QConcatenateTablesProxyModel::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -991,7 +991,7 @@ struct seaqt_string QConcatenateTablesProxyModel_trUtf82(const char* s, const ch
 	return _ms;
 }
 
-struct seaqt_string QConcatenateTablesProxyModel_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QConcatenateTablesProxyModel_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QConcatenateTablesProxyModel::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1303,7 +1303,7 @@ void QConcatenateTablesProxyModel_protectedbase_resetInternalData(VirtualQConcat
 	self->resetInternalData();
 }
 
-QModelIndex* QConcatenateTablesProxyModel_protectedbase_createIndex(const VirtualQConcatenateTablesProxyModel* self, int row, int column) {
+QModelIndex* QConcatenateTablesProxyModel_protectedbase_createIndex_row_column(const VirtualQConcatenateTablesProxyModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

@@ -92,8 +92,8 @@ type cQAction*{.exportc: "QAction", incompleteStruct.} = object
 proc fcQAction_metaObject(self: pointer): pointer {.importc: "QAction_metaObject".}
 proc fcQAction_metacast(self: pointer, param1: cstring): pointer {.importc: "QAction_metacast".}
 proc fcQAction_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAction_metacall".}
-proc fcQAction_tr(s: cstring): struct_seaqt_string {.importc: "QAction_tr".}
-proc fcQAction_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAction_trUtf8".}
+proc fcQAction_trS(s: cstring): struct_seaqt_string {.importc: "QAction_tr_s".}
+proc fcQAction_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAction_trUtf8_s".}
 proc fcQAction_setActionGroup(self: pointer, group: pointer): void {.importc: "QAction_setActionGroup".}
 proc fcQAction_actionGroup(self: pointer): pointer {.importc: "QAction_actionGroup".}
 proc fcQAction_setIcon(self: pointer, icon: pointer): void {.importc: "QAction_setIcon".}
@@ -116,8 +116,8 @@ proc fcQAction_setSeparator(self: pointer, b: bool): void {.importc: "QAction_se
 proc fcQAction_isSeparator(self: pointer): bool {.importc: "QAction_isSeparator".}
 proc fcQAction_setShortcut(self: pointer, shortcut: pointer): void {.importc: "QAction_setShortcut".}
 proc fcQAction_shortcut(self: pointer): pointer {.importc: "QAction_shortcut".}
-proc fcQAction_setShortcuts(self: pointer, shortcuts: struct_seaqt_array): void {.importc: "QAction_setShortcuts".}
-proc fcQAction_setShortcutsWithShortcuts(self: pointer, shortcuts: cint): void {.importc: "QAction_setShortcutsWithShortcuts".}
+proc fcQAction_setShortcuts_QListOfQKeySequence(self: pointer, shortcuts: struct_seaqt_array): void {.importc: "QAction_setShortcuts_QListOfQKeySequence".}
+proc fcQAction_setShortcuts_QKeySequence_StandardKey(self: pointer, shortcuts: cint): void {.importc: "QAction_setShortcuts_QKeySequence_StandardKey".}
 proc fcQAction_shortcuts(self: pointer): struct_seaqt_array {.importc: "QAction_shortcuts".}
 proc fcQAction_setShortcutContext(self: pointer, context: cint): void {.importc: "QAction_setShortcutContext".}
 proc fcQAction_shortcutContext(self: pointer): cint {.importc: "QAction_shortcutContext".}
@@ -158,13 +158,13 @@ proc fcQAction_hovered(self: pointer): void {.importc: "QAction_hovered".}
 proc fcQAction_connect_hovered(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_hovered".}
 proc fcQAction_toggled(self: pointer, param1: bool): void {.importc: "QAction_toggled".}
 proc fcQAction_connect_toggled(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_toggled".}
-proc fcQAction_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAction_tr2".}
-proc fcQAction_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAction_tr3".}
-proc fcQAction_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAction_trUtf82".}
-proc fcQAction_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAction_trUtf83".}
-proc fcQAction_showStatusTextWithWidget(self: pointer, widget: pointer): bool {.importc: "QAction_showStatusTextWithWidget".}
-proc fcQAction_triggeredWithChecked(self: pointer, checked: bool): void {.importc: "QAction_triggeredWithChecked".}
-proc fcQAction_connect_triggeredWithChecked(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_triggeredWithChecked".}
+proc fcQAction_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAction_tr_s_c".}
+proc fcQAction_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAction_tr_s_c_n".}
+proc fcQAction_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAction_trUtf8_s_c".}
+proc fcQAction_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAction_trUtf8_s_c_n".}
+proc fcQAction_showStatusTextWidget(self: pointer, widget: pointer): bool {.importc: "QAction_showStatusText_widget".}
+proc fcQAction_triggeredChecked(self: pointer, checked: bool): void {.importc: "QAction_triggered_checked".}
+proc fcQAction_connect_triggeredChecked(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_triggered_checked".}
 proc fcQAction_vdata(self: pointer): ptr pointer {.importc: "QAction_vdata".}
 proc fvdata_cQAction(self: pointer): pointer {.importc: "vdata_QAction".}
 
@@ -195,11 +195,11 @@ proc fcQAction_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "
 proc fcQAction_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAction_protectedbase_receivers".}
 proc fcQAction_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAction_protectedbase_isSignalConnected".}
 proc fcQAction_new(vtbl: pointer, vdata: csize_t): ptr cQAction {.importc: "QAction_new".}
-proc fcQAction_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQAction {.importc: "QAction_new2".}
-proc fcQAction_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQAction {.importc: "QAction_new3".}
-proc fcQAction_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAction {.importc: "QAction_new4".}
-proc fcQAction_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQAction {.importc: "QAction_new5".}
-proc fcQAction_new6(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, parent: pointer): ptr cQAction {.importc: "QAction_new6".}
+proc fcQAction_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQAction {.importc: "QAction_new_text".}
+proc fcQAction_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQAction {.importc: "QAction_new_icon_text".}
+proc fcQAction_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAction {.importc: "QAction_new_parent".}
+proc fcQAction_new5(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQAction {.importc: "QAction_new_text_parent".}
+proc fcQAction_new6(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, parent: pointer): ptr cQAction {.importc: "QAction_new_icon_text_parent".}
 proc fcQAction_staticMetaObject(): pointer {.importc: "QAction_staticMetaObject".}
 
 proc metaObject*(self: gen_qaction_types.QAction): gen_qobjectdefs_types.QMetaObject =
@@ -212,13 +212,13 @@ proc metacall*(self: gen_qaction_types.QAction, param1: cint, param2: cint, para
   fcQAction_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaction_types.QAction, s: cstring): string =
-  let v_ms = fcQAction_tr(s)
+  let v_ms = fcQAction_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaction_types.QAction, s: cstring): string =
-  let v_ms = fcQAction_trUtf8(s)
+  let v_ms = fcQAction_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -309,10 +309,10 @@ proc setShortcuts*(self: gen_qaction_types.QAction, shortcuts: openArray[gen_qke
   for i in 0..<len(shortcuts):
     shortcuts_CArray[i] = shortcuts[i].h
 
-  fcQAction_setShortcuts(self.h, struct_seaqt_array(len: csize_t(len(shortcuts)), data: if len(shortcuts) == 0: nil else: addr(shortcuts_CArray[0])))
+  fcQAction_setShortcuts_QListOfQKeySequence(self.h, struct_seaqt_array(len: csize_t(len(shortcuts)), data: if len(shortcuts) == 0: nil else: addr(shortcuts_CArray[0])))
 
 proc setShortcuts*(self: gen_qaction_types.QAction, shortcuts: cint): void =
-  fcQAction_setShortcutsWithShortcuts(self.h, cint(shortcuts))
+  fcQAction_setShortcuts_QKeySequence_StandardKey(self.h, cint(shortcuts))
 
 proc shortcuts*(self: gen_qaction_types.QAction): seq[gen_qkeysequence_types.QKeySequence] =
   var v_ma = fcQAction_shortcuts(self.h)
@@ -503,51 +503,51 @@ proc onToggled*(self: gen_qaction_types.QAction, slot: QActiontoggledSlot) =
   fcQAction_connect_toggled(self.h, cast[int](addr tmp[]), fcQAction_slot_callback_toggled, fcQAction_slot_callback_toggled_release)
 
 proc tr*(_: type gen_qaction_types.QAction, s: cstring, c: cstring): string =
-  let v_ms = fcQAction_tr2(s, c)
+  let v_ms = fcQAction_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaction_types.QAction, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAction_tr3(s, c, n)
+  let v_ms = fcQAction_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaction_types.QAction, s: cstring, c: cstring): string =
-  let v_ms = fcQAction_trUtf82(s, c)
+  let v_ms = fcQAction_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaction_types.QAction, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAction_trUtf83(s, c, n)
+  let v_ms = fcQAction_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc showStatusText*(self: gen_qaction_types.QAction, widget: gen_qwidget_types.QWidget): bool =
-  fcQAction_showStatusTextWithWidget(self.h, widget.h)
+  fcQAction_showStatusTextWidget(self.h, widget.h)
 
 proc triggered*(self: gen_qaction_types.QAction, checked: bool): void =
-  fcQAction_triggeredWithChecked(self.h, checked)
+  fcQAction_triggeredChecked(self.h, checked)
 
-type QActiontriggeredWithCheckedSlot* = proc(checked: bool)
-proc fcQAction_slot_callback_triggeredWithChecked(slot: int, checked: bool) {.cdecl.} =
-  let nimfunc = cast[ptr QActiontriggeredWithCheckedSlot](cast[pointer](slot))
+type QActiontriggeredCheckedSlot* = proc(checked: bool)
+proc fcQAction_slot_callback_triggeredChecked(slot: int, checked: bool) {.cdecl.} =
+  let nimfunc = cast[ptr QActiontriggeredCheckedSlot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
-proc fcQAction_slot_callback_triggeredWithChecked_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QActiontriggeredWithCheckedSlot](cast[pointer](slot))
+proc fcQAction_slot_callback_triggeredChecked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActiontriggeredCheckedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onTriggered*(self: gen_qaction_types.QAction, slot: QActiontriggeredWithCheckedSlot) =
-  var tmp = new QActiontriggeredWithCheckedSlot
+proc onTriggered*(self: gen_qaction_types.QAction, slot: QActiontriggeredCheckedSlot) =
+  var tmp = new QActiontriggeredCheckedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_triggeredWithChecked(self.h, cast[int](addr tmp[]), fcQAction_slot_callback_triggeredWithChecked, fcQAction_slot_callback_triggeredWithChecked_release)
+  fcQAction_connect_triggeredChecked(self.h, cast[int](addr tmp[]), fcQAction_slot_callback_triggeredChecked, fcQAction_slot_callback_triggeredChecked_release)
 
 type QActionmetaObjectProc* = proc(self: QAction): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QActionmetacastProc* = proc(self: QAction, param1: cstring): pointer {.raises: [], gcsafe.}

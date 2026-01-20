@@ -167,13 +167,13 @@ public:
 	friend bool QSound_protectedbase_isSignalConnected(const VirtualQSound* self, QMetaMethod* signal);
 };
 
-VirtualQSound* QSound_new(const QSound_VTable* vtbl, size_t vdata, struct seaqt_string filename) {
+VirtualQSound* QSound_new_filename(const QSound_VTable* vtbl, size_t vdata, struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSound>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSound(vtbl, filename_QString) : nullptr;
 }
 
-VirtualQSound* QSound_new2(const QSound_VTable* vtbl, size_t vdata, struct seaqt_string filename, QObject* parent) {
+VirtualQSound* QSound_new_filename_parent(const QSound_VTable* vtbl, size_t vdata, struct seaqt_string filename, QObject* parent) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSound>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSound(vtbl, filename_QString, parent) : nullptr;
@@ -195,7 +195,7 @@ int QSound_metacall(QSound* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSound_tr(const char* s) {
+struct seaqt_string QSound_tr_s(const char* s) {
 	QString _ret = QSound::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -206,7 +206,7 @@ struct seaqt_string QSound_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSound_trUtf8(const char* s) {
+struct seaqt_string QSound_trUtf8_s(const char* s) {
 	QString _ret = QSound::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -217,7 +217,7 @@ struct seaqt_string QSound_trUtf8(const char* s) {
 	return _ms;
 }
 
-void QSound_play(struct seaqt_string filename) {
+void QSound_play_filename(struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	QSound::play(filename_QString);
 }
@@ -249,7 +249,7 @@ bool QSound_isFinished(const QSound* self) {
 	return self->isFinished();
 }
 
-void QSound_play2(QSound* self) {
+void QSound_play(QSound* self) {
 	self->play();
 }
 
@@ -257,7 +257,7 @@ void QSound_stop(QSound* self) {
 	self->stop();
 }
 
-struct seaqt_string QSound_tr2(const char* s, const char* c) {
+struct seaqt_string QSound_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSound::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -268,7 +268,7 @@ struct seaqt_string QSound_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSound_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSound_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSound::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -279,7 +279,7 @@ struct seaqt_string QSound_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QSound_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSound_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSound::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -290,7 +290,7 @@ struct seaqt_string QSound_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSound_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSound_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSound::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

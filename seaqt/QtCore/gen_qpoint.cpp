@@ -17,12 +17,12 @@ QPoint* QPoint_new() {
 	return new (std::nothrow) QPoint();
 }
 
-QPoint* QPoint_new2(int xpos, int ypos) {
+QPoint* QPoint_new_xpos_ypos(int xpos, int ypos) {
 	return new (std::nothrow) QPoint(static_cast<int>(xpos), static_cast<int>(ypos));
 }
 
-QPoint* QPoint_new3(QPoint* param1) {
-	return new (std::nothrow) QPoint(*param1);
+QPoint* QPoint_new_from(QPoint* from) {
+	return new (std::nothrow) QPoint(*from);
 }
 
 bool QPoint_isNull(const QPoint* self) {
@@ -65,19 +65,19 @@ QPoint* QPoint_operatorMinusAssign(QPoint* self, QPoint* p) {
 	return &_ret;
 }
 
-QPoint* QPoint_operatorMultiplyAssign(QPoint* self, float factor) {
+QPoint* QPoint_operatorMultiplyAssign_float(QPoint* self, float factor) {
 	QPoint& _ret = self->operator*=(static_cast<float>(factor));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QPoint* QPoint_operatorMultiplyAssignWithFactor(QPoint* self, double factor) {
+QPoint* QPoint_operatorMultiplyAssign_double(QPoint* self, double factor) {
 	QPoint& _ret = self->operator*=(static_cast<double>(factor));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QPoint* QPoint_operatorMultiplyAssign2(QPoint* self, int factor) {
+QPoint* QPoint_operatorMultiplyAssign_int(QPoint* self, int factor) {
 	QPoint& _ret = self->operator*=(static_cast<int>(factor));
 	// Cast returned reference into pointer
 	return &_ret;
@@ -101,16 +101,16 @@ QPointF* QPointF_new() {
 	return new (std::nothrow) QPointF();
 }
 
-QPointF* QPointF_new2(QPoint* p) {
+QPointF* QPointF_new_p(QPoint* p) {
 	return new (std::nothrow) QPointF(*p);
 }
 
-QPointF* QPointF_new3(double xpos, double ypos) {
+QPointF* QPointF_new_xpos_ypos(double xpos, double ypos) {
 	return new (std::nothrow) QPointF(static_cast<qreal>(xpos), static_cast<qreal>(ypos));
 }
 
-QPointF* QPointF_new4(QPointF* param1) {
-	return new (std::nothrow) QPointF(*param1);
+QPointF* QPointF_new_from(QPointF* from) {
+	return new (std::nothrow) QPointF(*from);
 }
 
 double QPointF_manhattanLength(const QPointF* self) {

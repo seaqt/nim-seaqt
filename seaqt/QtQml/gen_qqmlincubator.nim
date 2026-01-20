@@ -85,12 +85,12 @@ type cQQmlIncubatorVTable {.pure.} = object
 proc fcQQmlIncubator_virtualbase_statusChanged(self: pointer, param1: cint): void {.importc: "QQmlIncubator_virtualbase_statusChanged".}
 proc fcQQmlIncubator_virtualbase_setInitialState(self: pointer, initialState: pointer): void {.importc: "QQmlIncubator_virtualbase_setInitialState".}
 proc fcQQmlIncubator_new(vtbl: pointer, vdata: csize_t): ptr cQQmlIncubator {.importc: "QQmlIncubator_new".}
-proc fcQQmlIncubator_new2(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQQmlIncubator {.importc: "QQmlIncubator_new2".}
+proc fcQQmlIncubator_new2(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQQmlIncubator {.importc: "QQmlIncubator_new_QQmlIncubator_IncubationMode".}
 proc fcQQmlIncubationController_engine(self: pointer): pointer {.importc: "QQmlIncubationController_engine".}
 proc fcQQmlIncubationController_incubatingObjectCount(self: pointer): cint {.importc: "QQmlIncubationController_incubatingObjectCount".}
 proc fcQQmlIncubationController_incubateFor(self: pointer, msecs: cint): void {.importc: "QQmlIncubationController_incubateFor".}
-proc fcQQmlIncubationController_incubateWhile(self: pointer, flag: ptr bool): void {.importc: "QQmlIncubationController_incubateWhile".}
-proc fcQQmlIncubationController_incubateWhile2(self: pointer, flag: ptr bool, msecs: cint): void {.importc: "QQmlIncubationController_incubateWhile2".}
+proc fcQQmlIncubationController_incubateWhileVolatilebool(self: pointer, flag: ptr bool): void {.importc: "QQmlIncubationController_incubateWhile_volatilebool".}
+proc fcQQmlIncubationController_incubateWhileVolatileboolInt(self: pointer, flag: ptr bool, msecs: cint): void {.importc: "QQmlIncubationController_incubateWhile_volatilebool_int".}
 proc fcQQmlIncubationController_vdata(self: pointer): ptr pointer {.importc: "QQmlIncubationController_vdata".}
 proc fvdata_cQQmlIncubationController(self: pointer): pointer {.importc: "vdata_QQmlIncubationController".}
 
@@ -259,10 +259,10 @@ proc incubateFor*(self: gen_qqmlincubator_types.QQmlIncubationController, msecs:
   fcQQmlIncubationController_incubateFor(self.h, msecs)
 
 proc incubateWhile*(self: gen_qqmlincubator_types.QQmlIncubationController, flag: ptr bool): void =
-  fcQQmlIncubationController_incubateWhile(self.h, flag)
+  fcQQmlIncubationController_incubateWhileVolatilebool(self.h, flag)
 
 proc incubateWhile*(self: gen_qqmlincubator_types.QQmlIncubationController, flag: ptr bool, msecs: cint): void =
-  fcQQmlIncubationController_incubateWhile2(self.h, flag, msecs)
+  fcQQmlIncubationController_incubateWhileVolatileboolInt(self.h, flag, msecs)
 
 type QQmlIncubationControllerincubatingObjectCountChangedProc* = proc(self: QQmlIncubationController, param1: cint): void {.raises: [], gcsafe.}
 

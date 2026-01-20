@@ -50,7 +50,7 @@ export
 
 type cQGeoRectangle*{.exportc: "QGeoRectangle", incompleteStruct.} = object
 
-proc fcQGeoRectangle_operatorAssign(self: pointer, other: pointer): void {.importc: "QGeoRectangle_operatorAssign".}
+proc fcQGeoRectangle_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoRectangle_operatorAssign".}
 proc fcQGeoRectangle_operatorEqual(self: pointer, other: pointer): bool {.importc: "QGeoRectangle_operatorEqual".}
 proc fcQGeoRectangle_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QGeoRectangle_operatorNotEqual".}
 proc fcQGeoRectangle_setTopLeft(self: pointer, topLeft: pointer): void {.importc: "QGeoRectangle_setTopLeft".}
@@ -77,15 +77,15 @@ proc fcQGeoRectangle_operatorBitwiseOr(self: pointer, rectangle: pointer): point
 proc fcQGeoRectangle_operatorBitwiseOrAssign(self: pointer, rectangle: pointer): void {.importc: "QGeoRectangle_operatorBitwiseOrAssign".}
 proc fcQGeoRectangle_toString(self: pointer): struct_seaqt_string {.importc: "QGeoRectangle_toString".}
 proc fcQGeoRectangle_new(): ptr cQGeoRectangle {.importc: "QGeoRectangle_new".}
-proc fcQGeoRectangle_new2(center: pointer, degreesWidth: float64, degreesHeight: float64): ptr cQGeoRectangle {.importc: "QGeoRectangle_new2".}
-proc fcQGeoRectangle_new3(topLeft: pointer, bottomRight: pointer): ptr cQGeoRectangle {.importc: "QGeoRectangle_new3".}
-proc fcQGeoRectangle_new4(coordinates: struct_seaqt_array): ptr cQGeoRectangle {.importc: "QGeoRectangle_new4".}
-proc fcQGeoRectangle_new5(other: pointer): ptr cQGeoRectangle {.importc: "QGeoRectangle_new5".}
-proc fcQGeoRectangle_new6(other: pointer): ptr cQGeoRectangle {.importc: "QGeoRectangle_new6".}
+proc fcQGeoRectangle_new2(center: pointer, degreesWidth: float64, degreesHeight: float64): ptr cQGeoRectangle {.importc: "QGeoRectangle_new_center_degreesWidth_degreesHeight".}
+proc fcQGeoRectangle_new3(topLeft: pointer, bottomRight: pointer): ptr cQGeoRectangle {.importc: "QGeoRectangle_new_topLeft_bottomRight".}
+proc fcQGeoRectangle_new4(coordinates: struct_seaqt_array): ptr cQGeoRectangle {.importc: "QGeoRectangle_new_coordinates".}
+proc fcQGeoRectangle_new5(fromVal: pointer): ptr cQGeoRectangle {.importc: "QGeoRectangle_new_from".}
+proc fcQGeoRectangle_new6(other: pointer): ptr cQGeoRectangle {.importc: "QGeoRectangle_new_other".}
 proc fcQGeoRectangle_staticMetaObject(): pointer {.importc: "QGeoRectangle_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qgeorectangle_types.QGeoRectangle, other: gen_qgeorectangle_types.QGeoRectangle): void =
-  fcQGeoRectangle_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qgeorectangle_types.QGeoRectangle, fromVal: gen_qgeorectangle_types.QGeoRectangle): void =
+  fcQGeoRectangle_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qgeorectangle_types.QGeoRectangle, other: gen_qgeorectangle_types.QGeoRectangle): bool =
   fcQGeoRectangle_operatorEqual(self.h, other.h)
@@ -185,8 +185,8 @@ proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
   let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new4(struct_seaqt_array(len: csize_t(len(coordinates)), data: if len(coordinates) == 0: nil else: addr(coordinates_CArray[0]))), owned: true)
   tmp
 proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
-    other: gen_qgeorectangle_types.QGeoRectangle): gen_qgeorectangle_types.QGeoRectangle =
-  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new5(other.h), owned: true)
+    fromVal: gen_qgeorectangle_types.QGeoRectangle): gen_qgeorectangle_types.QGeoRectangle =
+  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new5(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
     other: gen_qgeoshape_types.QGeoShape): gen_qgeorectangle_types.QGeoRectangle =

@@ -51,9 +51,9 @@ export
 
 type cQToolTip*{.exportc: "QToolTip", incompleteStruct.} = object
 
-proc fcQToolTip_showText(pos: pointer, text: struct_seaqt_string): void {.importc: "QToolTip_showText".}
-proc fcQToolTip_showText2(pos: pointer, text: struct_seaqt_string, w: pointer, rect: pointer): void {.importc: "QToolTip_showText2".}
-proc fcQToolTip_showText3(pos: pointer, text: struct_seaqt_string, w: pointer, rect: pointer, msecShowTime: cint): void {.importc: "QToolTip_showText3".}
+proc fcQToolTip_showTextPosText(pos: pointer, text: struct_seaqt_string): void {.importc: "QToolTip_showText_pos_text".}
+proc fcQToolTip_showTextPosTextWRect(pos: pointer, text: struct_seaqt_string, w: pointer, rect: pointer): void {.importc: "QToolTip_showText_pos_text_w_rect".}
+proc fcQToolTip_showTextPosTextWRectMsecShowTime(pos: pointer, text: struct_seaqt_string, w: pointer, rect: pointer, msecShowTime: cint): void {.importc: "QToolTip_showText_pos_text_w_rect_msecShowTime".}
 proc fcQToolTip_hideText(): void {.importc: "QToolTip_hideText".}
 proc fcQToolTip_isVisible(): bool {.importc: "QToolTip_isVisible".}
 proc fcQToolTip_text(): struct_seaqt_string {.importc: "QToolTip_text".}
@@ -61,16 +61,16 @@ proc fcQToolTip_palette(): pointer {.importc: "QToolTip_palette".}
 proc fcQToolTip_setPalette(palette: pointer): void {.importc: "QToolTip_setPalette".}
 proc fcQToolTip_font(): pointer {.importc: "QToolTip_font".}
 proc fcQToolTip_setFont(font: pointer): void {.importc: "QToolTip_setFont".}
-proc fcQToolTip_showText4(pos: pointer, text: struct_seaqt_string, w: pointer): void {.importc: "QToolTip_showText4".}
+proc fcQToolTip_showTextPosTextW(pos: pointer, text: struct_seaqt_string, w: pointer): void {.importc: "QToolTip_showText_pos_text_w".}
 
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char]): void =
-  fcQToolTip_showText(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQToolTip_showTextPosText(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget, rect: gen_qrect_types.QRect): void =
-  fcQToolTip_showText2(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h, rect.h)
+  fcQToolTip_showTextPosTextWRect(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h, rect.h)
 
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget, rect: gen_qrect_types.QRect, msecShowTime: cint): void =
-  fcQToolTip_showText3(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h, rect.h, msecShowTime)
+  fcQToolTip_showTextPosTextWRectMsecShowTime(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h, rect.h, msecShowTime)
 
 proc hideText*(_: type gen_qtooltip_types.QToolTip): void =
   fcQToolTip_hideText()
@@ -97,5 +97,5 @@ proc setFont*(_: type gen_qtooltip_types.QToolTip, font: gen_qfont_types.QFont):
   fcQToolTip_setFont(font.h)
 
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget): void =
-  fcQToolTip_showText4(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h)
+  fcQToolTip_showTextPosTextW(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h)
 

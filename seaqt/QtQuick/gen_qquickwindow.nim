@@ -115,15 +115,15 @@ type cQQuickWindowGraphicsStateInfo*{.exportc: "QQuickWindow__GraphicsStateInfo"
 proc fcQQuickWindow_metaObject(self: pointer): pointer {.importc: "QQuickWindow_metaObject".}
 proc fcQQuickWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickWindow_metacast".}
 proc fcQQuickWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickWindow_metacall".}
-proc fcQQuickWindow_tr(s: cstring): struct_seaqt_string {.importc: "QQuickWindow_tr".}
-proc fcQQuickWindow_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQuickWindow_trUtf8".}
+proc fcQQuickWindow_trS(s: cstring): struct_seaqt_string {.importc: "QQuickWindow_tr_s".}
+proc fcQQuickWindow_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQuickWindow_trUtf8_s".}
 proc fcQQuickWindow_contentItem(self: pointer): pointer {.importc: "QQuickWindow_contentItem".}
 proc fcQQuickWindow_activeFocusItem(self: pointer): pointer {.importc: "QQuickWindow_activeFocusItem".}
 proc fcQQuickWindow_focusObject(self: pointer): pointer {.importc: "QQuickWindow_focusObject".}
 proc fcQQuickWindow_mouseGrabberItem(self: pointer): pointer {.importc: "QQuickWindow_mouseGrabberItem".}
 proc fcQQuickWindow_sendEvent(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QQuickWindow_sendEvent".}
 proc fcQQuickWindow_grabWindow(self: pointer): pointer {.importc: "QQuickWindow_grabWindow".}
-proc fcQQuickWindow_setRenderTarget2(self: pointer, fboId: cuint, size: pointer): void {.importc: "QQuickWindow_setRenderTarget2".}
+proc fcQQuickWindow_setRenderTargetFboIdSize(self: pointer, fboId: cuint, size: pointer): void {.importc: "QQuickWindow_setRenderTarget_fboId_size".}
 proc fcQQuickWindow_renderTargetId(self: pointer): cuint {.importc: "QQuickWindow_renderTargetId".}
 proc fcQQuickWindow_renderTargetSize(self: pointer): pointer {.importc: "QQuickWindow_renderTargetSize".}
 proc fcQQuickWindow_resetOpenGLState(self: pointer): void {.importc: "QQuickWindow_resetOpenGLState".}
@@ -132,10 +132,10 @@ proc fcQQuickWindow_beginExternalCommands(self: pointer): void {.importc: "QQuic
 proc fcQQuickWindow_endExternalCommands(self: pointer): void {.importc: "QQuickWindow_endExternalCommands".}
 proc fcQQuickWindow_incubationController(self: pointer): pointer {.importc: "QQuickWindow_incubationController".}
 proc fcQQuickWindow_accessibleRoot(self: pointer): pointer {.importc: "QQuickWindow_accessibleRoot".}
-proc fcQQuickWindow_createTextureFromImage(self: pointer, image: pointer): pointer {.importc: "QQuickWindow_createTextureFromImage".}
-proc fcQQuickWindow_createTextureFromImage2(self: pointer, image: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromImage2".}
-proc fcQQuickWindow_createTextureFromId(self: pointer, id: cuint, size: pointer): pointer {.importc: "QQuickWindow_createTextureFromId".}
-proc fcQQuickWindow_createTextureFromNativeObject(self: pointer, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: pointer): pointer {.importc: "QQuickWindow_createTextureFromNativeObject".}
+proc fcQQuickWindow_createTextureFromImageImage(self: pointer, image: pointer): pointer {.importc: "QQuickWindow_createTextureFromImage_image".}
+proc fcQQuickWindow_createTextureFromImageImageOptions(self: pointer, image: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromImage_image_options".}
+proc fcQQuickWindow_createTextureFromIdIdSize(self: pointer, id: cuint, size: pointer): pointer {.importc: "QQuickWindow_createTextureFromId_id_size".}
+proc fcQQuickWindow_createTextureFromNativeObjectTypeNativeObjectPtrNativeLayoutSize(self: pointer, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: pointer): pointer {.importc: "QQuickWindow_createTextureFromNativeObject_type_nativeObjectPtr_nativeLayout_size".}
 proc fcQQuickWindow_setClearBeforeRendering(self: pointer, enabled: bool): void {.importc: "QQuickWindow_setClearBeforeRendering".}
 proc fcQQuickWindow_clearBeforeRendering(self: pointer): bool {.importc: "QQuickWindow_clearBeforeRendering".}
 proc fcQQuickWindow_setColor(self: pointer, color: pointer): void {.importc: "QQuickWindow_setColor".}
@@ -150,8 +150,8 @@ proc fcQQuickWindow_isSceneGraphInitialized(self: pointer): bool {.importc: "QQu
 proc fcQQuickWindow_scheduleRenderJob(self: pointer, job: pointer, schedule: cint): void {.importc: "QQuickWindow_scheduleRenderJob".}
 proc fcQQuickWindow_effectiveDevicePixelRatio(self: pointer): float64 {.importc: "QQuickWindow_effectiveDevicePixelRatio".}
 proc fcQQuickWindow_rendererInterface(self: pointer): pointer {.importc: "QQuickWindow_rendererInterface".}
-proc fcQQuickWindow_setSceneGraphBackend(api: cint): void {.importc: "QQuickWindow_setSceneGraphBackend".}
-proc fcQQuickWindow_setSceneGraphBackendWithBackend(backend: struct_seaqt_string): void {.importc: "QQuickWindow_setSceneGraphBackendWithBackend".}
+proc fcQQuickWindow_setSceneGraphBackendApi(api: cint): void {.importc: "QQuickWindow_setSceneGraphBackend_api".}
+proc fcQQuickWindow_setSceneGraphBackendBackend(backend: struct_seaqt_string): void {.importc: "QQuickWindow_setSceneGraphBackend_backend".}
 proc fcQQuickWindow_sceneGraphBackend(): struct_seaqt_string {.importc: "QQuickWindow_sceneGraphBackend".}
 proc fcQQuickWindow_createRectangleNode(self: pointer): pointer {.importc: "QQuickWindow_createRectangleNode".}
 proc fcQQuickWindow_createImageNode(self: pointer): pointer {.importc: "QQuickWindow_createImageNode".}
@@ -188,12 +188,12 @@ proc fcQQuickWindow_afterRenderPassRecording(self: pointer): void {.importc: "QQ
 proc fcQQuickWindow_connect_afterRenderPassRecording(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickWindow_connect_afterRenderPassRecording".}
 proc fcQQuickWindow_update(self: pointer): void {.importc: "QQuickWindow_update".}
 proc fcQQuickWindow_releaseResources(self: pointer): void {.importc: "QQuickWindow_releaseResources".}
-proc fcQQuickWindow_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickWindow_tr2".}
-proc fcQQuickWindow_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickWindow_tr3".}
-proc fcQQuickWindow_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickWindow_trUtf82".}
-proc fcQQuickWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickWindow_trUtf83".}
-proc fcQQuickWindow_createTextureFromId2(self: pointer, id: cuint, size: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromId2".}
-proc fcQQuickWindow_createTextureFromNativeObject2(self: pointer, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromNativeObject2".}
+proc fcQQuickWindow_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickWindow_tr_s_c".}
+proc fcQQuickWindow_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickWindow_tr_s_c_n".}
+proc fcQQuickWindow_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickWindow_trUtf8_s_c".}
+proc fcQQuickWindow_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickWindow_trUtf8_s_c_n".}
+proc fcQQuickWindow_createTextureFromIdIdSizeOptions(self: pointer, id: cuint, size: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromId_id_size_options".}
+proc fcQQuickWindow_createTextureFromNativeObjectTypeNativeObjectPtrNativeLayoutSizeOptions(self: pointer, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromNativeObject_type_nativeObjectPtr_nativeLayout_size_options".}
 proc fcQQuickWindow_vdata(self: pointer): ptr pointer {.importc: "QQuickWindow_vdata".}
 proc fvdata_cQQuickWindow(self: pointer): pointer {.importc: "vdata_QQuickWindow".}
 
@@ -268,8 +268,8 @@ proc fcQQuickWindow_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQQuickWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickWindow_protectedbase_receivers".}
 proc fcQQuickWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickWindow_protectedbase_isSignalConnected".}
 proc fcQQuickWindow_new(vtbl: pointer, vdata: csize_t): ptr cQQuickWindow {.importc: "QQuickWindow_new".}
-proc fcQQuickWindow_new2(vtbl: pointer, vdata: csize_t, renderControl: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new2".}
-proc fcQQuickWindow_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new3".}
+proc fcQQuickWindow_new2(vtbl: pointer, vdata: csize_t, renderControl: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new_renderControl".}
+proc fcQQuickWindow_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new_parent".}
 proc fcQQuickWindow_staticMetaObject(): pointer {.importc: "QQuickWindow_staticMetaObject".}
 proc fcQQuickWindowGraphicsStateInfo_currentFrameSlot(self: pointer): cint {.importc: "QQuickWindow__GraphicsStateInfo_currentFrameSlot".}
 proc fcQQuickWindowGraphicsStateInfo_setCurrentFrameSlot(self: pointer, currentFrameSlot: cint): void {.importc: "QQuickWindow__GraphicsStateInfo_setCurrentFrameSlot".}
@@ -286,13 +286,13 @@ proc metacall*(self: gen_qquickwindow_types.QQuickWindow, param1: cint, param2: 
   fcQQuickWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring): string =
-  let v_ms = fcQQuickWindow_tr(s)
+  let v_ms = fcQQuickWindow_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring): string =
-  let v_ms = fcQQuickWindow_trUtf8(s)
+  let v_ms = fcQQuickWindow_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -316,7 +316,7 @@ proc grabWindow*(self: gen_qquickwindow_types.QQuickWindow): gen_qimage_types.QI
   gen_qimage_types.QImage(h: fcQQuickWindow_grabWindow(self.h), owned: true)
 
 proc setRenderTarget*(self: gen_qquickwindow_types.QQuickWindow, fboId: cuint, size: gen_qsize_types.QSize): void =
-  fcQQuickWindow_setRenderTarget2(self.h, fboId, size.h)
+  fcQQuickWindow_setRenderTargetFboIdSize(self.h, fboId, size.h)
 
 proc renderTargetId*(self: gen_qquickwindow_types.QQuickWindow): cuint =
   fcQQuickWindow_renderTargetId(self.h)
@@ -343,16 +343,16 @@ proc accessibleRoot*(self: gen_qquickwindow_types.QQuickWindow): gen_qaccessible
   gen_qaccessible_types.QAccessibleInterface(h: fcQQuickWindow_accessibleRoot(self.h), owned: false)
 
 proc createTextureFromImage*(self: gen_qquickwindow_types.QQuickWindow, image: gen_qimage_types.QImage): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromImage(self.h, image.h), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromImageImage(self.h, image.h), owned: false)
 
 proc createTextureFromImage*(self: gen_qquickwindow_types.QQuickWindow, image: gen_qimage_types.QImage, options: cint): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromImage2(self.h, image.h, cint(options)), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromImageImageOptions(self.h, image.h, cint(options)), owned: false)
 
 proc createTextureFromId*(self: gen_qquickwindow_types.QQuickWindow, id: cuint, size: gen_qsize_types.QSize): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromId(self.h, id, size.h), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromIdIdSize(self.h, id, size.h), owned: false)
 
 proc createTextureFromNativeObject*(self: gen_qquickwindow_types.QQuickWindow, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: gen_qsize_types.QSize): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromNativeObject(self.h, cint(typeVal), nativeObjectPtr, nativeLayout, size.h), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromNativeObjectTypeNativeObjectPtrNativeLayoutSize(self.h, cint(typeVal), nativeObjectPtr, nativeLayout, size.h), owned: false)
 
 proc setClearBeforeRendering*(self: gen_qquickwindow_types.QQuickWindow, enabled: bool): void =
   fcQQuickWindow_setClearBeforeRendering(self.h, enabled)
@@ -397,10 +397,10 @@ proc rendererInterface*(self: gen_qquickwindow_types.QQuickWindow): gen_qsgrende
   gen_qsgrendererinterface_types.QSGRendererInterface(h: fcQQuickWindow_rendererInterface(self.h), owned: false)
 
 proc setSceneGraphBackend*(_: type gen_qquickwindow_types.QQuickWindow, api: cint): void =
-  fcQQuickWindow_setSceneGraphBackend(cint(api))
+  fcQQuickWindow_setSceneGraphBackendApi(cint(api))
 
 proc setSceneGraphBackend*(_: type gen_qquickwindow_types.QQuickWindow, backend: openArray[char]): void =
-  fcQQuickWindow_setSceneGraphBackendWithBackend(struct_seaqt_string(data: if len(backend) > 0: addr backend[0] else: nil, len: csize_t(len(backend))))
+  fcQQuickWindow_setSceneGraphBackendBackend(struct_seaqt_string(data: if len(backend) > 0: addr backend[0] else: nil, len: csize_t(len(backend))))
 
 proc sceneGraphBackend*(_: type gen_qquickwindow_types.QQuickWindow): string =
   let v_ms = fcQQuickWindow_sceneGraphBackend()
@@ -691,34 +691,34 @@ proc releaseResources*(self: gen_qquickwindow_types.QQuickWindow): void =
   fcQQuickWindow_releaseResources(self.h)
 
 proc tr*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickWindow_tr2(s, c)
+  let v_ms = fcQQuickWindow_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickWindow_tr3(s, c, n)
+  let v_ms = fcQQuickWindow_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickWindow_trUtf82(s, c)
+  let v_ms = fcQQuickWindow_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickWindow_trUtf83(s, c, n)
+  let v_ms = fcQQuickWindow_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc createTextureFromId*(self: gen_qquickwindow_types.QQuickWindow, id: cuint, size: gen_qsize_types.QSize, options: cint): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromId2(self.h, id, size.h, cint(options)), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromIdIdSizeOptions(self.h, id, size.h, cint(options)), owned: false)
 
 proc createTextureFromNativeObject*(self: gen_qquickwindow_types.QQuickWindow, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: gen_qsize_types.QSize, options: cint): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromNativeObject2(self.h, cint(typeVal), nativeObjectPtr, nativeLayout, size.h, cint(options)), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromNativeObjectTypeNativeObjectPtrNativeLayoutSizeOptions(self.h, cint(typeVal), nativeObjectPtr, nativeLayout, size.h, cint(options)), owned: false)
 
 type QQuickWindowmetaObjectProc* = proc(self: QQuickWindow): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQuickWindowmetacastProc* = proc(self: QQuickWindow, param1: cstring): pointer {.raises: [], gcsafe.}

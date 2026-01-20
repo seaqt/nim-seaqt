@@ -161,7 +161,7 @@ typedef struct QListView_VTable{
 	void (*closeEditor)(VirtualQListView* self, QWidget* editor, int hint);
 	void (*commitData)(VirtualQListView* self, QWidget* editor);
 	void (*editorDestroyed)(VirtualQListView* self, QObject* editor);
-	bool (*edit2)(VirtualQListView* self, QModelIndex* index, int trigger, QEvent* event);
+	bool (*edit_index_trigger_event)(VirtualQListView* self, QModelIndex* index, int trigger, QEvent* event);
 	int (*selectionCommand)(const VirtualQListView* self, QModelIndex* index, QEvent* event);
 	bool (*focusNextPrevChild)(VirtualQListView* self, bool next);
 	bool (*viewportEvent)(VirtualQListView* self, QEvent* event);
@@ -206,15 +206,15 @@ typedef struct QListView_VTable{
 void* QListView_vdata(VirtualQListView* self);
 VirtualQListView* vdata_QListView(void* vdata);
 
-VirtualQListView* QListView_new(const QListView_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQListView* QListView_new2(const QListView_VTable* vtbl, size_t vdata);
+VirtualQListView* QListView_new_parent(const QListView_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQListView* QListView_new(const QListView_VTable* vtbl, size_t vdata);
 
 void QListView_virtbase(QListView* src, QAbstractItemView** outptr_QAbstractItemView);
 QMetaObject* QListView_metaObject(const QListView* self);
 void* QListView_metacast(QListView* self, const char* param1);
 int QListView_metacall(QListView* self, int param1, int param2, void** param3);
-struct seaqt_string QListView_tr(const char* s);
-struct seaqt_string QListView_trUtf8(const char* s);
+struct seaqt_string QListView_tr_s(const char* s);
+struct seaqt_string QListView_trUtf8_s(const char* s);
 void QListView_setMovement(QListView* self, int movement);
 int QListView_movement(const QListView* self);
 void QListView_setFlow(QListView* self, int flow);
@@ -281,10 +281,10 @@ bool QListView_isIndexHidden(const QListView* self, QModelIndex* index);
 void QListView_selectionChanged(QListView* self, QItemSelection* selected, QItemSelection* deselected);
 void QListView_currentChanged(QListView* self, QModelIndex* current, QModelIndex* previous);
 QSize* QListView_viewportSizeHint(const QListView* self);
-struct seaqt_string QListView_tr2(const char* s, const char* c);
-struct seaqt_string QListView_tr3(const char* s, const char* c, int n);
-struct seaqt_string QListView_trUtf82(const char* s, const char* c);
-struct seaqt_string QListView_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QListView_tr_s_c(const char* s, const char* c);
+struct seaqt_string QListView_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QListView_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QListView_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QListView_virtualbase_metaObject(const VirtualQListView* self);
 void* QListView_virtualbase_metacast(VirtualQListView* self, const char* param1);
@@ -338,7 +338,7 @@ void QListView_virtualbase_horizontalScrollbarValueChanged(VirtualQListView* sel
 void QListView_virtualbase_closeEditor(VirtualQListView* self, QWidget* editor, int hint);
 void QListView_virtualbase_commitData(VirtualQListView* self, QWidget* editor);
 void QListView_virtualbase_editorDestroyed(VirtualQListView* self, QObject* editor);
-bool QListView_virtualbase_edit2(VirtualQListView* self, QModelIndex* index, int trigger, QEvent* event);
+bool QListView_virtualbase_edit_index_trigger_event(VirtualQListView* self, QModelIndex* index, int trigger, QEvent* event);
 int QListView_virtualbase_selectionCommand(const VirtualQListView* self, QModelIndex* index, QEvent* event);
 bool QListView_virtualbase_focusNextPrevChild(VirtualQListView* self, bool next);
 bool QListView_virtualbase_viewportEvent(VirtualQListView* self, QEvent* event);
@@ -398,7 +398,7 @@ void QListView_protectedbase_startAutoScroll(VirtualQListView* self);
 void QListView_protectedbase_stopAutoScroll(VirtualQListView* self);
 void QListView_protectedbase_doAutoScroll(VirtualQListView* self);
 int QListView_protectedbase_dropIndicatorPosition(const VirtualQListView* self);
-void QListView_protectedbase_setViewportMargins(VirtualQListView* self, int left, int top, int right, int bottom);
+void QListView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQListView* self, int left, int top, int right, int bottom);
 QMargins* QListView_protectedbase_viewportMargins(const VirtualQListView* self);
 void QListView_protectedbase_drawFrame(VirtualQListView* self, QPainter* param1);
 void QListView_protectedbase_initStyleOption(const VirtualQListView* self, QStyleOptionFrame* option);

@@ -21,10 +21,10 @@ typedef struct QRgba64 QRgba64;
 #endif
 
 QRgba64* QRgba64_new();
-QRgba64* QRgba64_new2(QRgba64* param1);
+QRgba64* QRgba64_new_from(QRgba64* from);
 
-QRgba64* QRgba64_fromRgba64(unsigned long long c);
-QRgba64* QRgba64_fromRgba642(unsigned short red, unsigned short green, unsigned short blue, unsigned short alpha);
+QRgba64* QRgba64_fromRgba64_c(unsigned long long c);
+QRgba64* QRgba64_fromRgba64_red_green_blue_alpha(unsigned short red, unsigned short green, unsigned short blue, unsigned short alpha);
 QRgba64* QRgba64_fromRgba(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
 QRgba64* QRgba64_fromArgb32(unsigned int rgb);
 bool QRgba64_isOpaque(const QRgba64* self);

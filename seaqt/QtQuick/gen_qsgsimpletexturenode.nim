@@ -56,11 +56,11 @@ export
 
 type cQSGSimpleTextureNode*{.exportc: "QSGSimpleTextureNode", incompleteStruct.} = object
 
-proc fcQSGSimpleTextureNode_setRect(self: pointer, rect: pointer): void {.importc: "QSGSimpleTextureNode_setRect".}
-proc fcQSGSimpleTextureNode_setRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGSimpleTextureNode_setRect2".}
+proc fcQSGSimpleTextureNode_setRectRect(self: pointer, rect: pointer): void {.importc: "QSGSimpleTextureNode_setRect_rect".}
+proc fcQSGSimpleTextureNode_setRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGSimpleTextureNode_setRect_x_y_w_h".}
 proc fcQSGSimpleTextureNode_rect(self: pointer): pointer {.importc: "QSGSimpleTextureNode_rect".}
-proc fcQSGSimpleTextureNode_setSourceRect(self: pointer, r: pointer): void {.importc: "QSGSimpleTextureNode_setSourceRect".}
-proc fcQSGSimpleTextureNode_setSourceRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGSimpleTextureNode_setSourceRect2".}
+proc fcQSGSimpleTextureNode_setSourceRectR(self: pointer, r: pointer): void {.importc: "QSGSimpleTextureNode_setSourceRect_r".}
+proc fcQSGSimpleTextureNode_setSourceRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGSimpleTextureNode_setSourceRect_x_y_w_h".}
 proc fcQSGSimpleTextureNode_sourceRect(self: pointer): pointer {.importc: "QSGSimpleTextureNode_sourceRect".}
 proc fcQSGSimpleTextureNode_setTexture(self: pointer, texture: pointer): void {.importc: "QSGSimpleTextureNode_setTexture".}
 proc fcQSGSimpleTextureNode_texture(self: pointer): pointer {.importc: "QSGSimpleTextureNode_texture".}
@@ -82,19 +82,19 @@ proc fcQSGSimpleTextureNode_virtualbase_preprocess(self: pointer): void {.import
 proc fcQSGSimpleTextureNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGSimpleTextureNode {.importc: "QSGSimpleTextureNode_new".}
 
 proc setRect*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode, rect: gen_qrect_types.QRectF): void =
-  fcQSGSimpleTextureNode_setRect(self.h, rect.h)
+  fcQSGSimpleTextureNode_setRectRect(self.h, rect.h)
 
 proc setRect*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode, x: float64, y: float64, w: float64, h: float64): void =
-  fcQSGSimpleTextureNode_setRect2(self.h, x, y, w, h)
+  fcQSGSimpleTextureNode_setRectXYWH(self.h, x, y, w, h)
 
 proc rect*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQSGSimpleTextureNode_rect(self.h), owned: true)
 
 proc setSourceRect*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode, r: gen_qrect_types.QRectF): void =
-  fcQSGSimpleTextureNode_setSourceRect(self.h, r.h)
+  fcQSGSimpleTextureNode_setSourceRectR(self.h, r.h)
 
 proc setSourceRect*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode, x: float64, y: float64, w: float64, h: float64): void =
-  fcQSGSimpleTextureNode_setSourceRect2(self.h, x, y, w, h)
+  fcQSGSimpleTextureNode_setSourceRectXYWH(self.h, x, y, w, h)
 
 proc sourceRect*(self: gen_qsgsimpletexturenode_types.QSGSimpleTextureNode): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQSGSimpleTextureNode_sourceRect(self.h), owned: true)

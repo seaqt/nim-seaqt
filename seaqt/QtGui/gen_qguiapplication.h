@@ -75,15 +75,15 @@ typedef struct QGuiApplication_VTable{
 void* QGuiApplication_vdata(VirtualQGuiApplication* self);
 VirtualQGuiApplication* vdata_QGuiApplication(void* vdata);
 
-VirtualQGuiApplication* QGuiApplication_new(const QGuiApplication_VTable* vtbl, size_t vdata, int* argc, char** argv);
-VirtualQGuiApplication* QGuiApplication_new2(const QGuiApplication_VTable* vtbl, size_t vdata, int* argc, char** argv, int param3);
+VirtualQGuiApplication* QGuiApplication_new_int_char(const QGuiApplication_VTable* vtbl, size_t vdata, int* argc, char** argv);
+VirtualQGuiApplication* QGuiApplication_new_int_char_int(const QGuiApplication_VTable* vtbl, size_t vdata, int* argc, char** argv, int param3);
 
 void QGuiApplication_virtbase(QGuiApplication* src, QCoreApplication** outptr_QCoreApplication);
 QMetaObject* QGuiApplication_metaObject(const QGuiApplication* self);
 void* QGuiApplication_metacast(QGuiApplication* self, const char* param1);
 int QGuiApplication_metacall(QGuiApplication* self, int param1, int param2, void** param3);
-struct seaqt_string QGuiApplication_tr(const char* s);
-struct seaqt_string QGuiApplication_trUtf8(const char* s);
+struct seaqt_string QGuiApplication_tr_s(const char* s);
+struct seaqt_string QGuiApplication_trUtf8_s(const char* s);
 void QGuiApplication_setApplicationDisplayName(struct seaqt_string name);
 struct seaqt_string QGuiApplication_applicationDisplayName();
 void QGuiApplication_setDesktopFileName(struct seaqt_string name);
@@ -164,10 +164,10 @@ void QGuiApplication_connect_applicationDisplayNameChanged(QGuiApplication* self
 void QGuiApplication_fontChanged(QGuiApplication* self, QFont* font);
 void QGuiApplication_connect_fontChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t));
 bool QGuiApplication_event(QGuiApplication* self, QEvent* param1);
-struct seaqt_string QGuiApplication_tr2(const char* s, const char* c);
-struct seaqt_string QGuiApplication_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGuiApplication_trUtf82(const char* s, const char* c);
-struct seaqt_string QGuiApplication_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGuiApplication_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGuiApplication_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGuiApplication_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGuiApplication_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGuiApplication_virtualbase_metaObject(const VirtualQGuiApplication* self);
 void* QGuiApplication_virtualbase_metacast(VirtualQGuiApplication* self, const char* param1);

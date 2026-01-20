@@ -79,8 +79,8 @@ type cQPdfBookmarkModel*{.exportc: "QPdfBookmarkModel", incompleteStruct.} = obj
 proc fcQPdfBookmarkModel_metaObject(self: pointer): pointer {.importc: "QPdfBookmarkModel_metaObject".}
 proc fcQPdfBookmarkModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfBookmarkModel_metacast".}
 proc fcQPdfBookmarkModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfBookmarkModel_metacall".}
-proc fcQPdfBookmarkModel_tr(s: cstring): struct_seaqt_string {.importc: "QPdfBookmarkModel_tr".}
-proc fcQPdfBookmarkModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPdfBookmarkModel_trUtf8".}
+proc fcQPdfBookmarkModel_trS(s: cstring): struct_seaqt_string {.importc: "QPdfBookmarkModel_tr_s".}
+proc fcQPdfBookmarkModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPdfBookmarkModel_trUtf8_s".}
 proc fcQPdfBookmarkModel_document(self: pointer): pointer {.importc: "QPdfBookmarkModel_document".}
 proc fcQPdfBookmarkModel_setDocument(self: pointer, document: pointer): void {.importc: "QPdfBookmarkModel_setDocument".}
 proc fcQPdfBookmarkModel_structureMode(self: pointer): cint {.importc: "QPdfBookmarkModel_structureMode".}
@@ -95,10 +95,10 @@ proc fcQPdfBookmarkModel_documentChanged(self: pointer, document: pointer): void
 proc fcQPdfBookmarkModel_connect_documentChanged(self: pointer, slot: int, callback: proc (slot: int, document: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfBookmarkModel_connect_documentChanged".}
 proc fcQPdfBookmarkModel_structureModeChanged(self: pointer, structureMode: cint): void {.importc: "QPdfBookmarkModel_structureModeChanged".}
 proc fcQPdfBookmarkModel_connect_structureModeChanged(self: pointer, slot: int, callback: proc (slot: int, structureMode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfBookmarkModel_connect_structureModeChanged".}
-proc fcQPdfBookmarkModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfBookmarkModel_tr2".}
-proc fcQPdfBookmarkModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfBookmarkModel_tr3".}
-proc fcQPdfBookmarkModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfBookmarkModel_trUtf82".}
-proc fcQPdfBookmarkModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfBookmarkModel_trUtf83".}
+proc fcQPdfBookmarkModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfBookmarkModel_tr_s_c".}
+proc fcQPdfBookmarkModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfBookmarkModel_tr_s_c_n".}
+proc fcQPdfBookmarkModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfBookmarkModel_trUtf8_s_c".}
+proc fcQPdfBookmarkModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfBookmarkModel_trUtf8_s_c_n".}
 proc fcQPdfBookmarkModel_vdata(self: pointer): ptr pointer {.importc: "QPdfBookmarkModel_vdata".}
 proc fvdata_cQPdfBookmarkModel(self: pointer): pointer {.importc: "vdata_QPdfBookmarkModel".}
 
@@ -193,7 +193,7 @@ proc fcQPdfBookmarkModel_virtualbase_customEvent(self: pointer, event: pointer):
 proc fcQPdfBookmarkModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPdfBookmarkModel_virtualbase_connectNotify".}
 proc fcQPdfBookmarkModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPdfBookmarkModel_virtualbase_disconnectNotify".}
 proc fcQPdfBookmarkModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QPdfBookmarkModel_protectedbase_resetInternalData".}
-proc fcQPdfBookmarkModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QPdfBookmarkModel_protectedbase_createIndex".}
+proc fcQPdfBookmarkModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QPdfBookmarkModel_protectedbase_createIndex_row_column".}
 proc fcQPdfBookmarkModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QPdfBookmarkModel_protectedbase_encodeData".}
 proc fcQPdfBookmarkModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QPdfBookmarkModel_protectedbase_decodeData".}
 proc fcQPdfBookmarkModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QPdfBookmarkModel_protectedbase_beginInsertRows".}
@@ -218,7 +218,7 @@ proc fcQPdfBookmarkModel_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQPdfBookmarkModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfBookmarkModel_protectedbase_receivers".}
 proc fcQPdfBookmarkModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfBookmarkModel_protectedbase_isSignalConnected".}
 proc fcQPdfBookmarkModel_new(vtbl: pointer, vdata: csize_t): ptr cQPdfBookmarkModel {.importc: "QPdfBookmarkModel_new".}
-proc fcQPdfBookmarkModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfBookmarkModel {.importc: "QPdfBookmarkModel_new2".}
+proc fcQPdfBookmarkModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfBookmarkModel {.importc: "QPdfBookmarkModel_new_parent".}
 proc fcQPdfBookmarkModel_staticMetaObject(): pointer {.importc: "QPdfBookmarkModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qpdfbookmarkmodel_types.QPdfBookmarkModel): gen_qobjectdefs_types.QMetaObject =
@@ -231,13 +231,13 @@ proc metacall*(self: gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, param1: cint
   fcQPdfBookmarkModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, s: cstring): string =
-  let v_ms = fcQPdfBookmarkModel_tr(s)
+  let v_ms = fcQPdfBookmarkModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, s: cstring): string =
-  let v_ms = fcQPdfBookmarkModel_trUtf8(s)
+  let v_ms = fcQPdfBookmarkModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -328,25 +328,25 @@ proc onStructureModeChanged*(self: gen_qpdfbookmarkmodel_types.QPdfBookmarkModel
   fcQPdfBookmarkModel_connect_structureModeChanged(self.h, cast[int](addr tmp[]), fcQPdfBookmarkModel_slot_callback_structureModeChanged, fcQPdfBookmarkModel_slot_callback_structureModeChanged_release)
 
 proc tr*(_: type gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfBookmarkModel_tr2(s, c)
+  let v_ms = fcQPdfBookmarkModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfBookmarkModel_tr3(s, c, n)
+  let v_ms = fcQPdfBookmarkModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfBookmarkModel_trUtf82(s, c)
+  let v_ms = fcQPdfBookmarkModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfBookmarkModel_trUtf83(s, c, n)
+  let v_ms = fcQPdfBookmarkModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1532,7 +1532,7 @@ proc resetInternalData*(self: gen_qpdfbookmarkmodel_types.QPdfBookmarkModel): vo
   fcQPdfBookmarkModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQPdfBookmarkModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQPdfBookmarkModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qpdfbookmarkmodel_types.QPdfBookmarkModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

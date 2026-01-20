@@ -35,7 +35,7 @@ int QCameraInfoControl_metacall(QCameraInfoControl* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCameraInfoControl_tr(const char* s) {
+struct seaqt_string QCameraInfoControl_tr_s(const char* s) {
 	QString _ret = QCameraInfoControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -46,7 +46,7 @@ struct seaqt_string QCameraInfoControl_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QCameraInfoControl_trUtf8(const char* s) {
+struct seaqt_string QCameraInfoControl_trUtf8_s(const char* s) {
 	QString _ret = QCameraInfoControl::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -68,7 +68,7 @@ int QCameraInfoControl_cameraOrientation(const QCameraInfoControl* self, struct 
 	return self->cameraOrientation(deviceName_QString);
 }
 
-struct seaqt_string QCameraInfoControl_tr2(const char* s, const char* c) {
+struct seaqt_string QCameraInfoControl_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCameraInfoControl::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -79,7 +79,7 @@ struct seaqt_string QCameraInfoControl_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCameraInfoControl_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCameraInfoControl_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraInfoControl::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -90,7 +90,7 @@ struct seaqt_string QCameraInfoControl_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-struct seaqt_string QCameraInfoControl_trUtf82(const char* s, const char* c) {
+struct seaqt_string QCameraInfoControl_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QCameraInfoControl::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -101,7 +101,7 @@ struct seaqt_string QCameraInfoControl_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCameraInfoControl_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QCameraInfoControl_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraInfoControl::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

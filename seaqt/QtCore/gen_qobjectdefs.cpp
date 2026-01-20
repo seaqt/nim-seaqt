@@ -29,15 +29,15 @@ QGenericArgument* QGenericArgument_new() {
 	return new (std::nothrow) QGenericArgument();
 }
 
-QGenericArgument* QGenericArgument_new2(QGenericArgument* param1) {
-	return new (std::nothrow) QGenericArgument(*param1);
+QGenericArgument* QGenericArgument_new_from(QGenericArgument* from) {
+	return new (std::nothrow) QGenericArgument(*from);
 }
 
-QGenericArgument* QGenericArgument_new3(const char* aName) {
+QGenericArgument* QGenericArgument_new_aName(const char* aName) {
 	return new (std::nothrow) QGenericArgument(aName);
 }
 
-QGenericArgument* QGenericArgument_new4(const char* aName, const void* aData) {
+QGenericArgument* QGenericArgument_new_aName_aData(const char* aName, const void* aData) {
 	return new (std::nothrow) QGenericArgument(aName, aData);
 }
 
@@ -57,15 +57,15 @@ QGenericReturnArgument* QGenericReturnArgument_new() {
 	return new (std::nothrow) QGenericReturnArgument();
 }
 
-QGenericReturnArgument* QGenericReturnArgument_new2(QGenericReturnArgument* param1) {
-	return new (std::nothrow) QGenericReturnArgument(*param1);
+QGenericReturnArgument* QGenericReturnArgument_new_from(QGenericReturnArgument* from) {
+	return new (std::nothrow) QGenericReturnArgument(*from);
 }
 
-QGenericReturnArgument* QGenericReturnArgument_new3(const char* aName) {
+QGenericReturnArgument* QGenericReturnArgument_new_aName(const char* aName) {
 	return new (std::nothrow) QGenericReturnArgument(aName);
 }
 
-QGenericReturnArgument* QGenericReturnArgument_new4(const char* aName, void* aData) {
+QGenericReturnArgument* QGenericReturnArgument_new_aName_aData(const char* aName, void* aData) {
 	return new (std::nothrow) QGenericReturnArgument(aName, aData);
 }
 
@@ -81,8 +81,8 @@ QMetaObject* QMetaObject_new() {
 	return new (std::nothrow) QMetaObject();
 }
 
-QMetaObject* QMetaObject_new2(QMetaObject* param1) {
-	return new (std::nothrow) QMetaObject(*param1);
+QMetaObject* QMetaObject_new_from(QMetaObject* from) {
+	return new (std::nothrow) QMetaObject(*from);
 }
 
 const char* QMetaObject_className(const QMetaObject* self) {
@@ -97,15 +97,15 @@ bool QMetaObject_inherits(const QMetaObject* self, QMetaObject* metaObject) {
 	return self->inherits(metaObject);
 }
 
-QObject* QMetaObject_cast(const QMetaObject* self, QObject* obj) {
+QObject* QMetaObject_cast_const_pQObject(const QMetaObject* self, QObject* obj) {
 	return self->cast(obj);
 }
 
-QObject* QMetaObject_castWithObj(const QMetaObject* self, QObject* obj) {
+QObject* QMetaObject_cast_const_pcQObject(const QMetaObject* self, QObject* obj) {
 	return (QObject*) self->cast(obj);
 }
 
-struct seaqt_string QMetaObject_tr(const QMetaObject* self, const char* s, const char* c) {
+struct seaqt_string QMetaObject_tr_s_c(const QMetaObject* self, const char* s, const char* c) {
 	QString _ret = self->tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -204,11 +204,11 @@ QMetaProperty* QMetaObject_userProperty(const QMetaObject* self) {
 	return new QMetaProperty(self->userProperty());
 }
 
-bool QMetaObject_checkConnectArgs(const char* signal, const char* method) {
+bool QMetaObject_checkConnectArgs_char_char(const char* signal, const char* method) {
 	return QMetaObject::checkConnectArgs(signal, method);
 }
 
-bool QMetaObject_checkConnectArgs2(QMetaMethod* signal, QMetaMethod* method) {
+bool QMetaObject_checkConnectArgs_QMetaMethod_QMetaMethod(QMetaMethod* signal, QMetaMethod* method) {
 	return QMetaObject::checkConnectArgs(*signal, *method);
 }
 
@@ -230,7 +230,7 @@ struct seaqt_string QMetaObject_normalizedType(const char* type) {
 	return _ms;
 }
 
-QMetaObject__Connection* QMetaObject_connect(QObject* sender, int signal_index, QObject* receiver, int method_index) {
+QMetaObject__Connection* QMetaObject_connect_sender_signal_index_receiver_method_index(QObject* sender, int signal_index, QObject* receiver, int method_index) {
 	return new QMetaObject::Connection(QMetaObject::connect(sender, static_cast<int>(signal_index), receiver, static_cast<int>(method_index)));
 }
 
@@ -246,31 +246,31 @@ void QMetaObject_connectSlotsByName(QObject* o) {
 	QMetaObject::connectSlotsByName(o);
 }
 
-void QMetaObject_activate(QObject* sender, int signal_index, void** argv) {
+void QMetaObject_activate_QObject_int_void(QObject* sender, int signal_index, void** argv) {
 	QMetaObject::activate(sender, static_cast<int>(signal_index), argv);
 }
 
-void QMetaObject_activate2(QObject* sender, QMetaObject* param2, int local_signal_index, void** argv) {
+void QMetaObject_activate_QObject_QMetaObject_int_void(QObject* sender, QMetaObject* param2, int local_signal_index, void** argv) {
 	QMetaObject::activate(sender, param2, static_cast<int>(local_signal_index), argv);
 }
 
-void QMetaObject_activate3(QObject* sender, int signal_offset, int local_signal_index, void** argv) {
+void QMetaObject_activate_QObject_int_int_void(QObject* sender, int signal_offset, int local_signal_index, void** argv) {
 	QMetaObject::activate(sender, static_cast<int>(signal_offset), static_cast<int>(local_signal_index), argv);
 }
 
-bool QMetaObject_invokeMethod(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret);
 }
 
-bool QMetaObject_invokeMethod2(QObject* obj, const char* member, QGenericReturnArgument* ret) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument(QObject* obj, const char* member, QGenericReturnArgument* ret) {
 	return QMetaObject::invokeMethod(obj, member, *ret);
 }
 
-bool QMetaObject_invokeMethod3(QObject* obj, const char* member, int type) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType(QObject* obj, const char* member, int type) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type));
 }
 
-bool QMetaObject_invokeMethod4(QObject* obj, const char* member) {
+bool QMetaObject_invokeMethod_QObject_char(QObject* obj, const char* member) {
 	return QMetaObject::invokeMethod(obj, member);
 }
 
@@ -278,7 +278,7 @@ QObject* QMetaObject_newInstance(const QMetaObject* self) {
 	return self->newInstance();
 }
 
-int QMetaObject_staticMetacall(const QMetaObject* self, int param1, int param2, void** param3) {
+int QMetaObject_static_metacall(const QMetaObject* self, int param1, int param2, void** param3) {
 	return self->static_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
@@ -286,11 +286,11 @@ int QMetaObject_metacall(QObject* param1, int param2, int param3, void** param4)
 	return QMetaObject::metacall(param1, static_cast<QMetaObject::Call>(param2), static_cast<int>(param3), param4);
 }
 
-void QMetaObject_operatorAssign(QMetaObject* self, QMetaObject* param1) {
-	self->operator=(*param1);
+void QMetaObject_operatorAssign(QMetaObject* self, QMetaObject* from) {
+	self->operator=(*from);
 }
 
-struct seaqt_string QMetaObject_tr2(const QMetaObject* self, const char* s, const char* c, int n) {
+struct seaqt_string QMetaObject_tr_s_c_n(const QMetaObject* self, const char* s, const char* c, int n) {
 	QString _ret = self->tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -301,211 +301,211 @@ struct seaqt_string QMetaObject_tr2(const QMetaObject* self, const char* s, cons
 	return _ms;
 }
 
-QMetaObject__Connection* QMetaObject_connect2(QObject* sender, int signal_index, QObject* receiver, int method_index, int type) {
+QMetaObject__Connection* QMetaObject_connect_sender_signal_index_receiver_method_index_type(QObject* sender, int signal_index, QObject* receiver, int method_index, int type) {
 	return new QMetaObject::Connection(QMetaObject::connect(sender, static_cast<int>(signal_index), receiver, static_cast<int>(method_index), static_cast<int>(type)));
 }
 
-QMetaObject__Connection* QMetaObject_connect3(QObject* sender, int signal_index, QObject* receiver, int method_index, int type, int* types) {
+QMetaObject__Connection* QMetaObject_connect_sender_signal_index_receiver_method_index_type_types(QObject* sender, int signal_index, QObject* receiver, int method_index, int type, int* types) {
 	return new QMetaObject::Connection(QMetaObject::connect(sender, static_cast<int>(signal_index), receiver, static_cast<int>(method_index), static_cast<int>(type), static_cast<int*>(types)));
 }
 
-bool QMetaObject_invokeMethod5(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0);
 }
 
-bool QMetaObject_invokeMethod6(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1);
 }
 
-bool QMetaObject_invokeMethod7(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1, *val2);
 }
 
-bool QMetaObject_invokeMethod8(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1, *val2, *val3);
 }
 
-bool QMetaObject_invokeMethod9(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1, *val2, *val3, *val4);
 }
 
-bool QMetaObject_invokeMethod10(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1, *val2, *val3, *val4, *val5);
 }
 
-bool QMetaObject_invokeMethod11(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1, *val2, *val3, *val4, *val5, *val6);
 }
 
-bool QMetaObject_invokeMethod12(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7);
 }
 
-bool QMetaObject_invokeMethod13(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8);
 }
 
-bool QMetaObject_invokeMethod14(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8, *val9);
 }
 
-bool QMetaObject_invokeMethod15(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0);
 }
 
-bool QMetaObject_invokeMethod16(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1);
 }
 
-bool QMetaObject_invokeMethod17(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1, *val2);
 }
 
-bool QMetaObject_invokeMethod18(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1, *val2, *val3);
 }
 
-bool QMetaObject_invokeMethod19(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1, *val2, *val3, *val4);
 }
 
-bool QMetaObject_invokeMethod20(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1, *val2, *val3, *val4, *val5);
 }
 
-bool QMetaObject_invokeMethod21(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1, *val2, *val3, *val4, *val5, *val6);
 }
 
-bool QMetaObject_invokeMethod22(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7);
 }
 
-bool QMetaObject_invokeMethod23(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8);
 }
 
-bool QMetaObject_invokeMethod24(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericReturnArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericReturnArgument* ret, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
 	return QMetaObject::invokeMethod(obj, member, *ret, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8, *val9);
 }
 
-bool QMetaObject_invokeMethod25(QObject* obj, const char* member, int type, QGenericArgument* val0) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0);
 }
 
-bool QMetaObject_invokeMethod26(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1);
 }
 
-bool QMetaObject_invokeMethod27(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1, *val2);
 }
 
-bool QMetaObject_invokeMethod28(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1, *val2, *val3);
 }
 
-bool QMetaObject_invokeMethod29(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1, *val2, *val3, *val4);
 }
 
-bool QMetaObject_invokeMethod30(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1, *val2, *val3, *val4, *val5);
 }
 
-bool QMetaObject_invokeMethod31(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1, *val2, *val3, *val4, *val5, *val6);
 }
 
-bool QMetaObject_invokeMethod32(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7);
 }
 
-bool QMetaObject_invokeMethod33(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8);
 }
 
-bool QMetaObject_invokeMethod34(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
+bool QMetaObject_invokeMethod_QObject_char_Qt_ConnectionType_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, int type, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(type), *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8, *val9);
 }
 
-bool QMetaObject_invokeMethod35(QObject* obj, const char* member, QGenericArgument* val0) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0) {
 	return QMetaObject::invokeMethod(obj, member, *val0);
 }
 
-bool QMetaObject_invokeMethod36(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1);
 }
 
-bool QMetaObject_invokeMethod37(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1, *val2);
 }
 
-bool QMetaObject_invokeMethod38(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1, *val2, *val3);
 }
 
-bool QMetaObject_invokeMethod39(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1, *val2, *val3, *val4);
 }
 
-bool QMetaObject_invokeMethod40(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1, *val2, *val3, *val4, *val5);
 }
 
-bool QMetaObject_invokeMethod41(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1, *val2, *val3, *val4, *val5, *val6);
 }
 
-bool QMetaObject_invokeMethod42(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7);
 }
 
-bool QMetaObject_invokeMethod43(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8);
 }
 
-bool QMetaObject_invokeMethod44(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
+bool QMetaObject_invokeMethod_QObject_char_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument_QGenericArgument(QObject* obj, const char* member, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
 	return QMetaObject::invokeMethod(obj, member, *val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8, *val9);
 }
 
-QObject* QMetaObject_newInstanceWithVal0(const QMetaObject* self, QGenericArgument* val0) {
+QObject* QMetaObject_newInstance_val0(const QMetaObject* self, QGenericArgument* val0) {
 	return self->newInstance(*val0);
 }
 
-QObject* QMetaObject_newInstance2(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1) {
+QObject* QMetaObject_newInstance_val0_val1(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1) {
 	return self->newInstance(*val0, *val1);
 }
 
-QObject* QMetaObject_newInstance3(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
+QObject* QMetaObject_newInstance_val0_val1_val2(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2) {
 	return self->newInstance(*val0, *val1, *val2);
 }
 
-QObject* QMetaObject_newInstance4(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
+QObject* QMetaObject_newInstance_val0_val1_val2_val3(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3) {
 	return self->newInstance(*val0, *val1, *val2, *val3);
 }
 
-QObject* QMetaObject_newInstance5(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
+QObject* QMetaObject_newInstance_val0_val1_val2_val3_val4(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4) {
 	return self->newInstance(*val0, *val1, *val2, *val3, *val4);
 }
 
-QObject* QMetaObject_newInstance6(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
+QObject* QMetaObject_newInstance_val0_val1_val2_val3_val4_val5(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5) {
 	return self->newInstance(*val0, *val1, *val2, *val3, *val4, *val5);
 }
 
-QObject* QMetaObject_newInstance7(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
+QObject* QMetaObject_newInstance_val0_val1_val2_val3_val4_val5_val6(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6) {
 	return self->newInstance(*val0, *val1, *val2, *val3, *val4, *val5, *val6);
 }
 
-QObject* QMetaObject_newInstance8(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
+QObject* QMetaObject_newInstance_val0_val1_val2_val3_val4_val5_val6_val7(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7) {
 	return self->newInstance(*val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7);
 }
 
-QObject* QMetaObject_newInstance9(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
+QObject* QMetaObject_newInstance_val0_val1_val2_val3_val4_val5_val6_val7_val8(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8) {
 	return self->newInstance(*val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8);
 }
 
-QObject* QMetaObject_newInstance10(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
+QObject* QMetaObject_newInstance_val0_val1_val2_val3_val4_val5_val6_val7_val8_val9(const QMetaObject* self, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9) {
 	return self->newInstance(*val0, *val1, *val2, *val3, *val4, *val5, *val6, *val7, *val8, *val9);
 }
 
@@ -517,12 +517,12 @@ QMetaObject__Connection* QMetaObject__Connection_new() {
 	return new (std::nothrow) QMetaObject__Connection();
 }
 
-QMetaObject__Connection* QMetaObject__Connection_new2(QMetaObject__Connection* other) {
-	return new (std::nothrow) QMetaObject__Connection(*other);
+QMetaObject__Connection* QMetaObject__Connection_new_from(QMetaObject__Connection* from) {
+	return new (std::nothrow) QMetaObject__Connection(*from);
 }
 
-void QMetaObject__Connection_operatorAssign(QMetaObject__Connection* self, QMetaObject__Connection* other) {
-	self->operator=(*other);
+void QMetaObject__Connection_operatorAssign(QMetaObject__Connection* self, QMetaObject__Connection* from) {
+	self->operator=(*from);
 }
 
 void QMetaObject__Connection_delete(QMetaObject__Connection* self) {
@@ -533,12 +533,12 @@ QMetaObject__SuperData* QMetaObject__SuperData_new() {
 	return new (std::nothrow) QMetaObject__SuperData();
 }
 
-QMetaObject__SuperData* QMetaObject__SuperData_new2(QMetaObject* mo) {
+QMetaObject__SuperData* QMetaObject__SuperData_new_QMetaObject(QMetaObject* mo) {
 	return new (std::nothrow) QMetaObject__SuperData(mo);
 }
 
-QMetaObject__SuperData* QMetaObject__SuperData_new3(QMetaObject__SuperData* param1) {
-	return new (std::nothrow) QMetaObject__SuperData(*param1);
+QMetaObject__SuperData* QMetaObject__SuperData_new_QMetaObject_SuperData(QMetaObject__SuperData* from) {
+	return new (std::nothrow) QMetaObject__SuperData(*from);
 }
 
 QMetaObject* QMetaObject__SuperData_direct(const QMetaObject__SuperData* self) {
@@ -557,8 +557,8 @@ QMetaObject* QMetaObject__SuperData_ToConstQMetaObjectMultiply(const QMetaObject
 	return (QMetaObject*) self->operator const QMetaObject *();
 }
 
-void QMetaObject__SuperData_operatorAssign(QMetaObject__SuperData* self, QMetaObject__SuperData* param1) {
-	self->operator=(*param1);
+void QMetaObject__SuperData_operatorAssign(QMetaObject__SuperData* self, QMetaObject__SuperData* from) {
+	self->operator=(*from);
 }
 
 void QMetaObject__SuperData_delete(QMetaObject__SuperData* self) {

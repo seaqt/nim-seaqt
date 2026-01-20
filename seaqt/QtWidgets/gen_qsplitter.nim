@@ -76,8 +76,8 @@ type cQSplitterHandle*{.exportc: "QSplitterHandle", incompleteStruct.} = object
 proc fcQSplitter_metaObject(self: pointer): pointer {.importc: "QSplitter_metaObject".}
 proc fcQSplitter_metacast(self: pointer, param1: cstring): pointer {.importc: "QSplitter_metacast".}
 proc fcQSplitter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSplitter_metacall".}
-proc fcQSplitter_tr(s: cstring): struct_seaqt_string {.importc: "QSplitter_tr".}
-proc fcQSplitter_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSplitter_trUtf8".}
+proc fcQSplitter_trS(s: cstring): struct_seaqt_string {.importc: "QSplitter_tr_s".}
+proc fcQSplitter_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSplitter_trUtf8_s".}
 proc fcQSplitter_addWidget(self: pointer, widget: pointer): void {.importc: "QSplitter_addWidget".}
 proc fcQSplitter_insertWidget(self: pointer, index: cint, widget: pointer): void {.importc: "QSplitter_insertWidget".}
 proc fcQSplitter_replaceWidget(self: pointer, index: cint, widget: pointer): pointer {.importc: "QSplitter_replaceWidget".}
@@ -106,11 +106,11 @@ proc fcQSplitter_handle(self: pointer, index: cint): pointer {.importc: "QSplitt
 proc fcQSplitter_setStretchFactor(self: pointer, index: cint, stretch: cint): void {.importc: "QSplitter_setStretchFactor".}
 proc fcQSplitter_splitterMoved(self: pointer, pos: cint, index: cint): void {.importc: "QSplitter_splitterMoved".}
 proc fcQSplitter_connect_splitterMoved(self: pointer, slot: int, callback: proc (slot: int, pos: cint, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSplitter_connect_splitterMoved".}
-proc fcQSplitter_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplitter_tr2".}
-proc fcQSplitter_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplitter_tr3".}
-proc fcQSplitter_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplitter_trUtf82".}
-proc fcQSplitter_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplitter_trUtf83".}
-proc fcQSplitter_setOpaqueResizeWithOpaque(self: pointer, opaque: bool): void {.importc: "QSplitter_setOpaqueResizeWithOpaque".}
+proc fcQSplitter_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplitter_tr_s_c".}
+proc fcQSplitter_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplitter_tr_s_c_n".}
+proc fcQSplitter_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplitter_trUtf8_s_c".}
+proc fcQSplitter_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplitter_trUtf8_s_c_n".}
+proc fcQSplitter_setOpaqueResizeOpaque(self: pointer, opaque: bool): void {.importc: "QSplitter_setOpaqueResize_opaque".}
 proc fcQSplitter_vdata(self: pointer): ptr pointer {.importc: "QSplitter_vdata".}
 proc fvdata_cQSplitter(self: pointer): pointer {.importc: "vdata_QSplitter".}
 
@@ -232,25 +232,25 @@ proc fcQSplitter_protectedbase_sender(self: pointer): pointer {.importc: "QSplit
 proc fcQSplitter_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSplitter_protectedbase_senderSignalIndex".}
 proc fcQSplitter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSplitter_protectedbase_receivers".}
 proc fcQSplitter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSplitter_protectedbase_isSignalConnected".}
-proc fcQSplitter_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSplitter {.importc: "QSplitter_new".}
-proc fcQSplitter_new2(vtbl: pointer, vdata: csize_t): ptr cQSplitter {.importc: "QSplitter_new2".}
-proc fcQSplitter_new3(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQSplitter {.importc: "QSplitter_new3".}
-proc fcQSplitter_new4(vtbl: pointer, vdata: csize_t, param1: cint, parent: pointer): ptr cQSplitter {.importc: "QSplitter_new4".}
+proc fcQSplitter_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSplitter {.importc: "QSplitter_new_QWidget".}
+proc fcQSplitter_new2(vtbl: pointer, vdata: csize_t): ptr cQSplitter {.importc: "QSplitter_new".}
+proc fcQSplitter_new3(vtbl: pointer, vdata: csize_t, param1: cint): ptr cQSplitter {.importc: "QSplitter_new_Qt_Orientation".}
+proc fcQSplitter_new4(vtbl: pointer, vdata: csize_t, param1: cint, parent: pointer): ptr cQSplitter {.importc: "QSplitter_new_Qt_Orientation_QWidget".}
 proc fcQSplitter_staticMetaObject(): pointer {.importc: "QSplitter_staticMetaObject".}
 proc fcQSplitterHandle_metaObject(self: pointer): pointer {.importc: "QSplitterHandle_metaObject".}
 proc fcQSplitterHandle_metacast(self: pointer, param1: cstring): pointer {.importc: "QSplitterHandle_metacast".}
 proc fcQSplitterHandle_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSplitterHandle_metacall".}
-proc fcQSplitterHandle_tr(s: cstring): struct_seaqt_string {.importc: "QSplitterHandle_tr".}
-proc fcQSplitterHandle_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSplitterHandle_trUtf8".}
+proc fcQSplitterHandle_trS(s: cstring): struct_seaqt_string {.importc: "QSplitterHandle_tr_s".}
+proc fcQSplitterHandle_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSplitterHandle_trUtf8_s".}
 proc fcQSplitterHandle_setOrientation(self: pointer, o: cint): void {.importc: "QSplitterHandle_setOrientation".}
 proc fcQSplitterHandle_orientation(self: pointer): cint {.importc: "QSplitterHandle_orientation".}
 proc fcQSplitterHandle_opaqueResize(self: pointer): bool {.importc: "QSplitterHandle_opaqueResize".}
 proc fcQSplitterHandle_splitter(self: pointer): pointer {.importc: "QSplitterHandle_splitter".}
 proc fcQSplitterHandle_sizeHint(self: pointer): pointer {.importc: "QSplitterHandle_sizeHint".}
-proc fcQSplitterHandle_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplitterHandle_tr2".}
-proc fcQSplitterHandle_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplitterHandle_tr3".}
-proc fcQSplitterHandle_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplitterHandle_trUtf82".}
-proc fcQSplitterHandle_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplitterHandle_trUtf83".}
+proc fcQSplitterHandle_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplitterHandle_tr_s_c".}
+proc fcQSplitterHandle_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplitterHandle_tr_s_c_n".}
+proc fcQSplitterHandle_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplitterHandle_trUtf8_s_c".}
+proc fcQSplitterHandle_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplitterHandle_trUtf8_s_c_n".}
 proc fcQSplitterHandle_vdata(self: pointer): ptr pointer {.importc: "QSplitterHandle_vdata".}
 proc fvdata_cQSplitterHandle(self: pointer): pointer {.importc: "vdata_QSplitterHandle".}
 
@@ -380,13 +380,13 @@ proc metacall*(self: gen_qsplitter_types.QSplitter, param1: cint, param2: cint, 
   fcQSplitter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsplitter_types.QSplitter, s: cstring): string =
-  let v_ms = fcQSplitter_tr(s)
+  let v_ms = fcQSplitter_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplitter_types.QSplitter, s: cstring): string =
-  let v_ms = fcQSplitter_trUtf8(s)
+  let v_ms = fcQSplitter_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -505,31 +505,31 @@ proc onSplitterMoved*(self: gen_qsplitter_types.QSplitter, slot: QSplittersplitt
   fcQSplitter_connect_splitterMoved(self.h, cast[int](addr tmp[]), fcQSplitter_slot_callback_splitterMoved, fcQSplitter_slot_callback_splitterMoved_release)
 
 proc tr*(_: type gen_qsplitter_types.QSplitter, s: cstring, c: cstring): string =
-  let v_ms = fcQSplitter_tr2(s, c)
+  let v_ms = fcQSplitter_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsplitter_types.QSplitter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSplitter_tr3(s, c, n)
+  let v_ms = fcQSplitter_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplitter_types.QSplitter, s: cstring, c: cstring): string =
-  let v_ms = fcQSplitter_trUtf82(s, c)
+  let v_ms = fcQSplitter_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplitter_types.QSplitter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSplitter_trUtf83(s, c, n)
+  let v_ms = fcQSplitter_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setOpaqueResize*(self: gen_qsplitter_types.QSplitter, opaque: bool): void =
-  fcQSplitter_setOpaqueResizeWithOpaque(self.h, opaque)
+  fcQSplitter_setOpaqueResizeOpaque(self.h, opaque)
 
 type QSplittermetaObjectProc* = proc(self: QSplitter): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSplittermetacastProc* = proc(self: QSplitter, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -2137,13 +2137,13 @@ proc metacall*(self: gen_qsplitter_types.QSplitterHandle, param1: cint, param2: 
   fcQSplitterHandle_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsplitter_types.QSplitterHandle, s: cstring): string =
-  let v_ms = fcQSplitterHandle_tr(s)
+  let v_ms = fcQSplitterHandle_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplitter_types.QSplitterHandle, s: cstring): string =
-  let v_ms = fcQSplitterHandle_trUtf8(s)
+  let v_ms = fcQSplitterHandle_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2164,25 +2164,25 @@ proc sizeHint*(self: gen_qsplitter_types.QSplitterHandle): gen_qsize_types.QSize
   gen_qsize_types.QSize(h: fcQSplitterHandle_sizeHint(self.h), owned: true)
 
 proc tr*(_: type gen_qsplitter_types.QSplitterHandle, s: cstring, c: cstring): string =
-  let v_ms = fcQSplitterHandle_tr2(s, c)
+  let v_ms = fcQSplitterHandle_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsplitter_types.QSplitterHandle, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSplitterHandle_tr3(s, c, n)
+  let v_ms = fcQSplitterHandle_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplitter_types.QSplitterHandle, s: cstring, c: cstring): string =
-  let v_ms = fcQSplitterHandle_trUtf82(s, c)
+  let v_ms = fcQSplitterHandle_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplitter_types.QSplitterHandle, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSplitterHandle_trUtf83(s, c, n)
+  let v_ms = fcQSplitterHandle_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

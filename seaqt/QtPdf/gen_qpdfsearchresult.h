@@ -27,13 +27,13 @@ typedef struct QRectF QRectF;
 #endif
 
 QPdfSearchResult* QPdfSearchResult_new();
-QPdfSearchResult* QPdfSearchResult_new2(QPdfSearchResult* param1);
+QPdfSearchResult* QPdfSearchResult_new_from(QPdfSearchResult* from);
 
 void QPdfSearchResult_virtbase(QPdfSearchResult* src, QPdfDestination** outptr_QPdfDestination);
 struct seaqt_string QPdfSearchResult_contextBefore(const QPdfSearchResult* self);
 struct seaqt_string QPdfSearchResult_contextAfter(const QPdfSearchResult* self);
 struct seaqt_array /* of QRectF* */  QPdfSearchResult_rectangles(const QPdfSearchResult* self);
-void QPdfSearchResult_operatorAssign(QPdfSearchResult* self, QPdfSearchResult* param1);
+void QPdfSearchResult_operatorAssign(QPdfSearchResult* self, QPdfSearchResult* from);
 
 const QMetaObject* QPdfSearchResult_staticMetaObject();
 void QPdfSearchResult_delete(QPdfSearchResult* self);

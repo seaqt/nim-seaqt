@@ -689,10 +689,10 @@ public:
 	friend void QAbstractSlider_virtualbase_disconnectNotify(VirtualQAbstractSlider* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractSlider_protectedbase_setRepeatAction(VirtualQAbstractSlider* self, int action);
+	friend void QAbstractSlider_protectedbase_setRepeatAction_action(VirtualQAbstractSlider* self, int action);
 	friend int QAbstractSlider_protectedbase_repeatAction(const VirtualQAbstractSlider* self);
-	friend void QAbstractSlider_protectedbase_setRepeatAction2(VirtualQAbstractSlider* self, int action, int thresholdTime);
-	friend void QAbstractSlider_protectedbase_setRepeatAction3(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime);
+	friend void QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime(VirtualQAbstractSlider* self, int action, int thresholdTime);
+	friend void QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime_repeatTime(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime);
 	friend void QAbstractSlider_protectedbase_updateMicroFocus(VirtualQAbstractSlider* self);
 	friend void QAbstractSlider_protectedbase_create(VirtualQAbstractSlider* self);
 	friend void QAbstractSlider_protectedbase_destroy(VirtualQAbstractSlider* self);
@@ -704,12 +704,12 @@ public:
 	friend bool QAbstractSlider_protectedbase_isSignalConnected(const VirtualQAbstractSlider* self, QMetaMethod* signal);
 };
 
-VirtualQAbstractSlider* QAbstractSlider_new(const QAbstractSlider_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQAbstractSlider* QAbstractSlider_new_parent(const QAbstractSlider_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractSlider>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractSlider(vtbl, parent) : nullptr;
 }
 
-VirtualQAbstractSlider* QAbstractSlider_new2(const QAbstractSlider_VTable* vtbl, size_t vdata) {
+VirtualQAbstractSlider* QAbstractSlider_new(const QAbstractSlider_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractSlider>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractSlider(vtbl) : nullptr;
 }
@@ -730,7 +730,7 @@ int QAbstractSlider_metacall(QAbstractSlider* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractSlider_tr(const char* s) {
+struct seaqt_string QAbstractSlider_tr_s(const char* s) {
 	QString _ret = QAbstractSlider::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -741,7 +741,7 @@ struct seaqt_string QAbstractSlider_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractSlider_trUtf8(const char* s) {
+struct seaqt_string QAbstractSlider_trUtf8_s(const char* s) {
 	QString _ret = QAbstractSlider::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -944,7 +944,7 @@ void QAbstractSlider_connect_actionTriggered(QAbstractSlider* self, intptr_t slo
 	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int)>(&QAbstractSlider::actionTriggered), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAbstractSlider_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractSlider_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractSlider::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -955,7 +955,7 @@ struct seaqt_string QAbstractSlider_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractSlider_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractSlider_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractSlider::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -966,7 +966,7 @@ struct seaqt_string QAbstractSlider_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractSlider_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAbstractSlider_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractSlider::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -977,7 +977,7 @@ struct seaqt_string QAbstractSlider_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractSlider_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractSlider_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractSlider::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1248,7 +1248,7 @@ void QAbstractSlider_virtualbase_disconnectNotify(VirtualQAbstractSlider* self, 
 	self->QAbstractSlider::disconnectNotify(*signal);
 }
 
-void QAbstractSlider_protectedbase_setRepeatAction(VirtualQAbstractSlider* self, int action) {
+void QAbstractSlider_protectedbase_setRepeatAction_action(VirtualQAbstractSlider* self, int action) {
 	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action));
 }
 
@@ -1257,11 +1257,11 @@ int QAbstractSlider_protectedbase_repeatAction(const VirtualQAbstractSlider* sel
 	return static_cast<int>(_ret);
 }
 
-void QAbstractSlider_protectedbase_setRepeatAction2(VirtualQAbstractSlider* self, int action, int thresholdTime) {
+void QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime(VirtualQAbstractSlider* self, int action, int thresholdTime) {
 	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime));
 }
 
-void QAbstractSlider_protectedbase_setRepeatAction3(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime) {
+void QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime_repeatTime(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime) {
 	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime), static_cast<int>(repeatTime));
 }
 

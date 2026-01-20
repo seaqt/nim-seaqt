@@ -87,8 +87,8 @@ type cQTableView*{.exportc: "QTableView", incompleteStruct.} = object
 proc fcQTableView_metaObject(self: pointer): pointer {.importc: "QTableView_metaObject".}
 proc fcQTableView_metacast(self: pointer, param1: cstring): pointer {.importc: "QTableView_metacast".}
 proc fcQTableView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTableView_metacall".}
-proc fcQTableView_tr(s: cstring): struct_seaqt_string {.importc: "QTableView_tr".}
-proc fcQTableView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTableView_trUtf8".}
+proc fcQTableView_trS(s: cstring): struct_seaqt_string {.importc: "QTableView_tr_s".}
+proc fcQTableView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTableView_trUtf8_s".}
 proc fcQTableView_setModel(self: pointer, model: pointer): void {.importc: "QTableView_setModel".}
 proc fcQTableView_setRootIndex(self: pointer, index: pointer): void {.importc: "QTableView_setRootIndex".}
 proc fcQTableView_setSelectionModel(self: pointer, selectionModel: pointer): void {.importc: "QTableView_setSelectionModel".}
@@ -135,13 +135,13 @@ proc fcQTableView_resizeRowToContents(self: pointer, row: cint): void {.importc:
 proc fcQTableView_resizeRowsToContents(self: pointer): void {.importc: "QTableView_resizeRowsToContents".}
 proc fcQTableView_resizeColumnToContents(self: pointer, column: cint): void {.importc: "QTableView_resizeColumnToContents".}
 proc fcQTableView_resizeColumnsToContents(self: pointer): void {.importc: "QTableView_resizeColumnsToContents".}
-proc fcQTableView_sortByColumn(self: pointer, column: cint): void {.importc: "QTableView_sortByColumn".}
-proc fcQTableView_sortByColumn2(self: pointer, column: cint, order: cint): void {.importc: "QTableView_sortByColumn2".}
+proc fcQTableView_sortByColumnColumn(self: pointer, column: cint): void {.importc: "QTableView_sortByColumn_column".}
+proc fcQTableView_sortByColumnColumnOrder(self: pointer, column: cint, order: cint): void {.importc: "QTableView_sortByColumn_column_order".}
 proc fcQTableView_setShowGrid(self: pointer, show: bool): void {.importc: "QTableView_setShowGrid".}
-proc fcQTableView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTableView_tr2".}
-proc fcQTableView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTableView_tr3".}
-proc fcQTableView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTableView_trUtf82".}
-proc fcQTableView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTableView_trUtf83".}
+proc fcQTableView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTableView_tr_s_c".}
+proc fcQTableView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTableView_tr_s_c_n".}
+proc fcQTableView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTableView_trUtf8_s_c".}
+proc fcQTableView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTableView_trUtf8_s_c_n".}
 proc fcQTableView_vdata(self: pointer): ptr pointer {.importc: "QTableView_vdata".}
 proc fvdata_cQTableView(self: pointer): pointer {.importc: "vdata_QTableView".}
 
@@ -190,7 +190,7 @@ type cQTableViewVTable {.pure.} = object
   closeEditor*: proc(self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   startDrag*: proc(self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
   focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
@@ -282,7 +282,7 @@ proc fcQTableView_virtualbase_horizontalScrollbarValueChanged(self: pointer, val
 proc fcQTableView_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void {.importc: "QTableView_virtualbase_closeEditor".}
 proc fcQTableView_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QTableView_virtualbase_commitData".}
 proc fcQTableView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QTableView_virtualbase_editorDestroyed".}
-proc fcQTableView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTableView_virtualbase_edit2".}
+proc fcQTableView_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTableView_virtualbase_edit_index_trigger_event".}
 proc fcQTableView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QTableView_virtualbase_selectionCommand".}
 proc fcQTableView_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QTableView_virtualbase_startDrag".}
 proc fcQTableView_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QTableView_virtualbase_focusNextPrevChild".}
@@ -352,7 +352,7 @@ proc fcQTableView_protectedbase_startAutoScroll(self: pointer): void {.importc: 
 proc fcQTableView_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QTableView_protectedbase_stopAutoScroll".}
 proc fcQTableView_protectedbase_doAutoScroll(self: pointer): void {.importc: "QTableView_protectedbase_doAutoScroll".}
 proc fcQTableView_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QTableView_protectedbase_dropIndicatorPosition".}
-proc fcQTableView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTableView_protectedbase_setViewportMargins".}
+proc fcQTableView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTableView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQTableView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QTableView_protectedbase_viewportMargins".}
 proc fcQTableView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTableView_protectedbase_drawFrame".}
 proc fcQTableView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QTableView_protectedbase_initStyleOption".}
@@ -365,8 +365,8 @@ proc fcQTableView_protectedbase_sender(self: pointer): pointer {.importc: "QTabl
 proc fcQTableView_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QTableView_protectedbase_senderSignalIndex".}
 proc fcQTableView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTableView_protectedbase_receivers".}
 proc fcQTableView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTableView_protectedbase_isSignalConnected".}
-proc fcQTableView_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTableView {.importc: "QTableView_new".}
-proc fcQTableView_new2(vtbl: pointer, vdata: csize_t): ptr cQTableView {.importc: "QTableView_new2".}
+proc fcQTableView_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTableView {.importc: "QTableView_new_parent".}
+proc fcQTableView_new2(vtbl: pointer, vdata: csize_t): ptr cQTableView {.importc: "QTableView_new".}
 proc fcQTableView_staticMetaObject(): pointer {.importc: "QTableView_staticMetaObject".}
 
 proc metaObject*(self: gen_qtableview_types.QTableView): gen_qobjectdefs_types.QMetaObject =
@@ -379,13 +379,13 @@ proc metacall*(self: gen_qtableview_types.QTableView, param1: cint, param2: cint
   fcQTableView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtableview_types.QTableView, s: cstring): string =
-  let v_ms = fcQTableView_tr(s)
+  let v_ms = fcQTableView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtableview_types.QTableView, s: cstring): string =
-  let v_ms = fcQTableView_trUtf8(s)
+  let v_ms = fcQTableView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -529,34 +529,34 @@ proc resizeColumnsToContents*(self: gen_qtableview_types.QTableView): void =
   fcQTableView_resizeColumnsToContents(self.h)
 
 proc sortByColumn*(self: gen_qtableview_types.QTableView, column: cint): void =
-  fcQTableView_sortByColumn(self.h, column)
+  fcQTableView_sortByColumnColumn(self.h, column)
 
 proc sortByColumn*(self: gen_qtableview_types.QTableView, column: cint, order: cint): void =
-  fcQTableView_sortByColumn2(self.h, column, cint(order))
+  fcQTableView_sortByColumnColumnOrder(self.h, column, cint(order))
 
 proc setShowGrid*(self: gen_qtableview_types.QTableView, show: bool): void =
   fcQTableView_setShowGrid(self.h, show)
 
 proc tr*(_: type gen_qtableview_types.QTableView, s: cstring, c: cstring): string =
-  let v_ms = fcQTableView_tr2(s, c)
+  let v_ms = fcQTableView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtableview_types.QTableView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTableView_tr3(s, c, n)
+  let v_ms = fcQTableView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtableview_types.QTableView, s: cstring, c: cstring): string =
-  let v_ms = fcQTableView_trUtf82(s, c)
+  let v_ms = fcQTableView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtableview_types.QTableView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTableView_trUtf83(s, c, n)
+  let v_ms = fcQTableView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -604,7 +604,7 @@ type QTableViewhorizontalScrollbarValueChangedProc* = proc(self: QTableView, val
 type QTableViewcloseEditorProc* = proc(self: QTableView, editor: gen_qwidget_types.QWidget, hint: cint): void {.raises: [], gcsafe.}
 type QTableViewcommitDataProc* = proc(self: QTableView, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QTableVieweditorDestroyedProc* = proc(self: QTableView, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
-type QTableViewedit2Proc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTableVieweditIndexTriggerEventProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QTableViewselectionCommandProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QTableViewstartDragProc* = proc(self: QTableView, supportedActions: cint): void {.raises: [], gcsafe.}
 type QTableViewfocusNextPrevChildProc* = proc(self: QTableView, next: bool): bool {.raises: [], gcsafe.}
@@ -699,7 +699,7 @@ type QTableViewVTable* {.inheritable, pure.} = object
   closeEditor*: QTableViewcloseEditorProc
   commitData*: QTableViewcommitDataProc
   editorDestroyed*: QTableVieweditorDestroyedProc
-  edit2*: QTableViewedit2Proc
+  editIndexTriggerEvent*: QTableVieweditIndexTriggerEventProc
   selectionCommand*: QTableViewselectionCommandProc
   startDrag*: QTableViewstartDragProc
   focusNextPrevChild*: QTableViewfocusNextPrevChildProc
@@ -889,7 +889,7 @@ proc QTableVieweditorDestroyed*(self: gen_qtableview_types.QTableView, editor: g
   fcQTableView_virtualbase_editorDestroyed(self.h, editor.h)
 
 proc QTableViewedit*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTableView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQTableView_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QTableViewselectionCommand*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQTableView_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -1353,13 +1353,13 @@ proc fcQTableView_vtable_callback_editorDestroyed(self: pointer, editor: pointer
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc fcQTableView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTableView_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTableViewVTable](fcQTableView_vdata(self)[])
   let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQTableView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -2143,7 +2143,7 @@ proc fcQTableView_method_callback_editorDestroyed(self: pointer, editor: pointer
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-proc fcQTableView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTableView_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTableView](fcQTableView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2487,7 +2487,7 @@ proc dropIndicatorPosition*(self: gen_qtableview_types.QTableView): cint =
   cint(fcQTableView_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qtableview_types.QTableView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQTableView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQTableView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qtableview_types.QTableView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQTableView_protectedbase_viewportMargins(self.h), owned: true)
@@ -2619,8 +2619,8 @@ proc create*(T: type gen_qtableview_types.QTableView,
     vtbl[].vtbl.commitData = fcQTableView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTableView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTableView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTableView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTableView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -2813,8 +2813,8 @@ proc create*(T: type gen_qtableview_types.QTableView,
     vtbl[].vtbl.commitData = fcQTableView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTableView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTableView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTableView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTableView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -2963,7 +2963,7 @@ const cQTableView_mvtbl = cQTableViewVTable(
   closeEditor: fcQTableView_method_callback_closeEditor,
   commitData: fcQTableView_method_callback_commitData,
   editorDestroyed: fcQTableView_method_callback_editorDestroyed,
-  edit2: fcQTableView_method_callback_edit2,
+  editIndexTriggerEvent: fcQTableView_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQTableView_method_callback_selectionCommand,
   startDrag: fcQTableView_method_callback_startDrag,
   focusNextPrevChild: fcQTableView_method_callback_focusNextPrevChild,

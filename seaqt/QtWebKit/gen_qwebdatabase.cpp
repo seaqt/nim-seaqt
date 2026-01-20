@@ -16,12 +16,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebDatabase* QWebDatabase_new(QWebDatabase* other) {
-	return new (std::nothrow) QWebDatabase(*other);
+QWebDatabase* QWebDatabase_new(QWebDatabase* from) {
+	return new (std::nothrow) QWebDatabase(*from);
 }
 
-void QWebDatabase_operatorAssign(QWebDatabase* self, QWebDatabase* other) {
-	self->operator=(*other);
+void QWebDatabase_operatorAssign(QWebDatabase* self, QWebDatabase* from) {
+	self->operator=(*from);
 }
 
 struct seaqt_string QWebDatabase_name(const QWebDatabase* self) {

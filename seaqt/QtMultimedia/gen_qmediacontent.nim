@@ -49,7 +49,7 @@ export
 
 type cQMediaContent*{.exportc: "QMediaContent", incompleteStruct.} = object
 
-proc fcQMediaContent_operatorAssign(self: pointer, other: pointer): void {.importc: "QMediaContent_operatorAssign".}
+proc fcQMediaContent_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QMediaContent_operatorAssign".}
 proc fcQMediaContent_operatorEqual(self: pointer, other: pointer): bool {.importc: "QMediaContent_operatorEqual".}
 proc fcQMediaContent_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QMediaContent_operatorNotEqual".}
 proc fcQMediaContent_isNull(self: pointer): bool {.importc: "QMediaContent_isNull".}
@@ -60,17 +60,17 @@ proc fcQMediaContent_canonicalResource(self: pointer): pointer {.importc: "QMedi
 proc fcQMediaContent_resources(self: pointer): struct_seaqt_array {.importc: "QMediaContent_resources".}
 proc fcQMediaContent_playlist(self: pointer): pointer {.importc: "QMediaContent_playlist".}
 proc fcQMediaContent_new(): ptr cQMediaContent {.importc: "QMediaContent_new".}
-proc fcQMediaContent_new2(contentUrl: pointer): ptr cQMediaContent {.importc: "QMediaContent_new2".}
-proc fcQMediaContent_new3(contentRequest: pointer): ptr cQMediaContent {.importc: "QMediaContent_new3".}
-proc fcQMediaContent_new4(contentResource: pointer): ptr cQMediaContent {.importc: "QMediaContent_new4".}
-proc fcQMediaContent_new5(resources: struct_seaqt_array): ptr cQMediaContent {.importc: "QMediaContent_new5".}
-proc fcQMediaContent_new6(other: pointer): ptr cQMediaContent {.importc: "QMediaContent_new6".}
-proc fcQMediaContent_new7(playlist: pointer): ptr cQMediaContent {.importc: "QMediaContent_new7".}
-proc fcQMediaContent_new8(playlist: pointer, contentUrl: pointer): ptr cQMediaContent {.importc: "QMediaContent_new8".}
-proc fcQMediaContent_new9(playlist: pointer, contentUrl: pointer, takeOwnership: bool): ptr cQMediaContent {.importc: "QMediaContent_new9".}
+proc fcQMediaContent_new2(contentUrl: pointer): ptr cQMediaContent {.importc: "QMediaContent_new_contentUrl".}
+proc fcQMediaContent_new3(contentRequest: pointer): ptr cQMediaContent {.importc: "QMediaContent_new_contentRequest".}
+proc fcQMediaContent_new4(contentResource: pointer): ptr cQMediaContent {.importc: "QMediaContent_new_contentResource".}
+proc fcQMediaContent_new5(resources: struct_seaqt_array): ptr cQMediaContent {.importc: "QMediaContent_new_resources".}
+proc fcQMediaContent_new6(fromVal: pointer): ptr cQMediaContent {.importc: "QMediaContent_new_from".}
+proc fcQMediaContent_new7(playlist: pointer): ptr cQMediaContent {.importc: "QMediaContent_new_playlist".}
+proc fcQMediaContent_new8(playlist: pointer, contentUrl: pointer): ptr cQMediaContent {.importc: "QMediaContent_new_playlist_contentUrl".}
+proc fcQMediaContent_new9(playlist: pointer, contentUrl: pointer, takeOwnership: bool): ptr cQMediaContent {.importc: "QMediaContent_new_playlist_contentUrl_takeOwnership".}
 
-proc operatorAssign*(self: gen_qmediacontent_types.QMediaContent, other: gen_qmediacontent_types.QMediaContent): void =
-  fcQMediaContent_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qmediacontent_types.QMediaContent, fromVal: gen_qmediacontent_types.QMediaContent): void =
+  fcQMediaContent_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qmediacontent_types.QMediaContent, other: gen_qmediacontent_types.QMediaContent): bool =
   fcQMediaContent_operatorEqual(self.h, other.h)
@@ -129,8 +129,8 @@ proc create*(T: type gen_qmediacontent_types.QMediaContent,
   let tmp = gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new5(struct_seaqt_array(len: csize_t(len(resources)), data: if len(resources) == 0: nil else: addr(resources_CArray[0]))), owned: true)
   tmp
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
-    other: gen_qmediacontent_types.QMediaContent): gen_qmediacontent_types.QMediaContent =
-  let tmp = gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new6(other.h), owned: true)
+    fromVal: gen_qmediacontent_types.QMediaContent): gen_qmediacontent_types.QMediaContent =
+  let tmp = gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new6(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     playlist: gen_qmediaplaylist_types.QMediaPlaylist): gen_qmediacontent_types.QMediaContent =

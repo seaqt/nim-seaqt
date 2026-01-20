@@ -78,8 +78,8 @@ type cQDoubleSpinBox*{.exportc: "QDoubleSpinBox", incompleteStruct.} = object
 proc fcQSpinBox_metaObject(self: pointer): pointer {.importc: "QSpinBox_metaObject".}
 proc fcQSpinBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QSpinBox_metacast".}
 proc fcQSpinBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSpinBox_metacall".}
-proc fcQSpinBox_tr(s: cstring): struct_seaqt_string {.importc: "QSpinBox_tr".}
-proc fcQSpinBox_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSpinBox_trUtf8".}
+proc fcQSpinBox_trS(s: cstring): struct_seaqt_string {.importc: "QSpinBox_tr_s".}
+proc fcQSpinBox_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSpinBox_trUtf8_s".}
 proc fcQSpinBox_value(self: pointer): cint {.importc: "QSpinBox_value".}
 proc fcQSpinBox_prefix(self: pointer): struct_seaqt_string {.importc: "QSpinBox_prefix".}
 proc fcQSpinBox_setPrefix(self: pointer, prefix: struct_seaqt_string): void {.importc: "QSpinBox_setPrefix".}
@@ -98,16 +98,16 @@ proc fcQSpinBox_setStepType(self: pointer, stepType: cint): void {.importc: "QSp
 proc fcQSpinBox_displayIntegerBase(self: pointer): cint {.importc: "QSpinBox_displayIntegerBase".}
 proc fcQSpinBox_setDisplayIntegerBase(self: pointer, base: cint): void {.importc: "QSpinBox_setDisplayIntegerBase".}
 proc fcQSpinBox_setValue(self: pointer, val: cint): void {.importc: "QSpinBox_setValue".}
-proc fcQSpinBox_valueChanged(self: pointer, param1: cint): void {.importc: "QSpinBox_valueChanged".}
-proc fcQSpinBox_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSpinBox_connect_valueChanged".}
+proc fcQSpinBox_valueChangedInt(self: pointer, param1: cint): void {.importc: "QSpinBox_valueChanged_int".}
+proc fcQSpinBox_connect_valueChangedInt(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSpinBox_connect_valueChanged_int".}
 proc fcQSpinBox_textChanged(self: pointer, param1: struct_seaqt_string): void {.importc: "QSpinBox_textChanged".}
 proc fcQSpinBox_connect_textChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSpinBox_connect_textChanged".}
-proc fcQSpinBox_valueChangedWithQString(self: pointer, param1: struct_seaqt_string): void {.importc: "QSpinBox_valueChangedWithQString".}
-proc fcQSpinBox_connect_valueChangedWithQString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSpinBox_connect_valueChangedWithQString".}
-proc fcQSpinBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSpinBox_tr2".}
-proc fcQSpinBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSpinBox_tr3".}
-proc fcQSpinBox_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSpinBox_trUtf82".}
-proc fcQSpinBox_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSpinBox_trUtf83".}
+proc fcQSpinBox_valueChanged_QString(self: pointer, param1: struct_seaqt_string): void {.importc: "QSpinBox_valueChanged_QString".}
+proc fcQSpinBox_connect_valueChanged_QString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSpinBox_connect_valueChanged_QString".}
+proc fcQSpinBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSpinBox_tr_s_c".}
+proc fcQSpinBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSpinBox_tr_s_c_n".}
+proc fcQSpinBox_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSpinBox_trUtf8_s_c".}
+proc fcQSpinBox_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSpinBox_trUtf8_s_c_n".}
 proc fcQSpinBox_vdata(self: pointer): ptr pointer {.importc: "QSpinBox_vdata".}
 proc fvdata_cQSpinBox(self: pointer): pointer {.importc: "vdata_QSpinBox".}
 
@@ -239,14 +239,14 @@ proc fcQSpinBox_protectedbase_sender(self: pointer): pointer {.importc: "QSpinBo
 proc fcQSpinBox_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSpinBox_protectedbase_senderSignalIndex".}
 proc fcQSpinBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSpinBox_protectedbase_receivers".}
 proc fcQSpinBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSpinBox_protectedbase_isSignalConnected".}
-proc fcQSpinBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSpinBox {.importc: "QSpinBox_new".}
-proc fcQSpinBox_new2(vtbl: pointer, vdata: csize_t): ptr cQSpinBox {.importc: "QSpinBox_new2".}
+proc fcQSpinBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSpinBox {.importc: "QSpinBox_new_parent".}
+proc fcQSpinBox_new2(vtbl: pointer, vdata: csize_t): ptr cQSpinBox {.importc: "QSpinBox_new".}
 proc fcQSpinBox_staticMetaObject(): pointer {.importc: "QSpinBox_staticMetaObject".}
 proc fcQDoubleSpinBox_metaObject(self: pointer): pointer {.importc: "QDoubleSpinBox_metaObject".}
 proc fcQDoubleSpinBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QDoubleSpinBox_metacast".}
 proc fcQDoubleSpinBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDoubleSpinBox_metacall".}
-proc fcQDoubleSpinBox_tr(s: cstring): struct_seaqt_string {.importc: "QDoubleSpinBox_tr".}
-proc fcQDoubleSpinBox_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDoubleSpinBox_trUtf8".}
+proc fcQDoubleSpinBox_trS(s: cstring): struct_seaqt_string {.importc: "QDoubleSpinBox_tr_s".}
+proc fcQDoubleSpinBox_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDoubleSpinBox_trUtf8_s".}
 proc fcQDoubleSpinBox_value(self: pointer): float64 {.importc: "QDoubleSpinBox_value".}
 proc fcQDoubleSpinBox_prefix(self: pointer): struct_seaqt_string {.importc: "QDoubleSpinBox_prefix".}
 proc fcQDoubleSpinBox_setPrefix(self: pointer, prefix: struct_seaqt_string): void {.importc: "QDoubleSpinBox_setPrefix".}
@@ -269,16 +269,16 @@ proc fcQDoubleSpinBox_valueFromText(self: pointer, text: struct_seaqt_string): f
 proc fcQDoubleSpinBox_textFromValue(self: pointer, val: float64): struct_seaqt_string {.importc: "QDoubleSpinBox_textFromValue".}
 proc fcQDoubleSpinBox_fixup(self: pointer, str: struct_seaqt_string): void {.importc: "QDoubleSpinBox_fixup".}
 proc fcQDoubleSpinBox_setValue(self: pointer, val: float64): void {.importc: "QDoubleSpinBox_setValue".}
-proc fcQDoubleSpinBox_valueChanged(self: pointer, param1: float64): void {.importc: "QDoubleSpinBox_valueChanged".}
-proc fcQDoubleSpinBox_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, param1: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleSpinBox_connect_valueChanged".}
+proc fcQDoubleSpinBox_valueChangedDouble(self: pointer, param1: float64): void {.importc: "QDoubleSpinBox_valueChanged_double".}
+proc fcQDoubleSpinBox_connect_valueChangedDouble(self: pointer, slot: int, callback: proc (slot: int, param1: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleSpinBox_connect_valueChanged_double".}
 proc fcQDoubleSpinBox_textChanged(self: pointer, param1: struct_seaqt_string): void {.importc: "QDoubleSpinBox_textChanged".}
 proc fcQDoubleSpinBox_connect_textChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleSpinBox_connect_textChanged".}
-proc fcQDoubleSpinBox_valueChangedWithQString(self: pointer, param1: struct_seaqt_string): void {.importc: "QDoubleSpinBox_valueChangedWithQString".}
-proc fcQDoubleSpinBox_connect_valueChangedWithQString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleSpinBox_connect_valueChangedWithQString".}
-proc fcQDoubleSpinBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDoubleSpinBox_tr2".}
-proc fcQDoubleSpinBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDoubleSpinBox_tr3".}
-proc fcQDoubleSpinBox_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDoubleSpinBox_trUtf82".}
-proc fcQDoubleSpinBox_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDoubleSpinBox_trUtf83".}
+proc fcQDoubleSpinBox_valueChanged_QString(self: pointer, param1: struct_seaqt_string): void {.importc: "QDoubleSpinBox_valueChanged_QString".}
+proc fcQDoubleSpinBox_connect_valueChanged_QString(self: pointer, slot: int, callback: proc (slot: int, param1: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleSpinBox_connect_valueChanged_QString".}
+proc fcQDoubleSpinBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDoubleSpinBox_tr_s_c".}
+proc fcQDoubleSpinBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDoubleSpinBox_tr_s_c_n".}
+proc fcQDoubleSpinBox_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDoubleSpinBox_trUtf8_s_c".}
+proc fcQDoubleSpinBox_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDoubleSpinBox_trUtf8_s_c_n".}
 proc fcQDoubleSpinBox_vdata(self: pointer): ptr pointer {.importc: "QDoubleSpinBox_vdata".}
 proc fvdata_cQDoubleSpinBox(self: pointer): pointer {.importc: "vdata_QDoubleSpinBox".}
 
@@ -410,8 +410,8 @@ proc fcQDoubleSpinBox_protectedbase_sender(self: pointer): pointer {.importc: "Q
 proc fcQDoubleSpinBox_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDoubleSpinBox_protectedbase_senderSignalIndex".}
 proc fcQDoubleSpinBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDoubleSpinBox_protectedbase_receivers".}
 proc fcQDoubleSpinBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDoubleSpinBox_protectedbase_isSignalConnected".}
-proc fcQDoubleSpinBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDoubleSpinBox {.importc: "QDoubleSpinBox_new".}
-proc fcQDoubleSpinBox_new2(vtbl: pointer, vdata: csize_t): ptr cQDoubleSpinBox {.importc: "QDoubleSpinBox_new2".}
+proc fcQDoubleSpinBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDoubleSpinBox {.importc: "QDoubleSpinBox_new_parent".}
+proc fcQDoubleSpinBox_new2(vtbl: pointer, vdata: csize_t): ptr cQDoubleSpinBox {.importc: "QDoubleSpinBox_new".}
 proc fcQDoubleSpinBox_staticMetaObject(): pointer {.importc: "QDoubleSpinBox_staticMetaObject".}
 
 proc metaObject*(self: gen_qspinbox_types.QSpinBox): gen_qobjectdefs_types.QMetaObject =
@@ -424,13 +424,13 @@ proc metacall*(self: gen_qspinbox_types.QSpinBox, param1: cint, param2: cint, pa
   fcQSpinBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qspinbox_types.QSpinBox, s: cstring): string =
-  let v_ms = fcQSpinBox_tr(s)
+  let v_ms = fcQSpinBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qspinbox_types.QSpinBox, s: cstring): string =
-  let v_ms = fcQSpinBox_trUtf8(s)
+  let v_ms = fcQSpinBox_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -499,24 +499,24 @@ proc setValue*(self: gen_qspinbox_types.QSpinBox, val: cint): void =
   fcQSpinBox_setValue(self.h, val)
 
 proc valueChanged*(self: gen_qspinbox_types.QSpinBox, param1: cint): void =
-  fcQSpinBox_valueChanged(self.h, param1)
+  fcQSpinBox_valueChangedInt(self.h, param1)
 
-type QSpinBoxvalueChangedSlot* = proc(param1: cint)
-proc fcQSpinBox_slot_callback_valueChanged(slot: int, param1: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QSpinBoxvalueChangedSlot](cast[pointer](slot))
+type QSpinBoxvalueChangedIntSlot* = proc(param1: cint)
+proc fcQSpinBox_slot_callback_valueChangedInt(slot: int, param1: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QSpinBoxvalueChangedIntSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc fcQSpinBox_slot_callback_valueChanged_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QSpinBoxvalueChangedSlot](cast[pointer](slot))
+proc fcQSpinBox_slot_callback_valueChangedInt_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSpinBoxvalueChangedIntSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onValueChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxvalueChangedSlot) =
-  var tmp = new QSpinBoxvalueChangedSlot
+proc onValueChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxvalueChangedIntSlot) =
+  var tmp = new QSpinBoxvalueChangedIntSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSpinBox_connect_valueChanged(self.h, cast[int](addr tmp[]), fcQSpinBox_slot_callback_valueChanged, fcQSpinBox_slot_callback_valueChanged_release)
+  fcQSpinBox_connect_valueChangedInt(self.h, cast[int](addr tmp[]), fcQSpinBox_slot_callback_valueChangedInt, fcQSpinBox_slot_callback_valueChangedInt_release)
 
 proc textChanged*(self: gen_qspinbox_types.QSpinBox, param1: openArray[char]): void =
   fcQSpinBox_textChanged(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
@@ -542,11 +542,11 @@ proc onTextChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxtextChanged
   fcQSpinBox_connect_textChanged(self.h, cast[int](addr tmp[]), fcQSpinBox_slot_callback_textChanged, fcQSpinBox_slot_callback_textChanged_release)
 
 proc valueChanged*(self: gen_qspinbox_types.QSpinBox, param1: openArray[char]): void =
-  fcQSpinBox_valueChangedWithQString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+  fcQSpinBox_valueChanged_QString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QSpinBoxvalueChangedWithQStringSlot* = proc(param1: openArray[char])
-proc fcQSpinBox_slot_callback_valueChangedWithQString(slot: int, param1: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QSpinBoxvalueChangedWithQStringSlot](cast[pointer](slot))
+type QSpinBoxvalueChanged_QStringSlot* = proc(param1: openArray[char])
+proc fcQSpinBox_slot_callback_valueChanged_QString(slot: int, param1: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QSpinBoxvalueChanged_QStringSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
@@ -554,36 +554,36 @@ proc fcQSpinBox_slot_callback_valueChangedWithQString(slot: int, param1: struct_
 
   nimfunc[](slotval1)
 
-proc fcQSpinBox_slot_callback_valueChangedWithQString_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QSpinBoxvalueChangedWithQStringSlot](cast[pointer](slot))
+proc fcQSpinBox_slot_callback_valueChanged_QString_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSpinBoxvalueChanged_QStringSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onValueChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxvalueChangedWithQStringSlot) =
-  var tmp = new QSpinBoxvalueChangedWithQStringSlot
+proc onValueChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxvalueChanged_QStringSlot) =
+  var tmp = new QSpinBoxvalueChanged_QStringSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSpinBox_connect_valueChangedWithQString(self.h, cast[int](addr tmp[]), fcQSpinBox_slot_callback_valueChangedWithQString, fcQSpinBox_slot_callback_valueChangedWithQString_release)
+  fcQSpinBox_connect_valueChanged_QString(self.h, cast[int](addr tmp[]), fcQSpinBox_slot_callback_valueChanged_QString, fcQSpinBox_slot_callback_valueChanged_QString_release)
 
 proc tr*(_: type gen_qspinbox_types.QSpinBox, s: cstring, c: cstring): string =
-  let v_ms = fcQSpinBox_tr2(s, c)
+  let v_ms = fcQSpinBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qspinbox_types.QSpinBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSpinBox_tr3(s, c, n)
+  let v_ms = fcQSpinBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qspinbox_types.QSpinBox, s: cstring, c: cstring): string =
-  let v_ms = fcQSpinBox_trUtf82(s, c)
+  let v_ms = fcQSpinBox_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qspinbox_types.QSpinBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSpinBox_trUtf83(s, c, n)
+  let v_ms = fcQSpinBox_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2109,13 +2109,13 @@ proc metacall*(self: gen_qspinbox_types.QDoubleSpinBox, param1: cint, param2: ci
   fcQDoubleSpinBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring): string =
-  let v_ms = fcQDoubleSpinBox_tr(s)
+  let v_ms = fcQDoubleSpinBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring): string =
-  let v_ms = fcQDoubleSpinBox_trUtf8(s)
+  let v_ms = fcQDoubleSpinBox_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2199,24 +2199,24 @@ proc setValue*(self: gen_qspinbox_types.QDoubleSpinBox, val: float64): void =
   fcQDoubleSpinBox_setValue(self.h, val)
 
 proc valueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, param1: float64): void =
-  fcQDoubleSpinBox_valueChanged(self.h, param1)
+  fcQDoubleSpinBox_valueChangedDouble(self.h, param1)
 
-type QDoubleSpinBoxvalueChangedSlot* = proc(param1: float64)
-proc fcQDoubleSpinBox_slot_callback_valueChanged(slot: int, param1: float64) {.cdecl.} =
-  let nimfunc = cast[ptr QDoubleSpinBoxvalueChangedSlot](cast[pointer](slot))
+type QDoubleSpinBoxvalueChangedDoubleSlot* = proc(param1: float64)
+proc fcQDoubleSpinBox_slot_callback_valueChangedDouble(slot: int, param1: float64) {.cdecl.} =
+  let nimfunc = cast[ptr QDoubleSpinBoxvalueChangedDoubleSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc fcQDoubleSpinBox_slot_callback_valueChanged_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QDoubleSpinBoxvalueChangedSlot](cast[pointer](slot))
+proc fcQDoubleSpinBox_slot_callback_valueChangedDouble_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDoubleSpinBoxvalueChangedDoubleSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onValueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinBoxvalueChangedSlot) =
-  var tmp = new QDoubleSpinBoxvalueChangedSlot
+proc onValueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinBoxvalueChangedDoubleSlot) =
+  var tmp = new QDoubleSpinBoxvalueChangedDoubleSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleSpinBox_connect_valueChanged(self.h, cast[int](addr tmp[]), fcQDoubleSpinBox_slot_callback_valueChanged, fcQDoubleSpinBox_slot_callback_valueChanged_release)
+  fcQDoubleSpinBox_connect_valueChangedDouble(self.h, cast[int](addr tmp[]), fcQDoubleSpinBox_slot_callback_valueChangedDouble, fcQDoubleSpinBox_slot_callback_valueChangedDouble_release)
 
 proc textChanged*(self: gen_qspinbox_types.QDoubleSpinBox, param1: openArray[char]): void =
   fcQDoubleSpinBox_textChanged(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
@@ -2242,11 +2242,11 @@ proc onTextChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinBo
   fcQDoubleSpinBox_connect_textChanged(self.h, cast[int](addr tmp[]), fcQDoubleSpinBox_slot_callback_textChanged, fcQDoubleSpinBox_slot_callback_textChanged_release)
 
 proc valueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, param1: openArray[char]): void =
-  fcQDoubleSpinBox_valueChangedWithQString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+  fcQDoubleSpinBox_valueChanged_QString(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
-type QDoubleSpinBoxvalueChangedWithQStringSlot* = proc(param1: openArray[char])
-proc fcQDoubleSpinBox_slot_callback_valueChangedWithQString(slot: int, param1: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QDoubleSpinBoxvalueChangedWithQStringSlot](cast[pointer](slot))
+type QDoubleSpinBoxvalueChanged_QStringSlot* = proc(param1: openArray[char])
+proc fcQDoubleSpinBox_slot_callback_valueChanged_QString(slot: int, param1: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QDoubleSpinBoxvalueChanged_QStringSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(vparam1_ms)
   c_free(vparam1_ms.data)
@@ -2254,36 +2254,36 @@ proc fcQDoubleSpinBox_slot_callback_valueChangedWithQString(slot: int, param1: s
 
   nimfunc[](slotval1)
 
-proc fcQDoubleSpinBox_slot_callback_valueChangedWithQString_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QDoubleSpinBoxvalueChangedWithQStringSlot](cast[pointer](slot))
+proc fcQDoubleSpinBox_slot_callback_valueChanged_QString_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDoubleSpinBoxvalueChanged_QStringSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onValueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinBoxvalueChangedWithQStringSlot) =
-  var tmp = new QDoubleSpinBoxvalueChangedWithQStringSlot
+proc onValueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinBoxvalueChanged_QStringSlot) =
+  var tmp = new QDoubleSpinBoxvalueChanged_QStringSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleSpinBox_connect_valueChangedWithQString(self.h, cast[int](addr tmp[]), fcQDoubleSpinBox_slot_callback_valueChangedWithQString, fcQDoubleSpinBox_slot_callback_valueChangedWithQString_release)
+  fcQDoubleSpinBox_connect_valueChanged_QString(self.h, cast[int](addr tmp[]), fcQDoubleSpinBox_slot_callback_valueChanged_QString, fcQDoubleSpinBox_slot_callback_valueChanged_QString_release)
 
 proc tr*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring, c: cstring): string =
-  let v_ms = fcQDoubleSpinBox_tr2(s, c)
+  let v_ms = fcQDoubleSpinBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDoubleSpinBox_tr3(s, c, n)
+  let v_ms = fcQDoubleSpinBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring, c: cstring): string =
-  let v_ms = fcQDoubleSpinBox_trUtf82(s, c)
+  let v_ms = fcQDoubleSpinBox_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDoubleSpinBox_trUtf83(s, c, n)
+  let v_ms = fcQDoubleSpinBox_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

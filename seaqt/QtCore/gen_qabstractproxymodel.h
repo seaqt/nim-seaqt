@@ -104,14 +104,14 @@ void* QAbstractProxyModel_vdata(VirtualQAbstractProxyModel* self);
 VirtualQAbstractProxyModel* vdata_QAbstractProxyModel(void* vdata);
 
 VirtualQAbstractProxyModel* QAbstractProxyModel_new(const QAbstractProxyModel_VTable* vtbl, size_t vdata);
-VirtualQAbstractProxyModel* QAbstractProxyModel_new2(const QAbstractProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAbstractProxyModel* QAbstractProxyModel_new_parent(const QAbstractProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAbstractProxyModel_virtbase(QAbstractProxyModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QAbstractProxyModel_metaObject(const QAbstractProxyModel* self);
 void* QAbstractProxyModel_metacast(QAbstractProxyModel* self, const char* param1);
 int QAbstractProxyModel_metacall(QAbstractProxyModel* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractProxyModel_tr(const char* s);
-struct seaqt_string QAbstractProxyModel_trUtf8(const char* s);
+struct seaqt_string QAbstractProxyModel_tr_s(const char* s);
+struct seaqt_string QAbstractProxyModel_trUtf8_s(const char* s);
 void QAbstractProxyModel_setSourceModel(QAbstractProxyModel* self, QAbstractItemModel* sourceModel);
 QAbstractItemModel* QAbstractProxyModel_sourceModel(const QAbstractProxyModel* self);
 QModelIndex* QAbstractProxyModel_mapToSource(const QAbstractProxyModel* self, QModelIndex* proxyIndex);
@@ -140,10 +140,10 @@ bool QAbstractProxyModel_dropMimeData(QAbstractProxyModel* self, QMimeData* data
 struct seaqt_array /* of struct seaqt_string */  QAbstractProxyModel_mimeTypes(const QAbstractProxyModel* self);
 int QAbstractProxyModel_supportedDragActions(const QAbstractProxyModel* self);
 int QAbstractProxyModel_supportedDropActions(const QAbstractProxyModel* self);
-struct seaqt_string QAbstractProxyModel_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractProxyModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractProxyModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractProxyModel_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractProxyModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractProxyModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractProxyModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractProxyModel_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractProxyModel_virtualbase_metaObject(const VirtualQAbstractProxyModel* self);
 void* QAbstractProxyModel_virtualbase_metacast(VirtualQAbstractProxyModel* self, const char* param1);
@@ -196,7 +196,7 @@ void QAbstractProxyModel_virtualbase_connectNotify(VirtualQAbstractProxyModel* s
 void QAbstractProxyModel_virtualbase_disconnectNotify(VirtualQAbstractProxyModel* self, QMetaMethod* signal);
 
 void QAbstractProxyModel_protectedbase_resetInternalData(VirtualQAbstractProxyModel* self);
-QModelIndex* QAbstractProxyModel_protectedbase_createIndex(const VirtualQAbstractProxyModel* self, int row, int column);
+QModelIndex* QAbstractProxyModel_protectedbase_createIndex_row_column(const VirtualQAbstractProxyModel* self, int row, int column);
 void QAbstractProxyModel_protectedbase_encodeData(const VirtualQAbstractProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QAbstractProxyModel_protectedbase_decodeData(VirtualQAbstractProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QAbstractProxyModel_protectedbase_beginInsertRows(VirtualQAbstractProxyModel* self, QModelIndex* parent, int first, int last);

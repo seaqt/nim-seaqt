@@ -49,14 +49,14 @@ proc fcQPoint_manhattanLength(self: pointer): cint {.importc: "QPoint_manhattanL
 proc fcQPoint_transposed(self: pointer): pointer {.importc: "QPoint_transposed".}
 proc fcQPoint_operatorPlusAssign(self: pointer, p: pointer): pointer {.importc: "QPoint_operatorPlusAssign".}
 proc fcQPoint_operatorMinusAssign(self: pointer, p: pointer): pointer {.importc: "QPoint_operatorMinusAssign".}
-proc fcQPoint_operatorMultiplyAssign(self: pointer, factor: float32): pointer {.importc: "QPoint_operatorMultiplyAssign".}
-proc fcQPoint_operatorMultiplyAssignWithFactor(self: pointer, factor: float64): pointer {.importc: "QPoint_operatorMultiplyAssignWithFactor".}
-proc fcQPoint_operatorMultiplyAssign2(self: pointer, factor: cint): pointer {.importc: "QPoint_operatorMultiplyAssign2".}
+proc fcQPoint_operatorMultiplyAssignFloat(self: pointer, factor: float32): pointer {.importc: "QPoint_operatorMultiplyAssign_float".}
+proc fcQPoint_operatorMultiplyAssignDouble(self: pointer, factor: float64): pointer {.importc: "QPoint_operatorMultiplyAssign_double".}
+proc fcQPoint_operatorMultiplyAssignInt(self: pointer, factor: cint): pointer {.importc: "QPoint_operatorMultiplyAssign_int".}
 proc fcQPoint_operatorDivideAssign(self: pointer, divisor: float64): pointer {.importc: "QPoint_operatorDivideAssign".}
 proc fcQPoint_dotProduct(p1: pointer, p2: pointer): cint {.importc: "QPoint_dotProduct".}
 proc fcQPoint_new(): ptr cQPoint {.importc: "QPoint_new".}
-proc fcQPoint_new2(xpos: cint, ypos: cint): ptr cQPoint {.importc: "QPoint_new2".}
-proc fcQPoint_new3(param1: pointer): ptr cQPoint {.importc: "QPoint_new3".}
+proc fcQPoint_new2(xpos: cint, ypos: cint): ptr cQPoint {.importc: "QPoint_new_xpos_ypos".}
+proc fcQPoint_new3(fromVal: pointer): ptr cQPoint {.importc: "QPoint_new_from".}
 proc fcQPointF_manhattanLength(self: pointer): float64 {.importc: "QPointF_manhattanLength".}
 proc fcQPointF_isNull(self: pointer): bool {.importc: "QPointF_isNull".}
 proc fcQPointF_x(self: pointer): float64 {.importc: "QPointF_x".}
@@ -71,9 +71,9 @@ proc fcQPointF_operatorDivideAssign(self: pointer, c: float64): pointer {.import
 proc fcQPointF_dotProduct(p1: pointer, p2: pointer): float64 {.importc: "QPointF_dotProduct".}
 proc fcQPointF_toPoint(self: pointer): pointer {.importc: "QPointF_toPoint".}
 proc fcQPointF_new(): ptr cQPointF {.importc: "QPointF_new".}
-proc fcQPointF_new2(p: pointer): ptr cQPointF {.importc: "QPointF_new2".}
-proc fcQPointF_new3(xpos: float64, ypos: float64): ptr cQPointF {.importc: "QPointF_new3".}
-proc fcQPointF_new4(param1: pointer): ptr cQPointF {.importc: "QPointF_new4".}
+proc fcQPointF_new2(p: pointer): ptr cQPointF {.importc: "QPointF_new_p".}
+proc fcQPointF_new3(xpos: float64, ypos: float64): ptr cQPointF {.importc: "QPointF_new_xpos_ypos".}
+proc fcQPointF_new4(fromVal: pointer): ptr cQPointF {.importc: "QPointF_new_from".}
 
 proc isNull*(self: gen_qpoint_types.QPoint): bool =
   fcQPoint_isNull(self.h)
@@ -103,13 +103,13 @@ proc operatorMinusAssign*(self: gen_qpoint_types.QPoint, p: gen_qpoint_types.QPo
   gen_qpoint_types.QPoint(h: fcQPoint_operatorMinusAssign(self.h, p.h), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qpoint_types.QPoint, factor: float32): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQPoint_operatorMultiplyAssign(self.h, factor), owned: false)
+  gen_qpoint_types.QPoint(h: fcQPoint_operatorMultiplyAssignFloat(self.h, factor), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qpoint_types.QPoint, factor: float64): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQPoint_operatorMultiplyAssignWithFactor(self.h, factor), owned: false)
+  gen_qpoint_types.QPoint(h: fcQPoint_operatorMultiplyAssignDouble(self.h, factor), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qpoint_types.QPoint, factor: cint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQPoint_operatorMultiplyAssign2(self.h, factor), owned: false)
+  gen_qpoint_types.QPoint(h: fcQPoint_operatorMultiplyAssignInt(self.h, factor), owned: false)
 
 proc operatorDivideAssign*(self: gen_qpoint_types.QPoint, divisor: float64): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQPoint_operatorDivideAssign(self.h, divisor), owned: false)
@@ -125,8 +125,8 @@ proc create*(T: type gen_qpoint_types.QPoint,
   let tmp = gen_qpoint_types.QPoint(h: fcQPoint_new2(xpos, ypos), owned: true)
   tmp
 proc create*(T: type gen_qpoint_types.QPoint,
-    param1: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  let tmp = gen_qpoint_types.QPoint(h: fcQPoint_new3(param1.h), owned: true)
+    fromVal: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
+  let tmp = gen_qpoint_types.QPoint(h: fcQPoint_new3(fromVal.h), owned: true)
   tmp
 proc manhattanLength*(self: gen_qpoint_types.QPointF): float64 =
   fcQPointF_manhattanLength(self.h)
@@ -179,6 +179,6 @@ proc create*(T: type gen_qpoint_types.QPointF,
   let tmp = gen_qpoint_types.QPointF(h: fcQPointF_new3(xpos, ypos), owned: true)
   tmp
 proc create*(T: type gen_qpoint_types.QPointF,
-    param1: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
-  let tmp = gen_qpoint_types.QPointF(h: fcQPointF_new4(param1.h), owned: true)
+    fromVal: gen_qpoint_types.QPointF): gen_qpoint_types.QPointF =
+  let tmp = gen_qpoint_types.QPointF(h: fcQPointF_new4(fromVal.h), owned: true)
   tmp

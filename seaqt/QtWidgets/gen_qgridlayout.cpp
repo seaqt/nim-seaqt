@@ -223,16 +223,16 @@ public:
 	friend void QGridLayout_virtualbase_setGeometry(VirtualQGridLayout* self, QRect* geometry);
 
 	virtual void addItem(QLayoutItem* param1) override {
-		if (vtbl->addItemWithQLayoutItem == 0) {
+		if (vtbl->addItem_QLayoutItem == 0) {
 			QGridLayout::addItem(param1);
 			return;
 		}
 
 		QLayoutItem* sigval1 = param1;
-		vtbl->addItemWithQLayoutItem(this, sigval1);
+		vtbl->addItem_QLayoutItem(this, sigval1);
 	}
 
-	friend void QGridLayout_virtualbase_addItemWithQLayoutItem(VirtualQGridLayout* self, QLayoutItem* param1);
+	friend void QGridLayout_virtualbase_addItem_QLayoutItem(VirtualQGridLayout* self, QLayoutItem* param1);
 
 	virtual QRect geometry() const override {
 		if (vtbl->geometry == 0) {
@@ -248,16 +248,16 @@ public:
 	friend QRect* QGridLayout_virtualbase_geometry(const VirtualQGridLayout* self);
 
 	virtual int indexOf(QWidget* param1) const override {
-		if (vtbl->indexOf == 0) {
+		if (vtbl->indexOf_QWidget == 0) {
 			return QGridLayout::indexOf(param1);
 		}
 
 		QWidget* sigval1 = param1;
-		int callback_return_value = vtbl->indexOf(this, sigval1);
+		int callback_return_value = vtbl->indexOf_QWidget(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGridLayout_virtualbase_indexOf(const VirtualQGridLayout* self, QWidget* param1);
+	friend int QGridLayout_virtualbase_indexOf_QWidget(const VirtualQGridLayout* self, QWidget* param1);
 
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
@@ -415,12 +415,12 @@ public:
 	friend bool QGridLayout_protectedbase_isSignalConnected(const VirtualQGridLayout* self, QMetaMethod* signal);
 };
 
-VirtualQGridLayout* QGridLayout_new(const QGridLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQGridLayout* QGridLayout_new_parent(const QGridLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGridLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGridLayout(vtbl, parent) : nullptr;
 }
 
-VirtualQGridLayout* QGridLayout_new2(const QGridLayout_VTable* vtbl, size_t vdata) {
+VirtualQGridLayout* QGridLayout_new(const QGridLayout_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGridLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGridLayout(vtbl) : nullptr;
 }
@@ -441,7 +441,7 @@ int QGridLayout_metacall(QGridLayout* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGridLayout_tr(const char* s) {
+struct seaqt_string QGridLayout_tr_s(const char* s) {
 	QString _ret = QGridLayout::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -452,7 +452,7 @@ struct seaqt_string QGridLayout_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGridLayout_trUtf8(const char* s) {
+struct seaqt_string QGridLayout_trUtf8_s(const char* s) {
 	QString _ret = QGridLayout::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -564,23 +564,23 @@ void QGridLayout_invalidate(QGridLayout* self) {
 	self->invalidate();
 }
 
-void QGridLayout_addWidget(QGridLayout* self, QWidget* w) {
+void QGridLayout_addWidget_QWidget(QGridLayout* self, QWidget* w) {
 	self->addWidget(w);
 }
 
-void QGridLayout_addWidget2(QGridLayout* self, QWidget* param1, int row, int column) {
+void QGridLayout_addWidget_QWidget_int_int(QGridLayout* self, QWidget* param1, int row, int column) {
 	self->addWidget(param1, static_cast<int>(row), static_cast<int>(column));
 }
 
-void QGridLayout_addWidget3(QGridLayout* self, QWidget* param1, int row, int column, int rowSpan, int columnSpan) {
+void QGridLayout_addWidget_QWidget_int_int_int_int(QGridLayout* self, QWidget* param1, int row, int column, int rowSpan, int columnSpan) {
 	self->addWidget(param1, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan), static_cast<int>(columnSpan));
 }
 
-void QGridLayout_addLayout(QGridLayout* self, QLayout* param1, int row, int column) {
+void QGridLayout_addLayout_QLayout_int_int(QGridLayout* self, QLayout* param1, int row, int column) {
 	self->addLayout(param1, static_cast<int>(row), static_cast<int>(column));
 }
 
-void QGridLayout_addLayout2(QGridLayout* self, QLayout* param1, int row, int column, int rowSpan, int columnSpan) {
+void QGridLayout_addLayout_QLayout_int_int_int_int(QGridLayout* self, QLayout* param1, int row, int column, int rowSpan, int columnSpan) {
 	self->addLayout(param1, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan), static_cast<int>(columnSpan));
 }
 
@@ -613,7 +613,7 @@ void QGridLayout_setGeometry(QGridLayout* self, QRect* geometry) {
 	self->setGeometry(*geometry);
 }
 
-void QGridLayout_addItem(QGridLayout* self, QLayoutItem* item, int row, int column) {
+void QGridLayout_addItem_QLayoutItem_int_int(QGridLayout* self, QLayoutItem* item, int row, int column) {
 	self->addItem(item, static_cast<int>(row), static_cast<int>(column));
 }
 
@@ -625,7 +625,7 @@ void QGridLayout_getItemPosition(const QGridLayout* self, int idx, int* row, int
 	self->getItemPosition(static_cast<int>(idx), static_cast<int*>(row), static_cast<int*>(column), static_cast<int*>(rowSpan), static_cast<int*>(columnSpan));
 }
 
-struct seaqt_string QGridLayout_tr2(const char* s, const char* c) {
+struct seaqt_string QGridLayout_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGridLayout::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -636,7 +636,7 @@ struct seaqt_string QGridLayout_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGridLayout_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGridLayout_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGridLayout::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -647,7 +647,7 @@ struct seaqt_string QGridLayout_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QGridLayout_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGridLayout_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGridLayout::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -658,7 +658,7 @@ struct seaqt_string QGridLayout_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGridLayout_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGridLayout_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGridLayout::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -669,31 +669,31 @@ struct seaqt_string QGridLayout_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QGridLayout_addWidget4(QGridLayout* self, QWidget* param1, int row, int column, int param4) {
+void QGridLayout_addWidget_QWidget_int_int_Qt_Alignment(QGridLayout* self, QWidget* param1, int row, int column, int param4) {
 	self->addWidget(param1, static_cast<int>(row), static_cast<int>(column), static_cast<Qt::Alignment>(param4));
 }
 
-void QGridLayout_addWidget5(QGridLayout* self, QWidget* param1, int row, int column, int rowSpan, int columnSpan, int param6) {
+void QGridLayout_addWidget_QWidget_int_int_int_int_Qt_Alignment(QGridLayout* self, QWidget* param1, int row, int column, int rowSpan, int columnSpan, int param6) {
 	self->addWidget(param1, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan), static_cast<int>(columnSpan), static_cast<Qt::Alignment>(param6));
 }
 
-void QGridLayout_addLayout3(QGridLayout* self, QLayout* param1, int row, int column, int param4) {
+void QGridLayout_addLayout_QLayout_int_int_Qt_Alignment(QGridLayout* self, QLayout* param1, int row, int column, int param4) {
 	self->addLayout(param1, static_cast<int>(row), static_cast<int>(column), static_cast<Qt::Alignment>(param4));
 }
 
-void QGridLayout_addLayout4(QGridLayout* self, QLayout* param1, int row, int column, int rowSpan, int columnSpan, int param6) {
+void QGridLayout_addLayout_QLayout_int_int_int_int_Qt_Alignment(QGridLayout* self, QLayout* param1, int row, int column, int rowSpan, int columnSpan, int param6) {
 	self->addLayout(param1, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan), static_cast<int>(columnSpan), static_cast<Qt::Alignment>(param6));
 }
 
-void QGridLayout_addItem2(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan) {
+void QGridLayout_addItem_QLayoutItem_int_int_int(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan) {
 	self->addItem(item, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan));
 }
 
-void QGridLayout_addItem3(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan, int columnSpan) {
+void QGridLayout_addItem_QLayoutItem_int_int_int_int(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan, int columnSpan) {
 	self->addItem(item, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan), static_cast<int>(columnSpan));
 }
 
-void QGridLayout_addItem4(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan, int columnSpan, int param6) {
+void QGridLayout_addItem_QLayoutItem_int_int_int_int_Qt_Alignment(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan, int columnSpan, int param6) {
 	self->addItem(item, static_cast<int>(row), static_cast<int>(column), static_cast<int>(rowSpan), static_cast<int>(columnSpan), static_cast<Qt::Alignment>(param6));
 }
 
@@ -777,7 +777,7 @@ void QGridLayout_virtualbase_setGeometry(VirtualQGridLayout* self, QRect* geomet
 	self->QGridLayout::setGeometry(*geometry);
 }
 
-void QGridLayout_virtualbase_addItemWithQLayoutItem(VirtualQGridLayout* self, QLayoutItem* param1) {
+void QGridLayout_virtualbase_addItem_QLayoutItem(VirtualQGridLayout* self, QLayoutItem* param1) {
 
 	self->QGridLayout::addItem(param1);
 }
@@ -787,7 +787,7 @@ QRect* QGridLayout_virtualbase_geometry(const VirtualQGridLayout* self) {
 	return new QRect(self->QGridLayout::geometry());
 }
 
-int QGridLayout_virtualbase_indexOf(const VirtualQGridLayout* self, QWidget* param1) {
+int QGridLayout_virtualbase_indexOf_QWidget(const VirtualQGridLayout* self, QWidget* param1) {
 
 	return self->QGridLayout::indexOf(param1);
 }

@@ -24,12 +24,12 @@ QNetworkAddressEntry* QNetworkAddressEntry_new() {
 	return new (std::nothrow) QNetworkAddressEntry();
 }
 
-QNetworkAddressEntry* QNetworkAddressEntry_new2(QNetworkAddressEntry* other) {
-	return new (std::nothrow) QNetworkAddressEntry(*other);
+QNetworkAddressEntry* QNetworkAddressEntry_new_from(QNetworkAddressEntry* from) {
+	return new (std::nothrow) QNetworkAddressEntry(*from);
 }
 
-void QNetworkAddressEntry_operatorAssign(QNetworkAddressEntry* self, QNetworkAddressEntry* other) {
-	self->operator=(*other);
+void QNetworkAddressEntry_operatorAssign(QNetworkAddressEntry* self, QNetworkAddressEntry* from) {
+	self->operator=(*from);
 }
 
 void QNetworkAddressEntry_swap(QNetworkAddressEntry* self, QNetworkAddressEntry* other) {
@@ -121,12 +121,12 @@ QNetworkInterface* QNetworkInterface_new() {
 	return new (std::nothrow) QNetworkInterface();
 }
 
-QNetworkInterface* QNetworkInterface_new2(QNetworkInterface* other) {
-	return new (std::nothrow) QNetworkInterface(*other);
+QNetworkInterface* QNetworkInterface_new_from(QNetworkInterface* from) {
+	return new (std::nothrow) QNetworkInterface(*from);
 }
 
-void QNetworkInterface_operatorAssign(QNetworkInterface* self, QNetworkInterface* other) {
-	self->operator=(*other);
+void QNetworkInterface_operatorAssign(QNetworkInterface* self, QNetworkInterface* from) {
+	self->operator=(*from);
 }
 
 void QNetworkInterface_swap(QNetworkInterface* self, QNetworkInterface* other) {

@@ -215,10 +215,10 @@ public:
 	friend QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsEffect* self);
 	friend void QGraphicsEffect_protectedbase_drawSource(VirtualQGraphicsEffect* self, QPainter* painter);
 	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap(const VirtualQGraphicsEffect* self);
-	friend QRectF* QGraphicsEffect_protectedbase_sourceBoundingRectWithSystem(const VirtualQGraphicsEffect* self, int system);
-	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmapWithSystem(const VirtualQGraphicsEffect* self, int system);
-	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap2(const VirtualQGraphicsEffect* self, int system, QPoint* offset);
-	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap3(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode);
+	friend QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect_system(const VirtualQGraphicsEffect* self, int system);
+	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system(const VirtualQGraphicsEffect* self, int system);
+	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system_offset(const VirtualQGraphicsEffect* self, int system, QPoint* offset);
+	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system_offset_mode(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode);
 	friend QObject* QGraphicsEffect_protectedbase_sender(const VirtualQGraphicsEffect* self);
 	friend int QGraphicsEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsEffect* self);
 	friend int QGraphicsEffect_protectedbase_receivers(const VirtualQGraphicsEffect* self, const char* signal);
@@ -230,7 +230,7 @@ VirtualQGraphicsEffect* QGraphicsEffect_new(const QGraphicsEffect_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQGraphicsEffect(vtbl) : nullptr;
 }
 
-VirtualQGraphicsEffect* QGraphicsEffect_new2(const QGraphicsEffect_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQGraphicsEffect* QGraphicsEffect_new_parent(const QGraphicsEffect_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsEffect>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsEffect(vtbl, parent) : nullptr;
 }
@@ -251,7 +251,7 @@ int QGraphicsEffect_metacall(QGraphicsEffect* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsEffect_tr(const char* s) {
+struct seaqt_string QGraphicsEffect_tr_s(const char* s) {
 	QString _ret = QGraphicsEffect::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -262,7 +262,7 @@ struct seaqt_string QGraphicsEffect_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsEffect_trUtf8(const char* s) {
+struct seaqt_string QGraphicsEffect_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsEffect::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -309,7 +309,7 @@ void QGraphicsEffect_connect_enabledChanged(QGraphicsEffect* self, intptr_t slot
 	QGraphicsEffect::connect(self, static_cast<void (QGraphicsEffect::*)(bool)>(&QGraphicsEffect::enabledChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsEffect_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsEffect_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsEffect::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -320,7 +320,7 @@ struct seaqt_string QGraphicsEffect_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsEffect_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsEffect_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsEffect::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -331,7 +331,7 @@ struct seaqt_string QGraphicsEffect_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsEffect_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsEffect_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsEffect::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -342,7 +342,7 @@ struct seaqt_string QGraphicsEffect_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsEffect_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsEffect_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsEffect::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -437,19 +437,19 @@ QPixmap* QGraphicsEffect_protectedbase_sourcePixmap(const VirtualQGraphicsEffect
 	return new QPixmap(self->sourcePixmap());
 }
 
-QRectF* QGraphicsEffect_protectedbase_sourceBoundingRectWithSystem(const VirtualQGraphicsEffect* self, int system) {
+QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect_system(const VirtualQGraphicsEffect* self, int system) {
 	return new QRectF(self->sourceBoundingRect(static_cast<Qt::CoordinateSystem>(system)));
 }
 
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmapWithSystem(const VirtualQGraphicsEffect* self, int system) {
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system(const VirtualQGraphicsEffect* self, int system) {
 	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system)));
 }
 
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmap2(const VirtualQGraphicsEffect* self, int system, QPoint* offset) {
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system_offset(const VirtualQGraphicsEffect* self, int system, QPoint* offset) {
 	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset));
 }
 
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmap3(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode) {
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system_offset_mode(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode) {
 	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset, static_cast<VirtualQGraphicsEffect::PixmapPadMode>(mode)));
 }
 
@@ -670,7 +670,7 @@ VirtualQGraphicsColorizeEffect* QGraphicsColorizeEffect_new(const QGraphicsColor
 	return _mem_ ? new (_mem_)VirtualQGraphicsColorizeEffect(vtbl) : nullptr;
 }
 
-VirtualQGraphicsColorizeEffect* QGraphicsColorizeEffect_new2(const QGraphicsColorizeEffect_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQGraphicsColorizeEffect* QGraphicsColorizeEffect_new_parent(const QGraphicsColorizeEffect_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsColorizeEffect>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsColorizeEffect(vtbl, parent) : nullptr;
 }
@@ -691,7 +691,7 @@ int QGraphicsColorizeEffect_metacall(QGraphicsColorizeEffect* self, int param1, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsColorizeEffect_tr(const char* s) {
+struct seaqt_string QGraphicsColorizeEffect_tr_s(const char* s) {
 	QString _ret = QGraphicsColorizeEffect::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -702,7 +702,7 @@ struct seaqt_string QGraphicsColorizeEffect_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsColorizeEffect_trUtf8(const char* s) {
+struct seaqt_string QGraphicsColorizeEffect_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsColorizeEffect::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -765,7 +765,7 @@ void QGraphicsColorizeEffect_connect_strengthChanged(QGraphicsColorizeEffect* se
 	QGraphicsColorizeEffect::connect(self, static_cast<void (QGraphicsColorizeEffect::*)(qreal)>(&QGraphicsColorizeEffect::strengthChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsColorizeEffect_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsColorizeEffect_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsColorizeEffect::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -776,7 +776,7 @@ struct seaqt_string QGraphicsColorizeEffect_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsColorizeEffect_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsColorizeEffect_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsColorizeEffect::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -787,7 +787,7 @@ struct seaqt_string QGraphicsColorizeEffect_tr3(const char* s, const char* c, in
 	return _ms;
 }
 
-struct seaqt_string QGraphicsColorizeEffect_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsColorizeEffect_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsColorizeEffect::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -798,7 +798,7 @@ struct seaqt_string QGraphicsColorizeEffect_trUtf82(const char* s, const char* c
 	return _ms;
 }
 
-struct seaqt_string QGraphicsColorizeEffect_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsColorizeEffect_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsColorizeEffect::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1115,7 +1115,7 @@ VirtualQGraphicsBlurEffect* QGraphicsBlurEffect_new(const QGraphicsBlurEffect_VT
 	return _mem_ ? new (_mem_)VirtualQGraphicsBlurEffect(vtbl) : nullptr;
 }
 
-VirtualQGraphicsBlurEffect* QGraphicsBlurEffect_new2(const QGraphicsBlurEffect_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQGraphicsBlurEffect* QGraphicsBlurEffect_new_parent(const QGraphicsBlurEffect_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsBlurEffect>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsBlurEffect(vtbl, parent) : nullptr;
 }
@@ -1136,7 +1136,7 @@ int QGraphicsBlurEffect_metacall(QGraphicsBlurEffect* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsBlurEffect_tr(const char* s) {
+struct seaqt_string QGraphicsBlurEffect_tr_s(const char* s) {
 	QString _ret = QGraphicsBlurEffect::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1147,7 +1147,7 @@ struct seaqt_string QGraphicsBlurEffect_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsBlurEffect_trUtf8(const char* s) {
+struct seaqt_string QGraphicsBlurEffect_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsBlurEffect::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1214,7 +1214,7 @@ void QGraphicsBlurEffect_connect_blurHintsChanged(QGraphicsBlurEffect* self, int
 	QGraphicsBlurEffect::connect(self, static_cast<void (QGraphicsBlurEffect::*)(QGraphicsBlurEffect::BlurHints)>(&QGraphicsBlurEffect::blurHintsChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsBlurEffect_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsBlurEffect_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsBlurEffect::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1225,7 +1225,7 @@ struct seaqt_string QGraphicsBlurEffect_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsBlurEffect_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsBlurEffect_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsBlurEffect::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1236,7 +1236,7 @@ struct seaqt_string QGraphicsBlurEffect_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QGraphicsBlurEffect_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsBlurEffect_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsBlurEffect::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1247,7 +1247,7 @@ struct seaqt_string QGraphicsBlurEffect_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsBlurEffect_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsBlurEffect_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsBlurEffect::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1564,7 +1564,7 @@ VirtualQGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new(const QGraphicsD
 	return _mem_ ? new (_mem_)VirtualQGraphicsDropShadowEffect(vtbl) : nullptr;
 }
 
-VirtualQGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new2(const QGraphicsDropShadowEffect_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new_parent(const QGraphicsDropShadowEffect_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsDropShadowEffect>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsDropShadowEffect(vtbl, parent) : nullptr;
 }
@@ -1585,7 +1585,7 @@ int QGraphicsDropShadowEffect_metacall(QGraphicsDropShadowEffect* self, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsDropShadowEffect_tr(const char* s) {
+struct seaqt_string QGraphicsDropShadowEffect_tr_s(const char* s) {
 	QString _ret = QGraphicsDropShadowEffect::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1596,7 +1596,7 @@ struct seaqt_string QGraphicsDropShadowEffect_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsDropShadowEffect_trUtf8(const char* s) {
+struct seaqt_string QGraphicsDropShadowEffect_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsDropShadowEffect::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1634,15 +1634,15 @@ QColor* QGraphicsDropShadowEffect_color(const QGraphicsDropShadowEffect* self) {
 	return new QColor(self->color());
 }
 
-void QGraphicsDropShadowEffect_setOffset(QGraphicsDropShadowEffect* self, QPointF* ofs) {
+void QGraphicsDropShadowEffect_setOffset_ofs(QGraphicsDropShadowEffect* self, QPointF* ofs) {
 	self->setOffset(*ofs);
 }
 
-void QGraphicsDropShadowEffect_setOffset2(QGraphicsDropShadowEffect* self, double dx, double dy) {
+void QGraphicsDropShadowEffect_setOffset_dx_dy(QGraphicsDropShadowEffect* self, double dx, double dy) {
 	self->setOffset(static_cast<qreal>(dx), static_cast<qreal>(dy));
 }
 
-void QGraphicsDropShadowEffect_setOffsetWithQreal(QGraphicsDropShadowEffect* self, double d) {
+void QGraphicsDropShadowEffect_setOffset_d(QGraphicsDropShadowEffect* self, double d) {
 	self->setOffset(static_cast<qreal>(d));
 }
 
@@ -1715,7 +1715,7 @@ void QGraphicsDropShadowEffect_connect_colorChanged(QGraphicsDropShadowEffect* s
 	QGraphicsDropShadowEffect::connect(self, static_cast<void (QGraphicsDropShadowEffect::*)(const QColor&)>(&QGraphicsDropShadowEffect::colorChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsDropShadowEffect_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsDropShadowEffect_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsDropShadowEffect::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1726,7 +1726,7 @@ struct seaqt_string QGraphicsDropShadowEffect_tr2(const char* s, const char* c) 
 	return _ms;
 }
 
-struct seaqt_string QGraphicsDropShadowEffect_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsDropShadowEffect_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsDropShadowEffect::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1737,7 +1737,7 @@ struct seaqt_string QGraphicsDropShadowEffect_tr3(const char* s, const char* c, 
 	return _ms;
 }
 
-struct seaqt_string QGraphicsDropShadowEffect_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsDropShadowEffect_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsDropShadowEffect::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1748,7 +1748,7 @@ struct seaqt_string QGraphicsDropShadowEffect_trUtf82(const char* s, const char*
 	return _ms;
 }
 
-struct seaqt_string QGraphicsDropShadowEffect_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsDropShadowEffect_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsDropShadowEffect::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2065,7 +2065,7 @@ VirtualQGraphicsOpacityEffect* QGraphicsOpacityEffect_new(const QGraphicsOpacity
 	return _mem_ ? new (_mem_)VirtualQGraphicsOpacityEffect(vtbl) : nullptr;
 }
 
-VirtualQGraphicsOpacityEffect* QGraphicsOpacityEffect_new2(const QGraphicsOpacityEffect_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQGraphicsOpacityEffect* QGraphicsOpacityEffect_new_parent(const QGraphicsOpacityEffect_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsOpacityEffect>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsOpacityEffect(vtbl, parent) : nullptr;
 }
@@ -2086,7 +2086,7 @@ int QGraphicsOpacityEffect_metacall(QGraphicsOpacityEffect* self, int param1, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsOpacityEffect_tr(const char* s) {
+struct seaqt_string QGraphicsOpacityEffect_tr_s(const char* s) {
 	QString _ret = QGraphicsOpacityEffect::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2097,7 +2097,7 @@ struct seaqt_string QGraphicsOpacityEffect_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsOpacityEffect_trUtf8(const char* s) {
+struct seaqt_string QGraphicsOpacityEffect_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsOpacityEffect::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2160,7 +2160,7 @@ void QGraphicsOpacityEffect_connect_opacityMaskChanged(QGraphicsOpacityEffect* s
 	QGraphicsOpacityEffect::connect(self, static_cast<void (QGraphicsOpacityEffect::*)(const QBrush&)>(&QGraphicsOpacityEffect::opacityMaskChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsOpacityEffect_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsOpacityEffect_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsOpacityEffect::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2171,7 +2171,7 @@ struct seaqt_string QGraphicsOpacityEffect_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsOpacityEffect_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsOpacityEffect_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsOpacityEffect::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2182,7 +2182,7 @@ struct seaqt_string QGraphicsOpacityEffect_tr3(const char* s, const char* c, int
 	return _ms;
 }
 
-struct seaqt_string QGraphicsOpacityEffect_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsOpacityEffect_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsOpacityEffect::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2193,7 +2193,7 @@ struct seaqt_string QGraphicsOpacityEffect_trUtf82(const char* s, const char* c)
 	return _ms;
 }
 
-struct seaqt_string QGraphicsOpacityEffect_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsOpacityEffect_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsOpacityEffect::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

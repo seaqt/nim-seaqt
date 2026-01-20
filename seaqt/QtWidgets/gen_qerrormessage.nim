@@ -73,15 +73,15 @@ type cQErrorMessage*{.exportc: "QErrorMessage", incompleteStruct.} = object
 proc fcQErrorMessage_metaObject(self: pointer): pointer {.importc: "QErrorMessage_metaObject".}
 proc fcQErrorMessage_metacast(self: pointer, param1: cstring): pointer {.importc: "QErrorMessage_metacast".}
 proc fcQErrorMessage_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QErrorMessage_metacall".}
-proc fcQErrorMessage_tr(s: cstring): struct_seaqt_string {.importc: "QErrorMessage_tr".}
-proc fcQErrorMessage_trUtf8(s: cstring): struct_seaqt_string {.importc: "QErrorMessage_trUtf8".}
+proc fcQErrorMessage_trS(s: cstring): struct_seaqt_string {.importc: "QErrorMessage_tr_s".}
+proc fcQErrorMessage_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QErrorMessage_trUtf8_s".}
 proc fcQErrorMessage_qtHandler(): pointer {.importc: "QErrorMessage_qtHandler".}
-proc fcQErrorMessage_showMessage(self: pointer, message: struct_seaqt_string): void {.importc: "QErrorMessage_showMessage".}
-proc fcQErrorMessage_showMessage2(self: pointer, message: struct_seaqt_string, typeVal: struct_seaqt_string): void {.importc: "QErrorMessage_showMessage2".}
-proc fcQErrorMessage_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QErrorMessage_tr2".}
-proc fcQErrorMessage_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QErrorMessage_tr3".}
-proc fcQErrorMessage_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QErrorMessage_trUtf82".}
-proc fcQErrorMessage_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QErrorMessage_trUtf83".}
+proc fcQErrorMessage_showMessageMessage(self: pointer, message: struct_seaqt_string): void {.importc: "QErrorMessage_showMessage_message".}
+proc fcQErrorMessage_showMessageMessageType(self: pointer, message: struct_seaqt_string, typeVal: struct_seaqt_string): void {.importc: "QErrorMessage_showMessage_message_type".}
+proc fcQErrorMessage_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QErrorMessage_tr_s_c".}
+proc fcQErrorMessage_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QErrorMessage_tr_s_c_n".}
+proc fcQErrorMessage_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QErrorMessage_trUtf8_s_c".}
+proc fcQErrorMessage_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QErrorMessage_trUtf8_s_c_n".}
 proc fcQErrorMessage_vdata(self: pointer): ptr pointer {.importc: "QErrorMessage_vdata".}
 proc fvdata_cQErrorMessage(self: pointer): pointer {.importc: "vdata_QErrorMessage".}
 
@@ -207,8 +207,8 @@ proc fcQErrorMessage_protectedbase_sender(self: pointer): pointer {.importc: "QE
 proc fcQErrorMessage_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QErrorMessage_protectedbase_senderSignalIndex".}
 proc fcQErrorMessage_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QErrorMessage_protectedbase_receivers".}
 proc fcQErrorMessage_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QErrorMessage_protectedbase_isSignalConnected".}
-proc fcQErrorMessage_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQErrorMessage {.importc: "QErrorMessage_new".}
-proc fcQErrorMessage_new2(vtbl: pointer, vdata: csize_t): ptr cQErrorMessage {.importc: "QErrorMessage_new2".}
+proc fcQErrorMessage_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQErrorMessage {.importc: "QErrorMessage_new_parent".}
+proc fcQErrorMessage_new2(vtbl: pointer, vdata: csize_t): ptr cQErrorMessage {.importc: "QErrorMessage_new".}
 proc fcQErrorMessage_staticMetaObject(): pointer {.importc: "QErrorMessage_staticMetaObject".}
 
 proc metaObject*(self: gen_qerrormessage_types.QErrorMessage): gen_qobjectdefs_types.QMetaObject =
@@ -221,13 +221,13 @@ proc metacall*(self: gen_qerrormessage_types.QErrorMessage, param1: cint, param2
   fcQErrorMessage_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring): string =
-  let v_ms = fcQErrorMessage_tr(s)
+  let v_ms = fcQErrorMessage_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring): string =
-  let v_ms = fcQErrorMessage_trUtf8(s)
+  let v_ms = fcQErrorMessage_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -236,31 +236,31 @@ proc qtHandler*(_: type gen_qerrormessage_types.QErrorMessage): gen_qerrormessag
   gen_qerrormessage_types.QErrorMessage(h: fcQErrorMessage_qtHandler(), owned: false)
 
 proc showMessage*(self: gen_qerrormessage_types.QErrorMessage, message: openArray[char]): void =
-  fcQErrorMessage_showMessage(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
+  fcQErrorMessage_showMessageMessage(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
 proc showMessage*(self: gen_qerrormessage_types.QErrorMessage, message: openArray[char], typeVal: openArray[char]): void =
-  fcQErrorMessage_showMessage2(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), struct_seaqt_string(data: if len(typeVal) > 0: addr typeVal[0] else: nil, len: csize_t(len(typeVal))))
+  fcQErrorMessage_showMessageMessageType(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), struct_seaqt_string(data: if len(typeVal) > 0: addr typeVal[0] else: nil, len: csize_t(len(typeVal))))
 
 proc tr*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring, c: cstring): string =
-  let v_ms = fcQErrorMessage_tr2(s, c)
+  let v_ms = fcQErrorMessage_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQErrorMessage_tr3(s, c, n)
+  let v_ms = fcQErrorMessage_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring, c: cstring): string =
-  let v_ms = fcQErrorMessage_trUtf82(s, c)
+  let v_ms = fcQErrorMessage_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQErrorMessage_trUtf83(s, c, n)
+  let v_ms = fcQErrorMessage_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

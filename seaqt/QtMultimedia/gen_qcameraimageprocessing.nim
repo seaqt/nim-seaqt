@@ -79,8 +79,8 @@ type cQCameraImageProcessing*{.exportc: "QCameraImageProcessing", incompleteStru
 proc fcQCameraImageProcessing_metaObject(self: pointer): pointer {.importc: "QCameraImageProcessing_metaObject".}
 proc fcQCameraImageProcessing_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraImageProcessing_metacast".}
 proc fcQCameraImageProcessing_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraImageProcessing_metacall".}
-proc fcQCameraImageProcessing_tr(s: cstring): struct_seaqt_string {.importc: "QCameraImageProcessing_tr".}
-proc fcQCameraImageProcessing_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraImageProcessing_trUtf8".}
+proc fcQCameraImageProcessing_trS(s: cstring): struct_seaqt_string {.importc: "QCameraImageProcessing_tr_s".}
+proc fcQCameraImageProcessing_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraImageProcessing_trUtf8_s".}
 proc fcQCameraImageProcessing_isAvailable(self: pointer): bool {.importc: "QCameraImageProcessing_isAvailable".}
 proc fcQCameraImageProcessing_whiteBalanceMode(self: pointer): cint {.importc: "QCameraImageProcessing_whiteBalanceMode".}
 proc fcQCameraImageProcessing_setWhiteBalanceMode(self: pointer, mode: cint): void {.importc: "QCameraImageProcessing_setWhiteBalanceMode".}
@@ -100,10 +100,10 @@ proc fcQCameraImageProcessing_setDenoisingLevel(self: pointer, value: float64): 
 proc fcQCameraImageProcessing_colorFilter(self: pointer): cint {.importc: "QCameraImageProcessing_colorFilter".}
 proc fcQCameraImageProcessing_setColorFilter(self: pointer, filter: cint): void {.importc: "QCameraImageProcessing_setColorFilter".}
 proc fcQCameraImageProcessing_isColorFilterSupported(self: pointer, filter: cint): bool {.importc: "QCameraImageProcessing_isColorFilterSupported".}
-proc fcQCameraImageProcessing_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageProcessing_tr2".}
-proc fcQCameraImageProcessing_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageProcessing_tr3".}
-proc fcQCameraImageProcessing_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageProcessing_trUtf82".}
-proc fcQCameraImageProcessing_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageProcessing_trUtf83".}
+proc fcQCameraImageProcessing_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageProcessing_tr_s_c".}
+proc fcQCameraImageProcessing_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageProcessing_tr_s_c_n".}
+proc fcQCameraImageProcessing_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageProcessing_trUtf8_s_c".}
+proc fcQCameraImageProcessing_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageProcessing_trUtf8_s_c_n".}
 proc fcQCameraImageProcessing_protectedbase_sender(self: pointer): pointer {.importc: "QCameraImageProcessing_protectedbase_sender".}
 proc fcQCameraImageProcessing_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraImageProcessing_protectedbase_senderSignalIndex".}
 proc fcQCameraImageProcessing_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraImageProcessing_protectedbase_receivers".}
@@ -120,13 +120,13 @@ proc metacall*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, pa
   fcQCameraImageProcessing_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s: cstring): string =
-  let v_ms = fcQCameraImageProcessing_tr(s)
+  let v_ms = fcQCameraImageProcessing_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s: cstring): string =
-  let v_ms = fcQCameraImageProcessing_trUtf8(s)
+  let v_ms = fcQCameraImageProcessing_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -189,25 +189,25 @@ proc isColorFilterSupported*(self: gen_qcameraimageprocessing_types.QCameraImage
   fcQCameraImageProcessing_isColorFilterSupported(self.h, cint(filter))
 
 proc tr*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraImageProcessing_tr2(s, c)
+  let v_ms = fcQCameraImageProcessing_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraImageProcessing_tr3(s, c, n)
+  let v_ms = fcQCameraImageProcessing_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraImageProcessing_trUtf82(s, c)
+  let v_ms = fcQCameraImageProcessing_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraImageProcessing_trUtf83(s, c, n)
+  let v_ms = fcQCameraImageProcessing_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

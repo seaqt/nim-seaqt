@@ -57,8 +57,8 @@ type cQWebEngineNotification*{.exportc: "QWebEngineNotification", incompleteStru
 proc fcQWebEngineNotification_metaObject(self: pointer): pointer {.importc: "QWebEngineNotification_metaObject".}
 proc fcQWebEngineNotification_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNotification_metacast".}
 proc fcQWebEngineNotification_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNotification_metacall".}
-proc fcQWebEngineNotification_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineNotification_tr".}
-proc fcQWebEngineNotification_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebEngineNotification_trUtf8".}
+proc fcQWebEngineNotification_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineNotification_tr_s".}
+proc fcQWebEngineNotification_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebEngineNotification_trUtf8_s".}
 proc fcQWebEngineNotification_matches(self: pointer, other: pointer): bool {.importc: "QWebEngineNotification_matches".}
 proc fcQWebEngineNotification_origin(self: pointer): pointer {.importc: "QWebEngineNotification_origin".}
 proc fcQWebEngineNotification_icon(self: pointer): pointer {.importc: "QWebEngineNotification_icon".}
@@ -72,10 +72,10 @@ proc fcQWebEngineNotification_click(self: pointer): void {.importc: "QWebEngineN
 proc fcQWebEngineNotification_close(self: pointer): void {.importc: "QWebEngineNotification_close".}
 proc fcQWebEngineNotification_closed(self: pointer): void {.importc: "QWebEngineNotification_closed".}
 proc fcQWebEngineNotification_connect_closed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineNotification_connect_closed".}
-proc fcQWebEngineNotification_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineNotification_tr2".}
-proc fcQWebEngineNotification_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineNotification_tr3".}
-proc fcQWebEngineNotification_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineNotification_trUtf82".}
-proc fcQWebEngineNotification_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineNotification_trUtf83".}
+proc fcQWebEngineNotification_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineNotification_tr_s_c".}
+proc fcQWebEngineNotification_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineNotification_tr_s_c_n".}
+proc fcQWebEngineNotification_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineNotification_trUtf8_s_c".}
+proc fcQWebEngineNotification_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineNotification_trUtf8_s_c_n".}
 proc fcQWebEngineNotification_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineNotification_protectedbase_sender".}
 proc fcQWebEngineNotification_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineNotification_protectedbase_senderSignalIndex".}
 proc fcQWebEngineNotification_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNotification_protectedbase_receivers".}
@@ -92,13 +92,13 @@ proc metacall*(self: gen_qwebenginenotification_types.QWebEngineNotification, pa
   fcQWebEngineNotification_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring): string =
-  let v_ms = fcQWebEngineNotification_tr(s)
+  let v_ms = fcQWebEngineNotification_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring): string =
-  let v_ms = fcQWebEngineNotification_trUtf8(s)
+  let v_ms = fcQWebEngineNotification_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -167,25 +167,25 @@ proc onClosed*(self: gen_qwebenginenotification_types.QWebEngineNotification, sl
   fcQWebEngineNotification_connect_closed(self.h, cast[int](addr tmp[]), fcQWebEngineNotification_slot_callback_closed, fcQWebEngineNotification_slot_callback_closed_release)
 
 proc tr*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineNotification_tr2(s, c)
+  let v_ms = fcQWebEngineNotification_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineNotification_tr3(s, c, n)
+  let v_ms = fcQWebEngineNotification_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineNotification_trUtf82(s, c)
+  let v_ms = fcQWebEngineNotification_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineNotification_trUtf83(s, c, n)
+  let v_ms = fcQWebEngineNotification_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -99,8 +99,8 @@ type cQCameraExposure*{.exportc: "QCameraExposure", incompleteStruct.} = object
 proc fcQCameraExposure_metaObject(self: pointer): pointer {.importc: "QCameraExposure_metaObject".}
 proc fcQCameraExposure_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraExposure_metacast".}
 proc fcQCameraExposure_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraExposure_metacall".}
-proc fcQCameraExposure_tr(s: cstring): struct_seaqt_string {.importc: "QCameraExposure_tr".}
-proc fcQCameraExposure_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraExposure_trUtf8".}
+proc fcQCameraExposure_trS(s: cstring): struct_seaqt_string {.importc: "QCameraExposure_tr_s".}
+proc fcQCameraExposure_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraExposure_trUtf8_s".}
 proc fcQCameraExposure_isAvailable(self: pointer): bool {.importc: "QCameraExposure_isAvailable".}
 proc fcQCameraExposure_flashMode(self: pointer): cint {.importc: "QCameraExposure_flashMode".}
 proc fcQCameraExposure_isFlashModeSupported(self: pointer, mode: cint): bool {.importc: "QCameraExposure_isFlashModeSupported".}
@@ -145,13 +145,13 @@ proc fcQCameraExposure_isoSensitivityChanged(self: pointer, param1: cint): void 
 proc fcQCameraExposure_connect_isoSensitivityChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraExposure_connect_isoSensitivityChanged".}
 proc fcQCameraExposure_exposureCompensationChanged(self: pointer, param1: float64): void {.importc: "QCameraExposure_exposureCompensationChanged".}
 proc fcQCameraExposure_connect_exposureCompensationChanged(self: pointer, slot: int, callback: proc (slot: int, param1: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraExposure_connect_exposureCompensationChanged".}
-proc fcQCameraExposure_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraExposure_tr2".}
-proc fcQCameraExposure_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraExposure_tr3".}
-proc fcQCameraExposure_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraExposure_trUtf82".}
-proc fcQCameraExposure_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraExposure_trUtf83".}
-proc fcQCameraExposure_supportedIsoSensitivitiesWithContinuous(self: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraExposure_supportedIsoSensitivitiesWithContinuous".}
-proc fcQCameraExposure_supportedAperturesWithContinuous(self: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraExposure_supportedAperturesWithContinuous".}
-proc fcQCameraExposure_supportedShutterSpeedsWithContinuous(self: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraExposure_supportedShutterSpeedsWithContinuous".}
+proc fcQCameraExposure_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraExposure_tr_s_c".}
+proc fcQCameraExposure_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraExposure_tr_s_c_n".}
+proc fcQCameraExposure_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraExposure_trUtf8_s_c".}
+proc fcQCameraExposure_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraExposure_trUtf8_s_c_n".}
+proc fcQCameraExposure_supportedIsoSensitivitiesContinuous(self: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraExposure_supportedIsoSensitivities_continuous".}
+proc fcQCameraExposure_supportedAperturesContinuous(self: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraExposure_supportedApertures_continuous".}
+proc fcQCameraExposure_supportedShutterSpeedsContinuous(self: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraExposure_supportedShutterSpeeds_continuous".}
 proc fcQCameraExposure_protectedbase_sender(self: pointer): pointer {.importc: "QCameraExposure_protectedbase_sender".}
 proc fcQCameraExposure_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraExposure_protectedbase_senderSignalIndex".}
 proc fcQCameraExposure_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraExposure_protectedbase_receivers".}
@@ -168,13 +168,13 @@ proc metacall*(self: gen_qcameraexposure_types.QCameraExposure, param1: cint, pa
   fcQCameraExposure_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraexposure_types.QCameraExposure, s: cstring): string =
-  let v_ms = fcQCameraExposure_tr(s)
+  let v_ms = fcQCameraExposure_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraexposure_types.QCameraExposure, s: cstring): string =
-  let v_ms = fcQCameraExposure_trUtf8(s)
+  let v_ms = fcQCameraExposure_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -424,31 +424,31 @@ proc onExposureCompensationChanged*(self: gen_qcameraexposure_types.QCameraExpos
   fcQCameraExposure_connect_exposureCompensationChanged(self.h, cast[int](addr tmp[]), fcQCameraExposure_slot_callback_exposureCompensationChanged, fcQCameraExposure_slot_callback_exposureCompensationChanged_release)
 
 proc tr*(_: type gen_qcameraexposure_types.QCameraExposure, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraExposure_tr2(s, c)
+  let v_ms = fcQCameraExposure_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameraexposure_types.QCameraExposure, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraExposure_tr3(s, c, n)
+  let v_ms = fcQCameraExposure_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraexposure_types.QCameraExposure, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraExposure_trUtf82(s, c)
+  let v_ms = fcQCameraExposure_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraexposure_types.QCameraExposure, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraExposure_trUtf83(s, c, n)
+  let v_ms = fcQCameraExposure_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc supportedIsoSensitivities*(self: gen_qcameraexposure_types.QCameraExposure, continuous: ptr bool): seq[cint] =
-  var v_ma = fcQCameraExposure_supportedIsoSensitivitiesWithContinuous(self.h, continuous)
+  var v_ma = fcQCameraExposure_supportedIsoSensitivitiesContinuous(self.h, continuous)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -457,7 +457,7 @@ proc supportedIsoSensitivities*(self: gen_qcameraexposure_types.QCameraExposure,
   vx_ret
 
 proc supportedApertures*(self: gen_qcameraexposure_types.QCameraExposure, continuous: ptr bool): seq[float64] =
-  var v_ma = fcQCameraExposure_supportedAperturesWithContinuous(self.h, continuous)
+  var v_ma = fcQCameraExposure_supportedAperturesContinuous(self.h, continuous)
   var vx_ret = newSeq[float64](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -466,7 +466,7 @@ proc supportedApertures*(self: gen_qcameraexposure_types.QCameraExposure, contin
   vx_ret
 
 proc supportedShutterSpeeds*(self: gen_qcameraexposure_types.QCameraExposure, continuous: ptr bool): seq[float64] =
-  var v_ma = fcQCameraExposure_supportedShutterSpeedsWithContinuous(self.h, continuous)
+  var v_ma = fcQCameraExposure_supportedShutterSpeedsContinuous(self.h, continuous)
   var vx_ret = newSeq[float64](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:

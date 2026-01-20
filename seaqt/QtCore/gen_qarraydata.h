@@ -29,17 +29,17 @@ void QArrayData_setCapacityReserved(QArrayData* self, unsigned int capacityReser
 intptr_t QArrayData_offset(const QArrayData* self);
 void QArrayData_setOffset(QArrayData* self, intptr_t offset);
 void* QArrayData_data(QArrayData* self);
-const void* QArrayData_data2(const QArrayData* self);
+const void* QArrayData_data_const(const QArrayData* self);
 bool QArrayData_isMutable(const QArrayData* self);
 size_t QArrayData_detachCapacity(const QArrayData* self, size_t newSize);
 int QArrayData_detachFlags(const QArrayData* self);
 int QArrayData_cloneFlags(const QArrayData* self);
-QArrayData* QArrayData_allocate(size_t objectSize, size_t alignment, size_t capacity);
-QArrayData* QArrayData_reallocateUnaligned(QArrayData* data, size_t objectSize, size_t newCapacity);
+QArrayData* QArrayData_allocate_objectSize_alignment_capacity(size_t objectSize, size_t alignment, size_t capacity);
+QArrayData* QArrayData_reallocateUnaligned_data_objectSize_newCapacity(QArrayData* data, size_t objectSize, size_t newCapacity);
 void QArrayData_deallocate(QArrayData* data, size_t objectSize, size_t alignment);
 QArrayData* QArrayData_sharedNull();
-QArrayData* QArrayData_allocate2(size_t objectSize, size_t alignment, size_t capacity, int options);
-QArrayData* QArrayData_reallocateUnaligned2(QArrayData* data, size_t objectSize, size_t newCapacity, int newOptions);
+QArrayData* QArrayData_allocate_objectSize_alignment_capacity_options(size_t objectSize, size_t alignment, size_t capacity, int options);
+QArrayData* QArrayData_reallocateUnaligned_data_objectSize_newCapacity_newOptions(QArrayData* data, size_t objectSize, size_t newCapacity, int newOptions);
 
 void QArrayData_delete(QArrayData* self);
 

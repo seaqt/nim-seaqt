@@ -57,13 +57,13 @@ type cQStylePlugin*{.exportc: "QStylePlugin", incompleteStruct.} = object
 proc fcQStylePlugin_metaObject(self: pointer): pointer {.importc: "QStylePlugin_metaObject".}
 proc fcQStylePlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QStylePlugin_metacast".}
 proc fcQStylePlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStylePlugin_metacall".}
-proc fcQStylePlugin_tr(s: cstring): struct_seaqt_string {.importc: "QStylePlugin_tr".}
-proc fcQStylePlugin_trUtf8(s: cstring): struct_seaqt_string {.importc: "QStylePlugin_trUtf8".}
+proc fcQStylePlugin_trS(s: cstring): struct_seaqt_string {.importc: "QStylePlugin_tr_s".}
+proc fcQStylePlugin_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QStylePlugin_trUtf8_s".}
 proc fcQStylePlugin_createX(self: pointer, key: struct_seaqt_string): pointer {.importc: "QStylePlugin_create".}
-proc fcQStylePlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStylePlugin_tr2".}
-proc fcQStylePlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStylePlugin_tr3".}
-proc fcQStylePlugin_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStylePlugin_trUtf82".}
-proc fcQStylePlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStylePlugin_trUtf83".}
+proc fcQStylePlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStylePlugin_tr_s_c".}
+proc fcQStylePlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStylePlugin_tr_s_c_n".}
+proc fcQStylePlugin_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStylePlugin_trUtf8_s_c".}
+proc fcQStylePlugin_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStylePlugin_trUtf8_s_c_n".}
 proc fcQStylePlugin_vdata(self: pointer): ptr pointer {.importc: "QStylePlugin_vdata".}
 proc fvdata_cQStylePlugin(self: pointer): pointer {.importc: "vdata_QStylePlugin".}
 
@@ -95,7 +95,7 @@ proc fcQStylePlugin_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQStylePlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStylePlugin_protectedbase_receivers".}
 proc fcQStylePlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStylePlugin_protectedbase_isSignalConnected".}
 proc fcQStylePlugin_new(vtbl: pointer, vdata: csize_t): ptr cQStylePlugin {.importc: "QStylePlugin_new".}
-proc fcQStylePlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStylePlugin {.importc: "QStylePlugin_new2".}
+proc fcQStylePlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStylePlugin {.importc: "QStylePlugin_new_parent".}
 proc fcQStylePlugin_staticMetaObject(): pointer {.importc: "QStylePlugin_staticMetaObject".}
 
 proc metaObject*(self: gen_qstyleplugin_types.QStylePlugin): gen_qobjectdefs_types.QMetaObject =
@@ -108,13 +108,13 @@ proc metacall*(self: gen_qstyleplugin_types.QStylePlugin, param1: cint, param2: 
   fcQStylePlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring): string =
-  let v_ms = fcQStylePlugin_tr(s)
+  let v_ms = fcQStylePlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring): string =
-  let v_ms = fcQStylePlugin_trUtf8(s)
+  let v_ms = fcQStylePlugin_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -123,25 +123,25 @@ proc createX*(self: gen_qstyleplugin_types.QStylePlugin, key: openArray[char]): 
   gen_qstyle_types.QStyle(h: fcQStylePlugin_createX(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc tr*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQStylePlugin_tr2(s, c)
+  let v_ms = fcQStylePlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStylePlugin_tr3(s, c, n)
+  let v_ms = fcQStylePlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQStylePlugin_trUtf82(s, c)
+  let v_ms = fcQStylePlugin_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStylePlugin_trUtf83(s, c, n)
+  let v_ms = fcQStylePlugin_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

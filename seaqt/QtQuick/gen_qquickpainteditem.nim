@@ -85,8 +85,8 @@ type cQQuickPaintedItem*{.exportc: "QQuickPaintedItem", incompleteStruct.} = obj
 proc fcQQuickPaintedItem_metaObject(self: pointer): pointer {.importc: "QQuickPaintedItem_metaObject".}
 proc fcQQuickPaintedItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickPaintedItem_metacast".}
 proc fcQQuickPaintedItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickPaintedItem_metacall".}
-proc fcQQuickPaintedItem_tr(s: cstring): struct_seaqt_string {.importc: "QQuickPaintedItem_tr".}
-proc fcQQuickPaintedItem_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQuickPaintedItem_trUtf8".}
+proc fcQQuickPaintedItem_trS(s: cstring): struct_seaqt_string {.importc: "QQuickPaintedItem_tr_s".}
+proc fcQQuickPaintedItem_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQuickPaintedItem_trUtf8_s".}
 proc fcQQuickPaintedItem_update(self: pointer): void {.importc: "QQuickPaintedItem_update".}
 proc fcQQuickPaintedItem_opaquePainting(self: pointer): bool {.importc: "QQuickPaintedItem_opaquePainting".}
 proc fcQQuickPaintedItem_setOpaquePainting(self: pointer, opaque: bool): void {.importc: "QQuickPaintedItem_setOpaquePainting".}
@@ -95,7 +95,7 @@ proc fcQQuickPaintedItem_setAntialiasing(self: pointer, enable: bool): void {.im
 proc fcQQuickPaintedItem_mipmap(self: pointer): bool {.importc: "QQuickPaintedItem_mipmap".}
 proc fcQQuickPaintedItem_setMipmap(self: pointer, enable: bool): void {.importc: "QQuickPaintedItem_setMipmap".}
 proc fcQQuickPaintedItem_performanceHints(self: pointer): cint {.importc: "QQuickPaintedItem_performanceHints".}
-proc fcQQuickPaintedItem_setPerformanceHint(self: pointer, hint: cint): void {.importc: "QQuickPaintedItem_setPerformanceHint".}
+proc fcQQuickPaintedItem_setPerformanceHintHint(self: pointer, hint: cint): void {.importc: "QQuickPaintedItem_setPerformanceHint_hint".}
 proc fcQQuickPaintedItem_setPerformanceHints(self: pointer, hints: cint): void {.importc: "QQuickPaintedItem_setPerformanceHints".}
 proc fcQQuickPaintedItem_contentsBoundingRect(self: pointer): pointer {.importc: "QQuickPaintedItem_contentsBoundingRect".}
 proc fcQQuickPaintedItem_contentsSize(self: pointer): pointer {.importc: "QQuickPaintedItem_contentsSize".}
@@ -122,12 +122,12 @@ proc fcQQuickPaintedItem_renderTargetChanged(self: pointer): void {.importc: "QQ
 proc fcQQuickPaintedItem_connect_renderTargetChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickPaintedItem_connect_renderTargetChanged".}
 proc fcQQuickPaintedItem_textureSizeChanged(self: pointer): void {.importc: "QQuickPaintedItem_textureSizeChanged".}
 proc fcQQuickPaintedItem_connect_textureSizeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickPaintedItem_connect_textureSizeChanged".}
-proc fcQQuickPaintedItem_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickPaintedItem_tr2".}
-proc fcQQuickPaintedItem_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickPaintedItem_tr3".}
-proc fcQQuickPaintedItem_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickPaintedItem_trUtf82".}
-proc fcQQuickPaintedItem_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickPaintedItem_trUtf83".}
-proc fcQQuickPaintedItem_updateWithRect(self: pointer, rect: pointer): void {.importc: "QQuickPaintedItem_updateWithRect".}
-proc fcQQuickPaintedItem_setPerformanceHint2(self: pointer, hint: cint, enabled: bool): void {.importc: "QQuickPaintedItem_setPerformanceHint2".}
+proc fcQQuickPaintedItem_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickPaintedItem_tr_s_c".}
+proc fcQQuickPaintedItem_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickPaintedItem_tr_s_c_n".}
+proc fcQQuickPaintedItem_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickPaintedItem_trUtf8_s_c".}
+proc fcQQuickPaintedItem_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickPaintedItem_trUtf8_s_c_n".}
+proc fcQQuickPaintedItem_updateRect(self: pointer, rect: pointer): void {.importc: "QQuickPaintedItem_update_rect".}
+proc fcQQuickPaintedItem_setPerformanceHintHintEnabled(self: pointer, hint: cint, enabled: bool): void {.importc: "QQuickPaintedItem_setPerformanceHint_hint_enabled".}
 proc fcQQuickPaintedItem_vdata(self: pointer): ptr pointer {.importc: "QQuickPaintedItem_vdata".}
 proc fvdata_cQQuickPaintedItem(self: pointer): pointer {.importc: "vdata_QQuickPaintedItem".}
 
@@ -234,7 +234,7 @@ proc fcQQuickPaintedItem_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQQuickPaintedItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickPaintedItem_protectedbase_receivers".}
 proc fcQQuickPaintedItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickPaintedItem_protectedbase_isSignalConnected".}
 proc fcQQuickPaintedItem_new(vtbl: pointer, vdata: csize_t): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new".}
-proc fcQQuickPaintedItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new2".}
+proc fcQQuickPaintedItem_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new_parent".}
 proc fcQQuickPaintedItem_staticMetaObject(): pointer {.importc: "QQuickPaintedItem_staticMetaObject".}
 
 proc metaObject*(self: gen_qquickpainteditem_types.QQuickPaintedItem): gen_qobjectdefs_types.QMetaObject =
@@ -247,13 +247,13 @@ proc metacall*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: cint
   fcQQuickPaintedItem_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickpainteditem_types.QQuickPaintedItem, s: cstring): string =
-  let v_ms = fcQQuickPaintedItem_tr(s)
+  let v_ms = fcQQuickPaintedItem_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickpainteditem_types.QQuickPaintedItem, s: cstring): string =
-  let v_ms = fcQQuickPaintedItem_trUtf8(s)
+  let v_ms = fcQQuickPaintedItem_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -283,7 +283,7 @@ proc performanceHints*(self: gen_qquickpainteditem_types.QQuickPaintedItem): cin
   cint(fcQQuickPaintedItem_performanceHints(self.h))
 
 proc setPerformanceHint*(self: gen_qquickpainteditem_types.QQuickPaintedItem, hint: cint): void =
-  fcQQuickPaintedItem_setPerformanceHint(self.h, cint(hint))
+  fcQQuickPaintedItem_setPerformanceHintHint(self.h, cint(hint))
 
 proc setPerformanceHints*(self: gen_qquickpainteditem_types.QQuickPaintedItem, hints: cint): void =
   fcQQuickPaintedItem_setPerformanceHints(self.h, cint(hints))
@@ -424,34 +424,34 @@ proc onTextureSizeChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, 
   fcQQuickPaintedItem_connect_textureSizeChanged(self.h, cast[int](addr tmp[]), fcQQuickPaintedItem_slot_callback_textureSizeChanged, fcQQuickPaintedItem_slot_callback_textureSizeChanged_release)
 
 proc tr*(_: type gen_qquickpainteditem_types.QQuickPaintedItem, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickPaintedItem_tr2(s, c)
+  let v_ms = fcQQuickPaintedItem_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickpainteditem_types.QQuickPaintedItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickPaintedItem_tr3(s, c, n)
+  let v_ms = fcQQuickPaintedItem_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickpainteditem_types.QQuickPaintedItem, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickPaintedItem_trUtf82(s, c)
+  let v_ms = fcQQuickPaintedItem_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickpainteditem_types.QQuickPaintedItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickPaintedItem_trUtf83(s, c, n)
+  let v_ms = fcQQuickPaintedItem_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc update*(self: gen_qquickpainteditem_types.QQuickPaintedItem, rect: gen_qrect_types.QRect): void =
-  fcQQuickPaintedItem_updateWithRect(self.h, rect.h)
+  fcQQuickPaintedItem_updateRect(self.h, rect.h)
 
 proc setPerformanceHint*(self: gen_qquickpainteditem_types.QQuickPaintedItem, hint: cint, enabled: bool): void =
-  fcQQuickPaintedItem_setPerformanceHint2(self.h, cint(hint), enabled)
+  fcQQuickPaintedItem_setPerformanceHintHintEnabled(self.h, cint(hint), enabled)
 
 type QQuickPaintedItemmetaObjectProc* = proc(self: QQuickPaintedItem): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQuickPaintedItemmetacastProc* = proc(self: QQuickPaintedItem, param1: cstring): pointer {.raises: [], gcsafe.}

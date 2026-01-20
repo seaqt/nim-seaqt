@@ -36,8 +36,8 @@ void QCameraFocusControl_virtbase(QCameraFocusControl* src, QMediaControl** outp
 QMetaObject* QCameraFocusControl_metaObject(const QCameraFocusControl* self);
 void* QCameraFocusControl_metacast(QCameraFocusControl* self, const char* param1);
 int QCameraFocusControl_metacall(QCameraFocusControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraFocusControl_tr(const char* s);
-struct seaqt_string QCameraFocusControl_trUtf8(const char* s);
+struct seaqt_string QCameraFocusControl_tr_s(const char* s);
+struct seaqt_string QCameraFocusControl_trUtf8_s(const char* s);
 int QCameraFocusControl_focusMode(const QCameraFocusControl* self);
 void QCameraFocusControl_setFocusMode(QCameraFocusControl* self, int mode);
 bool QCameraFocusControl_isFocusModeSupported(const QCameraFocusControl* self, int mode);
@@ -55,10 +55,10 @@ void QCameraFocusControl_customFocusPointChanged(QCameraFocusControl* self, QPoi
 void QCameraFocusControl_connect_customFocusPointChanged(QCameraFocusControl* self, intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t));
 void QCameraFocusControl_focusZonesChanged(QCameraFocusControl* self);
 void QCameraFocusControl_connect_focusZonesChanged(QCameraFocusControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QCameraFocusControl_tr2(const char* s, const char* c);
-struct seaqt_string QCameraFocusControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraFocusControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraFocusControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraFocusControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraFocusControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraFocusControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraFocusControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraFocusControl_staticMetaObject();
 void QCameraFocusControl_delete(QCameraFocusControl* self);

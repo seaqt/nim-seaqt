@@ -157,16 +157,16 @@ typedef struct QWizard_VTable{
 void* QWizard_vdata(VirtualQWizard* self);
 VirtualQWizard* vdata_QWizard(void* vdata);
 
-VirtualQWizard* QWizard_new(const QWizard_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQWizard* QWizard_new2(const QWizard_VTable* vtbl, size_t vdata);
-VirtualQWizard* QWizard_new3(const QWizard_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQWizard* QWizard_new_parent(const QWizard_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQWizard* QWizard_new(const QWizard_VTable* vtbl, size_t vdata);
+VirtualQWizard* QWizard_new_parent_flags(const QWizard_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
 
 void QWizard_virtbase(QWizard* src, QDialog** outptr_QDialog);
 QMetaObject* QWizard_metaObject(const QWizard* self);
 void* QWizard_metacast(QWizard* self, const char* param1);
 int QWizard_metacall(QWizard* self, int param1, int param2, void** param3);
-struct seaqt_string QWizard_tr(const char* s);
-struct seaqt_string QWizard_trUtf8(const char* s);
+struct seaqt_string QWizard_tr_s(const char* s);
+struct seaqt_string QWizard_trUtf8_s(const char* s);
 int QWizard_addPage(QWizard* self, QWizardPage* page);
 void QWizard_setPage(QWizard* self, int id, QWizardPage* page);
 void QWizard_removePage(QWizard* self, int id);
@@ -185,7 +185,7 @@ void QWizard_setField(QWizard* self, struct seaqt_string name, QVariant* value);
 QVariant* QWizard_field(const QWizard* self, struct seaqt_string name);
 void QWizard_setWizardStyle(QWizard* self, int style);
 int QWizard_wizardStyle(const QWizard* self);
-void QWizard_setOption(QWizard* self, int option);
+void QWizard_setOption_option(QWizard* self, int option);
 bool QWizard_testOption(const QWizard* self, int option);
 void QWizard_setOptions(QWizard* self, int options);
 int QWizard_options(const QWizard* self);
@@ -224,11 +224,11 @@ void QWizard_paintEvent(QWizard* self, QPaintEvent* event);
 void QWizard_done(QWizard* self, int result);
 void QWizard_initializePage(QWizard* self, int id);
 void QWizard_cleanupPage(QWizard* self, int id);
-struct seaqt_string QWizard_tr2(const char* s, const char* c);
-struct seaqt_string QWizard_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWizard_trUtf82(const char* s, const char* c);
-struct seaqt_string QWizard_trUtf83(const char* s, const char* c, int n);
-void QWizard_setOption2(QWizard* self, int option, bool on);
+struct seaqt_string QWizard_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWizard_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWizard_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWizard_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QWizard_setOption_option_on(QWizard* self, int option, bool on);
 
 QMetaObject* QWizard_virtualbase_metaObject(const VirtualQWizard* self);
 void* QWizard_virtualbase_metacast(VirtualQWizard* self, const char* param1);
@@ -367,15 +367,15 @@ typedef struct QWizardPage_VTable{
 void* QWizardPage_vdata(VirtualQWizardPage* self);
 VirtualQWizardPage* vdata_QWizardPage(void* vdata);
 
-VirtualQWizardPage* QWizardPage_new(const QWizardPage_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQWizardPage* QWizardPage_new2(const QWizardPage_VTable* vtbl, size_t vdata);
+VirtualQWizardPage* QWizardPage_new_parent(const QWizardPage_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQWizardPage* QWizardPage_new(const QWizardPage_VTable* vtbl, size_t vdata);
 
 void QWizardPage_virtbase(QWizardPage* src, QWidget** outptr_QWidget);
 QMetaObject* QWizardPage_metaObject(const QWizardPage* self);
 void* QWizardPage_metacast(QWizardPage* self, const char* param1);
 int QWizardPage_metacall(QWizardPage* self, int param1, int param2, void** param3);
-struct seaqt_string QWizardPage_tr(const char* s);
-struct seaqt_string QWizardPage_trUtf8(const char* s);
+struct seaqt_string QWizardPage_tr_s(const char* s);
+struct seaqt_string QWizardPage_trUtf8_s(const char* s);
 void QWizardPage_setTitle(QWizardPage* self, struct seaqt_string title);
 struct seaqt_string QWizardPage_title(const QWizardPage* self);
 void QWizardPage_setSubTitle(QWizardPage* self, struct seaqt_string subTitle);
@@ -395,10 +395,10 @@ bool QWizardPage_isComplete(const QWizardPage* self);
 int QWizardPage_nextId(const QWizardPage* self);
 void QWizardPage_completeChanged(QWizardPage* self);
 void QWizardPage_connect_completeChanged(QWizardPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QWizardPage_tr2(const char* s, const char* c);
-struct seaqt_string QWizardPage_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWizardPage_trUtf82(const char* s, const char* c);
-struct seaqt_string QWizardPage_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWizardPage_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWizardPage_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWizardPage_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWizardPage_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWizardPage_virtualbase_metaObject(const VirtualQWizardPage* self);
 void* QWizardPage_virtualbase_metacast(VirtualQWizardPage* self, const char* param1);
@@ -458,10 +458,10 @@ void QWizardPage_virtualbase_disconnectNotify(VirtualQWizardPage* self, QMetaMet
 
 void QWizardPage_protectedbase_setField(VirtualQWizardPage* self, struct seaqt_string name, QVariant* value);
 QVariant* QWizardPage_protectedbase_field(const VirtualQWizardPage* self, struct seaqt_string name);
-void QWizardPage_protectedbase_registerField(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget);
+void QWizardPage_protectedbase_registerField_name_widget(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget);
 QWizard* QWizardPage_protectedbase_wizard(const VirtualQWizardPage* self);
-void QWizardPage_protectedbase_registerField2(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property);
-void QWizardPage_protectedbase_registerField3(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property, const char* changedSignal);
+void QWizardPage_protectedbase_registerField_name_widget_property(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property);
+void QWizardPage_protectedbase_registerField_name_widget_property_changedSignal(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property, const char* changedSignal);
 void QWizardPage_protectedbase_updateMicroFocus(VirtualQWizardPage* self);
 void QWizardPage_protectedbase_create(VirtualQWizardPage* self);
 void QWizardPage_protectedbase_destroy(VirtualQWizardPage* self);

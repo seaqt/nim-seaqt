@@ -59,8 +59,8 @@ type cQVideoWindowControl*{.exportc: "QVideoWindowControl", incompleteStruct.} =
 proc fcQVideoWindowControl_metaObject(self: pointer): pointer {.importc: "QVideoWindowControl_metaObject".}
 proc fcQVideoWindowControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoWindowControl_metacast".}
 proc fcQVideoWindowControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoWindowControl_metacall".}
-proc fcQVideoWindowControl_tr(s: cstring): struct_seaqt_string {.importc: "QVideoWindowControl_tr".}
-proc fcQVideoWindowControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QVideoWindowControl_trUtf8".}
+proc fcQVideoWindowControl_trS(s: cstring): struct_seaqt_string {.importc: "QVideoWindowControl_tr_s".}
+proc fcQVideoWindowControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QVideoWindowControl_trUtf8_s".}
 proc fcQVideoWindowControl_winId(self: pointer): uint {.importc: "QVideoWindowControl_winId".}
 proc fcQVideoWindowControl_setWinId(self: pointer, id: uint): void {.importc: "QVideoWindowControl_setWinId".}
 proc fcQVideoWindowControl_displayRect(self: pointer): pointer {.importc: "QVideoWindowControl_displayRect".}
@@ -91,10 +91,10 @@ proc fcQVideoWindowControl_saturationChanged(self: pointer, saturation: cint): v
 proc fcQVideoWindowControl_connect_saturationChanged(self: pointer, slot: int, callback: proc (slot: int, saturation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWindowControl_connect_saturationChanged".}
 proc fcQVideoWindowControl_nativeSizeChanged(self: pointer): void {.importc: "QVideoWindowControl_nativeSizeChanged".}
 proc fcQVideoWindowControl_connect_nativeSizeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWindowControl_connect_nativeSizeChanged".}
-proc fcQVideoWindowControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoWindowControl_tr2".}
-proc fcQVideoWindowControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoWindowControl_tr3".}
-proc fcQVideoWindowControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoWindowControl_trUtf82".}
-proc fcQVideoWindowControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoWindowControl_trUtf83".}
+proc fcQVideoWindowControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoWindowControl_tr_s_c".}
+proc fcQVideoWindowControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoWindowControl_tr_s_c_n".}
+proc fcQVideoWindowControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVideoWindowControl_trUtf8_s_c".}
+proc fcQVideoWindowControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVideoWindowControl_trUtf8_s_c_n".}
 proc fcQVideoWindowControl_protectedbase_sender(self: pointer): pointer {.importc: "QVideoWindowControl_protectedbase_sender".}
 proc fcQVideoWindowControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QVideoWindowControl_protectedbase_senderSignalIndex".}
 proc fcQVideoWindowControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoWindowControl_protectedbase_receivers".}
@@ -111,13 +111,13 @@ proc metacall*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, param1: 
   fcQVideoWindowControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstring): string =
-  let v_ms = fcQVideoWindowControl_tr(s)
+  let v_ms = fcQVideoWindowControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstring): string =
-  let v_ms = fcQVideoWindowControl_trUtf8(s)
+  let v_ms = fcQVideoWindowControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -295,25 +295,25 @@ proc onNativeSizeChanged*(self: gen_qvideowindowcontrol_types.QVideoWindowContro
   fcQVideoWindowControl_connect_nativeSizeChanged(self.h, cast[int](addr tmp[]), fcQVideoWindowControl_slot_callback_nativeSizeChanged, fcQVideoWindowControl_slot_callback_nativeSizeChanged_release)
 
 proc tr*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoWindowControl_tr2(s, c)
+  let v_ms = fcQVideoWindowControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoWindowControl_tr3(s, c, n)
+  let v_ms = fcQVideoWindowControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstring, c: cstring): string =
-  let v_ms = fcQVideoWindowControl_trUtf82(s, c)
+  let v_ms = fcQVideoWindowControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVideoWindowControl_trUtf83(s, c, n)
+  let v_ms = fcQVideoWindowControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

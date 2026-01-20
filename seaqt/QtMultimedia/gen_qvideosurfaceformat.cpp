@@ -21,20 +21,20 @@ QVideoSurfaceFormat* QVideoSurfaceFormat_new() {
 	return new (std::nothrow) QVideoSurfaceFormat();
 }
 
-QVideoSurfaceFormat* QVideoSurfaceFormat_new2(QSize* size, int pixelFormat) {
+QVideoSurfaceFormat* QVideoSurfaceFormat_new_size_pixelFormat(QSize* size, int pixelFormat) {
 	return new (std::nothrow) QVideoSurfaceFormat(*size, static_cast<QVideoFrame::PixelFormat>(pixelFormat));
 }
 
-QVideoSurfaceFormat* QVideoSurfaceFormat_new3(QVideoSurfaceFormat* format) {
-	return new (std::nothrow) QVideoSurfaceFormat(*format);
+QVideoSurfaceFormat* QVideoSurfaceFormat_new_from(QVideoSurfaceFormat* from) {
+	return new (std::nothrow) QVideoSurfaceFormat(*from);
 }
 
-QVideoSurfaceFormat* QVideoSurfaceFormat_new4(QSize* size, int pixelFormat, int handleType) {
+QVideoSurfaceFormat* QVideoSurfaceFormat_new_size_pixelFormat_handleType(QSize* size, int pixelFormat, int handleType) {
 	return new (std::nothrow) QVideoSurfaceFormat(*size, static_cast<QVideoFrame::PixelFormat>(pixelFormat), static_cast<QAbstractVideoBuffer::HandleType>(handleType));
 }
 
-void QVideoSurfaceFormat_operatorAssign(QVideoSurfaceFormat* self, QVideoSurfaceFormat* format) {
-	self->operator=(*format);
+void QVideoSurfaceFormat_operatorAssign(QVideoSurfaceFormat* self, QVideoSurfaceFormat* from) {
+	self->operator=(*from);
 }
 
 bool QVideoSurfaceFormat_operatorEqual(const QVideoSurfaceFormat* self, QVideoSurfaceFormat* format) {
@@ -63,11 +63,11 @@ QSize* QVideoSurfaceFormat_frameSize(const QVideoSurfaceFormat* self) {
 	return new QSize(self->frameSize());
 }
 
-void QVideoSurfaceFormat_setFrameSize(QVideoSurfaceFormat* self, QSize* size) {
+void QVideoSurfaceFormat_setFrameSize_size(QVideoSurfaceFormat* self, QSize* size) {
 	self->setFrameSize(*size);
 }
 
-void QVideoSurfaceFormat_setFrameSize2(QVideoSurfaceFormat* self, int width, int height) {
+void QVideoSurfaceFormat_setFrameSize_width_height(QVideoSurfaceFormat* self, int width, int height) {
 	self->setFrameSize(static_cast<int>(width), static_cast<int>(height));
 }
 
@@ -109,11 +109,11 @@ QSize* QVideoSurfaceFormat_pixelAspectRatio(const QVideoSurfaceFormat* self) {
 	return new QSize(self->pixelAspectRatio());
 }
 
-void QVideoSurfaceFormat_setPixelAspectRatio(QVideoSurfaceFormat* self, QSize* ratio) {
+void QVideoSurfaceFormat_setPixelAspectRatio_ratio(QVideoSurfaceFormat* self, QSize* ratio) {
 	self->setPixelAspectRatio(*ratio);
 }
 
-void QVideoSurfaceFormat_setPixelAspectRatio2(QVideoSurfaceFormat* self, int width, int height) {
+void QVideoSurfaceFormat_setPixelAspectRatio_width_height(QVideoSurfaceFormat* self, int width, int height) {
 	self->setPixelAspectRatio(static_cast<int>(width), static_cast<int>(height));
 }
 

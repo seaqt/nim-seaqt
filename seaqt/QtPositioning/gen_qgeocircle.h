@@ -27,13 +27,13 @@ typedef struct QMetaObject QMetaObject;
 #endif
 
 QGeoCircle* QGeoCircle_new();
-QGeoCircle* QGeoCircle_new2(QGeoCoordinate* center);
-QGeoCircle* QGeoCircle_new3(QGeoCircle* other);
-QGeoCircle* QGeoCircle_new4(QGeoShape* other);
-QGeoCircle* QGeoCircle_new5(QGeoCoordinate* center, double radius);
+QGeoCircle* QGeoCircle_new_center(QGeoCoordinate* center);
+QGeoCircle* QGeoCircle_new_from(QGeoCircle* from);
+QGeoCircle* QGeoCircle_new_other(QGeoShape* other);
+QGeoCircle* QGeoCircle_new_center_radius(QGeoCoordinate* center, double radius);
 
 void QGeoCircle_virtbase(QGeoCircle* src, QGeoShape** outptr_QGeoShape);
-void QGeoCircle_operatorAssign(QGeoCircle* self, QGeoCircle* other);
+void QGeoCircle_operatorAssign(QGeoCircle* self, QGeoCircle* from);
 bool QGeoCircle_operatorEqual(const QGeoCircle* self, QGeoCircle* other);
 bool QGeoCircle_operatorNotEqual(const QGeoCircle* self, QGeoCircle* other);
 void QGeoCircle_setCenter(QGeoCircle* self, QGeoCoordinate* center);

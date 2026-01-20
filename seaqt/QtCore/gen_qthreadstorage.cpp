@@ -12,8 +12,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QThreadStorageData* QThreadStorageData_new(QThreadStorageData* param1) {
-	return new (std::nothrow) QThreadStorageData(*param1);
+QThreadStorageData* QThreadStorageData_new_from(QThreadStorageData* from) {
+	return new (std::nothrow) QThreadStorageData(*from);
 }
 
 void** QThreadStorageData_get(const QThreadStorageData* self) {

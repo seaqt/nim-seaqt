@@ -57,13 +57,13 @@ type cQAccessiblePlugin*{.exportc: "QAccessiblePlugin", incompleteStruct.} = obj
 proc fcQAccessiblePlugin_metaObject(self: pointer): pointer {.importc: "QAccessiblePlugin_metaObject".}
 proc fcQAccessiblePlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QAccessiblePlugin_metacast".}
 proc fcQAccessiblePlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAccessiblePlugin_metacall".}
-proc fcQAccessiblePlugin_tr(s: cstring): struct_seaqt_string {.importc: "QAccessiblePlugin_tr".}
-proc fcQAccessiblePlugin_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAccessiblePlugin_trUtf8".}
+proc fcQAccessiblePlugin_trS(s: cstring): struct_seaqt_string {.importc: "QAccessiblePlugin_tr_s".}
+proc fcQAccessiblePlugin_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAccessiblePlugin_trUtf8_s".}
 proc fcQAccessiblePlugin_createX(self: pointer, key: struct_seaqt_string, objectVal: pointer): pointer {.importc: "QAccessiblePlugin_create".}
-proc fcQAccessiblePlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAccessiblePlugin_tr2".}
-proc fcQAccessiblePlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAccessiblePlugin_tr3".}
-proc fcQAccessiblePlugin_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAccessiblePlugin_trUtf82".}
-proc fcQAccessiblePlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAccessiblePlugin_trUtf83".}
+proc fcQAccessiblePlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAccessiblePlugin_tr_s_c".}
+proc fcQAccessiblePlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAccessiblePlugin_tr_s_c_n".}
+proc fcQAccessiblePlugin_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAccessiblePlugin_trUtf8_s_c".}
+proc fcQAccessiblePlugin_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAccessiblePlugin_trUtf8_s_c_n".}
 proc fcQAccessiblePlugin_vdata(self: pointer): ptr pointer {.importc: "QAccessiblePlugin_vdata".}
 proc fvdata_cQAccessiblePlugin(self: pointer): pointer {.importc: "vdata_QAccessiblePlugin".}
 
@@ -95,7 +95,7 @@ proc fcQAccessiblePlugin_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQAccessiblePlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAccessiblePlugin_protectedbase_receivers".}
 proc fcQAccessiblePlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAccessiblePlugin_protectedbase_isSignalConnected".}
 proc fcQAccessiblePlugin_new(vtbl: pointer, vdata: csize_t): ptr cQAccessiblePlugin {.importc: "QAccessiblePlugin_new".}
-proc fcQAccessiblePlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAccessiblePlugin {.importc: "QAccessiblePlugin_new2".}
+proc fcQAccessiblePlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAccessiblePlugin {.importc: "QAccessiblePlugin_new_parent".}
 proc fcQAccessiblePlugin_staticMetaObject(): pointer {.importc: "QAccessiblePlugin_staticMetaObject".}
 
 proc metaObject*(self: gen_qaccessibleplugin_types.QAccessiblePlugin): gen_qobjectdefs_types.QMetaObject =
@@ -108,13 +108,13 @@ proc metacall*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, param1: cint
   fcQAccessiblePlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring): string =
-  let v_ms = fcQAccessiblePlugin_tr(s)
+  let v_ms = fcQAccessiblePlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring): string =
-  let v_ms = fcQAccessiblePlugin_trUtf8(s)
+  let v_ms = fcQAccessiblePlugin_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -123,25 +123,25 @@ proc createX*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, key: openArra
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessiblePlugin_createX(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), objectVal.h), owned: false)
 
 proc tr*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQAccessiblePlugin_tr2(s, c)
+  let v_ms = fcQAccessiblePlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAccessiblePlugin_tr3(s, c, n)
+  let v_ms = fcQAccessiblePlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQAccessiblePlugin_trUtf82(s, c)
+  let v_ms = fcQAccessiblePlugin_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAccessiblePlugin_trUtf83(s, c, n)
+  let v_ms = fcQAccessiblePlugin_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

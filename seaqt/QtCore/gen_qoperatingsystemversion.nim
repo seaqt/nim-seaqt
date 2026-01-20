@@ -57,9 +57,9 @@ proc fcQOperatingSystemVersion_microVersion(self: pointer): cint {.importc: "QOp
 proc fcQOperatingSystemVersion_segmentCount(self: pointer): cint {.importc: "QOperatingSystemVersion_segmentCount".}
 proc fcQOperatingSystemVersion_typeX(self: pointer): cint {.importc: "QOperatingSystemVersion_type".}
 proc fcQOperatingSystemVersion_name(self: pointer): struct_seaqt_string {.importc: "QOperatingSystemVersion_name".}
-proc fcQOperatingSystemVersion_new(osType: cint, vmajor: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new".}
-proc fcQOperatingSystemVersion_new2(osType: cint, vmajor: cint, vminor: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new2".}
-proc fcQOperatingSystemVersion_new3(osType: cint, vmajor: cint, vminor: cint, vmicro: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new3".}
+proc fcQOperatingSystemVersion_new(osType: cint, vmajor: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new_osType_vmajor".}
+proc fcQOperatingSystemVersion_new2(osType: cint, vmajor: cint, vminor: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new_osType_vmajor_vminor".}
+proc fcQOperatingSystemVersion_new3(osType: cint, vmajor: cint, vminor: cint, vmicro: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new_osType_vmajor_vminor_vmicro".}
 
 proc current*(_: type gen_qoperatingsystemversion_types.QOperatingSystemVersion): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
   gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_current(), owned: true)

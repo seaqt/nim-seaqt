@@ -51,7 +51,7 @@ export
 type cQWebHistoryItem*{.exportc: "QWebHistoryItem", incompleteStruct.} = object
 type cQWebHistory*{.exportc: "QWebHistory", incompleteStruct.} = object
 
-proc fcQWebHistoryItem_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebHistoryItem_operatorAssign".}
+proc fcQWebHistoryItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebHistoryItem_operatorAssign".}
 proc fcQWebHistoryItem_originalUrl(self: pointer): pointer {.importc: "QWebHistoryItem_originalUrl".}
 proc fcQWebHistoryItem_url(self: pointer): pointer {.importc: "QWebHistoryItem_url".}
 proc fcQWebHistoryItem_title(self: pointer): struct_seaqt_string {.importc: "QWebHistoryItem_title".}
@@ -62,7 +62,7 @@ proc fcQWebHistoryItem_setUserData(self: pointer, userData: pointer): void {.imp
 proc fcQWebHistoryItem_isValid(self: pointer): bool {.importc: "QWebHistoryItem_isValid".}
 proc fcQWebHistoryItem_toMap(self: pointer): struct_seaqt_map {.importc: "QWebHistoryItem_toMap".}
 proc fcQWebHistoryItem_loadFromMap(self: pointer, map: struct_seaqt_map): void {.importc: "QWebHistoryItem_loadFromMap".}
-proc fcQWebHistoryItem_new(other: pointer): ptr cQWebHistoryItem {.importc: "QWebHistoryItem_new".}
+proc fcQWebHistoryItem_new(fromVal: pointer): ptr cQWebHistoryItem {.importc: "QWebHistoryItem_new".}
 proc fcQWebHistory_clear(self: pointer): void {.importc: "QWebHistory_clear".}
 proc fcQWebHistory_items(self: pointer): struct_seaqt_array {.importc: "QWebHistory_items".}
 proc fcQWebHistory_backItems(self: pointer, maxItems: cint): struct_seaqt_array {.importc: "QWebHistory_backItems".}
@@ -83,8 +83,8 @@ proc fcQWebHistory_setMaximumItemCount(self: pointer, count: cint): void {.impor
 proc fcQWebHistory_toMap(self: pointer): struct_seaqt_map {.importc: "QWebHistory_toMap".}
 proc fcQWebHistory_loadFromMap(self: pointer, map: struct_seaqt_map): void {.importc: "QWebHistory_loadFromMap".}
 
-proc operatorAssign*(self: gen_qwebhistory_types.QWebHistoryItem, other: gen_qwebhistory_types.QWebHistoryItem): void =
-  fcQWebHistoryItem_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebhistory_types.QWebHistoryItem, fromVal: gen_qwebhistory_types.QWebHistoryItem): void =
+  fcQWebHistoryItem_operatorAssign(self.h, fromVal.h)
 
 proc originalUrl*(self: gen_qwebhistory_types.QWebHistoryItem): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebHistoryItem_originalUrl(self.h), owned: true)
@@ -146,8 +146,8 @@ proc loadFromMap*(self: gen_qwebhistory_types.QWebHistoryItem, map: Table[string
   fcQWebHistoryItem_loadFromMap(self.h, struct_seaqt_map(len: csize_t(len(map)),keys: if len(map) == 0: nil else: addr(map_Keys_CArray[0]), values: if len(map) == 0: nil else: addr(map_Values_CArray[0]),))
 
 proc create*(T: type gen_qwebhistory_types.QWebHistoryItem,
-    other: gen_qwebhistory_types.QWebHistoryItem): gen_qwebhistory_types.QWebHistoryItem =
-  let tmp = gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistoryItem_new(other.h), owned: true)
+    fromVal: gen_qwebhistory_types.QWebHistoryItem): gen_qwebhistory_types.QWebHistoryItem =
+  let tmp = gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistoryItem_new(fromVal.h), owned: true)
   tmp
 proc clear*(self: gen_qwebhistory_types.QWebHistory): void =
   fcQWebHistory_clear(self.h)

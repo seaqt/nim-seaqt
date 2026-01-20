@@ -97,8 +97,8 @@ type cQCalendarWidget*{.exportc: "QCalendarWidget", incompleteStruct.} = object
 proc fcQCalendarWidget_metaObject(self: pointer): pointer {.importc: "QCalendarWidget_metaObject".}
 proc fcQCalendarWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QCalendarWidget_metacast".}
 proc fcQCalendarWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCalendarWidget_metacall".}
-proc fcQCalendarWidget_tr(s: cstring): struct_seaqt_string {.importc: "QCalendarWidget_tr".}
-proc fcQCalendarWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCalendarWidget_trUtf8".}
+proc fcQCalendarWidget_trS(s: cstring): struct_seaqt_string {.importc: "QCalendarWidget_tr_s".}
+proc fcQCalendarWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCalendarWidget_trUtf8_s".}
 proc fcQCalendarWidget_sizeHint(self: pointer): pointer {.importc: "QCalendarWidget_sizeHint".}
 proc fcQCalendarWidget_minimumSizeHint(self: pointer): pointer {.importc: "QCalendarWidget_minimumSizeHint".}
 proc fcQCalendarWidget_selectedDate(self: pointer): pointer {.importc: "QCalendarWidget_selectedDate".}
@@ -125,7 +125,7 @@ proc fcQCalendarWidget_setHeaderTextFormat(self: pointer, format: pointer): void
 proc fcQCalendarWidget_weekdayTextFormat(self: pointer, dayOfWeek: cint): pointer {.importc: "QCalendarWidget_weekdayTextFormat".}
 proc fcQCalendarWidget_setWeekdayTextFormat(self: pointer, dayOfWeek: cint, format: pointer): void {.importc: "QCalendarWidget_setWeekdayTextFormat".}
 proc fcQCalendarWidget_dateTextFormat(self: pointer): struct_seaqt_map {.importc: "QCalendarWidget_dateTextFormat".}
-proc fcQCalendarWidget_dateTextFormatWithDate(self: pointer, date: pointer): pointer {.importc: "QCalendarWidget_dateTextFormatWithDate".}
+proc fcQCalendarWidget_dateTextFormatDate(self: pointer, date: pointer): pointer {.importc: "QCalendarWidget_dateTextFormat_date".}
 proc fcQCalendarWidget_setDateTextFormat(self: pointer, date: pointer, format: pointer): void {.importc: "QCalendarWidget_setDateTextFormat".}
 proc fcQCalendarWidget_isDateEditEnabled(self: pointer): bool {.importc: "QCalendarWidget_isDateEditEnabled".}
 proc fcQCalendarWidget_setDateEditEnabled(self: pointer, enable: bool): void {.importc: "QCalendarWidget_setDateEditEnabled".}
@@ -150,10 +150,10 @@ proc fcQCalendarWidget_activated(self: pointer, date: pointer): void {.importc: 
 proc fcQCalendarWidget_connect_activated(self: pointer, slot: int, callback: proc (slot: int, date: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCalendarWidget_connect_activated".}
 proc fcQCalendarWidget_currentPageChanged(self: pointer, year: cint, month: cint): void {.importc: "QCalendarWidget_currentPageChanged".}
 proc fcQCalendarWidget_connect_currentPageChanged(self: pointer, slot: int, callback: proc (slot: int, year: cint, month: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCalendarWidget_connect_currentPageChanged".}
-proc fcQCalendarWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCalendarWidget_tr2".}
-proc fcQCalendarWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCalendarWidget_tr3".}
-proc fcQCalendarWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCalendarWidget_trUtf82".}
-proc fcQCalendarWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCalendarWidget_trUtf83".}
+proc fcQCalendarWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCalendarWidget_tr_s_c".}
+proc fcQCalendarWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCalendarWidget_tr_s_c_n".}
+proc fcQCalendarWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCalendarWidget_trUtf8_s_c".}
+proc fcQCalendarWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCalendarWidget_trUtf8_s_c_n".}
 proc fcQCalendarWidget_vdata(self: pointer): ptr pointer {.importc: "QCalendarWidget_vdata".}
 proc fvdata_cQCalendarWidget(self: pointer): pointer {.importc: "vdata_QCalendarWidget".}
 
@@ -272,8 +272,8 @@ proc fcQCalendarWidget_protectedbase_sender(self: pointer): pointer {.importc: "
 proc fcQCalendarWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCalendarWidget_protectedbase_senderSignalIndex".}
 proc fcQCalendarWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCalendarWidget_protectedbase_receivers".}
 proc fcQCalendarWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCalendarWidget_protectedbase_isSignalConnected".}
-proc fcQCalendarWidget_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCalendarWidget {.importc: "QCalendarWidget_new".}
-proc fcQCalendarWidget_new2(vtbl: pointer, vdata: csize_t): ptr cQCalendarWidget {.importc: "QCalendarWidget_new2".}
+proc fcQCalendarWidget_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCalendarWidget {.importc: "QCalendarWidget_new_parent".}
+proc fcQCalendarWidget_new2(vtbl: pointer, vdata: csize_t): ptr cQCalendarWidget {.importc: "QCalendarWidget_new".}
 proc fcQCalendarWidget_staticMetaObject(): pointer {.importc: "QCalendarWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qobjectdefs_types.QMetaObject =
@@ -286,13 +286,13 @@ proc metacall*(self: gen_qcalendarwidget_types.QCalendarWidget, param1: cint, pa
   fcQCalendarWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcalendarwidget_types.QCalendarWidget, s: cstring): string =
-  let v_ms = fcQCalendarWidget_tr(s)
+  let v_ms = fcQCalendarWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcalendarwidget_types.QCalendarWidget, s: cstring): string =
-  let v_ms = fcQCalendarWidget_trUtf8(s)
+  let v_ms = fcQCalendarWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -388,7 +388,7 @@ proc dateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget): Table[gen
   vx_ret
 
 proc dateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate): gen_qtextformat_types.QTextCharFormat =
-  gen_qtextformat_types.QTextCharFormat(h: fcQCalendarWidget_dateTextFormatWithDate(self.h, date.h), owned: true)
+  gen_qtextformat_types.QTextCharFormat(h: fcQCalendarWidget_dateTextFormatDate(self.h, date.h), owned: true)
 
 proc setDateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate, format: gen_qtextformat_types.QTextCharFormat): void =
   fcQCalendarWidget_setDateTextFormat(self.h, date.h, format.h)
@@ -519,25 +519,25 @@ proc onCurrentPageChanged*(self: gen_qcalendarwidget_types.QCalendarWidget, slot
   fcQCalendarWidget_connect_currentPageChanged(self.h, cast[int](addr tmp[]), fcQCalendarWidget_slot_callback_currentPageChanged, fcQCalendarWidget_slot_callback_currentPageChanged_release)
 
 proc tr*(_: type gen_qcalendarwidget_types.QCalendarWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQCalendarWidget_tr2(s, c)
+  let v_ms = fcQCalendarWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcalendarwidget_types.QCalendarWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCalendarWidget_tr3(s, c, n)
+  let v_ms = fcQCalendarWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcalendarwidget_types.QCalendarWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQCalendarWidget_trUtf82(s, c)
+  let v_ms = fcQCalendarWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcalendarwidget_types.QCalendarWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCalendarWidget_trUtf83(s, c, n)
+  let v_ms = fcQCalendarWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

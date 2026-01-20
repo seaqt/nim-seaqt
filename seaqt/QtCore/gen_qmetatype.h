@@ -27,35 +27,35 @@ typedef struct QMetaType QMetaType;
 #endif
 
 QMetaType* QMetaType_new();
-QMetaType* QMetaType_new2(const int type);
+QMetaType* QMetaType_new_type(const int type);
 
 bool QMetaType_unregisterType(int type);
 int QMetaType_registerTypedef(const char* typeName, int aliasId);
 int QMetaType_registerNormalizedTypedef(struct seaqt_string normalizedTypeName, int aliasId);
-int QMetaType_type(const char* typeName);
-int QMetaType_typeWithTypeName(struct seaqt_string typeName);
+int QMetaType_type_char(const char* typeName);
+int QMetaType_type_QByteArray(struct seaqt_string typeName);
 const char* QMetaType_typeName(int type);
-int QMetaType_sizeOf(int type);
+int QMetaType_sizeOf_type(int type);
 int QMetaType_typeFlags(int type);
 QMetaObject* QMetaType_metaObjectForType(int type);
-bool QMetaType_isRegistered(int type);
-void* QMetaType_create(int type);
-void QMetaType_destroy(int type, void* data);
-void* QMetaType_construct(int type, void* where, const void* copy);
-void QMetaType_destruct(int type, void* where);
+bool QMetaType_isRegistered_type(int type);
+void* QMetaType_create_type(int type);
+void QMetaType_destroy_type_data(int type, void* data);
+void* QMetaType_construct_type_where_copy(int type, void* where, const void* copy);
+void QMetaType_destruct_type_where(int type, void* where);
 bool QMetaType_save(QDataStream* stream, int type, const void* data);
 bool QMetaType_load(QDataStream* stream, int type, void* data);
 bool QMetaType_isValid(const QMetaType* self);
-bool QMetaType_isRegistered2(const QMetaType* self);
+bool QMetaType_isRegistered(const QMetaType* self);
 int QMetaType_id(const QMetaType* self);
-int QMetaType_sizeOf2(const QMetaType* self);
+int QMetaType_sizeOf(const QMetaType* self);
 int QMetaType_flags(const QMetaType* self);
 QMetaObject* QMetaType_metaObject(const QMetaType* self);
 struct seaqt_string QMetaType_name(const QMetaType* self);
-void* QMetaType_create2(const QMetaType* self);
-void QMetaType_destroyWithData(const QMetaType* self, void* data);
-void* QMetaType_constructWithWhere(const QMetaType* self, void* where);
-void QMetaType_destructWithData(const QMetaType* self, void* data);
+void* QMetaType_create(const QMetaType* self);
+void QMetaType_destroy_data(const QMetaType* self, void* data);
+void* QMetaType_construct_where(const QMetaType* self, void* where);
+void QMetaType_destruct_data(const QMetaType* self, void* data);
 bool QMetaType_hasRegisteredComparators(int typeId);
 bool QMetaType_hasRegisteredDebugStreamOperator(int typeId);
 bool QMetaType_convert(const void* from, int fromTypeId, void* to, int toTypeId);
@@ -63,9 +63,9 @@ bool QMetaType_compare(const void* lhs, const void* rhs, int typeId, int* result
 bool QMetaType_equals(const void* lhs, const void* rhs, int typeId, int* result);
 bool QMetaType_debugStream(QDebug* dbg, const void* rhs, int typeId);
 bool QMetaType_hasRegisteredConverterFunction(int fromTypeId, int toTypeId);
-void* QMetaType_create3(int type, const void* copy);
-void* QMetaType_createWithCopy(const QMetaType* self, const void* copy);
-void* QMetaType_construct2(const QMetaType* self, void* where, const void* copy);
+void* QMetaType_create_type_copy(int type, const void* copy);
+void* QMetaType_create_copy(const QMetaType* self, const void* copy);
+void* QMetaType_construct_where_copy(const QMetaType* self, void* where, const void* copy);
 
 void QMetaType_delete(QMetaType* self);
 

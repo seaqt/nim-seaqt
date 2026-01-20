@@ -57,8 +57,8 @@ type cQMediaGaplessPlaybackControl*{.exportc: "QMediaGaplessPlaybackControl", in
 proc fcQMediaGaplessPlaybackControl_metaObject(self: pointer): pointer {.importc: "QMediaGaplessPlaybackControl_metaObject".}
 proc fcQMediaGaplessPlaybackControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaGaplessPlaybackControl_metacast".}
 proc fcQMediaGaplessPlaybackControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaGaplessPlaybackControl_metacall".}
-proc fcQMediaGaplessPlaybackControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_tr".}
-proc fcQMediaGaplessPlaybackControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf8".}
+proc fcQMediaGaplessPlaybackControl_trS(s: cstring): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_tr_s".}
+proc fcQMediaGaplessPlaybackControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf8_s".}
 proc fcQMediaGaplessPlaybackControl_nextMedia(self: pointer): pointer {.importc: "QMediaGaplessPlaybackControl_nextMedia".}
 proc fcQMediaGaplessPlaybackControl_setNextMedia(self: pointer, media: pointer): void {.importc: "QMediaGaplessPlaybackControl_setNextMedia".}
 proc fcQMediaGaplessPlaybackControl_isCrossfadeSupported(self: pointer): bool {.importc: "QMediaGaplessPlaybackControl_isCrossfadeSupported".}
@@ -70,10 +70,10 @@ proc fcQMediaGaplessPlaybackControl_nextMediaChanged(self: pointer, media: point
 proc fcQMediaGaplessPlaybackControl_connect_nextMediaChanged(self: pointer, slot: int, callback: proc (slot: int, media: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaGaplessPlaybackControl_connect_nextMediaChanged".}
 proc fcQMediaGaplessPlaybackControl_advancedToNextMedia(self: pointer): void {.importc: "QMediaGaplessPlaybackControl_advancedToNextMedia".}
 proc fcQMediaGaplessPlaybackControl_connect_advancedToNextMedia(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaGaplessPlaybackControl_connect_advancedToNextMedia".}
-proc fcQMediaGaplessPlaybackControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_tr2".}
-proc fcQMediaGaplessPlaybackControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_tr3".}
-proc fcQMediaGaplessPlaybackControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf82".}
-proc fcQMediaGaplessPlaybackControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf83".}
+proc fcQMediaGaplessPlaybackControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_tr_s_c".}
+proc fcQMediaGaplessPlaybackControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_tr_s_c_n".}
+proc fcQMediaGaplessPlaybackControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf8_s_c".}
+proc fcQMediaGaplessPlaybackControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf8_s_c_n".}
 proc fcQMediaGaplessPlaybackControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaGaplessPlaybackControl_protectedbase_sender".}
 proc fcQMediaGaplessPlaybackControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaGaplessPlaybackControl_protectedbase_senderSignalIndex".}
 proc fcQMediaGaplessPlaybackControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaGaplessPlaybackControl_protectedbase_receivers".}
@@ -90,13 +90,13 @@ proc metacall*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybac
   fcQMediaGaplessPlaybackControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, s: cstring): string =
-  let v_ms = fcQMediaGaplessPlaybackControl_tr(s)
+  let v_ms = fcQMediaGaplessPlaybackControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, s: cstring): string =
-  let v_ms = fcQMediaGaplessPlaybackControl_trUtf8(s)
+  let v_ms = fcQMediaGaplessPlaybackControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -175,25 +175,25 @@ proc onAdvancedToNextMedia*(self: gen_qmediagaplessplaybackcontrol_types.QMediaG
   fcQMediaGaplessPlaybackControl_connect_advancedToNextMedia(self.h, cast[int](addr tmp[]), fcQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia, fcQMediaGaplessPlaybackControl_slot_callback_advancedToNextMedia_release)
 
 proc tr*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaGaplessPlaybackControl_tr2(s, c)
+  let v_ms = fcQMediaGaplessPlaybackControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaGaplessPlaybackControl_tr3(s, c, n)
+  let v_ms = fcQMediaGaplessPlaybackControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaGaplessPlaybackControl_trUtf82(s, c)
+  let v_ms = fcQMediaGaplessPlaybackControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaGaplessPlaybackControl_trUtf83(s, c, n)
+  let v_ms = fcQMediaGaplessPlaybackControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

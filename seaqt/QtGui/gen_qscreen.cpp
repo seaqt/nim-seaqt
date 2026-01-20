@@ -41,7 +41,7 @@ int QScreen_metacall(QScreen* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QScreen_tr(const char* s) {
+struct seaqt_string QScreen_tr_s(const char* s) {
 	QString _ret = QScreen::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -52,7 +52,7 @@ struct seaqt_string QScreen_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QScreen_trUtf8(const char* s) {
+struct seaqt_string QScreen_trUtf8_s(const char* s) {
 	QString _ret = QScreen::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -243,7 +243,7 @@ bool QScreen_isLandscape(const QScreen* self, int orientation) {
 	return self->isLandscape(static_cast<Qt::ScreenOrientation>(orientation));
 }
 
-QPixmap* QScreen_grabWindow(QScreen* self, uintptr_t window) {
+QPixmap* QScreen_grabWindow_window(QScreen* self, uintptr_t window) {
 	return new QPixmap(self->grabWindow(static_cast<WId>(window)));
 }
 
@@ -409,7 +409,7 @@ void QScreen_connect_refreshRateChanged(QScreen* self, intptr_t slot, void (*cal
 	QScreen::connect(self, static_cast<void (QScreen::*)(qreal)>(&QScreen::refreshRateChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QScreen_tr2(const char* s, const char* c) {
+struct seaqt_string QScreen_tr_s_c(const char* s, const char* c) {
 	QString _ret = QScreen::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -420,7 +420,7 @@ struct seaqt_string QScreen_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QScreen_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QScreen_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QScreen::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -431,7 +431,7 @@ struct seaqt_string QScreen_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QScreen_trUtf82(const char* s, const char* c) {
+struct seaqt_string QScreen_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QScreen::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -442,7 +442,7 @@ struct seaqt_string QScreen_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QScreen_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QScreen_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QScreen::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -453,19 +453,19 @@ struct seaqt_string QScreen_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QPixmap* QScreen_grabWindow2(QScreen* self, uintptr_t window, int x) {
+QPixmap* QScreen_grabWindow_window_x(QScreen* self, uintptr_t window, int x) {
 	return new QPixmap(self->grabWindow(static_cast<WId>(window), static_cast<int>(x)));
 }
 
-QPixmap* QScreen_grabWindow3(QScreen* self, uintptr_t window, int x, int y) {
+QPixmap* QScreen_grabWindow_window_x_y(QScreen* self, uintptr_t window, int x, int y) {
 	return new QPixmap(self->grabWindow(static_cast<WId>(window), static_cast<int>(x), static_cast<int>(y)));
 }
 
-QPixmap* QScreen_grabWindow4(QScreen* self, uintptr_t window, int x, int y, int w) {
+QPixmap* QScreen_grabWindow_window_x_y_w(QScreen* self, uintptr_t window, int x, int y, int w) {
 	return new QPixmap(self->grabWindow(static_cast<WId>(window), static_cast<int>(x), static_cast<int>(y), static_cast<int>(w)));
 }
 
-QPixmap* QScreen_grabWindow5(QScreen* self, uintptr_t window, int x, int y, int w, int h) {
+QPixmap* QScreen_grabWindow_window_x_y_w_h(QScreen* self, uintptr_t window, int x, int y, int w, int h) {
 	return new QPixmap(self->grabWindow(static_cast<WId>(window), static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h)));
 }
 

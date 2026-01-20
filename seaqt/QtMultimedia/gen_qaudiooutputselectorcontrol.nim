@@ -55,8 +55,8 @@ type cQAudioOutputSelectorControl*{.exportc: "QAudioOutputSelectorControl", inco
 proc fcQAudioOutputSelectorControl_metaObject(self: pointer): pointer {.importc: "QAudioOutputSelectorControl_metaObject".}
 proc fcQAudioOutputSelectorControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioOutputSelectorControl_metacast".}
 proc fcQAudioOutputSelectorControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioOutputSelectorControl_metacall".}
-proc fcQAudioOutputSelectorControl_tr(s: cstring): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_tr".}
-proc fcQAudioOutputSelectorControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_trUtf8".}
+proc fcQAudioOutputSelectorControl_trS(s: cstring): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_tr_s".}
+proc fcQAudioOutputSelectorControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_trUtf8_s".}
 proc fcQAudioOutputSelectorControl_availableOutputs(self: pointer): struct_seaqt_array {.importc: "QAudioOutputSelectorControl_availableOutputs".}
 proc fcQAudioOutputSelectorControl_outputDescription(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_outputDescription".}
 proc fcQAudioOutputSelectorControl_defaultOutput(self: pointer): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_defaultOutput".}
@@ -66,10 +66,10 @@ proc fcQAudioOutputSelectorControl_activeOutputChanged(self: pointer, name: stru
 proc fcQAudioOutputSelectorControl_connect_activeOutputChanged(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioOutputSelectorControl_connect_activeOutputChanged".}
 proc fcQAudioOutputSelectorControl_availableOutputsChanged(self: pointer): void {.importc: "QAudioOutputSelectorControl_availableOutputsChanged".}
 proc fcQAudioOutputSelectorControl_connect_availableOutputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioOutputSelectorControl_connect_availableOutputsChanged".}
-proc fcQAudioOutputSelectorControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_tr2".}
-proc fcQAudioOutputSelectorControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_tr3".}
-proc fcQAudioOutputSelectorControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_trUtf82".}
-proc fcQAudioOutputSelectorControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_trUtf83".}
+proc fcQAudioOutputSelectorControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_tr_s_c".}
+proc fcQAudioOutputSelectorControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_tr_s_c_n".}
+proc fcQAudioOutputSelectorControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_trUtf8_s_c".}
+proc fcQAudioOutputSelectorControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioOutputSelectorControl_trUtf8_s_c_n".}
 proc fcQAudioOutputSelectorControl_protectedbase_sender(self: pointer): pointer {.importc: "QAudioOutputSelectorControl_protectedbase_sender".}
 proc fcQAudioOutputSelectorControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAudioOutputSelectorControl_protectedbase_senderSignalIndex".}
 proc fcQAudioOutputSelectorControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioOutputSelectorControl_protectedbase_receivers".}
@@ -86,13 +86,13 @@ proc metacall*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorC
   fcQAudioOutputSelectorControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, s: cstring): string =
-  let v_ms = fcQAudioOutputSelectorControl_tr(s)
+  let v_ms = fcQAudioOutputSelectorControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, s: cstring): string =
-  let v_ms = fcQAudioOutputSelectorControl_trUtf8(s)
+  let v_ms = fcQAudioOutputSelectorControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -172,25 +172,25 @@ proc onAvailableOutputsChanged*(self: gen_qaudiooutputselectorcontrol_types.QAud
   fcQAudioOutputSelectorControl_connect_availableOutputsChanged(self.h, cast[int](addr tmp[]), fcQAudioOutputSelectorControl_slot_callback_availableOutputsChanged, fcQAudioOutputSelectorControl_slot_callback_availableOutputsChanged_release)
 
 proc tr*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioOutputSelectorControl_tr2(s, c)
+  let v_ms = fcQAudioOutputSelectorControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioOutputSelectorControl_tr3(s, c, n)
+  let v_ms = fcQAudioOutputSelectorControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioOutputSelectorControl_trUtf82(s, c)
+  let v_ms = fcQAudioOutputSelectorControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioOutputSelectorControl_trUtf83(s, c, n)
+  let v_ms = fcQAudioOutputSelectorControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

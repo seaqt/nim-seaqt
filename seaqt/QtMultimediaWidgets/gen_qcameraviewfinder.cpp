@@ -713,12 +713,12 @@ public:
 	friend bool QCameraViewfinder_protectedbase_isSignalConnected(const VirtualQCameraViewfinder* self, QMetaMethod* signal);
 };
 
-VirtualQCameraViewfinder* QCameraViewfinder_new(const QCameraViewfinder_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQCameraViewfinder* QCameraViewfinder_new_parent(const QCameraViewfinder_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCameraViewfinder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCameraViewfinder(vtbl, parent) : nullptr;
 }
 
-VirtualQCameraViewfinder* QCameraViewfinder_new2(const QCameraViewfinder_VTable* vtbl, size_t vdata) {
+VirtualQCameraViewfinder* QCameraViewfinder_new(const QCameraViewfinder_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCameraViewfinder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCameraViewfinder(vtbl) : nullptr;
 }
@@ -739,7 +739,7 @@ int QCameraViewfinder_metacall(QCameraViewfinder* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCameraViewfinder_tr(const char* s) {
+struct seaqt_string QCameraViewfinder_tr_s(const char* s) {
 	QString _ret = QCameraViewfinder::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -750,7 +750,7 @@ struct seaqt_string QCameraViewfinder_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QCameraViewfinder_trUtf8(const char* s) {
+struct seaqt_string QCameraViewfinder_trUtf8_s(const char* s) {
 	QString _ret = QCameraViewfinder::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -765,7 +765,7 @@ QMediaObject* QCameraViewfinder_mediaObject(const QCameraViewfinder* self) {
 	return self->mediaObject();
 }
 
-struct seaqt_string QCameraViewfinder_tr2(const char* s, const char* c) {
+struct seaqt_string QCameraViewfinder_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCameraViewfinder::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -776,7 +776,7 @@ struct seaqt_string QCameraViewfinder_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCameraViewfinder_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCameraViewfinder_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraViewfinder::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -787,7 +787,7 @@ struct seaqt_string QCameraViewfinder_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QCameraViewfinder_trUtf82(const char* s, const char* c) {
+struct seaqt_string QCameraViewfinder_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QCameraViewfinder::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -798,7 +798,7 @@ struct seaqt_string QCameraViewfinder_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCameraViewfinder_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QCameraViewfinder_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraViewfinder::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

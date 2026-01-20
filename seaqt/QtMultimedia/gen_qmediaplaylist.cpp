@@ -202,7 +202,7 @@ VirtualQMediaPlaylist* QMediaPlaylist_new(const QMediaPlaylist_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQMediaPlaylist(vtbl) : nullptr;
 }
 
-VirtualQMediaPlaylist* QMediaPlaylist_new2(const QMediaPlaylist_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQMediaPlaylist* QMediaPlaylist_new_parent(const QMediaPlaylist_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMediaPlaylist>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMediaPlaylist(vtbl, parent) : nullptr;
 }
@@ -224,7 +224,7 @@ int QMediaPlaylist_metacall(QMediaPlaylist* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMediaPlaylist_tr(const char* s) {
+struct seaqt_string QMediaPlaylist_tr_s(const char* s) {
 	QString _ret = QMediaPlaylist::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -235,7 +235,7 @@ struct seaqt_string QMediaPlaylist_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlaylist_trUtf8(const char* s) {
+struct seaqt_string QMediaPlaylist_trUtf8_s(const char* s) {
 	QString _ret = QMediaPlaylist::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -291,11 +291,11 @@ bool QMediaPlaylist_isReadOnly(const QMediaPlaylist* self) {
 	return self->isReadOnly();
 }
 
-bool QMediaPlaylist_addMedia(QMediaPlaylist* self, QMediaContent* content) {
+bool QMediaPlaylist_addMedia_content(QMediaPlaylist* self, QMediaContent* content) {
 	return self->addMedia(*content);
 }
 
-bool QMediaPlaylist_addMediaWithItems(QMediaPlaylist* self, struct seaqt_array /* of QMediaContent* */  items) {
+bool QMediaPlaylist_addMedia_items(QMediaPlaylist* self, struct seaqt_array /* of QMediaContent* */  items) {
 	QList<QMediaContent> items_QList;
 	items_QList.reserve(items.len);
 	QMediaContent** items_arr = static_cast<QMediaContent**>(items.data);
@@ -305,11 +305,11 @@ bool QMediaPlaylist_addMediaWithItems(QMediaPlaylist* self, struct seaqt_array /
 	return self->addMedia(items_QList);
 }
 
-bool QMediaPlaylist_insertMedia(QMediaPlaylist* self, int index, QMediaContent* content) {
+bool QMediaPlaylist_insertMedia_index_content(QMediaPlaylist* self, int index, QMediaContent* content) {
 	return self->insertMedia(static_cast<int>(index), *content);
 }
 
-bool QMediaPlaylist_insertMedia2(QMediaPlaylist* self, int index, struct seaqt_array /* of QMediaContent* */  items) {
+bool QMediaPlaylist_insertMedia_index_items(QMediaPlaylist* self, int index, struct seaqt_array /* of QMediaContent* */  items) {
 	QList<QMediaContent> items_QList;
 	items_QList.reserve(items.len);
 	QMediaContent** items_arr = static_cast<QMediaContent**>(items.data);
@@ -323,11 +323,11 @@ bool QMediaPlaylist_moveMedia(QMediaPlaylist* self, int from, int to) {
 	return self->moveMedia(static_cast<int>(from), static_cast<int>(to));
 }
 
-bool QMediaPlaylist_removeMedia(QMediaPlaylist* self, int pos) {
+bool QMediaPlaylist_removeMedia_pos(QMediaPlaylist* self, int pos) {
 	return self->removeMedia(static_cast<int>(pos));
 }
 
-bool QMediaPlaylist_removeMedia2(QMediaPlaylist* self, int start, int end) {
+bool QMediaPlaylist_removeMedia_start_end(QMediaPlaylist* self, int start, int end) {
 	return self->removeMedia(static_cast<int>(start), static_cast<int>(end));
 }
 
@@ -335,23 +335,23 @@ bool QMediaPlaylist_clear(QMediaPlaylist* self) {
 	return self->clear();
 }
 
-void QMediaPlaylist_load(QMediaPlaylist* self, QNetworkRequest* request) {
+void QMediaPlaylist_load_request(QMediaPlaylist* self, QNetworkRequest* request) {
 	self->load(*request);
 }
 
-void QMediaPlaylist_loadWithLocation(QMediaPlaylist* self, QUrl* location) {
+void QMediaPlaylist_load_location(QMediaPlaylist* self, QUrl* location) {
 	self->load(*location);
 }
 
-void QMediaPlaylist_loadWithDevice(QMediaPlaylist* self, QIODevice* device) {
+void QMediaPlaylist_load_device(QMediaPlaylist* self, QIODevice* device) {
 	self->load(device);
 }
 
-bool QMediaPlaylist_save(QMediaPlaylist* self, QUrl* location) {
+bool QMediaPlaylist_save_location(QMediaPlaylist* self, QUrl* location) {
 	return self->save(*location);
 }
 
-bool QMediaPlaylist_save2(QMediaPlaylist* self, QIODevice* device, const char* format) {
+bool QMediaPlaylist_save_device_format(QMediaPlaylist* self, QIODevice* device, const char* format) {
 	return self->save(device, format);
 }
 
@@ -553,7 +553,7 @@ void QMediaPlaylist_connect_loadFailed(QMediaPlaylist* self, intptr_t slot, void
 	QMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)()>(&QMediaPlaylist::loadFailed), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMediaPlaylist_tr2(const char* s, const char* c) {
+struct seaqt_string QMediaPlaylist_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMediaPlaylist::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -564,7 +564,7 @@ struct seaqt_string QMediaPlaylist_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlaylist_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMediaPlaylist_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaPlaylist::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -575,7 +575,7 @@ struct seaqt_string QMediaPlaylist_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlaylist_trUtf82(const char* s, const char* c) {
+struct seaqt_string QMediaPlaylist_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QMediaPlaylist::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -586,7 +586,7 @@ struct seaqt_string QMediaPlaylist_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlaylist_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QMediaPlaylist_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaPlaylist::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -597,27 +597,27 @@ struct seaqt_string QMediaPlaylist_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-int QMediaPlaylist_nextIndexWithSteps(const QMediaPlaylist* self, int steps) {
+int QMediaPlaylist_nextIndex_steps(const QMediaPlaylist* self, int steps) {
 	return self->nextIndex(static_cast<int>(steps));
 }
 
-int QMediaPlaylist_previousIndexWithSteps(const QMediaPlaylist* self, int steps) {
+int QMediaPlaylist_previousIndex_steps(const QMediaPlaylist* self, int steps) {
 	return self->previousIndex(static_cast<int>(steps));
 }
 
-void QMediaPlaylist_load2(QMediaPlaylist* self, QNetworkRequest* request, const char* format) {
+void QMediaPlaylist_load_request_format(QMediaPlaylist* self, QNetworkRequest* request, const char* format) {
 	self->load(*request, format);
 }
 
-void QMediaPlaylist_load3(QMediaPlaylist* self, QUrl* location, const char* format) {
+void QMediaPlaylist_load_location_format(QMediaPlaylist* self, QUrl* location, const char* format) {
 	self->load(*location, format);
 }
 
-void QMediaPlaylist_load4(QMediaPlaylist* self, QIODevice* device, const char* format) {
+void QMediaPlaylist_load_device_format(QMediaPlaylist* self, QIODevice* device, const char* format) {
 	self->load(device, format);
 }
 
-bool QMediaPlaylist_save3(QMediaPlaylist* self, QUrl* location, const char* format) {
+bool QMediaPlaylist_save_location_format(QMediaPlaylist* self, QUrl* location, const char* format) {
 	return self->save(*location, format);
 }
 

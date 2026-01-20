@@ -121,13 +121,13 @@ type cQDialogButtonBox*{.exportc: "QDialogButtonBox", incompleteStruct.} = objec
 proc fcQDialogButtonBox_metaObject(self: pointer): pointer {.importc: "QDialogButtonBox_metaObject".}
 proc fcQDialogButtonBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QDialogButtonBox_metacast".}
 proc fcQDialogButtonBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDialogButtonBox_metacall".}
-proc fcQDialogButtonBox_tr(s: cstring): struct_seaqt_string {.importc: "QDialogButtonBox_tr".}
-proc fcQDialogButtonBox_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDialogButtonBox_trUtf8".}
+proc fcQDialogButtonBox_trS(s: cstring): struct_seaqt_string {.importc: "QDialogButtonBox_tr_s".}
+proc fcQDialogButtonBox_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDialogButtonBox_trUtf8_s".}
 proc fcQDialogButtonBox_setOrientation(self: pointer, orientation: cint): void {.importc: "QDialogButtonBox_setOrientation".}
 proc fcQDialogButtonBox_orientation(self: pointer): cint {.importc: "QDialogButtonBox_orientation".}
-proc fcQDialogButtonBox_addButton(self: pointer, button: pointer, role: cint): void {.importc: "QDialogButtonBox_addButton".}
-proc fcQDialogButtonBox_addButton2(self: pointer, text: struct_seaqt_string, role: cint): pointer {.importc: "QDialogButtonBox_addButton2".}
-proc fcQDialogButtonBox_addButtonWithButton(self: pointer, button: cint): pointer {.importc: "QDialogButtonBox_addButtonWithButton".}
+proc fcQDialogButtonBox_addButtonButtonRole(self: pointer, button: pointer, role: cint): void {.importc: "QDialogButtonBox_addButton_button_role".}
+proc fcQDialogButtonBox_addButtonTextRole(self: pointer, text: struct_seaqt_string, role: cint): pointer {.importc: "QDialogButtonBox_addButton_text_role".}
+proc fcQDialogButtonBox_addButtonButton(self: pointer, button: cint): pointer {.importc: "QDialogButtonBox_addButton_button".}
 proc fcQDialogButtonBox_removeButton(self: pointer, button: pointer): void {.importc: "QDialogButtonBox_removeButton".}
 proc fcQDialogButtonBox_clear(self: pointer): void {.importc: "QDialogButtonBox_clear".}
 proc fcQDialogButtonBox_buttons(self: pointer): struct_seaqt_array {.importc: "QDialogButtonBox_buttons".}
@@ -146,10 +146,10 @@ proc fcQDialogButtonBox_helpRequested(self: pointer): void {.importc: "QDialogBu
 proc fcQDialogButtonBox_connect_helpRequested(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDialogButtonBox_connect_helpRequested".}
 proc fcQDialogButtonBox_rejected(self: pointer): void {.importc: "QDialogButtonBox_rejected".}
 proc fcQDialogButtonBox_connect_rejected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDialogButtonBox_connect_rejected".}
-proc fcQDialogButtonBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDialogButtonBox_tr2".}
-proc fcQDialogButtonBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDialogButtonBox_tr3".}
-proc fcQDialogButtonBox_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDialogButtonBox_trUtf82".}
-proc fcQDialogButtonBox_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDialogButtonBox_trUtf83".}
+proc fcQDialogButtonBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDialogButtonBox_tr_s_c".}
+proc fcQDialogButtonBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDialogButtonBox_tr_s_c_n".}
+proc fcQDialogButtonBox_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDialogButtonBox_trUtf8_s_c".}
+proc fcQDialogButtonBox_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDialogButtonBox_trUtf8_s_c_n".}
 proc fcQDialogButtonBox_vdata(self: pointer): ptr pointer {.importc: "QDialogButtonBox_vdata".}
 proc fvdata_cQDialogButtonBox(self: pointer): pointer {.importc: "vdata_QDialogButtonBox".}
 
@@ -264,14 +264,14 @@ proc fcQDialogButtonBox_protectedbase_sender(self: pointer): pointer {.importc: 
 proc fcQDialogButtonBox_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDialogButtonBox_protectedbase_senderSignalIndex".}
 proc fcQDialogButtonBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDialogButtonBox_protectedbase_receivers".}
 proc fcQDialogButtonBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDialogButtonBox_protectedbase_isSignalConnected".}
-proc fcQDialogButtonBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new".}
-proc fcQDialogButtonBox_new2(vtbl: pointer, vdata: csize_t): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new2".}
-proc fcQDialogButtonBox_new3(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new3".}
-proc fcQDialogButtonBox_new4(vtbl: pointer, vdata: csize_t, buttons: cint): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new4".}
-proc fcQDialogButtonBox_new5(vtbl: pointer, vdata: csize_t, buttons: cint, orientation: cint): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new5".}
-proc fcQDialogButtonBox_new6(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new6".}
-proc fcQDialogButtonBox_new7(vtbl: pointer, vdata: csize_t, buttons: cint, parent: pointer): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new7".}
-proc fcQDialogButtonBox_new8(vtbl: pointer, vdata: csize_t, buttons: cint, orientation: cint, parent: pointer): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new8".}
+proc fcQDialogButtonBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new_parent".}
+proc fcQDialogButtonBox_new2(vtbl: pointer, vdata: csize_t): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new".}
+proc fcQDialogButtonBox_new3(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new_orientation".}
+proc fcQDialogButtonBox_new4(vtbl: pointer, vdata: csize_t, buttons: cint): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new_buttons".}
+proc fcQDialogButtonBox_new5(vtbl: pointer, vdata: csize_t, buttons: cint, orientation: cint): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new_buttons_orientation".}
+proc fcQDialogButtonBox_new6(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new_orientation_parent".}
+proc fcQDialogButtonBox_new7(vtbl: pointer, vdata: csize_t, buttons: cint, parent: pointer): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new_buttons_parent".}
+proc fcQDialogButtonBox_new8(vtbl: pointer, vdata: csize_t, buttons: cint, orientation: cint, parent: pointer): ptr cQDialogButtonBox {.importc: "QDialogButtonBox_new_buttons_orientation_parent".}
 proc fcQDialogButtonBox_staticMetaObject(): pointer {.importc: "QDialogButtonBox_staticMetaObject".}
 
 proc metaObject*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): gen_qobjectdefs_types.QMetaObject =
@@ -284,13 +284,13 @@ proc metacall*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, param1: cint, 
   fcQDialogButtonBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdialogbuttonbox_types.QDialogButtonBox, s: cstring): string =
-  let v_ms = fcQDialogButtonBox_tr(s)
+  let v_ms = fcQDialogButtonBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdialogbuttonbox_types.QDialogButtonBox, s: cstring): string =
-  let v_ms = fcQDialogButtonBox_trUtf8(s)
+  let v_ms = fcQDialogButtonBox_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -302,13 +302,13 @@ proc orientation*(self: gen_qdialogbuttonbox_types.QDialogButtonBox): cint =
   cint(fcQDialogButtonBox_orientation(self.h))
 
 proc addButton*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, button: gen_qabstractbutton_types.QAbstractButton, role: cint): void =
-  fcQDialogButtonBox_addButton(self.h, button.h, cint(role))
+  fcQDialogButtonBox_addButtonButtonRole(self.h, button.h, cint(role))
 
 proc addButton*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, text: openArray[char], role: cint): gen_qpushbutton_types.QPushButton =
-  gen_qpushbutton_types.QPushButton(h: fcQDialogButtonBox_addButton2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(role)), owned: false)
+  gen_qpushbutton_types.QPushButton(h: fcQDialogButtonBox_addButtonTextRole(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(role)), owned: false)
 
 proc addButton*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, button: cint): gen_qpushbutton_types.QPushButton =
-  gen_qpushbutton_types.QPushButton(h: fcQDialogButtonBox_addButtonWithButton(self.h, cint(button)), owned: false)
+  gen_qpushbutton_types.QPushButton(h: fcQDialogButtonBox_addButtonButton(self.h, cint(button)), owned: false)
 
 proc removeButton*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, button: gen_qabstractbutton_types.QAbstractButton): void =
   fcQDialogButtonBox_removeButton(self.h, button.h)
@@ -421,25 +421,25 @@ proc onRejected*(self: gen_qdialogbuttonbox_types.QDialogButtonBox, slot: QDialo
   fcQDialogButtonBox_connect_rejected(self.h, cast[int](addr tmp[]), fcQDialogButtonBox_slot_callback_rejected, fcQDialogButtonBox_slot_callback_rejected_release)
 
 proc tr*(_: type gen_qdialogbuttonbox_types.QDialogButtonBox, s: cstring, c: cstring): string =
-  let v_ms = fcQDialogButtonBox_tr2(s, c)
+  let v_ms = fcQDialogButtonBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdialogbuttonbox_types.QDialogButtonBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDialogButtonBox_tr3(s, c, n)
+  let v_ms = fcQDialogButtonBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdialogbuttonbox_types.QDialogButtonBox, s: cstring, c: cstring): string =
-  let v_ms = fcQDialogButtonBox_trUtf82(s, c)
+  let v_ms = fcQDialogButtonBox_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdialogbuttonbox_types.QDialogButtonBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDialogButtonBox_trUtf83(s, c, n)
+  let v_ms = fcQDialogButtonBox_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -55,8 +55,8 @@ type cQCameraZoomControl*{.exportc: "QCameraZoomControl", incompleteStruct.} = o
 proc fcQCameraZoomControl_metaObject(self: pointer): pointer {.importc: "QCameraZoomControl_metaObject".}
 proc fcQCameraZoomControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraZoomControl_metacast".}
 proc fcQCameraZoomControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraZoomControl_metacall".}
-proc fcQCameraZoomControl_tr(s: cstring): struct_seaqt_string {.importc: "QCameraZoomControl_tr".}
-proc fcQCameraZoomControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraZoomControl_trUtf8".}
+proc fcQCameraZoomControl_trS(s: cstring): struct_seaqt_string {.importc: "QCameraZoomControl_tr_s".}
+proc fcQCameraZoomControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraZoomControl_trUtf8_s".}
 proc fcQCameraZoomControl_maximumOpticalZoom(self: pointer): float64 {.importc: "QCameraZoomControl_maximumOpticalZoom".}
 proc fcQCameraZoomControl_maximumDigitalZoom(self: pointer): float64 {.importc: "QCameraZoomControl_maximumDigitalZoom".}
 proc fcQCameraZoomControl_requestedOpticalZoom(self: pointer): float64 {.importc: "QCameraZoomControl_requestedOpticalZoom".}
@@ -76,10 +76,10 @@ proc fcQCameraZoomControl_currentOpticalZoomChanged(self: pointer, opticalZoom: 
 proc fcQCameraZoomControl_connect_currentOpticalZoomChanged(self: pointer, slot: int, callback: proc (slot: int, opticalZoom: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraZoomControl_connect_currentOpticalZoomChanged".}
 proc fcQCameraZoomControl_currentDigitalZoomChanged(self: pointer, digitalZoom: float64): void {.importc: "QCameraZoomControl_currentDigitalZoomChanged".}
 proc fcQCameraZoomControl_connect_currentDigitalZoomChanged(self: pointer, slot: int, callback: proc (slot: int, digitalZoom: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraZoomControl_connect_currentDigitalZoomChanged".}
-proc fcQCameraZoomControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraZoomControl_tr2".}
-proc fcQCameraZoomControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraZoomControl_tr3".}
-proc fcQCameraZoomControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraZoomControl_trUtf82".}
-proc fcQCameraZoomControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraZoomControl_trUtf83".}
+proc fcQCameraZoomControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraZoomControl_tr_s_c".}
+proc fcQCameraZoomControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraZoomControl_tr_s_c_n".}
+proc fcQCameraZoomControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraZoomControl_trUtf8_s_c".}
+proc fcQCameraZoomControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraZoomControl_trUtf8_s_c_n".}
 proc fcQCameraZoomControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraZoomControl_protectedbase_sender".}
 proc fcQCameraZoomControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraZoomControl_protectedbase_senderSignalIndex".}
 proc fcQCameraZoomControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraZoomControl_protectedbase_receivers".}
@@ -96,13 +96,13 @@ proc metacall*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, param1: ci
   fcQCameraZoomControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring): string =
-  let v_ms = fcQCameraZoomControl_tr(s)
+  let v_ms = fcQCameraZoomControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring): string =
-  let v_ms = fcQCameraZoomControl_trUtf8(s)
+  let v_ms = fcQCameraZoomControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -249,25 +249,25 @@ proc onCurrentDigitalZoomChanged*(self: gen_qcamerazoomcontrol_types.QCameraZoom
   fcQCameraZoomControl_connect_currentDigitalZoomChanged(self.h, cast[int](addr tmp[]), fcQCameraZoomControl_slot_callback_currentDigitalZoomChanged, fcQCameraZoomControl_slot_callback_currentDigitalZoomChanged_release)
 
 proc tr*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraZoomControl_tr2(s, c)
+  let v_ms = fcQCameraZoomControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraZoomControl_tr3(s, c, n)
+  let v_ms = fcQCameraZoomControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraZoomControl_trUtf82(s, c)
+  let v_ms = fcQCameraZoomControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraZoomControl_trUtf83(s, c, n)
+  let v_ms = fcQCameraZoomControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

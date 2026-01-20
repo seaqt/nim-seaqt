@@ -242,12 +242,12 @@ VirtualQMediaPlayer* QMediaPlayer_new(const QMediaPlayer_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQMediaPlayer(vtbl) : nullptr;
 }
 
-VirtualQMediaPlayer* QMediaPlayer_new2(const QMediaPlayer_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQMediaPlayer* QMediaPlayer_new_parent(const QMediaPlayer_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMediaPlayer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMediaPlayer(vtbl, parent) : nullptr;
 }
 
-VirtualQMediaPlayer* QMediaPlayer_new3(const QMediaPlayer_VTable* vtbl, size_t vdata, QObject* parent, int flags) {
+VirtualQMediaPlayer* QMediaPlayer_new_parent_flags(const QMediaPlayer_VTable* vtbl, size_t vdata, QObject* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMediaPlayer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMediaPlayer(vtbl, parent, static_cast<QMediaPlayer::Flags>(flags)) : nullptr;
 }
@@ -268,7 +268,7 @@ int QMediaPlayer_metacall(QMediaPlayer* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMediaPlayer_tr(const char* s) {
+struct seaqt_string QMediaPlayer_tr_s(const char* s) {
 	QString _ret = QMediaPlayer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -279,7 +279,7 @@ struct seaqt_string QMediaPlayer_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlayer_trUtf8(const char* s) {
+struct seaqt_string QMediaPlayer_trUtf8_s(const char* s) {
 	QString _ret = QMediaPlayer::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -290,7 +290,7 @@ struct seaqt_string QMediaPlayer_trUtf8(const char* s) {
 	return _ms;
 }
 
-int QMediaPlayer_hasSupport(struct seaqt_string mimeType) {
+int QMediaPlayer_hasSupport_mimeType(struct seaqt_string mimeType) {
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	QMultimedia::SupportEstimate _ret = QMediaPlayer::hasSupport(mimeType_QString);
 	return static_cast<int>(_ret);
@@ -316,11 +316,11 @@ struct seaqt_array /* of struct seaqt_string */  QMediaPlayer_supportedMimeTypes
 	return _out;
 }
 
-void QMediaPlayer_setVideoOutput(QMediaPlayer* self, QAbstractVideoSurface* surface) {
+void QMediaPlayer_setVideoOutput_surface(QMediaPlayer* self, QAbstractVideoSurface* surface) {
 	self->setVideoOutput(surface);
 }
 
-void QMediaPlayer_setVideoOutputWithSurfaces(QMediaPlayer* self, struct seaqt_array /* of QAbstractVideoSurface* */  surfaces) {
+void QMediaPlayer_setVideoOutput_surfaces(QMediaPlayer* self, struct seaqt_array /* of QAbstractVideoSurface* */  surfaces) {
 	QVector<QAbstractVideoSurface *> surfaces_QList;
 	surfaces_QList.reserve(surfaces.len);
 	QAbstractVideoSurface** surfaces_arr = static_cast<QAbstractVideoSurface**>(surfaces.data);
@@ -507,7 +507,7 @@ void QMediaPlayer_setPlaybackRate(QMediaPlayer* self, double rate) {
 	self->setPlaybackRate(static_cast<qreal>(rate));
 }
 
-void QMediaPlayer_setMedia(QMediaPlayer* self, QMediaContent* media) {
+void QMediaPlayer_setMedia_media(QMediaPlayer* self, QMediaContent* media) {
 	self->setMedia(*media);
 }
 
@@ -783,11 +783,11 @@ void QMediaPlayer_connect_customAudioRoleChanged(QMediaPlayer* self, intptr_t sl
 	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QString&)>(&QMediaPlayer::customAudioRoleChanged), self, local_caller{slot, callback, release});
 }
 
-void QMediaPlayer_errorWithError(QMediaPlayer* self, int error) {
+void QMediaPlayer_error_error(QMediaPlayer* self, int error) {
 	self->error(static_cast<QMediaPlayer::Error>(error));
 }
 
-void QMediaPlayer_connect_errorWithError(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QMediaPlayer_connect_error_error(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -826,7 +826,7 @@ void QMediaPlayer_unbind(QMediaPlayer* self, QObject* param1) {
 	self->unbind(param1);
 }
 
-struct seaqt_string QMediaPlayer_tr2(const char* s, const char* c) {
+struct seaqt_string QMediaPlayer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMediaPlayer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -837,7 +837,7 @@ struct seaqt_string QMediaPlayer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlayer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMediaPlayer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaPlayer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -848,7 +848,7 @@ struct seaqt_string QMediaPlayer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlayer_trUtf82(const char* s, const char* c) {
+struct seaqt_string QMediaPlayer_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QMediaPlayer::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -859,7 +859,7 @@ struct seaqt_string QMediaPlayer_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlayer_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QMediaPlayer_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaPlayer::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -870,7 +870,7 @@ struct seaqt_string QMediaPlayer_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-int QMediaPlayer_hasSupport2(struct seaqt_string mimeType, struct seaqt_array /* of struct seaqt_string */  codecs) {
+int QMediaPlayer_hasSupport_mimeType_codecs(struct seaqt_string mimeType, struct seaqt_array /* of struct seaqt_string */  codecs) {
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	QStringList codecs_QList;
 	codecs_QList.reserve(codecs.len);
@@ -883,7 +883,7 @@ int QMediaPlayer_hasSupport2(struct seaqt_string mimeType, struct seaqt_array /*
 	return static_cast<int>(_ret);
 }
 
-int QMediaPlayer_hasSupport3(struct seaqt_string mimeType, struct seaqt_array /* of struct seaqt_string */  codecs, int flags) {
+int QMediaPlayer_hasSupport_mimeType_codecs_flags(struct seaqt_string mimeType, struct seaqt_array /* of struct seaqt_string */  codecs, int flags) {
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	QStringList codecs_QList;
 	codecs_QList.reserve(codecs.len);
@@ -896,7 +896,7 @@ int QMediaPlayer_hasSupport3(struct seaqt_string mimeType, struct seaqt_array /*
 	return static_cast<int>(_ret);
 }
 
-struct seaqt_array /* of struct seaqt_string */  QMediaPlayer_supportedMimeTypesWithFlags(int flags) {
+struct seaqt_array /* of struct seaqt_string */  QMediaPlayer_supportedMimeTypes_flags(int flags) {
 	QStringList _ret = QMediaPlayer::supportedMimeTypes(static_cast<QMediaPlayer::Flags>(flags));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
@@ -916,7 +916,7 @@ struct seaqt_array /* of struct seaqt_string */  QMediaPlayer_supportedMimeTypes
 	return _out;
 }
 
-void QMediaPlayer_setMedia2(QMediaPlayer* self, QMediaContent* media, QIODevice* stream) {
+void QMediaPlayer_setMedia_media_stream(QMediaPlayer* self, QMediaContent* media, QIODevice* stream) {
 	self->setMedia(*media, stream);
 }
 

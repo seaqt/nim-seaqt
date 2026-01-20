@@ -30,8 +30,8 @@ void QCameraImageProcessing_virtbase(QCameraImageProcessing* src, QObject** outp
 QMetaObject* QCameraImageProcessing_metaObject(const QCameraImageProcessing* self);
 void* QCameraImageProcessing_metacast(QCameraImageProcessing* self, const char* param1);
 int QCameraImageProcessing_metacall(QCameraImageProcessing* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraImageProcessing_tr(const char* s);
-struct seaqt_string QCameraImageProcessing_trUtf8(const char* s);
+struct seaqt_string QCameraImageProcessing_tr_s(const char* s);
+struct seaqt_string QCameraImageProcessing_trUtf8_s(const char* s);
 bool QCameraImageProcessing_isAvailable(const QCameraImageProcessing* self);
 int QCameraImageProcessing_whiteBalanceMode(const QCameraImageProcessing* self);
 void QCameraImageProcessing_setWhiteBalanceMode(QCameraImageProcessing* self, int mode);
@@ -51,10 +51,10 @@ void QCameraImageProcessing_setDenoisingLevel(QCameraImageProcessing* self, doub
 int QCameraImageProcessing_colorFilter(const QCameraImageProcessing* self);
 void QCameraImageProcessing_setColorFilter(QCameraImageProcessing* self, int filter);
 bool QCameraImageProcessing_isColorFilterSupported(const QCameraImageProcessing* self, int filter);
-struct seaqt_string QCameraImageProcessing_tr2(const char* s, const char* c);
-struct seaqt_string QCameraImageProcessing_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraImageProcessing_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraImageProcessing_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraImageProcessing_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraImageProcessing_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraImageProcessing_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraImageProcessing_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraImageProcessing_staticMetaObject();
 

@@ -17,12 +17,12 @@ QOcspResponse* QOcspResponse_new() {
 	return new (std::nothrow) QOcspResponse();
 }
 
-QOcspResponse* QOcspResponse_new2(QOcspResponse* other) {
-	return new (std::nothrow) QOcspResponse(*other);
+QOcspResponse* QOcspResponse_new_from(QOcspResponse* from) {
+	return new (std::nothrow) QOcspResponse(*from);
 }
 
-void QOcspResponse_operatorAssign(QOcspResponse* self, QOcspResponse* other) {
-	self->operator=(*other);
+void QOcspResponse_operatorAssign(QOcspResponse* self, QOcspResponse* from) {
+	self->operator=(*from);
 }
 
 int QOcspResponse_certificateStatus(const QOcspResponse* self) {

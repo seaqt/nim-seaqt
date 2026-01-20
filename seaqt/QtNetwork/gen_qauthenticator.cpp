@@ -21,12 +21,12 @@ QAuthenticator* QAuthenticator_new() {
 	return new (std::nothrow) QAuthenticator();
 }
 
-QAuthenticator* QAuthenticator_new2(QAuthenticator* other) {
-	return new (std::nothrow) QAuthenticator(*other);
+QAuthenticator* QAuthenticator_new_from(QAuthenticator* from) {
+	return new (std::nothrow) QAuthenticator(*from);
 }
 
-void QAuthenticator_operatorAssign(QAuthenticator* self, QAuthenticator* other) {
-	self->operator=(*other);
+void QAuthenticator_operatorAssign(QAuthenticator* self, QAuthenticator* from) {
+	self->operator=(*from);
 }
 
 bool QAuthenticator_operatorEqual(const QAuthenticator* self, QAuthenticator* other) {

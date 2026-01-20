@@ -748,22 +748,22 @@ public:
 	friend bool QColorDialog_protectedbase_isSignalConnected(const VirtualQColorDialog* self, QMetaMethod* signal);
 };
 
-VirtualQColorDialog* QColorDialog_new(const QColorDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQColorDialog* QColorDialog_new_parent(const QColorDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQColorDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQColorDialog(vtbl, parent) : nullptr;
 }
 
-VirtualQColorDialog* QColorDialog_new2(const QColorDialog_VTable* vtbl, size_t vdata) {
+VirtualQColorDialog* QColorDialog_new(const QColorDialog_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQColorDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQColorDialog(vtbl) : nullptr;
 }
 
-VirtualQColorDialog* QColorDialog_new3(const QColorDialog_VTable* vtbl, size_t vdata, QColor* initial) {
+VirtualQColorDialog* QColorDialog_new_initial(const QColorDialog_VTable* vtbl, size_t vdata, QColor* initial) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQColorDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQColorDialog(vtbl, *initial) : nullptr;
 }
 
-VirtualQColorDialog* QColorDialog_new4(const QColorDialog_VTable* vtbl, size_t vdata, QColor* initial, QWidget* parent) {
+VirtualQColorDialog* QColorDialog_new_initial_parent(const QColorDialog_VTable* vtbl, size_t vdata, QColor* initial, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQColorDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQColorDialog(vtbl, *initial, parent) : nullptr;
 }
@@ -784,7 +784,7 @@ int QColorDialog_metacall(QColorDialog* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QColorDialog_tr(const char* s) {
+struct seaqt_string QColorDialog_tr_s(const char* s) {
 	QString _ret = QColorDialog::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -795,7 +795,7 @@ struct seaqt_string QColorDialog_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QColorDialog_trUtf8(const char* s) {
+struct seaqt_string QColorDialog_trUtf8_s(const char* s) {
 	QString _ret = QColorDialog::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -818,7 +818,7 @@ QColor* QColorDialog_selectedColor(const QColorDialog* self) {
 	return new QColor(self->selectedColor());
 }
 
-void QColorDialog_setOption(QColorDialog* self, int option) {
+void QColorDialog_setOption_option(QColorDialog* self, int option) {
 	self->setOption(static_cast<QColorDialog::ColorDialogOption>(option));
 }
 
@@ -904,7 +904,7 @@ void QColorDialog_connect_colorSelected(QColorDialog* self, intptr_t slot, void 
 	QColorDialog::connect(self, static_cast<void (QColorDialog::*)(const QColor&)>(&QColorDialog::colorSelected), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QColorDialog_tr2(const char* s, const char* c) {
+struct seaqt_string QColorDialog_tr_s_c(const char* s, const char* c) {
 	QString _ret = QColorDialog::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -915,7 +915,7 @@ struct seaqt_string QColorDialog_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QColorDialog_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QColorDialog_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QColorDialog::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -926,7 +926,7 @@ struct seaqt_string QColorDialog_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QColorDialog_trUtf82(const char* s, const char* c) {
+struct seaqt_string QColorDialog_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QColorDialog::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -937,7 +937,7 @@ struct seaqt_string QColorDialog_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QColorDialog_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QColorDialog_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QColorDialog::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -948,39 +948,39 @@ struct seaqt_string QColorDialog_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QColorDialog_setOption2(QColorDialog* self, int option, bool on) {
+void QColorDialog_setOption_option_on(QColorDialog* self, int option, bool on) {
 	self->setOption(static_cast<QColorDialog::ColorDialogOption>(option), on);
 }
 
-QColor* QColorDialog_getColorWithInitial(QColor* initial) {
+QColor* QColorDialog_getColor_initial(QColor* initial) {
 	return new QColor(QColorDialog::getColor(*initial));
 }
 
-QColor* QColorDialog_getColor2(QColor* initial, QWidget* parent) {
+QColor* QColorDialog_getColor_initial_parent(QColor* initial, QWidget* parent) {
 	return new QColor(QColorDialog::getColor(*initial, parent));
 }
 
-QColor* QColorDialog_getColor3(QColor* initial, QWidget* parent, struct seaqt_string title) {
+QColor* QColorDialog_getColor_initial_parent_title(QColor* initial, QWidget* parent, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return new QColor(QColorDialog::getColor(*initial, parent, title_QString));
 }
 
-QColor* QColorDialog_getColor4(QColor* initial, QWidget* parent, struct seaqt_string title, int options) {
+QColor* QColorDialog_getColor_initial_parent_title_options(QColor* initial, QWidget* parent, struct seaqt_string title, int options) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return new QColor(QColorDialog::getColor(*initial, parent, title_QString, static_cast<QColorDialog::ColorDialogOptions>(options)));
 }
 
-unsigned int QColorDialog_getRgbaWithRgba(unsigned int rgba) {
+unsigned int QColorDialog_getRgba_rgba(unsigned int rgba) {
 	QRgb _ret = QColorDialog::getRgba(static_cast<QRgb>(rgba));
 	return static_cast<unsigned int>(_ret);
 }
 
-unsigned int QColorDialog_getRgba2(unsigned int rgba, bool* ok) {
+unsigned int QColorDialog_getRgba_rgba_ok(unsigned int rgba, bool* ok) {
 	QRgb _ret = QColorDialog::getRgba(static_cast<QRgb>(rgba), ok);
 	return static_cast<unsigned int>(_ret);
 }
 
-unsigned int QColorDialog_getRgba3(unsigned int rgba, bool* ok, QWidget* parent) {
+unsigned int QColorDialog_getRgba_rgba_ok_parent(unsigned int rgba, bool* ok, QWidget* parent) {
 	QRgb _ret = QColorDialog::getRgba(static_cast<QRgb>(rgba), ok, parent);
 	return static_cast<unsigned int>(_ret);
 }

@@ -27,19 +27,19 @@ typedef struct QVideoSurfaceFormat QVideoSurfaceFormat;
 #endif
 
 QVideoSurfaceFormat* QVideoSurfaceFormat_new();
-QVideoSurfaceFormat* QVideoSurfaceFormat_new2(QSize* size, int pixelFormat);
-QVideoSurfaceFormat* QVideoSurfaceFormat_new3(QVideoSurfaceFormat* format);
-QVideoSurfaceFormat* QVideoSurfaceFormat_new4(QSize* size, int pixelFormat, int handleType);
+QVideoSurfaceFormat* QVideoSurfaceFormat_new_size_pixelFormat(QSize* size, int pixelFormat);
+QVideoSurfaceFormat* QVideoSurfaceFormat_new_from(QVideoSurfaceFormat* from);
+QVideoSurfaceFormat* QVideoSurfaceFormat_new_size_pixelFormat_handleType(QSize* size, int pixelFormat, int handleType);
 
-void QVideoSurfaceFormat_operatorAssign(QVideoSurfaceFormat* self, QVideoSurfaceFormat* format);
+void QVideoSurfaceFormat_operatorAssign(QVideoSurfaceFormat* self, QVideoSurfaceFormat* from);
 bool QVideoSurfaceFormat_operatorEqual(const QVideoSurfaceFormat* self, QVideoSurfaceFormat* format);
 bool QVideoSurfaceFormat_operatorNotEqual(const QVideoSurfaceFormat* self, QVideoSurfaceFormat* format);
 bool QVideoSurfaceFormat_isValid(const QVideoSurfaceFormat* self);
 int QVideoSurfaceFormat_pixelFormat(const QVideoSurfaceFormat* self);
 int QVideoSurfaceFormat_handleType(const QVideoSurfaceFormat* self);
 QSize* QVideoSurfaceFormat_frameSize(const QVideoSurfaceFormat* self);
-void QVideoSurfaceFormat_setFrameSize(QVideoSurfaceFormat* self, QSize* size);
-void QVideoSurfaceFormat_setFrameSize2(QVideoSurfaceFormat* self, int width, int height);
+void QVideoSurfaceFormat_setFrameSize_size(QVideoSurfaceFormat* self, QSize* size);
+void QVideoSurfaceFormat_setFrameSize_width_height(QVideoSurfaceFormat* self, int width, int height);
 int QVideoSurfaceFormat_frameWidth(const QVideoSurfaceFormat* self);
 int QVideoSurfaceFormat_frameHeight(const QVideoSurfaceFormat* self);
 QRect* QVideoSurfaceFormat_viewport(const QVideoSurfaceFormat* self);
@@ -49,8 +49,8 @@ void QVideoSurfaceFormat_setScanLineDirection(QVideoSurfaceFormat* self, int dir
 double QVideoSurfaceFormat_frameRate(const QVideoSurfaceFormat* self);
 void QVideoSurfaceFormat_setFrameRate(QVideoSurfaceFormat* self, double rate);
 QSize* QVideoSurfaceFormat_pixelAspectRatio(const QVideoSurfaceFormat* self);
-void QVideoSurfaceFormat_setPixelAspectRatio(QVideoSurfaceFormat* self, QSize* ratio);
-void QVideoSurfaceFormat_setPixelAspectRatio2(QVideoSurfaceFormat* self, int width, int height);
+void QVideoSurfaceFormat_setPixelAspectRatio_ratio(QVideoSurfaceFormat* self, QSize* ratio);
+void QVideoSurfaceFormat_setPixelAspectRatio_width_height(QVideoSurfaceFormat* self, int width, int height);
 int QVideoSurfaceFormat_yCbCrColorSpace(const QVideoSurfaceFormat* self);
 void QVideoSurfaceFormat_setYCbCrColorSpace(QVideoSurfaceFormat* self, int colorSpace);
 bool QVideoSurfaceFormat_isMirrored(const QVideoSurfaceFormat* self);

@@ -59,8 +59,8 @@ type cQMimeData*{.exportc: "QMimeData", incompleteStruct.} = object
 proc fcQMimeData_metaObject(self: pointer): pointer {.importc: "QMimeData_metaObject".}
 proc fcQMimeData_metacast(self: pointer, param1: cstring): pointer {.importc: "QMimeData_metacast".}
 proc fcQMimeData_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMimeData_metacall".}
-proc fcQMimeData_tr(s: cstring): struct_seaqt_string {.importc: "QMimeData_tr".}
-proc fcQMimeData_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMimeData_trUtf8".}
+proc fcQMimeData_trS(s: cstring): struct_seaqt_string {.importc: "QMimeData_tr_s".}
+proc fcQMimeData_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMimeData_trUtf8_s".}
 proc fcQMimeData_urls(self: pointer): struct_seaqt_array {.importc: "QMimeData_urls".}
 proc fcQMimeData_setUrls(self: pointer, urls: struct_seaqt_array): void {.importc: "QMimeData_setUrls".}
 proc fcQMimeData_hasUrls(self: pointer): bool {.importc: "QMimeData_hasUrls".}
@@ -82,10 +82,10 @@ proc fcQMimeData_removeFormat(self: pointer, mimetype: struct_seaqt_string): voi
 proc fcQMimeData_hasFormat(self: pointer, mimetype: struct_seaqt_string): bool {.importc: "QMimeData_hasFormat".}
 proc fcQMimeData_formats(self: pointer): struct_seaqt_array {.importc: "QMimeData_formats".}
 proc fcQMimeData_clear(self: pointer): void {.importc: "QMimeData_clear".}
-proc fcQMimeData_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMimeData_tr2".}
-proc fcQMimeData_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMimeData_tr3".}
-proc fcQMimeData_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMimeData_trUtf82".}
-proc fcQMimeData_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMimeData_trUtf83".}
+proc fcQMimeData_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMimeData_tr_s_c".}
+proc fcQMimeData_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMimeData_tr_s_c_n".}
+proc fcQMimeData_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMimeData_trUtf8_s_c".}
+proc fcQMimeData_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMimeData_trUtf8_s_c_n".}
 proc fcQMimeData_vdata(self: pointer): ptr pointer {.importc: "QMimeData_vdata".}
 proc fvdata_cQMimeData(self: pointer): pointer {.importc: "vdata_QMimeData".}
 
@@ -134,13 +134,13 @@ proc metacall*(self: gen_qmimedata_types.QMimeData, param1: cint, param2: cint, 
   fcQMimeData_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmimedata_types.QMimeData, s: cstring): string =
-  let v_ms = fcQMimeData_tr(s)
+  let v_ms = fcQMimeData_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmimedata_types.QMimeData, s: cstring): string =
-  let v_ms = fcQMimeData_trUtf8(s)
+  let v_ms = fcQMimeData_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -237,25 +237,25 @@ proc clear*(self: gen_qmimedata_types.QMimeData): void =
   fcQMimeData_clear(self.h)
 
 proc tr*(_: type gen_qmimedata_types.QMimeData, s: cstring, c: cstring): string =
-  let v_ms = fcQMimeData_tr2(s, c)
+  let v_ms = fcQMimeData_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmimedata_types.QMimeData, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMimeData_tr3(s, c, n)
+  let v_ms = fcQMimeData_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmimedata_types.QMimeData, s: cstring, c: cstring): string =
-  let v_ms = fcQMimeData_trUtf82(s, c)
+  let v_ms = fcQMimeData_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmimedata_types.QMimeData, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMimeData_trUtf83(s, c, n)
+  let v_ms = fcQMimeData_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

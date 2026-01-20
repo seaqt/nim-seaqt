@@ -38,8 +38,8 @@ void QAudioDecoderControl_virtbase(QAudioDecoderControl* src, QMediaControl** ou
 QMetaObject* QAudioDecoderControl_metaObject(const QAudioDecoderControl* self);
 void* QAudioDecoderControl_metacast(QAudioDecoderControl* self, const char* param1);
 int QAudioDecoderControl_metacall(QAudioDecoderControl* self, int param1, int param2, void** param3);
-struct seaqt_string QAudioDecoderControl_tr(const char* s);
-struct seaqt_string QAudioDecoderControl_trUtf8(const char* s);
+struct seaqt_string QAudioDecoderControl_tr_s(const char* s);
+struct seaqt_string QAudioDecoderControl_trUtf8_s(const char* s);
 int QAudioDecoderControl_state(const QAudioDecoderControl* self);
 struct seaqt_string QAudioDecoderControl_sourceFilename(const QAudioDecoderControl* self);
 void QAudioDecoderControl_setSourceFilename(QAudioDecoderControl* self, struct seaqt_string fileName);
@@ -71,10 +71,10 @@ void QAudioDecoderControl_positionChanged(QAudioDecoderControl* self, long long 
 void QAudioDecoderControl_connect_positionChanged(QAudioDecoderControl* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t));
 void QAudioDecoderControl_durationChanged(QAudioDecoderControl* self, long long duration);
 void QAudioDecoderControl_connect_durationChanged(QAudioDecoderControl* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t));
-struct seaqt_string QAudioDecoderControl_tr2(const char* s, const char* c);
-struct seaqt_string QAudioDecoderControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAudioDecoderControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QAudioDecoderControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAudioDecoderControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAudioDecoderControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAudioDecoderControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAudioDecoderControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QAudioDecoderControl_staticMetaObject();
 void QAudioDecoderControl_delete(QAudioDecoderControl* self);

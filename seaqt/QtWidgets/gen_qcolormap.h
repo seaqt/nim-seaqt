@@ -22,19 +22,19 @@ typedef struct QColor QColor;
 typedef struct QColormap QColormap;
 #endif
 
-QColormap* QColormap_new(QColormap* colormap);
+QColormap* QColormap_new(QColormap* from);
 
 void QColormap_initialize();
 void QColormap_cleanup();
 QColormap* QColormap_instance();
-void QColormap_operatorAssign(QColormap* self, QColormap* colormap);
+void QColormap_operatorAssign(QColormap* self, QColormap* from);
 int QColormap_mode(const QColormap* self);
 int QColormap_depth(const QColormap* self);
 int QColormap_size(const QColormap* self);
 unsigned int QColormap_pixel(const QColormap* self, QColor* color);
 QColor* QColormap_colorAt(const QColormap* self, unsigned int pixel);
 struct seaqt_array /* of QColor* */  QColormap_colormap(const QColormap* self);
-QColormap* QColormap_instanceWithScreen(int screen);
+QColormap* QColormap_instance_screen(int screen);
 
 void QColormap_delete(QColormap* self);
 

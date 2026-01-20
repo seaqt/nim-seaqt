@@ -103,12 +103,12 @@ type cQMediaPlayer*{.exportc: "QMediaPlayer", incompleteStruct.} = object
 proc fcQMediaPlayer_metaObject(self: pointer): pointer {.importc: "QMediaPlayer_metaObject".}
 proc fcQMediaPlayer_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaPlayer_metacast".}
 proc fcQMediaPlayer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaPlayer_metacall".}
-proc fcQMediaPlayer_tr(s: cstring): struct_seaqt_string {.importc: "QMediaPlayer_tr".}
-proc fcQMediaPlayer_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaPlayer_trUtf8".}
-proc fcQMediaPlayer_hasSupport(mimeType: struct_seaqt_string): cint {.importc: "QMediaPlayer_hasSupport".}
+proc fcQMediaPlayer_trS(s: cstring): struct_seaqt_string {.importc: "QMediaPlayer_tr_s".}
+proc fcQMediaPlayer_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QMediaPlayer_trUtf8_s".}
+proc fcQMediaPlayer_hasSupportMimeType(mimeType: struct_seaqt_string): cint {.importc: "QMediaPlayer_hasSupport_mimeType".}
 proc fcQMediaPlayer_supportedMimeTypes(): struct_seaqt_array {.importc: "QMediaPlayer_supportedMimeTypes".}
-proc fcQMediaPlayer_setVideoOutput(self: pointer, surface: pointer): void {.importc: "QMediaPlayer_setVideoOutput".}
-proc fcQMediaPlayer_setVideoOutputWithSurfaces(self: pointer, surfaces: struct_seaqt_array): void {.importc: "QMediaPlayer_setVideoOutputWithSurfaces".}
+proc fcQMediaPlayer_setVideoOutputSurface(self: pointer, surface: pointer): void {.importc: "QMediaPlayer_setVideoOutput_surface".}
+proc fcQMediaPlayer_setVideoOutputSurfaces(self: pointer, surfaces: struct_seaqt_array): void {.importc: "QMediaPlayer_setVideoOutput_surfaces".}
 proc fcQMediaPlayer_media(self: pointer): pointer {.importc: "QMediaPlayer_media".}
 proc fcQMediaPlayer_mediaStream(self: pointer): pointer {.importc: "QMediaPlayer_mediaStream".}
 proc fcQMediaPlayer_playlist(self: pointer): pointer {.importc: "QMediaPlayer_playlist".}
@@ -141,7 +141,7 @@ proc fcQMediaPlayer_setPosition(self: pointer, position: clonglong): void {.impo
 proc fcQMediaPlayer_setVolume(self: pointer, volume: cint): void {.importc: "QMediaPlayer_setVolume".}
 proc fcQMediaPlayer_setMuted(self: pointer, muted: bool): void {.importc: "QMediaPlayer_setMuted".}
 proc fcQMediaPlayer_setPlaybackRate(self: pointer, rate: float64): void {.importc: "QMediaPlayer_setPlaybackRate".}
-proc fcQMediaPlayer_setMedia(self: pointer, media: pointer): void {.importc: "QMediaPlayer_setMedia".}
+proc fcQMediaPlayer_setMediaMedia(self: pointer, media: pointer): void {.importc: "QMediaPlayer_setMedia_media".}
 proc fcQMediaPlayer_setPlaylist(self: pointer, playlist: pointer): void {.importc: "QMediaPlayer_setPlaylist".}
 proc fcQMediaPlayer_setNetworkConfigurations(self: pointer, configurations: struct_seaqt_array): void {.importc: "QMediaPlayer_setNetworkConfigurations".}
 proc fcQMediaPlayer_mediaChanged(self: pointer, media: pointer): void {.importc: "QMediaPlayer_mediaChanged".}
@@ -174,20 +174,20 @@ proc fcQMediaPlayer_audioRoleChanged(self: pointer, role: cint): void {.importc:
 proc fcQMediaPlayer_connect_audioRoleChanged(self: pointer, slot: int, callback: proc (slot: int, role: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayer_connect_audioRoleChanged".}
 proc fcQMediaPlayer_customAudioRoleChanged(self: pointer, role: struct_seaqt_string): void {.importc: "QMediaPlayer_customAudioRoleChanged".}
 proc fcQMediaPlayer_connect_customAudioRoleChanged(self: pointer, slot: int, callback: proc (slot: int, role: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayer_connect_customAudioRoleChanged".}
-proc fcQMediaPlayer_errorWithError(self: pointer, error: cint): void {.importc: "QMediaPlayer_errorWithError".}
-proc fcQMediaPlayer_connect_errorWithError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayer_connect_errorWithError".}
+proc fcQMediaPlayer_errorError(self: pointer, error: cint): void {.importc: "QMediaPlayer_error_error".}
+proc fcQMediaPlayer_connect_errorError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayer_connect_error_error".}
 proc fcQMediaPlayer_networkConfigurationChanged(self: pointer, configuration: pointer): void {.importc: "QMediaPlayer_networkConfigurationChanged".}
 proc fcQMediaPlayer_connect_networkConfigurationChanged(self: pointer, slot: int, callback: proc (slot: int, configuration: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlayer_connect_networkConfigurationChanged".}
 proc fcQMediaPlayer_bindX(self: pointer, param1: pointer): bool {.importc: "QMediaPlayer_bind".}
 proc fcQMediaPlayer_unbind(self: pointer, param1: pointer): void {.importc: "QMediaPlayer_unbind".}
-proc fcQMediaPlayer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayer_tr2".}
-proc fcQMediaPlayer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayer_tr3".}
-proc fcQMediaPlayer_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayer_trUtf82".}
-proc fcQMediaPlayer_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayer_trUtf83".}
-proc fcQMediaPlayer_hasSupport2(mimeType: struct_seaqt_string, codecs: struct_seaqt_array): cint {.importc: "QMediaPlayer_hasSupport2".}
-proc fcQMediaPlayer_hasSupport3(mimeType: struct_seaqt_string, codecs: struct_seaqt_array, flags: cint): cint {.importc: "QMediaPlayer_hasSupport3".}
-proc fcQMediaPlayer_supportedMimeTypesWithFlags(flags: cint): struct_seaqt_array {.importc: "QMediaPlayer_supportedMimeTypesWithFlags".}
-proc fcQMediaPlayer_setMedia2(self: pointer, media: pointer, stream: pointer): void {.importc: "QMediaPlayer_setMedia2".}
+proc fcQMediaPlayer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayer_tr_s_c".}
+proc fcQMediaPlayer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayer_tr_s_c_n".}
+proc fcQMediaPlayer_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaPlayer_trUtf8_s_c".}
+proc fcQMediaPlayer_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaPlayer_trUtf8_s_c_n".}
+proc fcQMediaPlayer_hasSupportMimeTypeCodecs(mimeType: struct_seaqt_string, codecs: struct_seaqt_array): cint {.importc: "QMediaPlayer_hasSupport_mimeType_codecs".}
+proc fcQMediaPlayer_hasSupportMimeTypeCodecsFlags(mimeType: struct_seaqt_string, codecs: struct_seaqt_array, flags: cint): cint {.importc: "QMediaPlayer_hasSupport_mimeType_codecs_flags".}
+proc fcQMediaPlayer_supportedMimeTypesFlags(flags: cint): struct_seaqt_array {.importc: "QMediaPlayer_supportedMimeTypes_flags".}
+proc fcQMediaPlayer_setMediaMediaStream(self: pointer, media: pointer, stream: pointer): void {.importc: "QMediaPlayer_setMedia_media_stream".}
 proc fcQMediaPlayer_vdata(self: pointer): ptr pointer {.importc: "QMediaPlayer_vdata".}
 proc fvdata_cQMediaPlayer(self: pointer): pointer {.importc: "vdata_QMediaPlayer".}
 
@@ -230,8 +230,8 @@ proc fcQMediaPlayer_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQMediaPlayer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlayer_protectedbase_receivers".}
 proc fcQMediaPlayer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaPlayer_protectedbase_isSignalConnected".}
 proc fcQMediaPlayer_new(vtbl: pointer, vdata: csize_t): ptr cQMediaPlayer {.importc: "QMediaPlayer_new".}
-proc fcQMediaPlayer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaPlayer {.importc: "QMediaPlayer_new2".}
-proc fcQMediaPlayer_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQMediaPlayer {.importc: "QMediaPlayer_new3".}
+proc fcQMediaPlayer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMediaPlayer {.importc: "QMediaPlayer_new_parent".}
+proc fcQMediaPlayer_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQMediaPlayer {.importc: "QMediaPlayer_new_parent_flags".}
 proc fcQMediaPlayer_staticMetaObject(): pointer {.importc: "QMediaPlayer_staticMetaObject".}
 
 proc metaObject*(self: gen_qmediaplayer_types.QMediaPlayer): gen_qobjectdefs_types.QMetaObject =
@@ -244,19 +244,19 @@ proc metacall*(self: gen_qmediaplayer_types.QMediaPlayer, param1: cint, param2: 
   fcQMediaPlayer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring): string =
-  let v_ms = fcQMediaPlayer_tr(s)
+  let v_ms = fcQMediaPlayer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring): string =
-  let v_ms = fcQMediaPlayer_trUtf8(s)
+  let v_ms = fcQMediaPlayer_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: openArray[char]): cint =
-  cint(fcQMediaPlayer_hasSupport(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType)))))
+  cint(fcQMediaPlayer_hasSupportMimeType(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType)))))
 
 proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer): seq[string] =
   var v_ma = fcQMediaPlayer_supportedMimeTypes()
@@ -271,14 +271,14 @@ proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer): seq[strin
   vx_ret
 
 proc setVideoOutput*(self: gen_qmediaplayer_types.QMediaPlayer, surface: gen_qabstractvideosurface_types.QAbstractVideoSurface): void =
-  fcQMediaPlayer_setVideoOutput(self.h, surface.h)
+  fcQMediaPlayer_setVideoOutputSurface(self.h, surface.h)
 
 proc setVideoOutput*(self: gen_qmediaplayer_types.QMediaPlayer, surfaces: openArray[gen_qabstractvideosurface_types.QAbstractVideoSurface]): void =
   var surfaces_CArray = newSeq[pointer](len(surfaces))
   for i in 0..<len(surfaces):
     surfaces_CArray[i] = surfaces[i].h
 
-  fcQMediaPlayer_setVideoOutputWithSurfaces(self.h, struct_seaqt_array(len: csize_t(len(surfaces)), data: if len(surfaces) == 0: nil else: addr(surfaces_CArray[0])))
+  fcQMediaPlayer_setVideoOutputSurfaces(self.h, struct_seaqt_array(len: csize_t(len(surfaces)), data: if len(surfaces) == 0: nil else: addr(surfaces_CArray[0])))
 
 proc media*(self: gen_qmediaplayer_types.QMediaPlayer): gen_qmediacontent_types.QMediaContent =
   gen_qmediacontent_types.QMediaContent(h: fcQMediaPlayer_media(self.h), owned: true)
@@ -398,7 +398,7 @@ proc setPlaybackRate*(self: gen_qmediaplayer_types.QMediaPlayer, rate: float64):
   fcQMediaPlayer_setPlaybackRate(self.h, rate)
 
 proc setMedia*(self: gen_qmediaplayer_types.QMediaPlayer, media: gen_qmediacontent_types.QMediaContent): void =
-  fcQMediaPlayer_setMedia(self.h, media.h)
+  fcQMediaPlayer_setMediaMedia(self.h, media.h)
 
 proc setPlaylist*(self: gen_qmediaplayer_types.QMediaPlayer, playlist: gen_qmediaplaylist_types.QMediaPlaylist): void =
   fcQMediaPlayer_setPlaylist(self.h, playlist.h)
@@ -714,24 +714,24 @@ proc onCustomAudioRoleChanged*(self: gen_qmediaplayer_types.QMediaPlayer, slot: 
   fcQMediaPlayer_connect_customAudioRoleChanged(self.h, cast[int](addr tmp[]), fcQMediaPlayer_slot_callback_customAudioRoleChanged, fcQMediaPlayer_slot_callback_customAudioRoleChanged_release)
 
 proc error*(self: gen_qmediaplayer_types.QMediaPlayer, error: cint): void =
-  fcQMediaPlayer_errorWithError(self.h, cint(error))
+  fcQMediaPlayer_errorError(self.h, cint(error))
 
-type QMediaPlayererrorWithErrorSlot* = proc(error: cint)
-proc fcQMediaPlayer_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
-  let nimfunc = cast[ptr QMediaPlayererrorWithErrorSlot](cast[pointer](slot))
+type QMediaPlayererrorErrorSlot* = proc(error: cint)
+proc fcQMediaPlayer_slot_callback_errorError(slot: int, error: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QMediaPlayererrorErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc fcQMediaPlayer_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QMediaPlayererrorWithErrorSlot](cast[pointer](slot))
+proc fcQMediaPlayer_slot_callback_errorError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlayererrorErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onError*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayererrorWithErrorSlot) =
-  var tmp = new QMediaPlayererrorWithErrorSlot
+proc onError*(self: gen_qmediaplayer_types.QMediaPlayer, slot: QMediaPlayererrorErrorSlot) =
+  var tmp = new QMediaPlayererrorErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlayer_connect_errorWithError(self.h, cast[int](addr tmp[]), fcQMediaPlayer_slot_callback_errorWithError, fcQMediaPlayer_slot_callback_errorWithError_release)
+  fcQMediaPlayer_connect_errorError(self.h, cast[int](addr tmp[]), fcQMediaPlayer_slot_callback_errorError, fcQMediaPlayer_slot_callback_errorError_release)
 
 proc networkConfigurationChanged*(self: gen_qmediaplayer_types.QMediaPlayer, configuration: gen_qnetworkconfiguration_types.QNetworkConfiguration): void =
   fcQMediaPlayer_networkConfigurationChanged(self.h, configuration.h)
@@ -760,25 +760,25 @@ proc unbind*(self: gen_qmediaplayer_types.QMediaPlayer, param1: gen_qobject_type
   fcQMediaPlayer_unbind(self.h, param1.h)
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaPlayer_tr2(s, c)
+  let v_ms = fcQMediaPlayer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaPlayer_tr3(s, c, n)
+  let v_ms = fcQMediaPlayer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring): string =
-  let v_ms = fcQMediaPlayer_trUtf82(s, c)
+  let v_ms = fcQMediaPlayer_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qmediaplayer_types.QMediaPlayer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMediaPlayer_trUtf83(s, c, n)
+  let v_ms = fcQMediaPlayer_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -788,17 +788,17 @@ proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: openArra
   for i in 0..<len(codecs):
     codecs_CArray[i] = struct_seaqt_string(data: if len(codecs[i]) > 0: addr codecs[i][0] else: nil, len: csize_t(len(codecs[i])))
 
-  cint(fcQMediaPlayer_hasSupport2(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_seaqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
+  cint(fcQMediaPlayer_hasSupportMimeTypeCodecs(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_seaqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
 
 proc hasSupport*(_: type gen_qmediaplayer_types.QMediaPlayer, mimeType: openArray[char], codecs: openArray[string], flags: cint): cint =
   var codecs_CArray = newSeq[struct_seaqt_string](len(codecs))
   for i in 0..<len(codecs):
     codecs_CArray[i] = struct_seaqt_string(data: if len(codecs[i]) > 0: addr codecs[i][0] else: nil, len: csize_t(len(codecs[i])))
 
-  cint(fcQMediaPlayer_hasSupport3(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_seaqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0])), cint(flags)))
+  cint(fcQMediaPlayer_hasSupportMimeTypeCodecsFlags(struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), struct_seaqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0])), cint(flags)))
 
 proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer, flags: cint): seq[string] =
-  var v_ma = fcQMediaPlayer_supportedMimeTypesWithFlags(cint(flags))
+  var v_ma = fcQMediaPlayer_supportedMimeTypesFlags(cint(flags))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -810,7 +810,7 @@ proc supportedMimeTypes*(_: type gen_qmediaplayer_types.QMediaPlayer, flags: cin
   vx_ret
 
 proc setMedia*(self: gen_qmediaplayer_types.QMediaPlayer, media: gen_qmediacontent_types.QMediaContent, stream: gen_qiodevice_types.QIODevice): void =
-  fcQMediaPlayer_setMedia2(self.h, media.h, stream.h)
+  fcQMediaPlayer_setMediaMediaStream(self.h, media.h, stream.h)
 
 type QMediaPlayermetaObjectProc* = proc(self: QMediaPlayer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMediaPlayermetacastProc* = proc(self: QMediaPlayer, param1: cstring): pointer {.raises: [], gcsafe.}

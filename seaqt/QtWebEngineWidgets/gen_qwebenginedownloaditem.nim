@@ -106,8 +106,8 @@ type cQWebEngineDownloadItem*{.exportc: "QWebEngineDownloadItem", incompleteStru
 proc fcQWebEngineDownloadItem_metaObject(self: pointer): pointer {.importc: "QWebEngineDownloadItem_metaObject".}
 proc fcQWebEngineDownloadItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineDownloadItem_metacast".}
 proc fcQWebEngineDownloadItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineDownloadItem_metacall".}
-proc fcQWebEngineDownloadItem_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadItem_tr".}
-proc fcQWebEngineDownloadItem_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadItem_trUtf8".}
+proc fcQWebEngineDownloadItem_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadItem_tr_s".}
+proc fcQWebEngineDownloadItem_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadItem_trUtf8_s".}
 proc fcQWebEngineDownloadItem_id(self: pointer): cuint {.importc: "QWebEngineDownloadItem_id".}
 proc fcQWebEngineDownloadItem_state(self: pointer): cint {.importc: "QWebEngineDownloadItem_state".}
 proc fcQWebEngineDownloadItem_totalBytes(self: pointer): clonglong {.importc: "QWebEngineDownloadItem_totalBytes".}
@@ -142,10 +142,10 @@ proc fcQWebEngineDownloadItem_downloadProgress(self: pointer, bytesReceived: clo
 proc fcQWebEngineDownloadItem_connect_downloadProgress(self: pointer, slot: int, callback: proc (slot: int, bytesReceived: clonglong, bytesTotal: clonglong) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineDownloadItem_connect_downloadProgress".}
 proc fcQWebEngineDownloadItem_isPausedChanged(self: pointer, isPaused: bool): void {.importc: "QWebEngineDownloadItem_isPausedChanged".}
 proc fcQWebEngineDownloadItem_connect_isPausedChanged(self: pointer, slot: int, callback: proc (slot: int, isPaused: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineDownloadItem_connect_isPausedChanged".}
-proc fcQWebEngineDownloadItem_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadItem_tr2".}
-proc fcQWebEngineDownloadItem_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineDownloadItem_tr3".}
-proc fcQWebEngineDownloadItem_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadItem_trUtf82".}
-proc fcQWebEngineDownloadItem_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineDownloadItem_trUtf83".}
+proc fcQWebEngineDownloadItem_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadItem_tr_s_c".}
+proc fcQWebEngineDownloadItem_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineDownloadItem_tr_s_c_n".}
+proc fcQWebEngineDownloadItem_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineDownloadItem_trUtf8_s_c".}
+proc fcQWebEngineDownloadItem_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineDownloadItem_trUtf8_s_c_n".}
 proc fcQWebEngineDownloadItem_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineDownloadItem_protectedbase_sender".}
 proc fcQWebEngineDownloadItem_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineDownloadItem_protectedbase_senderSignalIndex".}
 proc fcQWebEngineDownloadItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineDownloadItem_protectedbase_receivers".}
@@ -162,13 +162,13 @@ proc metacall*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, pa
   fcQWebEngineDownloadItem_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, s: cstring): string =
-  let v_ms = fcQWebEngineDownloadItem_tr(s)
+  let v_ms = fcQWebEngineDownloadItem_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, s: cstring): string =
-  let v_ms = fcQWebEngineDownloadItem_trUtf8(s)
+  let v_ms = fcQWebEngineDownloadItem_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -350,25 +350,25 @@ proc onIsPausedChanged*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloa
   fcQWebEngineDownloadItem_connect_isPausedChanged(self.h, cast[int](addr tmp[]), fcQWebEngineDownloadItem_slot_callback_isPausedChanged, fcQWebEngineDownloadItem_slot_callback_isPausedChanged_release)
 
 proc tr*(_: type gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineDownloadItem_tr2(s, c)
+  let v_ms = fcQWebEngineDownloadItem_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineDownloadItem_tr3(s, c, n)
+  let v_ms = fcQWebEngineDownloadItem_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineDownloadItem_trUtf82(s, c)
+  let v_ms = fcQWebEngineDownloadItem_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineDownloadItem_trUtf83(s, c, n)
+  let v_ms = fcQWebEngineDownloadItem_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

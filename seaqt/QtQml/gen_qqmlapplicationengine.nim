@@ -62,21 +62,21 @@ type cQQmlApplicationEngine*{.exportc: "QQmlApplicationEngine", incompleteStruct
 proc fcQQmlApplicationEngine_metaObject(self: pointer): pointer {.importc: "QQmlApplicationEngine_metaObject".}
 proc fcQQmlApplicationEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlApplicationEngine_metacast".}
 proc fcQQmlApplicationEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlApplicationEngine_metacall".}
-proc fcQQmlApplicationEngine_tr(s: cstring): struct_seaqt_string {.importc: "QQmlApplicationEngine_tr".}
-proc fcQQmlApplicationEngine_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQmlApplicationEngine_trUtf8".}
+proc fcQQmlApplicationEngine_trS(s: cstring): struct_seaqt_string {.importc: "QQmlApplicationEngine_tr_s".}
+proc fcQQmlApplicationEngine_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQmlApplicationEngine_trUtf8_s".}
 proc fcQQmlApplicationEngine_rootObjects(self: pointer): struct_seaqt_array {.importc: "QQmlApplicationEngine_rootObjects".}
-proc fcQQmlApplicationEngine_rootObjects2(self: pointer): struct_seaqt_array {.importc: "QQmlApplicationEngine_rootObjects2".}
-proc fcQQmlApplicationEngine_load(self: pointer, url: pointer): void {.importc: "QQmlApplicationEngine_load".}
-proc fcQQmlApplicationEngine_loadWithFilePath(self: pointer, filePath: struct_seaqt_string): void {.importc: "QQmlApplicationEngine_loadWithFilePath".}
+proc fcQQmlApplicationEngine_rootObjectsConst(self: pointer): struct_seaqt_array {.importc: "QQmlApplicationEngine_rootObjects_const".}
+proc fcQQmlApplicationEngine_loadUrl(self: pointer, url: pointer): void {.importc: "QQmlApplicationEngine_load_url".}
+proc fcQQmlApplicationEngine_loadFilePath(self: pointer, filePath: struct_seaqt_string): void {.importc: "QQmlApplicationEngine_load_filePath".}
 proc fcQQmlApplicationEngine_setInitialProperties(self: pointer, initialProperties: struct_seaqt_map): void {.importc: "QQmlApplicationEngine_setInitialProperties".}
-proc fcQQmlApplicationEngine_loadData(self: pointer, data: struct_seaqt_string): void {.importc: "QQmlApplicationEngine_loadData".}
+proc fcQQmlApplicationEngine_loadDataData(self: pointer, data: struct_seaqt_string): void {.importc: "QQmlApplicationEngine_loadData_data".}
 proc fcQQmlApplicationEngine_objectCreated(self: pointer, objectVal: pointer, url: pointer): void {.importc: "QQmlApplicationEngine_objectCreated".}
 proc fcQQmlApplicationEngine_connect_objectCreated(self: pointer, slot: int, callback: proc (slot: int, objectVal: pointer, url: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlApplicationEngine_connect_objectCreated".}
-proc fcQQmlApplicationEngine_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlApplicationEngine_tr2".}
-proc fcQQmlApplicationEngine_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlApplicationEngine_tr3".}
-proc fcQQmlApplicationEngine_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlApplicationEngine_trUtf82".}
-proc fcQQmlApplicationEngine_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlApplicationEngine_trUtf83".}
-proc fcQQmlApplicationEngine_loadData2(self: pointer, data: struct_seaqt_string, url: pointer): void {.importc: "QQmlApplicationEngine_loadData2".}
+proc fcQQmlApplicationEngine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlApplicationEngine_tr_s_c".}
+proc fcQQmlApplicationEngine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlApplicationEngine_tr_s_c_n".}
+proc fcQQmlApplicationEngine_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlApplicationEngine_trUtf8_s_c".}
+proc fcQQmlApplicationEngine_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlApplicationEngine_trUtf8_s_c_n".}
+proc fcQQmlApplicationEngine_loadDataDataUrl(self: pointer, data: struct_seaqt_string, url: pointer): void {.importc: "QQmlApplicationEngine_loadData_data_url".}
 proc fcQQmlApplicationEngine_vdata(self: pointer): ptr pointer {.importc: "QQmlApplicationEngine_vdata".}
 proc fvdata_cQQmlApplicationEngine(self: pointer): pointer {.importc: "vdata_QQmlApplicationEngine".}
 
@@ -107,11 +107,11 @@ proc fcQQmlApplicationEngine_protectedbase_senderSignalIndex(self: pointer): cin
 proc fcQQmlApplicationEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlApplicationEngine_protectedbase_receivers".}
 proc fcQQmlApplicationEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlApplicationEngine_protectedbase_isSignalConnected".}
 proc fcQQmlApplicationEngine_new(vtbl: pointer, vdata: csize_t): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new".}
-proc fcQQmlApplicationEngine_new2(vtbl: pointer, vdata: csize_t, url: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new2".}
-proc fcQQmlApplicationEngine_new3(vtbl: pointer, vdata: csize_t, filePath: struct_seaqt_string): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new3".}
-proc fcQQmlApplicationEngine_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new4".}
-proc fcQQmlApplicationEngine_new5(vtbl: pointer, vdata: csize_t, url: pointer, parent: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new5".}
-proc fcQQmlApplicationEngine_new6(vtbl: pointer, vdata: csize_t, filePath: struct_seaqt_string, parent: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new6".}
+proc fcQQmlApplicationEngine_new2(vtbl: pointer, vdata: csize_t, url: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new_url".}
+proc fcQQmlApplicationEngine_new3(vtbl: pointer, vdata: csize_t, filePath: struct_seaqt_string): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new_filePath".}
+proc fcQQmlApplicationEngine_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new_parent".}
+proc fcQQmlApplicationEngine_new5(vtbl: pointer, vdata: csize_t, url: pointer, parent: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new_url_parent".}
+proc fcQQmlApplicationEngine_new6(vtbl: pointer, vdata: csize_t, filePath: struct_seaqt_string, parent: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new_filePath_parent".}
 proc fcQQmlApplicationEngine_staticMetaObject(): pointer {.importc: "QQmlApplicationEngine_staticMetaObject".}
 
 proc metaObject*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine): gen_qobjectdefs_types.QMetaObject =
@@ -124,13 +124,13 @@ proc metacall*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, para
   fcQQmlApplicationEngine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine, s: cstring): string =
-  let v_ms = fcQQmlApplicationEngine_tr(s)
+  let v_ms = fcQQmlApplicationEngine_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine, s: cstring): string =
-  let v_ms = fcQQmlApplicationEngine_trUtf8(s)
+  let v_ms = fcQQmlApplicationEngine_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -145,7 +145,7 @@ proc rootObjects*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine): 
   vx_ret
 
 proc rootObjects2*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine): seq[gen_qobject_types.QObject] =
-  var v_ma = fcQQmlApplicationEngine_rootObjects2(self.h)
+  var v_ma = fcQQmlApplicationEngine_rootObjectsConst(self.h)
   var vx_ret = newSeq[gen_qobject_types.QObject](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -154,10 +154,10 @@ proc rootObjects2*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine):
   vx_ret
 
 proc load*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, url: gen_qurl_types.QUrl): void =
-  fcQQmlApplicationEngine_load(self.h, url.h)
+  fcQQmlApplicationEngine_loadUrl(self.h, url.h)
 
 proc load*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, filePath: openArray[char]): void =
-  fcQQmlApplicationEngine_loadWithFilePath(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
+  fcQQmlApplicationEngine_loadFilePath(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc setInitialProperties*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, initialProperties: Table[string,gen_qvariant_types.QVariant]): void =
   var initialProperties_Keys_CArray = newSeq[struct_seaqt_string](len(initialProperties))
@@ -174,7 +174,7 @@ proc setInitialProperties*(self: gen_qqmlapplicationengine_types.QQmlApplication
   fcQQmlApplicationEngine_setInitialProperties(self.h, struct_seaqt_map(len: csize_t(len(initialProperties)),keys: if len(initialProperties) == 0: nil else: addr(initialProperties_Keys_CArray[0]), values: if len(initialProperties) == 0: nil else: addr(initialProperties_Values_CArray[0]),))
 
 proc loadData*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, data: openArray[byte]): void =
-  fcQQmlApplicationEngine_loadData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQQmlApplicationEngine_loadDataData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc objectCreated*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, objectVal: gen_qobject_types.QObject, url: gen_qurl_types.QUrl): void =
   fcQQmlApplicationEngine_objectCreated(self.h, objectVal.h, url.h)
@@ -199,31 +199,31 @@ proc onObjectCreated*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngin
   fcQQmlApplicationEngine_connect_objectCreated(self.h, cast[int](addr tmp[]), fcQQmlApplicationEngine_slot_callback_objectCreated, fcQQmlApplicationEngine_slot_callback_objectCreated_release)
 
 proc tr*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlApplicationEngine_tr2(s, c)
+  let v_ms = fcQQmlApplicationEngine_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlApplicationEngine_tr3(s, c, n)
+  let v_ms = fcQQmlApplicationEngine_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlApplicationEngine_trUtf82(s, c)
+  let v_ms = fcQQmlApplicationEngine_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlApplicationEngine_trUtf83(s, c, n)
+  let v_ms = fcQQmlApplicationEngine_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc loadData*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, data: openArray[byte], url: gen_qurl_types.QUrl): void =
-  fcQQmlApplicationEngine_loadData2(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), url.h)
+  fcQQmlApplicationEngine_loadDataDataUrl(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), url.h)
 
 type QQmlApplicationEnginemetaObjectProc* = proc(self: QQmlApplicationEngine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQmlApplicationEnginemetacastProc* = proc(self: QQmlApplicationEngine, param1: cstring): pointer {.raises: [], gcsafe.}

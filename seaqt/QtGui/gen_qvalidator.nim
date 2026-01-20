@@ -76,18 +76,18 @@ type cQRegularExpressionValidator*{.exportc: "QRegularExpressionValidator", inco
 proc fcQValidator_metaObject(self: pointer): pointer {.importc: "QValidator_metaObject".}
 proc fcQValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QValidator_metacast".}
 proc fcQValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QValidator_metacall".}
-proc fcQValidator_tr(s: cstring): struct_seaqt_string {.importc: "QValidator_tr".}
-proc fcQValidator_trUtf8(s: cstring): struct_seaqt_string {.importc: "QValidator_trUtf8".}
+proc fcQValidator_trS(s: cstring): struct_seaqt_string {.importc: "QValidator_tr_s".}
+proc fcQValidator_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QValidator_trUtf8_s".}
 proc fcQValidator_setLocale(self: pointer, locale: pointer): void {.importc: "QValidator_setLocale".}
 proc fcQValidator_locale(self: pointer): pointer {.importc: "QValidator_locale".}
 proc fcQValidator_validate(self: pointer, param1: struct_seaqt_string, param2: ptr cint): cint {.importc: "QValidator_validate".}
 proc fcQValidator_fixup(self: pointer, param1: struct_seaqt_string): void {.importc: "QValidator_fixup".}
 proc fcQValidator_changed(self: pointer): void {.importc: "QValidator_changed".}
 proc fcQValidator_connect_changed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QValidator_connect_changed".}
-proc fcQValidator_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QValidator_tr2".}
-proc fcQValidator_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QValidator_tr3".}
-proc fcQValidator_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QValidator_trUtf82".}
-proc fcQValidator_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QValidator_trUtf83".}
+proc fcQValidator_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QValidator_tr_s_c".}
+proc fcQValidator_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QValidator_tr_s_c_n".}
+proc fcQValidator_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QValidator_trUtf8_s_c".}
+proc fcQValidator_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QValidator_trUtf8_s_c_n".}
 proc fcQValidator_vdata(self: pointer): ptr pointer {.importc: "QValidator_vdata".}
 proc fvdata_cQValidator(self: pointer): pointer {.importc: "vdata_QValidator".}
 
@@ -121,13 +121,13 @@ proc fcQValidator_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QValidator_protectedbase_receivers".}
 proc fcQValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QValidator_protectedbase_isSignalConnected".}
 proc fcQValidator_new(vtbl: pointer, vdata: csize_t): ptr cQValidator {.importc: "QValidator_new".}
-proc fcQValidator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQValidator {.importc: "QValidator_new2".}
+proc fcQValidator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQValidator {.importc: "QValidator_new_parent".}
 proc fcQValidator_staticMetaObject(): pointer {.importc: "QValidator_staticMetaObject".}
 proc fcQIntValidator_metaObject(self: pointer): pointer {.importc: "QIntValidator_metaObject".}
 proc fcQIntValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QIntValidator_metacast".}
 proc fcQIntValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIntValidator_metacall".}
-proc fcQIntValidator_tr(s: cstring): struct_seaqt_string {.importc: "QIntValidator_tr".}
-proc fcQIntValidator_trUtf8(s: cstring): struct_seaqt_string {.importc: "QIntValidator_trUtf8".}
+proc fcQIntValidator_trS(s: cstring): struct_seaqt_string {.importc: "QIntValidator_tr_s".}
+proc fcQIntValidator_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QIntValidator_trUtf8_s".}
 proc fcQIntValidator_validate(self: pointer, param1: struct_seaqt_string, param2: ptr cint): cint {.importc: "QIntValidator_validate".}
 proc fcQIntValidator_fixup(self: pointer, input: struct_seaqt_string): void {.importc: "QIntValidator_fixup".}
 proc fcQIntValidator_setBottom(self: pointer, bottom: cint): void {.importc: "QIntValidator_setBottom".}
@@ -139,10 +139,10 @@ proc fcQIntValidator_bottomChanged(self: pointer, bottom: cint): void {.importc:
 proc fcQIntValidator_connect_bottomChanged(self: pointer, slot: int, callback: proc (slot: int, bottom: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIntValidator_connect_bottomChanged".}
 proc fcQIntValidator_topChanged(self: pointer, top: cint): void {.importc: "QIntValidator_topChanged".}
 proc fcQIntValidator_connect_topChanged(self: pointer, slot: int, callback: proc (slot: int, top: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIntValidator_connect_topChanged".}
-proc fcQIntValidator_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIntValidator_tr2".}
-proc fcQIntValidator_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIntValidator_tr3".}
-proc fcQIntValidator_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIntValidator_trUtf82".}
-proc fcQIntValidator_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIntValidator_trUtf83".}
+proc fcQIntValidator_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIntValidator_tr_s_c".}
+proc fcQIntValidator_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIntValidator_tr_s_c_n".}
+proc fcQIntValidator_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIntValidator_trUtf8_s_c".}
+proc fcQIntValidator_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIntValidator_trUtf8_s_c_n".}
 proc fcQIntValidator_vdata(self: pointer): ptr pointer {.importc: "QIntValidator_vdata".}
 proc fvdata_cQIntValidator(self: pointer): pointer {.importc: "vdata_QIntValidator".}
 
@@ -179,15 +179,15 @@ proc fcQIntValidator_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQIntValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIntValidator_protectedbase_receivers".}
 proc fcQIntValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIntValidator_protectedbase_isSignalConnected".}
 proc fcQIntValidator_new(vtbl: pointer, vdata: csize_t): ptr cQIntValidator {.importc: "QIntValidator_new".}
-proc fcQIntValidator_new2(vtbl: pointer, vdata: csize_t, bottom: cint, top: cint): ptr cQIntValidator {.importc: "QIntValidator_new2".}
-proc fcQIntValidator_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new3".}
-proc fcQIntValidator_new4(vtbl: pointer, vdata: csize_t, bottom: cint, top: cint, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new4".}
+proc fcQIntValidator_new2(vtbl: pointer, vdata: csize_t, bottom: cint, top: cint): ptr cQIntValidator {.importc: "QIntValidator_new_bottom_top".}
+proc fcQIntValidator_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new_parent".}
+proc fcQIntValidator_new4(vtbl: pointer, vdata: csize_t, bottom: cint, top: cint, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new_bottom_top_parent".}
 proc fcQIntValidator_staticMetaObject(): pointer {.importc: "QIntValidator_staticMetaObject".}
 proc fcQDoubleValidator_metaObject(self: pointer): pointer {.importc: "QDoubleValidator_metaObject".}
 proc fcQDoubleValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QDoubleValidator_metacast".}
 proc fcQDoubleValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDoubleValidator_metacall".}
-proc fcQDoubleValidator_tr(s: cstring): struct_seaqt_string {.importc: "QDoubleValidator_tr".}
-proc fcQDoubleValidator_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDoubleValidator_trUtf8".}
+proc fcQDoubleValidator_trS(s: cstring): struct_seaqt_string {.importc: "QDoubleValidator_tr_s".}
+proc fcQDoubleValidator_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDoubleValidator_trUtf8_s".}
 proc fcQDoubleValidator_validate(self: pointer, param1: struct_seaqt_string, param2: ptr cint): cint {.importc: "QDoubleValidator_validate".}
 proc fcQDoubleValidator_setRange(self: pointer, bottom: float64, top: float64, decimals: cint): void {.importc: "QDoubleValidator_setRange".}
 proc fcQDoubleValidator_setBottom(self: pointer, bottom: float64): void {.importc: "QDoubleValidator_setBottom".}
@@ -206,10 +206,10 @@ proc fcQDoubleValidator_decimalsChanged(self: pointer, decimals: cint): void {.i
 proc fcQDoubleValidator_connect_decimalsChanged(self: pointer, slot: int, callback: proc (slot: int, decimals: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleValidator_connect_decimalsChanged".}
 proc fcQDoubleValidator_notationChanged(self: pointer, notation: cint): void {.importc: "QDoubleValidator_notationChanged".}
 proc fcQDoubleValidator_connect_notationChanged(self: pointer, slot: int, callback: proc (slot: int, notation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleValidator_connect_notationChanged".}
-proc fcQDoubleValidator_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDoubleValidator_tr2".}
-proc fcQDoubleValidator_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDoubleValidator_tr3".}
-proc fcQDoubleValidator_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDoubleValidator_trUtf82".}
-proc fcQDoubleValidator_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDoubleValidator_trUtf83".}
+proc fcQDoubleValidator_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDoubleValidator_tr_s_c".}
+proc fcQDoubleValidator_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDoubleValidator_tr_s_c_n".}
+proc fcQDoubleValidator_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDoubleValidator_trUtf8_s_c".}
+proc fcQDoubleValidator_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDoubleValidator_trUtf8_s_c_n".}
 proc fcQDoubleValidator_vdata(self: pointer): ptr pointer {.importc: "QDoubleValidator_vdata".}
 proc fvdata_cQDoubleValidator(self: pointer): pointer {.importc: "vdata_QDoubleValidator".}
 
@@ -246,24 +246,24 @@ proc fcQDoubleValidator_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQDoubleValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDoubleValidator_protectedbase_receivers".}
 proc fcQDoubleValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDoubleValidator_protectedbase_isSignalConnected".}
 proc fcQDoubleValidator_new(vtbl: pointer, vdata: csize_t): ptr cQDoubleValidator {.importc: "QDoubleValidator_new".}
-proc fcQDoubleValidator_new2(vtbl: pointer, vdata: csize_t, bottom: float64, top: float64, decimals: cint): ptr cQDoubleValidator {.importc: "QDoubleValidator_new2".}
-proc fcQDoubleValidator_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new3".}
-proc fcQDoubleValidator_new4(vtbl: pointer, vdata: csize_t, bottom: float64, top: float64, decimals: cint, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new4".}
+proc fcQDoubleValidator_new2(vtbl: pointer, vdata: csize_t, bottom: float64, top: float64, decimals: cint): ptr cQDoubleValidator {.importc: "QDoubleValidator_new_bottom_top_decimals".}
+proc fcQDoubleValidator_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new_parent".}
+proc fcQDoubleValidator_new4(vtbl: pointer, vdata: csize_t, bottom: float64, top: float64, decimals: cint, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new_bottom_top_decimals_parent".}
 proc fcQDoubleValidator_staticMetaObject(): pointer {.importc: "QDoubleValidator_staticMetaObject".}
 proc fcQRegExpValidator_metaObject(self: pointer): pointer {.importc: "QRegExpValidator_metaObject".}
 proc fcQRegExpValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QRegExpValidator_metacast".}
 proc fcQRegExpValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRegExpValidator_metacall".}
-proc fcQRegExpValidator_tr(s: cstring): struct_seaqt_string {.importc: "QRegExpValidator_tr".}
-proc fcQRegExpValidator_trUtf8(s: cstring): struct_seaqt_string {.importc: "QRegExpValidator_trUtf8".}
+proc fcQRegExpValidator_trS(s: cstring): struct_seaqt_string {.importc: "QRegExpValidator_tr_s".}
+proc fcQRegExpValidator_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QRegExpValidator_trUtf8_s".}
 proc fcQRegExpValidator_validate(self: pointer, input: struct_seaqt_string, pos: ptr cint): cint {.importc: "QRegExpValidator_validate".}
 proc fcQRegExpValidator_setRegExp(self: pointer, rx: pointer): void {.importc: "QRegExpValidator_setRegExp".}
 proc fcQRegExpValidator_regExp(self: pointer): pointer {.importc: "QRegExpValidator_regExp".}
 proc fcQRegExpValidator_regExpChanged(self: pointer, regExp: pointer): void {.importc: "QRegExpValidator_regExpChanged".}
 proc fcQRegExpValidator_connect_regExpChanged(self: pointer, slot: int, callback: proc (slot: int, regExp: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRegExpValidator_connect_regExpChanged".}
-proc fcQRegExpValidator_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRegExpValidator_tr2".}
-proc fcQRegExpValidator_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRegExpValidator_tr3".}
-proc fcQRegExpValidator_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRegExpValidator_trUtf82".}
-proc fcQRegExpValidator_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRegExpValidator_trUtf83".}
+proc fcQRegExpValidator_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRegExpValidator_tr_s_c".}
+proc fcQRegExpValidator_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRegExpValidator_tr_s_c_n".}
+proc fcQRegExpValidator_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRegExpValidator_trUtf8_s_c".}
+proc fcQRegExpValidator_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRegExpValidator_trUtf8_s_c_n".}
 proc fcQRegExpValidator_vdata(self: pointer): ptr pointer {.importc: "QRegExpValidator_vdata".}
 proc fvdata_cQRegExpValidator(self: pointer): pointer {.importc: "vdata_QRegExpValidator".}
 
@@ -298,24 +298,24 @@ proc fcQRegExpValidator_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQRegExpValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRegExpValidator_protectedbase_receivers".}
 proc fcQRegExpValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRegExpValidator_protectedbase_isSignalConnected".}
 proc fcQRegExpValidator_new(vtbl: pointer, vdata: csize_t): ptr cQRegExpValidator {.importc: "QRegExpValidator_new".}
-proc fcQRegExpValidator_new2(vtbl: pointer, vdata: csize_t, rx: pointer): ptr cQRegExpValidator {.importc: "QRegExpValidator_new2".}
-proc fcQRegExpValidator_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQRegExpValidator {.importc: "QRegExpValidator_new3".}
-proc fcQRegExpValidator_new4(vtbl: pointer, vdata: csize_t, rx: pointer, parent: pointer): ptr cQRegExpValidator {.importc: "QRegExpValidator_new4".}
+proc fcQRegExpValidator_new2(vtbl: pointer, vdata: csize_t, rx: pointer): ptr cQRegExpValidator {.importc: "QRegExpValidator_new_rx".}
+proc fcQRegExpValidator_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQRegExpValidator {.importc: "QRegExpValidator_new_parent".}
+proc fcQRegExpValidator_new4(vtbl: pointer, vdata: csize_t, rx: pointer, parent: pointer): ptr cQRegExpValidator {.importc: "QRegExpValidator_new_rx_parent".}
 proc fcQRegExpValidator_staticMetaObject(): pointer {.importc: "QRegExpValidator_staticMetaObject".}
 proc fcQRegularExpressionValidator_metaObject(self: pointer): pointer {.importc: "QRegularExpressionValidator_metaObject".}
 proc fcQRegularExpressionValidator_metacast(self: pointer, param1: cstring): pointer {.importc: "QRegularExpressionValidator_metacast".}
 proc fcQRegularExpressionValidator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRegularExpressionValidator_metacall".}
-proc fcQRegularExpressionValidator_tr(s: cstring): struct_seaqt_string {.importc: "QRegularExpressionValidator_tr".}
-proc fcQRegularExpressionValidator_trUtf8(s: cstring): struct_seaqt_string {.importc: "QRegularExpressionValidator_trUtf8".}
+proc fcQRegularExpressionValidator_trS(s: cstring): struct_seaqt_string {.importc: "QRegularExpressionValidator_tr_s".}
+proc fcQRegularExpressionValidator_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QRegularExpressionValidator_trUtf8_s".}
 proc fcQRegularExpressionValidator_validate(self: pointer, input: struct_seaqt_string, pos: ptr cint): cint {.importc: "QRegularExpressionValidator_validate".}
 proc fcQRegularExpressionValidator_regularExpression(self: pointer): pointer {.importc: "QRegularExpressionValidator_regularExpression".}
 proc fcQRegularExpressionValidator_setRegularExpression(self: pointer, re: pointer): void {.importc: "QRegularExpressionValidator_setRegularExpression".}
 proc fcQRegularExpressionValidator_regularExpressionChanged(self: pointer, re: pointer): void {.importc: "QRegularExpressionValidator_regularExpressionChanged".}
 proc fcQRegularExpressionValidator_connect_regularExpressionChanged(self: pointer, slot: int, callback: proc (slot: int, re: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRegularExpressionValidator_connect_regularExpressionChanged".}
-proc fcQRegularExpressionValidator_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRegularExpressionValidator_tr2".}
-proc fcQRegularExpressionValidator_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRegularExpressionValidator_tr3".}
-proc fcQRegularExpressionValidator_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRegularExpressionValidator_trUtf82".}
-proc fcQRegularExpressionValidator_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRegularExpressionValidator_trUtf83".}
+proc fcQRegularExpressionValidator_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRegularExpressionValidator_tr_s_c".}
+proc fcQRegularExpressionValidator_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRegularExpressionValidator_tr_s_c_n".}
+proc fcQRegularExpressionValidator_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QRegularExpressionValidator_trUtf8_s_c".}
+proc fcQRegularExpressionValidator_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QRegularExpressionValidator_trUtf8_s_c_n".}
 proc fcQRegularExpressionValidator_vdata(self: pointer): ptr pointer {.importc: "QRegularExpressionValidator_vdata".}
 proc fvdata_cQRegularExpressionValidator(self: pointer): pointer {.importc: "vdata_QRegularExpressionValidator".}
 
@@ -350,9 +350,9 @@ proc fcQRegularExpressionValidator_protectedbase_senderSignalIndex(self: pointer
 proc fcQRegularExpressionValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRegularExpressionValidator_protectedbase_receivers".}
 proc fcQRegularExpressionValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRegularExpressionValidator_protectedbase_isSignalConnected".}
 proc fcQRegularExpressionValidator_new(vtbl: pointer, vdata: csize_t): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new".}
-proc fcQRegularExpressionValidator_new2(vtbl: pointer, vdata: csize_t, re: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new2".}
-proc fcQRegularExpressionValidator_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new3".}
-proc fcQRegularExpressionValidator_new4(vtbl: pointer, vdata: csize_t, re: pointer, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new4".}
+proc fcQRegularExpressionValidator_new2(vtbl: pointer, vdata: csize_t, re: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new_re".}
+proc fcQRegularExpressionValidator_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new_parent".}
+proc fcQRegularExpressionValidator_new4(vtbl: pointer, vdata: csize_t, re: pointer, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new_re_parent".}
 proc fcQRegularExpressionValidator_staticMetaObject(): pointer {.importc: "QRegularExpressionValidator_staticMetaObject".}
 
 proc metaObject*(self: gen_qvalidator_types.QValidator): gen_qobjectdefs_types.QMetaObject =
@@ -365,13 +365,13 @@ proc metacall*(self: gen_qvalidator_types.QValidator, param1: cint, param2: cint
   fcQValidator_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvalidator_types.QValidator, s: cstring): string =
-  let v_ms = fcQValidator_tr(s)
+  let v_ms = fcQValidator_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QValidator, s: cstring): string =
-  let v_ms = fcQValidator_trUtf8(s)
+  let v_ms = fcQValidator_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -407,25 +407,25 @@ proc onChanged*(self: gen_qvalidator_types.QValidator, slot: QValidatorchangedSl
   fcQValidator_connect_changed(self.h, cast[int](addr tmp[]), fcQValidator_slot_callback_changed, fcQValidator_slot_callback_changed_release)
 
 proc tr*(_: type gen_qvalidator_types.QValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQValidator_tr2(s, c)
+  let v_ms = fcQValidator_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvalidator_types.QValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQValidator_tr3(s, c, n)
+  let v_ms = fcQValidator_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQValidator_trUtf82(s, c)
+  let v_ms = fcQValidator_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQValidator_trUtf83(s, c, n)
+  let v_ms = fcQValidator_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -816,13 +816,13 @@ proc metacall*(self: gen_qvalidator_types.QIntValidator, param1: cint, param2: c
   fcQIntValidator_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvalidator_types.QIntValidator, s: cstring): string =
-  let v_ms = fcQIntValidator_tr(s)
+  let v_ms = fcQIntValidator_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QIntValidator, s: cstring): string =
-  let v_ms = fcQIntValidator_trUtf8(s)
+  let v_ms = fcQIntValidator_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -889,25 +889,25 @@ proc onTopChanged*(self: gen_qvalidator_types.QIntValidator, slot: QIntValidator
   fcQIntValidator_connect_topChanged(self.h, cast[int](addr tmp[]), fcQIntValidator_slot_callback_topChanged, fcQIntValidator_slot_callback_topChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QIntValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQIntValidator_tr2(s, c)
+  let v_ms = fcQIntValidator_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvalidator_types.QIntValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQIntValidator_tr3(s, c, n)
+  let v_ms = fcQIntValidator_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QIntValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQIntValidator_trUtf82(s, c)
+  let v_ms = fcQIntValidator_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QIntValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQIntValidator_trUtf83(s, c, n)
+  let v_ms = fcQIntValidator_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1416,13 +1416,13 @@ proc metacall*(self: gen_qvalidator_types.QDoubleValidator, param1: cint, param2
   fcQDoubleValidator_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring): string =
-  let v_ms = fcQDoubleValidator_tr(s)
+  let v_ms = fcQDoubleValidator_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring): string =
-  let v_ms = fcQDoubleValidator_trUtf8(s)
+  let v_ms = fcQDoubleValidator_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1538,25 +1538,25 @@ proc onNotationChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDoub
   fcQDoubleValidator_connect_notationChanged(self.h, cast[int](addr tmp[]), fcQDoubleValidator_slot_callback_notationChanged, fcQDoubleValidator_slot_callback_notationChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQDoubleValidator_tr2(s, c)
+  let v_ms = fcQDoubleValidator_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDoubleValidator_tr3(s, c, n)
+  let v_ms = fcQDoubleValidator_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQDoubleValidator_trUtf82(s, c)
+  let v_ms = fcQDoubleValidator_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDoubleValidator_trUtf83(s, c, n)
+  let v_ms = fcQDoubleValidator_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2067,13 +2067,13 @@ proc metacall*(self: gen_qvalidator_types.QRegExpValidator, param1: cint, param2
   fcQRegExpValidator_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvalidator_types.QRegExpValidator, s: cstring): string =
-  let v_ms = fcQRegExpValidator_tr(s)
+  let v_ms = fcQRegExpValidator_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QRegExpValidator, s: cstring): string =
-  let v_ms = fcQRegExpValidator_trUtf8(s)
+  let v_ms = fcQRegExpValidator_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2108,25 +2108,25 @@ proc onRegExpChanged*(self: gen_qvalidator_types.QRegExpValidator, slot: QRegExp
   fcQRegExpValidator_connect_regExpChanged(self.h, cast[int](addr tmp[]), fcQRegExpValidator_slot_callback_regExpChanged, fcQRegExpValidator_slot_callback_regExpChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QRegExpValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQRegExpValidator_tr2(s, c)
+  let v_ms = fcQRegExpValidator_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvalidator_types.QRegExpValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRegExpValidator_tr3(s, c, n)
+  let v_ms = fcQRegExpValidator_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QRegExpValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQRegExpValidator_trUtf82(s, c)
+  let v_ms = fcQRegExpValidator_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QRegExpValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRegExpValidator_trUtf83(s, c, n)
+  let v_ms = fcQRegExpValidator_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2606,13 +2606,13 @@ proc metacall*(self: gen_qvalidator_types.QRegularExpressionValidator, param1: c
   fcQRegularExpressionValidator_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring): string =
-  let v_ms = fcQRegularExpressionValidator_tr(s)
+  let v_ms = fcQRegularExpressionValidator_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring): string =
-  let v_ms = fcQRegularExpressionValidator_trUtf8(s)
+  let v_ms = fcQRegularExpressionValidator_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2647,25 +2647,25 @@ proc onRegularExpressionChanged*(self: gen_qvalidator_types.QRegularExpressionVa
   fcQRegularExpressionValidator_connect_regularExpressionChanged(self.h, cast[int](addr tmp[]), fcQRegularExpressionValidator_slot_callback_regularExpressionChanged, fcQRegularExpressionValidator_slot_callback_regularExpressionChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQRegularExpressionValidator_tr2(s, c)
+  let v_ms = fcQRegularExpressionValidator_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRegularExpressionValidator_tr3(s, c, n)
+  let v_ms = fcQRegularExpressionValidator_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring, c: cstring): string =
-  let v_ms = fcQRegularExpressionValidator_trUtf82(s, c)
+  let v_ms = fcQRegularExpressionValidator_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQRegularExpressionValidator_trUtf83(s, c, n)
+  let v_ms = fcQRegularExpressionValidator_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

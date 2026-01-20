@@ -106,7 +106,7 @@ public:
 	friend int QGraphicsWidget_virtualbase_metacall(VirtualQGraphicsWidget* self, int param1, int param2, void** param3);
 
 	virtual void setGeometry(const QRectF& rect) override {
-		if (vtbl->setGeometry == 0) {
+		if (vtbl->setGeometry_rect == 0) {
 			QGraphicsWidget::setGeometry(rect);
 			return;
 		}
@@ -114,10 +114,10 @@ public:
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
-		vtbl->setGeometry(this, sigval1);
+		vtbl->setGeometry_rect(this, sigval1);
 	}
 
-	friend void QGraphicsWidget_virtualbase_setGeometry(VirtualQGraphicsWidget* self, QRectF* rect);
+	friend void QGraphicsWidget_virtualbase_setGeometry_rect(VirtualQGraphicsWidget* self, QRectF* rect);
 
 	virtual void getContentsMargins(qreal* left, qreal* top, qreal* right, qreal* bottom) const override {
 		if (vtbl->getContentsMargins == 0) {
@@ -944,12 +944,12 @@ VirtualQGraphicsWidget* QGraphicsWidget_new(const QGraphicsWidget_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQGraphicsWidget(vtbl) : nullptr;
 }
 
-VirtualQGraphicsWidget* QGraphicsWidget_new2(const QGraphicsWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsWidget* QGraphicsWidget_new_parent(const QGraphicsWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsWidget(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsWidget* QGraphicsWidget_new3(const QGraphicsWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent, int wFlags) {
+VirtualQGraphicsWidget* QGraphicsWidget_new_parent_wFlags(const QGraphicsWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent, int wFlags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsWidget(vtbl, parent, static_cast<Qt::WindowFlags>(wFlags)) : nullptr;
 }
@@ -971,7 +971,7 @@ int QGraphicsWidget_metacall(QGraphicsWidget* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsWidget_tr(const char* s) {
+struct seaqt_string QGraphicsWidget_tr_s(const char* s) {
 	QString _ret = QGraphicsWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -982,7 +982,7 @@ struct seaqt_string QGraphicsWidget_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsWidget_trUtf8(const char* s) {
+struct seaqt_string QGraphicsWidget_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsWidget::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1050,11 +1050,11 @@ void QGraphicsWidget_setAutoFillBackground(QGraphicsWidget* self, bool enabled) 
 	self->setAutoFillBackground(enabled);
 }
 
-void QGraphicsWidget_resize(QGraphicsWidget* self, QSizeF* size) {
+void QGraphicsWidget_resize_size(QGraphicsWidget* self, QSizeF* size) {
 	self->resize(*size);
 }
 
-void QGraphicsWidget_resize2(QGraphicsWidget* self, double w, double h) {
+void QGraphicsWidget_resize_w_h(QGraphicsWidget* self, double w, double h) {
 	self->resize(static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -1062,11 +1062,11 @@ QSizeF* QGraphicsWidget_size(const QGraphicsWidget* self) {
 	return new QSizeF(self->size());
 }
 
-void QGraphicsWidget_setGeometry(QGraphicsWidget* self, QRectF* rect) {
+void QGraphicsWidget_setGeometry_rect(QGraphicsWidget* self, QRectF* rect) {
 	self->setGeometry(*rect);
 }
 
-void QGraphicsWidget_setGeometry2(QGraphicsWidget* self, double x, double y, double w, double h) {
+void QGraphicsWidget_setGeometry_x_y_w_h(QGraphicsWidget* self, double x, double y, double w, double h) {
 	self->setGeometry(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -1074,11 +1074,11 @@ QRectF* QGraphicsWidget_rect(const QGraphicsWidget* self) {
 	return new QRectF(self->rect());
 }
 
-void QGraphicsWidget_setContentsMargins(QGraphicsWidget* self, double left, double top, double right, double bottom) {
+void QGraphicsWidget_setContentsMargins_left_top_right_bottom(QGraphicsWidget* self, double left, double top, double right, double bottom) {
 	self->setContentsMargins(static_cast<qreal>(left), static_cast<qreal>(top), static_cast<qreal>(right), static_cast<qreal>(bottom));
 }
 
-void QGraphicsWidget_setContentsMarginsWithMargins(QGraphicsWidget* self, QMarginsF* margins) {
+void QGraphicsWidget_setContentsMargins_margins(QGraphicsWidget* self, QMarginsF* margins) {
 	self->setContentsMargins(*margins);
 }
 
@@ -1086,11 +1086,11 @@ void QGraphicsWidget_getContentsMargins(const QGraphicsWidget* self, double* lef
 	self->getContentsMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom));
 }
 
-void QGraphicsWidget_setWindowFrameMargins(QGraphicsWidget* self, double left, double top, double right, double bottom) {
+void QGraphicsWidget_setWindowFrameMargins_left_top_right_bottom(QGraphicsWidget* self, double left, double top, double right, double bottom) {
 	self->setWindowFrameMargins(static_cast<qreal>(left), static_cast<qreal>(top), static_cast<qreal>(right), static_cast<qreal>(bottom));
 }
 
-void QGraphicsWidget_setWindowFrameMarginsWithMargins(QGraphicsWidget* self, QMarginsF* margins) {
+void QGraphicsWidget_setWindowFrameMargins_margins(QGraphicsWidget* self, QMarginsF* margins) {
 	self->setWindowFrameMargins(*margins);
 }
 
@@ -1161,7 +1161,7 @@ QGraphicsWidget* QGraphicsWidget_focusWidget(const QGraphicsWidget* self) {
 	return self->focusWidget();
 }
 
-int QGraphicsWidget_grabShortcut(QGraphicsWidget* self, QKeySequence* sequence) {
+int QGraphicsWidget_grabShortcut_sequence(QGraphicsWidget* self, QKeySequence* sequence) {
 	return self->grabShortcut(*sequence);
 }
 
@@ -1169,11 +1169,11 @@ void QGraphicsWidget_releaseShortcut(QGraphicsWidget* self, int id) {
 	self->releaseShortcut(static_cast<int>(id));
 }
 
-void QGraphicsWidget_setShortcutEnabled(QGraphicsWidget* self, int id) {
+void QGraphicsWidget_setShortcutEnabled_id(QGraphicsWidget* self, int id) {
 	self->setShortcutEnabled(static_cast<int>(id));
 }
 
-void QGraphicsWidget_setShortcutAutoRepeat(QGraphicsWidget* self, int id) {
+void QGraphicsWidget_setShortcutAutoRepeat_id(QGraphicsWidget* self, int id) {
 	self->setShortcutAutoRepeat(static_cast<int>(id));
 }
 
@@ -1222,7 +1222,7 @@ struct seaqt_array /* of QAction* */  QGraphicsWidget_actions(const QGraphicsWid
 	return _out;
 }
 
-void QGraphicsWidget_setAttribute(QGraphicsWidget* self, int attribute) {
+void QGraphicsWidget_setAttribute_attribute(QGraphicsWidget* self, int attribute) {
 	self->setAttribute(static_cast<Qt::WidgetAttribute>(attribute));
 }
 
@@ -1284,7 +1284,7 @@ bool QGraphicsWidget_close(QGraphicsWidget* self) {
 	return self->close();
 }
 
-struct seaqt_string QGraphicsWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1295,7 +1295,7 @@ struct seaqt_string QGraphicsWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1306,7 +1306,7 @@ struct seaqt_string QGraphicsWidget_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsWidget_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsWidget_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsWidget::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1317,7 +1317,7 @@ struct seaqt_string QGraphicsWidget_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsWidget_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsWidget_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsWidget::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1328,19 +1328,19 @@ struct seaqt_string QGraphicsWidget_trUtf83(const char* s, const char* c, int n)
 	return _ms;
 }
 
-int QGraphicsWidget_grabShortcut2(QGraphicsWidget* self, QKeySequence* sequence, int context) {
+int QGraphicsWidget_grabShortcut_sequence_context(QGraphicsWidget* self, QKeySequence* sequence, int context) {
 	return self->grabShortcut(*sequence, static_cast<Qt::ShortcutContext>(context));
 }
 
-void QGraphicsWidget_setShortcutEnabled2(QGraphicsWidget* self, int id, bool enabled) {
+void QGraphicsWidget_setShortcutEnabled_id_enabled(QGraphicsWidget* self, int id, bool enabled) {
 	self->setShortcutEnabled(static_cast<int>(id), enabled);
 }
 
-void QGraphicsWidget_setShortcutAutoRepeat2(QGraphicsWidget* self, int id, bool enabled) {
+void QGraphicsWidget_setShortcutAutoRepeat_id_enabled(QGraphicsWidget* self, int id, bool enabled) {
 	self->setShortcutAutoRepeat(static_cast<int>(id), enabled);
 }
 
-void QGraphicsWidget_setAttribute2(QGraphicsWidget* self, int attribute, bool on) {
+void QGraphicsWidget_setAttribute_attribute_on(QGraphicsWidget* self, int attribute, bool on) {
 	self->setAttribute(static_cast<Qt::WidgetAttribute>(attribute), on);
 }
 
@@ -1363,7 +1363,7 @@ int QGraphicsWidget_virtualbase_metacall(VirtualQGraphicsWidget* self, int param
 	return self->QGraphicsWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QGraphicsWidget_virtualbase_setGeometry(VirtualQGraphicsWidget* self, QRectF* rect) {
+void QGraphicsWidget_virtualbase_setGeometry_rect(VirtualQGraphicsWidget* self, QRectF* rect) {
 
 	self->QGraphicsWidget::setGeometry(*rect);
 }

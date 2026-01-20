@@ -45,33 +45,33 @@ export
 
 type cQColorTransform*{.exportc: "QColorTransform", incompleteStruct.} = object
 
-proc fcQColorTransform_operatorAssign(self: pointer, other: pointer): void {.importc: "QColorTransform_operatorAssign".}
+proc fcQColorTransform_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QColorTransform_operatorAssign".}
 proc fcQColorTransform_swap(self: pointer, other: pointer): void {.importc: "QColorTransform_swap".}
-proc fcQColorTransform_map(self: pointer, argb: cuint): cuint {.importc: "QColorTransform_map".}
-proc fcQColorTransform_mapWithRgba64(self: pointer, rgba64: pointer): pointer {.importc: "QColorTransform_mapWithRgba64".}
-proc fcQColorTransform_mapWithColor(self: pointer, color: pointer): pointer {.importc: "QColorTransform_mapWithColor".}
+proc fcQColorTransform_mapArgb(self: pointer, argb: cuint): cuint {.importc: "QColorTransform_map_argb".}
+proc fcQColorTransform_mapRgba64(self: pointer, rgba64: pointer): pointer {.importc: "QColorTransform_map_rgba64".}
+proc fcQColorTransform_mapColor(self: pointer, color: pointer): pointer {.importc: "QColorTransform_map_color".}
 proc fcQColorTransform_new(): ptr cQColorTransform {.importc: "QColorTransform_new".}
-proc fcQColorTransform_new2(colorTransform: pointer): ptr cQColorTransform {.importc: "QColorTransform_new2".}
+proc fcQColorTransform_new2(fromVal: pointer): ptr cQColorTransform {.importc: "QColorTransform_new_from".}
 
-proc operatorAssign*(self: gen_qcolortransform_types.QColorTransform, other: gen_qcolortransform_types.QColorTransform): void =
-  fcQColorTransform_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qcolortransform_types.QColorTransform, fromVal: gen_qcolortransform_types.QColorTransform): void =
+  fcQColorTransform_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qcolortransform_types.QColorTransform, other: gen_qcolortransform_types.QColorTransform): void =
   fcQColorTransform_swap(self.h, other.h)
 
 proc map*(self: gen_qcolortransform_types.QColorTransform, argb: cuint): cuint =
-  fcQColorTransform_map(self.h, argb)
+  fcQColorTransform_mapArgb(self.h, argb)
 
 proc map*(self: gen_qcolortransform_types.QColorTransform, rgba64: gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQColorTransform_mapWithRgba64(self.h, rgba64.h), owned: true)
+  gen_qrgba64_types.QRgba64(h: fcQColorTransform_mapRgba64(self.h, rgba64.h), owned: true)
 
 proc map*(self: gen_qcolortransform_types.QColorTransform, color: gen_qcolor_types.QColor): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorTransform_mapWithColor(self.h, color.h), owned: true)
+  gen_qcolor_types.QColor(h: fcQColorTransform_mapColor(self.h, color.h), owned: true)
 
 proc create*(T: type gen_qcolortransform_types.QColorTransform): gen_qcolortransform_types.QColorTransform =
   let tmp = gen_qcolortransform_types.QColorTransform(h: fcQColorTransform_new(), owned: true)
   tmp
 proc create*(T: type gen_qcolortransform_types.QColorTransform,
-    colorTransform: gen_qcolortransform_types.QColorTransform): gen_qcolortransform_types.QColorTransform =
-  let tmp = gen_qcolortransform_types.QColorTransform(h: fcQColorTransform_new2(colorTransform.h), owned: true)
+    fromVal: gen_qcolortransform_types.QColorTransform): gen_qcolortransform_types.QColorTransform =
+  let tmp = gen_qcolortransform_types.QColorTransform(h: fcQColorTransform_new2(fromVal.h), owned: true)
   tmp

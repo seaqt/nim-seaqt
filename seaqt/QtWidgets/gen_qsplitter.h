@@ -147,17 +147,17 @@ typedef struct QSplitter_VTable{
 void* QSplitter_vdata(VirtualQSplitter* self);
 VirtualQSplitter* vdata_QSplitter(void* vdata);
 
-VirtualQSplitter* QSplitter_new(const QSplitter_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQSplitter* QSplitter_new2(const QSplitter_VTable* vtbl, size_t vdata);
-VirtualQSplitter* QSplitter_new3(const QSplitter_VTable* vtbl, size_t vdata, int param1);
-VirtualQSplitter* QSplitter_new4(const QSplitter_VTable* vtbl, size_t vdata, int param1, QWidget* parent);
+VirtualQSplitter* QSplitter_new_QWidget(const QSplitter_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQSplitter* QSplitter_new(const QSplitter_VTable* vtbl, size_t vdata);
+VirtualQSplitter* QSplitter_new_Qt_Orientation(const QSplitter_VTable* vtbl, size_t vdata, int param1);
+VirtualQSplitter* QSplitter_new_Qt_Orientation_QWidget(const QSplitter_VTable* vtbl, size_t vdata, int param1, QWidget* parent);
 
 void QSplitter_virtbase(QSplitter* src, QFrame** outptr_QFrame);
 QMetaObject* QSplitter_metaObject(const QSplitter* self);
 void* QSplitter_metacast(QSplitter* self, const char* param1);
 int QSplitter_metacall(QSplitter* self, int param1, int param2, void** param3);
-struct seaqt_string QSplitter_tr(const char* s);
-struct seaqt_string QSplitter_trUtf8(const char* s);
+struct seaqt_string QSplitter_tr_s(const char* s);
+struct seaqt_string QSplitter_trUtf8_s(const char* s);
 void QSplitter_addWidget(QSplitter* self, QWidget* widget);
 void QSplitter_insertWidget(QSplitter* self, int index, QWidget* widget);
 QWidget* QSplitter_replaceWidget(QSplitter* self, int index, QWidget* widget);
@@ -191,11 +191,11 @@ void QSplitter_childEvent(QSplitter* self, QChildEvent* param1);
 bool QSplitter_event(QSplitter* self, QEvent* param1);
 void QSplitter_resizeEvent(QSplitter* self, QResizeEvent* param1);
 void QSplitter_changeEvent(QSplitter* self, QEvent* param1);
-struct seaqt_string QSplitter_tr2(const char* s, const char* c);
-struct seaqt_string QSplitter_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSplitter_trUtf82(const char* s, const char* c);
-struct seaqt_string QSplitter_trUtf83(const char* s, const char* c, int n);
-void QSplitter_setOpaqueResizeWithOpaque(QSplitter* self, bool opaque);
+struct seaqt_string QSplitter_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSplitter_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSplitter_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSplitter_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QSplitter_setOpaqueResize_opaque(QSplitter* self, bool opaque);
 
 QMetaObject* QSplitter_virtualbase_metaObject(const VirtualQSplitter* self);
 void* QSplitter_virtualbase_metacast(VirtualQSplitter* self, const char* param1);
@@ -331,8 +331,8 @@ void QSplitterHandle_virtbase(QSplitterHandle* src, QWidget** outptr_QWidget);
 QMetaObject* QSplitterHandle_metaObject(const QSplitterHandle* self);
 void* QSplitterHandle_metacast(QSplitterHandle* self, const char* param1);
 int QSplitterHandle_metacall(QSplitterHandle* self, int param1, int param2, void** param3);
-struct seaqt_string QSplitterHandle_tr(const char* s);
-struct seaqt_string QSplitterHandle_trUtf8(const char* s);
+struct seaqt_string QSplitterHandle_tr_s(const char* s);
+struct seaqt_string QSplitterHandle_trUtf8_s(const char* s);
 void QSplitterHandle_setOrientation(QSplitterHandle* self, int o);
 int QSplitterHandle_orientation(const QSplitterHandle* self);
 bool QSplitterHandle_opaqueResize(const QSplitterHandle* self);
@@ -344,10 +344,10 @@ void QSplitterHandle_mousePressEvent(QSplitterHandle* self, QMouseEvent* param1)
 void QSplitterHandle_mouseReleaseEvent(QSplitterHandle* self, QMouseEvent* param1);
 void QSplitterHandle_resizeEvent(QSplitterHandle* self, QResizeEvent* param1);
 bool QSplitterHandle_event(QSplitterHandle* self, QEvent* param1);
-struct seaqt_string QSplitterHandle_tr2(const char* s, const char* c);
-struct seaqt_string QSplitterHandle_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSplitterHandle_trUtf82(const char* s, const char* c);
-struct seaqt_string QSplitterHandle_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSplitterHandle_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSplitterHandle_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSplitterHandle_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSplitterHandle_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSplitterHandle_virtualbase_metaObject(const VirtualQSplitterHandle* self);
 void* QSplitterHandle_virtualbase_metacast(VirtualQSplitterHandle* self, const char* param1);

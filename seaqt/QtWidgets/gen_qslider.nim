@@ -84,8 +84,8 @@ type cQSlider*{.exportc: "QSlider", incompleteStruct.} = object
 proc fcQSlider_metaObject(self: pointer): pointer {.importc: "QSlider_metaObject".}
 proc fcQSlider_metacast(self: pointer, param1: cstring): pointer {.importc: "QSlider_metacast".}
 proc fcQSlider_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSlider_metacall".}
-proc fcQSlider_tr(s: cstring): struct_seaqt_string {.importc: "QSlider_tr".}
-proc fcQSlider_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSlider_trUtf8".}
+proc fcQSlider_trS(s: cstring): struct_seaqt_string {.importc: "QSlider_tr_s".}
+proc fcQSlider_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSlider_trUtf8_s".}
 proc fcQSlider_sizeHint(self: pointer): pointer {.importc: "QSlider_sizeHint".}
 proc fcQSlider_minimumSizeHint(self: pointer): pointer {.importc: "QSlider_minimumSizeHint".}
 proc fcQSlider_setTickPosition(self: pointer, position: cint): void {.importc: "QSlider_setTickPosition".}
@@ -93,10 +93,10 @@ proc fcQSlider_tickPosition(self: pointer): cint {.importc: "QSlider_tickPositio
 proc fcQSlider_setTickInterval(self: pointer, ti: cint): void {.importc: "QSlider_setTickInterval".}
 proc fcQSlider_tickInterval(self: pointer): cint {.importc: "QSlider_tickInterval".}
 proc fcQSlider_event(self: pointer, event: pointer): bool {.importc: "QSlider_event".}
-proc fcQSlider_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSlider_tr2".}
-proc fcQSlider_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSlider_tr3".}
-proc fcQSlider_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSlider_trUtf82".}
-proc fcQSlider_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSlider_trUtf83".}
+proc fcQSlider_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSlider_tr_s_c".}
+proc fcQSlider_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSlider_tr_s_c_n".}
+proc fcQSlider_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSlider_trUtf8_s_c".}
+proc fcQSlider_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSlider_trUtf8_s_c_n".}
 proc fcQSlider_vdata(self: pointer): ptr pointer {.importc: "QSlider_vdata".}
 proc fvdata_cQSlider(self: pointer): pointer {.importc: "vdata_QSlider".}
 
@@ -205,7 +205,7 @@ proc fcQSlider_virtualbase_customEvent(self: pointer, event: pointer): void {.im
 proc fcQSlider_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSlider_virtualbase_connectNotify".}
 proc fcQSlider_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSlider_virtualbase_disconnectNotify".}
 proc fcQSlider_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QSlider_protectedbase_initStyleOption".}
-proc fcQSlider_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QSlider_protectedbase_setRepeatAction".}
+proc fcQSlider_protectedbase_setRepeatAction_action(self: pointer, action: cint): void {.importc: "QSlider_protectedbase_setRepeatAction_action".}
 proc fcQSlider_protectedbase_repeatAction(self: pointer): cint {.importc: "QSlider_protectedbase_repeatAction".}
 proc fcQSlider_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QSlider_protectedbase_updateMicroFocus".}
 proc fcQSlider_protectedbase_create(self: pointer): void {.importc: "QSlider_protectedbase_create".}
@@ -216,10 +216,10 @@ proc fcQSlider_protectedbase_sender(self: pointer): pointer {.importc: "QSlider_
 proc fcQSlider_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSlider_protectedbase_senderSignalIndex".}
 proc fcQSlider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSlider_protectedbase_receivers".}
 proc fcQSlider_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSlider_protectedbase_isSignalConnected".}
-proc fcQSlider_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSlider {.importc: "QSlider_new".}
-proc fcQSlider_new2(vtbl: pointer, vdata: csize_t): ptr cQSlider {.importc: "QSlider_new2".}
-proc fcQSlider_new3(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQSlider {.importc: "QSlider_new3".}
-proc fcQSlider_new4(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQSlider {.importc: "QSlider_new4".}
+proc fcQSlider_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSlider {.importc: "QSlider_new_parent".}
+proc fcQSlider_new2(vtbl: pointer, vdata: csize_t): ptr cQSlider {.importc: "QSlider_new".}
+proc fcQSlider_new3(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQSlider {.importc: "QSlider_new_orientation".}
+proc fcQSlider_new4(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQSlider {.importc: "QSlider_new_orientation_parent".}
 proc fcQSlider_staticMetaObject(): pointer {.importc: "QSlider_staticMetaObject".}
 
 proc metaObject*(self: gen_qslider_types.QSlider): gen_qobjectdefs_types.QMetaObject =
@@ -232,13 +232,13 @@ proc metacall*(self: gen_qslider_types.QSlider, param1: cint, param2: cint, para
   fcQSlider_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qslider_types.QSlider, s: cstring): string =
-  let v_ms = fcQSlider_tr(s)
+  let v_ms = fcQSlider_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qslider_types.QSlider, s: cstring): string =
-  let v_ms = fcQSlider_trUtf8(s)
+  let v_ms = fcQSlider_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -265,25 +265,25 @@ proc event*(self: gen_qslider_types.QSlider, event: gen_qcoreevent_types.QEvent)
   fcQSlider_event(self.h, event.h)
 
 proc tr*(_: type gen_qslider_types.QSlider, s: cstring, c: cstring): string =
-  let v_ms = fcQSlider_tr2(s, c)
+  let v_ms = fcQSlider_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qslider_types.QSlider, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSlider_tr3(s, c, n)
+  let v_ms = fcQSlider_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qslider_types.QSlider, s: cstring, c: cstring): string =
-  let v_ms = fcQSlider_trUtf82(s, c)
+  let v_ms = fcQSlider_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qslider_types.QSlider, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSlider_trUtf83(s, c, n)
+  let v_ms = fcQSlider_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1298,7 +1298,7 @@ proc initStyleOption*(self: gen_qslider_types.QSlider, option: gen_qstyleoption_
   fcQSlider_protectedbase_initStyleOption(self.h, option.h)
 
 proc setRepeatAction*(self: gen_qslider_types.QSlider, action: cint): void =
-  fcQSlider_protectedbase_setRepeatAction(self.h, cint(action))
+  fcQSlider_protectedbase_setRepeatAction_action(self.h, cint(action))
 
 proc repeatAction*(self: gen_qslider_types.QSlider): cint =
   cint(fcQSlider_protectedbase_repeatAction(self.h))

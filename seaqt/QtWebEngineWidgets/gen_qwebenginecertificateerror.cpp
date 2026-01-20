@@ -18,13 +18,13 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebEngineCertificateError* QWebEngineCertificateError_new(int error, QUrl* url, bool overridable, struct seaqt_string errorDescription) {
+QWebEngineCertificateError* QWebEngineCertificateError_new_error_url_overridable_errorDescription(int error, QUrl* url, bool overridable, struct seaqt_string errorDescription) {
 	QString errorDescription_QString = QString::fromUtf8(errorDescription.data, errorDescription.len);
 	return new (std::nothrow) QWebEngineCertificateError(static_cast<int>(error), *url, overridable, errorDescription_QString);
 }
 
-QWebEngineCertificateError* QWebEngineCertificateError_new2(QWebEngineCertificateError* other) {
-	return new (std::nothrow) QWebEngineCertificateError(*other);
+QWebEngineCertificateError* QWebEngineCertificateError_new_from(QWebEngineCertificateError* from) {
+	return new (std::nothrow) QWebEngineCertificateError(*from);
 }
 
 int QWebEngineCertificateError_error(const QWebEngineCertificateError* self) {
@@ -51,8 +51,8 @@ struct seaqt_string QWebEngineCertificateError_errorDescription(const QWebEngine
 	return _ms;
 }
 
-void QWebEngineCertificateError_operatorAssign(QWebEngineCertificateError* self, QWebEngineCertificateError* other) {
-	self->operator=(*other);
+void QWebEngineCertificateError_operatorAssign(QWebEngineCertificateError* self, QWebEngineCertificateError* from) {
+	self->operator=(*from);
 }
 
 void QWebEngineCertificateError_defer(QWebEngineCertificateError* self) {

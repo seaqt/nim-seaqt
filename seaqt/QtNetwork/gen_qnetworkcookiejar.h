@@ -61,24 +61,24 @@ void* QNetworkCookieJar_vdata(VirtualQNetworkCookieJar* self);
 VirtualQNetworkCookieJar* vdata_QNetworkCookieJar(void* vdata);
 
 VirtualQNetworkCookieJar* QNetworkCookieJar_new(const QNetworkCookieJar_VTable* vtbl, size_t vdata);
-VirtualQNetworkCookieJar* QNetworkCookieJar_new2(const QNetworkCookieJar_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQNetworkCookieJar* QNetworkCookieJar_new_parent(const QNetworkCookieJar_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QNetworkCookieJar_virtbase(QNetworkCookieJar* src, QObject** outptr_QObject);
 QMetaObject* QNetworkCookieJar_metaObject(const QNetworkCookieJar* self);
 void* QNetworkCookieJar_metacast(QNetworkCookieJar* self, const char* param1);
 int QNetworkCookieJar_metacall(QNetworkCookieJar* self, int param1, int param2, void** param3);
-struct seaqt_string QNetworkCookieJar_tr(const char* s);
-struct seaqt_string QNetworkCookieJar_trUtf8(const char* s);
+struct seaqt_string QNetworkCookieJar_tr_s(const char* s);
+struct seaqt_string QNetworkCookieJar_trUtf8_s(const char* s);
 struct seaqt_array /* of QNetworkCookie* */  QNetworkCookieJar_cookiesForUrl(const QNetworkCookieJar* self, QUrl* url);
 bool QNetworkCookieJar_setCookiesFromUrl(QNetworkCookieJar* self, struct seaqt_array /* of QNetworkCookie* */  cookieList, QUrl* url);
 bool QNetworkCookieJar_insertCookie(QNetworkCookieJar* self, QNetworkCookie* cookie);
 bool QNetworkCookieJar_updateCookie(QNetworkCookieJar* self, QNetworkCookie* cookie);
 bool QNetworkCookieJar_deleteCookie(QNetworkCookieJar* self, QNetworkCookie* cookie);
 bool QNetworkCookieJar_validateCookie(const QNetworkCookieJar* self, QNetworkCookie* cookie, QUrl* url);
-struct seaqt_string QNetworkCookieJar_tr2(const char* s, const char* c);
-struct seaqt_string QNetworkCookieJar_tr3(const char* s, const char* c, int n);
-struct seaqt_string QNetworkCookieJar_trUtf82(const char* s, const char* c);
-struct seaqt_string QNetworkCookieJar_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QNetworkCookieJar_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkCookieJar_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QNetworkCookieJar_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkCookieJar_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QNetworkCookieJar_virtualbase_metaObject(const VirtualQNetworkCookieJar* self);
 void* QNetworkCookieJar_virtualbase_metacast(VirtualQNetworkCookieJar* self, const char* param1);

@@ -34,7 +34,7 @@ VirtualQRunnable* QRunnable_new(const QRunnable_VTable* vtbl, size_t vdata);
 void QRunnable_run(QRunnable* self);
 bool QRunnable_autoDelete(const QRunnable* self);
 void QRunnable_setAutoDelete(QRunnable* self, bool _autoDelete);
-void QRunnable_operatorAssign(QRunnable* self, QRunnable* param1);
+void QRunnable_operatorAssign(QRunnable* self, QRunnable* from);
 
 void QRunnable_virtualbase_run(VirtualQRunnable* self);
 

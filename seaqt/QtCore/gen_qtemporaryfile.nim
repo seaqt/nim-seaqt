@@ -57,8 +57,8 @@ type cQTemporaryFile*{.exportc: "QTemporaryFile", incompleteStruct.} = object
 proc fcQTemporaryFile_metaObject(self: pointer): pointer {.importc: "QTemporaryFile_metaObject".}
 proc fcQTemporaryFile_metacast(self: pointer, param1: cstring): pointer {.importc: "QTemporaryFile_metacast".}
 proc fcQTemporaryFile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTemporaryFile_metacall".}
-proc fcQTemporaryFile_tr(s: cstring): struct_seaqt_string {.importc: "QTemporaryFile_tr".}
-proc fcQTemporaryFile_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTemporaryFile_trUtf8".}
+proc fcQTemporaryFile_trS(s: cstring): struct_seaqt_string {.importc: "QTemporaryFile_tr_s".}
+proc fcQTemporaryFile_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTemporaryFile_trUtf8_s".}
 proc fcQTemporaryFile_autoRemove(self: pointer): bool {.importc: "QTemporaryFile_autoRemove".}
 proc fcQTemporaryFile_setAutoRemove(self: pointer, b: bool): void {.importc: "QTemporaryFile_setAutoRemove".}
 proc fcQTemporaryFile_open(self: pointer): bool {.importc: "QTemporaryFile_open".}
@@ -66,14 +66,14 @@ proc fcQTemporaryFile_fileName(self: pointer): struct_seaqt_string {.importc: "Q
 proc fcQTemporaryFile_fileTemplate(self: pointer): struct_seaqt_string {.importc: "QTemporaryFile_fileTemplate".}
 proc fcQTemporaryFile_setFileTemplate(self: pointer, name: struct_seaqt_string): void {.importc: "QTemporaryFile_setFileTemplate".}
 proc fcQTemporaryFile_rename(self: pointer, newName: struct_seaqt_string): bool {.importc: "QTemporaryFile_rename".}
-proc fcQTemporaryFile_createLocalFile(fileName: struct_seaqt_string): pointer {.importc: "QTemporaryFile_createLocalFile".}
-proc fcQTemporaryFile_createLocalFileWithFile(file: pointer): pointer {.importc: "QTemporaryFile_createLocalFileWithFile".}
-proc fcQTemporaryFile_createNativeFile(fileName: struct_seaqt_string): pointer {.importc: "QTemporaryFile_createNativeFile".}
-proc fcQTemporaryFile_createNativeFileWithFile(file: pointer): pointer {.importc: "QTemporaryFile_createNativeFileWithFile".}
-proc fcQTemporaryFile_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTemporaryFile_tr2".}
-proc fcQTemporaryFile_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTemporaryFile_tr3".}
-proc fcQTemporaryFile_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTemporaryFile_trUtf82".}
-proc fcQTemporaryFile_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTemporaryFile_trUtf83".}
+proc fcQTemporaryFile_createLocalFileFileName(fileName: struct_seaqt_string): pointer {.importc: "QTemporaryFile_createLocalFile_fileName".}
+proc fcQTemporaryFile_createLocalFileFile(file: pointer): pointer {.importc: "QTemporaryFile_createLocalFile_file".}
+proc fcQTemporaryFile_createNativeFileFileName(fileName: struct_seaqt_string): pointer {.importc: "QTemporaryFile_createNativeFile_fileName".}
+proc fcQTemporaryFile_createNativeFileFile(file: pointer): pointer {.importc: "QTemporaryFile_createNativeFile_file".}
+proc fcQTemporaryFile_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTemporaryFile_tr_s_c".}
+proc fcQTemporaryFile_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTemporaryFile_tr_s_c_n".}
+proc fcQTemporaryFile_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTemporaryFile_trUtf8_s_c".}
+proc fcQTemporaryFile_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTemporaryFile_trUtf8_s_c_n".}
 proc fcQTemporaryFile_vdata(self: pointer): ptr pointer {.importc: "QTemporaryFile_vdata".}
 proc fvdata_cQTemporaryFile(self: pointer): pointer {.importc: "vdata_QTemporaryFile".}
 
@@ -83,11 +83,11 @@ type cQTemporaryFileVTable {.pure.} = object
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
   fileName*: proc(self: pointer): struct_seaqt_string {.cdecl, raises: [], gcsafe.}
-  openWithFlags*: proc(self: pointer, flags: cint): bool {.cdecl, raises: [], gcsafe.}
+  openFlags*: proc(self: pointer, flags: cint): bool {.cdecl, raises: [], gcsafe.}
   size*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
-  resize*: proc(self: pointer, sz: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  resizeSz*: proc(self: pointer, sz: clonglong): bool {.cdecl, raises: [], gcsafe.}
   permissions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
-  setPermissions*: proc(self: pointer, permissionSpec: cint): bool {.cdecl, raises: [], gcsafe.}
+  setPermissionsPermissionSpec*: proc(self: pointer, permissionSpec: cint): bool {.cdecl, raises: [], gcsafe.}
   close*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   isSequential*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   pos*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
@@ -113,11 +113,11 @@ proc fcQTemporaryFile_virtualbase_metaObject(self: pointer): pointer {.importc: 
 proc fcQTemporaryFile_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QTemporaryFile_virtualbase_metacast".}
 proc fcQTemporaryFile_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTemporaryFile_virtualbase_metacall".}
 proc fcQTemporaryFile_virtualbase_fileName(self: pointer): struct_seaqt_string {.importc: "QTemporaryFile_virtualbase_fileName".}
-proc fcQTemporaryFile_virtualbase_openWithFlags(self: pointer, flags: cint): bool {.importc: "QTemporaryFile_virtualbase_openWithFlags".}
+proc fcQTemporaryFile_virtualbase_openFlags(self: pointer, flags: cint): bool {.importc: "QTemporaryFile_virtualbase_open_flags".}
 proc fcQTemporaryFile_virtualbase_size(self: pointer): clonglong {.importc: "QTemporaryFile_virtualbase_size".}
-proc fcQTemporaryFile_virtualbase_resize(self: pointer, sz: clonglong): bool {.importc: "QTemporaryFile_virtualbase_resize".}
+proc fcQTemporaryFile_virtualbase_resizeSz(self: pointer, sz: clonglong): bool {.importc: "QTemporaryFile_virtualbase_resize_sz".}
 proc fcQTemporaryFile_virtualbase_permissions(self: pointer): cint {.importc: "QTemporaryFile_virtualbase_permissions".}
-proc fcQTemporaryFile_virtualbase_setPermissions(self: pointer, permissionSpec: cint): bool {.importc: "QTemporaryFile_virtualbase_setPermissions".}
+proc fcQTemporaryFile_virtualbase_setPermissionsPermissionSpec(self: pointer, permissionSpec: cint): bool {.importc: "QTemporaryFile_virtualbase_setPermissions_permissionSpec".}
 proc fcQTemporaryFile_virtualbase_close(self: pointer): void {.importc: "QTemporaryFile_virtualbase_close".}
 proc fcQTemporaryFile_virtualbase_isSequential(self: pointer): bool {.importc: "QTemporaryFile_virtualbase_isSequential".}
 proc fcQTemporaryFile_virtualbase_pos(self: pointer): clonglong {.importc: "QTemporaryFile_virtualbase_pos".}
@@ -146,9 +146,9 @@ proc fcQTemporaryFile_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQTemporaryFile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTemporaryFile_protectedbase_receivers".}
 proc fcQTemporaryFile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTemporaryFile_protectedbase_isSignalConnected".}
 proc fcQTemporaryFile_new(vtbl: pointer, vdata: csize_t): ptr cQTemporaryFile {.importc: "QTemporaryFile_new".}
-proc fcQTemporaryFile_new2(vtbl: pointer, vdata: csize_t, templateName: struct_seaqt_string): ptr cQTemporaryFile {.importc: "QTemporaryFile_new2".}
-proc fcQTemporaryFile_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new3".}
-proc fcQTemporaryFile_new4(vtbl: pointer, vdata: csize_t, templateName: struct_seaqt_string, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new4".}
+proc fcQTemporaryFile_new2(vtbl: pointer, vdata: csize_t, templateName: struct_seaqt_string): ptr cQTemporaryFile {.importc: "QTemporaryFile_new_templateName".}
+proc fcQTemporaryFile_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new_parent".}
+proc fcQTemporaryFile_new4(vtbl: pointer, vdata: csize_t, templateName: struct_seaqt_string, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new_templateName_parent".}
 proc fcQTemporaryFile_staticMetaObject(): pointer {.importc: "QTemporaryFile_staticMetaObject".}
 
 proc metaObject*(self: gen_qtemporaryfile_types.QTemporaryFile): gen_qobjectdefs_types.QMetaObject =
@@ -161,13 +161,13 @@ proc metacall*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cint, para
   fcQTemporaryFile_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring): string =
-  let v_ms = fcQTemporaryFile_tr(s)
+  let v_ms = fcQTemporaryFile_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring): string =
-  let v_ms = fcQTemporaryFile_trUtf8(s)
+  let v_ms = fcQTemporaryFile_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -200,37 +200,37 @@ proc rename*(self: gen_qtemporaryfile_types.QTemporaryFile, newName: openArray[c
   fcQTemporaryFile_rename(self.h, struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc createLocalFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, fileName: openArray[char]): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFile(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: false)
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFileFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: false)
 
 proc createLocalFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, file: gen_qfile_types.QFile): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFileWithFile(file.h), owned: false)
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFileFile(file.h), owned: false)
 
 proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, fileName: openArray[char]): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFile(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: false)
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFileFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: false)
 
 proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, file: gen_qfile_types.QFile): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFileWithFile(file.h), owned: false)
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFileFile(file.h), owned: false)
 
 proc tr*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring, c: cstring): string =
-  let v_ms = fcQTemporaryFile_tr2(s, c)
+  let v_ms = fcQTemporaryFile_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTemporaryFile_tr3(s, c, n)
+  let v_ms = fcQTemporaryFile_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring, c: cstring): string =
-  let v_ms = fcQTemporaryFile_trUtf82(s, c)
+  let v_ms = fcQTemporaryFile_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTemporaryFile_trUtf83(s, c, n)
+  let v_ms = fcQTemporaryFile_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -239,11 +239,11 @@ type QTemporaryFilemetaObjectProc* = proc(self: QTemporaryFile): gen_qobjectdefs
 type QTemporaryFilemetacastProc* = proc(self: QTemporaryFile, param1: cstring): pointer {.raises: [], gcsafe.}
 type QTemporaryFilemetacallProc* = proc(self: QTemporaryFile, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QTemporaryFilefileNameProc* = proc(self: QTemporaryFile): string {.raises: [], gcsafe.}
-type QTemporaryFileopenWithFlagsProc* = proc(self: QTemporaryFile, flags: cint): bool {.raises: [], gcsafe.}
+type QTemporaryFileopenFlagsProc* = proc(self: QTemporaryFile, flags: cint): bool {.raises: [], gcsafe.}
 type QTemporaryFilesizeProc* = proc(self: QTemporaryFile): clonglong {.raises: [], gcsafe.}
-type QTemporaryFileresizeProc* = proc(self: QTemporaryFile, sz: clonglong): bool {.raises: [], gcsafe.}
+type QTemporaryFileresizeSzProc* = proc(self: QTemporaryFile, sz: clonglong): bool {.raises: [], gcsafe.}
 type QTemporaryFilepermissionsProc* = proc(self: QTemporaryFile): cint {.raises: [], gcsafe.}
-type QTemporaryFilesetPermissionsProc* = proc(self: QTemporaryFile, permissionSpec: cint): bool {.raises: [], gcsafe.}
+type QTemporaryFilesetPermissionsPermissionSpecProc* = proc(self: QTemporaryFile, permissionSpec: cint): bool {.raises: [], gcsafe.}
 type QTemporaryFilecloseProc* = proc(self: QTemporaryFile): void {.raises: [], gcsafe.}
 type QTemporaryFileisSequentialProc* = proc(self: QTemporaryFile): bool {.raises: [], gcsafe.}
 type QTemporaryFileposProc* = proc(self: QTemporaryFile): clonglong {.raises: [], gcsafe.}
@@ -272,11 +272,11 @@ type QTemporaryFileVTable* {.inheritable, pure.} = object
   metacast*: QTemporaryFilemetacastProc
   metacall*: QTemporaryFilemetacallProc
   fileName*: QTemporaryFilefileNameProc
-  openWithFlags*: QTemporaryFileopenWithFlagsProc
+  openFlags*: QTemporaryFileopenFlagsProc
   size*: QTemporaryFilesizeProc
-  resize*: QTemporaryFileresizeProc
+  resizeSz*: QTemporaryFileresizeSzProc
   permissions*: QTemporaryFilepermissionsProc
-  setPermissions*: QTemporaryFilesetPermissionsProc
+  setPermissionsPermissionSpec*: QTemporaryFilesetPermissionsPermissionSpecProc
   close*: QTemporaryFilecloseProc
   isSequential*: QTemporaryFileisSequentialProc
   pos*: QTemporaryFileposProc
@@ -315,19 +315,19 @@ proc QTemporaryFilefileName*(self: gen_qtemporaryfile_types.QTemporaryFile): str
   vx_ret
 
 proc QTemporaryFileopen*(self: gen_qtemporaryfile_types.QTemporaryFile, flags: cint): bool =
-  fcQTemporaryFile_virtualbase_openWithFlags(self.h, cint(flags))
+  fcQTemporaryFile_virtualbase_openFlags(self.h, cint(flags))
 
 proc QTemporaryFilesize*(self: gen_qtemporaryfile_types.QTemporaryFile): clonglong =
   fcQTemporaryFile_virtualbase_size(self.h)
 
 proc QTemporaryFileresize*(self: gen_qtemporaryfile_types.QTemporaryFile, sz: clonglong): bool =
-  fcQTemporaryFile_virtualbase_resize(self.h, sz)
+  fcQTemporaryFile_virtualbase_resizeSz(self.h, sz)
 
 proc QTemporaryFilepermissions*(self: gen_qtemporaryfile_types.QTemporaryFile): cint =
   cint(fcQTemporaryFile_virtualbase_permissions(self.h))
 
 proc QTemporaryFilesetPermissions*(self: gen_qtemporaryfile_types.QTemporaryFile, permissionSpec: cint): bool =
-  fcQTemporaryFile_virtualbase_setPermissions(self.h, cint(permissionSpec))
+  fcQTemporaryFile_virtualbase_setPermissionsPermissionSpec(self.h, cint(permissionSpec))
 
 proc QTemporaryFileclose*(self: gen_qtemporaryfile_types.QTemporaryFile): void =
   fcQTemporaryFile_virtualbase_close(self.h)
@@ -426,11 +426,11 @@ proc fcQTemporaryFile_vtable_callback_fileName(self: pointer): struct_seaqt_stri
   if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_seaqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc fcQTemporaryFile_vtable_callback_openWithFlags(self: pointer, flags: cint): bool {.cdecl.} =
+proc fcQTemporaryFile_vtable_callback_openFlags(self: pointer, flags: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
   let slotval1 = cint(flags)
-  var virtualReturn = vtbl[].openWithFlags(self, slotval1)
+  var virtualReturn = vtbl[].openFlags(self, slotval1)
   virtualReturn
 
 proc fcQTemporaryFile_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
@@ -439,11 +439,11 @@ proc fcQTemporaryFile_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
   var virtualReturn = vtbl[].size(self)
   virtualReturn
 
-proc fcQTemporaryFile_vtable_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.} =
+proc fcQTemporaryFile_vtable_callback_resizeSz(self: pointer, sz: clonglong): bool {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
   let slotval1 = sz
-  var virtualReturn = vtbl[].resize(self, slotval1)
+  var virtualReturn = vtbl[].resizeSz(self, slotval1)
   virtualReturn
 
 proc fcQTemporaryFile_vtable_callback_permissions(self: pointer): cint {.cdecl.} =
@@ -452,11 +452,11 @@ proc fcQTemporaryFile_vtable_callback_permissions(self: pointer): cint {.cdecl.}
   var virtualReturn = vtbl[].permissions(self)
   cint(virtualReturn)
 
-proc fcQTemporaryFile_vtable_callback_setPermissions(self: pointer, permissionSpec: cint): bool {.cdecl.} =
+proc fcQTemporaryFile_vtable_callback_setPermissionsPermissionSpec(self: pointer, permissionSpec: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
   let slotval1 = cint(permissionSpec)
-  var virtualReturn = vtbl[].setPermissions(self, slotval1)
+  var virtualReturn = vtbl[].setPermissionsPermissionSpec(self, slotval1)
   virtualReturn
 
 proc fcQTemporaryFile_vtable_callback_close(self: pointer): void {.cdecl.} =
@@ -689,7 +689,7 @@ proc fcQTemporaryFile_method_callback_fileName(self: pointer): struct_seaqt_stri
   if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_seaqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc fcQTemporaryFile_method_callback_openWithFlags(self: pointer, flags: cint): bool {.cdecl.} =
+proc fcQTemporaryFile_method_callback_openFlags(self: pointer, flags: cint): bool {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
   let slotval1 = cint(flags)
   var virtualReturn = inst.open(slotval1)
@@ -700,7 +700,7 @@ proc fcQTemporaryFile_method_callback_size(self: pointer): clonglong {.cdecl.} =
   var virtualReturn = inst.size()
   virtualReturn
 
-proc fcQTemporaryFile_method_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.} =
+proc fcQTemporaryFile_method_callback_resizeSz(self: pointer, sz: clonglong): bool {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
   let slotval1 = sz
   var virtualReturn = inst.resize(slotval1)
@@ -711,7 +711,7 @@ proc fcQTemporaryFile_method_callback_permissions(self: pointer): cint {.cdecl.}
   var virtualReturn = inst.permissions()
   cint(virtualReturn)
 
-proc fcQTemporaryFile_method_callback_setPermissions(self: pointer, permissionSpec: cint): bool {.cdecl.} =
+proc fcQTemporaryFile_method_callback_setPermissionsPermissionSpec(self: pointer, permissionSpec: cint): bool {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
   let slotval1 = cint(permissionSpec)
   var virtualReturn = inst.setPermissions(slotval1)
@@ -867,16 +867,16 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl[].vtbl.metacall = fcQTemporaryFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = fcQTemporaryFile_vtable_callback_fileName
-  if not isNil(vtbl[].openWithFlags):
-    vtbl[].vtbl.openWithFlags = fcQTemporaryFile_vtable_callback_openWithFlags
+  if not isNil(vtbl[].openFlags):
+    vtbl[].vtbl.openFlags = fcQTemporaryFile_vtable_callback_openFlags
   if not isNil(vtbl[].size):
     vtbl[].vtbl.size = fcQTemporaryFile_vtable_callback_size
-  if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = fcQTemporaryFile_vtable_callback_resize
+  if not isNil(vtbl[].resizeSz):
+    vtbl[].vtbl.resizeSz = fcQTemporaryFile_vtable_callback_resizeSz
   if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = fcQTemporaryFile_vtable_callback_permissions
-  if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = fcQTemporaryFile_vtable_callback_setPermissions
+  if not isNil(vtbl[].setPermissionsPermissionSpec):
+    vtbl[].vtbl.setPermissionsPermissionSpec = fcQTemporaryFile_vtable_callback_setPermissionsPermissionSpec
   if not isNil(vtbl[].close):
     vtbl[].vtbl.close = fcQTemporaryFile_vtable_callback_close
   if not isNil(vtbl[].isSequential):
@@ -938,16 +938,16 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl[].vtbl.metacall = fcQTemporaryFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = fcQTemporaryFile_vtable_callback_fileName
-  if not isNil(vtbl[].openWithFlags):
-    vtbl[].vtbl.openWithFlags = fcQTemporaryFile_vtable_callback_openWithFlags
+  if not isNil(vtbl[].openFlags):
+    vtbl[].vtbl.openFlags = fcQTemporaryFile_vtable_callback_openFlags
   if not isNil(vtbl[].size):
     vtbl[].vtbl.size = fcQTemporaryFile_vtable_callback_size
-  if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = fcQTemporaryFile_vtable_callback_resize
+  if not isNil(vtbl[].resizeSz):
+    vtbl[].vtbl.resizeSz = fcQTemporaryFile_vtable_callback_resizeSz
   if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = fcQTemporaryFile_vtable_callback_permissions
-  if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = fcQTemporaryFile_vtable_callback_setPermissions
+  if not isNil(vtbl[].setPermissionsPermissionSpec):
+    vtbl[].vtbl.setPermissionsPermissionSpec = fcQTemporaryFile_vtable_callback_setPermissionsPermissionSpec
   if not isNil(vtbl[].close):
     vtbl[].vtbl.close = fcQTemporaryFile_vtable_callback_close
   if not isNil(vtbl[].isSequential):
@@ -1009,16 +1009,16 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl[].vtbl.metacall = fcQTemporaryFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = fcQTemporaryFile_vtable_callback_fileName
-  if not isNil(vtbl[].openWithFlags):
-    vtbl[].vtbl.openWithFlags = fcQTemporaryFile_vtable_callback_openWithFlags
+  if not isNil(vtbl[].openFlags):
+    vtbl[].vtbl.openFlags = fcQTemporaryFile_vtable_callback_openFlags
   if not isNil(vtbl[].size):
     vtbl[].vtbl.size = fcQTemporaryFile_vtable_callback_size
-  if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = fcQTemporaryFile_vtable_callback_resize
+  if not isNil(vtbl[].resizeSz):
+    vtbl[].vtbl.resizeSz = fcQTemporaryFile_vtable_callback_resizeSz
   if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = fcQTemporaryFile_vtable_callback_permissions
-  if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = fcQTemporaryFile_vtable_callback_setPermissions
+  if not isNil(vtbl[].setPermissionsPermissionSpec):
+    vtbl[].vtbl.setPermissionsPermissionSpec = fcQTemporaryFile_vtable_callback_setPermissionsPermissionSpec
   if not isNil(vtbl[].close):
     vtbl[].vtbl.close = fcQTemporaryFile_vtable_callback_close
   if not isNil(vtbl[].isSequential):
@@ -1080,16 +1080,16 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl[].vtbl.metacall = fcQTemporaryFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = fcQTemporaryFile_vtable_callback_fileName
-  if not isNil(vtbl[].openWithFlags):
-    vtbl[].vtbl.openWithFlags = fcQTemporaryFile_vtable_callback_openWithFlags
+  if not isNil(vtbl[].openFlags):
+    vtbl[].vtbl.openFlags = fcQTemporaryFile_vtable_callback_openFlags
   if not isNil(vtbl[].size):
     vtbl[].vtbl.size = fcQTemporaryFile_vtable_callback_size
-  if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = fcQTemporaryFile_vtable_callback_resize
+  if not isNil(vtbl[].resizeSz):
+    vtbl[].vtbl.resizeSz = fcQTemporaryFile_vtable_callback_resizeSz
   if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = fcQTemporaryFile_vtable_callback_permissions
-  if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = fcQTemporaryFile_vtable_callback_setPermissions
+  if not isNil(vtbl[].setPermissionsPermissionSpec):
+    vtbl[].vtbl.setPermissionsPermissionSpec = fcQTemporaryFile_vtable_callback_setPermissionsPermissionSpec
   if not isNil(vtbl[].close):
     vtbl[].vtbl.close = fcQTemporaryFile_vtable_callback_close
   if not isNil(vtbl[].isSequential):
@@ -1145,11 +1145,11 @@ const cQTemporaryFile_mvtbl = cQTemporaryFileVTable(
   metacast: fcQTemporaryFile_method_callback_metacast,
   metacall: fcQTemporaryFile_method_callback_metacall,
   fileName: fcQTemporaryFile_method_callback_fileName,
-  openWithFlags: fcQTemporaryFile_method_callback_openWithFlags,
+  openFlags: fcQTemporaryFile_method_callback_openFlags,
   size: fcQTemporaryFile_method_callback_size,
-  resize: fcQTemporaryFile_method_callback_resize,
+  resizeSz: fcQTemporaryFile_method_callback_resizeSz,
   permissions: fcQTemporaryFile_method_callback_permissions,
-  setPermissions: fcQTemporaryFile_method_callback_setPermissions,
+  setPermissionsPermissionSpec: fcQTemporaryFile_method_callback_setPermissionsPermissionSpec,
   close: fcQTemporaryFile_method_callback_close,
   isSequential: fcQTemporaryFile_method_callback_isSequential,
   pos: fcQTemporaryFile_method_callback_pos,

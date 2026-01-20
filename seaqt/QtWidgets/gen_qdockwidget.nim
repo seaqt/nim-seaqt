@@ -86,8 +86,8 @@ type cQDockWidget*{.exportc: "QDockWidget", incompleteStruct.} = object
 proc fcQDockWidget_metaObject(self: pointer): pointer {.importc: "QDockWidget_metaObject".}
 proc fcQDockWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QDockWidget_metacast".}
 proc fcQDockWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDockWidget_metacall".}
-proc fcQDockWidget_tr(s: cstring): struct_seaqt_string {.importc: "QDockWidget_tr".}
-proc fcQDockWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDockWidget_trUtf8".}
+proc fcQDockWidget_trS(s: cstring): struct_seaqt_string {.importc: "QDockWidget_tr_s".}
+proc fcQDockWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDockWidget_trUtf8_s".}
 proc fcQDockWidget_widget(self: pointer): pointer {.importc: "QDockWidget_widget".}
 proc fcQDockWidget_setWidget(self: pointer, widget: pointer): void {.importc: "QDockWidget_setWidget".}
 proc fcQDockWidget_setFeatures(self: pointer, features: cint): void {.importc: "QDockWidget_setFeatures".}
@@ -110,10 +110,10 @@ proc fcQDockWidget_visibilityChanged(self: pointer, visible: bool): void {.impor
 proc fcQDockWidget_connect_visibilityChanged(self: pointer, slot: int, callback: proc (slot: int, visible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDockWidget_connect_visibilityChanged".}
 proc fcQDockWidget_dockLocationChanged(self: pointer, area: cint): void {.importc: "QDockWidget_dockLocationChanged".}
 proc fcQDockWidget_connect_dockLocationChanged(self: pointer, slot: int, callback: proc (slot: int, area: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDockWidget_connect_dockLocationChanged".}
-proc fcQDockWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDockWidget_tr2".}
-proc fcQDockWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDockWidget_tr3".}
-proc fcQDockWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDockWidget_trUtf82".}
-proc fcQDockWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDockWidget_trUtf83".}
+proc fcQDockWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDockWidget_tr_s_c".}
+proc fcQDockWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDockWidget_tr_s_c_n".}
+proc fcQDockWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDockWidget_trUtf8_s_c".}
+proc fcQDockWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDockWidget_trUtf8_s_c_n".}
 proc fcQDockWidget_vdata(self: pointer): ptr pointer {.importc: "QDockWidget_vdata".}
 proc fvdata_cQDockWidget(self: pointer): pointer {.importc: "vdata_QDockWidget".}
 
@@ -229,12 +229,12 @@ proc fcQDockWidget_protectedbase_sender(self: pointer): pointer {.importc: "QDoc
 proc fcQDockWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDockWidget_protectedbase_senderSignalIndex".}
 proc fcQDockWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDockWidget_protectedbase_receivers".}
 proc fcQDockWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDockWidget_protectedbase_isSignalConnected".}
-proc fcQDockWidget_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDockWidget {.importc: "QDockWidget_new".}
-proc fcQDockWidget_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): ptr cQDockWidget {.importc: "QDockWidget_new2".}
-proc fcQDockWidget_new3(vtbl: pointer, vdata: csize_t): ptr cQDockWidget {.importc: "QDockWidget_new3".}
-proc fcQDockWidget_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQDockWidget {.importc: "QDockWidget_new4".}
-proc fcQDockWidget_new5(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer, flags: cint): ptr cQDockWidget {.importc: "QDockWidget_new5".}
-proc fcQDockWidget_new6(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDockWidget {.importc: "QDockWidget_new6".}
+proc fcQDockWidget_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDockWidget {.importc: "QDockWidget_new_parent".}
+proc fcQDockWidget_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): ptr cQDockWidget {.importc: "QDockWidget_new_title".}
+proc fcQDockWidget_new3(vtbl: pointer, vdata: csize_t): ptr cQDockWidget {.importc: "QDockWidget_new".}
+proc fcQDockWidget_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQDockWidget {.importc: "QDockWidget_new_title_parent".}
+proc fcQDockWidget_new5(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer, flags: cint): ptr cQDockWidget {.importc: "QDockWidget_new_title_parent_flags".}
+proc fcQDockWidget_new6(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDockWidget {.importc: "QDockWidget_new_parent_flags".}
 proc fcQDockWidget_staticMetaObject(): pointer {.importc: "QDockWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qdockwidget_types.QDockWidget): gen_qobjectdefs_types.QMetaObject =
@@ -247,13 +247,13 @@ proc metacall*(self: gen_qdockwidget_types.QDockWidget, param1: cint, param2: ci
   fcQDockWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring): string =
-  let v_ms = fcQDockWidget_tr(s)
+  let v_ms = fcQDockWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdockwidget_types.QDockWidget, s: cstring): string =
-  let v_ms = fcQDockWidget_trUtf8(s)
+  let v_ms = fcQDockWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -395,25 +395,25 @@ proc onDockLocationChanged*(self: gen_qdockwidget_types.QDockWidget, slot: QDock
   fcQDockWidget_connect_dockLocationChanged(self.h, cast[int](addr tmp[]), fcQDockWidget_slot_callback_dockLocationChanged, fcQDockWidget_slot_callback_dockLocationChanged_release)
 
 proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQDockWidget_tr2(s, c)
+  let v_ms = fcQDockWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDockWidget_tr3(s, c, n)
+  let v_ms = fcQDockWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQDockWidget_trUtf82(s, c)
+  let v_ms = fcQDockWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDockWidget_trUtf83(s, c, n)
+  let v_ms = fcQDockWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

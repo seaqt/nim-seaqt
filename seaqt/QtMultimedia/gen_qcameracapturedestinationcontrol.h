@@ -32,17 +32,17 @@ void QCameraCaptureDestinationControl_virtbase(QCameraCaptureDestinationControl*
 QMetaObject* QCameraCaptureDestinationControl_metaObject(const QCameraCaptureDestinationControl* self);
 void* QCameraCaptureDestinationControl_metacast(QCameraCaptureDestinationControl* self, const char* param1);
 int QCameraCaptureDestinationControl_metacall(QCameraCaptureDestinationControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraCaptureDestinationControl_tr(const char* s);
-struct seaqt_string QCameraCaptureDestinationControl_trUtf8(const char* s);
+struct seaqt_string QCameraCaptureDestinationControl_tr_s(const char* s);
+struct seaqt_string QCameraCaptureDestinationControl_trUtf8_s(const char* s);
 bool QCameraCaptureDestinationControl_isCaptureDestinationSupported(const QCameraCaptureDestinationControl* self, int destination);
 int QCameraCaptureDestinationControl_captureDestination(const QCameraCaptureDestinationControl* self);
 void QCameraCaptureDestinationControl_setCaptureDestination(QCameraCaptureDestinationControl* self, int destination);
 void QCameraCaptureDestinationControl_captureDestinationChanged(QCameraCaptureDestinationControl* self, int destination);
 void QCameraCaptureDestinationControl_connect_captureDestinationChanged(QCameraCaptureDestinationControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QCameraCaptureDestinationControl_tr2(const char* s, const char* c);
-struct seaqt_string QCameraCaptureDestinationControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraCaptureDestinationControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraCaptureDestinationControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraCaptureDestinationControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraCaptureDestinationControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraCaptureDestinationControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraCaptureDestinationControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraCaptureDestinationControl_staticMetaObject();
 void QCameraCaptureDestinationControl_delete(QCameraCaptureDestinationControl* self);
