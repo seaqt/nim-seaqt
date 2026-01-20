@@ -1,4 +1,4 @@
-type QVideoFrame* {.inheritable, pure.} = object
+type QVideoFrame* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QVideoFrame) =
   wasMoved(self)
   fcQVideoFrame_delete(h)
 
-type QVideoFramePaintOptions* {.inheritable, pure.} = object
+type QVideoFramePaintOptions* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

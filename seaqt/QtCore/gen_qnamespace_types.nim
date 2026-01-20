@@ -1,4 +1,4 @@
-type Disambiguated_t* {.inheritable, pure.} = object
+type Disambiguated_t* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink Disambiguated_t) =
   wasMoved(self)
   fcDisambiguated_t_delete(h)
 
-type QInternal* {.inheritable, pure.} = object
+type QInternal* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QInternal) =
   wasMoved(self)
   fcQInternal_delete(h)
 
-type QKeyCombination* {.inheritable, pure.} = object
+type QKeyCombination* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

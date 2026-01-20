@@ -49,7 +49,6 @@ proc fcQContiguousCacheData_offset(self: pointer): int64 {.importc: "QContiguous
 proc fcQContiguousCacheData_setOffset(self: pointer, offset: int64): void {.importc: "QContiguousCacheData_setOffset".}
 proc fcQContiguousCacheData_allocateData(size: int64, alignment: int64): pointer {.importc: "QContiguousCacheData_allocateData".}
 proc fcQContiguousCacheData_freeData(data: pointer): void {.importc: "QContiguousCacheData_freeData".}
-proc fcQContiguousCacheData_delete(self: pointer) {.importc: "QContiguousCacheData_delete".}
 
 proc alloc*(self: gen_qcontiguouscache_types.QContiguousCacheData): int64 =
   fcQContiguousCacheData_alloc(self.h)
@@ -76,10 +75,8 @@ proc setOffset*(self: gen_qcontiguouscache_types.QContiguousCacheData, offset: i
   fcQContiguousCacheData_setOffset(self.h, offset)
 
 proc allocateData*(_: type gen_qcontiguouscache_types.QContiguousCacheData, size: int64, alignment: int64): gen_qcontiguouscache_types.QContiguousCacheData =
-  gen_qcontiguouscache_types.QContiguousCacheData(h: fcQContiguousCacheData_allocateData(size, alignment))
+  gen_qcontiguouscache_types.QContiguousCacheData(h: fcQContiguousCacheData_allocateData(size, alignment), owned: false)
 
 proc freeData*(_: type gen_qcontiguouscache_types.QContiguousCacheData, data: gen_qcontiguouscache_types.QContiguousCacheData): void =
   fcQContiguousCacheData_freeData(data.h)
 
-proc delete*(self: gen_qcontiguouscache_types.QContiguousCacheData) =
-  fcQContiguousCacheData_delete(self.h)

@@ -67,7 +67,6 @@ proc fcQStorageInfo_new(): ptr cQStorageInfo {.importc: "QStorageInfo_new".}
 proc fcQStorageInfo_new2(path: struct_seaqt_string): ptr cQStorageInfo {.importc: "QStorageInfo_new2".}
 proc fcQStorageInfo_new3(dir: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new3".}
 proc fcQStorageInfo_new4(other: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new4".}
-proc fcQStorageInfo_delete(self: pointer) {.importc: "QStorageInfo_delete".}
 
 proc operatorAssign*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_types.QStorageInfo): void =
   fcQStorageInfo_operatorAssign(self.h, other.h)
@@ -146,27 +145,25 @@ proc mountedVolumes*(_: type gen_qstorageinfo_types.QStorageInfo): seq[gen_qstor
   var vx_ret = newSeq[gen_qstorageinfo_types.QStorageInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstorageinfo_types.QStorageInfo(h: v_outCast[i])
+    vx_ret[i] = gen_qstorageinfo_types.QStorageInfo(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc root*(_: type gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_root())
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_root(), owned: true)
 
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
-  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new())
+  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
     path: openArray[char]): gen_qstorageinfo_types.QStorageInfo =
-  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new2(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))))
+  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new2(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path)))), owned: true)
   tmp
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
     dir: gen_qdir_types.QDir): gen_qstorageinfo_types.QStorageInfo =
-  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new3(dir.h))
+  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new3(dir.h), owned: true)
   tmp
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
     other: gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
-  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new4(other.h))
+  let tmp = gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new4(other.h), owned: true)
   tmp
-proc delete*(self: gen_qstorageinfo_types.QStorageInfo) =
-  fcQStorageInfo_delete(self.h)

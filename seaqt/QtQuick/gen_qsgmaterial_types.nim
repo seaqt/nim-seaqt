@@ -1,4 +1,4 @@
-type QSGMaterial* {.inheritable, pure.} = object
+type QSGMaterial* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

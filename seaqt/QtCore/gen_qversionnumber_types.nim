@@ -1,4 +1,4 @@
-type QVersionNumber* {.inheritable, pure.} = object
+type QVersionNumber* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QVersionNumber) =
   wasMoved(self)
   fcQVersionNumber_delete(h)
 
-type QTypeRevision* {.inheritable, pure.} = object
+type QTypeRevision* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

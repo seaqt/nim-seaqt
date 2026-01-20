@@ -1,4 +1,4 @@
-type QJSPrimitiveUndefined* {.inheritable, pure.} = object
+type QJSPrimitiveUndefined* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QJSPrimitiveUndefined) =
   wasMoved(self)
   fcQJSPrimitiveUndefined_delete(h)
 
-type QJSPrimitiveNull* {.inheritable, pure.} = object
+type QJSPrimitiveNull* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QJSPrimitiveNull) =
   wasMoved(self)
   fcQJSPrimitiveNull_delete(h)
 
-type QJSPrimitiveValue* {.inheritable, pure.} = object
+type QJSPrimitiveValue* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

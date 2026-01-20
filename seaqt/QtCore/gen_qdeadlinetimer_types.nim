@@ -1,4 +1,4 @@
-type QDeadlineTimer* {.inheritable, pure.} = object
+type QDeadlineTimer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

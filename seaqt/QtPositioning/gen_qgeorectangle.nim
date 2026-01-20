@@ -81,7 +81,6 @@ proc fcQGeoRectangle_new4(coordinates: struct_seaqt_array): ptr cQGeoRectangle {
 proc fcQGeoRectangle_new5(other: pointer): ptr cQGeoRectangle {.importc: "QGeoRectangle_new5".}
 proc fcQGeoRectangle_new6(other: pointer): ptr cQGeoRectangle {.importc: "QGeoRectangle_new6".}
 proc fcQGeoRectangle_staticMetaObject(): pointer {.importc: "QGeoRectangle_staticMetaObject".}
-proc fcQGeoRectangle_delete(self: pointer) {.importc: "QGeoRectangle_delete".}
 
 proc operatorAssign*(self: gen_qgeorectangle_types.QGeoRectangle, other: gen_qgeorectangle_types.QGeoRectangle): void =
   fcQGeoRectangle_operatorAssign(self.h, other.h)
@@ -90,31 +89,31 @@ proc setTopLeft*(self: gen_qgeorectangle_types.QGeoRectangle, topLeft: gen_qgeoc
   fcQGeoRectangle_setTopLeft(self.h, topLeft.h)
 
 proc topLeft*(self: gen_qgeorectangle_types.QGeoRectangle): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_topLeft(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_topLeft(self.h), owned: true)
 
 proc setTopRight*(self: gen_qgeorectangle_types.QGeoRectangle, topRight: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoRectangle_setTopRight(self.h, topRight.h)
 
 proc topRight*(self: gen_qgeorectangle_types.QGeoRectangle): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_topRight(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_topRight(self.h), owned: true)
 
 proc setBottomLeft*(self: gen_qgeorectangle_types.QGeoRectangle, bottomLeft: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoRectangle_setBottomLeft(self.h, bottomLeft.h)
 
 proc bottomLeft*(self: gen_qgeorectangle_types.QGeoRectangle): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_bottomLeft(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_bottomLeft(self.h), owned: true)
 
 proc setBottomRight*(self: gen_qgeorectangle_types.QGeoRectangle, bottomRight: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoRectangle_setBottomRight(self.h, bottomRight.h)
 
 proc bottomRight*(self: gen_qgeorectangle_types.QGeoRectangle): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_bottomRight(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_bottomRight(self.h), owned: true)
 
 proc setCenter*(self: gen_qgeorectangle_types.QGeoRectangle, center: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoRectangle_setCenter(self.h, center.h)
 
 proc center*(self: gen_qgeorectangle_types.QGeoRectangle): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_center(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoRectangle_center(self.h), owned: true)
 
 proc setWidth*(self: gen_qgeorectangle_types.QGeoRectangle, degreesWidth: float64): void =
   fcQGeoRectangle_setWidth(self.h, degreesWidth)
@@ -138,16 +137,16 @@ proc translate*(self: gen_qgeorectangle_types.QGeoRectangle, degreesLatitude: fl
   fcQGeoRectangle_translate(self.h, degreesLatitude, degreesLongitude)
 
 proc translated*(self: gen_qgeorectangle_types.QGeoRectangle, degreesLatitude: float64, degreesLongitude: float64): gen_qgeorectangle_types.QGeoRectangle =
-  gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_translated(self.h, degreesLatitude, degreesLongitude))
+  gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_translated(self.h, degreesLatitude, degreesLongitude), owned: true)
 
 proc extendRectangle*(self: gen_qgeorectangle_types.QGeoRectangle, coordinate: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoRectangle_extendRectangle(self.h, coordinate.h)
 
 proc united*(self: gen_qgeorectangle_types.QGeoRectangle, rectangle: gen_qgeorectangle_types.QGeoRectangle): gen_qgeorectangle_types.QGeoRectangle =
-  gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_united(self.h, rectangle.h))
+  gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_united(self.h, rectangle.h), owned: true)
 
 proc operatorBitwiseOr*(self: gen_qgeorectangle_types.QGeoRectangle, rectangle: gen_qgeorectangle_types.QGeoRectangle): gen_qgeorectangle_types.QGeoRectangle =
-  gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_operatorBitwiseOr(self.h, rectangle.h))
+  gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_operatorBitwiseOr(self.h, rectangle.h), owned: true)
 
 proc operatorBitwiseOrAssign*(self: gen_qgeorectangle_types.QGeoRectangle, rectangle: gen_qgeorectangle_types.QGeoRectangle): void =
   fcQGeoRectangle_operatorBitwiseOrAssign(self.h, rectangle.h)
@@ -159,15 +158,15 @@ proc toString*(self: gen_qgeorectangle_types.QGeoRectangle): string =
   vx_ret
 
 proc create*(T: type gen_qgeorectangle_types.QGeoRectangle): gen_qgeorectangle_types.QGeoRectangle =
-  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new())
+  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
     center: gen_qgeocoordinate_types.QGeoCoordinate, degreesWidth: float64, degreesHeight: float64): gen_qgeorectangle_types.QGeoRectangle =
-  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new2(center.h, degreesWidth, degreesHeight))
+  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new2(center.h, degreesWidth, degreesHeight), owned: true)
   tmp
 proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
     topLeft: gen_qgeocoordinate_types.QGeoCoordinate, bottomRight: gen_qgeocoordinate_types.QGeoCoordinate): gen_qgeorectangle_types.QGeoRectangle =
-  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new3(topLeft.h, bottomRight.h))
+  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new3(topLeft.h, bottomRight.h), owned: true)
   tmp
 proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
     coordinates: openArray[gen_qgeocoordinate_types.QGeoCoordinate]): gen_qgeorectangle_types.QGeoRectangle =
@@ -175,17 +174,15 @@ proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
   for i in 0..<len(coordinates):
     coordinates_CArray[i] = coordinates[i].h
 
-  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new4(struct_seaqt_array(len: csize_t(len(coordinates)), data: if len(coordinates) == 0: nil else: addr(coordinates_CArray[0]))))
+  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new4(struct_seaqt_array(len: csize_t(len(coordinates)), data: if len(coordinates) == 0: nil else: addr(coordinates_CArray[0]))), owned: true)
   tmp
 proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
     other: gen_qgeorectangle_types.QGeoRectangle): gen_qgeorectangle_types.QGeoRectangle =
-  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new5(other.h))
+  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new5(other.h), owned: true)
   tmp
 proc create*(T: type gen_qgeorectangle_types.QGeoRectangle,
     other: gen_qgeoshape_types.QGeoShape): gen_qgeorectangle_types.QGeoRectangle =
-  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new6(other.h))
+  let tmp = gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoRectangle_new6(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qgeorectangle_types.QGeoRectangle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoRectangle_staticMetaObject())
-proc delete*(self: gen_qgeorectangle_types.QGeoRectangle) =
-  fcQGeoRectangle_delete(self.h)

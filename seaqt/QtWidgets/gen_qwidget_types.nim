@@ -1,4 +1,4 @@
-type QWidgetData* {.inheritable, pure.} = object
+type QWidgetData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

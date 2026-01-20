@@ -44,10 +44,9 @@ proc fcQHashSeed_setDeterministicGlobalSeed(): void {.importc: "QHashSeed_setDet
 proc fcQHashSeed_resetRandomGlobalSeed(): void {.importc: "QHashSeed_resetRandomGlobalSeed".}
 proc fcQHashSeed_new(): ptr cQHashSeed {.importc: "QHashSeed_new".}
 proc fcQHashSeed_new2(d: csize_t): ptr cQHashSeed {.importc: "QHashSeed_new2".}
-proc fcQHashSeed_delete(self: pointer) {.importc: "QHashSeed_delete".}
 
 proc globalSeed*(_: type gen_qhashfunctions_types.QHashSeed): gen_qhashfunctions_types.QHashSeed =
-  gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_globalSeed())
+  gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_globalSeed(), owned: true)
 
 proc setDeterministicGlobalSeed*(_: type gen_qhashfunctions_types.QHashSeed): void =
   fcQHashSeed_setDeterministicGlobalSeed()
@@ -56,11 +55,9 @@ proc resetRandomGlobalSeed*(_: type gen_qhashfunctions_types.QHashSeed): void =
   fcQHashSeed_resetRandomGlobalSeed()
 
 proc create*(T: type gen_qhashfunctions_types.QHashSeed): gen_qhashfunctions_types.QHashSeed =
-  let tmp = gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_new())
+  let tmp = gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_new(), owned: true)
   tmp
 proc create*(T: type gen_qhashfunctions_types.QHashSeed,
     d: csize_t): gen_qhashfunctions_types.QHashSeed =
-  let tmp = gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_new2(d))
+  let tmp = gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_new2(d), owned: true)
   tmp
-proc delete*(self: gen_qhashfunctions_types.QHashSeed) =
-  fcQHashSeed_delete(self.h)

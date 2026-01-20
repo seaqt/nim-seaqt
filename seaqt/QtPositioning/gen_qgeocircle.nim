@@ -65,7 +65,6 @@ proc fcQGeoCircle_new3(other: pointer): ptr cQGeoCircle {.importc: "QGeoCircle_n
 proc fcQGeoCircle_new4(other: pointer): ptr cQGeoCircle {.importc: "QGeoCircle_new4".}
 proc fcQGeoCircle_new5(center: pointer, radius: float64): ptr cQGeoCircle {.importc: "QGeoCircle_new5".}
 proc fcQGeoCircle_staticMetaObject(): pointer {.importc: "QGeoCircle_staticMetaObject".}
-proc fcQGeoCircle_delete(self: pointer) {.importc: "QGeoCircle_delete".}
 
 proc operatorAssign*(self: gen_qgeocircle_types.QGeoCircle, other: gen_qgeocircle_types.QGeoCircle): void =
   fcQGeoCircle_operatorAssign(self.h, other.h)
@@ -74,7 +73,7 @@ proc setCenter*(self: gen_qgeocircle_types.QGeoCircle, center: gen_qgeocoordinat
   fcQGeoCircle_setCenter(self.h, center.h)
 
 proc center*(self: gen_qgeocircle_types.QGeoCircle): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCircle_center(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCircle_center(self.h), owned: true)
 
 proc setRadius*(self: gen_qgeocircle_types.QGeoCircle, radius: float64): void =
   fcQGeoCircle_setRadius(self.h, radius)
@@ -86,7 +85,7 @@ proc translate*(self: gen_qgeocircle_types.QGeoCircle, degreesLatitude: float64,
   fcQGeoCircle_translate(self.h, degreesLatitude, degreesLongitude)
 
 proc translated*(self: gen_qgeocircle_types.QGeoCircle, degreesLatitude: float64, degreesLongitude: float64): gen_qgeocircle_types.QGeoCircle =
-  gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_translated(self.h, degreesLatitude, degreesLongitude))
+  gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_translated(self.h, degreesLatitude, degreesLongitude), owned: true)
 
 proc extendCircle*(self: gen_qgeocircle_types.QGeoCircle, coordinate: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoCircle_extendCircle(self.h, coordinate.h)
@@ -98,25 +97,23 @@ proc toString*(self: gen_qgeocircle_types.QGeoCircle): string =
   vx_ret
 
 proc create*(T: type gen_qgeocircle_types.QGeoCircle): gen_qgeocircle_types.QGeoCircle =
-  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new())
+  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeocircle_types.QGeoCircle,
     center: gen_qgeocoordinate_types.QGeoCoordinate): gen_qgeocircle_types.QGeoCircle =
-  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new2(center.h))
+  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new2(center.h), owned: true)
   tmp
 proc create*(T: type gen_qgeocircle_types.QGeoCircle,
     other: gen_qgeocircle_types.QGeoCircle): gen_qgeocircle_types.QGeoCircle =
-  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new3(other.h))
+  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qgeocircle_types.QGeoCircle,
     other: gen_qgeoshape_types.QGeoShape): gen_qgeocircle_types.QGeoCircle =
-  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new4(other.h))
+  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new4(other.h), owned: true)
   tmp
 proc create*(T: type gen_qgeocircle_types.QGeoCircle,
     center: gen_qgeocoordinate_types.QGeoCoordinate, radius: float64): gen_qgeocircle_types.QGeoCircle =
-  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new5(center.h, radius))
+  let tmp = gen_qgeocircle_types.QGeoCircle(h: fcQGeoCircle_new5(center.h, radius), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qgeocircle_types.QGeoCircle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoCircle_staticMetaObject())
-proc delete*(self: gen_qgeocircle_types.QGeoCircle) =
-  fcQGeoCircle_delete(self.h)

@@ -1,4 +1,4 @@
-type QContiguousCacheData* {.inheritable, pure.} = object
+type QContiguousCacheData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -131,10 +131,9 @@ proc fcQDataWidgetMapper_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQDataWidgetMapper_new(vtbl: pointer, vdata: csize_t): ptr cQDataWidgetMapper {.importc: "QDataWidgetMapper_new".}
 proc fcQDataWidgetMapper_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDataWidgetMapper {.importc: "QDataWidgetMapper_new2".}
 proc fcQDataWidgetMapper_staticMetaObject(): pointer {.importc: "QDataWidgetMapper_staticMetaObject".}
-proc fcQDataWidgetMapper_delete(self: pointer) {.importc: "QDataWidgetMapper_delete".}
 
 proc metaObject*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDataWidgetMapper_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDataWidgetMapper_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, param1: cstring): pointer =
   fcQDataWidgetMapper_metacast(self.h, param1)
@@ -152,19 +151,19 @@ proc setModel*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, model: gen_q
   fcQDataWidgetMapper_setModel(self.h, model.h)
 
 proc model*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qabstractitemmodel_types.QAbstractItemModel =
-  gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQDataWidgetMapper_model(self.h))
+  gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQDataWidgetMapper_model(self.h), owned: false)
 
 proc setItemDelegate*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, delegate: gen_qabstractitemdelegate_types.QAbstractItemDelegate): void =
   fcQDataWidgetMapper_setItemDelegate(self.h, delegate.h)
 
 proc itemDelegate*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
-  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQDataWidgetMapper_itemDelegate(self.h))
+  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQDataWidgetMapper_itemDelegate(self.h), owned: false)
 
 proc setRootIndex*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQDataWidgetMapper_setRootIndex(self.h, index.h)
 
 proc rootIndex*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQDataWidgetMapper_rootIndex(self.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDataWidgetMapper_rootIndex(self.h), owned: true)
 
 proc setOrientation*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, aOrientation: cint): void =
   fcQDataWidgetMapper_setOrientation(self.h, cint(aOrientation))
@@ -197,7 +196,7 @@ proc mappedPropertyName*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, wi
   vx_ret
 
 proc mappedWidgetAt*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, section: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDataWidgetMapper_mappedWidgetAt(self.h, section))
+  gen_qwidget_types.QWidget(h: fcQDataWidgetMapper_mappedWidgetAt(self.h, section), owned: false)
 
 proc clearMapping*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): void =
   fcQDataWidgetMapper_clearMapping(self.h)
@@ -272,7 +271,8 @@ type QDataWidgetMapperchildEventProc* = proc(self: QDataWidgetMapper, event: gen
 type QDataWidgetMappercustomEventProc* = proc(self: QDataWidgetMapper, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDataWidgetMapperconnectNotifyProc* = proc(self: QDataWidgetMapper, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDataWidgetMapperdisconnectNotifyProc* = proc(self: QDataWidgetMapper, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDataWidgetMapperVTable* = object
+
+type QDataWidgetMapperVTable* {.inheritable, pure.} = object
   vtbl: cQDataWidgetMapperVTable
   metaObject*: QDataWidgetMappermetaObjectProc
   metacast*: QDataWidgetMappermetacastProc
@@ -287,7 +287,7 @@ type QDataWidgetMapperVTable* = object
   disconnectNotify*: QDataWidgetMapperdisconnectNotifyProc
 
 proc QDataWidgetMappermetaObject*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDataWidgetMapper_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDataWidgetMapper_virtualbase_metaObject(self.h), owned: false)
 
 proc QDataWidgetMappermetacast*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, param1: cstring): pointer =
   fcQDataWidgetMapper_virtualbase_metacast(self.h, param1)
@@ -324,7 +324,10 @@ proc fcQDataWidgetMapper_vtable_callback_metaObject(self: pointer): pointer {.cd
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
   let self = QDataWidgetMapper(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDataWidgetMapper_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
@@ -351,46 +354,46 @@ proc fcQDataWidgetMapper_vtable_callback_setCurrentIndex(self: pointer, index: c
 proc fcQDataWidgetMapper_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
   let self = QDataWidgetMapper(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQDataWidgetMapper_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
   let self = QDataWidgetMapper(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQDataWidgetMapper_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
   let self = QDataWidgetMapper(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQDataWidgetMapper_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
   let self = QDataWidgetMapper(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQDataWidgetMapper_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
   let self = QDataWidgetMapper(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQDataWidgetMapper_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
   let self = QDataWidgetMapper(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQDataWidgetMapper_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDataWidgetMapperVTable](fcQDataWidgetMapper_vdata(self)[])
   let self = QDataWidgetMapper(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQDataWidgetMapper* {.inheritable.} = ref object of QDataWidgetMapper
@@ -422,7 +425,10 @@ method disconnectNotify*(self: VirtualQDataWidgetMapper, signal: gen_qmetaobject
 proc fcQDataWidgetMapper_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDataWidgetMapper_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
@@ -445,45 +451,45 @@ proc fcQDataWidgetMapper_method_callback_setCurrentIndex(self: pointer, index: c
 
 proc fcQDataWidgetMapper_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQDataWidgetMapper_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQDataWidgetMapper_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQDataWidgetMapper_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQDataWidgetMapper_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQDataWidgetMapper_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQDataWidgetMapper_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDataWidgetMapper](fcQDataWidgetMapper_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDataWidgetMapper_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDataWidgetMapper_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper): cint =
   fcQDataWidgetMapper_protectedbase_senderSignalIndex(self.h)
@@ -523,7 +529,7 @@ proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
     vtbl[].vtbl.connectNotify = fcQDataWidgetMapper_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDataWidgetMapper_vtable_callback_disconnectNotify
-  let tmp = gen_qdatawidgetmapper_types.QDataWidgetMapper(h: fcQDataWidgetMapper_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qdatawidgetmapper_types.QDataWidgetMapper(h: fcQDataWidgetMapper_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDataWidgetMapper_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
@@ -556,13 +562,14 @@ proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
     vtbl[].vtbl.connectNotify = fcQDataWidgetMapper_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDataWidgetMapper_vtable_callback_disconnectNotify
-  let tmp = gen_qdatawidgetmapper_types.QDataWidgetMapper(h: fcQDataWidgetMapper_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qdatawidgetmapper_types.QDataWidgetMapper(h: fcQDataWidgetMapper_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQDataWidgetMapper_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDataWidgetMapper_mvtbl = cQDataWidgetMapperVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDataWidgetMapper()[])](self.fcQDataWidgetMapper_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQDataWidgetMapper_method_callback_metaObject,
   metacast: fcQDataWidgetMapper_method_callback_metacast,
@@ -593,5 +600,3 @@ proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
 
 proc staticMetaObject*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDataWidgetMapper_staticMetaObject())
-proc delete*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper) =
-  fcQDataWidgetMapper_delete(self.h)

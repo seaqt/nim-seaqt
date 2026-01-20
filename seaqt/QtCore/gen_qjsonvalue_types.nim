@@ -1,4 +1,4 @@
-type QJsonValue* {.inheritable, pure.} = object
+type QJsonValue* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QJsonValue) =
   wasMoved(self)
   fcQJsonValue_delete(h)
 
-type QJsonValueConstRef* {.inheritable, pure.} = object
+type QJsonValueConstRef* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

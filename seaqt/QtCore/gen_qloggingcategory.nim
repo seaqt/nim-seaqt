@@ -49,7 +49,6 @@ proc fcQLoggingCategory_operatorCall2(self: pointer): pointer {.importc: "QLoggi
 proc fcQLoggingCategory_defaultCategory(): pointer {.importc: "QLoggingCategory_defaultCategory".}
 proc fcQLoggingCategory_setFilterRules(rules: struct_seaqt_string): void {.importc: "QLoggingCategory_setFilterRules".}
 proc fcQLoggingCategory_new(category: cstring): ptr cQLoggingCategory {.importc: "QLoggingCategory_new".}
-proc fcQLoggingCategory_delete(self: pointer) {.importc: "QLoggingCategory_delete".}
 
 proc isDebugEnabled*(self: gen_qloggingcategory_types.QLoggingCategory): bool =
   fcQLoggingCategory_isDebugEnabled(self.h)
@@ -67,20 +66,18 @@ proc categoryName*(self: gen_qloggingcategory_types.QLoggingCategory): cstring =
   (fcQLoggingCategory_categoryName(self.h))
 
 proc operatorCall*(self: gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
-  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall(self.h))
+  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall(self.h), owned: false)
 
 proc operatorCall2*(self: gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
-  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall2(self.h))
+  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall2(self.h), owned: false)
 
 proc defaultCategory*(_: type gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
-  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_defaultCategory())
+  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_defaultCategory(), owned: false)
 
 proc setFilterRules*(_: type gen_qloggingcategory_types.QLoggingCategory, rules: openArray[char]): void =
   fcQLoggingCategory_setFilterRules(struct_seaqt_string(data: if len(rules) > 0: addr rules[0] else: nil, len: csize_t(len(rules))))
 
 proc create*(T: type gen_qloggingcategory_types.QLoggingCategory,
     category: cstring): gen_qloggingcategory_types.QLoggingCategory =
-  let tmp = gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_new(category))
+  let tmp = gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_new(category), owned: true)
   tmp
-proc delete*(self: gen_qloggingcategory_types.QLoggingCategory) =
-  fcQLoggingCategory_delete(self.h)

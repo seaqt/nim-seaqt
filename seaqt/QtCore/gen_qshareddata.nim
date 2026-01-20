@@ -42,21 +42,15 @@ type cQAdoptSharedDataTag*{.exportc: "QAdoptSharedDataTag", incompleteStruct.} =
 
 proc fcQSharedData_new(): ptr cQSharedData {.importc: "QSharedData_new".}
 proc fcQSharedData_new2(param1: pointer): ptr cQSharedData {.importc: "QSharedData_new2".}
-proc fcQSharedData_delete(self: pointer) {.importc: "QSharedData_delete".}
 proc fcQAdoptSharedDataTag_new(): ptr cQAdoptSharedDataTag {.importc: "QAdoptSharedDataTag_new".}
-proc fcQAdoptSharedDataTag_delete(self: pointer) {.importc: "QAdoptSharedDataTag_delete".}
 
 proc create*(T: type gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
-  let tmp = gen_qshareddata_types.QSharedData(h: fcQSharedData_new())
+  let tmp = gen_qshareddata_types.QSharedData(h: fcQSharedData_new(), owned: true)
   tmp
 proc create*(T: type gen_qshareddata_types.QSharedData,
     param1: gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
-  let tmp = gen_qshareddata_types.QSharedData(h: fcQSharedData_new2(param1.h))
+  let tmp = gen_qshareddata_types.QSharedData(h: fcQSharedData_new2(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qshareddata_types.QSharedData) =
-  fcQSharedData_delete(self.h)
 proc create*(T: type gen_qshareddata_types.QAdoptSharedDataTag): gen_qshareddata_types.QAdoptSharedDataTag =
-  let tmp = gen_qshareddata_types.QAdoptSharedDataTag(h: fcQAdoptSharedDataTag_new())
+  let tmp = gen_qshareddata_types.QAdoptSharedDataTag(h: fcQAdoptSharedDataTag_new(), owned: true)
   tmp
-proc delete*(self: gen_qshareddata_types.QAdoptSharedDataTag) =
-  fcQAdoptSharedDataTag_delete(self.h)

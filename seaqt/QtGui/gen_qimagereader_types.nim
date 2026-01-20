@@ -1,4 +1,4 @@
-type QImageReader* {.inheritable, pure.} = object
+type QImageReader* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

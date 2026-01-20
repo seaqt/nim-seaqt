@@ -1,4 +1,4 @@
-type QPageLayout* {.inheritable, pure.} = object
+type QPageLayout* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

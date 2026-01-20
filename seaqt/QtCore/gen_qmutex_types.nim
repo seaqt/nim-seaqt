@@ -1,4 +1,4 @@
-type QBasicMutex* {.inheritable, pure.} = object
+type QBasicMutex* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -30,7 +30,7 @@ proc `=sink`(dest: var QMutex, source: QMutex) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QRecursiveMutex* {.inheritable, pure.} = object
+type QRecursiveMutex* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -238,7 +238,6 @@ proc fcQSpinBox_protectedbase_isSignalConnected(self: pointer, signal: pointer):
 proc fcQSpinBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSpinBox {.importc: "QSpinBox_new".}
 proc fcQSpinBox_new2(vtbl: pointer, vdata: csize_t): ptr cQSpinBox {.importc: "QSpinBox_new2".}
 proc fcQSpinBox_staticMetaObject(): pointer {.importc: "QSpinBox_staticMetaObject".}
-proc fcQSpinBox_delete(self: pointer) {.importc: "QSpinBox_delete".}
 proc fcQDoubleSpinBox_metaObject(self: pointer): pointer {.importc: "QDoubleSpinBox_metaObject".}
 proc fcQDoubleSpinBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QDoubleSpinBox_metacast".}
 proc fcQDoubleSpinBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDoubleSpinBox_metacall".}
@@ -406,10 +405,9 @@ proc fcQDoubleSpinBox_protectedbase_isSignalConnected(self: pointer, signal: poi
 proc fcQDoubleSpinBox_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDoubleSpinBox {.importc: "QDoubleSpinBox_new".}
 proc fcQDoubleSpinBox_new2(vtbl: pointer, vdata: csize_t): ptr cQDoubleSpinBox {.importc: "QDoubleSpinBox_new2".}
 proc fcQDoubleSpinBox_staticMetaObject(): pointer {.importc: "QDoubleSpinBox_staticMetaObject".}
-proc fcQDoubleSpinBox_delete(self: pointer) {.importc: "QDoubleSpinBox_delete".}
 
 proc metaObject*(self: gen_qspinbox_types.QSpinBox): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSpinBox_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSpinBox_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qspinbox_types.QSpinBox, param1: cstring): pointer =
   fcQSpinBox_metacast(self.h, param1)
@@ -599,7 +597,8 @@ type QSpinBoxchildEventProc* = proc(self: QSpinBox, event: gen_qcoreevent_types.
 type QSpinBoxcustomEventProc* = proc(self: QSpinBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSpinBoxconnectNotifyProc* = proc(self: QSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSpinBoxdisconnectNotifyProc* = proc(self: QSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSpinBoxVTable* = object
+
+type QSpinBoxVTable* {.inheritable, pure.} = object
   vtbl: cQSpinBoxVTable
   metaObject*: QSpinBoxmetaObjectProc
   metacast*: QSpinBoxmetacastProc
@@ -661,7 +660,7 @@ type QSpinBoxVTable* = object
   disconnectNotify*: QSpinBoxdisconnectNotifyProc
 
 proc QSpinBoxmetaObject*(self: gen_qspinbox_types.QSpinBox): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSpinBox_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSpinBox_virtualbase_metaObject(self.h), owned: false)
 
 proc QSpinBoxmetacast*(self: gen_qspinbox_types.QSpinBox, param1: cstring): pointer =
   fcQSpinBox_virtualbase_metacast(self.h, param1)
@@ -688,13 +687,13 @@ proc QSpinBoxfixup*(self: gen_qspinbox_types.QSpinBox, str: openArray[char]): vo
   fcQSpinBox_virtualbase_fixup(self.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc QSpinBoxsizeHint*(self: gen_qspinbox_types.QSpinBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSpinBox_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQSpinBox_virtualbase_sizeHint(self.h), owned: true)
 
 proc QSpinBoxminimumSizeHint*(self: gen_qspinbox_types.QSpinBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSpinBox_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQSpinBox_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QSpinBoxinputMethodQuery*(self: gen_qspinbox_types.QSpinBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSpinBox_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQSpinBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QSpinBoxstepBy*(self: gen_qspinbox_types.QSpinBox, steps: cint): void =
   fcQSpinBox_virtualbase_stepBy(self.h, steps)
@@ -769,7 +768,7 @@ proc QSpinBoxhasHeightForWidth*(self: gen_qspinbox_types.QSpinBox): bool =
   fcQSpinBox_virtualbase_hasHeightForWidth(self.h)
 
 proc QSpinBoxpaintEngine*(self: gen_qspinbox_types.QSpinBox): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQSpinBox_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQSpinBox_virtualbase_paintEngine(self.h), owned: false)
 
 proc QSpinBoxmouseDoubleClickEvent*(self: gen_qspinbox_types.QSpinBox, event: gen_qevent_types.QMouseEvent): void =
   fcQSpinBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -811,10 +810,10 @@ proc QSpinBoxinitPainter*(self: gen_qspinbox_types.QSpinBox, painter: gen_qpaint
   fcQSpinBox_virtualbase_initPainter(self.h, painter.h)
 
 proc QSpinBoxredirected*(self: gen_qspinbox_types.QSpinBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQSpinBox_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQSpinBox_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QSpinBoxsharedPainter*(self: gen_qspinbox_types.QSpinBox): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQSpinBox_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQSpinBox_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QSpinBoxinputMethodEvent*(self: gen_qspinbox_types.QSpinBox, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQSpinBox_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -842,7 +841,10 @@ proc fcQSpinBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
@@ -863,7 +865,7 @@ proc fcQSpinBox_vtable_callback_metacall(self: pointer, param1: cint, param2: ci
 proc fcQSpinBox_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -910,20 +912,29 @@ proc fcQSpinBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_vtable_callback_stepBy(self: pointer, steps: cint): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
@@ -939,103 +950,103 @@ proc fcQSpinBox_vtable_callback_clear(self: pointer): void {.cdecl.} =
 proc fcQSpinBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_stepEnabled(self: pointer): cint {.cdecl.} =
@@ -1073,66 +1084,69 @@ proc fcQSpinBox_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1157,26 +1171,32 @@ proc fcQSpinBox_vtable_callback_metric(self: pointer, param1: cint): cint {.cdec
 proc fcQSpinBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
@@ -1189,33 +1209,33 @@ proc fcQSpinBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): b
 proc fcQSpinBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQSpinBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQSpinBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpinBoxVTable](fcQSpinBox_vdata(self)[])
   let self = QSpinBox(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSpinBox* {.inheritable.} = ref object of QSpinBox
@@ -1341,7 +1361,10 @@ method disconnectNotify*(self: VirtualQSpinBox, signal: gen_qmetaobject_types.QM
 proc fcQSpinBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
@@ -1359,7 +1382,7 @@ proc fcQSpinBox_method_callback_metacall(self: pointer, param1: cint, param2: ci
 
 proc fcQSpinBox_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1401,18 +1424,27 @@ proc fcQSpinBox_method_callback_fixup(self: pointer, str: struct_seaqt_string): 
 proc fcQSpinBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_stepBy(self: pointer, steps: cint): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
@@ -1425,87 +1457,87 @@ proc fcQSpinBox_method_callback_clear(self: pointer): void {.cdecl.} =
 
 proc fcQSpinBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQSpinBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQSpinBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQSpinBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQSpinBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQSpinBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQSpinBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQSpinBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQSpinBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQSpinBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQSpinBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQSpinBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQSpinBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQSpinBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQSpinBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQSpinBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQSpinBox_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 proc fcQSpinBox_method_callback_stepEnabled(self: pointer): cint {.cdecl.} =
@@ -1537,56 +1569,59 @@ proc fcQSpinBox_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.}
 proc fcQSpinBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQSpinBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQSpinBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQSpinBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQSpinBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQSpinBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQSpinBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQSpinBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQSpinBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQSpinBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQSpinBox_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1608,23 +1643,29 @@ proc fcQSpinBox_method_callback_metric(self: pointer, param1: cint): cint {.cdec
 
 proc fcQSpinBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQSpinBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpinBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQSpinBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
@@ -1635,34 +1676,34 @@ proc fcQSpinBox_method_callback_focusNextPrevChild(self: pointer, next: bool): b
 
 proc fcQSpinBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQSpinBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQSpinBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQSpinBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQSpinBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpinBox](fcQSpinBox_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc lineEdit*(self: gen_qspinbox_types.QSpinBox): gen_qlineedit_types.QLineEdit =
-  gen_qlineedit_types.QLineEdit(h: fcQSpinBox_protectedbase_lineEdit(self.h))
+  gen_qlineedit_types.QLineEdit(h: fcQSpinBox_protectedbase_lineEdit(self.h), owned: false)
 
 proc setLineEdit*(self: gen_qspinbox_types.QSpinBox, edit: gen_qlineedit_types.QLineEdit): void =
   fcQSpinBox_protectedbase_setLineEdit(self.h, edit.h)
@@ -1683,7 +1724,7 @@ proc focusPreviousChild*(self: gen_qspinbox_types.QSpinBox): bool =
   fcQSpinBox_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qspinbox_types.QSpinBox): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSpinBox_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSpinBox_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qspinbox_types.QSpinBox): cint =
   fcQSpinBox_protectedbase_senderSignalIndex(self.h)
@@ -1818,7 +1859,7 @@ proc create*(T: type gen_qspinbox_types.QSpinBox,
     vtbl[].vtbl.connectNotify = fcQSpinBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSpinBox_vtable_callback_disconnectNotify
-  let tmp = gen_qspinbox_types.QSpinBox(h: fcQSpinBox_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qspinbox_types.QSpinBox(h: fcQSpinBox_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSpinBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qspinbox_types.QSpinBox,
@@ -1944,13 +1985,14 @@ proc create*(T: type gen_qspinbox_types.QSpinBox,
     vtbl[].vtbl.connectNotify = fcQSpinBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSpinBox_vtable_callback_disconnectNotify
-  let tmp = gen_qspinbox_types.QSpinBox(h: fcQSpinBox_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qspinbox_types.QSpinBox(h: fcQSpinBox_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSpinBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSpinBox_mvtbl = cQSpinBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSpinBox()[])](self.fcQSpinBox_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSpinBox_method_callback_metaObject,
   metacast: fcQSpinBox_method_callback_metacast,
@@ -2028,10 +2070,8 @@ proc create*(T: type gen_qspinbox_types.QSpinBox,
 
 proc staticMetaObject*(_: type gen_qspinbox_types.QSpinBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSpinBox_staticMetaObject())
-proc delete*(self: gen_qspinbox_types.QSpinBox) =
-  fcQSpinBox_delete(self.h)
 proc metaObject*(self: gen_qspinbox_types.QDoubleSpinBox): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDoubleSpinBox_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDoubleSpinBox_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qspinbox_types.QDoubleSpinBox, param1: cstring): pointer =
   fcQDoubleSpinBox_metacast(self.h, param1)
@@ -2236,7 +2276,8 @@ type QDoubleSpinBoxchildEventProc* = proc(self: QDoubleSpinBox, event: gen_qcore
 type QDoubleSpinBoxcustomEventProc* = proc(self: QDoubleSpinBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDoubleSpinBoxconnectNotifyProc* = proc(self: QDoubleSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDoubleSpinBoxdisconnectNotifyProc* = proc(self: QDoubleSpinBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDoubleSpinBoxVTable* = object
+
+type QDoubleSpinBoxVTable* {.inheritable, pure.} = object
   vtbl: cQDoubleSpinBoxVTable
   metaObject*: QDoubleSpinBoxmetaObjectProc
   metacast*: QDoubleSpinBoxmetacastProc
@@ -2298,7 +2339,7 @@ type QDoubleSpinBoxVTable* = object
   disconnectNotify*: QDoubleSpinBoxdisconnectNotifyProc
 
 proc QDoubleSpinBoxmetaObject*(self: gen_qspinbox_types.QDoubleSpinBox): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDoubleSpinBox_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDoubleSpinBox_virtualbase_metaObject(self.h), owned: false)
 
 proc QDoubleSpinBoxmetacast*(self: gen_qspinbox_types.QDoubleSpinBox, param1: cstring): pointer =
   fcQDoubleSpinBox_virtualbase_metacast(self.h, param1)
@@ -2322,16 +2363,16 @@ proc QDoubleSpinBoxfixup*(self: gen_qspinbox_types.QDoubleSpinBox, str: openArra
   fcQDoubleSpinBox_virtualbase_fixup(self.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc QDoubleSpinBoxsizeHint*(self: gen_qspinbox_types.QDoubleSpinBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDoubleSpinBox_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDoubleSpinBox_virtualbase_sizeHint(self.h), owned: true)
 
 proc QDoubleSpinBoxminimumSizeHint*(self: gen_qspinbox_types.QDoubleSpinBox): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDoubleSpinBox_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDoubleSpinBox_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QDoubleSpinBoxevent*(self: gen_qspinbox_types.QDoubleSpinBox, event: gen_qcoreevent_types.QEvent): bool =
   fcQDoubleSpinBox_virtualbase_event(self.h, event.h)
 
 proc QDoubleSpinBoxinputMethodQuery*(self: gen_qspinbox_types.QDoubleSpinBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDoubleSpinBox_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQDoubleSpinBox_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QDoubleSpinBoxstepBy*(self: gen_qspinbox_types.QDoubleSpinBox, steps: cint): void =
   fcQDoubleSpinBox_virtualbase_stepBy(self.h, steps)
@@ -2406,7 +2447,7 @@ proc QDoubleSpinBoxhasHeightForWidth*(self: gen_qspinbox_types.QDoubleSpinBox): 
   fcQDoubleSpinBox_virtualbase_hasHeightForWidth(self.h)
 
 proc QDoubleSpinBoxpaintEngine*(self: gen_qspinbox_types.QDoubleSpinBox): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDoubleSpinBox_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQDoubleSpinBox_virtualbase_paintEngine(self.h), owned: false)
 
 proc QDoubleSpinBoxmouseDoubleClickEvent*(self: gen_qspinbox_types.QDoubleSpinBox, event: gen_qevent_types.QMouseEvent): void =
   fcQDoubleSpinBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -2448,10 +2489,10 @@ proc QDoubleSpinBoxinitPainter*(self: gen_qspinbox_types.QDoubleSpinBox, painter
   fcQDoubleSpinBox_virtualbase_initPainter(self.h, painter.h)
 
 proc QDoubleSpinBoxredirected*(self: gen_qspinbox_types.QDoubleSpinBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDoubleSpinBox_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDoubleSpinBox_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QDoubleSpinBoxsharedPainter*(self: gen_qspinbox_types.QDoubleSpinBox): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDoubleSpinBox_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQDoubleSpinBox_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QDoubleSpinBoxinputMethodEvent*(self: gen_qspinbox_types.QDoubleSpinBox, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQDoubleSpinBox_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -2479,7 +2520,10 @@ proc fcQDoubleSpinBox_vtable_callback_metaObject(self: pointer): pointer {.cdecl
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
@@ -2540,18 +2584,24 @@ proc fcQDoubleSpinBox_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.}
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -2560,7 +2610,10 @@ proc fcQDoubleSpinBox_vtable_callback_inputMethodQuery(self: pointer, param1: ci
   let self = QDoubleSpinBox(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_vtable_callback_stepBy(self: pointer, steps: cint): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
@@ -2576,103 +2629,103 @@ proc fcQDoubleSpinBox_vtable_callback_clear(self: pointer): void {.cdecl.} =
 proc fcQDoubleSpinBox_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_stepEnabled(self: pointer): cint {.cdecl.} =
@@ -2710,66 +2763,69 @@ proc fcQDoubleSpinBox_vtable_callback_paintEngine(self: pointer): pointer {.cdec
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -2794,26 +2850,32 @@ proc fcQDoubleSpinBox_vtable_callback_metric(self: pointer, param1: cint): cint 
 proc fcQDoubleSpinBox_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
@@ -2826,33 +2888,33 @@ proc fcQDoubleSpinBox_vtable_callback_focusNextPrevChild(self: pointer, next: bo
 proc fcQDoubleSpinBox_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQDoubleSpinBox_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQDoubleSpinBox_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDoubleSpinBoxVTable](fcQDoubleSpinBox_vdata(self)[])
   let self = QDoubleSpinBox(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQDoubleSpinBox* {.inheritable.} = ref object of QDoubleSpinBox
@@ -2978,7 +3040,10 @@ method disconnectNotify*(self: VirtualQDoubleSpinBox, signal: gen_qmetaobject_ty
 proc fcQDoubleSpinBox_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
@@ -3032,16 +3097,22 @@ proc fcQDoubleSpinBox_method_callback_fixup(self: pointer, str: struct_seaqt_str
 proc fcQDoubleSpinBox_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -3049,7 +3120,10 @@ proc fcQDoubleSpinBox_method_callback_inputMethodQuery(self: pointer, param1: ci
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_stepBy(self: pointer, steps: cint): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
@@ -3062,87 +3136,87 @@ proc fcQDoubleSpinBox_method_callback_clear(self: pointer): void {.cdecl.} =
 
 proc fcQDoubleSpinBox_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionSpinBox(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_stepEnabled(self: pointer): cint {.cdecl.} =
@@ -3174,56 +3248,59 @@ proc fcQDoubleSpinBox_method_callback_hasHeightForWidth(self: pointer): bool {.c
 proc fcQDoubleSpinBox_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -3245,23 +3322,29 @@ proc fcQDoubleSpinBox_method_callback_metric(self: pointer, param1: cint): cint 
 
 proc fcQDoubleSpinBox_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDoubleSpinBox_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
@@ -3272,34 +3355,34 @@ proc fcQDoubleSpinBox_method_callback_focusNextPrevChild(self: pointer, next: bo
 
 proc fcQDoubleSpinBox_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQDoubleSpinBox_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQDoubleSpinBox_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDoubleSpinBox](fcQDoubleSpinBox_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc lineEdit*(self: gen_qspinbox_types.QDoubleSpinBox): gen_qlineedit_types.QLineEdit =
-  gen_qlineedit_types.QLineEdit(h: fcQDoubleSpinBox_protectedbase_lineEdit(self.h))
+  gen_qlineedit_types.QLineEdit(h: fcQDoubleSpinBox_protectedbase_lineEdit(self.h), owned: false)
 
 proc setLineEdit*(self: gen_qspinbox_types.QDoubleSpinBox, edit: gen_qlineedit_types.QLineEdit): void =
   fcQDoubleSpinBox_protectedbase_setLineEdit(self.h, edit.h)
@@ -3320,7 +3403,7 @@ proc focusPreviousChild*(self: gen_qspinbox_types.QDoubleSpinBox): bool =
   fcQDoubleSpinBox_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qspinbox_types.QDoubleSpinBox): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDoubleSpinBox_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDoubleSpinBox_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qspinbox_types.QDoubleSpinBox): cint =
   fcQDoubleSpinBox_protectedbase_senderSignalIndex(self.h)
@@ -3455,7 +3538,7 @@ proc create*(T: type gen_qspinbox_types.QDoubleSpinBox,
     vtbl[].vtbl.connectNotify = fcQDoubleSpinBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDoubleSpinBox_vtable_callback_disconnectNotify
-  let tmp = gen_qspinbox_types.QDoubleSpinBox(h: fcQDoubleSpinBox_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qspinbox_types.QDoubleSpinBox(h: fcQDoubleSpinBox_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQDoubleSpinBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qspinbox_types.QDoubleSpinBox,
@@ -3581,13 +3664,14 @@ proc create*(T: type gen_qspinbox_types.QDoubleSpinBox,
     vtbl[].vtbl.connectNotify = fcQDoubleSpinBox_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDoubleSpinBox_vtable_callback_disconnectNotify
-  let tmp = gen_qspinbox_types.QDoubleSpinBox(h: fcQDoubleSpinBox_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qspinbox_types.QDoubleSpinBox(h: fcQDoubleSpinBox_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDoubleSpinBox_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDoubleSpinBox_mvtbl = cQDoubleSpinBoxVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDoubleSpinBox()[])](self.fcQDoubleSpinBox_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQDoubleSpinBox_method_callback_metaObject,
   metacast: fcQDoubleSpinBox_method_callback_metacast,
@@ -3665,5 +3749,3 @@ proc create*(T: type gen_qspinbox_types.QDoubleSpinBox,
 
 proc staticMetaObject*(_: type gen_qspinbox_types.QDoubleSpinBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDoubleSpinBox_staticMetaObject())
-proc delete*(self: gen_qspinbox_types.QDoubleSpinBox) =
-  fcQDoubleSpinBox_delete(self.h)

@@ -60,7 +60,6 @@ proc fcQSysInfo_prettyProductName(): struct_seaqt_string {.importc: "QSysInfo_pr
 proc fcQSysInfo_machineHostName(): struct_seaqt_string {.importc: "QSysInfo_machineHostName".}
 proc fcQSysInfo_machineUniqueId(): struct_seaqt_string {.importc: "QSysInfo_machineUniqueId".}
 proc fcQSysInfo_bootUniqueId(): struct_seaqt_string {.importc: "QSysInfo_bootUniqueId".}
-proc fcQSysInfo_delete(self: pointer) {.importc: "QSysInfo_delete".}
 
 proc buildCpuArchitecture*(_: type gen_qsysinfo_types.QSysInfo): string =
   let v_ms = fcQSysInfo_buildCpuArchitecture()
@@ -128,5 +127,3 @@ proc bootUniqueId*(_: type gen_qsysinfo_types.QSysInfo): seq[byte] =
   c_free(v_bytearray.data)
   vx_ret
 
-proc delete*(self: gen_qsysinfo_types.QSysInfo) =
-  fcQSysInfo_delete(self.h)

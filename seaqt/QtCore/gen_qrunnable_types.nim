@@ -1,4 +1,4 @@
-type QRunnable* {.inheritable, pure.} = object
+type QRunnable* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

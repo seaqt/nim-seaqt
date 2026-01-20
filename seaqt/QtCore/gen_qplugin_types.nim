@@ -1,4 +1,4 @@
-type QPluginMetaData* {.inheritable, pure.} = object
+type QPluginMetaData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QPluginMetaData) =
   wasMoved(self)
   fcQPluginMetaData_delete(h)
 
-type QStaticPlugin* {.inheritable, pure.} = object
+type QStaticPlugin* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QStaticPlugin) =
   wasMoved(self)
   fcQStaticPlugin_delete(h)
 
-type QPluginMetaDataHeader* {.inheritable, pure.} = object
+type QPluginMetaDataHeader* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QPluginMetaDataHeader) =
   wasMoved(self)
   fcQPluginMetaDataHeader_delete(h)
 
-type QPluginMetaDataMagicHeader* {.inheritable, pure.} = object
+type QPluginMetaDataMagicHeader* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -82,7 +82,7 @@ proc delete*(self: sink QPluginMetaDataMagicHeader) =
   wasMoved(self)
   fcQPluginMetaDataMagicHeader_delete(h)
 
-type QPluginMetaDataElfNoteHeader* {.inheritable, pure.} = object
+type QPluginMetaDataElfNoteHeader* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

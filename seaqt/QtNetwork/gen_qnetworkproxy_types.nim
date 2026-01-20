@@ -1,4 +1,4 @@
-type QNetworkProxyQuery* {.inheritable, pure.} = object
+type QNetworkProxyQuery* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QNetworkProxyQuery) =
   wasMoved(self)
   fcQNetworkProxyQuery_delete(h)
 
-type QNetworkProxy* {.inheritable, pure.} = object
+type QNetworkProxy* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QNetworkProxy) =
   wasMoved(self)
   fcQNetworkProxy_delete(h)
 
-type QNetworkProxyFactory* {.inheritable, pure.} = object
+type QNetworkProxyFactory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

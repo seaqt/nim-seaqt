@@ -1,4 +1,4 @@
-type QQmlListReference* {.inheritable, pure.} = object
+type QQmlListReference* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QScrollerProperties* {.inheritable, pure.} = object
+type QScrollerProperties* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

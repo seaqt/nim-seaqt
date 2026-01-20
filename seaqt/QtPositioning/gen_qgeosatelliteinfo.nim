@@ -70,7 +70,6 @@ proc fcQGeoSatelliteInfo_hasAttribute(self: pointer, attribute: cint): bool {.im
 proc fcQGeoSatelliteInfo_detach(self: pointer): void {.importc: "QGeoSatelliteInfo_detach".}
 proc fcQGeoSatelliteInfo_new(): ptr cQGeoSatelliteInfo {.importc: "QGeoSatelliteInfo_new".}
 proc fcQGeoSatelliteInfo_new2(other: pointer): ptr cQGeoSatelliteInfo {.importc: "QGeoSatelliteInfo_new2".}
-proc fcQGeoSatelliteInfo_delete(self: pointer) {.importc: "QGeoSatelliteInfo_delete".}
 
 proc operatorAssign*(self: gen_qgeosatelliteinfo_types.QGeoSatelliteInfo, other: gen_qgeosatelliteinfo_types.QGeoSatelliteInfo): void =
   fcQGeoSatelliteInfo_operatorAssign(self.h, other.h)
@@ -112,11 +111,9 @@ proc detach*(self: gen_qgeosatelliteinfo_types.QGeoSatelliteInfo): void =
   fcQGeoSatelliteInfo_detach(self.h)
 
 proc create*(T: type gen_qgeosatelliteinfo_types.QGeoSatelliteInfo): gen_qgeosatelliteinfo_types.QGeoSatelliteInfo =
-  let tmp = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: fcQGeoSatelliteInfo_new())
+  let tmp = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: fcQGeoSatelliteInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeosatelliteinfo_types.QGeoSatelliteInfo,
     other: gen_qgeosatelliteinfo_types.QGeoSatelliteInfo): gen_qgeosatelliteinfo_types.QGeoSatelliteInfo =
-  let tmp = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: fcQGeoSatelliteInfo_new2(other.h))
+  let tmp = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: fcQGeoSatelliteInfo_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qgeosatelliteinfo_types.QGeoSatelliteInfo) =
-  fcQGeoSatelliteInfo_delete(self.h)

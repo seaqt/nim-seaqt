@@ -1,4 +1,4 @@
-type QJsonParseError* {.inheritable, pure.} = object
+type QJsonParseError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QJsonParseError) =
   wasMoved(self)
   fcQJsonParseError_delete(h)
 
-type QJsonDocument* {.inheritable, pure.} = object
+type QJsonDocument* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

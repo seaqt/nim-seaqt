@@ -112,7 +112,6 @@ proc fcQWebEngineSettings_defaultTextEncoding(self: pointer): struct_seaqt_strin
 proc fcQWebEngineSettings_unknownUrlSchemePolicy(self: pointer): cint {.importc: "QWebEngineSettings_unknownUrlSchemePolicy".}
 proc fcQWebEngineSettings_setUnknownUrlSchemePolicy(self: pointer, policy: cint): void {.importc: "QWebEngineSettings_setUnknownUrlSchemePolicy".}
 proc fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self: pointer): void {.importc: "QWebEngineSettings_resetUnknownUrlSchemePolicy".}
-proc fcQWebEngineSettings_delete(self: pointer) {.importc: "QWebEngineSettings_delete".}
 
 proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: openArray[char]): void =
   fcQWebEngineSettings_setFontFamily(self.h, cint(which), struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
@@ -162,5 +161,3 @@ proc setUnknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSet
 proc resetUnknownUrlSchemePolicy*(self: gen_qwebenginesettings_types.QWebEngineSettings): void =
   fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self.h)
 
-proc delete*(self: gen_qwebenginesettings_types.QWebEngineSettings) =
-  fcQWebEngineSettings_delete(self.h)

@@ -1,4 +1,4 @@
-type QPdfLink* {.inheritable, pure.} = object
+type QPdfLink* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

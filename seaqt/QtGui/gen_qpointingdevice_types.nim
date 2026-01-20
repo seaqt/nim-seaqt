@@ -1,4 +1,4 @@
-type QPointingDeviceUniqueId* {.inheritable, pure.} = object
+type QPointingDeviceUniqueId* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

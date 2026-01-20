@@ -1,4 +1,4 @@
-type QStorageInfo* {.inheritable, pure.} = object
+type QStorageInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

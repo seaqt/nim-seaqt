@@ -286,10 +286,9 @@ proc fcQSqlTableModel_new(vtbl: pointer, vdata: csize_t): ptr cQSqlTableModel {.
 proc fcQSqlTableModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlTableModel {.importc: "QSqlTableModel_new2".}
 proc fcQSqlTableModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer, db: pointer): ptr cQSqlTableModel {.importc: "QSqlTableModel_new3".}
 proc fcQSqlTableModel_staticMetaObject(): pointer {.importc: "QSqlTableModel_staticMetaObject".}
-proc fcQSqlTableModel_delete(self: pointer) {.importc: "QSqlTableModel_delete".}
 
 proc metaObject*(self: gen_qsqltablemodel_types.QSqlTableModel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSqlTableModel_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSqlTableModel_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsqltablemodel_types.QSqlTableModel, param1: cstring): pointer =
   fcQSqlTableModel_metacast(self.h, param1)
@@ -316,13 +315,13 @@ proc flags*(self: gen_qsqltablemodel_types.QSqlTableModel, index: gen_qabstracti
   cint(fcQSqlTableModel_flags(self.h, index.h))
 
 proc record*(self: gen_qsqltablemodel_types.QSqlTableModel): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_record(self.h))
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_record(self.h), owned: true)
 
 proc record*(self: gen_qsqltablemodel_types.QSqlTableModel, row: cint): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_recordWithRow(self.h, row))
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_recordWithRow(self.h, row), owned: true)
 
 proc data*(self: gen_qsqltablemodel_types.QSqlTableModel, idx: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlTableModel_data(self.h, idx.h, role))
+  gen_qvariant_types.QVariant(h: fcQSqlTableModel_data(self.h, idx.h, role), owned: true)
 
 proc setData*(self: gen_qsqltablemodel_types.QSqlTableModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQSqlTableModel_setData(self.h, index.h, value.h, role)
@@ -331,7 +330,7 @@ proc clearItemData*(self: gen_qsqltablemodel_types.QSqlTableModel, index: gen_qa
   fcQSqlTableModel_clearItemData(self.h, index.h)
 
 proc headerData*(self: gen_qsqltablemodel_types.QSqlTableModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlTableModel_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQSqlTableModel_headerData(self.h, section, cint(orientation), role), owned: true)
 
 proc isDirty*(self: gen_qsqltablemodel_types.QSqlTableModel): bool =
   fcQSqlTableModel_isDirty(self.h)
@@ -349,10 +348,10 @@ proc editStrategy*(self: gen_qsqltablemodel_types.QSqlTableModel): cint =
   cint(fcQSqlTableModel_editStrategy(self.h))
 
 proc primaryKey*(self: gen_qsqltablemodel_types.QSqlTableModel): gen_qsqlindex_types.QSqlIndex =
-  gen_qsqlindex_types.QSqlIndex(h: fcQSqlTableModel_primaryKey(self.h))
+  gen_qsqlindex_types.QSqlIndex(h: fcQSqlTableModel_primaryKey(self.h), owned: true)
 
 proc database*(self: gen_qsqltablemodel_types.QSqlTableModel): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlTableModel_database(self.h))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlTableModel_database(self.h), owned: true)
 
 proc fieldIndex*(self: gen_qsqltablemodel_types.QSqlTableModel, fieldName: openArray[char]): cint =
   fcQSqlTableModel_fieldIndex(self.h, struct_seaqt_string(data: if len(fieldName) > 0: addr fieldName[0] else: nil, len: csize_t(len(fieldName))))
@@ -419,7 +418,7 @@ proc fcQSqlTableModel_slot_callback_primeInsert(slot: int, row: cint, record: po
   let nimfunc = cast[ptr QSqlTableModelprimeInsertSlot](cast[pointer](slot))
   let slotval1 = row
 
-  let slotval2 = gen_qsqlrecord_types.QSqlRecord(h: record)
+  let slotval2 = gen_qsqlrecord_types.QSqlRecord(h: record, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -439,7 +438,7 @@ proc beforeInsert*(self: gen_qsqltablemodel_types.QSqlTableModel, record: gen_qs
 type QSqlTableModelbeforeInsertSlot* = proc(record: gen_qsqlrecord_types.QSqlRecord)
 proc fcQSqlTableModel_slot_callback_beforeInsert(slot: int, record: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QSqlTableModelbeforeInsertSlot](cast[pointer](slot))
-  let slotval1 = gen_qsqlrecord_types.QSqlRecord(h: record)
+  let slotval1 = gen_qsqlrecord_types.QSqlRecord(h: record, owned: false)
 
   nimfunc[](slotval1)
 
@@ -461,7 +460,7 @@ proc fcQSqlTableModel_slot_callback_beforeUpdate(slot: int, row: cint, record: p
   let nimfunc = cast[ptr QSqlTableModelbeforeUpdateSlot](cast[pointer](slot))
   let slotval1 = row
 
-  let slotval2 = gen_qsqlrecord_types.QSqlRecord(h: record)
+  let slotval2 = gen_qsqlrecord_types.QSqlRecord(h: record, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -567,7 +566,8 @@ type QSqlTableModelchildEventProc* = proc(self: QSqlTableModel, event: gen_qcore
 type QSqlTableModelcustomEventProc* = proc(self: QSqlTableModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSqlTableModelconnectNotifyProc* = proc(self: QSqlTableModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSqlTableModeldisconnectNotifyProc* = proc(self: QSqlTableModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSqlTableModelVTable* = object
+
+type QSqlTableModelVTable* {.inheritable, pure.} = object
   vtbl: cQSqlTableModelVTable
   metaObject*: QSqlTableModelmetaObjectProc
   metacast*: QSqlTableModelmetacastProc
@@ -631,7 +631,7 @@ type QSqlTableModelVTable* = object
   disconnectNotify*: QSqlTableModeldisconnectNotifyProc
 
 proc QSqlTableModelmetaObject*(self: gen_qsqltablemodel_types.QSqlTableModel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSqlTableModel_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSqlTableModel_virtualbase_metaObject(self.h), owned: false)
 
 proc QSqlTableModelmetacast*(self: gen_qsqltablemodel_types.QSqlTableModel, param1: cstring): pointer =
   fcQSqlTableModel_virtualbase_metacast(self.h, param1)
@@ -646,7 +646,7 @@ proc QSqlTableModelflags*(self: gen_qsqltablemodel_types.QSqlTableModel, index: 
   cint(fcQSqlTableModel_virtualbase_flags(self.h, index.h))
 
 proc QSqlTableModeldata*(self: gen_qsqltablemodel_types.QSqlTableModel, idx: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlTableModel_virtualbase_data(self.h, idx.h, role))
+  gen_qvariant_types.QVariant(h: fcQSqlTableModel_virtualbase_data(self.h, idx.h, role), owned: true)
 
 proc QSqlTableModelsetData*(self: gen_qsqltablemodel_types.QSqlTableModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQSqlTableModel_virtualbase_setData(self.h, index.h, value.h, role)
@@ -655,7 +655,7 @@ proc QSqlTableModelclearItemData*(self: gen_qsqltablemodel_types.QSqlTableModel,
   fcQSqlTableModel_virtualbase_clearItemData(self.h, index.h)
 
 proc QSqlTableModelheaderData*(self: gen_qsqltablemodel_types.QSqlTableModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlTableModel_virtualbase_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQSqlTableModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
 proc QSqlTableModelclear*(self: gen_qsqltablemodel_types.QSqlTableModel): void =
   fcQSqlTableModel_virtualbase_clear(self.h)
@@ -721,7 +721,7 @@ proc QSqlTableModelselectStatement*(self: gen_qsqltablemodel_types.QSqlTableMode
   vx_ret
 
 proc QSqlTableModelindexInQuery*(self: gen_qsqltablemodel_types.QSqlTableModel, item: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_virtualbase_indexInQuery(self.h, item.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_virtualbase_indexInQuery(self.h, item.h), owned: true)
 
 proc QSqlTableModelcolumnCount*(self: gen_qsqltablemodel_types.QSqlTableModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQSqlTableModel_virtualbase_columnCount(self.h, parent.h)
@@ -760,10 +760,10 @@ proc QSqlTableModelqueryChange*(self: gen_qsqltablemodel_types.QSqlTableModel): 
   fcQSqlTableModel_virtualbase_queryChange(self.h)
 
 proc QSqlTableModelindex*(self: gen_qsqltablemodel_types.QSqlTableModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_virtualbase_index(self.h, row, column, parent.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
 
 proc QSqlTableModelsibling*(self: gen_qsqltablemodel_types.QSqlTableModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_virtualbase_sibling(self.h, row, column, idx.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
 proc QSqlTableModeldropMimeData*(self: gen_qsqltablemodel_types.QSqlTableModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQSqlTableModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
@@ -776,7 +776,7 @@ proc QSqlTableModelitemData*(self: gen_qsqltablemodel_types.QSqlTableModel, inde
   for i in 0..<v_mm.len:
     var v_entry_Key = v_Keys[i]
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -787,8 +787,11 @@ proc QSqlTableModelsetItemData*(self: gen_qsqltablemodel_types.QSqlTableModel, i
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for roles_k, roles_v in roles:
+  for roles_k in roles.keys():
     roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
@@ -811,7 +814,7 @@ proc QSqlTableModelmimeData*(self: gen_qsqltablemodel_types.QSqlTableModel, inde
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
 
-  gen_qmimedata_types.QMimeData(h: fcQSqlTableModel_virtualbase_mimeData(self.h, struct_seaqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
+  gen_qmimedata_types.QMimeData(h: fcQSqlTableModel_virtualbase_mimeData(self.h, struct_seaqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
 proc QSqlTableModelcanDropMimeData*(self: gen_qsqltablemodel_types.QSqlTableModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQSqlTableModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
@@ -829,19 +832,19 @@ proc QSqlTableModelmoveColumns*(self: gen_qsqltablemodel_types.QSqlTableModel, s
   fcQSqlTableModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
 
 proc QSqlTableModelbuddy*(self: gen_qsqltablemodel_types.QSqlTableModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_virtualbase_buddy(self.h, index.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_virtualbase_buddy(self.h, index.h), owned: true)
 
 proc QSqlTableModelmatch*(self: gen_qsqltablemodel_types.QSqlTableModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQSqlTableModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc QSqlTableModelspan*(self: gen_qsqltablemodel_types.QSqlTableModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSqlTableModel_virtualbase_span(self.h, index.h))
+  gen_qsize_types.QSize(h: fcQSqlTableModel_virtualbase_span(self.h, index.h), owned: true)
 
 proc QSqlTableModelmultiData*(self: gen_qsqltablemodel_types.QSqlTableModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void =
   fcQSqlTableModel_virtualbase_multiData(self.h, index.h, roleDataSpan.h)
@@ -875,7 +878,10 @@ proc fcQSqlTableModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
@@ -905,23 +911,26 @@ proc fcQSqlTableModel_vtable_callback_setTable(self: pointer, tableName: struct_
 proc fcQSqlTableModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
 
 proc fcQSqlTableModel_vtable_callback_data(self: pointer, idx: pointer, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   let slotval2 = role
   var virtualReturn = vtbl[].data(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
   var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
   virtualReturn
@@ -929,7 +938,7 @@ proc fcQSqlTableModel_vtable_callback_setData(self: pointer, index: pointer, val
 proc fcQSqlTableModel_vtable_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].clearItemData(self, slotval1)
   virtualReturn
 
@@ -940,7 +949,10 @@ proc fcQSqlTableModel_vtable_callback_headerData(self: pointer, section: cint, o
   let slotval2 = cint(orientation)
   let slotval3 = role
   var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_clear(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
@@ -979,7 +991,7 @@ proc fcQSqlTableModel_vtable_callback_setFilter(self: pointer, filter: struct_se
 proc fcQSqlTableModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
 
@@ -988,7 +1000,7 @@ proc fcQSqlTableModel_vtable_callback_removeColumns(self: pointer, column: cint,
   let self = QSqlTableModel(h: self)
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -997,7 +1009,7 @@ proc fcQSqlTableModel_vtable_callback_removeRows(self: pointer, row: cint, count
   let self = QSqlTableModel(h: self)
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1006,7 +1018,7 @@ proc fcQSqlTableModel_vtable_callback_insertRows(self: pointer, row: cint, count
   let self = QSqlTableModel(h: self)
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1044,14 +1056,14 @@ proc fcQSqlTableModel_vtable_callback_updateRowInTable(self: pointer, row: cint,
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
   let slotval1 = row
-  let slotval2 = gen_qsqlrecord_types.QSqlRecord(h: values)
+  let slotval2 = gen_qsqlrecord_types.QSqlRecord(h: values, owned: false)
   var virtualReturn = vtbl[].updateRowInTable(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQSqlTableModel_vtable_callback_insertRowIntoTable(self: pointer, values: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qsqlrecord_types.QSqlRecord(h: values)
+  let slotval1 = gen_qsqlrecord_types.QSqlRecord(h: values, owned: false)
   var virtualReturn = vtbl[].insertRowIntoTable(self, slotval1)
   virtualReturn
 
@@ -1081,14 +1093,17 @@ proc fcQSqlTableModel_vtable_callback_selectStatement(self: pointer): struct_sea
 proc fcQSqlTableModel_vtable_callback_indexInQuery(self: pointer, item: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: item)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: item, owned: false)
   var virtualReturn = vtbl[].indexInQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].columnCount(self, slotval1)
   virtualReturn
 
@@ -1097,7 +1112,7 @@ proc fcQSqlTableModel_vtable_callback_setHeaderData(self: pointer, section: cint
   let self = QSqlTableModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
   var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -1107,20 +1122,20 @@ proc fcQSqlTableModel_vtable_callback_insertColumns(self: pointer, column: cint,
   let self = QSqlTableModel(h: self)
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQSqlTableModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
 
 proc fcQSqlTableModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
 
@@ -1131,8 +1146,11 @@ proc fcQSqlTableModel_vtable_callback_roleNames(self: pointer): struct_seaqt_map
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_seaqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_seaqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
     var virtualReturn_v_copy = if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil
     if len(virtualReturn_v) > 0: copyMem(virtualReturn_v_copy, addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_seaqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
@@ -1150,41 +1168,53 @@ proc fcQSqlTableModel_vtable_callback_index(self: pointer, row: cint, column: ci
   let self = QSqlTableModel(h: self)
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc fcQSqlTableModel_vtable_callback_itemData(self: pointer, index: pointer): struct_seaqt_map {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemData(self, slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
-    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
+    virtualReturn_v.owned = false # TODO move?
+    let virtualReturn_v_h = virtualReturn_v.h
+    virtualReturn_v.h = nil
+    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_h
     virtualReturn_ctr += 1
 
   struct_seaqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
@@ -1192,7 +1222,7 @@ proc fcQSqlTableModel_vtable_callback_itemData(self: pointer, index: pointer): s
 proc fcQSqlTableModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_seaqt_map): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -1200,7 +1230,7 @@ proc fcQSqlTableModel_vtable_callback_setItemData(self: pointer, index: pointer,
   for i in 0..<vroles_mm.len:
     var vroles_entry_Key = vroles_Keys[i]
 
-    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
+    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i], owned: true)
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   c_free(vroles_mm.keys)
@@ -1228,20 +1258,23 @@ proc fcQSqlTableModel_vtable_callback_mimeData(self: pointer, indexes: struct_se
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = vtbl[].mimeData(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -1260,10 +1293,10 @@ proc fcQSqlTableModel_vtable_callback_supportedDragActions(self: pointer): cint 
 proc fcQSqlTableModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1271,10 +1304,10 @@ proc fcQSqlTableModel_vtable_callback_moveRows(self: pointer, sourceParent: poin
 proc fcQSqlTableModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1282,37 +1315,46 @@ proc fcQSqlTableModel_vtable_callback_moveColumns(self: pointer, sourceParent: p
 proc fcQSqlTableModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].buddy(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_seaqt_array {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = vtbl[].match(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQSqlTableModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].span(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_vtable_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   vtbl[].multiData(self, slotval1, slotval2)
 
 proc fcQSqlTableModel_vtable_callback_resetInternalData(self: pointer): void {.cdecl.} =
@@ -1323,46 +1365,46 @@ proc fcQSqlTableModel_vtable_callback_resetInternalData(self: pointer): void {.c
 proc fcQSqlTableModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQSqlTableModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQSqlTableModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQSqlTableModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQSqlTableModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQSqlTableModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQSqlTableModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlTableModelVTable](fcQSqlTableModel_vdata(self)[])
   let self = QSqlTableModel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSqlTableModel* {.inheritable.} = ref object of QSqlTableModel
@@ -1492,7 +1534,10 @@ method disconnectNotify*(self: VirtualQSqlTableModel, signal: gen_qmetaobject_ty
 proc fcQSqlTableModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
@@ -1518,28 +1563,31 @@ proc fcQSqlTableModel_method_callback_setTable(self: pointer, tableName: struct_
 
 proc fcQSqlTableModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
 proc fcQSqlTableModel_method_callback_data(self: pointer, idx: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   let slotval2 = role
   var virtualReturn = inst.data(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
   var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQSqlTableModel_method_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.clearItemData(slotval1)
   virtualReturn
 
@@ -1549,7 +1597,10 @@ proc fcQSqlTableModel_method_callback_headerData(self: pointer, section: cint, o
   let slotval2 = cint(orientation)
   let slotval3 = role
   var virtualReturn = inst.headerData(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_clear(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
@@ -1582,7 +1633,7 @@ proc fcQSqlTableModel_method_callback_setFilter(self: pointer, filter: struct_se
 
 proc fcQSqlTableModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
@@ -1590,7 +1641,7 @@ proc fcQSqlTableModel_method_callback_removeColumns(self: pointer, column: cint,
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1598,7 +1649,7 @@ proc fcQSqlTableModel_method_callback_removeRows(self: pointer, row: cint, count
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1606,7 +1657,7 @@ proc fcQSqlTableModel_method_callback_insertRows(self: pointer, row: cint, count
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1638,13 +1689,13 @@ proc fcQSqlTableModel_method_callback_revert(self: pointer): void {.cdecl.} =
 proc fcQSqlTableModel_method_callback_updateRowInTable(self: pointer, row: cint, values: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   let slotval1 = row
-  let slotval2 = gen_qsqlrecord_types.QSqlRecord(h: values)
+  let slotval2 = gen_qsqlrecord_types.QSqlRecord(h: values, owned: false)
   var virtualReturn = inst.updateRowInTable(slotval1, slotval2)
   virtualReturn
 
 proc fcQSqlTableModel_method_callback_insertRowIntoTable(self: pointer, values: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qsqlrecord_types.QSqlRecord(h: values)
+  let slotval1 = gen_qsqlrecord_types.QSqlRecord(h: values, owned: false)
   var virtualReturn = inst.insertRowIntoTable(slotval1)
   virtualReturn
 
@@ -1670,13 +1721,16 @@ proc fcQSqlTableModel_method_callback_selectStatement(self: pointer): struct_sea
 
 proc fcQSqlTableModel_method_callback_indexInQuery(self: pointer, item: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: item)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: item, owned: false)
   var virtualReturn = inst.indexInQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
@@ -1684,7 +1738,7 @@ proc fcQSqlTableModel_method_callback_setHeaderData(self: pointer, section: cint
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   let slotval1 = section
   let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
   var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -1693,18 +1747,18 @@ proc fcQSqlTableModel_method_callback_insertColumns(self: pointer, column: cint,
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQSqlTableModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   inst.fetchMore(slotval1)
 
 proc fcQSqlTableModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
@@ -1714,8 +1768,11 @@ proc fcQSqlTableModel_method_callback_roleNames(self: pointer): struct_seaqt_map
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_seaqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_seaqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
     var virtualReturn_v_copy = if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil
     if len(virtualReturn_v) > 0: copyMem(virtualReturn_v_copy, addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_seaqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
@@ -1731,45 +1788,57 @@ proc fcQSqlTableModel_method_callback_index(self: pointer, row: cint, column: ci
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.index(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc fcQSqlTableModel_method_callback_itemData(self: pointer, index: pointer): struct_seaqt_map {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemData(slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
-    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
+    virtualReturn_v.owned = false # TODO move?
+    let virtualReturn_v_h = virtualReturn_v.h
+    virtualReturn_v.h = nil
+    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_h
     virtualReturn_ctr += 1
 
   struct_seaqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
 proc fcQSqlTableModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_seaqt_map): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -1777,7 +1846,7 @@ proc fcQSqlTableModel_method_callback_setItemData(self: pointer, index: pointer,
   for i in 0..<vroles_mm.len:
     var vroles_entry_Key = vroles_Keys[i]
 
-    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
+    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i], owned: true)
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   c_free(vroles_mm.keys)
@@ -1803,19 +1872,22 @@ proc fcQSqlTableModel_method_callback_mimeData(self: pointer, indexes: struct_se
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = inst.mimeData(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -1831,54 +1903,63 @@ proc fcQSqlTableModel_method_callback_supportedDragActions(self: pointer): cint 
 
 proc fcQSqlTableModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc fcQSqlTableModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc fcQSqlTableModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_seaqt_array {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = inst.match(slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQSqlTableModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlTableModel_method_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   inst.multiData(slotval1, slotval2)
 
 proc fcQSqlTableModel_method_callback_resetInternalData(self: pointer): void {.cdecl.} =
@@ -1887,40 +1968,40 @@ proc fcQSqlTableModel_method_callback_resetInternalData(self: pointer): void {.c
 
 proc fcQSqlTableModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQSqlTableModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQSqlTableModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQSqlTableModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQSqlTableModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQSqlTableModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQSqlTableModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlTableModel](fcQSqlTableModel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1931,7 +2012,7 @@ proc setQuery*(self: gen_qsqltablemodel_types.QSqlTableModel, query: gen_qsqlque
   fcQSqlTableModel_protectedbase_setQuery(self.h, query.h)
 
 proc primaryValues*(self: gen_qsqltablemodel_types.QSqlTableModel, row: cint): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_protectedbase_primaryValues(self.h, row))
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlTableModel_protectedbase_primaryValues(self.h, row), owned: true)
 
 proc beginInsertRows*(self: gen_qsqltablemodel_types.QSqlTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQSqlTableModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
@@ -1967,7 +2048,7 @@ proc setLastError*(self: gen_qsqltablemodel_types.QSqlTableModel, error: gen_qsq
   fcQSqlTableModel_protectedbase_setLastError(self.h, error.h)
 
 proc createIndex*(self: gen_qsqltablemodel_types.QSqlTableModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_protectedbase_createIndex(self.h, row, column))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSqlTableModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qsqltablemodel_types.QSqlTableModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
@@ -2010,12 +2091,12 @@ proc persistentIndexList*(self: gen_qsqltablemodel_types.QSqlTableModel): seq[ge
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qsqltablemodel_types.QSqlTableModel): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSqlTableModel_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSqlTableModel_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsqltablemodel_types.QSqlTableModel): cint =
   fcQSqlTableModel_protectedbase_senderSignalIndex(self.h)
@@ -2153,7 +2234,7 @@ proc create*(T: type gen_qsqltablemodel_types.QSqlTableModel,
     vtbl[].vtbl.connectNotify = fcQSqlTableModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSqlTableModel_vtable_callback_disconnectNotify
-  let tmp = gen_qsqltablemodel_types.QSqlTableModel(h: fcQSqlTableModel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsqltablemodel_types.QSqlTableModel(h: fcQSqlTableModel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSqlTableModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsqltablemodel_types.QSqlTableModel,
@@ -2284,7 +2365,7 @@ proc create*(T: type gen_qsqltablemodel_types.QSqlTableModel,
     vtbl[].vtbl.connectNotify = fcQSqlTableModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSqlTableModel_vtable_callback_disconnectNotify
-  let tmp = gen_qsqltablemodel_types.QSqlTableModel(h: fcQSqlTableModel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsqltablemodel_types.QSqlTableModel(h: fcQSqlTableModel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSqlTableModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsqltablemodel_types.QSqlTableModel,
@@ -2415,13 +2496,14 @@ proc create*(T: type gen_qsqltablemodel_types.QSqlTableModel,
     vtbl[].vtbl.connectNotify = fcQSqlTableModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSqlTableModel_vtable_callback_disconnectNotify
-  let tmp = gen_qsqltablemodel_types.QSqlTableModel(h: fcQSqlTableModel_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, db.h))
+  let tmp = gen_qsqltablemodel_types.QSqlTableModel(h: fcQSqlTableModel_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, db.h), owned: true)
   fcQSqlTableModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSqlTableModel_mvtbl = cQSqlTableModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSqlTableModel()[])](self.fcQSqlTableModel_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSqlTableModel_method_callback_metaObject,
   metacast: fcQSqlTableModel_method_callback_metacast,
@@ -2509,5 +2591,3 @@ proc create*(T: type gen_qsqltablemodel_types.QSqlTableModel,
 
 proc staticMetaObject*(_: type gen_qsqltablemodel_types.QSqlTableModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSqlTableModel_staticMetaObject())
-proc delete*(self: gen_qsqltablemodel_types.QSqlTableModel) =
-  fcQSqlTableModel_delete(self.h)

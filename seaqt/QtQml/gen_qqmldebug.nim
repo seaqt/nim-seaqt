@@ -64,7 +64,6 @@ proc fcQQmlDebuggingEnabler_connectToLocalDebugger2(socketFileName: struct_seaqt
 proc fcQQmlDebuggingEnabler_startDebugConnector2(pluginName: struct_seaqt_string, configuration: struct_seaqt_map): bool {.importc: "QQmlDebuggingEnabler_startDebugConnector2".}
 proc fcQQmlDebuggingEnabler_new(): ptr cQQmlDebuggingEnabler {.importc: "QQmlDebuggingEnabler_new".}
 proc fcQQmlDebuggingEnabler_new2(printWarning: bool): ptr cQQmlDebuggingEnabler {.importc: "QQmlDebuggingEnabler_new2".}
-proc fcQQmlDebuggingEnabler_delete(self: pointer) {.importc: "QQmlDebuggingEnabler_delete".}
 
 proc enableDebugging*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, printWarning: bool): void =
   fcQQmlDebuggingEnabler_enableDebugging(printWarning)
@@ -146,19 +145,20 @@ proc startDebugConnector*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, plug
   var configuration_Keys_CArray = newSeq[struct_seaqt_string](len(configuration))
   var configuration_Values_CArray = newSeq[pointer](len(configuration))
   var configuration_ctr = 0
-  for configuration_k, configuration_v in configuration:
+  for configuration_k in configuration.keys():
     configuration_Keys_CArray[configuration_ctr] = struct_seaqt_string(data: if len(configuration_k) > 0: addr configuration_k[0] else: nil, len: csize_t(len(configuration_k)))
+    configuration_ctr += 1
+  configuration_ctr = 0
+  for configuration_v in configuration.values():
     configuration_Values_CArray[configuration_ctr] = configuration_v.h
     configuration_ctr += 1
 
   fcQQmlDebuggingEnabler_startDebugConnector2(struct_seaqt_string(data: if len(pluginName) > 0: addr pluginName[0] else: nil, len: csize_t(len(pluginName))), struct_seaqt_map(len: csize_t(len(configuration)),keys: if len(configuration) == 0: nil else: addr(configuration_Keys_CArray[0]), values: if len(configuration) == 0: nil else: addr(configuration_Values_CArray[0]),))
 
 proc create*(T: type gen_qqmldebug_types.QQmlDebuggingEnabler): gen_qqmldebug_types.QQmlDebuggingEnabler =
-  let tmp = gen_qqmldebug_types.QQmlDebuggingEnabler(h: fcQQmlDebuggingEnabler_new())
+  let tmp = gen_qqmldebug_types.QQmlDebuggingEnabler(h: fcQQmlDebuggingEnabler_new(), owned: true)
   tmp
 proc create*(T: type gen_qqmldebug_types.QQmlDebuggingEnabler,
     printWarning: bool): gen_qqmldebug_types.QQmlDebuggingEnabler =
-  let tmp = gen_qqmldebug_types.QQmlDebuggingEnabler(h: fcQQmlDebuggingEnabler_new2(printWarning))
+  let tmp = gen_qqmldebug_types.QQmlDebuggingEnabler(h: fcQQmlDebuggingEnabler_new2(printWarning), owned: true)
   tmp
-proc delete*(self: gen_qqmldebug_types.QQmlDebuggingEnabler) =
-  fcQQmlDebuggingEnabler_delete(self.h)

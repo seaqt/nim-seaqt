@@ -40,17 +40,13 @@ export gen_qpropertyprivate_types
 type cQUntypedPropertyData*{.exportc: "QUntypedPropertyData", incompleteStruct.} = object
 type cQPropertyProxyBindingData*{.exportc: "QPropertyProxyBindingData", incompleteStruct.} = object
 
-proc fcQUntypedPropertyData_delete(self: pointer) {.importc: "QUntypedPropertyData_delete".}
 proc fcQPropertyProxyBindingData_dPtr(self: pointer): uint {.importc: "QPropertyProxyBindingData_dPtr".}
 proc fcQPropertyProxyBindingData_setDPtr(self: pointer, d_ptr: uint): void {.importc: "QPropertyProxyBindingData_setDPtr".}
 proc fcQPropertyProxyBindingData_originalBindingData(self: pointer): pointer {.importc: "QPropertyProxyBindingData_originalBindingData".}
 proc fcQPropertyProxyBindingData_setOriginalBindingData(self: pointer, originalBindingData: pointer): void {.importc: "QPropertyProxyBindingData_setOriginalBindingData".}
 proc fcQPropertyProxyBindingData_propertyData(self: pointer): pointer {.importc: "QPropertyProxyBindingData_propertyData".}
 proc fcQPropertyProxyBindingData_setPropertyData(self: pointer, propertyData: pointer): void {.importc: "QPropertyProxyBindingData_setPropertyData".}
-proc fcQPropertyProxyBindingData_delete(self: pointer) {.importc: "QPropertyProxyBindingData_delete".}
 
-proc delete*(self: gen_qpropertyprivate_types.QUntypedPropertyData) =
-  fcQUntypedPropertyData_delete(self.h)
 proc dPtr*(self: gen_qpropertyprivate_types.QPropertyProxyBindingData): uint =
   fcQPropertyProxyBindingData_dPtr(self.h)
 
@@ -64,10 +60,8 @@ proc setOriginalBindingData*(self: gen_qpropertyprivate_types.QPropertyProxyBind
   fcQPropertyProxyBindingData_setOriginalBindingData(self.h, originalBindingData)
 
 proc propertyData*(self: gen_qpropertyprivate_types.QPropertyProxyBindingData): gen_qpropertyprivate_types.QUntypedPropertyData =
-  gen_qpropertyprivate_types.QUntypedPropertyData(h: fcQPropertyProxyBindingData_propertyData(self.h))
+  gen_qpropertyprivate_types.QUntypedPropertyData(h: fcQPropertyProxyBindingData_propertyData(self.h), owned: false)
 
 proc setPropertyData*(self: gen_qpropertyprivate_types.QPropertyProxyBindingData, propertyData: gen_qpropertyprivate_types.QUntypedPropertyData): void =
   fcQPropertyProxyBindingData_setPropertyData(self.h, propertyData.h)
 
-proc delete*(self: gen_qpropertyprivate_types.QPropertyProxyBindingData) =
-  fcQPropertyProxyBindingData_delete(self.h)

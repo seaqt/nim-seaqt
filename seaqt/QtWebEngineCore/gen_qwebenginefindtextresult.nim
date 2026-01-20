@@ -49,7 +49,6 @@ proc fcQWebEngineFindTextResult_operatorAssign(self: pointer, other: pointer): v
 proc fcQWebEngineFindTextResult_new(): ptr cQWebEngineFindTextResult {.importc: "QWebEngineFindTextResult_new".}
 proc fcQWebEngineFindTextResult_new2(other: pointer): ptr cQWebEngineFindTextResult {.importc: "QWebEngineFindTextResult_new2".}
 proc fcQWebEngineFindTextResult_staticMetaObject(): pointer {.importc: "QWebEngineFindTextResult_staticMetaObject".}
-proc fcQWebEngineFindTextResult_delete(self: pointer) {.importc: "QWebEngineFindTextResult_delete".}
 
 proc numberOfMatches*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): cint =
   fcQWebEngineFindTextResult_numberOfMatches(self.h)
@@ -61,13 +60,11 @@ proc operatorAssign*(self: gen_qwebenginefindtextresult_types.QWebEngineFindText
   fcQWebEngineFindTextResult_operatorAssign(self.h, other.h)
 
 proc create*(T: type gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): gen_qwebenginefindtextresult_types.QWebEngineFindTextResult =
-  let tmp = gen_qwebenginefindtextresult_types.QWebEngineFindTextResult(h: fcQWebEngineFindTextResult_new())
+  let tmp = gen_qwebenginefindtextresult_types.QWebEngineFindTextResult(h: fcQWebEngineFindTextResult_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebenginefindtextresult_types.QWebEngineFindTextResult,
     other: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): gen_qwebenginefindtextresult_types.QWebEngineFindTextResult =
-  let tmp = gen_qwebenginefindtextresult_types.QWebEngineFindTextResult(h: fcQWebEngineFindTextResult_new2(other.h))
+  let tmp = gen_qwebenginefindtextresult_types.QWebEngineFindTextResult(h: fcQWebEngineFindTextResult_new2(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebenginefindtextresult_types.QWebEngineFindTextResult): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineFindTextResult_staticMetaObject())
-proc delete*(self: gen_qwebenginefindtextresult_types.QWebEngineFindTextResult) =
-  fcQWebEngineFindTextResult_delete(self.h)

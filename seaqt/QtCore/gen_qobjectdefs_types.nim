@@ -1,4 +1,4 @@
-type QMethodRawArguments* {.inheritable, pure.} = object
+type QMethodRawArguments* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QMethodRawArguments) =
   wasMoved(self)
   fcQMethodRawArguments_delete(h)
 
-type QGenericArgument* {.inheritable, pure.} = object
+type QGenericArgument* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -50,7 +50,7 @@ proc `=sink`(dest: var QGenericReturnArgument, source: QGenericReturnArgument) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QMetaObject* {.inheritable, pure.} = object
+type QMetaObject* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -70,7 +70,7 @@ proc delete*(self: sink QMetaObject) =
   wasMoved(self)
   fcQMetaObject_delete(h)
 
-type QMetaObjectConnection* {.inheritable, pure.} = object
+type QMetaObjectConnection* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -90,7 +90,7 @@ proc delete*(self: sink QMetaObjectConnection) =
   wasMoved(self)
   fcQMetaObjectConnection_delete(h)
 
-type QMetaObjectSuperData* {.inheritable, pure.} = object
+type QMetaObjectSuperData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -110,7 +110,7 @@ proc delete*(self: sink QMetaObjectSuperData) =
   wasMoved(self)
   fcQMetaObjectSuperData_delete(h)
 
-type QMetaObjectData* {.inheritable, pure.} = object
+type QMetaObjectData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
