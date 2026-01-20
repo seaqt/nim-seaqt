@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediametadata
+export gen_qmediametadata

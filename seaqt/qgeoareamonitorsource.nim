@@ -1,0 +1,2 @@
+import ./QtPositioning/gen_qgeoareamonitorsource
+export gen_qgeoareamonitorsource

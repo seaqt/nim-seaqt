@@ -1,0 +1,2 @@
+import ./QtPositioning/gen_qnmeasatelliteinfosource
+export gen_qnmeasatelliteinfosource

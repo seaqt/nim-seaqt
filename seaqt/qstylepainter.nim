@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qstylepainter
+export gen_qstylepainter

@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlpropertymap
+export gen_qqmlpropertymap

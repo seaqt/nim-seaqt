@@ -1,0 +1,2 @@
+import ./QtCore/gen_qtransposeproxymodel
+export gen_qtransposeproxymodel
