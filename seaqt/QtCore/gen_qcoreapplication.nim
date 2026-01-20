@@ -753,7 +753,10 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
     vtbl: ref QCoreApplicationVTable = nil): gen_qcoreapplication_types.QCoreApplication =
   # Convert []string to long-lived int& argc, char** argv, never call free()
   var args2 = @[getAppFilename()]
-  args2.add commandLineParams()
+  try:
+    args2.add commandLineParams()
+  except OSError:
+    echo getCurrentExceptionMsg()
   var argv: cStringArray = allocCstringArray(args2)
   var argc {.threadvar.}: cint
   argc = args2.len.cint
@@ -792,7 +795,10 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
     vtbl: ref QCoreApplicationVTable = nil): gen_qcoreapplication_types.QCoreApplication =
   # Convert []string to long-lived int& argc, char** argv, never call free()
   var args2 = @[getAppFilename()]
-  args2.add commandLineParams()
+  try:
+    args2.add commandLineParams()
+  except OSError:
+    echo getCurrentExceptionMsg()
   var argv: cStringArray = allocCstringArray(args2)
   var argc {.threadvar.}: cint
   argc = args2.len.cint
@@ -848,7 +854,10 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
     inst: VirtualQCoreApplication) =
   # Convert []string to long-lived int& argc, char** argv, never call free()
   var args2 = @[getAppFilename()]
-  args2.add commandLineParams()
+  try:
+    args2.add commandLineParams()
+  except OSError:
+    echo getCurrentExceptionMsg()
   var argv: cStringArray = allocCstringArray(args2)
   var argc {.threadvar.}: cint
   argc = args2.len.cint
@@ -862,7 +871,10 @@ proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
     inst: VirtualQCoreApplication) =
   # Convert []string to long-lived int& argc, char** argv, never call free()
   var args2 = @[getAppFilename()]
-  args2.add commandLineParams()
+  try:
+    args2.add commandLineParams()
+  except OSError:
+    echo getCurrentExceptionMsg()
   var argv: cStringArray = allocCstringArray(args2)
   var argc {.threadvar.}: cint
   argc = args2.len.cint
