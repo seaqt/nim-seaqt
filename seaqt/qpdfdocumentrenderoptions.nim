@@ -1,0 +1,2 @@
+import ./QtPdf/gen_qpdfdocumentrenderoptions
+export gen_qpdfdocumentrenderoptions

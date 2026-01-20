@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgtextureprovider
+export gen_qsgtextureprovider

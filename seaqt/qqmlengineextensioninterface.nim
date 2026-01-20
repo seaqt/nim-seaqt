@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlextensioninterface
+export gen_qqmlextensioninterface

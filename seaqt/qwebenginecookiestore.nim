@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginecookiestore
+export gen_qwebenginecookiestore

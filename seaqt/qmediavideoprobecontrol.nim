@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediavideoprobecontrol
+export gen_qmediavideoprobecontrol

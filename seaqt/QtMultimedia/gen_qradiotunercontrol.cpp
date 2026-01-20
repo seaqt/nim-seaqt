@@ -1,0 +1,422 @@
+#include <QMediaControl>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QPair>
+#include <QRadioTunerControl>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qradiotunercontrol.h>
+#include "gen_qradiotunercontrol.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QRadioTunerControl_virtbase(QRadioTunerControl* src, QMediaControl** outptr_QMediaControl) {
+	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
+}
+
+QMetaObject* QRadioTunerControl_metaObject(const QRadioTunerControl* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QRadioTunerControl_metacast(QRadioTunerControl* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QRadioTunerControl_metacall(QRadioTunerControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QRadioTunerControl_tr(const char* s) {
+	QString _ret = QRadioTunerControl::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioTunerControl_trUtf8(const char* s) {
+	QString _ret = QRadioTunerControl::trUtf8(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QRadioTunerControl_state(const QRadioTunerControl* self) {
+	QRadioTuner::State _ret = self->state();
+	return static_cast<int>(_ret);
+}
+
+int QRadioTunerControl_band(const QRadioTunerControl* self) {
+	QRadioTuner::Band _ret = self->band();
+	return static_cast<int>(_ret);
+}
+
+void QRadioTunerControl_setBand(QRadioTunerControl* self, int b) {
+	self->setBand(static_cast<QRadioTuner::Band>(b));
+}
+
+bool QRadioTunerControl_isBandSupported(const QRadioTunerControl* self, int b) {
+	return self->isBandSupported(static_cast<QRadioTuner::Band>(b));
+}
+
+int QRadioTunerControl_frequency(const QRadioTunerControl* self) {
+	return self->frequency();
+}
+
+int QRadioTunerControl_frequencyStep(const QRadioTunerControl* self, int b) {
+	return self->frequencyStep(static_cast<QRadioTuner::Band>(b));
+}
+
+struct seaqt_map /* tuple of int and int */  QRadioTunerControl_frequencyRange(const QRadioTunerControl* self, int b) {
+	QPair<int, int> _ret = self->frequencyRange(static_cast<QRadioTuner::Band>(b));
+	// Convert QPair<> from C++ memory to manually-managed C memory
+	int* _first_arr = static_cast<int*>(malloc(sizeof(int)));
+	int* _second_arr = static_cast<int*>(malloc(sizeof(int)));
+	_first_arr[0] = _ret.first;
+	_second_arr[0] = _ret.second;
+	struct seaqt_map _out;
+	_out.len = 1;
+	_out.keys = static_cast<void*>(_first_arr);
+	_out.values = static_cast<void*>(_second_arr);
+	return _out;
+}
+
+void QRadioTunerControl_setFrequency(QRadioTunerControl* self, int frequency) {
+	self->setFrequency(static_cast<int>(frequency));
+}
+
+bool QRadioTunerControl_isStereo(const QRadioTunerControl* self) {
+	return self->isStereo();
+}
+
+int QRadioTunerControl_stereoMode(const QRadioTunerControl* self) {
+	QRadioTuner::StereoMode _ret = self->stereoMode();
+	return static_cast<int>(_ret);
+}
+
+void QRadioTunerControl_setStereoMode(QRadioTunerControl* self, int mode) {
+	self->setStereoMode(static_cast<QRadioTuner::StereoMode>(mode));
+}
+
+int QRadioTunerControl_signalStrength(const QRadioTunerControl* self) {
+	return self->signalStrength();
+}
+
+int QRadioTunerControl_volume(const QRadioTunerControl* self) {
+	return self->volume();
+}
+
+void QRadioTunerControl_setVolume(QRadioTunerControl* self, int volume) {
+	self->setVolume(static_cast<int>(volume));
+}
+
+bool QRadioTunerControl_isMuted(const QRadioTunerControl* self) {
+	return self->isMuted();
+}
+
+void QRadioTunerControl_setMuted(QRadioTunerControl* self, bool muted) {
+	self->setMuted(muted);
+}
+
+bool QRadioTunerControl_isSearching(const QRadioTunerControl* self) {
+	return self->isSearching();
+}
+
+bool QRadioTunerControl_isAntennaConnected(const QRadioTunerControl* self) {
+	return self->isAntennaConnected();
+}
+
+void QRadioTunerControl_searchForward(QRadioTunerControl* self) {
+	self->searchForward();
+}
+
+void QRadioTunerControl_searchBackward(QRadioTunerControl* self) {
+	self->searchBackward();
+}
+
+void QRadioTunerControl_searchAllStations(QRadioTunerControl* self, int searchMode) {
+	self->searchAllStations(static_cast<QRadioTuner::SearchMode>(searchMode));
+}
+
+void QRadioTunerControl_cancelSearch(QRadioTunerControl* self) {
+	self->cancelSearch();
+}
+
+void QRadioTunerControl_start(QRadioTunerControl* self) {
+	self->start();
+}
+
+void QRadioTunerControl_stop(QRadioTunerControl* self) {
+	self->stop();
+}
+
+int QRadioTunerControl_error(const QRadioTunerControl* self) {
+	QRadioTuner::Error _ret = self->error();
+	return static_cast<int>(_ret);
+}
+
+struct seaqt_string QRadioTunerControl_errorString(const QRadioTunerControl* self) {
+	QString _ret = self->errorString();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QRadioTunerControl_stateChanged(QRadioTunerControl* self, int state) {
+	self->stateChanged(static_cast<QRadioTuner::State>(state));
+}
+
+void QRadioTunerControl_connect_stateChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QRadioTuner::State state) {
+			QRadioTuner::State state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::State)>(&QRadioTunerControl::stateChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_bandChanged(QRadioTunerControl* self, int band) {
+	self->bandChanged(static_cast<QRadioTuner::Band>(band));
+}
+
+void QRadioTunerControl_connect_bandChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QRadioTuner::Band band) {
+			QRadioTuner::Band band_ret = band;
+			int sigval1 = static_cast<int>(band_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::Band)>(&QRadioTunerControl::bandChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_frequencyChanged(QRadioTunerControl* self, int frequency) {
+	self->frequencyChanged(static_cast<int>(frequency));
+}
+
+void QRadioTunerControl_connect_frequencyChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int frequency) {
+			int sigval1 = frequency;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::frequencyChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_stereoStatusChanged(QRadioTunerControl* self, bool stereo) {
+	self->stereoStatusChanged(stereo);
+}
+
+void QRadioTunerControl_connect_stereoStatusChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool stereo) {
+			bool sigval1 = stereo;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::stereoStatusChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_searchingChanged(QRadioTunerControl* self, bool searching) {
+	self->searchingChanged(searching);
+}
+
+void QRadioTunerControl_connect_searchingChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool searching) {
+			bool sigval1 = searching;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::searchingChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_signalStrengthChanged(QRadioTunerControl* self, int signalStrength) {
+	self->signalStrengthChanged(static_cast<int>(signalStrength));
+}
+
+void QRadioTunerControl_connect_signalStrengthChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int signalStrength) {
+			int sigval1 = signalStrength;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::signalStrengthChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_volumeChanged(QRadioTunerControl* self, int volume) {
+	self->volumeChanged(static_cast<int>(volume));
+}
+
+void QRadioTunerControl_connect_volumeChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int volume) {
+			int sigval1 = volume;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::volumeChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_mutedChanged(QRadioTunerControl* self, bool muted) {
+	self->mutedChanged(muted);
+}
+
+void QRadioTunerControl_connect_mutedChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool muted) {
+			bool sigval1 = muted;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::mutedChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_errorWithErr(QRadioTunerControl* self, int err) {
+	self->error(static_cast<QRadioTuner::Error>(err));
+}
+
+void QRadioTunerControl_connect_errorWithErr(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QRadioTuner::Error err) {
+			QRadioTuner::Error err_ret = err;
+			int sigval1 = static_cast<int>(err_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::Error)>(&QRadioTunerControl::error), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_stationFound(QRadioTunerControl* self, int frequency, struct seaqt_string stationId) {
+	QString stationId_QString = QString::fromUtf8(stationId.data, stationId.len);
+	self->stationFound(static_cast<int>(frequency), stationId_QString);
+}
+
+void QRadioTunerControl_connect_stationFound(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, struct seaqt_string);
+		void operator()(int frequency, QString stationId) {
+			int sigval1 = frequency;
+			QString stationId_ret = stationId;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray stationId_b = stationId_ret.toUtf8();
+			struct seaqt_string stationId_ms;
+			stationId_ms.len = stationId_b.length();
+			stationId_ms.data = static_cast<char*>(malloc(stationId_ms.len));
+			memcpy(stationId_ms.data, stationId_b.data(), stationId_ms.len);
+			struct seaqt_string sigval2 = stationId_ms;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int, QString)>(&QRadioTunerControl::stationFound), self, local_caller{slot, callback, release});
+}
+
+void QRadioTunerControl_antennaConnectedChanged(QRadioTunerControl* self, bool connectionStatus) {
+	self->antennaConnectedChanged(connectionStatus);
+}
+
+void QRadioTunerControl_connect_antennaConnectedChanged(QRadioTunerControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool connectionStatus) {
+			bool sigval1 = connectionStatus;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::antennaConnectedChanged), self, local_caller{slot, callback, release});
+}
+
+struct seaqt_string QRadioTunerControl_tr2(const char* s, const char* c) {
+	QString _ret = QRadioTunerControl::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioTunerControl_tr3(const char* s, const char* c, int n) {
+	QString _ret = QRadioTunerControl::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioTunerControl_trUtf82(const char* s, const char* c) {
+	QString _ret = QRadioTunerControl::trUtf8(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioTunerControl_trUtf83(const char* s, const char* c, int n) {
+	QString _ret = QRadioTunerControl::trUtf8(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QRadioTunerControl_staticMetaObject() { return &QRadioTunerControl::staticMetaObject; }
+void QRadioTunerControl_delete(QRadioTunerControl* self) {
+	delete self;
+}
+

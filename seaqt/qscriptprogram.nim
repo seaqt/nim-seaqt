@@ -1,0 +1,2 @@
+import ./QtScript/gen_qscriptprogram
+export gen_qscriptprogram

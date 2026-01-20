@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qmouseeventtransition
+export gen_qmouseeventtransition

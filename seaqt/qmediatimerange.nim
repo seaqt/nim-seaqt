@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediatimerange
+export gen_qmediatimerange

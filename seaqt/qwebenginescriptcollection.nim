@@ -1,0 +1,2 @@
+import ./QtWebEngineWidgets/gen_qwebenginescriptcollection
+export gen_qwebenginescriptcollection

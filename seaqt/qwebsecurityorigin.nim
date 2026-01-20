@@ -1,0 +1,2 @@
+import ./QtWebKit/gen_qwebsecurityorigin
+export gen_qwebsecurityorigin

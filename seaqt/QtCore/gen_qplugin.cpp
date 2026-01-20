@@ -1,0 +1,23 @@
+#include <QJsonObject>
+#include <QStaticPlugin>
+#include <qplugin.h>
+#include "gen_qplugin.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QJsonObject* QStaticPlugin_metaData(const QStaticPlugin* self) {
+	return new QJsonObject(self->metaData());
+}
+
+void QStaticPlugin_delete(QStaticPlugin* self) {
+	delete self;
+}
+

@@ -1,0 +1,2 @@
+import ./QtWebKit/gen_qwebkitplatformplugin
+export gen_qwebkitplatformplugin

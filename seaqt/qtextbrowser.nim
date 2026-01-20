@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qtextbrowser
+export gen_qtextbrowser

@@ -1,0 +1,142 @@
+#include <QMediaControl>
+#include <QMediaVideoProbeControl>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QVideoFrame>
+#include <qmediavideoprobecontrol.h>
+#include "gen_qmediavideoprobecontrol.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QMediaVideoProbeControl_virtbase(QMediaVideoProbeControl* src, QMediaControl** outptr_QMediaControl) {
+	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
+}
+
+QMetaObject* QMediaVideoProbeControl_metaObject(const QMediaVideoProbeControl* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QMediaVideoProbeControl_metacast(QMediaVideoProbeControl* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QMediaVideoProbeControl_metacall(QMediaVideoProbeControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QMediaVideoProbeControl_tr(const char* s) {
+	QString _ret = QMediaVideoProbeControl::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QMediaVideoProbeControl_trUtf8(const char* s) {
+	QString _ret = QMediaVideoProbeControl::trUtf8(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QMediaVideoProbeControl_videoFrameProbed(QMediaVideoProbeControl* self, QVideoFrame* frame) {
+	self->videoFrameProbed(*frame);
+}
+
+void QMediaVideoProbeControl_connect_videoFrameProbed(QMediaVideoProbeControl* self, intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QVideoFrame*);
+		void operator()(const QVideoFrame& frame) {
+			const QVideoFrame& frame_ret = frame;
+			// Cast returned reference into pointer
+			QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)(const QVideoFrame&)>(&QMediaVideoProbeControl::videoFrameProbed), self, local_caller{slot, callback, release});
+}
+
+void QMediaVideoProbeControl_flush(QMediaVideoProbeControl* self) {
+	self->flush();
+}
+
+void QMediaVideoProbeControl_connect_flush(QMediaVideoProbeControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)()>(&QMediaVideoProbeControl::flush), self, local_caller{slot, callback, release});
+}
+
+struct seaqt_string QMediaVideoProbeControl_tr2(const char* s, const char* c) {
+	QString _ret = QMediaVideoProbeControl::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QMediaVideoProbeControl_tr3(const char* s, const char* c, int n) {
+	QString _ret = QMediaVideoProbeControl::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QMediaVideoProbeControl_trUtf82(const char* s, const char* c) {
+	QString _ret = QMediaVideoProbeControl::trUtf8(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QMediaVideoProbeControl_trUtf83(const char* s, const char* c, int n) {
+	QString _ret = QMediaVideoProbeControl::trUtf8(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QMediaVideoProbeControl_staticMetaObject() { return &QMediaVideoProbeControl::staticMetaObject; }
+void QMediaVideoProbeControl_delete(QMediaVideoProbeControl* self) {
+	delete self;
+}
+

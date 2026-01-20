@@ -1,0 +1,44 @@
+#pragma once
+#ifndef SEAQT_QTGUI_GEN_QTOUCHDEVICE_H
+#define SEAQT_QTGUI_GEN_QTOUCHDEVICE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QMetaObject;
+class QTouchDevice;
+#else
+typedef struct QMetaObject QMetaObject;
+typedef struct QTouchDevice QTouchDevice;
+#endif
+
+QTouchDevice* QTouchDevice_new();
+
+struct seaqt_array /* of QTouchDevice* */  QTouchDevice_devices();
+struct seaqt_string QTouchDevice_name(const QTouchDevice* self);
+int QTouchDevice_type(const QTouchDevice* self);
+int QTouchDevice_capabilities(const QTouchDevice* self);
+int QTouchDevice_maximumTouchPoints(const QTouchDevice* self);
+void QTouchDevice_setName(QTouchDevice* self, struct seaqt_string name);
+void QTouchDevice_setType(QTouchDevice* self, int devType);
+void QTouchDevice_setCapabilities(QTouchDevice* self, int caps);
+void QTouchDevice_setMaximumTouchPoints(QTouchDevice* self, int max);
+
+const QMetaObject* QTouchDevice_staticMetaObject();
+void QTouchDevice_delete(QTouchDevice* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

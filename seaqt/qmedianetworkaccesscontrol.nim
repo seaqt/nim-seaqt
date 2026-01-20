@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmedianetworkaccesscontrol
+export gen_qmedianetworkaccesscontrol

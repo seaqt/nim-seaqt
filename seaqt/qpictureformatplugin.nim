@@ -1,0 +1,2 @@
+import ./QtGui/gen_qpictureformatplugin
+export gen_qpictureformatplugin

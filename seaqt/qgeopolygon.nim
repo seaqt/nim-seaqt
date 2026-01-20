@@ -1,0 +1,2 @@
+import ./QtPositioning/gen_qgeopolygon
+export gen_qgeopolygon

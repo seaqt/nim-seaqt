@@ -1,0 +1,2 @@
+import ./QtGui/gen_qtextdocumentfragment
+export gen_qtextdocumentfragment

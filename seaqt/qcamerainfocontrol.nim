@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcamerainfocontrol
+export gen_qcamerainfocontrol

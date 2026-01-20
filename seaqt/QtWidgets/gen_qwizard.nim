@@ -1,0 +1,3914 @@
+import ./qtwidgets_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+{.compile("gen_qwizard.cpp", QtWidgetsCFlags).}
+
+
+type QWizardWizardButtonEnum* = distinct cint
+template BackButton*(_: type QWizardWizardButtonEnum): untyped = 0
+template NextButton*(_: type QWizardWizardButtonEnum): untyped = 1
+template CommitButton*(_: type QWizardWizardButtonEnum): untyped = 2
+template FinishButton*(_: type QWizardWizardButtonEnum): untyped = 3
+template CancelButton*(_: type QWizardWizardButtonEnum): untyped = 4
+template HelpButton*(_: type QWizardWizardButtonEnum): untyped = 5
+template CustomButton1*(_: type QWizardWizardButtonEnum): untyped = 6
+template CustomButton2*(_: type QWizardWizardButtonEnum): untyped = 7
+template CustomButton3*(_: type QWizardWizardButtonEnum): untyped = 8
+template Stretch*(_: type QWizardWizardButtonEnum): untyped = 9
+template NoButton*(_: type QWizardWizardButtonEnum): untyped = -1
+template NStandardButtons*(_: type QWizardWizardButtonEnum): untyped = 6
+template NButtons*(_: type QWizardWizardButtonEnum): untyped = 9
+
+
+type QWizardWizardPixmapEnum* = distinct cint
+template WatermarkPixmap*(_: type QWizardWizardPixmapEnum): untyped = 0
+template LogoPixmap*(_: type QWizardWizardPixmapEnum): untyped = 1
+template BannerPixmap*(_: type QWizardWizardPixmapEnum): untyped = 2
+template BackgroundPixmap*(_: type QWizardWizardPixmapEnum): untyped = 3
+template NPixmaps*(_: type QWizardWizardPixmapEnum): untyped = 4
+
+
+type QWizardWizardStyleEnum* = distinct cint
+template ClassicStyle*(_: type QWizardWizardStyleEnum): untyped = 0
+template ModernStyle*(_: type QWizardWizardStyleEnum): untyped = 1
+template MacStyle*(_: type QWizardWizardStyleEnum): untyped = 2
+template AeroStyle*(_: type QWizardWizardStyleEnum): untyped = 3
+template NStyles*(_: type QWizardWizardStyleEnum): untyped = 4
+
+
+type QWizardWizardOptionEnum* = distinct cint
+template IndependentPages*(_: type QWizardWizardOptionEnum): untyped = 1
+template IgnoreSubTitles*(_: type QWizardWizardOptionEnum): untyped = 2
+template ExtendedWatermarkPixmap*(_: type QWizardWizardOptionEnum): untyped = 4
+template NoDefaultButton*(_: type QWizardWizardOptionEnum): untyped = 8
+template NoBackButtonOnStartPage*(_: type QWizardWizardOptionEnum): untyped = 16
+template NoBackButtonOnLastPage*(_: type QWizardWizardOptionEnum): untyped = 32
+template DisabledBackButtonOnLastPage*(_: type QWizardWizardOptionEnum): untyped = 64
+template HaveNextButtonOnLastPage*(_: type QWizardWizardOptionEnum): untyped = 128
+template HaveFinishButtonOnEarlyPages*(_: type QWizardWizardOptionEnum): untyped = 256
+template NoCancelButton*(_: type QWizardWizardOptionEnum): untyped = 512
+template CancelButtonOnLeft*(_: type QWizardWizardOptionEnum): untyped = 1024
+template HaveHelpButton*(_: type QWizardWizardOptionEnum): untyped = 2048
+template HelpButtonOnRight*(_: type QWizardWizardOptionEnum): untyped = 4096
+template HaveCustomButton1*(_: type QWizardWizardOptionEnum): untyped = 8192
+template HaveCustomButton2*(_: type QWizardWizardOptionEnum): untyped = 16384
+template HaveCustomButton3*(_: type QWizardWizardOptionEnum): untyped = 32768
+template NoCancelButtonOnLastPage*(_: type QWizardWizardOptionEnum): untyped = 65536
+
+
+import ./gen_qwizard_types
+export gen_qwizard_types
+
+import
+  ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
+  ../QtCore/gen_qobjectdefs_types,
+  ../QtCore/gen_qpoint_types,
+  ../QtCore/gen_qsize_types,
+  ../QtCore/gen_qvariant_types,
+  ../QtGui/gen_qevent_types,
+  ../QtGui/gen_qpaintdevice_types,
+  ../QtGui/gen_qpaintengine_types,
+  ../QtGui/gen_qpainter_types,
+  ../QtGui/gen_qpixmap_types,
+  ./gen_qabstractbutton_types,
+  ./gen_qdialog,
+  ./gen_qwidget
+export
+  gen_qcoreevent_types,
+  gen_qmetaobject_types,
+  gen_qobject_types,
+  gen_qobjectdefs_types,
+  gen_qpoint_types,
+  gen_qsize_types,
+  gen_qvariant_types,
+  gen_qevent_types,
+  gen_qpaintdevice_types,
+  gen_qpaintengine_types,
+  gen_qpainter_types,
+  gen_qpixmap_types,
+  gen_qabstractbutton_types,
+  gen_qdialog,
+  gen_qwidget
+
+type cQWizard*{.exportc: "QWizard", incompleteStruct.} = object
+type cQWizardPage*{.exportc: "QWizardPage", incompleteStruct.} = object
+
+proc fcQWizard_metaObject(self: pointer): pointer {.importc: "QWizard_metaObject".}
+proc fcQWizard_metacast(self: pointer, param1: cstring): pointer {.importc: "QWizard_metacast".}
+proc fcQWizard_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWizard_metacall".}
+proc fcQWizard_tr(s: cstring): struct_seaqt_string {.importc: "QWizard_tr".}
+proc fcQWizard_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWizard_trUtf8".}
+proc fcQWizard_addPage(self: pointer, page: pointer): cint {.importc: "QWizard_addPage".}
+proc fcQWizard_setPage(self: pointer, id: cint, page: pointer): void {.importc: "QWizard_setPage".}
+proc fcQWizard_removePage(self: pointer, id: cint): void {.importc: "QWizard_removePage".}
+proc fcQWizard_page(self: pointer, id: cint): pointer {.importc: "QWizard_page".}
+proc fcQWizard_hasVisitedPage(self: pointer, id: cint): bool {.importc: "QWizard_hasVisitedPage".}
+proc fcQWizard_visitedPages(self: pointer): struct_seaqt_array {.importc: "QWizard_visitedPages".}
+proc fcQWizard_visitedIds(self: pointer): struct_seaqt_array {.importc: "QWizard_visitedIds".}
+proc fcQWizard_pageIds(self: pointer): struct_seaqt_array {.importc: "QWizard_pageIds".}
+proc fcQWizard_setStartId(self: pointer, id: cint): void {.importc: "QWizard_setStartId".}
+proc fcQWizard_startId(self: pointer): cint {.importc: "QWizard_startId".}
+proc fcQWizard_currentPage(self: pointer): pointer {.importc: "QWizard_currentPage".}
+proc fcQWizard_currentId(self: pointer): cint {.importc: "QWizard_currentId".}
+proc fcQWizard_validateCurrentPage(self: pointer): bool {.importc: "QWizard_validateCurrentPage".}
+proc fcQWizard_nextId(self: pointer): cint {.importc: "QWizard_nextId".}
+proc fcQWizard_setField(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QWizard_setField".}
+proc fcQWizard_field(self: pointer, name: struct_seaqt_string): pointer {.importc: "QWizard_field".}
+proc fcQWizard_setWizardStyle(self: pointer, style: cint): void {.importc: "QWizard_setWizardStyle".}
+proc fcQWizard_wizardStyle(self: pointer): cint {.importc: "QWizard_wizardStyle".}
+proc fcQWizard_setOption(self: pointer, option: cint): void {.importc: "QWizard_setOption".}
+proc fcQWizard_testOption(self: pointer, option: cint): bool {.importc: "QWizard_testOption".}
+proc fcQWizard_setOptions(self: pointer, options: cint): void {.importc: "QWizard_setOptions".}
+proc fcQWizard_options(self: pointer): cint {.importc: "QWizard_options".}
+proc fcQWizard_setButtonText(self: pointer, which: cint, text: struct_seaqt_string): void {.importc: "QWizard_setButtonText".}
+proc fcQWizard_buttonText(self: pointer, which: cint): struct_seaqt_string {.importc: "QWizard_buttonText".}
+proc fcQWizard_setButtonLayout(self: pointer, layout: struct_seaqt_array): void {.importc: "QWizard_setButtonLayout".}
+proc fcQWizard_setButton(self: pointer, which: cint, button: pointer): void {.importc: "QWizard_setButton".}
+proc fcQWizard_button(self: pointer, which: cint): pointer {.importc: "QWizard_button".}
+proc fcQWizard_setTitleFormat(self: pointer, format: cint): void {.importc: "QWizard_setTitleFormat".}
+proc fcQWizard_titleFormat(self: pointer): cint {.importc: "QWizard_titleFormat".}
+proc fcQWizard_setSubTitleFormat(self: pointer, format: cint): void {.importc: "QWizard_setSubTitleFormat".}
+proc fcQWizard_subTitleFormat(self: pointer): cint {.importc: "QWizard_subTitleFormat".}
+proc fcQWizard_setPixmap(self: pointer, which: cint, pixmap: pointer): void {.importc: "QWizard_setPixmap".}
+proc fcQWizard_pixmap(self: pointer, which: cint): pointer {.importc: "QWizard_pixmap".}
+proc fcQWizard_setSideWidget(self: pointer, widget: pointer): void {.importc: "QWizard_setSideWidget".}
+proc fcQWizard_sideWidget(self: pointer): pointer {.importc: "QWizard_sideWidget".}
+proc fcQWizard_setDefaultProperty(self: pointer, className: cstring, property: cstring, changedSignal: cstring): void {.importc: "QWizard_setDefaultProperty".}
+proc fcQWizard_setVisible(self: pointer, visible: bool): void {.importc: "QWizard_setVisible".}
+proc fcQWizard_sizeHint(self: pointer): pointer {.importc: "QWizard_sizeHint".}
+proc fcQWizard_currentIdChanged(self: pointer, id: cint): void {.importc: "QWizard_currentIdChanged".}
+proc fcQWizard_connect_currentIdChanged(self: pointer, slot: int, callback: proc (slot: int, id: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWizard_connect_currentIdChanged".}
+proc fcQWizard_helpRequested(self: pointer): void {.importc: "QWizard_helpRequested".}
+proc fcQWizard_connect_helpRequested(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWizard_connect_helpRequested".}
+proc fcQWizard_customButtonClicked(self: pointer, which: cint): void {.importc: "QWizard_customButtonClicked".}
+proc fcQWizard_connect_customButtonClicked(self: pointer, slot: int, callback: proc (slot: int, which: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWizard_connect_customButtonClicked".}
+proc fcQWizard_pageAdded(self: pointer, id: cint): void {.importc: "QWizard_pageAdded".}
+proc fcQWizard_connect_pageAdded(self: pointer, slot: int, callback: proc (slot: int, id: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWizard_connect_pageAdded".}
+proc fcQWizard_pageRemoved(self: pointer, id: cint): void {.importc: "QWizard_pageRemoved".}
+proc fcQWizard_connect_pageRemoved(self: pointer, slot: int, callback: proc (slot: int, id: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWizard_connect_pageRemoved".}
+proc fcQWizard_back(self: pointer): void {.importc: "QWizard_back".}
+proc fcQWizard_next(self: pointer): void {.importc: "QWizard_next".}
+proc fcQWizard_restart(self: pointer): void {.importc: "QWizard_restart".}
+proc fcQWizard_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizard_tr2".}
+proc fcQWizard_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizard_tr3".}
+proc fcQWizard_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizard_trUtf82".}
+proc fcQWizard_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizard_trUtf83".}
+proc fcQWizard_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QWizard_setOption2".}
+proc fcQWizard_vdata(self: pointer): ptr pointer {.importc: "QWizard_vdata".}
+proc fvdata_cQWizard(self: pointer): pointer {.importc: "vdata_QWizard".}
+
+type cQWizardVTable {.pure.} = object
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  validateCurrentPage*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  nextId*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  done*: proc(self: pointer, resultVal: cint): void {.cdecl, raises: [], gcsafe.}
+  initializePage*: proc(self: pointer, id: cint): void {.cdecl, raises: [], gcsafe.}
+  cleanupPage*: proc(self: pointer, id: cint): void {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  open*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  exec*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  accept*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  reject*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQWizard_virtualbase_metaObject(self: pointer): pointer {.importc: "QWizard_virtualbase_metaObject".}
+proc fcQWizard_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QWizard_virtualbase_metacast".}
+proc fcQWizard_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWizard_virtualbase_metacall".}
+proc fcQWizard_virtualbase_validateCurrentPage(self: pointer): bool {.importc: "QWizard_virtualbase_validateCurrentPage".}
+proc fcQWizard_virtualbase_nextId(self: pointer): cint {.importc: "QWizard_virtualbase_nextId".}
+proc fcQWizard_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QWizard_virtualbase_setVisible".}
+proc fcQWizard_virtualbase_sizeHint(self: pointer): pointer {.importc: "QWizard_virtualbase_sizeHint".}
+proc fcQWizard_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QWizard_virtualbase_event".}
+proc fcQWizard_virtualbase_resizeEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_resizeEvent".}
+proc fcQWizard_virtualbase_paintEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_paintEvent".}
+proc fcQWizard_virtualbase_done(self: pointer, resultVal: cint): void {.importc: "QWizard_virtualbase_done".}
+proc fcQWizard_virtualbase_initializePage(self: pointer, id: cint): void {.importc: "QWizard_virtualbase_initializePage".}
+proc fcQWizard_virtualbase_cleanupPage(self: pointer, id: cint): void {.importc: "QWizard_virtualbase_cleanupPage".}
+proc fcQWizard_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QWizard_virtualbase_minimumSizeHint".}
+proc fcQWizard_virtualbase_open(self: pointer): void {.importc: "QWizard_virtualbase_open".}
+proc fcQWizard_virtualbase_exec(self: pointer): cint {.importc: "QWizard_virtualbase_exec".}
+proc fcQWizard_virtualbase_accept(self: pointer): void {.importc: "QWizard_virtualbase_accept".}
+proc fcQWizard_virtualbase_reject(self: pointer): void {.importc: "QWizard_virtualbase_reject".}
+proc fcQWizard_virtualbase_keyPressEvent(self: pointer, param1: pointer): void {.importc: "QWizard_virtualbase_keyPressEvent".}
+proc fcQWizard_virtualbase_closeEvent(self: pointer, param1: pointer): void {.importc: "QWizard_virtualbase_closeEvent".}
+proc fcQWizard_virtualbase_showEvent(self: pointer, param1: pointer): void {.importc: "QWizard_virtualbase_showEvent".}
+proc fcQWizard_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void {.importc: "QWizard_virtualbase_contextMenuEvent".}
+proc fcQWizard_virtualbase_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QWizard_virtualbase_eventFilter".}
+proc fcQWizard_virtualbase_devType(self: pointer): cint {.importc: "QWizard_virtualbase_devType".}
+proc fcQWizard_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QWizard_virtualbase_heightForWidth".}
+proc fcQWizard_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QWizard_virtualbase_hasHeightForWidth".}
+proc fcQWizard_virtualbase_paintEngine(self: pointer): pointer {.importc: "QWizard_virtualbase_paintEngine".}
+proc fcQWizard_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_mousePressEvent".}
+proc fcQWizard_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_mouseReleaseEvent".}
+proc fcQWizard_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_mouseDoubleClickEvent".}
+proc fcQWizard_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_mouseMoveEvent".}
+proc fcQWizard_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_wheelEvent".}
+proc fcQWizard_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_keyReleaseEvent".}
+proc fcQWizard_virtualbase_focusInEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_focusInEvent".}
+proc fcQWizard_virtualbase_focusOutEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_focusOutEvent".}
+proc fcQWizard_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_enterEvent".}
+proc fcQWizard_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_leaveEvent".}
+proc fcQWizard_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_moveEvent".}
+proc fcQWizard_virtualbase_tabletEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_tabletEvent".}
+proc fcQWizard_virtualbase_actionEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_actionEvent".}
+proc fcQWizard_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_dragEnterEvent".}
+proc fcQWizard_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_dragMoveEvent".}
+proc fcQWizard_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_dragLeaveEvent".}
+proc fcQWizard_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_dropEvent".}
+proc fcQWizard_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_hideEvent".}
+proc fcQWizard_virtualbase_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QWizard_virtualbase_nativeEvent".}
+proc fcQWizard_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QWizard_virtualbase_changeEvent".}
+proc fcQWizard_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QWizard_virtualbase_metric".}
+proc fcQWizard_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QWizard_virtualbase_initPainter".}
+proc fcQWizard_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QWizard_virtualbase_redirected".}
+proc fcQWizard_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QWizard_virtualbase_sharedPainter".}
+proc fcQWizard_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QWizard_virtualbase_inputMethodEvent".}
+proc fcQWizard_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QWizard_virtualbase_inputMethodQuery".}
+proc fcQWizard_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QWizard_virtualbase_focusNextPrevChild".}
+proc fcQWizard_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_timerEvent".}
+proc fcQWizard_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_childEvent".}
+proc fcQWizard_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_customEvent".}
+proc fcQWizard_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWizard_virtualbase_connectNotify".}
+proc fcQWizard_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWizard_virtualbase_disconnectNotify".}
+proc fcQWizard_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QWizard_protectedbase_adjustPosition".}
+proc fcQWizard_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QWizard_protectedbase_updateMicroFocus".}
+proc fcQWizard_protectedbase_create(self: pointer): void {.importc: "QWizard_protectedbase_create".}
+proc fcQWizard_protectedbase_destroy(self: pointer): void {.importc: "QWizard_protectedbase_destroy".}
+proc fcQWizard_protectedbase_focusNextChild(self: pointer): bool {.importc: "QWizard_protectedbase_focusNextChild".}
+proc fcQWizard_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QWizard_protectedbase_focusPreviousChild".}
+proc fcQWizard_protectedbase_sender(self: pointer): pointer {.importc: "QWizard_protectedbase_sender".}
+proc fcQWizard_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWizard_protectedbase_senderSignalIndex".}
+proc fcQWizard_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWizard_protectedbase_receivers".}
+proc fcQWizard_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWizard_protectedbase_isSignalConnected".}
+proc fcQWizard_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWizard {.importc: "QWizard_new".}
+proc fcQWizard_new2(vtbl: pointer, vdata: csize_t): ptr cQWizard {.importc: "QWizard_new2".}
+proc fcQWizard_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQWizard {.importc: "QWizard_new3".}
+proc fcQWizard_staticMetaObject(): pointer {.importc: "QWizard_staticMetaObject".}
+proc fcQWizard_delete(self: pointer) {.importc: "QWizard_delete".}
+proc fcQWizardPage_metaObject(self: pointer): pointer {.importc: "QWizardPage_metaObject".}
+proc fcQWizardPage_metacast(self: pointer, param1: cstring): pointer {.importc: "QWizardPage_metacast".}
+proc fcQWizardPage_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWizardPage_metacall".}
+proc fcQWizardPage_tr(s: cstring): struct_seaqt_string {.importc: "QWizardPage_tr".}
+proc fcQWizardPage_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWizardPage_trUtf8".}
+proc fcQWizardPage_setTitle(self: pointer, title: struct_seaqt_string): void {.importc: "QWizardPage_setTitle".}
+proc fcQWizardPage_title(self: pointer): struct_seaqt_string {.importc: "QWizardPage_title".}
+proc fcQWizardPage_setSubTitle(self: pointer, subTitle: struct_seaqt_string): void {.importc: "QWizardPage_setSubTitle".}
+proc fcQWizardPage_subTitle(self: pointer): struct_seaqt_string {.importc: "QWizardPage_subTitle".}
+proc fcQWizardPage_setPixmap(self: pointer, which: cint, pixmap: pointer): void {.importc: "QWizardPage_setPixmap".}
+proc fcQWizardPage_pixmap(self: pointer, which: cint): pointer {.importc: "QWizardPage_pixmap".}
+proc fcQWizardPage_setFinalPage(self: pointer, finalPage: bool): void {.importc: "QWizardPage_setFinalPage".}
+proc fcQWizardPage_isFinalPage(self: pointer): bool {.importc: "QWizardPage_isFinalPage".}
+proc fcQWizardPage_setCommitPage(self: pointer, commitPage: bool): void {.importc: "QWizardPage_setCommitPage".}
+proc fcQWizardPage_isCommitPage(self: pointer): bool {.importc: "QWizardPage_isCommitPage".}
+proc fcQWizardPage_setButtonText(self: pointer, which: cint, text: struct_seaqt_string): void {.importc: "QWizardPage_setButtonText".}
+proc fcQWizardPage_buttonText(self: pointer, which: cint): struct_seaqt_string {.importc: "QWizardPage_buttonText".}
+proc fcQWizardPage_initializePage(self: pointer): void {.importc: "QWizardPage_initializePage".}
+proc fcQWizardPage_cleanupPage(self: pointer): void {.importc: "QWizardPage_cleanupPage".}
+proc fcQWizardPage_validatePage(self: pointer): bool {.importc: "QWizardPage_validatePage".}
+proc fcQWizardPage_isComplete(self: pointer): bool {.importc: "QWizardPage_isComplete".}
+proc fcQWizardPage_nextId(self: pointer): cint {.importc: "QWizardPage_nextId".}
+proc fcQWizardPage_completeChanged(self: pointer): void {.importc: "QWizardPage_completeChanged".}
+proc fcQWizardPage_connect_completeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWizardPage_connect_completeChanged".}
+proc fcQWizardPage_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizardPage_tr2".}
+proc fcQWizardPage_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizardPage_tr3".}
+proc fcQWizardPage_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWizardPage_trUtf82".}
+proc fcQWizardPage_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWizardPage_trUtf83".}
+proc fcQWizardPage_vdata(self: pointer): ptr pointer {.importc: "QWizardPage_vdata".}
+proc fvdata_cQWizardPage(self: pointer): pointer {.importc: "vdata_QWizardPage".}
+
+type cQWizardPageVTable {.pure.} = object
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  initializePage*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  cleanupPage*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  validatePage*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  isComplete*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  nextId*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQWizardPage_virtualbase_metaObject(self: pointer): pointer {.importc: "QWizardPage_virtualbase_metaObject".}
+proc fcQWizardPage_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QWizardPage_virtualbase_metacast".}
+proc fcQWizardPage_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWizardPage_virtualbase_metacall".}
+proc fcQWizardPage_virtualbase_initializePage(self: pointer): void {.importc: "QWizardPage_virtualbase_initializePage".}
+proc fcQWizardPage_virtualbase_cleanupPage(self: pointer): void {.importc: "QWizardPage_virtualbase_cleanupPage".}
+proc fcQWizardPage_virtualbase_validatePage(self: pointer): bool {.importc: "QWizardPage_virtualbase_validatePage".}
+proc fcQWizardPage_virtualbase_isComplete(self: pointer): bool {.importc: "QWizardPage_virtualbase_isComplete".}
+proc fcQWizardPage_virtualbase_nextId(self: pointer): cint {.importc: "QWizardPage_virtualbase_nextId".}
+proc fcQWizardPage_virtualbase_devType(self: pointer): cint {.importc: "QWizardPage_virtualbase_devType".}
+proc fcQWizardPage_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QWizardPage_virtualbase_setVisible".}
+proc fcQWizardPage_virtualbase_sizeHint(self: pointer): pointer {.importc: "QWizardPage_virtualbase_sizeHint".}
+proc fcQWizardPage_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QWizardPage_virtualbase_minimumSizeHint".}
+proc fcQWizardPage_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QWizardPage_virtualbase_heightForWidth".}
+proc fcQWizardPage_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QWizardPage_virtualbase_hasHeightForWidth".}
+proc fcQWizardPage_virtualbase_paintEngine(self: pointer): pointer {.importc: "QWizardPage_virtualbase_paintEngine".}
+proc fcQWizardPage_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QWizardPage_virtualbase_event".}
+proc fcQWizardPage_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_mousePressEvent".}
+proc fcQWizardPage_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_mouseReleaseEvent".}
+proc fcQWizardPage_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_mouseDoubleClickEvent".}
+proc fcQWizardPage_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_mouseMoveEvent".}
+proc fcQWizardPage_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_wheelEvent".}
+proc fcQWizardPage_virtualbase_keyPressEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_keyPressEvent".}
+proc fcQWizardPage_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_keyReleaseEvent".}
+proc fcQWizardPage_virtualbase_focusInEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_focusInEvent".}
+proc fcQWizardPage_virtualbase_focusOutEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_focusOutEvent".}
+proc fcQWizardPage_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_enterEvent".}
+proc fcQWizardPage_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_leaveEvent".}
+proc fcQWizardPage_virtualbase_paintEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_paintEvent".}
+proc fcQWizardPage_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_moveEvent".}
+proc fcQWizardPage_virtualbase_resizeEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_resizeEvent".}
+proc fcQWizardPage_virtualbase_closeEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_closeEvent".}
+proc fcQWizardPage_virtualbase_contextMenuEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_contextMenuEvent".}
+proc fcQWizardPage_virtualbase_tabletEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_tabletEvent".}
+proc fcQWizardPage_virtualbase_actionEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_actionEvent".}
+proc fcQWizardPage_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_dragEnterEvent".}
+proc fcQWizardPage_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_dragMoveEvent".}
+proc fcQWizardPage_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_dragLeaveEvent".}
+proc fcQWizardPage_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_dropEvent".}
+proc fcQWizardPage_virtualbase_showEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_showEvent".}
+proc fcQWizardPage_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_hideEvent".}
+proc fcQWizardPage_virtualbase_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QWizardPage_virtualbase_nativeEvent".}
+proc fcQWizardPage_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QWizardPage_virtualbase_changeEvent".}
+proc fcQWizardPage_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QWizardPage_virtualbase_metric".}
+proc fcQWizardPage_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QWizardPage_virtualbase_initPainter".}
+proc fcQWizardPage_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QWizardPage_virtualbase_redirected".}
+proc fcQWizardPage_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QWizardPage_virtualbase_sharedPainter".}
+proc fcQWizardPage_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QWizardPage_virtualbase_inputMethodEvent".}
+proc fcQWizardPage_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QWizardPage_virtualbase_inputMethodQuery".}
+proc fcQWizardPage_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QWizardPage_virtualbase_focusNextPrevChild".}
+proc fcQWizardPage_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QWizardPage_virtualbase_eventFilter".}
+proc fcQWizardPage_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_timerEvent".}
+proc fcQWizardPage_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_childEvent".}
+proc fcQWizardPage_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_customEvent".}
+proc fcQWizardPage_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWizardPage_virtualbase_connectNotify".}
+proc fcQWizardPage_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWizardPage_virtualbase_disconnectNotify".}
+proc fcQWizardPage_protectedbase_setField(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QWizardPage_protectedbase_setField".}
+proc fcQWizardPage_protectedbase_field(self: pointer, name: struct_seaqt_string): pointer {.importc: "QWizardPage_protectedbase_field".}
+proc fcQWizardPage_protectedbase_registerField(self: pointer, name: struct_seaqt_string, widget: pointer): void {.importc: "QWizardPage_protectedbase_registerField".}
+proc fcQWizardPage_protectedbase_wizard(self: pointer): pointer {.importc: "QWizardPage_protectedbase_wizard".}
+proc fcQWizardPage_protectedbase_registerField2(self: pointer, name: struct_seaqt_string, widget: pointer, property: cstring): void {.importc: "QWizardPage_protectedbase_registerField2".}
+proc fcQWizardPage_protectedbase_registerField3(self: pointer, name: struct_seaqt_string, widget: pointer, property: cstring, changedSignal: cstring): void {.importc: "QWizardPage_protectedbase_registerField3".}
+proc fcQWizardPage_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QWizardPage_protectedbase_updateMicroFocus".}
+proc fcQWizardPage_protectedbase_create(self: pointer): void {.importc: "QWizardPage_protectedbase_create".}
+proc fcQWizardPage_protectedbase_destroy(self: pointer): void {.importc: "QWizardPage_protectedbase_destroy".}
+proc fcQWizardPage_protectedbase_focusNextChild(self: pointer): bool {.importc: "QWizardPage_protectedbase_focusNextChild".}
+proc fcQWizardPage_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QWizardPage_protectedbase_focusPreviousChild".}
+proc fcQWizardPage_protectedbase_sender(self: pointer): pointer {.importc: "QWizardPage_protectedbase_sender".}
+proc fcQWizardPage_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWizardPage_protectedbase_senderSignalIndex".}
+proc fcQWizardPage_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWizardPage_protectedbase_receivers".}
+proc fcQWizardPage_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWizardPage_protectedbase_isSignalConnected".}
+proc fcQWizardPage_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWizardPage {.importc: "QWizardPage_new".}
+proc fcQWizardPage_new2(vtbl: pointer, vdata: csize_t): ptr cQWizardPage {.importc: "QWizardPage_new2".}
+proc fcQWizardPage_staticMetaObject(): pointer {.importc: "QWizardPage_staticMetaObject".}
+proc fcQWizardPage_delete(self: pointer) {.importc: "QWizardPage_delete".}
+
+proc metaObject*(self: gen_qwizard_types.QWizard): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWizard_metaObject(self.h))
+
+proc metacast*(self: gen_qwizard_types.QWizard, param1: cstring): pointer =
+  fcQWizard_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwizard_types.QWizard, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWizard_metacall(self.h, cint(param1), param2, param3)
+
+proc tr*(_: type gen_qwizard_types.QWizard, s: cstring): string =
+  let v_ms = fcQWizard_tr(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring): string =
+  let v_ms = fcQWizard_trUtf8(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc addPage*(self: gen_qwizard_types.QWizard, page: gen_qwizard_types.QWizardPage): cint =
+  fcQWizard_addPage(self.h, page.h)
+
+proc setPage*(self: gen_qwizard_types.QWizard, id: cint, page: gen_qwizard_types.QWizardPage): void =
+  fcQWizard_setPage(self.h, id, page.h)
+
+proc removePage*(self: gen_qwizard_types.QWizard, id: cint): void =
+  fcQWizard_removePage(self.h, id)
+
+proc page*(self: gen_qwizard_types.QWizard, id: cint): gen_qwizard_types.QWizardPage =
+  gen_qwizard_types.QWizardPage(h: fcQWizard_page(self.h, id))
+
+proc hasVisitedPage*(self: gen_qwizard_types.QWizard, id: cint): bool =
+  fcQWizard_hasVisitedPage(self.h, id)
+
+proc visitedPages*(self: gen_qwizard_types.QWizard): seq[cint] =
+  var v_ma = fcQWizard_visitedPages(self.h)
+  var vx_ret = newSeq[cint](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
+  vx_ret
+
+proc visitedIds*(self: gen_qwizard_types.QWizard): seq[cint] =
+  var v_ma = fcQWizard_visitedIds(self.h)
+  var vx_ret = newSeq[cint](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
+  vx_ret
+
+proc pageIds*(self: gen_qwizard_types.QWizard): seq[cint] =
+  var v_ma = fcQWizard_pageIds(self.h)
+  var vx_ret = newSeq[cint](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
+  vx_ret
+
+proc setStartId*(self: gen_qwizard_types.QWizard, id: cint): void =
+  fcQWizard_setStartId(self.h, id)
+
+proc startId*(self: gen_qwizard_types.QWizard): cint =
+  fcQWizard_startId(self.h)
+
+proc currentPage*(self: gen_qwizard_types.QWizard): gen_qwizard_types.QWizardPage =
+  gen_qwizard_types.QWizardPage(h: fcQWizard_currentPage(self.h))
+
+proc currentId*(self: gen_qwizard_types.QWizard): cint =
+  fcQWizard_currentId(self.h)
+
+proc validateCurrentPage*(self: gen_qwizard_types.QWizard): bool =
+  fcQWizard_validateCurrentPage(self.h)
+
+proc nextId*(self: gen_qwizard_types.QWizard): cint =
+  fcQWizard_nextId(self.h)
+
+proc setField*(self: gen_qwizard_types.QWizard, name: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQWizard_setField(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
+
+proc field*(self: gen_qwizard_types.QWizard, name: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWizard_field(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+
+proc setWizardStyle*(self: gen_qwizard_types.QWizard, style: cint): void =
+  fcQWizard_setWizardStyle(self.h, cint(style))
+
+proc wizardStyle*(self: gen_qwizard_types.QWizard): cint =
+  cint(fcQWizard_wizardStyle(self.h))
+
+proc setOption*(self: gen_qwizard_types.QWizard, option: cint): void =
+  fcQWizard_setOption(self.h, cint(option))
+
+proc testOption*(self: gen_qwizard_types.QWizard, option: cint): bool =
+  fcQWizard_testOption(self.h, cint(option))
+
+proc setOptions*(self: gen_qwizard_types.QWizard, options: cint): void =
+  fcQWizard_setOptions(self.h, cint(options))
+
+proc options*(self: gen_qwizard_types.QWizard): cint =
+  cint(fcQWizard_options(self.h))
+
+proc setButtonText*(self: gen_qwizard_types.QWizard, which: cint, text: openArray[char]): void =
+  fcQWizard_setButtonText(self.h, cint(which), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc buttonText*(self: gen_qwizard_types.QWizard, which: cint): string =
+  let v_ms = fcQWizard_buttonText(self.h, cint(which))
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setButtonLayout*(self: gen_qwizard_types.QWizard, layout: openArray[cint]): void =
+  var layout_CArray = newSeq[cint](len(layout))
+  for i in 0..<len(layout):
+    layout_CArray[i] = cint(layout[i])
+
+  fcQWizard_setButtonLayout(self.h, struct_seaqt_array(len: csize_t(len(layout)), data: if len(layout) == 0: nil else: addr(layout_CArray[0])))
+
+proc setButton*(self: gen_qwizard_types.QWizard, which: cint, button: gen_qabstractbutton_types.QAbstractButton): void =
+  fcQWizard_setButton(self.h, cint(which), button.h)
+
+proc button*(self: gen_qwizard_types.QWizard, which: cint): gen_qabstractbutton_types.QAbstractButton =
+  gen_qabstractbutton_types.QAbstractButton(h: fcQWizard_button(self.h, cint(which)))
+
+proc setTitleFormat*(self: gen_qwizard_types.QWizard, format: cint): void =
+  fcQWizard_setTitleFormat(self.h, cint(format))
+
+proc titleFormat*(self: gen_qwizard_types.QWizard): cint =
+  cint(fcQWizard_titleFormat(self.h))
+
+proc setSubTitleFormat*(self: gen_qwizard_types.QWizard, format: cint): void =
+  fcQWizard_setSubTitleFormat(self.h, cint(format))
+
+proc subTitleFormat*(self: gen_qwizard_types.QWizard): cint =
+  cint(fcQWizard_subTitleFormat(self.h))
+
+proc setPixmap*(self: gen_qwizard_types.QWizard, which: cint, pixmap: gen_qpixmap_types.QPixmap): void =
+  fcQWizard_setPixmap(self.h, cint(which), pixmap.h)
+
+proc pixmap*(self: gen_qwizard_types.QWizard, which: cint): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQWizard_pixmap(self.h, cint(which)))
+
+proc setSideWidget*(self: gen_qwizard_types.QWizard, widget: gen_qwidget_types.QWidget): void =
+  fcQWizard_setSideWidget(self.h, widget.h)
+
+proc sideWidget*(self: gen_qwizard_types.QWizard): gen_qwidget_types.QWidget =
+  gen_qwidget_types.QWidget(h: fcQWizard_sideWidget(self.h))
+
+proc setDefaultProperty*(self: gen_qwizard_types.QWizard, className: cstring, property: cstring, changedSignal: cstring): void =
+  fcQWizard_setDefaultProperty(self.h, className, property, changedSignal)
+
+proc setVisible*(self: gen_qwizard_types.QWizard, visible: bool): void =
+  fcQWizard_setVisible(self.h, visible)
+
+proc sizeHint*(self: gen_qwizard_types.QWizard): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQWizard_sizeHint(self.h))
+
+proc currentIdChanged*(self: gen_qwizard_types.QWizard, id: cint): void =
+  fcQWizard_currentIdChanged(self.h, id)
+
+type QWizardcurrentIdChangedSlot* = proc(id: cint)
+proc fcQWizard_slot_callback_currentIdChanged(slot: int, id: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QWizardcurrentIdChangedSlot](cast[pointer](slot))
+  let slotval1 = id
+
+  nimfunc[](slotval1)
+
+proc fcQWizard_slot_callback_currentIdChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWizardcurrentIdChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onCurrentIdChanged*(self: gen_qwizard_types.QWizard, slot: QWizardcurrentIdChangedSlot) =
+  var tmp = new QWizardcurrentIdChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizard_connect_currentIdChanged(self.h, cast[int](addr tmp[]), fcQWizard_slot_callback_currentIdChanged, fcQWizard_slot_callback_currentIdChanged_release)
+
+proc helpRequested*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_helpRequested(self.h)
+
+type QWizardhelpRequestedSlot* = proc()
+proc fcQWizard_slot_callback_helpRequested(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QWizardhelpRequestedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQWizard_slot_callback_helpRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWizardhelpRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onHelpRequested*(self: gen_qwizard_types.QWizard, slot: QWizardhelpRequestedSlot) =
+  var tmp = new QWizardhelpRequestedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizard_connect_helpRequested(self.h, cast[int](addr tmp[]), fcQWizard_slot_callback_helpRequested, fcQWizard_slot_callback_helpRequested_release)
+
+proc customButtonClicked*(self: gen_qwizard_types.QWizard, which: cint): void =
+  fcQWizard_customButtonClicked(self.h, which)
+
+type QWizardcustomButtonClickedSlot* = proc(which: cint)
+proc fcQWizard_slot_callback_customButtonClicked(slot: int, which: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QWizardcustomButtonClickedSlot](cast[pointer](slot))
+  let slotval1 = which
+
+  nimfunc[](slotval1)
+
+proc fcQWizard_slot_callback_customButtonClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWizardcustomButtonClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onCustomButtonClicked*(self: gen_qwizard_types.QWizard, slot: QWizardcustomButtonClickedSlot) =
+  var tmp = new QWizardcustomButtonClickedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizard_connect_customButtonClicked(self.h, cast[int](addr tmp[]), fcQWizard_slot_callback_customButtonClicked, fcQWizard_slot_callback_customButtonClicked_release)
+
+proc pageAdded*(self: gen_qwizard_types.QWizard, id: cint): void =
+  fcQWizard_pageAdded(self.h, id)
+
+type QWizardpageAddedSlot* = proc(id: cint)
+proc fcQWizard_slot_callback_pageAdded(slot: int, id: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QWizardpageAddedSlot](cast[pointer](slot))
+  let slotval1 = id
+
+  nimfunc[](slotval1)
+
+proc fcQWizard_slot_callback_pageAdded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWizardpageAddedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onPageAdded*(self: gen_qwizard_types.QWizard, slot: QWizardpageAddedSlot) =
+  var tmp = new QWizardpageAddedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizard_connect_pageAdded(self.h, cast[int](addr tmp[]), fcQWizard_slot_callback_pageAdded, fcQWizard_slot_callback_pageAdded_release)
+
+proc pageRemoved*(self: gen_qwizard_types.QWizard, id: cint): void =
+  fcQWizard_pageRemoved(self.h, id)
+
+type QWizardpageRemovedSlot* = proc(id: cint)
+proc fcQWizard_slot_callback_pageRemoved(slot: int, id: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QWizardpageRemovedSlot](cast[pointer](slot))
+  let slotval1 = id
+
+  nimfunc[](slotval1)
+
+proc fcQWizard_slot_callback_pageRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWizardpageRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onPageRemoved*(self: gen_qwizard_types.QWizard, slot: QWizardpageRemovedSlot) =
+  var tmp = new QWizardpageRemovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizard_connect_pageRemoved(self.h, cast[int](addr tmp[]), fcQWizard_slot_callback_pageRemoved, fcQWizard_slot_callback_pageRemoved_release)
+
+proc back*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_back(self.h)
+
+proc next*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_next(self.h)
+
+proc restart*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_restart(self.h)
+
+proc tr*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring): string =
+  let v_ms = fcQWizard_tr2(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tr*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQWizard_tr3(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring): string =
+  let v_ms = fcQWizard_trUtf82(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQWizard_trUtf83(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setOption*(self: gen_qwizard_types.QWizard, option: cint, on: bool): void =
+  fcQWizard_setOption2(self.h, cint(option), on)
+
+type QWizardmetaObjectProc* = proc(self: QWizard): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QWizardmetacastProc* = proc(self: QWizard, param1: cstring): pointer {.raises: [], gcsafe.}
+type QWizardmetacallProc* = proc(self: QWizard, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QWizardvalidateCurrentPageProc* = proc(self: QWizard): bool {.raises: [], gcsafe.}
+type QWizardnextIdProc* = proc(self: QWizard): cint {.raises: [], gcsafe.}
+type QWizardsetVisibleProc* = proc(self: QWizard, visible: bool): void {.raises: [], gcsafe.}
+type QWizardsizeHintProc* = proc(self: QWizard): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QWizardeventProc* = proc(self: QWizard, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QWizardresizeEventProc* = proc(self: QWizard, event: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QWizardpaintEventProc* = proc(self: QWizard, event: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
+type QWizarddoneProc* = proc(self: QWizard, resultVal: cint): void {.raises: [], gcsafe.}
+type QWizardinitializePageProc* = proc(self: QWizard, id: cint): void {.raises: [], gcsafe.}
+type QWizardcleanupPageProc* = proc(self: QWizard, id: cint): void {.raises: [], gcsafe.}
+type QWizardminimumSizeHintProc* = proc(self: QWizard): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QWizardopenProc* = proc(self: QWizard): void {.raises: [], gcsafe.}
+type QWizardexecProc* = proc(self: QWizard): cint {.raises: [], gcsafe.}
+type QWizardacceptProc* = proc(self: QWizard): void {.raises: [], gcsafe.}
+type QWizardrejectProc* = proc(self: QWizard): void {.raises: [], gcsafe.}
+type QWizardkeyPressEventProc* = proc(self: QWizard, param1: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QWizardcloseEventProc* = proc(self: QWizard, param1: gen_qevent_types.QCloseEvent): void {.raises: [], gcsafe.}
+type QWizardshowEventProc* = proc(self: QWizard, param1: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QWizardcontextMenuEventProc* = proc(self: QWizard, param1: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
+type QWizardeventFilterProc* = proc(self: QWizard, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QWizarddevTypeProc* = proc(self: QWizard): cint {.raises: [], gcsafe.}
+type QWizardheightForWidthProc* = proc(self: QWizard, param1: cint): cint {.raises: [], gcsafe.}
+type QWizardhasHeightForWidthProc* = proc(self: QWizard): bool {.raises: [], gcsafe.}
+type QWizardpaintEngineProc* = proc(self: QWizard): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QWizardmousePressEventProc* = proc(self: QWizard, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QWizardmouseReleaseEventProc* = proc(self: QWizard, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QWizardmouseDoubleClickEventProc* = proc(self: QWizard, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QWizardmouseMoveEventProc* = proc(self: QWizard, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QWizardwheelEventProc* = proc(self: QWizard, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QWizardkeyReleaseEventProc* = proc(self: QWizard, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QWizardfocusInEventProc* = proc(self: QWizard, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QWizardfocusOutEventProc* = proc(self: QWizard, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QWizardenterEventProc* = proc(self: QWizard, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QWizardleaveEventProc* = proc(self: QWizard, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QWizardmoveEventProc* = proc(self: QWizard, event: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QWizardtabletEventProc* = proc(self: QWizard, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QWizardactionEventProc* = proc(self: QWizard, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
+type QWizarddragEnterEventProc* = proc(self: QWizard, event: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QWizarddragMoveEventProc* = proc(self: QWizard, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QWizarddragLeaveEventProc* = proc(self: QWizard, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QWizarddropEventProc* = proc(self: QWizard, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QWizardhideEventProc* = proc(self: QWizard, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QWizardnativeEventProc* = proc(self: QWizard, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QWizardchangeEventProc* = proc(self: QWizard, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QWizardmetricProc* = proc(self: QWizard, param1: cint): cint {.raises: [], gcsafe.}
+type QWizardinitPainterProc* = proc(self: QWizard, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QWizardredirectedProc* = proc(self: QWizard, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QWizardsharedPainterProc* = proc(self: QWizard): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QWizardinputMethodEventProc* = proc(self: QWizard, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QWizardinputMethodQueryProc* = proc(self: QWizard, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QWizardfocusNextPrevChildProc* = proc(self: QWizard, next: bool): bool {.raises: [], gcsafe.}
+type QWizardtimerEventProc* = proc(self: QWizard, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QWizardchildEventProc* = proc(self: QWizard, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QWizardcustomEventProc* = proc(self: QWizard, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QWizardconnectNotifyProc* = proc(self: QWizard, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QWizarddisconnectNotifyProc* = proc(self: QWizard, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QWizardVTable* = object
+  vtbl: cQWizardVTable
+  metaObject*: QWizardmetaObjectProc
+  metacast*: QWizardmetacastProc
+  metacall*: QWizardmetacallProc
+  validateCurrentPage*: QWizardvalidateCurrentPageProc
+  nextId*: QWizardnextIdProc
+  setVisible*: QWizardsetVisibleProc
+  sizeHint*: QWizardsizeHintProc
+  event*: QWizardeventProc
+  resizeEvent*: QWizardresizeEventProc
+  paintEvent*: QWizardpaintEventProc
+  done*: QWizarddoneProc
+  initializePage*: QWizardinitializePageProc
+  cleanupPage*: QWizardcleanupPageProc
+  minimumSizeHint*: QWizardminimumSizeHintProc
+  open*: QWizardopenProc
+  exec*: QWizardexecProc
+  accept*: QWizardacceptProc
+  reject*: QWizardrejectProc
+  keyPressEvent*: QWizardkeyPressEventProc
+  closeEvent*: QWizardcloseEventProc
+  showEvent*: QWizardshowEventProc
+  contextMenuEvent*: QWizardcontextMenuEventProc
+  eventFilter*: QWizardeventFilterProc
+  devType*: QWizarddevTypeProc
+  heightForWidth*: QWizardheightForWidthProc
+  hasHeightForWidth*: QWizardhasHeightForWidthProc
+  paintEngine*: QWizardpaintEngineProc
+  mousePressEvent*: QWizardmousePressEventProc
+  mouseReleaseEvent*: QWizardmouseReleaseEventProc
+  mouseDoubleClickEvent*: QWizardmouseDoubleClickEventProc
+  mouseMoveEvent*: QWizardmouseMoveEventProc
+  wheelEvent*: QWizardwheelEventProc
+  keyReleaseEvent*: QWizardkeyReleaseEventProc
+  focusInEvent*: QWizardfocusInEventProc
+  focusOutEvent*: QWizardfocusOutEventProc
+  enterEvent*: QWizardenterEventProc
+  leaveEvent*: QWizardleaveEventProc
+  moveEvent*: QWizardmoveEventProc
+  tabletEvent*: QWizardtabletEventProc
+  actionEvent*: QWizardactionEventProc
+  dragEnterEvent*: QWizarddragEnterEventProc
+  dragMoveEvent*: QWizarddragMoveEventProc
+  dragLeaveEvent*: QWizarddragLeaveEventProc
+  dropEvent*: QWizarddropEventProc
+  hideEvent*: QWizardhideEventProc
+  nativeEvent*: QWizardnativeEventProc
+  changeEvent*: QWizardchangeEventProc
+  metric*: QWizardmetricProc
+  initPainter*: QWizardinitPainterProc
+  redirected*: QWizardredirectedProc
+  sharedPainter*: QWizardsharedPainterProc
+  inputMethodEvent*: QWizardinputMethodEventProc
+  inputMethodQuery*: QWizardinputMethodQueryProc
+  focusNextPrevChild*: QWizardfocusNextPrevChildProc
+  timerEvent*: QWizardtimerEventProc
+  childEvent*: QWizardchildEventProc
+  customEvent*: QWizardcustomEventProc
+  connectNotify*: QWizardconnectNotifyProc
+  disconnectNotify*: QWizarddisconnectNotifyProc
+
+proc QWizardmetaObject*(self: gen_qwizard_types.QWizard): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWizard_virtualbase_metaObject(self.h))
+
+proc QWizardmetacast*(self: gen_qwizard_types.QWizard, param1: cstring): pointer =
+  fcQWizard_virtualbase_metacast(self.h, param1)
+
+proc QWizardmetacall*(self: gen_qwizard_types.QWizard, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWizard_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QWizardvalidateCurrentPage*(self: gen_qwizard_types.QWizard): bool =
+  fcQWizard_virtualbase_validateCurrentPage(self.h)
+
+proc QWizardnextId*(self: gen_qwizard_types.QWizard): cint =
+  fcQWizard_virtualbase_nextId(self.h)
+
+proc QWizardsetVisible*(self: gen_qwizard_types.QWizard, visible: bool): void =
+  fcQWizard_virtualbase_setVisible(self.h, visible)
+
+proc QWizardsizeHint*(self: gen_qwizard_types.QWizard): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQWizard_virtualbase_sizeHint(self.h))
+
+proc QWizardevent*(self: gen_qwizard_types.QWizard, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWizard_virtualbase_event(self.h, event.h)
+
+proc QWizardresizeEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QResizeEvent): void =
+  fcQWizard_virtualbase_resizeEvent(self.h, event.h)
+
+proc QWizardpaintEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QPaintEvent): void =
+  fcQWizard_virtualbase_paintEvent(self.h, event.h)
+
+proc QWizarddone*(self: gen_qwizard_types.QWizard, resultVal: cint): void =
+  fcQWizard_virtualbase_done(self.h, resultVal)
+
+proc QWizardinitializePage*(self: gen_qwizard_types.QWizard, id: cint): void =
+  fcQWizard_virtualbase_initializePage(self.h, id)
+
+proc QWizardcleanupPage*(self: gen_qwizard_types.QWizard, id: cint): void =
+  fcQWizard_virtualbase_cleanupPage(self.h, id)
+
+proc QWizardminimumSizeHint*(self: gen_qwizard_types.QWizard): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQWizard_virtualbase_minimumSizeHint(self.h))
+
+proc QWizardopen*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_virtualbase_open(self.h)
+
+proc QWizardexec*(self: gen_qwizard_types.QWizard): cint =
+  fcQWizard_virtualbase_exec(self.h)
+
+proc QWizardaccept*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_virtualbase_accept(self.h)
+
+proc QWizardreject*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_virtualbase_reject(self.h)
+
+proc QWizardkeyPressEvent*(self: gen_qwizard_types.QWizard, param1: gen_qevent_types.QKeyEvent): void =
+  fcQWizard_virtualbase_keyPressEvent(self.h, param1.h)
+
+proc QWizardcloseEvent*(self: gen_qwizard_types.QWizard, param1: gen_qevent_types.QCloseEvent): void =
+  fcQWizard_virtualbase_closeEvent(self.h, param1.h)
+
+proc QWizardshowEvent*(self: gen_qwizard_types.QWizard, param1: gen_qevent_types.QShowEvent): void =
+  fcQWizard_virtualbase_showEvent(self.h, param1.h)
+
+proc QWizardcontextMenuEvent*(self: gen_qwizard_types.QWizard, param1: gen_qevent_types.QContextMenuEvent): void =
+  fcQWizard_virtualbase_contextMenuEvent(self.h, param1.h)
+
+proc QWizardeventFilter*(self: gen_qwizard_types.QWizard, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
+  fcQWizard_virtualbase_eventFilter(self.h, param1.h, param2.h)
+
+proc QWizarddevType*(self: gen_qwizard_types.QWizard): cint =
+  fcQWizard_virtualbase_devType(self.h)
+
+proc QWizardheightForWidth*(self: gen_qwizard_types.QWizard, param1: cint): cint =
+  fcQWizard_virtualbase_heightForWidth(self.h, param1)
+
+proc QWizardhasHeightForWidth*(self: gen_qwizard_types.QWizard): bool =
+  fcQWizard_virtualbase_hasHeightForWidth(self.h)
+
+proc QWizardpaintEngine*(self: gen_qwizard_types.QWizard): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQWizard_virtualbase_paintEngine(self.h))
+
+proc QWizardmousePressEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QMouseEvent): void =
+  fcQWizard_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QWizardmouseReleaseEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QMouseEvent): void =
+  fcQWizard_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QWizardmouseDoubleClickEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QMouseEvent): void =
+  fcQWizard_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QWizardmouseMoveEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QMouseEvent): void =
+  fcQWizard_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QWizardwheelEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QWheelEvent): void =
+  fcQWizard_virtualbase_wheelEvent(self.h, event.h)
+
+proc QWizardkeyReleaseEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QKeyEvent): void =
+  fcQWizard_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QWizardfocusInEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QFocusEvent): void =
+  fcQWizard_virtualbase_focusInEvent(self.h, event.h)
+
+proc QWizardfocusOutEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QFocusEvent): void =
+  fcQWizard_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QWizardenterEvent*(self: gen_qwizard_types.QWizard, event: gen_qcoreevent_types.QEvent): void =
+  fcQWizard_virtualbase_enterEvent(self.h, event.h)
+
+proc QWizardleaveEvent*(self: gen_qwizard_types.QWizard, event: gen_qcoreevent_types.QEvent): void =
+  fcQWizard_virtualbase_leaveEvent(self.h, event.h)
+
+proc QWizardmoveEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QMoveEvent): void =
+  fcQWizard_virtualbase_moveEvent(self.h, event.h)
+
+proc QWizardtabletEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QTabletEvent): void =
+  fcQWizard_virtualbase_tabletEvent(self.h, event.h)
+
+proc QWizardactionEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QActionEvent): void =
+  fcQWizard_virtualbase_actionEvent(self.h, event.h)
+
+proc QWizarddragEnterEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQWizard_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QWizarddragMoveEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQWizard_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QWizarddragLeaveEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQWizard_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QWizarddropEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QDropEvent): void =
+  fcQWizard_virtualbase_dropEvent(self.h, event.h)
+
+proc QWizardhideEvent*(self: gen_qwizard_types.QWizard, event: gen_qevent_types.QHideEvent): void =
+  fcQWizard_virtualbase_hideEvent(self.h, event.h)
+
+proc QWizardnativeEvent*(self: gen_qwizard_types.QWizard, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQWizard_virtualbase_nativeEvent(self.h, struct_seaqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QWizardchangeEvent*(self: gen_qwizard_types.QWizard, param1: gen_qcoreevent_types.QEvent): void =
+  fcQWizard_virtualbase_changeEvent(self.h, param1.h)
+
+proc QWizardmetric*(self: gen_qwizard_types.QWizard, param1: cint): cint =
+  fcQWizard_virtualbase_metric(self.h, cint(param1))
+
+proc QWizardinitPainter*(self: gen_qwizard_types.QWizard, painter: gen_qpainter_types.QPainter): void =
+  fcQWizard_virtualbase_initPainter(self.h, painter.h)
+
+proc QWizardredirected*(self: gen_qwizard_types.QWizard, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQWizard_virtualbase_redirected(self.h, offset.h))
+
+proc QWizardsharedPainter*(self: gen_qwizard_types.QWizard): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQWizard_virtualbase_sharedPainter(self.h))
+
+proc QWizardinputMethodEvent*(self: gen_qwizard_types.QWizard, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQWizard_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QWizardinputMethodQuery*(self: gen_qwizard_types.QWizard, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWizard_virtualbase_inputMethodQuery(self.h, cint(param1)))
+
+proc QWizardfocusNextPrevChild*(self: gen_qwizard_types.QWizard, next: bool): bool =
+  fcQWizard_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QWizardtimerEvent*(self: gen_qwizard_types.QWizard, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQWizard_virtualbase_timerEvent(self.h, event.h)
+
+proc QWizardchildEvent*(self: gen_qwizard_types.QWizard, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQWizard_virtualbase_childEvent(self.h, event.h)
+
+proc QWizardcustomEvent*(self: gen_qwizard_types.QWizard, event: gen_qcoreevent_types.QEvent): void =
+  fcQWizard_virtualbase_customEvent(self.h, event.h)
+
+proc QWizardconnectNotify*(self: gen_qwizard_types.QWizard, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWizard_virtualbase_connectNotify(self.h, signal.h)
+
+proc QWizarddisconnectNotify*(self: gen_qwizard_types.QWizard, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWizard_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQWizard_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.h
+
+proc fcQWizard_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_validateCurrentPage(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].validateCurrentPage(self)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_nextId(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].nextId(self)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = visible
+  vtbl[].setVisible(self, slotval1)
+
+proc fcQWizard_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].sizeHint(self)
+  virtualReturn.h
+
+proc fcQWizard_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = vtbl[].event(self, slotval1)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  vtbl[].resizeEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  vtbl[].paintEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_done(self: pointer, resultVal: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = resultVal
+  vtbl[].done(self, slotval1)
+
+proc fcQWizard_vtable_callback_initializePage(self: pointer, id: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = id
+  vtbl[].initializePage(self, slotval1)
+
+proc fcQWizard_vtable_callback_cleanupPage(self: pointer, id: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = id
+  vtbl[].cleanupPage(self, slotval1)
+
+proc fcQWizard_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].minimumSizeHint(self)
+  virtualReturn.h
+
+proc fcQWizard_vtable_callback_open(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  vtbl[].open(self)
+
+proc fcQWizard_vtable_callback_exec(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].exec(self)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_accept(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  vtbl[].accept(self)
+
+proc fcQWizard_vtable_callback_reject(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  vtbl[].reject(self)
+
+proc fcQWizard_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  vtbl[].keyPressEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  vtbl[].closeEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  vtbl[].showEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  vtbl[].contextMenuEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qobject_types.QObject(h: param1)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].devType(self)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = param1
+  var virtualReturn = vtbl[].heightForWidth(self, slotval1)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].hasHeightForWidth(self)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
+  virtualReturn.h
+
+proc fcQWizard_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mousePressEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseReleaseEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseMoveEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  vtbl[].wheelEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusInEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusOutEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].enterEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].leaveEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  vtbl[].moveEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  vtbl[].tabletEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  vtbl[].actionEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  vtbl[].hideEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  vtbl[].changeEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl[].metric(self, slotval1)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
+
+proc fcQWizard_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  var virtualReturn = vtbl[].redirected(self, slotval1)
+  virtualReturn.h
+
+proc fcQWizard_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
+  virtualReturn.h
+
+proc fcQWizard_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  vtbl[].inputMethodEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  virtualReturn.h
+
+proc fcQWizard_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = next
+  var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
+  virtualReturn
+
+proc fcQWizard_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
+
+proc fcQWizard_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
+
+proc fcQWizard_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardVTable](fcQWizard_vdata(self)[])
+  let self = QWizard(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQWizard* {.inheritable.} = ref object of QWizard
+  vtbl*: cQWizardVTable
+
+method metaObject*(self: VirtualQWizard): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QWizardmetaObject(self[])
+method metacast*(self: VirtualQWizard, param1: cstring): pointer {.base.} =
+  QWizardmetacast(self[], param1)
+method metacall*(self: VirtualQWizard, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWizardmetacall(self[], param1, param2, param3)
+method validateCurrentPage*(self: VirtualQWizard): bool {.base.} =
+  QWizardvalidateCurrentPage(self[])
+method nextId*(self: VirtualQWizard): cint {.base.} =
+  QWizardnextId(self[])
+method setVisible*(self: VirtualQWizard, visible: bool): void {.base.} =
+  QWizardsetVisible(self[], visible)
+method sizeHint*(self: VirtualQWizard): gen_qsize_types.QSize {.base.} =
+  QWizardsizeHint(self[])
+method event*(self: VirtualQWizard, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWizardevent(self[], event)
+method resizeEvent*(self: VirtualQWizard, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QWizardresizeEvent(self[], event)
+method paintEvent*(self: VirtualQWizard, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QWizardpaintEvent(self[], event)
+method done*(self: VirtualQWizard, resultVal: cint): void {.base.} =
+  QWizarddone(self[], resultVal)
+method initializePage*(self: VirtualQWizard, id: cint): void {.base.} =
+  QWizardinitializePage(self[], id)
+method cleanupPage*(self: VirtualQWizard, id: cint): void {.base.} =
+  QWizardcleanupPage(self[], id)
+method minimumSizeHint*(self: VirtualQWizard): gen_qsize_types.QSize {.base.} =
+  QWizardminimumSizeHint(self[])
+method open*(self: VirtualQWizard): void {.base.} =
+  QWizardopen(self[])
+method exec*(self: VirtualQWizard): cint {.base.} =
+  QWizardexec(self[])
+method accept*(self: VirtualQWizard): void {.base.} =
+  QWizardaccept(self[])
+method reject*(self: VirtualQWizard): void {.base.} =
+  QWizardreject(self[])
+method keyPressEvent*(self: VirtualQWizard, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QWizardkeyPressEvent(self[], param1)
+method closeEvent*(self: VirtualQWizard, param1: gen_qevent_types.QCloseEvent): void {.base.} =
+  QWizardcloseEvent(self[], param1)
+method showEvent*(self: VirtualQWizard, param1: gen_qevent_types.QShowEvent): void {.base.} =
+  QWizardshowEvent(self[], param1)
+method contextMenuEvent*(self: VirtualQWizard, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QWizardcontextMenuEvent(self[], param1)
+method eventFilter*(self: VirtualQWizard, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWizardeventFilter(self[], param1, param2)
+method devType*(self: VirtualQWizard): cint {.base.} =
+  QWizarddevType(self[])
+method heightForWidth*(self: VirtualQWizard, param1: cint): cint {.base.} =
+  QWizardheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQWizard): bool {.base.} =
+  QWizardhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQWizard): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QWizardpaintEngine(self[])
+method mousePressEvent*(self: VirtualQWizard, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWizardmousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQWizard, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWizardmouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQWizard, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWizardmouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQWizard, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWizardmouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQWizard, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QWizardwheelEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQWizard, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QWizardkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQWizard, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QWizardfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQWizard, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QWizardfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQWizard, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWizardenterEvent(self[], event)
+method leaveEvent*(self: VirtualQWizard, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWizardleaveEvent(self[], event)
+method moveEvent*(self: VirtualQWizard, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QWizardmoveEvent(self[], event)
+method tabletEvent*(self: VirtualQWizard, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QWizardtabletEvent(self[], event)
+method actionEvent*(self: VirtualQWizard, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QWizardactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQWizard, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QWizarddragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQWizard, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QWizarddragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQWizard, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QWizarddragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQWizard, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QWizarddropEvent(self[], event)
+method hideEvent*(self: VirtualQWizard, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QWizardhideEvent(self[], event)
+method nativeEvent*(self: VirtualQWizard, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QWizardnativeEvent(self[], eventType, message, resultVal)
+method changeEvent*(self: VirtualQWizard, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWizardchangeEvent(self[], param1)
+method metric*(self: VirtualQWizard, param1: cint): cint {.base.} =
+  QWizardmetric(self[], param1)
+method initPainter*(self: VirtualQWizard, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QWizardinitPainter(self[], painter)
+method redirected*(self: VirtualQWizard, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QWizardredirected(self[], offset)
+method sharedPainter*(self: VirtualQWizard): gen_qpainter_types.QPainter {.base.} =
+  QWizardsharedPainter(self[])
+method inputMethodEvent*(self: VirtualQWizard, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QWizardinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQWizard, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QWizardinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQWizard, next: bool): bool {.base.} =
+  QWizardfocusNextPrevChild(self[], next)
+method timerEvent*(self: VirtualQWizard, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWizardtimerEvent(self[], event)
+method childEvent*(self: VirtualQWizard, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWizardchildEvent(self[], event)
+method customEvent*(self: VirtualQWizard, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWizardcustomEvent(self[], event)
+method connectNotify*(self: VirtualQWizard, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWizardconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQWizard, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWizarddisconnectNotify(self[], signal)
+
+proc fcQWizard_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.metaObject()
+  virtualReturn.h
+
+proc fcQWizard_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = (param1)
+  var virtualReturn = inst.metacast(slotval1)
+  virtualReturn
+
+proc fcQWizard_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQWizard_method_callback_validateCurrentPage(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.validateCurrentPage()
+  virtualReturn
+
+proc fcQWizard_method_callback_nextId(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.nextId()
+  virtualReturn
+
+proc fcQWizard_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = visible
+  inst.setVisible(slotval1)
+
+proc fcQWizard_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.sizeHint()
+  virtualReturn.h
+
+proc fcQWizard_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = inst.event(slotval1)
+  virtualReturn
+
+proc fcQWizard_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  inst.resizeEvent(slotval1)
+
+proc fcQWizard_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  inst.paintEvent(slotval1)
+
+proc fcQWizard_method_callback_done(self: pointer, resultVal: cint): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = resultVal
+  inst.done(slotval1)
+
+proc fcQWizard_method_callback_initializePage(self: pointer, id: cint): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = id
+  inst.initializePage(slotval1)
+
+proc fcQWizard_method_callback_cleanupPage(self: pointer, id: cint): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = id
+  inst.cleanupPage(slotval1)
+
+proc fcQWizard_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.minimumSizeHint()
+  virtualReturn.h
+
+proc fcQWizard_method_callback_open(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  inst.open()
+
+proc fcQWizard_method_callback_exec(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.exec()
+  virtualReturn
+
+proc fcQWizard_method_callback_accept(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  inst.accept()
+
+proc fcQWizard_method_callback_reject(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  inst.reject()
+
+proc fcQWizard_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  inst.keyPressEvent(slotval1)
+
+proc fcQWizard_method_callback_closeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  inst.closeEvent(slotval1)
+
+proc fcQWizard_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  inst.showEvent(slotval1)
+
+proc fcQWizard_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  inst.contextMenuEvent(slotval1)
+
+proc fcQWizard_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qobject_types.QObject(h: param1)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+proc fcQWizard_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.devType()
+  virtualReturn
+
+proc fcQWizard_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = param1
+  var virtualReturn = inst.heightForWidth(slotval1)
+  virtualReturn
+
+proc fcQWizard_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.hasHeightForWidth()
+  virtualReturn
+
+proc fcQWizard_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.paintEngine()
+  virtualReturn.h
+
+proc fcQWizard_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mousePressEvent(slotval1)
+
+proc fcQWizard_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseReleaseEvent(slotval1)
+
+proc fcQWizard_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseDoubleClickEvent(slotval1)
+
+proc fcQWizard_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseMoveEvent(slotval1)
+
+proc fcQWizard_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  inst.wheelEvent(slotval1)
+
+proc fcQWizard_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  inst.keyReleaseEvent(slotval1)
+
+proc fcQWizard_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  inst.focusInEvent(slotval1)
+
+proc fcQWizard_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  inst.focusOutEvent(slotval1)
+
+proc fcQWizard_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.enterEvent(slotval1)
+
+proc fcQWizard_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.leaveEvent(slotval1)
+
+proc fcQWizard_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  inst.moveEvent(slotval1)
+
+proc fcQWizard_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  inst.tabletEvent(slotval1)
+
+proc fcQWizard_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  inst.actionEvent(slotval1)
+
+proc fcQWizard_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  inst.dragEnterEvent(slotval1)
+
+proc fcQWizard_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  inst.dragMoveEvent(slotval1)
+
+proc fcQWizard_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  inst.dragLeaveEvent(slotval1)
+
+proc fcQWizard_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  inst.dropEvent(slotval1)
+
+proc fcQWizard_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  inst.hideEvent(slotval1)
+
+proc fcQWizard_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQWizard_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  inst.changeEvent(slotval1)
+
+proc fcQWizard_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = cint(param1)
+  var virtualReturn = inst.metric(slotval1)
+  virtualReturn
+
+proc fcQWizard_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  inst.initPainter(slotval1)
+
+proc fcQWizard_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  var virtualReturn = inst.redirected(slotval1)
+  virtualReturn.h
+
+proc fcQWizard_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  var virtualReturn = inst.sharedPainter()
+  virtualReturn.h
+
+proc fcQWizard_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  inst.inputMethodEvent(slotval1)
+
+proc fcQWizard_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = cint(param1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
+  virtualReturn.h
+
+proc fcQWizard_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = next
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
+  virtualReturn
+
+proc fcQWizard_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  inst.timerEvent(slotval1)
+
+proc fcQWizard_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  inst.childEvent(slotval1)
+
+proc fcQWizard_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.customEvent(slotval1)
+
+proc fcQWizard_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  inst.connectNotify(slotval1)
+
+proc fcQWizard_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizard](fcQWizard_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  inst.disconnectNotify(slotval1)
+
+
+proc adjustPosition*(self: gen_qwizard_types.QWizard, param1: gen_qwidget_types.QWidget): void =
+  fcQWizard_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_protectedbase_updateMicroFocus(self.h)
+
+proc createX*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qwizard_types.QWizard): void =
+  fcQWizard_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qwizard_types.QWizard): bool =
+  fcQWizard_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qwizard_types.QWizard): bool =
+  fcQWizard_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qwizard_types.QWizard): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWizard_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwizard_types.QWizard): cint =
+  fcQWizard_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwizard_types.QWizard, signal: cstring): cint =
+  fcQWizard_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwizard_types.QWizard, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWizard_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc create*(T: type gen_qwizard_types.QWizard,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: ref QWizardVTable = nil): gen_qwizard_types.QWizard =
+  let vtbl = if vtbl == nil: new QWizardVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QWizardVTable](fcQWizard_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQWizard_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQWizard_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQWizard_vtable_callback_metacall
+  if not isNil(vtbl[].validateCurrentPage):
+    vtbl[].vtbl.validateCurrentPage = fcQWizard_vtable_callback_validateCurrentPage
+  if not isNil(vtbl[].nextId):
+    vtbl[].vtbl.nextId = fcQWizard_vtable_callback_nextId
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQWizard_vtable_callback_setVisible
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQWizard_vtable_callback_sizeHint
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQWizard_vtable_callback_event
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQWizard_vtable_callback_resizeEvent
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQWizard_vtable_callback_paintEvent
+  if not isNil(vtbl[].done):
+    vtbl[].vtbl.done = fcQWizard_vtable_callback_done
+  if not isNil(vtbl[].initializePage):
+    vtbl[].vtbl.initializePage = fcQWizard_vtable_callback_initializePage
+  if not isNil(vtbl[].cleanupPage):
+    vtbl[].vtbl.cleanupPage = fcQWizard_vtable_callback_cleanupPage
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQWizard_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].open):
+    vtbl[].vtbl.open = fcQWizard_vtable_callback_open
+  if not isNil(vtbl[].exec):
+    vtbl[].vtbl.exec = fcQWizard_vtable_callback_exec
+  if not isNil(vtbl[].accept):
+    vtbl[].vtbl.accept = fcQWizard_vtable_callback_accept
+  if not isNil(vtbl[].reject):
+    vtbl[].vtbl.reject = fcQWizard_vtable_callback_reject
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQWizard_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQWizard_vtable_callback_closeEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQWizard_vtable_callback_showEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQWizard_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQWizard_vtable_callback_eventFilter
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQWizard_vtable_callback_devType
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQWizard_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQWizard_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQWizard_vtable_callback_paintEngine
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQWizard_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQWizard_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQWizard_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQWizard_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQWizard_vtable_callback_wheelEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQWizard_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQWizard_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQWizard_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQWizard_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQWizard_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQWizard_vtable_callback_moveEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQWizard_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQWizard_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQWizard_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQWizard_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQWizard_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQWizard_vtable_callback_dropEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQWizard_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQWizard_vtable_callback_nativeEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQWizard_vtable_callback_changeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQWizard_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQWizard_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQWizard_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQWizard_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQWizard_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQWizard_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQWizard_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQWizard_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQWizard_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQWizard_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQWizard_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQWizard_vtable_callback_disconnectNotify
+  let tmp = gen_qwizard_types.QWizard(h: fcQWizard_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  fcQWizard_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qwizard_types.QWizard,
+    vtbl: ref QWizardVTable = nil): gen_qwizard_types.QWizard =
+  let vtbl = if vtbl == nil: new QWizardVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QWizardVTable](fcQWizard_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQWizard_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQWizard_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQWizard_vtable_callback_metacall
+  if not isNil(vtbl[].validateCurrentPage):
+    vtbl[].vtbl.validateCurrentPage = fcQWizard_vtable_callback_validateCurrentPage
+  if not isNil(vtbl[].nextId):
+    vtbl[].vtbl.nextId = fcQWizard_vtable_callback_nextId
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQWizard_vtable_callback_setVisible
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQWizard_vtable_callback_sizeHint
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQWizard_vtable_callback_event
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQWizard_vtable_callback_resizeEvent
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQWizard_vtable_callback_paintEvent
+  if not isNil(vtbl[].done):
+    vtbl[].vtbl.done = fcQWizard_vtable_callback_done
+  if not isNil(vtbl[].initializePage):
+    vtbl[].vtbl.initializePage = fcQWizard_vtable_callback_initializePage
+  if not isNil(vtbl[].cleanupPage):
+    vtbl[].vtbl.cleanupPage = fcQWizard_vtable_callback_cleanupPage
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQWizard_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].open):
+    vtbl[].vtbl.open = fcQWizard_vtable_callback_open
+  if not isNil(vtbl[].exec):
+    vtbl[].vtbl.exec = fcQWizard_vtable_callback_exec
+  if not isNil(vtbl[].accept):
+    vtbl[].vtbl.accept = fcQWizard_vtable_callback_accept
+  if not isNil(vtbl[].reject):
+    vtbl[].vtbl.reject = fcQWizard_vtable_callback_reject
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQWizard_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQWizard_vtable_callback_closeEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQWizard_vtable_callback_showEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQWizard_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQWizard_vtable_callback_eventFilter
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQWizard_vtable_callback_devType
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQWizard_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQWizard_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQWizard_vtable_callback_paintEngine
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQWizard_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQWizard_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQWizard_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQWizard_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQWizard_vtable_callback_wheelEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQWizard_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQWizard_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQWizard_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQWizard_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQWizard_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQWizard_vtable_callback_moveEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQWizard_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQWizard_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQWizard_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQWizard_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQWizard_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQWizard_vtable_callback_dropEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQWizard_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQWizard_vtable_callback_nativeEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQWizard_vtable_callback_changeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQWizard_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQWizard_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQWizard_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQWizard_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQWizard_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQWizard_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQWizard_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQWizard_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQWizard_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQWizard_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQWizard_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQWizard_vtable_callback_disconnectNotify
+  let tmp = gen_qwizard_types.QWizard(h: fcQWizard_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  fcQWizard_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qwizard_types.QWizard,
+    parent: gen_qwidget_types.QWidget, flags: cint,
+    vtbl: ref QWizardVTable = nil): gen_qwizard_types.QWizard =
+  let vtbl = if vtbl == nil: new QWizardVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QWizardVTable](fcQWizard_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQWizard_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQWizard_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQWizard_vtable_callback_metacall
+  if not isNil(vtbl[].validateCurrentPage):
+    vtbl[].vtbl.validateCurrentPage = fcQWizard_vtable_callback_validateCurrentPage
+  if not isNil(vtbl[].nextId):
+    vtbl[].vtbl.nextId = fcQWizard_vtable_callback_nextId
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQWizard_vtable_callback_setVisible
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQWizard_vtable_callback_sizeHint
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQWizard_vtable_callback_event
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQWizard_vtable_callback_resizeEvent
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQWizard_vtable_callback_paintEvent
+  if not isNil(vtbl[].done):
+    vtbl[].vtbl.done = fcQWizard_vtable_callback_done
+  if not isNil(vtbl[].initializePage):
+    vtbl[].vtbl.initializePage = fcQWizard_vtable_callback_initializePage
+  if not isNil(vtbl[].cleanupPage):
+    vtbl[].vtbl.cleanupPage = fcQWizard_vtable_callback_cleanupPage
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQWizard_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].open):
+    vtbl[].vtbl.open = fcQWizard_vtable_callback_open
+  if not isNil(vtbl[].exec):
+    vtbl[].vtbl.exec = fcQWizard_vtable_callback_exec
+  if not isNil(vtbl[].accept):
+    vtbl[].vtbl.accept = fcQWizard_vtable_callback_accept
+  if not isNil(vtbl[].reject):
+    vtbl[].vtbl.reject = fcQWizard_vtable_callback_reject
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQWizard_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQWizard_vtable_callback_closeEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQWizard_vtable_callback_showEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQWizard_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQWizard_vtable_callback_eventFilter
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQWizard_vtable_callback_devType
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQWizard_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQWizard_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQWizard_vtable_callback_paintEngine
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQWizard_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQWizard_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQWizard_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQWizard_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQWizard_vtable_callback_wheelEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQWizard_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQWizard_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQWizard_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQWizard_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQWizard_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQWizard_vtable_callback_moveEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQWizard_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQWizard_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQWizard_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQWizard_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQWizard_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQWizard_vtable_callback_dropEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQWizard_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQWizard_vtable_callback_nativeEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQWizard_vtable_callback_changeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQWizard_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQWizard_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQWizard_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQWizard_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQWizard_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQWizard_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQWizard_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQWizard_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQWizard_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQWizard_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQWizard_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQWizard_vtable_callback_disconnectNotify
+  let tmp = gen_qwizard_types.QWizard(h: fcQWizard_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)))
+  fcQWizard_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+const cQWizard_mvtbl = cQWizardVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQWizard()[])](self.fcQWizard_vdata()[])
+    inst[].h = nil,
+
+  metaObject: fcQWizard_method_callback_metaObject,
+  metacast: fcQWizard_method_callback_metacast,
+  metacall: fcQWizard_method_callback_metacall,
+  validateCurrentPage: fcQWizard_method_callback_validateCurrentPage,
+  nextId: fcQWizard_method_callback_nextId,
+  setVisible: fcQWizard_method_callback_setVisible,
+  sizeHint: fcQWizard_method_callback_sizeHint,
+  event: fcQWizard_method_callback_event,
+  resizeEvent: fcQWizard_method_callback_resizeEvent,
+  paintEvent: fcQWizard_method_callback_paintEvent,
+  done: fcQWizard_method_callback_done,
+  initializePage: fcQWizard_method_callback_initializePage,
+  cleanupPage: fcQWizard_method_callback_cleanupPage,
+  minimumSizeHint: fcQWizard_method_callback_minimumSizeHint,
+  open: fcQWizard_method_callback_open,
+  exec: fcQWizard_method_callback_exec,
+  accept: fcQWizard_method_callback_accept,
+  reject: fcQWizard_method_callback_reject,
+  keyPressEvent: fcQWizard_method_callback_keyPressEvent,
+  closeEvent: fcQWizard_method_callback_closeEvent,
+  showEvent: fcQWizard_method_callback_showEvent,
+  contextMenuEvent: fcQWizard_method_callback_contextMenuEvent,
+  eventFilter: fcQWizard_method_callback_eventFilter,
+  devType: fcQWizard_method_callback_devType,
+  heightForWidth: fcQWizard_method_callback_heightForWidth,
+  hasHeightForWidth: fcQWizard_method_callback_hasHeightForWidth,
+  paintEngine: fcQWizard_method_callback_paintEngine,
+  mousePressEvent: fcQWizard_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQWizard_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQWizard_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQWizard_method_callback_mouseMoveEvent,
+  wheelEvent: fcQWizard_method_callback_wheelEvent,
+  keyReleaseEvent: fcQWizard_method_callback_keyReleaseEvent,
+  focusInEvent: fcQWizard_method_callback_focusInEvent,
+  focusOutEvent: fcQWizard_method_callback_focusOutEvent,
+  enterEvent: fcQWizard_method_callback_enterEvent,
+  leaveEvent: fcQWizard_method_callback_leaveEvent,
+  moveEvent: fcQWizard_method_callback_moveEvent,
+  tabletEvent: fcQWizard_method_callback_tabletEvent,
+  actionEvent: fcQWizard_method_callback_actionEvent,
+  dragEnterEvent: fcQWizard_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQWizard_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQWizard_method_callback_dragLeaveEvent,
+  dropEvent: fcQWizard_method_callback_dropEvent,
+  hideEvent: fcQWizard_method_callback_hideEvent,
+  nativeEvent: fcQWizard_method_callback_nativeEvent,
+  changeEvent: fcQWizard_method_callback_changeEvent,
+  metric: fcQWizard_method_callback_metric,
+  initPainter: fcQWizard_method_callback_initPainter,
+  redirected: fcQWizard_method_callback_redirected,
+  sharedPainter: fcQWizard_method_callback_sharedPainter,
+  inputMethodEvent: fcQWizard_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQWizard_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQWizard_method_callback_focusNextPrevChild,
+  timerEvent: fcQWizard_method_callback_timerEvent,
+  childEvent: fcQWizard_method_callback_childEvent,
+  customEvent: fcQWizard_method_callback_customEvent,
+  connectNotify: fcQWizard_method_callback_connectNotify,
+  disconnectNotify: fcQWizard_method_callback_disconnectNotify,
+)
+proc create*(T: type gen_qwizard_types.QWizard,
+    parent: gen_qwidget_types.QWidget,
+    inst: VirtualQWizard) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQWizard_new(addr(cQWizard_mvtbl), csize_t(sizeof(pointer)), parent.h)
+  fcQWizard_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qwizard_types.QWizard,
+    inst: VirtualQWizard) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQWizard_new2(addr(cQWizard_mvtbl), csize_t(sizeof(pointer)))
+  fcQWizard_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qwizard_types.QWizard,
+    parent: gen_qwidget_types.QWidget, flags: cint,
+    inst: VirtualQWizard) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQWizard_new3(addr(cQWizard_mvtbl), csize_t(sizeof(pointer)), parent.h, cint(flags))
+  fcQWizard_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc staticMetaObject*(_: type gen_qwizard_types.QWizard): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWizard_staticMetaObject())
+proc delete*(self: gen_qwizard_types.QWizard) =
+  fcQWizard_delete(self.h)
+proc metaObject*(self: gen_qwizard_types.QWizardPage): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWizardPage_metaObject(self.h))
+
+proc metacast*(self: gen_qwizard_types.QWizardPage, param1: cstring): pointer =
+  fcQWizardPage_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwizard_types.QWizardPage, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWizardPage_metacall(self.h, cint(param1), param2, param3)
+
+proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring): string =
+  let v_ms = fcQWizardPage_tr(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring): string =
+  let v_ms = fcQWizardPage_trUtf8(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setTitle*(self: gen_qwizard_types.QWizardPage, title: openArray[char]): void =
+  fcQWizardPage_setTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
+
+proc title*(self: gen_qwizard_types.QWizardPage): string =
+  let v_ms = fcQWizardPage_title(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setSubTitle*(self: gen_qwizard_types.QWizardPage, subTitle: openArray[char]): void =
+  fcQWizardPage_setSubTitle(self.h, struct_seaqt_string(data: if len(subTitle) > 0: addr subTitle[0] else: nil, len: csize_t(len(subTitle))))
+
+proc subTitle*(self: gen_qwizard_types.QWizardPage): string =
+  let v_ms = fcQWizardPage_subTitle(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setPixmap*(self: gen_qwizard_types.QWizardPage, which: cint, pixmap: gen_qpixmap_types.QPixmap): void =
+  fcQWizardPage_setPixmap(self.h, cint(which), pixmap.h)
+
+proc pixmap*(self: gen_qwizard_types.QWizardPage, which: cint): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQWizardPage_pixmap(self.h, cint(which)))
+
+proc setFinalPage*(self: gen_qwizard_types.QWizardPage, finalPage: bool): void =
+  fcQWizardPage_setFinalPage(self.h, finalPage)
+
+proc isFinalPage*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_isFinalPage(self.h)
+
+proc setCommitPage*(self: gen_qwizard_types.QWizardPage, commitPage: bool): void =
+  fcQWizardPage_setCommitPage(self.h, commitPage)
+
+proc isCommitPage*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_isCommitPage(self.h)
+
+proc setButtonText*(self: gen_qwizard_types.QWizardPage, which: cint, text: openArray[char]): void =
+  fcQWizardPage_setButtonText(self.h, cint(which), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc buttonText*(self: gen_qwizard_types.QWizardPage, which: cint): string =
+  let v_ms = fcQWizardPage_buttonText(self.h, cint(which))
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc initializePage*(self: gen_qwizard_types.QWizardPage): void =
+  fcQWizardPage_initializePage(self.h)
+
+proc cleanupPage*(self: gen_qwizard_types.QWizardPage): void =
+  fcQWizardPage_cleanupPage(self.h)
+
+proc validatePage*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_validatePage(self.h)
+
+proc isComplete*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_isComplete(self.h)
+
+proc nextId*(self: gen_qwizard_types.QWizardPage): cint =
+  fcQWizardPage_nextId(self.h)
+
+proc completeChanged*(self: gen_qwizard_types.QWizardPage): void =
+  fcQWizardPage_completeChanged(self.h)
+
+type QWizardPagecompleteChangedSlot* = proc()
+proc fcQWizardPage_slot_callback_completeChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QWizardPagecompleteChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQWizardPage_slot_callback_completeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWizardPagecompleteChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onCompleteChanged*(self: gen_qwizard_types.QWizardPage, slot: QWizardPagecompleteChangedSlot) =
+  var tmp = new QWizardPagecompleteChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizardPage_connect_completeChanged(self.h, cast[int](addr tmp[]), fcQWizardPage_slot_callback_completeChanged, fcQWizardPage_slot_callback_completeChanged_release)
+
+proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring): string =
+  let v_ms = fcQWizardPage_tr2(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQWizardPage_tr3(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring): string =
+  let v_ms = fcQWizardPage_trUtf82(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQWizardPage_trUtf83(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+type QWizardPagemetaObjectProc* = proc(self: QWizardPage): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QWizardPagemetacastProc* = proc(self: QWizardPage, param1: cstring): pointer {.raises: [], gcsafe.}
+type QWizardPagemetacallProc* = proc(self: QWizardPage, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QWizardPageinitializePageProc* = proc(self: QWizardPage): void {.raises: [], gcsafe.}
+type QWizardPagecleanupPageProc* = proc(self: QWizardPage): void {.raises: [], gcsafe.}
+type QWizardPagevalidatePageProc* = proc(self: QWizardPage): bool {.raises: [], gcsafe.}
+type QWizardPageisCompleteProc* = proc(self: QWizardPage): bool {.raises: [], gcsafe.}
+type QWizardPagenextIdProc* = proc(self: QWizardPage): cint {.raises: [], gcsafe.}
+type QWizardPagedevTypeProc* = proc(self: QWizardPage): cint {.raises: [], gcsafe.}
+type QWizardPagesetVisibleProc* = proc(self: QWizardPage, visible: bool): void {.raises: [], gcsafe.}
+type QWizardPagesizeHintProc* = proc(self: QWizardPage): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QWizardPageminimumSizeHintProc* = proc(self: QWizardPage): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QWizardPageheightForWidthProc* = proc(self: QWizardPage, param1: cint): cint {.raises: [], gcsafe.}
+type QWizardPagehasHeightForWidthProc* = proc(self: QWizardPage): bool {.raises: [], gcsafe.}
+type QWizardPagepaintEngineProc* = proc(self: QWizardPage): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QWizardPageeventProc* = proc(self: QWizardPage, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QWizardPagemousePressEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QWizardPagemouseReleaseEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QWizardPagemouseDoubleClickEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QWizardPagemouseMoveEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QWizardPagewheelEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QWizardPagekeyPressEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QWizardPagekeyReleaseEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QWizardPagefocusInEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QWizardPagefocusOutEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QWizardPageenterEventProc* = proc(self: QWizardPage, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QWizardPageleaveEventProc* = proc(self: QWizardPage, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QWizardPagepaintEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
+type QWizardPagemoveEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QWizardPageresizeEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QWizardPagecloseEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QCloseEvent): void {.raises: [], gcsafe.}
+type QWizardPagecontextMenuEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
+type QWizardPagetabletEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QWizardPageactionEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
+type QWizardPagedragEnterEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QWizardPagedragMoveEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QWizardPagedragLeaveEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QWizardPagedropEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QWizardPageshowEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QWizardPagehideEventProc* = proc(self: QWizardPage, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QWizardPagenativeEventProc* = proc(self: QWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QWizardPagechangeEventProc* = proc(self: QWizardPage, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QWizardPagemetricProc* = proc(self: QWizardPage, param1: cint): cint {.raises: [], gcsafe.}
+type QWizardPageinitPainterProc* = proc(self: QWizardPage, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QWizardPageredirectedProc* = proc(self: QWizardPage, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QWizardPagesharedPainterProc* = proc(self: QWizardPage): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QWizardPageinputMethodEventProc* = proc(self: QWizardPage, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QWizardPageinputMethodQueryProc* = proc(self: QWizardPage, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QWizardPagefocusNextPrevChildProc* = proc(self: QWizardPage, next: bool): bool {.raises: [], gcsafe.}
+type QWizardPageeventFilterProc* = proc(self: QWizardPage, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QWizardPagetimerEventProc* = proc(self: QWizardPage, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QWizardPagechildEventProc* = proc(self: QWizardPage, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QWizardPagecustomEventProc* = proc(self: QWizardPage, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QWizardPageconnectNotifyProc* = proc(self: QWizardPage, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QWizardPagedisconnectNotifyProc* = proc(self: QWizardPage, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QWizardPageVTable* = object
+  vtbl: cQWizardPageVTable
+  metaObject*: QWizardPagemetaObjectProc
+  metacast*: QWizardPagemetacastProc
+  metacall*: QWizardPagemetacallProc
+  initializePage*: QWizardPageinitializePageProc
+  cleanupPage*: QWizardPagecleanupPageProc
+  validatePage*: QWizardPagevalidatePageProc
+  isComplete*: QWizardPageisCompleteProc
+  nextId*: QWizardPagenextIdProc
+  devType*: QWizardPagedevTypeProc
+  setVisible*: QWizardPagesetVisibleProc
+  sizeHint*: QWizardPagesizeHintProc
+  minimumSizeHint*: QWizardPageminimumSizeHintProc
+  heightForWidth*: QWizardPageheightForWidthProc
+  hasHeightForWidth*: QWizardPagehasHeightForWidthProc
+  paintEngine*: QWizardPagepaintEngineProc
+  event*: QWizardPageeventProc
+  mousePressEvent*: QWizardPagemousePressEventProc
+  mouseReleaseEvent*: QWizardPagemouseReleaseEventProc
+  mouseDoubleClickEvent*: QWizardPagemouseDoubleClickEventProc
+  mouseMoveEvent*: QWizardPagemouseMoveEventProc
+  wheelEvent*: QWizardPagewheelEventProc
+  keyPressEvent*: QWizardPagekeyPressEventProc
+  keyReleaseEvent*: QWizardPagekeyReleaseEventProc
+  focusInEvent*: QWizardPagefocusInEventProc
+  focusOutEvent*: QWizardPagefocusOutEventProc
+  enterEvent*: QWizardPageenterEventProc
+  leaveEvent*: QWizardPageleaveEventProc
+  paintEvent*: QWizardPagepaintEventProc
+  moveEvent*: QWizardPagemoveEventProc
+  resizeEvent*: QWizardPageresizeEventProc
+  closeEvent*: QWizardPagecloseEventProc
+  contextMenuEvent*: QWizardPagecontextMenuEventProc
+  tabletEvent*: QWizardPagetabletEventProc
+  actionEvent*: QWizardPageactionEventProc
+  dragEnterEvent*: QWizardPagedragEnterEventProc
+  dragMoveEvent*: QWizardPagedragMoveEventProc
+  dragLeaveEvent*: QWizardPagedragLeaveEventProc
+  dropEvent*: QWizardPagedropEventProc
+  showEvent*: QWizardPageshowEventProc
+  hideEvent*: QWizardPagehideEventProc
+  nativeEvent*: QWizardPagenativeEventProc
+  changeEvent*: QWizardPagechangeEventProc
+  metric*: QWizardPagemetricProc
+  initPainter*: QWizardPageinitPainterProc
+  redirected*: QWizardPageredirectedProc
+  sharedPainter*: QWizardPagesharedPainterProc
+  inputMethodEvent*: QWizardPageinputMethodEventProc
+  inputMethodQuery*: QWizardPageinputMethodQueryProc
+  focusNextPrevChild*: QWizardPagefocusNextPrevChildProc
+  eventFilter*: QWizardPageeventFilterProc
+  timerEvent*: QWizardPagetimerEventProc
+  childEvent*: QWizardPagechildEventProc
+  customEvent*: QWizardPagecustomEventProc
+  connectNotify*: QWizardPageconnectNotifyProc
+  disconnectNotify*: QWizardPagedisconnectNotifyProc
+
+proc QWizardPagemetaObject*(self: gen_qwizard_types.QWizardPage): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWizardPage_virtualbase_metaObject(self.h))
+
+proc QWizardPagemetacast*(self: gen_qwizard_types.QWizardPage, param1: cstring): pointer =
+  fcQWizardPage_virtualbase_metacast(self.h, param1)
+
+proc QWizardPagemetacall*(self: gen_qwizard_types.QWizardPage, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWizardPage_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QWizardPageinitializePage*(self: gen_qwizard_types.QWizardPage): void =
+  fcQWizardPage_virtualbase_initializePage(self.h)
+
+proc QWizardPagecleanupPage*(self: gen_qwizard_types.QWizardPage): void =
+  fcQWizardPage_virtualbase_cleanupPage(self.h)
+
+proc QWizardPagevalidatePage*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_virtualbase_validatePage(self.h)
+
+proc QWizardPageisComplete*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_virtualbase_isComplete(self.h)
+
+proc QWizardPagenextId*(self: gen_qwizard_types.QWizardPage): cint =
+  fcQWizardPage_virtualbase_nextId(self.h)
+
+proc QWizardPagedevType*(self: gen_qwizard_types.QWizardPage): cint =
+  fcQWizardPage_virtualbase_devType(self.h)
+
+proc QWizardPagesetVisible*(self: gen_qwizard_types.QWizardPage, visible: bool): void =
+  fcQWizardPage_virtualbase_setVisible(self.h, visible)
+
+proc QWizardPagesizeHint*(self: gen_qwizard_types.QWizardPage): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQWizardPage_virtualbase_sizeHint(self.h))
+
+proc QWizardPageminimumSizeHint*(self: gen_qwizard_types.QWizardPage): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQWizardPage_virtualbase_minimumSizeHint(self.h))
+
+proc QWizardPageheightForWidth*(self: gen_qwizard_types.QWizardPage, param1: cint): cint =
+  fcQWizardPage_virtualbase_heightForWidth(self.h, param1)
+
+proc QWizardPagehasHeightForWidth*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_virtualbase_hasHeightForWidth(self.h)
+
+proc QWizardPagepaintEngine*(self: gen_qwizard_types.QWizardPage): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQWizardPage_virtualbase_paintEngine(self.h))
+
+proc QWizardPageevent*(self: gen_qwizard_types.QWizardPage, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWizardPage_virtualbase_event(self.h, event.h)
+
+proc QWizardPagemousePressEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QMouseEvent): void =
+  fcQWizardPage_virtualbase_mousePressEvent(self.h, event.h)
+
+proc QWizardPagemouseReleaseEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QMouseEvent): void =
+  fcQWizardPage_virtualbase_mouseReleaseEvent(self.h, event.h)
+
+proc QWizardPagemouseDoubleClickEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QMouseEvent): void =
+  fcQWizardPage_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QWizardPagemouseMoveEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QMouseEvent): void =
+  fcQWizardPage_virtualbase_mouseMoveEvent(self.h, event.h)
+
+proc QWizardPagewheelEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QWheelEvent): void =
+  fcQWizardPage_virtualbase_wheelEvent(self.h, event.h)
+
+proc QWizardPagekeyPressEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QKeyEvent): void =
+  fcQWizardPage_virtualbase_keyPressEvent(self.h, event.h)
+
+proc QWizardPagekeyReleaseEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QKeyEvent): void =
+  fcQWizardPage_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QWizardPagefocusInEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QFocusEvent): void =
+  fcQWizardPage_virtualbase_focusInEvent(self.h, event.h)
+
+proc QWizardPagefocusOutEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QFocusEvent): void =
+  fcQWizardPage_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QWizardPageenterEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qcoreevent_types.QEvent): void =
+  fcQWizardPage_virtualbase_enterEvent(self.h, event.h)
+
+proc QWizardPageleaveEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qcoreevent_types.QEvent): void =
+  fcQWizardPage_virtualbase_leaveEvent(self.h, event.h)
+
+proc QWizardPagepaintEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QPaintEvent): void =
+  fcQWizardPage_virtualbase_paintEvent(self.h, event.h)
+
+proc QWizardPagemoveEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QMoveEvent): void =
+  fcQWizardPage_virtualbase_moveEvent(self.h, event.h)
+
+proc QWizardPageresizeEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QResizeEvent): void =
+  fcQWizardPage_virtualbase_resizeEvent(self.h, event.h)
+
+proc QWizardPagecloseEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QCloseEvent): void =
+  fcQWizardPage_virtualbase_closeEvent(self.h, event.h)
+
+proc QWizardPagecontextMenuEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQWizardPage_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QWizardPagetabletEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QTabletEvent): void =
+  fcQWizardPage_virtualbase_tabletEvent(self.h, event.h)
+
+proc QWizardPageactionEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QActionEvent): void =
+  fcQWizardPage_virtualbase_actionEvent(self.h, event.h)
+
+proc QWizardPagedragEnterEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQWizardPage_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QWizardPagedragMoveEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQWizardPage_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QWizardPagedragLeaveEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQWizardPage_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QWizardPagedropEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QDropEvent): void =
+  fcQWizardPage_virtualbase_dropEvent(self.h, event.h)
+
+proc QWizardPageshowEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QShowEvent): void =
+  fcQWizardPage_virtualbase_showEvent(self.h, event.h)
+
+proc QWizardPagehideEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qevent_types.QHideEvent): void =
+  fcQWizardPage_virtualbase_hideEvent(self.h, event.h)
+
+proc QWizardPagenativeEvent*(self: gen_qwizard_types.QWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQWizardPage_virtualbase_nativeEvent(self.h, struct_seaqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QWizardPagechangeEvent*(self: gen_qwizard_types.QWizardPage, param1: gen_qcoreevent_types.QEvent): void =
+  fcQWizardPage_virtualbase_changeEvent(self.h, param1.h)
+
+proc QWizardPagemetric*(self: gen_qwizard_types.QWizardPage, param1: cint): cint =
+  fcQWizardPage_virtualbase_metric(self.h, cint(param1))
+
+proc QWizardPageinitPainter*(self: gen_qwizard_types.QWizardPage, painter: gen_qpainter_types.QPainter): void =
+  fcQWizardPage_virtualbase_initPainter(self.h, painter.h)
+
+proc QWizardPageredirected*(self: gen_qwizard_types.QWizardPage, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQWizardPage_virtualbase_redirected(self.h, offset.h))
+
+proc QWizardPagesharedPainter*(self: gen_qwizard_types.QWizardPage): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQWizardPage_virtualbase_sharedPainter(self.h))
+
+proc QWizardPageinputMethodEvent*(self: gen_qwizard_types.QWizardPage, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQWizardPage_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QWizardPageinputMethodQuery*(self: gen_qwizard_types.QWizardPage, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWizardPage_virtualbase_inputMethodQuery(self.h, cint(param1)))
+
+proc QWizardPagefocusNextPrevChild*(self: gen_qwizard_types.QWizardPage, next: bool): bool =
+  fcQWizardPage_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QWizardPageeventFilter*(self: gen_qwizard_types.QWizardPage, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQWizardPage_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QWizardPagetimerEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQWizardPage_virtualbase_timerEvent(self.h, event.h)
+
+proc QWizardPagechildEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQWizardPage_virtualbase_childEvent(self.h, event.h)
+
+proc QWizardPagecustomEvent*(self: gen_qwizard_types.QWizardPage, event: gen_qcoreevent_types.QEvent): void =
+  fcQWizardPage_virtualbase_customEvent(self.h, event.h)
+
+proc QWizardPageconnectNotify*(self: gen_qwizard_types.QWizardPage, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWizardPage_virtualbase_connectNotify(self.h, signal.h)
+
+proc QWizardPagedisconnectNotify*(self: gen_qwizard_types.QWizardPage, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQWizardPage_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQWizardPage_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.h
+
+proc fcQWizardPage_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_initializePage(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  vtbl[].initializePage(self)
+
+proc fcQWizardPage_vtable_callback_cleanupPage(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  vtbl[].cleanupPage(self)
+
+proc fcQWizardPage_vtable_callback_validatePage(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].validatePage(self)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_isComplete(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].isComplete(self)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_nextId(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].nextId(self)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].devType(self)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = visible
+  vtbl[].setVisible(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].sizeHint(self)
+  virtualReturn.h
+
+proc fcQWizardPage_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].minimumSizeHint(self)
+  virtualReturn.h
+
+proc fcQWizardPage_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = param1
+  var virtualReturn = vtbl[].heightForWidth(self, slotval1)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].hasHeightForWidth(self)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
+  virtualReturn.h
+
+proc fcQWizardPage_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = vtbl[].event(self, slotval1)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mousePressEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseReleaseEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseMoveEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  vtbl[].wheelEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyPressEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusInEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusOutEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].enterEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].leaveEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  vtbl[].paintEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  vtbl[].moveEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  vtbl[].resizeEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  vtbl[].closeEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  vtbl[].contextMenuEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  vtbl[].tabletEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  vtbl[].actionEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  vtbl[].showEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  vtbl[].hideEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  vtbl[].changeEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl[].metric(self, slotval1)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  var virtualReturn = vtbl[].redirected(self, slotval1)
+  virtualReturn.h
+
+proc fcQWizardPage_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
+  virtualReturn.h
+
+proc fcQWizardPage_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  vtbl[].inputMethodEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  virtualReturn.h
+
+proc fcQWizardPage_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = next
+  var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qobject_types.QObject(h: watched)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
+  virtualReturn
+
+proc fcQWizardPage_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
+
+proc fcQWizardPage_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QWizardPageVTable](fcQWizardPage_vdata(self)[])
+  let self = QWizardPage(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQWizardPage* {.inheritable.} = ref object of QWizardPage
+  vtbl*: cQWizardPageVTable
+
+method metaObject*(self: VirtualQWizardPage): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QWizardPagemetaObject(self[])
+method metacast*(self: VirtualQWizardPage, param1: cstring): pointer {.base.} =
+  QWizardPagemetacast(self[], param1)
+method metacall*(self: VirtualQWizardPage, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWizardPagemetacall(self[], param1, param2, param3)
+method initializePage*(self: VirtualQWizardPage): void {.base.} =
+  QWizardPageinitializePage(self[])
+method cleanupPage*(self: VirtualQWizardPage): void {.base.} =
+  QWizardPagecleanupPage(self[])
+method validatePage*(self: VirtualQWizardPage): bool {.base.} =
+  QWizardPagevalidatePage(self[])
+method isComplete*(self: VirtualQWizardPage): bool {.base.} =
+  QWizardPageisComplete(self[])
+method nextId*(self: VirtualQWizardPage): cint {.base.} =
+  QWizardPagenextId(self[])
+method devType*(self: VirtualQWizardPage): cint {.base.} =
+  QWizardPagedevType(self[])
+method setVisible*(self: VirtualQWizardPage, visible: bool): void {.base.} =
+  QWizardPagesetVisible(self[], visible)
+method sizeHint*(self: VirtualQWizardPage): gen_qsize_types.QSize {.base.} =
+  QWizardPagesizeHint(self[])
+method minimumSizeHint*(self: VirtualQWizardPage): gen_qsize_types.QSize {.base.} =
+  QWizardPageminimumSizeHint(self[])
+method heightForWidth*(self: VirtualQWizardPage, param1: cint): cint {.base.} =
+  QWizardPageheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQWizardPage): bool {.base.} =
+  QWizardPagehasHeightForWidth(self[])
+method paintEngine*(self: VirtualQWizardPage): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QWizardPagepaintEngine(self[])
+method event*(self: VirtualQWizardPage, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWizardPageevent(self[], event)
+method mousePressEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWizardPagemousePressEvent(self[], event)
+method mouseReleaseEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWizardPagemouseReleaseEvent(self[], event)
+method mouseDoubleClickEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWizardPagemouseDoubleClickEvent(self[], event)
+method mouseMoveEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWizardPagemouseMoveEvent(self[], event)
+method wheelEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QWizardPagewheelEvent(self[], event)
+method keyPressEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QWizardPagekeyPressEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QWizardPagekeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QWizardPagefocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QWizardPagefocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQWizardPage, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWizardPageenterEvent(self[], event)
+method leaveEvent*(self: VirtualQWizardPage, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWizardPageleaveEvent(self[], event)
+method paintEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QWizardPagepaintEvent(self[], event)
+method moveEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QWizardPagemoveEvent(self[], event)
+method resizeEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QWizardPageresizeEvent(self[], event)
+method closeEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QWizardPagecloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QWizardPagecontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QWizardPagetabletEvent(self[], event)
+method actionEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QWizardPageactionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QWizardPagedragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QWizardPagedragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QWizardPagedragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QWizardPagedropEvent(self[], event)
+method showEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QWizardPageshowEvent(self[], event)
+method hideEvent*(self: VirtualQWizardPage, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QWizardPagehideEvent(self[], event)
+method nativeEvent*(self: VirtualQWizardPage, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QWizardPagenativeEvent(self[], eventType, message, resultVal)
+method changeEvent*(self: VirtualQWizardPage, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWizardPagechangeEvent(self[], param1)
+method metric*(self: VirtualQWizardPage, param1: cint): cint {.base.} =
+  QWizardPagemetric(self[], param1)
+method initPainter*(self: VirtualQWizardPage, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QWizardPageinitPainter(self[], painter)
+method redirected*(self: VirtualQWizardPage, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QWizardPageredirected(self[], offset)
+method sharedPainter*(self: VirtualQWizardPage): gen_qpainter_types.QPainter {.base.} =
+  QWizardPagesharedPainter(self[])
+method inputMethodEvent*(self: VirtualQWizardPage, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QWizardPageinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQWizardPage, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QWizardPageinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQWizardPage, next: bool): bool {.base.} =
+  QWizardPagefocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQWizardPage, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWizardPageeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQWizardPage, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWizardPagetimerEvent(self[], event)
+method childEvent*(self: VirtualQWizardPage, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWizardPagechildEvent(self[], event)
+method customEvent*(self: VirtualQWizardPage, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWizardPagecustomEvent(self[], event)
+method connectNotify*(self: VirtualQWizardPage, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWizardPageconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQWizardPage, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWizardPagedisconnectNotify(self[], signal)
+
+proc fcQWizardPage_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.metaObject()
+  virtualReturn.h
+
+proc fcQWizardPage_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = (param1)
+  var virtualReturn = inst.metacast(slotval1)
+  virtualReturn
+
+proc fcQWizardPage_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQWizardPage_method_callback_initializePage(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  inst.initializePage()
+
+proc fcQWizardPage_method_callback_cleanupPage(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  inst.cleanupPage()
+
+proc fcQWizardPage_method_callback_validatePage(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.validatePage()
+  virtualReturn
+
+proc fcQWizardPage_method_callback_isComplete(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.isComplete()
+  virtualReturn
+
+proc fcQWizardPage_method_callback_nextId(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.nextId()
+  virtualReturn
+
+proc fcQWizardPage_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.devType()
+  virtualReturn
+
+proc fcQWizardPage_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = visible
+  inst.setVisible(slotval1)
+
+proc fcQWizardPage_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.sizeHint()
+  virtualReturn.h
+
+proc fcQWizardPage_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.minimumSizeHint()
+  virtualReturn.h
+
+proc fcQWizardPage_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = param1
+  var virtualReturn = inst.heightForWidth(slotval1)
+  virtualReturn
+
+proc fcQWizardPage_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.hasHeightForWidth()
+  virtualReturn
+
+proc fcQWizardPage_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.paintEngine()
+  virtualReturn.h
+
+proc fcQWizardPage_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = inst.event(slotval1)
+  virtualReturn
+
+proc fcQWizardPage_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mousePressEvent(slotval1)
+
+proc fcQWizardPage_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseReleaseEvent(slotval1)
+
+proc fcQWizardPage_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseDoubleClickEvent(slotval1)
+
+proc fcQWizardPage_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseMoveEvent(slotval1)
+
+proc fcQWizardPage_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  inst.wheelEvent(slotval1)
+
+proc fcQWizardPage_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  inst.keyPressEvent(slotval1)
+
+proc fcQWizardPage_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  inst.keyReleaseEvent(slotval1)
+
+proc fcQWizardPage_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  inst.focusInEvent(slotval1)
+
+proc fcQWizardPage_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  inst.focusOutEvent(slotval1)
+
+proc fcQWizardPage_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.enterEvent(slotval1)
+
+proc fcQWizardPage_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.leaveEvent(slotval1)
+
+proc fcQWizardPage_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  inst.paintEvent(slotval1)
+
+proc fcQWizardPage_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  inst.moveEvent(slotval1)
+
+proc fcQWizardPage_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  inst.resizeEvent(slotval1)
+
+proc fcQWizardPage_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  inst.closeEvent(slotval1)
+
+proc fcQWizardPage_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  inst.contextMenuEvent(slotval1)
+
+proc fcQWizardPage_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  inst.tabletEvent(slotval1)
+
+proc fcQWizardPage_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  inst.actionEvent(slotval1)
+
+proc fcQWizardPage_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  inst.dragEnterEvent(slotval1)
+
+proc fcQWizardPage_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  inst.dragMoveEvent(slotval1)
+
+proc fcQWizardPage_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  inst.dragLeaveEvent(slotval1)
+
+proc fcQWizardPage_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  inst.dropEvent(slotval1)
+
+proc fcQWizardPage_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  inst.showEvent(slotval1)
+
+proc fcQWizardPage_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  inst.hideEvent(slotval1)
+
+proc fcQWizardPage_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQWizardPage_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  inst.changeEvent(slotval1)
+
+proc fcQWizardPage_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = cint(param1)
+  var virtualReturn = inst.metric(slotval1)
+  virtualReturn
+
+proc fcQWizardPage_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  inst.initPainter(slotval1)
+
+proc fcQWizardPage_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  var virtualReturn = inst.redirected(slotval1)
+  virtualReturn.h
+
+proc fcQWizardPage_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  var virtualReturn = inst.sharedPainter()
+  virtualReturn.h
+
+proc fcQWizardPage_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  inst.inputMethodEvent(slotval1)
+
+proc fcQWizardPage_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = cint(param1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
+  virtualReturn.h
+
+proc fcQWizardPage_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = next
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
+  virtualReturn
+
+proc fcQWizardPage_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qobject_types.QObject(h: watched)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+proc fcQWizardPage_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  inst.timerEvent(slotval1)
+
+proc fcQWizardPage_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  inst.childEvent(slotval1)
+
+proc fcQWizardPage_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.customEvent(slotval1)
+
+proc fcQWizardPage_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  inst.connectNotify(slotval1)
+
+proc fcQWizardPage_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQWizardPage](fcQWizardPage_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  inst.disconnectNotify(slotval1)
+
+
+proc setField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], value: gen_qvariant_types.QVariant): void =
+  fcQWizardPage_protectedbase_setField(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
+
+proc field*(self: gen_qwizard_types.QWizardPage, name: openArray[char]): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWizardPage_protectedbase_field(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget): void =
+  fcQWizardPage_protectedbase_registerField(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h)
+
+proc wizard*(self: gen_qwizard_types.QWizardPage): gen_qwizard_types.QWizard =
+  gen_qwizard_types.QWizard(h: fcQWizardPage_protectedbase_wizard(self.h))
+
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget, property: cstring): void =
+  fcQWizardPage_protectedbase_registerField2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property)
+
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: openArray[char], widget: gen_qwidget_types.QWidget, property: cstring, changedSignal: cstring): void =
+  fcQWizardPage_protectedbase_registerField3(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), widget.h, property, changedSignal)
+
+proc updateMicroFocus*(self: gen_qwizard_types.QWizardPage): void =
+  fcQWizardPage_protectedbase_updateMicroFocus(self.h)
+
+proc createX*(self: gen_qwizard_types.QWizardPage): void =
+  fcQWizardPage_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qwizard_types.QWizardPage): void =
+  fcQWizardPage_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qwizard_types.QWizardPage): bool =
+  fcQWizardPage_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qwizard_types.QWizardPage): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWizardPage_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwizard_types.QWizardPage): cint =
+  fcQWizardPage_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwizard_types.QWizardPage, signal: cstring): cint =
+  fcQWizardPage_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwizard_types.QWizardPage, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWizardPage_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc create*(T: type gen_qwizard_types.QWizardPage,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: ref QWizardPageVTable = nil): gen_qwizard_types.QWizardPage =
+  let vtbl = if vtbl == nil: new QWizardPageVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QWizardPageVTable](fcQWizardPage_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQWizardPage_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQWizardPage_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQWizardPage_vtable_callback_metacall
+  if not isNil(vtbl[].initializePage):
+    vtbl[].vtbl.initializePage = fcQWizardPage_vtable_callback_initializePage
+  if not isNil(vtbl[].cleanupPage):
+    vtbl[].vtbl.cleanupPage = fcQWizardPage_vtable_callback_cleanupPage
+  if not isNil(vtbl[].validatePage):
+    vtbl[].vtbl.validatePage = fcQWizardPage_vtable_callback_validatePage
+  if not isNil(vtbl[].isComplete):
+    vtbl[].vtbl.isComplete = fcQWizardPage_vtable_callback_isComplete
+  if not isNil(vtbl[].nextId):
+    vtbl[].vtbl.nextId = fcQWizardPage_vtable_callback_nextId
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQWizardPage_vtable_callback_devType
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQWizardPage_vtable_callback_setVisible
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQWizardPage_vtable_callback_sizeHint
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQWizardPage_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQWizardPage_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQWizardPage_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQWizardPage_vtable_callback_paintEngine
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQWizardPage_vtable_callback_event
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQWizardPage_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQWizardPage_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQWizardPage_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQWizardPage_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQWizardPage_vtable_callback_wheelEvent
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQWizardPage_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQWizardPage_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQWizardPage_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQWizardPage_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQWizardPage_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQWizardPage_vtable_callback_leaveEvent
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQWizardPage_vtable_callback_paintEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQWizardPage_vtable_callback_moveEvent
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQWizardPage_vtable_callback_resizeEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQWizardPage_vtable_callback_closeEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQWizardPage_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQWizardPage_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQWizardPage_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQWizardPage_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQWizardPage_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQWizardPage_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQWizardPage_vtable_callback_dropEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQWizardPage_vtable_callback_showEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQWizardPage_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQWizardPage_vtable_callback_nativeEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQWizardPage_vtable_callback_changeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQWizardPage_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQWizardPage_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQWizardPage_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQWizardPage_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQWizardPage_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQWizardPage_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQWizardPage_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQWizardPage_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQWizardPage_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQWizardPage_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQWizardPage_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQWizardPage_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQWizardPage_vtable_callback_disconnectNotify
+  let tmp = gen_qwizard_types.QWizardPage(h: fcQWizardPage_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  fcQWizardPage_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qwizard_types.QWizardPage,
+    vtbl: ref QWizardPageVTable = nil): gen_qwizard_types.QWizardPage =
+  let vtbl = if vtbl == nil: new QWizardPageVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QWizardPageVTable](fcQWizardPage_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQWizardPage_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQWizardPage_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQWizardPage_vtable_callback_metacall
+  if not isNil(vtbl[].initializePage):
+    vtbl[].vtbl.initializePage = fcQWizardPage_vtable_callback_initializePage
+  if not isNil(vtbl[].cleanupPage):
+    vtbl[].vtbl.cleanupPage = fcQWizardPage_vtable_callback_cleanupPage
+  if not isNil(vtbl[].validatePage):
+    vtbl[].vtbl.validatePage = fcQWizardPage_vtable_callback_validatePage
+  if not isNil(vtbl[].isComplete):
+    vtbl[].vtbl.isComplete = fcQWizardPage_vtable_callback_isComplete
+  if not isNil(vtbl[].nextId):
+    vtbl[].vtbl.nextId = fcQWizardPage_vtable_callback_nextId
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQWizardPage_vtable_callback_devType
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQWizardPage_vtable_callback_setVisible
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQWizardPage_vtable_callback_sizeHint
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQWizardPage_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQWizardPage_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQWizardPage_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQWizardPage_vtable_callback_paintEngine
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQWizardPage_vtable_callback_event
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQWizardPage_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQWizardPage_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQWizardPage_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQWizardPage_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQWizardPage_vtable_callback_wheelEvent
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQWizardPage_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQWizardPage_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQWizardPage_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQWizardPage_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQWizardPage_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQWizardPage_vtable_callback_leaveEvent
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQWizardPage_vtable_callback_paintEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQWizardPage_vtable_callback_moveEvent
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQWizardPage_vtable_callback_resizeEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQWizardPage_vtable_callback_closeEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQWizardPage_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQWizardPage_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQWizardPage_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQWizardPage_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQWizardPage_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQWizardPage_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQWizardPage_vtable_callback_dropEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQWizardPage_vtable_callback_showEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQWizardPage_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQWizardPage_vtable_callback_nativeEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQWizardPage_vtable_callback_changeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQWizardPage_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQWizardPage_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQWizardPage_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQWizardPage_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQWizardPage_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQWizardPage_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQWizardPage_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQWizardPage_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQWizardPage_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQWizardPage_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQWizardPage_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQWizardPage_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQWizardPage_vtable_callback_disconnectNotify
+  let tmp = gen_qwizard_types.QWizardPage(h: fcQWizardPage_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  fcQWizardPage_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+const cQWizardPage_mvtbl = cQWizardPageVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQWizardPage()[])](self.fcQWizardPage_vdata()[])
+    inst[].h = nil,
+
+  metaObject: fcQWizardPage_method_callback_metaObject,
+  metacast: fcQWizardPage_method_callback_metacast,
+  metacall: fcQWizardPage_method_callback_metacall,
+  initializePage: fcQWizardPage_method_callback_initializePage,
+  cleanupPage: fcQWizardPage_method_callback_cleanupPage,
+  validatePage: fcQWizardPage_method_callback_validatePage,
+  isComplete: fcQWizardPage_method_callback_isComplete,
+  nextId: fcQWizardPage_method_callback_nextId,
+  devType: fcQWizardPage_method_callback_devType,
+  setVisible: fcQWizardPage_method_callback_setVisible,
+  sizeHint: fcQWizardPage_method_callback_sizeHint,
+  minimumSizeHint: fcQWizardPage_method_callback_minimumSizeHint,
+  heightForWidth: fcQWizardPage_method_callback_heightForWidth,
+  hasHeightForWidth: fcQWizardPage_method_callback_hasHeightForWidth,
+  paintEngine: fcQWizardPage_method_callback_paintEngine,
+  event: fcQWizardPage_method_callback_event,
+  mousePressEvent: fcQWizardPage_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQWizardPage_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: fcQWizardPage_method_callback_mouseDoubleClickEvent,
+  mouseMoveEvent: fcQWizardPage_method_callback_mouseMoveEvent,
+  wheelEvent: fcQWizardPage_method_callback_wheelEvent,
+  keyPressEvent: fcQWizardPage_method_callback_keyPressEvent,
+  keyReleaseEvent: fcQWizardPage_method_callback_keyReleaseEvent,
+  focusInEvent: fcQWizardPage_method_callback_focusInEvent,
+  focusOutEvent: fcQWizardPage_method_callback_focusOutEvent,
+  enterEvent: fcQWizardPage_method_callback_enterEvent,
+  leaveEvent: fcQWizardPage_method_callback_leaveEvent,
+  paintEvent: fcQWizardPage_method_callback_paintEvent,
+  moveEvent: fcQWizardPage_method_callback_moveEvent,
+  resizeEvent: fcQWizardPage_method_callback_resizeEvent,
+  closeEvent: fcQWizardPage_method_callback_closeEvent,
+  contextMenuEvent: fcQWizardPage_method_callback_contextMenuEvent,
+  tabletEvent: fcQWizardPage_method_callback_tabletEvent,
+  actionEvent: fcQWizardPage_method_callback_actionEvent,
+  dragEnterEvent: fcQWizardPage_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQWizardPage_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQWizardPage_method_callback_dragLeaveEvent,
+  dropEvent: fcQWizardPage_method_callback_dropEvent,
+  showEvent: fcQWizardPage_method_callback_showEvent,
+  hideEvent: fcQWizardPage_method_callback_hideEvent,
+  nativeEvent: fcQWizardPage_method_callback_nativeEvent,
+  changeEvent: fcQWizardPage_method_callback_changeEvent,
+  metric: fcQWizardPage_method_callback_metric,
+  initPainter: fcQWizardPage_method_callback_initPainter,
+  redirected: fcQWizardPage_method_callback_redirected,
+  sharedPainter: fcQWizardPage_method_callback_sharedPainter,
+  inputMethodEvent: fcQWizardPage_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQWizardPage_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQWizardPage_method_callback_focusNextPrevChild,
+  eventFilter: fcQWizardPage_method_callback_eventFilter,
+  timerEvent: fcQWizardPage_method_callback_timerEvent,
+  childEvent: fcQWizardPage_method_callback_childEvent,
+  customEvent: fcQWizardPage_method_callback_customEvent,
+  connectNotify: fcQWizardPage_method_callback_connectNotify,
+  disconnectNotify: fcQWizardPage_method_callback_disconnectNotify,
+)
+proc create*(T: type gen_qwizard_types.QWizardPage,
+    parent: gen_qwidget_types.QWidget,
+    inst: VirtualQWizardPage) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQWizardPage_new(addr(cQWizardPage_mvtbl), csize_t(sizeof(pointer)), parent.h)
+  fcQWizardPage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qwizard_types.QWizardPage,
+    inst: VirtualQWizardPage) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQWizardPage_new2(addr(cQWizardPage_mvtbl), csize_t(sizeof(pointer)))
+  fcQWizardPage_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc staticMetaObject*(_: type gen_qwizard_types.QWizardPage): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWizardPage_staticMetaObject())
+proc delete*(self: gen_qwizard_types.QWizardPage) =
+  fcQWizardPage_delete(self.h)
