@@ -106,7 +106,6 @@ int QHttpMultiPart_protectedbase_senderSignalIndex(const VirtualQHttpMultiPart* 
 int QHttpMultiPart_protectedbase_receivers(const VirtualQHttpMultiPart* self, const char* signal);
 bool QHttpMultiPart_protectedbase_isSignalConnected(const VirtualQHttpMultiPart* self, QMetaMethod* signal);
 
-const QMetaObject* QHttpMultiPart_staticMetaObject();
 void QHttpMultiPart_delete(QHttpMultiPart* self);
 
 #ifdef __cplusplus

@@ -191,6 +191,7 @@ proc fcQObject_connectSenderSignalReceiverMethodType(sender: pointer, signal: po
 proc fcQObject_connectSenderSignalMemberType(self: pointer, sender: pointer, signal: cstring, member: cstring, typeVal: cint): pointer {.importc: "QObject_connect_sender_signal_member_type".}
 proc fcQObject_destroyed_QObject(self: pointer, param1: pointer): void {.importc: "QObject_destroyed_QObject".}
 proc fcQObject_connect_destroyed_QObject(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_destroyed_QObject".}
+proc fcQObject_connect_objectNameChanged(self: pointer, slot: int, callback: proc (slot: int, objectName: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_objectNameChanged".}
 proc fcQObject_vdata(self: pointer): ptr pointer {.importc: "QObject_vdata".}
 proc fvdata_cQObject(self: pointer): pointer {.importc: "vdata_QObject".}
 
@@ -525,6 +526,26 @@ proc onDestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyed_QObjec
   tmp[] = slot
   GC_ref(tmp)
   fcQObject_connect_destroyed_QObject(self.h, cast[int](addr tmp[]), fcQObject_slot_callback_destroyed_QObject, fcQObject_slot_callback_destroyed_QObject_release)
+
+type QObjectobjectNameChangedSlot* = proc(objectName: openArray[char])
+proc fcQObject_slot_callback_objectNameChanged(slot: int, objectName: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QObjectobjectNameChangedSlot](cast[pointer](slot))
+  let vobjectName_ms = objectName
+  let vobjectNamex_ret = string.fromBytes(vobjectName_ms)
+  c_free(vobjectName_ms.data)
+  let slotval1 = vobjectNamex_ret
+
+  nimfunc[](slotval1)
+
+proc fcQObject_slot_callback_objectNameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QObjectobjectNameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onObjectNameChanged*(self: gen_qobject_types.QObject, slot: QObjectobjectNameChangedSlot) =
+  var tmp = new QObjectobjectNameChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQObject_connect_objectNameChanged(self.h, cast[int](addr tmp[]), fcQObject_slot_callback_objectNameChanged, fcQObject_slot_callback_objectNameChanged_release)
 
 type QObjectmetaObjectProc* = proc(self: QObject): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QObjectmetacastProc* = proc(self: QObject, param1: cstring): pointer {.raises: [], gcsafe.}

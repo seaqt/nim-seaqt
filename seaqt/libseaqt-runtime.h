@@ -9,31 +9,28 @@
 
 namespace seaqt {
 struct release_callback {
+  intptr_t slot;
   void (*release)(intptr_t);
 
-  constexpr release_callback(void (*release)(intptr_t)) : release(release) {}
-  constexpr release_callback(release_callback &&rhs) : release(rhs.release) {
+  constexpr release_callback(intptr_t slot, void (*release)(intptr_t)) : slot(slot), release(release) {}
+  constexpr release_callback(release_callback &&rhs) : slot(rhs.slot), release(rhs.release) {
+    rhs.slot = 0;
     rhs.release = 0;
   }
   release_callback &operator=(release_callback &&rhs) {
+    slot = rhs.slot;
     release = rhs.release;
+    rhs.slot = slot;
     rhs.release = 0;
     return *this;
   };
 
-  void operator()(intptr_t slot) {
+  void operator()() {
     if (release)
       release(slot);
   }
   release_callback(const release_callback &) = delete;
   release_callback &operator=(const release_callback &) = delete;
-};
-struct caller {
-  intptr_t slot;
-  seaqt::release_callback release;
-  caller(caller&&) = default;
-  caller& operator=(caller&&) = default;
-  ~caller() { release(slot); }
 };
 } // namespace seaqt
 

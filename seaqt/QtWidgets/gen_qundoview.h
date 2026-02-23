@@ -366,7 +366,6 @@ int QUndoView_protectedbase_senderSignalIndex(const VirtualQUndoView* self);
 int QUndoView_protectedbase_receivers(const VirtualQUndoView* self, const char* signal);
 bool QUndoView_protectedbase_isSignalConnected(const VirtualQUndoView* self, QMetaMethod* signal);
 
-const QMetaObject* QUndoView_staticMetaObject();
 void QUndoView_delete(QUndoView* self);
 
 #ifdef __cplusplus

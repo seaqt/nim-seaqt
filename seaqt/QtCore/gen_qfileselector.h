@@ -87,7 +87,6 @@ int QFileSelector_protectedbase_senderSignalIndex(const VirtualQFileSelector* se
 int QFileSelector_protectedbase_receivers(const VirtualQFileSelector* self, const char* signal);
 bool QFileSelector_protectedbase_isSignalConnected(const VirtualQFileSelector* self, QMetaMethod* signal);
 
-const QMetaObject* QFileSelector_staticMetaObject();
 void QFileSelector_delete(QFileSelector* self);
 
 #ifdef __cplusplus

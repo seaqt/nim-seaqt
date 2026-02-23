@@ -43,7 +43,6 @@ void QEvent_ignore(QEvent* self);
 int QEvent_registerEventType();
 int QEvent_registerEventType_hint(int hint);
 
-const QMetaObject* QEvent_staticMetaObject();
 void QEvent_delete(QEvent* self);
 
 QTimerEvent* QTimerEvent_new_timerId(int timerId);

@@ -82,7 +82,6 @@ QPalette* QPalette_resolve_QPalette(const QPalette* self, QPalette* param1);
 unsigned int QPalette_resolve(const QPalette* self);
 void QPalette_resolve_uint(QPalette* self, unsigned int mask);
 
-const QMetaObject* QPalette_staticMetaObject();
 void QPalette_delete(QPalette* self);
 
 #ifdef __cplusplus

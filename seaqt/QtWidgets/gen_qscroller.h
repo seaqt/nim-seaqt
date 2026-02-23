@@ -74,7 +74,6 @@ struct seaqt_string QScroller_trUtf8_s_c_n(const char* s, const char* c, int n);
 int QScroller_grabGesture_target_gestureType(QObject* target, int gestureType);
 bool QScroller_handleInput_input_position_timestamp(QScroller* self, int input, QPointF* position, long long timestamp);
 
-const QMetaObject* QScroller_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

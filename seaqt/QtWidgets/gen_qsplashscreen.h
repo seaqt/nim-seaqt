@@ -244,7 +244,6 @@ int QSplashScreen_protectedbase_senderSignalIndex(const VirtualQSplashScreen* se
 int QSplashScreen_protectedbase_receivers(const VirtualQSplashScreen* self, const char* signal);
 bool QSplashScreen_protectedbase_isSignalConnected(const VirtualQSplashScreen* self, QMetaMethod* signal);
 
-const QMetaObject* QSplashScreen_staticMetaObject();
 void QSplashScreen_delete(QSplashScreen* self);
 
 #ifdef __cplusplus

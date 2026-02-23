@@ -123,10 +123,7 @@ void QAudioOutputSelectorControl_activeOutputChanged(QAudioOutputSelectorControl
 }
 
 void QAudioOutputSelectorControl_connect_activeOutputChanged(QAudioOutputSelectorControl* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& name) {
+	QAudioOutputSelectorControl::connect(self, static_cast<void (QAudioOutputSelectorControl::*)(const QString&)>(&QAudioOutputSelectorControl::activeOutputChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& name) {
 			const QString name_ret = name;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray name_b = name_ret.toUtf8();
@@ -135,10 +132,8 @@ void QAudioOutputSelectorControl_connect_activeOutputChanged(QAudioOutputSelecto
 			name_ms.data = static_cast<char*>(malloc(name_ms.len));
 			memcpy(name_ms.data, name_b.data(), name_ms.len);
 			struct seaqt_string sigval1 = name_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QAudioOutputSelectorControl::connect(self, static_cast<void (QAudioOutputSelectorControl::*)(const QString&)>(&QAudioOutputSelectorControl::activeOutputChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAudioOutputSelectorControl_availableOutputsChanged(QAudioOutputSelectorControl* self) {
@@ -146,14 +141,9 @@ void QAudioOutputSelectorControl_availableOutputsChanged(QAudioOutputSelectorCon
 }
 
 void QAudioOutputSelectorControl_connect_availableOutputsChanged(QAudioOutputSelectorControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAudioOutputSelectorControl::connect(self, static_cast<void (QAudioOutputSelectorControl::*)()>(&QAudioOutputSelectorControl::availableOutputsChanged), self, local_caller{slot, callback, release});
+	QAudioOutputSelectorControl::connect(self, static_cast<void (QAudioOutputSelectorControl::*)()>(&QAudioOutputSelectorControl::availableOutputsChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QAudioOutputSelectorControl_tr_s_c(const char* s, const char* c) {

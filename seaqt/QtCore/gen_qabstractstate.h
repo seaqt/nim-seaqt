@@ -51,7 +51,9 @@ struct seaqt_string QAbstractState_tr_s_c_n(const char* s, const char* c, int n)
 struct seaqt_string QAbstractState_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QAbstractState_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QAbstractState_staticMetaObject();
+void QAbstractState_connect_entered(QAbstractState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAbstractState_connect_exited(QAbstractState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QAbstractState_delete(QAbstractState* self);
 
 #ifdef __cplusplus

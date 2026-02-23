@@ -530,17 +530,12 @@ void QMediaPlayer_mediaChanged(QMediaPlayer* self, QMediaContent* media) {
 }
 
 void QMediaPlayer_connect_mediaChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, QMediaContent*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QMediaContent*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QMediaContent*);
-		void operator()(const QMediaContent& media) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QMediaContent&)>(&QMediaPlayer::mediaChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QMediaContent& media) {
 			const QMediaContent& media_ret = media;
 			// Cast returned reference into pointer
 			QMediaContent* sigval1 = const_cast<QMediaContent*>(&media_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QMediaContent&)>(&QMediaPlayer::mediaChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_currentMediaChanged(QMediaPlayer* self, QMediaContent* media) {
@@ -548,17 +543,12 @@ void QMediaPlayer_currentMediaChanged(QMediaPlayer* self, QMediaContent* media) 
 }
 
 void QMediaPlayer_connect_currentMediaChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, QMediaContent*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QMediaContent*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QMediaContent*);
-		void operator()(const QMediaContent& media) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QMediaContent&)>(&QMediaPlayer::currentMediaChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QMediaContent& media) {
 			const QMediaContent& media_ret = media;
 			// Cast returned reference into pointer
 			QMediaContent* sigval1 = const_cast<QMediaContent*>(&media_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QMediaContent&)>(&QMediaPlayer::currentMediaChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_stateChanged(QMediaPlayer* self, int newState) {
@@ -566,16 +556,11 @@ void QMediaPlayer_stateChanged(QMediaPlayer* self, int newState) {
 }
 
 void QMediaPlayer_connect_stateChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMediaPlayer::State newState) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QMediaPlayer::State)>(&QMediaPlayer::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QMediaPlayer::State newState) {
 			QMediaPlayer::State newState_ret = newState;
 			int sigval1 = static_cast<int>(newState_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QMediaPlayer::State)>(&QMediaPlayer::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_mediaStatusChanged(QMediaPlayer* self, int status) {
@@ -583,16 +568,11 @@ void QMediaPlayer_mediaStatusChanged(QMediaPlayer* self, int status) {
 }
 
 void QMediaPlayer_connect_mediaStatusChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMediaPlayer::MediaStatus status) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QMediaPlayer::MediaStatus)>(&QMediaPlayer::mediaStatusChanged), self, [callback, release = seaqt::release_callback{slot,release}](QMediaPlayer::MediaStatus status) {
 			QMediaPlayer::MediaStatus status_ret = status;
 			int sigval1 = static_cast<int>(status_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QMediaPlayer::MediaStatus)>(&QMediaPlayer::mediaStatusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_durationChanged(QMediaPlayer* self, long long duration) {
@@ -600,16 +580,11 @@ void QMediaPlayer_durationChanged(QMediaPlayer* self, long long duration) {
 }
 
 void QMediaPlayer_connect_durationChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, long long);
-		void operator()(qint64 duration) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(qint64)>(&QMediaPlayer::durationChanged), self, [callback, release = seaqt::release_callback{slot,release}](qint64 duration) {
 			qint64 duration_ret = duration;
 			long long sigval1 = static_cast<long long>(duration_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(qint64)>(&QMediaPlayer::durationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_positionChanged(QMediaPlayer* self, long long position) {
@@ -617,16 +592,11 @@ void QMediaPlayer_positionChanged(QMediaPlayer* self, long long position) {
 }
 
 void QMediaPlayer_connect_positionChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, long long);
-		void operator()(qint64 position) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(qint64)>(&QMediaPlayer::positionChanged), self, [callback, release = seaqt::release_callback{slot,release}](qint64 position) {
 			qint64 position_ret = position;
 			long long sigval1 = static_cast<long long>(position_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(qint64)>(&QMediaPlayer::positionChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_volumeChanged(QMediaPlayer* self, int volume) {
@@ -634,15 +604,10 @@ void QMediaPlayer_volumeChanged(QMediaPlayer* self, int volume) {
 }
 
 void QMediaPlayer_connect_volumeChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int volume) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(int)>(&QMediaPlayer::volumeChanged), self, [callback, release = seaqt::release_callback{slot,release}](int volume) {
 			int sigval1 = volume;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(int)>(&QMediaPlayer::volumeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_mutedChanged(QMediaPlayer* self, bool muted) {
@@ -650,15 +615,10 @@ void QMediaPlayer_mutedChanged(QMediaPlayer* self, bool muted) {
 }
 
 void QMediaPlayer_connect_mutedChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool muted) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(bool)>(&QMediaPlayer::mutedChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool muted) {
 			bool sigval1 = muted;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(bool)>(&QMediaPlayer::mutedChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_audioAvailableChanged(QMediaPlayer* self, bool available) {
@@ -666,15 +626,10 @@ void QMediaPlayer_audioAvailableChanged(QMediaPlayer* self, bool available) {
 }
 
 void QMediaPlayer_connect_audioAvailableChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool available) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(bool)>(&QMediaPlayer::audioAvailableChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool available) {
 			bool sigval1 = available;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(bool)>(&QMediaPlayer::audioAvailableChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_videoAvailableChanged(QMediaPlayer* self, bool videoAvailable) {
@@ -682,15 +637,10 @@ void QMediaPlayer_videoAvailableChanged(QMediaPlayer* self, bool videoAvailable)
 }
 
 void QMediaPlayer_connect_videoAvailableChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool videoAvailable) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(bool)>(&QMediaPlayer::videoAvailableChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool videoAvailable) {
 			bool sigval1 = videoAvailable;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(bool)>(&QMediaPlayer::videoAvailableChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_bufferStatusChanged(QMediaPlayer* self, int percentFilled) {
@@ -698,15 +648,10 @@ void QMediaPlayer_bufferStatusChanged(QMediaPlayer* self, int percentFilled) {
 }
 
 void QMediaPlayer_connect_bufferStatusChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int percentFilled) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(int)>(&QMediaPlayer::bufferStatusChanged), self, [callback, release = seaqt::release_callback{slot,release}](int percentFilled) {
 			int sigval1 = percentFilled;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(int)>(&QMediaPlayer::bufferStatusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_seekableChanged(QMediaPlayer* self, bool seekable) {
@@ -714,15 +659,10 @@ void QMediaPlayer_seekableChanged(QMediaPlayer* self, bool seekable) {
 }
 
 void QMediaPlayer_connect_seekableChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool seekable) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(bool)>(&QMediaPlayer::seekableChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool seekable) {
 			bool sigval1 = seekable;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(bool)>(&QMediaPlayer::seekableChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_playbackRateChanged(QMediaPlayer* self, double rate) {
@@ -730,16 +670,11 @@ void QMediaPlayer_playbackRateChanged(QMediaPlayer* self, double rate) {
 }
 
 void QMediaPlayer_connect_playbackRateChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal rate) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(qreal)>(&QMediaPlayer::playbackRateChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal rate) {
 			qreal rate_ret = rate;
 			double sigval1 = static_cast<double>(rate_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(qreal)>(&QMediaPlayer::playbackRateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_audioRoleChanged(QMediaPlayer* self, int role) {
@@ -747,16 +682,11 @@ void QMediaPlayer_audioRoleChanged(QMediaPlayer* self, int role) {
 }
 
 void QMediaPlayer_connect_audioRoleChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QAudio::Role role) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QAudio::Role)>(&QMediaPlayer::audioRoleChanged), self, [callback, release = seaqt::release_callback{slot,release}](QAudio::Role role) {
 			QAudio::Role role_ret = role;
 			int sigval1 = static_cast<int>(role_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QAudio::Role)>(&QMediaPlayer::audioRoleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_customAudioRoleChanged(QMediaPlayer* self, struct seaqt_string role) {
@@ -765,10 +695,7 @@ void QMediaPlayer_customAudioRoleChanged(QMediaPlayer* self, struct seaqt_string
 }
 
 void QMediaPlayer_connect_customAudioRoleChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& role) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QString&)>(&QMediaPlayer::customAudioRoleChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& role) {
 			const QString role_ret = role;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray role_b = role_ret.toUtf8();
@@ -777,10 +704,8 @@ void QMediaPlayer_connect_customAudioRoleChanged(QMediaPlayer* self, intptr_t sl
 			role_ms.data = static_cast<char*>(malloc(role_ms.len));
 			memcpy(role_ms.data, role_b.data(), role_ms.len);
 			struct seaqt_string sigval1 = role_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QString&)>(&QMediaPlayer::customAudioRoleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_error_error(QMediaPlayer* self, int error) {
@@ -788,16 +713,11 @@ void QMediaPlayer_error_error(QMediaPlayer* self, int error) {
 }
 
 void QMediaPlayer_connect_error_error(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMediaPlayer::Error error) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QMediaPlayer::Error)>(&QMediaPlayer::error), self, [callback, release = seaqt::release_callback{slot,release}](QMediaPlayer::Error error) {
 			QMediaPlayer::Error error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QMediaPlayer::Error)>(&QMediaPlayer::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaPlayer_networkConfigurationChanged(QMediaPlayer* self, QNetworkConfiguration* configuration) {
@@ -805,17 +725,12 @@ void QMediaPlayer_networkConfigurationChanged(QMediaPlayer* self, QNetworkConfig
 }
 
 void QMediaPlayer_connect_networkConfigurationChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, QNetworkConfiguration*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkConfiguration*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QNetworkConfiguration*);
-		void operator()(const QNetworkConfiguration& configuration) {
+	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QNetworkConfiguration&)>(&QMediaPlayer::networkConfigurationChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QNetworkConfiguration& configuration) {
 			const QNetworkConfiguration& configuration_ret = configuration;
 			// Cast returned reference into pointer
 			QNetworkConfiguration* sigval1 = const_cast<QNetworkConfiguration*>(&configuration_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(const QNetworkConfiguration&)>(&QMediaPlayer::networkConfigurationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 bool QMediaPlayer_bind(QMediaPlayer* self, QObject* param1) {

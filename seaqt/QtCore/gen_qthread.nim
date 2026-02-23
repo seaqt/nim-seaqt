@@ -104,6 +104,8 @@ proc fcQThread_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {
 proc fcQThread_exitRetcode(self: pointer, retcode: cint): void {.importc: "QThread_exit_retcode".}
 proc fcQThread_start_QThread_Priority(self: pointer, param1: cint): void {.importc: "QThread_start_QThread_Priority".}
 proc fcQThread_waitDeadline(self: pointer, deadline: pointer): bool {.importc: "QThread_wait_deadline".}
+proc fcQThread_connect_started(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QThread_connect_started".}
+proc fcQThread_connect_finished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QThread_connect_finished".}
 proc fcQThread_vdata(self: pointer): ptr pointer {.importc: "QThread_vdata".}
 proc fvdata_cQThread(self: pointer): pointer {.importc: "vdata_QThread".}
 
@@ -268,6 +270,36 @@ proc start*(self: gen_qthread_types.QThread, param1: cint): void =
 
 proc wait*(self: gen_qthread_types.QThread, deadline: gen_qdeadlinetimer_types.QDeadlineTimer): bool =
   fcQThread_waitDeadline(self.h, deadline.h)
+
+type QThreadstartedSlot* = proc()
+proc fcQThread_slot_callback_started(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QThreadstartedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQThread_slot_callback_started_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QThreadstartedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onStarted*(self: gen_qthread_types.QThread, slot: QThreadstartedSlot) =
+  var tmp = new QThreadstartedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQThread_connect_started(self.h, cast[int](addr tmp[]), fcQThread_slot_callback_started, fcQThread_slot_callback_started_release)
+
+type QThreadfinishedSlot* = proc()
+proc fcQThread_slot_callback_finished(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QThreadfinishedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQThread_slot_callback_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QThreadfinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onFinished*(self: gen_qthread_types.QThread, slot: QThreadfinishedSlot) =
+  var tmp = new QThreadfinishedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQThread_connect_finished(self.h, cast[int](addr tmp[]), fcQThread_slot_callback_finished, fcQThread_slot_callback_finished_release)
 
 type QThreadmetaObjectProc* = proc(self: QThread): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QThreadmetacastProc* = proc(self: QThread, param1: cstring): pointer {.raises: [], gcsafe.}

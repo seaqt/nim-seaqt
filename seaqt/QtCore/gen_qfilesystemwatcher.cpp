@@ -390,6 +390,34 @@ struct seaqt_string QFileSystemWatcher_trUtf8_s_c_n(const char* s, const char* c
 	return _ms;
 }
 
+void QFileSystemWatcher_connect_fileChanged(QFileSystemWatcher* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QFileSystemWatcher::connect(self, &QFileSystemWatcher::fileChanged, self, [callback, release = seaqt::release_callback{slot,release}](const QString& path, auto) {
+			const QString path_ret = path;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray path_b = path_ret.toUtf8();
+			struct seaqt_string path_ms;
+			path_ms.len = path_b.length();
+			path_ms.data = static_cast<char*>(malloc(path_ms.len));
+			memcpy(path_ms.data, path_b.data(), path_ms.len);
+			struct seaqt_string sigval1 = path_ms;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QFileSystemWatcher_connect_directoryChanged(QFileSystemWatcher* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QFileSystemWatcher::connect(self, &QFileSystemWatcher::directoryChanged, self, [callback, release = seaqt::release_callback{slot,release}](const QString& path, auto) {
+			const QString path_ret = path;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray path_b = path_ret.toUtf8();
+			struct seaqt_string path_ms;
+			path_ms.len = path_b.length();
+			path_ms.data = static_cast<char*>(malloc(path_ms.len));
+			memcpy(path_ms.data, path_b.data(), path_ms.len);
+			struct seaqt_string sigval1 = path_ms;
+			callback(release.slot, sigval1);
+	});
+}
+
 const QMetaObject* QFileSystemWatcher_staticMetaObject() { return &QFileSystemWatcher::staticMetaObject; }
 void* QFileSystemWatcher_vdata(VirtualQFileSystemWatcher* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQFileSystemWatcher>()); }
 VirtualQFileSystemWatcher* vdata_QFileSystemWatcher(void* vdata) { return reinterpret_cast<VirtualQFileSystemWatcher*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQFileSystemWatcher>()); }

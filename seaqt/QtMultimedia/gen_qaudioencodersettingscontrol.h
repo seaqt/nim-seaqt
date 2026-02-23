@@ -46,7 +46,6 @@ struct seaqt_string QAudioEncoderSettingsControl_tr_s_c_n(const char* s, const c
 struct seaqt_string QAudioEncoderSettingsControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QAudioEncoderSettingsControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QAudioEncoderSettingsControl_staticMetaObject();
 void QAudioEncoderSettingsControl_delete(QAudioEncoderSettingsControl* self);
 
 #ifdef __cplusplus

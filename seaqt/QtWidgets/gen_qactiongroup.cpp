@@ -289,15 +289,10 @@ void QActionGroup_triggered(QActionGroup* self, QAction* param1) {
 }
 
 void QActionGroup_connect_triggered(QActionGroup* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAction*);
-		void operator()(QAction* param1) {
+	QActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::triggered), self, [callback, release = seaqt::release_callback{slot,release}](QAction* param1) {
 			QAction* sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::triggered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QActionGroup_hovered(QActionGroup* self, QAction* param1) {
@@ -305,15 +300,10 @@ void QActionGroup_hovered(QActionGroup* self, QAction* param1) {
 }
 
 void QActionGroup_connect_hovered(QActionGroup* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAction*);
-		void operator()(QAction* param1) {
+	QActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::hovered), self, [callback, release = seaqt::release_callback{slot,release}](QAction* param1) {
 			QAction* sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::hovered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QActionGroup_tr_s_c(const char* s, const char* c) {

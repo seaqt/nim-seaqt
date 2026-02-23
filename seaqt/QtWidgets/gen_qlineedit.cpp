@@ -1075,10 +1075,7 @@ void QLineEdit_textChanged(QLineEdit* self, struct seaqt_string param1) {
 }
 
 void QLineEdit_connect_textChanged(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& param1) {
+	QLineEdit::connect(self, static_cast<void (QLineEdit::*)(const QString&)>(&QLineEdit::textChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& param1) {
 			const QString param1_ret = param1;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray param1_b = param1_ret.toUtf8();
@@ -1087,10 +1084,8 @@ void QLineEdit_connect_textChanged(QLineEdit* self, intptr_t slot, void (*callba
 			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
 			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
 			struct seaqt_string sigval1 = param1_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QLineEdit::connect(self, static_cast<void (QLineEdit::*)(const QString&)>(&QLineEdit::textChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QLineEdit_textEdited(QLineEdit* self, struct seaqt_string param1) {
@@ -1099,10 +1094,7 @@ void QLineEdit_textEdited(QLineEdit* self, struct seaqt_string param1) {
 }
 
 void QLineEdit_connect_textEdited(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& param1) {
+	QLineEdit::connect(self, static_cast<void (QLineEdit::*)(const QString&)>(&QLineEdit::textEdited), self, [callback, release = seaqt::release_callback{slot,release}](const QString& param1) {
 			const QString param1_ret = param1;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray param1_b = param1_ret.toUtf8();
@@ -1111,10 +1103,8 @@ void QLineEdit_connect_textEdited(QLineEdit* self, intptr_t slot, void (*callbac
 			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
 			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
 			struct seaqt_string sigval1 = param1_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QLineEdit::connect(self, static_cast<void (QLineEdit::*)(const QString&)>(&QLineEdit::textEdited), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QLineEdit_cursorPositionChanged(QLineEdit* self, int param1, int param2) {
@@ -1122,16 +1112,11 @@ void QLineEdit_cursorPositionChanged(QLineEdit* self, int param1, int param2) {
 }
 
 void QLineEdit_connect_cursorPositionChanged(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int);
-		void operator()(int param1, int param2) {
+	QLineEdit::connect(self, static_cast<void (QLineEdit::*)(int, int)>(&QLineEdit::cursorPositionChanged), self, [callback, release = seaqt::release_callback{slot,release}](int param1, int param2) {
 			int sigval1 = param1;
 			int sigval2 = param2;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QLineEdit::connect(self, static_cast<void (QLineEdit::*)(int, int)>(&QLineEdit::cursorPositionChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QLineEdit_returnPressed(QLineEdit* self) {
@@ -1139,14 +1124,9 @@ void QLineEdit_returnPressed(QLineEdit* self) {
 }
 
 void QLineEdit_connect_returnPressed(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::returnPressed), self, local_caller{slot, callback, release});
+	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::returnPressed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QLineEdit_editingFinished(QLineEdit* self) {
@@ -1154,14 +1134,9 @@ void QLineEdit_editingFinished(QLineEdit* self) {
 }
 
 void QLineEdit_connect_editingFinished(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::editingFinished), self, local_caller{slot, callback, release});
+	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::editingFinished), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QLineEdit_selectionChanged(QLineEdit* self) {
@@ -1169,14 +1144,9 @@ void QLineEdit_selectionChanged(QLineEdit* self) {
 }
 
 void QLineEdit_connect_selectionChanged(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::selectionChanged), self, local_caller{slot, callback, release});
+	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QLineEdit_inputRejected(QLineEdit* self) {
@@ -1184,14 +1154,9 @@ void QLineEdit_inputRejected(QLineEdit* self) {
 }
 
 void QLineEdit_connect_inputRejected(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::inputRejected), self, local_caller{slot, callback, release});
+	QLineEdit::connect(self, static_cast<void (QLineEdit::*)()>(&QLineEdit::inputRejected), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 QVariant* QLineEdit_inputMethodQuery_Qt_InputMethodQuery(const QLineEdit* self, int param1) {

@@ -33,7 +33,6 @@ int QPdfDestination_page(const QPdfDestination* self);
 QPointF* QPdfDestination_location(const QPdfDestination* self);
 double QPdfDestination_zoom(const QPdfDestination* self);
 
-const QMetaObject* QPdfDestination_staticMetaObject();
 void QPdfDestination_delete(QPdfDestination* self);
 
 #ifdef __cplusplus

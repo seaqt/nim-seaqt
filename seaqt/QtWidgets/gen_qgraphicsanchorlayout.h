@@ -56,7 +56,6 @@ struct seaqt_string QGraphicsAnchor_tr_s_c_n(const char* s, const char* c, int n
 struct seaqt_string QGraphicsAnchor_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QGraphicsAnchor_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QGraphicsAnchor_staticMetaObject();
 void QGraphicsAnchor_delete(QGraphicsAnchor* self);
 
 typedef struct VirtualQGraphicsAnchorLayout VirtualQGraphicsAnchorLayout;

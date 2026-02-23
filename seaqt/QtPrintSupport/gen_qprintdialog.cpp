@@ -845,15 +845,10 @@ void QPrintDialog_accepted(QPrintDialog* self, QPrinter* printer) {
 }
 
 void QPrintDialog_connect_accepted(QPrintDialog* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPrinter*);
-		void operator()(QPrinter* printer) {
+	QPrintDialog::connect(self, static_cast<void (QPrintDialog::*)(QPrinter*)>(&QPrintDialog::accepted), self, [callback, release = seaqt::release_callback{slot,release}](QPrinter* printer) {
 			QPrinter* sigval1 = printer;
-			callback(slot, sigval1);
-		}
-	};
-	QPrintDialog::connect(self, static_cast<void (QPrintDialog::*)(QPrinter*)>(&QPrintDialog::accepted), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QPrintDialog_tr_s_c(const char* s, const char* c) {

@@ -121,7 +121,6 @@ int QWebPluginFactory_protectedbase_senderSignalIndex(const VirtualQWebPluginFac
 int QWebPluginFactory_protectedbase_receivers(const VirtualQWebPluginFactory* self, const char* signal);
 bool QWebPluginFactory_protectedbase_isSignalConnected(const VirtualQWebPluginFactory* self, QMetaMethod* signal);
 
-const QMetaObject* QWebPluginFactory_staticMetaObject();
 void QWebPluginFactory_delete(QWebPluginFactory* self);
 
 QWebPluginFactory__MimeType* QWebPluginFactory__MimeType_new(QWebPluginFactory__MimeType* from);

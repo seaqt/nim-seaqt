@@ -85,7 +85,6 @@ int QIconEnginePlugin_protectedbase_senderSignalIndex(const VirtualQIconEnginePl
 int QIconEnginePlugin_protectedbase_receivers(const VirtualQIconEnginePlugin* self, const char* signal);
 bool QIconEnginePlugin_protectedbase_isSignalConnected(const VirtualQIconEnginePlugin* self, QMetaMethod* signal);
 
-const QMetaObject* QIconEnginePlugin_staticMetaObject();
 void QIconEnginePlugin_delete(QIconEnginePlugin* self);
 
 #ifdef __cplusplus

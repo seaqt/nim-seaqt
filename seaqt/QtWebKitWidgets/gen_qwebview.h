@@ -313,7 +313,6 @@ int QWebView_protectedbase_senderSignalIndex(const VirtualQWebView* self);
 int QWebView_protectedbase_receivers(const VirtualQWebView* self, const char* signal);
 bool QWebView_protectedbase_isSignalConnected(const VirtualQWebView* self, QMetaMethod* signal);
 
-const QMetaObject* QWebView_staticMetaObject();
 void QWebView_delete(QWebView* self);
 
 #ifdef __cplusplus

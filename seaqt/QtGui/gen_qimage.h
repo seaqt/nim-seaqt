@@ -221,7 +221,6 @@ QImage* QImage_protectedbase_convertToFormat_helper(const VirtualQImage* self, i
 bool QImage_protectedbase_convertToFormat_inplace(VirtualQImage* self, int format, int flags);
 QImage* QImage_protectedbase_smoothScaled(const VirtualQImage* self, int w, int h);
 
-const QMetaObject* QImage_staticMetaObject();
 void QImage_delete(QImage* self);
 
 #ifdef __cplusplus

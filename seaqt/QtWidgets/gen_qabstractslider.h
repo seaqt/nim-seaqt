@@ -263,7 +263,6 @@ int QAbstractSlider_protectedbase_senderSignalIndex(const VirtualQAbstractSlider
 int QAbstractSlider_protectedbase_receivers(const VirtualQAbstractSlider* self, const char* signal);
 bool QAbstractSlider_protectedbase_isSignalConnected(const VirtualQAbstractSlider* self, QMetaMethod* signal);
 
-const QMetaObject* QAbstractSlider_staticMetaObject();
 void QAbstractSlider_delete(QAbstractSlider* self);
 
 #ifdef __cplusplus

@@ -378,7 +378,6 @@ int QStandardItemModel_protectedbase_senderSignalIndex(const VirtualQStandardIte
 int QStandardItemModel_protectedbase_receivers(const VirtualQStandardItemModel* self, const char* signal);
 bool QStandardItemModel_protectedbase_isSignalConnected(const VirtualQStandardItemModel* self, QMetaMethod* signal);
 
-const QMetaObject* QStandardItemModel_staticMetaObject();
 void QStandardItemModel_delete(QStandardItemModel* self);
 
 #ifdef __cplusplus

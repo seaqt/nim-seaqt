@@ -1241,10 +1241,7 @@ void QFileDialog_fileSelected(QFileDialog* self, struct seaqt_string file) {
 }
 
 void QFileDialog_connect_fileSelected(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& file) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QString&)>(&QFileDialog::fileSelected), self, [callback, release = seaqt::release_callback{slot,release}](const QString& file) {
 			const QString file_ret = file;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray file_b = file_ret.toUtf8();
@@ -1253,10 +1250,8 @@ void QFileDialog_connect_fileSelected(QFileDialog* self, intptr_t slot, void (*c
 			file_ms.data = static_cast<char*>(malloc(file_ms.len));
 			memcpy(file_ms.data, file_b.data(), file_ms.len);
 			struct seaqt_string sigval1 = file_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QString&)>(&QFileDialog::fileSelected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileDialog_filesSelected(QFileDialog* self, struct seaqt_array /* of struct seaqt_string */  files) {
@@ -1271,10 +1266,7 @@ void QFileDialog_filesSelected(QFileDialog* self, struct seaqt_array /* of struc
 }
 
 void QFileDialog_connect_filesSelected(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of struct seaqt_string */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of struct seaqt_string */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of struct seaqt_string */ );
-		void operator()(const QStringList& files) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QStringList&)>(&QFileDialog::filesSelected), self, [callback, release = seaqt::release_callback{slot,release}](const QStringList& files) {
 			const QStringList& files_ret = files;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			struct seaqt_string* files_arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * files_ret.length()));
@@ -1292,10 +1284,8 @@ void QFileDialog_connect_filesSelected(QFileDialog* self, intptr_t slot, void (*
 			files_out.len = files_ret.length();
 			files_out.data = static_cast<void*>(files_arr);
 			struct seaqt_array /* of struct seaqt_string */  sigval1 = files_out;
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QStringList&)>(&QFileDialog::filesSelected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileDialog_currentChanged(QFileDialog* self, struct seaqt_string path) {
@@ -1304,10 +1294,7 @@ void QFileDialog_currentChanged(QFileDialog* self, struct seaqt_string path) {
 }
 
 void QFileDialog_connect_currentChanged(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& path) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QString&)>(&QFileDialog::currentChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& path) {
 			const QString path_ret = path;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray path_b = path_ret.toUtf8();
@@ -1316,10 +1303,8 @@ void QFileDialog_connect_currentChanged(QFileDialog* self, intptr_t slot, void (
 			path_ms.data = static_cast<char*>(malloc(path_ms.len));
 			memcpy(path_ms.data, path_b.data(), path_ms.len);
 			struct seaqt_string sigval1 = path_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QString&)>(&QFileDialog::currentChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileDialog_directoryEntered(QFileDialog* self, struct seaqt_string directory) {
@@ -1328,10 +1313,7 @@ void QFileDialog_directoryEntered(QFileDialog* self, struct seaqt_string directo
 }
 
 void QFileDialog_connect_directoryEntered(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& directory) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QString&)>(&QFileDialog::directoryEntered), self, [callback, release = seaqt::release_callback{slot,release}](const QString& directory) {
 			const QString directory_ret = directory;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray directory_b = directory_ret.toUtf8();
@@ -1340,10 +1322,8 @@ void QFileDialog_connect_directoryEntered(QFileDialog* self, intptr_t slot, void
 			directory_ms.data = static_cast<char*>(malloc(directory_ms.len));
 			memcpy(directory_ms.data, directory_b.data(), directory_ms.len);
 			struct seaqt_string sigval1 = directory_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QString&)>(&QFileDialog::directoryEntered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileDialog_urlSelected(QFileDialog* self, QUrl* url) {
@@ -1351,17 +1331,12 @@ void QFileDialog_urlSelected(QFileDialog* self, QUrl* url) {
 }
 
 void QFileDialog_connect_urlSelected(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& url) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QUrl&)>(&QFileDialog::urlSelected), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& url) {
 			const QUrl& url_ret = url;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QUrl&)>(&QFileDialog::urlSelected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileDialog_urlsSelected(QFileDialog* self, struct seaqt_array /* of QUrl* */  urls) {
@@ -1375,10 +1350,7 @@ void QFileDialog_urlsSelected(QFileDialog* self, struct seaqt_array /* of QUrl* 
 }
 
 void QFileDialog_connect_urlsSelected(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QUrl* */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QUrl* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QUrl* */ );
-		void operator()(const QList<QUrl>& urls) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QList<QUrl>&)>(&QFileDialog::urlsSelected), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QUrl>& urls) {
 			const QList<QUrl>& urls_ret = urls;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QUrl** urls_arr = static_cast<QUrl**>(malloc(sizeof(QUrl*) * urls_ret.length()));
@@ -1389,10 +1361,8 @@ void QFileDialog_connect_urlsSelected(QFileDialog* self, intptr_t slot, void (*c
 			urls_out.len = urls_ret.length();
 			urls_out.data = static_cast<void*>(urls_arr);
 			struct seaqt_array /* of QUrl* */  sigval1 = urls_out;
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QList<QUrl>&)>(&QFileDialog::urlsSelected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileDialog_currentUrlChanged(QFileDialog* self, QUrl* url) {
@@ -1400,17 +1370,12 @@ void QFileDialog_currentUrlChanged(QFileDialog* self, QUrl* url) {
 }
 
 void QFileDialog_connect_currentUrlChanged(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& url) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QUrl&)>(&QFileDialog::currentUrlChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& url) {
 			const QUrl& url_ret = url;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QUrl&)>(&QFileDialog::currentUrlChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileDialog_directoryUrlEntered(QFileDialog* self, QUrl* directory) {
@@ -1418,17 +1383,12 @@ void QFileDialog_directoryUrlEntered(QFileDialog* self, QUrl* directory) {
 }
 
 void QFileDialog_connect_directoryUrlEntered(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& directory) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QUrl&)>(&QFileDialog::directoryUrlEntered), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& directory) {
 			const QUrl& directory_ret = directory;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&directory_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QUrl&)>(&QFileDialog::directoryUrlEntered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileDialog_filterSelected(QFileDialog* self, struct seaqt_string filter) {
@@ -1437,10 +1397,7 @@ void QFileDialog_filterSelected(QFileDialog* self, struct seaqt_string filter) {
 }
 
 void QFileDialog_connect_filterSelected(QFileDialog* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& filter) {
+	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QString&)>(&QFileDialog::filterSelected), self, [callback, release = seaqt::release_callback{slot,release}](const QString& filter) {
 			const QString filter_ret = filter;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray filter_b = filter_ret.toUtf8();
@@ -1449,10 +1406,8 @@ void QFileDialog_connect_filterSelected(QFileDialog* self, intptr_t slot, void (
 			filter_ms.data = static_cast<char*>(malloc(filter_ms.len));
 			memcpy(filter_ms.data, filter_b.data(), filter_ms.len);
 			struct seaqt_string sigval1 = filter_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QFileDialog::connect(self, static_cast<void (QFileDialog::*)(const QString&)>(&QFileDialog::filterSelected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QFileDialog_getOpenFileName() {

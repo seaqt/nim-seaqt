@@ -45,7 +45,6 @@ struct seaqt_string QMediaAudioProbeControl_tr_s_c_n(const char* s, const char* 
 struct seaqt_string QMediaAudioProbeControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMediaAudioProbeControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QMediaAudioProbeControl_staticMetaObject();
 void QMediaAudioProbeControl_delete(QMediaAudioProbeControl* self);
 
 #ifdef __cplusplus

@@ -42,7 +42,6 @@ struct seaqt_string QMediaAvailabilityControl_tr_s_c_n(const char* s, const char
 struct seaqt_string QMediaAvailabilityControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMediaAvailabilityControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QMediaAvailabilityControl_staticMetaObject();
 void QMediaAvailabilityControl_delete(QMediaAvailabilityControl* self);
 
 #ifdef __cplusplus

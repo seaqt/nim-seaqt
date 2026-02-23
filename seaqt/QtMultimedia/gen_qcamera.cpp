@@ -532,16 +532,11 @@ void QCamera_stateChanged(QCamera* self, int state) {
 }
 
 void QCamera_connect_stateChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QCamera::State state) {
+	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::State)>(&QCamera::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QCamera::State state) {
 			QCamera::State state_ret = state;
 			int sigval1 = static_cast<int>(state_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::State)>(&QCamera::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCamera_captureModeChanged(QCamera* self, int param1) {
@@ -549,16 +544,11 @@ void QCamera_captureModeChanged(QCamera* self, int param1) {
 }
 
 void QCamera_connect_captureModeChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QCamera::CaptureModes param1) {
+	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::CaptureModes)>(&QCamera::captureModeChanged), self, [callback, release = seaqt::release_callback{slot,release}](QCamera::CaptureModes param1) {
 			QCamera::CaptureModes param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::CaptureModes)>(&QCamera::captureModeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCamera_statusChanged(QCamera* self, int status) {
@@ -566,16 +556,11 @@ void QCamera_statusChanged(QCamera* self, int status) {
 }
 
 void QCamera_connect_statusChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QCamera::Status status) {
+	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Status)>(&QCamera::statusChanged), self, [callback, release = seaqt::release_callback{slot,release}](QCamera::Status status) {
 			QCamera::Status status_ret = status;
 			int sigval1 = static_cast<int>(status_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Status)>(&QCamera::statusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCamera_locked(QCamera* self) {
@@ -583,14 +568,9 @@ void QCamera_locked(QCamera* self) {
 }
 
 void QCamera_connect_locked(QCamera* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::locked), self, local_caller{slot, callback, release});
+	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::locked), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QCamera_lockFailed(QCamera* self) {
@@ -598,14 +578,9 @@ void QCamera_lockFailed(QCamera* self) {
 }
 
 void QCamera_connect_lockFailed(QCamera* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::lockFailed), self, local_caller{slot, callback, release});
+	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::lockFailed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QCamera_lockStatusChanged_status_reason(QCamera* self, int status, int reason) {
@@ -613,18 +588,13 @@ void QCamera_lockStatusChanged_status_reason(QCamera* self, int status, int reas
 }
 
 void QCamera_connect_lockStatusChanged_status_reason(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int);
-		void operator()(QCamera::LockStatus status, QCamera::LockChangeReason reason) {
+	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::LockStatus, QCamera::LockChangeReason)>(&QCamera::lockStatusChanged), self, [callback, release = seaqt::release_callback{slot,release}](QCamera::LockStatus status, QCamera::LockChangeReason reason) {
 			QCamera::LockStatus status_ret = status;
 			int sigval1 = static_cast<int>(status_ret);
 			QCamera::LockChangeReason reason_ret = reason;
 			int sigval2 = static_cast<int>(reason_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::LockStatus, QCamera::LockChangeReason)>(&QCamera::lockStatusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QCamera_lockStatusChanged_lock_status_reason(QCamera* self, int lock, int status, int reason) {
@@ -632,20 +602,15 @@ void QCamera_lockStatusChanged_lock_status_reason(QCamera* self, int lock, int s
 }
 
 void QCamera_connect_lockStatusChanged_lock_status_reason(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int, int);
-		void operator()(QCamera::LockType lock, QCamera::LockStatus status, QCamera::LockChangeReason reason) {
+	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::LockType, QCamera::LockStatus, QCamera::LockChangeReason)>(&QCamera::lockStatusChanged), self, [callback, release = seaqt::release_callback{slot,release}](QCamera::LockType lock, QCamera::LockStatus status, QCamera::LockChangeReason reason) {
 			QCamera::LockType lock_ret = lock;
 			int sigval1 = static_cast<int>(lock_ret);
 			QCamera::LockStatus status_ret = status;
 			int sigval2 = static_cast<int>(status_ret);
 			QCamera::LockChangeReason reason_ret = reason;
 			int sigval3 = static_cast<int>(reason_ret);
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::LockType, QCamera::LockStatus, QCamera::LockChangeReason)>(&QCamera::lockStatusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 void QCamera_error_QCamera_Error(QCamera* self, int param1) {
@@ -653,16 +618,11 @@ void QCamera_error_QCamera_Error(QCamera* self, int param1) {
 }
 
 void QCamera_connect_error_QCamera_Error(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QCamera::Error param1) {
+	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Error)>(&QCamera::error), self, [callback, release = seaqt::release_callback{slot,release}](QCamera::Error param1) {
 			QCamera::Error param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Error)>(&QCamera::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCamera_errorOccurred(QCamera* self, int param1) {
@@ -670,16 +630,11 @@ void QCamera_errorOccurred(QCamera* self, int param1) {
 }
 
 void QCamera_connect_errorOccurred(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QCamera::Error param1) {
+	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Error)>(&QCamera::errorOccurred), self, [callback, release = seaqt::release_callback{slot,release}](QCamera::Error param1) {
 			QCamera::Error param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Error)>(&QCamera::errorOccurred), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QCamera_tr_s_c(const char* s, const char* c) {

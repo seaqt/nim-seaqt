@@ -261,7 +261,6 @@ int QColorDialog_protectedbase_senderSignalIndex(const VirtualQColorDialog* self
 int QColorDialog_protectedbase_receivers(const VirtualQColorDialog* self, const char* signal);
 bool QColorDialog_protectedbase_isSignalConnected(const VirtualQColorDialog* self, QMetaMethod* signal);
 
-const QMetaObject* QColorDialog_staticMetaObject();
 void QColorDialog_delete(QColorDialog* self);
 
 #ifdef __cplusplus

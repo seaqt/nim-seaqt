@@ -118,7 +118,6 @@ int QDataWidgetMapper_protectedbase_senderSignalIndex(const VirtualQDataWidgetMa
 int QDataWidgetMapper_protectedbase_receivers(const VirtualQDataWidgetMapper* self, const char* signal);
 bool QDataWidgetMapper_protectedbase_isSignalConnected(const VirtualQDataWidgetMapper* self, QMetaMethod* signal);
 
-const QMetaObject* QDataWidgetMapper_staticMetaObject();
 void QDataWidgetMapper_delete(QDataWidgetMapper* self);
 
 #ifdef __cplusplus

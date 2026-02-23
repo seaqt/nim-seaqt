@@ -399,6 +399,34 @@ struct seaqt_string QTimeLine_trUtf8_s_c_n(const char* s, const char* c, int n) 
 	return _ms;
 }
 
+void QTimeLine_connect_valueChanged(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	QTimeLine::connect(self, &QTimeLine::valueChanged, self, [callback, release = seaqt::release_callback{slot,release}](qreal x, auto) {
+			double sigval1 = x;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTimeLine_connect_frameChanged(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QTimeLine::connect(self, &QTimeLine::frameChanged, self, [callback, release = seaqt::release_callback{slot,release}](int param1, auto) {
+			int sigval1 = param1;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTimeLine_connect_stateChanged(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QTimeLine::connect(self, &QTimeLine::stateChanged, self, [callback, release = seaqt::release_callback{slot,release}](QTimeLine::State newState, auto) {
+			QTimeLine::State newState_ret = newState;
+			int sigval1 = static_cast<int>(newState_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QTimeLine_connect_finished(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QTimeLine::connect(self, &QTimeLine::finished, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
 const QMetaObject* QTimeLine_staticMetaObject() { return &QTimeLine::staticMetaObject; }
 void* QTimeLine_vdata(VirtualQTimeLine* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQTimeLine>()); }
 VirtualQTimeLine* vdata_QTimeLine(void* vdata) { return reinterpret_cast<VirtualQTimeLine*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQTimeLine>()); }

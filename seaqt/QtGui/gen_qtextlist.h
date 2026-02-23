@@ -106,7 +106,6 @@ int QTextList_protectedbase_senderSignalIndex(const VirtualQTextList* self);
 int QTextList_protectedbase_receivers(const VirtualQTextList* self, const char* signal);
 bool QTextList_protectedbase_isSignalConnected(const VirtualQTextList* self, QMetaMethod* signal);
 
-const QMetaObject* QTextList_staticMetaObject();
 void QTextList_delete(QTextList* self);
 
 #ifdef __cplusplus

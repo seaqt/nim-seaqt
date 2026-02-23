@@ -221,7 +221,8 @@ int QAbstractProxyModel_protectedbase_senderSignalIndex(const VirtualQAbstractPr
 int QAbstractProxyModel_protectedbase_receivers(const VirtualQAbstractProxyModel* self, const char* signal);
 bool QAbstractProxyModel_protectedbase_isSignalConnected(const VirtualQAbstractProxyModel* self, QMetaMethod* signal);
 
-const QMetaObject* QAbstractProxyModel_staticMetaObject();
+void QAbstractProxyModel_connect_sourceModelChanged(QAbstractProxyModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QAbstractProxyModel_delete(QAbstractProxyModel* self);
 
 #ifdef __cplusplus

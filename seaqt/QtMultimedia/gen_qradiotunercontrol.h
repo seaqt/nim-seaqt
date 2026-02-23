@@ -87,7 +87,6 @@ struct seaqt_string QRadioTunerControl_tr_s_c_n(const char* s, const char* c, in
 struct seaqt_string QRadioTunerControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QRadioTunerControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QRadioTunerControl_staticMetaObject();
 void QRadioTunerControl_delete(QRadioTunerControl* self);
 
 #ifdef __cplusplus

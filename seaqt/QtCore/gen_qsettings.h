@@ -135,7 +135,6 @@ int QSettings_protectedbase_senderSignalIndex(const VirtualQSettings* self);
 int QSettings_protectedbase_receivers(const VirtualQSettings* self, const char* signal);
 bool QSettings_protectedbase_isSignalConnected(const VirtualQSettings* self, QMetaMethod* signal);
 
-const QMetaObject* QSettings_staticMetaObject();
 void QSettings_delete(QSettings* self);
 
 #ifdef __cplusplus

@@ -109,6 +109,8 @@ proc fcQStateMachine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string
 proc fcQStateMachine_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStateMachine_trUtf8_s_c".}
 proc fcQStateMachine_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStateMachine_trUtf8_s_c_n".}
 proc fcQStateMachine_postEventEventPriority(self: pointer, event: pointer, priority: cint): void {.importc: "QStateMachine_postEvent_event_priority".}
+proc fcQStateMachine_connect_started(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStateMachine_connect_started".}
+proc fcQStateMachine_connect_stopped(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStateMachine_connect_stopped".}
 proc fcQStateMachine_vdata(self: pointer): ptr pointer {.importc: "QStateMachine_vdata".}
 proc fvdata_cQStateMachine(self: pointer): pointer {.importc: "vdata_QStateMachine".}
 
@@ -311,6 +313,36 @@ proc trUtf8*(_: type gen_qstatemachine_types.QStateMachine, s: cstring, c: cstri
 
 proc postEvent*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent, priority: cint): void =
   fcQStateMachine_postEventEventPriority(self.h, event.h, cint(priority))
+
+type QStateMachinestartedSlot* = proc()
+proc fcQStateMachine_slot_callback_started(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QStateMachinestartedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQStateMachine_slot_callback_started_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStateMachinestartedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onStarted*(self: gen_qstatemachine_types.QStateMachine, slot: QStateMachinestartedSlot) =
+  var tmp = new QStateMachinestartedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStateMachine_connect_started(self.h, cast[int](addr tmp[]), fcQStateMachine_slot_callback_started, fcQStateMachine_slot_callback_started_release)
+
+type QStateMachinestoppedSlot* = proc()
+proc fcQStateMachine_slot_callback_stopped(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QStateMachinestoppedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQStateMachine_slot_callback_stopped_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStateMachinestoppedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onStopped*(self: gen_qstatemachine_types.QStateMachine, slot: QStateMachinestoppedSlot) =
+  var tmp = new QStateMachinestoppedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStateMachine_connect_stopped(self.h, cast[int](addr tmp[]), fcQStateMachine_slot_callback_stopped, fcQStateMachine_slot_callback_stopped_release)
 
 type QStateMachinemetaObjectProc* = proc(self: QStateMachine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QStateMachinemetacastProc* = proc(self: QStateMachine, param1: cstring): pointer {.raises: [], gcsafe.}

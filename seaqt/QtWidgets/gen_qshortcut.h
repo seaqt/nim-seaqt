@@ -104,7 +104,6 @@ int QShortcut_protectedbase_senderSignalIndex(const VirtualQShortcut* self);
 int QShortcut_protectedbase_receivers(const VirtualQShortcut* self, const char* signal);
 bool QShortcut_protectedbase_isSignalConnected(const VirtualQShortcut* self, QMetaMethod* signal);
 
-const QMetaObject* QShortcut_staticMetaObject();
 void QShortcut_delete(QShortcut* self);
 
 #ifdef __cplusplus

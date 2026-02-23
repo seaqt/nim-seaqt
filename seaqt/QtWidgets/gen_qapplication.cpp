@@ -452,16 +452,11 @@ void QApplication_focusChanged(QApplication* self, QWidget* old, QWidget* now) {
 }
 
 void QApplication_connect_focusChanged(QApplication* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, QWidget*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QWidget*, QWidget*);
-		void operator()(QWidget* old, QWidget* now) {
+	QApplication::connect(self, static_cast<void (QApplication::*)(QWidget*, QWidget*)>(&QApplication::focusChanged), self, [callback, release = seaqt::release_callback{slot,release}](QWidget* old, QWidget* now) {
 			QWidget* sigval1 = old;
 			QWidget* sigval2 = now;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QApplication::connect(self, static_cast<void (QApplication::*)(QWidget*, QWidget*)>(&QApplication::focusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QApplication_styleSheet(const QApplication* self) {

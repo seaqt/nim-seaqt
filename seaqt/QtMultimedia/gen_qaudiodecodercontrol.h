@@ -76,7 +76,6 @@ struct seaqt_string QAudioDecoderControl_tr_s_c_n(const char* s, const char* c, 
 struct seaqt_string QAudioDecoderControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QAudioDecoderControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QAudioDecoderControl_staticMetaObject();
 void QAudioDecoderControl_delete(QAudioDecoderControl* self);
 
 #ifdef __cplusplus

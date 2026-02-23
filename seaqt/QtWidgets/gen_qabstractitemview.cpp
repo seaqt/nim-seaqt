@@ -1627,17 +1627,12 @@ void QAbstractItemView_pressed(QAbstractItemView* self, QModelIndex* index) {
 }
 
 void QAbstractItemView_connect_pressed(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::pressed), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::pressed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemView_clicked(QAbstractItemView* self, QModelIndex* index) {
@@ -1645,17 +1640,12 @@ void QAbstractItemView_clicked(QAbstractItemView* self, QModelIndex* index) {
 }
 
 void QAbstractItemView_connect_clicked(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::clicked), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::clicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemView_doubleClicked(QAbstractItemView* self, QModelIndex* index) {
@@ -1663,17 +1653,12 @@ void QAbstractItemView_doubleClicked(QAbstractItemView* self, QModelIndex* index
 }
 
 void QAbstractItemView_connect_doubleClicked(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::doubleClicked), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::doubleClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemView_activated(QAbstractItemView* self, QModelIndex* index) {
@@ -1681,17 +1666,12 @@ void QAbstractItemView_activated(QAbstractItemView* self, QModelIndex* index) {
 }
 
 void QAbstractItemView_connect_activated(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::activated), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::activated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemView_entered(QAbstractItemView* self, QModelIndex* index) {
@@ -1699,17 +1679,12 @@ void QAbstractItemView_entered(QAbstractItemView* self, QModelIndex* index) {
 }
 
 void QAbstractItemView_connect_entered(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::entered), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QModelIndex&)>(&QAbstractItemView::entered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemView_viewportEntered(QAbstractItemView* self) {
@@ -1717,14 +1692,9 @@ void QAbstractItemView_viewportEntered(QAbstractItemView* self) {
 }
 
 void QAbstractItemView_connect_viewportEntered(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)()>(&QAbstractItemView::viewportEntered), self, local_caller{slot, callback, release});
+	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)()>(&QAbstractItemView::viewportEntered), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QAbstractItemView_iconSizeChanged(QAbstractItemView* self, QSize* size) {
@@ -1732,17 +1702,12 @@ void QAbstractItemView_iconSizeChanged(QAbstractItemView* self, QSize* size) {
 }
 
 void QAbstractItemView_connect_iconSizeChanged(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSize*);
-		void operator()(const QSize& size) {
+	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QSize&)>(&QAbstractItemView::iconSizeChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QSize& size) {
 			const QSize& size_ret = size;
 			// Cast returned reference into pointer
 			QSize* sigval1 = const_cast<QSize*>(&size_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemView::connect(self, static_cast<void (QAbstractItemView::*)(const QSize&)>(&QAbstractItemView::iconSizeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QAbstractItemView_tr_s_c(const char* s, const char* c) {

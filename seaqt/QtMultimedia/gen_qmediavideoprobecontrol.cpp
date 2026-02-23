@@ -63,17 +63,12 @@ void QMediaVideoProbeControl_videoFrameProbed(QMediaVideoProbeControl* self, QVi
 }
 
 void QMediaVideoProbeControl_connect_videoFrameProbed(QMediaVideoProbeControl* self, intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QVideoFrame*);
-		void operator()(const QVideoFrame& frame) {
+	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)(const QVideoFrame&)>(&QMediaVideoProbeControl::videoFrameProbed), self, [callback, release = seaqt::release_callback{slot,release}](const QVideoFrame& frame) {
 			const QVideoFrame& frame_ret = frame;
 			// Cast returned reference into pointer
 			QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)(const QVideoFrame&)>(&QMediaVideoProbeControl::videoFrameProbed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaVideoProbeControl_flush(QMediaVideoProbeControl* self) {
@@ -81,14 +76,9 @@ void QMediaVideoProbeControl_flush(QMediaVideoProbeControl* self) {
 }
 
 void QMediaVideoProbeControl_connect_flush(QMediaVideoProbeControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)()>(&QMediaVideoProbeControl::flush), self, local_caller{slot, callback, release});
+	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)()>(&QMediaVideoProbeControl::flush), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QMediaVideoProbeControl_tr_s_c(const char* s, const char* c) {

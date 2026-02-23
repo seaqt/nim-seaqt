@@ -1835,15 +1835,10 @@ void QStandardItemModel_itemChanged(QStandardItemModel* self, QStandardItem* ite
 }
 
 void QStandardItemModel_connect_itemChanged(QStandardItemModel* self, intptr_t slot, void (*callback)(intptr_t, QStandardItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QStandardItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QStandardItem*);
-		void operator()(QStandardItem* item) {
+	QStandardItemModel::connect(self, static_cast<void (QStandardItemModel::*)(QStandardItem*)>(&QStandardItemModel::itemChanged), self, [callback, release = seaqt::release_callback{slot,release}](QStandardItem* item) {
 			QStandardItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QStandardItemModel::connect(self, static_cast<void (QStandardItemModel::*)(QStandardItem*)>(&QStandardItemModel::itemChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QStandardItemModel_tr_s_c(const char* s, const char* c) {

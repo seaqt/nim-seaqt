@@ -100,7 +100,6 @@ int QTranslator_protectedbase_senderSignalIndex(const VirtualQTranslator* self);
 int QTranslator_protectedbase_receivers(const VirtualQTranslator* self, const char* signal);
 bool QTranslator_protectedbase_isSignalConnected(const VirtualQTranslator* self, QMetaMethod* signal);
 
-const QMetaObject* QTranslator_staticMetaObject();
 void QTranslator_delete(QTranslator* self);
 
 #ifdef __cplusplus

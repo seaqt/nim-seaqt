@@ -150,7 +150,8 @@ int QCoreApplication_protectedbase_senderSignalIndex(const VirtualQCoreApplicati
 int QCoreApplication_protectedbase_receivers(const VirtualQCoreApplication* self, const char* signal);
 bool QCoreApplication_protectedbase_isSignalConnected(const VirtualQCoreApplication* self, QMetaMethod* signal);
 
-const QMetaObject* QCoreApplication_staticMetaObject();
+void QCoreApplication_connect_aboutToQuit(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QCoreApplication_delete(QCoreApplication* self);
 
 #ifdef __cplusplus

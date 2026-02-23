@@ -787,15 +787,10 @@ void QDesktopWidget_resized(QDesktopWidget* self, int param1) {
 }
 
 void QDesktopWidget_connect_resized(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)(int)>(&QDesktopWidget::resized), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)(int)>(&QDesktopWidget::resized), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDesktopWidget_workAreaResized(QDesktopWidget* self, int param1) {
@@ -803,15 +798,10 @@ void QDesktopWidget_workAreaResized(QDesktopWidget* self, int param1) {
 }
 
 void QDesktopWidget_connect_workAreaResized(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)(int)>(&QDesktopWidget::workAreaResized), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)(int)>(&QDesktopWidget::workAreaResized), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDesktopWidget_screenCountChanged(QDesktopWidget* self, int param1) {
@@ -819,15 +809,10 @@ void QDesktopWidget_screenCountChanged(QDesktopWidget* self, int param1) {
 }
 
 void QDesktopWidget_connect_screenCountChanged(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)(int)>(&QDesktopWidget::screenCountChanged), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)(int)>(&QDesktopWidget::screenCountChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDesktopWidget_primaryScreenChanged(QDesktopWidget* self) {
@@ -835,14 +820,9 @@ void QDesktopWidget_primaryScreenChanged(QDesktopWidget* self) {
 }
 
 void QDesktopWidget_connect_primaryScreenChanged(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)()>(&QDesktopWidget::primaryScreenChanged), self, local_caller{slot, callback, release});
+	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)()>(&QDesktopWidget::primaryScreenChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QDesktopWidget_tr_s_c(const char* s, const char* c) {

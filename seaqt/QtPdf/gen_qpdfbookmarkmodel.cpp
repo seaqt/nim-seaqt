@@ -892,15 +892,10 @@ void QPdfBookmarkModel_documentChanged(QPdfBookmarkModel* self, QPdfDocument* do
 }
 
 void QPdfBookmarkModel_connect_documentChanged(QPdfBookmarkModel* self, intptr_t slot, void (*callback)(intptr_t, QPdfDocument*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPdfDocument*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPdfDocument*);
-		void operator()(QPdfDocument* document) {
+	QPdfBookmarkModel::connect(self, static_cast<void (QPdfBookmarkModel::*)(QPdfDocument*)>(&QPdfBookmarkModel::documentChanged), self, [callback, release = seaqt::release_callback{slot,release}](QPdfDocument* document) {
 			QPdfDocument* sigval1 = document;
-			callback(slot, sigval1);
-		}
-	};
-	QPdfBookmarkModel::connect(self, static_cast<void (QPdfBookmarkModel::*)(QPdfDocument*)>(&QPdfBookmarkModel::documentChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfBookmarkModel_structureModeChanged(QPdfBookmarkModel* self, int structureMode) {
@@ -908,16 +903,11 @@ void QPdfBookmarkModel_structureModeChanged(QPdfBookmarkModel* self, int structu
 }
 
 void QPdfBookmarkModel_connect_structureModeChanged(QPdfBookmarkModel* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QPdfBookmarkModel::StructureMode structureMode) {
+	QPdfBookmarkModel::connect(self, static_cast<void (QPdfBookmarkModel::*)(QPdfBookmarkModel::StructureMode)>(&QPdfBookmarkModel::structureModeChanged), self, [callback, release = seaqt::release_callback{slot,release}](QPdfBookmarkModel::StructureMode structureMode) {
 			QPdfBookmarkModel::StructureMode structureMode_ret = structureMode;
 			int sigval1 = static_cast<int>(structureMode_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfBookmarkModel::connect(self, static_cast<void (QPdfBookmarkModel::*)(QPdfBookmarkModel::StructureMode)>(&QPdfBookmarkModel::structureModeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QPdfBookmarkModel_tr_s_c(const char* s, const char* c) {

@@ -84,7 +84,6 @@ int QQuickTextDocument_protectedbase_senderSignalIndex(const VirtualQQuickTextDo
 int QQuickTextDocument_protectedbase_receivers(const VirtualQQuickTextDocument* self, const char* signal);
 bool QQuickTextDocument_protectedbase_isSignalConnected(const VirtualQQuickTextDocument* self, QMetaMethod* signal);
 
-const QMetaObject* QQuickTextDocument_staticMetaObject();
 void QQuickTextDocument_delete(QQuickTextDocument* self);
 
 #ifdef __cplusplus

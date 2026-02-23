@@ -45,7 +45,6 @@ struct seaqt_string QCameraFlashControl_tr_s_c_n(const char* s, const char* c, i
 struct seaqt_string QCameraFlashControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraFlashControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCameraFlashControl_staticMetaObject();
 void QCameraFlashControl_delete(QCameraFlashControl* self);
 
 #ifdef __cplusplus
