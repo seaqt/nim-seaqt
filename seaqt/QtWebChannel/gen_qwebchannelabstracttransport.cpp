@@ -225,18 +225,13 @@ void QWebChannelAbstractTransport_messageReceived(QWebChannelAbstractTransport* 
 }
 
 void QWebChannelAbstractTransport_connect_messageReceived(QWebChannelAbstractTransport* self, intptr_t slot, void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*);
-		void operator()(const QJsonObject& message, QWebChannelAbstractTransport* transport) {
+	QWebChannelAbstractTransport::connect(self, static_cast<void (QWebChannelAbstractTransport::*)(const QJsonObject&, QWebChannelAbstractTransport*)>(&QWebChannelAbstractTransport::messageReceived), self, [callback, release = seaqt::release_callback{slot,release}](const QJsonObject& message, QWebChannelAbstractTransport* transport) {
 			const QJsonObject& message_ret = message;
 			// Cast returned reference into pointer
 			QJsonObject* sigval1 = const_cast<QJsonObject*>(&message_ret);
 			QWebChannelAbstractTransport* sigval2 = transport;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QWebChannelAbstractTransport::connect(self, static_cast<void (QWebChannelAbstractTransport::*)(const QJsonObject&, QWebChannelAbstractTransport*)>(&QWebChannelAbstractTransport::messageReceived), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QWebChannelAbstractTransport_tr_s_c(const char* s, const char* c) {

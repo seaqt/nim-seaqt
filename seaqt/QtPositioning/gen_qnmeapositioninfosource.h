@@ -124,7 +124,6 @@ int QNmeaPositionInfoSource_protectedbase_senderSignalIndex(const VirtualQNmeaPo
 int QNmeaPositionInfoSource_protectedbase_receivers(const VirtualQNmeaPositionInfoSource* self, const char* signal);
 bool QNmeaPositionInfoSource_protectedbase_isSignalConnected(const VirtualQNmeaPositionInfoSource* self, QMetaMethod* signal);
 
-const QMetaObject* QNmeaPositionInfoSource_staticMetaObject();
 void QNmeaPositionInfoSource_delete(QNmeaPositionInfoSource* self);
 
 #ifdef __cplusplus

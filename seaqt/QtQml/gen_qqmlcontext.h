@@ -108,7 +108,6 @@ int QQmlContext_protectedbase_senderSignalIndex(const VirtualQQmlContext* self);
 int QQmlContext_protectedbase_receivers(const VirtualQQmlContext* self, const char* signal);
 bool QQmlContext_protectedbase_isSignalConnected(const VirtualQQmlContext* self, QMetaMethod* signal);
 
-const QMetaObject* QQmlContext_staticMetaObject();
 void QQmlContext_delete(QQmlContext* self);
 
 QQmlContext__PropertyPair* QQmlContext__PropertyPair_new(QQmlContext__PropertyPair* from);

@@ -237,17 +237,12 @@ void QScreen_geometryChanged(QScreen* self, QRect* geometry) {
 }
 
 void QScreen_connect_geometryChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRect*);
-		void operator()(const QRect& geometry) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(const QRect&)>(&QScreen::geometryChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QRect& geometry) {
 			const QRect& geometry_ret = geometry;
 			// Cast returned reference into pointer
 			QRect* sigval1 = const_cast<QRect*>(&geometry_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(const QRect&)>(&QScreen::geometryChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScreen_availableGeometryChanged(QScreen* self, QRect* geometry) {
@@ -255,17 +250,12 @@ void QScreen_availableGeometryChanged(QScreen* self, QRect* geometry) {
 }
 
 void QScreen_connect_availableGeometryChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRect*);
-		void operator()(const QRect& geometry) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(const QRect&)>(&QScreen::availableGeometryChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QRect& geometry) {
 			const QRect& geometry_ret = geometry;
 			// Cast returned reference into pointer
 			QRect* sigval1 = const_cast<QRect*>(&geometry_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(const QRect&)>(&QScreen::availableGeometryChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScreen_physicalSizeChanged(QScreen* self, QSizeF* size) {
@@ -273,17 +263,12 @@ void QScreen_physicalSizeChanged(QScreen* self, QSizeF* size) {
 }
 
 void QScreen_connect_physicalSizeChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSizeF*);
-		void operator()(const QSizeF& size) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(const QSizeF&)>(&QScreen::physicalSizeChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QSizeF& size) {
 			const QSizeF& size_ret = size;
 			// Cast returned reference into pointer
 			QSizeF* sigval1 = const_cast<QSizeF*>(&size_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(const QSizeF&)>(&QScreen::physicalSizeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScreen_physicalDotsPerInchChanged(QScreen* self, double dpi) {
@@ -291,16 +276,11 @@ void QScreen_physicalDotsPerInchChanged(QScreen* self, double dpi) {
 }
 
 void QScreen_connect_physicalDotsPerInchChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal dpi) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(qreal)>(&QScreen::physicalDotsPerInchChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal dpi) {
 			qreal dpi_ret = dpi;
 			double sigval1 = static_cast<double>(dpi_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(qreal)>(&QScreen::physicalDotsPerInchChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScreen_logicalDotsPerInchChanged(QScreen* self, double dpi) {
@@ -308,16 +288,11 @@ void QScreen_logicalDotsPerInchChanged(QScreen* self, double dpi) {
 }
 
 void QScreen_connect_logicalDotsPerInchChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal dpi) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(qreal)>(&QScreen::logicalDotsPerInchChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal dpi) {
 			qreal dpi_ret = dpi;
 			double sigval1 = static_cast<double>(dpi_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(qreal)>(&QScreen::logicalDotsPerInchChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScreen_virtualGeometryChanged(QScreen* self, QRect* rect) {
@@ -325,17 +300,12 @@ void QScreen_virtualGeometryChanged(QScreen* self, QRect* rect) {
 }
 
 void QScreen_connect_virtualGeometryChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRect*);
-		void operator()(const QRect& rect) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(const QRect&)>(&QScreen::virtualGeometryChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QRect& rect) {
 			const QRect& rect_ret = rect;
 			// Cast returned reference into pointer
 			QRect* sigval1 = const_cast<QRect*>(&rect_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(const QRect&)>(&QScreen::virtualGeometryChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScreen_primaryOrientationChanged(QScreen* self, int orientation) {
@@ -343,16 +313,11 @@ void QScreen_primaryOrientationChanged(QScreen* self, int orientation) {
 }
 
 void QScreen_connect_primaryOrientationChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::ScreenOrientation orientation) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(Qt::ScreenOrientation)>(&QScreen::primaryOrientationChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::ScreenOrientation orientation) {
 			Qt::ScreenOrientation orientation_ret = orientation;
 			int sigval1 = static_cast<int>(orientation_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(Qt::ScreenOrientation)>(&QScreen::primaryOrientationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScreen_orientationChanged(QScreen* self, int orientation) {
@@ -360,16 +325,11 @@ void QScreen_orientationChanged(QScreen* self, int orientation) {
 }
 
 void QScreen_connect_orientationChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::ScreenOrientation orientation) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(Qt::ScreenOrientation)>(&QScreen::orientationChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::ScreenOrientation orientation) {
 			Qt::ScreenOrientation orientation_ret = orientation;
 			int sigval1 = static_cast<int>(orientation_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(Qt::ScreenOrientation)>(&QScreen::orientationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScreen_refreshRateChanged(QScreen* self, double refreshRate) {
@@ -377,16 +337,11 @@ void QScreen_refreshRateChanged(QScreen* self, double refreshRate) {
 }
 
 void QScreen_connect_refreshRateChanged(QScreen* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal refreshRate) {
+	QScreen::connect(self, static_cast<void (QScreen::*)(qreal)>(&QScreen::refreshRateChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal refreshRate) {
 			qreal refreshRate_ret = refreshRate;
 			double sigval1 = static_cast<double>(refreshRate_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScreen::connect(self, static_cast<void (QScreen::*)(qreal)>(&QScreen::refreshRateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QScreen_tr_s_c(const char* s, const char* c) {

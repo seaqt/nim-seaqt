@@ -462,15 +462,10 @@ void QWebEngineProfile_downloadRequested(QWebEngineProfile* self, QWebEngineDown
 }
 
 void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QWebEngineDownloadRequest*);
-		void operator()(QWebEngineDownloadRequest* download) {
+	QWebEngineProfile::connect(self, static_cast<void (QWebEngineProfile::*)(QWebEngineDownloadRequest*)>(&QWebEngineProfile::downloadRequested), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineDownloadRequest* download) {
 			QWebEngineDownloadRequest* sigval1 = download;
-			callback(slot, sigval1);
-		}
-	};
-	QWebEngineProfile::connect(self, static_cast<void (QWebEngineProfile::*)(QWebEngineDownloadRequest*)>(&QWebEngineProfile::downloadRequested), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QWebEngineProfile_tr_s_c(const char* s, const char* c) {

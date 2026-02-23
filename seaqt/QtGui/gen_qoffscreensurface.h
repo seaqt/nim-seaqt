@@ -105,7 +105,6 @@ int QOffscreenSurface_protectedbase_senderSignalIndex(const VirtualQOffscreenSur
 int QOffscreenSurface_protectedbase_receivers(const VirtualQOffscreenSurface* self, const char* signal);
 bool QOffscreenSurface_protectedbase_isSignalConnected(const VirtualQOffscreenSurface* self, QMetaMethod* signal);
 
-const QMetaObject* QOffscreenSurface_staticMetaObject();
 void QOffscreenSurface_delete(QOffscreenSurface* self);
 
 #ifdef __cplusplus

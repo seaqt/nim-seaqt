@@ -652,14 +652,9 @@ void QDnsLookup_finished(QDnsLookup* self) {
 }
 
 void QDnsLookup_connect_finished(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)()>(&QDnsLookup::finished), self, local_caller{slot, callback, release});
+	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)()>(&QDnsLookup::finished), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QDnsLookup_nameChanged(QDnsLookup* self, struct seaqt_string name) {
@@ -668,10 +663,7 @@ void QDnsLookup_nameChanged(QDnsLookup* self, struct seaqt_string name) {
 }
 
 void QDnsLookup_connect_nameChanged(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& name) {
+	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QString&)>(&QDnsLookup::nameChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& name) {
 			const QString name_ret = name;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray name_b = name_ret.toUtf8();
@@ -680,10 +672,8 @@ void QDnsLookup_connect_nameChanged(QDnsLookup* self, intptr_t slot, void (*call
 			name_ms.data = static_cast<char*>(malloc(name_ms.len));
 			memcpy(name_ms.data, name_b.data(), name_ms.len);
 			struct seaqt_string sigval1 = name_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QString&)>(&QDnsLookup::nameChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDnsLookup_typeChanged(QDnsLookup* self, int type) {
@@ -691,16 +681,11 @@ void QDnsLookup_typeChanged(QDnsLookup* self, int type) {
 }
 
 void QDnsLookup_connect_typeChanged(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QDnsLookup::Type type) {
+	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(QDnsLookup::Type)>(&QDnsLookup::typeChanged), self, [callback, release = seaqt::release_callback{slot,release}](QDnsLookup::Type type) {
 			QDnsLookup::Type type_ret = type;
 			int sigval1 = static_cast<int>(type_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(QDnsLookup::Type)>(&QDnsLookup::typeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDnsLookup_nameserverChanged(QDnsLookup* self, QHostAddress* nameserver) {
@@ -708,17 +693,12 @@ void QDnsLookup_nameserverChanged(QDnsLookup* self, QHostAddress* nameserver) {
 }
 
 void QDnsLookup_connect_nameserverChanged(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t, QHostAddress*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QHostAddress*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QHostAddress*);
-		void operator()(const QHostAddress& nameserver) {
+	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QHostAddress&)>(&QDnsLookup::nameserverChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QHostAddress& nameserver) {
 			const QHostAddress& nameserver_ret = nameserver;
 			// Cast returned reference into pointer
 			QHostAddress* sigval1 = const_cast<QHostAddress*>(&nameserver_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QHostAddress&)>(&QDnsLookup::nameserverChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QDnsLookup_tr_s_c(const char* s, const char* c) {

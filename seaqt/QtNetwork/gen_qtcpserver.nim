@@ -92,6 +92,7 @@ proc fcQTcpServer_listenAddress(self: pointer, address: pointer): bool {.importc
 proc fcQTcpServer_listenAddressPort(self: pointer, address: pointer, port: cushort): bool {.importc: "QTcpServer_listen_address_port".}
 proc fcQTcpServer_waitForNewConnectionMsec(self: pointer, msec: cint): bool {.importc: "QTcpServer_waitForNewConnection_msec".}
 proc fcQTcpServer_waitForNewConnectionMsecTimedOut(self: pointer, msec: cint, timedOut: ptr bool): bool {.importc: "QTcpServer_waitForNewConnection_msec_timedOut".}
+proc fcQTcpServer_connect_pendingConnectionAvailable(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTcpServer_connect_pendingConnectionAvailable".}
 proc fcQTcpServer_vdata(self: pointer): ptr pointer {.importc: "QTcpServer_vdata".}
 proc fvdata_cQTcpServer(self: pointer): pointer {.importc: "vdata_QTcpServer".}
 
@@ -271,6 +272,21 @@ proc waitForNewConnection*(self: gen_qtcpserver_types.QTcpServer, msec: cint): b
 
 proc waitForNewConnection*(self: gen_qtcpserver_types.QTcpServer, msec: cint, timedOut: ptr bool): bool =
   fcQTcpServer_waitForNewConnectionMsecTimedOut(self.h, msec, timedOut)
+
+type QTcpServerpendingConnectionAvailableSlot* = proc()
+proc fcQTcpServer_slot_callback_pendingConnectionAvailable(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QTcpServerpendingConnectionAvailableSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQTcpServer_slot_callback_pendingConnectionAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTcpServerpendingConnectionAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onPendingConnectionAvailable*(self: gen_qtcpserver_types.QTcpServer, slot: QTcpServerpendingConnectionAvailableSlot) =
+  var tmp = new QTcpServerpendingConnectionAvailableSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTcpServer_connect_pendingConnectionAvailable(self.h, cast[int](addr tmp[]), fcQTcpServer_slot_callback_pendingConnectionAvailable, fcQTcpServer_slot_callback_pendingConnectionAvailable_release)
 
 type QTcpServermetaObjectProc* = proc(self: QTcpServer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTcpServermetacastProc* = proc(self: QTcpServer, param1: cstring): pointer {.raises: [], gcsafe.}

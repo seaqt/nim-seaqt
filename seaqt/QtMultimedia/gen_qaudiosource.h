@@ -106,7 +106,6 @@ int QAudioSource_protectedbase_senderSignalIndex(const VirtualQAudioSource* self
 int QAudioSource_protectedbase_receivers(const VirtualQAudioSource* self, const char* signal);
 bool QAudioSource_protectedbase_isSignalConnected(const VirtualQAudioSource* self, QMetaMethod* signal);
 
-const QMetaObject* QAudioSource_staticMetaObject();
 void QAudioSource_delete(QAudioSource* self);
 
 #ifdef __cplusplus

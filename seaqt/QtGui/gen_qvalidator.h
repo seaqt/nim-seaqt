@@ -97,7 +97,6 @@ int QValidator_protectedbase_senderSignalIndex(const VirtualQValidator* self);
 int QValidator_protectedbase_receivers(const VirtualQValidator* self, const char* signal);
 bool QValidator_protectedbase_isSignalConnected(const VirtualQValidator* self, QMetaMethod* signal);
 
-const QMetaObject* QValidator_staticMetaObject();
 void QValidator_delete(QValidator* self);
 
 typedef struct VirtualQIntValidator VirtualQIntValidator;
@@ -162,7 +161,6 @@ int QIntValidator_protectedbase_senderSignalIndex(const VirtualQIntValidator* se
 int QIntValidator_protectedbase_receivers(const VirtualQIntValidator* self, const char* signal);
 bool QIntValidator_protectedbase_isSignalConnected(const VirtualQIntValidator* self, QMetaMethod* signal);
 
-const QMetaObject* QIntValidator_staticMetaObject();
 void QIntValidator_delete(QIntValidator* self);
 
 typedef struct VirtualQDoubleValidator VirtualQDoubleValidator;
@@ -236,7 +234,6 @@ int QDoubleValidator_protectedbase_senderSignalIndex(const VirtualQDoubleValidat
 int QDoubleValidator_protectedbase_receivers(const VirtualQDoubleValidator* self, const char* signal);
 bool QDoubleValidator_protectedbase_isSignalConnected(const VirtualQDoubleValidator* self, QMetaMethod* signal);
 
-const QMetaObject* QDoubleValidator_staticMetaObject();
 void QDoubleValidator_delete(QDoubleValidator* self);
 
 typedef struct VirtualQRegularExpressionValidator VirtualQRegularExpressionValidator;
@@ -295,7 +292,6 @@ int QRegularExpressionValidator_protectedbase_senderSignalIndex(const VirtualQRe
 int QRegularExpressionValidator_protectedbase_receivers(const VirtualQRegularExpressionValidator* self, const char* signal);
 bool QRegularExpressionValidator_protectedbase_isSignalConnected(const VirtualQRegularExpressionValidator* self, QMetaMethod* signal);
 
-const QMetaObject* QRegularExpressionValidator_staticMetaObject();
 void QRegularExpressionValidator_delete(QRegularExpressionValidator* self);
 
 #ifdef __cplusplus

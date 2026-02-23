@@ -270,14 +270,9 @@ void QValidator_changed(QValidator* self) {
 }
 
 void QValidator_connect_changed(QValidator* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QValidator::connect(self, static_cast<void (QValidator::*)()>(&QValidator::changed), self, local_caller{slot, callback, release});
+	QValidator::connect(self, static_cast<void (QValidator::*)()>(&QValidator::changed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QValidator_tr_s_c(const char* s, const char* c) {
@@ -652,15 +647,10 @@ void QIntValidator_bottomChanged(QIntValidator* self, int bottom) {
 }
 
 void QIntValidator_connect_bottomChanged(QIntValidator* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int bottom) {
+	QIntValidator::connect(self, static_cast<void (QIntValidator::*)(int)>(&QIntValidator::bottomChanged), self, [callback, release = seaqt::release_callback{slot,release}](int bottom) {
 			int sigval1 = bottom;
-			callback(slot, sigval1);
-		}
-	};
-	QIntValidator::connect(self, static_cast<void (QIntValidator::*)(int)>(&QIntValidator::bottomChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QIntValidator_topChanged(QIntValidator* self, int top) {
@@ -668,15 +658,10 @@ void QIntValidator_topChanged(QIntValidator* self, int top) {
 }
 
 void QIntValidator_connect_topChanged(QIntValidator* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int top) {
+	QIntValidator::connect(self, static_cast<void (QIntValidator::*)(int)>(&QIntValidator::topChanged), self, [callback, release = seaqt::release_callback{slot,release}](int top) {
 			int sigval1 = top;
-			callback(slot, sigval1);
-		}
-	};
-	QIntValidator::connect(self, static_cast<void (QIntValidator::*)(int)>(&QIntValidator::topChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QIntValidator_tr_s_c(const char* s, const char* c) {
@@ -1079,15 +1064,10 @@ void QDoubleValidator_bottomChanged(QDoubleValidator* self, double bottom) {
 }
 
 void QDoubleValidator_connect_bottomChanged(QDoubleValidator* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(double bottom) {
+	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(double)>(&QDoubleValidator::bottomChanged), self, [callback, release = seaqt::release_callback{slot,release}](double bottom) {
 			double sigval1 = bottom;
-			callback(slot, sigval1);
-		}
-	};
-	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(double)>(&QDoubleValidator::bottomChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDoubleValidator_topChanged(QDoubleValidator* self, double top) {
@@ -1095,15 +1075,10 @@ void QDoubleValidator_topChanged(QDoubleValidator* self, double top) {
 }
 
 void QDoubleValidator_connect_topChanged(QDoubleValidator* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(double top) {
+	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(double)>(&QDoubleValidator::topChanged), self, [callback, release = seaqt::release_callback{slot,release}](double top) {
 			double sigval1 = top;
-			callback(slot, sigval1);
-		}
-	};
-	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(double)>(&QDoubleValidator::topChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDoubleValidator_decimalsChanged(QDoubleValidator* self, int decimals) {
@@ -1111,15 +1086,10 @@ void QDoubleValidator_decimalsChanged(QDoubleValidator* self, int decimals) {
 }
 
 void QDoubleValidator_connect_decimalsChanged(QDoubleValidator* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int decimals) {
+	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(int)>(&QDoubleValidator::decimalsChanged), self, [callback, release = seaqt::release_callback{slot,release}](int decimals) {
 			int sigval1 = decimals;
-			callback(slot, sigval1);
-		}
-	};
-	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(int)>(&QDoubleValidator::decimalsChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDoubleValidator_notationChanged(QDoubleValidator* self, int notation) {
@@ -1127,16 +1097,11 @@ void QDoubleValidator_notationChanged(QDoubleValidator* self, int notation) {
 }
 
 void QDoubleValidator_connect_notationChanged(QDoubleValidator* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QDoubleValidator::Notation notation) {
+	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(QDoubleValidator::Notation)>(&QDoubleValidator::notationChanged), self, [callback, release = seaqt::release_callback{slot,release}](QDoubleValidator::Notation notation) {
 			QDoubleValidator::Notation notation_ret = notation;
 			int sigval1 = static_cast<int>(notation_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QDoubleValidator::connect(self, static_cast<void (QDoubleValidator::*)(QDoubleValidator::Notation)>(&QDoubleValidator::notationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QDoubleValidator_tr_s_c(const char* s, const char* c) {
@@ -1501,17 +1466,12 @@ void QRegularExpressionValidator_regularExpressionChanged(QRegularExpressionVali
 }
 
 void QRegularExpressionValidator_connect_regularExpressionChanged(QRegularExpressionValidator* self, intptr_t slot, void (*callback)(intptr_t, QRegularExpression*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRegularExpression*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRegularExpression*);
-		void operator()(const QRegularExpression& re) {
+	QRegularExpressionValidator::connect(self, static_cast<void (QRegularExpressionValidator::*)(const QRegularExpression&)>(&QRegularExpressionValidator::regularExpressionChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QRegularExpression& re) {
 			const QRegularExpression& re_ret = re;
 			// Cast returned reference into pointer
 			QRegularExpression* sigval1 = const_cast<QRegularExpression*>(&re_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QRegularExpressionValidator::connect(self, static_cast<void (QRegularExpressionValidator::*)(const QRegularExpression&)>(&QRegularExpressionValidator::regularExpressionChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QRegularExpressionValidator_tr_s_c(const char* s, const char* c) {

@@ -270,16 +270,11 @@ void QDrag_actionChanged(QDrag* self, int action) {
 }
 
 void QDrag_connect_actionChanged(QDrag* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::DropAction action) {
+	QDrag::connect(self, static_cast<void (QDrag::*)(Qt::DropAction)>(&QDrag::actionChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::DropAction action) {
 			Qt::DropAction action_ret = action;
 			int sigval1 = static_cast<int>(action_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QDrag::connect(self, static_cast<void (QDrag::*)(Qt::DropAction)>(&QDrag::actionChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDrag_targetChanged(QDrag* self, QObject* newTarget) {
@@ -287,15 +282,10 @@ void QDrag_targetChanged(QDrag* self, QObject* newTarget) {
 }
 
 void QDrag_connect_targetChanged(QDrag* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QObject*);
-		void operator()(QObject* newTarget) {
+	QDrag::connect(self, static_cast<void (QDrag::*)(QObject*)>(&QDrag::targetChanged), self, [callback, release = seaqt::release_callback{slot,release}](QObject* newTarget) {
 			QObject* sigval1 = newTarget;
-			callback(slot, sigval1);
-		}
-	};
-	QDrag::connect(self, static_cast<void (QDrag::*)(QObject*)>(&QDrag::targetChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QDrag_tr_s_c(const char* s, const char* c) {

@@ -286,7 +286,6 @@ int QMdiArea_protectedbase_senderSignalIndex(const VirtualQMdiArea* self);
 int QMdiArea_protectedbase_receivers(const VirtualQMdiArea* self, const char* signal);
 bool QMdiArea_protectedbase_isSignalConnected(const VirtualQMdiArea* self, QMetaMethod* signal);
 
-const QMetaObject* QMdiArea_staticMetaObject();
 void QMdiArea_delete(QMdiArea* self);
 
 #ifdef __cplusplus

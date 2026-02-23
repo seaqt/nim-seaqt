@@ -131,6 +131,7 @@ proc fcQCoreApplication_removePostedEventsReceiverEventType(receiver: pointer, e
 proc fcQCoreApplication_translateContextKeyDisambiguation(context: cstring, key: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QCoreApplication_translate_context_key_disambiguation".}
 proc fcQCoreApplication_translateContextKeyDisambiguationN(context: cstring, key: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QCoreApplication_translate_context_key_disambiguation_n".}
 proc fcQCoreApplication_exitRetcode(retcode: cint): void {.importc: "QCoreApplication_exit_retcode".}
+proc fcQCoreApplication_connect_aboutToQuit(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_aboutToQuit".}
 proc fcQCoreApplication_vdata(self: pointer): ptr pointer {.importc: "QCoreApplication_vdata".}
 proc fvdata_cQCoreApplication(self: pointer): pointer {.importc: "vdata_QCoreApplication".}
 
@@ -501,6 +502,21 @@ proc translate*(_: type gen_qcoreapplication_types.QCoreApplication, context: cs
 
 proc exit*(_: type gen_qcoreapplication_types.QCoreApplication, retcode: cint): void =
   fcQCoreApplication_exitRetcode(retcode)
+
+type QCoreApplicationaboutToQuitSlot* = proc()
+proc fcQCoreApplication_slot_callback_aboutToQuit(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QCoreApplicationaboutToQuitSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQCoreApplication_slot_callback_aboutToQuit_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationaboutToQuitSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onAboutToQuit*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationaboutToQuitSlot) =
+  var tmp = new QCoreApplicationaboutToQuitSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCoreApplication_connect_aboutToQuit(self.h, cast[int](addr tmp[]), fcQCoreApplication_slot_callback_aboutToQuit, fcQCoreApplication_slot_callback_aboutToQuit_release)
 
 type QCoreApplicationmetaObjectProc* = proc(self: QCoreApplication): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QCoreApplicationmetacastProc* = proc(self: QCoreApplication, param1: cstring): pointer {.raises: [], gcsafe.}

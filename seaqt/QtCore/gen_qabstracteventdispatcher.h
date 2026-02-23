@@ -68,7 +68,6 @@ struct seaqt_string QAbstractEventDispatcher_tr_s_c(const char* s, const char* c
 struct seaqt_string QAbstractEventDispatcher_tr_s_c_n(const char* s, const char* c, int n);
 QAbstractEventDispatcher* QAbstractEventDispatcher_instance_thread(QThread* thread);
 
-const QMetaObject* QAbstractEventDispatcher_staticMetaObject();
 void QAbstractEventDispatcher_delete(QAbstractEventDispatcher* self);
 
 QAbstractEventDispatcher__TimerInfo* QAbstractEventDispatcher__TimerInfo_new(int id, int i, int t);

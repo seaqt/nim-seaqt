@@ -183,7 +183,8 @@ int QObject_protectedbase_senderSignalIndex(const VirtualQObject* self);
 int QObject_protectedbase_receivers(const VirtualQObject* self, const char* signal);
 bool QObject_protectedbase_isSignalConnected(const VirtualQObject* self, QMetaMethod* signal);
 
-const QMetaObject* QObject_staticMetaObject();
+void QObject_connect_objectNameChanged(QObject* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
+
 void QObject_delete(QObject* self);
 
 QSignalBlocker* QSignalBlocker_new_pQObject(QObject* o);

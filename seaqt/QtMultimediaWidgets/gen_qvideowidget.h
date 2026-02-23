@@ -230,7 +230,6 @@ int QVideoWidget_protectedbase_senderSignalIndex(const VirtualQVideoWidget* self
 int QVideoWidget_protectedbase_receivers(const VirtualQVideoWidget* self, const char* signal);
 bool QVideoWidget_protectedbase_isSignalConnected(const VirtualQVideoWidget* self, QMetaMethod* signal);
 
-const QMetaObject* QVideoWidget_staticMetaObject();
 void QVideoWidget_delete(QVideoWidget* self);
 
 #ifdef __cplusplus

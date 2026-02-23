@@ -728,17 +728,12 @@ void QGraphicsVideoItem_nativeSizeChanged(QGraphicsVideoItem* self, QSizeF* size
 }
 
 void QGraphicsVideoItem_connect_nativeSizeChanged(QGraphicsVideoItem* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSizeF*);
-		void operator()(const QSizeF& size) {
+	QGraphicsVideoItem::connect(self, static_cast<void (QGraphicsVideoItem::*)(const QSizeF&)>(&QGraphicsVideoItem::nativeSizeChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QSizeF& size) {
 			const QSizeF& size_ret = size;
 			// Cast returned reference into pointer
 			QSizeF* sigval1 = const_cast<QSizeF*>(&size_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsVideoItem::connect(self, static_cast<void (QGraphicsVideoItem::*)(const QSizeF&)>(&QGraphicsVideoItem::nativeSizeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QGraphicsVideoItem_tr_s_c(const char* s, const char* c) {

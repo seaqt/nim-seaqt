@@ -44,7 +44,6 @@ bool QWebEngineScript_operatorEqual(const QWebEngineScript* self, QWebEngineScri
 bool QWebEngineScript_operatorNotEqual(const QWebEngineScript* self, QWebEngineScript* other);
 void QWebEngineScript_swap(QWebEngineScript* self, QWebEngineScript* other);
 
-const QMetaObject* QWebEngineScript_staticMetaObject();
 void QWebEngineScript_delete(QWebEngineScript* self);
 
 #ifdef __cplusplus

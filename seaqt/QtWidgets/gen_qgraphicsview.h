@@ -375,7 +375,6 @@ int QGraphicsView_protectedbase_senderSignalIndex(const VirtualQGraphicsView* se
 int QGraphicsView_protectedbase_receivers(const VirtualQGraphicsView* self, const char* signal);
 bool QGraphicsView_protectedbase_isSignalConnected(const VirtualQGraphicsView* self, QMetaMethod* signal);
 
-const QMetaObject* QGraphicsView_staticMetaObject();
 void QGraphicsView_delete(QGraphicsView* self);
 
 #ifdef __cplusplus

@@ -528,14 +528,9 @@ void QObject_destroyed(QObject* self) {
 }
 
 void QObject_connect_destroyed(QObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QObject::connect(self, static_cast<void (QObject::*)(QObject*)>(&QObject::destroyed), self, local_caller{slot, callback, release});
+	QObject::connect(self, static_cast<void (QObject::*)(QObject*)>(&QObject::destroyed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 QObject* QObject_parent(const QObject* self) {
@@ -589,15 +584,24 @@ void QObject_destroyed_QObject(QObject* self, QObject* param1) {
 }
 
 void QObject_connect_destroyed_QObject(QObject* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QObject*);
-		void operator()(QObject* param1) {
+	QObject::connect(self, static_cast<void (QObject::*)(QObject*)>(&QObject::destroyed), self, [callback, release = seaqt::release_callback{slot,release}](QObject* param1) {
 			QObject* sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QObject::connect(self, static_cast<void (QObject::*)(QObject*)>(&QObject::destroyed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
+}
+
+void QObject_connect_objectNameChanged(QObject* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QObject::connect(self, &QObject::objectNameChanged, self, [callback, release = seaqt::release_callback{slot,release}](const QString& objectName, auto) {
+			const QString objectName_ret = objectName;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray objectName_b = objectName_ret.toUtf8();
+			struct seaqt_string objectName_ms;
+			objectName_ms.len = objectName_b.length();
+			objectName_ms.data = static_cast<char*>(malloc(objectName_ms.len));
+			memcpy(objectName_ms.data, objectName_b.data(), objectName_ms.len);
+			struct seaqt_string sigval1 = objectName_ms;
+			callback(release.slot, sigval1);
+	});
 }
 
 const QMetaObject* QObject_staticMetaObject() { return &QObject::staticMetaObject; }

@@ -273,15 +273,10 @@ void QWebChannel_blockUpdatesChanged(QWebChannel* self, bool block) {
 }
 
 void QWebChannel_connect_blockUpdatesChanged(QWebChannel* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool block) {
+	QWebChannel::connect(self, static_cast<void (QWebChannel::*)(bool)>(&QWebChannel::blockUpdatesChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool block) {
 			bool sigval1 = block;
-			callback(slot, sigval1);
-		}
-	};
-	QWebChannel::connect(self, static_cast<void (QWebChannel::*)(bool)>(&QWebChannel::blockUpdatesChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWebChannel_connectTo(QWebChannel* self, QWebChannelAbstractTransport* transport) {

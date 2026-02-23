@@ -714,14 +714,9 @@ void QQuickWindow_frameSwapped(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_frameSwapped(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::frameSwapped), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::frameSwapped), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_sceneGraphInitialized(QQuickWindow* self) {
@@ -729,14 +724,9 @@ void QQuickWindow_sceneGraphInitialized(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_sceneGraphInitialized(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphInitialized), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphInitialized), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_sceneGraphInvalidated(QQuickWindow* self) {
@@ -744,14 +734,9 @@ void QQuickWindow_sceneGraphInvalidated(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_sceneGraphInvalidated(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphInvalidated), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphInvalidated), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_beforeSynchronizing(QQuickWindow* self) {
@@ -759,14 +744,9 @@ void QQuickWindow_beforeSynchronizing(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_beforeSynchronizing(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeSynchronizing), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeSynchronizing), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_afterSynchronizing(QQuickWindow* self) {
@@ -774,14 +754,9 @@ void QQuickWindow_afterSynchronizing(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_afterSynchronizing(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterSynchronizing), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterSynchronizing), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_beforeRendering(QQuickWindow* self) {
@@ -789,14 +764,9 @@ void QQuickWindow_beforeRendering(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_beforeRendering(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeRendering), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeRendering), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_afterRendering(QQuickWindow* self) {
@@ -804,14 +774,9 @@ void QQuickWindow_afterRendering(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_afterRendering(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterRendering), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterRendering), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_afterAnimating(QQuickWindow* self) {
@@ -819,14 +784,9 @@ void QQuickWindow_afterAnimating(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_afterAnimating(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterAnimating), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterAnimating), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_sceneGraphAboutToStop(QQuickWindow* self) {
@@ -834,14 +794,9 @@ void QQuickWindow_sceneGraphAboutToStop(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_sceneGraphAboutToStop(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphAboutToStop), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphAboutToStop), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_colorChanged(QQuickWindow* self, QColor* param1) {
@@ -849,17 +804,12 @@ void QQuickWindow_colorChanged(QQuickWindow* self, QColor* param1) {
 }
 
 void QQuickWindow_connect_colorChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QColor*);
-		void operator()(const QColor& param1) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)(const QColor&)>(&QQuickWindow::colorChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QColor& param1) {
 			const QColor& param1_ret = param1;
 			// Cast returned reference into pointer
 			QColor* sigval1 = const_cast<QColor*>(&param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)(const QColor&)>(&QQuickWindow::colorChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QQuickWindow_activeFocusItemChanged(QQuickWindow* self) {
@@ -867,14 +817,9 @@ void QQuickWindow_activeFocusItemChanged(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_activeFocusItemChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::activeFocusItemChanged), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::activeFocusItemChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_sceneGraphError(QQuickWindow* self, int error, struct seaqt_string message) {
@@ -883,10 +828,7 @@ void QQuickWindow_sceneGraphError(QQuickWindow* self, int error, struct seaqt_st
 }
 
 void QQuickWindow_connect_sceneGraphError(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, struct seaqt_string);
-		void operator()(QQuickWindow::SceneGraphError error, const QString& message) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)(QQuickWindow::SceneGraphError, const QString&)>(&QQuickWindow::sceneGraphError), self, [callback, release = seaqt::release_callback{slot,release}](QQuickWindow::SceneGraphError error, const QString& message) {
 			QQuickWindow::SceneGraphError error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
 			const QString message_ret = message;
@@ -897,10 +839,8 @@ void QQuickWindow_connect_sceneGraphError(QQuickWindow* self, intptr_t slot, voi
 			message_ms.data = static_cast<char*>(malloc(message_ms.len));
 			memcpy(message_ms.data, message_b.data(), message_ms.len);
 			struct seaqt_string sigval2 = message_ms;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)(QQuickWindow::SceneGraphError, const QString&)>(&QQuickWindow::sceneGraphError), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QQuickWindow_beforeRenderPassRecording(QQuickWindow* self) {
@@ -908,14 +848,9 @@ void QQuickWindow_beforeRenderPassRecording(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_beforeRenderPassRecording(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeRenderPassRecording), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeRenderPassRecording), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_afterRenderPassRecording(QQuickWindow* self) {
@@ -923,14 +858,9 @@ void QQuickWindow_afterRenderPassRecording(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_afterRenderPassRecording(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterRenderPassRecording), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterRenderPassRecording), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_paletteChanged(QQuickWindow* self) {
@@ -938,14 +868,9 @@ void QQuickWindow_paletteChanged(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_paletteChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::paletteChanged), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::paletteChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_paletteCreated(QQuickWindow* self) {
@@ -953,14 +878,9 @@ void QQuickWindow_paletteCreated(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_paletteCreated(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::paletteCreated), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::paletteCreated), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_beforeFrameBegin(QQuickWindow* self) {
@@ -968,14 +888,9 @@ void QQuickWindow_beforeFrameBegin(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_beforeFrameBegin(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeFrameBegin), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeFrameBegin), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_afterFrameEnd(QQuickWindow* self) {
@@ -983,14 +898,9 @@ void QQuickWindow_afterFrameEnd(QQuickWindow* self) {
 }
 
 void QQuickWindow_connect_afterFrameEnd(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterFrameEnd), self, local_caller{slot, callback, release});
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterFrameEnd), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QQuickWindow_update(QQuickWindow* self) {

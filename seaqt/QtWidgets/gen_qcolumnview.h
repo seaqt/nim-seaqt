@@ -372,7 +372,6 @@ int QColumnView_protectedbase_senderSignalIndex(const VirtualQColumnView* self);
 int QColumnView_protectedbase_receivers(const VirtualQColumnView* self, const char* signal);
 bool QColumnView_protectedbase_isSignalConnected(const VirtualQColumnView* self, QMetaMethod* signal);
 
-const QMetaObject* QColumnView_staticMetaObject();
 void QColumnView_delete(QColumnView* self);
 
 #ifdef __cplusplus

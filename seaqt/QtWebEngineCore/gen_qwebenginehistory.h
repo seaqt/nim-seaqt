@@ -69,7 +69,6 @@ void QWebEngineHistoryModel_reset(QWebEngineHistoryModel* self);
 struct seaqt_string QWebEngineHistoryModel_tr_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineHistoryModel_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebEngineHistoryModel_staticMetaObject();
 
 void QWebEngineHistory_virtbase(QWebEngineHistory* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineHistory_metaObject(const QWebEngineHistory* self);
@@ -97,7 +96,6 @@ QWebEngineHistoryModel* QWebEngineHistory_forwardItemsModel(const QWebEngineHist
 struct seaqt_string QWebEngineHistory_tr_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineHistory_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebEngineHistory_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

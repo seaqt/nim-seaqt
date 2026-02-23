@@ -269,7 +269,6 @@ int QToolBar_protectedbase_senderSignalIndex(const VirtualQToolBar* self);
 int QToolBar_protectedbase_receivers(const VirtualQToolBar* self, const char* signal);
 bool QToolBar_protectedbase_isSignalConnected(const VirtualQToolBar* self, QMetaMethod* signal);
 
-const QMetaObject* QToolBar_staticMetaObject();
 void QToolBar_delete(QToolBar* self);
 
 #ifdef __cplusplus

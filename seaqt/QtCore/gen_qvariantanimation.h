@@ -115,7 +115,6 @@ int QVariantAnimation_protectedbase_senderSignalIndex(const VirtualQVariantAnima
 int QVariantAnimation_protectedbase_receivers(const VirtualQVariantAnimation* self, const char* signal);
 bool QVariantAnimation_protectedbase_isSignalConnected(const VirtualQVariantAnimation* self, QMetaMethod* signal);
 
-const QMetaObject* QVariantAnimation_staticMetaObject();
 void QVariantAnimation_delete(QVariantAnimation* self);
 
 #ifdef __cplusplus

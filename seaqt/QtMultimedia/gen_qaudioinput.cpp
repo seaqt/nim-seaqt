@@ -246,14 +246,9 @@ void QAudioInput_deviceChanged(QAudioInput* self) {
 }
 
 void QAudioInput_connect_deviceChanged(QAudioInput* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAudioInput::connect(self, static_cast<void (QAudioInput::*)()>(&QAudioInput::deviceChanged), self, local_caller{slot, callback, release});
+	QAudioInput::connect(self, static_cast<void (QAudioInput::*)()>(&QAudioInput::deviceChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QAudioInput_volumeChanged(QAudioInput* self, float volume) {
@@ -261,15 +256,10 @@ void QAudioInput_volumeChanged(QAudioInput* self, float volume) {
 }
 
 void QAudioInput_connect_volumeChanged(QAudioInput* self, intptr_t slot, void (*callback)(intptr_t, float), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, float), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, float);
-		void operator()(float volume) {
+	QAudioInput::connect(self, static_cast<void (QAudioInput::*)(float)>(&QAudioInput::volumeChanged), self, [callback, release = seaqt::release_callback{slot,release}](float volume) {
 			float sigval1 = volume;
-			callback(slot, sigval1);
-		}
-	};
-	QAudioInput::connect(self, static_cast<void (QAudioInput::*)(float)>(&QAudioInput::volumeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAudioInput_mutedChanged(QAudioInput* self, bool muted) {
@@ -277,15 +267,10 @@ void QAudioInput_mutedChanged(QAudioInput* self, bool muted) {
 }
 
 void QAudioInput_connect_mutedChanged(QAudioInput* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool muted) {
+	QAudioInput::connect(self, static_cast<void (QAudioInput::*)(bool)>(&QAudioInput::mutedChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool muted) {
 			bool sigval1 = muted;
-			callback(slot, sigval1);
-		}
-	};
-	QAudioInput::connect(self, static_cast<void (QAudioInput::*)(bool)>(&QAudioInput::mutedChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QAudioInput_tr_s_c(const char* s, const char* c) {

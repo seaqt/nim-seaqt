@@ -147,7 +147,6 @@ int QQuickTransform_protectedbase_senderSignalIndex(const VirtualQQuickTransform
 int QQuickTransform_protectedbase_receivers(const VirtualQQuickTransform* self, const char* signal);
 bool QQuickTransform_protectedbase_isSignalConnected(const VirtualQQuickTransform* self, QMetaMethod* signal);
 
-const QMetaObject* QQuickTransform_staticMetaObject();
 void QQuickTransform_delete(QQuickTransform* self);
 
 typedef struct VirtualQQuickItem VirtualQQuickItem;
@@ -472,7 +471,6 @@ int QQuickItem_protectedbase_senderSignalIndex(const VirtualQQuickItem* self);
 int QQuickItem_protectedbase_receivers(const VirtualQQuickItem* self, const char* signal);
 bool QQuickItem_protectedbase_isSignalConnected(const VirtualQQuickItem* self, QMetaMethod* signal);
 
-const QMetaObject* QQuickItem_staticMetaObject();
 void QQuickItem_delete(QQuickItem* self);
 
 QQuickItem__ItemChangeData* QQuickItem__ItemChangeData_new_QQuickItem(QQuickItem* v);

@@ -112,7 +112,6 @@ int QSGTexture_protectedbase_senderSignalIndex(const VirtualQSGTexture* self);
 int QSGTexture_protectedbase_receivers(const VirtualQSGTexture* self, const char* signal);
 bool QSGTexture_protectedbase_isSignalConnected(const VirtualQSGTexture* self, QMetaMethod* signal);
 
-const QMetaObject* QSGTexture_staticMetaObject();
 void QSGTexture_delete(QSGTexture* self);
 
 typedef struct VirtualQSGDynamicTexture VirtualQSGDynamicTexture;
@@ -175,7 +174,6 @@ int QSGDynamicTexture_protectedbase_senderSignalIndex(const VirtualQSGDynamicTex
 int QSGDynamicTexture_protectedbase_receivers(const VirtualQSGDynamicTexture* self, const char* signal);
 bool QSGDynamicTexture_protectedbase_isSignalConnected(const VirtualQSGDynamicTexture* self, QMetaMethod* signal);
 
-const QMetaObject* QSGDynamicTexture_staticMetaObject();
 void QSGDynamicTexture_delete(QSGDynamicTexture* self);
 
 #ifdef __cplusplus

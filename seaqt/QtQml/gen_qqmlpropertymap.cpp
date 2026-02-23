@@ -317,10 +317,7 @@ void QQmlPropertyMap_valueChanged(QQmlPropertyMap* self, struct seaqt_string key
 }
 
 void QQmlPropertyMap_connect_valueChanged(QQmlPropertyMap* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string, QVariant*);
-		void operator()(const QString& key, const QVariant& value) {
+	QQmlPropertyMap::connect(self, static_cast<void (QQmlPropertyMap::*)(const QString&, const QVariant&)>(&QQmlPropertyMap::valueChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& key, const QVariant& value) {
 			const QString key_ret = key;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray key_b = key_ret.toUtf8();
@@ -332,10 +329,8 @@ void QQmlPropertyMap_connect_valueChanged(QQmlPropertyMap* self, intptr_t slot, 
 			const QVariant& value_ret = value;
 			// Cast returned reference into pointer
 			QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QQmlPropertyMap::connect(self, static_cast<void (QQmlPropertyMap::*)(const QString&, const QVariant&)>(&QQmlPropertyMap::valueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QQmlPropertyMap_tr_s_c(const char* s, const char* c) {

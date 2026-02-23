@@ -688,15 +688,10 @@ void QDtls_pskRequired(QDtls* self, QSslPreSharedKeyAuthenticator* authenticator
 }
 
 void QDtls_connect_pskRequired(QDtls* self, intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*);
-		void operator()(QSslPreSharedKeyAuthenticator* authenticator) {
+	QDtls::connect(self, static_cast<void (QDtls::*)(QSslPreSharedKeyAuthenticator*)>(&QDtls::pskRequired), self, [callback, release = seaqt::release_callback{slot,release}](QSslPreSharedKeyAuthenticator* authenticator) {
 			QSslPreSharedKeyAuthenticator* sigval1 = authenticator;
-			callback(slot, sigval1);
-		}
-	};
-	QDtls::connect(self, static_cast<void (QDtls::*)(QSslPreSharedKeyAuthenticator*)>(&QDtls::pskRequired), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDtls_handshakeTimeout(QDtls* self) {
@@ -704,14 +699,9 @@ void QDtls_handshakeTimeout(QDtls* self) {
 }
 
 void QDtls_connect_handshakeTimeout(QDtls* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QDtls::connect(self, static_cast<void (QDtls::*)()>(&QDtls::handshakeTimeout), self, local_caller{slot, callback, release});
+	QDtls::connect(self, static_cast<void (QDtls::*)()>(&QDtls::handshakeTimeout), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QDtls_tr_s_c(const char* s, const char* c) {

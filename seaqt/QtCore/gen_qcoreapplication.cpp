@@ -466,15 +466,10 @@ void QCoreApplication_installNativeEventFilter(QCoreApplication* self, QAbstract
 }
 
 void QCoreApplication_connect_installNativeEventFilter(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t, QAbstractNativeEventFilter*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractNativeEventFilter*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAbstractNativeEventFilter*);
-		void operator()(QAbstractNativeEventFilter* filterObj) {
+	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)(QAbstractNativeEventFilter*)>(&QCoreApplication::installNativeEventFilter), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractNativeEventFilter* filterObj) {
 			QAbstractNativeEventFilter* sigval1 = filterObj;
-			callback(slot, sigval1);
-		}
-	};
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)(QAbstractNativeEventFilter*)>(&QCoreApplication::installNativeEventFilter), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCoreApplication_removeNativeEventFilter(QCoreApplication* self, QAbstractNativeEventFilter* filterObj) {
@@ -482,15 +477,10 @@ void QCoreApplication_removeNativeEventFilter(QCoreApplication* self, QAbstractN
 }
 
 void QCoreApplication_connect_removeNativeEventFilter(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t, QAbstractNativeEventFilter*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractNativeEventFilter*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAbstractNativeEventFilter*);
-		void operator()(QAbstractNativeEventFilter* filterObj) {
+	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)(QAbstractNativeEventFilter*)>(&QCoreApplication::removeNativeEventFilter), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractNativeEventFilter* filterObj) {
 			QAbstractNativeEventFilter* sigval1 = filterObj;
-			callback(slot, sigval1);
-		}
-	};
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)(QAbstractNativeEventFilter*)>(&QCoreApplication::removeNativeEventFilter), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 bool QCoreApplication_isQuitLockEnabled() {
@@ -514,14 +504,9 @@ void QCoreApplication_organizationNameChanged(QCoreApplication* self) {
 }
 
 void QCoreApplication_connect_organizationNameChanged(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::organizationNameChanged), self, local_caller{slot, callback, release});
+	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::organizationNameChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QCoreApplication_organizationDomainChanged(QCoreApplication* self) {
@@ -529,14 +514,9 @@ void QCoreApplication_organizationDomainChanged(QCoreApplication* self) {
 }
 
 void QCoreApplication_connect_organizationDomainChanged(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::organizationDomainChanged), self, local_caller{slot, callback, release});
+	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::organizationDomainChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QCoreApplication_applicationNameChanged(QCoreApplication* self) {
@@ -544,14 +524,9 @@ void QCoreApplication_applicationNameChanged(QCoreApplication* self) {
 }
 
 void QCoreApplication_connect_applicationNameChanged(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationNameChanged), self, local_caller{slot, callback, release});
+	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationNameChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QCoreApplication_applicationVersionChanged(QCoreApplication* self) {
@@ -559,14 +534,9 @@ void QCoreApplication_applicationVersionChanged(QCoreApplication* self) {
 }
 
 void QCoreApplication_connect_applicationVersionChanged(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationVersionChanged), self, local_caller{slot, callback, release});
+	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationVersionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QCoreApplication_tr_s_c(const char* s, const char* c) {
@@ -639,6 +609,12 @@ struct seaqt_string QCoreApplication_translate_context_key_disambiguation_n(cons
 
 void QCoreApplication_exit_retcode(int retcode) {
 	QCoreApplication::exit(static_cast<int>(retcode));
+}
+
+void QCoreApplication_connect_aboutToQuit(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QCoreApplication::connect(self, &QCoreApplication::aboutToQuit, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
 }
 
 const QMetaObject* QCoreApplication_staticMetaObject() { return &QCoreApplication::staticMetaObject; }

@@ -84,7 +84,6 @@ void QFutureWatcherBase_disconnectNotify(QFutureWatcherBase* self, QMetaMethod* 
 struct seaqt_string QFutureWatcherBase_tr_s_c(const char* s, const char* c);
 struct seaqt_string QFutureWatcherBase_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QFutureWatcherBase_staticMetaObject();
 void QFutureWatcherBase_delete(QFutureWatcherBase* self);
 
 #ifdef __cplusplus

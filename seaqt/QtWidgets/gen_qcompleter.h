@@ -139,7 +139,6 @@ int QCompleter_protectedbase_senderSignalIndex(const VirtualQCompleter* self);
 int QCompleter_protectedbase_receivers(const VirtualQCompleter* self, const char* signal);
 bool QCompleter_protectedbase_isSignalConnected(const VirtualQCompleter* self, QMetaMethod* signal);
 
-const QMetaObject* QCompleter_staticMetaObject();
 void QCompleter_delete(QCompleter* self);
 
 #ifdef __cplusplus
