@@ -177,6 +177,7 @@ int QNetworkAccessManager_protectedbase_senderSignalIndex(const VirtualQNetworkA
 int QNetworkAccessManager_protectedbase_receivers(const VirtualQNetworkAccessManager* self, const char* signal);
 bool QNetworkAccessManager_protectedbase_isSignalConnected(const VirtualQNetworkAccessManager* self, QMetaMethod* signal);
 
+const QMetaObject* QNetworkAccessManager_staticMetaObject();
 void QNetworkAccessManager_delete(QNetworkAccessManager* self);
 
 #ifdef __cplusplus

@@ -160,6 +160,7 @@ int QUndoStack_protectedbase_senderSignalIndex(const VirtualQUndoStack* self);
 int QUndoStack_protectedbase_receivers(const VirtualQUndoStack* self, const char* signal);
 bool QUndoStack_protectedbase_isSignalConnected(const VirtualQUndoStack* self, QMetaMethod* signal);
 
+const QMetaObject* QUndoStack_staticMetaObject();
 void QUndoStack_delete(QUndoStack* self);
 
 #ifdef __cplusplus

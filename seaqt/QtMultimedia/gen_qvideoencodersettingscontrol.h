@@ -49,6 +49,7 @@ struct seaqt_string QVideoEncoderSettingsControl_tr_s_c_n(const char* s, const c
 struct seaqt_string QVideoEncoderSettingsControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QVideoEncoderSettingsControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QVideoEncoderSettingsControl_staticMetaObject();
 void QVideoEncoderSettingsControl_delete(QVideoEncoderSettingsControl* self);
 
 #ifdef __cplusplus

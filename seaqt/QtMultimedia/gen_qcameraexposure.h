@@ -86,6 +86,7 @@ struct seaqt_array /* of int */  QCameraExposure_supportedIsoSensitivities_conti
 struct seaqt_array /* of double */  QCameraExposure_supportedApertures_continuous(const QCameraExposure* self, bool* continuous);
 struct seaqt_array /* of double */  QCameraExposure_supportedShutterSpeeds_continuous(const QCameraExposure* self, bool* continuous);
 
+const QMetaObject* QCameraExposure_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

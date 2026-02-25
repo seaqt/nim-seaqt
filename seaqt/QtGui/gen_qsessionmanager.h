@@ -53,6 +53,7 @@ struct seaqt_string QSessionManager_tr_s_c_n(const char* s, const char* c, int n
 struct seaqt_string QSessionManager_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QSessionManager_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QSessionManager_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

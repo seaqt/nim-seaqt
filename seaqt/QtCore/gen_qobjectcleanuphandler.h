@@ -83,6 +83,7 @@ int QObjectCleanupHandler_protectedbase_senderSignalIndex(const VirtualQObjectCl
 int QObjectCleanupHandler_protectedbase_receivers(const VirtualQObjectCleanupHandler* self, const char* signal);
 bool QObjectCleanupHandler_protectedbase_isSignalConnected(const VirtualQObjectCleanupHandler* self, QMetaMethod* signal);
 
+const QMetaObject* QObjectCleanupHandler_staticMetaObject();
 void QObjectCleanupHandler_delete(QObjectCleanupHandler* self);
 
 #ifdef __cplusplus

@@ -104,6 +104,7 @@ int QGesture_protectedbase_senderSignalIndex(const VirtualQGesture* self);
 int QGesture_protectedbase_receivers(const VirtualQGesture* self, const char* signal);
 bool QGesture_protectedbase_isSignalConnected(const VirtualQGesture* self, QMetaMethod* signal);
 
+const QMetaObject* QGesture_staticMetaObject();
 void QGesture_delete(QGesture* self);
 
 typedef struct VirtualQPanGesture VirtualQPanGesture;
@@ -161,6 +162,7 @@ int QPanGesture_protectedbase_senderSignalIndex(const VirtualQPanGesture* self);
 int QPanGesture_protectedbase_receivers(const VirtualQPanGesture* self, const char* signal);
 bool QPanGesture_protectedbase_isSignalConnected(const VirtualQPanGesture* self, QMetaMethod* signal);
 
+const QMetaObject* QPanGesture_staticMetaObject();
 void QPanGesture_delete(QPanGesture* self);
 
 typedef struct VirtualQPinchGesture VirtualQPinchGesture;
@@ -233,6 +235,7 @@ int QPinchGesture_protectedbase_senderSignalIndex(const VirtualQPinchGesture* se
 int QPinchGesture_protectedbase_receivers(const VirtualQPinchGesture* self, const char* signal);
 bool QPinchGesture_protectedbase_isSignalConnected(const VirtualQPinchGesture* self, QMetaMethod* signal);
 
+const QMetaObject* QPinchGesture_staticMetaObject();
 void QPinchGesture_delete(QPinchGesture* self);
 
 typedef struct VirtualQSwipeGesture VirtualQSwipeGesture;
@@ -287,6 +290,7 @@ int QSwipeGesture_protectedbase_senderSignalIndex(const VirtualQSwipeGesture* se
 int QSwipeGesture_protectedbase_receivers(const VirtualQSwipeGesture* self, const char* signal);
 bool QSwipeGesture_protectedbase_isSignalConnected(const VirtualQSwipeGesture* self, QMetaMethod* signal);
 
+const QMetaObject* QSwipeGesture_staticMetaObject();
 void QSwipeGesture_delete(QSwipeGesture* self);
 
 typedef struct VirtualQTapGesture VirtualQTapGesture;
@@ -339,6 +343,7 @@ int QTapGesture_protectedbase_senderSignalIndex(const VirtualQTapGesture* self);
 int QTapGesture_protectedbase_receivers(const VirtualQTapGesture* self, const char* signal);
 bool QTapGesture_protectedbase_isSignalConnected(const VirtualQTapGesture* self, QMetaMethod* signal);
 
+const QMetaObject* QTapGesture_staticMetaObject();
 void QTapGesture_delete(QTapGesture* self);
 
 typedef struct VirtualQTapAndHoldGesture VirtualQTapAndHoldGesture;
@@ -393,6 +398,7 @@ int QTapAndHoldGesture_protectedbase_senderSignalIndex(const VirtualQTapAndHoldG
 int QTapAndHoldGesture_protectedbase_receivers(const VirtualQTapAndHoldGesture* self, const char* signal);
 bool QTapAndHoldGesture_protectedbase_isSignalConnected(const VirtualQTapAndHoldGesture* self, QMetaMethod* signal);
 
+const QMetaObject* QTapAndHoldGesture_staticMetaObject();
 void QTapAndHoldGesture_delete(QTapAndHoldGesture* self);
 
 QGestureEvent* QGestureEvent_new_gestures(struct seaqt_array /* of QGesture* */  gestures);

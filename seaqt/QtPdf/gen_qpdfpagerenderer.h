@@ -100,6 +100,7 @@ int QPdfPageRenderer_protectedbase_senderSignalIndex(const VirtualQPdfPageRender
 int QPdfPageRenderer_protectedbase_receivers(const VirtualQPdfPageRenderer* self, const char* signal);
 bool QPdfPageRenderer_protectedbase_isSignalConnected(const VirtualQPdfPageRenderer* self, QMetaMethod* signal);
 
+const QMetaObject* QPdfPageRenderer_staticMetaObject();
 void QPdfPageRenderer_delete(QPdfPageRenderer* self);
 
 #ifdef __cplusplus

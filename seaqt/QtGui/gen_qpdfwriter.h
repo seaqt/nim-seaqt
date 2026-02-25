@@ -141,6 +141,7 @@ int QPdfWriter_protectedbase_receivers(const VirtualQPdfWriter* self, const char
 bool QPdfWriter_protectedbase_isSignalConnected(const VirtualQPdfWriter* self, QMetaMethod* signal);
 QPageLayout* QPdfWriter_protectedbase_devicePageLayout_const(const VirtualQPdfWriter* self);
 
+const QMetaObject* QPdfWriter_staticMetaObject();
 void QPdfWriter_delete(QPdfWriter* self);
 
 #ifdef __cplusplus

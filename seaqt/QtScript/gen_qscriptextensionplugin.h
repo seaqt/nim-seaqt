@@ -95,6 +95,7 @@ int QScriptExtensionPlugin_protectedbase_senderSignalIndex(const VirtualQScriptE
 int QScriptExtensionPlugin_protectedbase_receivers(const VirtualQScriptExtensionPlugin* self, const char* signal);
 bool QScriptExtensionPlugin_protectedbase_isSignalConnected(const VirtualQScriptExtensionPlugin* self, QMetaMethod* signal);
 
+const QMetaObject* QScriptExtensionPlugin_staticMetaObject();
 void QScriptExtensionPlugin_delete(QScriptExtensionPlugin* self);
 
 #ifdef __cplusplus

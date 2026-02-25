@@ -610,6 +610,7 @@ int QWidget_protectedbase_senderSignalIndex(const VirtualQWidget* self);
 int QWidget_protectedbase_receivers(const VirtualQWidget* self, const char* signal);
 bool QWidget_protectedbase_isSignalConnected(const VirtualQWidget* self, QMetaMethod* signal);
 
+const QMetaObject* QWidget_staticMetaObject();
 void QWidget_delete(QWidget* self);
 
 #ifdef __cplusplus

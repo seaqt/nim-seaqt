@@ -70,6 +70,7 @@ void QSurfaceFormat_setDefaultFormat(QSurfaceFormat* format);
 QSurfaceFormat* QSurfaceFormat_defaultFormat();
 void QSurfaceFormat_setOption_option_on(QSurfaceFormat* self, int option, bool on);
 
+const QMetaObject* QSurfaceFormat_staticMetaObject();
 void QSurfaceFormat_delete(QSurfaceFormat* self);
 
 #ifdef __cplusplus

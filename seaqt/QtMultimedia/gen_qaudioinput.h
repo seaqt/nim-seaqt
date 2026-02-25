@@ -113,6 +113,7 @@ int QAudioInput_protectedbase_senderSignalIndex(const VirtualQAudioInput* self);
 int QAudioInput_protectedbase_receivers(const VirtualQAudioInput* self, const char* signal);
 bool QAudioInput_protectedbase_isSignalConnected(const VirtualQAudioInput* self, QMetaMethod* signal);
 
+const QMetaObject* QAudioInput_staticMetaObject();
 void QAudioInput_delete(QAudioInput* self);
 
 #ifdef __cplusplus

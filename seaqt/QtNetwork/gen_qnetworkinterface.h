@@ -76,6 +76,7 @@ struct seaqt_string QNetworkInterface_interfaceNameFromIndex(int index);
 struct seaqt_array /* of QNetworkInterface* */  QNetworkInterface_allInterfaces();
 struct seaqt_array /* of QHostAddress* */  QNetworkInterface_allAddresses();
 
+const QMetaObject* QNetworkInterface_staticMetaObject();
 void QNetworkInterface_delete(QNetworkInterface* self);
 
 #ifdef __cplusplus

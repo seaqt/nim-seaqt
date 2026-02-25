@@ -107,6 +107,7 @@ int QDrag_protectedbase_senderSignalIndex(const VirtualQDrag* self);
 int QDrag_protectedbase_receivers(const VirtualQDrag* self, const char* signal);
 bool QDrag_protectedbase_isSignalConnected(const VirtualQDrag* self, QMetaMethod* signal);
 
+const QMetaObject* QDrag_staticMetaObject();
 void QDrag_delete(QDrag* self);
 
 #ifdef __cplusplus

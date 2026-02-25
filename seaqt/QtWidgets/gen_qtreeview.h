@@ -452,6 +452,7 @@ int QTreeView_protectedbase_senderSignalIndex(const VirtualQTreeView* self);
 int QTreeView_protectedbase_receivers(const VirtualQTreeView* self, const char* signal);
 bool QTreeView_protectedbase_isSignalConnected(const VirtualQTreeView* self, QMetaMethod* signal);
 
+const QMetaObject* QTreeView_staticMetaObject();
 void QTreeView_delete(QTreeView* self);
 
 #ifdef __cplusplus

@@ -132,6 +132,7 @@ int QBuffer_protectedbase_senderSignalIndex(const VirtualQBuffer* self);
 int QBuffer_protectedbase_receivers(const VirtualQBuffer* self, const char* signal);
 bool QBuffer_protectedbase_isSignalConnected(const VirtualQBuffer* self, QMetaMethod* signal);
 
+const QMetaObject* QBuffer_staticMetaObject();
 void QBuffer_delete(QBuffer* self);
 
 #ifdef __cplusplus

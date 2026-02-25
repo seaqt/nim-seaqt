@@ -66,6 +66,7 @@ struct seaqt_string QMediaRecorderControl_tr_s_c_n(const char* s, const char* c,
 struct seaqt_string QMediaRecorderControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMediaRecorderControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QMediaRecorderControl_staticMetaObject();
 void QMediaRecorderControl_delete(QMediaRecorderControl* self);
 
 #ifdef __cplusplus

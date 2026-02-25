@@ -63,6 +63,7 @@ bool QFontDatabase_isSmoothlyScalable_family_style(const QFontDatabase* self, st
 bool QFontDatabase_isScalable_family_style(const QFontDatabase* self, struct seaqt_string family, struct seaqt_string style);
 bool QFontDatabase_isFixedPitch_family_style(const QFontDatabase* self, struct seaqt_string family, struct seaqt_string style);
 
+const QMetaObject* QFontDatabase_staticMetaObject();
 void QFontDatabase_delete(QFontDatabase* self);
 
 #ifdef __cplusplus

@@ -264,6 +264,7 @@ int QSplitter_protectedbase_senderSignalIndex(const VirtualQSplitter* self);
 int QSplitter_protectedbase_receivers(const VirtualQSplitter* self, const char* signal);
 bool QSplitter_protectedbase_isSignalConnected(const VirtualQSplitter* self, QMetaMethod* signal);
 
+const QMetaObject* QSplitter_staticMetaObject();
 void QSplitter_delete(QSplitter* self);
 
 typedef struct VirtualQSplitterHandle VirtualQSplitterHandle;
@@ -411,6 +412,7 @@ int QSplitterHandle_protectedbase_senderSignalIndex(const VirtualQSplitterHandle
 int QSplitterHandle_protectedbase_receivers(const VirtualQSplitterHandle* self, const char* signal);
 bool QSplitterHandle_protectedbase_isSignalConnected(const VirtualQSplitterHandle* self, QMetaMethod* signal);
 
+const QMetaObject* QSplitterHandle_staticMetaObject();
 void QSplitterHandle_delete(QSplitterHandle* self);
 
 #ifdef __cplusplus

@@ -50,6 +50,7 @@ struct seaqt_string QQuickItemGrabResult_tr_s_c_n(const char* s, const char* c, 
 struct seaqt_string QQuickItemGrabResult_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QQuickItemGrabResult_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QQuickItemGrabResult_staticMetaObject();
 void QQuickItemGrabResult_delete(QQuickItemGrabResult* self);
 
 #ifdef __cplusplus

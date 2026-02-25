@@ -101,6 +101,7 @@ int QPdfPageNavigation_protectedbase_senderSignalIndex(const VirtualQPdfPageNavi
 int QPdfPageNavigation_protectedbase_receivers(const VirtualQPdfPageNavigation* self, const char* signal);
 bool QPdfPageNavigation_protectedbase_isSignalConnected(const VirtualQPdfPageNavigation* self, QMetaMethod* signal);
 
+const QMetaObject* QPdfPageNavigation_staticMetaObject();
 void QPdfPageNavigation_delete(QPdfPageNavigation* self);
 
 #ifdef __cplusplus

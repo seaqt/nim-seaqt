@@ -214,6 +214,7 @@ int QTransposeProxyModel_protectedbase_senderSignalIndex(const VirtualQTranspose
 int QTransposeProxyModel_protectedbase_receivers(const VirtualQTransposeProxyModel* self, const char* signal);
 bool QTransposeProxyModel_protectedbase_isSignalConnected(const VirtualQTransposeProxyModel* self, QMetaMethod* signal);
 
+const QMetaObject* QTransposeProxyModel_staticMetaObject();
 void QTransposeProxyModel_delete(QTransposeProxyModel* self);
 
 #ifdef __cplusplus

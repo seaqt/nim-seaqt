@@ -98,6 +98,7 @@ int QPluginLoader_protectedbase_senderSignalIndex(const VirtualQPluginLoader* se
 int QPluginLoader_protectedbase_receivers(const VirtualQPluginLoader* self, const char* signal);
 bool QPluginLoader_protectedbase_isSignalConnected(const VirtualQPluginLoader* self, QMetaMethod* signal);
 
+const QMetaObject* QPluginLoader_staticMetaObject();
 void QPluginLoader_delete(QPluginLoader* self);
 
 #ifdef __cplusplus

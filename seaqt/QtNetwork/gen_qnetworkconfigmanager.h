@@ -99,6 +99,7 @@ int QNetworkConfigurationManager_protectedbase_senderSignalIndex(const VirtualQN
 int QNetworkConfigurationManager_protectedbase_receivers(const VirtualQNetworkConfigurationManager* self, const char* signal);
 bool QNetworkConfigurationManager_protectedbase_isSignalConnected(const VirtualQNetworkConfigurationManager* self, QMetaMethod* signal);
 
+const QMetaObject* QNetworkConfigurationManager_staticMetaObject();
 void QNetworkConfigurationManager_delete(QNetworkConfigurationManager* self);
 
 #ifdef __cplusplus

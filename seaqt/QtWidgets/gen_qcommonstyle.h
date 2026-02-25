@@ -171,6 +171,7 @@ int QCommonStyle_protectedbase_senderSignalIndex(const VirtualQCommonStyle* self
 int QCommonStyle_protectedbase_receivers(const VirtualQCommonStyle* self, const char* signal);
 bool QCommonStyle_protectedbase_isSignalConnected(const VirtualQCommonStyle* self, QMetaMethod* signal);
 
+const QMetaObject* QCommonStyle_staticMetaObject();
 void QCommonStyle_delete(QCommonStyle* self);
 
 #ifdef __cplusplus

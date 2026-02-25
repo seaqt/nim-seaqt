@@ -134,6 +134,7 @@ int QSaveFile_protectedbase_senderSignalIndex(const VirtualQSaveFile* self);
 int QSaveFile_protectedbase_receivers(const VirtualQSaveFile* self, const char* signal);
 bool QSaveFile_protectedbase_isSignalConnected(const VirtualQSaveFile* self, QMetaMethod* signal);
 
+const QMetaObject* QSaveFile_staticMetaObject();
 void QSaveFile_delete(QSaveFile* self);
 
 #ifdef __cplusplus
