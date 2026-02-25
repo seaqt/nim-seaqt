@@ -92,6 +92,7 @@ int QAccessibleBridgePlugin_protectedbase_senderSignalIndex(const VirtualQAccess
 int QAccessibleBridgePlugin_protectedbase_receivers(const VirtualQAccessibleBridgePlugin* self, const char* signal);
 bool QAccessibleBridgePlugin_protectedbase_isSignalConnected(const VirtualQAccessibleBridgePlugin* self, QMetaMethod* signal);
 
+const QMetaObject* QAccessibleBridgePlugin_staticMetaObject();
 void QAccessibleBridgePlugin_delete(QAccessibleBridgePlugin* self);
 
 #ifdef __cplusplus

@@ -274,6 +274,7 @@ int QAbstractScrollArea_protectedbase_senderSignalIndex(const VirtualQAbstractSc
 int QAbstractScrollArea_protectedbase_receivers(const VirtualQAbstractScrollArea* self, const char* signal);
 bool QAbstractScrollArea_protectedbase_isSignalConnected(const VirtualQAbstractScrollArea* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractScrollArea_staticMetaObject();
 void QAbstractScrollArea_delete(QAbstractScrollArea* self);
 
 #ifdef __cplusplus

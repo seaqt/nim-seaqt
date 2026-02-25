@@ -47,6 +47,7 @@ QPointingDeviceUniqueId* QPointingDeviceUniqueId_fromNumericId(long long id);
 bool QPointingDeviceUniqueId_isValid(const QPointingDeviceUniqueId* self);
 long long QPointingDeviceUniqueId_numericId(const QPointingDeviceUniqueId* self);
 
+const QMetaObject* QPointingDeviceUniqueId_staticMetaObject();
 void QPointingDeviceUniqueId_delete(QPointingDeviceUniqueId* self);
 
 typedef struct VirtualQPointingDevice VirtualQPointingDevice;
@@ -110,6 +111,7 @@ int QPointingDevice_protectedbase_senderSignalIndex(const VirtualQPointingDevice
 int QPointingDevice_protectedbase_receivers(const VirtualQPointingDevice* self, const char* signal);
 bool QPointingDevice_protectedbase_isSignalConnected(const VirtualQPointingDevice* self, QMetaMethod* signal);
 
+const QMetaObject* QPointingDevice_staticMetaObject();
 void QPointingDevice_delete(QPointingDevice* self);
 
 #ifdef __cplusplus

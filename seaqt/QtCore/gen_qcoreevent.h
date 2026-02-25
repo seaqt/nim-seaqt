@@ -58,6 +58,7 @@ int QEvent_registerEventType_hint(int hint);
 void QEvent_virtualbase_setAccepted(VirtualQEvent* self, bool accepted);
 QEvent* QEvent_virtualbase_clone(const VirtualQEvent* self);
 
+const QMetaObject* QEvent_staticMetaObject();
 void QEvent_delete(QEvent* self);
 
 typedef struct VirtualQTimerEvent VirtualQTimerEvent;

@@ -51,6 +51,7 @@ void QWebEngineNotification_connect_closed(QWebEngineNotification* self, intptr_
 struct seaqt_string QWebEngineNotification_tr_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineNotification_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QWebEngineNotification_staticMetaObject();
 void QWebEngineNotification_delete(QWebEngineNotification* self);
 
 #ifdef __cplusplus

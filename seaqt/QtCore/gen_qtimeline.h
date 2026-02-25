@@ -115,6 +115,7 @@ void QTimeLine_connect_frameChanged(QTimeLine* self, intptr_t slot, void (*callb
 void QTimeLine_connect_stateChanged(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QTimeLine_connect_finished(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QTimeLine_staticMetaObject();
 void QTimeLine_delete(QTimeLine* self);
 
 #ifdef __cplusplus

@@ -131,6 +131,7 @@ int QAbstractItemDelegate_protectedbase_senderSignalIndex(const VirtualQAbstract
 int QAbstractItemDelegate_protectedbase_receivers(const VirtualQAbstractItemDelegate* self, const char* signal);
 bool QAbstractItemDelegate_protectedbase_isSignalConnected(const VirtualQAbstractItemDelegate* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractItemDelegate_staticMetaObject();
 void QAbstractItemDelegate_delete(QAbstractItemDelegate* self);
 
 #ifdef __cplusplus

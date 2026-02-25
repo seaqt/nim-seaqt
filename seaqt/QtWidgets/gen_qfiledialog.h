@@ -354,6 +354,7 @@ int QFileDialog_protectedbase_senderSignalIndex(const VirtualQFileDialog* self);
 int QFileDialog_protectedbase_receivers(const VirtualQFileDialog* self, const char* signal);
 bool QFileDialog_protectedbase_isSignalConnected(const VirtualQFileDialog* self, QMetaMethod* signal);
 
+const QMetaObject* QFileDialog_staticMetaObject();
 void QFileDialog_delete(QFileDialog* self);
 
 #ifdef __cplusplus

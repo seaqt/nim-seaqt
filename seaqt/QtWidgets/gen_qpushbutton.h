@@ -253,6 +253,7 @@ int QPushButton_protectedbase_senderSignalIndex(const VirtualQPushButton* self);
 int QPushButton_protectedbase_receivers(const VirtualQPushButton* self, const char* signal);
 bool QPushButton_protectedbase_isSignalConnected(const VirtualQPushButton* self, QMetaMethod* signal);
 
+const QMetaObject* QPushButton_staticMetaObject();
 void QPushButton_delete(QPushButton* self);
 
 #ifdef __cplusplus

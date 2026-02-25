@@ -470,6 +470,7 @@ int QAbstractItemView_protectedbase_senderSignalIndex(const VirtualQAbstractItem
 int QAbstractItemView_protectedbase_receivers(const VirtualQAbstractItemView* self, const char* signal);
 bool QAbstractItemView_protectedbase_isSignalConnected(const VirtualQAbstractItemView* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractItemView_staticMetaObject();
 void QAbstractItemView_delete(QAbstractItemView* self);
 
 #ifdef __cplusplus

@@ -267,6 +267,7 @@ int QProgressDialog_protectedbase_senderSignalIndex(const VirtualQProgressDialog
 int QProgressDialog_protectedbase_receivers(const VirtualQProgressDialog* self, const char* signal);
 bool QProgressDialog_protectedbase_isSignalConnected(const VirtualQProgressDialog* self, QMetaMethod* signal);
 
+const QMetaObject* QProgressDialog_staticMetaObject();
 void QProgressDialog_delete(QProgressDialog* self);
 
 #ifdef __cplusplus

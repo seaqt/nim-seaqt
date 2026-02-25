@@ -200,6 +200,7 @@ int QCamera_protectedbase_senderSignalIndex(const VirtualQCamera* self);
 int QCamera_protectedbase_receivers(const VirtualQCamera* self, const char* signal);
 bool QCamera_protectedbase_isSignalConnected(const VirtualQCamera* self, QMetaMethod* signal);
 
+const QMetaObject* QCamera_staticMetaObject();
 void QCamera_delete(QCamera* self);
 
 #ifdef __cplusplus

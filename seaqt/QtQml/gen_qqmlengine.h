@@ -60,6 +60,7 @@ int QQmlImageProviderBase_flags(const QQmlImageProviderBase* self);
 struct seaqt_string QQmlImageProviderBase_tr_s_c(const char* s, const char* c);
 struct seaqt_string QQmlImageProviderBase_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QQmlImageProviderBase_staticMetaObject();
 void QQmlImageProviderBase_delete(QQmlImageProviderBase* self);
 
 typedef struct VirtualQQmlEngine VirtualQQmlEngine;
@@ -150,6 +151,7 @@ int QQmlEngine_protectedbase_senderSignalIndex(const VirtualQQmlEngine* self);
 int QQmlEngine_protectedbase_receivers(const VirtualQQmlEngine* self, const char* signal);
 bool QQmlEngine_protectedbase_isSignalConnected(const VirtualQQmlEngine* self, QMetaMethod* signal);
 
+const QMetaObject* QQmlEngine_staticMetaObject();
 void QQmlEngine_delete(QQmlEngine* self);
 
 #ifdef __cplusplus

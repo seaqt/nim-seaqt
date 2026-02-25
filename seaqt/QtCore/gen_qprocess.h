@@ -216,6 +216,7 @@ void QProcess_connect_stateChanged(QProcess* self, intptr_t slot, void (*callbac
 void QProcess_connect_readyReadStandardOutput(QProcess* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QProcess_connect_readyReadStandardError(QProcess* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QProcess_staticMetaObject();
 void QProcess_delete(QProcess* self);
 
 #ifdef __cplusplus

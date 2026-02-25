@@ -90,6 +90,7 @@ bool QSocketNotifier_protectedbase_isSignalConnected(const VirtualQSocketNotifie
 
 void QSocketNotifier_connect_activated(QSocketNotifier* self, intptr_t slot, void (*callback)(intptr_t, QSocketDescriptor*, int), void (*release)(intptr_t));
 
+const QMetaObject* QSocketNotifier_staticMetaObject();
 void QSocketNotifier_delete(QSocketNotifier* self);
 
 QSocketDescriptor* QSocketDescriptor_new();

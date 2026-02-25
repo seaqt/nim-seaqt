@@ -197,6 +197,7 @@ int QPdfBookmarkModel_protectedbase_senderSignalIndex(const VirtualQPdfBookmarkM
 int QPdfBookmarkModel_protectedbase_receivers(const VirtualQPdfBookmarkModel* self, const char* signal);
 bool QPdfBookmarkModel_protectedbase_isSignalConnected(const VirtualQPdfBookmarkModel* self, QMetaMethod* signal);
 
+const QMetaObject* QPdfBookmarkModel_staticMetaObject();
 void QPdfBookmarkModel_delete(QPdfBookmarkModel* self);
 
 #ifdef __cplusplus

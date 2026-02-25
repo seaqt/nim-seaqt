@@ -92,6 +92,7 @@ void QStyleHints_connect_mouseQuickSelectionThresholdChanged(QStyleHints* self, 
 struct seaqt_string QStyleHints_tr_s_c(const char* s, const char* c);
 struct seaqt_string QStyleHints_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QStyleHints_staticMetaObject();
 void QStyleHints_delete(QStyleHints* self);
 
 #ifdef __cplusplus

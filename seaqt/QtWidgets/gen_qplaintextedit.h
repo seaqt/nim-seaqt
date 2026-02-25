@@ -419,6 +419,7 @@ int QPlainTextEdit_protectedbase_senderSignalIndex(const VirtualQPlainTextEdit* 
 int QPlainTextEdit_protectedbase_receivers(const VirtualQPlainTextEdit* self, const char* signal);
 bool QPlainTextEdit_protectedbase_isSignalConnected(const VirtualQPlainTextEdit* self, QMetaMethod* signal);
 
+const QMetaObject* QPlainTextEdit_staticMetaObject();
 void QPlainTextEdit_delete(QPlainTextEdit* self);
 
 typedef struct VirtualQPlainTextDocumentLayout VirtualQPlainTextDocumentLayout;
@@ -498,6 +499,7 @@ int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQPlain
 int QPlainTextDocumentLayout_protectedbase_receivers(const VirtualQPlainTextDocumentLayout* self, const char* signal);
 bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQPlainTextDocumentLayout* self, QMetaMethod* signal);
 
+const QMetaObject* QPlainTextDocumentLayout_staticMetaObject();
 void QPlainTextDocumentLayout_delete(QPlainTextDocumentLayout* self);
 
 #ifdef __cplusplus

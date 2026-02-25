@@ -51,6 +51,7 @@ bool QMediaFormat_operatorEqual(const QMediaFormat* self, QMediaFormat* other);
 bool QMediaFormat_operatorNotEqual(const QMediaFormat* self, QMediaFormat* other);
 void QMediaFormat_resolveForEncoding(QMediaFormat* self, int flags);
 
+const QMetaObject* QMediaFormat_staticMetaObject();
 void QMediaFormat_delete(QMediaFormat* self);
 
 #ifdef __cplusplus

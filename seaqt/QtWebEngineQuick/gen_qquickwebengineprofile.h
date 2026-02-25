@@ -147,6 +147,7 @@ int QQuickWebEngineProfile_protectedbase_senderSignalIndex(const VirtualQQuickWe
 int QQuickWebEngineProfile_protectedbase_receivers(const VirtualQQuickWebEngineProfile* self, const char* signal);
 bool QQuickWebEngineProfile_protectedbase_isSignalConnected(const VirtualQQuickWebEngineProfile* self, QMetaMethod* signal);
 
+const QMetaObject* QQuickWebEngineProfile_staticMetaObject();
 void QQuickWebEngineProfile_delete(QQuickWebEngineProfile* self);
 
 #ifdef __cplusplus

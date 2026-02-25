@@ -159,6 +159,7 @@ int QFile_protectedbase_senderSignalIndex(const VirtualQFile* self);
 int QFile_protectedbase_receivers(const VirtualQFile* self, const char* signal);
 bool QFile_protectedbase_isSignalConnected(const VirtualQFile* self, QMetaMethod* signal);
 
+const QMetaObject* QFile_staticMetaObject();
 void QFile_delete(QFile* self);
 
 #ifdef __cplusplus

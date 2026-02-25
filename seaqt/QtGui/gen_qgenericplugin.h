@@ -80,6 +80,7 @@ int QGenericPlugin_protectedbase_senderSignalIndex(const VirtualQGenericPlugin* 
 int QGenericPlugin_protectedbase_receivers(const VirtualQGenericPlugin* self, const char* signal);
 bool QGenericPlugin_protectedbase_isSignalConnected(const VirtualQGenericPlugin* self, QMetaMethod* signal);
 
+const QMetaObject* QGenericPlugin_staticMetaObject();
 void QGenericPlugin_delete(QGenericPlugin* self);
 
 #ifdef __cplusplus
