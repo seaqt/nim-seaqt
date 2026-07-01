@@ -1,0 +1,5 @@
+version = "0.6.4.0"
+license = "MIT"
+author = "seaqt"
+description = "Generator-based bindings for Qt/QML"
+requires "nim >= 2.0.0"
