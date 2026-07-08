@@ -2,7 +2,7 @@ import ./qtcore_pkg
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_seaqt_string {.used.} = object
@@ -61,6 +61,54 @@ const privateDir = block:
       flag = " " & path & "/" & QtCoreBuildVersion & " " & path & "/" & QtCoreBuildVersion & "/QtCore"
       break
   flag
+
+{.compile("../libseaqt-runtime.cpp", QtCoreCFlags & privateDir).}
+
+type QObjectconnectRawSlot* = proc(args: pointer)
+
+proc QObject_slot_callback_connectRaw(slot: int, args: pointer) {.cdecl.} =
+  let slot = cast[ptr QObjectconnectRawSlot](slot)
+  slot[](args)
+
+proc QObject_slot_callback_connectRaw_release(slot: int) {.cdecl.} =
+  let slot = cast[ref QObjectconnectRawSlot](slot)
+  GC_unref(slot)
+
+proc fcQObject_connectRawSlot(
+  sender: pointer,
+  signal: cstring,
+  receiver: pointer,
+  slot: int,
+  callback: pointer,
+  release: pointer,
+  typeVal: cint,
+  senderMetaObject: pointer,
+): pointer {.importc: "QObject_connectRawSlot".}
+
+proc connectRaw*(
+    _: type gen_qobject_types.QObject,
+    sender: gen_qobject_types.QObject,
+    signal: cstring,
+    receiver: gen_qobject_types.QObject,
+    slot: QObjectconnectRawSlot,
+    typeVal: cint,
+    senderMetaObject: gen_qobjectdefs_types.QMetaObject,
+): gen_qobjectdefs_types.QMetaObjectConnection =
+  var tmp = new QObjectconnectRawSLot
+  tmp[] = slot
+  GC_ref(tmp)
+  gen_qobjectdefs_types.QMetaObjectConnection(
+    h: fcQObject_connectRawSlot(
+      sender.h,
+      signal,
+      receiver.h,
+      cast[int](addr tmp[]),
+      QObject_slot_callback_connectRaw,
+      QObject_slot_callback_connectRaw_release,
+      typeVal,
+      senderMetaObject.h,
+    ),
+  )
 
 type cQObject*{.exportc: "QObject", incompleteStruct.} = object
 type cQObjectUserData*{.exportc: "QObjectUserData", incompleteStruct.} = object
