@@ -1,0 +1,170 @@
+#include <QAnyStringView>
+#include <QString>
+#include <QByteArray>
+#include <QAnyStringView>
+#include <QByteArray>
+#include <QByteArrayView>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QUuid>
+#include <quuid.h>
+#include "gen_quuid.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QUuid* QUuid_new() {
+	return new (std::nothrow) QUuid();
+}
+
+QUuid* QUuid_new_l_w1_w2_b1_b2_b3_b4_b5_b6_b7_b8(unsigned int l, unsigned short w1, unsigned short w2, unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, unsigned char b5, unsigned char b6, unsigned char b7, unsigned char b8) {
+	return new (std::nothrow) QUuid(static_cast<uint>(l), static_cast<ushort>(w1), static_cast<ushort>(w2), static_cast<uchar>(b1), static_cast<uchar>(b2), static_cast<uchar>(b3), static_cast<uchar>(b4), static_cast<uchar>(b5), static_cast<uchar>(b6), static_cast<uchar>(b7), static_cast<uchar>(b8));
+}
+
+QUuid* QUuid_new_string(struct seaqt_string string) {
+	QAnyStringView string_QString = QAnyStringView(string.data, string.len);
+	return new (std::nothrow) QUuid(string_QString);
+}
+
+QUuid* QUuid_new_from(QUuid* from) {
+	return new (std::nothrow) QUuid(*from);
+}
+
+QUuid* QUuid_fromString(struct seaqt_string string) {
+	QAnyStringView string_QString = QAnyStringView(string.data, string.len);
+	return new QUuid(QUuid::fromString(string_QString));
+}
+
+struct seaqt_string QUuid_toString(const QUuid* self) {
+	QString _ret = self->toString();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QUuid_toByteArray(const QUuid* self) {
+	QByteArray _qb = self->toByteArray();
+	struct seaqt_string _ms;
+	_ms.len = _qb.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _qb.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QUuid_toRfc4122(const QUuid* self) {
+	QByteArray _qb = self->toRfc4122();
+	struct seaqt_string _ms;
+	_ms.len = _qb.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _qb.data(), _ms.len);
+	return _ms;
+}
+
+QUuid* QUuid_fromBytes_bytes(const void* bytes) {
+	return new QUuid(QUuid::fromBytes(bytes));
+}
+
+QUuid* QUuid_fromRfc4122(struct seaqt_string param1) {
+	QByteArrayView param1_QByteArray(param1.data, param1.len);
+	return new QUuid(QUuid::fromRfc4122(param1_QByteArray));
+}
+
+bool QUuid_isNull(const QUuid* self) {
+	return self->isNull();
+}
+
+QUuid* QUuid_createUuid() {
+	return new QUuid(QUuid::createUuid());
+}
+
+QUuid* QUuid_createUuidV5(QUuid* ns, struct seaqt_string baseData) {
+	QByteArrayView baseData_QByteArray(baseData.data, baseData.len);
+	return new QUuid(QUuid::createUuidV5(*ns, baseData_QByteArray));
+}
+
+QUuid* QUuid_createUuidV3(QUuid* ns, struct seaqt_string baseData) {
+	QByteArrayView baseData_QByteArray(baseData.data, baseData.len);
+	return new QUuid(QUuid::createUuidV3(*ns, baseData_QByteArray));
+}
+
+QUuid* QUuid_createUuidV7() {
+	return new QUuid(QUuid::createUuidV7());
+}
+
+int QUuid_variant(const QUuid* self) {
+	QUuid::Variant _ret = self->variant();
+	return static_cast<int>(_ret);
+}
+
+int QUuid_version(const QUuid* self) {
+	QUuid::Version _ret = self->version();
+	return static_cast<int>(_ret);
+}
+
+unsigned int QUuid_data1(const QUuid* self) {
+	uint data1_ret = self->data1;
+	return static_cast<unsigned int>(data1_ret);
+}
+
+void QUuid_setData1(QUuid* self, unsigned int data1) {
+	self->data1 = static_cast<uint>(data1);
+}
+
+unsigned short QUuid_data2(const QUuid* self) {
+	ushort data2_ret = self->data2;
+	return static_cast<unsigned short>(data2_ret);
+}
+
+void QUuid_setData2(QUuid* self, unsigned short data2) {
+	self->data2 = static_cast<ushort>(data2);
+}
+
+unsigned short QUuid_data3(const QUuid* self) {
+	ushort data3_ret = self->data3;
+	return static_cast<unsigned short>(data3_ret);
+}
+
+void QUuid_setData3(QUuid* self, unsigned short data3) {
+	self->data3 = static_cast<ushort>(data3);
+}
+
+struct seaqt_string QUuid_toString_mode(const QUuid* self, int mode) {
+	QString _ret = self->toString(static_cast<QUuid::StringFormat>(mode));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QUuid_toByteArray_mode(const QUuid* self, int mode) {
+	QByteArray _qb = self->toByteArray(static_cast<QUuid::StringFormat>(mode));
+	struct seaqt_string _ms;
+	_ms.len = _qb.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _qb.data(), _ms.len);
+	return _ms;
+}
+
+QUuid* QUuid_fromBytes_bytes_order(const void* bytes, int order) {
+	return new QUuid(QUuid::fromBytes(bytes, static_cast<QSysInfo::Endian>(order)));
+}
+
+void QUuid_delete(QUuid* self) {
+	delete self;
+}
+

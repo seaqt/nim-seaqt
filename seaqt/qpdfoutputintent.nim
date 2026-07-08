@@ -1,0 +1,2 @@
+import ./QtGui/gen_qpdfoutputintent
+export gen_qpdfoutputintent

@@ -1,0 +1,2 @@
+import ./QtWebSockets/gen_qmaskgenerator
+export gen_qmaskgenerator

@@ -1,0 +1,2 @@
+import ./QtPdfWidgets/gen_qpdfpageselector
+export gen_qpdfpageselector

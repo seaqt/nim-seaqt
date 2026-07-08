@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_qextensionmanager
+export gen_qextensionmanager

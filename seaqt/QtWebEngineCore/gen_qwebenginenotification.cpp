@@ -1,0 +1,159 @@
+#include <QImage>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QUrl>
+#include <QWebEngineNotification>
+#include <qwebenginenotification.h>
+#include "gen_qwebenginenotification.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QWebEngineNotification_virtbase(QWebEngineNotification* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QWebEngineNotification_metaObject(const QWebEngineNotification* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QWebEngineNotification_metacast(QWebEngineNotification* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QWebEngineNotification_metacall(QWebEngineNotification* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QWebEngineNotification_tr_s(const char* s) {
+	QString _ret = QWebEngineNotification::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QWebEngineNotification_matches(const QWebEngineNotification* self, QWebEngineNotification* other) {
+	return self->matches(other);
+}
+
+QUrl* QWebEngineNotification_origin(const QWebEngineNotification* self) {
+	return new QUrl(self->origin());
+}
+
+QImage* QWebEngineNotification_icon(const QWebEngineNotification* self) {
+	return new QImage(self->icon());
+}
+
+struct seaqt_string QWebEngineNotification_title(const QWebEngineNotification* self) {
+	QString _ret = self->title();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebEngineNotification_message(const QWebEngineNotification* self) {
+	QString _ret = self->message();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebEngineNotification_tag(const QWebEngineNotification* self) {
+	QString _ret = self->tag();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebEngineNotification_language(const QWebEngineNotification* self) {
+	QString _ret = self->language();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QWebEngineNotification_direction(const QWebEngineNotification* self) {
+	Qt::LayoutDirection _ret = self->direction();
+	return static_cast<int>(_ret);
+}
+
+void QWebEngineNotification_show(const QWebEngineNotification* self) {
+	self->show();
+}
+
+void QWebEngineNotification_click(const QWebEngineNotification* self) {
+	self->click();
+}
+
+void QWebEngineNotification_close(const QWebEngineNotification* self) {
+	self->close();
+}
+
+void QWebEngineNotification_closed(QWebEngineNotification* self) {
+	self->closed();
+}
+
+void QWebEngineNotification_connect_closed(QWebEngineNotification* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QWebEngineNotification::connect(self, static_cast<void (QWebEngineNotification::*)()>(&QWebEngineNotification::closed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+struct seaqt_string QWebEngineNotification_tr_s_c(const char* s, const char* c) {
+	QString _ret = QWebEngineNotification::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebEngineNotification_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QWebEngineNotification::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QWebEngineNotification_staticMetaObject() { return &QWebEngineNotification::staticMetaObject; }
+void QWebEngineNotification_delete(QWebEngineNotification* self) {
+	delete self;
+}
+

@@ -1,0 +1,168 @@
+#include <QHash>
+#include <QList>
+#include <QQmlDebuggingEnabler>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QVariant>
+#include <qqmldebug.h>
+#include "gen_qqmldebug.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QQmlDebuggingEnabler* QQmlDebuggingEnabler_new() {
+	return new (std::nothrow) QQmlDebuggingEnabler();
+}
+
+QQmlDebuggingEnabler* QQmlDebuggingEnabler_new_printWarning(bool printWarning) {
+	return new (std::nothrow) QQmlDebuggingEnabler(printWarning);
+}
+
+void QQmlDebuggingEnabler_enableDebugging(bool printWarning) {
+	QQmlDebuggingEnabler::enableDebugging(printWarning);
+}
+
+struct seaqt_array /* of struct seaqt_string */  QQmlDebuggingEnabler_debuggerServices() {
+	QStringList _ret = QQmlDebuggingEnabler::debuggerServices();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of struct seaqt_string */  QQmlDebuggingEnabler_inspectorServices() {
+	QStringList _ret = QQmlDebuggingEnabler::inspectorServices();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of struct seaqt_string */  QQmlDebuggingEnabler_profilerServices() {
+	QStringList _ret = QQmlDebuggingEnabler::profilerServices();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of struct seaqt_string */  QQmlDebuggingEnabler_nativeDebuggerServices() {
+	QStringList _ret = QQmlDebuggingEnabler::nativeDebuggerServices();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QQmlDebuggingEnabler_setServices(struct seaqt_array /* of struct seaqt_string */  services) {
+	QStringList services_QList;
+	services_QList.reserve(services.len);
+	struct seaqt_string* services_arr = static_cast<struct seaqt_string*>(services.data);
+	for(size_t i = 0; i < services.len; ++i) {
+		QString services_arr_i_QString = QString::fromUtf8(services_arr[i].data, services_arr[i].len);
+		services_QList.push_back(services_arr_i_QString);
+	}
+	QQmlDebuggingEnabler::setServices(services_QList);
+}
+
+bool QQmlDebuggingEnabler_startTcpDebugServer_port(int port) {
+	return QQmlDebuggingEnabler::startTcpDebugServer(static_cast<int>(port));
+}
+
+bool QQmlDebuggingEnabler_connectToLocalDebugger_socketFileName(struct seaqt_string socketFileName) {
+	QString socketFileName_QString = QString::fromUtf8(socketFileName.data, socketFileName.len);
+	return QQmlDebuggingEnabler::connectToLocalDebugger(socketFileName_QString);
+}
+
+bool QQmlDebuggingEnabler_startDebugConnector_pluginName(struct seaqt_string pluginName) {
+	QString pluginName_QString = QString::fromUtf8(pluginName.data, pluginName.len);
+	return QQmlDebuggingEnabler::startDebugConnector(pluginName_QString);
+}
+
+bool QQmlDebuggingEnabler_startTcpDebugServer_port_mode(int port, int mode) {
+	return QQmlDebuggingEnabler::startTcpDebugServer(static_cast<int>(port), static_cast<QQmlDebuggingEnabler::StartMode>(mode));
+}
+
+bool QQmlDebuggingEnabler_startTcpDebugServer_port_mode_hostName(int port, int mode, struct seaqt_string hostName) {
+	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
+	return QQmlDebuggingEnabler::startTcpDebugServer(static_cast<int>(port), static_cast<QQmlDebuggingEnabler::StartMode>(mode), hostName_QString);
+}
+
+bool QQmlDebuggingEnabler_connectToLocalDebugger_socketFileName_mode(struct seaqt_string socketFileName, int mode) {
+	QString socketFileName_QString = QString::fromUtf8(socketFileName.data, socketFileName.len);
+	return QQmlDebuggingEnabler::connectToLocalDebugger(socketFileName_QString, static_cast<QQmlDebuggingEnabler::StartMode>(mode));
+}
+
+bool QQmlDebuggingEnabler_startDebugConnector_pluginName_configuration(struct seaqt_string pluginName, struct seaqt_map /* of struct seaqt_string to QVariant* */  configuration) {
+	QString pluginName_QString = QString::fromUtf8(pluginName.data, pluginName.len);
+	QVariantHash configuration_QMap;
+	configuration_QMap.reserve(configuration.len);
+	struct seaqt_string* configuration_karr = static_cast<struct seaqt_string*>(configuration.keys);
+	QVariant** configuration_varr = static_cast<QVariant**>(configuration.values);
+	for(size_t i = 0; i < configuration.len; ++i) {
+		QString configuration_karr_i_QString = QString::fromUtf8(configuration_karr[i].data, configuration_karr[i].len);
+		configuration_QMap[configuration_karr_i_QString] = *(configuration_varr[i]);
+	}
+	return QQmlDebuggingEnabler::startDebugConnector(pluginName_QString, configuration_QMap);
+}
+
+void QQmlDebuggingEnabler_delete(QQmlDebuggingEnabler* self) {
+	delete self;
+}
+

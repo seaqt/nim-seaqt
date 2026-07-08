@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginewebauthuxrequest
+export gen_qwebenginewebauthuxrequest

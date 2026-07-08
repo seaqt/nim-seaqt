@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineextensioninfo
+export gen_qwebengineextensioninfo

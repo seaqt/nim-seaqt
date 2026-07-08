@@ -1,0 +1,122 @@
+#include <QSqlError>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qsqlerror.h>
+#include "gen_qsqlerror.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QSqlError* QSqlError_new() {
+	return new (std::nothrow) QSqlError();
+}
+
+QSqlError* QSqlError_new_from(QSqlError* from) {
+	return new (std::nothrow) QSqlError(*from);
+}
+
+QSqlError* QSqlError_new_driverText(struct seaqt_string driverText) {
+	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
+	return new (std::nothrow) QSqlError(driverText_QString);
+}
+
+QSqlError* QSqlError_new_driverText_databaseText(struct seaqt_string driverText, struct seaqt_string databaseText) {
+	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
+	QString databaseText_QString = QString::fromUtf8(databaseText.data, databaseText.len);
+	return new (std::nothrow) QSqlError(driverText_QString, databaseText_QString);
+}
+
+QSqlError* QSqlError_new_driverText_databaseText_type(struct seaqt_string driverText, struct seaqt_string databaseText, int type) {
+	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
+	QString databaseText_QString = QString::fromUtf8(databaseText.data, databaseText.len);
+	return new (std::nothrow) QSqlError(driverText_QString, databaseText_QString, static_cast<QSqlError::ErrorType>(type));
+}
+
+QSqlError* QSqlError_new_driverText_databaseText_type_nativeErrorCode(struct seaqt_string driverText, struct seaqt_string databaseText, int type, struct seaqt_string nativeErrorCode) {
+	QString driverText_QString = QString::fromUtf8(driverText.data, driverText.len);
+	QString databaseText_QString = QString::fromUtf8(databaseText.data, databaseText.len);
+	QString nativeErrorCode_QString = QString::fromUtf8(nativeErrorCode.data, nativeErrorCode.len);
+	return new (std::nothrow) QSqlError(driverText_QString, databaseText_QString, static_cast<QSqlError::ErrorType>(type), nativeErrorCode_QString);
+}
+
+void QSqlError_operatorAssign(QSqlError* self, QSqlError* from) {
+	self->operator=(*from);
+}
+
+bool QSqlError_operatorEqual(const QSqlError* self, QSqlError* other) {
+	return (*self == *other);
+}
+
+bool QSqlError_operatorNotEqual(const QSqlError* self, QSqlError* other) {
+	return (*self != *other);
+}
+
+void QSqlError_swap(QSqlError* self, QSqlError* other) {
+	self->swap(*other);
+}
+
+struct seaqt_string QSqlError_driverText(const QSqlError* self) {
+	QString _ret = self->driverText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QSqlError_databaseText(const QSqlError* self) {
+	QString _ret = self->databaseText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QSqlError_type(const QSqlError* self) {
+	QSqlError::ErrorType _ret = self->type();
+	return static_cast<int>(_ret);
+}
+
+struct seaqt_string QSqlError_nativeErrorCode(const QSqlError* self) {
+	QString _ret = self->nativeErrorCode();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QSqlError_text(const QSqlError* self) {
+	QString _ret = self->text();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QSqlError_isValid(const QSqlError* self) {
+	return self->isValid();
+}
+
+void QSqlError_delete(QSqlError* self) {
+	delete self;
+}
+

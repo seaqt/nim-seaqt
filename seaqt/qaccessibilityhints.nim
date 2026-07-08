@@ -1,0 +1,2 @@
+import ./QtGui/gen_qaccessibilityhints
+export gen_qaccessibilityhints

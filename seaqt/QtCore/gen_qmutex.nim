@@ -1,0 +1,112 @@
+import ./qtcore_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free, c_malloc
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+import ./gen_qmutex_types
+export gen_qmutex_types
+
+import
+  ./gen_qdeadlinetimer_types
+export
+  gen_qdeadlinetimer_types
+
+type cQBasicMutex*{.exportc: "QBasicMutex", incompleteStruct.} = object
+type cQMutex*{.exportc: "QMutex", incompleteStruct.} = object
+type cQRecursiveMutex*{.exportc: "QRecursiveMutex", incompleteStruct.} = object
+
+proc fcQBasicMutex_lock(self: pointer): void {.importc: "QBasicMutex_lock".}
+proc fcQBasicMutex_unlock(self: pointer): void {.importc: "QBasicMutex_unlock".}
+proc fcQBasicMutex_tryLock(self: pointer): bool {.importc: "QBasicMutex_tryLock".}
+proc fcQBasicMutex_tryLock(self: pointer): bool {.importc: "QBasicMutex_try_lock".}
+proc fcQBasicMutex_new(): ptr cQBasicMutex {.importc: "QBasicMutex_new".}
+proc fcQMutex_tryLock(self: pointer): bool {.importc: "QMutex_try_lock".}
+proc fcQMutex_tryLockInt(self: pointer, timeout: cint): bool {.importc: "QMutex_tryLock_int".}
+proc fcQMutex_tryLock_QDeadlineTimer(self: pointer, timeout: pointer): bool {.importc: "QMutex_tryLock_QDeadlineTimer".}
+proc fcQMutex_new(): ptr cQMutex {.importc: "QMutex_new".}
+proc fcQRecursiveMutex_lock(self: pointer): void {.importc: "QRecursiveMutex_lock".}
+proc fcQRecursiveMutex_tryLockTimeout(self: pointer, timeout: cint): bool {.importc: "QRecursiveMutex_tryLock_timeout".}
+proc fcQRecursiveMutex_tryLock(self: pointer): bool {.importc: "QRecursiveMutex_tryLock".}
+proc fcQRecursiveMutex_unlock(self: pointer): void {.importc: "QRecursiveMutex_unlock".}
+proc fcQRecursiveMutex_tryLock(self: pointer): bool {.importc: "QRecursiveMutex_try_lock".}
+proc fcQRecursiveMutex_tryLockTimer(self: pointer, timer: pointer): bool {.importc: "QRecursiveMutex_tryLock_timer".}
+proc fcQRecursiveMutex_new(): ptr cQRecursiveMutex {.importc: "QRecursiveMutex_new".}
+
+proc lock*(self: gen_qmutex_types.QBasicMutex): void =
+  fcQBasicMutex_lock(self.h)
+
+proc unlock*(self: gen_qmutex_types.QBasicMutex): void =
+  fcQBasicMutex_unlock(self.h)
+
+proc tryLock*(self: gen_qmutex_types.QBasicMutex): bool =
+  fcQBasicMutex_tryLock(self.h)
+
+proc tryLock2*(self: gen_qmutex_types.QBasicMutex): bool =
+  fcQBasicMutex_tryLock(self.h)
+
+proc create*(T: type gen_qmutex_types.QBasicMutex): gen_qmutex_types.QBasicMutex =
+  let tmp = gen_qmutex_types.QBasicMutex(h: fcQBasicMutex_new(), owned: true)
+  tmp
+proc tryLock*(self: gen_qmutex_types.QMutex): bool =
+  fcQMutex_tryLock(self.h)
+
+proc tryLock*(self: gen_qmutex_types.QMutex, timeout: cint): bool =
+  fcQMutex_tryLockInt(self.h, timeout)
+
+proc tryLock*(self: gen_qmutex_types.QMutex, timeout: gen_qdeadlinetimer_types.QDeadlineTimer): bool =
+  fcQMutex_tryLock_QDeadlineTimer(self.h, timeout.h)
+
+proc create*(T: type gen_qmutex_types.QMutex): gen_qmutex_types.QMutex =
+  let tmp = gen_qmutex_types.QMutex(h: fcQMutex_new(), owned: true)
+  tmp
+proc lock*(self: gen_qmutex_types.QRecursiveMutex): void =
+  fcQRecursiveMutex_lock(self.h)
+
+proc tryLock*(self: gen_qmutex_types.QRecursiveMutex, timeout: cint): bool =
+  fcQRecursiveMutex_tryLockTimeout(self.h, timeout)
+
+proc tryLock*(self: gen_qmutex_types.QRecursiveMutex): bool =
+  fcQRecursiveMutex_tryLock(self.h)
+
+proc unlock*(self: gen_qmutex_types.QRecursiveMutex): void =
+  fcQRecursiveMutex_unlock(self.h)
+
+proc tryLock2*(self: gen_qmutex_types.QRecursiveMutex): bool =
+  fcQRecursiveMutex_tryLock(self.h)
+
+proc tryLock*(self: gen_qmutex_types.QRecursiveMutex, timer: gen_qdeadlinetimer_types.QDeadlineTimer): bool =
+  fcQRecursiveMutex_tryLockTimer(self.h, timer.h)
+
+proc create*(T: type gen_qmutex_types.QRecursiveMutex): gen_qmutex_types.QRecursiveMutex =
+  let tmp = gen_qmutex_types.QRecursiveMutex(h: fcQRecursiveMutex_new(), owned: true)
+  tmp

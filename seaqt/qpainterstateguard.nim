@@ -1,0 +1,2 @@
+import ./QtGui/gen_qpainterstateguard
+export gen_qpainterstateguard

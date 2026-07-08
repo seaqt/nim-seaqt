@@ -1,0 +1,206 @@
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QSessionManager>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qsessionmanager.h>
+#include "gen_qsessionmanager.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QSessionManager_virtbase(QSessionManager* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QSessionManager_metaObject(const QSessionManager* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QSessionManager_metacast(QSessionManager* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QSessionManager_metacall(QSessionManager* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QSessionManager_tr_s(const char* s) {
+	QString _ret = QSessionManager::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QSessionManager_sessionId(const QSessionManager* self) {
+	QString _ret = self->sessionId();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QSessionManager_sessionKey(const QSessionManager* self) {
+	QString _ret = self->sessionKey();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QSessionManager_allowsInteraction(QSessionManager* self) {
+	return self->allowsInteraction();
+}
+
+bool QSessionManager_allowsErrorInteraction(QSessionManager* self) {
+	return self->allowsErrorInteraction();
+}
+
+void QSessionManager_release(QSessionManager* self) {
+	self->release();
+}
+
+void QSessionManager_cancel(QSessionManager* self) {
+	self->cancel();
+}
+
+void QSessionManager_setRestartHint(QSessionManager* self, int restartHint) {
+	self->setRestartHint(static_cast<QSessionManager::RestartHint>(restartHint));
+}
+
+int QSessionManager_restartHint(const QSessionManager* self) {
+	QSessionManager::RestartHint _ret = self->restartHint();
+	return static_cast<int>(_ret);
+}
+
+void QSessionManager_setRestartCommand(QSessionManager* self, struct seaqt_array /* of struct seaqt_string */  restartCommand) {
+	QStringList restartCommand_QList;
+	restartCommand_QList.reserve(restartCommand.len);
+	struct seaqt_string* restartCommand_arr = static_cast<struct seaqt_string*>(restartCommand.data);
+	for(size_t i = 0; i < restartCommand.len; ++i) {
+		QString restartCommand_arr_i_QString = QString::fromUtf8(restartCommand_arr[i].data, restartCommand_arr[i].len);
+		restartCommand_QList.push_back(restartCommand_arr_i_QString);
+	}
+	self->setRestartCommand(restartCommand_QList);
+}
+
+struct seaqt_array /* of struct seaqt_string */  QSessionManager_restartCommand(const QSessionManager* self) {
+	QStringList _ret = self->restartCommand();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QSessionManager_setDiscardCommand(QSessionManager* self, struct seaqt_array /* of struct seaqt_string */  discardCommand) {
+	QStringList discardCommand_QList;
+	discardCommand_QList.reserve(discardCommand.len);
+	struct seaqt_string* discardCommand_arr = static_cast<struct seaqt_string*>(discardCommand.data);
+	for(size_t i = 0; i < discardCommand.len; ++i) {
+		QString discardCommand_arr_i_QString = QString::fromUtf8(discardCommand_arr[i].data, discardCommand_arr[i].len);
+		discardCommand_QList.push_back(discardCommand_arr_i_QString);
+	}
+	self->setDiscardCommand(discardCommand_QList);
+}
+
+struct seaqt_array /* of struct seaqt_string */  QSessionManager_discardCommand(const QSessionManager* self) {
+	QStringList _ret = self->discardCommand();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QSessionManager_setManagerProperty_QString_QString(QSessionManager* self, struct seaqt_string name, struct seaqt_string value) {
+	QString name_QString = QString::fromUtf8(name.data, name.len);
+	QString value_QString = QString::fromUtf8(value.data, value.len);
+	self->setManagerProperty(name_QString, value_QString);
+}
+
+void QSessionManager_setManagerProperty_QString_QStringList(QSessionManager* self, struct seaqt_string name, struct seaqt_array /* of struct seaqt_string */  value) {
+	QString name_QString = QString::fromUtf8(name.data, name.len);
+	QStringList value_QList;
+	value_QList.reserve(value.len);
+	struct seaqt_string* value_arr = static_cast<struct seaqt_string*>(value.data);
+	for(size_t i = 0; i < value.len; ++i) {
+		QString value_arr_i_QString = QString::fromUtf8(value_arr[i].data, value_arr[i].len);
+		value_QList.push_back(value_arr_i_QString);
+	}
+	self->setManagerProperty(name_QString, value_QList);
+}
+
+bool QSessionManager_isPhase2(const QSessionManager* self) {
+	return self->isPhase2();
+}
+
+void QSessionManager_requestPhase2(QSessionManager* self) {
+	self->requestPhase2();
+}
+
+struct seaqt_string QSessionManager_tr_s_c(const char* s, const char* c) {
+	QString _ret = QSessionManager::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QSessionManager_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QSessionManager::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QSessionManager_staticMetaObject() { return &QSessionManager::staticMetaObject; }

@@ -1,0 +1,2 @@
+import ./QtCore/gen_qlatin1stringmatcher
+export gen_qlatin1stringmatcher

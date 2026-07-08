@@ -1,0 +1,2 @@
+import ./QtGui/gen_qfontvariableaxis
+export gen_qfontvariableaxis

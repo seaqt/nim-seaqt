@@ -1,0 +1,2 @@
+import ./QtGui/gen_qtextdocumentwriter
+export gen_qtextdocumentwriter

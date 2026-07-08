@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qabstractbutton
+export gen_qabstractbutton

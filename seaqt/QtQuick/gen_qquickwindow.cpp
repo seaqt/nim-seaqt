@@ -1,0 +1,1170 @@
+#include <QAccessibleInterface>
+#include <QByteArray>
+#include <QChildEvent>
+#include <QCloseEvent>
+#include <QColor>
+#include <QEvent>
+#include <QExposeEvent>
+#include <QFocusEvent>
+#include <QHideEvent>
+#include <QImage>
+#include <QKeyEvent>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QMouseEvent>
+#include <QMoveEvent>
+#include <QObject>
+#include <QPaintEvent>
+#include <QQmlIncubationController>
+#include <QQuickGraphicsConfiguration>
+#include <QQuickGraphicsDevice>
+#include <QQuickItem>
+#include <QQuickRenderControl>
+#include <QQuickRenderTarget>
+#include <QQuickWindow>
+#define WORKAROUND_INNER_CLASS_DEFINITION_QQuickWindow__GraphicsStateInfo
+#include <QResizeEvent>
+#include <QRunnable>
+#include <QSGImageNode>
+#include <QSGNinePatchNode>
+#include <QSGRectangleNode>
+#include <QSGRendererInterface>
+#include <QSGTextNode>
+#include <QSGTexture>
+#include <QShowEvent>
+#include <QSize>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QSurface>
+#include <QSurfaceFormat>
+#include <QTabletEvent>
+#include <QTimerEvent>
+#include <QTouchEvent>
+#include <QWheelEvent>
+#include <QWindow>
+#include <qquickwindow.h>
+#include "gen_qquickwindow.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQQuickWindow final : public QQuickWindow {
+	const QQuickWindow_VTable* vtbl;
+public:
+	friend void* QQuickWindow_vdata(VirtualQQuickWindow* self);
+	friend VirtualQQuickWindow* vdata_QQuickWindow(void* vdata);
+
+	VirtualQQuickWindow(const QQuickWindow_VTable* vtbl): QQuickWindow(), vtbl(vtbl) {}
+	VirtualQQuickWindow(const QQuickWindow_VTable* vtbl, QQuickRenderControl* renderControl): QQuickWindow(renderControl), vtbl(vtbl) {}
+	VirtualQQuickWindow(const QQuickWindow_VTable* vtbl, QWindow* parent): QQuickWindow(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQQuickWindow() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QQuickWindow::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQuickWindow_virtualbase_metaObject(const VirtualQQuickWindow* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QQuickWindow::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QQuickWindow_virtualbase_metacast(VirtualQQuickWindow* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QQuickWindow::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQuickWindow_virtualbase_metacall(VirtualQQuickWindow* self, int param1, int param2, void** param3);
+
+	virtual QObject* focusObject() const override {
+		if (vtbl->focusObject == 0) {
+			return QQuickWindow::focusObject();
+		}
+
+		QObject* callback_return_value = vtbl->focusObject(this);
+		return callback_return_value;
+	}
+
+	friend QObject* QQuickWindow_virtualbase_focusObject(const VirtualQQuickWindow* self);
+
+	virtual QAccessibleInterface* accessibleRoot() const override {
+		if (vtbl->accessibleRoot == 0) {
+			return QQuickWindow::accessibleRoot();
+		}
+
+		QAccessibleInterface* callback_return_value = vtbl->accessibleRoot(this);
+		return callback_return_value;
+	}
+
+	friend QAccessibleInterface* QQuickWindow_virtualbase_accessibleRoot(const VirtualQQuickWindow* self);
+
+	virtual void exposeEvent(QExposeEvent* param1) override {
+		if (vtbl->exposeEvent == 0) {
+			QQuickWindow::exposeEvent(param1);
+			return;
+		}
+
+		QExposeEvent* sigval1 = param1;
+		vtbl->exposeEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_exposeEvent(VirtualQQuickWindow* self, QExposeEvent* param1);
+
+	virtual void resizeEvent(QResizeEvent* param1) override {
+		if (vtbl->resizeEvent == 0) {
+			QQuickWindow::resizeEvent(param1);
+			return;
+		}
+
+		QResizeEvent* sigval1 = param1;
+		vtbl->resizeEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_resizeEvent(VirtualQQuickWindow* self, QResizeEvent* param1);
+
+	virtual void showEvent(QShowEvent* param1) override {
+		if (vtbl->showEvent == 0) {
+			QQuickWindow::showEvent(param1);
+			return;
+		}
+
+		QShowEvent* sigval1 = param1;
+		vtbl->showEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_showEvent(VirtualQQuickWindow* self, QShowEvent* param1);
+
+	virtual void hideEvent(QHideEvent* param1) override {
+		if (vtbl->hideEvent == 0) {
+			QQuickWindow::hideEvent(param1);
+			return;
+		}
+
+		QHideEvent* sigval1 = param1;
+		vtbl->hideEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_hideEvent(VirtualQQuickWindow* self, QHideEvent* param1);
+
+	virtual void closeEvent(QCloseEvent* param1) override {
+		if (vtbl->closeEvent == 0) {
+			QQuickWindow::closeEvent(param1);
+			return;
+		}
+
+		QCloseEvent* sigval1 = param1;
+		vtbl->closeEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_closeEvent(VirtualQQuickWindow* self, QCloseEvent* param1);
+
+	virtual void focusInEvent(QFocusEvent* param1) override {
+		if (vtbl->focusInEvent == 0) {
+			QQuickWindow::focusInEvent(param1);
+			return;
+		}
+
+		QFocusEvent* sigval1 = param1;
+		vtbl->focusInEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_focusInEvent(VirtualQQuickWindow* self, QFocusEvent* param1);
+
+	virtual void focusOutEvent(QFocusEvent* param1) override {
+		if (vtbl->focusOutEvent == 0) {
+			QQuickWindow::focusOutEvent(param1);
+			return;
+		}
+
+		QFocusEvent* sigval1 = param1;
+		vtbl->focusOutEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_focusOutEvent(VirtualQQuickWindow* self, QFocusEvent* param1);
+
+	virtual bool event(QEvent* param1) override {
+		if (vtbl->event == 0) {
+			return QQuickWindow::event(param1);
+		}
+
+		QEvent* sigval1 = param1;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QQuickWindow_virtualbase_event(VirtualQQuickWindow* self, QEvent* param1);
+
+	virtual void keyPressEvent(QKeyEvent* param1) override {
+		if (vtbl->keyPressEvent == 0) {
+			QQuickWindow::keyPressEvent(param1);
+			return;
+		}
+
+		QKeyEvent* sigval1 = param1;
+		vtbl->keyPressEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_keyPressEvent(VirtualQQuickWindow* self, QKeyEvent* param1);
+
+	virtual void keyReleaseEvent(QKeyEvent* param1) override {
+		if (vtbl->keyReleaseEvent == 0) {
+			QQuickWindow::keyReleaseEvent(param1);
+			return;
+		}
+
+		QKeyEvent* sigval1 = param1;
+		vtbl->keyReleaseEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_keyReleaseEvent(VirtualQQuickWindow* self, QKeyEvent* param1);
+
+	virtual void mousePressEvent(QMouseEvent* param1) override {
+		if (vtbl->mousePressEvent == 0) {
+			QQuickWindow::mousePressEvent(param1);
+			return;
+		}
+
+		QMouseEvent* sigval1 = param1;
+		vtbl->mousePressEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_mousePressEvent(VirtualQQuickWindow* self, QMouseEvent* param1);
+
+	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
+		if (vtbl->mouseReleaseEvent == 0) {
+			QQuickWindow::mouseReleaseEvent(param1);
+			return;
+		}
+
+		QMouseEvent* sigval1 = param1;
+		vtbl->mouseReleaseEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_mouseReleaseEvent(VirtualQQuickWindow* self, QMouseEvent* param1);
+
+	virtual void mouseDoubleClickEvent(QMouseEvent* param1) override {
+		if (vtbl->mouseDoubleClickEvent == 0) {
+			QQuickWindow::mouseDoubleClickEvent(param1);
+			return;
+		}
+
+		QMouseEvent* sigval1 = param1;
+		vtbl->mouseDoubleClickEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_mouseDoubleClickEvent(VirtualQQuickWindow* self, QMouseEvent* param1);
+
+	virtual void mouseMoveEvent(QMouseEvent* param1) override {
+		if (vtbl->mouseMoveEvent == 0) {
+			QQuickWindow::mouseMoveEvent(param1);
+			return;
+		}
+
+		QMouseEvent* sigval1 = param1;
+		vtbl->mouseMoveEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_mouseMoveEvent(VirtualQQuickWindow* self, QMouseEvent* param1);
+
+	virtual void wheelEvent(QWheelEvent* param1) override {
+		if (vtbl->wheelEvent == 0) {
+			QQuickWindow::wheelEvent(param1);
+			return;
+		}
+
+		QWheelEvent* sigval1 = param1;
+		vtbl->wheelEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_wheelEvent(VirtualQQuickWindow* self, QWheelEvent* param1);
+
+	virtual void tabletEvent(QTabletEvent* param1) override {
+		if (vtbl->tabletEvent == 0) {
+			QQuickWindow::tabletEvent(param1);
+			return;
+		}
+
+		QTabletEvent* sigval1 = param1;
+		vtbl->tabletEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_tabletEvent(VirtualQQuickWindow* self, QTabletEvent* param1);
+
+	virtual QSurface::SurfaceType surfaceType() const override {
+		if (vtbl->surfaceType == 0) {
+			return QQuickWindow::surfaceType();
+		}
+
+		int callback_return_value = vtbl->surfaceType(this);
+		return static_cast<QSurface::SurfaceType>(callback_return_value);
+	}
+
+	friend int QQuickWindow_virtualbase_surfaceType(const VirtualQQuickWindow* self);
+
+	virtual QSurfaceFormat format() const override {
+		if (vtbl->format == 0) {
+			return QQuickWindow::format();
+		}
+
+		QSurfaceFormat* callback_return_value = vtbl->format(this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QSurfaceFormat* QQuickWindow_virtualbase_format(const VirtualQQuickWindow* self);
+
+	virtual QSize size() const override {
+		if (vtbl->size == 0) {
+			return QQuickWindow::size();
+		}
+
+		QSize* callback_return_value = vtbl->size(this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QSize* QQuickWindow_virtualbase_size(const VirtualQQuickWindow* self);
+
+	virtual void paintEvent(QPaintEvent* param1) override {
+		if (vtbl->paintEvent == 0) {
+			QQuickWindow::paintEvent(param1);
+			return;
+		}
+
+		QPaintEvent* sigval1 = param1;
+		vtbl->paintEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_paintEvent(VirtualQQuickWindow* self, QPaintEvent* param1);
+
+	virtual void moveEvent(QMoveEvent* param1) override {
+		if (vtbl->moveEvent == 0) {
+			QQuickWindow::moveEvent(param1);
+			return;
+		}
+
+		QMoveEvent* sigval1 = param1;
+		vtbl->moveEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_moveEvent(VirtualQQuickWindow* self, QMoveEvent* param1);
+
+	virtual void touchEvent(QTouchEvent* param1) override {
+		if (vtbl->touchEvent == 0) {
+			QQuickWindow::touchEvent(param1);
+			return;
+		}
+
+		QTouchEvent* sigval1 = param1;
+		vtbl->touchEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_touchEvent(VirtualQQuickWindow* self, QTouchEvent* param1);
+
+	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
+		if (vtbl->nativeEvent == 0) {
+			return QQuickWindow::nativeEvent(eventType, message, result);
+		}
+
+		const QByteArray eventType_qb = eventType;
+		struct seaqt_string eventType_ms;
+		eventType_ms.len = eventType_qb.length();
+		eventType_ms.data = static_cast<char*>(malloc(eventType_ms.len));
+		memcpy(eventType_ms.data, eventType_qb.data(), eventType_ms.len);
+		struct seaqt_string sigval1 = eventType_ms;
+		void* sigval2 = message;
+		qintptr* result_ret = result;
+		intptr_t* sigval3 = (intptr_t*)(result_ret);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
+		return callback_return_value;
+	}
+
+	friend bool QQuickWindow_virtualbase_nativeEvent(VirtualQQuickWindow* self, struct seaqt_string eventType, void* message, intptr_t* result);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QQuickWindow::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QQuickWindow_virtualbase_eventFilter(VirtualQQuickWindow* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QQuickWindow::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_timerEvent(VirtualQQuickWindow* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QQuickWindow::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_childEvent(VirtualQQuickWindow* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QQuickWindow::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_customEvent(VirtualQQuickWindow* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QQuickWindow::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_connectNotify(VirtualQQuickWindow* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QQuickWindow::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QQuickWindow_virtualbase_disconnectNotify(VirtualQQuickWindow* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend void* QQuickWindow_protectedbase_resolveInterface(const VirtualQQuickWindow* self, const char* name, int revision);
+	friend QObject* QQuickWindow_protectedbase_sender(const VirtualQQuickWindow* self);
+	friend int QQuickWindow_protectedbase_senderSignalIndex(const VirtualQQuickWindow* self);
+	friend int QQuickWindow_protectedbase_receivers(const VirtualQQuickWindow* self, const char* signal);
+	friend bool QQuickWindow_protectedbase_isSignalConnected(const VirtualQQuickWindow* self, QMetaMethod* signal);
+};
+
+VirtualQQuickWindow* QQuickWindow_new(const QQuickWindow_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickWindow>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQQuickWindow(vtbl) : nullptr;
+}
+
+VirtualQQuickWindow* QQuickWindow_new_renderControl(const QQuickWindow_VTable* vtbl, size_t vdata, QQuickRenderControl* renderControl) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickWindow>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQQuickWindow(vtbl, renderControl) : nullptr;
+}
+
+VirtualQQuickWindow* QQuickWindow_new_parent(const QQuickWindow_VTable* vtbl, size_t vdata, QWindow* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickWindow>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQQuickWindow(vtbl, parent) : nullptr;
+}
+
+void QQuickWindow_virtbase(QQuickWindow* src, QWindow** outptr_QWindow) {
+	*outptr_QWindow = static_cast<QWindow*>(src);
+}
+
+QMetaObject* QQuickWindow_metaObject(const QQuickWindow* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QQuickWindow_metacast(QQuickWindow* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QQuickWindow_metacall(QQuickWindow* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QQuickWindow_tr_s(const char* s) {
+	QString _ret = QQuickWindow::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QQuickItem* QQuickWindow_contentItem(const QQuickWindow* self) {
+	return self->contentItem();
+}
+
+QQuickItem* QQuickWindow_activeFocusItem(const QQuickWindow* self) {
+	return self->activeFocusItem();
+}
+
+QObject* QQuickWindow_focusObject(const QQuickWindow* self) {
+	return self->focusObject();
+}
+
+QQuickItem* QQuickWindow_mouseGrabberItem(const QQuickWindow* self) {
+	return self->mouseGrabberItem();
+}
+
+QImage* QQuickWindow_grabWindow(QQuickWindow* self) {
+	return new QImage(self->grabWindow());
+}
+
+void QQuickWindow_setRenderTarget(QQuickWindow* self, QQuickRenderTarget* target) {
+	self->setRenderTarget(*target);
+}
+
+QQuickRenderTarget* QQuickWindow_renderTarget(const QQuickWindow* self) {
+	return new QQuickRenderTarget(self->renderTarget());
+}
+
+QQuickWindow__GraphicsStateInfo* QQuickWindow_graphicsStateInfo(QQuickWindow* self) {
+	const QQuickWindow::GraphicsStateInfo& _ret = self->graphicsStateInfo();
+	// Cast returned reference into pointer
+	return const_cast<QQuickWindow::GraphicsStateInfo*>(&_ret);
+}
+
+void QQuickWindow_beginExternalCommands(QQuickWindow* self) {
+	self->beginExternalCommands();
+}
+
+void QQuickWindow_endExternalCommands(QQuickWindow* self) {
+	self->endExternalCommands();
+}
+
+QQmlIncubationController* QQuickWindow_incubationController(const QQuickWindow* self) {
+	return self->incubationController();
+}
+
+QAccessibleInterface* QQuickWindow_accessibleRoot(const QQuickWindow* self) {
+	return self->accessibleRoot();
+}
+
+QSGTexture* QQuickWindow_createTextureFromImage_image(const QQuickWindow* self, QImage* image) {
+	return self->createTextureFromImage(*image);
+}
+
+QSGTexture* QQuickWindow_createTextureFromImage_image_options(const QQuickWindow* self, QImage* image, int options) {
+	return self->createTextureFromImage(*image, static_cast<QQuickWindow::CreateTextureOptions>(options));
+}
+
+void QQuickWindow_setColor(QQuickWindow* self, QColor* color) {
+	self->setColor(*color);
+}
+
+QColor* QQuickWindow_color(const QQuickWindow* self) {
+	return new QColor(self->color());
+}
+
+bool QQuickWindow_hasDefaultAlphaBuffer() {
+	return QQuickWindow::hasDefaultAlphaBuffer();
+}
+
+void QQuickWindow_setDefaultAlphaBuffer(bool useAlpha) {
+	QQuickWindow::setDefaultAlphaBuffer(useAlpha);
+}
+
+void QQuickWindow_setPersistentGraphics(QQuickWindow* self, bool persistent) {
+	self->setPersistentGraphics(persistent);
+}
+
+bool QQuickWindow_isPersistentGraphics(const QQuickWindow* self) {
+	return self->isPersistentGraphics();
+}
+
+void QQuickWindow_setPersistentSceneGraph(QQuickWindow* self, bool persistent) {
+	self->setPersistentSceneGraph(persistent);
+}
+
+bool QQuickWindow_isPersistentSceneGraph(const QQuickWindow* self) {
+	return self->isPersistentSceneGraph();
+}
+
+bool QQuickWindow_isSceneGraphInitialized(const QQuickWindow* self) {
+	return self->isSceneGraphInitialized();
+}
+
+void QQuickWindow_scheduleRenderJob(QQuickWindow* self, QRunnable* job, int schedule) {
+	self->scheduleRenderJob(job, static_cast<QQuickWindow::RenderStage>(schedule));
+}
+
+double QQuickWindow_effectiveDevicePixelRatio(const QQuickWindow* self) {
+	qreal _ret = self->effectiveDevicePixelRatio();
+	return static_cast<double>(_ret);
+}
+
+QSGRendererInterface* QQuickWindow_rendererInterface(const QQuickWindow* self) {
+	return self->rendererInterface();
+}
+
+void QQuickWindow_setGraphicsApi(int api) {
+	QQuickWindow::setGraphicsApi(static_cast<QSGRendererInterface::GraphicsApi>(api));
+}
+
+int QQuickWindow_graphicsApi() {
+	QSGRendererInterface::GraphicsApi _ret = QQuickWindow::graphicsApi();
+	return static_cast<int>(_ret);
+}
+
+void QQuickWindow_setSceneGraphBackend(struct seaqt_string backend) {
+	QString backend_QString = QString::fromUtf8(backend.data, backend.len);
+	QQuickWindow::setSceneGraphBackend(backend_QString);
+}
+
+struct seaqt_string QQuickWindow_sceneGraphBackend() {
+	QString _ret = QQuickWindow::sceneGraphBackend();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QQuickWindow_setGraphicsDevice(QQuickWindow* self, QQuickGraphicsDevice* device) {
+	self->setGraphicsDevice(*device);
+}
+
+QQuickGraphicsDevice* QQuickWindow_graphicsDevice(const QQuickWindow* self) {
+	return new QQuickGraphicsDevice(self->graphicsDevice());
+}
+
+void QQuickWindow_setGraphicsConfiguration(QQuickWindow* self, QQuickGraphicsConfiguration* config) {
+	self->setGraphicsConfiguration(*config);
+}
+
+QQuickGraphicsConfiguration* QQuickWindow_graphicsConfiguration(const QQuickWindow* self) {
+	return new QQuickGraphicsConfiguration(self->graphicsConfiguration());
+}
+
+QSGRectangleNode* QQuickWindow_createRectangleNode(const QQuickWindow* self) {
+	return self->createRectangleNode();
+}
+
+QSGImageNode* QQuickWindow_createImageNode(const QQuickWindow* self) {
+	return self->createImageNode();
+}
+
+QSGNinePatchNode* QQuickWindow_createNinePatchNode(const QQuickWindow* self) {
+	return self->createNinePatchNode();
+}
+
+QSGTextNode* QQuickWindow_createTextNode(const QQuickWindow* self) {
+	return self->createTextNode();
+}
+
+int QQuickWindow_textRenderType() {
+	QQuickWindow::TextRenderType _ret = QQuickWindow::textRenderType();
+	return static_cast<int>(_ret);
+}
+
+void QQuickWindow_setTextRenderType(int renderType) {
+	QQuickWindow::setTextRenderType(static_cast<QQuickWindow::TextRenderType>(renderType));
+}
+
+void QQuickWindow_frameSwapped(QQuickWindow* self) {
+	self->frameSwapped();
+}
+
+void QQuickWindow_connect_frameSwapped(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::frameSwapped), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_sceneGraphInitialized(QQuickWindow* self) {
+	self->sceneGraphInitialized();
+}
+
+void QQuickWindow_connect_sceneGraphInitialized(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphInitialized), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_sceneGraphInvalidated(QQuickWindow* self) {
+	self->sceneGraphInvalidated();
+}
+
+void QQuickWindow_connect_sceneGraphInvalidated(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphInvalidated), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_beforeSynchronizing(QQuickWindow* self) {
+	self->beforeSynchronizing();
+}
+
+void QQuickWindow_connect_beforeSynchronizing(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeSynchronizing), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_afterSynchronizing(QQuickWindow* self) {
+	self->afterSynchronizing();
+}
+
+void QQuickWindow_connect_afterSynchronizing(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterSynchronizing), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_beforeRendering(QQuickWindow* self) {
+	self->beforeRendering();
+}
+
+void QQuickWindow_connect_beforeRendering(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeRendering), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_afterRendering(QQuickWindow* self) {
+	self->afterRendering();
+}
+
+void QQuickWindow_connect_afterRendering(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterRendering), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_afterAnimating(QQuickWindow* self) {
+	self->afterAnimating();
+}
+
+void QQuickWindow_connect_afterAnimating(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterAnimating), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_sceneGraphAboutToStop(QQuickWindow* self) {
+	self->sceneGraphAboutToStop();
+}
+
+void QQuickWindow_connect_sceneGraphAboutToStop(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::sceneGraphAboutToStop), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_colorChanged(QQuickWindow* self, QColor* param1) {
+	self->colorChanged(*param1);
+}
+
+void QQuickWindow_connect_colorChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)(const QColor&)>(&QQuickWindow::colorChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QColor& param1) {
+			const QColor& param1_ret = param1;
+			// Cast returned reference into pointer
+			QColor* sigval1 = const_cast<QColor*>(&param1_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QQuickWindow_activeFocusItemChanged(QQuickWindow* self) {
+	self->activeFocusItemChanged();
+}
+
+void QQuickWindow_connect_activeFocusItemChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::activeFocusItemChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_sceneGraphError(QQuickWindow* self, int error, struct seaqt_string message) {
+	QString message_QString = QString::fromUtf8(message.data, message.len);
+	self->sceneGraphError(static_cast<QQuickWindow::SceneGraphError>(error), message_QString);
+}
+
+void QQuickWindow_connect_sceneGraphError(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)(QQuickWindow::SceneGraphError, const QString&)>(&QQuickWindow::sceneGraphError), self, [callback, release = seaqt::release_callback{slot,release}](QQuickWindow::SceneGraphError error, const QString& message) {
+			QQuickWindow::SceneGraphError error_ret = error;
+			int sigval1 = static_cast<int>(error_ret);
+			const QString message_ret = message;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray message_b = message_ret.toUtf8();
+			struct seaqt_string message_ms;
+			message_ms.len = message_b.length();
+			message_ms.data = static_cast<char*>(malloc(message_ms.len));
+			memcpy(message_ms.data, message_b.data(), message_ms.len);
+			struct seaqt_string sigval2 = message_ms;
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QQuickWindow_beforeRenderPassRecording(QQuickWindow* self) {
+	self->beforeRenderPassRecording();
+}
+
+void QQuickWindow_connect_beforeRenderPassRecording(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeRenderPassRecording), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_afterRenderPassRecording(QQuickWindow* self) {
+	self->afterRenderPassRecording();
+}
+
+void QQuickWindow_connect_afterRenderPassRecording(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterRenderPassRecording), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_paletteChanged(QQuickWindow* self) {
+	self->paletteChanged();
+}
+
+void QQuickWindow_connect_paletteChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::paletteChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_paletteCreated(QQuickWindow* self) {
+	self->paletteCreated();
+}
+
+void QQuickWindow_connect_paletteCreated(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::paletteCreated), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_beforeFrameBegin(QQuickWindow* self) {
+	self->beforeFrameBegin();
+}
+
+void QQuickWindow_connect_beforeFrameBegin(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::beforeFrameBegin), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_afterFrameEnd(QQuickWindow* self) {
+	self->afterFrameEnd();
+}
+
+void QQuickWindow_connect_afterFrameEnd(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::afterFrameEnd), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_devicePixelRatioChanged(QQuickWindow* self) {
+	self->devicePixelRatioChanged();
+}
+
+void QQuickWindow_connect_devicePixelRatioChanged(QQuickWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QQuickWindow::connect(self, static_cast<void (QQuickWindow::*)()>(&QQuickWindow::devicePixelRatioChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QQuickWindow_update(QQuickWindow* self) {
+	self->update();
+}
+
+void QQuickWindow_releaseResources(QQuickWindow* self) {
+	self->releaseResources();
+}
+
+struct seaqt_string QQuickWindow_tr_s_c(const char* s, const char* c) {
+	QString _ret = QQuickWindow::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QQuickWindow_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QQuickWindow::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QQuickWindow_staticMetaObject() { return &QQuickWindow::staticMetaObject; }
+void* QQuickWindow_vdata(VirtualQQuickWindow* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQQuickWindow>()); }
+VirtualQQuickWindow* vdata_QQuickWindow(void* vdata) { return reinterpret_cast<VirtualQQuickWindow*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQQuickWindow>()); }
+
+QMetaObject* QQuickWindow_virtualbase_metaObject(const VirtualQQuickWindow* self) {
+
+	return (QMetaObject*) self->QQuickWindow::metaObject();
+}
+
+void* QQuickWindow_virtualbase_metacast(VirtualQQuickWindow* self, const char* param1) {
+
+	return self->QQuickWindow::qt_metacast(param1);
+}
+
+int QQuickWindow_virtualbase_metacall(VirtualQQuickWindow* self, int param1, int param2, void** param3) {
+
+	return self->QQuickWindow::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+QObject* QQuickWindow_virtualbase_focusObject(const VirtualQQuickWindow* self) {
+
+	return self->QQuickWindow::focusObject();
+}
+
+QAccessibleInterface* QQuickWindow_virtualbase_accessibleRoot(const VirtualQQuickWindow* self) {
+
+	return self->QQuickWindow::accessibleRoot();
+}
+
+void QQuickWindow_virtualbase_exposeEvent(VirtualQQuickWindow* self, QExposeEvent* param1) {
+
+	self->QQuickWindow::exposeEvent(param1);
+}
+
+void QQuickWindow_virtualbase_resizeEvent(VirtualQQuickWindow* self, QResizeEvent* param1) {
+
+	self->QQuickWindow::resizeEvent(param1);
+}
+
+void QQuickWindow_virtualbase_showEvent(VirtualQQuickWindow* self, QShowEvent* param1) {
+
+	self->QQuickWindow::showEvent(param1);
+}
+
+void QQuickWindow_virtualbase_hideEvent(VirtualQQuickWindow* self, QHideEvent* param1) {
+
+	self->QQuickWindow::hideEvent(param1);
+}
+
+void QQuickWindow_virtualbase_closeEvent(VirtualQQuickWindow* self, QCloseEvent* param1) {
+
+	self->QQuickWindow::closeEvent(param1);
+}
+
+void QQuickWindow_virtualbase_focusInEvent(VirtualQQuickWindow* self, QFocusEvent* param1) {
+
+	self->QQuickWindow::focusInEvent(param1);
+}
+
+void QQuickWindow_virtualbase_focusOutEvent(VirtualQQuickWindow* self, QFocusEvent* param1) {
+
+	self->QQuickWindow::focusOutEvent(param1);
+}
+
+bool QQuickWindow_virtualbase_event(VirtualQQuickWindow* self, QEvent* param1) {
+
+	return self->QQuickWindow::event(param1);
+}
+
+void QQuickWindow_virtualbase_keyPressEvent(VirtualQQuickWindow* self, QKeyEvent* param1) {
+
+	self->QQuickWindow::keyPressEvent(param1);
+}
+
+void QQuickWindow_virtualbase_keyReleaseEvent(VirtualQQuickWindow* self, QKeyEvent* param1) {
+
+	self->QQuickWindow::keyReleaseEvent(param1);
+}
+
+void QQuickWindow_virtualbase_mousePressEvent(VirtualQQuickWindow* self, QMouseEvent* param1) {
+
+	self->QQuickWindow::mousePressEvent(param1);
+}
+
+void QQuickWindow_virtualbase_mouseReleaseEvent(VirtualQQuickWindow* self, QMouseEvent* param1) {
+
+	self->QQuickWindow::mouseReleaseEvent(param1);
+}
+
+void QQuickWindow_virtualbase_mouseDoubleClickEvent(VirtualQQuickWindow* self, QMouseEvent* param1) {
+
+	self->QQuickWindow::mouseDoubleClickEvent(param1);
+}
+
+void QQuickWindow_virtualbase_mouseMoveEvent(VirtualQQuickWindow* self, QMouseEvent* param1) {
+
+	self->QQuickWindow::mouseMoveEvent(param1);
+}
+
+void QQuickWindow_virtualbase_wheelEvent(VirtualQQuickWindow* self, QWheelEvent* param1) {
+
+	self->QQuickWindow::wheelEvent(param1);
+}
+
+void QQuickWindow_virtualbase_tabletEvent(VirtualQQuickWindow* self, QTabletEvent* param1) {
+
+	self->QQuickWindow::tabletEvent(param1);
+}
+
+int QQuickWindow_virtualbase_surfaceType(const VirtualQQuickWindow* self) {
+
+	VirtualQQuickWindow::SurfaceType _ret = self->QQuickWindow::surfaceType();
+	return static_cast<int>(_ret);
+}
+
+QSurfaceFormat* QQuickWindow_virtualbase_format(const VirtualQQuickWindow* self) {
+
+	return new QSurfaceFormat(self->QQuickWindow::format());
+}
+
+QSize* QQuickWindow_virtualbase_size(const VirtualQQuickWindow* self) {
+
+	return new QSize(self->QQuickWindow::size());
+}
+
+void QQuickWindow_virtualbase_paintEvent(VirtualQQuickWindow* self, QPaintEvent* param1) {
+
+	self->QQuickWindow::paintEvent(param1);
+}
+
+void QQuickWindow_virtualbase_moveEvent(VirtualQQuickWindow* self, QMoveEvent* param1) {
+
+	self->QQuickWindow::moveEvent(param1);
+}
+
+void QQuickWindow_virtualbase_touchEvent(VirtualQQuickWindow* self, QTouchEvent* param1) {
+
+	self->QQuickWindow::touchEvent(param1);
+}
+
+bool QQuickWindow_virtualbase_nativeEvent(VirtualQQuickWindow* self, struct seaqt_string eventType, void* message, intptr_t* result) {
+	QByteArray eventType_QByteArray(eventType.data, eventType.len);
+
+	return self->QQuickWindow::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
+}
+
+bool QQuickWindow_virtualbase_eventFilter(VirtualQQuickWindow* self, QObject* watched, QEvent* event) {
+
+	return self->QQuickWindow::eventFilter(watched, event);
+}
+
+void QQuickWindow_virtualbase_timerEvent(VirtualQQuickWindow* self, QTimerEvent* event) {
+
+	self->QQuickWindow::timerEvent(event);
+}
+
+void QQuickWindow_virtualbase_childEvent(VirtualQQuickWindow* self, QChildEvent* event) {
+
+	self->QQuickWindow::childEvent(event);
+}
+
+void QQuickWindow_virtualbase_customEvent(VirtualQQuickWindow* self, QEvent* event) {
+
+	self->QQuickWindow::customEvent(event);
+}
+
+void QQuickWindow_virtualbase_connectNotify(VirtualQQuickWindow* self, QMetaMethod* signal) {
+
+	self->QQuickWindow::connectNotify(*signal);
+}
+
+void QQuickWindow_virtualbase_disconnectNotify(VirtualQQuickWindow* self, QMetaMethod* signal) {
+
+	self->QQuickWindow::disconnectNotify(*signal);
+}
+
+void* QQuickWindow_protectedbase_resolveInterface(const VirtualQQuickWindow* self, const char* name, int revision) {
+	return self->QQuickWindow::resolveInterface(name, static_cast<int>(revision));
+}
+
+QObject* QQuickWindow_protectedbase_sender(const VirtualQQuickWindow* self) {
+	return self->QQuickWindow::sender();
+}
+
+int QQuickWindow_protectedbase_senderSignalIndex(const VirtualQQuickWindow* self) {
+	return self->QQuickWindow::senderSignalIndex();
+}
+
+int QQuickWindow_protectedbase_receivers(const VirtualQQuickWindow* self, const char* signal) {
+	return self->QQuickWindow::receivers(signal);
+}
+
+bool QQuickWindow_protectedbase_isSignalConnected(const VirtualQQuickWindow* self, QMetaMethod* signal) {
+	return self->QQuickWindow::isSignalConnected(*signal);
+}
+
+void QQuickWindow_delete(QQuickWindow* self) {
+	delete self;
+}
+
+int QQuickWindow__GraphicsStateInfo_currentFrameSlot(const QQuickWindow__GraphicsStateInfo* self) {
+	return self->currentFrameSlot;
+}
+
+void QQuickWindow__GraphicsStateInfo_setCurrentFrameSlot(QQuickWindow__GraphicsStateInfo* self, int currentFrameSlot) {
+	self->currentFrameSlot = static_cast<int>(currentFrameSlot);
+}
+
+int QQuickWindow__GraphicsStateInfo_framesInFlight(const QQuickWindow__GraphicsStateInfo* self) {
+	return self->framesInFlight;
+}
+
+void QQuickWindow__GraphicsStateInfo_setFramesInFlight(QQuickWindow__GraphicsStateInfo* self, int framesInFlight) {
+	self->framesInFlight = static_cast<int>(framesInFlight);
+}
+
+void QQuickWindow__GraphicsStateInfo_delete(QQuickWindow__GraphicsStateInfo* self) {
+	delete self;
+}
+

@@ -1,0 +1,61 @@
+#pragma once
+#ifndef SEAQT_QTWEBENGINECORE_GEN_QWEBENGINECONTEXTMENUREQUEST_H
+#define SEAQT_QTWEBENGINECORE_GEN_QWEBENGINECONTEXTMENUREQUEST_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QMetaMethod;
+class QMetaObject;
+class QObject;
+class QPoint;
+class QUrl;
+class QWebEngineContextMenuRequest;
+#else
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QObject QObject;
+typedef struct QPoint QPoint;
+typedef struct QUrl QUrl;
+typedef struct QWebEngineContextMenuRequest QWebEngineContextMenuRequest;
+#endif
+
+void QWebEngineContextMenuRequest_virtbase(QWebEngineContextMenuRequest* src, QObject** outptr_QObject);
+QMetaObject* QWebEngineContextMenuRequest_metaObject(const QWebEngineContextMenuRequest* self);
+void* QWebEngineContextMenuRequest_metacast(QWebEngineContextMenuRequest* self, const char* param1);
+int QWebEngineContextMenuRequest_metacall(QWebEngineContextMenuRequest* self, int param1, int param2, void** param3);
+struct seaqt_string QWebEngineContextMenuRequest_tr_s(const char* s);
+QPoint* QWebEngineContextMenuRequest_position(const QWebEngineContextMenuRequest* self);
+struct seaqt_string QWebEngineContextMenuRequest_selectedText(const QWebEngineContextMenuRequest* self);
+struct seaqt_string QWebEngineContextMenuRequest_linkText(const QWebEngineContextMenuRequest* self);
+QUrl* QWebEngineContextMenuRequest_linkUrl(const QWebEngineContextMenuRequest* self);
+QUrl* QWebEngineContextMenuRequest_mediaUrl(const QWebEngineContextMenuRequest* self);
+int QWebEngineContextMenuRequest_mediaType(const QWebEngineContextMenuRequest* self);
+bool QWebEngineContextMenuRequest_isContentEditable(const QWebEngineContextMenuRequest* self);
+struct seaqt_string QWebEngineContextMenuRequest_misspelledWord(const QWebEngineContextMenuRequest* self);
+struct seaqt_array /* of struct seaqt_string */  QWebEngineContextMenuRequest_spellCheckerSuggestions(const QWebEngineContextMenuRequest* self);
+bool QWebEngineContextMenuRequest_isAccepted(const QWebEngineContextMenuRequest* self);
+void QWebEngineContextMenuRequest_setAccepted(QWebEngineContextMenuRequest* self, bool accepted);
+int QWebEngineContextMenuRequest_mediaFlags(const QWebEngineContextMenuRequest* self);
+int QWebEngineContextMenuRequest_editFlags(const QWebEngineContextMenuRequest* self);
+struct seaqt_string QWebEngineContextMenuRequest_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineContextMenuRequest_tr_s_c_n(const char* s, const char* c, int n);
+
+const QMetaObject* QWebEngineContextMenuRequest_staticMetaObject();
+void QWebEngineContextMenuRequest_delete(QWebEngineContextMenuRequest* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

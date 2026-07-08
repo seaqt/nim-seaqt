@@ -1,0 +1,169 @@
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QPoint>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QUrl>
+#include <QWebEngineContextMenuRequest>
+#include <qwebenginecontextmenurequest.h>
+#include "gen_qwebenginecontextmenurequest.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QWebEngineContextMenuRequest_virtbase(QWebEngineContextMenuRequest* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QWebEngineContextMenuRequest_metaObject(const QWebEngineContextMenuRequest* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QWebEngineContextMenuRequest_metacast(QWebEngineContextMenuRequest* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QWebEngineContextMenuRequest_metacall(QWebEngineContextMenuRequest* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QWebEngineContextMenuRequest_tr_s(const char* s) {
+	QString _ret = QWebEngineContextMenuRequest::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QPoint* QWebEngineContextMenuRequest_position(const QWebEngineContextMenuRequest* self) {
+	return new QPoint(self->position());
+}
+
+struct seaqt_string QWebEngineContextMenuRequest_selectedText(const QWebEngineContextMenuRequest* self) {
+	QString _ret = self->selectedText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebEngineContextMenuRequest_linkText(const QWebEngineContextMenuRequest* self) {
+	QString _ret = self->linkText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QUrl* QWebEngineContextMenuRequest_linkUrl(const QWebEngineContextMenuRequest* self) {
+	return new QUrl(self->linkUrl());
+}
+
+QUrl* QWebEngineContextMenuRequest_mediaUrl(const QWebEngineContextMenuRequest* self) {
+	return new QUrl(self->mediaUrl());
+}
+
+int QWebEngineContextMenuRequest_mediaType(const QWebEngineContextMenuRequest* self) {
+	QWebEngineContextMenuRequest::MediaType _ret = self->mediaType();
+	return static_cast<int>(_ret);
+}
+
+bool QWebEngineContextMenuRequest_isContentEditable(const QWebEngineContextMenuRequest* self) {
+	return self->isContentEditable();
+}
+
+struct seaqt_string QWebEngineContextMenuRequest_misspelledWord(const QWebEngineContextMenuRequest* self) {
+	QString _ret = self->misspelledWord();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_array /* of struct seaqt_string */  QWebEngineContextMenuRequest_spellCheckerSuggestions(const QWebEngineContextMenuRequest* self) {
+	QStringList _ret = self->spellCheckerSuggestions();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+bool QWebEngineContextMenuRequest_isAccepted(const QWebEngineContextMenuRequest* self) {
+	return self->isAccepted();
+}
+
+void QWebEngineContextMenuRequest_setAccepted(QWebEngineContextMenuRequest* self, bool accepted) {
+	self->setAccepted(accepted);
+}
+
+int QWebEngineContextMenuRequest_mediaFlags(const QWebEngineContextMenuRequest* self) {
+	QWebEngineContextMenuRequest::MediaFlags _ret = self->mediaFlags();
+	return static_cast<int>(_ret);
+}
+
+int QWebEngineContextMenuRequest_editFlags(const QWebEngineContextMenuRequest* self) {
+	QWebEngineContextMenuRequest::EditFlags _ret = self->editFlags();
+	return static_cast<int>(_ret);
+}
+
+struct seaqt_string QWebEngineContextMenuRequest_tr_s_c(const char* s, const char* c) {
+	QString _ret = QWebEngineContextMenuRequest::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebEngineContextMenuRequest_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QWebEngineContextMenuRequest::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QWebEngineContextMenuRequest_staticMetaObject() { return &QWebEngineContextMenuRequest::staticMetaObject; }
+void QWebEngineContextMenuRequest_delete(QWebEngineContextMenuRequest* self) {
+	delete self;
+}
+

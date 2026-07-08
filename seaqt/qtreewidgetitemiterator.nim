@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qtreewidgetitemiterator
+export gen_qtreewidgetitemiterator

@@ -1,0 +1,35 @@
+#pragma once
+#ifndef SEAQT_QTQUICK_GEN_QQUICKGRAPHICSDEVICE_H
+#define SEAQT_QTQUICK_GEN_QQUICKGRAPHICSDEVICE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QQuickGraphicsDevice;
+#else
+typedef struct QQuickGraphicsDevice QQuickGraphicsDevice;
+#endif
+
+QQuickGraphicsDevice* QQuickGraphicsDevice_new();
+QQuickGraphicsDevice* QQuickGraphicsDevice_new_from(QQuickGraphicsDevice* from);
+
+void QQuickGraphicsDevice_operatorAssign(QQuickGraphicsDevice* self, QQuickGraphicsDevice* from);
+bool QQuickGraphicsDevice_isNull(const QQuickGraphicsDevice* self);
+
+void QQuickGraphicsDevice_delete(QQuickGraphicsDevice* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

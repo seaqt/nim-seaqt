@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractdnditem
+export gen_abstractdnditem

@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineclienthints
+export gen_qwebengineclienthints

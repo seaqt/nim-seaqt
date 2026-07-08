@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qscrollerproperties
+export gen_qscrollerproperties

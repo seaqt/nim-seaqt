@@ -1,0 +1,137 @@
+#pragma once
+#ifndef SEAQT_QTCORE_GEN_QSETTINGS_H
+#define SEAQT_QTCORE_GEN_QSETTINGS_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QAnyStringView;
+class QChildEvent;
+class QEvent;
+class QMetaMethod;
+class QMetaObject;
+class QObject;
+class QSettings;
+class QTimerEvent;
+class QVariant;
+#else
+typedef struct QAnyStringView QAnyStringView;
+typedef struct QChildEvent QChildEvent;
+typedef struct QEvent QEvent;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QObject QObject;
+typedef struct QSettings QSettings;
+typedef struct QTimerEvent QTimerEvent;
+typedef struct QVariant QVariant;
+#endif
+
+typedef struct VirtualQSettings VirtualQSettings;
+typedef struct QSettings_VTable{
+	void (*destructor)(VirtualQSettings* self);
+	QMetaObject* (*metaObject)(const VirtualQSettings* self);
+	void* (*metacast)(VirtualQSettings* self, const char* param1);
+	int (*metacall)(VirtualQSettings* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQSettings* self, QEvent* event);
+	bool (*eventFilter)(VirtualQSettings* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQSettings* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQSettings* self, QChildEvent* event);
+	void (*customEvent)(VirtualQSettings* self, QEvent* event);
+	void (*connectNotify)(VirtualQSettings* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQSettings* self, QMetaMethod* signal);
+}QSettings_VTable;
+
+void* QSettings_vdata(VirtualQSettings* self);
+VirtualQSettings* vdata_QSettings(void* vdata);
+
+VirtualQSettings* QSettings_new_organization(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization);
+VirtualQSettings* QSettings_new_scope_organization(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization);
+VirtualQSettings* QSettings_new_format_scope_organization(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization);
+VirtualQSettings* QSettings_new_fileName_format(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int format);
+VirtualQSettings* QSettings_new(const QSettings_VTable* vtbl, size_t vdata);
+VirtualQSettings* QSettings_new_scope(const QSettings_VTable* vtbl, size_t vdata, int scope);
+VirtualQSettings* QSettings_new_organization_application(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization, struct seaqt_string application);
+VirtualQSettings* QSettings_new_organization_application_parent(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string organization, struct seaqt_string application, QObject* parent);
+VirtualQSettings* QSettings_new_scope_organization_application(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization, struct seaqt_string application);
+VirtualQSettings* QSettings_new_scope_organization_application_parent(const QSettings_VTable* vtbl, size_t vdata, int scope, struct seaqt_string organization, struct seaqt_string application, QObject* parent);
+VirtualQSettings* QSettings_new_format_scope_organization_application(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization, struct seaqt_string application);
+VirtualQSettings* QSettings_new_format_scope_organization_application_parent(const QSettings_VTable* vtbl, size_t vdata, int format, int scope, struct seaqt_string organization, struct seaqt_string application, QObject* parent);
+VirtualQSettings* QSettings_new_fileName_format_parent(const QSettings_VTable* vtbl, size_t vdata, struct seaqt_string fileName, int format, QObject* parent);
+VirtualQSettings* QSettings_new_parent(const QSettings_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSettings* QSettings_new_scope_parent(const QSettings_VTable* vtbl, size_t vdata, int scope, QObject* parent);
+
+void QSettings_virtbase(QSettings* src, QObject** outptr_QObject);
+QMetaObject* QSettings_metaObject(const QSettings* self);
+void* QSettings_metacast(QSettings* self, const char* param1);
+int QSettings_metacall(QSettings* self, int param1, int param2, void** param3);
+struct seaqt_string QSettings_tr_s(const char* s);
+void QSettings_clear(QSettings* self);
+void QSettings_sync(QSettings* self);
+int QSettings_status(const QSettings* self);
+bool QSettings_isAtomicSyncRequired(const QSettings* self);
+void QSettings_setAtomicSyncRequired(QSettings* self, bool enable);
+void QSettings_beginGroup(QSettings* self, struct seaqt_string prefix);
+void QSettings_endGroup(QSettings* self);
+struct seaqt_string QSettings_group(const QSettings* self);
+int QSettings_beginReadArray(QSettings* self, struct seaqt_string prefix);
+void QSettings_beginWriteArray_prefix(QSettings* self, struct seaqt_string prefix);
+void QSettings_endArray(QSettings* self);
+void QSettings_setArrayIndex(QSettings* self, int i);
+struct seaqt_array /* of struct seaqt_string */  QSettings_allKeys(const QSettings* self);
+struct seaqt_array /* of struct seaqt_string */  QSettings_childKeys(const QSettings* self);
+struct seaqt_array /* of struct seaqt_string */  QSettings_childGroups(const QSettings* self);
+bool QSettings_isWritable(const QSettings* self);
+void QSettings_setValue(QSettings* self, struct seaqt_string key, QVariant* value);
+QVariant* QSettings_value_key_defaultValue(const QSettings* self, struct seaqt_string key, QVariant* defaultValue);
+QVariant* QSettings_value_key(const QSettings* self, struct seaqt_string key);
+void QSettings_remove(QSettings* self, struct seaqt_string key);
+bool QSettings_contains(const QSettings* self, struct seaqt_string key);
+void QSettings_setFallbacksEnabled(QSettings* self, bool b);
+bool QSettings_fallbacksEnabled(const QSettings* self);
+struct seaqt_string QSettings_fileName(const QSettings* self);
+int QSettings_format(const QSettings* self);
+int QSettings_scope(const QSettings* self);
+struct seaqt_string QSettings_organizationName(const QSettings* self);
+struct seaqt_string QSettings_applicationName(const QSettings* self);
+void QSettings_setDefaultFormat(int format);
+int QSettings_defaultFormat();
+void QSettings_setPath(int format, int scope, struct seaqt_string path);
+bool QSettings_event(QSettings* self, QEvent* event);
+struct seaqt_string QSettings_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSettings_tr_s_c_n(const char* s, const char* c, int n);
+void QSettings_beginWriteArray_prefix_size(QSettings* self, struct seaqt_string prefix, int size);
+
+QMetaObject* QSettings_virtualbase_metaObject(const VirtualQSettings* self);
+void* QSettings_virtualbase_metacast(VirtualQSettings* self, const char* param1);
+int QSettings_virtualbase_metacall(VirtualQSettings* self, int param1, int param2, void** param3);
+bool QSettings_virtualbase_event(VirtualQSettings* self, QEvent* event);
+bool QSettings_virtualbase_eventFilter(VirtualQSettings* self, QObject* watched, QEvent* event);
+void QSettings_virtualbase_timerEvent(VirtualQSettings* self, QTimerEvent* event);
+void QSettings_virtualbase_childEvent(VirtualQSettings* self, QChildEvent* event);
+void QSettings_virtualbase_customEvent(VirtualQSettings* self, QEvent* event);
+void QSettings_virtualbase_connectNotify(VirtualQSettings* self, QMetaMethod* signal);
+void QSettings_virtualbase_disconnectNotify(VirtualQSettings* self, QMetaMethod* signal);
+
+QObject* QSettings_protectedbase_sender(const VirtualQSettings* self);
+int QSettings_protectedbase_senderSignalIndex(const VirtualQSettings* self);
+int QSettings_protectedbase_receivers(const VirtualQSettings* self, const char* signal);
+bool QSettings_protectedbase_isSignalConnected(const VirtualQSettings* self, QMetaMethod* signal);
+
+const QMetaObject* QSettings_staticMetaObject();
+void QSettings_delete(QSettings* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

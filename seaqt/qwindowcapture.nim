@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qwindowcapture
+export gen_qwindowcapture

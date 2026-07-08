@@ -1,0 +1,177 @@
+#pragma once
+#ifndef SEAQT_QTNETWORK_GEN_QNETWORKACCESSMANAGER_H
+#define SEAQT_QTNETWORK_GEN_QNETWORKACCESSMANAGER_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QAbstractNetworkCache;
+class QAuthenticator;
+class QChildEvent;
+class QEvent;
+class QHstsPolicy;
+class QHttpMultiPart;
+class QIODevice;
+class QMetaMethod;
+class QMetaObject;
+class QNetworkAccessManager;
+class QNetworkCookieJar;
+class QNetworkProxy;
+class QNetworkProxyFactory;
+class QNetworkReply;
+class QNetworkRequest;
+class QObject;
+class QSslConfiguration;
+class QSslError;
+class QSslPreSharedKeyAuthenticator;
+class QTimerEvent;
+#else
+typedef struct QAbstractNetworkCache QAbstractNetworkCache;
+typedef struct QAuthenticator QAuthenticator;
+typedef struct QChildEvent QChildEvent;
+typedef struct QEvent QEvent;
+typedef struct QHstsPolicy QHstsPolicy;
+typedef struct QHttpMultiPart QHttpMultiPart;
+typedef struct QIODevice QIODevice;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QNetworkAccessManager QNetworkAccessManager;
+typedef struct QNetworkCookieJar QNetworkCookieJar;
+typedef struct QNetworkProxy QNetworkProxy;
+typedef struct QNetworkProxyFactory QNetworkProxyFactory;
+typedef struct QNetworkReply QNetworkReply;
+typedef struct QNetworkRequest QNetworkRequest;
+typedef struct QObject QObject;
+typedef struct QSslConfiguration QSslConfiguration;
+typedef struct QSslError QSslError;
+typedef struct QSslPreSharedKeyAuthenticator QSslPreSharedKeyAuthenticator;
+typedef struct QTimerEvent QTimerEvent;
+#endif
+
+typedef struct VirtualQNetworkAccessManager VirtualQNetworkAccessManager;
+typedef struct QNetworkAccessManager_VTable{
+	void (*destructor)(VirtualQNetworkAccessManager* self);
+	QMetaObject* (*metaObject)(const VirtualQNetworkAccessManager* self);
+	void* (*metacast)(VirtualQNetworkAccessManager* self, const char* param1);
+	int (*metacall)(VirtualQNetworkAccessManager* self, int param1, int param2, void** param3);
+	struct seaqt_array /* of struct seaqt_string */  (*supportedSchemes)(const VirtualQNetworkAccessManager* self);
+	QNetworkReply* (*createRequest)(VirtualQNetworkAccessManager* self, int op, QNetworkRequest* request, QIODevice* outgoingData);
+	bool (*event)(VirtualQNetworkAccessManager* self, QEvent* event);
+	bool (*eventFilter)(VirtualQNetworkAccessManager* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQNetworkAccessManager* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQNetworkAccessManager* self, QChildEvent* event);
+	void (*customEvent)(VirtualQNetworkAccessManager* self, QEvent* event);
+	void (*connectNotify)(VirtualQNetworkAccessManager* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQNetworkAccessManager* self, QMetaMethod* signal);
+}QNetworkAccessManager_VTable;
+
+void* QNetworkAccessManager_vdata(VirtualQNetworkAccessManager* self);
+VirtualQNetworkAccessManager* vdata_QNetworkAccessManager(void* vdata);
+
+VirtualQNetworkAccessManager* QNetworkAccessManager_new(const QNetworkAccessManager_VTable* vtbl, size_t vdata);
+VirtualQNetworkAccessManager* QNetworkAccessManager_new_parent(const QNetworkAccessManager_VTable* vtbl, size_t vdata, QObject* parent);
+
+void QNetworkAccessManager_virtbase(QNetworkAccessManager* src, QObject** outptr_QObject);
+QMetaObject* QNetworkAccessManager_metaObject(const QNetworkAccessManager* self);
+void* QNetworkAccessManager_metacast(QNetworkAccessManager* self, const char* param1);
+int QNetworkAccessManager_metacall(QNetworkAccessManager* self, int param1, int param2, void** param3);
+struct seaqt_string QNetworkAccessManager_tr_s(const char* s);
+struct seaqt_array /* of struct seaqt_string */  QNetworkAccessManager_supportedSchemes(const QNetworkAccessManager* self);
+void QNetworkAccessManager_clearAccessCache(QNetworkAccessManager* self);
+void QNetworkAccessManager_clearConnectionCache(QNetworkAccessManager* self);
+QNetworkProxy* QNetworkAccessManager_proxy(const QNetworkAccessManager* self);
+void QNetworkAccessManager_setProxy(QNetworkAccessManager* self, QNetworkProxy* proxy);
+QNetworkProxyFactory* QNetworkAccessManager_proxyFactory(const QNetworkAccessManager* self);
+void QNetworkAccessManager_setProxyFactory(QNetworkAccessManager* self, QNetworkProxyFactory* factory);
+QAbstractNetworkCache* QNetworkAccessManager_cache(const QNetworkAccessManager* self);
+void QNetworkAccessManager_setCache(QNetworkAccessManager* self, QAbstractNetworkCache* cache);
+QNetworkCookieJar* QNetworkAccessManager_cookieJar(const QNetworkAccessManager* self);
+void QNetworkAccessManager_setCookieJar(QNetworkAccessManager* self, QNetworkCookieJar* cookieJar);
+void QNetworkAccessManager_setStrictTransportSecurityEnabled(QNetworkAccessManager* self, bool enabled);
+bool QNetworkAccessManager_isStrictTransportSecurityEnabled(const QNetworkAccessManager* self);
+void QNetworkAccessManager_enableStrictTransportSecurityStore_enabled(QNetworkAccessManager* self, bool enabled);
+bool QNetworkAccessManager_isStrictTransportSecurityStoreEnabled(const QNetworkAccessManager* self);
+void QNetworkAccessManager_addStrictTransportSecurityHosts(QNetworkAccessManager* self, struct seaqt_array /* of QHstsPolicy* */  knownHosts);
+struct seaqt_array /* of QHstsPolicy* */  QNetworkAccessManager_strictTransportSecurityHosts(const QNetworkAccessManager* self);
+QNetworkReply* QNetworkAccessManager_head(QNetworkAccessManager* self, QNetworkRequest* request);
+QNetworkReply* QNetworkAccessManager_get_QNetworkRequest(QNetworkAccessManager* self, QNetworkRequest* request);
+QNetworkReply* QNetworkAccessManager_get_QNetworkRequest_QIODevice(QNetworkAccessManager* self, QNetworkRequest* request, QIODevice* data);
+QNetworkReply* QNetworkAccessManager_get_QNetworkRequest_QByteArray(QNetworkAccessManager* self, QNetworkRequest* request, struct seaqt_string data);
+QNetworkReply* QNetworkAccessManager_post_QNetworkRequest_QIODevice(QNetworkAccessManager* self, QNetworkRequest* request, QIODevice* data);
+QNetworkReply* QNetworkAccessManager_post_QNetworkRequest_QByteArray(QNetworkAccessManager* self, QNetworkRequest* request, struct seaqt_string data);
+QNetworkReply* QNetworkAccessManager_put_QNetworkRequest_QIODevice(QNetworkAccessManager* self, QNetworkRequest* request, QIODevice* data);
+QNetworkReply* QNetworkAccessManager_put_QNetworkRequest_QByteArray(QNetworkAccessManager* self, QNetworkRequest* request, struct seaqt_string data);
+QNetworkReply* QNetworkAccessManager_deleteResource(QNetworkAccessManager* self, QNetworkRequest* request);
+QNetworkReply* QNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray(QNetworkAccessManager* self, QNetworkRequest* request, struct seaqt_string verb);
+QNetworkReply* QNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QByteArray(QNetworkAccessManager* self, QNetworkRequest* request, struct seaqt_string verb, struct seaqt_string data);
+QNetworkReply* QNetworkAccessManager_post_QNetworkRequest_QHttpMultiPart(QNetworkAccessManager* self, QNetworkRequest* request, QHttpMultiPart* multiPart);
+QNetworkReply* QNetworkAccessManager_put_QNetworkRequest_QHttpMultiPart(QNetworkAccessManager* self, QNetworkRequest* request, QHttpMultiPart* multiPart);
+QNetworkReply* QNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QHttpMultiPart(QNetworkAccessManager* self, QNetworkRequest* request, struct seaqt_string verb, QHttpMultiPart* multiPart);
+void QNetworkAccessManager_connectToHostEncrypted_hostName(QNetworkAccessManager* self, struct seaqt_string hostName);
+void QNetworkAccessManager_connectToHostEncrypted_hostName_port_sslConfiguration_peerName(QNetworkAccessManager* self, struct seaqt_string hostName, unsigned short port, QSslConfiguration* sslConfiguration, struct seaqt_string peerName);
+void QNetworkAccessManager_connectToHost_hostName(QNetworkAccessManager* self, struct seaqt_string hostName);
+void QNetworkAccessManager_setRedirectPolicy(QNetworkAccessManager* self, int policy);
+int QNetworkAccessManager_redirectPolicy(const QNetworkAccessManager* self);
+bool QNetworkAccessManager_autoDeleteReplies(const QNetworkAccessManager* self);
+void QNetworkAccessManager_setAutoDeleteReplies(QNetworkAccessManager* self, bool autoDelete);
+int QNetworkAccessManager_transferTimeout(const QNetworkAccessManager* self);
+void QNetworkAccessManager_setTransferTimeout_timeout(QNetworkAccessManager* self, int timeout);
+void QNetworkAccessManager_setTransferTimeout(QNetworkAccessManager* self);
+void QNetworkAccessManager_proxyAuthenticationRequired(QNetworkAccessManager* self, QNetworkProxy* proxy, QAuthenticator* authenticator);
+void QNetworkAccessManager_connect_proxyAuthenticationRequired(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t));
+void QNetworkAccessManager_authenticationRequired(QNetworkAccessManager* self, QNetworkReply* reply, QAuthenticator* authenticator);
+void QNetworkAccessManager_connect_authenticationRequired(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, QAuthenticator*), void (*release)(intptr_t));
+void QNetworkAccessManager_finished(QNetworkAccessManager* self, QNetworkReply* reply);
+void QNetworkAccessManager_connect_finished(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t));
+void QNetworkAccessManager_encrypted(QNetworkAccessManager* self, QNetworkReply* reply);
+void QNetworkAccessManager_connect_encrypted(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t));
+void QNetworkAccessManager_sslErrors(QNetworkAccessManager* self, QNetworkReply* reply, struct seaqt_array /* of QSslError* */  errors);
+void QNetworkAccessManager_connect_sslErrors(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, struct seaqt_array /* of QSslError* */ ), void (*release)(intptr_t));
+void QNetworkAccessManager_preSharedKeyAuthenticationRequired(QNetworkAccessManager* self, QNetworkReply* reply, QSslPreSharedKeyAuthenticator* authenticator);
+void QNetworkAccessManager_connect_preSharedKeyAuthenticationRequired(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t));
+QNetworkReply* QNetworkAccessManager_createRequest(QNetworkAccessManager* self, int op, QNetworkRequest* request, QIODevice* outgoingData);
+struct seaqt_string QNetworkAccessManager_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkAccessManager_tr_s_c_n(const char* s, const char* c, int n);
+void QNetworkAccessManager_enableStrictTransportSecurityStore_enabled_storeDir(QNetworkAccessManager* self, bool enabled, struct seaqt_string storeDir);
+QNetworkReply* QNetworkAccessManager_sendCustomRequest_QNetworkRequest_QByteArray_QIODevice(QNetworkAccessManager* self, QNetworkRequest* request, struct seaqt_string verb, QIODevice* data);
+void QNetworkAccessManager_connectToHostEncrypted_hostName_port(QNetworkAccessManager* self, struct seaqt_string hostName, unsigned short port);
+void QNetworkAccessManager_connectToHostEncrypted_hostName_port_sslConfiguration(QNetworkAccessManager* self, struct seaqt_string hostName, unsigned short port, QSslConfiguration* sslConfiguration);
+void QNetworkAccessManager_connectToHost_hostName_port(QNetworkAccessManager* self, struct seaqt_string hostName, unsigned short port);
+
+QMetaObject* QNetworkAccessManager_virtualbase_metaObject(const VirtualQNetworkAccessManager* self);
+void* QNetworkAccessManager_virtualbase_metacast(VirtualQNetworkAccessManager* self, const char* param1);
+int QNetworkAccessManager_virtualbase_metacall(VirtualQNetworkAccessManager* self, int param1, int param2, void** param3);
+struct seaqt_array /* of struct seaqt_string */  QNetworkAccessManager_virtualbase_supportedSchemes(const VirtualQNetworkAccessManager* self);
+QNetworkReply* QNetworkAccessManager_virtualbase_createRequest(VirtualQNetworkAccessManager* self, int op, QNetworkRequest* request, QIODevice* outgoingData);
+bool QNetworkAccessManager_virtualbase_event(VirtualQNetworkAccessManager* self, QEvent* event);
+bool QNetworkAccessManager_virtualbase_eventFilter(VirtualQNetworkAccessManager* self, QObject* watched, QEvent* event);
+void QNetworkAccessManager_virtualbase_timerEvent(VirtualQNetworkAccessManager* self, QTimerEvent* event);
+void QNetworkAccessManager_virtualbase_childEvent(VirtualQNetworkAccessManager* self, QChildEvent* event);
+void QNetworkAccessManager_virtualbase_customEvent(VirtualQNetworkAccessManager* self, QEvent* event);
+void QNetworkAccessManager_virtualbase_connectNotify(VirtualQNetworkAccessManager* self, QMetaMethod* signal);
+void QNetworkAccessManager_virtualbase_disconnectNotify(VirtualQNetworkAccessManager* self, QMetaMethod* signal);
+
+struct seaqt_array /* of struct seaqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const VirtualQNetworkAccessManager* self);
+QObject* QNetworkAccessManager_protectedbase_sender(const VirtualQNetworkAccessManager* self);
+int QNetworkAccessManager_protectedbase_senderSignalIndex(const VirtualQNetworkAccessManager* self);
+int QNetworkAccessManager_protectedbase_receivers(const VirtualQNetworkAccessManager* self, const char* signal);
+bool QNetworkAccessManager_protectedbase_isSignalConnected(const VirtualQNetworkAccessManager* self, QMetaMethod* signal);
+
+const QMetaObject* QNetworkAccessManager_staticMetaObject();
+void QNetworkAccessManager_delete(QNetworkAccessManager* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

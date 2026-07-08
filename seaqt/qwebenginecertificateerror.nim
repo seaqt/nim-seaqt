@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginecertificateerror
+export gen_qwebenginecertificateerror
