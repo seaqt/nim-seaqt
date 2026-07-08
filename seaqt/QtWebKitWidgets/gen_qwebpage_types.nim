@@ -9,7 +9,7 @@ proc `=sink`(dest: var QWebPage, source: QWebPage) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QWebPageViewportAttributes* {.inheritable, pure.} = object
+type QWebPageViewportAttributes* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -33,7 +33,7 @@ proc delete*(self: sink QWebPageViewportAttributes) =
   wasMoved(self)
   fcQWebPageViewportAttributes_delete(h)
 
-type QWebPageExtensionOption* {.inheritable, pure.} = object
+type QWebPageExtensionOption* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -53,7 +53,7 @@ proc delete*(self: sink QWebPageExtensionOption) =
   wasMoved(self)
   fcQWebPageExtensionOption_delete(h)
 
-type QWebPageExtensionReturn* {.inheritable, pure.} = object
+type QWebPageExtensionReturn* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

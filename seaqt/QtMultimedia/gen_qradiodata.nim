@@ -182,10 +182,9 @@ proc fcQRadioData_protectedbase_isSignalConnected(self: pointer, signal: pointer
 proc fcQRadioData_new(vtbl: pointer, vdata: csize_t, mediaObject: pointer): ptr cQRadioData {.importc: "QRadioData_new".}
 proc fcQRadioData_new2(vtbl: pointer, vdata: csize_t, mediaObject: pointer, parent: pointer): ptr cQRadioData {.importc: "QRadioData_new2".}
 proc fcQRadioData_staticMetaObject(): pointer {.importc: "QRadioData_staticMetaObject".}
-proc fcQRadioData_delete(self: pointer) {.importc: "QRadioData_delete".}
 
 proc metaObject*(self: gen_qradiodata_types.QRadioData): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQRadioData_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQRadioData_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qradiodata_types.QRadioData, param1: cstring): pointer =
   fcQRadioData_metacast(self.h, param1)
@@ -209,7 +208,7 @@ proc availability*(self: gen_qradiodata_types.QRadioData): cint =
   cint(fcQRadioData_availability(self.h))
 
 proc mediaObject*(self: gen_qradiodata_types.QRadioData): gen_qmediaobject_types.QMediaObject =
-  gen_qmediaobject_types.QMediaObject(h: fcQRadioData_mediaObject(self.h))
+  gen_qmediaobject_types.QMediaObject(h: fcQRadioData_mediaObject(self.h), owned: false)
 
 proc stationId*(self: gen_qradiodata_types.QRadioData): string =
   let v_ms = fcQRadioData_stationId(self.h)
@@ -441,7 +440,8 @@ type QRadioDatachildEventProc* = proc(self: QRadioData, event: gen_qcoreevent_ty
 type QRadioDatacustomEventProc* = proc(self: QRadioData, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QRadioDataconnectNotifyProc* = proc(self: QRadioData, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QRadioDatadisconnectNotifyProc* = proc(self: QRadioData, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QRadioDataVTable* = object
+
+type QRadioDataVTable* {.inheritable, pure.} = object
   vtbl: cQRadioDataVTable
   metaObject*: QRadioDatametaObjectProc
   metacast*: QRadioDatametacastProc
@@ -457,7 +457,7 @@ type QRadioDataVTable* = object
   disconnectNotify*: QRadioDatadisconnectNotifyProc
 
 proc QRadioDatametaObject*(self: gen_qradiodata_types.QRadioData): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQRadioData_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQRadioData_virtualbase_metaObject(self.h), owned: false)
 
 proc QRadioDatametacast*(self: gen_qradiodata_types.QRadioData, param1: cstring): pointer =
   fcQRadioData_virtualbase_metacast(self.h, param1)
@@ -466,7 +466,7 @@ proc QRadioDatametacall*(self: gen_qradiodata_types.QRadioData, param1: cint, pa
   fcQRadioData_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QRadioDatamediaObject*(self: gen_qradiodata_types.QRadioData): gen_qmediaobject_types.QMediaObject =
-  gen_qmediaobject_types.QMediaObject(h: fcQRadioData_virtualbase_mediaObject(self.h))
+  gen_qmediaobject_types.QMediaObject(h: fcQRadioData_virtualbase_mediaObject(self.h), owned: false)
 
 proc QRadioDatasetMediaObject*(self: gen_qradiodata_types.QRadioData, mediaObject: gen_qmediaobject_types.QMediaObject): bool =
   fcQRadioData_virtualbase_setMediaObject(self.h, mediaObject.h)
@@ -497,7 +497,10 @@ proc fcQRadioData_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRadioData_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
@@ -519,58 +522,61 @@ proc fcQRadioData_vtable_callback_mediaObject(self: pointer): pointer {.cdecl.} 
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
   var virtualReturn = vtbl[].mediaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRadioData_vtable_callback_setMediaObject(self: pointer, mediaObject: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
-  let slotval1 = gen_qmediaobject_types.QMediaObject(h: mediaObject)
+  let slotval1 = gen_qmediaobject_types.QMediaObject(h: mediaObject, owned: false)
   var virtualReturn = vtbl[].setMediaObject(self, slotval1)
   virtualReturn
 
 proc fcQRadioData_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQRadioData_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQRadioData_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQRadioData_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQRadioData_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQRadioData_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQRadioData_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self)[])
   let self = QRadioData(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQRadioData* {.inheritable.} = ref object of QRadioData
@@ -604,7 +610,10 @@ method disconnectNotify*(self: VirtualQRadioData, signal: gen_qmetaobject_types.
 proc fcQRadioData_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRadioData_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
@@ -623,55 +632,58 @@ proc fcQRadioData_method_callback_metacall(self: pointer, param1: cint, param2: 
 proc fcQRadioData_method_callback_mediaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
   var virtualReturn = inst.mediaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQRadioData_method_callback_setMediaObject(self: pointer, mediaObject: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
-  let slotval1 = gen_qmediaobject_types.QMediaObject(h: mediaObject)
+  let slotval1 = gen_qmediaobject_types.QMediaObject(h: mediaObject, owned: false)
   var virtualReturn = inst.setMediaObject(slotval1)
   virtualReturn
 
 proc fcQRadioData_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQRadioData_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQRadioData_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQRadioData_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQRadioData_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQRadioData_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQRadioData_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qradiodata_types.QRadioData): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQRadioData_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQRadioData_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qradiodata_types.QRadioData): cint =
   fcQRadioData_protectedbase_senderSignalIndex(self.h)
@@ -714,7 +726,7 @@ proc create*(T: type gen_qradiodata_types.QRadioData,
     vtbl[].vtbl.connectNotify = fcQRadioData_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQRadioData_vtable_callback_disconnectNotify
-  let tmp = gen_qradiodata_types.QRadioData(h: fcQRadioData_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), mediaObject.h))
+  let tmp = gen_qradiodata_types.QRadioData(h: fcQRadioData_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), mediaObject.h), owned: true)
   fcQRadioData_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qradiodata_types.QRadioData,
@@ -749,13 +761,14 @@ proc create*(T: type gen_qradiodata_types.QRadioData,
     vtbl[].vtbl.connectNotify = fcQRadioData_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQRadioData_vtable_callback_disconnectNotify
-  let tmp = gen_qradiodata_types.QRadioData(h: fcQRadioData_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), mediaObject.h, parent.h))
+  let tmp = gen_qradiodata_types.QRadioData(h: fcQRadioData_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), mediaObject.h, parent.h), owned: true)
   fcQRadioData_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQRadioData_mvtbl = cQRadioDataVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQRadioData()[])](self.fcQRadioData_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQRadioData_method_callback_metaObject,
   metacast: fcQRadioData_method_callback_metacast,
@@ -788,5 +801,3 @@ proc create*(T: type gen_qradiodata_types.QRadioData,
 
 proc staticMetaObject*(_: type gen_qradiodata_types.QRadioData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioData_staticMetaObject())
-proc delete*(self: gen_qradiodata_types.QRadioData) =
-  fcQRadioData_delete(self.h)

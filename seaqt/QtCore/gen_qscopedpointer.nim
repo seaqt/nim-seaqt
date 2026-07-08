@@ -40,10 +40,7 @@ export gen_qscopedpointer_types
 type cQScopedPointerPodDeleter*{.exportc: "QScopedPointerPodDeleter", incompleteStruct.} = object
 
 proc fcQScopedPointerPodDeleter_cleanup(pointer: pointer): void {.importc: "QScopedPointerPodDeleter_cleanup".}
-proc fcQScopedPointerPodDeleter_delete(self: pointer) {.importc: "QScopedPointerPodDeleter_delete".}
 
 proc cleanup*(_: type gen_qscopedpointer_types.QScopedPointerPodDeleter, pointer: pointer): void =
   fcQScopedPointerPodDeleter_cleanup(pointer)
 
-proc delete*(self: gen_qscopedpointer_types.QScopedPointerPodDeleter) =
-  fcQScopedPointerPodDeleter_delete(self.h)

@@ -1,4 +1,4 @@
-type QCameraInfo* {.inheritable, pure.} = object
+type QCameraInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QSslError* {.inheritable, pure.} = object
+type QSslError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

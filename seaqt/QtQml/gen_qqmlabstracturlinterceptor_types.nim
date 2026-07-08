@@ -1,4 +1,4 @@
-type QQmlAbstractUrlInterceptor* {.inheritable, pure.} = object
+type QQmlAbstractUrlInterceptor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QFutureInterfaceBase* {.inheritable, pure.} = object
+type QFutureInterfaceBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

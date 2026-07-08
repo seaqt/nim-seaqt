@@ -56,7 +56,6 @@ proc fcQSslCipher_new(): ptr cQSslCipher {.importc: "QSslCipher_new".}
 proc fcQSslCipher_new2(name: struct_seaqt_string): ptr cQSslCipher {.importc: "QSslCipher_new2".}
 proc fcQSslCipher_new3(name: struct_seaqt_string, protocol: cint): ptr cQSslCipher {.importc: "QSslCipher_new3".}
 proc fcQSslCipher_new4(other: pointer): ptr cQSslCipher {.importc: "QSslCipher_new4".}
-proc fcQSslCipher_delete(self: pointer) {.importc: "QSslCipher_delete".}
 
 proc operatorAssign*(self: gen_qsslcipher_types.QSslCipher, other: gen_qsslcipher_types.QSslCipher): void =
   fcQSslCipher_operatorAssign(self.h, other.h)
@@ -113,19 +112,17 @@ proc protocol*(self: gen_qsslcipher_types.QSslCipher): cint =
   cint(fcQSslCipher_protocol(self.h))
 
 proc create*(T: type gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSslCipher =
-  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new())
+  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslcipher_types.QSslCipher,
     name: openArray[char]): gen_qsslcipher_types.QSslCipher =
-  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new2(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new2(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
 proc create*(T: type gen_qsslcipher_types.QSslCipher,
     name: openArray[char], protocol: cint): gen_qsslcipher_types.QSslCipher =
-  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new3(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol)))
+  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new3(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol)), owned: true)
   tmp
 proc create*(T: type gen_qsslcipher_types.QSslCipher,
     other: gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSslCipher =
-  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new4(other.h))
+  let tmp = gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new4(other.h), owned: true)
   tmp
-proc delete*(self: gen_qsslcipher_types.QSslCipher) =
-  fcQSslCipher_delete(self.h)

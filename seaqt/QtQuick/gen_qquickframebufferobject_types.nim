@@ -9,7 +9,7 @@ proc `=sink`(dest: var QQuickFramebufferObject, source: QQuickFramebufferObject)
   dest.h = source.h
   dest.owned = source.owned
 
-type QQuickFramebufferObjectRenderer* {.inheritable, pure.} = object
+type QQuickFramebufferObjectRenderer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

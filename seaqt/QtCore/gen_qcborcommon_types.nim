@@ -1,4 +1,4 @@
-type QCborError* {.inheritable, pure.} = object
+type QCborError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

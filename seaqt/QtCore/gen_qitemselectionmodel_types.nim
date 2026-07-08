@@ -1,4 +1,4 @@
-type QItemSelectionRange* {.inheritable, pure.} = object
+type QItemSelectionRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -33,7 +33,7 @@ proc `=sink`(dest: var QItemSelectionModel, source: QItemSelectionModel) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QItemSelection* {.inheritable, pure.} = object
+type QItemSelection* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

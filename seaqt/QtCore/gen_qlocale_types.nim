@@ -1,4 +1,4 @@
-type QLocale* {.inheritable, pure.} = object
+type QLocale* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

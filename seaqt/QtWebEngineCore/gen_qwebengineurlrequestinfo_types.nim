@@ -1,4 +1,4 @@
-type QWebEngineUrlRequestInfo* {.inheritable, pure.} = object
+type QWebEngineUrlRequestInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

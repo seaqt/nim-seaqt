@@ -1,4 +1,4 @@
-type QTextBoundaryFinder* {.inheritable, pure.} = object
+type QTextBoundaryFinder* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

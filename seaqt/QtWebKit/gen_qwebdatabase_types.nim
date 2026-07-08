@@ -1,4 +1,4 @@
-type QWebDatabase* {.inheritable, pure.} = object
+type QWebDatabase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

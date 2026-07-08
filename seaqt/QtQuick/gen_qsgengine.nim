@@ -126,10 +126,9 @@ proc fcQSGEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer)
 proc fcQSGEngine_new(vtbl: pointer, vdata: csize_t): ptr cQSGEngine {.importc: "QSGEngine_new".}
 proc fcQSGEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSGEngine {.importc: "QSGEngine_new2".}
 proc fcQSGEngine_staticMetaObject(): pointer {.importc: "QSGEngine_staticMetaObject".}
-proc fcQSGEngine_delete(self: pointer) {.importc: "QSGEngine_delete".}
 
 proc metaObject*(self: gen_qsgengine_types.QSGEngine): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSGEngine_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSGEngine_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsgengine_types.QSGEngine, param1: cstring): pointer =
   fcQSGEngine_metacast(self.h, param1)
@@ -153,25 +152,25 @@ proc invalidate*(self: gen_qsgengine_types.QSGEngine): void =
   fcQSGEngine_invalidate(self.h)
 
 proc createRenderer*(self: gen_qsgengine_types.QSGEngine): gen_qsgabstractrenderer_types.QSGAbstractRenderer =
-  gen_qsgabstractrenderer_types.QSGAbstractRenderer(h: fcQSGEngine_createRenderer(self.h))
+  gen_qsgabstractrenderer_types.QSGAbstractRenderer(h: fcQSGEngine_createRenderer(self.h), owned: false)
 
 proc createTextureFromImage*(self: gen_qsgengine_types.QSGEngine, image: gen_qimage_types.QImage): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromImage(self.h, image.h))
+  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromImage(self.h, image.h), owned: false)
 
 proc createTextureFromId*(self: gen_qsgengine_types.QSGEngine, id: cuint, size: gen_qsize_types.QSize): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromId(self.h, id, size.h))
+  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromId(self.h, id, size.h), owned: false)
 
 proc rendererInterface*(self: gen_qsgengine_types.QSGEngine): gen_qsgrendererinterface_types.QSGRendererInterface =
-  gen_qsgrendererinterface_types.QSGRendererInterface(h: fcQSGEngine_rendererInterface(self.h))
+  gen_qsgrendererinterface_types.QSGRendererInterface(h: fcQSGEngine_rendererInterface(self.h), owned: false)
 
 proc createRectangleNode*(self: gen_qsgengine_types.QSGEngine): gen_qsgrectanglenode_types.QSGRectangleNode =
-  gen_qsgrectanglenode_types.QSGRectangleNode(h: fcQSGEngine_createRectangleNode(self.h))
+  gen_qsgrectanglenode_types.QSGRectangleNode(h: fcQSGEngine_createRectangleNode(self.h), owned: false)
 
 proc createImageNode*(self: gen_qsgengine_types.QSGEngine): gen_qsgimagenode_types.QSGImageNode =
-  gen_qsgimagenode_types.QSGImageNode(h: fcQSGEngine_createImageNode(self.h))
+  gen_qsgimagenode_types.QSGImageNode(h: fcQSGEngine_createImageNode(self.h), owned: false)
 
 proc createNinePatchNode*(self: gen_qsgengine_types.QSGEngine): gen_qsgninepatchnode_types.QSGNinePatchNode =
-  gen_qsgninepatchnode_types.QSGNinePatchNode(h: fcQSGEngine_createNinePatchNode(self.h))
+  gen_qsgninepatchnode_types.QSGNinePatchNode(h: fcQSGEngine_createNinePatchNode(self.h), owned: false)
 
 proc tr*(_: type gen_qsgengine_types.QSGEngine, s: cstring, c: cstring): string =
   let v_ms = fcQSGEngine_tr2(s, c)
@@ -198,10 +197,10 @@ proc trUtf8*(_: type gen_qsgengine_types.QSGEngine, s: cstring, c: cstring, n: c
   vx_ret
 
 proc createTextureFromImage*(self: gen_qsgengine_types.QSGEngine, image: gen_qimage_types.QImage, options: cint): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromImage2(self.h, image.h, cint(options)))
+  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromImage2(self.h, image.h, cint(options)), owned: false)
 
 proc createTextureFromId*(self: gen_qsgengine_types.QSGEngine, id: cuint, size: gen_qsize_types.QSize, options: cint): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromId2(self.h, id, size.h, cint(options)))
+  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromId2(self.h, id, size.h, cint(options)), owned: false)
 
 type QSGEnginemetaObjectProc* = proc(self: QSGEngine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSGEnginemetacastProc* = proc(self: QSGEngine, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -213,7 +212,8 @@ type QSGEnginechildEventProc* = proc(self: QSGEngine, event: gen_qcoreevent_type
 type QSGEnginecustomEventProc* = proc(self: QSGEngine, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSGEngineconnectNotifyProc* = proc(self: QSGEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSGEnginedisconnectNotifyProc* = proc(self: QSGEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSGEngineVTable* = object
+
+type QSGEngineVTable* {.inheritable, pure.} = object
   vtbl: cQSGEngineVTable
   metaObject*: QSGEnginemetaObjectProc
   metacast*: QSGEnginemetacastProc
@@ -227,7 +227,7 @@ type QSGEngineVTable* = object
   disconnectNotify*: QSGEnginedisconnectNotifyProc
 
 proc QSGEnginemetaObject*(self: gen_qsgengine_types.QSGEngine): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSGEngine_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSGEngine_virtualbase_metaObject(self.h), owned: false)
 
 proc QSGEnginemetacast*(self: gen_qsgengine_types.QSGEngine, param1: cstring): pointer =
   fcQSGEngine_virtualbase_metacast(self.h, param1)
@@ -261,7 +261,10 @@ proc fcQSGEngine_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
   let self = QSGEngine(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGEngine_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
@@ -282,46 +285,46 @@ proc fcQSGEngine_vtable_callback_metacall(self: pointer, param1: cint, param2: c
 proc fcQSGEngine_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
   let self = QSGEngine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQSGEngine_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
   let self = QSGEngine(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQSGEngine_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
   let self = QSGEngine(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQSGEngine_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
   let self = QSGEngine(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQSGEngine_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
   let self = QSGEngine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQSGEngine_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
   let self = QSGEngine(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQSGEngine_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGEngineVTable](fcQSGEngine_vdata(self)[])
   let self = QSGEngine(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSGEngine* {.inheritable.} = ref object of QSGEngine
@@ -351,7 +354,10 @@ method disconnectNotify*(self: VirtualQSGEngine, signal: gen_qmetaobject_types.Q
 proc fcQSGEngine_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGEngine_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
@@ -369,45 +375,45 @@ proc fcQSGEngine_method_callback_metacall(self: pointer, param1: cint, param2: c
 
 proc fcQSGEngine_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQSGEngine_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQSGEngine_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQSGEngine_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQSGEngine_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQSGEngine_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQSGEngine_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSGEngine](fcQSGEngine_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qsgengine_types.QSGEngine): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSGEngine_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSGEngine_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsgengine_types.QSGEngine): cint =
   fcQSGEngine_protectedbase_senderSignalIndex(self.h)
@@ -445,7 +451,7 @@ proc create*(T: type gen_qsgengine_types.QSGEngine,
     vtbl[].vtbl.connectNotify = fcQSGEngine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSGEngine_vtable_callback_disconnectNotify
-  let tmp = gen_qsgengine_types.QSGEngine(h: fcQSGEngine_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgengine_types.QSGEngine(h: fcQSGEngine_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGEngine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsgengine_types.QSGEngine,
@@ -476,13 +482,14 @@ proc create*(T: type gen_qsgengine_types.QSGEngine,
     vtbl[].vtbl.connectNotify = fcQSGEngine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSGEngine_vtable_callback_disconnectNotify
-  let tmp = gen_qsgengine_types.QSGEngine(h: fcQSGEngine_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsgengine_types.QSGEngine(h: fcQSGEngine_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSGEngine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGEngine_mvtbl = cQSGEngineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGEngine()[])](self.fcQSGEngine_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSGEngine_method_callback_metaObject,
   metacast: fcQSGEngine_method_callback_metacast,
@@ -512,5 +519,3 @@ proc create*(T: type gen_qsgengine_types.QSGEngine,
 
 proc staticMetaObject*(_: type gen_qsgengine_types.QSGEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGEngine_staticMetaObject())
-proc delete*(self: gen_qsgengine_types.QSGEngine) =
-  fcQSGEngine_delete(self.h)

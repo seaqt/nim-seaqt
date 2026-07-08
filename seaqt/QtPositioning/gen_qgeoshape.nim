@@ -69,7 +69,6 @@ proc fcQGeoShape_toString(self: pointer): struct_seaqt_string {.importc: "QGeoSh
 proc fcQGeoShape_new(): ptr cQGeoShape {.importc: "QGeoShape_new".}
 proc fcQGeoShape_new2(other: pointer): ptr cQGeoShape {.importc: "QGeoShape_new2".}
 proc fcQGeoShape_staticMetaObject(): pointer {.importc: "QGeoShape_staticMetaObject".}
-proc fcQGeoShape_delete(self: pointer) {.importc: "QGeoShape_delete".}
 
 proc typeX*(self: gen_qgeoshape_types.QGeoShape): cint =
   cint(fcQGeoShape_typeX(self.h))
@@ -84,10 +83,10 @@ proc contains*(self: gen_qgeoshape_types.QGeoShape, coordinate: gen_qgeocoordina
   fcQGeoShape_contains(self.h, coordinate.h)
 
 proc boundingGeoRectangle*(self: gen_qgeoshape_types.QGeoShape): gen_qgeorectangle_types.QGeoRectangle =
-  gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoShape_boundingGeoRectangle(self.h))
+  gen_qgeorectangle_types.QGeoRectangle(h: fcQGeoShape_boundingGeoRectangle(self.h), owned: true)
 
 proc center*(self: gen_qgeoshape_types.QGeoShape): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoShape_center(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoShape_center(self.h), owned: true)
 
 proc extendShape*(self: gen_qgeoshape_types.QGeoShape, coordinate: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoShape_extendShape(self.h, coordinate.h)
@@ -108,13 +107,11 @@ proc toString*(self: gen_qgeoshape_types.QGeoShape): string =
   vx_ret
 
 proc create*(T: type gen_qgeoshape_types.QGeoShape): gen_qgeoshape_types.QGeoShape =
-  let tmp = gen_qgeoshape_types.QGeoShape(h: fcQGeoShape_new())
+  let tmp = gen_qgeoshape_types.QGeoShape(h: fcQGeoShape_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeoshape_types.QGeoShape,
     other: gen_qgeoshape_types.QGeoShape): gen_qgeoshape_types.QGeoShape =
-  let tmp = gen_qgeoshape_types.QGeoShape(h: fcQGeoShape_new2(other.h))
+  let tmp = gen_qgeoshape_types.QGeoShape(h: fcQGeoShape_new2(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qgeoshape_types.QGeoShape): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoShape_staticMetaObject())
-proc delete*(self: gen_qgeoshape_types.QGeoShape) =
-  fcQGeoShape_delete(self.h)

@@ -275,10 +275,9 @@ proc fcQCalendarWidget_protectedbase_isSignalConnected(self: pointer, signal: po
 proc fcQCalendarWidget_new(vtbl: pointer, vdata: csize_t): ptr cQCalendarWidget {.importc: "QCalendarWidget_new".}
 proc fcQCalendarWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCalendarWidget {.importc: "QCalendarWidget_new2".}
 proc fcQCalendarWidget_staticMetaObject(): pointer {.importc: "QCalendarWidget_staticMetaObject".}
-proc fcQCalendarWidget_delete(self: pointer) {.importc: "QCalendarWidget_delete".}
 
 proc metaObject*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCalendarWidget_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCalendarWidget_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcalendarwidget_types.QCalendarWidget, param1: cstring): pointer =
   fcQCalendarWidget_metacast(self.h, param1)
@@ -299,13 +298,13 @@ proc trUtf8*(_: type gen_qcalendarwidget_types.QCalendarWidget, s: cstring): str
   vx_ret
 
 proc sizeHint*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCalendarWidget_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCalendarWidget_sizeHint(self.h), owned: true)
 
 proc minimumSizeHint*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCalendarWidget_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCalendarWidget_minimumSizeHint(self.h), owned: true)
 
 proc selectedDate*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQCalendarWidget_selectedDate(self.h))
+  gen_qdatetime_types.QDate(h: fcQCalendarWidget_selectedDate(self.h), owned: true)
 
 proc yearShown*(self: gen_qcalendarwidget_types.QCalendarWidget): cint =
   fcQCalendarWidget_yearShown(self.h)
@@ -314,13 +313,13 @@ proc monthShown*(self: gen_qcalendarwidget_types.QCalendarWidget): cint =
   fcQCalendarWidget_monthShown(self.h)
 
 proc minimumDate*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQCalendarWidget_minimumDate(self.h))
+  gen_qdatetime_types.QDate(h: fcQCalendarWidget_minimumDate(self.h), owned: true)
 
 proc setMinimumDate*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate): void =
   fcQCalendarWidget_setMinimumDate(self.h, date.h)
 
 proc maximumDate*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQCalendarWidget_maximumDate(self.h))
+  gen_qdatetime_types.QDate(h: fcQCalendarWidget_maximumDate(self.h), owned: true)
 
 proc setMaximumDate*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate): void =
   fcQCalendarWidget_setMaximumDate(self.h, date.h)
@@ -338,7 +337,7 @@ proc isGridVisible*(self: gen_qcalendarwidget_types.QCalendarWidget): bool =
   fcQCalendarWidget_isGridVisible(self.h)
 
 proc calendar*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qcalendar_types.QCalendar =
-  gen_qcalendar_types.QCalendar(h: fcQCalendarWidget_calendar(self.h))
+  gen_qcalendar_types.QCalendar(h: fcQCalendarWidget_calendar(self.h), owned: true)
 
 proc setCalendar*(self: gen_qcalendarwidget_types.QCalendarWidget, calendar: gen_qcalendar_types.QCalendar): void =
   fcQCalendarWidget_setCalendar(self.h, calendar.h)
@@ -362,13 +361,13 @@ proc setVerticalHeaderFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, f
   fcQCalendarWidget_setVerticalHeaderFormat(self.h, cint(format))
 
 proc headerTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qtextformat_types.QTextCharFormat =
-  gen_qtextformat_types.QTextCharFormat(h: fcQCalendarWidget_headerTextFormat(self.h))
+  gen_qtextformat_types.QTextCharFormat(h: fcQCalendarWidget_headerTextFormat(self.h), owned: true)
 
 proc setHeaderTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, format: gen_qtextformat_types.QTextCharFormat): void =
   fcQCalendarWidget_setHeaderTextFormat(self.h, format.h)
 
 proc weekdayTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, dayOfWeek: cint): gen_qtextformat_types.QTextCharFormat =
-  gen_qtextformat_types.QTextCharFormat(h: fcQCalendarWidget_weekdayTextFormat(self.h, cint(dayOfWeek)))
+  gen_qtextformat_types.QTextCharFormat(h: fcQCalendarWidget_weekdayTextFormat(self.h, cint(dayOfWeek)), owned: true)
 
 proc setWeekdayTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, dayOfWeek: cint, format: gen_qtextformat_types.QTextCharFormat): void =
   fcQCalendarWidget_setWeekdayTextFormat(self.h, cint(dayOfWeek), format.h)
@@ -379,9 +378,9 @@ proc dateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget): Table[gen
   var v_Keys = cast[ptr UncheckedArray[pointer]](v_mm.keys)
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
   for i in 0..<v_mm.len:
-    var v_entry_Key = gen_qdatetime_types.QDate(h: v_Keys[i])
+    var v_entry_Key = gen_qdatetime_types.QDate(h: v_Keys[i], owned: true)
 
-    var v_entry_Value = gen_qtextformat_types.QTextCharFormat(h: v_Values[i])
+    var v_entry_Value = gen_qtextformat_types.QTextCharFormat(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -389,7 +388,7 @@ proc dateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget): Table[gen
   vx_ret
 
 proc dateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate): gen_qtextformat_types.QTextCharFormat =
-  gen_qtextformat_types.QTextCharFormat(h: fcQCalendarWidget_dateTextFormatWithDate(self.h, date.h))
+  gen_qtextformat_types.QTextCharFormat(h: fcQCalendarWidget_dateTextFormatWithDate(self.h, date.h), owned: true)
 
 proc setDateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate, format: gen_qtextformat_types.QTextCharFormat): void =
   fcQCalendarWidget_setDateTextFormat(self.h, date.h, format.h)
@@ -463,7 +462,7 @@ proc clicked*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdateti
 type QCalendarWidgetclickedSlot* = proc(date: gen_qdatetime_types.QDate)
 proc fcQCalendarWidget_slot_callback_clicked(slot: int, date: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCalendarWidgetclickedSlot](cast[pointer](slot))
-  let slotval1 = gen_qdatetime_types.QDate(h: date)
+  let slotval1 = gen_qdatetime_types.QDate(h: date, owned: false)
 
   nimfunc[](slotval1)
 
@@ -483,7 +482,7 @@ proc activated*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdate
 type QCalendarWidgetactivatedSlot* = proc(date: gen_qdatetime_types.QDate)
 proc fcQCalendarWidget_slot_callback_activated(slot: int, date: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCalendarWidgetactivatedSlot](cast[pointer](slot))
-  let slotval1 = gen_qdatetime_types.QDate(h: date)
+  let slotval1 = gen_qdatetime_types.QDate(h: date, owned: false)
 
   nimfunc[](slotval1)
 
@@ -594,7 +593,8 @@ type QCalendarWidgetchildEventProc* = proc(self: QCalendarWidget, event: gen_qco
 type QCalendarWidgetcustomEventProc* = proc(self: QCalendarWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QCalendarWidgetconnectNotifyProc* = proc(self: QCalendarWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QCalendarWidgetdisconnectNotifyProc* = proc(self: QCalendarWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QCalendarWidgetVTable* = object
+
+type QCalendarWidgetVTable* {.inheritable, pure.} = object
   vtbl: cQCalendarWidgetVTable
   metaObject*: QCalendarWidgetmetaObjectProc
   metacast*: QCalendarWidgetmetacastProc
@@ -649,7 +649,7 @@ type QCalendarWidgetVTable* = object
   disconnectNotify*: QCalendarWidgetdisconnectNotifyProc
 
 proc QCalendarWidgetmetaObject*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCalendarWidget_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCalendarWidget_virtualbase_metaObject(self.h), owned: false)
 
 proc QCalendarWidgetmetacast*(self: gen_qcalendarwidget_types.QCalendarWidget, param1: cstring): pointer =
   fcQCalendarWidget_virtualbase_metacast(self.h, param1)
@@ -658,10 +658,10 @@ proc QCalendarWidgetmetacall*(self: gen_qcalendarwidget_types.QCalendarWidget, p
   fcQCalendarWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QCalendarWidgetsizeHint*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCalendarWidget_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCalendarWidget_virtualbase_sizeHint(self.h), owned: true)
 
 proc QCalendarWidgetminimumSizeHint*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCalendarWidget_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCalendarWidget_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QCalendarWidgetevent*(self: gen_qcalendarwidget_types.QCalendarWidget, event: gen_qcoreevent_types.QEvent): bool =
   fcQCalendarWidget_virtualbase_event(self.h, event.h)
@@ -694,7 +694,7 @@ proc QCalendarWidgethasHeightForWidth*(self: gen_qcalendarwidget_types.QCalendar
   fcQCalendarWidget_virtualbase_hasHeightForWidth(self.h)
 
 proc QCalendarWidgetpaintEngine*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQCalendarWidget_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQCalendarWidget_virtualbase_paintEngine(self.h), owned: false)
 
 proc QCalendarWidgetmouseReleaseEvent*(self: gen_qcalendarwidget_types.QCalendarWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQCalendarWidget_virtualbase_mouseReleaseEvent(self.h, event.h)
@@ -772,16 +772,16 @@ proc QCalendarWidgetinitPainter*(self: gen_qcalendarwidget_types.QCalendarWidget
   fcQCalendarWidget_virtualbase_initPainter(self.h, painter.h)
 
 proc QCalendarWidgetredirected*(self: gen_qcalendarwidget_types.QCalendarWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQCalendarWidget_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQCalendarWidget_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QCalendarWidgetsharedPainter*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQCalendarWidget_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQCalendarWidget_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QCalendarWidgetinputMethodEvent*(self: gen_qcalendarwidget_types.QCalendarWidget, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQCalendarWidget_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc QCalendarWidgetinputMethodQuery*(self: gen_qcalendarwidget_types.QCalendarWidget, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQCalendarWidget_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQCalendarWidget_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QCalendarWidgetfocusNextPrevChild*(self: gen_qcalendarwidget_types.QCalendarWidget, next: bool): bool =
   fcQCalendarWidget_virtualbase_focusNextPrevChild(self.h, next)
@@ -806,7 +806,10 @@ proc fcQCalendarWidget_vtable_callback_metaObject(self: pointer): pointer {.cdec
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
@@ -828,53 +831,59 @@ proc fcQCalendarWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQCalendarWidget_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQCalendarWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_paintCell(self: pointer, painter: pointer, rect: pointer, date: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
-  let slotval3 = gen_qdatetime_types.QDate(h: date)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval3 = gen_qdatetime_types.QDate(h: date, owned: false)
   vtbl[].paintCell(self, slotval1, slotval2, slotval3)
 
 proc fcQCalendarWidget_vtable_callback_devType(self: pointer): cint {.cdecl.} =
@@ -906,132 +915,135 @@ proc fcQCalendarWidget_vtable_callback_paintEngine(self: pointer): pointer {.cde
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1049,7 +1061,7 @@ proc fcQCalendarWidget_vtable_callback_nativeEvent(self: pointer, eventType: str
 proc fcQCalendarWidget_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
@@ -1062,26 +1074,32 @@ proc fcQCalendarWidget_vtable_callback_metric(self: pointer, param1: cint): cint
 proc fcQCalendarWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
@@ -1089,7 +1107,10 @@ proc fcQCalendarWidget_vtable_callback_inputMethodQuery(self: pointer, param1: c
   let self = QCalendarWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
@@ -1101,31 +1122,31 @@ proc fcQCalendarWidget_vtable_callback_focusNextPrevChild(self: pointer, next: b
 proc fcQCalendarWidget_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQCalendarWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCalendarWidgetVTable](fcQCalendarWidget_vdata(self)[])
   let self = QCalendarWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQCalendarWidget* {.inheritable.} = ref object of QCalendarWidget
@@ -1237,7 +1258,10 @@ method disconnectNotify*(self: VirtualQCalendarWidget, signal: gen_qmetaobject_t
 proc fcQCalendarWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
@@ -1256,46 +1280,52 @@ proc fcQCalendarWidget_method_callback_metacall(self: pointer, param1: cint, par
 proc fcQCalendarWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQCalendarWidget_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQCalendarWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_paintCell(self: pointer, painter: pointer, rect: pointer, date: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
-  let slotval3 = gen_qdatetime_types.QDate(h: date)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval3 = gen_qdatetime_types.QDate(h: date, owned: false)
   inst.paintCell(slotval1, slotval2, slotval3)
 
 proc fcQCalendarWidget_method_callback_devType(self: pointer): cint {.cdecl.} =
@@ -1322,111 +1352,114 @@ proc fcQCalendarWidget_method_callback_hasHeightForWidth(self: pointer): bool {.
 proc fcQCalendarWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1442,7 +1475,7 @@ proc fcQCalendarWidget_method_callback_nativeEvent(self: pointer, eventType: str
 
 proc fcQCalendarWidget_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
@@ -1453,30 +1486,39 @@ proc fcQCalendarWidget_method_callback_metric(self: pointer, param1: cint): cint
 
 proc fcQCalendarWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQCalendarWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCalendarWidget_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
@@ -1486,27 +1528,27 @@ proc fcQCalendarWidget_method_callback_focusNextPrevChild(self: pointer, next: b
 
 proc fcQCalendarWidget_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQCalendarWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQCalendarWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCalendarWidget](fcQCalendarWidget_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1532,7 +1574,7 @@ proc focusPreviousChild*(self: gen_qcalendarwidget_types.QCalendarWidget): bool 
   fcQCalendarWidget_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qcalendarwidget_types.QCalendarWidget): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCalendarWidget_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCalendarWidget_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcalendarwidget_types.QCalendarWidget): cint =
   fcQCalendarWidget_protectedbase_senderSignalIndex(self.h)
@@ -1652,7 +1694,7 @@ proc create*(T: type gen_qcalendarwidget_types.QCalendarWidget,
     vtbl[].vtbl.connectNotify = fcQCalendarWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCalendarWidget_vtable_callback_disconnectNotify
-  let tmp = gen_qcalendarwidget_types.QCalendarWidget(h: fcQCalendarWidget_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qcalendarwidget_types.QCalendarWidget(h: fcQCalendarWidget_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQCalendarWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qcalendarwidget_types.QCalendarWidget,
@@ -1765,13 +1807,14 @@ proc create*(T: type gen_qcalendarwidget_types.QCalendarWidget,
     vtbl[].vtbl.connectNotify = fcQCalendarWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCalendarWidget_vtable_callback_disconnectNotify
-  let tmp = gen_qcalendarwidget_types.QCalendarWidget(h: fcQCalendarWidget_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qcalendarwidget_types.QCalendarWidget(h: fcQCalendarWidget_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQCalendarWidget_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQCalendarWidget_mvtbl = cQCalendarWidgetVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQCalendarWidget()[])](self.fcQCalendarWidget_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQCalendarWidget_method_callback_metaObject,
   metacast: fcQCalendarWidget_method_callback_metacast,
@@ -1842,5 +1885,3 @@ proc create*(T: type gen_qcalendarwidget_types.QCalendarWidget,
 
 proc staticMetaObject*(_: type gen_qcalendarwidget_types.QCalendarWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCalendarWidget_staticMetaObject())
-proc delete*(self: gen_qcalendarwidget_types.QCalendarWidget) =
-  fcQCalendarWidget_delete(self.h)

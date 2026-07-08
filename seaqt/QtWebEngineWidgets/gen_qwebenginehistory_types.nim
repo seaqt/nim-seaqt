@@ -1,4 +1,4 @@
-type QWebEngineHistoryItem* {.inheritable, pure.} = object
+type QWebEngineHistoryItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QWebEngineHistoryItem) =
   wasMoved(self)
   fcQWebEngineHistoryItem_delete(h)
 
-type QWebEngineHistory* {.inheritable, pure.} = object
+type QWebEngineHistory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

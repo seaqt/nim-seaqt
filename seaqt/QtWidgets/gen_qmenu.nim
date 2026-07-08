@@ -259,10 +259,9 @@ proc fcQMenu_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): pt
 proc fcQMenu_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMenu {.importc: "QMenu_new3".}
 proc fcQMenu_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQMenu {.importc: "QMenu_new4".}
 proc fcQMenu_staticMetaObject(): pointer {.importc: "QMenu_staticMetaObject".}
-proc fcQMenu_delete(self: pointer) {.importc: "QMenu_delete".}
 
 proc metaObject*(self: gen_qmenu_types.QMenu): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMenu_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMenu_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmenu_types.QMenu, param1: cstring): pointer =
   fcQMenu_metacast(self.h, param1)
@@ -283,40 +282,40 @@ proc trUtf8*(_: type gen_qmenu_types.QMenu, s: cstring): string =
   vx_ret
 
 proc addAction*(self: gen_qmenu_types.QMenu, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addAction(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qaction_types.QAction(h: fcQMenu_addAction(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addAction*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addAction2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qaction_types.QAction(h: fcQMenu_addAction2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addMenu*(self: gen_qmenu_types.QMenu, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addMenu(self.h, menu.h))
+  gen_qaction_types.QAction(h: fcQMenu_addMenu(self.h, menu.h), owned: false)
 
 proc addMenu*(self: gen_qmenu_types.QMenu, title: openArray[char]): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQMenu_addMenuWithTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))))
+  gen_qmenu_types.QMenu(h: fcQMenu_addMenuWithTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addMenu*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, title: openArray[char]): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQMenu_addMenu2(self.h, icon.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))))
+  gen_qmenu_types.QMenu(h: fcQMenu_addMenu2(self.h, icon.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc addSeparator*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addSeparator(self.h))
+  gen_qaction_types.QAction(h: fcQMenu_addSeparator(self.h), owned: false)
 
 proc addSection*(self: gen_qmenu_types.QMenu, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addSection(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qaction_types.QAction(h: fcQMenu_addSection(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addSection*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_addSection2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qaction_types.QAction(h: fcQMenu_addSection2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc insertMenu*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, menu: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_insertMenu(self.h, before.h, menu.h))
+  gen_qaction_types.QAction(h: fcQMenu_insertMenu(self.h, before.h, menu.h), owned: false)
 
 proc insertSeparator*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_insertSeparator(self.h, before.h))
+  gen_qaction_types.QAction(h: fcQMenu_insertSeparator(self.h, before.h), owned: false)
 
 proc insertSection*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_insertSection(self.h, before.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qaction_types.QAction(h: fcQMenu_insertSection(self.h, before.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc insertSection*(self: gen_qmenu_types.QMenu, before: gen_qaction_types.QAction, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_insertSection2(self.h, before.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qaction_types.QAction(h: fcQMenu_insertSection2(self.h, before.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc isEmpty*(self: gen_qmenu_types.QMenu): bool =
   fcQMenu_isEmpty(self.h)
@@ -346,41 +345,41 @@ proc setDefaultAction*(self: gen_qmenu_types.QMenu, defaultAction: gen_qaction_t
   fcQMenu_setDefaultAction(self.h, defaultAction.h)
 
 proc defaultAction*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_defaultAction(self.h))
+  gen_qaction_types.QAction(h: fcQMenu_defaultAction(self.h), owned: false)
 
 proc setActiveAction*(self: gen_qmenu_types.QMenu, act: gen_qaction_types.QAction): void =
   fcQMenu_setActiveAction(self.h, act.h)
 
 proc activeAction*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_activeAction(self.h))
+  gen_qaction_types.QAction(h: fcQMenu_activeAction(self.h), owned: false)
 
 proc popup*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint): void =
   fcQMenu_popup(self.h, pos.h)
 
 proc exec*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_exec(self.h))
+  gen_qaction_types.QAction(h: fcQMenu_exec(self.h), owned: false)
 
 proc exec*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_execWithPos(self.h, pos.h))
+  gen_qaction_types.QAction(h: fcQMenu_execWithPos(self.h, pos.h), owned: false)
 
 proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
-  gen_qaction_types.QAction(h: fcQMenu_exec2(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h))
+  gen_qaction_types.QAction(h: fcQMenu_exec2(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h), owned: false)
 
 proc sizeHint*(self: gen_qmenu_types.QMenu): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMenu_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMenu_sizeHint(self.h), owned: true)
 
 proc actionGeometry*(self: gen_qmenu_types.QMenu, param1: gen_qaction_types.QAction): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQMenu_actionGeometry(self.h, param1.h))
+  gen_qrect_types.QRect(h: fcQMenu_actionGeometry(self.h, param1.h), owned: true)
 
 proc actionAt*(self: gen_qmenu_types.QMenu, param1: gen_qpoint_types.QPoint): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_actionAt(self.h, param1.h))
+  gen_qaction_types.QAction(h: fcQMenu_actionAt(self.h, param1.h), owned: false)
 
 proc menuAction*(self: gen_qmenu_types.QMenu): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_menuAction(self.h))
+  gen_qaction_types.QAction(h: fcQMenu_menuAction(self.h), owned: false)
 
 proc title*(self: gen_qmenu_types.QMenu): string =
   let v_ms = fcQMenu_title(self.h)
@@ -392,7 +391,7 @@ proc setTitle*(self: gen_qmenu_types.QMenu, title: openArray[char]): void =
   fcQMenu_setTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))))
 
 proc icon*(self: gen_qmenu_types.QMenu): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQMenu_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQMenu_icon(self.h), owned: true)
 
 proc setIcon*(self: gen_qmenu_types.QMenu, icon: gen_qicon_types.QIcon): void =
   fcQMenu_setIcon(self.h, icon.h)
@@ -454,7 +453,7 @@ proc triggered*(self: gen_qmenu_types.QMenu, action: gen_qaction_types.QAction):
 type QMenutriggeredSlot* = proc(action: gen_qaction_types.QAction)
 proc fcQMenu_slot_callback_triggered(slot: int, action: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMenutriggeredSlot](cast[pointer](slot))
-  let slotval1 = gen_qaction_types.QAction(h: action)
+  let slotval1 = gen_qaction_types.QAction(h: action, owned: false)
 
   nimfunc[](slotval1)
 
@@ -474,7 +473,7 @@ proc hovered*(self: gen_qmenu_types.QMenu, action: gen_qaction_types.QAction): v
 type QMenuhoveredSlot* = proc(action: gen_qaction_types.QAction)
 proc fcQMenu_slot_callback_hovered(slot: int, action: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMenuhoveredSlot](cast[pointer](slot))
-  let slotval1 = gen_qaction_types.QAction(h: action)
+  let slotval1 = gen_qaction_types.QAction(h: action, owned: false)
 
   nimfunc[](slotval1)
 
@@ -516,21 +515,21 @@ proc popup*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint, at: gen_q
   fcQMenu_popup2(self.h, pos.h, at.h)
 
 proc exec*(self: gen_qmenu_types.QMenu, pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQMenu_exec3(self.h, pos.h, at.h))
+  gen_qaction_types.QAction(h: fcQMenu_exec3(self.h, pos.h, at.h), owned: false)
 
 proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
-  gen_qaction_types.QAction(h: fcQMenu_exec4(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h))
+  gen_qaction_types.QAction(h: fcQMenu_exec4(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h), owned: false)
 
 proc exec*(_: type gen_qmenu_types.QMenu, actions: openArray[gen_qaction_types.QAction], pos: gen_qpoint_types.QPoint, at: gen_qaction_types.QAction, parent: gen_qwidget_types.QWidget): gen_qaction_types.QAction =
   var actions_CArray = newSeq[pointer](len(actions))
   for i in 0..<len(actions):
     actions_CArray[i] = actions[i].h
 
-  gen_qaction_types.QAction(h: fcQMenu_exec5(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h, parent.h))
+  gen_qaction_types.QAction(h: fcQMenu_exec5(struct_seaqt_array(len: csize_t(len(actions)), data: if len(actions) == 0: nil else: addr(actions_CArray[0])), pos.h, at.h, parent.h), owned: false)
 
 type QMenumetaObjectProc* = proc(self: QMenu): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMenumetacastProc* = proc(self: QMenu, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -582,7 +581,8 @@ type QMenuchildEventProc* = proc(self: QMenu, event: gen_qcoreevent_types.QChild
 type QMenucustomEventProc* = proc(self: QMenu, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QMenuconnectNotifyProc* = proc(self: QMenu, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QMenudisconnectNotifyProc* = proc(self: QMenu, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QMenuVTable* = object
+
+type QMenuVTable* {.inheritable, pure.} = object
   vtbl: cQMenuVTable
   metaObject*: QMenumetaObjectProc
   metacast*: QMenumetacastProc
@@ -636,7 +636,7 @@ type QMenuVTable* = object
   disconnectNotify*: QMenudisconnectNotifyProc
 
 proc QMenumetaObject*(self: gen_qmenu_types.QMenu): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMenu_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMenu_virtualbase_metaObject(self.h), owned: false)
 
 proc QMenumetacast*(self: gen_qmenu_types.QMenu, param1: cstring): pointer =
   fcQMenu_virtualbase_metacast(self.h, param1)
@@ -645,7 +645,7 @@ proc QMenumetacall*(self: gen_qmenu_types.QMenu, param1: cint, param2: cint, par
   fcQMenu_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QMenusizeHint*(self: gen_qmenu_types.QMenu): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMenu_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMenu_virtualbase_sizeHint(self.h), owned: true)
 
 proc QMenuchangeEvent*(self: gen_qmenu_types.QMenu, param1: gen_qcoreevent_types.QEvent): void =
   fcQMenu_virtualbase_changeEvent(self.h, param1.h)
@@ -696,7 +696,7 @@ proc QMenusetVisible*(self: gen_qmenu_types.QMenu, visible: bool): void =
   fcQMenu_virtualbase_setVisible(self.h, visible)
 
 proc QMenuminimumSizeHint*(self: gen_qmenu_types.QMenu): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMenu_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQMenu_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QMenuheightForWidth*(self: gen_qmenu_types.QMenu, param1: cint): cint =
   fcQMenu_virtualbase_heightForWidth(self.h, param1)
@@ -705,7 +705,7 @@ proc QMenuhasHeightForWidth*(self: gen_qmenu_types.QMenu): bool =
   fcQMenu_virtualbase_hasHeightForWidth(self.h)
 
 proc QMenupaintEngine*(self: gen_qmenu_types.QMenu): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQMenu_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQMenu_virtualbase_paintEngine(self.h), owned: false)
 
 proc QMenumouseDoubleClickEvent*(self: gen_qmenu_types.QMenu, event: gen_qevent_types.QMouseEvent): void =
   fcQMenu_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -759,16 +759,16 @@ proc QMenuinitPainter*(self: gen_qmenu_types.QMenu, painter: gen_qpainter_types.
   fcQMenu_virtualbase_initPainter(self.h, painter.h)
 
 proc QMenuredirected*(self: gen_qmenu_types.QMenu, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQMenu_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQMenu_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QMenusharedPainter*(self: gen_qmenu_types.QMenu): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQMenu_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQMenu_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QMenuinputMethodEvent*(self: gen_qmenu_types.QMenu, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQMenu_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc QMenuinputMethodQuery*(self: gen_qmenu_types.QMenu, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMenu_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQMenu_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QMenueventFilter*(self: gen_qmenu_types.QMenu, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQMenu_virtualbase_eventFilter(self.h, watched.h, event.h)
@@ -790,7 +790,10 @@ proc fcQMenu_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
@@ -812,84 +815,87 @@ proc fcQMenu_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_enterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_leaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: param1)
+  let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_actionEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: param1)
+  let slotval1 = gen_qevent_types.QActionEvent(h: param1, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -916,7 +922,10 @@ proc fcQMenu_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
@@ -935,90 +944,93 @@ proc fcQMenu_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1043,26 +1055,32 @@ proc fcQMenu_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.}
 proc fcQMenu_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQMenu_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
@@ -1070,38 +1088,41 @@ proc fcQMenu_vtable_callback_inputMethodQuery(self: pointer, param1: cint): poin
   let self = QMenu(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQMenu_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQMenu_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQMenu_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QMenuVTable](fcQMenu_vdata(self)[])
   let self = QMenu(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQMenu* {.inheritable.} = ref object of QMenu
@@ -1211,7 +1232,10 @@ method disconnectNotify*(self: VirtualQMenu, signal: gen_qmetaobject_types.QMeta
 proc fcQMenu_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
@@ -1230,71 +1254,74 @@ proc fcQMenu_method_callback_metacall(self: pointer, param1: cint, param2: cint,
 proc fcQMenu_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQMenu_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQMenu_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQMenu_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQMenu_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQMenu_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQMenu_method_callback_enterEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQMenu_method_callback_leaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQMenu_method_callback_hideEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: param1)
+  let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQMenu_method_callback_paintEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQMenu_method_callback_actionEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: param1)
+  let slotval1 = gen_qevent_types.QActionEvent(h: param1, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQMenu_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQMenu_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
@@ -1317,7 +1344,10 @@ proc fcQMenu_method_callback_setVisible(self: pointer, visible: bool): void {.cd
 proc fcQMenu_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
@@ -1333,76 +1363,79 @@ proc fcQMenu_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
 proc fcQMenu_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQMenu_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQMenu_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQMenu_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQMenu_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQMenu_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQMenu_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQMenu_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQMenu_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQMenu_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQMenu_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQMenu_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQMenu_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQMenu_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQMenu_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -1424,56 +1457,65 @@ proc fcQMenu_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.}
 
 proc fcQMenu_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQMenu_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQMenu_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQMenu_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQMenu_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQMenu_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQMenu_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQMenu_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQMenu](fcQMenu_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1499,7 +1541,7 @@ proc focusPreviousChild*(self: gen_qmenu_types.QMenu): bool =
   fcQMenu_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qmenu_types.QMenu): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMenu_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMenu_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmenu_types.QMenu): cint =
   fcQMenu_protectedbase_senderSignalIndex(self.h)
@@ -1617,7 +1659,7 @@ proc create*(T: type gen_qmenu_types.QMenu,
     vtbl[].vtbl.connectNotify = fcQMenu_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMenu_vtable_callback_disconnectNotify
-  let tmp = gen_qmenu_types.QMenu(h: fcQMenu_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qmenu_types.QMenu(h: fcQMenu_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQMenu_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmenu_types.QMenu,
@@ -1728,7 +1770,7 @@ proc create*(T: type gen_qmenu_types.QMenu,
     vtbl[].vtbl.connectNotify = fcQMenu_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMenu_vtable_callback_disconnectNotify
-  let tmp = gen_qmenu_types.QMenu(h: fcQMenu_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))))
+  let tmp = gen_qmenu_types.QMenu(h: fcQMenu_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
   fcQMenu_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmenu_types.QMenu,
@@ -1839,7 +1881,7 @@ proc create*(T: type gen_qmenu_types.QMenu,
     vtbl[].vtbl.connectNotify = fcQMenu_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMenu_vtable_callback_disconnectNotify
-  let tmp = gen_qmenu_types.QMenu(h: fcQMenu_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qmenu_types.QMenu(h: fcQMenu_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQMenu_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qmenu_types.QMenu,
@@ -1950,13 +1992,14 @@ proc create*(T: type gen_qmenu_types.QMenu,
     vtbl[].vtbl.connectNotify = fcQMenu_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQMenu_vtable_callback_disconnectNotify
-  let tmp = gen_qmenu_types.QMenu(h: fcQMenu_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h))
+  let tmp = gen_qmenu_types.QMenu(h: fcQMenu_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), parent.h), owned: true)
   fcQMenu_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQMenu_mvtbl = cQMenuVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQMenu()[])](self.fcQMenu_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQMenu_method_callback_metaObject,
   metacast: fcQMenu_method_callback_metacast,
@@ -2042,5 +2085,3 @@ proc create*(T: type gen_qmenu_types.QMenu,
 
 proc staticMetaObject*(_: type gen_qmenu_types.QMenu): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMenu_staticMetaObject())
-proc delete*(self: gen_qmenu_types.QMenu) =
-  fcQMenu_delete(self.h)

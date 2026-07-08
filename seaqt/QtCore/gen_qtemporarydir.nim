@@ -48,7 +48,6 @@ proc fcQTemporaryDir_path(self: pointer): struct_seaqt_string {.importc: "QTempo
 proc fcQTemporaryDir_filePath(self: pointer, fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QTemporaryDir_filePath".}
 proc fcQTemporaryDir_new(): ptr cQTemporaryDir {.importc: "QTemporaryDir_new".}
 proc fcQTemporaryDir_new2(templateName: struct_seaqt_string): ptr cQTemporaryDir {.importc: "QTemporaryDir_new2".}
-proc fcQTemporaryDir_delete(self: pointer) {.importc: "QTemporaryDir_delete".}
 
 proc isValid*(self: gen_qtemporarydir_types.QTemporaryDir): bool =
   fcQTemporaryDir_isValid(self.h)
@@ -81,11 +80,9 @@ proc filePath*(self: gen_qtemporarydir_types.QTemporaryDir, fileName: openArray[
   vx_ret
 
 proc create*(T: type gen_qtemporarydir_types.QTemporaryDir): gen_qtemporarydir_types.QTemporaryDir =
-  let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new())
+  let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new(), owned: true)
   tmp
 proc create*(T: type gen_qtemporarydir_types.QTemporaryDir,
     templateName: openArray[char]): gen_qtemporarydir_types.QTemporaryDir =
-  let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new2(struct_seaqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName)))))
+  let tmp = gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new2(struct_seaqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName)))), owned: true)
   tmp
-proc delete*(self: gen_qtemporarydir_types.QTemporaryDir) =
-  fcQTemporaryDir_delete(self.h)

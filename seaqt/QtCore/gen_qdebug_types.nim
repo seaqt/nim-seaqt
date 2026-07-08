@@ -1,4 +1,4 @@
-type QDebug* {.inheritable, pure.} = object
+type QDebug* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QDebug) =
   wasMoved(self)
   fcQDebug_delete(h)
 
-type QDebugStateSaver* {.inheritable, pure.} = object
+type QDebugStateSaver* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QDebugStateSaver) =
   wasMoved(self)
   fcQDebugStateSaver_delete(h)
 
-type QNoDebug* {.inheritable, pure.} = object
+type QNoDebug* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

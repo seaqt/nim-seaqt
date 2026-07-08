@@ -76,7 +76,6 @@ proc fcQSqlRecord_count(self: pointer): cint {.importc: "QSqlRecord_count".}
 proc fcQSqlRecord_keyValues(self: pointer, keyFields: pointer): pointer {.importc: "QSqlRecord_keyValues".}
 proc fcQSqlRecord_new(): ptr cQSqlRecord {.importc: "QSqlRecord_new".}
 proc fcQSqlRecord_new2(other: pointer): ptr cQSqlRecord {.importc: "QSqlRecord_new2".}
-proc fcQSqlRecord_delete(self: pointer) {.importc: "QSqlRecord_delete".}
 
 proc operatorAssign*(self: gen_qsqlrecord_types.QSqlRecord, other: gen_qsqlrecord_types.QSqlRecord): void =
   fcQSqlRecord_operatorAssign(self.h, other.h)
@@ -88,10 +87,10 @@ proc operatorNotEqual*(self: gen_qsqlrecord_types.QSqlRecord, other: gen_qsqlrec
   fcQSqlRecord_operatorNotEqual(self.h, other.h)
 
 proc value*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlRecord_value(self.h, i))
+  gen_qvariant_types.QVariant(h: fcQSqlRecord_value(self.h, i), owned: true)
 
 proc value*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlRecord_valueWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qvariant_types.QVariant(h: fcQSqlRecord_valueWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc setValue*(self: gen_qsqlrecord_types.QSqlRecord, i: cint, val: gen_qvariant_types.QVariant): void =
   fcQSqlRecord_setValue(self.h, i, val.h)
@@ -121,10 +120,10 @@ proc fieldName*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): string =
   vx_ret
 
 proc field*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): gen_qsqlfield_types.QSqlField =
-  gen_qsqlfield_types.QSqlField(h: fcQSqlRecord_field(self.h, i))
+  gen_qsqlfield_types.QSqlField(h: fcQSqlRecord_field(self.h, i), owned: true)
 
 proc field*(self: gen_qsqlrecord_types.QSqlRecord, name: openArray[char]): gen_qsqlfield_types.QSqlField =
-  gen_qsqlfield_types.QSqlField(h: fcQSqlRecord_fieldWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qsqlfield_types.QSqlField(h: fcQSqlRecord_fieldWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc isGenerated*(self: gen_qsqlrecord_types.QSqlRecord, i: cint): bool =
   fcQSqlRecord_isGenerated(self.h, i)
@@ -166,14 +165,12 @@ proc count*(self: gen_qsqlrecord_types.QSqlRecord): cint =
   fcQSqlRecord_count(self.h)
 
 proc keyValues*(self: gen_qsqlrecord_types.QSqlRecord, keyFields: gen_qsqlrecord_types.QSqlRecord): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_keyValues(self.h, keyFields.h))
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_keyValues(self.h, keyFields.h), owned: true)
 
 proc create*(T: type gen_qsqlrecord_types.QSqlRecord): gen_qsqlrecord_types.QSqlRecord =
-  let tmp = gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_new())
+  let tmp = gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_new(), owned: true)
   tmp
 proc create*(T: type gen_qsqlrecord_types.QSqlRecord,
     other: gen_qsqlrecord_types.QSqlRecord): gen_qsqlrecord_types.QSqlRecord =
-  let tmp = gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_new2(other.h))
+  let tmp = gen_qsqlrecord_types.QSqlRecord(h: fcQSqlRecord_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qsqlrecord_types.QSqlRecord) =
-  fcQSqlRecord_delete(self.h)

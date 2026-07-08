@@ -95,7 +95,6 @@ proc fcQNetworkConfiguration_connectTimeout(self: pointer): cint {.importc: "QNe
 proc fcQNetworkConfiguration_setConnectTimeout(self: pointer, timeout: cint): bool {.importc: "QNetworkConfiguration_setConnectTimeout".}
 proc fcQNetworkConfiguration_new(): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new".}
 proc fcQNetworkConfiguration_new2(other: pointer): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new2".}
-proc fcQNetworkConfiguration_delete(self: pointer) {.importc: "QNetworkConfiguration_delete".}
 
 proc operatorAssign*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, other: gen_qnetworkconfiguration_types.QNetworkConfiguration): void =
   fcQNetworkConfiguration_operatorAssign(self.h, other.h)
@@ -144,7 +143,7 @@ proc children*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): seq
   var vx_ret = newSeq[gen_qnetworkconfiguration_types.QNetworkConfiguration](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: v_outCast[i])
+    vx_ret[i] = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -164,11 +163,9 @@ proc setConnectTimeout*(self: gen_qnetworkconfiguration_types.QNetworkConfigurat
   fcQNetworkConfiguration_setConnectTimeout(self.h, timeout)
 
 proc create*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration): gen_qnetworkconfiguration_types.QNetworkConfiguration =
-  let tmp = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new())
+  let tmp = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new(), owned: true)
   tmp
 proc create*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration,
     other: gen_qnetworkconfiguration_types.QNetworkConfiguration): gen_qnetworkconfiguration_types.QNetworkConfiguration =
-  let tmp = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new2(other.h))
+  let tmp = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration) =
-  fcQNetworkConfiguration_delete(self.h)

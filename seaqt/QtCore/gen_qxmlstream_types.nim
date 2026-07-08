@@ -1,4 +1,4 @@
-type QXmlStreamStringRef* {.inheritable, pure.} = object
+type QXmlStreamStringRef* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QXmlStreamStringRef) =
   wasMoved(self)
   fcQXmlStreamStringRef_delete(h)
 
-type QXmlStreamAttribute* {.inheritable, pure.} = object
+type QXmlStreamAttribute* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QXmlStreamAttribute) =
   wasMoved(self)
   fcQXmlStreamAttribute_delete(h)
 
-type QXmlStreamNamespaceDeclaration* {.inheritable, pure.} = object
+type QXmlStreamNamespaceDeclaration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QXmlStreamNamespaceDeclaration) =
   wasMoved(self)
   fcQXmlStreamNamespaceDeclaration_delete(h)
 
-type QXmlStreamNotationDeclaration* {.inheritable, pure.} = object
+type QXmlStreamNotationDeclaration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -82,7 +82,7 @@ proc delete*(self: sink QXmlStreamNotationDeclaration) =
   wasMoved(self)
   fcQXmlStreamNotationDeclaration_delete(h)
 
-type QXmlStreamEntityDeclaration* {.inheritable, pure.} = object
+type QXmlStreamEntityDeclaration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -102,7 +102,7 @@ proc delete*(self: sink QXmlStreamEntityDeclaration) =
   wasMoved(self)
   fcQXmlStreamEntityDeclaration_delete(h)
 
-type QXmlStreamEntityResolver* {.inheritable, pure.} = object
+type QXmlStreamEntityResolver* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -122,7 +122,7 @@ proc delete*(self: sink QXmlStreamEntityResolver) =
   wasMoved(self)
   fcQXmlStreamEntityResolver_delete(h)
 
-type QXmlStreamReader* {.inheritable, pure.} = object
+type QXmlStreamReader* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -142,7 +142,7 @@ proc delete*(self: sink QXmlStreamReader) =
   wasMoved(self)
   fcQXmlStreamReader_delete(h)
 
-type QXmlStreamWriter* {.inheritable, pure.} = object
+type QXmlStreamWriter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

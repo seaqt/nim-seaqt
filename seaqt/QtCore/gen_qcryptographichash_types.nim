@@ -1,4 +1,4 @@
-type QCryptographicHash* {.inheritable, pure.} = object
+type QCryptographicHash* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

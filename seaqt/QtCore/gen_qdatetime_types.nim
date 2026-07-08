@@ -1,4 +1,4 @@
-type QDate* {.inheritable, pure.} = object
+type QDate* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QDate) =
   wasMoved(self)
   fcQDate_delete(h)
 
-type QTime* {.inheritable, pure.} = object
+type QTime* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QTime) =
   wasMoved(self)
   fcQTime_delete(h)
 
-type QDateTime* {.inheritable, pure.} = object
+type QDateTime* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QFontMetrics* {.inheritable, pure.} = object
+type QFontMetrics* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QFontMetrics) =
   wasMoved(self)
   fcQFontMetrics_delete(h)
 
-type QFontMetricsF* {.inheritable, pure.} = object
+type QFontMetricsF* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -9,7 +9,7 @@ proc `=sink`(dest: var QPicture, source: QPicture) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QPictureIO* {.inheritable, pure.} = object
+type QPictureIO* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

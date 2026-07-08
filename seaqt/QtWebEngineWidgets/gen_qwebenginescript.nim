@@ -68,7 +68,6 @@ proc fcQWebEngineScript_operatorNotEqual(self: pointer, other: pointer): bool {.
 proc fcQWebEngineScript_swap(self: pointer, other: pointer): void {.importc: "QWebEngineScript_swap".}
 proc fcQWebEngineScript_new(): ptr cQWebEngineScript {.importc: "QWebEngineScript_new".}
 proc fcQWebEngineScript_new2(other: pointer): ptr cQWebEngineScript {.importc: "QWebEngineScript_new2".}
-proc fcQWebEngineScript_delete(self: pointer) {.importc: "QWebEngineScript_delete".}
 
 proc operatorAssign*(self: gen_qwebenginescript_types.QWebEngineScript, other: gen_qwebenginescript_types.QWebEngineScript): void =
   fcQWebEngineScript_operatorAssign(self.h, other.h)
@@ -122,11 +121,9 @@ proc swap*(self: gen_qwebenginescript_types.QWebEngineScript, other: gen_qwebeng
   fcQWebEngineScript_swap(self.h, other.h)
 
 proc create*(T: type gen_qwebenginescript_types.QWebEngineScript): gen_qwebenginescript_types.QWebEngineScript =
-  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new())
+  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebenginescript_types.QWebEngineScript,
     other: gen_qwebenginescript_types.QWebEngineScript): gen_qwebenginescript_types.QWebEngineScript =
-  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new2(other.h))
+  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qwebenginescript_types.QWebEngineScript) =
-  fcQWebEngineScript_delete(self.h)

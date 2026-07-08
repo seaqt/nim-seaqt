@@ -1,4 +1,4 @@
-type QTextItem* {.inheritable, pure.} = object
+type QTextItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QTextItem) =
   wasMoved(self)
   fcQTextItem_delete(h)
 
-type QPaintEngine* {.inheritable, pure.} = object
+type QPaintEngine* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QPaintEngine) =
   wasMoved(self)
   fcQPaintEngine_delete(h)
 
-type QPaintEngineState* {.inheritable, pure.} = object
+type QPaintEngineState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QSizePolicy* {.inheritable, pure.} = object
+type QSizePolicy* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

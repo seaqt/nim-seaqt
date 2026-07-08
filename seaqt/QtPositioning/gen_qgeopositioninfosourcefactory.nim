@@ -66,7 +66,6 @@ type cQGeoPositionInfoSourceFactoryVTable {.pure.} = object
   satelliteInfoSource*: proc(self: pointer, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
   areaMonitor*: proc(self: pointer, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQGeoPositionInfoSourceFactory_new(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQGeoPositionInfoSourceFactory {.importc: "QGeoPositionInfoSourceFactory_new".}
-proc fcQGeoPositionInfoSourceFactory_delete(self: pointer) {.importc: "QGeoPositionInfoSourceFactory_delete".}
 proc fcQGeoPositionInfoSourceFactoryV2_positionInfoSourceWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.importc: "QGeoPositionInfoSourceFactoryV2_positionInfoSourceWithParameters".}
 proc fcQGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.importc: "QGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithParameters".}
 proc fcQGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.importc: "QGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters".}
@@ -83,16 +82,15 @@ type cQGeoPositionInfoSourceFactoryV2VTable {.pure.} = object
   satelliteInfoSource*: proc(self: pointer, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
   areaMonitor*: proc(self: pointer, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQGeoPositionInfoSourceFactoryV2_new(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQGeoPositionInfoSourceFactoryV2 {.importc: "QGeoPositionInfoSourceFactoryV2_new".}
-proc fcQGeoPositionInfoSourceFactoryV2_delete(self: pointer) {.importc: "QGeoPositionInfoSourceFactoryV2_delete".}
 
 proc positionInfoSource*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory, parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSourceFactory_positionInfoSource(self.h, parent.h))
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSourceFactory_positionInfoSource(self.h, parent.h), owned: false)
 
 proc satelliteInfoSource*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory, parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoPositionInfoSourceFactory_satelliteInfoSource(self.h, parent.h))
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoPositionInfoSourceFactory_satelliteInfoSource(self.h, parent.h), owned: false)
 
 proc areaMonitor*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory, parent: gen_qobject_types.QObject): gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource =
-  gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoPositionInfoSourceFactory_areaMonitor(self.h, parent.h))
+  gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoPositionInfoSourceFactory_areaMonitor(self.h, parent.h), owned: false)
 
 proc operatorAssign*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory, param1: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory): void =
   fcQGeoPositionInfoSourceFactory_operatorAssign(self.h, param1.h)
@@ -100,7 +98,8 @@ proc operatorAssign*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionI
 type QGeoPositionInfoSourceFactorypositionInfoSourceProc* = proc(self: QGeoPositionInfoSourceFactory, parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource {.raises: [], gcsafe.}
 type QGeoPositionInfoSourceFactorysatelliteInfoSourceProc* = proc(self: QGeoPositionInfoSourceFactory, parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource {.raises: [], gcsafe.}
 type QGeoPositionInfoSourceFactoryareaMonitorProc* = proc(self: QGeoPositionInfoSourceFactory, parent: gen_qobject_types.QObject): gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource {.raises: [], gcsafe.}
-type QGeoPositionInfoSourceFactoryVTable* = object
+
+type QGeoPositionInfoSourceFactoryVTable* {.inheritable, pure.} = object
   vtbl: cQGeoPositionInfoSourceFactoryVTable
   positionInfoSource*: QGeoPositionInfoSourceFactorypositionInfoSourceProc
   satelliteInfoSource*: QGeoPositionInfoSourceFactorysatelliteInfoSourceProc
@@ -110,23 +109,32 @@ type QGeoPositionInfoSourceFactoryVTable* = object
 proc fcQGeoPositionInfoSourceFactory_vtable_callback_positionInfoSource(self: pointer, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryVTable](fcQGeoPositionInfoSourceFactory_vdata(self)[])
   let self = QGeoPositionInfoSourceFactory(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = vtbl[].positionInfoSource(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactory_vtable_callback_satelliteInfoSource(self: pointer, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryVTable](fcQGeoPositionInfoSourceFactory_vdata(self)[])
   let self = QGeoPositionInfoSourceFactory(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = vtbl[].satelliteInfoSource(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactory_vtable_callback_areaMonitor(self: pointer, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryVTable](fcQGeoPositionInfoSourceFactory_vdata(self)[])
   let self = QGeoPositionInfoSourceFactory(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = vtbl[].areaMonitor(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGeoPositionInfoSourceFactory* {.inheritable.} = ref object of QGeoPositionInfoSourceFactory
   vtbl*: cQGeoPositionInfoSourceFactoryVTable
@@ -140,21 +148,30 @@ method areaMonitor*(self: VirtualQGeoPositionInfoSourceFactory, parent: gen_qobj
 
 proc fcQGeoPositionInfoSourceFactory_method_callback_positionInfoSource(self: pointer, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactory](fcQGeoPositionInfoSourceFactory_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = inst.positionInfoSource(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactory_method_callback_satelliteInfoSource(self: pointer, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactory](fcQGeoPositionInfoSourceFactory_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = inst.satelliteInfoSource(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactory_method_callback_areaMonitor(self: pointer, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactory](fcQGeoPositionInfoSourceFactory_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = inst.areaMonitor(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory,
@@ -171,13 +188,14 @@ proc create*(T: type gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSou
     vtbl[].vtbl.satelliteInfoSource = fcQGeoPositionInfoSourceFactory_vtable_callback_satelliteInfoSource
   if not isNil(vtbl[].areaMonitor):
     vtbl[].vtbl.areaMonitor = fcQGeoPositionInfoSourceFactory_vtable_callback_areaMonitor
-  let tmp = gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory(h: fcQGeoPositionInfoSourceFactory_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory(h: fcQGeoPositionInfoSourceFactory_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQGeoPositionInfoSourceFactory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGeoPositionInfoSourceFactory_mvtbl = cQGeoPositionInfoSourceFactoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGeoPositionInfoSourceFactory()[])](self.fcQGeoPositionInfoSourceFactory_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   positionInfoSource: fcQGeoPositionInfoSourceFactory_method_callback_positionInfoSource,
   satelliteInfoSource: fcQGeoPositionInfoSourceFactory_method_callback_satelliteInfoSource,
@@ -191,40 +209,47 @@ proc create*(T: type gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSou
   fcQGeoPositionInfoSourceFactory_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactory) =
-  fcQGeoPositionInfoSourceFactory_delete(self.h)
 proc positionInfoSourceWithParameters*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2, parent: gen_qobject_types.QObject, parameters: Table[string,gen_qvariant_types.QVariant]): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
   var parameters_Values_CArray = newSeq[pointer](len(parameters))
   var parameters_ctr = 0
-  for parameters_k, parameters_v in parameters:
+  for parameters_k in parameters.keys():
     parameters_Keys_CArray[parameters_ctr] = struct_seaqt_string(data: if len(parameters_k) > 0: addr parameters_k[0] else: nil, len: csize_t(len(parameters_k)))
+    parameters_ctr += 1
+  parameters_ctr = 0
+  for parameters_v in parameters.values():
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSourceFactoryV2_positionInfoSourceWithParameters(self.h, parent.h, struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),)))
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSourceFactoryV2_positionInfoSourceWithParameters(self.h, parent.h, struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),)), owned: false)
 
 proc satelliteInfoSourceWithParameters*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2, parent: gen_qobject_types.QObject, parameters: Table[string,gen_qvariant_types.QVariant]): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
   var parameters_Values_CArray = newSeq[pointer](len(parameters))
   var parameters_ctr = 0
-  for parameters_k, parameters_v in parameters:
+  for parameters_k in parameters.keys():
     parameters_Keys_CArray[parameters_ctr] = struct_seaqt_string(data: if len(parameters_k) > 0: addr parameters_k[0] else: nil, len: csize_t(len(parameters_k)))
+    parameters_ctr += 1
+  parameters_ctr = 0
+  for parameters_v in parameters.values():
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithParameters(self.h, parent.h, struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),)))
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithParameters(self.h, parent.h, struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),)), owned: false)
 
 proc areaMonitorWithParameters*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2, parent: gen_qobject_types.QObject, parameters: Table[string,gen_qvariant_types.QVariant]): gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
   var parameters_Values_CArray = newSeq[pointer](len(parameters))
   var parameters_ctr = 0
-  for parameters_k, parameters_v in parameters:
+  for parameters_k in parameters.keys():
     parameters_Keys_CArray[parameters_ctr] = struct_seaqt_string(data: if len(parameters_k) > 0: addr parameters_k[0] else: nil, len: csize_t(len(parameters_k)))
+    parameters_ctr += 1
+  parameters_ctr = 0
+  for parameters_v in parameters.values():
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters(self.h, parent.h, struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),)))
+  gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters(self.h, parent.h, struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),)), owned: false)
 
 proc operatorAssign*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2, param1: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2): void =
   fcQGeoPositionInfoSourceFactoryV2_operatorAssign(self.h, param1.h)
@@ -235,7 +260,8 @@ type QGeoPositionInfoSourceFactoryV2areaMonitorWithParametersProc* = proc(self: 
 type QGeoPositionInfoSourceFactoryV2positionInfoSourceProc* = proc(self: QGeoPositionInfoSourceFactoryV2, parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource {.raises: [], gcsafe.}
 type QGeoPositionInfoSourceFactoryV2satelliteInfoSourceProc* = proc(self: QGeoPositionInfoSourceFactoryV2, parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource {.raises: [], gcsafe.}
 type QGeoPositionInfoSourceFactoryV2areaMonitorProc* = proc(self: QGeoPositionInfoSourceFactoryV2, parent: gen_qobject_types.QObject): gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource {.raises: [], gcsafe.}
-type QGeoPositionInfoSourceFactoryV2VTable* = object
+
+type QGeoPositionInfoSourceFactoryV2VTable* {.inheritable, pure.} = object
   vtbl: cQGeoPositionInfoSourceFactoryV2VTable
   positionInfoSourceWithParameters*: QGeoPositionInfoSourceFactoryV2positionInfoSourceWithParametersProc
   satelliteInfoSourceWithParameters*: QGeoPositionInfoSourceFactoryV2satelliteInfoSourceWithParametersProc
@@ -248,7 +274,7 @@ type QGeoPositionInfoSourceFactoryV2VTable* = object
 proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_positionInfoSourceWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryV2VTable](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
   let self = QGeoPositionInfoSourceFactoryV2(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var vparameters_mm = parameters
   var vparametersx_ret: Table[string, gen_qvariant_types.QVariant]
   var vparameters_Keys = cast[ptr UncheckedArray[struct_seaqt_string]](vparameters_mm.keys)
@@ -259,19 +285,22 @@ proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_positionInfoSourceWithPar
     c_free(vparameters_mapkey_ms.data)
     var vparameters_entry_Key = vparameters_mapkeyx_ret
 
-    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i])
+    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i], owned: true)
 
     vparametersx_ret[vparameters_entry_Key] = vparameters_entry_Value
   c_free(vparameters_mm.keys)
   c_free(vparameters_mm.values)
   let slotval2 = vparametersx_ret
   var virtualReturn = vtbl[].positionInfoSourceWithParameters(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_satelliteInfoSourceWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryV2VTable](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
   let self = QGeoPositionInfoSourceFactoryV2(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var vparameters_mm = parameters
   var vparametersx_ret: Table[string, gen_qvariant_types.QVariant]
   var vparameters_Keys = cast[ptr UncheckedArray[struct_seaqt_string]](vparameters_mm.keys)
@@ -282,19 +311,22 @@ proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_satelliteInfoSourceWithPa
     c_free(vparameters_mapkey_ms.data)
     var vparameters_entry_Key = vparameters_mapkeyx_ret
 
-    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i])
+    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i], owned: true)
 
     vparametersx_ret[vparameters_entry_Key] = vparameters_entry_Value
   c_free(vparameters_mm.keys)
   c_free(vparameters_mm.values)
   let slotval2 = vparametersx_ret
   var virtualReturn = vtbl[].satelliteInfoSourceWithParameters(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_areaMonitorWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryV2VTable](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
   let self = QGeoPositionInfoSourceFactoryV2(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var vparameters_mm = parameters
   var vparametersx_ret: Table[string, gen_qvariant_types.QVariant]
   var vparameters_Keys = cast[ptr UncheckedArray[struct_seaqt_string]](vparameters_mm.keys)
@@ -305,35 +337,47 @@ proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_areaMonitorWithParameters
     c_free(vparameters_mapkey_ms.data)
     var vparameters_entry_Key = vparameters_mapkeyx_ret
 
-    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i])
+    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i], owned: true)
 
     vparametersx_ret[vparameters_entry_Key] = vparameters_entry_Value
   c_free(vparameters_mm.keys)
   c_free(vparameters_mm.values)
   let slotval2 = vparametersx_ret
   var virtualReturn = vtbl[].areaMonitorWithParameters(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_positionInfoSource(self: pointer, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryV2VTable](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
   let self = QGeoPositionInfoSourceFactoryV2(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = vtbl[].positionInfoSource(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_satelliteInfoSource(self: pointer, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryV2VTable](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
   let self = QGeoPositionInfoSourceFactoryV2(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = vtbl[].satelliteInfoSource(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_vtable_callback_areaMonitor(self: pointer, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceFactoryV2VTable](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
   let self = QGeoPositionInfoSourceFactoryV2(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = vtbl[].areaMonitor(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGeoPositionInfoSourceFactoryV2* {.inheritable.} = ref object of QGeoPositionInfoSourceFactoryV2
   vtbl*: cQGeoPositionInfoSourceFactoryV2VTable
@@ -353,7 +397,7 @@ method areaMonitor*(self: VirtualQGeoPositionInfoSourceFactoryV2, parent: gen_qo
 
 proc fcQGeoPositionInfoSourceFactoryV2_method_callback_positionInfoSourceWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactoryV2](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var vparameters_mm = parameters
   var vparametersx_ret: Table[string, gen_qvariant_types.QVariant]
   var vparameters_Keys = cast[ptr UncheckedArray[struct_seaqt_string]](vparameters_mm.keys)
@@ -364,18 +408,21 @@ proc fcQGeoPositionInfoSourceFactoryV2_method_callback_positionInfoSourceWithPar
     c_free(vparameters_mapkey_ms.data)
     var vparameters_entry_Key = vparameters_mapkeyx_ret
 
-    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i])
+    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i], owned: true)
 
     vparametersx_ret[vparameters_entry_Key] = vparameters_entry_Value
   c_free(vparameters_mm.keys)
   c_free(vparameters_mm.values)
   let slotval2 = vparametersx_ret
   var virtualReturn = inst.positionInfoSourceWithParameters(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_method_callback_satelliteInfoSourceWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactoryV2](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var vparameters_mm = parameters
   var vparametersx_ret: Table[string, gen_qvariant_types.QVariant]
   var vparameters_Keys = cast[ptr UncheckedArray[struct_seaqt_string]](vparameters_mm.keys)
@@ -386,18 +433,21 @@ proc fcQGeoPositionInfoSourceFactoryV2_method_callback_satelliteInfoSourceWithPa
     c_free(vparameters_mapkey_ms.data)
     var vparameters_entry_Key = vparameters_mapkeyx_ret
 
-    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i])
+    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i], owned: true)
 
     vparametersx_ret[vparameters_entry_Key] = vparameters_entry_Value
   c_free(vparameters_mm.keys)
   c_free(vparameters_mm.values)
   let slotval2 = vparametersx_ret
   var virtualReturn = inst.satelliteInfoSourceWithParameters(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_method_callback_areaMonitorWithParameters(self: pointer, parent: pointer, parameters: struct_seaqt_map): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactoryV2](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var vparameters_mm = parameters
   var vparametersx_ret: Table[string, gen_qvariant_types.QVariant]
   var vparameters_Keys = cast[ptr UncheckedArray[struct_seaqt_string]](vparameters_mm.keys)
@@ -408,32 +458,44 @@ proc fcQGeoPositionInfoSourceFactoryV2_method_callback_areaMonitorWithParameters
     c_free(vparameters_mapkey_ms.data)
     var vparameters_entry_Key = vparameters_mapkeyx_ret
 
-    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i])
+    var vparameters_entry_Value = gen_qvariant_types.QVariant(h: vparameters_Values[i], owned: true)
 
     vparametersx_ret[vparameters_entry_Key] = vparameters_entry_Value
   c_free(vparameters_mm.keys)
   c_free(vparameters_mm.values)
   let slotval2 = vparametersx_ret
   var virtualReturn = inst.areaMonitorWithParameters(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_method_callback_positionInfoSource(self: pointer, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactoryV2](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = inst.positionInfoSource(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_method_callback_satelliteInfoSource(self: pointer, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactoryV2](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = inst.satelliteInfoSource(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSourceFactoryV2_method_callback_areaMonitor(self: pointer, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSourceFactoryV2](fcQGeoPositionInfoSourceFactoryV2_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = inst.areaMonitor(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2,
@@ -456,13 +518,14 @@ proc create*(T: type gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSou
     vtbl[].vtbl.satelliteInfoSource = fcQGeoPositionInfoSourceFactoryV2_vtable_callback_satelliteInfoSource
   if not isNil(vtbl[].areaMonitor):
     vtbl[].vtbl.areaMonitor = fcQGeoPositionInfoSourceFactoryV2_vtable_callback_areaMonitor
-  let tmp = gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2(h: fcQGeoPositionInfoSourceFactoryV2_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2(h: fcQGeoPositionInfoSourceFactoryV2_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQGeoPositionInfoSourceFactoryV2_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGeoPositionInfoSourceFactoryV2_mvtbl = cQGeoPositionInfoSourceFactoryV2VTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGeoPositionInfoSourceFactoryV2()[])](self.fcQGeoPositionInfoSourceFactoryV2_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   positionInfoSourceWithParameters: fcQGeoPositionInfoSourceFactoryV2_method_callback_positionInfoSourceWithParameters,
   satelliteInfoSourceWithParameters: fcQGeoPositionInfoSourceFactoryV2_method_callback_satelliteInfoSourceWithParameters,
@@ -479,5 +542,3 @@ proc create*(T: type gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSou
   fcQGeoPositionInfoSourceFactoryV2_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qgeopositioninfosourcefactory_types.QGeoPositionInfoSourceFactoryV2) =
-  fcQGeoPositionInfoSourceFactoryV2_delete(self.h)

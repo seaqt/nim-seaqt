@@ -149,7 +149,6 @@ proc fcQImageIOHandler_virtualbase_nextImageDelay(self: pointer): cint {.importc
 proc fcQImageIOHandler_virtualbase_currentImageNumber(self: pointer): cint {.importc: "QImageIOHandler_virtualbase_currentImageNumber".}
 proc fcQImageIOHandler_virtualbase_currentImageRect(self: pointer): pointer {.importc: "QImageIOHandler_virtualbase_currentImageRect".}
 proc fcQImageIOHandler_new(vtbl: pointer, vdata: csize_t): ptr cQImageIOHandler {.importc: "QImageIOHandler_new".}
-proc fcQImageIOHandler_delete(self: pointer) {.importc: "QImageIOHandler_delete".}
 proc fcQImageIOPlugin_metaObject(self: pointer): pointer {.importc: "QImageIOPlugin_metaObject".}
 proc fcQImageIOPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QImageIOPlugin_metacast".}
 proc fcQImageIOPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QImageIOPlugin_metacall".}
@@ -195,13 +194,12 @@ proc fcQImageIOPlugin_protectedbase_isSignalConnected(self: pointer, signal: poi
 proc fcQImageIOPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new".}
 proc fcQImageIOPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new2".}
 proc fcQImageIOPlugin_staticMetaObject(): pointer {.importc: "QImageIOPlugin_staticMetaObject".}
-proc fcQImageIOPlugin_delete(self: pointer) {.importc: "QImageIOPlugin_delete".}
 
 proc setDevice*(self: gen_qimageiohandler_types.QImageIOHandler, device: gen_qiodevice_types.QIODevice): void =
   fcQImageIOHandler_setDevice(self.h, device.h)
 
 proc device*(self: gen_qimageiohandler_types.QImageIOHandler): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQImageIOHandler_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQImageIOHandler_device(self.h), owned: false)
 
 proc setFormat*(self: gen_qimageiohandler_types.QImageIOHandler, format: openArray[byte]): void =
   fcQImageIOHandler_setFormat(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
@@ -231,7 +229,7 @@ proc write*(self: gen_qimageiohandler_types.QImageIOHandler, image: gen_qimage_t
   fcQImageIOHandler_write(self.h, image.h)
 
 proc option*(self: gen_qimageiohandler_types.QImageIOHandler, option: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQImageIOHandler_option(self.h, cint(option)))
+  gen_qvariant_types.QVariant(h: fcQImageIOHandler_option(self.h, cint(option)), owned: true)
 
 proc setOption*(self: gen_qimageiohandler_types.QImageIOHandler, option: cint, value: gen_qvariant_types.QVariant): void =
   fcQImageIOHandler_setOption(self.h, cint(option), value.h)
@@ -258,7 +256,7 @@ proc currentImageNumber*(self: gen_qimageiohandler_types.QImageIOHandler): cint 
   fcQImageIOHandler_currentImageNumber(self.h)
 
 proc currentImageRect*(self: gen_qimageiohandler_types.QImageIOHandler): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQImageIOHandler_currentImageRect(self.h))
+  gen_qrect_types.QRect(h: fcQImageIOHandler_currentImageRect(self.h), owned: true)
 
 type QImageIOHandlernameProc* = proc(self: QImageIOHandler): seq[byte] {.raises: [], gcsafe.}
 type QImageIOHandlercanReadProc* = proc(self: QImageIOHandler): bool {.raises: [], gcsafe.}
@@ -274,7 +272,8 @@ type QImageIOHandlerimageCountProc* = proc(self: QImageIOHandler): cint {.raises
 type QImageIOHandlernextImageDelayProc* = proc(self: QImageIOHandler): cint {.raises: [], gcsafe.}
 type QImageIOHandlercurrentImageNumberProc* = proc(self: QImageIOHandler): cint {.raises: [], gcsafe.}
 type QImageIOHandlercurrentImageRectProc* = proc(self: QImageIOHandler): gen_qrect_types.QRect {.raises: [], gcsafe.}
-type QImageIOHandlerVTable* = object
+
+type QImageIOHandlerVTable* {.inheritable, pure.} = object
   vtbl: cQImageIOHandlerVTable
   name*: QImageIOHandlernameProc
   canRead*: QImageIOHandlercanReadProc
@@ -301,7 +300,7 @@ proc QImageIOHandlerwrite*(self: gen_qimageiohandler_types.QImageIOHandler, imag
   fcQImageIOHandler_virtualbase_write(self.h, image.h)
 
 proc QImageIOHandleroption*(self: gen_qimageiohandler_types.QImageIOHandler, option: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQImageIOHandler_virtualbase_option(self.h, cint(option)))
+  gen_qvariant_types.QVariant(h: fcQImageIOHandler_virtualbase_option(self.h, cint(option)), owned: true)
 
 proc QImageIOHandlersetOption*(self: gen_qimageiohandler_types.QImageIOHandler, option: cint, value: gen_qvariant_types.QVariant): void =
   fcQImageIOHandler_virtualbase_setOption(self.h, cint(option), value.h)
@@ -328,7 +327,7 @@ proc QImageIOHandlercurrentImageNumber*(self: gen_qimageiohandler_types.QImageIO
   fcQImageIOHandler_virtualbase_currentImageNumber(self.h)
 
 proc QImageIOHandlercurrentImageRect*(self: gen_qimageiohandler_types.QImageIOHandler): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQImageIOHandler_virtualbase_currentImageRect(self.h))
+  gen_qrect_types.QRect(h: fcQImageIOHandler_virtualbase_currentImageRect(self.h), owned: true)
 
 
 proc fcQImageIOHandler_vtable_callback_name(self: pointer): struct_seaqt_string {.cdecl.} =
@@ -348,14 +347,14 @@ proc fcQImageIOHandler_vtable_callback_canRead(self: pointer): bool {.cdecl.} =
 proc fcQImageIOHandler_vtable_callback_read(self: pointer, image: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QImageIOHandlerVTable](fcQImageIOHandler_vdata(self)[])
   let self = QImageIOHandler(h: self)
-  let slotval1 = gen_qimage_types.QImage(h: image)
+  let slotval1 = gen_qimage_types.QImage(h: image, owned: false)
   var virtualReturn = vtbl[].read(self, slotval1)
   virtualReturn
 
 proc fcQImageIOHandler_vtable_callback_write(self: pointer, image: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QImageIOHandlerVTable](fcQImageIOHandler_vdata(self)[])
   let self = QImageIOHandler(h: self)
-  let slotval1 = gen_qimage_types.QImage(h: image)
+  let slotval1 = gen_qimage_types.QImage(h: image, owned: false)
   var virtualReturn = vtbl[].write(self, slotval1)
   virtualReturn
 
@@ -364,13 +363,16 @@ proc fcQImageIOHandler_vtable_callback_option(self: pointer, option: cint): poin
   let self = QImageIOHandler(h: self)
   let slotval1 = cint(option)
   var virtualReturn = vtbl[].option(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOHandler_vtable_callback_setOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageIOHandlerVTable](fcQImageIOHandler_vdata(self)[])
   let self = QImageIOHandler(h: self)
   let slotval1 = cint(option)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setOption(self, slotval1, slotval2)
 
 proc fcQImageIOHandler_vtable_callback_supportsOption(self: pointer, option: cint): bool {.cdecl.} =
@@ -421,7 +423,10 @@ proc fcQImageIOHandler_vtable_callback_currentImageRect(self: pointer): pointer 
   let vtbl = cast[ptr QImageIOHandlerVTable](fcQImageIOHandler_vdata(self)[])
   let self = QImageIOHandler(h: self)
   var virtualReturn = vtbl[].currentImageRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQImageIOHandler* {.inheritable.} = ref object of QImageIOHandler
   vtbl*: cQImageIOHandlerVTable
@@ -469,13 +474,13 @@ proc fcQImageIOHandler_method_callback_canRead(self: pointer): bool {.cdecl.} =
 
 proc fcQImageIOHandler_method_callback_read(self: pointer, image: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQImageIOHandler](fcQImageIOHandler_vdata(self)[])
-  let slotval1 = gen_qimage_types.QImage(h: image)
+  let slotval1 = gen_qimage_types.QImage(h: image, owned: false)
   var virtualReturn = inst.read(slotval1)
   virtualReturn
 
 proc fcQImageIOHandler_method_callback_write(self: pointer, image: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQImageIOHandler](fcQImageIOHandler_vdata(self)[])
-  let slotval1 = gen_qimage_types.QImage(h: image)
+  let slotval1 = gen_qimage_types.QImage(h: image, owned: false)
   var virtualReturn = inst.write(slotval1)
   virtualReturn
 
@@ -483,12 +488,15 @@ proc fcQImageIOHandler_method_callback_option(self: pointer, option: cint): poin
   let inst = cast[VirtualQImageIOHandler](fcQImageIOHandler_vdata(self)[])
   let slotval1 = cint(option)
   var virtualReturn = inst.option(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOHandler_method_callback_setOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageIOHandler](fcQImageIOHandler_vdata(self)[])
   let slotval1 = cint(option)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setOption(slotval1, slotval2)
 
 proc fcQImageIOHandler_method_callback_supportsOption(self: pointer, option: cint): bool {.cdecl.} =
@@ -531,7 +539,10 @@ proc fcQImageIOHandler_method_callback_currentImageNumber(self: pointer): cint {
 proc fcQImageIOHandler_method_callback_currentImageRect(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQImageIOHandler](fcQImageIOHandler_vdata(self)[])
   var virtualReturn = inst.currentImageRect()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qimageiohandler_types.QImageIOHandler,
@@ -569,13 +580,14 @@ proc create*(T: type gen_qimageiohandler_types.QImageIOHandler,
     vtbl[].vtbl.currentImageNumber = fcQImageIOHandler_vtable_callback_currentImageNumber
   if not isNil(vtbl[].currentImageRect):
     vtbl[].vtbl.currentImageRect = fcQImageIOHandler_vtable_callback_currentImageRect
-  let tmp = gen_qimageiohandler_types.QImageIOHandler(h: fcQImageIOHandler_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qimageiohandler_types.QImageIOHandler(h: fcQImageIOHandler_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQImageIOHandler_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQImageIOHandler_mvtbl = cQImageIOHandlerVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQImageIOHandler()[])](self.fcQImageIOHandler_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   name: fcQImageIOHandler_method_callback_name,
   canRead: fcQImageIOHandler_method_callback_canRead,
@@ -599,10 +611,8 @@ proc create*(T: type gen_qimageiohandler_types.QImageIOHandler,
   fcQImageIOHandler_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qimageiohandler_types.QImageIOHandler) =
-  fcQImageIOHandler_delete(self.h)
 proc metaObject*(self: gen_qimageiohandler_types.QImageIOPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQImageIOPlugin_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQImageIOPlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qimageiohandler_types.QImageIOPlugin, param1: cstring): pointer =
   fcQImageIOPlugin_metacast(self.h, param1)
@@ -626,7 +636,7 @@ proc capabilities*(self: gen_qimageiohandler_types.QImageIOPlugin, device: gen_q
   cint(fcQImageIOPlugin_capabilities(self.h, device.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))))
 
 proc createX*(self: gen_qimageiohandler_types.QImageIOPlugin, device: gen_qiodevice_types.QIODevice, format: openArray[byte]): gen_qimageiohandler_types.QImageIOHandler =
-  gen_qimageiohandler_types.QImageIOHandler(h: fcQImageIOPlugin_createX(self.h, device.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))))
+  gen_qimageiohandler_types.QImageIOHandler(h: fcQImageIOPlugin_createX(self.h, device.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: false)
 
 proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQImageIOPlugin_tr2(s, c)
@@ -664,7 +674,8 @@ type QImageIOPluginchildEventProc* = proc(self: QImageIOPlugin, event: gen_qcore
 type QImageIOPlugincustomEventProc* = proc(self: QImageIOPlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QImageIOPluginconnectNotifyProc* = proc(self: QImageIOPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QImageIOPlugindisconnectNotifyProc* = proc(self: QImageIOPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QImageIOPluginVTable* = object
+
+type QImageIOPluginVTable* {.inheritable, pure.} = object
   vtbl: cQImageIOPluginVTable
   metaObject*: QImageIOPluginmetaObjectProc
   metacast*: QImageIOPluginmetacastProc
@@ -680,7 +691,7 @@ type QImageIOPluginVTable* = object
   disconnectNotify*: QImageIOPlugindisconnectNotifyProc
 
 proc QImageIOPluginmetaObject*(self: gen_qimageiohandler_types.QImageIOPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQImageIOPlugin_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQImageIOPlugin_virtualbase_metaObject(self.h), owned: false)
 
 proc QImageIOPluginmetacast*(self: gen_qimageiohandler_types.QImageIOPlugin, param1: cstring): pointer =
   fcQImageIOPlugin_virtualbase_metacast(self.h, param1)
@@ -714,7 +725,10 @@ proc fcQImageIOPlugin_vtable_callback_metaObject(self: pointer): pointer {.cdecl
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOPlugin_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
@@ -735,7 +749,7 @@ proc fcQImageIOPlugin_vtable_callback_metacall(self: pointer, param1: cint, para
 proc fcQImageIOPlugin_vtable_callback_capabilities(self: pointer, device: pointer, format: struct_seaqt_string): cint {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qiodevice_types.QIODevice(h: device)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   var vformat_bytearray = format
   var vformatx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vformat_bytearray.data), 0, int(vformat_bytearray.len)-1))
   c_free(vformat_bytearray.data)
@@ -746,57 +760,60 @@ proc fcQImageIOPlugin_vtable_callback_capabilities(self: pointer, device: pointe
 proc fcQImageIOPlugin_vtable_callback_createX(self: pointer, device: pointer, format: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qiodevice_types.QIODevice(h: device)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   var vformat_bytearray = format
   var vformatx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vformat_bytearray.data), 0, int(vformat_bytearray.len)-1))
   c_free(vformat_bytearray.data)
   let slotval2 = vformatx_ret
   var virtualReturn = vtbl[].createX(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQImageIOPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQImageIOPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQImageIOPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQImageIOPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQImageIOPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQImageIOPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageIOPluginVTable](fcQImageIOPlugin_vdata(self)[])
   let self = QImageIOPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQImageIOPlugin* {.inheritable.} = ref object of QImageIOPlugin
@@ -830,7 +847,10 @@ method disconnectNotify*(self: VirtualQImageIOPlugin, signal: gen_qmetaobject_ty
 proc fcQImageIOPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
@@ -848,7 +868,7 @@ proc fcQImageIOPlugin_method_callback_metacall(self: pointer, param1: cint, para
 
 proc fcQImageIOPlugin_method_callback_capabilities(self: pointer, device: pointer, format: struct_seaqt_string): cint {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qiodevice_types.QIODevice(h: device)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   var vformat_bytearray = format
   var vformatx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vformat_bytearray.data), 0, int(vformat_bytearray.len)-1))
   c_free(vformat_bytearray.data)
@@ -858,55 +878,58 @@ proc fcQImageIOPlugin_method_callback_capabilities(self: pointer, device: pointe
 
 proc fcQImageIOPlugin_method_callback_createX(self: pointer, device: pointer, format: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qiodevice_types.QIODevice(h: device)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: device, owned: false)
   var vformat_bytearray = format
   var vformatx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vformat_bytearray.data), 0, int(vformat_bytearray.len)-1))
   c_free(vformat_bytearray.data)
   let slotval2 = vformatx_ret
   var virtualReturn = inst.createX(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageIOPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQImageIOPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQImageIOPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQImageIOPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQImageIOPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQImageIOPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQImageIOPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageIOPlugin](fcQImageIOPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qimageiohandler_types.QImageIOPlugin): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQImageIOPlugin_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQImageIOPlugin_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qimageiohandler_types.QImageIOPlugin): cint =
   fcQImageIOPlugin_protectedbase_senderSignalIndex(self.h)
@@ -948,7 +971,7 @@ proc create*(T: type gen_qimageiohandler_types.QImageIOPlugin,
     vtbl[].vtbl.connectNotify = fcQImageIOPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQImageIOPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qimageiohandler_types.QImageIOPlugin(h: fcQImageIOPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qimageiohandler_types.QImageIOPlugin(h: fcQImageIOPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQImageIOPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qimageiohandler_types.QImageIOPlugin,
@@ -983,13 +1006,14 @@ proc create*(T: type gen_qimageiohandler_types.QImageIOPlugin,
     vtbl[].vtbl.connectNotify = fcQImageIOPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQImageIOPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qimageiohandler_types.QImageIOPlugin(h: fcQImageIOPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qimageiohandler_types.QImageIOPlugin(h: fcQImageIOPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQImageIOPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQImageIOPlugin_mvtbl = cQImageIOPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQImageIOPlugin()[])](self.fcQImageIOPlugin_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQImageIOPlugin_method_callback_metaObject,
   metacast: fcQImageIOPlugin_method_callback_metacast,
@@ -1021,5 +1045,3 @@ proc create*(T: type gen_qimageiohandler_types.QImageIOPlugin,
 
 proc staticMetaObject*(_: type gen_qimageiohandler_types.QImageIOPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQImageIOPlugin_staticMetaObject())
-proc delete*(self: gen_qimageiohandler_types.QImageIOPlugin) =
-  fcQImageIOPlugin_delete(self.h)

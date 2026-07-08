@@ -1,4 +1,4 @@
-type QWebSecurityOrigin* {.inheritable, pure.} = object
+type QWebSecurityOrigin* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

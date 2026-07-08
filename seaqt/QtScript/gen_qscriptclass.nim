@@ -95,16 +95,15 @@ proc fcQScriptClass_virtualbase_name(self: pointer): struct_seaqt_string {.impor
 proc fcQScriptClass_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QScriptClass_virtualbase_supportsExtension".}
 proc fcQScriptClass_virtualbase_extension(self: pointer, extension: cint, argument: pointer): pointer {.importc: "QScriptClass_virtualbase_extension".}
 proc fcQScriptClass_new(vtbl: pointer, vdata: csize_t, engine: pointer): ptr cQScriptClass {.importc: "QScriptClass_new".}
-proc fcQScriptClass_delete(self: pointer) {.importc: "QScriptClass_delete".}
 
 proc engine*(self: gen_qscriptclass_types.QScriptClass): gen_qscriptengine_types.QScriptEngine =
-  gen_qscriptengine_types.QScriptEngine(h: fcQScriptClass_engine(self.h))
+  gen_qscriptengine_types.QScriptEngine(h: fcQScriptClass_engine(self.h), owned: false)
 
 proc queryProperty*(self: gen_qscriptclass_types.QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, flags: cint, id: ptr cuint): cint =
   cint(fcQScriptClass_queryProperty(self.h, objectVal.h, name.h, cint(flags), id))
 
 proc property*(self: gen_qscriptclass_types.QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, id: cuint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClass_property(self.h, objectVal.h, name.h, id))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClass_property(self.h, objectVal.h, name.h, id), owned: true)
 
 proc setProperty*(self: gen_qscriptclass_types.QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, id: cuint, value: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptClass_setProperty(self.h, objectVal.h, name.h, id, value.h)
@@ -113,10 +112,10 @@ proc propertyFlags*(self: gen_qscriptclass_types.QScriptClass, objectVal: gen_qs
   cint(fcQScriptClass_propertyFlags(self.h, objectVal.h, name.h, id))
 
 proc newIterator*(self: gen_qscriptclass_types.QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue): gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator =
-  gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator(h: fcQScriptClass_newIterator(self.h, objectVal.h))
+  gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator(h: fcQScriptClass_newIterator(self.h, objectVal.h), owned: false)
 
 proc prototype*(self: gen_qscriptclass_types.QScriptClass): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClass_prototype(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClass_prototype(self.h), owned: true)
 
 proc name*(self: gen_qscriptclass_types.QScriptClass): string =
   let v_ms = fcQScriptClass_name(self.h)
@@ -128,7 +127,7 @@ proc supportsExtension*(self: gen_qscriptclass_types.QScriptClass, extension: ci
   fcQScriptClass_supportsExtension(self.h, cint(extension))
 
 proc extension*(self: gen_qscriptclass_types.QScriptClass, extension: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQScriptClass_extension(self.h, cint(extension), argument.h))
+  gen_qvariant_types.QVariant(h: fcQScriptClass_extension(self.h, cint(extension), argument.h), owned: true)
 
 type QScriptClassqueryPropertyProc* = proc(self: QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, flags: cint, id: ptr cuint): cint {.raises: [], gcsafe.}
 type QScriptClasspropertyProc* = proc(self: QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, id: cuint): gen_qscriptvalue_types.QScriptValue {.raises: [], gcsafe.}
@@ -139,7 +138,8 @@ type QScriptClassprototypeProc* = proc(self: QScriptClass): gen_qscriptvalue_typ
 type QScriptClassnameProc* = proc(self: QScriptClass): string {.raises: [], gcsafe.}
 type QScriptClasssupportsExtensionProc* = proc(self: QScriptClass, extension: cint): bool {.raises: [], gcsafe.}
 type QScriptClassextensionProc* = proc(self: QScriptClass, extension: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
-type QScriptClassVTable* = object
+
+type QScriptClassVTable* {.inheritable, pure.} = object
   vtbl: cQScriptClassVTable
   queryProperty*: QScriptClassqueryPropertyProc
   property*: QScriptClasspropertyProc
@@ -155,7 +155,7 @@ proc QScriptClassqueryProperty*(self: gen_qscriptclass_types.QScriptClass, objec
   cint(fcQScriptClass_virtualbase_queryProperty(self.h, objectVal.h, name.h, cint(flags), id))
 
 proc QScriptClassproperty*(self: gen_qscriptclass_types.QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, id: cuint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClass_virtualbase_property(self.h, objectVal.h, name.h, id))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClass_virtualbase_property(self.h, objectVal.h, name.h, id), owned: true)
 
 proc QScriptClasssetProperty*(self: gen_qscriptclass_types.QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, id: cuint, value: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptClass_virtualbase_setProperty(self.h, objectVal.h, name.h, id, value.h)
@@ -164,10 +164,10 @@ proc QScriptClasspropertyFlags*(self: gen_qscriptclass_types.QScriptClass, objec
   cint(fcQScriptClass_virtualbase_propertyFlags(self.h, objectVal.h, name.h, id))
 
 proc QScriptClassnewIterator*(self: gen_qscriptclass_types.QScriptClass, objectVal: gen_qscriptvalue_types.QScriptValue): gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator =
-  gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator(h: fcQScriptClass_virtualbase_newIterator(self.h, objectVal.h))
+  gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator(h: fcQScriptClass_virtualbase_newIterator(self.h, objectVal.h), owned: false)
 
 proc QScriptClassprototype*(self: gen_qscriptclass_types.QScriptClass): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClass_virtualbase_prototype(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClass_virtualbase_prototype(self.h), owned: true)
 
 proc QScriptClassname*(self: gen_qscriptclass_types.QScriptClass): string =
   let v_ms = fcQScriptClass_virtualbase_name(self.h)
@@ -179,14 +179,14 @@ proc QScriptClasssupportsExtension*(self: gen_qscriptclass_types.QScriptClass, e
   fcQScriptClass_virtualbase_supportsExtension(self.h, cint(extension))
 
 proc QScriptClassextension*(self: gen_qscriptclass_types.QScriptClass, extension: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQScriptClass_virtualbase_extension(self.h, cint(extension), argument.h))
+  gen_qvariant_types.QVariant(h: fcQScriptClass_virtualbase_extension(self.h, cint(extension), argument.h), owned: true)
 
 
 proc fcQScriptClass_vtable_callback_queryProperty(self: pointer, objectVal: pointer, name: pointer, flags: cint, id: ptr cuint): cint {.cdecl.} =
   let vtbl = cast[ptr QScriptClassVTable](fcQScriptClass_vdata(self)[])
   let self = QScriptClass(h: self)
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
-  let slotval2 = gen_qscriptstring_types.QScriptString(h: name)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
+  let slotval2 = gen_qscriptstring_types.QScriptString(h: name, owned: false)
   let slotval3 = cint(flags)
   let slotval4 = id
   var virtualReturn = vtbl[].queryProperty(self, slotval1, slotval2, slotval3, slotval4)
@@ -195,26 +195,29 @@ proc fcQScriptClass_vtable_callback_queryProperty(self: pointer, objectVal: poin
 proc fcQScriptClass_vtable_callback_property(self: pointer, objectVal: pointer, name: pointer, id: cuint): pointer {.cdecl.} =
   let vtbl = cast[ptr QScriptClassVTable](fcQScriptClass_vdata(self)[])
   let self = QScriptClass(h: self)
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
-  let slotval2 = gen_qscriptstring_types.QScriptString(h: name)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
+  let slotval2 = gen_qscriptstring_types.QScriptString(h: name, owned: false)
   let slotval3 = id
   var virtualReturn = vtbl[].property(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScriptClass_vtable_callback_setProperty(self: pointer, objectVal: pointer, name: pointer, id: cuint, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScriptClassVTable](fcQScriptClass_vdata(self)[])
   let self = QScriptClass(h: self)
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
-  let slotval2 = gen_qscriptstring_types.QScriptString(h: name)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
+  let slotval2 = gen_qscriptstring_types.QScriptString(h: name, owned: false)
   let slotval3 = id
-  let slotval4 = gen_qscriptvalue_types.QScriptValue(h: value)
+  let slotval4 = gen_qscriptvalue_types.QScriptValue(h: value, owned: false)
   vtbl[].setProperty(self, slotval1, slotval2, slotval3, slotval4)
 
 proc fcQScriptClass_vtable_callback_propertyFlags(self: pointer, objectVal: pointer, name: pointer, id: cuint): cint {.cdecl.} =
   let vtbl = cast[ptr QScriptClassVTable](fcQScriptClass_vdata(self)[])
   let self = QScriptClass(h: self)
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
-  let slotval2 = gen_qscriptstring_types.QScriptString(h: name)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
+  let slotval2 = gen_qscriptstring_types.QScriptString(h: name, owned: false)
   let slotval3 = id
   var virtualReturn = vtbl[].propertyFlags(self, slotval1, slotval2, slotval3)
   cint(virtualReturn)
@@ -222,15 +225,21 @@ proc fcQScriptClass_vtable_callback_propertyFlags(self: pointer, objectVal: poin
 proc fcQScriptClass_vtable_callback_newIterator(self: pointer, objectVal: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScriptClassVTable](fcQScriptClass_vdata(self)[])
   let self = QScriptClass(h: self)
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
   var virtualReturn = vtbl[].newIterator(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScriptClass_vtable_callback_prototype(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScriptClassVTable](fcQScriptClass_vdata(self)[])
   let self = QScriptClass(h: self)
   var virtualReturn = vtbl[].prototype(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScriptClass_vtable_callback_name(self: pointer): struct_seaqt_string {.cdecl.} =
   let vtbl = cast[ptr QScriptClassVTable](fcQScriptClass_vdata(self)[])
@@ -251,9 +260,12 @@ proc fcQScriptClass_vtable_callback_extension(self: pointer, extension: cint, ar
   let vtbl = cast[ptr QScriptClassVTable](fcQScriptClass_vdata(self)[])
   let self = QScriptClass(h: self)
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: argument)
+  let slotval2 = gen_qvariant_types.QVariant(h: argument, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQScriptClass* {.inheritable.} = ref object of QScriptClass
   vtbl*: cQScriptClassVTable
@@ -279,8 +291,8 @@ method extension*(self: VirtualQScriptClass, extension: cint, argument: gen_qvar
 
 proc fcQScriptClass_method_callback_queryProperty(self: pointer, objectVal: pointer, name: pointer, flags: cint, id: ptr cuint): cint {.cdecl.} =
   let inst = cast[VirtualQScriptClass](fcQScriptClass_vdata(self)[])
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
-  let slotval2 = gen_qscriptstring_types.QScriptString(h: name)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
+  let slotval2 = gen_qscriptstring_types.QScriptString(h: name, owned: false)
   let slotval3 = cint(flags)
   let slotval4 = id
   var virtualReturn = inst.queryProperty(slotval1, slotval2, slotval3, slotval4)
@@ -288,38 +300,47 @@ proc fcQScriptClass_method_callback_queryProperty(self: pointer, objectVal: poin
 
 proc fcQScriptClass_method_callback_property(self: pointer, objectVal: pointer, name: pointer, id: cuint): pointer {.cdecl.} =
   let inst = cast[VirtualQScriptClass](fcQScriptClass_vdata(self)[])
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
-  let slotval2 = gen_qscriptstring_types.QScriptString(h: name)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
+  let slotval2 = gen_qscriptstring_types.QScriptString(h: name, owned: false)
   let slotval3 = id
   var virtualReturn = inst.property(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScriptClass_method_callback_setProperty(self: pointer, objectVal: pointer, name: pointer, id: cuint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScriptClass](fcQScriptClass_vdata(self)[])
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
-  let slotval2 = gen_qscriptstring_types.QScriptString(h: name)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
+  let slotval2 = gen_qscriptstring_types.QScriptString(h: name, owned: false)
   let slotval3 = id
-  let slotval4 = gen_qscriptvalue_types.QScriptValue(h: value)
+  let slotval4 = gen_qscriptvalue_types.QScriptValue(h: value, owned: false)
   inst.setProperty(slotval1, slotval2, slotval3, slotval4)
 
 proc fcQScriptClass_method_callback_propertyFlags(self: pointer, objectVal: pointer, name: pointer, id: cuint): cint {.cdecl.} =
   let inst = cast[VirtualQScriptClass](fcQScriptClass_vdata(self)[])
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
-  let slotval2 = gen_qscriptstring_types.QScriptString(h: name)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
+  let slotval2 = gen_qscriptstring_types.QScriptString(h: name, owned: false)
   let slotval3 = id
   var virtualReturn = inst.propertyFlags(slotval1, slotval2, slotval3)
   cint(virtualReturn)
 
 proc fcQScriptClass_method_callback_newIterator(self: pointer, objectVal: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScriptClass](fcQScriptClass_vdata(self)[])
-  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal)
+  let slotval1 = gen_qscriptvalue_types.QScriptValue(h: objectVal, owned: false)
   var virtualReturn = inst.newIterator(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScriptClass_method_callback_prototype(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScriptClass](fcQScriptClass_vdata(self)[])
   var virtualReturn = inst.prototype()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScriptClass_method_callback_name(self: pointer): struct_seaqt_string {.cdecl.} =
   let inst = cast[VirtualQScriptClass](fcQScriptClass_vdata(self)[])
@@ -337,9 +358,12 @@ proc fcQScriptClass_method_callback_supportsExtension(self: pointer, extension: 
 proc fcQScriptClass_method_callback_extension(self: pointer, extension: cint, argument: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScriptClass](fcQScriptClass_vdata(self)[])
   let slotval1 = cint(extension)
-  let slotval2 = gen_qvariant_types.QVariant(h: argument)
+  let slotval2 = gen_qvariant_types.QVariant(h: argument, owned: false)
   var virtualReturn = inst.extension(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qscriptclass_types.QScriptClass,
@@ -368,13 +392,14 @@ proc create*(T: type gen_qscriptclass_types.QScriptClass,
     vtbl[].vtbl.supportsExtension = fcQScriptClass_vtable_callback_supportsExtension
   if not isNil(vtbl[].extension):
     vtbl[].vtbl.extension = fcQScriptClass_vtable_callback_extension
-  let tmp = gen_qscriptclass_types.QScriptClass(h: fcQScriptClass_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), engine.h))
+  let tmp = gen_qscriptclass_types.QScriptClass(h: fcQScriptClass_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), engine.h), owned: true)
   fcQScriptClass_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQScriptClass_mvtbl = cQScriptClassVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQScriptClass()[])](self.fcQScriptClass_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   queryProperty: fcQScriptClass_method_callback_queryProperty,
   property: fcQScriptClass_method_callback_property,
@@ -394,5 +419,3 @@ proc create*(T: type gen_qscriptclass_types.QScriptClass,
   fcQScriptClass_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qscriptclass_types.QScriptClass) =
-  fcQScriptClass_delete(self.h)

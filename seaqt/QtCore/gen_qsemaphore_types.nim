@@ -1,4 +1,4 @@
-type QSemaphore* {.inheritable, pure.} = object
+type QSemaphore* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QSemaphore) =
   wasMoved(self)
   fcQSemaphore_delete(h)
 
-type QSemaphoreReleaser* {.inheritable, pure.} = object
+type QSemaphoreReleaser* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
