@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qhttpheaders
+export gen_qhttpheaders

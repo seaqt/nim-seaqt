@@ -1,0 +1,342 @@
+#pragma once
+#ifndef SEAQT_QTWIDGETS_GEN_QGRAPHICSSCENE_H
+#define SEAQT_QTWIDGETS_GEN_QGRAPHICSSCENE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QBrush;
+class QChildEvent;
+class QEvent;
+class QFocusEvent;
+class QFont;
+class QGraphicsEllipseItem;
+class QGraphicsItem;
+class QGraphicsItemGroup;
+class QGraphicsLineItem;
+class QGraphicsPathItem;
+class QGraphicsPixmapItem;
+class QGraphicsProxyWidget;
+class QGraphicsRectItem;
+class QGraphicsScene;
+class QGraphicsSceneContextMenuEvent;
+class QGraphicsSceneDragDropEvent;
+class QGraphicsSceneHelpEvent;
+class QGraphicsSceneMouseEvent;
+class QGraphicsSceneWheelEvent;
+class QGraphicsSimpleTextItem;
+class QGraphicsTextItem;
+class QGraphicsView;
+class QGraphicsWidget;
+class QInputMethodEvent;
+class QKeyEvent;
+class QLineF;
+class QMetaMethod;
+class QMetaObject;
+class QObject;
+class QPainter;
+class QPainterPath;
+class QPalette;
+class QPen;
+class QPixmap;
+class QPointF;
+class QRectF;
+class QStyle;
+class QTimerEvent;
+class QTransform;
+class QVariant;
+class QWidget;
+#else
+typedef struct QBrush QBrush;
+typedef struct QChildEvent QChildEvent;
+typedef struct QEvent QEvent;
+typedef struct QFocusEvent QFocusEvent;
+typedef struct QFont QFont;
+typedef struct QGraphicsEllipseItem QGraphicsEllipseItem;
+typedef struct QGraphicsItem QGraphicsItem;
+typedef struct QGraphicsItemGroup QGraphicsItemGroup;
+typedef struct QGraphicsLineItem QGraphicsLineItem;
+typedef struct QGraphicsPathItem QGraphicsPathItem;
+typedef struct QGraphicsPixmapItem QGraphicsPixmapItem;
+typedef struct QGraphicsProxyWidget QGraphicsProxyWidget;
+typedef struct QGraphicsRectItem QGraphicsRectItem;
+typedef struct QGraphicsScene QGraphicsScene;
+typedef struct QGraphicsSceneContextMenuEvent QGraphicsSceneContextMenuEvent;
+typedef struct QGraphicsSceneDragDropEvent QGraphicsSceneDragDropEvent;
+typedef struct QGraphicsSceneHelpEvent QGraphicsSceneHelpEvent;
+typedef struct QGraphicsSceneMouseEvent QGraphicsSceneMouseEvent;
+typedef struct QGraphicsSceneWheelEvent QGraphicsSceneWheelEvent;
+typedef struct QGraphicsSimpleTextItem QGraphicsSimpleTextItem;
+typedef struct QGraphicsTextItem QGraphicsTextItem;
+typedef struct QGraphicsView QGraphicsView;
+typedef struct QGraphicsWidget QGraphicsWidget;
+typedef struct QInputMethodEvent QInputMethodEvent;
+typedef struct QKeyEvent QKeyEvent;
+typedef struct QLineF QLineF;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QObject QObject;
+typedef struct QPainter QPainter;
+typedef struct QPainterPath QPainterPath;
+typedef struct QPalette QPalette;
+typedef struct QPen QPen;
+typedef struct QPixmap QPixmap;
+typedef struct QPointF QPointF;
+typedef struct QRectF QRectF;
+typedef struct QStyle QStyle;
+typedef struct QTimerEvent QTimerEvent;
+typedef struct QTransform QTransform;
+typedef struct QVariant QVariant;
+typedef struct QWidget QWidget;
+#endif
+
+typedef struct VirtualQGraphicsScene VirtualQGraphicsScene;
+typedef struct QGraphicsScene_VTable{
+	void (*destructor)(VirtualQGraphicsScene* self);
+	QMetaObject* (*metaObject)(const VirtualQGraphicsScene* self);
+	void* (*metacast)(VirtualQGraphicsScene* self, const char* param1);
+	int (*metacall)(VirtualQGraphicsScene* self, int param1, int param2, void** param3);
+	QVariant* (*inputMethodQuery)(const VirtualQGraphicsScene* self, int query);
+	bool (*event)(VirtualQGraphicsScene* self, QEvent* event);
+	bool (*eventFilter)(VirtualQGraphicsScene* self, QObject* watched, QEvent* event);
+	void (*contextMenuEvent)(VirtualQGraphicsScene* self, QGraphicsSceneContextMenuEvent* event);
+	void (*dragEnterEvent)(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+	void (*dragMoveEvent)(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+	void (*dragLeaveEvent)(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+	void (*dropEvent)(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+	void (*focusInEvent)(VirtualQGraphicsScene* self, QFocusEvent* event);
+	void (*focusOutEvent)(VirtualQGraphicsScene* self, QFocusEvent* event);
+	void (*helpEvent)(VirtualQGraphicsScene* self, QGraphicsSceneHelpEvent* event);
+	void (*keyPressEvent)(VirtualQGraphicsScene* self, QKeyEvent* event);
+	void (*keyReleaseEvent)(VirtualQGraphicsScene* self, QKeyEvent* event);
+	void (*mousePressEvent)(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+	void (*mouseMoveEvent)(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+	void (*mouseReleaseEvent)(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+	void (*mouseDoubleClickEvent)(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+	void (*wheelEvent)(VirtualQGraphicsScene* self, QGraphicsSceneWheelEvent* event);
+	void (*inputMethodEvent)(VirtualQGraphicsScene* self, QInputMethodEvent* event);
+	void (*drawBackground)(VirtualQGraphicsScene* self, QPainter* painter, QRectF* rect);
+	void (*drawForeground)(VirtualQGraphicsScene* self, QPainter* painter, QRectF* rect);
+	bool (*focusNextPrevChild)(VirtualQGraphicsScene* self, bool next);
+	void (*timerEvent)(VirtualQGraphicsScene* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQGraphicsScene* self, QChildEvent* event);
+	void (*customEvent)(VirtualQGraphicsScene* self, QEvent* event);
+	void (*connectNotify)(VirtualQGraphicsScene* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQGraphicsScene* self, QMetaMethod* signal);
+}QGraphicsScene_VTable;
+
+void* QGraphicsScene_vdata(VirtualQGraphicsScene* self);
+VirtualQGraphicsScene* vdata_QGraphicsScene(void* vdata);
+
+VirtualQGraphicsScene* QGraphicsScene_new(const QGraphicsScene_VTable* vtbl, size_t vdata);
+VirtualQGraphicsScene* QGraphicsScene_new_sceneRect(const QGraphicsScene_VTable* vtbl, size_t vdata, QRectF* sceneRect);
+VirtualQGraphicsScene* QGraphicsScene_new_x_y_width_height(const QGraphicsScene_VTable* vtbl, size_t vdata, double x, double y, double width, double height);
+VirtualQGraphicsScene* QGraphicsScene_new_parent(const QGraphicsScene_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGraphicsScene* QGraphicsScene_new_sceneRect_parent(const QGraphicsScene_VTable* vtbl, size_t vdata, QRectF* sceneRect, QObject* parent);
+VirtualQGraphicsScene* QGraphicsScene_new_x_y_width_height_parent(const QGraphicsScene_VTable* vtbl, size_t vdata, double x, double y, double width, double height, QObject* parent);
+
+void QGraphicsScene_virtbase(QGraphicsScene* src, QObject** outptr_QObject);
+QMetaObject* QGraphicsScene_metaObject(const QGraphicsScene* self);
+void* QGraphicsScene_metacast(QGraphicsScene* self, const char* param1);
+int QGraphicsScene_metacall(QGraphicsScene* self, int param1, int param2, void** param3);
+struct seaqt_string QGraphicsScene_tr_s(const char* s);
+QRectF* QGraphicsScene_sceneRect(const QGraphicsScene* self);
+double QGraphicsScene_width(const QGraphicsScene* self);
+double QGraphicsScene_height(const QGraphicsScene* self);
+void QGraphicsScene_setSceneRect_rect(QGraphicsScene* self, QRectF* rect);
+void QGraphicsScene_setSceneRect_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h);
+void QGraphicsScene_render_painter(QGraphicsScene* self, QPainter* painter);
+int QGraphicsScene_itemIndexMethod(const QGraphicsScene* self);
+void QGraphicsScene_setItemIndexMethod(QGraphicsScene* self, int method);
+int QGraphicsScene_bspTreeDepth(const QGraphicsScene* self);
+void QGraphicsScene_setBspTreeDepth(QGraphicsScene* self, int depth);
+QRectF* QGraphicsScene_itemsBoundingRect(const QGraphicsScene* self);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items(const QGraphicsScene* self);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_pos(const QGraphicsScene* self, QPointF* pos);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_rect(const QGraphicsScene* self, QRectF* rect);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_path(const QGraphicsScene* self, QPainterPath* path);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_x_y_w_h_mode_order(const QGraphicsScene* self, double x, double y, double w, double h, int mode, int order);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_collidingItems_item(const QGraphicsScene* self, QGraphicsItem* item);
+QGraphicsItem* QGraphicsScene_itemAt_pos_deviceTransform(const QGraphicsScene* self, QPointF* pos, QTransform* deviceTransform);
+QGraphicsItem* QGraphicsScene_itemAt_x_y_deviceTransform(const QGraphicsScene* self, double x, double y, QTransform* deviceTransform);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_selectedItems(const QGraphicsScene* self);
+QPainterPath* QGraphicsScene_selectionArea(const QGraphicsScene* self);
+void QGraphicsScene_setSelectionArea_path_deviceTransform(QGraphicsScene* self, QPainterPath* path, QTransform* deviceTransform);
+void QGraphicsScene_setSelectionArea_path(QGraphicsScene* self, QPainterPath* path);
+QGraphicsItemGroup* QGraphicsScene_createItemGroup(QGraphicsScene* self, struct seaqt_array /* of QGraphicsItem* */  items);
+void QGraphicsScene_destroyItemGroup(QGraphicsScene* self, QGraphicsItemGroup* group);
+void QGraphicsScene_addItem(QGraphicsScene* self, QGraphicsItem* item);
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_rect(QGraphicsScene* self, QRectF* rect);
+QGraphicsLineItem* QGraphicsScene_addLine_line(QGraphicsScene* self, QLineF* line);
+QGraphicsPathItem* QGraphicsScene_addPath_path(QGraphicsScene* self, QPainterPath* path);
+QGraphicsPixmapItem* QGraphicsScene_addPixmap(QGraphicsScene* self, QPixmap* pixmap);
+QGraphicsRectItem* QGraphicsScene_addRect_rect(QGraphicsScene* self, QRectF* rect);
+QGraphicsTextItem* QGraphicsScene_addText_text(QGraphicsScene* self, struct seaqt_string text);
+QGraphicsSimpleTextItem* QGraphicsScene_addSimpleText_text(QGraphicsScene* self, struct seaqt_string text);
+QGraphicsProxyWidget* QGraphicsScene_addWidget_widget(QGraphicsScene* self, QWidget* widget);
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h);
+QGraphicsLineItem* QGraphicsScene_addLine_x1_y1_x2_y2(QGraphicsScene* self, double x1, double y1, double x2, double y2);
+QGraphicsRectItem* QGraphicsScene_addRect_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h);
+void QGraphicsScene_removeItem(QGraphicsScene* self, QGraphicsItem* item);
+QGraphicsItem* QGraphicsScene_focusItem(const QGraphicsScene* self);
+void QGraphicsScene_setFocusItem_item(QGraphicsScene* self, QGraphicsItem* item);
+bool QGraphicsScene_hasFocus(const QGraphicsScene* self);
+void QGraphicsScene_setFocus(QGraphicsScene* self);
+void QGraphicsScene_clearFocus(QGraphicsScene* self);
+void QGraphicsScene_setStickyFocus(QGraphicsScene* self, bool enabled);
+bool QGraphicsScene_stickyFocus(const QGraphicsScene* self);
+QGraphicsItem* QGraphicsScene_mouseGrabberItem(const QGraphicsScene* self);
+QBrush* QGraphicsScene_backgroundBrush(const QGraphicsScene* self);
+void QGraphicsScene_setBackgroundBrush(QGraphicsScene* self, QBrush* brush);
+QBrush* QGraphicsScene_foregroundBrush(const QGraphicsScene* self);
+void QGraphicsScene_setForegroundBrush(QGraphicsScene* self, QBrush* brush);
+QVariant* QGraphicsScene_inputMethodQuery(const QGraphicsScene* self, int query);
+struct seaqt_array /* of QGraphicsView* */  QGraphicsScene_views(const QGraphicsScene* self);
+void QGraphicsScene_update_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h);
+void QGraphicsScene_invalidate_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h);
+QStyle* QGraphicsScene_style(const QGraphicsScene* self);
+void QGraphicsScene_setStyle(QGraphicsScene* self, QStyle* style);
+QFont* QGraphicsScene_font(const QGraphicsScene* self);
+void QGraphicsScene_setFont(QGraphicsScene* self, QFont* font);
+QPalette* QGraphicsScene_palette(const QGraphicsScene* self);
+void QGraphicsScene_setPalette(QGraphicsScene* self, QPalette* palette);
+bool QGraphicsScene_isActive(const QGraphicsScene* self);
+QGraphicsItem* QGraphicsScene_activePanel(const QGraphicsScene* self);
+void QGraphicsScene_setActivePanel(QGraphicsScene* self, QGraphicsItem* item);
+QGraphicsWidget* QGraphicsScene_activeWindow(const QGraphicsScene* self);
+void QGraphicsScene_setActiveWindow(QGraphicsScene* self, QGraphicsWidget* widget);
+bool QGraphicsScene_sendEvent(QGraphicsScene* self, QGraphicsItem* item, QEvent* event);
+double QGraphicsScene_minimumRenderSize(const QGraphicsScene* self);
+void QGraphicsScene_setMinimumRenderSize(QGraphicsScene* self, double minSize);
+bool QGraphicsScene_focusOnTouch(const QGraphicsScene* self);
+void QGraphicsScene_setFocusOnTouch(QGraphicsScene* self, bool enabled);
+void QGraphicsScene_update(QGraphicsScene* self);
+void QGraphicsScene_invalidate(QGraphicsScene* self);
+void QGraphicsScene_advance(QGraphicsScene* self);
+void QGraphicsScene_clearSelection(QGraphicsScene* self);
+void QGraphicsScene_clear(QGraphicsScene* self);
+bool QGraphicsScene_event(QGraphicsScene* self, QEvent* event);
+bool QGraphicsScene_eventFilter(QGraphicsScene* self, QObject* watched, QEvent* event);
+void QGraphicsScene_contextMenuEvent(QGraphicsScene* self, QGraphicsSceneContextMenuEvent* event);
+void QGraphicsScene_dragEnterEvent(QGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+void QGraphicsScene_dragMoveEvent(QGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+void QGraphicsScene_dragLeaveEvent(QGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+void QGraphicsScene_dropEvent(QGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+void QGraphicsScene_focusInEvent(QGraphicsScene* self, QFocusEvent* event);
+void QGraphicsScene_focusOutEvent(QGraphicsScene* self, QFocusEvent* event);
+void QGraphicsScene_helpEvent(QGraphicsScene* self, QGraphicsSceneHelpEvent* event);
+void QGraphicsScene_keyPressEvent(QGraphicsScene* self, QKeyEvent* event);
+void QGraphicsScene_keyReleaseEvent(QGraphicsScene* self, QKeyEvent* event);
+void QGraphicsScene_mousePressEvent(QGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+void QGraphicsScene_mouseMoveEvent(QGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+void QGraphicsScene_mouseReleaseEvent(QGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+void QGraphicsScene_mouseDoubleClickEvent(QGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+void QGraphicsScene_wheelEvent(QGraphicsScene* self, QGraphicsSceneWheelEvent* event);
+void QGraphicsScene_inputMethodEvent(QGraphicsScene* self, QInputMethodEvent* event);
+void QGraphicsScene_drawBackground(QGraphicsScene* self, QPainter* painter, QRectF* rect);
+void QGraphicsScene_drawForeground(QGraphicsScene* self, QPainter* painter, QRectF* rect);
+bool QGraphicsScene_focusNextPrevChild(QGraphicsScene* self, bool next);
+void QGraphicsScene_changed(QGraphicsScene* self, struct seaqt_array /* of QRectF* */  region);
+void QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QRectF* */ ), void (*release)(intptr_t));
+void QGraphicsScene_sceneRectChanged(QGraphicsScene* self, QRectF* rect);
+void QGraphicsScene_connect_sceneRectChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t));
+void QGraphicsScene_selectionChanged(QGraphicsScene* self);
+void QGraphicsScene_connect_selectionChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QGraphicsScene_focusItemChanged(QGraphicsScene* self, QGraphicsItem* newFocus, QGraphicsItem* oldFocus, int reason);
+void QGraphicsScene_connect_focusItemChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, QGraphicsItem*, QGraphicsItem*, int), void (*release)(intptr_t));
+struct seaqt_string QGraphicsScene_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsScene_tr_s_c_n(const char* s, const char* c, int n);
+void QGraphicsScene_render_painter_target(QGraphicsScene* self, QPainter* painter, QRectF* target);
+void QGraphicsScene_render_painter_target_source(QGraphicsScene* self, QPainter* painter, QRectF* target, QRectF* source);
+void QGraphicsScene_render_painter_target_source_aspectRatioMode(QGraphicsScene* self, QPainter* painter, QRectF* target, QRectF* source, int aspectRatioMode);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_order(const QGraphicsScene* self, int order);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_pos_mode(const QGraphicsScene* self, QPointF* pos, int mode);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_pos_mode_order(const QGraphicsScene* self, QPointF* pos, int mode, int order);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_pos_mode_order_deviceTransform(const QGraphicsScene* self, QPointF* pos, int mode, int order, QTransform* deviceTransform);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_rect_mode(const QGraphicsScene* self, QRectF* rect, int mode);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_rect_mode_order(const QGraphicsScene* self, QRectF* rect, int mode, int order);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_rect_mode_order_deviceTransform(const QGraphicsScene* self, QRectF* rect, int mode, int order, QTransform* deviceTransform);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_path_mode(const QGraphicsScene* self, QPainterPath* path, int mode);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_path_mode_order(const QGraphicsScene* self, QPainterPath* path, int mode, int order);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_path_mode_order_deviceTransform(const QGraphicsScene* self, QPainterPath* path, int mode, int order, QTransform* deviceTransform);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_x_y_w_h_mode_order_deviceTransform(const QGraphicsScene* self, double x, double y, double w, double h, int mode, int order, QTransform* deviceTransform);
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_collidingItems_item_mode(const QGraphicsScene* self, QGraphicsItem* item, int mode);
+void QGraphicsScene_setSelectionArea_path_selectionOperation(QGraphicsScene* self, QPainterPath* path, int selectionOperation);
+void QGraphicsScene_setSelectionArea_path_selectionOperation_mode(QGraphicsScene* self, QPainterPath* path, int selectionOperation, int mode);
+void QGraphicsScene_setSelectionArea_path_selectionOperation_mode_deviceTransform(QGraphicsScene* self, QPainterPath* path, int selectionOperation, int mode, QTransform* deviceTransform);
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_rect_pen(QGraphicsScene* self, QRectF* rect, QPen* pen);
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_rect_pen_brush(QGraphicsScene* self, QRectF* rect, QPen* pen, QBrush* brush);
+QGraphicsLineItem* QGraphicsScene_addLine_line_pen(QGraphicsScene* self, QLineF* line, QPen* pen);
+QGraphicsPathItem* QGraphicsScene_addPath_path_pen(QGraphicsScene* self, QPainterPath* path, QPen* pen);
+QGraphicsPathItem* QGraphicsScene_addPath_path_pen_brush(QGraphicsScene* self, QPainterPath* path, QPen* pen, QBrush* brush);
+QGraphicsRectItem* QGraphicsScene_addRect_rect_pen(QGraphicsScene* self, QRectF* rect, QPen* pen);
+QGraphicsRectItem* QGraphicsScene_addRect_rect_pen_brush(QGraphicsScene* self, QRectF* rect, QPen* pen, QBrush* brush);
+QGraphicsTextItem* QGraphicsScene_addText_text_font(QGraphicsScene* self, struct seaqt_string text, QFont* font);
+QGraphicsSimpleTextItem* QGraphicsScene_addSimpleText_text_font(QGraphicsScene* self, struct seaqt_string text, QFont* font);
+QGraphicsProxyWidget* QGraphicsScene_addWidget_widget_wFlags(QGraphicsScene* self, QWidget* widget, int wFlags);
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_x_y_w_h_pen(QGraphicsScene* self, double x, double y, double w, double h, QPen* pen);
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_x_y_w_h_pen_brush(QGraphicsScene* self, double x, double y, double w, double h, QPen* pen, QBrush* brush);
+QGraphicsLineItem* QGraphicsScene_addLine_x1_y1_x2_y2_pen(QGraphicsScene* self, double x1, double y1, double x2, double y2, QPen* pen);
+QGraphicsRectItem* QGraphicsScene_addRect_x_y_w_h_pen(QGraphicsScene* self, double x, double y, double w, double h, QPen* pen);
+QGraphicsRectItem* QGraphicsScene_addRect_x_y_w_h_pen_brush(QGraphicsScene* self, double x, double y, double w, double h, QPen* pen, QBrush* brush);
+void QGraphicsScene_setFocusItem_item_focusReason(QGraphicsScene* self, QGraphicsItem* item, int focusReason);
+void QGraphicsScene_setFocus_focusReason(QGraphicsScene* self, int focusReason);
+void QGraphicsScene_invalidate_x_y_w_h_layers(QGraphicsScene* self, double x, double y, double w, double h, int layers);
+void QGraphicsScene_update_rect(QGraphicsScene* self, QRectF* rect);
+void QGraphicsScene_invalidate_rect(QGraphicsScene* self, QRectF* rect);
+void QGraphicsScene_invalidate_rect_layers(QGraphicsScene* self, QRectF* rect, int layers);
+
+QMetaObject* QGraphicsScene_virtualbase_metaObject(const VirtualQGraphicsScene* self);
+void* QGraphicsScene_virtualbase_metacast(VirtualQGraphicsScene* self, const char* param1);
+int QGraphicsScene_virtualbase_metacall(VirtualQGraphicsScene* self, int param1, int param2, void** param3);
+QVariant* QGraphicsScene_virtualbase_inputMethodQuery(const VirtualQGraphicsScene* self, int query);
+bool QGraphicsScene_virtualbase_event(VirtualQGraphicsScene* self, QEvent* event);
+bool QGraphicsScene_virtualbase_eventFilter(VirtualQGraphicsScene* self, QObject* watched, QEvent* event);
+void QGraphicsScene_virtualbase_contextMenuEvent(VirtualQGraphicsScene* self, QGraphicsSceneContextMenuEvent* event);
+void QGraphicsScene_virtualbase_dragEnterEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+void QGraphicsScene_virtualbase_dragMoveEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+void QGraphicsScene_virtualbase_dragLeaveEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+void QGraphicsScene_virtualbase_dropEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+void QGraphicsScene_virtualbase_focusInEvent(VirtualQGraphicsScene* self, QFocusEvent* event);
+void QGraphicsScene_virtualbase_focusOutEvent(VirtualQGraphicsScene* self, QFocusEvent* event);
+void QGraphicsScene_virtualbase_helpEvent(VirtualQGraphicsScene* self, QGraphicsSceneHelpEvent* event);
+void QGraphicsScene_virtualbase_keyPressEvent(VirtualQGraphicsScene* self, QKeyEvent* event);
+void QGraphicsScene_virtualbase_keyReleaseEvent(VirtualQGraphicsScene* self, QKeyEvent* event);
+void QGraphicsScene_virtualbase_mousePressEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+void QGraphicsScene_virtualbase_mouseMoveEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+void QGraphicsScene_virtualbase_mouseReleaseEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+void QGraphicsScene_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+void QGraphicsScene_virtualbase_wheelEvent(VirtualQGraphicsScene* self, QGraphicsSceneWheelEvent* event);
+void QGraphicsScene_virtualbase_inputMethodEvent(VirtualQGraphicsScene* self, QInputMethodEvent* event);
+void QGraphicsScene_virtualbase_drawBackground(VirtualQGraphicsScene* self, QPainter* painter, QRectF* rect);
+void QGraphicsScene_virtualbase_drawForeground(VirtualQGraphicsScene* self, QPainter* painter, QRectF* rect);
+bool QGraphicsScene_virtualbase_focusNextPrevChild(VirtualQGraphicsScene* self, bool next);
+void QGraphicsScene_virtualbase_timerEvent(VirtualQGraphicsScene* self, QTimerEvent* event);
+void QGraphicsScene_virtualbase_childEvent(VirtualQGraphicsScene* self, QChildEvent* event);
+void QGraphicsScene_virtualbase_customEvent(VirtualQGraphicsScene* self, QEvent* event);
+void QGraphicsScene_virtualbase_connectNotify(VirtualQGraphicsScene* self, QMetaMethod* signal);
+void QGraphicsScene_virtualbase_disconnectNotify(VirtualQGraphicsScene* self, QMetaMethod* signal);
+
+QObject* QGraphicsScene_protectedbase_sender(const VirtualQGraphicsScene* self);
+int QGraphicsScene_protectedbase_senderSignalIndex(const VirtualQGraphicsScene* self);
+int QGraphicsScene_protectedbase_receivers(const VirtualQGraphicsScene* self, const char* signal);
+bool QGraphicsScene_protectedbase_isSignalConnected(const VirtualQGraphicsScene* self, QMetaMethod* signal);
+
+const QMetaObject* QGraphicsScene_staticMetaObject();
+void QGraphicsScene_delete(QGraphicsScene* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

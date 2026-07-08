@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractsettings
+export gen_abstractsettings

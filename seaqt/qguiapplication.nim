@@ -1,0 +1,2 @@
+import ./QtGui/gen_qguiapplication
+export gen_qguiapplication

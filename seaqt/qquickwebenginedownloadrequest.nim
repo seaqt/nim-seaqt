@@ -1,0 +1,2 @@
+import ./QtWebEngineQuick/gen_qquickwebenginedownloadrequest
+export gen_qquickwebenginedownloadrequest

@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcapturablewindow
+export gen_qcapturablewindow

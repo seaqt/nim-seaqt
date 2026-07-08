@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginepermission
+export gen_qwebenginepermission

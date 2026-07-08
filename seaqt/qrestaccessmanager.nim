@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qrestaccessmanager
+export gen_qrestaccessmanager

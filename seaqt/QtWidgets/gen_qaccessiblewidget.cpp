@@ -1,0 +1,155 @@
+#define WORKAROUND_INNER_CLASS_DEFINITION_QAccessible__State
+#include <QAccessibleActionInterface>
+#include <QAccessibleInterface>
+#include <QAccessibleObject>
+#include <QAccessibleWidget>
+#include <QColor>
+#include <QList>
+#include <QObject>
+#include <QRect>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QWidget>
+#include <QWindow>
+#include <qaccessiblewidget.h>
+#include "gen_qaccessiblewidget.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QAccessibleWidget* QAccessibleWidget_new_o(QWidget* o) {
+	return new (std::nothrow) QAccessibleWidget(o);
+}
+
+QAccessibleWidget* QAccessibleWidget_new_o_r(QWidget* o, int r) {
+	return new (std::nothrow) QAccessibleWidget(o, static_cast<QAccessible::Role>(r));
+}
+
+QAccessibleWidget* QAccessibleWidget_new_o_r_name(QWidget* o, int r, struct seaqt_string name) {
+	QString name_QString = QString::fromUtf8(name.data, name.len);
+	return new (std::nothrow) QAccessibleWidget(o, static_cast<QAccessible::Role>(r), name_QString);
+}
+
+void QAccessibleWidget_virtbase(QAccessibleWidget* src, QAccessibleObject** outptr_QAccessibleObject, QAccessibleActionInterface** outptr_QAccessibleActionInterface) {
+	*outptr_QAccessibleObject = static_cast<QAccessibleObject*>(src);
+	*outptr_QAccessibleActionInterface = static_cast<QAccessibleActionInterface*>(src);
+}
+
+bool QAccessibleWidget_isValid(const QAccessibleWidget* self) {
+	return self->isValid();
+}
+
+QWindow* QAccessibleWidget_window(const QAccessibleWidget* self) {
+	return self->window();
+}
+
+int QAccessibleWidget_childCount(const QAccessibleWidget* self) {
+	return self->childCount();
+}
+
+int QAccessibleWidget_indexOfChild(const QAccessibleWidget* self, QAccessibleInterface* child) {
+	return self->indexOfChild(child);
+}
+
+QAccessibleInterface* QAccessibleWidget_focusChild(const QAccessibleWidget* self) {
+	return self->focusChild();
+}
+
+QRect* QAccessibleWidget_rect(const QAccessibleWidget* self) {
+	return new QRect(self->rect());
+}
+
+QAccessibleInterface* QAccessibleWidget_parent(const QAccessibleWidget* self) {
+	return self->parent();
+}
+
+QAccessibleInterface* QAccessibleWidget_child(const QAccessibleWidget* self, int index) {
+	return self->child(static_cast<int>(index));
+}
+
+struct seaqt_string QAccessibleWidget_text(const QAccessibleWidget* self, int t) {
+	QString _ret = self->text(static_cast<QAccessible::Text>(t));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QAccessibleWidget_role(const QAccessibleWidget* self) {
+	QAccessible::Role _ret = self->role();
+	return static_cast<int>(_ret);
+}
+
+QAccessible__State* QAccessibleWidget_state(const QAccessibleWidget* self) {
+	return new QAccessible::State(self->state());
+}
+
+QColor* QAccessibleWidget_foregroundColor(const QAccessibleWidget* self) {
+	return new QColor(self->foregroundColor());
+}
+
+QColor* QAccessibleWidget_backgroundColor(const QAccessibleWidget* self) {
+	return new QColor(self->backgroundColor());
+}
+
+void* QAccessibleWidget_interface_cast(QAccessibleWidget* self, int t) {
+	return self->interface_cast(static_cast<QAccessible::InterfaceType>(t));
+}
+
+struct seaqt_array /* of struct seaqt_string */  QAccessibleWidget_actionNames(const QAccessibleWidget* self) {
+	QStringList _ret = self->actionNames();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QAccessibleWidget_doAction(QAccessibleWidget* self, struct seaqt_string actionName) {
+	QString actionName_QString = QString::fromUtf8(actionName.data, actionName.len);
+	self->doAction(actionName_QString);
+}
+
+struct seaqt_array /* of struct seaqt_string */  QAccessibleWidget_keyBindingsForAction(const QAccessibleWidget* self, struct seaqt_string actionName) {
+	QString actionName_QString = QString::fromUtf8(actionName.data, actionName.len);
+	QStringList _ret = self->keyBindingsForAction(actionName_QString);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+

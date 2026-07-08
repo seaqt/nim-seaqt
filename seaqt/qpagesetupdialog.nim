@@ -1,0 +1,2 @@
+import ./QtPrintSupport/gen_qpagesetupdialog
+export gen_qpagesetupdialog

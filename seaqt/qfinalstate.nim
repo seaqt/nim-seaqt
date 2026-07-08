@@ -1,0 +1,2 @@
+import ./QtStateMachine/gen_qfinalstate
+export gen_qfinalstate

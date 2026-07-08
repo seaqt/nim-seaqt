@@ -1,0 +1,237 @@
+#include <QInputMethod>
+#include <QLocale>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QRectF>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTransform>
+#include <QVariant>
+#include <qinputmethod.h>
+#include "gen_qinputmethod.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QInputMethod_virtbase(QInputMethod* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QInputMethod_metaObject(const QInputMethod* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QInputMethod_metacast(QInputMethod* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QInputMethod_metacall(QInputMethod* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QInputMethod_tr_s(const char* s) {
+	QString _ret = QInputMethod::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QTransform* QInputMethod_inputItemTransform(const QInputMethod* self) {
+	return new QTransform(self->inputItemTransform());
+}
+
+void QInputMethod_setInputItemTransform(QInputMethod* self, QTransform* transform) {
+	self->setInputItemTransform(*transform);
+}
+
+QRectF* QInputMethod_inputItemRectangle(const QInputMethod* self) {
+	return new QRectF(self->inputItemRectangle());
+}
+
+void QInputMethod_setInputItemRectangle(QInputMethod* self, QRectF* rect) {
+	self->setInputItemRectangle(*rect);
+}
+
+QRectF* QInputMethod_cursorRectangle(const QInputMethod* self) {
+	return new QRectF(self->cursorRectangle());
+}
+
+QRectF* QInputMethod_anchorRectangle(const QInputMethod* self) {
+	return new QRectF(self->anchorRectangle());
+}
+
+QRectF* QInputMethod_keyboardRectangle(const QInputMethod* self) {
+	return new QRectF(self->keyboardRectangle());
+}
+
+QRectF* QInputMethod_inputItemClipRectangle(const QInputMethod* self) {
+	return new QRectF(self->inputItemClipRectangle());
+}
+
+bool QInputMethod_isVisible(const QInputMethod* self) {
+	return self->isVisible();
+}
+
+void QInputMethod_setVisible(QInputMethod* self, bool visible) {
+	self->setVisible(visible);
+}
+
+bool QInputMethod_isAnimating(const QInputMethod* self) {
+	return self->isAnimating();
+}
+
+QLocale* QInputMethod_locale(const QInputMethod* self) {
+	return new QLocale(self->locale());
+}
+
+int QInputMethod_inputDirection(const QInputMethod* self) {
+	Qt::LayoutDirection _ret = self->inputDirection();
+	return static_cast<int>(_ret);
+}
+
+QVariant* QInputMethod_queryFocusObject(int query, QVariant* argument) {
+	return new QVariant(QInputMethod::queryFocusObject(static_cast<Qt::InputMethodQuery>(query), *argument));
+}
+
+void QInputMethod_show(QInputMethod* self) {
+	self->show();
+}
+
+void QInputMethod_hide(QInputMethod* self) {
+	self->hide();
+}
+
+void QInputMethod_update(QInputMethod* self, int queries) {
+	self->update(static_cast<Qt::InputMethodQueries>(queries));
+}
+
+void QInputMethod_reset(QInputMethod* self) {
+	self->reset();
+}
+
+void QInputMethod_commit(QInputMethod* self) {
+	self->commit();
+}
+
+void QInputMethod_invokeAction(QInputMethod* self, int a, int cursorPosition) {
+	self->invokeAction(static_cast<QInputMethod::Action>(a), static_cast<int>(cursorPosition));
+}
+
+void QInputMethod_cursorRectangleChanged(QInputMethod* self) {
+	self->cursorRectangleChanged();
+}
+
+void QInputMethod_connect_cursorRectangleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::cursorRectangleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QInputMethod_anchorRectangleChanged(QInputMethod* self) {
+	self->anchorRectangleChanged();
+}
+
+void QInputMethod_connect_anchorRectangleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::anchorRectangleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QInputMethod_keyboardRectangleChanged(QInputMethod* self) {
+	self->keyboardRectangleChanged();
+}
+
+void QInputMethod_connect_keyboardRectangleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::keyboardRectangleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QInputMethod_inputItemClipRectangleChanged(QInputMethod* self) {
+	self->inputItemClipRectangleChanged();
+}
+
+void QInputMethod_connect_inputItemClipRectangleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::inputItemClipRectangleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QInputMethod_visibleChanged(QInputMethod* self) {
+	self->visibleChanged();
+}
+
+void QInputMethod_connect_visibleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::visibleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QInputMethod_animatingChanged(QInputMethod* self) {
+	self->animatingChanged();
+}
+
+void QInputMethod_connect_animatingChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::animatingChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QInputMethod_localeChanged(QInputMethod* self) {
+	self->localeChanged();
+}
+
+void QInputMethod_connect_localeChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::localeChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QInputMethod_inputDirectionChanged(QInputMethod* self, int newDirection) {
+	self->inputDirectionChanged(static_cast<Qt::LayoutDirection>(newDirection));
+}
+
+void QInputMethod_connect_inputDirectionChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)(Qt::LayoutDirection)>(&QInputMethod::inputDirectionChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::LayoutDirection newDirection) {
+			Qt::LayoutDirection newDirection_ret = newDirection;
+			int sigval1 = static_cast<int>(newDirection_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+struct seaqt_string QInputMethod_tr_s_c(const char* s, const char* c) {
+	QString _ret = QInputMethod::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QInputMethod_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QInputMethod::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QInputMethod_staticMetaObject() { return &QInputMethod::staticMetaObject; }

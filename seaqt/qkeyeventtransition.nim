@@ -1,0 +1,2 @@
+import ./QtStateMachine/gen_qkeyeventtransition
+export gen_qkeyeventtransition

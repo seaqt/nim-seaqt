@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractformeditorplugin
+export gen_abstractformeditorplugin

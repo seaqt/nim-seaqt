@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicslinearlayout
+export gen_qgraphicslinearlayout

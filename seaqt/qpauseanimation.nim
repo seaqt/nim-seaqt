@@ -1,0 +1,2 @@
+import ./QtCore/gen_qpauseanimation
+export gen_qpauseanimation

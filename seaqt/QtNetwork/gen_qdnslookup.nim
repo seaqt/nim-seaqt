@@ -1,0 +1,1419 @@
+import ./qtnetwork_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free, c_malloc
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+type QDnsTlsAssociationRecordCertificateUsageEnum* = distinct uint8
+template CertificateAuthorityConstrait*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 0
+template ServiceCertificateConstraint*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 1
+template TrustAnchorAssertion*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 2
+template DomainIssuedCertificate*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 3
+template PrivateUse*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 255
+template PKIX_TA*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 0
+template PKIX_EE*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 1
+template DANE_TA*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 2
+template DANE_EE*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 3
+template PrivCert*(_: type QDnsTlsAssociationRecordCertificateUsageEnum): untyped = 255
+
+
+type QDnsTlsAssociationRecordSelectorEnum* = distinct uint8
+template FullCertificate*(_: type QDnsTlsAssociationRecordSelectorEnum): untyped = 0
+template SubjectPublicKeyInfo*(_: type QDnsTlsAssociationRecordSelectorEnum): untyped = 1
+template PrivateUse*(_: type QDnsTlsAssociationRecordSelectorEnum): untyped = 255
+template Cert*(_: type QDnsTlsAssociationRecordSelectorEnum): untyped = 0
+template SPKI*(_: type QDnsTlsAssociationRecordSelectorEnum): untyped = 1
+template PrivSel*(_: type QDnsTlsAssociationRecordSelectorEnum): untyped = 255
+
+
+type QDnsTlsAssociationRecordMatchingTypeEnum* = distinct uint8
+template Exact*(_: type QDnsTlsAssociationRecordMatchingTypeEnum): untyped = 0
+template Sha256*(_: type QDnsTlsAssociationRecordMatchingTypeEnum): untyped = 1
+template Sha512*(_: type QDnsTlsAssociationRecordMatchingTypeEnum): untyped = 2
+template PrivateUse*(_: type QDnsTlsAssociationRecordMatchingTypeEnum): untyped = 255
+template PrivMatch*(_: type QDnsTlsAssociationRecordMatchingTypeEnum): untyped = 255
+
+
+type QDnsLookupErrorEnum* = distinct cint
+template NoError*(_: type QDnsLookupErrorEnum): untyped = 0
+template ResolverError*(_: type QDnsLookupErrorEnum): untyped = 1
+template OperationCancelledError*(_: type QDnsLookupErrorEnum): untyped = 2
+template InvalidRequestError*(_: type QDnsLookupErrorEnum): untyped = 3
+template InvalidReplyError*(_: type QDnsLookupErrorEnum): untyped = 4
+template ServerFailureError*(_: type QDnsLookupErrorEnum): untyped = 5
+template ServerRefusedError*(_: type QDnsLookupErrorEnum): untyped = 6
+template NotFoundError*(_: type QDnsLookupErrorEnum): untyped = 7
+template TimeoutError*(_: type QDnsLookupErrorEnum): untyped = 8
+
+
+type QDnsLookupTypeEnum* = distinct cint
+template A*(_: type QDnsLookupTypeEnum): untyped = 1
+template AAAA*(_: type QDnsLookupTypeEnum): untyped = 28
+template ANY*(_: type QDnsLookupTypeEnum): untyped = 255
+template CNAME*(_: type QDnsLookupTypeEnum): untyped = 5
+template MX*(_: type QDnsLookupTypeEnum): untyped = 15
+template NS*(_: type QDnsLookupTypeEnum): untyped = 2
+template PTR*(_: type QDnsLookupTypeEnum): untyped = 12
+template SRV*(_: type QDnsLookupTypeEnum): untyped = 33
+template TLSA*(_: type QDnsLookupTypeEnum): untyped = 52
+template TXT*(_: type QDnsLookupTypeEnum): untyped = 16
+
+
+type QDnsLookupProtocolEnum* = distinct uint8
+template Standard*(_: type QDnsLookupProtocolEnum): untyped = 0
+template DnsOverTls*(_: type QDnsLookupProtocolEnum): untyped = 1
+
+
+import ./gen_qdnslookup_types
+export gen_qdnslookup_types
+
+import
+  ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject,
+  ../QtCore/gen_qobjectdefs_types,
+  ./gen_qhostaddress_types,
+  ./gen_qsslconfiguration_types
+export
+  gen_qcoreevent_types,
+  gen_qmetaobject_types,
+  gen_qobject,
+  gen_qobjectdefs_types,
+  gen_qhostaddress_types,
+  gen_qsslconfiguration_types
+
+type cQDnsDomainNameRecord*{.exportc: "QDnsDomainNameRecord", incompleteStruct.} = object
+type cQDnsHostAddressRecord*{.exportc: "QDnsHostAddressRecord", incompleteStruct.} = object
+type cQDnsMailExchangeRecord*{.exportc: "QDnsMailExchangeRecord", incompleteStruct.} = object
+type cQDnsServiceRecord*{.exportc: "QDnsServiceRecord", incompleteStruct.} = object
+type cQDnsTextRecord*{.exportc: "QDnsTextRecord", incompleteStruct.} = object
+type cQDnsTlsAssociationRecord*{.exportc: "QDnsTlsAssociationRecord", incompleteStruct.} = object
+type cQDnsLookup*{.exportc: "QDnsLookup", incompleteStruct.} = object
+
+proc fcQDnsDomainNameRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsDomainNameRecord_operatorAssign".}
+proc fcQDnsDomainNameRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsDomainNameRecord_swap".}
+proc fcQDnsDomainNameRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsDomainNameRecord_name".}
+proc fcQDnsDomainNameRecord_timeToLive(self: pointer): cuint {.importc: "QDnsDomainNameRecord_timeToLive".}
+proc fcQDnsDomainNameRecord_value(self: pointer): struct_seaqt_string {.importc: "QDnsDomainNameRecord_value".}
+proc fcQDnsDomainNameRecord_new(): ptr cQDnsDomainNameRecord {.importc: "QDnsDomainNameRecord_new".}
+proc fcQDnsDomainNameRecord_new2(fromVal: pointer): ptr cQDnsDomainNameRecord {.importc: "QDnsDomainNameRecord_new_from".}
+proc fcQDnsHostAddressRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsHostAddressRecord_operatorAssign".}
+proc fcQDnsHostAddressRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsHostAddressRecord_swap".}
+proc fcQDnsHostAddressRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsHostAddressRecord_name".}
+proc fcQDnsHostAddressRecord_timeToLive(self: pointer): cuint {.importc: "QDnsHostAddressRecord_timeToLive".}
+proc fcQDnsHostAddressRecord_value(self: pointer): pointer {.importc: "QDnsHostAddressRecord_value".}
+proc fcQDnsHostAddressRecord_new(): ptr cQDnsHostAddressRecord {.importc: "QDnsHostAddressRecord_new".}
+proc fcQDnsHostAddressRecord_new2(fromVal: pointer): ptr cQDnsHostAddressRecord {.importc: "QDnsHostAddressRecord_new_from".}
+proc fcQDnsMailExchangeRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsMailExchangeRecord_operatorAssign".}
+proc fcQDnsMailExchangeRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsMailExchangeRecord_swap".}
+proc fcQDnsMailExchangeRecord_exchange(self: pointer): struct_seaqt_string {.importc: "QDnsMailExchangeRecord_exchange".}
+proc fcQDnsMailExchangeRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsMailExchangeRecord_name".}
+proc fcQDnsMailExchangeRecord_preference(self: pointer): cushort {.importc: "QDnsMailExchangeRecord_preference".}
+proc fcQDnsMailExchangeRecord_timeToLive(self: pointer): cuint {.importc: "QDnsMailExchangeRecord_timeToLive".}
+proc fcQDnsMailExchangeRecord_new(): ptr cQDnsMailExchangeRecord {.importc: "QDnsMailExchangeRecord_new".}
+proc fcQDnsMailExchangeRecord_new2(fromVal: pointer): ptr cQDnsMailExchangeRecord {.importc: "QDnsMailExchangeRecord_new_from".}
+proc fcQDnsServiceRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsServiceRecord_operatorAssign".}
+proc fcQDnsServiceRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsServiceRecord_swap".}
+proc fcQDnsServiceRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsServiceRecord_name".}
+proc fcQDnsServiceRecord_port(self: pointer): cushort {.importc: "QDnsServiceRecord_port".}
+proc fcQDnsServiceRecord_priority(self: pointer): cushort {.importc: "QDnsServiceRecord_priority".}
+proc fcQDnsServiceRecord_target(self: pointer): struct_seaqt_string {.importc: "QDnsServiceRecord_target".}
+proc fcQDnsServiceRecord_timeToLive(self: pointer): cuint {.importc: "QDnsServiceRecord_timeToLive".}
+proc fcQDnsServiceRecord_weight(self: pointer): cushort {.importc: "QDnsServiceRecord_weight".}
+proc fcQDnsServiceRecord_new(): ptr cQDnsServiceRecord {.importc: "QDnsServiceRecord_new".}
+proc fcQDnsServiceRecord_new2(fromVal: pointer): ptr cQDnsServiceRecord {.importc: "QDnsServiceRecord_new_from".}
+proc fcQDnsTextRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsTextRecord_operatorAssign".}
+proc fcQDnsTextRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsTextRecord_swap".}
+proc fcQDnsTextRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsTextRecord_name".}
+proc fcQDnsTextRecord_timeToLive(self: pointer): cuint {.importc: "QDnsTextRecord_timeToLive".}
+proc fcQDnsTextRecord_values(self: pointer): struct_seaqt_array {.importc: "QDnsTextRecord_values".}
+proc fcQDnsTextRecord_new(): ptr cQDnsTextRecord {.importc: "QDnsTextRecord_new".}
+proc fcQDnsTextRecord_new2(fromVal: pointer): ptr cQDnsTextRecord {.importc: "QDnsTextRecord_new_from".}
+proc fcQDnsTlsAssociationRecord_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDnsTlsAssociationRecord_operatorAssign".}
+proc fcQDnsTlsAssociationRecord_swap(self: pointer, other: pointer): void {.importc: "QDnsTlsAssociationRecord_swap".}
+proc fcQDnsTlsAssociationRecord_name(self: pointer): struct_seaqt_string {.importc: "QDnsTlsAssociationRecord_name".}
+proc fcQDnsTlsAssociationRecord_timeToLive(self: pointer): cuint {.importc: "QDnsTlsAssociationRecord_timeToLive".}
+proc fcQDnsTlsAssociationRecord_usage(self: pointer): cint {.importc: "QDnsTlsAssociationRecord_usage".}
+proc fcQDnsTlsAssociationRecord_selector(self: pointer): cint {.importc: "QDnsTlsAssociationRecord_selector".}
+proc fcQDnsTlsAssociationRecord_matchType(self: pointer): cint {.importc: "QDnsTlsAssociationRecord_matchType".}
+proc fcQDnsTlsAssociationRecord_value(self: pointer): struct_seaqt_string {.importc: "QDnsTlsAssociationRecord_value".}
+proc fcQDnsTlsAssociationRecord_new(): ptr cQDnsTlsAssociationRecord {.importc: "QDnsTlsAssociationRecord_new".}
+proc fcQDnsTlsAssociationRecord_new2(fromVal: pointer): ptr cQDnsTlsAssociationRecord {.importc: "QDnsTlsAssociationRecord_new_from".}
+proc fcQDnsTlsAssociationRecord_staticMetaObject(): pointer {.importc: "QDnsTlsAssociationRecord_staticMetaObject".}
+proc fcQDnsLookup_metaObject(self: pointer): pointer {.importc: "QDnsLookup_metaObject".}
+proc fcQDnsLookup_metacast(self: pointer, param1: cstring): pointer {.importc: "QDnsLookup_metacast".}
+proc fcQDnsLookup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDnsLookup_metacall".}
+proc fcQDnsLookup_trS(s: cstring): struct_seaqt_string {.importc: "QDnsLookup_tr_s".}
+proc fcQDnsLookup_isAuthenticData(self: pointer): bool {.importc: "QDnsLookup_isAuthenticData".}
+proc fcQDnsLookup_error(self: pointer): cint {.importc: "QDnsLookup_error".}
+proc fcQDnsLookup_errorString(self: pointer): struct_seaqt_string {.importc: "QDnsLookup_errorString".}
+proc fcQDnsLookup_isFinished(self: pointer): bool {.importc: "QDnsLookup_isFinished".}
+proc fcQDnsLookup_name(self: pointer): struct_seaqt_string {.importc: "QDnsLookup_name".}
+proc fcQDnsLookup_setName(self: pointer, name: struct_seaqt_string): void {.importc: "QDnsLookup_setName".}
+proc fcQDnsLookup_typeX(self: pointer): cint {.importc: "QDnsLookup_type".}
+proc fcQDnsLookup_setType(self: pointer, typeVal: cint): void {.importc: "QDnsLookup_setType".}
+proc fcQDnsLookup_nameserver(self: pointer): pointer {.importc: "QDnsLookup_nameserver".}
+proc fcQDnsLookup_setNameserverNameserver(self: pointer, nameserver: pointer): void {.importc: "QDnsLookup_setNameserver_nameserver".}
+proc fcQDnsLookup_nameserverPort(self: pointer): cushort {.importc: "QDnsLookup_nameserverPort".}
+proc fcQDnsLookup_setNameserverPort(self: pointer, port: cushort): void {.importc: "QDnsLookup_setNameserverPort".}
+proc fcQDnsLookup_nameserverProtocol(self: pointer): cint {.importc: "QDnsLookup_nameserverProtocol".}
+proc fcQDnsLookup_setNameserverProtocol(self: pointer, protocol: cint): void {.importc: "QDnsLookup_setNameserverProtocol".}
+proc fcQDnsLookup_setNameserverProtocolNameserver(self: pointer, protocol: cint, nameserver: pointer): void {.importc: "QDnsLookup_setNameserver_protocol_nameserver".}
+proc fcQDnsLookup_setNameserverNameserverPort(self: pointer, nameserver: pointer, port: cushort): void {.importc: "QDnsLookup_setNameserver_nameserver_port".}
+proc fcQDnsLookup_canonicalNameRecords(self: pointer): struct_seaqt_array {.importc: "QDnsLookup_canonicalNameRecords".}
+proc fcQDnsLookup_hostAddressRecords(self: pointer): struct_seaqt_array {.importc: "QDnsLookup_hostAddressRecords".}
+proc fcQDnsLookup_mailExchangeRecords(self: pointer): struct_seaqt_array {.importc: "QDnsLookup_mailExchangeRecords".}
+proc fcQDnsLookup_nameServerRecords(self: pointer): struct_seaqt_array {.importc: "QDnsLookup_nameServerRecords".}
+proc fcQDnsLookup_pointerRecords(self: pointer): struct_seaqt_array {.importc: "QDnsLookup_pointerRecords".}
+proc fcQDnsLookup_serviceRecords(self: pointer): struct_seaqt_array {.importc: "QDnsLookup_serviceRecords".}
+proc fcQDnsLookup_textRecords(self: pointer): struct_seaqt_array {.importc: "QDnsLookup_textRecords".}
+proc fcQDnsLookup_tlsAssociationRecords(self: pointer): struct_seaqt_array {.importc: "QDnsLookup_tlsAssociationRecords".}
+proc fcQDnsLookup_setSslConfiguration(self: pointer, sslConfiguration: pointer): void {.importc: "QDnsLookup_setSslConfiguration".}
+proc fcQDnsLookup_sslConfiguration(self: pointer): pointer {.importc: "QDnsLookup_sslConfiguration".}
+proc fcQDnsLookup_isProtocolSupported(protocol: cint): bool {.importc: "QDnsLookup_isProtocolSupported".}
+proc fcQDnsLookup_defaultPortForProtocol(protocol: cint): cushort {.importc: "QDnsLookup_defaultPortForProtocol".}
+proc fcQDnsLookup_abort(self: pointer): void {.importc: "QDnsLookup_abort".}
+proc fcQDnsLookup_lookup(self: pointer): void {.importc: "QDnsLookup_lookup".}
+proc fcQDnsLookup_finished(self: pointer): void {.importc: "QDnsLookup_finished".}
+proc fcQDnsLookup_connect_finished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_finished".}
+proc fcQDnsLookup_nameChanged(self: pointer, name: struct_seaqt_string): void {.importc: "QDnsLookup_nameChanged".}
+proc fcQDnsLookup_connect_nameChanged(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_nameChanged".}
+proc fcQDnsLookup_typeChanged(self: pointer, typeVal: cint): void {.importc: "QDnsLookup_typeChanged".}
+proc fcQDnsLookup_connect_typeChanged(self: pointer, slot: int, callback: proc (slot: int, typeVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_typeChanged".}
+proc fcQDnsLookup_nameserverChanged(self: pointer, nameserver: pointer): void {.importc: "QDnsLookup_nameserverChanged".}
+proc fcQDnsLookup_connect_nameserverChanged(self: pointer, slot: int, callback: proc (slot: int, nameserver: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_nameserverChanged".}
+proc fcQDnsLookup_nameserverPortChanged(self: pointer, port: cushort): void {.importc: "QDnsLookup_nameserverPortChanged".}
+proc fcQDnsLookup_connect_nameserverPortChanged(self: pointer, slot: int, callback: proc (slot: int, port: cushort) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_nameserverPortChanged".}
+proc fcQDnsLookup_nameserverProtocolChanged(self: pointer, protocol: cint): void {.importc: "QDnsLookup_nameserverProtocolChanged".}
+proc fcQDnsLookup_connect_nameserverProtocolChanged(self: pointer, slot: int, callback: proc (slot: int, protocol: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_nameserverProtocolChanged".}
+proc fcQDnsLookup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDnsLookup_tr_s_c".}
+proc fcQDnsLookup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDnsLookup_tr_s_c_n".}
+proc fcQDnsLookup_setNameserverProtocolNameserverPort(self: pointer, protocol: cint, nameserver: pointer, port: cushort): void {.importc: "QDnsLookup_setNameserver_protocol_nameserver_port".}
+proc fcQDnsLookup_vdata(self: pointer): ptr pointer {.importc: "QDnsLookup_vdata".}
+proc fvdata_cQDnsLookup(self: pointer): pointer {.importc: "vdata_QDnsLookup".}
+
+type cQDnsLookupVTable {.pure.} = object
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQDnsLookup_virtualbase_metaObject(self: pointer): pointer {.importc: "QDnsLookup_virtualbase_metaObject".}
+proc fcQDnsLookup_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QDnsLookup_virtualbase_metacast".}
+proc fcQDnsLookup_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDnsLookup_virtualbase_metacall".}
+proc fcQDnsLookup_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QDnsLookup_virtualbase_event".}
+proc fcQDnsLookup_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QDnsLookup_virtualbase_eventFilter".}
+proc fcQDnsLookup_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QDnsLookup_virtualbase_timerEvent".}
+proc fcQDnsLookup_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QDnsLookup_virtualbase_childEvent".}
+proc fcQDnsLookup_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDnsLookup_virtualbase_customEvent".}
+proc fcQDnsLookup_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDnsLookup_virtualbase_connectNotify".}
+proc fcQDnsLookup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDnsLookup_virtualbase_disconnectNotify".}
+proc fcQDnsLookup_protectedbase_sender(self: pointer): pointer {.importc: "QDnsLookup_protectedbase_sender".}
+proc fcQDnsLookup_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDnsLookup_protectedbase_senderSignalIndex".}
+proc fcQDnsLookup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDnsLookup_protectedbase_receivers".}
+proc fcQDnsLookup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDnsLookup_protectedbase_isSignalConnected".}
+proc fcQDnsLookup_new(vtbl: pointer, vdata: csize_t): ptr cQDnsLookup {.importc: "QDnsLookup_new".}
+proc fcQDnsLookup_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name".}
+proc fcQDnsLookup_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, nameserver: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_nameserver".}
+proc fcQDnsLookup_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, nameserver: pointer, port: cushort): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_nameserver_port".}
+proc fcQDnsLookup_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, protocol: cint, nameserver: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_protocol_nameserver".}
+proc fcQDnsLookup_new6(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_parent".}
+proc fcQDnsLookup_new7(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_parent".}
+proc fcQDnsLookup_new8(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, nameserver: pointer, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_nameserver_parent".}
+proc fcQDnsLookup_new9(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, nameserver: pointer, port: cushort, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_nameserver_port_parent".}
+proc fcQDnsLookup_new10(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, protocol: cint, nameserver: pointer, port: cushort): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_protocol_nameserver_port".}
+proc fcQDnsLookup_new11(vtbl: pointer, vdata: csize_t, typeVal: cint, name: struct_seaqt_string, protocol: cint, nameserver: pointer, port: cushort, parent: pointer): ptr cQDnsLookup {.importc: "QDnsLookup_new_type_name_protocol_nameserver_port_parent".}
+proc fcQDnsLookup_staticMetaObject(): pointer {.importc: "QDnsLookup_staticMetaObject".}
+
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsDomainNameRecord, fromVal: gen_qdnslookup_types.QDnsDomainNameRecord): void =
+  fcQDnsDomainNameRecord_operatorAssign(self.h, fromVal.h)
+
+proc swap*(self: gen_qdnslookup_types.QDnsDomainNameRecord, other: gen_qdnslookup_types.QDnsDomainNameRecord): void =
+  fcQDnsDomainNameRecord_swap(self.h, other.h)
+
+proc name*(self: gen_qdnslookup_types.QDnsDomainNameRecord): string =
+  let v_ms = fcQDnsDomainNameRecord_name(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc timeToLive*(self: gen_qdnslookup_types.QDnsDomainNameRecord): cuint =
+  fcQDnsDomainNameRecord_timeToLive(self.h)
+
+proc value*(self: gen_qdnslookup_types.QDnsDomainNameRecord): string =
+  let v_ms = fcQDnsDomainNameRecord_value(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc create*(T: type gen_qdnslookup_types.QDnsDomainNameRecord): gen_qdnslookup_types.QDnsDomainNameRecord =
+  let tmp = gen_qdnslookup_types.QDnsDomainNameRecord(h: fcQDnsDomainNameRecord_new(), owned: true)
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsDomainNameRecord,
+    fromVal: gen_qdnslookup_types.QDnsDomainNameRecord): gen_qdnslookup_types.QDnsDomainNameRecord =
+  let tmp = gen_qdnslookup_types.QDnsDomainNameRecord(h: fcQDnsDomainNameRecord_new2(fromVal.h), owned: true)
+  tmp
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsHostAddressRecord, fromVal: gen_qdnslookup_types.QDnsHostAddressRecord): void =
+  fcQDnsHostAddressRecord_operatorAssign(self.h, fromVal.h)
+
+proc swap*(self: gen_qdnslookup_types.QDnsHostAddressRecord, other: gen_qdnslookup_types.QDnsHostAddressRecord): void =
+  fcQDnsHostAddressRecord_swap(self.h, other.h)
+
+proc name*(self: gen_qdnslookup_types.QDnsHostAddressRecord): string =
+  let v_ms = fcQDnsHostAddressRecord_name(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc timeToLive*(self: gen_qdnslookup_types.QDnsHostAddressRecord): cuint =
+  fcQDnsHostAddressRecord_timeToLive(self.h)
+
+proc value*(self: gen_qdnslookup_types.QDnsHostAddressRecord): gen_qhostaddress_types.QHostAddress =
+  gen_qhostaddress_types.QHostAddress(h: fcQDnsHostAddressRecord_value(self.h), owned: true)
+
+proc create*(T: type gen_qdnslookup_types.QDnsHostAddressRecord): gen_qdnslookup_types.QDnsHostAddressRecord =
+  let tmp = gen_qdnslookup_types.QDnsHostAddressRecord(h: fcQDnsHostAddressRecord_new(), owned: true)
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsHostAddressRecord,
+    fromVal: gen_qdnslookup_types.QDnsHostAddressRecord): gen_qdnslookup_types.QDnsHostAddressRecord =
+  let tmp = gen_qdnslookup_types.QDnsHostAddressRecord(h: fcQDnsHostAddressRecord_new2(fromVal.h), owned: true)
+  tmp
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsMailExchangeRecord, fromVal: gen_qdnslookup_types.QDnsMailExchangeRecord): void =
+  fcQDnsMailExchangeRecord_operatorAssign(self.h, fromVal.h)
+
+proc swap*(self: gen_qdnslookup_types.QDnsMailExchangeRecord, other: gen_qdnslookup_types.QDnsMailExchangeRecord): void =
+  fcQDnsMailExchangeRecord_swap(self.h, other.h)
+
+proc exchange*(self: gen_qdnslookup_types.QDnsMailExchangeRecord): string =
+  let v_ms = fcQDnsMailExchangeRecord_exchange(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc name*(self: gen_qdnslookup_types.QDnsMailExchangeRecord): string =
+  let v_ms = fcQDnsMailExchangeRecord_name(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc preference*(self: gen_qdnslookup_types.QDnsMailExchangeRecord): cushort =
+  fcQDnsMailExchangeRecord_preference(self.h)
+
+proc timeToLive*(self: gen_qdnslookup_types.QDnsMailExchangeRecord): cuint =
+  fcQDnsMailExchangeRecord_timeToLive(self.h)
+
+proc create*(T: type gen_qdnslookup_types.QDnsMailExchangeRecord): gen_qdnslookup_types.QDnsMailExchangeRecord =
+  let tmp = gen_qdnslookup_types.QDnsMailExchangeRecord(h: fcQDnsMailExchangeRecord_new(), owned: true)
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsMailExchangeRecord,
+    fromVal: gen_qdnslookup_types.QDnsMailExchangeRecord): gen_qdnslookup_types.QDnsMailExchangeRecord =
+  let tmp = gen_qdnslookup_types.QDnsMailExchangeRecord(h: fcQDnsMailExchangeRecord_new2(fromVal.h), owned: true)
+  tmp
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsServiceRecord, fromVal: gen_qdnslookup_types.QDnsServiceRecord): void =
+  fcQDnsServiceRecord_operatorAssign(self.h, fromVal.h)
+
+proc swap*(self: gen_qdnslookup_types.QDnsServiceRecord, other: gen_qdnslookup_types.QDnsServiceRecord): void =
+  fcQDnsServiceRecord_swap(self.h, other.h)
+
+proc name*(self: gen_qdnslookup_types.QDnsServiceRecord): string =
+  let v_ms = fcQDnsServiceRecord_name(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc port*(self: gen_qdnslookup_types.QDnsServiceRecord): cushort =
+  fcQDnsServiceRecord_port(self.h)
+
+proc priority*(self: gen_qdnslookup_types.QDnsServiceRecord): cushort =
+  fcQDnsServiceRecord_priority(self.h)
+
+proc target*(self: gen_qdnslookup_types.QDnsServiceRecord): string =
+  let v_ms = fcQDnsServiceRecord_target(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc timeToLive*(self: gen_qdnslookup_types.QDnsServiceRecord): cuint =
+  fcQDnsServiceRecord_timeToLive(self.h)
+
+proc weight*(self: gen_qdnslookup_types.QDnsServiceRecord): cushort =
+  fcQDnsServiceRecord_weight(self.h)
+
+proc create*(T: type gen_qdnslookup_types.QDnsServiceRecord): gen_qdnslookup_types.QDnsServiceRecord =
+  let tmp = gen_qdnslookup_types.QDnsServiceRecord(h: fcQDnsServiceRecord_new(), owned: true)
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsServiceRecord,
+    fromVal: gen_qdnslookup_types.QDnsServiceRecord): gen_qdnslookup_types.QDnsServiceRecord =
+  let tmp = gen_qdnslookup_types.QDnsServiceRecord(h: fcQDnsServiceRecord_new2(fromVal.h), owned: true)
+  tmp
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsTextRecord, fromVal: gen_qdnslookup_types.QDnsTextRecord): void =
+  fcQDnsTextRecord_operatorAssign(self.h, fromVal.h)
+
+proc swap*(self: gen_qdnslookup_types.QDnsTextRecord, other: gen_qdnslookup_types.QDnsTextRecord): void =
+  fcQDnsTextRecord_swap(self.h, other.h)
+
+proc name*(self: gen_qdnslookup_types.QDnsTextRecord): string =
+  let v_ms = fcQDnsTextRecord_name(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc timeToLive*(self: gen_qdnslookup_types.QDnsTextRecord): cuint =
+  fcQDnsTextRecord_timeToLive(self.h)
+
+proc values*(self: gen_qdnslookup_types.QDnsTextRecord): seq[seq[byte]] =
+  var v_ma = fcQDnsTextRecord_values(self.h)
+  var vx_ret = newSeq[seq[byte]](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    var vx_lv_bytearray = v_outCast[i]
+    var vx_lvx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](vx_lv_bytearray.data), 0, int(vx_lv_bytearray.len)-1))
+    c_free(vx_lv_bytearray.data)
+    vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
+  vx_ret
+
+proc create*(T: type gen_qdnslookup_types.QDnsTextRecord): gen_qdnslookup_types.QDnsTextRecord =
+  let tmp = gen_qdnslookup_types.QDnsTextRecord(h: fcQDnsTextRecord_new(), owned: true)
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsTextRecord,
+    fromVal: gen_qdnslookup_types.QDnsTextRecord): gen_qdnslookup_types.QDnsTextRecord =
+  let tmp = gen_qdnslookup_types.QDnsTextRecord(h: fcQDnsTextRecord_new2(fromVal.h), owned: true)
+  tmp
+proc operatorAssign*(self: gen_qdnslookup_types.QDnsTlsAssociationRecord, fromVal: gen_qdnslookup_types.QDnsTlsAssociationRecord): void =
+  fcQDnsTlsAssociationRecord_operatorAssign(self.h, fromVal.h)
+
+proc swap*(self: gen_qdnslookup_types.QDnsTlsAssociationRecord, other: gen_qdnslookup_types.QDnsTlsAssociationRecord): void =
+  fcQDnsTlsAssociationRecord_swap(self.h, other.h)
+
+proc name*(self: gen_qdnslookup_types.QDnsTlsAssociationRecord): string =
+  let v_ms = fcQDnsTlsAssociationRecord_name(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc timeToLive*(self: gen_qdnslookup_types.QDnsTlsAssociationRecord): cuint =
+  fcQDnsTlsAssociationRecord_timeToLive(self.h)
+
+proc usage*(self: gen_qdnslookup_types.QDnsTlsAssociationRecord): cint =
+  cint(fcQDnsTlsAssociationRecord_usage(self.h))
+
+proc selector*(self: gen_qdnslookup_types.QDnsTlsAssociationRecord): cint =
+  cint(fcQDnsTlsAssociationRecord_selector(self.h))
+
+proc matchType*(self: gen_qdnslookup_types.QDnsTlsAssociationRecord): cint =
+  cint(fcQDnsTlsAssociationRecord_matchType(self.h))
+
+proc value*(self: gen_qdnslookup_types.QDnsTlsAssociationRecord): seq[byte] =
+  var v_bytearray = fcQDnsTlsAssociationRecord_value(self.h)
+  var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
+  c_free(v_bytearray.data)
+  vx_ret
+
+proc create*(T: type gen_qdnslookup_types.QDnsTlsAssociationRecord): gen_qdnslookup_types.QDnsTlsAssociationRecord =
+  let tmp = gen_qdnslookup_types.QDnsTlsAssociationRecord(h: fcQDnsTlsAssociationRecord_new(), owned: true)
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsTlsAssociationRecord,
+    fromVal: gen_qdnslookup_types.QDnsTlsAssociationRecord): gen_qdnslookup_types.QDnsTlsAssociationRecord =
+  let tmp = gen_qdnslookup_types.QDnsTlsAssociationRecord(h: fcQDnsTlsAssociationRecord_new2(fromVal.h), owned: true)
+  tmp
+proc staticMetaObject*(_: type gen_qdnslookup_types.QDnsTlsAssociationRecord): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDnsTlsAssociationRecord_staticMetaObject())
+proc metaObject*(self: gen_qdnslookup_types.QDnsLookup): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDnsLookup_metaObject(self.h), owned: false)
+
+proc metacast*(self: gen_qdnslookup_types.QDnsLookup, param1: cstring): pointer =
+  fcQDnsLookup_metacast(self.h, param1)
+
+proc metacall*(self: gen_qdnslookup_types.QDnsLookup, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDnsLookup_metacall(self.h, cint(param1), param2, param3)
+
+proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring): string =
+  let v_ms = fcQDnsLookup_trS(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc isAuthenticData*(self: gen_qdnslookup_types.QDnsLookup): bool =
+  fcQDnsLookup_isAuthenticData(self.h)
+
+proc error*(self: gen_qdnslookup_types.QDnsLookup): cint =
+  cint(fcQDnsLookup_error(self.h))
+
+proc errorString*(self: gen_qdnslookup_types.QDnsLookup): string =
+  let v_ms = fcQDnsLookup_errorString(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc isFinished*(self: gen_qdnslookup_types.QDnsLookup): bool =
+  fcQDnsLookup_isFinished(self.h)
+
+proc name*(self: gen_qdnslookup_types.QDnsLookup): string =
+  let v_ms = fcQDnsLookup_name(self.h)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setName*(self: gen_qdnslookup_types.QDnsLookup, name: openArray[char]): void =
+  fcQDnsLookup_setName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+
+proc typeX*(self: gen_qdnslookup_types.QDnsLookup): cint =
+  cint(fcQDnsLookup_typeX(self.h))
+
+proc setType*(self: gen_qdnslookup_types.QDnsLookup, typeVal: cint): void =
+  fcQDnsLookup_setType(self.h, cint(typeVal))
+
+proc nameserver*(self: gen_qdnslookup_types.QDnsLookup): gen_qhostaddress_types.QHostAddress =
+  gen_qhostaddress_types.QHostAddress(h: fcQDnsLookup_nameserver(self.h), owned: true)
+
+proc setNameserver*(self: gen_qdnslookup_types.QDnsLookup, nameserver: gen_qhostaddress_types.QHostAddress): void =
+  fcQDnsLookup_setNameserverNameserver(self.h, nameserver.h)
+
+proc nameserverPort*(self: gen_qdnslookup_types.QDnsLookup): cushort =
+  fcQDnsLookup_nameserverPort(self.h)
+
+proc setNameserverPort*(self: gen_qdnslookup_types.QDnsLookup, port: cushort): void =
+  fcQDnsLookup_setNameserverPort(self.h, port)
+
+proc nameserverProtocol*(self: gen_qdnslookup_types.QDnsLookup): cint =
+  cint(fcQDnsLookup_nameserverProtocol(self.h))
+
+proc setNameserverProtocol*(self: gen_qdnslookup_types.QDnsLookup, protocol: cint): void =
+  fcQDnsLookup_setNameserverProtocol(self.h, cint(protocol))
+
+proc setNameserver*(self: gen_qdnslookup_types.QDnsLookup, protocol: cint, nameserver: gen_qhostaddress_types.QHostAddress): void =
+  fcQDnsLookup_setNameserverProtocolNameserver(self.h, cint(protocol), nameserver.h)
+
+proc setNameserver*(self: gen_qdnslookup_types.QDnsLookup, nameserver: gen_qhostaddress_types.QHostAddress, port: cushort): void =
+  fcQDnsLookup_setNameserverNameserverPort(self.h, nameserver.h, port)
+
+proc canonicalNameRecords*(self: gen_qdnslookup_types.QDnsLookup): seq[gen_qdnslookup_types.QDnsDomainNameRecord] =
+  var v_ma = fcQDnsLookup_canonicalNameRecords(self.h)
+  var vx_ret = newSeq[gen_qdnslookup_types.QDnsDomainNameRecord](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qdnslookup_types.QDnsDomainNameRecord(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc hostAddressRecords*(self: gen_qdnslookup_types.QDnsLookup): seq[gen_qdnslookup_types.QDnsHostAddressRecord] =
+  var v_ma = fcQDnsLookup_hostAddressRecords(self.h)
+  var vx_ret = newSeq[gen_qdnslookup_types.QDnsHostAddressRecord](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qdnslookup_types.QDnsHostAddressRecord(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc mailExchangeRecords*(self: gen_qdnslookup_types.QDnsLookup): seq[gen_qdnslookup_types.QDnsMailExchangeRecord] =
+  var v_ma = fcQDnsLookup_mailExchangeRecords(self.h)
+  var vx_ret = newSeq[gen_qdnslookup_types.QDnsMailExchangeRecord](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qdnslookup_types.QDnsMailExchangeRecord(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc nameServerRecords*(self: gen_qdnslookup_types.QDnsLookup): seq[gen_qdnslookup_types.QDnsDomainNameRecord] =
+  var v_ma = fcQDnsLookup_nameServerRecords(self.h)
+  var vx_ret = newSeq[gen_qdnslookup_types.QDnsDomainNameRecord](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qdnslookup_types.QDnsDomainNameRecord(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc pointerRecords*(self: gen_qdnslookup_types.QDnsLookup): seq[gen_qdnslookup_types.QDnsDomainNameRecord] =
+  var v_ma = fcQDnsLookup_pointerRecords(self.h)
+  var vx_ret = newSeq[gen_qdnslookup_types.QDnsDomainNameRecord](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qdnslookup_types.QDnsDomainNameRecord(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc serviceRecords*(self: gen_qdnslookup_types.QDnsLookup): seq[gen_qdnslookup_types.QDnsServiceRecord] =
+  var v_ma = fcQDnsLookup_serviceRecords(self.h)
+  var vx_ret = newSeq[gen_qdnslookup_types.QDnsServiceRecord](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qdnslookup_types.QDnsServiceRecord(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc textRecords*(self: gen_qdnslookup_types.QDnsLookup): seq[gen_qdnslookup_types.QDnsTextRecord] =
+  var v_ma = fcQDnsLookup_textRecords(self.h)
+  var vx_ret = newSeq[gen_qdnslookup_types.QDnsTextRecord](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qdnslookup_types.QDnsTextRecord(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc tlsAssociationRecords*(self: gen_qdnslookup_types.QDnsLookup): seq[gen_qdnslookup_types.QDnsTlsAssociationRecord] =
+  var v_ma = fcQDnsLookup_tlsAssociationRecords(self.h)
+  var vx_ret = newSeq[gen_qdnslookup_types.QDnsTlsAssociationRecord](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qdnslookup_types.QDnsTlsAssociationRecord(h: v_outCast[i], owned: true)
+  c_free(v_ma.data)
+  vx_ret
+
+proc setSslConfiguration*(self: gen_qdnslookup_types.QDnsLookup, sslConfiguration: gen_qsslconfiguration_types.QSslConfiguration): void =
+  fcQDnsLookup_setSslConfiguration(self.h, sslConfiguration.h)
+
+proc sslConfiguration*(self: gen_qdnslookup_types.QDnsLookup): gen_qsslconfiguration_types.QSslConfiguration =
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQDnsLookup_sslConfiguration(self.h), owned: true)
+
+proc isProtocolSupported*(_: type gen_qdnslookup_types.QDnsLookup, protocol: cint): bool =
+  fcQDnsLookup_isProtocolSupported(cint(protocol))
+
+proc defaultPortForProtocol*(_: type gen_qdnslookup_types.QDnsLookup, protocol: cint): cushort =
+  fcQDnsLookup_defaultPortForProtocol(cint(protocol))
+
+proc abort*(self: gen_qdnslookup_types.QDnsLookup): void =
+  fcQDnsLookup_abort(self.h)
+
+proc lookup*(self: gen_qdnslookup_types.QDnsLookup): void =
+  fcQDnsLookup_lookup(self.h)
+
+proc finished*(self: gen_qdnslookup_types.QDnsLookup): void =
+  fcQDnsLookup_finished(self.h)
+
+type QDnsLookupfinishedSlot* = proc()
+proc fcQDnsLookup_slot_callback_finished(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QDnsLookupfinishedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQDnsLookup_slot_callback_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookupfinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onFinished*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupfinishedSlot) =
+  var tmp = new QDnsLookupfinishedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDnsLookup_connect_finished(self.h, cast[int](addr tmp[]), fcQDnsLookup_slot_callback_finished, fcQDnsLookup_slot_callback_finished_release)
+
+proc nameChanged*(self: gen_qdnslookup_types.QDnsLookup, name: openArray[char]): void =
+  fcQDnsLookup_nameChanged(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+
+type QDnsLookupnameChangedSlot* = proc(name: openArray[char])
+proc fcQDnsLookup_slot_callback_nameChanged(slot: int, name: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QDnsLookupnameChangedSlot](cast[pointer](slot))
+  let vname_ms = name
+  let vnamex_ret = string.fromBytes(vname_ms)
+  c_free(vname_ms.data)
+  let slotval1 = vnamex_ret
+
+  nimfunc[](slotval1)
+
+proc fcQDnsLookup_slot_callback_nameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookupnameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onNameChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameChangedSlot) =
+  var tmp = new QDnsLookupnameChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDnsLookup_connect_nameChanged(self.h, cast[int](addr tmp[]), fcQDnsLookup_slot_callback_nameChanged, fcQDnsLookup_slot_callback_nameChanged_release)
+
+proc typeChanged*(self: gen_qdnslookup_types.QDnsLookup, typeVal: cint): void =
+  fcQDnsLookup_typeChanged(self.h, cint(typeVal))
+
+type QDnsLookuptypeChangedSlot* = proc(typeVal: cint)
+proc fcQDnsLookup_slot_callback_typeChanged(slot: int, typeVal: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QDnsLookuptypeChangedSlot](cast[pointer](slot))
+  let slotval1 = cint(typeVal)
+
+  nimfunc[](slotval1)
+
+proc fcQDnsLookup_slot_callback_typeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookuptypeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onTypeChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookuptypeChangedSlot) =
+  var tmp = new QDnsLookuptypeChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDnsLookup_connect_typeChanged(self.h, cast[int](addr tmp[]), fcQDnsLookup_slot_callback_typeChanged, fcQDnsLookup_slot_callback_typeChanged_release)
+
+proc nameserverChanged*(self: gen_qdnslookup_types.QDnsLookup, nameserver: gen_qhostaddress_types.QHostAddress): void =
+  fcQDnsLookup_nameserverChanged(self.h, nameserver.h)
+
+type QDnsLookupnameserverChangedSlot* = proc(nameserver: gen_qhostaddress_types.QHostAddress)
+proc fcQDnsLookup_slot_callback_nameserverChanged(slot: int, nameserver: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QDnsLookupnameserverChangedSlot](cast[pointer](slot))
+  let slotval1 = gen_qhostaddress_types.QHostAddress(h: nameserver, owned: false)
+
+  nimfunc[](slotval1)
+
+proc fcQDnsLookup_slot_callback_nameserverChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookupnameserverChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onNameserverChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameserverChangedSlot) =
+  var tmp = new QDnsLookupnameserverChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDnsLookup_connect_nameserverChanged(self.h, cast[int](addr tmp[]), fcQDnsLookup_slot_callback_nameserverChanged, fcQDnsLookup_slot_callback_nameserverChanged_release)
+
+proc nameserverPortChanged*(self: gen_qdnslookup_types.QDnsLookup, port: cushort): void =
+  fcQDnsLookup_nameserverPortChanged(self.h, port)
+
+type QDnsLookupnameserverPortChangedSlot* = proc(port: cushort)
+proc fcQDnsLookup_slot_callback_nameserverPortChanged(slot: int, port: cushort) {.cdecl.} =
+  let nimfunc = cast[ptr QDnsLookupnameserverPortChangedSlot](cast[pointer](slot))
+  let slotval1 = port
+
+  nimfunc[](slotval1)
+
+proc fcQDnsLookup_slot_callback_nameserverPortChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookupnameserverPortChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onNameserverPortChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameserverPortChangedSlot) =
+  var tmp = new QDnsLookupnameserverPortChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDnsLookup_connect_nameserverPortChanged(self.h, cast[int](addr tmp[]), fcQDnsLookup_slot_callback_nameserverPortChanged, fcQDnsLookup_slot_callback_nameserverPortChanged_release)
+
+proc nameserverProtocolChanged*(self: gen_qdnslookup_types.QDnsLookup, protocol: cint): void =
+  fcQDnsLookup_nameserverProtocolChanged(self.h, cint(protocol))
+
+type QDnsLookupnameserverProtocolChangedSlot* = proc(protocol: cint)
+proc fcQDnsLookup_slot_callback_nameserverProtocolChanged(slot: int, protocol: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QDnsLookupnameserverProtocolChangedSlot](cast[pointer](slot))
+  let slotval1 = cint(protocol)
+
+  nimfunc[](slotval1)
+
+proc fcQDnsLookup_slot_callback_nameserverProtocolChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookupnameserverProtocolChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onNameserverProtocolChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameserverProtocolChangedSlot) =
+  var tmp = new QDnsLookupnameserverProtocolChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDnsLookup_connect_nameserverProtocolChanged(self.h, cast[int](addr tmp[]), fcQDnsLookup_slot_callback_nameserverProtocolChanged, fcQDnsLookup_slot_callback_nameserverProtocolChanged_release)
+
+proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring, c: cstring): string =
+  let v_ms = fcQDnsLookup_trSC(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQDnsLookup_trSCN(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc setNameserver*(self: gen_qdnslookup_types.QDnsLookup, protocol: cint, nameserver: gen_qhostaddress_types.QHostAddress, port: cushort): void =
+  fcQDnsLookup_setNameserverProtocolNameserverPort(self.h, cint(protocol), nameserver.h, port)
+
+type QDnsLookupmetaObjectProc* = proc(self: QDnsLookup): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QDnsLookupmetacastProc* = proc(self: QDnsLookup, param1: cstring): pointer {.raises: [], gcsafe.}
+type QDnsLookupmetacallProc* = proc(self: QDnsLookup, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QDnsLookupeventProc* = proc(self: QDnsLookup, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QDnsLookupeventFilterProc* = proc(self: QDnsLookup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QDnsLookuptimerEventProc* = proc(self: QDnsLookup, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QDnsLookupchildEventProc* = proc(self: QDnsLookup, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QDnsLookupcustomEventProc* = proc(self: QDnsLookup, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QDnsLookupconnectNotifyProc* = proc(self: QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QDnsLookupdisconnectNotifyProc* = proc(self: QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
+type QDnsLookupVTable* {.inheritable, pure.} = object
+  vtbl: cQDnsLookupVTable
+  metaObject*: QDnsLookupmetaObjectProc
+  metacast*: QDnsLookupmetacastProc
+  metacall*: QDnsLookupmetacallProc
+  event*: QDnsLookupeventProc
+  eventFilter*: QDnsLookupeventFilterProc
+  timerEvent*: QDnsLookuptimerEventProc
+  childEvent*: QDnsLookupchildEventProc
+  customEvent*: QDnsLookupcustomEventProc
+  connectNotify*: QDnsLookupconnectNotifyProc
+  disconnectNotify*: QDnsLookupdisconnectNotifyProc
+
+proc QDnsLookupmetaObject*(self: gen_qdnslookup_types.QDnsLookup): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDnsLookup_virtualbase_metaObject(self.h), owned: false)
+
+proc QDnsLookupmetacast*(self: gen_qdnslookup_types.QDnsLookup, param1: cstring): pointer =
+  fcQDnsLookup_virtualbase_metacast(self.h, param1)
+
+proc QDnsLookupmetacall*(self: gen_qdnslookup_types.QDnsLookup, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDnsLookup_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QDnsLookupevent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDnsLookup_virtualbase_event(self.h, event.h)
+
+proc QDnsLookupeventFilter*(self: gen_qdnslookup_types.QDnsLookup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQDnsLookup_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QDnsLookuptimerEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQDnsLookup_virtualbase_timerEvent(self.h, event.h)
+
+proc QDnsLookupchildEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQDnsLookup_virtualbase_childEvent(self.h, event.h)
+
+proc QDnsLookupcustomEvent*(self: gen_qdnslookup_types.QDnsLookup, event: gen_qcoreevent_types.QEvent): void =
+  fcQDnsLookup_virtualbase_customEvent(self.h, event.h)
+
+proc QDnsLookupconnectNotify*(self: gen_qdnslookup_types.QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDnsLookup_virtualbase_connectNotify(self.h, signal.h)
+
+proc QDnsLookupdisconnectNotify*(self: gen_qdnslookup_types.QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQDnsLookup_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQDnsLookup_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDnsLookup_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQDnsLookup_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQDnsLookup_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl[].event(self, slotval1)
+  virtualReturn
+
+proc fcQDnsLookup_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
+  virtualReturn
+
+proc fcQDnsLookup_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl[].timerEvent(self, slotval1)
+
+proc fcQDnsLookup_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl[].childEvent(self, slotval1)
+
+proc fcQDnsLookup_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl[].customEvent(self, slotval1)
+
+proc fcQDnsLookup_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl[].connectNotify(self, slotval1)
+
+proc fcQDnsLookup_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+  let self = QDnsLookup(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQDnsLookup* {.inheritable.} = ref object of QDnsLookup
+  vtbl*: cQDnsLookupVTable
+
+method metaObject*(self: VirtualQDnsLookup): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QDnsLookupmetaObject(self[])
+method metacast*(self: VirtualQDnsLookup, param1: cstring): pointer {.base.} =
+  QDnsLookupmetacast(self[], param1)
+method metacall*(self: VirtualQDnsLookup, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDnsLookupmetacall(self[], param1, param2, param3)
+method event*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDnsLookupevent(self[], event)
+method eventFilter*(self: VirtualQDnsLookup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDnsLookupeventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDnsLookuptimerEvent(self[], event)
+method childEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDnsLookupchildEvent(self[], event)
+method customEvent*(self: VirtualQDnsLookup, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDnsLookupcustomEvent(self[], event)
+method connectNotify*(self: VirtualQDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDnsLookupconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDnsLookupdisconnectNotify(self[], signal)
+
+proc fcQDnsLookup_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  var virtualReturn = inst.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQDnsLookup_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = (param1)
+  var virtualReturn = inst.metacast(slotval1)
+  virtualReturn
+
+proc fcQDnsLookup_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQDnsLookup_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = inst.event(slotval1)
+  virtualReturn
+
+proc fcQDnsLookup_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+proc fcQDnsLookup_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  inst.timerEvent(slotval1)
+
+proc fcQDnsLookup_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  inst.childEvent(slotval1)
+
+proc fcQDnsLookup_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  inst.customEvent(slotval1)
+
+proc fcQDnsLookup_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  inst.connectNotify(slotval1)
+
+proc fcQDnsLookup_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQDnsLookup](fcQDnsLookup_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  inst.disconnectNotify(slotval1)
+
+
+proc sender*(self: gen_qdnslookup_types.QDnsLookup): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDnsLookup_protectedbase_sender(self.h), owned: false)
+
+proc senderSignalIndex*(self: gen_qdnslookup_types.QDnsLookup): cint =
+  fcQDnsLookup_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdnslookup_types.QDnsLookup, signal: cstring): cint =
+  fcQDnsLookup_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdnslookup_types.QDnsLookup, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDnsLookup_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char],
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress, port: cushort,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h, port), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], protocol: cint, nameserver: gen_qhostaddress_types.QHostAddress,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol), nameserver.h), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], parent: gen_qobject_types.QObject,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress, parent: gen_qobject_types.QObject,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new8(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h, parent.h), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress, port: cushort, parent: gen_qobject_types.QObject,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new9(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h, port, parent.h), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], protocol: cint, nameserver: gen_qhostaddress_types.QHostAddress, port: cushort,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new10(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol), nameserver.h, port), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], protocol: cint, nameserver: gen_qhostaddress_types.QHostAddress, port: cushort, parent: gen_qobject_types.QObject,
+    vtbl: ref QDnsLookupVTable = nil): gen_qdnslookup_types.QDnsLookup =
+  let vtbl = if vtbl == nil: new QDnsLookupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QDnsLookupVTable](fcQDnsLookup_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQDnsLookup_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQDnsLookup_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQDnsLookup_vtable_callback_metacall
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQDnsLookup_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQDnsLookup_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQDnsLookup_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQDnsLookup_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQDnsLookup_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQDnsLookup_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQDnsLookup_vtable_callback_disconnectNotify
+  let tmp = gen_qdnslookup_types.QDnsLookup(h: fcQDnsLookup_new11(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol), nameserver.h, port, parent.h), owned: true)
+  fcQDnsLookup_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+const cQDnsLookup_mvtbl = cQDnsLookupVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQDnsLookup()[])](self.fcQDnsLookup_vdata()[])
+    inst[].h = nil
+    inst[].owned = false,
+
+  metaObject: fcQDnsLookup_method_callback_metaObject,
+  metacast: fcQDnsLookup_method_callback_metacast,
+  metacall: fcQDnsLookup_method_callback_metacall,
+  event: fcQDnsLookup_method_callback_event,
+  eventFilter: fcQDnsLookup_method_callback_eventFilter,
+  timerEvent: fcQDnsLookup_method_callback_timerEvent,
+  childEvent: fcQDnsLookup_method_callback_childEvent,
+  customEvent: fcQDnsLookup_method_callback_customEvent,
+  connectNotify: fcQDnsLookup_method_callback_connectNotify,
+  disconnectNotify: fcQDnsLookup_method_callback_disconnectNotify,
+)
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)))
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char],
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new2(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new3(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress, port: cushort,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new4(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h, port)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], protocol: cint, nameserver: gen_qhostaddress_types.QHostAddress,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new5(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol), nameserver.h)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    parent: gen_qobject_types.QObject,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new6(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), parent.h)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], parent: gen_qobject_types.QObject,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new7(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress, parent: gen_qobject_types.QObject,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new8(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h, parent.h)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], nameserver: gen_qhostaddress_types.QHostAddress, port: cushort, parent: gen_qobject_types.QObject,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new9(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), nameserver.h, port, parent.h)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], protocol: cint, nameserver: gen_qhostaddress_types.QHostAddress, port: cushort,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new10(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol), nameserver.h, port)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qdnslookup_types.QDnsLookup,
+    typeVal: cint, name: openArray[char], protocol: cint, nameserver: gen_qhostaddress_types.QHostAddress, port: cushort, parent: gen_qobject_types.QObject,
+    inst: VirtualQDnsLookup) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQDnsLookup_new11(addr(cQDnsLookup_mvtbl), csize_t(sizeof(pointer)), cint(typeVal), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), cint(protocol), nameserver.h, port, parent.h)
+  fcQDnsLookup_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc staticMetaObject*(_: type gen_qdnslookup_types.QDnsLookup): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDnsLookup_staticMetaObject())

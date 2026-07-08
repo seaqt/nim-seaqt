@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicsitemanimation
+export gen_qgraphicsitemanimation

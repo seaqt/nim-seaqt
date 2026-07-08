@@ -1,0 +1,148 @@
+#pragma once
+#ifndef SEAQT_QTGUI_GEN_QTEXTTABLE_H
+#define SEAQT_QTGUI_GEN_QTEXTTABLE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QChildEvent;
+class QEvent;
+class QMetaMethod;
+class QMetaObject;
+class QObject;
+class QTextCharFormat;
+class QTextCursor;
+class QTextDocument;
+class QTextFrame;
+#if defined(WORKAROUND_INNER_CLASS_DEFINITION_QTextFrame__iterator)
+typedef QTextFrame::iterator QTextFrame__iterator;
+#else
+class QTextFrame__iterator;
+#endif
+class QTextObject;
+class QTextTable;
+class QTextTableCell;
+class QTextTableFormat;
+class QTimerEvent;
+#else
+typedef struct QChildEvent QChildEvent;
+typedef struct QEvent QEvent;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QObject QObject;
+typedef struct QTextCharFormat QTextCharFormat;
+typedef struct QTextCursor QTextCursor;
+typedef struct QTextDocument QTextDocument;
+typedef struct QTextFrame QTextFrame;
+typedef struct QTextFrame__iterator QTextFrame__iterator;
+typedef struct QTextObject QTextObject;
+typedef struct QTextTable QTextTable;
+typedef struct QTextTableCell QTextTableCell;
+typedef struct QTextTableFormat QTextTableFormat;
+typedef struct QTimerEvent QTimerEvent;
+#endif
+
+QTextTableCell* QTextTableCell_new();
+QTextTableCell* QTextTableCell_new_from(QTextTableCell* from);
+
+void QTextTableCell_operatorAssign(QTextTableCell* self, QTextTableCell* from);
+void QTextTableCell_setFormat(QTextTableCell* self, QTextCharFormat* format);
+QTextCharFormat* QTextTableCell_format(const QTextTableCell* self);
+int QTextTableCell_row(const QTextTableCell* self);
+int QTextTableCell_column(const QTextTableCell* self);
+int QTextTableCell_rowSpan(const QTextTableCell* self);
+int QTextTableCell_columnSpan(const QTextTableCell* self);
+bool QTextTableCell_isValid(const QTextTableCell* self);
+QTextCursor* QTextTableCell_firstCursorPosition(const QTextTableCell* self);
+QTextCursor* QTextTableCell_lastCursorPosition(const QTextTableCell* self);
+int QTextTableCell_firstPosition(const QTextTableCell* self);
+int QTextTableCell_lastPosition(const QTextTableCell* self);
+bool QTextTableCell_operatorEqual(const QTextTableCell* self, QTextTableCell* other);
+bool QTextTableCell_operatorNotEqual(const QTextTableCell* self, QTextTableCell* other);
+QTextFrame__iterator* QTextTableCell_begin(const QTextTableCell* self);
+QTextFrame__iterator* QTextTableCell_end(const QTextTableCell* self);
+int QTextTableCell_tableCellFormatIndex(const QTextTableCell* self);
+
+void QTextTableCell_delete(QTextTableCell* self);
+
+typedef struct VirtualQTextTable VirtualQTextTable;
+typedef struct QTextTable_VTable{
+	void (*destructor)(VirtualQTextTable* self);
+	QMetaObject* (*metaObject)(const VirtualQTextTable* self);
+	void* (*metacast)(VirtualQTextTable* self, const char* param1);
+	int (*metacall)(VirtualQTextTable* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQTextTable* self, QEvent* event);
+	bool (*eventFilter)(VirtualQTextTable* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQTextTable* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQTextTable* self, QChildEvent* event);
+	void (*customEvent)(VirtualQTextTable* self, QEvent* event);
+	void (*connectNotify)(VirtualQTextTable* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQTextTable* self, QMetaMethod* signal);
+}QTextTable_VTable;
+
+void* QTextTable_vdata(VirtualQTextTable* self);
+VirtualQTextTable* vdata_QTextTable(void* vdata);
+
+VirtualQTextTable* QTextTable_new(const QTextTable_VTable* vtbl, size_t vdata, QTextDocument* doc);
+
+void QTextTable_virtbase(QTextTable* src, QTextFrame** outptr_QTextFrame);
+QMetaObject* QTextTable_metaObject(const QTextTable* self);
+void* QTextTable_metacast(QTextTable* self, const char* param1);
+int QTextTable_metacall(QTextTable* self, int param1, int param2, void** param3);
+struct seaqt_string QTextTable_tr_s(const char* s);
+void QTextTable_resize(QTextTable* self, int rows, int cols);
+void QTextTable_insertRows(QTextTable* self, int pos, int num);
+void QTextTable_insertColumns(QTextTable* self, int pos, int num);
+void QTextTable_appendRows(QTextTable* self, int count);
+void QTextTable_appendColumns(QTextTable* self, int count);
+void QTextTable_removeRows(QTextTable* self, int pos, int num);
+void QTextTable_removeColumns(QTextTable* self, int pos, int num);
+void QTextTable_mergeCells_row_col_numRows_numCols(QTextTable* self, int row, int col, int numRows, int numCols);
+void QTextTable_mergeCells_cursor(QTextTable* self, QTextCursor* cursor);
+void QTextTable_splitCell(QTextTable* self, int row, int col, int numRows, int numCols);
+int QTextTable_rows(const QTextTable* self);
+int QTextTable_columns(const QTextTable* self);
+QTextTableCell* QTextTable_cellAt_row_col(const QTextTable* self, int row, int col);
+QTextTableCell* QTextTable_cellAt_position(const QTextTable* self, int position);
+QTextTableCell* QTextTable_cellAt_c(const QTextTable* self, QTextCursor* c);
+QTextCursor* QTextTable_rowStart(const QTextTable* self, QTextCursor* c);
+QTextCursor* QTextTable_rowEnd(const QTextTable* self, QTextCursor* c);
+void QTextTable_setFormat(QTextTable* self, QTextTableFormat* format);
+QTextTableFormat* QTextTable_format(const QTextTable* self);
+struct seaqt_string QTextTable_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTextTable_tr_s_c_n(const char* s, const char* c, int n);
+
+QMetaObject* QTextTable_virtualbase_metaObject(const VirtualQTextTable* self);
+void* QTextTable_virtualbase_metacast(VirtualQTextTable* self, const char* param1);
+int QTextTable_virtualbase_metacall(VirtualQTextTable* self, int param1, int param2, void** param3);
+bool QTextTable_virtualbase_event(VirtualQTextTable* self, QEvent* event);
+bool QTextTable_virtualbase_eventFilter(VirtualQTextTable* self, QObject* watched, QEvent* event);
+void QTextTable_virtualbase_timerEvent(VirtualQTextTable* self, QTimerEvent* event);
+void QTextTable_virtualbase_childEvent(VirtualQTextTable* self, QChildEvent* event);
+void QTextTable_virtualbase_customEvent(VirtualQTextTable* self, QEvent* event);
+void QTextTable_virtualbase_connectNotify(VirtualQTextTable* self, QMetaMethod* signal);
+void QTextTable_virtualbase_disconnectNotify(VirtualQTextTable* self, QMetaMethod* signal);
+
+QObject* QTextTable_protectedbase_sender(const VirtualQTextTable* self);
+int QTextTable_protectedbase_senderSignalIndex(const VirtualQTextTable* self);
+int QTextTable_protectedbase_receivers(const VirtualQTextTable* self, const char* signal);
+bool QTextTable_protectedbase_isSignalConnected(const VirtualQTextTable* self, QMetaMethod* signal);
+
+const QMetaObject* QTextTable_staticMetaObject();
+void QTextTable_delete(QTextTable* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

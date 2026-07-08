@@ -1,0 +1,2 @@
+import ./QtCore/gen_qcoreapplication
+export gen_qcoreapplication

@@ -1,0 +1,2 @@
+import ./QtUiPlugin/gen_customwidget
+export gen_customwidget

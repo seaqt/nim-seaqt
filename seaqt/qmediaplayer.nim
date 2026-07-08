@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediaplayer
+export gen_qmediaplayer

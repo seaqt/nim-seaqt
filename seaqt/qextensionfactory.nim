@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_default_extensionfactory
+export gen_default_extensionfactory

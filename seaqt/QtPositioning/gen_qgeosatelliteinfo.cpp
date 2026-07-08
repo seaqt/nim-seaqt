@@ -1,0 +1,82 @@
+#include <QGeoSatelliteInfo>
+#include <QMetaObject>
+#include <qgeosatelliteinfo.h>
+#include "gen_qgeosatelliteinfo.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QGeoSatelliteInfo* QGeoSatelliteInfo_new() {
+	return new (std::nothrow) QGeoSatelliteInfo();
+}
+
+QGeoSatelliteInfo* QGeoSatelliteInfo_new_from(QGeoSatelliteInfo* from) {
+	return new (std::nothrow) QGeoSatelliteInfo(*from);
+}
+
+void QGeoSatelliteInfo_operatorAssign(QGeoSatelliteInfo* self, QGeoSatelliteInfo* from) {
+	self->operator=(*from);
+}
+
+void QGeoSatelliteInfo_swap(QGeoSatelliteInfo* self, QGeoSatelliteInfo* other) {
+	self->swap(*other);
+}
+
+void QGeoSatelliteInfo_setSatelliteSystem(QGeoSatelliteInfo* self, int system) {
+	self->setSatelliteSystem(static_cast<QGeoSatelliteInfo::SatelliteSystem>(system));
+}
+
+int QGeoSatelliteInfo_satelliteSystem(const QGeoSatelliteInfo* self) {
+	QGeoSatelliteInfo::SatelliteSystem _ret = self->satelliteSystem();
+	return static_cast<int>(_ret);
+}
+
+void QGeoSatelliteInfo_setSatelliteIdentifier(QGeoSatelliteInfo* self, int satId) {
+	self->setSatelliteIdentifier(static_cast<int>(satId));
+}
+
+int QGeoSatelliteInfo_satelliteIdentifier(const QGeoSatelliteInfo* self) {
+	return self->satelliteIdentifier();
+}
+
+void QGeoSatelliteInfo_setSignalStrength(QGeoSatelliteInfo* self, int signalStrength) {
+	self->setSignalStrength(static_cast<int>(signalStrength));
+}
+
+int QGeoSatelliteInfo_signalStrength(const QGeoSatelliteInfo* self) {
+	return self->signalStrength();
+}
+
+void QGeoSatelliteInfo_setAttribute(QGeoSatelliteInfo* self, int attribute, double value) {
+	self->setAttribute(static_cast<QGeoSatelliteInfo::Attribute>(attribute), static_cast<qreal>(value));
+}
+
+double QGeoSatelliteInfo_attribute(const QGeoSatelliteInfo* self, int attribute) {
+	qreal _ret = self->attribute(static_cast<QGeoSatelliteInfo::Attribute>(attribute));
+	return static_cast<double>(_ret);
+}
+
+void QGeoSatelliteInfo_removeAttribute(QGeoSatelliteInfo* self, int attribute) {
+	self->removeAttribute(static_cast<QGeoSatelliteInfo::Attribute>(attribute));
+}
+
+bool QGeoSatelliteInfo_hasAttribute(const QGeoSatelliteInfo* self, int attribute) {
+	return self->hasAttribute(static_cast<QGeoSatelliteInfo::Attribute>(attribute));
+}
+
+void QGeoSatelliteInfo_detach(QGeoSatelliteInfo* self) {
+	self->detach();
+}
+
+const QMetaObject* QGeoSatelliteInfo_staticMetaObject() { return &QGeoSatelliteInfo::staticMetaObject; }
+void QGeoSatelliteInfo_delete(QGeoSatelliteInfo* self) {
+	delete self;
+}
+

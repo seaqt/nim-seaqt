@@ -1,0 +1,443 @@
+#include <QByteArray>
+#include <QChar>
+#include <QList>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QStringView>
+#include <qstringview.h>
+#include "gen_qstringview.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QStringView* QStringView_new() {
+	return new (std::nothrow) QStringView();
+}
+
+struct seaqt_string QStringView_toString(const QStringView* self) {
+	QString _ret = self->toString();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+ptrdiff_t QStringView_size(const QStringView* self) {
+	qsizetype _ret = self->size();
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+QChar* QStringView_data(const QStringView* self) {
+	QStringView::const_pointer _ret = self->data();
+	return const_cast<QChar*>(static_cast<const QChar*>(_ret));
+}
+
+QChar* QStringView_constData(const QStringView* self) {
+	QStringView::const_pointer _ret = self->constData();
+	return const_cast<QChar*>(static_cast<const QChar*>(_ret));
+}
+
+QChar* QStringView_operatorSubscript(const QStringView* self, ptrdiff_t n) {
+	return new QChar(self->operator[]((qsizetype)(n)));
+}
+
+struct seaqt_string QStringView_toLatin1(const QStringView* self) {
+	QByteArray _qb = self->toLatin1();
+	struct seaqt_string _ms;
+	_ms.len = _qb.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _qb.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QStringView_toUtf8(const QStringView* self) {
+	QByteArray _qb = self->toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _qb.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _qb.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QStringView_toLocal8Bit(const QStringView* self) {
+	QByteArray _qb = self->toLocal8Bit();
+	struct seaqt_string _ms;
+	_ms.len = _qb.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _qb.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_array /* of unsigned int */  QStringView_toUcs4(const QStringView* self) {
+	QList<uint> _ret = self->toUcs4();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	unsigned int* _arr = static_cast<unsigned int*>(malloc(sizeof(unsigned int) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+QChar* QStringView_at(const QStringView* self, ptrdiff_t n) {
+	return new QChar(self->at((qsizetype)(n)));
+}
+
+void QStringView_truncate(QStringView* self, ptrdiff_t n) {
+	self->truncate((qsizetype)(n));
+}
+
+void QStringView_chop(QStringView* self, ptrdiff_t n) {
+	self->chop((qsizetype)(n));
+}
+
+int QStringView_compare_QChar(const QStringView* self, QChar* c) {
+	return self->compare(*c);
+}
+
+int QStringView_compare_QChar_Qt_CaseSensitivity(const QStringView* self, QChar* c, int cs) {
+	return self->compare(*c, static_cast<Qt::CaseSensitivity>(cs));
+}
+
+bool QStringView_startsWith_QChar(const QStringView* self, QChar* c) {
+	return self->startsWith(*c);
+}
+
+bool QStringView_startsWith_QChar_Qt_CaseSensitivity(const QStringView* self, QChar* c, int cs) {
+	return self->startsWith(*c, static_cast<Qt::CaseSensitivity>(cs));
+}
+
+bool QStringView_endsWith_QChar(const QStringView* self, QChar* c) {
+	return self->endsWith(*c);
+}
+
+bool QStringView_endsWith_QChar_Qt_CaseSensitivity(const QStringView* self, QChar* c, int cs) {
+	return self->endsWith(*c, static_cast<Qt::CaseSensitivity>(cs));
+}
+
+ptrdiff_t QStringView_indexOf_QChar(const QStringView* self, QChar* c) {
+	qsizetype _ret = self->indexOf(*c);
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+bool QStringView_contains_QChar(const QStringView* self, QChar* c) {
+	return self->contains(*c);
+}
+
+ptrdiff_t QStringView_count_QChar(const QStringView* self, QChar* c) {
+	qsizetype _ret = self->count(*c);
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_lastIndexOf_QChar(const QStringView* self, QChar* c) {
+	qsizetype _ret = self->lastIndexOf(*c);
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_lastIndexOf_QChar_qsizetype(const QStringView* self, QChar* c, ptrdiff_t from) {
+	qsizetype _ret = self->lastIndexOf(*c, (qsizetype)(from));
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_indexOf_QRegularExpression(const QStringView* self, QRegularExpression* re) {
+	qsizetype _ret = self->indexOf(*re);
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_lastIndexOf_QRegularExpression_qsizetype(const QStringView* self, QRegularExpression* re, ptrdiff_t from) {
+	qsizetype _ret = self->lastIndexOf(*re, (qsizetype)(from));
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+bool QStringView_contains_QRegularExpression(const QStringView* self, QRegularExpression* re) {
+	return self->contains(*re);
+}
+
+ptrdiff_t QStringView_count_QRegularExpression(const QStringView* self, QRegularExpression* re) {
+	qsizetype _ret = self->count(*re);
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+bool QStringView_isRightToLeft(const QStringView* self) {
+	return self->isRightToLeft();
+}
+
+bool QStringView_isValidUtf16(const QStringView* self) {
+	return self->isValidUtf16();
+}
+
+bool QStringView_isUpper(const QStringView* self) {
+	return self->isUpper();
+}
+
+bool QStringView_isLower(const QStringView* self) {
+	return self->isLower();
+}
+
+short QStringView_toShort(const QStringView* self) {
+	return self->toShort();
+}
+
+unsigned short QStringView_toUShort(const QStringView* self) {
+	ushort _ret = self->toUShort();
+	return static_cast<unsigned short>(_ret);
+}
+
+int QStringView_toInt(const QStringView* self) {
+	return self->toInt();
+}
+
+unsigned int QStringView_toUInt(const QStringView* self) {
+	uint _ret = self->toUInt();
+	return static_cast<unsigned int>(_ret);
+}
+
+long QStringView_toLong(const QStringView* self) {
+	return self->toLong();
+}
+
+unsigned long QStringView_toULong(const QStringView* self) {
+	ulong _ret = self->toULong();
+	return static_cast<unsigned long>(_ret);
+}
+
+long long QStringView_toLongLong(const QStringView* self) {
+	qlonglong _ret = self->toLongLong();
+	return static_cast<long long>(_ret);
+}
+
+unsigned long long QStringView_toULongLong(const QStringView* self) {
+	qulonglong _ret = self->toULongLong();
+	return static_cast<unsigned long long>(_ret);
+}
+
+float QStringView_toFloat(const QStringView* self) {
+	return self->toFloat();
+}
+
+double QStringView_toDouble(const QStringView* self) {
+	return self->toDouble();
+}
+
+QChar* QStringView_begin(const QStringView* self) {
+	QStringView::const_iterator _ret = self->begin();
+	return const_cast<QChar*>(static_cast<const QChar*>(_ret));
+}
+
+QChar* QStringView_end(const QStringView* self) {
+	QStringView::const_iterator _ret = self->end();
+	return const_cast<QChar*>(static_cast<const QChar*>(_ret));
+}
+
+QChar* QStringView_cbegin(const QStringView* self) {
+	QStringView::const_iterator _ret = self->cbegin();
+	return const_cast<QChar*>(static_cast<const QChar*>(_ret));
+}
+
+QChar* QStringView_cend(const QStringView* self) {
+	QStringView::const_iterator _ret = self->cend();
+	return const_cast<QChar*>(static_cast<const QChar*>(_ret));
+}
+
+bool QStringView_empty(const QStringView* self) {
+	return self->empty();
+}
+
+QChar* QStringView_front(const QStringView* self) {
+	return new QChar(self->front());
+}
+
+QChar* QStringView_back(const QStringView* self) {
+	return new QChar(self->back());
+}
+
+ptrdiff_t QStringView_max_size(const QStringView* self) {
+	qsizetype _ret = self->max_size();
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+QChar* QStringView_constBegin(const QStringView* self) {
+	QStringView::const_iterator _ret = self->constBegin();
+	return const_cast<QChar*>(static_cast<const QChar*>(_ret));
+}
+
+QChar* QStringView_constEnd(const QStringView* self) {
+	QStringView::const_iterator _ret = self->constEnd();
+	return const_cast<QChar*>(static_cast<const QChar*>(_ret));
+}
+
+bool QStringView_isNull(const QStringView* self) {
+	return self->isNull();
+}
+
+bool QStringView_isEmpty(const QStringView* self) {
+	return self->isEmpty();
+}
+
+ptrdiff_t QStringView_length(const QStringView* self) {
+	qsizetype _ret = self->length();
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+QChar* QStringView_first(const QStringView* self) {
+	return new QChar(self->first());
+}
+
+QChar* QStringView_last(const QStringView* self) {
+	return new QChar(self->last());
+}
+
+ptrdiff_t QStringView_maxSize() {
+	qsizetype _ret = QStringView::maxSize();
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_indexOf_QChar_qsizetype(const QStringView* self, QChar* c, ptrdiff_t from) {
+	qsizetype _ret = self->indexOf(*c, (qsizetype)(from));
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_indexOf_QChar_qsizetype_Qt_CaseSensitivity(const QStringView* self, QChar* c, ptrdiff_t from, int cs) {
+	qsizetype _ret = self->indexOf(*c, (qsizetype)(from), static_cast<Qt::CaseSensitivity>(cs));
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+bool QStringView_contains_QChar_Qt_CaseSensitivity(const QStringView* self, QChar* c, int cs) {
+	return self->contains(*c, static_cast<Qt::CaseSensitivity>(cs));
+}
+
+ptrdiff_t QStringView_count_QChar_Qt_CaseSensitivity(const QStringView* self, QChar* c, int cs) {
+	qsizetype _ret = self->count(*c, static_cast<Qt::CaseSensitivity>(cs));
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_lastIndexOf_QChar_Qt_CaseSensitivity(const QStringView* self, QChar* c, int cs) {
+	qsizetype _ret = self->lastIndexOf(*c, static_cast<Qt::CaseSensitivity>(cs));
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_lastIndexOf_QChar_qsizetype_Qt_CaseSensitivity(const QStringView* self, QChar* c, ptrdiff_t from, int cs) {
+	qsizetype _ret = self->lastIndexOf(*c, (qsizetype)(from), static_cast<Qt::CaseSensitivity>(cs));
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_indexOf_QRegularExpression_qsizetype(const QStringView* self, QRegularExpression* re, ptrdiff_t from) {
+	qsizetype _ret = self->indexOf(*re, (qsizetype)(from));
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_indexOf_QRegularExpression_qsizetype_QRegularExpressionMatch(const QStringView* self, QRegularExpression* re, ptrdiff_t from, QRegularExpressionMatch* rmatch) {
+	qsizetype _ret = self->indexOf(*re, (qsizetype)(from), rmatch);
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+ptrdiff_t QStringView_lastIndexOf_QRegularExpression_qsizetype_QRegularExpressionMatch(const QStringView* self, QRegularExpression* re, ptrdiff_t from, QRegularExpressionMatch* rmatch) {
+	qsizetype _ret = self->lastIndexOf(*re, (qsizetype)(from), rmatch);
+	return static_cast<ptrdiff_t>(_ret);
+}
+
+bool QStringView_contains_QRegularExpression_QRegularExpressionMatch(const QStringView* self, QRegularExpression* re, QRegularExpressionMatch* rmatch) {
+	return self->contains(*re, rmatch);
+}
+
+short QStringView_toShort_ok(const QStringView* self, bool* ok) {
+	return self->toShort(ok);
+}
+
+short QStringView_toShort_ok_base(const QStringView* self, bool* ok, int base) {
+	return self->toShort(ok, static_cast<int>(base));
+}
+
+unsigned short QStringView_toUShort_ok(const QStringView* self, bool* ok) {
+	ushort _ret = self->toUShort(ok);
+	return static_cast<unsigned short>(_ret);
+}
+
+unsigned short QStringView_toUShort_ok_base(const QStringView* self, bool* ok, int base) {
+	ushort _ret = self->toUShort(ok, static_cast<int>(base));
+	return static_cast<unsigned short>(_ret);
+}
+
+int QStringView_toInt_ok(const QStringView* self, bool* ok) {
+	return self->toInt(ok);
+}
+
+int QStringView_toInt_ok_base(const QStringView* self, bool* ok, int base) {
+	return self->toInt(ok, static_cast<int>(base));
+}
+
+unsigned int QStringView_toUInt_ok(const QStringView* self, bool* ok) {
+	uint _ret = self->toUInt(ok);
+	return static_cast<unsigned int>(_ret);
+}
+
+unsigned int QStringView_toUInt_ok_base(const QStringView* self, bool* ok, int base) {
+	uint _ret = self->toUInt(ok, static_cast<int>(base));
+	return static_cast<unsigned int>(_ret);
+}
+
+long QStringView_toLong_ok(const QStringView* self, bool* ok) {
+	return self->toLong(ok);
+}
+
+long QStringView_toLong_ok_base(const QStringView* self, bool* ok, int base) {
+	return self->toLong(ok, static_cast<int>(base));
+}
+
+unsigned long QStringView_toULong_ok(const QStringView* self, bool* ok) {
+	ulong _ret = self->toULong(ok);
+	return static_cast<unsigned long>(_ret);
+}
+
+unsigned long QStringView_toULong_ok_base(const QStringView* self, bool* ok, int base) {
+	ulong _ret = self->toULong(ok, static_cast<int>(base));
+	return static_cast<unsigned long>(_ret);
+}
+
+long long QStringView_toLongLong_ok(const QStringView* self, bool* ok) {
+	qlonglong _ret = self->toLongLong(ok);
+	return static_cast<long long>(_ret);
+}
+
+long long QStringView_toLongLong_ok_base(const QStringView* self, bool* ok, int base) {
+	qlonglong _ret = self->toLongLong(ok, static_cast<int>(base));
+	return static_cast<long long>(_ret);
+}
+
+unsigned long long QStringView_toULongLong_ok(const QStringView* self, bool* ok) {
+	qulonglong _ret = self->toULongLong(ok);
+	return static_cast<unsigned long long>(_ret);
+}
+
+unsigned long long QStringView_toULongLong_ok_base(const QStringView* self, bool* ok, int base) {
+	qulonglong _ret = self->toULongLong(ok, static_cast<int>(base));
+	return static_cast<unsigned long long>(_ret);
+}
+
+float QStringView_toFloat_ok(const QStringView* self, bool* ok) {
+	return self->toFloat(ok);
+}
+
+double QStringView_toDouble_ok(const QStringView* self, bool* ok) {
+	return self->toDouble(ok);
+}
+
+void QStringView_delete(QStringView* self) {
+	delete self;
+}
+

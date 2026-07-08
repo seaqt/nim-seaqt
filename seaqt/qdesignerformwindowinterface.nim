@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractformwindow
+export gen_abstractformwindow
