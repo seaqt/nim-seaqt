@@ -31,22 +31,22 @@ QBasicMutex* QBasicMutex_new();
 void QBasicMutex_lock(QBasicMutex* self);
 void QBasicMutex_unlock(QBasicMutex* self);
 bool QBasicMutex_tryLock(QBasicMutex* self);
-bool QBasicMutex_tryLock2(QBasicMutex* self);
+bool QBasicMutex_try_lock(QBasicMutex* self);
 bool QBasicMutex_isRecursive(QBasicMutex* self);
-bool QBasicMutex_isRecursive2(const QBasicMutex* self);
+bool QBasicMutex_isRecursive_const(const QBasicMutex* self);
 
 void QBasicMutex_delete(QBasicMutex* self);
 
 QMutex* QMutex_new();
-QMutex* QMutex_new2(int mode);
+QMutex* QMutex_new_mode(int mode);
 
 void QMutex_virtbase(QMutex* src, QBasicMutex** outptr_QBasicMutex);
 void QMutex_lock(QMutex* self);
 bool QMutex_tryLock(QMutex* self);
 void QMutex_unlock(QMutex* self);
-bool QMutex_tryLock2(QMutex* self);
+bool QMutex_try_lock(QMutex* self);
 bool QMutex_isRecursive(const QMutex* self);
-bool QMutex_tryLockWithTimeout(QMutex* self, int timeout);
+bool QMutex_tryLock_timeout(QMutex* self, int timeout);
 
 void QMutex_delete(QMutex* self);
 
@@ -54,8 +54,8 @@ QRecursiveMutex* QRecursiveMutex_new();
 
 void QRecursiveMutex_delete(QRecursiveMutex* self);
 
-QMutexLocker* QMutexLocker_new(QBasicMutex* m);
-QMutexLocker* QMutexLocker_new2(QRecursiveMutex* m);
+QMutexLocker* QMutexLocker_new_QBasicMutex(QBasicMutex* m);
+QMutexLocker* QMutexLocker_new_QRecursiveMutex(QRecursiveMutex* m);
 
 void QMutexLocker_unlock(QMutexLocker* self);
 void QMutexLocker_relock(QMutexLocker* self);

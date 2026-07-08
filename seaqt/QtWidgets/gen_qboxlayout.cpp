@@ -250,16 +250,16 @@ public:
 	friend QRect* QBoxLayout_virtualbase_geometry(const VirtualQBoxLayout* self);
 
 	virtual int indexOf(QWidget* param1) const override {
-		if (vtbl->indexOf == 0) {
+		if (vtbl->indexOf_QWidget == 0) {
 			return QBoxLayout::indexOf(param1);
 		}
 
 		QWidget* sigval1 = param1;
-		int callback_return_value = vtbl->indexOf(this, sigval1);
+		int callback_return_value = vtbl->indexOf_QWidget(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QBoxLayout_virtualbase_indexOf(const VirtualQBoxLayout* self, QWidget* param1);
+	friend int QBoxLayout_virtualbase_indexOf_QWidget(const VirtualQBoxLayout* self, QWidget* param1);
 
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
@@ -417,12 +417,12 @@ public:
 	friend bool QBoxLayout_protectedbase_isSignalConnected(const VirtualQBoxLayout* self, QMetaMethod* signal);
 };
 
-VirtualQBoxLayout* QBoxLayout_new(const QBoxLayout_VTable* vtbl, size_t vdata, int param1) {
+VirtualQBoxLayout* QBoxLayout_new_QBoxLayout_Direction(const QBoxLayout_VTable* vtbl, size_t vdata, int param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBoxLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQBoxLayout(vtbl, static_cast<QBoxLayout::Direction>(param1)) : nullptr;
 }
 
-VirtualQBoxLayout* QBoxLayout_new2(const QBoxLayout_VTable* vtbl, size_t vdata, int param1, QWidget* parent) {
+VirtualQBoxLayout* QBoxLayout_new_QBoxLayout_Direction_QWidget(const QBoxLayout_VTable* vtbl, size_t vdata, int param1, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBoxLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQBoxLayout(vtbl, static_cast<QBoxLayout::Direction>(param1), parent) : nullptr;
 }
@@ -443,7 +443,7 @@ int QBoxLayout_metacall(QBoxLayout* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QBoxLayout_tr(const char* s) {
+struct seaqt_string QBoxLayout_tr_s(const char* s) {
 	QString _ret = QBoxLayout::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -454,7 +454,7 @@ struct seaqt_string QBoxLayout_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QBoxLayout_trUtf8(const char* s) {
+struct seaqt_string QBoxLayout_trUtf8_s(const char* s) {
 	QString _ret = QBoxLayout::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -486,11 +486,11 @@ void QBoxLayout_addSpacerItem(QBoxLayout* self, QSpacerItem* spacerItem) {
 	self->addSpacerItem(spacerItem);
 }
 
-void QBoxLayout_addWidget(QBoxLayout* self, QWidget* param1) {
+void QBoxLayout_addWidget_QWidget(QBoxLayout* self, QWidget* param1) {
 	self->addWidget(param1);
 }
 
-void QBoxLayout_addLayout(QBoxLayout* self, QLayout* layout) {
+void QBoxLayout_addLayout_layout(QBoxLayout* self, QLayout* layout) {
 	self->addLayout(layout);
 }
 
@@ -506,7 +506,7 @@ void QBoxLayout_insertSpacing(QBoxLayout* self, int index, int size) {
 	self->insertSpacing(static_cast<int>(index), static_cast<int>(size));
 }
 
-void QBoxLayout_insertStretch(QBoxLayout* self, int index) {
+void QBoxLayout_insertStretch_index(QBoxLayout* self, int index) {
 	self->insertStretch(static_cast<int>(index));
 }
 
@@ -514,11 +514,11 @@ void QBoxLayout_insertSpacerItem(QBoxLayout* self, int index, QSpacerItem* space
 	self->insertSpacerItem(static_cast<int>(index), spacerItem);
 }
 
-void QBoxLayout_insertWidget(QBoxLayout* self, int index, QWidget* widget) {
+void QBoxLayout_insertWidget_index_widget(QBoxLayout* self, int index, QWidget* widget) {
 	self->insertWidget(static_cast<int>(index), widget);
 }
 
-void QBoxLayout_insertLayout(QBoxLayout* self, int index, QLayout* layout) {
+void QBoxLayout_insertLayout_index_layout(QBoxLayout* self, int index, QLayout* layout) {
 	self->insertLayout(static_cast<int>(index), layout);
 }
 
@@ -534,11 +534,11 @@ void QBoxLayout_setSpacing(QBoxLayout* self, int spacing) {
 	self->setSpacing(static_cast<int>(spacing));
 }
 
-bool QBoxLayout_setStretchFactor(QBoxLayout* self, QWidget* w, int stretch) {
+bool QBoxLayout_setStretchFactor_w_stretch(QBoxLayout* self, QWidget* w, int stretch) {
 	return self->setStretchFactor(w, static_cast<int>(stretch));
 }
 
-bool QBoxLayout_setStretchFactor2(QBoxLayout* self, QLayout* l, int stretch) {
+bool QBoxLayout_setStretchFactor_l_stretch(QBoxLayout* self, QLayout* l, int stretch) {
 	return self->setStretchFactor(l, static_cast<int>(stretch));
 }
 
@@ -599,7 +599,7 @@ void QBoxLayout_setGeometry(QBoxLayout* self, QRect* geometry) {
 	self->setGeometry(*geometry);
 }
 
-struct seaqt_string QBoxLayout_tr2(const char* s, const char* c) {
+struct seaqt_string QBoxLayout_tr_s_c(const char* s, const char* c) {
 	QString _ret = QBoxLayout::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -610,7 +610,7 @@ struct seaqt_string QBoxLayout_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QBoxLayout_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QBoxLayout_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QBoxLayout::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -621,7 +621,7 @@ struct seaqt_string QBoxLayout_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QBoxLayout_trUtf82(const char* s, const char* c) {
+struct seaqt_string QBoxLayout_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QBoxLayout::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -632,7 +632,7 @@ struct seaqt_string QBoxLayout_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QBoxLayout_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QBoxLayout_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QBoxLayout::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -643,35 +643,35 @@ struct seaqt_string QBoxLayout_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QBoxLayout_addStretchWithStretch(QBoxLayout* self, int stretch) {
+void QBoxLayout_addStretch_stretch(QBoxLayout* self, int stretch) {
 	self->addStretch(static_cast<int>(stretch));
 }
 
-void QBoxLayout_addWidget2(QBoxLayout* self, QWidget* param1, int stretch) {
+void QBoxLayout_addWidget_QWidget_int(QBoxLayout* self, QWidget* param1, int stretch) {
 	self->addWidget(param1, static_cast<int>(stretch));
 }
 
-void QBoxLayout_addWidget3(QBoxLayout* self, QWidget* param1, int stretch, int alignment) {
+void QBoxLayout_addWidget_QWidget_int_Qt_Alignment(QBoxLayout* self, QWidget* param1, int stretch, int alignment) {
 	self->addWidget(param1, static_cast<int>(stretch), static_cast<Qt::Alignment>(alignment));
 }
 
-void QBoxLayout_addLayout2(QBoxLayout* self, QLayout* layout, int stretch) {
+void QBoxLayout_addLayout_layout_stretch(QBoxLayout* self, QLayout* layout, int stretch) {
 	self->addLayout(layout, static_cast<int>(stretch));
 }
 
-void QBoxLayout_insertStretch2(QBoxLayout* self, int index, int stretch) {
+void QBoxLayout_insertStretch_index_stretch(QBoxLayout* self, int index, int stretch) {
 	self->insertStretch(static_cast<int>(index), static_cast<int>(stretch));
 }
 
-void QBoxLayout_insertWidget2(QBoxLayout* self, int index, QWidget* widget, int stretch) {
+void QBoxLayout_insertWidget_index_widget_stretch(QBoxLayout* self, int index, QWidget* widget, int stretch) {
 	self->insertWidget(static_cast<int>(index), widget, static_cast<int>(stretch));
 }
 
-void QBoxLayout_insertWidget3(QBoxLayout* self, int index, QWidget* widget, int stretch, int alignment) {
+void QBoxLayout_insertWidget_index_widget_stretch_alignment(QBoxLayout* self, int index, QWidget* widget, int stretch, int alignment) {
 	self->insertWidget(static_cast<int>(index), widget, static_cast<int>(stretch), static_cast<Qt::Alignment>(alignment));
 }
 
-void QBoxLayout_insertLayout2(QBoxLayout* self, int index, QLayout* layout, int stretch) {
+void QBoxLayout_insertLayout_index_layout_stretch(QBoxLayout* self, int index, QLayout* layout, int stretch) {
 	self->insertLayout(static_cast<int>(index), layout, static_cast<int>(stretch));
 }
 
@@ -765,7 +765,7 @@ QRect* QBoxLayout_virtualbase_geometry(const VirtualQBoxLayout* self) {
 	return new QRect(self->QBoxLayout::geometry());
 }
 
-int QBoxLayout_virtualbase_indexOf(const VirtualQBoxLayout* self, QWidget* param1) {
+int QBoxLayout_virtualbase_indexOf_QWidget(const VirtualQBoxLayout* self, QWidget* param1) {
 
 	return self->QBoxLayout::indexOf(param1);
 }
@@ -1092,16 +1092,16 @@ public:
 	friend QRect* QHBoxLayout_virtualbase_geometry(const VirtualQHBoxLayout* self);
 
 	virtual int indexOf(QWidget* param1) const override {
-		if (vtbl->indexOf == 0) {
+		if (vtbl->indexOf_QWidget == 0) {
 			return QHBoxLayout::indexOf(param1);
 		}
 
 		QWidget* sigval1 = param1;
-		int callback_return_value = vtbl->indexOf(this, sigval1);
+		int callback_return_value = vtbl->indexOf_QWidget(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QHBoxLayout_virtualbase_indexOf(const VirtualQHBoxLayout* self, QWidget* param1);
+	friend int QHBoxLayout_virtualbase_indexOf_QWidget(const VirtualQHBoxLayout* self, QWidget* param1);
 
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
@@ -1264,7 +1264,7 @@ VirtualQHBoxLayout* QHBoxLayout_new(const QHBoxLayout_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQHBoxLayout(vtbl) : nullptr;
 }
 
-VirtualQHBoxLayout* QHBoxLayout_new2(const QHBoxLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQHBoxLayout* QHBoxLayout_new_parent(const QHBoxLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHBoxLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHBoxLayout(vtbl, parent) : nullptr;
 }
@@ -1285,7 +1285,7 @@ int QHBoxLayout_metacall(QHBoxLayout* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QHBoxLayout_tr(const char* s) {
+struct seaqt_string QHBoxLayout_tr_s(const char* s) {
 	QString _ret = QHBoxLayout::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1296,7 +1296,7 @@ struct seaqt_string QHBoxLayout_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QHBoxLayout_trUtf8(const char* s) {
+struct seaqt_string QHBoxLayout_trUtf8_s(const char* s) {
 	QString _ret = QHBoxLayout::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1307,7 +1307,7 @@ struct seaqt_string QHBoxLayout_trUtf8(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QHBoxLayout_tr2(const char* s, const char* c) {
+struct seaqt_string QHBoxLayout_tr_s_c(const char* s, const char* c) {
 	QString _ret = QHBoxLayout::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1318,7 +1318,7 @@ struct seaqt_string QHBoxLayout_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QHBoxLayout_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QHBoxLayout_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QHBoxLayout::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1329,7 +1329,7 @@ struct seaqt_string QHBoxLayout_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QHBoxLayout_trUtf82(const char* s, const char* c) {
+struct seaqt_string QHBoxLayout_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QHBoxLayout::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1340,7 +1340,7 @@ struct seaqt_string QHBoxLayout_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QHBoxLayout_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QHBoxLayout_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QHBoxLayout::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1441,7 +1441,7 @@ QRect* QHBoxLayout_virtualbase_geometry(const VirtualQHBoxLayout* self) {
 	return new QRect(self->QHBoxLayout::geometry());
 }
 
-int QHBoxLayout_virtualbase_indexOf(const VirtualQHBoxLayout* self, QWidget* param1) {
+int QHBoxLayout_virtualbase_indexOf_QWidget(const VirtualQHBoxLayout* self, QWidget* param1) {
 
 	return self->QHBoxLayout::indexOf(param1);
 }
@@ -1768,16 +1768,16 @@ public:
 	friend QRect* QVBoxLayout_virtualbase_geometry(const VirtualQVBoxLayout* self);
 
 	virtual int indexOf(QWidget* param1) const override {
-		if (vtbl->indexOf == 0) {
+		if (vtbl->indexOf_QWidget == 0) {
 			return QVBoxLayout::indexOf(param1);
 		}
 
 		QWidget* sigval1 = param1;
-		int callback_return_value = vtbl->indexOf(this, sigval1);
+		int callback_return_value = vtbl->indexOf_QWidget(this, sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QVBoxLayout_virtualbase_indexOf(const VirtualQVBoxLayout* self, QWidget* param1);
+	friend int QVBoxLayout_virtualbase_indexOf_QWidget(const VirtualQVBoxLayout* self, QWidget* param1);
 
 	virtual bool isEmpty() const override {
 		if (vtbl->isEmpty == 0) {
@@ -1940,7 +1940,7 @@ VirtualQVBoxLayout* QVBoxLayout_new(const QVBoxLayout_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQVBoxLayout(vtbl) : nullptr;
 }
 
-VirtualQVBoxLayout* QVBoxLayout_new2(const QVBoxLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQVBoxLayout* QVBoxLayout_new_parent(const QVBoxLayout_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQVBoxLayout>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQVBoxLayout(vtbl, parent) : nullptr;
 }
@@ -1961,7 +1961,7 @@ int QVBoxLayout_metacall(QVBoxLayout* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QVBoxLayout_tr(const char* s) {
+struct seaqt_string QVBoxLayout_tr_s(const char* s) {
 	QString _ret = QVBoxLayout::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1972,7 +1972,7 @@ struct seaqt_string QVBoxLayout_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QVBoxLayout_trUtf8(const char* s) {
+struct seaqt_string QVBoxLayout_trUtf8_s(const char* s) {
 	QString _ret = QVBoxLayout::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1983,7 +1983,7 @@ struct seaqt_string QVBoxLayout_trUtf8(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QVBoxLayout_tr2(const char* s, const char* c) {
+struct seaqt_string QVBoxLayout_tr_s_c(const char* s, const char* c) {
 	QString _ret = QVBoxLayout::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1994,7 +1994,7 @@ struct seaqt_string QVBoxLayout_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QVBoxLayout_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QVBoxLayout_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QVBoxLayout::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2005,7 +2005,7 @@ struct seaqt_string QVBoxLayout_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QVBoxLayout_trUtf82(const char* s, const char* c) {
+struct seaqt_string QVBoxLayout_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QVBoxLayout::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2016,7 +2016,7 @@ struct seaqt_string QVBoxLayout_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QVBoxLayout_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QVBoxLayout_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QVBoxLayout::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2117,7 +2117,7 @@ QRect* QVBoxLayout_virtualbase_geometry(const VirtualQVBoxLayout* self) {
 	return new QRect(self->QVBoxLayout::geometry());
 }
 
-int QVBoxLayout_virtualbase_indexOf(const VirtualQVBoxLayout* self, QWidget* param1) {
+int QVBoxLayout_virtualbase_indexOf_QWidget(const VirtualQVBoxLayout* self, QWidget* param1) {
 
 	return self->QVBoxLayout::indexOf(param1);
 }

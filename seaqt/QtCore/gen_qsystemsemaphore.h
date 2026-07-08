@@ -20,19 +20,19 @@ class QSystemSemaphore;
 typedef struct QSystemSemaphore QSystemSemaphore;
 #endif
 
-QSystemSemaphore* QSystemSemaphore_new(struct seaqt_string key);
-QSystemSemaphore* QSystemSemaphore_new2(struct seaqt_string key, int initialValue);
-QSystemSemaphore* QSystemSemaphore_new3(struct seaqt_string key, int initialValue, int mode);
+QSystemSemaphore* QSystemSemaphore_new_key(struct seaqt_string key);
+QSystemSemaphore* QSystemSemaphore_new_key_initialValue(struct seaqt_string key, int initialValue);
+QSystemSemaphore* QSystemSemaphore_new_key_initialValue_mode(struct seaqt_string key, int initialValue, int mode);
 
-void QSystemSemaphore_setKey(QSystemSemaphore* self, struct seaqt_string key);
+void QSystemSemaphore_setKey_key(QSystemSemaphore* self, struct seaqt_string key);
 struct seaqt_string QSystemSemaphore_key(const QSystemSemaphore* self);
 bool QSystemSemaphore_acquire(QSystemSemaphore* self);
 bool QSystemSemaphore_release(QSystemSemaphore* self);
 int QSystemSemaphore_error(const QSystemSemaphore* self);
 struct seaqt_string QSystemSemaphore_errorString(const QSystemSemaphore* self);
-void QSystemSemaphore_setKey2(QSystemSemaphore* self, struct seaqt_string key, int initialValue);
-void QSystemSemaphore_setKey3(QSystemSemaphore* self, struct seaqt_string key, int initialValue, int mode);
-bool QSystemSemaphore_releaseWithInt(QSystemSemaphore* self, int n);
+void QSystemSemaphore_setKey_key_initialValue(QSystemSemaphore* self, struct seaqt_string key, int initialValue);
+void QSystemSemaphore_setKey_key_initialValue_mode(QSystemSemaphore* self, struct seaqt_string key, int initialValue, int mode);
+bool QSystemSemaphore_release_n(QSystemSemaphore* self, int n);
 
 void QSystemSemaphore_delete(QSystemSemaphore* self);
 

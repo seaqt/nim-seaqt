@@ -81,46 +81,46 @@ export
 
 type cQUrl*{.exportc: "QUrl", incompleteStruct.} = object
 
-proc fcQUrl_operatorAssign(self: pointer, copy: pointer): void {.importc: "QUrl_operatorAssign".}
-proc fcQUrl_operatorAssignWithUrl(self: pointer, url: struct_seaqt_string): void {.importc: "QUrl_operatorAssignWithUrl".}
+proc fcQUrl_operatorAssignFrom(self: pointer, fromVal: pointer): void {.importc: "QUrl_operatorAssign_from".}
+proc fcQUrl_operatorAssignUrl(self: pointer, url: struct_seaqt_string): void {.importc: "QUrl_operatorAssign_url".}
 proc fcQUrl_swap(self: pointer, other: pointer): void {.importc: "QUrl_swap".}
-proc fcQUrl_setUrl(self: pointer, url: struct_seaqt_string): void {.importc: "QUrl_setUrl".}
+proc fcQUrl_setUrlUrl(self: pointer, url: struct_seaqt_string): void {.importc: "QUrl_setUrl_url".}
 proc fcQUrl_url(self: pointer): struct_seaqt_string {.importc: "QUrl_url".}
 proc fcQUrl_toString(self: pointer): struct_seaqt_string {.importc: "QUrl_toString".}
 proc fcQUrl_toDisplayString(self: pointer): struct_seaqt_string {.importc: "QUrl_toDisplayString".}
 proc fcQUrl_toEncoded(self: pointer): struct_seaqt_string {.importc: "QUrl_toEncoded".}
-proc fcQUrl_fromEncoded(url: struct_seaqt_string): pointer {.importc: "QUrl_fromEncoded".}
-proc fcQUrl_fromUserInput(userInput: struct_seaqt_string): pointer {.importc: "QUrl_fromUserInput".}
-proc fcQUrl_fromUserInput2(userInput: struct_seaqt_string, workingDirectory: struct_seaqt_string): pointer {.importc: "QUrl_fromUserInput2".}
+proc fcQUrl_fromEncodedUrl(url: struct_seaqt_string): pointer {.importc: "QUrl_fromEncoded_url".}
+proc fcQUrl_fromUserInputUserInput(userInput: struct_seaqt_string): pointer {.importc: "QUrl_fromUserInput_userInput".}
+proc fcQUrl_fromUserInputUserInputWorkingDirectory(userInput: struct_seaqt_string, workingDirectory: struct_seaqt_string): pointer {.importc: "QUrl_fromUserInput_userInput_workingDirectory".}
 proc fcQUrl_isValid(self: pointer): bool {.importc: "QUrl_isValid".}
 proc fcQUrl_errorString(self: pointer): struct_seaqt_string {.importc: "QUrl_errorString".}
 proc fcQUrl_isEmpty(self: pointer): bool {.importc: "QUrl_isEmpty".}
 proc fcQUrl_clear(self: pointer): void {.importc: "QUrl_clear".}
 proc fcQUrl_setScheme(self: pointer, scheme: struct_seaqt_string): void {.importc: "QUrl_setScheme".}
 proc fcQUrl_scheme(self: pointer): struct_seaqt_string {.importc: "QUrl_scheme".}
-proc fcQUrl_setAuthority(self: pointer, authority: struct_seaqt_string): void {.importc: "QUrl_setAuthority".}
+proc fcQUrl_setAuthorityAuthority(self: pointer, authority: struct_seaqt_string): void {.importc: "QUrl_setAuthority_authority".}
 proc fcQUrl_authority(self: pointer): struct_seaqt_string {.importc: "QUrl_authority".}
-proc fcQUrl_setUserInfo(self: pointer, userInfo: struct_seaqt_string): void {.importc: "QUrl_setUserInfo".}
+proc fcQUrl_setUserInfoUserInfo(self: pointer, userInfo: struct_seaqt_string): void {.importc: "QUrl_setUserInfo_userInfo".}
 proc fcQUrl_userInfo(self: pointer): struct_seaqt_string {.importc: "QUrl_userInfo".}
-proc fcQUrl_setUserName(self: pointer, userName: struct_seaqt_string): void {.importc: "QUrl_setUserName".}
+proc fcQUrl_setUserNameUserName(self: pointer, userName: struct_seaqt_string): void {.importc: "QUrl_setUserName_userName".}
 proc fcQUrl_userName(self: pointer): struct_seaqt_string {.importc: "QUrl_userName".}
-proc fcQUrl_setPassword(self: pointer, password: struct_seaqt_string): void {.importc: "QUrl_setPassword".}
+proc fcQUrl_setPasswordPassword(self: pointer, password: struct_seaqt_string): void {.importc: "QUrl_setPassword_password".}
 proc fcQUrl_password(self: pointer): struct_seaqt_string {.importc: "QUrl_password".}
-proc fcQUrl_setHost(self: pointer, host: struct_seaqt_string): void {.importc: "QUrl_setHost".}
+proc fcQUrl_setHostHost(self: pointer, host: struct_seaqt_string): void {.importc: "QUrl_setHost_host".}
 proc fcQUrl_host(self: pointer): struct_seaqt_string {.importc: "QUrl_host".}
 proc fcQUrl_topLevelDomain(self: pointer): struct_seaqt_string {.importc: "QUrl_topLevelDomain".}
 proc fcQUrl_setPort(self: pointer, port: cint): void {.importc: "QUrl_setPort".}
 proc fcQUrl_port(self: pointer): cint {.importc: "QUrl_port".}
-proc fcQUrl_setPath(self: pointer, path: struct_seaqt_string): void {.importc: "QUrl_setPath".}
+proc fcQUrl_setPathPath(self: pointer, path: struct_seaqt_string): void {.importc: "QUrl_setPath_path".}
 proc fcQUrl_path(self: pointer): struct_seaqt_string {.importc: "QUrl_path".}
 proc fcQUrl_fileName(self: pointer): struct_seaqt_string {.importc: "QUrl_fileName".}
 proc fcQUrl_hasQuery(self: pointer): bool {.importc: "QUrl_hasQuery".}
-proc fcQUrl_setQuery(self: pointer, query: struct_seaqt_string): void {.importc: "QUrl_setQuery".}
-proc fcQUrl_setQueryWithQuery(self: pointer, query: pointer): void {.importc: "QUrl_setQueryWithQuery".}
+proc fcQUrl_setQuery_QString(self: pointer, query: struct_seaqt_string): void {.importc: "QUrl_setQuery_QString".}
+proc fcQUrl_setQuery_QUrlQuery(self: pointer, query: pointer): void {.importc: "QUrl_setQuery_QUrlQuery".}
 proc fcQUrl_query(self: pointer): struct_seaqt_string {.importc: "QUrl_query".}
 proc fcQUrl_hasFragment(self: pointer): bool {.importc: "QUrl_hasFragment".}
 proc fcQUrl_fragment(self: pointer): struct_seaqt_string {.importc: "QUrl_fragment".}
-proc fcQUrl_setFragment(self: pointer, fragment: struct_seaqt_string): void {.importc: "QUrl_setFragment".}
+proc fcQUrl_setFragmentFragment(self: pointer, fragment: struct_seaqt_string): void {.importc: "QUrl_setFragment_fragment".}
 proc fcQUrl_resolved(self: pointer, relative: pointer): pointer {.importc: "QUrl_resolved".}
 proc fcQUrl_isRelative(self: pointer): bool {.importc: "QUrl_isRelative".}
 proc fcQUrl_isParentOf(self: pointer, url: pointer): bool {.importc: "QUrl_isParentOf".}
@@ -133,54 +133,54 @@ proc fcQUrl_operatorLesser(self: pointer, url: pointer): bool {.importc: "QUrl_o
 proc fcQUrl_operatorEqual(self: pointer, url: pointer): bool {.importc: "QUrl_operatorEqual".}
 proc fcQUrl_operatorNotEqual(self: pointer, url: pointer): bool {.importc: "QUrl_operatorNotEqual".}
 proc fcQUrl_fromPercentEncoding(param1: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_fromPercentEncoding".}
-proc fcQUrl_toPercentEncoding(param1: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_toPercentEncoding".}
+proc fcQUrl_toPercentEncoding_QString(param1: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_toPercentEncoding_QString".}
 proc fcQUrl_fromAce(param1: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_fromAce".}
 proc fcQUrl_toAce(param1: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_toAce".}
 proc fcQUrl_idnWhitelist(): struct_seaqt_array {.importc: "QUrl_idnWhitelist".}
-proc fcQUrl_toStringList(uris: struct_seaqt_array): struct_seaqt_array {.importc: "QUrl_toStringList".}
-proc fcQUrl_fromStringList(uris: struct_seaqt_array): struct_seaqt_array {.importc: "QUrl_fromStringList".}
+proc fcQUrl_toStringListUris(uris: struct_seaqt_array): struct_seaqt_array {.importc: "QUrl_toStringList_uris".}
+proc fcQUrl_fromStringListUris(uris: struct_seaqt_array): struct_seaqt_array {.importc: "QUrl_fromStringList_uris".}
 proc fcQUrl_setIdnWhitelist(idnWhitelist: struct_seaqt_array): void {.importc: "QUrl_setIdnWhitelist".}
-proc fcQUrl_setUrl2(self: pointer, url: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setUrl2".}
-proc fcQUrl_fromEncoded2(url: struct_seaqt_string, mode: cint): pointer {.importc: "QUrl_fromEncoded2".}
-proc fcQUrl_fromUserInput3(userInput: struct_seaqt_string, workingDirectory: struct_seaqt_string, options: cint): pointer {.importc: "QUrl_fromUserInput3".}
-proc fcQUrl_setAuthority2(self: pointer, authority: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setAuthority2".}
-proc fcQUrl_authorityWithOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_authorityWithOptions".}
-proc fcQUrl_setUserInfo2(self: pointer, userInfo: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setUserInfo2".}
-proc fcQUrl_userInfoWithOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_userInfoWithOptions".}
-proc fcQUrl_setUserName2(self: pointer, userName: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setUserName2".}
-proc fcQUrl_userNameWithOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_userNameWithOptions".}
-proc fcQUrl_setPassword2(self: pointer, password: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setPassword2".}
-proc fcQUrl_passwordWithQUrlComponentFormattingOptions(self: pointer, param1: cint): struct_seaqt_string {.importc: "QUrl_passwordWithQUrlComponentFormattingOptions".}
-proc fcQUrl_setHost2(self: pointer, host: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setHost2".}
-proc fcQUrl_hostWithQUrlComponentFormattingOptions(self: pointer, param1: cint): struct_seaqt_string {.importc: "QUrl_hostWithQUrlComponentFormattingOptions".}
-proc fcQUrl_topLevelDomainWithOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_topLevelDomainWithOptions".}
-proc fcQUrl_portWithDefaultPort(self: pointer, defaultPort: cint): cint {.importc: "QUrl_portWithDefaultPort".}
-proc fcQUrl_setPath2(self: pointer, path: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setPath2".}
-proc fcQUrl_pathWithOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_pathWithOptions".}
-proc fcQUrl_fileNameWithOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_fileNameWithOptions".}
-proc fcQUrl_setQuery2(self: pointer, query: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setQuery2".}
-proc fcQUrl_queryWithQUrlComponentFormattingOptions(self: pointer, param1: cint): struct_seaqt_string {.importc: "QUrl_queryWithQUrlComponentFormattingOptions".}
-proc fcQUrl_fragmentWithOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_fragmentWithOptions".}
-proc fcQUrl_setFragment2(self: pointer, fragment: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setFragment2".}
-proc fcQUrl_toPercentEncoding2(param1: struct_seaqt_string, exclude: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_toPercentEncoding2".}
-proc fcQUrl_toPercentEncoding3(param1: struct_seaqt_string, exclude: struct_seaqt_string, includeVal: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_toPercentEncoding3".}
-proc fcQUrl_fromStringList2(uris: struct_seaqt_array, mode: cint): struct_seaqt_array {.importc: "QUrl_fromStringList2".}
+proc fcQUrl_setUrlUrlMode(self: pointer, url: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setUrl_url_mode".}
+proc fcQUrl_fromEncodedUrlMode(url: struct_seaqt_string, mode: cint): pointer {.importc: "QUrl_fromEncoded_url_mode".}
+proc fcQUrl_fromUserInputUserInputWorkingDirectoryOptions(userInput: struct_seaqt_string, workingDirectory: struct_seaqt_string, options: cint): pointer {.importc: "QUrl_fromUserInput_userInput_workingDirectory_options".}
+proc fcQUrl_setAuthorityAuthorityMode(self: pointer, authority: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setAuthority_authority_mode".}
+proc fcQUrl_authorityOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_authority_options".}
+proc fcQUrl_setUserInfoUserInfoMode(self: pointer, userInfo: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setUserInfo_userInfo_mode".}
+proc fcQUrl_userInfoOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_userInfo_options".}
+proc fcQUrl_setUserNameUserNameMode(self: pointer, userName: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setUserName_userName_mode".}
+proc fcQUrl_userNameOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_userName_options".}
+proc fcQUrl_setPasswordPasswordMode(self: pointer, password: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setPassword_password_mode".}
+proc fcQUrl_password_QUrl_ComponentFormattingOptions(self: pointer, param1: cint): struct_seaqt_string {.importc: "QUrl_password_QUrl_ComponentFormattingOptions".}
+proc fcQUrl_setHostHostMode(self: pointer, host: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setHost_host_mode".}
+proc fcQUrl_host_QUrl_ComponentFormattingOptions(self: pointer, param1: cint): struct_seaqt_string {.importc: "QUrl_host_QUrl_ComponentFormattingOptions".}
+proc fcQUrl_topLevelDomainOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_topLevelDomain_options".}
+proc fcQUrl_portDefaultPort(self: pointer, defaultPort: cint): cint {.importc: "QUrl_port_defaultPort".}
+proc fcQUrl_setPathPathMode(self: pointer, path: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setPath_path_mode".}
+proc fcQUrl_pathOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_path_options".}
+proc fcQUrl_fileNameOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_fileName_options".}
+proc fcQUrl_setQuery_QString_QUrl_ParsingMode(self: pointer, query: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setQuery_QString_QUrl_ParsingMode".}
+proc fcQUrl_query_QUrl_ComponentFormattingOptions(self: pointer, param1: cint): struct_seaqt_string {.importc: "QUrl_query_QUrl_ComponentFormattingOptions".}
+proc fcQUrl_fragmentOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QUrl_fragment_options".}
+proc fcQUrl_setFragmentFragmentMode(self: pointer, fragment: struct_seaqt_string, mode: cint): void {.importc: "QUrl_setFragment_fragment_mode".}
+proc fcQUrl_toPercentEncoding_QString_QByteArray(param1: struct_seaqt_string, exclude: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_toPercentEncoding_QString_QByteArray".}
+proc fcQUrl_toPercentEncoding_QString_QByteArray_QByteArray(param1: struct_seaqt_string, exclude: struct_seaqt_string, includeVal: struct_seaqt_string): struct_seaqt_string {.importc: "QUrl_toPercentEncoding_QString_QByteArray_QByteArray".}
+proc fcQUrl_fromStringListUrisMode(uris: struct_seaqt_array, mode: cint): struct_seaqt_array {.importc: "QUrl_fromStringList_uris_mode".}
 proc fcQUrl_new(): ptr cQUrl {.importc: "QUrl_new".}
-proc fcQUrl_new2(copy: pointer): ptr cQUrl {.importc: "QUrl_new2".}
-proc fcQUrl_new3(url: struct_seaqt_string): ptr cQUrl {.importc: "QUrl_new3".}
-proc fcQUrl_new4(url: struct_seaqt_string, mode: cint): ptr cQUrl {.importc: "QUrl_new4".}
+proc fcQUrl_new2(fromVal: pointer): ptr cQUrl {.importc: "QUrl_new_from".}
+proc fcQUrl_new3(url: struct_seaqt_string): ptr cQUrl {.importc: "QUrl_new_url".}
+proc fcQUrl_new4(url: struct_seaqt_string, mode: cint): ptr cQUrl {.importc: "QUrl_new_url_mode".}
 
-proc operatorAssign*(self: gen_qurl_types.QUrl, copy: gen_qurl_types.QUrl): void =
-  fcQUrl_operatorAssign(self.h, copy.h)
+proc operatorAssign*(self: gen_qurl_types.QUrl, fromVal: gen_qurl_types.QUrl): void =
+  fcQUrl_operatorAssignFrom(self.h, fromVal.h)
 
 proc operatorAssign*(self: gen_qurl_types.QUrl, url: openArray[char]): void =
-  fcQUrl_operatorAssignWithUrl(self.h, struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
+  fcQUrl_operatorAssignUrl(self.h, struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
 proc swap*(self: gen_qurl_types.QUrl, other: gen_qurl_types.QUrl): void =
   fcQUrl_swap(self.h, other.h)
 
 proc setUrl*(self: gen_qurl_types.QUrl, url: openArray[char]): void =
-  fcQUrl_setUrl(self.h, struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
+  fcQUrl_setUrlUrl(self.h, struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))))
 
 proc url*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_url(self.h)
@@ -207,13 +207,13 @@ proc toEncoded*(self: gen_qurl_types.QUrl): seq[byte] =
   vx_ret
 
 proc fromEncoded*(_: type gen_qurl_types.QUrl, url: openArray[byte]): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQUrl_fromEncoded(struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url)))), owned: true)
+  gen_qurl_types.QUrl(h: fcQUrl_fromEncodedUrl(struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url)))), owned: true)
 
 proc fromUserInput*(_: type gen_qurl_types.QUrl, userInput: openArray[char]): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQUrl_fromUserInput(struct_seaqt_string(data: if len(userInput) > 0: addr userInput[0] else: nil, len: csize_t(len(userInput)))), owned: true)
+  gen_qurl_types.QUrl(h: fcQUrl_fromUserInputUserInput(struct_seaqt_string(data: if len(userInput) > 0: addr userInput[0] else: nil, len: csize_t(len(userInput)))), owned: true)
 
 proc fromUserInput*(_: type gen_qurl_types.QUrl, userInput: openArray[char], workingDirectory: openArray[char]): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQUrl_fromUserInput2(struct_seaqt_string(data: if len(userInput) > 0: addr userInput[0] else: nil, len: csize_t(len(userInput))), struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory)))), owned: true)
+  gen_qurl_types.QUrl(h: fcQUrl_fromUserInputUserInputWorkingDirectory(struct_seaqt_string(data: if len(userInput) > 0: addr userInput[0] else: nil, len: csize_t(len(userInput))), struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory)))), owned: true)
 
 proc isValid*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_isValid(self.h)
@@ -240,7 +240,7 @@ proc scheme*(self: gen_qurl_types.QUrl): string =
   vx_ret
 
 proc setAuthority*(self: gen_qurl_types.QUrl, authority: openArray[char]): void =
-  fcQUrl_setAuthority(self.h, struct_seaqt_string(data: if len(authority) > 0: addr authority[0] else: nil, len: csize_t(len(authority))))
+  fcQUrl_setAuthorityAuthority(self.h, struct_seaqt_string(data: if len(authority) > 0: addr authority[0] else: nil, len: csize_t(len(authority))))
 
 proc authority*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_authority(self.h)
@@ -249,7 +249,7 @@ proc authority*(self: gen_qurl_types.QUrl): string =
   vx_ret
 
 proc setUserInfo*(self: gen_qurl_types.QUrl, userInfo: openArray[char]): void =
-  fcQUrl_setUserInfo(self.h, struct_seaqt_string(data: if len(userInfo) > 0: addr userInfo[0] else: nil, len: csize_t(len(userInfo))))
+  fcQUrl_setUserInfoUserInfo(self.h, struct_seaqt_string(data: if len(userInfo) > 0: addr userInfo[0] else: nil, len: csize_t(len(userInfo))))
 
 proc userInfo*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_userInfo(self.h)
@@ -258,7 +258,7 @@ proc userInfo*(self: gen_qurl_types.QUrl): string =
   vx_ret
 
 proc setUserName*(self: gen_qurl_types.QUrl, userName: openArray[char]): void =
-  fcQUrl_setUserName(self.h, struct_seaqt_string(data: if len(userName) > 0: addr userName[0] else: nil, len: csize_t(len(userName))))
+  fcQUrl_setUserNameUserName(self.h, struct_seaqt_string(data: if len(userName) > 0: addr userName[0] else: nil, len: csize_t(len(userName))))
 
 proc userName*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_userName(self.h)
@@ -267,7 +267,7 @@ proc userName*(self: gen_qurl_types.QUrl): string =
   vx_ret
 
 proc setPassword*(self: gen_qurl_types.QUrl, password: openArray[char]): void =
-  fcQUrl_setPassword(self.h, struct_seaqt_string(data: if len(password) > 0: addr password[0] else: nil, len: csize_t(len(password))))
+  fcQUrl_setPasswordPassword(self.h, struct_seaqt_string(data: if len(password) > 0: addr password[0] else: nil, len: csize_t(len(password))))
 
 proc password*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_password(self.h)
@@ -276,7 +276,7 @@ proc password*(self: gen_qurl_types.QUrl): string =
   vx_ret
 
 proc setHost*(self: gen_qurl_types.QUrl, host: openArray[char]): void =
-  fcQUrl_setHost(self.h, struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host))))
+  fcQUrl_setHostHost(self.h, struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host))))
 
 proc host*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_host(self.h)
@@ -297,7 +297,7 @@ proc port*(self: gen_qurl_types.QUrl): cint =
   fcQUrl_port(self.h)
 
 proc setPath*(self: gen_qurl_types.QUrl, path: openArray[char]): void =
-  fcQUrl_setPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
+  fcQUrl_setPathPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc path*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_path(self.h)
@@ -315,10 +315,10 @@ proc hasQuery*(self: gen_qurl_types.QUrl): bool =
   fcQUrl_hasQuery(self.h)
 
 proc setQuery*(self: gen_qurl_types.QUrl, query: openArray[char]): void =
-  fcQUrl_setQuery(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))))
+  fcQUrl_setQuery_QString(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))))
 
 proc setQuery*(self: gen_qurl_types.QUrl, query: gen_qurlquery_types.QUrlQuery): void =
-  fcQUrl_setQueryWithQuery(self.h, query.h)
+  fcQUrl_setQuery_QUrlQuery(self.h, query.h)
 
 proc query*(self: gen_qurl_types.QUrl): string =
   let v_ms = fcQUrl_query(self.h)
@@ -336,7 +336,7 @@ proc fragment*(self: gen_qurl_types.QUrl): string =
   vx_ret
 
 proc setFragment*(self: gen_qurl_types.QUrl, fragment: openArray[char]): void =
-  fcQUrl_setFragment(self.h, struct_seaqt_string(data: if len(fragment) > 0: addr fragment[0] else: nil, len: csize_t(len(fragment))))
+  fcQUrl_setFragmentFragment(self.h, struct_seaqt_string(data: if len(fragment) > 0: addr fragment[0] else: nil, len: csize_t(len(fragment))))
 
 proc resolved*(self: gen_qurl_types.QUrl, relative: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQUrl_resolved(self.h, relative.h), owned: true)
@@ -381,7 +381,7 @@ proc fromPercentEncoding*(_: type gen_qurl_types.QUrl, param1: openArray[byte]):
   vx_ret
 
 proc toPercentEncoding*(_: type gen_qurl_types.QUrl, param1: openArray[char]): seq[byte] =
-  var v_bytearray = fcQUrl_toPercentEncoding(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
+  var v_bytearray = fcQUrl_toPercentEncoding_QString(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -415,7 +415,7 @@ proc toStringList*(_: type gen_qurl_types.QUrl, uris: openArray[gen_qurl_types.Q
   for i in 0..<len(uris):
     uris_CArray[i] = uris[i].h
 
-  var v_ma = fcQUrl_toStringList(struct_seaqt_array(len: csize_t(len(uris)), data: if len(uris) == 0: nil else: addr(uris_CArray[0])))
+  var v_ma = fcQUrl_toStringListUris(struct_seaqt_array(len: csize_t(len(uris)), data: if len(uris) == 0: nil else: addr(uris_CArray[0])))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -431,7 +431,7 @@ proc fromStringList*(_: type gen_qurl_types.QUrl, uris: openArray[string]): seq[
   for i in 0..<len(uris):
     uris_CArray[i] = struct_seaqt_string(data: if len(uris[i]) > 0: addr uris[i][0] else: nil, len: csize_t(len(uris[i])))
 
-  var v_ma = fcQUrl_fromStringList(struct_seaqt_array(len: csize_t(len(uris)), data: if len(uris) == 0: nil else: addr(uris_CArray[0])))
+  var v_ma = fcQUrl_fromStringListUris(struct_seaqt_array(len: csize_t(len(uris)), data: if len(uris) == 0: nil else: addr(uris_CArray[0])))
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -447,109 +447,109 @@ proc setIdnWhitelist*(_: type gen_qurl_types.QUrl, idnWhitelist: openArray[strin
   fcQUrl_setIdnWhitelist(struct_seaqt_array(len: csize_t(len(idnWhitelist)), data: if len(idnWhitelist) == 0: nil else: addr(idnWhitelist_CArray[0])))
 
 proc setUrl*(self: gen_qurl_types.QUrl, url: openArray[char], mode: cint): void =
-  fcQUrl_setUrl2(self.h, struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))), cint(mode))
+  fcQUrl_setUrlUrlMode(self.h, struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))), cint(mode))
 
 proc fromEncoded*(_: type gen_qurl_types.QUrl, url: openArray[byte], mode: cint): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQUrl_fromEncoded2(struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))), cint(mode)), owned: true)
+  gen_qurl_types.QUrl(h: fcQUrl_fromEncodedUrlMode(struct_seaqt_string(data: if len(url) > 0: addr url[0] else: nil, len: csize_t(len(url))), cint(mode)), owned: true)
 
 proc fromUserInput*(_: type gen_qurl_types.QUrl, userInput: openArray[char], workingDirectory: openArray[char], options: cint): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQUrl_fromUserInput3(struct_seaqt_string(data: if len(userInput) > 0: addr userInput[0] else: nil, len: csize_t(len(userInput))), struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory))), cint(options)), owned: true)
+  gen_qurl_types.QUrl(h: fcQUrl_fromUserInputUserInputWorkingDirectoryOptions(struct_seaqt_string(data: if len(userInput) > 0: addr userInput[0] else: nil, len: csize_t(len(userInput))), struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory))), cint(options)), owned: true)
 
 proc setAuthority*(self: gen_qurl_types.QUrl, authority: openArray[char], mode: cint): void =
-  fcQUrl_setAuthority2(self.h, struct_seaqt_string(data: if len(authority) > 0: addr authority[0] else: nil, len: csize_t(len(authority))), cint(mode))
+  fcQUrl_setAuthorityAuthorityMode(self.h, struct_seaqt_string(data: if len(authority) > 0: addr authority[0] else: nil, len: csize_t(len(authority))), cint(mode))
 
 proc authority*(self: gen_qurl_types.QUrl, options: cint): string =
-  let v_ms = fcQUrl_authorityWithOptions(self.h, cint(options))
+  let v_ms = fcQUrl_authorityOptions(self.h, cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setUserInfo*(self: gen_qurl_types.QUrl, userInfo: openArray[char], mode: cint): void =
-  fcQUrl_setUserInfo2(self.h, struct_seaqt_string(data: if len(userInfo) > 0: addr userInfo[0] else: nil, len: csize_t(len(userInfo))), cint(mode))
+  fcQUrl_setUserInfoUserInfoMode(self.h, struct_seaqt_string(data: if len(userInfo) > 0: addr userInfo[0] else: nil, len: csize_t(len(userInfo))), cint(mode))
 
 proc userInfo*(self: gen_qurl_types.QUrl, options: cint): string =
-  let v_ms = fcQUrl_userInfoWithOptions(self.h, cint(options))
+  let v_ms = fcQUrl_userInfoOptions(self.h, cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setUserName*(self: gen_qurl_types.QUrl, userName: openArray[char], mode: cint): void =
-  fcQUrl_setUserName2(self.h, struct_seaqt_string(data: if len(userName) > 0: addr userName[0] else: nil, len: csize_t(len(userName))), cint(mode))
+  fcQUrl_setUserNameUserNameMode(self.h, struct_seaqt_string(data: if len(userName) > 0: addr userName[0] else: nil, len: csize_t(len(userName))), cint(mode))
 
 proc userName*(self: gen_qurl_types.QUrl, options: cint): string =
-  let v_ms = fcQUrl_userNameWithOptions(self.h, cint(options))
+  let v_ms = fcQUrl_userNameOptions(self.h, cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setPassword*(self: gen_qurl_types.QUrl, password: openArray[char], mode: cint): void =
-  fcQUrl_setPassword2(self.h, struct_seaqt_string(data: if len(password) > 0: addr password[0] else: nil, len: csize_t(len(password))), cint(mode))
+  fcQUrl_setPasswordPasswordMode(self.h, struct_seaqt_string(data: if len(password) > 0: addr password[0] else: nil, len: csize_t(len(password))), cint(mode))
 
 proc password*(self: gen_qurl_types.QUrl, param1: cint): string =
-  let v_ms = fcQUrl_passwordWithQUrlComponentFormattingOptions(self.h, cint(param1))
+  let v_ms = fcQUrl_password_QUrl_ComponentFormattingOptions(self.h, cint(param1))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setHost*(self: gen_qurl_types.QUrl, host: openArray[char], mode: cint): void =
-  fcQUrl_setHost2(self.h, struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host))), cint(mode))
+  fcQUrl_setHostHostMode(self.h, struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host))), cint(mode))
 
 proc host*(self: gen_qurl_types.QUrl, param1: cint): string =
-  let v_ms = fcQUrl_hostWithQUrlComponentFormattingOptions(self.h, cint(param1))
+  let v_ms = fcQUrl_host_QUrl_ComponentFormattingOptions(self.h, cint(param1))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc topLevelDomain*(self: gen_qurl_types.QUrl, options: cint): string =
-  let v_ms = fcQUrl_topLevelDomainWithOptions(self.h, cint(options))
+  let v_ms = fcQUrl_topLevelDomainOptions(self.h, cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc port*(self: gen_qurl_types.QUrl, defaultPort: cint): cint =
-  fcQUrl_portWithDefaultPort(self.h, defaultPort)
+  fcQUrl_portDefaultPort(self.h, defaultPort)
 
 proc setPath*(self: gen_qurl_types.QUrl, path: openArray[char], mode: cint): void =
-  fcQUrl_setPath2(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(mode))
+  fcQUrl_setPathPathMode(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))), cint(mode))
 
 proc path*(self: gen_qurl_types.QUrl, options: cint): string =
-  let v_ms = fcQUrl_pathWithOptions(self.h, cint(options))
+  let v_ms = fcQUrl_pathOptions(self.h, cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc fileName*(self: gen_qurl_types.QUrl, options: cint): string =
-  let v_ms = fcQUrl_fileNameWithOptions(self.h, cint(options))
+  let v_ms = fcQUrl_fileNameOptions(self.h, cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setQuery*(self: gen_qurl_types.QUrl, query: openArray[char], mode: cint): void =
-  fcQUrl_setQuery2(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))), cint(mode))
+  fcQUrl_setQuery_QString_QUrl_ParsingMode(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))), cint(mode))
 
 proc query*(self: gen_qurl_types.QUrl, param1: cint): string =
-  let v_ms = fcQUrl_queryWithQUrlComponentFormattingOptions(self.h, cint(param1))
+  let v_ms = fcQUrl_query_QUrl_ComponentFormattingOptions(self.h, cint(param1))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc fragment*(self: gen_qurl_types.QUrl, options: cint): string =
-  let v_ms = fcQUrl_fragmentWithOptions(self.h, cint(options))
+  let v_ms = fcQUrl_fragmentOptions(self.h, cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setFragment*(self: gen_qurl_types.QUrl, fragment: openArray[char], mode: cint): void =
-  fcQUrl_setFragment2(self.h, struct_seaqt_string(data: if len(fragment) > 0: addr fragment[0] else: nil, len: csize_t(len(fragment))), cint(mode))
+  fcQUrl_setFragmentFragmentMode(self.h, struct_seaqt_string(data: if len(fragment) > 0: addr fragment[0] else: nil, len: csize_t(len(fragment))), cint(mode))
 
 proc toPercentEncoding*(_: type gen_qurl_types.QUrl, param1: openArray[char], exclude: openArray[byte]): seq[byte] =
-  var v_bytearray = fcQUrl_toPercentEncoding2(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_seaqt_string(data: if len(exclude) > 0: addr exclude[0] else: nil, len: csize_t(len(exclude))))
+  var v_bytearray = fcQUrl_toPercentEncoding_QString_QByteArray(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_seaqt_string(data: if len(exclude) > 0: addr exclude[0] else: nil, len: csize_t(len(exclude))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc toPercentEncoding*(_: type gen_qurl_types.QUrl, param1: openArray[char], exclude: openArray[byte], includeVal: openArray[byte]): seq[byte] =
-  var v_bytearray = fcQUrl_toPercentEncoding3(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_seaqt_string(data: if len(exclude) > 0: addr exclude[0] else: nil, len: csize_t(len(exclude))), struct_seaqt_string(data: if len(includeVal) > 0: addr includeVal[0] else: nil, len: csize_t(len(includeVal))))
+  var v_bytearray = fcQUrl_toPercentEncoding_QString_QByteArray_QByteArray(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), struct_seaqt_string(data: if len(exclude) > 0: addr exclude[0] else: nil, len: csize_t(len(exclude))), struct_seaqt_string(data: if len(includeVal) > 0: addr includeVal[0] else: nil, len: csize_t(len(includeVal))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -559,7 +559,7 @@ proc fromStringList*(_: type gen_qurl_types.QUrl, uris: openArray[string], mode:
   for i in 0..<len(uris):
     uris_CArray[i] = struct_seaqt_string(data: if len(uris[i]) > 0: addr uris[i][0] else: nil, len: csize_t(len(uris[i])))
 
-  var v_ma = fcQUrl_fromStringList2(struct_seaqt_array(len: csize_t(len(uris)), data: if len(uris) == 0: nil else: addr(uris_CArray[0])), cint(mode))
+  var v_ma = fcQUrl_fromStringListUrisMode(struct_seaqt_array(len: csize_t(len(uris)), data: if len(uris) == 0: nil else: addr(uris_CArray[0])), cint(mode))
   var vx_ret = newSeq[gen_qurl_types.QUrl](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -571,8 +571,8 @@ proc create*(T: type gen_qurl_types.QUrl): gen_qurl_types.QUrl =
   let tmp = gen_qurl_types.QUrl(h: fcQUrl_new(), owned: true)
   tmp
 proc create*(T: type gen_qurl_types.QUrl,
-    copy: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  let tmp = gen_qurl_types.QUrl(h: fcQUrl_new2(copy.h), owned: true)
+    fromVal: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
+  let tmp = gen_qurl_types.QUrl(h: fcQUrl_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qurl_types.QUrl,
     url: openArray[char]): gen_qurl_types.QUrl =

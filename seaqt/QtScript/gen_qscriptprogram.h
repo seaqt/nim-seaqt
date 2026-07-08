@@ -21,12 +21,12 @@ typedef struct QScriptProgram QScriptProgram;
 #endif
 
 QScriptProgram* QScriptProgram_new();
-QScriptProgram* QScriptProgram_new2(struct seaqt_string sourceCode);
-QScriptProgram* QScriptProgram_new3(QScriptProgram* other);
-QScriptProgram* QScriptProgram_new4(struct seaqt_string sourceCode, struct seaqt_string fileName);
-QScriptProgram* QScriptProgram_new5(struct seaqt_string sourceCode, struct seaqt_string fileName, int firstLineNumber);
+QScriptProgram* QScriptProgram_new_sourceCode(struct seaqt_string sourceCode);
+QScriptProgram* QScriptProgram_new_from(QScriptProgram* from);
+QScriptProgram* QScriptProgram_new_sourceCode_fileName(struct seaqt_string sourceCode, struct seaqt_string fileName);
+QScriptProgram* QScriptProgram_new_sourceCode_fileName_firstLineNumber(struct seaqt_string sourceCode, struct seaqt_string fileName, int firstLineNumber);
 
-void QScriptProgram_operatorAssign(QScriptProgram* self, QScriptProgram* other);
+void QScriptProgram_operatorAssign(QScriptProgram* self, QScriptProgram* from);
 bool QScriptProgram_isNull(const QScriptProgram* self);
 struct seaqt_string QScriptProgram_sourceCode(const QScriptProgram* self);
 struct seaqt_string QScriptProgram_fileName(const QScriptProgram* self);

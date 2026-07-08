@@ -95,18 +95,18 @@ type cQFontDatabase*{.exportc: "QFontDatabase", incompleteStruct.} = object
 
 proc fcQFontDatabase_standardSizes(): struct_seaqt_array {.importc: "QFontDatabase_standardSizes".}
 proc fcQFontDatabase_writingSystems(self: pointer): struct_seaqt_array {.importc: "QFontDatabase_writingSystems".}
-proc fcQFontDatabase_writingSystemsWithFamily(self: pointer, family: struct_seaqt_string): struct_seaqt_array {.importc: "QFontDatabase_writingSystemsWithFamily".}
+proc fcQFontDatabase_writingSystemsFamily(self: pointer, family: struct_seaqt_string): struct_seaqt_array {.importc: "QFontDatabase_writingSystems_family".}
 proc fcQFontDatabase_families(self: pointer): struct_seaqt_array {.importc: "QFontDatabase_families".}
 proc fcQFontDatabase_styles(self: pointer, family: struct_seaqt_string): struct_seaqt_array {.importc: "QFontDatabase_styles".}
-proc fcQFontDatabase_pointSizes(self: pointer, family: struct_seaqt_string): struct_seaqt_array {.importc: "QFontDatabase_pointSizes".}
+proc fcQFontDatabase_pointSizesFamily(self: pointer, family: struct_seaqt_string): struct_seaqt_array {.importc: "QFontDatabase_pointSizes_family".}
 proc fcQFontDatabase_smoothSizes(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): struct_seaqt_array {.importc: "QFontDatabase_smoothSizes".}
-proc fcQFontDatabase_styleString(self: pointer, font: pointer): struct_seaqt_string {.importc: "QFontDatabase_styleString".}
-proc fcQFontDatabase_styleStringWithFontInfo(self: pointer, fontInfo: pointer): struct_seaqt_string {.importc: "QFontDatabase_styleStringWithFontInfo".}
+proc fcQFontDatabase_styleStringFont(self: pointer, font: pointer): struct_seaqt_string {.importc: "QFontDatabase_styleString_font".}
+proc fcQFontDatabase_styleStringFontInfo(self: pointer, fontInfo: pointer): struct_seaqt_string {.importc: "QFontDatabase_styleString_fontInfo".}
 proc fcQFontDatabase_font(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string, pointSize: cint): pointer {.importc: "QFontDatabase_font".}
-proc fcQFontDatabase_isBitmapScalable(self: pointer, family: struct_seaqt_string): bool {.importc: "QFontDatabase_isBitmapScalable".}
-proc fcQFontDatabase_isSmoothlyScalable(self: pointer, family: struct_seaqt_string): bool {.importc: "QFontDatabase_isSmoothlyScalable".}
-proc fcQFontDatabase_isScalable(self: pointer, family: struct_seaqt_string): bool {.importc: "QFontDatabase_isScalable".}
-proc fcQFontDatabase_isFixedPitch(self: pointer, family: struct_seaqt_string): bool {.importc: "QFontDatabase_isFixedPitch".}
+proc fcQFontDatabase_isBitmapScalableFamily(self: pointer, family: struct_seaqt_string): bool {.importc: "QFontDatabase_isBitmapScalable_family".}
+proc fcQFontDatabase_isSmoothlyScalableFamily(self: pointer, family: struct_seaqt_string): bool {.importc: "QFontDatabase_isSmoothlyScalable_family".}
+proc fcQFontDatabase_isScalableFamily(self: pointer, family: struct_seaqt_string): bool {.importc: "QFontDatabase_isScalable_family".}
+proc fcQFontDatabase_isFixedPitchFamily(self: pointer, family: struct_seaqt_string): bool {.importc: "QFontDatabase_isFixedPitch_family".}
 proc fcQFontDatabase_italic(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_italic".}
 proc fcQFontDatabase_bold(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_bold".}
 proc fcQFontDatabase_weight(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): cint {.importc: "QFontDatabase_weight".}
@@ -121,12 +121,12 @@ proc fcQFontDatabase_removeApplicationFont(id: cint): bool {.importc: "QFontData
 proc fcQFontDatabase_removeAllApplicationFonts(): bool {.importc: "QFontDatabase_removeAllApplicationFonts".}
 proc fcQFontDatabase_supportsThreadedFontRendering(): bool {.importc: "QFontDatabase_supportsThreadedFontRendering".}
 proc fcQFontDatabase_systemFont(typeVal: cint): pointer {.importc: "QFontDatabase_systemFont".}
-proc fcQFontDatabase_familiesWithWritingSystem(self: pointer, writingSystem: cint): struct_seaqt_array {.importc: "QFontDatabase_familiesWithWritingSystem".}
-proc fcQFontDatabase_pointSizes2(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): struct_seaqt_array {.importc: "QFontDatabase_pointSizes2".}
-proc fcQFontDatabase_isBitmapScalable2(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isBitmapScalable2".}
-proc fcQFontDatabase_isSmoothlyScalable2(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isSmoothlyScalable2".}
-proc fcQFontDatabase_isScalable2(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isScalable2".}
-proc fcQFontDatabase_isFixedPitch2(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isFixedPitch2".}
+proc fcQFontDatabase_familiesWritingSystem(self: pointer, writingSystem: cint): struct_seaqt_array {.importc: "QFontDatabase_families_writingSystem".}
+proc fcQFontDatabase_pointSizesFamilyStyle(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): struct_seaqt_array {.importc: "QFontDatabase_pointSizes_family_style".}
+proc fcQFontDatabase_isBitmapScalableFamilyStyle(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isBitmapScalable_family_style".}
+proc fcQFontDatabase_isSmoothlyScalableFamilyStyle(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isSmoothlyScalable_family_style".}
+proc fcQFontDatabase_isScalableFamilyStyle(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isScalable_family_style".}
+proc fcQFontDatabase_isFixedPitchFamilyStyle(self: pointer, family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isFixedPitch_family_style".}
 proc fcQFontDatabase_new(): ptr cQFontDatabase {.importc: "QFontDatabase_new".}
 proc fcQFontDatabase_staticMetaObject(): pointer {.importc: "QFontDatabase_staticMetaObject".}
 
@@ -149,7 +149,7 @@ proc writingSystems*(self: gen_qfontdatabase_types.QFontDatabase): seq[cint] =
   vx_ret
 
 proc writingSystems*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): seq[cint] =
-  var v_ma = fcQFontDatabase_writingSystemsWithFamily(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
+  var v_ma = fcQFontDatabase_writingSystemsFamily(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -182,7 +182,7 @@ proc styles*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char
   vx_ret
 
 proc pointSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): seq[cint] =
-  var v_ma = fcQFontDatabase_pointSizes(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
+  var v_ma = fcQFontDatabase_pointSizesFamily(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -200,13 +200,13 @@ proc smoothSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray
   vx_ret
 
 proc styleString*(self: gen_qfontdatabase_types.QFontDatabase, font: gen_qfont_types.QFont): string =
-  let v_ms = fcQFontDatabase_styleString(self.h, font.h)
+  let v_ms = fcQFontDatabase_styleStringFont(self.h, font.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc styleString*(self: gen_qfontdatabase_types.QFontDatabase, fontInfo: gen_qfontinfo_types.QFontInfo): string =
-  let v_ms = fcQFontDatabase_styleStringWithFontInfo(self.h, fontInfo.h)
+  let v_ms = fcQFontDatabase_styleStringFontInfo(self.h, fontInfo.h)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -215,16 +215,16 @@ proc font*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char],
   gen_qfont_types.QFont(h: fcQFontDatabase_font(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))), pointSize), owned: true)
 
 proc isBitmapScalable*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
-  fcQFontDatabase_isBitmapScalable(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
+  fcQFontDatabase_isBitmapScalableFamily(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc isSmoothlyScalable*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
-  fcQFontDatabase_isSmoothlyScalable(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
+  fcQFontDatabase_isSmoothlyScalableFamily(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc isScalable*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
-  fcQFontDatabase_isScalable(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
+  fcQFontDatabase_isScalableFamily(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc isFixedPitch*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
-  fcQFontDatabase_isFixedPitch(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
+  fcQFontDatabase_isFixedPitchFamily(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
 
 proc italic*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
   fcQFontDatabase_italic(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
@@ -284,7 +284,7 @@ proc systemFont*(_: type gen_qfontdatabase_types.QFontDatabase, typeVal: cint): 
   gen_qfont_types.QFont(h: fcQFontDatabase_systemFont(cint(typeVal)), owned: true)
 
 proc families*(self: gen_qfontdatabase_types.QFontDatabase, writingSystem: cint): seq[string] =
-  var v_ma = fcQFontDatabase_familiesWithWritingSystem(self.h, cint(writingSystem))
+  var v_ma = fcQFontDatabase_familiesWritingSystem(self.h, cint(writingSystem))
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -296,7 +296,7 @@ proc families*(self: gen_qfontdatabase_types.QFontDatabase, writingSystem: cint)
   vx_ret
 
 proc pointSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): seq[cint] =
-  var v_ma = fcQFontDatabase_pointSizes2(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
+  var v_ma = fcQFontDatabase_pointSizesFamilyStyle(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -305,16 +305,16 @@ proc pointSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[
   vx_ret
 
 proc isBitmapScalable*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
-  fcQFontDatabase_isBitmapScalable2(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
+  fcQFontDatabase_isBitmapScalableFamilyStyle(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
 proc isSmoothlyScalable*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
-  fcQFontDatabase_isSmoothlyScalable2(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
+  fcQFontDatabase_isSmoothlyScalableFamilyStyle(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
 proc isScalable*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
-  fcQFontDatabase_isScalable2(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
+  fcQFontDatabase_isScalableFamilyStyle(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
 proc isFixedPitch*(self: gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char]): bool =
-  fcQFontDatabase_isFixedPitch2(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
+  fcQFontDatabase_isFixedPitchFamilyStyle(self.h, struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
 proc create*(T: type gen_qfontdatabase_types.QFontDatabase): gen_qfontdatabase_types.QFontDatabase =
   let tmp = gen_qfontdatabase_types.QFontDatabase(h: fcQFontDatabase_new(), owned: true)

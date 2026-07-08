@@ -36,7 +36,7 @@ int QCustomAudioRoleControl_metacall(QCustomAudioRoleControl* self, int param1, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCustomAudioRoleControl_tr(const char* s) {
+struct seaqt_string QCustomAudioRoleControl_tr_s(const char* s) {
 	QString _ret = QCustomAudioRoleControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -47,7 +47,7 @@ struct seaqt_string QCustomAudioRoleControl_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QCustomAudioRoleControl_trUtf8(const char* s) {
+struct seaqt_string QCustomAudioRoleControl_trUtf8_s(const char* s) {
 	QString _ret = QCustomAudioRoleControl::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -118,7 +118,7 @@ void QCustomAudioRoleControl_connect_customAudioRoleChanged(QCustomAudioRoleCont
 	QCustomAudioRoleControl::connect(self, static_cast<void (QCustomAudioRoleControl::*)(const QString&)>(&QCustomAudioRoleControl::customAudioRoleChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QCustomAudioRoleControl_tr2(const char* s, const char* c) {
+struct seaqt_string QCustomAudioRoleControl_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCustomAudioRoleControl::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -129,7 +129,7 @@ struct seaqt_string QCustomAudioRoleControl_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCustomAudioRoleControl_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCustomAudioRoleControl_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCustomAudioRoleControl::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -140,7 +140,7 @@ struct seaqt_string QCustomAudioRoleControl_tr3(const char* s, const char* c, in
 	return _ms;
 }
 
-struct seaqt_string QCustomAudioRoleControl_trUtf82(const char* s, const char* c) {
+struct seaqt_string QCustomAudioRoleControl_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QCustomAudioRoleControl::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -151,7 +151,7 @@ struct seaqt_string QCustomAudioRoleControl_trUtf82(const char* s, const char* c
 	return _ms;
 }
 
-struct seaqt_string QCustomAudioRoleControl_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QCustomAudioRoleControl_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCustomAudioRoleControl::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

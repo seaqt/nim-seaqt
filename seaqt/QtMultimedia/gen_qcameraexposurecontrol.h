@@ -34,8 +34,8 @@ void QCameraExposureControl_virtbase(QCameraExposureControl* src, QMediaControl*
 QMetaObject* QCameraExposureControl_metaObject(const QCameraExposureControl* self);
 void* QCameraExposureControl_metacast(QCameraExposureControl* self, const char* param1);
 int QCameraExposureControl_metacall(QCameraExposureControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraExposureControl_tr(const char* s);
-struct seaqt_string QCameraExposureControl_trUtf8(const char* s);
+struct seaqt_string QCameraExposureControl_tr_s(const char* s);
+struct seaqt_string QCameraExposureControl_trUtf8_s(const char* s);
 bool QCameraExposureControl_isParameterSupported(const QCameraExposureControl* self, int parameter);
 struct seaqt_array /* of QVariant* */  QCameraExposureControl_supportedParameterRange(const QCameraExposureControl* self, int parameter, bool* continuous);
 QVariant* QCameraExposureControl_requestedValue(const QCameraExposureControl* self, int parameter);
@@ -47,10 +47,10 @@ void QCameraExposureControl_actualValueChanged(QCameraExposureControl* self, int
 void QCameraExposureControl_connect_actualValueChanged(QCameraExposureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QCameraExposureControl_parameterRangeChanged(QCameraExposureControl* self, int parameter);
 void QCameraExposureControl_connect_parameterRangeChanged(QCameraExposureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QCameraExposureControl_tr2(const char* s, const char* c);
-struct seaqt_string QCameraExposureControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraExposureControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraExposureControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraExposureControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraExposureControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraExposureControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraExposureControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraExposureControl_staticMetaObject();
 void QCameraExposureControl_delete(QCameraExposureControl* self);

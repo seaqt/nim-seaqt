@@ -61,12 +61,12 @@ type cQTcpSocket*{.exportc: "QTcpSocket", incompleteStruct.} = object
 proc fcQTcpSocket_metaObject(self: pointer): pointer {.importc: "QTcpSocket_metaObject".}
 proc fcQTcpSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QTcpSocket_metacast".}
 proc fcQTcpSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTcpSocket_metacall".}
-proc fcQTcpSocket_tr(s: cstring): struct_seaqt_string {.importc: "QTcpSocket_tr".}
-proc fcQTcpSocket_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTcpSocket_trUtf8".}
-proc fcQTcpSocket_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTcpSocket_tr2".}
-proc fcQTcpSocket_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTcpSocket_tr3".}
-proc fcQTcpSocket_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTcpSocket_trUtf82".}
-proc fcQTcpSocket_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTcpSocket_trUtf83".}
+proc fcQTcpSocket_trS(s: cstring): struct_seaqt_string {.importc: "QTcpSocket_tr_s".}
+proc fcQTcpSocket_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTcpSocket_trUtf8_s".}
+proc fcQTcpSocket_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTcpSocket_tr_s_c".}
+proc fcQTcpSocket_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTcpSocket_tr_s_c_n".}
+proc fcQTcpSocket_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTcpSocket_trUtf8_s_c".}
+proc fcQTcpSocket_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTcpSocket_trUtf8_s_c_n".}
 proc fcQTcpSocket_vdata(self: pointer): ptr pointer {.importc: "QTcpSocket_vdata".}
 proc fvdata_cQTcpSocket(self: pointer): pointer {.importc: "vdata_QTcpSocket".}
 
@@ -76,7 +76,7 @@ type cQTcpSocketVTable {.pure.} = object
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
   resume*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectToHost*: proc(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl, raises: [], gcsafe.}
+  connectToHostHostNamePortModeProtocol*: proc(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl, raises: [], gcsafe.}
   disconnectFromHost*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   bytesAvailable*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
   bytesToWrite*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
@@ -112,7 +112,7 @@ proc fcQTcpSocket_virtualbase_metaObject(self: pointer): pointer {.importc: "QTc
 proc fcQTcpSocket_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QTcpSocket_virtualbase_metacast".}
 proc fcQTcpSocket_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTcpSocket_virtualbase_metacall".}
 proc fcQTcpSocket_virtualbase_resume(self: pointer): void {.importc: "QTcpSocket_virtualbase_resume".}
-proc fcQTcpSocket_virtualbase_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QTcpSocket_virtualbase_connectToHost".}
+proc fcQTcpSocket_virtualbase_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QTcpSocket_virtualbase_connectToHost_hostName_port_mode_protocol".}
 proc fcQTcpSocket_virtualbase_disconnectFromHost(self: pointer): void {.importc: "QTcpSocket_virtualbase_disconnectFromHost".}
 proc fcQTcpSocket_virtualbase_bytesAvailable(self: pointer): clonglong {.importc: "QTcpSocket_virtualbase_bytesAvailable".}
 proc fcQTcpSocket_virtualbase_bytesToWrite(self: pointer): clonglong {.importc: "QTcpSocket_virtualbase_bytesToWrite".}
@@ -158,7 +158,7 @@ proc fcQTcpSocket_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQTcpSocket_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTcpSocket_protectedbase_receivers".}
 proc fcQTcpSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTcpSocket_protectedbase_isSignalConnected".}
 proc fcQTcpSocket_new(vtbl: pointer, vdata: csize_t): ptr cQTcpSocket {.importc: "QTcpSocket_new".}
-proc fcQTcpSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTcpSocket {.importc: "QTcpSocket_new2".}
+proc fcQTcpSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTcpSocket {.importc: "QTcpSocket_new_parent".}
 proc fcQTcpSocket_staticMetaObject(): pointer {.importc: "QTcpSocket_staticMetaObject".}
 
 proc metaObject*(self: gen_qtcpsocket_types.QTcpSocket): gen_qobjectdefs_types.QMetaObject =
@@ -171,37 +171,37 @@ proc metacall*(self: gen_qtcpsocket_types.QTcpSocket, param1: cint, param2: cint
   fcQTcpSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtcpsocket_types.QTcpSocket, s: cstring): string =
-  let v_ms = fcQTcpSocket_tr(s)
+  let v_ms = fcQTcpSocket_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtcpsocket_types.QTcpSocket, s: cstring): string =
-  let v_ms = fcQTcpSocket_trUtf8(s)
+  let v_ms = fcQTcpSocket_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtcpsocket_types.QTcpSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQTcpSocket_tr2(s, c)
+  let v_ms = fcQTcpSocket_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtcpsocket_types.QTcpSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTcpSocket_tr3(s, c, n)
+  let v_ms = fcQTcpSocket_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtcpsocket_types.QTcpSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQTcpSocket_trUtf82(s, c)
+  let v_ms = fcQTcpSocket_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtcpsocket_types.QTcpSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTcpSocket_trUtf83(s, c, n)
+  let v_ms = fcQTcpSocket_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -210,7 +210,7 @@ type QTcpSocketmetaObjectProc* = proc(self: QTcpSocket): gen_qobjectdefs_types.Q
 type QTcpSocketmetacastProc* = proc(self: QTcpSocket, param1: cstring): pointer {.raises: [], gcsafe.}
 type QTcpSocketmetacallProc* = proc(self: QTcpSocket, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QTcpSocketresumeProc* = proc(self: QTcpSocket): void {.raises: [], gcsafe.}
-type QTcpSocketconnectToHostProc* = proc(self: QTcpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QTcpSocketconnectToHostHostNamePortModeProtocolProc* = proc(self: QTcpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QTcpSocketdisconnectFromHostProc* = proc(self: QTcpSocket): void {.raises: [], gcsafe.}
 type QTcpSocketbytesAvailableProc* = proc(self: QTcpSocket): clonglong {.raises: [], gcsafe.}
 type QTcpSocketbytesToWriteProc* = proc(self: QTcpSocket): clonglong {.raises: [], gcsafe.}
@@ -249,7 +249,7 @@ type QTcpSocketVTable* {.inheritable, pure.} = object
   metacast*: QTcpSocketmetacastProc
   metacall*: QTcpSocketmetacallProc
   resume*: QTcpSocketresumeProc
-  connectToHost*: QTcpSocketconnectToHostProc
+  connectToHostHostNamePortModeProtocol*: QTcpSocketconnectToHostHostNamePortModeProtocolProc
   disconnectFromHost*: QTcpSocketdisconnectFromHostProc
   bytesAvailable*: QTcpSocketbytesAvailableProc
   bytesToWrite*: QTcpSocketbytesToWriteProc
@@ -295,7 +295,7 @@ proc QTcpSocketresume*(self: gen_qtcpsocket_types.QTcpSocket): void =
   fcQTcpSocket_virtualbase_resume(self.h)
 
 proc QTcpSocketconnectToHost*(self: gen_qtcpsocket_types.QTcpSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
-  fcQTcpSocket_virtualbase_connectToHost(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+  fcQTcpSocket_virtualbase_connectToHostHostNamePortModeProtocol(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc QTcpSocketdisconnectFromHost*(self: gen_qtcpsocket_types.QTcpSocket): void =
   fcQTcpSocket_virtualbase_disconnectFromHost(self.h)
@@ -421,7 +421,7 @@ proc fcQTcpSocket_vtable_callback_resume(self: pointer): void {.cdecl.} =
   let self = QTcpSocket(h: self)
   vtbl[].resume(self)
 
-proc fcQTcpSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+proc fcQTcpSocket_vtable_callback_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let vtbl = cast[ptr QTcpSocketVTable](fcQTcpSocket_vdata(self)[])
   let self = QTcpSocket(h: self)
   let vhostName_ms = hostName
@@ -431,7 +431,7 @@ proc fcQTcpSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_
   let slotval2 = port
   let slotval3 = cint(mode)
   let slotval4 = cint(protocol)
-  vtbl[].connectToHost(self, slotval1, slotval2, slotval3, slotval4)
+  vtbl[].connectToHostHostNamePortModeProtocol(self, slotval1, slotval2, slotval3, slotval4)
 
 proc fcQTcpSocket_vtable_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTcpSocketVTable](fcQTcpSocket_vdata(self)[])
@@ -742,7 +742,7 @@ proc fcQTcpSocket_method_callback_resume(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTcpSocket](fcQTcpSocket_vdata(self)[])
   inst.resume()
 
-proc fcQTcpSocket_method_callback_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+proc fcQTcpSocket_method_callback_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQTcpSocket](fcQTcpSocket_vdata(self)[])
   let vhostName_ms = hostName
   let vhostNamex_ret = string.fromBytes(vhostName_ms)
@@ -984,8 +984,8 @@ proc create*(T: type gen_qtcpsocket_types.QTcpSocket,
     vtbl[].vtbl.metacall = fcQTcpSocket_vtable_callback_metacall
   if not isNil(vtbl[].resume):
     vtbl[].vtbl.resume = fcQTcpSocket_vtable_callback_resume
-  if not isNil(vtbl[].connectToHost):
-    vtbl[].vtbl.connectToHost = fcQTcpSocket_vtable_callback_connectToHost
+  if not isNil(vtbl[].connectToHostHostNamePortModeProtocol):
+    vtbl[].vtbl.connectToHostHostNamePortModeProtocol = fcQTcpSocket_vtable_callback_connectToHostHostNamePortModeProtocol
   if not isNil(vtbl[].disconnectFromHost):
     vtbl[].vtbl.disconnectFromHost = fcQTcpSocket_vtable_callback_disconnectFromHost
   if not isNil(vtbl[].bytesAvailable):
@@ -1067,8 +1067,8 @@ proc create*(T: type gen_qtcpsocket_types.QTcpSocket,
     vtbl[].vtbl.metacall = fcQTcpSocket_vtable_callback_metacall
   if not isNil(vtbl[].resume):
     vtbl[].vtbl.resume = fcQTcpSocket_vtable_callback_resume
-  if not isNil(vtbl[].connectToHost):
-    vtbl[].vtbl.connectToHost = fcQTcpSocket_vtable_callback_connectToHost
+  if not isNil(vtbl[].connectToHostHostNamePortModeProtocol):
+    vtbl[].vtbl.connectToHostHostNamePortModeProtocol = fcQTcpSocket_vtable_callback_connectToHostHostNamePortModeProtocol
   if not isNil(vtbl[].disconnectFromHost):
     vtbl[].vtbl.disconnectFromHost = fcQTcpSocket_vtable_callback_disconnectFromHost
   if not isNil(vtbl[].bytesAvailable):
@@ -1144,7 +1144,7 @@ const cQTcpSocket_mvtbl = cQTcpSocketVTable(
   metacast: fcQTcpSocket_method_callback_metacast,
   metacall: fcQTcpSocket_method_callback_metacall,
   resume: fcQTcpSocket_method_callback_resume,
-  connectToHost: fcQTcpSocket_method_callback_connectToHost,
+  connectToHostHostNamePortModeProtocol: fcQTcpSocket_method_callback_connectToHostHostNamePortModeProtocol,
   disconnectFromHost: fcQTcpSocket_method_callback_disconnectFromHost,
   bytesAvailable: fcQTcpSocket_method_callback_bytesAvailable,
   bytesToWrite: fcQTcpSocket_method_callback_bytesToWrite,

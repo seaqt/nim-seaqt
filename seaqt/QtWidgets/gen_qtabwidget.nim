@@ -89,12 +89,12 @@ type cQTabWidget*{.exportc: "QTabWidget", incompleteStruct.} = object
 proc fcQTabWidget_metaObject(self: pointer): pointer {.importc: "QTabWidget_metaObject".}
 proc fcQTabWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QTabWidget_metacast".}
 proc fcQTabWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTabWidget_metacall".}
-proc fcQTabWidget_tr(s: cstring): struct_seaqt_string {.importc: "QTabWidget_tr".}
-proc fcQTabWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTabWidget_trUtf8".}
-proc fcQTabWidget_addTab(self: pointer, widget: pointer, param2: struct_seaqt_string): cint {.importc: "QTabWidget_addTab".}
-proc fcQTabWidget_addTab2(self: pointer, widget: pointer, icon: pointer, label: struct_seaqt_string): cint {.importc: "QTabWidget_addTab2".}
-proc fcQTabWidget_insertTab(self: pointer, index: cint, widget: pointer, param3: struct_seaqt_string): cint {.importc: "QTabWidget_insertTab".}
-proc fcQTabWidget_insertTab2(self: pointer, index: cint, widget: pointer, icon: pointer, label: struct_seaqt_string): cint {.importc: "QTabWidget_insertTab2".}
+proc fcQTabWidget_trS(s: cstring): struct_seaqt_string {.importc: "QTabWidget_tr_s".}
+proc fcQTabWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTabWidget_trUtf8_s".}
+proc fcQTabWidget_addTab_QWidget_QString(self: pointer, widget: pointer, param2: struct_seaqt_string): cint {.importc: "QTabWidget_addTab_QWidget_QString".}
+proc fcQTabWidget_addTab_QWidget_QIcon_QString(self: pointer, widget: pointer, icon: pointer, label: struct_seaqt_string): cint {.importc: "QTabWidget_addTab_QWidget_QIcon_QString".}
+proc fcQTabWidget_insertTabInt_QWidget_QString(self: pointer, index: cint, widget: pointer, param3: struct_seaqt_string): cint {.importc: "QTabWidget_insertTab_int_QWidget_QString".}
+proc fcQTabWidget_insertTabInt_QWidget_QIcon_QString(self: pointer, index: cint, widget: pointer, icon: pointer, label: struct_seaqt_string): cint {.importc: "QTabWidget_insertTab_int_QWidget_QIcon_QString".}
 proc fcQTabWidget_removeTab(self: pointer, index: cint): void {.importc: "QTabWidget_removeTab".}
 proc fcQTabWidget_isTabEnabled(self: pointer, index: cint): bool {.importc: "QTabWidget_isTabEnabled".}
 proc fcQTabWidget_setTabEnabled(self: pointer, index: cint, enabled: bool): void {.importc: "QTabWidget_setTabEnabled".}
@@ -125,7 +125,7 @@ proc fcQTabWidget_sizeHint(self: pointer): pointer {.importc: "QTabWidget_sizeHi
 proc fcQTabWidget_minimumSizeHint(self: pointer): pointer {.importc: "QTabWidget_minimumSizeHint".}
 proc fcQTabWidget_heightForWidth(self: pointer, width: cint): cint {.importc: "QTabWidget_heightForWidth".}
 proc fcQTabWidget_hasHeightForWidth(self: pointer): bool {.importc: "QTabWidget_hasHeightForWidth".}
-proc fcQTabWidget_setCornerWidget(self: pointer, w: pointer): void {.importc: "QTabWidget_setCornerWidget".}
+proc fcQTabWidget_setCornerWidgetW(self: pointer, w: pointer): void {.importc: "QTabWidget_setCornerWidget_w".}
 proc fcQTabWidget_cornerWidget(self: pointer): pointer {.importc: "QTabWidget_cornerWidget".}
 proc fcQTabWidget_elideMode(self: pointer): cint {.importc: "QTabWidget_elideMode".}
 proc fcQTabWidget_setElideMode(self: pointer, mode: cint): void {.importc: "QTabWidget_setElideMode".}
@@ -149,12 +149,12 @@ proc fcQTabWidget_tabBarClicked(self: pointer, index: cint): void {.importc: "QT
 proc fcQTabWidget_connect_tabBarClicked(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_tabBarClicked".}
 proc fcQTabWidget_tabBarDoubleClicked(self: pointer, index: cint): void {.importc: "QTabWidget_tabBarDoubleClicked".}
 proc fcQTabWidget_connect_tabBarDoubleClicked(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_tabBarDoubleClicked".}
-proc fcQTabWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabWidget_tr2".}
-proc fcQTabWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabWidget_tr3".}
-proc fcQTabWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabWidget_trUtf82".}
-proc fcQTabWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabWidget_trUtf83".}
-proc fcQTabWidget_setCornerWidget2(self: pointer, w: pointer, corner: cint): void {.importc: "QTabWidget_setCornerWidget2".}
-proc fcQTabWidget_cornerWidgetWithCorner(self: pointer, corner: cint): pointer {.importc: "QTabWidget_cornerWidgetWithCorner".}
+proc fcQTabWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabWidget_tr_s_c".}
+proc fcQTabWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabWidget_tr_s_c_n".}
+proc fcQTabWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTabWidget_trUtf8_s_c".}
+proc fcQTabWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTabWidget_trUtf8_s_c_n".}
+proc fcQTabWidget_setCornerWidgetWCorner(self: pointer, w: pointer, corner: cint): void {.importc: "QTabWidget_setCornerWidget_w_corner".}
+proc fcQTabWidget_cornerWidgetCorner(self: pointer, corner: cint): pointer {.importc: "QTabWidget_cornerWidget_corner".}
 proc fcQTabWidget_vdata(self: pointer): ptr pointer {.importc: "QTabWidget_vdata".}
 proc fvdata_cQTabWidget(self: pointer): pointer {.importc: "vdata_QTabWidget".}
 
@@ -276,7 +276,7 @@ proc fcQTabWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQTabWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTabWidget_protectedbase_receivers".}
 proc fcQTabWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTabWidget_protectedbase_isSignalConnected".}
 proc fcQTabWidget_new(vtbl: pointer, vdata: csize_t): ptr cQTabWidget {.importc: "QTabWidget_new".}
-proc fcQTabWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTabWidget {.importc: "QTabWidget_new2".}
+proc fcQTabWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTabWidget {.importc: "QTabWidget_new_parent".}
 proc fcQTabWidget_staticMetaObject(): pointer {.importc: "QTabWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qtabwidget_types.QTabWidget): gen_qobjectdefs_types.QMetaObject =
@@ -289,28 +289,28 @@ proc metacall*(self: gen_qtabwidget_types.QTabWidget, param1: cint, param2: cint
   fcQTabWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtabwidget_types.QTabWidget, s: cstring): string =
-  let v_ms = fcQTabWidget_tr(s)
+  let v_ms = fcQTabWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtabwidget_types.QTabWidget, s: cstring): string =
-  let v_ms = fcQTabWidget_trUtf8(s)
+  let v_ms = fcQTabWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addTab*(self: gen_qtabwidget_types.QTabWidget, widget: gen_qwidget_types.QWidget, param2: openArray[char]): cint =
-  fcQTabWidget_addTab(self.h, widget.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
+  fcQTabWidget_addTab_QWidget_QString(self.h, widget.h, struct_seaqt_string(data: if len(param2) > 0: addr param2[0] else: nil, len: csize_t(len(param2))))
 
 proc addTab*(self: gen_qtabwidget_types.QTabWidget, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, label: openArray[char]): cint =
-  fcQTabWidget_addTab2(self.h, widget.h, icon.h, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
+  fcQTabWidget_addTab_QWidget_QIcon_QString(self.h, widget.h, icon.h, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
 proc insertTab*(self: gen_qtabwidget_types.QTabWidget, index: cint, widget: gen_qwidget_types.QWidget, param3: openArray[char]): cint =
-  fcQTabWidget_insertTab(self.h, index, widget.h, struct_seaqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3))))
+  fcQTabWidget_insertTabInt_QWidget_QString(self.h, index, widget.h, struct_seaqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3))))
 
 proc insertTab*(self: gen_qtabwidget_types.QTabWidget, index: cint, widget: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon, label: openArray[char]): cint =
-  fcQTabWidget_insertTab2(self.h, index, widget.h, icon.h, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
+  fcQTabWidget_insertTabInt_QWidget_QIcon_QString(self.h, index, widget.h, icon.h, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
 proc removeTab*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_removeTab(self.h, index)
@@ -412,7 +412,7 @@ proc hasHeightForWidth*(self: gen_qtabwidget_types.QTabWidget): bool =
   fcQTabWidget_hasHeightForWidth(self.h)
 
 proc setCornerWidget*(self: gen_qtabwidget_types.QTabWidget, w: gen_qwidget_types.QWidget): void =
-  fcQTabWidget_setCornerWidget(self.h, w.h)
+  fcQTabWidget_setCornerWidgetW(self.h, w.h)
 
 proc cornerWidget*(self: gen_qtabwidget_types.QTabWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQTabWidget_cornerWidget(self.h), owned: false)
@@ -540,34 +540,34 @@ proc onTabBarDoubleClicked*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWid
   fcQTabWidget_connect_tabBarDoubleClicked(self.h, cast[int](addr tmp[]), fcQTabWidget_slot_callback_tabBarDoubleClicked, fcQTabWidget_slot_callback_tabBarDoubleClicked_release)
 
 proc tr*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQTabWidget_tr2(s, c)
+  let v_ms = fcQTabWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTabWidget_tr3(s, c, n)
+  let v_ms = fcQTabWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQTabWidget_trUtf82(s, c)
+  let v_ms = fcQTabWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTabWidget_trUtf83(s, c, n)
+  let v_ms = fcQTabWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setCornerWidget*(self: gen_qtabwidget_types.QTabWidget, w: gen_qwidget_types.QWidget, corner: cint): void =
-  fcQTabWidget_setCornerWidget2(self.h, w.h, cint(corner))
+  fcQTabWidget_setCornerWidgetWCorner(self.h, w.h, cint(corner))
 
 proc cornerWidget*(self: gen_qtabwidget_types.QTabWidget, corner: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQTabWidget_cornerWidgetWithCorner(self.h, cint(corner)), owned: false)
+  gen_qwidget_types.QWidget(h: fcQTabWidget_cornerWidgetCorner(self.h, cint(corner)), owned: false)
 
 type QTabWidgetmetaObjectProc* = proc(self: QTabWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTabWidgetmetacastProc* = proc(self: QTabWidget, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -69,17 +69,17 @@ type cQCameraFeedbackControl*{.exportc: "QCameraFeedbackControl", incompleteStru
 proc fcQCameraFeedbackControl_metaObject(self: pointer): pointer {.importc: "QCameraFeedbackControl_metaObject".}
 proc fcQCameraFeedbackControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFeedbackControl_metacast".}
 proc fcQCameraFeedbackControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFeedbackControl_metacall".}
-proc fcQCameraFeedbackControl_tr(s: cstring): struct_seaqt_string {.importc: "QCameraFeedbackControl_tr".}
-proc fcQCameraFeedbackControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraFeedbackControl_trUtf8".}
+proc fcQCameraFeedbackControl_trS(s: cstring): struct_seaqt_string {.importc: "QCameraFeedbackControl_tr_s".}
+proc fcQCameraFeedbackControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraFeedbackControl_trUtf8_s".}
 proc fcQCameraFeedbackControl_isEventFeedbackLocked(self: pointer, param1: cint): bool {.importc: "QCameraFeedbackControl_isEventFeedbackLocked".}
 proc fcQCameraFeedbackControl_isEventFeedbackEnabled(self: pointer, param1: cint): bool {.importc: "QCameraFeedbackControl_isEventFeedbackEnabled".}
 proc fcQCameraFeedbackControl_setEventFeedbackEnabled(self: pointer, param1: cint, param2: bool): bool {.importc: "QCameraFeedbackControl_setEventFeedbackEnabled".}
 proc fcQCameraFeedbackControl_resetEventFeedback(self: pointer, param1: cint): void {.importc: "QCameraFeedbackControl_resetEventFeedback".}
 proc fcQCameraFeedbackControl_setEventFeedbackSound(self: pointer, param1: cint, filePath: struct_seaqt_string): bool {.importc: "QCameraFeedbackControl_setEventFeedbackSound".}
-proc fcQCameraFeedbackControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFeedbackControl_tr2".}
-proc fcQCameraFeedbackControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFeedbackControl_tr3".}
-proc fcQCameraFeedbackControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFeedbackControl_trUtf82".}
-proc fcQCameraFeedbackControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFeedbackControl_trUtf83".}
+proc fcQCameraFeedbackControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFeedbackControl_tr_s_c".}
+proc fcQCameraFeedbackControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFeedbackControl_tr_s_c_n".}
+proc fcQCameraFeedbackControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFeedbackControl_trUtf8_s_c".}
+proc fcQCameraFeedbackControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFeedbackControl_trUtf8_s_c_n".}
 proc fcQCameraFeedbackControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraFeedbackControl_protectedbase_sender".}
 proc fcQCameraFeedbackControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraFeedbackControl_protectedbase_senderSignalIndex".}
 proc fcQCameraFeedbackControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFeedbackControl_protectedbase_receivers".}
@@ -96,13 +96,13 @@ proc metacall*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, pa
   fcQCameraFeedbackControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, s: cstring): string =
-  let v_ms = fcQCameraFeedbackControl_tr(s)
+  let v_ms = fcQCameraFeedbackControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, s: cstring): string =
-  let v_ms = fcQCameraFeedbackControl_trUtf8(s)
+  let v_ms = fcQCameraFeedbackControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -123,25 +123,25 @@ proc setEventFeedbackSound*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedba
   fcQCameraFeedbackControl_setEventFeedbackSound(self.h, cint(param1), struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
 
 proc tr*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraFeedbackControl_tr2(s, c)
+  let v_ms = fcQCameraFeedbackControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraFeedbackControl_tr3(s, c, n)
+  let v_ms = fcQCameraFeedbackControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraFeedbackControl_trUtf82(s, c)
+  let v_ms = fcQCameraFeedbackControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraFeedbackControl_trUtf83(s, c, n)
+  let v_ms = fcQCameraFeedbackControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

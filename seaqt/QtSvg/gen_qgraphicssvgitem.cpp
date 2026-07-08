@@ -648,18 +648,18 @@ VirtualQGraphicsSvgItem* QGraphicsSvgItem_new(const QGraphicsSvgItem_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQGraphicsSvgItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsSvgItem* QGraphicsSvgItem_new2(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
+VirtualQGraphicsSvgItem* QGraphicsSvgItem_new_fileName(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSvgItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSvgItem(vtbl, fileName_QString) : nullptr;
 }
 
-VirtualQGraphicsSvgItem* QGraphicsSvgItem_new3(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, QGraphicsItem* parentItem) {
+VirtualQGraphicsSvgItem* QGraphicsSvgItem_new_parentItem(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, QGraphicsItem* parentItem) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSvgItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSvgItem(vtbl, parentItem) : nullptr;
 }
 
-VirtualQGraphicsSvgItem* QGraphicsSvgItem_new4(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, struct seaqt_string fileName, QGraphicsItem* parentItem) {
+VirtualQGraphicsSvgItem* QGraphicsSvgItem_new_fileName_parentItem(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, struct seaqt_string fileName, QGraphicsItem* parentItem) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSvgItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSvgItem(vtbl, fileName_QString, parentItem) : nullptr;
@@ -681,7 +681,7 @@ int QGraphicsSvgItem_metacall(QGraphicsSvgItem* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsSvgItem_tr(const char* s) {
+struct seaqt_string QGraphicsSvgItem_tr_s(const char* s) {
 	QString _ret = QGraphicsSvgItem::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -692,7 +692,7 @@ struct seaqt_string QGraphicsSvgItem_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsSvgItem_trUtf8(const char* s) {
+struct seaqt_string QGraphicsSvgItem_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsSvgItem::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -755,7 +755,7 @@ int QGraphicsSvgItem_type(const QGraphicsSvgItem* self) {
 	return self->type();
 }
 
-struct seaqt_string QGraphicsSvgItem_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsSvgItem_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsSvgItem::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -766,7 +766,7 @@ struct seaqt_string QGraphicsSvgItem_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsSvgItem_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsSvgItem_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsSvgItem::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -777,7 +777,7 @@ struct seaqt_string QGraphicsSvgItem_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsSvgItem_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsSvgItem_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsSvgItem::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -788,7 +788,7 @@ struct seaqt_string QGraphicsSvgItem_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsSvgItem_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsSvgItem_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsSvgItem::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

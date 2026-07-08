@@ -44,7 +44,7 @@ export gen_qcommandlineoption_types
 
 type cQCommandLineOption*{.exportc: "QCommandLineOption", incompleteStruct.} = object
 
-proc fcQCommandLineOption_operatorAssign(self: pointer, other: pointer): void {.importc: "QCommandLineOption_operatorAssign".}
+proc fcQCommandLineOption_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QCommandLineOption_operatorAssign".}
 proc fcQCommandLineOption_swap(self: pointer, other: pointer): void {.importc: "QCommandLineOption_swap".}
 proc fcQCommandLineOption_names(self: pointer): struct_seaqt_array {.importc: "QCommandLineOption_names".}
 proc fcQCommandLineOption_setValueName(self: pointer, name: struct_seaqt_string): void {.importc: "QCommandLineOption_setValueName".}
@@ -58,18 +58,18 @@ proc fcQCommandLineOption_flags(self: pointer): cint {.importc: "QCommandLineOpt
 proc fcQCommandLineOption_setFlags(self: pointer, aflags: cint): void {.importc: "QCommandLineOption_setFlags".}
 proc fcQCommandLineOption_setHidden(self: pointer, hidden: bool): void {.importc: "QCommandLineOption_setHidden".}
 proc fcQCommandLineOption_isHidden(self: pointer): bool {.importc: "QCommandLineOption_isHidden".}
-proc fcQCommandLineOption_new(name: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new".}
-proc fcQCommandLineOption_new2(names: struct_seaqt_array): ptr cQCommandLineOption {.importc: "QCommandLineOption_new2".}
-proc fcQCommandLineOption_new3(name: struct_seaqt_string, description: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new3".}
-proc fcQCommandLineOption_new4(names: struct_seaqt_array, description: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new4".}
-proc fcQCommandLineOption_new5(other: pointer): ptr cQCommandLineOption {.importc: "QCommandLineOption_new5".}
-proc fcQCommandLineOption_new6(name: struct_seaqt_string, description: struct_seaqt_string, valueName: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new6".}
-proc fcQCommandLineOption_new7(name: struct_seaqt_string, description: struct_seaqt_string, valueName: struct_seaqt_string, defaultValue: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new7".}
-proc fcQCommandLineOption_new8(names: struct_seaqt_array, description: struct_seaqt_string, valueName: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new8".}
-proc fcQCommandLineOption_new9(names: struct_seaqt_array, description: struct_seaqt_string, valueName: struct_seaqt_string, defaultValue: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new9".}
+proc fcQCommandLineOption_new(name: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_name".}
+proc fcQCommandLineOption_new2(names: struct_seaqt_array): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_names".}
+proc fcQCommandLineOption_new3(name: struct_seaqt_string, description: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_name_description".}
+proc fcQCommandLineOption_new4(names: struct_seaqt_array, description: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_names_description".}
+proc fcQCommandLineOption_new5(fromVal: pointer): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_from".}
+proc fcQCommandLineOption_new6(name: struct_seaqt_string, description: struct_seaqt_string, valueName: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_name_description_valueName".}
+proc fcQCommandLineOption_new7(name: struct_seaqt_string, description: struct_seaqt_string, valueName: struct_seaqt_string, defaultValue: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_name_description_valueName_defaultValue".}
+proc fcQCommandLineOption_new8(names: struct_seaqt_array, description: struct_seaqt_string, valueName: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_names_description_valueName".}
+proc fcQCommandLineOption_new9(names: struct_seaqt_array, description: struct_seaqt_string, valueName: struct_seaqt_string, defaultValue: struct_seaqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new_names_description_valueName_defaultValue".}
 
-proc operatorAssign*(self: gen_qcommandlineoption_types.QCommandLineOption, other: gen_qcommandlineoption_types.QCommandLineOption): void =
-  fcQCommandLineOption_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qcommandlineoption_types.QCommandLineOption, fromVal: gen_qcommandlineoption_types.QCommandLineOption): void =
+  fcQCommandLineOption_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qcommandlineoption_types.QCommandLineOption, other: gen_qcommandlineoption_types.QCommandLineOption): void =
   fcQCommandLineOption_swap(self.h, other.h)
@@ -163,8 +163,8 @@ proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
   let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new4(struct_seaqt_array(len: csize_t(len(names)), data: if len(names) == 0: nil else: addr(names_CArray[0])), struct_seaqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description)))), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
-    other: gen_qcommandlineoption_types.QCommandLineOption): gen_qcommandlineoption_types.QCommandLineOption =
-  let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new5(other.h), owned: true)
+    fromVal: gen_qcommandlineoption_types.QCommandLineOption): gen_qcommandlineoption_types.QCommandLineOption =
+  let tmp = gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineOption_new5(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,
     name: openArray[char], description: openArray[char], valueName: openArray[char]): gen_qcommandlineoption_types.QCommandLineOption =

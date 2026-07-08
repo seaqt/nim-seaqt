@@ -938,12 +938,12 @@ VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new(const QGraphicsProxyWidget
 	return _mem_ ? new (_mem_)VirtualQGraphicsProxyWidget(vtbl) : nullptr;
 }
 
-VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new2(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new_parent(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsProxyWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsProxyWidget(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new3(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent, int wFlags) {
+VirtualQGraphicsProxyWidget* QGraphicsProxyWidget_new_parent_wFlags(const QGraphicsProxyWidget_VTable* vtbl, size_t vdata, QGraphicsItem* parent, int wFlags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsProxyWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsProxyWidget(vtbl, parent, static_cast<Qt::WindowFlags>(wFlags)) : nullptr;
 }
@@ -964,7 +964,7 @@ int QGraphicsProxyWidget_metacall(QGraphicsProxyWidget* self, int param1, int pa
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsProxyWidget_tr(const char* s) {
+struct seaqt_string QGraphicsProxyWidget_tr_s(const char* s) {
 	QString _ret = QGraphicsProxyWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -975,7 +975,7 @@ struct seaqt_string QGraphicsProxyWidget_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsProxyWidget_trUtf8(const char* s) {
+struct seaqt_string QGraphicsProxyWidget_trUtf8_s(const char* s) {
 	QString _ret = QGraphicsProxyWidget::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1014,7 +1014,7 @@ QGraphicsProxyWidget* QGraphicsProxyWidget_createProxyForChildWidget(QGraphicsPr
 	return self->createProxyForChildWidget(child);
 }
 
-struct seaqt_string QGraphicsProxyWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsProxyWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsProxyWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1025,7 +1025,7 @@ struct seaqt_string QGraphicsProxyWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsProxyWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsProxyWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsProxyWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1036,7 +1036,7 @@ struct seaqt_string QGraphicsProxyWidget_tr3(const char* s, const char* c, int n
 	return _ms;
 }
 
-struct seaqt_string QGraphicsProxyWidget_trUtf82(const char* s, const char* c) {
+struct seaqt_string QGraphicsProxyWidget_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsProxyWidget::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1047,7 +1047,7 @@ struct seaqt_string QGraphicsProxyWidget_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsProxyWidget_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsProxyWidget_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsProxyWidget::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

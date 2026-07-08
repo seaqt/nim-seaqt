@@ -424,19 +424,19 @@ public:
 	friend QPalette* QProxyStyle_virtualbase_standardPalette(const VirtualQProxyStyle* self);
 
 	virtual void polish(QWidget* widget) override {
-		if (vtbl->polish == 0) {
+		if (vtbl->polish_widget == 0) {
 			QProxyStyle::polish(widget);
 			return;
 		}
 
 		QWidget* sigval1 = widget;
-		vtbl->polish(this, sigval1);
+		vtbl->polish_widget(this, sigval1);
 	}
 
-	friend void QProxyStyle_virtualbase_polish(VirtualQProxyStyle* self, QWidget* widget);
+	friend void QProxyStyle_virtualbase_polish_widget(VirtualQProxyStyle* self, QWidget* widget);
 
 	virtual void polish(QPalette& pal) override {
-		if (vtbl->polishWithPal == 0) {
+		if (vtbl->polish_pal == 0) {
 			QProxyStyle::polish(pal);
 			return;
 		}
@@ -444,46 +444,46 @@ public:
 		QPalette& pal_ret = pal;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = &pal_ret;
-		vtbl->polishWithPal(this, sigval1);
+		vtbl->polish_pal(this, sigval1);
 	}
 
-	friend void QProxyStyle_virtualbase_polishWithPal(VirtualQProxyStyle* self, QPalette* pal);
+	friend void QProxyStyle_virtualbase_polish_pal(VirtualQProxyStyle* self, QPalette* pal);
 
 	virtual void polish(QApplication* app) override {
-		if (vtbl->polishWithApp == 0) {
+		if (vtbl->polish_app == 0) {
 			QProxyStyle::polish(app);
 			return;
 		}
 
 		QApplication* sigval1 = app;
-		vtbl->polishWithApp(this, sigval1);
+		vtbl->polish_app(this, sigval1);
 	}
 
-	friend void QProxyStyle_virtualbase_polishWithApp(VirtualQProxyStyle* self, QApplication* app);
+	friend void QProxyStyle_virtualbase_polish_app(VirtualQProxyStyle* self, QApplication* app);
 
 	virtual void unpolish(QWidget* widget) override {
-		if (vtbl->unpolish == 0) {
+		if (vtbl->unpolish_widget == 0) {
 			QProxyStyle::unpolish(widget);
 			return;
 		}
 
 		QWidget* sigval1 = widget;
-		vtbl->unpolish(this, sigval1);
+		vtbl->unpolish_widget(this, sigval1);
 	}
 
-	friend void QProxyStyle_virtualbase_unpolish(VirtualQProxyStyle* self, QWidget* widget);
+	friend void QProxyStyle_virtualbase_unpolish_widget(VirtualQProxyStyle* self, QWidget* widget);
 
 	virtual void unpolish(QApplication* app) override {
-		if (vtbl->unpolishWithApp == 0) {
+		if (vtbl->unpolish_app == 0) {
 			QProxyStyle::unpolish(app);
 			return;
 		}
 
 		QApplication* sigval1 = app;
-		vtbl->unpolishWithApp(this, sigval1);
+		vtbl->unpolish_app(this, sigval1);
 	}
 
-	friend void QProxyStyle_virtualbase_unpolishWithApp(VirtualQProxyStyle* self, QApplication* app);
+	friend void QProxyStyle_virtualbase_unpolish_app(VirtualQProxyStyle* self, QApplication* app);
 
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
@@ -586,13 +586,13 @@ VirtualQProxyStyle* QProxyStyle_new(const QProxyStyle_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQProxyStyle(vtbl) : nullptr;
 }
 
-VirtualQProxyStyle* QProxyStyle_new2(const QProxyStyle_VTable* vtbl, size_t vdata, struct seaqt_string key) {
+VirtualQProxyStyle* QProxyStyle_new_key(const QProxyStyle_VTable* vtbl, size_t vdata, struct seaqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQProxyStyle>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQProxyStyle(vtbl, key_QString) : nullptr;
 }
 
-VirtualQProxyStyle* QProxyStyle_new3(const QProxyStyle_VTable* vtbl, size_t vdata, QStyle* style) {
+VirtualQProxyStyle* QProxyStyle_new_style(const QProxyStyle_VTable* vtbl, size_t vdata, QStyle* style) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQProxyStyle>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQProxyStyle(vtbl, style) : nullptr;
 }
@@ -613,7 +613,7 @@ int QProxyStyle_metacall(QProxyStyle* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QProxyStyle_tr(const char* s) {
+struct seaqt_string QProxyStyle_tr_s(const char* s) {
 	QString _ret = QProxyStyle::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -624,7 +624,7 @@ struct seaqt_string QProxyStyle_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QProxyStyle_trUtf8(const char* s) {
+struct seaqt_string QProxyStyle_trUtf8_s(const char* s) {
 	QString _ret = QProxyStyle::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -718,27 +718,27 @@ QPalette* QProxyStyle_standardPalette(const QProxyStyle* self) {
 	return new QPalette(self->standardPalette());
 }
 
-void QProxyStyle_polish(QProxyStyle* self, QWidget* widget) {
+void QProxyStyle_polish_widget(QProxyStyle* self, QWidget* widget) {
 	self->polish(widget);
 }
 
-void QProxyStyle_polishWithPal(QProxyStyle* self, QPalette* pal) {
+void QProxyStyle_polish_pal(QProxyStyle* self, QPalette* pal) {
 	self->polish(*pal);
 }
 
-void QProxyStyle_polishWithApp(QProxyStyle* self, QApplication* app) {
+void QProxyStyle_polish_app(QProxyStyle* self, QApplication* app) {
 	self->polish(app);
 }
 
-void QProxyStyle_unpolish(QProxyStyle* self, QWidget* widget) {
+void QProxyStyle_unpolish_widget(QProxyStyle* self, QWidget* widget) {
 	self->unpolish(widget);
 }
 
-void QProxyStyle_unpolishWithApp(QProxyStyle* self, QApplication* app) {
+void QProxyStyle_unpolish_app(QProxyStyle* self, QApplication* app) {
 	self->unpolish(app);
 }
 
-struct seaqt_string QProxyStyle_tr2(const char* s, const char* c) {
+struct seaqt_string QProxyStyle_tr_s_c(const char* s, const char* c) {
 	QString _ret = QProxyStyle::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -749,7 +749,7 @@ struct seaqt_string QProxyStyle_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QProxyStyle_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QProxyStyle_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QProxyStyle::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -760,7 +760,7 @@ struct seaqt_string QProxyStyle_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QProxyStyle_trUtf82(const char* s, const char* c) {
+struct seaqt_string QProxyStyle_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QProxyStyle::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -771,7 +771,7 @@ struct seaqt_string QProxyStyle_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QProxyStyle_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QProxyStyle_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QProxyStyle::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -894,27 +894,27 @@ QPalette* QProxyStyle_virtualbase_standardPalette(const VirtualQProxyStyle* self
 	return new QPalette(self->QProxyStyle::standardPalette());
 }
 
-void QProxyStyle_virtualbase_polish(VirtualQProxyStyle* self, QWidget* widget) {
+void QProxyStyle_virtualbase_polish_widget(VirtualQProxyStyle* self, QWidget* widget) {
 
 	self->QProxyStyle::polish(widget);
 }
 
-void QProxyStyle_virtualbase_polishWithPal(VirtualQProxyStyle* self, QPalette* pal) {
+void QProxyStyle_virtualbase_polish_pal(VirtualQProxyStyle* self, QPalette* pal) {
 
 	self->QProxyStyle::polish(*pal);
 }
 
-void QProxyStyle_virtualbase_polishWithApp(VirtualQProxyStyle* self, QApplication* app) {
+void QProxyStyle_virtualbase_polish_app(VirtualQProxyStyle* self, QApplication* app) {
 
 	self->QProxyStyle::polish(app);
 }
 
-void QProxyStyle_virtualbase_unpolish(VirtualQProxyStyle* self, QWidget* widget) {
+void QProxyStyle_virtualbase_unpolish_widget(VirtualQProxyStyle* self, QWidget* widget) {
 
 	self->QProxyStyle::unpolish(widget);
 }
 
-void QProxyStyle_virtualbase_unpolishWithApp(VirtualQProxyStyle* self, QApplication* app) {
+void QProxyStyle_virtualbase_unpolish_app(VirtualQProxyStyle* self, QApplication* app) {
 
 	self->QProxyStyle::unpolish(app);
 }

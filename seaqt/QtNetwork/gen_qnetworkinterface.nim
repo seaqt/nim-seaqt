@@ -81,7 +81,7 @@ export
 type cQNetworkAddressEntry*{.exportc: "QNetworkAddressEntry", incompleteStruct.} = object
 type cQNetworkInterface*{.exportc: "QNetworkInterface", incompleteStruct.} = object
 
-proc fcQNetworkAddressEntry_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkAddressEntry_operatorAssign".}
+proc fcQNetworkAddressEntry_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QNetworkAddressEntry_operatorAssign".}
 proc fcQNetworkAddressEntry_swap(self: pointer, other: pointer): void {.importc: "QNetworkAddressEntry_swap".}
 proc fcQNetworkAddressEntry_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkAddressEntry_operatorEqual".}
 proc fcQNetworkAddressEntry_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QNetworkAddressEntry_operatorNotEqual".}
@@ -103,8 +103,8 @@ proc fcQNetworkAddressEntry_clearAddressLifetime(self: pointer): void {.importc:
 proc fcQNetworkAddressEntry_isPermanent(self: pointer): bool {.importc: "QNetworkAddressEntry_isPermanent".}
 proc fcQNetworkAddressEntry_isTemporary(self: pointer): bool {.importc: "QNetworkAddressEntry_isTemporary".}
 proc fcQNetworkAddressEntry_new(): ptr cQNetworkAddressEntry {.importc: "QNetworkAddressEntry_new".}
-proc fcQNetworkAddressEntry_new2(other: pointer): ptr cQNetworkAddressEntry {.importc: "QNetworkAddressEntry_new2".}
-proc fcQNetworkInterface_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkInterface_operatorAssign".}
+proc fcQNetworkAddressEntry_new2(fromVal: pointer): ptr cQNetworkAddressEntry {.importc: "QNetworkAddressEntry_new_from".}
+proc fcQNetworkInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QNetworkInterface_operatorAssign".}
 proc fcQNetworkInterface_swap(self: pointer, other: pointer): void {.importc: "QNetworkInterface_swap".}
 proc fcQNetworkInterface_isValid(self: pointer): bool {.importc: "QNetworkInterface_isValid".}
 proc fcQNetworkInterface_index(self: pointer): cint {.importc: "QNetworkInterface_index".}
@@ -122,11 +122,11 @@ proc fcQNetworkInterface_interfaceNameFromIndex(index: cint): struct_seaqt_strin
 proc fcQNetworkInterface_allInterfaces(): struct_seaqt_array {.importc: "QNetworkInterface_allInterfaces".}
 proc fcQNetworkInterface_allAddresses(): struct_seaqt_array {.importc: "QNetworkInterface_allAddresses".}
 proc fcQNetworkInterface_new(): ptr cQNetworkInterface {.importc: "QNetworkInterface_new".}
-proc fcQNetworkInterface_new2(other: pointer): ptr cQNetworkInterface {.importc: "QNetworkInterface_new2".}
+proc fcQNetworkInterface_new2(fromVal: pointer): ptr cQNetworkInterface {.importc: "QNetworkInterface_new_from".}
 proc fcQNetworkInterface_staticMetaObject(): pointer {.importc: "QNetworkInterface_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qnetworkinterface_types.QNetworkAddressEntry, other: gen_qnetworkinterface_types.QNetworkAddressEntry): void =
-  fcQNetworkAddressEntry_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qnetworkinterface_types.QNetworkAddressEntry, fromVal: gen_qnetworkinterface_types.QNetworkAddressEntry): void =
+  fcQNetworkAddressEntry_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qnetworkinterface_types.QNetworkAddressEntry, other: gen_qnetworkinterface_types.QNetworkAddressEntry): void =
   fcQNetworkAddressEntry_swap(self.h, other.h)
@@ -192,11 +192,11 @@ proc create*(T: type gen_qnetworkinterface_types.QNetworkAddressEntry): gen_qnet
   let tmp = gen_qnetworkinterface_types.QNetworkAddressEntry(h: fcQNetworkAddressEntry_new(), owned: true)
   tmp
 proc create*(T: type gen_qnetworkinterface_types.QNetworkAddressEntry,
-    other: gen_qnetworkinterface_types.QNetworkAddressEntry): gen_qnetworkinterface_types.QNetworkAddressEntry =
-  let tmp = gen_qnetworkinterface_types.QNetworkAddressEntry(h: fcQNetworkAddressEntry_new2(other.h), owned: true)
+    fromVal: gen_qnetworkinterface_types.QNetworkAddressEntry): gen_qnetworkinterface_types.QNetworkAddressEntry =
+  let tmp = gen_qnetworkinterface_types.QNetworkAddressEntry(h: fcQNetworkAddressEntry_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qnetworkinterface_types.QNetworkInterface, other: gen_qnetworkinterface_types.QNetworkInterface): void =
-  fcQNetworkInterface_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qnetworkinterface_types.QNetworkInterface, fromVal: gen_qnetworkinterface_types.QNetworkInterface): void =
+  fcQNetworkInterface_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qnetworkinterface_types.QNetworkInterface, other: gen_qnetworkinterface_types.QNetworkInterface): void =
   fcQNetworkInterface_swap(self.h, other.h)
@@ -280,8 +280,8 @@ proc create*(T: type gen_qnetworkinterface_types.QNetworkInterface): gen_qnetwor
   let tmp = gen_qnetworkinterface_types.QNetworkInterface(h: fcQNetworkInterface_new(), owned: true)
   tmp
 proc create*(T: type gen_qnetworkinterface_types.QNetworkInterface,
-    other: gen_qnetworkinterface_types.QNetworkInterface): gen_qnetworkinterface_types.QNetworkInterface =
-  let tmp = gen_qnetworkinterface_types.QNetworkInterface(h: fcQNetworkInterface_new2(other.h), owned: true)
+    fromVal: gen_qnetworkinterface_types.QNetworkInterface): gen_qnetworkinterface_types.QNetworkInterface =
+  let tmp = gen_qnetworkinterface_types.QNetworkInterface(h: fcQNetworkInterface_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qnetworkinterface_types.QNetworkInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkInterface_staticMetaObject())

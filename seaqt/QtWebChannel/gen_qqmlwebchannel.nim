@@ -60,15 +60,15 @@ type cQQmlWebChannel*{.exportc: "QQmlWebChannel", incompleteStruct.} = object
 proc fcQQmlWebChannel_metaObject(self: pointer): pointer {.importc: "QQmlWebChannel_metaObject".}
 proc fcQQmlWebChannel_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlWebChannel_metacast".}
 proc fcQQmlWebChannel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlWebChannel_metacall".}
-proc fcQQmlWebChannel_tr(s: cstring): struct_seaqt_string {.importc: "QQmlWebChannel_tr".}
-proc fcQQmlWebChannel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQmlWebChannel_trUtf8".}
+proc fcQQmlWebChannel_trS(s: cstring): struct_seaqt_string {.importc: "QQmlWebChannel_tr_s".}
+proc fcQQmlWebChannel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQmlWebChannel_trUtf8_s".}
 proc fcQQmlWebChannel_registerObjects(self: pointer, objects: struct_seaqt_map): void {.importc: "QQmlWebChannel_registerObjects".}
 proc fcQQmlWebChannel_connectTo(self: pointer, transport: pointer): void {.importc: "QQmlWebChannel_connectTo".}
 proc fcQQmlWebChannel_disconnectFrom(self: pointer, transport: pointer): void {.importc: "QQmlWebChannel_disconnectFrom".}
-proc fcQQmlWebChannel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlWebChannel_tr2".}
-proc fcQQmlWebChannel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlWebChannel_tr3".}
-proc fcQQmlWebChannel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlWebChannel_trUtf82".}
-proc fcQQmlWebChannel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlWebChannel_trUtf83".}
+proc fcQQmlWebChannel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlWebChannel_tr_s_c".}
+proc fcQQmlWebChannel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlWebChannel_tr_s_c_n".}
+proc fcQQmlWebChannel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlWebChannel_trUtf8_s_c".}
+proc fcQQmlWebChannel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlWebChannel_trUtf8_s_c_n".}
 proc fcQQmlWebChannel_vdata(self: pointer): ptr pointer {.importc: "QQmlWebChannel_vdata".}
 proc fvdata_cQQmlWebChannel(self: pointer): pointer {.importc: "vdata_QQmlWebChannel".}
 
@@ -99,7 +99,7 @@ proc fcQQmlWebChannel_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQQmlWebChannel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlWebChannel_protectedbase_receivers".}
 proc fcQQmlWebChannel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlWebChannel_protectedbase_isSignalConnected".}
 proc fcQQmlWebChannel_new(vtbl: pointer, vdata: csize_t): ptr cQQmlWebChannel {.importc: "QQmlWebChannel_new".}
-proc fcQQmlWebChannel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlWebChannel {.importc: "QQmlWebChannel_new2".}
+proc fcQQmlWebChannel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlWebChannel {.importc: "QQmlWebChannel_new_parent".}
 proc fcQQmlWebChannel_staticMetaObject(): pointer {.importc: "QQmlWebChannel_staticMetaObject".}
 
 proc metaObject*(self: gen_qqmlwebchannel_types.QQmlWebChannel): gen_qobjectdefs_types.QMetaObject =
@@ -112,13 +112,13 @@ proc metacall*(self: gen_qqmlwebchannel_types.QQmlWebChannel, param1: cint, para
   fcQQmlWebChannel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlwebchannel_types.QQmlWebChannel, s: cstring): string =
-  let v_ms = fcQQmlWebChannel_tr(s)
+  let v_ms = fcQQmlWebChannel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlwebchannel_types.QQmlWebChannel, s: cstring): string =
-  let v_ms = fcQQmlWebChannel_trUtf8(s)
+  let v_ms = fcQQmlWebChannel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -144,25 +144,25 @@ proc disconnectFrom*(self: gen_qqmlwebchannel_types.QQmlWebChannel, transport: g
   fcQQmlWebChannel_disconnectFrom(self.h, transport.h)
 
 proc tr*(_: type gen_qqmlwebchannel_types.QQmlWebChannel, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlWebChannel_tr2(s, c)
+  let v_ms = fcQQmlWebChannel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlwebchannel_types.QQmlWebChannel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlWebChannel_tr3(s, c, n)
+  let v_ms = fcQQmlWebChannel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlwebchannel_types.QQmlWebChannel, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlWebChannel_trUtf82(s, c)
+  let v_ms = fcQQmlWebChannel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlwebchannel_types.QQmlWebChannel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlWebChannel_trUtf83(s, c, n)
+  let v_ms = fcQQmlWebChannel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

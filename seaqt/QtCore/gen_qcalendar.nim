@@ -63,7 +63,7 @@ type cQCalendar*{.exportc: "QCalendar", incompleteStruct.} = object
 type cQCalendarYearMonthDay*{.exportc: "QCalendar__YearMonthDay", incompleteStruct.} = object
 
 proc fcQCalendar_isValid(self: pointer): bool {.importc: "QCalendar_isValid".}
-proc fcQCalendar_daysInMonth(self: pointer, month: cint): cint {.importc: "QCalendar_daysInMonth".}
+proc fcQCalendar_daysInMonthMonth(self: pointer, month: cint): cint {.importc: "QCalendar_daysInMonth_month".}
 proc fcQCalendar_daysInYear(self: pointer, year: cint): cint {.importc: "QCalendar_daysInYear".}
 proc fcQCalendar_monthsInYear(self: pointer, year: cint): cint {.importc: "QCalendar_monthsInYear".}
 proc fcQCalendar_isDateValid(self: pointer, year: cint, month: cint, day: cint): bool {.importc: "QCalendar_isDateValid".}
@@ -78,24 +78,24 @@ proc fcQCalendar_maximumDaysInMonth(self: pointer): cint {.importc: "QCalendar_m
 proc fcQCalendar_minimumDaysInMonth(self: pointer): cint {.importc: "QCalendar_minimumDaysInMonth".}
 proc fcQCalendar_maximumMonthsInYear(self: pointer): cint {.importc: "QCalendar_maximumMonthsInYear".}
 proc fcQCalendar_name(self: pointer): struct_seaqt_string {.importc: "QCalendar_name".}
-proc fcQCalendar_dateFromParts(self: pointer, year: cint, month: cint, day: cint): pointer {.importc: "QCalendar_dateFromParts".}
-proc fcQCalendar_dateFromPartsWithParts(self: pointer, parts: pointer): pointer {.importc: "QCalendar_dateFromPartsWithParts".}
+proc fcQCalendar_dateFromPartsYearMonthDay(self: pointer, year: cint, month: cint, day: cint): pointer {.importc: "QCalendar_dateFromParts_year_month_day".}
+proc fcQCalendar_dateFromPartsParts(self: pointer, parts: pointer): pointer {.importc: "QCalendar_dateFromParts_parts".}
 proc fcQCalendar_partsFromDate(self: pointer, date: pointer): pointer {.importc: "QCalendar_partsFromDate".}
 proc fcQCalendar_dayOfWeek(self: pointer, date: pointer): cint {.importc: "QCalendar_dayOfWeek".}
-proc fcQCalendar_monthName(self: pointer, locale: pointer, month: cint): struct_seaqt_string {.importc: "QCalendar_monthName".}
-proc fcQCalendar_standaloneMonthName(self: pointer, locale: pointer, month: cint): struct_seaqt_string {.importc: "QCalendar_standaloneMonthName".}
-proc fcQCalendar_weekDayName(self: pointer, locale: pointer, day: cint): struct_seaqt_string {.importc: "QCalendar_weekDayName".}
-proc fcQCalendar_standaloneWeekDayName(self: pointer, locale: pointer, day: cint): struct_seaqt_string {.importc: "QCalendar_standaloneWeekDayName".}
+proc fcQCalendar_monthNameLocaleMonth(self: pointer, locale: pointer, month: cint): struct_seaqt_string {.importc: "QCalendar_monthName_locale_month".}
+proc fcQCalendar_standaloneMonthNameLocaleMonth(self: pointer, locale: pointer, month: cint): struct_seaqt_string {.importc: "QCalendar_standaloneMonthName_locale_month".}
+proc fcQCalendar_weekDayNameLocaleDay(self: pointer, locale: pointer, day: cint): struct_seaqt_string {.importc: "QCalendar_weekDayName_locale_day".}
+proc fcQCalendar_standaloneWeekDayNameLocaleDay(self: pointer, locale: pointer, day: cint): struct_seaqt_string {.importc: "QCalendar_standaloneWeekDayName_locale_day".}
 proc fcQCalendar_availableCalendars(): struct_seaqt_array {.importc: "QCalendar_availableCalendars".}
-proc fcQCalendar_daysInMonth2(self: pointer, month: cint, year: cint): cint {.importc: "QCalendar_daysInMonth2".}
-proc fcQCalendar_monthName2(self: pointer, locale: pointer, month: cint, year: cint): struct_seaqt_string {.importc: "QCalendar_monthName2".}
-proc fcQCalendar_monthName3(self: pointer, locale: pointer, month: cint, year: cint, format: cint): struct_seaqt_string {.importc: "QCalendar_monthName3".}
-proc fcQCalendar_standaloneMonthName2(self: pointer, locale: pointer, month: cint, year: cint): struct_seaqt_string {.importc: "QCalendar_standaloneMonthName2".}
-proc fcQCalendar_standaloneMonthName3(self: pointer, locale: pointer, month: cint, year: cint, format: cint): struct_seaqt_string {.importc: "QCalendar_standaloneMonthName3".}
-proc fcQCalendar_weekDayName2(self: pointer, locale: pointer, day: cint, format: cint): struct_seaqt_string {.importc: "QCalendar_weekDayName2".}
-proc fcQCalendar_standaloneWeekDayName2(self: pointer, locale: pointer, day: cint, format: cint): struct_seaqt_string {.importc: "QCalendar_standaloneWeekDayName2".}
+proc fcQCalendar_daysInMonthMonthYear(self: pointer, month: cint, year: cint): cint {.importc: "QCalendar_daysInMonth_month_year".}
+proc fcQCalendar_monthNameLocaleMonthYear(self: pointer, locale: pointer, month: cint, year: cint): struct_seaqt_string {.importc: "QCalendar_monthName_locale_month_year".}
+proc fcQCalendar_monthNameLocaleMonthYearFormat(self: pointer, locale: pointer, month: cint, year: cint, format: cint): struct_seaqt_string {.importc: "QCalendar_monthName_locale_month_year_format".}
+proc fcQCalendar_standaloneMonthNameLocaleMonthYear(self: pointer, locale: pointer, month: cint, year: cint): struct_seaqt_string {.importc: "QCalendar_standaloneMonthName_locale_month_year".}
+proc fcQCalendar_standaloneMonthNameLocaleMonthYearFormat(self: pointer, locale: pointer, month: cint, year: cint, format: cint): struct_seaqt_string {.importc: "QCalendar_standaloneMonthName_locale_month_year_format".}
+proc fcQCalendar_weekDayNameLocaleDayFormat(self: pointer, locale: pointer, day: cint, format: cint): struct_seaqt_string {.importc: "QCalendar_weekDayName_locale_day_format".}
+proc fcQCalendar_standaloneWeekDayNameLocaleDayFormat(self: pointer, locale: pointer, day: cint, format: cint): struct_seaqt_string {.importc: "QCalendar_standaloneWeekDayName_locale_day_format".}
 proc fcQCalendar_new(): ptr cQCalendar {.importc: "QCalendar_new".}
-proc fcQCalendar_new2(system: cint): ptr cQCalendar {.importc: "QCalendar_new2".}
+proc fcQCalendar_new2(system: cint): ptr cQCalendar {.importc: "QCalendar_new_QCalendar_System".}
 proc fcQCalendar_staticMetaObject(): pointer {.importc: "QCalendar_staticMetaObject".}
 proc fcQCalendarYearMonthDay_isValid(self: pointer): bool {.importc: "QCalendar__YearMonthDay_isValid".}
 proc fcQCalendarYearMonthDay_year(self: pointer): cint {.importc: "QCalendar__YearMonthDay_year".}
@@ -105,15 +105,15 @@ proc fcQCalendarYearMonthDay_setMonth(self: pointer, month: cint): void {.import
 proc fcQCalendarYearMonthDay_day(self: pointer): cint {.importc: "QCalendar__YearMonthDay_day".}
 proc fcQCalendarYearMonthDay_setDay(self: pointer, day: cint): void {.importc: "QCalendar__YearMonthDay_setDay".}
 proc fcQCalendarYearMonthDay_new(): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new".}
-proc fcQCalendarYearMonthDay_new2(y: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new2".}
-proc fcQCalendarYearMonthDay_new3(y: cint, m: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new3".}
-proc fcQCalendarYearMonthDay_new4(y: cint, m: cint, d: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new4".}
+proc fcQCalendarYearMonthDay_new2(y: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new_y".}
+proc fcQCalendarYearMonthDay_new3(y: cint, m: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new_y_m".}
+proc fcQCalendarYearMonthDay_new4(y: cint, m: cint, d: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new_y_m_d".}
 
 proc isValid*(self: gen_qcalendar_types.QCalendar): bool =
   fcQCalendar_isValid(self.h)
 
 proc daysInMonth*(self: gen_qcalendar_types.QCalendar, month: cint): cint =
-  fcQCalendar_daysInMonth(self.h, month)
+  fcQCalendar_daysInMonthMonth(self.h, month)
 
 proc daysInYear*(self: gen_qcalendar_types.QCalendar, year: cint): cint =
   fcQCalendar_daysInYear(self.h, year)
@@ -161,10 +161,10 @@ proc name*(self: gen_qcalendar_types.QCalendar): string =
   vx_ret
 
 proc dateFromParts*(self: gen_qcalendar_types.QCalendar, year: cint, month: cint, day: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQCalendar_dateFromParts(self.h, year, month, day), owned: true)
+  gen_qdatetime_types.QDate(h: fcQCalendar_dateFromPartsYearMonthDay(self.h, year, month, day), owned: true)
 
 proc dateFromParts*(self: gen_qcalendar_types.QCalendar, parts: gen_qcalendar_types.QCalendarYearMonthDay): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQCalendar_dateFromPartsWithParts(self.h, parts.h), owned: true)
+  gen_qdatetime_types.QDate(h: fcQCalendar_dateFromPartsParts(self.h, parts.h), owned: true)
 
 proc partsFromDate*(self: gen_qcalendar_types.QCalendar, date: gen_qdatetime_types.QDate): gen_qcalendar_types.QCalendarYearMonthDay =
   gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendar_partsFromDate(self.h, date.h), owned: true)
@@ -173,25 +173,25 @@ proc dayOfWeek*(self: gen_qcalendar_types.QCalendar, date: gen_qdatetime_types.Q
   fcQCalendar_dayOfWeek(self.h, date.h)
 
 proc monthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint): string =
-  let v_ms = fcQCalendar_monthName(self.h, locale.h, month)
+  let v_ms = fcQCalendar_monthNameLocaleMonth(self.h, locale.h, month)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint): string =
-  let v_ms = fcQCalendar_standaloneMonthName(self.h, locale.h, month)
+  let v_ms = fcQCalendar_standaloneMonthNameLocaleMonth(self.h, locale.h, month)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc weekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, day: cint): string =
-  let v_ms = fcQCalendar_weekDayName(self.h, locale.h, day)
+  let v_ms = fcQCalendar_weekDayNameLocaleDay(self.h, locale.h, day)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneWeekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, day: cint): string =
-  let v_ms = fcQCalendar_standaloneWeekDayName(self.h, locale.h, day)
+  let v_ms = fcQCalendar_standaloneWeekDayNameLocaleDay(self.h, locale.h, day)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -209,40 +209,40 @@ proc availableCalendars*(_: type gen_qcalendar_types.QCalendar): seq[string] =
   vx_ret
 
 proc daysInMonth*(self: gen_qcalendar_types.QCalendar, month: cint, year: cint): cint =
-  fcQCalendar_daysInMonth2(self.h, month, year)
+  fcQCalendar_daysInMonthMonthYear(self.h, month, year)
 
 proc monthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint, year: cint): string =
-  let v_ms = fcQCalendar_monthName2(self.h, locale.h, month, year)
+  let v_ms = fcQCalendar_monthNameLocaleMonthYear(self.h, locale.h, month, year)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc monthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint, year: cint, format: cint): string =
-  let v_ms = fcQCalendar_monthName3(self.h, locale.h, month, year, cint(format))
+  let v_ms = fcQCalendar_monthNameLocaleMonthYearFormat(self.h, locale.h, month, year, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint, year: cint): string =
-  let v_ms = fcQCalendar_standaloneMonthName2(self.h, locale.h, month, year)
+  let v_ms = fcQCalendar_standaloneMonthNameLocaleMonthYear(self.h, locale.h, month, year)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneMonthName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, month: cint, year: cint, format: cint): string =
-  let v_ms = fcQCalendar_standaloneMonthName3(self.h, locale.h, month, year, cint(format))
+  let v_ms = fcQCalendar_standaloneMonthNameLocaleMonthYearFormat(self.h, locale.h, month, year, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc weekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, day: cint, format: cint): string =
-  let v_ms = fcQCalendar_weekDayName2(self.h, locale.h, day, cint(format))
+  let v_ms = fcQCalendar_weekDayNameLocaleDayFormat(self.h, locale.h, day, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc standaloneWeekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlocale_types.QLocale, day: cint, format: cint): string =
-  let v_ms = fcQCalendar_standaloneWeekDayName2(self.h, locale.h, day, cint(format))
+  let v_ms = fcQCalendar_standaloneWeekDayNameLocaleDayFormat(self.h, locale.h, day, cint(format))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

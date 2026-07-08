@@ -57,13 +57,13 @@ type cQWebEngineUrlSchemeHandler*{.exportc: "QWebEngineUrlSchemeHandler", incomp
 proc fcQWebEngineUrlSchemeHandler_metaObject(self: pointer): pointer {.importc: "QWebEngineUrlSchemeHandler_metaObject".}
 proc fcQWebEngineUrlSchemeHandler_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineUrlSchemeHandler_metacast".}
 proc fcQWebEngineUrlSchemeHandler_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineUrlSchemeHandler_metacall".}
-proc fcQWebEngineUrlSchemeHandler_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_tr".}
-proc fcQWebEngineUrlSchemeHandler_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_trUtf8".}
+proc fcQWebEngineUrlSchemeHandler_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_tr_s".}
+proc fcQWebEngineUrlSchemeHandler_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_trUtf8_s".}
 proc fcQWebEngineUrlSchemeHandler_requestStarted(self: pointer, param1: pointer): void {.importc: "QWebEngineUrlSchemeHandler_requestStarted".}
-proc fcQWebEngineUrlSchemeHandler_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_tr2".}
-proc fcQWebEngineUrlSchemeHandler_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_tr3".}
-proc fcQWebEngineUrlSchemeHandler_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_trUtf82".}
-proc fcQWebEngineUrlSchemeHandler_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_trUtf83".}
+proc fcQWebEngineUrlSchemeHandler_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_tr_s_c".}
+proc fcQWebEngineUrlSchemeHandler_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_tr_s_c_n".}
+proc fcQWebEngineUrlSchemeHandler_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_trUtf8_s_c".}
+proc fcQWebEngineUrlSchemeHandler_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineUrlSchemeHandler_trUtf8_s_c_n".}
 proc fcQWebEngineUrlSchemeHandler_vdata(self: pointer): ptr pointer {.importc: "QWebEngineUrlSchemeHandler_vdata".}
 proc fvdata_cQWebEngineUrlSchemeHandler(self: pointer): pointer {.importc: "vdata_QWebEngineUrlSchemeHandler".}
 
@@ -95,7 +95,7 @@ proc fcQWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(self: pointer)
 proc fcQWebEngineUrlSchemeHandler_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineUrlSchemeHandler_protectedbase_receivers".}
 proc fcQWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected".}
 proc fcQWebEngineUrlSchemeHandler_new(vtbl: pointer, vdata: csize_t): ptr cQWebEngineUrlSchemeHandler {.importc: "QWebEngineUrlSchemeHandler_new".}
-proc fcQWebEngineUrlSchemeHandler_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebEngineUrlSchemeHandler {.importc: "QWebEngineUrlSchemeHandler_new2".}
+proc fcQWebEngineUrlSchemeHandler_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebEngineUrlSchemeHandler {.importc: "QWebEngineUrlSchemeHandler_new_parent".}
 proc fcQWebEngineUrlSchemeHandler_staticMetaObject(): pointer {.importc: "QWebEngineUrlSchemeHandler_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler): gen_qobjectdefs_types.QMetaObject =
@@ -108,13 +108,13 @@ proc metacall*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHan
   fcQWebEngineUrlSchemeHandler_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, s: cstring): string =
-  let v_ms = fcQWebEngineUrlSchemeHandler_tr(s)
+  let v_ms = fcQWebEngineUrlSchemeHandler_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, s: cstring): string =
-  let v_ms = fcQWebEngineUrlSchemeHandler_trUtf8(s)
+  let v_ms = fcQWebEngineUrlSchemeHandler_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -123,25 +123,25 @@ proc requestStarted*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSch
   fcQWebEngineUrlSchemeHandler_requestStarted(self.h, param1.h)
 
 proc tr*(_: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineUrlSchemeHandler_tr2(s, c)
+  let v_ms = fcQWebEngineUrlSchemeHandler_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineUrlSchemeHandler_tr3(s, c, n)
+  let v_ms = fcQWebEngineUrlSchemeHandler_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineUrlSchemeHandler_trUtf82(s, c)
+  let v_ms = fcQWebEngineUrlSchemeHandler_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineUrlSchemeHandler_trUtf83(s, c, n)
+  let v_ms = fcQWebEngineUrlSchemeHandler_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -91,8 +91,8 @@ type cQUndoView*{.exportc: "QUndoView", incompleteStruct.} = object
 proc fcQUndoView_metaObject(self: pointer): pointer {.importc: "QUndoView_metaObject".}
 proc fcQUndoView_metacast(self: pointer, param1: cstring): pointer {.importc: "QUndoView_metacast".}
 proc fcQUndoView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QUndoView_metacall".}
-proc fcQUndoView_tr(s: cstring): struct_seaqt_string {.importc: "QUndoView_tr".}
-proc fcQUndoView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QUndoView_trUtf8".}
+proc fcQUndoView_trS(s: cstring): struct_seaqt_string {.importc: "QUndoView_tr_s".}
+proc fcQUndoView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QUndoView_trUtf8_s".}
 proc fcQUndoView_stack(self: pointer): pointer {.importc: "QUndoView_stack".}
 proc fcQUndoView_group(self: pointer): pointer {.importc: "QUndoView_group".}
 proc fcQUndoView_setEmptyLabel(self: pointer, label: struct_seaqt_string): void {.importc: "QUndoView_setEmptyLabel".}
@@ -101,10 +101,10 @@ proc fcQUndoView_setCleanIcon(self: pointer, icon: pointer): void {.importc: "QU
 proc fcQUndoView_cleanIcon(self: pointer): pointer {.importc: "QUndoView_cleanIcon".}
 proc fcQUndoView_setStack(self: pointer, stack: pointer): void {.importc: "QUndoView_setStack".}
 proc fcQUndoView_setGroup(self: pointer, group: pointer): void {.importc: "QUndoView_setGroup".}
-proc fcQUndoView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUndoView_tr2".}
-proc fcQUndoView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUndoView_tr3".}
-proc fcQUndoView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUndoView_trUtf82".}
-proc fcQUndoView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUndoView_trUtf83".}
+proc fcQUndoView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUndoView_tr_s_c".}
+proc fcQUndoView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUndoView_tr_s_c_n".}
+proc fcQUndoView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUndoView_trUtf8_s_c".}
+proc fcQUndoView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUndoView_trUtf8_s_c_n".}
 proc fcQUndoView_vdata(self: pointer): ptr pointer {.importc: "QUndoView_vdata".}
 proc fvdata_cQUndoView(self: pointer): pointer {.importc: "vdata_QUndoView".}
 
@@ -162,7 +162,7 @@ type cQUndoViewVTable {.pure.} = object
   closeEditor*: proc(self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
   viewportEvent*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -254,7 +254,7 @@ proc fcQUndoView_virtualbase_horizontalScrollbarValueChanged(self: pointer, valu
 proc fcQUndoView_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void {.importc: "QUndoView_virtualbase_closeEditor".}
 proc fcQUndoView_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QUndoView_virtualbase_commitData".}
 proc fcQUndoView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QUndoView_virtualbase_editorDestroyed".}
-proc fcQUndoView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QUndoView_virtualbase_edit2".}
+proc fcQUndoView_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QUndoView_virtualbase_edit_index_trigger_event".}
 proc fcQUndoView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QUndoView_virtualbase_selectionCommand".}
 proc fcQUndoView_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QUndoView_virtualbase_focusNextPrevChild".}
 proc fcQUndoView_virtualbase_viewportEvent(self: pointer, event: pointer): bool {.importc: "QUndoView_virtualbase_viewportEvent".}
@@ -313,7 +313,7 @@ proc fcQUndoView_protectedbase_startAutoScroll(self: pointer): void {.importc: "
 proc fcQUndoView_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QUndoView_protectedbase_stopAutoScroll".}
 proc fcQUndoView_protectedbase_doAutoScroll(self: pointer): void {.importc: "QUndoView_protectedbase_doAutoScroll".}
 proc fcQUndoView_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QUndoView_protectedbase_dropIndicatorPosition".}
-proc fcQUndoView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QUndoView_protectedbase_setViewportMargins".}
+proc fcQUndoView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QUndoView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQUndoView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QUndoView_protectedbase_viewportMargins".}
 proc fcQUndoView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QUndoView_protectedbase_drawFrame".}
 proc fcQUndoView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QUndoView_protectedbase_initStyleOption".}
@@ -327,11 +327,11 @@ proc fcQUndoView_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQUndoView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QUndoView_protectedbase_receivers".}
 proc fcQUndoView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QUndoView_protectedbase_isSignalConnected".}
 proc fcQUndoView_new(vtbl: pointer, vdata: csize_t): ptr cQUndoView {.importc: "QUndoView_new".}
-proc fcQUndoView_new2(vtbl: pointer, vdata: csize_t, stack: pointer): ptr cQUndoView {.importc: "QUndoView_new2".}
-proc fcQUndoView_new3(vtbl: pointer, vdata: csize_t, group: pointer): ptr cQUndoView {.importc: "QUndoView_new3".}
-proc fcQUndoView_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUndoView {.importc: "QUndoView_new4".}
-proc fcQUndoView_new5(vtbl: pointer, vdata: csize_t, stack: pointer, parent: pointer): ptr cQUndoView {.importc: "QUndoView_new5".}
-proc fcQUndoView_new6(vtbl: pointer, vdata: csize_t, group: pointer, parent: pointer): ptr cQUndoView {.importc: "QUndoView_new6".}
+proc fcQUndoView_new2(vtbl: pointer, vdata: csize_t, stack: pointer): ptr cQUndoView {.importc: "QUndoView_new_stack".}
+proc fcQUndoView_new3(vtbl: pointer, vdata: csize_t, group: pointer): ptr cQUndoView {.importc: "QUndoView_new_group".}
+proc fcQUndoView_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUndoView {.importc: "QUndoView_new_parent".}
+proc fcQUndoView_new5(vtbl: pointer, vdata: csize_t, stack: pointer, parent: pointer): ptr cQUndoView {.importc: "QUndoView_new_stack_parent".}
+proc fcQUndoView_new6(vtbl: pointer, vdata: csize_t, group: pointer, parent: pointer): ptr cQUndoView {.importc: "QUndoView_new_group_parent".}
 proc fcQUndoView_staticMetaObject(): pointer {.importc: "QUndoView_staticMetaObject".}
 
 proc metaObject*(self: gen_qundoview_types.QUndoView): gen_qobjectdefs_types.QMetaObject =
@@ -344,13 +344,13 @@ proc metacall*(self: gen_qundoview_types.QUndoView, param1: cint, param2: cint, 
   fcQUndoView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qundoview_types.QUndoView, s: cstring): string =
-  let v_ms = fcQUndoView_tr(s)
+  let v_ms = fcQUndoView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qundoview_types.QUndoView, s: cstring): string =
-  let v_ms = fcQUndoView_trUtf8(s)
+  let v_ms = fcQUndoView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -383,25 +383,25 @@ proc setGroup*(self: gen_qundoview_types.QUndoView, group: gen_qundogroup_types.
   fcQUndoView_setGroup(self.h, group.h)
 
 proc tr*(_: type gen_qundoview_types.QUndoView, s: cstring, c: cstring): string =
-  let v_ms = fcQUndoView_tr2(s, c)
+  let v_ms = fcQUndoView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qundoview_types.QUndoView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQUndoView_tr3(s, c, n)
+  let v_ms = fcQUndoView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qundoview_types.QUndoView, s: cstring, c: cstring): string =
-  let v_ms = fcQUndoView_trUtf82(s, c)
+  let v_ms = fcQUndoView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qundoview_types.QUndoView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQUndoView_trUtf83(s, c, n)
+  let v_ms = fcQUndoView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -458,7 +458,7 @@ type QUndoViewhorizontalScrollbarValueChangedProc* = proc(self: QUndoView, value
 type QUndoViewcloseEditorProc* = proc(self: QUndoView, editor: gen_qwidget_types.QWidget, hint: cint): void {.raises: [], gcsafe.}
 type QUndoViewcommitDataProc* = proc(self: QUndoView, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QUndoVieweditorDestroyedProc* = proc(self: QUndoView, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
-type QUndoViewedit2Proc* = proc(self: QUndoView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QUndoVieweditIndexTriggerEventProc* = proc(self: QUndoView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QUndoViewselectionCommandProc* = proc(self: QUndoView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QUndoViewfocusNextPrevChildProc* = proc(self: QUndoView, next: bool): bool {.raises: [], gcsafe.}
 type QUndoViewviewportEventProc* = proc(self: QUndoView, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
@@ -553,7 +553,7 @@ type QUndoViewVTable* {.inheritable, pure.} = object
   closeEditor*: QUndoViewcloseEditorProc
   commitData*: QUndoViewcommitDataProc
   editorDestroyed*: QUndoVieweditorDestroyedProc
-  edit2*: QUndoViewedit2Proc
+  editIndexTriggerEvent*: QUndoVieweditIndexTriggerEventProc
   selectionCommand*: QUndoViewselectionCommandProc
   focusNextPrevChild*: QUndoViewfocusNextPrevChildProc
   viewportEvent*: QUndoViewviewportEventProc
@@ -761,7 +761,7 @@ proc QUndoVieweditorDestroyed*(self: gen_qundoview_types.QUndoView, editor: gen_
   fcQUndoView_virtualbase_editorDestroyed(self.h, editor.h)
 
 proc QUndoViewedit*(self: gen_qundoview_types.QUndoView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQUndoView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQUndoView_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QUndoViewselectionCommand*(self: gen_qundoview_types.QUndoView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQUndoView_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -1253,13 +1253,13 @@ proc fcQUndoView_vtable_callback_editorDestroyed(self: pointer, editor: pointer)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc fcQUndoView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQUndoView_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoViewVTable](fcQUndoView_vdata(self)[])
   let self = QUndoView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQUndoView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -2034,7 +2034,7 @@ proc fcQUndoView_method_callback_editorDestroyed(self: pointer, editor: pointer)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-proc fcQUndoView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQUndoView_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUndoView](fcQUndoView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2326,7 +2326,7 @@ proc dropIndicatorPosition*(self: gen_qundoview_types.QUndoView): cint =
   cint(fcQUndoView_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qundoview_types.QUndoView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQUndoView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQUndoView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qundoview_types.QUndoView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQUndoView_protectedbase_viewportMargins(self.h), owned: true)
@@ -2475,8 +2475,8 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.commitData = fcQUndoView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQUndoView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQUndoView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQUndoView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQUndoView_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -2670,8 +2670,8 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.commitData = fcQUndoView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQUndoView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQUndoView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQUndoView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQUndoView_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -2865,8 +2865,8 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.commitData = fcQUndoView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQUndoView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQUndoView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQUndoView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQUndoView_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -3060,8 +3060,8 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.commitData = fcQUndoView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQUndoView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQUndoView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQUndoView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQUndoView_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -3255,8 +3255,8 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.commitData = fcQUndoView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQUndoView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQUndoView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQUndoView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQUndoView_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -3450,8 +3450,8 @@ proc create*(T: type gen_qundoview_types.QUndoView,
     vtbl[].vtbl.commitData = fcQUndoView_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQUndoView_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQUndoView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQUndoView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQUndoView_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -3591,7 +3591,7 @@ const cQUndoView_mvtbl = cQUndoViewVTable(
   closeEditor: fcQUndoView_method_callback_closeEditor,
   commitData: fcQUndoView_method_callback_commitData,
   editorDestroyed: fcQUndoView_method_callback_editorDestroyed,
-  edit2: fcQUndoView_method_callback_edit2,
+  editIndexTriggerEvent: fcQUndoView_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQUndoView_method_callback_selectionCommand,
   focusNextPrevChild: fcQUndoView_method_callback_focusNextPrevChild,
   viewportEvent: fcQUndoView_method_callback_viewportEvent,

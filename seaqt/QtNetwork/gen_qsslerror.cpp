@@ -21,24 +21,24 @@ QSslError* QSslError_new() {
 	return new (std::nothrow) QSslError();
 }
 
-QSslError* QSslError_new2(int error) {
+QSslError* QSslError_new_error(int error) {
 	return new (std::nothrow) QSslError(static_cast<QSslError::SslError>(error));
 }
 
-QSslError* QSslError_new3(int error, QSslCertificate* certificate) {
+QSslError* QSslError_new_error_certificate(int error, QSslCertificate* certificate) {
 	return new (std::nothrow) QSslError(static_cast<QSslError::SslError>(error), *certificate);
 }
 
-QSslError* QSslError_new4(QSslError* other) {
-	return new (std::nothrow) QSslError(*other);
+QSslError* QSslError_new_from(QSslError* from) {
+	return new (std::nothrow) QSslError(*from);
 }
 
 void QSslError_swap(QSslError* self, QSslError* other) {
 	self->swap(*other);
 }
 
-void QSslError_operatorAssign(QSslError* self, QSslError* other) {
-	self->operator=(*other);
+void QSslError_operatorAssign(QSslError* self, QSslError* from) {
+	self->operator=(*from);
 }
 
 bool QSslError_operatorEqual(const QSslError* self, QSslError* other) {

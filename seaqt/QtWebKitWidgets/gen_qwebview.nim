@@ -87,14 +87,14 @@ type cQWebView*{.exportc: "QWebView", incompleteStruct.} = object
 proc fcQWebView_metaObject(self: pointer): pointer {.importc: "QWebView_metaObject".}
 proc fcQWebView_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebView_metacast".}
 proc fcQWebView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebView_metacall".}
-proc fcQWebView_tr(s: cstring): struct_seaqt_string {.importc: "QWebView_tr".}
-proc fcQWebView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebView_trUtf8".}
+proc fcQWebView_trS(s: cstring): struct_seaqt_string {.importc: "QWebView_tr_s".}
+proc fcQWebView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebView_trUtf8_s".}
 proc fcQWebView_page(self: pointer): pointer {.importc: "QWebView_page".}
 proc fcQWebView_setPage(self: pointer, page: pointer): void {.importc: "QWebView_setPage".}
-proc fcQWebView_load(self: pointer, url: pointer): void {.importc: "QWebView_load".}
-proc fcQWebView_loadWithRequest(self: pointer, request: pointer): void {.importc: "QWebView_loadWithRequest".}
-proc fcQWebView_setHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QWebView_setHtml".}
-proc fcQWebView_setContent(self: pointer, data: struct_seaqt_string): void {.importc: "QWebView_setContent".}
+proc fcQWebView_loadUrl(self: pointer, url: pointer): void {.importc: "QWebView_load_url".}
+proc fcQWebView_loadRequest(self: pointer, request: pointer): void {.importc: "QWebView_load_request".}
+proc fcQWebView_setHtmlHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QWebView_setHtml_html".}
+proc fcQWebView_setContentData(self: pointer, data: struct_seaqt_string): void {.importc: "QWebView_setContent_data".}
 proc fcQWebView_history(self: pointer): pointer {.importc: "QWebView_history".}
 proc fcQWebView_settings(self: pointer): pointer {.importc: "QWebView_settings".}
 proc fcQWebView_title(self: pointer): struct_seaqt_string {.importc: "QWebView_title".}
@@ -105,7 +105,7 @@ proc fcQWebView_hasSelection(self: pointer): bool {.importc: "QWebView_hasSelect
 proc fcQWebView_selectedText(self: pointer): struct_seaqt_string {.importc: "QWebView_selectedText".}
 proc fcQWebView_selectedHtml(self: pointer): struct_seaqt_string {.importc: "QWebView_selectedHtml".}
 proc fcQWebView_pageAction(self: pointer, action: cint): pointer {.importc: "QWebView_pageAction".}
-proc fcQWebView_triggerPageAction(self: pointer, action: cint): void {.importc: "QWebView_triggerPageAction".}
+proc fcQWebView_triggerPageActionAction(self: pointer, action: cint): void {.importc: "QWebView_triggerPageAction_action".}
 proc fcQWebView_isModified(self: pointer): bool {.importc: "QWebView_isModified".}
 proc fcQWebView_inputMethodQuery(self: pointer, property: cint): pointer {.importc: "QWebView_inputMethodQuery".}
 proc fcQWebView_sizeHint(self: pointer): pointer {.importc: "QWebView_sizeHint".}
@@ -115,8 +115,8 @@ proc fcQWebView_setTextSizeMultiplier(self: pointer, factor: float64): void {.im
 proc fcQWebView_textSizeMultiplier(self: pointer): float64 {.importc: "QWebView_textSizeMultiplier".}
 proc fcQWebView_renderHints(self: pointer): cint {.importc: "QWebView_renderHints".}
 proc fcQWebView_setRenderHints(self: pointer, hints: cint): void {.importc: "QWebView_setRenderHints".}
-proc fcQWebView_setRenderHint(self: pointer, hint: cint): void {.importc: "QWebView_setRenderHint".}
-proc fcQWebView_findText(self: pointer, subString: struct_seaqt_string): bool {.importc: "QWebView_findText".}
+proc fcQWebView_setRenderHintHint(self: pointer, hint: cint): void {.importc: "QWebView_setRenderHint_hint".}
+proc fcQWebView_findTextSubString(self: pointer, subString: struct_seaqt_string): bool {.importc: "QWebView_findText_subString".}
 proc fcQWebView_event(self: pointer, param1: pointer): bool {.importc: "QWebView_event".}
 proc fcQWebView_stop(self: pointer): void {.importc: "QWebView_stop".}
 proc fcQWebView_back(self: pointer): void {.importc: "QWebView_back".}
@@ -141,18 +141,18 @@ proc fcQWebView_iconChanged(self: pointer): void {.importc: "QWebView_iconChange
 proc fcQWebView_connect_iconChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_iconChanged".}
 proc fcQWebView_urlChanged(self: pointer, param1: pointer): void {.importc: "QWebView_urlChanged".}
 proc fcQWebView_connect_urlChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_urlChanged".}
-proc fcQWebView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebView_tr2".}
-proc fcQWebView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebView_tr3".}
-proc fcQWebView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebView_trUtf82".}
-proc fcQWebView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebView_trUtf83".}
-proc fcQWebView_load2(self: pointer, request: pointer, operation: cint): void {.importc: "QWebView_load2".}
-proc fcQWebView_load3(self: pointer, request: pointer, operation: cint, body: struct_seaqt_string): void {.importc: "QWebView_load3".}
-proc fcQWebView_setHtml2(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebView_setHtml2".}
-proc fcQWebView_setContent2(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QWebView_setContent2".}
-proc fcQWebView_setContent3(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebView_setContent3".}
-proc fcQWebView_triggerPageAction2(self: pointer, action: cint, checked: bool): void {.importc: "QWebView_triggerPageAction2".}
-proc fcQWebView_setRenderHint2(self: pointer, hint: cint, enabled: bool): void {.importc: "QWebView_setRenderHint2".}
-proc fcQWebView_findText2(self: pointer, subString: struct_seaqt_string, options: cint): bool {.importc: "QWebView_findText2".}
+proc fcQWebView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebView_tr_s_c".}
+proc fcQWebView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebView_tr_s_c_n".}
+proc fcQWebView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebView_trUtf8_s_c".}
+proc fcQWebView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebView_trUtf8_s_c_n".}
+proc fcQWebView_loadRequestOperation(self: pointer, request: pointer, operation: cint): void {.importc: "QWebView_load_request_operation".}
+proc fcQWebView_loadRequestOperationBody(self: pointer, request: pointer, operation: cint, body: struct_seaqt_string): void {.importc: "QWebView_load_request_operation_body".}
+proc fcQWebView_setHtmlHtmlBaseUrl(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebView_setHtml_html_baseUrl".}
+proc fcQWebView_setContentDataMimeType(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QWebView_setContent_data_mimeType".}
+proc fcQWebView_setContentDataMimeTypeBaseUrl(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QWebView_setContent_data_mimeType_baseUrl".}
+proc fcQWebView_triggerPageActionActionChecked(self: pointer, action: cint, checked: bool): void {.importc: "QWebView_triggerPageAction_action_checked".}
+proc fcQWebView_setRenderHintHintEnabled(self: pointer, hint: cint, enabled: bool): void {.importc: "QWebView_setRenderHint_hint_enabled".}
+proc fcQWebView_findTextSubStringOptions(self: pointer, subString: struct_seaqt_string, options: cint): bool {.importc: "QWebView_findText_subString_options".}
 proc fcQWebView_vdata(self: pointer): ptr pointer {.importc: "QWebView_vdata".}
 proc fvdata_cQWebView(self: pointer): pointer {.importc: "vdata_QWebView".}
 
@@ -270,7 +270,7 @@ proc fcQWebView_protectedbase_senderSignalIndex(self: pointer): cint {.importc: 
 proc fcQWebView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebView_protectedbase_receivers".}
 proc fcQWebView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebView_protectedbase_isSignalConnected".}
 proc fcQWebView_new(vtbl: pointer, vdata: csize_t): ptr cQWebView {.importc: "QWebView_new".}
-proc fcQWebView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebView {.importc: "QWebView_new2".}
+proc fcQWebView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebView {.importc: "QWebView_new_parent".}
 proc fcQWebView_staticMetaObject(): pointer {.importc: "QWebView_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebview_types.QWebView): gen_qobjectdefs_types.QMetaObject =
@@ -283,13 +283,13 @@ proc metacall*(self: gen_qwebview_types.QWebView, param1: cint, param2: cint, pa
   fcQWebView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring): string =
-  let v_ms = fcQWebView_tr(s)
+  let v_ms = fcQWebView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebview_types.QWebView, s: cstring): string =
-  let v_ms = fcQWebView_trUtf8(s)
+  let v_ms = fcQWebView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -301,16 +301,16 @@ proc setPage*(self: gen_qwebview_types.QWebView, page: gen_qwebpage_types.QWebPa
   fcQWebView_setPage(self.h, page.h)
 
 proc load*(self: gen_qwebview_types.QWebView, url: gen_qurl_types.QUrl): void =
-  fcQWebView_load(self.h, url.h)
+  fcQWebView_loadUrl(self.h, url.h)
 
 proc load*(self: gen_qwebview_types.QWebView, request: gen_qnetworkrequest_types.QNetworkRequest): void =
-  fcQWebView_loadWithRequest(self.h, request.h)
+  fcQWebView_loadRequest(self.h, request.h)
 
 proc setHtml*(self: gen_qwebview_types.QWebView, html: openArray[char]): void =
-  fcQWebView_setHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
+  fcQWebView_setHtmlHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc setContent*(self: gen_qwebview_types.QWebView, data: openArray[byte]): void =
-  fcQWebView_setContent(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQWebView_setContentData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc history*(self: gen_qwebview_types.QWebView): gen_qwebhistory_types.QWebHistory =
   gen_qwebhistory_types.QWebHistory(h: fcQWebView_history(self.h), owned: false)
@@ -352,7 +352,7 @@ proc pageAction*(self: gen_qwebview_types.QWebView, action: cint): gen_qaction_t
   gen_qaction_types.QAction(h: fcQWebView_pageAction(self.h, cint(action)), owned: false)
 
 proc triggerPageAction*(self: gen_qwebview_types.QWebView, action: cint): void =
-  fcQWebView_triggerPageAction(self.h, cint(action))
+  fcQWebView_triggerPageActionAction(self.h, cint(action))
 
 proc isModified*(self: gen_qwebview_types.QWebView): bool =
   fcQWebView_isModified(self.h)
@@ -382,10 +382,10 @@ proc setRenderHints*(self: gen_qwebview_types.QWebView, hints: cint): void =
   fcQWebView_setRenderHints(self.h, cint(hints))
 
 proc setRenderHint*(self: gen_qwebview_types.QWebView, hint: cint): void =
-  fcQWebView_setRenderHint(self.h, cint(hint))
+  fcQWebView_setRenderHintHint(self.h, cint(hint))
 
 proc findText*(self: gen_qwebview_types.QWebView, subString: openArray[char]): bool =
-  fcQWebView_findText(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
+  fcQWebView_findTextSubString(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
 
 proc event*(self: gen_qwebview_types.QWebView, param1: gen_qcoreevent_types.QEvent): bool =
   fcQWebView_event(self.h, param1.h)
@@ -586,52 +586,52 @@ proc onUrlChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewurlChangedSl
   fcQWebView_connect_urlChanged(self.h, cast[int](addr tmp[]), fcQWebView_slot_callback_urlChanged, fcQWebView_slot_callback_urlChanged_release)
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring): string =
-  let v_ms = fcQWebView_tr2(s, c)
+  let v_ms = fcQWebView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebView_tr3(s, c, n)
+  let v_ms = fcQWebView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring): string =
-  let v_ms = fcQWebView_trUtf82(s, c)
+  let v_ms = fcQWebView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebView_trUtf83(s, c, n)
+  let v_ms = fcQWebView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc load*(self: gen_qwebview_types.QWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint): void =
-  fcQWebView_load2(self.h, request.h, cint(operation))
+  fcQWebView_loadRequestOperation(self.h, request.h, cint(operation))
 
 proc load*(self: gen_qwebview_types.QWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint, body: openArray[byte]): void =
-  fcQWebView_load3(self.h, request.h, cint(operation), struct_seaqt_string(data: if len(body) > 0: addr body[0] else: nil, len: csize_t(len(body))))
+  fcQWebView_loadRequestOperationBody(self.h, request.h, cint(operation), struct_seaqt_string(data: if len(body) > 0: addr body[0] else: nil, len: csize_t(len(body))))
 
 proc setHtml*(self: gen_qwebview_types.QWebView, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebView_setHtml2(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
+  fcQWebView_setHtmlHtmlBaseUrl(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
 proc setContent*(self: gen_qwebview_types.QWebView, data: openArray[byte], mimeType: openArray[char]): void =
-  fcQWebView_setContent2(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
+  fcQWebView_setContentDataMimeType(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 proc setContent*(self: gen_qwebview_types.QWebView, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQWebView_setContent3(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
+  fcQWebView_setContentDataMimeTypeBaseUrl(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc triggerPageAction*(self: gen_qwebview_types.QWebView, action: cint, checked: bool): void =
-  fcQWebView_triggerPageAction2(self.h, cint(action), checked)
+  fcQWebView_triggerPageActionActionChecked(self.h, cint(action), checked)
 
 proc setRenderHint*(self: gen_qwebview_types.QWebView, hint: cint, enabled: bool): void =
-  fcQWebView_setRenderHint2(self.h, cint(hint), enabled)
+  fcQWebView_setRenderHintHintEnabled(self.h, cint(hint), enabled)
 
 proc findText*(self: gen_qwebview_types.QWebView, subString: openArray[char], options: cint): bool =
-  fcQWebView_findText2(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
+  fcQWebView_findTextSubStringOptions(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
 
 type QWebViewmetaObjectProc* = proc(self: QWebView): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QWebViewmetacastProc* = proc(self: QWebView, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -188,13 +188,13 @@ public:
 	friend bool QWebSocketServer_protectedbase_isSignalConnected(const VirtualQWebSocketServer* self, QMetaMethod* signal);
 };
 
-VirtualQWebSocketServer* QWebSocketServer_new(const QWebSocketServer_VTable* vtbl, size_t vdata, struct seaqt_string serverName, int secureMode) {
+VirtualQWebSocketServer* QWebSocketServer_new_serverName_secureMode(const QWebSocketServer_VTable* vtbl, size_t vdata, struct seaqt_string serverName, int secureMode) {
 	QString serverName_QString = QString::fromUtf8(serverName.data, serverName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebSocketServer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebSocketServer(vtbl, serverName_QString, static_cast<QWebSocketServer::SslMode>(secureMode)) : nullptr;
 }
 
-VirtualQWebSocketServer* QWebSocketServer_new2(const QWebSocketServer_VTable* vtbl, size_t vdata, struct seaqt_string serverName, int secureMode, QObject* parent) {
+VirtualQWebSocketServer* QWebSocketServer_new_serverName_secureMode_parent(const QWebSocketServer_VTable* vtbl, size_t vdata, struct seaqt_string serverName, int secureMode, QObject* parent) {
 	QString serverName_QString = QString::fromUtf8(serverName.data, serverName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebSocketServer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWebSocketServer(vtbl, serverName_QString, static_cast<QWebSocketServer::SslMode>(secureMode), parent) : nullptr;
@@ -216,7 +216,7 @@ int QWebSocketServer_metacall(QWebSocketServer* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebSocketServer_tr(const char* s) {
+struct seaqt_string QWebSocketServer_tr_s(const char* s) {
 	QString _ret = QWebSocketServer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -227,7 +227,7 @@ struct seaqt_string QWebSocketServer_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebSocketServer_trUtf8(const char* s) {
+struct seaqt_string QWebSocketServer_trUtf8_s(const char* s) {
 	QString _ret = QWebSocketServer::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -258,7 +258,7 @@ int QWebSocketServer_maxPendingConnections(const QWebSocketServer* self) {
 	return self->maxPendingConnections();
 }
 
-void QWebSocketServer_setHandshakeTimeoutWithMsec(QWebSocketServer* self, int msec) {
+void QWebSocketServer_setHandshakeTimeout_int(QWebSocketServer* self, int msec) {
 	self->setHandshakeTimeout(static_cast<int>(msec));
 }
 
@@ -528,7 +528,7 @@ void QWebSocketServer_connect_closed(QWebSocketServer* self, intptr_t slot, void
 	QWebSocketServer::connect(self, static_cast<void (QWebSocketServer::*)()>(&QWebSocketServer::closed), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebSocketServer_tr2(const char* s, const char* c) {
+struct seaqt_string QWebSocketServer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebSocketServer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -539,7 +539,7 @@ struct seaqt_string QWebSocketServer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebSocketServer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebSocketServer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebSocketServer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -550,7 +550,7 @@ struct seaqt_string QWebSocketServer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebSocketServer_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebSocketServer_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebSocketServer::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -561,7 +561,7 @@ struct seaqt_string QWebSocketServer_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebSocketServer_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebSocketServer_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebSocketServer::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -572,11 +572,11 @@ struct seaqt_string QWebSocketServer_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-bool QWebSocketServer_listenWithAddress(QWebSocketServer* self, QHostAddress* address) {
+bool QWebSocketServer_listen_address(QWebSocketServer* self, QHostAddress* address) {
 	return self->listen(*address);
 }
 
-bool QWebSocketServer_listen2(QWebSocketServer* self, QHostAddress* address, unsigned short port) {
+bool QWebSocketServer_listen_address_port(QWebSocketServer* self, QHostAddress* address, unsigned short port) {
 	return self->listen(*address, static_cast<quint16>(port));
 }
 

@@ -73,34 +73,34 @@ export
 
 type cQColorSpace*{.exportc: "QColorSpace", incompleteStruct.} = object
 
-proc fcQColorSpace_operatorAssign(self: pointer, colorSpace: pointer): void {.importc: "QColorSpace_operatorAssign".}
+proc fcQColorSpace_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QColorSpace_operatorAssign".}
 proc fcQColorSpace_swap(self: pointer, colorSpace: pointer): void {.importc: "QColorSpace_swap".}
 proc fcQColorSpace_primaries(self: pointer): cint {.importc: "QColorSpace_primaries".}
 proc fcQColorSpace_transferFunction(self: pointer): cint {.importc: "QColorSpace_transferFunction".}
 proc fcQColorSpace_gamma(self: pointer): float32 {.importc: "QColorSpace_gamma".}
-proc fcQColorSpace_setTransferFunction(self: pointer, transferFunction: cint): void {.importc: "QColorSpace_setTransferFunction".}
-proc fcQColorSpace_withTransferFunction(self: pointer, transferFunction: cint): pointer {.importc: "QColorSpace_withTransferFunction".}
-proc fcQColorSpace_setPrimaries(self: pointer, primariesId: cint): void {.importc: "QColorSpace_setPrimaries".}
-proc fcQColorSpace_setPrimaries2(self: pointer, whitePoint: pointer, redPoint: pointer, greenPoint: pointer, bluePoint: pointer): void {.importc: "QColorSpace_setPrimaries2".}
+proc fcQColorSpace_setTransferFunctionTransferFunction(self: pointer, transferFunction: cint): void {.importc: "QColorSpace_setTransferFunction_transferFunction".}
+proc fcQColorSpace_withTransferFunctionTransferFunction(self: pointer, transferFunction: cint): pointer {.importc: "QColorSpace_withTransferFunction_transferFunction".}
+proc fcQColorSpace_setPrimariesPrimariesId(self: pointer, primariesId: cint): void {.importc: "QColorSpace_setPrimaries_primariesId".}
+proc fcQColorSpace_setPrimariesWhitePointRedPointGreenPointBluePoint(self: pointer, whitePoint: pointer, redPoint: pointer, greenPoint: pointer, bluePoint: pointer): void {.importc: "QColorSpace_setPrimaries_whitePoint_redPoint_greenPoint_bluePoint".}
 proc fcQColorSpace_isValid(self: pointer): bool {.importc: "QColorSpace_isValid".}
 proc fcQColorSpace_fromIccProfile(iccProfile: struct_seaqt_string): pointer {.importc: "QColorSpace_fromIccProfile".}
 proc fcQColorSpace_iccProfile(self: pointer): struct_seaqt_string {.importc: "QColorSpace_iccProfile".}
 proc fcQColorSpace_transformationToColorSpace(self: pointer, colorspace: pointer): pointer {.importc: "QColorSpace_transformationToColorSpace".}
 proc fcQColorSpace_ToQVariant(self: pointer): pointer {.importc: "QColorSpace_ToQVariant".}
-proc fcQColorSpace_setTransferFunction2(self: pointer, transferFunction: cint, gamma: float32): void {.importc: "QColorSpace_setTransferFunction2".}
-proc fcQColorSpace_withTransferFunction2(self: pointer, transferFunction: cint, gamma: float32): pointer {.importc: "QColorSpace_withTransferFunction2".}
+proc fcQColorSpace_setTransferFunctionTransferFunctionGamma(self: pointer, transferFunction: cint, gamma: float32): void {.importc: "QColorSpace_setTransferFunction_transferFunction_gamma".}
+proc fcQColorSpace_withTransferFunctionTransferFunctionGamma(self: pointer, transferFunction: cint, gamma: float32): pointer {.importc: "QColorSpace_withTransferFunction_transferFunction_gamma".}
 proc fcQColorSpace_new(): ptr cQColorSpace {.importc: "QColorSpace_new".}
-proc fcQColorSpace_new2(namedColorSpace: cint): ptr cQColorSpace {.importc: "QColorSpace_new2".}
-proc fcQColorSpace_new3(primaries: cint, transferFunction: cint): ptr cQColorSpace {.importc: "QColorSpace_new3".}
-proc fcQColorSpace_new4(primaries: cint, gamma: float32): ptr cQColorSpace {.importc: "QColorSpace_new4".}
-proc fcQColorSpace_new5(whitePoint: pointer, redPoint: pointer, greenPoint: pointer, bluePoint: pointer, transferFunction: cint): ptr cQColorSpace {.importc: "QColorSpace_new5".}
-proc fcQColorSpace_new6(colorSpace: pointer): ptr cQColorSpace {.importc: "QColorSpace_new6".}
-proc fcQColorSpace_new7(primaries: cint, transferFunction: cint, gamma: float32): ptr cQColorSpace {.importc: "QColorSpace_new7".}
-proc fcQColorSpace_new8(whitePoint: pointer, redPoint: pointer, greenPoint: pointer, bluePoint: pointer, transferFunction: cint, gamma: float32): ptr cQColorSpace {.importc: "QColorSpace_new8".}
+proc fcQColorSpace_new2(namedColorSpace: cint): ptr cQColorSpace {.importc: "QColorSpace_new_namedColorSpace".}
+proc fcQColorSpace_new3(primaries: cint, transferFunction: cint): ptr cQColorSpace {.importc: "QColorSpace_new_primaries_transferFunction".}
+proc fcQColorSpace_new4(primaries: cint, gamma: float32): ptr cQColorSpace {.importc: "QColorSpace_new_primaries_gamma".}
+proc fcQColorSpace_new5(whitePoint: pointer, redPoint: pointer, greenPoint: pointer, bluePoint: pointer, transferFunction: cint): ptr cQColorSpace {.importc: "QColorSpace_new_whitePoint_redPoint_greenPoint_bluePoint_transferFunction".}
+proc fcQColorSpace_new6(fromVal: pointer): ptr cQColorSpace {.importc: "QColorSpace_new_from".}
+proc fcQColorSpace_new7(primaries: cint, transferFunction: cint, gamma: float32): ptr cQColorSpace {.importc: "QColorSpace_new_primaries_transferFunction_gamma".}
+proc fcQColorSpace_new8(whitePoint: pointer, redPoint: pointer, greenPoint: pointer, bluePoint: pointer, transferFunction: cint, gamma: float32): ptr cQColorSpace {.importc: "QColorSpace_new_whitePoint_redPoint_greenPoint_bluePoint_transferFunction_gamma".}
 proc fcQColorSpace_staticMetaObject(): pointer {.importc: "QColorSpace_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qcolorspace_types.QColorSpace, colorSpace: gen_qcolorspace_types.QColorSpace): void =
-  fcQColorSpace_operatorAssign(self.h, colorSpace.h)
+proc operatorAssign*(self: gen_qcolorspace_types.QColorSpace, fromVal: gen_qcolorspace_types.QColorSpace): void =
+  fcQColorSpace_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qcolorspace_types.QColorSpace, colorSpace: gen_qcolorspace_types.QColorSpace): void =
   fcQColorSpace_swap(self.h, colorSpace.h)
@@ -115,16 +115,16 @@ proc gamma*(self: gen_qcolorspace_types.QColorSpace): float32 =
   fcQColorSpace_gamma(self.h)
 
 proc setTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunction: cint): void =
-  fcQColorSpace_setTransferFunction(self.h, cint(transferFunction))
+  fcQColorSpace_setTransferFunctionTransferFunction(self.h, cint(transferFunction))
 
 proc withTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunction: cint): gen_qcolorspace_types.QColorSpace =
-  gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_withTransferFunction(self.h, cint(transferFunction)), owned: true)
+  gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_withTransferFunctionTransferFunction(self.h, cint(transferFunction)), owned: true)
 
 proc setPrimaries*(self: gen_qcolorspace_types.QColorSpace, primariesId: cint): void =
-  fcQColorSpace_setPrimaries(self.h, cint(primariesId))
+  fcQColorSpace_setPrimariesPrimariesId(self.h, cint(primariesId))
 
 proc setPrimaries*(self: gen_qcolorspace_types.QColorSpace, whitePoint: gen_qpoint_types.QPointF, redPoint: gen_qpoint_types.QPointF, greenPoint: gen_qpoint_types.QPointF, bluePoint: gen_qpoint_types.QPointF): void =
-  fcQColorSpace_setPrimaries2(self.h, whitePoint.h, redPoint.h, greenPoint.h, bluePoint.h)
+  fcQColorSpace_setPrimariesWhitePointRedPointGreenPointBluePoint(self.h, whitePoint.h, redPoint.h, greenPoint.h, bluePoint.h)
 
 proc isValid*(self: gen_qcolorspace_types.QColorSpace): bool =
   fcQColorSpace_isValid(self.h)
@@ -145,10 +145,10 @@ proc ToQVariant*(self: gen_qcolorspace_types.QColorSpace): gen_qvariant_types.QV
   gen_qvariant_types.QVariant(h: fcQColorSpace_ToQVariant(self.h), owned: true)
 
 proc setTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunction: cint, gamma: float32): void =
-  fcQColorSpace_setTransferFunction2(self.h, cint(transferFunction), gamma)
+  fcQColorSpace_setTransferFunctionTransferFunctionGamma(self.h, cint(transferFunction), gamma)
 
 proc withTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunction: cint, gamma: float32): gen_qcolorspace_types.QColorSpace =
-  gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_withTransferFunction2(self.h, cint(transferFunction), gamma), owned: true)
+  gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_withTransferFunctionTransferFunctionGamma(self.h, cint(transferFunction), gamma), owned: true)
 
 proc create*(T: type gen_qcolorspace_types.QColorSpace): gen_qcolorspace_types.QColorSpace =
   let tmp = gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_new(), owned: true)
@@ -170,8 +170,8 @@ proc create*(T: type gen_qcolorspace_types.QColorSpace,
   let tmp = gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_new5(whitePoint.h, redPoint.h, greenPoint.h, bluePoint.h, cint(transferFunction)), owned: true)
   tmp
 proc create*(T: type gen_qcolorspace_types.QColorSpace,
-    colorSpace: gen_qcolorspace_types.QColorSpace): gen_qcolorspace_types.QColorSpace =
-  let tmp = gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_new6(colorSpace.h), owned: true)
+    fromVal: gen_qcolorspace_types.QColorSpace): gen_qcolorspace_types.QColorSpace =
+  let tmp = gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_new6(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qcolorspace_types.QColorSpace,
     primaries: cint, transferFunction: cint, gamma: float32): gen_qcolorspace_types.QColorSpace =

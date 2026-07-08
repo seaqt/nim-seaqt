@@ -50,7 +50,7 @@ export
 
 type cQNetworkCookie*{.exportc: "QNetworkCookie", incompleteStruct.} = object
 
-proc fcQNetworkCookie_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkCookie_operatorAssign".}
+proc fcQNetworkCookie_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QNetworkCookie_operatorAssign".}
 proc fcQNetworkCookie_swap(self: pointer, other: pointer): void {.importc: "QNetworkCookie_swap".}
 proc fcQNetworkCookie_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkCookie_operatorEqual".}
 proc fcQNetworkCookie_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QNetworkCookie_operatorNotEqual".}
@@ -73,14 +73,14 @@ proc fcQNetworkCookie_toRawForm(self: pointer): struct_seaqt_string {.importc: "
 proc fcQNetworkCookie_hasSameIdentifier(self: pointer, other: pointer): bool {.importc: "QNetworkCookie_hasSameIdentifier".}
 proc fcQNetworkCookie_normalize(self: pointer, url: pointer): void {.importc: "QNetworkCookie_normalize".}
 proc fcQNetworkCookie_parseCookies(cookieString: struct_seaqt_string): struct_seaqt_array {.importc: "QNetworkCookie_parseCookies".}
-proc fcQNetworkCookie_toRawFormWithForm(self: pointer, form: cint): struct_seaqt_string {.importc: "QNetworkCookie_toRawFormWithForm".}
+proc fcQNetworkCookie_toRawFormForm(self: pointer, form: cint): struct_seaqt_string {.importc: "QNetworkCookie_toRawForm_form".}
 proc fcQNetworkCookie_new(): ptr cQNetworkCookie {.importc: "QNetworkCookie_new".}
-proc fcQNetworkCookie_new2(other: pointer): ptr cQNetworkCookie {.importc: "QNetworkCookie_new2".}
-proc fcQNetworkCookie_new3(name: struct_seaqt_string): ptr cQNetworkCookie {.importc: "QNetworkCookie_new3".}
-proc fcQNetworkCookie_new4(name: struct_seaqt_string, value: struct_seaqt_string): ptr cQNetworkCookie {.importc: "QNetworkCookie_new4".}
+proc fcQNetworkCookie_new2(fromVal: pointer): ptr cQNetworkCookie {.importc: "QNetworkCookie_new_from".}
+proc fcQNetworkCookie_new3(name: struct_seaqt_string): ptr cQNetworkCookie {.importc: "QNetworkCookie_new_name".}
+proc fcQNetworkCookie_new4(name: struct_seaqt_string, value: struct_seaqt_string): ptr cQNetworkCookie {.importc: "QNetworkCookie_new_name_value".}
 
-proc operatorAssign*(self: gen_qnetworkcookie_types.QNetworkCookie, other: gen_qnetworkcookie_types.QNetworkCookie): void =
-  fcQNetworkCookie_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qnetworkcookie_types.QNetworkCookie, fromVal: gen_qnetworkcookie_types.QNetworkCookie): void =
+  fcQNetworkCookie_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qnetworkcookie_types.QNetworkCookie, other: gen_qnetworkcookie_types.QNetworkCookie): void =
   fcQNetworkCookie_swap(self.h, other.h)
@@ -170,7 +170,7 @@ proc parseCookies*(_: type gen_qnetworkcookie_types.QNetworkCookie, cookieString
   vx_ret
 
 proc toRawForm*(self: gen_qnetworkcookie_types.QNetworkCookie, form: cint): seq[byte] =
-  var v_bytearray = fcQNetworkCookie_toRawFormWithForm(self.h, cint(form))
+  var v_bytearray = fcQNetworkCookie_toRawFormForm(self.h, cint(form))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -179,8 +179,8 @@ proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie): gen_qnetworkcooki
   let tmp = gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new(), owned: true)
   tmp
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
-    other: gen_qnetworkcookie_types.QNetworkCookie): gen_qnetworkcookie_types.QNetworkCookie =
-  let tmp = gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new2(other.h), owned: true)
+    fromVal: gen_qnetworkcookie_types.QNetworkCookie): gen_qnetworkcookie_types.QNetworkCookie =
+  let tmp = gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
     name: openArray[byte]): gen_qnetworkcookie_types.QNetworkCookie =

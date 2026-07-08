@@ -70,8 +70,8 @@ type cQSoundEffect*{.exportc: "QSoundEffect", incompleteStruct.} = object
 proc fcQSoundEffect_metaObject(self: pointer): pointer {.importc: "QSoundEffect_metaObject".}
 proc fcQSoundEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QSoundEffect_metacast".}
 proc fcQSoundEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSoundEffect_metacall".}
-proc fcQSoundEffect_tr(s: cstring): struct_seaqt_string {.importc: "QSoundEffect_tr".}
-proc fcQSoundEffect_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSoundEffect_trUtf8".}
+proc fcQSoundEffect_trS(s: cstring): struct_seaqt_string {.importc: "QSoundEffect_tr_s".}
+proc fcQSoundEffect_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSoundEffect_trUtf8_s".}
 proc fcQSoundEffect_supportedMimeTypes(): struct_seaqt_array {.importc: "QSoundEffect_supportedMimeTypes".}
 proc fcQSoundEffect_source(self: pointer): pointer {.importc: "QSoundEffect_source".}
 proc fcQSoundEffect_setSource(self: pointer, url: pointer): void {.importc: "QSoundEffect_setSource".}
@@ -107,10 +107,10 @@ proc fcQSoundEffect_categoryChanged(self: pointer): void {.importc: "QSoundEffec
 proc fcQSoundEffect_connect_categoryChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSoundEffect_connect_categoryChanged".}
 proc fcQSoundEffect_play(self: pointer): void {.importc: "QSoundEffect_play".}
 proc fcQSoundEffect_stop(self: pointer): void {.importc: "QSoundEffect_stop".}
-proc fcQSoundEffect_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSoundEffect_tr2".}
-proc fcQSoundEffect_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSoundEffect_tr3".}
-proc fcQSoundEffect_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSoundEffect_trUtf82".}
-proc fcQSoundEffect_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSoundEffect_trUtf83".}
+proc fcQSoundEffect_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSoundEffect_tr_s_c".}
+proc fcQSoundEffect_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSoundEffect_tr_s_c_n".}
+proc fcQSoundEffect_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSoundEffect_trUtf8_s_c".}
+proc fcQSoundEffect_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSoundEffect_trUtf8_s_c_n".}
 proc fcQSoundEffect_vdata(self: pointer): ptr pointer {.importc: "QSoundEffect_vdata".}
 proc fvdata_cQSoundEffect(self: pointer): pointer {.importc: "vdata_QSoundEffect".}
 
@@ -141,9 +141,9 @@ proc fcQSoundEffect_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQSoundEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSoundEffect_protectedbase_receivers".}
 proc fcQSoundEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSoundEffect_protectedbase_isSignalConnected".}
 proc fcQSoundEffect_new(vtbl: pointer, vdata: csize_t): ptr cQSoundEffect {.importc: "QSoundEffect_new".}
-proc fcQSoundEffect_new2(vtbl: pointer, vdata: csize_t, audioDevice: pointer): ptr cQSoundEffect {.importc: "QSoundEffect_new2".}
-proc fcQSoundEffect_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSoundEffect {.importc: "QSoundEffect_new3".}
-proc fcQSoundEffect_new4(vtbl: pointer, vdata: csize_t, audioDevice: pointer, parent: pointer): ptr cQSoundEffect {.importc: "QSoundEffect_new4".}
+proc fcQSoundEffect_new2(vtbl: pointer, vdata: csize_t, audioDevice: pointer): ptr cQSoundEffect {.importc: "QSoundEffect_new_audioDevice".}
+proc fcQSoundEffect_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSoundEffect {.importc: "QSoundEffect_new_parent".}
+proc fcQSoundEffect_new4(vtbl: pointer, vdata: csize_t, audioDevice: pointer, parent: pointer): ptr cQSoundEffect {.importc: "QSoundEffect_new_audioDevice_parent".}
 proc fcQSoundEffect_staticMetaObject(): pointer {.importc: "QSoundEffect_staticMetaObject".}
 
 proc metaObject*(self: gen_qsoundeffect_types.QSoundEffect): gen_qobjectdefs_types.QMetaObject =
@@ -156,13 +156,13 @@ proc metacall*(self: gen_qsoundeffect_types.QSoundEffect, param1: cint, param2: 
   fcQSoundEffect_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsoundeffect_types.QSoundEffect, s: cstring): string =
-  let v_ms = fcQSoundEffect_tr(s)
+  let v_ms = fcQSoundEffect_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsoundeffect_types.QSoundEffect, s: cstring): string =
-  let v_ms = fcQSoundEffect_trUtf8(s)
+  let v_ms = fcQSoundEffect_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -393,25 +393,25 @@ proc stop*(self: gen_qsoundeffect_types.QSoundEffect): void =
   fcQSoundEffect_stop(self.h)
 
 proc tr*(_: type gen_qsoundeffect_types.QSoundEffect, s: cstring, c: cstring): string =
-  let v_ms = fcQSoundEffect_tr2(s, c)
+  let v_ms = fcQSoundEffect_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsoundeffect_types.QSoundEffect, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSoundEffect_tr3(s, c, n)
+  let v_ms = fcQSoundEffect_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsoundeffect_types.QSoundEffect, s: cstring, c: cstring): string =
-  let v_ms = fcQSoundEffect_trUtf82(s, c)
+  let v_ms = fcQSoundEffect_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsoundeffect_types.QSoundEffect, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSoundEffect_trUtf83(s, c, n)
+  let v_ms = fcQSoundEffect_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

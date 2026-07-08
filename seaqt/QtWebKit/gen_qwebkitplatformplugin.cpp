@@ -90,8 +90,8 @@ QColor* QWebSelectData_itemForegroundColor(const QWebSelectData* self, int index
 	return new QColor(self->itemForegroundColor(static_cast<int>(index)));
 }
 
-void QWebSelectData_operatorAssign(QWebSelectData* self, QWebSelectData* param1) {
-	self->operator=(*param1);
+void QWebSelectData_operatorAssign(QWebSelectData* self, QWebSelectData* from) {
+	self->operator=(*from);
 }
 
 void QWebSelectData_delete(QWebSelectData* self) {
@@ -114,7 +114,7 @@ int QWebSelectMethod_metacall(QWebSelectMethod* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebSelectMethod_tr(const char* s) {
+struct seaqt_string QWebSelectMethod_tr_s(const char* s) {
 	QString _ret = QWebSelectMethod::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -125,7 +125,7 @@ struct seaqt_string QWebSelectMethod_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebSelectMethod_trUtf8(const char* s) {
+struct seaqt_string QWebSelectMethod_trUtf8_s(const char* s) {
 	QString _ret = QWebSelectMethod::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -185,7 +185,7 @@ void QWebSelectMethod_connect_didHide(QWebSelectMethod* self, intptr_t slot, voi
 	QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)()>(&QWebSelectMethod::didHide), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebSelectMethod_tr2(const char* s, const char* c) {
+struct seaqt_string QWebSelectMethod_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebSelectMethod::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -196,7 +196,7 @@ struct seaqt_string QWebSelectMethod_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebSelectMethod_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebSelectMethod_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebSelectMethod::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -207,7 +207,7 @@ struct seaqt_string QWebSelectMethod_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebSelectMethod_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebSelectMethod_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebSelectMethod::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -218,7 +218,7 @@ struct seaqt_string QWebSelectMethod_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebSelectMethod_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebSelectMethod_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebSelectMethod::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -264,8 +264,8 @@ QUrl* QWebNotificationData_openerPageUrl(const QWebNotificationData* self) {
 	return new QUrl(self->openerPageUrl());
 }
 
-void QWebNotificationData_operatorAssign(QWebNotificationData* self, QWebNotificationData* param1) {
-	self->operator=(*param1);
+void QWebNotificationData_operatorAssign(QWebNotificationData* self, QWebNotificationData* from) {
+	self->operator=(*from);
 }
 
 void QWebNotificationData_delete(QWebNotificationData* self) {
@@ -288,7 +288,7 @@ int QWebNotificationPresenter_metacall(QWebNotificationPresenter* self, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebNotificationPresenter_tr(const char* s) {
+struct seaqt_string QWebNotificationPresenter_tr_s(const char* s) {
 	QString _ret = QWebNotificationPresenter::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -299,7 +299,7 @@ struct seaqt_string QWebNotificationPresenter_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebNotificationPresenter_trUtf8(const char* s) {
+struct seaqt_string QWebNotificationPresenter_trUtf8_s(const char* s) {
 	QString _ret = QWebNotificationPresenter::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -344,7 +344,7 @@ void QWebNotificationPresenter_connect_notificationClicked(QWebNotificationPrese
 	QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClicked), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebNotificationPresenter_tr2(const char* s, const char* c) {
+struct seaqt_string QWebNotificationPresenter_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebNotificationPresenter::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -355,7 +355,7 @@ struct seaqt_string QWebNotificationPresenter_tr2(const char* s, const char* c) 
 	return _ms;
 }
 
-struct seaqt_string QWebNotificationPresenter_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebNotificationPresenter_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebNotificationPresenter::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -366,7 +366,7 @@ struct seaqt_string QWebNotificationPresenter_tr3(const char* s, const char* c, 
 	return _ms;
 }
 
-struct seaqt_string QWebNotificationPresenter_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebNotificationPresenter_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebNotificationPresenter::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -377,7 +377,7 @@ struct seaqt_string QWebNotificationPresenter_trUtf82(const char* s, const char*
 	return _ms;
 }
 
-struct seaqt_string QWebNotificationPresenter_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebNotificationPresenter_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebNotificationPresenter::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -409,7 +409,7 @@ int QWebHapticFeedbackPlayer_metacall(QWebHapticFeedbackPlayer* self, int param1
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebHapticFeedbackPlayer_tr(const char* s) {
+struct seaqt_string QWebHapticFeedbackPlayer_tr_s(const char* s) {
 	QString _ret = QWebHapticFeedbackPlayer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -420,7 +420,7 @@ struct seaqt_string QWebHapticFeedbackPlayer_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebHapticFeedbackPlayer_trUtf8(const char* s) {
+struct seaqt_string QWebHapticFeedbackPlayer_trUtf8_s(const char* s) {
 	QString _ret = QWebHapticFeedbackPlayer::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -436,7 +436,7 @@ void QWebHapticFeedbackPlayer_playHapticFeedback(QWebHapticFeedbackPlayer* self,
 	self->playHapticFeedback(static_cast<const QWebHapticFeedbackPlayer::HapticEvent>(param1), hapticType_QString, static_cast<const QWebHapticFeedbackPlayer::HapticStrength>(param3));
 }
 
-struct seaqt_string QWebHapticFeedbackPlayer_tr2(const char* s, const char* c) {
+struct seaqt_string QWebHapticFeedbackPlayer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebHapticFeedbackPlayer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -447,7 +447,7 @@ struct seaqt_string QWebHapticFeedbackPlayer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebHapticFeedbackPlayer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebHapticFeedbackPlayer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebHapticFeedbackPlayer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -458,7 +458,7 @@ struct seaqt_string QWebHapticFeedbackPlayer_tr3(const char* s, const char* c, i
 	return _ms;
 }
 
-struct seaqt_string QWebHapticFeedbackPlayer_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebHapticFeedbackPlayer_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebHapticFeedbackPlayer::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -469,7 +469,7 @@ struct seaqt_string QWebHapticFeedbackPlayer_trUtf82(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QWebHapticFeedbackPlayer_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebHapticFeedbackPlayer_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebHapticFeedbackPlayer::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -501,7 +501,7 @@ int QWebTouchModifier_metacall(QWebTouchModifier* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebTouchModifier_tr(const char* s) {
+struct seaqt_string QWebTouchModifier_tr_s(const char* s) {
 	QString _ret = QWebTouchModifier::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -512,7 +512,7 @@ struct seaqt_string QWebTouchModifier_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebTouchModifier_trUtf8(const char* s) {
+struct seaqt_string QWebTouchModifier_trUtf8_s(const char* s) {
 	QString _ret = QWebTouchModifier::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -527,7 +527,7 @@ unsigned int QWebTouchModifier_hitTestPaddingForTouch(const QWebTouchModifier* s
 	return self->hitTestPaddingForTouch(static_cast<const QWebTouchModifier::PaddingDirection>(param1));
 }
 
-struct seaqt_string QWebTouchModifier_tr2(const char* s, const char* c) {
+struct seaqt_string QWebTouchModifier_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebTouchModifier::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -538,7 +538,7 @@ struct seaqt_string QWebTouchModifier_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebTouchModifier_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebTouchModifier_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebTouchModifier::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -549,7 +549,7 @@ struct seaqt_string QWebTouchModifier_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebTouchModifier_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebTouchModifier_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebTouchModifier::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -560,7 +560,7 @@ struct seaqt_string QWebTouchModifier_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebTouchModifier_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebTouchModifier_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebTouchModifier::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -592,7 +592,7 @@ int QWebSpellChecker_metacall(QWebSpellChecker* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebSpellChecker_tr(const char* s) {
+struct seaqt_string QWebSpellChecker_tr_s(const char* s) {
 	QString _ret = QWebSpellChecker::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -603,7 +603,7 @@ struct seaqt_string QWebSpellChecker_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebSpellChecker_trUtf8(const char* s) {
+struct seaqt_string QWebSpellChecker_trUtf8_s(const char* s) {
 	QString _ret = QWebSpellChecker::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -681,7 +681,7 @@ void QWebSpellChecker_checkGrammarOfString(QWebSpellChecker* self, struct seaqt_
 	self->checkGrammarOfString(param1_QString, param2_QList, static_cast<int*>(badGrammarLocation), static_cast<int*>(badGrammarLength));
 }
 
-struct seaqt_string QWebSpellChecker_tr2(const char* s, const char* c) {
+struct seaqt_string QWebSpellChecker_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebSpellChecker::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -692,7 +692,7 @@ struct seaqt_string QWebSpellChecker_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebSpellChecker_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebSpellChecker_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebSpellChecker::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -703,7 +703,7 @@ struct seaqt_string QWebSpellChecker_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebSpellChecker_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebSpellChecker_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebSpellChecker::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -714,7 +714,7 @@ struct seaqt_string QWebSpellChecker_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebSpellChecker_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebSpellChecker_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebSpellChecker::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -738,16 +738,16 @@ QObject* QWebKitPlatformPlugin_createExtension(const QWebKitPlatformPlugin* self
 	return self->createExtension(static_cast<QWebKitPlatformPlugin::Extension>(param1));
 }
 
-void QWebKitPlatformPlugin_operatorAssign(QWebKitPlatformPlugin* self, QWebKitPlatformPlugin* param1) {
-	self->operator=(*param1);
+void QWebKitPlatformPlugin_operatorAssign(QWebKitPlatformPlugin* self, QWebKitPlatformPlugin* from) {
+	self->operator=(*from);
 }
 
 void QWebKitPlatformPlugin_delete(QWebKitPlatformPlugin* self) {
 	delete self;
 }
 
-QWebSpellChecker__GrammarDetail* QWebSpellChecker__GrammarDetail_new(QWebSpellChecker__GrammarDetail* param1) {
-	return new (std::nothrow) QWebSpellChecker__GrammarDetail(*param1);
+QWebSpellChecker__GrammarDetail* QWebSpellChecker__GrammarDetail_new(QWebSpellChecker__GrammarDetail* from) {
+	return new (std::nothrow) QWebSpellChecker__GrammarDetail(*from);
 }
 
 int QWebSpellChecker__GrammarDetail_location(const QWebSpellChecker__GrammarDetail* self) {
@@ -813,8 +813,8 @@ void QWebSpellChecker__GrammarDetail_setUserDescription(QWebSpellChecker__Gramma
 	self->userDescription = userDescription_QString;
 }
 
-void QWebSpellChecker__GrammarDetail_operatorAssign(QWebSpellChecker__GrammarDetail* self, QWebSpellChecker__GrammarDetail* param1) {
-	self->operator=(*param1);
+void QWebSpellChecker__GrammarDetail_operatorAssign(QWebSpellChecker__GrammarDetail* self, QWebSpellChecker__GrammarDetail* from) {
+	self->operator=(*from);
 }
 
 void QWebSpellChecker__GrammarDetail_delete(QWebSpellChecker__GrammarDetail* self) {

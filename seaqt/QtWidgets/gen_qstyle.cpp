@@ -84,55 +84,55 @@ public:
 	friend int QStyle_virtualbase_metacall(VirtualQStyle* self, int param1, int param2, void** param3);
 
 	virtual void polish(QWidget* widget) override {
-		if (vtbl->polish == 0) {
+		if (vtbl->polish_widget == 0) {
 			QStyle::polish(widget);
 			return;
 		}
 
 		QWidget* sigval1 = widget;
-		vtbl->polish(this, sigval1);
+		vtbl->polish_widget(this, sigval1);
 	}
 
-	friend void QStyle_virtualbase_polish(VirtualQStyle* self, QWidget* widget);
+	friend void QStyle_virtualbase_polish_widget(VirtualQStyle* self, QWidget* widget);
 
 	virtual void unpolish(QWidget* widget) override {
-		if (vtbl->unpolish == 0) {
+		if (vtbl->unpolish_widget == 0) {
 			QStyle::unpolish(widget);
 			return;
 		}
 
 		QWidget* sigval1 = widget;
-		vtbl->unpolish(this, sigval1);
+		vtbl->unpolish_widget(this, sigval1);
 	}
 
-	friend void QStyle_virtualbase_unpolish(VirtualQStyle* self, QWidget* widget);
+	friend void QStyle_virtualbase_unpolish_widget(VirtualQStyle* self, QWidget* widget);
 
 	virtual void polish(QApplication* application) override {
-		if (vtbl->polishWithApplication == 0) {
+		if (vtbl->polish_application == 0) {
 			QStyle::polish(application);
 			return;
 		}
 
 		QApplication* sigval1 = application;
-		vtbl->polishWithApplication(this, sigval1);
+		vtbl->polish_application(this, sigval1);
 	}
 
-	friend void QStyle_virtualbase_polishWithApplication(VirtualQStyle* self, QApplication* application);
+	friend void QStyle_virtualbase_polish_application(VirtualQStyle* self, QApplication* application);
 
 	virtual void unpolish(QApplication* application) override {
-		if (vtbl->unpolishWithApplication == 0) {
+		if (vtbl->unpolish_application == 0) {
 			QStyle::unpolish(application);
 			return;
 		}
 
 		QApplication* sigval1 = application;
-		vtbl->unpolishWithApplication(this, sigval1);
+		vtbl->unpolish_application(this, sigval1);
 	}
 
-	friend void QStyle_virtualbase_unpolishWithApplication(VirtualQStyle* self, QApplication* application);
+	friend void QStyle_virtualbase_unpolish_application(VirtualQStyle* self, QApplication* application);
 
 	virtual void polish(QPalette& palette) override {
-		if (vtbl->polishWithPalette == 0) {
+		if (vtbl->polish_palette == 0) {
 			QStyle::polish(palette);
 			return;
 		}
@@ -140,10 +140,10 @@ public:
 		QPalette& palette_ret = palette;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = &palette_ret;
-		vtbl->polishWithPalette(this, sigval1);
+		vtbl->polish_palette(this, sigval1);
 	}
 
-	friend void QStyle_virtualbase_polishWithPalette(VirtualQStyle* self, QPalette* palette);
+	friend void QStyle_virtualbase_polish_palette(VirtualQStyle* self, QPalette* palette);
 
 	virtual QRect itemTextRect(const QFontMetrics& fm, const QRect& r, int flags, bool enabled, const QString& text) const override {
 		if (vtbl->itemTextRect == 0) {
@@ -569,7 +569,7 @@ int QStyle_metacall(QStyle* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QStyle_tr(const char* s) {
+struct seaqt_string QStyle_tr_s(const char* s) {
 	QString _ret = QStyle::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -580,7 +580,7 @@ struct seaqt_string QStyle_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QStyle_trUtf8(const char* s) {
+struct seaqt_string QStyle_trUtf8_s(const char* s) {
 	QString _ret = QStyle::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -591,23 +591,23 @@ struct seaqt_string QStyle_trUtf8(const char* s) {
 	return _ms;
 }
 
-void QStyle_polish(QStyle* self, QWidget* widget) {
+void QStyle_polish_widget(QStyle* self, QWidget* widget) {
 	self->polish(widget);
 }
 
-void QStyle_unpolish(QStyle* self, QWidget* widget) {
+void QStyle_unpolish_widget(QStyle* self, QWidget* widget) {
 	self->unpolish(widget);
 }
 
-void QStyle_polishWithApplication(QStyle* self, QApplication* application) {
+void QStyle_polish_application(QStyle* self, QApplication* application) {
 	self->polish(application);
 }
 
-void QStyle_unpolishWithApplication(QStyle* self, QApplication* application) {
+void QStyle_unpolish_application(QStyle* self, QApplication* application) {
 	self->unpolish(application);
 }
 
-void QStyle_polishWithPalette(QStyle* self, QPalette* palette) {
+void QStyle_polish_palette(QStyle* self, QPalette* palette) {
 	self->polish(*palette);
 }
 
@@ -690,11 +690,11 @@ QPoint* QStyle_visualPos(int direction, QRect* boundingRect, QPoint* logicalPos)
 	return new QPoint(QStyle::visualPos(static_cast<Qt::LayoutDirection>(direction), *boundingRect, *logicalPos));
 }
 
-int QStyle_sliderPositionFromValue(int min, int max, int val, int space) {
+int QStyle_sliderPositionFromValue_min_max_val_space(int min, int max, int val, int space) {
 	return QStyle::sliderPositionFromValue(static_cast<int>(min), static_cast<int>(max), static_cast<int>(val), static_cast<int>(space));
 }
 
-int QStyle_sliderValueFromPosition(int min, int max, int pos, int space) {
+int QStyle_sliderValueFromPosition_min_max_pos_space(int min, int max, int pos, int space) {
 	return QStyle::sliderValueFromPosition(static_cast<int>(min), static_cast<int>(max), static_cast<int>(pos), static_cast<int>(space));
 }
 
@@ -711,7 +711,7 @@ int QStyle_layoutSpacing(const QStyle* self, int control1, int control2, int ori
 	return self->layoutSpacing(static_cast<QSizePolicy::ControlType>(control1), static_cast<QSizePolicy::ControlType>(control2), static_cast<Qt::Orientation>(orientation), option, widget);
 }
 
-int QStyle_combinedLayoutSpacing(const QStyle* self, int controls1, int controls2, int orientation) {
+int QStyle_combinedLayoutSpacing_controls1_controls2_orientation(const QStyle* self, int controls1, int controls2, int orientation) {
 	return self->combinedLayoutSpacing(static_cast<QSizePolicy::ControlTypes>(controls1), static_cast<QSizePolicy::ControlTypes>(controls2), static_cast<Qt::Orientation>(orientation));
 }
 
@@ -719,7 +719,7 @@ QStyle* QStyle_proxy(const QStyle* self) {
 	return (QStyle*) self->proxy();
 }
 
-struct seaqt_string QStyle_tr2(const char* s, const char* c) {
+struct seaqt_string QStyle_tr_s_c(const char* s, const char* c) {
 	QString _ret = QStyle::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -730,7 +730,7 @@ struct seaqt_string QStyle_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QStyle_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QStyle_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QStyle::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -741,7 +741,7 @@ struct seaqt_string QStyle_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QStyle_trUtf82(const char* s, const char* c) {
+struct seaqt_string QStyle_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QStyle::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -752,7 +752,7 @@ struct seaqt_string QStyle_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QStyle_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QStyle_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QStyle::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -763,19 +763,19 @@ struct seaqt_string QStyle_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-int QStyle_sliderPositionFromValue2(int min, int max, int val, int space, bool upsideDown) {
+int QStyle_sliderPositionFromValue_min_max_val_space_upsideDown(int min, int max, int val, int space, bool upsideDown) {
 	return QStyle::sliderPositionFromValue(static_cast<int>(min), static_cast<int>(max), static_cast<int>(val), static_cast<int>(space), upsideDown);
 }
 
-int QStyle_sliderValueFromPosition2(int min, int max, int pos, int space, bool upsideDown) {
+int QStyle_sliderValueFromPosition_min_max_pos_space_upsideDown(int min, int max, int pos, int space, bool upsideDown) {
 	return QStyle::sliderValueFromPosition(static_cast<int>(min), static_cast<int>(max), static_cast<int>(pos), static_cast<int>(space), upsideDown);
 }
 
-int QStyle_combinedLayoutSpacing2(const QStyle* self, int controls1, int controls2, int orientation, QStyleOption* option) {
+int QStyle_combinedLayoutSpacing_controls1_controls2_orientation_option(const QStyle* self, int controls1, int controls2, int orientation, QStyleOption* option) {
 	return self->combinedLayoutSpacing(static_cast<QSizePolicy::ControlTypes>(controls1), static_cast<QSizePolicy::ControlTypes>(controls2), static_cast<Qt::Orientation>(orientation), option);
 }
 
-int QStyle_combinedLayoutSpacing3(const QStyle* self, int controls1, int controls2, int orientation, QStyleOption* option, QWidget* widget) {
+int QStyle_combinedLayoutSpacing_controls1_controls2_orientation_option_widget(const QStyle* self, int controls1, int controls2, int orientation, QStyleOption* option, QWidget* widget) {
 	return self->combinedLayoutSpacing(static_cast<QSizePolicy::ControlTypes>(controls1), static_cast<QSizePolicy::ControlTypes>(controls2), static_cast<Qt::Orientation>(orientation), option, widget);
 }
 
@@ -798,27 +798,27 @@ int QStyle_virtualbase_metacall(VirtualQStyle* self, int param1, int param2, voi
 	return self->QStyle::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QStyle_virtualbase_polish(VirtualQStyle* self, QWidget* widget) {
+void QStyle_virtualbase_polish_widget(VirtualQStyle* self, QWidget* widget) {
 
 	self->QStyle::polish(widget);
 }
 
-void QStyle_virtualbase_unpolish(VirtualQStyle* self, QWidget* widget) {
+void QStyle_virtualbase_unpolish_widget(VirtualQStyle* self, QWidget* widget) {
 
 	self->QStyle::unpolish(widget);
 }
 
-void QStyle_virtualbase_polishWithApplication(VirtualQStyle* self, QApplication* application) {
+void QStyle_virtualbase_polish_application(VirtualQStyle* self, QApplication* application) {
 
 	self->QStyle::polish(application);
 }
 
-void QStyle_virtualbase_unpolishWithApplication(VirtualQStyle* self, QApplication* application) {
+void QStyle_virtualbase_unpolish_application(VirtualQStyle* self, QApplication* application) {
 
 	self->QStyle::unpolish(application);
 }
 
-void QStyle_virtualbase_polishWithPalette(VirtualQStyle* self, QPalette* palette) {
+void QStyle_virtualbase_polish_palette(VirtualQStyle* self, QPalette* palette) {
 
 	self->QStyle::polish(*palette);
 }

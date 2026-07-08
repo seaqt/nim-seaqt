@@ -67,14 +67,14 @@ void* QGesture_vdata(VirtualQGesture* self);
 VirtualQGesture* vdata_QGesture(void* vdata);
 
 VirtualQGesture* QGesture_new(const QGesture_VTable* vtbl, size_t vdata);
-VirtualQGesture* QGesture_new2(const QGesture_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQGesture* QGesture_new_parent(const QGesture_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QGesture_virtbase(QGesture* src, QObject** outptr_QObject);
 QMetaObject* QGesture_metaObject(const QGesture* self);
 void* QGesture_metacast(QGesture* self, const char* param1);
 int QGesture_metacall(QGesture* self, int param1, int param2, void** param3);
-struct seaqt_string QGesture_tr(const char* s);
-struct seaqt_string QGesture_trUtf8(const char* s);
+struct seaqt_string QGesture_tr_s(const char* s);
+struct seaqt_string QGesture_trUtf8_s(const char* s);
 int QGesture_gestureType(const QGesture* self);
 int QGesture_state(const QGesture* self);
 QPointF* QGesture_hotSpot(const QGesture* self);
@@ -83,10 +83,10 @@ bool QGesture_hasHotSpot(const QGesture* self);
 void QGesture_unsetHotSpot(QGesture* self);
 void QGesture_setGestureCancelPolicy(QGesture* self, int policy);
 int QGesture_gestureCancelPolicy(const QGesture* self);
-struct seaqt_string QGesture_tr2(const char* s, const char* c);
-struct seaqt_string QGesture_tr3(const char* s, const char* c, int n);
-struct seaqt_string QGesture_trUtf82(const char* s, const char* c);
-struct seaqt_string QGesture_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QGesture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGesture_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QGesture_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QGesture_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGesture_virtualbase_metaObject(const VirtualQGesture* self);
 void* QGesture_virtualbase_metacast(VirtualQGesture* self, const char* param1);
@@ -126,14 +126,14 @@ void* QPanGesture_vdata(VirtualQPanGesture* self);
 VirtualQPanGesture* vdata_QPanGesture(void* vdata);
 
 VirtualQPanGesture* QPanGesture_new(const QPanGesture_VTable* vtbl, size_t vdata);
-VirtualQPanGesture* QPanGesture_new2(const QPanGesture_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPanGesture* QPanGesture_new_parent(const QPanGesture_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QPanGesture_virtbase(QPanGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QPanGesture_metaObject(const QPanGesture* self);
 void* QPanGesture_metacast(QPanGesture* self, const char* param1);
 int QPanGesture_metacall(QPanGesture* self, int param1, int param2, void** param3);
-struct seaqt_string QPanGesture_tr(const char* s);
-struct seaqt_string QPanGesture_trUtf8(const char* s);
+struct seaqt_string QPanGesture_tr_s(const char* s);
+struct seaqt_string QPanGesture_trUtf8_s(const char* s);
 QPointF* QPanGesture_lastOffset(const QPanGesture* self);
 QPointF* QPanGesture_offset(const QPanGesture* self);
 QPointF* QPanGesture_delta(const QPanGesture* self);
@@ -141,10 +141,10 @@ double QPanGesture_acceleration(const QPanGesture* self);
 void QPanGesture_setLastOffset(QPanGesture* self, QPointF* value);
 void QPanGesture_setOffset(QPanGesture* self, QPointF* value);
 void QPanGesture_setAcceleration(QPanGesture* self, double value);
-struct seaqt_string QPanGesture_tr2(const char* s, const char* c);
-struct seaqt_string QPanGesture_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPanGesture_trUtf82(const char* s, const char* c);
-struct seaqt_string QPanGesture_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QPanGesture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPanGesture_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPanGesture_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPanGesture_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPanGesture_virtualbase_metaObject(const VirtualQPanGesture* self);
 void* QPanGesture_virtualbase_metacast(VirtualQPanGesture* self, const char* param1);
@@ -184,14 +184,14 @@ void* QPinchGesture_vdata(VirtualQPinchGesture* self);
 VirtualQPinchGesture* vdata_QPinchGesture(void* vdata);
 
 VirtualQPinchGesture* QPinchGesture_new(const QPinchGesture_VTable* vtbl, size_t vdata);
-VirtualQPinchGesture* QPinchGesture_new2(const QPinchGesture_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPinchGesture* QPinchGesture_new_parent(const QPinchGesture_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QPinchGesture_virtbase(QPinchGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QPinchGesture_metaObject(const QPinchGesture* self);
 void* QPinchGesture_metacast(QPinchGesture* self, const char* param1);
 int QPinchGesture_metacall(QPinchGesture* self, int param1, int param2, void** param3);
-struct seaqt_string QPinchGesture_tr(const char* s);
-struct seaqt_string QPinchGesture_trUtf8(const char* s);
+struct seaqt_string QPinchGesture_tr_s(const char* s);
+struct seaqt_string QPinchGesture_trUtf8_s(const char* s);
 int QPinchGesture_totalChangeFlags(const QPinchGesture* self);
 void QPinchGesture_setTotalChangeFlags(QPinchGesture* self, int value);
 int QPinchGesture_changeFlags(const QPinchGesture* self);
@@ -214,10 +214,10 @@ double QPinchGesture_rotationAngle(const QPinchGesture* self);
 void QPinchGesture_setTotalRotationAngle(QPinchGesture* self, double value);
 void QPinchGesture_setLastRotationAngle(QPinchGesture* self, double value);
 void QPinchGesture_setRotationAngle(QPinchGesture* self, double value);
-struct seaqt_string QPinchGesture_tr2(const char* s, const char* c);
-struct seaqt_string QPinchGesture_tr3(const char* s, const char* c, int n);
-struct seaqt_string QPinchGesture_trUtf82(const char* s, const char* c);
-struct seaqt_string QPinchGesture_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QPinchGesture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPinchGesture_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QPinchGesture_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QPinchGesture_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPinchGesture_virtualbase_metaObject(const VirtualQPinchGesture* self);
 void* QPinchGesture_virtualbase_metacast(VirtualQPinchGesture* self, const char* param1);
@@ -257,22 +257,22 @@ void* QSwipeGesture_vdata(VirtualQSwipeGesture* self);
 VirtualQSwipeGesture* vdata_QSwipeGesture(void* vdata);
 
 VirtualQSwipeGesture* QSwipeGesture_new(const QSwipeGesture_VTable* vtbl, size_t vdata);
-VirtualQSwipeGesture* QSwipeGesture_new2(const QSwipeGesture_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSwipeGesture* QSwipeGesture_new_parent(const QSwipeGesture_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSwipeGesture_virtbase(QSwipeGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QSwipeGesture_metaObject(const QSwipeGesture* self);
 void* QSwipeGesture_metacast(QSwipeGesture* self, const char* param1);
 int QSwipeGesture_metacall(QSwipeGesture* self, int param1, int param2, void** param3);
-struct seaqt_string QSwipeGesture_tr(const char* s);
-struct seaqt_string QSwipeGesture_trUtf8(const char* s);
+struct seaqt_string QSwipeGesture_tr_s(const char* s);
+struct seaqt_string QSwipeGesture_trUtf8_s(const char* s);
 int QSwipeGesture_horizontalDirection(const QSwipeGesture* self);
 int QSwipeGesture_verticalDirection(const QSwipeGesture* self);
 double QSwipeGesture_swipeAngle(const QSwipeGesture* self);
 void QSwipeGesture_setSwipeAngle(QSwipeGesture* self, double value);
-struct seaqt_string QSwipeGesture_tr2(const char* s, const char* c);
-struct seaqt_string QSwipeGesture_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSwipeGesture_trUtf82(const char* s, const char* c);
-struct seaqt_string QSwipeGesture_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSwipeGesture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSwipeGesture_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSwipeGesture_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSwipeGesture_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSwipeGesture_virtualbase_metaObject(const VirtualQSwipeGesture* self);
 void* QSwipeGesture_virtualbase_metacast(VirtualQSwipeGesture* self, const char* param1);
@@ -312,20 +312,20 @@ void* QTapGesture_vdata(VirtualQTapGesture* self);
 VirtualQTapGesture* vdata_QTapGesture(void* vdata);
 
 VirtualQTapGesture* QTapGesture_new(const QTapGesture_VTable* vtbl, size_t vdata);
-VirtualQTapGesture* QTapGesture_new2(const QTapGesture_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQTapGesture* QTapGesture_new_parent(const QTapGesture_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QTapGesture_virtbase(QTapGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QTapGesture_metaObject(const QTapGesture* self);
 void* QTapGesture_metacast(QTapGesture* self, const char* param1);
 int QTapGesture_metacall(QTapGesture* self, int param1, int param2, void** param3);
-struct seaqt_string QTapGesture_tr(const char* s);
-struct seaqt_string QTapGesture_trUtf8(const char* s);
+struct seaqt_string QTapGesture_tr_s(const char* s);
+struct seaqt_string QTapGesture_trUtf8_s(const char* s);
 QPointF* QTapGesture_position(const QTapGesture* self);
 void QTapGesture_setPosition(QTapGesture* self, QPointF* pos);
-struct seaqt_string QTapGesture_tr2(const char* s, const char* c);
-struct seaqt_string QTapGesture_tr3(const char* s, const char* c, int n);
-struct seaqt_string QTapGesture_trUtf82(const char* s, const char* c);
-struct seaqt_string QTapGesture_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QTapGesture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTapGesture_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QTapGesture_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QTapGesture_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTapGesture_virtualbase_metaObject(const VirtualQTapGesture* self);
 void* QTapGesture_virtualbase_metacast(VirtualQTapGesture* self, const char* param1);
@@ -365,22 +365,22 @@ void* QTapAndHoldGesture_vdata(VirtualQTapAndHoldGesture* self);
 VirtualQTapAndHoldGesture* vdata_QTapAndHoldGesture(void* vdata);
 
 VirtualQTapAndHoldGesture* QTapAndHoldGesture_new(const QTapAndHoldGesture_VTable* vtbl, size_t vdata);
-VirtualQTapAndHoldGesture* QTapAndHoldGesture_new2(const QTapAndHoldGesture_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQTapAndHoldGesture* QTapAndHoldGesture_new_parent(const QTapAndHoldGesture_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QTapAndHoldGesture_virtbase(QTapAndHoldGesture* src, QGesture** outptr_QGesture);
 QMetaObject* QTapAndHoldGesture_metaObject(const QTapAndHoldGesture* self);
 void* QTapAndHoldGesture_metacast(QTapAndHoldGesture* self, const char* param1);
 int QTapAndHoldGesture_metacall(QTapAndHoldGesture* self, int param1, int param2, void** param3);
-struct seaqt_string QTapAndHoldGesture_tr(const char* s);
-struct seaqt_string QTapAndHoldGesture_trUtf8(const char* s);
+struct seaqt_string QTapAndHoldGesture_tr_s(const char* s);
+struct seaqt_string QTapAndHoldGesture_trUtf8_s(const char* s);
 QPointF* QTapAndHoldGesture_position(const QTapAndHoldGesture* self);
 void QTapAndHoldGesture_setPosition(QTapAndHoldGesture* self, QPointF* pos);
 void QTapAndHoldGesture_setTimeout(int msecs);
 int QTapAndHoldGesture_timeout();
-struct seaqt_string QTapAndHoldGesture_tr2(const char* s, const char* c);
-struct seaqt_string QTapAndHoldGesture_tr3(const char* s, const char* c, int n);
-struct seaqt_string QTapAndHoldGesture_trUtf82(const char* s, const char* c);
-struct seaqt_string QTapAndHoldGesture_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QTapAndHoldGesture_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTapAndHoldGesture_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QTapAndHoldGesture_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QTapAndHoldGesture_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTapAndHoldGesture_virtualbase_metaObject(const VirtualQTapAndHoldGesture* self);
 void* QTapAndHoldGesture_virtualbase_metacast(VirtualQTapAndHoldGesture* self, const char* param1);
@@ -401,26 +401,26 @@ bool QTapAndHoldGesture_protectedbase_isSignalConnected(const VirtualQTapAndHold
 const QMetaObject* QTapAndHoldGesture_staticMetaObject();
 void QTapAndHoldGesture_delete(QTapAndHoldGesture* self);
 
-QGestureEvent* QGestureEvent_new(struct seaqt_array /* of QGesture* */  gestures);
-QGestureEvent* QGestureEvent_new2(QGestureEvent* param1);
+QGestureEvent* QGestureEvent_new_gestures(struct seaqt_array /* of QGesture* */  gestures);
+QGestureEvent* QGestureEvent_new_from(QGestureEvent* from);
 
 void QGestureEvent_virtbase(QGestureEvent* src, QEvent** outptr_QEvent);
 struct seaqt_array /* of QGesture* */  QGestureEvent_gestures(const QGestureEvent* self);
 QGesture* QGestureEvent_gesture(const QGestureEvent* self, int type);
 struct seaqt_array /* of QGesture* */  QGestureEvent_activeGestures(const QGestureEvent* self);
 struct seaqt_array /* of QGesture* */  QGestureEvent_canceledGestures(const QGestureEvent* self);
-void QGestureEvent_setAccepted(QGestureEvent* self, QGesture* param1, bool param2);
-void QGestureEvent_accept(QGestureEvent* self, QGesture* param1);
-void QGestureEvent_ignore(QGestureEvent* self, QGesture* param1);
-bool QGestureEvent_isAccepted(const QGestureEvent* self, QGesture* param1);
-void QGestureEvent_setAccepted2(QGestureEvent* self, int param1, bool param2);
-void QGestureEvent_acceptWithQtGestureType(QGestureEvent* self, int param1);
-void QGestureEvent_ignoreWithQtGestureType(QGestureEvent* self, int param1);
-bool QGestureEvent_isAcceptedWithQtGestureType(const QGestureEvent* self, int param1);
+void QGestureEvent_setAccepted_QGesture_bool(QGestureEvent* self, QGesture* param1, bool param2);
+void QGestureEvent_accept_QGesture(QGestureEvent* self, QGesture* param1);
+void QGestureEvent_ignore_QGesture(QGestureEvent* self, QGesture* param1);
+bool QGestureEvent_isAccepted_QGesture(const QGestureEvent* self, QGesture* param1);
+void QGestureEvent_setAccepted_Qt_GestureType_bool(QGestureEvent* self, int param1, bool param2);
+void QGestureEvent_accept_Qt_GestureType(QGestureEvent* self, int param1);
+void QGestureEvent_ignore_Qt_GestureType(QGestureEvent* self, int param1);
+bool QGestureEvent_isAccepted_Qt_GestureType(const QGestureEvent* self, int param1);
 void QGestureEvent_setWidget(QGestureEvent* self, QWidget* widget);
 QWidget* QGestureEvent_widget(const QGestureEvent* self);
 QPointF* QGestureEvent_mapToGraphicsScene(const QGestureEvent* self, QPointF* gesturePoint);
-void QGestureEvent_operatorAssign(QGestureEvent* self, QGestureEvent* param1);
+void QGestureEvent_operatorAssign(QGestureEvent* self, QGestureEvent* from);
 
 void QGestureEvent_delete(QGestureEvent* self);
 

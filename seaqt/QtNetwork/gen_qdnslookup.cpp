@@ -33,12 +33,12 @@ QDnsDomainNameRecord* QDnsDomainNameRecord_new() {
 	return new (std::nothrow) QDnsDomainNameRecord();
 }
 
-QDnsDomainNameRecord* QDnsDomainNameRecord_new2(QDnsDomainNameRecord* other) {
-	return new (std::nothrow) QDnsDomainNameRecord(*other);
+QDnsDomainNameRecord* QDnsDomainNameRecord_new_from(QDnsDomainNameRecord* from) {
+	return new (std::nothrow) QDnsDomainNameRecord(*from);
 }
 
-void QDnsDomainNameRecord_operatorAssign(QDnsDomainNameRecord* self, QDnsDomainNameRecord* other) {
-	self->operator=(*other);
+void QDnsDomainNameRecord_operatorAssign(QDnsDomainNameRecord* self, QDnsDomainNameRecord* from) {
+	self->operator=(*from);
 }
 
 void QDnsDomainNameRecord_swap(QDnsDomainNameRecord* self, QDnsDomainNameRecord* other) {
@@ -80,12 +80,12 @@ QDnsHostAddressRecord* QDnsHostAddressRecord_new() {
 	return new (std::nothrow) QDnsHostAddressRecord();
 }
 
-QDnsHostAddressRecord* QDnsHostAddressRecord_new2(QDnsHostAddressRecord* other) {
-	return new (std::nothrow) QDnsHostAddressRecord(*other);
+QDnsHostAddressRecord* QDnsHostAddressRecord_new_from(QDnsHostAddressRecord* from) {
+	return new (std::nothrow) QDnsHostAddressRecord(*from);
 }
 
-void QDnsHostAddressRecord_operatorAssign(QDnsHostAddressRecord* self, QDnsHostAddressRecord* other) {
-	self->operator=(*other);
+void QDnsHostAddressRecord_operatorAssign(QDnsHostAddressRecord* self, QDnsHostAddressRecord* from) {
+	self->operator=(*from);
 }
 
 void QDnsHostAddressRecord_swap(QDnsHostAddressRecord* self, QDnsHostAddressRecord* other) {
@@ -120,12 +120,12 @@ QDnsMailExchangeRecord* QDnsMailExchangeRecord_new() {
 	return new (std::nothrow) QDnsMailExchangeRecord();
 }
 
-QDnsMailExchangeRecord* QDnsMailExchangeRecord_new2(QDnsMailExchangeRecord* other) {
-	return new (std::nothrow) QDnsMailExchangeRecord(*other);
+QDnsMailExchangeRecord* QDnsMailExchangeRecord_new_from(QDnsMailExchangeRecord* from) {
+	return new (std::nothrow) QDnsMailExchangeRecord(*from);
 }
 
-void QDnsMailExchangeRecord_operatorAssign(QDnsMailExchangeRecord* self, QDnsMailExchangeRecord* other) {
-	self->operator=(*other);
+void QDnsMailExchangeRecord_operatorAssign(QDnsMailExchangeRecord* self, QDnsMailExchangeRecord* from) {
+	self->operator=(*from);
 }
 
 void QDnsMailExchangeRecord_swap(QDnsMailExchangeRecord* self, QDnsMailExchangeRecord* other) {
@@ -172,12 +172,12 @@ QDnsServiceRecord* QDnsServiceRecord_new() {
 	return new (std::nothrow) QDnsServiceRecord();
 }
 
-QDnsServiceRecord* QDnsServiceRecord_new2(QDnsServiceRecord* other) {
-	return new (std::nothrow) QDnsServiceRecord(*other);
+QDnsServiceRecord* QDnsServiceRecord_new_from(QDnsServiceRecord* from) {
+	return new (std::nothrow) QDnsServiceRecord(*from);
 }
 
-void QDnsServiceRecord_operatorAssign(QDnsServiceRecord* self, QDnsServiceRecord* other) {
-	self->operator=(*other);
+void QDnsServiceRecord_operatorAssign(QDnsServiceRecord* self, QDnsServiceRecord* from) {
+	self->operator=(*from);
 }
 
 void QDnsServiceRecord_swap(QDnsServiceRecord* self, QDnsServiceRecord* other) {
@@ -234,12 +234,12 @@ QDnsTextRecord* QDnsTextRecord_new() {
 	return new (std::nothrow) QDnsTextRecord();
 }
 
-QDnsTextRecord* QDnsTextRecord_new2(QDnsTextRecord* other) {
-	return new (std::nothrow) QDnsTextRecord(*other);
+QDnsTextRecord* QDnsTextRecord_new_from(QDnsTextRecord* from) {
+	return new (std::nothrow) QDnsTextRecord(*from);
 }
 
-void QDnsTextRecord_operatorAssign(QDnsTextRecord* self, QDnsTextRecord* other) {
-	self->operator=(*other);
+void QDnsTextRecord_operatorAssign(QDnsTextRecord* self, QDnsTextRecord* from) {
+	self->operator=(*from);
 }
 
 void QDnsTextRecord_swap(QDnsTextRecord* self, QDnsTextRecord* other) {
@@ -439,30 +439,30 @@ VirtualQDnsLookup* QDnsLookup_new(const QDnsLookup_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQDnsLookup(vtbl) : nullptr;
 }
 
-VirtualQDnsLookup* QDnsLookup_new2(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name) {
+VirtualQDnsLookup* QDnsLookup_new_type_name(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDnsLookup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDnsLookup(vtbl, static_cast<QDnsLookup::Type>(type), name_QString) : nullptr;
 }
 
-VirtualQDnsLookup* QDnsLookup_new3(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QHostAddress* nameserver) {
+VirtualQDnsLookup* QDnsLookup_new_type_name_nameserver(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QHostAddress* nameserver) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDnsLookup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDnsLookup(vtbl, static_cast<QDnsLookup::Type>(type), name_QString, *nameserver) : nullptr;
 }
 
-VirtualQDnsLookup* QDnsLookup_new4(const QDnsLookup_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQDnsLookup* QDnsLookup_new_parent(const QDnsLookup_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDnsLookup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDnsLookup(vtbl, parent) : nullptr;
 }
 
-VirtualQDnsLookup* QDnsLookup_new5(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QObject* parent) {
+VirtualQDnsLookup* QDnsLookup_new_type_name_parent(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDnsLookup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDnsLookup(vtbl, static_cast<QDnsLookup::Type>(type), name_QString, parent) : nullptr;
 }
 
-VirtualQDnsLookup* QDnsLookup_new6(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QHostAddress* nameserver, QObject* parent) {
+VirtualQDnsLookup* QDnsLookup_new_type_name_nameserver_parent(const QDnsLookup_VTable* vtbl, size_t vdata, int type, struct seaqt_string name, QHostAddress* nameserver, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDnsLookup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDnsLookup(vtbl, static_cast<QDnsLookup::Type>(type), name_QString, *nameserver, parent) : nullptr;
@@ -484,7 +484,7 @@ int QDnsLookup_metacall(QDnsLookup* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDnsLookup_tr(const char* s) {
+struct seaqt_string QDnsLookup_tr_s(const char* s) {
 	QString _ret = QDnsLookup::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -495,7 +495,7 @@ struct seaqt_string QDnsLookup_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDnsLookup_trUtf8(const char* s) {
+struct seaqt_string QDnsLookup_trUtf8_s(const char* s) {
 	QString _ret = QDnsLookup::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -732,7 +732,7 @@ void QDnsLookup_connect_nameserverChanged(QDnsLookup* self, intptr_t slot, void 
 	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QHostAddress&)>(&QDnsLookup::nameserverChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDnsLookup_tr2(const char* s, const char* c) {
+struct seaqt_string QDnsLookup_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDnsLookup::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -743,7 +743,7 @@ struct seaqt_string QDnsLookup_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDnsLookup_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDnsLookup_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDnsLookup::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -754,7 +754,7 @@ struct seaqt_string QDnsLookup_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDnsLookup_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDnsLookup_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDnsLookup::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -765,7 +765,7 @@ struct seaqt_string QDnsLookup_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDnsLookup_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDnsLookup_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDnsLookup::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

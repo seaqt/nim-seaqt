@@ -113,14 +113,14 @@ void* QSortFilterProxyModel_vdata(VirtualQSortFilterProxyModel* self);
 VirtualQSortFilterProxyModel* vdata_QSortFilterProxyModel(void* vdata);
 
 VirtualQSortFilterProxyModel* QSortFilterProxyModel_new(const QSortFilterProxyModel_VTable* vtbl, size_t vdata);
-VirtualQSortFilterProxyModel* QSortFilterProxyModel_new2(const QSortFilterProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSortFilterProxyModel* QSortFilterProxyModel_new_parent(const QSortFilterProxyModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSortFilterProxyModel_virtbase(QSortFilterProxyModel* src, QAbstractProxyModel** outptr_QAbstractProxyModel);
 QMetaObject* QSortFilterProxyModel_metaObject(const QSortFilterProxyModel* self);
 void* QSortFilterProxyModel_metacast(QSortFilterProxyModel* self, const char* param1);
 int QSortFilterProxyModel_metacall(QSortFilterProxyModel* self, int param1, int param2, void** param3);
-struct seaqt_string QSortFilterProxyModel_tr(const char* s);
-struct seaqt_string QSortFilterProxyModel_trUtf8(const char* s);
+struct seaqt_string QSortFilterProxyModel_tr_s(const char* s);
+struct seaqt_string QSortFilterProxyModel_trUtf8_s(const char* s);
 void QSortFilterProxyModel_setSourceModel(QSortFilterProxyModel* self, QAbstractItemModel* sourceModel);
 QModelIndex* QSortFilterProxyModel_mapToSource(const QSortFilterProxyModel* self, QModelIndex* proxyIndex);
 QModelIndex* QSortFilterProxyModel_mapFromSource(const QSortFilterProxyModel* self, QModelIndex* sourceIndex);
@@ -146,10 +146,10 @@ int QSortFilterProxyModel_filterRole(const QSortFilterProxyModel* self);
 void QSortFilterProxyModel_setFilterRole(QSortFilterProxyModel* self, int role);
 bool QSortFilterProxyModel_isRecursiveFilteringEnabled(const QSortFilterProxyModel* self);
 void QSortFilterProxyModel_setRecursiveFilteringEnabled(QSortFilterProxyModel* self, bool recursive);
-void QSortFilterProxyModel_setFilterRegExp(QSortFilterProxyModel* self, struct seaqt_string pattern);
-void QSortFilterProxyModel_setFilterRegExpWithRegExp(QSortFilterProxyModel* self, QRegExp* regExp);
-void QSortFilterProxyModel_setFilterRegularExpression(QSortFilterProxyModel* self, struct seaqt_string pattern);
-void QSortFilterProxyModel_setFilterRegularExpressionWithRegularExpression(QSortFilterProxyModel* self, QRegularExpression* regularExpression);
+void QSortFilterProxyModel_setFilterRegExp_pattern(QSortFilterProxyModel* self, struct seaqt_string pattern);
+void QSortFilterProxyModel_setFilterRegExp_regExp(QSortFilterProxyModel* self, QRegExp* regExp);
+void QSortFilterProxyModel_setFilterRegularExpression_pattern(QSortFilterProxyModel* self, struct seaqt_string pattern);
+void QSortFilterProxyModel_setFilterRegularExpression_regularExpression(QSortFilterProxyModel* self, QRegularExpression* regularExpression);
 void QSortFilterProxyModel_setFilterWildcard(QSortFilterProxyModel* self, struct seaqt_string pattern);
 void QSortFilterProxyModel_setFilterFixedString(QSortFilterProxyModel* self, struct seaqt_string pattern);
 void QSortFilterProxyModel_clear(QSortFilterProxyModel* self);
@@ -196,10 +196,10 @@ void QSortFilterProxyModel_filterRoleChanged(QSortFilterProxyModel* self, int fi
 void QSortFilterProxyModel_connect_filterRoleChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QSortFilterProxyModel_recursiveFilteringEnabledChanged(QSortFilterProxyModel* self, bool recursiveFilteringEnabled);
 void QSortFilterProxyModel_connect_recursiveFilteringEnabledChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-struct seaqt_string QSortFilterProxyModel_tr2(const char* s, const char* c);
-struct seaqt_string QSortFilterProxyModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QSortFilterProxyModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QSortFilterProxyModel_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QSortFilterProxyModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSortFilterProxyModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QSortFilterProxyModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QSortFilterProxyModel_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSortFilterProxyModel_virtualbase_metaObject(const VirtualQSortFilterProxyModel* self);
 void* QSortFilterProxyModel_virtualbase_metacast(VirtualQSortFilterProxyModel* self, const char* param1);
@@ -257,7 +257,7 @@ void QSortFilterProxyModel_virtualbase_disconnectNotify(VirtualQSortFilterProxyM
 void QSortFilterProxyModel_protectedbase_filterChanged(VirtualQSortFilterProxyModel* self);
 void QSortFilterProxyModel_protectedbase_invalidateFilter(VirtualQSortFilterProxyModel* self);
 void QSortFilterProxyModel_protectedbase_resetInternalData(VirtualQSortFilterProxyModel* self);
-QModelIndex* QSortFilterProxyModel_protectedbase_createIndex(const VirtualQSortFilterProxyModel* self, int row, int column);
+QModelIndex* QSortFilterProxyModel_protectedbase_createIndex_row_column(const VirtualQSortFilterProxyModel* self, int row, int column);
 void QSortFilterProxyModel_protectedbase_encodeData(const VirtualQSortFilterProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QSortFilterProxyModel_protectedbase_decodeData(VirtualQSortFilterProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QSortFilterProxyModel_protectedbase_beginInsertRows(VirtualQSortFilterProxyModel* self, QModelIndex* parent, int first, int last);

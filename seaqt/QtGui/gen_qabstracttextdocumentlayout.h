@@ -106,8 +106,8 @@ void QAbstractTextDocumentLayout_virtbase(QAbstractTextDocumentLayout* src, QObj
 QMetaObject* QAbstractTextDocumentLayout_metaObject(const QAbstractTextDocumentLayout* self);
 void* QAbstractTextDocumentLayout_metacast(QAbstractTextDocumentLayout* self, const char* param1);
 int QAbstractTextDocumentLayout_metacall(QAbstractTextDocumentLayout* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractTextDocumentLayout_tr(const char* s);
-struct seaqt_string QAbstractTextDocumentLayout_trUtf8(const char* s);
+struct seaqt_string QAbstractTextDocumentLayout_tr_s(const char* s);
+struct seaqt_string QAbstractTextDocumentLayout_trUtf8_s(const char* s);
 void QAbstractTextDocumentLayout_draw(QAbstractTextDocumentLayout* self, QPainter* painter, QAbstractTextDocumentLayout__PaintContext* context);
 int QAbstractTextDocumentLayout_hitTest(const QAbstractTextDocumentLayout* self, QPointF* point, int accuracy);
 struct seaqt_string QAbstractTextDocumentLayout_anchorAt(const QAbstractTextDocumentLayout* self, QPointF* pos);
@@ -122,7 +122,7 @@ void QAbstractTextDocumentLayout_setPaintDevice(QAbstractTextDocumentLayout* sel
 QPaintDevice* QAbstractTextDocumentLayout_paintDevice(const QAbstractTextDocumentLayout* self);
 QTextDocument* QAbstractTextDocumentLayout_document(const QAbstractTextDocumentLayout* self);
 void QAbstractTextDocumentLayout_registerHandler(QAbstractTextDocumentLayout* self, int objectType, QObject* component);
-void QAbstractTextDocumentLayout_unregisterHandler(QAbstractTextDocumentLayout* self, int objectType);
+void QAbstractTextDocumentLayout_unregisterHandler_objectType(QAbstractTextDocumentLayout* self, int objectType);
 QTextObjectInterface* QAbstractTextDocumentLayout_handlerForObject(const QAbstractTextDocumentLayout* self, int objectType);
 void QAbstractTextDocumentLayout_update(QAbstractTextDocumentLayout* self);
 void QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
@@ -136,13 +136,13 @@ void QAbstractTextDocumentLayout_documentChanged(QAbstractTextDocumentLayout* se
 void QAbstractTextDocumentLayout_resizeInlineObject(QAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 void QAbstractTextDocumentLayout_positionInlineObject(QAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 void QAbstractTextDocumentLayout_drawInlineObject(QAbstractTextDocumentLayout* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
-struct seaqt_string QAbstractTextDocumentLayout_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractTextDocumentLayout_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractTextDocumentLayout_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractTextDocumentLayout_trUtf83(const char* s, const char* c, int n);
-void QAbstractTextDocumentLayout_unregisterHandler2(QAbstractTextDocumentLayout* self, int objectType, QObject* component);
-void QAbstractTextDocumentLayout_updateWithQRectF(QAbstractTextDocumentLayout* self, QRectF* param1);
-void QAbstractTextDocumentLayout_connect_updateWithQRectF(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t));
+struct seaqt_string QAbstractTextDocumentLayout_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractTextDocumentLayout_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractTextDocumentLayout_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractTextDocumentLayout_trUtf8_s_c_n(const char* s, const char* c, int n);
+void QAbstractTextDocumentLayout_unregisterHandler_objectType_component(QAbstractTextDocumentLayout* self, int objectType, QObject* component);
+void QAbstractTextDocumentLayout_update_QRectF(QAbstractTextDocumentLayout* self, QRectF* param1);
+void QAbstractTextDocumentLayout_connect_update_QRectF(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t));
 
 QMetaObject* QAbstractTextDocumentLayout_virtualbase_metaObject(const VirtualQAbstractTextDocumentLayout* self);
 void* QAbstractTextDocumentLayout_virtualbase_metacast(VirtualQAbstractTextDocumentLayout* self, const char* param1);
@@ -177,22 +177,22 @@ void QAbstractTextDocumentLayout_delete(QAbstractTextDocumentLayout* self);
 
 QSizeF* QTextObjectInterface_intrinsicSize(QTextObjectInterface* self, QTextDocument* doc, int posInDocument, QTextFormat* format);
 void QTextObjectInterface_drawObject(QTextObjectInterface* self, QPainter* painter, QRectF* rect, QTextDocument* doc, int posInDocument, QTextFormat* format);
-void QTextObjectInterface_operatorAssign(QTextObjectInterface* self, QTextObjectInterface* param1);
+void QTextObjectInterface_operatorAssign(QTextObjectInterface* self, QTextObjectInterface* from);
 
 void QTextObjectInterface_delete(QTextObjectInterface* self);
 
-QAbstractTextDocumentLayout__Selection* QAbstractTextDocumentLayout__Selection_new(QAbstractTextDocumentLayout__Selection* param1);
+QAbstractTextDocumentLayout__Selection* QAbstractTextDocumentLayout__Selection_new(QAbstractTextDocumentLayout__Selection* from);
 
 QTextCursor* QAbstractTextDocumentLayout__Selection_cursor(const QAbstractTextDocumentLayout__Selection* self);
 void QAbstractTextDocumentLayout__Selection_setCursor(QAbstractTextDocumentLayout__Selection* self, QTextCursor* cursor);
 QTextCharFormat* QAbstractTextDocumentLayout__Selection_format(const QAbstractTextDocumentLayout__Selection* self);
 void QAbstractTextDocumentLayout__Selection_setFormat(QAbstractTextDocumentLayout__Selection* self, QTextCharFormat* format);
-void QAbstractTextDocumentLayout__Selection_operatorAssign(QAbstractTextDocumentLayout__Selection* self, QAbstractTextDocumentLayout__Selection* param1);
+void QAbstractTextDocumentLayout__Selection_operatorAssign(QAbstractTextDocumentLayout__Selection* self, QAbstractTextDocumentLayout__Selection* from);
 
 void QAbstractTextDocumentLayout__Selection_delete(QAbstractTextDocumentLayout__Selection* self);
 
 QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new();
-QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new2(QAbstractTextDocumentLayout__PaintContext* param1);
+QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new_from(QAbstractTextDocumentLayout__PaintContext* from);
 
 int QAbstractTextDocumentLayout__PaintContext_cursorPosition(const QAbstractTextDocumentLayout__PaintContext* self);
 void QAbstractTextDocumentLayout__PaintContext_setCursorPosition(QAbstractTextDocumentLayout__PaintContext* self, int cursorPosition);
@@ -202,7 +202,7 @@ QRectF* QAbstractTextDocumentLayout__PaintContext_clip(const QAbstractTextDocume
 void QAbstractTextDocumentLayout__PaintContext_setClip(QAbstractTextDocumentLayout__PaintContext* self, QRectF* clip);
 struct seaqt_array /* of QAbstractTextDocumentLayout__Selection* */  QAbstractTextDocumentLayout__PaintContext_selections(const QAbstractTextDocumentLayout__PaintContext* self);
 void QAbstractTextDocumentLayout__PaintContext_setSelections(QAbstractTextDocumentLayout__PaintContext* self, struct seaqt_array /* of QAbstractTextDocumentLayout__Selection* */  selections);
-void QAbstractTextDocumentLayout__PaintContext_operatorAssign(QAbstractTextDocumentLayout__PaintContext* self, QAbstractTextDocumentLayout__PaintContext* param1);
+void QAbstractTextDocumentLayout__PaintContext_operatorAssign(QAbstractTextDocumentLayout__PaintContext* self, QAbstractTextDocumentLayout__PaintContext* from);
 
 void QAbstractTextDocumentLayout__PaintContext_delete(QAbstractTextDocumentLayout__PaintContext* self);
 

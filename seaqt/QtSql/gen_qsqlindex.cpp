@@ -21,16 +21,16 @@ QSqlIndex* QSqlIndex_new() {
 	return new (std::nothrow) QSqlIndex();
 }
 
-QSqlIndex* QSqlIndex_new2(QSqlIndex* other) {
-	return new (std::nothrow) QSqlIndex(*other);
+QSqlIndex* QSqlIndex_new_from(QSqlIndex* from) {
+	return new (std::nothrow) QSqlIndex(*from);
 }
 
-QSqlIndex* QSqlIndex_new3(struct seaqt_string cursorName) {
+QSqlIndex* QSqlIndex_new_cursorName(struct seaqt_string cursorName) {
 	QString cursorName_QString = QString::fromUtf8(cursorName.data, cursorName.len);
 	return new (std::nothrow) QSqlIndex(cursorName_QString);
 }
 
-QSqlIndex* QSqlIndex_new4(struct seaqt_string cursorName, struct seaqt_string name) {
+QSqlIndex* QSqlIndex_new_cursorName_name(struct seaqt_string cursorName, struct seaqt_string name) {
 	QString cursorName_QString = QString::fromUtf8(cursorName.data, cursorName.len);
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return new (std::nothrow) QSqlIndex(cursorName_QString, name_QString);
@@ -40,8 +40,8 @@ void QSqlIndex_virtbase(QSqlIndex* src, QSqlRecord** outptr_QSqlRecord) {
 	*outptr_QSqlRecord = static_cast<QSqlRecord*>(src);
 }
 
-void QSqlIndex_operatorAssign(QSqlIndex* self, QSqlIndex* other) {
-	self->operator=(*other);
+void QSqlIndex_operatorAssign(QSqlIndex* self, QSqlIndex* from) {
+	self->operator=(*from);
 }
 
 void QSqlIndex_setCursorName(QSqlIndex* self, struct seaqt_string cursorName) {
@@ -76,11 +76,11 @@ struct seaqt_string QSqlIndex_name(const QSqlIndex* self) {
 	return _ms;
 }
 
-void QSqlIndex_append(QSqlIndex* self, QSqlField* field) {
+void QSqlIndex_append_field(QSqlIndex* self, QSqlField* field) {
 	self->append(*field);
 }
 
-void QSqlIndex_append2(QSqlIndex* self, QSqlField* field, bool desc) {
+void QSqlIndex_append_field_desc(QSqlIndex* self, QSqlField* field, bool desc) {
 	self->append(*field, desc);
 }
 

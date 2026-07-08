@@ -145,15 +145,15 @@ void* QFrame_vdata(VirtualQFrame* self);
 VirtualQFrame* vdata_QFrame(void* vdata);
 
 VirtualQFrame* QFrame_new(const QFrame_VTable* vtbl, size_t vdata);
-VirtualQFrame* QFrame_new2(const QFrame_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQFrame* QFrame_new3(const QFrame_VTable* vtbl, size_t vdata, QWidget* parent, int f);
+VirtualQFrame* QFrame_new_parent(const QFrame_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQFrame* QFrame_new_parent_f(const QFrame_VTable* vtbl, size_t vdata, QWidget* parent, int f);
 
 void QFrame_virtbase(QFrame* src, QWidget** outptr_QWidget);
 QMetaObject* QFrame_metaObject(const QFrame* self);
 void* QFrame_metacast(QFrame* self, const char* param1);
 int QFrame_metacall(QFrame* self, int param1, int param2, void** param3);
-struct seaqt_string QFrame_tr(const char* s);
-struct seaqt_string QFrame_trUtf8(const char* s);
+struct seaqt_string QFrame_tr_s(const char* s);
+struct seaqt_string QFrame_trUtf8_s(const char* s);
 int QFrame_frameStyle(const QFrame* self);
 void QFrame_setFrameStyle(QFrame* self, int frameStyle);
 int QFrame_frameWidth(const QFrame* self);
@@ -171,10 +171,10 @@ void QFrame_setFrameRect(QFrame* self, QRect* frameRect);
 bool QFrame_event(QFrame* self, QEvent* e);
 void QFrame_paintEvent(QFrame* self, QPaintEvent* param1);
 void QFrame_changeEvent(QFrame* self, QEvent* param1);
-struct seaqt_string QFrame_tr2(const char* s, const char* c);
-struct seaqt_string QFrame_tr3(const char* s, const char* c, int n);
-struct seaqt_string QFrame_trUtf82(const char* s, const char* c);
-struct seaqt_string QFrame_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QFrame_tr_s_c(const char* s, const char* c);
+struct seaqt_string QFrame_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QFrame_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QFrame_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QFrame_virtualbase_metaObject(const VirtualQFrame* self);
 void* QFrame_virtualbase_metacast(VirtualQFrame* self, const char* param1);

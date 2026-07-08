@@ -26,16 +26,16 @@ QNetworkRequest* QNetworkRequest_new() {
 	return new (std::nothrow) QNetworkRequest();
 }
 
-QNetworkRequest* QNetworkRequest_new2(QUrl* url) {
+QNetworkRequest* QNetworkRequest_new_url(QUrl* url) {
 	return new (std::nothrow) QNetworkRequest(*url);
 }
 
-QNetworkRequest* QNetworkRequest_new3(QNetworkRequest* other) {
-	return new (std::nothrow) QNetworkRequest(*other);
+QNetworkRequest* QNetworkRequest_new_from(QNetworkRequest* from) {
+	return new (std::nothrow) QNetworkRequest(*from);
 }
 
-void QNetworkRequest_operatorAssign(QNetworkRequest* self, QNetworkRequest* other) {
-	self->operator=(*other);
+void QNetworkRequest_operatorAssign(QNetworkRequest* self, QNetworkRequest* from) {
+	self->operator=(*from);
 }
 
 void QNetworkRequest_swap(QNetworkRequest* self, QNetworkRequest* other) {
@@ -105,7 +105,7 @@ void QNetworkRequest_setRawHeader(QNetworkRequest* self, struct seaqt_string hea
 	self->setRawHeader(headerName_QByteArray, value_QByteArray);
 }
 
-QVariant* QNetworkRequest_attribute(const QNetworkRequest* self, int code) {
+QVariant* QNetworkRequest_attribute_code(const QNetworkRequest* self, int code) {
 	return new QVariant(self->attribute(static_cast<QNetworkRequest::Attribute>(code)));
 }
 
@@ -178,11 +178,11 @@ void QNetworkRequest_setTransferTimeout(QNetworkRequest* self) {
 	self->setTransferTimeout();
 }
 
-QVariant* QNetworkRequest_attribute2(const QNetworkRequest* self, int code, QVariant* defaultValue) {
+QVariant* QNetworkRequest_attribute_code_defaultValue(const QNetworkRequest* self, int code, QVariant* defaultValue) {
 	return new QVariant(self->attribute(static_cast<QNetworkRequest::Attribute>(code), *defaultValue));
 }
 
-void QNetworkRequest_setTransferTimeoutWithTimeout(QNetworkRequest* self, int timeout) {
+void QNetworkRequest_setTransferTimeout_timeout(QNetworkRequest* self, int timeout) {
 	self->setTransferTimeout(static_cast<int>(timeout));
 }
 

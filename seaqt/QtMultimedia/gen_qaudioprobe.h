@@ -57,25 +57,25 @@ void* QAudioProbe_vdata(VirtualQAudioProbe* self);
 VirtualQAudioProbe* vdata_QAudioProbe(void* vdata);
 
 VirtualQAudioProbe* QAudioProbe_new(const QAudioProbe_VTable* vtbl, size_t vdata);
-VirtualQAudioProbe* QAudioProbe_new2(const QAudioProbe_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAudioProbe* QAudioProbe_new_parent(const QAudioProbe_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAudioProbe_virtbase(QAudioProbe* src, QObject** outptr_QObject);
 QMetaObject* QAudioProbe_metaObject(const QAudioProbe* self);
 void* QAudioProbe_metacast(QAudioProbe* self, const char* param1);
 int QAudioProbe_metacall(QAudioProbe* self, int param1, int param2, void** param3);
-struct seaqt_string QAudioProbe_tr(const char* s);
-struct seaqt_string QAudioProbe_trUtf8(const char* s);
-bool QAudioProbe_setSource(QAudioProbe* self, QMediaObject* source);
-bool QAudioProbe_setSourceWithSource(QAudioProbe* self, QMediaRecorder* source);
+struct seaqt_string QAudioProbe_tr_s(const char* s);
+struct seaqt_string QAudioProbe_trUtf8_s(const char* s);
+bool QAudioProbe_setSource_QMediaObject(QAudioProbe* self, QMediaObject* source);
+bool QAudioProbe_setSource_QMediaRecorder(QAudioProbe* self, QMediaRecorder* source);
 bool QAudioProbe_isActive(const QAudioProbe* self);
 void QAudioProbe_audioBufferProbed(QAudioProbe* self, QAudioBuffer* buffer);
 void QAudioProbe_connect_audioBufferProbed(QAudioProbe* self, intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t));
 void QAudioProbe_flush(QAudioProbe* self);
 void QAudioProbe_connect_flush(QAudioProbe* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QAudioProbe_tr2(const char* s, const char* c);
-struct seaqt_string QAudioProbe_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAudioProbe_trUtf82(const char* s, const char* c);
-struct seaqt_string QAudioProbe_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAudioProbe_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAudioProbe_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAudioProbe_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAudioProbe_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAudioProbe_virtualbase_metaObject(const VirtualQAudioProbe* self);
 void* QAudioProbe_virtualbase_metacast(VirtualQAudioProbe* self, const char* param1);

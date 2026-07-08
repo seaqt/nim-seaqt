@@ -65,11 +65,11 @@ type cQActionGroup*{.exportc: "QActionGroup", incompleteStruct.} = object
 proc fcQActionGroup_metaObject(self: pointer): pointer {.importc: "QActionGroup_metaObject".}
 proc fcQActionGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QActionGroup_metacast".}
 proc fcQActionGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QActionGroup_metacall".}
-proc fcQActionGroup_tr(s: cstring): struct_seaqt_string {.importc: "QActionGroup_tr".}
-proc fcQActionGroup_trUtf8(s: cstring): struct_seaqt_string {.importc: "QActionGroup_trUtf8".}
-proc fcQActionGroup_addAction(self: pointer, a: pointer): pointer {.importc: "QActionGroup_addAction".}
-proc fcQActionGroup_addActionWithText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QActionGroup_addActionWithText".}
-proc fcQActionGroup_addAction2(self: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QActionGroup_addAction2".}
+proc fcQActionGroup_trS(s: cstring): struct_seaqt_string {.importc: "QActionGroup_tr_s".}
+proc fcQActionGroup_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QActionGroup_trUtf8_s".}
+proc fcQActionGroup_addActionA(self: pointer, a: pointer): pointer {.importc: "QActionGroup_addAction_a".}
+proc fcQActionGroup_addActionText(self: pointer, text: struct_seaqt_string): pointer {.importc: "QActionGroup_addAction_text".}
+proc fcQActionGroup_addActionIconText(self: pointer, icon: pointer, text: struct_seaqt_string): pointer {.importc: "QActionGroup_addAction_icon_text".}
 proc fcQActionGroup_removeAction(self: pointer, a: pointer): void {.importc: "QActionGroup_removeAction".}
 proc fcQActionGroup_actions(self: pointer): struct_seaqt_array {.importc: "QActionGroup_actions".}
 proc fcQActionGroup_checkedAction(self: pointer): pointer {.importc: "QActionGroup_checkedAction".}
@@ -86,10 +86,10 @@ proc fcQActionGroup_triggered(self: pointer, param1: pointer): void {.importc: "
 proc fcQActionGroup_connect_triggered(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QActionGroup_connect_triggered".}
 proc fcQActionGroup_hovered(self: pointer, param1: pointer): void {.importc: "QActionGroup_hovered".}
 proc fcQActionGroup_connect_hovered(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QActionGroup_connect_hovered".}
-proc fcQActionGroup_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QActionGroup_tr2".}
-proc fcQActionGroup_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QActionGroup_tr3".}
-proc fcQActionGroup_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QActionGroup_trUtf82".}
-proc fcQActionGroup_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QActionGroup_trUtf83".}
+proc fcQActionGroup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QActionGroup_tr_s_c".}
+proc fcQActionGroup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QActionGroup_tr_s_c_n".}
+proc fcQActionGroup_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QActionGroup_trUtf8_s_c".}
+proc fcQActionGroup_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QActionGroup_trUtf8_s_c_n".}
 proc fcQActionGroup_vdata(self: pointer): ptr pointer {.importc: "QActionGroup_vdata".}
 proc fvdata_cQActionGroup(self: pointer): pointer {.importc: "vdata_QActionGroup".}
 
@@ -132,25 +132,25 @@ proc metacall*(self: gen_qactiongroup_types.QActionGroup, param1: cint, param2: 
   fcQActionGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qactiongroup_types.QActionGroup, s: cstring): string =
-  let v_ms = fcQActionGroup_tr(s)
+  let v_ms = fcQActionGroup_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qactiongroup_types.QActionGroup, s: cstring): string =
-  let v_ms = fcQActionGroup_trUtf8(s)
+  let v_ms = fcQActionGroup_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addAction*(self: gen_qactiongroup_types.QActionGroup, a: gen_qaction_types.QAction): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQActionGroup_addAction(self.h, a.h), owned: false)
+  gen_qaction_types.QAction(h: fcQActionGroup_addActionA(self.h, a.h), owned: false)
 
 proc addAction*(self: gen_qactiongroup_types.QActionGroup, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQActionGroup_addActionWithText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQActionGroup_addActionText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc addAction*(self: gen_qactiongroup_types.QActionGroup, icon: gen_qicon_types.QIcon, text: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQActionGroup_addAction2(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
+  gen_qaction_types.QAction(h: fcQActionGroup_addActionIconText(self.h, icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: false)
 
 proc removeAction*(self: gen_qactiongroup_types.QActionGroup, a: gen_qaction_types.QAction): void =
   fcQActionGroup_removeAction(self.h, a.h)
@@ -235,25 +235,25 @@ proc onHovered*(self: gen_qactiongroup_types.QActionGroup, slot: QActionGrouphov
   fcQActionGroup_connect_hovered(self.h, cast[int](addr tmp[]), fcQActionGroup_slot_callback_hovered, fcQActionGroup_slot_callback_hovered_release)
 
 proc tr*(_: type gen_qactiongroup_types.QActionGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQActionGroup_tr2(s, c)
+  let v_ms = fcQActionGroup_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qactiongroup_types.QActionGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQActionGroup_tr3(s, c, n)
+  let v_ms = fcQActionGroup_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qactiongroup_types.QActionGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQActionGroup_trUtf82(s, c)
+  let v_ms = fcQActionGroup_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qactiongroup_types.QActionGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQActionGroup_trUtf83(s, c, n)
+  let v_ms = fcQActionGroup_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

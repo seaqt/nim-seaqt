@@ -714,42 +714,42 @@ VirtualQSplashScreen* QSplashScreen_new(const QSplashScreen_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl) : nullptr;
 }
 
-VirtualQSplashScreen* QSplashScreen_new2(const QSplashScreen_VTable* vtbl, size_t vdata, QScreen* screen) {
+VirtualQSplashScreen* QSplashScreen_new_screen(const QSplashScreen_VTable* vtbl, size_t vdata, QScreen* screen) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplashScreen>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl, screen) : nullptr;
 }
 
-VirtualQSplashScreen* QSplashScreen_new3(const QSplashScreen_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQSplashScreen* QSplashScreen_new_parent(const QSplashScreen_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplashScreen>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl, parent) : nullptr;
 }
 
-VirtualQSplashScreen* QSplashScreen_new4(const QSplashScreen_VTable* vtbl, size_t vdata, QPixmap* pixmap) {
+VirtualQSplashScreen* QSplashScreen_new_pixmap(const QSplashScreen_VTable* vtbl, size_t vdata, QPixmap* pixmap) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplashScreen>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl, *pixmap) : nullptr;
 }
 
-VirtualQSplashScreen* QSplashScreen_new5(const QSplashScreen_VTable* vtbl, size_t vdata, QPixmap* pixmap, int f) {
+VirtualQSplashScreen* QSplashScreen_new_pixmap_f(const QSplashScreen_VTable* vtbl, size_t vdata, QPixmap* pixmap, int f) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplashScreen>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl, *pixmap, static_cast<Qt::WindowFlags>(f)) : nullptr;
 }
 
-VirtualQSplashScreen* QSplashScreen_new6(const QSplashScreen_VTable* vtbl, size_t vdata, QScreen* screen, QPixmap* pixmap) {
+VirtualQSplashScreen* QSplashScreen_new_screen_pixmap(const QSplashScreen_VTable* vtbl, size_t vdata, QScreen* screen, QPixmap* pixmap) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplashScreen>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl, screen, *pixmap) : nullptr;
 }
 
-VirtualQSplashScreen* QSplashScreen_new7(const QSplashScreen_VTable* vtbl, size_t vdata, QScreen* screen, QPixmap* pixmap, int f) {
+VirtualQSplashScreen* QSplashScreen_new_screen_pixmap_f(const QSplashScreen_VTable* vtbl, size_t vdata, QScreen* screen, QPixmap* pixmap, int f) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplashScreen>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl, screen, *pixmap, static_cast<Qt::WindowFlags>(f)) : nullptr;
 }
 
-VirtualQSplashScreen* QSplashScreen_new8(const QSplashScreen_VTable* vtbl, size_t vdata, QWidget* parent, QPixmap* pixmap) {
+VirtualQSplashScreen* QSplashScreen_new_parent_pixmap(const QSplashScreen_VTable* vtbl, size_t vdata, QWidget* parent, QPixmap* pixmap) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplashScreen>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl, parent, *pixmap) : nullptr;
 }
 
-VirtualQSplashScreen* QSplashScreen_new9(const QSplashScreen_VTable* vtbl, size_t vdata, QWidget* parent, QPixmap* pixmap, int f) {
+VirtualQSplashScreen* QSplashScreen_new_parent_pixmap_f(const QSplashScreen_VTable* vtbl, size_t vdata, QWidget* parent, QPixmap* pixmap, int f) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSplashScreen>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSplashScreen(vtbl, parent, *pixmap, static_cast<Qt::WindowFlags>(f)) : nullptr;
 }
@@ -770,7 +770,7 @@ int QSplashScreen_metacall(QSplashScreen* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSplashScreen_tr(const char* s) {
+struct seaqt_string QSplashScreen_tr_s(const char* s) {
 	QString _ret = QSplashScreen::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -781,7 +781,7 @@ struct seaqt_string QSplashScreen_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSplashScreen_trUtf8(const char* s) {
+struct seaqt_string QSplashScreen_trUtf8_s(const char* s) {
 	QString _ret = QSplashScreen::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -819,7 +819,7 @@ struct seaqt_string QSplashScreen_message(const QSplashScreen* self) {
 	return _ms;
 }
 
-void QSplashScreen_showMessage(QSplashScreen* self, struct seaqt_string message) {
+void QSplashScreen_showMessage_message(QSplashScreen* self, struct seaqt_string message) {
 	QString message_QString = QString::fromUtf8(message.data, message.len);
 	self->showMessage(message_QString);
 }
@@ -852,7 +852,7 @@ void QSplashScreen_connect_messageChanged(QSplashScreen* self, intptr_t slot, vo
 	QSplashScreen::connect(self, static_cast<void (QSplashScreen::*)(const QString&)>(&QSplashScreen::messageChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QSplashScreen_tr2(const char* s, const char* c) {
+struct seaqt_string QSplashScreen_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSplashScreen::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -863,7 +863,7 @@ struct seaqt_string QSplashScreen_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSplashScreen_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSplashScreen_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSplashScreen::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -874,7 +874,7 @@ struct seaqt_string QSplashScreen_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QSplashScreen_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSplashScreen_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSplashScreen::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -885,7 +885,7 @@ struct seaqt_string QSplashScreen_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSplashScreen_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSplashScreen_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSplashScreen::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -896,12 +896,12 @@ struct seaqt_string QSplashScreen_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QSplashScreen_showMessage2(QSplashScreen* self, struct seaqt_string message, int alignment) {
+void QSplashScreen_showMessage_message_alignment(QSplashScreen* self, struct seaqt_string message, int alignment) {
 	QString message_QString = QString::fromUtf8(message.data, message.len);
 	self->showMessage(message_QString, static_cast<int>(alignment));
 }
 
-void QSplashScreen_showMessage3(QSplashScreen* self, struct seaqt_string message, int alignment, QColor* color) {
+void QSplashScreen_showMessage_message_alignment_color(QSplashScreen* self, struct seaqt_string message, int alignment, QColor* color) {
 	QString message_QString = QString::fromUtf8(message.data, message.len);
 	self->showMessage(message_QString, static_cast<int>(alignment), *color);
 }

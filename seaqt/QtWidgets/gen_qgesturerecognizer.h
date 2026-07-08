@@ -44,7 +44,7 @@ int QGestureRecognizer_recognize(QGestureRecognizer* self, QGesture* state, QObj
 void QGestureRecognizer_reset(QGestureRecognizer* self, QGesture* state);
 int QGestureRecognizer_registerRecognizer(QGestureRecognizer* recognizer);
 void QGestureRecognizer_unregisterRecognizer(int type);
-void QGestureRecognizer_operatorAssign(QGestureRecognizer* self, QGestureRecognizer* param1);
+void QGestureRecognizer_operatorAssign(QGestureRecognizer* self, QGestureRecognizer* from);
 
 QGesture* QGestureRecognizer_virtualbase_create(VirtualQGestureRecognizer* self, QObject* target);
 int QGestureRecognizer_virtualbase_recognize(VirtualQGestureRecognizer* self, QGesture* state, QObject* watched, QEvent* event);

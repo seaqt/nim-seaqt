@@ -93,8 +93,8 @@ type cQGraphicsWebView*{.exportc: "QGraphicsWebView", incompleteStruct.} = objec
 proc fcQGraphicsWebView_metaObject(self: pointer): pointer {.importc: "QGraphicsWebView_metaObject".}
 proc fcQGraphicsWebView_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsWebView_metacast".}
 proc fcQGraphicsWebView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsWebView_metacall".}
-proc fcQGraphicsWebView_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsWebView_tr".}
-proc fcQGraphicsWebView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGraphicsWebView_trUtf8".}
+proc fcQGraphicsWebView_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsWebView_tr_s".}
+proc fcQGraphicsWebView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGraphicsWebView_trUtf8_s".}
 proc fcQGraphicsWebView_page(self: pointer): pointer {.importc: "QGraphicsWebView_page".}
 proc fcQGraphicsWebView_setPage(self: pointer, page: pointer): void {.importc: "QGraphicsWebView_setPage".}
 proc fcQGraphicsWebView_url(self: pointer): pointer {.importc: "QGraphicsWebView_url".}
@@ -104,15 +104,15 @@ proc fcQGraphicsWebView_icon(self: pointer): pointer {.importc: "QGraphicsWebVie
 proc fcQGraphicsWebView_zoomFactor(self: pointer): float64 {.importc: "QGraphicsWebView_zoomFactor".}
 proc fcQGraphicsWebView_setZoomFactor(self: pointer, zoomFactor: float64): void {.importc: "QGraphicsWebView_setZoomFactor".}
 proc fcQGraphicsWebView_isModified(self: pointer): bool {.importc: "QGraphicsWebView_isModified".}
-proc fcQGraphicsWebView_load(self: pointer, url: pointer): void {.importc: "QGraphicsWebView_load".}
-proc fcQGraphicsWebView_loadWithRequest(self: pointer, request: pointer): void {.importc: "QGraphicsWebView_loadWithRequest".}
-proc fcQGraphicsWebView_setHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QGraphicsWebView_setHtml".}
-proc fcQGraphicsWebView_setContent(self: pointer, data: struct_seaqt_string): void {.importc: "QGraphicsWebView_setContent".}
+proc fcQGraphicsWebView_loadUrl(self: pointer, url: pointer): void {.importc: "QGraphicsWebView_load_url".}
+proc fcQGraphicsWebView_loadRequest(self: pointer, request: pointer): void {.importc: "QGraphicsWebView_load_request".}
+proc fcQGraphicsWebView_setHtmlHtml(self: pointer, html: struct_seaqt_string): void {.importc: "QGraphicsWebView_setHtml_html".}
+proc fcQGraphicsWebView_setContentData(self: pointer, data: struct_seaqt_string): void {.importc: "QGraphicsWebView_setContent_data".}
 proc fcQGraphicsWebView_history(self: pointer): pointer {.importc: "QGraphicsWebView_history".}
 proc fcQGraphicsWebView_settings(self: pointer): pointer {.importc: "QGraphicsWebView_settings".}
 proc fcQGraphicsWebView_pageAction(self: pointer, action: cint): pointer {.importc: "QGraphicsWebView_pageAction".}
-proc fcQGraphicsWebView_triggerPageAction(self: pointer, action: cint): void {.importc: "QGraphicsWebView_triggerPageAction".}
-proc fcQGraphicsWebView_findText(self: pointer, subString: struct_seaqt_string): bool {.importc: "QGraphicsWebView_findText".}
+proc fcQGraphicsWebView_triggerPageActionAction(self: pointer, action: cint): void {.importc: "QGraphicsWebView_triggerPageAction_action".}
+proc fcQGraphicsWebView_findTextSubString(self: pointer, subString: struct_seaqt_string): bool {.importc: "QGraphicsWebView_findText_subString".}
 proc fcQGraphicsWebView_resizesToContents(self: pointer): bool {.importc: "QGraphicsWebView_resizesToContents".}
 proc fcQGraphicsWebView_setResizesToContents(self: pointer, enabled: bool): void {.importc: "QGraphicsWebView_setResizesToContents".}
 proc fcQGraphicsWebView_isTiledBackingStoreFrozen(self: pointer): bool {.importc: "QGraphicsWebView_isTiledBackingStoreFrozen".}
@@ -126,7 +126,7 @@ proc fcQGraphicsWebView_sizeHint(self: pointer, which: cint, constraint: pointer
 proc fcQGraphicsWebView_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsWebView_inputMethodQuery".}
 proc fcQGraphicsWebView_renderHints(self: pointer): cint {.importc: "QGraphicsWebView_renderHints".}
 proc fcQGraphicsWebView_setRenderHints(self: pointer, renderHints: cint): void {.importc: "QGraphicsWebView_setRenderHints".}
-proc fcQGraphicsWebView_setRenderHint(self: pointer, param1: cint): void {.importc: "QGraphicsWebView_setRenderHint".}
+proc fcQGraphicsWebView_setRenderHint_QPainter_RenderHint(self: pointer, param1: cint): void {.importc: "QGraphicsWebView_setRenderHint_QPainter_RenderHint".}
 proc fcQGraphicsWebView_stop(self: pointer): void {.importc: "QGraphicsWebView_stop".}
 proc fcQGraphicsWebView_back(self: pointer): void {.importc: "QGraphicsWebView_back".}
 proc fcQGraphicsWebView_forward(self: pointer): void {.importc: "QGraphicsWebView_forward".}
@@ -147,18 +147,18 @@ proc fcQGraphicsWebView_statusBarMessage(self: pointer, message: struct_seaqt_st
 proc fcQGraphicsWebView_connect_statusBarMessage(self: pointer, slot: int, callback: proc (slot: int, message: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWebView_connect_statusBarMessage".}
 proc fcQGraphicsWebView_linkClicked(self: pointer, param1: pointer): void {.importc: "QGraphicsWebView_linkClicked".}
 proc fcQGraphicsWebView_connect_linkClicked(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWebView_connect_linkClicked".}
-proc fcQGraphicsWebView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsWebView_tr2".}
-proc fcQGraphicsWebView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsWebView_tr3".}
-proc fcQGraphicsWebView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsWebView_trUtf82".}
-proc fcQGraphicsWebView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsWebView_trUtf83".}
-proc fcQGraphicsWebView_load2(self: pointer, request: pointer, operation: cint): void {.importc: "QGraphicsWebView_load2".}
-proc fcQGraphicsWebView_load3(self: pointer, request: pointer, operation: cint, body: struct_seaqt_string): void {.importc: "QGraphicsWebView_load3".}
-proc fcQGraphicsWebView_setHtml2(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QGraphicsWebView_setHtml2".}
-proc fcQGraphicsWebView_setContent2(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QGraphicsWebView_setContent2".}
-proc fcQGraphicsWebView_setContent3(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QGraphicsWebView_setContent3".}
-proc fcQGraphicsWebView_triggerPageAction2(self: pointer, action: cint, checked: bool): void {.importc: "QGraphicsWebView_triggerPageAction2".}
-proc fcQGraphicsWebView_findText2(self: pointer, subString: struct_seaqt_string, options: cint): bool {.importc: "QGraphicsWebView_findText2".}
-proc fcQGraphicsWebView_setRenderHint2(self: pointer, param1: cint, enabled: bool): void {.importc: "QGraphicsWebView_setRenderHint2".}
+proc fcQGraphicsWebView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsWebView_tr_s_c".}
+proc fcQGraphicsWebView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsWebView_tr_s_c_n".}
+proc fcQGraphicsWebView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsWebView_trUtf8_s_c".}
+proc fcQGraphicsWebView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsWebView_trUtf8_s_c_n".}
+proc fcQGraphicsWebView_loadRequestOperation(self: pointer, request: pointer, operation: cint): void {.importc: "QGraphicsWebView_load_request_operation".}
+proc fcQGraphicsWebView_loadRequestOperationBody(self: pointer, request: pointer, operation: cint, body: struct_seaqt_string): void {.importc: "QGraphicsWebView_load_request_operation_body".}
+proc fcQGraphicsWebView_setHtmlHtmlBaseUrl(self: pointer, html: struct_seaqt_string, baseUrl: pointer): void {.importc: "QGraphicsWebView_setHtml_html_baseUrl".}
+proc fcQGraphicsWebView_setContentDataMimeType(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QGraphicsWebView_setContent_data_mimeType".}
+proc fcQGraphicsWebView_setContentDataMimeTypeBaseUrl(self: pointer, data: struct_seaqt_string, mimeType: struct_seaqt_string, baseUrl: pointer): void {.importc: "QGraphicsWebView_setContent_data_mimeType_baseUrl".}
+proc fcQGraphicsWebView_triggerPageActionActionChecked(self: pointer, action: cint, checked: bool): void {.importc: "QGraphicsWebView_triggerPageAction_action_checked".}
+proc fcQGraphicsWebView_findTextSubStringOptions(self: pointer, subString: struct_seaqt_string, options: cint): bool {.importc: "QGraphicsWebView_findText_subString_options".}
+proc fcQGraphicsWebView_setRenderHint_QPainter_RenderHintBool(self: pointer, param1: cint, enabled: bool): void {.importc: "QGraphicsWebView_setRenderHint_QPainter_RenderHint_bool".}
 proc fcQGraphicsWebView_vdata(self: pointer): ptr pointer {.importc: "QGraphicsWebView_vdata".}
 proc fvdata_cQGraphicsWebView(self: pointer): pointer {.importc: "vdata_QGraphicsWebView".}
 
@@ -307,7 +307,7 @@ proc fcQGraphicsWebView_protectedbase_prepareGeometryChange(self: pointer): void
 proc fcQGraphicsWebView_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsWebView_protectedbase_setGraphicsItem".}
 proc fcQGraphicsWebView_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsWebView_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsWebView_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new".}
-proc fcQGraphicsWebView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new2".}
+proc fcQGraphicsWebView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new_parent".}
 proc fcQGraphicsWebView_staticMetaObject(): pointer {.importc: "QGraphicsWebView_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qobjectdefs_types.QMetaObject =
@@ -320,13 +320,13 @@ proc metacall*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cint, 
   fcQGraphicsWebView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring): string =
-  let v_ms = fcQGraphicsWebView_tr(s)
+  let v_ms = fcQGraphicsWebView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring): string =
-  let v_ms = fcQGraphicsWebView_trUtf8(s)
+  let v_ms = fcQGraphicsWebView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -362,16 +362,16 @@ proc isModified*(self: gen_qgraphicswebview_types.QGraphicsWebView): bool =
   fcQGraphicsWebView_isModified(self.h)
 
 proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, url: gen_qurl_types.QUrl): void =
-  fcQGraphicsWebView_load(self.h, url.h)
+  fcQGraphicsWebView_loadUrl(self.h, url.h)
 
 proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, request: gen_qnetworkrequest_types.QNetworkRequest): void =
-  fcQGraphicsWebView_loadWithRequest(self.h, request.h)
+  fcQGraphicsWebView_loadRequest(self.h, request.h)
 
 proc setHtml*(self: gen_qgraphicswebview_types.QGraphicsWebView, html: openArray[char]): void =
-  fcQGraphicsWebView_setHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
+  fcQGraphicsWebView_setHtmlHtml(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))))
 
 proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: openArray[byte]): void =
-  fcQGraphicsWebView_setContent(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQGraphicsWebView_setContentData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc history*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qwebhistory_types.QWebHistory =
   gen_qwebhistory_types.QWebHistory(h: fcQGraphicsWebView_history(self.h), owned: false)
@@ -383,10 +383,10 @@ proc pageAction*(self: gen_qgraphicswebview_types.QGraphicsWebView, action: cint
   gen_qaction_types.QAction(h: fcQGraphicsWebView_pageAction(self.h, cint(action)), owned: false)
 
 proc triggerPageAction*(self: gen_qgraphicswebview_types.QGraphicsWebView, action: cint): void =
-  fcQGraphicsWebView_triggerPageAction(self.h, cint(action))
+  fcQGraphicsWebView_triggerPageActionAction(self.h, cint(action))
 
 proc findText*(self: gen_qgraphicswebview_types.QGraphicsWebView, subString: openArray[char]): bool =
-  fcQGraphicsWebView_findText(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
+  fcQGraphicsWebView_findTextSubString(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
 
 proc resizesToContents*(self: gen_qgraphicswebview_types.QGraphicsWebView): bool =
   fcQGraphicsWebView_resizesToContents(self.h)
@@ -428,7 +428,7 @@ proc setRenderHints*(self: gen_qgraphicswebview_types.QGraphicsWebView, renderHi
   fcQGraphicsWebView_setRenderHints(self.h, cint(renderHints))
 
 proc setRenderHint*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cint): void =
-  fcQGraphicsWebView_setRenderHint(self.h, cint(param1))
+  fcQGraphicsWebView_setRenderHint_QPainter_RenderHint(self.h, cint(param1))
 
 proc stop*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_stop(self.h)
@@ -605,52 +605,52 @@ proc onLinkClicked*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QGr
   fcQGraphicsWebView_connect_linkClicked(self.h, cast[int](addr tmp[]), fcQGraphicsWebView_slot_callback_linkClicked, fcQGraphicsWebView_slot_callback_linkClicked_release)
 
 proc tr*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsWebView_tr2(s, c)
+  let v_ms = fcQGraphicsWebView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsWebView_tr3(s, c, n)
+  let v_ms = fcQGraphicsWebView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsWebView_trUtf82(s, c)
+  let v_ms = fcQGraphicsWebView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsWebView_trUtf83(s, c, n)
+  let v_ms = fcQGraphicsWebView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint): void =
-  fcQGraphicsWebView_load2(self.h, request.h, cint(operation))
+  fcQGraphicsWebView_loadRequestOperation(self.h, request.h, cint(operation))
 
 proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, request: gen_qnetworkrequest_types.QNetworkRequest, operation: cint, body: openArray[byte]): void =
-  fcQGraphicsWebView_load3(self.h, request.h, cint(operation), struct_seaqt_string(data: if len(body) > 0: addr body[0] else: nil, len: csize_t(len(body))))
+  fcQGraphicsWebView_loadRequestOperationBody(self.h, request.h, cint(operation), struct_seaqt_string(data: if len(body) > 0: addr body[0] else: nil, len: csize_t(len(body))))
 
 proc setHtml*(self: gen_qgraphicswebview_types.QGraphicsWebView, html: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQGraphicsWebView_setHtml2(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
+  fcQGraphicsWebView_setHtmlHtmlBaseUrl(self.h, struct_seaqt_string(data: if len(html) > 0: addr html[0] else: nil, len: csize_t(len(html))), baseUrl.h)
 
 proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: openArray[byte], mimeType: openArray[char]): void =
-  fcQGraphicsWebView_setContent2(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
+  fcQGraphicsWebView_setContentDataMimeType(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: openArray[byte], mimeType: openArray[char], baseUrl: gen_qurl_types.QUrl): void =
-  fcQGraphicsWebView_setContent3(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
+  fcQGraphicsWebView_setContentDataMimeTypeBaseUrl(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))), baseUrl.h)
 
 proc triggerPageAction*(self: gen_qgraphicswebview_types.QGraphicsWebView, action: cint, checked: bool): void =
-  fcQGraphicsWebView_triggerPageAction2(self.h, cint(action), checked)
+  fcQGraphicsWebView_triggerPageActionActionChecked(self.h, cint(action), checked)
 
 proc findText*(self: gen_qgraphicswebview_types.QGraphicsWebView, subString: openArray[char], options: cint): bool =
-  fcQGraphicsWebView_findText2(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
+  fcQGraphicsWebView_findTextSubStringOptions(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))), cint(options))
 
 proc setRenderHint*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cint, enabled: bool): void =
-  fcQGraphicsWebView_setRenderHint2(self.h, cint(param1), enabled)
+  fcQGraphicsWebView_setRenderHint_QPainter_RenderHintBool(self.h, cint(param1), enabled)
 
 type QGraphicsWebViewmetaObjectProc* = proc(self: QGraphicsWebView): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGraphicsWebViewmetacastProc* = proc(self: QGraphicsWebView, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -14,8 +14,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QColormap* QColormap_new(QColormap* colormap) {
-	return new (std::nothrow) QColormap(*colormap);
+QColormap* QColormap_new(QColormap* from) {
+	return new (std::nothrow) QColormap(*from);
 }
 
 void QColormap_initialize() {
@@ -30,8 +30,8 @@ QColormap* QColormap_instance() {
 	return new QColormap(QColormap::instance());
 }
 
-void QColormap_operatorAssign(QColormap* self, QColormap* colormap) {
-	self->operator=(*colormap);
+void QColormap_operatorAssign(QColormap* self, QColormap* from) {
+	self->operator=(*from);
 }
 
 int QColormap_mode(const QColormap* self) {
@@ -69,7 +69,7 @@ struct seaqt_array /* of QColor* */  QColormap_colormap(const QColormap* self) {
 	return _out;
 }
 
-QColormap* QColormap_instanceWithScreen(int screen) {
+QColormap* QColormap_instance_screen(int screen) {
 	return new QColormap(QColormap::instance(static_cast<int>(screen)));
 }
 

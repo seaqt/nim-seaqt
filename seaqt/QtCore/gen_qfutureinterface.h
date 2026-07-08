@@ -27,8 +27,8 @@ typedef struct QThreadPool QThreadPool;
 #endif
 
 QFutureInterfaceBase* QFutureInterfaceBase_new();
-QFutureInterfaceBase* QFutureInterfaceBase_new2(QFutureInterfaceBase* other);
-QFutureInterfaceBase* QFutureInterfaceBase_new3(int initialState);
+QFutureInterfaceBase* QFutureInterfaceBase_new_from(QFutureInterfaceBase* from);
+QFutureInterfaceBase* QFutureInterfaceBase_new_initialState(int initialState);
 
 void QFutureInterfaceBase_reportStarted(QFutureInterfaceBase* self);
 void QFutureInterfaceBase_reportFinished(QFutureInterfaceBase* self);
@@ -65,10 +65,10 @@ bool QFutureInterfaceBase_waitForNextResult(QFutureInterfaceBase* self);
 void QFutureInterfaceBase_waitForResult(QFutureInterfaceBase* self, int resultIndex);
 void QFutureInterfaceBase_waitForResume(QFutureInterfaceBase* self);
 QMutex* QFutureInterfaceBase_mutex(const QFutureInterfaceBase* self);
-QMutex* QFutureInterfaceBase_mutexWithInt(const QFutureInterfaceBase* self, int param1);
+QMutex* QFutureInterfaceBase_mutex_int(const QFutureInterfaceBase* self, int param1);
 bool QFutureInterfaceBase_operatorEqual(const QFutureInterfaceBase* self, QFutureInterfaceBase* other);
 bool QFutureInterfaceBase_operatorNotEqual(const QFutureInterfaceBase* self, QFutureInterfaceBase* other);
-void QFutureInterfaceBase_operatorAssign(QFutureInterfaceBase* self, QFutureInterfaceBase* other);
+void QFutureInterfaceBase_operatorAssign(QFutureInterfaceBase* self, QFutureInterfaceBase* from);
 
 void QFutureInterfaceBase_delete(QFutureInterfaceBase* self);
 

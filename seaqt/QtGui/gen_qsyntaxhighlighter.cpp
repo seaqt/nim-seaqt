@@ -183,9 +183,9 @@ public:
 	friend void QSyntaxHighlighter_virtualbase_disconnectNotify(VirtualQSyntaxHighlighter* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSyntaxHighlighter_protectedbase_setFormat(VirtualQSyntaxHighlighter* self, int start, int count, QTextCharFormat* format);
-	friend void QSyntaxHighlighter_protectedbase_setFormat2(VirtualQSyntaxHighlighter* self, int start, int count, QColor* color);
-	friend void QSyntaxHighlighter_protectedbase_setFormat3(VirtualQSyntaxHighlighter* self, int start, int count, QFont* font);
+	friend void QSyntaxHighlighter_protectedbase_setFormat_start_count_format(VirtualQSyntaxHighlighter* self, int start, int count, QTextCharFormat* format);
+	friend void QSyntaxHighlighter_protectedbase_setFormat_start_count_color(VirtualQSyntaxHighlighter* self, int start, int count, QColor* color);
+	friend void QSyntaxHighlighter_protectedbase_setFormat_start_count_font(VirtualQSyntaxHighlighter* self, int start, int count, QFont* font);
 	friend QTextCharFormat* QSyntaxHighlighter_protectedbase_format(const VirtualQSyntaxHighlighter* self, int pos);
 	friend int QSyntaxHighlighter_protectedbase_previousBlockState(const VirtualQSyntaxHighlighter* self);
 	friend int QSyntaxHighlighter_protectedbase_currentBlockState(const VirtualQSyntaxHighlighter* self);
@@ -199,12 +199,12 @@ public:
 	friend bool QSyntaxHighlighter_protectedbase_isSignalConnected(const VirtualQSyntaxHighlighter* self, QMetaMethod* signal);
 };
 
-VirtualQSyntaxHighlighter* QSyntaxHighlighter_new(const QSyntaxHighlighter_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSyntaxHighlighter* QSyntaxHighlighter_new_QObject(const QSyntaxHighlighter_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSyntaxHighlighter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSyntaxHighlighter(vtbl, parent) : nullptr;
 }
 
-VirtualQSyntaxHighlighter* QSyntaxHighlighter_new2(const QSyntaxHighlighter_VTable* vtbl, size_t vdata, QTextDocument* parent) {
+VirtualQSyntaxHighlighter* QSyntaxHighlighter_new_QTextDocument(const QSyntaxHighlighter_VTable* vtbl, size_t vdata, QTextDocument* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSyntaxHighlighter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSyntaxHighlighter(vtbl, parent) : nullptr;
 }
@@ -225,7 +225,7 @@ int QSyntaxHighlighter_metacall(QSyntaxHighlighter* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSyntaxHighlighter_tr(const char* s) {
+struct seaqt_string QSyntaxHighlighter_tr_s(const char* s) {
 	QString _ret = QSyntaxHighlighter::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -236,7 +236,7 @@ struct seaqt_string QSyntaxHighlighter_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QSyntaxHighlighter_trUtf8(const char* s) {
+struct seaqt_string QSyntaxHighlighter_trUtf8_s(const char* s) {
 	QString _ret = QSyntaxHighlighter::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -263,7 +263,7 @@ void QSyntaxHighlighter_rehighlightBlock(QSyntaxHighlighter* self, QTextBlock* b
 	self->rehighlightBlock(*block);
 }
 
-struct seaqt_string QSyntaxHighlighter_tr2(const char* s, const char* c) {
+struct seaqt_string QSyntaxHighlighter_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSyntaxHighlighter::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -274,7 +274,7 @@ struct seaqt_string QSyntaxHighlighter_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSyntaxHighlighter_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSyntaxHighlighter_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSyntaxHighlighter::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -285,7 +285,7 @@ struct seaqt_string QSyntaxHighlighter_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-struct seaqt_string QSyntaxHighlighter_trUtf82(const char* s, const char* c) {
+struct seaqt_string QSyntaxHighlighter_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QSyntaxHighlighter::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -296,7 +296,7 @@ struct seaqt_string QSyntaxHighlighter_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSyntaxHighlighter_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QSyntaxHighlighter_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSyntaxHighlighter::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -361,15 +361,15 @@ void QSyntaxHighlighter_virtualbase_disconnectNotify(VirtualQSyntaxHighlighter* 
 	self->QSyntaxHighlighter::disconnectNotify(*signal);
 }
 
-void QSyntaxHighlighter_protectedbase_setFormat(VirtualQSyntaxHighlighter* self, int start, int count, QTextCharFormat* format) {
+void QSyntaxHighlighter_protectedbase_setFormat_start_count_format(VirtualQSyntaxHighlighter* self, int start, int count, QTextCharFormat* format) {
 	self->setFormat(static_cast<int>(start), static_cast<int>(count), *format);
 }
 
-void QSyntaxHighlighter_protectedbase_setFormat2(VirtualQSyntaxHighlighter* self, int start, int count, QColor* color) {
+void QSyntaxHighlighter_protectedbase_setFormat_start_count_color(VirtualQSyntaxHighlighter* self, int start, int count, QColor* color) {
 	self->setFormat(static_cast<int>(start), static_cast<int>(count), *color);
 }
 
-void QSyntaxHighlighter_protectedbase_setFormat3(VirtualQSyntaxHighlighter* self, int start, int count, QFont* font) {
+void QSyntaxHighlighter_protectedbase_setFormat_start_count_font(VirtualQSyntaxHighlighter* self, int start, int count, QFont* font) {
 	self->setFormat(static_cast<int>(start), static_cast<int>(count), *font);
 }
 

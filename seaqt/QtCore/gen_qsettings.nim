@@ -92,8 +92,8 @@ type cQSettings*{.exportc: "QSettings", incompleteStruct.} = object
 proc fcQSettings_metaObject(self: pointer): pointer {.importc: "QSettings_metaObject".}
 proc fcQSettings_metacast(self: pointer, param1: cstring): pointer {.importc: "QSettings_metacast".}
 proc fcQSettings_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSettings_metacall".}
-proc fcQSettings_tr(s: cstring): struct_seaqt_string {.importc: "QSettings_tr".}
-proc fcQSettings_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSettings_trUtf8".}
+proc fcQSettings_trS(s: cstring): struct_seaqt_string {.importc: "QSettings_tr_s".}
+proc fcQSettings_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSettings_trUtf8_s".}
 proc fcQSettings_clear(self: pointer): void {.importc: "QSettings_clear".}
 proc fcQSettings_sync(self: pointer): void {.importc: "QSettings_sync".}
 proc fcQSettings_status(self: pointer): cint {.importc: "QSettings_status".}
@@ -103,7 +103,7 @@ proc fcQSettings_beginGroup(self: pointer, prefix: struct_seaqt_string): void {.
 proc fcQSettings_endGroup(self: pointer): void {.importc: "QSettings_endGroup".}
 proc fcQSettings_group(self: pointer): struct_seaqt_string {.importc: "QSettings_group".}
 proc fcQSettings_beginReadArray(self: pointer, prefix: struct_seaqt_string): cint {.importc: "QSettings_beginReadArray".}
-proc fcQSettings_beginWriteArray(self: pointer, prefix: struct_seaqt_string): void {.importc: "QSettings_beginWriteArray".}
+proc fcQSettings_beginWriteArrayPrefix(self: pointer, prefix: struct_seaqt_string): void {.importc: "QSettings_beginWriteArray_prefix".}
 proc fcQSettings_endArray(self: pointer): void {.importc: "QSettings_endArray".}
 proc fcQSettings_setArrayIndex(self: pointer, i: cint): void {.importc: "QSettings_setArrayIndex".}
 proc fcQSettings_allKeys(self: pointer): struct_seaqt_array {.importc: "QSettings_allKeys".}
@@ -111,7 +111,7 @@ proc fcQSettings_childKeys(self: pointer): struct_seaqt_array {.importc: "QSetti
 proc fcQSettings_childGroups(self: pointer): struct_seaqt_array {.importc: "QSettings_childGroups".}
 proc fcQSettings_isWritable(self: pointer): bool {.importc: "QSettings_isWritable".}
 proc fcQSettings_setValue(self: pointer, key: struct_seaqt_string, value: pointer): void {.importc: "QSettings_setValue".}
-proc fcQSettings_value(self: pointer, key: struct_seaqt_string): pointer {.importc: "QSettings_value".}
+proc fcQSettings_valueKey(self: pointer, key: struct_seaqt_string): pointer {.importc: "QSettings_value_key".}
 proc fcQSettings_remove(self: pointer, key: struct_seaqt_string): void {.importc: "QSettings_remove".}
 proc fcQSettings_contains(self: pointer, key: struct_seaqt_string): bool {.importc: "QSettings_contains".}
 proc fcQSettings_setFallbacksEnabled(self: pointer, b: bool): void {.importc: "QSettings_setFallbacksEnabled".}
@@ -121,20 +121,20 @@ proc fcQSettings_format(self: pointer): cint {.importc: "QSettings_format".}
 proc fcQSettings_scope(self: pointer): cint {.importc: "QSettings_scope".}
 proc fcQSettings_organizationName(self: pointer): struct_seaqt_string {.importc: "QSettings_organizationName".}
 proc fcQSettings_applicationName(self: pointer): struct_seaqt_string {.importc: "QSettings_applicationName".}
-proc fcQSettings_setIniCodec(self: pointer, codec: pointer): void {.importc: "QSettings_setIniCodec".}
-proc fcQSettings_setIniCodecWithCodecName(self: pointer, codecName: cstring): void {.importc: "QSettings_setIniCodecWithCodecName".}
+proc fcQSettings_setIniCodecCodec(self: pointer, codec: pointer): void {.importc: "QSettings_setIniCodec_codec".}
+proc fcQSettings_setIniCodecCodecName(self: pointer, codecName: cstring): void {.importc: "QSettings_setIniCodec_codecName".}
 proc fcQSettings_iniCodec(self: pointer): pointer {.importc: "QSettings_iniCodec".}
 proc fcQSettings_setDefaultFormat(format: cint): void {.importc: "QSettings_setDefaultFormat".}
 proc fcQSettings_defaultFormat(): cint {.importc: "QSettings_defaultFormat".}
 proc fcQSettings_setSystemIniPath(dir: struct_seaqt_string): void {.importc: "QSettings_setSystemIniPath".}
 proc fcQSettings_setUserIniPath(dir: struct_seaqt_string): void {.importc: "QSettings_setUserIniPath".}
 proc fcQSettings_setPath(format: cint, scope: cint, path: struct_seaqt_string): void {.importc: "QSettings_setPath".}
-proc fcQSettings_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSettings_tr2".}
-proc fcQSettings_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSettings_tr3".}
-proc fcQSettings_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSettings_trUtf82".}
-proc fcQSettings_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSettings_trUtf83".}
-proc fcQSettings_beginWriteArray2(self: pointer, prefix: struct_seaqt_string, size: cint): void {.importc: "QSettings_beginWriteArray2".}
-proc fcQSettings_value2(self: pointer, key: struct_seaqt_string, defaultValue: pointer): pointer {.importc: "QSettings_value2".}
+proc fcQSettings_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSettings_tr_s_c".}
+proc fcQSettings_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSettings_tr_s_c_n".}
+proc fcQSettings_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSettings_trUtf8_s_c".}
+proc fcQSettings_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSettings_trUtf8_s_c_n".}
+proc fcQSettings_beginWriteArrayPrefixSize(self: pointer, prefix: struct_seaqt_string, size: cint): void {.importc: "QSettings_beginWriteArray_prefix_size".}
+proc fcQSettings_valueKeyDefaultValue(self: pointer, key: struct_seaqt_string, defaultValue: pointer): pointer {.importc: "QSettings_value_key_defaultValue".}
 proc fcQSettings_vdata(self: pointer): ptr pointer {.importc: "QSettings_vdata".}
 proc fvdata_cQSettings(self: pointer): pointer {.importc: "vdata_QSettings".}
 
@@ -164,21 +164,21 @@ proc fcQSettings_protectedbase_sender(self: pointer): pointer {.importc: "QSetti
 proc fcQSettings_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSettings_protectedbase_senderSignalIndex".}
 proc fcQSettings_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSettings_protectedbase_receivers".}
 proc fcQSettings_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSettings_protectedbase_isSignalConnected".}
-proc fcQSettings_new(vtbl: pointer, vdata: csize_t, organization: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new".}
-proc fcQSettings_new2(vtbl: pointer, vdata: csize_t, scope: cint, organization: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new2".}
-proc fcQSettings_new3(vtbl: pointer, vdata: csize_t, format: cint, scope: cint, organization: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new3".}
-proc fcQSettings_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cint): ptr cQSettings {.importc: "QSettings_new4".}
-proc fcQSettings_new5(vtbl: pointer, vdata: csize_t): ptr cQSettings {.importc: "QSettings_new5".}
-proc fcQSettings_new6(vtbl: pointer, vdata: csize_t, scope: cint): ptr cQSettings {.importc: "QSettings_new6".}
-proc fcQSettings_new7(vtbl: pointer, vdata: csize_t, organization: struct_seaqt_string, application: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new7".}
-proc fcQSettings_new8(vtbl: pointer, vdata: csize_t, organization: struct_seaqt_string, application: struct_seaqt_string, parent: pointer): ptr cQSettings {.importc: "QSettings_new8".}
-proc fcQSettings_new9(vtbl: pointer, vdata: csize_t, scope: cint, organization: struct_seaqt_string, application: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new9".}
-proc fcQSettings_new10(vtbl: pointer, vdata: csize_t, scope: cint, organization: struct_seaqt_string, application: struct_seaqt_string, parent: pointer): ptr cQSettings {.importc: "QSettings_new10".}
-proc fcQSettings_new11(vtbl: pointer, vdata: csize_t, format: cint, scope: cint, organization: struct_seaqt_string, application: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new11".}
-proc fcQSettings_new12(vtbl: pointer, vdata: csize_t, format: cint, scope: cint, organization: struct_seaqt_string, application: struct_seaqt_string, parent: pointer): ptr cQSettings {.importc: "QSettings_new12".}
-proc fcQSettings_new13(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cint, parent: pointer): ptr cQSettings {.importc: "QSettings_new13".}
-proc fcQSettings_new14(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSettings {.importc: "QSettings_new14".}
-proc fcQSettings_new15(vtbl: pointer, vdata: csize_t, scope: cint, parent: pointer): ptr cQSettings {.importc: "QSettings_new15".}
+proc fcQSettings_new(vtbl: pointer, vdata: csize_t, organization: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new_organization".}
+proc fcQSettings_new2(vtbl: pointer, vdata: csize_t, scope: cint, organization: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new_scope_organization".}
+proc fcQSettings_new3(vtbl: pointer, vdata: csize_t, format: cint, scope: cint, organization: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new_format_scope_organization".}
+proc fcQSettings_new4(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cint): ptr cQSettings {.importc: "QSettings_new_fileName_format".}
+proc fcQSettings_new5(vtbl: pointer, vdata: csize_t): ptr cQSettings {.importc: "QSettings_new".}
+proc fcQSettings_new6(vtbl: pointer, vdata: csize_t, scope: cint): ptr cQSettings {.importc: "QSettings_new_scope".}
+proc fcQSettings_new7(vtbl: pointer, vdata: csize_t, organization: struct_seaqt_string, application: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new_organization_application".}
+proc fcQSettings_new8(vtbl: pointer, vdata: csize_t, organization: struct_seaqt_string, application: struct_seaqt_string, parent: pointer): ptr cQSettings {.importc: "QSettings_new_organization_application_parent".}
+proc fcQSettings_new9(vtbl: pointer, vdata: csize_t, scope: cint, organization: struct_seaqt_string, application: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new_scope_organization_application".}
+proc fcQSettings_new10(vtbl: pointer, vdata: csize_t, scope: cint, organization: struct_seaqt_string, application: struct_seaqt_string, parent: pointer): ptr cQSettings {.importc: "QSettings_new_scope_organization_application_parent".}
+proc fcQSettings_new11(vtbl: pointer, vdata: csize_t, format: cint, scope: cint, organization: struct_seaqt_string, application: struct_seaqt_string): ptr cQSettings {.importc: "QSettings_new_format_scope_organization_application".}
+proc fcQSettings_new12(vtbl: pointer, vdata: csize_t, format: cint, scope: cint, organization: struct_seaqt_string, application: struct_seaqt_string, parent: pointer): ptr cQSettings {.importc: "QSettings_new_format_scope_organization_application_parent".}
+proc fcQSettings_new13(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: cint, parent: pointer): ptr cQSettings {.importc: "QSettings_new_fileName_format_parent".}
+proc fcQSettings_new14(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSettings {.importc: "QSettings_new_parent".}
+proc fcQSettings_new15(vtbl: pointer, vdata: csize_t, scope: cint, parent: pointer): ptr cQSettings {.importc: "QSettings_new_scope_parent".}
 proc fcQSettings_staticMetaObject(): pointer {.importc: "QSettings_staticMetaObject".}
 
 proc metaObject*(self: gen_qsettings_types.QSettings): gen_qobjectdefs_types.QMetaObject =
@@ -191,13 +191,13 @@ proc metacall*(self: gen_qsettings_types.QSettings, param1: cint, param2: cint, 
   fcQSettings_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsettings_types.QSettings, s: cstring): string =
-  let v_ms = fcQSettings_tr(s)
+  let v_ms = fcQSettings_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsettings_types.QSettings, s: cstring): string =
-  let v_ms = fcQSettings_trUtf8(s)
+  let v_ms = fcQSettings_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -233,7 +233,7 @@ proc beginReadArray*(self: gen_qsettings_types.QSettings, prefix: openArray[char
   fcQSettings_beginReadArray(self.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
 proc beginWriteArray*(self: gen_qsettings_types.QSettings, prefix: openArray[char]): void =
-  fcQSettings_beginWriteArray(self.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
+  fcQSettings_beginWriteArrayPrefix(self.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
 
 proc endArray*(self: gen_qsettings_types.QSettings): void =
   fcQSettings_endArray(self.h)
@@ -284,7 +284,7 @@ proc setValue*(self: gen_qsettings_types.QSettings, key: openArray[char], value:
   fcQSettings_setValue(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
 proc value*(self: gen_qsettings_types.QSettings, key: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSettings_value(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
+  gen_qvariant_types.QVariant(h: fcQSettings_valueKey(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc remove*(self: gen_qsettings_types.QSettings, key: openArray[char]): void =
   fcQSettings_remove(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
@@ -323,10 +323,10 @@ proc applicationName*(self: gen_qsettings_types.QSettings): string =
   vx_ret
 
 proc setIniCodec*(self: gen_qsettings_types.QSettings, codec: gen_qtextcodec_types.QTextCodec): void =
-  fcQSettings_setIniCodec(self.h, codec.h)
+  fcQSettings_setIniCodecCodec(self.h, codec.h)
 
 proc setIniCodec*(self: gen_qsettings_types.QSettings, codecName: cstring): void =
-  fcQSettings_setIniCodecWithCodecName(self.h, codecName)
+  fcQSettings_setIniCodecCodecName(self.h, codecName)
 
 proc iniCodec*(self: gen_qsettings_types.QSettings): gen_qtextcodec_types.QTextCodec =
   gen_qtextcodec_types.QTextCodec(h: fcQSettings_iniCodec(self.h), owned: false)
@@ -347,34 +347,34 @@ proc setPath*(_: type gen_qsettings_types.QSettings, format: cint, scope: cint, 
   fcQSettings_setPath(cint(format), cint(scope), struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc tr*(_: type gen_qsettings_types.QSettings, s: cstring, c: cstring): string =
-  let v_ms = fcQSettings_tr2(s, c)
+  let v_ms = fcQSettings_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsettings_types.QSettings, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSettings_tr3(s, c, n)
+  let v_ms = fcQSettings_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsettings_types.QSettings, s: cstring, c: cstring): string =
-  let v_ms = fcQSettings_trUtf82(s, c)
+  let v_ms = fcQSettings_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsettings_types.QSettings, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSettings_trUtf83(s, c, n)
+  let v_ms = fcQSettings_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc beginWriteArray*(self: gen_qsettings_types.QSettings, prefix: openArray[char], size: cint): void =
-  fcQSettings_beginWriteArray2(self.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), size)
+  fcQSettings_beginWriteArrayPrefixSize(self.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))), size)
 
 proc value*(self: gen_qsettings_types.QSettings, key: openArray[char], defaultValue: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSettings_value2(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), defaultValue.h), owned: true)
+  gen_qvariant_types.QVariant(h: fcQSettings_valueKeyDefaultValue(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), defaultValue.h), owned: true)
 
 type QSettingsmetaObjectProc* = proc(self: QSettings): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSettingsmetacastProc* = proc(self: QSettings, param1: cstring): pointer {.raises: [], gcsafe.}

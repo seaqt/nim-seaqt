@@ -82,7 +82,7 @@ public:
 	VirtualQTreeWidgetItem(const QTreeWidgetItem_VTable* vtbl, QTreeWidgetItem* parent): QTreeWidgetItem(parent), vtbl(vtbl) {}
 	VirtualQTreeWidgetItem(const QTreeWidgetItem_VTable* vtbl, QTreeWidgetItem* parent, const QStringList& strings): QTreeWidgetItem(parent, strings), vtbl(vtbl) {}
 	VirtualQTreeWidgetItem(const QTreeWidgetItem_VTable* vtbl, QTreeWidgetItem* parent, QTreeWidgetItem* after): QTreeWidgetItem(parent, after), vtbl(vtbl) {}
-	VirtualQTreeWidgetItem(const QTreeWidgetItem_VTable* vtbl, const QTreeWidgetItem& other): QTreeWidgetItem(other), vtbl(vtbl) {}
+	VirtualQTreeWidgetItem(const QTreeWidgetItem_VTable* vtbl, const QTreeWidgetItem& from): QTreeWidgetItem(from), vtbl(vtbl) {}
 	VirtualQTreeWidgetItem(const QTreeWidgetItem_VTable* vtbl, int type): QTreeWidgetItem(type), vtbl(vtbl) {}
 	VirtualQTreeWidgetItem(const QTreeWidgetItem_VTable* vtbl, const QStringList& strings, int type): QTreeWidgetItem(strings, type), vtbl(vtbl) {}
 	VirtualQTreeWidgetItem(const QTreeWidgetItem_VTable* vtbl, QTreeWidget* treeview, int type): QTreeWidgetItem(treeview, type), vtbl(vtbl) {}
@@ -188,7 +188,7 @@ VirtualQTreeWidgetItem* QTreeWidgetItem_new(const QTreeWidgetItem_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new2(const QTreeWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_strings(const QTreeWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings) {
 	QStringList strings_QList;
 	strings_QList.reserve(strings.len);
 	struct seaqt_string* strings_arr = static_cast<struct seaqt_string*>(strings.data);
@@ -200,12 +200,12 @@ VirtualQTreeWidgetItem* QTreeWidgetItem_new2(const QTreeWidgetItem_VTable* vtbl,
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, strings_QList) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new3(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_treeview(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, treeview) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new4(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, struct seaqt_array /* of struct seaqt_string */  strings) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_treeview_strings(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, struct seaqt_array /* of struct seaqt_string */  strings) {
 	QStringList strings_QList;
 	strings_QList.reserve(strings.len);
 	struct seaqt_string* strings_arr = static_cast<struct seaqt_string*>(strings.data);
@@ -217,17 +217,17 @@ VirtualQTreeWidgetItem* QTreeWidgetItem_new4(const QTreeWidgetItem_VTable* vtbl,
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, treeview, strings_QList) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new5(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, QTreeWidgetItem* after) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_treeview_after(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, QTreeWidgetItem* after) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, treeview, after) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new6(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_parent(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, parent) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new7(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, struct seaqt_array /* of struct seaqt_string */  strings) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_parent_strings(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, struct seaqt_array /* of struct seaqt_string */  strings) {
 	QStringList strings_QList;
 	strings_QList.reserve(strings.len);
 	struct seaqt_string* strings_arr = static_cast<struct seaqt_string*>(strings.data);
@@ -239,22 +239,22 @@ VirtualQTreeWidgetItem* QTreeWidgetItem_new7(const QTreeWidgetItem_VTable* vtbl,
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, parent, strings_QList) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new8(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, QTreeWidgetItem* after) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_parent_after(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, QTreeWidgetItem* after) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, parent, after) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new9(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* other) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_from(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, *other) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, *from) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new10(const QTreeWidgetItem_VTable* vtbl, size_t vdata, int type) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_type(const QTreeWidgetItem_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new11(const QTreeWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings, int type) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_strings_type(const QTreeWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings, int type) {
 	QStringList strings_QList;
 	strings_QList.reserve(strings.len);
 	struct seaqt_string* strings_arr = static_cast<struct seaqt_string*>(strings.data);
@@ -266,12 +266,12 @@ VirtualQTreeWidgetItem* QTreeWidgetItem_new11(const QTreeWidgetItem_VTable* vtbl
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, strings_QList, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new12(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, int type) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_treeview_type(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, treeview, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new13(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, struct seaqt_array /* of struct seaqt_string */  strings, int type) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_treeview_strings_type(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, struct seaqt_array /* of struct seaqt_string */  strings, int type) {
 	QStringList strings_QList;
 	strings_QList.reserve(strings.len);
 	struct seaqt_string* strings_arr = static_cast<struct seaqt_string*>(strings.data);
@@ -283,17 +283,17 @@ VirtualQTreeWidgetItem* QTreeWidgetItem_new13(const QTreeWidgetItem_VTable* vtbl
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, treeview, strings_QList, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new14(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, QTreeWidgetItem* after, int type) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_treeview_after_type(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidget* treeview, QTreeWidgetItem* after, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, treeview, after, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new15(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, int type) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_parent_type(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, parent, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new16(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, struct seaqt_array /* of struct seaqt_string */  strings, int type) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_parent_strings_type(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, struct seaqt_array /* of struct seaqt_string */  strings, int type) {
 	QStringList strings_QList;
 	strings_QList.reserve(strings.len);
 	struct seaqt_string* strings_arr = static_cast<struct seaqt_string*>(strings.data);
@@ -305,7 +305,7 @@ VirtualQTreeWidgetItem* QTreeWidgetItem_new16(const QTreeWidgetItem_VTable* vtbl
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, parent, strings_QList, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQTreeWidgetItem* QTreeWidgetItem_new17(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, QTreeWidgetItem* after, int type) {
+VirtualQTreeWidgetItem* QTreeWidgetItem_new_parent_after_type(const QTreeWidgetItem_VTable* vtbl, size_t vdata, QTreeWidgetItem* parent, QTreeWidgetItem* after, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidgetItem(vtbl, parent, after, static_cast<int>(type)) : nullptr;
 }
@@ -533,8 +533,8 @@ void QTreeWidgetItem_write(const QTreeWidgetItem* self, QDataStream* out) {
 	self->write(*out);
 }
 
-void QTreeWidgetItem_operatorAssign(QTreeWidgetItem* self, QTreeWidgetItem* other) {
-	self->operator=(*other);
+void QTreeWidgetItem_operatorAssign(QTreeWidgetItem* self, QTreeWidgetItem* from) {
+	self->operator=(*from);
 }
 
 QTreeWidgetItem* QTreeWidgetItem_parent(const QTreeWidgetItem* self) {
@@ -1448,7 +1448,7 @@ public:
 	friend void QTreeWidget_virtualbase_editorDestroyed(VirtualQTreeWidget* self, QObject* editor);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QTreeWidget::edit(index, trigger, event);
 		}
 
@@ -1458,11 +1458,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QTreeWidget_virtualbase_edit2(VirtualQTreeWidget* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QTreeWidget_virtualbase_edit_index_trigger_event(VirtualQTreeWidget* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1962,11 +1962,11 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend struct seaqt_array /* of QTreeWidgetItem* */  QTreeWidget_protectedbase_items(const VirtualQTreeWidget* self, QMimeData* data);
-	friend QModelIndex* QTreeWidget_protectedbase_indexFromItem(const VirtualQTreeWidget* self, QTreeWidgetItem* item);
-	friend QModelIndex* QTreeWidget_protectedbase_indexFromItemWithItem(const VirtualQTreeWidget* self, QTreeWidgetItem* item);
+	friend QModelIndex* QTreeWidget_protectedbase_indexFromItem_const_pcQTreeWidgetItem(const VirtualQTreeWidget* self, QTreeWidgetItem* item);
+	friend QModelIndex* QTreeWidget_protectedbase_indexFromItem_const_pQTreeWidgetItem(const VirtualQTreeWidget* self, QTreeWidgetItem* item);
 	friend QTreeWidgetItem* QTreeWidget_protectedbase_itemFromIndex(const VirtualQTreeWidget* self, QModelIndex* index);
-	friend QModelIndex* QTreeWidget_protectedbase_indexFromItem2(const VirtualQTreeWidget* self, QTreeWidgetItem* item, int column);
-	friend QModelIndex* QTreeWidget_protectedbase_indexFromItem3(const VirtualQTreeWidget* self, QTreeWidgetItem* item, int column);
+	friend QModelIndex* QTreeWidget_protectedbase_indexFromItem_const_pcQTreeWidgetItem_int(const VirtualQTreeWidget* self, QTreeWidgetItem* item, int column);
+	friend QModelIndex* QTreeWidget_protectedbase_indexFromItem_const_pQTreeWidgetItem_int(const VirtualQTreeWidget* self, QTreeWidgetItem* item, int column);
 	friend void QTreeWidget_protectedbase_columnResized(VirtualQTreeWidget* self, int column, int oldSize, int newSize);
 	friend void QTreeWidget_protectedbase_columnCountChanged(VirtualQTreeWidget* self, int oldCount, int newCount);
 	friend void QTreeWidget_protectedbase_columnMoved(VirtualQTreeWidget* self);
@@ -1990,7 +1990,7 @@ public:
 	friend void QTreeWidget_protectedbase_stopAutoScroll(VirtualQTreeWidget* self);
 	friend void QTreeWidget_protectedbase_doAutoScroll(VirtualQTreeWidget* self);
 	friend int QTreeWidget_protectedbase_dropIndicatorPosition(const VirtualQTreeWidget* self);
-	friend void QTreeWidget_protectedbase_setViewportMargins(VirtualQTreeWidget* self, int left, int top, int right, int bottom);
+	friend void QTreeWidget_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTreeWidget* self, int left, int top, int right, int bottom);
 	friend QMargins* QTreeWidget_protectedbase_viewportMargins(const VirtualQTreeWidget* self);
 	friend void QTreeWidget_protectedbase_drawFrame(VirtualQTreeWidget* self, QPainter* param1);
 	friend void QTreeWidget_protectedbase_initStyleOption(const VirtualQTreeWidget* self, QStyleOptionFrame* option);
@@ -2010,7 +2010,7 @@ VirtualQTreeWidget* QTreeWidget_new(const QTreeWidget_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQTreeWidget(vtbl) : nullptr;
 }
 
-VirtualQTreeWidget* QTreeWidget_new2(const QTreeWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQTreeWidget* QTreeWidget_new_parent(const QTreeWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTreeWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTreeWidget(vtbl, parent) : nullptr;
 }
@@ -2031,7 +2031,7 @@ int QTreeWidget_metacall(QTreeWidget* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTreeWidget_tr(const char* s) {
+struct seaqt_string QTreeWidget_tr_s(const char* s) {
 	QString _ret = QTreeWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2042,7 +2042,7 @@ struct seaqt_string QTreeWidget_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTreeWidget_trUtf8(const char* s) {
+struct seaqt_string QTreeWidget_trUtf8_s(const char* s) {
 	QString _ret = QTreeWidget::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2141,23 +2141,23 @@ int QTreeWidget_currentColumn(const QTreeWidget* self) {
 	return self->currentColumn();
 }
 
-void QTreeWidget_setCurrentItem(QTreeWidget* self, QTreeWidgetItem* item) {
+void QTreeWidget_setCurrentItem_item(QTreeWidget* self, QTreeWidgetItem* item) {
 	self->setCurrentItem(item);
 }
 
-void QTreeWidget_setCurrentItem2(QTreeWidget* self, QTreeWidgetItem* item, int column) {
+void QTreeWidget_setCurrentItem_item_column(QTreeWidget* self, QTreeWidgetItem* item, int column) {
 	self->setCurrentItem(item, static_cast<int>(column));
 }
 
-void QTreeWidget_setCurrentItem3(QTreeWidget* self, QTreeWidgetItem* item, int column, int command) {
+void QTreeWidget_setCurrentItem_item_column_command(QTreeWidget* self, QTreeWidgetItem* item, int column, int command) {
 	self->setCurrentItem(item, static_cast<int>(column), static_cast<QItemSelectionModel::SelectionFlags>(command));
 }
 
-QTreeWidgetItem* QTreeWidget_itemAt(const QTreeWidget* self, QPoint* p) {
+QTreeWidgetItem* QTreeWidget_itemAt_p(const QTreeWidget* self, QPoint* p) {
 	return self->itemAt(*p);
 }
 
-QTreeWidgetItem* QTreeWidget_itemAt2(const QTreeWidget* self, int x, int y) {
+QTreeWidgetItem* QTreeWidget_itemAt_x_y(const QTreeWidget* self, int x, int y) {
 	return self->itemAt(static_cast<int>(x), static_cast<int>(y));
 }
 
@@ -2173,19 +2173,19 @@ void QTreeWidget_sortItems(QTreeWidget* self, int column, int order) {
 	self->sortItems(static_cast<int>(column), static_cast<Qt::SortOrder>(order));
 }
 
-void QTreeWidget_editItem(QTreeWidget* self, QTreeWidgetItem* item) {
+void QTreeWidget_editItem_item(QTreeWidget* self, QTreeWidgetItem* item) {
 	self->editItem(item);
 }
 
-void QTreeWidget_openPersistentEditor(QTreeWidget* self, QTreeWidgetItem* item) {
+void QTreeWidget_openPersistentEditor_item(QTreeWidget* self, QTreeWidgetItem* item) {
 	self->openPersistentEditor(item);
 }
 
-void QTreeWidget_closePersistentEditor(QTreeWidget* self, QTreeWidgetItem* item) {
+void QTreeWidget_closePersistentEditor_item(QTreeWidget* self, QTreeWidgetItem* item) {
 	self->closePersistentEditor(item);
 }
 
-bool QTreeWidget_isPersistentEditorOpen(const QTreeWidget* self, QTreeWidgetItem* item) {
+bool QTreeWidget_isPersistentEditorOpen_item(const QTreeWidget* self, QTreeWidgetItem* item) {
 	return self->isPersistentEditorOpen(item);
 }
 
@@ -2222,7 +2222,7 @@ struct seaqt_array /* of QTreeWidgetItem* */  QTreeWidget_selectedItems(const QT
 	return _out;
 }
 
-struct seaqt_array /* of QTreeWidgetItem* */  QTreeWidget_findItems(const QTreeWidget* self, struct seaqt_string text, int flags) {
+struct seaqt_array /* of QTreeWidgetItem* */  QTreeWidget_findItems_text_flags(const QTreeWidget* self, struct seaqt_string text, int flags) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	QList<QTreeWidgetItem *> _ret = self->findItems(text_QString, static_cast<Qt::MatchFlags>(flags));
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -2272,7 +2272,7 @@ void QTreeWidget_setSelectionModel(QTreeWidget* self, QItemSelectionModel* selec
 	self->setSelectionModel(selectionModel);
 }
 
-void QTreeWidget_scrollToItem(QTreeWidget* self, QTreeWidgetItem* item) {
+void QTreeWidget_scrollToItem_item(QTreeWidget* self, QTreeWidgetItem* item) {
 	self->scrollToItem(item);
 }
 
@@ -2454,7 +2454,7 @@ void QTreeWidget_connect_itemSelectionChanged(QTreeWidget* self, intptr_t slot, 
 	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)()>(&QTreeWidget::itemSelectionChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QTreeWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QTreeWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTreeWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2465,7 +2465,7 @@ struct seaqt_string QTreeWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTreeWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTreeWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTreeWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2476,7 +2476,7 @@ struct seaqt_string QTreeWidget_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTreeWidget_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTreeWidget_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTreeWidget::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2487,7 +2487,7 @@ struct seaqt_string QTreeWidget_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTreeWidget_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTreeWidget_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTreeWidget::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2498,23 +2498,23 @@ struct seaqt_string QTreeWidget_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QTreeWidget_editItem2(QTreeWidget* self, QTreeWidgetItem* item, int column) {
+void QTreeWidget_editItem_item_column(QTreeWidget* self, QTreeWidgetItem* item, int column) {
 	self->editItem(item, static_cast<int>(column));
 }
 
-void QTreeWidget_openPersistentEditor2(QTreeWidget* self, QTreeWidgetItem* item, int column) {
+void QTreeWidget_openPersistentEditor_item_column(QTreeWidget* self, QTreeWidgetItem* item, int column) {
 	self->openPersistentEditor(item, static_cast<int>(column));
 }
 
-void QTreeWidget_closePersistentEditor2(QTreeWidget* self, QTreeWidgetItem* item, int column) {
+void QTreeWidget_closePersistentEditor_item_column(QTreeWidget* self, QTreeWidgetItem* item, int column) {
 	self->closePersistentEditor(item, static_cast<int>(column));
 }
 
-bool QTreeWidget_isPersistentEditorOpen2(const QTreeWidget* self, QTreeWidgetItem* item, int column) {
+bool QTreeWidget_isPersistentEditorOpen_item_column(const QTreeWidget* self, QTreeWidgetItem* item, int column) {
 	return self->isPersistentEditorOpen(item, static_cast<int>(column));
 }
 
-struct seaqt_array /* of QTreeWidgetItem* */  QTreeWidget_findItems2(const QTreeWidget* self, struct seaqt_string text, int flags, int column) {
+struct seaqt_array /* of QTreeWidgetItem* */  QTreeWidget_findItems_text_flags_column(const QTreeWidget* self, struct seaqt_string text, int flags, int column) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	QList<QTreeWidgetItem *> _ret = self->findItems(text_QString, static_cast<Qt::MatchFlags>(flags), static_cast<int>(column));
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -2528,7 +2528,7 @@ struct seaqt_array /* of QTreeWidgetItem* */  QTreeWidget_findItems2(const QTree
 	return _out;
 }
 
-void QTreeWidget_scrollToItem2(QTreeWidget* self, QTreeWidgetItem* item, int hint) {
+void QTreeWidget_scrollToItem_item_hint(QTreeWidget* self, QTreeWidgetItem* item, int hint) {
 	self->scrollToItem(item, static_cast<QAbstractItemView::ScrollHint>(hint));
 }
 
@@ -2855,7 +2855,7 @@ void QTreeWidget_virtualbase_editorDestroyed(VirtualQTreeWidget* self, QObject* 
 	self->QTreeWidget::editorDestroyed(editor);
 }
 
-bool QTreeWidget_virtualbase_edit2(VirtualQTreeWidget* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QTreeWidget_virtualbase_edit_index_trigger_event(VirtualQTreeWidget* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QTreeWidget::edit(*index, static_cast<VirtualQTreeWidget::EditTrigger>(trigger), event);
 }
@@ -3075,11 +3075,11 @@ struct seaqt_array /* of QTreeWidgetItem* */  QTreeWidget_protectedbase_items(co
 	return _out;
 }
 
-QModelIndex* QTreeWidget_protectedbase_indexFromItem(const VirtualQTreeWidget* self, QTreeWidgetItem* item) {
+QModelIndex* QTreeWidget_protectedbase_indexFromItem_const_pcQTreeWidgetItem(const VirtualQTreeWidget* self, QTreeWidgetItem* item) {
 	return new QModelIndex(self->indexFromItem(item));
 }
 
-QModelIndex* QTreeWidget_protectedbase_indexFromItemWithItem(const VirtualQTreeWidget* self, QTreeWidgetItem* item) {
+QModelIndex* QTreeWidget_protectedbase_indexFromItem_const_pQTreeWidgetItem(const VirtualQTreeWidget* self, QTreeWidgetItem* item) {
 	return new QModelIndex(self->indexFromItem(item));
 }
 
@@ -3087,11 +3087,11 @@ QTreeWidgetItem* QTreeWidget_protectedbase_itemFromIndex(const VirtualQTreeWidge
 	return self->itemFromIndex(*index);
 }
 
-QModelIndex* QTreeWidget_protectedbase_indexFromItem2(const VirtualQTreeWidget* self, QTreeWidgetItem* item, int column) {
+QModelIndex* QTreeWidget_protectedbase_indexFromItem_const_pcQTreeWidgetItem_int(const VirtualQTreeWidget* self, QTreeWidgetItem* item, int column) {
 	return new QModelIndex(self->indexFromItem(item, static_cast<int>(column)));
 }
 
-QModelIndex* QTreeWidget_protectedbase_indexFromItem3(const VirtualQTreeWidget* self, QTreeWidgetItem* item, int column) {
+QModelIndex* QTreeWidget_protectedbase_indexFromItem_const_pQTreeWidgetItem_int(const VirtualQTreeWidget* self, QTreeWidgetItem* item, int column) {
 	return new QModelIndex(self->indexFromItem(item, static_cast<int>(column)));
 }
 
@@ -3189,7 +3189,7 @@ int QTreeWidget_protectedbase_dropIndicatorPosition(const VirtualQTreeWidget* se
 	return static_cast<int>(_ret);
 }
 
-void QTreeWidget_protectedbase_setViewportMargins(VirtualQTreeWidget* self, int left, int top, int right, int bottom) {
+void QTreeWidget_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTreeWidget* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

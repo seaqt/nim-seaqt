@@ -23,23 +23,23 @@ QImageWriter* QImageWriter_new() {
 	return new (std::nothrow) QImageWriter();
 }
 
-QImageWriter* QImageWriter_new2(QIODevice* device, struct seaqt_string format) {
+QImageWriter* QImageWriter_new_device_format(QIODevice* device, struct seaqt_string format) {
 	QByteArray format_QByteArray(format.data, format.len);
 	return new (std::nothrow) QImageWriter(device, format_QByteArray);
 }
 
-QImageWriter* QImageWriter_new3(struct seaqt_string fileName) {
+QImageWriter* QImageWriter_new_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new (std::nothrow) QImageWriter(fileName_QString);
 }
 
-QImageWriter* QImageWriter_new4(struct seaqt_string fileName, struct seaqt_string format) {
+QImageWriter* QImageWriter_new_fileName_format(struct seaqt_string fileName, struct seaqt_string format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray format_QByteArray(format.data, format.len);
 	return new (std::nothrow) QImageWriter(fileName_QString, format_QByteArray);
 }
 
-struct seaqt_string QImageWriter_tr(const char* sourceText) {
+struct seaqt_string QImageWriter_tr_sourceText(const char* sourceText) {
 	QString _ret = QImageWriter::tr(sourceText);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -50,7 +50,7 @@ struct seaqt_string QImageWriter_tr(const char* sourceText) {
 	return _ms;
 }
 
-struct seaqt_string QImageWriter_trUtf8(const char* sourceText) {
+struct seaqt_string QImageWriter_trUtf8_sourceText(const char* sourceText) {
 	QString _ret = QImageWriter::trUtf8(sourceText);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -285,7 +285,7 @@ struct seaqt_array /* of struct seaqt_string */  QImageWriter_imageFormatsForMim
 	return _out;
 }
 
-struct seaqt_string QImageWriter_tr2(const char* sourceText, const char* disambiguation) {
+struct seaqt_string QImageWriter_tr_sourceText_disambiguation(const char* sourceText, const char* disambiguation) {
 	QString _ret = QImageWriter::tr(sourceText, disambiguation);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -296,7 +296,7 @@ struct seaqt_string QImageWriter_tr2(const char* sourceText, const char* disambi
 	return _ms;
 }
 
-struct seaqt_string QImageWriter_tr3(const char* sourceText, const char* disambiguation, int n) {
+struct seaqt_string QImageWriter_tr_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n) {
 	QString _ret = QImageWriter::tr(sourceText, disambiguation, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -307,7 +307,7 @@ struct seaqt_string QImageWriter_tr3(const char* sourceText, const char* disambi
 	return _ms;
 }
 
-struct seaqt_string QImageWriter_trUtf82(const char* sourceText, const char* disambiguation) {
+struct seaqt_string QImageWriter_trUtf8_sourceText_disambiguation(const char* sourceText, const char* disambiguation) {
 	QString _ret = QImageWriter::trUtf8(sourceText, disambiguation);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -318,7 +318,7 @@ struct seaqt_string QImageWriter_trUtf82(const char* sourceText, const char* dis
 	return _ms;
 }
 
-struct seaqt_string QImageWriter_trUtf83(const char* sourceText, const char* disambiguation, int n) {
+struct seaqt_string QImageWriter_trUtf8_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n) {
 	QString _ret = QImageWriter::trUtf8(sourceText, disambiguation, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

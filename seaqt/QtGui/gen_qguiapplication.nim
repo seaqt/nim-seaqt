@@ -81,8 +81,8 @@ type cQGuiApplication*{.exportc: "QGuiApplication", incompleteStruct.} = object
 proc fcQGuiApplication_metaObject(self: pointer): pointer {.importc: "QGuiApplication_metaObject".}
 proc fcQGuiApplication_metacast(self: pointer, param1: cstring): pointer {.importc: "QGuiApplication_metacast".}
 proc fcQGuiApplication_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGuiApplication_metacall".}
-proc fcQGuiApplication_tr(s: cstring): struct_seaqt_string {.importc: "QGuiApplication_tr".}
-proc fcQGuiApplication_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGuiApplication_trUtf8".}
+proc fcQGuiApplication_trS(s: cstring): struct_seaqt_string {.importc: "QGuiApplication_tr_s".}
+proc fcQGuiApplication_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGuiApplication_trUtf8_s".}
 proc fcQGuiApplication_setApplicationDisplayName(name: struct_seaqt_string): void {.importc: "QGuiApplication_setApplicationDisplayName".}
 proc fcQGuiApplication_applicationDisplayName(): struct_seaqt_string {.importc: "QGuiApplication_applicationDisplayName".}
 proc fcQGuiApplication_setDesktopFileName(name: struct_seaqt_string): void {.importc: "QGuiApplication_setDesktopFileName".}
@@ -162,10 +162,10 @@ proc fcQGuiApplication_applicationDisplayNameChanged(self: pointer): void {.impo
 proc fcQGuiApplication_connect_applicationDisplayNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGuiApplication_connect_applicationDisplayNameChanged".}
 proc fcQGuiApplication_fontChanged(self: pointer, font: pointer): void {.importc: "QGuiApplication_fontChanged".}
 proc fcQGuiApplication_connect_fontChanged(self: pointer, slot: int, callback: proc (slot: int, font: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGuiApplication_connect_fontChanged".}
-proc fcQGuiApplication_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGuiApplication_tr2".}
-proc fcQGuiApplication_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGuiApplication_tr3".}
-proc fcQGuiApplication_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGuiApplication_trUtf82".}
-proc fcQGuiApplication_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGuiApplication_trUtf83".}
+proc fcQGuiApplication_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGuiApplication_tr_s_c".}
+proc fcQGuiApplication_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGuiApplication_tr_s_c_n".}
+proc fcQGuiApplication_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGuiApplication_trUtf8_s_c".}
+proc fcQGuiApplication_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGuiApplication_trUtf8_s_c_n".}
 proc fcQGuiApplication_vdata(self: pointer): ptr pointer {.importc: "QGuiApplication_vdata".}
 proc fvdata_cQGuiApplication(self: pointer): pointer {.importc: "vdata_QGuiApplication".}
 
@@ -197,8 +197,8 @@ proc fcQGuiApplication_protectedbase_sender(self: pointer): pointer {.importc: "
 proc fcQGuiApplication_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QGuiApplication_protectedbase_senderSignalIndex".}
 proc fcQGuiApplication_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGuiApplication_protectedbase_receivers".}
 proc fcQGuiApplication_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGuiApplication_protectedbase_isSignalConnected".}
-proc fcQGuiApplication_new(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray): ptr cQGuiApplication {.importc: "QGuiApplication_new".}
-proc fcQGuiApplication_new2(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQGuiApplication {.importc: "QGuiApplication_new2".}
+proc fcQGuiApplication_new(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray): ptr cQGuiApplication {.importc: "QGuiApplication_new_int_char".}
+proc fcQGuiApplication_new2(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQGuiApplication {.importc: "QGuiApplication_new_int_char_int".}
 proc fcQGuiApplication_staticMetaObject(): pointer {.importc: "QGuiApplication_staticMetaObject".}
 
 proc metaObject*(self: gen_qguiapplication_types.QGuiApplication): gen_qobjectdefs_types.QMetaObject =
@@ -211,13 +211,13 @@ proc metacall*(self: gen_qguiapplication_types.QGuiApplication, param1: cint, pa
   fcQGuiApplication_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring): string =
-  let v_ms = fcQGuiApplication_tr(s)
+  let v_ms = fcQGuiApplication_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring): string =
-  let v_ms = fcQGuiApplication_trUtf8(s)
+  let v_ms = fcQGuiApplication_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -683,25 +683,25 @@ proc onFontChanged*(self: gen_qguiapplication_types.QGuiApplication, slot: QGuiA
   fcQGuiApplication_connect_fontChanged(self.h, cast[int](addr tmp[]), fcQGuiApplication_slot_callback_fontChanged, fcQGuiApplication_slot_callback_fontChanged_release)
 
 proc tr*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring, c: cstring): string =
-  let v_ms = fcQGuiApplication_tr2(s, c)
+  let v_ms = fcQGuiApplication_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGuiApplication_tr3(s, c, n)
+  let v_ms = fcQGuiApplication_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring, c: cstring): string =
-  let v_ms = fcQGuiApplication_trUtf82(s, c)
+  let v_ms = fcQGuiApplication_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGuiApplication_trUtf83(s, c, n)
+  let v_ms = fcQGuiApplication_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

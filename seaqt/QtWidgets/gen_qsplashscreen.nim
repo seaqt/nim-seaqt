@@ -77,23 +77,23 @@ type cQSplashScreen*{.exportc: "QSplashScreen", incompleteStruct.} = object
 proc fcQSplashScreen_metaObject(self: pointer): pointer {.importc: "QSplashScreen_metaObject".}
 proc fcQSplashScreen_metacast(self: pointer, param1: cstring): pointer {.importc: "QSplashScreen_metacast".}
 proc fcQSplashScreen_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSplashScreen_metacall".}
-proc fcQSplashScreen_tr(s: cstring): struct_seaqt_string {.importc: "QSplashScreen_tr".}
-proc fcQSplashScreen_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSplashScreen_trUtf8".}
+proc fcQSplashScreen_trS(s: cstring): struct_seaqt_string {.importc: "QSplashScreen_tr_s".}
+proc fcQSplashScreen_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSplashScreen_trUtf8_s".}
 proc fcQSplashScreen_setPixmap(self: pointer, pixmap: pointer): void {.importc: "QSplashScreen_setPixmap".}
 proc fcQSplashScreen_pixmap(self: pointer): pointer {.importc: "QSplashScreen_pixmap".}
 proc fcQSplashScreen_finish(self: pointer, w: pointer): void {.importc: "QSplashScreen_finish".}
 proc fcQSplashScreen_repaint(self: pointer): void {.importc: "QSplashScreen_repaint".}
 proc fcQSplashScreen_message(self: pointer): struct_seaqt_string {.importc: "QSplashScreen_message".}
-proc fcQSplashScreen_showMessage(self: pointer, message: struct_seaqt_string): void {.importc: "QSplashScreen_showMessage".}
+proc fcQSplashScreen_showMessageMessage(self: pointer, message: struct_seaqt_string): void {.importc: "QSplashScreen_showMessage_message".}
 proc fcQSplashScreen_clearMessage(self: pointer): void {.importc: "QSplashScreen_clearMessage".}
 proc fcQSplashScreen_messageChanged(self: pointer, message: struct_seaqt_string): void {.importc: "QSplashScreen_messageChanged".}
 proc fcQSplashScreen_connect_messageChanged(self: pointer, slot: int, callback: proc (slot: int, message: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSplashScreen_connect_messageChanged".}
-proc fcQSplashScreen_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplashScreen_tr2".}
-proc fcQSplashScreen_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplashScreen_tr3".}
-proc fcQSplashScreen_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplashScreen_trUtf82".}
-proc fcQSplashScreen_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplashScreen_trUtf83".}
-proc fcQSplashScreen_showMessage2(self: pointer, message: struct_seaqt_string, alignment: cint): void {.importc: "QSplashScreen_showMessage2".}
-proc fcQSplashScreen_showMessage3(self: pointer, message: struct_seaqt_string, alignment: cint, color: pointer): void {.importc: "QSplashScreen_showMessage3".}
+proc fcQSplashScreen_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplashScreen_tr_s_c".}
+proc fcQSplashScreen_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplashScreen_tr_s_c_n".}
+proc fcQSplashScreen_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSplashScreen_trUtf8_s_c".}
+proc fcQSplashScreen_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSplashScreen_trUtf8_s_c_n".}
+proc fcQSplashScreen_showMessageMessageAlignment(self: pointer, message: struct_seaqt_string, alignment: cint): void {.importc: "QSplashScreen_showMessage_message_alignment".}
+proc fcQSplashScreen_showMessageMessageAlignmentColor(self: pointer, message: struct_seaqt_string, alignment: cint, color: pointer): void {.importc: "QSplashScreen_showMessage_message_alignment_color".}
 proc fcQSplashScreen_vdata(self: pointer): ptr pointer {.importc: "QSplashScreen_vdata".}
 proc fvdata_cQSplashScreen(self: pointer): pointer {.importc: "vdata_QSplashScreen".}
 
@@ -211,14 +211,14 @@ proc fcQSplashScreen_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQSplashScreen_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSplashScreen_protectedbase_receivers".}
 proc fcQSplashScreen_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSplashScreen_protectedbase_isSignalConnected".}
 proc fcQSplashScreen_new(vtbl: pointer, vdata: csize_t): ptr cQSplashScreen {.importc: "QSplashScreen_new".}
-proc fcQSplashScreen_new2(vtbl: pointer, vdata: csize_t, screen: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new2".}
-proc fcQSplashScreen_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new3".}
-proc fcQSplashScreen_new4(vtbl: pointer, vdata: csize_t, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new4".}
-proc fcQSplashScreen_new5(vtbl: pointer, vdata: csize_t, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new5".}
-proc fcQSplashScreen_new6(vtbl: pointer, vdata: csize_t, screen: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new6".}
-proc fcQSplashScreen_new7(vtbl: pointer, vdata: csize_t, screen: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new7".}
-proc fcQSplashScreen_new8(vtbl: pointer, vdata: csize_t, parent: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new8".}
-proc fcQSplashScreen_new9(vtbl: pointer, vdata: csize_t, parent: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new9".}
+proc fcQSplashScreen_new2(vtbl: pointer, vdata: csize_t, screen: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new_screen".}
+proc fcQSplashScreen_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new_parent".}
+proc fcQSplashScreen_new4(vtbl: pointer, vdata: csize_t, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new_pixmap".}
+proc fcQSplashScreen_new5(vtbl: pointer, vdata: csize_t, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new_pixmap_f".}
+proc fcQSplashScreen_new6(vtbl: pointer, vdata: csize_t, screen: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new_screen_pixmap".}
+proc fcQSplashScreen_new7(vtbl: pointer, vdata: csize_t, screen: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new_screen_pixmap_f".}
+proc fcQSplashScreen_new8(vtbl: pointer, vdata: csize_t, parent: pointer, pixmap: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new_parent_pixmap".}
+proc fcQSplashScreen_new9(vtbl: pointer, vdata: csize_t, parent: pointer, pixmap: pointer, f: cint): ptr cQSplashScreen {.importc: "QSplashScreen_new_parent_pixmap_f".}
 proc fcQSplashScreen_staticMetaObject(): pointer {.importc: "QSplashScreen_staticMetaObject".}
 
 proc metaObject*(self: gen_qsplashscreen_types.QSplashScreen): gen_qobjectdefs_types.QMetaObject =
@@ -231,13 +231,13 @@ proc metacall*(self: gen_qsplashscreen_types.QSplashScreen, param1: cint, param2
   fcQSplashScreen_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring): string =
-  let v_ms = fcQSplashScreen_tr(s)
+  let v_ms = fcQSplashScreen_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring): string =
-  let v_ms = fcQSplashScreen_trUtf8(s)
+  let v_ms = fcQSplashScreen_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -261,7 +261,7 @@ proc message*(self: gen_qsplashscreen_types.QSplashScreen): string =
   vx_ret
 
 proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: openArray[char]): void =
-  fcQSplashScreen_showMessage(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
+  fcQSplashScreen_showMessageMessage(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
 proc clearMessage*(self: gen_qsplashscreen_types.QSplashScreen): void =
   fcQSplashScreen_clearMessage(self.h)
@@ -290,34 +290,34 @@ proc onMessageChanged*(self: gen_qsplashscreen_types.QSplashScreen, slot: QSplas
   fcQSplashScreen_connect_messageChanged(self.h, cast[int](addr tmp[]), fcQSplashScreen_slot_callback_messageChanged, fcQSplashScreen_slot_callback_messageChanged_release)
 
 proc tr*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring, c: cstring): string =
-  let v_ms = fcQSplashScreen_tr2(s, c)
+  let v_ms = fcQSplashScreen_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSplashScreen_tr3(s, c, n)
+  let v_ms = fcQSplashScreen_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring, c: cstring): string =
-  let v_ms = fcQSplashScreen_trUtf82(s, c)
+  let v_ms = fcQSplashScreen_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSplashScreen_trUtf83(s, c, n)
+  let v_ms = fcQSplashScreen_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: openArray[char], alignment: cint): void =
-  fcQSplashScreen_showMessage2(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), alignment)
+  fcQSplashScreen_showMessageMessageAlignment(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), alignment)
 
 proc showMessage*(self: gen_qsplashscreen_types.QSplashScreen, message: openArray[char], alignment: cint, color: gen_qcolor_types.QColor): void =
-  fcQSplashScreen_showMessage3(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), alignment, color.h)
+  fcQSplashScreen_showMessageMessageAlignmentColor(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))), alignment, color.h)
 
 type QSplashScreenmetaObjectProc* = proc(self: QSplashScreen): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSplashScreenmetacastProc* = proc(self: QSplashScreen, param1: cstring): pointer {.raises: [], gcsafe.}

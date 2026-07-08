@@ -70,8 +70,8 @@ type cQQuickFramebufferObjectRenderer*{.exportc: "QQuickFramebufferObject__Rende
 proc fcQQuickFramebufferObject_metaObject(self: pointer): pointer {.importc: "QQuickFramebufferObject_metaObject".}
 proc fcQQuickFramebufferObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickFramebufferObject_metacast".}
 proc fcQQuickFramebufferObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickFramebufferObject_metacall".}
-proc fcQQuickFramebufferObject_tr(s: cstring): struct_seaqt_string {.importc: "QQuickFramebufferObject_tr".}
-proc fcQQuickFramebufferObject_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQuickFramebufferObject_trUtf8".}
+proc fcQQuickFramebufferObject_trS(s: cstring): struct_seaqt_string {.importc: "QQuickFramebufferObject_tr_s".}
+proc fcQQuickFramebufferObject_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQuickFramebufferObject_trUtf8_s".}
 proc fcQQuickFramebufferObject_textureFollowsItemSize(self: pointer): bool {.importc: "QQuickFramebufferObject_textureFollowsItemSize".}
 proc fcQQuickFramebufferObject_setTextureFollowsItemSize(self: pointer, follows: bool): void {.importc: "QQuickFramebufferObject_setTextureFollowsItemSize".}
 proc fcQQuickFramebufferObject_mirrorVertically(self: pointer): bool {.importc: "QQuickFramebufferObject_mirrorVertically".}
@@ -84,10 +84,10 @@ proc fcQQuickFramebufferObject_textureFollowsItemSizeChanged(self: pointer, para
 proc fcQQuickFramebufferObject_connect_textureFollowsItemSizeChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickFramebufferObject_connect_textureFollowsItemSizeChanged".}
 proc fcQQuickFramebufferObject_mirrorVerticallyChanged(self: pointer, param1: bool): void {.importc: "QQuickFramebufferObject_mirrorVerticallyChanged".}
 proc fcQQuickFramebufferObject_connect_mirrorVerticallyChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickFramebufferObject_connect_mirrorVerticallyChanged".}
-proc fcQQuickFramebufferObject_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickFramebufferObject_tr2".}
-proc fcQQuickFramebufferObject_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickFramebufferObject_tr3".}
-proc fcQQuickFramebufferObject_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickFramebufferObject_trUtf82".}
-proc fcQQuickFramebufferObject_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickFramebufferObject_trUtf83".}
+proc fcQQuickFramebufferObject_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickFramebufferObject_tr_s_c".}
+proc fcQQuickFramebufferObject_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickFramebufferObject_tr_s_c_n".}
+proc fcQQuickFramebufferObject_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickFramebufferObject_trUtf8_s_c".}
+proc fcQQuickFramebufferObject_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickFramebufferObject_trUtf8_s_c_n".}
 proc fcQQuickFramebufferObject_vdata(self: pointer): ptr pointer {.importc: "QQuickFramebufferObject_vdata".}
 proc fvdata_cQQuickFramebufferObject(self: pointer): pointer {.importc: "vdata_QQuickFramebufferObject".}
 
@@ -194,9 +194,9 @@ proc fcQQuickFramebufferObject_protectedbase_senderSignalIndex(self: pointer): c
 proc fcQQuickFramebufferObject_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickFramebufferObject_protectedbase_receivers".}
 proc fcQQuickFramebufferObject_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickFramebufferObject_protectedbase_isSignalConnected".}
 proc fcQQuickFramebufferObject_new(vtbl: pointer, vdata: csize_t): ptr cQQuickFramebufferObject {.importc: "QQuickFramebufferObject_new".}
-proc fcQQuickFramebufferObject_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickFramebufferObject {.importc: "QQuickFramebufferObject_new2".}
+proc fcQQuickFramebufferObject_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickFramebufferObject {.importc: "QQuickFramebufferObject_new_parent".}
 proc fcQQuickFramebufferObject_staticMetaObject(): pointer {.importc: "QQuickFramebufferObject_staticMetaObject".}
-proc fcQQuickFramebufferObjectRenderer_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQuickFramebufferObject__Renderer_operatorAssign".}
+proc fcQQuickFramebufferObjectRenderer_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQuickFramebufferObject__Renderer_operatorAssign".}
 proc fcQQuickFramebufferObjectRenderer_protectedbase_update(self: pointer): void {.importc: "QQuickFramebufferObject__Renderer_protectedbase_update".}
 proc fcQQuickFramebufferObjectRenderer_protectedbase_invalidateFramebufferObject(self: pointer): void {.importc: "QQuickFramebufferObject__Renderer_protectedbase_invalidateFramebufferObject".}
 
@@ -210,13 +210,13 @@ proc metacall*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, 
   fcQQuickFramebufferObject_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, s: cstring): string =
-  let v_ms = fcQQuickFramebufferObject_tr(s)
+  let v_ms = fcQQuickFramebufferObject_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, s: cstring): string =
-  let v_ms = fcQQuickFramebufferObject_trUtf8(s)
+  let v_ms = fcQQuickFramebufferObject_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -286,25 +286,25 @@ proc onMirrorVerticallyChanged*(self: gen_qquickframebufferobject_types.QQuickFr
   fcQQuickFramebufferObject_connect_mirrorVerticallyChanged(self.h, cast[int](addr tmp[]), fcQQuickFramebufferObject_slot_callback_mirrorVerticallyChanged, fcQQuickFramebufferObject_slot_callback_mirrorVerticallyChanged_release)
 
 proc tr*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickFramebufferObject_tr2(s, c)
+  let v_ms = fcQQuickFramebufferObject_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickFramebufferObject_tr3(s, c, n)
+  let v_ms = fcQQuickFramebufferObject_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickFramebufferObject_trUtf82(s, c)
+  let v_ms = fcQQuickFramebufferObject_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickFramebufferObject_trUtf83(s, c, n)
+  let v_ms = fcQQuickFramebufferObject_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1504,8 +1504,8 @@ proc create*(T: type gen_qquickframebufferobject_types.QQuickFramebufferObject,
 
 proc staticMetaObject*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickFramebufferObject_staticMetaObject())
-proc operatorAssign*(self: gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer, param1: gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer): void =
-  fcQQuickFramebufferObjectRenderer_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer, fromVal: gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer): void =
+  fcQQuickFramebufferObjectRenderer_operatorAssign(self.h, fromVal.h)
 
 proc update*(self: gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer): void =
   fcQQuickFramebufferObjectRenderer_protectedbase_update(self.h)

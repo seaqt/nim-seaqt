@@ -39,7 +39,7 @@ int QAbstractAudioDeviceInfo_metacall(QAbstractAudioDeviceInfo* self, int param1
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractAudioDeviceInfo_tr(const char* s) {
+struct seaqt_string QAbstractAudioDeviceInfo_tr_s(const char* s) {
 	QString _ret = QAbstractAudioDeviceInfo::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -50,7 +50,7 @@ struct seaqt_string QAbstractAudioDeviceInfo_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioDeviceInfo_trUtf8(const char* s) {
+struct seaqt_string QAbstractAudioDeviceInfo_trUtf8_s(const char* s) {
 	QString _ret = QAbstractAudioDeviceInfo::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -167,7 +167,7 @@ struct seaqt_array /* of int */  QAbstractAudioDeviceInfo_supportedSampleTypes(Q
 	return _out;
 }
 
-struct seaqt_string QAbstractAudioDeviceInfo_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractAudioDeviceInfo_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractAudioDeviceInfo::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -178,7 +178,7 @@ struct seaqt_string QAbstractAudioDeviceInfo_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioDeviceInfo_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractAudioDeviceInfo_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractAudioDeviceInfo::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -189,7 +189,7 @@ struct seaqt_string QAbstractAudioDeviceInfo_tr3(const char* s, const char* c, i
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioDeviceInfo_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAbstractAudioDeviceInfo_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractAudioDeviceInfo::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -200,7 +200,7 @@ struct seaqt_string QAbstractAudioDeviceInfo_trUtf82(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioDeviceInfo_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractAudioDeviceInfo_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractAudioDeviceInfo::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -232,7 +232,7 @@ int QAbstractAudioOutput_metacall(QAbstractAudioOutput* self, int param1, int pa
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractAudioOutput_tr(const char* s) {
+struct seaqt_string QAbstractAudioOutput_tr_s(const char* s) {
 	QString _ret = QAbstractAudioOutput::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -243,7 +243,7 @@ struct seaqt_string QAbstractAudioOutput_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioOutput_trUtf8(const char* s) {
+struct seaqt_string QAbstractAudioOutput_trUtf8_s(const char* s) {
 	QString _ret = QAbstractAudioOutput::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -254,11 +254,11 @@ struct seaqt_string QAbstractAudioOutput_trUtf8(const char* s) {
 	return _ms;
 }
 
-void QAbstractAudioOutput_start(QAbstractAudioOutput* self, QIODevice* device) {
+void QAbstractAudioOutput_start_device(QAbstractAudioOutput* self, QIODevice* device) {
 	self->start(device);
 }
 
-QIODevice* QAbstractAudioOutput_start2(QAbstractAudioOutput* self) {
+QIODevice* QAbstractAudioOutput_start(QAbstractAudioOutput* self) {
 	return self->start();
 }
 
@@ -404,7 +404,7 @@ void QAbstractAudioOutput_connect_notify(QAbstractAudioOutput* self, intptr_t sl
 	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)()>(&QAbstractAudioOutput::notify), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAbstractAudioOutput_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractAudioOutput_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractAudioOutput::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -415,7 +415,7 @@ struct seaqt_string QAbstractAudioOutput_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioOutput_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractAudioOutput_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractAudioOutput::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -426,7 +426,7 @@ struct seaqt_string QAbstractAudioOutput_tr3(const char* s, const char* c, int n
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioOutput_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAbstractAudioOutput_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractAudioOutput::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -437,7 +437,7 @@ struct seaqt_string QAbstractAudioOutput_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioOutput_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractAudioOutput_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractAudioOutput::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -469,7 +469,7 @@ int QAbstractAudioInput_metacall(QAbstractAudioInput* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractAudioInput_tr(const char* s) {
+struct seaqt_string QAbstractAudioInput_tr_s(const char* s) {
 	QString _ret = QAbstractAudioInput::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -480,7 +480,7 @@ struct seaqt_string QAbstractAudioInput_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioInput_trUtf8(const char* s) {
+struct seaqt_string QAbstractAudioInput_trUtf8_s(const char* s) {
 	QString _ret = QAbstractAudioInput::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -491,11 +491,11 @@ struct seaqt_string QAbstractAudioInput_trUtf8(const char* s) {
 	return _ms;
 }
 
-void QAbstractAudioInput_start(QAbstractAudioInput* self, QIODevice* device) {
+void QAbstractAudioInput_start_device(QAbstractAudioInput* self, QIODevice* device) {
 	self->start(device);
 }
 
-QIODevice* QAbstractAudioInput_start2(QAbstractAudioInput* self) {
+QIODevice* QAbstractAudioInput_start(QAbstractAudioInput* self) {
 	return self->start();
 }
 
@@ -625,7 +625,7 @@ void QAbstractAudioInput_connect_notify(QAbstractAudioInput* self, intptr_t slot
 	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)()>(&QAbstractAudioInput::notify), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAbstractAudioInput_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractAudioInput_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractAudioInput::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -636,7 +636,7 @@ struct seaqt_string QAbstractAudioInput_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioInput_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractAudioInput_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractAudioInput::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -647,7 +647,7 @@ struct seaqt_string QAbstractAudioInput_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioInput_trUtf82(const char* s, const char* c) {
+struct seaqt_string QAbstractAudioInput_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractAudioInput::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -658,7 +658,7 @@ struct seaqt_string QAbstractAudioInput_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAudioInput_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractAudioInput_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractAudioInput::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

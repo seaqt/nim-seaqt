@@ -53,7 +53,7 @@ int QLockFile_error(const QLockFile* self) {
 	return static_cast<int>(_ret);
 }
 
-bool QLockFile_tryLockWithTimeout(QLockFile* self, int timeout) {
+bool QLockFile_tryLock_timeout(QLockFile* self, int timeout) {
 	return self->tryLock(static_cast<int>(timeout));
 }
 

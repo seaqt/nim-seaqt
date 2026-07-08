@@ -57,18 +57,18 @@ type cQQuickItemGrabResult*{.exportc: "QQuickItemGrabResult", incompleteStruct.}
 proc fcQQuickItemGrabResult_metaObject(self: pointer): pointer {.importc: "QQuickItemGrabResult_metaObject".}
 proc fcQQuickItemGrabResult_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickItemGrabResult_metacast".}
 proc fcQQuickItemGrabResult_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickItemGrabResult_metacall".}
-proc fcQQuickItemGrabResult_tr(s: cstring): struct_seaqt_string {.importc: "QQuickItemGrabResult_tr".}
-proc fcQQuickItemGrabResult_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQuickItemGrabResult_trUtf8".}
+proc fcQQuickItemGrabResult_trS(s: cstring): struct_seaqt_string {.importc: "QQuickItemGrabResult_tr_s".}
+proc fcQQuickItemGrabResult_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQuickItemGrabResult_trUtf8_s".}
 proc fcQQuickItemGrabResult_image(self: pointer): pointer {.importc: "QQuickItemGrabResult_image".}
 proc fcQQuickItemGrabResult_url(self: pointer): pointer {.importc: "QQuickItemGrabResult_url".}
-proc fcQQuickItemGrabResult_saveToFile(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QQuickItemGrabResult_saveToFile".}
-proc fcQQuickItemGrabResult_saveToFileWithFileName(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QQuickItemGrabResult_saveToFileWithFileName".}
+proc fcQQuickItemGrabResult_saveToFileCQString(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QQuickItemGrabResult_saveToFile_cQString".}
+proc fcQQuickItemGrabResult_saveToFileConstCQString(self: pointer, fileName: struct_seaqt_string): bool {.importc: "QQuickItemGrabResult_saveToFile_const_cQString".}
 proc fcQQuickItemGrabResult_ready(self: pointer): void {.importc: "QQuickItemGrabResult_ready".}
 proc fcQQuickItemGrabResult_connect_ready(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItemGrabResult_connect_ready".}
-proc fcQQuickItemGrabResult_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickItemGrabResult_tr2".}
-proc fcQQuickItemGrabResult_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickItemGrabResult_tr3".}
-proc fcQQuickItemGrabResult_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickItemGrabResult_trUtf82".}
-proc fcQQuickItemGrabResult_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickItemGrabResult_trUtf83".}
+proc fcQQuickItemGrabResult_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickItemGrabResult_tr_s_c".}
+proc fcQQuickItemGrabResult_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickItemGrabResult_tr_s_c_n".}
+proc fcQQuickItemGrabResult_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickItemGrabResult_trUtf8_s_c".}
+proc fcQQuickItemGrabResult_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickItemGrabResult_trUtf8_s_c_n".}
 proc fcQQuickItemGrabResult_protectedbase_sender(self: pointer): pointer {.importc: "QQuickItemGrabResult_protectedbase_sender".}
 proc fcQQuickItemGrabResult_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QQuickItemGrabResult_protectedbase_senderSignalIndex".}
 proc fcQQuickItemGrabResult_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickItemGrabResult_protectedbase_receivers".}
@@ -85,13 +85,13 @@ proc metacall*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, param1
   fcQQuickItemGrabResult_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cstring): string =
-  let v_ms = fcQQuickItemGrabResult_tr(s)
+  let v_ms = fcQQuickItemGrabResult_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cstring): string =
-  let v_ms = fcQQuickItemGrabResult_trUtf8(s)
+  let v_ms = fcQQuickItemGrabResult_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -103,10 +103,10 @@ proc url*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult): gen_qurl_t
   gen_qurl_types.QUrl(h: fcQQuickItemGrabResult_url(self.h), owned: true)
 
 proc saveToFile*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, fileName: openArray[char]): bool =
-  fcQQuickItemGrabResult_saveToFile(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQQuickItemGrabResult_saveToFileCQString(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc saveToFile2*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, fileName: openArray[char]): bool =
-  fcQQuickItemGrabResult_saveToFileWithFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQQuickItemGrabResult_saveToFileConstCQString(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc ready*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult): void =
   fcQQuickItemGrabResult_ready(self.h)
@@ -127,25 +127,25 @@ proc onReady*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, slot: Q
   fcQQuickItemGrabResult_connect_ready(self.h, cast[int](addr tmp[]), fcQQuickItemGrabResult_slot_callback_ready, fcQQuickItemGrabResult_slot_callback_ready_release)
 
 proc tr*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickItemGrabResult_tr2(s, c)
+  let v_ms = fcQQuickItemGrabResult_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickItemGrabResult_tr3(s, c, n)
+  let v_ms = fcQQuickItemGrabResult_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickItemGrabResult_trUtf82(s, c)
+  let v_ms = fcQQuickItemGrabResult_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickItemGrabResult_trUtf83(s, c, n)
+  let v_ms = fcQQuickItemGrabResult_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -23,12 +23,12 @@ QWebEngineContextMenuData* QWebEngineContextMenuData_new() {
 	return new (std::nothrow) QWebEngineContextMenuData();
 }
 
-QWebEngineContextMenuData* QWebEngineContextMenuData_new2(QWebEngineContextMenuData* other) {
-	return new (std::nothrow) QWebEngineContextMenuData(*other);
+QWebEngineContextMenuData* QWebEngineContextMenuData_new_from(QWebEngineContextMenuData* from) {
+	return new (std::nothrow) QWebEngineContextMenuData(*from);
 }
 
-void QWebEngineContextMenuData_operatorAssign(QWebEngineContextMenuData* self, QWebEngineContextMenuData* other) {
-	self->operator=(*other);
+void QWebEngineContextMenuData_operatorAssign(QWebEngineContextMenuData* self, QWebEngineContextMenuData* from) {
+	self->operator=(*from);
 }
 
 bool QWebEngineContextMenuData_isValid(const QWebEngineContextMenuData* self) {

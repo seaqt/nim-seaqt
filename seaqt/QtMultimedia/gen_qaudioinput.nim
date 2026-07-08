@@ -61,11 +61,11 @@ type cQAudioInput*{.exportc: "QAudioInput", incompleteStruct.} = object
 proc fcQAudioInput_metaObject(self: pointer): pointer {.importc: "QAudioInput_metaObject".}
 proc fcQAudioInput_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioInput_metacast".}
 proc fcQAudioInput_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioInput_metacall".}
-proc fcQAudioInput_tr(s: cstring): struct_seaqt_string {.importc: "QAudioInput_tr".}
-proc fcQAudioInput_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAudioInput_trUtf8".}
+proc fcQAudioInput_trS(s: cstring): struct_seaqt_string {.importc: "QAudioInput_tr_s".}
+proc fcQAudioInput_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAudioInput_trUtf8_s".}
 proc fcQAudioInput_format(self: pointer): pointer {.importc: "QAudioInput_format".}
-proc fcQAudioInput_start(self: pointer, device: pointer): void {.importc: "QAudioInput_start".}
-proc fcQAudioInput_start2(self: pointer): pointer {.importc: "QAudioInput_start2".}
+proc fcQAudioInput_startDevice(self: pointer, device: pointer): void {.importc: "QAudioInput_start_device".}
+proc fcQAudioInput_start(self: pointer): pointer {.importc: "QAudioInput_start".}
 proc fcQAudioInput_stop(self: pointer): void {.importc: "QAudioInput_stop".}
 proc fcQAudioInput_reset(self: pointer): void {.importc: "QAudioInput_reset".}
 proc fcQAudioInput_suspend(self: pointer): void {.importc: "QAudioInput_suspend".}
@@ -86,10 +86,10 @@ proc fcQAudioInput_stateChanged(self: pointer, state: cint): void {.importc: "QA
 proc fcQAudioInput_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInput_connect_stateChanged".}
 proc fcQAudioInput_notify(self: pointer): void {.importc: "QAudioInput_notify".}
 proc fcQAudioInput_connect_notify(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInput_connect_notify".}
-proc fcQAudioInput_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInput_tr2".}
-proc fcQAudioInput_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInput_tr3".}
-proc fcQAudioInput_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInput_trUtf82".}
-proc fcQAudioInput_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInput_trUtf83".}
+proc fcQAudioInput_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInput_tr_s_c".}
+proc fcQAudioInput_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInput_tr_s_c_n".}
+proc fcQAudioInput_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInput_trUtf8_s_c".}
+proc fcQAudioInput_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInput_trUtf8_s_c_n".}
 proc fcQAudioInput_vdata(self: pointer): ptr pointer {.importc: "QAudioInput_vdata".}
 proc fvdata_cQAudioInput(self: pointer): pointer {.importc: "vdata_QAudioInput".}
 
@@ -120,11 +120,11 @@ proc fcQAudioInput_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQAudioInput_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioInput_protectedbase_receivers".}
 proc fcQAudioInput_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioInput_protectedbase_isSignalConnected".}
 proc fcQAudioInput_new(vtbl: pointer, vdata: csize_t): ptr cQAudioInput {.importc: "QAudioInput_new".}
-proc fcQAudioInput_new2(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer): ptr cQAudioInput {.importc: "QAudioInput_new2".}
-proc fcQAudioInput_new3(vtbl: pointer, vdata: csize_t, format: pointer): ptr cQAudioInput {.importc: "QAudioInput_new3".}
-proc fcQAudioInput_new4(vtbl: pointer, vdata: csize_t, format: pointer, parent: pointer): ptr cQAudioInput {.importc: "QAudioInput_new4".}
-proc fcQAudioInput_new5(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer): ptr cQAudioInput {.importc: "QAudioInput_new5".}
-proc fcQAudioInput_new6(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer, parent: pointer): ptr cQAudioInput {.importc: "QAudioInput_new6".}
+proc fcQAudioInput_new2(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer): ptr cQAudioInput {.importc: "QAudioInput_new_audioDeviceInfo".}
+proc fcQAudioInput_new3(vtbl: pointer, vdata: csize_t, format: pointer): ptr cQAudioInput {.importc: "QAudioInput_new_format".}
+proc fcQAudioInput_new4(vtbl: pointer, vdata: csize_t, format: pointer, parent: pointer): ptr cQAudioInput {.importc: "QAudioInput_new_format_parent".}
+proc fcQAudioInput_new5(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer): ptr cQAudioInput {.importc: "QAudioInput_new_audioDeviceInfo_format".}
+proc fcQAudioInput_new6(vtbl: pointer, vdata: csize_t, audioDeviceInfo: pointer, format: pointer, parent: pointer): ptr cQAudioInput {.importc: "QAudioInput_new_audioDeviceInfo_format_parent".}
 proc fcQAudioInput_staticMetaObject(): pointer {.importc: "QAudioInput_staticMetaObject".}
 
 proc metaObject*(self: gen_qaudioinput_types.QAudioInput): gen_qobjectdefs_types.QMetaObject =
@@ -137,13 +137,13 @@ proc metacall*(self: gen_qaudioinput_types.QAudioInput, param1: cint, param2: ci
   fcQAudioInput_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudioinput_types.QAudioInput, s: cstring): string =
-  let v_ms = fcQAudioInput_tr(s)
+  let v_ms = fcQAudioInput_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinput_types.QAudioInput, s: cstring): string =
-  let v_ms = fcQAudioInput_trUtf8(s)
+  let v_ms = fcQAudioInput_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -152,10 +152,10 @@ proc format*(self: gen_qaudioinput_types.QAudioInput): gen_qaudioformat_types.QA
   gen_qaudioformat_types.QAudioFormat(h: fcQAudioInput_format(self.h), owned: true)
 
 proc start*(self: gen_qaudioinput_types.QAudioInput, device: gen_qiodevice_types.QIODevice): void =
-  fcQAudioInput_start(self.h, device.h)
+  fcQAudioInput_startDevice(self.h, device.h)
 
 proc start*(self: gen_qaudioinput_types.QAudioInput): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQAudioInput_start2(self.h), owned: false)
+  gen_qiodevice_types.QIODevice(h: fcQAudioInput_start(self.h), owned: false)
 
 proc stop*(self: gen_qaudioinput_types.QAudioInput): void =
   fcQAudioInput_stop(self.h)
@@ -244,25 +244,25 @@ proc onNotify*(self: gen_qaudioinput_types.QAudioInput, slot: QAudioInputnotifyS
   fcQAudioInput_connect_notify(self.h, cast[int](addr tmp[]), fcQAudioInput_slot_callback_notify, fcQAudioInput_slot_callback_notify_release)
 
 proc tr*(_: type gen_qaudioinput_types.QAudioInput, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioInput_tr2(s, c)
+  let v_ms = fcQAudioInput_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudioinput_types.QAudioInput, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioInput_tr3(s, c, n)
+  let v_ms = fcQAudioInput_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinput_types.QAudioInput, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioInput_trUtf82(s, c)
+  let v_ms = fcQAudioInput_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinput_types.QAudioInput, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioInput_trUtf83(s, c, n)
+  let v_ms = fcQAudioInput_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

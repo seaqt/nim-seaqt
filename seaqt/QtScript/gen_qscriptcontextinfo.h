@@ -22,11 +22,11 @@ typedef struct QScriptContext QScriptContext;
 typedef struct QScriptContextInfo QScriptContextInfo;
 #endif
 
-QScriptContextInfo* QScriptContextInfo_new(QScriptContext* context);
-QScriptContextInfo* QScriptContextInfo_new2(QScriptContextInfo* other);
-QScriptContextInfo* QScriptContextInfo_new3();
+QScriptContextInfo* QScriptContextInfo_new_context(QScriptContext* context);
+QScriptContextInfo* QScriptContextInfo_new_from(QScriptContextInfo* from);
+QScriptContextInfo* QScriptContextInfo_new();
 
-void QScriptContextInfo_operatorAssign(QScriptContextInfo* self, QScriptContextInfo* other);
+void QScriptContextInfo_operatorAssign(QScriptContextInfo* self, QScriptContextInfo* from);
 bool QScriptContextInfo_isNull(const QScriptContextInfo* self);
 long long QScriptContextInfo_scriptId(const QScriptContextInfo* self);
 struct seaqt_string QScriptContextInfo_fileName(const QScriptContextInfo* self);

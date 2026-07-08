@@ -35,7 +35,7 @@ int QMediaAvailabilityControl_metacall(QMediaAvailabilityControl* self, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMediaAvailabilityControl_tr(const char* s) {
+struct seaqt_string QMediaAvailabilityControl_tr_s(const char* s) {
 	QString _ret = QMediaAvailabilityControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -46,7 +46,7 @@ struct seaqt_string QMediaAvailabilityControl_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QMediaAvailabilityControl_trUtf8(const char* s) {
+struct seaqt_string QMediaAvailabilityControl_trUtf8_s(const char* s) {
 	QString _ret = QMediaAvailabilityControl::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -79,7 +79,7 @@ void QMediaAvailabilityControl_connect_availabilityChanged(QMediaAvailabilityCon
 	QMediaAvailabilityControl::connect(self, static_cast<void (QMediaAvailabilityControl::*)(QMultimedia::AvailabilityStatus)>(&QMediaAvailabilityControl::availabilityChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMediaAvailabilityControl_tr2(const char* s, const char* c) {
+struct seaqt_string QMediaAvailabilityControl_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMediaAvailabilityControl::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -90,7 +90,7 @@ struct seaqt_string QMediaAvailabilityControl_tr2(const char* s, const char* c) 
 	return _ms;
 }
 
-struct seaqt_string QMediaAvailabilityControl_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMediaAvailabilityControl_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaAvailabilityControl::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -101,7 +101,7 @@ struct seaqt_string QMediaAvailabilityControl_tr3(const char* s, const char* c, 
 	return _ms;
 }
 
-struct seaqt_string QMediaAvailabilityControl_trUtf82(const char* s, const char* c) {
+struct seaqt_string QMediaAvailabilityControl_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QMediaAvailabilityControl::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -112,7 +112,7 @@ struct seaqt_string QMediaAvailabilityControl_trUtf82(const char* s, const char*
 	return _ms;
 }
 
-struct seaqt_string QMediaAvailabilityControl_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QMediaAvailabilityControl_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaAvailabilityControl::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

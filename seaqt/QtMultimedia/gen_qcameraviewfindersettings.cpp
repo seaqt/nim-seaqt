@@ -17,12 +17,12 @@ QCameraViewfinderSettings* QCameraViewfinderSettings_new() {
 	return new (std::nothrow) QCameraViewfinderSettings();
 }
 
-QCameraViewfinderSettings* QCameraViewfinderSettings_new2(QCameraViewfinderSettings* other) {
-	return new (std::nothrow) QCameraViewfinderSettings(*other);
+QCameraViewfinderSettings* QCameraViewfinderSettings_new_from(QCameraViewfinderSettings* from) {
+	return new (std::nothrow) QCameraViewfinderSettings(*from);
 }
 
-void QCameraViewfinderSettings_operatorAssign(QCameraViewfinderSettings* self, QCameraViewfinderSettings* other) {
-	self->operator=(*other);
+void QCameraViewfinderSettings_operatorAssign(QCameraViewfinderSettings* self, QCameraViewfinderSettings* from) {
+	self->operator=(*from);
 }
 
 void QCameraViewfinderSettings_swap(QCameraViewfinderSettings* self, QCameraViewfinderSettings* other) {
@@ -37,11 +37,11 @@ QSize* QCameraViewfinderSettings_resolution(const QCameraViewfinderSettings* sel
 	return new QSize(self->resolution());
 }
 
-void QCameraViewfinderSettings_setResolution(QCameraViewfinderSettings* self, QSize* resolution) {
+void QCameraViewfinderSettings_setResolution_resolution(QCameraViewfinderSettings* self, QSize* resolution) {
 	self->setResolution(*resolution);
 }
 
-void QCameraViewfinderSettings_setResolution2(QCameraViewfinderSettings* self, int width, int height) {
+void QCameraViewfinderSettings_setResolution_width_height(QCameraViewfinderSettings* self, int width, int height) {
 	self->setResolution(static_cast<int>(width), static_cast<int>(height));
 }
 
@@ -76,11 +76,11 @@ QSize* QCameraViewfinderSettings_pixelAspectRatio(const QCameraViewfinderSetting
 	return new QSize(self->pixelAspectRatio());
 }
 
-void QCameraViewfinderSettings_setPixelAspectRatio(QCameraViewfinderSettings* self, QSize* ratio) {
+void QCameraViewfinderSettings_setPixelAspectRatio_ratio(QCameraViewfinderSettings* self, QSize* ratio) {
 	self->setPixelAspectRatio(*ratio);
 }
 
-void QCameraViewfinderSettings_setPixelAspectRatio2(QCameraViewfinderSettings* self, int horizontal, int vertical) {
+void QCameraViewfinderSettings_setPixelAspectRatio_horizontal_vertical(QCameraViewfinderSettings* self, int horizontal, int vertical) {
 	self->setPixelAspectRatio(static_cast<int>(horizontal), static_cast<int>(vertical));
 }
 

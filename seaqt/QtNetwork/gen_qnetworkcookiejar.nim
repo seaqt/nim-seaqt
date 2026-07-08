@@ -59,17 +59,17 @@ type cQNetworkCookieJar*{.exportc: "QNetworkCookieJar", incompleteStruct.} = obj
 proc fcQNetworkCookieJar_metaObject(self: pointer): pointer {.importc: "QNetworkCookieJar_metaObject".}
 proc fcQNetworkCookieJar_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkCookieJar_metacast".}
 proc fcQNetworkCookieJar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkCookieJar_metacall".}
-proc fcQNetworkCookieJar_tr(s: cstring): struct_seaqt_string {.importc: "QNetworkCookieJar_tr".}
-proc fcQNetworkCookieJar_trUtf8(s: cstring): struct_seaqt_string {.importc: "QNetworkCookieJar_trUtf8".}
+proc fcQNetworkCookieJar_trS(s: cstring): struct_seaqt_string {.importc: "QNetworkCookieJar_tr_s".}
+proc fcQNetworkCookieJar_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QNetworkCookieJar_trUtf8_s".}
 proc fcQNetworkCookieJar_cookiesForUrl(self: pointer, url: pointer): struct_seaqt_array {.importc: "QNetworkCookieJar_cookiesForUrl".}
 proc fcQNetworkCookieJar_setCookiesFromUrl(self: pointer, cookieList: struct_seaqt_array, url: pointer): bool {.importc: "QNetworkCookieJar_setCookiesFromUrl".}
 proc fcQNetworkCookieJar_insertCookie(self: pointer, cookie: pointer): bool {.importc: "QNetworkCookieJar_insertCookie".}
 proc fcQNetworkCookieJar_updateCookie(self: pointer, cookie: pointer): bool {.importc: "QNetworkCookieJar_updateCookie".}
 proc fcQNetworkCookieJar_deleteCookie(self: pointer, cookie: pointer): bool {.importc: "QNetworkCookieJar_deleteCookie".}
-proc fcQNetworkCookieJar_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNetworkCookieJar_tr2".}
-proc fcQNetworkCookieJar_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNetworkCookieJar_tr3".}
-proc fcQNetworkCookieJar_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNetworkCookieJar_trUtf82".}
-proc fcQNetworkCookieJar_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNetworkCookieJar_trUtf83".}
+proc fcQNetworkCookieJar_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNetworkCookieJar_tr_s_c".}
+proc fcQNetworkCookieJar_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNetworkCookieJar_tr_s_c_n".}
+proc fcQNetworkCookieJar_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNetworkCookieJar_trUtf8_s_c".}
+proc fcQNetworkCookieJar_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNetworkCookieJar_trUtf8_s_c_n".}
 proc fcQNetworkCookieJar_vdata(self: pointer): ptr pointer {.importc: "QNetworkCookieJar_vdata".}
 proc fvdata_cQNetworkCookieJar(self: pointer): pointer {.importc: "vdata_QNetworkCookieJar".}
 
@@ -114,7 +114,7 @@ proc fcQNetworkCookieJar_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQNetworkCookieJar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkCookieJar_protectedbase_receivers".}
 proc fcQNetworkCookieJar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkCookieJar_protectedbase_isSignalConnected".}
 proc fcQNetworkCookieJar_new(vtbl: pointer, vdata: csize_t): ptr cQNetworkCookieJar {.importc: "QNetworkCookieJar_new".}
-proc fcQNetworkCookieJar_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQNetworkCookieJar {.importc: "QNetworkCookieJar_new2".}
+proc fcQNetworkCookieJar_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQNetworkCookieJar {.importc: "QNetworkCookieJar_new_parent".}
 proc fcQNetworkCookieJar_staticMetaObject(): pointer {.importc: "QNetworkCookieJar_staticMetaObject".}
 
 proc metaObject*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar): gen_qobjectdefs_types.QMetaObject =
@@ -127,13 +127,13 @@ proc metacall*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, param1: cint
   fcQNetworkCookieJar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring): string =
-  let v_ms = fcQNetworkCookieJar_tr(s)
+  let v_ms = fcQNetworkCookieJar_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring): string =
-  let v_ms = fcQNetworkCookieJar_trUtf8(s)
+  let v_ms = fcQNetworkCookieJar_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -164,25 +164,25 @@ proc deleteCookie*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookie: 
   fcQNetworkCookieJar_deleteCookie(self.h, cookie.h)
 
 proc tr*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring, c: cstring): string =
-  let v_ms = fcQNetworkCookieJar_tr2(s, c)
+  let v_ms = fcQNetworkCookieJar_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQNetworkCookieJar_tr3(s, c, n)
+  let v_ms = fcQNetworkCookieJar_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring, c: cstring): string =
-  let v_ms = fcQNetworkCookieJar_trUtf82(s, c)
+  let v_ms = fcQNetworkCookieJar_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQNetworkCookieJar_trUtf83(s, c, n)
+  let v_ms = fcQNetworkCookieJar_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -20,32 +20,32 @@ QPalette* QPalette_new() {
 	return new (std::nothrow) QPalette();
 }
 
-QPalette* QPalette_new2(QColor* button) {
+QPalette* QPalette_new_QColor(QColor* button) {
 	return new (std::nothrow) QPalette(*button);
 }
 
-QPalette* QPalette_new3(int button) {
+QPalette* QPalette_new_Qt_GlobalColor(int button) {
 	return new (std::nothrow) QPalette(static_cast<Qt::GlobalColor>(button));
 }
 
-QPalette* QPalette_new4(QColor* button, QColor* window) {
+QPalette* QPalette_new_QColor_QColor(QColor* button, QColor* window) {
 	return new (std::nothrow) QPalette(*button, *window);
 }
 
-QPalette* QPalette_new5(QBrush* windowText, QBrush* button, QBrush* light, QBrush* dark, QBrush* mid, QBrush* text, QBrush* bright_text, QBrush* base, QBrush* window) {
+QPalette* QPalette_new_QBrush_QBrush_QBrush_QBrush_QBrush_QBrush_QBrush_QBrush_QBrush(QBrush* windowText, QBrush* button, QBrush* light, QBrush* dark, QBrush* mid, QBrush* text, QBrush* bright_text, QBrush* base, QBrush* window) {
 	return new (std::nothrow) QPalette(*windowText, *button, *light, *dark, *mid, *text, *bright_text, *base, *window);
 }
 
-QPalette* QPalette_new6(QColor* windowText, QColor* window, QColor* light, QColor* dark, QColor* mid, QColor* text, QColor* base) {
+QPalette* QPalette_new_QColor_QColor_QColor_QColor_QColor_QColor_QColor(QColor* windowText, QColor* window, QColor* light, QColor* dark, QColor* mid, QColor* text, QColor* base) {
 	return new (std::nothrow) QPalette(*windowText, *window, *light, *dark, *mid, *text, *base);
 }
 
-QPalette* QPalette_new7(QPalette* palette) {
-	return new (std::nothrow) QPalette(*palette);
+QPalette* QPalette_new_QPalette(QPalette* from) {
+	return new (std::nothrow) QPalette(*from);
 }
 
-void QPalette_operatorAssign(QPalette* self, QPalette* palette) {
-	self->operator=(*palette);
+void QPalette_operatorAssign(QPalette* self, QPalette* from) {
+	self->operator=(*from);
 }
 
 void QPalette_swap(QPalette* self, QPalette* other) {
@@ -65,27 +65,27 @@ void QPalette_setCurrentColorGroup(QPalette* self, int cg) {
 	self->setCurrentColorGroup(static_cast<QPalette::ColorGroup>(cg));
 }
 
-QColor* QPalette_color(const QPalette* self, int cg, int cr) {
+QColor* QPalette_color_cg_cr(const QPalette* self, int cg, int cr) {
 	const QColor& _ret = self->color(static_cast<QPalette::ColorGroup>(cg), static_cast<QPalette::ColorRole>(cr));
 	// Cast returned reference into pointer
 	return const_cast<QColor*>(&_ret);
 }
 
-QBrush* QPalette_brush(const QPalette* self, int cg, int cr) {
+QBrush* QPalette_brush_cg_cr(const QPalette* self, int cg, int cr) {
 	const QBrush& _ret = self->brush(static_cast<QPalette::ColorGroup>(cg), static_cast<QPalette::ColorRole>(cr));
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
 }
 
-void QPalette_setColor(QPalette* self, int cg, int cr, QColor* color) {
+void QPalette_setColor_cg_cr_color(QPalette* self, int cg, int cr, QColor* color) {
 	self->setColor(static_cast<QPalette::ColorGroup>(cg), static_cast<QPalette::ColorRole>(cr), *color);
 }
 
-void QPalette_setColor2(QPalette* self, int cr, QColor* color) {
+void QPalette_setColor_cr_color(QPalette* self, int cr, QColor* color) {
 	self->setColor(static_cast<QPalette::ColorRole>(cr), *color);
 }
 
-void QPalette_setBrush(QPalette* self, int cr, QBrush* brush) {
+void QPalette_setBrush_cr_brush(QPalette* self, int cr, QBrush* brush) {
 	self->setBrush(static_cast<QPalette::ColorRole>(cr), *brush);
 }
 
@@ -93,7 +93,7 @@ bool QPalette_isBrushSet(const QPalette* self, int cg, int cr) {
 	return self->isBrushSet(static_cast<QPalette::ColorGroup>(cg), static_cast<QPalette::ColorRole>(cr));
 }
 
-void QPalette_setBrush2(QPalette* self, int cg, int cr, QBrush* brush) {
+void QPalette_setBrush_cg_cr_brush(QPalette* self, int cg, int cr, QBrush* brush) {
 	self->setBrush(static_cast<QPalette::ColorGroup>(cg), static_cast<QPalette::ColorRole>(cr), *brush);
 }
 
@@ -105,13 +105,13 @@ bool QPalette_isEqual(const QPalette* self, int cr1, int cr2) {
 	return self->isEqual(static_cast<QPalette::ColorGroup>(cr1), static_cast<QPalette::ColorGroup>(cr2));
 }
 
-QColor* QPalette_colorWithCr(const QPalette* self, int cr) {
+QColor* QPalette_color_cr(const QPalette* self, int cr) {
 	const QColor& _ret = self->color(static_cast<QPalette::ColorRole>(cr));
 	// Cast returned reference into pointer
 	return const_cast<QColor*>(&_ret);
 }
 
-QBrush* QPalette_brushWithCr(const QPalette* self, int cr) {
+QBrush* QPalette_brush_cr(const QPalette* self, int cr) {
 	const QBrush& _ret = self->brush(static_cast<QPalette::ColorRole>(cr));
 	// Cast returned reference into pointer
 	return const_cast<QBrush*>(&_ret);
@@ -266,16 +266,16 @@ long long QPalette_cacheKey(const QPalette* self) {
 	return static_cast<long long>(_ret);
 }
 
-QPalette* QPalette_resolve(const QPalette* self, QPalette* param1) {
+QPalette* QPalette_resolve_QPalette(const QPalette* self, QPalette* param1) {
 	return new QPalette(self->resolve(*param1));
 }
 
-unsigned int QPalette_resolve2(const QPalette* self) {
+unsigned int QPalette_resolve(const QPalette* self) {
 	uint _ret = self->resolve();
 	return static_cast<unsigned int>(_ret);
 }
 
-void QPalette_resolveWithMask(QPalette* self, unsigned int mask) {
+void QPalette_resolve_uint(QPalette* self, unsigned int mask) {
 	self->resolve(static_cast<uint>(mask));
 }
 

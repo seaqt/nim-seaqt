@@ -694,35 +694,35 @@ public:
 	friend bool QDockWidget_protectedbase_isSignalConnected(const VirtualQDockWidget* self, QMetaMethod* signal);
 };
 
-VirtualQDockWidget* QDockWidget_new(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title) {
+VirtualQDockWidget* QDockWidget_new_title(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDockWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDockWidget(vtbl, title_QString) : nullptr;
 }
 
-VirtualQDockWidget* QDockWidget_new2(const QDockWidget_VTable* vtbl, size_t vdata) {
+VirtualQDockWidget* QDockWidget_new(const QDockWidget_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDockWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDockWidget(vtbl) : nullptr;
 }
 
-VirtualQDockWidget* QDockWidget_new3(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent) {
+VirtualQDockWidget* QDockWidget_new_title_parent(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDockWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDockWidget(vtbl, title_QString, parent) : nullptr;
 }
 
-VirtualQDockWidget* QDockWidget_new4(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent, int flags) {
+VirtualQDockWidget* QDockWidget_new_title_parent_flags(const QDockWidget_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent, int flags) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDockWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDockWidget(vtbl, title_QString, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
 
-VirtualQDockWidget* QDockWidget_new5(const QDockWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDockWidget* QDockWidget_new_parent(const QDockWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDockWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDockWidget(vtbl, parent) : nullptr;
 }
 
-VirtualQDockWidget* QDockWidget_new6(const QDockWidget_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQDockWidget* QDockWidget_new_parent_flags(const QDockWidget_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDockWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDockWidget(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -743,7 +743,7 @@ int QDockWidget_metacall(QDockWidget* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDockWidget_tr(const char* s) {
+struct seaqt_string QDockWidget_tr_s(const char* s) {
 	QString _ret = QDockWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -754,7 +754,7 @@ struct seaqt_string QDockWidget_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDockWidget_trUtf8(const char* s) {
+struct seaqt_string QDockWidget_trUtf8_s(const char* s) {
 	QString _ret = QDockWidget::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -898,7 +898,7 @@ void QDockWidget_connect_dockLocationChanged(QDockWidget* self, intptr_t slot, v
 	QDockWidget::connect(self, static_cast<void (QDockWidget::*)(Qt::DockWidgetArea)>(&QDockWidget::dockLocationChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDockWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QDockWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDockWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -909,7 +909,7 @@ struct seaqt_string QDockWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDockWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDockWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDockWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -920,7 +920,7 @@ struct seaqt_string QDockWidget_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDockWidget_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDockWidget_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDockWidget::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -931,7 +931,7 @@ struct seaqt_string QDockWidget_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDockWidget_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDockWidget_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDockWidget::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

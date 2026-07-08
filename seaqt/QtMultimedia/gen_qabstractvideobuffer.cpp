@@ -134,7 +134,7 @@ void QAbstractPlanarVideoBuffer_virtbase(QAbstractPlanarVideoBuffer* src, QAbstr
 	*outptr_QAbstractVideoBuffer = static_cast<QAbstractVideoBuffer*>(src);
 }
 
-unsigned char* QAbstractPlanarVideoBuffer_map(QAbstractPlanarVideoBuffer* self, int mode, int* numBytes, int* bytesPerLine) {
+unsigned char* QAbstractPlanarVideoBuffer_map_mode_numBytes_bytesPerLine(QAbstractPlanarVideoBuffer* self, int mode, int* numBytes, int* bytesPerLine) {
 	uchar* _ret = self->map(static_cast<QAbstractVideoBuffer::MapMode>(mode), static_cast<int*>(numBytes), static_cast<int*>(bytesPerLine));
 	return static_cast<unsigned char*>(_ret);
 }

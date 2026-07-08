@@ -22,21 +22,21 @@ QCameraInfo* QCameraInfo_new() {
 	return new (std::nothrow) QCameraInfo();
 }
 
-QCameraInfo* QCameraInfo_new2(QCamera* camera) {
+QCameraInfo* QCameraInfo_new_camera(QCamera* camera) {
 	return new (std::nothrow) QCameraInfo(*camera);
 }
 
-QCameraInfo* QCameraInfo_new3(QCameraInfo* other) {
-	return new (std::nothrow) QCameraInfo(*other);
+QCameraInfo* QCameraInfo_new_from(QCameraInfo* from) {
+	return new (std::nothrow) QCameraInfo(*from);
 }
 
-QCameraInfo* QCameraInfo_new4(struct seaqt_string name) {
+QCameraInfo* QCameraInfo_new_name(struct seaqt_string name) {
 	QByteArray name_QByteArray(name.data, name.len);
 	return new (std::nothrow) QCameraInfo(name_QByteArray);
 }
 
-void QCameraInfo_operatorAssign(QCameraInfo* self, QCameraInfo* other) {
-	self->operator=(*other);
+void QCameraInfo_operatorAssign(QCameraInfo* self, QCameraInfo* from) {
+	self->operator=(*from);
 }
 
 bool QCameraInfo_operatorEqual(const QCameraInfo* self, QCameraInfo* other) {
@@ -99,7 +99,7 @@ struct seaqt_array /* of QCameraInfo* */  QCameraInfo_availableCameras() {
 	return _out;
 }
 
-struct seaqt_array /* of QCameraInfo* */  QCameraInfo_availableCamerasWithPosition(int position) {
+struct seaqt_array /* of QCameraInfo* */  QCameraInfo_availableCameras_position(int position) {
 	QList<QCameraInfo> _ret = QCameraInfo::availableCameras(static_cast<QCamera::Position>(position));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QCameraInfo** _arr = static_cast<QCameraInfo**>(malloc(sizeof(QCameraInfo*) * _ret.length()));

@@ -54,7 +54,7 @@ proc fcQLockFile_staleLockTime(self: pointer): cint {.importc: "QLockFile_staleL
 proc fcQLockFile_isLocked(self: pointer): bool {.importc: "QLockFile_isLocked".}
 proc fcQLockFile_removeStaleLockFile(self: pointer): bool {.importc: "QLockFile_removeStaleLockFile".}
 proc fcQLockFile_error(self: pointer): cint {.importc: "QLockFile_error".}
-proc fcQLockFile_tryLockWithTimeout(self: pointer, timeout: cint): bool {.importc: "QLockFile_tryLockWithTimeout".}
+proc fcQLockFile_tryLockTimeout(self: pointer, timeout: cint): bool {.importc: "QLockFile_tryLock_timeout".}
 proc fcQLockFile_new(fileName: struct_seaqt_string): ptr cQLockFile {.importc: "QLockFile_new".}
 
 proc lock*(self: gen_qlockfile_types.QLockFile): bool =
@@ -82,7 +82,7 @@ proc error*(self: gen_qlockfile_types.QLockFile): cint =
   cint(fcQLockFile_error(self.h))
 
 proc tryLock*(self: gen_qlockfile_types.QLockFile, timeout: cint): bool =
-  fcQLockFile_tryLockWithTimeout(self.h, timeout)
+  fcQLockFile_tryLockTimeout(self.h, timeout)
 
 proc create*(T: type gen_qlockfile_types.QLockFile,
     fileName: openArray[char]): gen_qlockfile_types.QLockFile =

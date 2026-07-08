@@ -73,16 +73,16 @@ type cQSvgWidget*{.exportc: "QSvgWidget", incompleteStruct.} = object
 proc fcQSvgWidget_metaObject(self: pointer): pointer {.importc: "QSvgWidget_metaObject".}
 proc fcQSvgWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QSvgWidget_metacast".}
 proc fcQSvgWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSvgWidget_metacall".}
-proc fcQSvgWidget_tr(s: cstring): struct_seaqt_string {.importc: "QSvgWidget_tr".}
-proc fcQSvgWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSvgWidget_trUtf8".}
+proc fcQSvgWidget_trS(s: cstring): struct_seaqt_string {.importc: "QSvgWidget_tr_s".}
+proc fcQSvgWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSvgWidget_trUtf8_s".}
 proc fcQSvgWidget_renderer(self: pointer): pointer {.importc: "QSvgWidget_renderer".}
 proc fcQSvgWidget_sizeHint(self: pointer): pointer {.importc: "QSvgWidget_sizeHint".}
-proc fcQSvgWidget_load(self: pointer, file: struct_seaqt_string): void {.importc: "QSvgWidget_load".}
-proc fcQSvgWidget_loadWithContents(self: pointer, contents: struct_seaqt_string): void {.importc: "QSvgWidget_loadWithContents".}
-proc fcQSvgWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSvgWidget_tr2".}
-proc fcQSvgWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSvgWidget_tr3".}
-proc fcQSvgWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSvgWidget_trUtf82".}
-proc fcQSvgWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSvgWidget_trUtf83".}
+proc fcQSvgWidget_loadFile(self: pointer, file: struct_seaqt_string): void {.importc: "QSvgWidget_load_file".}
+proc fcQSvgWidget_loadContents(self: pointer, contents: struct_seaqt_string): void {.importc: "QSvgWidget_load_contents".}
+proc fcQSvgWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSvgWidget_tr_s_c".}
+proc fcQSvgWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSvgWidget_tr_s_c_n".}
+proc fcQSvgWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSvgWidget_trUtf8_s_c".}
+proc fcQSvgWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSvgWidget_trUtf8_s_c_n".}
 proc fcQSvgWidget_vdata(self: pointer): ptr pointer {.importc: "QSvgWidget_vdata".}
 proc fvdata_cQSvgWidget(self: pointer): pointer {.importc: "vdata_QSvgWidget".}
 
@@ -198,9 +198,9 @@ proc fcQSvgWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQSvgWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSvgWidget_protectedbase_receivers".}
 proc fcQSvgWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSvgWidget_protectedbase_isSignalConnected".}
 proc fcQSvgWidget_new(vtbl: pointer, vdata: csize_t): ptr cQSvgWidget {.importc: "QSvgWidget_new".}
-proc fcQSvgWidget_new2(vtbl: pointer, vdata: csize_t, file: struct_seaqt_string): ptr cQSvgWidget {.importc: "QSvgWidget_new2".}
-proc fcQSvgWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSvgWidget {.importc: "QSvgWidget_new3".}
-proc fcQSvgWidget_new4(vtbl: pointer, vdata: csize_t, file: struct_seaqt_string, parent: pointer): ptr cQSvgWidget {.importc: "QSvgWidget_new4".}
+proc fcQSvgWidget_new2(vtbl: pointer, vdata: csize_t, file: struct_seaqt_string): ptr cQSvgWidget {.importc: "QSvgWidget_new_file".}
+proc fcQSvgWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSvgWidget {.importc: "QSvgWidget_new_parent".}
+proc fcQSvgWidget_new4(vtbl: pointer, vdata: csize_t, file: struct_seaqt_string, parent: pointer): ptr cQSvgWidget {.importc: "QSvgWidget_new_file_parent".}
 proc fcQSvgWidget_staticMetaObject(): pointer {.importc: "QSvgWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qsvgwidget_types.QSvgWidget): gen_qobjectdefs_types.QMetaObject =
@@ -213,13 +213,13 @@ proc metacall*(self: gen_qsvgwidget_types.QSvgWidget, param1: cint, param2: cint
   fcQSvgWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring): string =
-  let v_ms = fcQSvgWidget_tr(s)
+  let v_ms = fcQSvgWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring): string =
-  let v_ms = fcQSvgWidget_trUtf8(s)
+  let v_ms = fcQSvgWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -231,31 +231,31 @@ proc sizeHint*(self: gen_qsvgwidget_types.QSvgWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSvgWidget_sizeHint(self.h), owned: true)
 
 proc load*(self: gen_qsvgwidget_types.QSvgWidget, file: openArray[char]): void =
-  fcQSvgWidget_load(self.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
+  fcQSvgWidget_loadFile(self.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
 
 proc load*(self: gen_qsvgwidget_types.QSvgWidget, contents: openArray[byte]): void =
-  fcQSvgWidget_loadWithContents(self.h, struct_seaqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))))
+  fcQSvgWidget_loadContents(self.h, struct_seaqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))))
 
 proc tr*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQSvgWidget_tr2(s, c)
+  let v_ms = fcQSvgWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSvgWidget_tr3(s, c, n)
+  let v_ms = fcQSvgWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQSvgWidget_trUtf82(s, c)
+  let v_ms = fcQSvgWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsvgwidget_types.QSvgWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSvgWidget_trUtf83(s, c, n)
+  let v_ms = fcQSvgWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

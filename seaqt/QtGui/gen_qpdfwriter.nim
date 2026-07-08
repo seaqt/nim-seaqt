@@ -71,8 +71,8 @@ type cQPdfWriter*{.exportc: "QPdfWriter", incompleteStruct.} = object
 proc fcQPdfWriter_metaObject(self: pointer): pointer {.importc: "QPdfWriter_metaObject".}
 proc fcQPdfWriter_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfWriter_metacast".}
 proc fcQPdfWriter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfWriter_metacall".}
-proc fcQPdfWriter_tr(s: cstring): struct_seaqt_string {.importc: "QPdfWriter_tr".}
-proc fcQPdfWriter_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPdfWriter_trUtf8".}
+proc fcQPdfWriter_trS(s: cstring): struct_seaqt_string {.importc: "QPdfWriter_tr_s".}
+proc fcQPdfWriter_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPdfWriter_trUtf8_s".}
 proc fcQPdfWriter_setPdfVersion(self: pointer, version: cint): void {.importc: "QPdfWriter_setPdfVersion".}
 proc fcQPdfWriter_pdfVersion(self: pointer): cint {.importc: "QPdfWriter_pdfVersion".}
 proc fcQPdfWriter_title(self: pointer): struct_seaqt_string {.importc: "QPdfWriter_title".}
@@ -84,15 +84,15 @@ proc fcQPdfWriter_setResolution(self: pointer, resolution: cint): void {.importc
 proc fcQPdfWriter_resolution(self: pointer): cint {.importc: "QPdfWriter_resolution".}
 proc fcQPdfWriter_setDocumentXmpMetadata(self: pointer, xmpMetadata: struct_seaqt_string): void {.importc: "QPdfWriter_setDocumentXmpMetadata".}
 proc fcQPdfWriter_documentXmpMetadata(self: pointer): struct_seaqt_string {.importc: "QPdfWriter_documentXmpMetadata".}
-proc fcQPdfWriter_addFileAttachment(self: pointer, fileName: struct_seaqt_string, data: struct_seaqt_string): void {.importc: "QPdfWriter_addFileAttachment".}
+proc fcQPdfWriter_addFileAttachmentFileNameData(self: pointer, fileName: struct_seaqt_string, data: struct_seaqt_string): void {.importc: "QPdfWriter_addFileAttachment_fileName_data".}
 proc fcQPdfWriter_setPageSize(self: pointer, size: cint): void {.importc: "QPdfWriter_setPageSize".}
 proc fcQPdfWriter_setPageSizeMM(self: pointer, size: pointer): void {.importc: "QPdfWriter_setPageSizeMM".}
 proc fcQPdfWriter_setMargins(self: pointer, m: pointer): void {.importc: "QPdfWriter_setMargins".}
-proc fcQPdfWriter_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfWriter_tr2".}
-proc fcQPdfWriter_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfWriter_tr3".}
-proc fcQPdfWriter_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfWriter_trUtf82".}
-proc fcQPdfWriter_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfWriter_trUtf83".}
-proc fcQPdfWriter_addFileAttachment2(self: pointer, fileName: struct_seaqt_string, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QPdfWriter_addFileAttachment2".}
+proc fcQPdfWriter_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfWriter_tr_s_c".}
+proc fcQPdfWriter_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfWriter_tr_s_c_n".}
+proc fcQPdfWriter_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfWriter_trUtf8_s_c".}
+proc fcQPdfWriter_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfWriter_trUtf8_s_c_n".}
+proc fcQPdfWriter_addFileAttachmentFileNameDataMimeType(self: pointer, fileName: struct_seaqt_string, data: struct_seaqt_string, mimeType: struct_seaqt_string): void {.importc: "QPdfWriter_addFileAttachment_fileName_data_mimeType".}
 proc fcQPdfWriter_vdata(self: pointer): ptr pointer {.importc: "QPdfWriter_vdata".}
 proc fvdata_cQPdfWriter(self: pointer): pointer {.importc: "vdata_QPdfWriter".}
 
@@ -142,9 +142,9 @@ proc fcQPdfWriter_protectedbase_sender(self: pointer): pointer {.importc: "QPdfW
 proc fcQPdfWriter_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QPdfWriter_protectedbase_senderSignalIndex".}
 proc fcQPdfWriter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfWriter_protectedbase_receivers".}
 proc fcQPdfWriter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfWriter_protectedbase_isSignalConnected".}
-proc fcQPdfWriter_protectedbase_devicePageLayout(self: pointer): pointer {.importc: "QPdfWriter_protectedbase_devicePageLayout".}
-proc fcQPdfWriter_new(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string): ptr cQPdfWriter {.importc: "QPdfWriter_new".}
-proc fcQPdfWriter_new2(vtbl: pointer, vdata: csize_t, device: pointer): ptr cQPdfWriter {.importc: "QPdfWriter_new2".}
+proc fcQPdfWriter_protectedbase_devicePageLayout_const(self: pointer): pointer {.importc: "QPdfWriter_protectedbase_devicePageLayout_const".}
+proc fcQPdfWriter_new(vtbl: pointer, vdata: csize_t, filename: struct_seaqt_string): ptr cQPdfWriter {.importc: "QPdfWriter_new_filename".}
+proc fcQPdfWriter_new2(vtbl: pointer, vdata: csize_t, device: pointer): ptr cQPdfWriter {.importc: "QPdfWriter_new_device".}
 proc fcQPdfWriter_staticMetaObject(): pointer {.importc: "QPdfWriter_staticMetaObject".}
 
 proc metaObject*(self: gen_qpdfwriter_types.QPdfWriter): gen_qobjectdefs_types.QMetaObject =
@@ -157,13 +157,13 @@ proc metacall*(self: gen_qpdfwriter_types.QPdfWriter, param1: cint, param2: cint
   fcQPdfWriter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring): string =
-  let v_ms = fcQPdfWriter_tr(s)
+  let v_ms = fcQPdfWriter_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring): string =
-  let v_ms = fcQPdfWriter_trUtf8(s)
+  let v_ms = fcQPdfWriter_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -211,7 +211,7 @@ proc documentXmpMetadata*(self: gen_qpdfwriter_types.QPdfWriter): seq[byte] =
   vx_ret
 
 proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: openArray[char], data: openArray[byte]): void =
-  fcQPdfWriter_addFileAttachment(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQPdfWriter_addFileAttachmentFileNameData(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc setPageSize*(self: gen_qpdfwriter_types.QPdfWriter, size: cint): void =
   fcQPdfWriter_setPageSize(self.h, cint(size))
@@ -223,31 +223,31 @@ proc setMargins*(self: gen_qpdfwriter_types.QPdfWriter, m: gen_qpagedpaintdevice
   fcQPdfWriter_setMargins(self.h, m.h)
 
 proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfWriter_tr2(s, c)
+  let v_ms = fcQPdfWriter_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfWriter_tr3(s, c, n)
+  let v_ms = fcQPdfWriter_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfWriter_trUtf82(s, c)
+  let v_ms = fcQPdfWriter_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfWriter_trUtf83(s, c, n)
+  let v_ms = fcQPdfWriter_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: openArray[char], data: openArray[byte], mimeType: openArray[char]): void =
-  fcQPdfWriter_addFileAttachment2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
+  fcQPdfWriter_addFileAttachmentFileNameDataMimeType(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))), struct_seaqt_string(data: if len(mimeType) > 0: addr mimeType[0] else: nil, len: csize_t(len(mimeType))))
 
 type QPdfWritermetaObjectProc* = proc(self: QPdfWriter): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPdfWritermetacastProc* = proc(self: QPdfWriter, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -674,7 +674,7 @@ proc isSignalConnected*(self: gen_qpdfwriter_types.QPdfWriter, signal: gen_qmeta
   fcQPdfWriter_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc devicePageLayout*(self: gen_qpdfwriter_types.QPdfWriter): gen_qpagelayout_types.QPageLayout =
-  gen_qpagelayout_types.QPageLayout(h: fcQPdfWriter_protectedbase_devicePageLayout(self.h), owned: true)
+  gen_qpagelayout_types.QPageLayout(h: fcQPdfWriter_protectedbase_devicePageLayout_const(self.h), owned: true)
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
     filename: openArray[char],

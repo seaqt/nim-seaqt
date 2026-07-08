@@ -143,14 +143,14 @@ void* QWebInspector_vdata(VirtualQWebInspector* self);
 VirtualQWebInspector* vdata_QWebInspector(void* vdata);
 
 VirtualQWebInspector* QWebInspector_new(const QWebInspector_VTable* vtbl, size_t vdata);
-VirtualQWebInspector* QWebInspector_new2(const QWebInspector_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQWebInspector* QWebInspector_new_parent(const QWebInspector_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QWebInspector_virtbase(QWebInspector* src, QWidget** outptr_QWidget);
 QMetaObject* QWebInspector_metaObject(const QWebInspector* self);
 void* QWebInspector_metacast(QWebInspector* self, const char* param1);
 int QWebInspector_metacall(QWebInspector* self, int param1, int param2, void** param3);
-struct seaqt_string QWebInspector_tr(const char* s);
-struct seaqt_string QWebInspector_trUtf8(const char* s);
+struct seaqt_string QWebInspector_tr_s(const char* s);
+struct seaqt_string QWebInspector_trUtf8_s(const char* s);
 void QWebInspector_setPage(QWebInspector* self, QWebPage* page);
 QWebPage* QWebInspector_page(const QWebInspector* self);
 QSize* QWebInspector_sizeHint(const QWebInspector* self);
@@ -159,10 +159,10 @@ void QWebInspector_resizeEvent(QWebInspector* self, QResizeEvent* event);
 void QWebInspector_showEvent(QWebInspector* self, QShowEvent* event);
 void QWebInspector_hideEvent(QWebInspector* self, QHideEvent* event);
 void QWebInspector_closeEvent(QWebInspector* self, QCloseEvent* event);
-struct seaqt_string QWebInspector_tr2(const char* s, const char* c);
-struct seaqt_string QWebInspector_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebInspector_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebInspector_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebInspector_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebInspector_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebInspector_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebInspector_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWebInspector_virtualbase_metaObject(const VirtualQWebInspector* self);
 void* QWebInspector_virtualbase_metacast(VirtualQWebInspector* self, const char* param1);

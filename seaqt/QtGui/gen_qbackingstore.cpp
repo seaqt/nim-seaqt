@@ -29,7 +29,7 @@ QPaintDevice* QBackingStore_paintDevice(QBackingStore* self) {
 	return self->paintDevice();
 }
 
-void QBackingStore_flush(QBackingStore* self, QRegion* region) {
+void QBackingStore_flush_region(QBackingStore* self, QRegion* region) {
 	self->flush(*region);
 }
 
@@ -65,11 +65,11 @@ bool QBackingStore_hasStaticContents(const QBackingStore* self) {
 	return self->hasStaticContents();
 }
 
-void QBackingStore_flush2(QBackingStore* self, QRegion* region, QWindow* window) {
+void QBackingStore_flush_region_window(QBackingStore* self, QRegion* region, QWindow* window) {
 	self->flush(*region, window);
 }
 
-void QBackingStore_flush3(QBackingStore* self, QRegion* region, QWindow* window, QPoint* offset) {
+void QBackingStore_flush_region_window_offset(QBackingStore* self, QRegion* region, QWindow* window, QPoint* offset) {
 	self->flush(*region, window, *offset);
 }
 

@@ -81,12 +81,12 @@ type cQColorDialog*{.exportc: "QColorDialog", incompleteStruct.} = object
 proc fcQColorDialog_metaObject(self: pointer): pointer {.importc: "QColorDialog_metaObject".}
 proc fcQColorDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QColorDialog_metacast".}
 proc fcQColorDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QColorDialog_metacall".}
-proc fcQColorDialog_tr(s: cstring): struct_seaqt_string {.importc: "QColorDialog_tr".}
-proc fcQColorDialog_trUtf8(s: cstring): struct_seaqt_string {.importc: "QColorDialog_trUtf8".}
+proc fcQColorDialog_trS(s: cstring): struct_seaqt_string {.importc: "QColorDialog_tr_s".}
+proc fcQColorDialog_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QColorDialog_trUtf8_s".}
 proc fcQColorDialog_setCurrentColor(self: pointer, color: pointer): void {.importc: "QColorDialog_setCurrentColor".}
 proc fcQColorDialog_currentColor(self: pointer): pointer {.importc: "QColorDialog_currentColor".}
 proc fcQColorDialog_selectedColor(self: pointer): pointer {.importc: "QColorDialog_selectedColor".}
-proc fcQColorDialog_setOption(self: pointer, option: cint): void {.importc: "QColorDialog_setOption".}
+proc fcQColorDialog_setOptionOption(self: pointer, option: cint): void {.importc: "QColorDialog_setOption_option".}
 proc fcQColorDialog_testOption(self: pointer, option: cint): bool {.importc: "QColorDialog_testOption".}
 proc fcQColorDialog_setOptions(self: pointer, options: cint): void {.importc: "QColorDialog_setOptions".}
 proc fcQColorDialog_options(self: pointer): cint {.importc: "QColorDialog_options".}
@@ -102,18 +102,18 @@ proc fcQColorDialog_currentColorChanged(self: pointer, color: pointer): void {.i
 proc fcQColorDialog_connect_currentColorChanged(self: pointer, slot: int, callback: proc (slot: int, color: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QColorDialog_connect_currentColorChanged".}
 proc fcQColorDialog_colorSelected(self: pointer, color: pointer): void {.importc: "QColorDialog_colorSelected".}
 proc fcQColorDialog_connect_colorSelected(self: pointer, slot: int, callback: proc (slot: int, color: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QColorDialog_connect_colorSelected".}
-proc fcQColorDialog_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QColorDialog_tr2".}
-proc fcQColorDialog_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QColorDialog_tr3".}
-proc fcQColorDialog_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QColorDialog_trUtf82".}
-proc fcQColorDialog_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QColorDialog_trUtf83".}
-proc fcQColorDialog_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QColorDialog_setOption2".}
-proc fcQColorDialog_getColorWithInitial(initial: pointer): pointer {.importc: "QColorDialog_getColorWithInitial".}
-proc fcQColorDialog_getColor2(initial: pointer, parent: pointer): pointer {.importc: "QColorDialog_getColor2".}
-proc fcQColorDialog_getColor3(initial: pointer, parent: pointer, title: struct_seaqt_string): pointer {.importc: "QColorDialog_getColor3".}
-proc fcQColorDialog_getColor4(initial: pointer, parent: pointer, title: struct_seaqt_string, options: cint): pointer {.importc: "QColorDialog_getColor4".}
-proc fcQColorDialog_getRgbaWithRgba(rgba: cuint): cuint {.importc: "QColorDialog_getRgbaWithRgba".}
-proc fcQColorDialog_getRgba2(rgba: cuint, ok: ptr bool): cuint {.importc: "QColorDialog_getRgba2".}
-proc fcQColorDialog_getRgba3(rgba: cuint, ok: ptr bool, parent: pointer): cuint {.importc: "QColorDialog_getRgba3".}
+proc fcQColorDialog_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QColorDialog_tr_s_c".}
+proc fcQColorDialog_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QColorDialog_tr_s_c_n".}
+proc fcQColorDialog_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QColorDialog_trUtf8_s_c".}
+proc fcQColorDialog_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QColorDialog_trUtf8_s_c_n".}
+proc fcQColorDialog_setOptionOptionOn(self: pointer, option: cint, on: bool): void {.importc: "QColorDialog_setOption_option_on".}
+proc fcQColorDialog_getColorInitial(initial: pointer): pointer {.importc: "QColorDialog_getColor_initial".}
+proc fcQColorDialog_getColorInitialParent(initial: pointer, parent: pointer): pointer {.importc: "QColorDialog_getColor_initial_parent".}
+proc fcQColorDialog_getColorInitialParentTitle(initial: pointer, parent: pointer, title: struct_seaqt_string): pointer {.importc: "QColorDialog_getColor_initial_parent_title".}
+proc fcQColorDialog_getColorInitialParentTitleOptions(initial: pointer, parent: pointer, title: struct_seaqt_string, options: cint): pointer {.importc: "QColorDialog_getColor_initial_parent_title_options".}
+proc fcQColorDialog_getRgbaRgba(rgba: cuint): cuint {.importc: "QColorDialog_getRgba_rgba".}
+proc fcQColorDialog_getRgbaRgbaOk(rgba: cuint, ok: ptr bool): cuint {.importc: "QColorDialog_getRgba_rgba_ok".}
+proc fcQColorDialog_getRgbaRgbaOkParent(rgba: cuint, ok: ptr bool, parent: pointer): cuint {.importc: "QColorDialog_getRgba_rgba_ok_parent".}
 proc fcQColorDialog_vdata(self: pointer): ptr pointer {.importc: "QColorDialog_vdata".}
 proc fvdata_cQColorDialog(self: pointer): pointer {.importc: "vdata_QColorDialog".}
 
@@ -240,9 +240,9 @@ proc fcQColorDialog_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQColorDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QColorDialog_protectedbase_receivers".}
 proc fcQColorDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QColorDialog_protectedbase_isSignalConnected".}
 proc fcQColorDialog_new(vtbl: pointer, vdata: csize_t): ptr cQColorDialog {.importc: "QColorDialog_new".}
-proc fcQColorDialog_new2(vtbl: pointer, vdata: csize_t, initial: pointer): ptr cQColorDialog {.importc: "QColorDialog_new2".}
-proc fcQColorDialog_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQColorDialog {.importc: "QColorDialog_new3".}
-proc fcQColorDialog_new4(vtbl: pointer, vdata: csize_t, initial: pointer, parent: pointer): ptr cQColorDialog {.importc: "QColorDialog_new4".}
+proc fcQColorDialog_new2(vtbl: pointer, vdata: csize_t, initial: pointer): ptr cQColorDialog {.importc: "QColorDialog_new_initial".}
+proc fcQColorDialog_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQColorDialog {.importc: "QColorDialog_new_parent".}
+proc fcQColorDialog_new4(vtbl: pointer, vdata: csize_t, initial: pointer, parent: pointer): ptr cQColorDialog {.importc: "QColorDialog_new_initial_parent".}
 proc fcQColorDialog_staticMetaObject(): pointer {.importc: "QColorDialog_staticMetaObject".}
 
 proc metaObject*(self: gen_qcolordialog_types.QColorDialog): gen_qobjectdefs_types.QMetaObject =
@@ -255,13 +255,13 @@ proc metacall*(self: gen_qcolordialog_types.QColorDialog, param1: cint, param2: 
   fcQColorDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcolordialog_types.QColorDialog, s: cstring): string =
-  let v_ms = fcQColorDialog_tr(s)
+  let v_ms = fcQColorDialog_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcolordialog_types.QColorDialog, s: cstring): string =
-  let v_ms = fcQColorDialog_trUtf8(s)
+  let v_ms = fcQColorDialog_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -276,7 +276,7 @@ proc selectedColor*(self: gen_qcolordialog_types.QColorDialog): gen_qcolor_types
   gen_qcolor_types.QColor(h: fcQColorDialog_selectedColor(self.h), owned: true)
 
 proc setOption*(self: gen_qcolordialog_types.QColorDialog, option: cint): void =
-  fcQColorDialog_setOption(self.h, cint(option))
+  fcQColorDialog_setOptionOption(self.h, cint(option))
 
 proc testOption*(self: gen_qcolordialog_types.QColorDialog, option: cint): bool =
   fcQColorDialog_testOption(self.h, cint(option))
@@ -352,52 +352,52 @@ proc onColorSelected*(self: gen_qcolordialog_types.QColorDialog, slot: QColorDia
   fcQColorDialog_connect_colorSelected(self.h, cast[int](addr tmp[]), fcQColorDialog_slot_callback_colorSelected, fcQColorDialog_slot_callback_colorSelected_release)
 
 proc tr*(_: type gen_qcolordialog_types.QColorDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQColorDialog_tr2(s, c)
+  let v_ms = fcQColorDialog_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcolordialog_types.QColorDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQColorDialog_tr3(s, c, n)
+  let v_ms = fcQColorDialog_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcolordialog_types.QColorDialog, s: cstring, c: cstring): string =
-  let v_ms = fcQColorDialog_trUtf82(s, c)
+  let v_ms = fcQColorDialog_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcolordialog_types.QColorDialog, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQColorDialog_trUtf83(s, c, n)
+  let v_ms = fcQColorDialog_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setOption*(self: gen_qcolordialog_types.QColorDialog, option: cint, on: bool): void =
-  fcQColorDialog_setOption2(self.h, cint(option), on)
+  fcQColorDialog_setOptionOptionOn(self.h, cint(option), on)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColorWithInitial(initial.h), owned: true)
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColorInitial(initial.h), owned: true)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColor2(initial.h, parent.h), owned: true)
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColorInitialParent(initial.h, parent.h), owned: true)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget, title: openArray[char]): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColor3(initial.h, parent.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColorInitialParentTitle(initial.h, parent.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: true)
 
 proc getColor*(_: type gen_qcolordialog_types.QColorDialog, initial: gen_qcolor_types.QColor, parent: gen_qwidget_types.QWidget, title: openArray[char], options: cint): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColorDialog_getColor4(initial.h, parent.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), cint(options)), owned: true)
+  gen_qcolor_types.QColor(h: fcQColorDialog_getColorInitialParentTitleOptions(initial.h, parent.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), cint(options)), owned: true)
 
 proc getRgba*(_: type gen_qcolordialog_types.QColorDialog, rgba: cuint): cuint =
-  fcQColorDialog_getRgbaWithRgba(rgba)
+  fcQColorDialog_getRgbaRgba(rgba)
 
 proc getRgba*(_: type gen_qcolordialog_types.QColorDialog, rgba: cuint, ok: ptr bool): cuint =
-  fcQColorDialog_getRgba2(rgba, ok)
+  fcQColorDialog_getRgbaRgbaOk(rgba, ok)
 
 proc getRgba*(_: type gen_qcolordialog_types.QColorDialog, rgba: cuint, ok: ptr bool, parent: gen_qwidget_types.QWidget): cuint =
-  fcQColorDialog_getRgba3(rgba, ok, parent.h)
+  fcQColorDialog_getRgbaRgbaOkParent(rgba, ok, parent.h)
 
 type QColorDialogmetaObjectProc* = proc(self: QColorDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QColorDialogmetacastProc* = proc(self: QColorDialog, param1: cstring): pointer {.raises: [], gcsafe.}

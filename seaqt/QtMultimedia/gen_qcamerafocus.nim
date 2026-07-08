@@ -75,7 +75,7 @@ export
 type cQCameraFocusZone*{.exportc: "QCameraFocusZone", incompleteStruct.} = object
 type cQCameraFocus*{.exportc: "QCameraFocus", incompleteStruct.} = object
 
-proc fcQCameraFocusZone_operatorAssign(self: pointer, other: pointer): void {.importc: "QCameraFocusZone_operatorAssign".}
+proc fcQCameraFocusZone_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QCameraFocusZone_operatorAssign".}
 proc fcQCameraFocusZone_operatorEqual(self: pointer, other: pointer): bool {.importc: "QCameraFocusZone_operatorEqual".}
 proc fcQCameraFocusZone_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QCameraFocusZone_operatorNotEqual".}
 proc fcQCameraFocusZone_isValid(self: pointer): bool {.importc: "QCameraFocusZone_isValid".}
@@ -83,14 +83,14 @@ proc fcQCameraFocusZone_area(self: pointer): pointer {.importc: "QCameraFocusZon
 proc fcQCameraFocusZone_status(self: pointer): cint {.importc: "QCameraFocusZone_status".}
 proc fcQCameraFocusZone_setStatus(self: pointer, status: cint): void {.importc: "QCameraFocusZone_setStatus".}
 proc fcQCameraFocusZone_new(): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new".}
-proc fcQCameraFocusZone_new2(area: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new2".}
-proc fcQCameraFocusZone_new3(other: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new3".}
-proc fcQCameraFocusZone_new4(area: pointer, status: cint): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new4".}
+proc fcQCameraFocusZone_new2(area: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new_area".}
+proc fcQCameraFocusZone_new3(fromVal: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new_from".}
+proc fcQCameraFocusZone_new4(area: pointer, status: cint): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new_area_status".}
 proc fcQCameraFocus_metaObject(self: pointer): pointer {.importc: "QCameraFocus_metaObject".}
 proc fcQCameraFocus_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFocus_metacast".}
 proc fcQCameraFocus_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFocus_metacall".}
-proc fcQCameraFocus_tr(s: cstring): struct_seaqt_string {.importc: "QCameraFocus_tr".}
-proc fcQCameraFocus_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraFocus_trUtf8".}
+proc fcQCameraFocus_trS(s: cstring): struct_seaqt_string {.importc: "QCameraFocus_tr_s".}
+proc fcQCameraFocus_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraFocus_trUtf8_s".}
 proc fcQCameraFocus_isAvailable(self: pointer): bool {.importc: "QCameraFocus_isAvailable".}
 proc fcQCameraFocus_focusMode(self: pointer): cint {.importc: "QCameraFocus_focusMode".}
 proc fcQCameraFocus_setFocusMode(self: pointer, mode: cint): void {.importc: "QCameraFocus_setFocusMode".}
@@ -116,18 +116,18 @@ proc fcQCameraFocus_maximumOpticalZoomChanged(self: pointer, param1: float64): v
 proc fcQCameraFocus_connect_maximumOpticalZoomChanged(self: pointer, slot: int, callback: proc (slot: int, param1: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFocus_connect_maximumOpticalZoomChanged".}
 proc fcQCameraFocus_maximumDigitalZoomChanged(self: pointer, param1: float64): void {.importc: "QCameraFocus_maximumDigitalZoomChanged".}
 proc fcQCameraFocus_connect_maximumDigitalZoomChanged(self: pointer, slot: int, callback: proc (slot: int, param1: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFocus_connect_maximumDigitalZoomChanged".}
-proc fcQCameraFocus_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFocus_tr2".}
-proc fcQCameraFocus_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFocus_tr3".}
-proc fcQCameraFocus_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFocus_trUtf82".}
-proc fcQCameraFocus_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFocus_trUtf83".}
+proc fcQCameraFocus_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFocus_tr_s_c".}
+proc fcQCameraFocus_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFocus_tr_s_c_n".}
+proc fcQCameraFocus_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFocus_trUtf8_s_c".}
+proc fcQCameraFocus_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFocus_trUtf8_s_c_n".}
 proc fcQCameraFocus_protectedbase_sender(self: pointer): pointer {.importc: "QCameraFocus_protectedbase_sender".}
 proc fcQCameraFocus_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraFocus_protectedbase_senderSignalIndex".}
 proc fcQCameraFocus_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFocus_protectedbase_receivers".}
 proc fcQCameraFocus_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraFocus_protectedbase_isSignalConnected".}
 proc fcQCameraFocus_staticMetaObject(): pointer {.importc: "QCameraFocus_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qcamerafocus_types.QCameraFocusZone, other: gen_qcamerafocus_types.QCameraFocusZone): void =
-  fcQCameraFocusZone_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qcamerafocus_types.QCameraFocusZone, fromVal: gen_qcamerafocus_types.QCameraFocusZone): void =
+  fcQCameraFocusZone_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qcamerafocus_types.QCameraFocusZone, other: gen_qcamerafocus_types.QCameraFocusZone): bool =
   fcQCameraFocusZone_operatorEqual(self.h, other.h)
@@ -155,8 +155,8 @@ proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
   let tmp = gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new2(area.h), owned: true)
   tmp
 proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
-    other: gen_qcamerafocus_types.QCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
-  let tmp = gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new3(other.h), owned: true)
+    fromVal: gen_qcamerafocus_types.QCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
+  let tmp = gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
     area: gen_qrect_types.QRectF, status: cint): gen_qcamerafocus_types.QCameraFocusZone =
@@ -172,13 +172,13 @@ proc metacall*(self: gen_qcamerafocus_types.QCameraFocus, param1: cint, param2: 
   fcQCameraFocus_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring): string =
-  let v_ms = fcQCameraFocus_tr(s)
+  let v_ms = fcQCameraFocus_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring): string =
-  let v_ms = fcQCameraFocus_trUtf8(s)
+  let v_ms = fcQCameraFocus_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -333,25 +333,25 @@ proc onMaximumDigitalZoomChanged*(self: gen_qcamerafocus_types.QCameraFocus, slo
   fcQCameraFocus_connect_maximumDigitalZoomChanged(self.h, cast[int](addr tmp[]), fcQCameraFocus_slot_callback_maximumDigitalZoomChanged, fcQCameraFocus_slot_callback_maximumDigitalZoomChanged_release)
 
 proc tr*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraFocus_tr2(s, c)
+  let v_ms = fcQCameraFocus_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraFocus_tr3(s, c, n)
+  let v_ms = fcQCameraFocus_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraFocus_trUtf82(s, c)
+  let v_ms = fcQCameraFocus_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraFocus_trUtf83(s, c, n)
+  let v_ms = fcQCameraFocus_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

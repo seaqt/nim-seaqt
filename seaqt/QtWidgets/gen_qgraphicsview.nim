@@ -123,11 +123,11 @@ type cQGraphicsView*{.exportc: "QGraphicsView", incompleteStruct.} = object
 proc fcQGraphicsView_metaObject(self: pointer): pointer {.importc: "QGraphicsView_metaObject".}
 proc fcQGraphicsView_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsView_metacast".}
 proc fcQGraphicsView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsView_metacall".}
-proc fcQGraphicsView_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsView_tr".}
-proc fcQGraphicsView_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGraphicsView_trUtf8".}
+proc fcQGraphicsView_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsView_tr_s".}
+proc fcQGraphicsView_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGraphicsView_trUtf8_s".}
 proc fcQGraphicsView_sizeHint(self: pointer): pointer {.importc: "QGraphicsView_sizeHint".}
 proc fcQGraphicsView_renderHints(self: pointer): cint {.importc: "QGraphicsView_renderHints".}
-proc fcQGraphicsView_setRenderHint(self: pointer, hint: cint): void {.importc: "QGraphicsView_setRenderHint".}
+proc fcQGraphicsView_setRenderHintHint(self: pointer, hint: cint): void {.importc: "QGraphicsView_setRenderHint_hint".}
 proc fcQGraphicsView_setRenderHints(self: pointer, hints: cint): void {.importc: "QGraphicsView_setRenderHints".}
 proc fcQGraphicsView_alignment(self: pointer): cint {.importc: "QGraphicsView_alignment".}
 proc fcQGraphicsView_setAlignment(self: pointer, alignment: cint): void {.importc: "QGraphicsView_setAlignment".}
@@ -138,7 +138,7 @@ proc fcQGraphicsView_setResizeAnchor(self: pointer, anchor: cint): void {.import
 proc fcQGraphicsView_viewportUpdateMode(self: pointer): cint {.importc: "QGraphicsView_viewportUpdateMode".}
 proc fcQGraphicsView_setViewportUpdateMode(self: pointer, mode: cint): void {.importc: "QGraphicsView_setViewportUpdateMode".}
 proc fcQGraphicsView_optimizationFlags(self: pointer): cint {.importc: "QGraphicsView_optimizationFlags".}
-proc fcQGraphicsView_setOptimizationFlag(self: pointer, flag: cint): void {.importc: "QGraphicsView_setOptimizationFlag".}
+proc fcQGraphicsView_setOptimizationFlagFlag(self: pointer, flag: cint): void {.importc: "QGraphicsView_setOptimizationFlag_flag".}
 proc fcQGraphicsView_setOptimizationFlags(self: pointer, flags: cint): void {.importc: "QGraphicsView_setOptimizationFlags".}
 proc fcQGraphicsView_dragMode(self: pointer): cint {.importc: "QGraphicsView_dragMode".}
 proc fcQGraphicsView_setDragMode(self: pointer, mode: cint): void {.importc: "QGraphicsView_setDragMode".}
@@ -153,44 +153,44 @@ proc fcQGraphicsView_setInteractive(self: pointer, allowed: bool): void {.import
 proc fcQGraphicsView_scene(self: pointer): pointer {.importc: "QGraphicsView_scene".}
 proc fcQGraphicsView_setScene(self: pointer, scene: pointer): void {.importc: "QGraphicsView_setScene".}
 proc fcQGraphicsView_sceneRect(self: pointer): pointer {.importc: "QGraphicsView_sceneRect".}
-proc fcQGraphicsView_setSceneRect(self: pointer, rect: pointer): void {.importc: "QGraphicsView_setSceneRect".}
-proc fcQGraphicsView_setSceneRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsView_setSceneRect2".}
+proc fcQGraphicsView_setSceneRectRect(self: pointer, rect: pointer): void {.importc: "QGraphicsView_setSceneRect_rect".}
+proc fcQGraphicsView_setSceneRectXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsView_setSceneRect_x_y_w_h".}
 proc fcQGraphicsView_matrix(self: pointer): pointer {.importc: "QGraphicsView_matrix".}
-proc fcQGraphicsView_setMatrix(self: pointer, matrix: pointer): void {.importc: "QGraphicsView_setMatrix".}
+proc fcQGraphicsView_setMatrixMatrix(self: pointer, matrix: pointer): void {.importc: "QGraphicsView_setMatrix_matrix".}
 proc fcQGraphicsView_resetMatrix(self: pointer): void {.importc: "QGraphicsView_resetMatrix".}
 proc fcQGraphicsView_transform(self: pointer): pointer {.importc: "QGraphicsView_transform".}
 proc fcQGraphicsView_viewportTransform(self: pointer): pointer {.importc: "QGraphicsView_viewportTransform".}
 proc fcQGraphicsView_isTransformed(self: pointer): bool {.importc: "QGraphicsView_isTransformed".}
-proc fcQGraphicsView_setTransform(self: pointer, matrix: pointer): void {.importc: "QGraphicsView_setTransform".}
+proc fcQGraphicsView_setTransformMatrix(self: pointer, matrix: pointer): void {.importc: "QGraphicsView_setTransform_matrix".}
 proc fcQGraphicsView_resetTransform(self: pointer): void {.importc: "QGraphicsView_resetTransform".}
 proc fcQGraphicsView_rotate(self: pointer, angle: float64): void {.importc: "QGraphicsView_rotate".}
 proc fcQGraphicsView_scale(self: pointer, sx: float64, sy: float64): void {.importc: "QGraphicsView_scale".}
 proc fcQGraphicsView_shear(self: pointer, sh: float64, sv: float64): void {.importc: "QGraphicsView_shear".}
 proc fcQGraphicsView_translate(self: pointer, dx: float64, dy: float64): void {.importc: "QGraphicsView_translate".}
-proc fcQGraphicsView_centerOn(self: pointer, pos: pointer): void {.importc: "QGraphicsView_centerOn".}
-proc fcQGraphicsView_centerOn2(self: pointer, x: float64, y: float64): void {.importc: "QGraphicsView_centerOn2".}
-proc fcQGraphicsView_centerOnWithItem(self: pointer, item: pointer): void {.importc: "QGraphicsView_centerOnWithItem".}
-proc fcQGraphicsView_ensureVisible(self: pointer, rect: pointer): void {.importc: "QGraphicsView_ensureVisible".}
-proc fcQGraphicsView_ensureVisible2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsView_ensureVisible2".}
-proc fcQGraphicsView_ensureVisibleWithItem(self: pointer, item: pointer): void {.importc: "QGraphicsView_ensureVisibleWithItem".}
-proc fcQGraphicsView_fitInView(self: pointer, rect: pointer): void {.importc: "QGraphicsView_fitInView".}
-proc fcQGraphicsView_fitInView2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsView_fitInView2".}
-proc fcQGraphicsView_fitInViewWithItem(self: pointer, item: pointer): void {.importc: "QGraphicsView_fitInViewWithItem".}
-proc fcQGraphicsView_render(self: pointer, painter: pointer): void {.importc: "QGraphicsView_render".}
+proc fcQGraphicsView_centerOnPos(self: pointer, pos: pointer): void {.importc: "QGraphicsView_centerOn_pos".}
+proc fcQGraphicsView_centerOnXY(self: pointer, x: float64, y: float64): void {.importc: "QGraphicsView_centerOn_x_y".}
+proc fcQGraphicsView_centerOnItem(self: pointer, item: pointer): void {.importc: "QGraphicsView_centerOn_item".}
+proc fcQGraphicsView_ensureVisibleRect(self: pointer, rect: pointer): void {.importc: "QGraphicsView_ensureVisible_rect".}
+proc fcQGraphicsView_ensureVisibleXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsView_ensureVisible_x_y_w_h".}
+proc fcQGraphicsView_ensureVisibleItem(self: pointer, item: pointer): void {.importc: "QGraphicsView_ensureVisible_item".}
+proc fcQGraphicsView_fitInViewRect(self: pointer, rect: pointer): void {.importc: "QGraphicsView_fitInView_rect".}
+proc fcQGraphicsView_fitInViewXYWH(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QGraphicsView_fitInView_x_y_w_h".}
+proc fcQGraphicsView_fitInViewItem(self: pointer, item: pointer): void {.importc: "QGraphicsView_fitInView_item".}
+proc fcQGraphicsView_renderPainter(self: pointer, painter: pointer): void {.importc: "QGraphicsView_render_painter".}
 proc fcQGraphicsView_items(self: pointer): struct_seaqt_array {.importc: "QGraphicsView_items".}
-proc fcQGraphicsView_itemsWithPos(self: pointer, pos: pointer): struct_seaqt_array {.importc: "QGraphicsView_itemsWithPos".}
-proc fcQGraphicsView_items2(self: pointer, x: cint, y: cint): struct_seaqt_array {.importc: "QGraphicsView_items2".}
-proc fcQGraphicsView_itemsWithRect(self: pointer, rect: pointer): struct_seaqt_array {.importc: "QGraphicsView_itemsWithRect".}
-proc fcQGraphicsView_items3(self: pointer, x: cint, y: cint, w: cint, h: cint): struct_seaqt_array {.importc: "QGraphicsView_items3".}
-proc fcQGraphicsView_itemsWithPath(self: pointer, path: pointer): struct_seaqt_array {.importc: "QGraphicsView_itemsWithPath".}
-proc fcQGraphicsView_itemAt(self: pointer, pos: pointer): pointer {.importc: "QGraphicsView_itemAt".}
-proc fcQGraphicsView_itemAt2(self: pointer, x: cint, y: cint): pointer {.importc: "QGraphicsView_itemAt2".}
-proc fcQGraphicsView_mapToScene(self: pointer, point: pointer): pointer {.importc: "QGraphicsView_mapToScene".}
-proc fcQGraphicsView_mapToSceneWithPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsView_mapToSceneWithPath".}
-proc fcQGraphicsView_mapFromScene(self: pointer, point: pointer): pointer {.importc: "QGraphicsView_mapFromScene".}
-proc fcQGraphicsView_mapFromSceneWithPath(self: pointer, path: pointer): pointer {.importc: "QGraphicsView_mapFromSceneWithPath".}
-proc fcQGraphicsView_mapToScene2(self: pointer, x: cint, y: cint): pointer {.importc: "QGraphicsView_mapToScene2".}
-proc fcQGraphicsView_mapFromScene2(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsView_mapFromScene2".}
+proc fcQGraphicsView_itemsPos(self: pointer, pos: pointer): struct_seaqt_array {.importc: "QGraphicsView_items_pos".}
+proc fcQGraphicsView_itemsXY(self: pointer, x: cint, y: cint): struct_seaqt_array {.importc: "QGraphicsView_items_x_y".}
+proc fcQGraphicsView_itemsRect(self: pointer, rect: pointer): struct_seaqt_array {.importc: "QGraphicsView_items_rect".}
+proc fcQGraphicsView_itemsXYWH(self: pointer, x: cint, y: cint, w: cint, h: cint): struct_seaqt_array {.importc: "QGraphicsView_items_x_y_w_h".}
+proc fcQGraphicsView_itemsPath(self: pointer, path: pointer): struct_seaqt_array {.importc: "QGraphicsView_items_path".}
+proc fcQGraphicsView_itemAtPos(self: pointer, pos: pointer): pointer {.importc: "QGraphicsView_itemAt_pos".}
+proc fcQGraphicsView_itemAtXY(self: pointer, x: cint, y: cint): pointer {.importc: "QGraphicsView_itemAt_x_y".}
+proc fcQGraphicsView_mapToScenePoint(self: pointer, point: pointer): pointer {.importc: "QGraphicsView_mapToScene_point".}
+proc fcQGraphicsView_mapToScenePath(self: pointer, path: pointer): pointer {.importc: "QGraphicsView_mapToScene_path".}
+proc fcQGraphicsView_mapFromScenePoint(self: pointer, point: pointer): pointer {.importc: "QGraphicsView_mapFromScene_point".}
+proc fcQGraphicsView_mapFromScenePath(self: pointer, path: pointer): pointer {.importc: "QGraphicsView_mapFromScene_path".}
+proc fcQGraphicsView_mapToSceneXY(self: pointer, x: cint, y: cint): pointer {.importc: "QGraphicsView_mapToScene_x_y".}
+proc fcQGraphicsView_mapFromSceneXY(self: pointer, x: float64, y: float64): pointer {.importc: "QGraphicsView_mapFromScene_x_y".}
 proc fcQGraphicsView_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsView_inputMethodQuery".}
 proc fcQGraphicsView_backgroundBrush(self: pointer): pointer {.importc: "QGraphicsView_backgroundBrush".}
 proc fcQGraphicsView_setBackgroundBrush(self: pointer, brush: pointer): void {.importc: "QGraphicsView_setBackgroundBrush".}
@@ -201,31 +201,31 @@ proc fcQGraphicsView_invalidateScene(self: pointer): void {.importc: "QGraphicsV
 proc fcQGraphicsView_updateSceneRect(self: pointer, rect: pointer): void {.importc: "QGraphicsView_updateSceneRect".}
 proc fcQGraphicsView_rubberBandChanged(self: pointer, viewportRect: pointer, fromScenePoint: pointer, toScenePoint: pointer): void {.importc: "QGraphicsView_rubberBandChanged".}
 proc fcQGraphicsView_connect_rubberBandChanged(self: pointer, slot: int, callback: proc (slot: int, viewportRect: pointer, fromScenePoint: pointer, toScenePoint: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsView_connect_rubberBandChanged".}
-proc fcQGraphicsView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsView_tr2".}
-proc fcQGraphicsView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsView_tr3".}
-proc fcQGraphicsView_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsView_trUtf82".}
-proc fcQGraphicsView_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsView_trUtf83".}
-proc fcQGraphicsView_setRenderHint2(self: pointer, hint: cint, enabled: bool): void {.importc: "QGraphicsView_setRenderHint2".}
-proc fcQGraphicsView_setOptimizationFlag2(self: pointer, flag: cint, enabled: bool): void {.importc: "QGraphicsView_setOptimizationFlag2".}
-proc fcQGraphicsView_setMatrix2(self: pointer, matrix: pointer, combine: bool): void {.importc: "QGraphicsView_setMatrix2".}
-proc fcQGraphicsView_setTransform2(self: pointer, matrix: pointer, combine: bool): void {.importc: "QGraphicsView_setTransform2".}
-proc fcQGraphicsView_ensureVisible3(self: pointer, rect: pointer, xmargin: cint): void {.importc: "QGraphicsView_ensureVisible3".}
-proc fcQGraphicsView_ensureVisible4(self: pointer, rect: pointer, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsView_ensureVisible4".}
-proc fcQGraphicsView_ensureVisible5(self: pointer, x: float64, y: float64, w: float64, h: float64, xmargin: cint): void {.importc: "QGraphicsView_ensureVisible5".}
-proc fcQGraphicsView_ensureVisible6(self: pointer, x: float64, y: float64, w: float64, h: float64, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsView_ensureVisible6".}
-proc fcQGraphicsView_ensureVisible7(self: pointer, item: pointer, xmargin: cint): void {.importc: "QGraphicsView_ensureVisible7".}
-proc fcQGraphicsView_ensureVisible8(self: pointer, item: pointer, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsView_ensureVisible8".}
-proc fcQGraphicsView_fitInView3(self: pointer, rect: pointer, aspectRadioMode: cint): void {.importc: "QGraphicsView_fitInView3".}
-proc fcQGraphicsView_fitInView4(self: pointer, x: float64, y: float64, w: float64, h: float64, aspectRadioMode: cint): void {.importc: "QGraphicsView_fitInView4".}
-proc fcQGraphicsView_fitInView5(self: pointer, item: pointer, aspectRadioMode: cint): void {.importc: "QGraphicsView_fitInView5".}
-proc fcQGraphicsView_render2(self: pointer, painter: pointer, target: pointer): void {.importc: "QGraphicsView_render2".}
-proc fcQGraphicsView_render3(self: pointer, painter: pointer, target: pointer, source: pointer): void {.importc: "QGraphicsView_render3".}
-proc fcQGraphicsView_render4(self: pointer, painter: pointer, target: pointer, source: pointer, aspectRatioMode: cint): void {.importc: "QGraphicsView_render4".}
-proc fcQGraphicsView_items4(self: pointer, rect: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsView_items4".}
-proc fcQGraphicsView_items5(self: pointer, x: cint, y: cint, w: cint, h: cint, mode: cint): struct_seaqt_array {.importc: "QGraphicsView_items5".}
-proc fcQGraphicsView_items7(self: pointer, path: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsView_items7".}
-proc fcQGraphicsView_invalidateSceneWithRect(self: pointer, rect: pointer): void {.importc: "QGraphicsView_invalidateSceneWithRect".}
-proc fcQGraphicsView_invalidateScene2(self: pointer, rect: pointer, layers: cint): void {.importc: "QGraphicsView_invalidateScene2".}
+proc fcQGraphicsView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsView_tr_s_c".}
+proc fcQGraphicsView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsView_tr_s_c_n".}
+proc fcQGraphicsView_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsView_trUtf8_s_c".}
+proc fcQGraphicsView_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsView_trUtf8_s_c_n".}
+proc fcQGraphicsView_setRenderHintHintEnabled(self: pointer, hint: cint, enabled: bool): void {.importc: "QGraphicsView_setRenderHint_hint_enabled".}
+proc fcQGraphicsView_setOptimizationFlagFlagEnabled(self: pointer, flag: cint, enabled: bool): void {.importc: "QGraphicsView_setOptimizationFlag_flag_enabled".}
+proc fcQGraphicsView_setMatrixMatrixCombine(self: pointer, matrix: pointer, combine: bool): void {.importc: "QGraphicsView_setMatrix_matrix_combine".}
+proc fcQGraphicsView_setTransformMatrixCombine(self: pointer, matrix: pointer, combine: bool): void {.importc: "QGraphicsView_setTransform_matrix_combine".}
+proc fcQGraphicsView_ensureVisibleRectXmargin(self: pointer, rect: pointer, xmargin: cint): void {.importc: "QGraphicsView_ensureVisible_rect_xmargin".}
+proc fcQGraphicsView_ensureVisibleRectXmarginYmargin(self: pointer, rect: pointer, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsView_ensureVisible_rect_xmargin_ymargin".}
+proc fcQGraphicsView_ensureVisibleXYWHXmargin(self: pointer, x: float64, y: float64, w: float64, h: float64, xmargin: cint): void {.importc: "QGraphicsView_ensureVisible_x_y_w_h_xmargin".}
+proc fcQGraphicsView_ensureVisibleXYWHXmarginYmargin(self: pointer, x: float64, y: float64, w: float64, h: float64, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsView_ensureVisible_x_y_w_h_xmargin_ymargin".}
+proc fcQGraphicsView_ensureVisibleItemXmargin(self: pointer, item: pointer, xmargin: cint): void {.importc: "QGraphicsView_ensureVisible_item_xmargin".}
+proc fcQGraphicsView_ensureVisibleItemXmarginYmargin(self: pointer, item: pointer, xmargin: cint, ymargin: cint): void {.importc: "QGraphicsView_ensureVisible_item_xmargin_ymargin".}
+proc fcQGraphicsView_fitInViewRectAspectRadioMode(self: pointer, rect: pointer, aspectRadioMode: cint): void {.importc: "QGraphicsView_fitInView_rect_aspectRadioMode".}
+proc fcQGraphicsView_fitInViewXYWHAspectRadioMode(self: pointer, x: float64, y: float64, w: float64, h: float64, aspectRadioMode: cint): void {.importc: "QGraphicsView_fitInView_x_y_w_h_aspectRadioMode".}
+proc fcQGraphicsView_fitInViewItemAspectRadioMode(self: pointer, item: pointer, aspectRadioMode: cint): void {.importc: "QGraphicsView_fitInView_item_aspectRadioMode".}
+proc fcQGraphicsView_renderPainterTarget(self: pointer, painter: pointer, target: pointer): void {.importc: "QGraphicsView_render_painter_target".}
+proc fcQGraphicsView_renderPainterTargetSource(self: pointer, painter: pointer, target: pointer, source: pointer): void {.importc: "QGraphicsView_render_painter_target_source".}
+proc fcQGraphicsView_renderPainterTargetSourceAspectRatioMode(self: pointer, painter: pointer, target: pointer, source: pointer, aspectRatioMode: cint): void {.importc: "QGraphicsView_render_painter_target_source_aspectRatioMode".}
+proc fcQGraphicsView_itemsRectMode(self: pointer, rect: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsView_items_rect_mode".}
+proc fcQGraphicsView_itemsXYWHMode(self: pointer, x: cint, y: cint, w: cint, h: cint, mode: cint): struct_seaqt_array {.importc: "QGraphicsView_items_x_y_w_h_mode".}
+proc fcQGraphicsView_itemsPathMode(self: pointer, path: pointer, mode: cint): struct_seaqt_array {.importc: "QGraphicsView_items_path_mode".}
+proc fcQGraphicsView_invalidateSceneRect(self: pointer, rect: pointer): void {.importc: "QGraphicsView_invalidateScene_rect".}
+proc fcQGraphicsView_invalidateSceneRectLayers(self: pointer, rect: pointer, layers: cint): void {.importc: "QGraphicsView_invalidateScene_rect_layers".}
 proc fcQGraphicsView_vdata(self: pointer): ptr pointer {.importc: "QGraphicsView_vdata".}
 proc fvdata_cQGraphicsView(self: pointer): pointer {.importc: "vdata_QGraphicsView".}
 
@@ -343,7 +343,7 @@ proc fcQGraphicsView_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQGraphicsView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsView_virtualbase_customEvent".}
 proc fcQGraphicsView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsView_virtualbase_connectNotify".}
 proc fcQGraphicsView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsView_virtualbase_disconnectNotify".}
-proc fcQGraphicsView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QGraphicsView_protectedbase_setViewportMargins".}
+proc fcQGraphicsView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QGraphicsView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQGraphicsView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QGraphicsView_protectedbase_viewportMargins".}
 proc fcQGraphicsView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QGraphicsView_protectedbase_drawFrame".}
 proc fcQGraphicsView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QGraphicsView_protectedbase_initStyleOption".}
@@ -357,9 +357,9 @@ proc fcQGraphicsView_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQGraphicsView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsView_protectedbase_receivers".}
 proc fcQGraphicsView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsView_protectedbase_isSignalConnected".}
 proc fcQGraphicsView_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsView {.importc: "QGraphicsView_new".}
-proc fcQGraphicsView_new2(vtbl: pointer, vdata: csize_t, scene: pointer): ptr cQGraphicsView {.importc: "QGraphicsView_new2".}
-proc fcQGraphicsView_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsView {.importc: "QGraphicsView_new3".}
-proc fcQGraphicsView_new4(vtbl: pointer, vdata: csize_t, scene: pointer, parent: pointer): ptr cQGraphicsView {.importc: "QGraphicsView_new4".}
+proc fcQGraphicsView_new2(vtbl: pointer, vdata: csize_t, scene: pointer): ptr cQGraphicsView {.importc: "QGraphicsView_new_scene".}
+proc fcQGraphicsView_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsView {.importc: "QGraphicsView_new_parent".}
+proc fcQGraphicsView_new4(vtbl: pointer, vdata: csize_t, scene: pointer, parent: pointer): ptr cQGraphicsView {.importc: "QGraphicsView_new_scene_parent".}
 proc fcQGraphicsView_staticMetaObject(): pointer {.importc: "QGraphicsView_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicsview_types.QGraphicsView): gen_qobjectdefs_types.QMetaObject =
@@ -372,13 +372,13 @@ proc metacall*(self: gen_qgraphicsview_types.QGraphicsView, param1: cint, param2
   fcQGraphicsView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring): string =
-  let v_ms = fcQGraphicsView_tr(s)
+  let v_ms = fcQGraphicsView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring): string =
-  let v_ms = fcQGraphicsView_trUtf8(s)
+  let v_ms = fcQGraphicsView_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -390,7 +390,7 @@ proc renderHints*(self: gen_qgraphicsview_types.QGraphicsView): cint =
   cint(fcQGraphicsView_renderHints(self.h))
 
 proc setRenderHint*(self: gen_qgraphicsview_types.QGraphicsView, hint: cint): void =
-  fcQGraphicsView_setRenderHint(self.h, cint(hint))
+  fcQGraphicsView_setRenderHintHint(self.h, cint(hint))
 
 proc setRenderHints*(self: gen_qgraphicsview_types.QGraphicsView, hints: cint): void =
   fcQGraphicsView_setRenderHints(self.h, cint(hints))
@@ -423,7 +423,7 @@ proc optimizationFlags*(self: gen_qgraphicsview_types.QGraphicsView): cint =
   cint(fcQGraphicsView_optimizationFlags(self.h))
 
 proc setOptimizationFlag*(self: gen_qgraphicsview_types.QGraphicsView, flag: cint): void =
-  fcQGraphicsView_setOptimizationFlag(self.h, cint(flag))
+  fcQGraphicsView_setOptimizationFlagFlag(self.h, cint(flag))
 
 proc setOptimizationFlags*(self: gen_qgraphicsview_types.QGraphicsView, flags: cint): void =
   fcQGraphicsView_setOptimizationFlags(self.h, cint(flags))
@@ -468,16 +468,16 @@ proc sceneRect*(self: gen_qgraphicsview_types.QGraphicsView): gen_qrect_types.QR
   gen_qrect_types.QRectF(h: fcQGraphicsView_sceneRect(self.h), owned: true)
 
 proc setSceneRect*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsView_setSceneRect(self.h, rect.h)
+  fcQGraphicsView_setSceneRectRect(self.h, rect.h)
 
 proc setSceneRect*(self: gen_qgraphicsview_types.QGraphicsView, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsView_setSceneRect2(self.h, x, y, w, h)
+  fcQGraphicsView_setSceneRectXYWH(self.h, x, y, w, h)
 
 proc matrix*(self: gen_qgraphicsview_types.QGraphicsView): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQGraphicsView_matrix(self.h), owned: true)
 
 proc setMatrix*(self: gen_qgraphicsview_types.QGraphicsView, matrix: gen_qmatrix_types.QMatrix): void =
-  fcQGraphicsView_setMatrix(self.h, matrix.h)
+  fcQGraphicsView_setMatrixMatrix(self.h, matrix.h)
 
 proc resetMatrix*(self: gen_qgraphicsview_types.QGraphicsView): void =
   fcQGraphicsView_resetMatrix(self.h)
@@ -492,7 +492,7 @@ proc isTransformed*(self: gen_qgraphicsview_types.QGraphicsView): bool =
   fcQGraphicsView_isTransformed(self.h)
 
 proc setTransform*(self: gen_qgraphicsview_types.QGraphicsView, matrix: gen_qtransform_types.QTransform): void =
-  fcQGraphicsView_setTransform(self.h, matrix.h)
+  fcQGraphicsView_setTransformMatrix(self.h, matrix.h)
 
 proc resetTransform*(self: gen_qgraphicsview_types.QGraphicsView): void =
   fcQGraphicsView_resetTransform(self.h)
@@ -510,34 +510,34 @@ proc translate*(self: gen_qgraphicsview_types.QGraphicsView, dx: float64, dy: fl
   fcQGraphicsView_translate(self.h, dx, dy)
 
 proc centerOn*(self: gen_qgraphicsview_types.QGraphicsView, pos: gen_qpoint_types.QPointF): void =
-  fcQGraphicsView_centerOn(self.h, pos.h)
+  fcQGraphicsView_centerOnPos(self.h, pos.h)
 
 proc centerOn*(self: gen_qgraphicsview_types.QGraphicsView, x: float64, y: float64): void =
-  fcQGraphicsView_centerOn2(self.h, x, y)
+  fcQGraphicsView_centerOnXY(self.h, x, y)
 
 proc centerOn*(self: gen_qgraphicsview_types.QGraphicsView, item: gen_qgraphicsitem_types.QGraphicsItem): void =
-  fcQGraphicsView_centerOnWithItem(self.h, item.h)
+  fcQGraphicsView_centerOnItem(self.h, item.h)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsView_ensureVisible(self.h, rect.h)
+  fcQGraphicsView_ensureVisibleRect(self.h, rect.h)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsView_ensureVisible2(self.h, x, y, w, h)
+  fcQGraphicsView_ensureVisibleXYWH(self.h, x, y, w, h)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, item: gen_qgraphicsitem_types.QGraphicsItem): void =
-  fcQGraphicsView_ensureVisibleWithItem(self.h, item.h)
+  fcQGraphicsView_ensureVisibleItem(self.h, item.h)
 
 proc fitInView*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsView_fitInView(self.h, rect.h)
+  fcQGraphicsView_fitInViewRect(self.h, rect.h)
 
 proc fitInView*(self: gen_qgraphicsview_types.QGraphicsView, x: float64, y: float64, w: float64, h: float64): void =
-  fcQGraphicsView_fitInView2(self.h, x, y, w, h)
+  fcQGraphicsView_fitInViewXYWH(self.h, x, y, w, h)
 
 proc fitInView*(self: gen_qgraphicsview_types.QGraphicsView, item: gen_qgraphicsitem_types.QGraphicsItem): void =
-  fcQGraphicsView_fitInViewWithItem(self.h, item.h)
+  fcQGraphicsView_fitInViewItem(self.h, item.h)
 
 proc render*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter): void =
-  fcQGraphicsView_render(self.h, painter.h)
+  fcQGraphicsView_renderPainter(self.h, painter.h)
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView): seq[gen_qgraphicsitem_types.QGraphicsItem] =
   var v_ma = fcQGraphicsView_items(self.h)
@@ -549,7 +549,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView): seq[gen_qgraphicsitem_
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, pos: gen_qpoint_types.QPoint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsView_itemsWithPos(self.h, pos.h)
+  var v_ma = fcQGraphicsView_itemsPos(self.h, pos.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -558,7 +558,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, pos: gen_qpoint_types.Q
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsView_items2(self.h, x, y)
+  var v_ma = fcQGraphicsView_itemsXY(self.h, x, y)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -567,7 +567,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint): seq[
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRect): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsView_itemsWithRect(self.h, rect.h)
+  var v_ma = fcQGraphicsView_itemsRect(self.h, rect.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -576,7 +576,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.Q
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint, w: cint, h: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsView_items3(self.h, x, y, w, h)
+  var v_ma = fcQGraphicsView_itemsXYWH(self.h, x, y, w, h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -585,7 +585,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint, w: ci
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_types.QPainterPath): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsView_itemsWithPath(self.h, path.h)
+  var v_ma = fcQGraphicsView_itemsPath(self.h, path.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -594,28 +594,28 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_
   vx_ret
 
 proc itemAt*(self: gen_qgraphicsview_types.QGraphicsView, pos: gen_qpoint_types.QPoint): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsView_itemAt(self.h, pos.h), owned: false)
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsView_itemAtPos(self.h, pos.h), owned: false)
 
 proc itemAt*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsView_itemAt2(self.h, x, y), owned: false)
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsView_itemAtXY(self.h, x, y), owned: false)
 
 proc mapToScene*(self: gen_qgraphicsview_types.QGraphicsView, point: gen_qpoint_types.QPoint): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsView_mapToScene(self.h, point.h), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsView_mapToScenePoint(self.h, point.h), owned: true)
 
 proc mapToScene*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsView_mapToSceneWithPath(self.h, path.h), owned: true)
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsView_mapToScenePath(self.h, path.h), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsview_types.QGraphicsView, point: gen_qpoint_types.QPointF): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQGraphicsView_mapFromScene(self.h, point.h), owned: true)
+  gen_qpoint_types.QPoint(h: fcQGraphicsView_mapFromScenePoint(self.h, point.h), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsView_mapFromSceneWithPath(self.h, path.h), owned: true)
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsView_mapFromScenePath(self.h, path.h), owned: true)
 
 proc mapToScene*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQGraphicsView_mapToScene2(self.h, x, y), owned: true)
+  gen_qpoint_types.QPointF(h: fcQGraphicsView_mapToSceneXY(self.h, x, y), owned: true)
 
 proc mapFromScene*(self: gen_qgraphicsview_types.QGraphicsView, x: float64, y: float64): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQGraphicsView_mapFromScene2(self.h, x, y), owned: true)
+  gen_qpoint_types.QPoint(h: fcQGraphicsView_mapFromSceneXY(self.h, x, y), owned: true)
 
 proc inputMethodQuery*(self: gen_qgraphicsview_types.QGraphicsView, query: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQGraphicsView_inputMethodQuery(self.h, cint(query)), owned: true)
@@ -670,79 +670,79 @@ proc onRubberBandChanged*(self: gen_qgraphicsview_types.QGraphicsView, slot: QGr
   fcQGraphicsView_connect_rubberBandChanged(self.h, cast[int](addr tmp[]), fcQGraphicsView_slot_callback_rubberBandChanged, fcQGraphicsView_slot_callback_rubberBandChanged_release)
 
 proc tr*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsView_tr2(s, c)
+  let v_ms = fcQGraphicsView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsView_tr3(s, c, n)
+  let v_ms = fcQGraphicsView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsView_trUtf82(s, c)
+  let v_ms = fcQGraphicsView_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsView_trUtf83(s, c, n)
+  let v_ms = fcQGraphicsView_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setRenderHint*(self: gen_qgraphicsview_types.QGraphicsView, hint: cint, enabled: bool): void =
-  fcQGraphicsView_setRenderHint2(self.h, cint(hint), enabled)
+  fcQGraphicsView_setRenderHintHintEnabled(self.h, cint(hint), enabled)
 
 proc setOptimizationFlag*(self: gen_qgraphicsview_types.QGraphicsView, flag: cint, enabled: bool): void =
-  fcQGraphicsView_setOptimizationFlag2(self.h, cint(flag), enabled)
+  fcQGraphicsView_setOptimizationFlagFlagEnabled(self.h, cint(flag), enabled)
 
 proc setMatrix*(self: gen_qgraphicsview_types.QGraphicsView, matrix: gen_qmatrix_types.QMatrix, combine: bool): void =
-  fcQGraphicsView_setMatrix2(self.h, matrix.h, combine)
+  fcQGraphicsView_setMatrixMatrixCombine(self.h, matrix.h, combine)
 
 proc setTransform*(self: gen_qgraphicsview_types.QGraphicsView, matrix: gen_qtransform_types.QTransform, combine: bool): void =
-  fcQGraphicsView_setTransform2(self.h, matrix.h, combine)
+  fcQGraphicsView_setTransformMatrixCombine(self.h, matrix.h, combine)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF, xmargin: cint): void =
-  fcQGraphicsView_ensureVisible3(self.h, rect.h, xmargin)
+  fcQGraphicsView_ensureVisibleRectXmargin(self.h, rect.h, xmargin)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF, xmargin: cint, ymargin: cint): void =
-  fcQGraphicsView_ensureVisible4(self.h, rect.h, xmargin, ymargin)
+  fcQGraphicsView_ensureVisibleRectXmarginYmargin(self.h, rect.h, xmargin, ymargin)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, x: float64, y: float64, w: float64, h: float64, xmargin: cint): void =
-  fcQGraphicsView_ensureVisible5(self.h, x, y, w, h, xmargin)
+  fcQGraphicsView_ensureVisibleXYWHXmargin(self.h, x, y, w, h, xmargin)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, x: float64, y: float64, w: float64, h: float64, xmargin: cint, ymargin: cint): void =
-  fcQGraphicsView_ensureVisible6(self.h, x, y, w, h, xmargin, ymargin)
+  fcQGraphicsView_ensureVisibleXYWHXmarginYmargin(self.h, x, y, w, h, xmargin, ymargin)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, item: gen_qgraphicsitem_types.QGraphicsItem, xmargin: cint): void =
-  fcQGraphicsView_ensureVisible7(self.h, item.h, xmargin)
+  fcQGraphicsView_ensureVisibleItemXmargin(self.h, item.h, xmargin)
 
 proc ensureVisible*(self: gen_qgraphicsview_types.QGraphicsView, item: gen_qgraphicsitem_types.QGraphicsItem, xmargin: cint, ymargin: cint): void =
-  fcQGraphicsView_ensureVisible8(self.h, item.h, xmargin, ymargin)
+  fcQGraphicsView_ensureVisibleItemXmarginYmargin(self.h, item.h, xmargin, ymargin)
 
 proc fitInView*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF, aspectRadioMode: cint): void =
-  fcQGraphicsView_fitInView3(self.h, rect.h, cint(aspectRadioMode))
+  fcQGraphicsView_fitInViewRectAspectRadioMode(self.h, rect.h, cint(aspectRadioMode))
 
 proc fitInView*(self: gen_qgraphicsview_types.QGraphicsView, x: float64, y: float64, w: float64, h: float64, aspectRadioMode: cint): void =
-  fcQGraphicsView_fitInView4(self.h, x, y, w, h, cint(aspectRadioMode))
+  fcQGraphicsView_fitInViewXYWHAspectRadioMode(self.h, x, y, w, h, cint(aspectRadioMode))
 
 proc fitInView*(self: gen_qgraphicsview_types.QGraphicsView, item: gen_qgraphicsitem_types.QGraphicsItem, aspectRadioMode: cint): void =
-  fcQGraphicsView_fitInView5(self.h, item.h, cint(aspectRadioMode))
+  fcQGraphicsView_fitInViewItemAspectRadioMode(self.h, item.h, cint(aspectRadioMode))
 
 proc render*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter, target: gen_qrect_types.QRectF): void =
-  fcQGraphicsView_render2(self.h, painter.h, target.h)
+  fcQGraphicsView_renderPainterTarget(self.h, painter.h, target.h)
 
 proc render*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter, target: gen_qrect_types.QRectF, source: gen_qrect_types.QRect): void =
-  fcQGraphicsView_render3(self.h, painter.h, target.h, source.h)
+  fcQGraphicsView_renderPainterTargetSource(self.h, painter.h, target.h, source.h)
 
 proc render*(self: gen_qgraphicsview_types.QGraphicsView, painter: gen_qpainter_types.QPainter, target: gen_qrect_types.QRectF, source: gen_qrect_types.QRect, aspectRatioMode: cint): void =
-  fcQGraphicsView_render4(self.h, painter.h, target.h, source.h, cint(aspectRatioMode))
+  fcQGraphicsView_renderPainterTargetSourceAspectRatioMode(self.h, painter.h, target.h, source.h, cint(aspectRatioMode))
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRect, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsView_items4(self.h, rect.h, cint(mode))
+  var v_ma = fcQGraphicsView_itemsRectMode(self.h, rect.h, cint(mode))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -751,7 +751,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.Q
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint, w: cint, h: cint, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsView_items5(self.h, x, y, w, h, cint(mode))
+  var v_ma = fcQGraphicsView_itemsXYWHMode(self.h, x, y, w, h, cint(mode))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -760,7 +760,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint, w: ci
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_types.QPainterPath, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
-  var v_ma = fcQGraphicsView_items7(self.h, path.h, cint(mode))
+  var v_ma = fcQGraphicsView_itemsPathMode(self.h, path.h, cint(mode))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -769,10 +769,10 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_
   vx_ret
 
 proc invalidateScene*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF): void =
-  fcQGraphicsView_invalidateSceneWithRect(self.h, rect.h)
+  fcQGraphicsView_invalidateSceneRect(self.h, rect.h)
 
 proc invalidateScene*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF, layers: cint): void =
-  fcQGraphicsView_invalidateScene2(self.h, rect.h, cint(layers))
+  fcQGraphicsView_invalidateSceneRectLayers(self.h, rect.h, cint(layers))
 
 type QGraphicsViewmetaObjectProc* = proc(self: QGraphicsView): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGraphicsViewmetacastProc* = proc(self: QGraphicsView, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1885,7 +1885,7 @@ proc fcQGraphicsView_method_callback_disconnectNotify(self: pointer, signal: poi
 
 
 proc setViewportMargins*(self: gen_qgraphicsview_types.QGraphicsView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQGraphicsView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQGraphicsView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qgraphicsview_types.QGraphicsView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQGraphicsView_protectedbase_viewportMargins(self.h), owned: true)

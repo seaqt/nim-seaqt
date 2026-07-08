@@ -166,7 +166,7 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend void QPrinter_protectedbase_setEngines(VirtualQPrinter* self, QPrintEngine* printEngine, QPaintEngine* paintEngine);
-	friend QPageLayout* QPrinter_protectedbase_devicePageLayout(const VirtualQPrinter* self);
+	friend QPageLayout* QPrinter_protectedbase_devicePageLayout_const(const VirtualQPrinter* self);
 };
 
 VirtualQPrinter* QPrinter_new(const QPrinter_VTable* vtbl, size_t vdata) {
@@ -174,17 +174,17 @@ VirtualQPrinter* QPrinter_new(const QPrinter_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQPrinter(vtbl) : nullptr;
 }
 
-VirtualQPrinter* QPrinter_new2(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer) {
+VirtualQPrinter* QPrinter_new_printer(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrinter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrinter(vtbl, *printer) : nullptr;
 }
 
-VirtualQPrinter* QPrinter_new3(const QPrinter_VTable* vtbl, size_t vdata, int mode) {
+VirtualQPrinter* QPrinter_new_mode(const QPrinter_VTable* vtbl, size_t vdata, int mode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrinter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrinter(vtbl, static_cast<QPrinter::PrinterMode>(mode)) : nullptr;
 }
 
-VirtualQPrinter* QPrinter_new4(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer, int mode) {
+VirtualQPrinter* QPrinter_new_printer_mode(const QPrinter_VTable* vtbl, size_t vdata, QPrinterInfo* printer, int mode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPrinter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPrinter(vtbl, *printer, static_cast<QPrinter::PrinterMode>(mode)) : nullptr;
 }
@@ -321,7 +321,7 @@ void QPrinter_setPageSizeMM(QPrinter* self, QSizeF* size) {
 	self->setPageSizeMM(*size);
 }
 
-void QPrinter_setPaperSize(QPrinter* self, int paperSize) {
+void QPrinter_setPaperSize_paperSize(QPrinter* self, int paperSize) {
 	self->setPaperSize(static_cast<QPrinter::PaperSize>(paperSize));
 }
 
@@ -330,11 +330,11 @@ int QPrinter_paperSize(const QPrinter* self) {
 	return static_cast<int>(_ret);
 }
 
-void QPrinter_setPaperSize2(QPrinter* self, QSizeF* paperSize, int unit) {
+void QPrinter_setPaperSize_paperSize_unit(QPrinter* self, QSizeF* paperSize, int unit) {
 	self->setPaperSize(*paperSize, static_cast<QPrinter::Unit>(unit));
 }
 
-QSizeF* QPrinter_paperSizeWithUnit(const QPrinter* self, int unit) {
+QSizeF* QPrinter_paperSize_unit(const QPrinter* self, int unit) {
 	return new QSizeF(self->paperSize(static_cast<QPrinter::Unit>(unit)));
 }
 
@@ -483,11 +483,11 @@ QRect* QPrinter_pageRect(const QPrinter* self) {
 	return new QRect(self->pageRect());
 }
 
-QRectF* QPrinter_paperRectWithQPrinterUnit(const QPrinter* self, int param1) {
+QRectF* QPrinter_paperRect_QPrinter_Unit(const QPrinter* self, int param1) {
 	return new QRectF(self->paperRect(static_cast<QPrinter::Unit>(param1)));
 }
 
-QRectF* QPrinter_pageRectWithQPrinterUnit(const QPrinter* self, int param1) {
+QRectF* QPrinter_pageRect_QPrinter_Unit(const QPrinter* self, int param1) {
 	return new QRectF(self->pageRect(static_cast<QPrinter::Unit>(param1)));
 }
 
@@ -618,7 +618,7 @@ void QPrinter_protectedbase_setEngines(VirtualQPrinter* self, QPrintEngine* prin
 	self->setEngines(printEngine, paintEngine);
 }
 
-QPageLayout* QPrinter_protectedbase_devicePageLayout(const VirtualQPrinter* self) {
+QPageLayout* QPrinter_protectedbase_devicePageLayout_const(const VirtualQPrinter* self) {
 	return new QPageLayout(self->devicePageLayout());
 }
 

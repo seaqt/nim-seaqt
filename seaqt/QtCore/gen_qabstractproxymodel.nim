@@ -68,8 +68,8 @@ type cQAbstractProxyModel*{.exportc: "QAbstractProxyModel", incompleteStruct.} =
 proc fcQAbstractProxyModel_metaObject(self: pointer): pointer {.importc: "QAbstractProxyModel_metaObject".}
 proc fcQAbstractProxyModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractProxyModel_metacast".}
 proc fcQAbstractProxyModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractProxyModel_metacall".}
-proc fcQAbstractProxyModel_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_tr".}
-proc fcQAbstractProxyModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_trUtf8".}
+proc fcQAbstractProxyModel_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_tr_s".}
+proc fcQAbstractProxyModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_trUtf8_s".}
 proc fcQAbstractProxyModel_setSourceModel(self: pointer, sourceModel: pointer): void {.importc: "QAbstractProxyModel_setSourceModel".}
 proc fcQAbstractProxyModel_sourceModel(self: pointer): pointer {.importc: "QAbstractProxyModel_sourceModel".}
 proc fcQAbstractProxyModel_mapToSource(self: pointer, proxyIndex: pointer): pointer {.importc: "QAbstractProxyModel_mapToSource".}
@@ -98,10 +98,10 @@ proc fcQAbstractProxyModel_dropMimeData(self: pointer, data: pointer, action: ci
 proc fcQAbstractProxyModel_mimeTypes(self: pointer): struct_seaqt_array {.importc: "QAbstractProxyModel_mimeTypes".}
 proc fcQAbstractProxyModel_supportedDragActions(self: pointer): cint {.importc: "QAbstractProxyModel_supportedDragActions".}
 proc fcQAbstractProxyModel_supportedDropActions(self: pointer): cint {.importc: "QAbstractProxyModel_supportedDropActions".}
-proc fcQAbstractProxyModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_tr2".}
-proc fcQAbstractProxyModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractProxyModel_tr3".}
-proc fcQAbstractProxyModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_trUtf82".}
-proc fcQAbstractProxyModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractProxyModel_trUtf83".}
+proc fcQAbstractProxyModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_tr_s_c".}
+proc fcQAbstractProxyModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractProxyModel_tr_s_c_n".}
+proc fcQAbstractProxyModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_trUtf8_s_c".}
+proc fcQAbstractProxyModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractProxyModel_trUtf8_s_c_n".}
 proc fcQAbstractProxyModel_vdata(self: pointer): ptr pointer {.importc: "QAbstractProxyModel_vdata".}
 proc fvdata_cQAbstractProxyModel(self: pointer): pointer {.importc: "vdata_QAbstractProxyModel".}
 
@@ -200,7 +200,7 @@ proc fcQAbstractProxyModel_virtualbase_customEvent(self: pointer, event: pointer
 proc fcQAbstractProxyModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractProxyModel_virtualbase_connectNotify".}
 proc fcQAbstractProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractProxyModel_virtualbase_disconnectNotify".}
 proc fcQAbstractProxyModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QAbstractProxyModel_protectedbase_resetInternalData".}
-proc fcQAbstractProxyModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractProxyModel_protectedbase_createIndex".}
+proc fcQAbstractProxyModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractProxyModel_protectedbase_createIndex_row_column".}
 proc fcQAbstractProxyModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QAbstractProxyModel_protectedbase_encodeData".}
 proc fcQAbstractProxyModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractProxyModel_protectedbase_decodeData".}
 proc fcQAbstractProxyModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractProxyModel_protectedbase_beginInsertRows".}
@@ -225,7 +225,7 @@ proc fcQAbstractProxyModel_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQAbstractProxyModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractProxyModel_protectedbase_receivers".}
 proc fcQAbstractProxyModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractProxyModel_protectedbase_isSignalConnected".}
 proc fcQAbstractProxyModel_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractProxyModel {.importc: "QAbstractProxyModel_new".}
-proc fcQAbstractProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractProxyModel {.importc: "QAbstractProxyModel_new2".}
+proc fcQAbstractProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractProxyModel {.importc: "QAbstractProxyModel_new_parent".}
 proc fcQAbstractProxyModel_staticMetaObject(): pointer {.importc: "QAbstractProxyModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractproxymodel_types.QAbstractProxyModel): gen_qobjectdefs_types.QMetaObject =
@@ -238,13 +238,13 @@ proc metacall*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, param1: 
   fcQAbstractProxyModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel, s: cstring): string =
-  let v_ms = fcQAbstractProxyModel_tr(s)
+  let v_ms = fcQAbstractProxyModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel, s: cstring): string =
-  let v_ms = fcQAbstractProxyModel_trUtf8(s)
+  let v_ms = fcQAbstractProxyModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -370,25 +370,25 @@ proc supportedDropActions*(self: gen_qabstractproxymodel_types.QAbstractProxyMod
   cint(fcQAbstractProxyModel_supportedDropActions(self.h))
 
 proc tr*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractProxyModel_tr2(s, c)
+  let v_ms = fcQAbstractProxyModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractProxyModel_tr3(s, c, n)
+  let v_ms = fcQAbstractProxyModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractProxyModel_trUtf82(s, c)
+  let v_ms = fcQAbstractProxyModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractProxyModel_trUtf83(s, c, n)
+  let v_ms = fcQAbstractProxyModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1678,7 +1678,7 @@ proc resetInternalData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel)
   fcQAbstractProxyModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractProxyModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

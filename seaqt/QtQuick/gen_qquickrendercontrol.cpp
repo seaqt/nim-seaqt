@@ -189,7 +189,7 @@ VirtualQQuickRenderControl* QQuickRenderControl_new(const QQuickRenderControl_VT
 	return _mem_ ? new (_mem_)VirtualQQuickRenderControl(vtbl) : nullptr;
 }
 
-VirtualQQuickRenderControl* QQuickRenderControl_new2(const QQuickRenderControl_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQQuickRenderControl* QQuickRenderControl_new_parent(const QQuickRenderControl_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickRenderControl>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickRenderControl(vtbl, parent) : nullptr;
 }
@@ -210,7 +210,7 @@ int QQuickRenderControl_metacall(QQuickRenderControl* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickRenderControl_tr(const char* s) {
+struct seaqt_string QQuickRenderControl_tr_s(const char* s) {
 	QString _ret = QQuickRenderControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -221,7 +221,7 @@ struct seaqt_string QQuickRenderControl_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QQuickRenderControl_trUtf8(const char* s) {
+struct seaqt_string QQuickRenderControl_trUtf8_s(const char* s) {
 	QString _ret = QQuickRenderControl::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -256,7 +256,7 @@ QImage* QQuickRenderControl_grab(QQuickRenderControl* self) {
 	return new QImage(self->grab());
 }
 
-QWindow* QQuickRenderControl_renderWindowFor(QQuickWindow* win) {
+QWindow* QQuickRenderControl_renderWindowFor_win(QQuickWindow* win) {
 	return QQuickRenderControl::renderWindowFor(win);
 }
 
@@ -294,7 +294,7 @@ void QQuickRenderControl_connect_sceneChanged(QQuickRenderControl* self, intptr_
 	QQuickRenderControl::connect(self, static_cast<void (QQuickRenderControl::*)()>(&QQuickRenderControl::sceneChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQuickRenderControl_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickRenderControl_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickRenderControl::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -305,7 +305,7 @@ struct seaqt_string QQuickRenderControl_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickRenderControl_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickRenderControl_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickRenderControl::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -316,7 +316,7 @@ struct seaqt_string QQuickRenderControl_tr3(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_string QQuickRenderControl_trUtf82(const char* s, const char* c) {
+struct seaqt_string QQuickRenderControl_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QQuickRenderControl::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -327,7 +327,7 @@ struct seaqt_string QQuickRenderControl_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickRenderControl_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QQuickRenderControl_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickRenderControl::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -338,7 +338,7 @@ struct seaqt_string QQuickRenderControl_trUtf83(const char* s, const char* c, in
 	return _ms;
 }
 
-QWindow* QQuickRenderControl_renderWindowFor2(QQuickWindow* win, QPoint* offset) {
+QWindow* QQuickRenderControl_renderWindowFor_win_offset(QQuickWindow* win, QPoint* offset) {
 	return QQuickRenderControl::renderWindowFor(win, offset);
 }
 

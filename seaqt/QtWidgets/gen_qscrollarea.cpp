@@ -730,7 +730,7 @@ public:
 	friend void QScrollArea_virtualbase_disconnectNotify(VirtualQScrollArea* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QScrollArea_protectedbase_setViewportMargins(VirtualQScrollArea* self, int left, int top, int right, int bottom);
+	friend void QScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQScrollArea* self, int left, int top, int right, int bottom);
 	friend QMargins* QScrollArea_protectedbase_viewportMargins(const VirtualQScrollArea* self);
 	friend void QScrollArea_protectedbase_drawFrame(VirtualQScrollArea* self, QPainter* param1);
 	friend void QScrollArea_protectedbase_initStyleOption(const VirtualQScrollArea* self, QStyleOptionFrame* option);
@@ -750,7 +750,7 @@ VirtualQScrollArea* QScrollArea_new(const QScrollArea_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQScrollArea(vtbl) : nullptr;
 }
 
-VirtualQScrollArea* QScrollArea_new2(const QScrollArea_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQScrollArea* QScrollArea_new_parent(const QScrollArea_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQScrollArea>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQScrollArea(vtbl, parent) : nullptr;
 }
@@ -771,7 +771,7 @@ int QScrollArea_metacall(QScrollArea* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QScrollArea_tr(const char* s) {
+struct seaqt_string QScrollArea_tr_s(const char* s) {
 	QString _ret = QScrollArea::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -782,7 +782,7 @@ struct seaqt_string QScrollArea_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QScrollArea_trUtf8(const char* s) {
+struct seaqt_string QScrollArea_trUtf8_s(const char* s) {
 	QString _ret = QScrollArea::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -830,15 +830,15 @@ void QScrollArea_setAlignment(QScrollArea* self, int alignment) {
 	self->setAlignment(static_cast<Qt::Alignment>(alignment));
 }
 
-void QScrollArea_ensureVisible(QScrollArea* self, int x, int y) {
+void QScrollArea_ensureVisible_x_y(QScrollArea* self, int x, int y) {
 	self->ensureVisible(static_cast<int>(x), static_cast<int>(y));
 }
 
-void QScrollArea_ensureWidgetVisible(QScrollArea* self, QWidget* childWidget) {
+void QScrollArea_ensureWidgetVisible_childWidget(QScrollArea* self, QWidget* childWidget) {
 	self->ensureWidgetVisible(childWidget);
 }
 
-struct seaqt_string QScrollArea_tr2(const char* s, const char* c) {
+struct seaqt_string QScrollArea_tr_s_c(const char* s, const char* c) {
 	QString _ret = QScrollArea::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -849,7 +849,7 @@ struct seaqt_string QScrollArea_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QScrollArea_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QScrollArea_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QScrollArea::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -860,7 +860,7 @@ struct seaqt_string QScrollArea_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QScrollArea_trUtf82(const char* s, const char* c) {
+struct seaqt_string QScrollArea_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QScrollArea::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -871,7 +871,7 @@ struct seaqt_string QScrollArea_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QScrollArea_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QScrollArea_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QScrollArea::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -882,19 +882,19 @@ struct seaqt_string QScrollArea_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QScrollArea_ensureVisible2(QScrollArea* self, int x, int y, int xmargin) {
+void QScrollArea_ensureVisible_x_y_xmargin(QScrollArea* self, int x, int y, int xmargin) {
 	self->ensureVisible(static_cast<int>(x), static_cast<int>(y), static_cast<int>(xmargin));
 }
 
-void QScrollArea_ensureVisible3(QScrollArea* self, int x, int y, int xmargin, int ymargin) {
+void QScrollArea_ensureVisible_x_y_xmargin_ymargin(QScrollArea* self, int x, int y, int xmargin, int ymargin) {
 	self->ensureVisible(static_cast<int>(x), static_cast<int>(y), static_cast<int>(xmargin), static_cast<int>(ymargin));
 }
 
-void QScrollArea_ensureWidgetVisible2(QScrollArea* self, QWidget* childWidget, int xmargin) {
+void QScrollArea_ensureWidgetVisible_childWidget_xmargin(QScrollArea* self, QWidget* childWidget, int xmargin) {
 	self->ensureWidgetVisible(childWidget, static_cast<int>(xmargin));
 }
 
-void QScrollArea_ensureWidgetVisible3(QScrollArea* self, QWidget* childWidget, int xmargin, int ymargin) {
+void QScrollArea_ensureWidgetVisible_childWidget_xmargin_ymargin(QScrollArea* self, QWidget* childWidget, int xmargin, int ymargin) {
 	self->ensureWidgetVisible(childWidget, static_cast<int>(xmargin), static_cast<int>(ymargin));
 }
 
@@ -1173,7 +1173,7 @@ void QScrollArea_virtualbase_disconnectNotify(VirtualQScrollArea* self, QMetaMet
 	self->QScrollArea::disconnectNotify(*signal);
 }
 
-void QScrollArea_protectedbase_setViewportMargins(VirtualQScrollArea* self, int left, int top, int right, int bottom) {
+void QScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQScrollArea* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

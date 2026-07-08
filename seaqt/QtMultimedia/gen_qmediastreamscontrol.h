@@ -34,8 +34,8 @@ void QMediaStreamsControl_virtbase(QMediaStreamsControl* src, QMediaControl** ou
 QMetaObject* QMediaStreamsControl_metaObject(const QMediaStreamsControl* self);
 void* QMediaStreamsControl_metacast(QMediaStreamsControl* self, const char* param1);
 int QMediaStreamsControl_metacall(QMediaStreamsControl* self, int param1, int param2, void** param3);
-struct seaqt_string QMediaStreamsControl_tr(const char* s);
-struct seaqt_string QMediaStreamsControl_trUtf8(const char* s);
+struct seaqt_string QMediaStreamsControl_tr_s(const char* s);
+struct seaqt_string QMediaStreamsControl_trUtf8_s(const char* s);
 int QMediaStreamsControl_streamCount(QMediaStreamsControl* self);
 int QMediaStreamsControl_streamType(QMediaStreamsControl* self, int streamNumber);
 QVariant* QMediaStreamsControl_metaData(QMediaStreamsControl* self, int streamNumber, struct seaqt_string key);
@@ -45,10 +45,10 @@ void QMediaStreamsControl_streamsChanged(QMediaStreamsControl* self);
 void QMediaStreamsControl_connect_streamsChanged(QMediaStreamsControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QMediaStreamsControl_activeStreamsChanged(QMediaStreamsControl* self);
 void QMediaStreamsControl_connect_activeStreamsChanged(QMediaStreamsControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QMediaStreamsControl_tr2(const char* s, const char* c);
-struct seaqt_string QMediaStreamsControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QMediaStreamsControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QMediaStreamsControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QMediaStreamsControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMediaStreamsControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QMediaStreamsControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QMediaStreamsControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QMediaStreamsControl_staticMetaObject();
 void QMediaStreamsControl_delete(QMediaStreamsControl* self);

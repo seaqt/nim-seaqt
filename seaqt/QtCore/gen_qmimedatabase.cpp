@@ -30,12 +30,12 @@ QMimeType* QMimeDatabase_mimeTypeForName(const QMimeDatabase* self, struct seaqt
 	return new QMimeType(self->mimeTypeForName(nameOrAlias_QString));
 }
 
-QMimeType* QMimeDatabase_mimeTypeForFile(const QMimeDatabase* self, struct seaqt_string fileName) {
+QMimeType* QMimeDatabase_mimeTypeForFile_fileName(const QMimeDatabase* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new QMimeType(self->mimeTypeForFile(fileName_QString));
 }
 
-QMimeType* QMimeDatabase_mimeTypeForFileWithFileInfo(const QMimeDatabase* self, QFileInfo* fileInfo) {
+QMimeType* QMimeDatabase_mimeTypeForFile_fileInfo(const QMimeDatabase* self, QFileInfo* fileInfo) {
 	return new QMimeType(self->mimeTypeForFile(*fileInfo));
 }
 
@@ -53,12 +53,12 @@ struct seaqt_array /* of QMimeType* */  QMimeDatabase_mimeTypesForFileName(const
 	return _out;
 }
 
-QMimeType* QMimeDatabase_mimeTypeForData(const QMimeDatabase* self, struct seaqt_string data) {
+QMimeType* QMimeDatabase_mimeTypeForData_data(const QMimeDatabase* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new QMimeType(self->mimeTypeForData(data_QByteArray));
 }
 
-QMimeType* QMimeDatabase_mimeTypeForDataWithDevice(const QMimeDatabase* self, QIODevice* device) {
+QMimeType* QMimeDatabase_mimeTypeForData_device(const QMimeDatabase* self, QIODevice* device) {
 	return new QMimeType(self->mimeTypeForData(device));
 }
 
@@ -66,12 +66,12 @@ QMimeType* QMimeDatabase_mimeTypeForUrl(const QMimeDatabase* self, QUrl* url) {
 	return new QMimeType(self->mimeTypeForUrl(*url));
 }
 
-QMimeType* QMimeDatabase_mimeTypeForFileNameAndData(const QMimeDatabase* self, struct seaqt_string fileName, QIODevice* device) {
+QMimeType* QMimeDatabase_mimeTypeForFileNameAndData_fileName_device(const QMimeDatabase* self, struct seaqt_string fileName, QIODevice* device) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new QMimeType(self->mimeTypeForFileNameAndData(fileName_QString, device));
 }
 
-QMimeType* QMimeDatabase_mimeTypeForFileNameAndData2(const QMimeDatabase* self, struct seaqt_string fileName, struct seaqt_string data) {
+QMimeType* QMimeDatabase_mimeTypeForFileNameAndData_fileName_data(const QMimeDatabase* self, struct seaqt_string fileName, struct seaqt_string data) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray data_QByteArray(data.data, data.len);
 	return new QMimeType(self->mimeTypeForFileNameAndData(fileName_QString, data_QByteArray));
@@ -102,12 +102,12 @@ struct seaqt_array /* of QMimeType* */  QMimeDatabase_allMimeTypes(const QMimeDa
 	return _out;
 }
 
-QMimeType* QMimeDatabase_mimeTypeForFile2(const QMimeDatabase* self, struct seaqt_string fileName, int mode) {
+QMimeType* QMimeDatabase_mimeTypeForFile_fileName_mode(const QMimeDatabase* self, struct seaqt_string fileName, int mode) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new QMimeType(self->mimeTypeForFile(fileName_QString, static_cast<QMimeDatabase::MatchMode>(mode)));
 }
 
-QMimeType* QMimeDatabase_mimeTypeForFile3(const QMimeDatabase* self, QFileInfo* fileInfo, int mode) {
+QMimeType* QMimeDatabase_mimeTypeForFile_fileInfo_mode(const QMimeDatabase* self, QFileInfo* fileInfo, int mode) {
 	return new QMimeType(self->mimeTypeForFile(*fileInfo, static_cast<QMimeDatabase::MatchMode>(mode)));
 }
 

@@ -48,7 +48,7 @@ void* QGraphicsLayout_vdata(VirtualQGraphicsLayout* self);
 VirtualQGraphicsLayout* vdata_QGraphicsLayout(void* vdata);
 
 VirtualQGraphicsLayout* QGraphicsLayout_new(const QGraphicsLayout_VTable* vtbl, size_t vdata);
-VirtualQGraphicsLayout* QGraphicsLayout_new2(const QGraphicsLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent);
+VirtualQGraphicsLayout* QGraphicsLayout_new_parent(const QGraphicsLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent);
 
 void QGraphicsLayout_virtbase(QGraphicsLayout* src, QGraphicsLayoutItem** outptr_QGraphicsLayoutItem);
 void QGraphicsLayout_setContentsMargins(QGraphicsLayout* self, double left, double top, double right, double bottom);

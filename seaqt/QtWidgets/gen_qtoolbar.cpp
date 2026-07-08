@@ -694,24 +694,24 @@ public:
 	friend bool QToolBar_protectedbase_isSignalConnected(const VirtualQToolBar* self, QMetaMethod* signal);
 };
 
-VirtualQToolBar* QToolBar_new(const QToolBar_VTable* vtbl, size_t vdata, struct seaqt_string title) {
+VirtualQToolBar* QToolBar_new_title(const QToolBar_VTable* vtbl, size_t vdata, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQToolBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQToolBar(vtbl, title_QString) : nullptr;
 }
 
-VirtualQToolBar* QToolBar_new2(const QToolBar_VTable* vtbl, size_t vdata) {
+VirtualQToolBar* QToolBar_new(const QToolBar_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQToolBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQToolBar(vtbl) : nullptr;
 }
 
-VirtualQToolBar* QToolBar_new3(const QToolBar_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent) {
+VirtualQToolBar* QToolBar_new_title_parent(const QToolBar_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQToolBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQToolBar(vtbl, title_QString, parent) : nullptr;
 }
 
-VirtualQToolBar* QToolBar_new4(const QToolBar_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQToolBar* QToolBar_new_parent(const QToolBar_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQToolBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQToolBar(vtbl, parent) : nullptr;
 }
@@ -732,7 +732,7 @@ int QToolBar_metacall(QToolBar* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QToolBar_tr(const char* s) {
+struct seaqt_string QToolBar_tr_s(const char* s) {
 	QString _ret = QToolBar::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -743,7 +743,7 @@ struct seaqt_string QToolBar_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QToolBar_trUtf8(const char* s) {
+struct seaqt_string QToolBar_trUtf8_s(const char* s) {
 	QString _ret = QToolBar::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -788,12 +788,12 @@ void QToolBar_clear(QToolBar* self) {
 	self->clear();
 }
 
-QAction* QToolBar_addAction(QToolBar* self, struct seaqt_string text) {
+QAction* QToolBar_addAction_text(QToolBar* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addAction(text_QString);
 }
 
-QAction* QToolBar_addAction2(QToolBar* self, QIcon* icon, struct seaqt_string text) {
+QAction* QToolBar_addAction_icon_text(QToolBar* self, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addAction(*icon, text_QString);
 }
@@ -818,11 +818,11 @@ QRect* QToolBar_actionGeometry(const QToolBar* self, QAction* action) {
 	return new QRect(self->actionGeometry(action));
 }
 
-QAction* QToolBar_actionAt(const QToolBar* self, QPoint* p) {
+QAction* QToolBar_actionAt_p(const QToolBar* self, QPoint* p) {
 	return self->actionAt(*p);
 }
 
-QAction* QToolBar_actionAt2(const QToolBar* self, int x, int y) {
+QAction* QToolBar_actionAt_x_y(const QToolBar* self, int x, int y) {
 	return self->actionAt(static_cast<int>(x), static_cast<int>(y));
 }
 
@@ -996,7 +996,7 @@ void QToolBar_connect_visibilityChanged(QToolBar* self, intptr_t slot, void (*ca
 	QToolBar::connect(self, static_cast<void (QToolBar::*)(bool)>(&QToolBar::visibilityChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QToolBar_tr2(const char* s, const char* c) {
+struct seaqt_string QToolBar_tr_s_c(const char* s, const char* c) {
 	QString _ret = QToolBar::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1007,7 +1007,7 @@ struct seaqt_string QToolBar_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QToolBar_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QToolBar_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QToolBar::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1018,7 +1018,7 @@ struct seaqt_string QToolBar_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QToolBar_trUtf82(const char* s, const char* c) {
+struct seaqt_string QToolBar_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QToolBar::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1029,7 +1029,7 @@ struct seaqt_string QToolBar_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QToolBar_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QToolBar_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QToolBar::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

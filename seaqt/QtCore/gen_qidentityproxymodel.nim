@@ -70,8 +70,8 @@ type cQIdentityProxyModel*{.exportc: "QIdentityProxyModel", incompleteStruct.} =
 proc fcQIdentityProxyModel_metaObject(self: pointer): pointer {.importc: "QIdentityProxyModel_metaObject".}
 proc fcQIdentityProxyModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QIdentityProxyModel_metacast".}
 proc fcQIdentityProxyModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIdentityProxyModel_metacall".}
-proc fcQIdentityProxyModel_tr(s: cstring): struct_seaqt_string {.importc: "QIdentityProxyModel_tr".}
-proc fcQIdentityProxyModel_trUtf8(s: cstring): struct_seaqt_string {.importc: "QIdentityProxyModel_trUtf8".}
+proc fcQIdentityProxyModel_trS(s: cstring): struct_seaqt_string {.importc: "QIdentityProxyModel_tr_s".}
+proc fcQIdentityProxyModel_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QIdentityProxyModel_trUtf8_s".}
 proc fcQIdentityProxyModel_columnCount(self: pointer, parent: pointer): cint {.importc: "QIdentityProxyModel_columnCount".}
 proc fcQIdentityProxyModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QIdentityProxyModel_index".}
 proc fcQIdentityProxyModel_mapFromSource(self: pointer, sourceIndex: pointer): pointer {.importc: "QIdentityProxyModel_mapFromSource".}
@@ -91,10 +91,10 @@ proc fcQIdentityProxyModel_removeColumns(self: pointer, column: cint, count: cin
 proc fcQIdentityProxyModel_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QIdentityProxyModel_removeRows".}
 proc fcQIdentityProxyModel_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QIdentityProxyModel_moveRows".}
 proc fcQIdentityProxyModel_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QIdentityProxyModel_moveColumns".}
-proc fcQIdentityProxyModel_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIdentityProxyModel_tr2".}
-proc fcQIdentityProxyModel_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIdentityProxyModel_tr3".}
-proc fcQIdentityProxyModel_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIdentityProxyModel_trUtf82".}
-proc fcQIdentityProxyModel_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIdentityProxyModel_trUtf83".}
+proc fcQIdentityProxyModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIdentityProxyModel_tr_s_c".}
+proc fcQIdentityProxyModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIdentityProxyModel_tr_s_c_n".}
+proc fcQIdentityProxyModel_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIdentityProxyModel_trUtf8_s_c".}
+proc fcQIdentityProxyModel_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIdentityProxyModel_trUtf8_s_c_n".}
 proc fcQIdentityProxyModel_vdata(self: pointer): ptr pointer {.importc: "QIdentityProxyModel_vdata".}
 proc fvdata_cQIdentityProxyModel(self: pointer): pointer {.importc: "vdata_QIdentityProxyModel".}
 
@@ -199,7 +199,7 @@ proc fcQIdentityProxyModel_virtualbase_customEvent(self: pointer, event: pointer
 proc fcQIdentityProxyModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QIdentityProxyModel_virtualbase_connectNotify".}
 proc fcQIdentityProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QIdentityProxyModel_virtualbase_disconnectNotify".}
 proc fcQIdentityProxyModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QIdentityProxyModel_protectedbase_resetInternalData".}
-proc fcQIdentityProxyModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QIdentityProxyModel_protectedbase_createIndex".}
+proc fcQIdentityProxyModel_protectedbase_createIndex_row_column(self: pointer, row: cint, column: cint): pointer {.importc: "QIdentityProxyModel_protectedbase_createIndex_row_column".}
 proc fcQIdentityProxyModel_protectedbase_encodeData(self: pointer, indexes: struct_seaqt_array, stream: pointer): void {.importc: "QIdentityProxyModel_protectedbase_encodeData".}
 proc fcQIdentityProxyModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QIdentityProxyModel_protectedbase_decodeData".}
 proc fcQIdentityProxyModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QIdentityProxyModel_protectedbase_beginInsertRows".}
@@ -224,7 +224,7 @@ proc fcQIdentityProxyModel_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQIdentityProxyModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIdentityProxyModel_protectedbase_receivers".}
 proc fcQIdentityProxyModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIdentityProxyModel_protectedbase_isSignalConnected".}
 proc fcQIdentityProxyModel_new(vtbl: pointer, vdata: csize_t): ptr cQIdentityProxyModel {.importc: "QIdentityProxyModel_new".}
-proc fcQIdentityProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIdentityProxyModel {.importc: "QIdentityProxyModel_new2".}
+proc fcQIdentityProxyModel_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIdentityProxyModel {.importc: "QIdentityProxyModel_new_parent".}
 proc fcQIdentityProxyModel_staticMetaObject(): pointer {.importc: "QIdentityProxyModel_staticMetaObject".}
 
 proc metaObject*(self: gen_qidentityproxymodel_types.QIdentityProxyModel): gen_qobjectdefs_types.QMetaObject =
@@ -237,13 +237,13 @@ proc metacall*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, param1: 
   fcQIdentityProxyModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel, s: cstring): string =
-  let v_ms = fcQIdentityProxyModel_tr(s)
+  let v_ms = fcQIdentityProxyModel_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel, s: cstring): string =
-  let v_ms = fcQIdentityProxyModel_trUtf8(s)
+  let v_ms = fcQIdentityProxyModel_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -312,25 +312,25 @@ proc moveColumns*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, sourc
   fcQIdentityProxyModel_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
 
 proc tr*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel, s: cstring, c: cstring): string =
-  let v_ms = fcQIdentityProxyModel_tr2(s, c)
+  let v_ms = fcQIdentityProxyModel_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQIdentityProxyModel_tr3(s, c, n)
+  let v_ms = fcQIdentityProxyModel_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel, s: cstring, c: cstring): string =
-  let v_ms = fcQIdentityProxyModel_trUtf82(s, c)
+  let v_ms = fcQIdentityProxyModel_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQIdentityProxyModel_trUtf83(s, c, n)
+  let v_ms = fcQIdentityProxyModel_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1638,7 +1638,7 @@ proc resetInternalData*(self: gen_qidentityproxymodel_types.QIdentityProxyModel)
   fcQIdentityProxyModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQIdentityProxyModel_protectedbase_createIndex(self.h, row, column), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQIdentityProxyModel_protectedbase_createIndex_row_column(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))

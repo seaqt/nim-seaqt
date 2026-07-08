@@ -52,34 +52,34 @@ typedef struct QSGGeometry__Point2D QSGGeometry__Point2D;
 typedef struct QSGGeometry__TexturedPoint2D QSGGeometry__TexturedPoint2D;
 #endif
 
-QSGGeometry* QSGGeometry_new(QSGGeometry__AttributeSet* attribs, int vertexCount);
-QSGGeometry* QSGGeometry_new2(QSGGeometry__AttributeSet* attribs, int vertexCount, int indexCount);
-QSGGeometry* QSGGeometry_new3(QSGGeometry__AttributeSet* attribs, int vertexCount, int indexCount, int indexType);
+QSGGeometry* QSGGeometry_new_attribs_vertexCount(QSGGeometry__AttributeSet* attribs, int vertexCount);
+QSGGeometry* QSGGeometry_new_attribs_vertexCount_indexCount(QSGGeometry__AttributeSet* attribs, int vertexCount, int indexCount);
+QSGGeometry* QSGGeometry_new_attribs_vertexCount_indexCount_indexType(QSGGeometry__AttributeSet* attribs, int vertexCount, int indexCount, int indexType);
 
 QSGGeometry__AttributeSet* QSGGeometry_defaultAttributes_Point2D();
 QSGGeometry__AttributeSet* QSGGeometry_defaultAttributes_TexturedPoint2D();
 QSGGeometry__AttributeSet* QSGGeometry_defaultAttributes_ColoredPoint2D();
 void QSGGeometry_setDrawingMode(QSGGeometry* self, unsigned int mode);
 unsigned int QSGGeometry_drawingMode(const QSGGeometry* self);
-void QSGGeometry_allocate(QSGGeometry* self, int vertexCount);
+void QSGGeometry_allocate_vertexCount(QSGGeometry* self, int vertexCount);
 int QSGGeometry_vertexCount(const QSGGeometry* self);
 void* QSGGeometry_vertexData(QSGGeometry* self);
 QSGGeometry__Point2D* QSGGeometry_vertexDataAsPoint2D(QSGGeometry* self);
 QSGGeometry__TexturedPoint2D* QSGGeometry_vertexDataAsTexturedPoint2D(QSGGeometry* self);
 QSGGeometry__ColoredPoint2D* QSGGeometry_vertexDataAsColoredPoint2D(QSGGeometry* self);
-const void* QSGGeometry_vertexData2(const QSGGeometry* self);
-QSGGeometry__Point2D* QSGGeometry_vertexDataAsPoint2D2(const QSGGeometry* self);
-QSGGeometry__TexturedPoint2D* QSGGeometry_vertexDataAsTexturedPoint2D2(const QSGGeometry* self);
-QSGGeometry__ColoredPoint2D* QSGGeometry_vertexDataAsColoredPoint2D2(const QSGGeometry* self);
+const void* QSGGeometry_vertexData_const(const QSGGeometry* self);
+QSGGeometry__Point2D* QSGGeometry_vertexDataAsPoint2D_const(const QSGGeometry* self);
+QSGGeometry__TexturedPoint2D* QSGGeometry_vertexDataAsTexturedPoint2D_const(const QSGGeometry* self);
+QSGGeometry__ColoredPoint2D* QSGGeometry_vertexDataAsColoredPoint2D_const(const QSGGeometry* self);
 int QSGGeometry_indexType(const QSGGeometry* self);
 int QSGGeometry_indexCount(const QSGGeometry* self);
 void* QSGGeometry_indexData(QSGGeometry* self);
 unsigned int* QSGGeometry_indexDataAsUInt(QSGGeometry* self);
 unsigned short* QSGGeometry_indexDataAsUShort(QSGGeometry* self);
 int QSGGeometry_sizeOfIndex(const QSGGeometry* self);
-const void* QSGGeometry_indexData2(const QSGGeometry* self);
-const unsigned int* QSGGeometry_indexDataAsUInt2(const QSGGeometry* self);
-const unsigned short* QSGGeometry_indexDataAsUShort2(const QSGGeometry* self);
+const void* QSGGeometry_indexData_const(const QSGGeometry* self);
+const unsigned int* QSGGeometry_indexDataAsUInt_const(const QSGGeometry* self);
+const unsigned short* QSGGeometry_indexDataAsUShort_const(const QSGGeometry* self);
 int QSGGeometry_attributeCount(const QSGGeometry* self);
 QSGGeometry__Attribute* QSGGeometry_attributes(const QSGGeometry* self);
 int QSGGeometry_sizeOfVertex(const QSGGeometry* self);
@@ -94,7 +94,7 @@ void QSGGeometry_markIndexDataDirty(QSGGeometry* self);
 void QSGGeometry_markVertexDataDirty(QSGGeometry* self);
 float QSGGeometry_lineWidth(const QSGGeometry* self);
 void QSGGeometry_setLineWidth(QSGGeometry* self, float w);
-void QSGGeometry_allocate2(QSGGeometry* self, int vertexCount, int indexCount);
+void QSGGeometry_allocate_vertexCount_indexCount(QSGGeometry* self, int vertexCount, int indexCount);
 
 void QSGGeometry_delete(QSGGeometry* self);
 
@@ -110,9 +110,9 @@ int QSGGeometry__Attribute_attributeType(const QSGGeometry__Attribute* self);
 void QSGGeometry__Attribute_setAttributeType(QSGGeometry__Attribute* self, int attributeType);
 unsigned int QSGGeometry__Attribute_reserved(const QSGGeometry__Attribute* self);
 void QSGGeometry__Attribute_setReserved(QSGGeometry__Attribute* self, unsigned int reserved);
-QSGGeometry__Attribute* QSGGeometry__Attribute_create(int pos, int tupleSize, int primitiveType);
+QSGGeometry__Attribute* QSGGeometry__Attribute_create_pos_tupleSize_primitiveType(int pos, int tupleSize, int primitiveType);
 QSGGeometry__Attribute* QSGGeometry__Attribute_createWithAttributeType(int pos, int tupleSize, int primitiveType, int attributeType);
-QSGGeometry__Attribute* QSGGeometry__Attribute_create2(int pos, int tupleSize, int primitiveType, bool isPosition);
+QSGGeometry__Attribute* QSGGeometry__Attribute_create_pos_tupleSize_primitiveType_isPosition(int pos, int tupleSize, int primitiveType, bool isPosition);
 
 void QSGGeometry__Attribute_delete(QSGGeometry__Attribute* self);
 

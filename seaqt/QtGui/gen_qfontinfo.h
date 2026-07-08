@@ -22,10 +22,10 @@ typedef struct QFont QFont;
 typedef struct QFontInfo QFontInfo;
 #endif
 
-QFontInfo* QFontInfo_new(QFont* param1);
-QFontInfo* QFontInfo_new2(QFontInfo* param1);
+QFontInfo* QFontInfo_new_QFont(QFont* param1);
+QFontInfo* QFontInfo_new_QFontInfo(QFontInfo* from);
 
-void QFontInfo_operatorAssign(QFontInfo* self, QFontInfo* param1);
+void QFontInfo_operatorAssign(QFontInfo* self, QFontInfo* from);
 void QFontInfo_swap(QFontInfo* self, QFontInfo* other);
 struct seaqt_string QFontInfo_family(const QFontInfo* self);
 struct seaqt_string QFontInfo_styleName(const QFontInfo* self);

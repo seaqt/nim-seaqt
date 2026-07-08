@@ -83,8 +83,8 @@ type cQGraphicsProxyWidget*{.exportc: "QGraphicsProxyWidget", incompleteStruct.}
 proc fcQGraphicsProxyWidget_metaObject(self: pointer): pointer {.importc: "QGraphicsProxyWidget_metaObject".}
 proc fcQGraphicsProxyWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsProxyWidget_metacast".}
 proc fcQGraphicsProxyWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsProxyWidget_metacall".}
-proc fcQGraphicsProxyWidget_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsProxyWidget_tr".}
-proc fcQGraphicsProxyWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QGraphicsProxyWidget_trUtf8".}
+proc fcQGraphicsProxyWidget_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsProxyWidget_tr_s".}
+proc fcQGraphicsProxyWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QGraphicsProxyWidget_trUtf8_s".}
 proc fcQGraphicsProxyWidget_setWidget(self: pointer, widget: pointer): void {.importc: "QGraphicsProxyWidget_setWidget".}
 proc fcQGraphicsProxyWidget_widget(self: pointer): pointer {.importc: "QGraphicsProxyWidget_widget".}
 proc fcQGraphicsProxyWidget_subWidgetRect(self: pointer, widget: pointer): pointer {.importc: "QGraphicsProxyWidget_subWidgetRect".}
@@ -92,10 +92,10 @@ proc fcQGraphicsProxyWidget_setGeometry(self: pointer, rect: pointer): void {.im
 proc fcQGraphicsProxyWidget_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsProxyWidget_paint".}
 proc fcQGraphicsProxyWidget_typeX(self: pointer): cint {.importc: "QGraphicsProxyWidget_type".}
 proc fcQGraphicsProxyWidget_createProxyForChildWidget(self: pointer, child: pointer): pointer {.importc: "QGraphicsProxyWidget_createProxyForChildWidget".}
-proc fcQGraphicsProxyWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsProxyWidget_tr2".}
-proc fcQGraphicsProxyWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsProxyWidget_tr3".}
-proc fcQGraphicsProxyWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsProxyWidget_trUtf82".}
-proc fcQGraphicsProxyWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsProxyWidget_trUtf83".}
+proc fcQGraphicsProxyWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsProxyWidget_tr_s_c".}
+proc fcQGraphicsProxyWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsProxyWidget_tr_s_c_n".}
+proc fcQGraphicsProxyWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsProxyWidget_trUtf8_s_c".}
+proc fcQGraphicsProxyWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsProxyWidget_trUtf8_s_c_n".}
 proc fcQGraphicsProxyWidget_vdata(self: pointer): ptr pointer {.importc: "QGraphicsProxyWidget_vdata".}
 proc fvdata_cQGraphicsProxyWidget(self: pointer): pointer {.importc: "vdata_QGraphicsProxyWidget".}
 
@@ -245,8 +245,8 @@ proc fcQGraphicsProxyWidget_protectedbase_prepareGeometryChange(self: pointer): 
 proc fcQGraphicsProxyWidget_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsProxyWidget_protectedbase_setGraphicsItem".}
 proc fcQGraphicsProxyWidget_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsProxyWidget_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsProxyWidget_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new".}
-proc fcQGraphicsProxyWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new2".}
-proc fcQGraphicsProxyWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer, wFlags: cint): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new3".}
+proc fcQGraphicsProxyWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new_parent".}
+proc fcQGraphicsProxyWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer, wFlags: cint): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new_parent_wFlags".}
 proc fcQGraphicsProxyWidget_staticMetaObject(): pointer {.importc: "QGraphicsProxyWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qobjectdefs_types.QMetaObject =
@@ -259,13 +259,13 @@ proc metacall*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1
   fcQGraphicsProxyWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring): string =
-  let v_ms = fcQGraphicsProxyWidget_tr(s)
+  let v_ms = fcQGraphicsProxyWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring): string =
-  let v_ms = fcQGraphicsProxyWidget_trUtf8(s)
+  let v_ms = fcQGraphicsProxyWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -292,25 +292,25 @@ proc createProxyForChildWidget*(self: gen_qgraphicsproxywidget_types.QGraphicsPr
   gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_createProxyForChildWidget(self.h, child.h), owned: false)
 
 proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsProxyWidget_tr2(s, c)
+  let v_ms = fcQGraphicsProxyWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsProxyWidget_tr3(s, c, n)
+  let v_ms = fcQGraphicsProxyWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsProxyWidget_trUtf82(s, c)
+  let v_ms = fcQGraphicsProxyWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsProxyWidget_trUtf83(s, c, n)
+  let v_ms = fcQGraphicsProxyWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

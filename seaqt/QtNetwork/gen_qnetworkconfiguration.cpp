@@ -20,12 +20,12 @@ QNetworkConfiguration* QNetworkConfiguration_new() {
 	return new (std::nothrow) QNetworkConfiguration();
 }
 
-QNetworkConfiguration* QNetworkConfiguration_new2(QNetworkConfiguration* other) {
-	return new (std::nothrow) QNetworkConfiguration(*other);
+QNetworkConfiguration* QNetworkConfiguration_new_from(QNetworkConfiguration* from) {
+	return new (std::nothrow) QNetworkConfiguration(*from);
 }
 
-void QNetworkConfiguration_operatorAssign(QNetworkConfiguration* self, QNetworkConfiguration* other) {
-	self->operator=(*other);
+void QNetworkConfiguration_operatorAssign(QNetworkConfiguration* self, QNetworkConfiguration* from) {
+	self->operator=(*from);
 }
 
 void QNetworkConfiguration_swap(QNetworkConfiguration* self, QNetworkConfiguration* other) {

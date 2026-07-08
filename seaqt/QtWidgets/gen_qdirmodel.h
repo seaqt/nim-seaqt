@@ -56,7 +56,7 @@ typedef struct QDirModel_VTable{
 	QMetaObject* (*metaObject)(const VirtualQDirModel* self);
 	void* (*metacast)(VirtualQDirModel* self, const char* param1);
 	int (*metacall)(VirtualQDirModel* self, int param1, int param2, void** param3);
-	QModelIndex* (*index)(const VirtualQDirModel* self, int row, int column, QModelIndex* parent);
+	QModelIndex* (*index_row_column_parent)(const VirtualQDirModel* self, int row, int column, QModelIndex* parent);
 	QModelIndex* (*parent)(const VirtualQDirModel* self, QModelIndex* child);
 	int (*rowCount)(const VirtualQDirModel* self, QModelIndex* parent);
 	int (*columnCount)(const VirtualQDirModel* self, QModelIndex* parent);
@@ -102,18 +102,18 @@ typedef struct QDirModel_VTable{
 void* QDirModel_vdata(VirtualQDirModel* self);
 VirtualQDirModel* vdata_QDirModel(void* vdata);
 
-VirtualQDirModel* QDirModel_new(const QDirModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int sort);
-VirtualQDirModel* QDirModel_new2(const QDirModel_VTable* vtbl, size_t vdata);
-VirtualQDirModel* QDirModel_new3(const QDirModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int sort, QObject* parent);
-VirtualQDirModel* QDirModel_new4(const QDirModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQDirModel* QDirModel_new_nameFilters_filters_sort(const QDirModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int sort);
+VirtualQDirModel* QDirModel_new(const QDirModel_VTable* vtbl, size_t vdata);
+VirtualQDirModel* QDirModel_new_nameFilters_filters_sort_parent(const QDirModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  nameFilters, int filters, int sort, QObject* parent);
+VirtualQDirModel* QDirModel_new_parent(const QDirModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QDirModel_virtbase(QDirModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QDirModel_metaObject(const QDirModel* self);
 void* QDirModel_metacast(QDirModel* self, const char* param1);
 int QDirModel_metacall(QDirModel* self, int param1, int param2, void** param3);
-struct seaqt_string QDirModel_tr(const char* s);
-struct seaqt_string QDirModel_trUtf8(const char* s);
-QModelIndex* QDirModel_index(const QDirModel* self, int row, int column, QModelIndex* parent);
+struct seaqt_string QDirModel_tr_s(const char* s);
+struct seaqt_string QDirModel_trUtf8_s(const char* s);
+QModelIndex* QDirModel_index_row_column_parent(const QDirModel* self, int row, int column, QModelIndex* parent);
 QModelIndex* QDirModel_parent(const QDirModel* self, QModelIndex* child);
 int QDirModel_rowCount(const QDirModel* self, QModelIndex* parent);
 int QDirModel_columnCount(const QDirModel* self, QModelIndex* parent);
@@ -141,7 +141,7 @@ void QDirModel_setReadOnly(QDirModel* self, bool enable);
 bool QDirModel_isReadOnly(const QDirModel* self);
 void QDirModel_setLazyChildCount(QDirModel* self, bool enable);
 bool QDirModel_lazyChildCount(const QDirModel* self);
-QModelIndex* QDirModel_indexWithPath(const QDirModel* self, struct seaqt_string path);
+QModelIndex* QDirModel_index_path(const QDirModel* self, struct seaqt_string path);
 bool QDirModel_isDir(const QDirModel* self, QModelIndex* index);
 QModelIndex* QDirModel_mkdir(QDirModel* self, QModelIndex* parent, struct seaqt_string name);
 bool QDirModel_rmdir(QDirModel* self, QModelIndex* index);
@@ -151,17 +151,17 @@ struct seaqt_string QDirModel_fileName(const QDirModel* self, QModelIndex* index
 QIcon* QDirModel_fileIcon(const QDirModel* self, QModelIndex* index);
 QFileInfo* QDirModel_fileInfo(const QDirModel* self, QModelIndex* index);
 void QDirModel_refresh(QDirModel* self);
-struct seaqt_string QDirModel_tr2(const char* s, const char* c);
-struct seaqt_string QDirModel_tr3(const char* s, const char* c, int n);
-struct seaqt_string QDirModel_trUtf82(const char* s, const char* c);
-struct seaqt_string QDirModel_trUtf83(const char* s, const char* c, int n);
-QModelIndex* QDirModel_index2(const QDirModel* self, struct seaqt_string path, int column);
-void QDirModel_refreshWithParent(QDirModel* self, QModelIndex* parent);
+struct seaqt_string QDirModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDirModel_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QDirModel_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QDirModel_trUtf8_s_c_n(const char* s, const char* c, int n);
+QModelIndex* QDirModel_index_path_column(const QDirModel* self, struct seaqt_string path, int column);
+void QDirModel_refresh_parent(QDirModel* self, QModelIndex* parent);
 
 QMetaObject* QDirModel_virtualbase_metaObject(const VirtualQDirModel* self);
 void* QDirModel_virtualbase_metacast(VirtualQDirModel* self, const char* param1);
 int QDirModel_virtualbase_metacall(VirtualQDirModel* self, int param1, int param2, void** param3);
-QModelIndex* QDirModel_virtualbase_index(const VirtualQDirModel* self, int row, int column, QModelIndex* parent);
+QModelIndex* QDirModel_virtualbase_index_row_column_parent(const VirtualQDirModel* self, int row, int column, QModelIndex* parent);
 QModelIndex* QDirModel_virtualbase_parent(const VirtualQDirModel* self, QModelIndex* child);
 int QDirModel_virtualbase_rowCount(const VirtualQDirModel* self, QModelIndex* parent);
 int QDirModel_virtualbase_columnCount(const VirtualQDirModel* self, QModelIndex* parent);
@@ -204,7 +204,7 @@ void QDirModel_virtualbase_connectNotify(VirtualQDirModel* self, QMetaMethod* si
 void QDirModel_virtualbase_disconnectNotify(VirtualQDirModel* self, QMetaMethod* signal);
 
 void QDirModel_protectedbase_resetInternalData(VirtualQDirModel* self);
-QModelIndex* QDirModel_protectedbase_createIndex(const VirtualQDirModel* self, int row, int column);
+QModelIndex* QDirModel_protectedbase_createIndex_row_column(const VirtualQDirModel* self, int row, int column);
 void QDirModel_protectedbase_encodeData(const VirtualQDirModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QDirModel_protectedbase_decodeData(VirtualQDirModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QDirModel_protectedbase_beginInsertRows(VirtualQDirModel* self, QModelIndex* parent, int first, int last);

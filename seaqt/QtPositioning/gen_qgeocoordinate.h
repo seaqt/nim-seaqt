@@ -23,11 +23,11 @@ typedef struct QMetaObject QMetaObject;
 #endif
 
 QGeoCoordinate* QGeoCoordinate_new();
-QGeoCoordinate* QGeoCoordinate_new2(double latitude, double longitude);
-QGeoCoordinate* QGeoCoordinate_new3(double latitude, double longitude, double altitude);
-QGeoCoordinate* QGeoCoordinate_new4(QGeoCoordinate* other);
+QGeoCoordinate* QGeoCoordinate_new_latitude_longitude(double latitude, double longitude);
+QGeoCoordinate* QGeoCoordinate_new_latitude_longitude_altitude(double latitude, double longitude, double altitude);
+QGeoCoordinate* QGeoCoordinate_new_from(QGeoCoordinate* from);
 
-void QGeoCoordinate_operatorAssign(QGeoCoordinate* self, QGeoCoordinate* other);
+void QGeoCoordinate_operatorAssign(QGeoCoordinate* self, QGeoCoordinate* from);
 bool QGeoCoordinate_operatorEqual(const QGeoCoordinate* self, QGeoCoordinate* other);
 bool QGeoCoordinate_operatorNotEqual(const QGeoCoordinate* self, QGeoCoordinate* other);
 bool QGeoCoordinate_isValid(const QGeoCoordinate* self);
@@ -40,10 +40,10 @@ void QGeoCoordinate_setAltitude(QGeoCoordinate* self, double altitude);
 double QGeoCoordinate_altitude(const QGeoCoordinate* self);
 double QGeoCoordinate_distanceTo(const QGeoCoordinate* self, QGeoCoordinate* other);
 double QGeoCoordinate_azimuthTo(const QGeoCoordinate* self, QGeoCoordinate* other);
-QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth(const QGeoCoordinate* self, double distance, double azimuth);
+QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth_distance_azimuth(const QGeoCoordinate* self, double distance, double azimuth);
 struct seaqt_string QGeoCoordinate_toString(const QGeoCoordinate* self);
-QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth2(const QGeoCoordinate* self, double distance, double azimuth, double distanceUp);
-struct seaqt_string QGeoCoordinate_toStringWithFormat(const QGeoCoordinate* self, int format);
+QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth_distance_azimuth_distanceUp(const QGeoCoordinate* self, double distance, double azimuth, double distanceUp);
+struct seaqt_string QGeoCoordinate_toString_format(const QGeoCoordinate* self, int format);
 
 const QMetaObject* QGeoCoordinate_staticMetaObject();
 void QGeoCoordinate_delete(QGeoCoordinate* self);

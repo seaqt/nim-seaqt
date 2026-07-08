@@ -47,7 +47,7 @@ proc fcQTemporaryDir_remove(self: pointer): bool {.importc: "QTemporaryDir_remov
 proc fcQTemporaryDir_path(self: pointer): struct_seaqt_string {.importc: "QTemporaryDir_path".}
 proc fcQTemporaryDir_filePath(self: pointer, fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QTemporaryDir_filePath".}
 proc fcQTemporaryDir_new(): ptr cQTemporaryDir {.importc: "QTemporaryDir_new".}
-proc fcQTemporaryDir_new2(templateName: struct_seaqt_string): ptr cQTemporaryDir {.importc: "QTemporaryDir_new2".}
+proc fcQTemporaryDir_new2(templateName: struct_seaqt_string): ptr cQTemporaryDir {.importc: "QTemporaryDir_new_templateName".}
 
 proc isValid*(self: gen_qtemporarydir_types.QTemporaryDir): bool =
   fcQTemporaryDir_isValid(self.h)

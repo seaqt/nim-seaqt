@@ -73,21 +73,21 @@ type cQDesktopWidget*{.exportc: "QDesktopWidget", incompleteStruct.} = object
 proc fcQDesktopWidget_metaObject(self: pointer): pointer {.importc: "QDesktopWidget_metaObject".}
 proc fcQDesktopWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesktopWidget_metacast".}
 proc fcQDesktopWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesktopWidget_metacall".}
-proc fcQDesktopWidget_tr(s: cstring): struct_seaqt_string {.importc: "QDesktopWidget_tr".}
-proc fcQDesktopWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QDesktopWidget_trUtf8".}
+proc fcQDesktopWidget_trS(s: cstring): struct_seaqt_string {.importc: "QDesktopWidget_tr_s".}
+proc fcQDesktopWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QDesktopWidget_trUtf8_s".}
 proc fcQDesktopWidget_screenNumber(self: pointer): cint {.importc: "QDesktopWidget_screenNumber".}
-proc fcQDesktopWidget_screenGeometry(self: pointer, widget: pointer): pointer {.importc: "QDesktopWidget_screenGeometry".}
-proc fcQDesktopWidget_availableGeometry(self: pointer, widget: pointer): pointer {.importc: "QDesktopWidget_availableGeometry".}
+proc fcQDesktopWidget_screenGeometryWidget(self: pointer, widget: pointer): pointer {.importc: "QDesktopWidget_screenGeometry_widget".}
+proc fcQDesktopWidget_availableGeometryWidget(self: pointer, widget: pointer): pointer {.importc: "QDesktopWidget_availableGeometry_widget".}
 proc fcQDesktopWidget_isVirtualDesktop(self: pointer): bool {.importc: "QDesktopWidget_isVirtualDesktop".}
 proc fcQDesktopWidget_numScreens(self: pointer): cint {.importc: "QDesktopWidget_numScreens".}
 proc fcQDesktopWidget_screenCount(self: pointer): cint {.importc: "QDesktopWidget_screenCount".}
 proc fcQDesktopWidget_primaryScreen(self: pointer): cint {.importc: "QDesktopWidget_primaryScreen".}
-proc fcQDesktopWidget_screenNumberWithQPoint(self: pointer, param1: pointer): cint {.importc: "QDesktopWidget_screenNumberWithQPoint".}
+proc fcQDesktopWidget_screenNumber_QPoint(self: pointer, param1: pointer): cint {.importc: "QDesktopWidget_screenNumber_QPoint".}
 proc fcQDesktopWidget_screen(self: pointer): pointer {.importc: "QDesktopWidget_screen".}
-proc fcQDesktopWidget_screenGeometry2(self: pointer): pointer {.importc: "QDesktopWidget_screenGeometry2".}
-proc fcQDesktopWidget_screenGeometryWithPoint(self: pointer, point: pointer): pointer {.importc: "QDesktopWidget_screenGeometryWithPoint".}
-proc fcQDesktopWidget_availableGeometry2(self: pointer): pointer {.importc: "QDesktopWidget_availableGeometry2".}
-proc fcQDesktopWidget_availableGeometryWithPoint(self: pointer, point: pointer): pointer {.importc: "QDesktopWidget_availableGeometryWithPoint".}
+proc fcQDesktopWidget_screenGeometry(self: pointer): pointer {.importc: "QDesktopWidget_screenGeometry".}
+proc fcQDesktopWidget_screenGeometryPoint(self: pointer, point: pointer): pointer {.importc: "QDesktopWidget_screenGeometry_point".}
+proc fcQDesktopWidget_availableGeometry(self: pointer): pointer {.importc: "QDesktopWidget_availableGeometry".}
+proc fcQDesktopWidget_availableGeometryPoint(self: pointer, point: pointer): pointer {.importc: "QDesktopWidget_availableGeometry_point".}
 proc fcQDesktopWidget_resized(self: pointer, param1: cint): void {.importc: "QDesktopWidget_resized".}
 proc fcQDesktopWidget_connect_resized(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesktopWidget_connect_resized".}
 proc fcQDesktopWidget_workAreaResized(self: pointer, param1: cint): void {.importc: "QDesktopWidget_workAreaResized".}
@@ -96,14 +96,14 @@ proc fcQDesktopWidget_screenCountChanged(self: pointer, param1: cint): void {.im
 proc fcQDesktopWidget_connect_screenCountChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesktopWidget_connect_screenCountChanged".}
 proc fcQDesktopWidget_primaryScreenChanged(self: pointer): void {.importc: "QDesktopWidget_primaryScreenChanged".}
 proc fcQDesktopWidget_connect_primaryScreenChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesktopWidget_connect_primaryScreenChanged".}
-proc fcQDesktopWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesktopWidget_tr2".}
-proc fcQDesktopWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesktopWidget_tr3".}
-proc fcQDesktopWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesktopWidget_trUtf82".}
-proc fcQDesktopWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesktopWidget_trUtf83".}
-proc fcQDesktopWidget_screenNumberWithWidget(self: pointer, widget: pointer): cint {.importc: "QDesktopWidget_screenNumberWithWidget".}
-proc fcQDesktopWidget_screenWithScreen(self: pointer, screen: cint): pointer {.importc: "QDesktopWidget_screenWithScreen".}
-proc fcQDesktopWidget_screenGeometryWithScreen(self: pointer, screen: cint): pointer {.importc: "QDesktopWidget_screenGeometryWithScreen".}
-proc fcQDesktopWidget_availableGeometryWithScreen(self: pointer, screen: cint): pointer {.importc: "QDesktopWidget_availableGeometryWithScreen".}
+proc fcQDesktopWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesktopWidget_tr_s_c".}
+proc fcQDesktopWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesktopWidget_tr_s_c_n".}
+proc fcQDesktopWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesktopWidget_trUtf8_s_c".}
+proc fcQDesktopWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesktopWidget_trUtf8_s_c_n".}
+proc fcQDesktopWidget_screenNumber_QWidget(self: pointer, widget: pointer): cint {.importc: "QDesktopWidget_screenNumber_QWidget".}
+proc fcQDesktopWidget_screenScreen(self: pointer, screen: cint): pointer {.importc: "QDesktopWidget_screen_screen".}
+proc fcQDesktopWidget_screenGeometryScreen(self: pointer, screen: cint): pointer {.importc: "QDesktopWidget_screenGeometry_screen".}
+proc fcQDesktopWidget_availableGeometryScreen(self: pointer, screen: cint): pointer {.importc: "QDesktopWidget_availableGeometry_screen".}
 proc fcQDesktopWidget_vdata(self: pointer): ptr pointer {.importc: "QDesktopWidget_vdata".}
 proc fvdata_cQDesktopWidget(self: pointer): pointer {.importc: "vdata_QDesktopWidget".}
 
@@ -231,13 +231,13 @@ proc metacall*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint, para
   fcQDesktopWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdesktopwidget_types.QDesktopWidget, s: cstring): string =
-  let v_ms = fcQDesktopWidget_tr(s)
+  let v_ms = fcQDesktopWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdesktopwidget_types.QDesktopWidget, s: cstring): string =
-  let v_ms = fcQDesktopWidget_trUtf8(s)
+  let v_ms = fcQDesktopWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -246,10 +246,10 @@ proc screenNumber*(self: gen_qdesktopwidget_types.QDesktopWidget): cint =
   fcQDesktopWidget_screenNumber(self.h)
 
 proc screenGeometry*(self: gen_qdesktopwidget_types.QDesktopWidget, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesktopWidget_screenGeometry(self.h, widget.h), owned: true)
+  gen_qrect_types.QRect(h: fcQDesktopWidget_screenGeometryWidget(self.h, widget.h), owned: true)
 
 proc availableGeometry*(self: gen_qdesktopwidget_types.QDesktopWidget, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesktopWidget_availableGeometry(self.h, widget.h), owned: true)
+  gen_qrect_types.QRect(h: fcQDesktopWidget_availableGeometryWidget(self.h, widget.h), owned: true)
 
 proc isVirtualDesktop*(self: gen_qdesktopwidget_types.QDesktopWidget): bool =
   fcQDesktopWidget_isVirtualDesktop(self.h)
@@ -264,22 +264,22 @@ proc primaryScreen*(self: gen_qdesktopwidget_types.QDesktopWidget): cint =
   fcQDesktopWidget_primaryScreen(self.h)
 
 proc screenNumber*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: gen_qpoint_types.QPoint): cint =
-  fcQDesktopWidget_screenNumberWithQPoint(self.h, param1.h)
+  fcQDesktopWidget_screenNumber_QPoint(self.h, param1.h)
 
 proc screen*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQDesktopWidget_screen(self.h), owned: false)
 
 proc screenGeometry*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesktopWidget_screenGeometry2(self.h), owned: true)
+  gen_qrect_types.QRect(h: fcQDesktopWidget_screenGeometry(self.h), owned: true)
 
 proc screenGeometry*(self: gen_qdesktopwidget_types.QDesktopWidget, point: gen_qpoint_types.QPoint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesktopWidget_screenGeometryWithPoint(self.h, point.h), owned: true)
+  gen_qrect_types.QRect(h: fcQDesktopWidget_screenGeometryPoint(self.h, point.h), owned: true)
 
 proc availableGeometry*(self: gen_qdesktopwidget_types.QDesktopWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesktopWidget_availableGeometry2(self.h), owned: true)
+  gen_qrect_types.QRect(h: fcQDesktopWidget_availableGeometry(self.h), owned: true)
 
 proc availableGeometry*(self: gen_qdesktopwidget_types.QDesktopWidget, point: gen_qpoint_types.QPoint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesktopWidget_availableGeometryWithPoint(self.h, point.h), owned: true)
+  gen_qrect_types.QRect(h: fcQDesktopWidget_availableGeometryPoint(self.h, point.h), owned: true)
 
 proc resized*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): void =
   fcQDesktopWidget_resized(self.h, param1)
@@ -360,40 +360,40 @@ proc onPrimaryScreenChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, slot
   fcQDesktopWidget_connect_primaryScreenChanged(self.h, cast[int](addr tmp[]), fcQDesktopWidget_slot_callback_primaryScreenChanged, fcQDesktopWidget_slot_callback_primaryScreenChanged_release)
 
 proc tr*(_: type gen_qdesktopwidget_types.QDesktopWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQDesktopWidget_tr2(s, c)
+  let v_ms = fcQDesktopWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdesktopwidget_types.QDesktopWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesktopWidget_tr3(s, c, n)
+  let v_ms = fcQDesktopWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdesktopwidget_types.QDesktopWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQDesktopWidget_trUtf82(s, c)
+  let v_ms = fcQDesktopWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qdesktopwidget_types.QDesktopWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesktopWidget_trUtf83(s, c, n)
+  let v_ms = fcQDesktopWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc screenNumber*(self: gen_qdesktopwidget_types.QDesktopWidget, widget: gen_qwidget_types.QWidget): cint =
-  fcQDesktopWidget_screenNumberWithWidget(self.h, widget.h)
+  fcQDesktopWidget_screenNumber_QWidget(self.h, widget.h)
 
 proc screen*(self: gen_qdesktopwidget_types.QDesktopWidget, screen: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesktopWidget_screenWithScreen(self.h, screen), owned: false)
+  gen_qwidget_types.QWidget(h: fcQDesktopWidget_screenScreen(self.h, screen), owned: false)
 
 proc screenGeometry*(self: gen_qdesktopwidget_types.QDesktopWidget, screen: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesktopWidget_screenGeometryWithScreen(self.h, screen), owned: true)
+  gen_qrect_types.QRect(h: fcQDesktopWidget_screenGeometryScreen(self.h, screen), owned: true)
 
 proc availableGeometry*(self: gen_qdesktopwidget_types.QDesktopWidget, screen: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesktopWidget_availableGeometryWithScreen(self.h, screen), owned: true)
+  gen_qrect_types.QRect(h: fcQDesktopWidget_availableGeometryScreen(self.h, screen), owned: true)
 
 type QDesktopWidgetmetaObjectProc* = proc(self: QDesktopWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QDesktopWidgetmetacastProc* = proc(self: QDesktopWidget, param1: cstring): pointer {.raises: [], gcsafe.}

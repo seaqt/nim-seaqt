@@ -36,7 +36,7 @@ int QCameraExposure_metacall(QCameraExposure* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCameraExposure_tr(const char* s) {
+struct seaqt_string QCameraExposure_tr_s(const char* s) {
 	QString _ret = QCameraExposure::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -47,7 +47,7 @@ struct seaqt_string QCameraExposure_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QCameraExposure_trUtf8(const char* s) {
+struct seaqt_string QCameraExposure_trUtf8_s(const char* s) {
 	QString _ret = QCameraExposure::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -326,7 +326,7 @@ void QCameraExposure_connect_exposureCompensationChanged(QCameraExposure* self, 
 	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(qreal)>(&QCameraExposure::exposureCompensationChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QCameraExposure_tr2(const char* s, const char* c) {
+struct seaqt_string QCameraExposure_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCameraExposure::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -337,7 +337,7 @@ struct seaqt_string QCameraExposure_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCameraExposure_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCameraExposure_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraExposure::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -348,7 +348,7 @@ struct seaqt_string QCameraExposure_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QCameraExposure_trUtf82(const char* s, const char* c) {
+struct seaqt_string QCameraExposure_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QCameraExposure::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -359,7 +359,7 @@ struct seaqt_string QCameraExposure_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCameraExposure_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QCameraExposure_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraExposure::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -370,7 +370,7 @@ struct seaqt_string QCameraExposure_trUtf83(const char* s, const char* c, int n)
 	return _ms;
 }
 
-struct seaqt_array /* of int */  QCameraExposure_supportedIsoSensitivitiesWithContinuous(const QCameraExposure* self, bool* continuous) {
+struct seaqt_array /* of int */  QCameraExposure_supportedIsoSensitivities_continuous(const QCameraExposure* self, bool* continuous) {
 	QList<int> _ret = self->supportedIsoSensitivities(continuous);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	int* _arr = static_cast<int*>(malloc(sizeof(int) * _ret.length()));
@@ -383,7 +383,7 @@ struct seaqt_array /* of int */  QCameraExposure_supportedIsoSensitivitiesWithCo
 	return _out;
 }
 
-struct seaqt_array /* of double */  QCameraExposure_supportedAperturesWithContinuous(const QCameraExposure* self, bool* continuous) {
+struct seaqt_array /* of double */  QCameraExposure_supportedApertures_continuous(const QCameraExposure* self, bool* continuous) {
 	QList<qreal> _ret = self->supportedApertures(continuous);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	double* _arr = static_cast<double*>(malloc(sizeof(double) * _ret.length()));
@@ -396,7 +396,7 @@ struct seaqt_array /* of double */  QCameraExposure_supportedAperturesWithContin
 	return _out;
 }
 
-struct seaqt_array /* of double */  QCameraExposure_supportedShutterSpeedsWithContinuous(const QCameraExposure* self, bool* continuous) {
+struct seaqt_array /* of double */  QCameraExposure_supportedShutterSpeeds_continuous(const QCameraExposure* self, bool* continuous) {
 	QList<qreal> _ret = self->supportedShutterSpeeds(continuous);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	double* _arr = static_cast<double*>(malloc(sizeof(double) * _ret.length()));

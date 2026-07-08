@@ -83,20 +83,20 @@ type cQApplication*{.exportc: "QApplication", incompleteStruct.} = object
 proc fcQApplication_metaObject(self: pointer): pointer {.importc: "QApplication_metaObject".}
 proc fcQApplication_metacast(self: pointer, param1: cstring): pointer {.importc: "QApplication_metacast".}
 proc fcQApplication_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QApplication_metacall".}
-proc fcQApplication_tr(s: cstring): struct_seaqt_string {.importc: "QApplication_tr".}
-proc fcQApplication_trUtf8(s: cstring): struct_seaqt_string {.importc: "QApplication_trUtf8".}
+proc fcQApplication_trS(s: cstring): struct_seaqt_string {.importc: "QApplication_tr_s".}
+proc fcQApplication_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QApplication_trUtf8_s".}
 proc fcQApplication_style(): pointer {.importc: "QApplication_style".}
-proc fcQApplication_setStyle(style: pointer): void {.importc: "QApplication_setStyle".}
-proc fcQApplication_setStyleWithStyle(style: struct_seaqt_string): pointer {.importc: "QApplication_setStyleWithStyle".}
+proc fcQApplication_setStyle_QStyle(style: pointer): void {.importc: "QApplication_setStyle_QStyle".}
+proc fcQApplication_setStyle_QString(style: struct_seaqt_string): pointer {.importc: "QApplication_setStyle_QString".}
 proc fcQApplication_colorSpec(): cint {.importc: "QApplication_colorSpec".}
 proc fcQApplication_setColorSpec(colorSpec: cint): void {.importc: "QApplication_setColorSpec".}
-proc fcQApplication_palette(param1: pointer): pointer {.importc: "QApplication_palette".}
-proc fcQApplication_paletteWithClassName(className: cstring): pointer {.importc: "QApplication_paletteWithClassName".}
-proc fcQApplication_setPalette(param1: pointer): void {.importc: "QApplication_setPalette".}
+proc fcQApplication_palette_QWidget(param1: pointer): pointer {.importc: "QApplication_palette_QWidget".}
+proc fcQApplication_paletteChar(className: cstring): pointer {.importc: "QApplication_palette_char".}
+proc fcQApplication_setPalette_QPalette(param1: pointer): void {.importc: "QApplication_setPalette_QPalette".}
 proc fcQApplication_font(): pointer {.importc: "QApplication_font".}
-proc fcQApplication_fontWithQWidget(param1: pointer): pointer {.importc: "QApplication_fontWithQWidget".}
-proc fcQApplication_fontWithClassName(className: cstring): pointer {.importc: "QApplication_fontWithClassName".}
-proc fcQApplication_setFont(param1: pointer): void {.importc: "QApplication_setFont".}
+proc fcQApplication_font_QWidget(param1: pointer): pointer {.importc: "QApplication_font_QWidget".}
+proc fcQApplication_fontChar(className: cstring): pointer {.importc: "QApplication_font_char".}
+proc fcQApplication_setFont_QFont(param1: pointer): void {.importc: "QApplication_setFont_QFont".}
 proc fcQApplication_fontMetrics(): pointer {.importc: "QApplication_fontMetrics".}
 proc fcQApplication_setWindowIcon(icon: pointer): void {.importc: "QApplication_setWindowIcon".}
 proc fcQApplication_windowIcon(): pointer {.importc: "QApplication_windowIcon".}
@@ -108,12 +108,12 @@ proc fcQApplication_activeModalWidget(): pointer {.importc: "QApplication_active
 proc fcQApplication_focusWidget(): pointer {.importc: "QApplication_focusWidget".}
 proc fcQApplication_activeWindow(): pointer {.importc: "QApplication_activeWindow".}
 proc fcQApplication_setActiveWindow(act: pointer): void {.importc: "QApplication_setActiveWindow".}
-proc fcQApplication_widgetAt(p: pointer): pointer {.importc: "QApplication_widgetAt".}
-proc fcQApplication_widgetAt2(x: cint, y: cint): pointer {.importc: "QApplication_widgetAt2".}
-proc fcQApplication_topLevelAt(p: pointer): pointer {.importc: "QApplication_topLevelAt".}
-proc fcQApplication_topLevelAt2(x: cint, y: cint): pointer {.importc: "QApplication_topLevelAt2".}
+proc fcQApplication_widgetAtP(p: pointer): pointer {.importc: "QApplication_widgetAt_p".}
+proc fcQApplication_widgetAtXY(x: cint, y: cint): pointer {.importc: "QApplication_widgetAt_x_y".}
+proc fcQApplication_topLevelAtP(p: pointer): pointer {.importc: "QApplication_topLevelAt_p".}
+proc fcQApplication_topLevelAtXY(x: cint, y: cint): pointer {.importc: "QApplication_topLevelAt_x_y".}
 proc fcQApplication_beep(): void {.importc: "QApplication_beep".}
-proc fcQApplication_alert(widget: pointer): void {.importc: "QApplication_alert".}
+proc fcQApplication_alertWidget(widget: pointer): void {.importc: "QApplication_alert_widget".}
 proc fcQApplication_setCursorFlashTime(cursorFlashTime: cint): void {.importc: "QApplication_setCursorFlashTime".}
 proc fcQApplication_cursorFlashTime(): cint {.importc: "QApplication_cursorFlashTime".}
 proc fcQApplication_setDoubleClickInterval(doubleClickInterval: cint): void {.importc: "QApplication_setDoubleClickInterval".}
@@ -129,7 +129,7 @@ proc fcQApplication_startDragTime(): cint {.importc: "QApplication_startDragTime
 proc fcQApplication_setStartDragDistance(l: cint): void {.importc: "QApplication_setStartDragDistance".}
 proc fcQApplication_startDragDistance(): cint {.importc: "QApplication_startDragDistance".}
 proc fcQApplication_isEffectEnabled(param1: cint): bool {.importc: "QApplication_isEffectEnabled".}
-proc fcQApplication_setEffectEnabled(param1: cint): void {.importc: "QApplication_setEffectEnabled".}
+proc fcQApplication_setEffectEnabled_Qt_UIEffect(param1: cint): void {.importc: "QApplication_setEffectEnabled_Qt_UIEffect".}
 proc fcQApplication_exec(): cint {.importc: "QApplication_exec".}
 proc fcQApplication_notify(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QApplication_notify".}
 proc fcQApplication_focusChanged(self: pointer, old: pointer, now: pointer): void {.importc: "QApplication_focusChanged".}
@@ -140,14 +140,14 @@ proc fcQApplication_setAutoSipEnabled(self: pointer, enabled: bool): void {.impo
 proc fcQApplication_autoSipEnabled(self: pointer): bool {.importc: "QApplication_autoSipEnabled".}
 proc fcQApplication_closeAllWindows(): void {.importc: "QApplication_closeAllWindows".}
 proc fcQApplication_aboutQt(): void {.importc: "QApplication_aboutQt".}
-proc fcQApplication_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QApplication_tr2".}
-proc fcQApplication_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QApplication_tr3".}
-proc fcQApplication_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QApplication_trUtf82".}
-proc fcQApplication_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QApplication_trUtf83".}
-proc fcQApplication_setPalette2(param1: pointer, className: cstring): void {.importc: "QApplication_setPalette2".}
-proc fcQApplication_setFont2(param1: pointer, className: cstring): void {.importc: "QApplication_setFont2".}
-proc fcQApplication_alert2(widget: pointer, duration: cint): void {.importc: "QApplication_alert2".}
-proc fcQApplication_setEffectEnabled2(param1: cint, enable: bool): void {.importc: "QApplication_setEffectEnabled2".}
+proc fcQApplication_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QApplication_tr_s_c".}
+proc fcQApplication_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QApplication_tr_s_c_n".}
+proc fcQApplication_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QApplication_trUtf8_s_c".}
+proc fcQApplication_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QApplication_trUtf8_s_c_n".}
+proc fcQApplication_setPalette_QPaletteChar(param1: pointer, className: cstring): void {.importc: "QApplication_setPalette_QPalette_char".}
+proc fcQApplication_setFont_QFontChar(param1: pointer, className: cstring): void {.importc: "QApplication_setFont_QFont_char".}
+proc fcQApplication_alertWidgetDuration(widget: pointer, duration: cint): void {.importc: "QApplication_alert_widget_duration".}
+proc fcQApplication_setEffectEnabled_Qt_UIEffectBool(param1: cint, enable: bool): void {.importc: "QApplication_setEffectEnabled_Qt_UIEffect_bool".}
 proc fcQApplication_vdata(self: pointer): ptr pointer {.importc: "QApplication_vdata".}
 proc fvdata_cQApplication(self: pointer): pointer {.importc: "vdata_QApplication".}
 
@@ -179,8 +179,8 @@ proc fcQApplication_protectedbase_sender(self: pointer): pointer {.importc: "QAp
 proc fcQApplication_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QApplication_protectedbase_senderSignalIndex".}
 proc fcQApplication_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QApplication_protectedbase_receivers".}
 proc fcQApplication_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QApplication_protectedbase_isSignalConnected".}
-proc fcQApplication_new(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray): ptr cQApplication {.importc: "QApplication_new".}
-proc fcQApplication_new2(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQApplication {.importc: "QApplication_new2".}
+proc fcQApplication_new(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray): ptr cQApplication {.importc: "QApplication_new_int_char".}
+proc fcQApplication_new2(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQApplication {.importc: "QApplication_new_int_char_int".}
 proc fcQApplication_staticMetaObject(): pointer {.importc: "QApplication_staticMetaObject".}
 
 proc metaObject*(self: gen_qapplication_types.QApplication): gen_qobjectdefs_types.QMetaObject =
@@ -193,13 +193,13 @@ proc metacall*(self: gen_qapplication_types.QApplication, param1: cint, param2: 
   fcQApplication_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qapplication_types.QApplication, s: cstring): string =
-  let v_ms = fcQApplication_tr(s)
+  let v_ms = fcQApplication_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qapplication_types.QApplication, s: cstring): string =
-  let v_ms = fcQApplication_trUtf8(s)
+  let v_ms = fcQApplication_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -208,10 +208,10 @@ proc style*(_: type gen_qapplication_types.QApplication): gen_qstyle_types.QStyl
   gen_qstyle_types.QStyle(h: fcQApplication_style(), owned: false)
 
 proc setStyle*(_: type gen_qapplication_types.QApplication, style: gen_qstyle_types.QStyle): void =
-  fcQApplication_setStyle(style.h)
+  fcQApplication_setStyle_QStyle(style.h)
 
 proc setStyle*(_: type gen_qapplication_types.QApplication, style: openArray[char]): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQApplication_setStyleWithStyle(struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style)))), owned: false)
+  gen_qstyle_types.QStyle(h: fcQApplication_setStyle_QString(struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style)))), owned: false)
 
 proc colorSpec*(_: type gen_qapplication_types.QApplication): cint =
   fcQApplication_colorSpec()
@@ -220,25 +220,25 @@ proc setColorSpec*(_: type gen_qapplication_types.QApplication, colorSpec: cint)
   fcQApplication_setColorSpec(colorSpec)
 
 proc palette*(_: type gen_qapplication_types.QApplication, param1: gen_qwidget_types.QWidget): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQApplication_palette(param1.h), owned: true)
+  gen_qpalette_types.QPalette(h: fcQApplication_palette_QWidget(param1.h), owned: true)
 
 proc palette*(_: type gen_qapplication_types.QApplication, className: cstring): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQApplication_paletteWithClassName(className), owned: true)
+  gen_qpalette_types.QPalette(h: fcQApplication_paletteChar(className), owned: true)
 
 proc setPalette*(_: type gen_qapplication_types.QApplication, param1: gen_qpalette_types.QPalette): void =
-  fcQApplication_setPalette(param1.h)
+  fcQApplication_setPalette_QPalette(param1.h)
 
 proc font*(_: type gen_qapplication_types.QApplication): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQApplication_font(), owned: true)
 
 proc font*(_: type gen_qapplication_types.QApplication, param1: gen_qwidget_types.QWidget): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQApplication_fontWithQWidget(param1.h), owned: true)
+  gen_qfont_types.QFont(h: fcQApplication_font_QWidget(param1.h), owned: true)
 
 proc font*(_: type gen_qapplication_types.QApplication, className: cstring): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQApplication_fontWithClassName(className), owned: true)
+  gen_qfont_types.QFont(h: fcQApplication_fontChar(className), owned: true)
 
 proc setFont*(_: type gen_qapplication_types.QApplication, param1: gen_qfont_types.QFont): void =
-  fcQApplication_setFont(param1.h)
+  fcQApplication_setFont_QFont(param1.h)
 
 proc fontMetrics*(_: type gen_qapplication_types.QApplication): gen_qfontmetrics_types.QFontMetrics =
   gen_qfontmetrics_types.QFontMetrics(h: fcQApplication_fontMetrics(), owned: true)
@@ -286,22 +286,22 @@ proc setActiveWindow*(_: type gen_qapplication_types.QApplication, act: gen_qwid
   fcQApplication_setActiveWindow(act.h)
 
 proc widgetAt*(_: type gen_qapplication_types.QApplication, p: gen_qpoint_types.QPoint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQApplication_widgetAt(p.h), owned: false)
+  gen_qwidget_types.QWidget(h: fcQApplication_widgetAtP(p.h), owned: false)
 
 proc widgetAt*(_: type gen_qapplication_types.QApplication, x: cint, y: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQApplication_widgetAt2(x, y), owned: false)
+  gen_qwidget_types.QWidget(h: fcQApplication_widgetAtXY(x, y), owned: false)
 
 proc topLevelAt*(_: type gen_qapplication_types.QApplication, p: gen_qpoint_types.QPoint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQApplication_topLevelAt(p.h), owned: false)
+  gen_qwidget_types.QWidget(h: fcQApplication_topLevelAtP(p.h), owned: false)
 
 proc topLevelAt*(_: type gen_qapplication_types.QApplication, x: cint, y: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQApplication_topLevelAt2(x, y), owned: false)
+  gen_qwidget_types.QWidget(h: fcQApplication_topLevelAtXY(x, y), owned: false)
 
 proc beep*(_: type gen_qapplication_types.QApplication): void =
   fcQApplication_beep()
 
 proc alert*(_: type gen_qapplication_types.QApplication, widget: gen_qwidget_types.QWidget): void =
-  fcQApplication_alert(widget.h)
+  fcQApplication_alertWidget(widget.h)
 
 proc setCursorFlashTime*(_: type gen_qapplication_types.QApplication, cursorFlashTime: cint): void =
   fcQApplication_setCursorFlashTime(cursorFlashTime)
@@ -349,7 +349,7 @@ proc isEffectEnabled*(_: type gen_qapplication_types.QApplication, param1: cint)
   fcQApplication_isEffectEnabled(cint(param1))
 
 proc setEffectEnabled*(_: type gen_qapplication_types.QApplication, param1: cint): void =
-  fcQApplication_setEffectEnabled(cint(param1))
+  fcQApplication_setEffectEnabled_Qt_UIEffect(cint(param1))
 
 proc exec*(_: type gen_qapplication_types.QApplication): cint =
   fcQApplication_exec()
@@ -401,40 +401,40 @@ proc aboutQt*(_: type gen_qapplication_types.QApplication): void =
   fcQApplication_aboutQt()
 
 proc tr*(_: type gen_qapplication_types.QApplication, s: cstring, c: cstring): string =
-  let v_ms = fcQApplication_tr2(s, c)
+  let v_ms = fcQApplication_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qapplication_types.QApplication, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQApplication_tr3(s, c, n)
+  let v_ms = fcQApplication_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qapplication_types.QApplication, s: cstring, c: cstring): string =
-  let v_ms = fcQApplication_trUtf82(s, c)
+  let v_ms = fcQApplication_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qapplication_types.QApplication, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQApplication_trUtf83(s, c, n)
+  let v_ms = fcQApplication_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setPalette*(_: type gen_qapplication_types.QApplication, param1: gen_qpalette_types.QPalette, className: cstring): void =
-  fcQApplication_setPalette2(param1.h, className)
+  fcQApplication_setPalette_QPaletteChar(param1.h, className)
 
 proc setFont*(_: type gen_qapplication_types.QApplication, param1: gen_qfont_types.QFont, className: cstring): void =
-  fcQApplication_setFont2(param1.h, className)
+  fcQApplication_setFont_QFontChar(param1.h, className)
 
 proc alert*(_: type gen_qapplication_types.QApplication, widget: gen_qwidget_types.QWidget, duration: cint): void =
-  fcQApplication_alert2(widget.h, duration)
+  fcQApplication_alertWidgetDuration(widget.h, duration)
 
 proc setEffectEnabled*(_: type gen_qapplication_types.QApplication, param1: cint, enable: bool): void =
-  fcQApplication_setEffectEnabled2(cint(param1), enable)
+  fcQApplication_setEffectEnabled_Qt_UIEffectBool(cint(param1), enable)
 
 type QApplicationmetaObjectProc* = proc(self: QApplication): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QApplicationmetacastProc* = proc(self: QApplication, param1: cstring): pointer {.raises: [], gcsafe.}

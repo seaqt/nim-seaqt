@@ -55,18 +55,18 @@ type cQCameraFlashControl*{.exportc: "QCameraFlashControl", incompleteStruct.} =
 proc fcQCameraFlashControl_metaObject(self: pointer): pointer {.importc: "QCameraFlashControl_metaObject".}
 proc fcQCameraFlashControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFlashControl_metacast".}
 proc fcQCameraFlashControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFlashControl_metacall".}
-proc fcQCameraFlashControl_tr(s: cstring): struct_seaqt_string {.importc: "QCameraFlashControl_tr".}
-proc fcQCameraFlashControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraFlashControl_trUtf8".}
+proc fcQCameraFlashControl_trS(s: cstring): struct_seaqt_string {.importc: "QCameraFlashControl_tr_s".}
+proc fcQCameraFlashControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraFlashControl_trUtf8_s".}
 proc fcQCameraFlashControl_flashMode(self: pointer): cint {.importc: "QCameraFlashControl_flashMode".}
 proc fcQCameraFlashControl_setFlashMode(self: pointer, mode: cint): void {.importc: "QCameraFlashControl_setFlashMode".}
 proc fcQCameraFlashControl_isFlashModeSupported(self: pointer, mode: cint): bool {.importc: "QCameraFlashControl_isFlashModeSupported".}
 proc fcQCameraFlashControl_isFlashReady(self: pointer): bool {.importc: "QCameraFlashControl_isFlashReady".}
 proc fcQCameraFlashControl_flashReady(self: pointer, param1: bool): void {.importc: "QCameraFlashControl_flashReady".}
 proc fcQCameraFlashControl_connect_flashReady(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFlashControl_connect_flashReady".}
-proc fcQCameraFlashControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFlashControl_tr2".}
-proc fcQCameraFlashControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFlashControl_tr3".}
-proc fcQCameraFlashControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFlashControl_trUtf82".}
-proc fcQCameraFlashControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFlashControl_trUtf83".}
+proc fcQCameraFlashControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFlashControl_tr_s_c".}
+proc fcQCameraFlashControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFlashControl_tr_s_c_n".}
+proc fcQCameraFlashControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraFlashControl_trUtf8_s_c".}
+proc fcQCameraFlashControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraFlashControl_trUtf8_s_c_n".}
 proc fcQCameraFlashControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraFlashControl_protectedbase_sender".}
 proc fcQCameraFlashControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraFlashControl_protectedbase_senderSignalIndex".}
 proc fcQCameraFlashControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFlashControl_protectedbase_receivers".}
@@ -83,13 +83,13 @@ proc metacall*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, param1: 
   fcQCameraFlashControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstring): string =
-  let v_ms = fcQCameraFlashControl_tr(s)
+  let v_ms = fcQCameraFlashControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstring): string =
-  let v_ms = fcQCameraFlashControl_trUtf8(s)
+  let v_ms = fcQCameraFlashControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -127,25 +127,25 @@ proc onFlashReady*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, slot
   fcQCameraFlashControl_connect_flashReady(self.h, cast[int](addr tmp[]), fcQCameraFlashControl_slot_callback_flashReady, fcQCameraFlashControl_slot_callback_flashReady_release)
 
 proc tr*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraFlashControl_tr2(s, c)
+  let v_ms = fcQCameraFlashControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraFlashControl_tr3(s, c, n)
+  let v_ms = fcQCameraFlashControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraFlashControl_trUtf82(s, c)
+  let v_ms = fcQCameraFlashControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraFlashControl_trUtf83(s, c, n)
+  let v_ms = fcQCameraFlashControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

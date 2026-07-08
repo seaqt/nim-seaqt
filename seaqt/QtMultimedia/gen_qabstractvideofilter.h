@@ -39,7 +39,7 @@ typedef struct QVideoSurfaceFormat QVideoSurfaceFormat;
 #endif
 
 QVideoFrame* QVideoFilterRunnable_run(QVideoFilterRunnable* self, QVideoFrame* input, QVideoSurfaceFormat* surfaceFormat, int flags);
-void QVideoFilterRunnable_operatorAssign(QVideoFilterRunnable* self, QVideoFilterRunnable* param1);
+void QVideoFilterRunnable_operatorAssign(QVideoFilterRunnable* self, QVideoFilterRunnable* from);
 
 void QVideoFilterRunnable_delete(QVideoFilterRunnable* self);
 
@@ -63,23 +63,23 @@ void* QAbstractVideoFilter_vdata(VirtualQAbstractVideoFilter* self);
 VirtualQAbstractVideoFilter* vdata_QAbstractVideoFilter(void* vdata);
 
 VirtualQAbstractVideoFilter* QAbstractVideoFilter_new(const QAbstractVideoFilter_VTable* vtbl, size_t vdata);
-VirtualQAbstractVideoFilter* QAbstractVideoFilter_new2(const QAbstractVideoFilter_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAbstractVideoFilter* QAbstractVideoFilter_new_parent(const QAbstractVideoFilter_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAbstractVideoFilter_virtbase(QAbstractVideoFilter* src, QObject** outptr_QObject);
 QMetaObject* QAbstractVideoFilter_metaObject(const QAbstractVideoFilter* self);
 void* QAbstractVideoFilter_metacast(QAbstractVideoFilter* self, const char* param1);
 int QAbstractVideoFilter_metacall(QAbstractVideoFilter* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractVideoFilter_tr(const char* s);
-struct seaqt_string QAbstractVideoFilter_trUtf8(const char* s);
+struct seaqt_string QAbstractVideoFilter_tr_s(const char* s);
+struct seaqt_string QAbstractVideoFilter_trUtf8_s(const char* s);
 bool QAbstractVideoFilter_isActive(const QAbstractVideoFilter* self);
 void QAbstractVideoFilter_setActive(QAbstractVideoFilter* self, bool v);
 QVideoFilterRunnable* QAbstractVideoFilter_createFilterRunnable(QAbstractVideoFilter* self);
 void QAbstractVideoFilter_activeChanged(QAbstractVideoFilter* self);
 void QAbstractVideoFilter_connect_activeChanged(QAbstractVideoFilter* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QAbstractVideoFilter_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractVideoFilter_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAbstractVideoFilter_trUtf82(const char* s, const char* c);
-struct seaqt_string QAbstractVideoFilter_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAbstractVideoFilter_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractVideoFilter_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAbstractVideoFilter_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractVideoFilter_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractVideoFilter_virtualbase_metaObject(const VirtualQAbstractVideoFilter* self);
 void* QAbstractVideoFilter_virtualbase_metacast(VirtualQAbstractVideoFilter* self, const char* param1);

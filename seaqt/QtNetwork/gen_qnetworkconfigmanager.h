@@ -53,14 +53,14 @@ void* QNetworkConfigurationManager_vdata(VirtualQNetworkConfigurationManager* se
 VirtualQNetworkConfigurationManager* vdata_QNetworkConfigurationManager(void* vdata);
 
 VirtualQNetworkConfigurationManager* QNetworkConfigurationManager_new(const QNetworkConfigurationManager_VTable* vtbl, size_t vdata);
-VirtualQNetworkConfigurationManager* QNetworkConfigurationManager_new2(const QNetworkConfigurationManager_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQNetworkConfigurationManager* QNetworkConfigurationManager_new_parent(const QNetworkConfigurationManager_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QNetworkConfigurationManager_virtbase(QNetworkConfigurationManager* src, QObject** outptr_QObject);
 QMetaObject* QNetworkConfigurationManager_metaObject(const QNetworkConfigurationManager* self);
 void* QNetworkConfigurationManager_metacast(QNetworkConfigurationManager* self, const char* param1);
 int QNetworkConfigurationManager_metacall(QNetworkConfigurationManager* self, int param1, int param2, void** param3);
-struct seaqt_string QNetworkConfigurationManager_tr(const char* s);
-struct seaqt_string QNetworkConfigurationManager_trUtf8(const char* s);
+struct seaqt_string QNetworkConfigurationManager_tr_s(const char* s);
+struct seaqt_string QNetworkConfigurationManager_trUtf8_s(const char* s);
 int QNetworkConfigurationManager_capabilities(const QNetworkConfigurationManager* self);
 QNetworkConfiguration* QNetworkConfigurationManager_defaultConfiguration(const QNetworkConfigurationManager* self);
 struct seaqt_array /* of QNetworkConfiguration* */  QNetworkConfigurationManager_allConfigurations(const QNetworkConfigurationManager* self);
@@ -77,11 +77,11 @@ void QNetworkConfigurationManager_onlineStateChanged(QNetworkConfigurationManage
 void QNetworkConfigurationManager_connect_onlineStateChanged(QNetworkConfigurationManager* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QNetworkConfigurationManager_updateCompleted(QNetworkConfigurationManager* self);
 void QNetworkConfigurationManager_connect_updateCompleted(QNetworkConfigurationManager* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QNetworkConfigurationManager_tr2(const char* s, const char* c);
-struct seaqt_string QNetworkConfigurationManager_tr3(const char* s, const char* c, int n);
-struct seaqt_string QNetworkConfigurationManager_trUtf82(const char* s, const char* c);
-struct seaqt_string QNetworkConfigurationManager_trUtf83(const char* s, const char* c, int n);
-struct seaqt_array /* of QNetworkConfiguration* */  QNetworkConfigurationManager_allConfigurationsWithFlags(const QNetworkConfigurationManager* self, int flags);
+struct seaqt_string QNetworkConfigurationManager_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkConfigurationManager_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QNetworkConfigurationManager_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QNetworkConfigurationManager_trUtf8_s_c_n(const char* s, const char* c, int n);
+struct seaqt_array /* of QNetworkConfiguration* */  QNetworkConfigurationManager_allConfigurations_flags(const QNetworkConfigurationManager* self, int flags);
 
 QMetaObject* QNetworkConfigurationManager_virtualbase_metaObject(const VirtualQNetworkConfigurationManager* self);
 void* QNetworkConfigurationManager_virtualbase_metacast(VirtualQNetworkConfigurationManager* self, const char* param1);

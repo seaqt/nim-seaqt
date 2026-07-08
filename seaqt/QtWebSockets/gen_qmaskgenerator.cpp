@@ -187,7 +187,7 @@ VirtualQMaskGenerator* QMaskGenerator_new(const QMaskGenerator_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQMaskGenerator(vtbl) : nullptr;
 }
 
-VirtualQMaskGenerator* QMaskGenerator_new2(const QMaskGenerator_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQMaskGenerator* QMaskGenerator_new_parent(const QMaskGenerator_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMaskGenerator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMaskGenerator(vtbl, parent) : nullptr;
 }

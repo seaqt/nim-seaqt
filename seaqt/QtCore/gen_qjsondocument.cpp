@@ -57,27 +57,27 @@ QJsonDocument* QJsonDocument_new() {
 	return new (std::nothrow) QJsonDocument();
 }
 
-QJsonDocument* QJsonDocument_new2(QJsonObject* object) {
+QJsonDocument* QJsonDocument_new_object(QJsonObject* object) {
 	return new (std::nothrow) QJsonDocument(*object);
 }
 
-QJsonDocument* QJsonDocument_new3(QJsonArray* array) {
+QJsonDocument* QJsonDocument_new_array(QJsonArray* array) {
 	return new (std::nothrow) QJsonDocument(*array);
 }
 
-QJsonDocument* QJsonDocument_new4(QJsonDocument* other) {
-	return new (std::nothrow) QJsonDocument(*other);
+QJsonDocument* QJsonDocument_new_from(QJsonDocument* from) {
+	return new (std::nothrow) QJsonDocument(*from);
 }
 
-void QJsonDocument_operatorAssign(QJsonDocument* self, QJsonDocument* other) {
-	self->operator=(*other);
+void QJsonDocument_operatorAssign(QJsonDocument* self, QJsonDocument* from) {
+	self->operator=(*from);
 }
 
 void QJsonDocument_swap(QJsonDocument* self, QJsonDocument* other) {
 	self->swap(*other);
 }
 
-QJsonDocument* QJsonDocument_fromRawData(const char* data, int size) {
+QJsonDocument* QJsonDocument_fromRawData_data_size(const char* data, int size) {
 	return new QJsonDocument(QJsonDocument::fromRawData(data, static_cast<int>(size)));
 }
 
@@ -85,7 +85,7 @@ const char* QJsonDocument_rawData(const QJsonDocument* self, int* size) {
 	return (const char*) self->rawData(static_cast<int*>(size));
 }
 
-QJsonDocument* QJsonDocument_fromBinaryData(struct seaqt_string data) {
+QJsonDocument* QJsonDocument_fromBinaryData_data(struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new QJsonDocument(QJsonDocument::fromBinaryData(data_QByteArray));
 }
@@ -107,7 +107,7 @@ QVariant* QJsonDocument_toVariant(const QJsonDocument* self) {
 	return new QVariant(self->toVariant());
 }
 
-QJsonDocument* QJsonDocument_fromJson(struct seaqt_string json) {
+QJsonDocument* QJsonDocument_fromJson_json(struct seaqt_string json) {
 	QByteArray json_QByteArray(json.data, json.len);
 	return new QJsonDocument(QJsonDocument::fromJson(json_QByteArray));
 }
@@ -121,7 +121,7 @@ struct seaqt_string QJsonDocument_toJson(const QJsonDocument* self) {
 	return _ms;
 }
 
-struct seaqt_string QJsonDocument_toJsonWithFormat(const QJsonDocument* self, int format) {
+struct seaqt_string QJsonDocument_toJson_format(const QJsonDocument* self, int format) {
 	QByteArray _qb = self->toJson(static_cast<QJsonDocument::JsonFormat>(format));
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();
@@ -158,12 +158,12 @@ void QJsonDocument_setArray(QJsonDocument* self, QJsonArray* array) {
 	self->setArray(*array);
 }
 
-QJsonValue* QJsonDocument_operatorSubscript(const QJsonDocument* self, struct seaqt_string key) {
+QJsonValue* QJsonDocument_operatorSubscript_QString(const QJsonDocument* self, struct seaqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	return new QJsonValue(self->operator[](key_QString));
 }
 
-QJsonValue* QJsonDocument_operatorSubscriptWithInt(const QJsonDocument* self, int i) {
+QJsonValue* QJsonDocument_operatorSubscript_int(const QJsonDocument* self, int i) {
 	return new QJsonValue(self->operator[](static_cast<int>(i)));
 }
 
@@ -179,16 +179,16 @@ bool QJsonDocument_isNull(const QJsonDocument* self) {
 	return self->isNull();
 }
 
-QJsonDocument* QJsonDocument_fromRawData2(const char* data, int size, int validation) {
+QJsonDocument* QJsonDocument_fromRawData_data_size_validation(const char* data, int size, int validation) {
 	return new QJsonDocument(QJsonDocument::fromRawData(data, static_cast<int>(size), static_cast<QJsonDocument::DataValidation>(validation)));
 }
 
-QJsonDocument* QJsonDocument_fromBinaryData2(struct seaqt_string data, int validation) {
+QJsonDocument* QJsonDocument_fromBinaryData_data_validation(struct seaqt_string data, int validation) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new QJsonDocument(QJsonDocument::fromBinaryData(data_QByteArray, static_cast<QJsonDocument::DataValidation>(validation)));
 }
 
-QJsonDocument* QJsonDocument_fromJson2(struct seaqt_string json, QJsonParseError* error) {
+QJsonDocument* QJsonDocument_fromJson_json_error(struct seaqt_string json, QJsonParseError* error) {
 	QByteArray json_QByteArray(json.data, json.len);
 	return new QJsonDocument(QJsonDocument::fromJson(json_QByteArray, error));
 }

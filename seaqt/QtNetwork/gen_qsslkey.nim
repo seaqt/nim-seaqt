@@ -43,7 +43,7 @@ export
 
 type cQSslKey*{.exportc: "QSslKey", incompleteStruct.} = object
 
-proc fcQSslKey_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslKey_operatorAssign".}
+proc fcQSslKey_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSslKey_operatorAssign".}
 proc fcQSslKey_swap(self: pointer, other: pointer): void {.importc: "QSslKey_swap".}
 proc fcQSslKey_isNull(self: pointer): bool {.importc: "QSslKey_isNull".}
 proc fcQSslKey_clear(self: pointer): void {.importc: "QSslKey_clear".}
@@ -55,23 +55,23 @@ proc fcQSslKey_toDer(self: pointer): struct_seaqt_string {.importc: "QSslKey_toD
 proc fcQSslKey_handle(self: pointer): pointer {.importc: "QSslKey_handle".}
 proc fcQSslKey_operatorEqual(self: pointer, key: pointer): bool {.importc: "QSslKey_operatorEqual".}
 proc fcQSslKey_operatorNotEqual(self: pointer, key: pointer): bool {.importc: "QSslKey_operatorNotEqual".}
-proc fcQSslKey_toPemWithPassPhrase(self: pointer, passPhrase: struct_seaqt_string): struct_seaqt_string {.importc: "QSslKey_toPemWithPassPhrase".}
-proc fcQSslKey_toDerWithPassPhrase(self: pointer, passPhrase: struct_seaqt_string): struct_seaqt_string {.importc: "QSslKey_toDerWithPassPhrase".}
+proc fcQSslKey_toPemPassPhrase(self: pointer, passPhrase: struct_seaqt_string): struct_seaqt_string {.importc: "QSslKey_toPem_passPhrase".}
+proc fcQSslKey_toDerPassPhrase(self: pointer, passPhrase: struct_seaqt_string): struct_seaqt_string {.importc: "QSslKey_toDer_passPhrase".}
 proc fcQSslKey_new(): ptr cQSslKey {.importc: "QSslKey_new".}
-proc fcQSslKey_new2(encoded: struct_seaqt_string, algorithm: cint): ptr cQSslKey {.importc: "QSslKey_new2".}
-proc fcQSslKey_new3(device: pointer, algorithm: cint): ptr cQSslKey {.importc: "QSslKey_new3".}
-proc fcQSslKey_new4(handle: pointer): ptr cQSslKey {.importc: "QSslKey_new4".}
-proc fcQSslKey_new5(other: pointer): ptr cQSslKey {.importc: "QSslKey_new5".}
-proc fcQSslKey_new6(encoded: struct_seaqt_string, algorithm: cint, format: cint): ptr cQSslKey {.importc: "QSslKey_new6".}
-proc fcQSslKey_new7(encoded: struct_seaqt_string, algorithm: cint, format: cint, typeVal: cint): ptr cQSslKey {.importc: "QSslKey_new7".}
-proc fcQSslKey_new8(encoded: struct_seaqt_string, algorithm: cint, format: cint, typeVal: cint, passPhrase: struct_seaqt_string): ptr cQSslKey {.importc: "QSslKey_new8".}
-proc fcQSslKey_new9(device: pointer, algorithm: cint, format: cint): ptr cQSslKey {.importc: "QSslKey_new9".}
-proc fcQSslKey_new10(device: pointer, algorithm: cint, format: cint, typeVal: cint): ptr cQSslKey {.importc: "QSslKey_new10".}
-proc fcQSslKey_new11(device: pointer, algorithm: cint, format: cint, typeVal: cint, passPhrase: struct_seaqt_string): ptr cQSslKey {.importc: "QSslKey_new11".}
-proc fcQSslKey_new12(handle: pointer, typeVal: cint): ptr cQSslKey {.importc: "QSslKey_new12".}
+proc fcQSslKey_new2(encoded: struct_seaqt_string, algorithm: cint): ptr cQSslKey {.importc: "QSslKey_new_encoded_algorithm".}
+proc fcQSslKey_new3(device: pointer, algorithm: cint): ptr cQSslKey {.importc: "QSslKey_new_device_algorithm".}
+proc fcQSslKey_new4(handle: pointer): ptr cQSslKey {.importc: "QSslKey_new_handle".}
+proc fcQSslKey_new5(fromVal: pointer): ptr cQSslKey {.importc: "QSslKey_new_from".}
+proc fcQSslKey_new6(encoded: struct_seaqt_string, algorithm: cint, format: cint): ptr cQSslKey {.importc: "QSslKey_new_encoded_algorithm_format".}
+proc fcQSslKey_new7(encoded: struct_seaqt_string, algorithm: cint, format: cint, typeVal: cint): ptr cQSslKey {.importc: "QSslKey_new_encoded_algorithm_format_type".}
+proc fcQSslKey_new8(encoded: struct_seaqt_string, algorithm: cint, format: cint, typeVal: cint, passPhrase: struct_seaqt_string): ptr cQSslKey {.importc: "QSslKey_new_encoded_algorithm_format_type_passPhrase".}
+proc fcQSslKey_new9(device: pointer, algorithm: cint, format: cint): ptr cQSslKey {.importc: "QSslKey_new_device_algorithm_format".}
+proc fcQSslKey_new10(device: pointer, algorithm: cint, format: cint, typeVal: cint): ptr cQSslKey {.importc: "QSslKey_new_device_algorithm_format_type".}
+proc fcQSslKey_new11(device: pointer, algorithm: cint, format: cint, typeVal: cint, passPhrase: struct_seaqt_string): ptr cQSslKey {.importc: "QSslKey_new_device_algorithm_format_type_passPhrase".}
+proc fcQSslKey_new12(handle: pointer, typeVal: cint): ptr cQSslKey {.importc: "QSslKey_new_handle_type".}
 
-proc operatorAssign*(self: gen_qsslkey_types.QSslKey, other: gen_qsslkey_types.QSslKey): void =
-  fcQSslKey_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsslkey_types.QSslKey, fromVal: gen_qsslkey_types.QSslKey): void =
+  fcQSslKey_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qsslkey_types.QSslKey, other: gen_qsslkey_types.QSslKey): void =
   fcQSslKey_swap(self.h, other.h)
@@ -113,13 +113,13 @@ proc operatorNotEqual*(self: gen_qsslkey_types.QSslKey, key: gen_qsslkey_types.Q
   fcQSslKey_operatorNotEqual(self.h, key.h)
 
 proc toPem*(self: gen_qsslkey_types.QSslKey, passPhrase: openArray[byte]): seq[byte] =
-  var v_bytearray = fcQSslKey_toPemWithPassPhrase(self.h, struct_seaqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
+  var v_bytearray = fcQSslKey_toPemPassPhrase(self.h, struct_seaqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc toDer*(self: gen_qsslkey_types.QSslKey, passPhrase: openArray[byte]): seq[byte] =
-  var v_bytearray = fcQSslKey_toDerWithPassPhrase(self.h, struct_seaqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
+  var v_bytearray = fcQSslKey_toDerPassPhrase(self.h, struct_seaqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -140,8 +140,8 @@ proc create*(T: type gen_qsslkey_types.QSslKey,
   let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new4(handle), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
-    other: gen_qsslkey_types.QSslKey): gen_qsslkey_types.QSslKey =
-  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new5(other.h), owned: true)
+    fromVal: gen_qsslkey_types.QSslKey): gen_qsslkey_types.QSslKey =
+  let tmp = gen_qsslkey_types.QSslKey(h: fcQSslKey_new5(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qsslkey_types.QSslKey,
     encoded: openArray[byte], algorithm: cint, format: cint): gen_qsslkey_types.QSslKey =

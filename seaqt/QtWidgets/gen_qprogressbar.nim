@@ -78,8 +78,8 @@ type cQProgressBar*{.exportc: "QProgressBar", incompleteStruct.} = object
 proc fcQProgressBar_metaObject(self: pointer): pointer {.importc: "QProgressBar_metaObject".}
 proc fcQProgressBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QProgressBar_metacast".}
 proc fcQProgressBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProgressBar_metacall".}
-proc fcQProgressBar_tr(s: cstring): struct_seaqt_string {.importc: "QProgressBar_tr".}
-proc fcQProgressBar_trUtf8(s: cstring): struct_seaqt_string {.importc: "QProgressBar_trUtf8".}
+proc fcQProgressBar_trS(s: cstring): struct_seaqt_string {.importc: "QProgressBar_tr_s".}
+proc fcQProgressBar_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QProgressBar_trUtf8_s".}
 proc fcQProgressBar_minimum(self: pointer): cint {.importc: "QProgressBar_minimum".}
 proc fcQProgressBar_maximum(self: pointer): cint {.importc: "QProgressBar_maximum".}
 proc fcQProgressBar_value(self: pointer): cint {.importc: "QProgressBar_value".}
@@ -106,10 +106,10 @@ proc fcQProgressBar_setValue(self: pointer, value: cint): void {.importc: "QProg
 proc fcQProgressBar_setOrientation(self: pointer, orientation: cint): void {.importc: "QProgressBar_setOrientation".}
 proc fcQProgressBar_valueChanged(self: pointer, value: cint): void {.importc: "QProgressBar_valueChanged".}
 proc fcQProgressBar_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, value: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProgressBar_connect_valueChanged".}
-proc fcQProgressBar_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProgressBar_tr2".}
-proc fcQProgressBar_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProgressBar_tr3".}
-proc fcQProgressBar_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProgressBar_trUtf82".}
-proc fcQProgressBar_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProgressBar_trUtf83".}
+proc fcQProgressBar_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProgressBar_tr_s_c".}
+proc fcQProgressBar_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProgressBar_tr_s_c_n".}
+proc fcQProgressBar_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QProgressBar_trUtf8_s_c".}
+proc fcQProgressBar_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QProgressBar_trUtf8_s_c_n".}
 proc fcQProgressBar_vdata(self: pointer): ptr pointer {.importc: "QProgressBar_vdata".}
 proc fvdata_cQProgressBar(self: pointer): pointer {.importc: "vdata_QProgressBar".}
 
@@ -228,7 +228,7 @@ proc fcQProgressBar_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQProgressBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QProgressBar_protectedbase_receivers".}
 proc fcQProgressBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QProgressBar_protectedbase_isSignalConnected".}
 proc fcQProgressBar_new(vtbl: pointer, vdata: csize_t): ptr cQProgressBar {.importc: "QProgressBar_new".}
-proc fcQProgressBar_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQProgressBar {.importc: "QProgressBar_new2".}
+proc fcQProgressBar_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQProgressBar {.importc: "QProgressBar_new_parent".}
 proc fcQProgressBar_staticMetaObject(): pointer {.importc: "QProgressBar_staticMetaObject".}
 
 proc metaObject*(self: gen_qprogressbar_types.QProgressBar): gen_qobjectdefs_types.QMetaObject =
@@ -241,13 +241,13 @@ proc metacall*(self: gen_qprogressbar_types.QProgressBar, param1: cint, param2: 
   fcQProgressBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qprogressbar_types.QProgressBar, s: cstring): string =
-  let v_ms = fcQProgressBar_tr(s)
+  let v_ms = fcQProgressBar_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qprogressbar_types.QProgressBar, s: cstring): string =
-  let v_ms = fcQProgressBar_trUtf8(s)
+  let v_ms = fcQProgressBar_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -351,25 +351,25 @@ proc onValueChanged*(self: gen_qprogressbar_types.QProgressBar, slot: QProgressB
   fcQProgressBar_connect_valueChanged(self.h, cast[int](addr tmp[]), fcQProgressBar_slot_callback_valueChanged, fcQProgressBar_slot_callback_valueChanged_release)
 
 proc tr*(_: type gen_qprogressbar_types.QProgressBar, s: cstring, c: cstring): string =
-  let v_ms = fcQProgressBar_tr2(s, c)
+  let v_ms = fcQProgressBar_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprogressbar_types.QProgressBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQProgressBar_tr3(s, c, n)
+  let v_ms = fcQProgressBar_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qprogressbar_types.QProgressBar, s: cstring, c: cstring): string =
-  let v_ms = fcQProgressBar_trUtf82(s, c)
+  let v_ms = fcQProgressBar_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qprogressbar_types.QProgressBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQProgressBar_trUtf83(s, c, n)
+  let v_ms = fcQProgressBar_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

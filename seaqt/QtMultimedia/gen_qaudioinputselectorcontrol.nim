@@ -55,8 +55,8 @@ type cQAudioInputSelectorControl*{.exportc: "QAudioInputSelectorControl", incomp
 proc fcQAudioInputSelectorControl_metaObject(self: pointer): pointer {.importc: "QAudioInputSelectorControl_metaObject".}
 proc fcQAudioInputSelectorControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioInputSelectorControl_metacast".}
 proc fcQAudioInputSelectorControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioInputSelectorControl_metacall".}
-proc fcQAudioInputSelectorControl_tr(s: cstring): struct_seaqt_string {.importc: "QAudioInputSelectorControl_tr".}
-proc fcQAudioInputSelectorControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAudioInputSelectorControl_trUtf8".}
+proc fcQAudioInputSelectorControl_trS(s: cstring): struct_seaqt_string {.importc: "QAudioInputSelectorControl_tr_s".}
+proc fcQAudioInputSelectorControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAudioInputSelectorControl_trUtf8_s".}
 proc fcQAudioInputSelectorControl_availableInputs(self: pointer): struct_seaqt_array {.importc: "QAudioInputSelectorControl_availableInputs".}
 proc fcQAudioInputSelectorControl_inputDescription(self: pointer, name: struct_seaqt_string): struct_seaqt_string {.importc: "QAudioInputSelectorControl_inputDescription".}
 proc fcQAudioInputSelectorControl_defaultInput(self: pointer): struct_seaqt_string {.importc: "QAudioInputSelectorControl_defaultInput".}
@@ -66,10 +66,10 @@ proc fcQAudioInputSelectorControl_activeInputChanged(self: pointer, name: struct
 proc fcQAudioInputSelectorControl_connect_activeInputChanged(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInputSelectorControl_connect_activeInputChanged".}
 proc fcQAudioInputSelectorControl_availableInputsChanged(self: pointer): void {.importc: "QAudioInputSelectorControl_availableInputsChanged".}
 proc fcQAudioInputSelectorControl_connect_availableInputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInputSelectorControl_connect_availableInputsChanged".}
-proc fcQAudioInputSelectorControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInputSelectorControl_tr2".}
-proc fcQAudioInputSelectorControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInputSelectorControl_tr3".}
-proc fcQAudioInputSelectorControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInputSelectorControl_trUtf82".}
-proc fcQAudioInputSelectorControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInputSelectorControl_trUtf83".}
+proc fcQAudioInputSelectorControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInputSelectorControl_tr_s_c".}
+proc fcQAudioInputSelectorControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInputSelectorControl_tr_s_c_n".}
+proc fcQAudioInputSelectorControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInputSelectorControl_trUtf8_s_c".}
+proc fcQAudioInputSelectorControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInputSelectorControl_trUtf8_s_c_n".}
 proc fcQAudioInputSelectorControl_protectedbase_sender(self: pointer): pointer {.importc: "QAudioInputSelectorControl_protectedbase_sender".}
 proc fcQAudioInputSelectorControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAudioInputSelectorControl_protectedbase_senderSignalIndex".}
 proc fcQAudioInputSelectorControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioInputSelectorControl_protectedbase_receivers".}
@@ -86,13 +86,13 @@ proc metacall*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorCon
   fcQAudioInputSelectorControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring): string =
-  let v_ms = fcQAudioInputSelectorControl_tr(s)
+  let v_ms = fcQAudioInputSelectorControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring): string =
-  let v_ms = fcQAudioInputSelectorControl_trUtf8(s)
+  let v_ms = fcQAudioInputSelectorControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -172,25 +172,25 @@ proc onAvailableInputsChanged*(self: gen_qaudioinputselectorcontrol_types.QAudio
   fcQAudioInputSelectorControl_connect_availableInputsChanged(self.h, cast[int](addr tmp[]), fcQAudioInputSelectorControl_slot_callback_availableInputsChanged, fcQAudioInputSelectorControl_slot_callback_availableInputsChanged_release)
 
 proc tr*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioInputSelectorControl_tr2(s, c)
+  let v_ms = fcQAudioInputSelectorControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioInputSelectorControl_tr3(s, c, n)
+  let v_ms = fcQAudioInputSelectorControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioInputSelectorControl_trUtf82(s, c)
+  let v_ms = fcQAudioInputSelectorControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioInputSelectorControl_trUtf83(s, c, n)
+  let v_ms = fcQAudioInputSelectorControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

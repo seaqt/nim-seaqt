@@ -100,12 +100,12 @@ QScriptValue* QScriptContext_throwValue(QScriptContext* self, QScriptValue* valu
 	return new QScriptValue(self->throwValue(*value));
 }
 
-QScriptValue* QScriptContext_throwError(QScriptContext* self, int error, struct seaqt_string text) {
+QScriptValue* QScriptContext_throwError_error_text(QScriptContext* self, int error, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return new QScriptValue(self->throwError(static_cast<QScriptContext::Error>(error), text_QString));
 }
 
-QScriptValue* QScriptContext_throwErrorWithText(QScriptContext* self, struct seaqt_string text) {
+QScriptValue* QScriptContext_throwError_text(QScriptContext* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return new QScriptValue(self->throwError(text_QString));
 }

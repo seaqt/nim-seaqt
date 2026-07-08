@@ -190,7 +190,7 @@ int QActionGroup_metacall(QActionGroup* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QActionGroup_tr(const char* s) {
+struct seaqt_string QActionGroup_tr_s(const char* s) {
 	QString _ret = QActionGroup::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -201,7 +201,7 @@ struct seaqt_string QActionGroup_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QActionGroup_trUtf8(const char* s) {
+struct seaqt_string QActionGroup_trUtf8_s(const char* s) {
 	QString _ret = QActionGroup::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -212,16 +212,16 @@ struct seaqt_string QActionGroup_trUtf8(const char* s) {
 	return _ms;
 }
 
-QAction* QActionGroup_addAction(QActionGroup* self, QAction* a) {
+QAction* QActionGroup_addAction_a(QActionGroup* self, QAction* a) {
 	return self->addAction(a);
 }
 
-QAction* QActionGroup_addActionWithText(QActionGroup* self, struct seaqt_string text) {
+QAction* QActionGroup_addAction_text(QActionGroup* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addAction(text_QString);
 }
 
-QAction* QActionGroup_addAction2(QActionGroup* self, QIcon* icon, struct seaqt_string text) {
+QAction* QActionGroup_addAction_icon_text(QActionGroup* self, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->addAction(*icon, text_QString);
 }
@@ -316,7 +316,7 @@ void QActionGroup_connect_hovered(QActionGroup* self, intptr_t slot, void (*call
 	QActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::hovered), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QActionGroup_tr2(const char* s, const char* c) {
+struct seaqt_string QActionGroup_tr_s_c(const char* s, const char* c) {
 	QString _ret = QActionGroup::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -327,7 +327,7 @@ struct seaqt_string QActionGroup_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QActionGroup_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QActionGroup_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QActionGroup::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -338,7 +338,7 @@ struct seaqt_string QActionGroup_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QActionGroup_trUtf82(const char* s, const char* c) {
+struct seaqt_string QActionGroup_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QActionGroup::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -349,7 +349,7 @@ struct seaqt_string QActionGroup_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QActionGroup_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QActionGroup_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QActionGroup::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

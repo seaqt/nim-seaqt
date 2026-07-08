@@ -23,20 +23,20 @@ QWebEngineHttpRequest* QWebEngineHttpRequest_new() {
 	return new (std::nothrow) QWebEngineHttpRequest();
 }
 
-QWebEngineHttpRequest* QWebEngineHttpRequest_new2(QWebEngineHttpRequest* other) {
-	return new (std::nothrow) QWebEngineHttpRequest(*other);
+QWebEngineHttpRequest* QWebEngineHttpRequest_new_from(QWebEngineHttpRequest* from) {
+	return new (std::nothrow) QWebEngineHttpRequest(*from);
 }
 
-QWebEngineHttpRequest* QWebEngineHttpRequest_new3(QUrl* url) {
+QWebEngineHttpRequest* QWebEngineHttpRequest_new_url(QUrl* url) {
 	return new (std::nothrow) QWebEngineHttpRequest(*url);
 }
 
-QWebEngineHttpRequest* QWebEngineHttpRequest_new4(QUrl* url, int* method) {
+QWebEngineHttpRequest* QWebEngineHttpRequest_new_url_method(QUrl* url, int* method) {
 	return new (std::nothrow) QWebEngineHttpRequest(*url, (const QWebEngineHttpRequest::Method&)(*method));
 }
 
-void QWebEngineHttpRequest_operatorAssign(QWebEngineHttpRequest* self, QWebEngineHttpRequest* other) {
-	self->operator=(*other);
+void QWebEngineHttpRequest_operatorAssign(QWebEngineHttpRequest* self, QWebEngineHttpRequest* from) {
+	self->operator=(*from);
 }
 
 QWebEngineHttpRequest* QWebEngineHttpRequest_postRequest(QUrl* url, struct seaqt_map /* of struct seaqt_string to struct seaqt_string */  postData) {

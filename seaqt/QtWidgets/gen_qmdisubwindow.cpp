@@ -695,12 +695,12 @@ VirtualQMdiSubWindow* QMdiSubWindow_new(const QMdiSubWindow_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQMdiSubWindow(vtbl) : nullptr;
 }
 
-VirtualQMdiSubWindow* QMdiSubWindow_new2(const QMdiSubWindow_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQMdiSubWindow* QMdiSubWindow_new_parent(const QMdiSubWindow_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMdiSubWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMdiSubWindow(vtbl, parent) : nullptr;
 }
 
-VirtualQMdiSubWindow* QMdiSubWindow_new3(const QMdiSubWindow_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQMdiSubWindow* QMdiSubWindow_new_parent_flags(const QMdiSubWindow_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMdiSubWindow>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMdiSubWindow(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -721,7 +721,7 @@ int QMdiSubWindow_metacall(QMdiSubWindow* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMdiSubWindow_tr(const char* s) {
+struct seaqt_string QMdiSubWindow_tr_s(const char* s) {
 	QString _ret = QMdiSubWindow::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -732,7 +732,7 @@ struct seaqt_string QMdiSubWindow_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QMdiSubWindow_trUtf8(const char* s) {
+struct seaqt_string QMdiSubWindow_trUtf8_s(const char* s) {
 	QString _ret = QMdiSubWindow::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -771,7 +771,7 @@ bool QMdiSubWindow_isShaded(const QMdiSubWindow* self) {
 	return self->isShaded();
 }
 
-void QMdiSubWindow_setOption(QMdiSubWindow* self, int option) {
+void QMdiSubWindow_setOption_option(QMdiSubWindow* self, int option) {
 	self->setOption(static_cast<QMdiSubWindow::SubWindowOption>(option));
 }
 
@@ -849,7 +849,7 @@ void QMdiSubWindow_showShaded(QMdiSubWindow* self) {
 	self->showShaded();
 }
 
-struct seaqt_string QMdiSubWindow_tr2(const char* s, const char* c) {
+struct seaqt_string QMdiSubWindow_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMdiSubWindow::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -860,7 +860,7 @@ struct seaqt_string QMdiSubWindow_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMdiSubWindow_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMdiSubWindow_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMdiSubWindow::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -871,7 +871,7 @@ struct seaqt_string QMdiSubWindow_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QMdiSubWindow_trUtf82(const char* s, const char* c) {
+struct seaqt_string QMdiSubWindow_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QMdiSubWindow::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -882,7 +882,7 @@ struct seaqt_string QMdiSubWindow_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMdiSubWindow_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QMdiSubWindow_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMdiSubWindow::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -893,7 +893,7 @@ struct seaqt_string QMdiSubWindow_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QMdiSubWindow_setOption2(QMdiSubWindow* self, int option, bool on) {
+void QMdiSubWindow_setOption_option_on(QMdiSubWindow* self, int option, bool on) {
 	self->setOption(static_cast<QMdiSubWindow::SubWindowOption>(option), on);
 }
 

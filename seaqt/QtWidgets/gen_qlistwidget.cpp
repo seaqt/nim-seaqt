@@ -77,7 +77,7 @@ public:
 	VirtualQListWidgetItem(const QListWidgetItem_VTable* vtbl): QListWidgetItem(), vtbl(vtbl) {}
 	VirtualQListWidgetItem(const QListWidgetItem_VTable* vtbl, const QString& text): QListWidgetItem(text), vtbl(vtbl) {}
 	VirtualQListWidgetItem(const QListWidgetItem_VTable* vtbl, const QIcon& icon, const QString& text): QListWidgetItem(icon, text), vtbl(vtbl) {}
-	VirtualQListWidgetItem(const QListWidgetItem_VTable* vtbl, const QListWidgetItem& other): QListWidgetItem(other), vtbl(vtbl) {}
+	VirtualQListWidgetItem(const QListWidgetItem_VTable* vtbl, const QListWidgetItem& from): QListWidgetItem(from), vtbl(vtbl) {}
 	VirtualQListWidgetItem(const QListWidgetItem_VTable* vtbl, QListWidget* listview): QListWidgetItem(listview), vtbl(vtbl) {}
 	VirtualQListWidgetItem(const QListWidgetItem_VTable* vtbl, QListWidget* listview, int type): QListWidgetItem(listview, type), vtbl(vtbl) {}
 	VirtualQListWidgetItem(const QListWidgetItem_VTable* vtbl, const QString& text, QListWidget* listview): QListWidgetItem(text, listview), vtbl(vtbl) {}
@@ -191,52 +191,52 @@ VirtualQListWidgetItem* QListWidgetItem_new(const QListWidgetItem_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new2(const QListWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQListWidgetItem* QListWidgetItem_new_text(const QListWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, text_QString) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new3(const QListWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text) {
+VirtualQListWidgetItem* QListWidgetItem_new_icon_text(const QListWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, *icon, text_QString) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new4(const QListWidgetItem_VTable* vtbl, size_t vdata, QListWidgetItem* other) {
+VirtualQListWidgetItem* QListWidgetItem_new_from(const QListWidgetItem_VTable* vtbl, size_t vdata, QListWidgetItem* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, *other) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, *from) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new5(const QListWidgetItem_VTable* vtbl, size_t vdata, QListWidget* listview) {
+VirtualQListWidgetItem* QListWidgetItem_new_listview(const QListWidgetItem_VTable* vtbl, size_t vdata, QListWidget* listview) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, listview) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new6(const QListWidgetItem_VTable* vtbl, size_t vdata, QListWidget* listview, int type) {
+VirtualQListWidgetItem* QListWidgetItem_new_listview_type(const QListWidgetItem_VTable* vtbl, size_t vdata, QListWidget* listview, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, listview, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new7(const QListWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text, QListWidget* listview) {
+VirtualQListWidgetItem* QListWidgetItem_new_text_listview(const QListWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text, QListWidget* listview) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, text_QString, listview) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new8(const QListWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text, QListWidget* listview, int type) {
+VirtualQListWidgetItem* QListWidgetItem_new_text_listview_type(const QListWidgetItem_VTable* vtbl, size_t vdata, struct seaqt_string text, QListWidget* listview, int type) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, text_QString, listview, static_cast<int>(type)) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new9(const QListWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QListWidget* listview) {
+VirtualQListWidgetItem* QListWidgetItem_new_icon_text_listview(const QListWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QListWidget* listview) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, *icon, text_QString, listview) : nullptr;
 }
 
-VirtualQListWidgetItem* QListWidgetItem_new10(const QListWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QListWidget* listview, int type) {
+VirtualQListWidgetItem* QListWidgetItem_new_icon_text_listview_type(const QListWidgetItem_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QListWidget* listview, int type) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidgetItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidgetItem(vtbl, *icon, text_QString, listview, static_cast<int>(type)) : nullptr;
@@ -432,8 +432,8 @@ void QListWidgetItem_write(const QListWidgetItem* self, QDataStream* out) {
 	self->write(*out);
 }
 
-void QListWidgetItem_operatorAssign(QListWidgetItem* self, QListWidgetItem* other) {
-	self->operator=(*other);
+void QListWidgetItem_operatorAssign(QListWidgetItem* self, QListWidgetItem* from) {
+	self->operator=(*from);
 }
 
 int QListWidgetItem_type(const QListWidgetItem* self) {
@@ -1252,7 +1252,7 @@ public:
 	friend void QListWidget_virtualbase_editorDestroyed(VirtualQListWidget* self, QObject* editor);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QListWidget::edit(index, trigger, event);
 		}
 
@@ -1262,11 +1262,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QListWidget_virtualbase_edit2(VirtualQListWidget* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QListWidget_virtualbase_edit_index_trigger_event(VirtualQListWidget* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1752,8 +1752,8 @@ public:
 
 	// Wrappers to allow calling protected methods:
 	friend struct seaqt_array /* of QListWidgetItem* */  QListWidget_protectedbase_items(const VirtualQListWidget* self, QMimeData* data);
-	friend QModelIndex* QListWidget_protectedbase_indexFromItem(const VirtualQListWidget* self, QListWidgetItem* item);
-	friend QModelIndex* QListWidget_protectedbase_indexFromItemWithItem(const VirtualQListWidget* self, QListWidgetItem* item);
+	friend QModelIndex* QListWidget_protectedbase_indexFromItem_const_pcQListWidgetItem(const VirtualQListWidget* self, QListWidgetItem* item);
+	friend QModelIndex* QListWidget_protectedbase_indexFromItem_const_pQListWidgetItem(const VirtualQListWidget* self, QListWidgetItem* item);
 	friend QListWidgetItem* QListWidget_protectedbase_itemFromIndex(const VirtualQListWidget* self, QModelIndex* index);
 	friend void QListWidget_protectedbase_resizeContents(VirtualQListWidget* self, int width, int height);
 	friend QSize* QListWidget_protectedbase_contentsSize(const VirtualQListWidget* self);
@@ -1774,7 +1774,7 @@ public:
 	friend void QListWidget_protectedbase_stopAutoScroll(VirtualQListWidget* self);
 	friend void QListWidget_protectedbase_doAutoScroll(VirtualQListWidget* self);
 	friend int QListWidget_protectedbase_dropIndicatorPosition(const VirtualQListWidget* self);
-	friend void QListWidget_protectedbase_setViewportMargins(VirtualQListWidget* self, int left, int top, int right, int bottom);
+	friend void QListWidget_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQListWidget* self, int left, int top, int right, int bottom);
 	friend QMargins* QListWidget_protectedbase_viewportMargins(const VirtualQListWidget* self);
 	friend void QListWidget_protectedbase_drawFrame(VirtualQListWidget* self, QPainter* param1);
 	friend void QListWidget_protectedbase_initStyleOption(const VirtualQListWidget* self, QStyleOptionFrame* option);
@@ -1794,7 +1794,7 @@ VirtualQListWidget* QListWidget_new(const QListWidget_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQListWidget(vtbl) : nullptr;
 }
 
-VirtualQListWidget* QListWidget_new2(const QListWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQListWidget* QListWidget_new_parent(const QListWidget_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQListWidget>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQListWidget(vtbl, parent) : nullptr;
 }
@@ -1815,7 +1815,7 @@ int QListWidget_metacall(QListWidget* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QListWidget_tr(const char* s) {
+struct seaqt_string QListWidget_tr_s(const char* s) {
 	QString _ret = QListWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1826,7 +1826,7 @@ struct seaqt_string QListWidget_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QListWidget_trUtf8(const char* s) {
+struct seaqt_string QListWidget_trUtf8_s(const char* s) {
 	QString _ret = QListWidget::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1849,11 +1849,11 @@ int QListWidget_row(const QListWidget* self, QListWidgetItem* item) {
 	return self->row(item);
 }
 
-void QListWidget_insertItem(QListWidget* self, int row, QListWidgetItem* item) {
+void QListWidget_insertItem_row_item(QListWidget* self, int row, QListWidgetItem* item) {
 	self->insertItem(static_cast<int>(row), item);
 }
 
-void QListWidget_insertItem2(QListWidget* self, int row, struct seaqt_string label) {
+void QListWidget_insertItem_row_label(QListWidget* self, int row, struct seaqt_string label) {
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	self->insertItem(static_cast<int>(row), label_QString);
 }
@@ -1869,12 +1869,12 @@ void QListWidget_insertItems(QListWidget* self, int row, struct seaqt_array /* o
 	self->insertItems(static_cast<int>(row), labels_QList);
 }
 
-void QListWidget_addItem(QListWidget* self, struct seaqt_string label) {
+void QListWidget_addItem_label(QListWidget* self, struct seaqt_string label) {
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	self->addItem(label_QString);
 }
 
-void QListWidget_addItemWithItem(QListWidget* self, QListWidgetItem* item) {
+void QListWidget_addItem_item(QListWidget* self, QListWidgetItem* item) {
 	self->addItem(item);
 }
 
@@ -1901,11 +1901,11 @@ QListWidgetItem* QListWidget_currentItem(const QListWidget* self) {
 	return self->currentItem();
 }
 
-void QListWidget_setCurrentItem(QListWidget* self, QListWidgetItem* item) {
+void QListWidget_setCurrentItem_item(QListWidget* self, QListWidgetItem* item) {
 	self->setCurrentItem(item);
 }
 
-void QListWidget_setCurrentItem2(QListWidget* self, QListWidgetItem* item, int command) {
+void QListWidget_setCurrentItem_item_command(QListWidget* self, QListWidgetItem* item, int command) {
 	self->setCurrentItem(item, static_cast<QItemSelectionModel::SelectionFlags>(command));
 }
 
@@ -1913,19 +1913,19 @@ int QListWidget_currentRow(const QListWidget* self) {
 	return self->currentRow();
 }
 
-void QListWidget_setCurrentRow(QListWidget* self, int row) {
+void QListWidget_setCurrentRow_row(QListWidget* self, int row) {
 	self->setCurrentRow(static_cast<int>(row));
 }
 
-void QListWidget_setCurrentRow2(QListWidget* self, int row, int command) {
+void QListWidget_setCurrentRow_row_command(QListWidget* self, int row, int command) {
 	self->setCurrentRow(static_cast<int>(row), static_cast<QItemSelectionModel::SelectionFlags>(command));
 }
 
-QListWidgetItem* QListWidget_itemAt(const QListWidget* self, QPoint* p) {
+QListWidgetItem* QListWidget_itemAt_p(const QListWidget* self, QPoint* p) {
 	return self->itemAt(*p);
 }
 
-QListWidgetItem* QListWidget_itemAt2(const QListWidget* self, int x, int y) {
+QListWidgetItem* QListWidget_itemAt_x_y(const QListWidget* self, int x, int y) {
 	return self->itemAt(static_cast<int>(x), static_cast<int>(y));
 }
 
@@ -2020,7 +2020,7 @@ void QListWidget_dropEvent(QListWidget* self, QDropEvent* event) {
 	self->dropEvent(event);
 }
 
-void QListWidget_scrollToItem(QListWidget* self, QListWidgetItem* item) {
+void QListWidget_scrollToItem_item(QListWidget* self, QListWidgetItem* item) {
 	self->scrollToItem(item);
 }
 
@@ -2196,7 +2196,7 @@ void QListWidget_connect_itemSelectionChanged(QListWidget* self, intptr_t slot, 
 	QListWidget::connect(self, static_cast<void (QListWidget::*)()>(&QListWidget::itemSelectionChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QListWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QListWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QListWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2207,7 +2207,7 @@ struct seaqt_string QListWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QListWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QListWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QListWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2218,7 +2218,7 @@ struct seaqt_string QListWidget_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QListWidget_trUtf82(const char* s, const char* c) {
+struct seaqt_string QListWidget_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QListWidget::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2229,7 +2229,7 @@ struct seaqt_string QListWidget_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QListWidget_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QListWidget_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QListWidget::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2240,11 +2240,11 @@ struct seaqt_string QListWidget_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QListWidget_sortItemsWithOrder(QListWidget* self, int order) {
+void QListWidget_sortItems_order(QListWidget* self, int order) {
 	self->sortItems(static_cast<Qt::SortOrder>(order));
 }
 
-void QListWidget_scrollToItem2(QListWidget* self, QListWidgetItem* item, int hint) {
+void QListWidget_scrollToItem_item_hint(QListWidget* self, QListWidgetItem* item, int hint) {
 	self->scrollToItem(item, static_cast<QAbstractItemView::ScrollHint>(hint));
 }
 
@@ -2566,7 +2566,7 @@ void QListWidget_virtualbase_editorDestroyed(VirtualQListWidget* self, QObject* 
 	self->QListWidget::editorDestroyed(editor);
 }
 
-bool QListWidget_virtualbase_edit2(VirtualQListWidget* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QListWidget_virtualbase_edit_index_trigger_event(VirtualQListWidget* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QListWidget::edit(*index, static_cast<VirtualQListWidget::EditTrigger>(trigger), event);
 }
@@ -2781,11 +2781,11 @@ struct seaqt_array /* of QListWidgetItem* */  QListWidget_protectedbase_items(co
 	return _out;
 }
 
-QModelIndex* QListWidget_protectedbase_indexFromItem(const VirtualQListWidget* self, QListWidgetItem* item) {
+QModelIndex* QListWidget_protectedbase_indexFromItem_const_pcQListWidgetItem(const VirtualQListWidget* self, QListWidgetItem* item) {
 	return new QModelIndex(self->indexFromItem(item));
 }
 
-QModelIndex* QListWidget_protectedbase_indexFromItemWithItem(const VirtualQListWidget* self, QListWidgetItem* item) {
+QModelIndex* QListWidget_protectedbase_indexFromItem_const_pQListWidgetItem(const VirtualQListWidget* self, QListWidgetItem* item) {
 	return new QModelIndex(self->indexFromItem(item));
 }
 
@@ -2871,7 +2871,7 @@ int QListWidget_protectedbase_dropIndicatorPosition(const VirtualQListWidget* se
 	return static_cast<int>(_ret);
 }
 
-void QListWidget_protectedbase_setViewportMargins(VirtualQListWidget* self, int left, int top, int right, int bottom) {
+void QListWidget_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQListWidget* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

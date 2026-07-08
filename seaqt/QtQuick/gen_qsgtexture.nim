@@ -78,8 +78,8 @@ type cQSGTextureNativeTexture*{.exportc: "QSGTexture__NativeTexture", incomplete
 proc fcQSGTexture_metaObject(self: pointer): pointer {.importc: "QSGTexture_metaObject".}
 proc fcQSGTexture_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGTexture_metacast".}
 proc fcQSGTexture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGTexture_metacall".}
-proc fcQSGTexture_tr(s: cstring): struct_seaqt_string {.importc: "QSGTexture_tr".}
-proc fcQSGTexture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSGTexture_trUtf8".}
+proc fcQSGTexture_trS(s: cstring): struct_seaqt_string {.importc: "QSGTexture_tr_s".}
+proc fcQSGTexture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSGTexture_trUtf8_s".}
 proc fcQSGTexture_textureId(self: pointer): cint {.importc: "QSGTexture_textureId".}
 proc fcQSGTexture_nativeTexture(self: pointer): pointer {.importc: "QSGTexture_nativeTexture".}
 proc fcQSGTexture_textureSize(self: pointer): pointer {.importc: "QSGTexture_textureSize".}
@@ -102,11 +102,11 @@ proc fcQSGTexture_setVerticalWrapMode(self: pointer, vwrap: cint): void {.import
 proc fcQSGTexture_verticalWrapMode(self: pointer): cint {.importc: "QSGTexture_verticalWrapMode".}
 proc fcQSGTexture_convertToNormalizedSourceRect(self: pointer, rect: pointer): pointer {.importc: "QSGTexture_convertToNormalizedSourceRect".}
 proc fcQSGTexture_comparisonKey(self: pointer): cint {.importc: "QSGTexture_comparisonKey".}
-proc fcQSGTexture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGTexture_tr2".}
-proc fcQSGTexture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGTexture_tr3".}
-proc fcQSGTexture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGTexture_trUtf82".}
-proc fcQSGTexture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGTexture_trUtf83".}
-proc fcQSGTexture_updateBindOptionsWithForce(self: pointer, force: bool): void {.importc: "QSGTexture_updateBindOptionsWithForce".}
+proc fcQSGTexture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGTexture_tr_s_c".}
+proc fcQSGTexture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGTexture_tr_s_c_n".}
+proc fcQSGTexture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGTexture_trUtf8_s_c".}
+proc fcQSGTexture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGTexture_trUtf8_s_c_n".}
+proc fcQSGTexture_updateBindOptionsForce(self: pointer, force: bool): void {.importc: "QSGTexture_updateBindOptions_force".}
 proc fcQSGTexture_vdata(self: pointer): ptr pointer {.importc: "QSGTexture_vdata".}
 proc fvdata_cQSGTexture(self: pointer): pointer {.importc: "vdata_QSGTexture".}
 
@@ -152,13 +152,13 @@ proc fcQSGTexture_staticMetaObject(): pointer {.importc: "QSGTexture_staticMetaO
 proc fcQSGDynamicTexture_metaObject(self: pointer): pointer {.importc: "QSGDynamicTexture_metaObject".}
 proc fcQSGDynamicTexture_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGDynamicTexture_metacast".}
 proc fcQSGDynamicTexture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGDynamicTexture_metacall".}
-proc fcQSGDynamicTexture_tr(s: cstring): struct_seaqt_string {.importc: "QSGDynamicTexture_tr".}
-proc fcQSGDynamicTexture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSGDynamicTexture_trUtf8".}
+proc fcQSGDynamicTexture_trS(s: cstring): struct_seaqt_string {.importc: "QSGDynamicTexture_tr_s".}
+proc fcQSGDynamicTexture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSGDynamicTexture_trUtf8_s".}
 proc fcQSGDynamicTexture_updateTexture(self: pointer): bool {.importc: "QSGDynamicTexture_updateTexture".}
-proc fcQSGDynamicTexture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGDynamicTexture_tr2".}
-proc fcQSGDynamicTexture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGDynamicTexture_tr3".}
-proc fcQSGDynamicTexture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGDynamicTexture_trUtf82".}
-proc fcQSGDynamicTexture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGDynamicTexture_trUtf83".}
+proc fcQSGDynamicTexture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGDynamicTexture_tr_s_c".}
+proc fcQSGDynamicTexture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGDynamicTexture_tr_s_c_n".}
+proc fcQSGDynamicTexture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGDynamicTexture_trUtf8_s_c".}
+proc fcQSGDynamicTexture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGDynamicTexture_trUtf8_s_c_n".}
 proc fcQSGDynamicTexture_vdata(self: pointer): ptr pointer {.importc: "QSGDynamicTexture_vdata".}
 proc fvdata_cQSGDynamicTexture(self: pointer): pointer {.importc: "vdata_QSGDynamicTexture".}
 
@@ -215,13 +215,13 @@ proc metacall*(self: gen_qsgtexture_types.QSGTexture, param1: cint, param2: cint
   fcQSGTexture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsgtexture_types.QSGTexture, s: cstring): string =
-  let v_ms = fcQSGTexture_tr(s)
+  let v_ms = fcQSGTexture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgtexture_types.QSGTexture, s: cstring): string =
-  let v_ms = fcQSGTexture_trUtf8(s)
+  let v_ms = fcQSGTexture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -293,31 +293,31 @@ proc comparisonKey*(self: gen_qsgtexture_types.QSGTexture): cint =
   fcQSGTexture_comparisonKey(self.h)
 
 proc tr*(_: type gen_qsgtexture_types.QSGTexture, s: cstring, c: cstring): string =
-  let v_ms = fcQSGTexture_tr2(s, c)
+  let v_ms = fcQSGTexture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsgtexture_types.QSGTexture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGTexture_tr3(s, c, n)
+  let v_ms = fcQSGTexture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgtexture_types.QSGTexture, s: cstring, c: cstring): string =
-  let v_ms = fcQSGTexture_trUtf82(s, c)
+  let v_ms = fcQSGTexture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgtexture_types.QSGTexture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGTexture_trUtf83(s, c, n)
+  let v_ms = fcQSGTexture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc updateBindOptions*(self: gen_qsgtexture_types.QSGTexture, force: bool): void =
-  fcQSGTexture_updateBindOptionsWithForce(self.h, force)
+  fcQSGTexture_updateBindOptionsForce(self.h, force)
 
 type QSGTexturemetaObjectProc* = proc(self: QSGTexture): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSGTexturemetacastProc* = proc(self: QSGTexture, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -776,13 +776,13 @@ proc metacall*(self: gen_qsgtexture_types.QSGDynamicTexture, param1: cint, param
   fcQSGDynamicTexture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsgtexture_types.QSGDynamicTexture, s: cstring): string =
-  let v_ms = fcQSGDynamicTexture_tr(s)
+  let v_ms = fcQSGDynamicTexture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgtexture_types.QSGDynamicTexture, s: cstring): string =
-  let v_ms = fcQSGDynamicTexture_trUtf8(s)
+  let v_ms = fcQSGDynamicTexture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -791,25 +791,25 @@ proc updateTexture*(self: gen_qsgtexture_types.QSGDynamicTexture): bool =
   fcQSGDynamicTexture_updateTexture(self.h)
 
 proc tr*(_: type gen_qsgtexture_types.QSGDynamicTexture, s: cstring, c: cstring): string =
-  let v_ms = fcQSGDynamicTexture_tr2(s, c)
+  let v_ms = fcQSGDynamicTexture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsgtexture_types.QSGDynamicTexture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGDynamicTexture_tr3(s, c, n)
+  let v_ms = fcQSGDynamicTexture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgtexture_types.QSGDynamicTexture, s: cstring, c: cstring): string =
-  let v_ms = fcQSGDynamicTexture_trUtf82(s, c)
+  let v_ms = fcQSGDynamicTexture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgtexture_types.QSGDynamicTexture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGDynamicTexture_trUtf83(s, c, n)
+  let v_ms = fcQSGDynamicTexture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

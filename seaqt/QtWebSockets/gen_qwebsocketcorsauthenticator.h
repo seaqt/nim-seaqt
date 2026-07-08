@@ -20,11 +20,11 @@ class QWebSocketCorsAuthenticator;
 typedef struct QWebSocketCorsAuthenticator QWebSocketCorsAuthenticator;
 #endif
 
-QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new(struct seaqt_string origin);
-QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new2(QWebSocketCorsAuthenticator* other);
+QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new_origin(struct seaqt_string origin);
+QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new_from(QWebSocketCorsAuthenticator* from);
 
 void QWebSocketCorsAuthenticator_swap(QWebSocketCorsAuthenticator* self, QWebSocketCorsAuthenticator* other);
-void QWebSocketCorsAuthenticator_operatorAssign(QWebSocketCorsAuthenticator* self, QWebSocketCorsAuthenticator* other);
+void QWebSocketCorsAuthenticator_operatorAssign(QWebSocketCorsAuthenticator* self, QWebSocketCorsAuthenticator* from);
 struct seaqt_string QWebSocketCorsAuthenticator_origin(const QWebSocketCorsAuthenticator* self);
 void QWebSocketCorsAuthenticator_setAllowed(QWebSocketCorsAuthenticator* self, bool allowed);
 bool QWebSocketCorsAuthenticator_allowed(const QWebSocketCorsAuthenticator* self);

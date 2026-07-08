@@ -17,7 +17,7 @@ QSemaphore* QSemaphore_new() {
 	return new (std::nothrow) QSemaphore();
 }
 
-QSemaphore* QSemaphore_new2(int n) {
+QSemaphore* QSemaphore_new_n(int n) {
 	return new (std::nothrow) QSemaphore(static_cast<int>(n));
 }
 
@@ -29,7 +29,7 @@ bool QSemaphore_tryAcquire(QSemaphore* self) {
 	return self->tryAcquire();
 }
 
-bool QSemaphore_tryAcquire2(QSemaphore* self, int n, int timeout) {
+bool QSemaphore_tryAcquire_n_timeout(QSemaphore* self, int n, int timeout) {
 	return self->tryAcquire(static_cast<int>(n), static_cast<int>(timeout));
 }
 
@@ -41,15 +41,15 @@ int QSemaphore_available(const QSemaphore* self) {
 	return self->available();
 }
 
-void QSemaphore_acquireWithInt(QSemaphore* self, int n) {
+void QSemaphore_acquire_n(QSemaphore* self, int n) {
 	self->acquire(static_cast<int>(n));
 }
 
-bool QSemaphore_tryAcquireWithInt(QSemaphore* self, int n) {
+bool QSemaphore_tryAcquire_n(QSemaphore* self, int n) {
 	return self->tryAcquire(static_cast<int>(n));
 }
 
-void QSemaphore_releaseWithInt(QSemaphore* self, int n) {
+void QSemaphore_release_n(QSemaphore* self, int n) {
 	self->release(static_cast<int>(n));
 }
 
@@ -61,19 +61,19 @@ QSemaphoreReleaser* QSemaphoreReleaser_new() {
 	return new (std::nothrow) QSemaphoreReleaser();
 }
 
-QSemaphoreReleaser* QSemaphoreReleaser_new2(QSemaphore* sem) {
+QSemaphoreReleaser* QSemaphoreReleaser_new_QSemaphore(QSemaphore* sem) {
 	return new (std::nothrow) QSemaphoreReleaser(*sem);
 }
 
-QSemaphoreReleaser* QSemaphoreReleaser_new3(QSemaphore* sem) {
+QSemaphoreReleaser* QSemaphoreReleaser_new_pQSemaphore(QSemaphore* sem) {
 	return new (std::nothrow) QSemaphoreReleaser(sem);
 }
 
-QSemaphoreReleaser* QSemaphoreReleaser_new4(QSemaphore* sem, int n) {
+QSemaphoreReleaser* QSemaphoreReleaser_new_QSemaphore_int(QSemaphore* sem, int n) {
 	return new (std::nothrow) QSemaphoreReleaser(*sem, static_cast<int>(n));
 }
 
-QSemaphoreReleaser* QSemaphoreReleaser_new5(QSemaphore* sem, int n) {
+QSemaphoreReleaser* QSemaphoreReleaser_new_pQSemaphore_int(QSemaphore* sem, int n) {
 	return new (std::nothrow) QSemaphoreReleaser(sem, static_cast<int>(n));
 }
 

@@ -198,12 +198,12 @@ public:
 	friend bool QMediaRecorder_protectedbase_isSignalConnected(const VirtualQMediaRecorder* self, QMetaMethod* signal);
 };
 
-VirtualQMediaRecorder* QMediaRecorder_new(const QMediaRecorder_VTable* vtbl, size_t vdata, QMediaObject* mediaObject) {
+VirtualQMediaRecorder* QMediaRecorder_new_mediaObject(const QMediaRecorder_VTable* vtbl, size_t vdata, QMediaObject* mediaObject) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMediaRecorder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMediaRecorder(vtbl, mediaObject) : nullptr;
 }
 
-VirtualQMediaRecorder* QMediaRecorder_new2(const QMediaRecorder_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent) {
+VirtualQMediaRecorder* QMediaRecorder_new_mediaObject_parent(const QMediaRecorder_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMediaRecorder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMediaRecorder(vtbl, mediaObject, parent) : nullptr;
 }
@@ -225,7 +225,7 @@ int QMediaRecorder_metacall(QMediaRecorder* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMediaRecorder_tr(const char* s) {
+struct seaqt_string QMediaRecorder_tr_s(const char* s) {
 	QString _ret = QMediaRecorder::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -236,7 +236,7 @@ struct seaqt_string QMediaRecorder_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QMediaRecorder_trUtf8(const char* s) {
+struct seaqt_string QMediaRecorder_trUtf8_s(const char* s) {
 	QString _ret = QMediaRecorder::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -479,7 +479,7 @@ void QMediaRecorder_setContainerFormat(QMediaRecorder* self, struct seaqt_string
 	self->setContainerFormat(container_QString);
 }
 
-void QMediaRecorder_setEncodingSettings(QMediaRecorder* self, QAudioEncoderSettings* audioSettings) {
+void QMediaRecorder_setEncodingSettings_audioSettings(QMediaRecorder* self, QAudioEncoderSettings* audioSettings) {
 	self->setEncodingSettings(*audioSettings);
 }
 
@@ -643,11 +643,11 @@ void QMediaRecorder_connect_actualLocationChanged(QMediaRecorder* self, intptr_t
 	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(const QUrl&)>(&QMediaRecorder::actualLocationChanged), self, local_caller{slot, callback, release});
 }
 
-void QMediaRecorder_errorWithError(QMediaRecorder* self, int error) {
+void QMediaRecorder_error_error(QMediaRecorder* self, int error) {
 	self->error(static_cast<QMediaRecorder::Error>(error));
 }
 
-void QMediaRecorder_connect_errorWithError(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_error_error(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -707,12 +707,12 @@ void QMediaRecorder_connect_metaDataChanged(QMediaRecorder* self, intptr_t slot,
 	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::metaDataChanged), self, local_caller{slot, callback, release});
 }
 
-void QMediaRecorder_metaDataChanged2(QMediaRecorder* self, struct seaqt_string key, QVariant* value) {
+void QMediaRecorder_metaDataChanged_key_value(QMediaRecorder* self, struct seaqt_string key, QVariant* value) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	self->metaDataChanged(key_QString, *value);
 }
 
-void QMediaRecorder_connect_metaDataChanged2(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_metaDataChanged_key_value(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct seaqt_string, QVariant*);
@@ -734,11 +734,11 @@ void QMediaRecorder_connect_metaDataChanged2(QMediaRecorder* self, intptr_t slot
 	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(const QString&, const QVariant&)>(&QMediaRecorder::metaDataChanged), self, local_caller{slot, callback, release});
 }
 
-void QMediaRecorder_availabilityChanged(QMediaRecorder* self, bool available) {
+void QMediaRecorder_availabilityChanged_available(QMediaRecorder* self, bool available) {
 	self->availabilityChanged(available);
 }
 
-void QMediaRecorder_connect_availabilityChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_availabilityChanged_available(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -750,11 +750,11 @@ void QMediaRecorder_connect_availabilityChanged(QMediaRecorder* self, intptr_t s
 	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::availabilityChanged), self, local_caller{slot, callback, release});
 }
 
-void QMediaRecorder_availabilityChangedWithAvailability(QMediaRecorder* self, int availability) {
+void QMediaRecorder_availabilityChanged_availability(QMediaRecorder* self, int availability) {
 	self->availabilityChanged(static_cast<QMultimedia::AvailabilityStatus>(availability));
 }
 
-void QMediaRecorder_connect_availabilityChangedWithAvailability(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_availabilityChanged_availability(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -767,7 +767,7 @@ void QMediaRecorder_connect_availabilityChangedWithAvailability(QMediaRecorder* 
 	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMultimedia::AvailabilityStatus)>(&QMediaRecorder::availabilityChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMediaRecorder_tr2(const char* s, const char* c) {
+struct seaqt_string QMediaRecorder_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMediaRecorder::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -778,7 +778,7 @@ struct seaqt_string QMediaRecorder_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMediaRecorder_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMediaRecorder_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaRecorder::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -789,7 +789,7 @@ struct seaqt_string QMediaRecorder_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QMediaRecorder_trUtf82(const char* s, const char* c) {
+struct seaqt_string QMediaRecorder_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QMediaRecorder::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -800,7 +800,7 @@ struct seaqt_string QMediaRecorder_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMediaRecorder_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QMediaRecorder_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaRecorder::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -811,7 +811,7 @@ struct seaqt_string QMediaRecorder_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-struct seaqt_array /* of int */  QMediaRecorder_supportedAudioSampleRatesWithSettings(const QMediaRecorder* self, QAudioEncoderSettings* settings) {
+struct seaqt_array /* of int */  QMediaRecorder_supportedAudioSampleRates_settings(const QMediaRecorder* self, QAudioEncoderSettings* settings) {
 	QList<int> _ret = self->supportedAudioSampleRates(*settings);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	int* _arr = static_cast<int*>(malloc(sizeof(int) * _ret.length()));
@@ -824,7 +824,7 @@ struct seaqt_array /* of int */  QMediaRecorder_supportedAudioSampleRatesWithSet
 	return _out;
 }
 
-struct seaqt_array /* of int */  QMediaRecorder_supportedAudioSampleRates2(const QMediaRecorder* self, QAudioEncoderSettings* settings, bool* continuous) {
+struct seaqt_array /* of int */  QMediaRecorder_supportedAudioSampleRates_settings_continuous(const QMediaRecorder* self, QAudioEncoderSettings* settings, bool* continuous) {
 	QList<int> _ret = self->supportedAudioSampleRates(*settings, continuous);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	int* _arr = static_cast<int*>(malloc(sizeof(int) * _ret.length()));
@@ -837,7 +837,7 @@ struct seaqt_array /* of int */  QMediaRecorder_supportedAudioSampleRates2(const
 	return _out;
 }
 
-struct seaqt_array /* of QSize* */  QMediaRecorder_supportedResolutionsWithSettings(const QMediaRecorder* self, QVideoEncoderSettings* settings) {
+struct seaqt_array /* of QSize* */  QMediaRecorder_supportedResolutions_settings(const QMediaRecorder* self, QVideoEncoderSettings* settings) {
 	QList<QSize> _ret = self->supportedResolutions(*settings);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QSize** _arr = static_cast<QSize**>(malloc(sizeof(QSize*) * _ret.length()));
@@ -850,7 +850,7 @@ struct seaqt_array /* of QSize* */  QMediaRecorder_supportedResolutionsWithSetti
 	return _out;
 }
 
-struct seaqt_array /* of QSize* */  QMediaRecorder_supportedResolutions2(const QMediaRecorder* self, QVideoEncoderSettings* settings, bool* continuous) {
+struct seaqt_array /* of QSize* */  QMediaRecorder_supportedResolutions_settings_continuous(const QMediaRecorder* self, QVideoEncoderSettings* settings, bool* continuous) {
 	QList<QSize> _ret = self->supportedResolutions(*settings, continuous);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QSize** _arr = static_cast<QSize**>(malloc(sizeof(QSize*) * _ret.length()));
@@ -863,7 +863,7 @@ struct seaqt_array /* of QSize* */  QMediaRecorder_supportedResolutions2(const Q
 	return _out;
 }
 
-struct seaqt_array /* of double */  QMediaRecorder_supportedFrameRatesWithSettings(const QMediaRecorder* self, QVideoEncoderSettings* settings) {
+struct seaqt_array /* of double */  QMediaRecorder_supportedFrameRates_settings(const QMediaRecorder* self, QVideoEncoderSettings* settings) {
 	QList<qreal> _ret = self->supportedFrameRates(*settings);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	double* _arr = static_cast<double*>(malloc(sizeof(double) * _ret.length()));
@@ -876,7 +876,7 @@ struct seaqt_array /* of double */  QMediaRecorder_supportedFrameRatesWithSettin
 	return _out;
 }
 
-struct seaqt_array /* of double */  QMediaRecorder_supportedFrameRates2(const QMediaRecorder* self, QVideoEncoderSettings* settings, bool* continuous) {
+struct seaqt_array /* of double */  QMediaRecorder_supportedFrameRates_settings_continuous(const QMediaRecorder* self, QVideoEncoderSettings* settings, bool* continuous) {
 	QList<qreal> _ret = self->supportedFrameRates(*settings, continuous);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	double* _arr = static_cast<double*>(malloc(sizeof(double) * _ret.length()));
@@ -889,11 +889,11 @@ struct seaqt_array /* of double */  QMediaRecorder_supportedFrameRates2(const QM
 	return _out;
 }
 
-void QMediaRecorder_setEncodingSettings2(QMediaRecorder* self, QAudioEncoderSettings* audioSettings, QVideoEncoderSettings* videoSettings) {
+void QMediaRecorder_setEncodingSettings_audioSettings_videoSettings(QMediaRecorder* self, QAudioEncoderSettings* audioSettings, QVideoEncoderSettings* videoSettings) {
 	self->setEncodingSettings(*audioSettings, *videoSettings);
 }
 
-void QMediaRecorder_setEncodingSettings3(QMediaRecorder* self, QAudioEncoderSettings* audioSettings, QVideoEncoderSettings* videoSettings, struct seaqt_string containerMimeType) {
+void QMediaRecorder_setEncodingSettings_audioSettings_videoSettings_containerMimeType(QMediaRecorder* self, QAudioEncoderSettings* audioSettings, QVideoEncoderSettings* videoSettings, struct seaqt_string containerMimeType) {
 	QString containerMimeType_QString = QString::fromUtf8(containerMimeType.data, containerMimeType.len);
 	self->setEncodingSettings(*audioSettings, *videoSettings, containerMimeType_QString);
 }

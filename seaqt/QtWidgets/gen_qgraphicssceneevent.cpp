@@ -50,7 +50,7 @@ QGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new() {
 	return new (std::nothrow) QGraphicsSceneMouseEvent();
 }
 
-QGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new2(int type) {
+QGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new_type(int type) {
 	return new (std::nothrow) QGraphicsSceneMouseEvent(static_cast<QEvent::Type>(type));
 }
 
@@ -183,7 +183,7 @@ QGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new() {
 	return new (std::nothrow) QGraphicsSceneWheelEvent();
 }
 
-QGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new2(int type) {
+QGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new_type(int type) {
 	return new (std::nothrow) QGraphicsSceneWheelEvent(static_cast<QEvent::Type>(type));
 }
 
@@ -258,7 +258,7 @@ QGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new() {
 	return new (std::nothrow) QGraphicsSceneContextMenuEvent();
 }
 
-QGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new2(int type) {
+QGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new_type(int type) {
 	return new (std::nothrow) QGraphicsSceneContextMenuEvent(static_cast<QEvent::Type>(type));
 }
 
@@ -316,7 +316,7 @@ QGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new() {
 	return new (std::nothrow) QGraphicsSceneHoverEvent();
 }
 
-QGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new2(int type) {
+QGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new_type(int type) {
 	return new (std::nothrow) QGraphicsSceneHoverEvent(static_cast<QEvent::Type>(type));
 }
 
@@ -389,7 +389,7 @@ QGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new() {
 	return new (std::nothrow) QGraphicsSceneHelpEvent();
 }
 
-QGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new2(int type) {
+QGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new_type(int type) {
 	return new (std::nothrow) QGraphicsSceneHelpEvent(static_cast<QEvent::Type>(type));
 }
 
@@ -421,7 +421,7 @@ QGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new() {
 	return new (std::nothrow) QGraphicsSceneDragDropEvent();
 }
 
-QGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new2(int type) {
+QGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new_type(int type) {
 	return new (std::nothrow) QGraphicsSceneDragDropEvent(static_cast<QEvent::Type>(type));
 }
 

@@ -27,8 +27,8 @@ typedef struct QSizeF QSizeF;
 #endif
 
 QSize* QSize_new();
-QSize* QSize_new2(int w, int h);
-QSize* QSize_new3(QSize* param1);
+QSize* QSize_new_w_h(int w, int h);
+QSize* QSize_new_from(QSize* from);
 
 bool QSize_isNull(const QSize* self);
 bool QSize_isEmpty(const QSize* self);
@@ -39,10 +39,10 @@ void QSize_setWidth(QSize* self, int w);
 void QSize_setHeight(QSize* self, int h);
 void QSize_transpose(QSize* self);
 QSize* QSize_transposed(const QSize* self);
-void QSize_scale(QSize* self, int w, int h, int mode);
-void QSize_scale2(QSize* self, QSize* s, int mode);
-QSize* QSize_scaled(const QSize* self, int w, int h, int mode);
-QSize* QSize_scaled2(const QSize* self, QSize* s, int mode);
+void QSize_scale_w_h_mode(QSize* self, int w, int h, int mode);
+void QSize_scale_s_mode(QSize* self, QSize* s, int mode);
+QSize* QSize_scaled_w_h_mode(const QSize* self, int w, int h, int mode);
+QSize* QSize_scaled_s_mode(const QSize* self, QSize* s, int mode);
 QSize* QSize_expandedTo(const QSize* self, QSize* param1);
 QSize* QSize_boundedTo(const QSize* self, QSize* param1);
 QSize* QSize_grownBy(const QSize* self, QMargins* m);
@@ -51,14 +51,14 @@ QSize* QSize_operatorPlusAssign(QSize* self, QSize* param1);
 QSize* QSize_operatorMinusAssign(QSize* self, QSize* param1);
 QSize* QSize_operatorMultiplyAssign(QSize* self, double c);
 QSize* QSize_operatorDivideAssign(QSize* self, double c);
-void QSize_operatorAssign(QSize* self, QSize* param1);
+void QSize_operatorAssign(QSize* self, QSize* from);
 
 void QSize_delete(QSize* self);
 
 QSizeF* QSizeF_new();
-QSizeF* QSizeF_new2(QSize* sz);
-QSizeF* QSizeF_new3(double w, double h);
-QSizeF* QSizeF_new4(QSizeF* param1);
+QSizeF* QSizeF_new_sz(QSize* sz);
+QSizeF* QSizeF_new_w_h(double w, double h);
+QSizeF* QSizeF_new_from(QSizeF* from);
 
 bool QSizeF_isNull(const QSizeF* self);
 bool QSizeF_isEmpty(const QSizeF* self);
@@ -69,10 +69,10 @@ void QSizeF_setWidth(QSizeF* self, double w);
 void QSizeF_setHeight(QSizeF* self, double h);
 void QSizeF_transpose(QSizeF* self);
 QSizeF* QSizeF_transposed(const QSizeF* self);
-void QSizeF_scale(QSizeF* self, double w, double h, int mode);
-void QSizeF_scale2(QSizeF* self, QSizeF* s, int mode);
-QSizeF* QSizeF_scaled(const QSizeF* self, double w, double h, int mode);
-QSizeF* QSizeF_scaled2(const QSizeF* self, QSizeF* s, int mode);
+void QSizeF_scale_w_h_mode(QSizeF* self, double w, double h, int mode);
+void QSizeF_scale_s_mode(QSizeF* self, QSizeF* s, int mode);
+QSizeF* QSizeF_scaled_w_h_mode(const QSizeF* self, double w, double h, int mode);
+QSizeF* QSizeF_scaled_s_mode(const QSizeF* self, QSizeF* s, int mode);
 QSizeF* QSizeF_expandedTo(const QSizeF* self, QSizeF* param1);
 QSizeF* QSizeF_boundedTo(const QSizeF* self, QSizeF* param1);
 QSizeF* QSizeF_grownBy(const QSizeF* self, QMarginsF* m);
@@ -82,7 +82,7 @@ QSizeF* QSizeF_operatorMinusAssign(QSizeF* self, QSizeF* param1);
 QSizeF* QSizeF_operatorMultiplyAssign(QSizeF* self, double c);
 QSizeF* QSizeF_operatorDivideAssign(QSizeF* self, double c);
 QSize* QSizeF_toSize(const QSizeF* self);
-void QSizeF_operatorAssign(QSizeF* self, QSizeF* param1);
+void QSizeF_operatorAssign(QSizeF* self, QSizeF* from);
 
 void QSizeF_delete(QSizeF* self);
 

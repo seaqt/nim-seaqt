@@ -75,8 +75,8 @@ type cQCompleter*{.exportc: "QCompleter", incompleteStruct.} = object
 proc fcQCompleter_metaObject(self: pointer): pointer {.importc: "QCompleter_metaObject".}
 proc fcQCompleter_metacast(self: pointer, param1: cstring): pointer {.importc: "QCompleter_metacast".}
 proc fcQCompleter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCompleter_metacall".}
-proc fcQCompleter_tr(s: cstring): struct_seaqt_string {.importc: "QCompleter_tr".}
-proc fcQCompleter_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCompleter_trUtf8".}
+proc fcQCompleter_trS(s: cstring): struct_seaqt_string {.importc: "QCompleter_tr_s".}
+proc fcQCompleter_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCompleter_trUtf8_s".}
 proc fcQCompleter_setWidget(self: pointer, widget: pointer): void {.importc: "QCompleter_setWidget".}
 proc fcQCompleter_widget(self: pointer): pointer {.importc: "QCompleter_widget".}
 proc fcQCompleter_setModel(self: pointer, c: pointer): void {.importc: "QCompleter_setModel".}
@@ -110,19 +110,19 @@ proc fcQCompleter_complete(self: pointer): void {.importc: "QCompleter_complete"
 proc fcQCompleter_setWrapAround(self: pointer, wrap: bool): void {.importc: "QCompleter_setWrapAround".}
 proc fcQCompleter_pathFromIndex(self: pointer, index: pointer): struct_seaqt_string {.importc: "QCompleter_pathFromIndex".}
 proc fcQCompleter_splitPath(self: pointer, path: struct_seaqt_string): struct_seaqt_array {.importc: "QCompleter_splitPath".}
-proc fcQCompleter_activated(self: pointer, text: struct_seaqt_string): void {.importc: "QCompleter_activated".}
-proc fcQCompleter_connect_activated(self: pointer, slot: int, callback: proc (slot: int, text: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_activated".}
-proc fcQCompleter_activatedWithIndex(self: pointer, index: pointer): void {.importc: "QCompleter_activatedWithIndex".}
-proc fcQCompleter_connect_activatedWithIndex(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_activatedWithIndex".}
-proc fcQCompleter_highlighted(self: pointer, text: struct_seaqt_string): void {.importc: "QCompleter_highlighted".}
-proc fcQCompleter_connect_highlighted(self: pointer, slot: int, callback: proc (slot: int, text: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_highlighted".}
-proc fcQCompleter_highlightedWithIndex(self: pointer, index: pointer): void {.importc: "QCompleter_highlightedWithIndex".}
-proc fcQCompleter_connect_highlightedWithIndex(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_highlightedWithIndex".}
-proc fcQCompleter_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCompleter_tr2".}
-proc fcQCompleter_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCompleter_tr3".}
-proc fcQCompleter_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCompleter_trUtf82".}
-proc fcQCompleter_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCompleter_trUtf83".}
-proc fcQCompleter_completeWithRect(self: pointer, rect: pointer): void {.importc: "QCompleter_completeWithRect".}
+proc fcQCompleter_activatedText(self: pointer, text: struct_seaqt_string): void {.importc: "QCompleter_activated_text".}
+proc fcQCompleter_connect_activatedText(self: pointer, slot: int, callback: proc (slot: int, text: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_activated_text".}
+proc fcQCompleter_activatedIndex(self: pointer, index: pointer): void {.importc: "QCompleter_activated_index".}
+proc fcQCompleter_connect_activatedIndex(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_activated_index".}
+proc fcQCompleter_highlightedText(self: pointer, text: struct_seaqt_string): void {.importc: "QCompleter_highlighted_text".}
+proc fcQCompleter_connect_highlightedText(self: pointer, slot: int, callback: proc (slot: int, text: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_highlighted_text".}
+proc fcQCompleter_highlightedIndex(self: pointer, index: pointer): void {.importc: "QCompleter_highlighted_index".}
+proc fcQCompleter_connect_highlightedIndex(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_highlighted_index".}
+proc fcQCompleter_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCompleter_tr_s_c".}
+proc fcQCompleter_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCompleter_tr_s_c_n".}
+proc fcQCompleter_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCompleter_trUtf8_s_c".}
+proc fcQCompleter_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCompleter_trUtf8_s_c_n".}
+proc fcQCompleter_completeRect(self: pointer, rect: pointer): void {.importc: "QCompleter_complete_rect".}
 proc fcQCompleter_vdata(self: pointer): ptr pointer {.importc: "QCompleter_vdata".}
 proc fvdata_cQCompleter(self: pointer): pointer {.importc: "vdata_QCompleter".}
 
@@ -157,11 +157,11 @@ proc fcQCompleter_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQCompleter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCompleter_protectedbase_receivers".}
 proc fcQCompleter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCompleter_protectedbase_isSignalConnected".}
 proc fcQCompleter_new(vtbl: pointer, vdata: csize_t): ptr cQCompleter {.importc: "QCompleter_new".}
-proc fcQCompleter_new2(vtbl: pointer, vdata: csize_t, model: pointer): ptr cQCompleter {.importc: "QCompleter_new2".}
-proc fcQCompleter_new3(vtbl: pointer, vdata: csize_t, completions: struct_seaqt_array): ptr cQCompleter {.importc: "QCompleter_new3".}
-proc fcQCompleter_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new4".}
-proc fcQCompleter_new5(vtbl: pointer, vdata: csize_t, model: pointer, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new5".}
-proc fcQCompleter_new6(vtbl: pointer, vdata: csize_t, completions: struct_seaqt_array, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new6".}
+proc fcQCompleter_new2(vtbl: pointer, vdata: csize_t, model: pointer): ptr cQCompleter {.importc: "QCompleter_new_model".}
+proc fcQCompleter_new3(vtbl: pointer, vdata: csize_t, completions: struct_seaqt_array): ptr cQCompleter {.importc: "QCompleter_new_completions".}
+proc fcQCompleter_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new_parent".}
+proc fcQCompleter_new5(vtbl: pointer, vdata: csize_t, model: pointer, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new_model_parent".}
+proc fcQCompleter_new6(vtbl: pointer, vdata: csize_t, completions: struct_seaqt_array, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new_completions_parent".}
 proc fcQCompleter_staticMetaObject(): pointer {.importc: "QCompleter_staticMetaObject".}
 
 proc metaObject*(self: gen_qcompleter_types.QCompleter): gen_qobjectdefs_types.QMetaObject =
@@ -174,13 +174,13 @@ proc metacall*(self: gen_qcompleter_types.QCompleter, param1: cint, param2: cint
   fcQCompleter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcompleter_types.QCompleter, s: cstring): string =
-  let v_ms = fcQCompleter_tr(s)
+  let v_ms = fcQCompleter_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcompleter_types.QCompleter, s: cstring): string =
-  let v_ms = fcQCompleter_trUtf8(s)
+  let v_ms = fcQCompleter_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -303,11 +303,11 @@ proc splitPath*(self: gen_qcompleter_types.QCompleter, path: openArray[char]): s
   vx_ret
 
 proc activated*(self: gen_qcompleter_types.QCompleter, text: openArray[char]): void =
-  fcQCompleter_activated(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQCompleter_activatedText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-type QCompleteractivatedSlot* = proc(text: openArray[char])
-proc fcQCompleter_slot_callback_activated(slot: int, text: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QCompleteractivatedSlot](cast[pointer](slot))
+type QCompleteractivatedTextSlot* = proc(text: openArray[char])
+proc fcQCompleter_slot_callback_activatedText(slot: int, text: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QCompleteractivatedTextSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
@@ -315,42 +315,42 @@ proc fcQCompleter_slot_callback_activated(slot: int, text: struct_seaqt_string) 
 
   nimfunc[](slotval1)
 
-proc fcQCompleter_slot_callback_activated_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QCompleteractivatedSlot](cast[pointer](slot))
+proc fcQCompleter_slot_callback_activatedText_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCompleteractivatedTextSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onActivated*(self: gen_qcompleter_types.QCompleter, slot: QCompleteractivatedSlot) =
-  var tmp = new QCompleteractivatedSlot
+proc onActivated*(self: gen_qcompleter_types.QCompleter, slot: QCompleteractivatedTextSlot) =
+  var tmp = new QCompleteractivatedTextSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_activated(self.h, cast[int](addr tmp[]), fcQCompleter_slot_callback_activated, fcQCompleter_slot_callback_activated_release)
+  fcQCompleter_connect_activatedText(self.h, cast[int](addr tmp[]), fcQCompleter_slot_callback_activatedText, fcQCompleter_slot_callback_activatedText_release)
 
 proc activated*(self: gen_qcompleter_types.QCompleter, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQCompleter_activatedWithIndex(self.h, index.h)
+  fcQCompleter_activatedIndex(self.h, index.h)
 
-type QCompleteractivatedWithIndexSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc fcQCompleter_slot_callback_activatedWithIndex(slot: int, index: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QCompleteractivatedWithIndexSlot](cast[pointer](slot))
+type QCompleteractivatedIndexSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
+proc fcQCompleter_slot_callback_activatedIndex(slot: int, index: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QCompleteractivatedIndexSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
 
   nimfunc[](slotval1)
 
-proc fcQCompleter_slot_callback_activatedWithIndex_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QCompleteractivatedWithIndexSlot](cast[pointer](slot))
+proc fcQCompleter_slot_callback_activatedIndex_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCompleteractivatedIndexSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onActivated*(self: gen_qcompleter_types.QCompleter, slot: QCompleteractivatedWithIndexSlot) =
-  var tmp = new QCompleteractivatedWithIndexSlot
+proc onActivated*(self: gen_qcompleter_types.QCompleter, slot: QCompleteractivatedIndexSlot) =
+  var tmp = new QCompleteractivatedIndexSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_activatedWithIndex(self.h, cast[int](addr tmp[]), fcQCompleter_slot_callback_activatedWithIndex, fcQCompleter_slot_callback_activatedWithIndex_release)
+  fcQCompleter_connect_activatedIndex(self.h, cast[int](addr tmp[]), fcQCompleter_slot_callback_activatedIndex, fcQCompleter_slot_callback_activatedIndex_release)
 
 proc highlighted*(self: gen_qcompleter_types.QCompleter, text: openArray[char]): void =
-  fcQCompleter_highlighted(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQCompleter_highlightedText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
-type QCompleterhighlightedSlot* = proc(text: openArray[char])
-proc fcQCompleter_slot_callback_highlighted(slot: int, text: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QCompleterhighlightedSlot](cast[pointer](slot))
+type QCompleterhighlightedTextSlot* = proc(text: openArray[char])
+proc fcQCompleter_slot_callback_highlightedText(slot: int, text: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QCompleterhighlightedTextSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(vtext_ms)
   c_free(vtext_ms.data)
@@ -358,62 +358,62 @@ proc fcQCompleter_slot_callback_highlighted(slot: int, text: struct_seaqt_string
 
   nimfunc[](slotval1)
 
-proc fcQCompleter_slot_callback_highlighted_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QCompleterhighlightedSlot](cast[pointer](slot))
+proc fcQCompleter_slot_callback_highlightedText_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCompleterhighlightedTextSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onHighlighted*(self: gen_qcompleter_types.QCompleter, slot: QCompleterhighlightedSlot) =
-  var tmp = new QCompleterhighlightedSlot
+proc onHighlighted*(self: gen_qcompleter_types.QCompleter, slot: QCompleterhighlightedTextSlot) =
+  var tmp = new QCompleterhighlightedTextSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_highlighted(self.h, cast[int](addr tmp[]), fcQCompleter_slot_callback_highlighted, fcQCompleter_slot_callback_highlighted_release)
+  fcQCompleter_connect_highlightedText(self.h, cast[int](addr tmp[]), fcQCompleter_slot_callback_highlightedText, fcQCompleter_slot_callback_highlightedText_release)
 
 proc highlighted*(self: gen_qcompleter_types.QCompleter, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQCompleter_highlightedWithIndex(self.h, index.h)
+  fcQCompleter_highlightedIndex(self.h, index.h)
 
-type QCompleterhighlightedWithIndexSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc fcQCompleter_slot_callback_highlightedWithIndex(slot: int, index: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QCompleterhighlightedWithIndexSlot](cast[pointer](slot))
+type QCompleterhighlightedIndexSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
+proc fcQCompleter_slot_callback_highlightedIndex(slot: int, index: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QCompleterhighlightedIndexSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
 
   nimfunc[](slotval1)
 
-proc fcQCompleter_slot_callback_highlightedWithIndex_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QCompleterhighlightedWithIndexSlot](cast[pointer](slot))
+proc fcQCompleter_slot_callback_highlightedIndex_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCompleterhighlightedIndexSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onHighlighted*(self: gen_qcompleter_types.QCompleter, slot: QCompleterhighlightedWithIndexSlot) =
-  var tmp = new QCompleterhighlightedWithIndexSlot
+proc onHighlighted*(self: gen_qcompleter_types.QCompleter, slot: QCompleterhighlightedIndexSlot) =
+  var tmp = new QCompleterhighlightedIndexSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_highlightedWithIndex(self.h, cast[int](addr tmp[]), fcQCompleter_slot_callback_highlightedWithIndex, fcQCompleter_slot_callback_highlightedWithIndex_release)
+  fcQCompleter_connect_highlightedIndex(self.h, cast[int](addr tmp[]), fcQCompleter_slot_callback_highlightedIndex, fcQCompleter_slot_callback_highlightedIndex_release)
 
 proc tr*(_: type gen_qcompleter_types.QCompleter, s: cstring, c: cstring): string =
-  let v_ms = fcQCompleter_tr2(s, c)
+  let v_ms = fcQCompleter_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcompleter_types.QCompleter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCompleter_tr3(s, c, n)
+  let v_ms = fcQCompleter_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcompleter_types.QCompleter, s: cstring, c: cstring): string =
-  let v_ms = fcQCompleter_trUtf82(s, c)
+  let v_ms = fcQCompleter_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcompleter_types.QCompleter, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCompleter_trUtf83(s, c, n)
+  let v_ms = fcQCompleter_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc complete*(self: gen_qcompleter_types.QCompleter, rect: gen_qrect_types.QRect): void =
-  fcQCompleter_completeWithRect(self.h, rect.h)
+  fcQCompleter_completeRect(self.h, rect.h)
 
 type QCompletermetaObjectProc* = proc(self: QCompleter): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QCompletermetacastProc* = proc(self: QCompleter, param1: cstring): pointer {.raises: [], gcsafe.}

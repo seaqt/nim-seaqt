@@ -78,22 +78,22 @@ type cQSGEngine*{.exportc: "QSGEngine", incompleteStruct.} = object
 proc fcQSGEngine_metaObject(self: pointer): pointer {.importc: "QSGEngine_metaObject".}
 proc fcQSGEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGEngine_metacast".}
 proc fcQSGEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGEngine_metacall".}
-proc fcQSGEngine_tr(s: cstring): struct_seaqt_string {.importc: "QSGEngine_tr".}
-proc fcQSGEngine_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSGEngine_trUtf8".}
+proc fcQSGEngine_trS(s: cstring): struct_seaqt_string {.importc: "QSGEngine_tr_s".}
+proc fcQSGEngine_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QSGEngine_trUtf8_s".}
 proc fcQSGEngine_invalidate(self: pointer): void {.importc: "QSGEngine_invalidate".}
 proc fcQSGEngine_createRenderer(self: pointer): pointer {.importc: "QSGEngine_createRenderer".}
-proc fcQSGEngine_createTextureFromImage(self: pointer, image: pointer): pointer {.importc: "QSGEngine_createTextureFromImage".}
-proc fcQSGEngine_createTextureFromId(self: pointer, id: cuint, size: pointer): pointer {.importc: "QSGEngine_createTextureFromId".}
+proc fcQSGEngine_createTextureFromImageImage(self: pointer, image: pointer): pointer {.importc: "QSGEngine_createTextureFromImage_image".}
+proc fcQSGEngine_createTextureFromIdIdSize(self: pointer, id: cuint, size: pointer): pointer {.importc: "QSGEngine_createTextureFromId_id_size".}
 proc fcQSGEngine_rendererInterface(self: pointer): pointer {.importc: "QSGEngine_rendererInterface".}
 proc fcQSGEngine_createRectangleNode(self: pointer): pointer {.importc: "QSGEngine_createRectangleNode".}
 proc fcQSGEngine_createImageNode(self: pointer): pointer {.importc: "QSGEngine_createImageNode".}
 proc fcQSGEngine_createNinePatchNode(self: pointer): pointer {.importc: "QSGEngine_createNinePatchNode".}
-proc fcQSGEngine_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGEngine_tr2".}
-proc fcQSGEngine_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGEngine_tr3".}
-proc fcQSGEngine_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGEngine_trUtf82".}
-proc fcQSGEngine_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGEngine_trUtf83".}
-proc fcQSGEngine_createTextureFromImage2(self: pointer, image: pointer, options: cint): pointer {.importc: "QSGEngine_createTextureFromImage2".}
-proc fcQSGEngine_createTextureFromId2(self: pointer, id: cuint, size: pointer, options: cint): pointer {.importc: "QSGEngine_createTextureFromId2".}
+proc fcQSGEngine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGEngine_tr_s_c".}
+proc fcQSGEngine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGEngine_tr_s_c_n".}
+proc fcQSGEngine_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGEngine_trUtf8_s_c".}
+proc fcQSGEngine_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGEngine_trUtf8_s_c_n".}
+proc fcQSGEngine_createTextureFromImageImageOptions(self: pointer, image: pointer, options: cint): pointer {.importc: "QSGEngine_createTextureFromImage_image_options".}
+proc fcQSGEngine_createTextureFromIdIdSizeOptions(self: pointer, id: cuint, size: pointer, options: cint): pointer {.importc: "QSGEngine_createTextureFromId_id_size_options".}
 proc fcQSGEngine_vdata(self: pointer): ptr pointer {.importc: "QSGEngine_vdata".}
 proc fvdata_cQSGEngine(self: pointer): pointer {.importc: "vdata_QSGEngine".}
 
@@ -124,7 +124,7 @@ proc fcQSGEngine_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQSGEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGEngine_protectedbase_receivers".}
 proc fcQSGEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSGEngine_protectedbase_isSignalConnected".}
 proc fcQSGEngine_new(vtbl: pointer, vdata: csize_t): ptr cQSGEngine {.importc: "QSGEngine_new".}
-proc fcQSGEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSGEngine {.importc: "QSGEngine_new2".}
+proc fcQSGEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSGEngine {.importc: "QSGEngine_new_parent".}
 proc fcQSGEngine_staticMetaObject(): pointer {.importc: "QSGEngine_staticMetaObject".}
 
 proc metaObject*(self: gen_qsgengine_types.QSGEngine): gen_qobjectdefs_types.QMetaObject =
@@ -137,13 +137,13 @@ proc metacall*(self: gen_qsgengine_types.QSGEngine, param1: cint, param2: cint, 
   fcQSGEngine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsgengine_types.QSGEngine, s: cstring): string =
-  let v_ms = fcQSGEngine_tr(s)
+  let v_ms = fcQSGEngine_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgengine_types.QSGEngine, s: cstring): string =
-  let v_ms = fcQSGEngine_trUtf8(s)
+  let v_ms = fcQSGEngine_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -155,10 +155,10 @@ proc createRenderer*(self: gen_qsgengine_types.QSGEngine): gen_qsgabstractrender
   gen_qsgabstractrenderer_types.QSGAbstractRenderer(h: fcQSGEngine_createRenderer(self.h), owned: false)
 
 proc createTextureFromImage*(self: gen_qsgengine_types.QSGEngine, image: gen_qimage_types.QImage): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromImage(self.h, image.h), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromImageImage(self.h, image.h), owned: false)
 
 proc createTextureFromId*(self: gen_qsgengine_types.QSGEngine, id: cuint, size: gen_qsize_types.QSize): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromId(self.h, id, size.h), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromIdIdSize(self.h, id, size.h), owned: false)
 
 proc rendererInterface*(self: gen_qsgengine_types.QSGEngine): gen_qsgrendererinterface_types.QSGRendererInterface =
   gen_qsgrendererinterface_types.QSGRendererInterface(h: fcQSGEngine_rendererInterface(self.h), owned: false)
@@ -173,34 +173,34 @@ proc createNinePatchNode*(self: gen_qsgengine_types.QSGEngine): gen_qsgninepatch
   gen_qsgninepatchnode_types.QSGNinePatchNode(h: fcQSGEngine_createNinePatchNode(self.h), owned: false)
 
 proc tr*(_: type gen_qsgengine_types.QSGEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQSGEngine_tr2(s, c)
+  let v_ms = fcQSGEngine_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsgengine_types.QSGEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGEngine_tr3(s, c, n)
+  let v_ms = fcQSGEngine_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgengine_types.QSGEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQSGEngine_trUtf82(s, c)
+  let v_ms = fcQSGEngine_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qsgengine_types.QSGEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGEngine_trUtf83(s, c, n)
+  let v_ms = fcQSGEngine_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc createTextureFromImage*(self: gen_qsgengine_types.QSGEngine, image: gen_qimage_types.QImage, options: cint): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromImage2(self.h, image.h, cint(options)), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromImageImageOptions(self.h, image.h, cint(options)), owned: false)
 
 proc createTextureFromId*(self: gen_qsgengine_types.QSGEngine, id: cuint, size: gen_qsize_types.QSize, options: cint): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromId2(self.h, id, size.h, cint(options)), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQSGEngine_createTextureFromIdIdSizeOptions(self.h, id, size.h, cint(options)), owned: false)
 
 type QSGEnginemetaObjectProc* = proc(self: QSGEngine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSGEnginemetacastProc* = proc(self: QSGEngine, param1: cstring): pointer {.raises: [], gcsafe.}

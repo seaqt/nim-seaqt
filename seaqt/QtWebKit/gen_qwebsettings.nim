@@ -168,7 +168,7 @@ proc fcQWebSettings_setThirdPartyCookiePolicy(self: pointer, thirdPartyCookiePol
 proc fcQWebSettings_thirdPartyCookiePolicy(self: pointer): cint {.importc: "QWebSettings_thirdPartyCookiePolicy".}
 proc fcQWebSettings_setCSSMediaType(self: pointer, cSSMediaType: struct_seaqt_string): void {.importc: "QWebSettings_setCSSMediaType".}
 proc fcQWebSettings_cssMediaType(self: pointer): struct_seaqt_string {.importc: "QWebSettings_cssMediaType".}
-proc fcQWebSettings_enablePersistentStorageWithPath(path: struct_seaqt_string): void {.importc: "QWebSettings_enablePersistentStorageWithPath".}
+proc fcQWebSettings_enablePersistentStoragePath(path: struct_seaqt_string): void {.importc: "QWebSettings_enablePersistentStorage_path".}
 
 proc globalSettings*(_: type gen_qwebsettings_types.QWebSettings): gen_qwebsettings_types.QWebSettings =
   gen_qwebsettings_types.QWebSettings(h: fcQWebSettings_globalSettings(), owned: false)
@@ -328,5 +328,5 @@ proc cssMediaType*(self: gen_qwebsettings_types.QWebSettings): string =
   vx_ret
 
 proc enablePersistentStorage*(_: type gen_qwebsettings_types.QWebSettings, path: openArray[char]): void =
-  fcQWebSettings_enablePersistentStorageWithPath(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
+  fcQWebSettings_enablePersistentStoragePath(struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 

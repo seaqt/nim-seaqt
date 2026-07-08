@@ -24,8 +24,8 @@ typedef struct QWebDatabase QWebDatabase;
 typedef struct QWebSecurityOrigin QWebSecurityOrigin;
 #endif
 
-QWebSecurityOrigin* QWebSecurityOrigin_new(QUrl* url);
-QWebSecurityOrigin* QWebSecurityOrigin_new2(QWebSecurityOrigin* other);
+QWebSecurityOrigin* QWebSecurityOrigin_new_url(QUrl* url);
+QWebSecurityOrigin* QWebSecurityOrigin_new_from(QWebSecurityOrigin* from);
 
 struct seaqt_array /* of QWebSecurityOrigin* */  QWebSecurityOrigin_allOrigins();
 void QWebSecurityOrigin_addLocalScheme(struct seaqt_string scheme);
@@ -41,7 +41,7 @@ long long QWebSecurityOrigin_databaseQuota(const QWebSecurityOrigin* self);
 void QWebSecurityOrigin_setDatabaseQuota(QWebSecurityOrigin* self, long long quota);
 void QWebSecurityOrigin_setApplicationCacheQuota(QWebSecurityOrigin* self, long long quota);
 struct seaqt_array /* of QWebDatabase* */  QWebSecurityOrigin_databases(const QWebSecurityOrigin* self);
-void QWebSecurityOrigin_operatorAssign(QWebSecurityOrigin* self, QWebSecurityOrigin* other);
+void QWebSecurityOrigin_operatorAssign(QWebSecurityOrigin* self, QWebSecurityOrigin* from);
 
 void QWebSecurityOrigin_delete(QWebSecurityOrigin* self);
 

@@ -91,16 +91,16 @@ public:
 	friend int QQmlComponent_virtualbase_metacall(VirtualQQmlComponent* self, int param1, int param2, void** param3);
 
 	virtual QObject* create(QQmlContext* context) override {
-		if (vtbl->create == 0) {
+		if (vtbl->create_QQmlContext == 0) {
 			return QQmlComponent::create(context);
 		}
 
 		QQmlContext* sigval1 = context;
-		QObject* callback_return_value = vtbl->create(this, sigval1);
+		QObject* callback_return_value = vtbl->create_QQmlContext(this, sigval1);
 		return callback_return_value;
 	}
 
-	friend QObject* QQmlComponent_virtualbase_create(VirtualQQmlComponent* self, QQmlContext* context);
+	friend QObject* QQmlComponent_virtualbase_create_QQmlContext(VirtualQQmlComponent* self, QQmlContext* context);
 
 	virtual QObject* beginCreate(QQmlContext* param1) override {
 		if (vtbl->beginCreate == 0) {
@@ -226,61 +226,61 @@ VirtualQQmlComponent* QQmlComponent_new(const QQmlComponent_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new2(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new3(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, struct seaqt_string fileName) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QString(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, fileName_QString) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new4(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, struct seaqt_string fileName, int mode) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QString_QQmlComponent_CompilationMode(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, struct seaqt_string fileName, int mode) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, fileName_QString, static_cast<QQmlComponent::CompilationMode>(mode)) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new5(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QUrl* url) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QUrl(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QUrl* url) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, *url) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new6(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QUrl* url, int mode) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QUrl_QQmlComponent_CompilationMode(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QUrl* url, int mode) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, *url, static_cast<QQmlComponent::CompilationMode>(mode)) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new7(const QQmlComponent_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQQmlComponent* QQmlComponent_new_QObject(const QQmlComponent_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, parent) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new8(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QObject* parent) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QObject(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, parent) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new9(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, struct seaqt_string fileName, QObject* parent) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QString_QObject(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, struct seaqt_string fileName, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, fileName_QString, parent) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new10(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, struct seaqt_string fileName, int mode, QObject* parent) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QString_QQmlComponent_CompilationMode_QObject(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, struct seaqt_string fileName, int mode, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, fileName_QString, static_cast<QQmlComponent::CompilationMode>(mode), parent) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new11(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QUrl* url, QObject* parent) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QUrl_QObject(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QUrl* url, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, *url, parent) : nullptr;
 }
 
-VirtualQQmlComponent* QQmlComponent_new12(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QUrl* url, int mode, QObject* parent) {
+VirtualQQmlComponent* QQmlComponent_new_QQmlEngine_QUrl_QQmlComponent_CompilationMode_QObject(const QQmlComponent_VTable* vtbl, size_t vdata, QQmlEngine* param1, QUrl* url, int mode, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQmlComponent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQmlComponent(vtbl, param1, *url, static_cast<QQmlComponent::CompilationMode>(mode), parent) : nullptr;
 }
@@ -301,7 +301,7 @@ int QQmlComponent_metacall(QQmlComponent* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQmlComponent_tr(const char* s) {
+struct seaqt_string QQmlComponent_tr_s(const char* s) {
 	QString _ret = QQmlComponent::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -312,7 +312,7 @@ struct seaqt_string QQmlComponent_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QQmlComponent_trUtf8(const char* s) {
+struct seaqt_string QQmlComponent_trUtf8_s(const char* s) {
 	QString _ret = QQmlComponent::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -377,11 +377,11 @@ QUrl* QQmlComponent_url(const QQmlComponent* self) {
 	return new QUrl(self->url());
 }
 
-QObject* QQmlComponent_create(QQmlComponent* self, QQmlContext* context) {
+QObject* QQmlComponent_create_QQmlContext(QQmlComponent* self, QQmlContext* context) {
 	return self->create(context);
 }
 
-QObject* QQmlComponent_createWithInitialProperties(QQmlComponent* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  initialProperties) {
+QObject* QQmlComponent_createWithInitialProperties_initialProperties(QQmlComponent* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  initialProperties) {
 	QVariantMap initialProperties_QMap;
 	struct seaqt_string* initialProperties_karr = static_cast<struct seaqt_string*>(initialProperties.keys);
 	QVariant** initialProperties_varr = static_cast<QVariant**>(initialProperties.values);
@@ -411,7 +411,7 @@ void QQmlComponent_completeCreate(QQmlComponent* self) {
 	self->completeCreate();
 }
 
-void QQmlComponent_createWithQQmlIncubator(QQmlComponent* self, QQmlIncubator* param1) {
+void QQmlComponent_create_QQmlIncubator(QQmlComponent* self, QQmlIncubator* param1) {
 	self->create(*param1);
 }
 
@@ -423,11 +423,11 @@ QQmlEngine* QQmlComponent_engine(const QQmlComponent* self) {
 	return self->engine();
 }
 
-void QQmlComponent_loadUrl(QQmlComponent* self, QUrl* url) {
+void QQmlComponent_loadUrl_url(QQmlComponent* self, QUrl* url) {
 	self->loadUrl(*url);
 }
 
-void QQmlComponent_loadUrl2(QQmlComponent* self, QUrl* url, int mode) {
+void QQmlComponent_loadUrl_url_mode(QQmlComponent* self, QUrl* url, int mode) {
 	self->loadUrl(*url, static_cast<QQmlComponent::CompilationMode>(mode));
 }
 
@@ -470,7 +470,7 @@ void QQmlComponent_connect_progressChanged(QQmlComponent* self, intptr_t slot, v
 	QQmlComponent::connect(self, static_cast<void (QQmlComponent::*)(qreal)>(&QQmlComponent::progressChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQmlComponent_tr2(const char* s, const char* c) {
+struct seaqt_string QQmlComponent_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQmlComponent::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -481,7 +481,7 @@ struct seaqt_string QQmlComponent_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlComponent_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQmlComponent_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlComponent::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -492,7 +492,7 @@ struct seaqt_string QQmlComponent_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QQmlComponent_trUtf82(const char* s, const char* c) {
+struct seaqt_string QQmlComponent_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QQmlComponent::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -503,7 +503,7 @@ struct seaqt_string QQmlComponent_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQmlComponent_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QQmlComponent_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQmlComponent::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -514,7 +514,7 @@ struct seaqt_string QQmlComponent_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QObject* QQmlComponent_createWithInitialProperties2(QQmlComponent* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  initialProperties, QQmlContext* context) {
+QObject* QQmlComponent_createWithInitialProperties_initialProperties_context(QQmlComponent* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  initialProperties, QQmlContext* context) {
 	QVariantMap initialProperties_QMap;
 	struct seaqt_string* initialProperties_karr = static_cast<struct seaqt_string*>(initialProperties.keys);
 	QVariant** initialProperties_varr = static_cast<QVariant**>(initialProperties.values);
@@ -525,11 +525,11 @@ QObject* QQmlComponent_createWithInitialProperties2(QQmlComponent* self, struct 
 	return self->createWithInitialProperties(initialProperties_QMap, context);
 }
 
-void QQmlComponent_create2(QQmlComponent* self, QQmlIncubator* param1, QQmlContext* context) {
+void QQmlComponent_create_QQmlIncubator_QQmlContext(QQmlComponent* self, QQmlIncubator* param1, QQmlContext* context) {
 	self->create(*param1, context);
 }
 
-void QQmlComponent_create3(QQmlComponent* self, QQmlIncubator* param1, QQmlContext* context, QQmlContext* forContext) {
+void QQmlComponent_create_QQmlIncubator_QQmlContext_QQmlContext(QQmlComponent* self, QQmlIncubator* param1, QQmlContext* context, QQmlContext* forContext) {
 	self->create(*param1, context, forContext);
 }
 
@@ -552,7 +552,7 @@ int QQmlComponent_virtualbase_metacall(VirtualQQmlComponent* self, int param1, i
 	return self->QQmlComponent::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QObject* QQmlComponent_virtualbase_create(VirtualQQmlComponent* self, QQmlContext* context) {
+QObject* QQmlComponent_virtualbase_create_QQmlContext(VirtualQQmlComponent* self, QQmlContext* context) {
 
 	return self->QQmlComponent::create(context);
 }

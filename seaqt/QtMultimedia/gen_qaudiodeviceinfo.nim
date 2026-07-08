@@ -43,7 +43,7 @@ export
 
 type cQAudioDeviceInfo*{.exportc: "QAudioDeviceInfo", incompleteStruct.} = object
 
-proc fcQAudioDeviceInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioDeviceInfo_operatorAssign".}
+proc fcQAudioDeviceInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QAudioDeviceInfo_operatorAssign".}
 proc fcQAudioDeviceInfo_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAudioDeviceInfo_operatorEqual".}
 proc fcQAudioDeviceInfo_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAudioDeviceInfo_operatorNotEqual".}
 proc fcQAudioDeviceInfo_isNull(self: pointer): bool {.importc: "QAudioDeviceInfo_isNull".}
@@ -62,10 +62,10 @@ proc fcQAudioDeviceInfo_defaultInputDevice(): pointer {.importc: "QAudioDeviceIn
 proc fcQAudioDeviceInfo_defaultOutputDevice(): pointer {.importc: "QAudioDeviceInfo_defaultOutputDevice".}
 proc fcQAudioDeviceInfo_availableDevices(mode: cint): struct_seaqt_array {.importc: "QAudioDeviceInfo_availableDevices".}
 proc fcQAudioDeviceInfo_new(): ptr cQAudioDeviceInfo {.importc: "QAudioDeviceInfo_new".}
-proc fcQAudioDeviceInfo_new2(other: pointer): ptr cQAudioDeviceInfo {.importc: "QAudioDeviceInfo_new2".}
+proc fcQAudioDeviceInfo_new2(fromVal: pointer): ptr cQAudioDeviceInfo {.importc: "QAudioDeviceInfo_new_from".}
 
-proc operatorAssign*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, other: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): void =
-  fcQAudioDeviceInfo_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, fromVal: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): void =
+  fcQAudioDeviceInfo_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, other: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): bool =
   fcQAudioDeviceInfo_operatorEqual(self.h, other.h)
@@ -173,6 +173,6 @@ proc create*(T: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodev
   let tmp = gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: fcQAudioDeviceInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo,
-    other: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
-  let tmp = gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: fcQAudioDeviceInfo_new2(other.h), owned: true)
+    fromVal: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
+  let tmp = gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: fcQAudioDeviceInfo_new2(fromVal.h), owned: true)
   tmp

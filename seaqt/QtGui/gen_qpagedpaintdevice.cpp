@@ -42,17 +42,17 @@ public:
 	}
 
 	virtual void setPageSize(QPagedPaintDevice::PageSize size) override {
-		if (vtbl->setPageSizeWithSize == 0) {
+		if (vtbl->setPageSize_size == 0) {
 			QPagedPaintDevice::setPageSize(size);
 			return;
 		}
 
 		QPagedPaintDevice::PageSize size_ret = size;
 		int sigval1 = static_cast<int>(size_ret);
-		vtbl->setPageSizeWithSize(this, sigval1);
+		vtbl->setPageSize_size(this, sigval1);
 	}
 
-	friend void QPagedPaintDevice_virtualbase_setPageSizeWithSize(VirtualQPagedPaintDevice* self, int size);
+	friend void QPagedPaintDevice_virtualbase_setPageSize_size(VirtualQPagedPaintDevice* self, int size);
 
 	virtual void setPageSizeMM(const QSizeF& size) override {
 		if (vtbl->setPageSizeMM == 0) {
@@ -151,8 +151,8 @@ public:
 	friend QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const VirtualQPagedPaintDevice* self);
 
 	// Wrappers to allow calling protected methods:
-	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(const VirtualQPagedPaintDevice* self);
-	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(VirtualQPagedPaintDevice* self);
+	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout_const(const VirtualQPagedPaintDevice* self);
+	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(VirtualQPagedPaintDevice* self);
 };
 
 VirtualQPagedPaintDevice* QPagedPaintDevice_new(const QPagedPaintDevice_VTable* vtbl, size_t vdata) {
@@ -172,7 +172,7 @@ bool QPagedPaintDevice_setPageLayout(QPagedPaintDevice* self, QPageLayout* pageL
 	return self->setPageLayout(*pageLayout);
 }
 
-bool QPagedPaintDevice_setPageSize(QPagedPaintDevice* self, QPageSize* pageSize) {
+bool QPagedPaintDevice_setPageSize_pageSize(QPagedPaintDevice* self, QPageSize* pageSize) {
 	return self->setPageSize(*pageSize);
 }
 
@@ -180,11 +180,11 @@ bool QPagedPaintDevice_setPageOrientation(QPagedPaintDevice* self, int orientati
 	return self->setPageOrientation(static_cast<QPageLayout::Orientation>(orientation));
 }
 
-bool QPagedPaintDevice_setPageMargins(QPagedPaintDevice* self, QMarginsF* margins) {
+bool QPagedPaintDevice_setPageMargins_margins(QPagedPaintDevice* self, QMarginsF* margins) {
 	return self->setPageMargins(*margins);
 }
 
-bool QPagedPaintDevice_setPageMargins2(QPagedPaintDevice* self, QMarginsF* margins, int units) {
+bool QPagedPaintDevice_setPageMargins_margins_units(QPagedPaintDevice* self, QMarginsF* margins, int units) {
 	return self->setPageMargins(*margins, static_cast<QPageLayout::Unit>(units));
 }
 
@@ -192,7 +192,7 @@ QPageLayout* QPagedPaintDevice_pageLayout(const QPagedPaintDevice* self) {
 	return new QPageLayout(self->pageLayout());
 }
 
-void QPagedPaintDevice_setPageSizeWithSize(QPagedPaintDevice* self, int size) {
+void QPagedPaintDevice_setPageSize_size(QPagedPaintDevice* self, int size) {
 	self->setPageSize(static_cast<QPagedPaintDevice::PageSize>(size));
 }
 
@@ -220,7 +220,7 @@ QPagedPaintDevice__Margins* QPagedPaintDevice_margins(const QPagedPaintDevice* s
 void* QPagedPaintDevice_vdata(VirtualQPagedPaintDevice* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQPagedPaintDevice>()); }
 VirtualQPagedPaintDevice* vdata_QPagedPaintDevice(void* vdata) { return reinterpret_cast<VirtualQPagedPaintDevice*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQPagedPaintDevice>()); }
 
-void QPagedPaintDevice_virtualbase_setPageSizeWithSize(VirtualQPagedPaintDevice* self, int size) {
+void QPagedPaintDevice_virtualbase_setPageSize_size(VirtualQPagedPaintDevice* self, int size) {
 
 	self->QPagedPaintDevice::setPageSize(static_cast<VirtualQPagedPaintDevice::PageSize>(size));
 }
@@ -260,11 +260,11 @@ QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const VirtualQPagedPaintDe
 	return self->QPagedPaintDevice::sharedPainter();
 }
 
-QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(const VirtualQPagedPaintDevice* self) {
+QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout_const(const VirtualQPagedPaintDevice* self) {
 	return new QPageLayout(self->devicePageLayout());
 }
 
-QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(VirtualQPagedPaintDevice* self) {
+QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(VirtualQPagedPaintDevice* self) {
 	QPageLayout& _ret = self->devicePageLayout();
 	// Cast returned reference into pointer
 	return &_ret;

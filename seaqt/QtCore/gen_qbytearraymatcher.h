@@ -23,17 +23,17 @@ typedef struct QStaticByteArrayMatcherBase QStaticByteArrayMatcherBase;
 #endif
 
 QByteArrayMatcher* QByteArrayMatcher_new();
-QByteArrayMatcher* QByteArrayMatcher_new2(struct seaqt_string pattern);
-QByteArrayMatcher* QByteArrayMatcher_new3(const char* pattern, int length);
-QByteArrayMatcher* QByteArrayMatcher_new4(QByteArrayMatcher* other);
+QByteArrayMatcher* QByteArrayMatcher_new_pattern(struct seaqt_string pattern);
+QByteArrayMatcher* QByteArrayMatcher_new_pattern_length(const char* pattern, int length);
+QByteArrayMatcher* QByteArrayMatcher_new_from(QByteArrayMatcher* from);
 
-void QByteArrayMatcher_operatorAssign(QByteArrayMatcher* self, QByteArrayMatcher* other);
+void QByteArrayMatcher_operatorAssign(QByteArrayMatcher* self, QByteArrayMatcher* from);
 void QByteArrayMatcher_setPattern(QByteArrayMatcher* self, struct seaqt_string pattern);
-int QByteArrayMatcher_indexIn(const QByteArrayMatcher* self, struct seaqt_string ba);
-int QByteArrayMatcher_indexIn2(const QByteArrayMatcher* self, const char* str, int len);
+int QByteArrayMatcher_indexIn_ba(const QByteArrayMatcher* self, struct seaqt_string ba);
+int QByteArrayMatcher_indexIn_str_len(const QByteArrayMatcher* self, const char* str, int len);
 struct seaqt_string QByteArrayMatcher_pattern(const QByteArrayMatcher* self);
-int QByteArrayMatcher_indexIn3(const QByteArrayMatcher* self, struct seaqt_string ba, int from);
-int QByteArrayMatcher_indexIn4(const QByteArrayMatcher* self, const char* str, int len, int from);
+int QByteArrayMatcher_indexIn_ba_from(const QByteArrayMatcher* self, struct seaqt_string ba, int from);
+int QByteArrayMatcher_indexIn_str_len_from(const QByteArrayMatcher* self, const char* str, int len, int from);
 
 void QByteArrayMatcher_delete(QByteArrayMatcher* self);
 

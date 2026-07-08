@@ -73,16 +73,16 @@ type cQWebInspector*{.exportc: "QWebInspector", incompleteStruct.} = object
 proc fcQWebInspector_metaObject(self: pointer): pointer {.importc: "QWebInspector_metaObject".}
 proc fcQWebInspector_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebInspector_metacast".}
 proc fcQWebInspector_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebInspector_metacall".}
-proc fcQWebInspector_tr(s: cstring): struct_seaqt_string {.importc: "QWebInspector_tr".}
-proc fcQWebInspector_trUtf8(s: cstring): struct_seaqt_string {.importc: "QWebInspector_trUtf8".}
+proc fcQWebInspector_trS(s: cstring): struct_seaqt_string {.importc: "QWebInspector_tr_s".}
+proc fcQWebInspector_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QWebInspector_trUtf8_s".}
 proc fcQWebInspector_setPage(self: pointer, page: pointer): void {.importc: "QWebInspector_setPage".}
 proc fcQWebInspector_page(self: pointer): pointer {.importc: "QWebInspector_page".}
 proc fcQWebInspector_sizeHint(self: pointer): pointer {.importc: "QWebInspector_sizeHint".}
 proc fcQWebInspector_event(self: pointer, param1: pointer): bool {.importc: "QWebInspector_event".}
-proc fcQWebInspector_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebInspector_tr2".}
-proc fcQWebInspector_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebInspector_tr3".}
-proc fcQWebInspector_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebInspector_trUtf82".}
-proc fcQWebInspector_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebInspector_trUtf83".}
+proc fcQWebInspector_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebInspector_tr_s_c".}
+proc fcQWebInspector_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebInspector_tr_s_c_n".}
+proc fcQWebInspector_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebInspector_trUtf8_s_c".}
+proc fcQWebInspector_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebInspector_trUtf8_s_c_n".}
 proc fcQWebInspector_vdata(self: pointer): ptr pointer {.importc: "QWebInspector_vdata".}
 proc fvdata_cQWebInspector(self: pointer): pointer {.importc: "vdata_QWebInspector".}
 
@@ -198,7 +198,7 @@ proc fcQWebInspector_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQWebInspector_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebInspector_protectedbase_receivers".}
 proc fcQWebInspector_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebInspector_protectedbase_isSignalConnected".}
 proc fcQWebInspector_new(vtbl: pointer, vdata: csize_t): ptr cQWebInspector {.importc: "QWebInspector_new".}
-proc fcQWebInspector_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebInspector {.importc: "QWebInspector_new2".}
+proc fcQWebInspector_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebInspector {.importc: "QWebInspector_new_parent".}
 proc fcQWebInspector_staticMetaObject(): pointer {.importc: "QWebInspector_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebinspector_types.QWebInspector): gen_qobjectdefs_types.QMetaObject =
@@ -211,13 +211,13 @@ proc metacall*(self: gen_qwebinspector_types.QWebInspector, param1: cint, param2
   fcQWebInspector_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebinspector_types.QWebInspector, s: cstring): string =
-  let v_ms = fcQWebInspector_tr(s)
+  let v_ms = fcQWebInspector_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebinspector_types.QWebInspector, s: cstring): string =
-  let v_ms = fcQWebInspector_trUtf8(s)
+  let v_ms = fcQWebInspector_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -235,25 +235,25 @@ proc event*(self: gen_qwebinspector_types.QWebInspector, param1: gen_qcoreevent_
   fcQWebInspector_event(self.h, param1.h)
 
 proc tr*(_: type gen_qwebinspector_types.QWebInspector, s: cstring, c: cstring): string =
-  let v_ms = fcQWebInspector_tr2(s, c)
+  let v_ms = fcQWebInspector_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebinspector_types.QWebInspector, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebInspector_tr3(s, c, n)
+  let v_ms = fcQWebInspector_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebinspector_types.QWebInspector, s: cstring, c: cstring): string =
-  let v_ms = fcQWebInspector_trUtf82(s, c)
+  let v_ms = fcQWebInspector_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qwebinspector_types.QWebInspector, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebInspector_trUtf83(s, c, n)
+  let v_ms = fcQWebInspector_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

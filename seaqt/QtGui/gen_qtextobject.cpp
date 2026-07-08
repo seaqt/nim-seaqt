@@ -56,7 +56,7 @@ int QTextObject_metacall(QTextObject* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTextObject_tr(const char* s) {
+struct seaqt_string QTextObject_tr_s(const char* s) {
 	QString _ret = QTextObject::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -67,7 +67,7 @@ struct seaqt_string QTextObject_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTextObject_trUtf8(const char* s) {
+struct seaqt_string QTextObject_trUtf8_s(const char* s) {
 	QString _ret = QTextObject::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -94,7 +94,7 @@ int QTextObject_objectIndex(const QTextObject* self) {
 	return self->objectIndex();
 }
 
-struct seaqt_string QTextObject_tr2(const char* s, const char* c) {
+struct seaqt_string QTextObject_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTextObject::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -105,7 +105,7 @@ struct seaqt_string QTextObject_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextObject_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTextObject_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextObject::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -116,7 +116,7 @@ struct seaqt_string QTextObject_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTextObject_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTextObject_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTextObject::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -127,7 +127,7 @@ struct seaqt_string QTextObject_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextObject_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTextObject_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextObject::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -155,7 +155,7 @@ int QTextBlockGroup_metacall(QTextBlockGroup* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTextBlockGroup_tr(const char* s) {
+struct seaqt_string QTextBlockGroup_tr_s(const char* s) {
 	QString _ret = QTextBlockGroup::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -166,7 +166,7 @@ struct seaqt_string QTextBlockGroup_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTextBlockGroup_trUtf8(const char* s) {
+struct seaqt_string QTextBlockGroup_trUtf8_s(const char* s) {
 	QString _ret = QTextBlockGroup::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -177,7 +177,7 @@ struct seaqt_string QTextBlockGroup_trUtf8(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTextBlockGroup_tr2(const char* s, const char* c) {
+struct seaqt_string QTextBlockGroup_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTextBlockGroup::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -188,7 +188,7 @@ struct seaqt_string QTextBlockGroup_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextBlockGroup_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTextBlockGroup_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextBlockGroup::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -199,7 +199,7 @@ struct seaqt_string QTextBlockGroup_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTextBlockGroup_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTextBlockGroup_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTextBlockGroup::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -210,7 +210,7 @@ struct seaqt_string QTextBlockGroup_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextBlockGroup_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTextBlockGroup_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextBlockGroup::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -389,7 +389,7 @@ int QTextFrame_metacall(QTextFrame* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTextFrame_tr(const char* s) {
+struct seaqt_string QTextFrame_tr_s(const char* s) {
 	QString _ret = QTextFrame::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -400,7 +400,7 @@ struct seaqt_string QTextFrame_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTextFrame_trUtf8(const char* s) {
+struct seaqt_string QTextFrame_trUtf8_s(const char* s) {
 	QString _ret = QTextFrame::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -468,7 +468,7 @@ QTextFrame__iterator* QTextFrame_end(const QTextFrame* self) {
 	return new QTextFrame::iterator(self->end());
 }
 
-struct seaqt_string QTextFrame_tr2(const char* s, const char* c) {
+struct seaqt_string QTextFrame_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTextFrame::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -479,7 +479,7 @@ struct seaqt_string QTextFrame_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextFrame_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTextFrame_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextFrame::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -490,7 +490,7 @@ struct seaqt_string QTextFrame_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTextFrame_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTextFrame_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTextFrame::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -501,7 +501,7 @@ struct seaqt_string QTextFrame_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTextFrame_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTextFrame_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTextFrame::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -590,8 +590,8 @@ void QTextFrame_delete(QTextFrame* self) {
 	delete self;
 }
 
-void QTextBlockUserData_operatorAssign(QTextBlockUserData* self, QTextBlockUserData* param1) {
-	self->operator=(*param1);
+void QTextBlockUserData_operatorAssign(QTextBlockUserData* self, QTextBlockUserData* from) {
+	self->operator=(*from);
 }
 
 void QTextBlockUserData_delete(QTextBlockUserData* self) {
@@ -602,12 +602,12 @@ QTextBlock* QTextBlock_new() {
 	return new (std::nothrow) QTextBlock();
 }
 
-QTextBlock* QTextBlock_new2(QTextBlock* o) {
-	return new (std::nothrow) QTextBlock(*o);
+QTextBlock* QTextBlock_new_from(QTextBlock* from) {
+	return new (std::nothrow) QTextBlock(*from);
 }
 
-void QTextBlock_operatorAssign(QTextBlock* self, QTextBlock* o) {
-	self->operator=(*o);
+void QTextBlock_operatorAssign(QTextBlock* self, QTextBlock* from) {
+	self->operator=(*from);
 }
 
 bool QTextBlock_isValid(const QTextBlock* self) {
@@ -775,12 +775,12 @@ QTextFragment* QTextFragment_new() {
 	return new (std::nothrow) QTextFragment();
 }
 
-QTextFragment* QTextFragment_new2(QTextFragment* o) {
-	return new (std::nothrow) QTextFragment(*o);
+QTextFragment* QTextFragment_new_from(QTextFragment* from) {
+	return new (std::nothrow) QTextFragment(*from);
 }
 
-void QTextFragment_operatorAssign(QTextFragment* self, QTextFragment* o) {
-	self->operator=(*o);
+void QTextFragment_operatorAssign(QTextFragment* self, QTextFragment* from) {
+	self->operator=(*from);
 }
 
 bool QTextFragment_isValid(const QTextFragment* self) {
@@ -843,7 +843,7 @@ struct seaqt_array /* of QGlyphRun* */  QTextFragment_glyphRuns(const QTextFragm
 	return _out;
 }
 
-struct seaqt_array /* of QGlyphRun* */  QTextFragment_glyphRunsWithFrom(const QTextFragment* self, int from) {
+struct seaqt_array /* of QGlyphRun* */  QTextFragment_glyphRuns_from(const QTextFragment* self, int from) {
 	QList<QGlyphRun> _ret = self->glyphRuns(static_cast<int>(from));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGlyphRun** _arr = static_cast<QGlyphRun**>(malloc(sizeof(QGlyphRun*) * _ret.length()));
@@ -856,7 +856,7 @@ struct seaqt_array /* of QGlyphRun* */  QTextFragment_glyphRunsWithFrom(const QT
 	return _out;
 }
 
-struct seaqt_array /* of QGlyphRun* */  QTextFragment_glyphRuns2(const QTextFragment* self, int from, int length) {
+struct seaqt_array /* of QGlyphRun* */  QTextFragment_glyphRuns_from_length(const QTextFragment* self, int from, int length) {
 	QList<QGlyphRun> _ret = self->glyphRuns(static_cast<int>(from), static_cast<int>(length));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGlyphRun** _arr = static_cast<QGlyphRun**>(malloc(sizeof(QGlyphRun*) * _ret.length()));
@@ -877,12 +877,12 @@ QTextFrame__iterator* QTextFrame__iterator_new() {
 	return new (std::nothrow) QTextFrame__iterator();
 }
 
-QTextFrame__iterator* QTextFrame__iterator_new2(QTextFrame__iterator* o) {
-	return new (std::nothrow) QTextFrame__iterator(*o);
+QTextFrame__iterator* QTextFrame__iterator_new_from(QTextFrame__iterator* from) {
+	return new (std::nothrow) QTextFrame__iterator(*from);
 }
 
-void QTextFrame__iterator_operatorAssign(QTextFrame__iterator* self, QTextFrame__iterator* o) {
-	self->operator=(*o);
+void QTextFrame__iterator_operatorAssign(QTextFrame__iterator* self, QTextFrame__iterator* from) {
+	self->operator=(*from);
 }
 
 QTextFrame* QTextFrame__iterator_parentFrame(const QTextFrame__iterator* self) {
@@ -915,7 +915,7 @@ QTextFrame__iterator* QTextFrame__iterator_operatorPlusPlus(QTextFrame__iterator
 	return &_ret;
 }
 
-QTextFrame__iterator* QTextFrame__iterator_operatorPlusPlusWithInt(QTextFrame__iterator* self, int param1) {
+QTextFrame__iterator* QTextFrame__iterator_operatorPlusPlus_int(QTextFrame__iterator* self, int param1) {
 	return new QTextFrame::iterator(self->operator++(static_cast<int>(param1)));
 }
 
@@ -925,7 +925,7 @@ QTextFrame__iterator* QTextFrame__iterator_operatorMinusMinus(QTextFrame__iterat
 	return &_ret;
 }
 
-QTextFrame__iterator* QTextFrame__iterator_operatorMinusMinusWithInt(QTextFrame__iterator* self, int param1) {
+QTextFrame__iterator* QTextFrame__iterator_operatorMinusMinus_int(QTextFrame__iterator* self, int param1) {
 	return new QTextFrame::iterator(self->operator--(static_cast<int>(param1)));
 }
 
@@ -937,12 +937,12 @@ QTextBlock__iterator* QTextBlock__iterator_new() {
 	return new (std::nothrow) QTextBlock__iterator();
 }
 
-QTextBlock__iterator* QTextBlock__iterator_new2(QTextBlock__iterator* o) {
-	return new (std::nothrow) QTextBlock__iterator(*o);
+QTextBlock__iterator* QTextBlock__iterator_new_from(QTextBlock__iterator* from) {
+	return new (std::nothrow) QTextBlock__iterator(*from);
 }
 
-void QTextBlock__iterator_operatorAssign(QTextBlock__iterator* self, QTextBlock__iterator* o) {
-	self->operator=(*o);
+void QTextBlock__iterator_operatorAssign(QTextBlock__iterator* self, QTextBlock__iterator* from) {
+	self->operator=(*from);
 }
 
 QTextFragment* QTextBlock__iterator_fragment(const QTextBlock__iterator* self) {
@@ -967,7 +967,7 @@ QTextBlock__iterator* QTextBlock__iterator_operatorPlusPlus(QTextBlock__iterator
 	return &_ret;
 }
 
-QTextBlock__iterator* QTextBlock__iterator_operatorPlusPlusWithInt(QTextBlock__iterator* self, int param1) {
+QTextBlock__iterator* QTextBlock__iterator_operatorPlusPlus_int(QTextBlock__iterator* self, int param1) {
 	return new QTextBlock::iterator(self->operator++(static_cast<int>(param1)));
 }
 
@@ -977,7 +977,7 @@ QTextBlock__iterator* QTextBlock__iterator_operatorMinusMinus(QTextBlock__iterat
 	return &_ret;
 }
 
-QTextBlock__iterator* QTextBlock__iterator_operatorMinusMinusWithInt(QTextBlock__iterator* self, int param1) {
+QTextBlock__iterator* QTextBlock__iterator_operatorMinusMinus_int(QTextBlock__iterator* self, int param1) {
 	return new QTextBlock::iterator(self->operator--(static_cast<int>(param1)));
 }
 

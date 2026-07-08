@@ -249,39 +249,39 @@ VirtualQCamera* QCamera_new(const QCamera_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl) : nullptr;
 }
 
-VirtualQCamera* QCamera_new2(const QCamera_VTable* vtbl, size_t vdata, struct seaqt_string deviceName) {
+VirtualQCamera* QCamera_new_deviceName(const QCamera_VTable* vtbl, size_t vdata, struct seaqt_string deviceName) {
 	QByteArray deviceName_QByteArray(deviceName.data, deviceName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, deviceName_QByteArray) : nullptr;
 }
 
-VirtualQCamera* QCamera_new3(const QCamera_VTable* vtbl, size_t vdata, QCameraInfo* cameraInfo) {
+VirtualQCamera* QCamera_new_cameraInfo(const QCamera_VTable* vtbl, size_t vdata, QCameraInfo* cameraInfo) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, *cameraInfo) : nullptr;
 }
 
-VirtualQCamera* QCamera_new4(const QCamera_VTable* vtbl, size_t vdata, int position) {
+VirtualQCamera* QCamera_new_position(const QCamera_VTable* vtbl, size_t vdata, int position) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, static_cast<QCamera::Position>(position)) : nullptr;
 }
 
-VirtualQCamera* QCamera_new5(const QCamera_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQCamera* QCamera_new_parent(const QCamera_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, parent) : nullptr;
 }
 
-VirtualQCamera* QCamera_new6(const QCamera_VTable* vtbl, size_t vdata, struct seaqt_string deviceName, QObject* parent) {
+VirtualQCamera* QCamera_new_deviceName_parent(const QCamera_VTable* vtbl, size_t vdata, struct seaqt_string deviceName, QObject* parent) {
 	QByteArray deviceName_QByteArray(deviceName.data, deviceName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, deviceName_QByteArray, parent) : nullptr;
 }
 
-VirtualQCamera* QCamera_new7(const QCamera_VTable* vtbl, size_t vdata, QCameraInfo* cameraInfo, QObject* parent) {
+VirtualQCamera* QCamera_new_cameraInfo_parent(const QCamera_VTable* vtbl, size_t vdata, QCameraInfo* cameraInfo, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, *cameraInfo, parent) : nullptr;
 }
 
-VirtualQCamera* QCamera_new8(const QCamera_VTable* vtbl, size_t vdata, int position, QObject* parent) {
+VirtualQCamera* QCamera_new_position_parent(const QCamera_VTable* vtbl, size_t vdata, int position, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQCamera>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQCamera(vtbl, static_cast<QCamera::Position>(position), parent) : nullptr;
 }
@@ -302,7 +302,7 @@ int QCamera_metacall(QCamera* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCamera_tr(const char* s) {
+struct seaqt_string QCamera_tr_s(const char* s) {
 	QString _ret = QCamera::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -313,7 +313,7 @@ struct seaqt_string QCamera_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QCamera_trUtf8(const char* s) {
+struct seaqt_string QCamera_trUtf8_s(const char* s) {
 	QString _ret = QCamera::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -486,7 +486,7 @@ int QCamera_lockStatus(const QCamera* self) {
 	return static_cast<int>(_ret);
 }
 
-int QCamera_lockStatusWithLock(const QCamera* self, int lock) {
+int QCamera_lockStatus_lock(const QCamera* self, int lock) {
 	QCamera::LockStatus _ret = self->lockStatus(static_cast<QCamera::LockType>(lock));
 	return static_cast<int>(_ret);
 }
@@ -519,11 +519,11 @@ void QCamera_unlock(QCamera* self) {
 	self->unlock();
 }
 
-void QCamera_searchAndLockWithLocks(QCamera* self, int locks) {
+void QCamera_searchAndLock_locks(QCamera* self, int locks) {
 	self->searchAndLock(static_cast<QCamera::LockTypes>(locks));
 }
 
-void QCamera_unlockWithLocks(QCamera* self, int locks) {
+void QCamera_unlock_locks(QCamera* self, int locks) {
 	self->unlock(static_cast<QCamera::LockTypes>(locks));
 }
 
@@ -608,11 +608,11 @@ void QCamera_connect_lockFailed(QCamera* self, intptr_t slot, void (*callback)(i
 	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::lockFailed), self, local_caller{slot, callback, release});
 }
 
-void QCamera_lockStatusChanged(QCamera* self, int status, int reason) {
+void QCamera_lockStatusChanged_status_reason(QCamera* self, int status, int reason) {
 	self->lockStatusChanged(static_cast<QCamera::LockStatus>(status), static_cast<QCamera::LockChangeReason>(reason));
 }
 
-void QCamera_connect_lockStatusChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QCamera_connect_lockStatusChanged_status_reason(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -627,11 +627,11 @@ void QCamera_connect_lockStatusChanged(QCamera* self, intptr_t slot, void (*call
 	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::LockStatus, QCamera::LockChangeReason)>(&QCamera::lockStatusChanged), self, local_caller{slot, callback, release});
 }
 
-void QCamera_lockStatusChanged2(QCamera* self, int lock, int status, int reason) {
+void QCamera_lockStatusChanged_lock_status_reason(QCamera* self, int lock, int status, int reason) {
 	self->lockStatusChanged(static_cast<QCamera::LockType>(lock), static_cast<QCamera::LockStatus>(status), static_cast<QCamera::LockChangeReason>(reason));
 }
 
-void QCamera_connect_lockStatusChanged2(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
+void QCamera_connect_lockStatusChanged_lock_status_reason(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int, int);
@@ -648,11 +648,11 @@ void QCamera_connect_lockStatusChanged2(QCamera* self, intptr_t slot, void (*cal
 	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::LockType, QCamera::LockStatus, QCamera::LockChangeReason)>(&QCamera::lockStatusChanged), self, local_caller{slot, callback, release});
 }
 
-void QCamera_errorWithQCameraError(QCamera* self, int param1) {
+void QCamera_error_QCamera_Error(QCamera* self, int param1) {
 	self->error(static_cast<QCamera::Error>(param1));
 }
 
-void QCamera_connect_errorWithQCameraError(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QCamera_connect_error_QCamera_Error(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -682,7 +682,7 @@ void QCamera_connect_errorOccurred(QCamera* self, intptr_t slot, void (*callback
 	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Error)>(&QCamera::errorOccurred), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QCamera_tr2(const char* s, const char* c) {
+struct seaqt_string QCamera_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCamera::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -693,7 +693,7 @@ struct seaqt_string QCamera_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCamera_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCamera_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCamera::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -704,7 +704,7 @@ struct seaqt_string QCamera_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QCamera_trUtf82(const char* s, const char* c) {
+struct seaqt_string QCamera_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QCamera::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -715,7 +715,7 @@ struct seaqt_string QCamera_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QCamera_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QCamera_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCamera::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -726,7 +726,7 @@ struct seaqt_string QCamera_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_array /* of QCameraViewfinderSettings* */  QCamera_supportedViewfinderSettingsWithSettings(const QCamera* self, QCameraViewfinderSettings* settings) {
+struct seaqt_array /* of QCameraViewfinderSettings* */  QCamera_supportedViewfinderSettings_settings(const QCamera* self, QCameraViewfinderSettings* settings) {
 	QList<QCameraViewfinderSettings> _ret = self->supportedViewfinderSettings(*settings);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QCameraViewfinderSettings** _arr = static_cast<QCameraViewfinderSettings**>(malloc(sizeof(QCameraViewfinderSettings*) * _ret.length()));
@@ -739,7 +739,7 @@ struct seaqt_array /* of QCameraViewfinderSettings* */  QCamera_supportedViewfin
 	return _out;
 }
 
-struct seaqt_array /* of QSize* */  QCamera_supportedViewfinderResolutionsWithSettings(const QCamera* self, QCameraViewfinderSettings* settings) {
+struct seaqt_array /* of QSize* */  QCamera_supportedViewfinderResolutions_settings(const QCamera* self, QCameraViewfinderSettings* settings) {
 	QList<QSize> _ret = self->supportedViewfinderResolutions(*settings);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QSize** _arr = static_cast<QSize**>(malloc(sizeof(QSize*) * _ret.length()));
@@ -752,7 +752,7 @@ struct seaqt_array /* of QSize* */  QCamera_supportedViewfinderResolutionsWithSe
 	return _out;
 }
 
-struct seaqt_array /* of QCamera__FrameRateRange* */  QCamera_supportedViewfinderFrameRateRangesWithSettings(const QCamera* self, QCameraViewfinderSettings* settings) {
+struct seaqt_array /* of QCamera__FrameRateRange* */  QCamera_supportedViewfinderFrameRateRanges_settings(const QCamera* self, QCameraViewfinderSettings* settings) {
 	QList<QCamera::FrameRateRange> _ret = self->supportedViewfinderFrameRateRanges(*settings);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QCamera__FrameRateRange** _arr = static_cast<QCamera__FrameRateRange**>(malloc(sizeof(QCamera__FrameRateRange*) * _ret.length()));
@@ -765,7 +765,7 @@ struct seaqt_array /* of QCamera__FrameRateRange* */  QCamera_supportedViewfinde
 	return _out;
 }
 
-struct seaqt_array /* of int */  QCamera_supportedViewfinderPixelFormatsWithSettings(const QCamera* self, QCameraViewfinderSettings* settings) {
+struct seaqt_array /* of int */  QCamera_supportedViewfinderPixelFormats_settings(const QCamera* self, QCameraViewfinderSettings* settings) {
 	QList<QVideoFrame::PixelFormat> _ret = self->supportedViewfinderPixelFormats(*settings);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	int* _arr = static_cast<int*>(malloc(sizeof(int) * _ret.length()));
@@ -893,12 +893,12 @@ QCamera__FrameRateRange* QCamera__FrameRateRange_new() {
 	return new (std::nothrow) QCamera__FrameRateRange();
 }
 
-QCamera__FrameRateRange* QCamera__FrameRateRange_new2(double minimum, double maximum) {
+QCamera__FrameRateRange* QCamera__FrameRateRange_new_minimum_maximum(double minimum, double maximum) {
 	return new (std::nothrow) QCamera__FrameRateRange(static_cast<qreal>(minimum), static_cast<qreal>(maximum));
 }
 
-QCamera__FrameRateRange* QCamera__FrameRateRange_new3(QCamera__FrameRateRange* param1) {
-	return new (std::nothrow) QCamera__FrameRateRange(*param1);
+QCamera__FrameRateRange* QCamera__FrameRateRange_new_from(QCamera__FrameRateRange* from) {
+	return new (std::nothrow) QCamera__FrameRateRange(*from);
 }
 
 double QCamera__FrameRateRange_minimumFrameRate(const QCamera__FrameRateRange* self) {

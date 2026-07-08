@@ -21,16 +21,16 @@ typedef struct QUuid QUuid;
 #endif
 
 QUuid* QUuid_new();
-QUuid* QUuid_new2(unsigned int l, unsigned short w1, unsigned short w2, unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, unsigned char b5, unsigned char b6, unsigned char b7, unsigned char b8);
-QUuid* QUuid_new3(struct seaqt_string param1);
-QUuid* QUuid_new4(const char* param1);
-QUuid* QUuid_new5(struct seaqt_string param1);
-QUuid* QUuid_new6(QUuid* param1);
+QUuid* QUuid_new_uint_ushort_ushort_uchar_uchar_uchar_uchar_uchar_uchar_uchar_uchar(unsigned int l, unsigned short w1, unsigned short w2, unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, unsigned char b5, unsigned char b6, unsigned char b7, unsigned char b8);
+QUuid* QUuid_new_QString(struct seaqt_string param1);
+QUuid* QUuid_new_char(const char* param1);
+QUuid* QUuid_new_QByteArray(struct seaqt_string param1);
+QUuid* QUuid_new_QUuid(QUuid* from);
 
 struct seaqt_string QUuid_toString(const QUuid* self);
-struct seaqt_string QUuid_toStringWithMode(const QUuid* self, int mode);
+struct seaqt_string QUuid_toString_mode(const QUuid* self, int mode);
 struct seaqt_string QUuid_toByteArray(const QUuid* self);
-struct seaqt_string QUuid_toByteArrayWithMode(const QUuid* self, int mode);
+struct seaqt_string QUuid_toByteArray_mode(const QUuid* self, int mode);
 struct seaqt_string QUuid_toRfc4122(const QUuid* self);
 QUuid* QUuid_fromRfc4122(struct seaqt_string param1);
 bool QUuid_isNull(const QUuid* self);
@@ -39,10 +39,10 @@ bool QUuid_operatorNotEqual(const QUuid* self, QUuid* orig);
 bool QUuid_operatorLesser(const QUuid* self, QUuid* other);
 bool QUuid_operatorGreater(const QUuid* self, QUuid* other);
 QUuid* QUuid_createUuid();
-QUuid* QUuid_createUuidV3(QUuid* ns, struct seaqt_string baseData);
-QUuid* QUuid_createUuidV5(QUuid* ns, struct seaqt_string baseData);
-QUuid* QUuid_createUuidV32(QUuid* ns, struct seaqt_string baseData);
-QUuid* QUuid_createUuidV52(QUuid* ns, struct seaqt_string baseData);
+QUuid* QUuid_createUuidV3_QUuid_QByteArray(QUuid* ns, struct seaqt_string baseData);
+QUuid* QUuid_createUuidV5_QUuid_QByteArray(QUuid* ns, struct seaqt_string baseData);
+QUuid* QUuid_createUuidV3_QUuid_QString(QUuid* ns, struct seaqt_string baseData);
+QUuid* QUuid_createUuidV5_QUuid_QString(QUuid* ns, struct seaqt_string baseData);
 int QUuid_variant(const QUuid* self);
 int QUuid_version(const QUuid* self);
 unsigned int QUuid_data1(const QUuid* self);

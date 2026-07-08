@@ -36,17 +36,17 @@ void QImageEncoderControl_virtbase(QImageEncoderControl* src, QMediaControl** ou
 QMetaObject* QImageEncoderControl_metaObject(const QImageEncoderControl* self);
 void* QImageEncoderControl_metacast(QImageEncoderControl* self, const char* param1);
 int QImageEncoderControl_metacall(QImageEncoderControl* self, int param1, int param2, void** param3);
-struct seaqt_string QImageEncoderControl_tr(const char* s);
-struct seaqt_string QImageEncoderControl_trUtf8(const char* s);
+struct seaqt_string QImageEncoderControl_tr_s(const char* s);
+struct seaqt_string QImageEncoderControl_trUtf8_s(const char* s);
 struct seaqt_array /* of struct seaqt_string */  QImageEncoderControl_supportedImageCodecs(const QImageEncoderControl* self);
 struct seaqt_string QImageEncoderControl_imageCodecDescription(const QImageEncoderControl* self, struct seaqt_string codec);
 struct seaqt_array /* of QSize* */  QImageEncoderControl_supportedResolutions(const QImageEncoderControl* self, QImageEncoderSettings* settings, bool* continuous);
 QImageEncoderSettings* QImageEncoderControl_imageSettings(const QImageEncoderControl* self);
 void QImageEncoderControl_setImageSettings(QImageEncoderControl* self, QImageEncoderSettings* settings);
-struct seaqt_string QImageEncoderControl_tr2(const char* s, const char* c);
-struct seaqt_string QImageEncoderControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QImageEncoderControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QImageEncoderControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QImageEncoderControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QImageEncoderControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QImageEncoderControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QImageEncoderControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QImageEncoderControl_staticMetaObject();
 void QImageEncoderControl_delete(QImageEncoderControl* self);

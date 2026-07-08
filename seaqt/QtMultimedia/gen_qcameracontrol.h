@@ -32,8 +32,8 @@ void QCameraControl_virtbase(QCameraControl* src, QMediaControl** outptr_QMediaC
 QMetaObject* QCameraControl_metaObject(const QCameraControl* self);
 void* QCameraControl_metacast(QCameraControl* self, const char* param1);
 int QCameraControl_metacall(QCameraControl* self, int param1, int param2, void** param3);
-struct seaqt_string QCameraControl_tr(const char* s);
-struct seaqt_string QCameraControl_trUtf8(const char* s);
+struct seaqt_string QCameraControl_tr_s(const char* s);
+struct seaqt_string QCameraControl_trUtf8_s(const char* s);
 int QCameraControl_state(const QCameraControl* self);
 void QCameraControl_setState(QCameraControl* self, int state);
 int QCameraControl_status(const QCameraControl* self);
@@ -49,10 +49,10 @@ void QCameraControl_error(QCameraControl* self, int error, struct seaqt_string e
 void QCameraControl_connect_error(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t));
 void QCameraControl_captureModeChanged(QCameraControl* self, int mode);
 void QCameraControl_connect_captureModeChanged(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
-struct seaqt_string QCameraControl_tr2(const char* s, const char* c);
-struct seaqt_string QCameraControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QCameraControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QCameraControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QCameraControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCameraControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QCameraControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QCameraControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QCameraControl_staticMetaObject();
 void QCameraControl_delete(QCameraControl* self);

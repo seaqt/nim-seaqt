@@ -30,25 +30,25 @@ typedef struct QPixmapCache__Key QPixmapCache__Key;
 
 int QPixmapCache_cacheLimit();
 void QPixmapCache_setCacheLimit(int cacheLimit);
-QPixmap* QPixmapCache_find(struct seaqt_string key);
-bool QPixmapCache_find2(struct seaqt_string key, QPixmap* pixmap);
-bool QPixmapCache_find3(struct seaqt_string key, QPixmap* pixmap);
-bool QPixmapCache_find4(QPixmapCache__Key* key, QPixmap* pixmap);
-bool QPixmapCache_insert(struct seaqt_string key, QPixmap* pixmap);
-QPixmapCache__Key* QPixmapCache_insertWithPixmap(QPixmap* pixmap);
+QPixmap* QPixmapCache_find_cQString(struct seaqt_string key);
+bool QPixmapCache_find_cQString_QPixmap(struct seaqt_string key, QPixmap* pixmap);
+bool QPixmapCache_find_cQString_pQPixmap(struct seaqt_string key, QPixmap* pixmap);
+bool QPixmapCache_find_cQPixmapCache_Key_pQPixmap(QPixmapCache__Key* key, QPixmap* pixmap);
+bool QPixmapCache_insert_key_pixmap(struct seaqt_string key, QPixmap* pixmap);
+QPixmapCache__Key* QPixmapCache_insert_pixmap(QPixmap* pixmap);
 bool QPixmapCache_replace(QPixmapCache__Key* key, QPixmap* pixmap);
-void QPixmapCache_remove(struct seaqt_string key);
-void QPixmapCache_removeWithKey(QPixmapCache__Key* key);
+void QPixmapCache_remove_QString(struct seaqt_string key);
+void QPixmapCache_remove_QPixmapCache_Key(QPixmapCache__Key* key);
 void QPixmapCache_clear();
 
 void QPixmapCache_delete(QPixmapCache* self);
 
 QPixmapCache__Key* QPixmapCache__Key_new();
-QPixmapCache__Key* QPixmapCache__Key_new2(QPixmapCache__Key* other);
+QPixmapCache__Key* QPixmapCache__Key_new_from(QPixmapCache__Key* from);
 
 bool QPixmapCache__Key_operatorEqual(const QPixmapCache__Key* self, QPixmapCache__Key* key);
 bool QPixmapCache__Key_operatorNotEqual(const QPixmapCache__Key* self, QPixmapCache__Key* key);
-void QPixmapCache__Key_operatorAssign(QPixmapCache__Key* self, QPixmapCache__Key* other);
+void QPixmapCache__Key_operatorAssign(QPixmapCache__Key* self, QPixmapCache__Key* from);
 void QPixmapCache__Key_swap(QPixmapCache__Key* self, QPixmapCache__Key* other);
 bool QPixmapCache__Key_isValid(const QPixmapCache__Key* self);
 

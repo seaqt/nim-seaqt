@@ -248,7 +248,7 @@ VirtualQPictureFormatPlugin* QPictureFormatPlugin_new(const QPictureFormatPlugin
 	return _mem_ ? new (_mem_)VirtualQPictureFormatPlugin(vtbl) : nullptr;
 }
 
-VirtualQPictureFormatPlugin* QPictureFormatPlugin_new2(const QPictureFormatPlugin_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPictureFormatPlugin* QPictureFormatPlugin_new_parent(const QPictureFormatPlugin_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPictureFormatPlugin>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPictureFormatPlugin(vtbl, parent) : nullptr;
 }
@@ -269,7 +269,7 @@ int QPictureFormatPlugin_metacall(QPictureFormatPlugin* self, int param1, int pa
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPictureFormatPlugin_tr(const char* s) {
+struct seaqt_string QPictureFormatPlugin_tr_s(const char* s) {
 	QString _ret = QPictureFormatPlugin::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -280,7 +280,7 @@ struct seaqt_string QPictureFormatPlugin_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QPictureFormatPlugin_trUtf8(const char* s) {
+struct seaqt_string QPictureFormatPlugin_trUtf8_s(const char* s) {
 	QString _ret = QPictureFormatPlugin::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -308,7 +308,7 @@ bool QPictureFormatPlugin_installIOHandler(QPictureFormatPlugin* self, struct se
 	return self->installIOHandler(format_QString);
 }
 
-struct seaqt_string QPictureFormatPlugin_tr2(const char* s, const char* c) {
+struct seaqt_string QPictureFormatPlugin_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPictureFormatPlugin::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -319,7 +319,7 @@ struct seaqt_string QPictureFormatPlugin_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPictureFormatPlugin_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPictureFormatPlugin_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPictureFormatPlugin::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -330,7 +330,7 @@ struct seaqt_string QPictureFormatPlugin_tr3(const char* s, const char* c, int n
 	return _ms;
 }
 
-struct seaqt_string QPictureFormatPlugin_trUtf82(const char* s, const char* c) {
+struct seaqt_string QPictureFormatPlugin_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QPictureFormatPlugin::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -341,7 +341,7 @@ struct seaqt_string QPictureFormatPlugin_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPictureFormatPlugin_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QPictureFormatPlugin_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPictureFormatPlugin::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

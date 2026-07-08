@@ -54,21 +54,21 @@ void* QWebChannelAbstractTransport_vdata(VirtualQWebChannelAbstractTransport* se
 VirtualQWebChannelAbstractTransport* vdata_QWebChannelAbstractTransport(void* vdata);
 
 VirtualQWebChannelAbstractTransport* QWebChannelAbstractTransport_new(const QWebChannelAbstractTransport_VTable* vtbl, size_t vdata);
-VirtualQWebChannelAbstractTransport* QWebChannelAbstractTransport_new2(const QWebChannelAbstractTransport_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQWebChannelAbstractTransport* QWebChannelAbstractTransport_new_parent(const QWebChannelAbstractTransport_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QWebChannelAbstractTransport_virtbase(QWebChannelAbstractTransport* src, QObject** outptr_QObject);
 QMetaObject* QWebChannelAbstractTransport_metaObject(const QWebChannelAbstractTransport* self);
 void* QWebChannelAbstractTransport_metacast(QWebChannelAbstractTransport* self, const char* param1);
 int QWebChannelAbstractTransport_metacall(QWebChannelAbstractTransport* self, int param1, int param2, void** param3);
-struct seaqt_string QWebChannelAbstractTransport_tr(const char* s);
-struct seaqt_string QWebChannelAbstractTransport_trUtf8(const char* s);
+struct seaqt_string QWebChannelAbstractTransport_tr_s(const char* s);
+struct seaqt_string QWebChannelAbstractTransport_trUtf8_s(const char* s);
 void QWebChannelAbstractTransport_sendMessage(QWebChannelAbstractTransport* self, QJsonObject* message);
 void QWebChannelAbstractTransport_messageReceived(QWebChannelAbstractTransport* self, QJsonObject* message, QWebChannelAbstractTransport* transport);
 void QWebChannelAbstractTransport_connect_messageReceived(QWebChannelAbstractTransport* self, intptr_t slot, void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*), void (*release)(intptr_t));
-struct seaqt_string QWebChannelAbstractTransport_tr2(const char* s, const char* c);
-struct seaqt_string QWebChannelAbstractTransport_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebChannelAbstractTransport_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebChannelAbstractTransport_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebChannelAbstractTransport_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebChannelAbstractTransport_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebChannelAbstractTransport_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebChannelAbstractTransport_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWebChannelAbstractTransport_virtualbase_metaObject(const VirtualQWebChannelAbstractTransport* self);
 void* QWebChannelAbstractTransport_virtualbase_metacast(VirtualQWebChannelAbstractTransport* self, const char* param1);

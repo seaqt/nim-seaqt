@@ -56,15 +56,15 @@ typedef struct QRadioData_VTable{
 void* QRadioData_vdata(VirtualQRadioData* self);
 VirtualQRadioData* vdata_QRadioData(void* vdata);
 
-VirtualQRadioData* QRadioData_new(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject);
-VirtualQRadioData* QRadioData_new2(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent);
+VirtualQRadioData* QRadioData_new_mediaObject(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject);
+VirtualQRadioData* QRadioData_new_mediaObject_parent(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent);
 
 void QRadioData_virtbase(QRadioData* src, QObject** outptr_QObject, QMediaBindableInterface** outptr_QMediaBindableInterface);
 QMetaObject* QRadioData_metaObject(const QRadioData* self);
 void* QRadioData_metacast(QRadioData* self, const char* param1);
 int QRadioData_metacall(QRadioData* self, int param1, int param2, void** param3);
-struct seaqt_string QRadioData_tr(const char* s);
-struct seaqt_string QRadioData_trUtf8(const char* s);
+struct seaqt_string QRadioData_tr_s(const char* s);
+struct seaqt_string QRadioData_trUtf8_s(const char* s);
 int QRadioData_availability(const QRadioData* self);
 QMediaObject* QRadioData_mediaObject(const QRadioData* self);
 struct seaqt_string QRadioData_stationId(const QRadioData* self);
@@ -88,13 +88,13 @@ void QRadioData_radioTextChanged(QRadioData* self, struct seaqt_string radioText
 void QRadioData_connect_radioTextChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
 void QRadioData_alternativeFrequenciesEnabledChanged(QRadioData* self, bool enabled);
 void QRadioData_connect_alternativeFrequenciesEnabledChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-void QRadioData_errorWithError(QRadioData* self, int error);
-void QRadioData_connect_errorWithError(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QRadioData_error_error(QRadioData* self, int error);
+void QRadioData_connect_error_error(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 bool QRadioData_setMediaObject(QRadioData* self, QMediaObject* mediaObject);
-struct seaqt_string QRadioData_tr2(const char* s, const char* c);
-struct seaqt_string QRadioData_tr3(const char* s, const char* c, int n);
-struct seaqt_string QRadioData_trUtf82(const char* s, const char* c);
-struct seaqt_string QRadioData_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QRadioData_tr_s_c(const char* s, const char* c);
+struct seaqt_string QRadioData_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QRadioData_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QRadioData_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QRadioData_virtualbase_metaObject(const VirtualQRadioData* self);
 void* QRadioData_virtualbase_metacast(VirtualQRadioData* self, const char* param1);

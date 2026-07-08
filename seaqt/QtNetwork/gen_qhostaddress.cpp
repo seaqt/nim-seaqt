@@ -30,45 +30,45 @@ QHostAddress* QHostAddress_new() {
 	return new (std::nothrow) QHostAddress();
 }
 
-QHostAddress* QHostAddress_new2(unsigned int ip4Addr) {
+QHostAddress* QHostAddress_new_quint32(unsigned int ip4Addr) {
 	return new (std::nothrow) QHostAddress(static_cast<quint32>(ip4Addr));
 }
 
-QHostAddress* QHostAddress_new3(unsigned char* ip6Addr) {
+QHostAddress* QHostAddress_new_pquint8(unsigned char* ip6Addr) {
 	return new (std::nothrow) QHostAddress(static_cast<quint8*>(ip6Addr));
 }
 
-QHostAddress* QHostAddress_new4(const unsigned char* ip6Addr) {
+QHostAddress* QHostAddress_new_pcquint8(const unsigned char* ip6Addr) {
 	return new (std::nothrow) QHostAddress(static_cast<const quint8*>(ip6Addr));
 }
 
-QHostAddress* QHostAddress_new5(QIPv6Address* ip6Addr) {
+QHostAddress* QHostAddress_new_cQ_IPV6ADDR(QIPv6Address* ip6Addr) {
 	return new (std::nothrow) QHostAddress(*ip6Addr);
 }
 
-QHostAddress* QHostAddress_new6(struct seaqt_string address) {
+QHostAddress* QHostAddress_new_cQString(struct seaqt_string address) {
 	QString address_QString = QString::fromUtf8(address.data, address.len);
 	return new (std::nothrow) QHostAddress(address_QString);
 }
 
-QHostAddress* QHostAddress_new7(QHostAddress* copy) {
-	return new (std::nothrow) QHostAddress(*copy);
+QHostAddress* QHostAddress_new_cQHostAddress(QHostAddress* from) {
+	return new (std::nothrow) QHostAddress(*from);
 }
 
-QHostAddress* QHostAddress_new8(int address) {
+QHostAddress* QHostAddress_new_QHostAddress_SpecialAddress(int address) {
 	return new (std::nothrow) QHostAddress(static_cast<QHostAddress::SpecialAddress>(address));
 }
 
-void QHostAddress_operatorAssign(QHostAddress* self, QHostAddress* other) {
-	self->operator=(*other);
+void QHostAddress_operatorAssign_QHostAddress(QHostAddress* self, QHostAddress* from) {
+	self->operator=(*from);
 }
 
-void QHostAddress_operatorAssignWithAddress(QHostAddress* self, struct seaqt_string address) {
+void QHostAddress_operatorAssign_QString(QHostAddress* self, struct seaqt_string address) {
 	QString address_QString = QString::fromUtf8(address.data, address.len);
 	self->operator=(address_QString);
 }
 
-void QHostAddress_operatorAssign2(QHostAddress* self, int address) {
+void QHostAddress_operatorAssign_QHostAddress_SpecialAddress(QHostAddress* self, int address) {
 	self->operator=(static_cast<QHostAddress::SpecialAddress>(address));
 }
 
@@ -76,28 +76,28 @@ void QHostAddress_swap(QHostAddress* self, QHostAddress* other) {
 	self->swap(*other);
 }
 
-void QHostAddress_setAddress(QHostAddress* self, unsigned int ip4Addr) {
+void QHostAddress_setAddress_quint32(QHostAddress* self, unsigned int ip4Addr) {
 	self->setAddress(static_cast<quint32>(ip4Addr));
 }
 
-void QHostAddress_setAddressWithIp6Addr(QHostAddress* self, unsigned char* ip6Addr) {
+void QHostAddress_setAddress_pquint8(QHostAddress* self, unsigned char* ip6Addr) {
 	self->setAddress(static_cast<quint8*>(ip6Addr));
 }
 
-void QHostAddress_setAddress2(QHostAddress* self, const unsigned char* ip6Addr) {
+void QHostAddress_setAddress_pcquint8(QHostAddress* self, const unsigned char* ip6Addr) {
 	self->setAddress(static_cast<const quint8*>(ip6Addr));
 }
 
-void QHostAddress_setAddress3(QHostAddress* self, QIPv6Address* ip6Addr) {
+void QHostAddress_setAddress_cQ_IPV6ADDR(QHostAddress* self, QIPv6Address* ip6Addr) {
 	self->setAddress(*ip6Addr);
 }
 
-bool QHostAddress_setAddress4(QHostAddress* self, struct seaqt_string address) {
+bool QHostAddress_setAddress_cQString(QHostAddress* self, struct seaqt_string address) {
 	QString address_QString = QString::fromUtf8(address.data, address.len);
 	return self->setAddress(address_QString);
 }
 
-void QHostAddress_setAddress5(QHostAddress* self, int address) {
+void QHostAddress_setAddress_QHostAddress_SpecialAddress(QHostAddress* self, int address) {
 	self->setAddress(static_cast<QHostAddress::SpecialAddress>(address));
 }
 
@@ -111,7 +111,7 @@ unsigned int QHostAddress_toIPv4Address(const QHostAddress* self) {
 	return static_cast<unsigned int>(_ret);
 }
 
-unsigned int QHostAddress_toIPv4AddressWithOk(const QHostAddress* self, bool* ok) {
+unsigned int QHostAddress_toIPv4Address_ok(const QHostAddress* self, bool* ok) {
 	quint32 _ret = self->toIPv4Address(ok);
 	return static_cast<unsigned int>(_ret);
 }
@@ -147,23 +147,23 @@ void QHostAddress_setScopeId(QHostAddress* self, struct seaqt_string id) {
 	self->setScopeId(id_QString);
 }
 
-bool QHostAddress_isEqual(const QHostAddress* self, QHostAddress* address) {
+bool QHostAddress_isEqual_address(const QHostAddress* self, QHostAddress* address) {
 	return self->isEqual(*address);
 }
 
-bool QHostAddress_operatorEqual(const QHostAddress* self, QHostAddress* address) {
+bool QHostAddress_operatorEqual_QHostAddress(const QHostAddress* self, QHostAddress* address) {
 	return (*self == *address);
 }
 
-bool QHostAddress_operatorEqualWithAddress(const QHostAddress* self, int address) {
+bool QHostAddress_operatorEqual_QHostAddress_SpecialAddress(const QHostAddress* self, int address) {
 	return (*self == static_cast<QHostAddress::SpecialAddress>(address));
 }
 
-bool QHostAddress_operatorNotEqual(const QHostAddress* self, QHostAddress* address) {
+bool QHostAddress_operatorNotEqual_QHostAddress(const QHostAddress* self, QHostAddress* address) {
 	return (*self != *address);
 }
 
-bool QHostAddress_operatorNotEqualWithAddress(const QHostAddress* self, int address) {
+bool QHostAddress_operatorNotEqual_QHostAddress_SpecialAddress(const QHostAddress* self, int address) {
 	return (*self != static_cast<QHostAddress::SpecialAddress>(address));
 }
 
@@ -175,11 +175,11 @@ void QHostAddress_clear(QHostAddress* self) {
 	self->clear();
 }
 
-bool QHostAddress_isInSubnet(const QHostAddress* self, QHostAddress* subnet, int netmask) {
+bool QHostAddress_isInSubnet_subnet_netmask(const QHostAddress* self, QHostAddress* subnet, int netmask) {
 	return self->isInSubnet(*subnet, static_cast<int>(netmask));
 }
 
-bool QHostAddress_isInSubnetWithSubnet(const QHostAddress* self, struct seaqt_map /* tuple of QHostAddress* and int */  subnet) {
+bool QHostAddress_isInSubnet_subnet(const QHostAddress* self, struct seaqt_map /* tuple of QHostAddress* and int */  subnet) {
 	QPair<QHostAddress, int> subnet_QPair;
 	QHostAddress** subnet_first_arr = static_cast<QHostAddress**>(subnet.keys);
 	int* subnet_second_arr = static_cast<int*>(subnet.values);
@@ -231,7 +231,7 @@ struct seaqt_map /* tuple of QHostAddress* and int */  QHostAddress_parseSubnet(
 	return _out;
 }
 
-bool QHostAddress_isEqual2(const QHostAddress* self, QHostAddress* address, int mode) {
+bool QHostAddress_isEqual_address_mode(const QHostAddress* self, QHostAddress* address, int mode) {
 	return self->isEqual(*address, static_cast<QHostAddress::ConversionMode>(mode));
 }
 

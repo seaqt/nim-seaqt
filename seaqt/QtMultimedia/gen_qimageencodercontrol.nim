@@ -59,17 +59,17 @@ type cQImageEncoderControl*{.exportc: "QImageEncoderControl", incompleteStruct.}
 proc fcQImageEncoderControl_metaObject(self: pointer): pointer {.importc: "QImageEncoderControl_metaObject".}
 proc fcQImageEncoderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QImageEncoderControl_metacast".}
 proc fcQImageEncoderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QImageEncoderControl_metacall".}
-proc fcQImageEncoderControl_tr(s: cstring): struct_seaqt_string {.importc: "QImageEncoderControl_tr".}
-proc fcQImageEncoderControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QImageEncoderControl_trUtf8".}
+proc fcQImageEncoderControl_trS(s: cstring): struct_seaqt_string {.importc: "QImageEncoderControl_tr_s".}
+proc fcQImageEncoderControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QImageEncoderControl_trUtf8_s".}
 proc fcQImageEncoderControl_supportedImageCodecs(self: pointer): struct_seaqt_array {.importc: "QImageEncoderControl_supportedImageCodecs".}
 proc fcQImageEncoderControl_imageCodecDescription(self: pointer, codec: struct_seaqt_string): struct_seaqt_string {.importc: "QImageEncoderControl_imageCodecDescription".}
 proc fcQImageEncoderControl_supportedResolutions(self: pointer, settings: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QImageEncoderControl_supportedResolutions".}
 proc fcQImageEncoderControl_imageSettings(self: pointer): pointer {.importc: "QImageEncoderControl_imageSettings".}
 proc fcQImageEncoderControl_setImageSettings(self: pointer, settings: pointer): void {.importc: "QImageEncoderControl_setImageSettings".}
-proc fcQImageEncoderControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageEncoderControl_tr2".}
-proc fcQImageEncoderControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageEncoderControl_tr3".}
-proc fcQImageEncoderControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageEncoderControl_trUtf82".}
-proc fcQImageEncoderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageEncoderControl_trUtf83".}
+proc fcQImageEncoderControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageEncoderControl_tr_s_c".}
+proc fcQImageEncoderControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageEncoderControl_tr_s_c_n".}
+proc fcQImageEncoderControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageEncoderControl_trUtf8_s_c".}
+proc fcQImageEncoderControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageEncoderControl_trUtf8_s_c_n".}
 proc fcQImageEncoderControl_protectedbase_sender(self: pointer): pointer {.importc: "QImageEncoderControl_protectedbase_sender".}
 proc fcQImageEncoderControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QImageEncoderControl_protectedbase_senderSignalIndex".}
 proc fcQImageEncoderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QImageEncoderControl_protectedbase_receivers".}
@@ -86,13 +86,13 @@ proc metacall*(self: gen_qimageencodercontrol_types.QImageEncoderControl, param1
   fcQImageEncoderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cstring): string =
-  let v_ms = fcQImageEncoderControl_tr(s)
+  let v_ms = fcQImageEncoderControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cstring): string =
-  let v_ms = fcQImageEncoderControl_trUtf8(s)
+  let v_ms = fcQImageEncoderControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -131,25 +131,25 @@ proc setImageSettings*(self: gen_qimageencodercontrol_types.QImageEncoderControl
   fcQImageEncoderControl_setImageSettings(self.h, settings.h)
 
 proc tr*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQImageEncoderControl_tr2(s, c)
+  let v_ms = fcQImageEncoderControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQImageEncoderControl_tr3(s, c, n)
+  let v_ms = fcQImageEncoderControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cstring, c: cstring): string =
-  let v_ms = fcQImageEncoderControl_trUtf82(s, c)
+  let v_ms = fcQImageEncoderControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQImageEncoderControl_trUtf83(s, c, n)
+  let v_ms = fcQImageEncoderControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

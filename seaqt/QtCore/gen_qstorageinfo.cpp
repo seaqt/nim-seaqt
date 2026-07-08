@@ -22,21 +22,21 @@ QStorageInfo* QStorageInfo_new() {
 	return new (std::nothrow) QStorageInfo();
 }
 
-QStorageInfo* QStorageInfo_new2(struct seaqt_string path) {
+QStorageInfo* QStorageInfo_new_path(struct seaqt_string path) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 	return new (std::nothrow) QStorageInfo(path_QString);
 }
 
-QStorageInfo* QStorageInfo_new3(QDir* dir) {
+QStorageInfo* QStorageInfo_new_dir(QDir* dir) {
 	return new (std::nothrow) QStorageInfo(*dir);
 }
 
-QStorageInfo* QStorageInfo_new4(QStorageInfo* other) {
-	return new (std::nothrow) QStorageInfo(*other);
+QStorageInfo* QStorageInfo_new_from(QStorageInfo* from) {
+	return new (std::nothrow) QStorageInfo(*from);
 }
 
-void QStorageInfo_operatorAssign(QStorageInfo* self, QStorageInfo* other) {
-	self->operator=(*other);
+void QStorageInfo_operatorAssign(QStorageInfo* self, QStorageInfo* from) {
+	self->operator=(*from);
 }
 
 void QStorageInfo_swap(QStorageInfo* self, QStorageInfo* other) {

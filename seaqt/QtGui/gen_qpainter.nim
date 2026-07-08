@@ -152,49 +152,49 @@ proc fcQPainter_font(self: pointer): pointer {.importc: "QPainter_font".}
 proc fcQPainter_setFont(self: pointer, f: pointer): void {.importc: "QPainter_setFont".}
 proc fcQPainter_fontMetrics(self: pointer): pointer {.importc: "QPainter_fontMetrics".}
 proc fcQPainter_fontInfo(self: pointer): pointer {.importc: "QPainter_fontInfo".}
-proc fcQPainter_setPen(self: pointer, color: pointer): void {.importc: "QPainter_setPen".}
-proc fcQPainter_setPenWithPen(self: pointer, pen: pointer): void {.importc: "QPainter_setPenWithPen".}
-proc fcQPainter_setPenWithStyle(self: pointer, style: cint): void {.importc: "QPainter_setPenWithStyle".}
+proc fcQPainter_setPenColor(self: pointer, color: pointer): void {.importc: "QPainter_setPen_color".}
+proc fcQPainter_setPenPen(self: pointer, pen: pointer): void {.importc: "QPainter_setPen_pen".}
+proc fcQPainter_setPenStyle(self: pointer, style: cint): void {.importc: "QPainter_setPen_style".}
 proc fcQPainter_pen(self: pointer): pointer {.importc: "QPainter_pen".}
-proc fcQPainter_setBrush(self: pointer, brush: pointer): void {.importc: "QPainter_setBrush".}
-proc fcQPainter_setBrushWithStyle(self: pointer, style: cint): void {.importc: "QPainter_setBrushWithStyle".}
+proc fcQPainter_setBrushBrush(self: pointer, brush: pointer): void {.importc: "QPainter_setBrush_brush".}
+proc fcQPainter_setBrushStyle(self: pointer, style: cint): void {.importc: "QPainter_setBrush_style".}
 proc fcQPainter_brush(self: pointer): pointer {.importc: "QPainter_brush".}
 proc fcQPainter_setBackgroundMode(self: pointer, mode: cint): void {.importc: "QPainter_setBackgroundMode".}
 proc fcQPainter_backgroundMode(self: pointer): cint {.importc: "QPainter_backgroundMode".}
 proc fcQPainter_brushOrigin(self: pointer): pointer {.importc: "QPainter_brushOrigin".}
-proc fcQPainter_setBrushOrigin(self: pointer, x: cint, y: cint): void {.importc: "QPainter_setBrushOrigin".}
-proc fcQPainter_setBrushOriginWithBrushOrigin(self: pointer, brushOrigin: pointer): void {.importc: "QPainter_setBrushOriginWithBrushOrigin".}
-proc fcQPainter_setBrushOrigin2(self: pointer, brushOrigin: pointer): void {.importc: "QPainter_setBrushOrigin2".}
+proc fcQPainter_setBrushOriginIntInt(self: pointer, x: cint, y: cint): void {.importc: "QPainter_setBrushOrigin_int_int".}
+proc fcQPainter_setBrushOrigin_QPoint(self: pointer, brushOrigin: pointer): void {.importc: "QPainter_setBrushOrigin_QPoint".}
+proc fcQPainter_setBrushOrigin_QPointF(self: pointer, brushOrigin: pointer): void {.importc: "QPainter_setBrushOrigin_QPointF".}
 proc fcQPainter_setBackground(self: pointer, bg: pointer): void {.importc: "QPainter_setBackground".}
 proc fcQPainter_background(self: pointer): pointer {.importc: "QPainter_background".}
 proc fcQPainter_opacity(self: pointer): float64 {.importc: "QPainter_opacity".}
 proc fcQPainter_setOpacity(self: pointer, opacity: float64): void {.importc: "QPainter_setOpacity".}
 proc fcQPainter_clipRegion(self: pointer): pointer {.importc: "QPainter_clipRegion".}
 proc fcQPainter_clipPath(self: pointer): pointer {.importc: "QPainter_clipPath".}
-proc fcQPainter_setClipRect(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRect".}
-proc fcQPainter_setClipRectWithQRect(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRectWithQRect".}
-proc fcQPainter_setClipRect2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setClipRect2".}
-proc fcQPainter_setClipRegion(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRegion".}
-proc fcQPainter_setClipPath(self: pointer, path: pointer): void {.importc: "QPainter_setClipPath".}
+proc fcQPainter_setClipRect_QRectF(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRect_QRectF".}
+proc fcQPainter_setClipRect_QRect(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRect_QRect".}
+proc fcQPainter_setClipRectIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setClipRect_int_int_int_int".}
+proc fcQPainter_setClipRegion_QRegion(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRegion_QRegion".}
+proc fcQPainter_setClipPathPath(self: pointer, path: pointer): void {.importc: "QPainter_setClipPath_path".}
 proc fcQPainter_setClipping(self: pointer, enable: bool): void {.importc: "QPainter_setClipping".}
 proc fcQPainter_hasClipping(self: pointer): bool {.importc: "QPainter_hasClipping".}
 proc fcQPainter_clipBoundingRect(self: pointer): pointer {.importc: "QPainter_clipBoundingRect".}
 proc fcQPainter_save(self: pointer): void {.importc: "QPainter_save".}
 proc fcQPainter_restore(self: pointer): void {.importc: "QPainter_restore".}
-proc fcQPainter_setMatrix(self: pointer, matrix: pointer): void {.importc: "QPainter_setMatrix".}
+proc fcQPainter_setMatrixMatrix(self: pointer, matrix: pointer): void {.importc: "QPainter_setMatrix_matrix".}
 proc fcQPainter_matrix(self: pointer): pointer {.importc: "QPainter_matrix".}
 proc fcQPainter_deviceMatrix(self: pointer): pointer {.importc: "QPainter_deviceMatrix".}
 proc fcQPainter_resetMatrix(self: pointer): void {.importc: "QPainter_resetMatrix".}
-proc fcQPainter_setTransform(self: pointer, transform: pointer): void {.importc: "QPainter_setTransform".}
+proc fcQPainter_setTransformTransform(self: pointer, transform: pointer): void {.importc: "QPainter_setTransform_transform".}
 proc fcQPainter_transform(self: pointer): pointer {.importc: "QPainter_transform".}
 proc fcQPainter_deviceTransform(self: pointer): pointer {.importc: "QPainter_deviceTransform".}
 proc fcQPainter_resetTransform(self: pointer): void {.importc: "QPainter_resetTransform".}
-proc fcQPainter_setWorldMatrix(self: pointer, matrix: pointer): void {.importc: "QPainter_setWorldMatrix".}
+proc fcQPainter_setWorldMatrixMatrix(self: pointer, matrix: pointer): void {.importc: "QPainter_setWorldMatrix_matrix".}
 proc fcQPainter_worldMatrix(self: pointer): pointer {.importc: "QPainter_worldMatrix".}
 proc fcQPainter_combinedMatrix(self: pointer): pointer {.importc: "QPainter_combinedMatrix".}
 proc fcQPainter_setMatrixEnabled(self: pointer, enabled: bool): void {.importc: "QPainter_setMatrixEnabled".}
 proc fcQPainter_matrixEnabled(self: pointer): bool {.importc: "QPainter_matrixEnabled".}
-proc fcQPainter_setWorldTransform(self: pointer, matrix: pointer): void {.importc: "QPainter_setWorldTransform".}
+proc fcQPainter_setWorldTransformMatrix(self: pointer, matrix: pointer): void {.importc: "QPainter_setWorldTransform_matrix".}
 proc fcQPainter_worldTransform(self: pointer): pointer {.importc: "QPainter_worldTransform".}
 proc fcQPainter_combinedTransform(self: pointer): pointer {.importc: "QPainter_combinedTransform".}
 proc fcQPainter_setWorldMatrixEnabled(self: pointer, enabled: bool): void {.importc: "QPainter_setWorldMatrixEnabled".}
@@ -202,192 +202,192 @@ proc fcQPainter_worldMatrixEnabled(self: pointer): bool {.importc: "QPainter_wor
 proc fcQPainter_scale(self: pointer, sx: float64, sy: float64): void {.importc: "QPainter_scale".}
 proc fcQPainter_shear(self: pointer, sh: float64, sv: float64): void {.importc: "QPainter_shear".}
 proc fcQPainter_rotate(self: pointer, a: float64): void {.importc: "QPainter_rotate".}
-proc fcQPainter_translate(self: pointer, offset: pointer): void {.importc: "QPainter_translate".}
-proc fcQPainter_translateWithOffset(self: pointer, offset: pointer): void {.importc: "QPainter_translateWithOffset".}
-proc fcQPainter_translate2(self: pointer, dx: float64, dy: float64): void {.importc: "QPainter_translate2".}
+proc fcQPainter_translate_QPointF(self: pointer, offset: pointer): void {.importc: "QPainter_translate_QPointF".}
+proc fcQPainter_translate_QPoint(self: pointer, offset: pointer): void {.importc: "QPainter_translate_QPoint".}
+proc fcQPainter_translateQrealQreal(self: pointer, dx: float64, dy: float64): void {.importc: "QPainter_translate_qreal_qreal".}
 proc fcQPainter_window(self: pointer): pointer {.importc: "QPainter_window".}
-proc fcQPainter_setWindow(self: pointer, window: pointer): void {.importc: "QPainter_setWindow".}
-proc fcQPainter_setWindow2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setWindow2".}
+proc fcQPainter_setWindowWindow(self: pointer, window: pointer): void {.importc: "QPainter_setWindow_window".}
+proc fcQPainter_setWindowXYWH(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setWindow_x_y_w_h".}
 proc fcQPainter_viewport(self: pointer): pointer {.importc: "QPainter_viewport".}
-proc fcQPainter_setViewport(self: pointer, viewport: pointer): void {.importc: "QPainter_setViewport".}
-proc fcQPainter_setViewport2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setViewport2".}
+proc fcQPainter_setViewportViewport(self: pointer, viewport: pointer): void {.importc: "QPainter_setViewport_viewport".}
+proc fcQPainter_setViewportXYWH(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setViewport_x_y_w_h".}
 proc fcQPainter_setViewTransformEnabled(self: pointer, enable: bool): void {.importc: "QPainter_setViewTransformEnabled".}
 proc fcQPainter_viewTransformEnabled(self: pointer): bool {.importc: "QPainter_viewTransformEnabled".}
 proc fcQPainter_strokePath(self: pointer, path: pointer, pen: pointer): void {.importc: "QPainter_strokePath".}
 proc fcQPainter_fillPath(self: pointer, path: pointer, brush: pointer): void {.importc: "QPainter_fillPath".}
 proc fcQPainter_drawPath(self: pointer, path: pointer): void {.importc: "QPainter_drawPath".}
-proc fcQPainter_drawPoint(self: pointer, pt: pointer): void {.importc: "QPainter_drawPoint".}
-proc fcQPainter_drawPointWithQPoint(self: pointer, p: pointer): void {.importc: "QPainter_drawPointWithQPoint".}
-proc fcQPainter_drawPoint2(self: pointer, x: cint, y: cint): void {.importc: "QPainter_drawPoint2".}
-proc fcQPainter_drawPoints(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPoints".}
-proc fcQPainter_drawPoints2(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPoints2".}
-proc fcQPainter_drawLine(self: pointer, line: pointer): void {.importc: "QPainter_drawLine".}
-proc fcQPainter_drawLineWithLine(self: pointer, line: pointer): void {.importc: "QPainter_drawLineWithLine".}
-proc fcQPainter_drawLine2(self: pointer, x1: cint, y1: cint, x2: cint, y2: cint): void {.importc: "QPainter_drawLine2".}
-proc fcQPainter_drawLine3(self: pointer, p1: pointer, p2: pointer): void {.importc: "QPainter_drawLine3".}
-proc fcQPainter_drawLine4(self: pointer, p1: pointer, p2: pointer): void {.importc: "QPainter_drawLine4".}
-proc fcQPainter_drawLines(self: pointer, lines: pointer, lineCount: cint): void {.importc: "QPainter_drawLines".}
-proc fcQPainter_drawLinesWithLines(self: pointer, lines: struct_seaqt_array): void {.importc: "QPainter_drawLinesWithLines".}
-proc fcQPainter_drawLines2(self: pointer, pointPairs: pointer, lineCount: cint): void {.importc: "QPainter_drawLines2".}
-proc fcQPainter_drawLinesWithPointPairs(self: pointer, pointPairs: struct_seaqt_array): void {.importc: "QPainter_drawLinesWithPointPairs".}
-proc fcQPainter_drawLines3(self: pointer, lines: pointer, lineCount: cint): void {.importc: "QPainter_drawLines3".}
-proc fcQPainter_drawLines4(self: pointer, lines: struct_seaqt_array): void {.importc: "QPainter_drawLines4".}
-proc fcQPainter_drawLines5(self: pointer, pointPairs: pointer, lineCount: cint): void {.importc: "QPainter_drawLines5".}
-proc fcQPainter_drawLines6(self: pointer, pointPairs: struct_seaqt_array): void {.importc: "QPainter_drawLines6".}
-proc fcQPainter_drawRect(self: pointer, rect: pointer): void {.importc: "QPainter_drawRect".}
-proc fcQPainter_drawRect2(self: pointer, x1: cint, y1: cint, w: cint, h: cint): void {.importc: "QPainter_drawRect2".}
-proc fcQPainter_drawRectWithRect(self: pointer, rect: pointer): void {.importc: "QPainter_drawRectWithRect".}
-proc fcQPainter_drawRects(self: pointer, rects: pointer, rectCount: cint): void {.importc: "QPainter_drawRects".}
-proc fcQPainter_drawRectsWithRectangles(self: pointer, rectangles: struct_seaqt_array): void {.importc: "QPainter_drawRectsWithRectangles".}
-proc fcQPainter_drawRects2(self: pointer, rects: pointer, rectCount: cint): void {.importc: "QPainter_drawRects2".}
-proc fcQPainter_drawRects3(self: pointer, rectangles: struct_seaqt_array): void {.importc: "QPainter_drawRects3".}
-proc fcQPainter_drawEllipse(self: pointer, r: pointer): void {.importc: "QPainter_drawEllipse".}
-proc fcQPainter_drawEllipseWithQRect(self: pointer, r: pointer): void {.importc: "QPainter_drawEllipseWithQRect".}
-proc fcQPainter_drawEllipse2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_drawEllipse2".}
-proc fcQPainter_drawEllipse3(self: pointer, center: pointer, rx: float64, ry: float64): void {.importc: "QPainter_drawEllipse3".}
-proc fcQPainter_drawEllipse4(self: pointer, center: pointer, rx: cint, ry: cint): void {.importc: "QPainter_drawEllipse4".}
-proc fcQPainter_drawPolyline(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPolyline".}
-proc fcQPainter_drawPolyline2(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPolyline2".}
-proc fcQPainter_drawPolygon(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPolygon".}
-proc fcQPainter_drawPolygon2(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPolygon2".}
-proc fcQPainter_drawConvexPolygon(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawConvexPolygon".}
-proc fcQPainter_drawConvexPolygon2(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawConvexPolygon2".}
-proc fcQPainter_drawArc(self: pointer, rect: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawArc".}
-proc fcQPainter_drawArc2(self: pointer, param1: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawArc2".}
-proc fcQPainter_drawArc3(self: pointer, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void {.importc: "QPainter_drawArc3".}
-proc fcQPainter_drawPie(self: pointer, rect: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawPie".}
-proc fcQPainter_drawPie2(self: pointer, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void {.importc: "QPainter_drawPie2".}
-proc fcQPainter_drawPie3(self: pointer, param1: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawPie3".}
-proc fcQPainter_drawChord(self: pointer, rect: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawChord".}
-proc fcQPainter_drawChord2(self: pointer, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void {.importc: "QPainter_drawChord2".}
-proc fcQPainter_drawChord3(self: pointer, param1: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawChord3".}
-proc fcQPainter_drawRoundedRect(self: pointer, rect: pointer, xRadius: float64, yRadius: float64): void {.importc: "QPainter_drawRoundedRect".}
-proc fcQPainter_drawRoundedRect2(self: pointer, x: cint, y: cint, w: cint, h: cint, xRadius: float64, yRadius: float64): void {.importc: "QPainter_drawRoundedRect2".}
-proc fcQPainter_drawRoundedRect3(self: pointer, rect: pointer, xRadius: float64, yRadius: float64): void {.importc: "QPainter_drawRoundedRect3".}
-proc fcQPainter_drawRoundRect(self: pointer, r: pointer): void {.importc: "QPainter_drawRoundRect".}
-proc fcQPainter_drawRoundRect2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_drawRoundRect2".}
-proc fcQPainter_drawRoundRectWithQRect(self: pointer, r: pointer): void {.importc: "QPainter_drawRoundRectWithQRect".}
-proc fcQPainter_drawTiledPixmap(self: pointer, rect: pointer, pm: pointer): void {.importc: "QPainter_drawTiledPixmap".}
-proc fcQPainter_drawTiledPixmap2(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: pointer): void {.importc: "QPainter_drawTiledPixmap2".}
-proc fcQPainter_drawTiledPixmap3(self: pointer, param1: pointer, param2: pointer): void {.importc: "QPainter_drawTiledPixmap3".}
-proc fcQPainter_drawPicture(self: pointer, p: pointer, picture: pointer): void {.importc: "QPainter_drawPicture".}
-proc fcQPainter_drawPicture2(self: pointer, x: cint, y: cint, picture: pointer): void {.importc: "QPainter_drawPicture2".}
-proc fcQPainter_drawPicture3(self: pointer, p: pointer, picture: pointer): void {.importc: "QPainter_drawPicture3".}
-proc fcQPainter_drawPixmap(self: pointer, targetRect: pointer, pixmap: pointer, sourceRect: pointer): void {.importc: "QPainter_drawPixmap".}
-proc fcQPainter_drawPixmap2(self: pointer, targetRect: pointer, pixmap: pointer, sourceRect: pointer): void {.importc: "QPainter_drawPixmap2".}
-proc fcQPainter_drawPixmap3(self: pointer, x: cint, y: cint, w: cint, h: cint, pm: pointer, sx: cint, sy: cint, sw: cint, sh: cint): void {.importc: "QPainter_drawPixmap3".}
-proc fcQPainter_drawPixmap4(self: pointer, x: cint, y: cint, pm: pointer, sx: cint, sy: cint, sw: cint, sh: cint): void {.importc: "QPainter_drawPixmap4".}
-proc fcQPainter_drawPixmap5(self: pointer, p: pointer, pm: pointer, sr: pointer): void {.importc: "QPainter_drawPixmap5".}
-proc fcQPainter_drawPixmap6(self: pointer, p: pointer, pm: pointer, sr: pointer): void {.importc: "QPainter_drawPixmap6".}
-proc fcQPainter_drawPixmap7(self: pointer, p: pointer, pm: pointer): void {.importc: "QPainter_drawPixmap7".}
-proc fcQPainter_drawPixmap8(self: pointer, p: pointer, pm: pointer): void {.importc: "QPainter_drawPixmap8".}
-proc fcQPainter_drawPixmap9(self: pointer, x: cint, y: cint, pm: pointer): void {.importc: "QPainter_drawPixmap9".}
-proc fcQPainter_drawPixmap10(self: pointer, r: pointer, pm: pointer): void {.importc: "QPainter_drawPixmap10".}
-proc fcQPainter_drawPixmap11(self: pointer, x: cint, y: cint, w: cint, h: cint, pm: pointer): void {.importc: "QPainter_drawPixmap11".}
-proc fcQPainter_drawPixmapFragments(self: pointer, fragments: pointer, fragmentCount: cint, pixmap: pointer): void {.importc: "QPainter_drawPixmapFragments".}
-proc fcQPainter_drawImage(self: pointer, targetRect: pointer, image: pointer, sourceRect: pointer): void {.importc: "QPainter_drawImage".}
-proc fcQPainter_drawImage2(self: pointer, targetRect: pointer, image: pointer, sourceRect: pointer): void {.importc: "QPainter_drawImage2".}
-proc fcQPainter_drawImage3(self: pointer, p: pointer, image: pointer, sr: pointer): void {.importc: "QPainter_drawImage3".}
-proc fcQPainter_drawImage4(self: pointer, p: pointer, image: pointer, sr: pointer): void {.importc: "QPainter_drawImage4".}
-proc fcQPainter_drawImage5(self: pointer, r: pointer, image: pointer): void {.importc: "QPainter_drawImage5".}
-proc fcQPainter_drawImage6(self: pointer, r: pointer, image: pointer): void {.importc: "QPainter_drawImage6".}
-proc fcQPainter_drawImage7(self: pointer, p: pointer, image: pointer): void {.importc: "QPainter_drawImage7".}
-proc fcQPainter_drawImage8(self: pointer, p: pointer, image: pointer): void {.importc: "QPainter_drawImage8".}
-proc fcQPainter_drawImage9(self: pointer, x: cint, y: cint, image: pointer): void {.importc: "QPainter_drawImage9".}
+proc fcQPainter_drawPointPt(self: pointer, pt: pointer): void {.importc: "QPainter_drawPoint_pt".}
+proc fcQPainter_drawPointP(self: pointer, p: pointer): void {.importc: "QPainter_drawPoint_p".}
+proc fcQPainter_drawPointXY(self: pointer, x: cint, y: cint): void {.importc: "QPainter_drawPoint_x_y".}
+proc fcQPainter_drawPoints_QPointFInt(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPoints_QPointF_int".}
+proc fcQPainter_drawPoints_QPointInt(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPoints_QPoint_int".}
+proc fcQPainter_drawLine_QLineF(self: pointer, line: pointer): void {.importc: "QPainter_drawLine_QLineF".}
+proc fcQPainter_drawLine_QLine(self: pointer, line: pointer): void {.importc: "QPainter_drawLine_QLine".}
+proc fcQPainter_drawLineIntIntIntInt(self: pointer, x1: cint, y1: cint, x2: cint, y2: cint): void {.importc: "QPainter_drawLine_int_int_int_int".}
+proc fcQPainter_drawLine_QPoint_QPoint(self: pointer, p1: pointer, p2: pointer): void {.importc: "QPainter_drawLine_QPoint_QPoint".}
+proc fcQPainter_drawLine_QPointF_QPointF(self: pointer, p1: pointer, p2: pointer): void {.importc: "QPainter_drawLine_QPointF_QPointF".}
+proc fcQPainter_drawLines_QLineFInt(self: pointer, lines: pointer, lineCount: cint): void {.importc: "QPainter_drawLines_QLineF_int".}
+proc fcQPainter_drawLines_QVectorOfQLineF(self: pointer, lines: struct_seaqt_array): void {.importc: "QPainter_drawLines_QVectorOfQLineF".}
+proc fcQPainter_drawLines_QPointFInt(self: pointer, pointPairs: pointer, lineCount: cint): void {.importc: "QPainter_drawLines_QPointF_int".}
+proc fcQPainter_drawLines_QVectorOfQPointF(self: pointer, pointPairs: struct_seaqt_array): void {.importc: "QPainter_drawLines_QVectorOfQPointF".}
+proc fcQPainter_drawLines_QLineInt(self: pointer, lines: pointer, lineCount: cint): void {.importc: "QPainter_drawLines_QLine_int".}
+proc fcQPainter_drawLines_QVectorOfQLine(self: pointer, lines: struct_seaqt_array): void {.importc: "QPainter_drawLines_QVectorOfQLine".}
+proc fcQPainter_drawLines_QPointInt(self: pointer, pointPairs: pointer, lineCount: cint): void {.importc: "QPainter_drawLines_QPoint_int".}
+proc fcQPainter_drawLines_QVectorOfQPoint(self: pointer, pointPairs: struct_seaqt_array): void {.importc: "QPainter_drawLines_QVectorOfQPoint".}
+proc fcQPainter_drawRect_QRectF(self: pointer, rect: pointer): void {.importc: "QPainter_drawRect_QRectF".}
+proc fcQPainter_drawRectIntIntIntInt(self: pointer, x1: cint, y1: cint, w: cint, h: cint): void {.importc: "QPainter_drawRect_int_int_int_int".}
+proc fcQPainter_drawRect_QRect(self: pointer, rect: pointer): void {.importc: "QPainter_drawRect_QRect".}
+proc fcQPainter_drawRects_QRectFInt(self: pointer, rects: pointer, rectCount: cint): void {.importc: "QPainter_drawRects_QRectF_int".}
+proc fcQPainter_drawRects_QVectorOfQRectF(self: pointer, rectangles: struct_seaqt_array): void {.importc: "QPainter_drawRects_QVectorOfQRectF".}
+proc fcQPainter_drawRects_QRectInt(self: pointer, rects: pointer, rectCount: cint): void {.importc: "QPainter_drawRects_QRect_int".}
+proc fcQPainter_drawRects_QVectorOfQRect(self: pointer, rectangles: struct_seaqt_array): void {.importc: "QPainter_drawRects_QVectorOfQRect".}
+proc fcQPainter_drawEllipse_QRectF(self: pointer, r: pointer): void {.importc: "QPainter_drawEllipse_QRectF".}
+proc fcQPainter_drawEllipse_QRect(self: pointer, r: pointer): void {.importc: "QPainter_drawEllipse_QRect".}
+proc fcQPainter_drawEllipseIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_drawEllipse_int_int_int_int".}
+proc fcQPainter_drawEllipse_QPointFQrealQreal(self: pointer, center: pointer, rx: float64, ry: float64): void {.importc: "QPainter_drawEllipse_QPointF_qreal_qreal".}
+proc fcQPainter_drawEllipse_QPointIntInt(self: pointer, center: pointer, rx: cint, ry: cint): void {.importc: "QPainter_drawEllipse_QPoint_int_int".}
+proc fcQPainter_drawPolyline_QPointFInt(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPolyline_QPointF_int".}
+proc fcQPainter_drawPolyline_QPointInt(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPolyline_QPoint_int".}
+proc fcQPainter_drawPolygon_QPointFInt(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPolygon_QPointF_int".}
+proc fcQPainter_drawPolygon_QPointInt(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawPolygon_QPoint_int".}
+proc fcQPainter_drawConvexPolygon_QPointFInt(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawConvexPolygon_QPointF_int".}
+proc fcQPainter_drawConvexPolygon_QPointInt(self: pointer, points: pointer, pointCount: cint): void {.importc: "QPainter_drawConvexPolygon_QPoint_int".}
+proc fcQPainter_drawArc_QRectFIntInt(self: pointer, rect: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawArc_QRectF_int_int".}
+proc fcQPainter_drawArc_QRectIntInt(self: pointer, param1: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawArc_QRect_int_int".}
+proc fcQPainter_drawArcIntIntIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void {.importc: "QPainter_drawArc_int_int_int_int_int_int".}
+proc fcQPainter_drawPie_QRectFIntInt(self: pointer, rect: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawPie_QRectF_int_int".}
+proc fcQPainter_drawPieIntIntIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void {.importc: "QPainter_drawPie_int_int_int_int_int_int".}
+proc fcQPainter_drawPie_QRectIntInt(self: pointer, param1: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawPie_QRect_int_int".}
+proc fcQPainter_drawChord_QRectFIntInt(self: pointer, rect: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawChord_QRectF_int_int".}
+proc fcQPainter_drawChordIntIntIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void {.importc: "QPainter_drawChord_int_int_int_int_int_int".}
+proc fcQPainter_drawChord_QRectIntInt(self: pointer, param1: pointer, a: cint, alen: cint): void {.importc: "QPainter_drawChord_QRect_int_int".}
+proc fcQPainter_drawRoundedRect_QRectFQrealQreal(self: pointer, rect: pointer, xRadius: float64, yRadius: float64): void {.importc: "QPainter_drawRoundedRect_QRectF_qreal_qreal".}
+proc fcQPainter_drawRoundedRectIntIntIntIntQrealQreal(self: pointer, x: cint, y: cint, w: cint, h: cint, xRadius: float64, yRadius: float64): void {.importc: "QPainter_drawRoundedRect_int_int_int_int_qreal_qreal".}
+proc fcQPainter_drawRoundedRect_QRectQrealQreal(self: pointer, rect: pointer, xRadius: float64, yRadius: float64): void {.importc: "QPainter_drawRoundedRect_QRect_qreal_qreal".}
+proc fcQPainter_drawRoundRect_QRectF(self: pointer, r: pointer): void {.importc: "QPainter_drawRoundRect_QRectF".}
+proc fcQPainter_drawRoundRectIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_drawRoundRect_int_int_int_int".}
+proc fcQPainter_drawRoundRect_QRect(self: pointer, r: pointer): void {.importc: "QPainter_drawRoundRect_QRect".}
+proc fcQPainter_drawTiledPixmap_QRectF_QPixmap(self: pointer, rect: pointer, pm: pointer): void {.importc: "QPainter_drawTiledPixmap_QRectF_QPixmap".}
+proc fcQPainter_drawTiledPixmapIntIntIntInt_QPixmap(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: pointer): void {.importc: "QPainter_drawTiledPixmap_int_int_int_int_QPixmap".}
+proc fcQPainter_drawTiledPixmap_QRect_QPixmap(self: pointer, param1: pointer, param2: pointer): void {.importc: "QPainter_drawTiledPixmap_QRect_QPixmap".}
+proc fcQPainter_drawPicture_QPointF_QPicture(self: pointer, p: pointer, picture: pointer): void {.importc: "QPainter_drawPicture_QPointF_QPicture".}
+proc fcQPainter_drawPictureIntInt_QPicture(self: pointer, x: cint, y: cint, picture: pointer): void {.importc: "QPainter_drawPicture_int_int_QPicture".}
+proc fcQPainter_drawPicture_QPoint_QPicture(self: pointer, p: pointer, picture: pointer): void {.importc: "QPainter_drawPicture_QPoint_QPicture".}
+proc fcQPainter_drawPixmap_QRectF_QPixmap_QRectF(self: pointer, targetRect: pointer, pixmap: pointer, sourceRect: pointer): void {.importc: "QPainter_drawPixmap_QRectF_QPixmap_QRectF".}
+proc fcQPainter_drawPixmap_QRect_QPixmap_QRect(self: pointer, targetRect: pointer, pixmap: pointer, sourceRect: pointer): void {.importc: "QPainter_drawPixmap_QRect_QPixmap_QRect".}
+proc fcQPainter_drawPixmapIntIntIntInt_QPixmapIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint, pm: pointer, sx: cint, sy: cint, sw: cint, sh: cint): void {.importc: "QPainter_drawPixmap_int_int_int_int_QPixmap_int_int_int_int".}
+proc fcQPainter_drawPixmapIntInt_QPixmapIntIntIntInt(self: pointer, x: cint, y: cint, pm: pointer, sx: cint, sy: cint, sw: cint, sh: cint): void {.importc: "QPainter_drawPixmap_int_int_QPixmap_int_int_int_int".}
+proc fcQPainter_drawPixmap_QPointF_QPixmap_QRectF(self: pointer, p: pointer, pm: pointer, sr: pointer): void {.importc: "QPainter_drawPixmap_QPointF_QPixmap_QRectF".}
+proc fcQPainter_drawPixmap_QPoint_QPixmap_QRect(self: pointer, p: pointer, pm: pointer, sr: pointer): void {.importc: "QPainter_drawPixmap_QPoint_QPixmap_QRect".}
+proc fcQPainter_drawPixmap_QPointF_QPixmap(self: pointer, p: pointer, pm: pointer): void {.importc: "QPainter_drawPixmap_QPointF_QPixmap".}
+proc fcQPainter_drawPixmap_QPoint_QPixmap(self: pointer, p: pointer, pm: pointer): void {.importc: "QPainter_drawPixmap_QPoint_QPixmap".}
+proc fcQPainter_drawPixmapIntInt_QPixmap(self: pointer, x: cint, y: cint, pm: pointer): void {.importc: "QPainter_drawPixmap_int_int_QPixmap".}
+proc fcQPainter_drawPixmap_QRect_QPixmap(self: pointer, r: pointer, pm: pointer): void {.importc: "QPainter_drawPixmap_QRect_QPixmap".}
+proc fcQPainter_drawPixmapIntIntIntInt_QPixmap(self: pointer, x: cint, y: cint, w: cint, h: cint, pm: pointer): void {.importc: "QPainter_drawPixmap_int_int_int_int_QPixmap".}
+proc fcQPainter_drawPixmapFragmentsFragmentsFragmentCountPixmap(self: pointer, fragments: pointer, fragmentCount: cint, pixmap: pointer): void {.importc: "QPainter_drawPixmapFragments_fragments_fragmentCount_pixmap".}
+proc fcQPainter_drawImage_QRectF_QImage_QRectF(self: pointer, targetRect: pointer, image: pointer, sourceRect: pointer): void {.importc: "QPainter_drawImage_QRectF_QImage_QRectF".}
+proc fcQPainter_drawImage_QRect_QImage_QRect(self: pointer, targetRect: pointer, image: pointer, sourceRect: pointer): void {.importc: "QPainter_drawImage_QRect_QImage_QRect".}
+proc fcQPainter_drawImage_QPointF_QImage_QRectF(self: pointer, p: pointer, image: pointer, sr: pointer): void {.importc: "QPainter_drawImage_QPointF_QImage_QRectF".}
+proc fcQPainter_drawImage_QPoint_QImage_QRect(self: pointer, p: pointer, image: pointer, sr: pointer): void {.importc: "QPainter_drawImage_QPoint_QImage_QRect".}
+proc fcQPainter_drawImage_QRectF_QImage(self: pointer, r: pointer, image: pointer): void {.importc: "QPainter_drawImage_QRectF_QImage".}
+proc fcQPainter_drawImage_QRect_QImage(self: pointer, r: pointer, image: pointer): void {.importc: "QPainter_drawImage_QRect_QImage".}
+proc fcQPainter_drawImage_QPointF_QImage(self: pointer, p: pointer, image: pointer): void {.importc: "QPainter_drawImage_QPointF_QImage".}
+proc fcQPainter_drawImage_QPoint_QImage(self: pointer, p: pointer, image: pointer): void {.importc: "QPainter_drawImage_QPoint_QImage".}
+proc fcQPainter_drawImageIntInt_QImage(self: pointer, x: cint, y: cint, image: pointer): void {.importc: "QPainter_drawImage_int_int_QImage".}
 proc fcQPainter_setLayoutDirection(self: pointer, direction: cint): void {.importc: "QPainter_setLayoutDirection".}
 proc fcQPainter_layoutDirection(self: pointer): cint {.importc: "QPainter_layoutDirection".}
 proc fcQPainter_drawGlyphRun(self: pointer, position: pointer, glyphRun: pointer): void {.importc: "QPainter_drawGlyphRun".}
-proc fcQPainter_drawStaticText(self: pointer, topLeftPosition: pointer, staticText: pointer): void {.importc: "QPainter_drawStaticText".}
-proc fcQPainter_drawStaticText2(self: pointer, topLeftPosition: pointer, staticText: pointer): void {.importc: "QPainter_drawStaticText2".}
-proc fcQPainter_drawStaticText3(self: pointer, left: cint, top: cint, staticText: pointer): void {.importc: "QPainter_drawStaticText3".}
-proc fcQPainter_drawText(self: pointer, p: pointer, s: struct_seaqt_string): void {.importc: "QPainter_drawText".}
-proc fcQPainter_drawText2(self: pointer, p: pointer, s: struct_seaqt_string): void {.importc: "QPainter_drawText2".}
-proc fcQPainter_drawText3(self: pointer, x: cint, y: cint, s: struct_seaqt_string): void {.importc: "QPainter_drawText3".}
-proc fcQPainter_drawText4(self: pointer, p: pointer, str: struct_seaqt_string, tf: cint, justificationPadding: cint): void {.importc: "QPainter_drawText4".}
-proc fcQPainter_drawText5(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string): void {.importc: "QPainter_drawText5".}
-proc fcQPainter_drawText6(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string): void {.importc: "QPainter_drawText6".}
-proc fcQPainter_drawText7(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string): void {.importc: "QPainter_drawText7".}
-proc fcQPainter_drawText8(self: pointer, r: pointer, text: struct_seaqt_string): void {.importc: "QPainter_drawText8".}
-proc fcQPainter_boundingRect(self: pointer, rect: pointer, flags: cint, text: struct_seaqt_string): pointer {.importc: "QPainter_boundingRect".}
-proc fcQPainter_boundingRect2(self: pointer, rect: pointer, flags: cint, text: struct_seaqt_string): pointer {.importc: "QPainter_boundingRect2".}
-proc fcQPainter_boundingRect3(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string): pointer {.importc: "QPainter_boundingRect3".}
-proc fcQPainter_boundingRect4(self: pointer, rect: pointer, text: struct_seaqt_string): pointer {.importc: "QPainter_boundingRect4".}
-proc fcQPainter_drawTextItem(self: pointer, p: pointer, ti: pointer): void {.importc: "QPainter_drawTextItem".}
-proc fcQPainter_drawTextItem2(self: pointer, x: cint, y: cint, ti: pointer): void {.importc: "QPainter_drawTextItem2".}
-proc fcQPainter_drawTextItem3(self: pointer, p: pointer, ti: pointer): void {.importc: "QPainter_drawTextItem3".}
-proc fcQPainter_fillRect(self: pointer, param1: pointer, param2: pointer): void {.importc: "QPainter_fillRect".}
-proc fcQPainter_fillRect2(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: pointer): void {.importc: "QPainter_fillRect2".}
-proc fcQPainter_fillRect3(self: pointer, param1: pointer, param2: pointer): void {.importc: "QPainter_fillRect3".}
-proc fcQPainter_fillRect4(self: pointer, param1: pointer, color: pointer): void {.importc: "QPainter_fillRect4".}
-proc fcQPainter_fillRect5(self: pointer, x: cint, y: cint, w: cint, h: cint, color: pointer): void {.importc: "QPainter_fillRect5".}
-proc fcQPainter_fillRect6(self: pointer, param1: pointer, color: pointer): void {.importc: "QPainter_fillRect6".}
-proc fcQPainter_fillRect7(self: pointer, x: cint, y: cint, w: cint, h: cint, c: cint): void {.importc: "QPainter_fillRect7".}
-proc fcQPainter_fillRect8(self: pointer, r: pointer, c: cint): void {.importc: "QPainter_fillRect8".}
-proc fcQPainter_fillRect9(self: pointer, r: pointer, c: cint): void {.importc: "QPainter_fillRect9".}
-proc fcQPainter_fillRect10(self: pointer, x: cint, y: cint, w: cint, h: cint, style: cint): void {.importc: "QPainter_fillRect10".}
-proc fcQPainter_fillRect11(self: pointer, r: pointer, style: cint): void {.importc: "QPainter_fillRect11".}
-proc fcQPainter_fillRect12(self: pointer, r: pointer, style: cint): void {.importc: "QPainter_fillRect12".}
-proc fcQPainter_fillRect13(self: pointer, x: cint, y: cint, w: cint, h: cint, preset: cint): void {.importc: "QPainter_fillRect13".}
-proc fcQPainter_fillRect14(self: pointer, r: pointer, preset: cint): void {.importc: "QPainter_fillRect14".}
-proc fcQPainter_fillRect15(self: pointer, r: pointer, preset: cint): void {.importc: "QPainter_fillRect15".}
-proc fcQPainter_eraseRect(self: pointer, param1: pointer): void {.importc: "QPainter_eraseRect".}
-proc fcQPainter_eraseRect2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_eraseRect2".}
-proc fcQPainter_eraseRectWithQRect(self: pointer, param1: pointer): void {.importc: "QPainter_eraseRectWithQRect".}
-proc fcQPainter_setRenderHint(self: pointer, hint: cint): void {.importc: "QPainter_setRenderHint".}
-proc fcQPainter_setRenderHints(self: pointer, hints: cint): void {.importc: "QPainter_setRenderHints".}
+proc fcQPainter_drawStaticText_QPointF_QStaticText(self: pointer, topLeftPosition: pointer, staticText: pointer): void {.importc: "QPainter_drawStaticText_QPointF_QStaticText".}
+proc fcQPainter_drawStaticText_QPoint_QStaticText(self: pointer, topLeftPosition: pointer, staticText: pointer): void {.importc: "QPainter_drawStaticText_QPoint_QStaticText".}
+proc fcQPainter_drawStaticTextIntInt_QStaticText(self: pointer, left: cint, top: cint, staticText: pointer): void {.importc: "QPainter_drawStaticText_int_int_QStaticText".}
+proc fcQPainter_drawText_QPointF_QString(self: pointer, p: pointer, s: struct_seaqt_string): void {.importc: "QPainter_drawText_QPointF_QString".}
+proc fcQPainter_drawText_QPoint_QString(self: pointer, p: pointer, s: struct_seaqt_string): void {.importc: "QPainter_drawText_QPoint_QString".}
+proc fcQPainter_drawTextIntInt_QString(self: pointer, x: cint, y: cint, s: struct_seaqt_string): void {.importc: "QPainter_drawText_int_int_QString".}
+proc fcQPainter_drawText_QPointF_QStringIntInt(self: pointer, p: pointer, str: struct_seaqt_string, tf: cint, justificationPadding: cint): void {.importc: "QPainter_drawText_QPointF_QString_int_int".}
+proc fcQPainter_drawText_QRectFInt_QString(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string): void {.importc: "QPainter_drawText_QRectF_int_QString".}
+proc fcQPainter_drawText_QRectInt_QString(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string): void {.importc: "QPainter_drawText_QRect_int_QString".}
+proc fcQPainter_drawTextIntIntIntIntInt_QString(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string): void {.importc: "QPainter_drawText_int_int_int_int_int_QString".}
+proc fcQPainter_drawText_QRectF_QString(self: pointer, r: pointer, text: struct_seaqt_string): void {.importc: "QPainter_drawText_QRectF_QString".}
+proc fcQPainter_boundingRect_QRectFInt_QString(self: pointer, rect: pointer, flags: cint, text: struct_seaqt_string): pointer {.importc: "QPainter_boundingRect_QRectF_int_QString".}
+proc fcQPainter_boundingRect_QRectInt_QString(self: pointer, rect: pointer, flags: cint, text: struct_seaqt_string): pointer {.importc: "QPainter_boundingRect_QRect_int_QString".}
+proc fcQPainter_boundingRectIntIntIntIntInt_QString(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string): pointer {.importc: "QPainter_boundingRect_int_int_int_int_int_QString".}
+proc fcQPainter_boundingRect_QRectF_QString(self: pointer, rect: pointer, text: struct_seaqt_string): pointer {.importc: "QPainter_boundingRect_QRectF_QString".}
+proc fcQPainter_drawTextItem_QPointF_QTextItem(self: pointer, p: pointer, ti: pointer): void {.importc: "QPainter_drawTextItem_QPointF_QTextItem".}
+proc fcQPainter_drawTextItemIntInt_QTextItem(self: pointer, x: cint, y: cint, ti: pointer): void {.importc: "QPainter_drawTextItem_int_int_QTextItem".}
+proc fcQPainter_drawTextItem_QPoint_QTextItem(self: pointer, p: pointer, ti: pointer): void {.importc: "QPainter_drawTextItem_QPoint_QTextItem".}
+proc fcQPainter_fillRect_QRectF_QBrush(self: pointer, param1: pointer, param2: pointer): void {.importc: "QPainter_fillRect_QRectF_QBrush".}
+proc fcQPainter_fillRectIntIntIntInt_QBrush(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: pointer): void {.importc: "QPainter_fillRect_int_int_int_int_QBrush".}
+proc fcQPainter_fillRect_QRect_QBrush(self: pointer, param1: pointer, param2: pointer): void {.importc: "QPainter_fillRect_QRect_QBrush".}
+proc fcQPainter_fillRect_QRectF_QColor(self: pointer, param1: pointer, color: pointer): void {.importc: "QPainter_fillRect_QRectF_QColor".}
+proc fcQPainter_fillRectIntIntIntInt_QColor(self: pointer, x: cint, y: cint, w: cint, h: cint, color: pointer): void {.importc: "QPainter_fillRect_int_int_int_int_QColor".}
+proc fcQPainter_fillRect_QRect_QColor(self: pointer, param1: pointer, color: pointer): void {.importc: "QPainter_fillRect_QRect_QColor".}
+proc fcQPainter_fillRectIntIntIntInt_Qt_GlobalColor(self: pointer, x: cint, y: cint, w: cint, h: cint, c: cint): void {.importc: "QPainter_fillRect_int_int_int_int_Qt_GlobalColor".}
+proc fcQPainter_fillRect_QRect_Qt_GlobalColor(self: pointer, r: pointer, c: cint): void {.importc: "QPainter_fillRect_QRect_Qt_GlobalColor".}
+proc fcQPainter_fillRect_QRectF_Qt_GlobalColor(self: pointer, r: pointer, c: cint): void {.importc: "QPainter_fillRect_QRectF_Qt_GlobalColor".}
+proc fcQPainter_fillRectIntIntIntInt_Qt_BrushStyle(self: pointer, x: cint, y: cint, w: cint, h: cint, style: cint): void {.importc: "QPainter_fillRect_int_int_int_int_Qt_BrushStyle".}
+proc fcQPainter_fillRect_QRect_Qt_BrushStyle(self: pointer, r: pointer, style: cint): void {.importc: "QPainter_fillRect_QRect_Qt_BrushStyle".}
+proc fcQPainter_fillRect_QRectF_Qt_BrushStyle(self: pointer, r: pointer, style: cint): void {.importc: "QPainter_fillRect_QRectF_Qt_BrushStyle".}
+proc fcQPainter_fillRectIntIntIntInt_QGradient_Preset(self: pointer, x: cint, y: cint, w: cint, h: cint, preset: cint): void {.importc: "QPainter_fillRect_int_int_int_int_QGradient_Preset".}
+proc fcQPainter_fillRect_QRect_QGradient_Preset(self: pointer, r: pointer, preset: cint): void {.importc: "QPainter_fillRect_QRect_QGradient_Preset".}
+proc fcQPainter_fillRect_QRectF_QGradient_Preset(self: pointer, r: pointer, preset: cint): void {.importc: "QPainter_fillRect_QRectF_QGradient_Preset".}
+proc fcQPainter_eraseRect_QRectF(self: pointer, param1: pointer): void {.importc: "QPainter_eraseRect_QRectF".}
+proc fcQPainter_eraseRectIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_eraseRect_int_int_int_int".}
+proc fcQPainter_eraseRect_QRect(self: pointer, param1: pointer): void {.importc: "QPainter_eraseRect_QRect".}
+proc fcQPainter_setRenderHintHint(self: pointer, hint: cint): void {.importc: "QPainter_setRenderHint_hint".}
+proc fcQPainter_setRenderHintsHints(self: pointer, hints: cint): void {.importc: "QPainter_setRenderHints_hints".}
 proc fcQPainter_renderHints(self: pointer): cint {.importc: "QPainter_renderHints".}
 proc fcQPainter_testRenderHint(self: pointer, hint: cint): bool {.importc: "QPainter_testRenderHint".}
 proc fcQPainter_paintEngine(self: pointer): pointer {.importc: "QPainter_paintEngine".}
-proc fcQPainter_setRedirected(device: pointer, replacement: pointer): void {.importc: "QPainter_setRedirected".}
-proc fcQPainter_redirected(device: pointer): pointer {.importc: "QPainter_redirected".}
+proc fcQPainter_setRedirectedDeviceReplacement(device: pointer, replacement: pointer): void {.importc: "QPainter_setRedirected_device_replacement".}
+proc fcQPainter_redirectedDevice(device: pointer): pointer {.importc: "QPainter_redirected_device".}
 proc fcQPainter_restoreRedirected(device: pointer): void {.importc: "QPainter_restoreRedirected".}
 proc fcQPainter_beginNativePainting(self: pointer): void {.importc: "QPainter_beginNativePainting".}
 proc fcQPainter_endNativePainting(self: pointer): void {.importc: "QPainter_endNativePainting".}
-proc fcQPainter_setClipRect3(self: pointer, param1: pointer, op: cint): void {.importc: "QPainter_setClipRect3".}
-proc fcQPainter_setClipRect4(self: pointer, param1: pointer, op: cint): void {.importc: "QPainter_setClipRect4".}
-proc fcQPainter_setClipRect5(self: pointer, x: cint, y: cint, w: cint, h: cint, op: cint): void {.importc: "QPainter_setClipRect5".}
-proc fcQPainter_setClipRegion2(self: pointer, param1: pointer, op: cint): void {.importc: "QPainter_setClipRegion2".}
-proc fcQPainter_setClipPath2(self: pointer, path: pointer, op: cint): void {.importc: "QPainter_setClipPath2".}
-proc fcQPainter_setMatrix2(self: pointer, matrix: pointer, combine: bool): void {.importc: "QPainter_setMatrix2".}
-proc fcQPainter_setTransform2(self: pointer, transform: pointer, combine: bool): void {.importc: "QPainter_setTransform2".}
-proc fcQPainter_setWorldMatrix2(self: pointer, matrix: pointer, combine: bool): void {.importc: "QPainter_setWorldMatrix2".}
-proc fcQPainter_setWorldTransform2(self: pointer, matrix: pointer, combine: bool): void {.importc: "QPainter_setWorldTransform2".}
-proc fcQPainter_drawPolygon4(self: pointer, points: pointer, pointCount: cint, fillRule: cint): void {.importc: "QPainter_drawPolygon4".}
-proc fcQPainter_drawPolygon6(self: pointer, points: pointer, pointCount: cint, fillRule: cint): void {.importc: "QPainter_drawPolygon6".}
-proc fcQPainter_drawRoundedRect4(self: pointer, rect: pointer, xRadius: float64, yRadius: float64, mode: cint): void {.importc: "QPainter_drawRoundedRect4".}
-proc fcQPainter_drawRoundedRect5(self: pointer, x: cint, y: cint, w: cint, h: cint, xRadius: float64, yRadius: float64, mode: cint): void {.importc: "QPainter_drawRoundedRect5".}
-proc fcQPainter_drawRoundedRect6(self: pointer, rect: pointer, xRadius: float64, yRadius: float64, mode: cint): void {.importc: "QPainter_drawRoundedRect6".}
-proc fcQPainter_drawRoundRect3(self: pointer, r: pointer, xround: cint): void {.importc: "QPainter_drawRoundRect3".}
-proc fcQPainter_drawRoundRect4(self: pointer, r: pointer, xround: cint, yround: cint): void {.importc: "QPainter_drawRoundRect4".}
-proc fcQPainter_drawRoundRect5(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: cint): void {.importc: "QPainter_drawRoundRect5".}
-proc fcQPainter_drawRoundRect6(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: cint, param6: cint): void {.importc: "QPainter_drawRoundRect6".}
-proc fcQPainter_drawRoundRect7(self: pointer, r: pointer, xround: cint): void {.importc: "QPainter_drawRoundRect7".}
-proc fcQPainter_drawRoundRect8(self: pointer, r: pointer, xround: cint, yround: cint): void {.importc: "QPainter_drawRoundRect8".}
-proc fcQPainter_drawTiledPixmap4(self: pointer, rect: pointer, pm: pointer, offset: pointer): void {.importc: "QPainter_drawTiledPixmap4".}
-proc fcQPainter_drawTiledPixmap5(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: pointer, sx: cint): void {.importc: "QPainter_drawTiledPixmap5".}
-proc fcQPainter_drawTiledPixmap6(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: pointer, sx: cint, sy: cint): void {.importc: "QPainter_drawTiledPixmap6".}
-proc fcQPainter_drawTiledPixmap7(self: pointer, param1: pointer, param2: pointer, param3: pointer): void {.importc: "QPainter_drawTiledPixmap7".}
-proc fcQPainter_drawPixmapFragments2(self: pointer, fragments: pointer, fragmentCount: cint, pixmap: pointer, hints: cint): void {.importc: "QPainter_drawPixmapFragments2".}
-proc fcQPainter_drawImage10(self: pointer, targetRect: pointer, image: pointer, sourceRect: pointer, flags: cint): void {.importc: "QPainter_drawImage10".}
-proc fcQPainter_drawImage11(self: pointer, targetRect: pointer, image: pointer, sourceRect: pointer, flags: cint): void {.importc: "QPainter_drawImage11".}
-proc fcQPainter_drawImage12(self: pointer, p: pointer, image: pointer, sr: pointer, flags: cint): void {.importc: "QPainter_drawImage12".}
-proc fcQPainter_drawImage13(self: pointer, p: pointer, image: pointer, sr: pointer, flags: cint): void {.importc: "QPainter_drawImage13".}
-proc fcQPainter_drawImage14(self: pointer, x: cint, y: cint, image: pointer, sx: cint): void {.importc: "QPainter_drawImage14".}
-proc fcQPainter_drawImage15(self: pointer, x: cint, y: cint, image: pointer, sx: cint, sy: cint): void {.importc: "QPainter_drawImage15".}
-proc fcQPainter_drawImage16(self: pointer, x: cint, y: cint, image: pointer, sx: cint, sy: cint, sw: cint): void {.importc: "QPainter_drawImage16".}
-proc fcQPainter_drawImage17(self: pointer, x: cint, y: cint, image: pointer, sx: cint, sy: cint, sw: cint, sh: cint): void {.importc: "QPainter_drawImage17".}
-proc fcQPainter_drawImage18(self: pointer, x: cint, y: cint, image: pointer, sx: cint, sy: cint, sw: cint, sh: cint, flags: cint): void {.importc: "QPainter_drawImage18".}
-proc fcQPainter_drawText9(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string, br: pointer): void {.importc: "QPainter_drawText9".}
-proc fcQPainter_drawText10(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string, br: pointer): void {.importc: "QPainter_drawText10".}
-proc fcQPainter_drawText11(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string, br: pointer): void {.importc: "QPainter_drawText11".}
-proc fcQPainter_drawText12(self: pointer, r: pointer, text: struct_seaqt_string, o: pointer): void {.importc: "QPainter_drawText12".}
-proc fcQPainter_boundingRect5(self: pointer, rect: pointer, text: struct_seaqt_string, o: pointer): pointer {.importc: "QPainter_boundingRect5".}
-proc fcQPainter_setRenderHint2(self: pointer, hint: cint, on: bool): void {.importc: "QPainter_setRenderHint2".}
-proc fcQPainter_setRenderHints2(self: pointer, hints: cint, on: bool): void {.importc: "QPainter_setRenderHints2".}
-proc fcQPainter_setRedirected2(device: pointer, replacement: pointer, offset: pointer): void {.importc: "QPainter_setRedirected2".}
-proc fcQPainter_redirected2(device: pointer, offset: pointer): pointer {.importc: "QPainter_redirected2".}
+proc fcQPainter_setClipRect_QRectF_Qt_ClipOperation(self: pointer, param1: pointer, op: cint): void {.importc: "QPainter_setClipRect_QRectF_Qt_ClipOperation".}
+proc fcQPainter_setClipRect_QRect_Qt_ClipOperation(self: pointer, param1: pointer, op: cint): void {.importc: "QPainter_setClipRect_QRect_Qt_ClipOperation".}
+proc fcQPainter_setClipRectIntIntIntInt_Qt_ClipOperation(self: pointer, x: cint, y: cint, w: cint, h: cint, op: cint): void {.importc: "QPainter_setClipRect_int_int_int_int_Qt_ClipOperation".}
+proc fcQPainter_setClipRegion_QRegion_Qt_ClipOperation(self: pointer, param1: pointer, op: cint): void {.importc: "QPainter_setClipRegion_QRegion_Qt_ClipOperation".}
+proc fcQPainter_setClipPathPathOp(self: pointer, path: pointer, op: cint): void {.importc: "QPainter_setClipPath_path_op".}
+proc fcQPainter_setMatrixMatrixCombine(self: pointer, matrix: pointer, combine: bool): void {.importc: "QPainter_setMatrix_matrix_combine".}
+proc fcQPainter_setTransformTransformCombine(self: pointer, transform: pointer, combine: bool): void {.importc: "QPainter_setTransform_transform_combine".}
+proc fcQPainter_setWorldMatrixMatrixCombine(self: pointer, matrix: pointer, combine: bool): void {.importc: "QPainter_setWorldMatrix_matrix_combine".}
+proc fcQPainter_setWorldTransformMatrixCombine(self: pointer, matrix: pointer, combine: bool): void {.importc: "QPainter_setWorldTransform_matrix_combine".}
+proc fcQPainter_drawPolygon_QPointFInt_Qt_FillRule(self: pointer, points: pointer, pointCount: cint, fillRule: cint): void {.importc: "QPainter_drawPolygon_QPointF_int_Qt_FillRule".}
+proc fcQPainter_drawPolygon_QPointInt_Qt_FillRule(self: pointer, points: pointer, pointCount: cint, fillRule: cint): void {.importc: "QPainter_drawPolygon_QPoint_int_Qt_FillRule".}
+proc fcQPainter_drawRoundedRect_QRectFQrealQreal_Qt_SizeMode(self: pointer, rect: pointer, xRadius: float64, yRadius: float64, mode: cint): void {.importc: "QPainter_drawRoundedRect_QRectF_qreal_qreal_Qt_SizeMode".}
+proc fcQPainter_drawRoundedRectIntIntIntIntQrealQreal_Qt_SizeMode(self: pointer, x: cint, y: cint, w: cint, h: cint, xRadius: float64, yRadius: float64, mode: cint): void {.importc: "QPainter_drawRoundedRect_int_int_int_int_qreal_qreal_Qt_SizeMode".}
+proc fcQPainter_drawRoundedRect_QRectQrealQreal_Qt_SizeMode(self: pointer, rect: pointer, xRadius: float64, yRadius: float64, mode: cint): void {.importc: "QPainter_drawRoundedRect_QRect_qreal_qreal_Qt_SizeMode".}
+proc fcQPainter_drawRoundRect_QRectFInt(self: pointer, r: pointer, xround: cint): void {.importc: "QPainter_drawRoundRect_QRectF_int".}
+proc fcQPainter_drawRoundRect_QRectFIntInt(self: pointer, r: pointer, xround: cint, yround: cint): void {.importc: "QPainter_drawRoundRect_QRectF_int_int".}
+proc fcQPainter_drawRoundRectIntIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: cint): void {.importc: "QPainter_drawRoundRect_int_int_int_int_int".}
+proc fcQPainter_drawRoundRectIntIntIntIntIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: cint, param6: cint): void {.importc: "QPainter_drawRoundRect_int_int_int_int_int_int".}
+proc fcQPainter_drawRoundRect_QRectInt(self: pointer, r: pointer, xround: cint): void {.importc: "QPainter_drawRoundRect_QRect_int".}
+proc fcQPainter_drawRoundRect_QRectIntInt(self: pointer, r: pointer, xround: cint, yround: cint): void {.importc: "QPainter_drawRoundRect_QRect_int_int".}
+proc fcQPainter_drawTiledPixmap_QRectF_QPixmap_QPointF(self: pointer, rect: pointer, pm: pointer, offset: pointer): void {.importc: "QPainter_drawTiledPixmap_QRectF_QPixmap_QPointF".}
+proc fcQPainter_drawTiledPixmapIntIntIntInt_QPixmapInt(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: pointer, sx: cint): void {.importc: "QPainter_drawTiledPixmap_int_int_int_int_QPixmap_int".}
+proc fcQPainter_drawTiledPixmapIntIntIntInt_QPixmapIntInt(self: pointer, x: cint, y: cint, w: cint, h: cint, param5: pointer, sx: cint, sy: cint): void {.importc: "QPainter_drawTiledPixmap_int_int_int_int_QPixmap_int_int".}
+proc fcQPainter_drawTiledPixmap_QRect_QPixmap_QPoint(self: pointer, param1: pointer, param2: pointer, param3: pointer): void {.importc: "QPainter_drawTiledPixmap_QRect_QPixmap_QPoint".}
+proc fcQPainter_drawPixmapFragmentsFragmentsFragmentCountPixmapHints(self: pointer, fragments: pointer, fragmentCount: cint, pixmap: pointer, hints: cint): void {.importc: "QPainter_drawPixmapFragments_fragments_fragmentCount_pixmap_hints".}
+proc fcQPainter_drawImage_QRectF_QImage_QRectF_Qt_ImageConversionFlags(self: pointer, targetRect: pointer, image: pointer, sourceRect: pointer, flags: cint): void {.importc: "QPainter_drawImage_QRectF_QImage_QRectF_Qt_ImageConversionFlags".}
+proc fcQPainter_drawImage_QRect_QImage_QRect_Qt_ImageConversionFlags(self: pointer, targetRect: pointer, image: pointer, sourceRect: pointer, flags: cint): void {.importc: "QPainter_drawImage_QRect_QImage_QRect_Qt_ImageConversionFlags".}
+proc fcQPainter_drawImage_QPointF_QImage_QRectF_Qt_ImageConversionFlags(self: pointer, p: pointer, image: pointer, sr: pointer, flags: cint): void {.importc: "QPainter_drawImage_QPointF_QImage_QRectF_Qt_ImageConversionFlags".}
+proc fcQPainter_drawImage_QPoint_QImage_QRect_Qt_ImageConversionFlags(self: pointer, p: pointer, image: pointer, sr: pointer, flags: cint): void {.importc: "QPainter_drawImage_QPoint_QImage_QRect_Qt_ImageConversionFlags".}
+proc fcQPainter_drawImageIntInt_QImageInt(self: pointer, x: cint, y: cint, image: pointer, sx: cint): void {.importc: "QPainter_drawImage_int_int_QImage_int".}
+proc fcQPainter_drawImageIntInt_QImageIntInt(self: pointer, x: cint, y: cint, image: pointer, sx: cint, sy: cint): void {.importc: "QPainter_drawImage_int_int_QImage_int_int".}
+proc fcQPainter_drawImageIntInt_QImageIntIntInt(self: pointer, x: cint, y: cint, image: pointer, sx: cint, sy: cint, sw: cint): void {.importc: "QPainter_drawImage_int_int_QImage_int_int_int".}
+proc fcQPainter_drawImageIntInt_QImageIntIntIntInt(self: pointer, x: cint, y: cint, image: pointer, sx: cint, sy: cint, sw: cint, sh: cint): void {.importc: "QPainter_drawImage_int_int_QImage_int_int_int_int".}
+proc fcQPainter_drawImageIntInt_QImageIntIntIntInt_Qt_ImageConversionFlags(self: pointer, x: cint, y: cint, image: pointer, sx: cint, sy: cint, sw: cint, sh: cint, flags: cint): void {.importc: "QPainter_drawImage_int_int_QImage_int_int_int_int_Qt_ImageConversionFlags".}
+proc fcQPainter_drawText_QRectFInt_QString_QRectF(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string, br: pointer): void {.importc: "QPainter_drawText_QRectF_int_QString_QRectF".}
+proc fcQPainter_drawText_QRectInt_QString_QRect(self: pointer, r: pointer, flags: cint, text: struct_seaqt_string, br: pointer): void {.importc: "QPainter_drawText_QRect_int_QString_QRect".}
+proc fcQPainter_drawTextIntIntIntIntInt_QString_QRect(self: pointer, x: cint, y: cint, w: cint, h: cint, flags: cint, text: struct_seaqt_string, br: pointer): void {.importc: "QPainter_drawText_int_int_int_int_int_QString_QRect".}
+proc fcQPainter_drawText_QRectF_QString_QTextOption(self: pointer, r: pointer, text: struct_seaqt_string, o: pointer): void {.importc: "QPainter_drawText_QRectF_QString_QTextOption".}
+proc fcQPainter_boundingRect_QRectF_QString_QTextOption(self: pointer, rect: pointer, text: struct_seaqt_string, o: pointer): pointer {.importc: "QPainter_boundingRect_QRectF_QString_QTextOption".}
+proc fcQPainter_setRenderHintHintOn(self: pointer, hint: cint, on: bool): void {.importc: "QPainter_setRenderHint_hint_on".}
+proc fcQPainter_setRenderHintsHintsOn(self: pointer, hints: cint, on: bool): void {.importc: "QPainter_setRenderHints_hints_on".}
+proc fcQPainter_setRedirectedDeviceReplacementOffset(device: pointer, replacement: pointer, offset: pointer): void {.importc: "QPainter_setRedirected_device_replacement_offset".}
+proc fcQPainter_redirectedDeviceOffset(device: pointer, offset: pointer): pointer {.importc: "QPainter_redirected_device_offset".}
 proc fcQPainter_new(): ptr cQPainter {.importc: "QPainter_new".}
-proc fcQPainter_new2(param1: pointer): ptr cQPainter {.importc: "QPainter_new2".}
+proc fcQPainter_new2(param1: pointer): ptr cQPainter {.importc: "QPainter_new_QPaintDevice".}
 proc fcQPainter_staticMetaObject(): pointer {.importc: "QPainter_staticMetaObject".}
 proc fcQPainterPixmapFragment_x(self: pointer): float64 {.importc: "QPainter__PixmapFragment_x".}
 proc fcQPainterPixmapFragment_setX(self: pointer, x: float64): void {.importc: "QPainter__PixmapFragment_setX".}
@@ -409,11 +409,11 @@ proc fcQPainterPixmapFragment_rotation(self: pointer): float64 {.importc: "QPain
 proc fcQPainterPixmapFragment_setRotation(self: pointer, rotation: float64): void {.importc: "QPainter__PixmapFragment_setRotation".}
 proc fcQPainterPixmapFragment_opacity(self: pointer): float64 {.importc: "QPainter__PixmapFragment_opacity".}
 proc fcQPainterPixmapFragment_setOpacity(self: pointer, opacity: float64): void {.importc: "QPainter__PixmapFragment_setOpacity".}
-proc fcQPainterPixmapFragment_createX(pos: pointer, sourceRect: pointer): pointer {.importc: "QPainter__PixmapFragment_create".}
-proc fcQPainterPixmapFragment_create2(pos: pointer, sourceRect: pointer, scaleX: float64): pointer {.importc: "QPainter__PixmapFragment_create2".}
-proc fcQPainterPixmapFragment_create3(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64): pointer {.importc: "QPainter__PixmapFragment_create3".}
-proc fcQPainterPixmapFragment_create4(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64): pointer {.importc: "QPainter__PixmapFragment_create4".}
-proc fcQPainterPixmapFragment_create5(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): pointer {.importc: "QPainter__PixmapFragment_create5".}
+proc fcQPainterPixmapFragment_createPosSourceRect(pos: pointer, sourceRect: pointer): pointer {.importc: "QPainter__PixmapFragment_create_pos_sourceRect".}
+proc fcQPainterPixmapFragment_createPosSourceRectScaleX(pos: pointer, sourceRect: pointer, scaleX: float64): pointer {.importc: "QPainter__PixmapFragment_create_pos_sourceRect_scaleX".}
+proc fcQPainterPixmapFragment_createPosSourceRectScaleXScaleY(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64): pointer {.importc: "QPainter__PixmapFragment_create_pos_sourceRect_scaleX_scaleY".}
+proc fcQPainterPixmapFragment_createPosSourceRectScaleXScaleYRotation(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64): pointer {.importc: "QPainter__PixmapFragment_create_pos_sourceRect_scaleX_scaleY_rotation".}
+proc fcQPainterPixmapFragment_createPosSourceRectScaleXScaleYRotationOpacity(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): pointer {.importc: "QPainter__PixmapFragment_create_pos_sourceRect_scaleX_scaleY_rotation_opacity".}
 
 proc device*(self: gen_qpainter_types.QPainter): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_device(self.h), owned: false)
@@ -449,22 +449,22 @@ proc fontInfo*(self: gen_qpainter_types.QPainter): gen_qfontinfo_types.QFontInfo
   gen_qfontinfo_types.QFontInfo(h: fcQPainter_fontInfo(self.h), owned: true)
 
 proc setPen*(self: gen_qpainter_types.QPainter, color: gen_qcolor_types.QColor): void =
-  fcQPainter_setPen(self.h, color.h)
+  fcQPainter_setPenColor(self.h, color.h)
 
 proc setPen*(self: gen_qpainter_types.QPainter, pen: gen_qpen_types.QPen): void =
-  fcQPainter_setPenWithPen(self.h, pen.h)
+  fcQPainter_setPenPen(self.h, pen.h)
 
 proc setPen*(self: gen_qpainter_types.QPainter, style: cint): void =
-  fcQPainter_setPenWithStyle(self.h, cint(style))
+  fcQPainter_setPenStyle(self.h, cint(style))
 
 proc pen*(self: gen_qpainter_types.QPainter): gen_qpen_types.QPen =
   gen_qpen_types.QPen(h: fcQPainter_pen(self.h), owned: false)
 
 proc setBrush*(self: gen_qpainter_types.QPainter, brush: gen_qbrush_types.QBrush): void =
-  fcQPainter_setBrush(self.h, brush.h)
+  fcQPainter_setBrushBrush(self.h, brush.h)
 
 proc setBrush*(self: gen_qpainter_types.QPainter, style: cint): void =
-  fcQPainter_setBrushWithStyle(self.h, cint(style))
+  fcQPainter_setBrushStyle(self.h, cint(style))
 
 proc brush*(self: gen_qpainter_types.QPainter): gen_qbrush_types.QBrush =
   gen_qbrush_types.QBrush(h: fcQPainter_brush(self.h), owned: false)
@@ -479,13 +479,13 @@ proc brushOrigin*(self: gen_qpainter_types.QPainter): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQPainter_brushOrigin(self.h), owned: true)
 
 proc setBrushOrigin*(self: gen_qpainter_types.QPainter, x: cint, y: cint): void =
-  fcQPainter_setBrushOrigin(self.h, x, y)
+  fcQPainter_setBrushOriginIntInt(self.h, x, y)
 
 proc setBrushOrigin*(self: gen_qpainter_types.QPainter, brushOrigin: gen_qpoint_types.QPoint): void =
-  fcQPainter_setBrushOriginWithBrushOrigin(self.h, brushOrigin.h)
+  fcQPainter_setBrushOrigin_QPoint(self.h, brushOrigin.h)
 
 proc setBrushOrigin*(self: gen_qpainter_types.QPainter, brushOrigin: gen_qpoint_types.QPointF): void =
-  fcQPainter_setBrushOrigin2(self.h, brushOrigin.h)
+  fcQPainter_setBrushOrigin_QPointF(self.h, brushOrigin.h)
 
 proc setBackground*(self: gen_qpainter_types.QPainter, bg: gen_qbrush_types.QBrush): void =
   fcQPainter_setBackground(self.h, bg.h)
@@ -506,19 +506,19 @@ proc clipPath*(self: gen_qpainter_types.QPainter): gen_qpainterpath_types.QPaint
   gen_qpainterpath_types.QPainterPath(h: fcQPainter_clipPath(self.h), owned: true)
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRectF): void =
-  fcQPainter_setClipRect(self.h, param1.h)
+  fcQPainter_setClipRect_QRectF(self.h, param1.h)
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect): void =
-  fcQPainter_setClipRectWithQRect(self.h, param1.h)
+  fcQPainter_setClipRect_QRect(self.h, param1.h)
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint): void =
-  fcQPainter_setClipRect2(self.h, x, y, w, h)
+  fcQPainter_setClipRectIntIntIntInt(self.h, x, y, w, h)
 
 proc setClipRegion*(self: gen_qpainter_types.QPainter, param1: gen_qregion_types.QRegion): void =
-  fcQPainter_setClipRegion(self.h, param1.h)
+  fcQPainter_setClipRegion_QRegion(self.h, param1.h)
 
 proc setClipPath*(self: gen_qpainter_types.QPainter, path: gen_qpainterpath_types.QPainterPath): void =
-  fcQPainter_setClipPath(self.h, path.h)
+  fcQPainter_setClipPathPath(self.h, path.h)
 
 proc setClipping*(self: gen_qpainter_types.QPainter, enable: bool): void =
   fcQPainter_setClipping(self.h, enable)
@@ -536,7 +536,7 @@ proc restore*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_restore(self.h)
 
 proc setMatrix*(self: gen_qpainter_types.QPainter, matrix: gen_qmatrix_types.QMatrix): void =
-  fcQPainter_setMatrix(self.h, matrix.h)
+  fcQPainter_setMatrixMatrix(self.h, matrix.h)
 
 proc matrix*(self: gen_qpainter_types.QPainter): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQPainter_matrix(self.h), owned: false)
@@ -548,7 +548,7 @@ proc resetMatrix*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_resetMatrix(self.h)
 
 proc setTransform*(self: gen_qpainter_types.QPainter, transform: gen_qtransform_types.QTransform): void =
-  fcQPainter_setTransform(self.h, transform.h)
+  fcQPainter_setTransformTransform(self.h, transform.h)
 
 proc transform*(self: gen_qpainter_types.QPainter): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQPainter_transform(self.h), owned: false)
@@ -560,7 +560,7 @@ proc resetTransform*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_resetTransform(self.h)
 
 proc setWorldMatrix*(self: gen_qpainter_types.QPainter, matrix: gen_qmatrix_types.QMatrix): void =
-  fcQPainter_setWorldMatrix(self.h, matrix.h)
+  fcQPainter_setWorldMatrixMatrix(self.h, matrix.h)
 
 proc worldMatrix*(self: gen_qpainter_types.QPainter): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQPainter_worldMatrix(self.h), owned: false)
@@ -575,7 +575,7 @@ proc matrixEnabled*(self: gen_qpainter_types.QPainter): bool =
   fcQPainter_matrixEnabled(self.h)
 
 proc setWorldTransform*(self: gen_qpainter_types.QPainter, matrix: gen_qtransform_types.QTransform): void =
-  fcQPainter_setWorldTransform(self.h, matrix.h)
+  fcQPainter_setWorldTransformMatrix(self.h, matrix.h)
 
 proc worldTransform*(self: gen_qpainter_types.QPainter): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQPainter_worldTransform(self.h), owned: false)
@@ -599,31 +599,31 @@ proc rotate*(self: gen_qpainter_types.QPainter, a: float64): void =
   fcQPainter_rotate(self.h, a)
 
 proc translate*(self: gen_qpainter_types.QPainter, offset: gen_qpoint_types.QPointF): void =
-  fcQPainter_translate(self.h, offset.h)
+  fcQPainter_translate_QPointF(self.h, offset.h)
 
 proc translate*(self: gen_qpainter_types.QPainter, offset: gen_qpoint_types.QPoint): void =
-  fcQPainter_translateWithOffset(self.h, offset.h)
+  fcQPainter_translate_QPoint(self.h, offset.h)
 
 proc translate*(self: gen_qpainter_types.QPainter, dx: float64, dy: float64): void =
-  fcQPainter_translate2(self.h, dx, dy)
+  fcQPainter_translateQrealQreal(self.h, dx, dy)
 
 proc window*(self: gen_qpainter_types.QPainter): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPainter_window(self.h), owned: true)
 
 proc setWindow*(self: gen_qpainter_types.QPainter, window: gen_qrect_types.QRect): void =
-  fcQPainter_setWindow(self.h, window.h)
+  fcQPainter_setWindowWindow(self.h, window.h)
 
 proc setWindow*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint): void =
-  fcQPainter_setWindow2(self.h, x, y, w, h)
+  fcQPainter_setWindowXYWH(self.h, x, y, w, h)
 
 proc viewport*(self: gen_qpainter_types.QPainter): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPainter_viewport(self.h), owned: true)
 
 proc setViewport*(self: gen_qpainter_types.QPainter, viewport: gen_qrect_types.QRect): void =
-  fcQPainter_setViewport(self.h, viewport.h)
+  fcQPainter_setViewportViewport(self.h, viewport.h)
 
 proc setViewport*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint): void =
-  fcQPainter_setViewport2(self.h, x, y, w, h)
+  fcQPainter_setViewportXYWH(self.h, x, y, w, h)
 
 proc setViewTransformEnabled*(self: gen_qpainter_types.QPainter, enable: bool): void =
   fcQPainter_setViewTransformEnabled(self.h, enable)
@@ -641,262 +641,262 @@ proc drawPath*(self: gen_qpainter_types.QPainter, path: gen_qpainterpath_types.Q
   fcQPainter_drawPath(self.h, path.h)
 
 proc drawPoint*(self: gen_qpainter_types.QPainter, pt: gen_qpoint_types.QPointF): void =
-  fcQPainter_drawPoint(self.h, pt.h)
+  fcQPainter_drawPointPt(self.h, pt.h)
 
 proc drawPoint*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint): void =
-  fcQPainter_drawPointWithQPoint(self.h, p.h)
+  fcQPainter_drawPointP(self.h, p.h)
 
 proc drawPoint*(self: gen_qpainter_types.QPainter, x: cint, y: cint): void =
-  fcQPainter_drawPoint2(self.h, x, y)
+  fcQPainter_drawPointXY(self.h, x, y)
 
 proc drawPoints*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPointF, pointCount: cint): void =
-  fcQPainter_drawPoints(self.h, points.h, pointCount)
+  fcQPainter_drawPoints_QPointFInt(self.h, points.h, pointCount)
 
 proc drawPoints*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPoint, pointCount: cint): void =
-  fcQPainter_drawPoints2(self.h, points.h, pointCount)
+  fcQPainter_drawPoints_QPointInt(self.h, points.h, pointCount)
 
 proc drawLine*(self: gen_qpainter_types.QPainter, line: gen_qline_types.QLineF): void =
-  fcQPainter_drawLine(self.h, line.h)
+  fcQPainter_drawLine_QLineF(self.h, line.h)
 
 proc drawLine*(self: gen_qpainter_types.QPainter, line: gen_qline_types.QLine): void =
-  fcQPainter_drawLineWithLine(self.h, line.h)
+  fcQPainter_drawLine_QLine(self.h, line.h)
 
 proc drawLine*(self: gen_qpainter_types.QPainter, x1: cint, y1: cint, x2: cint, y2: cint): void =
-  fcQPainter_drawLine2(self.h, x1, y1, x2, y2)
+  fcQPainter_drawLineIntIntIntInt(self.h, x1, y1, x2, y2)
 
 proc drawLine*(self: gen_qpainter_types.QPainter, p1: gen_qpoint_types.QPoint, p2: gen_qpoint_types.QPoint): void =
-  fcQPainter_drawLine3(self.h, p1.h, p2.h)
+  fcQPainter_drawLine_QPoint_QPoint(self.h, p1.h, p2.h)
 
 proc drawLine*(self: gen_qpainter_types.QPainter, p1: gen_qpoint_types.QPointF, p2: gen_qpoint_types.QPointF): void =
-  fcQPainter_drawLine4(self.h, p1.h, p2.h)
+  fcQPainter_drawLine_QPointF_QPointF(self.h, p1.h, p2.h)
 
 proc drawLines*(self: gen_qpainter_types.QPainter, lines: gen_qline_types.QLineF, lineCount: cint): void =
-  fcQPainter_drawLines(self.h, lines.h, lineCount)
+  fcQPainter_drawLines_QLineFInt(self.h, lines.h, lineCount)
 
 proc drawLines*(self: gen_qpainter_types.QPainter, lines: openArray[gen_qline_types.QLineF]): void =
   var lines_CArray = newSeq[pointer](len(lines))
   for i in 0..<len(lines):
     lines_CArray[i] = lines[i].h
 
-  fcQPainter_drawLinesWithLines(self.h, struct_seaqt_array(len: csize_t(len(lines)), data: if len(lines) == 0: nil else: addr(lines_CArray[0])))
+  fcQPainter_drawLines_QVectorOfQLineF(self.h, struct_seaqt_array(len: csize_t(len(lines)), data: if len(lines) == 0: nil else: addr(lines_CArray[0])))
 
 proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: gen_qpoint_types.QPointF, lineCount: cint): void =
-  fcQPainter_drawLines2(self.h, pointPairs.h, lineCount)
+  fcQPainter_drawLines_QPointFInt(self.h, pointPairs.h, lineCount)
 
 proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: openArray[gen_qpoint_types.QPointF]): void =
   var pointPairs_CArray = newSeq[pointer](len(pointPairs))
   for i in 0..<len(pointPairs):
     pointPairs_CArray[i] = pointPairs[i].h
 
-  fcQPainter_drawLinesWithPointPairs(self.h, struct_seaqt_array(len: csize_t(len(pointPairs)), data: if len(pointPairs) == 0: nil else: addr(pointPairs_CArray[0])))
+  fcQPainter_drawLines_QVectorOfQPointF(self.h, struct_seaqt_array(len: csize_t(len(pointPairs)), data: if len(pointPairs) == 0: nil else: addr(pointPairs_CArray[0])))
 
 proc drawLines*(self: gen_qpainter_types.QPainter, lines: gen_qline_types.QLine, lineCount: cint): void =
-  fcQPainter_drawLines3(self.h, lines.h, lineCount)
+  fcQPainter_drawLines_QLineInt(self.h, lines.h, lineCount)
 
 proc drawLines*(self: gen_qpainter_types.QPainter, lines: openArray[gen_qline_types.QLine]): void =
   var lines_CArray = newSeq[pointer](len(lines))
   for i in 0..<len(lines):
     lines_CArray[i] = lines[i].h
 
-  fcQPainter_drawLines4(self.h, struct_seaqt_array(len: csize_t(len(lines)), data: if len(lines) == 0: nil else: addr(lines_CArray[0])))
+  fcQPainter_drawLines_QVectorOfQLine(self.h, struct_seaqt_array(len: csize_t(len(lines)), data: if len(lines) == 0: nil else: addr(lines_CArray[0])))
 
 proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: gen_qpoint_types.QPoint, lineCount: cint): void =
-  fcQPainter_drawLines5(self.h, pointPairs.h, lineCount)
+  fcQPainter_drawLines_QPointInt(self.h, pointPairs.h, lineCount)
 
 proc drawLines*(self: gen_qpainter_types.QPainter, pointPairs: openArray[gen_qpoint_types.QPoint]): void =
   var pointPairs_CArray = newSeq[pointer](len(pointPairs))
   for i in 0..<len(pointPairs):
     pointPairs_CArray[i] = pointPairs[i].h
 
-  fcQPainter_drawLines6(self.h, struct_seaqt_array(len: csize_t(len(pointPairs)), data: if len(pointPairs) == 0: nil else: addr(pointPairs_CArray[0])))
+  fcQPainter_drawLines_QVectorOfQPoint(self.h, struct_seaqt_array(len: csize_t(len(pointPairs)), data: if len(pointPairs) == 0: nil else: addr(pointPairs_CArray[0])))
 
 proc drawRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void =
-  fcQPainter_drawRect(self.h, rect.h)
+  fcQPainter_drawRect_QRectF(self.h, rect.h)
 
 proc drawRect*(self: gen_qpainter_types.QPainter, x1: cint, y1: cint, w: cint, h: cint): void =
-  fcQPainter_drawRect2(self.h, x1, y1, w, h)
+  fcQPainter_drawRectIntIntIntInt(self.h, x1, y1, w, h)
 
 proc drawRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect): void =
-  fcQPainter_drawRectWithRect(self.h, rect.h)
+  fcQPainter_drawRect_QRect(self.h, rect.h)
 
 proc drawRects*(self: gen_qpainter_types.QPainter, rects: gen_qrect_types.QRectF, rectCount: cint): void =
-  fcQPainter_drawRects(self.h, rects.h, rectCount)
+  fcQPainter_drawRects_QRectFInt(self.h, rects.h, rectCount)
 
 proc drawRects*(self: gen_qpainter_types.QPainter, rectangles: openArray[gen_qrect_types.QRectF]): void =
   var rectangles_CArray = newSeq[pointer](len(rectangles))
   for i in 0..<len(rectangles):
     rectangles_CArray[i] = rectangles[i].h
 
-  fcQPainter_drawRectsWithRectangles(self.h, struct_seaqt_array(len: csize_t(len(rectangles)), data: if len(rectangles) == 0: nil else: addr(rectangles_CArray[0])))
+  fcQPainter_drawRects_QVectorOfQRectF(self.h, struct_seaqt_array(len: csize_t(len(rectangles)), data: if len(rectangles) == 0: nil else: addr(rectangles_CArray[0])))
 
 proc drawRects*(self: gen_qpainter_types.QPainter, rects: gen_qrect_types.QRect, rectCount: cint): void =
-  fcQPainter_drawRects2(self.h, rects.h, rectCount)
+  fcQPainter_drawRects_QRectInt(self.h, rects.h, rectCount)
 
 proc drawRects*(self: gen_qpainter_types.QPainter, rectangles: openArray[gen_qrect_types.QRect]): void =
   var rectangles_CArray = newSeq[pointer](len(rectangles))
   for i in 0..<len(rectangles):
     rectangles_CArray[i] = rectangles[i].h
 
-  fcQPainter_drawRects3(self.h, struct_seaqt_array(len: csize_t(len(rectangles)), data: if len(rectangles) == 0: nil else: addr(rectangles_CArray[0])))
+  fcQPainter_drawRects_QVectorOfQRect(self.h, struct_seaqt_array(len: csize_t(len(rectangles)), data: if len(rectangles) == 0: nil else: addr(rectangles_CArray[0])))
 
 proc drawEllipse*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF): void =
-  fcQPainter_drawEllipse(self.h, r.h)
+  fcQPainter_drawEllipse_QRectF(self.h, r.h)
 
 proc drawEllipse*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect): void =
-  fcQPainter_drawEllipseWithQRect(self.h, r.h)
+  fcQPainter_drawEllipse_QRect(self.h, r.h)
 
 proc drawEllipse*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint): void =
-  fcQPainter_drawEllipse2(self.h, x, y, w, h)
+  fcQPainter_drawEllipseIntIntIntInt(self.h, x, y, w, h)
 
 proc drawEllipse*(self: gen_qpainter_types.QPainter, center: gen_qpoint_types.QPointF, rx: float64, ry: float64): void =
-  fcQPainter_drawEllipse3(self.h, center.h, rx, ry)
+  fcQPainter_drawEllipse_QPointFQrealQreal(self.h, center.h, rx, ry)
 
 proc drawEllipse*(self: gen_qpainter_types.QPainter, center: gen_qpoint_types.QPoint, rx: cint, ry: cint): void =
-  fcQPainter_drawEllipse4(self.h, center.h, rx, ry)
+  fcQPainter_drawEllipse_QPointIntInt(self.h, center.h, rx, ry)
 
 proc drawPolyline*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPointF, pointCount: cint): void =
-  fcQPainter_drawPolyline(self.h, points.h, pointCount)
+  fcQPainter_drawPolyline_QPointFInt(self.h, points.h, pointCount)
 
 proc drawPolyline*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPoint, pointCount: cint): void =
-  fcQPainter_drawPolyline2(self.h, points.h, pointCount)
+  fcQPainter_drawPolyline_QPointInt(self.h, points.h, pointCount)
 
 proc drawPolygon*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPointF, pointCount: cint): void =
-  fcQPainter_drawPolygon(self.h, points.h, pointCount)
+  fcQPainter_drawPolygon_QPointFInt(self.h, points.h, pointCount)
 
 proc drawPolygon*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPoint, pointCount: cint): void =
-  fcQPainter_drawPolygon2(self.h, points.h, pointCount)
+  fcQPainter_drawPolygon_QPointInt(self.h, points.h, pointCount)
 
 proc drawConvexPolygon*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPointF, pointCount: cint): void =
-  fcQPainter_drawConvexPolygon(self.h, points.h, pointCount)
+  fcQPainter_drawConvexPolygon_QPointFInt(self.h, points.h, pointCount)
 
 proc drawConvexPolygon*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPoint, pointCount: cint): void =
-  fcQPainter_drawConvexPolygon2(self.h, points.h, pointCount)
+  fcQPainter_drawConvexPolygon_QPointInt(self.h, points.h, pointCount)
 
 proc drawArc*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, a: cint, alen: cint): void =
-  fcQPainter_drawArc(self.h, rect.h, a, alen)
+  fcQPainter_drawArc_QRectFIntInt(self.h, rect.h, a, alen)
 
 proc drawArc*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect, a: cint, alen: cint): void =
-  fcQPainter_drawArc2(self.h, param1.h, a, alen)
+  fcQPainter_drawArc_QRectIntInt(self.h, param1.h, a, alen)
 
 proc drawArc*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void =
-  fcQPainter_drawArc3(self.h, x, y, w, h, a, alen)
+  fcQPainter_drawArcIntIntIntIntIntInt(self.h, x, y, w, h, a, alen)
 
 proc drawPie*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, a: cint, alen: cint): void =
-  fcQPainter_drawPie(self.h, rect.h, a, alen)
+  fcQPainter_drawPie_QRectFIntInt(self.h, rect.h, a, alen)
 
 proc drawPie*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void =
-  fcQPainter_drawPie2(self.h, x, y, w, h, a, alen)
+  fcQPainter_drawPieIntIntIntIntIntInt(self.h, x, y, w, h, a, alen)
 
 proc drawPie*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect, a: cint, alen: cint): void =
-  fcQPainter_drawPie3(self.h, param1.h, a, alen)
+  fcQPainter_drawPie_QRectIntInt(self.h, param1.h, a, alen)
 
 proc drawChord*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, a: cint, alen: cint): void =
-  fcQPainter_drawChord(self.h, rect.h, a, alen)
+  fcQPainter_drawChord_QRectFIntInt(self.h, rect.h, a, alen)
 
 proc drawChord*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, a: cint, alen: cint): void =
-  fcQPainter_drawChord2(self.h, x, y, w, h, a, alen)
+  fcQPainter_drawChordIntIntIntIntIntInt(self.h, x, y, w, h, a, alen)
 
 proc drawChord*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect, a: cint, alen: cint): void =
-  fcQPainter_drawChord3(self.h, param1.h, a, alen)
+  fcQPainter_drawChord_QRectIntInt(self.h, param1.h, a, alen)
 
 proc drawRoundedRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, xRadius: float64, yRadius: float64): void =
-  fcQPainter_drawRoundedRect(self.h, rect.h, xRadius, yRadius)
+  fcQPainter_drawRoundedRect_QRectFQrealQreal(self.h, rect.h, xRadius, yRadius)
 
 proc drawRoundedRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, xRadius: float64, yRadius: float64): void =
-  fcQPainter_drawRoundedRect2(self.h, x, y, w, h, xRadius, yRadius)
+  fcQPainter_drawRoundedRectIntIntIntIntQrealQreal(self.h, x, y, w, h, xRadius, yRadius)
 
 proc drawRoundedRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, xRadius: float64, yRadius: float64): void =
-  fcQPainter_drawRoundedRect3(self.h, rect.h, xRadius, yRadius)
+  fcQPainter_drawRoundedRect_QRectQrealQreal(self.h, rect.h, xRadius, yRadius)
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF): void =
-  fcQPainter_drawRoundRect(self.h, r.h)
+  fcQPainter_drawRoundRect_QRectF(self.h, r.h)
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint): void =
-  fcQPainter_drawRoundRect2(self.h, x, y, w, h)
+  fcQPainter_drawRoundRectIntIntIntInt(self.h, x, y, w, h)
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect): void =
-  fcQPainter_drawRoundRectWithQRect(self.h, r.h)
+  fcQPainter_drawRoundRect_QRect(self.h, r.h)
 
 proc drawTiledPixmap*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, pm: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawTiledPixmap(self.h, rect.h, pm.h)
+  fcQPainter_drawTiledPixmap_QRectF_QPixmap(self.h, rect.h, pm.h)
 
 proc drawTiledPixmap*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, param5: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawTiledPixmap2(self.h, x, y, w, h, param5.h)
+  fcQPainter_drawTiledPixmapIntIntIntInt_QPixmap(self.h, x, y, w, h, param5.h)
 
 proc drawTiledPixmap*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect, param2: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawTiledPixmap3(self.h, param1.h, param2.h)
+  fcQPainter_drawTiledPixmap_QRect_QPixmap(self.h, param1.h, param2.h)
 
 proc drawPicture*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, picture: gen_qpicture_types.QPicture): void =
-  fcQPainter_drawPicture(self.h, p.h, picture.h)
+  fcQPainter_drawPicture_QPointF_QPicture(self.h, p.h, picture.h)
 
 proc drawPicture*(self: gen_qpainter_types.QPainter, x: cint, y: cint, picture: gen_qpicture_types.QPicture): void =
-  fcQPainter_drawPicture2(self.h, x, y, picture.h)
+  fcQPainter_drawPictureIntInt_QPicture(self.h, x, y, picture.h)
 
 proc drawPicture*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, picture: gen_qpicture_types.QPicture): void =
-  fcQPainter_drawPicture3(self.h, p.h, picture.h)
+  fcQPainter_drawPicture_QPoint_QPicture(self.h, p.h, picture.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, targetRect: gen_qrect_types.QRectF, pixmap: gen_qpixmap_types.QPixmap, sourceRect: gen_qrect_types.QRectF): void =
-  fcQPainter_drawPixmap(self.h, targetRect.h, pixmap.h, sourceRect.h)
+  fcQPainter_drawPixmap_QRectF_QPixmap_QRectF(self.h, targetRect.h, pixmap.h, sourceRect.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, targetRect: gen_qrect_types.QRect, pixmap: gen_qpixmap_types.QPixmap, sourceRect: gen_qrect_types.QRect): void =
-  fcQPainter_drawPixmap2(self.h, targetRect.h, pixmap.h, sourceRect.h)
+  fcQPainter_drawPixmap_QRect_QPixmap_QRect(self.h, targetRect.h, pixmap.h, sourceRect.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, pm: gen_qpixmap_types.QPixmap, sx: cint, sy: cint, sw: cint, sh: cint): void =
-  fcQPainter_drawPixmap3(self.h, x, y, w, h, pm.h, sx, sy, sw, sh)
+  fcQPainter_drawPixmapIntIntIntInt_QPixmapIntIntIntInt(self.h, x, y, w, h, pm.h, sx, sy, sw, sh)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, x: cint, y: cint, pm: gen_qpixmap_types.QPixmap, sx: cint, sy: cint, sw: cint, sh: cint): void =
-  fcQPainter_drawPixmap4(self.h, x, y, pm.h, sx, sy, sw, sh)
+  fcQPainter_drawPixmapIntInt_QPixmapIntIntIntInt(self.h, x, y, pm.h, sx, sy, sw, sh)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, pm: gen_qpixmap_types.QPixmap, sr: gen_qrect_types.QRectF): void =
-  fcQPainter_drawPixmap5(self.h, p.h, pm.h, sr.h)
+  fcQPainter_drawPixmap_QPointF_QPixmap_QRectF(self.h, p.h, pm.h, sr.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, pm: gen_qpixmap_types.QPixmap, sr: gen_qrect_types.QRect): void =
-  fcQPainter_drawPixmap6(self.h, p.h, pm.h, sr.h)
+  fcQPainter_drawPixmap_QPoint_QPixmap_QRect(self.h, p.h, pm.h, sr.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, pm: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawPixmap7(self.h, p.h, pm.h)
+  fcQPainter_drawPixmap_QPointF_QPixmap(self.h, p.h, pm.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, pm: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawPixmap8(self.h, p.h, pm.h)
+  fcQPainter_drawPixmap_QPoint_QPixmap(self.h, p.h, pm.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, x: cint, y: cint, pm: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawPixmap9(self.h, x, y, pm.h)
+  fcQPainter_drawPixmapIntInt_QPixmap(self.h, x, y, pm.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, pm: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawPixmap10(self.h, r.h, pm.h)
+  fcQPainter_drawPixmap_QRect_QPixmap(self.h, r.h, pm.h)
 
 proc drawPixmap*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, pm: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawPixmap11(self.h, x, y, w, h, pm.h)
+  fcQPainter_drawPixmapIntIntIntInt_QPixmap(self.h, x, y, w, h, pm.h)
 
 proc drawPixmapFragments*(self: gen_qpainter_types.QPainter, fragments: gen_qpainter_types.QPainterPixmapFragment, fragmentCount: cint, pixmap: gen_qpixmap_types.QPixmap): void =
-  fcQPainter_drawPixmapFragments(self.h, fragments.h, fragmentCount, pixmap.h)
+  fcQPainter_drawPixmapFragmentsFragmentsFragmentCountPixmap(self.h, fragments.h, fragmentCount, pixmap.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, targetRect: gen_qrect_types.QRectF, image: gen_qimage_types.QImage, sourceRect: gen_qrect_types.QRectF): void =
-  fcQPainter_drawImage(self.h, targetRect.h, image.h, sourceRect.h)
+  fcQPainter_drawImage_QRectF_QImage_QRectF(self.h, targetRect.h, image.h, sourceRect.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, targetRect: gen_qrect_types.QRect, image: gen_qimage_types.QImage, sourceRect: gen_qrect_types.QRect): void =
-  fcQPainter_drawImage2(self.h, targetRect.h, image.h, sourceRect.h)
+  fcQPainter_drawImage_QRect_QImage_QRect(self.h, targetRect.h, image.h, sourceRect.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, image: gen_qimage_types.QImage, sr: gen_qrect_types.QRectF): void =
-  fcQPainter_drawImage3(self.h, p.h, image.h, sr.h)
+  fcQPainter_drawImage_QPointF_QImage_QRectF(self.h, p.h, image.h, sr.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, image: gen_qimage_types.QImage, sr: gen_qrect_types.QRect): void =
-  fcQPainter_drawImage4(self.h, p.h, image.h, sr.h)
+  fcQPainter_drawImage_QPoint_QImage_QRect(self.h, p.h, image.h, sr.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, image: gen_qimage_types.QImage): void =
-  fcQPainter_drawImage5(self.h, r.h, image.h)
+  fcQPainter_drawImage_QRectF_QImage(self.h, r.h, image.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, image: gen_qimage_types.QImage): void =
-  fcQPainter_drawImage6(self.h, r.h, image.h)
+  fcQPainter_drawImage_QRect_QImage(self.h, r.h, image.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, image: gen_qimage_types.QImage): void =
-  fcQPainter_drawImage7(self.h, p.h, image.h)
+  fcQPainter_drawImage_QPointF_QImage(self.h, p.h, image.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, image: gen_qimage_types.QImage): void =
-  fcQPainter_drawImage8(self.h, p.h, image.h)
+  fcQPainter_drawImage_QPoint_QImage(self.h, p.h, image.h)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_qimage_types.QImage): void =
-  fcQPainter_drawImage9(self.h, x, y, image.h)
+  fcQPainter_drawImageIntInt_QImage(self.h, x, y, image.h)
 
 proc setLayoutDirection*(self: gen_qpainter_types.QPainter, direction: cint): void =
   fcQPainter_setLayoutDirection(self.h, cint(direction))
@@ -908,118 +908,118 @@ proc drawGlyphRun*(self: gen_qpainter_types.QPainter, position: gen_qpoint_types
   fcQPainter_drawGlyphRun(self.h, position.h, glyphRun.h)
 
 proc drawStaticText*(self: gen_qpainter_types.QPainter, topLeftPosition: gen_qpoint_types.QPointF, staticText: gen_qstatictext_types.QStaticText): void =
-  fcQPainter_drawStaticText(self.h, topLeftPosition.h, staticText.h)
+  fcQPainter_drawStaticText_QPointF_QStaticText(self.h, topLeftPosition.h, staticText.h)
 
 proc drawStaticText*(self: gen_qpainter_types.QPainter, topLeftPosition: gen_qpoint_types.QPoint, staticText: gen_qstatictext_types.QStaticText): void =
-  fcQPainter_drawStaticText2(self.h, topLeftPosition.h, staticText.h)
+  fcQPainter_drawStaticText_QPoint_QStaticText(self.h, topLeftPosition.h, staticText.h)
 
 proc drawStaticText*(self: gen_qpainter_types.QPainter, left: cint, top: cint, staticText: gen_qstatictext_types.QStaticText): void =
-  fcQPainter_drawStaticText3(self.h, left, top, staticText.h)
+  fcQPainter_drawStaticTextIntInt_QStaticText(self.h, left, top, staticText.h)
 
 proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, s: openArray[char]): void =
-  fcQPainter_drawText(self.h, p.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQPainter_drawText_QPointF_QString(self.h, p.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, s: openArray[char]): void =
-  fcQPainter_drawText2(self.h, p.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQPainter_drawText_QPoint_QString(self.h, p.h, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, s: openArray[char]): void =
-  fcQPainter_drawText3(self.h, x, y, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
+  fcQPainter_drawTextIntInt_QString(self.h, x, y, struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s))))
 
 proc drawText*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, str: openArray[char], tf: cint, justificationPadding: cint): void =
-  fcQPainter_drawText4(self.h, p.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tf, justificationPadding)
+  fcQPainter_drawText_QPointF_QStringIntInt(self.h, p.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))), tf, justificationPadding)
 
 proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, flags: cint, text: openArray[char]): void =
-  fcQPainter_drawText5(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQPainter_drawText_QRectFInt_QString(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, flags: cint, text: openArray[char]): void =
-  fcQPainter_drawText6(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQPainter_drawText_QRectInt_QString(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char]): void =
-  fcQPainter_drawText7(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQPainter_drawTextIntIntIntIntInt_QString(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, text: openArray[char]): void =
-  fcQPainter_drawText8(self.h, r.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQPainter_drawText_QRectF_QString(self.h, r.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, flags: cint, text: openArray[char]): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect(self.h, rect.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect_QRectFInt_QString(self.h, rect.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, text: openArray[char]): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPainter_boundingRect2(self.h, rect.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRect(h: fcQPainter_boundingRect_QRectInt_QString(self.h, rect.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char]): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPainter_boundingRect3(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRect(h: fcQPainter_boundingRectIntIntIntIntInt_QString(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, text: openArray[char]): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect4(self.h, rect.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect_QRectF_QString(self.h, rect.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc drawTextItem*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, ti: gen_qpaintengine_types.QTextItem): void =
-  fcQPainter_drawTextItem(self.h, p.h, ti.h)
+  fcQPainter_drawTextItem_QPointF_QTextItem(self.h, p.h, ti.h)
 
 proc drawTextItem*(self: gen_qpainter_types.QPainter, x: cint, y: cint, ti: gen_qpaintengine_types.QTextItem): void =
-  fcQPainter_drawTextItem2(self.h, x, y, ti.h)
+  fcQPainter_drawTextItemIntInt_QTextItem(self.h, x, y, ti.h)
 
 proc drawTextItem*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, ti: gen_qpaintengine_types.QTextItem): void =
-  fcQPainter_drawTextItem3(self.h, p.h, ti.h)
+  fcQPainter_drawTextItem_QPoint_QTextItem(self.h, p.h, ti.h)
 
 proc fillRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRectF, param2: gen_qbrush_types.QBrush): void =
-  fcQPainter_fillRect(self.h, param1.h, param2.h)
+  fcQPainter_fillRect_QRectF_QBrush(self.h, param1.h, param2.h)
 
 proc fillRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, param5: gen_qbrush_types.QBrush): void =
-  fcQPainter_fillRect2(self.h, x, y, w, h, param5.h)
+  fcQPainter_fillRectIntIntIntInt_QBrush(self.h, x, y, w, h, param5.h)
 
 proc fillRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect, param2: gen_qbrush_types.QBrush): void =
-  fcQPainter_fillRect3(self.h, param1.h, param2.h)
+  fcQPainter_fillRect_QRect_QBrush(self.h, param1.h, param2.h)
 
 proc fillRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRectF, color: gen_qcolor_types.QColor): void =
-  fcQPainter_fillRect4(self.h, param1.h, color.h)
+  fcQPainter_fillRect_QRectF_QColor(self.h, param1.h, color.h)
 
 proc fillRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, color: gen_qcolor_types.QColor): void =
-  fcQPainter_fillRect5(self.h, x, y, w, h, color.h)
+  fcQPainter_fillRectIntIntIntInt_QColor(self.h, x, y, w, h, color.h)
 
 proc fillRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect, color: gen_qcolor_types.QColor): void =
-  fcQPainter_fillRect6(self.h, param1.h, color.h)
+  fcQPainter_fillRect_QRect_QColor(self.h, param1.h, color.h)
 
 proc fillRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, c: cint): void =
-  fcQPainter_fillRect7(self.h, x, y, w, h, cint(c))
+  fcQPainter_fillRectIntIntIntInt_Qt_GlobalColor(self.h, x, y, w, h, cint(c))
 
 proc fillRect*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, c: cint): void =
-  fcQPainter_fillRect8(self.h, r.h, cint(c))
+  fcQPainter_fillRect_QRect_Qt_GlobalColor(self.h, r.h, cint(c))
 
 proc fillRect*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, c: cint): void =
-  fcQPainter_fillRect9(self.h, r.h, cint(c))
+  fcQPainter_fillRect_QRectF_Qt_GlobalColor(self.h, r.h, cint(c))
 
 proc fillRect2*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, style: cint): void =
-  fcQPainter_fillRect10(self.h, x, y, w, h, cint(style))
+  fcQPainter_fillRectIntIntIntInt_Qt_BrushStyle(self.h, x, y, w, h, cint(style))
 
 proc fillRect2*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, style: cint): void =
-  fcQPainter_fillRect11(self.h, r.h, cint(style))
+  fcQPainter_fillRect_QRect_Qt_BrushStyle(self.h, r.h, cint(style))
 
 proc fillRect2*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, style: cint): void =
-  fcQPainter_fillRect12(self.h, r.h, cint(style))
+  fcQPainter_fillRect_QRectF_Qt_BrushStyle(self.h, r.h, cint(style))
 
 proc fillRect3*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, preset: cint): void =
-  fcQPainter_fillRect13(self.h, x, y, w, h, cint(preset))
+  fcQPainter_fillRectIntIntIntInt_QGradient_Preset(self.h, x, y, w, h, cint(preset))
 
 proc fillRect3*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, preset: cint): void =
-  fcQPainter_fillRect14(self.h, r.h, cint(preset))
+  fcQPainter_fillRect_QRect_QGradient_Preset(self.h, r.h, cint(preset))
 
 proc fillRect3*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, preset: cint): void =
-  fcQPainter_fillRect15(self.h, r.h, cint(preset))
+  fcQPainter_fillRect_QRectF_QGradient_Preset(self.h, r.h, cint(preset))
 
 proc eraseRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRectF): void =
-  fcQPainter_eraseRect(self.h, param1.h)
+  fcQPainter_eraseRect_QRectF(self.h, param1.h)
 
 proc eraseRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint): void =
-  fcQPainter_eraseRect2(self.h, x, y, w, h)
+  fcQPainter_eraseRectIntIntIntInt(self.h, x, y, w, h)
 
 proc eraseRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect): void =
-  fcQPainter_eraseRectWithQRect(self.h, param1.h)
+  fcQPainter_eraseRect_QRect(self.h, param1.h)
 
 proc setRenderHint*(self: gen_qpainter_types.QPainter, hint: cint): void =
-  fcQPainter_setRenderHint(self.h, cint(hint))
+  fcQPainter_setRenderHintHint(self.h, cint(hint))
 
 proc setRenderHints*(self: gen_qpainter_types.QPainter, hints: cint): void =
-  fcQPainter_setRenderHints(self.h, cint(hints))
+  fcQPainter_setRenderHintsHints(self.h, cint(hints))
 
 proc renderHints*(self: gen_qpainter_types.QPainter): cint =
   cint(fcQPainter_renderHints(self.h))
@@ -1031,10 +1031,10 @@ proc paintEngine*(self: gen_qpainter_types.QPainter): gen_qpaintengine_types.QPa
   gen_qpaintengine_types.QPaintEngine(h: fcQPainter_paintEngine(self.h), owned: false)
 
 proc setRedirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice, replacement: gen_qpaintdevice_types.QPaintDevice): void =
-  fcQPainter_setRedirected(device.h, replacement.h)
+  fcQPainter_setRedirectedDeviceReplacement(device.h, replacement.h)
 
 proc redirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_redirected(device.h), owned: false)
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_redirectedDevice(device.h), owned: false)
 
 proc restoreRedirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice): void =
   fcQPainter_restoreRedirected(device.h)
@@ -1046,133 +1046,133 @@ proc endNativePainting*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_endNativePainting(self.h)
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRectF, op: cint): void =
-  fcQPainter_setClipRect3(self.h, param1.h, cint(op))
+  fcQPainter_setClipRect_QRectF_Qt_ClipOperation(self.h, param1.h, cint(op))
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect, op: cint): void =
-  fcQPainter_setClipRect4(self.h, param1.h, cint(op))
+  fcQPainter_setClipRect_QRect_Qt_ClipOperation(self.h, param1.h, cint(op))
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, op: cint): void =
-  fcQPainter_setClipRect5(self.h, x, y, w, h, cint(op))
+  fcQPainter_setClipRectIntIntIntInt_Qt_ClipOperation(self.h, x, y, w, h, cint(op))
 
 proc setClipRegion*(self: gen_qpainter_types.QPainter, param1: gen_qregion_types.QRegion, op: cint): void =
-  fcQPainter_setClipRegion2(self.h, param1.h, cint(op))
+  fcQPainter_setClipRegion_QRegion_Qt_ClipOperation(self.h, param1.h, cint(op))
 
 proc setClipPath*(self: gen_qpainter_types.QPainter, path: gen_qpainterpath_types.QPainterPath, op: cint): void =
-  fcQPainter_setClipPath2(self.h, path.h, cint(op))
+  fcQPainter_setClipPathPathOp(self.h, path.h, cint(op))
 
 proc setMatrix*(self: gen_qpainter_types.QPainter, matrix: gen_qmatrix_types.QMatrix, combine: bool): void =
-  fcQPainter_setMatrix2(self.h, matrix.h, combine)
+  fcQPainter_setMatrixMatrixCombine(self.h, matrix.h, combine)
 
 proc setTransform*(self: gen_qpainter_types.QPainter, transform: gen_qtransform_types.QTransform, combine: bool): void =
-  fcQPainter_setTransform2(self.h, transform.h, combine)
+  fcQPainter_setTransformTransformCombine(self.h, transform.h, combine)
 
 proc setWorldMatrix*(self: gen_qpainter_types.QPainter, matrix: gen_qmatrix_types.QMatrix, combine: bool): void =
-  fcQPainter_setWorldMatrix2(self.h, matrix.h, combine)
+  fcQPainter_setWorldMatrixMatrixCombine(self.h, matrix.h, combine)
 
 proc setWorldTransform*(self: gen_qpainter_types.QPainter, matrix: gen_qtransform_types.QTransform, combine: bool): void =
-  fcQPainter_setWorldTransform2(self.h, matrix.h, combine)
+  fcQPainter_setWorldTransformMatrixCombine(self.h, matrix.h, combine)
 
 proc drawPolygon*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPointF, pointCount: cint, fillRule: cint): void =
-  fcQPainter_drawPolygon4(self.h, points.h, pointCount, cint(fillRule))
+  fcQPainter_drawPolygon_QPointFInt_Qt_FillRule(self.h, points.h, pointCount, cint(fillRule))
 
 proc drawPolygon*(self: gen_qpainter_types.QPainter, points: gen_qpoint_types.QPoint, pointCount: cint, fillRule: cint): void =
-  fcQPainter_drawPolygon6(self.h, points.h, pointCount, cint(fillRule))
+  fcQPainter_drawPolygon_QPointInt_Qt_FillRule(self.h, points.h, pointCount, cint(fillRule))
 
 proc drawRoundedRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, xRadius: float64, yRadius: float64, mode: cint): void =
-  fcQPainter_drawRoundedRect4(self.h, rect.h, xRadius, yRadius, cint(mode))
+  fcQPainter_drawRoundedRect_QRectFQrealQreal_Qt_SizeMode(self.h, rect.h, xRadius, yRadius, cint(mode))
 
 proc drawRoundedRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, xRadius: float64, yRadius: float64, mode: cint): void =
-  fcQPainter_drawRoundedRect5(self.h, x, y, w, h, xRadius, yRadius, cint(mode))
+  fcQPainter_drawRoundedRectIntIntIntIntQrealQreal_Qt_SizeMode(self.h, x, y, w, h, xRadius, yRadius, cint(mode))
 
 proc drawRoundedRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, xRadius: float64, yRadius: float64, mode: cint): void =
-  fcQPainter_drawRoundedRect6(self.h, rect.h, xRadius, yRadius, cint(mode))
+  fcQPainter_drawRoundedRect_QRectQrealQreal_Qt_SizeMode(self.h, rect.h, xRadius, yRadius, cint(mode))
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, xround: cint): void =
-  fcQPainter_drawRoundRect3(self.h, r.h, xround)
+  fcQPainter_drawRoundRect_QRectFInt(self.h, r.h, xround)
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, xround: cint, yround: cint): void =
-  fcQPainter_drawRoundRect4(self.h, r.h, xround, yround)
+  fcQPainter_drawRoundRect_QRectFIntInt(self.h, r.h, xround, yround)
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, param5: cint): void =
-  fcQPainter_drawRoundRect5(self.h, x, y, w, h, param5)
+  fcQPainter_drawRoundRectIntIntIntIntInt(self.h, x, y, w, h, param5)
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, param5: cint, param6: cint): void =
-  fcQPainter_drawRoundRect6(self.h, x, y, w, h, param5, param6)
+  fcQPainter_drawRoundRectIntIntIntIntIntInt(self.h, x, y, w, h, param5, param6)
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, xround: cint): void =
-  fcQPainter_drawRoundRect7(self.h, r.h, xround)
+  fcQPainter_drawRoundRect_QRectInt(self.h, r.h, xround)
 
 proc drawRoundRect*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, xround: cint, yround: cint): void =
-  fcQPainter_drawRoundRect8(self.h, r.h, xround, yround)
+  fcQPainter_drawRoundRect_QRectIntInt(self.h, r.h, xround, yround)
 
 proc drawTiledPixmap*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, pm: gen_qpixmap_types.QPixmap, offset: gen_qpoint_types.QPointF): void =
-  fcQPainter_drawTiledPixmap4(self.h, rect.h, pm.h, offset.h)
+  fcQPainter_drawTiledPixmap_QRectF_QPixmap_QPointF(self.h, rect.h, pm.h, offset.h)
 
 proc drawTiledPixmap*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, param5: gen_qpixmap_types.QPixmap, sx: cint): void =
-  fcQPainter_drawTiledPixmap5(self.h, x, y, w, h, param5.h, sx)
+  fcQPainter_drawTiledPixmapIntIntIntInt_QPixmapInt(self.h, x, y, w, h, param5.h, sx)
 
 proc drawTiledPixmap*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, param5: gen_qpixmap_types.QPixmap, sx: cint, sy: cint): void =
-  fcQPainter_drawTiledPixmap6(self.h, x, y, w, h, param5.h, sx, sy)
+  fcQPainter_drawTiledPixmapIntIntIntInt_QPixmapIntInt(self.h, x, y, w, h, param5.h, sx, sy)
 
 proc drawTiledPixmap*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRect, param2: gen_qpixmap_types.QPixmap, param3: gen_qpoint_types.QPoint): void =
-  fcQPainter_drawTiledPixmap7(self.h, param1.h, param2.h, param3.h)
+  fcQPainter_drawTiledPixmap_QRect_QPixmap_QPoint(self.h, param1.h, param2.h, param3.h)
 
 proc drawPixmapFragments*(self: gen_qpainter_types.QPainter, fragments: gen_qpainter_types.QPainterPixmapFragment, fragmentCount: cint, pixmap: gen_qpixmap_types.QPixmap, hints: cint): void =
-  fcQPainter_drawPixmapFragments2(self.h, fragments.h, fragmentCount, pixmap.h, cint(hints))
+  fcQPainter_drawPixmapFragmentsFragmentsFragmentCountPixmapHints(self.h, fragments.h, fragmentCount, pixmap.h, cint(hints))
 
 proc drawImage*(self: gen_qpainter_types.QPainter, targetRect: gen_qrect_types.QRectF, image: gen_qimage_types.QImage, sourceRect: gen_qrect_types.QRectF, flags: cint): void =
-  fcQPainter_drawImage10(self.h, targetRect.h, image.h, sourceRect.h, cint(flags))
+  fcQPainter_drawImage_QRectF_QImage_QRectF_Qt_ImageConversionFlags(self.h, targetRect.h, image.h, sourceRect.h, cint(flags))
 
 proc drawImage*(self: gen_qpainter_types.QPainter, targetRect: gen_qrect_types.QRect, image: gen_qimage_types.QImage, sourceRect: gen_qrect_types.QRect, flags: cint): void =
-  fcQPainter_drawImage11(self.h, targetRect.h, image.h, sourceRect.h, cint(flags))
+  fcQPainter_drawImage_QRect_QImage_QRect_Qt_ImageConversionFlags(self.h, targetRect.h, image.h, sourceRect.h, cint(flags))
 
 proc drawImage*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, image: gen_qimage_types.QImage, sr: gen_qrect_types.QRectF, flags: cint): void =
-  fcQPainter_drawImage12(self.h, p.h, image.h, sr.h, cint(flags))
+  fcQPainter_drawImage_QPointF_QImage_QRectF_Qt_ImageConversionFlags(self.h, p.h, image.h, sr.h, cint(flags))
 
 proc drawImage*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPoint, image: gen_qimage_types.QImage, sr: gen_qrect_types.QRect, flags: cint): void =
-  fcQPainter_drawImage13(self.h, p.h, image.h, sr.h, cint(flags))
+  fcQPainter_drawImage_QPoint_QImage_QRect_Qt_ImageConversionFlags(self.h, p.h, image.h, sr.h, cint(flags))
 
 proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_qimage_types.QImage, sx: cint): void =
-  fcQPainter_drawImage14(self.h, x, y, image.h, sx)
+  fcQPainter_drawImageIntInt_QImageInt(self.h, x, y, image.h, sx)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_qimage_types.QImage, sx: cint, sy: cint): void =
-  fcQPainter_drawImage15(self.h, x, y, image.h, sx, sy)
+  fcQPainter_drawImageIntInt_QImageIntInt(self.h, x, y, image.h, sx, sy)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_qimage_types.QImage, sx: cint, sy: cint, sw: cint): void =
-  fcQPainter_drawImage16(self.h, x, y, image.h, sx, sy, sw)
+  fcQPainter_drawImageIntInt_QImageIntIntInt(self.h, x, y, image.h, sx, sy, sw)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_qimage_types.QImage, sx: cint, sy: cint, sw: cint, sh: cint): void =
-  fcQPainter_drawImage17(self.h, x, y, image.h, sx, sy, sw, sh)
+  fcQPainter_drawImageIntInt_QImageIntIntIntInt(self.h, x, y, image.h, sx, sy, sw, sh)
 
 proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_qimage_types.QImage, sx: cint, sy: cint, sw: cint, sh: cint, flags: cint): void =
-  fcQPainter_drawImage18(self.h, x, y, image.h, sx, sy, sw, sh, cint(flags))
+  fcQPainter_drawImageIntInt_QImageIntIntIntInt_Qt_ImageConversionFlags(self.h, x, y, image.h, sx, sy, sw, sh, cint(flags))
 
 proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, flags: cint, text: openArray[char], br: gen_qrect_types.QRectF): void =
-  fcQPainter_drawText9(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
+  fcQPainter_drawText_QRectFInt_QString_QRectF(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
 
 proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRect, flags: cint, text: openArray[char], br: gen_qrect_types.QRect): void =
-  fcQPainter_drawText10(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
+  fcQPainter_drawText_QRectInt_QString_QRect(self.h, r.h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
 
 proc drawText*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: openArray[char], br: gen_qrect_types.QRect): void =
-  fcQPainter_drawText11(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
+  fcQPainter_drawTextIntIntIntIntInt_QString_QRect(self.h, x, y, w, h, flags, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), br.h)
 
 proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, text: openArray[char], o: gen_qtextoption_types.QTextOption): void =
-  fcQPainter_drawText12(self.h, r.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), o.h)
+  fcQPainter_drawText_QRectF_QString_QTextOption(self.h, r.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), o.h)
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, text: openArray[char], o: gen_qtextoption_types.QTextOption): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect5(self.h, rect.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), o.h), owned: true)
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect_QRectF_QString_QTextOption(self.h, rect.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), o.h), owned: true)
 
 proc setRenderHint*(self: gen_qpainter_types.QPainter, hint: cint, on: bool): void =
-  fcQPainter_setRenderHint2(self.h, cint(hint), on)
+  fcQPainter_setRenderHintHintOn(self.h, cint(hint), on)
 
 proc setRenderHints*(self: gen_qpainter_types.QPainter, hints: cint, on: bool): void =
-  fcQPainter_setRenderHints2(self.h, cint(hints), on)
+  fcQPainter_setRenderHintsHintsOn(self.h, cint(hints), on)
 
 proc setRedirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice, replacement: gen_qpaintdevice_types.QPaintDevice, offset: gen_qpoint_types.QPoint): void =
-  fcQPainter_setRedirected2(device.h, replacement.h, offset.h)
+  fcQPainter_setRedirectedDeviceReplacementOffset(device.h, replacement.h, offset.h)
 
 proc redirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_redirected2(device.h, offset.h), owned: false)
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_redirectedDeviceOffset(device.h, offset.h), owned: false)
 
 proc create*(T: type gen_qpainter_types.QPainter): gen_qpainter_types.QPainter =
   let tmp = gen_qpainter_types.QPainter(h: fcQPainter_new(), owned: true)
@@ -1244,17 +1244,17 @@ proc setOpacity*(self: gen_qpainter_types.QPainterPixmapFragment, opacity: float
   fcQPainterPixmapFragment_setOpacity(self.h, opacity)
 
 proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_createX(pos.h, sourceRect.h), owned: true)
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_createPosSourceRect(pos.h, sourceRect.h), owned: true)
 
 proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create2(pos.h, sourceRect.h, scaleX), owned: true)
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_createPosSourceRectScaleX(pos.h, sourceRect.h, scaleX), owned: true)
 
 proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create3(pos.h, sourceRect.h, scaleX, scaleY), owned: true)
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_createPosSourceRectScaleXScaleY(pos.h, sourceRect.h, scaleX, scaleY), owned: true)
 
 proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64, rotation: float64): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create4(pos.h, sourceRect.h, scaleX, scaleY, rotation), owned: true)
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_createPosSourceRectScaleXScaleYRotation(pos.h, sourceRect.h, scaleX, scaleY, rotation), owned: true)
 
 proc createX*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create5(pos.h, sourceRect.h, scaleX, scaleY, rotation, opacity), owned: true)
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_createPosSourceRectScaleXScaleYRotationOpacity(pos.h, sourceRect.h, scaleX, scaleY, rotation, opacity), owned: true)
 

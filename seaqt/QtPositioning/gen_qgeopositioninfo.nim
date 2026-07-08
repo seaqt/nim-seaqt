@@ -54,7 +54,7 @@ export
 
 type cQGeoPositionInfo*{.exportc: "QGeoPositionInfo", incompleteStruct.} = object
 
-proc fcQGeoPositionInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QGeoPositionInfo_operatorAssign".}
+proc fcQGeoPositionInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoPositionInfo_operatorAssign".}
 proc fcQGeoPositionInfo_operatorEqual(self: pointer, other: pointer): bool {.importc: "QGeoPositionInfo_operatorEqual".}
 proc fcQGeoPositionInfo_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QGeoPositionInfo_operatorNotEqual".}
 proc fcQGeoPositionInfo_isValid(self: pointer): bool {.importc: "QGeoPositionInfo_isValid".}
@@ -67,11 +67,11 @@ proc fcQGeoPositionInfo_attribute(self: pointer, attribute: cint): float64 {.imp
 proc fcQGeoPositionInfo_removeAttribute(self: pointer, attribute: cint): void {.importc: "QGeoPositionInfo_removeAttribute".}
 proc fcQGeoPositionInfo_hasAttribute(self: pointer, attribute: cint): bool {.importc: "QGeoPositionInfo_hasAttribute".}
 proc fcQGeoPositionInfo_new(): ptr cQGeoPositionInfo {.importc: "QGeoPositionInfo_new".}
-proc fcQGeoPositionInfo_new2(coordinate: pointer, updateTime: pointer): ptr cQGeoPositionInfo {.importc: "QGeoPositionInfo_new2".}
-proc fcQGeoPositionInfo_new3(other: pointer): ptr cQGeoPositionInfo {.importc: "QGeoPositionInfo_new3".}
+proc fcQGeoPositionInfo_new2(coordinate: pointer, updateTime: pointer): ptr cQGeoPositionInfo {.importc: "QGeoPositionInfo_new_coordinate_updateTime".}
+proc fcQGeoPositionInfo_new3(fromVal: pointer): ptr cQGeoPositionInfo {.importc: "QGeoPositionInfo_new_from".}
 
-proc operatorAssign*(self: gen_qgeopositioninfo_types.QGeoPositionInfo, other: gen_qgeopositioninfo_types.QGeoPositionInfo): void =
-  fcQGeoPositionInfo_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qgeopositioninfo_types.QGeoPositionInfo, fromVal: gen_qgeopositioninfo_types.QGeoPositionInfo): void =
+  fcQGeoPositionInfo_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qgeopositioninfo_types.QGeoPositionInfo, other: gen_qgeopositioninfo_types.QGeoPositionInfo): bool =
   fcQGeoPositionInfo_operatorEqual(self.h, other.h)
@@ -114,6 +114,6 @@ proc create*(T: type gen_qgeopositioninfo_types.QGeoPositionInfo,
   let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new2(coordinate.h, updateTime.h), owned: true)
   tmp
 proc create*(T: type gen_qgeopositioninfo_types.QGeoPositionInfo,
-    other: gen_qgeopositioninfo_types.QGeoPositionInfo): gen_qgeopositioninfo_types.QGeoPositionInfo =
-  let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new3(other.h), owned: true)
+    fromVal: gen_qgeopositioninfo_types.QGeoPositionInfo): gen_qgeopositioninfo_types.QGeoPositionInfo =
+  let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new3(fromVal.h), owned: true)
   tmp

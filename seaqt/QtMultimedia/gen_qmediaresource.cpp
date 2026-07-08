@@ -22,30 +22,30 @@ QMediaResource* QMediaResource_new() {
 	return new (std::nothrow) QMediaResource();
 }
 
-QMediaResource* QMediaResource_new2(QUrl* url) {
+QMediaResource* QMediaResource_new_url(QUrl* url) {
 	return new (std::nothrow) QMediaResource(*url);
 }
 
-QMediaResource* QMediaResource_new3(QNetworkRequest* request) {
+QMediaResource* QMediaResource_new_request(QNetworkRequest* request) {
 	return new (std::nothrow) QMediaResource(*request);
 }
 
-QMediaResource* QMediaResource_new4(QMediaResource* other) {
-	return new (std::nothrow) QMediaResource(*other);
+QMediaResource* QMediaResource_new_from(QMediaResource* from) {
+	return new (std::nothrow) QMediaResource(*from);
 }
 
-QMediaResource* QMediaResource_new5(QUrl* url, struct seaqt_string mimeType) {
+QMediaResource* QMediaResource_new_url_mimeType(QUrl* url, struct seaqt_string mimeType) {
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	return new (std::nothrow) QMediaResource(*url, mimeType_QString);
 }
 
-QMediaResource* QMediaResource_new6(QNetworkRequest* request, struct seaqt_string mimeType) {
+QMediaResource* QMediaResource_new_request_mimeType(QNetworkRequest* request, struct seaqt_string mimeType) {
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	return new (std::nothrow) QMediaResource(*request, mimeType_QString);
 }
 
-void QMediaResource_operatorAssign(QMediaResource* self, QMediaResource* other) {
-	self->operator=(*other);
+void QMediaResource_operatorAssign(QMediaResource* self, QMediaResource* from) {
+	self->operator=(*from);
 }
 
 bool QMediaResource_isNull(const QMediaResource* self) {
@@ -172,11 +172,11 @@ QSize* QMediaResource_resolution(const QMediaResource* self) {
 	return new QSize(self->resolution());
 }
 
-void QMediaResource_setResolution(QMediaResource* self, QSize* resolution) {
+void QMediaResource_setResolution_resolution(QMediaResource* self, QSize* resolution) {
 	self->setResolution(*resolution);
 }
 
-void QMediaResource_setResolution2(QMediaResource* self, int width, int height) {
+void QMediaResource_setResolution_width_height(QMediaResource* self, int width, int height) {
 	self->setResolution(static_cast<int>(width), static_cast<int>(height));
 }
 

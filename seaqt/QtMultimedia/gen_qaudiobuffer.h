@@ -23,13 +23,13 @@ typedef struct QAudioFormat QAudioFormat;
 #endif
 
 QAudioBuffer* QAudioBuffer_new();
-QAudioBuffer* QAudioBuffer_new2(QAudioBuffer* other);
-QAudioBuffer* QAudioBuffer_new3(struct seaqt_string data, QAudioFormat* format);
-QAudioBuffer* QAudioBuffer_new4(int numFrames, QAudioFormat* format);
-QAudioBuffer* QAudioBuffer_new5(struct seaqt_string data, QAudioFormat* format, long long startTime);
-QAudioBuffer* QAudioBuffer_new6(int numFrames, QAudioFormat* format, long long startTime);
+QAudioBuffer* QAudioBuffer_new_from(QAudioBuffer* from);
+QAudioBuffer* QAudioBuffer_new_data_format(struct seaqt_string data, QAudioFormat* format);
+QAudioBuffer* QAudioBuffer_new_numFrames_format(int numFrames, QAudioFormat* format);
+QAudioBuffer* QAudioBuffer_new_data_format_startTime(struct seaqt_string data, QAudioFormat* format, long long startTime);
+QAudioBuffer* QAudioBuffer_new_numFrames_format_startTime(int numFrames, QAudioFormat* format, long long startTime);
 
-void QAudioBuffer_operatorAssign(QAudioBuffer* self, QAudioBuffer* other);
+void QAudioBuffer_operatorAssign(QAudioBuffer* self, QAudioBuffer* from);
 bool QAudioBuffer_isValid(const QAudioBuffer* self);
 QAudioFormat* QAudioBuffer_format(const QAudioBuffer* self);
 int QAudioBuffer_frameCount(const QAudioBuffer* self);
@@ -38,8 +38,8 @@ int QAudioBuffer_byteCount(const QAudioBuffer* self);
 long long QAudioBuffer_duration(const QAudioBuffer* self);
 long long QAudioBuffer_startTime(const QAudioBuffer* self);
 const void* QAudioBuffer_constData(const QAudioBuffer* self);
-const void* QAudioBuffer_data(const QAudioBuffer* self);
-void* QAudioBuffer_data2(QAudioBuffer* self);
+const void* QAudioBuffer_data_const(const QAudioBuffer* self);
+void* QAudioBuffer_data(QAudioBuffer* self);
 
 void QAudioBuffer_delete(QAudioBuffer* self);
 

@@ -66,7 +66,7 @@ proc fcQSurface_format(self: pointer): pointer {.importc: "QSurface_format".}
 proc fcQSurface_surfaceType(self: pointer): cint {.importc: "QSurface_surfaceType".}
 proc fcQSurface_supportsOpenGL(self: pointer): bool {.importc: "QSurface_supportsOpenGL".}
 proc fcQSurface_size(self: pointer): pointer {.importc: "QSurface_size".}
-proc fcQSurface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSurface_operatorAssign".}
+proc fcQSurface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSurface_operatorAssign".}
 proc fcQSurface_staticMetaObject(): pointer {.importc: "QSurface_staticMetaObject".}
 
 proc surfaceClass*(self: gen_qsurface_types.QSurface): cint =
@@ -84,8 +84,8 @@ proc supportsOpenGL*(self: gen_qsurface_types.QSurface): bool =
 proc size*(self: gen_qsurface_types.QSurface): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSurface_size(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qsurface_types.QSurface, param1: gen_qsurface_types.QSurface): void =
-  fcQSurface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qsurface_types.QSurface, fromVal: gen_qsurface_types.QSurface): void =
+  fcQSurface_operatorAssign(self.h, fromVal.h)
 
 proc staticMetaObject*(_: type gen_qsurface_types.QSurface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSurface_staticMetaObject())

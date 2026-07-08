@@ -57,17 +57,17 @@ type cQAbstractState*{.exportc: "QAbstractState", incompleteStruct.} = object
 proc fcQAbstractState_metaObject(self: pointer): pointer {.importc: "QAbstractState_metaObject".}
 proc fcQAbstractState_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractState_metacast".}
 proc fcQAbstractState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractState_metacall".}
-proc fcQAbstractState_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractState_tr".}
-proc fcQAbstractState_trUtf8(s: cstring): struct_seaqt_string {.importc: "QAbstractState_trUtf8".}
+proc fcQAbstractState_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractState_tr_s".}
+proc fcQAbstractState_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QAbstractState_trUtf8_s".}
 proc fcQAbstractState_parentState(self: pointer): pointer {.importc: "QAbstractState_parentState".}
 proc fcQAbstractState_machine(self: pointer): pointer {.importc: "QAbstractState_machine".}
 proc fcQAbstractState_active(self: pointer): bool {.importc: "QAbstractState_active".}
 proc fcQAbstractState_activeChanged(self: pointer, active: bool): void {.importc: "QAbstractState_activeChanged".}
 proc fcQAbstractState_connect_activeChanged(self: pointer, slot: int, callback: proc (slot: int, active: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractState_connect_activeChanged".}
-proc fcQAbstractState_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractState_tr2".}
-proc fcQAbstractState_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractState_tr3".}
-proc fcQAbstractState_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractState_trUtf82".}
-proc fcQAbstractState_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractState_trUtf83".}
+proc fcQAbstractState_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractState_tr_s_c".}
+proc fcQAbstractState_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractState_tr_s_c_n".}
+proc fcQAbstractState_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractState_trUtf8_s_c".}
+proc fcQAbstractState_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractState_trUtf8_s_c_n".}
 proc fcQAbstractState_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractState_protectedbase_sender".}
 proc fcQAbstractState_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractState_protectedbase_senderSignalIndex".}
 proc fcQAbstractState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractState_protectedbase_receivers".}
@@ -84,13 +84,13 @@ proc metacall*(self: gen_qabstractstate_types.QAbstractState, param1: cint, para
   fcQAbstractState_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractstate_types.QAbstractState, s: cstring): string =
-  let v_ms = fcQAbstractState_tr(s)
+  let v_ms = fcQAbstractState_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractstate_types.QAbstractState, s: cstring): string =
-  let v_ms = fcQAbstractState_trUtf8(s)
+  let v_ms = fcQAbstractState_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -125,25 +125,25 @@ proc onActiveChanged*(self: gen_qabstractstate_types.QAbstractState, slot: QAbst
   fcQAbstractState_connect_activeChanged(self.h, cast[int](addr tmp[]), fcQAbstractState_slot_callback_activeChanged, fcQAbstractState_slot_callback_activeChanged_release)
 
 proc tr*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractState_tr2(s, c)
+  let v_ms = fcQAbstractState_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractState_tr3(s, c, n)
+  let v_ms = fcQAbstractState_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractState_trUtf82(s, c)
+  let v_ms = fcQAbstractState_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractState_trUtf83(s, c, n)
+  let v_ms = fcQAbstractState_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

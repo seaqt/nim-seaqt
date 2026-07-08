@@ -39,19 +39,19 @@ export gen_qscriptstring_types
 
 type cQScriptString*{.exportc: "QScriptString", incompleteStruct.} = object
 
-proc fcQScriptString_operatorAssign(self: pointer, other: pointer): void {.importc: "QScriptString_operatorAssign".}
+proc fcQScriptString_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QScriptString_operatorAssign".}
 proc fcQScriptString_isValid(self: pointer): bool {.importc: "QScriptString_isValid".}
 proc fcQScriptString_operatorEqual(self: pointer, other: pointer): bool {.importc: "QScriptString_operatorEqual".}
 proc fcQScriptString_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QScriptString_operatorNotEqual".}
 proc fcQScriptString_toArrayIndex(self: pointer): cuint {.importc: "QScriptString_toArrayIndex".}
 proc fcQScriptString_toString(self: pointer): struct_seaqt_string {.importc: "QScriptString_toString".}
 proc fcQScriptString_ToQString(self: pointer): struct_seaqt_string {.importc: "QScriptString_ToQString".}
-proc fcQScriptString_toArrayIndexWithOk(self: pointer, ok: ptr bool): cuint {.importc: "QScriptString_toArrayIndexWithOk".}
+proc fcQScriptString_toArrayIndexOk(self: pointer, ok: ptr bool): cuint {.importc: "QScriptString_toArrayIndex_ok".}
 proc fcQScriptString_new(): ptr cQScriptString {.importc: "QScriptString_new".}
-proc fcQScriptString_new2(other: pointer): ptr cQScriptString {.importc: "QScriptString_new2".}
+proc fcQScriptString_new2(fromVal: pointer): ptr cQScriptString {.importc: "QScriptString_new_from".}
 
-proc operatorAssign*(self: gen_qscriptstring_types.QScriptString, other: gen_qscriptstring_types.QScriptString): void =
-  fcQScriptString_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qscriptstring_types.QScriptString, fromVal: gen_qscriptstring_types.QScriptString): void =
+  fcQScriptString_operatorAssign(self.h, fromVal.h)
 
 proc isValid*(self: gen_qscriptstring_types.QScriptString): bool =
   fcQScriptString_isValid(self.h)
@@ -78,12 +78,12 @@ proc ToQString*(self: gen_qscriptstring_types.QScriptString): string =
   vx_ret
 
 proc toArrayIndex*(self: gen_qscriptstring_types.QScriptString, ok: ptr bool): cuint =
-  fcQScriptString_toArrayIndexWithOk(self.h, ok)
+  fcQScriptString_toArrayIndexOk(self.h, ok)
 
 proc create*(T: type gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
   let tmp = gen_qscriptstring_types.QScriptString(h: fcQScriptString_new(), owned: true)
   tmp
 proc create*(T: type gen_qscriptstring_types.QScriptString,
-    other: gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
-  let tmp = gen_qscriptstring_types.QScriptString(h: fcQScriptString_new2(other.h), owned: true)
+    fromVal: gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
+  let tmp = gen_qscriptstring_types.QScriptString(h: fcQScriptString_new2(fromVal.h), owned: true)
   tmp

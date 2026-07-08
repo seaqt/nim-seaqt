@@ -297,16 +297,16 @@ public:
 	friend int QPdfWriter_protectedbase_senderSignalIndex(const VirtualQPdfWriter* self);
 	friend int QPdfWriter_protectedbase_receivers(const VirtualQPdfWriter* self, const char* signal);
 	friend bool QPdfWriter_protectedbase_isSignalConnected(const VirtualQPdfWriter* self, QMetaMethod* signal);
-	friend QPageLayout* QPdfWriter_protectedbase_devicePageLayout(const VirtualQPdfWriter* self);
+	friend QPageLayout* QPdfWriter_protectedbase_devicePageLayout_const(const VirtualQPdfWriter* self);
 };
 
-VirtualQPdfWriter* QPdfWriter_new(const QPdfWriter_VTable* vtbl, size_t vdata, struct seaqt_string filename) {
+VirtualQPdfWriter* QPdfWriter_new_filename(const QPdfWriter_VTable* vtbl, size_t vdata, struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPdfWriter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPdfWriter(vtbl, filename_QString) : nullptr;
 }
 
-VirtualQPdfWriter* QPdfWriter_new2(const QPdfWriter_VTable* vtbl, size_t vdata, QIODevice* device) {
+VirtualQPdfWriter* QPdfWriter_new_device(const QPdfWriter_VTable* vtbl, size_t vdata, QIODevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPdfWriter>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPdfWriter(vtbl, device) : nullptr;
 }
@@ -328,7 +328,7 @@ int QPdfWriter_metacall(QPdfWriter* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPdfWriter_tr(const char* s) {
+struct seaqt_string QPdfWriter_tr_s(const char* s) {
 	QString _ret = QPdfWriter::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -339,7 +339,7 @@ struct seaqt_string QPdfWriter_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QPdfWriter_trUtf8(const char* s) {
+struct seaqt_string QPdfWriter_trUtf8_s(const char* s) {
 	QString _ret = QPdfWriter::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -417,7 +417,7 @@ struct seaqt_string QPdfWriter_documentXmpMetadata(const QPdfWriter* self) {
 	return _ms;
 }
 
-void QPdfWriter_addFileAttachment(QPdfWriter* self, struct seaqt_string fileName, struct seaqt_string data) {
+void QPdfWriter_addFileAttachment_fileName_data(QPdfWriter* self, struct seaqt_string fileName, struct seaqt_string data) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray data_QByteArray(data.data, data.len);
 	self->addFileAttachment(fileName_QString, data_QByteArray);
@@ -435,7 +435,7 @@ void QPdfWriter_setMargins(QPdfWriter* self, QPagedPaintDevice__Margins* m) {
 	self->setMargins(*m);
 }
 
-struct seaqt_string QPdfWriter_tr2(const char* s, const char* c) {
+struct seaqt_string QPdfWriter_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPdfWriter::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -446,7 +446,7 @@ struct seaqt_string QPdfWriter_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfWriter_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPdfWriter_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfWriter::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -457,7 +457,7 @@ struct seaqt_string QPdfWriter_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QPdfWriter_trUtf82(const char* s, const char* c) {
+struct seaqt_string QPdfWriter_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QPdfWriter::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -468,7 +468,7 @@ struct seaqt_string QPdfWriter_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfWriter_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QPdfWriter_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfWriter::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -479,7 +479,7 @@ struct seaqt_string QPdfWriter_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QPdfWriter_addFileAttachment2(QPdfWriter* self, struct seaqt_string fileName, struct seaqt_string data, struct seaqt_string mimeType) {
+void QPdfWriter_addFileAttachment_fileName_data_mimeType(QPdfWriter* self, struct seaqt_string fileName, struct seaqt_string data, struct seaqt_string mimeType) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
@@ -606,7 +606,7 @@ bool QPdfWriter_protectedbase_isSignalConnected(const VirtualQPdfWriter* self, Q
 	return self->isSignalConnected(*signal);
 }
 
-QPageLayout* QPdfWriter_protectedbase_devicePageLayout(const VirtualQPdfWriter* self) {
+QPageLayout* QPdfWriter_protectedbase_devicePageLayout_const(const VirtualQPdfWriter* self) {
 	return new QPageLayout(self->devicePageLayout());
 }
 

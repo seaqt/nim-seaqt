@@ -91,8 +91,8 @@ void QGestureRecognizer_unregisterRecognizer(int type) {
 	QGestureRecognizer::unregisterRecognizer(static_cast<Qt::GestureType>(type));
 }
 
-void QGestureRecognizer_operatorAssign(QGestureRecognizer* self, QGestureRecognizer* param1) {
-	self->operator=(*param1);
+void QGestureRecognizer_operatorAssign(QGestureRecognizer* self, QGestureRecognizer* from) {
+	self->operator=(*from);
 }
 
 void* QGestureRecognizer_vdata(VirtualQGestureRecognizer* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQGestureRecognizer>()); }

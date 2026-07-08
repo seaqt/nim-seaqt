@@ -98,11 +98,11 @@ type cQPdfDocument*{.exportc: "QPdfDocument", incompleteStruct.} = object
 proc fcQPdfDocument_metaObject(self: pointer): pointer {.importc: "QPdfDocument_metaObject".}
 proc fcQPdfDocument_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfDocument_metacast".}
 proc fcQPdfDocument_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfDocument_metacall".}
-proc fcQPdfDocument_tr(s: cstring): struct_seaqt_string {.importc: "QPdfDocument_tr".}
-proc fcQPdfDocument_trUtf8(s: cstring): struct_seaqt_string {.importc: "QPdfDocument_trUtf8".}
-proc fcQPdfDocument_load(self: pointer, fileName: struct_seaqt_string): cint {.importc: "QPdfDocument_load".}
+proc fcQPdfDocument_trS(s: cstring): struct_seaqt_string {.importc: "QPdfDocument_tr_s".}
+proc fcQPdfDocument_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QPdfDocument_trUtf8_s".}
+proc fcQPdfDocument_loadFileName(self: pointer, fileName: struct_seaqt_string): cint {.importc: "QPdfDocument_load_fileName".}
 proc fcQPdfDocument_status(self: pointer): cint {.importc: "QPdfDocument_status".}
-proc fcQPdfDocument_loadWithDevice(self: pointer, device: pointer): void {.importc: "QPdfDocument_loadWithDevice".}
+proc fcQPdfDocument_loadDevice(self: pointer, device: pointer): void {.importc: "QPdfDocument_load_device".}
 proc fcQPdfDocument_setPassword(self: pointer, password: struct_seaqt_string): void {.importc: "QPdfDocument_setPassword".}
 proc fcQPdfDocument_password(self: pointer): struct_seaqt_string {.importc: "QPdfDocument_password".}
 proc fcQPdfDocument_metaData(self: pointer, field: cint): pointer {.importc: "QPdfDocument_metaData".}
@@ -110,7 +110,7 @@ proc fcQPdfDocument_error(self: pointer): cint {.importc: "QPdfDocument_error".}
 proc fcQPdfDocument_close(self: pointer): void {.importc: "QPdfDocument_close".}
 proc fcQPdfDocument_pageCount(self: pointer): cint {.importc: "QPdfDocument_pageCount".}
 proc fcQPdfDocument_pageSize(self: pointer, page: cint): pointer {.importc: "QPdfDocument_pageSize".}
-proc fcQPdfDocument_render(self: pointer, page: cint, imageSize: pointer): pointer {.importc: "QPdfDocument_render".}
+proc fcQPdfDocument_renderPageImageSize(self: pointer, page: cint, imageSize: pointer): pointer {.importc: "QPdfDocument_render_page_imageSize".}
 proc fcQPdfDocument_getSelection(self: pointer, page: cint, start: pointer, endVal: pointer): pointer {.importc: "QPdfDocument_getSelection".}
 proc fcQPdfDocument_getSelectionAtIndex(self: pointer, page: cint, startIndex: cint, maxLength: cint): pointer {.importc: "QPdfDocument_getSelectionAtIndex".}
 proc fcQPdfDocument_getAllText(self: pointer, page: cint): pointer {.importc: "QPdfDocument_getAllText".}
@@ -122,11 +122,11 @@ proc fcQPdfDocument_statusChanged(self: pointer, status: cint): void {.importc: 
 proc fcQPdfDocument_connect_statusChanged(self: pointer, slot: int, callback: proc (slot: int, status: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfDocument_connect_statusChanged".}
 proc fcQPdfDocument_pageCountChanged(self: pointer, pageCount: cint): void {.importc: "QPdfDocument_pageCountChanged".}
 proc fcQPdfDocument_connect_pageCountChanged(self: pointer, slot: int, callback: proc (slot: int, pageCount: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfDocument_connect_pageCountChanged".}
-proc fcQPdfDocument_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfDocument_tr2".}
-proc fcQPdfDocument_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfDocument_tr3".}
-proc fcQPdfDocument_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfDocument_trUtf82".}
-proc fcQPdfDocument_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfDocument_trUtf83".}
-proc fcQPdfDocument_render2(self: pointer, page: cint, imageSize: pointer, options: pointer): pointer {.importc: "QPdfDocument_render2".}
+proc fcQPdfDocument_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfDocument_tr_s_c".}
+proc fcQPdfDocument_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfDocument_tr_s_c_n".}
+proc fcQPdfDocument_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfDocument_trUtf8_s_c".}
+proc fcQPdfDocument_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfDocument_trUtf8_s_c_n".}
+proc fcQPdfDocument_renderPageImageSizeOptions(self: pointer, page: cint, imageSize: pointer, options: pointer): pointer {.importc: "QPdfDocument_render_page_imageSize_options".}
 proc fcQPdfDocument_vdata(self: pointer): ptr pointer {.importc: "QPdfDocument_vdata".}
 proc fvdata_cQPdfDocument(self: pointer): pointer {.importc: "vdata_QPdfDocument".}
 
@@ -157,7 +157,7 @@ proc fcQPdfDocument_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQPdfDocument_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfDocument_protectedbase_receivers".}
 proc fcQPdfDocument_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfDocument_protectedbase_isSignalConnected".}
 proc fcQPdfDocument_new(vtbl: pointer, vdata: csize_t): ptr cQPdfDocument {.importc: "QPdfDocument_new".}
-proc fcQPdfDocument_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfDocument {.importc: "QPdfDocument_new2".}
+proc fcQPdfDocument_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfDocument {.importc: "QPdfDocument_new_parent".}
 proc fcQPdfDocument_staticMetaObject(): pointer {.importc: "QPdfDocument_staticMetaObject".}
 
 proc metaObject*(self: gen_qpdfdocument_types.QPdfDocument): gen_qobjectdefs_types.QMetaObject =
@@ -170,25 +170,25 @@ proc metacall*(self: gen_qpdfdocument_types.QPdfDocument, param1: cint, param2: 
   fcQPdfDocument_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfdocument_types.QPdfDocument, s: cstring): string =
-  let v_ms = fcQPdfDocument_tr(s)
+  let v_ms = fcQPdfDocument_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfdocument_types.QPdfDocument, s: cstring): string =
-  let v_ms = fcQPdfDocument_trUtf8(s)
+  let v_ms = fcQPdfDocument_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc load*(self: gen_qpdfdocument_types.QPdfDocument, fileName: openArray[char]): cint =
-  cint(fcQPdfDocument_load(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))))
+  cint(fcQPdfDocument_loadFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))))
 
 proc status*(self: gen_qpdfdocument_types.QPdfDocument): cint =
   cint(fcQPdfDocument_status(self.h))
 
 proc load*(self: gen_qpdfdocument_types.QPdfDocument, device: gen_qiodevice_types.QIODevice): void =
-  fcQPdfDocument_loadWithDevice(self.h, device.h)
+  fcQPdfDocument_loadDevice(self.h, device.h)
 
 proc setPassword*(self: gen_qpdfdocument_types.QPdfDocument, password: openArray[char]): void =
   fcQPdfDocument_setPassword(self.h, struct_seaqt_string(data: if len(password) > 0: addr password[0] else: nil, len: csize_t(len(password))))
@@ -215,7 +215,7 @@ proc pageSize*(self: gen_qpdfdocument_types.QPdfDocument, page: cint): gen_qsize
   gen_qsize_types.QSizeF(h: fcQPdfDocument_pageSize(self.h, page), owned: true)
 
 proc render*(self: gen_qpdfdocument_types.QPdfDocument, page: cint, imageSize: gen_qsize_types.QSize): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQPdfDocument_render(self.h, page, imageSize.h), owned: true)
+  gen_qimage_types.QImage(h: fcQPdfDocument_renderPageImageSize(self.h, page, imageSize.h), owned: true)
 
 proc getSelection*(self: gen_qpdfdocument_types.QPdfDocument, page: cint, start: gen_qpoint_types.QPointF, endVal: gen_qpoint_types.QPointF): gen_qpdfselection_types.QPdfSelection =
   gen_qpdfselection_types.QPdfSelection(h: fcQPdfDocument_getSelection(self.h, page, start.h, endVal.h), owned: true)
@@ -303,31 +303,31 @@ proc onPageCountChanged*(self: gen_qpdfdocument_types.QPdfDocument, slot: QPdfDo
   fcQPdfDocument_connect_pageCountChanged(self.h, cast[int](addr tmp[]), fcQPdfDocument_slot_callback_pageCountChanged, fcQPdfDocument_slot_callback_pageCountChanged_release)
 
 proc tr*(_: type gen_qpdfdocument_types.QPdfDocument, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfDocument_tr2(s, c)
+  let v_ms = fcQPdfDocument_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfdocument_types.QPdfDocument, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfDocument_tr3(s, c, n)
+  let v_ms = fcQPdfDocument_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfdocument_types.QPdfDocument, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfDocument_trUtf82(s, c)
+  let v_ms = fcQPdfDocument_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qpdfdocument_types.QPdfDocument, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfDocument_trUtf83(s, c, n)
+  let v_ms = fcQPdfDocument_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc render*(self: gen_qpdfdocument_types.QPdfDocument, page: cint, imageSize: gen_qsize_types.QSize, options: gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQPdfDocument_render2(self.h, page, imageSize.h, options.h), owned: true)
+  gen_qimage_types.QImage(h: fcQPdfDocument_renderPageImageSizeOptions(self.h, page, imageSize.h, options.h), owned: true)
 
 type QPdfDocumentmetaObjectProc* = proc(self: QPdfDocument): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPdfDocumentmetacastProc* = proc(self: QPdfDocument, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -53,22 +53,22 @@ void* QWebHistoryInterface_vdata(VirtualQWebHistoryInterface* self);
 VirtualQWebHistoryInterface* vdata_QWebHistoryInterface(void* vdata);
 
 VirtualQWebHistoryInterface* QWebHistoryInterface_new(const QWebHistoryInterface_VTable* vtbl, size_t vdata);
-VirtualQWebHistoryInterface* QWebHistoryInterface_new2(const QWebHistoryInterface_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQWebHistoryInterface* QWebHistoryInterface_new_parent(const QWebHistoryInterface_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QWebHistoryInterface_virtbase(QWebHistoryInterface* src, QObject** outptr_QObject);
 QMetaObject* QWebHistoryInterface_metaObject(const QWebHistoryInterface* self);
 void* QWebHistoryInterface_metacast(QWebHistoryInterface* self, const char* param1);
 int QWebHistoryInterface_metacall(QWebHistoryInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QWebHistoryInterface_tr(const char* s);
-struct seaqt_string QWebHistoryInterface_trUtf8(const char* s);
+struct seaqt_string QWebHistoryInterface_tr_s(const char* s);
+struct seaqt_string QWebHistoryInterface_trUtf8_s(const char* s);
 void QWebHistoryInterface_setDefaultInterface(QWebHistoryInterface* defaultInterface);
 QWebHistoryInterface* QWebHistoryInterface_defaultInterface();
 bool QWebHistoryInterface_historyContains(const QWebHistoryInterface* self, struct seaqt_string url);
 void QWebHistoryInterface_addHistoryEntry(QWebHistoryInterface* self, struct seaqt_string url);
-struct seaqt_string QWebHistoryInterface_tr2(const char* s, const char* c);
-struct seaqt_string QWebHistoryInterface_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebHistoryInterface_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebHistoryInterface_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebHistoryInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebHistoryInterface_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebHistoryInterface_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebHistoryInterface_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWebHistoryInterface_virtualbase_metaObject(const VirtualQWebHistoryInterface* self);
 void* QWebHistoryInterface_virtualbase_metacast(VirtualQWebHistoryInterface* self, const char* param1);

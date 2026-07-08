@@ -59,26 +59,26 @@ void* QKeyEventTransition_vdata(VirtualQKeyEventTransition* self);
 VirtualQKeyEventTransition* vdata_QKeyEventTransition(void* vdata);
 
 VirtualQKeyEventTransition* QKeyEventTransition_new(const QKeyEventTransition_VTable* vtbl, size_t vdata);
-VirtualQKeyEventTransition* QKeyEventTransition_new2(const QKeyEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int key);
-VirtualQKeyEventTransition* QKeyEventTransition_new3(const QKeyEventTransition_VTable* vtbl, size_t vdata, QState* sourceState);
-VirtualQKeyEventTransition* QKeyEventTransition_new4(const QKeyEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int key, QState* sourceState);
+VirtualQKeyEventTransition* QKeyEventTransition_new_object_type_key(const QKeyEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int key);
+VirtualQKeyEventTransition* QKeyEventTransition_new_sourceState(const QKeyEventTransition_VTable* vtbl, size_t vdata, QState* sourceState);
+VirtualQKeyEventTransition* QKeyEventTransition_new_object_type_key_sourceState(const QKeyEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int key, QState* sourceState);
 
 void QKeyEventTransition_virtbase(QKeyEventTransition* src, QEventTransition** outptr_QEventTransition);
 QMetaObject* QKeyEventTransition_metaObject(const QKeyEventTransition* self);
 void* QKeyEventTransition_metacast(QKeyEventTransition* self, const char* param1);
 int QKeyEventTransition_metacall(QKeyEventTransition* self, int param1, int param2, void** param3);
-struct seaqt_string QKeyEventTransition_tr(const char* s);
-struct seaqt_string QKeyEventTransition_trUtf8(const char* s);
+struct seaqt_string QKeyEventTransition_tr_s(const char* s);
+struct seaqt_string QKeyEventTransition_trUtf8_s(const char* s);
 int QKeyEventTransition_key(const QKeyEventTransition* self);
 void QKeyEventTransition_setKey(QKeyEventTransition* self, int key);
 int QKeyEventTransition_modifierMask(const QKeyEventTransition* self);
 void QKeyEventTransition_setModifierMask(QKeyEventTransition* self, int modifiers);
 void QKeyEventTransition_onTransition(QKeyEventTransition* self, QEvent* event);
 bool QKeyEventTransition_eventTest(QKeyEventTransition* self, QEvent* event);
-struct seaqt_string QKeyEventTransition_tr2(const char* s, const char* c);
-struct seaqt_string QKeyEventTransition_tr3(const char* s, const char* c, int n);
-struct seaqt_string QKeyEventTransition_trUtf82(const char* s, const char* c);
-struct seaqt_string QKeyEventTransition_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QKeyEventTransition_tr_s_c(const char* s, const char* c);
+struct seaqt_string QKeyEventTransition_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QKeyEventTransition_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QKeyEventTransition_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QKeyEventTransition_virtualbase_metaObject(const VirtualQKeyEventTransition* self);
 void* QKeyEventTransition_virtualbase_metacast(VirtualQKeyEventTransition* self, const char* param1);

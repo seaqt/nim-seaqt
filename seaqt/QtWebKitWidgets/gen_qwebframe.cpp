@@ -41,12 +41,12 @@ QWebHitTestResult* QWebHitTestResult_new() {
 	return new (std::nothrow) QWebHitTestResult();
 }
 
-QWebHitTestResult* QWebHitTestResult_new2(QWebHitTestResult* other) {
-	return new (std::nothrow) QWebHitTestResult(*other);
+QWebHitTestResult* QWebHitTestResult_new_from(QWebHitTestResult* from) {
+	return new (std::nothrow) QWebHitTestResult(*from);
 }
 
-void QWebHitTestResult_operatorAssign(QWebHitTestResult* self, QWebHitTestResult* other) {
-	self->operator=(*other);
+void QWebHitTestResult_operatorAssign(QWebHitTestResult* self, QWebHitTestResult* from) {
+	self->operator=(*from);
 }
 
 bool QWebHitTestResult_isNull(const QWebHitTestResult* self) {
@@ -173,7 +173,7 @@ int QWebFrame_metacall(QWebFrame* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebFrame_tr(const char* s) {
+struct seaqt_string QWebFrame_tr_s(const char* s) {
 	QString _ret = QWebFrame::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -184,7 +184,7 @@ struct seaqt_string QWebFrame_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QWebFrame_trUtf8(const char* s) {
+struct seaqt_string QWebFrame_trUtf8_s(const char* s) {
 	QString _ret = QWebFrame::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -199,25 +199,25 @@ QWebPage* QWebFrame_page(const QWebFrame* self) {
 	return self->page();
 }
 
-void QWebFrame_load(QWebFrame* self, QUrl* url) {
+void QWebFrame_load_url(QWebFrame* self, QUrl* url) {
 	self->load(*url);
 }
 
-void QWebFrame_loadWithRequest(QWebFrame* self, QNetworkRequest* request) {
+void QWebFrame_load_request(QWebFrame* self, QNetworkRequest* request) {
 	self->load(*request);
 }
 
-void QWebFrame_setHtml(QWebFrame* self, struct seaqt_string html) {
+void QWebFrame_setHtml_html(QWebFrame* self, struct seaqt_string html) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString);
 }
 
-void QWebFrame_setContent(QWebFrame* self, struct seaqt_string data) {
+void QWebFrame_setContent_data(QWebFrame* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->setContent(data_QByteArray);
 }
 
-void QWebFrame_addToJavaScriptWindowObject(QWebFrame* self, struct seaqt_string name, QObject* object) {
+void QWebFrame_addToJavaScriptWindowObject_name_object(QWebFrame* self, struct seaqt_string name, QObject* object) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	self->addToJavaScriptWindowObject(name_QString, object);
 }
@@ -349,11 +349,11 @@ void QWebFrame_scrollToAnchor(QWebFrame* self, struct seaqt_string anchor) {
 	self->scrollToAnchor(anchor_QString);
 }
 
-void QWebFrame_render(QWebFrame* self, QPainter* param1) {
+void QWebFrame_render_QPainter(QWebFrame* self, QPainter* param1) {
 	self->render(param1);
 }
 
-void QWebFrame_render2(QWebFrame* self, QPainter* param1, int layer) {
+void QWebFrame_render_QPainter_QWebFrame_RenderLayers(QWebFrame* self, QPainter* param1, int layer) {
 	self->render(param1, static_cast<QWebFrame::RenderLayers>(layer));
 }
 
@@ -600,7 +600,7 @@ void QWebFrame_connect_pageChanged(QWebFrame* self, intptr_t slot, void (*callba
 	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::pageChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QWebFrame_tr2(const char* s, const char* c) {
+struct seaqt_string QWebFrame_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebFrame::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -611,7 +611,7 @@ struct seaqt_string QWebFrame_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebFrame_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebFrame_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebFrame::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -622,7 +622,7 @@ struct seaqt_string QWebFrame_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QWebFrame_trUtf82(const char* s, const char* c) {
+struct seaqt_string QWebFrame_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QWebFrame::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -633,7 +633,7 @@ struct seaqt_string QWebFrame_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebFrame_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QWebFrame_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebFrame::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -644,42 +644,42 @@ struct seaqt_string QWebFrame_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QWebFrame_load2(QWebFrame* self, QNetworkRequest* request, int operation) {
+void QWebFrame_load_request_operation(QWebFrame* self, QNetworkRequest* request, int operation) {
 	self->load(*request, static_cast<QNetworkAccessManager::Operation>(operation));
 }
 
-void QWebFrame_load3(QWebFrame* self, QNetworkRequest* request, int operation, struct seaqt_string body) {
+void QWebFrame_load_request_operation_body(QWebFrame* self, QNetworkRequest* request, int operation, struct seaqt_string body) {
 	QByteArray body_QByteArray(body.data, body.len);
 	self->load(*request, static_cast<QNetworkAccessManager::Operation>(operation), body_QByteArray);
 }
 
-void QWebFrame_setHtml2(QWebFrame* self, struct seaqt_string html, QUrl* baseUrl) {
+void QWebFrame_setHtml_html_baseUrl(QWebFrame* self, struct seaqt_string html, QUrl* baseUrl) {
 	QString html_QString = QString::fromUtf8(html.data, html.len);
 	self->setHtml(html_QString, *baseUrl);
 }
 
-void QWebFrame_setContent2(QWebFrame* self, struct seaqt_string data, struct seaqt_string mimeType) {
+void QWebFrame_setContent_data_mimeType(QWebFrame* self, struct seaqt_string data, struct seaqt_string mimeType) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString);
 }
 
-void QWebFrame_setContent3(QWebFrame* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
+void QWebFrame_setContent_data_mimeType_baseUrl(QWebFrame* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
 	QByteArray data_QByteArray(data.data, data.len);
 	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
 	self->setContent(data_QByteArray, mimeType_QString, *baseUrl);
 }
 
-void QWebFrame_addToJavaScriptWindowObject2(QWebFrame* self, struct seaqt_string name, QObject* object, int ownership) {
+void QWebFrame_addToJavaScriptWindowObject_name_object_ownership(QWebFrame* self, struct seaqt_string name, QObject* object, int ownership) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	self->addToJavaScriptWindowObject(name_QString, object, static_cast<QWebFrame::ValueOwnership>(ownership));
 }
 
-void QWebFrame_render3(QWebFrame* self, QPainter* param1, QRegion* clip) {
+void QWebFrame_render_QPainter_QRegion(QWebFrame* self, QPainter* param1, QRegion* clip) {
 	self->render(param1, *clip);
 }
 
-void QWebFrame_render4(QWebFrame* self, QPainter* param1, int layer, QRegion* clip) {
+void QWebFrame_render_QPainter_QWebFrame_RenderLayers_QRegion(QWebFrame* self, QPainter* param1, int layer, QRegion* clip) {
 	self->render(param1, static_cast<QWebFrame::RenderLayers>(layer), *clip);
 }
 

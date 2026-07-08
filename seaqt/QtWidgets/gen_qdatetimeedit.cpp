@@ -821,37 +821,37 @@ VirtualQDateTimeEdit* QDateTimeEdit_new(const QDateTimeEdit_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQDateTimeEdit(vtbl) : nullptr;
 }
 
-VirtualQDateTimeEdit* QDateTimeEdit_new2(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDateTime* dt) {
+VirtualQDateTimeEdit* QDateTimeEdit_new_dt(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDateTime* dt) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateTimeEdit(vtbl, *dt) : nullptr;
 }
 
-VirtualQDateTimeEdit* QDateTimeEdit_new3(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDate* d) {
+VirtualQDateTimeEdit* QDateTimeEdit_new_d(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDate* d) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateTimeEdit(vtbl, *d) : nullptr;
 }
 
-VirtualQDateTimeEdit* QDateTimeEdit_new4(const QDateTimeEdit_VTable* vtbl, size_t vdata, QTime* t) {
+VirtualQDateTimeEdit* QDateTimeEdit_new_t(const QDateTimeEdit_VTable* vtbl, size_t vdata, QTime* t) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateTimeEdit(vtbl, *t) : nullptr;
 }
 
-VirtualQDateTimeEdit* QDateTimeEdit_new5(const QDateTimeEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDateTimeEdit* QDateTimeEdit_new_parent(const QDateTimeEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateTimeEdit(vtbl, parent) : nullptr;
 }
 
-VirtualQDateTimeEdit* QDateTimeEdit_new6(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDateTime* dt, QWidget* parent) {
+VirtualQDateTimeEdit* QDateTimeEdit_new_dt_parent(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDateTime* dt, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateTimeEdit(vtbl, *dt, parent) : nullptr;
 }
 
-VirtualQDateTimeEdit* QDateTimeEdit_new7(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDate* d, QWidget* parent) {
+VirtualQDateTimeEdit* QDateTimeEdit_new_d_parent(const QDateTimeEdit_VTable* vtbl, size_t vdata, QDate* d, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateTimeEdit(vtbl, *d, parent) : nullptr;
 }
 
-VirtualQDateTimeEdit* QDateTimeEdit_new8(const QDateTimeEdit_VTable* vtbl, size_t vdata, QTime* t, QWidget* parent) {
+VirtualQDateTimeEdit* QDateTimeEdit_new_t_parent(const QDateTimeEdit_VTable* vtbl, size_t vdata, QTime* t, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateTimeEdit(vtbl, *t, parent) : nullptr;
 }
@@ -872,7 +872,7 @@ int QDateTimeEdit_metacall(QDateTimeEdit* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDateTimeEdit_tr(const char* s) {
+struct seaqt_string QDateTimeEdit_tr_s(const char* s) {
 	QString _ret = QDateTimeEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -883,7 +883,7 @@ struct seaqt_string QDateTimeEdit_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDateTimeEdit_trUtf8(const char* s) {
+struct seaqt_string QDateTimeEdit_trUtf8_s(const char* s) {
 	QString _ret = QDateTimeEdit::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1167,7 +1167,7 @@ void QDateTimeEdit_setTime(QDateTimeEdit* self, QTime* time) {
 	self->setTime(*time);
 }
 
-struct seaqt_string QDateTimeEdit_tr2(const char* s, const char* c) {
+struct seaqt_string QDateTimeEdit_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDateTimeEdit::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1178,7 +1178,7 @@ struct seaqt_string QDateTimeEdit_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDateTimeEdit_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDateTimeEdit_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDateTimeEdit::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1189,7 +1189,7 @@ struct seaqt_string QDateTimeEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDateTimeEdit_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDateTimeEdit_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDateTimeEdit::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1200,7 +1200,7 @@ struct seaqt_string QDateTimeEdit_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDateTimeEdit_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDateTimeEdit_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDateTimeEdit::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2325,17 +2325,17 @@ VirtualQTimeEdit* QTimeEdit_new(const QTimeEdit_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQTimeEdit(vtbl) : nullptr;
 }
 
-VirtualQTimeEdit* QTimeEdit_new2(const QTimeEdit_VTable* vtbl, size_t vdata, QTime* time) {
+VirtualQTimeEdit* QTimeEdit_new_time(const QTimeEdit_VTable* vtbl, size_t vdata, QTime* time) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTimeEdit(vtbl, *time) : nullptr;
 }
 
-VirtualQTimeEdit* QTimeEdit_new3(const QTimeEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQTimeEdit* QTimeEdit_new_parent(const QTimeEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTimeEdit(vtbl, parent) : nullptr;
 }
 
-VirtualQTimeEdit* QTimeEdit_new4(const QTimeEdit_VTable* vtbl, size_t vdata, QTime* time, QWidget* parent) {
+VirtualQTimeEdit* QTimeEdit_new_time_parent(const QTimeEdit_VTable* vtbl, size_t vdata, QTime* time, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTimeEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTimeEdit(vtbl, *time, parent) : nullptr;
 }
@@ -2356,7 +2356,7 @@ int QTimeEdit_metacall(QTimeEdit* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTimeEdit_tr(const char* s) {
+struct seaqt_string QTimeEdit_tr_s(const char* s) {
 	QString _ret = QTimeEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2367,7 +2367,7 @@ struct seaqt_string QTimeEdit_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QTimeEdit_trUtf8(const char* s) {
+struct seaqt_string QTimeEdit_trUtf8_s(const char* s) {
 	QString _ret = QTimeEdit::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2396,7 +2396,7 @@ void QTimeEdit_connect_userTimeChanged(QTimeEdit* self, intptr_t slot, void (*ca
 	QTimeEdit::connect(self, static_cast<void (QTimeEdit::*)(const QTime&)>(&QTimeEdit::userTimeChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QTimeEdit_tr2(const char* s, const char* c) {
+struct seaqt_string QTimeEdit_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTimeEdit::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2407,7 +2407,7 @@ struct seaqt_string QTimeEdit_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTimeEdit_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTimeEdit_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTimeEdit::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2418,7 +2418,7 @@ struct seaqt_string QTimeEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QTimeEdit_trUtf82(const char* s, const char* c) {
+struct seaqt_string QTimeEdit_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QTimeEdit::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2429,7 +2429,7 @@ struct seaqt_string QTimeEdit_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTimeEdit_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QTimeEdit_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTimeEdit::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3554,17 +3554,17 @@ VirtualQDateEdit* QDateEdit_new(const QDateEdit_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQDateEdit(vtbl) : nullptr;
 }
 
-VirtualQDateEdit* QDateEdit_new2(const QDateEdit_VTable* vtbl, size_t vdata, QDate* date) {
+VirtualQDateEdit* QDateEdit_new_date(const QDateEdit_VTable* vtbl, size_t vdata, QDate* date) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateEdit(vtbl, *date) : nullptr;
 }
 
-VirtualQDateEdit* QDateEdit_new3(const QDateEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDateEdit* QDateEdit_new_parent(const QDateEdit_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateEdit(vtbl, parent) : nullptr;
 }
 
-VirtualQDateEdit* QDateEdit_new4(const QDateEdit_VTable* vtbl, size_t vdata, QDate* date, QWidget* parent) {
+VirtualQDateEdit* QDateEdit_new_date_parent(const QDateEdit_VTable* vtbl, size_t vdata, QDate* date, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDateEdit>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDateEdit(vtbl, *date, parent) : nullptr;
 }
@@ -3585,7 +3585,7 @@ int QDateEdit_metacall(QDateEdit* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDateEdit_tr(const char* s) {
+struct seaqt_string QDateEdit_tr_s(const char* s) {
 	QString _ret = QDateEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3596,7 +3596,7 @@ struct seaqt_string QDateEdit_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDateEdit_trUtf8(const char* s) {
+struct seaqt_string QDateEdit_trUtf8_s(const char* s) {
 	QString _ret = QDateEdit::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3625,7 +3625,7 @@ void QDateEdit_connect_userDateChanged(QDateEdit* self, intptr_t slot, void (*ca
 	QDateEdit::connect(self, static_cast<void (QDateEdit::*)(const QDate&)>(&QDateEdit::userDateChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDateEdit_tr2(const char* s, const char* c) {
+struct seaqt_string QDateEdit_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDateEdit::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3636,7 +3636,7 @@ struct seaqt_string QDateEdit_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDateEdit_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDateEdit_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDateEdit::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3647,7 +3647,7 @@ struct seaqt_string QDateEdit_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDateEdit_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDateEdit_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDateEdit::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -3658,7 +3658,7 @@ struct seaqt_string QDateEdit_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDateEdit_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDateEdit_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDateEdit::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

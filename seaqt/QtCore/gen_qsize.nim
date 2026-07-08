@@ -53,10 +53,10 @@ proc fcQSize_setWidth(self: pointer, w: cint): void {.importc: "QSize_setWidth".
 proc fcQSize_setHeight(self: pointer, h: cint): void {.importc: "QSize_setHeight".}
 proc fcQSize_transpose(self: pointer): void {.importc: "QSize_transpose".}
 proc fcQSize_transposed(self: pointer): pointer {.importc: "QSize_transposed".}
-proc fcQSize_scale(self: pointer, w: cint, h: cint, mode: cint): void {.importc: "QSize_scale".}
-proc fcQSize_scale2(self: pointer, s: pointer, mode: cint): void {.importc: "QSize_scale2".}
-proc fcQSize_scaled(self: pointer, w: cint, h: cint, mode: cint): pointer {.importc: "QSize_scaled".}
-proc fcQSize_scaled2(self: pointer, s: pointer, mode: cint): pointer {.importc: "QSize_scaled2".}
+proc fcQSize_scaleWHMode(self: pointer, w: cint, h: cint, mode: cint): void {.importc: "QSize_scale_w_h_mode".}
+proc fcQSize_scaleSMode(self: pointer, s: pointer, mode: cint): void {.importc: "QSize_scale_s_mode".}
+proc fcQSize_scaledWHMode(self: pointer, w: cint, h: cint, mode: cint): pointer {.importc: "QSize_scaled_w_h_mode".}
+proc fcQSize_scaledSMode(self: pointer, s: pointer, mode: cint): pointer {.importc: "QSize_scaled_s_mode".}
 proc fcQSize_expandedTo(self: pointer, param1: pointer): pointer {.importc: "QSize_expandedTo".}
 proc fcQSize_boundedTo(self: pointer, param1: pointer): pointer {.importc: "QSize_boundedTo".}
 proc fcQSize_grownBy(self: pointer, m: pointer): pointer {.importc: "QSize_grownBy".}
@@ -65,10 +65,10 @@ proc fcQSize_operatorPlusAssign(self: pointer, param1: pointer): pointer {.impor
 proc fcQSize_operatorMinusAssign(self: pointer, param1: pointer): pointer {.importc: "QSize_operatorMinusAssign".}
 proc fcQSize_operatorMultiplyAssign(self: pointer, c: float64): pointer {.importc: "QSize_operatorMultiplyAssign".}
 proc fcQSize_operatorDivideAssign(self: pointer, c: float64): pointer {.importc: "QSize_operatorDivideAssign".}
-proc fcQSize_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSize_operatorAssign".}
+proc fcQSize_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSize_operatorAssign".}
 proc fcQSize_new(): ptr cQSize {.importc: "QSize_new".}
-proc fcQSize_new2(w: cint, h: cint): ptr cQSize {.importc: "QSize_new2".}
-proc fcQSize_new3(param1: pointer): ptr cQSize {.importc: "QSize_new3".}
+proc fcQSize_new2(w: cint, h: cint): ptr cQSize {.importc: "QSize_new_w_h".}
+proc fcQSize_new3(fromVal: pointer): ptr cQSize {.importc: "QSize_new_from".}
 proc fcQSizeF_isNull(self: pointer): bool {.importc: "QSizeF_isNull".}
 proc fcQSizeF_isEmpty(self: pointer): bool {.importc: "QSizeF_isEmpty".}
 proc fcQSizeF_isValid(self: pointer): bool {.importc: "QSizeF_isValid".}
@@ -78,10 +78,10 @@ proc fcQSizeF_setWidth(self: pointer, w: float64): void {.importc: "QSizeF_setWi
 proc fcQSizeF_setHeight(self: pointer, h: float64): void {.importc: "QSizeF_setHeight".}
 proc fcQSizeF_transpose(self: pointer): void {.importc: "QSizeF_transpose".}
 proc fcQSizeF_transposed(self: pointer): pointer {.importc: "QSizeF_transposed".}
-proc fcQSizeF_scale(self: pointer, w: float64, h: float64, mode: cint): void {.importc: "QSizeF_scale".}
-proc fcQSizeF_scale2(self: pointer, s: pointer, mode: cint): void {.importc: "QSizeF_scale2".}
-proc fcQSizeF_scaled(self: pointer, w: float64, h: float64, mode: cint): pointer {.importc: "QSizeF_scaled".}
-proc fcQSizeF_scaled2(self: pointer, s: pointer, mode: cint): pointer {.importc: "QSizeF_scaled2".}
+proc fcQSizeF_scaleWHMode(self: pointer, w: float64, h: float64, mode: cint): void {.importc: "QSizeF_scale_w_h_mode".}
+proc fcQSizeF_scaleSMode(self: pointer, s: pointer, mode: cint): void {.importc: "QSizeF_scale_s_mode".}
+proc fcQSizeF_scaledWHMode(self: pointer, w: float64, h: float64, mode: cint): pointer {.importc: "QSizeF_scaled_w_h_mode".}
+proc fcQSizeF_scaledSMode(self: pointer, s: pointer, mode: cint): pointer {.importc: "QSizeF_scaled_s_mode".}
 proc fcQSizeF_expandedTo(self: pointer, param1: pointer): pointer {.importc: "QSizeF_expandedTo".}
 proc fcQSizeF_boundedTo(self: pointer, param1: pointer): pointer {.importc: "QSizeF_boundedTo".}
 proc fcQSizeF_grownBy(self: pointer, m: pointer): pointer {.importc: "QSizeF_grownBy".}
@@ -91,11 +91,11 @@ proc fcQSizeF_operatorMinusAssign(self: pointer, param1: pointer): pointer {.imp
 proc fcQSizeF_operatorMultiplyAssign(self: pointer, c: float64): pointer {.importc: "QSizeF_operatorMultiplyAssign".}
 proc fcQSizeF_operatorDivideAssign(self: pointer, c: float64): pointer {.importc: "QSizeF_operatorDivideAssign".}
 proc fcQSizeF_toSize(self: pointer): pointer {.importc: "QSizeF_toSize".}
-proc fcQSizeF_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSizeF_operatorAssign".}
+proc fcQSizeF_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSizeF_operatorAssign".}
 proc fcQSizeF_new(): ptr cQSizeF {.importc: "QSizeF_new".}
-proc fcQSizeF_new2(sz: pointer): ptr cQSizeF {.importc: "QSizeF_new2".}
-proc fcQSizeF_new3(w: float64, h: float64): ptr cQSizeF {.importc: "QSizeF_new3".}
-proc fcQSizeF_new4(param1: pointer): ptr cQSizeF {.importc: "QSizeF_new4".}
+proc fcQSizeF_new2(sz: pointer): ptr cQSizeF {.importc: "QSizeF_new_sz".}
+proc fcQSizeF_new3(w: float64, h: float64): ptr cQSizeF {.importc: "QSizeF_new_w_h".}
+proc fcQSizeF_new4(fromVal: pointer): ptr cQSizeF {.importc: "QSizeF_new_from".}
 
 proc isNull*(self: gen_qsize_types.QSize): bool =
   fcQSize_isNull(self.h)
@@ -125,16 +125,16 @@ proc transposed*(self: gen_qsize_types.QSize): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSize_transposed(self.h), owned: true)
 
 proc scale*(self: gen_qsize_types.QSize, w: cint, h: cint, mode: cint): void =
-  fcQSize_scale(self.h, w, h, cint(mode))
+  fcQSize_scaleWHMode(self.h, w, h, cint(mode))
 
 proc scale*(self: gen_qsize_types.QSize, s: gen_qsize_types.QSize, mode: cint): void =
-  fcQSize_scale2(self.h, s.h, cint(mode))
+  fcQSize_scaleSMode(self.h, s.h, cint(mode))
 
 proc scaled*(self: gen_qsize_types.QSize, w: cint, h: cint, mode: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSize_scaled(self.h, w, h, cint(mode)), owned: true)
+  gen_qsize_types.QSize(h: fcQSize_scaledWHMode(self.h, w, h, cint(mode)), owned: true)
 
 proc scaled*(self: gen_qsize_types.QSize, s: gen_qsize_types.QSize, mode: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSize_scaled2(self.h, s.h, cint(mode)), owned: true)
+  gen_qsize_types.QSize(h: fcQSize_scaledSMode(self.h, s.h, cint(mode)), owned: true)
 
 proc expandedTo*(self: gen_qsize_types.QSize, param1: gen_qsize_types.QSize): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSize_expandedTo(self.h, param1.h), owned: true)
@@ -160,8 +160,8 @@ proc operatorMultiplyAssign*(self: gen_qsize_types.QSize, c: float64): gen_qsize
 proc operatorDivideAssign*(self: gen_qsize_types.QSize, c: float64): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSize_operatorDivideAssign(self.h, c), owned: false)
 
-proc operatorAssign*(self: gen_qsize_types.QSize, param1: gen_qsize_types.QSize): void =
-  fcQSize_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qsize_types.QSize, fromVal: gen_qsize_types.QSize): void =
+  fcQSize_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qsize_types.QSize): gen_qsize_types.QSize =
   let tmp = gen_qsize_types.QSize(h: fcQSize_new(), owned: true)
@@ -171,8 +171,8 @@ proc create*(T: type gen_qsize_types.QSize,
   let tmp = gen_qsize_types.QSize(h: fcQSize_new2(w, h), owned: true)
   tmp
 proc create*(T: type gen_qsize_types.QSize,
-    param1: gen_qsize_types.QSize): gen_qsize_types.QSize =
-  let tmp = gen_qsize_types.QSize(h: fcQSize_new3(param1.h), owned: true)
+    fromVal: gen_qsize_types.QSize): gen_qsize_types.QSize =
+  let tmp = gen_qsize_types.QSize(h: fcQSize_new3(fromVal.h), owned: true)
   tmp
 proc isNull*(self: gen_qsize_types.QSizeF): bool =
   fcQSizeF_isNull(self.h)
@@ -202,16 +202,16 @@ proc transposed*(self: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQSizeF_transposed(self.h), owned: true)
 
 proc scale*(self: gen_qsize_types.QSizeF, w: float64, h: float64, mode: cint): void =
-  fcQSizeF_scale(self.h, w, h, cint(mode))
+  fcQSizeF_scaleWHMode(self.h, w, h, cint(mode))
 
 proc scale*(self: gen_qsize_types.QSizeF, s: gen_qsize_types.QSizeF, mode: cint): void =
-  fcQSizeF_scale2(self.h, s.h, cint(mode))
+  fcQSizeF_scaleSMode(self.h, s.h, cint(mode))
 
 proc scaled*(self: gen_qsize_types.QSizeF, w: float64, h: float64, mode: cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQSizeF_scaled(self.h, w, h, cint(mode)), owned: true)
+  gen_qsize_types.QSizeF(h: fcQSizeF_scaledWHMode(self.h, w, h, cint(mode)), owned: true)
 
 proc scaled*(self: gen_qsize_types.QSizeF, s: gen_qsize_types.QSizeF, mode: cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQSizeF_scaled2(self.h, s.h, cint(mode)), owned: true)
+  gen_qsize_types.QSizeF(h: fcQSizeF_scaledSMode(self.h, s.h, cint(mode)), owned: true)
 
 proc expandedTo*(self: gen_qsize_types.QSizeF, param1: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQSizeF_expandedTo(self.h, param1.h), owned: true)
@@ -240,8 +240,8 @@ proc operatorDivideAssign*(self: gen_qsize_types.QSizeF, c: float64): gen_qsize_
 proc toSize*(self: gen_qsize_types.QSizeF): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSizeF_toSize(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qsize_types.QSizeF, param1: gen_qsize_types.QSizeF): void =
-  fcQSizeF_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qsize_types.QSizeF, fromVal: gen_qsize_types.QSizeF): void =
+  fcQSizeF_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
   let tmp = gen_qsize_types.QSizeF(h: fcQSizeF_new(), owned: true)
@@ -255,6 +255,6 @@ proc create*(T: type gen_qsize_types.QSizeF,
   let tmp = gen_qsize_types.QSizeF(h: fcQSizeF_new3(w, h), owned: true)
   tmp
 proc create*(T: type gen_qsize_types.QSizeF,
-    param1: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
-  let tmp = gen_qsize_types.QSizeF(h: fcQSizeF_new4(param1.h), owned: true)
+    fromVal: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
+  let tmp = gen_qsize_types.QSizeF(h: fcQSizeF_new4(fromVal.h), owned: true)
   tmp

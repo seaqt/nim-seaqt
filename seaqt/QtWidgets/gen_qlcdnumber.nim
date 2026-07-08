@@ -88,13 +88,13 @@ type cQLCDNumber*{.exportc: "QLCDNumber", incompleteStruct.} = object
 proc fcQLCDNumber_metaObject(self: pointer): pointer {.importc: "QLCDNumber_metaObject".}
 proc fcQLCDNumber_metacast(self: pointer, param1: cstring): pointer {.importc: "QLCDNumber_metacast".}
 proc fcQLCDNumber_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLCDNumber_metacall".}
-proc fcQLCDNumber_tr(s: cstring): struct_seaqt_string {.importc: "QLCDNumber_tr".}
-proc fcQLCDNumber_trUtf8(s: cstring): struct_seaqt_string {.importc: "QLCDNumber_trUtf8".}
+proc fcQLCDNumber_trS(s: cstring): struct_seaqt_string {.importc: "QLCDNumber_tr_s".}
+proc fcQLCDNumber_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QLCDNumber_trUtf8_s".}
 proc fcQLCDNumber_smallDecimalPoint(self: pointer): bool {.importc: "QLCDNumber_smallDecimalPoint".}
 proc fcQLCDNumber_digitCount(self: pointer): cint {.importc: "QLCDNumber_digitCount".}
 proc fcQLCDNumber_setDigitCount(self: pointer, nDigits: cint): void {.importc: "QLCDNumber_setDigitCount".}
-proc fcQLCDNumber_checkOverflow(self: pointer, num: float64): bool {.importc: "QLCDNumber_checkOverflow".}
-proc fcQLCDNumber_checkOverflowWithNum(self: pointer, num: cint): bool {.importc: "QLCDNumber_checkOverflowWithNum".}
+proc fcQLCDNumber_checkOverflowDouble(self: pointer, num: float64): bool {.importc: "QLCDNumber_checkOverflow_double".}
+proc fcQLCDNumber_checkOverflowInt(self: pointer, num: cint): bool {.importc: "QLCDNumber_checkOverflow_int".}
 proc fcQLCDNumber_mode(self: pointer): cint {.importc: "QLCDNumber_mode".}
 proc fcQLCDNumber_setMode(self: pointer, mode: cint): void {.importc: "QLCDNumber_setMode".}
 proc fcQLCDNumber_segmentStyle(self: pointer): cint {.importc: "QLCDNumber_segmentStyle".}
@@ -102,9 +102,9 @@ proc fcQLCDNumber_setSegmentStyle(self: pointer, segmentStyle: cint): void {.imp
 proc fcQLCDNumber_value(self: pointer): float64 {.importc: "QLCDNumber_value".}
 proc fcQLCDNumber_intValue(self: pointer): cint {.importc: "QLCDNumber_intValue".}
 proc fcQLCDNumber_sizeHint(self: pointer): pointer {.importc: "QLCDNumber_sizeHint".}
-proc fcQLCDNumber_display(self: pointer, str: struct_seaqt_string): void {.importc: "QLCDNumber_display".}
-proc fcQLCDNumber_displayWithNum(self: pointer, num: cint): void {.importc: "QLCDNumber_displayWithNum".}
-proc fcQLCDNumber_display2(self: pointer, num: float64): void {.importc: "QLCDNumber_display2".}
+proc fcQLCDNumber_display_QString(self: pointer, str: struct_seaqt_string): void {.importc: "QLCDNumber_display_QString".}
+proc fcQLCDNumber_displayInt(self: pointer, num: cint): void {.importc: "QLCDNumber_display_int".}
+proc fcQLCDNumber_displayDouble(self: pointer, num: float64): void {.importc: "QLCDNumber_display_double".}
 proc fcQLCDNumber_setHexMode(self: pointer): void {.importc: "QLCDNumber_setHexMode".}
 proc fcQLCDNumber_setDecMode(self: pointer): void {.importc: "QLCDNumber_setDecMode".}
 proc fcQLCDNumber_setOctMode(self: pointer): void {.importc: "QLCDNumber_setOctMode".}
@@ -112,10 +112,10 @@ proc fcQLCDNumber_setBinMode(self: pointer): void {.importc: "QLCDNumber_setBinM
 proc fcQLCDNumber_setSmallDecimalPoint(self: pointer, smallDecimalPoint: bool): void {.importc: "QLCDNumber_setSmallDecimalPoint".}
 proc fcQLCDNumber_overflow(self: pointer): void {.importc: "QLCDNumber_overflow".}
 proc fcQLCDNumber_connect_overflow(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLCDNumber_connect_overflow".}
-proc fcQLCDNumber_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLCDNumber_tr2".}
-proc fcQLCDNumber_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLCDNumber_tr3".}
-proc fcQLCDNumber_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLCDNumber_trUtf82".}
-proc fcQLCDNumber_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLCDNumber_trUtf83".}
+proc fcQLCDNumber_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLCDNumber_tr_s_c".}
+proc fcQLCDNumber_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLCDNumber_tr_s_c_n".}
+proc fcQLCDNumber_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLCDNumber_trUtf8_s_c".}
+proc fcQLCDNumber_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLCDNumber_trUtf8_s_c_n".}
 proc fcQLCDNumber_vdata(self: pointer): ptr pointer {.importc: "QLCDNumber_vdata".}
 proc fvdata_cQLCDNumber(self: pointer): pointer {.importc: "vdata_QLCDNumber".}
 
@@ -233,9 +233,9 @@ proc fcQLCDNumber_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQLCDNumber_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLCDNumber_protectedbase_receivers".}
 proc fcQLCDNumber_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLCDNumber_protectedbase_isSignalConnected".}
 proc fcQLCDNumber_new(vtbl: pointer, vdata: csize_t): ptr cQLCDNumber {.importc: "QLCDNumber_new".}
-proc fcQLCDNumber_new2(vtbl: pointer, vdata: csize_t, numDigits: cuint): ptr cQLCDNumber {.importc: "QLCDNumber_new2".}
-proc fcQLCDNumber_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLCDNumber {.importc: "QLCDNumber_new3".}
-proc fcQLCDNumber_new4(vtbl: pointer, vdata: csize_t, numDigits: cuint, parent: pointer): ptr cQLCDNumber {.importc: "QLCDNumber_new4".}
+proc fcQLCDNumber_new2(vtbl: pointer, vdata: csize_t, numDigits: cuint): ptr cQLCDNumber {.importc: "QLCDNumber_new_numDigits".}
+proc fcQLCDNumber_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLCDNumber {.importc: "QLCDNumber_new_parent".}
+proc fcQLCDNumber_new4(vtbl: pointer, vdata: csize_t, numDigits: cuint, parent: pointer): ptr cQLCDNumber {.importc: "QLCDNumber_new_numDigits_parent".}
 proc fcQLCDNumber_staticMetaObject(): pointer {.importc: "QLCDNumber_staticMetaObject".}
 
 proc metaObject*(self: gen_qlcdnumber_types.QLCDNumber): gen_qobjectdefs_types.QMetaObject =
@@ -248,13 +248,13 @@ proc metacall*(self: gen_qlcdnumber_types.QLCDNumber, param1: cint, param2: cint
   fcQLCDNumber_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlcdnumber_types.QLCDNumber, s: cstring): string =
-  let v_ms = fcQLCDNumber_tr(s)
+  let v_ms = fcQLCDNumber_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlcdnumber_types.QLCDNumber, s: cstring): string =
-  let v_ms = fcQLCDNumber_trUtf8(s)
+  let v_ms = fcQLCDNumber_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -269,10 +269,10 @@ proc setDigitCount*(self: gen_qlcdnumber_types.QLCDNumber, nDigits: cint): void 
   fcQLCDNumber_setDigitCount(self.h, nDigits)
 
 proc checkOverflow*(self: gen_qlcdnumber_types.QLCDNumber, num: float64): bool =
-  fcQLCDNumber_checkOverflow(self.h, num)
+  fcQLCDNumber_checkOverflowDouble(self.h, num)
 
 proc checkOverflow*(self: gen_qlcdnumber_types.QLCDNumber, num: cint): bool =
-  fcQLCDNumber_checkOverflowWithNum(self.h, num)
+  fcQLCDNumber_checkOverflowInt(self.h, num)
 
 proc mode*(self: gen_qlcdnumber_types.QLCDNumber): cint =
   cint(fcQLCDNumber_mode(self.h))
@@ -296,13 +296,13 @@ proc sizeHint*(self: gen_qlcdnumber_types.QLCDNumber): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLCDNumber_sizeHint(self.h), owned: true)
 
 proc display*(self: gen_qlcdnumber_types.QLCDNumber, str: openArray[char]): void =
-  fcQLCDNumber_display(self.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
+  fcQLCDNumber_display_QString(self.h, struct_seaqt_string(data: if len(str) > 0: addr str[0] else: nil, len: csize_t(len(str))))
 
 proc display*(self: gen_qlcdnumber_types.QLCDNumber, num: cint): void =
-  fcQLCDNumber_displayWithNum(self.h, num)
+  fcQLCDNumber_displayInt(self.h, num)
 
 proc display*(self: gen_qlcdnumber_types.QLCDNumber, num: float64): void =
-  fcQLCDNumber_display2(self.h, num)
+  fcQLCDNumber_displayDouble(self.h, num)
 
 proc setHexMode*(self: gen_qlcdnumber_types.QLCDNumber): void =
   fcQLCDNumber_setHexMode(self.h)
@@ -338,25 +338,25 @@ proc onOverflow*(self: gen_qlcdnumber_types.QLCDNumber, slot: QLCDNumberoverflow
   fcQLCDNumber_connect_overflow(self.h, cast[int](addr tmp[]), fcQLCDNumber_slot_callback_overflow, fcQLCDNumber_slot_callback_overflow_release)
 
 proc tr*(_: type gen_qlcdnumber_types.QLCDNumber, s: cstring, c: cstring): string =
-  let v_ms = fcQLCDNumber_tr2(s, c)
+  let v_ms = fcQLCDNumber_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlcdnumber_types.QLCDNumber, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLCDNumber_tr3(s, c, n)
+  let v_ms = fcQLCDNumber_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlcdnumber_types.QLCDNumber, s: cstring, c: cstring): string =
-  let v_ms = fcQLCDNumber_trUtf82(s, c)
+  let v_ms = fcQLCDNumber_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlcdnumber_types.QLCDNumber, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLCDNumber_trUtf83(s, c, n)
+  let v_ms = fcQLCDNumber_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

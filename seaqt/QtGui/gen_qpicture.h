@@ -50,8 +50,8 @@ void* QPicture_vdata(VirtualQPicture* self);
 VirtualQPicture* vdata_QPicture(void* vdata);
 
 VirtualQPicture* QPicture_new(const QPicture_VTable* vtbl, size_t vdata);
-VirtualQPicture* QPicture_new2(const QPicture_VTable* vtbl, size_t vdata, QPicture* param1);
-VirtualQPicture* QPicture_new3(const QPicture_VTable* vtbl, size_t vdata, int formatVersion);
+VirtualQPicture* QPicture_new_from(const QPicture_VTable* vtbl, size_t vdata, QPicture* from);
+VirtualQPicture* QPicture_new_formatVersion(const QPicture_VTable* vtbl, size_t vdata, int formatVersion);
 
 void QPicture_virtbase(QPicture* src, QPaintDevice** outptr_QPaintDevice);
 bool QPicture_isNull(const QPicture* self);
@@ -60,13 +60,13 @@ unsigned int QPicture_size(const QPicture* self);
 const char* QPicture_data(const QPicture* self);
 void QPicture_setData(QPicture* self, const char* data, unsigned int size);
 bool QPicture_play(QPicture* self, QPainter* p);
-bool QPicture_load(QPicture* self, QIODevice* dev);
-bool QPicture_loadWithFileName(QPicture* self, struct seaqt_string fileName);
-bool QPicture_save(QPicture* self, QIODevice* dev);
-bool QPicture_saveWithFileName(QPicture* self, struct seaqt_string fileName);
+bool QPicture_load_dev(QPicture* self, QIODevice* dev);
+bool QPicture_load_fileName(QPicture* self, struct seaqt_string fileName);
+bool QPicture_save_dev(QPicture* self, QIODevice* dev);
+bool QPicture_save_fileName(QPicture* self, struct seaqt_string fileName);
 QRect* QPicture_boundingRect(const QPicture* self);
 void QPicture_setBoundingRect(QPicture* self, QRect* r);
-void QPicture_operatorAssign(QPicture* self, QPicture* p);
+void QPicture_operatorAssign(QPicture* self, QPicture* from);
 void QPicture_swap(QPicture* self, QPicture* other);
 void QPicture_detach(QPicture* self);
 bool QPicture_isDetached(const QPicture* self);
@@ -77,10 +77,10 @@ struct seaqt_array /* of struct seaqt_string */  QPicture_inputFormatList();
 struct seaqt_array /* of struct seaqt_string */  QPicture_outputFormatList();
 QPaintEngine* QPicture_paintEngine(const QPicture* self);
 int QPicture_metric(const QPicture* self, int m);
-bool QPicture_load2(QPicture* self, QIODevice* dev, const char* format);
-bool QPicture_load3(QPicture* self, struct seaqt_string fileName, const char* format);
-bool QPicture_save2(QPicture* self, QIODevice* dev, const char* format);
-bool QPicture_save3(QPicture* self, struct seaqt_string fileName, const char* format);
+bool QPicture_load_dev_format(QPicture* self, QIODevice* dev, const char* format);
+bool QPicture_load_fileName_format(QPicture* self, struct seaqt_string fileName, const char* format);
+bool QPicture_save_dev_format(QPicture* self, QIODevice* dev, const char* format);
+bool QPicture_save_fileName_format(QPicture* self, struct seaqt_string fileName, const char* format);
 
 int QPicture_virtualbase_devType(const VirtualQPicture* self);
 void QPicture_virtualbase_setData(VirtualQPicture* self, const char* data, unsigned int size);
@@ -93,8 +93,8 @@ QPainter* QPicture_virtualbase_sharedPainter(const VirtualQPicture* self);
 void QPicture_delete(QPicture* self);
 
 QPictureIO* QPictureIO_new();
-QPictureIO* QPictureIO_new2(QIODevice* ioDevice, const char* format);
-QPictureIO* QPictureIO_new3(struct seaqt_string fileName, const char* format);
+QPictureIO* QPictureIO_new_ioDevice_format(QIODevice* ioDevice, const char* format);
+QPictureIO* QPictureIO_new_fileName_format(struct seaqt_string fileName, const char* format);
 
 QPicture* QPictureIO_picture(const QPictureIO* self);
 int QPictureIO_status(const QPictureIO* self);
@@ -116,8 +116,8 @@ void QPictureIO_setParameters(QPictureIO* self, const char* parameters);
 void QPictureIO_setGamma(QPictureIO* self, float gamma);
 bool QPictureIO_read(QPictureIO* self);
 bool QPictureIO_write(QPictureIO* self);
-struct seaqt_string QPictureIO_pictureFormat(struct seaqt_string fileName);
-struct seaqt_string QPictureIO_pictureFormatWithQIODevice(QIODevice* param1);
+struct seaqt_string QPictureIO_pictureFormat_QString(struct seaqt_string fileName);
+struct seaqt_string QPictureIO_pictureFormat_QIODevice(QIODevice* param1);
 struct seaqt_array /* of struct seaqt_string */  QPictureIO_inputFormats();
 struct seaqt_array /* of struct seaqt_string */  QPictureIO_outputFormats();
 

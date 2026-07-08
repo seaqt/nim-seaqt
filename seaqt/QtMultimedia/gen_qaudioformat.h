@@ -21,9 +21,9 @@ typedef struct QAudioFormat QAudioFormat;
 #endif
 
 QAudioFormat* QAudioFormat_new();
-QAudioFormat* QAudioFormat_new2(QAudioFormat* other);
+QAudioFormat* QAudioFormat_new_from(QAudioFormat* from);
 
-void QAudioFormat_operatorAssign(QAudioFormat* self, QAudioFormat* other);
+void QAudioFormat_operatorAssign(QAudioFormat* self, QAudioFormat* from);
 bool QAudioFormat_operatorEqual(const QAudioFormat* self, QAudioFormat* other);
 bool QAudioFormat_operatorNotEqual(const QAudioFormat* self, QAudioFormat* other);
 bool QAudioFormat_isValid(const QAudioFormat* self);

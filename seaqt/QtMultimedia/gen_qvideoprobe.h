@@ -57,25 +57,25 @@ void* QVideoProbe_vdata(VirtualQVideoProbe* self);
 VirtualQVideoProbe* vdata_QVideoProbe(void* vdata);
 
 VirtualQVideoProbe* QVideoProbe_new(const QVideoProbe_VTable* vtbl, size_t vdata);
-VirtualQVideoProbe* QVideoProbe_new2(const QVideoProbe_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQVideoProbe* QVideoProbe_new_parent(const QVideoProbe_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QVideoProbe_virtbase(QVideoProbe* src, QObject** outptr_QObject);
 QMetaObject* QVideoProbe_metaObject(const QVideoProbe* self);
 void* QVideoProbe_metacast(QVideoProbe* self, const char* param1);
 int QVideoProbe_metacall(QVideoProbe* self, int param1, int param2, void** param3);
-struct seaqt_string QVideoProbe_tr(const char* s);
-struct seaqt_string QVideoProbe_trUtf8(const char* s);
-bool QVideoProbe_setSource(QVideoProbe* self, QMediaObject* source);
-bool QVideoProbe_setSourceWithSource(QVideoProbe* self, QMediaRecorder* source);
+struct seaqt_string QVideoProbe_tr_s(const char* s);
+struct seaqt_string QVideoProbe_trUtf8_s(const char* s);
+bool QVideoProbe_setSource_QMediaObject(QVideoProbe* self, QMediaObject* source);
+bool QVideoProbe_setSource_QMediaRecorder(QVideoProbe* self, QMediaRecorder* source);
 bool QVideoProbe_isActive(const QVideoProbe* self);
 void QVideoProbe_videoFrameProbed(QVideoProbe* self, QVideoFrame* frame);
 void QVideoProbe_connect_videoFrameProbed(QVideoProbe* self, intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t));
 void QVideoProbe_flush(QVideoProbe* self);
 void QVideoProbe_connect_flush(QVideoProbe* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QVideoProbe_tr2(const char* s, const char* c);
-struct seaqt_string QVideoProbe_tr3(const char* s, const char* c, int n);
-struct seaqt_string QVideoProbe_trUtf82(const char* s, const char* c);
-struct seaqt_string QVideoProbe_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QVideoProbe_tr_s_c(const char* s, const char* c);
+struct seaqt_string QVideoProbe_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QVideoProbe_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QVideoProbe_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QVideoProbe_virtualbase_metaObject(const VirtualQVideoProbe* self);
 void* QVideoProbe_virtualbase_metacast(VirtualQVideoProbe* self, const char* param1);

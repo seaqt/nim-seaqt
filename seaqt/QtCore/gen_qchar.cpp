@@ -16,12 +16,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QLatin1Char* QLatin1Char_new(char c) {
+QLatin1Char* QLatin1Char_new_c(char c) {
 	return new (std::nothrow) QLatin1Char(static_cast<char>(c));
 }
 
-QLatin1Char* QLatin1Char_new2(QLatin1Char* param1) {
-	return new (std::nothrow) QLatin1Char(*param1);
+QLatin1Char* QLatin1Char_new_from(QLatin1Char* from) {
+	return new (std::nothrow) QLatin1Char(*from);
 }
 
 char QLatin1Char_toLatin1(const QLatin1Char* self) {
@@ -41,44 +41,44 @@ QChar* QChar_new() {
 	return new (std::nothrow) QChar();
 }
 
-QChar* QChar_new2(unsigned short rc) {
+QChar* QChar_new_ushort(unsigned short rc) {
 	return new (std::nothrow) QChar(static_cast<ushort>(rc));
 }
 
-QChar* QChar_new3(unsigned char c, unsigned char r) {
+QChar* QChar_new_uchar_uchar(unsigned char c, unsigned char r) {
 	return new (std::nothrow) QChar(static_cast<uchar>(c), static_cast<uchar>(r));
 }
 
-QChar* QChar_new4(short rc) {
+QChar* QChar_new_short(short rc) {
 	return new (std::nothrow) QChar(static_cast<short>(rc));
 }
 
-QChar* QChar_new5(unsigned int rc) {
+QChar* QChar_new_uint(unsigned int rc) {
 	return new (std::nothrow) QChar(static_cast<uint>(rc));
 }
 
-QChar* QChar_new6(int rc) {
+QChar* QChar_new_int(int rc) {
 	return new (std::nothrow) QChar(static_cast<int>(rc));
 }
 
-QChar* QChar_new7(int s) {
+QChar* QChar_new_QChar_SpecialCharacter(int s) {
 	return new (std::nothrow) QChar(static_cast<QChar::SpecialCharacter>(s));
 }
 
-QChar* QChar_new8(QLatin1Char* ch) {
+QChar* QChar_new_QLatin1Char(QLatin1Char* ch) {
 	return new (std::nothrow) QChar(*ch);
 }
 
-QChar* QChar_new9(char c) {
+QChar* QChar_new_char(char c) {
 	return new (std::nothrow) QChar(static_cast<char>(c));
 }
 
-QChar* QChar_new10(unsigned char c) {
+QChar* QChar_new_uchar(unsigned char c) {
 	return new (std::nothrow) QChar(static_cast<uchar>(c));
 }
 
-QChar* QChar_new11(QChar* param1) {
-	return new (std::nothrow) QChar(*param1);
+QChar* QChar_new_QChar(QChar* from) {
+	return new (std::nothrow) QChar(*from);
 }
 
 int QChar_category(const QChar* self) {
@@ -258,19 +258,19 @@ void QChar_setRow(QChar* self, unsigned char arow) {
 	self->setRow(static_cast<uchar>(arow));
 }
 
-bool QChar_isNonCharacterWithUcs4(unsigned int ucs4) {
+bool QChar_isNonCharacter_ucs4(unsigned int ucs4) {
 	return QChar::isNonCharacter(static_cast<uint>(ucs4));
 }
 
-bool QChar_isHighSurrogateWithUcs4(unsigned int ucs4) {
+bool QChar_isHighSurrogate_ucs4(unsigned int ucs4) {
 	return QChar::isHighSurrogate(static_cast<uint>(ucs4));
 }
 
-bool QChar_isLowSurrogateWithUcs4(unsigned int ucs4) {
+bool QChar_isLowSurrogate_ucs4(unsigned int ucs4) {
 	return QChar::isLowSurrogate(static_cast<uint>(ucs4));
 }
 
-bool QChar_isSurrogateWithUcs4(unsigned int ucs4) {
+bool QChar_isSurrogate_ucs4(unsigned int ucs4) {
 	return QChar::isSurrogate(static_cast<uint>(ucs4));
 }
 
@@ -278,12 +278,12 @@ bool QChar_requiresSurrogates(unsigned int ucs4) {
 	return QChar::requiresSurrogates(static_cast<uint>(ucs4));
 }
 
-unsigned int QChar_surrogateToUcs4(unsigned short high, unsigned short low) {
+unsigned int QChar_surrogateToUcs4_ushort_ushort(unsigned short high, unsigned short low) {
 	uint _ret = QChar::surrogateToUcs4(static_cast<ushort>(high), static_cast<ushort>(low));
 	return static_cast<unsigned int>(_ret);
 }
 
-unsigned int QChar_surrogateToUcs42(QChar* high, QChar* low) {
+unsigned int QChar_surrogateToUcs4_QChar_QChar(QChar* high, QChar* low) {
 	uint _ret = QChar::surrogateToUcs4(*high, *low);
 	return static_cast<unsigned int>(_ret);
 }
@@ -298,40 +298,40 @@ unsigned short QChar_lowSurrogate(unsigned int ucs4) {
 	return static_cast<unsigned short>(_ret);
 }
 
-int QChar_categoryWithUcs4(unsigned int ucs4) {
+int QChar_category_ucs4(unsigned int ucs4) {
 	QChar::Category _ret = QChar::category(static_cast<uint>(ucs4));
 	return static_cast<int>(_ret);
 }
 
-int QChar_directionWithUcs4(unsigned int ucs4) {
+int QChar_direction_ucs4(unsigned int ucs4) {
 	QChar::Direction _ret = QChar::direction(static_cast<uint>(ucs4));
 	return static_cast<int>(_ret);
 }
 
-int QChar_joiningTypeWithUcs4(unsigned int ucs4) {
+int QChar_joiningType_ucs4(unsigned int ucs4) {
 	QChar::JoiningType _ret = QChar::joiningType(static_cast<uint>(ucs4));
 	return static_cast<int>(_ret);
 }
 
-int QChar_joiningWithUcs4(unsigned int ucs4) {
+int QChar_joining_ucs4(unsigned int ucs4) {
 	QChar::Joining _ret = QChar::joining(static_cast<uint>(ucs4));
 	return static_cast<int>(_ret);
 }
 
-unsigned char QChar_combiningClassWithUcs4(unsigned int ucs4) {
+unsigned char QChar_combiningClass_ucs4(unsigned int ucs4) {
 	return QChar::combiningClass(static_cast<uint>(ucs4));
 }
 
-unsigned int QChar_mirroredCharWithUcs4(unsigned int ucs4) {
+unsigned int QChar_mirroredChar_ucs4(unsigned int ucs4) {
 	uint _ret = QChar::mirroredChar(static_cast<uint>(ucs4));
 	return static_cast<unsigned int>(_ret);
 }
 
-bool QChar_hasMirroredWithUcs4(unsigned int ucs4) {
+bool QChar_hasMirrored_ucs4(unsigned int ucs4) {
 	return QChar::hasMirrored(static_cast<uint>(ucs4));
 }
 
-struct seaqt_string QChar_decompositionWithUcs4(unsigned int ucs4) {
+struct seaqt_string QChar_decomposition_ucs4(unsigned int ucs4) {
 	QString _ret = QChar::decomposition(static_cast<uint>(ucs4));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -342,41 +342,41 @@ struct seaqt_string QChar_decompositionWithUcs4(unsigned int ucs4) {
 	return _ms;
 }
 
-int QChar_decompositionTagWithUcs4(unsigned int ucs4) {
+int QChar_decompositionTag_ucs4(unsigned int ucs4) {
 	QChar::Decomposition _ret = QChar::decompositionTag(static_cast<uint>(ucs4));
 	return static_cast<int>(_ret);
 }
 
-int QChar_digitValueWithUcs4(unsigned int ucs4) {
+int QChar_digitValue_ucs4(unsigned int ucs4) {
 	return QChar::digitValue(static_cast<uint>(ucs4));
 }
 
-unsigned int QChar_toLowerWithUcs4(unsigned int ucs4) {
+unsigned int QChar_toLower_ucs4(unsigned int ucs4) {
 	uint _ret = QChar::toLower(static_cast<uint>(ucs4));
 	return static_cast<unsigned int>(_ret);
 }
 
-unsigned int QChar_toUpperWithUcs4(unsigned int ucs4) {
+unsigned int QChar_toUpper_ucs4(unsigned int ucs4) {
 	uint _ret = QChar::toUpper(static_cast<uint>(ucs4));
 	return static_cast<unsigned int>(_ret);
 }
 
-unsigned int QChar_toTitleCaseWithUcs4(unsigned int ucs4) {
+unsigned int QChar_toTitleCase_ucs4(unsigned int ucs4) {
 	uint _ret = QChar::toTitleCase(static_cast<uint>(ucs4));
 	return static_cast<unsigned int>(_ret);
 }
 
-unsigned int QChar_toCaseFoldedWithUcs4(unsigned int ucs4) {
+unsigned int QChar_toCaseFolded_ucs4(unsigned int ucs4) {
 	uint _ret = QChar::toCaseFolded(static_cast<uint>(ucs4));
 	return static_cast<unsigned int>(_ret);
 }
 
-int QChar_scriptWithUcs4(unsigned int ucs4) {
+int QChar_script_ucs4(unsigned int ucs4) {
 	QChar::Script _ret = QChar::script(static_cast<uint>(ucs4));
 	return static_cast<int>(_ret);
 }
 
-int QChar_unicodeVersionWithUcs4(unsigned int ucs4) {
+int QChar_unicodeVersion_ucs4(unsigned int ucs4) {
 	QChar::UnicodeVersion _ret = QChar::unicodeVersion(static_cast<uint>(ucs4));
 	return static_cast<int>(_ret);
 }
@@ -386,51 +386,51 @@ int QChar_currentUnicodeVersion() {
 	return static_cast<int>(_ret);
 }
 
-bool QChar_isPrintWithUcs4(unsigned int ucs4) {
+bool QChar_isPrint_ucs4(unsigned int ucs4) {
 	return QChar::isPrint(static_cast<uint>(ucs4));
 }
 
-bool QChar_isSpaceWithUcs4(unsigned int ucs4) {
+bool QChar_isSpace_ucs4(unsigned int ucs4) {
 	return QChar::isSpace(static_cast<uint>(ucs4));
 }
 
-bool QChar_isMarkWithUcs4(unsigned int ucs4) {
+bool QChar_isMark_ucs4(unsigned int ucs4) {
 	return QChar::isMark(static_cast<uint>(ucs4));
 }
 
-bool QChar_isPunctWithUcs4(unsigned int ucs4) {
+bool QChar_isPunct_ucs4(unsigned int ucs4) {
 	return QChar::isPunct(static_cast<uint>(ucs4));
 }
 
-bool QChar_isSymbolWithUcs4(unsigned int ucs4) {
+bool QChar_isSymbol_ucs4(unsigned int ucs4) {
 	return QChar::isSymbol(static_cast<uint>(ucs4));
 }
 
-bool QChar_isLetterWithUcs4(unsigned int ucs4) {
+bool QChar_isLetter_ucs4(unsigned int ucs4) {
 	return QChar::isLetter(static_cast<uint>(ucs4));
 }
 
-bool QChar_isNumberWithUcs4(unsigned int ucs4) {
+bool QChar_isNumber_ucs4(unsigned int ucs4) {
 	return QChar::isNumber(static_cast<uint>(ucs4));
 }
 
-bool QChar_isLetterOrNumberWithUcs4(unsigned int ucs4) {
+bool QChar_isLetterOrNumber_ucs4(unsigned int ucs4) {
 	return QChar::isLetterOrNumber(static_cast<uint>(ucs4));
 }
 
-bool QChar_isDigitWithUcs4(unsigned int ucs4) {
+bool QChar_isDigit_ucs4(unsigned int ucs4) {
 	return QChar::isDigit(static_cast<uint>(ucs4));
 }
 
-bool QChar_isLowerWithUcs4(unsigned int ucs4) {
+bool QChar_isLower_ucs4(unsigned int ucs4) {
 	return QChar::isLower(static_cast<uint>(ucs4));
 }
 
-bool QChar_isUpperWithUcs4(unsigned int ucs4) {
+bool QChar_isUpper_ucs4(unsigned int ucs4) {
 	return QChar::isUpper(static_cast<uint>(ucs4));
 }
 
-bool QChar_isTitleCaseWithUcs4(unsigned int ucs4) {
+bool QChar_isTitleCase_ucs4(unsigned int ucs4) {
 	return QChar::isTitleCase(static_cast<uint>(ucs4));
 }
 

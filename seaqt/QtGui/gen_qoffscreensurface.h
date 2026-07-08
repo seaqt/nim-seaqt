@@ -61,16 +61,16 @@ typedef struct QOffscreenSurface_VTable{
 void* QOffscreenSurface_vdata(VirtualQOffscreenSurface* self);
 VirtualQOffscreenSurface* vdata_QOffscreenSurface(void* vdata);
 
-VirtualQOffscreenSurface* QOffscreenSurface_new(const QOffscreenSurface_VTable* vtbl, size_t vdata, QScreen* screen, QObject* parent);
-VirtualQOffscreenSurface* QOffscreenSurface_new2(const QOffscreenSurface_VTable* vtbl, size_t vdata);
-VirtualQOffscreenSurface* QOffscreenSurface_new3(const QOffscreenSurface_VTable* vtbl, size_t vdata, QScreen* screen);
+VirtualQOffscreenSurface* QOffscreenSurface_new_screen_parent(const QOffscreenSurface_VTable* vtbl, size_t vdata, QScreen* screen, QObject* parent);
+VirtualQOffscreenSurface* QOffscreenSurface_new(const QOffscreenSurface_VTable* vtbl, size_t vdata);
+VirtualQOffscreenSurface* QOffscreenSurface_new_screen(const QOffscreenSurface_VTable* vtbl, size_t vdata, QScreen* screen);
 
 void QOffscreenSurface_virtbase(QOffscreenSurface* src, QObject** outptr_QObject, QSurface** outptr_QSurface);
 QMetaObject* QOffscreenSurface_metaObject(const QOffscreenSurface* self);
 void* QOffscreenSurface_metacast(QOffscreenSurface* self, const char* param1);
 int QOffscreenSurface_metacall(QOffscreenSurface* self, int param1, int param2, void** param3);
-struct seaqt_string QOffscreenSurface_tr(const char* s);
-struct seaqt_string QOffscreenSurface_trUtf8(const char* s);
+struct seaqt_string QOffscreenSurface_tr_s(const char* s);
+struct seaqt_string QOffscreenSurface_trUtf8_s(const char* s);
 int QOffscreenSurface_surfaceType(const QOffscreenSurface* self);
 void QOffscreenSurface_create(QOffscreenSurface* self);
 void QOffscreenSurface_destroy(QOffscreenSurface* self);
@@ -85,10 +85,10 @@ void* QOffscreenSurface_nativeHandle(const QOffscreenSurface* self);
 void QOffscreenSurface_setNativeHandle(QOffscreenSurface* self, void* handle);
 void QOffscreenSurface_screenChanged(QOffscreenSurface* self, QScreen* screen);
 void QOffscreenSurface_connect_screenChanged(QOffscreenSurface* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t));
-struct seaqt_string QOffscreenSurface_tr2(const char* s, const char* c);
-struct seaqt_string QOffscreenSurface_tr3(const char* s, const char* c, int n);
-struct seaqt_string QOffscreenSurface_trUtf82(const char* s, const char* c);
-struct seaqt_string QOffscreenSurface_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QOffscreenSurface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QOffscreenSurface_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QOffscreenSurface_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QOffscreenSurface_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QOffscreenSurface_virtualbase_metaObject(const VirtualQOffscreenSurface* self);
 void* QOffscreenSurface_virtualbase_metacast(VirtualQOffscreenSurface* self, const char* param1);

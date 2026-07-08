@@ -27,7 +27,7 @@ typedef struct QMetaObject QMetaObject;
 #endif
 
 QGeoShape* QGeoShape_new();
-QGeoShape* QGeoShape_new2(QGeoShape* other);
+QGeoShape* QGeoShape_new_from(QGeoShape* from);
 
 int QGeoShape_type(const QGeoShape* self);
 bool QGeoShape_isValid(const QGeoShape* self);
@@ -38,7 +38,7 @@ QGeoCoordinate* QGeoShape_center(const QGeoShape* self);
 void QGeoShape_extendShape(QGeoShape* self, QGeoCoordinate* coordinate);
 bool QGeoShape_operatorEqual(const QGeoShape* self, QGeoShape* other);
 bool QGeoShape_operatorNotEqual(const QGeoShape* self, QGeoShape* other);
-void QGeoShape_operatorAssign(QGeoShape* self, QGeoShape* other);
+void QGeoShape_operatorAssign(QGeoShape* self, QGeoShape* from);
 struct seaqt_string QGeoShape_toString(const QGeoShape* self);
 
 const QMetaObject* QGeoShape_staticMetaObject();

@@ -136,7 +136,7 @@ proc fcQListWidgetItem_setData(self: pointer, role: cint, value: pointer): void 
 proc fcQListWidgetItem_operatorLesser(self: pointer, other: pointer): bool {.importc: "QListWidgetItem_operatorLesser".}
 proc fcQListWidgetItem_read(self: pointer, inVal: pointer): void {.importc: "QListWidgetItem_read".}
 proc fcQListWidgetItem_write(self: pointer, outVal: pointer): void {.importc: "QListWidgetItem_write".}
-proc fcQListWidgetItem_operatorAssign(self: pointer, other: pointer): void {.importc: "QListWidgetItem_operatorAssign".}
+proc fcQListWidgetItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QListWidgetItem_operatorAssign".}
 proc fcQListWidgetItem_typeX(self: pointer): cint {.importc: "QListWidgetItem_type".}
 proc fcQListWidgetItem_vdata(self: pointer): ptr pointer {.importc: "QListWidgetItem_vdata".}
 proc fvdata_cQListWidgetItem(self: pointer): pointer {.importc: "vdata_QListWidgetItem".}
@@ -158,39 +158,39 @@ proc fcQListWidgetItem_virtualbase_operatorLesser(self: pointer, other: pointer)
 proc fcQListWidgetItem_virtualbase_read(self: pointer, inVal: pointer): void {.importc: "QListWidgetItem_virtualbase_read".}
 proc fcQListWidgetItem_virtualbase_write(self: pointer, outVal: pointer): void {.importc: "QListWidgetItem_virtualbase_write".}
 proc fcQListWidgetItem_new(vtbl: pointer, vdata: csize_t): ptr cQListWidgetItem {.importc: "QListWidgetItem_new".}
-proc fcQListWidgetItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQListWidgetItem {.importc: "QListWidgetItem_new2".}
-proc fcQListWidgetItem_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQListWidgetItem {.importc: "QListWidgetItem_new3".}
-proc fcQListWidgetItem_new4(vtbl: pointer, vdata: csize_t, other: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new4".}
-proc fcQListWidgetItem_new5(vtbl: pointer, vdata: csize_t, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new5".}
-proc fcQListWidgetItem_new6(vtbl: pointer, vdata: csize_t, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new6".}
-proc fcQListWidgetItem_new7(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new7".}
-proc fcQListWidgetItem_new8(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new8".}
-proc fcQListWidgetItem_new9(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new9".}
-proc fcQListWidgetItem_new10(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new10".}
+proc fcQListWidgetItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_text".}
+proc fcQListWidgetItem_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_icon_text".}
+proc fcQListWidgetItem_new4(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_from".}
+proc fcQListWidgetItem_new5(vtbl: pointer, vdata: csize_t, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_listview".}
+proc fcQListWidgetItem_new6(vtbl: pointer, vdata: csize_t, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_listview_type".}
+proc fcQListWidgetItem_new7(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_text_listview".}
+proc fcQListWidgetItem_new8(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_text_listview_type".}
+proc fcQListWidgetItem_new9(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_icon_text_listview".}
+proc fcQListWidgetItem_new10(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new_icon_text_listview_type".}
 proc fcQListWidget_metaObject(self: pointer): pointer {.importc: "QListWidget_metaObject".}
 proc fcQListWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QListWidget_metacast".}
 proc fcQListWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QListWidget_metacall".}
-proc fcQListWidget_tr(s: cstring): struct_seaqt_string {.importc: "QListWidget_tr".}
-proc fcQListWidget_trUtf8(s: cstring): struct_seaqt_string {.importc: "QListWidget_trUtf8".}
+proc fcQListWidget_trS(s: cstring): struct_seaqt_string {.importc: "QListWidget_tr_s".}
+proc fcQListWidget_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QListWidget_trUtf8_s".}
 proc fcQListWidget_setSelectionModel(self: pointer, selectionModel: pointer): void {.importc: "QListWidget_setSelectionModel".}
 proc fcQListWidget_item(self: pointer, row: cint): pointer {.importc: "QListWidget_item".}
 proc fcQListWidget_row(self: pointer, item: pointer): cint {.importc: "QListWidget_row".}
-proc fcQListWidget_insertItem(self: pointer, row: cint, item: pointer): void {.importc: "QListWidget_insertItem".}
-proc fcQListWidget_insertItem2(self: pointer, row: cint, label: struct_seaqt_string): void {.importc: "QListWidget_insertItem2".}
+proc fcQListWidget_insertItemRowItem(self: pointer, row: cint, item: pointer): void {.importc: "QListWidget_insertItem_row_item".}
+proc fcQListWidget_insertItemRowLabel(self: pointer, row: cint, label: struct_seaqt_string): void {.importc: "QListWidget_insertItem_row_label".}
 proc fcQListWidget_insertItems(self: pointer, row: cint, labels: struct_seaqt_array): void {.importc: "QListWidget_insertItems".}
-proc fcQListWidget_addItem(self: pointer, label: struct_seaqt_string): void {.importc: "QListWidget_addItem".}
-proc fcQListWidget_addItemWithItem(self: pointer, item: pointer): void {.importc: "QListWidget_addItemWithItem".}
+proc fcQListWidget_addItemLabel(self: pointer, label: struct_seaqt_string): void {.importc: "QListWidget_addItem_label".}
+proc fcQListWidget_addItemItem(self: pointer, item: pointer): void {.importc: "QListWidget_addItem_item".}
 proc fcQListWidget_addItems(self: pointer, labels: struct_seaqt_array): void {.importc: "QListWidget_addItems".}
 proc fcQListWidget_takeItem(self: pointer, row: cint): pointer {.importc: "QListWidget_takeItem".}
 proc fcQListWidget_count(self: pointer): cint {.importc: "QListWidget_count".}
 proc fcQListWidget_currentItem(self: pointer): pointer {.importc: "QListWidget_currentItem".}
-proc fcQListWidget_setCurrentItem(self: pointer, item: pointer): void {.importc: "QListWidget_setCurrentItem".}
-proc fcQListWidget_setCurrentItem2(self: pointer, item: pointer, command: cint): void {.importc: "QListWidget_setCurrentItem2".}
+proc fcQListWidget_setCurrentItemItem(self: pointer, item: pointer): void {.importc: "QListWidget_setCurrentItem_item".}
+proc fcQListWidget_setCurrentItemItemCommand(self: pointer, item: pointer, command: cint): void {.importc: "QListWidget_setCurrentItem_item_command".}
 proc fcQListWidget_currentRow(self: pointer): cint {.importc: "QListWidget_currentRow".}
-proc fcQListWidget_setCurrentRow(self: pointer, row: cint): void {.importc: "QListWidget_setCurrentRow".}
-proc fcQListWidget_setCurrentRow2(self: pointer, row: cint, command: cint): void {.importc: "QListWidget_setCurrentRow2".}
-proc fcQListWidget_itemAt(self: pointer, p: pointer): pointer {.importc: "QListWidget_itemAt".}
-proc fcQListWidget_itemAt2(self: pointer, x: cint, y: cint): pointer {.importc: "QListWidget_itemAt2".}
+proc fcQListWidget_setCurrentRowRow(self: pointer, row: cint): void {.importc: "QListWidget_setCurrentRow_row".}
+proc fcQListWidget_setCurrentRowRowCommand(self: pointer, row: cint, command: cint): void {.importc: "QListWidget_setCurrentRow_row_command".}
+proc fcQListWidget_itemAtP(self: pointer, p: pointer): pointer {.importc: "QListWidget_itemAt_p".}
+proc fcQListWidget_itemAtXY(self: pointer, x: cint, y: cint): pointer {.importc: "QListWidget_itemAt_x_y".}
 proc fcQListWidget_visualItemRect(self: pointer, item: pointer): pointer {.importc: "QListWidget_visualItemRect".}
 proc fcQListWidget_sortItems(self: pointer): void {.importc: "QListWidget_sortItems".}
 proc fcQListWidget_setSortingEnabled(self: pointer, enable: bool): void {.importc: "QListWidget_setSortingEnabled".}
@@ -209,7 +209,7 @@ proc fcQListWidget_findItems(self: pointer, text: struct_seaqt_string, flags: ci
 proc fcQListWidget_isItemHidden(self: pointer, item: pointer): bool {.importc: "QListWidget_isItemHidden".}
 proc fcQListWidget_setItemHidden(self: pointer, item: pointer, hide: bool): void {.importc: "QListWidget_setItemHidden".}
 proc fcQListWidget_dropEvent(self: pointer, event: pointer): void {.importc: "QListWidget_dropEvent".}
-proc fcQListWidget_scrollToItem(self: pointer, item: pointer): void {.importc: "QListWidget_scrollToItem".}
+proc fcQListWidget_scrollToItemItem(self: pointer, item: pointer): void {.importc: "QListWidget_scrollToItem_item".}
 proc fcQListWidget_clear(self: pointer): void {.importc: "QListWidget_clear".}
 proc fcQListWidget_itemPressed(self: pointer, item: pointer): void {.importc: "QListWidget_itemPressed".}
 proc fcQListWidget_connect_itemPressed(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListWidget_connect_itemPressed".}
@@ -231,12 +231,12 @@ proc fcQListWidget_currentRowChanged(self: pointer, currentRow: cint): void {.im
 proc fcQListWidget_connect_currentRowChanged(self: pointer, slot: int, callback: proc (slot: int, currentRow: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListWidget_connect_currentRowChanged".}
 proc fcQListWidget_itemSelectionChanged(self: pointer): void {.importc: "QListWidget_itemSelectionChanged".}
 proc fcQListWidget_connect_itemSelectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListWidget_connect_itemSelectionChanged".}
-proc fcQListWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QListWidget_tr2".}
-proc fcQListWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QListWidget_tr3".}
-proc fcQListWidget_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QListWidget_trUtf82".}
-proc fcQListWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QListWidget_trUtf83".}
-proc fcQListWidget_sortItemsWithOrder(self: pointer, order: cint): void {.importc: "QListWidget_sortItemsWithOrder".}
-proc fcQListWidget_scrollToItem2(self: pointer, item: pointer, hint: cint): void {.importc: "QListWidget_scrollToItem2".}
+proc fcQListWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QListWidget_tr_s_c".}
+proc fcQListWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QListWidget_tr_s_c_n".}
+proc fcQListWidget_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QListWidget_trUtf8_s_c".}
+proc fcQListWidget_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QListWidget_trUtf8_s_c_n".}
+proc fcQListWidget_sortItemsOrder(self: pointer, order: cint): void {.importc: "QListWidget_sortItems_order".}
+proc fcQListWidget_scrollToItemItemHint(self: pointer, item: pointer, hint: cint): void {.importc: "QListWidget_scrollToItem_item_hint".}
 proc fcQListWidget_vdata(self: pointer): ptr pointer {.importc: "QListWidget_vdata".}
 proc fvdata_cQListWidget(self: pointer): pointer {.importc: "vdata_QListWidget".}
 
@@ -297,7 +297,7 @@ type cQListWidgetVTable {.pure.} = object
   closeEditor*: proc(self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
   viewportEvent*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -392,7 +392,7 @@ proc fcQListWidget_virtualbase_horizontalScrollbarValueChanged(self: pointer, va
 proc fcQListWidget_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void {.importc: "QListWidget_virtualbase_closeEditor".}
 proc fcQListWidget_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QListWidget_virtualbase_commitData".}
 proc fcQListWidget_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QListWidget_virtualbase_editorDestroyed".}
-proc fcQListWidget_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QListWidget_virtualbase_edit2".}
+proc fcQListWidget_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QListWidget_virtualbase_edit_index_trigger_event".}
 proc fcQListWidget_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QListWidget_virtualbase_selectionCommand".}
 proc fcQListWidget_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QListWidget_virtualbase_focusNextPrevChild".}
 proc fcQListWidget_virtualbase_viewportEvent(self: pointer, event: pointer): bool {.importc: "QListWidget_virtualbase_viewportEvent".}
@@ -433,8 +433,8 @@ proc fcQListWidget_virtualbase_customEvent(self: pointer, event: pointer): void 
 proc fcQListWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QListWidget_virtualbase_connectNotify".}
 proc fcQListWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QListWidget_virtualbase_disconnectNotify".}
 proc fcQListWidget_protectedbase_items(self: pointer, data: pointer): struct_seaqt_array {.importc: "QListWidget_protectedbase_items".}
-proc fcQListWidget_protectedbase_indexFromItem(self: pointer, item: pointer): pointer {.importc: "QListWidget_protectedbase_indexFromItem".}
-proc fcQListWidget_protectedbase_indexFromItemWithItem(self: pointer, item: pointer): pointer {.importc: "QListWidget_protectedbase_indexFromItemWithItem".}
+proc fcQListWidget_protectedbase_indexFromItem_const_pcQListWidgetItem(self: pointer, item: pointer): pointer {.importc: "QListWidget_protectedbase_indexFromItem_const_pcQListWidgetItem".}
+proc fcQListWidget_protectedbase_indexFromItem_const_pQListWidgetItem(self: pointer, item: pointer): pointer {.importc: "QListWidget_protectedbase_indexFromItem_const_pQListWidgetItem".}
 proc fcQListWidget_protectedbase_itemFromIndex(self: pointer, index: pointer): pointer {.importc: "QListWidget_protectedbase_itemFromIndex".}
 proc fcQListWidget_protectedbase_resizeContents(self: pointer, width: cint, height: cint): void {.importc: "QListWidget_protectedbase_resizeContents".}
 proc fcQListWidget_protectedbase_contentsSize(self: pointer): pointer {.importc: "QListWidget_protectedbase_contentsSize".}
@@ -455,7 +455,7 @@ proc fcQListWidget_protectedbase_startAutoScroll(self: pointer): void {.importc:
 proc fcQListWidget_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QListWidget_protectedbase_stopAutoScroll".}
 proc fcQListWidget_protectedbase_doAutoScroll(self: pointer): void {.importc: "QListWidget_protectedbase_doAutoScroll".}
 proc fcQListWidget_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QListWidget_protectedbase_dropIndicatorPosition".}
-proc fcQListWidget_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QListWidget_protectedbase_setViewportMargins".}
+proc fcQListWidget_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QListWidget_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQListWidget_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QListWidget_protectedbase_viewportMargins".}
 proc fcQListWidget_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QListWidget_protectedbase_drawFrame".}
 proc fcQListWidget_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QListWidget_protectedbase_initStyleOption".}
@@ -469,7 +469,7 @@ proc fcQListWidget_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQListWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QListWidget_protectedbase_receivers".}
 proc fcQListWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QListWidget_protectedbase_isSignalConnected".}
 proc fcQListWidget_new(vtbl: pointer, vdata: csize_t): ptr cQListWidget {.importc: "QListWidget_new".}
-proc fcQListWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQListWidget {.importc: "QListWidget_new2".}
+proc fcQListWidget_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQListWidget {.importc: "QListWidget_new_parent".}
 proc fcQListWidget_staticMetaObject(): pointer {.importc: "QListWidget_staticMetaObject".}
 
 proc clone*(self: gen_qlistwidget_types.QListWidgetItem): gen_qlistwidget_types.QListWidgetItem =
@@ -601,8 +601,8 @@ proc read*(self: gen_qlistwidget_types.QListWidgetItem, inVal: gen_qdatastream_t
 proc write*(self: gen_qlistwidget_types.QListWidgetItem, outVal: gen_qdatastream_types.QDataStream): void =
   fcQListWidgetItem_write(self.h, outVal.h)
 
-proc operatorAssign*(self: gen_qlistwidget_types.QListWidgetItem, other: gen_qlistwidget_types.QListWidgetItem): void =
-  fcQListWidgetItem_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qlistwidget_types.QListWidgetItem, fromVal: gen_qlistwidget_types.QListWidgetItem): void =
+  fcQListWidgetItem_operatorAssign(self.h, fromVal.h)
 
 proc typeX*(self: gen_qlistwidget_types.QListWidgetItem): cint =
   fcQListWidgetItem_typeX(self.h)
@@ -836,7 +836,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   fcQListWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    other: gen_qlistwidget_types.QListWidgetItem,
+    fromVal: gen_qlistwidget_types.QListWidgetItem,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -857,7 +857,7 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     vtbl[].vtbl.read = fcQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
     vtbl[].vtbl.write = fcQListWidgetItem_vtable_callback_write
-  let tmp = gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), other.h), owned: true)
+  let tmp = gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQListWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
@@ -1048,10 +1048,10 @@ proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
   inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    other: gen_qlistwidget_types.QListWidgetItem,
+    fromVal: gen_qlistwidget_types.QListWidgetItem,
     inst: VirtualQListWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQListWidgetItem_new4(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), other.h)
+  inst[].h = fcQListWidgetItem_new4(addr(cQListWidgetItem_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQListWidgetItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
@@ -1113,13 +1113,13 @@ proc metacall*(self: gen_qlistwidget_types.QListWidget, param1: cint, param2: ci
   fcQListWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlistwidget_types.QListWidget, s: cstring): string =
-  let v_ms = fcQListWidget_tr(s)
+  let v_ms = fcQListWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlistwidget_types.QListWidget, s: cstring): string =
-  let v_ms = fcQListWidget_trUtf8(s)
+  let v_ms = fcQListWidget_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1134,10 +1134,10 @@ proc row*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.Q
   fcQListWidget_row(self.h, item.h)
 
 proc insertItem*(self: gen_qlistwidget_types.QListWidget, row: cint, item: gen_qlistwidget_types.QListWidgetItem): void =
-  fcQListWidget_insertItem(self.h, row, item.h)
+  fcQListWidget_insertItemRowItem(self.h, row, item.h)
 
 proc insertItem*(self: gen_qlistwidget_types.QListWidget, row: cint, label: openArray[char]): void =
-  fcQListWidget_insertItem2(self.h, row, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
+  fcQListWidget_insertItemRowLabel(self.h, row, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
 proc insertItems*(self: gen_qlistwidget_types.QListWidget, row: cint, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_seaqt_string](len(labels))
@@ -1147,10 +1147,10 @@ proc insertItems*(self: gen_qlistwidget_types.QListWidget, row: cint, labels: op
   fcQListWidget_insertItems(self.h, row, struct_seaqt_array(len: csize_t(len(labels)), data: if len(labels) == 0: nil else: addr(labels_CArray[0])))
 
 proc addItem*(self: gen_qlistwidget_types.QListWidget, label: openArray[char]): void =
-  fcQListWidget_addItem(self.h, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
+  fcQListWidget_addItemLabel(self.h, struct_seaqt_string(data: if len(label) > 0: addr label[0] else: nil, len: csize_t(len(label))))
 
 proc addItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
-  fcQListWidget_addItemWithItem(self.h, item.h)
+  fcQListWidget_addItemItem(self.h, item.h)
 
 proc addItems*(self: gen_qlistwidget_types.QListWidget, labels: openArray[string]): void =
   var labels_CArray = newSeq[struct_seaqt_string](len(labels))
@@ -1169,25 +1169,25 @@ proc currentItem*(self: gen_qlistwidget_types.QListWidget): gen_qlistwidget_type
   gen_qlistwidget_types.QListWidgetItem(h: fcQListWidget_currentItem(self.h), owned: false)
 
 proc setCurrentItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
-  fcQListWidget_setCurrentItem(self.h, item.h)
+  fcQListWidget_setCurrentItemItem(self.h, item.h)
 
 proc setCurrentItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem, command: cint): void =
-  fcQListWidget_setCurrentItem2(self.h, item.h, cint(command))
+  fcQListWidget_setCurrentItemItemCommand(self.h, item.h, cint(command))
 
 proc currentRow*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_currentRow(self.h)
 
 proc setCurrentRow*(self: gen_qlistwidget_types.QListWidget, row: cint): void =
-  fcQListWidget_setCurrentRow(self.h, row)
+  fcQListWidget_setCurrentRowRow(self.h, row)
 
 proc setCurrentRow*(self: gen_qlistwidget_types.QListWidget, row: cint, command: cint): void =
-  fcQListWidget_setCurrentRow2(self.h, row, cint(command))
+  fcQListWidget_setCurrentRowRowCommand(self.h, row, cint(command))
 
 proc itemAt*(self: gen_qlistwidget_types.QListWidget, p: gen_qpoint_types.QPoint): gen_qlistwidget_types.QListWidgetItem =
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidget_itemAt(self.h, p.h), owned: false)
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidget_itemAtP(self.h, p.h), owned: false)
 
 proc itemAt*(self: gen_qlistwidget_types.QListWidget, x: cint, y: cint): gen_qlistwidget_types.QListWidgetItem =
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidget_itemAt2(self.h, x, y), owned: false)
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidget_itemAtXY(self.h, x, y), owned: false)
 
 proc visualItemRect*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQListWidget_visualItemRect(self.h, item.h), owned: true)
@@ -1256,7 +1256,7 @@ proc dropEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types
   fcQListWidget_dropEvent(self.h, event.h)
 
 proc scrollToItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
-  fcQListWidget_scrollToItem(self.h, item.h)
+  fcQListWidget_scrollToItemItem(self.h, item.h)
 
 proc clear*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_clear(self.h)
@@ -1465,34 +1465,34 @@ proc onItemSelectionChanged*(self: gen_qlistwidget_types.QListWidget, slot: QLis
   fcQListWidget_connect_itemSelectionChanged(self.h, cast[int](addr tmp[]), fcQListWidget_slot_callback_itemSelectionChanged, fcQListWidget_slot_callback_itemSelectionChanged_release)
 
 proc tr*(_: type gen_qlistwidget_types.QListWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQListWidget_tr2(s, c)
+  let v_ms = fcQListWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlistwidget_types.QListWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQListWidget_tr3(s, c, n)
+  let v_ms = fcQListWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlistwidget_types.QListWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQListWidget_trUtf82(s, c)
+  let v_ms = fcQListWidget_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qlistwidget_types.QListWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQListWidget_trUtf83(s, c, n)
+  let v_ms = fcQListWidget_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc sortItems*(self: gen_qlistwidget_types.QListWidget, order: cint): void =
-  fcQListWidget_sortItemsWithOrder(self.h, cint(order))
+  fcQListWidget_sortItemsOrder(self.h, cint(order))
 
 proc scrollToItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem, hint: cint): void =
-  fcQListWidget_scrollToItem2(self.h, item.h, cint(hint))
+  fcQListWidget_scrollToItemItemHint(self.h, item.h, cint(hint))
 
 type QListWidgetmetaObjectProc* = proc(self: QListWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QListWidgetmetacastProc* = proc(self: QListWidget, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1549,7 +1549,7 @@ type QListWidgethorizontalScrollbarValueChangedProc* = proc(self: QListWidget, v
 type QListWidgetcloseEditorProc* = proc(self: QListWidget, editor: gen_qwidget_types.QWidget, hint: cint): void {.raises: [], gcsafe.}
 type QListWidgetcommitDataProc* = proc(self: QListWidget, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QListWidgeteditorDestroyedProc* = proc(self: QListWidget, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
-type QListWidgetedit2Proc* = proc(self: QListWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QListWidgeteditIndexTriggerEventProc* = proc(self: QListWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QListWidgetselectionCommandProc* = proc(self: QListWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QListWidgetfocusNextPrevChildProc* = proc(self: QListWidget, next: bool): bool {.raises: [], gcsafe.}
 type QListWidgetviewportEventProc* = proc(self: QListWidget, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
@@ -1647,7 +1647,7 @@ type QListWidgetVTable* {.inheritable, pure.} = object
   closeEditor*: QListWidgetcloseEditorProc
   commitData*: QListWidgetcommitDataProc
   editorDestroyed*: QListWidgeteditorDestroyedProc
-  edit2*: QListWidgetedit2Proc
+  editIndexTriggerEvent*: QListWidgeteditIndexTriggerEventProc
   selectionCommand*: QListWidgetselectionCommandProc
   focusNextPrevChild*: QListWidgetfocusNextPrevChildProc
   viewportEvent*: QListWidgetviewportEventProc
@@ -1877,7 +1877,7 @@ proc QListWidgeteditorDestroyed*(self: gen_qlistwidget_types.QListWidget, editor
   fcQListWidget_virtualbase_editorDestroyed(self.h, editor.h)
 
 proc QListWidgetedit*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQListWidget_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQListWidget_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QListWidgetselectionCommand*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQListWidget_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -2406,13 +2406,13 @@ proc fcQListWidget_vtable_callback_editorDestroyed(self: pointer, editor: pointe
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc fcQListWidget_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQListWidget_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self)[])
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQListWidget_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -3227,7 +3227,7 @@ proc fcQListWidget_method_callback_editorDestroyed(self: pointer, editor: pointe
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-proc fcQListWidget_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQListWidget_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -3471,10 +3471,10 @@ proc items*(self: gen_qlistwidget_types.QListWidget, data: gen_qmimedata_types.Q
   vx_ret
 
 proc indexFromItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQListWidget_protectedbase_indexFromItem(self.h, item.h), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQListWidget_protectedbase_indexFromItem_const_pcQListWidgetItem(self.h, item.h), owned: true)
 
 proc indexFromItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQListWidget_protectedbase_indexFromItemWithItem(self.h, item.h), owned: true)
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQListWidget_protectedbase_indexFromItem_const_pQListWidgetItem(self.h, item.h), owned: true)
 
 proc itemFromIndex*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qlistwidget_types.QListWidgetItem =
   gen_qlistwidget_types.QListWidgetItem(h: fcQListWidget_protectedbase_itemFromIndex(self.h, index.h), owned: false)
@@ -3537,7 +3537,7 @@ proc dropIndicatorPosition*(self: gen_qlistwidget_types.QListWidget): cint =
   cint(fcQListWidget_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qlistwidget_types.QListWidget, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQListWidget_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQListWidget_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qlistwidget_types.QListWidget): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQListWidget_protectedbase_viewportMargins(self.h), owned: true)
@@ -3692,8 +3692,8 @@ proc create*(T: type gen_qlistwidget_types.QListWidget,
     vtbl[].vtbl.commitData = fcQListWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQListWidget_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQListWidget_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQListWidget_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQListWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -3893,8 +3893,8 @@ proc create*(T: type gen_qlistwidget_types.QListWidget,
     vtbl[].vtbl.commitData = fcQListWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQListWidget_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQListWidget_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQListWidget_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQListWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
@@ -4037,7 +4037,7 @@ const cQListWidget_mvtbl = cQListWidgetVTable(
   closeEditor: fcQListWidget_method_callback_closeEditor,
   commitData: fcQListWidget_method_callback_commitData,
   editorDestroyed: fcQListWidget_method_callback_editorDestroyed,
-  edit2: fcQListWidget_method_callback_edit2,
+  editIndexTriggerEvent: fcQListWidget_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQListWidget_method_callback_selectionCommand,
   focusNextPrevChild: fcQListWidget_method_callback_focusNextPrevChild,
   viewportEvent: fcQListWidget_method_callback_viewportEvent,

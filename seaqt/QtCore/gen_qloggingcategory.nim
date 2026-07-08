@@ -45,10 +45,10 @@ proc fcQLoggingCategory_isWarningEnabled(self: pointer): bool {.importc: "QLoggi
 proc fcQLoggingCategory_isCriticalEnabled(self: pointer): bool {.importc: "QLoggingCategory_isCriticalEnabled".}
 proc fcQLoggingCategory_categoryName(self: pointer): cstring {.importc: "QLoggingCategory_categoryName".}
 proc fcQLoggingCategory_operatorCall(self: pointer): pointer {.importc: "QLoggingCategory_operatorCall".}
-proc fcQLoggingCategory_operatorCall2(self: pointer): pointer {.importc: "QLoggingCategory_operatorCall2".}
+proc fcQLoggingCategory_operatorCallConst(self: pointer): pointer {.importc: "QLoggingCategory_operatorCall_const".}
 proc fcQLoggingCategory_defaultCategory(): pointer {.importc: "QLoggingCategory_defaultCategory".}
 proc fcQLoggingCategory_setFilterRules(rules: struct_seaqt_string): void {.importc: "QLoggingCategory_setFilterRules".}
-proc fcQLoggingCategory_new(category: cstring): ptr cQLoggingCategory {.importc: "QLoggingCategory_new".}
+proc fcQLoggingCategory_new(category: cstring): ptr cQLoggingCategory {.importc: "QLoggingCategory_new_category".}
 
 proc isDebugEnabled*(self: gen_qloggingcategory_types.QLoggingCategory): bool =
   fcQLoggingCategory_isDebugEnabled(self.h)
@@ -69,7 +69,7 @@ proc operatorCall*(self: gen_qloggingcategory_types.QLoggingCategory): gen_qlogg
   gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall(self.h), owned: false)
 
 proc operatorCall2*(self: gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
-  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall2(self.h), owned: false)
+  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCallConst(self.h), owned: false)
 
 proc defaultCategory*(_: type gen_qloggingcategory_types.QLoggingCategory): gen_qloggingcategory_types.QLoggingCategory =
   gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_defaultCategory(), owned: false)

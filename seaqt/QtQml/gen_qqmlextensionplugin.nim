@@ -60,15 +60,15 @@ type cQQmlEngineExtensionPlugin*{.exportc: "QQmlEngineExtensionPlugin", incomple
 proc fcQQmlExtensionPlugin_metaObject(self: pointer): pointer {.importc: "QQmlExtensionPlugin_metaObject".}
 proc fcQQmlExtensionPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlExtensionPlugin_metacast".}
 proc fcQQmlExtensionPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlExtensionPlugin_metacall".}
-proc fcQQmlExtensionPlugin_tr(s: cstring): struct_seaqt_string {.importc: "QQmlExtensionPlugin_tr".}
-proc fcQQmlExtensionPlugin_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQmlExtensionPlugin_trUtf8".}
+proc fcQQmlExtensionPlugin_trS(s: cstring): struct_seaqt_string {.importc: "QQmlExtensionPlugin_tr_s".}
+proc fcQQmlExtensionPlugin_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQmlExtensionPlugin_trUtf8_s".}
 proc fcQQmlExtensionPlugin_baseUrl(self: pointer): pointer {.importc: "QQmlExtensionPlugin_baseUrl".}
 proc fcQQmlExtensionPlugin_registerTypes(self: pointer, uri: cstring): void {.importc: "QQmlExtensionPlugin_registerTypes".}
 proc fcQQmlExtensionPlugin_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.importc: "QQmlExtensionPlugin_initializeEngine".}
-proc fcQQmlExtensionPlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlExtensionPlugin_tr2".}
-proc fcQQmlExtensionPlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlExtensionPlugin_tr3".}
-proc fcQQmlExtensionPlugin_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlExtensionPlugin_trUtf82".}
-proc fcQQmlExtensionPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlExtensionPlugin_trUtf83".}
+proc fcQQmlExtensionPlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlExtensionPlugin_tr_s_c".}
+proc fcQQmlExtensionPlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlExtensionPlugin_tr_s_c_n".}
+proc fcQQmlExtensionPlugin_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlExtensionPlugin_trUtf8_s_c".}
+proc fcQQmlExtensionPlugin_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlExtensionPlugin_trUtf8_s_c_n".}
 proc fcQQmlExtensionPlugin_vdata(self: pointer): ptr pointer {.importc: "QQmlExtensionPlugin_vdata".}
 proc fvdata_cQQmlExtensionPlugin(self: pointer): pointer {.importc: "vdata_QQmlExtensionPlugin".}
 
@@ -102,18 +102,18 @@ proc fcQQmlExtensionPlugin_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQQmlExtensionPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlExtensionPlugin_protectedbase_receivers".}
 proc fcQQmlExtensionPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlExtensionPlugin_protectedbase_isSignalConnected".}
 proc fcQQmlExtensionPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQQmlExtensionPlugin {.importc: "QQmlExtensionPlugin_new".}
-proc fcQQmlExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlExtensionPlugin {.importc: "QQmlExtensionPlugin_new2".}
+proc fcQQmlExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlExtensionPlugin {.importc: "QQmlExtensionPlugin_new_parent".}
 proc fcQQmlExtensionPlugin_staticMetaObject(): pointer {.importc: "QQmlExtensionPlugin_staticMetaObject".}
 proc fcQQmlEngineExtensionPlugin_metaObject(self: pointer): pointer {.importc: "QQmlEngineExtensionPlugin_metaObject".}
 proc fcQQmlEngineExtensionPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlEngineExtensionPlugin_metacast".}
 proc fcQQmlEngineExtensionPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlEngineExtensionPlugin_metacall".}
-proc fcQQmlEngineExtensionPlugin_tr(s: cstring): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_tr".}
-proc fcQQmlEngineExtensionPlugin_trUtf8(s: cstring): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_trUtf8".}
+proc fcQQmlEngineExtensionPlugin_trS(s: cstring): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_tr_s".}
+proc fcQQmlEngineExtensionPlugin_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_trUtf8_s".}
 proc fcQQmlEngineExtensionPlugin_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.importc: "QQmlEngineExtensionPlugin_initializeEngine".}
-proc fcQQmlEngineExtensionPlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_tr2".}
-proc fcQQmlEngineExtensionPlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_tr3".}
-proc fcQQmlEngineExtensionPlugin_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_trUtf82".}
-proc fcQQmlEngineExtensionPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_trUtf83".}
+proc fcQQmlEngineExtensionPlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_tr_s_c".}
+proc fcQQmlEngineExtensionPlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_tr_s_c_n".}
+proc fcQQmlEngineExtensionPlugin_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_trUtf8_s_c".}
+proc fcQQmlEngineExtensionPlugin_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlEngineExtensionPlugin_trUtf8_s_c_n".}
 proc fcQQmlEngineExtensionPlugin_vdata(self: pointer): ptr pointer {.importc: "QQmlEngineExtensionPlugin_vdata".}
 proc fvdata_cQQmlEngineExtensionPlugin(self: pointer): pointer {.importc: "vdata_QQmlEngineExtensionPlugin".}
 
@@ -146,7 +146,7 @@ proc fcQQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(self: pointer):
 proc fcQQmlEngineExtensionPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlEngineExtensionPlugin_protectedbase_receivers".}
 proc fcQQmlEngineExtensionPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlEngineExtensionPlugin_protectedbase_isSignalConnected".}
 proc fcQQmlEngineExtensionPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new".}
-proc fcQQmlEngineExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new2".}
+proc fcQQmlEngineExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new_parent".}
 proc fcQQmlEngineExtensionPlugin_staticMetaObject(): pointer {.importc: "QQmlEngineExtensionPlugin_staticMetaObject".}
 
 proc metaObject*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
@@ -159,13 +159,13 @@ proc metacall*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, param1: 
   fcQQmlExtensionPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring): string =
-  let v_ms = fcQQmlExtensionPlugin_tr(s)
+  let v_ms = fcQQmlExtensionPlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring): string =
-  let v_ms = fcQQmlExtensionPlugin_trUtf8(s)
+  let v_ms = fcQQmlExtensionPlugin_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -180,25 +180,25 @@ proc initializeEngine*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, 
   fcQQmlExtensionPlugin_initializeEngine(self.h, engine.h, uri)
 
 proc tr*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlExtensionPlugin_tr2(s, c)
+  let v_ms = fcQQmlExtensionPlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlExtensionPlugin_tr3(s, c, n)
+  let v_ms = fcQQmlExtensionPlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlExtensionPlugin_trUtf82(s, c)
+  let v_ms = fcQQmlExtensionPlugin_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlExtensionPlugin_trUtf83(s, c, n)
+  let v_ms = fcQQmlExtensionPlugin_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -575,13 +575,13 @@ proc metacall*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, pa
   fcQQmlEngineExtensionPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, s: cstring): string =
-  let v_ms = fcQQmlEngineExtensionPlugin_tr(s)
+  let v_ms = fcQQmlEngineExtensionPlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, s: cstring): string =
-  let v_ms = fcQQmlEngineExtensionPlugin_trUtf8(s)
+  let v_ms = fcQQmlEngineExtensionPlugin_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -590,25 +590,25 @@ proc initializeEngine*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPl
   fcQQmlEngineExtensionPlugin_initializeEngine(self.h, engine.h, uri)
 
 proc tr*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlEngineExtensionPlugin_tr2(s, c)
+  let v_ms = fcQQmlEngineExtensionPlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlEngineExtensionPlugin_tr3(s, c, n)
+  let v_ms = fcQQmlEngineExtensionPlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlEngineExtensionPlugin_trUtf82(s, c)
+  let v_ms = fcQQmlEngineExtensionPlugin_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlEngineExtensionPlugin_trUtf83(s, c, n)
+  let v_ms = fcQQmlEngineExtensionPlugin_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

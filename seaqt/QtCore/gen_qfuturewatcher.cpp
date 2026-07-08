@@ -35,7 +35,7 @@ int QFutureWatcherBase_metacall(QFutureWatcherBase* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFutureWatcherBase_tr(const char* s) {
+struct seaqt_string QFutureWatcherBase_tr_s(const char* s) {
 	QString _ret = QFutureWatcherBase::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -46,7 +46,7 @@ struct seaqt_string QFutureWatcherBase_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QFutureWatcherBase_trUtf8(const char* s) {
+struct seaqt_string QFutureWatcherBase_trUtf8_s(const char* s) {
 	QString _ret = QFutureWatcherBase::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -297,7 +297,7 @@ void QFutureWatcherBase_togglePaused(QFutureWatcherBase* self) {
 	self->togglePaused();
 }
 
-struct seaqt_string QFutureWatcherBase_tr2(const char* s, const char* c) {
+struct seaqt_string QFutureWatcherBase_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFutureWatcherBase::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -308,7 +308,7 @@ struct seaqt_string QFutureWatcherBase_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFutureWatcherBase_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFutureWatcherBase_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFutureWatcherBase::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -319,7 +319,7 @@ struct seaqt_string QFutureWatcherBase_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-struct seaqt_string QFutureWatcherBase_trUtf82(const char* s, const char* c) {
+struct seaqt_string QFutureWatcherBase_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QFutureWatcherBase::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -330,7 +330,7 @@ struct seaqt_string QFutureWatcherBase_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFutureWatcherBase_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QFutureWatcherBase_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFutureWatcherBase::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -35,7 +35,7 @@ int QCameraCaptureDestinationControl_metacall(QCameraCaptureDestinationControl* 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QCameraCaptureDestinationControl_tr(const char* s) {
+struct seaqt_string QCameraCaptureDestinationControl_tr_s(const char* s) {
 	QString _ret = QCameraCaptureDestinationControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -46,7 +46,7 @@ struct seaqt_string QCameraCaptureDestinationControl_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QCameraCaptureDestinationControl_trUtf8(const char* s) {
+struct seaqt_string QCameraCaptureDestinationControl_trUtf8_s(const char* s) {
 	QString _ret = QCameraCaptureDestinationControl::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -87,7 +87,7 @@ void QCameraCaptureDestinationControl_connect_captureDestinationChanged(QCameraC
 	QCameraCaptureDestinationControl::connect(self, static_cast<void (QCameraCaptureDestinationControl::*)(QCameraImageCapture::CaptureDestinations)>(&QCameraCaptureDestinationControl::captureDestinationChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QCameraCaptureDestinationControl_tr2(const char* s, const char* c) {
+struct seaqt_string QCameraCaptureDestinationControl_tr_s_c(const char* s, const char* c) {
 	QString _ret = QCameraCaptureDestinationControl::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -98,7 +98,7 @@ struct seaqt_string QCameraCaptureDestinationControl_tr2(const char* s, const ch
 	return _ms;
 }
 
-struct seaqt_string QCameraCaptureDestinationControl_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QCameraCaptureDestinationControl_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraCaptureDestinationControl::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -109,7 +109,7 @@ struct seaqt_string QCameraCaptureDestinationControl_tr3(const char* s, const ch
 	return _ms;
 }
 
-struct seaqt_string QCameraCaptureDestinationControl_trUtf82(const char* s, const char* c) {
+struct seaqt_string QCameraCaptureDestinationControl_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QCameraCaptureDestinationControl::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -120,7 +120,7 @@ struct seaqt_string QCameraCaptureDestinationControl_trUtf82(const char* s, cons
 	return _ms;
 }
 
-struct seaqt_string QCameraCaptureDestinationControl_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QCameraCaptureDestinationControl_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QCameraCaptureDestinationControl::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

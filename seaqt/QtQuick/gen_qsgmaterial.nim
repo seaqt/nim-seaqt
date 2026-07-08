@@ -59,8 +59,8 @@ proc fcQSGMaterial_typeX(self: pointer): pointer {.importc: "QSGMaterial_type".}
 proc fcQSGMaterial_createShader(self: pointer): pointer {.importc: "QSGMaterial_createShader".}
 proc fcQSGMaterial_compare(self: pointer, other: pointer): cint {.importc: "QSGMaterial_compare".}
 proc fcQSGMaterial_flags(self: pointer): cint {.importc: "QSGMaterial_flags".}
-proc fcQSGMaterial_setFlag(self: pointer, flags: cint): void {.importc: "QSGMaterial_setFlag".}
-proc fcQSGMaterial_setFlag2(self: pointer, flags: cint, on: bool): void {.importc: "QSGMaterial_setFlag2".}
+proc fcQSGMaterial_setFlagFlags(self: pointer, flags: cint): void {.importc: "QSGMaterial_setFlag_flags".}
+proc fcQSGMaterial_setFlagFlagsOn(self: pointer, flags: cint, on: bool): void {.importc: "QSGMaterial_setFlag_flags_on".}
 proc fcQSGMaterial_vdata(self: pointer): ptr pointer {.importc: "QSGMaterial_vdata".}
 proc fvdata_cQSGMaterial(self: pointer): pointer {.importc: "vdata_QSGMaterial".}
 
@@ -85,10 +85,10 @@ proc flags*(self: gen_qsgmaterial_types.QSGMaterial): cint =
   cint(fcQSGMaterial_flags(self.h))
 
 proc setFlag*(self: gen_qsgmaterial_types.QSGMaterial, flags: cint): void =
-  fcQSGMaterial_setFlag(self.h, cint(flags))
+  fcQSGMaterial_setFlagFlags(self.h, cint(flags))
 
 proc setFlag*(self: gen_qsgmaterial_types.QSGMaterial, flags: cint, on: bool): void =
-  fcQSGMaterial_setFlag2(self.h, cint(flags), on)
+  fcQSGMaterial_setFlagFlagsOn(self.h, cint(flags), on)
 
 type QSGMaterialtypeXProc* = proc(self: QSGMaterial): gen_qsgmaterialtype_types.QSGMaterialType {.raises: [], gcsafe.}
 type QSGMaterialcreateShaderProc* = proc(self: QSGMaterial): gen_qsgmaterialshader_types.QSGMaterialShader {.raises: [], gcsafe.}

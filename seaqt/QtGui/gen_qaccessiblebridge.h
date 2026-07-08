@@ -40,7 +40,7 @@ typedef struct QTimerEvent QTimerEvent;
 
 void QAccessibleBridge_setRootObject(QAccessibleBridge* self, QAccessibleInterface* rootObject);
 void QAccessibleBridge_notifyAccessibilityUpdate(QAccessibleBridge* self, QAccessibleEvent* event);
-void QAccessibleBridge_operatorAssign(QAccessibleBridge* self, QAccessibleBridge* param1);
+void QAccessibleBridge_operatorAssign(QAccessibleBridge* self, QAccessibleBridge* from);
 
 void QAccessibleBridge_delete(QAccessibleBridge* self);
 
@@ -64,19 +64,19 @@ void* QAccessibleBridgePlugin_vdata(VirtualQAccessibleBridgePlugin* self);
 VirtualQAccessibleBridgePlugin* vdata_QAccessibleBridgePlugin(void* vdata);
 
 VirtualQAccessibleBridgePlugin* QAccessibleBridgePlugin_new(const QAccessibleBridgePlugin_VTable* vtbl, size_t vdata);
-VirtualQAccessibleBridgePlugin* QAccessibleBridgePlugin_new2(const QAccessibleBridgePlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAccessibleBridgePlugin* QAccessibleBridgePlugin_new_parent(const QAccessibleBridgePlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAccessibleBridgePlugin_virtbase(QAccessibleBridgePlugin* src, QObject** outptr_QObject);
 QMetaObject* QAccessibleBridgePlugin_metaObject(const QAccessibleBridgePlugin* self);
 void* QAccessibleBridgePlugin_metacast(QAccessibleBridgePlugin* self, const char* param1);
 int QAccessibleBridgePlugin_metacall(QAccessibleBridgePlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QAccessibleBridgePlugin_tr(const char* s);
-struct seaqt_string QAccessibleBridgePlugin_trUtf8(const char* s);
+struct seaqt_string QAccessibleBridgePlugin_tr_s(const char* s);
+struct seaqt_string QAccessibleBridgePlugin_trUtf8_s(const char* s);
 QAccessibleBridge* QAccessibleBridgePlugin_create(QAccessibleBridgePlugin* self, struct seaqt_string key);
-struct seaqt_string QAccessibleBridgePlugin_tr2(const char* s, const char* c);
-struct seaqt_string QAccessibleBridgePlugin_tr3(const char* s, const char* c, int n);
-struct seaqt_string QAccessibleBridgePlugin_trUtf82(const char* s, const char* c);
-struct seaqt_string QAccessibleBridgePlugin_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QAccessibleBridgePlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAccessibleBridgePlugin_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QAccessibleBridgePlugin_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QAccessibleBridgePlugin_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAccessibleBridgePlugin_virtualbase_metaObject(const VirtualQAccessibleBridgePlugin* self);
 void* QAccessibleBridgePlugin_virtualbase_metacast(VirtualQAccessibleBridgePlugin* self, const char* param1);

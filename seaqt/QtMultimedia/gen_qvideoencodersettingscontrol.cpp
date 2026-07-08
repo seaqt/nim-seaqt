@@ -38,7 +38,7 @@ int QVideoEncoderSettingsControl_metacall(QVideoEncoderSettingsControl* self, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QVideoEncoderSettingsControl_tr(const char* s) {
+struct seaqt_string QVideoEncoderSettingsControl_tr_s(const char* s) {
 	QString _ret = QVideoEncoderSettingsControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -49,7 +49,7 @@ struct seaqt_string QVideoEncoderSettingsControl_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QVideoEncoderSettingsControl_trUtf8(const char* s) {
+struct seaqt_string QVideoEncoderSettingsControl_trUtf8_s(const char* s) {
 	QString _ret = QVideoEncoderSettingsControl::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -126,7 +126,7 @@ void QVideoEncoderSettingsControl_setVideoSettings(QVideoEncoderSettingsControl*
 	self->setVideoSettings(*settings);
 }
 
-struct seaqt_string QVideoEncoderSettingsControl_tr2(const char* s, const char* c) {
+struct seaqt_string QVideoEncoderSettingsControl_tr_s_c(const char* s, const char* c) {
 	QString _ret = QVideoEncoderSettingsControl::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -137,7 +137,7 @@ struct seaqt_string QVideoEncoderSettingsControl_tr2(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QVideoEncoderSettingsControl_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QVideoEncoderSettingsControl_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QVideoEncoderSettingsControl::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -148,7 +148,7 @@ struct seaqt_string QVideoEncoderSettingsControl_tr3(const char* s, const char* 
 	return _ms;
 }
 
-struct seaqt_string QVideoEncoderSettingsControl_trUtf82(const char* s, const char* c) {
+struct seaqt_string QVideoEncoderSettingsControl_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QVideoEncoderSettingsControl::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -159,7 +159,7 @@ struct seaqt_string QVideoEncoderSettingsControl_trUtf82(const char* s, const ch
 	return _ms;
 }
 
-struct seaqt_string QVideoEncoderSettingsControl_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QVideoEncoderSettingsControl_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QVideoEncoderSettingsControl::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

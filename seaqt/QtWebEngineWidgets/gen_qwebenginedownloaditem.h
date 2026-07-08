@@ -34,8 +34,8 @@ void QWebEngineDownloadItem_virtbase(QWebEngineDownloadItem* src, QObject** outp
 QMetaObject* QWebEngineDownloadItem_metaObject(const QWebEngineDownloadItem* self);
 void* QWebEngineDownloadItem_metacast(QWebEngineDownloadItem* self, const char* param1);
 int QWebEngineDownloadItem_metacall(QWebEngineDownloadItem* self, int param1, int param2, void** param3);
-struct seaqt_string QWebEngineDownloadItem_tr(const char* s);
-struct seaqt_string QWebEngineDownloadItem_trUtf8(const char* s);
+struct seaqt_string QWebEngineDownloadItem_tr_s(const char* s);
+struct seaqt_string QWebEngineDownloadItem_trUtf8_s(const char* s);
 unsigned int QWebEngineDownloadItem_id(const QWebEngineDownloadItem* self);
 int QWebEngineDownloadItem_state(const QWebEngineDownloadItem* self);
 long long QWebEngineDownloadItem_totalBytes(const QWebEngineDownloadItem* self);
@@ -70,10 +70,10 @@ void QWebEngineDownloadItem_downloadProgress(QWebEngineDownloadItem* self, long 
 void QWebEngineDownloadItem_connect_downloadProgress(QWebEngineDownloadItem* self, intptr_t slot, void (*callback)(intptr_t, long long, long long), void (*release)(intptr_t));
 void QWebEngineDownloadItem_isPausedChanged(QWebEngineDownloadItem* self, bool isPaused);
 void QWebEngineDownloadItem_connect_isPausedChanged(QWebEngineDownloadItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
-struct seaqt_string QWebEngineDownloadItem_tr2(const char* s, const char* c);
-struct seaqt_string QWebEngineDownloadItem_tr3(const char* s, const char* c, int n);
-struct seaqt_string QWebEngineDownloadItem_trUtf82(const char* s, const char* c);
-struct seaqt_string QWebEngineDownloadItem_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineDownloadItem_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineDownloadItem_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QWebEngineDownloadItem_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QWebEngineDownloadItem_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QWebEngineDownloadItem_staticMetaObject();
 void QWebEngineDownloadItem_delete(QWebEngineDownloadItem* self);

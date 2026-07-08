@@ -708,7 +708,7 @@ int QDesktopWidget_metacall(QDesktopWidget* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDesktopWidget_tr(const char* s) {
+struct seaqt_string QDesktopWidget_tr_s(const char* s) {
 	QString _ret = QDesktopWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -719,7 +719,7 @@ struct seaqt_string QDesktopWidget_tr(const char* s) {
 	return _ms;
 }
 
-struct seaqt_string QDesktopWidget_trUtf8(const char* s) {
+struct seaqt_string QDesktopWidget_trUtf8_s(const char* s) {
 	QString _ret = QDesktopWidget::trUtf8(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -734,11 +734,11 @@ int QDesktopWidget_screenNumber(const QDesktopWidget* self) {
 	return self->screenNumber();
 }
 
-QRect* QDesktopWidget_screenGeometry(const QDesktopWidget* self, QWidget* widget) {
+QRect* QDesktopWidget_screenGeometry_widget(const QDesktopWidget* self, QWidget* widget) {
 	return new QRect(self->screenGeometry(widget));
 }
 
-QRect* QDesktopWidget_availableGeometry(const QDesktopWidget* self, QWidget* widget) {
+QRect* QDesktopWidget_availableGeometry_widget(const QDesktopWidget* self, QWidget* widget) {
 	return new QRect(self->availableGeometry(widget));
 }
 
@@ -758,7 +758,7 @@ int QDesktopWidget_primaryScreen(const QDesktopWidget* self) {
 	return self->primaryScreen();
 }
 
-int QDesktopWidget_screenNumberWithQPoint(const QDesktopWidget* self, QPoint* param1) {
+int QDesktopWidget_screenNumber_QPoint(const QDesktopWidget* self, QPoint* param1) {
 	return self->screenNumber(*param1);
 }
 
@@ -766,19 +766,19 @@ QWidget* QDesktopWidget_screen(QDesktopWidget* self) {
 	return self->screen();
 }
 
-QRect* QDesktopWidget_screenGeometry2(const QDesktopWidget* self) {
+QRect* QDesktopWidget_screenGeometry(const QDesktopWidget* self) {
 	return new QRect(self->screenGeometry());
 }
 
-QRect* QDesktopWidget_screenGeometryWithPoint(const QDesktopWidget* self, QPoint* point) {
+QRect* QDesktopWidget_screenGeometry_point(const QDesktopWidget* self, QPoint* point) {
 	return new QRect(self->screenGeometry(*point));
 }
 
-QRect* QDesktopWidget_availableGeometry2(const QDesktopWidget* self) {
+QRect* QDesktopWidget_availableGeometry(const QDesktopWidget* self) {
 	return new QRect(self->availableGeometry());
 }
 
-QRect* QDesktopWidget_availableGeometryWithPoint(const QDesktopWidget* self, QPoint* point) {
+QRect* QDesktopWidget_availableGeometry_point(const QDesktopWidget* self, QPoint* point) {
 	return new QRect(self->availableGeometry(*point));
 }
 
@@ -845,7 +845,7 @@ void QDesktopWidget_connect_primaryScreenChanged(QDesktopWidget* self, intptr_t 
 	QDesktopWidget::connect(self, static_cast<void (QDesktopWidget::*)()>(&QDesktopWidget::primaryScreenChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QDesktopWidget_tr2(const char* s, const char* c) {
+struct seaqt_string QDesktopWidget_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDesktopWidget::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -856,7 +856,7 @@ struct seaqt_string QDesktopWidget_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDesktopWidget_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDesktopWidget_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDesktopWidget::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -867,7 +867,7 @@ struct seaqt_string QDesktopWidget_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_string QDesktopWidget_trUtf82(const char* s, const char* c) {
+struct seaqt_string QDesktopWidget_trUtf8_s_c(const char* s, const char* c) {
 	QString _ret = QDesktopWidget::trUtf8(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -878,7 +878,7 @@ struct seaqt_string QDesktopWidget_trUtf82(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QDesktopWidget_trUtf83(const char* s, const char* c, int n) {
+struct seaqt_string QDesktopWidget_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDesktopWidget::trUtf8(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -889,19 +889,19 @@ struct seaqt_string QDesktopWidget_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-int QDesktopWidget_screenNumberWithWidget(const QDesktopWidget* self, QWidget* widget) {
+int QDesktopWidget_screenNumber_QWidget(const QDesktopWidget* self, QWidget* widget) {
 	return self->screenNumber(widget);
 }
 
-QWidget* QDesktopWidget_screenWithScreen(QDesktopWidget* self, int screen) {
+QWidget* QDesktopWidget_screen_screen(QDesktopWidget* self, int screen) {
 	return self->screen(static_cast<int>(screen));
 }
 
-QRect* QDesktopWidget_screenGeometryWithScreen(const QDesktopWidget* self, int screen) {
+QRect* QDesktopWidget_screenGeometry_screen(const QDesktopWidget* self, int screen) {
 	return new QRect(self->screenGeometry(static_cast<int>(screen)));
 }
 
-QRect* QDesktopWidget_availableGeometryWithScreen(const QDesktopWidget* self, int screen) {
+QRect* QDesktopWidget_availableGeometry_screen(const QDesktopWidget* self, int screen) {
 	return new QRect(self->availableGeometry(static_cast<int>(screen)));
 }
 

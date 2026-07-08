@@ -19,12 +19,12 @@ QAudioFormat* QAudioFormat_new() {
 	return new (std::nothrow) QAudioFormat();
 }
 
-QAudioFormat* QAudioFormat_new2(QAudioFormat* other) {
-	return new (std::nothrow) QAudioFormat(*other);
+QAudioFormat* QAudioFormat_new_from(QAudioFormat* from) {
+	return new (std::nothrow) QAudioFormat(*from);
 }
 
-void QAudioFormat_operatorAssign(QAudioFormat* self, QAudioFormat* other) {
-	self->operator=(*other);
+void QAudioFormat_operatorAssign(QAudioFormat* self, QAudioFormat* from) {
+	self->operator=(*from);
 }
 
 bool QAudioFormat_operatorEqual(const QAudioFormat* self, QAudioFormat* other) {

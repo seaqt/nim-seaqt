@@ -55,18 +55,18 @@ type cQCameraLocksControl*{.exportc: "QCameraLocksControl", incompleteStruct.} =
 proc fcQCameraLocksControl_metaObject(self: pointer): pointer {.importc: "QCameraLocksControl_metaObject".}
 proc fcQCameraLocksControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraLocksControl_metacast".}
 proc fcQCameraLocksControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraLocksControl_metacall".}
-proc fcQCameraLocksControl_tr(s: cstring): struct_seaqt_string {.importc: "QCameraLocksControl_tr".}
-proc fcQCameraLocksControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraLocksControl_trUtf8".}
+proc fcQCameraLocksControl_trS(s: cstring): struct_seaqt_string {.importc: "QCameraLocksControl_tr_s".}
+proc fcQCameraLocksControl_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraLocksControl_trUtf8_s".}
 proc fcQCameraLocksControl_supportedLocks(self: pointer): cint {.importc: "QCameraLocksControl_supportedLocks".}
 proc fcQCameraLocksControl_lockStatus(self: pointer, lock: cint): cint {.importc: "QCameraLocksControl_lockStatus".}
 proc fcQCameraLocksControl_searchAndLock(self: pointer, locks: cint): void {.importc: "QCameraLocksControl_searchAndLock".}
 proc fcQCameraLocksControl_unlock(self: pointer, locks: cint): void {.importc: "QCameraLocksControl_unlock".}
 proc fcQCameraLocksControl_lockStatusChanged(self: pointer, typeVal: cint, status: cint, reason: cint): void {.importc: "QCameraLocksControl_lockStatusChanged".}
 proc fcQCameraLocksControl_connect_lockStatusChanged(self: pointer, slot: int, callback: proc (slot: int, typeVal: cint, status: cint, reason: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraLocksControl_connect_lockStatusChanged".}
-proc fcQCameraLocksControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraLocksControl_tr2".}
-proc fcQCameraLocksControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraLocksControl_tr3".}
-proc fcQCameraLocksControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraLocksControl_trUtf82".}
-proc fcQCameraLocksControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraLocksControl_trUtf83".}
+proc fcQCameraLocksControl_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraLocksControl_tr_s_c".}
+proc fcQCameraLocksControl_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraLocksControl_tr_s_c_n".}
+proc fcQCameraLocksControl_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraLocksControl_trUtf8_s_c".}
+proc fcQCameraLocksControl_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraLocksControl_trUtf8_s_c_n".}
 proc fcQCameraLocksControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraLocksControl_protectedbase_sender".}
 proc fcQCameraLocksControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraLocksControl_protectedbase_senderSignalIndex".}
 proc fcQCameraLocksControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraLocksControl_protectedbase_receivers".}
@@ -83,13 +83,13 @@ proc metacall*(self: gen_qcameralockscontrol_types.QCameraLocksControl, param1: 
   fcQCameraLocksControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring): string =
-  let v_ms = fcQCameraLocksControl_tr(s)
+  let v_ms = fcQCameraLocksControl_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring): string =
-  let v_ms = fcQCameraLocksControl_trUtf8(s)
+  let v_ms = fcQCameraLocksControl_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -131,25 +131,25 @@ proc onLockStatusChanged*(self: gen_qcameralockscontrol_types.QCameraLocksContro
   fcQCameraLocksControl_connect_lockStatusChanged(self.h, cast[int](addr tmp[]), fcQCameraLocksControl_slot_callback_lockStatusChanged, fcQCameraLocksControl_slot_callback_lockStatusChanged_release)
 
 proc tr*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraLocksControl_tr2(s, c)
+  let v_ms = fcQCameraLocksControl_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraLocksControl_tr3(s, c, n)
+  let v_ms = fcQCameraLocksControl_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraLocksControl_trUtf82(s, c)
+  let v_ms = fcQCameraLocksControl_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraLocksControl_trUtf83(s, c, n)
+  let v_ms = fcQCameraLocksControl_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

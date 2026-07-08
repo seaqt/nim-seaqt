@@ -42,22 +42,22 @@ type cQSemaphoreReleaser*{.exportc: "QSemaphoreReleaser", incompleteStruct.} = o
 
 proc fcQSemaphore_acquire(self: pointer): void {.importc: "QSemaphore_acquire".}
 proc fcQSemaphore_tryAcquire(self: pointer): bool {.importc: "QSemaphore_tryAcquire".}
-proc fcQSemaphore_tryAcquire2(self: pointer, n: cint, timeout: cint): bool {.importc: "QSemaphore_tryAcquire2".}
+proc fcQSemaphore_tryAcquireNTimeout(self: pointer, n: cint, timeout: cint): bool {.importc: "QSemaphore_tryAcquire_n_timeout".}
 proc fcQSemaphore_release(self: pointer): void {.importc: "QSemaphore_release".}
 proc fcQSemaphore_available(self: pointer): cint {.importc: "QSemaphore_available".}
-proc fcQSemaphore_acquireWithInt(self: pointer, n: cint): void {.importc: "QSemaphore_acquireWithInt".}
-proc fcQSemaphore_tryAcquireWithInt(self: pointer, n: cint): bool {.importc: "QSemaphore_tryAcquireWithInt".}
-proc fcQSemaphore_releaseWithInt(self: pointer, n: cint): void {.importc: "QSemaphore_releaseWithInt".}
+proc fcQSemaphore_acquireN(self: pointer, n: cint): void {.importc: "QSemaphore_acquire_n".}
+proc fcQSemaphore_tryAcquireN(self: pointer, n: cint): bool {.importc: "QSemaphore_tryAcquire_n".}
+proc fcQSemaphore_releaseN(self: pointer, n: cint): void {.importc: "QSemaphore_release_n".}
 proc fcQSemaphore_new(): ptr cQSemaphore {.importc: "QSemaphore_new".}
-proc fcQSemaphore_new2(n: cint): ptr cQSemaphore {.importc: "QSemaphore_new2".}
+proc fcQSemaphore_new2(n: cint): ptr cQSemaphore {.importc: "QSemaphore_new_n".}
 proc fcQSemaphoreReleaser_swap(self: pointer, other: pointer): void {.importc: "QSemaphoreReleaser_swap".}
 proc fcQSemaphoreReleaser_semaphore(self: pointer): pointer {.importc: "QSemaphoreReleaser_semaphore".}
 proc fcQSemaphoreReleaser_cancel(self: pointer): pointer {.importc: "QSemaphoreReleaser_cancel".}
 proc fcQSemaphoreReleaser_new(): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new".}
-proc fcQSemaphoreReleaser_new2(sem: pointer): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new2".}
-proc fcQSemaphoreReleaser_new3(sem: pointer): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new3".}
-proc fcQSemaphoreReleaser_new4(sem: pointer, n: cint): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new4".}
-proc fcQSemaphoreReleaser_new5(sem: pointer, n: cint): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new5".}
+proc fcQSemaphoreReleaser_new2(sem: pointer): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new_QSemaphore".}
+proc fcQSemaphoreReleaser_new3(sem: pointer): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new_pQSemaphore".}
+proc fcQSemaphoreReleaser_new4(sem: pointer, n: cint): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new_QSemaphore_int".}
+proc fcQSemaphoreReleaser_new5(sem: pointer, n: cint): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new_pQSemaphore_int".}
 
 proc acquire*(self: gen_qsemaphore_types.QSemaphore): void =
   fcQSemaphore_acquire(self.h)
@@ -66,7 +66,7 @@ proc tryAcquire*(self: gen_qsemaphore_types.QSemaphore): bool =
   fcQSemaphore_tryAcquire(self.h)
 
 proc tryAcquire*(self: gen_qsemaphore_types.QSemaphore, n: cint, timeout: cint): bool =
-  fcQSemaphore_tryAcquire2(self.h, n, timeout)
+  fcQSemaphore_tryAcquireNTimeout(self.h, n, timeout)
 
 proc release*(self: gen_qsemaphore_types.QSemaphore): void =
   fcQSemaphore_release(self.h)
@@ -75,13 +75,13 @@ proc available*(self: gen_qsemaphore_types.QSemaphore): cint =
   fcQSemaphore_available(self.h)
 
 proc acquire*(self: gen_qsemaphore_types.QSemaphore, n: cint): void =
-  fcQSemaphore_acquireWithInt(self.h, n)
+  fcQSemaphore_acquireN(self.h, n)
 
 proc tryAcquire*(self: gen_qsemaphore_types.QSemaphore, n: cint): bool =
-  fcQSemaphore_tryAcquireWithInt(self.h, n)
+  fcQSemaphore_tryAcquireN(self.h, n)
 
 proc release*(self: gen_qsemaphore_types.QSemaphore, n: cint): void =
-  fcQSemaphore_releaseWithInt(self.h, n)
+  fcQSemaphore_releaseN(self.h, n)
 
 proc create*(T: type gen_qsemaphore_types.QSemaphore): gen_qsemaphore_types.QSemaphore =
   let tmp = gen_qsemaphore_types.QSemaphore(h: fcQSemaphore_new(), owned: true)

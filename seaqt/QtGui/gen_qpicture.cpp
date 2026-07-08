@@ -31,7 +31,7 @@ public:
 	friend VirtualQPicture* vdata_QPicture(void* vdata);
 
 	VirtualQPicture(const QPicture_VTable* vtbl): QPicture(), vtbl(vtbl) {}
-	VirtualQPicture(const QPicture_VTable* vtbl, const QPicture& param1): QPicture(param1), vtbl(vtbl) {}
+	VirtualQPicture(const QPicture_VTable* vtbl, const QPicture& from): QPicture(from), vtbl(vtbl) {}
 	VirtualQPicture(const QPicture_VTable* vtbl, int formatVersion): QPicture(formatVersion), vtbl(vtbl) {}
 
 	virtual ~VirtualQPicture() override { if(vtbl->destructor) vtbl->destructor(this); }
@@ -128,12 +128,12 @@ VirtualQPicture* QPicture_new(const QPicture_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQPicture(vtbl) : nullptr;
 }
 
-VirtualQPicture* QPicture_new2(const QPicture_VTable* vtbl, size_t vdata, QPicture* param1) {
+VirtualQPicture* QPicture_new_from(const QPicture_VTable* vtbl, size_t vdata, QPicture* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPicture>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQPicture(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQPicture(vtbl, *from) : nullptr;
 }
 
-VirtualQPicture* QPicture_new3(const QPicture_VTable* vtbl, size_t vdata, int formatVersion) {
+VirtualQPicture* QPicture_new_formatVersion(const QPicture_VTable* vtbl, size_t vdata, int formatVersion) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPicture>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPicture(vtbl, static_cast<int>(formatVersion)) : nullptr;
 }
@@ -167,20 +167,20 @@ bool QPicture_play(QPicture* self, QPainter* p) {
 	return self->play(p);
 }
 
-bool QPicture_load(QPicture* self, QIODevice* dev) {
+bool QPicture_load_dev(QPicture* self, QIODevice* dev) {
 	return self->load(dev);
 }
 
-bool QPicture_loadWithFileName(QPicture* self, struct seaqt_string fileName) {
+bool QPicture_load_fileName(QPicture* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->load(fileName_QString);
 }
 
-bool QPicture_save(QPicture* self, QIODevice* dev) {
+bool QPicture_save_dev(QPicture* self, QIODevice* dev) {
 	return self->save(dev);
 }
 
-bool QPicture_saveWithFileName(QPicture* self, struct seaqt_string fileName) {
+bool QPicture_save_fileName(QPicture* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->save(fileName_QString);
 }
@@ -193,8 +193,8 @@ void QPicture_setBoundingRect(QPicture* self, QRect* r) {
 	self->setBoundingRect(*r);
 }
 
-void QPicture_operatorAssign(QPicture* self, QPicture* p) {
-	self->operator=(*p);
+void QPicture_operatorAssign(QPicture* self, QPicture* from) {
+	self->operator=(*from);
 }
 
 void QPicture_swap(QPicture* self, QPicture* other) {
@@ -294,20 +294,20 @@ QPaintEngine* QPicture_paintEngine(const QPicture* self) {
 	return self->paintEngine();
 }
 
-bool QPicture_load2(QPicture* self, QIODevice* dev, const char* format) {
+bool QPicture_load_dev_format(QPicture* self, QIODevice* dev, const char* format) {
 	return self->load(dev, format);
 }
 
-bool QPicture_load3(QPicture* self, struct seaqt_string fileName, const char* format) {
+bool QPicture_load_fileName_format(QPicture* self, struct seaqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->load(fileName_QString, format);
 }
 
-bool QPicture_save2(QPicture* self, QIODevice* dev, const char* format) {
+bool QPicture_save_dev_format(QPicture* self, QIODevice* dev, const char* format) {
 	return self->save(dev, format);
 }
 
-bool QPicture_save3(QPicture* self, struct seaqt_string fileName, const char* format) {
+bool QPicture_save_fileName_format(QPicture* self, struct seaqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return self->save(fileName_QString, format);
 }
@@ -358,11 +358,11 @@ QPictureIO* QPictureIO_new() {
 	return new (std::nothrow) QPictureIO();
 }
 
-QPictureIO* QPictureIO_new2(QIODevice* ioDevice, const char* format) {
+QPictureIO* QPictureIO_new_ioDevice_format(QIODevice* ioDevice, const char* format) {
 	return new (std::nothrow) QPictureIO(ioDevice, format);
 }
 
-QPictureIO* QPictureIO_new3(struct seaqt_string fileName, const char* format) {
+QPictureIO* QPictureIO_new_fileName_format(struct seaqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new (std::nothrow) QPictureIO(fileName_QString, format);
 }
@@ -465,7 +465,7 @@ bool QPictureIO_write(QPictureIO* self) {
 	return self->write();
 }
 
-struct seaqt_string QPictureIO_pictureFormat(struct seaqt_string fileName) {
+struct seaqt_string QPictureIO_pictureFormat_QString(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray _qb = QPictureIO::pictureFormat(fileName_QString);
 	struct seaqt_string _ms;
@@ -475,7 +475,7 @@ struct seaqt_string QPictureIO_pictureFormat(struct seaqt_string fileName) {
 	return _ms;
 }
 
-struct seaqt_string QPictureIO_pictureFormatWithQIODevice(QIODevice* param1) {
+struct seaqt_string QPictureIO_pictureFormat_QIODevice(QIODevice* param1) {
 	QByteArray _qb = QPictureIO::pictureFormat(param1);
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();

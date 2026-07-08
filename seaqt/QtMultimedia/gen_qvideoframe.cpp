@@ -23,20 +23,20 @@ QVideoFrame* QVideoFrame_new() {
 	return new (std::nothrow) QVideoFrame();
 }
 
-QVideoFrame* QVideoFrame_new2(int bytes, QSize* size, int bytesPerLine, int format) {
+QVideoFrame* QVideoFrame_new_bytes_size_bytesPerLine_format(int bytes, QSize* size, int bytesPerLine, int format) {
 	return new (std::nothrow) QVideoFrame(static_cast<int>(bytes), *size, static_cast<int>(bytesPerLine), static_cast<QVideoFrame::PixelFormat>(format));
 }
 
-QVideoFrame* QVideoFrame_new3(QImage* image) {
+QVideoFrame* QVideoFrame_new_image(QImage* image) {
 	return new (std::nothrow) QVideoFrame(*image);
 }
 
-QVideoFrame* QVideoFrame_new4(QVideoFrame* other) {
-	return new (std::nothrow) QVideoFrame(*other);
+QVideoFrame* QVideoFrame_new_from(QVideoFrame* from) {
+	return new (std::nothrow) QVideoFrame(*from);
 }
 
-void QVideoFrame_operatorAssign(QVideoFrame* self, QVideoFrame* other) {
-	self->operator=(*other);
+void QVideoFrame_operatorAssign(QVideoFrame* self, QVideoFrame* from) {
+	self->operator=(*from);
 }
 
 bool QVideoFrame_operatorEqual(const QVideoFrame* self, QVideoFrame* other) {
@@ -111,7 +111,7 @@ int QVideoFrame_bytesPerLine(const QVideoFrame* self) {
 	return self->bytesPerLine();
 }
 
-int QVideoFrame_bytesPerLineWithPlane(const QVideoFrame* self, int plane) {
+int QVideoFrame_bytesPerLine_plane(const QVideoFrame* self, int plane) {
 	return self->bytesPerLine(static_cast<int>(plane));
 }
 
@@ -120,17 +120,17 @@ unsigned char* QVideoFrame_bits(QVideoFrame* self) {
 	return static_cast<unsigned char*>(_ret);
 }
 
-unsigned char* QVideoFrame_bitsWithPlane(QVideoFrame* self, int plane) {
+unsigned char* QVideoFrame_bits_int(QVideoFrame* self, int plane) {
 	uchar* _ret = self->bits(static_cast<int>(plane));
 	return static_cast<unsigned char*>(_ret);
 }
 
-const unsigned char* QVideoFrame_bits2(const QVideoFrame* self) {
+const unsigned char* QVideoFrame_bits_const(const QVideoFrame* self) {
 	const uchar* _ret = self->bits();
 	return static_cast<const unsigned char*>(_ret);
 }
 
-const unsigned char* QVideoFrame_bits3(const QVideoFrame* self, int plane) {
+const unsigned char* QVideoFrame_bits_const_int(const QVideoFrame* self, int plane) {
 	const uchar* _ret = self->bits(static_cast<int>(plane));
 	return static_cast<const unsigned char*>(_ret);
 }

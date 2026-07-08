@@ -61,8 +61,8 @@ type cQVariantAnimation*{.exportc: "QVariantAnimation", incompleteStruct.} = obj
 proc fcQVariantAnimation_metaObject(self: pointer): pointer {.importc: "QVariantAnimation_metaObject".}
 proc fcQVariantAnimation_metacast(self: pointer, param1: cstring): pointer {.importc: "QVariantAnimation_metacast".}
 proc fcQVariantAnimation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVariantAnimation_metacall".}
-proc fcQVariantAnimation_tr(s: cstring): struct_seaqt_string {.importc: "QVariantAnimation_tr".}
-proc fcQVariantAnimation_trUtf8(s: cstring): struct_seaqt_string {.importc: "QVariantAnimation_trUtf8".}
+proc fcQVariantAnimation_trS(s: cstring): struct_seaqt_string {.importc: "QVariantAnimation_tr_s".}
+proc fcQVariantAnimation_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QVariantAnimation_trUtf8_s".}
 proc fcQVariantAnimation_startValue(self: pointer): pointer {.importc: "QVariantAnimation_startValue".}
 proc fcQVariantAnimation_setStartValue(self: pointer, value: pointer): void {.importc: "QVariantAnimation_setStartValue".}
 proc fcQVariantAnimation_endValue(self: pointer): pointer {.importc: "QVariantAnimation_endValue".}
@@ -78,10 +78,10 @@ proc fcQVariantAnimation_easingCurve(self: pointer): pointer {.importc: "QVarian
 proc fcQVariantAnimation_setEasingCurve(self: pointer, easing: pointer): void {.importc: "QVariantAnimation_setEasingCurve".}
 proc fcQVariantAnimation_valueChanged(self: pointer, value: pointer): void {.importc: "QVariantAnimation_valueChanged".}
 proc fcQVariantAnimation_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVariantAnimation_connect_valueChanged".}
-proc fcQVariantAnimation_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVariantAnimation_tr2".}
-proc fcQVariantAnimation_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVariantAnimation_tr3".}
-proc fcQVariantAnimation_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVariantAnimation_trUtf82".}
-proc fcQVariantAnimation_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVariantAnimation_trUtf83".}
+proc fcQVariantAnimation_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVariantAnimation_tr_s_c".}
+proc fcQVariantAnimation_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVariantAnimation_tr_s_c_n".}
+proc fcQVariantAnimation_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QVariantAnimation_trUtf8_s_c".}
+proc fcQVariantAnimation_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QVariantAnimation_trUtf8_s_c_n".}
 proc fcQVariantAnimation_vdata(self: pointer): ptr pointer {.importc: "QVariantAnimation_vdata".}
 proc fvdata_cQVariantAnimation(self: pointer): pointer {.importc: "vdata_QVariantAnimation".}
 
@@ -124,7 +124,7 @@ proc fcQVariantAnimation_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQVariantAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVariantAnimation_protectedbase_receivers".}
 proc fcQVariantAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVariantAnimation_protectedbase_isSignalConnected".}
 proc fcQVariantAnimation_new(vtbl: pointer, vdata: csize_t): ptr cQVariantAnimation {.importc: "QVariantAnimation_new".}
-proc fcQVariantAnimation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVariantAnimation {.importc: "QVariantAnimation_new2".}
+proc fcQVariantAnimation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQVariantAnimation {.importc: "QVariantAnimation_new_parent".}
 proc fcQVariantAnimation_staticMetaObject(): pointer {.importc: "QVariantAnimation_staticMetaObject".}
 
 proc metaObject*(self: gen_qvariantanimation_types.QVariantAnimation): gen_qobjectdefs_types.QMetaObject =
@@ -137,13 +137,13 @@ proc metacall*(self: gen_qvariantanimation_types.QVariantAnimation, param1: cint
   fcQVariantAnimation_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvariantanimation_types.QVariantAnimation, s: cstring): string =
-  let v_ms = fcQVariantAnimation_tr(s)
+  let v_ms = fcQVariantAnimation_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvariantanimation_types.QVariantAnimation, s: cstring): string =
-  let v_ms = fcQVariantAnimation_trUtf8(s)
+  let v_ms = fcQVariantAnimation_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -231,25 +231,25 @@ proc onValueChanged*(self: gen_qvariantanimation_types.QVariantAnimation, slot: 
   fcQVariantAnimation_connect_valueChanged(self.h, cast[int](addr tmp[]), fcQVariantAnimation_slot_callback_valueChanged, fcQVariantAnimation_slot_callback_valueChanged_release)
 
 proc tr*(_: type gen_qvariantanimation_types.QVariantAnimation, s: cstring, c: cstring): string =
-  let v_ms = fcQVariantAnimation_tr2(s, c)
+  let v_ms = fcQVariantAnimation_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qvariantanimation_types.QVariantAnimation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVariantAnimation_tr3(s, c, n)
+  let v_ms = fcQVariantAnimation_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvariantanimation_types.QVariantAnimation, s: cstring, c: cstring): string =
-  let v_ms = fcQVariantAnimation_trUtf82(s, c)
+  let v_ms = fcQVariantAnimation_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qvariantanimation_types.QVariantAnimation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQVariantAnimation_trUtf83(s, c, n)
+  let v_ms = fcQVariantAnimation_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -48,13 +48,13 @@ type cQWriteLocker*{.exportc: "QWriteLocker", incompleteStruct.} = object
 
 proc fcQReadWriteLock_lockForRead(self: pointer): void {.importc: "QReadWriteLock_lockForRead".}
 proc fcQReadWriteLock_tryLockForRead(self: pointer): bool {.importc: "QReadWriteLock_tryLockForRead".}
-proc fcQReadWriteLock_tryLockForReadWithTimeout(self: pointer, timeout: cint): bool {.importc: "QReadWriteLock_tryLockForReadWithTimeout".}
+proc fcQReadWriteLock_tryLockForReadTimeout(self: pointer, timeout: cint): bool {.importc: "QReadWriteLock_tryLockForRead_timeout".}
 proc fcQReadWriteLock_lockForWrite(self: pointer): void {.importc: "QReadWriteLock_lockForWrite".}
 proc fcQReadWriteLock_tryLockForWrite(self: pointer): bool {.importc: "QReadWriteLock_tryLockForWrite".}
-proc fcQReadWriteLock_tryLockForWriteWithTimeout(self: pointer, timeout: cint): bool {.importc: "QReadWriteLock_tryLockForWriteWithTimeout".}
+proc fcQReadWriteLock_tryLockForWriteTimeout(self: pointer, timeout: cint): bool {.importc: "QReadWriteLock_tryLockForWrite_timeout".}
 proc fcQReadWriteLock_unlock(self: pointer): void {.importc: "QReadWriteLock_unlock".}
 proc fcQReadWriteLock_new(): ptr cQReadWriteLock {.importc: "QReadWriteLock_new".}
-proc fcQReadWriteLock_new2(recursionMode: cint): ptr cQReadWriteLock {.importc: "QReadWriteLock_new2".}
+proc fcQReadWriteLock_new2(recursionMode: cint): ptr cQReadWriteLock {.importc: "QReadWriteLock_new_recursionMode".}
 proc fcQReadLocker_unlock(self: pointer): void {.importc: "QReadLocker_unlock".}
 proc fcQReadLocker_relock(self: pointer): void {.importc: "QReadLocker_relock".}
 proc fcQReadLocker_readWriteLock(self: pointer): pointer {.importc: "QReadLocker_readWriteLock".}
@@ -71,7 +71,7 @@ proc tryLockForRead*(self: gen_qreadwritelock_types.QReadWriteLock): bool =
   fcQReadWriteLock_tryLockForRead(self.h)
 
 proc tryLockForRead*(self: gen_qreadwritelock_types.QReadWriteLock, timeout: cint): bool =
-  fcQReadWriteLock_tryLockForReadWithTimeout(self.h, timeout)
+  fcQReadWriteLock_tryLockForReadTimeout(self.h, timeout)
 
 proc lockForWrite*(self: gen_qreadwritelock_types.QReadWriteLock): void =
   fcQReadWriteLock_lockForWrite(self.h)
@@ -80,7 +80,7 @@ proc tryLockForWrite*(self: gen_qreadwritelock_types.QReadWriteLock): bool =
   fcQReadWriteLock_tryLockForWrite(self.h)
 
 proc tryLockForWrite*(self: gen_qreadwritelock_types.QReadWriteLock, timeout: cint): bool =
-  fcQReadWriteLock_tryLockForWriteWithTimeout(self.h, timeout)
+  fcQReadWriteLock_tryLockForWriteTimeout(self.h, timeout)
 
 proc unlock*(self: gen_qreadwritelock_types.QReadWriteLock): void =
   fcQReadWriteLock_unlock(self.h)

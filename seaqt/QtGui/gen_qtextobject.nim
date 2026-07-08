@@ -71,16 +71,16 @@ type cQTextBlockiterator*{.exportc: "QTextBlock__iterator", incompleteStruct.} =
 proc fcQTextObject_metaObject(self: pointer): pointer {.importc: "QTextObject_metaObject".}
 proc fcQTextObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextObject_metacast".}
 proc fcQTextObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextObject_metacall".}
-proc fcQTextObject_tr(s: cstring): struct_seaqt_string {.importc: "QTextObject_tr".}
-proc fcQTextObject_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTextObject_trUtf8".}
+proc fcQTextObject_trS(s: cstring): struct_seaqt_string {.importc: "QTextObject_tr_s".}
+proc fcQTextObject_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTextObject_trUtf8_s".}
 proc fcQTextObject_format(self: pointer): pointer {.importc: "QTextObject_format".}
 proc fcQTextObject_formatIndex(self: pointer): cint {.importc: "QTextObject_formatIndex".}
 proc fcQTextObject_document(self: pointer): pointer {.importc: "QTextObject_document".}
 proc fcQTextObject_objectIndex(self: pointer): cint {.importc: "QTextObject_objectIndex".}
-proc fcQTextObject_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextObject_tr2".}
-proc fcQTextObject_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextObject_tr3".}
-proc fcQTextObject_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextObject_trUtf82".}
-proc fcQTextObject_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextObject_trUtf83".}
+proc fcQTextObject_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextObject_tr_s_c".}
+proc fcQTextObject_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextObject_tr_s_c_n".}
+proc fcQTextObject_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextObject_trUtf8_s_c".}
+proc fcQTextObject_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextObject_trUtf8_s_c_n".}
 proc fcQTextObject_protectedbase_setFormat(self: pointer, format: pointer): void {.importc: "QTextObject_protectedbase_setFormat".}
 proc fcQTextObject_protectedbase_sender(self: pointer): pointer {.importc: "QTextObject_protectedbase_sender".}
 proc fcQTextObject_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QTextObject_protectedbase_senderSignalIndex".}
@@ -90,12 +90,12 @@ proc fcQTextObject_staticMetaObject(): pointer {.importc: "QTextObject_staticMet
 proc fcQTextBlockGroup_metaObject(self: pointer): pointer {.importc: "QTextBlockGroup_metaObject".}
 proc fcQTextBlockGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextBlockGroup_metacast".}
 proc fcQTextBlockGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextBlockGroup_metacall".}
-proc fcQTextBlockGroup_tr(s: cstring): struct_seaqt_string {.importc: "QTextBlockGroup_tr".}
-proc fcQTextBlockGroup_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTextBlockGroup_trUtf8".}
-proc fcQTextBlockGroup_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextBlockGroup_tr2".}
-proc fcQTextBlockGroup_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextBlockGroup_tr3".}
-proc fcQTextBlockGroup_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextBlockGroup_trUtf82".}
-proc fcQTextBlockGroup_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextBlockGroup_trUtf83".}
+proc fcQTextBlockGroup_trS(s: cstring): struct_seaqt_string {.importc: "QTextBlockGroup_tr_s".}
+proc fcQTextBlockGroup_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTextBlockGroup_trUtf8_s".}
+proc fcQTextBlockGroup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextBlockGroup_tr_s_c".}
+proc fcQTextBlockGroup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextBlockGroup_tr_s_c_n".}
+proc fcQTextBlockGroup_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextBlockGroup_trUtf8_s_c".}
+proc fcQTextBlockGroup_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextBlockGroup_trUtf8_s_c_n".}
 proc fcQTextBlockGroup_protectedbase_blockList(self: pointer): struct_seaqt_array {.importc: "QTextBlockGroup_protectedbase_blockList".}
 proc fcQTextBlockGroup_protectedbase_setFormat(self: pointer, format: pointer): void {.importc: "QTextBlockGroup_protectedbase_setFormat".}
 proc fcQTextBlockGroup_protectedbase_sender(self: pointer): pointer {.importc: "QTextBlockGroup_protectedbase_sender".}
@@ -106,8 +106,8 @@ proc fcQTextBlockGroup_staticMetaObject(): pointer {.importc: "QTextBlockGroup_s
 proc fcQTextFrame_metaObject(self: pointer): pointer {.importc: "QTextFrame_metaObject".}
 proc fcQTextFrame_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextFrame_metacast".}
 proc fcQTextFrame_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextFrame_metacall".}
-proc fcQTextFrame_tr(s: cstring): struct_seaqt_string {.importc: "QTextFrame_tr".}
-proc fcQTextFrame_trUtf8(s: cstring): struct_seaqt_string {.importc: "QTextFrame_trUtf8".}
+proc fcQTextFrame_trS(s: cstring): struct_seaqt_string {.importc: "QTextFrame_tr_s".}
+proc fcQTextFrame_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QTextFrame_trUtf8_s".}
 proc fcQTextFrame_setFrameFormat(self: pointer, format: pointer): void {.importc: "QTextFrame_setFrameFormat".}
 proc fcQTextFrame_frameFormat(self: pointer): pointer {.importc: "QTextFrame_frameFormat".}
 proc fcQTextFrame_firstCursorPosition(self: pointer): pointer {.importc: "QTextFrame_firstCursorPosition".}
@@ -120,10 +120,10 @@ proc fcQTextFrame_childFrames(self: pointer): struct_seaqt_array {.importc: "QTe
 proc fcQTextFrame_parentFrame(self: pointer): pointer {.importc: "QTextFrame_parentFrame".}
 proc fcQTextFrame_begin(self: pointer): pointer {.importc: "QTextFrame_begin".}
 proc fcQTextFrame_endX(self: pointer): pointer {.importc: "QTextFrame_end".}
-proc fcQTextFrame_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextFrame_tr2".}
-proc fcQTextFrame_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextFrame_tr3".}
-proc fcQTextFrame_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextFrame_trUtf82".}
-proc fcQTextFrame_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextFrame_trUtf83".}
+proc fcQTextFrame_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextFrame_tr_s_c".}
+proc fcQTextFrame_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextFrame_tr_s_c_n".}
+proc fcQTextFrame_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTextFrame_trUtf8_s_c".}
+proc fcQTextFrame_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTextFrame_trUtf8_s_c_n".}
 proc fcQTextFrame_vdata(self: pointer): ptr pointer {.importc: "QTextFrame_vdata".}
 proc fvdata_cQTextFrame(self: pointer): pointer {.importc: "vdata_QTextFrame".}
 
@@ -156,8 +156,8 @@ proc fcQTextFrame_protectedbase_receivers(self: pointer, signal: cstring): cint 
 proc fcQTextFrame_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextFrame_protectedbase_isSignalConnected".}
 proc fcQTextFrame_new(vtbl: pointer, vdata: csize_t, doc: pointer): ptr cQTextFrame {.importc: "QTextFrame_new".}
 proc fcQTextFrame_staticMetaObject(): pointer {.importc: "QTextFrame_staticMetaObject".}
-proc fcQTextBlockUserData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTextBlockUserData_operatorAssign".}
-proc fcQTextBlock_operatorAssign(self: pointer, o: pointer): void {.importc: "QTextBlock_operatorAssign".}
+proc fcQTextBlockUserData_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextBlockUserData_operatorAssign".}
+proc fcQTextBlock_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextBlock_operatorAssign".}
 proc fcQTextBlock_isValid(self: pointer): bool {.importc: "QTextBlock_isValid".}
 proc fcQTextBlock_operatorEqual(self: pointer, o: pointer): bool {.importc: "QTextBlock_operatorEqual".}
 proc fcQTextBlock_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QTextBlock_operatorNotEqual".}
@@ -194,8 +194,8 @@ proc fcQTextBlock_next(self: pointer): pointer {.importc: "QTextBlock_next".}
 proc fcQTextBlock_previous(self: pointer): pointer {.importc: "QTextBlock_previous".}
 proc fcQTextBlock_fragmentIndex(self: pointer): cint {.importc: "QTextBlock_fragmentIndex".}
 proc fcQTextBlock_new(): ptr cQTextBlock {.importc: "QTextBlock_new".}
-proc fcQTextBlock_new2(o: pointer): ptr cQTextBlock {.importc: "QTextBlock_new2".}
-proc fcQTextFragment_operatorAssign(self: pointer, o: pointer): void {.importc: "QTextFragment_operatorAssign".}
+proc fcQTextBlock_new2(fromVal: pointer): ptr cQTextBlock {.importc: "QTextBlock_new_from".}
+proc fcQTextFragment_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextFragment_operatorAssign".}
 proc fcQTextFragment_isValid(self: pointer): bool {.importc: "QTextFragment_isValid".}
 proc fcQTextFragment_operatorEqual(self: pointer, o: pointer): bool {.importc: "QTextFragment_operatorEqual".}
 proc fcQTextFragment_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QTextFragment_operatorNotEqual".}
@@ -207,11 +207,11 @@ proc fcQTextFragment_charFormat(self: pointer): pointer {.importc: "QTextFragmen
 proc fcQTextFragment_charFormatIndex(self: pointer): cint {.importc: "QTextFragment_charFormatIndex".}
 proc fcQTextFragment_text(self: pointer): struct_seaqt_string {.importc: "QTextFragment_text".}
 proc fcQTextFragment_glyphRuns(self: pointer): struct_seaqt_array {.importc: "QTextFragment_glyphRuns".}
-proc fcQTextFragment_glyphRunsWithFrom(self: pointer, fromVal: cint): struct_seaqt_array {.importc: "QTextFragment_glyphRunsWithFrom".}
-proc fcQTextFragment_glyphRuns2(self: pointer, fromVal: cint, length: cint): struct_seaqt_array {.importc: "QTextFragment_glyphRuns2".}
+proc fcQTextFragment_glyphRunsFrom(self: pointer, fromVal: cint): struct_seaqt_array {.importc: "QTextFragment_glyphRuns_from".}
+proc fcQTextFragment_glyphRunsFromLength(self: pointer, fromVal: cint, length: cint): struct_seaqt_array {.importc: "QTextFragment_glyphRuns_from_length".}
 proc fcQTextFragment_new(): ptr cQTextFragment {.importc: "QTextFragment_new".}
-proc fcQTextFragment_new2(o: pointer): ptr cQTextFragment {.importc: "QTextFragment_new2".}
-proc fcQTextFrameiterator_operatorAssign(self: pointer, o: pointer): void {.importc: "QTextFrame__iterator_operatorAssign".}
+proc fcQTextFragment_new2(fromVal: pointer): ptr cQTextFragment {.importc: "QTextFragment_new_from".}
+proc fcQTextFrameiterator_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextFrame__iterator_operatorAssign".}
 proc fcQTextFrameiterator_parentFrame(self: pointer): pointer {.importc: "QTextFrame__iterator_parentFrame".}
 proc fcQTextFrameiterator_currentFrame(self: pointer): pointer {.importc: "QTextFrame__iterator_currentFrame".}
 proc fcQTextFrameiterator_currentBlock(self: pointer): pointer {.importc: "QTextFrame__iterator_currentBlock".}
@@ -219,22 +219,22 @@ proc fcQTextFrameiterator_atEnd(self: pointer): bool {.importc: "QTextFrame__ite
 proc fcQTextFrameiterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QTextFrame__iterator_operatorEqual".}
 proc fcQTextFrameiterator_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QTextFrame__iterator_operatorNotEqual".}
 proc fcQTextFrameiterator_operatorPlusPlus(self: pointer): pointer {.importc: "QTextFrame__iterator_operatorPlusPlus".}
-proc fcQTextFrameiterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QTextFrame__iterator_operatorPlusPlusWithInt".}
+proc fcQTextFrameiterator_operatorPlusPlusInt(self: pointer, param1: cint): pointer {.importc: "QTextFrame__iterator_operatorPlusPlus_int".}
 proc fcQTextFrameiterator_operatorMinusMinus(self: pointer): pointer {.importc: "QTextFrame__iterator_operatorMinusMinus".}
-proc fcQTextFrameiterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QTextFrame__iterator_operatorMinusMinusWithInt".}
+proc fcQTextFrameiterator_operatorMinusMinusInt(self: pointer, param1: cint): pointer {.importc: "QTextFrame__iterator_operatorMinusMinus_int".}
 proc fcQTextFrameiterator_new(): ptr cQTextFrameiterator {.importc: "QTextFrame__iterator_new".}
-proc fcQTextFrameiterator_new2(o: pointer): ptr cQTextFrameiterator {.importc: "QTextFrame__iterator_new2".}
-proc fcQTextBlockiterator_operatorAssign(self: pointer, o: pointer): void {.importc: "QTextBlock__iterator_operatorAssign".}
+proc fcQTextFrameiterator_new2(fromVal: pointer): ptr cQTextFrameiterator {.importc: "QTextFrame__iterator_new_from".}
+proc fcQTextBlockiterator_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextBlock__iterator_operatorAssign".}
 proc fcQTextBlockiterator_fragment(self: pointer): pointer {.importc: "QTextBlock__iterator_fragment".}
 proc fcQTextBlockiterator_atEnd(self: pointer): bool {.importc: "QTextBlock__iterator_atEnd".}
 proc fcQTextBlockiterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QTextBlock__iterator_operatorEqual".}
 proc fcQTextBlockiterator_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QTextBlock__iterator_operatorNotEqual".}
 proc fcQTextBlockiterator_operatorPlusPlus(self: pointer): pointer {.importc: "QTextBlock__iterator_operatorPlusPlus".}
-proc fcQTextBlockiterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QTextBlock__iterator_operatorPlusPlusWithInt".}
+proc fcQTextBlockiterator_operatorPlusPlusInt(self: pointer, param1: cint): pointer {.importc: "QTextBlock__iterator_operatorPlusPlus_int".}
 proc fcQTextBlockiterator_operatorMinusMinus(self: pointer): pointer {.importc: "QTextBlock__iterator_operatorMinusMinus".}
-proc fcQTextBlockiterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QTextBlock__iterator_operatorMinusMinusWithInt".}
+proc fcQTextBlockiterator_operatorMinusMinusInt(self: pointer, param1: cint): pointer {.importc: "QTextBlock__iterator_operatorMinusMinus_int".}
 proc fcQTextBlockiterator_new(): ptr cQTextBlockiterator {.importc: "QTextBlock__iterator_new".}
-proc fcQTextBlockiterator_new2(o: pointer): ptr cQTextBlockiterator {.importc: "QTextBlock__iterator_new2".}
+proc fcQTextBlockiterator_new2(fromVal: pointer): ptr cQTextBlockiterator {.importc: "QTextBlock__iterator_new_from".}
 
 proc metaObject*(self: gen_qtextobject_types.QTextObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextObject_metaObject(self.h), owned: false)
@@ -246,13 +246,13 @@ proc metacall*(self: gen_qtextobject_types.QTextObject, param1: cint, param2: ci
   fcQTextObject_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextobject_types.QTextObject, s: cstring): string =
-  let v_ms = fcQTextObject_tr(s)
+  let v_ms = fcQTextObject_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextObject, s: cstring): string =
-  let v_ms = fcQTextObject_trUtf8(s)
+  let v_ms = fcQTextObject_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -270,25 +270,25 @@ proc objectIndex*(self: gen_qtextobject_types.QTextObject): cint =
   fcQTextObject_objectIndex(self.h)
 
 proc tr*(_: type gen_qtextobject_types.QTextObject, s: cstring, c: cstring): string =
-  let v_ms = fcQTextObject_tr2(s, c)
+  let v_ms = fcQTextObject_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextobject_types.QTextObject, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextObject_tr3(s, c, n)
+  let v_ms = fcQTextObject_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextObject, s: cstring, c: cstring): string =
-  let v_ms = fcQTextObject_trUtf82(s, c)
+  let v_ms = fcQTextObject_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextObject, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextObject_trUtf83(s, c, n)
+  let v_ms = fcQTextObject_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -320,37 +320,37 @@ proc metacall*(self: gen_qtextobject_types.QTextBlockGroup, param1: cint, param2
   fcQTextBlockGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring): string =
-  let v_ms = fcQTextBlockGroup_tr(s)
+  let v_ms = fcQTextBlockGroup_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring): string =
-  let v_ms = fcQTextBlockGroup_trUtf8(s)
+  let v_ms = fcQTextBlockGroup_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQTextBlockGroup_tr2(s, c)
+  let v_ms = fcQTextBlockGroup_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextBlockGroup_tr3(s, c, n)
+  let v_ms = fcQTextBlockGroup_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQTextBlockGroup_trUtf82(s, c)
+  let v_ms = fcQTextBlockGroup_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextBlockGroup_trUtf83(s, c, n)
+  let v_ms = fcQTextBlockGroup_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -391,13 +391,13 @@ proc metacall*(self: gen_qtextobject_types.QTextFrame, param1: cint, param2: cin
   fcQTextFrame_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextobject_types.QTextFrame, s: cstring): string =
-  let v_ms = fcQTextFrame_tr(s)
+  let v_ms = fcQTextFrame_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextFrame, s: cstring): string =
-  let v_ms = fcQTextFrame_trUtf8(s)
+  let v_ms = fcQTextFrame_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -445,25 +445,25 @@ proc endX*(self: gen_qtextobject_types.QTextFrame): gen_qtextobject_types.QTextF
   gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrame_endX(self.h), owned: true)
 
 proc tr*(_: type gen_qtextobject_types.QTextFrame, s: cstring, c: cstring): string =
-  let v_ms = fcQTextFrame_tr2(s, c)
+  let v_ms = fcQTextFrame_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtextobject_types.QTextFrame, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextFrame_tr3(s, c, n)
+  let v_ms = fcQTextFrame_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextFrame, s: cstring, c: cstring): string =
-  let v_ms = fcQTextFrame_trUtf82(s, c)
+  let v_ms = fcQTextFrame_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qtextobject_types.QTextFrame, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTextFrame_trUtf83(s, c, n)
+  let v_ms = fcQTextFrame_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -751,11 +751,11 @@ proc create*(T: type gen_qtextobject_types.QTextFrame,
 
 proc staticMetaObject*(_: type gen_qtextobject_types.QTextFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextFrame_staticMetaObject())
-proc operatorAssign*(self: gen_qtextobject_types.QTextBlockUserData, param1: gen_qtextobject_types.QTextBlockUserData): void =
-  fcQTextBlockUserData_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qtextobject_types.QTextBlockUserData, fromVal: gen_qtextobject_types.QTextBlockUserData): void =
+  fcQTextBlockUserData_operatorAssign(self.h, fromVal.h)
 
-proc operatorAssign*(self: gen_qtextobject_types.QTextBlock, o: gen_qtextobject_types.QTextBlock): void =
-  fcQTextBlock_operatorAssign(self.h, o.h)
+proc operatorAssign*(self: gen_qtextobject_types.QTextBlock, fromVal: gen_qtextobject_types.QTextBlock): void =
+  fcQTextBlock_operatorAssign(self.h, fromVal.h)
 
 proc isValid*(self: gen_qtextobject_types.QTextBlock): bool =
   fcQTextBlock_isValid(self.h)
@@ -875,11 +875,11 @@ proc create*(T: type gen_qtextobject_types.QTextBlock): gen_qtextobject_types.QT
   let tmp = gen_qtextobject_types.QTextBlock(h: fcQTextBlock_new(), owned: true)
   tmp
 proc create*(T: type gen_qtextobject_types.QTextBlock,
-    o: gen_qtextobject_types.QTextBlock): gen_qtextobject_types.QTextBlock =
-  let tmp = gen_qtextobject_types.QTextBlock(h: fcQTextBlock_new2(o.h), owned: true)
+    fromVal: gen_qtextobject_types.QTextBlock): gen_qtextobject_types.QTextBlock =
+  let tmp = gen_qtextobject_types.QTextBlock(h: fcQTextBlock_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qtextobject_types.QTextFragment, o: gen_qtextobject_types.QTextFragment): void =
-  fcQTextFragment_operatorAssign(self.h, o.h)
+proc operatorAssign*(self: gen_qtextobject_types.QTextFragment, fromVal: gen_qtextobject_types.QTextFragment): void =
+  fcQTextFragment_operatorAssign(self.h, fromVal.h)
 
 proc isValid*(self: gen_qtextobject_types.QTextFragment): bool =
   fcQTextFragment_isValid(self.h)
@@ -924,7 +924,7 @@ proc glyphRuns*(self: gen_qtextobject_types.QTextFragment): seq[gen_qglyphrun_ty
   vx_ret
 
 proc glyphRuns*(self: gen_qtextobject_types.QTextFragment, fromVal: cint): seq[gen_qglyphrun_types.QGlyphRun] =
-  var v_ma = fcQTextFragment_glyphRunsWithFrom(self.h, fromVal)
+  var v_ma = fcQTextFragment_glyphRunsFrom(self.h, fromVal)
   var vx_ret = newSeq[gen_qglyphrun_types.QGlyphRun](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -933,7 +933,7 @@ proc glyphRuns*(self: gen_qtextobject_types.QTextFragment, fromVal: cint): seq[g
   vx_ret
 
 proc glyphRuns*(self: gen_qtextobject_types.QTextFragment, fromVal: cint, length: cint): seq[gen_qglyphrun_types.QGlyphRun] =
-  var v_ma = fcQTextFragment_glyphRuns2(self.h, fromVal, length)
+  var v_ma = fcQTextFragment_glyphRunsFromLength(self.h, fromVal, length)
   var vx_ret = newSeq[gen_qglyphrun_types.QGlyphRun](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -945,11 +945,11 @@ proc create*(T: type gen_qtextobject_types.QTextFragment): gen_qtextobject_types
   let tmp = gen_qtextobject_types.QTextFragment(h: fcQTextFragment_new(), owned: true)
   tmp
 proc create*(T: type gen_qtextobject_types.QTextFragment,
-    o: gen_qtextobject_types.QTextFragment): gen_qtextobject_types.QTextFragment =
-  let tmp = gen_qtextobject_types.QTextFragment(h: fcQTextFragment_new2(o.h), owned: true)
+    fromVal: gen_qtextobject_types.QTextFragment): gen_qtextobject_types.QTextFragment =
+  let tmp = gen_qtextobject_types.QTextFragment(h: fcQTextFragment_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qtextobject_types.QTextFrameiterator, o: gen_qtextobject_types.QTextFrameiterator): void =
-  fcQTextFrameiterator_operatorAssign(self.h, o.h)
+proc operatorAssign*(self: gen_qtextobject_types.QTextFrameiterator, fromVal: gen_qtextobject_types.QTextFrameiterator): void =
+  fcQTextFrameiterator_operatorAssign(self.h, fromVal.h)
 
 proc parentFrame*(self: gen_qtextobject_types.QTextFrameiterator): gen_qtextobject_types.QTextFrame =
   gen_qtextobject_types.QTextFrame(h: fcQTextFrameiterator_parentFrame(self.h), owned: false)
@@ -973,23 +973,23 @@ proc operatorPlusPlus*(self: gen_qtextobject_types.QTextFrameiterator): gen_qtex
   gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qtextobject_types.QTextFrameiterator, param1: cint): gen_qtextobject_types.QTextFrameiterator =
-  gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
+  gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_operatorPlusPlusInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qtextobject_types.QTextFrameiterator): gen_qtextobject_types.QTextFrameiterator =
   gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qtextobject_types.QTextFrameiterator, param1: cint): gen_qtextobject_types.QTextFrameiterator =
-  gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_operatorMinusMinusWithInt(self.h, param1), owned: true)
+  gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_operatorMinusMinusInt(self.h, param1), owned: true)
 
 proc create*(T: type gen_qtextobject_types.QTextFrameiterator): gen_qtextobject_types.QTextFrameiterator =
   let tmp = gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_new(), owned: true)
   tmp
 proc create*(T: type gen_qtextobject_types.QTextFrameiterator,
-    o: gen_qtextobject_types.QTextFrameiterator): gen_qtextobject_types.QTextFrameiterator =
-  let tmp = gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_new2(o.h), owned: true)
+    fromVal: gen_qtextobject_types.QTextFrameiterator): gen_qtextobject_types.QTextFrameiterator =
+  let tmp = gen_qtextobject_types.QTextFrameiterator(h: fcQTextFrameiterator_new2(fromVal.h), owned: true)
   tmp
-proc operatorAssign*(self: gen_qtextobject_types.QTextBlockiterator, o: gen_qtextobject_types.QTextBlockiterator): void =
-  fcQTextBlockiterator_operatorAssign(self.h, o.h)
+proc operatorAssign*(self: gen_qtextobject_types.QTextBlockiterator, fromVal: gen_qtextobject_types.QTextBlockiterator): void =
+  fcQTextBlockiterator_operatorAssign(self.h, fromVal.h)
 
 proc fragment*(self: gen_qtextobject_types.QTextBlockiterator): gen_qtextobject_types.QTextFragment =
   gen_qtextobject_types.QTextFragment(h: fcQTextBlockiterator_fragment(self.h), owned: true)
@@ -1007,18 +1007,18 @@ proc operatorPlusPlus*(self: gen_qtextobject_types.QTextBlockiterator): gen_qtex
   gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qtextobject_types.QTextBlockiterator, param1: cint): gen_qtextobject_types.QTextBlockiterator =
-  gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
+  gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_operatorPlusPlusInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qtextobject_types.QTextBlockiterator): gen_qtextobject_types.QTextBlockiterator =
   gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qtextobject_types.QTextBlockiterator, param1: cint): gen_qtextobject_types.QTextBlockiterator =
-  gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_operatorMinusMinusWithInt(self.h, param1), owned: true)
+  gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_operatorMinusMinusInt(self.h, param1), owned: true)
 
 proc create*(T: type gen_qtextobject_types.QTextBlockiterator): gen_qtextobject_types.QTextBlockiterator =
   let tmp = gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_new(), owned: true)
   tmp
 proc create*(T: type gen_qtextobject_types.QTextBlockiterator,
-    o: gen_qtextobject_types.QTextBlockiterator): gen_qtextobject_types.QTextBlockiterator =
-  let tmp = gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_new2(o.h), owned: true)
+    fromVal: gen_qtextobject_types.QTextBlockiterator): gen_qtextobject_types.QTextBlockiterator =
+  let tmp = gen_qtextobject_types.QTextBlockiterator(h: fcQTextBlockiterator_new2(fromVal.h), owned: true)
   tmp

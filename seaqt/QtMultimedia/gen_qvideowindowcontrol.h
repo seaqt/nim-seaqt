@@ -36,8 +36,8 @@ void QVideoWindowControl_virtbase(QVideoWindowControl* src, QMediaControl** outp
 QMetaObject* QVideoWindowControl_metaObject(const QVideoWindowControl* self);
 void* QVideoWindowControl_metacast(QVideoWindowControl* self, const char* param1);
 int QVideoWindowControl_metacall(QVideoWindowControl* self, int param1, int param2, void** param3);
-struct seaqt_string QVideoWindowControl_tr(const char* s);
-struct seaqt_string QVideoWindowControl_trUtf8(const char* s);
+struct seaqt_string QVideoWindowControl_tr_s(const char* s);
+struct seaqt_string QVideoWindowControl_trUtf8_s(const char* s);
 uintptr_t QVideoWindowControl_winId(const QVideoWindowControl* self);
 void QVideoWindowControl_setWinId(QVideoWindowControl* self, uintptr_t id);
 QRect* QVideoWindowControl_displayRect(const QVideoWindowControl* self);
@@ -68,10 +68,10 @@ void QVideoWindowControl_saturationChanged(QVideoWindowControl* self, int satura
 void QVideoWindowControl_connect_saturationChanged(QVideoWindowControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QVideoWindowControl_nativeSizeChanged(QVideoWindowControl* self);
 void QVideoWindowControl_connect_nativeSizeChanged(QVideoWindowControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QVideoWindowControl_tr2(const char* s, const char* c);
-struct seaqt_string QVideoWindowControl_tr3(const char* s, const char* c, int n);
-struct seaqt_string QVideoWindowControl_trUtf82(const char* s, const char* c);
-struct seaqt_string QVideoWindowControl_trUtf83(const char* s, const char* c, int n);
+struct seaqt_string QVideoWindowControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QVideoWindowControl_tr_s_c_n(const char* s, const char* c, int n);
+struct seaqt_string QVideoWindowControl_trUtf8_s_c(const char* s, const char* c);
+struct seaqt_string QVideoWindowControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QVideoWindowControl_staticMetaObject();
 void QVideoWindowControl_delete(QVideoWindowControl* self);

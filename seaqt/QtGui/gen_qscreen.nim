@@ -63,8 +63,8 @@ type cQScreen*{.exportc: "QScreen", incompleteStruct.} = object
 proc fcQScreen_metaObject(self: pointer): pointer {.importc: "QScreen_metaObject".}
 proc fcQScreen_metacast(self: pointer, param1: cstring): pointer {.importc: "QScreen_metacast".}
 proc fcQScreen_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScreen_metacall".}
-proc fcQScreen_tr(s: cstring): struct_seaqt_string {.importc: "QScreen_tr".}
-proc fcQScreen_trUtf8(s: cstring): struct_seaqt_string {.importc: "QScreen_trUtf8".}
+proc fcQScreen_trS(s: cstring): struct_seaqt_string {.importc: "QScreen_tr_s".}
+proc fcQScreen_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QScreen_trUtf8_s".}
 proc fcQScreen_name(self: pointer): struct_seaqt_string {.importc: "QScreen_name".}
 proc fcQScreen_manufacturer(self: pointer): struct_seaqt_string {.importc: "QScreen_manufacturer".}
 proc fcQScreen_model(self: pointer): struct_seaqt_string {.importc: "QScreen_model".}
@@ -98,7 +98,7 @@ proc fcQScreen_transformBetween(self: pointer, a: cint, b: cint, target: pointer
 proc fcQScreen_mapBetween(self: pointer, a: cint, b: cint, rect: pointer): pointer {.importc: "QScreen_mapBetween".}
 proc fcQScreen_isPortrait(self: pointer, orientation: cint): bool {.importc: "QScreen_isPortrait".}
 proc fcQScreen_isLandscape(self: pointer, orientation: cint): bool {.importc: "QScreen_isLandscape".}
-proc fcQScreen_grabWindow(self: pointer, window: uint): pointer {.importc: "QScreen_grabWindow".}
+proc fcQScreen_grabWindowWindow(self: pointer, window: uint): pointer {.importc: "QScreen_grabWindow_window".}
 proc fcQScreen_refreshRate(self: pointer): float64 {.importc: "QScreen_refreshRate".}
 proc fcQScreen_geometryChanged(self: pointer, geometry: pointer): void {.importc: "QScreen_geometryChanged".}
 proc fcQScreen_connect_geometryChanged(self: pointer, slot: int, callback: proc (slot: int, geometry: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QScreen_connect_geometryChanged".}
@@ -118,14 +118,14 @@ proc fcQScreen_orientationChanged(self: pointer, orientation: cint): void {.impo
 proc fcQScreen_connect_orientationChanged(self: pointer, slot: int, callback: proc (slot: int, orientation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QScreen_connect_orientationChanged".}
 proc fcQScreen_refreshRateChanged(self: pointer, refreshRate: float64): void {.importc: "QScreen_refreshRateChanged".}
 proc fcQScreen_connect_refreshRateChanged(self: pointer, slot: int, callback: proc (slot: int, refreshRate: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QScreen_connect_refreshRateChanged".}
-proc fcQScreen_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScreen_tr2".}
-proc fcQScreen_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScreen_tr3".}
-proc fcQScreen_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScreen_trUtf82".}
-proc fcQScreen_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScreen_trUtf83".}
-proc fcQScreen_grabWindow2(self: pointer, window: uint, x: cint): pointer {.importc: "QScreen_grabWindow2".}
-proc fcQScreen_grabWindow3(self: pointer, window: uint, x: cint, y: cint): pointer {.importc: "QScreen_grabWindow3".}
-proc fcQScreen_grabWindow4(self: pointer, window: uint, x: cint, y: cint, w: cint): pointer {.importc: "QScreen_grabWindow4".}
-proc fcQScreen_grabWindow5(self: pointer, window: uint, x: cint, y: cint, w: cint, h: cint): pointer {.importc: "QScreen_grabWindow5".}
+proc fcQScreen_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScreen_tr_s_c".}
+proc fcQScreen_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScreen_tr_s_c_n".}
+proc fcQScreen_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QScreen_trUtf8_s_c".}
+proc fcQScreen_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QScreen_trUtf8_s_c_n".}
+proc fcQScreen_grabWindowWindowX(self: pointer, window: uint, x: cint): pointer {.importc: "QScreen_grabWindow_window_x".}
+proc fcQScreen_grabWindowWindowXY(self: pointer, window: uint, x: cint, y: cint): pointer {.importc: "QScreen_grabWindow_window_x_y".}
+proc fcQScreen_grabWindowWindowXYW(self: pointer, window: uint, x: cint, y: cint, w: cint): pointer {.importc: "QScreen_grabWindow_window_x_y_w".}
+proc fcQScreen_grabWindowWindowXYWH(self: pointer, window: uint, x: cint, y: cint, w: cint, h: cint): pointer {.importc: "QScreen_grabWindow_window_x_y_w_h".}
 proc fcQScreen_protectedbase_sender(self: pointer): pointer {.importc: "QScreen_protectedbase_sender".}
 proc fcQScreen_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QScreen_protectedbase_senderSignalIndex".}
 proc fcQScreen_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScreen_protectedbase_receivers".}
@@ -142,13 +142,13 @@ proc metacall*(self: gen_qscreen_types.QScreen, param1: cint, param2: cint, para
   fcQScreen_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscreen_types.QScreen, s: cstring): string =
-  let v_ms = fcQScreen_tr(s)
+  let v_ms = fcQScreen_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscreen_types.QScreen, s: cstring): string =
-  let v_ms = fcQScreen_trUtf8(s)
+  let v_ms = fcQScreen_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -271,7 +271,7 @@ proc isLandscape*(self: gen_qscreen_types.QScreen, orientation: cint): bool =
   fcQScreen_isLandscape(self.h, cint(orientation))
 
 proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindow(self.h, window), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindowWindow(self.h, window), owned: true)
 
 proc refreshRate*(self: gen_qscreen_types.QScreen): float64 =
   fcQScreen_refreshRate(self.h)
@@ -457,40 +457,40 @@ proc onRefreshRateChanged*(self: gen_qscreen_types.QScreen, slot: QScreenrefresh
   fcQScreen_connect_refreshRateChanged(self.h, cast[int](addr tmp[]), fcQScreen_slot_callback_refreshRateChanged, fcQScreen_slot_callback_refreshRateChanged_release)
 
 proc tr*(_: type gen_qscreen_types.QScreen, s: cstring, c: cstring): string =
-  let v_ms = fcQScreen_tr2(s, c)
+  let v_ms = fcQScreen_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qscreen_types.QScreen, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScreen_tr3(s, c, n)
+  let v_ms = fcQScreen_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscreen_types.QScreen, s: cstring, c: cstring): string =
-  let v_ms = fcQScreen_trUtf82(s, c)
+  let v_ms = fcQScreen_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qscreen_types.QScreen, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQScreen_trUtf83(s, c, n)
+  let v_ms = fcQScreen_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint, x: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindow2(self.h, window, x), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindowWindowX(self.h, window, x), owned: true)
 
 proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint, x: cint, y: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindow3(self.h, window, x, y), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindowWindowXY(self.h, window, x, y), owned: true)
 
 proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint, x: cint, y: cint, w: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindow4(self.h, window, x, y, w), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindowWindowXYW(self.h, window, x, y, w), owned: true)
 
 proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint, x: cint, y: cint, w: cint, h: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindow5(self.h, window, x, y, w, h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindowWindowXYWH(self.h, window, x, y, w, h), owned: true)
 
 proc sender*(self: gen_qscreen_types.QScreen): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQScreen_protectedbase_sender(self.h), owned: false)

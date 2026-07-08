@@ -21,32 +21,32 @@ QVector2D* QVector2D_new() {
 	return new (std::nothrow) QVector2D();
 }
 
-QVector2D* QVector2D_new2(int param1) {
+QVector2D* QVector2D_new_Qt_Initialization(int param1) {
 	return new (std::nothrow) QVector2D(static_cast<Qt::Initialization>(param1));
 }
 
-QVector2D* QVector2D_new3(float xpos, float ypos) {
+QVector2D* QVector2D_new_float_float(float xpos, float ypos) {
 	return new (std::nothrow) QVector2D(static_cast<float>(xpos), static_cast<float>(ypos));
 }
 
-QVector2D* QVector2D_new4(QPoint* point) {
+QVector2D* QVector2D_new_QPoint(QPoint* point) {
 	return new (std::nothrow) QVector2D(*point);
 }
 
-QVector2D* QVector2D_new5(QPointF* point) {
+QVector2D* QVector2D_new_QPointF(QPointF* point) {
 	return new (std::nothrow) QVector2D(*point);
 }
 
-QVector2D* QVector2D_new6(QVector3D* vector) {
+QVector2D* QVector2D_new_QVector3D(QVector3D* vector) {
 	return new (std::nothrow) QVector2D(*vector);
 }
 
-QVector2D* QVector2D_new7(QVector4D* vector) {
+QVector2D* QVector2D_new_QVector4D(QVector4D* vector) {
 	return new (std::nothrow) QVector2D(*vector);
 }
 
-QVector2D* QVector2D_new8(QVector2D* param1) {
-	return new (std::nothrow) QVector2D(*param1);
+QVector2D* QVector2D_new_QVector2D(QVector2D* from) {
+	return new (std::nothrow) QVector2D(*from);
 }
 
 bool QVector2D_isNull(const QVector2D* self) {
@@ -109,25 +109,25 @@ QVector2D* QVector2D_operatorMinusAssign(QVector2D* self, QVector2D* vector) {
 	return &_ret;
 }
 
-QVector2D* QVector2D_operatorMultiplyAssign(QVector2D* self, float factor) {
+QVector2D* QVector2D_operatorMultiplyAssign_factor(QVector2D* self, float factor) {
 	QVector2D& _ret = self->operator*=(static_cast<float>(factor));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector2D* QVector2D_operatorMultiplyAssignWithVector(QVector2D* self, QVector2D* vector) {
+QVector2D* QVector2D_operatorMultiplyAssign_vector(QVector2D* self, QVector2D* vector) {
 	QVector2D& _ret = self->operator*=(*vector);
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector2D* QVector2D_operatorDivideAssign(QVector2D* self, float divisor) {
+QVector2D* QVector2D_operatorDivideAssign_divisor(QVector2D* self, float divisor) {
 	QVector2D& _ret = self->operator/=(static_cast<float>(divisor));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
-QVector2D* QVector2D_operatorDivideAssignWithVector(QVector2D* self, QVector2D* vector) {
+QVector2D* QVector2D_operatorDivideAssign_vector(QVector2D* self, QVector2D* vector) {
 	QVector2D& _ret = self->operator/=(*vector);
 	// Cast returned reference into pointer
 	return &_ret;

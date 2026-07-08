@@ -85,8 +85,8 @@ type cQCameraImageCapture*{.exportc: "QCameraImageCapture", incompleteStruct.} =
 proc fcQCameraImageCapture_metaObject(self: pointer): pointer {.importc: "QCameraImageCapture_metaObject".}
 proc fcQCameraImageCapture_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraImageCapture_metacast".}
 proc fcQCameraImageCapture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraImageCapture_metacall".}
-proc fcQCameraImageCapture_tr(s: cstring): struct_seaqt_string {.importc: "QCameraImageCapture_tr".}
-proc fcQCameraImageCapture_trUtf8(s: cstring): struct_seaqt_string {.importc: "QCameraImageCapture_trUtf8".}
+proc fcQCameraImageCapture_trS(s: cstring): struct_seaqt_string {.importc: "QCameraImageCapture_tr_s".}
+proc fcQCameraImageCapture_trUtf8S(s: cstring): struct_seaqt_string {.importc: "QCameraImageCapture_trUtf8_s".}
 proc fcQCameraImageCapture_isAvailable(self: pointer): bool {.importc: "QCameraImageCapture_isAvailable".}
 proc fcQCameraImageCapture_availability(self: pointer): cint {.importc: "QCameraImageCapture_availability".}
 proc fcQCameraImageCapture_mediaObject(self: pointer): pointer {.importc: "QCameraImageCapture_mediaObject".}
@@ -106,8 +106,8 @@ proc fcQCameraImageCapture_captureDestination(self: pointer): cint {.importc: "Q
 proc fcQCameraImageCapture_setCaptureDestination(self: pointer, destination: cint): void {.importc: "QCameraImageCapture_setCaptureDestination".}
 proc fcQCameraImageCapture_capture(self: pointer): cint {.importc: "QCameraImageCapture_capture".}
 proc fcQCameraImageCapture_cancelCapture(self: pointer): void {.importc: "QCameraImageCapture_cancelCapture".}
-proc fcQCameraImageCapture_error2(self: pointer, id: cint, error: cint, errorString: struct_seaqt_string): void {.importc: "QCameraImageCapture_error2".}
-proc fcQCameraImageCapture_connect_error2(self: pointer, slot: int, callback: proc (slot: int, id: cint, error: cint, errorString: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraImageCapture_connect_error2".}
+proc fcQCameraImageCapture_errorIdErrorErrorString(self: pointer, id: cint, error: cint, errorString: struct_seaqt_string): void {.importc: "QCameraImageCapture_error_id_error_errorString".}
+proc fcQCameraImageCapture_connect_errorIdErrorErrorString(self: pointer, slot: int, callback: proc (slot: int, id: cint, error: cint, errorString: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraImageCapture_connect_error_id_error_errorString".}
 proc fcQCameraImageCapture_readyForCaptureChanged(self: pointer, ready: bool): void {.importc: "QCameraImageCapture_readyForCaptureChanged".}
 proc fcQCameraImageCapture_connect_readyForCaptureChanged(self: pointer, slot: int, callback: proc (slot: int, ready: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraImageCapture_connect_readyForCaptureChanged".}
 proc fcQCameraImageCapture_bufferFormatChanged(self: pointer, format: cint): void {.importc: "QCameraImageCapture_bufferFormatChanged".}
@@ -124,13 +124,13 @@ proc fcQCameraImageCapture_imageAvailable(self: pointer, id: cint, frame: pointe
 proc fcQCameraImageCapture_connect_imageAvailable(self: pointer, slot: int, callback: proc (slot: int, id: cint, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraImageCapture_connect_imageAvailable".}
 proc fcQCameraImageCapture_imageSaved(self: pointer, id: cint, fileName: struct_seaqt_string): void {.importc: "QCameraImageCapture_imageSaved".}
 proc fcQCameraImageCapture_connect_imageSaved(self: pointer, slot: int, callback: proc (slot: int, id: cint, fileName: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraImageCapture_connect_imageSaved".}
-proc fcQCameraImageCapture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageCapture_tr2".}
-proc fcQCameraImageCapture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageCapture_tr3".}
-proc fcQCameraImageCapture_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageCapture_trUtf82".}
-proc fcQCameraImageCapture_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageCapture_trUtf83".}
-proc fcQCameraImageCapture_supportedResolutionsWithSettings(self: pointer, settings: pointer): struct_seaqt_array {.importc: "QCameraImageCapture_supportedResolutionsWithSettings".}
-proc fcQCameraImageCapture_supportedResolutions2(self: pointer, settings: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraImageCapture_supportedResolutions2".}
-proc fcQCameraImageCapture_captureWithLocation(self: pointer, location: struct_seaqt_string): cint {.importc: "QCameraImageCapture_captureWithLocation".}
+proc fcQCameraImageCapture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageCapture_tr_s_c".}
+proc fcQCameraImageCapture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageCapture_tr_s_c_n".}
+proc fcQCameraImageCapture_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QCameraImageCapture_trUtf8_s_c".}
+proc fcQCameraImageCapture_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QCameraImageCapture_trUtf8_s_c_n".}
+proc fcQCameraImageCapture_supportedResolutionsSettings(self: pointer, settings: pointer): struct_seaqt_array {.importc: "QCameraImageCapture_supportedResolutions_settings".}
+proc fcQCameraImageCapture_supportedResolutionsSettingsContinuous(self: pointer, settings: pointer, continuous: ptr bool): struct_seaqt_array {.importc: "QCameraImageCapture_supportedResolutions_settings_continuous".}
+proc fcQCameraImageCapture_captureLocation(self: pointer, location: struct_seaqt_string): cint {.importc: "QCameraImageCapture_capture_location".}
 proc fcQCameraImageCapture_vdata(self: pointer): ptr pointer {.importc: "QCameraImageCapture_vdata".}
 proc fvdata_cQCameraImageCapture(self: pointer): pointer {.importc: "vdata_QCameraImageCapture".}
 
@@ -164,8 +164,8 @@ proc fcQCameraImageCapture_protectedbase_sender(self: pointer): pointer {.import
 proc fcQCameraImageCapture_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraImageCapture_protectedbase_senderSignalIndex".}
 proc fcQCameraImageCapture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraImageCapture_protectedbase_receivers".}
 proc fcQCameraImageCapture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraImageCapture_protectedbase_isSignalConnected".}
-proc fcQCameraImageCapture_new(vtbl: pointer, vdata: csize_t, mediaObject: pointer): ptr cQCameraImageCapture {.importc: "QCameraImageCapture_new".}
-proc fcQCameraImageCapture_new2(vtbl: pointer, vdata: csize_t, mediaObject: pointer, parent: pointer): ptr cQCameraImageCapture {.importc: "QCameraImageCapture_new2".}
+proc fcQCameraImageCapture_new(vtbl: pointer, vdata: csize_t, mediaObject: pointer): ptr cQCameraImageCapture {.importc: "QCameraImageCapture_new_mediaObject".}
+proc fcQCameraImageCapture_new2(vtbl: pointer, vdata: csize_t, mediaObject: pointer, parent: pointer): ptr cQCameraImageCapture {.importc: "QCameraImageCapture_new_mediaObject_parent".}
 proc fcQCameraImageCapture_staticMetaObject(): pointer {.importc: "QCameraImageCapture_staticMetaObject".}
 
 proc metaObject*(self: gen_qcameraimagecapture_types.QCameraImageCapture): gen_qobjectdefs_types.QMetaObject =
@@ -178,13 +178,13 @@ proc metacall*(self: gen_qcameraimagecapture_types.QCameraImageCapture, param1: 
   fcQCameraImageCapture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraimagecapture_types.QCameraImageCapture, s: cstring): string =
-  let v_ms = fcQCameraImageCapture_tr(s)
+  let v_ms = fcQCameraImageCapture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimagecapture_types.QCameraImageCapture, s: cstring): string =
-  let v_ms = fcQCameraImageCapture_trUtf8(s)
+  let v_ms = fcQCameraImageCapture_trUtf8S(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -274,11 +274,11 @@ proc cancelCapture*(self: gen_qcameraimagecapture_types.QCameraImageCapture): vo
   fcQCameraImageCapture_cancelCapture(self.h)
 
 proc error*(self: gen_qcameraimagecapture_types.QCameraImageCapture, id: cint, error: cint, errorString: openArray[char]): void =
-  fcQCameraImageCapture_error2(self.h, id, cint(error), struct_seaqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
+  fcQCameraImageCapture_errorIdErrorErrorString(self.h, id, cint(error), struct_seaqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
-type QCameraImageCaptureerror2Slot* = proc(id: cint, error: cint, errorString: openArray[char])
-proc fcQCameraImageCapture_slot_callback_error2(slot: int, id: cint, error: cint, errorString: struct_seaqt_string) {.cdecl.} =
-  let nimfunc = cast[ptr QCameraImageCaptureerror2Slot](cast[pointer](slot))
+type QCameraImageCaptureerrorIdErrorErrorStringSlot* = proc(id: cint, error: cint, errorString: openArray[char])
+proc fcQCameraImageCapture_slot_callback_errorIdErrorErrorString(slot: int, id: cint, error: cint, errorString: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QCameraImageCaptureerrorIdErrorErrorStringSlot](cast[pointer](slot))
   let slotval1 = id
 
   let slotval2 = cint(error)
@@ -290,15 +290,15 @@ proc fcQCameraImageCapture_slot_callback_error2(slot: int, id: cint, error: cint
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc fcQCameraImageCapture_slot_callback_error2_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QCameraImageCaptureerror2Slot](cast[pointer](slot))
+proc fcQCameraImageCapture_slot_callback_errorIdErrorErrorString_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraImageCaptureerrorIdErrorErrorStringSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onError*(self: gen_qcameraimagecapture_types.QCameraImageCapture, slot: QCameraImageCaptureerror2Slot) =
-  var tmp = new QCameraImageCaptureerror2Slot
+proc onError*(self: gen_qcameraimagecapture_types.QCameraImageCapture, slot: QCameraImageCaptureerrorIdErrorErrorStringSlot) =
+  var tmp = new QCameraImageCaptureerrorIdErrorErrorStringSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraImageCapture_connect_error2(self.h, cast[int](addr tmp[]), fcQCameraImageCapture_slot_callback_error2, fcQCameraImageCapture_slot_callback_error2_release)
+  fcQCameraImageCapture_connect_errorIdErrorErrorString(self.h, cast[int](addr tmp[]), fcQCameraImageCapture_slot_callback_errorIdErrorErrorString, fcQCameraImageCapture_slot_callback_errorIdErrorErrorString_release)
 
 proc readyForCaptureChanged*(self: gen_qcameraimagecapture_types.QCameraImageCapture, ready: bool): void =
   fcQCameraImageCapture_readyForCaptureChanged(self.h, ready)
@@ -477,31 +477,31 @@ proc onImageSaved*(self: gen_qcameraimagecapture_types.QCameraImageCapture, slot
   fcQCameraImageCapture_connect_imageSaved(self.h, cast[int](addr tmp[]), fcQCameraImageCapture_slot_callback_imageSaved, fcQCameraImageCapture_slot_callback_imageSaved_release)
 
 proc tr*(_: type gen_qcameraimagecapture_types.QCameraImageCapture, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraImageCapture_tr2(s, c)
+  let v_ms = fcQCameraImageCapture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qcameraimagecapture_types.QCameraImageCapture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraImageCapture_tr3(s, c, n)
+  let v_ms = fcQCameraImageCapture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimagecapture_types.QCameraImageCapture, s: cstring, c: cstring): string =
-  let v_ms = fcQCameraImageCapture_trUtf82(s, c)
+  let v_ms = fcQCameraImageCapture_trUtf8SC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc trUtf8*(_: type gen_qcameraimagecapture_types.QCameraImageCapture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQCameraImageCapture_trUtf83(s, c, n)
+  let v_ms = fcQCameraImageCapture_trUtf8SCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc supportedResolutions*(self: gen_qcameraimagecapture_types.QCameraImageCapture, settings: gen_qmediaencodersettings_types.QImageEncoderSettings): seq[gen_qsize_types.QSize] =
-  var v_ma = fcQCameraImageCapture_supportedResolutionsWithSettings(self.h, settings.h)
+  var v_ma = fcQCameraImageCapture_supportedResolutionsSettings(self.h, settings.h)
   var vx_ret = newSeq[gen_qsize_types.QSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -510,7 +510,7 @@ proc supportedResolutions*(self: gen_qcameraimagecapture_types.QCameraImageCaptu
   vx_ret
 
 proc supportedResolutions*(self: gen_qcameraimagecapture_types.QCameraImageCapture, settings: gen_qmediaencodersettings_types.QImageEncoderSettings, continuous: ptr bool): seq[gen_qsize_types.QSize] =
-  var v_ma = fcQCameraImageCapture_supportedResolutions2(self.h, settings.h, continuous)
+  var v_ma = fcQCameraImageCapture_supportedResolutionsSettingsContinuous(self.h, settings.h, continuous)
   var vx_ret = newSeq[gen_qsize_types.QSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -519,7 +519,7 @@ proc supportedResolutions*(self: gen_qcameraimagecapture_types.QCameraImageCaptu
   vx_ret
 
 proc capture*(self: gen_qcameraimagecapture_types.QCameraImageCapture, location: openArray[char]): cint =
-  fcQCameraImageCapture_captureWithLocation(self.h, struct_seaqt_string(data: if len(location) > 0: addr location[0] else: nil, len: csize_t(len(location))))
+  fcQCameraImageCapture_captureLocation(self.h, struct_seaqt_string(data: if len(location) > 0: addr location[0] else: nil, len: csize_t(len(location))))
 
 type QCameraImageCapturemetaObjectProc* = proc(self: QCameraImageCapture): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QCameraImageCapturemetacastProc* = proc(self: QCameraImageCapture, param1: cstring): pointer {.raises: [], gcsafe.}

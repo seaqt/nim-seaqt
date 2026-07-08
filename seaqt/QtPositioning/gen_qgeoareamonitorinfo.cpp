@@ -23,17 +23,17 @@ QGeoAreaMonitorInfo* QGeoAreaMonitorInfo_new() {
 	return new (std::nothrow) QGeoAreaMonitorInfo();
 }
 
-QGeoAreaMonitorInfo* QGeoAreaMonitorInfo_new2(QGeoAreaMonitorInfo* other) {
-	return new (std::nothrow) QGeoAreaMonitorInfo(*other);
+QGeoAreaMonitorInfo* QGeoAreaMonitorInfo_new_from(QGeoAreaMonitorInfo* from) {
+	return new (std::nothrow) QGeoAreaMonitorInfo(*from);
 }
 
-QGeoAreaMonitorInfo* QGeoAreaMonitorInfo_new3(struct seaqt_string name) {
+QGeoAreaMonitorInfo* QGeoAreaMonitorInfo_new_name(struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return new (std::nothrow) QGeoAreaMonitorInfo(name_QString);
 }
 
-void QGeoAreaMonitorInfo_operatorAssign(QGeoAreaMonitorInfo* self, QGeoAreaMonitorInfo* other) {
-	self->operator=(*other);
+void QGeoAreaMonitorInfo_operatorAssign(QGeoAreaMonitorInfo* self, QGeoAreaMonitorInfo* from) {
+	self->operator=(*from);
 }
 
 bool QGeoAreaMonitorInfo_operatorEqual(const QGeoAreaMonitorInfo* self, QGeoAreaMonitorInfo* other) {
