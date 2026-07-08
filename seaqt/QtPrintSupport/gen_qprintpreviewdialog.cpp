@@ -1166,43 +1166,43 @@ void QPrintPreviewDialog_virtualbase_disconnectNotify(VirtualQPrintPreviewDialog
 }
 
 void QPrintPreviewDialog_protectedbase_adjustPosition(VirtualQPrintPreviewDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QPrintPreviewDialog::adjustPosition(param1);
 }
 
 void QPrintPreviewDialog_protectedbase_updateMicroFocus(VirtualQPrintPreviewDialog* self) {
-	self->updateMicroFocus();
+	self->QPrintPreviewDialog::updateMicroFocus();
 }
 
 void QPrintPreviewDialog_protectedbase_create(VirtualQPrintPreviewDialog* self) {
-	self->create();
+	self->QPrintPreviewDialog::create();
 }
 
 void QPrintPreviewDialog_protectedbase_destroy(VirtualQPrintPreviewDialog* self) {
-	self->destroy();
+	self->QPrintPreviewDialog::destroy();
 }
 
 bool QPrintPreviewDialog_protectedbase_focusNextChild(VirtualQPrintPreviewDialog* self) {
-	return self->focusNextChild();
+	return self->QPrintPreviewDialog::focusNextChild();
 }
 
 bool QPrintPreviewDialog_protectedbase_focusPreviousChild(VirtualQPrintPreviewDialog* self) {
-	return self->focusPreviousChild();
+	return self->QPrintPreviewDialog::focusPreviousChild();
 }
 
 QObject* QPrintPreviewDialog_protectedbase_sender(const VirtualQPrintPreviewDialog* self) {
-	return self->sender();
+	return self->QPrintPreviewDialog::sender();
 }
 
 int QPrintPreviewDialog_protectedbase_senderSignalIndex(const VirtualQPrintPreviewDialog* self) {
-	return self->senderSignalIndex();
+	return self->QPrintPreviewDialog::senderSignalIndex();
 }
 
 int QPrintPreviewDialog_protectedbase_receivers(const VirtualQPrintPreviewDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPrintPreviewDialog::receivers(signal);
 }
 
 bool QPrintPreviewDialog_protectedbase_isSignalConnected(const VirtualQPrintPreviewDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPrintPreviewDialog::isSignalConnected(*signal);
 }
 
 void QPrintPreviewDialog_delete(QPrintPreviewDialog* self) {

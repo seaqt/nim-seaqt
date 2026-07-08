@@ -567,23 +567,23 @@ void QTextFrame_virtualbase_disconnectNotify(VirtualQTextFrame* self, QMetaMetho
 }
 
 void QTextFrame_protectedbase_setFormat(VirtualQTextFrame* self, QTextFormat* format) {
-	self->setFormat(*format);
+	self->QTextFrame::setFormat(*format);
 }
 
 QObject* QTextFrame_protectedbase_sender(const VirtualQTextFrame* self) {
-	return self->sender();
+	return self->QTextFrame::sender();
 }
 
 int QTextFrame_protectedbase_senderSignalIndex(const VirtualQTextFrame* self) {
-	return self->senderSignalIndex();
+	return self->QTextFrame::senderSignalIndex();
 }
 
 int QTextFrame_protectedbase_receivers(const VirtualQTextFrame* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTextFrame::receivers(signal);
 }
 
 bool QTextFrame_protectedbase_isSignalConnected(const VirtualQTextFrame* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTextFrame::isSignalConnected(*signal);
 }
 
 void QTextFrame_delete(QTextFrame* self) {

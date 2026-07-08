@@ -352,19 +352,19 @@ void QVideoProbe_virtualbase_disconnectNotify(VirtualQVideoProbe* self, QMetaMet
 }
 
 QObject* QVideoProbe_protectedbase_sender(const VirtualQVideoProbe* self) {
-	return self->sender();
+	return self->QVideoProbe::sender();
 }
 
 int QVideoProbe_protectedbase_senderSignalIndex(const VirtualQVideoProbe* self) {
-	return self->senderSignalIndex();
+	return self->QVideoProbe::senderSignalIndex();
 }
 
 int QVideoProbe_protectedbase_receivers(const VirtualQVideoProbe* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QVideoProbe::receivers(signal);
 }
 
 bool QVideoProbe_protectedbase_isSignalConnected(const VirtualQVideoProbe* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QVideoProbe::isSignalConnected(*signal);
 }
 
 void QVideoProbe_delete(QVideoProbe* self) {

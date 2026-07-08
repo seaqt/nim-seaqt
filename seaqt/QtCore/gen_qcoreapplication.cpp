@@ -703,19 +703,19 @@ void QCoreApplication_virtualbase_disconnectNotify(VirtualQCoreApplication* self
 }
 
 QObject* QCoreApplication_protectedbase_sender(const VirtualQCoreApplication* self) {
-	return self->sender();
+	return self->QCoreApplication::sender();
 }
 
 int QCoreApplication_protectedbase_senderSignalIndex(const VirtualQCoreApplication* self) {
-	return self->senderSignalIndex();
+	return self->QCoreApplication::senderSignalIndex();
 }
 
 int QCoreApplication_protectedbase_receivers(const VirtualQCoreApplication* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCoreApplication::receivers(signal);
 }
 
 bool QCoreApplication_protectedbase_isSignalConnected(const VirtualQCoreApplication* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCoreApplication::isSignalConnected(*signal);
 }
 
 void QCoreApplication_delete(QCoreApplication* self) {

@@ -523,27 +523,27 @@ void QAbstractVideoSurface_virtualbase_disconnectNotify(VirtualQAbstractVideoSur
 }
 
 void QAbstractVideoSurface_protectedbase_setError(VirtualQAbstractVideoSurface* self, int error) {
-	self->setError(static_cast<VirtualQAbstractVideoSurface::Error>(error));
+	self->QAbstractVideoSurface::setError(static_cast<VirtualQAbstractVideoSurface::Error>(error));
 }
 
 void QAbstractVideoSurface_protectedbase_setNativeResolution(VirtualQAbstractVideoSurface* self, QSize* resolution) {
-	self->setNativeResolution(*resolution);
+	self->QAbstractVideoSurface::setNativeResolution(*resolution);
 }
 
 QObject* QAbstractVideoSurface_protectedbase_sender(const VirtualQAbstractVideoSurface* self) {
-	return self->sender();
+	return self->QAbstractVideoSurface::sender();
 }
 
 int QAbstractVideoSurface_protectedbase_senderSignalIndex(const VirtualQAbstractVideoSurface* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractVideoSurface::senderSignalIndex();
 }
 
 int QAbstractVideoSurface_protectedbase_receivers(const VirtualQAbstractVideoSurface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractVideoSurface::receivers(signal);
 }
 
 bool QAbstractVideoSurface_protectedbase_isSignalConnected(const VirtualQAbstractVideoSurface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractVideoSurface::isSignalConnected(*signal);
 }
 
 void QAbstractVideoSurface_delete(QAbstractVideoSurface* self) {

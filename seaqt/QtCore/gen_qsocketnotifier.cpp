@@ -342,19 +342,19 @@ void QSocketNotifier_virtualbase_disconnectNotify(VirtualQSocketNotifier* self, 
 }
 
 QObject* QSocketNotifier_protectedbase_sender(const VirtualQSocketNotifier* self) {
-	return self->sender();
+	return self->QSocketNotifier::sender();
 }
 
 int QSocketNotifier_protectedbase_senderSignalIndex(const VirtualQSocketNotifier* self) {
-	return self->senderSignalIndex();
+	return self->QSocketNotifier::senderSignalIndex();
 }
 
 int QSocketNotifier_protectedbase_receivers(const VirtualQSocketNotifier* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSocketNotifier::receivers(signal);
 }
 
 bool QSocketNotifier_protectedbase_isSignalConnected(const VirtualQSocketNotifier* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSocketNotifier::isSignalConnected(*signal);
 }
 
 void QSocketNotifier_delete(QSocketNotifier* self) {

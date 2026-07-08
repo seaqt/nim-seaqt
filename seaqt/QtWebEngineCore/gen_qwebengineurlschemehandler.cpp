@@ -328,19 +328,19 @@ void QWebEngineUrlSchemeHandler_virtualbase_disconnectNotify(VirtualQWebEngineUr
 }
 
 QObject* QWebEngineUrlSchemeHandler_protectedbase_sender(const VirtualQWebEngineUrlSchemeHandler* self) {
-	return self->sender();
+	return self->QWebEngineUrlSchemeHandler::sender();
 }
 
 int QWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(const VirtualQWebEngineUrlSchemeHandler* self) {
-	return self->senderSignalIndex();
+	return self->QWebEngineUrlSchemeHandler::senderSignalIndex();
 }
 
 int QWebEngineUrlSchemeHandler_protectedbase_receivers(const VirtualQWebEngineUrlSchemeHandler* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebEngineUrlSchemeHandler::receivers(signal);
 }
 
 bool QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(const VirtualQWebEngineUrlSchemeHandler* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebEngineUrlSchemeHandler::isSignalConnected(*signal);
 }
 
 void QWebEngineUrlSchemeHandler_delete(QWebEngineUrlSchemeHandler* self) {

@@ -1263,47 +1263,47 @@ void QProgressDialog_virtualbase_disconnectNotify(VirtualQProgressDialog* self, 
 }
 
 void QProgressDialog_protectedbase_forceShow(VirtualQProgressDialog* self) {
-	self->forceShow();
+	self->QProgressDialog::forceShow();
 }
 
 void QProgressDialog_protectedbase_adjustPosition(VirtualQProgressDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QProgressDialog::adjustPosition(param1);
 }
 
 void QProgressDialog_protectedbase_updateMicroFocus(VirtualQProgressDialog* self) {
-	self->updateMicroFocus();
+	self->QProgressDialog::updateMicroFocus();
 }
 
 void QProgressDialog_protectedbase_create(VirtualQProgressDialog* self) {
-	self->create();
+	self->QProgressDialog::create();
 }
 
 void QProgressDialog_protectedbase_destroy(VirtualQProgressDialog* self) {
-	self->destroy();
+	self->QProgressDialog::destroy();
 }
 
 bool QProgressDialog_protectedbase_focusNextChild(VirtualQProgressDialog* self) {
-	return self->focusNextChild();
+	return self->QProgressDialog::focusNextChild();
 }
 
 bool QProgressDialog_protectedbase_focusPreviousChild(VirtualQProgressDialog* self) {
-	return self->focusPreviousChild();
+	return self->QProgressDialog::focusPreviousChild();
 }
 
 QObject* QProgressDialog_protectedbase_sender(const VirtualQProgressDialog* self) {
-	return self->sender();
+	return self->QProgressDialog::sender();
 }
 
 int QProgressDialog_protectedbase_senderSignalIndex(const VirtualQProgressDialog* self) {
-	return self->senderSignalIndex();
+	return self->QProgressDialog::senderSignalIndex();
 }
 
 int QProgressDialog_protectedbase_receivers(const VirtualQProgressDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QProgressDialog::receivers(signal);
 }
 
 bool QProgressDialog_protectedbase_isSignalConnected(const VirtualQProgressDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QProgressDialog::isSignalConnected(*signal);
 }
 
 void QProgressDialog_delete(QProgressDialog* self) {

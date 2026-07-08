@@ -446,19 +446,19 @@ void QQmlExpression_virtualbase_disconnectNotify(VirtualQQmlExpression* self, QM
 }
 
 QObject* QQmlExpression_protectedbase_sender(const VirtualQQmlExpression* self) {
-	return self->sender();
+	return self->QQmlExpression::sender();
 }
 
 int QQmlExpression_protectedbase_senderSignalIndex(const VirtualQQmlExpression* self) {
-	return self->senderSignalIndex();
+	return self->QQmlExpression::senderSignalIndex();
 }
 
 int QQmlExpression_protectedbase_receivers(const VirtualQQmlExpression* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQmlExpression::receivers(signal);
 }
 
 bool QQmlExpression_protectedbase_isSignalConnected(const VirtualQQmlExpression* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQmlExpression::isSignalConnected(*signal);
 }
 
 void QQmlExpression_delete(QQmlExpression* self) {

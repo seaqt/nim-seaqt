@@ -1143,43 +1143,43 @@ void QCheckBox_virtualbase_disconnectNotify(VirtualQCheckBox* self, QMetaMethod*
 }
 
 void QCheckBox_protectedbase_initStyleOption(const VirtualQCheckBox* self, QStyleOptionButton* option) {
-	self->initStyleOption(option);
+	self->QCheckBox::initStyleOption(option);
 }
 
 void QCheckBox_protectedbase_updateMicroFocus(VirtualQCheckBox* self) {
-	self->updateMicroFocus();
+	self->QCheckBox::updateMicroFocus();
 }
 
 void QCheckBox_protectedbase_create(VirtualQCheckBox* self) {
-	self->create();
+	self->QCheckBox::create();
 }
 
 void QCheckBox_protectedbase_destroy(VirtualQCheckBox* self) {
-	self->destroy();
+	self->QCheckBox::destroy();
 }
 
 bool QCheckBox_protectedbase_focusNextChild(VirtualQCheckBox* self) {
-	return self->focusNextChild();
+	return self->QCheckBox::focusNextChild();
 }
 
 bool QCheckBox_protectedbase_focusPreviousChild(VirtualQCheckBox* self) {
-	return self->focusPreviousChild();
+	return self->QCheckBox::focusPreviousChild();
 }
 
 QObject* QCheckBox_protectedbase_sender(const VirtualQCheckBox* self) {
-	return self->sender();
+	return self->QCheckBox::sender();
 }
 
 int QCheckBox_protectedbase_senderSignalIndex(const VirtualQCheckBox* self) {
-	return self->senderSignalIndex();
+	return self->QCheckBox::senderSignalIndex();
 }
 
 int QCheckBox_protectedbase_receivers(const VirtualQCheckBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCheckBox::receivers(signal);
 }
 
 bool QCheckBox_protectedbase_isSignalConnected(const VirtualQCheckBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCheckBox::isSignalConnected(*signal);
 }
 
 void QCheckBox_delete(QCheckBox* self) {

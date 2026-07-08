@@ -1357,47 +1357,47 @@ void QTabWidget_virtualbase_disconnectNotify(VirtualQTabWidget* self, QMetaMetho
 }
 
 void QTabWidget_protectedbase_setTabBar(VirtualQTabWidget* self, QTabBar* tabBar) {
-	self->setTabBar(tabBar);
+	self->QTabWidget::setTabBar(tabBar);
 }
 
 void QTabWidget_protectedbase_initStyleOption(const VirtualQTabWidget* self, QStyleOptionTabWidgetFrame* option) {
-	self->initStyleOption(option);
+	self->QTabWidget::initStyleOption(option);
 }
 
 void QTabWidget_protectedbase_updateMicroFocus(VirtualQTabWidget* self) {
-	self->updateMicroFocus();
+	self->QTabWidget::updateMicroFocus();
 }
 
 void QTabWidget_protectedbase_create(VirtualQTabWidget* self) {
-	self->create();
+	self->QTabWidget::create();
 }
 
 void QTabWidget_protectedbase_destroy(VirtualQTabWidget* self) {
-	self->destroy();
+	self->QTabWidget::destroy();
 }
 
 bool QTabWidget_protectedbase_focusNextChild(VirtualQTabWidget* self) {
-	return self->focusNextChild();
+	return self->QTabWidget::focusNextChild();
 }
 
 bool QTabWidget_protectedbase_focusPreviousChild(VirtualQTabWidget* self) {
-	return self->focusPreviousChild();
+	return self->QTabWidget::focusPreviousChild();
 }
 
 QObject* QTabWidget_protectedbase_sender(const VirtualQTabWidget* self) {
-	return self->sender();
+	return self->QTabWidget::sender();
 }
 
 int QTabWidget_protectedbase_senderSignalIndex(const VirtualQTabWidget* self) {
-	return self->senderSignalIndex();
+	return self->QTabWidget::senderSignalIndex();
 }
 
 int QTabWidget_protectedbase_receivers(const VirtualQTabWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTabWidget::receivers(signal);
 }
 
 bool QTabWidget_protectedbase_isSignalConnected(const VirtualQTabWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTabWidget::isSignalConnected(*signal);
 }
 
 void QTabWidget_delete(QTabWidget* self) {

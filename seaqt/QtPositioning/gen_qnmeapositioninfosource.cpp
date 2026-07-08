@@ -499,19 +499,19 @@ void QNmeaPositionInfoSource_virtualbase_disconnectNotify(VirtualQNmeaPositionIn
 }
 
 QObject* QNmeaPositionInfoSource_protectedbase_sender(const VirtualQNmeaPositionInfoSource* self) {
-	return self->sender();
+	return self->QNmeaPositionInfoSource::sender();
 }
 
 int QNmeaPositionInfoSource_protectedbase_senderSignalIndex(const VirtualQNmeaPositionInfoSource* self) {
-	return self->senderSignalIndex();
+	return self->QNmeaPositionInfoSource::senderSignalIndex();
 }
 
 int QNmeaPositionInfoSource_protectedbase_receivers(const VirtualQNmeaPositionInfoSource* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QNmeaPositionInfoSource::receivers(signal);
 }
 
 bool QNmeaPositionInfoSource_protectedbase_isSignalConnected(const VirtualQNmeaPositionInfoSource* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QNmeaPositionInfoSource::isSignalConnected(*signal);
 }
 
 void QNmeaPositionInfoSource_delete(QNmeaPositionInfoSource* self) {

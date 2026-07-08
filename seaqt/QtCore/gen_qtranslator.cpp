@@ -458,19 +458,19 @@ void QTranslator_virtualbase_disconnectNotify(VirtualQTranslator* self, QMetaMet
 }
 
 QObject* QTranslator_protectedbase_sender(const VirtualQTranslator* self) {
-	return self->sender();
+	return self->QTranslator::sender();
 }
 
 int QTranslator_protectedbase_senderSignalIndex(const VirtualQTranslator* self) {
-	return self->senderSignalIndex();
+	return self->QTranslator::senderSignalIndex();
 }
 
 int QTranslator_protectedbase_receivers(const VirtualQTranslator* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTranslator::receivers(signal);
 }
 
 bool QTranslator_protectedbase_isSignalConnected(const VirtualQTranslator* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTranslator::isSignalConnected(*signal);
 }
 
 void QTranslator_delete(QTranslator* self) {

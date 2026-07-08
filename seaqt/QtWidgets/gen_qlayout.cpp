@@ -812,39 +812,39 @@ QSpacerItem* QLayout_virtualbase_spacerItem(VirtualQLayout* self) {
 }
 
 void QLayout_protectedbase_widgetEvent(VirtualQLayout* self, QEvent* param1) {
-	self->widgetEvent(param1);
+	self->QLayout::widgetEvent(param1);
 }
 
 void QLayout_protectedbase_addChildLayout(VirtualQLayout* self, QLayout* l) {
-	self->addChildLayout(l);
+	self->QLayout::addChildLayout(l);
 }
 
 void QLayout_protectedbase_addChildWidget(VirtualQLayout* self, QWidget* w) {
-	self->addChildWidget(w);
+	self->QLayout::addChildWidget(w);
 }
 
 bool QLayout_protectedbase_adoptLayout(VirtualQLayout* self, QLayout* layout) {
-	return self->adoptLayout(layout);
+	return self->QLayout::adoptLayout(layout);
 }
 
 QRect* QLayout_protectedbase_alignmentRect(const VirtualQLayout* self, QRect* param1) {
-	return new QRect(self->alignmentRect(*param1));
+	return new QRect(self->QLayout::alignmentRect(*param1));
 }
 
 QObject* QLayout_protectedbase_sender(const VirtualQLayout* self) {
-	return self->sender();
+	return self->QLayout::sender();
 }
 
 int QLayout_protectedbase_senderSignalIndex(const VirtualQLayout* self) {
-	return self->senderSignalIndex();
+	return self->QLayout::senderSignalIndex();
 }
 
 int QLayout_protectedbase_receivers(const VirtualQLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QLayout::receivers(signal);
 }
 
 bool QLayout_protectedbase_isSignalConnected(const VirtualQLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QLayout::isSignalConnected(*signal);
 }
 
 void QLayout_delete(QLayout* self) {

@@ -413,55 +413,55 @@ void QGraphicsEffect_virtualbase_disconnectNotify(VirtualQGraphicsEffect* self, 
 }
 
 void QGraphicsEffect_protectedbase_updateBoundingRect(VirtualQGraphicsEffect* self) {
-	self->updateBoundingRect();
+	self->QGraphicsEffect::updateBoundingRect();
 }
 
 bool QGraphicsEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsEffect* self) {
-	return self->sourceIsPixmap();
+	return self->QGraphicsEffect::sourceIsPixmap();
 }
 
 QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsEffect* self) {
-	return new QRectF(self->sourceBoundingRect());
+	return new QRectF(self->QGraphicsEffect::sourceBoundingRect());
 }
 
 void QGraphicsEffect_protectedbase_drawSource(VirtualQGraphicsEffect* self, QPainter* painter) {
-	self->drawSource(painter);
+	self->QGraphicsEffect::drawSource(painter);
 }
 
 QPixmap* QGraphicsEffect_protectedbase_sourcePixmap(const VirtualQGraphicsEffect* self) {
-	return new QPixmap(self->sourcePixmap());
+	return new QPixmap(self->QGraphicsEffect::sourcePixmap());
 }
 
 QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect_system(const VirtualQGraphicsEffect* self, int system) {
-	return new QRectF(self->sourceBoundingRect(static_cast<Qt::CoordinateSystem>(system)));
+	return new QRectF(self->QGraphicsEffect::sourceBoundingRect(static_cast<Qt::CoordinateSystem>(system)));
 }
 
 QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system(const VirtualQGraphicsEffect* self, int system) {
-	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system)));
+	return new QPixmap(self->QGraphicsEffect::sourcePixmap(static_cast<Qt::CoordinateSystem>(system)));
 }
 
 QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system_offset(const VirtualQGraphicsEffect* self, int system, QPoint* offset) {
-	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset));
+	return new QPixmap(self->QGraphicsEffect::sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset));
 }
 
 QPixmap* QGraphicsEffect_protectedbase_sourcePixmap_system_offset_mode(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode) {
-	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset, static_cast<VirtualQGraphicsEffect::PixmapPadMode>(mode)));
+	return new QPixmap(self->QGraphicsEffect::sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset, static_cast<VirtualQGraphicsEffect::PixmapPadMode>(mode)));
 }
 
 QObject* QGraphicsEffect_protectedbase_sender(const VirtualQGraphicsEffect* self) {
-	return self->sender();
+	return self->QGraphicsEffect::sender();
 }
 
 int QGraphicsEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsEffect* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsEffect::senderSignalIndex();
 }
 
 int QGraphicsEffect_protectedbase_receivers(const VirtualQGraphicsEffect* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsEffect::receivers(signal);
 }
 
 bool QGraphicsEffect_protectedbase_isSignalConnected(const VirtualQGraphicsEffect* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsEffect::isSignalConnected(*signal);
 }
 
 void QGraphicsEffect_delete(QGraphicsEffect* self) {
@@ -864,39 +864,39 @@ void QGraphicsColorizeEffect_virtualbase_disconnectNotify(VirtualQGraphicsColori
 }
 
 void QGraphicsColorizeEffect_protectedbase_updateBoundingRect(VirtualQGraphicsColorizeEffect* self) {
-	self->updateBoundingRect();
+	self->QGraphicsColorizeEffect::updateBoundingRect();
 }
 
 bool QGraphicsColorizeEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsColorizeEffect* self) {
-	return self->sourceIsPixmap();
+	return self->QGraphicsColorizeEffect::sourceIsPixmap();
 }
 
 QRectF* QGraphicsColorizeEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsColorizeEffect* self) {
-	return new QRectF(self->sourceBoundingRect());
+	return new QRectF(self->QGraphicsColorizeEffect::sourceBoundingRect());
 }
 
 void QGraphicsColorizeEffect_protectedbase_drawSource(VirtualQGraphicsColorizeEffect* self, QPainter* painter) {
-	self->drawSource(painter);
+	self->QGraphicsColorizeEffect::drawSource(painter);
 }
 
 QPixmap* QGraphicsColorizeEffect_protectedbase_sourcePixmap(const VirtualQGraphicsColorizeEffect* self) {
-	return new QPixmap(self->sourcePixmap());
+	return new QPixmap(self->QGraphicsColorizeEffect::sourcePixmap());
 }
 
 QObject* QGraphicsColorizeEffect_protectedbase_sender(const VirtualQGraphicsColorizeEffect* self) {
-	return self->sender();
+	return self->QGraphicsColorizeEffect::sender();
 }
 
 int QGraphicsColorizeEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsColorizeEffect* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsColorizeEffect::senderSignalIndex();
 }
 
 int QGraphicsColorizeEffect_protectedbase_receivers(const VirtualQGraphicsColorizeEffect* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsColorizeEffect::receivers(signal);
 }
 
 bool QGraphicsColorizeEffect_protectedbase_isSignalConnected(const VirtualQGraphicsColorizeEffect* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsColorizeEffect::isSignalConnected(*signal);
 }
 
 void QGraphicsColorizeEffect_delete(QGraphicsColorizeEffect* self) {
@@ -1303,39 +1303,39 @@ void QGraphicsBlurEffect_virtualbase_disconnectNotify(VirtualQGraphicsBlurEffect
 }
 
 void QGraphicsBlurEffect_protectedbase_updateBoundingRect(VirtualQGraphicsBlurEffect* self) {
-	self->updateBoundingRect();
+	self->QGraphicsBlurEffect::updateBoundingRect();
 }
 
 bool QGraphicsBlurEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsBlurEffect* self) {
-	return self->sourceIsPixmap();
+	return self->QGraphicsBlurEffect::sourceIsPixmap();
 }
 
 QRectF* QGraphicsBlurEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsBlurEffect* self) {
-	return new QRectF(self->sourceBoundingRect());
+	return new QRectF(self->QGraphicsBlurEffect::sourceBoundingRect());
 }
 
 void QGraphicsBlurEffect_protectedbase_drawSource(VirtualQGraphicsBlurEffect* self, QPainter* painter) {
-	self->drawSource(painter);
+	self->QGraphicsBlurEffect::drawSource(painter);
 }
 
 QPixmap* QGraphicsBlurEffect_protectedbase_sourcePixmap(const VirtualQGraphicsBlurEffect* self) {
-	return new QPixmap(self->sourcePixmap());
+	return new QPixmap(self->QGraphicsBlurEffect::sourcePixmap());
 }
 
 QObject* QGraphicsBlurEffect_protectedbase_sender(const VirtualQGraphicsBlurEffect* self) {
-	return self->sender();
+	return self->QGraphicsBlurEffect::sender();
 }
 
 int QGraphicsBlurEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsBlurEffect* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsBlurEffect::senderSignalIndex();
 }
 
 int QGraphicsBlurEffect_protectedbase_receivers(const VirtualQGraphicsBlurEffect* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsBlurEffect::receivers(signal);
 }
 
 bool QGraphicsBlurEffect_protectedbase_isSignalConnected(const VirtualQGraphicsBlurEffect* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsBlurEffect::isSignalConnected(*signal);
 }
 
 void QGraphicsBlurEffect_delete(QGraphicsBlurEffect* self) {
@@ -1789,39 +1789,39 @@ void QGraphicsDropShadowEffect_virtualbase_disconnectNotify(VirtualQGraphicsDrop
 }
 
 void QGraphicsDropShadowEffect_protectedbase_updateBoundingRect(VirtualQGraphicsDropShadowEffect* self) {
-	self->updateBoundingRect();
+	self->QGraphicsDropShadowEffect::updateBoundingRect();
 }
 
 bool QGraphicsDropShadowEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsDropShadowEffect* self) {
-	return self->sourceIsPixmap();
+	return self->QGraphicsDropShadowEffect::sourceIsPixmap();
 }
 
 QRectF* QGraphicsDropShadowEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsDropShadowEffect* self) {
-	return new QRectF(self->sourceBoundingRect());
+	return new QRectF(self->QGraphicsDropShadowEffect::sourceBoundingRect());
 }
 
 void QGraphicsDropShadowEffect_protectedbase_drawSource(VirtualQGraphicsDropShadowEffect* self, QPainter* painter) {
-	self->drawSource(painter);
+	self->QGraphicsDropShadowEffect::drawSource(painter);
 }
 
 QPixmap* QGraphicsDropShadowEffect_protectedbase_sourcePixmap(const VirtualQGraphicsDropShadowEffect* self) {
-	return new QPixmap(self->sourcePixmap());
+	return new QPixmap(self->QGraphicsDropShadowEffect::sourcePixmap());
 }
 
 QObject* QGraphicsDropShadowEffect_protectedbase_sender(const VirtualQGraphicsDropShadowEffect* self) {
-	return self->sender();
+	return self->QGraphicsDropShadowEffect::sender();
 }
 
 int QGraphicsDropShadowEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsDropShadowEffect* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsDropShadowEffect::senderSignalIndex();
 }
 
 int QGraphicsDropShadowEffect_protectedbase_receivers(const VirtualQGraphicsDropShadowEffect* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsDropShadowEffect::receivers(signal);
 }
 
 bool QGraphicsDropShadowEffect_protectedbase_isSignalConnected(const VirtualQGraphicsDropShadowEffect* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsDropShadowEffect::isSignalConnected(*signal);
 }
 
 void QGraphicsDropShadowEffect_delete(QGraphicsDropShadowEffect* self) {
@@ -2224,39 +2224,39 @@ void QGraphicsOpacityEffect_virtualbase_disconnectNotify(VirtualQGraphicsOpacity
 }
 
 void QGraphicsOpacityEffect_protectedbase_updateBoundingRect(VirtualQGraphicsOpacityEffect* self) {
-	self->updateBoundingRect();
+	self->QGraphicsOpacityEffect::updateBoundingRect();
 }
 
 bool QGraphicsOpacityEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsOpacityEffect* self) {
-	return self->sourceIsPixmap();
+	return self->QGraphicsOpacityEffect::sourceIsPixmap();
 }
 
 QRectF* QGraphicsOpacityEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsOpacityEffect* self) {
-	return new QRectF(self->sourceBoundingRect());
+	return new QRectF(self->QGraphicsOpacityEffect::sourceBoundingRect());
 }
 
 void QGraphicsOpacityEffect_protectedbase_drawSource(VirtualQGraphicsOpacityEffect* self, QPainter* painter) {
-	self->drawSource(painter);
+	self->QGraphicsOpacityEffect::drawSource(painter);
 }
 
 QPixmap* QGraphicsOpacityEffect_protectedbase_sourcePixmap(const VirtualQGraphicsOpacityEffect* self) {
-	return new QPixmap(self->sourcePixmap());
+	return new QPixmap(self->QGraphicsOpacityEffect::sourcePixmap());
 }
 
 QObject* QGraphicsOpacityEffect_protectedbase_sender(const VirtualQGraphicsOpacityEffect* self) {
-	return self->sender();
+	return self->QGraphicsOpacityEffect::sender();
 }
 
 int QGraphicsOpacityEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsOpacityEffect* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsOpacityEffect::senderSignalIndex();
 }
 
 int QGraphicsOpacityEffect_protectedbase_receivers(const VirtualQGraphicsOpacityEffect* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsOpacityEffect::receivers(signal);
 }
 
 bool QGraphicsOpacityEffect_protectedbase_isSignalConnected(const VirtualQGraphicsOpacityEffect* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsOpacityEffect::isSignalConnected(*signal);
 }
 
 void QGraphicsOpacityEffect_delete(QGraphicsOpacityEffect* self) {

@@ -1163,43 +1163,43 @@ void QPushButton_virtualbase_disconnectNotify(VirtualQPushButton* self, QMetaMet
 }
 
 void QPushButton_protectedbase_initStyleOption(const VirtualQPushButton* self, QStyleOptionButton* option) {
-	self->initStyleOption(option);
+	self->QPushButton::initStyleOption(option);
 }
 
 void QPushButton_protectedbase_updateMicroFocus(VirtualQPushButton* self) {
-	self->updateMicroFocus();
+	self->QPushButton::updateMicroFocus();
 }
 
 void QPushButton_protectedbase_create(VirtualQPushButton* self) {
-	self->create();
+	self->QPushButton::create();
 }
 
 void QPushButton_protectedbase_destroy(VirtualQPushButton* self) {
-	self->destroy();
+	self->QPushButton::destroy();
 }
 
 bool QPushButton_protectedbase_focusNextChild(VirtualQPushButton* self) {
-	return self->focusNextChild();
+	return self->QPushButton::focusNextChild();
 }
 
 bool QPushButton_protectedbase_focusPreviousChild(VirtualQPushButton* self) {
-	return self->focusPreviousChild();
+	return self->QPushButton::focusPreviousChild();
 }
 
 QObject* QPushButton_protectedbase_sender(const VirtualQPushButton* self) {
-	return self->sender();
+	return self->QPushButton::sender();
 }
 
 int QPushButton_protectedbase_senderSignalIndex(const VirtualQPushButton* self) {
-	return self->senderSignalIndex();
+	return self->QPushButton::senderSignalIndex();
 }
 
 int QPushButton_protectedbase_receivers(const VirtualQPushButton* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPushButton::receivers(signal);
 }
 
 bool QPushButton_protectedbase_isSignalConnected(const VirtualQPushButton* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPushButton::isSignalConnected(*signal);
 }
 
 void QPushButton_delete(QPushButton* self) {

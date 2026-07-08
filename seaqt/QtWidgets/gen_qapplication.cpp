@@ -611,19 +611,19 @@ void QApplication_virtualbase_disconnectNotify(VirtualQApplication* self, QMetaM
 }
 
 QObject* QApplication_protectedbase_sender(const VirtualQApplication* self) {
-	return self->sender();
+	return self->QApplication::sender();
 }
 
 int QApplication_protectedbase_senderSignalIndex(const VirtualQApplication* self) {
-	return self->senderSignalIndex();
+	return self->QApplication::senderSignalIndex();
 }
 
 int QApplication_protectedbase_receivers(const VirtualQApplication* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QApplication::receivers(signal);
 }
 
 bool QApplication_protectedbase_isSignalConnected(const VirtualQApplication* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QApplication::isSignalConnected(*signal);
 }
 
 void QApplication_delete(QApplication* self) {

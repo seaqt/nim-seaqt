@@ -438,19 +438,19 @@ void QOffscreenSurface_virtualbase_disconnectNotify(VirtualQOffscreenSurface* se
 }
 
 QObject* QOffscreenSurface_protectedbase_sender(const VirtualQOffscreenSurface* self) {
-	return self->sender();
+	return self->QOffscreenSurface::sender();
 }
 
 int QOffscreenSurface_protectedbase_senderSignalIndex(const VirtualQOffscreenSurface* self) {
-	return self->senderSignalIndex();
+	return self->QOffscreenSurface::senderSignalIndex();
 }
 
 int QOffscreenSurface_protectedbase_receivers(const VirtualQOffscreenSurface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QOffscreenSurface::receivers(signal);
 }
 
 bool QOffscreenSurface_protectedbase_isSignalConnected(const VirtualQOffscreenSurface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QOffscreenSurface::isSignalConnected(*signal);
 }
 
 void QOffscreenSurface_delete(QOffscreenSurface* self) {

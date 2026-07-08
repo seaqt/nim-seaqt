@@ -472,19 +472,19 @@ void QTextTable_virtualbase_disconnectNotify(VirtualQTextTable* self, QMetaMetho
 }
 
 QObject* QTextTable_protectedbase_sender(const VirtualQTextTable* self) {
-	return self->sender();
+	return self->QTextTable::sender();
 }
 
 int QTextTable_protectedbase_senderSignalIndex(const VirtualQTextTable* self) {
-	return self->senderSignalIndex();
+	return self->QTextTable::senderSignalIndex();
 }
 
 int QTextTable_protectedbase_receivers(const VirtualQTextTable* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTextTable::receivers(signal);
 }
 
 bool QTextTable_protectedbase_isSignalConnected(const VirtualQTextTable* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTextTable::isSignalConnected(*signal);
 }
 
 void QTextTable_delete(QTextTable* self) {

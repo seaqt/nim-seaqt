@@ -1952,133 +1952,133 @@ void QUndoView_virtualbase_disconnectNotify(VirtualQUndoView* self, QMetaMethod*
 }
 
 void QUndoView_protectedbase_resizeContents(VirtualQUndoView* self, int width, int height) {
-	self->resizeContents(static_cast<int>(width), static_cast<int>(height));
+	self->QUndoView::resizeContents(static_cast<int>(width), static_cast<int>(height));
 }
 
 QSize* QUndoView_protectedbase_contentsSize(const VirtualQUndoView* self) {
-	return new QSize(self->contentsSize());
+	return new QSize(self->QUndoView::contentsSize());
 }
 
 QRect* QUndoView_protectedbase_rectForIndex(const VirtualQUndoView* self, QModelIndex* index) {
-	return new QRect(self->rectForIndex(*index));
+	return new QRect(self->QUndoView::rectForIndex(*index));
 }
 
 void QUndoView_protectedbase_setPositionForIndex(VirtualQUndoView* self, QPoint* position, QModelIndex* index) {
-	self->setPositionForIndex(*position, *index);
+	self->QUndoView::setPositionForIndex(*position, *index);
 }
 
 void QUndoView_protectedbase_setHorizontalStepsPerItem(VirtualQUndoView* self, int steps) {
-	self->setHorizontalStepsPerItem(static_cast<int>(steps));
+	self->QUndoView::setHorizontalStepsPerItem(static_cast<int>(steps));
 }
 
 int QUndoView_protectedbase_horizontalStepsPerItem(const VirtualQUndoView* self) {
-	return self->horizontalStepsPerItem();
+	return self->QUndoView::horizontalStepsPerItem();
 }
 
 void QUndoView_protectedbase_setVerticalStepsPerItem(VirtualQUndoView* self, int steps) {
-	self->setVerticalStepsPerItem(static_cast<int>(steps));
+	self->QUndoView::setVerticalStepsPerItem(static_cast<int>(steps));
 }
 
 int QUndoView_protectedbase_verticalStepsPerItem(const VirtualQUndoView* self) {
-	return self->verticalStepsPerItem();
+	return self->QUndoView::verticalStepsPerItem();
 }
 
 int QUndoView_protectedbase_state(const VirtualQUndoView* self) {
-	VirtualQUndoView::State _ret = self->state();
+	VirtualQUndoView::State _ret = self->QUndoView::state();
 	return static_cast<int>(_ret);
 }
 
 void QUndoView_protectedbase_setState(VirtualQUndoView* self, int state) {
-	self->setState(static_cast<VirtualQUndoView::State>(state));
+	self->QUndoView::setState(static_cast<VirtualQUndoView::State>(state));
 }
 
 void QUndoView_protectedbase_scheduleDelayedItemsLayout(VirtualQUndoView* self) {
-	self->scheduleDelayedItemsLayout();
+	self->QUndoView::scheduleDelayedItemsLayout();
 }
 
 void QUndoView_protectedbase_executeDelayedItemsLayout(VirtualQUndoView* self) {
-	self->executeDelayedItemsLayout();
+	self->QUndoView::executeDelayedItemsLayout();
 }
 
 void QUndoView_protectedbase_setDirtyRegion(VirtualQUndoView* self, QRegion* region) {
-	self->setDirtyRegion(*region);
+	self->QUndoView::setDirtyRegion(*region);
 }
 
 void QUndoView_protectedbase_scrollDirtyRegion(VirtualQUndoView* self, int dx, int dy) {
-	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
+	self->QUndoView::scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
 QPoint* QUndoView_protectedbase_dirtyRegionOffset(const VirtualQUndoView* self) {
-	return new QPoint(self->dirtyRegionOffset());
+	return new QPoint(self->QUndoView::dirtyRegionOffset());
 }
 
 void QUndoView_protectedbase_startAutoScroll(VirtualQUndoView* self) {
-	self->startAutoScroll();
+	self->QUndoView::startAutoScroll();
 }
 
 void QUndoView_protectedbase_stopAutoScroll(VirtualQUndoView* self) {
-	self->stopAutoScroll();
+	self->QUndoView::stopAutoScroll();
 }
 
 void QUndoView_protectedbase_doAutoScroll(VirtualQUndoView* self) {
-	self->doAutoScroll();
+	self->QUndoView::doAutoScroll();
 }
 
 int QUndoView_protectedbase_dropIndicatorPosition(const VirtualQUndoView* self) {
-	VirtualQUndoView::DropIndicatorPosition _ret = self->dropIndicatorPosition();
+	VirtualQUndoView::DropIndicatorPosition _ret = self->QUndoView::dropIndicatorPosition();
 	return static_cast<int>(_ret);
 }
 
 void QUndoView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQUndoView* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QUndoView::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QUndoView_protectedbase_viewportMargins(const VirtualQUndoView* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QUndoView::viewportMargins());
 }
 
 void QUndoView_protectedbase_drawFrame(VirtualQUndoView* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QUndoView::drawFrame(param1);
 }
 
 void QUndoView_protectedbase_initStyleOption(const VirtualQUndoView* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QUndoView::initStyleOption(option);
 }
 
 void QUndoView_protectedbase_updateMicroFocus(VirtualQUndoView* self) {
-	self->updateMicroFocus();
+	self->QUndoView::updateMicroFocus();
 }
 
 void QUndoView_protectedbase_create(VirtualQUndoView* self) {
-	self->create();
+	self->QUndoView::create();
 }
 
 void QUndoView_protectedbase_destroy(VirtualQUndoView* self) {
-	self->destroy();
+	self->QUndoView::destroy();
 }
 
 bool QUndoView_protectedbase_focusNextChild(VirtualQUndoView* self) {
-	return self->focusNextChild();
+	return self->QUndoView::focusNextChild();
 }
 
 bool QUndoView_protectedbase_focusPreviousChild(VirtualQUndoView* self) {
-	return self->focusPreviousChild();
+	return self->QUndoView::focusPreviousChild();
 }
 
 QObject* QUndoView_protectedbase_sender(const VirtualQUndoView* self) {
-	return self->sender();
+	return self->QUndoView::sender();
 }
 
 int QUndoView_protectedbase_senderSignalIndex(const VirtualQUndoView* self) {
-	return self->senderSignalIndex();
+	return self->QUndoView::senderSignalIndex();
 }
 
 int QUndoView_protectedbase_receivers(const VirtualQUndoView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QUndoView::receivers(signal);
 }
 
 bool QUndoView_protectedbase_isSignalConnected(const VirtualQUndoView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QUndoView::isSignalConnected(*signal);
 }
 
 void QUndoView_delete(QUndoView* self) {

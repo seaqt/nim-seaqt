@@ -1451,43 +1451,43 @@ void QTabBar_virtualbase_disconnectNotify(VirtualQTabBar* self, QMetaMethod* sig
 }
 
 void QTabBar_protectedbase_initStyleOption(const VirtualQTabBar* self, QStyleOptionTab* option, int tabIndex) {
-	self->initStyleOption(option, static_cast<int>(tabIndex));
+	self->QTabBar::initStyleOption(option, static_cast<int>(tabIndex));
 }
 
 void QTabBar_protectedbase_updateMicroFocus(VirtualQTabBar* self) {
-	self->updateMicroFocus();
+	self->QTabBar::updateMicroFocus();
 }
 
 void QTabBar_protectedbase_create(VirtualQTabBar* self) {
-	self->create();
+	self->QTabBar::create();
 }
 
 void QTabBar_protectedbase_destroy(VirtualQTabBar* self) {
-	self->destroy();
+	self->QTabBar::destroy();
 }
 
 bool QTabBar_protectedbase_focusNextChild(VirtualQTabBar* self) {
-	return self->focusNextChild();
+	return self->QTabBar::focusNextChild();
 }
 
 bool QTabBar_protectedbase_focusPreviousChild(VirtualQTabBar* self) {
-	return self->focusPreviousChild();
+	return self->QTabBar::focusPreviousChild();
 }
 
 QObject* QTabBar_protectedbase_sender(const VirtualQTabBar* self) {
-	return self->sender();
+	return self->QTabBar::sender();
 }
 
 int QTabBar_protectedbase_senderSignalIndex(const VirtualQTabBar* self) {
-	return self->senderSignalIndex();
+	return self->QTabBar::senderSignalIndex();
 }
 
 int QTabBar_protectedbase_receivers(const VirtualQTabBar* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTabBar::receivers(signal);
 }
 
 bool QTabBar_protectedbase_isSignalConnected(const VirtualQTabBar* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTabBar::isSignalConnected(*signal);
 }
 
 void QTabBar_delete(QTabBar* self) {

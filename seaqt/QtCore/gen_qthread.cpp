@@ -460,23 +460,23 @@ void QThread_virtualbase_disconnectNotify(VirtualQThread* self, QMetaMethod* sig
 }
 
 int QThread_protectedbase_exec(VirtualQThread* self) {
-	return self->exec();
+	return self->QThread::exec();
 }
 
 QObject* QThread_protectedbase_sender(const VirtualQThread* self) {
-	return self->sender();
+	return self->QThread::sender();
 }
 
 int QThread_protectedbase_senderSignalIndex(const VirtualQThread* self) {
-	return self->senderSignalIndex();
+	return self->QThread::senderSignalIndex();
 }
 
 int QThread_protectedbase_receivers(const VirtualQThread* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QThread::receivers(signal);
 }
 
 bool QThread_protectedbase_isSignalConnected(const VirtualQThread* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QThread::isSignalConnected(*signal);
 }
 
 void QThread_delete(QThread* self) {

@@ -1414,19 +1414,19 @@ void QWindow_virtualbase_disconnectNotify(VirtualQWindow* self, QMetaMethod* sig
 }
 
 QObject* QWindow_protectedbase_sender(const VirtualQWindow* self) {
-	return self->sender();
+	return self->QWindow::sender();
 }
 
 int QWindow_protectedbase_senderSignalIndex(const VirtualQWindow* self) {
-	return self->senderSignalIndex();
+	return self->QWindow::senderSignalIndex();
 }
 
 int QWindow_protectedbase_receivers(const VirtualQWindow* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWindow::receivers(signal);
 }
 
 bool QWindow_protectedbase_isSignalConnected(const VirtualQWindow* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWindow::isSignalConnected(*signal);
 }
 
 void QWindow_delete(QWindow* self) {

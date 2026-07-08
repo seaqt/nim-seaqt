@@ -424,19 +424,19 @@ void QNetworkConfigurationManager_virtualbase_disconnectNotify(VirtualQNetworkCo
 }
 
 QObject* QNetworkConfigurationManager_protectedbase_sender(const VirtualQNetworkConfigurationManager* self) {
-	return self->sender();
+	return self->QNetworkConfigurationManager::sender();
 }
 
 int QNetworkConfigurationManager_protectedbase_senderSignalIndex(const VirtualQNetworkConfigurationManager* self) {
-	return self->senderSignalIndex();
+	return self->QNetworkConfigurationManager::senderSignalIndex();
 }
 
 int QNetworkConfigurationManager_protectedbase_receivers(const VirtualQNetworkConfigurationManager* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QNetworkConfigurationManager::receivers(signal);
 }
 
 bool QNetworkConfigurationManager_protectedbase_isSignalConnected(const VirtualQNetworkConfigurationManager* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QNetworkConfigurationManager::isSignalConnected(*signal);
 }
 
 void QNetworkConfigurationManager_delete(QNetworkConfigurationManager* self) {

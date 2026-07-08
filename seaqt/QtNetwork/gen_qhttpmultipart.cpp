@@ -399,19 +399,19 @@ void QHttpMultiPart_virtualbase_disconnectNotify(VirtualQHttpMultiPart* self, QM
 }
 
 QObject* QHttpMultiPart_protectedbase_sender(const VirtualQHttpMultiPart* self) {
-	return self->sender();
+	return self->QHttpMultiPart::sender();
 }
 
 int QHttpMultiPart_protectedbase_senderSignalIndex(const VirtualQHttpMultiPart* self) {
-	return self->senderSignalIndex();
+	return self->QHttpMultiPart::senderSignalIndex();
 }
 
 int QHttpMultiPart_protectedbase_receivers(const VirtualQHttpMultiPart* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QHttpMultiPart::receivers(signal);
 }
 
 bool QHttpMultiPart_protectedbase_isSignalConnected(const VirtualQHttpMultiPart* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QHttpMultiPart::isSignalConnected(*signal);
 }
 
 void QHttpMultiPart_delete(QHttpMultiPart* self) {

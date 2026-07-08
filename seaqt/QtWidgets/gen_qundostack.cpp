@@ -703,19 +703,19 @@ void QUndoStack_virtualbase_disconnectNotify(VirtualQUndoStack* self, QMetaMetho
 }
 
 QObject* QUndoStack_protectedbase_sender(const VirtualQUndoStack* self) {
-	return self->sender();
+	return self->QUndoStack::sender();
 }
 
 int QUndoStack_protectedbase_senderSignalIndex(const VirtualQUndoStack* self) {
-	return self->senderSignalIndex();
+	return self->QUndoStack::senderSignalIndex();
 }
 
 int QUndoStack_protectedbase_receivers(const VirtualQUndoStack* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QUndoStack::receivers(signal);
 }
 
 bool QUndoStack_protectedbase_isSignalConnected(const VirtualQUndoStack* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QUndoStack::isSignalConnected(*signal);
 }
 
 void QUndoStack_delete(QUndoStack* self) {

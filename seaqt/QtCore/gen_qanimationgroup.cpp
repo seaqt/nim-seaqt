@@ -403,19 +403,19 @@ void QAnimationGroup_virtualbase_disconnectNotify(VirtualQAnimationGroup* self, 
 }
 
 QObject* QAnimationGroup_protectedbase_sender(const VirtualQAnimationGroup* self) {
-	return self->sender();
+	return self->QAnimationGroup::sender();
 }
 
 int QAnimationGroup_protectedbase_senderSignalIndex(const VirtualQAnimationGroup* self) {
-	return self->senderSignalIndex();
+	return self->QAnimationGroup::senderSignalIndex();
 }
 
 int QAnimationGroup_protectedbase_receivers(const VirtualQAnimationGroup* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAnimationGroup::receivers(signal);
 }
 
 bool QAnimationGroup_protectedbase_isSignalConnected(const VirtualQAnimationGroup* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAnimationGroup::isSignalConnected(*signal);
 }
 
 void QAnimationGroup_delete(QAnimationGroup* self) {

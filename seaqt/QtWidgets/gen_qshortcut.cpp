@@ -411,19 +411,19 @@ void QShortcut_virtualbase_disconnectNotify(VirtualQShortcut* self, QMetaMethod*
 }
 
 QObject* QShortcut_protectedbase_sender(const VirtualQShortcut* self) {
-	return self->sender();
+	return self->QShortcut::sender();
 }
 
 int QShortcut_protectedbase_senderSignalIndex(const VirtualQShortcut* self) {
-	return self->senderSignalIndex();
+	return self->QShortcut::senderSignalIndex();
 }
 
 int QShortcut_protectedbase_receivers(const VirtualQShortcut* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QShortcut::receivers(signal);
 }
 
 bool QShortcut_protectedbase_isSignalConnected(const VirtualQShortcut* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QShortcut::isSignalConnected(*signal);
 }
 
 void QShortcut_delete(QShortcut* self) {

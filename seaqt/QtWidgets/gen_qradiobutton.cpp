@@ -1111,43 +1111,43 @@ void QRadioButton_virtualbase_disconnectNotify(VirtualQRadioButton* self, QMetaM
 }
 
 void QRadioButton_protectedbase_initStyleOption(const VirtualQRadioButton* self, QStyleOptionButton* button) {
-	self->initStyleOption(button);
+	self->QRadioButton::initStyleOption(button);
 }
 
 void QRadioButton_protectedbase_updateMicroFocus(VirtualQRadioButton* self) {
-	self->updateMicroFocus();
+	self->QRadioButton::updateMicroFocus();
 }
 
 void QRadioButton_protectedbase_create(VirtualQRadioButton* self) {
-	self->create();
+	self->QRadioButton::create();
 }
 
 void QRadioButton_protectedbase_destroy(VirtualQRadioButton* self) {
-	self->destroy();
+	self->QRadioButton::destroy();
 }
 
 bool QRadioButton_protectedbase_focusNextChild(VirtualQRadioButton* self) {
-	return self->focusNextChild();
+	return self->QRadioButton::focusNextChild();
 }
 
 bool QRadioButton_protectedbase_focusPreviousChild(VirtualQRadioButton* self) {
-	return self->focusPreviousChild();
+	return self->QRadioButton::focusPreviousChild();
 }
 
 QObject* QRadioButton_protectedbase_sender(const VirtualQRadioButton* self) {
-	return self->sender();
+	return self->QRadioButton::sender();
 }
 
 int QRadioButton_protectedbase_senderSignalIndex(const VirtualQRadioButton* self) {
-	return self->senderSignalIndex();
+	return self->QRadioButton::senderSignalIndex();
 }
 
 int QRadioButton_protectedbase_receivers(const VirtualQRadioButton* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QRadioButton::receivers(signal);
 }
 
 bool QRadioButton_protectedbase_isSignalConnected(const VirtualQRadioButton* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QRadioButton::isSignalConnected(*signal);
 }
 
 void QRadioButton_delete(QRadioButton* self) {

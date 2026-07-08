@@ -819,19 +819,19 @@ QPainter* QRasterWindow_virtualbase_sharedPainter(const VirtualQRasterWindow* se
 }
 
 QObject* QRasterWindow_protectedbase_sender(const VirtualQRasterWindow* self) {
-	return self->sender();
+	return self->QRasterWindow::sender();
 }
 
 int QRasterWindow_protectedbase_senderSignalIndex(const VirtualQRasterWindow* self) {
-	return self->senderSignalIndex();
+	return self->QRasterWindow::senderSignalIndex();
 }
 
 int QRasterWindow_protectedbase_receivers(const VirtualQRasterWindow* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QRasterWindow::receivers(signal);
 }
 
 bool QRasterWindow_protectedbase_isSignalConnected(const VirtualQRasterWindow* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QRasterWindow::isSignalConnected(*signal);
 }
 
 void QRasterWindow_delete(QRasterWindow* self) {

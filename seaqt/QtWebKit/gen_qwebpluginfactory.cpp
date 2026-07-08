@@ -488,19 +488,19 @@ void QWebPluginFactory_virtualbase_disconnectNotify(VirtualQWebPluginFactory* se
 }
 
 QObject* QWebPluginFactory_protectedbase_sender(const VirtualQWebPluginFactory* self) {
-	return self->sender();
+	return self->QWebPluginFactory::sender();
 }
 
 int QWebPluginFactory_protectedbase_senderSignalIndex(const VirtualQWebPluginFactory* self) {
-	return self->senderSignalIndex();
+	return self->QWebPluginFactory::senderSignalIndex();
 }
 
 int QWebPluginFactory_protectedbase_receivers(const VirtualQWebPluginFactory* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebPluginFactory::receivers(signal);
 }
 
 bool QWebPluginFactory_protectedbase_isSignalConnected(const VirtualQWebPluginFactory* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebPluginFactory::isSignalConnected(*signal);
 }
 
 void QWebPluginFactory_delete(QWebPluginFactory* self) {

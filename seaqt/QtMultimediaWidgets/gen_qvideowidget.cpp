@@ -1184,39 +1184,39 @@ void QVideoWidget_virtualbase_disconnectNotify(VirtualQVideoWidget* self, QMetaM
 }
 
 void QVideoWidget_protectedbase_updateMicroFocus(VirtualQVideoWidget* self) {
-	self->updateMicroFocus();
+	self->QVideoWidget::updateMicroFocus();
 }
 
 void QVideoWidget_protectedbase_create(VirtualQVideoWidget* self) {
-	self->create();
+	self->QVideoWidget::create();
 }
 
 void QVideoWidget_protectedbase_destroy(VirtualQVideoWidget* self) {
-	self->destroy();
+	self->QVideoWidget::destroy();
 }
 
 bool QVideoWidget_protectedbase_focusNextChild(VirtualQVideoWidget* self) {
-	return self->focusNextChild();
+	return self->QVideoWidget::focusNextChild();
 }
 
 bool QVideoWidget_protectedbase_focusPreviousChild(VirtualQVideoWidget* self) {
-	return self->focusPreviousChild();
+	return self->QVideoWidget::focusPreviousChild();
 }
 
 QObject* QVideoWidget_protectedbase_sender(const VirtualQVideoWidget* self) {
-	return self->sender();
+	return self->QVideoWidget::sender();
 }
 
 int QVideoWidget_protectedbase_senderSignalIndex(const VirtualQVideoWidget* self) {
-	return self->senderSignalIndex();
+	return self->QVideoWidget::senderSignalIndex();
 }
 
 int QVideoWidget_protectedbase_receivers(const VirtualQVideoWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QVideoWidget::receivers(signal);
 }
 
 bool QVideoWidget_protectedbase_isSignalConnected(const VirtualQVideoWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QVideoWidget::isSignalConnected(*signal);
 }
 
 void QVideoWidget_delete(QVideoWidget* self) {

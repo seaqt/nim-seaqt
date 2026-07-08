@@ -1356,11 +1356,11 @@ void QIdentityProxyModel_virtualbase_disconnectNotify(VirtualQIdentityProxyModel
 }
 
 void QIdentityProxyModel_protectedbase_resetInternalData(VirtualQIdentityProxyModel* self) {
-	self->resetInternalData();
+	self->QIdentityProxyModel::resetInternalData();
 }
 
 QModelIndex* QIdentityProxyModel_protectedbase_createIndex_row_column(const VirtualQIdentityProxyModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QIdentityProxyModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QIdentityProxyModel_protectedbase_encodeData(const VirtualQIdentityProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1370,71 +1370,71 @@ void QIdentityProxyModel_protectedbase_encodeData(const VirtualQIdentityProxyMod
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QIdentityProxyModel::encodeData(indexes_QList, *stream);
 }
 
 bool QIdentityProxyModel_protectedbase_decodeData(VirtualQIdentityProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QIdentityProxyModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QIdentityProxyModel_protectedbase_beginInsertRows(VirtualQIdentityProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QIdentityProxyModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QIdentityProxyModel_protectedbase_endInsertRows(VirtualQIdentityProxyModel* self) {
-	self->endInsertRows();
+	self->QIdentityProxyModel::endInsertRows();
 }
 
 void QIdentityProxyModel_protectedbase_beginRemoveRows(VirtualQIdentityProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QIdentityProxyModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QIdentityProxyModel_protectedbase_endRemoveRows(VirtualQIdentityProxyModel* self) {
-	self->endRemoveRows();
+	self->QIdentityProxyModel::endRemoveRows();
 }
 
 bool QIdentityProxyModel_protectedbase_beginMoveRows(VirtualQIdentityProxyModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QIdentityProxyModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QIdentityProxyModel_protectedbase_endMoveRows(VirtualQIdentityProxyModel* self) {
-	self->endMoveRows();
+	self->QIdentityProxyModel::endMoveRows();
 }
 
 void QIdentityProxyModel_protectedbase_beginInsertColumns(VirtualQIdentityProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QIdentityProxyModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QIdentityProxyModel_protectedbase_endInsertColumns(VirtualQIdentityProxyModel* self) {
-	self->endInsertColumns();
+	self->QIdentityProxyModel::endInsertColumns();
 }
 
 void QIdentityProxyModel_protectedbase_beginRemoveColumns(VirtualQIdentityProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QIdentityProxyModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QIdentityProxyModel_protectedbase_endRemoveColumns(VirtualQIdentityProxyModel* self) {
-	self->endRemoveColumns();
+	self->QIdentityProxyModel::endRemoveColumns();
 }
 
 bool QIdentityProxyModel_protectedbase_beginMoveColumns(VirtualQIdentityProxyModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QIdentityProxyModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QIdentityProxyModel_protectedbase_endMoveColumns(VirtualQIdentityProxyModel* self) {
-	self->endMoveColumns();
+	self->QIdentityProxyModel::endMoveColumns();
 }
 
 void QIdentityProxyModel_protectedbase_beginResetModel(VirtualQIdentityProxyModel* self) {
-	self->beginResetModel();
+	self->QIdentityProxyModel::beginResetModel();
 }
 
 void QIdentityProxyModel_protectedbase_endResetModel(VirtualQIdentityProxyModel* self) {
-	self->endResetModel();
+	self->QIdentityProxyModel::endResetModel();
 }
 
 void QIdentityProxyModel_protectedbase_changePersistentIndex(VirtualQIdentityProxyModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QIdentityProxyModel::changePersistentIndex(*from, *to);
 }
 
 void QIdentityProxyModel_protectedbase_changePersistentIndexList(VirtualQIdentityProxyModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1450,11 +1450,11 @@ void QIdentityProxyModel_protectedbase_changePersistentIndexList(VirtualQIdentit
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QIdentityProxyModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QIdentityProxyModel_protectedbase_persistentIndexList(const VirtualQIdentityProxyModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QIdentityProxyModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1467,19 +1467,19 @@ struct seaqt_array /* of QModelIndex* */  QIdentityProxyModel_protectedbase_pers
 }
 
 QObject* QIdentityProxyModel_protectedbase_sender(const VirtualQIdentityProxyModel* self) {
-	return self->sender();
+	return self->QIdentityProxyModel::sender();
 }
 
 int QIdentityProxyModel_protectedbase_senderSignalIndex(const VirtualQIdentityProxyModel* self) {
-	return self->senderSignalIndex();
+	return self->QIdentityProxyModel::senderSignalIndex();
 }
 
 int QIdentityProxyModel_protectedbase_receivers(const VirtualQIdentityProxyModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QIdentityProxyModel::receivers(signal);
 }
 
 bool QIdentityProxyModel_protectedbase_isSignalConnected(const VirtualQIdentityProxyModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QIdentityProxyModel::isSignalConnected(*signal);
 }
 
 void QIdentityProxyModel_delete(QIdentityProxyModel* self) {

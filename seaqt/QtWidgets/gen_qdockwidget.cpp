@@ -1173,43 +1173,43 @@ void QDockWidget_virtualbase_disconnectNotify(VirtualQDockWidget* self, QMetaMet
 }
 
 void QDockWidget_protectedbase_initStyleOption(const VirtualQDockWidget* self, QStyleOptionDockWidget* option) {
-	self->initStyleOption(option);
+	self->QDockWidget::initStyleOption(option);
 }
 
 void QDockWidget_protectedbase_updateMicroFocus(VirtualQDockWidget* self) {
-	self->updateMicroFocus();
+	self->QDockWidget::updateMicroFocus();
 }
 
 void QDockWidget_protectedbase_create(VirtualQDockWidget* self) {
-	self->create();
+	self->QDockWidget::create();
 }
 
 void QDockWidget_protectedbase_destroy(VirtualQDockWidget* self) {
-	self->destroy();
+	self->QDockWidget::destroy();
 }
 
 bool QDockWidget_protectedbase_focusNextChild(VirtualQDockWidget* self) {
-	return self->focusNextChild();
+	return self->QDockWidget::focusNextChild();
 }
 
 bool QDockWidget_protectedbase_focusPreviousChild(VirtualQDockWidget* self) {
-	return self->focusPreviousChild();
+	return self->QDockWidget::focusPreviousChild();
 }
 
 QObject* QDockWidget_protectedbase_sender(const VirtualQDockWidget* self) {
-	return self->sender();
+	return self->QDockWidget::sender();
 }
 
 int QDockWidget_protectedbase_senderSignalIndex(const VirtualQDockWidget* self) {
-	return self->senderSignalIndex();
+	return self->QDockWidget::senderSignalIndex();
 }
 
 int QDockWidget_protectedbase_receivers(const VirtualQDockWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDockWidget::receivers(signal);
 }
 
 bool QDockWidget_protectedbase_isSignalConnected(const VirtualQDockWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDockWidget::isSignalConnected(*signal);
 }
 
 void QDockWidget_delete(QDockWidget* self) {

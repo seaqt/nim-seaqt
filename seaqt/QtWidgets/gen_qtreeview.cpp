@@ -2224,149 +2224,149 @@ void QTreeView_virtualbase_disconnectNotify(VirtualQTreeView* self, QMetaMethod*
 }
 
 void QTreeView_protectedbase_columnResized(VirtualQTreeView* self, int column, int oldSize, int newSize) {
-	self->columnResized(static_cast<int>(column), static_cast<int>(oldSize), static_cast<int>(newSize));
+	self->QTreeView::columnResized(static_cast<int>(column), static_cast<int>(oldSize), static_cast<int>(newSize));
 }
 
 void QTreeView_protectedbase_columnCountChanged(VirtualQTreeView* self, int oldCount, int newCount) {
-	self->columnCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
+	self->QTreeView::columnCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
 }
 
 void QTreeView_protectedbase_columnMoved(VirtualQTreeView* self) {
-	self->columnMoved();
+	self->QTreeView::columnMoved();
 }
 
 void QTreeView_protectedbase_reexpand(VirtualQTreeView* self) {
-	self->reexpand();
+	self->QTreeView::reexpand();
 }
 
 void QTreeView_protectedbase_rowsRemoved(VirtualQTreeView* self, QModelIndex* parent, int first, int last) {
-	self->rowsRemoved(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QTreeView::rowsRemoved(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QTreeView_protectedbase_drawTree(const VirtualQTreeView* self, QPainter* painter, QRegion* region) {
-	self->drawTree(painter, *region);
+	self->QTreeView::drawTree(painter, *region);
 }
 
 int QTreeView_protectedbase_indexRowSizeHint(const VirtualQTreeView* self, QModelIndex* index) {
-	return self->indexRowSizeHint(*index);
+	return self->QTreeView::indexRowSizeHint(*index);
 }
 
 int QTreeView_protectedbase_rowHeight(const VirtualQTreeView* self, QModelIndex* index) {
-	return self->rowHeight(*index);
+	return self->QTreeView::rowHeight(*index);
 }
 
 void QTreeView_protectedbase_setHorizontalStepsPerItem(VirtualQTreeView* self, int steps) {
-	self->setHorizontalStepsPerItem(static_cast<int>(steps));
+	self->QTreeView::setHorizontalStepsPerItem(static_cast<int>(steps));
 }
 
 int QTreeView_protectedbase_horizontalStepsPerItem(const VirtualQTreeView* self) {
-	return self->horizontalStepsPerItem();
+	return self->QTreeView::horizontalStepsPerItem();
 }
 
 void QTreeView_protectedbase_setVerticalStepsPerItem(VirtualQTreeView* self, int steps) {
-	self->setVerticalStepsPerItem(static_cast<int>(steps));
+	self->QTreeView::setVerticalStepsPerItem(static_cast<int>(steps));
 }
 
 int QTreeView_protectedbase_verticalStepsPerItem(const VirtualQTreeView* self) {
-	return self->verticalStepsPerItem();
+	return self->QTreeView::verticalStepsPerItem();
 }
 
 int QTreeView_protectedbase_state(const VirtualQTreeView* self) {
-	VirtualQTreeView::State _ret = self->state();
+	VirtualQTreeView::State _ret = self->QTreeView::state();
 	return static_cast<int>(_ret);
 }
 
 void QTreeView_protectedbase_setState(VirtualQTreeView* self, int state) {
-	self->setState(static_cast<VirtualQTreeView::State>(state));
+	self->QTreeView::setState(static_cast<VirtualQTreeView::State>(state));
 }
 
 void QTreeView_protectedbase_scheduleDelayedItemsLayout(VirtualQTreeView* self) {
-	self->scheduleDelayedItemsLayout();
+	self->QTreeView::scheduleDelayedItemsLayout();
 }
 
 void QTreeView_protectedbase_executeDelayedItemsLayout(VirtualQTreeView* self) {
-	self->executeDelayedItemsLayout();
+	self->QTreeView::executeDelayedItemsLayout();
 }
 
 void QTreeView_protectedbase_setDirtyRegion(VirtualQTreeView* self, QRegion* region) {
-	self->setDirtyRegion(*region);
+	self->QTreeView::setDirtyRegion(*region);
 }
 
 void QTreeView_protectedbase_scrollDirtyRegion(VirtualQTreeView* self, int dx, int dy) {
-	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
+	self->QTreeView::scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
 QPoint* QTreeView_protectedbase_dirtyRegionOffset(const VirtualQTreeView* self) {
-	return new QPoint(self->dirtyRegionOffset());
+	return new QPoint(self->QTreeView::dirtyRegionOffset());
 }
 
 void QTreeView_protectedbase_startAutoScroll(VirtualQTreeView* self) {
-	self->startAutoScroll();
+	self->QTreeView::startAutoScroll();
 }
 
 void QTreeView_protectedbase_stopAutoScroll(VirtualQTreeView* self) {
-	self->stopAutoScroll();
+	self->QTreeView::stopAutoScroll();
 }
 
 void QTreeView_protectedbase_doAutoScroll(VirtualQTreeView* self) {
-	self->doAutoScroll();
+	self->QTreeView::doAutoScroll();
 }
 
 int QTreeView_protectedbase_dropIndicatorPosition(const VirtualQTreeView* self) {
-	VirtualQTreeView::DropIndicatorPosition _ret = self->dropIndicatorPosition();
+	VirtualQTreeView::DropIndicatorPosition _ret = self->QTreeView::dropIndicatorPosition();
 	return static_cast<int>(_ret);
 }
 
 void QTreeView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTreeView* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QTreeView::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QTreeView_protectedbase_viewportMargins(const VirtualQTreeView* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QTreeView::viewportMargins());
 }
 
 void QTreeView_protectedbase_drawFrame(VirtualQTreeView* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QTreeView::drawFrame(param1);
 }
 
 void QTreeView_protectedbase_initStyleOption(const VirtualQTreeView* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QTreeView::initStyleOption(option);
 }
 
 void QTreeView_protectedbase_updateMicroFocus(VirtualQTreeView* self) {
-	self->updateMicroFocus();
+	self->QTreeView::updateMicroFocus();
 }
 
 void QTreeView_protectedbase_create(VirtualQTreeView* self) {
-	self->create();
+	self->QTreeView::create();
 }
 
 void QTreeView_protectedbase_destroy(VirtualQTreeView* self) {
-	self->destroy();
+	self->QTreeView::destroy();
 }
 
 bool QTreeView_protectedbase_focusNextChild(VirtualQTreeView* self) {
-	return self->focusNextChild();
+	return self->QTreeView::focusNextChild();
 }
 
 bool QTreeView_protectedbase_focusPreviousChild(VirtualQTreeView* self) {
-	return self->focusPreviousChild();
+	return self->QTreeView::focusPreviousChild();
 }
 
 QObject* QTreeView_protectedbase_sender(const VirtualQTreeView* self) {
-	return self->sender();
+	return self->QTreeView::sender();
 }
 
 int QTreeView_protectedbase_senderSignalIndex(const VirtualQTreeView* self) {
-	return self->senderSignalIndex();
+	return self->QTreeView::senderSignalIndex();
 }
 
 int QTreeView_protectedbase_receivers(const VirtualQTreeView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTreeView::receivers(signal);
 }
 
 bool QTreeView_protectedbase_isSignalConnected(const VirtualQTreeView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTreeView::isSignalConnected(*signal);
 }
 
 void QTreeView_delete(QTreeView* self) {

@@ -406,19 +406,19 @@ void QPdfPageNavigation_virtualbase_disconnectNotify(VirtualQPdfPageNavigation* 
 }
 
 QObject* QPdfPageNavigation_protectedbase_sender(const VirtualQPdfPageNavigation* self) {
-	return self->sender();
+	return self->QPdfPageNavigation::sender();
 }
 
 int QPdfPageNavigation_protectedbase_senderSignalIndex(const VirtualQPdfPageNavigation* self) {
-	return self->senderSignalIndex();
+	return self->QPdfPageNavigation::senderSignalIndex();
 }
 
 int QPdfPageNavigation_protectedbase_receivers(const VirtualQPdfPageNavigation* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPdfPageNavigation::receivers(signal);
 }
 
 bool QPdfPageNavigation_protectedbase_isSignalConnected(const VirtualQPdfPageNavigation* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPdfPageNavigation::isSignalConnected(*signal);
 }
 
 void QPdfPageNavigation_delete(QPdfPageNavigation* self) {

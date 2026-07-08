@@ -1543,11 +1543,11 @@ void QFileSystemModel_virtualbase_disconnectNotify(VirtualQFileSystemModel* self
 }
 
 void QFileSystemModel_protectedbase_resetInternalData(VirtualQFileSystemModel* self) {
-	self->resetInternalData();
+	self->QFileSystemModel::resetInternalData();
 }
 
 QModelIndex* QFileSystemModel_protectedbase_createIndex_row_column(const VirtualQFileSystemModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QFileSystemModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QFileSystemModel_protectedbase_encodeData(const VirtualQFileSystemModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1557,71 +1557,71 @@ void QFileSystemModel_protectedbase_encodeData(const VirtualQFileSystemModel* se
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QFileSystemModel::encodeData(indexes_QList, *stream);
 }
 
 bool QFileSystemModel_protectedbase_decodeData(VirtualQFileSystemModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QFileSystemModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QFileSystemModel_protectedbase_beginInsertRows(VirtualQFileSystemModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QFileSystemModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QFileSystemModel_protectedbase_endInsertRows(VirtualQFileSystemModel* self) {
-	self->endInsertRows();
+	self->QFileSystemModel::endInsertRows();
 }
 
 void QFileSystemModel_protectedbase_beginRemoveRows(VirtualQFileSystemModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QFileSystemModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QFileSystemModel_protectedbase_endRemoveRows(VirtualQFileSystemModel* self) {
-	self->endRemoveRows();
+	self->QFileSystemModel::endRemoveRows();
 }
 
 bool QFileSystemModel_protectedbase_beginMoveRows(VirtualQFileSystemModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QFileSystemModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QFileSystemModel_protectedbase_endMoveRows(VirtualQFileSystemModel* self) {
-	self->endMoveRows();
+	self->QFileSystemModel::endMoveRows();
 }
 
 void QFileSystemModel_protectedbase_beginInsertColumns(VirtualQFileSystemModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QFileSystemModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QFileSystemModel_protectedbase_endInsertColumns(VirtualQFileSystemModel* self) {
-	self->endInsertColumns();
+	self->QFileSystemModel::endInsertColumns();
 }
 
 void QFileSystemModel_protectedbase_beginRemoveColumns(VirtualQFileSystemModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QFileSystemModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QFileSystemModel_protectedbase_endRemoveColumns(VirtualQFileSystemModel* self) {
-	self->endRemoveColumns();
+	self->QFileSystemModel::endRemoveColumns();
 }
 
 bool QFileSystemModel_protectedbase_beginMoveColumns(VirtualQFileSystemModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QFileSystemModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QFileSystemModel_protectedbase_endMoveColumns(VirtualQFileSystemModel* self) {
-	self->endMoveColumns();
+	self->QFileSystemModel::endMoveColumns();
 }
 
 void QFileSystemModel_protectedbase_beginResetModel(VirtualQFileSystemModel* self) {
-	self->beginResetModel();
+	self->QFileSystemModel::beginResetModel();
 }
 
 void QFileSystemModel_protectedbase_endResetModel(VirtualQFileSystemModel* self) {
-	self->endResetModel();
+	self->QFileSystemModel::endResetModel();
 }
 
 void QFileSystemModel_protectedbase_changePersistentIndex(VirtualQFileSystemModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QFileSystemModel::changePersistentIndex(*from, *to);
 }
 
 void QFileSystemModel_protectedbase_changePersistentIndexList(VirtualQFileSystemModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1637,11 +1637,11 @@ void QFileSystemModel_protectedbase_changePersistentIndexList(VirtualQFileSystem
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QFileSystemModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QFileSystemModel_protectedbase_persistentIndexList(const VirtualQFileSystemModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QFileSystemModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1654,19 +1654,19 @@ struct seaqt_array /* of QModelIndex* */  QFileSystemModel_protectedbase_persist
 }
 
 QObject* QFileSystemModel_protectedbase_sender(const VirtualQFileSystemModel* self) {
-	return self->sender();
+	return self->QFileSystemModel::sender();
 }
 
 int QFileSystemModel_protectedbase_senderSignalIndex(const VirtualQFileSystemModel* self) {
-	return self->senderSignalIndex();
+	return self->QFileSystemModel::senderSignalIndex();
 }
 
 int QFileSystemModel_protectedbase_receivers(const VirtualQFileSystemModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFileSystemModel::receivers(signal);
 }
 
 bool QFileSystemModel_protectedbase_isSignalConnected(const VirtualQFileSystemModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFileSystemModel::isSignalConnected(*signal);
 }
 
 void QFileSystemModel_delete(QFileSystemModel* self) {

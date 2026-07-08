@@ -1,6 +1,5 @@
 #include <QMatrix4x4>
 #include <QRect>
-#include <QSGMaterial>
 #include <QSGMaterialShader>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QSGMaterialShader__RenderState
 #include <qsgmaterialshader.h>
@@ -48,22 +47,6 @@ public:
 	}
 
 	friend void QSGMaterialShader_virtualbase_deactivate(VirtualQSGMaterialShader* self);
-
-	virtual void updateState(const QSGMaterialShader::RenderState& state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) override {
-		if (vtbl->updateState == 0) {
-			QSGMaterialShader::updateState(state, newMaterial, oldMaterial);
-			return;
-		}
-
-		const QSGMaterialShader::RenderState& state_ret = state;
-		// Cast returned reference into pointer
-		QSGMaterialShader__RenderState* sigval1 = const_cast<QSGMaterialShader::RenderState*>(&state_ret);
-		QSGMaterial* sigval2 = newMaterial;
-		QSGMaterial* sigval3 = oldMaterial;
-		vtbl->updateState(this, sigval1, sigval2, sigval3);
-	}
-
-	friend void QSGMaterialShader_virtualbase_updateState(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 
 	virtual const char** attributeNames() const override {
 		if (vtbl->attributeNames == 0) {
@@ -133,10 +116,6 @@ void QSGMaterialShader_deactivate(QSGMaterialShader* self) {
 	self->deactivate();
 }
 
-void QSGMaterialShader_updateState(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
-	self->updateState(*state, newMaterial, oldMaterial);
-}
-
 const char** QSGMaterialShader_attributeNames(const QSGMaterialShader* self) {
 	return (const char**) self->attributeNames();
 }
@@ -152,11 +131,6 @@ void QSGMaterialShader_virtualbase_activate(VirtualQSGMaterialShader* self) {
 void QSGMaterialShader_virtualbase_deactivate(VirtualQSGMaterialShader* self) {
 
 	self->QSGMaterialShader::deactivate();
-}
-
-void QSGMaterialShader_virtualbase_updateState(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
-
-	self->QSGMaterialShader::updateState(*state, newMaterial, oldMaterial);
 }
 
 void QSGMaterialShader_virtualbase_compile(VirtualQSGMaterialShader* self) {

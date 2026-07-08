@@ -1479,47 +1479,47 @@ void QLineEdit_virtualbase_disconnectNotify(VirtualQLineEdit* self, QMetaMethod*
 }
 
 void QLineEdit_protectedbase_initStyleOption(const VirtualQLineEdit* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QLineEdit::initStyleOption(option);
 }
 
 QRect* QLineEdit_protectedbase_cursorRect(const VirtualQLineEdit* self) {
-	return new QRect(self->cursorRect());
+	return new QRect(self->QLineEdit::cursorRect());
 }
 
 void QLineEdit_protectedbase_updateMicroFocus(VirtualQLineEdit* self) {
-	self->updateMicroFocus();
+	self->QLineEdit::updateMicroFocus();
 }
 
 void QLineEdit_protectedbase_create(VirtualQLineEdit* self) {
-	self->create();
+	self->QLineEdit::create();
 }
 
 void QLineEdit_protectedbase_destroy(VirtualQLineEdit* self) {
-	self->destroy();
+	self->QLineEdit::destroy();
 }
 
 bool QLineEdit_protectedbase_focusNextChild(VirtualQLineEdit* self) {
-	return self->focusNextChild();
+	return self->QLineEdit::focusNextChild();
 }
 
 bool QLineEdit_protectedbase_focusPreviousChild(VirtualQLineEdit* self) {
-	return self->focusPreviousChild();
+	return self->QLineEdit::focusPreviousChild();
 }
 
 QObject* QLineEdit_protectedbase_sender(const VirtualQLineEdit* self) {
-	return self->sender();
+	return self->QLineEdit::sender();
 }
 
 int QLineEdit_protectedbase_senderSignalIndex(const VirtualQLineEdit* self) {
-	return self->senderSignalIndex();
+	return self->QLineEdit::senderSignalIndex();
 }
 
 int QLineEdit_protectedbase_receivers(const VirtualQLineEdit* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QLineEdit::receivers(signal);
 }
 
 bool QLineEdit_protectedbase_isSignalConnected(const VirtualQLineEdit* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QLineEdit::isSignalConnected(*signal);
 }
 
 void QLineEdit_delete(QLineEdit* self) {

@@ -71,13 +71,11 @@ export gen_qsgnode_types
 import
   ../QtCore/gen_qrect_types,
   ../QtGui/gen_qmatrix4x4_types,
-  ./gen_qsggeometry_types,
-  ./gen_qsgmaterial_types
+  ./gen_qsggeometry_types
 export
   gen_qrect_types,
   gen_qmatrix4x4_types,
-  gen_qsggeometry_types,
-  gen_qsgmaterial_types
+  gen_qsggeometry_types
 
 type cQSGNode*{.exportc: "QSGNode", incompleteStruct.} = object
 type cQSGBasicGeometryNode*{.exportc: "QSGBasicGeometryNode", incompleteStruct.} = object
@@ -130,11 +128,6 @@ proc fcQSGBasicGeometryNode_matrix(self: pointer): pointer {.importc: "QSGBasicG
 proc fcQSGBasicGeometryNode_clipList(self: pointer): pointer {.importc: "QSGBasicGeometryNode_clipList".}
 proc fcQSGBasicGeometryNode_setRendererMatrix(self: pointer, m: pointer): void {.importc: "QSGBasicGeometryNode_setRendererMatrix".}
 proc fcQSGBasicGeometryNode_setRendererClipList(self: pointer, c: pointer): void {.importc: "QSGBasicGeometryNode_setRendererClipList".}
-proc fcQSGGeometryNode_setMaterial(self: pointer, material: pointer): void {.importc: "QSGGeometryNode_setMaterial".}
-proc fcQSGGeometryNode_material(self: pointer): pointer {.importc: "QSGGeometryNode_material".}
-proc fcQSGGeometryNode_setOpaqueMaterial(self: pointer, material: pointer): void {.importc: "QSGGeometryNode_setOpaqueMaterial".}
-proc fcQSGGeometryNode_opaqueMaterial(self: pointer): pointer {.importc: "QSGGeometryNode_opaqueMaterial".}
-proc fcQSGGeometryNode_activeMaterial(self: pointer): pointer {.importc: "QSGGeometryNode_activeMaterial".}
 proc fcQSGGeometryNode_setRenderOrder(self: pointer, order: cint): void {.importc: "QSGGeometryNode_setRenderOrder".}
 proc fcQSGGeometryNode_renderOrder(self: pointer): cint {.importc: "QSGGeometryNode_renderOrder".}
 proc fcQSGGeometryNode_setInheritedOpacity(self: pointer, opacity: float64): void {.importc: "QSGGeometryNode_setInheritedOpacity".}
@@ -373,21 +366,6 @@ proc setRendererMatrix*(self: gen_qsgnode_types.QSGBasicGeometryNode, m: gen_qma
 
 proc setRendererClipList*(self: gen_qsgnode_types.QSGBasicGeometryNode, c: gen_qsgnode_types.QSGClipNode): void =
   fcQSGBasicGeometryNode_setRendererClipList(self.h, c.h)
-
-proc setMaterial*(self: gen_qsgnode_types.QSGGeometryNode, material: gen_qsgmaterial_types.QSGMaterial): void =
-  fcQSGGeometryNode_setMaterial(self.h, material.h)
-
-proc material*(self: gen_qsgnode_types.QSGGeometryNode): gen_qsgmaterial_types.QSGMaterial =
-  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_material(self.h), owned: false)
-
-proc setOpaqueMaterial*(self: gen_qsgnode_types.QSGGeometryNode, material: gen_qsgmaterial_types.QSGMaterial): void =
-  fcQSGGeometryNode_setOpaqueMaterial(self.h, material.h)
-
-proc opaqueMaterial*(self: gen_qsgnode_types.QSGGeometryNode): gen_qsgmaterial_types.QSGMaterial =
-  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_opaqueMaterial(self.h), owned: false)
-
-proc activeMaterial*(self: gen_qsgnode_types.QSGGeometryNode): gen_qsgmaterial_types.QSGMaterial =
-  gen_qsgmaterial_types.QSGMaterial(h: fcQSGGeometryNode_activeMaterial(self.h), owned: false)
 
 proc setRenderOrder*(self: gen_qsgnode_types.QSGGeometryNode, order: cint): void =
   fcQSGGeometryNode_setRenderOrder(self.h, order)

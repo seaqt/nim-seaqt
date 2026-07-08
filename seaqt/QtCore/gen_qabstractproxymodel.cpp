@@ -1391,11 +1391,11 @@ void QAbstractProxyModel_virtualbase_disconnectNotify(VirtualQAbstractProxyModel
 }
 
 void QAbstractProxyModel_protectedbase_resetInternalData(VirtualQAbstractProxyModel* self) {
-	self->resetInternalData();
+	self->QAbstractProxyModel::resetInternalData();
 }
 
 QModelIndex* QAbstractProxyModel_protectedbase_createIndex_row_column(const VirtualQAbstractProxyModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QAbstractProxyModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QAbstractProxyModel_protectedbase_encodeData(const VirtualQAbstractProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1405,71 +1405,71 @@ void QAbstractProxyModel_protectedbase_encodeData(const VirtualQAbstractProxyMod
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QAbstractProxyModel::encodeData(indexes_QList, *stream);
 }
 
 bool QAbstractProxyModel_protectedbase_decodeData(VirtualQAbstractProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QAbstractProxyModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QAbstractProxyModel_protectedbase_beginInsertRows(VirtualQAbstractProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractProxyModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractProxyModel_protectedbase_endInsertRows(VirtualQAbstractProxyModel* self) {
-	self->endInsertRows();
+	self->QAbstractProxyModel::endInsertRows();
 }
 
 void QAbstractProxyModel_protectedbase_beginRemoveRows(VirtualQAbstractProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractProxyModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractProxyModel_protectedbase_endRemoveRows(VirtualQAbstractProxyModel* self) {
-	self->endRemoveRows();
+	self->QAbstractProxyModel::endRemoveRows();
 }
 
 bool QAbstractProxyModel_protectedbase_beginMoveRows(VirtualQAbstractProxyModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QAbstractProxyModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QAbstractProxyModel_protectedbase_endMoveRows(VirtualQAbstractProxyModel* self) {
-	self->endMoveRows();
+	self->QAbstractProxyModel::endMoveRows();
 }
 
 void QAbstractProxyModel_protectedbase_beginInsertColumns(VirtualQAbstractProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractProxyModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractProxyModel_protectedbase_endInsertColumns(VirtualQAbstractProxyModel* self) {
-	self->endInsertColumns();
+	self->QAbstractProxyModel::endInsertColumns();
 }
 
 void QAbstractProxyModel_protectedbase_beginRemoveColumns(VirtualQAbstractProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractProxyModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractProxyModel_protectedbase_endRemoveColumns(VirtualQAbstractProxyModel* self) {
-	self->endRemoveColumns();
+	self->QAbstractProxyModel::endRemoveColumns();
 }
 
 bool QAbstractProxyModel_protectedbase_beginMoveColumns(VirtualQAbstractProxyModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QAbstractProxyModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QAbstractProxyModel_protectedbase_endMoveColumns(VirtualQAbstractProxyModel* self) {
-	self->endMoveColumns();
+	self->QAbstractProxyModel::endMoveColumns();
 }
 
 void QAbstractProxyModel_protectedbase_beginResetModel(VirtualQAbstractProxyModel* self) {
-	self->beginResetModel();
+	self->QAbstractProxyModel::beginResetModel();
 }
 
 void QAbstractProxyModel_protectedbase_endResetModel(VirtualQAbstractProxyModel* self) {
-	self->endResetModel();
+	self->QAbstractProxyModel::endResetModel();
 }
 
 void QAbstractProxyModel_protectedbase_changePersistentIndex(VirtualQAbstractProxyModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QAbstractProxyModel::changePersistentIndex(*from, *to);
 }
 
 void QAbstractProxyModel_protectedbase_changePersistentIndexList(VirtualQAbstractProxyModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1485,11 +1485,11 @@ void QAbstractProxyModel_protectedbase_changePersistentIndexList(VirtualQAbstrac
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QAbstractProxyModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QAbstractProxyModel_protectedbase_persistentIndexList(const VirtualQAbstractProxyModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QAbstractProxyModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1502,19 +1502,19 @@ struct seaqt_array /* of QModelIndex* */  QAbstractProxyModel_protectedbase_pers
 }
 
 QObject* QAbstractProxyModel_protectedbase_sender(const VirtualQAbstractProxyModel* self) {
-	return self->sender();
+	return self->QAbstractProxyModel::sender();
 }
 
 int QAbstractProxyModel_protectedbase_senderSignalIndex(const VirtualQAbstractProxyModel* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractProxyModel::senderSignalIndex();
 }
 
 int QAbstractProxyModel_protectedbase_receivers(const VirtualQAbstractProxyModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractProxyModel::receivers(signal);
 }
 
 bool QAbstractProxyModel_protectedbase_isSignalConnected(const VirtualQAbstractProxyModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractProxyModel::isSignalConnected(*signal);
 }
 
 void QAbstractProxyModel_delete(QAbstractProxyModel* self) {

@@ -811,19 +811,19 @@ void QDnsLookup_virtualbase_disconnectNotify(VirtualQDnsLookup* self, QMetaMetho
 }
 
 QObject* QDnsLookup_protectedbase_sender(const VirtualQDnsLookup* self) {
-	return self->sender();
+	return self->QDnsLookup::sender();
 }
 
 int QDnsLookup_protectedbase_senderSignalIndex(const VirtualQDnsLookup* self) {
-	return self->senderSignalIndex();
+	return self->QDnsLookup::senderSignalIndex();
 }
 
 int QDnsLookup_protectedbase_receivers(const VirtualQDnsLookup* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDnsLookup::receivers(signal);
 }
 
 bool QDnsLookup_protectedbase_isSignalConnected(const VirtualQDnsLookup* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDnsLookup::isSignalConnected(*signal);
 }
 
 void QDnsLookup_delete(QDnsLookup* self) {

@@ -1309,51 +1309,51 @@ void QAbstractSpinBox_virtualbase_disconnectNotify(VirtualQAbstractSpinBox* self
 }
 
 void QAbstractSpinBox_protectedbase_initStyleOption(const VirtualQAbstractSpinBox* self, QStyleOptionSpinBox* option) {
-	self->initStyleOption(option);
+	self->QAbstractSpinBox::initStyleOption(option);
 }
 
 QLineEdit* QAbstractSpinBox_protectedbase_lineEdit(const VirtualQAbstractSpinBox* self) {
-	return self->lineEdit();
+	return self->QAbstractSpinBox::lineEdit();
 }
 
 void QAbstractSpinBox_protectedbase_setLineEdit(VirtualQAbstractSpinBox* self, QLineEdit* edit) {
-	self->setLineEdit(edit);
+	self->QAbstractSpinBox::setLineEdit(edit);
 }
 
 void QAbstractSpinBox_protectedbase_updateMicroFocus(VirtualQAbstractSpinBox* self) {
-	self->updateMicroFocus();
+	self->QAbstractSpinBox::updateMicroFocus();
 }
 
 void QAbstractSpinBox_protectedbase_create(VirtualQAbstractSpinBox* self) {
-	self->create();
+	self->QAbstractSpinBox::create();
 }
 
 void QAbstractSpinBox_protectedbase_destroy(VirtualQAbstractSpinBox* self) {
-	self->destroy();
+	self->QAbstractSpinBox::destroy();
 }
 
 bool QAbstractSpinBox_protectedbase_focusNextChild(VirtualQAbstractSpinBox* self) {
-	return self->focusNextChild();
+	return self->QAbstractSpinBox::focusNextChild();
 }
 
 bool QAbstractSpinBox_protectedbase_focusPreviousChild(VirtualQAbstractSpinBox* self) {
-	return self->focusPreviousChild();
+	return self->QAbstractSpinBox::focusPreviousChild();
 }
 
 QObject* QAbstractSpinBox_protectedbase_sender(const VirtualQAbstractSpinBox* self) {
-	return self->sender();
+	return self->QAbstractSpinBox::sender();
 }
 
 int QAbstractSpinBox_protectedbase_senderSignalIndex(const VirtualQAbstractSpinBox* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractSpinBox::senderSignalIndex();
 }
 
 int QAbstractSpinBox_protectedbase_receivers(const VirtualQAbstractSpinBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractSpinBox::receivers(signal);
 }
 
 bool QAbstractSpinBox_protectedbase_isSignalConnected(const VirtualQAbstractSpinBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractSpinBox::isSignalConnected(*signal);
 }
 
 void QAbstractSpinBox_delete(QAbstractSpinBox* self) {

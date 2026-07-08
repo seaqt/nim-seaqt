@@ -230,7 +230,6 @@ proc fcQWebEnginePage_replaceMisspelledWord(self: pointer, replacement: struct_s
 proc fcQWebEnginePage_event(self: pointer, param1: pointer): bool {.importc: "QWebEnginePage_event".}
 proc fcQWebEnginePage_findTextSubString(self: pointer, subString: struct_seaqt_string): void {.importc: "QWebEnginePage_findText_subString".}
 proc fcQWebEnginePage_createStandardContextMenu(self: pointer): pointer {.importc: "QWebEnginePage_createStandardContextMenu".}
-proc fcQWebEnginePage_setFeaturePermission(self: pointer, securityOrigin: pointer, feature: cint, policy: cint): void {.importc: "QWebEnginePage_setFeaturePermission".}
 proc fcQWebEnginePage_loadUrl(self: pointer, url: pointer): void {.importc: "QWebEnginePage_load_url".}
 proc fcQWebEnginePage_loadRequest(self: pointer, request: pointer): void {.importc: "QWebEnginePage_load_request".}
 proc fcQWebEnginePage_downloadUrl(self: pointer, url: pointer): void {.importc: "QWebEnginePage_download_url".}
@@ -453,9 +452,6 @@ proc findText*(self: gen_qwebenginepage_types.QWebEnginePage, subString: openArr
 
 proc createStandardContextMenu*(self: gen_qwebenginepage_types.QWebEnginePage): gen_qmenu_types.QMenu =
   gen_qmenu_types.QMenu(h: fcQWebEnginePage_createStandardContextMenu(self.h), owned: false)
-
-proc setFeaturePermission*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, feature: cint, policy: cint): void =
-  fcQWebEnginePage_setFeaturePermission(self.h, securityOrigin.h, cint(feature), cint(policy))
 
 proc load*(self: gen_qwebenginepage_types.QWebEnginePage, url: gen_qurl_types.QUrl): void =
   fcQWebEnginePage_loadUrl(self.h, url.h)

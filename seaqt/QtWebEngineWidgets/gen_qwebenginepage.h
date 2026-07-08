@@ -129,7 +129,6 @@ void QWebEnginePage_replaceMisspelledWord(QWebEnginePage* self, struct seaqt_str
 bool QWebEnginePage_event(QWebEnginePage* self, QEvent* param1);
 void QWebEnginePage_findText_subString(QWebEnginePage* self, struct seaqt_string subString);
 QMenu* QWebEnginePage_createStandardContextMenu(QWebEnginePage* self);
-void QWebEnginePage_setFeaturePermission(QWebEnginePage* self, QUrl* securityOrigin, int feature, int policy);
 void QWebEnginePage_load_url(QWebEnginePage* self, QUrl* url);
 void QWebEnginePage_load_request(QWebEnginePage* self, QWebEngineHttpRequest* request);
 void QWebEnginePage_download_url(QWebEnginePage* self, QUrl* url);

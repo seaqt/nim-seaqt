@@ -1078,19 +1078,19 @@ void QQuickWindow_virtualbase_disconnectNotify(VirtualQQuickWindow* self, QMetaM
 }
 
 QObject* QQuickWindow_protectedbase_sender(const VirtualQQuickWindow* self) {
-	return self->sender();
+	return self->QQuickWindow::sender();
 }
 
 int QQuickWindow_protectedbase_senderSignalIndex(const VirtualQQuickWindow* self) {
-	return self->senderSignalIndex();
+	return self->QQuickWindow::senderSignalIndex();
 }
 
 int QQuickWindow_protectedbase_receivers(const VirtualQQuickWindow* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickWindow::receivers(signal);
 }
 
 bool QQuickWindow_protectedbase_isSignalConnected(const VirtualQQuickWindow* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickWindow::isSignalConnected(*signal);
 }
 
 void QQuickWindow_delete(QQuickWindow* self) {

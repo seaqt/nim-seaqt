@@ -1045,43 +1045,43 @@ void QFocusFrame_virtualbase_disconnectNotify(VirtualQFocusFrame* self, QMetaMet
 }
 
 void QFocusFrame_protectedbase_initStyleOption(const VirtualQFocusFrame* self, QStyleOption* option) {
-	self->initStyleOption(option);
+	self->QFocusFrame::initStyleOption(option);
 }
 
 void QFocusFrame_protectedbase_updateMicroFocus(VirtualQFocusFrame* self) {
-	self->updateMicroFocus();
+	self->QFocusFrame::updateMicroFocus();
 }
 
 void QFocusFrame_protectedbase_create(VirtualQFocusFrame* self) {
-	self->create();
+	self->QFocusFrame::create();
 }
 
 void QFocusFrame_protectedbase_destroy(VirtualQFocusFrame* self) {
-	self->destroy();
+	self->QFocusFrame::destroy();
 }
 
 bool QFocusFrame_protectedbase_focusNextChild(VirtualQFocusFrame* self) {
-	return self->focusNextChild();
+	return self->QFocusFrame::focusNextChild();
 }
 
 bool QFocusFrame_protectedbase_focusPreviousChild(VirtualQFocusFrame* self) {
-	return self->focusPreviousChild();
+	return self->QFocusFrame::focusPreviousChild();
 }
 
 QObject* QFocusFrame_protectedbase_sender(const VirtualQFocusFrame* self) {
-	return self->sender();
+	return self->QFocusFrame::sender();
 }
 
 int QFocusFrame_protectedbase_senderSignalIndex(const VirtualQFocusFrame* self) {
-	return self->senderSignalIndex();
+	return self->QFocusFrame::senderSignalIndex();
 }
 
 int QFocusFrame_protectedbase_receivers(const VirtualQFocusFrame* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFocusFrame::receivers(signal);
 }
 
 bool QFocusFrame_protectedbase_isSignalConnected(const VirtualQFocusFrame* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFocusFrame::isSignalConnected(*signal);
 }
 
 void QFocusFrame_delete(QFocusFrame* self) {

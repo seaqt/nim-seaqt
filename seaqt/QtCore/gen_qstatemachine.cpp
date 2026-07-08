@@ -576,19 +576,19 @@ void QStateMachine_virtualbase_disconnectNotify(VirtualQStateMachine* self, QMet
 }
 
 QObject* QStateMachine_protectedbase_sender(const VirtualQStateMachine* self) {
-	return self->sender();
+	return self->QStateMachine::sender();
 }
 
 int QStateMachine_protectedbase_senderSignalIndex(const VirtualQStateMachine* self) {
-	return self->senderSignalIndex();
+	return self->QStateMachine::senderSignalIndex();
 }
 
 int QStateMachine_protectedbase_receivers(const VirtualQStateMachine* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QStateMachine::receivers(signal);
 }
 
 bool QStateMachine_protectedbase_isSignalConnected(const VirtualQStateMachine* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QStateMachine::isSignalConnected(*signal);
 }
 
 void QStateMachine_delete(QStateMachine* self) {

@@ -1162,43 +1162,43 @@ void QMenuBar_virtualbase_disconnectNotify(VirtualQMenuBar* self, QMetaMethod* s
 }
 
 void QMenuBar_protectedbase_initStyleOption(const VirtualQMenuBar* self, QStyleOptionMenuItem* option, QAction* action) {
-	self->initStyleOption(option, action);
+	self->QMenuBar::initStyleOption(option, action);
 }
 
 void QMenuBar_protectedbase_updateMicroFocus(VirtualQMenuBar* self) {
-	self->updateMicroFocus();
+	self->QMenuBar::updateMicroFocus();
 }
 
 void QMenuBar_protectedbase_create(VirtualQMenuBar* self) {
-	self->create();
+	self->QMenuBar::create();
 }
 
 void QMenuBar_protectedbase_destroy(VirtualQMenuBar* self) {
-	self->destroy();
+	self->QMenuBar::destroy();
 }
 
 bool QMenuBar_protectedbase_focusNextChild(VirtualQMenuBar* self) {
-	return self->focusNextChild();
+	return self->QMenuBar::focusNextChild();
 }
 
 bool QMenuBar_protectedbase_focusPreviousChild(VirtualQMenuBar* self) {
-	return self->focusPreviousChild();
+	return self->QMenuBar::focusPreviousChild();
 }
 
 QObject* QMenuBar_protectedbase_sender(const VirtualQMenuBar* self) {
-	return self->sender();
+	return self->QMenuBar::sender();
 }
 
 int QMenuBar_protectedbase_senderSignalIndex(const VirtualQMenuBar* self) {
-	return self->senderSignalIndex();
+	return self->QMenuBar::senderSignalIndex();
 }
 
 int QMenuBar_protectedbase_receivers(const VirtualQMenuBar* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMenuBar::receivers(signal);
 }
 
 bool QMenuBar_protectedbase_isSignalConnected(const VirtualQMenuBar* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMenuBar::isSignalConnected(*signal);
 }
 
 void QMenuBar_delete(QMenuBar* self) {

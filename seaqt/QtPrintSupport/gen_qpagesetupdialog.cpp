@@ -1143,43 +1143,43 @@ void QPageSetupDialog_virtualbase_disconnectNotify(VirtualQPageSetupDialog* self
 }
 
 void QPageSetupDialog_protectedbase_adjustPosition(VirtualQPageSetupDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QPageSetupDialog::adjustPosition(param1);
 }
 
 void QPageSetupDialog_protectedbase_updateMicroFocus(VirtualQPageSetupDialog* self) {
-	self->updateMicroFocus();
+	self->QPageSetupDialog::updateMicroFocus();
 }
 
 void QPageSetupDialog_protectedbase_create(VirtualQPageSetupDialog* self) {
-	self->create();
+	self->QPageSetupDialog::create();
 }
 
 void QPageSetupDialog_protectedbase_destroy(VirtualQPageSetupDialog* self) {
-	self->destroy();
+	self->QPageSetupDialog::destroy();
 }
 
 bool QPageSetupDialog_protectedbase_focusNextChild(VirtualQPageSetupDialog* self) {
-	return self->focusNextChild();
+	return self->QPageSetupDialog::focusNextChild();
 }
 
 bool QPageSetupDialog_protectedbase_focusPreviousChild(VirtualQPageSetupDialog* self) {
-	return self->focusPreviousChild();
+	return self->QPageSetupDialog::focusPreviousChild();
 }
 
 QObject* QPageSetupDialog_protectedbase_sender(const VirtualQPageSetupDialog* self) {
-	return self->sender();
+	return self->QPageSetupDialog::sender();
 }
 
 int QPageSetupDialog_protectedbase_senderSignalIndex(const VirtualQPageSetupDialog* self) {
-	return self->senderSignalIndex();
+	return self->QPageSetupDialog::senderSignalIndex();
 }
 
 int QPageSetupDialog_protectedbase_receivers(const VirtualQPageSetupDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPageSetupDialog::receivers(signal);
 }
 
 bool QPageSetupDialog_protectedbase_isSignalConnected(const VirtualQPageSetupDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPageSetupDialog::isSignalConnected(*signal);
 }
 
 void QPageSetupDialog_delete(QPageSetupDialog* self) {

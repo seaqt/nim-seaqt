@@ -386,19 +386,19 @@ void QPdfPageRenderer_virtualbase_disconnectNotify(VirtualQPdfPageRenderer* self
 }
 
 QObject* QPdfPageRenderer_protectedbase_sender(const VirtualQPdfPageRenderer* self) {
-	return self->sender();
+	return self->QPdfPageRenderer::sender();
 }
 
 int QPdfPageRenderer_protectedbase_senderSignalIndex(const VirtualQPdfPageRenderer* self) {
-	return self->senderSignalIndex();
+	return self->QPdfPageRenderer::senderSignalIndex();
 }
 
 int QPdfPageRenderer_protectedbase_receivers(const VirtualQPdfPageRenderer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPdfPageRenderer::receivers(signal);
 }
 
 bool QPdfPageRenderer_protectedbase_isSignalConnected(const VirtualQPdfPageRenderer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPdfPageRenderer::isSignalConnected(*signal);
 }
 
 void QPdfPageRenderer_delete(QPdfPageRenderer* self) {

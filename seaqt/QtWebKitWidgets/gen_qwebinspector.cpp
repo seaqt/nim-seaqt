@@ -1052,39 +1052,39 @@ void QWebInspector_virtualbase_disconnectNotify(VirtualQWebInspector* self, QMet
 }
 
 void QWebInspector_protectedbase_updateMicroFocus(VirtualQWebInspector* self) {
-	self->updateMicroFocus();
+	self->QWebInspector::updateMicroFocus();
 }
 
 void QWebInspector_protectedbase_create(VirtualQWebInspector* self) {
-	self->create();
+	self->QWebInspector::create();
 }
 
 void QWebInspector_protectedbase_destroy(VirtualQWebInspector* self) {
-	self->destroy();
+	self->QWebInspector::destroy();
 }
 
 bool QWebInspector_protectedbase_focusNextChild(VirtualQWebInspector* self) {
-	return self->focusNextChild();
+	return self->QWebInspector::focusNextChild();
 }
 
 bool QWebInspector_protectedbase_focusPreviousChild(VirtualQWebInspector* self) {
-	return self->focusPreviousChild();
+	return self->QWebInspector::focusPreviousChild();
 }
 
 QObject* QWebInspector_protectedbase_sender(const VirtualQWebInspector* self) {
-	return self->sender();
+	return self->QWebInspector::sender();
 }
 
 int QWebInspector_protectedbase_senderSignalIndex(const VirtualQWebInspector* self) {
-	return self->senderSignalIndex();
+	return self->QWebInspector::senderSignalIndex();
 }
 
 int QWebInspector_protectedbase_receivers(const VirtualQWebInspector* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebInspector::receivers(signal);
 }
 
 bool QWebInspector_protectedbase_isSignalConnected(const VirtualQWebInspector* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebInspector::isSignalConnected(*signal);
 }
 
 void QWebInspector_delete(QWebInspector* self) {

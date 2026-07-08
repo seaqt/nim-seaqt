@@ -488,23 +488,23 @@ void QTcpServer_virtualbase_disconnectNotify(VirtualQTcpServer* self, QMetaMetho
 }
 
 void QTcpServer_protectedbase_addPendingConnection(VirtualQTcpServer* self, QTcpSocket* socket) {
-	self->addPendingConnection(socket);
+	self->QTcpServer::addPendingConnection(socket);
 }
 
 QObject* QTcpServer_protectedbase_sender(const VirtualQTcpServer* self) {
-	return self->sender();
+	return self->QTcpServer::sender();
 }
 
 int QTcpServer_protectedbase_senderSignalIndex(const VirtualQTcpServer* self) {
-	return self->senderSignalIndex();
+	return self->QTcpServer::senderSignalIndex();
 }
 
 int QTcpServer_protectedbase_receivers(const VirtualQTcpServer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTcpServer::receivers(signal);
 }
 
 bool QTcpServer_protectedbase_isSignalConnected(const VirtualQTcpServer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTcpServer::isSignalConnected(*signal);
 }
 
 void QTcpServer_delete(QTcpServer* self) {

@@ -362,19 +362,19 @@ void QSGEngine_virtualbase_disconnectNotify(VirtualQSGEngine* self, QMetaMethod*
 }
 
 QObject* QSGEngine_protectedbase_sender(const VirtualQSGEngine* self) {
-	return self->sender();
+	return self->QSGEngine::sender();
 }
 
 int QSGEngine_protectedbase_senderSignalIndex(const VirtualQSGEngine* self) {
-	return self->senderSignalIndex();
+	return self->QSGEngine::senderSignalIndex();
 }
 
 int QSGEngine_protectedbase_receivers(const VirtualQSGEngine* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSGEngine::receivers(signal);
 }
 
 bool QSGEngine_protectedbase_isSignalConnected(const VirtualQSGEngine* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSGEngine::isSignalConnected(*signal);
 }
 
 void QSGEngine_delete(QSGEngine* self) {

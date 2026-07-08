@@ -1067,43 +1067,43 @@ void QRubberBand_virtualbase_disconnectNotify(VirtualQRubberBand* self, QMetaMet
 }
 
 void QRubberBand_protectedbase_initStyleOption(const VirtualQRubberBand* self, QStyleOptionRubberBand* option) {
-	self->initStyleOption(option);
+	self->QRubberBand::initStyleOption(option);
 }
 
 void QRubberBand_protectedbase_updateMicroFocus(VirtualQRubberBand* self) {
-	self->updateMicroFocus();
+	self->QRubberBand::updateMicroFocus();
 }
 
 void QRubberBand_protectedbase_create(VirtualQRubberBand* self) {
-	self->create();
+	self->QRubberBand::create();
 }
 
 void QRubberBand_protectedbase_destroy(VirtualQRubberBand* self) {
-	self->destroy();
+	self->QRubberBand::destroy();
 }
 
 bool QRubberBand_protectedbase_focusNextChild(VirtualQRubberBand* self) {
-	return self->focusNextChild();
+	return self->QRubberBand::focusNextChild();
 }
 
 bool QRubberBand_protectedbase_focusPreviousChild(VirtualQRubberBand* self) {
-	return self->focusPreviousChild();
+	return self->QRubberBand::focusPreviousChild();
 }
 
 QObject* QRubberBand_protectedbase_sender(const VirtualQRubberBand* self) {
-	return self->sender();
+	return self->QRubberBand::sender();
 }
 
 int QRubberBand_protectedbase_senderSignalIndex(const VirtualQRubberBand* self) {
-	return self->senderSignalIndex();
+	return self->QRubberBand::senderSignalIndex();
 }
 
 int QRubberBand_protectedbase_receivers(const VirtualQRubberBand* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QRubberBand::receivers(signal);
 }
 
 bool QRubberBand_protectedbase_isSignalConnected(const VirtualQRubberBand* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QRubberBand::isSignalConnected(*signal);
 }
 
 void QRubberBand_delete(QRubberBand* self) {

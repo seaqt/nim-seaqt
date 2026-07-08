@@ -1252,11 +1252,11 @@ void QPdfBookmarkModel_virtualbase_disconnectNotify(VirtualQPdfBookmarkModel* se
 }
 
 void QPdfBookmarkModel_protectedbase_resetInternalData(VirtualQPdfBookmarkModel* self) {
-	self->resetInternalData();
+	self->QPdfBookmarkModel::resetInternalData();
 }
 
 QModelIndex* QPdfBookmarkModel_protectedbase_createIndex_row_column(const VirtualQPdfBookmarkModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QPdfBookmarkModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QPdfBookmarkModel_protectedbase_encodeData(const VirtualQPdfBookmarkModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1266,71 +1266,71 @@ void QPdfBookmarkModel_protectedbase_encodeData(const VirtualQPdfBookmarkModel* 
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QPdfBookmarkModel::encodeData(indexes_QList, *stream);
 }
 
 bool QPdfBookmarkModel_protectedbase_decodeData(VirtualQPdfBookmarkModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QPdfBookmarkModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QPdfBookmarkModel_protectedbase_beginInsertRows(VirtualQPdfBookmarkModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QPdfBookmarkModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QPdfBookmarkModel_protectedbase_endInsertRows(VirtualQPdfBookmarkModel* self) {
-	self->endInsertRows();
+	self->QPdfBookmarkModel::endInsertRows();
 }
 
 void QPdfBookmarkModel_protectedbase_beginRemoveRows(VirtualQPdfBookmarkModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QPdfBookmarkModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QPdfBookmarkModel_protectedbase_endRemoveRows(VirtualQPdfBookmarkModel* self) {
-	self->endRemoveRows();
+	self->QPdfBookmarkModel::endRemoveRows();
 }
 
 bool QPdfBookmarkModel_protectedbase_beginMoveRows(VirtualQPdfBookmarkModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QPdfBookmarkModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QPdfBookmarkModel_protectedbase_endMoveRows(VirtualQPdfBookmarkModel* self) {
-	self->endMoveRows();
+	self->QPdfBookmarkModel::endMoveRows();
 }
 
 void QPdfBookmarkModel_protectedbase_beginInsertColumns(VirtualQPdfBookmarkModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QPdfBookmarkModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QPdfBookmarkModel_protectedbase_endInsertColumns(VirtualQPdfBookmarkModel* self) {
-	self->endInsertColumns();
+	self->QPdfBookmarkModel::endInsertColumns();
 }
 
 void QPdfBookmarkModel_protectedbase_beginRemoveColumns(VirtualQPdfBookmarkModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QPdfBookmarkModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QPdfBookmarkModel_protectedbase_endRemoveColumns(VirtualQPdfBookmarkModel* self) {
-	self->endRemoveColumns();
+	self->QPdfBookmarkModel::endRemoveColumns();
 }
 
 bool QPdfBookmarkModel_protectedbase_beginMoveColumns(VirtualQPdfBookmarkModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QPdfBookmarkModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QPdfBookmarkModel_protectedbase_endMoveColumns(VirtualQPdfBookmarkModel* self) {
-	self->endMoveColumns();
+	self->QPdfBookmarkModel::endMoveColumns();
 }
 
 void QPdfBookmarkModel_protectedbase_beginResetModel(VirtualQPdfBookmarkModel* self) {
-	self->beginResetModel();
+	self->QPdfBookmarkModel::beginResetModel();
 }
 
 void QPdfBookmarkModel_protectedbase_endResetModel(VirtualQPdfBookmarkModel* self) {
-	self->endResetModel();
+	self->QPdfBookmarkModel::endResetModel();
 }
 
 void QPdfBookmarkModel_protectedbase_changePersistentIndex(VirtualQPdfBookmarkModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QPdfBookmarkModel::changePersistentIndex(*from, *to);
 }
 
 void QPdfBookmarkModel_protectedbase_changePersistentIndexList(VirtualQPdfBookmarkModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1346,11 +1346,11 @@ void QPdfBookmarkModel_protectedbase_changePersistentIndexList(VirtualQPdfBookma
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QPdfBookmarkModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QPdfBookmarkModel_protectedbase_persistentIndexList(const VirtualQPdfBookmarkModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QPdfBookmarkModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1363,19 +1363,19 @@ struct seaqt_array /* of QModelIndex* */  QPdfBookmarkModel_protectedbase_persis
 }
 
 QObject* QPdfBookmarkModel_protectedbase_sender(const VirtualQPdfBookmarkModel* self) {
-	return self->sender();
+	return self->QPdfBookmarkModel::sender();
 }
 
 int QPdfBookmarkModel_protectedbase_senderSignalIndex(const VirtualQPdfBookmarkModel* self) {
-	return self->senderSignalIndex();
+	return self->QPdfBookmarkModel::senderSignalIndex();
 }
 
 int QPdfBookmarkModel_protectedbase_receivers(const VirtualQPdfBookmarkModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPdfBookmarkModel::receivers(signal);
 }
 
 bool QPdfBookmarkModel_protectedbase_isSignalConnected(const VirtualQPdfBookmarkModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPdfBookmarkModel::isSignalConnected(*signal);
 }
 
 void QPdfBookmarkModel_delete(QPdfBookmarkModel* self) {

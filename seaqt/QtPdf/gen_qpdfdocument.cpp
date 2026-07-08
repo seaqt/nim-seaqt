@@ -437,19 +437,19 @@ void QPdfDocument_virtualbase_disconnectNotify(VirtualQPdfDocument* self, QMetaM
 }
 
 QObject* QPdfDocument_protectedbase_sender(const VirtualQPdfDocument* self) {
-	return self->sender();
+	return self->QPdfDocument::sender();
 }
 
 int QPdfDocument_protectedbase_senderSignalIndex(const VirtualQPdfDocument* self) {
-	return self->senderSignalIndex();
+	return self->QPdfDocument::senderSignalIndex();
 }
 
 int QPdfDocument_protectedbase_receivers(const VirtualQPdfDocument* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPdfDocument::receivers(signal);
 }
 
 bool QPdfDocument_protectedbase_isSignalConnected(const VirtualQPdfDocument* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPdfDocument::isSignalConnected(*signal);
 }
 
 void QPdfDocument_delete(QPdfDocument* self) {

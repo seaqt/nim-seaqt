@@ -496,19 +496,19 @@ void QNetworkSession_virtualbase_customEvent(VirtualQNetworkSession* self, QEven
 }
 
 QObject* QNetworkSession_protectedbase_sender(const VirtualQNetworkSession* self) {
-	return self->sender();
+	return self->QNetworkSession::sender();
 }
 
 int QNetworkSession_protectedbase_senderSignalIndex(const VirtualQNetworkSession* self) {
-	return self->senderSignalIndex();
+	return self->QNetworkSession::senderSignalIndex();
 }
 
 int QNetworkSession_protectedbase_receivers(const VirtualQNetworkSession* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QNetworkSession::receivers(signal);
 }
 
 bool QNetworkSession_protectedbase_isSignalConnected(const VirtualQNetworkSession* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QNetworkSession::isSignalConnected(*signal);
 }
 
 void QNetworkSession_delete(QNetworkSession* self) {

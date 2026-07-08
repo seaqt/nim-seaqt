@@ -1366,19 +1366,19 @@ void QWebPage_virtualbase_disconnectNotify(VirtualQWebPage* self, QMetaMethod* s
 }
 
 QObject* QWebPage_protectedbase_sender(const VirtualQWebPage* self) {
-	return self->sender();
+	return self->QWebPage::sender();
 }
 
 int QWebPage_protectedbase_senderSignalIndex(const VirtualQWebPage* self) {
-	return self->senderSignalIndex();
+	return self->QWebPage::senderSignalIndex();
 }
 
 int QWebPage_protectedbase_receivers(const VirtualQWebPage* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebPage::receivers(signal);
 }
 
 bool QWebPage_protectedbase_isSignalConnected(const VirtualQWebPage* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebPage::isSignalConnected(*signal);
 }
 
 void QWebPage_delete(QWebPage* self) {

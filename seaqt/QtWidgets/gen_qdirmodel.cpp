@@ -1423,11 +1423,11 @@ void QDirModel_virtualbase_disconnectNotify(VirtualQDirModel* self, QMetaMethod*
 }
 
 void QDirModel_protectedbase_resetInternalData(VirtualQDirModel* self) {
-	self->resetInternalData();
+	self->QDirModel::resetInternalData();
 }
 
 QModelIndex* QDirModel_protectedbase_createIndex_row_column(const VirtualQDirModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QDirModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QDirModel_protectedbase_encodeData(const VirtualQDirModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1437,71 +1437,71 @@ void QDirModel_protectedbase_encodeData(const VirtualQDirModel* self, struct sea
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QDirModel::encodeData(indexes_QList, *stream);
 }
 
 bool QDirModel_protectedbase_decodeData(VirtualQDirModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QDirModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QDirModel_protectedbase_beginInsertRows(VirtualQDirModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QDirModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QDirModel_protectedbase_endInsertRows(VirtualQDirModel* self) {
-	self->endInsertRows();
+	self->QDirModel::endInsertRows();
 }
 
 void QDirModel_protectedbase_beginRemoveRows(VirtualQDirModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QDirModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QDirModel_protectedbase_endRemoveRows(VirtualQDirModel* self) {
-	self->endRemoveRows();
+	self->QDirModel::endRemoveRows();
 }
 
 bool QDirModel_protectedbase_beginMoveRows(VirtualQDirModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QDirModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QDirModel_protectedbase_endMoveRows(VirtualQDirModel* self) {
-	self->endMoveRows();
+	self->QDirModel::endMoveRows();
 }
 
 void QDirModel_protectedbase_beginInsertColumns(VirtualQDirModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QDirModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QDirModel_protectedbase_endInsertColumns(VirtualQDirModel* self) {
-	self->endInsertColumns();
+	self->QDirModel::endInsertColumns();
 }
 
 void QDirModel_protectedbase_beginRemoveColumns(VirtualQDirModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QDirModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QDirModel_protectedbase_endRemoveColumns(VirtualQDirModel* self) {
-	self->endRemoveColumns();
+	self->QDirModel::endRemoveColumns();
 }
 
 bool QDirModel_protectedbase_beginMoveColumns(VirtualQDirModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QDirModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QDirModel_protectedbase_endMoveColumns(VirtualQDirModel* self) {
-	self->endMoveColumns();
+	self->QDirModel::endMoveColumns();
 }
 
 void QDirModel_protectedbase_beginResetModel(VirtualQDirModel* self) {
-	self->beginResetModel();
+	self->QDirModel::beginResetModel();
 }
 
 void QDirModel_protectedbase_endResetModel(VirtualQDirModel* self) {
-	self->endResetModel();
+	self->QDirModel::endResetModel();
 }
 
 void QDirModel_protectedbase_changePersistentIndex(VirtualQDirModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QDirModel::changePersistentIndex(*from, *to);
 }
 
 void QDirModel_protectedbase_changePersistentIndexList(VirtualQDirModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1517,11 +1517,11 @@ void QDirModel_protectedbase_changePersistentIndexList(VirtualQDirModel* self, s
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QDirModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QDirModel_protectedbase_persistentIndexList(const VirtualQDirModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QDirModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1534,19 +1534,19 @@ struct seaqt_array /* of QModelIndex* */  QDirModel_protectedbase_persistentInde
 }
 
 QObject* QDirModel_protectedbase_sender(const VirtualQDirModel* self) {
-	return self->sender();
+	return self->QDirModel::sender();
 }
 
 int QDirModel_protectedbase_senderSignalIndex(const VirtualQDirModel* self) {
-	return self->senderSignalIndex();
+	return self->QDirModel::senderSignalIndex();
 }
 
 int QDirModel_protectedbase_receivers(const VirtualQDirModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDirModel::receivers(signal);
 }
 
 bool QDirModel_protectedbase_isSignalConnected(const VirtualQDirModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDirModel::isSignalConnected(*signal);
 }
 
 void QDirModel_delete(QDirModel* self) {

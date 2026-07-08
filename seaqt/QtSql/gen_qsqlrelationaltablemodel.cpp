@@ -1589,67 +1589,67 @@ void QSqlRelationalTableModel_virtualbase_disconnectNotify(VirtualQSqlRelational
 }
 
 void QSqlRelationalTableModel_protectedbase_setPrimaryKey(VirtualQSqlRelationalTableModel* self, QSqlIndex* key) {
-	self->setPrimaryKey(*key);
+	self->QSqlRelationalTableModel::setPrimaryKey(*key);
 }
 
 void QSqlRelationalTableModel_protectedbase_setQuery(VirtualQSqlRelationalTableModel* self, QSqlQuery* query) {
-	self->setQuery(*query);
+	self->QSqlRelationalTableModel::setQuery(*query);
 }
 
 QSqlRecord* QSqlRelationalTableModel_protectedbase_primaryValues(const VirtualQSqlRelationalTableModel* self, int row) {
-	return new QSqlRecord(self->primaryValues(static_cast<int>(row)));
+	return new QSqlRecord(self->QSqlRelationalTableModel::primaryValues(static_cast<int>(row)));
 }
 
 void QSqlRelationalTableModel_protectedbase_beginInsertRows(VirtualQSqlRelationalTableModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QSqlRelationalTableModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QSqlRelationalTableModel_protectedbase_endInsertRows(VirtualQSqlRelationalTableModel* self) {
-	self->endInsertRows();
+	self->QSqlRelationalTableModel::endInsertRows();
 }
 
 void QSqlRelationalTableModel_protectedbase_beginRemoveRows(VirtualQSqlRelationalTableModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QSqlRelationalTableModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QSqlRelationalTableModel_protectedbase_endRemoveRows(VirtualQSqlRelationalTableModel* self) {
-	self->endRemoveRows();
+	self->QSqlRelationalTableModel::endRemoveRows();
 }
 
 void QSqlRelationalTableModel_protectedbase_beginInsertColumns(VirtualQSqlRelationalTableModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QSqlRelationalTableModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QSqlRelationalTableModel_protectedbase_endInsertColumns(VirtualQSqlRelationalTableModel* self) {
-	self->endInsertColumns();
+	self->QSqlRelationalTableModel::endInsertColumns();
 }
 
 void QSqlRelationalTableModel_protectedbase_beginRemoveColumns(VirtualQSqlRelationalTableModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QSqlRelationalTableModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QSqlRelationalTableModel_protectedbase_endRemoveColumns(VirtualQSqlRelationalTableModel* self) {
-	self->endRemoveColumns();
+	self->QSqlRelationalTableModel::endRemoveColumns();
 }
 
 void QSqlRelationalTableModel_protectedbase_beginResetModel(VirtualQSqlRelationalTableModel* self) {
-	self->beginResetModel();
+	self->QSqlRelationalTableModel::beginResetModel();
 }
 
 void QSqlRelationalTableModel_protectedbase_endResetModel(VirtualQSqlRelationalTableModel* self) {
-	self->endResetModel();
+	self->QSqlRelationalTableModel::endResetModel();
 }
 
 void QSqlRelationalTableModel_protectedbase_setLastError(VirtualQSqlRelationalTableModel* self, QSqlError* error) {
-	self->setLastError(*error);
+	self->QSqlRelationalTableModel::setLastError(*error);
 }
 
 void QSqlRelationalTableModel_protectedbase_resetInternalData(VirtualQSqlRelationalTableModel* self) {
-	self->resetInternalData();
+	self->QSqlRelationalTableModel::resetInternalData();
 }
 
 QModelIndex* QSqlRelationalTableModel_protectedbase_createIndex_row_column(const VirtualQSqlRelationalTableModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QSqlRelationalTableModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QSqlRelationalTableModel_protectedbase_encodeData(const VirtualQSqlRelationalTableModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1659,31 +1659,31 @@ void QSqlRelationalTableModel_protectedbase_encodeData(const VirtualQSqlRelation
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QSqlRelationalTableModel::encodeData(indexes_QList, *stream);
 }
 
 bool QSqlRelationalTableModel_protectedbase_decodeData(VirtualQSqlRelationalTableModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QSqlRelationalTableModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 bool QSqlRelationalTableModel_protectedbase_beginMoveRows(VirtualQSqlRelationalTableModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QSqlRelationalTableModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QSqlRelationalTableModel_protectedbase_endMoveRows(VirtualQSqlRelationalTableModel* self) {
-	self->endMoveRows();
+	self->QSqlRelationalTableModel::endMoveRows();
 }
 
 bool QSqlRelationalTableModel_protectedbase_beginMoveColumns(VirtualQSqlRelationalTableModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QSqlRelationalTableModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QSqlRelationalTableModel_protectedbase_endMoveColumns(VirtualQSqlRelationalTableModel* self) {
-	self->endMoveColumns();
+	self->QSqlRelationalTableModel::endMoveColumns();
 }
 
 void QSqlRelationalTableModel_protectedbase_changePersistentIndex(VirtualQSqlRelationalTableModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QSqlRelationalTableModel::changePersistentIndex(*from, *to);
 }
 
 void QSqlRelationalTableModel_protectedbase_changePersistentIndexList(VirtualQSqlRelationalTableModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1699,11 +1699,11 @@ void QSqlRelationalTableModel_protectedbase_changePersistentIndexList(VirtualQSq
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QSqlRelationalTableModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QSqlRelationalTableModel_protectedbase_persistentIndexList(const VirtualQSqlRelationalTableModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QSqlRelationalTableModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1716,19 +1716,19 @@ struct seaqt_array /* of QModelIndex* */  QSqlRelationalTableModel_protectedbase
 }
 
 QObject* QSqlRelationalTableModel_protectedbase_sender(const VirtualQSqlRelationalTableModel* self) {
-	return self->sender();
+	return self->QSqlRelationalTableModel::sender();
 }
 
 int QSqlRelationalTableModel_protectedbase_senderSignalIndex(const VirtualQSqlRelationalTableModel* self) {
-	return self->senderSignalIndex();
+	return self->QSqlRelationalTableModel::senderSignalIndex();
 }
 
 int QSqlRelationalTableModel_protectedbase_receivers(const VirtualQSqlRelationalTableModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSqlRelationalTableModel::receivers(signal);
 }
 
 bool QSqlRelationalTableModel_protectedbase_isSignalConnected(const VirtualQSqlRelationalTableModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSqlRelationalTableModel::isSignalConnected(*signal);
 }
 
 void QSqlRelationalTableModel_delete(QSqlRelationalTableModel* self) {

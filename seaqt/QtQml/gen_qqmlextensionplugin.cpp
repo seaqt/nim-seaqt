@@ -360,19 +360,19 @@ void QQmlExtensionPlugin_virtualbase_disconnectNotify(VirtualQQmlExtensionPlugin
 }
 
 QObject* QQmlExtensionPlugin_protectedbase_sender(const VirtualQQmlExtensionPlugin* self) {
-	return self->sender();
+	return self->QQmlExtensionPlugin::sender();
 }
 
 int QQmlExtensionPlugin_protectedbase_senderSignalIndex(const VirtualQQmlExtensionPlugin* self) {
-	return self->senderSignalIndex();
+	return self->QQmlExtensionPlugin::senderSignalIndex();
 }
 
 int QQmlExtensionPlugin_protectedbase_receivers(const VirtualQQmlExtensionPlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQmlExtensionPlugin::receivers(signal);
 }
 
 bool QQmlExtensionPlugin_protectedbase_isSignalConnected(const VirtualQQmlExtensionPlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQmlExtensionPlugin::isSignalConnected(*signal);
 }
 
 void QQmlExtensionPlugin_delete(QQmlExtensionPlugin* self) {
@@ -695,19 +695,19 @@ void QQmlEngineExtensionPlugin_virtualbase_disconnectNotify(VirtualQQmlEngineExt
 }
 
 QObject* QQmlEngineExtensionPlugin_protectedbase_sender(const VirtualQQmlEngineExtensionPlugin* self) {
-	return self->sender();
+	return self->QQmlEngineExtensionPlugin::sender();
 }
 
 int QQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(const VirtualQQmlEngineExtensionPlugin* self) {
-	return self->senderSignalIndex();
+	return self->QQmlEngineExtensionPlugin::senderSignalIndex();
 }
 
 int QQmlEngineExtensionPlugin_protectedbase_receivers(const VirtualQQmlEngineExtensionPlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQmlEngineExtensionPlugin::receivers(signal);
 }
 
 bool QQmlEngineExtensionPlugin_protectedbase_isSignalConnected(const VirtualQQmlEngineExtensionPlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQmlEngineExtensionPlugin::isSignalConnected(*signal);
 }
 
 void QQmlEngineExtensionPlugin_delete(QQmlEngineExtensionPlugin* self) {

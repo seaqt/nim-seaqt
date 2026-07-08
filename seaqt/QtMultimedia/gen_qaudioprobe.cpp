@@ -352,19 +352,19 @@ void QAudioProbe_virtualbase_disconnectNotify(VirtualQAudioProbe* self, QMetaMet
 }
 
 QObject* QAudioProbe_protectedbase_sender(const VirtualQAudioProbe* self) {
-	return self->sender();
+	return self->QAudioProbe::sender();
 }
 
 int QAudioProbe_protectedbase_senderSignalIndex(const VirtualQAudioProbe* self) {
-	return self->senderSignalIndex();
+	return self->QAudioProbe::senderSignalIndex();
 }
 
 int QAudioProbe_protectedbase_receivers(const VirtualQAudioProbe* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioProbe::receivers(signal);
 }
 
 bool QAudioProbe_protectedbase_isSignalConnected(const VirtualQAudioProbe* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioProbe::isSignalConnected(*signal);
 }
 
 void QAudioProbe_delete(QAudioProbe* self) {

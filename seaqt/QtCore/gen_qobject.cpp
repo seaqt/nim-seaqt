@@ -527,19 +527,19 @@ void QObject_virtualbase_disconnectNotify(VirtualQObject* self, QMetaMethod* sig
 }
 
 QObject* QObject_protectedbase_sender(const VirtualQObject* self) {
-	return self->sender();
+	return self->QObject::sender();
 }
 
 int QObject_protectedbase_senderSignalIndex(const VirtualQObject* self) {
-	return self->senderSignalIndex();
+	return self->QObject::senderSignalIndex();
 }
 
 int QObject_protectedbase_receivers(const VirtualQObject* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QObject::receivers(signal);
 }
 
 bool QObject_protectedbase_isSignalConnected(const VirtualQObject* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QObject::isSignalConnected(*signal);
 }
 
 void QObject_delete(QObject* self) {

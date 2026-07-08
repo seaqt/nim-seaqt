@@ -1504,67 +1504,67 @@ void QTextBrowser_virtualbase_disconnectNotify(VirtualQTextBrowser* self, QMetaM
 }
 
 void QTextBrowser_protectedbase_doSetSource_name(VirtualQTextBrowser* self, QUrl* name) {
-	self->doSetSource(*name);
+	self->QTextBrowser::doSetSource(*name);
 }
 
 void QTextBrowser_protectedbase_doSetSource_name_type(VirtualQTextBrowser* self, QUrl* name, int type) {
-	self->doSetSource(*name, static_cast<QTextDocument::ResourceType>(type));
+	self->QTextBrowser::doSetSource(*name, static_cast<QTextDocument::ResourceType>(type));
 }
 
 void QTextBrowser_protectedbase_zoomInF(VirtualQTextBrowser* self, float range) {
-	self->zoomInF(static_cast<float>(range));
+	self->QTextBrowser::zoomInF(static_cast<float>(range));
 }
 
 void QTextBrowser_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTextBrowser* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QTextBrowser::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QTextBrowser_protectedbase_viewportMargins(const VirtualQTextBrowser* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QTextBrowser::viewportMargins());
 }
 
 void QTextBrowser_protectedbase_drawFrame(VirtualQTextBrowser* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QTextBrowser::drawFrame(param1);
 }
 
 void QTextBrowser_protectedbase_initStyleOption(const VirtualQTextBrowser* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QTextBrowser::initStyleOption(option);
 }
 
 void QTextBrowser_protectedbase_updateMicroFocus(VirtualQTextBrowser* self) {
-	self->updateMicroFocus();
+	self->QTextBrowser::updateMicroFocus();
 }
 
 void QTextBrowser_protectedbase_create(VirtualQTextBrowser* self) {
-	self->create();
+	self->QTextBrowser::create();
 }
 
 void QTextBrowser_protectedbase_destroy(VirtualQTextBrowser* self) {
-	self->destroy();
+	self->QTextBrowser::destroy();
 }
 
 bool QTextBrowser_protectedbase_focusNextChild(VirtualQTextBrowser* self) {
-	return self->focusNextChild();
+	return self->QTextBrowser::focusNextChild();
 }
 
 bool QTextBrowser_protectedbase_focusPreviousChild(VirtualQTextBrowser* self) {
-	return self->focusPreviousChild();
+	return self->QTextBrowser::focusPreviousChild();
 }
 
 QObject* QTextBrowser_protectedbase_sender(const VirtualQTextBrowser* self) {
-	return self->sender();
+	return self->QTextBrowser::sender();
 }
 
 int QTextBrowser_protectedbase_senderSignalIndex(const VirtualQTextBrowser* self) {
-	return self->senderSignalIndex();
+	return self->QTextBrowser::senderSignalIndex();
 }
 
 int QTextBrowser_protectedbase_receivers(const VirtualQTextBrowser* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTextBrowser::receivers(signal);
 }
 
 bool QTextBrowser_protectedbase_isSignalConnected(const VirtualQTextBrowser* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTextBrowser::isSignalConnected(*signal);
 }
 
 void QTextBrowser_delete(QTextBrowser* self) {

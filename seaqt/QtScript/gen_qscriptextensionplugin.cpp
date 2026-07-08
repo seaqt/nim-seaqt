@@ -385,19 +385,19 @@ void QScriptExtensionPlugin_virtualbase_disconnectNotify(VirtualQScriptExtension
 }
 
 QObject* QScriptExtensionPlugin_protectedbase_sender(const VirtualQScriptExtensionPlugin* self) {
-	return self->sender();
+	return self->QScriptExtensionPlugin::sender();
 }
 
 int QScriptExtensionPlugin_protectedbase_senderSignalIndex(const VirtualQScriptExtensionPlugin* self) {
-	return self->senderSignalIndex();
+	return self->QScriptExtensionPlugin::senderSignalIndex();
 }
 
 int QScriptExtensionPlugin_protectedbase_receivers(const VirtualQScriptExtensionPlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QScriptExtensionPlugin::receivers(signal);
 }
 
 bool QScriptExtensionPlugin_protectedbase_isSignalConnected(const VirtualQScriptExtensionPlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QScriptExtensionPlugin::isSignalConnected(*signal);
 }
 
 void QScriptExtensionPlugin_delete(QScriptExtensionPlugin* self) {

@@ -1237,11 +1237,11 @@ void QStringListModel_virtualbase_disconnectNotify(VirtualQStringListModel* self
 }
 
 void QStringListModel_protectedbase_resetInternalData(VirtualQStringListModel* self) {
-	self->resetInternalData();
+	self->QStringListModel::resetInternalData();
 }
 
 QModelIndex* QStringListModel_protectedbase_createIndex_row_column(const VirtualQStringListModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QStringListModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QStringListModel_protectedbase_encodeData(const VirtualQStringListModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1251,71 +1251,71 @@ void QStringListModel_protectedbase_encodeData(const VirtualQStringListModel* se
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QStringListModel::encodeData(indexes_QList, *stream);
 }
 
 bool QStringListModel_protectedbase_decodeData(VirtualQStringListModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QStringListModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QStringListModel_protectedbase_beginInsertRows(VirtualQStringListModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QStringListModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QStringListModel_protectedbase_endInsertRows(VirtualQStringListModel* self) {
-	self->endInsertRows();
+	self->QStringListModel::endInsertRows();
 }
 
 void QStringListModel_protectedbase_beginRemoveRows(VirtualQStringListModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QStringListModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QStringListModel_protectedbase_endRemoveRows(VirtualQStringListModel* self) {
-	self->endRemoveRows();
+	self->QStringListModel::endRemoveRows();
 }
 
 bool QStringListModel_protectedbase_beginMoveRows(VirtualQStringListModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QStringListModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QStringListModel_protectedbase_endMoveRows(VirtualQStringListModel* self) {
-	self->endMoveRows();
+	self->QStringListModel::endMoveRows();
 }
 
 void QStringListModel_protectedbase_beginInsertColumns(VirtualQStringListModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QStringListModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QStringListModel_protectedbase_endInsertColumns(VirtualQStringListModel* self) {
-	self->endInsertColumns();
+	self->QStringListModel::endInsertColumns();
 }
 
 void QStringListModel_protectedbase_beginRemoveColumns(VirtualQStringListModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QStringListModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QStringListModel_protectedbase_endRemoveColumns(VirtualQStringListModel* self) {
-	self->endRemoveColumns();
+	self->QStringListModel::endRemoveColumns();
 }
 
 bool QStringListModel_protectedbase_beginMoveColumns(VirtualQStringListModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QStringListModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QStringListModel_protectedbase_endMoveColumns(VirtualQStringListModel* self) {
-	self->endMoveColumns();
+	self->QStringListModel::endMoveColumns();
 }
 
 void QStringListModel_protectedbase_beginResetModel(VirtualQStringListModel* self) {
-	self->beginResetModel();
+	self->QStringListModel::beginResetModel();
 }
 
 void QStringListModel_protectedbase_endResetModel(VirtualQStringListModel* self) {
-	self->endResetModel();
+	self->QStringListModel::endResetModel();
 }
 
 void QStringListModel_protectedbase_changePersistentIndex(VirtualQStringListModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QStringListModel::changePersistentIndex(*from, *to);
 }
 
 void QStringListModel_protectedbase_changePersistentIndexList(VirtualQStringListModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1331,11 +1331,11 @@ void QStringListModel_protectedbase_changePersistentIndexList(VirtualQStringList
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QStringListModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QStringListModel_protectedbase_persistentIndexList(const VirtualQStringListModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QStringListModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1348,19 +1348,19 @@ struct seaqt_array /* of QModelIndex* */  QStringListModel_protectedbase_persist
 }
 
 QObject* QStringListModel_protectedbase_sender(const VirtualQStringListModel* self) {
-	return self->sender();
+	return self->QStringListModel::sender();
 }
 
 int QStringListModel_protectedbase_senderSignalIndex(const VirtualQStringListModel* self) {
-	return self->senderSignalIndex();
+	return self->QStringListModel::senderSignalIndex();
 }
 
 int QStringListModel_protectedbase_receivers(const VirtualQStringListModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QStringListModel::receivers(signal);
 }
 
 bool QStringListModel_protectedbase_isSignalConnected(const VirtualQStringListModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QStringListModel::isSignalConnected(*signal);
 }
 
 void QStringListModel_delete(QStringListModel* self) {

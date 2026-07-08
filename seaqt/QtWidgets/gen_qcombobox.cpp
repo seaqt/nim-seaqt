@@ -1624,43 +1624,43 @@ void QComboBox_virtualbase_disconnectNotify(VirtualQComboBox* self, QMetaMethod*
 }
 
 void QComboBox_protectedbase_initStyleOption(const VirtualQComboBox* self, QStyleOptionComboBox* option) {
-	self->initStyleOption(option);
+	self->QComboBox::initStyleOption(option);
 }
 
 void QComboBox_protectedbase_updateMicroFocus(VirtualQComboBox* self) {
-	self->updateMicroFocus();
+	self->QComboBox::updateMicroFocus();
 }
 
 void QComboBox_protectedbase_create(VirtualQComboBox* self) {
-	self->create();
+	self->QComboBox::create();
 }
 
 void QComboBox_protectedbase_destroy(VirtualQComboBox* self) {
-	self->destroy();
+	self->QComboBox::destroy();
 }
 
 bool QComboBox_protectedbase_focusNextChild(VirtualQComboBox* self) {
-	return self->focusNextChild();
+	return self->QComboBox::focusNextChild();
 }
 
 bool QComboBox_protectedbase_focusPreviousChild(VirtualQComboBox* self) {
-	return self->focusPreviousChild();
+	return self->QComboBox::focusPreviousChild();
 }
 
 QObject* QComboBox_protectedbase_sender(const VirtualQComboBox* self) {
-	return self->sender();
+	return self->QComboBox::sender();
 }
 
 int QComboBox_protectedbase_senderSignalIndex(const VirtualQComboBox* self) {
-	return self->senderSignalIndex();
+	return self->QComboBox::senderSignalIndex();
 }
 
 int QComboBox_protectedbase_receivers(const VirtualQComboBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QComboBox::receivers(signal);
 }
 
 bool QComboBox_protectedbase_isSignalConnected(const VirtualQComboBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QComboBox::isSignalConnected(*signal);
 }
 
 void QComboBox_delete(QComboBox* self) {

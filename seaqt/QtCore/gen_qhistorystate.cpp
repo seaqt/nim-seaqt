@@ -406,19 +406,19 @@ void QHistoryState_virtualbase_disconnectNotify(VirtualQHistoryState* self, QMet
 }
 
 QObject* QHistoryState_protectedbase_sender(const VirtualQHistoryState* self) {
-	return self->sender();
+	return self->QHistoryState::sender();
 }
 
 int QHistoryState_protectedbase_senderSignalIndex(const VirtualQHistoryState* self) {
-	return self->senderSignalIndex();
+	return self->QHistoryState::senderSignalIndex();
 }
 
 int QHistoryState_protectedbase_receivers(const VirtualQHistoryState* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QHistoryState::receivers(signal);
 }
 
 bool QHistoryState_protectedbase_isSignalConnected(const VirtualQHistoryState* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QHistoryState::isSignalConnected(*signal);
 }
 
 void QHistoryState_delete(QHistoryState* self) {

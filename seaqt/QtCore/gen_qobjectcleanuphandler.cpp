@@ -324,19 +324,19 @@ void QObjectCleanupHandler_virtualbase_disconnectNotify(VirtualQObjectCleanupHan
 }
 
 QObject* QObjectCleanupHandler_protectedbase_sender(const VirtualQObjectCleanupHandler* self) {
-	return self->sender();
+	return self->QObjectCleanupHandler::sender();
 }
 
 int QObjectCleanupHandler_protectedbase_senderSignalIndex(const VirtualQObjectCleanupHandler* self) {
-	return self->senderSignalIndex();
+	return self->QObjectCleanupHandler::senderSignalIndex();
 }
 
 int QObjectCleanupHandler_protectedbase_receivers(const VirtualQObjectCleanupHandler* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QObjectCleanupHandler::receivers(signal);
 }
 
 bool QObjectCleanupHandler_protectedbase_isSignalConnected(const VirtualQObjectCleanupHandler* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QObjectCleanupHandler::isSignalConnected(*signal);
 }
 
 void QObjectCleanupHandler_delete(QObjectCleanupHandler* self) {

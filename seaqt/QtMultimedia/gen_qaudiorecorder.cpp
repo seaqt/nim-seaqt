@@ -439,19 +439,19 @@ void QAudioRecorder_virtualbase_disconnectNotify(VirtualQAudioRecorder* self, QM
 }
 
 QObject* QAudioRecorder_protectedbase_sender(const VirtualQAudioRecorder* self) {
-	return self->sender();
+	return self->QAudioRecorder::sender();
 }
 
 int QAudioRecorder_protectedbase_senderSignalIndex(const VirtualQAudioRecorder* self) {
-	return self->senderSignalIndex();
+	return self->QAudioRecorder::senderSignalIndex();
 }
 
 int QAudioRecorder_protectedbase_receivers(const VirtualQAudioRecorder* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioRecorder::receivers(signal);
 }
 
 bool QAudioRecorder_protectedbase_isSignalConnected(const VirtualQAudioRecorder* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioRecorder::isSignalConnected(*signal);
 }
 
 void QAudioRecorder_delete(QAudioRecorder* self) {

@@ -652,19 +652,19 @@ void QAbstractItemDelegate_virtualbase_disconnectNotify(VirtualQAbstractItemDele
 }
 
 QObject* QAbstractItemDelegate_protectedbase_sender(const VirtualQAbstractItemDelegate* self) {
-	return self->sender();
+	return self->QAbstractItemDelegate::sender();
 }
 
 int QAbstractItemDelegate_protectedbase_senderSignalIndex(const VirtualQAbstractItemDelegate* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractItemDelegate::senderSignalIndex();
 }
 
 int QAbstractItemDelegate_protectedbase_receivers(const VirtualQAbstractItemDelegate* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractItemDelegate::receivers(signal);
 }
 
 bool QAbstractItemDelegate_protectedbase_isSignalConnected(const VirtualQAbstractItemDelegate* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractItemDelegate::isSignalConnected(*signal);
 }
 
 void QAbstractItemDelegate_delete(QAbstractItemDelegate* self) {

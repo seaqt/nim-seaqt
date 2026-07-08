@@ -390,19 +390,19 @@ void QMouseEventTransition_virtualbase_disconnectNotify(VirtualQMouseEventTransi
 }
 
 QObject* QMouseEventTransition_protectedbase_sender(const VirtualQMouseEventTransition* self) {
-	return self->sender();
+	return self->QMouseEventTransition::sender();
 }
 
 int QMouseEventTransition_protectedbase_senderSignalIndex(const VirtualQMouseEventTransition* self) {
-	return self->senderSignalIndex();
+	return self->QMouseEventTransition::senderSignalIndex();
 }
 
 int QMouseEventTransition_protectedbase_receivers(const VirtualQMouseEventTransition* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMouseEventTransition::receivers(signal);
 }
 
 bool QMouseEventTransition_protectedbase_isSignalConnected(const VirtualQMouseEventTransition* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMouseEventTransition::isSignalConnected(*signal);
 }
 
 void QMouseEventTransition_delete(QMouseEventTransition* self) {

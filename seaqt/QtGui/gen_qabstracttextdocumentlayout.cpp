@@ -619,27 +619,27 @@ void QAbstractTextDocumentLayout_virtualbase_disconnectNotify(VirtualQAbstractTe
 }
 
 int QAbstractTextDocumentLayout_protectedbase_formatIndex(VirtualQAbstractTextDocumentLayout* self, int pos) {
-	return self->formatIndex(static_cast<int>(pos));
+	return self->QAbstractTextDocumentLayout::formatIndex(static_cast<int>(pos));
 }
 
 QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(VirtualQAbstractTextDocumentLayout* self, int pos) {
-	return new QTextCharFormat(self->format(static_cast<int>(pos)));
+	return new QTextCharFormat(self->QAbstractTextDocumentLayout::format(static_cast<int>(pos)));
 }
 
 QObject* QAbstractTextDocumentLayout_protectedbase_sender(const VirtualQAbstractTextDocumentLayout* self) {
-	return self->sender();
+	return self->QAbstractTextDocumentLayout::sender();
 }
 
 int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQAbstractTextDocumentLayout* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractTextDocumentLayout::senderSignalIndex();
 }
 
 int QAbstractTextDocumentLayout_protectedbase_receivers(const VirtualQAbstractTextDocumentLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractTextDocumentLayout::receivers(signal);
 }
 
 bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractTextDocumentLayout::isSignalConnected(*signal);
 }
 
 void QAbstractTextDocumentLayout_delete(QAbstractTextDocumentLayout* self) {

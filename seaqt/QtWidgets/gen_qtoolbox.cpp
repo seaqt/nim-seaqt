@@ -1191,47 +1191,47 @@ void QToolBox_virtualbase_disconnectNotify(VirtualQToolBox* self, QMetaMethod* s
 }
 
 void QToolBox_protectedbase_drawFrame(VirtualQToolBox* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QToolBox::drawFrame(param1);
 }
 
 void QToolBox_protectedbase_initStyleOption(const VirtualQToolBox* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QToolBox::initStyleOption(option);
 }
 
 void QToolBox_protectedbase_updateMicroFocus(VirtualQToolBox* self) {
-	self->updateMicroFocus();
+	self->QToolBox::updateMicroFocus();
 }
 
 void QToolBox_protectedbase_create(VirtualQToolBox* self) {
-	self->create();
+	self->QToolBox::create();
 }
 
 void QToolBox_protectedbase_destroy(VirtualQToolBox* self) {
-	self->destroy();
+	self->QToolBox::destroy();
 }
 
 bool QToolBox_protectedbase_focusNextChild(VirtualQToolBox* self) {
-	return self->focusNextChild();
+	return self->QToolBox::focusNextChild();
 }
 
 bool QToolBox_protectedbase_focusPreviousChild(VirtualQToolBox* self) {
-	return self->focusPreviousChild();
+	return self->QToolBox::focusPreviousChild();
 }
 
 QObject* QToolBox_protectedbase_sender(const VirtualQToolBox* self) {
-	return self->sender();
+	return self->QToolBox::sender();
 }
 
 int QToolBox_protectedbase_senderSignalIndex(const VirtualQToolBox* self) {
-	return self->senderSignalIndex();
+	return self->QToolBox::senderSignalIndex();
 }
 
 int QToolBox_protectedbase_receivers(const VirtualQToolBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QToolBox::receivers(signal);
 }
 
 bool QToolBox_protectedbase_isSignalConnected(const VirtualQToolBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QToolBox::isSignalConnected(*signal);
 }
 
 void QToolBox_delete(QToolBox* self) {

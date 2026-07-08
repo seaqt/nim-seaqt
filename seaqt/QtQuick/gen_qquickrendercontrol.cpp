@@ -392,19 +392,19 @@ void QQuickRenderControl_virtualbase_disconnectNotify(VirtualQQuickRenderControl
 }
 
 QObject* QQuickRenderControl_protectedbase_sender(const VirtualQQuickRenderControl* self) {
-	return self->sender();
+	return self->QQuickRenderControl::sender();
 }
 
 int QQuickRenderControl_protectedbase_senderSignalIndex(const VirtualQQuickRenderControl* self) {
-	return self->senderSignalIndex();
+	return self->QQuickRenderControl::senderSignalIndex();
 }
 
 int QQuickRenderControl_protectedbase_receivers(const VirtualQQuickRenderControl* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickRenderControl::receivers(signal);
 }
 
 bool QQuickRenderControl_protectedbase_isSignalConnected(const VirtualQQuickRenderControl* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickRenderControl::isSignalConnected(*signal);
 }
 
 void QQuickRenderControl_delete(QQuickRenderControl* self) {

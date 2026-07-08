@@ -432,19 +432,19 @@ void QQmlPropertyMap_virtualbase_disconnectNotify(VirtualQQmlPropertyMap* self, 
 }
 
 QObject* QQmlPropertyMap_protectedbase_sender(const VirtualQQmlPropertyMap* self) {
-	return self->sender();
+	return self->QQmlPropertyMap::sender();
 }
 
 int QQmlPropertyMap_protectedbase_senderSignalIndex(const VirtualQQmlPropertyMap* self) {
-	return self->senderSignalIndex();
+	return self->QQmlPropertyMap::senderSignalIndex();
 }
 
 int QQmlPropertyMap_protectedbase_receivers(const VirtualQQmlPropertyMap* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQmlPropertyMap::receivers(signal);
 }
 
 bool QQmlPropertyMap_protectedbase_isSignalConnected(const VirtualQQmlPropertyMap* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQmlPropertyMap::isSignalConnected(*signal);
 }
 
 void QQmlPropertyMap_delete(QQmlPropertyMap* self) {

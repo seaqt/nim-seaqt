@@ -816,28 +816,28 @@ void QCamera_virtualbase_disconnectNotify(VirtualQCamera* self, QMetaMethod* sig
 
 void QCamera_protectedbase_addPropertyWatch(VirtualQCamera* self, struct seaqt_string name) {
 		QByteArray name_QByteArray(name.data, name.len);
-	self->addPropertyWatch(name_QByteArray);
+	self->QCamera::addPropertyWatch(name_QByteArray);
 }
 
 void QCamera_protectedbase_removePropertyWatch(VirtualQCamera* self, struct seaqt_string name) {
 		QByteArray name_QByteArray(name.data, name.len);
-	self->removePropertyWatch(name_QByteArray);
+	self->QCamera::removePropertyWatch(name_QByteArray);
 }
 
 QObject* QCamera_protectedbase_sender(const VirtualQCamera* self) {
-	return self->sender();
+	return self->QCamera::sender();
 }
 
 int QCamera_protectedbase_senderSignalIndex(const VirtualQCamera* self) {
-	return self->senderSignalIndex();
+	return self->QCamera::senderSignalIndex();
 }
 
 int QCamera_protectedbase_receivers(const VirtualQCamera* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCamera::receivers(signal);
 }
 
 bool QCamera_protectedbase_isSignalConnected(const VirtualQCamera* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCamera::isSignalConnected(*signal);
 }
 
 void QCamera_delete(QCamera* self) {

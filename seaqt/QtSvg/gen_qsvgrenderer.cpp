@@ -481,19 +481,19 @@ void QSvgRenderer_virtualbase_disconnectNotify(VirtualQSvgRenderer* self, QMetaM
 }
 
 QObject* QSvgRenderer_protectedbase_sender(const VirtualQSvgRenderer* self) {
-	return self->sender();
+	return self->QSvgRenderer::sender();
 }
 
 int QSvgRenderer_protectedbase_senderSignalIndex(const VirtualQSvgRenderer* self) {
-	return self->senderSignalIndex();
+	return self->QSvgRenderer::senderSignalIndex();
 }
 
 int QSvgRenderer_protectedbase_receivers(const VirtualQSvgRenderer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSvgRenderer::receivers(signal);
 }
 
 bool QSvgRenderer_protectedbase_isSignalConnected(const VirtualQSvgRenderer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSvgRenderer::isSignalConnected(*signal);
 }
 
 void QSvgRenderer_delete(QSvgRenderer* self) {

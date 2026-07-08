@@ -875,57 +875,57 @@ void QUdpSocket_virtualbase_disconnectNotify(VirtualQUdpSocket* self, QMetaMetho
 }
 
 void QUdpSocket_protectedbase_setSocketState(VirtualQUdpSocket* self, int state) {
-	self->setSocketState(static_cast<VirtualQUdpSocket::SocketState>(state));
+	self->QUdpSocket::setSocketState(static_cast<VirtualQUdpSocket::SocketState>(state));
 }
 
 void QUdpSocket_protectedbase_setSocketError(VirtualQUdpSocket* self, int socketError) {
-	self->setSocketError(static_cast<VirtualQUdpSocket::SocketError>(socketError));
+	self->QUdpSocket::setSocketError(static_cast<VirtualQUdpSocket::SocketError>(socketError));
 }
 
 void QUdpSocket_protectedbase_setLocalPort(VirtualQUdpSocket* self, unsigned short port) {
-	self->setLocalPort(static_cast<quint16>(port));
+	self->QUdpSocket::setLocalPort(static_cast<quint16>(port));
 }
 
 void QUdpSocket_protectedbase_setLocalAddress(VirtualQUdpSocket* self, QHostAddress* address) {
-	self->setLocalAddress(*address);
+	self->QUdpSocket::setLocalAddress(*address);
 }
 
 void QUdpSocket_protectedbase_setPeerPort(VirtualQUdpSocket* self, unsigned short port) {
-	self->setPeerPort(static_cast<quint16>(port));
+	self->QUdpSocket::setPeerPort(static_cast<quint16>(port));
 }
 
 void QUdpSocket_protectedbase_setPeerAddress(VirtualQUdpSocket* self, QHostAddress* address) {
-	self->setPeerAddress(*address);
+	self->QUdpSocket::setPeerAddress(*address);
 }
 
 void QUdpSocket_protectedbase_setPeerName(VirtualQUdpSocket* self, struct seaqt_string name) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->setPeerName(name_QString);
+	self->QUdpSocket::setPeerName(name_QString);
 }
 
 void QUdpSocket_protectedbase_setOpenMode(VirtualQUdpSocket* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQUdpSocket::OpenMode>(openMode));
+	self->QUdpSocket::setOpenMode(static_cast<VirtualQUdpSocket::OpenMode>(openMode));
 }
 
 void QUdpSocket_protectedbase_setErrorString(VirtualQUdpSocket* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QUdpSocket::setErrorString(errorString_QString);
 }
 
 QObject* QUdpSocket_protectedbase_sender(const VirtualQUdpSocket* self) {
-	return self->sender();
+	return self->QUdpSocket::sender();
 }
 
 int QUdpSocket_protectedbase_senderSignalIndex(const VirtualQUdpSocket* self) {
-	return self->senderSignalIndex();
+	return self->QUdpSocket::senderSignalIndex();
 }
 
 int QUdpSocket_protectedbase_receivers(const VirtualQUdpSocket* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QUdpSocket::receivers(signal);
 }
 
 bool QUdpSocket_protectedbase_isSignalConnected(const VirtualQUdpSocket* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QUdpSocket::isSignalConnected(*signal);
 }
 
 void QUdpSocket_delete(QUdpSocket* self) {
