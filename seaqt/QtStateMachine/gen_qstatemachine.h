@@ -145,6 +145,7 @@ bool QStateMachine_protectedbase_isSignalConnected(const VirtualQStateMachine* s
 void QStateMachine_connect_started(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QStateMachine_connect_stopped(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QStateMachine_staticMetaObject();
 void QStateMachine_delete(QStateMachine* self);
 
 typedef struct VirtualQStateMachineSignalEvent VirtualQStateMachineSignalEvent;

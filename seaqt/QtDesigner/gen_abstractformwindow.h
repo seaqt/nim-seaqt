@@ -133,6 +133,7 @@ struct seaqt_string QDesignerFormWindowInterface_tr_s_c(const char* s, const cha
 struct seaqt_string QDesignerFormWindowInterface_tr_s_c_n(const char* s, const char* c, int n);
 void QDesignerFormWindowInterface_activateResourceFilePaths_paths_errorCount(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths, int* errorCount);
 
+const QMetaObject* QDesignerFormWindowInterface_staticMetaObject();
 void QDesignerFormWindowInterface_delete(QDesignerFormWindowInterface* self);
 
 #ifdef __cplusplus

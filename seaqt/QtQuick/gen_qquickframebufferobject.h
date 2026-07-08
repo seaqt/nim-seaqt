@@ -220,6 +220,7 @@ int QQuickFramebufferObject_protectedbase_senderSignalIndex(const VirtualQQuickF
 int QQuickFramebufferObject_protectedbase_receivers(const VirtualQQuickFramebufferObject* self, const char* signal);
 bool QQuickFramebufferObject_protectedbase_isSignalConnected(const VirtualQQuickFramebufferObject* self, QMetaMethod* signal);
 
+const QMetaObject* QQuickFramebufferObject_staticMetaObject();
 void QQuickFramebufferObject_delete(QQuickFramebufferObject* self);
 
 void QQuickFramebufferObject__Renderer_render(QQuickFramebufferObject__Renderer* self);

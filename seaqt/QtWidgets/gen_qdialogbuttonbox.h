@@ -249,6 +249,7 @@ int QDialogButtonBox_protectedbase_senderSignalIndex(const VirtualQDialogButtonB
 int QDialogButtonBox_protectedbase_receivers(const VirtualQDialogButtonBox* self, const char* signal);
 bool QDialogButtonBox_protectedbase_isSignalConnected(const VirtualQDialogButtonBox* self, QMetaMethod* signal);
 
+const QMetaObject* QDialogButtonBox_staticMetaObject();
 void QDialogButtonBox_delete(QDialogButtonBox* self);
 
 #ifdef __cplusplus

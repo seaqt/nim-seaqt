@@ -103,6 +103,7 @@ int QDtlsClientVerifier_protectedbase_senderSignalIndex(const VirtualQDtlsClient
 int QDtlsClientVerifier_protectedbase_receivers(const VirtualQDtlsClientVerifier* self, const char* signal);
 bool QDtlsClientVerifier_protectedbase_isSignalConnected(const VirtualQDtlsClientVerifier* self, QMetaMethod* signal);
 
+const QMetaObject* QDtlsClientVerifier_staticMetaObject();
 void QDtlsClientVerifier_delete(QDtlsClientVerifier* self);
 
 typedef struct VirtualQDtls VirtualQDtls;
@@ -183,6 +184,7 @@ int QDtls_protectedbase_senderSignalIndex(const VirtualQDtls* self);
 int QDtls_protectedbase_receivers(const VirtualQDtls* self, const char* signal);
 bool QDtls_protectedbase_isSignalConnected(const VirtualQDtls* self, QMetaMethod* signal);
 
+const QMetaObject* QDtls_staticMetaObject();
 void QDtls_delete(QDtls* self);
 
 QDtlsClientVerifier__GeneratorParameters* QDtlsClientVerifier__GeneratorParameters_new();

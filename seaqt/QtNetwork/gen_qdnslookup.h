@@ -178,6 +178,7 @@ int QDnsLookup_protectedbase_senderSignalIndex(const VirtualQDnsLookup* self);
 int QDnsLookup_protectedbase_receivers(const VirtualQDnsLookup* self, const char* signal);
 bool QDnsLookup_protectedbase_isSignalConnected(const VirtualQDnsLookup* self, QMetaMethod* signal);
 
+const QMetaObject* QDnsLookup_staticMetaObject();
 void QDnsLookup_delete(QDnsLookup* self);
 
 #ifdef __cplusplus

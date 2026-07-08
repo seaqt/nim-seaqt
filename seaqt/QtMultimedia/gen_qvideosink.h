@@ -92,6 +92,7 @@ int QVideoSink_protectedbase_senderSignalIndex(const VirtualQVideoSink* self);
 int QVideoSink_protectedbase_receivers(const VirtualQVideoSink* self, const char* signal);
 bool QVideoSink_protectedbase_isSignalConnected(const VirtualQVideoSink* self, QMetaMethod* signal);
 
+const QMetaObject* QVideoSink_staticMetaObject();
 void QVideoSink_delete(QVideoSink* self);
 
 #ifdef __cplusplus

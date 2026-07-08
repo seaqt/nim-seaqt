@@ -224,6 +224,7 @@ int QFocusFrame_protectedbase_senderSignalIndex(const VirtualQFocusFrame* self);
 int QFocusFrame_protectedbase_receivers(const VirtualQFocusFrame* self, const char* signal);
 bool QFocusFrame_protectedbase_isSignalConnected(const VirtualQFocusFrame* self, QMetaMethod* signal);
 
+const QMetaObject* QFocusFrame_staticMetaObject();
 void QFocusFrame_delete(QFocusFrame* self);
 
 #ifdef __cplusplus

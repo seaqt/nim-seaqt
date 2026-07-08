@@ -48,6 +48,7 @@ bool QDesignerFormWindowToolInterface_handleEvent(QDesignerFormWindowToolInterfa
 struct seaqt_string QDesignerFormWindowToolInterface_tr_s_c(const char* s, const char* c);
 struct seaqt_string QDesignerFormWindowToolInterface_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QDesignerFormWindowToolInterface_staticMetaObject();
 void QDesignerFormWindowToolInterface_delete(QDesignerFormWindowToolInterface* self);
 
 #ifdef __cplusplus

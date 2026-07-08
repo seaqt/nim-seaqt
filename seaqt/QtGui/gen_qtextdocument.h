@@ -247,6 +247,7 @@ int QTextDocument_protectedbase_senderSignalIndex(const VirtualQTextDocument* se
 int QTextDocument_protectedbase_receivers(const VirtualQTextDocument* self, const char* signal);
 bool QTextDocument_protectedbase_isSignalConnected(const VirtualQTextDocument* self, QMetaMethod* signal);
 
+const QMetaObject* QTextDocument_staticMetaObject();
 void QTextDocument_delete(QTextDocument* self);
 
 #ifdef __cplusplus

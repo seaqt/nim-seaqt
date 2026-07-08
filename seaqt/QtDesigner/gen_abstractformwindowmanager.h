@@ -86,6 +86,7 @@ void QDesignerFormWindowManagerInterface_showPluginDialog(QDesignerFormWindowMan
 struct seaqt_string QDesignerFormWindowManagerInterface_tr_s_c(const char* s, const char* c);
 struct seaqt_string QDesignerFormWindowManagerInterface_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QDesignerFormWindowManagerInterface_staticMetaObject();
 void QDesignerFormWindowManagerInterface_delete(QDesignerFormWindowManagerInterface* self);
 
 #ifdef __cplusplus

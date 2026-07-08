@@ -96,6 +96,7 @@ int QAnimationGroup_protectedbase_senderSignalIndex(const VirtualQAnimationGroup
 int QAnimationGroup_protectedbase_receivers(const VirtualQAnimationGroup* self, const char* signal);
 bool QAnimationGroup_protectedbase_isSignalConnected(const VirtualQAnimationGroup* self, QMetaMethod* signal);
 
+const QMetaObject* QAnimationGroup_staticMetaObject();
 void QAnimationGroup_delete(QAnimationGroup* self);
 
 #ifdef __cplusplus

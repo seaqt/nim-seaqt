@@ -286,6 +286,7 @@ int QSortFilterProxyModel_protectedbase_senderSignalIndex(const VirtualQSortFilt
 int QSortFilterProxyModel_protectedbase_receivers(const VirtualQSortFilterProxyModel* self, const char* signal);
 bool QSortFilterProxyModel_protectedbase_isSignalConnected(const VirtualQSortFilterProxyModel* self, QMetaMethod* signal);
 
+const QMetaObject* QSortFilterProxyModel_staticMetaObject();
 void QSortFilterProxyModel_delete(QSortFilterProxyModel* self);
 
 #ifdef __cplusplus

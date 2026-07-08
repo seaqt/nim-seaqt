@@ -234,6 +234,7 @@ int QRubberBand_protectedbase_senderSignalIndex(const VirtualQRubberBand* self);
 int QRubberBand_protectedbase_receivers(const VirtualQRubberBand* self, const char* signal);
 bool QRubberBand_protectedbase_isSignalConnected(const VirtualQRubberBand* self, QMetaMethod* signal);
 
+const QMetaObject* QRubberBand_staticMetaObject();
 void QRubberBand_delete(QRubberBand* self);
 
 #ifdef __cplusplus

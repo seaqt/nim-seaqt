@@ -100,6 +100,7 @@ int QAmbientSound_protectedbase_senderSignalIndex(const VirtualQAmbientSound* se
 int QAmbientSound_protectedbase_receivers(const VirtualQAmbientSound* self, const char* signal);
 bool QAmbientSound_protectedbase_isSignalConnected(const VirtualQAmbientSound* self, QMetaMethod* signal);
 
+const QMetaObject* QAmbientSound_staticMetaObject();
 void QAmbientSound_delete(QAmbientSound* self);
 
 #ifdef __cplusplus

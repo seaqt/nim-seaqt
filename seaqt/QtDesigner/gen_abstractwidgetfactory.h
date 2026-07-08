@@ -44,6 +44,7 @@ void QDesignerWidgetFactoryInterface_initialize(const QDesignerWidgetFactoryInte
 struct seaqt_string QDesignerWidgetFactoryInterface_tr_s_c(const char* s, const char* c);
 struct seaqt_string QDesignerWidgetFactoryInterface_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QDesignerWidgetFactoryInterface_staticMetaObject();
 void QDesignerWidgetFactoryInterface_delete(QDesignerWidgetFactoryInterface* self);
 
 #ifdef __cplusplus

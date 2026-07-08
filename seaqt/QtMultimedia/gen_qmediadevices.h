@@ -93,6 +93,7 @@ int QMediaDevices_protectedbase_senderSignalIndex(const VirtualQMediaDevices* se
 int QMediaDevices_protectedbase_receivers(const VirtualQMediaDevices* self, const char* signal);
 bool QMediaDevices_protectedbase_isSignalConnected(const VirtualQMediaDevices* self, QMetaMethod* signal);
 
+const QMetaObject* QMediaDevices_staticMetaObject();
 void QMediaDevices_delete(QMediaDevices* self);
 
 #ifdef __cplusplus

@@ -165,6 +165,7 @@ int QSctpSocket_protectedbase_senderSignalIndex(const VirtualQSctpSocket* self);
 int QSctpSocket_protectedbase_receivers(const VirtualQSctpSocket* self, const char* signal);
 bool QSctpSocket_protectedbase_isSignalConnected(const VirtualQSctpSocket* self, QMetaMethod* signal);
 
+const QMetaObject* QSctpSocket_staticMetaObject();
 void QSctpSocket_delete(QSctpSocket* self);
 
 #ifdef __cplusplus

@@ -88,6 +88,7 @@ int QExtensionFactory_protectedbase_senderSignalIndex(const VirtualQExtensionFac
 int QExtensionFactory_protectedbase_receivers(const VirtualQExtensionFactory* self, const char* signal);
 bool QExtensionFactory_protectedbase_isSignalConnected(const VirtualQExtensionFactory* self, QMetaMethod* signal);
 
+const QMetaObject* QExtensionFactory_staticMetaObject();
 void QExtensionFactory_delete(QExtensionFactory* self);
 
 #ifdef __cplusplus

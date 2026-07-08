@@ -202,6 +202,7 @@ int QDesignerWidgetDataBaseInterface_protectedbase_senderSignalIndex(const Virtu
 int QDesignerWidgetDataBaseInterface_protectedbase_receivers(const VirtualQDesignerWidgetDataBaseInterface* self, const char* signal);
 bool QDesignerWidgetDataBaseInterface_protectedbase_isSignalConnected(const VirtualQDesignerWidgetDataBaseInterface* self, QMetaMethod* signal);
 
+const QMetaObject* QDesignerWidgetDataBaseInterface_staticMetaObject();
 void QDesignerWidgetDataBaseInterface_delete(QDesignerWidgetDataBaseInterface* self);
 
 #ifdef __cplusplus

@@ -82,6 +82,7 @@ int QWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(const VirtualQWeb
 int QWebEngineUrlSchemeHandler_protectedbase_receivers(const VirtualQWebEngineUrlSchemeHandler* self, const char* signal);
 bool QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(const VirtualQWebEngineUrlSchemeHandler* self, QMetaMethod* signal);
 
+const QMetaObject* QWebEngineUrlSchemeHandler_staticMetaObject();
 void QWebEngineUrlSchemeHandler_delete(QWebEngineUrlSchemeHandler* self);
 
 #ifdef __cplusplus

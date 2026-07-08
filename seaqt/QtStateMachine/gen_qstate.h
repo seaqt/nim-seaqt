@@ -112,6 +112,7 @@ void QState_connect_childModeChanged(QState* self, intptr_t slot, void (*callbac
 void QState_connect_initialStateChanged(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QState_connect_errorStateChanged(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QState_staticMetaObject();
 void QState_delete(QState* self);
 
 #ifdef __cplusplus

@@ -237,6 +237,7 @@ int QScrollBar_protectedbase_senderSignalIndex(const VirtualQScrollBar* self);
 int QScrollBar_protectedbase_receivers(const VirtualQScrollBar* self, const char* signal);
 bool QScrollBar_protectedbase_isSignalConnected(const VirtualQScrollBar* self, QMetaMethod* signal);
 
+const QMetaObject* QScrollBar_staticMetaObject();
 void QScrollBar_delete(QScrollBar* self);
 
 #ifdef __cplusplus

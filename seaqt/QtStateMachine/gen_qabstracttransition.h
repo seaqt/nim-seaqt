@@ -107,6 +107,7 @@ void QAbstractTransition_connect_triggered(QAbstractTransition* self, intptr_t s
 void QAbstractTransition_connect_targetStateChanged(QAbstractTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QAbstractTransition_connect_targetStatesChanged(QAbstractTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QAbstractTransition_staticMetaObject();
 void QAbstractTransition_delete(QAbstractTransition* self);
 
 #ifdef __cplusplus

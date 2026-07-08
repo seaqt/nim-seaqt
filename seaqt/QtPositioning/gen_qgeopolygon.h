@@ -58,6 +58,7 @@ struct seaqt_string QGeoPolygon_toString(const QGeoPolygon* self);
 double QGeoPolygon_length_indexFrom(const QGeoPolygon* self, ptrdiff_t indexFrom);
 double QGeoPolygon_length_indexFrom_indexTo(const QGeoPolygon* self, ptrdiff_t indexFrom, ptrdiff_t indexTo);
 
+const QMetaObject* QGeoPolygon_staticMetaObject();
 void QGeoPolygon_delete(QGeoPolygon* self);
 
 #ifdef __cplusplus

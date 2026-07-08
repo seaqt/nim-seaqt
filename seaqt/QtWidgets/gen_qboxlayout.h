@@ -185,6 +185,7 @@ int QBoxLayout_protectedbase_senderSignalIndex(const VirtualQBoxLayout* self);
 int QBoxLayout_protectedbase_receivers(const VirtualQBoxLayout* self, const char* signal);
 bool QBoxLayout_protectedbase_isSignalConnected(const VirtualQBoxLayout* self, QMetaMethod* signal);
 
+const QMetaObject* QBoxLayout_staticMetaObject();
 void QBoxLayout_delete(QBoxLayout* self);
 
 typedef struct VirtualQHBoxLayout VirtualQHBoxLayout;
@@ -283,6 +284,7 @@ int QHBoxLayout_protectedbase_senderSignalIndex(const VirtualQHBoxLayout* self);
 int QHBoxLayout_protectedbase_receivers(const VirtualQHBoxLayout* self, const char* signal);
 bool QHBoxLayout_protectedbase_isSignalConnected(const VirtualQHBoxLayout* self, QMetaMethod* signal);
 
+const QMetaObject* QHBoxLayout_staticMetaObject();
 void QHBoxLayout_delete(QHBoxLayout* self);
 
 typedef struct VirtualQVBoxLayout VirtualQVBoxLayout;
@@ -381,6 +383,7 @@ int QVBoxLayout_protectedbase_senderSignalIndex(const VirtualQVBoxLayout* self);
 int QVBoxLayout_protectedbase_receivers(const VirtualQVBoxLayout* self, const char* signal);
 bool QVBoxLayout_protectedbase_isSignalConnected(const VirtualQVBoxLayout* self, QMetaMethod* signal);
 
+const QMetaObject* QVBoxLayout_staticMetaObject();
 void QVBoxLayout_delete(QVBoxLayout* self);
 
 #ifdef __cplusplus

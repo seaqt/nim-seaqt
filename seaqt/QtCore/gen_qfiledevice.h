@@ -62,6 +62,7 @@ struct seaqt_string QFileDevice_tr_s_c(const char* s, const char* c);
 struct seaqt_string QFileDevice_tr_s_c_n(const char* s, const char* c, int n);
 unsigned char* QFileDevice_map_offset_size_flags(QFileDevice* self, long long offset, long long size, int flags);
 
+const QMetaObject* QFileDevice_staticMetaObject();
 void QFileDevice_delete(QFileDevice* self);
 
 #ifdef __cplusplus

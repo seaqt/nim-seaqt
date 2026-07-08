@@ -267,6 +267,7 @@ int QPdfView_protectedbase_senderSignalIndex(const VirtualQPdfView* self);
 int QPdfView_protectedbase_receivers(const VirtualQPdfView* self, const char* signal);
 bool QPdfView_protectedbase_isSignalConnected(const VirtualQPdfView* self, QMetaMethod* signal);
 
+const QMetaObject* QPdfView_staticMetaObject();
 void QPdfView_delete(QPdfView* self);
 
 #ifdef __cplusplus

@@ -283,6 +283,7 @@ int QCalendarWidget_protectedbase_senderSignalIndex(const VirtualQCalendarWidget
 int QCalendarWidget_protectedbase_receivers(const VirtualQCalendarWidget* self, const char* signal);
 bool QCalendarWidget_protectedbase_isSignalConnected(const VirtualQCalendarWidget* self, QMetaMethod* signal);
 
+const QMetaObject* QCalendarWidget_staticMetaObject();
 void QCalendarWidget_delete(QCalendarWidget* self);
 
 #ifdef __cplusplus

@@ -117,6 +117,7 @@ int QGeoSatelliteInfoSource_protectedbase_senderSignalIndex(const VirtualQGeoSat
 int QGeoSatelliteInfoSource_protectedbase_receivers(const VirtualQGeoSatelliteInfoSource* self, const char* signal);
 bool QGeoSatelliteInfoSource_protectedbase_isSignalConnected(const VirtualQGeoSatelliteInfoSource* self, QMetaMethod* signal);
 
+const QMetaObject* QGeoSatelliteInfoSource_staticMetaObject();
 void QGeoSatelliteInfoSource_delete(QGeoSatelliteInfoSource* self);
 
 #ifdef __cplusplus

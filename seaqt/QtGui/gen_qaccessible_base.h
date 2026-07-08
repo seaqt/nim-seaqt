@@ -56,6 +56,7 @@ void QAccessible_setRootObject(QObject* object);
 void QAccessible_cleanup();
 struct seaqt_map /* tuple of int and int */  QAccessible_qAccessibleTextBoundaryHelper(QTextCursor* cursor, int boundaryType);
 
+const QMetaObject* QAccessible_staticMetaObject();
 void QAccessible_delete(QAccessible* self);
 
 QAccessible__State* QAccessible__State_new();

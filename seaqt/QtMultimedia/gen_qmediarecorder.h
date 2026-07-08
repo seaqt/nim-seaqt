@@ -153,6 +153,7 @@ int QMediaRecorder_protectedbase_senderSignalIndex(const VirtualQMediaRecorder* 
 int QMediaRecorder_protectedbase_receivers(const VirtualQMediaRecorder* self, const char* signal);
 bool QMediaRecorder_protectedbase_isSignalConnected(const VirtualQMediaRecorder* self, QMetaMethod* signal);
 
+const QMetaObject* QMediaRecorder_staticMetaObject();
 void QMediaRecorder_delete(QMediaRecorder* self);
 
 #ifdef __cplusplus

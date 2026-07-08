@@ -111,6 +111,7 @@ int QQmlExpression_protectedbase_senderSignalIndex(const VirtualQQmlExpression* 
 int QQmlExpression_protectedbase_receivers(const VirtualQQmlExpression* self, const char* signal);
 bool QQmlExpression_protectedbase_isSignalConnected(const VirtualQQmlExpression* self, QMetaMethod* signal);
 
+const QMetaObject* QQmlExpression_staticMetaObject();
 void QQmlExpression_delete(QQmlExpression* self);
 
 #ifdef __cplusplus
