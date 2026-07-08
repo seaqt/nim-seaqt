@@ -560,19 +560,19 @@ void QGeoSatelliteInfoSource_virtualbase_disconnectNotify(VirtualQGeoSatelliteIn
 }
 
 QObject* QGeoSatelliteInfoSource_protectedbase_sender(const VirtualQGeoSatelliteInfoSource* self) {
-	return self->sender();
+	return self->QGeoSatelliteInfoSource::sender();
 }
 
 int QGeoSatelliteInfoSource_protectedbase_senderSignalIndex(const VirtualQGeoSatelliteInfoSource* self) {
-	return self->senderSignalIndex();
+	return self->QGeoSatelliteInfoSource::senderSignalIndex();
 }
 
 int QGeoSatelliteInfoSource_protectedbase_receivers(const VirtualQGeoSatelliteInfoSource* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGeoSatelliteInfoSource::receivers(signal);
 }
 
 bool QGeoSatelliteInfoSource_protectedbase_isSignalConnected(const VirtualQGeoSatelliteInfoSource* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGeoSatelliteInfoSource::isSignalConnected(*signal);
 }
 
 void QGeoSatelliteInfoSource_delete(QGeoSatelliteInfoSource* self) {

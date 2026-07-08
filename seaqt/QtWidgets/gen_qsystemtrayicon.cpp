@@ -408,19 +408,19 @@ void QSystemTrayIcon_virtualbase_disconnectNotify(VirtualQSystemTrayIcon* self, 
 }
 
 QObject* QSystemTrayIcon_protectedbase_sender(const VirtualQSystemTrayIcon* self) {
-	return self->sender();
+	return self->QSystemTrayIcon::sender();
 }
 
 int QSystemTrayIcon_protectedbase_senderSignalIndex(const VirtualQSystemTrayIcon* self) {
-	return self->senderSignalIndex();
+	return self->QSystemTrayIcon::senderSignalIndex();
 }
 
 int QSystemTrayIcon_protectedbase_receivers(const VirtualQSystemTrayIcon* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSystemTrayIcon::receivers(signal);
 }
 
 bool QSystemTrayIcon_protectedbase_isSignalConnected(const VirtualQSystemTrayIcon* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSystemTrayIcon::isSignalConnected(*signal);
 }
 
 void QSystemTrayIcon_delete(QSystemTrayIcon* self) {

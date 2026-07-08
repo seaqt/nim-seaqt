@@ -8,7 +8,6 @@
 #include <QFocusEvent>
 #include <QHoverEvent>
 #include <QInputMethodEvent>
-#include <QJSValue>
 #include <QKeyEvent>
 #include <QList>
 #include <QMatrix4x4>
@@ -27,7 +26,6 @@
 #include <QSGNode>
 #include <QSGTextureProvider>
 #include <QSGTransformNode>
-#include <QSize>
 #include <QSizeF>
 #include <QString>
 #include <QByteArray>
@@ -332,23 +330,23 @@ void QQuickTransform_virtualbase_disconnectNotify(VirtualQQuickTransform* self, 
 }
 
 void QQuickTransform_protectedbase_update(VirtualQQuickTransform* self) {
-	self->update();
+	self->QQuickTransform::update();
 }
 
 QObject* QQuickTransform_protectedbase_sender(const VirtualQQuickTransform* self) {
-	return self->sender();
+	return self->QQuickTransform::sender();
 }
 
 int QQuickTransform_protectedbase_senderSignalIndex(const VirtualQQuickTransform* self) {
-	return self->senderSignalIndex();
+	return self->QQuickTransform::senderSignalIndex();
 }
 
 int QQuickTransform_protectedbase_receivers(const VirtualQQuickTransform* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickTransform::receivers(signal);
 }
 
 bool QQuickTransform_protectedbase_isSignalConnected(const VirtualQQuickTransform* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickTransform::isSignalConnected(*signal);
 }
 
 void QQuickTransform_delete(QQuickTransform* self) {
@@ -1348,10 +1346,6 @@ void QQuickItem_setKeepTouchGrab(QQuickItem* self, bool keepTouchGrab) {
 	self->setKeepTouchGrab(keepTouchGrab);
 }
 
-bool QQuickItem_grabToImage_callback(QQuickItem* self, QJSValue* callback) {
-	return self->grabToImage(*callback);
-}
-
 bool QQuickItem_contains(const QQuickItem* self, QPointF* point) {
 	return self->contains(*point);
 }
@@ -1792,10 +1786,6 @@ void QQuickItem_setFlag_flag_enabled(QQuickItem* self, int flag, bool enabled) {
 	self->setFlag(static_cast<QQuickItem::Flag>(flag), enabled);
 }
 
-bool QQuickItem_grabToImage_callback_targetSize(QQuickItem* self, QJSValue* callback, QSize* targetSize) {
-	return self->grabToImage(*callback, *targetSize);
-}
-
 QQuickItem* QQuickItem_nextItemInFocusChain_forward(QQuickItem* self, bool forward) {
 	return self->nextItemInFocusChain(forward);
 }
@@ -2025,43 +2015,43 @@ void QQuickItem_virtualbase_disconnectNotify(VirtualQQuickItem* self, QMetaMetho
 }
 
 bool QQuickItem_protectedbase_isComponentComplete(const VirtualQQuickItem* self) {
-	return self->isComponentComplete();
+	return self->QQuickItem::isComponentComplete();
 }
 
 void QQuickItem_protectedbase_updateInputMethod(VirtualQQuickItem* self) {
-	self->updateInputMethod();
+	self->QQuickItem::updateInputMethod();
 }
 
 bool QQuickItem_protectedbase_widthValid(const VirtualQQuickItem* self) {
-	return self->widthValid();
+	return self->QQuickItem::widthValid();
 }
 
 bool QQuickItem_protectedbase_heightValid(const VirtualQQuickItem* self) {
-	return self->heightValid();
+	return self->QQuickItem::heightValid();
 }
 
 void QQuickItem_protectedbase_setImplicitSize(VirtualQQuickItem* self, double param1, double param2) {
-	self->setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
+	self->QQuickItem::setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
 }
 
 void QQuickItem_protectedbase_updateInputMethod_queries(VirtualQQuickItem* self, int queries) {
-	self->updateInputMethod(static_cast<Qt::InputMethodQueries>(queries));
+	self->QQuickItem::updateInputMethod(static_cast<Qt::InputMethodQueries>(queries));
 }
 
 QObject* QQuickItem_protectedbase_sender(const VirtualQQuickItem* self) {
-	return self->sender();
+	return self->QQuickItem::sender();
 }
 
 int QQuickItem_protectedbase_senderSignalIndex(const VirtualQQuickItem* self) {
-	return self->senderSignalIndex();
+	return self->QQuickItem::senderSignalIndex();
 }
 
 int QQuickItem_protectedbase_receivers(const VirtualQQuickItem* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickItem::receivers(signal);
 }
 
 bool QQuickItem_protectedbase_isSignalConnected(const VirtualQQuickItem* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickItem::isSignalConnected(*signal);
 }
 
 void QQuickItem_delete(QQuickItem* self) {

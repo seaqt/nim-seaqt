@@ -5,7 +5,7 @@ const
 
   QtWebEngineCoreLibs* = gorge("pkg-config --libs Qt6WebEngineCore")
 
-  QtWebEngineCoreGenVersion* = "6.4.2"
+  QtWebEngineCoreGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtWebEngineCoreBuildVersion* = gorge("pkg-config --modversion Qt6WebEngineCore")

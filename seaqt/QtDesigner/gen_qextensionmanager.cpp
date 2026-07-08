@@ -377,19 +377,19 @@ void QExtensionManager_virtualbase_disconnectNotify(VirtualQExtensionManager* se
 }
 
 QObject* QExtensionManager_protectedbase_sender(const VirtualQExtensionManager* self) {
-	return self->sender();
+	return self->QExtensionManager::sender();
 }
 
 int QExtensionManager_protectedbase_senderSignalIndex(const VirtualQExtensionManager* self) {
-	return self->senderSignalIndex();
+	return self->QExtensionManager::senderSignalIndex();
 }
 
 int QExtensionManager_protectedbase_receivers(const VirtualQExtensionManager* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QExtensionManager::receivers(signal);
 }
 
 bool QExtensionManager_protectedbase_isSignalConnected(const VirtualQExtensionManager* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QExtensionManager::isSignalConnected(*signal);
 }
 
 void QExtensionManager_delete(QExtensionManager* self) {

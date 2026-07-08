@@ -37,7 +37,7 @@ func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
 
 
 type QCoreApplicationEnumEnum* = distinct cint
-template ApplicationFlags*(_: type QCoreApplicationEnumEnum): untyped = 394242
+template ApplicationFlags*(_: type QCoreApplicationEnumEnum): untyped = 394243
 
 
 import ./gen_qcoreapplication_types

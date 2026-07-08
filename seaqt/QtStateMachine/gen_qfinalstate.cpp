@@ -317,19 +317,19 @@ void QFinalState_virtualbase_disconnectNotify(VirtualQFinalState* self, QMetaMet
 }
 
 QObject* QFinalState_protectedbase_sender(const VirtualQFinalState* self) {
-	return self->sender();
+	return self->QFinalState::sender();
 }
 
 int QFinalState_protectedbase_senderSignalIndex(const VirtualQFinalState* self) {
-	return self->senderSignalIndex();
+	return self->QFinalState::senderSignalIndex();
 }
 
 int QFinalState_protectedbase_receivers(const VirtualQFinalState* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFinalState::receivers(signal);
 }
 
 bool QFinalState_protectedbase_isSignalConnected(const VirtualQFinalState* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFinalState::isSignalConnected(*signal);
 }
 
 void QFinalState_delete(QFinalState* self) {

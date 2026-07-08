@@ -1388,39 +1388,39 @@ void QWebEngineView_virtualbase_disconnectNotify(VirtualQWebEngineView* self, QM
 }
 
 void QWebEngineView_protectedbase_updateMicroFocus(VirtualQWebEngineView* self) {
-	self->updateMicroFocus();
+	self->QWebEngineView::updateMicroFocus();
 }
 
 void QWebEngineView_protectedbase_create(VirtualQWebEngineView* self) {
-	self->create();
+	self->QWebEngineView::create();
 }
 
 void QWebEngineView_protectedbase_destroy(VirtualQWebEngineView* self) {
-	self->destroy();
+	self->QWebEngineView::destroy();
 }
 
 bool QWebEngineView_protectedbase_focusNextChild(VirtualQWebEngineView* self) {
-	return self->focusNextChild();
+	return self->QWebEngineView::focusNextChild();
 }
 
 bool QWebEngineView_protectedbase_focusPreviousChild(VirtualQWebEngineView* self) {
-	return self->focusPreviousChild();
+	return self->QWebEngineView::focusPreviousChild();
 }
 
 QObject* QWebEngineView_protectedbase_sender(const VirtualQWebEngineView* self) {
-	return self->sender();
+	return self->QWebEngineView::sender();
 }
 
 int QWebEngineView_protectedbase_senderSignalIndex(const VirtualQWebEngineView* self) {
-	return self->senderSignalIndex();
+	return self->QWebEngineView::senderSignalIndex();
 }
 
 int QWebEngineView_protectedbase_receivers(const VirtualQWebEngineView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebEngineView::receivers(signal);
 }
 
 bool QWebEngineView_protectedbase_isSignalConnected(const VirtualQWebEngineView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebEngineView::isSignalConnected(*signal);
 }
 
 void QWebEngineView_delete(QWebEngineView* self) {

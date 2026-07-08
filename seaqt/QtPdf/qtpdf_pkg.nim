@@ -5,7 +5,7 @@ const
 
   QtPdfLibs* = gorge("pkg-config --libs Qt6Pdf")
 
-  QtPdfGenVersion* = "6.4.2"
+  QtPdfGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtPdfBuildVersion* = gorge("pkg-config --modversion Qt6Pdf")

@@ -220,11 +220,6 @@ QJSValue* QJSEngine_importModule(QJSEngine* self, struct seaqt_string fileName) 
 	return new QJSValue(self->importModule(fileName_QString));
 }
 
-bool QJSEngine_registerModule(QJSEngine* self, struct seaqt_string moduleName, QJSValue* value) {
-	QString moduleName_QString = QString::fromUtf8(moduleName.data, moduleName.len);
-	return self->registerModule(moduleName_QString, *value);
-}
-
 QJSValue* QJSEngine_newObject(QJSEngine* self) {
 	return new QJSValue(self->newObject());
 }
@@ -263,10 +258,6 @@ int QJSEngine_objectOwnership(QObject* param1) {
 	return static_cast<int>(_ret);
 }
 
-void QJSEngine_installExtensions_extensions(QJSEngine* self, int extensions) {
-	self->installExtensions(static_cast<QJSEngine::Extensions>(extensions));
-}
-
 void QJSEngine_setInterrupted(QJSEngine* self, bool interrupted) {
 	self->setInterrupted(interrupted);
 }
@@ -282,10 +273,6 @@ void QJSEngine_throwError_message(QJSEngine* self, struct seaqt_string message) 
 
 void QJSEngine_throwError_errorType(QJSEngine* self, int errorType) {
 	self->throwError(static_cast<QJSValue::ErrorType>(errorType));
-}
-
-void QJSEngine_throwError_error(QJSEngine* self, QJSValue* error) {
-	self->throwError(*error);
 }
 
 bool QJSEngine_hasError(const QJSEngine* self) {
@@ -378,10 +365,6 @@ QJSValue* QJSEngine_newErrorObject_errorType_message(QJSEngine* self, int errorT
 	return new QJSValue(self->newErrorObject(static_cast<QJSValue::ErrorType>(errorType), message_QString));
 }
 
-void QJSEngine_installExtensions_extensions_object(QJSEngine* self, int extensions, QJSValue* object) {
-	self->installExtensions(static_cast<QJSEngine::Extensions>(extensions), *object);
-}
-
 void QJSEngine_throwError_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message) {
 	QString message_QString = QString::fromUtf8(message.data, message.len);
 	self->throwError(static_cast<QJSValue::ErrorType>(errorType), message_QString);
@@ -442,19 +425,19 @@ void QJSEngine_virtualbase_disconnectNotify(VirtualQJSEngine* self, QMetaMethod*
 }
 
 QObject* QJSEngine_protectedbase_sender(const VirtualQJSEngine* self) {
-	return self->sender();
+	return self->QJSEngine::sender();
 }
 
 int QJSEngine_protectedbase_senderSignalIndex(const VirtualQJSEngine* self) {
-	return self->senderSignalIndex();
+	return self->QJSEngine::senderSignalIndex();
 }
 
 int QJSEngine_protectedbase_receivers(const VirtualQJSEngine* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QJSEngine::receivers(signal);
 }
 
 bool QJSEngine_protectedbase_isSignalConnected(const VirtualQJSEngine* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QJSEngine::isSignalConnected(*signal);
 }
 
 void QJSEngine_delete(QJSEngine* self) {

@@ -1045,39 +1045,39 @@ void QDesignerActionEditorInterface_virtualbase_disconnectNotify(VirtualQDesigne
 }
 
 void QDesignerActionEditorInterface_protectedbase_updateMicroFocus(VirtualQDesignerActionEditorInterface* self) {
-	self->updateMicroFocus();
+	self->QDesignerActionEditorInterface::updateMicroFocus();
 }
 
 void QDesignerActionEditorInterface_protectedbase_create(VirtualQDesignerActionEditorInterface* self) {
-	self->create();
+	self->QDesignerActionEditorInterface::create();
 }
 
 void QDesignerActionEditorInterface_protectedbase_destroy(VirtualQDesignerActionEditorInterface* self) {
-	self->destroy();
+	self->QDesignerActionEditorInterface::destroy();
 }
 
 bool QDesignerActionEditorInterface_protectedbase_focusNextChild(VirtualQDesignerActionEditorInterface* self) {
-	return self->focusNextChild();
+	return self->QDesignerActionEditorInterface::focusNextChild();
 }
 
 bool QDesignerActionEditorInterface_protectedbase_focusPreviousChild(VirtualQDesignerActionEditorInterface* self) {
-	return self->focusPreviousChild();
+	return self->QDesignerActionEditorInterface::focusPreviousChild();
 }
 
 QObject* QDesignerActionEditorInterface_protectedbase_sender(const VirtualQDesignerActionEditorInterface* self) {
-	return self->sender();
+	return self->QDesignerActionEditorInterface::sender();
 }
 
 int QDesignerActionEditorInterface_protectedbase_senderSignalIndex(const VirtualQDesignerActionEditorInterface* self) {
-	return self->senderSignalIndex();
+	return self->QDesignerActionEditorInterface::senderSignalIndex();
 }
 
 int QDesignerActionEditorInterface_protectedbase_receivers(const VirtualQDesignerActionEditorInterface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDesignerActionEditorInterface::receivers(signal);
 }
 
 bool QDesignerActionEditorInterface_protectedbase_isSignalConnected(const VirtualQDesignerActionEditorInterface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDesignerActionEditorInterface::isSignalConnected(*signal);
 }
 
 void QDesignerActionEditorInterface_delete(QDesignerActionEditorInterface* self) {

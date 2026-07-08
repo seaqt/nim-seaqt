@@ -1423,43 +1423,43 @@ void QWizard_virtualbase_disconnectNotify(VirtualQWizard* self, QMetaMethod* sig
 }
 
 void QWizard_protectedbase_adjustPosition(VirtualQWizard* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QWizard::adjustPosition(param1);
 }
 
 void QWizard_protectedbase_updateMicroFocus(VirtualQWizard* self) {
-	self->updateMicroFocus();
+	self->QWizard::updateMicroFocus();
 }
 
 void QWizard_protectedbase_create(VirtualQWizard* self) {
-	self->create();
+	self->QWizard::create();
 }
 
 void QWizard_protectedbase_destroy(VirtualQWizard* self) {
-	self->destroy();
+	self->QWizard::destroy();
 }
 
 bool QWizard_protectedbase_focusNextChild(VirtualQWizard* self) {
-	return self->focusNextChild();
+	return self->QWizard::focusNextChild();
 }
 
 bool QWizard_protectedbase_focusPreviousChild(VirtualQWizard* self) {
-	return self->focusPreviousChild();
+	return self->QWizard::focusPreviousChild();
 }
 
 QObject* QWizard_protectedbase_sender(const VirtualQWizard* self) {
-	return self->sender();
+	return self->QWizard::sender();
 }
 
 int QWizard_protectedbase_senderSignalIndex(const VirtualQWizard* self) {
-	return self->senderSignalIndex();
+	return self->QWizard::senderSignalIndex();
 }
 
 int QWizard_protectedbase_receivers(const VirtualQWizard* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWizard::receivers(signal);
 }
 
 bool QWizard_protectedbase_isSignalConnected(const VirtualQWizard* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWizard::isSignalConnected(*signal);
 }
 
 void QWizard_delete(QWizard* self) {
@@ -2611,67 +2611,67 @@ void QWizardPage_virtualbase_disconnectNotify(VirtualQWizardPage* self, QMetaMet
 
 void QWizardPage_protectedbase_setField(VirtualQWizardPage* self, struct seaqt_string name, QVariant* value) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->setField(name_QString, *value);
+	self->QWizardPage::setField(name_QString, *value);
 }
 
 QVariant* QWizardPage_protectedbase_field(const VirtualQWizardPage* self, struct seaqt_string name) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	return new QVariant(self->field(name_QString));
+	return new QVariant(self->QWizardPage::field(name_QString));
 }
 
 void QWizardPage_protectedbase_registerField_name_widget(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->registerField(name_QString, widget);
+	self->QWizardPage::registerField(name_QString, widget);
 }
 
 QWizard* QWizardPage_protectedbase_wizard(const VirtualQWizardPage* self) {
-	return self->wizard();
+	return self->QWizardPage::wizard();
 }
 
 void QWizardPage_protectedbase_registerField_name_widget_property(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->registerField(name_QString, widget, property);
+	self->QWizardPage::registerField(name_QString, widget, property);
 }
 
 void QWizardPage_protectedbase_registerField_name_widget_property_changedSignal(VirtualQWizardPage* self, struct seaqt_string name, QWidget* widget, const char* property, const char* changedSignal) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->registerField(name_QString, widget, property, changedSignal);
+	self->QWizardPage::registerField(name_QString, widget, property, changedSignal);
 }
 
 void QWizardPage_protectedbase_updateMicroFocus(VirtualQWizardPage* self) {
-	self->updateMicroFocus();
+	self->QWizardPage::updateMicroFocus();
 }
 
 void QWizardPage_protectedbase_create(VirtualQWizardPage* self) {
-	self->create();
+	self->QWizardPage::create();
 }
 
 void QWizardPage_protectedbase_destroy(VirtualQWizardPage* self) {
-	self->destroy();
+	self->QWizardPage::destroy();
 }
 
 bool QWizardPage_protectedbase_focusNextChild(VirtualQWizardPage* self) {
-	return self->focusNextChild();
+	return self->QWizardPage::focusNextChild();
 }
 
 bool QWizardPage_protectedbase_focusPreviousChild(VirtualQWizardPage* self) {
-	return self->focusPreviousChild();
+	return self->QWizardPage::focusPreviousChild();
 }
 
 QObject* QWizardPage_protectedbase_sender(const VirtualQWizardPage* self) {
-	return self->sender();
+	return self->QWizardPage::sender();
 }
 
 int QWizardPage_protectedbase_senderSignalIndex(const VirtualQWizardPage* self) {
-	return self->senderSignalIndex();
+	return self->QWizardPage::senderSignalIndex();
 }
 
 int QWizardPage_protectedbase_receivers(const VirtualQWizardPage* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWizardPage::receivers(signal);
 }
 
 bool QWizardPage_protectedbase_isSignalConnected(const VirtualQWizardPage* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWizardPage::isSignalConnected(*signal);
 }
 
 void QWizardPage_delete(QWizardPage* self) {

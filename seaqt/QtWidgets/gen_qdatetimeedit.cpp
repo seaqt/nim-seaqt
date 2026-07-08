@@ -1480,47 +1480,47 @@ void QDateTimeEdit_virtualbase_disconnectNotify(VirtualQDateTimeEdit* self, QMet
 }
 
 QLineEdit* QDateTimeEdit_protectedbase_lineEdit(const VirtualQDateTimeEdit* self) {
-	return self->lineEdit();
+	return self->QDateTimeEdit::lineEdit();
 }
 
 void QDateTimeEdit_protectedbase_setLineEdit(VirtualQDateTimeEdit* self, QLineEdit* edit) {
-	self->setLineEdit(edit);
+	self->QDateTimeEdit::setLineEdit(edit);
 }
 
 void QDateTimeEdit_protectedbase_updateMicroFocus(VirtualQDateTimeEdit* self) {
-	self->updateMicroFocus();
+	self->QDateTimeEdit::updateMicroFocus();
 }
 
 void QDateTimeEdit_protectedbase_create(VirtualQDateTimeEdit* self) {
-	self->create();
+	self->QDateTimeEdit::create();
 }
 
 void QDateTimeEdit_protectedbase_destroy(VirtualQDateTimeEdit* self) {
-	self->destroy();
+	self->QDateTimeEdit::destroy();
 }
 
 bool QDateTimeEdit_protectedbase_focusNextChild(VirtualQDateTimeEdit* self) {
-	return self->focusNextChild();
+	return self->QDateTimeEdit::focusNextChild();
 }
 
 bool QDateTimeEdit_protectedbase_focusPreviousChild(VirtualQDateTimeEdit* self) {
-	return self->focusPreviousChild();
+	return self->QDateTimeEdit::focusPreviousChild();
 }
 
 QObject* QDateTimeEdit_protectedbase_sender(const VirtualQDateTimeEdit* self) {
-	return self->sender();
+	return self->QDateTimeEdit::sender();
 }
 
 int QDateTimeEdit_protectedbase_senderSignalIndex(const VirtualQDateTimeEdit* self) {
-	return self->senderSignalIndex();
+	return self->QDateTimeEdit::senderSignalIndex();
 }
 
 int QDateTimeEdit_protectedbase_receivers(const VirtualQDateTimeEdit* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDateTimeEdit::receivers(signal);
 }
 
 bool QDateTimeEdit_protectedbase_isSignalConnected(const VirtualQDateTimeEdit* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDateTimeEdit::isSignalConnected(*signal);
 }
 
 void QDateTimeEdit_delete(QDateTimeEdit* self) {
@@ -2682,47 +2682,47 @@ void QTimeEdit_virtualbase_disconnectNotify(VirtualQTimeEdit* self, QMetaMethod*
 }
 
 QLineEdit* QTimeEdit_protectedbase_lineEdit(const VirtualQTimeEdit* self) {
-	return self->lineEdit();
+	return self->QTimeEdit::lineEdit();
 }
 
 void QTimeEdit_protectedbase_setLineEdit(VirtualQTimeEdit* self, QLineEdit* edit) {
-	self->setLineEdit(edit);
+	self->QTimeEdit::setLineEdit(edit);
 }
 
 void QTimeEdit_protectedbase_updateMicroFocus(VirtualQTimeEdit* self) {
-	self->updateMicroFocus();
+	self->QTimeEdit::updateMicroFocus();
 }
 
 void QTimeEdit_protectedbase_create(VirtualQTimeEdit* self) {
-	self->create();
+	self->QTimeEdit::create();
 }
 
 void QTimeEdit_protectedbase_destroy(VirtualQTimeEdit* self) {
-	self->destroy();
+	self->QTimeEdit::destroy();
 }
 
 bool QTimeEdit_protectedbase_focusNextChild(VirtualQTimeEdit* self) {
-	return self->focusNextChild();
+	return self->QTimeEdit::focusNextChild();
 }
 
 bool QTimeEdit_protectedbase_focusPreviousChild(VirtualQTimeEdit* self) {
-	return self->focusPreviousChild();
+	return self->QTimeEdit::focusPreviousChild();
 }
 
 QObject* QTimeEdit_protectedbase_sender(const VirtualQTimeEdit* self) {
-	return self->sender();
+	return self->QTimeEdit::sender();
 }
 
 int QTimeEdit_protectedbase_senderSignalIndex(const VirtualQTimeEdit* self) {
-	return self->senderSignalIndex();
+	return self->QTimeEdit::senderSignalIndex();
 }
 
 int QTimeEdit_protectedbase_receivers(const VirtualQTimeEdit* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTimeEdit::receivers(signal);
 }
 
 bool QTimeEdit_protectedbase_isSignalConnected(const VirtualQTimeEdit* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTimeEdit::isSignalConnected(*signal);
 }
 
 void QTimeEdit_delete(QTimeEdit* self) {
@@ -3884,47 +3884,47 @@ void QDateEdit_virtualbase_disconnectNotify(VirtualQDateEdit* self, QMetaMethod*
 }
 
 QLineEdit* QDateEdit_protectedbase_lineEdit(const VirtualQDateEdit* self) {
-	return self->lineEdit();
+	return self->QDateEdit::lineEdit();
 }
 
 void QDateEdit_protectedbase_setLineEdit(VirtualQDateEdit* self, QLineEdit* edit) {
-	self->setLineEdit(edit);
+	self->QDateEdit::setLineEdit(edit);
 }
 
 void QDateEdit_protectedbase_updateMicroFocus(VirtualQDateEdit* self) {
-	self->updateMicroFocus();
+	self->QDateEdit::updateMicroFocus();
 }
 
 void QDateEdit_protectedbase_create(VirtualQDateEdit* self) {
-	self->create();
+	self->QDateEdit::create();
 }
 
 void QDateEdit_protectedbase_destroy(VirtualQDateEdit* self) {
-	self->destroy();
+	self->QDateEdit::destroy();
 }
 
 bool QDateEdit_protectedbase_focusNextChild(VirtualQDateEdit* self) {
-	return self->focusNextChild();
+	return self->QDateEdit::focusNextChild();
 }
 
 bool QDateEdit_protectedbase_focusPreviousChild(VirtualQDateEdit* self) {
-	return self->focusPreviousChild();
+	return self->QDateEdit::focusPreviousChild();
 }
 
 QObject* QDateEdit_protectedbase_sender(const VirtualQDateEdit* self) {
-	return self->sender();
+	return self->QDateEdit::sender();
 }
 
 int QDateEdit_protectedbase_senderSignalIndex(const VirtualQDateEdit* self) {
-	return self->senderSignalIndex();
+	return self->QDateEdit::senderSignalIndex();
 }
 
 int QDateEdit_protectedbase_receivers(const VirtualQDateEdit* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDateEdit::receivers(signal);
 }
 
 bool QDateEdit_protectedbase_isSignalConnected(const VirtualQDateEdit* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDateEdit::isSignalConnected(*signal);
 }
 
 void QDateEdit_delete(QDateEdit* self) {

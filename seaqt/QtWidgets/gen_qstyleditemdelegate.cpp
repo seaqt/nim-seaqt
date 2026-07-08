@@ -622,19 +622,19 @@ void QStyledItemDelegate_virtualbase_disconnectNotify(VirtualQStyledItemDelegate
 }
 
 QObject* QStyledItemDelegate_protectedbase_sender(const VirtualQStyledItemDelegate* self) {
-	return self->sender();
+	return self->QStyledItemDelegate::sender();
 }
 
 int QStyledItemDelegate_protectedbase_senderSignalIndex(const VirtualQStyledItemDelegate* self) {
-	return self->senderSignalIndex();
+	return self->QStyledItemDelegate::senderSignalIndex();
 }
 
 int QStyledItemDelegate_protectedbase_receivers(const VirtualQStyledItemDelegate* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QStyledItemDelegate::receivers(signal);
 }
 
 bool QStyledItemDelegate_protectedbase_isSignalConnected(const VirtualQStyledItemDelegate* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QStyledItemDelegate::isSignalConnected(*signal);
 }
 
 void QStyledItemDelegate_delete(QStyledItemDelegate* self) {

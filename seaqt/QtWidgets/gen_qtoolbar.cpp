@@ -1230,39 +1230,39 @@ void QToolBar_virtualbase_disconnectNotify(VirtualQToolBar* self, QMetaMethod* s
 }
 
 void QToolBar_protectedbase_updateMicroFocus(VirtualQToolBar* self) {
-	self->updateMicroFocus();
+	self->QToolBar::updateMicroFocus();
 }
 
 void QToolBar_protectedbase_create(VirtualQToolBar* self) {
-	self->create();
+	self->QToolBar::create();
 }
 
 void QToolBar_protectedbase_destroy(VirtualQToolBar* self) {
-	self->destroy();
+	self->QToolBar::destroy();
 }
 
 bool QToolBar_protectedbase_focusNextChild(VirtualQToolBar* self) {
-	return self->focusNextChild();
+	return self->QToolBar::focusNextChild();
 }
 
 bool QToolBar_protectedbase_focusPreviousChild(VirtualQToolBar* self) {
-	return self->focusPreviousChild();
+	return self->QToolBar::focusPreviousChild();
 }
 
 QObject* QToolBar_protectedbase_sender(const VirtualQToolBar* self) {
-	return self->sender();
+	return self->QToolBar::sender();
 }
 
 int QToolBar_protectedbase_senderSignalIndex(const VirtualQToolBar* self) {
-	return self->senderSignalIndex();
+	return self->QToolBar::senderSignalIndex();
 }
 
 int QToolBar_protectedbase_receivers(const VirtualQToolBar* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QToolBar::receivers(signal);
 }
 
 bool QToolBar_protectedbase_isSignalConnected(const VirtualQToolBar* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QToolBar::isSignalConnected(*signal);
 }
 
 void QToolBar_delete(QToolBar* self) {

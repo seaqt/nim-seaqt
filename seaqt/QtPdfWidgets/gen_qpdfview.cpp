@@ -1224,51 +1224,51 @@ void QPdfView_virtualbase_disconnectNotify(VirtualQPdfView* self, QMetaMethod* s
 }
 
 void QPdfView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQPdfView* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QPdfView::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QPdfView_protectedbase_viewportMargins(const VirtualQPdfView* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QPdfView::viewportMargins());
 }
 
 void QPdfView_protectedbase_drawFrame(VirtualQPdfView* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QPdfView::drawFrame(param1);
 }
 
 void QPdfView_protectedbase_updateMicroFocus(VirtualQPdfView* self) {
-	self->updateMicroFocus();
+	self->QPdfView::updateMicroFocus();
 }
 
 void QPdfView_protectedbase_create(VirtualQPdfView* self) {
-	self->create();
+	self->QPdfView::create();
 }
 
 void QPdfView_protectedbase_destroy(VirtualQPdfView* self) {
-	self->destroy();
+	self->QPdfView::destroy();
 }
 
 bool QPdfView_protectedbase_focusNextChild(VirtualQPdfView* self) {
-	return self->focusNextChild();
+	return self->QPdfView::focusNextChild();
 }
 
 bool QPdfView_protectedbase_focusPreviousChild(VirtualQPdfView* self) {
-	return self->focusPreviousChild();
+	return self->QPdfView::focusPreviousChild();
 }
 
 QObject* QPdfView_protectedbase_sender(const VirtualQPdfView* self) {
-	return self->sender();
+	return self->QPdfView::sender();
 }
 
 int QPdfView_protectedbase_senderSignalIndex(const VirtualQPdfView* self) {
-	return self->senderSignalIndex();
+	return self->QPdfView::senderSignalIndex();
 }
 
 int QPdfView_protectedbase_receivers(const VirtualQPdfView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPdfView::receivers(signal);
 }
 
 bool QPdfView_protectedbase_isSignalConnected(const VirtualQPdfView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPdfView::isSignalConnected(*signal);
 }
 
 void QPdfView_delete(QPdfView* self) {

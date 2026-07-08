@@ -670,7 +670,7 @@ void QNetworkAccessManager_virtualbase_disconnectNotify(VirtualQNetworkAccessMan
 }
 
 struct seaqt_array /* of struct seaqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const VirtualQNetworkAccessManager* self) {
-	QStringList _ret = self->supportedSchemesImplementation();
+	QStringList _ret = self->QNetworkAccessManager::supportedSchemesImplementation();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -690,19 +690,19 @@ struct seaqt_array /* of struct seaqt_string */  QNetworkAccessManager_protected
 }
 
 QObject* QNetworkAccessManager_protectedbase_sender(const VirtualQNetworkAccessManager* self) {
-	return self->sender();
+	return self->QNetworkAccessManager::sender();
 }
 
 int QNetworkAccessManager_protectedbase_senderSignalIndex(const VirtualQNetworkAccessManager* self) {
-	return self->senderSignalIndex();
+	return self->QNetworkAccessManager::senderSignalIndex();
 }
 
 int QNetworkAccessManager_protectedbase_receivers(const VirtualQNetworkAccessManager* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QNetworkAccessManager::receivers(signal);
 }
 
 bool QNetworkAccessManager_protectedbase_isSignalConnected(const VirtualQNetworkAccessManager* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QNetworkAccessManager::isSignalConnected(*signal);
 }
 
 void QNetworkAccessManager_delete(QNetworkAccessManager* self) {

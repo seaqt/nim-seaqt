@@ -380,15 +380,15 @@ bool QGraphicsAnchorLayout_virtualbase_isEmpty(const VirtualQGraphicsAnchorLayou
 }
 
 void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(VirtualQGraphicsAnchorLayout* self, QGraphicsLayoutItem* layoutItem) {
-	self->addChildLayoutItem(layoutItem);
+	self->QGraphicsAnchorLayout::addChildLayoutItem(layoutItem);
 }
 
 void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(VirtualQGraphicsAnchorLayout* self, QGraphicsItem* item) {
-	self->setGraphicsItem(item);
+	self->QGraphicsAnchorLayout::setGraphicsItem(item);
 }
 
 void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(VirtualQGraphicsAnchorLayout* self, bool ownedByLayout) {
-	self->setOwnedByLayout(ownedByLayout);
+	self->QGraphicsAnchorLayout::setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsAnchorLayout_delete(QGraphicsAnchorLayout* self) {

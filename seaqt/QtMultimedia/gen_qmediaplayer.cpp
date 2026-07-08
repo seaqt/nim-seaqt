@@ -700,19 +700,19 @@ void QMediaPlayer_virtualbase_disconnectNotify(VirtualQMediaPlayer* self, QMetaM
 }
 
 QObject* QMediaPlayer_protectedbase_sender(const VirtualQMediaPlayer* self) {
-	return self->sender();
+	return self->QMediaPlayer::sender();
 }
 
 int QMediaPlayer_protectedbase_senderSignalIndex(const VirtualQMediaPlayer* self) {
-	return self->senderSignalIndex();
+	return self->QMediaPlayer::senderSignalIndex();
 }
 
 int QMediaPlayer_protectedbase_receivers(const VirtualQMediaPlayer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMediaPlayer::receivers(signal);
 }
 
 bool QMediaPlayer_protectedbase_isSignalConnected(const VirtualQMediaPlayer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMediaPlayer::isSignalConnected(*signal);
 }
 
 void QMediaPlayer_delete(QMediaPlayer* self) {

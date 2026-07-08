@@ -336,19 +336,19 @@ void QTimer_virtualbase_disconnectNotify(VirtualQTimer* self, QMetaMethod* signa
 }
 
 QObject* QTimer_protectedbase_sender(const VirtualQTimer* self) {
-	return self->sender();
+	return self->QTimer::sender();
 }
 
 int QTimer_protectedbase_senderSignalIndex(const VirtualQTimer* self) {
-	return self->senderSignalIndex();
+	return self->QTimer::senderSignalIndex();
 }
 
 int QTimer_protectedbase_receivers(const VirtualQTimer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTimer::receivers(signal);
 }
 
 bool QTimer_protectedbase_isSignalConnected(const VirtualQTimer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTimer::isSignalConnected(*signal);
 }
 
 void QTimer_delete(QTimer* self) {

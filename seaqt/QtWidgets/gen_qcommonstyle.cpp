@@ -878,19 +878,19 @@ void QCommonStyle_virtualbase_disconnectNotify(VirtualQCommonStyle* self, QMetaM
 }
 
 QObject* QCommonStyle_protectedbase_sender(const VirtualQCommonStyle* self) {
-	return self->sender();
+	return self->QCommonStyle::sender();
 }
 
 int QCommonStyle_protectedbase_senderSignalIndex(const VirtualQCommonStyle* self) {
-	return self->senderSignalIndex();
+	return self->QCommonStyle::senderSignalIndex();
 }
 
 int QCommonStyle_protectedbase_receivers(const VirtualQCommonStyle* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCommonStyle::receivers(signal);
 }
 
 bool QCommonStyle_protectedbase_isSignalConnected(const VirtualQCommonStyle* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCommonStyle::isSignalConnected(*signal);
 }
 
 void QCommonStyle_delete(QCommonStyle* self) {

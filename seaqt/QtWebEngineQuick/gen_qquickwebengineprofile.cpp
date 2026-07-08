@@ -631,19 +631,19 @@ void QQuickWebEngineProfile_virtualbase_disconnectNotify(VirtualQQuickWebEngineP
 }
 
 QObject* QQuickWebEngineProfile_protectedbase_sender(const VirtualQQuickWebEngineProfile* self) {
-	return self->sender();
+	return self->QQuickWebEngineProfile::sender();
 }
 
 int QQuickWebEngineProfile_protectedbase_senderSignalIndex(const VirtualQQuickWebEngineProfile* self) {
-	return self->senderSignalIndex();
+	return self->QQuickWebEngineProfile::senderSignalIndex();
 }
 
 int QQuickWebEngineProfile_protectedbase_receivers(const VirtualQQuickWebEngineProfile* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickWebEngineProfile::receivers(signal);
 }
 
 bool QQuickWebEngineProfile_protectedbase_isSignalConnected(const VirtualQQuickWebEngineProfile* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickWebEngineProfile::isSignalConnected(*signal);
 }
 
 void QQuickWebEngineProfile_delete(QQuickWebEngineProfile* self) {

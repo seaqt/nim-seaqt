@@ -364,19 +364,19 @@ void QSignalTransition_virtualbase_disconnectNotify(VirtualQSignalTransition* se
 }
 
 QObject* QSignalTransition_protectedbase_sender(const VirtualQSignalTransition* self) {
-	return self->sender();
+	return self->QSignalTransition::sender();
 }
 
 int QSignalTransition_protectedbase_senderSignalIndex(const VirtualQSignalTransition* self) {
-	return self->senderSignalIndex();
+	return self->QSignalTransition::senderSignalIndex();
 }
 
 int QSignalTransition_protectedbase_receivers(const VirtualQSignalTransition* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSignalTransition::receivers(signal);
 }
 
 bool QSignalTransition_protectedbase_isSignalConnected(const VirtualQSignalTransition* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSignalTransition::isSignalConnected(*signal);
 }
 
 void QSignalTransition_delete(QSignalTransition* self) {

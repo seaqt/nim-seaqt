@@ -1390,11 +1390,11 @@ void QTransposeProxyModel_virtualbase_disconnectNotify(VirtualQTransposeProxyMod
 }
 
 QModelIndex* QTransposeProxyModel_protectedbase_createSourceIndex(const VirtualQTransposeProxyModel* self, int row, int col, void* internalPtr) {
-	return new QModelIndex(self->createSourceIndex(static_cast<int>(row), static_cast<int>(col), internalPtr));
+	return new QModelIndex(self->QTransposeProxyModel::createSourceIndex(static_cast<int>(row), static_cast<int>(col), internalPtr));
 }
 
 QModelIndex* QTransposeProxyModel_protectedbase_createIndex_row_column(const VirtualQTransposeProxyModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QTransposeProxyModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QTransposeProxyModel_protectedbase_encodeData(const VirtualQTransposeProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1404,71 +1404,71 @@ void QTransposeProxyModel_protectedbase_encodeData(const VirtualQTransposeProxyM
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QTransposeProxyModel::encodeData(indexes_QList, *stream);
 }
 
 bool QTransposeProxyModel_protectedbase_decodeData(VirtualQTransposeProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QTransposeProxyModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QTransposeProxyModel_protectedbase_beginInsertRows(VirtualQTransposeProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QTransposeProxyModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QTransposeProxyModel_protectedbase_endInsertRows(VirtualQTransposeProxyModel* self) {
-	self->endInsertRows();
+	self->QTransposeProxyModel::endInsertRows();
 }
 
 void QTransposeProxyModel_protectedbase_beginRemoveRows(VirtualQTransposeProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QTransposeProxyModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QTransposeProxyModel_protectedbase_endRemoveRows(VirtualQTransposeProxyModel* self) {
-	self->endRemoveRows();
+	self->QTransposeProxyModel::endRemoveRows();
 }
 
 bool QTransposeProxyModel_protectedbase_beginMoveRows(VirtualQTransposeProxyModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QTransposeProxyModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QTransposeProxyModel_protectedbase_endMoveRows(VirtualQTransposeProxyModel* self) {
-	self->endMoveRows();
+	self->QTransposeProxyModel::endMoveRows();
 }
 
 void QTransposeProxyModel_protectedbase_beginInsertColumns(VirtualQTransposeProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QTransposeProxyModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QTransposeProxyModel_protectedbase_endInsertColumns(VirtualQTransposeProxyModel* self) {
-	self->endInsertColumns();
+	self->QTransposeProxyModel::endInsertColumns();
 }
 
 void QTransposeProxyModel_protectedbase_beginRemoveColumns(VirtualQTransposeProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QTransposeProxyModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QTransposeProxyModel_protectedbase_endRemoveColumns(VirtualQTransposeProxyModel* self) {
-	self->endRemoveColumns();
+	self->QTransposeProxyModel::endRemoveColumns();
 }
 
 bool QTransposeProxyModel_protectedbase_beginMoveColumns(VirtualQTransposeProxyModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QTransposeProxyModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QTransposeProxyModel_protectedbase_endMoveColumns(VirtualQTransposeProxyModel* self) {
-	self->endMoveColumns();
+	self->QTransposeProxyModel::endMoveColumns();
 }
 
 void QTransposeProxyModel_protectedbase_beginResetModel(VirtualQTransposeProxyModel* self) {
-	self->beginResetModel();
+	self->QTransposeProxyModel::beginResetModel();
 }
 
 void QTransposeProxyModel_protectedbase_endResetModel(VirtualQTransposeProxyModel* self) {
-	self->endResetModel();
+	self->QTransposeProxyModel::endResetModel();
 }
 
 void QTransposeProxyModel_protectedbase_changePersistentIndex(VirtualQTransposeProxyModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QTransposeProxyModel::changePersistentIndex(*from, *to);
 }
 
 void QTransposeProxyModel_protectedbase_changePersistentIndexList(VirtualQTransposeProxyModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1484,11 +1484,11 @@ void QTransposeProxyModel_protectedbase_changePersistentIndexList(VirtualQTransp
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QTransposeProxyModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QTransposeProxyModel_protectedbase_persistentIndexList(const VirtualQTransposeProxyModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QTransposeProxyModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1501,19 +1501,19 @@ struct seaqt_array /* of QModelIndex* */  QTransposeProxyModel_protectedbase_per
 }
 
 QObject* QTransposeProxyModel_protectedbase_sender(const VirtualQTransposeProxyModel* self) {
-	return self->sender();
+	return self->QTransposeProxyModel::sender();
 }
 
 int QTransposeProxyModel_protectedbase_senderSignalIndex(const VirtualQTransposeProxyModel* self) {
-	return self->senderSignalIndex();
+	return self->QTransposeProxyModel::senderSignalIndex();
 }
 
 int QTransposeProxyModel_protectedbase_receivers(const VirtualQTransposeProxyModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTransposeProxyModel::receivers(signal);
 }
 
 bool QTransposeProxyModel_protectedbase_isSignalConnected(const VirtualQTransposeProxyModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTransposeProxyModel::isSignalConnected(*signal);
 }
 
 void QTransposeProxyModel_delete(QTransposeProxyModel* self) {

@@ -651,19 +651,19 @@ void QImageIOPlugin_virtualbase_disconnectNotify(VirtualQImageIOPlugin* self, QM
 }
 
 QObject* QImageIOPlugin_protectedbase_sender(const VirtualQImageIOPlugin* self) {
-	return self->sender();
+	return self->QImageIOPlugin::sender();
 }
 
 int QImageIOPlugin_protectedbase_senderSignalIndex(const VirtualQImageIOPlugin* self) {
-	return self->senderSignalIndex();
+	return self->QImageIOPlugin::senderSignalIndex();
 }
 
 int QImageIOPlugin_protectedbase_receivers(const VirtualQImageIOPlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QImageIOPlugin::receivers(signal);
 }
 
 bool QImageIOPlugin_protectedbase_isSignalConnected(const VirtualQImageIOPlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QImageIOPlugin::isSignalConnected(*signal);
 }
 
 void QImageIOPlugin_delete(QImageIOPlugin* self) {

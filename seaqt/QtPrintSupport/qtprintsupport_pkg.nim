@@ -5,7 +5,7 @@ const
 
   QtPrintSupportLibs* = gorge("pkg-config --libs Qt6PrintSupport")
 
-  QtPrintSupportGenVersion* = "6.4.2"
+  QtPrintSupportGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtPrintSupportBuildVersion* = gorge("pkg-config --modversion Qt6PrintSupport")

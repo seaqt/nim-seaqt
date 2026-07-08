@@ -350,19 +350,19 @@ void QFileSelector_virtualbase_disconnectNotify(VirtualQFileSelector* self, QMet
 }
 
 QObject* QFileSelector_protectedbase_sender(const VirtualQFileSelector* self) {
-	return self->sender();
+	return self->QFileSelector::sender();
 }
 
 int QFileSelector_protectedbase_senderSignalIndex(const VirtualQFileSelector* self) {
-	return self->senderSignalIndex();
+	return self->QFileSelector::senderSignalIndex();
 }
 
 int QFileSelector_protectedbase_receivers(const VirtualQFileSelector* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFileSelector::receivers(signal);
 }
 
 bool QFileSelector_protectedbase_isSignalConnected(const VirtualQFileSelector* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFileSelector::isSignalConnected(*signal);
 }
 
 void QFileSelector_delete(QFileSelector* self) {

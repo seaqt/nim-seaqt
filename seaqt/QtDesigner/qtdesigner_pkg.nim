@@ -5,7 +5,7 @@ const
 
   QtDesignerLibs* = gorge("pkg-config --libs Qt6Designer")
 
-  QtDesignerGenVersion* = "6.4.2"
+  QtDesignerGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtDesignerBuildVersion* = gorge("pkg-config --modversion Qt6Designer")

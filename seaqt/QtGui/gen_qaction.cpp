@@ -682,19 +682,19 @@ void QAction_virtualbase_disconnectNotify(VirtualQAction* self, QMetaMethod* sig
 }
 
 QObject* QAction_protectedbase_sender(const VirtualQAction* self) {
-	return self->sender();
+	return self->QAction::sender();
 }
 
 int QAction_protectedbase_senderSignalIndex(const VirtualQAction* self) {
-	return self->senderSignalIndex();
+	return self->QAction::senderSignalIndex();
 }
 
 int QAction_protectedbase_receivers(const VirtualQAction* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAction::receivers(signal);
 }
 
 bool QAction_protectedbase_isSignalConnected(const VirtualQAction* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAction::isSignalConnected(*signal);
 }
 
 void QAction_delete(QAction* self) {

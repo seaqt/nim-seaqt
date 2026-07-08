@@ -1227,11 +1227,11 @@ void QPdfSearchModel_virtualbase_disconnectNotify(VirtualQPdfSearchModel* self, 
 }
 
 void QPdfSearchModel_protectedbase_updatePage(VirtualQPdfSearchModel* self, int page) {
-	self->updatePage(static_cast<int>(page));
+	self->QPdfSearchModel::updatePage(static_cast<int>(page));
 }
 
 QModelIndex* QPdfSearchModel_protectedbase_createIndex_row_column(const VirtualQPdfSearchModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QPdfSearchModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QPdfSearchModel_protectedbase_encodeData(const VirtualQPdfSearchModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1241,71 +1241,71 @@ void QPdfSearchModel_protectedbase_encodeData(const VirtualQPdfSearchModel* self
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QPdfSearchModel::encodeData(indexes_QList, *stream);
 }
 
 bool QPdfSearchModel_protectedbase_decodeData(VirtualQPdfSearchModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QPdfSearchModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QPdfSearchModel_protectedbase_beginInsertRows(VirtualQPdfSearchModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QPdfSearchModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QPdfSearchModel_protectedbase_endInsertRows(VirtualQPdfSearchModel* self) {
-	self->endInsertRows();
+	self->QPdfSearchModel::endInsertRows();
 }
 
 void QPdfSearchModel_protectedbase_beginRemoveRows(VirtualQPdfSearchModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QPdfSearchModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QPdfSearchModel_protectedbase_endRemoveRows(VirtualQPdfSearchModel* self) {
-	self->endRemoveRows();
+	self->QPdfSearchModel::endRemoveRows();
 }
 
 bool QPdfSearchModel_protectedbase_beginMoveRows(VirtualQPdfSearchModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QPdfSearchModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QPdfSearchModel_protectedbase_endMoveRows(VirtualQPdfSearchModel* self) {
-	self->endMoveRows();
+	self->QPdfSearchModel::endMoveRows();
 }
 
 void QPdfSearchModel_protectedbase_beginInsertColumns(VirtualQPdfSearchModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QPdfSearchModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QPdfSearchModel_protectedbase_endInsertColumns(VirtualQPdfSearchModel* self) {
-	self->endInsertColumns();
+	self->QPdfSearchModel::endInsertColumns();
 }
 
 void QPdfSearchModel_protectedbase_beginRemoveColumns(VirtualQPdfSearchModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QPdfSearchModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QPdfSearchModel_protectedbase_endRemoveColumns(VirtualQPdfSearchModel* self) {
-	self->endRemoveColumns();
+	self->QPdfSearchModel::endRemoveColumns();
 }
 
 bool QPdfSearchModel_protectedbase_beginMoveColumns(VirtualQPdfSearchModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QPdfSearchModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QPdfSearchModel_protectedbase_endMoveColumns(VirtualQPdfSearchModel* self) {
-	self->endMoveColumns();
+	self->QPdfSearchModel::endMoveColumns();
 }
 
 void QPdfSearchModel_protectedbase_beginResetModel(VirtualQPdfSearchModel* self) {
-	self->beginResetModel();
+	self->QPdfSearchModel::beginResetModel();
 }
 
 void QPdfSearchModel_protectedbase_endResetModel(VirtualQPdfSearchModel* self) {
-	self->endResetModel();
+	self->QPdfSearchModel::endResetModel();
 }
 
 void QPdfSearchModel_protectedbase_changePersistentIndex(VirtualQPdfSearchModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QPdfSearchModel::changePersistentIndex(*from, *to);
 }
 
 void QPdfSearchModel_protectedbase_changePersistentIndexList(VirtualQPdfSearchModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1321,11 +1321,11 @@ void QPdfSearchModel_protectedbase_changePersistentIndexList(VirtualQPdfSearchMo
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QPdfSearchModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QPdfSearchModel_protectedbase_persistentIndexList(const VirtualQPdfSearchModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QPdfSearchModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1338,19 +1338,19 @@ struct seaqt_array /* of QModelIndex* */  QPdfSearchModel_protectedbase_persiste
 }
 
 QObject* QPdfSearchModel_protectedbase_sender(const VirtualQPdfSearchModel* self) {
-	return self->sender();
+	return self->QPdfSearchModel::sender();
 }
 
 int QPdfSearchModel_protectedbase_senderSignalIndex(const VirtualQPdfSearchModel* self) {
-	return self->senderSignalIndex();
+	return self->QPdfSearchModel::senderSignalIndex();
 }
 
 int QPdfSearchModel_protectedbase_receivers(const VirtualQPdfSearchModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPdfSearchModel::receivers(signal);
 }
 
 bool QPdfSearchModel_protectedbase_isSignalConnected(const VirtualQPdfSearchModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPdfSearchModel::isSignalConnected(*signal);
 }
 
 void QPdfSearchModel_delete(QPdfSearchModel* self) {

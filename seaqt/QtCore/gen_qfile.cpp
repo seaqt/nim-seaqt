@@ -858,28 +858,28 @@ void QFile_virtualbase_disconnectNotify(VirtualQFile* self, QMetaMethod* signal)
 }
 
 void QFile_protectedbase_setOpenMode(VirtualQFile* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQFile::OpenMode>(openMode));
+	self->QFile::setOpenMode(static_cast<VirtualQFile::OpenMode>(openMode));
 }
 
 void QFile_protectedbase_setErrorString(VirtualQFile* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QFile::setErrorString(errorString_QString);
 }
 
 QObject* QFile_protectedbase_sender(const VirtualQFile* self) {
-	return self->sender();
+	return self->QFile::sender();
 }
 
 int QFile_protectedbase_senderSignalIndex(const VirtualQFile* self) {
-	return self->senderSignalIndex();
+	return self->QFile::senderSignalIndex();
 }
 
 int QFile_protectedbase_receivers(const VirtualQFile* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFile::receivers(signal);
 }
 
 bool QFile_protectedbase_isSignalConnected(const VirtualQFile* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFile::isSignalConnected(*signal);
 }
 
 void QFile_delete(QFile* self) {

@@ -1068,39 +1068,39 @@ void QQuickPaintedItem_virtualbase_disconnectNotify(VirtualQQuickPaintedItem* se
 }
 
 bool QQuickPaintedItem_protectedbase_isComponentComplete(const VirtualQQuickPaintedItem* self) {
-	return self->isComponentComplete();
+	return self->QQuickPaintedItem::isComponentComplete();
 }
 
 void QQuickPaintedItem_protectedbase_updateInputMethod(VirtualQQuickPaintedItem* self) {
-	self->updateInputMethod();
+	self->QQuickPaintedItem::updateInputMethod();
 }
 
 bool QQuickPaintedItem_protectedbase_widthValid(const VirtualQQuickPaintedItem* self) {
-	return self->widthValid();
+	return self->QQuickPaintedItem::widthValid();
 }
 
 bool QQuickPaintedItem_protectedbase_heightValid(const VirtualQQuickPaintedItem* self) {
-	return self->heightValid();
+	return self->QQuickPaintedItem::heightValid();
 }
 
 void QQuickPaintedItem_protectedbase_setImplicitSize(VirtualQQuickPaintedItem* self, double param1, double param2) {
-	self->setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
+	self->QQuickPaintedItem::setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
 }
 
 QObject* QQuickPaintedItem_protectedbase_sender(const VirtualQQuickPaintedItem* self) {
-	return self->sender();
+	return self->QQuickPaintedItem::sender();
 }
 
 int QQuickPaintedItem_protectedbase_senderSignalIndex(const VirtualQQuickPaintedItem* self) {
-	return self->senderSignalIndex();
+	return self->QQuickPaintedItem::senderSignalIndex();
 }
 
 int QQuickPaintedItem_protectedbase_receivers(const VirtualQQuickPaintedItem* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickPaintedItem::receivers(signal);
 }
 
 bool QQuickPaintedItem_protectedbase_isSignalConnected(const VirtualQQuickPaintedItem* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickPaintedItem::isSignalConnected(*signal);
 }
 
 void QQuickPaintedItem_delete(QQuickPaintedItem* self) {

@@ -232,7 +232,6 @@ proc fcQWebEnginePage_triggerAction(self: pointer, action: cint, checked: bool):
 proc fcQWebEnginePage_replaceMisspelledWord(self: pointer, replacement: struct_seaqt_string): void {.importc: "QWebEnginePage_replaceMisspelledWord".}
 proc fcQWebEnginePage_event(self: pointer, param1: pointer): bool {.importc: "QWebEnginePage_event".}
 proc fcQWebEnginePage_findTextSubString(self: pointer, subString: struct_seaqt_string): void {.importc: "QWebEnginePage_findText_subString".}
-proc fcQWebEnginePage_setFeaturePermission(self: pointer, securityOrigin: pointer, feature: cint, policy: cint): void {.importc: "QWebEnginePage_setFeaturePermission".}
 proc fcQWebEnginePage_isLoading(self: pointer): bool {.importc: "QWebEnginePage_isLoading".}
 proc fcQWebEnginePage_loadUrl(self: pointer, url: pointer): void {.importc: "QWebEnginePage_load_url".}
 proc fcQWebEnginePage_loadRequest(self: pointer, request: pointer): void {.importc: "QWebEnginePage_load_request".}
@@ -450,9 +449,6 @@ proc event*(self: gen_qwebenginepage_types.QWebEnginePage, param1: gen_qcoreeven
 
 proc findText*(self: gen_qwebenginepage_types.QWebEnginePage, subString: openArray[char]): void =
   fcQWebEnginePage_findTextSubString(self.h, struct_seaqt_string(data: if len(subString) > 0: addr subString[0] else: nil, len: csize_t(len(subString))))
-
-proc setFeaturePermission*(self: gen_qwebenginepage_types.QWebEnginePage, securityOrigin: gen_qurl_types.QUrl, feature: cint, policy: cint): void =
-  fcQWebEnginePage_setFeaturePermission(self.h, securityOrigin.h, cint(feature), cint(policy))
 
 proc isLoading*(self: gen_qwebenginepage_types.QWebEnginePage): bool =
   fcQWebEnginePage_isLoading(self.h)

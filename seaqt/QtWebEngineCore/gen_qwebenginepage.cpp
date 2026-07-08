@@ -463,10 +463,6 @@ void QWebEnginePage_findText_subString(QWebEnginePage* self, struct seaqt_string
 	self->findText(subString_QString);
 }
 
-void QWebEnginePage_setFeaturePermission(QWebEnginePage* self, QUrl* securityOrigin, int feature, int policy) {
-	self->setFeaturePermission(*securityOrigin, static_cast<QWebEnginePage::Feature>(feature), static_cast<QWebEnginePage::PermissionPolicy>(policy));
-}
-
 bool QWebEnginePage_isLoading(const QWebEnginePage* self) {
 	return self->isLoading();
 }
@@ -1308,19 +1304,19 @@ void QWebEnginePage_virtualbase_disconnectNotify(VirtualQWebEnginePage* self, QM
 }
 
 QObject* QWebEnginePage_protectedbase_sender(const VirtualQWebEnginePage* self) {
-	return self->sender();
+	return self->QWebEnginePage::sender();
 }
 
 int QWebEnginePage_protectedbase_senderSignalIndex(const VirtualQWebEnginePage* self) {
-	return self->senderSignalIndex();
+	return self->QWebEnginePage::senderSignalIndex();
 }
 
 int QWebEnginePage_protectedbase_receivers(const VirtualQWebEnginePage* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebEnginePage::receivers(signal);
 }
 
 bool QWebEnginePage_protectedbase_isSignalConnected(const VirtualQWebEnginePage* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebEnginePage::isSignalConnected(*signal);
 }
 
 void QWebEnginePage_delete(QWebEnginePage* self) {

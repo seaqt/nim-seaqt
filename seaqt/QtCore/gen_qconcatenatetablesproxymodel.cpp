@@ -1322,7 +1322,7 @@ void QConcatenateTablesProxyModel_virtualbase_disconnectNotify(VirtualQConcatena
 }
 
 QModelIndex* QConcatenateTablesProxyModel_protectedbase_createIndex_row_column(const VirtualQConcatenateTablesProxyModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QConcatenateTablesProxyModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QConcatenateTablesProxyModel_protectedbase_encodeData(const VirtualQConcatenateTablesProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1332,71 +1332,71 @@ void QConcatenateTablesProxyModel_protectedbase_encodeData(const VirtualQConcate
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QConcatenateTablesProxyModel::encodeData(indexes_QList, *stream);
 }
 
 bool QConcatenateTablesProxyModel_protectedbase_decodeData(VirtualQConcatenateTablesProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QConcatenateTablesProxyModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QConcatenateTablesProxyModel_protectedbase_beginInsertRows(VirtualQConcatenateTablesProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QConcatenateTablesProxyModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QConcatenateTablesProxyModel_protectedbase_endInsertRows(VirtualQConcatenateTablesProxyModel* self) {
-	self->endInsertRows();
+	self->QConcatenateTablesProxyModel::endInsertRows();
 }
 
 void QConcatenateTablesProxyModel_protectedbase_beginRemoveRows(VirtualQConcatenateTablesProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QConcatenateTablesProxyModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QConcatenateTablesProxyModel_protectedbase_endRemoveRows(VirtualQConcatenateTablesProxyModel* self) {
-	self->endRemoveRows();
+	self->QConcatenateTablesProxyModel::endRemoveRows();
 }
 
 bool QConcatenateTablesProxyModel_protectedbase_beginMoveRows(VirtualQConcatenateTablesProxyModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QConcatenateTablesProxyModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QConcatenateTablesProxyModel_protectedbase_endMoveRows(VirtualQConcatenateTablesProxyModel* self) {
-	self->endMoveRows();
+	self->QConcatenateTablesProxyModel::endMoveRows();
 }
 
 void QConcatenateTablesProxyModel_protectedbase_beginInsertColumns(VirtualQConcatenateTablesProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QConcatenateTablesProxyModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QConcatenateTablesProxyModel_protectedbase_endInsertColumns(VirtualQConcatenateTablesProxyModel* self) {
-	self->endInsertColumns();
+	self->QConcatenateTablesProxyModel::endInsertColumns();
 }
 
 void QConcatenateTablesProxyModel_protectedbase_beginRemoveColumns(VirtualQConcatenateTablesProxyModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QConcatenateTablesProxyModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QConcatenateTablesProxyModel_protectedbase_endRemoveColumns(VirtualQConcatenateTablesProxyModel* self) {
-	self->endRemoveColumns();
+	self->QConcatenateTablesProxyModel::endRemoveColumns();
 }
 
 bool QConcatenateTablesProxyModel_protectedbase_beginMoveColumns(VirtualQConcatenateTablesProxyModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QConcatenateTablesProxyModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QConcatenateTablesProxyModel_protectedbase_endMoveColumns(VirtualQConcatenateTablesProxyModel* self) {
-	self->endMoveColumns();
+	self->QConcatenateTablesProxyModel::endMoveColumns();
 }
 
 void QConcatenateTablesProxyModel_protectedbase_beginResetModel(VirtualQConcatenateTablesProxyModel* self) {
-	self->beginResetModel();
+	self->QConcatenateTablesProxyModel::beginResetModel();
 }
 
 void QConcatenateTablesProxyModel_protectedbase_endResetModel(VirtualQConcatenateTablesProxyModel* self) {
-	self->endResetModel();
+	self->QConcatenateTablesProxyModel::endResetModel();
 }
 
 void QConcatenateTablesProxyModel_protectedbase_changePersistentIndex(VirtualQConcatenateTablesProxyModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QConcatenateTablesProxyModel::changePersistentIndex(*from, *to);
 }
 
 void QConcatenateTablesProxyModel_protectedbase_changePersistentIndexList(VirtualQConcatenateTablesProxyModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1412,11 +1412,11 @@ void QConcatenateTablesProxyModel_protectedbase_changePersistentIndexList(Virtua
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QConcatenateTablesProxyModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QConcatenateTablesProxyModel_protectedbase_persistentIndexList(const VirtualQConcatenateTablesProxyModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QConcatenateTablesProxyModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1429,19 +1429,19 @@ struct seaqt_array /* of QModelIndex* */  QConcatenateTablesProxyModel_protected
 }
 
 QObject* QConcatenateTablesProxyModel_protectedbase_sender(const VirtualQConcatenateTablesProxyModel* self) {
-	return self->sender();
+	return self->QConcatenateTablesProxyModel::sender();
 }
 
 int QConcatenateTablesProxyModel_protectedbase_senderSignalIndex(const VirtualQConcatenateTablesProxyModel* self) {
-	return self->senderSignalIndex();
+	return self->QConcatenateTablesProxyModel::senderSignalIndex();
 }
 
 int QConcatenateTablesProxyModel_protectedbase_receivers(const VirtualQConcatenateTablesProxyModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QConcatenateTablesProxyModel::receivers(signal);
 }
 
 bool QConcatenateTablesProxyModel_protectedbase_isSignalConnected(const VirtualQConcatenateTablesProxyModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QConcatenateTablesProxyModel::isSignalConnected(*signal);
 }
 
 void QConcatenateTablesProxyModel_delete(QConcatenateTablesProxyModel* self) {

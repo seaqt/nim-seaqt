@@ -297,19 +297,19 @@ void QWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify(VirtualQWebEng
 }
 
 QObject* QWebEngineUrlRequestInterceptor_protectedbase_sender(const VirtualQWebEngineUrlRequestInterceptor* self) {
-	return self->sender();
+	return self->QWebEngineUrlRequestInterceptor::sender();
 }
 
 int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(const VirtualQWebEngineUrlRequestInterceptor* self) {
-	return self->senderSignalIndex();
+	return self->QWebEngineUrlRequestInterceptor::senderSignalIndex();
 }
 
 int QWebEngineUrlRequestInterceptor_protectedbase_receivers(const VirtualQWebEngineUrlRequestInterceptor* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebEngineUrlRequestInterceptor::receivers(signal);
 }
 
 bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(const VirtualQWebEngineUrlRequestInterceptor* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebEngineUrlRequestInterceptor::isSignalConnected(*signal);
 }
 
 void QWebEngineUrlRequestInterceptor_delete(QWebEngineUrlRequestInterceptor* self) {

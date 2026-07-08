@@ -369,19 +369,19 @@ void QThreadPool_virtualbase_disconnectNotify(VirtualQThreadPool* self, QMetaMet
 }
 
 QObject* QThreadPool_protectedbase_sender(const VirtualQThreadPool* self) {
-	return self->sender();
+	return self->QThreadPool::sender();
 }
 
 int QThreadPool_protectedbase_senderSignalIndex(const VirtualQThreadPool* self) {
-	return self->senderSignalIndex();
+	return self->QThreadPool::senderSignalIndex();
 }
 
 int QThreadPool_protectedbase_receivers(const VirtualQThreadPool* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QThreadPool::receivers(signal);
 }
 
 bool QThreadPool_protectedbase_isSignalConnected(const VirtualQThreadPool* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QThreadPool::isSignalConnected(*signal);
 }
 
 void QThreadPool_delete(QThreadPool* self) {

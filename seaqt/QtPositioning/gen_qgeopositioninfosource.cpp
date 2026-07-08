@@ -588,19 +588,19 @@ void QGeoPositionInfoSource_virtualbase_disconnectNotify(VirtualQGeoPositionInfo
 }
 
 QObject* QGeoPositionInfoSource_protectedbase_sender(const VirtualQGeoPositionInfoSource* self) {
-	return self->sender();
+	return self->QGeoPositionInfoSource::sender();
 }
 
 int QGeoPositionInfoSource_protectedbase_senderSignalIndex(const VirtualQGeoPositionInfoSource* self) {
-	return self->senderSignalIndex();
+	return self->QGeoPositionInfoSource::senderSignalIndex();
 }
 
 int QGeoPositionInfoSource_protectedbase_receivers(const VirtualQGeoPositionInfoSource* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGeoPositionInfoSource::receivers(signal);
 }
 
 bool QGeoPositionInfoSource_protectedbase_isSignalConnected(const VirtualQGeoPositionInfoSource* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGeoPositionInfoSource::isSignalConnected(*signal);
 }
 
 void QGeoPositionInfoSource_delete(QGeoPositionInfoSource* self) {

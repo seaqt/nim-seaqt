@@ -1192,55 +1192,55 @@ void QAbstractScrollArea_virtualbase_disconnectNotify(VirtualQAbstractScrollArea
 }
 
 void QAbstractScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQAbstractScrollArea* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QAbstractScrollArea::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 void QAbstractScrollArea_protectedbase_setViewportMargins_margins(VirtualQAbstractScrollArea* self, QMargins* margins) {
-	self->setViewportMargins(*margins);
+	self->QAbstractScrollArea::setViewportMargins(*margins);
 }
 
 QMargins* QAbstractScrollArea_protectedbase_viewportMargins(const VirtualQAbstractScrollArea* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QAbstractScrollArea::viewportMargins());
 }
 
 void QAbstractScrollArea_protectedbase_drawFrame(VirtualQAbstractScrollArea* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QAbstractScrollArea::drawFrame(param1);
 }
 
 void QAbstractScrollArea_protectedbase_updateMicroFocus(VirtualQAbstractScrollArea* self) {
-	self->updateMicroFocus();
+	self->QAbstractScrollArea::updateMicroFocus();
 }
 
 void QAbstractScrollArea_protectedbase_create(VirtualQAbstractScrollArea* self) {
-	self->create();
+	self->QAbstractScrollArea::create();
 }
 
 void QAbstractScrollArea_protectedbase_destroy(VirtualQAbstractScrollArea* self) {
-	self->destroy();
+	self->QAbstractScrollArea::destroy();
 }
 
 bool QAbstractScrollArea_protectedbase_focusNextChild(VirtualQAbstractScrollArea* self) {
-	return self->focusNextChild();
+	return self->QAbstractScrollArea::focusNextChild();
 }
 
 bool QAbstractScrollArea_protectedbase_focusPreviousChild(VirtualQAbstractScrollArea* self) {
-	return self->focusPreviousChild();
+	return self->QAbstractScrollArea::focusPreviousChild();
 }
 
 QObject* QAbstractScrollArea_protectedbase_sender(const VirtualQAbstractScrollArea* self) {
-	return self->sender();
+	return self->QAbstractScrollArea::sender();
 }
 
 int QAbstractScrollArea_protectedbase_senderSignalIndex(const VirtualQAbstractScrollArea* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractScrollArea::senderSignalIndex();
 }
 
 int QAbstractScrollArea_protectedbase_receivers(const VirtualQAbstractScrollArea* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractScrollArea::receivers(signal);
 }
 
 bool QAbstractScrollArea_protectedbase_isSignalConnected(const VirtualQAbstractScrollArea* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractScrollArea::isSignalConnected(*signal);
 }
 
 void QAbstractScrollArea_delete(QAbstractScrollArea* self) {

@@ -2063,113 +2063,113 @@ void QListView_virtualbase_disconnectNotify(VirtualQListView* self, QMetaMethod*
 }
 
 void QListView_protectedbase_resizeContents(VirtualQListView* self, int width, int height) {
-	self->resizeContents(static_cast<int>(width), static_cast<int>(height));
+	self->QListView::resizeContents(static_cast<int>(width), static_cast<int>(height));
 }
 
 QSize* QListView_protectedbase_contentsSize(const VirtualQListView* self) {
-	return new QSize(self->contentsSize());
+	return new QSize(self->QListView::contentsSize());
 }
 
 QRect* QListView_protectedbase_rectForIndex(const VirtualQListView* self, QModelIndex* index) {
-	return new QRect(self->rectForIndex(*index));
+	return new QRect(self->QListView::rectForIndex(*index));
 }
 
 void QListView_protectedbase_setPositionForIndex(VirtualQListView* self, QPoint* position, QModelIndex* index) {
-	self->setPositionForIndex(*position, *index);
+	self->QListView::setPositionForIndex(*position, *index);
 }
 
 int QListView_protectedbase_state(const VirtualQListView* self) {
-	VirtualQListView::State _ret = self->state();
+	VirtualQListView::State _ret = self->QListView::state();
 	return static_cast<int>(_ret);
 }
 
 void QListView_protectedbase_setState(VirtualQListView* self, int state) {
-	self->setState(static_cast<VirtualQListView::State>(state));
+	self->QListView::setState(static_cast<VirtualQListView::State>(state));
 }
 
 void QListView_protectedbase_scheduleDelayedItemsLayout(VirtualQListView* self) {
-	self->scheduleDelayedItemsLayout();
+	self->QListView::scheduleDelayedItemsLayout();
 }
 
 void QListView_protectedbase_executeDelayedItemsLayout(VirtualQListView* self) {
-	self->executeDelayedItemsLayout();
+	self->QListView::executeDelayedItemsLayout();
 }
 
 void QListView_protectedbase_setDirtyRegion(VirtualQListView* self, QRegion* region) {
-	self->setDirtyRegion(*region);
+	self->QListView::setDirtyRegion(*region);
 }
 
 void QListView_protectedbase_scrollDirtyRegion(VirtualQListView* self, int dx, int dy) {
-	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
+	self->QListView::scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
 QPoint* QListView_protectedbase_dirtyRegionOffset(const VirtualQListView* self) {
-	return new QPoint(self->dirtyRegionOffset());
+	return new QPoint(self->QListView::dirtyRegionOffset());
 }
 
 void QListView_protectedbase_startAutoScroll(VirtualQListView* self) {
-	self->startAutoScroll();
+	self->QListView::startAutoScroll();
 }
 
 void QListView_protectedbase_stopAutoScroll(VirtualQListView* self) {
-	self->stopAutoScroll();
+	self->QListView::stopAutoScroll();
 }
 
 void QListView_protectedbase_doAutoScroll(VirtualQListView* self) {
-	self->doAutoScroll();
+	self->QListView::doAutoScroll();
 }
 
 int QListView_protectedbase_dropIndicatorPosition(const VirtualQListView* self) {
-	VirtualQListView::DropIndicatorPosition _ret = self->dropIndicatorPosition();
+	VirtualQListView::DropIndicatorPosition _ret = self->QListView::dropIndicatorPosition();
 	return static_cast<int>(_ret);
 }
 
 void QListView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQListView* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QListView::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QListView_protectedbase_viewportMargins(const VirtualQListView* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QListView::viewportMargins());
 }
 
 void QListView_protectedbase_drawFrame(VirtualQListView* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QListView::drawFrame(param1);
 }
 
 void QListView_protectedbase_updateMicroFocus(VirtualQListView* self) {
-	self->updateMicroFocus();
+	self->QListView::updateMicroFocus();
 }
 
 void QListView_protectedbase_create(VirtualQListView* self) {
-	self->create();
+	self->QListView::create();
 }
 
 void QListView_protectedbase_destroy(VirtualQListView* self) {
-	self->destroy();
+	self->QListView::destroy();
 }
 
 bool QListView_protectedbase_focusNextChild(VirtualQListView* self) {
-	return self->focusNextChild();
+	return self->QListView::focusNextChild();
 }
 
 bool QListView_protectedbase_focusPreviousChild(VirtualQListView* self) {
-	return self->focusPreviousChild();
+	return self->QListView::focusPreviousChild();
 }
 
 QObject* QListView_protectedbase_sender(const VirtualQListView* self) {
-	return self->sender();
+	return self->QListView::sender();
 }
 
 int QListView_protectedbase_senderSignalIndex(const VirtualQListView* self) {
-	return self->senderSignalIndex();
+	return self->QListView::senderSignalIndex();
 }
 
 int QListView_protectedbase_receivers(const VirtualQListView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QListView::receivers(signal);
 }
 
 bool QListView_protectedbase_isSignalConnected(const VirtualQListView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QListView::isSignalConnected(*signal);
 }
 
 void QListView_delete(QListView* self) {

@@ -1129,43 +1129,43 @@ void QLCDNumber_virtualbase_disconnectNotify(VirtualQLCDNumber* self, QMetaMetho
 }
 
 void QLCDNumber_protectedbase_drawFrame(VirtualQLCDNumber* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QLCDNumber::drawFrame(param1);
 }
 
 void QLCDNumber_protectedbase_updateMicroFocus(VirtualQLCDNumber* self) {
-	self->updateMicroFocus();
+	self->QLCDNumber::updateMicroFocus();
 }
 
 void QLCDNumber_protectedbase_create(VirtualQLCDNumber* self) {
-	self->create();
+	self->QLCDNumber::create();
 }
 
 void QLCDNumber_protectedbase_destroy(VirtualQLCDNumber* self) {
-	self->destroy();
+	self->QLCDNumber::destroy();
 }
 
 bool QLCDNumber_protectedbase_focusNextChild(VirtualQLCDNumber* self) {
-	return self->focusNextChild();
+	return self->QLCDNumber::focusNextChild();
 }
 
 bool QLCDNumber_protectedbase_focusPreviousChild(VirtualQLCDNumber* self) {
-	return self->focusPreviousChild();
+	return self->QLCDNumber::focusPreviousChild();
 }
 
 QObject* QLCDNumber_protectedbase_sender(const VirtualQLCDNumber* self) {
-	return self->sender();
+	return self->QLCDNumber::sender();
 }
 
 int QLCDNumber_protectedbase_senderSignalIndex(const VirtualQLCDNumber* self) {
-	return self->senderSignalIndex();
+	return self->QLCDNumber::senderSignalIndex();
 }
 
 int QLCDNumber_protectedbase_receivers(const VirtualQLCDNumber* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QLCDNumber::receivers(signal);
 }
 
 bool QLCDNumber_protectedbase_isSignalConnected(const VirtualQLCDNumber* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QLCDNumber::isSignalConnected(*signal);
 }
 
 void QLCDNumber_delete(QLCDNumber* self) {

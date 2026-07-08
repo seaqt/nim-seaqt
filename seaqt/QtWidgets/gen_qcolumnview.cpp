@@ -1983,101 +1983,101 @@ void QColumnView_virtualbase_disconnectNotify(VirtualQColumnView* self, QMetaMet
 }
 
 void QColumnView_protectedbase_initializeColumn(const VirtualQColumnView* self, QAbstractItemView* column) {
-	self->initializeColumn(column);
+	self->QColumnView::initializeColumn(column);
 }
 
 int QColumnView_protectedbase_state(const VirtualQColumnView* self) {
-	VirtualQColumnView::State _ret = self->state();
+	VirtualQColumnView::State _ret = self->QColumnView::state();
 	return static_cast<int>(_ret);
 }
 
 void QColumnView_protectedbase_setState(VirtualQColumnView* self, int state) {
-	self->setState(static_cast<VirtualQColumnView::State>(state));
+	self->QColumnView::setState(static_cast<VirtualQColumnView::State>(state));
 }
 
 void QColumnView_protectedbase_scheduleDelayedItemsLayout(VirtualQColumnView* self) {
-	self->scheduleDelayedItemsLayout();
+	self->QColumnView::scheduleDelayedItemsLayout();
 }
 
 void QColumnView_protectedbase_executeDelayedItemsLayout(VirtualQColumnView* self) {
-	self->executeDelayedItemsLayout();
+	self->QColumnView::executeDelayedItemsLayout();
 }
 
 void QColumnView_protectedbase_setDirtyRegion(VirtualQColumnView* self, QRegion* region) {
-	self->setDirtyRegion(*region);
+	self->QColumnView::setDirtyRegion(*region);
 }
 
 void QColumnView_protectedbase_scrollDirtyRegion(VirtualQColumnView* self, int dx, int dy) {
-	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
+	self->QColumnView::scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
 QPoint* QColumnView_protectedbase_dirtyRegionOffset(const VirtualQColumnView* self) {
-	return new QPoint(self->dirtyRegionOffset());
+	return new QPoint(self->QColumnView::dirtyRegionOffset());
 }
 
 void QColumnView_protectedbase_startAutoScroll(VirtualQColumnView* self) {
-	self->startAutoScroll();
+	self->QColumnView::startAutoScroll();
 }
 
 void QColumnView_protectedbase_stopAutoScroll(VirtualQColumnView* self) {
-	self->stopAutoScroll();
+	self->QColumnView::stopAutoScroll();
 }
 
 void QColumnView_protectedbase_doAutoScroll(VirtualQColumnView* self) {
-	self->doAutoScroll();
+	self->QColumnView::doAutoScroll();
 }
 
 int QColumnView_protectedbase_dropIndicatorPosition(const VirtualQColumnView* self) {
-	VirtualQColumnView::DropIndicatorPosition _ret = self->dropIndicatorPosition();
+	VirtualQColumnView::DropIndicatorPosition _ret = self->QColumnView::dropIndicatorPosition();
 	return static_cast<int>(_ret);
 }
 
 void QColumnView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQColumnView* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QColumnView::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QColumnView_protectedbase_viewportMargins(const VirtualQColumnView* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QColumnView::viewportMargins());
 }
 
 void QColumnView_protectedbase_drawFrame(VirtualQColumnView* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QColumnView::drawFrame(param1);
 }
 
 void QColumnView_protectedbase_updateMicroFocus(VirtualQColumnView* self) {
-	self->updateMicroFocus();
+	self->QColumnView::updateMicroFocus();
 }
 
 void QColumnView_protectedbase_create(VirtualQColumnView* self) {
-	self->create();
+	self->QColumnView::create();
 }
 
 void QColumnView_protectedbase_destroy(VirtualQColumnView* self) {
-	self->destroy();
+	self->QColumnView::destroy();
 }
 
 bool QColumnView_protectedbase_focusNextChild(VirtualQColumnView* self) {
-	return self->focusNextChild();
+	return self->QColumnView::focusNextChild();
 }
 
 bool QColumnView_protectedbase_focusPreviousChild(VirtualQColumnView* self) {
-	return self->focusPreviousChild();
+	return self->QColumnView::focusPreviousChild();
 }
 
 QObject* QColumnView_protectedbase_sender(const VirtualQColumnView* self) {
-	return self->sender();
+	return self->QColumnView::sender();
 }
 
 int QColumnView_protectedbase_senderSignalIndex(const VirtualQColumnView* self) {
-	return self->senderSignalIndex();
+	return self->QColumnView::senderSignalIndex();
 }
 
 int QColumnView_protectedbase_receivers(const VirtualQColumnView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QColumnView::receivers(signal);
 }
 
 bool QColumnView_protectedbase_isSignalConnected(const VirtualQColumnView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QColumnView::isSignalConnected(*signal);
 }
 
 void QColumnView_delete(QColumnView* self) {

@@ -806,23 +806,23 @@ QPainter* QRasterWindow_virtualbase_sharedPainter(const VirtualQRasterWindow* se
 }
 
 void* QRasterWindow_protectedbase_resolveInterface(const VirtualQRasterWindow* self, const char* name, int revision) {
-	return self->resolveInterface(name, static_cast<int>(revision));
+	return self->QRasterWindow::resolveInterface(name, static_cast<int>(revision));
 }
 
 QObject* QRasterWindow_protectedbase_sender(const VirtualQRasterWindow* self) {
-	return self->sender();
+	return self->QRasterWindow::sender();
 }
 
 int QRasterWindow_protectedbase_senderSignalIndex(const VirtualQRasterWindow* self) {
-	return self->senderSignalIndex();
+	return self->QRasterWindow::senderSignalIndex();
 }
 
 int QRasterWindow_protectedbase_receivers(const VirtualQRasterWindow* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QRasterWindow::receivers(signal);
 }
 
 bool QRasterWindow_protectedbase_isSignalConnected(const VirtualQRasterWindow* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QRasterWindow::isSignalConnected(*signal);
 }
 
 void QRasterWindow_delete(QRasterWindow* self) {

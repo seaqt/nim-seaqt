@@ -1402,19 +1402,19 @@ void QGraphicsScene_virtualbase_disconnectNotify(VirtualQGraphicsScene* self, QM
 }
 
 QObject* QGraphicsScene_protectedbase_sender(const VirtualQGraphicsScene* self) {
-	return self->sender();
+	return self->QGraphicsScene::sender();
 }
 
 int QGraphicsScene_protectedbase_senderSignalIndex(const VirtualQGraphicsScene* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsScene::senderSignalIndex();
 }
 
 int QGraphicsScene_protectedbase_receivers(const VirtualQGraphicsScene* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsScene::receivers(signal);
 }
 
 bool QGraphicsScene_protectedbase_isSignalConnected(const VirtualQGraphicsScene* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsScene::isSignalConnected(*signal);
 }
 
 void QGraphicsScene_delete(QGraphicsScene* self) {

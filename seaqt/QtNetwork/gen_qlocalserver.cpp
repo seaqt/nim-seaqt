@@ -452,19 +452,19 @@ void QLocalServer_virtualbase_disconnectNotify(VirtualQLocalServer* self, QMetaM
 }
 
 QObject* QLocalServer_protectedbase_sender(const VirtualQLocalServer* self) {
-	return self->sender();
+	return self->QLocalServer::sender();
 }
 
 int QLocalServer_protectedbase_senderSignalIndex(const VirtualQLocalServer* self) {
-	return self->senderSignalIndex();
+	return self->QLocalServer::senderSignalIndex();
 }
 
 int QLocalServer_protectedbase_receivers(const VirtualQLocalServer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QLocalServer::receivers(signal);
 }
 
 bool QLocalServer_protectedbase_isSignalConnected(const VirtualQLocalServer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QLocalServer::isSignalConnected(*signal);
 }
 
 void QLocalServer_delete(QLocalServer* self) {

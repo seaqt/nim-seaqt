@@ -249,19 +249,19 @@ void QAudioListener_virtualbase_disconnectNotify(VirtualQAudioListener* self, QM
 }
 
 QObject* QAudioListener_protectedbase_sender(const VirtualQAudioListener* self) {
-	return self->sender();
+	return self->QAudioListener::sender();
 }
 
 int QAudioListener_protectedbase_senderSignalIndex(const VirtualQAudioListener* self) {
-	return self->senderSignalIndex();
+	return self->QAudioListener::senderSignalIndex();
 }
 
 int QAudioListener_protectedbase_receivers(const VirtualQAudioListener* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioListener::receivers(signal);
 }
 
 bool QAudioListener_protectedbase_isSignalConnected(const VirtualQAudioListener* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioListener::isSignalConnected(*signal);
 }
 
 void QAudioListener_delete(QAudioListener* self) {

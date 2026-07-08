@@ -360,19 +360,19 @@ void QSignalMapper_virtualbase_disconnectNotify(VirtualQSignalMapper* self, QMet
 }
 
 QObject* QSignalMapper_protectedbase_sender(const VirtualQSignalMapper* self) {
-	return self->sender();
+	return self->QSignalMapper::sender();
 }
 
 int QSignalMapper_protectedbase_senderSignalIndex(const VirtualQSignalMapper* self) {
-	return self->senderSignalIndex();
+	return self->QSignalMapper::senderSignalIndex();
 }
 
 int QSignalMapper_protectedbase_receivers(const VirtualQSignalMapper* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSignalMapper::receivers(signal);
 }
 
 bool QSignalMapper_protectedbase_isSignalConnected(const VirtualQSignalMapper* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSignalMapper::isSignalConnected(*signal);
 }
 
 void QSignalMapper_delete(QSignalMapper* self) {

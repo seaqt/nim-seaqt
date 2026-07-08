@@ -1189,43 +1189,43 @@ void QFontDialog_virtualbase_disconnectNotify(VirtualQFontDialog* self, QMetaMet
 }
 
 void QFontDialog_protectedbase_adjustPosition(VirtualQFontDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QFontDialog::adjustPosition(param1);
 }
 
 void QFontDialog_protectedbase_updateMicroFocus(VirtualQFontDialog* self) {
-	self->updateMicroFocus();
+	self->QFontDialog::updateMicroFocus();
 }
 
 void QFontDialog_protectedbase_create(VirtualQFontDialog* self) {
-	self->create();
+	self->QFontDialog::create();
 }
 
 void QFontDialog_protectedbase_destroy(VirtualQFontDialog* self) {
-	self->destroy();
+	self->QFontDialog::destroy();
 }
 
 bool QFontDialog_protectedbase_focusNextChild(VirtualQFontDialog* self) {
-	return self->focusNextChild();
+	return self->QFontDialog::focusNextChild();
 }
 
 bool QFontDialog_protectedbase_focusPreviousChild(VirtualQFontDialog* self) {
-	return self->focusPreviousChild();
+	return self->QFontDialog::focusPreviousChild();
 }
 
 QObject* QFontDialog_protectedbase_sender(const VirtualQFontDialog* self) {
-	return self->sender();
+	return self->QFontDialog::sender();
 }
 
 int QFontDialog_protectedbase_senderSignalIndex(const VirtualQFontDialog* self) {
-	return self->senderSignalIndex();
+	return self->QFontDialog::senderSignalIndex();
 }
 
 int QFontDialog_protectedbase_receivers(const VirtualQFontDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFontDialog::receivers(signal);
 }
 
 bool QFontDialog_protectedbase_isSignalConnected(const VirtualQFontDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFontDialog::isSignalConnected(*signal);
 }
 
 void QFontDialog_delete(QFontDialog* self) {

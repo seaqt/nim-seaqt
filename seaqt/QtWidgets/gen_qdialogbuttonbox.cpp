@@ -1158,39 +1158,39 @@ void QDialogButtonBox_virtualbase_disconnectNotify(VirtualQDialogButtonBox* self
 }
 
 void QDialogButtonBox_protectedbase_updateMicroFocus(VirtualQDialogButtonBox* self) {
-	self->updateMicroFocus();
+	self->QDialogButtonBox::updateMicroFocus();
 }
 
 void QDialogButtonBox_protectedbase_create(VirtualQDialogButtonBox* self) {
-	self->create();
+	self->QDialogButtonBox::create();
 }
 
 void QDialogButtonBox_protectedbase_destroy(VirtualQDialogButtonBox* self) {
-	self->destroy();
+	self->QDialogButtonBox::destroy();
 }
 
 bool QDialogButtonBox_protectedbase_focusNextChild(VirtualQDialogButtonBox* self) {
-	return self->focusNextChild();
+	return self->QDialogButtonBox::focusNextChild();
 }
 
 bool QDialogButtonBox_protectedbase_focusPreviousChild(VirtualQDialogButtonBox* self) {
-	return self->focusPreviousChild();
+	return self->QDialogButtonBox::focusPreviousChild();
 }
 
 QObject* QDialogButtonBox_protectedbase_sender(const VirtualQDialogButtonBox* self) {
-	return self->sender();
+	return self->QDialogButtonBox::sender();
 }
 
 int QDialogButtonBox_protectedbase_senderSignalIndex(const VirtualQDialogButtonBox* self) {
-	return self->senderSignalIndex();
+	return self->QDialogButtonBox::senderSignalIndex();
 }
 
 int QDialogButtonBox_protectedbase_receivers(const VirtualQDialogButtonBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDialogButtonBox::receivers(signal);
 }
 
 bool QDialogButtonBox_protectedbase_isSignalConnected(const VirtualQDialogButtonBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDialogButtonBox::isSignalConnected(*signal);
 }
 
 void QDialogButtonBox_delete(QDialogButtonBox* self) {

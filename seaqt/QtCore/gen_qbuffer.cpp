@@ -649,28 +649,28 @@ void QBuffer_virtualbase_customEvent(VirtualQBuffer* self, QEvent* event) {
 }
 
 void QBuffer_protectedbase_setOpenMode(VirtualQBuffer* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQBuffer::OpenMode>(openMode));
+	self->QBuffer::setOpenMode(static_cast<VirtualQBuffer::OpenMode>(openMode));
 }
 
 void QBuffer_protectedbase_setErrorString(VirtualQBuffer* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QBuffer::setErrorString(errorString_QString);
 }
 
 QObject* QBuffer_protectedbase_sender(const VirtualQBuffer* self) {
-	return self->sender();
+	return self->QBuffer::sender();
 }
 
 int QBuffer_protectedbase_senderSignalIndex(const VirtualQBuffer* self) {
-	return self->senderSignalIndex();
+	return self->QBuffer::senderSignalIndex();
 }
 
 int QBuffer_protectedbase_receivers(const VirtualQBuffer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QBuffer::receivers(signal);
 }
 
 bool QBuffer_protectedbase_isSignalConnected(const VirtualQBuffer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QBuffer::isSignalConnected(*signal);
 }
 
 void QBuffer_delete(QBuffer* self) {

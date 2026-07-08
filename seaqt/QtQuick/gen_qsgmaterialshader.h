@@ -18,7 +18,6 @@ extern "C" {
 class QColor;
 class QMatrix4x4;
 class QRect;
-class QSGMaterial;
 class QSGMaterialShader;
 #if defined(WORKAROUND_INNER_CLASS_DEFINITION_QSGMaterialShader__GraphicsPipelineState)
 typedef QSGMaterialShader::GraphicsPipelineState QSGMaterialShader__GraphicsPipelineState;
@@ -34,36 +33,18 @@ class QSGMaterialShader__RenderState;
 typedef struct QColor QColor;
 typedef struct QMatrix4x4 QMatrix4x4;
 typedef struct QRect QRect;
-typedef struct QSGMaterial QSGMaterial;
 typedef struct QSGMaterialShader QSGMaterialShader;
 typedef struct QSGMaterialShader__GraphicsPipelineState QSGMaterialShader__GraphicsPipelineState;
 typedef struct QSGMaterialShader__RenderState QSGMaterialShader__RenderState;
 #endif
 
-typedef struct VirtualQSGMaterialShader VirtualQSGMaterialShader;
-typedef struct QSGMaterialShader_VTable{
-	void (*destructor)(VirtualQSGMaterialShader* self);
-	bool (*updateUniformData)(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-	bool (*updateGraphicsPipelineState)(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-}QSGMaterialShader_VTable;
+QSGMaterialShader* QSGMaterialShader_new();
 
-void* QSGMaterialShader_vdata(VirtualQSGMaterialShader* self);
-VirtualQSGMaterialShader* vdata_QSGMaterialShader(void* vdata);
-
-VirtualQSGMaterialShader* QSGMaterialShader_new(const QSGMaterialShader_VTable* vtbl, size_t vdata);
-
-bool QSGMaterialShader_updateUniformData(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-bool QSGMaterialShader_updateGraphicsPipelineState(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 int QSGMaterialShader_flags(const QSGMaterialShader* self);
 void QSGMaterialShader_setFlag_flags(QSGMaterialShader* self, int flags);
 void QSGMaterialShader_setFlags(QSGMaterialShader* self, int flags);
 int QSGMaterialShader_combinedImageSamplerCount(const QSGMaterialShader* self, int binding);
 void QSGMaterialShader_setFlag_flags_on(QSGMaterialShader* self, int flags, bool on);
-
-bool QSGMaterialShader_virtualbase_updateUniformData(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-bool QSGMaterialShader_virtualbase_updateGraphicsPipelineState(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-
-void QSGMaterialShader_protectedbase_setShaderFileName(VirtualQSGMaterialShader* self, int stage, struct seaqt_string filename);
 
 void QSGMaterialShader_delete(QSGMaterialShader* self);
 

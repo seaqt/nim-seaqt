@@ -425,23 +425,23 @@ void QSGTexture_virtualbase_disconnectNotify(VirtualQSGTexture* self, QMetaMetho
 }
 
 void* QSGTexture_protectedbase_resolveInterface(const VirtualQSGTexture* self, const char* name, int revision) {
-	return self->resolveInterface(name, static_cast<int>(revision));
+	return self->QSGTexture::resolveInterface(name, static_cast<int>(revision));
 }
 
 QObject* QSGTexture_protectedbase_sender(const VirtualQSGTexture* self) {
-	return self->sender();
+	return self->QSGTexture::sender();
 }
 
 int QSGTexture_protectedbase_senderSignalIndex(const VirtualQSGTexture* self) {
-	return self->senderSignalIndex();
+	return self->QSGTexture::senderSignalIndex();
 }
 
 int QSGTexture_protectedbase_receivers(const VirtualQSGTexture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSGTexture::receivers(signal);
 }
 
 bool QSGTexture_protectedbase_isSignalConnected(const VirtualQSGTexture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSGTexture::isSignalConnected(*signal);
 }
 
 void QSGTexture_delete(QSGTexture* self) {
@@ -788,23 +788,23 @@ void QSGDynamicTexture_virtualbase_disconnectNotify(VirtualQSGDynamicTexture* se
 }
 
 void* QSGDynamicTexture_protectedbase_resolveInterface(const VirtualQSGDynamicTexture* self, const char* name, int revision) {
-	return self->resolveInterface(name, static_cast<int>(revision));
+	return self->QSGDynamicTexture::resolveInterface(name, static_cast<int>(revision));
 }
 
 QObject* QSGDynamicTexture_protectedbase_sender(const VirtualQSGDynamicTexture* self) {
-	return self->sender();
+	return self->QSGDynamicTexture::sender();
 }
 
 int QSGDynamicTexture_protectedbase_senderSignalIndex(const VirtualQSGDynamicTexture* self) {
-	return self->senderSignalIndex();
+	return self->QSGDynamicTexture::senderSignalIndex();
 }
 
 int QSGDynamicTexture_protectedbase_receivers(const VirtualQSGDynamicTexture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSGDynamicTexture::receivers(signal);
 }
 
 bool QSGDynamicTexture_protectedbase_isSignalConnected(const VirtualQSGDynamicTexture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSGDynamicTexture::isSignalConnected(*signal);
 }
 
 void QSGDynamicTexture_delete(QSGDynamicTexture* self) {

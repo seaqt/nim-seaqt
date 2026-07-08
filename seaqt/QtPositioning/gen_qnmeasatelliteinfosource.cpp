@@ -561,23 +561,23 @@ void QNmeaSatelliteInfoSource_virtualbase_disconnectNotify(VirtualQNmeaSatellite
 }
 
 void QNmeaSatelliteInfoSource_protectedbase_setError(VirtualQNmeaSatelliteInfoSource* self, int satelliteError) {
-	self->setError(static_cast<VirtualQNmeaSatelliteInfoSource::Error>(satelliteError));
+	self->QNmeaSatelliteInfoSource::setError(static_cast<VirtualQNmeaSatelliteInfoSource::Error>(satelliteError));
 }
 
 QObject* QNmeaSatelliteInfoSource_protectedbase_sender(const VirtualQNmeaSatelliteInfoSource* self) {
-	return self->sender();
+	return self->QNmeaSatelliteInfoSource::sender();
 }
 
 int QNmeaSatelliteInfoSource_protectedbase_senderSignalIndex(const VirtualQNmeaSatelliteInfoSource* self) {
-	return self->senderSignalIndex();
+	return self->QNmeaSatelliteInfoSource::senderSignalIndex();
 }
 
 int QNmeaSatelliteInfoSource_protectedbase_receivers(const VirtualQNmeaSatelliteInfoSource* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QNmeaSatelliteInfoSource::receivers(signal);
 }
 
 bool QNmeaSatelliteInfoSource_protectedbase_isSignalConnected(const VirtualQNmeaSatelliteInfoSource* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QNmeaSatelliteInfoSource::isSignalConnected(*signal);
 }
 
 void QNmeaSatelliteInfoSource_delete(QNmeaSatelliteInfoSource* self) {

@@ -1,6 +1,5 @@
 #include <QSGMaterial>
 #include <QSGMaterialShader>
-#include <QSGMaterialType>
 #include <qsgmaterial.h>
 #include "gen_qsgmaterial.h"
 
@@ -14,66 +13,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-class VirtualQSGMaterial final : public QSGMaterial {
-	const QSGMaterial_VTable* vtbl;
-public:
-	friend void* QSGMaterial_vdata(VirtualQSGMaterial* self);
-	friend VirtualQSGMaterial* vdata_QSGMaterial(void* vdata);
-
-	VirtualQSGMaterial(const QSGMaterial_VTable* vtbl): QSGMaterial(), vtbl(vtbl) {}
-
-	virtual ~VirtualQSGMaterial() override { if(vtbl->destructor) vtbl->destructor(this); }
-
-	void operator delete(void* p) { ::operator delete(p); }
-	virtual QSGMaterialType* type() const override {
-		if (vtbl->type == 0) {
-			return nullptr; // Pure virtual, there is no base we can call
-		}
-
-		QSGMaterialType* callback_return_value = vtbl->type(this);
-		return callback_return_value;
-	}
-
-	virtual QSGMaterialShader* createShader(QSGRendererInterface::RenderMode renderMode) const override {
-		if (vtbl->createShader == 0) {
-			return nullptr; // Pure virtual, there is no base we can call
-		}
-
-		QSGRendererInterface::RenderMode renderMode_ret = renderMode;
-		int sigval1 = static_cast<int>(renderMode_ret);
-		QSGMaterialShader* callback_return_value = vtbl->createShader(this, sigval1);
-		return callback_return_value;
-	}
-
-	virtual int compare(const QSGMaterial* other) const override {
-		if (vtbl->compare == 0) {
-			return QSGMaterial::compare(other);
-		}
-
-		QSGMaterial* sigval1 = (QSGMaterial*) other;
-		int callback_return_value = vtbl->compare(this, sigval1);
-		return static_cast<int>(callback_return_value);
-	}
-
-	friend int QSGMaterial_virtualbase_compare(const VirtualQSGMaterial* self, QSGMaterial* other);
-
-};
-
-VirtualQSGMaterial* QSGMaterial_new(const QSGMaterial_VTable* vtbl, size_t vdata) {
-	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGMaterial>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQSGMaterial(vtbl) : nullptr;
-}
-
-QSGMaterialType* QSGMaterial_type(const QSGMaterial* self) {
-	return self->type();
-}
-
 QSGMaterialShader* QSGMaterial_createShader(const QSGMaterial* self, int renderMode) {
 	return self->createShader(static_cast<QSGRendererInterface::RenderMode>(renderMode));
-}
-
-int QSGMaterial_compare(const QSGMaterial* self, QSGMaterial* other) {
-	return self->compare(other);
 }
 
 int QSGMaterial_flags(const QSGMaterial* self) {
@@ -87,14 +28,6 @@ void QSGMaterial_setFlag_flags(QSGMaterial* self, int flags) {
 
 void QSGMaterial_setFlag_flags_on(QSGMaterial* self, int flags, bool on) {
 	self->setFlag(static_cast<QSGMaterial::Flags>(flags), on);
-}
-
-void* QSGMaterial_vdata(VirtualQSGMaterial* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGMaterial>()); }
-VirtualQSGMaterial* vdata_QSGMaterial(void* vdata) { return reinterpret_cast<VirtualQSGMaterial*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGMaterial>()); }
-
-int QSGMaterial_virtualbase_compare(const VirtualQSGMaterial* self, QSGMaterial* other) {
-
-	return self->QSGMaterial::compare(other);
 }
 
 void QSGMaterial_delete(QSGMaterial* self) {

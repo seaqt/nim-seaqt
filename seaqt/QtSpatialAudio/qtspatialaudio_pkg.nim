@@ -5,7 +5,7 @@ const
 
   QtSpatialAudioLibs* = gorge("pkg-config --libs Qt6SpatialAudio")
 
-  QtSpatialAudioGenVersion* = "6.4.2"
+  QtSpatialAudioGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtSpatialAudioBuildVersion* = gorge("pkg-config --modversion Qt6SpatialAudio")

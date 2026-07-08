@@ -2063,11 +2063,11 @@ void QAbstractItemModel_virtualbase_disconnectNotify(VirtualQAbstractItemModel* 
 }
 
 QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column(const VirtualQAbstractItemModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QAbstractItemModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column_id(const VirtualQAbstractItemModel* self, int row, int column, uintptr_t id) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column), static_cast<quintptr>(id)));
+	return new QModelIndex(self->QAbstractItemModel::createIndex(static_cast<int>(row), static_cast<int>(column), static_cast<quintptr>(id)));
 }
 
 void QAbstractItemModel_protectedbase_encodeData(const VirtualQAbstractItemModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -2077,71 +2077,71 @@ void QAbstractItemModel_protectedbase_encodeData(const VirtualQAbstractItemModel
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QAbstractItemModel::encodeData(indexes_QList, *stream);
 }
 
 bool QAbstractItemModel_protectedbase_decodeData(VirtualQAbstractItemModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QAbstractItemModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QAbstractItemModel_protectedbase_beginInsertRows(VirtualQAbstractItemModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractItemModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractItemModel_protectedbase_endInsertRows(VirtualQAbstractItemModel* self) {
-	self->endInsertRows();
+	self->QAbstractItemModel::endInsertRows();
 }
 
 void QAbstractItemModel_protectedbase_beginRemoveRows(VirtualQAbstractItemModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractItemModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractItemModel_protectedbase_endRemoveRows(VirtualQAbstractItemModel* self) {
-	self->endRemoveRows();
+	self->QAbstractItemModel::endRemoveRows();
 }
 
 bool QAbstractItemModel_protectedbase_beginMoveRows(VirtualQAbstractItemModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QAbstractItemModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QAbstractItemModel_protectedbase_endMoveRows(VirtualQAbstractItemModel* self) {
-	self->endMoveRows();
+	self->QAbstractItemModel::endMoveRows();
 }
 
 void QAbstractItemModel_protectedbase_beginInsertColumns(VirtualQAbstractItemModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractItemModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractItemModel_protectedbase_endInsertColumns(VirtualQAbstractItemModel* self) {
-	self->endInsertColumns();
+	self->QAbstractItemModel::endInsertColumns();
 }
 
 void QAbstractItemModel_protectedbase_beginRemoveColumns(VirtualQAbstractItemModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractItemModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractItemModel_protectedbase_endRemoveColumns(VirtualQAbstractItemModel* self) {
-	self->endRemoveColumns();
+	self->QAbstractItemModel::endRemoveColumns();
 }
 
 bool QAbstractItemModel_protectedbase_beginMoveColumns(VirtualQAbstractItemModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QAbstractItemModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QAbstractItemModel_protectedbase_endMoveColumns(VirtualQAbstractItemModel* self) {
-	self->endMoveColumns();
+	self->QAbstractItemModel::endMoveColumns();
 }
 
 void QAbstractItemModel_protectedbase_beginResetModel(VirtualQAbstractItemModel* self) {
-	self->beginResetModel();
+	self->QAbstractItemModel::beginResetModel();
 }
 
 void QAbstractItemModel_protectedbase_endResetModel(VirtualQAbstractItemModel* self) {
-	self->endResetModel();
+	self->QAbstractItemModel::endResetModel();
 }
 
 void QAbstractItemModel_protectedbase_changePersistentIndex(VirtualQAbstractItemModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QAbstractItemModel::changePersistentIndex(*from, *to);
 }
 
 void QAbstractItemModel_protectedbase_changePersistentIndexList(VirtualQAbstractItemModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -2157,11 +2157,11 @@ void QAbstractItemModel_protectedbase_changePersistentIndexList(VirtualQAbstract
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QAbstractItemModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QAbstractItemModel_protectedbase_persistentIndexList(const VirtualQAbstractItemModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QAbstractItemModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -2174,23 +2174,23 @@ struct seaqt_array /* of QModelIndex* */  QAbstractItemModel_protectedbase_persi
 }
 
 QModelIndex* QAbstractItemModel_protectedbase_createIndex_row_column_data(const VirtualQAbstractItemModel* self, int row, int column, const void* data) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column), data));
+	return new QModelIndex(self->QAbstractItemModel::createIndex(static_cast<int>(row), static_cast<int>(column), data));
 }
 
 QObject* QAbstractItemModel_protectedbase_sender(const VirtualQAbstractItemModel* self) {
-	return self->sender();
+	return self->QAbstractItemModel::sender();
 }
 
 int QAbstractItemModel_protectedbase_senderSignalIndex(const VirtualQAbstractItemModel* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractItemModel::senderSignalIndex();
 }
 
 int QAbstractItemModel_protectedbase_receivers(const VirtualQAbstractItemModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractItemModel::receivers(signal);
 }
 
 bool QAbstractItemModel_protectedbase_isSignalConnected(const VirtualQAbstractItemModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractItemModel::isSignalConnected(*signal);
 }
 
 void QAbstractItemModel_delete(QAbstractItemModel* self) {
@@ -3311,7 +3311,7 @@ void QAbstractTableModel_virtualbase_disconnectNotify(VirtualQAbstractTableModel
 }
 
 QModelIndex* QAbstractTableModel_protectedbase_createIndex_row_column(const VirtualQAbstractTableModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QAbstractTableModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QAbstractTableModel_protectedbase_encodeData(const VirtualQAbstractTableModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -3321,71 +3321,71 @@ void QAbstractTableModel_protectedbase_encodeData(const VirtualQAbstractTableMod
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QAbstractTableModel::encodeData(indexes_QList, *stream);
 }
 
 bool QAbstractTableModel_protectedbase_decodeData(VirtualQAbstractTableModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QAbstractTableModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QAbstractTableModel_protectedbase_beginInsertRows(VirtualQAbstractTableModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractTableModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractTableModel_protectedbase_endInsertRows(VirtualQAbstractTableModel* self) {
-	self->endInsertRows();
+	self->QAbstractTableModel::endInsertRows();
 }
 
 void QAbstractTableModel_protectedbase_beginRemoveRows(VirtualQAbstractTableModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractTableModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractTableModel_protectedbase_endRemoveRows(VirtualQAbstractTableModel* self) {
-	self->endRemoveRows();
+	self->QAbstractTableModel::endRemoveRows();
 }
 
 bool QAbstractTableModel_protectedbase_beginMoveRows(VirtualQAbstractTableModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QAbstractTableModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QAbstractTableModel_protectedbase_endMoveRows(VirtualQAbstractTableModel* self) {
-	self->endMoveRows();
+	self->QAbstractTableModel::endMoveRows();
 }
 
 void QAbstractTableModel_protectedbase_beginInsertColumns(VirtualQAbstractTableModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractTableModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractTableModel_protectedbase_endInsertColumns(VirtualQAbstractTableModel* self) {
-	self->endInsertColumns();
+	self->QAbstractTableModel::endInsertColumns();
 }
 
 void QAbstractTableModel_protectedbase_beginRemoveColumns(VirtualQAbstractTableModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractTableModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractTableModel_protectedbase_endRemoveColumns(VirtualQAbstractTableModel* self) {
-	self->endRemoveColumns();
+	self->QAbstractTableModel::endRemoveColumns();
 }
 
 bool QAbstractTableModel_protectedbase_beginMoveColumns(VirtualQAbstractTableModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QAbstractTableModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QAbstractTableModel_protectedbase_endMoveColumns(VirtualQAbstractTableModel* self) {
-	self->endMoveColumns();
+	self->QAbstractTableModel::endMoveColumns();
 }
 
 void QAbstractTableModel_protectedbase_beginResetModel(VirtualQAbstractTableModel* self) {
-	self->beginResetModel();
+	self->QAbstractTableModel::beginResetModel();
 }
 
 void QAbstractTableModel_protectedbase_endResetModel(VirtualQAbstractTableModel* self) {
-	self->endResetModel();
+	self->QAbstractTableModel::endResetModel();
 }
 
 void QAbstractTableModel_protectedbase_changePersistentIndex(VirtualQAbstractTableModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QAbstractTableModel::changePersistentIndex(*from, *to);
 }
 
 void QAbstractTableModel_protectedbase_changePersistentIndexList(VirtualQAbstractTableModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -3401,11 +3401,11 @@ void QAbstractTableModel_protectedbase_changePersistentIndexList(VirtualQAbstrac
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QAbstractTableModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QAbstractTableModel_protectedbase_persistentIndexList(const VirtualQAbstractTableModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QAbstractTableModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -3418,19 +3418,19 @@ struct seaqt_array /* of QModelIndex* */  QAbstractTableModel_protectedbase_pers
 }
 
 QObject* QAbstractTableModel_protectedbase_sender(const VirtualQAbstractTableModel* self) {
-	return self->sender();
+	return self->QAbstractTableModel::sender();
 }
 
 int QAbstractTableModel_protectedbase_senderSignalIndex(const VirtualQAbstractTableModel* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractTableModel::senderSignalIndex();
 }
 
 int QAbstractTableModel_protectedbase_receivers(const VirtualQAbstractTableModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractTableModel::receivers(signal);
 }
 
 bool QAbstractTableModel_protectedbase_isSignalConnected(const VirtualQAbstractTableModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractTableModel::isSignalConnected(*signal);
 }
 
 void QAbstractTableModel_delete(QAbstractTableModel* self) {
@@ -4539,7 +4539,7 @@ void QAbstractListModel_virtualbase_disconnectNotify(VirtualQAbstractListModel* 
 }
 
 QModelIndex* QAbstractListModel_protectedbase_createIndex_row_column(const VirtualQAbstractListModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QAbstractListModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QAbstractListModel_protectedbase_encodeData(const VirtualQAbstractListModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -4549,71 +4549,71 @@ void QAbstractListModel_protectedbase_encodeData(const VirtualQAbstractListModel
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QAbstractListModel::encodeData(indexes_QList, *stream);
 }
 
 bool QAbstractListModel_protectedbase_decodeData(VirtualQAbstractListModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QAbstractListModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 void QAbstractListModel_protectedbase_beginInsertRows(VirtualQAbstractListModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractListModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractListModel_protectedbase_endInsertRows(VirtualQAbstractListModel* self) {
-	self->endInsertRows();
+	self->QAbstractListModel::endInsertRows();
 }
 
 void QAbstractListModel_protectedbase_beginRemoveRows(VirtualQAbstractListModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractListModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractListModel_protectedbase_endRemoveRows(VirtualQAbstractListModel* self) {
-	self->endRemoveRows();
+	self->QAbstractListModel::endRemoveRows();
 }
 
 bool QAbstractListModel_protectedbase_beginMoveRows(VirtualQAbstractListModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QAbstractListModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QAbstractListModel_protectedbase_endMoveRows(VirtualQAbstractListModel* self) {
-	self->endMoveRows();
+	self->QAbstractListModel::endMoveRows();
 }
 
 void QAbstractListModel_protectedbase_beginInsertColumns(VirtualQAbstractListModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractListModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractListModel_protectedbase_endInsertColumns(VirtualQAbstractListModel* self) {
-	self->endInsertColumns();
+	self->QAbstractListModel::endInsertColumns();
 }
 
 void QAbstractListModel_protectedbase_beginRemoveColumns(VirtualQAbstractListModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QAbstractListModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QAbstractListModel_protectedbase_endRemoveColumns(VirtualQAbstractListModel* self) {
-	self->endRemoveColumns();
+	self->QAbstractListModel::endRemoveColumns();
 }
 
 bool QAbstractListModel_protectedbase_beginMoveColumns(VirtualQAbstractListModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QAbstractListModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QAbstractListModel_protectedbase_endMoveColumns(VirtualQAbstractListModel* self) {
-	self->endMoveColumns();
+	self->QAbstractListModel::endMoveColumns();
 }
 
 void QAbstractListModel_protectedbase_beginResetModel(VirtualQAbstractListModel* self) {
-	self->beginResetModel();
+	self->QAbstractListModel::beginResetModel();
 }
 
 void QAbstractListModel_protectedbase_endResetModel(VirtualQAbstractListModel* self) {
-	self->endResetModel();
+	self->QAbstractListModel::endResetModel();
 }
 
 void QAbstractListModel_protectedbase_changePersistentIndex(VirtualQAbstractListModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QAbstractListModel::changePersistentIndex(*from, *to);
 }
 
 void QAbstractListModel_protectedbase_changePersistentIndexList(VirtualQAbstractListModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -4629,11 +4629,11 @@ void QAbstractListModel_protectedbase_changePersistentIndexList(VirtualQAbstract
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QAbstractListModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QAbstractListModel_protectedbase_persistentIndexList(const VirtualQAbstractListModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QAbstractListModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -4646,19 +4646,19 @@ struct seaqt_array /* of QModelIndex* */  QAbstractListModel_protectedbase_persi
 }
 
 QObject* QAbstractListModel_protectedbase_sender(const VirtualQAbstractListModel* self) {
-	return self->sender();
+	return self->QAbstractListModel::sender();
 }
 
 int QAbstractListModel_protectedbase_senderSignalIndex(const VirtualQAbstractListModel* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractListModel::senderSignalIndex();
 }
 
 int QAbstractListModel_protectedbase_receivers(const VirtualQAbstractListModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractListModel::receivers(signal);
 }
 
 bool QAbstractListModel_protectedbase_isSignalConnected(const VirtualQAbstractListModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractListModel::isSignalConnected(*signal);
 }
 
 void QAbstractListModel_delete(QAbstractListModel* self) {

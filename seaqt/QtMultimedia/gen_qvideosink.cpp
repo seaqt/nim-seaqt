@@ -353,19 +353,19 @@ void QVideoSink_virtualbase_disconnectNotify(VirtualQVideoSink* self, QMetaMetho
 }
 
 QObject* QVideoSink_protectedbase_sender(const VirtualQVideoSink* self) {
-	return self->sender();
+	return self->QVideoSink::sender();
 }
 
 int QVideoSink_protectedbase_senderSignalIndex(const VirtualQVideoSink* self) {
-	return self->senderSignalIndex();
+	return self->QVideoSink::senderSignalIndex();
 }
 
 int QVideoSink_protectedbase_receivers(const VirtualQVideoSink* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QVideoSink::receivers(signal);
 }
 
 bool QVideoSink_protectedbase_isSignalConnected(const VirtualQVideoSink* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QVideoSink::isSignalConnected(*signal);
 }
 
 void QVideoSink_delete(QVideoSink* self) {

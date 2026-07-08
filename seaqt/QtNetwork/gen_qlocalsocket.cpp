@@ -782,28 +782,28 @@ void QLocalSocket_virtualbase_disconnectNotify(VirtualQLocalSocket* self, QMetaM
 }
 
 void QLocalSocket_protectedbase_setOpenMode(VirtualQLocalSocket* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQLocalSocket::OpenMode>(openMode));
+	self->QLocalSocket::setOpenMode(static_cast<VirtualQLocalSocket::OpenMode>(openMode));
 }
 
 void QLocalSocket_protectedbase_setErrorString(VirtualQLocalSocket* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QLocalSocket::setErrorString(errorString_QString);
 }
 
 QObject* QLocalSocket_protectedbase_sender(const VirtualQLocalSocket* self) {
-	return self->sender();
+	return self->QLocalSocket::sender();
 }
 
 int QLocalSocket_protectedbase_senderSignalIndex(const VirtualQLocalSocket* self) {
-	return self->senderSignalIndex();
+	return self->QLocalSocket::senderSignalIndex();
 }
 
 int QLocalSocket_protectedbase_receivers(const VirtualQLocalSocket* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QLocalSocket::receivers(signal);
 }
 
 bool QLocalSocket_protectedbase_isSignalConnected(const VirtualQLocalSocket* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QLocalSocket::isSignalConnected(*signal);
 }
 
 void QLocalSocket_delete(QLocalSocket* self) {

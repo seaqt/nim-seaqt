@@ -1006,39 +1006,39 @@ void QSizeGrip_virtualbase_disconnectNotify(VirtualQSizeGrip* self, QMetaMethod*
 }
 
 void QSizeGrip_protectedbase_updateMicroFocus(VirtualQSizeGrip* self) {
-	self->updateMicroFocus();
+	self->QSizeGrip::updateMicroFocus();
 }
 
 void QSizeGrip_protectedbase_create(VirtualQSizeGrip* self) {
-	self->create();
+	self->QSizeGrip::create();
 }
 
 void QSizeGrip_protectedbase_destroy(VirtualQSizeGrip* self) {
-	self->destroy();
+	self->QSizeGrip::destroy();
 }
 
 bool QSizeGrip_protectedbase_focusNextChild(VirtualQSizeGrip* self) {
-	return self->focusNextChild();
+	return self->QSizeGrip::focusNextChild();
 }
 
 bool QSizeGrip_protectedbase_focusPreviousChild(VirtualQSizeGrip* self) {
-	return self->focusPreviousChild();
+	return self->QSizeGrip::focusPreviousChild();
 }
 
 QObject* QSizeGrip_protectedbase_sender(const VirtualQSizeGrip* self) {
-	return self->sender();
+	return self->QSizeGrip::sender();
 }
 
 int QSizeGrip_protectedbase_senderSignalIndex(const VirtualQSizeGrip* self) {
-	return self->senderSignalIndex();
+	return self->QSizeGrip::senderSignalIndex();
 }
 
 int QSizeGrip_protectedbase_receivers(const VirtualQSizeGrip* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSizeGrip::receivers(signal);
 }
 
 bool QSizeGrip_protectedbase_isSignalConnected(const VirtualQSizeGrip* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSizeGrip::isSignalConnected(*signal);
 }
 
 void QSizeGrip_delete(QSizeGrip* self) {

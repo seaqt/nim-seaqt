@@ -304,19 +304,19 @@ void QIconEnginePlugin_virtualbase_disconnectNotify(VirtualQIconEnginePlugin* se
 }
 
 QObject* QIconEnginePlugin_protectedbase_sender(const VirtualQIconEnginePlugin* self) {
-	return self->sender();
+	return self->QIconEnginePlugin::sender();
 }
 
 int QIconEnginePlugin_protectedbase_senderSignalIndex(const VirtualQIconEnginePlugin* self) {
-	return self->senderSignalIndex();
+	return self->QIconEnginePlugin::senderSignalIndex();
 }
 
 int QIconEnginePlugin_protectedbase_receivers(const VirtualQIconEnginePlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QIconEnginePlugin::receivers(signal);
 }
 
 bool QIconEnginePlugin_protectedbase_isSignalConnected(const VirtualQIconEnginePlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QIconEnginePlugin::isSignalConnected(*signal);
 }
 
 void QIconEnginePlugin_delete(QIconEnginePlugin* self) {

@@ -1,4 +1,6 @@
-.PHONY: all
+# Compilation checks for seaqt runtime against Qt 6
+
+.PHONY: all test
 all:
 
 DIRS := $(wildcard seaqt/Qt*)

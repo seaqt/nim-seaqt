@@ -741,23 +741,23 @@ void QGuiApplication_virtualbase_disconnectNotify(VirtualQGuiApplication* self, 
 }
 
 void* QGuiApplication_protectedbase_resolveInterface(const VirtualQGuiApplication* self, const char* name, int revision) {
-	return self->resolveInterface(name, static_cast<int>(revision));
+	return self->QGuiApplication::resolveInterface(name, static_cast<int>(revision));
 }
 
 QObject* QGuiApplication_protectedbase_sender(const VirtualQGuiApplication* self) {
-	return self->sender();
+	return self->QGuiApplication::sender();
 }
 
 int QGuiApplication_protectedbase_senderSignalIndex(const VirtualQGuiApplication* self) {
-	return self->senderSignalIndex();
+	return self->QGuiApplication::senderSignalIndex();
 }
 
 int QGuiApplication_protectedbase_receivers(const VirtualQGuiApplication* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGuiApplication::receivers(signal);
 }
 
 bool QGuiApplication_protectedbase_isSignalConnected(const VirtualQGuiApplication* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGuiApplication::isSignalConnected(*signal);
 }
 
 void QGuiApplication_delete(QGuiApplication* self) {

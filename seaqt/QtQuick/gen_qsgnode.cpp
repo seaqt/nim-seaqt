@@ -4,7 +4,6 @@
 #include <QSGClipNode>
 #include <QSGGeometry>
 #include <QSGGeometryNode>
-#include <QSGMaterial>
 #include <QSGNode>
 #include <QSGNodeVisitor>
 #include <QSGOpacityNode>
@@ -261,26 +260,6 @@ VirtualQSGGeometryNode* QSGGeometryNode_new(const QSGGeometryNode_VTable* vtbl, 
 
 void QSGGeometryNode_virtbase(QSGGeometryNode* src, QSGBasicGeometryNode** outptr_QSGBasicGeometryNode) {
 	*outptr_QSGBasicGeometryNode = static_cast<QSGBasicGeometryNode*>(src);
-}
-
-void QSGGeometryNode_setMaterial(QSGGeometryNode* self, QSGMaterial* material) {
-	self->setMaterial(material);
-}
-
-QSGMaterial* QSGGeometryNode_material(const QSGGeometryNode* self) {
-	return self->material();
-}
-
-void QSGGeometryNode_setOpaqueMaterial(QSGGeometryNode* self, QSGMaterial* material) {
-	self->setOpaqueMaterial(material);
-}
-
-QSGMaterial* QSGGeometryNode_opaqueMaterial(const QSGGeometryNode* self) {
-	return self->opaqueMaterial();
-}
-
-QSGMaterial* QSGGeometryNode_activeMaterial(const QSGGeometryNode* self) {
-	return self->activeMaterial();
 }
 
 void QSGGeometryNode_setRenderOrder(QSGGeometryNode* self, int order) {

@@ -303,19 +303,19 @@ void QQmlWebChannel_virtualbase_disconnectNotify(VirtualQQmlWebChannel* self, QM
 }
 
 QObject* QQmlWebChannel_protectedbase_sender(const VirtualQQmlWebChannel* self) {
-	return self->sender();
+	return self->QQmlWebChannel::sender();
 }
 
 int QQmlWebChannel_protectedbase_senderSignalIndex(const VirtualQQmlWebChannel* self) {
-	return self->senderSignalIndex();
+	return self->QQmlWebChannel::senderSignalIndex();
 }
 
 int QQmlWebChannel_protectedbase_receivers(const VirtualQQmlWebChannel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQmlWebChannel::receivers(signal);
 }
 
 bool QQmlWebChannel_protectedbase_isSignalConnected(const VirtualQQmlWebChannel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQmlWebChannel::isSignalConnected(*signal);
 }
 
 void QQmlWebChannel_delete(QQmlWebChannel* self) {

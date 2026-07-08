@@ -128,7 +128,6 @@ void QWebEnginePage_triggerAction(QWebEnginePage* self, int action, bool checked
 void QWebEnginePage_replaceMisspelledWord(QWebEnginePage* self, struct seaqt_string replacement);
 bool QWebEnginePage_event(QWebEnginePage* self, QEvent* param1);
 void QWebEnginePage_findText_subString(QWebEnginePage* self, struct seaqt_string subString);
-void QWebEnginePage_setFeaturePermission(QWebEnginePage* self, QUrl* securityOrigin, int feature, int policy);
 bool QWebEnginePage_isLoading(const QWebEnginePage* self);
 void QWebEnginePage_load_url(QWebEnginePage* self, QUrl* url);
 void QWebEnginePage_load_request(QWebEnginePage* self, QWebEngineHttpRequest* request);

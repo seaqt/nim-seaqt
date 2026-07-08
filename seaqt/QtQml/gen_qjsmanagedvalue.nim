@@ -108,28 +108,23 @@ proc fcQJSManagedValue_toDateTime(self: pointer): pointer {.importc: "QJSManaged
 proc fcQJSManagedValue_hasPropertyName(self: pointer, name: struct_seaqt_string): bool {.importc: "QJSManagedValue_hasProperty_name".}
 proc fcQJSManagedValue_hasOwnPropertyName(self: pointer, name: struct_seaqt_string): bool {.importc: "QJSManagedValue_hasOwnProperty_name".}
 proc fcQJSManagedValue_propertyName(self: pointer, name: struct_seaqt_string): pointer {.importc: "QJSManagedValue_property_name".}
-proc fcQJSManagedValue_setPropertyNameValue(self: pointer, name: struct_seaqt_string, value: pointer): void {.importc: "QJSManagedValue_setProperty_name_value".}
 proc fcQJSManagedValue_deletePropertyName(self: pointer, name: struct_seaqt_string): bool {.importc: "QJSManagedValue_deleteProperty_name".}
 proc fcQJSManagedValue_hasPropertyArrayIndex(self: pointer, arrayIndex: cuint): bool {.importc: "QJSManagedValue_hasProperty_arrayIndex".}
 proc fcQJSManagedValue_hasOwnPropertyArrayIndex(self: pointer, arrayIndex: cuint): bool {.importc: "QJSManagedValue_hasOwnProperty_arrayIndex".}
 proc fcQJSManagedValue_propertyArrayIndex(self: pointer, arrayIndex: cuint): pointer {.importc: "QJSManagedValue_property_arrayIndex".}
-proc fcQJSManagedValue_setPropertyArrayIndexValue(self: pointer, arrayIndex: cuint, value: pointer): void {.importc: "QJSManagedValue_setProperty_arrayIndex_value".}
 proc fcQJSManagedValue_deletePropertyArrayIndex(self: pointer, arrayIndex: cuint): bool {.importc: "QJSManagedValue_deleteProperty_arrayIndex".}
 proc fcQJSManagedValue_call(self: pointer): pointer {.importc: "QJSManagedValue_call".}
-proc fcQJSManagedValue_callWithInstanceInstance(self: pointer, instance: pointer): pointer {.importc: "QJSManagedValue_callWithInstance_instance".}
 proc fcQJSManagedValue_callAsConstructor(self: pointer): pointer {.importc: "QJSManagedValue_callAsConstructor".}
 proc fcQJSManagedValue_jsMetaType(self: pointer): pointer {.importc: "QJSManagedValue_jsMetaType".}
 proc fcQJSManagedValue_jsMetaMembers(self: pointer): struct_seaqt_array {.importc: "QJSManagedValue_jsMetaMembers".}
 proc fcQJSManagedValue_jsMetaInstantiate(self: pointer): pointer {.importc: "QJSManagedValue_jsMetaInstantiate".}
 proc fcQJSManagedValue_callArguments(self: pointer, arguments: struct_seaqt_array): pointer {.importc: "QJSManagedValue_call_arguments".}
-proc fcQJSManagedValue_callWithInstanceInstanceArguments(self: pointer, instance: pointer, arguments: struct_seaqt_array): pointer {.importc: "QJSManagedValue_callWithInstance_instance_arguments".}
 proc fcQJSManagedValue_callAsConstructorArguments(self: pointer, arguments: struct_seaqt_array): pointer {.importc: "QJSManagedValue_callAsConstructor_arguments".}
 proc fcQJSManagedValue_jsMetaInstantiateValues(self: pointer, values: struct_seaqt_array): pointer {.importc: "QJSManagedValue_jsMetaInstantiate_values".}
 proc fcQJSManagedValue_new(): ptr cQJSManagedValue {.importc: "QJSManagedValue_new".}
-proc fcQJSManagedValue_new2(value: pointer, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new_QJSValue_QJSEngine".}
-proc fcQJSManagedValue_new3(value: pointer, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new_QJSPrimitiveValue_QJSEngine".}
-proc fcQJSManagedValue_new4(variant: pointer, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new_QVariant_QJSEngine".}
-proc fcQJSManagedValue_new5(stringVal: struct_seaqt_string, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new_QString_QJSEngine".}
+proc fcQJSManagedValue_new2(value: pointer, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new_value_engine".}
+proc fcQJSManagedValue_new3(variant: pointer, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new_variant_engine".}
+proc fcQJSManagedValue_new4(stringVal: struct_seaqt_string, engine: pointer): ptr cQJSManagedValue {.importc: "QJSManagedValue_new_string_engine".}
 
 proc equals*(self: gen_qjsmanagedvalue_types.QJSManagedValue, other: gen_qjsmanagedvalue_types.QJSManagedValue): bool =
   fcQJSManagedValue_equals(self.h, other.h)
@@ -251,9 +246,6 @@ proc hasOwnProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: open
 proc property*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: openArray[char]): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_propertyName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
-proc setProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: openArray[char], value: gen_qjsvalue_types.QJSValue): void =
-  fcQJSManagedValue_setPropertyNameValue(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
-
 proc deleteProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, name: openArray[char]): bool =
   fcQJSManagedValue_deletePropertyName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
@@ -266,17 +258,11 @@ proc hasOwnProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arrayIndex
 proc property*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arrayIndex: cuint): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_propertyArrayIndex(self.h, arrayIndex), owned: true)
 
-proc setProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arrayIndex: cuint, value: gen_qjsvalue_types.QJSValue): void =
-  fcQJSManagedValue_setPropertyArrayIndexValue(self.h, arrayIndex, value.h)
-
 proc deleteProperty*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arrayIndex: cuint): bool =
   fcQJSManagedValue_deletePropertyArrayIndex(self.h, arrayIndex)
 
 proc call*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_call(self.h), owned: true)
-
-proc callWithInstance*(self: gen_qjsmanagedvalue_types.QJSManagedValue, instance: gen_qjsvalue_types.QJSValue): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_callWithInstanceInstance(self.h, instance.h), owned: true)
 
 proc callAsConstructor*(self: gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_callAsConstructor(self.h), owned: true)
@@ -306,13 +292,6 @@ proc call*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arguments: openArray
 
   gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_callArguments(self.h, struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0]))), owned: true)
 
-proc callWithInstance*(self: gen_qjsmanagedvalue_types.QJSManagedValue, instance: gen_qjsvalue_types.QJSValue, arguments: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
-  var arguments_CArray = newSeq[pointer](len(arguments))
-  for i in 0..<len(arguments):
-    arguments_CArray[i] = arguments[i].h
-
-  gen_qjsvalue_types.QJSValue(h: fcQJSManagedValue_callWithInstanceInstanceArguments(self.h, instance.h, struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0]))), owned: true)
-
 proc callAsConstructor*(self: gen_qjsmanagedvalue_types.QJSManagedValue, arguments: openArray[gen_qjsvalue_types.QJSValue]): gen_qjsvalue_types.QJSValue =
   var arguments_CArray = newSeq[pointer](len(arguments))
   for i in 0..<len(arguments):
@@ -331,18 +310,14 @@ proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue): gen_qjsmanagedv
   let tmp = gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new(), owned: true)
   tmp
 proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue,
-    value: gen_qjsvalue_types.QJSValue, engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
+    value: gen_qjsprimitivevalue_types.QJSPrimitiveValue, engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
   let tmp = gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new2(value.h, engine.h), owned: true)
   tmp
 proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue,
-    value: gen_qjsprimitivevalue_types.QJSPrimitiveValue, engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
-  let tmp = gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new3(value.h, engine.h), owned: true)
-  tmp
-proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue,
     variant: gen_qvariant_types.QVariant, engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
-  let tmp = gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new4(variant.h, engine.h), owned: true)
+  let tmp = gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new3(variant.h, engine.h), owned: true)
   tmp
 proc create*(T: type gen_qjsmanagedvalue_types.QJSManagedValue,
     stringVal: openArray[char], engine: gen_qjsengine_types.QJSEngine): gen_qjsmanagedvalue_types.QJSManagedValue =
-  let tmp = gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new5(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), engine.h), owned: true)
+  let tmp = gen_qjsmanagedvalue_types.QJSManagedValue(h: fcQJSManagedValue_new4(struct_seaqt_string(data: if len(stringVal) > 0: addr stringVal[0] else: nil, len: csize_t(len(stringVal))), engine.h), owned: true)
   tmp

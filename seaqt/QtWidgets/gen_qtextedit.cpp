@@ -1768,55 +1768,55 @@ void QTextEdit_virtualbase_disconnectNotify(VirtualQTextEdit* self, QMetaMethod*
 }
 
 void QTextEdit_protectedbase_zoomInF(VirtualQTextEdit* self, float range) {
-	self->zoomInF(static_cast<float>(range));
+	self->QTextEdit::zoomInF(static_cast<float>(range));
 }
 
 void QTextEdit_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTextEdit* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QTextEdit::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QTextEdit_protectedbase_viewportMargins(const VirtualQTextEdit* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QTextEdit::viewportMargins());
 }
 
 void QTextEdit_protectedbase_drawFrame(VirtualQTextEdit* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QTextEdit::drawFrame(param1);
 }
 
 void QTextEdit_protectedbase_updateMicroFocus(VirtualQTextEdit* self) {
-	self->updateMicroFocus();
+	self->QTextEdit::updateMicroFocus();
 }
 
 void QTextEdit_protectedbase_create(VirtualQTextEdit* self) {
-	self->create();
+	self->QTextEdit::create();
 }
 
 void QTextEdit_protectedbase_destroy(VirtualQTextEdit* self) {
-	self->destroy();
+	self->QTextEdit::destroy();
 }
 
 bool QTextEdit_protectedbase_focusNextChild(VirtualQTextEdit* self) {
-	return self->focusNextChild();
+	return self->QTextEdit::focusNextChild();
 }
 
 bool QTextEdit_protectedbase_focusPreviousChild(VirtualQTextEdit* self) {
-	return self->focusPreviousChild();
+	return self->QTextEdit::focusPreviousChild();
 }
 
 QObject* QTextEdit_protectedbase_sender(const VirtualQTextEdit* self) {
-	return self->sender();
+	return self->QTextEdit::sender();
 }
 
 int QTextEdit_protectedbase_senderSignalIndex(const VirtualQTextEdit* self) {
-	return self->senderSignalIndex();
+	return self->QTextEdit::senderSignalIndex();
 }
 
 int QTextEdit_protectedbase_receivers(const VirtualQTextEdit* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTextEdit::receivers(signal);
 }
 
 bool QTextEdit_protectedbase_isSignalConnected(const VirtualQTextEdit* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTextEdit::isSignalConnected(*signal);
 }
 
 void QTextEdit_delete(QTextEdit* self) {

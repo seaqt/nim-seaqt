@@ -2,7 +2,6 @@
 #include <QColor>
 #include <QMatrix4x4>
 #include <QRect>
-#include <QSGMaterial>
 #include <QSGMaterialShader>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QSGMaterialShader__GraphicsPipelineState
 #define WORKAROUND_INNER_CLASS_DEFINITION_QSGMaterialShader__RenderState
@@ -22,65 +21,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-class VirtualQSGMaterialShader final : public QSGMaterialShader {
-	const QSGMaterialShader_VTable* vtbl;
-public:
-	friend void* QSGMaterialShader_vdata(VirtualQSGMaterialShader* self);
-	friend VirtualQSGMaterialShader* vdata_QSGMaterialShader(void* vdata);
-
-	VirtualQSGMaterialShader(const QSGMaterialShader_VTable* vtbl): QSGMaterialShader(), vtbl(vtbl) {}
-
-	virtual ~VirtualQSGMaterialShader() override { if(vtbl->destructor) vtbl->destructor(this); }
-
-	void operator delete(void* p) { ::operator delete(p); }
-	virtual bool updateUniformData(QSGMaterialShader::RenderState& state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) override {
-		if (vtbl->updateUniformData == 0) {
-			return QSGMaterialShader::updateUniformData(state, newMaterial, oldMaterial);
-		}
-
-		QSGMaterialShader::RenderState& state_ret = state;
-		// Cast returned reference into pointer
-		QSGMaterialShader__RenderState* sigval1 = &state_ret;
-		QSGMaterial* sigval2 = newMaterial;
-		QSGMaterial* sigval3 = oldMaterial;
-		bool callback_return_value = vtbl->updateUniformData(this, sigval1, sigval2, sigval3);
-		return callback_return_value;
-	}
-
-	friend bool QSGMaterialShader_virtualbase_updateUniformData(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-
-	virtual bool updateGraphicsPipelineState(QSGMaterialShader::RenderState& state, QSGMaterialShader::GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) override {
-		if (vtbl->updateGraphicsPipelineState == 0) {
-			return QSGMaterialShader::updateGraphicsPipelineState(state, ps, newMaterial, oldMaterial);
-		}
-
-		QSGMaterialShader::RenderState& state_ret = state;
-		// Cast returned reference into pointer
-		QSGMaterialShader__RenderState* sigval1 = &state_ret;
-		QSGMaterialShader__GraphicsPipelineState* sigval2 = ps;
-		QSGMaterial* sigval3 = newMaterial;
-		QSGMaterial* sigval4 = oldMaterial;
-		bool callback_return_value = vtbl->updateGraphicsPipelineState(this, sigval1, sigval2, sigval3, sigval4);
-		return callback_return_value;
-	}
-
-	friend bool QSGMaterialShader_virtualbase_updateGraphicsPipelineState(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-
-	// Wrappers to allow calling protected methods:
-	friend void QSGMaterialShader_protectedbase_setShaderFileName(VirtualQSGMaterialShader* self, int stage, struct seaqt_string filename);
-};
-
-VirtualQSGMaterialShader* QSGMaterialShader_new(const QSGMaterialShader_VTable* vtbl, size_t vdata) {
-	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGMaterialShader>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQSGMaterialShader(vtbl) : nullptr;
-}
-
-bool QSGMaterialShader_updateUniformData(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
-	return self->updateUniformData(*state, newMaterial, oldMaterial);
-}
-
-bool QSGMaterialShader_updateGraphicsPipelineState(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
-	return self->updateGraphicsPipelineState(*state, ps, newMaterial, oldMaterial);
+QSGMaterialShader* QSGMaterialShader_new() {
+	return new (std::nothrow) QSGMaterialShader();
 }
 
 int QSGMaterialShader_flags(const QSGMaterialShader* self) {
@@ -102,24 +44,6 @@ int QSGMaterialShader_combinedImageSamplerCount(const QSGMaterialShader* self, i
 
 void QSGMaterialShader_setFlag_flags_on(QSGMaterialShader* self, int flags, bool on) {
 	self->setFlag(static_cast<QSGMaterialShader::Flags>(flags), on);
-}
-
-void* QSGMaterialShader_vdata(VirtualQSGMaterialShader* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGMaterialShader>()); }
-VirtualQSGMaterialShader* vdata_QSGMaterialShader(void* vdata) { return reinterpret_cast<VirtualQSGMaterialShader*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGMaterialShader>()); }
-
-bool QSGMaterialShader_virtualbase_updateUniformData(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
-
-	return self->QSGMaterialShader::updateUniformData(*state, newMaterial, oldMaterial);
-}
-
-bool QSGMaterialShader_virtualbase_updateGraphicsPipelineState(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
-
-	return self->QSGMaterialShader::updateGraphicsPipelineState(*state, ps, newMaterial, oldMaterial);
-}
-
-void QSGMaterialShader_protectedbase_setShaderFileName(VirtualQSGMaterialShader* self, int stage, struct seaqt_string filename) {
-		QString filename_QString = QString::fromUtf8(filename.data, filename.len);
-	self->setShaderFileName(static_cast<VirtualQSGMaterialShader::Stage>(stage), filename_QString);
 }
 
 void QSGMaterialShader_delete(QSGMaterialShader* self) {

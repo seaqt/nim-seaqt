@@ -1237,39 +1237,39 @@ void QDesignerWidgetBoxInterface_virtualbase_disconnectNotify(VirtualQDesignerWi
 }
 
 void QDesignerWidgetBoxInterface_protectedbase_updateMicroFocus(VirtualQDesignerWidgetBoxInterface* self) {
-	self->updateMicroFocus();
+	self->QDesignerWidgetBoxInterface::updateMicroFocus();
 }
 
 void QDesignerWidgetBoxInterface_protectedbase_create(VirtualQDesignerWidgetBoxInterface* self) {
-	self->create();
+	self->QDesignerWidgetBoxInterface::create();
 }
 
 void QDesignerWidgetBoxInterface_protectedbase_destroy(VirtualQDesignerWidgetBoxInterface* self) {
-	self->destroy();
+	self->QDesignerWidgetBoxInterface::destroy();
 }
 
 bool QDesignerWidgetBoxInterface_protectedbase_focusNextChild(VirtualQDesignerWidgetBoxInterface* self) {
-	return self->focusNextChild();
+	return self->QDesignerWidgetBoxInterface::focusNextChild();
 }
 
 bool QDesignerWidgetBoxInterface_protectedbase_focusPreviousChild(VirtualQDesignerWidgetBoxInterface* self) {
-	return self->focusPreviousChild();
+	return self->QDesignerWidgetBoxInterface::focusPreviousChild();
 }
 
 QObject* QDesignerWidgetBoxInterface_protectedbase_sender(const VirtualQDesignerWidgetBoxInterface* self) {
-	return self->sender();
+	return self->QDesignerWidgetBoxInterface::sender();
 }
 
 int QDesignerWidgetBoxInterface_protectedbase_senderSignalIndex(const VirtualQDesignerWidgetBoxInterface* self) {
-	return self->senderSignalIndex();
+	return self->QDesignerWidgetBoxInterface::senderSignalIndex();
 }
 
 int QDesignerWidgetBoxInterface_protectedbase_receivers(const VirtualQDesignerWidgetBoxInterface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDesignerWidgetBoxInterface::receivers(signal);
 }
 
 bool QDesignerWidgetBoxInterface_protectedbase_isSignalConnected(const VirtualQDesignerWidgetBoxInterface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDesignerWidgetBoxInterface::isSignalConnected(*signal);
 }
 
 void QDesignerWidgetBoxInterface_delete(QDesignerWidgetBoxInterface* self) {

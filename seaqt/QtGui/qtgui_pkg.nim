@@ -5,7 +5,7 @@ const
 
   QtGuiLibs* = gorge("pkg-config --libs Qt6Gui")
 
-  QtGuiGenVersion* = "6.4.2"
+  QtGuiGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtGuiBuildVersion* = gorge("pkg-config --modversion Qt6Gui")

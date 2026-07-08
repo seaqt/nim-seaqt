@@ -695,28 +695,28 @@ void QSaveFile_virtualbase_disconnectNotify(VirtualQSaveFile* self, QMetaMethod*
 }
 
 void QSaveFile_protectedbase_setOpenMode(VirtualQSaveFile* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQSaveFile::OpenMode>(openMode));
+	self->QSaveFile::setOpenMode(static_cast<VirtualQSaveFile::OpenMode>(openMode));
 }
 
 void QSaveFile_protectedbase_setErrorString(VirtualQSaveFile* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QSaveFile::setErrorString(errorString_QString);
 }
 
 QObject* QSaveFile_protectedbase_sender(const VirtualQSaveFile* self) {
-	return self->sender();
+	return self->QSaveFile::sender();
 }
 
 int QSaveFile_protectedbase_senderSignalIndex(const VirtualQSaveFile* self) {
-	return self->senderSignalIndex();
+	return self->QSaveFile::senderSignalIndex();
 }
 
 int QSaveFile_protectedbase_receivers(const VirtualQSaveFile* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSaveFile::receivers(signal);
 }
 
 bool QSaveFile_protectedbase_isSignalConnected(const VirtualQSaveFile* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSaveFile::isSignalConnected(*signal);
 }
 
 void QSaveFile_delete(QSaveFile* self) {

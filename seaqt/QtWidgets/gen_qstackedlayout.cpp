@@ -785,39 +785,39 @@ QSpacerItem* QStackedLayout_virtualbase_spacerItem(VirtualQStackedLayout* self) 
 }
 
 void QStackedLayout_protectedbase_widgetEvent(VirtualQStackedLayout* self, QEvent* param1) {
-	self->widgetEvent(param1);
+	self->QStackedLayout::widgetEvent(param1);
 }
 
 void QStackedLayout_protectedbase_addChildLayout(VirtualQStackedLayout* self, QLayout* l) {
-	self->addChildLayout(l);
+	self->QStackedLayout::addChildLayout(l);
 }
 
 void QStackedLayout_protectedbase_addChildWidget(VirtualQStackedLayout* self, QWidget* w) {
-	self->addChildWidget(w);
+	self->QStackedLayout::addChildWidget(w);
 }
 
 bool QStackedLayout_protectedbase_adoptLayout(VirtualQStackedLayout* self, QLayout* layout) {
-	return self->adoptLayout(layout);
+	return self->QStackedLayout::adoptLayout(layout);
 }
 
 QRect* QStackedLayout_protectedbase_alignmentRect(const VirtualQStackedLayout* self, QRect* param1) {
-	return new QRect(self->alignmentRect(*param1));
+	return new QRect(self->QStackedLayout::alignmentRect(*param1));
 }
 
 QObject* QStackedLayout_protectedbase_sender(const VirtualQStackedLayout* self) {
-	return self->sender();
+	return self->QStackedLayout::sender();
 }
 
 int QStackedLayout_protectedbase_senderSignalIndex(const VirtualQStackedLayout* self) {
-	return self->senderSignalIndex();
+	return self->QStackedLayout::senderSignalIndex();
 }
 
 int QStackedLayout_protectedbase_receivers(const VirtualQStackedLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QStackedLayout::receivers(signal);
 }
 
 bool QStackedLayout_protectedbase_isSignalConnected(const VirtualQStackedLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QStackedLayout::isSignalConnected(*signal);
 }
 
 void QStackedLayout_delete(QStackedLayout* self) {

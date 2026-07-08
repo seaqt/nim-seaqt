@@ -403,19 +403,19 @@ void QMediaCaptureSession_virtualbase_disconnectNotify(VirtualQMediaCaptureSessi
 }
 
 QObject* QMediaCaptureSession_protectedbase_sender(const VirtualQMediaCaptureSession* self) {
-	return self->sender();
+	return self->QMediaCaptureSession::sender();
 }
 
 int QMediaCaptureSession_protectedbase_senderSignalIndex(const VirtualQMediaCaptureSession* self) {
-	return self->senderSignalIndex();
+	return self->QMediaCaptureSession::senderSignalIndex();
 }
 
 int QMediaCaptureSession_protectedbase_receivers(const VirtualQMediaCaptureSession* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMediaCaptureSession::receivers(signal);
 }
 
 bool QMediaCaptureSession_protectedbase_isSignalConnected(const VirtualQMediaCaptureSession* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMediaCaptureSession::isSignalConnected(*signal);
 }
 
 void QMediaCaptureSession_delete(QMediaCaptureSession* self) {

@@ -858,28 +858,28 @@ void QIODevice_virtualbase_disconnectNotify(VirtualQIODevice* self, QMetaMethod*
 }
 
 void QIODevice_protectedbase_setOpenMode(VirtualQIODevice* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQIODevice::OpenMode>(openMode));
+	self->QIODevice::setOpenMode(static_cast<VirtualQIODevice::OpenMode>(openMode));
 }
 
 void QIODevice_protectedbase_setErrorString(VirtualQIODevice* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QIODevice::setErrorString(errorString_QString);
 }
 
 QObject* QIODevice_protectedbase_sender(const VirtualQIODevice* self) {
-	return self->sender();
+	return self->QIODevice::sender();
 }
 
 int QIODevice_protectedbase_senderSignalIndex(const VirtualQIODevice* self) {
-	return self->senderSignalIndex();
+	return self->QIODevice::senderSignalIndex();
 }
 
 int QIODevice_protectedbase_receivers(const VirtualQIODevice* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QIODevice::receivers(signal);
 }
 
 bool QIODevice_protectedbase_isSignalConnected(const VirtualQIODevice* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QIODevice::isSignalConnected(*signal);
 }
 
 void QIODevice_delete(QIODevice* self) {

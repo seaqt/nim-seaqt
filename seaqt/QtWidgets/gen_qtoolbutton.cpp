@@ -1150,39 +1150,39 @@ void QToolButton_virtualbase_disconnectNotify(VirtualQToolButton* self, QMetaMet
 }
 
 void QToolButton_protectedbase_updateMicroFocus(VirtualQToolButton* self) {
-	self->updateMicroFocus();
+	self->QToolButton::updateMicroFocus();
 }
 
 void QToolButton_protectedbase_create(VirtualQToolButton* self) {
-	self->create();
+	self->QToolButton::create();
 }
 
 void QToolButton_protectedbase_destroy(VirtualQToolButton* self) {
-	self->destroy();
+	self->QToolButton::destroy();
 }
 
 bool QToolButton_protectedbase_focusNextChild(VirtualQToolButton* self) {
-	return self->focusNextChild();
+	return self->QToolButton::focusNextChild();
 }
 
 bool QToolButton_protectedbase_focusPreviousChild(VirtualQToolButton* self) {
-	return self->focusPreviousChild();
+	return self->QToolButton::focusPreviousChild();
 }
 
 QObject* QToolButton_protectedbase_sender(const VirtualQToolButton* self) {
-	return self->sender();
+	return self->QToolButton::sender();
 }
 
 int QToolButton_protectedbase_senderSignalIndex(const VirtualQToolButton* self) {
-	return self->senderSignalIndex();
+	return self->QToolButton::senderSignalIndex();
 }
 
 int QToolButton_protectedbase_receivers(const VirtualQToolButton* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QToolButton::receivers(signal);
 }
 
 bool QToolButton_protectedbase_isSignalConnected(const VirtualQToolButton* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QToolButton::isSignalConnected(*signal);
 }
 
 void QToolButton_delete(QToolButton* self) {

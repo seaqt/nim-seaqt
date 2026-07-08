@@ -986,19 +986,19 @@ void QDesignerWidgetDataBaseInterface_virtualbase_disconnectNotify(VirtualQDesig
 }
 
 QObject* QDesignerWidgetDataBaseInterface_protectedbase_sender(const VirtualQDesignerWidgetDataBaseInterface* self) {
-	return self->sender();
+	return self->QDesignerWidgetDataBaseInterface::sender();
 }
 
 int QDesignerWidgetDataBaseInterface_protectedbase_senderSignalIndex(const VirtualQDesignerWidgetDataBaseInterface* self) {
-	return self->senderSignalIndex();
+	return self->QDesignerWidgetDataBaseInterface::senderSignalIndex();
 }
 
 int QDesignerWidgetDataBaseInterface_protectedbase_receivers(const VirtualQDesignerWidgetDataBaseInterface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDesignerWidgetDataBaseInterface::receivers(signal);
 }
 
 bool QDesignerWidgetDataBaseInterface_protectedbase_isSignalConnected(const VirtualQDesignerWidgetDataBaseInterface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDesignerWidgetDataBaseInterface::isSignalConnected(*signal);
 }
 
 void QDesignerWidgetDataBaseInterface_delete(QDesignerWidgetDataBaseInterface* self) {

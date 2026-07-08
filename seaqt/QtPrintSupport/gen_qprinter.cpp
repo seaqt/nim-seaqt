@@ -551,7 +551,7 @@ QPainter* QPrinter_virtualbase_sharedPainter(const VirtualQPrinter* self) {
 }
 
 void QPrinter_protectedbase_setEngines(VirtualQPrinter* self, QPrintEngine* printEngine, QPaintEngine* paintEngine) {
-	self->setEngines(printEngine, paintEngine);
+	self->QPrinter::setEngines(printEngine, paintEngine);
 }
 
 void QPrinter_delete(QPrinter* self) {

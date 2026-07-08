@@ -1018,39 +1018,39 @@ void QDesignerObjectInspectorInterface_virtualbase_disconnectNotify(VirtualQDesi
 }
 
 void QDesignerObjectInspectorInterface_protectedbase_updateMicroFocus(VirtualQDesignerObjectInspectorInterface* self) {
-	self->updateMicroFocus();
+	self->QDesignerObjectInspectorInterface::updateMicroFocus();
 }
 
 void QDesignerObjectInspectorInterface_protectedbase_create(VirtualQDesignerObjectInspectorInterface* self) {
-	self->create();
+	self->QDesignerObjectInspectorInterface::create();
 }
 
 void QDesignerObjectInspectorInterface_protectedbase_destroy(VirtualQDesignerObjectInspectorInterface* self) {
-	self->destroy();
+	self->QDesignerObjectInspectorInterface::destroy();
 }
 
 bool QDesignerObjectInspectorInterface_protectedbase_focusNextChild(VirtualQDesignerObjectInspectorInterface* self) {
-	return self->focusNextChild();
+	return self->QDesignerObjectInspectorInterface::focusNextChild();
 }
 
 bool QDesignerObjectInspectorInterface_protectedbase_focusPreviousChild(VirtualQDesignerObjectInspectorInterface* self) {
-	return self->focusPreviousChild();
+	return self->QDesignerObjectInspectorInterface::focusPreviousChild();
 }
 
 QObject* QDesignerObjectInspectorInterface_protectedbase_sender(const VirtualQDesignerObjectInspectorInterface* self) {
-	return self->sender();
+	return self->QDesignerObjectInspectorInterface::sender();
 }
 
 int QDesignerObjectInspectorInterface_protectedbase_senderSignalIndex(const VirtualQDesignerObjectInspectorInterface* self) {
-	return self->senderSignalIndex();
+	return self->QDesignerObjectInspectorInterface::senderSignalIndex();
 }
 
 int QDesignerObjectInspectorInterface_protectedbase_receivers(const VirtualQDesignerObjectInspectorInterface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDesignerObjectInspectorInterface::receivers(signal);
 }
 
 bool QDesignerObjectInspectorInterface_protectedbase_isSignalConnected(const VirtualQDesignerObjectInspectorInterface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDesignerObjectInspectorInterface::isSignalConnected(*signal);
 }
 
 void QDesignerObjectInspectorInterface_delete(QDesignerObjectInspectorInterface* self) {

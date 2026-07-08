@@ -395,19 +395,19 @@ void QQmlApplicationEngine_virtualbase_disconnectNotify(VirtualQQmlApplicationEn
 }
 
 QObject* QQmlApplicationEngine_protectedbase_sender(const VirtualQQmlApplicationEngine* self) {
-	return self->sender();
+	return self->QQmlApplicationEngine::sender();
 }
 
 int QQmlApplicationEngine_protectedbase_senderSignalIndex(const VirtualQQmlApplicationEngine* self) {
-	return self->senderSignalIndex();
+	return self->QQmlApplicationEngine::senderSignalIndex();
 }
 
 int QQmlApplicationEngine_protectedbase_receivers(const VirtualQQmlApplicationEngine* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQmlApplicationEngine::receivers(signal);
 }
 
 bool QQmlApplicationEngine_protectedbase_isSignalConnected(const VirtualQQmlApplicationEngine* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQmlApplicationEngine::isSignalConnected(*signal);
 }
 
 void QQmlApplicationEngine_delete(QQmlApplicationEngine* self) {

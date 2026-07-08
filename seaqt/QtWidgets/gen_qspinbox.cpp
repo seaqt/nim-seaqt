@@ -1306,47 +1306,47 @@ void QSpinBox_virtualbase_disconnectNotify(VirtualQSpinBox* self, QMetaMethod* s
 }
 
 QLineEdit* QSpinBox_protectedbase_lineEdit(const VirtualQSpinBox* self) {
-	return self->lineEdit();
+	return self->QSpinBox::lineEdit();
 }
 
 void QSpinBox_protectedbase_setLineEdit(VirtualQSpinBox* self, QLineEdit* edit) {
-	self->setLineEdit(edit);
+	self->QSpinBox::setLineEdit(edit);
 }
 
 void QSpinBox_protectedbase_updateMicroFocus(VirtualQSpinBox* self) {
-	self->updateMicroFocus();
+	self->QSpinBox::updateMicroFocus();
 }
 
 void QSpinBox_protectedbase_create(VirtualQSpinBox* self) {
-	self->create();
+	self->QSpinBox::create();
 }
 
 void QSpinBox_protectedbase_destroy(VirtualQSpinBox* self) {
-	self->destroy();
+	self->QSpinBox::destroy();
 }
 
 bool QSpinBox_protectedbase_focusNextChild(VirtualQSpinBox* self) {
-	return self->focusNextChild();
+	return self->QSpinBox::focusNextChild();
 }
 
 bool QSpinBox_protectedbase_focusPreviousChild(VirtualQSpinBox* self) {
-	return self->focusPreviousChild();
+	return self->QSpinBox::focusPreviousChild();
 }
 
 QObject* QSpinBox_protectedbase_sender(const VirtualQSpinBox* self) {
-	return self->sender();
+	return self->QSpinBox::sender();
 }
 
 int QSpinBox_protectedbase_senderSignalIndex(const VirtualQSpinBox* self) {
-	return self->senderSignalIndex();
+	return self->QSpinBox::senderSignalIndex();
 }
 
 int QSpinBox_protectedbase_receivers(const VirtualQSpinBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSpinBox::receivers(signal);
 }
 
 bool QSpinBox_protectedbase_isSignalConnected(const VirtualQSpinBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSpinBox::isSignalConnected(*signal);
 }
 
 void QSpinBox_delete(QSpinBox* self) {
@@ -2634,47 +2634,47 @@ void QDoubleSpinBox_virtualbase_disconnectNotify(VirtualQDoubleSpinBox* self, QM
 }
 
 QLineEdit* QDoubleSpinBox_protectedbase_lineEdit(const VirtualQDoubleSpinBox* self) {
-	return self->lineEdit();
+	return self->QDoubleSpinBox::lineEdit();
 }
 
 void QDoubleSpinBox_protectedbase_setLineEdit(VirtualQDoubleSpinBox* self, QLineEdit* edit) {
-	self->setLineEdit(edit);
+	self->QDoubleSpinBox::setLineEdit(edit);
 }
 
 void QDoubleSpinBox_protectedbase_updateMicroFocus(VirtualQDoubleSpinBox* self) {
-	self->updateMicroFocus();
+	self->QDoubleSpinBox::updateMicroFocus();
 }
 
 void QDoubleSpinBox_protectedbase_create(VirtualQDoubleSpinBox* self) {
-	self->create();
+	self->QDoubleSpinBox::create();
 }
 
 void QDoubleSpinBox_protectedbase_destroy(VirtualQDoubleSpinBox* self) {
-	self->destroy();
+	self->QDoubleSpinBox::destroy();
 }
 
 bool QDoubleSpinBox_protectedbase_focusNextChild(VirtualQDoubleSpinBox* self) {
-	return self->focusNextChild();
+	return self->QDoubleSpinBox::focusNextChild();
 }
 
 bool QDoubleSpinBox_protectedbase_focusPreviousChild(VirtualQDoubleSpinBox* self) {
-	return self->focusPreviousChild();
+	return self->QDoubleSpinBox::focusPreviousChild();
 }
 
 QObject* QDoubleSpinBox_protectedbase_sender(const VirtualQDoubleSpinBox* self) {
-	return self->sender();
+	return self->QDoubleSpinBox::sender();
 }
 
 int QDoubleSpinBox_protectedbase_senderSignalIndex(const VirtualQDoubleSpinBox* self) {
-	return self->senderSignalIndex();
+	return self->QDoubleSpinBox::senderSignalIndex();
 }
 
 int QDoubleSpinBox_protectedbase_receivers(const VirtualQDoubleSpinBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDoubleSpinBox::receivers(signal);
 }
 
 bool QDoubleSpinBox_protectedbase_isSignalConnected(const VirtualQDoubleSpinBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDoubleSpinBox::isSignalConnected(*signal);
 }
 
 void QDoubleSpinBox_delete(QDoubleSpinBox* self) {

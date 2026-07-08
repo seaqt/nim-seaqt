@@ -63,7 +63,6 @@ struct seaqt_string QJSEngine_tr_s(const char* s);
 QJSValue* QJSEngine_globalObject(const QJSEngine* self);
 QJSValue* QJSEngine_evaluate_program(QJSEngine* self, struct seaqt_string program);
 QJSValue* QJSEngine_importModule(QJSEngine* self, struct seaqt_string fileName);
-bool QJSEngine_registerModule(QJSEngine* self, struct seaqt_string moduleName, QJSValue* value);
 QJSValue* QJSEngine_newObject(QJSEngine* self);
 QJSValue* QJSEngine_newSymbol(QJSEngine* self, struct seaqt_string name);
 QJSValue* QJSEngine_newArray(QJSEngine* self);
@@ -73,12 +72,10 @@ QJSValue* QJSEngine_newErrorObject_errorType(QJSEngine* self, int errorType);
 void QJSEngine_collectGarbage(QJSEngine* self);
 void QJSEngine_setObjectOwnership(QObject* param1, int param2);
 int QJSEngine_objectOwnership(QObject* param1);
-void QJSEngine_installExtensions_extensions(QJSEngine* self, int extensions);
 void QJSEngine_setInterrupted(QJSEngine* self, bool interrupted);
 bool QJSEngine_isInterrupted(const QJSEngine* self);
 void QJSEngine_throwError_message(QJSEngine* self, struct seaqt_string message);
 void QJSEngine_throwError_errorType(QJSEngine* self, int errorType);
-void QJSEngine_throwError_error(QJSEngine* self, QJSValue* error);
 bool QJSEngine_hasError(const QJSEngine* self);
 QJSValue* QJSEngine_catchError(QJSEngine* self);
 struct seaqt_string QJSEngine_uiLanguage(const QJSEngine* self);
@@ -92,7 +89,6 @@ QJSValue* QJSEngine_evaluate_program_fileName_lineNumber(QJSEngine* self, struct
 QJSValue* QJSEngine_evaluate_program_fileName_lineNumber_exceptionStackTrace(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber, struct seaqt_array /* of struct seaqt_string */  exceptionStackTrace);
 QJSValue* QJSEngine_newArray_length(QJSEngine* self, unsigned int length);
 QJSValue* QJSEngine_newErrorObject_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message);
-void QJSEngine_installExtensions_extensions_object(QJSEngine* self, int extensions, QJSValue* object);
 void QJSEngine_throwError_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message);
 
 QMetaObject* QJSEngine_virtualbase_metaObject(const VirtualQJSEngine* self);

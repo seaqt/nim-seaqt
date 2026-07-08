@@ -1188,56 +1188,56 @@ void QAbstractSlider_virtualbase_disconnectNotify(VirtualQAbstractSlider* self, 
 }
 
 void QAbstractSlider_protectedbase_setRepeatAction_action(VirtualQAbstractSlider* self, int action) {
-	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action));
+	self->QAbstractSlider::setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action));
 }
 
 int QAbstractSlider_protectedbase_repeatAction(const VirtualQAbstractSlider* self) {
-	VirtualQAbstractSlider::SliderAction _ret = self->repeatAction();
+	VirtualQAbstractSlider::SliderAction _ret = self->QAbstractSlider::repeatAction();
 	return static_cast<int>(_ret);
 }
 
 void QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime(VirtualQAbstractSlider* self, int action, int thresholdTime) {
-	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime));
+	self->QAbstractSlider::setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime));
 }
 
 void QAbstractSlider_protectedbase_setRepeatAction_action_thresholdTime_repeatTime(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime) {
-	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime), static_cast<int>(repeatTime));
+	self->QAbstractSlider::setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime), static_cast<int>(repeatTime));
 }
 
 void QAbstractSlider_protectedbase_updateMicroFocus(VirtualQAbstractSlider* self) {
-	self->updateMicroFocus();
+	self->QAbstractSlider::updateMicroFocus();
 }
 
 void QAbstractSlider_protectedbase_create(VirtualQAbstractSlider* self) {
-	self->create();
+	self->QAbstractSlider::create();
 }
 
 void QAbstractSlider_protectedbase_destroy(VirtualQAbstractSlider* self) {
-	self->destroy();
+	self->QAbstractSlider::destroy();
 }
 
 bool QAbstractSlider_protectedbase_focusNextChild(VirtualQAbstractSlider* self) {
-	return self->focusNextChild();
+	return self->QAbstractSlider::focusNextChild();
 }
 
 bool QAbstractSlider_protectedbase_focusPreviousChild(VirtualQAbstractSlider* self) {
-	return self->focusPreviousChild();
+	return self->QAbstractSlider::focusPreviousChild();
 }
 
 QObject* QAbstractSlider_protectedbase_sender(const VirtualQAbstractSlider* self) {
-	return self->sender();
+	return self->QAbstractSlider::sender();
 }
 
 int QAbstractSlider_protectedbase_senderSignalIndex(const VirtualQAbstractSlider* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractSlider::senderSignalIndex();
 }
 
 int QAbstractSlider_protectedbase_receivers(const VirtualQAbstractSlider* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractSlider::receivers(signal);
 }
 
 bool QAbstractSlider_protectedbase_isSignalConnected(const VirtualQAbstractSlider* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractSlider::isSignalConnected(*signal);
 }
 
 void QAbstractSlider_delete(QAbstractSlider* self) {

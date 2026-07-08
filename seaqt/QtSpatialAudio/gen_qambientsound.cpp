@@ -365,19 +365,19 @@ void QAmbientSound_virtualbase_disconnectNotify(VirtualQAmbientSound* self, QMet
 }
 
 QObject* QAmbientSound_protectedbase_sender(const VirtualQAmbientSound* self) {
-	return self->sender();
+	return self->QAmbientSound::sender();
 }
 
 int QAmbientSound_protectedbase_senderSignalIndex(const VirtualQAmbientSound* self) {
-	return self->senderSignalIndex();
+	return self->QAmbientSound::senderSignalIndex();
 }
 
 int QAmbientSound_protectedbase_receivers(const VirtualQAmbientSound* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAmbientSound::receivers(signal);
 }
 
 bool QAmbientSound_protectedbase_isSignalConnected(const VirtualQAmbientSound* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAmbientSound::isSignalConnected(*signal);
 }
 
 void QAmbientSound_delete(QAmbientSound* self) {

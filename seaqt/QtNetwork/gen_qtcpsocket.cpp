@@ -822,57 +822,57 @@ void QTcpSocket_virtualbase_disconnectNotify(VirtualQTcpSocket* self, QMetaMetho
 }
 
 void QTcpSocket_protectedbase_setSocketState(VirtualQTcpSocket* self, int state) {
-	self->setSocketState(static_cast<VirtualQTcpSocket::SocketState>(state));
+	self->QTcpSocket::setSocketState(static_cast<VirtualQTcpSocket::SocketState>(state));
 }
 
 void QTcpSocket_protectedbase_setSocketError(VirtualQTcpSocket* self, int socketError) {
-	self->setSocketError(static_cast<VirtualQTcpSocket::SocketError>(socketError));
+	self->QTcpSocket::setSocketError(static_cast<VirtualQTcpSocket::SocketError>(socketError));
 }
 
 void QTcpSocket_protectedbase_setLocalPort(VirtualQTcpSocket* self, unsigned short port) {
-	self->setLocalPort(static_cast<quint16>(port));
+	self->QTcpSocket::setLocalPort(static_cast<quint16>(port));
 }
 
 void QTcpSocket_protectedbase_setLocalAddress(VirtualQTcpSocket* self, QHostAddress* address) {
-	self->setLocalAddress(*address);
+	self->QTcpSocket::setLocalAddress(*address);
 }
 
 void QTcpSocket_protectedbase_setPeerPort(VirtualQTcpSocket* self, unsigned short port) {
-	self->setPeerPort(static_cast<quint16>(port));
+	self->QTcpSocket::setPeerPort(static_cast<quint16>(port));
 }
 
 void QTcpSocket_protectedbase_setPeerAddress(VirtualQTcpSocket* self, QHostAddress* address) {
-	self->setPeerAddress(*address);
+	self->QTcpSocket::setPeerAddress(*address);
 }
 
 void QTcpSocket_protectedbase_setPeerName(VirtualQTcpSocket* self, struct seaqt_string name) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->setPeerName(name_QString);
+	self->QTcpSocket::setPeerName(name_QString);
 }
 
 void QTcpSocket_protectedbase_setOpenMode(VirtualQTcpSocket* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQTcpSocket::OpenMode>(openMode));
+	self->QTcpSocket::setOpenMode(static_cast<VirtualQTcpSocket::OpenMode>(openMode));
 }
 
 void QTcpSocket_protectedbase_setErrorString(VirtualQTcpSocket* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QTcpSocket::setErrorString(errorString_QString);
 }
 
 QObject* QTcpSocket_protectedbase_sender(const VirtualQTcpSocket* self) {
-	return self->sender();
+	return self->QTcpSocket::sender();
 }
 
 int QTcpSocket_protectedbase_senderSignalIndex(const VirtualQTcpSocket* self) {
-	return self->senderSignalIndex();
+	return self->QTcpSocket::senderSignalIndex();
 }
 
 int QTcpSocket_protectedbase_receivers(const VirtualQTcpSocket* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTcpSocket::receivers(signal);
 }
 
 bool QTcpSocket_protectedbase_isSignalConnected(const VirtualQTcpSocket* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTcpSocket::isSignalConnected(*signal);
 }
 
 void QTcpSocket_delete(QTcpSocket* self) {

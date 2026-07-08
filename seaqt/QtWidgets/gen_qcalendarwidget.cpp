@@ -1266,47 +1266,47 @@ void QCalendarWidget_virtualbase_disconnectNotify(VirtualQCalendarWidget* self, 
 }
 
 void QCalendarWidget_protectedbase_updateCell(VirtualQCalendarWidget* self, QDate* date) {
-	self->updateCell(*date);
+	self->QCalendarWidget::updateCell(*date);
 }
 
 void QCalendarWidget_protectedbase_updateCells(VirtualQCalendarWidget* self) {
-	self->updateCells();
+	self->QCalendarWidget::updateCells();
 }
 
 void QCalendarWidget_protectedbase_updateMicroFocus(VirtualQCalendarWidget* self) {
-	self->updateMicroFocus();
+	self->QCalendarWidget::updateMicroFocus();
 }
 
 void QCalendarWidget_protectedbase_create(VirtualQCalendarWidget* self) {
-	self->create();
+	self->QCalendarWidget::create();
 }
 
 void QCalendarWidget_protectedbase_destroy(VirtualQCalendarWidget* self) {
-	self->destroy();
+	self->QCalendarWidget::destroy();
 }
 
 bool QCalendarWidget_protectedbase_focusNextChild(VirtualQCalendarWidget* self) {
-	return self->focusNextChild();
+	return self->QCalendarWidget::focusNextChild();
 }
 
 bool QCalendarWidget_protectedbase_focusPreviousChild(VirtualQCalendarWidget* self) {
-	return self->focusPreviousChild();
+	return self->QCalendarWidget::focusPreviousChild();
 }
 
 QObject* QCalendarWidget_protectedbase_sender(const VirtualQCalendarWidget* self) {
-	return self->sender();
+	return self->QCalendarWidget::sender();
 }
 
 int QCalendarWidget_protectedbase_senderSignalIndex(const VirtualQCalendarWidget* self) {
-	return self->senderSignalIndex();
+	return self->QCalendarWidget::senderSignalIndex();
 }
 
 int QCalendarWidget_protectedbase_receivers(const VirtualQCalendarWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCalendarWidget::receivers(signal);
 }
 
 bool QCalendarWidget_protectedbase_isSignalConnected(const VirtualQCalendarWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCalendarWidget::isSignalConnected(*signal);
 }
 
 void QCalendarWidget_delete(QCalendarWidget* self) {

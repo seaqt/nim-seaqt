@@ -854,39 +854,39 @@ QPainter* QImage_virtualbase_sharedPainter(const VirtualQImage* self) {
 }
 
 QImage* QImage_protectedbase_mirrored_helper(const VirtualQImage* self, bool horizontal, bool vertical) {
-	return new QImage(self->mirrored_helper(horizontal, vertical));
+	return new QImage(self->QImage::mirrored_helper(horizontal, vertical));
 }
 
 QImage* QImage_protectedbase_rgbSwapped_helper(const VirtualQImage* self) {
-	return new QImage(self->rgbSwapped_helper());
+	return new QImage(self->QImage::rgbSwapped_helper());
 }
 
 void QImage_protectedbase_mirrored_inplace(VirtualQImage* self, bool horizontal, bool vertical) {
-	self->mirrored_inplace(horizontal, vertical);
+	self->QImage::mirrored_inplace(horizontal, vertical);
 }
 
 void QImage_protectedbase_rgbSwapped_inplace(VirtualQImage* self) {
-	self->rgbSwapped_inplace();
+	self->QImage::rgbSwapped_inplace();
 }
 
 QImage* QImage_protectedbase_convertToFormat_helper(const VirtualQImage* self, int format, int flags) {
-	return new QImage(self->convertToFormat_helper(static_cast<VirtualQImage::Format>(format), static_cast<Qt::ImageConversionFlags>(flags)));
+	return new QImage(self->QImage::convertToFormat_helper(static_cast<VirtualQImage::Format>(format), static_cast<Qt::ImageConversionFlags>(flags)));
 }
 
 bool QImage_protectedbase_convertToFormat_inplace(VirtualQImage* self, int format, int flags) {
-	return self->convertToFormat_inplace(static_cast<VirtualQImage::Format>(format), static_cast<Qt::ImageConversionFlags>(flags));
+	return self->QImage::convertToFormat_inplace(static_cast<VirtualQImage::Format>(format), static_cast<Qt::ImageConversionFlags>(flags));
 }
 
 QImage* QImage_protectedbase_smoothScaled(const VirtualQImage* self, int w, int h) {
-	return new QImage(self->smoothScaled(static_cast<int>(w), static_cast<int>(h)));
+	return new QImage(self->QImage::smoothScaled(static_cast<int>(w), static_cast<int>(h)));
 }
 
 void QImage_protectedbase_detachMetadata(VirtualQImage* self) {
-	self->detachMetadata();
+	self->QImage::detachMetadata();
 }
 
 void QImage_protectedbase_detachMetadata_invalidateCache(VirtualQImage* self, bool invalidateCache) {
-	self->detachMetadata(invalidateCache);
+	self->QImage::detachMetadata(invalidateCache);
 }
 
 void QImage_delete(QImage* self) {

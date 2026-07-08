@@ -5,7 +5,7 @@ const
 
   QtMultimediaLibs* = gorge("pkg-config --libs Qt6Multimedia")
 
-  QtMultimediaGenVersion* = "6.4.2"
+  QtMultimediaGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtMultimediaBuildVersion* = gorge("pkg-config --modversion Qt6Multimedia")
