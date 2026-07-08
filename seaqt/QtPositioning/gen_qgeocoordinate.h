@@ -44,7 +44,6 @@ struct seaqt_string QGeoCoordinate_toString(const QGeoCoordinate* self);
 QGeoCoordinate* QGeoCoordinate_atDistanceAndAzimuth_distance_azimuth_distanceUp(const QGeoCoordinate* self, double distance, double azimuth, double distanceUp);
 struct seaqt_string QGeoCoordinate_toString_format(const QGeoCoordinate* self, int format);
 
-const QMetaObject* QGeoCoordinate_staticMetaObject();
 void QGeoCoordinate_delete(QGeoCoordinate* self);
 
 #ifdef __cplusplus

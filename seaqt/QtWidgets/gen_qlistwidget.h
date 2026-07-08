@@ -503,7 +503,6 @@ int QListWidget_protectedbase_senderSignalIndex(const VirtualQListWidget* self);
 int QListWidget_protectedbase_receivers(const VirtualQListWidget* self, const char* signal);
 bool QListWidget_protectedbase_isSignalConnected(const VirtualQListWidget* self, QMetaMethod* signal);
 
-const QMetaObject* QListWidget_staticMetaObject();
 void QListWidget_delete(QListWidget* self);
 
 #ifdef __cplusplus

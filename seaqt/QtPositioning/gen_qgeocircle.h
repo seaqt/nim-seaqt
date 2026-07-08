@@ -43,7 +43,6 @@ QGeoCircle* QGeoCircle_translated(const QGeoCircle* self, double degreesLatitude
 void QGeoCircle_extendCircle(QGeoCircle* self, QGeoCoordinate* coordinate);
 struct seaqt_string QGeoCircle_toString(const QGeoCircle* self);
 
-const QMetaObject* QGeoCircle_staticMetaObject();
 void QGeoCircle_delete(QGeoCircle* self);
 
 #ifdef __cplusplus

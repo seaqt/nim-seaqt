@@ -88,7 +88,6 @@ int QFinalState_protectedbase_senderSignalIndex(const VirtualQFinalState* self);
 int QFinalState_protectedbase_receivers(const VirtualQFinalState* self, const char* signal);
 bool QFinalState_protectedbase_isSignalConnected(const VirtualQFinalState* self, QMetaMethod* signal);
 
-const QMetaObject* QFinalState_staticMetaObject();
 void QFinalState_delete(QFinalState* self);
 
 #ifdef __cplusplus

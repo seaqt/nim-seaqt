@@ -167,15 +167,10 @@ void QDesignerFormWindowManagerInterface_formWindowAdded(QDesignerFormWindowMana
 }
 
 void QDesignerFormWindowManagerInterface_connect_formWindowAdded(QDesignerFormWindowManagerInterface* self, intptr_t slot, void (*callback)(intptr_t, QDesignerFormWindowInterface*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDesignerFormWindowInterface*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QDesignerFormWindowInterface*);
-		void operator()(QDesignerFormWindowInterface* formWindow) {
+	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowAdded), self, [callback, release = seaqt::release_callback{slot,release}](QDesignerFormWindowInterface* formWindow) {
 			QDesignerFormWindowInterface* sigval1 = formWindow;
-			callback(slot, sigval1);
-		}
-	};
-	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowAdded), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDesignerFormWindowManagerInterface_formWindowRemoved(QDesignerFormWindowManagerInterface* self, QDesignerFormWindowInterface* formWindow) {
@@ -183,15 +178,10 @@ void QDesignerFormWindowManagerInterface_formWindowRemoved(QDesignerFormWindowMa
 }
 
 void QDesignerFormWindowManagerInterface_connect_formWindowRemoved(QDesignerFormWindowManagerInterface* self, intptr_t slot, void (*callback)(intptr_t, QDesignerFormWindowInterface*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDesignerFormWindowInterface*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QDesignerFormWindowInterface*);
-		void operator()(QDesignerFormWindowInterface* formWindow) {
+	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowRemoved), self, [callback, release = seaqt::release_callback{slot,release}](QDesignerFormWindowInterface* formWindow) {
 			QDesignerFormWindowInterface* sigval1 = formWindow;
-			callback(slot, sigval1);
-		}
-	};
-	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowRemoved), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDesignerFormWindowManagerInterface_activeFormWindowChanged(QDesignerFormWindowManagerInterface* self, QDesignerFormWindowInterface* formWindow) {
@@ -199,15 +189,10 @@ void QDesignerFormWindowManagerInterface_activeFormWindowChanged(QDesignerFormWi
 }
 
 void QDesignerFormWindowManagerInterface_connect_activeFormWindowChanged(QDesignerFormWindowManagerInterface* self, intptr_t slot, void (*callback)(intptr_t, QDesignerFormWindowInterface*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDesignerFormWindowInterface*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QDesignerFormWindowInterface*);
-		void operator()(QDesignerFormWindowInterface* formWindow) {
+	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::activeFormWindowChanged), self, [callback, release = seaqt::release_callback{slot,release}](QDesignerFormWindowInterface* formWindow) {
 			QDesignerFormWindowInterface* sigval1 = formWindow;
-			callback(slot, sigval1);
-		}
-	};
-	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::activeFormWindowChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDesignerFormWindowManagerInterface_formWindowSettingsChanged(QDesignerFormWindowManagerInterface* self, QDesignerFormWindowInterface* fw) {
@@ -215,15 +200,10 @@ void QDesignerFormWindowManagerInterface_formWindowSettingsChanged(QDesignerForm
 }
 
 void QDesignerFormWindowManagerInterface_connect_formWindowSettingsChanged(QDesignerFormWindowManagerInterface* self, intptr_t slot, void (*callback)(intptr_t, QDesignerFormWindowInterface*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDesignerFormWindowInterface*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QDesignerFormWindowInterface*);
-		void operator()(QDesignerFormWindowInterface* fw) {
+	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowSettingsChanged), self, [callback, release = seaqt::release_callback{slot,release}](QDesignerFormWindowInterface* fw) {
 			QDesignerFormWindowInterface* sigval1 = fw;
-			callback(slot, sigval1);
-		}
-	};
-	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowSettingsChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDesignerFormWindowManagerInterface_addFormWindow(QDesignerFormWindowManagerInterface* self, QDesignerFormWindowInterface* formWindow) {

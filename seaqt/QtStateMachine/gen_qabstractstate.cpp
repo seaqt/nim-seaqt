@@ -65,15 +65,10 @@ void QAbstractState_activeChanged(QAbstractState* self, bool active) {
 }
 
 void QAbstractState_connect_activeChanged(QAbstractState* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool active) {
+	QAbstractState::connect(self, static_cast<void (QAbstractState::*)(bool)>(&QAbstractState::activeChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool active) {
 			bool sigval1 = active;
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractState::connect(self, static_cast<void (QAbstractState::*)(bool)>(&QAbstractState::activeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QAbstractState_tr_s_c(const char* s, const char* c) {
@@ -96,6 +91,18 @@ struct seaqt_string QAbstractState_tr_s_c_n(const char* s, const char* c, int n)
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+void QAbstractState_connect_entered(QAbstractState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAbstractState::connect(self, &QAbstractState::entered, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QAbstractState_connect_exited(QAbstractState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAbstractState::connect(self, &QAbstractState::exited, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
 }
 
 const QMetaObject* QAbstractState_staticMetaObject() { return &QAbstractState::staticMetaObject; }

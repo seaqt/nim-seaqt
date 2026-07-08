@@ -232,7 +232,6 @@ int QErrorMessage_protectedbase_senderSignalIndex(const VirtualQErrorMessage* se
 int QErrorMessage_protectedbase_receivers(const VirtualQErrorMessage* self, const char* signal);
 bool QErrorMessage_protectedbase_isSignalConnected(const VirtualQErrorMessage* self, QMetaMethod* signal);
 
-const QMetaObject* QErrorMessage_staticMetaObject();
 void QErrorMessage_delete(QErrorMessage* self);
 
 #ifdef __cplusplus

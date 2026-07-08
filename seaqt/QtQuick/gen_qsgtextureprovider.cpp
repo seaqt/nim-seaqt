@@ -55,14 +55,9 @@ void QSGTextureProvider_textureChanged(QSGTextureProvider* self) {
 }
 
 void QSGTextureProvider_connect_textureChanged(QSGTextureProvider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QSGTextureProvider::connect(self, static_cast<void (QSGTextureProvider::*)()>(&QSGTextureProvider::textureChanged), self, local_caller{slot, callback, release});
+	QSGTextureProvider::connect(self, static_cast<void (QSGTextureProvider::*)()>(&QSGTextureProvider::textureChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QSGTextureProvider_tr_s_c(const char* s, const char* c) {

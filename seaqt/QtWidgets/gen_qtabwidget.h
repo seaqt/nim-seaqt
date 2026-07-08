@@ -296,7 +296,6 @@ int QTabWidget_protectedbase_senderSignalIndex(const VirtualQTabWidget* self);
 int QTabWidget_protectedbase_receivers(const VirtualQTabWidget* self, const char* signal);
 bool QTabWidget_protectedbase_isSignalConnected(const VirtualQTabWidget* self, QMetaMethod* signal);
 
-const QMetaObject* QTabWidget_staticMetaObject();
 void QTabWidget_delete(QTabWidget* self);
 
 #ifdef __cplusplus

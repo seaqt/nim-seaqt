@@ -775,10 +775,7 @@ void QDesignerResourceBrowserInterface_currentPathChanged(QDesignerResourceBrows
 }
 
 void QDesignerResourceBrowserInterface_connect_currentPathChanged(QDesignerResourceBrowserInterface* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& filePath) {
+	QDesignerResourceBrowserInterface::connect(self, static_cast<void (QDesignerResourceBrowserInterface::*)(const QString&)>(&QDesignerResourceBrowserInterface::currentPathChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& filePath) {
 			const QString filePath_ret = filePath;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray filePath_b = filePath_ret.toUtf8();
@@ -787,10 +784,8 @@ void QDesignerResourceBrowserInterface_connect_currentPathChanged(QDesignerResou
 			filePath_ms.data = static_cast<char*>(malloc(filePath_ms.len));
 			memcpy(filePath_ms.data, filePath_b.data(), filePath_ms.len);
 			struct seaqt_string sigval1 = filePath_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QDesignerResourceBrowserInterface::connect(self, static_cast<void (QDesignerResourceBrowserInterface::*)(const QString&)>(&QDesignerResourceBrowserInterface::currentPathChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDesignerResourceBrowserInterface_pathActivated(QDesignerResourceBrowserInterface* self, struct seaqt_string filePath) {
@@ -799,10 +794,7 @@ void QDesignerResourceBrowserInterface_pathActivated(QDesignerResourceBrowserInt
 }
 
 void QDesignerResourceBrowserInterface_connect_pathActivated(QDesignerResourceBrowserInterface* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& filePath) {
+	QDesignerResourceBrowserInterface::connect(self, static_cast<void (QDesignerResourceBrowserInterface::*)(const QString&)>(&QDesignerResourceBrowserInterface::pathActivated), self, [callback, release = seaqt::release_callback{slot,release}](const QString& filePath) {
 			const QString filePath_ret = filePath;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray filePath_b = filePath_ret.toUtf8();
@@ -811,10 +803,8 @@ void QDesignerResourceBrowserInterface_connect_pathActivated(QDesignerResourceBr
 			filePath_ms.data = static_cast<char*>(malloc(filePath_ms.len));
 			memcpy(filePath_ms.data, filePath_b.data(), filePath_ms.len);
 			struct seaqt_string sigval1 = filePath_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QDesignerResourceBrowserInterface::connect(self, static_cast<void (QDesignerResourceBrowserInterface::*)(const QString&)>(&QDesignerResourceBrowserInterface::pathActivated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QDesignerResourceBrowserInterface_tr_s_c(const char* s, const char* c) {

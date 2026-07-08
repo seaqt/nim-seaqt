@@ -149,7 +149,6 @@ int QApplication_protectedbase_senderSignalIndex(const VirtualQApplication* self
 int QApplication_protectedbase_receivers(const VirtualQApplication* self, const char* signal);
 bool QApplication_protectedbase_isSignalConnected(const VirtualQApplication* self, QMetaMethod* signal);
 
-const QMetaObject* QApplication_staticMetaObject();
 void QApplication_delete(QApplication* self);
 
 #ifdef __cplusplus

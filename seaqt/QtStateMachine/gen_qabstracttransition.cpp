@@ -319,6 +319,24 @@ struct seaqt_string QAbstractTransition_tr_s_c_n(const char* s, const char* c, i
 	return _ms;
 }
 
+void QAbstractTransition_connect_triggered(QAbstractTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAbstractTransition::connect(self, &QAbstractTransition::triggered, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QAbstractTransition_connect_targetStateChanged(QAbstractTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAbstractTransition::connect(self, &QAbstractTransition::targetStateChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QAbstractTransition_connect_targetStatesChanged(QAbstractTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAbstractTransition::connect(self, &QAbstractTransition::targetStatesChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
 const QMetaObject* QAbstractTransition_staticMetaObject() { return &QAbstractTransition::staticMetaObject; }
 void* QAbstractTransition_vdata(VirtualQAbstractTransition* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQAbstractTransition>()); }
 VirtualQAbstractTransition* vdata_QAbstractTransition(void* vdata) { return reinterpret_cast<VirtualQAbstractTransition*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQAbstractTransition>()); }

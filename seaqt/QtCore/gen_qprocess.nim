@@ -185,6 +185,10 @@ proc fcQProcess_startDetachedProgramArgumentsWorkingDirectory(program: struct_se
 proc fcQProcess_startDetachedProgramArgumentsWorkingDirectoryPid(program: struct_seaqt_string, arguments: struct_seaqt_array, workingDirectory: struct_seaqt_string, pid: ptr clonglong): bool {.importc: "QProcess_startDetached_program_arguments_workingDirectory_pid".}
 proc fcQProcess_finishedExitCodeExitStatus(self: pointer, exitCode: cint, exitStatus: cint): void {.importc: "QProcess_finished_exitCode_exitStatus".}
 proc fcQProcess_connect_finishedExitCodeExitStatus(self: pointer, slot: int, callback: proc (slot: int, exitCode: cint, exitStatus: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_finished_exitCode_exitStatus".}
+proc fcQProcess_connect_started(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_started".}
+proc fcQProcess_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_stateChanged".}
+proc fcQProcess_connect_readyReadStandardOutput(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_readyReadStandardOutput".}
+proc fcQProcess_connect_readyReadStandardError(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_readyReadStandardError".}
 proc fcQProcess_vdata(self: pointer): ptr pointer {.importc: "QProcess_vdata".}
 proc fvdata_cQProcess(self: pointer): pointer {.importc: "vdata_QProcess".}
 
@@ -680,6 +684,68 @@ proc onFinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinishedExitCo
   tmp[] = slot
   GC_ref(tmp)
   fcQProcess_connect_finishedExitCodeExitStatus(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_finishedExitCodeExitStatus, fcQProcess_slot_callback_finishedExitCodeExitStatus_release)
+
+type QProcessstartedSlot* = proc()
+proc fcQProcess_slot_callback_started(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QProcessstartedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQProcess_slot_callback_started_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcessstartedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onStarted*(self: gen_qprocess_types.QProcess, slot: QProcessstartedSlot) =
+  var tmp = new QProcessstartedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProcess_connect_started(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_started, fcQProcess_slot_callback_started_release)
+
+type QProcessstateChangedSlot* = proc(state: cint)
+proc fcQProcess_slot_callback_stateChanged(slot: int, state: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QProcessstateChangedSlot](cast[pointer](slot))
+  let slotval1 = cint(state)
+
+  nimfunc[](slotval1)
+
+proc fcQProcess_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcessstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onStateChanged*(self: gen_qprocess_types.QProcess, slot: QProcessstateChangedSlot) =
+  var tmp = new QProcessstateChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProcess_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_stateChanged, fcQProcess_slot_callback_stateChanged_release)
+
+type QProcessreadyReadStandardOutputSlot* = proc()
+proc fcQProcess_slot_callback_readyReadStandardOutput(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QProcessreadyReadStandardOutputSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQProcess_slot_callback_readyReadStandardOutput_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcessreadyReadStandardOutputSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onReadyReadStandardOutput*(self: gen_qprocess_types.QProcess, slot: QProcessreadyReadStandardOutputSlot) =
+  var tmp = new QProcessreadyReadStandardOutputSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProcess_connect_readyReadStandardOutput(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_readyReadStandardOutput, fcQProcess_slot_callback_readyReadStandardOutput_release)
+
+type QProcessreadyReadStandardErrorSlot* = proc()
+proc fcQProcess_slot_callback_readyReadStandardError(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QProcessreadyReadStandardErrorSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQProcess_slot_callback_readyReadStandardError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcessreadyReadStandardErrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onReadyReadStandardError*(self: gen_qprocess_types.QProcess, slot: QProcessreadyReadStandardErrorSlot) =
+  var tmp = new QProcessreadyReadStandardErrorSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProcess_connect_readyReadStandardError(self.h, cast[int](addr tmp[]), fcQProcess_slot_callback_readyReadStandardError, fcQProcess_slot_callback_readyReadStandardError_release)
 
 type QProcessmetaObjectProc* = proc(self: QProcess): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QProcessmetacastProc* = proc(self: QProcess, param1: cstring): pointer {.raises: [], gcsafe.}

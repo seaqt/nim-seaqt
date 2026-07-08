@@ -131,7 +131,6 @@ int QGeoAreaMonitorSource_protectedbase_senderSignalIndex(const VirtualQGeoAreaM
 int QGeoAreaMonitorSource_protectedbase_receivers(const VirtualQGeoAreaMonitorSource* self, const char* signal);
 bool QGeoAreaMonitorSource_protectedbase_isSignalConnected(const VirtualQGeoAreaMonitorSource* self, QMetaMethod* signal);
 
-const QMetaObject* QGeoAreaMonitorSource_staticMetaObject();
 void QGeoAreaMonitorSource_delete(QGeoAreaMonitorSource* self);
 
 #ifdef __cplusplus

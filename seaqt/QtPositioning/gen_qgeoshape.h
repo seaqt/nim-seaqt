@@ -38,7 +38,6 @@ QGeoCoordinate* QGeoShape_center(const QGeoShape* self);
 void QGeoShape_operatorAssign(QGeoShape* self, QGeoShape* from);
 struct seaqt_string QGeoShape_toString(const QGeoShape* self);
 
-const QMetaObject* QGeoShape_staticMetaObject();
 void QGeoShape_delete(QGeoShape* self);
 
 #ifdef __cplusplus

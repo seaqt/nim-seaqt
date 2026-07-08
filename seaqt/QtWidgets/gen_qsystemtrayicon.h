@@ -108,7 +108,6 @@ int QSystemTrayIcon_protectedbase_senderSignalIndex(const VirtualQSystemTrayIcon
 int QSystemTrayIcon_protectedbase_receivers(const VirtualQSystemTrayIcon* self, const char* signal);
 bool QSystemTrayIcon_protectedbase_isSignalConnected(const VirtualQSystemTrayIcon* self, QMetaMethod* signal);
 
-const QMetaObject* QSystemTrayIcon_staticMetaObject();
 void QSystemTrayIcon_delete(QSystemTrayIcon* self);
 
 #ifdef __cplusplus

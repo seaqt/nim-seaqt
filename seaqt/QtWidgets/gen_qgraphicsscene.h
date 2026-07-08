@@ -332,7 +332,6 @@ int QGraphicsScene_protectedbase_senderSignalIndex(const VirtualQGraphicsScene* 
 int QGraphicsScene_protectedbase_receivers(const VirtualQGraphicsScene* self, const char* signal);
 bool QGraphicsScene_protectedbase_isSignalConnected(const VirtualQGraphicsScene* self, QMetaMethod* signal);
 
-const QMetaObject* QGraphicsScene_staticMetaObject();
 void QGraphicsScene_delete(QGraphicsScene* self);
 
 #ifdef __cplusplus

@@ -83,7 +83,6 @@ bool QEventPoint_isAccepted(const QEventPoint* self);
 void QEventPoint_setAccepted(QEventPoint* self);
 void QEventPoint_setAccepted_accepted(QEventPoint* self, bool accepted);
 
-const QMetaObject* QEventPoint_staticMetaObject();
 void QEventPoint_delete(QEventPoint* self);
 
 #ifdef __cplusplus

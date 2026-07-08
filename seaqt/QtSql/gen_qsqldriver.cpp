@@ -830,10 +830,7 @@ void QSqlDriver_notification(QSqlDriver* self, struct seaqt_string name, int sou
 }
 
 void QSqlDriver_connect_notification(QSqlDriver* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, int, QVariant*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, int, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string, int, QVariant*);
-		void operator()(const QString& name, QSqlDriver::NotificationSource source, const QVariant& payload) {
+	QSqlDriver::connect(self, static_cast<void (QSqlDriver::*)(const QString&, QSqlDriver::NotificationSource, const QVariant&)>(&QSqlDriver::notification), self, [callback, release = seaqt::release_callback{slot,release}](const QString& name, QSqlDriver::NotificationSource source, const QVariant& payload) {
 			const QString name_ret = name;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray name_b = name_ret.toUtf8();
@@ -847,10 +844,8 @@ void QSqlDriver_connect_notification(QSqlDriver* self, intptr_t slot, void (*cal
 			const QVariant& payload_ret = payload;
 			// Cast returned reference into pointer
 			QVariant* sigval3 = const_cast<QVariant*>(&payload_ret);
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QSqlDriver::connect(self, static_cast<void (QSqlDriver::*)(const QString&, QSqlDriver::NotificationSource, const QVariant&)>(&QSqlDriver::notification), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 struct seaqt_string QSqlDriver_tr_s_c(const char* s, const char* c) {

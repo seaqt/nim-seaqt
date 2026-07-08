@@ -227,7 +227,6 @@ int QDesignerActionEditorInterface_protectedbase_senderSignalIndex(const Virtual
 int QDesignerActionEditorInterface_protectedbase_receivers(const VirtualQDesignerActionEditorInterface* self, const char* signal);
 bool QDesignerActionEditorInterface_protectedbase_isSignalConnected(const VirtualQDesignerActionEditorInterface* self, QMetaMethod* signal);
 
-const QMetaObject* QDesignerActionEditorInterface_staticMetaObject();
 void QDesignerActionEditorInterface_delete(QDesignerActionEditorInterface* self);
 
 #ifdef __cplusplus

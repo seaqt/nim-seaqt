@@ -412,7 +412,6 @@ int QListView_protectedbase_senderSignalIndex(const VirtualQListView* self);
 int QListView_protectedbase_receivers(const VirtualQListView* self, const char* signal);
 bool QListView_protectedbase_isSignalConnected(const VirtualQListView* self, QMetaMethod* signal);
 
-const QMetaObject* QListView_staticMetaObject();
 void QListView_delete(QListView* self);
 
 #ifdef __cplusplus

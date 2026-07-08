@@ -1127,6 +1127,12 @@ struct seaqt_string QAbstractProxyModel_tr_s_c_n(const char* s, const char* c, i
 	return _ms;
 }
 
+void QAbstractProxyModel_connect_sourceModelChanged(QAbstractProxyModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAbstractProxyModel::connect(self, &QAbstractProxyModel::sourceModelChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
 const QMetaObject* QAbstractProxyModel_staticMetaObject() { return &QAbstractProxyModel::staticMetaObject; }
 void* QAbstractProxyModel_vdata(VirtualQAbstractProxyModel* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQAbstractProxyModel>()); }
 VirtualQAbstractProxyModel* vdata_QAbstractProxyModel(void* vdata) { return reinterpret_cast<VirtualQAbstractProxyModel*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQAbstractProxyModel>()); }

@@ -91,7 +91,6 @@ int QWebChannel_protectedbase_senderSignalIndex(const VirtualQWebChannel* self);
 int QWebChannel_protectedbase_receivers(const VirtualQWebChannel* self, const char* signal);
 bool QWebChannel_protectedbase_isSignalConnected(const VirtualQWebChannel* self, QMetaMethod* signal);
 
-const QMetaObject* QWebChannel_staticMetaObject();
 void QWebChannel_delete(QWebChannel* self);
 
 #ifdef __cplusplus

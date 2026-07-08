@@ -135,14 +135,9 @@ void QInputMethod_cursorRectangleChanged(QInputMethod* self) {
 }
 
 void QInputMethod_connect_cursorRectangleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::cursorRectangleChanged), self, local_caller{slot, callback, release});
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::cursorRectangleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QInputMethod_anchorRectangleChanged(QInputMethod* self) {
@@ -150,14 +145,9 @@ void QInputMethod_anchorRectangleChanged(QInputMethod* self) {
 }
 
 void QInputMethod_connect_anchorRectangleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::anchorRectangleChanged), self, local_caller{slot, callback, release});
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::anchorRectangleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QInputMethod_keyboardRectangleChanged(QInputMethod* self) {
@@ -165,14 +155,9 @@ void QInputMethod_keyboardRectangleChanged(QInputMethod* self) {
 }
 
 void QInputMethod_connect_keyboardRectangleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::keyboardRectangleChanged), self, local_caller{slot, callback, release});
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::keyboardRectangleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QInputMethod_inputItemClipRectangleChanged(QInputMethod* self) {
@@ -180,14 +165,9 @@ void QInputMethod_inputItemClipRectangleChanged(QInputMethod* self) {
 }
 
 void QInputMethod_connect_inputItemClipRectangleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::inputItemClipRectangleChanged), self, local_caller{slot, callback, release});
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::inputItemClipRectangleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QInputMethod_visibleChanged(QInputMethod* self) {
@@ -195,14 +175,9 @@ void QInputMethod_visibleChanged(QInputMethod* self) {
 }
 
 void QInputMethod_connect_visibleChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::visibleChanged), self, local_caller{slot, callback, release});
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::visibleChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QInputMethod_animatingChanged(QInputMethod* self) {
@@ -210,14 +185,9 @@ void QInputMethod_animatingChanged(QInputMethod* self) {
 }
 
 void QInputMethod_connect_animatingChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::animatingChanged), self, local_caller{slot, callback, release});
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::animatingChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QInputMethod_localeChanged(QInputMethod* self) {
@@ -225,14 +195,9 @@ void QInputMethod_localeChanged(QInputMethod* self) {
 }
 
 void QInputMethod_connect_localeChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::localeChanged), self, local_caller{slot, callback, release});
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::localeChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QInputMethod_inputDirectionChanged(QInputMethod* self, int newDirection) {
@@ -240,16 +205,11 @@ void QInputMethod_inputDirectionChanged(QInputMethod* self, int newDirection) {
 }
 
 void QInputMethod_connect_inputDirectionChanged(QInputMethod* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::LayoutDirection newDirection) {
+	QInputMethod::connect(self, static_cast<void (QInputMethod::*)(Qt::LayoutDirection)>(&QInputMethod::inputDirectionChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::LayoutDirection newDirection) {
 			Qt::LayoutDirection newDirection_ret = newDirection;
 			int sigval1 = static_cast<int>(newDirection_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)(Qt::LayoutDirection)>(&QInputMethod::inputDirectionChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QInputMethod_tr_s_c(const char* s, const char* c) {

@@ -900,16 +900,11 @@ void QSplitter_splitterMoved(QSplitter* self, int pos, int index) {
 }
 
 void QSplitter_connect_splitterMoved(QSplitter* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int);
-		void operator()(int pos, int index) {
+	QSplitter::connect(self, static_cast<void (QSplitter::*)(int, int)>(&QSplitter::splitterMoved), self, [callback, release = seaqt::release_callback{slot,release}](int pos, int index) {
 			int sigval1 = pos;
 			int sigval2 = index;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QSplitter::connect(self, static_cast<void (QSplitter::*)(int, int)>(&QSplitter::splitterMoved), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QSplitter_tr_s_c(const char* s, const char* c) {

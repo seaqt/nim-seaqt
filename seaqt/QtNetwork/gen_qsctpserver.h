@@ -94,7 +94,6 @@ int QSctpServer_protectedbase_senderSignalIndex(const VirtualQSctpServer* self);
 int QSctpServer_protectedbase_receivers(const VirtualQSctpServer* self, const char* signal);
 bool QSctpServer_protectedbase_isSignalConnected(const VirtualQSctpServer* self, QMetaMethod* signal);
 
-const QMetaObject* QSctpServer_staticMetaObject();
 void QSctpServer_delete(QSctpServer* self);
 
 #ifdef __cplusplus

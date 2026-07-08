@@ -90,7 +90,6 @@ int QExtensionManager_protectedbase_senderSignalIndex(const VirtualQExtensionMan
 int QExtensionManager_protectedbase_receivers(const VirtualQExtensionManager* self, const char* signal);
 bool QExtensionManager_protectedbase_isSignalConnected(const VirtualQExtensionManager* self, QMetaMethod* signal);
 
-const QMetaObject* QExtensionManager_staticMetaObject();
 void QExtensionManager_delete(QExtensionManager* self);
 
 #ifdef __cplusplus

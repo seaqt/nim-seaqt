@@ -272,7 +272,6 @@ int QSslSocket_protectedbase_senderSignalIndex(const VirtualQSslSocket* self);
 int QSslSocket_protectedbase_receivers(const VirtualQSslSocket* self, const char* signal);
 bool QSslSocket_protectedbase_isSignalConnected(const VirtualQSslSocket* self, QMetaMethod* signal);
 
-const QMetaObject* QSslSocket_staticMetaObject();
 void QSslSocket_delete(QSslSocket* self);
 
 #ifdef __cplusplus

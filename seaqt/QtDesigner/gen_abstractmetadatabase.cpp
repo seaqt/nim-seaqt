@@ -229,14 +229,9 @@ void QDesignerMetaDataBaseInterface_changed(QDesignerMetaDataBaseInterface* self
 }
 
 void QDesignerMetaDataBaseInterface_connect_changed(QDesignerMetaDataBaseInterface* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QDesignerMetaDataBaseInterface::connect(self, static_cast<void (QDesignerMetaDataBaseInterface::*)()>(&QDesignerMetaDataBaseInterface::changed), self, local_caller{slot, callback, release});
+	QDesignerMetaDataBaseInterface::connect(self, static_cast<void (QDesignerMetaDataBaseInterface::*)()>(&QDesignerMetaDataBaseInterface::changed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QDesignerMetaDataBaseInterface_tr_s_c(const char* s, const char* c) {

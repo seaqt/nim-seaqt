@@ -43,7 +43,6 @@ void QDesignerNewFormWidgetInterface_connect_currentTemplateChanged(QDesignerNew
 struct seaqt_string QDesignerNewFormWidgetInterface_tr_s_c(const char* s, const char* c);
 struct seaqt_string QDesignerNewFormWidgetInterface_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QDesignerNewFormWidgetInterface_staticMetaObject();
 void QDesignerNewFormWidgetInterface_delete(QDesignerNewFormWidgetInterface* self);
 
 #ifdef __cplusplus

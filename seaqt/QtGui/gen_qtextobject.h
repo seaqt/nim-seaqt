@@ -90,7 +90,6 @@ int QTextObject_objectIndex(const QTextObject* self);
 struct seaqt_string QTextObject_tr_s_c(const char* s, const char* c);
 struct seaqt_string QTextObject_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QTextObject_staticMetaObject();
 
 void QTextBlockGroup_virtbase(QTextBlockGroup* src, QTextObject** outptr_QTextObject);
 QMetaObject* QTextBlockGroup_metaObject(const QTextBlockGroup* self);
@@ -103,7 +102,6 @@ void QTextBlockGroup_blockFormatChanged(QTextBlockGroup* self, QTextBlock* block
 struct seaqt_string QTextBlockGroup_tr_s_c(const char* s, const char* c);
 struct seaqt_string QTextBlockGroup_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QTextBlockGroup_staticMetaObject();
 
 typedef struct VirtualQTextFrame VirtualQTextFrame;
 typedef struct QTextFrame_VTable{
@@ -162,7 +160,6 @@ int QTextFrame_protectedbase_senderSignalIndex(const VirtualQTextFrame* self);
 int QTextFrame_protectedbase_receivers(const VirtualQTextFrame* self, const char* signal);
 bool QTextFrame_protectedbase_isSignalConnected(const VirtualQTextFrame* self, QMetaMethod* signal);
 
-const QMetaObject* QTextFrame_staticMetaObject();
 void QTextFrame_delete(QTextFrame* self);
 
 void QTextBlockUserData_operatorAssign(QTextBlockUserData* self, QTextBlockUserData* from);

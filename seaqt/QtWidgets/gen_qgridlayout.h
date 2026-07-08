@@ -188,7 +188,6 @@ int QGridLayout_protectedbase_senderSignalIndex(const VirtualQGridLayout* self);
 int QGridLayout_protectedbase_receivers(const VirtualQGridLayout* self, const char* signal);
 bool QGridLayout_protectedbase_isSignalConnected(const VirtualQGridLayout* self, QMetaMethod* signal);
 
-const QMetaObject* QGridLayout_staticMetaObject();
 void QGridLayout_delete(QGridLayout* self);
 
 #ifdef __cplusplus

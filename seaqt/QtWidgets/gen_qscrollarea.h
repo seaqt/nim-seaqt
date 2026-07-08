@@ -255,7 +255,6 @@ int QScrollArea_protectedbase_senderSignalIndex(const VirtualQScrollArea* self);
 int QScrollArea_protectedbase_receivers(const VirtualQScrollArea* self, const char* signal);
 bool QScrollArea_protectedbase_isSignalConnected(const VirtualQScrollArea* self, QMetaMethod* signal);
 
-const QMetaObject* QScrollArea_staticMetaObject();
 void QScrollArea_delete(QScrollArea* self);
 
 #ifdef __cplusplus

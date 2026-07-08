@@ -287,6 +287,18 @@ struct seaqt_string QSignalTransition_tr_s_c_n(const char* s, const char* c, int
 	return _ms;
 }
 
+void QSignalTransition_connect_senderObjectChanged(QSignalTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QSignalTransition::connect(self, &QSignalTransition::senderObjectChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QSignalTransition_connect_signalChanged(QSignalTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QSignalTransition::connect(self, &QSignalTransition::signalChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
 const QMetaObject* QSignalTransition_staticMetaObject() { return &QSignalTransition::staticMetaObject; }
 void* QSignalTransition_vdata(VirtualQSignalTransition* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSignalTransition>()); }
 VirtualQSignalTransition* vdata_QSignalTransition(void* vdata) { return reinterpret_cast<VirtualQSignalTransition*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSignalTransition>()); }

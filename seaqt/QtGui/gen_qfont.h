@@ -111,7 +111,6 @@ void QFont_setLegacyWeight(QFont* self, int legacyWeight);
 int QFont_legacyWeight(const QFont* self);
 void QFont_setStyleHint_QFont_StyleHint_QFont_StyleStrategy(QFont* self, int param1, int param2);
 
-const QMetaObject* QFont_staticMetaObject();
 void QFont_delete(QFont* self);
 
 #ifdef __cplusplus

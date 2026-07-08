@@ -2013,15 +2013,10 @@ void QListWidget_itemPressed(QListWidget* self, QListWidgetItem* item) {
 }
 
 void QListWidget_connect_itemPressed(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QListWidgetItem*);
-		void operator()(QListWidgetItem* item) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemPressed), self, [callback, release = seaqt::release_callback{slot,release}](QListWidgetItem* item) {
 			QListWidgetItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemPressed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QListWidget_itemClicked(QListWidget* self, QListWidgetItem* item) {
@@ -2029,15 +2024,10 @@ void QListWidget_itemClicked(QListWidget* self, QListWidgetItem* item) {
 }
 
 void QListWidget_connect_itemClicked(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QListWidgetItem*);
-		void operator()(QListWidgetItem* item) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemClicked), self, [callback, release = seaqt::release_callback{slot,release}](QListWidgetItem* item) {
 			QListWidgetItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QListWidget_itemDoubleClicked(QListWidget* self, QListWidgetItem* item) {
@@ -2045,15 +2035,10 @@ void QListWidget_itemDoubleClicked(QListWidget* self, QListWidgetItem* item) {
 }
 
 void QListWidget_connect_itemDoubleClicked(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QListWidgetItem*);
-		void operator()(QListWidgetItem* item) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemDoubleClicked), self, [callback, release = seaqt::release_callback{slot,release}](QListWidgetItem* item) {
 			QListWidgetItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemDoubleClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QListWidget_itemActivated(QListWidget* self, QListWidgetItem* item) {
@@ -2061,15 +2046,10 @@ void QListWidget_itemActivated(QListWidget* self, QListWidgetItem* item) {
 }
 
 void QListWidget_connect_itemActivated(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QListWidgetItem*);
-		void operator()(QListWidgetItem* item) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemActivated), self, [callback, release = seaqt::release_callback{slot,release}](QListWidgetItem* item) {
 			QListWidgetItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemActivated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QListWidget_itemEntered(QListWidget* self, QListWidgetItem* item) {
@@ -2077,15 +2057,10 @@ void QListWidget_itemEntered(QListWidget* self, QListWidgetItem* item) {
 }
 
 void QListWidget_connect_itemEntered(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QListWidgetItem*);
-		void operator()(QListWidgetItem* item) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemEntered), self, [callback, release = seaqt::release_callback{slot,release}](QListWidgetItem* item) {
 			QListWidgetItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemEntered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QListWidget_itemChanged(QListWidget* self, QListWidgetItem* item) {
@@ -2093,15 +2068,10 @@ void QListWidget_itemChanged(QListWidget* self, QListWidgetItem* item) {
 }
 
 void QListWidget_connect_itemChanged(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QListWidgetItem*);
-		void operator()(QListWidgetItem* item) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemChanged), self, [callback, release = seaqt::release_callback{slot,release}](QListWidgetItem* item) {
 			QListWidgetItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*)>(&QListWidget::itemChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QListWidget_currentItemChanged(QListWidget* self, QListWidgetItem* current, QListWidgetItem* previous) {
@@ -2109,16 +2079,11 @@ void QListWidget_currentItemChanged(QListWidget* self, QListWidgetItem* current,
 }
 
 void QListWidget_connect_currentItemChanged(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*, QListWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QListWidgetItem*, QListWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QListWidgetItem*, QListWidgetItem*);
-		void operator()(QListWidgetItem* current, QListWidgetItem* previous) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*, QListWidgetItem*)>(&QListWidget::currentItemChanged), self, [callback, release = seaqt::release_callback{slot,release}](QListWidgetItem* current, QListWidgetItem* previous) {
 			QListWidgetItem* sigval1 = current;
 			QListWidgetItem* sigval2 = previous;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(QListWidgetItem*, QListWidgetItem*)>(&QListWidget::currentItemChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QListWidget_currentTextChanged(QListWidget* self, struct seaqt_string currentText) {
@@ -2127,10 +2092,7 @@ void QListWidget_currentTextChanged(QListWidget* self, struct seaqt_string curre
 }
 
 void QListWidget_connect_currentTextChanged(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& currentText) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(const QString&)>(&QListWidget::currentTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& currentText) {
 			const QString currentText_ret = currentText;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray currentText_b = currentText_ret.toUtf8();
@@ -2139,10 +2101,8 @@ void QListWidget_connect_currentTextChanged(QListWidget* self, intptr_t slot, vo
 			currentText_ms.data = static_cast<char*>(malloc(currentText_ms.len));
 			memcpy(currentText_ms.data, currentText_b.data(), currentText_ms.len);
 			struct seaqt_string sigval1 = currentText_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(const QString&)>(&QListWidget::currentTextChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QListWidget_currentRowChanged(QListWidget* self, int currentRow) {
@@ -2150,15 +2110,10 @@ void QListWidget_currentRowChanged(QListWidget* self, int currentRow) {
 }
 
 void QListWidget_connect_currentRowChanged(QListWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int currentRow) {
+	QListWidget::connect(self, static_cast<void (QListWidget::*)(int)>(&QListWidget::currentRowChanged), self, [callback, release = seaqt::release_callback{slot,release}](int currentRow) {
 			int sigval1 = currentRow;
-			callback(slot, sigval1);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)(int)>(&QListWidget::currentRowChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QListWidget_itemSelectionChanged(QListWidget* self) {
@@ -2166,14 +2121,9 @@ void QListWidget_itemSelectionChanged(QListWidget* self) {
 }
 
 void QListWidget_connect_itemSelectionChanged(QListWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QListWidget::connect(self, static_cast<void (QListWidget::*)()>(&QListWidget::itemSelectionChanged), self, local_caller{slot, callback, release});
+	QListWidget::connect(self, static_cast<void (QListWidget::*)()>(&QListWidget::itemSelectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QListWidget_tr_s_c(const char* s, const char* c) {

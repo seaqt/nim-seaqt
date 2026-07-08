@@ -123,7 +123,6 @@ int QGraphicsEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsEffect
 int QGraphicsEffect_protectedbase_receivers(const VirtualQGraphicsEffect* self, const char* signal);
 bool QGraphicsEffect_protectedbase_isSignalConnected(const VirtualQGraphicsEffect* self, QMetaMethod* signal);
 
-const QMetaObject* QGraphicsEffect_staticMetaObject();
 void QGraphicsEffect_delete(QGraphicsEffect* self);
 
 typedef struct VirtualQGraphicsColorizeEffect VirtualQGraphicsColorizeEffect;
@@ -191,7 +190,6 @@ int QGraphicsColorizeEffect_protectedbase_senderSignalIndex(const VirtualQGraphi
 int QGraphicsColorizeEffect_protectedbase_receivers(const VirtualQGraphicsColorizeEffect* self, const char* signal);
 bool QGraphicsColorizeEffect_protectedbase_isSignalConnected(const VirtualQGraphicsColorizeEffect* self, QMetaMethod* signal);
 
-const QMetaObject* QGraphicsColorizeEffect_staticMetaObject();
 void QGraphicsColorizeEffect_delete(QGraphicsColorizeEffect* self);
 
 typedef struct VirtualQGraphicsBlurEffect VirtualQGraphicsBlurEffect;
@@ -260,7 +258,6 @@ int QGraphicsBlurEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsBl
 int QGraphicsBlurEffect_protectedbase_receivers(const VirtualQGraphicsBlurEffect* self, const char* signal);
 bool QGraphicsBlurEffect_protectedbase_isSignalConnected(const VirtualQGraphicsBlurEffect* self, QMetaMethod* signal);
 
-const QMetaObject* QGraphicsBlurEffect_staticMetaObject();
 void QGraphicsBlurEffect_delete(QGraphicsBlurEffect* self);
 
 typedef struct VirtualQGraphicsDropShadowEffect VirtualQGraphicsDropShadowEffect;
@@ -339,7 +336,6 @@ int QGraphicsDropShadowEffect_protectedbase_senderSignalIndex(const VirtualQGrap
 int QGraphicsDropShadowEffect_protectedbase_receivers(const VirtualQGraphicsDropShadowEffect* self, const char* signal);
 bool QGraphicsDropShadowEffect_protectedbase_isSignalConnected(const VirtualQGraphicsDropShadowEffect* self, QMetaMethod* signal);
 
-const QMetaObject* QGraphicsDropShadowEffect_staticMetaObject();
 void QGraphicsDropShadowEffect_delete(QGraphicsDropShadowEffect* self);
 
 typedef struct VirtualQGraphicsOpacityEffect VirtualQGraphicsOpacityEffect;
@@ -407,7 +403,6 @@ int QGraphicsOpacityEffect_protectedbase_senderSignalIndex(const VirtualQGraphic
 int QGraphicsOpacityEffect_protectedbase_receivers(const VirtualQGraphicsOpacityEffect* self, const char* signal);
 bool QGraphicsOpacityEffect_protectedbase_isSignalConnected(const VirtualQGraphicsOpacityEffect* self, QMetaMethod* signal);
 
-const QMetaObject* QGraphicsOpacityEffect_staticMetaObject();
 void QGraphicsOpacityEffect_delete(QGraphicsOpacityEffect* self);
 
 #ifdef __cplusplus

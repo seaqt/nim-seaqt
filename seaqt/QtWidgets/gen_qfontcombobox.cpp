@@ -850,17 +850,12 @@ void QFontComboBox_currentFontChanged(QFontComboBox* self, QFont* f) {
 }
 
 void QFontComboBox_connect_currentFontChanged(QFontComboBox* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QFont*);
-		void operator()(const QFont& f) {
+	QFontComboBox::connect(self, static_cast<void (QFontComboBox::*)(const QFont&)>(&QFontComboBox::currentFontChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QFont& f) {
 			const QFont& f_ret = f;
 			// Cast returned reference into pointer
 			QFont* sigval1 = const_cast<QFont*>(&f_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QFontComboBox::connect(self, static_cast<void (QFontComboBox::*)(const QFont&)>(&QFontComboBox::currentFontChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QFontComboBox_tr_s_c(const char* s, const char* c) {

@@ -65,6 +65,8 @@ proc fcQAbstractState_activeChanged(self: pointer, active: bool): void {.importc
 proc fcQAbstractState_connect_activeChanged(self: pointer, slot: int, callback: proc (slot: int, active: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractState_connect_activeChanged".}
 proc fcQAbstractState_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractState_tr_s_c".}
 proc fcQAbstractState_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractState_tr_s_c_n".}
+proc fcQAbstractState_connect_entered(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractState_connect_entered".}
+proc fcQAbstractState_connect_exited(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractState_connect_exited".}
 proc fcQAbstractState_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractState_protectedbase_sender".}
 proc fcQAbstractState_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractState_protectedbase_senderSignalIndex".}
 proc fcQAbstractState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractState_protectedbase_receivers".}
@@ -126,6 +128,36 @@ proc tr*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cstring
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QAbstractStateenteredSlot* = proc()
+proc fcQAbstractState_slot_callback_entered(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractStateenteredSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQAbstractState_slot_callback_entered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractStateenteredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onEntered*(self: gen_qabstractstate_types.QAbstractState, slot: QAbstractStateenteredSlot) =
+  var tmp = new QAbstractStateenteredSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractState_connect_entered(self.h, cast[int](addr tmp[]), fcQAbstractState_slot_callback_entered, fcQAbstractState_slot_callback_entered_release)
+
+type QAbstractStateexitedSlot* = proc()
+proc fcQAbstractState_slot_callback_exited(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractStateexitedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQAbstractState_slot_callback_exited_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractStateexitedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onExited*(self: gen_qabstractstate_types.QAbstractState, slot: QAbstractStateexitedSlot) =
+  var tmp = new QAbstractStateexitedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractState_connect_exited(self.h, cast[int](addr tmp[]), fcQAbstractState_slot_callback_exited, fcQAbstractState_slot_callback_exited_release)
 
 proc sender*(self: gen_qabstractstate_types.QAbstractState): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractState_protectedbase_sender(self.h), owned: false)

@@ -35,7 +35,6 @@ struct seaqt_string QQmlScriptString_stringLiteral(const QQmlScriptString* self)
 double QQmlScriptString_numberLiteral(const QQmlScriptString* self, bool* ok);
 bool QQmlScriptString_booleanLiteral(const QQmlScriptString* self, bool* ok);
 
-const QMetaObject* QQmlScriptString_staticMetaObject();
 void QQmlScriptString_delete(QQmlScriptString* self);
 
 #ifdef __cplusplus

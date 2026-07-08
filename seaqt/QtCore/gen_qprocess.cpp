@@ -852,15 +852,10 @@ void QProcess_finished_exitCode(QProcess* self, int exitCode) {
 }
 
 void QProcess_connect_finished_exitCode(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int exitCode) {
+	QProcess::connect(self, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), self, [callback, release = seaqt::release_callback{slot,release}](int exitCode) {
 			int sigval1 = exitCode;
-			callback(slot, sigval1);
-		}
-	};
-	QProcess::connect(self, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QProcess_errorOccurred(QProcess* self, int error) {
@@ -868,16 +863,11 @@ void QProcess_errorOccurred(QProcess* self, int error) {
 }
 
 void QProcess_connect_errorOccurred(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QProcess::ProcessError error) {
+	QProcess::connect(self, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::errorOccurred), self, [callback, release = seaqt::release_callback{slot,release}](QProcess::ProcessError error) {
 			QProcess::ProcessError error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QProcess::connect(self, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::errorOccurred), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QProcess_tr_s_c(const char* s, const char* c) {
@@ -1012,17 +1002,38 @@ void QProcess_finished_exitCode_exitStatus(QProcess* self, int exitCode, int exi
 }
 
 void QProcess_connect_finished_exitCode_exitStatus(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int);
-		void operator()(int exitCode, QProcess::ExitStatus exitStatus) {
+	QProcess::connect(self, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), self, [callback, release = seaqt::release_callback{slot,release}](int exitCode, QProcess::ExitStatus exitStatus) {
 			int sigval1 = exitCode;
 			QProcess::ExitStatus exitStatus_ret = exitStatus;
 			int sigval2 = static_cast<int>(exitStatus_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QProcess::connect(self, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QProcess_connect_started(QProcess* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QProcess::connect(self, &QProcess::started, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QProcess_connect_stateChanged(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QProcess::connect(self, &QProcess::stateChanged, self, [callback, release = seaqt::release_callback{slot,release}](QProcess::ProcessState state, auto) {
+			QProcess::ProcessState state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QProcess_connect_readyReadStandardOutput(QProcess* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QProcess::connect(self, &QProcess::readyReadStandardOutput, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QProcess_connect_readyReadStandardError(QProcess* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QProcess::connect(self, &QProcess::readyReadStandardError, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
 }
 
 const QMetaObject* QProcess_staticMetaObject() { return &QProcess::staticMetaObject; }

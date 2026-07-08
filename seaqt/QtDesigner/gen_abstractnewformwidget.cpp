@@ -56,14 +56,9 @@ void QDesignerNewFormWidgetInterface_templateActivated(QDesignerNewFormWidgetInt
 }
 
 void QDesignerNewFormWidgetInterface_connect_templateActivated(QDesignerNewFormWidgetInterface* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QDesignerNewFormWidgetInterface::connect(self, static_cast<void (QDesignerNewFormWidgetInterface::*)()>(&QDesignerNewFormWidgetInterface::templateActivated), self, local_caller{slot, callback, release});
+	QDesignerNewFormWidgetInterface::connect(self, static_cast<void (QDesignerNewFormWidgetInterface::*)()>(&QDesignerNewFormWidgetInterface::templateActivated), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QDesignerNewFormWidgetInterface_currentTemplateChanged(QDesignerNewFormWidgetInterface* self, bool templateSelected) {
@@ -71,15 +66,10 @@ void QDesignerNewFormWidgetInterface_currentTemplateChanged(QDesignerNewFormWidg
 }
 
 void QDesignerNewFormWidgetInterface_connect_currentTemplateChanged(QDesignerNewFormWidgetInterface* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool templateSelected) {
+	QDesignerNewFormWidgetInterface::connect(self, static_cast<void (QDesignerNewFormWidgetInterface::*)(bool)>(&QDesignerNewFormWidgetInterface::currentTemplateChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool templateSelected) {
 			bool sigval1 = templateSelected;
-			callback(slot, sigval1);
-		}
-	};
-	QDesignerNewFormWidgetInterface::connect(self, static_cast<void (QDesignerNewFormWidgetInterface::*)(bool)>(&QDesignerNewFormWidgetInterface::currentTemplateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QDesignerNewFormWidgetInterface_tr_s_c(const char* s, const char* c) {

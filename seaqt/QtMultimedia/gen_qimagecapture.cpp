@@ -329,14 +329,9 @@ void QImageCapture_errorChanged(QImageCapture* self) {
 }
 
 void QImageCapture_connect_errorChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::errorChanged), self, local_caller{slot, callback, release});
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::errorChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QImageCapture_errorOccurred(QImageCapture* self, int id, int error, struct seaqt_string errorString) {
@@ -345,10 +340,7 @@ void QImageCapture_errorOccurred(QImageCapture* self, int id, int error, struct 
 }
 
 void QImageCapture_connect_errorOccurred(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int, struct seaqt_string);
-		void operator()(int id, QImageCapture::Error error, const QString& errorString) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, QImageCapture::Error, const QString&)>(&QImageCapture::errorOccurred), self, [callback, release = seaqt::release_callback{slot,release}](int id, QImageCapture::Error error, const QString& errorString) {
 			int sigval1 = id;
 			QImageCapture::Error error_ret = error;
 			int sigval2 = static_cast<int>(error_ret);
@@ -360,10 +352,8 @@ void QImageCapture_connect_errorOccurred(QImageCapture* self, intptr_t slot, voi
 			errorString_ms.data = static_cast<char*>(malloc(errorString_ms.len));
 			memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
 			struct seaqt_string sigval3 = errorString_ms;
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, QImageCapture::Error, const QString&)>(&QImageCapture::errorOccurred), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 void QImageCapture_readyForCaptureChanged(QImageCapture* self, bool ready) {
@@ -371,15 +361,10 @@ void QImageCapture_readyForCaptureChanged(QImageCapture* self, bool ready) {
 }
 
 void QImageCapture_connect_readyForCaptureChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool ready) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(bool)>(&QImageCapture::readyForCaptureChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool ready) {
 			bool sigval1 = ready;
-			callback(slot, sigval1);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(bool)>(&QImageCapture::readyForCaptureChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QImageCapture_metaDataChanged(QImageCapture* self) {
@@ -387,14 +372,9 @@ void QImageCapture_metaDataChanged(QImageCapture* self) {
 }
 
 void QImageCapture_connect_metaDataChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::metaDataChanged), self, local_caller{slot, callback, release});
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::metaDataChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QImageCapture_fileFormatChanged(QImageCapture* self) {
@@ -402,14 +382,9 @@ void QImageCapture_fileFormatChanged(QImageCapture* self) {
 }
 
 void QImageCapture_connect_fileFormatChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::fileFormatChanged), self, local_caller{slot, callback, release});
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::fileFormatChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QImageCapture_qualityChanged(QImageCapture* self) {
@@ -417,14 +392,9 @@ void QImageCapture_qualityChanged(QImageCapture* self) {
 }
 
 void QImageCapture_connect_qualityChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::qualityChanged), self, local_caller{slot, callback, release});
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::qualityChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QImageCapture_resolutionChanged(QImageCapture* self) {
@@ -432,14 +402,9 @@ void QImageCapture_resolutionChanged(QImageCapture* self) {
 }
 
 void QImageCapture_connect_resolutionChanged(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::resolutionChanged), self, local_caller{slot, callback, release});
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::resolutionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QImageCapture_imageExposed(QImageCapture* self, int id) {
@@ -447,15 +412,10 @@ void QImageCapture_imageExposed(QImageCapture* self, int id) {
 }
 
 void QImageCapture_connect_imageExposed(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int id) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int)>(&QImageCapture::imageExposed), self, [callback, release = seaqt::release_callback{slot,release}](int id) {
 			int sigval1 = id;
-			callback(slot, sigval1);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int)>(&QImageCapture::imageExposed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QImageCapture_imageCaptured(QImageCapture* self, int id, QImage* preview) {
@@ -463,18 +423,13 @@ void QImageCapture_imageCaptured(QImageCapture* self, int id, QImage* preview) {
 }
 
 void QImageCapture_connect_imageCaptured(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, QImage*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, QImage*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, QImage*);
-		void operator()(int id, const QImage& preview) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QImage&)>(&QImageCapture::imageCaptured), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QImage& preview) {
 			int sigval1 = id;
 			const QImage& preview_ret = preview;
 			// Cast returned reference into pointer
 			QImage* sigval2 = const_cast<QImage*>(&preview_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QImage&)>(&QImageCapture::imageCaptured), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QImageCapture_imageMetadataAvailable(QImageCapture* self, int id, QMediaMetaData* metaData) {
@@ -482,18 +437,13 @@ void QImageCapture_imageMetadataAvailable(QImageCapture* self, int id, QMediaMet
 }
 
 void QImageCapture_connect_imageMetadataAvailable(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, QMediaMetaData*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, QMediaMetaData*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, QMediaMetaData*);
-		void operator()(int id, const QMediaMetaData& metaData) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QMediaMetaData&)>(&QImageCapture::imageMetadataAvailable), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QMediaMetaData& metaData) {
 			int sigval1 = id;
 			const QMediaMetaData& metaData_ret = metaData;
 			// Cast returned reference into pointer
 			QMediaMetaData* sigval2 = const_cast<QMediaMetaData*>(&metaData_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QMediaMetaData&)>(&QImageCapture::imageMetadataAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QImageCapture_imageAvailable(QImageCapture* self, int id, QVideoFrame* frame) {
@@ -501,18 +451,13 @@ void QImageCapture_imageAvailable(QImageCapture* self, int id, QVideoFrame* fram
 }
 
 void QImageCapture_connect_imageAvailable(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, QVideoFrame*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, QVideoFrame*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, QVideoFrame*);
-		void operator()(int id, const QVideoFrame& frame) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QVideoFrame&)>(&QImageCapture::imageAvailable), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QVideoFrame& frame) {
 			int sigval1 = id;
 			const QVideoFrame& frame_ret = frame;
 			// Cast returned reference into pointer
 			QVideoFrame* sigval2 = const_cast<QVideoFrame*>(&frame_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QVideoFrame&)>(&QImageCapture::imageAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QImageCapture_imageSaved(QImageCapture* self, int id, struct seaqt_string fileName) {
@@ -521,10 +466,7 @@ void QImageCapture_imageSaved(QImageCapture* self, int id, struct seaqt_string f
 }
 
 void QImageCapture_connect_imageSaved(QImageCapture* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, struct seaqt_string);
-		void operator()(int id, const QString& fileName) {
+	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QString&)>(&QImageCapture::imageSaved), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QString& fileName) {
 			int sigval1 = id;
 			const QString fileName_ret = fileName;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -534,10 +476,8 @@ void QImageCapture_connect_imageSaved(QImageCapture* self, intptr_t slot, void (
 			fileName_ms.data = static_cast<char*>(malloc(fileName_ms.len));
 			memcpy(fileName_ms.data, fileName_b.data(), fileName_ms.len);
 			struct seaqt_string sigval2 = fileName_ms;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QString&)>(&QImageCapture::imageSaved), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QImageCapture_tr_s_c(const char* s, const char* c) {

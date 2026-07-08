@@ -58,7 +58,6 @@ struct seaqt_string QGeoPath_toString(const QGeoPath* self);
 double QGeoPath_length_indexFrom(const QGeoPath* self, ptrdiff_t indexFrom);
 double QGeoPath_length_indexFrom_indexTo(const QGeoPath* self, ptrdiff_t indexFrom, ptrdiff_t indexTo);
 
-const QMetaObject* QGeoPath_staticMetaObject();
 void QGeoPath_delete(QGeoPath* self);
 
 #ifdef __cplusplus

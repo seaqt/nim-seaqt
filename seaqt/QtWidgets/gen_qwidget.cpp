@@ -1910,10 +1910,7 @@ void QWidget_windowTitleChanged(QWidget* self, struct seaqt_string title) {
 }
 
 void QWidget_connect_windowTitleChanged(QWidget* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& title) {
+	QWidget::connect(self, static_cast<void (QWidget::*)(const QString&)>(&QWidget::windowTitleChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& title) {
 			const QString title_ret = title;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray title_b = title_ret.toUtf8();
@@ -1922,10 +1919,8 @@ void QWidget_connect_windowTitleChanged(QWidget* self, intptr_t slot, void (*cal
 			title_ms.data = static_cast<char*>(malloc(title_ms.len));
 			memcpy(title_ms.data, title_b.data(), title_ms.len);
 			struct seaqt_string sigval1 = title_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QWidget::connect(self, static_cast<void (QWidget::*)(const QString&)>(&QWidget::windowTitleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWidget_windowIconChanged(QWidget* self, QIcon* icon) {
@@ -1933,17 +1928,12 @@ void QWidget_windowIconChanged(QWidget* self, QIcon* icon) {
 }
 
 void QWidget_connect_windowIconChanged(QWidget* self, intptr_t slot, void (*callback)(intptr_t, QIcon*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QIcon*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QIcon*);
-		void operator()(const QIcon& icon) {
+	QWidget::connect(self, static_cast<void (QWidget::*)(const QIcon&)>(&QWidget::windowIconChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QIcon& icon) {
 			const QIcon& icon_ret = icon;
 			// Cast returned reference into pointer
 			QIcon* sigval1 = const_cast<QIcon*>(&icon_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWidget::connect(self, static_cast<void (QWidget::*)(const QIcon&)>(&QWidget::windowIconChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWidget_windowIconTextChanged(QWidget* self, struct seaqt_string iconText) {
@@ -1952,10 +1942,7 @@ void QWidget_windowIconTextChanged(QWidget* self, struct seaqt_string iconText) 
 }
 
 void QWidget_connect_windowIconTextChanged(QWidget* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& iconText) {
+	QWidget::connect(self, static_cast<void (QWidget::*)(const QString&)>(&QWidget::windowIconTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& iconText) {
 			const QString iconText_ret = iconText;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray iconText_b = iconText_ret.toUtf8();
@@ -1964,10 +1951,8 @@ void QWidget_connect_windowIconTextChanged(QWidget* self, intptr_t slot, void (*
 			iconText_ms.data = static_cast<char*>(malloc(iconText_ms.len));
 			memcpy(iconText_ms.data, iconText_b.data(), iconText_ms.len);
 			struct seaqt_string sigval1 = iconText_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QWidget::connect(self, static_cast<void (QWidget::*)(const QString&)>(&QWidget::windowIconTextChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWidget_customContextMenuRequested(QWidget* self, QPoint* pos) {
@@ -1975,17 +1960,12 @@ void QWidget_customContextMenuRequested(QWidget* self, QPoint* pos) {
 }
 
 void QWidget_connect_customContextMenuRequested(QWidget* self, intptr_t slot, void (*callback)(intptr_t, QPoint*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPoint*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPoint*);
-		void operator()(const QPoint& pos) {
+	QWidget::connect(self, static_cast<void (QWidget::*)(const QPoint&)>(&QWidget::customContextMenuRequested), self, [callback, release = seaqt::release_callback{slot,release}](const QPoint& pos) {
 			const QPoint& pos_ret = pos;
 			// Cast returned reference into pointer
 			QPoint* sigval1 = const_cast<QPoint*>(&pos_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWidget::connect(self, static_cast<void (QWidget::*)(const QPoint&)>(&QWidget::customContextMenuRequested), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 QVariant* QWidget_inputMethodQuery(const QWidget* self, int param1) {

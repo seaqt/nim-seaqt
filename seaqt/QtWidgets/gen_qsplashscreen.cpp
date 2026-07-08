@@ -807,10 +807,7 @@ void QSplashScreen_messageChanged(QSplashScreen* self, struct seaqt_string messa
 }
 
 void QSplashScreen_connect_messageChanged(QSplashScreen* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& message) {
+	QSplashScreen::connect(self, static_cast<void (QSplashScreen::*)(const QString&)>(&QSplashScreen::messageChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& message) {
 			const QString message_ret = message;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray message_b = message_ret.toUtf8();
@@ -819,10 +816,8 @@ void QSplashScreen_connect_messageChanged(QSplashScreen* self, intptr_t slot, vo
 			message_ms.data = static_cast<char*>(malloc(message_ms.len));
 			memcpy(message_ms.data, message_b.data(), message_ms.len);
 			struct seaqt_string sigval1 = message_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QSplashScreen::connect(self, static_cast<void (QSplashScreen::*)(const QString&)>(&QSplashScreen::messageChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QSplashScreen_tr_s_c(const char* s, const char* c) {

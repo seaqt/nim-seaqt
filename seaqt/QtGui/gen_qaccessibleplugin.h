@@ -82,7 +82,6 @@ int QAccessiblePlugin_protectedbase_senderSignalIndex(const VirtualQAccessiblePl
 int QAccessiblePlugin_protectedbase_receivers(const VirtualQAccessiblePlugin* self, const char* signal);
 bool QAccessiblePlugin_protectedbase_isSignalConnected(const VirtualQAccessiblePlugin* self, QMetaMethod* signal);
 
-const QMetaObject* QAccessiblePlugin_staticMetaObject();
 void QAccessiblePlugin_delete(QAccessiblePlugin* self);
 
 #ifdef __cplusplus

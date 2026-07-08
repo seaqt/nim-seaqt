@@ -224,7 +224,6 @@ int QDesignerResourceBrowserInterface_protectedbase_senderSignalIndex(const Virt
 int QDesignerResourceBrowserInterface_protectedbase_receivers(const VirtualQDesignerResourceBrowserInterface* self, const char* signal);
 bool QDesignerResourceBrowserInterface_protectedbase_isSignalConnected(const VirtualQDesignerResourceBrowserInterface* self, QMetaMethod* signal);
 
-const QMetaObject* QDesignerResourceBrowserInterface_staticMetaObject();
 void QDesignerResourceBrowserInterface_delete(QDesignerResourceBrowserInterface* self);
 
 #ifdef __cplusplus

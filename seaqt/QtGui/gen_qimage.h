@@ -230,7 +230,6 @@ QImage* QImage_protectedbase_smoothScaled(const VirtualQImage* self, int w, int 
 void QImage_protectedbase_detachMetadata(VirtualQImage* self);
 void QImage_protectedbase_detachMetadata_invalidateCache(VirtualQImage* self, bool invalidateCache);
 
-const QMetaObject* QImage_staticMetaObject();
 void QImage_delete(QImage* self);
 
 #ifdef __cplusplus

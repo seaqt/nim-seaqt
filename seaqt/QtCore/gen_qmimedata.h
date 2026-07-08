@@ -110,7 +110,6 @@ int QMimeData_protectedbase_senderSignalIndex(const VirtualQMimeData* self);
 int QMimeData_protectedbase_receivers(const VirtualQMimeData* self, const char* signal);
 bool QMimeData_protectedbase_isSignalConnected(const VirtualQMimeData* self, QMetaMethod* signal);
 
-const QMetaObject* QMimeData_staticMetaObject();
 void QMimeData_delete(QMimeData* self);
 
 #ifdef __cplusplus

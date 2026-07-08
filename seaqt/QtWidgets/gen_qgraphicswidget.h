@@ -352,7 +352,6 @@ void QGraphicsWidget_protectedbase_prepareGeometryChange(VirtualQGraphicsWidget*
 void QGraphicsWidget_protectedbase_setGraphicsItem(VirtualQGraphicsWidget* self, QGraphicsItem* item);
 void QGraphicsWidget_protectedbase_setOwnedByLayout(VirtualQGraphicsWidget* self, bool ownedByLayout);
 
-const QMetaObject* QGraphicsWidget_staticMetaObject();
 void QGraphicsWidget_delete(QGraphicsWidget* self);
 
 #ifdef __cplusplus

@@ -753,15 +753,10 @@ void QVideoWidget_fullScreenChanged(QVideoWidget* self, bool fullScreen) {
 }
 
 void QVideoWidget_connect_fullScreenChanged(QVideoWidget* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool fullScreen) {
+	QVideoWidget::connect(self, static_cast<void (QVideoWidget::*)(bool)>(&QVideoWidget::fullScreenChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool fullScreen) {
 			bool sigval1 = fullScreen;
-			callback(slot, sigval1);
-		}
-	};
-	QVideoWidget::connect(self, static_cast<void (QVideoWidget::*)(bool)>(&QVideoWidget::fullScreenChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QVideoWidget_aspectRatioModeChanged(QVideoWidget* self, int mode) {
@@ -769,16 +764,11 @@ void QVideoWidget_aspectRatioModeChanged(QVideoWidget* self, int mode) {
 }
 
 void QVideoWidget_connect_aspectRatioModeChanged(QVideoWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::AspectRatioMode mode) {
+	QVideoWidget::connect(self, static_cast<void (QVideoWidget::*)(Qt::AspectRatioMode)>(&QVideoWidget::aspectRatioModeChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::AspectRatioMode mode) {
 			Qt::AspectRatioMode mode_ret = mode;
 			int sigval1 = static_cast<int>(mode_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QVideoWidget::connect(self, static_cast<void (QVideoWidget::*)(Qt::AspectRatioMode)>(&QVideoWidget::aspectRatioModeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QVideoWidget_tr_s_c(const char* s, const char* c) {

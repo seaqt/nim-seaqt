@@ -122,7 +122,6 @@ int QPdfDocument_protectedbase_senderSignalIndex(const VirtualQPdfDocument* self
 int QPdfDocument_protectedbase_receivers(const VirtualQPdfDocument* self, const char* signal);
 bool QPdfDocument_protectedbase_isSignalConnected(const VirtualQPdfDocument* self, QMetaMethod* signal);
 
-const QMetaObject* QPdfDocument_staticMetaObject();
 void QPdfDocument_delete(QPdfDocument* self);
 
 #ifdef __cplusplus

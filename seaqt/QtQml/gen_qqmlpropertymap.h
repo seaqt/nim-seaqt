@@ -96,7 +96,6 @@ int QQmlPropertyMap_protectedbase_senderSignalIndex(const VirtualQQmlPropertyMap
 int QQmlPropertyMap_protectedbase_receivers(const VirtualQQmlPropertyMap* self, const char* signal);
 bool QQmlPropertyMap_protectedbase_isSignalConnected(const VirtualQQmlPropertyMap* self, QMetaMethod* signal);
 
-const QMetaObject* QQmlPropertyMap_staticMetaObject();
 void QQmlPropertyMap_delete(QQmlPropertyMap* self);
 
 #ifdef __cplusplus

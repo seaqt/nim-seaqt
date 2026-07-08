@@ -244,7 +244,6 @@ int QCheckBox_protectedbase_senderSignalIndex(const VirtualQCheckBox* self);
 int QCheckBox_protectedbase_receivers(const VirtualQCheckBox* self, const char* signal);
 bool QCheckBox_protectedbase_isSignalConnected(const VirtualQCheckBox* self, QMetaMethod* signal);
 
-const QMetaObject* QCheckBox_staticMetaObject();
 void QCheckBox_delete(QCheckBox* self);
 
 #ifdef __cplusplus

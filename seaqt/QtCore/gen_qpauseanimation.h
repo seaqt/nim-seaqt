@@ -93,7 +93,6 @@ int QPauseAnimation_protectedbase_senderSignalIndex(const VirtualQPauseAnimation
 int QPauseAnimation_protectedbase_receivers(const VirtualQPauseAnimation* self, const char* signal);
 bool QPauseAnimation_protectedbase_isSignalConnected(const VirtualQPauseAnimation* self, QMetaMethod* signal);
 
-const QMetaObject* QPauseAnimation_staticMetaObject();
 void QPauseAnimation_delete(QPauseAnimation* self);
 
 #ifdef __cplusplus
