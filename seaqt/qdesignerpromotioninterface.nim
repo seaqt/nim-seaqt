@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractpromotioninterface
+export gen_abstractpromotioninterface

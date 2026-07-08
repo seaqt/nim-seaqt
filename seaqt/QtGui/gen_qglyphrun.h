@@ -1,0 +1,70 @@
+#pragma once
+#ifndef SEAQT_QTGUI_GEN_QGLYPHRUN_H
+#define SEAQT_QTGUI_GEN_QGLYPHRUN_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QGlyphRun;
+class QPointF;
+class QRawFont;
+class QRectF;
+#else
+typedef struct QGlyphRun QGlyphRun;
+typedef struct QPointF QPointF;
+typedef struct QRawFont QRawFont;
+typedef struct QRectF QRectF;
+#endif
+
+QGlyphRun* QGlyphRun_new();
+QGlyphRun* QGlyphRun_new_from(QGlyphRun* from);
+
+void QGlyphRun_operatorAssign(QGlyphRun* self, QGlyphRun* from);
+void QGlyphRun_swap(QGlyphRun* self, QGlyphRun* other);
+QRawFont* QGlyphRun_rawFont(const QGlyphRun* self);
+void QGlyphRun_setRawFont(QGlyphRun* self, QRawFont* rawFont);
+void QGlyphRun_setRawData(QGlyphRun* self, const unsigned int* glyphIndexArray, QPointF* glyphPositionArray, int size);
+struct seaqt_array /* of unsigned int */  QGlyphRun_glyphIndexes(const QGlyphRun* self);
+void QGlyphRun_setGlyphIndexes(QGlyphRun* self, struct seaqt_array /* of unsigned int */  glyphIndexes);
+struct seaqt_array /* of QPointF* */  QGlyphRun_positions(const QGlyphRun* self);
+void QGlyphRun_setPositions(QGlyphRun* self, struct seaqt_array /* of QPointF* */  positions);
+void QGlyphRun_clear(QGlyphRun* self);
+bool QGlyphRun_operatorEqual(const QGlyphRun* self, QGlyphRun* other);
+bool QGlyphRun_operatorNotEqual(const QGlyphRun* self, QGlyphRun* other);
+void QGlyphRun_setOverline(QGlyphRun* self, bool overline);
+bool QGlyphRun_overline(const QGlyphRun* self);
+void QGlyphRun_setUnderline(QGlyphRun* self, bool underline);
+bool QGlyphRun_underline(const QGlyphRun* self);
+void QGlyphRun_setStrikeOut(QGlyphRun* self, bool strikeOut);
+bool QGlyphRun_strikeOut(const QGlyphRun* self);
+void QGlyphRun_setRightToLeft(QGlyphRun* self, bool on);
+bool QGlyphRun_isRightToLeft(const QGlyphRun* self);
+void QGlyphRun_setFlag_flag(QGlyphRun* self, int flag);
+void QGlyphRun_setFlags(QGlyphRun* self, int flags);
+int QGlyphRun_flags(const QGlyphRun* self);
+void QGlyphRun_setBoundingRect(QGlyphRun* self, QRectF* boundingRect);
+QRectF* QGlyphRun_boundingRect(const QGlyphRun* self);
+struct seaqt_array /* of ptrdiff_t */  QGlyphRun_stringIndexes(const QGlyphRun* self);
+void QGlyphRun_setStringIndexes(QGlyphRun* self, struct seaqt_array /* of ptrdiff_t */  stringIndexes);
+void QGlyphRun_setSourceString(QGlyphRun* self, struct seaqt_string sourceString);
+struct seaqt_string QGlyphRun_sourceString(const QGlyphRun* self);
+bool QGlyphRun_isEmpty(const QGlyphRun* self);
+void QGlyphRun_setFlag_flag_enabled(QGlyphRun* self, int flag, bool enabled);
+
+void QGlyphRun_delete(QGlyphRun* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

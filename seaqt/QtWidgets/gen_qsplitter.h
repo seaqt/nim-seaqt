@@ -1,0 +1,419 @@
+#pragma once
+#ifndef SEAQT_QTWIDGETS_GEN_QSPLITTER_H
+#define SEAQT_QTWIDGETS_GEN_QSPLITTER_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QActionEvent;
+class QChildEvent;
+class QCloseEvent;
+class QContextMenuEvent;
+class QDragEnterEvent;
+class QDragLeaveEvent;
+class QDragMoveEvent;
+class QDropEvent;
+class QEnterEvent;
+class QEvent;
+class QFocusEvent;
+class QFrame;
+class QHideEvent;
+class QInputMethodEvent;
+class QKeyEvent;
+class QMetaMethod;
+class QMetaObject;
+class QMouseEvent;
+class QMoveEvent;
+class QObject;
+class QPaintDevice;
+class QPaintEngine;
+class QPaintEvent;
+class QPainter;
+class QPoint;
+class QResizeEvent;
+class QShowEvent;
+class QSize;
+class QSplitter;
+class QSplitterHandle;
+class QStyleOptionFrame;
+class QTabletEvent;
+class QTimerEvent;
+class QVariant;
+class QWheelEvent;
+class QWidget;
+#else
+typedef struct QActionEvent QActionEvent;
+typedef struct QChildEvent QChildEvent;
+typedef struct QCloseEvent QCloseEvent;
+typedef struct QContextMenuEvent QContextMenuEvent;
+typedef struct QDragEnterEvent QDragEnterEvent;
+typedef struct QDragLeaveEvent QDragLeaveEvent;
+typedef struct QDragMoveEvent QDragMoveEvent;
+typedef struct QDropEvent QDropEvent;
+typedef struct QEnterEvent QEnterEvent;
+typedef struct QEvent QEvent;
+typedef struct QFocusEvent QFocusEvent;
+typedef struct QFrame QFrame;
+typedef struct QHideEvent QHideEvent;
+typedef struct QInputMethodEvent QInputMethodEvent;
+typedef struct QKeyEvent QKeyEvent;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QMouseEvent QMouseEvent;
+typedef struct QMoveEvent QMoveEvent;
+typedef struct QObject QObject;
+typedef struct QPaintDevice QPaintDevice;
+typedef struct QPaintEngine QPaintEngine;
+typedef struct QPaintEvent QPaintEvent;
+typedef struct QPainter QPainter;
+typedef struct QPoint QPoint;
+typedef struct QResizeEvent QResizeEvent;
+typedef struct QShowEvent QShowEvent;
+typedef struct QSize QSize;
+typedef struct QSplitter QSplitter;
+typedef struct QSplitterHandle QSplitterHandle;
+typedef struct QStyleOptionFrame QStyleOptionFrame;
+typedef struct QTabletEvent QTabletEvent;
+typedef struct QTimerEvent QTimerEvent;
+typedef struct QVariant QVariant;
+typedef struct QWheelEvent QWheelEvent;
+typedef struct QWidget QWidget;
+#endif
+
+typedef struct VirtualQSplitter VirtualQSplitter;
+typedef struct QSplitter_VTable{
+	void (*destructor)(VirtualQSplitter* self);
+	QMetaObject* (*metaObject)(const VirtualQSplitter* self);
+	void* (*metacast)(VirtualQSplitter* self, const char* param1);
+	int (*metacall)(VirtualQSplitter* self, int param1, int param2, void** param3);
+	QSize* (*sizeHint)(const VirtualQSplitter* self);
+	QSize* (*minimumSizeHint)(const VirtualQSplitter* self);
+	QSplitterHandle* (*createHandle)(VirtualQSplitter* self);
+	void (*childEvent)(VirtualQSplitter* self, QChildEvent* param1);
+	bool (*event)(VirtualQSplitter* self, QEvent* param1);
+	void (*resizeEvent)(VirtualQSplitter* self, QResizeEvent* param1);
+	void (*changeEvent)(VirtualQSplitter* self, QEvent* param1);
+	void (*paintEvent)(VirtualQSplitter* self, QPaintEvent* param1);
+	void (*initStyleOption)(const VirtualQSplitter* self, QStyleOptionFrame* option);
+	int (*devType)(const VirtualQSplitter* self);
+	void (*setVisible)(VirtualQSplitter* self, bool visible);
+	int (*heightForWidth)(const VirtualQSplitter* self, int param1);
+	bool (*hasHeightForWidth)(const VirtualQSplitter* self);
+	QPaintEngine* (*paintEngine)(const VirtualQSplitter* self);
+	void (*mousePressEvent)(VirtualQSplitter* self, QMouseEvent* event);
+	void (*mouseReleaseEvent)(VirtualQSplitter* self, QMouseEvent* event);
+	void (*mouseDoubleClickEvent)(VirtualQSplitter* self, QMouseEvent* event);
+	void (*mouseMoveEvent)(VirtualQSplitter* self, QMouseEvent* event);
+	void (*wheelEvent)(VirtualQSplitter* self, QWheelEvent* event);
+	void (*keyPressEvent)(VirtualQSplitter* self, QKeyEvent* event);
+	void (*keyReleaseEvent)(VirtualQSplitter* self, QKeyEvent* event);
+	void (*focusInEvent)(VirtualQSplitter* self, QFocusEvent* event);
+	void (*focusOutEvent)(VirtualQSplitter* self, QFocusEvent* event);
+	void (*enterEvent)(VirtualQSplitter* self, QEnterEvent* event);
+	void (*leaveEvent)(VirtualQSplitter* self, QEvent* event);
+	void (*moveEvent)(VirtualQSplitter* self, QMoveEvent* event);
+	void (*closeEvent)(VirtualQSplitter* self, QCloseEvent* event);
+	void (*contextMenuEvent)(VirtualQSplitter* self, QContextMenuEvent* event);
+	void (*tabletEvent)(VirtualQSplitter* self, QTabletEvent* event);
+	void (*actionEvent)(VirtualQSplitter* self, QActionEvent* event);
+	void (*dragEnterEvent)(VirtualQSplitter* self, QDragEnterEvent* event);
+	void (*dragMoveEvent)(VirtualQSplitter* self, QDragMoveEvent* event);
+	void (*dragLeaveEvent)(VirtualQSplitter* self, QDragLeaveEvent* event);
+	void (*dropEvent)(VirtualQSplitter* self, QDropEvent* event);
+	void (*showEvent)(VirtualQSplitter* self, QShowEvent* event);
+	void (*hideEvent)(VirtualQSplitter* self, QHideEvent* event);
+	bool (*nativeEvent)(VirtualQSplitter* self, struct seaqt_string eventType, void* message, intptr_t* result);
+	int (*metric)(const VirtualQSplitter* self, int param1);
+	void (*initPainter)(const VirtualQSplitter* self, QPainter* painter);
+	QPaintDevice* (*redirected)(const VirtualQSplitter* self, QPoint* offset);
+	QPainter* (*sharedPainter)(const VirtualQSplitter* self);
+	void (*inputMethodEvent)(VirtualQSplitter* self, QInputMethodEvent* param1);
+	QVariant* (*inputMethodQuery)(const VirtualQSplitter* self, int param1);
+	bool (*focusNextPrevChild)(VirtualQSplitter* self, bool next);
+	bool (*eventFilter)(VirtualQSplitter* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQSplitter* self, QTimerEvent* event);
+	void (*customEvent)(VirtualQSplitter* self, QEvent* event);
+	void (*connectNotify)(VirtualQSplitter* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQSplitter* self, QMetaMethod* signal);
+}QSplitter_VTable;
+
+void* QSplitter_vdata(VirtualQSplitter* self);
+VirtualQSplitter* vdata_QSplitter(void* vdata);
+
+VirtualQSplitter* QSplitter_new(const QSplitter_VTable* vtbl, size_t vdata);
+VirtualQSplitter* QSplitter_new_Qt_Orientation(const QSplitter_VTable* vtbl, size_t vdata, int param1);
+VirtualQSplitter* QSplitter_new_QWidget(const QSplitter_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQSplitter* QSplitter_new_Qt_Orientation_QWidget(const QSplitter_VTable* vtbl, size_t vdata, int param1, QWidget* parent);
+
+void QSplitter_virtbase(QSplitter* src, QFrame** outptr_QFrame);
+QMetaObject* QSplitter_metaObject(const QSplitter* self);
+void* QSplitter_metacast(QSplitter* self, const char* param1);
+int QSplitter_metacall(QSplitter* self, int param1, int param2, void** param3);
+struct seaqt_string QSplitter_tr_s(const char* s);
+void QSplitter_addWidget(QSplitter* self, QWidget* widget);
+void QSplitter_insertWidget(QSplitter* self, int index, QWidget* widget);
+QWidget* QSplitter_replaceWidget(QSplitter* self, int index, QWidget* widget);
+void QSplitter_setOrientation(QSplitter* self, int orientation);
+int QSplitter_orientation(const QSplitter* self);
+void QSplitter_setChildrenCollapsible(QSplitter* self, bool childrenCollapsible);
+bool QSplitter_childrenCollapsible(const QSplitter* self);
+void QSplitter_setCollapsible(QSplitter* self, int index, bool param2);
+bool QSplitter_isCollapsible(const QSplitter* self, int index);
+void QSplitter_setOpaqueResize(QSplitter* self);
+bool QSplitter_opaqueResize(const QSplitter* self);
+void QSplitter_refresh(QSplitter* self);
+QSize* QSplitter_sizeHint(const QSplitter* self);
+QSize* QSplitter_minimumSizeHint(const QSplitter* self);
+struct seaqt_array /* of int */  QSplitter_sizes(const QSplitter* self);
+void QSplitter_setSizes(QSplitter* self, struct seaqt_array /* of int */  list);
+struct seaqt_string QSplitter_saveState(const QSplitter* self);
+bool QSplitter_restoreState(QSplitter* self, struct seaqt_string state);
+int QSplitter_handleWidth(const QSplitter* self);
+void QSplitter_setHandleWidth(QSplitter* self, int handleWidth);
+int QSplitter_indexOf(const QSplitter* self, QWidget* w);
+QWidget* QSplitter_widget(const QSplitter* self, int index);
+int QSplitter_count(const QSplitter* self);
+void QSplitter_getRange(const QSplitter* self, int index, int* param2, int* param3);
+QSplitterHandle* QSplitter_handle(const QSplitter* self, int index);
+void QSplitter_setStretchFactor(QSplitter* self, int index, int stretch);
+void QSplitter_splitterMoved(QSplitter* self, int pos, int index);
+void QSplitter_connect_splitterMoved(QSplitter* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t));
+QSplitterHandle* QSplitter_createHandle(QSplitter* self);
+void QSplitter_childEvent(QSplitter* self, QChildEvent* param1);
+bool QSplitter_event(QSplitter* self, QEvent* param1);
+void QSplitter_resizeEvent(QSplitter* self, QResizeEvent* param1);
+void QSplitter_changeEvent(QSplitter* self, QEvent* param1);
+struct seaqt_string QSplitter_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSplitter_tr_s_c_n(const char* s, const char* c, int n);
+void QSplitter_setOpaqueResize_opaque(QSplitter* self, bool opaque);
+
+QMetaObject* QSplitter_virtualbase_metaObject(const VirtualQSplitter* self);
+void* QSplitter_virtualbase_metacast(VirtualQSplitter* self, const char* param1);
+int QSplitter_virtualbase_metacall(VirtualQSplitter* self, int param1, int param2, void** param3);
+QSize* QSplitter_virtualbase_sizeHint(const VirtualQSplitter* self);
+QSize* QSplitter_virtualbase_minimumSizeHint(const VirtualQSplitter* self);
+QSplitterHandle* QSplitter_virtualbase_createHandle(VirtualQSplitter* self);
+void QSplitter_virtualbase_childEvent(VirtualQSplitter* self, QChildEvent* param1);
+bool QSplitter_virtualbase_event(VirtualQSplitter* self, QEvent* param1);
+void QSplitter_virtualbase_resizeEvent(VirtualQSplitter* self, QResizeEvent* param1);
+void QSplitter_virtualbase_changeEvent(VirtualQSplitter* self, QEvent* param1);
+void QSplitter_virtualbase_paintEvent(VirtualQSplitter* self, QPaintEvent* param1);
+void QSplitter_virtualbase_initStyleOption(const VirtualQSplitter* self, QStyleOptionFrame* option);
+int QSplitter_virtualbase_devType(const VirtualQSplitter* self);
+void QSplitter_virtualbase_setVisible(VirtualQSplitter* self, bool visible);
+int QSplitter_virtualbase_heightForWidth(const VirtualQSplitter* self, int param1);
+bool QSplitter_virtualbase_hasHeightForWidth(const VirtualQSplitter* self);
+QPaintEngine* QSplitter_virtualbase_paintEngine(const VirtualQSplitter* self);
+void QSplitter_virtualbase_mousePressEvent(VirtualQSplitter* self, QMouseEvent* event);
+void QSplitter_virtualbase_mouseReleaseEvent(VirtualQSplitter* self, QMouseEvent* event);
+void QSplitter_virtualbase_mouseDoubleClickEvent(VirtualQSplitter* self, QMouseEvent* event);
+void QSplitter_virtualbase_mouseMoveEvent(VirtualQSplitter* self, QMouseEvent* event);
+void QSplitter_virtualbase_wheelEvent(VirtualQSplitter* self, QWheelEvent* event);
+void QSplitter_virtualbase_keyPressEvent(VirtualQSplitter* self, QKeyEvent* event);
+void QSplitter_virtualbase_keyReleaseEvent(VirtualQSplitter* self, QKeyEvent* event);
+void QSplitter_virtualbase_focusInEvent(VirtualQSplitter* self, QFocusEvent* event);
+void QSplitter_virtualbase_focusOutEvent(VirtualQSplitter* self, QFocusEvent* event);
+void QSplitter_virtualbase_enterEvent(VirtualQSplitter* self, QEnterEvent* event);
+void QSplitter_virtualbase_leaveEvent(VirtualQSplitter* self, QEvent* event);
+void QSplitter_virtualbase_moveEvent(VirtualQSplitter* self, QMoveEvent* event);
+void QSplitter_virtualbase_closeEvent(VirtualQSplitter* self, QCloseEvent* event);
+void QSplitter_virtualbase_contextMenuEvent(VirtualQSplitter* self, QContextMenuEvent* event);
+void QSplitter_virtualbase_tabletEvent(VirtualQSplitter* self, QTabletEvent* event);
+void QSplitter_virtualbase_actionEvent(VirtualQSplitter* self, QActionEvent* event);
+void QSplitter_virtualbase_dragEnterEvent(VirtualQSplitter* self, QDragEnterEvent* event);
+void QSplitter_virtualbase_dragMoveEvent(VirtualQSplitter* self, QDragMoveEvent* event);
+void QSplitter_virtualbase_dragLeaveEvent(VirtualQSplitter* self, QDragLeaveEvent* event);
+void QSplitter_virtualbase_dropEvent(VirtualQSplitter* self, QDropEvent* event);
+void QSplitter_virtualbase_showEvent(VirtualQSplitter* self, QShowEvent* event);
+void QSplitter_virtualbase_hideEvent(VirtualQSplitter* self, QHideEvent* event);
+bool QSplitter_virtualbase_nativeEvent(VirtualQSplitter* self, struct seaqt_string eventType, void* message, intptr_t* result);
+int QSplitter_virtualbase_metric(const VirtualQSplitter* self, int param1);
+void QSplitter_virtualbase_initPainter(const VirtualQSplitter* self, QPainter* painter);
+QPaintDevice* QSplitter_virtualbase_redirected(const VirtualQSplitter* self, QPoint* offset);
+QPainter* QSplitter_virtualbase_sharedPainter(const VirtualQSplitter* self);
+void QSplitter_virtualbase_inputMethodEvent(VirtualQSplitter* self, QInputMethodEvent* param1);
+QVariant* QSplitter_virtualbase_inputMethodQuery(const VirtualQSplitter* self, int param1);
+bool QSplitter_virtualbase_focusNextPrevChild(VirtualQSplitter* self, bool next);
+bool QSplitter_virtualbase_eventFilter(VirtualQSplitter* self, QObject* watched, QEvent* event);
+void QSplitter_virtualbase_timerEvent(VirtualQSplitter* self, QTimerEvent* event);
+void QSplitter_virtualbase_customEvent(VirtualQSplitter* self, QEvent* event);
+void QSplitter_virtualbase_connectNotify(VirtualQSplitter* self, QMetaMethod* signal);
+void QSplitter_virtualbase_disconnectNotify(VirtualQSplitter* self, QMetaMethod* signal);
+
+void QSplitter_protectedbase_moveSplitter(VirtualQSplitter* self, int pos, int index);
+void QSplitter_protectedbase_setRubberBand(VirtualQSplitter* self, int position);
+int QSplitter_protectedbase_closestLegalPosition(VirtualQSplitter* self, int param1, int param2);
+void QSplitter_protectedbase_drawFrame(VirtualQSplitter* self, QPainter* param1);
+void QSplitter_protectedbase_updateMicroFocus(VirtualQSplitter* self);
+void QSplitter_protectedbase_create(VirtualQSplitter* self);
+void QSplitter_protectedbase_destroy(VirtualQSplitter* self);
+bool QSplitter_protectedbase_focusNextChild(VirtualQSplitter* self);
+bool QSplitter_protectedbase_focusPreviousChild(VirtualQSplitter* self);
+QObject* QSplitter_protectedbase_sender(const VirtualQSplitter* self);
+int QSplitter_protectedbase_senderSignalIndex(const VirtualQSplitter* self);
+int QSplitter_protectedbase_receivers(const VirtualQSplitter* self, const char* signal);
+bool QSplitter_protectedbase_isSignalConnected(const VirtualQSplitter* self, QMetaMethod* signal);
+
+const QMetaObject* QSplitter_staticMetaObject();
+void QSplitter_delete(QSplitter* self);
+
+typedef struct VirtualQSplitterHandle VirtualQSplitterHandle;
+typedef struct QSplitterHandle_VTable{
+	void (*destructor)(VirtualQSplitterHandle* self);
+	QMetaObject* (*metaObject)(const VirtualQSplitterHandle* self);
+	void* (*metacast)(VirtualQSplitterHandle* self, const char* param1);
+	int (*metacall)(VirtualQSplitterHandle* self, int param1, int param2, void** param3);
+	QSize* (*sizeHint)(const VirtualQSplitterHandle* self);
+	void (*paintEvent)(VirtualQSplitterHandle* self, QPaintEvent* param1);
+	void (*mouseMoveEvent)(VirtualQSplitterHandle* self, QMouseEvent* param1);
+	void (*mousePressEvent)(VirtualQSplitterHandle* self, QMouseEvent* param1);
+	void (*mouseReleaseEvent)(VirtualQSplitterHandle* self, QMouseEvent* param1);
+	void (*resizeEvent)(VirtualQSplitterHandle* self, QResizeEvent* param1);
+	bool (*event)(VirtualQSplitterHandle* self, QEvent* param1);
+	int (*devType)(const VirtualQSplitterHandle* self);
+	void (*setVisible)(VirtualQSplitterHandle* self, bool visible);
+	QSize* (*minimumSizeHint)(const VirtualQSplitterHandle* self);
+	int (*heightForWidth)(const VirtualQSplitterHandle* self, int param1);
+	bool (*hasHeightForWidth)(const VirtualQSplitterHandle* self);
+	QPaintEngine* (*paintEngine)(const VirtualQSplitterHandle* self);
+	void (*mouseDoubleClickEvent)(VirtualQSplitterHandle* self, QMouseEvent* event);
+	void (*wheelEvent)(VirtualQSplitterHandle* self, QWheelEvent* event);
+	void (*keyPressEvent)(VirtualQSplitterHandle* self, QKeyEvent* event);
+	void (*keyReleaseEvent)(VirtualQSplitterHandle* self, QKeyEvent* event);
+	void (*focusInEvent)(VirtualQSplitterHandle* self, QFocusEvent* event);
+	void (*focusOutEvent)(VirtualQSplitterHandle* self, QFocusEvent* event);
+	void (*enterEvent)(VirtualQSplitterHandle* self, QEnterEvent* event);
+	void (*leaveEvent)(VirtualQSplitterHandle* self, QEvent* event);
+	void (*moveEvent)(VirtualQSplitterHandle* self, QMoveEvent* event);
+	void (*closeEvent)(VirtualQSplitterHandle* self, QCloseEvent* event);
+	void (*contextMenuEvent)(VirtualQSplitterHandle* self, QContextMenuEvent* event);
+	void (*tabletEvent)(VirtualQSplitterHandle* self, QTabletEvent* event);
+	void (*actionEvent)(VirtualQSplitterHandle* self, QActionEvent* event);
+	void (*dragEnterEvent)(VirtualQSplitterHandle* self, QDragEnterEvent* event);
+	void (*dragMoveEvent)(VirtualQSplitterHandle* self, QDragMoveEvent* event);
+	void (*dragLeaveEvent)(VirtualQSplitterHandle* self, QDragLeaveEvent* event);
+	void (*dropEvent)(VirtualQSplitterHandle* self, QDropEvent* event);
+	void (*showEvent)(VirtualQSplitterHandle* self, QShowEvent* event);
+	void (*hideEvent)(VirtualQSplitterHandle* self, QHideEvent* event);
+	bool (*nativeEvent)(VirtualQSplitterHandle* self, struct seaqt_string eventType, void* message, intptr_t* result);
+	void (*changeEvent)(VirtualQSplitterHandle* self, QEvent* param1);
+	int (*metric)(const VirtualQSplitterHandle* self, int param1);
+	void (*initPainter)(const VirtualQSplitterHandle* self, QPainter* painter);
+	QPaintDevice* (*redirected)(const VirtualQSplitterHandle* self, QPoint* offset);
+	QPainter* (*sharedPainter)(const VirtualQSplitterHandle* self);
+	void (*inputMethodEvent)(VirtualQSplitterHandle* self, QInputMethodEvent* param1);
+	QVariant* (*inputMethodQuery)(const VirtualQSplitterHandle* self, int param1);
+	bool (*focusNextPrevChild)(VirtualQSplitterHandle* self, bool next);
+	bool (*eventFilter)(VirtualQSplitterHandle* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQSplitterHandle* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQSplitterHandle* self, QChildEvent* event);
+	void (*customEvent)(VirtualQSplitterHandle* self, QEvent* event);
+	void (*connectNotify)(VirtualQSplitterHandle* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQSplitterHandle* self, QMetaMethod* signal);
+}QSplitterHandle_VTable;
+
+void* QSplitterHandle_vdata(VirtualQSplitterHandle* self);
+VirtualQSplitterHandle* vdata_QSplitterHandle(void* vdata);
+
+VirtualQSplitterHandle* QSplitterHandle_new(const QSplitterHandle_VTable* vtbl, size_t vdata, int o, QSplitter* parent);
+
+void QSplitterHandle_virtbase(QSplitterHandle* src, QWidget** outptr_QWidget);
+QMetaObject* QSplitterHandle_metaObject(const QSplitterHandle* self);
+void* QSplitterHandle_metacast(QSplitterHandle* self, const char* param1);
+int QSplitterHandle_metacall(QSplitterHandle* self, int param1, int param2, void** param3);
+struct seaqt_string QSplitterHandle_tr_s(const char* s);
+void QSplitterHandle_setOrientation(QSplitterHandle* self, int o);
+int QSplitterHandle_orientation(const QSplitterHandle* self);
+bool QSplitterHandle_opaqueResize(const QSplitterHandle* self);
+QSplitter* QSplitterHandle_splitter(const QSplitterHandle* self);
+QSize* QSplitterHandle_sizeHint(const QSplitterHandle* self);
+void QSplitterHandle_paintEvent(QSplitterHandle* self, QPaintEvent* param1);
+void QSplitterHandle_mouseMoveEvent(QSplitterHandle* self, QMouseEvent* param1);
+void QSplitterHandle_mousePressEvent(QSplitterHandle* self, QMouseEvent* param1);
+void QSplitterHandle_mouseReleaseEvent(QSplitterHandle* self, QMouseEvent* param1);
+void QSplitterHandle_resizeEvent(QSplitterHandle* self, QResizeEvent* param1);
+bool QSplitterHandle_event(QSplitterHandle* self, QEvent* param1);
+struct seaqt_string QSplitterHandle_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSplitterHandle_tr_s_c_n(const char* s, const char* c, int n);
+
+QMetaObject* QSplitterHandle_virtualbase_metaObject(const VirtualQSplitterHandle* self);
+void* QSplitterHandle_virtualbase_metacast(VirtualQSplitterHandle* self, const char* param1);
+int QSplitterHandle_virtualbase_metacall(VirtualQSplitterHandle* self, int param1, int param2, void** param3);
+QSize* QSplitterHandle_virtualbase_sizeHint(const VirtualQSplitterHandle* self);
+void QSplitterHandle_virtualbase_paintEvent(VirtualQSplitterHandle* self, QPaintEvent* param1);
+void QSplitterHandle_virtualbase_mouseMoveEvent(VirtualQSplitterHandle* self, QMouseEvent* param1);
+void QSplitterHandle_virtualbase_mousePressEvent(VirtualQSplitterHandle* self, QMouseEvent* param1);
+void QSplitterHandle_virtualbase_mouseReleaseEvent(VirtualQSplitterHandle* self, QMouseEvent* param1);
+void QSplitterHandle_virtualbase_resizeEvent(VirtualQSplitterHandle* self, QResizeEvent* param1);
+bool QSplitterHandle_virtualbase_event(VirtualQSplitterHandle* self, QEvent* param1);
+int QSplitterHandle_virtualbase_devType(const VirtualQSplitterHandle* self);
+void QSplitterHandle_virtualbase_setVisible(VirtualQSplitterHandle* self, bool visible);
+QSize* QSplitterHandle_virtualbase_minimumSizeHint(const VirtualQSplitterHandle* self);
+int QSplitterHandle_virtualbase_heightForWidth(const VirtualQSplitterHandle* self, int param1);
+bool QSplitterHandle_virtualbase_hasHeightForWidth(const VirtualQSplitterHandle* self);
+QPaintEngine* QSplitterHandle_virtualbase_paintEngine(const VirtualQSplitterHandle* self);
+void QSplitterHandle_virtualbase_mouseDoubleClickEvent(VirtualQSplitterHandle* self, QMouseEvent* event);
+void QSplitterHandle_virtualbase_wheelEvent(VirtualQSplitterHandle* self, QWheelEvent* event);
+void QSplitterHandle_virtualbase_keyPressEvent(VirtualQSplitterHandle* self, QKeyEvent* event);
+void QSplitterHandle_virtualbase_keyReleaseEvent(VirtualQSplitterHandle* self, QKeyEvent* event);
+void QSplitterHandle_virtualbase_focusInEvent(VirtualQSplitterHandle* self, QFocusEvent* event);
+void QSplitterHandle_virtualbase_focusOutEvent(VirtualQSplitterHandle* self, QFocusEvent* event);
+void QSplitterHandle_virtualbase_enterEvent(VirtualQSplitterHandle* self, QEnterEvent* event);
+void QSplitterHandle_virtualbase_leaveEvent(VirtualQSplitterHandle* self, QEvent* event);
+void QSplitterHandle_virtualbase_moveEvent(VirtualQSplitterHandle* self, QMoveEvent* event);
+void QSplitterHandle_virtualbase_closeEvent(VirtualQSplitterHandle* self, QCloseEvent* event);
+void QSplitterHandle_virtualbase_contextMenuEvent(VirtualQSplitterHandle* self, QContextMenuEvent* event);
+void QSplitterHandle_virtualbase_tabletEvent(VirtualQSplitterHandle* self, QTabletEvent* event);
+void QSplitterHandle_virtualbase_actionEvent(VirtualQSplitterHandle* self, QActionEvent* event);
+void QSplitterHandle_virtualbase_dragEnterEvent(VirtualQSplitterHandle* self, QDragEnterEvent* event);
+void QSplitterHandle_virtualbase_dragMoveEvent(VirtualQSplitterHandle* self, QDragMoveEvent* event);
+void QSplitterHandle_virtualbase_dragLeaveEvent(VirtualQSplitterHandle* self, QDragLeaveEvent* event);
+void QSplitterHandle_virtualbase_dropEvent(VirtualQSplitterHandle* self, QDropEvent* event);
+void QSplitterHandle_virtualbase_showEvent(VirtualQSplitterHandle* self, QShowEvent* event);
+void QSplitterHandle_virtualbase_hideEvent(VirtualQSplitterHandle* self, QHideEvent* event);
+bool QSplitterHandle_virtualbase_nativeEvent(VirtualQSplitterHandle* self, struct seaqt_string eventType, void* message, intptr_t* result);
+void QSplitterHandle_virtualbase_changeEvent(VirtualQSplitterHandle* self, QEvent* param1);
+int QSplitterHandle_virtualbase_metric(const VirtualQSplitterHandle* self, int param1);
+void QSplitterHandle_virtualbase_initPainter(const VirtualQSplitterHandle* self, QPainter* painter);
+QPaintDevice* QSplitterHandle_virtualbase_redirected(const VirtualQSplitterHandle* self, QPoint* offset);
+QPainter* QSplitterHandle_virtualbase_sharedPainter(const VirtualQSplitterHandle* self);
+void QSplitterHandle_virtualbase_inputMethodEvent(VirtualQSplitterHandle* self, QInputMethodEvent* param1);
+QVariant* QSplitterHandle_virtualbase_inputMethodQuery(const VirtualQSplitterHandle* self, int param1);
+bool QSplitterHandle_virtualbase_focusNextPrevChild(VirtualQSplitterHandle* self, bool next);
+bool QSplitterHandle_virtualbase_eventFilter(VirtualQSplitterHandle* self, QObject* watched, QEvent* event);
+void QSplitterHandle_virtualbase_timerEvent(VirtualQSplitterHandle* self, QTimerEvent* event);
+void QSplitterHandle_virtualbase_childEvent(VirtualQSplitterHandle* self, QChildEvent* event);
+void QSplitterHandle_virtualbase_customEvent(VirtualQSplitterHandle* self, QEvent* event);
+void QSplitterHandle_virtualbase_connectNotify(VirtualQSplitterHandle* self, QMetaMethod* signal);
+void QSplitterHandle_virtualbase_disconnectNotify(VirtualQSplitterHandle* self, QMetaMethod* signal);
+
+void QSplitterHandle_protectedbase_moveSplitter(VirtualQSplitterHandle* self, int p);
+int QSplitterHandle_protectedbase_closestLegalPosition(VirtualQSplitterHandle* self, int p);
+void QSplitterHandle_protectedbase_updateMicroFocus(VirtualQSplitterHandle* self);
+void QSplitterHandle_protectedbase_create(VirtualQSplitterHandle* self);
+void QSplitterHandle_protectedbase_destroy(VirtualQSplitterHandle* self);
+bool QSplitterHandle_protectedbase_focusNextChild(VirtualQSplitterHandle* self);
+bool QSplitterHandle_protectedbase_focusPreviousChild(VirtualQSplitterHandle* self);
+QObject* QSplitterHandle_protectedbase_sender(const VirtualQSplitterHandle* self);
+int QSplitterHandle_protectedbase_senderSignalIndex(const VirtualQSplitterHandle* self);
+int QSplitterHandle_protectedbase_receivers(const VirtualQSplitterHandle* self, const char* signal);
+bool QSplitterHandle_protectedbase_isSignalConnected(const VirtualQSplitterHandle* self, QMetaMethod* signal);
+
+const QMetaObject* QSplitterHandle_staticMetaObject();
+void QSplitterHandle_delete(QSplitterHandle* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineclientcertificateselection
+export gen_qwebengineclientcertificateselection

@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_dynamicpropertysheet
+export gen_dynamicpropertysheet

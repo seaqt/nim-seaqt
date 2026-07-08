@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcameradevice
+export gen_qcameradevice

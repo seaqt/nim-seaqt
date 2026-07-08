@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractnewformwidget
+export gen_abstractnewformwidget

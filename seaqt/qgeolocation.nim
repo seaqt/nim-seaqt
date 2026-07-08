@@ -1,0 +1,2 @@
+import ./QtPositioning/gen_qgeolocation
+export gen_qgeolocation

@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractlanguage
+export gen_abstractlanguage

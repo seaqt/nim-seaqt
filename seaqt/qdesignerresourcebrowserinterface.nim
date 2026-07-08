@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractresourcebrowser
+export gen_abstractresourcebrowser

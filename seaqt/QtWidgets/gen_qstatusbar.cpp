@@ -1,0 +1,1143 @@
+#include <QActionEvent>
+#include <QByteArray>
+#include <QChildEvent>
+#include <QCloseEvent>
+#include <QContextMenuEvent>
+#include <QDragEnterEvent>
+#include <QDragLeaveEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
+#include <QEnterEvent>
+#include <QEvent>
+#include <QFocusEvent>
+#include <QHideEvent>
+#include <QInputMethodEvent>
+#include <QKeyEvent>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QMouseEvent>
+#include <QMoveEvent>
+#include <QObject>
+#include <QPaintDevice>
+#include <QPaintEngine>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QPoint>
+#include <QResizeEvent>
+#include <QShowEvent>
+#include <QSize>
+#include <QStatusBar>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTabletEvent>
+#include <QTimerEvent>
+#include <QVariant>
+#include <QWheelEvent>
+#include <QWidget>
+#include <qstatusbar.h>
+#include "gen_qstatusbar.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQStatusBar final : public QStatusBar {
+	const QStatusBar_VTable* vtbl;
+public:
+	friend void* QStatusBar_vdata(VirtualQStatusBar* self);
+	friend VirtualQStatusBar* vdata_QStatusBar(void* vdata);
+
+	VirtualQStatusBar(const QStatusBar_VTable* vtbl): QStatusBar(), vtbl(vtbl) {}
+	VirtualQStatusBar(const QStatusBar_VTable* vtbl, QWidget* parent): QStatusBar(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQStatusBar() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QStatusBar::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QStatusBar_virtualbase_metaObject(const VirtualQStatusBar* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QStatusBar::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QStatusBar_virtualbase_metacast(VirtualQStatusBar* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QStatusBar::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QStatusBar_virtualbase_metacall(VirtualQStatusBar* self, int param1, int param2, void** param3);
+
+	virtual void showEvent(QShowEvent* param1) override {
+		if (vtbl->showEvent == 0) {
+			QStatusBar::showEvent(param1);
+			return;
+		}
+
+		QShowEvent* sigval1 = param1;
+		vtbl->showEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_showEvent(VirtualQStatusBar* self, QShowEvent* param1);
+
+	virtual void paintEvent(QPaintEvent* param1) override {
+		if (vtbl->paintEvent == 0) {
+			QStatusBar::paintEvent(param1);
+			return;
+		}
+
+		QPaintEvent* sigval1 = param1;
+		vtbl->paintEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_paintEvent(VirtualQStatusBar* self, QPaintEvent* param1);
+
+	virtual void resizeEvent(QResizeEvent* param1) override {
+		if (vtbl->resizeEvent == 0) {
+			QStatusBar::resizeEvent(param1);
+			return;
+		}
+
+		QResizeEvent* sigval1 = param1;
+		vtbl->resizeEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_resizeEvent(VirtualQStatusBar* self, QResizeEvent* param1);
+
+	virtual bool event(QEvent* param1) override {
+		if (vtbl->event == 0) {
+			return QStatusBar::event(param1);
+		}
+
+		QEvent* sigval1 = param1;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QStatusBar_virtualbase_event(VirtualQStatusBar* self, QEvent* param1);
+
+	virtual int devType() const override {
+		if (vtbl->devType == 0) {
+			return QStatusBar::devType();
+		}
+
+		int callback_return_value = vtbl->devType(this);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QStatusBar_virtualbase_devType(const VirtualQStatusBar* self);
+
+	virtual void setVisible(bool visible) override {
+		if (vtbl->setVisible == 0) {
+			QStatusBar::setVisible(visible);
+			return;
+		}
+
+		bool sigval1 = visible;
+		vtbl->setVisible(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_setVisible(VirtualQStatusBar* self, bool visible);
+
+	virtual QSize sizeHint() const override {
+		if (vtbl->sizeHint == 0) {
+			return QStatusBar::sizeHint();
+		}
+
+		QSize* callback_return_value = vtbl->sizeHint(this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QSize* QStatusBar_virtualbase_sizeHint(const VirtualQStatusBar* self);
+
+	virtual QSize minimumSizeHint() const override {
+		if (vtbl->minimumSizeHint == 0) {
+			return QStatusBar::minimumSizeHint();
+		}
+
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QSize* QStatusBar_virtualbase_minimumSizeHint(const VirtualQStatusBar* self);
+
+	virtual int heightForWidth(int param1) const override {
+		if (vtbl->heightForWidth == 0) {
+			return QStatusBar::heightForWidth(param1);
+		}
+
+		int sigval1 = param1;
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QStatusBar_virtualbase_heightForWidth(const VirtualQStatusBar* self, int param1);
+
+	virtual bool hasHeightForWidth() const override {
+		if (vtbl->hasHeightForWidth == 0) {
+			return QStatusBar::hasHeightForWidth();
+		}
+
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
+		return callback_return_value;
+	}
+
+	friend bool QStatusBar_virtualbase_hasHeightForWidth(const VirtualQStatusBar* self);
+
+	virtual QPaintEngine* paintEngine() const override {
+		if (vtbl->paintEngine == 0) {
+			return QStatusBar::paintEngine();
+		}
+
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
+		return callback_return_value;
+	}
+
+	friend QPaintEngine* QStatusBar_virtualbase_paintEngine(const VirtualQStatusBar* self);
+
+	virtual void mousePressEvent(QMouseEvent* event) override {
+		if (vtbl->mousePressEvent == 0) {
+			QStatusBar::mousePressEvent(event);
+			return;
+		}
+
+		QMouseEvent* sigval1 = event;
+		vtbl->mousePressEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_mousePressEvent(VirtualQStatusBar* self, QMouseEvent* event);
+
+	virtual void mouseReleaseEvent(QMouseEvent* event) override {
+		if (vtbl->mouseReleaseEvent == 0) {
+			QStatusBar::mouseReleaseEvent(event);
+			return;
+		}
+
+		QMouseEvent* sigval1 = event;
+		vtbl->mouseReleaseEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_mouseReleaseEvent(VirtualQStatusBar* self, QMouseEvent* event);
+
+	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
+		if (vtbl->mouseDoubleClickEvent == 0) {
+			QStatusBar::mouseDoubleClickEvent(event);
+			return;
+		}
+
+		QMouseEvent* sigval1 = event;
+		vtbl->mouseDoubleClickEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_mouseDoubleClickEvent(VirtualQStatusBar* self, QMouseEvent* event);
+
+	virtual void mouseMoveEvent(QMouseEvent* event) override {
+		if (vtbl->mouseMoveEvent == 0) {
+			QStatusBar::mouseMoveEvent(event);
+			return;
+		}
+
+		QMouseEvent* sigval1 = event;
+		vtbl->mouseMoveEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_mouseMoveEvent(VirtualQStatusBar* self, QMouseEvent* event);
+
+	virtual void wheelEvent(QWheelEvent* event) override {
+		if (vtbl->wheelEvent == 0) {
+			QStatusBar::wheelEvent(event);
+			return;
+		}
+
+		QWheelEvent* sigval1 = event;
+		vtbl->wheelEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_wheelEvent(VirtualQStatusBar* self, QWheelEvent* event);
+
+	virtual void keyPressEvent(QKeyEvent* event) override {
+		if (vtbl->keyPressEvent == 0) {
+			QStatusBar::keyPressEvent(event);
+			return;
+		}
+
+		QKeyEvent* sigval1 = event;
+		vtbl->keyPressEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_keyPressEvent(VirtualQStatusBar* self, QKeyEvent* event);
+
+	virtual void keyReleaseEvent(QKeyEvent* event) override {
+		if (vtbl->keyReleaseEvent == 0) {
+			QStatusBar::keyReleaseEvent(event);
+			return;
+		}
+
+		QKeyEvent* sigval1 = event;
+		vtbl->keyReleaseEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_keyReleaseEvent(VirtualQStatusBar* self, QKeyEvent* event);
+
+	virtual void focusInEvent(QFocusEvent* event) override {
+		if (vtbl->focusInEvent == 0) {
+			QStatusBar::focusInEvent(event);
+			return;
+		}
+
+		QFocusEvent* sigval1 = event;
+		vtbl->focusInEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_focusInEvent(VirtualQStatusBar* self, QFocusEvent* event);
+
+	virtual void focusOutEvent(QFocusEvent* event) override {
+		if (vtbl->focusOutEvent == 0) {
+			QStatusBar::focusOutEvent(event);
+			return;
+		}
+
+		QFocusEvent* sigval1 = event;
+		vtbl->focusOutEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_focusOutEvent(VirtualQStatusBar* self, QFocusEvent* event);
+
+	virtual void enterEvent(QEnterEvent* event) override {
+		if (vtbl->enterEvent == 0) {
+			QStatusBar::enterEvent(event);
+			return;
+		}
+
+		QEnterEvent* sigval1 = event;
+		vtbl->enterEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_enterEvent(VirtualQStatusBar* self, QEnterEvent* event);
+
+	virtual void leaveEvent(QEvent* event) override {
+		if (vtbl->leaveEvent == 0) {
+			QStatusBar::leaveEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->leaveEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_leaveEvent(VirtualQStatusBar* self, QEvent* event);
+
+	virtual void moveEvent(QMoveEvent* event) override {
+		if (vtbl->moveEvent == 0) {
+			QStatusBar::moveEvent(event);
+			return;
+		}
+
+		QMoveEvent* sigval1 = event;
+		vtbl->moveEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_moveEvent(VirtualQStatusBar* self, QMoveEvent* event);
+
+	virtual void closeEvent(QCloseEvent* event) override {
+		if (vtbl->closeEvent == 0) {
+			QStatusBar::closeEvent(event);
+			return;
+		}
+
+		QCloseEvent* sigval1 = event;
+		vtbl->closeEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_closeEvent(VirtualQStatusBar* self, QCloseEvent* event);
+
+	virtual void contextMenuEvent(QContextMenuEvent* event) override {
+		if (vtbl->contextMenuEvent == 0) {
+			QStatusBar::contextMenuEvent(event);
+			return;
+		}
+
+		QContextMenuEvent* sigval1 = event;
+		vtbl->contextMenuEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_contextMenuEvent(VirtualQStatusBar* self, QContextMenuEvent* event);
+
+	virtual void tabletEvent(QTabletEvent* event) override {
+		if (vtbl->tabletEvent == 0) {
+			QStatusBar::tabletEvent(event);
+			return;
+		}
+
+		QTabletEvent* sigval1 = event;
+		vtbl->tabletEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_tabletEvent(VirtualQStatusBar* self, QTabletEvent* event);
+
+	virtual void actionEvent(QActionEvent* event) override {
+		if (vtbl->actionEvent == 0) {
+			QStatusBar::actionEvent(event);
+			return;
+		}
+
+		QActionEvent* sigval1 = event;
+		vtbl->actionEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_actionEvent(VirtualQStatusBar* self, QActionEvent* event);
+
+	virtual void dragEnterEvent(QDragEnterEvent* event) override {
+		if (vtbl->dragEnterEvent == 0) {
+			QStatusBar::dragEnterEvent(event);
+			return;
+		}
+
+		QDragEnterEvent* sigval1 = event;
+		vtbl->dragEnterEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_dragEnterEvent(VirtualQStatusBar* self, QDragEnterEvent* event);
+
+	virtual void dragMoveEvent(QDragMoveEvent* event) override {
+		if (vtbl->dragMoveEvent == 0) {
+			QStatusBar::dragMoveEvent(event);
+			return;
+		}
+
+		QDragMoveEvent* sigval1 = event;
+		vtbl->dragMoveEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_dragMoveEvent(VirtualQStatusBar* self, QDragMoveEvent* event);
+
+	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
+		if (vtbl->dragLeaveEvent == 0) {
+			QStatusBar::dragLeaveEvent(event);
+			return;
+		}
+
+		QDragLeaveEvent* sigval1 = event;
+		vtbl->dragLeaveEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_dragLeaveEvent(VirtualQStatusBar* self, QDragLeaveEvent* event);
+
+	virtual void dropEvent(QDropEvent* event) override {
+		if (vtbl->dropEvent == 0) {
+			QStatusBar::dropEvent(event);
+			return;
+		}
+
+		QDropEvent* sigval1 = event;
+		vtbl->dropEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_dropEvent(VirtualQStatusBar* self, QDropEvent* event);
+
+	virtual void hideEvent(QHideEvent* event) override {
+		if (vtbl->hideEvent == 0) {
+			QStatusBar::hideEvent(event);
+			return;
+		}
+
+		QHideEvent* sigval1 = event;
+		vtbl->hideEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_hideEvent(VirtualQStatusBar* self, QHideEvent* event);
+
+	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
+		if (vtbl->nativeEvent == 0) {
+			return QStatusBar::nativeEvent(eventType, message, result);
+		}
+
+		const QByteArray eventType_qb = eventType;
+		struct seaqt_string eventType_ms;
+		eventType_ms.len = eventType_qb.length();
+		eventType_ms.data = static_cast<char*>(malloc(eventType_ms.len));
+		memcpy(eventType_ms.data, eventType_qb.data(), eventType_ms.len);
+		struct seaqt_string sigval1 = eventType_ms;
+		void* sigval2 = message;
+		qintptr* result_ret = result;
+		intptr_t* sigval3 = (intptr_t*)(result_ret);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
+		return callback_return_value;
+	}
+
+	friend bool QStatusBar_virtualbase_nativeEvent(VirtualQStatusBar* self, struct seaqt_string eventType, void* message, intptr_t* result);
+
+	virtual void changeEvent(QEvent* param1) override {
+		if (vtbl->changeEvent == 0) {
+			QStatusBar::changeEvent(param1);
+			return;
+		}
+
+		QEvent* sigval1 = param1;
+		vtbl->changeEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_changeEvent(VirtualQStatusBar* self, QEvent* param1);
+
+	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
+		if (vtbl->metric == 0) {
+			return QStatusBar::metric(param1);
+		}
+
+		QPaintDevice::PaintDeviceMetric param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int callback_return_value = vtbl->metric(this, sigval1);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QStatusBar_virtualbase_metric(const VirtualQStatusBar* self, int param1);
+
+	virtual void initPainter(QPainter* painter) const override {
+		if (vtbl->initPainter == 0) {
+			QStatusBar::initPainter(painter);
+			return;
+		}
+
+		QPainter* sigval1 = painter;
+		vtbl->initPainter(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_initPainter(const VirtualQStatusBar* self, QPainter* painter);
+
+	virtual QPaintDevice* redirected(QPoint* offset) const override {
+		if (vtbl->redirected == 0) {
+			return QStatusBar::redirected(offset);
+		}
+
+		QPoint* sigval1 = offset;
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend QPaintDevice* QStatusBar_virtualbase_redirected(const VirtualQStatusBar* self, QPoint* offset);
+
+	virtual QPainter* sharedPainter() const override {
+		if (vtbl->sharedPainter == 0) {
+			return QStatusBar::sharedPainter();
+		}
+
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
+		return callback_return_value;
+	}
+
+	friend QPainter* QStatusBar_virtualbase_sharedPainter(const VirtualQStatusBar* self);
+
+	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
+		if (vtbl->inputMethodEvent == 0) {
+			QStatusBar::inputMethodEvent(param1);
+			return;
+		}
+
+		QInputMethodEvent* sigval1 = param1;
+		vtbl->inputMethodEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_inputMethodEvent(VirtualQStatusBar* self, QInputMethodEvent* param1);
+
+	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
+		if (vtbl->inputMethodQuery == 0) {
+			return QStatusBar::inputMethodQuery(param1);
+		}
+
+		Qt::InputMethodQuery param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QVariant* QStatusBar_virtualbase_inputMethodQuery(const VirtualQStatusBar* self, int param1);
+
+	virtual bool focusNextPrevChild(bool next) override {
+		if (vtbl->focusNextPrevChild == 0) {
+			return QStatusBar::focusNextPrevChild(next);
+		}
+
+		bool sigval1 = next;
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QStatusBar_virtualbase_focusNextPrevChild(VirtualQStatusBar* self, bool next);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QStatusBar::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QStatusBar_virtualbase_eventFilter(VirtualQStatusBar* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QStatusBar::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_timerEvent(VirtualQStatusBar* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QStatusBar::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_childEvent(VirtualQStatusBar* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QStatusBar::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_customEvent(VirtualQStatusBar* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QStatusBar::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_connectNotify(VirtualQStatusBar* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QStatusBar::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QStatusBar_virtualbase_disconnectNotify(VirtualQStatusBar* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend void QStatusBar_protectedbase_reformat(VirtualQStatusBar* self);
+	friend void QStatusBar_protectedbase_hideOrShow(VirtualQStatusBar* self);
+	friend void QStatusBar_protectedbase_updateMicroFocus(VirtualQStatusBar* self);
+	friend void QStatusBar_protectedbase_create(VirtualQStatusBar* self);
+	friend void QStatusBar_protectedbase_destroy(VirtualQStatusBar* self);
+	friend bool QStatusBar_protectedbase_focusNextChild(VirtualQStatusBar* self);
+	friend bool QStatusBar_protectedbase_focusPreviousChild(VirtualQStatusBar* self);
+	friend QObject* QStatusBar_protectedbase_sender(const VirtualQStatusBar* self);
+	friend int QStatusBar_protectedbase_senderSignalIndex(const VirtualQStatusBar* self);
+	friend int QStatusBar_protectedbase_receivers(const VirtualQStatusBar* self, const char* signal);
+	friend bool QStatusBar_protectedbase_isSignalConnected(const VirtualQStatusBar* self, QMetaMethod* signal);
+};
+
+VirtualQStatusBar* QStatusBar_new(const QStatusBar_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStatusBar>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQStatusBar(vtbl) : nullptr;
+}
+
+VirtualQStatusBar* QStatusBar_new_parent(const QStatusBar_VTable* vtbl, size_t vdata, QWidget* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStatusBar>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQStatusBar(vtbl, parent) : nullptr;
+}
+
+void QStatusBar_virtbase(QStatusBar* src, QWidget** outptr_QWidget) {
+	*outptr_QWidget = static_cast<QWidget*>(src);
+}
+
+QMetaObject* QStatusBar_metaObject(const QStatusBar* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QStatusBar_metacast(QStatusBar* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QStatusBar_metacall(QStatusBar* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QStatusBar_tr_s(const char* s) {
+	QString _ret = QStatusBar::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QStatusBar_addWidget_widget(QStatusBar* self, QWidget* widget) {
+	self->addWidget(widget);
+}
+
+int QStatusBar_insertWidget_index_widget(QStatusBar* self, int index, QWidget* widget) {
+	return self->insertWidget(static_cast<int>(index), widget);
+}
+
+void QStatusBar_addPermanentWidget_widget(QStatusBar* self, QWidget* widget) {
+	self->addPermanentWidget(widget);
+}
+
+int QStatusBar_insertPermanentWidget_index_widget(QStatusBar* self, int index, QWidget* widget) {
+	return self->insertPermanentWidget(static_cast<int>(index), widget);
+}
+
+void QStatusBar_removeWidget(QStatusBar* self, QWidget* widget) {
+	self->removeWidget(widget);
+}
+
+void QStatusBar_setSizeGripEnabled(QStatusBar* self, bool sizeGripEnabled) {
+	self->setSizeGripEnabled(sizeGripEnabled);
+}
+
+bool QStatusBar_isSizeGripEnabled(const QStatusBar* self) {
+	return self->isSizeGripEnabled();
+}
+
+struct seaqt_string QStatusBar_currentMessage(const QStatusBar* self) {
+	QString _ret = self->currentMessage();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QStatusBar_showMessage_text(QStatusBar* self, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	self->showMessage(text_QString);
+}
+
+void QStatusBar_clearMessage(QStatusBar* self) {
+	self->clearMessage();
+}
+
+void QStatusBar_messageChanged(QStatusBar* self, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	self->messageChanged(text_QString);
+}
+
+void QStatusBar_connect_messageChanged(QStatusBar* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QStatusBar::connect(self, static_cast<void (QStatusBar::*)(const QString&)>(&QStatusBar::messageChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& text) {
+			const QString text_ret = text;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray text_b = text_ret.toUtf8();
+			struct seaqt_string text_ms;
+			text_ms.len = text_b.length();
+			text_ms.data = static_cast<char*>(malloc(text_ms.len));
+			memcpy(text_ms.data, text_b.data(), text_ms.len);
+			struct seaqt_string sigval1 = text_ms;
+			callback(release.slot, sigval1);
+	});
+}
+
+struct seaqt_string QStatusBar_tr_s_c(const char* s, const char* c) {
+	QString _ret = QStatusBar::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QStatusBar_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QStatusBar::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QStatusBar_addWidget_widget_stretch(QStatusBar* self, QWidget* widget, int stretch) {
+	self->addWidget(widget, static_cast<int>(stretch));
+}
+
+int QStatusBar_insertWidget_index_widget_stretch(QStatusBar* self, int index, QWidget* widget, int stretch) {
+	return self->insertWidget(static_cast<int>(index), widget, static_cast<int>(stretch));
+}
+
+void QStatusBar_addPermanentWidget_widget_stretch(QStatusBar* self, QWidget* widget, int stretch) {
+	self->addPermanentWidget(widget, static_cast<int>(stretch));
+}
+
+int QStatusBar_insertPermanentWidget_index_widget_stretch(QStatusBar* self, int index, QWidget* widget, int stretch) {
+	return self->insertPermanentWidget(static_cast<int>(index), widget, static_cast<int>(stretch));
+}
+
+void QStatusBar_showMessage_text_timeout(QStatusBar* self, struct seaqt_string text, int timeout) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	self->showMessage(text_QString, static_cast<int>(timeout));
+}
+
+const QMetaObject* QStatusBar_staticMetaObject() { return &QStatusBar::staticMetaObject; }
+void* QStatusBar_vdata(VirtualQStatusBar* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQStatusBar>()); }
+VirtualQStatusBar* vdata_QStatusBar(void* vdata) { return reinterpret_cast<VirtualQStatusBar*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQStatusBar>()); }
+
+QMetaObject* QStatusBar_virtualbase_metaObject(const VirtualQStatusBar* self) {
+
+	return (QMetaObject*) self->QStatusBar::metaObject();
+}
+
+void* QStatusBar_virtualbase_metacast(VirtualQStatusBar* self, const char* param1) {
+
+	return self->QStatusBar::qt_metacast(param1);
+}
+
+int QStatusBar_virtualbase_metacall(VirtualQStatusBar* self, int param1, int param2, void** param3) {
+
+	return self->QStatusBar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+void QStatusBar_virtualbase_showEvent(VirtualQStatusBar* self, QShowEvent* param1) {
+
+	self->QStatusBar::showEvent(param1);
+}
+
+void QStatusBar_virtualbase_paintEvent(VirtualQStatusBar* self, QPaintEvent* param1) {
+
+	self->QStatusBar::paintEvent(param1);
+}
+
+void QStatusBar_virtualbase_resizeEvent(VirtualQStatusBar* self, QResizeEvent* param1) {
+
+	self->QStatusBar::resizeEvent(param1);
+}
+
+bool QStatusBar_virtualbase_event(VirtualQStatusBar* self, QEvent* param1) {
+
+	return self->QStatusBar::event(param1);
+}
+
+int QStatusBar_virtualbase_devType(const VirtualQStatusBar* self) {
+
+	return self->QStatusBar::devType();
+}
+
+void QStatusBar_virtualbase_setVisible(VirtualQStatusBar* self, bool visible) {
+
+	self->QStatusBar::setVisible(visible);
+}
+
+QSize* QStatusBar_virtualbase_sizeHint(const VirtualQStatusBar* self) {
+
+	return new QSize(self->QStatusBar::sizeHint());
+}
+
+QSize* QStatusBar_virtualbase_minimumSizeHint(const VirtualQStatusBar* self) {
+
+	return new QSize(self->QStatusBar::minimumSizeHint());
+}
+
+int QStatusBar_virtualbase_heightForWidth(const VirtualQStatusBar* self, int param1) {
+
+	return self->QStatusBar::heightForWidth(static_cast<int>(param1));
+}
+
+bool QStatusBar_virtualbase_hasHeightForWidth(const VirtualQStatusBar* self) {
+
+	return self->QStatusBar::hasHeightForWidth();
+}
+
+QPaintEngine* QStatusBar_virtualbase_paintEngine(const VirtualQStatusBar* self) {
+
+	return self->QStatusBar::paintEngine();
+}
+
+void QStatusBar_virtualbase_mousePressEvent(VirtualQStatusBar* self, QMouseEvent* event) {
+
+	self->QStatusBar::mousePressEvent(event);
+}
+
+void QStatusBar_virtualbase_mouseReleaseEvent(VirtualQStatusBar* self, QMouseEvent* event) {
+
+	self->QStatusBar::mouseReleaseEvent(event);
+}
+
+void QStatusBar_virtualbase_mouseDoubleClickEvent(VirtualQStatusBar* self, QMouseEvent* event) {
+
+	self->QStatusBar::mouseDoubleClickEvent(event);
+}
+
+void QStatusBar_virtualbase_mouseMoveEvent(VirtualQStatusBar* self, QMouseEvent* event) {
+
+	self->QStatusBar::mouseMoveEvent(event);
+}
+
+void QStatusBar_virtualbase_wheelEvent(VirtualQStatusBar* self, QWheelEvent* event) {
+
+	self->QStatusBar::wheelEvent(event);
+}
+
+void QStatusBar_virtualbase_keyPressEvent(VirtualQStatusBar* self, QKeyEvent* event) {
+
+	self->QStatusBar::keyPressEvent(event);
+}
+
+void QStatusBar_virtualbase_keyReleaseEvent(VirtualQStatusBar* self, QKeyEvent* event) {
+
+	self->QStatusBar::keyReleaseEvent(event);
+}
+
+void QStatusBar_virtualbase_focusInEvent(VirtualQStatusBar* self, QFocusEvent* event) {
+
+	self->QStatusBar::focusInEvent(event);
+}
+
+void QStatusBar_virtualbase_focusOutEvent(VirtualQStatusBar* self, QFocusEvent* event) {
+
+	self->QStatusBar::focusOutEvent(event);
+}
+
+void QStatusBar_virtualbase_enterEvent(VirtualQStatusBar* self, QEnterEvent* event) {
+
+	self->QStatusBar::enterEvent(event);
+}
+
+void QStatusBar_virtualbase_leaveEvent(VirtualQStatusBar* self, QEvent* event) {
+
+	self->QStatusBar::leaveEvent(event);
+}
+
+void QStatusBar_virtualbase_moveEvent(VirtualQStatusBar* self, QMoveEvent* event) {
+
+	self->QStatusBar::moveEvent(event);
+}
+
+void QStatusBar_virtualbase_closeEvent(VirtualQStatusBar* self, QCloseEvent* event) {
+
+	self->QStatusBar::closeEvent(event);
+}
+
+void QStatusBar_virtualbase_contextMenuEvent(VirtualQStatusBar* self, QContextMenuEvent* event) {
+
+	self->QStatusBar::contextMenuEvent(event);
+}
+
+void QStatusBar_virtualbase_tabletEvent(VirtualQStatusBar* self, QTabletEvent* event) {
+
+	self->QStatusBar::tabletEvent(event);
+}
+
+void QStatusBar_virtualbase_actionEvent(VirtualQStatusBar* self, QActionEvent* event) {
+
+	self->QStatusBar::actionEvent(event);
+}
+
+void QStatusBar_virtualbase_dragEnterEvent(VirtualQStatusBar* self, QDragEnterEvent* event) {
+
+	self->QStatusBar::dragEnterEvent(event);
+}
+
+void QStatusBar_virtualbase_dragMoveEvent(VirtualQStatusBar* self, QDragMoveEvent* event) {
+
+	self->QStatusBar::dragMoveEvent(event);
+}
+
+void QStatusBar_virtualbase_dragLeaveEvent(VirtualQStatusBar* self, QDragLeaveEvent* event) {
+
+	self->QStatusBar::dragLeaveEvent(event);
+}
+
+void QStatusBar_virtualbase_dropEvent(VirtualQStatusBar* self, QDropEvent* event) {
+
+	self->QStatusBar::dropEvent(event);
+}
+
+void QStatusBar_virtualbase_hideEvent(VirtualQStatusBar* self, QHideEvent* event) {
+
+	self->QStatusBar::hideEvent(event);
+}
+
+bool QStatusBar_virtualbase_nativeEvent(VirtualQStatusBar* self, struct seaqt_string eventType, void* message, intptr_t* result) {
+	QByteArray eventType_QByteArray(eventType.data, eventType.len);
+
+	return self->QStatusBar::nativeEvent(eventType_QByteArray, message, (qintptr*)(result));
+}
+
+void QStatusBar_virtualbase_changeEvent(VirtualQStatusBar* self, QEvent* param1) {
+
+	self->QStatusBar::changeEvent(param1);
+}
+
+int QStatusBar_virtualbase_metric(const VirtualQStatusBar* self, int param1) {
+
+	return self->QStatusBar::metric(static_cast<VirtualQStatusBar::PaintDeviceMetric>(param1));
+}
+
+void QStatusBar_virtualbase_initPainter(const VirtualQStatusBar* self, QPainter* painter) {
+
+	self->QStatusBar::initPainter(painter);
+}
+
+QPaintDevice* QStatusBar_virtualbase_redirected(const VirtualQStatusBar* self, QPoint* offset) {
+
+	return self->QStatusBar::redirected(offset);
+}
+
+QPainter* QStatusBar_virtualbase_sharedPainter(const VirtualQStatusBar* self) {
+
+	return self->QStatusBar::sharedPainter();
+}
+
+void QStatusBar_virtualbase_inputMethodEvent(VirtualQStatusBar* self, QInputMethodEvent* param1) {
+
+	self->QStatusBar::inputMethodEvent(param1);
+}
+
+QVariant* QStatusBar_virtualbase_inputMethodQuery(const VirtualQStatusBar* self, int param1) {
+
+	return new QVariant(self->QStatusBar::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
+}
+
+bool QStatusBar_virtualbase_focusNextPrevChild(VirtualQStatusBar* self, bool next) {
+
+	return self->QStatusBar::focusNextPrevChild(next);
+}
+
+bool QStatusBar_virtualbase_eventFilter(VirtualQStatusBar* self, QObject* watched, QEvent* event) {
+
+	return self->QStatusBar::eventFilter(watched, event);
+}
+
+void QStatusBar_virtualbase_timerEvent(VirtualQStatusBar* self, QTimerEvent* event) {
+
+	self->QStatusBar::timerEvent(event);
+}
+
+void QStatusBar_virtualbase_childEvent(VirtualQStatusBar* self, QChildEvent* event) {
+
+	self->QStatusBar::childEvent(event);
+}
+
+void QStatusBar_virtualbase_customEvent(VirtualQStatusBar* self, QEvent* event) {
+
+	self->QStatusBar::customEvent(event);
+}
+
+void QStatusBar_virtualbase_connectNotify(VirtualQStatusBar* self, QMetaMethod* signal) {
+
+	self->QStatusBar::connectNotify(*signal);
+}
+
+void QStatusBar_virtualbase_disconnectNotify(VirtualQStatusBar* self, QMetaMethod* signal) {
+
+	self->QStatusBar::disconnectNotify(*signal);
+}
+
+void QStatusBar_protectedbase_reformat(VirtualQStatusBar* self) {
+	self->QStatusBar::reformat();
+}
+
+void QStatusBar_protectedbase_hideOrShow(VirtualQStatusBar* self) {
+	self->QStatusBar::hideOrShow();
+}
+
+void QStatusBar_protectedbase_updateMicroFocus(VirtualQStatusBar* self) {
+	self->QStatusBar::updateMicroFocus();
+}
+
+void QStatusBar_protectedbase_create(VirtualQStatusBar* self) {
+	self->QStatusBar::create();
+}
+
+void QStatusBar_protectedbase_destroy(VirtualQStatusBar* self) {
+	self->QStatusBar::destroy();
+}
+
+bool QStatusBar_protectedbase_focusNextChild(VirtualQStatusBar* self) {
+	return self->QStatusBar::focusNextChild();
+}
+
+bool QStatusBar_protectedbase_focusPreviousChild(VirtualQStatusBar* self) {
+	return self->QStatusBar::focusPreviousChild();
+}
+
+QObject* QStatusBar_protectedbase_sender(const VirtualQStatusBar* self) {
+	return self->QStatusBar::sender();
+}
+
+int QStatusBar_protectedbase_senderSignalIndex(const VirtualQStatusBar* self) {
+	return self->QStatusBar::senderSignalIndex();
+}
+
+int QStatusBar_protectedbase_receivers(const VirtualQStatusBar* self, const char* signal) {
+	return self->QStatusBar::receivers(signal);
+}
+
+bool QStatusBar_protectedbase_isSignalConnected(const VirtualQStatusBar* self, QMetaMethod* signal) {
+	return self->QStatusBar::isSignalConnected(*signal);
+}
+
+void QStatusBar_delete(QStatusBar* self) {
+	delete self;
+}
+

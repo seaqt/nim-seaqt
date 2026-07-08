@@ -1,0 +1,69 @@
+#pragma once
+#ifndef SEAQT_QTWEBENGINEWIDGETS_GEN_QWEBENGINE_ACCESSIBLE_H
+#define SEAQT_QTWEBENGINEWIDGETS_GEN_QWEBENGINE_ACCESSIBLE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QAccessibleActionInterface;
+class QAccessibleInterface;
+class QAccessibleObject;
+class QAccessibleWidget;
+class QObject;
+class QWebEngineView;
+class QWebEngineViewAccessible;
+class QWidget;
+#if defined(WORKAROUND_INNER_CLASS_DEFINITION_QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible)
+typedef QtWebEngineCore::RenderWidgetHostViewQtDelegateWidgetAccessible QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible;
+#else
+class QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible;
+#endif
+#else
+typedef struct QAccessibleActionInterface QAccessibleActionInterface;
+typedef struct QAccessibleInterface QAccessibleInterface;
+typedef struct QAccessibleObject QAccessibleObject;
+typedef struct QAccessibleWidget QAccessibleWidget;
+typedef struct QObject QObject;
+typedef struct QWebEngineView QWebEngineView;
+typedef struct QWebEngineViewAccessible QWebEngineViewAccessible;
+typedef struct QWidget QWidget;
+typedef struct QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible;
+#endif
+
+QWebEngineViewAccessible* QWebEngineViewAccessible_new(QWebEngineView* o);
+
+void QWebEngineViewAccessible_virtbase(QWebEngineViewAccessible* src, QAccessibleWidget** outptr_QAccessibleWidget);
+bool QWebEngineViewAccessible_isValid(const QWebEngineViewAccessible* self);
+QAccessibleInterface* QWebEngineViewAccessible_focusChild(const QWebEngineViewAccessible* self);
+int QWebEngineViewAccessible_childCount(const QWebEngineViewAccessible* self);
+QAccessibleInterface* QWebEngineViewAccessible_child(const QWebEngineViewAccessible* self, int index);
+int QWebEngineViewAccessible_indexOfChild(const QWebEngineViewAccessible* self, QAccessibleInterface* child);
+
+void QWebEngineViewAccessible_delete(QWebEngineViewAccessible* self);
+
+QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible* QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible_new(QWidget* o, QWebEngineView* view);
+
+void QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible_virtbase(QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible* src, QAccessibleWidget** outptr_QAccessibleWidget);
+bool QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible_isValid(const QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible* self);
+QAccessibleInterface* QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible_focusChild(const QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible* self);
+int QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible_childCount(const QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible* self);
+QAccessibleInterface* QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible_child(const QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible* self, int index);
+int QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible_indexOfChild(const QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible* self, QAccessibleInterface* child);
+
+void QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible_delete(QtWebEngineCore__RenderWidgetHostViewQtDelegateWidgetAccessible* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

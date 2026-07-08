@@ -1,0 +1,47 @@
+#pragma once
+#ifndef SEAQT_QTNETWORK_GEN_QSSLERROR_H
+#define SEAQT_QTNETWORK_GEN_QSSLERROR_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QMetaObject;
+class QSslCertificate;
+class QSslError;
+#else
+typedef struct QMetaObject QMetaObject;
+typedef struct QSslCertificate QSslCertificate;
+typedef struct QSslError QSslError;
+#endif
+
+QSslError* QSslError_new();
+QSslError* QSslError_new_error(int error);
+QSslError* QSslError_new_error_certificate(int error, QSslCertificate* certificate);
+QSslError* QSslError_new_from(QSslError* from);
+
+void QSslError_swap(QSslError* self, QSslError* other);
+void QSslError_operatorAssign(QSslError* self, QSslError* from);
+bool QSslError_operatorEqual(const QSslError* self, QSslError* other);
+bool QSslError_operatorNotEqual(const QSslError* self, QSslError* other);
+int QSslError_error(const QSslError* self);
+struct seaqt_string QSslError_errorString(const QSslError* self);
+QSslCertificate* QSslError_certificate(const QSslError* self);
+
+const QMetaObject* QSslError_staticMetaObject();
+void QSslError_delete(QSslError* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

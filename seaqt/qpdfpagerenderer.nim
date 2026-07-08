@@ -1,0 +1,2 @@
+import ./QtPdf/gen_qpdfpagerenderer
+export gen_qpdfpagerenderer

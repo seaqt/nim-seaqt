@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qhttp1configuration
+export gen_qhttp1configuration

@@ -1,0 +1,2 @@
+import ./QtPositioning/gen_qgeosatelliteinfo
+export gen_qgeosatelliteinfo

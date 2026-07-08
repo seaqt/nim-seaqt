@@ -1,0 +1,41 @@
+#pragma once
+#ifndef SEAQT_QTNETWORK_GEN_QOCSPRESPONSE_H
+#define SEAQT_QTNETWORK_GEN_QOCSPRESPONSE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QOcspResponse;
+class QSslCertificate;
+#else
+typedef struct QOcspResponse QOcspResponse;
+typedef struct QSslCertificate QSslCertificate;
+#endif
+
+QOcspResponse* QOcspResponse_new();
+QOcspResponse* QOcspResponse_new_from(QOcspResponse* from);
+
+void QOcspResponse_operatorAssign(QOcspResponse* self, QOcspResponse* from);
+int QOcspResponse_certificateStatus(const QOcspResponse* self);
+int QOcspResponse_revocationReason(const QOcspResponse* self);
+QSslCertificate* QOcspResponse_responder(const QOcspResponse* self);
+QSslCertificate* QOcspResponse_subject(const QOcspResponse* self);
+void QOcspResponse_swap(QOcspResponse* self, QOcspResponse* other);
+
+void QOcspResponse_delete(QOcspResponse* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

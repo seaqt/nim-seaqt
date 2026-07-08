@@ -1,0 +1,597 @@
+import ./qtstatemachine_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free, c_malloc
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+{.compile("gen_qkeyeventtransition.cpp", QtStateMachineCFlags).}
+
+
+import ./gen_qkeyeventtransition_types
+export gen_qkeyeventtransition_types
+
+import
+  ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
+  ../QtCore/gen_qobjectdefs_types,
+  ./gen_qeventtransition,
+  ./gen_qstate_types
+export
+  gen_qcoreevent_types,
+  gen_qmetaobject_types,
+  gen_qobject_types,
+  gen_qobjectdefs_types,
+  gen_qeventtransition,
+  gen_qstate_types
+
+type cQKeyEventTransition*{.exportc: "QKeyEventTransition", incompleteStruct.} = object
+
+proc fcQKeyEventTransition_metaObject(self: pointer): pointer {.importc: "QKeyEventTransition_metaObject".}
+proc fcQKeyEventTransition_metacast(self: pointer, param1: cstring): pointer {.importc: "QKeyEventTransition_metacast".}
+proc fcQKeyEventTransition_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QKeyEventTransition_metacall".}
+proc fcQKeyEventTransition_trS(s: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_tr_s".}
+proc fcQKeyEventTransition_key(self: pointer): cint {.importc: "QKeyEventTransition_key".}
+proc fcQKeyEventTransition_setKey(self: pointer, key: cint): void {.importc: "QKeyEventTransition_setKey".}
+proc fcQKeyEventTransition_modifierMask(self: pointer): cint {.importc: "QKeyEventTransition_modifierMask".}
+proc fcQKeyEventTransition_setModifierMask(self: pointer, modifiers: cint): void {.importc: "QKeyEventTransition_setModifierMask".}
+proc fcQKeyEventTransition_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QKeyEventTransition_tr_s_c".}
+proc fcQKeyEventTransition_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QKeyEventTransition_tr_s_c_n".}
+proc fcQKeyEventTransition_vdata(self: pointer): ptr pointer {.importc: "QKeyEventTransition_vdata".}
+proc fvdata_cQKeyEventTransition(self: pointer): pointer {.importc: "vdata_QKeyEventTransition".}
+
+type cQKeyEventTransitionVTable {.pure.} = object
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  onTransition*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventTest*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQKeyEventTransition_virtualbase_metaObject(self: pointer): pointer {.importc: "QKeyEventTransition_virtualbase_metaObject".}
+proc fcQKeyEventTransition_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QKeyEventTransition_virtualbase_metacast".}
+proc fcQKeyEventTransition_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QKeyEventTransition_virtualbase_metacall".}
+proc fcQKeyEventTransition_virtualbase_onTransition(self: pointer, event: pointer): void {.importc: "QKeyEventTransition_virtualbase_onTransition".}
+proc fcQKeyEventTransition_virtualbase_eventTest(self: pointer, event: pointer): bool {.importc: "QKeyEventTransition_virtualbase_eventTest".}
+proc fcQKeyEventTransition_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QKeyEventTransition_virtualbase_event".}
+proc fcQKeyEventTransition_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QKeyEventTransition_virtualbase_eventFilter".}
+proc fcQKeyEventTransition_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QKeyEventTransition_virtualbase_timerEvent".}
+proc fcQKeyEventTransition_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QKeyEventTransition_virtualbase_childEvent".}
+proc fcQKeyEventTransition_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QKeyEventTransition_virtualbase_customEvent".}
+proc fcQKeyEventTransition_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QKeyEventTransition_virtualbase_connectNotify".}
+proc fcQKeyEventTransition_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QKeyEventTransition_virtualbase_disconnectNotify".}
+proc fcQKeyEventTransition_protectedbase_sender(self: pointer): pointer {.importc: "QKeyEventTransition_protectedbase_sender".}
+proc fcQKeyEventTransition_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QKeyEventTransition_protectedbase_senderSignalIndex".}
+proc fcQKeyEventTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QKeyEventTransition_protectedbase_receivers".}
+proc fcQKeyEventTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QKeyEventTransition_protectedbase_isSignalConnected".}
+proc fcQKeyEventTransition_new(vtbl: pointer, vdata: csize_t): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new".}
+proc fcQKeyEventTransition_new2(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, key: cint): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new_object_type_key".}
+proc fcQKeyEventTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new_sourceState".}
+proc fcQKeyEventTransition_new4(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, key: cint, sourceState: pointer): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new_object_type_key_sourceState".}
+proc fcQKeyEventTransition_staticMetaObject(): pointer {.importc: "QKeyEventTransition_staticMetaObject".}
+
+proc metaObject*(self: gen_qkeyeventtransition_types.QKeyEventTransition): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQKeyEventTransition_metaObject(self.h), owned: false)
+
+proc metacast*(self: gen_qkeyeventtransition_types.QKeyEventTransition, param1: cstring): pointer =
+  fcQKeyEventTransition_metacast(self.h, param1)
+
+proc metacall*(self: gen_qkeyeventtransition_types.QKeyEventTransition, param1: cint, param2: cint, param3: pointer): cint =
+  fcQKeyEventTransition_metacall(self.h, cint(param1), param2, param3)
+
+proc tr*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring): string =
+  let v_ms = fcQKeyEventTransition_trS(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc key*(self: gen_qkeyeventtransition_types.QKeyEventTransition): cint =
+  fcQKeyEventTransition_key(self.h)
+
+proc setKey*(self: gen_qkeyeventtransition_types.QKeyEventTransition, key: cint): void =
+  fcQKeyEventTransition_setKey(self.h, key)
+
+proc modifierMask*(self: gen_qkeyeventtransition_types.QKeyEventTransition): cint =
+  cint(fcQKeyEventTransition_modifierMask(self.h))
+
+proc setModifierMask*(self: gen_qkeyeventtransition_types.QKeyEventTransition, modifiers: cint): void =
+  fcQKeyEventTransition_setModifierMask(self.h, cint(modifiers))
+
+proc tr*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring, c: cstring): string =
+  let v_ms = fcQKeyEventTransition_trSC(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tr*(_: type gen_qkeyeventtransition_types.QKeyEventTransition, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQKeyEventTransition_trSCN(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+type QKeyEventTransitionmetaObjectProc* = proc(self: QKeyEventTransition): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QKeyEventTransitionmetacastProc* = proc(self: QKeyEventTransition, param1: cstring): pointer {.raises: [], gcsafe.}
+type QKeyEventTransitionmetacallProc* = proc(self: QKeyEventTransition, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QKeyEventTransitiononTransitionProc* = proc(self: QKeyEventTransition, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QKeyEventTransitioneventTestProc* = proc(self: QKeyEventTransition, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QKeyEventTransitioneventProc* = proc(self: QKeyEventTransition, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QKeyEventTransitioneventFilterProc* = proc(self: QKeyEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QKeyEventTransitiontimerEventProc* = proc(self: QKeyEventTransition, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QKeyEventTransitionchildEventProc* = proc(self: QKeyEventTransition, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QKeyEventTransitioncustomEventProc* = proc(self: QKeyEventTransition, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QKeyEventTransitionconnectNotifyProc* = proc(self: QKeyEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QKeyEventTransitiondisconnectNotifyProc* = proc(self: QKeyEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+
+type QKeyEventTransitionVTable* {.inheritable, pure.} = object
+  vtbl: cQKeyEventTransitionVTable
+  metaObject*: QKeyEventTransitionmetaObjectProc
+  metacast*: QKeyEventTransitionmetacastProc
+  metacall*: QKeyEventTransitionmetacallProc
+  onTransition*: QKeyEventTransitiononTransitionProc
+  eventTest*: QKeyEventTransitioneventTestProc
+  event*: QKeyEventTransitioneventProc
+  eventFilter*: QKeyEventTransitioneventFilterProc
+  timerEvent*: QKeyEventTransitiontimerEventProc
+  childEvent*: QKeyEventTransitionchildEventProc
+  customEvent*: QKeyEventTransitioncustomEventProc
+  connectNotify*: QKeyEventTransitionconnectNotifyProc
+  disconnectNotify*: QKeyEventTransitiondisconnectNotifyProc
+
+proc QKeyEventTransitionmetaObject*(self: gen_qkeyeventtransition_types.QKeyEventTransition): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQKeyEventTransition_virtualbase_metaObject(self.h), owned: false)
+
+proc QKeyEventTransitionmetacast*(self: gen_qkeyeventtransition_types.QKeyEventTransition, param1: cstring): pointer =
+  fcQKeyEventTransition_virtualbase_metacast(self.h, param1)
+
+proc QKeyEventTransitionmetacall*(self: gen_qkeyeventtransition_types.QKeyEventTransition, param1: cint, param2: cint, param3: pointer): cint =
+  fcQKeyEventTransition_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QKeyEventTransitiononTransition*(self: gen_qkeyeventtransition_types.QKeyEventTransition, event: gen_qcoreevent_types.QEvent): void =
+  fcQKeyEventTransition_virtualbase_onTransition(self.h, event.h)
+
+proc QKeyEventTransitioneventTest*(self: gen_qkeyeventtransition_types.QKeyEventTransition, event: gen_qcoreevent_types.QEvent): bool =
+  fcQKeyEventTransition_virtualbase_eventTest(self.h, event.h)
+
+proc QKeyEventTransitionevent*(self: gen_qkeyeventtransition_types.QKeyEventTransition, e: gen_qcoreevent_types.QEvent): bool =
+  fcQKeyEventTransition_virtualbase_event(self.h, e.h)
+
+proc QKeyEventTransitioneventFilter*(self: gen_qkeyeventtransition_types.QKeyEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQKeyEventTransition_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QKeyEventTransitiontimerEvent*(self: gen_qkeyeventtransition_types.QKeyEventTransition, event: gen_qcoreevent_types.QTimerEvent): void =
+  fcQKeyEventTransition_virtualbase_timerEvent(self.h, event.h)
+
+proc QKeyEventTransitionchildEvent*(self: gen_qkeyeventtransition_types.QKeyEventTransition, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQKeyEventTransition_virtualbase_childEvent(self.h, event.h)
+
+proc QKeyEventTransitioncustomEvent*(self: gen_qkeyeventtransition_types.QKeyEventTransition, event: gen_qcoreevent_types.QEvent): void =
+  fcQKeyEventTransition_virtualbase_customEvent(self.h, event.h)
+
+proc QKeyEventTransitionconnectNotify*(self: gen_qkeyeventtransition_types.QKeyEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQKeyEventTransition_virtualbase_connectNotify(self.h, signal.h)
+
+proc QKeyEventTransitiondisconnectNotify*(self: gen_qkeyeventtransition_types.QKeyEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQKeyEventTransition_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQKeyEventTransition_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQKeyEventTransition_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQKeyEventTransition_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQKeyEventTransition_vtable_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl[].onTransition(self, slotval1)
+
+proc fcQKeyEventTransition_vtable_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl[].eventTest(self, slotval1)
+  virtualReturn
+
+proc fcQKeyEventTransition_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl[].event(self, slotval1)
+  virtualReturn
+
+proc fcQKeyEventTransition_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
+  virtualReturn
+
+proc fcQKeyEventTransition_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl[].timerEvent(self, slotval1)
+
+proc fcQKeyEventTransition_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl[].childEvent(self, slotval1)
+
+proc fcQKeyEventTransition_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl[].customEvent(self, slotval1)
+
+proc fcQKeyEventTransition_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl[].connectNotify(self, slotval1)
+
+proc fcQKeyEventTransition_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+  let self = QKeyEventTransition(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQKeyEventTransition* {.inheritable.} = ref object of QKeyEventTransition
+  vtbl*: cQKeyEventTransitionVTable
+
+method metaObject*(self: VirtualQKeyEventTransition): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QKeyEventTransitionmetaObject(self[])
+method metacast*(self: VirtualQKeyEventTransition, param1: cstring): pointer {.base.} =
+  QKeyEventTransitionmetacast(self[], param1)
+method metacall*(self: VirtualQKeyEventTransition, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QKeyEventTransitionmetacall(self[], param1, param2, param3)
+method onTransition*(self: VirtualQKeyEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QKeyEventTransitiononTransition(self[], event)
+method eventTest*(self: VirtualQKeyEventTransition, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QKeyEventTransitioneventTest(self[], event)
+method event*(self: VirtualQKeyEventTransition, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QKeyEventTransitionevent(self[], e)
+method eventFilter*(self: VirtualQKeyEventTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QKeyEventTransitioneventFilter(self[], watched, event)
+method timerEvent*(self: VirtualQKeyEventTransition, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QKeyEventTransitiontimerEvent(self[], event)
+method childEvent*(self: VirtualQKeyEventTransition, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QKeyEventTransitionchildEvent(self[], event)
+method customEvent*(self: VirtualQKeyEventTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QKeyEventTransitioncustomEvent(self[], event)
+method connectNotify*(self: VirtualQKeyEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QKeyEventTransitionconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQKeyEventTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QKeyEventTransitiondisconnectNotify(self[], signal)
+
+proc fcQKeyEventTransition_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  var virtualReturn = inst.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+proc fcQKeyEventTransition_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = (param1)
+  var virtualReturn = inst.metacast(slotval1)
+  virtualReturn
+
+proc fcQKeyEventTransition_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQKeyEventTransition_method_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  inst.onTransition(slotval1)
+
+proc fcQKeyEventTransition_method_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = inst.eventTest(slotval1)
+  virtualReturn
+
+proc fcQKeyEventTransition_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = inst.event(slotval1)
+  virtualReturn
+
+proc fcQKeyEventTransition_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+proc fcQKeyEventTransition_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  inst.timerEvent(slotval1)
+
+proc fcQKeyEventTransition_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  inst.childEvent(slotval1)
+
+proc fcQKeyEventTransition_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  inst.customEvent(slotval1)
+
+proc fcQKeyEventTransition_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  inst.connectNotify(slotval1)
+
+proc fcQKeyEventTransition_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQKeyEventTransition](fcQKeyEventTransition_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  inst.disconnectNotify(slotval1)
+
+
+proc sender*(self: gen_qkeyeventtransition_types.QKeyEventTransition): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQKeyEventTransition_protectedbase_sender(self.h), owned: false)
+
+proc senderSignalIndex*(self: gen_qkeyeventtransition_types.QKeyEventTransition): cint =
+  fcQKeyEventTransition_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qkeyeventtransition_types.QKeyEventTransition, signal: cstring): cint =
+  fcQKeyEventTransition_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qkeyeventtransition_types.QKeyEventTransition, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQKeyEventTransition_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
+    vtbl: ref QKeyEventTransitionVTable = nil): gen_qkeyeventtransition_types.QKeyEventTransition =
+  let vtbl = if vtbl == nil: new QKeyEventTransitionVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQKeyEventTransition_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQKeyEventTransition_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQKeyEventTransition_vtable_callback_metacall
+  if not isNil(vtbl[].onTransition):
+    vtbl[].vtbl.onTransition = fcQKeyEventTransition_vtable_callback_onTransition
+  if not isNil(vtbl[].eventTest):
+    vtbl[].vtbl.eventTest = fcQKeyEventTransition_vtable_callback_eventTest
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQKeyEventTransition_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQKeyEventTransition_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQKeyEventTransition_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQKeyEventTransition_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQKeyEventTransition_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQKeyEventTransition_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQKeyEventTransition_vtable_callback_disconnectNotify
+  let tmp = gen_qkeyeventtransition_types.QKeyEventTransition(h: fcQKeyEventTransition_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
+  fcQKeyEventTransition_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
+    objectVal: gen_qobject_types.QObject, typeVal: cint, key: cint,
+    vtbl: ref QKeyEventTransitionVTable = nil): gen_qkeyeventtransition_types.QKeyEventTransition =
+  let vtbl = if vtbl == nil: new QKeyEventTransitionVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQKeyEventTransition_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQKeyEventTransition_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQKeyEventTransition_vtable_callback_metacall
+  if not isNil(vtbl[].onTransition):
+    vtbl[].vtbl.onTransition = fcQKeyEventTransition_vtable_callback_onTransition
+  if not isNil(vtbl[].eventTest):
+    vtbl[].vtbl.eventTest = fcQKeyEventTransition_vtable_callback_eventTest
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQKeyEventTransition_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQKeyEventTransition_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQKeyEventTransition_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQKeyEventTransition_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQKeyEventTransition_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQKeyEventTransition_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQKeyEventTransition_vtable_callback_disconnectNotify
+  let tmp = gen_qkeyeventtransition_types.QKeyEventTransition(h: fcQKeyEventTransition_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), objectVal.h, cint(typeVal), key), owned: true)
+  fcQKeyEventTransition_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
+    sourceState: gen_qstate_types.QState,
+    vtbl: ref QKeyEventTransitionVTable = nil): gen_qkeyeventtransition_types.QKeyEventTransition =
+  let vtbl = if vtbl == nil: new QKeyEventTransitionVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQKeyEventTransition_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQKeyEventTransition_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQKeyEventTransition_vtable_callback_metacall
+  if not isNil(vtbl[].onTransition):
+    vtbl[].vtbl.onTransition = fcQKeyEventTransition_vtable_callback_onTransition
+  if not isNil(vtbl[].eventTest):
+    vtbl[].vtbl.eventTest = fcQKeyEventTransition_vtable_callback_eventTest
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQKeyEventTransition_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQKeyEventTransition_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQKeyEventTransition_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQKeyEventTransition_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQKeyEventTransition_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQKeyEventTransition_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQKeyEventTransition_vtable_callback_disconnectNotify
+  let tmp = gen_qkeyeventtransition_types.QKeyEventTransition(h: fcQKeyEventTransition_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sourceState.h), owned: true)
+  fcQKeyEventTransition_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
+    objectVal: gen_qobject_types.QObject, typeVal: cint, key: cint, sourceState: gen_qstate_types.QState,
+    vtbl: ref QKeyEventTransitionVTable = nil): gen_qkeyeventtransition_types.QKeyEventTransition =
+  let vtbl = if vtbl == nil: new QKeyEventTransitionVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QKeyEventTransitionVTable](fcQKeyEventTransition_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQKeyEventTransition_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQKeyEventTransition_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQKeyEventTransition_vtable_callback_metacall
+  if not isNil(vtbl[].onTransition):
+    vtbl[].vtbl.onTransition = fcQKeyEventTransition_vtable_callback_onTransition
+  if not isNil(vtbl[].eventTest):
+    vtbl[].vtbl.eventTest = fcQKeyEventTransition_vtable_callback_eventTest
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQKeyEventTransition_vtable_callback_event
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQKeyEventTransition_vtable_callback_eventFilter
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQKeyEventTransition_vtable_callback_timerEvent
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQKeyEventTransition_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQKeyEventTransition_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQKeyEventTransition_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQKeyEventTransition_vtable_callback_disconnectNotify
+  let tmp = gen_qkeyeventtransition_types.QKeyEventTransition(h: fcQKeyEventTransition_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), objectVal.h, cint(typeVal), key, sourceState.h), owned: true)
+  fcQKeyEventTransition_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+const cQKeyEventTransition_mvtbl = cQKeyEventTransitionVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQKeyEventTransition()[])](self.fcQKeyEventTransition_vdata()[])
+    inst[].h = nil
+    inst[].owned = false,
+
+  metaObject: fcQKeyEventTransition_method_callback_metaObject,
+  metacast: fcQKeyEventTransition_method_callback_metacast,
+  metacall: fcQKeyEventTransition_method_callback_metacall,
+  onTransition: fcQKeyEventTransition_method_callback_onTransition,
+  eventTest: fcQKeyEventTransition_method_callback_eventTest,
+  event: fcQKeyEventTransition_method_callback_event,
+  eventFilter: fcQKeyEventTransition_method_callback_eventFilter,
+  timerEvent: fcQKeyEventTransition_method_callback_timerEvent,
+  childEvent: fcQKeyEventTransition_method_callback_childEvent,
+  customEvent: fcQKeyEventTransition_method_callback_customEvent,
+  connectNotify: fcQKeyEventTransition_method_callback_connectNotify,
+  disconnectNotify: fcQKeyEventTransition_method_callback_disconnectNotify,
+)
+proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
+    inst: VirtualQKeyEventTransition) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQKeyEventTransition_new(addr(cQKeyEventTransition_mvtbl), csize_t(sizeof(pointer)))
+  fcQKeyEventTransition_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
+    objectVal: gen_qobject_types.QObject, typeVal: cint, key: cint,
+    inst: VirtualQKeyEventTransition) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQKeyEventTransition_new2(addr(cQKeyEventTransition_mvtbl), csize_t(sizeof(pointer)), objectVal.h, cint(typeVal), key)
+  fcQKeyEventTransition_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
+    sourceState: gen_qstate_types.QState,
+    inst: VirtualQKeyEventTransition) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQKeyEventTransition_new3(addr(cQKeyEventTransition_mvtbl), csize_t(sizeof(pointer)), sourceState.h)
+  fcQKeyEventTransition_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
+    objectVal: gen_qobject_types.QObject, typeVal: cint, key: cint, sourceState: gen_qstate_types.QState,
+    inst: VirtualQKeyEventTransition) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQKeyEventTransition_new4(addr(cQKeyEventTransition_mvtbl), csize_t(sizeof(pointer)), objectVal.h, cint(typeVal), key, sourceState.h)
+  fcQKeyEventTransition_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc staticMetaObject*(_: type gen_qkeyeventtransition_types.QKeyEventTransition): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQKeyEventTransition_staticMetaObject())

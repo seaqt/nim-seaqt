@@ -1,0 +1,2 @@
+import ./QtPositioning/gen_qgeorectangle
+export gen_qgeorectangle

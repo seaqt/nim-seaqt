@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qbuttongroup
+export gen_qbuttongroup
