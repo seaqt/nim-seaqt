@@ -418,6 +418,7 @@ int QTableView_protectedbase_senderSignalIndex(const VirtualQTableView* self);
 int QTableView_protectedbase_receivers(const VirtualQTableView* self, const char* signal);
 bool QTableView_protectedbase_isSignalConnected(const VirtualQTableView* self, QMetaMethod* signal);
 
+const QMetaObject* QTableView_staticMetaObject();
 void QTableView_delete(QTableView* self);
 
 #ifdef __cplusplus

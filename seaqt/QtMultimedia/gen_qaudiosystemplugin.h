@@ -108,6 +108,7 @@ int QAudioSystemPlugin_protectedbase_senderSignalIndex(const VirtualQAudioSystem
 int QAudioSystemPlugin_protectedbase_receivers(const VirtualQAudioSystemPlugin* self, const char* signal);
 bool QAudioSystemPlugin_protectedbase_isSignalConnected(const VirtualQAudioSystemPlugin* self, QMetaMethod* signal);
 
+const QMetaObject* QAudioSystemPlugin_staticMetaObject();
 void QAudioSystemPlugin_delete(QAudioSystemPlugin* self);
 
 #ifdef __cplusplus

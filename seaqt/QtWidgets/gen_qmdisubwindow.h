@@ -263,6 +263,7 @@ int QMdiSubWindow_protectedbase_senderSignalIndex(const VirtualQMdiSubWindow* se
 int QMdiSubWindow_protectedbase_receivers(const VirtualQMdiSubWindow* self, const char* signal);
 bool QMdiSubWindow_protectedbase_isSignalConnected(const VirtualQMdiSubWindow* self, QMetaMethod* signal);
 
+const QMetaObject* QMdiSubWindow_staticMetaObject();
 void QMdiSubWindow_delete(QMdiSubWindow* self);
 
 #ifdef __cplusplus

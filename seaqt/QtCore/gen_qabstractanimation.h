@@ -122,6 +122,7 @@ int QAbstractAnimation_protectedbase_senderSignalIndex(const VirtualQAbstractAni
 int QAbstractAnimation_protectedbase_receivers(const VirtualQAbstractAnimation* self, const char* signal);
 bool QAbstractAnimation_protectedbase_isSignalConnected(const VirtualQAbstractAnimation* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractAnimation_staticMetaObject();
 void QAbstractAnimation_delete(QAbstractAnimation* self);
 
 typedef struct VirtualQAnimationDriver VirtualQAnimationDriver;
@@ -195,6 +196,7 @@ int QAnimationDriver_protectedbase_senderSignalIndex(const VirtualQAnimationDriv
 int QAnimationDriver_protectedbase_receivers(const VirtualQAnimationDriver* self, const char* signal);
 bool QAnimationDriver_protectedbase_isSignalConnected(const VirtualQAnimationDriver* self, QMetaMethod* signal);
 
+const QMetaObject* QAnimationDriver_staticMetaObject();
 void QAnimationDriver_delete(QAnimationDriver* self);
 
 #ifdef __cplusplus

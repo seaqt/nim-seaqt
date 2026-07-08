@@ -123,6 +123,7 @@ int QGraphicsItemAnimation_protectedbase_senderSignalIndex(const VirtualQGraphic
 int QGraphicsItemAnimation_protectedbase_receivers(const VirtualQGraphicsItemAnimation* self, const char* signal);
 bool QGraphicsItemAnimation_protectedbase_isSignalConnected(const VirtualQGraphicsItemAnimation* self, QMetaMethod* signal);
 
+const QMetaObject* QGraphicsItemAnimation_staticMetaObject();
 void QGraphicsItemAnimation_delete(QGraphicsItemAnimation* self);
 
 #ifdef __cplusplus

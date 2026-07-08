@@ -27,6 +27,7 @@ void QCborError_setC(QCborError* self, int c);
 int QCborError_ToQCborError__Code(const QCborError* self);
 struct seaqt_string QCborError_toString(const QCborError* self);
 
+const QMetaObject* QCborError_staticMetaObject();
 void QCborError_delete(QCborError* self);
 
 #ifdef __cplusplus

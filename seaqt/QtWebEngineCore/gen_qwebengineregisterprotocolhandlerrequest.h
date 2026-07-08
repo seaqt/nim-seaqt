@@ -35,6 +35,7 @@ bool QWebEngineRegisterProtocolHandlerRequest_operatorEqual(const QWebEngineRegi
 bool QWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(const QWebEngineRegisterProtocolHandlerRequest* self, QWebEngineRegisterProtocolHandlerRequest* that);
 void QWebEngineRegisterProtocolHandlerRequest_operatorAssign(QWebEngineRegisterProtocolHandlerRequest* self, QWebEngineRegisterProtocolHandlerRequest* from);
 
+const QMetaObject* QWebEngineRegisterProtocolHandlerRequest_staticMetaObject();
 void QWebEngineRegisterProtocolHandlerRequest_delete(QWebEngineRegisterProtocolHandlerRequest* self);
 
 #ifdef __cplusplus

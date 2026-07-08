@@ -268,6 +268,7 @@ int QMenuBar_protectedbase_senderSignalIndex(const VirtualQMenuBar* self);
 int QMenuBar_protectedbase_receivers(const VirtualQMenuBar* self, const char* signal);
 bool QMenuBar_protectedbase_isSignalConnected(const VirtualQMenuBar* self, QMetaMethod* signal);
 
+const QMetaObject* QMenuBar_staticMetaObject();
 void QMenuBar_delete(QMenuBar* self);
 
 #ifdef __cplusplus

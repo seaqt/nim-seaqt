@@ -103,6 +103,7 @@ int QThreadPool_protectedbase_senderSignalIndex(const VirtualQThreadPool* self);
 int QThreadPool_protectedbase_receivers(const VirtualQThreadPool* self, const char* signal);
 bool QThreadPool_protectedbase_isSignalConnected(const VirtualQThreadPool* self, QMetaMethod* signal);
 
+const QMetaObject* QThreadPool_staticMetaObject();
 void QThreadPool_delete(QThreadPool* self);
 
 #ifdef __cplusplus

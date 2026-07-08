@@ -92,6 +92,7 @@ int QGraphicsTransform_protectedbase_senderSignalIndex(const VirtualQGraphicsTra
 int QGraphicsTransform_protectedbase_receivers(const VirtualQGraphicsTransform* self, const char* signal);
 bool QGraphicsTransform_protectedbase_isSignalConnected(const VirtualQGraphicsTransform* self, QMetaMethod* signal);
 
+const QMetaObject* QGraphicsTransform_staticMetaObject();
 void QGraphicsTransform_delete(QGraphicsTransform* self);
 
 typedef struct VirtualQGraphicsScale VirtualQGraphicsScale;
@@ -164,6 +165,7 @@ int QGraphicsScale_protectedbase_senderSignalIndex(const VirtualQGraphicsScale* 
 int QGraphicsScale_protectedbase_receivers(const VirtualQGraphicsScale* self, const char* signal);
 bool QGraphicsScale_protectedbase_isSignalConnected(const VirtualQGraphicsScale* self, QMetaMethod* signal);
 
+const QMetaObject* QGraphicsScale_staticMetaObject();
 void QGraphicsScale_delete(QGraphicsScale* self);
 
 typedef struct VirtualQGraphicsRotation VirtualQGraphicsRotation;
@@ -231,6 +233,7 @@ int QGraphicsRotation_protectedbase_senderSignalIndex(const VirtualQGraphicsRota
 int QGraphicsRotation_protectedbase_receivers(const VirtualQGraphicsRotation* self, const char* signal);
 bool QGraphicsRotation_protectedbase_isSignalConnected(const VirtualQGraphicsRotation* self, QMetaMethod* signal);
 
+const QMetaObject* QGraphicsRotation_staticMetaObject();
 void QGraphicsRotation_delete(QGraphicsRotation* self);
 
 #ifdef __cplusplus

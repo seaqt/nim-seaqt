@@ -53,6 +53,7 @@ void QSizePolicy_transpose(QSizePolicy* self);
 QSizePolicy* QSizePolicy_transposed(const QSizePolicy* self);
 void QSizePolicy_operatorAssign(QSizePolicy* self, QSizePolicy* from);
 
+const QMetaObject* QSizePolicy_staticMetaObject();
 void QSizePolicy_delete(QSizePolicy* self);
 
 #ifdef __cplusplus

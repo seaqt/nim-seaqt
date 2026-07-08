@@ -205,6 +205,7 @@ void QGraphicsSvgItem_protectedbase_addToIndex(VirtualQGraphicsSvgItem* self);
 void QGraphicsSvgItem_protectedbase_removeFromIndex(VirtualQGraphicsSvgItem* self);
 void QGraphicsSvgItem_protectedbase_prepareGeometryChange(VirtualQGraphicsSvgItem* self);
 
+const QMetaObject* QGraphicsSvgItem_staticMetaObject();
 void QGraphicsSvgItem_delete(QGraphicsSvgItem* self);
 
 #ifdef __cplusplus

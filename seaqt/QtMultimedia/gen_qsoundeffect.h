@@ -121,6 +121,7 @@ int QSoundEffect_protectedbase_senderSignalIndex(const VirtualQSoundEffect* self
 int QSoundEffect_protectedbase_receivers(const VirtualQSoundEffect* self, const char* signal);
 bool QSoundEffect_protectedbase_isSignalConnected(const VirtualQSoundEffect* self, QMetaMethod* signal);
 
+const QMetaObject* QSoundEffect_staticMetaObject();
 void QSoundEffect_delete(QSoundEffect* self);
 
 #ifdef __cplusplus

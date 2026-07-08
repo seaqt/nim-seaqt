@@ -186,6 +186,7 @@ int QGuiApplication_protectedbase_senderSignalIndex(const VirtualQGuiApplication
 int QGuiApplication_protectedbase_receivers(const VirtualQGuiApplication* self, const char* signal);
 bool QGuiApplication_protectedbase_isSignalConnected(const VirtualQGuiApplication* self, QMetaMethod* signal);
 
+const QMetaObject* QGuiApplication_staticMetaObject();
 void QGuiApplication_delete(QGuiApplication* self);
 
 #ifdef __cplusplus

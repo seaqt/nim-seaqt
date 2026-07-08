@@ -196,6 +196,7 @@ int QPdfSearchModel_protectedbase_senderSignalIndex(const VirtualQPdfSearchModel
 int QPdfSearchModel_protectedbase_receivers(const VirtualQPdfSearchModel* self, const char* signal);
 bool QPdfSearchModel_protectedbase_isSignalConnected(const VirtualQPdfSearchModel* self, QMetaMethod* signal);
 
+const QMetaObject* QPdfSearchModel_staticMetaObject();
 void QPdfSearchModel_delete(QPdfSearchModel* self);
 
 #ifdef __cplusplus

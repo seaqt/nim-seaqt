@@ -97,6 +97,7 @@ int QLibrary_protectedbase_senderSignalIndex(const VirtualQLibrary* self);
 int QLibrary_protectedbase_receivers(const VirtualQLibrary* self, const char* signal);
 bool QLibrary_protectedbase_isSignalConnected(const VirtualQLibrary* self, QMetaMethod* signal);
 
+const QMetaObject* QLibrary_staticMetaObject();
 void QLibrary_delete(QLibrary* self);
 
 #ifdef __cplusplus

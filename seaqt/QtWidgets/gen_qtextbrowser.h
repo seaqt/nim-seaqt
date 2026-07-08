@@ -310,6 +310,7 @@ int QTextBrowser_protectedbase_senderSignalIndex(const VirtualQTextBrowser* self
 int QTextBrowser_protectedbase_receivers(const VirtualQTextBrowser* self, const char* signal);
 bool QTextBrowser_protectedbase_isSignalConnected(const VirtualQTextBrowser* self, QMetaMethod* signal);
 
+const QMetaObject* QTextBrowser_staticMetaObject();
 void QTextBrowser_delete(QTextBrowser* self);
 
 #ifdef __cplusplus

@@ -153,6 +153,7 @@ int QMediaPlaylist_protectedbase_senderSignalIndex(const VirtualQMediaPlaylist* 
 int QMediaPlaylist_protectedbase_receivers(const VirtualQMediaPlaylist* self, const char* signal);
 bool QMediaPlaylist_protectedbase_isSignalConnected(const VirtualQMediaPlaylist* self, QMetaMethod* signal);
 
+const QMetaObject* QMediaPlaylist_staticMetaObject();
 void QMediaPlaylist_delete(QMediaPlaylist* self);
 
 #ifdef __cplusplus

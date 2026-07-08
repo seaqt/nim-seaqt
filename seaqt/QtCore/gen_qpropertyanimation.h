@@ -107,6 +107,7 @@ int QPropertyAnimation_protectedbase_senderSignalIndex(const VirtualQPropertyAni
 int QPropertyAnimation_protectedbase_receivers(const VirtualQPropertyAnimation* self, const char* signal);
 bool QPropertyAnimation_protectedbase_isSignalConnected(const VirtualQPropertyAnimation* self, QMetaMethod* signal);
 
+const QMetaObject* QPropertyAnimation_staticMetaObject();
 void QPropertyAnimation_delete(QPropertyAnimation* self);
 
 #ifdef __cplusplus

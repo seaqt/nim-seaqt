@@ -318,6 +318,7 @@ int QInputDialog_protectedbase_senderSignalIndex(const VirtualQInputDialog* self
 int QInputDialog_protectedbase_receivers(const VirtualQInputDialog* self, const char* signal);
 bool QInputDialog_protectedbase_isSignalConnected(const VirtualQInputDialog* self, QMetaMethod* signal);
 
+const QMetaObject* QInputDialog_staticMetaObject();
 void QInputDialog_delete(QInputDialog* self);
 
 #ifdef __cplusplus

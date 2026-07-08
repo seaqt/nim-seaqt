@@ -245,6 +245,7 @@ int QPrintDialog_protectedbase_senderSignalIndex(const VirtualQPrintDialog* self
 int QPrintDialog_protectedbase_receivers(const VirtualQPrintDialog* self, const char* signal);
 bool QPrintDialog_protectedbase_isSignalConnected(const VirtualQPrintDialog* self, QMetaMethod* signal);
 
+const QMetaObject* QPrintDialog_staticMetaObject();
 void QPrintDialog_delete(QPrintDialog* self);
 
 #ifdef __cplusplus

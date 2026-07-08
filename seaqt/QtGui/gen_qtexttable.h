@@ -141,6 +141,7 @@ int QTextTable_protectedbase_senderSignalIndex(const VirtualQTextTable* self);
 int QTextTable_protectedbase_receivers(const VirtualQTextTable* self, const char* signal);
 bool QTextTable_protectedbase_isSignalConnected(const VirtualQTextTable* self, QMetaMethod* signal);
 
+const QMetaObject* QTextTable_staticMetaObject();
 void QTextTable_delete(QTextTable* self);
 
 #ifdef __cplusplus

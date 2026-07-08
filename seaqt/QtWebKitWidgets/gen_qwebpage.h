@@ -317,6 +317,7 @@ int QWebPage_protectedbase_senderSignalIndex(const VirtualQWebPage* self);
 int QWebPage_protectedbase_receivers(const VirtualQWebPage* self, const char* signal);
 bool QWebPage_protectedbase_isSignalConnected(const VirtualQWebPage* self, QMetaMethod* signal);
 
+const QMetaObject* QWebPage_staticMetaObject();
 void QWebPage_delete(QWebPage* self);
 
 QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new();

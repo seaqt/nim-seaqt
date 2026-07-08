@@ -169,6 +169,7 @@ int QScriptEngine_protectedbase_senderSignalIndex(const VirtualQScriptEngine* se
 int QScriptEngine_protectedbase_receivers(const VirtualQScriptEngine* self, const char* signal);
 bool QScriptEngine_protectedbase_isSignalConnected(const VirtualQScriptEngine* self, QMetaMethod* signal);
 
+const QMetaObject* QScriptEngine_staticMetaObject();
 void QScriptEngine_delete(QScriptEngine* self);
 
 #ifdef __cplusplus

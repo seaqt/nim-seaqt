@@ -42,6 +42,7 @@ struct seaqt_string QSGTextureProvider_tr_s_c_n(const char* s, const char* c, in
 struct seaqt_string QSGTextureProvider_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QSGTextureProvider_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QSGTextureProvider_staticMetaObject();
 void QSGTextureProvider_delete(QSGTextureProvider* self);
 
 #ifdef __cplusplus

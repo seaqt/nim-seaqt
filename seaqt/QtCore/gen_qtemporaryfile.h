@@ -142,6 +142,7 @@ int QTemporaryFile_protectedbase_senderSignalIndex(const VirtualQTemporaryFile* 
 int QTemporaryFile_protectedbase_receivers(const VirtualQTemporaryFile* self, const char* signal);
 bool QTemporaryFile_protectedbase_isSignalConnected(const VirtualQTemporaryFile* self, QMetaMethod* signal);
 
+const QMetaObject* QTemporaryFile_staticMetaObject();
 void QTemporaryFile_delete(QTemporaryFile* self);
 
 #ifdef __cplusplus
