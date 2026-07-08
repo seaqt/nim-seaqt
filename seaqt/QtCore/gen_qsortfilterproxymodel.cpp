@@ -922,7 +922,7 @@ public:
 	friend void QSortFilterProxyModel_protectedbase_invalidateRowsFilter(VirtualQSortFilterProxyModel* self);
 	friend void QSortFilterProxyModel_protectedbase_invalidateColumnsFilter(VirtualQSortFilterProxyModel* self);
 	friend QModelIndex* QSortFilterProxyModel_protectedbase_createSourceIndex(const VirtualQSortFilterProxyModel* self, int row, int col, void* internalPtr);
-	friend QModelIndex* QSortFilterProxyModel_protectedbase_createIndex(const VirtualQSortFilterProxyModel* self, int row, int column);
+	friend QModelIndex* QSortFilterProxyModel_protectedbase_createIndex_row_column(const VirtualQSortFilterProxyModel* self, int row, int column);
 	friend void QSortFilterProxyModel_protectedbase_encodeData(const VirtualQSortFilterProxyModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QSortFilterProxyModel_protectedbase_decodeData(VirtualQSortFilterProxyModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QSortFilterProxyModel_protectedbase_beginInsertRows(VirtualQSortFilterProxyModel* self, QModelIndex* parent, int first, int last);
@@ -953,7 +953,7 @@ VirtualQSortFilterProxyModel* QSortFilterProxyModel_new(const QSortFilterProxyMo
 	return _mem_ ? new (_mem_)VirtualQSortFilterProxyModel(vtbl) : nullptr;
 }
 
-VirtualQSortFilterProxyModel* QSortFilterProxyModel_new2(const QSortFilterProxyModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSortFilterProxyModel* QSortFilterProxyModel_new_parent(const QSortFilterProxyModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSortFilterProxyModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSortFilterProxyModel(vtbl, parent) : nullptr;
 }
@@ -974,7 +974,7 @@ int QSortFilterProxyModel_metacall(QSortFilterProxyModel* self, int param1, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSortFilterProxyModel_tr(const char* s) {
+struct seaqt_string QSortFilterProxyModel_tr_s(const char* s) {
 	QString _ret = QSortFilterProxyModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1092,12 +1092,12 @@ void QSortFilterProxyModel_setAutoAcceptChildRows(QSortFilterProxyModel* self, b
 	self->setAutoAcceptChildRows(accept);
 }
 
-void QSortFilterProxyModel_setFilterRegularExpression(QSortFilterProxyModel* self, struct seaqt_string pattern) {
+void QSortFilterProxyModel_setFilterRegularExpression_pattern(QSortFilterProxyModel* self, struct seaqt_string pattern) {
 	QString pattern_QString = QString::fromUtf8(pattern.data, pattern.len);
 	self->setFilterRegularExpression(pattern_QString);
 }
 
-void QSortFilterProxyModel_setFilterRegularExpressionWithRegularExpression(QSortFilterProxyModel* self, QRegularExpression* regularExpression) {
+void QSortFilterProxyModel_setFilterRegularExpression_regularExpression(QSortFilterProxyModel* self, QRegularExpression* regularExpression) {
 	self->setFilterRegularExpression(*regularExpression);
 }
 
@@ -1378,7 +1378,7 @@ void QSortFilterProxyModel_connect_autoAcceptChildRowsChanged(QSortFilterProxyMo
 	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::autoAcceptChildRowsChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QSortFilterProxyModel_tr2(const char* s, const char* c) {
+struct seaqt_string QSortFilterProxyModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSortFilterProxyModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1389,7 +1389,7 @@ struct seaqt_string QSortFilterProxyModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSortFilterProxyModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSortFilterProxyModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSortFilterProxyModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1768,7 +1768,7 @@ QModelIndex* QSortFilterProxyModel_protectedbase_createSourceIndex(const Virtual
 	return new QModelIndex(self->createSourceIndex(static_cast<int>(row), static_cast<int>(col), internalPtr));
 }
 
-QModelIndex* QSortFilterProxyModel_protectedbase_createIndex(const VirtualQSortFilterProxyModel* self, int row, int column) {
+QModelIndex* QSortFilterProxyModel_protectedbase_createIndex_row_column(const VirtualQSortFilterProxyModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

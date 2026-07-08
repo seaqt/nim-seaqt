@@ -16,12 +16,12 @@ QHttp2Configuration* QHttp2Configuration_new() {
 	return new (std::nothrow) QHttp2Configuration();
 }
 
-QHttp2Configuration* QHttp2Configuration_new2(QHttp2Configuration* other) {
-	return new (std::nothrow) QHttp2Configuration(*other);
+QHttp2Configuration* QHttp2Configuration_new_from(QHttp2Configuration* from) {
+	return new (std::nothrow) QHttp2Configuration(*from);
 }
 
-void QHttp2Configuration_operatorAssign(QHttp2Configuration* self, QHttp2Configuration* other) {
-	self->operator=(*other);
+void QHttp2Configuration_operatorAssign(QHttp2Configuration* self, QHttp2Configuration* from) {
+	self->operator=(*from);
 }
 
 void QHttp2Configuration_setServerPushEnabled(QHttp2Configuration* self, bool enable) {

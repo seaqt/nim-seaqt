@@ -66,15 +66,15 @@ type cQLocalServer*{.exportc: "QLocalServer", incompleteStruct.} = object
 proc fcQLocalServer_metaObject(self: pointer): pointer {.importc: "QLocalServer_metaObject".}
 proc fcQLocalServer_metacast(self: pointer, param1: cstring): pointer {.importc: "QLocalServer_metacast".}
 proc fcQLocalServer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLocalServer_metacall".}
-proc fcQLocalServer_tr(s: cstring): struct_seaqt_string {.importc: "QLocalServer_tr".}
+proc fcQLocalServer_trS(s: cstring): struct_seaqt_string {.importc: "QLocalServer_tr_s".}
 proc fcQLocalServer_newConnection(self: pointer): void {.importc: "QLocalServer_newConnection".}
 proc fcQLocalServer_connect_newConnection(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalServer_connect_newConnection".}
 proc fcQLocalServer_close(self: pointer): void {.importc: "QLocalServer_close".}
 proc fcQLocalServer_errorString(self: pointer): struct_seaqt_string {.importc: "QLocalServer_errorString".}
 proc fcQLocalServer_hasPendingConnections(self: pointer): bool {.importc: "QLocalServer_hasPendingConnections".}
 proc fcQLocalServer_isListening(self: pointer): bool {.importc: "QLocalServer_isListening".}
-proc fcQLocalServer_listen(self: pointer, name: struct_seaqt_string): bool {.importc: "QLocalServer_listen".}
-proc fcQLocalServer_listenWithSocketDescriptor(self: pointer, socketDescriptor: uint): bool {.importc: "QLocalServer_listenWithSocketDescriptor".}
+proc fcQLocalServer_listenName(self: pointer, name: struct_seaqt_string): bool {.importc: "QLocalServer_listen_name".}
+proc fcQLocalServer_listenSocketDescriptor(self: pointer, socketDescriptor: uint): bool {.importc: "QLocalServer_listen_socketDescriptor".}
 proc fcQLocalServer_maxPendingConnections(self: pointer): cint {.importc: "QLocalServer_maxPendingConnections".}
 proc fcQLocalServer_nextPendingConnection(self: pointer): pointer {.importc: "QLocalServer_nextPendingConnection".}
 proc fcQLocalServer_serverName(self: pointer): struct_seaqt_string {.importc: "QLocalServer_serverName".}
@@ -88,10 +88,10 @@ proc fcQLocalServer_listenBacklogSize(self: pointer): cint {.importc: "QLocalSer
 proc fcQLocalServer_setSocketOptions(self: pointer, options: cint): void {.importc: "QLocalServer_setSocketOptions".}
 proc fcQLocalServer_socketOptions(self: pointer): cint {.importc: "QLocalServer_socketOptions".}
 proc fcQLocalServer_socketDescriptor(self: pointer): uint {.importc: "QLocalServer_socketDescriptor".}
-proc fcQLocalServer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLocalServer_tr2".}
-proc fcQLocalServer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLocalServer_tr3".}
-proc fcQLocalServer_waitForNewConnectionWithMsec(self: pointer, msec: cint): bool {.importc: "QLocalServer_waitForNewConnectionWithMsec".}
-proc fcQLocalServer_waitForNewConnection2(self: pointer, msec: cint, timedOut: ptr bool): bool {.importc: "QLocalServer_waitForNewConnection2".}
+proc fcQLocalServer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLocalServer_tr_s_c".}
+proc fcQLocalServer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLocalServer_tr_s_c_n".}
+proc fcQLocalServer_waitForNewConnectionMsec(self: pointer, msec: cint): bool {.importc: "QLocalServer_waitForNewConnection_msec".}
+proc fcQLocalServer_waitForNewConnectionMsecTimedOut(self: pointer, msec: cint, timedOut: ptr bool): bool {.importc: "QLocalServer_waitForNewConnection_msec_timedOut".}
 proc fcQLocalServer_vdata(self: pointer): ptr pointer {.importc: "QLocalServer_vdata".}
 proc fvdata_cQLocalServer(self: pointer): pointer {.importc: "vdata_QLocalServer".}
 
@@ -128,7 +128,7 @@ proc fcQLocalServer_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQLocalServer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLocalServer_protectedbase_receivers".}
 proc fcQLocalServer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLocalServer_protectedbase_isSignalConnected".}
 proc fcQLocalServer_new(vtbl: pointer, vdata: csize_t): ptr cQLocalServer {.importc: "QLocalServer_new".}
-proc fcQLocalServer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLocalServer {.importc: "QLocalServer_new2".}
+proc fcQLocalServer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLocalServer {.importc: "QLocalServer_new_parent".}
 proc fcQLocalServer_staticMetaObject(): pointer {.importc: "QLocalServer_staticMetaObject".}
 
 proc metaObject*(self: gen_qlocalserver_types.QLocalServer): gen_qobjectdefs_types.QMetaObject =
@@ -141,7 +141,7 @@ proc metacall*(self: gen_qlocalserver_types.QLocalServer, param1: cint, param2: 
   fcQLocalServer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlocalserver_types.QLocalServer, s: cstring): string =
-  let v_ms = fcQLocalServer_tr(s)
+  let v_ms = fcQLocalServer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -180,10 +180,10 @@ proc isListening*(self: gen_qlocalserver_types.QLocalServer): bool =
   fcQLocalServer_isListening(self.h)
 
 proc listen*(self: gen_qlocalserver_types.QLocalServer, name: openArray[char]): bool =
-  fcQLocalServer_listen(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
+  fcQLocalServer_listenName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
 
 proc listen*(self: gen_qlocalserver_types.QLocalServer, socketDescriptor: uint): bool =
-  fcQLocalServer_listenWithSocketDescriptor(self.h, socketDescriptor)
+  fcQLocalServer_listenSocketDescriptor(self.h, socketDescriptor)
 
 proc maxPendingConnections*(self: gen_qlocalserver_types.QLocalServer): cint =
   fcQLocalServer_maxPendingConnections(self.h)
@@ -231,22 +231,22 @@ proc socketDescriptor*(self: gen_qlocalserver_types.QLocalServer): uint =
   fcQLocalServer_socketDescriptor(self.h)
 
 proc tr*(_: type gen_qlocalserver_types.QLocalServer, s: cstring, c: cstring): string =
-  let v_ms = fcQLocalServer_tr2(s, c)
+  let v_ms = fcQLocalServer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlocalserver_types.QLocalServer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLocalServer_tr3(s, c, n)
+  let v_ms = fcQLocalServer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc waitForNewConnection*(self: gen_qlocalserver_types.QLocalServer, msec: cint): bool =
-  fcQLocalServer_waitForNewConnectionWithMsec(self.h, msec)
+  fcQLocalServer_waitForNewConnectionMsec(self.h, msec)
 
 proc waitForNewConnection*(self: gen_qlocalserver_types.QLocalServer, msec: cint, timedOut: ptr bool): bool =
-  fcQLocalServer_waitForNewConnection2(self.h, msec, timedOut)
+  fcQLocalServer_waitForNewConnectionMsecTimedOut(self.h, msec, timedOut)
 
 type QLocalServermetaObjectProc* = proc(self: QLocalServer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QLocalServermetacastProc* = proc(self: QLocalServer, param1: cstring): pointer {.raises: [], gcsafe.}

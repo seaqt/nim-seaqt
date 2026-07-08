@@ -696,7 +696,7 @@ VirtualQStatusBar* QStatusBar_new(const QStatusBar_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQStatusBar(vtbl) : nullptr;
 }
 
-VirtualQStatusBar* QStatusBar_new2(const QStatusBar_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQStatusBar* QStatusBar_new_parent(const QStatusBar_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStatusBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQStatusBar(vtbl, parent) : nullptr;
 }
@@ -717,7 +717,7 @@ int QStatusBar_metacall(QStatusBar* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QStatusBar_tr(const char* s) {
+struct seaqt_string QStatusBar_tr_s(const char* s) {
 	QString _ret = QStatusBar::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -728,19 +728,19 @@ struct seaqt_string QStatusBar_tr(const char* s) {
 	return _ms;
 }
 
-void QStatusBar_addWidget(QStatusBar* self, QWidget* widget) {
+void QStatusBar_addWidget_widget(QStatusBar* self, QWidget* widget) {
 	self->addWidget(widget);
 }
 
-int QStatusBar_insertWidget(QStatusBar* self, int index, QWidget* widget) {
+int QStatusBar_insertWidget_index_widget(QStatusBar* self, int index, QWidget* widget) {
 	return self->insertWidget(static_cast<int>(index), widget);
 }
 
-void QStatusBar_addPermanentWidget(QStatusBar* self, QWidget* widget) {
+void QStatusBar_addPermanentWidget_widget(QStatusBar* self, QWidget* widget) {
 	self->addPermanentWidget(widget);
 }
 
-int QStatusBar_insertPermanentWidget(QStatusBar* self, int index, QWidget* widget) {
+int QStatusBar_insertPermanentWidget_index_widget(QStatusBar* self, int index, QWidget* widget) {
 	return self->insertPermanentWidget(static_cast<int>(index), widget);
 }
 
@@ -767,7 +767,7 @@ struct seaqt_string QStatusBar_currentMessage(const QStatusBar* self) {
 	return _ms;
 }
 
-void QStatusBar_showMessage(QStatusBar* self, struct seaqt_string text) {
+void QStatusBar_showMessage_text(QStatusBar* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->showMessage(text_QString);
 }
@@ -800,7 +800,7 @@ void QStatusBar_connect_messageChanged(QStatusBar* self, intptr_t slot, void (*c
 	QStatusBar::connect(self, static_cast<void (QStatusBar::*)(const QString&)>(&QStatusBar::messageChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QStatusBar_tr2(const char* s, const char* c) {
+struct seaqt_string QStatusBar_tr_s_c(const char* s, const char* c) {
 	QString _ret = QStatusBar::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -811,7 +811,7 @@ struct seaqt_string QStatusBar_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QStatusBar_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QStatusBar_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QStatusBar::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -822,23 +822,23 @@ struct seaqt_string QStatusBar_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QStatusBar_addWidget2(QStatusBar* self, QWidget* widget, int stretch) {
+void QStatusBar_addWidget_widget_stretch(QStatusBar* self, QWidget* widget, int stretch) {
 	self->addWidget(widget, static_cast<int>(stretch));
 }
 
-int QStatusBar_insertWidget2(QStatusBar* self, int index, QWidget* widget, int stretch) {
+int QStatusBar_insertWidget_index_widget_stretch(QStatusBar* self, int index, QWidget* widget, int stretch) {
 	return self->insertWidget(static_cast<int>(index), widget, static_cast<int>(stretch));
 }
 
-void QStatusBar_addPermanentWidget2(QStatusBar* self, QWidget* widget, int stretch) {
+void QStatusBar_addPermanentWidget_widget_stretch(QStatusBar* self, QWidget* widget, int stretch) {
 	self->addPermanentWidget(widget, static_cast<int>(stretch));
 }
 
-int QStatusBar_insertPermanentWidget2(QStatusBar* self, int index, QWidget* widget, int stretch) {
+int QStatusBar_insertPermanentWidget_index_widget_stretch(QStatusBar* self, int index, QWidget* widget, int stretch) {
 	return self->insertPermanentWidget(static_cast<int>(index), widget, static_cast<int>(stretch));
 }
 
-void QStatusBar_showMessage2(QStatusBar* self, struct seaqt_string text, int timeout) {
+void QStatusBar_showMessage_text_timeout(QStatusBar* self, struct seaqt_string text, int timeout) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->showMessage(text_QString, static_cast<int>(timeout));
 }

@@ -747,7 +747,7 @@ public:
 	friend void QMdiArea_virtualbase_disconnectNotify(VirtualQMdiArea* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QMdiArea_protectedbase_setViewportMargins(VirtualQMdiArea* self, int left, int top, int right, int bottom);
+	friend void QMdiArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQMdiArea* self, int left, int top, int right, int bottom);
 	friend QMargins* QMdiArea_protectedbase_viewportMargins(const VirtualQMdiArea* self);
 	friend void QMdiArea_protectedbase_drawFrame(VirtualQMdiArea* self, QPainter* param1);
 	friend void QMdiArea_protectedbase_updateMicroFocus(VirtualQMdiArea* self);
@@ -766,7 +766,7 @@ VirtualQMdiArea* QMdiArea_new(const QMdiArea_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQMdiArea(vtbl) : nullptr;
 }
 
-VirtualQMdiArea* QMdiArea_new2(const QMdiArea_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQMdiArea* QMdiArea_new_parent(const QMdiArea_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMdiArea>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMdiArea(vtbl, parent) : nullptr;
 }
@@ -787,7 +787,7 @@ int QMdiArea_metacall(QMdiArea* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMdiArea_tr(const char* s) {
+struct seaqt_string QMdiArea_tr_s(const char* s) {
 	QString _ret = QMdiArea::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -827,7 +827,7 @@ struct seaqt_array /* of QMdiSubWindow* */  QMdiArea_subWindowList(const QMdiAre
 	return _out;
 }
 
-QMdiSubWindow* QMdiArea_addSubWindow(QMdiArea* self, QWidget* widget) {
+QMdiSubWindow* QMdiArea_addSubWindow_widget(QMdiArea* self, QWidget* widget) {
 	return self->addSubWindow(widget);
 }
 
@@ -852,7 +852,7 @@ void QMdiArea_setActivationOrder(QMdiArea* self, int order) {
 	self->setActivationOrder(static_cast<QMdiArea::WindowOrder>(order));
 }
 
-void QMdiArea_setOption(QMdiArea* self, int option) {
+void QMdiArea_setOption_option(QMdiArea* self, int option) {
 	self->setOption(static_cast<QMdiArea::AreaOption>(option));
 }
 
@@ -955,7 +955,7 @@ void QMdiArea_activatePreviousSubWindow(QMdiArea* self) {
 	self->activatePreviousSubWindow();
 }
 
-struct seaqt_string QMdiArea_tr2(const char* s, const char* c) {
+struct seaqt_string QMdiArea_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMdiArea::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -966,7 +966,7 @@ struct seaqt_string QMdiArea_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMdiArea_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMdiArea_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMdiArea::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -977,7 +977,7 @@ struct seaqt_string QMdiArea_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-struct seaqt_array /* of QMdiSubWindow* */  QMdiArea_subWindowListWithOrder(const QMdiArea* self, int order) {
+struct seaqt_array /* of QMdiSubWindow* */  QMdiArea_subWindowList_order(const QMdiArea* self, int order) {
 	QList<QMdiSubWindow *> _ret = self->subWindowList(static_cast<QMdiArea::WindowOrder>(order));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QMdiSubWindow** _arr = static_cast<QMdiSubWindow**>(malloc(sizeof(QMdiSubWindow*) * _ret.length()));
@@ -990,11 +990,11 @@ struct seaqt_array /* of QMdiSubWindow* */  QMdiArea_subWindowListWithOrder(cons
 	return _out;
 }
 
-QMdiSubWindow* QMdiArea_addSubWindow2(QMdiArea* self, QWidget* widget, int flags) {
+QMdiSubWindow* QMdiArea_addSubWindow_widget_flags(QMdiArea* self, QWidget* widget, int flags) {
 	return self->addSubWindow(widget, static_cast<Qt::WindowFlags>(flags));
 }
 
-void QMdiArea_setOption2(QMdiArea* self, int option, bool on) {
+void QMdiArea_setOption_option_on(QMdiArea* self, int option, bool on) {
 	self->setOption(static_cast<QMdiArea::AreaOption>(option), on);
 }
 
@@ -1278,7 +1278,7 @@ void QMdiArea_virtualbase_disconnectNotify(VirtualQMdiArea* self, QMetaMethod* s
 	self->QMdiArea::disconnectNotify(*signal);
 }
 
-void QMdiArea_protectedbase_setViewportMargins(VirtualQMdiArea* self, int left, int top, int right, int bottom) {
+void QMdiArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQMdiArea* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

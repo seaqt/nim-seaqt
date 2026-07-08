@@ -26,7 +26,7 @@ typedef struct QCoreApplication QCoreApplication;
 
 QCommandLineParser* QCommandLineParser_new();
 
-struct seaqt_string QCommandLineParser_tr(const char* sourceText);
+struct seaqt_string QCommandLineParser_tr_sourceText(const char* sourceText);
 void QCommandLineParser_setSingleDashWordOptionMode(QCommandLineParser* self, int parsingMode);
 void QCommandLineParser_setOptionsAfterPositionalArgumentsMode(QCommandLineParser* self, int mode);
 bool QCommandLineParser_addOption(QCommandLineParser* self, QCommandLineOption* commandLineOption);
@@ -35,28 +35,28 @@ QCommandLineOption* QCommandLineParser_addVersionOption(QCommandLineParser* self
 QCommandLineOption* QCommandLineParser_addHelpOption(QCommandLineParser* self);
 void QCommandLineParser_setApplicationDescription(QCommandLineParser* self, struct seaqt_string description);
 struct seaqt_string QCommandLineParser_applicationDescription(const QCommandLineParser* self);
-void QCommandLineParser_addPositionalArgument(QCommandLineParser* self, struct seaqt_string name, struct seaqt_string description);
+void QCommandLineParser_addPositionalArgument_name_description(QCommandLineParser* self, struct seaqt_string name, struct seaqt_string description);
 void QCommandLineParser_clearPositionalArguments(QCommandLineParser* self);
-void QCommandLineParser_process(QCommandLineParser* self, struct seaqt_array /* of struct seaqt_string */  arguments);
-void QCommandLineParser_processWithApp(QCommandLineParser* self, QCoreApplication* app);
+void QCommandLineParser_process_arguments(QCommandLineParser* self, struct seaqt_array /* of struct seaqt_string */  arguments);
+void QCommandLineParser_process_app(QCommandLineParser* self, QCoreApplication* app);
 bool QCommandLineParser_parse(QCommandLineParser* self, struct seaqt_array /* of struct seaqt_string */  arguments);
 struct seaqt_string QCommandLineParser_errorText(const QCommandLineParser* self);
-bool QCommandLineParser_isSet(const QCommandLineParser* self, struct seaqt_string name);
-struct seaqt_string QCommandLineParser_value(const QCommandLineParser* self, struct seaqt_string name);
-struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_values(const QCommandLineParser* self, struct seaqt_string name);
-bool QCommandLineParser_isSetWithOption(const QCommandLineParser* self, QCommandLineOption* option);
-struct seaqt_string QCommandLineParser_valueWithOption(const QCommandLineParser* self, QCommandLineOption* option);
-struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_valuesWithOption(const QCommandLineParser* self, QCommandLineOption* option);
+bool QCommandLineParser_isSet_name(const QCommandLineParser* self, struct seaqt_string name);
+struct seaqt_string QCommandLineParser_value_name(const QCommandLineParser* self, struct seaqt_string name);
+struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_values_name(const QCommandLineParser* self, struct seaqt_string name);
+bool QCommandLineParser_isSet_option(const QCommandLineParser* self, QCommandLineOption* option);
+struct seaqt_string QCommandLineParser_value_option(const QCommandLineParser* self, QCommandLineOption* option);
+struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_values_option(const QCommandLineParser* self, QCommandLineOption* option);
 struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_positionalArguments(const QCommandLineParser* self);
 struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_optionNames(const QCommandLineParser* self);
 struct seaqt_array /* of struct seaqt_string */  QCommandLineParser_unknownOptionNames(const QCommandLineParser* self);
 void QCommandLineParser_showVersion(QCommandLineParser* self);
 void QCommandLineParser_showHelp(QCommandLineParser* self);
 struct seaqt_string QCommandLineParser_helpText(const QCommandLineParser* self);
-struct seaqt_string QCommandLineParser_tr2(const char* sourceText, const char* disambiguation);
-struct seaqt_string QCommandLineParser_tr3(const char* sourceText, const char* disambiguation, int n);
-void QCommandLineParser_addPositionalArgument2(QCommandLineParser* self, struct seaqt_string name, struct seaqt_string description, struct seaqt_string syntax);
-void QCommandLineParser_showHelpWithExitCode(QCommandLineParser* self, int exitCode);
+struct seaqt_string QCommandLineParser_tr_sourceText_disambiguation(const char* sourceText, const char* disambiguation);
+struct seaqt_string QCommandLineParser_tr_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n);
+void QCommandLineParser_addPositionalArgument_name_description_syntax(QCommandLineParser* self, struct seaqt_string name, struct seaqt_string description, struct seaqt_string syntax);
+void QCommandLineParser_showHelp_exitCode(QCommandLineParser* self, int exitCode);
 
 void QCommandLineParser_delete(QCommandLineParser* self);
 

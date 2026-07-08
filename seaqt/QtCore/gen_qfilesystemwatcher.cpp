@@ -175,7 +175,7 @@ VirtualQFileSystemWatcher* QFileSystemWatcher_new(const QFileSystemWatcher_VTabl
 	return _mem_ ? new (_mem_)VirtualQFileSystemWatcher(vtbl) : nullptr;
 }
 
-VirtualQFileSystemWatcher* QFileSystemWatcher_new2(const QFileSystemWatcher_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  paths) {
+VirtualQFileSystemWatcher* QFileSystemWatcher_new_paths(const QFileSystemWatcher_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  paths) {
 	QStringList paths_QList;
 	paths_QList.reserve(paths.len);
 	struct seaqt_string* paths_arr = static_cast<struct seaqt_string*>(paths.data);
@@ -187,12 +187,12 @@ VirtualQFileSystemWatcher* QFileSystemWatcher_new2(const QFileSystemWatcher_VTab
 	return _mem_ ? new (_mem_)VirtualQFileSystemWatcher(vtbl, paths_QList) : nullptr;
 }
 
-VirtualQFileSystemWatcher* QFileSystemWatcher_new3(const QFileSystemWatcher_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQFileSystemWatcher* QFileSystemWatcher_new_parent(const QFileSystemWatcher_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileSystemWatcher>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileSystemWatcher(vtbl, parent) : nullptr;
 }
 
-VirtualQFileSystemWatcher* QFileSystemWatcher_new4(const QFileSystemWatcher_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  paths, QObject* parent) {
+VirtualQFileSystemWatcher* QFileSystemWatcher_new_paths_parent(const QFileSystemWatcher_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  paths, QObject* parent) {
 	QStringList paths_QList;
 	paths_QList.reserve(paths.len);
 	struct seaqt_string* paths_arr = static_cast<struct seaqt_string*>(paths.data);
@@ -220,7 +220,7 @@ int QFileSystemWatcher_metacall(QFileSystemWatcher* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFileSystemWatcher_tr(const char* s) {
+struct seaqt_string QFileSystemWatcher_tr_s(const char* s) {
 	QString _ret = QFileSystemWatcher::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -335,7 +335,7 @@ struct seaqt_array /* of struct seaqt_string */  QFileSystemWatcher_directories(
 	return _out;
 }
 
-struct seaqt_string QFileSystemWatcher_tr2(const char* s, const char* c) {
+struct seaqt_string QFileSystemWatcher_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFileSystemWatcher::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -346,7 +346,7 @@ struct seaqt_string QFileSystemWatcher_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFileSystemWatcher_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFileSystemWatcher_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFileSystemWatcher::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

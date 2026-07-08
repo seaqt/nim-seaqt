@@ -59,7 +59,7 @@ export
 
 type cQImageReader*{.exportc: "QImageReader", incompleteStruct.} = object
 
-proc fcQImageReader_tr(sourceText: cstring): struct_seaqt_string {.importc: "QImageReader_tr".}
+proc fcQImageReader_trSourceText(sourceText: cstring): struct_seaqt_string {.importc: "QImageReader_tr_sourceText".}
 proc fcQImageReader_setFormat(self: pointer, format: struct_seaqt_string): void {.importc: "QImageReader_setFormat".}
 proc fcQImageReader_format(self: pointer): struct_seaqt_string {.importc: "QImageReader_format".}
 proc fcQImageReader_setAutoDetectImageFormat(self: pointer, enabled: bool): void {.importc: "QImageReader_setAutoDetectImageFormat".}
@@ -92,7 +92,7 @@ proc fcQImageReader_subType(self: pointer): struct_seaqt_string {.importc: "QIma
 proc fcQImageReader_supportedSubTypes(self: pointer): struct_seaqt_array {.importc: "QImageReader_supportedSubTypes".}
 proc fcQImageReader_canRead(self: pointer): bool {.importc: "QImageReader_canRead".}
 proc fcQImageReader_read(self: pointer): pointer {.importc: "QImageReader_read".}
-proc fcQImageReader_readWithImage(self: pointer, image: pointer): bool {.importc: "QImageReader_readWithImage".}
+proc fcQImageReader_readImage(self: pointer, image: pointer): bool {.importc: "QImageReader_read_image".}
 proc fcQImageReader_jumpToNextImage(self: pointer): bool {.importc: "QImageReader_jumpToNextImage".}
 proc fcQImageReader_jumpToImage(self: pointer, imageNumber: cint): bool {.importc: "QImageReader_jumpToImage".}
 proc fcQImageReader_loopCount(self: pointer): cint {.importc: "QImageReader_loopCount".}
@@ -103,23 +103,23 @@ proc fcQImageReader_currentImageRect(self: pointer): pointer {.importc: "QImageR
 proc fcQImageReader_error(self: pointer): cint {.importc: "QImageReader_error".}
 proc fcQImageReader_errorString(self: pointer): struct_seaqt_string {.importc: "QImageReader_errorString".}
 proc fcQImageReader_supportsOption(self: pointer, option: cint): bool {.importc: "QImageReader_supportsOption".}
-proc fcQImageReader_imageFormatWithFileName(fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QImageReader_imageFormatWithFileName".}
-proc fcQImageReader_imageFormatWithDevice(device: pointer): struct_seaqt_string {.importc: "QImageReader_imageFormatWithDevice".}
+proc fcQImageReader_imageFormatFileName(fileName: struct_seaqt_string): struct_seaqt_string {.importc: "QImageReader_imageFormat_fileName".}
+proc fcQImageReader_imageFormatDevice(device: pointer): struct_seaqt_string {.importc: "QImageReader_imageFormat_device".}
 proc fcQImageReader_supportedImageFormats(): struct_seaqt_array {.importc: "QImageReader_supportedImageFormats".}
 proc fcQImageReader_supportedMimeTypes(): struct_seaqt_array {.importc: "QImageReader_supportedMimeTypes".}
 proc fcQImageReader_imageFormatsForMimeType(mimeType: struct_seaqt_string): struct_seaqt_array {.importc: "QImageReader_imageFormatsForMimeType".}
 proc fcQImageReader_allocationLimit(): cint {.importc: "QImageReader_allocationLimit".}
 proc fcQImageReader_setAllocationLimit(mbLimit: cint): void {.importc: "QImageReader_setAllocationLimit".}
-proc fcQImageReader_tr2(sourceText: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QImageReader_tr2".}
-proc fcQImageReader_tr3(sourceText: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QImageReader_tr3".}
+proc fcQImageReader_trSourceTextDisambiguation(sourceText: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QImageReader_tr_sourceText_disambiguation".}
+proc fcQImageReader_trSourceTextDisambiguationN(sourceText: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QImageReader_tr_sourceText_disambiguation_n".}
 proc fcQImageReader_new(): ptr cQImageReader {.importc: "QImageReader_new".}
-proc fcQImageReader_new2(device: pointer): ptr cQImageReader {.importc: "QImageReader_new2".}
-proc fcQImageReader_new3(fileName: struct_seaqt_string): ptr cQImageReader {.importc: "QImageReader_new3".}
-proc fcQImageReader_new4(device: pointer, format: struct_seaqt_string): ptr cQImageReader {.importc: "QImageReader_new4".}
-proc fcQImageReader_new5(fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQImageReader {.importc: "QImageReader_new5".}
+proc fcQImageReader_new2(device: pointer): ptr cQImageReader {.importc: "QImageReader_new_device".}
+proc fcQImageReader_new3(fileName: struct_seaqt_string): ptr cQImageReader {.importc: "QImageReader_new_fileName".}
+proc fcQImageReader_new4(device: pointer, format: struct_seaqt_string): ptr cQImageReader {.importc: "QImageReader_new_device_format".}
+proc fcQImageReader_new5(fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQImageReader {.importc: "QImageReader_new_fileName_format".}
 
 proc tr*(_: type gen_qimagereader_types.QImageReader, sourceText: cstring): string =
-  let v_ms = fcQImageReader_tr(sourceText)
+  let v_ms = fcQImageReader_trSourceText(sourceText)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -251,7 +251,7 @@ proc read*(self: gen_qimagereader_types.QImageReader): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQImageReader_read(self.h), owned: true)
 
 proc read*(self: gen_qimagereader_types.QImageReader, image: gen_qimage_types.QImage): bool =
-  fcQImageReader_readWithImage(self.h, image.h)
+  fcQImageReader_readImage(self.h, image.h)
 
 proc jumpToNextImage*(self: gen_qimagereader_types.QImageReader): bool =
   fcQImageReader_jumpToNextImage(self.h)
@@ -287,13 +287,13 @@ proc supportsOption*(self: gen_qimagereader_types.QImageReader, option: cint): b
   fcQImageReader_supportsOption(self.h, cint(option))
 
 proc imageFormat*(_: type gen_qimagereader_types.QImageReader, fileName: openArray[char]): seq[byte] =
-  var v_bytearray = fcQImageReader_imageFormatWithFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  var v_bytearray = fcQImageReader_imageFormatFileName(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc imageFormat*(_: type gen_qimagereader_types.QImageReader, device: gen_qiodevice_types.QIODevice): seq[byte] =
-  var v_bytearray = fcQImageReader_imageFormatWithDevice(device.h)
+  var v_bytearray = fcQImageReader_imageFormatDevice(device.h)
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -341,13 +341,13 @@ proc setAllocationLimit*(_: type gen_qimagereader_types.QImageReader, mbLimit: c
   fcQImageReader_setAllocationLimit(mbLimit)
 
 proc tr*(_: type gen_qimagereader_types.QImageReader, sourceText: cstring, disambiguation: cstring): string =
-  let v_ms = fcQImageReader_tr2(sourceText, disambiguation)
+  let v_ms = fcQImageReader_trSourceTextDisambiguation(sourceText, disambiguation)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qimagereader_types.QImageReader, sourceText: cstring, disambiguation: cstring, n: cint): string =
-  let v_ms = fcQImageReader_tr3(sourceText, disambiguation, n)
+  let v_ms = fcQImageReader_trSourceTextDisambiguationN(sourceText, disambiguation, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

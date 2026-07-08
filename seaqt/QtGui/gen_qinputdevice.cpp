@@ -177,25 +177,25 @@ VirtualQInputDevice* QInputDevice_new(const QInputDevice_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQInputDevice(vtbl) : nullptr;
 }
 
-VirtualQInputDevice* QInputDevice_new2(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type) {
+VirtualQInputDevice* QInputDevice_new_name_systemId_type(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQInputDevice>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQInputDevice(vtbl, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(type)) : nullptr;
 }
 
-VirtualQInputDevice* QInputDevice_new3(const QInputDevice_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQInputDevice* QInputDevice_new_parent(const QInputDevice_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQInputDevice>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQInputDevice(vtbl, parent) : nullptr;
 }
 
-VirtualQInputDevice* QInputDevice_new4(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type, struct seaqt_string seatName) {
+VirtualQInputDevice* QInputDevice_new_name_systemId_type_seatName(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type, struct seaqt_string seatName) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQInputDevice>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQInputDevice(vtbl, name_QString, static_cast<qint64>(systemId), static_cast<QInputDevice::DeviceType>(type), seatName_QString) : nullptr;
 }
 
-VirtualQInputDevice* QInputDevice_new5(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type, struct seaqt_string seatName, QObject* parent) {
+VirtualQInputDevice* QInputDevice_new_name_systemId_type_seatName_parent(const QInputDevice_VTable* vtbl, size_t vdata, struct seaqt_string name, long long systemId, int type, struct seaqt_string seatName, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQInputDevice>() + vdata, std::nothrow);
@@ -218,7 +218,7 @@ int QInputDevice_metacall(QInputDevice* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QInputDevice_tr(const char* s) {
+struct seaqt_string QInputDevice_tr_s(const char* s) {
 	QString _ret = QInputDevice::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -331,7 +331,7 @@ void QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, in
 	QInputDevice::connect(self, static_cast<void (QInputDevice::*)(QRect)>(&QInputDevice::availableVirtualGeometryChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QInputDevice_tr2(const char* s, const char* c) {
+struct seaqt_string QInputDevice_tr_s_c(const char* s, const char* c) {
 	QString _ret = QInputDevice::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -342,7 +342,7 @@ struct seaqt_string QInputDevice_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QInputDevice_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QInputDevice_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QInputDevice::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -353,7 +353,7 @@ struct seaqt_string QInputDevice_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QInputDevice* QInputDevice_primaryKeyboardWithSeatName(struct seaqt_string seatName) {
+QInputDevice* QInputDevice_primaryKeyboard_seatName(struct seaqt_string seatName) {
 	QString seatName_QString = QString::fromUtf8(seatName.data, seatName.len);
 	return (QInputDevice*) QInputDevice::primaryKeyboard(seatName_QString);
 }

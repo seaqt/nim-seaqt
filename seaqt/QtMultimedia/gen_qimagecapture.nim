@@ -91,7 +91,7 @@ type cQImageCapture*{.exportc: "QImageCapture", incompleteStruct.} = object
 proc fcQImageCapture_metaObject(self: pointer): pointer {.importc: "QImageCapture_metaObject".}
 proc fcQImageCapture_metacast(self: pointer, param1: cstring): pointer {.importc: "QImageCapture_metacast".}
 proc fcQImageCapture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QImageCapture_metacall".}
-proc fcQImageCapture_tr(s: cstring): struct_seaqt_string {.importc: "QImageCapture_tr".}
+proc fcQImageCapture_trS(s: cstring): struct_seaqt_string {.importc: "QImageCapture_tr_s".}
 proc fcQImageCapture_isAvailable(self: pointer): bool {.importc: "QImageCapture_isAvailable".}
 proc fcQImageCapture_captureSession(self: pointer): pointer {.importc: "QImageCapture_captureSession".}
 proc fcQImageCapture_error(self: pointer): cint {.importc: "QImageCapture_error".}
@@ -103,8 +103,8 @@ proc fcQImageCapture_supportedFormats(): struct_seaqt_array {.importc: "QImageCa
 proc fcQImageCapture_fileFormatName(c: cint): struct_seaqt_string {.importc: "QImageCapture_fileFormatName".}
 proc fcQImageCapture_fileFormatDescription(c: cint): struct_seaqt_string {.importc: "QImageCapture_fileFormatDescription".}
 proc fcQImageCapture_resolution(self: pointer): pointer {.importc: "QImageCapture_resolution".}
-proc fcQImageCapture_setResolution(self: pointer, resolution: pointer): void {.importc: "QImageCapture_setResolution".}
-proc fcQImageCapture_setResolution2(self: pointer, width: cint, height: cint): void {.importc: "QImageCapture_setResolution2".}
+proc fcQImageCapture_setResolutionResolution(self: pointer, resolution: pointer): void {.importc: "QImageCapture_setResolution_resolution".}
+proc fcQImageCapture_setResolutionWidthHeight(self: pointer, width: cint, height: cint): void {.importc: "QImageCapture_setResolution_width_height".}
 proc fcQImageCapture_quality(self: pointer): cint {.importc: "QImageCapture_quality".}
 proc fcQImageCapture_setQuality(self: pointer, quality: cint): void {.importc: "QImageCapture_setQuality".}
 proc fcQImageCapture_metaData(self: pointer): pointer {.importc: "QImageCapture_metaData".}
@@ -136,9 +136,9 @@ proc fcQImageCapture_imageAvailable(self: pointer, id: cint, frame: pointer): vo
 proc fcQImageCapture_connect_imageAvailable(self: pointer, slot: int, callback: proc (slot: int, id: cint, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_imageAvailable".}
 proc fcQImageCapture_imageSaved(self: pointer, id: cint, fileName: struct_seaqt_string): void {.importc: "QImageCapture_imageSaved".}
 proc fcQImageCapture_connect_imageSaved(self: pointer, slot: int, callback: proc (slot: int, id: cint, fileName: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_imageSaved".}
-proc fcQImageCapture_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageCapture_tr2".}
-proc fcQImageCapture_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageCapture_tr3".}
-proc fcQImageCapture_captureToFileWithLocation(self: pointer, location: struct_seaqt_string): cint {.importc: "QImageCapture_captureToFileWithLocation".}
+proc fcQImageCapture_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QImageCapture_tr_s_c".}
+proc fcQImageCapture_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QImageCapture_tr_s_c_n".}
+proc fcQImageCapture_captureToFileLocation(self: pointer, location: struct_seaqt_string): cint {.importc: "QImageCapture_captureToFile_location".}
 proc fcQImageCapture_vdata(self: pointer): ptr pointer {.importc: "QImageCapture_vdata".}
 proc fvdata_cQImageCapture(self: pointer): pointer {.importc: "vdata_QImageCapture".}
 
@@ -169,7 +169,7 @@ proc fcQImageCapture_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQImageCapture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QImageCapture_protectedbase_receivers".}
 proc fcQImageCapture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QImageCapture_protectedbase_isSignalConnected".}
 proc fcQImageCapture_new(vtbl: pointer, vdata: csize_t): ptr cQImageCapture {.importc: "QImageCapture_new".}
-proc fcQImageCapture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQImageCapture {.importc: "QImageCapture_new2".}
+proc fcQImageCapture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQImageCapture {.importc: "QImageCapture_new_parent".}
 proc fcQImageCapture_staticMetaObject(): pointer {.importc: "QImageCapture_staticMetaObject".}
 
 proc metaObject*(self: gen_qimagecapture_types.QImageCapture): gen_qobjectdefs_types.QMetaObject =
@@ -182,7 +182,7 @@ proc metacall*(self: gen_qimagecapture_types.QImageCapture, param1: cint, param2
   fcQImageCapture_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qimagecapture_types.QImageCapture, s: cstring): string =
-  let v_ms = fcQImageCapture_tr(s)
+  let v_ms = fcQImageCapture_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -236,10 +236,10 @@ proc resolution*(self: gen_qimagecapture_types.QImageCapture): gen_qsize_types.Q
   gen_qsize_types.QSize(h: fcQImageCapture_resolution(self.h), owned: true)
 
 proc setResolution*(self: gen_qimagecapture_types.QImageCapture, resolution: gen_qsize_types.QSize): void =
-  fcQImageCapture_setResolution(self.h, resolution.h)
+  fcQImageCapture_setResolutionResolution(self.h, resolution.h)
 
 proc setResolution*(self: gen_qimagecapture_types.QImageCapture, width: cint, height: cint): void =
-  fcQImageCapture_setResolution2(self.h, width, height)
+  fcQImageCapture_setResolutionWidthHeight(self.h, width, height)
 
 proc quality*(self: gen_qimagecapture_types.QImageCapture): cint =
   cint(fcQImageCapture_quality(self.h))
@@ -511,19 +511,19 @@ proc onImageSaved*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCapt
   fcQImageCapture_connect_imageSaved(self.h, cast[int](addr tmp[]), fcQImageCapture_slot_callback_imageSaved, fcQImageCapture_slot_callback_imageSaved_release)
 
 proc tr*(_: type gen_qimagecapture_types.QImageCapture, s: cstring, c: cstring): string =
-  let v_ms = fcQImageCapture_tr2(s, c)
+  let v_ms = fcQImageCapture_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qimagecapture_types.QImageCapture, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQImageCapture_tr3(s, c, n)
+  let v_ms = fcQImageCapture_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc captureToFile*(self: gen_qimagecapture_types.QImageCapture, location: openArray[char]): cint =
-  fcQImageCapture_captureToFileWithLocation(self.h, struct_seaqt_string(data: if len(location) > 0: addr location[0] else: nil, len: csize_t(len(location))))
+  fcQImageCapture_captureToFileLocation(self.h, struct_seaqt_string(data: if len(location) > 0: addr location[0] else: nil, len: csize_t(len(location))))
 
 type QImageCapturemetaObjectProc* = proc(self: QImageCapture): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QImageCapturemetacastProc* = proc(self: QImageCapture, param1: cstring): pointer {.raises: [], gcsafe.}

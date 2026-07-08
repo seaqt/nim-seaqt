@@ -29,12 +29,12 @@ QHttpPart* QHttpPart_new() {
 	return new (std::nothrow) QHttpPart();
 }
 
-QHttpPart* QHttpPart_new2(QHttpPart* other) {
-	return new (std::nothrow) QHttpPart(*other);
+QHttpPart* QHttpPart_new_from(QHttpPart* from) {
+	return new (std::nothrow) QHttpPart(*from);
 }
 
-void QHttpPart_operatorAssign(QHttpPart* self, QHttpPart* other) {
-	self->operator=(*other);
+void QHttpPart_operatorAssign(QHttpPart* self, QHttpPart* from) {
+	self->operator=(*from);
 }
 
 void QHttpPart_swap(QHttpPart* self, QHttpPart* other) {
@@ -225,17 +225,17 @@ VirtualQHttpMultiPart* QHttpMultiPart_new(const QHttpMultiPart_VTable* vtbl, siz
 	return _mem_ ? new (_mem_)VirtualQHttpMultiPart(vtbl) : nullptr;
 }
 
-VirtualQHttpMultiPart* QHttpMultiPart_new2(const QHttpMultiPart_VTable* vtbl, size_t vdata, int contentType) {
+VirtualQHttpMultiPart* QHttpMultiPart_new_contentType(const QHttpMultiPart_VTable* vtbl, size_t vdata, int contentType) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHttpMultiPart>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHttpMultiPart(vtbl, static_cast<QHttpMultiPart::ContentType>(contentType)) : nullptr;
 }
 
-VirtualQHttpMultiPart* QHttpMultiPart_new3(const QHttpMultiPart_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQHttpMultiPart* QHttpMultiPart_new_parent(const QHttpMultiPart_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHttpMultiPart>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHttpMultiPart(vtbl, parent) : nullptr;
 }
 
-VirtualQHttpMultiPart* QHttpMultiPart_new4(const QHttpMultiPart_VTable* vtbl, size_t vdata, int contentType, QObject* parent) {
+VirtualQHttpMultiPart* QHttpMultiPart_new_contentType_parent(const QHttpMultiPart_VTable* vtbl, size_t vdata, int contentType, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHttpMultiPart>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHttpMultiPart(vtbl, static_cast<QHttpMultiPart::ContentType>(contentType), parent) : nullptr;
 }
@@ -256,7 +256,7 @@ int QHttpMultiPart_metacall(QHttpMultiPart* self, int param1, int param2, void**
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QHttpMultiPart_tr(const char* s) {
+struct seaqt_string QHttpMultiPart_tr_s(const char* s) {
 	QString _ret = QHttpMultiPart::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -289,7 +289,7 @@ void QHttpMultiPart_setBoundary(QHttpMultiPart* self, struct seaqt_string bounda
 	self->setBoundary(boundary_QByteArray);
 }
 
-struct seaqt_string QHttpMultiPart_tr2(const char* s, const char* c) {
+struct seaqt_string QHttpMultiPart_tr_s_c(const char* s, const char* c) {
 	QString _ret = QHttpMultiPart::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -300,7 +300,7 @@ struct seaqt_string QHttpMultiPart_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QHttpMultiPart_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QHttpMultiPart_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QHttpMultiPart::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

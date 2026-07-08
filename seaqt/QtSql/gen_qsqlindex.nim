@@ -48,22 +48,22 @@ export
 
 type cQSqlIndex*{.exportc: "QSqlIndex", incompleteStruct.} = object
 
-proc fcQSqlIndex_operatorAssign(self: pointer, other: pointer): void {.importc: "QSqlIndex_operatorAssign".}
+proc fcQSqlIndex_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSqlIndex_operatorAssign".}
 proc fcQSqlIndex_setCursorName(self: pointer, cursorName: struct_seaqt_string): void {.importc: "QSqlIndex_setCursorName".}
 proc fcQSqlIndex_cursorName(self: pointer): struct_seaqt_string {.importc: "QSqlIndex_cursorName".}
 proc fcQSqlIndex_setName(self: pointer, name: struct_seaqt_string): void {.importc: "QSqlIndex_setName".}
 proc fcQSqlIndex_name(self: pointer): struct_seaqt_string {.importc: "QSqlIndex_name".}
-proc fcQSqlIndex_append(self: pointer, field: pointer): void {.importc: "QSqlIndex_append".}
-proc fcQSqlIndex_append2(self: pointer, field: pointer, desc: bool): void {.importc: "QSqlIndex_append2".}
+proc fcQSqlIndex_appendField(self: pointer, field: pointer): void {.importc: "QSqlIndex_append_field".}
+proc fcQSqlIndex_appendFieldDesc(self: pointer, field: pointer, desc: bool): void {.importc: "QSqlIndex_append_field_desc".}
 proc fcQSqlIndex_isDescending(self: pointer, i: cint): bool {.importc: "QSqlIndex_isDescending".}
 proc fcQSqlIndex_setDescending(self: pointer, i: cint, desc: bool): void {.importc: "QSqlIndex_setDescending".}
 proc fcQSqlIndex_new(): ptr cQSqlIndex {.importc: "QSqlIndex_new".}
-proc fcQSqlIndex_new2(other: pointer): ptr cQSqlIndex {.importc: "QSqlIndex_new2".}
-proc fcQSqlIndex_new3(cursorName: struct_seaqt_string): ptr cQSqlIndex {.importc: "QSqlIndex_new3".}
-proc fcQSqlIndex_new4(cursorName: struct_seaqt_string, name: struct_seaqt_string): ptr cQSqlIndex {.importc: "QSqlIndex_new4".}
+proc fcQSqlIndex_new2(fromVal: pointer): ptr cQSqlIndex {.importc: "QSqlIndex_new_from".}
+proc fcQSqlIndex_new3(cursorName: struct_seaqt_string): ptr cQSqlIndex {.importc: "QSqlIndex_new_cursorName".}
+proc fcQSqlIndex_new4(cursorName: struct_seaqt_string, name: struct_seaqt_string): ptr cQSqlIndex {.importc: "QSqlIndex_new_cursorName_name".}
 
-proc operatorAssign*(self: gen_qsqlindex_types.QSqlIndex, other: gen_qsqlindex_types.QSqlIndex): void =
-  fcQSqlIndex_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsqlindex_types.QSqlIndex, fromVal: gen_qsqlindex_types.QSqlIndex): void =
+  fcQSqlIndex_operatorAssign(self.h, fromVal.h)
 
 proc setCursorName*(self: gen_qsqlindex_types.QSqlIndex, cursorName: openArray[char]): void =
   fcQSqlIndex_setCursorName(self.h, struct_seaqt_string(data: if len(cursorName) > 0: addr cursorName[0] else: nil, len: csize_t(len(cursorName))))
@@ -84,10 +84,10 @@ proc name*(self: gen_qsqlindex_types.QSqlIndex): string =
   vx_ret
 
 proc append*(self: gen_qsqlindex_types.QSqlIndex, field: gen_qsqlfield_types.QSqlField): void =
-  fcQSqlIndex_append(self.h, field.h)
+  fcQSqlIndex_appendField(self.h, field.h)
 
 proc append*(self: gen_qsqlindex_types.QSqlIndex, field: gen_qsqlfield_types.QSqlField, desc: bool): void =
-  fcQSqlIndex_append2(self.h, field.h, desc)
+  fcQSqlIndex_appendFieldDesc(self.h, field.h, desc)
 
 proc isDescending*(self: gen_qsqlindex_types.QSqlIndex, i: cint): bool =
   fcQSqlIndex_isDescending(self.h, i)
@@ -99,8 +99,8 @@ proc create*(T: type gen_qsqlindex_types.QSqlIndex): gen_qsqlindex_types.QSqlInd
   let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new(), owned: true)
   tmp
 proc create*(T: type gen_qsqlindex_types.QSqlIndex,
-    other: gen_qsqlindex_types.QSqlIndex): gen_qsqlindex_types.QSqlIndex =
-  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new2(other.h), owned: true)
+    fromVal: gen_qsqlindex_types.QSqlIndex): gen_qsqlindex_types.QSqlIndex =
+  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlindex_types.QSqlIndex,
     cursorName: openArray[char]): gen_qsqlindex_types.QSqlIndex =

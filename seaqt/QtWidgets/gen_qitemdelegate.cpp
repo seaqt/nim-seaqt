@@ -454,7 +454,7 @@ VirtualQItemDelegate* QItemDelegate_new(const QItemDelegate_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQItemDelegate(vtbl) : nullptr;
 }
 
-VirtualQItemDelegate* QItemDelegate_new2(const QItemDelegate_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQItemDelegate* QItemDelegate_new_parent(const QItemDelegate_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQItemDelegate>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQItemDelegate(vtbl, parent) : nullptr;
 }
@@ -475,7 +475,7 @@ int QItemDelegate_metacall(QItemDelegate* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QItemDelegate_tr(const char* s) {
+struct seaqt_string QItemDelegate_tr_s(const char* s) {
 	QString _ret = QItemDelegate::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -526,7 +526,7 @@ void QItemDelegate_setItemEditorFactory(QItemDelegate* self, QItemEditorFactory*
 	self->setItemEditorFactory(factory);
 }
 
-struct seaqt_string QItemDelegate_tr2(const char* s, const char* c) {
+struct seaqt_string QItemDelegate_tr_s_c(const char* s, const char* c) {
 	QString _ret = QItemDelegate::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -537,7 +537,7 @@ struct seaqt_string QItemDelegate_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QItemDelegate_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QItemDelegate_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QItemDelegate::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

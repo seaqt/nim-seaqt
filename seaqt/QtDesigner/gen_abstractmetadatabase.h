@@ -66,15 +66,15 @@ void QDesignerMetaDataBaseInterface_virtbase(QDesignerMetaDataBaseInterface* src
 QMetaObject* QDesignerMetaDataBaseInterface_metaObject(const QDesignerMetaDataBaseInterface* self);
 void* QDesignerMetaDataBaseInterface_metacast(QDesignerMetaDataBaseInterface* self, const char* param1);
 int QDesignerMetaDataBaseInterface_metacall(QDesignerMetaDataBaseInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerMetaDataBaseInterface_tr(const char* s);
+struct seaqt_string QDesignerMetaDataBaseInterface_tr_s(const char* s);
 QDesignerMetaDataBaseItemInterface* QDesignerMetaDataBaseInterface_item(const QDesignerMetaDataBaseInterface* self, QObject* object);
 void QDesignerMetaDataBaseInterface_add(QDesignerMetaDataBaseInterface* self, QObject* object);
 void QDesignerMetaDataBaseInterface_remove(QDesignerMetaDataBaseInterface* self, QObject* object);
 struct seaqt_array /* of QObject* */  QDesignerMetaDataBaseInterface_objects(const QDesignerMetaDataBaseInterface* self);
 void QDesignerMetaDataBaseInterface_changed(QDesignerMetaDataBaseInterface* self);
 void QDesignerMetaDataBaseInterface_connect_changed(QDesignerMetaDataBaseInterface* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QDesignerMetaDataBaseInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerMetaDataBaseInterface_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDesignerMetaDataBaseInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerMetaDataBaseInterface_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QDesignerMetaDataBaseInterface_staticMetaObject();
 void QDesignerMetaDataBaseInterface_delete(QDesignerMetaDataBaseInterface* self);

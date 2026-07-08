@@ -54,16 +54,16 @@ void* QQmlPropertyMap_vdata(VirtualQQmlPropertyMap* self);
 VirtualQQmlPropertyMap* vdata_QQmlPropertyMap(void* vdata);
 
 VirtualQQmlPropertyMap* QQmlPropertyMap_new(const QQmlPropertyMap_VTable* vtbl, size_t vdata);
-VirtualQQmlPropertyMap* QQmlPropertyMap_new2(const QQmlPropertyMap_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQQmlPropertyMap* QQmlPropertyMap_new_parent(const QQmlPropertyMap_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QQmlPropertyMap_virtbase(QQmlPropertyMap* src, QObject** outptr_QObject);
 QMetaObject* QQmlPropertyMap_metaObject(const QQmlPropertyMap* self);
 void* QQmlPropertyMap_metacast(QQmlPropertyMap* self, const char* param1);
 int QQmlPropertyMap_metacall(QQmlPropertyMap* self, int param1, int param2, void** param3);
-struct seaqt_string QQmlPropertyMap_tr(const char* s);
+struct seaqt_string QQmlPropertyMap_tr_s(const char* s);
 QVariant* QQmlPropertyMap_value(const QQmlPropertyMap* self, struct seaqt_string key);
-void QQmlPropertyMap_insert(QQmlPropertyMap* self, struct seaqt_string key, QVariant* value);
-void QQmlPropertyMap_insertWithValues(QQmlPropertyMap* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  values);
+void QQmlPropertyMap_insert_key_value(QQmlPropertyMap* self, struct seaqt_string key, QVariant* value);
+void QQmlPropertyMap_insert_values(QQmlPropertyMap* self, struct seaqt_map /* of struct seaqt_string to QVariant* */  values);
 void QQmlPropertyMap_clear(QQmlPropertyMap* self, struct seaqt_string key);
 void QQmlPropertyMap_freeze(QQmlPropertyMap* self);
 struct seaqt_array /* of struct seaqt_string */  QQmlPropertyMap_keys(const QQmlPropertyMap* self);
@@ -71,13 +71,13 @@ int QQmlPropertyMap_count(const QQmlPropertyMap* self);
 int QQmlPropertyMap_size(const QQmlPropertyMap* self);
 bool QQmlPropertyMap_isEmpty(const QQmlPropertyMap* self);
 bool QQmlPropertyMap_contains(const QQmlPropertyMap* self, struct seaqt_string key);
-QVariant* QQmlPropertyMap_operatorSubscript(QQmlPropertyMap* self, struct seaqt_string key);
-QVariant* QQmlPropertyMap_operatorSubscriptWithKey(const QQmlPropertyMap* self, struct seaqt_string key);
+QVariant* QQmlPropertyMap_operatorSubscript_cQString(QQmlPropertyMap* self, struct seaqt_string key);
+QVariant* QQmlPropertyMap_operatorSubscript_const_cQString(const QQmlPropertyMap* self, struct seaqt_string key);
 void QQmlPropertyMap_valueChanged(QQmlPropertyMap* self, struct seaqt_string key, QVariant* value);
 void QQmlPropertyMap_connect_valueChanged(QQmlPropertyMap* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t));
 QVariant* QQmlPropertyMap_updateValue(QQmlPropertyMap* self, struct seaqt_string key, QVariant* input);
-struct seaqt_string QQmlPropertyMap_tr2(const char* s, const char* c);
-struct seaqt_string QQmlPropertyMap_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQmlPropertyMap_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQmlPropertyMap_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQmlPropertyMap_virtualbase_metaObject(const VirtualQQmlPropertyMap* self);
 void* QQmlPropertyMap_virtualbase_metacast(VirtualQQmlPropertyMap* self, const char* param1);

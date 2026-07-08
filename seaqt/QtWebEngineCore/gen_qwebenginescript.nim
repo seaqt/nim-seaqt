@@ -57,7 +57,7 @@ export
 
 type cQWebEngineScript*{.exportc: "QWebEngineScript", incompleteStruct.} = object
 
-proc fcQWebEngineScript_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineScript_operatorAssign".}
+proc fcQWebEngineScript_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineScript_operatorAssign".}
 proc fcQWebEngineScript_name(self: pointer): struct_seaqt_string {.importc: "QWebEngineScript_name".}
 proc fcQWebEngineScript_setName(self: pointer, name: struct_seaqt_string): void {.importc: "QWebEngineScript_setName".}
 proc fcQWebEngineScript_sourceUrl(self: pointer): pointer {.importc: "QWebEngineScript_sourceUrl".}
@@ -74,11 +74,11 @@ proc fcQWebEngineScript_operatorEqual(self: pointer, other: pointer): bool {.imp
 proc fcQWebEngineScript_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QWebEngineScript_operatorNotEqual".}
 proc fcQWebEngineScript_swap(self: pointer, other: pointer): void {.importc: "QWebEngineScript_swap".}
 proc fcQWebEngineScript_new(): ptr cQWebEngineScript {.importc: "QWebEngineScript_new".}
-proc fcQWebEngineScript_new2(other: pointer): ptr cQWebEngineScript {.importc: "QWebEngineScript_new2".}
+proc fcQWebEngineScript_new2(fromVal: pointer): ptr cQWebEngineScript {.importc: "QWebEngineScript_new_from".}
 proc fcQWebEngineScript_staticMetaObject(): pointer {.importc: "QWebEngineScript_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qwebenginescript_types.QWebEngineScript, other: gen_qwebenginescript_types.QWebEngineScript): void =
-  fcQWebEngineScript_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebenginescript_types.QWebEngineScript, fromVal: gen_qwebenginescript_types.QWebEngineScript): void =
+  fcQWebEngineScript_operatorAssign(self.h, fromVal.h)
 
 proc name*(self: gen_qwebenginescript_types.QWebEngineScript): string =
   let v_ms = fcQWebEngineScript_name(self.h)
@@ -135,8 +135,8 @@ proc create*(T: type gen_qwebenginescript_types.QWebEngineScript): gen_qwebengin
   let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebenginescript_types.QWebEngineScript,
-    other: gen_qwebenginescript_types.QWebEngineScript): gen_qwebenginescript_types.QWebEngineScript =
-  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new2(other.h), owned: true)
+    fromVal: gen_qwebenginescript_types.QWebEngineScript): gen_qwebenginescript_types.QWebEngineScript =
+  let tmp = gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScript_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebenginescript_types.QWebEngineScript): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineScript_staticMetaObject())

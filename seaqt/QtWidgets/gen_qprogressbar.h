@@ -147,13 +147,13 @@ void* QProgressBar_vdata(VirtualQProgressBar* self);
 VirtualQProgressBar* vdata_QProgressBar(void* vdata);
 
 VirtualQProgressBar* QProgressBar_new(const QProgressBar_VTable* vtbl, size_t vdata);
-VirtualQProgressBar* QProgressBar_new2(const QProgressBar_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQProgressBar* QProgressBar_new_parent(const QProgressBar_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QProgressBar_virtbase(QProgressBar* src, QWidget** outptr_QWidget);
 QMetaObject* QProgressBar_metaObject(const QProgressBar* self);
 void* QProgressBar_metacast(QProgressBar* self, const char* param1);
 int QProgressBar_metacall(QProgressBar* self, int param1, int param2, void** param3);
-struct seaqt_string QProgressBar_tr(const char* s);
+struct seaqt_string QProgressBar_tr_s(const char* s);
 int QProgressBar_minimum(const QProgressBar* self);
 int QProgressBar_maximum(const QProgressBar* self);
 int QProgressBar_value(const QProgressBar* self);
@@ -183,8 +183,8 @@ void QProgressBar_connect_valueChanged(QProgressBar* self, intptr_t slot, void (
 bool QProgressBar_event(QProgressBar* self, QEvent* e);
 void QProgressBar_paintEvent(QProgressBar* self, QPaintEvent* param1);
 void QProgressBar_initStyleOption(const QProgressBar* self, QStyleOptionProgressBar* option);
-struct seaqt_string QProgressBar_tr2(const char* s, const char* c);
-struct seaqt_string QProgressBar_tr3(const char* s, const char* c, int n);
+struct seaqt_string QProgressBar_tr_s_c(const char* s, const char* c);
+struct seaqt_string QProgressBar_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QProgressBar_virtualbase_metaObject(const VirtualQProgressBar* self);
 void* QProgressBar_virtualbase_metacast(VirtualQProgressBar* self, const char* param1);

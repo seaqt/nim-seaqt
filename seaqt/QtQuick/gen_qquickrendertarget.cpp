@@ -18,12 +18,12 @@ QQuickRenderTarget* QQuickRenderTarget_new() {
 	return new (std::nothrow) QQuickRenderTarget();
 }
 
-QQuickRenderTarget* QQuickRenderTarget_new2(QQuickRenderTarget* other) {
-	return new (std::nothrow) QQuickRenderTarget(*other);
+QQuickRenderTarget* QQuickRenderTarget_new_from(QQuickRenderTarget* from) {
+	return new (std::nothrow) QQuickRenderTarget(*from);
 }
 
-void QQuickRenderTarget_operatorAssign(QQuickRenderTarget* self, QQuickRenderTarget* other) {
-	self->operator=(*other);
+void QQuickRenderTarget_operatorAssign(QQuickRenderTarget* self, QQuickRenderTarget* from) {
+	self->operator=(*from);
 }
 
 bool QQuickRenderTarget_isNull(const QQuickRenderTarget* self) {
@@ -47,15 +47,15 @@ void QQuickRenderTarget_setMirrorVertically(QQuickRenderTarget* self, bool enabl
 	self->setMirrorVertically(enable);
 }
 
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture(unsigned int textureId, unsigned int format, QSize* pixelSize) {
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture_textureId_format_pixelSize(unsigned int textureId, unsigned int format, QSize* pixelSize) {
 	return new QQuickRenderTarget(QQuickRenderTarget::fromOpenGLTexture(static_cast<uint>(textureId), static_cast<uint>(format), *pixelSize));
 }
 
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture2(unsigned int textureId, QSize* pixelSize) {
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture_textureId_pixelSize(unsigned int textureId, QSize* pixelSize) {
 	return new QQuickRenderTarget(QQuickRenderTarget::fromOpenGLTexture(static_cast<uint>(textureId), *pixelSize));
 }
 
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer(unsigned int renderbufferId, QSize* pixelSize) {
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer_renderbufferId_pixelSize(unsigned int renderbufferId, QSize* pixelSize) {
 	return new QQuickRenderTarget(QQuickRenderTarget::fromOpenGLRenderBuffer(static_cast<uint>(renderbufferId), *pixelSize));
 }
 
@@ -63,15 +63,15 @@ QQuickRenderTarget* QQuickRenderTarget_fromPaintDevice(QPaintDevice* device) {
 	return new QQuickRenderTarget(QQuickRenderTarget::fromPaintDevice(device));
 }
 
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture3(unsigned int textureId, unsigned int format, QSize* pixelSize, int sampleCount) {
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture_textureId_format_pixelSize_sampleCount(unsigned int textureId, unsigned int format, QSize* pixelSize, int sampleCount) {
 	return new QQuickRenderTarget(QQuickRenderTarget::fromOpenGLTexture(static_cast<uint>(textureId), static_cast<uint>(format), *pixelSize, static_cast<int>(sampleCount)));
 }
 
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture4(unsigned int textureId, QSize* pixelSize, int sampleCount) {
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLTexture_textureId_pixelSize_sampleCount(unsigned int textureId, QSize* pixelSize, int sampleCount) {
 	return new QQuickRenderTarget(QQuickRenderTarget::fromOpenGLTexture(static_cast<uint>(textureId), *pixelSize, static_cast<int>(sampleCount)));
 }
 
-QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer2(unsigned int renderbufferId, QSize* pixelSize, int sampleCount) {
+QQuickRenderTarget* QQuickRenderTarget_fromOpenGLRenderBuffer_renderbufferId_pixelSize_sampleCount(unsigned int renderbufferId, QSize* pixelSize, int sampleCount) {
 	return new QQuickRenderTarget(QQuickRenderTarget::fromOpenGLRenderBuffer(static_cast<uint>(renderbufferId), *pixelSize, static_cast<int>(sampleCount)));
 }
 

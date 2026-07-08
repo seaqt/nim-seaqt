@@ -81,7 +81,7 @@ type cQItemDelegate*{.exportc: "QItemDelegate", incompleteStruct.} = object
 proc fcQItemDelegate_metaObject(self: pointer): pointer {.importc: "QItemDelegate_metaObject".}
 proc fcQItemDelegate_metacast(self: pointer, param1: cstring): pointer {.importc: "QItemDelegate_metacast".}
 proc fcQItemDelegate_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QItemDelegate_metacall".}
-proc fcQItemDelegate_tr(s: cstring): struct_seaqt_string {.importc: "QItemDelegate_tr".}
+proc fcQItemDelegate_trS(s: cstring): struct_seaqt_string {.importc: "QItemDelegate_tr_s".}
 proc fcQItemDelegate_hasClipping(self: pointer): bool {.importc: "QItemDelegate_hasClipping".}
 proc fcQItemDelegate_setClipping(self: pointer, clip: bool): void {.importc: "QItemDelegate_setClipping".}
 proc fcQItemDelegate_paint(self: pointer, painter: pointer, option: pointer, index: pointer): void {.importc: "QItemDelegate_paint".}
@@ -92,8 +92,8 @@ proc fcQItemDelegate_setModelData(self: pointer, editor: pointer, model: pointer
 proc fcQItemDelegate_updateEditorGeometry(self: pointer, editor: pointer, option: pointer, index: pointer): void {.importc: "QItemDelegate_updateEditorGeometry".}
 proc fcQItemDelegate_itemEditorFactory(self: pointer): pointer {.importc: "QItemDelegate_itemEditorFactory".}
 proc fcQItemDelegate_setItemEditorFactory(self: pointer, factory: pointer): void {.importc: "QItemDelegate_setItemEditorFactory".}
-proc fcQItemDelegate_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QItemDelegate_tr2".}
-proc fcQItemDelegate_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QItemDelegate_tr3".}
+proc fcQItemDelegate_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QItemDelegate_tr_s_c".}
+proc fcQItemDelegate_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QItemDelegate_tr_s_c_n".}
 proc fcQItemDelegate_vdata(self: pointer): ptr pointer {.importc: "QItemDelegate_vdata".}
 proc fvdata_cQItemDelegate(self: pointer): pointer {.importc: "vdata_QItemDelegate".}
 
@@ -159,7 +159,7 @@ proc fcQItemDelegate_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQItemDelegate_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QItemDelegate_protectedbase_receivers".}
 proc fcQItemDelegate_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QItemDelegate_protectedbase_isSignalConnected".}
 proc fcQItemDelegate_new(vtbl: pointer, vdata: csize_t): ptr cQItemDelegate {.importc: "QItemDelegate_new".}
-proc fcQItemDelegate_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQItemDelegate {.importc: "QItemDelegate_new2".}
+proc fcQItemDelegate_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQItemDelegate {.importc: "QItemDelegate_new_parent".}
 proc fcQItemDelegate_staticMetaObject(): pointer {.importc: "QItemDelegate_staticMetaObject".}
 
 proc metaObject*(self: gen_qitemdelegate_types.QItemDelegate): gen_qobjectdefs_types.QMetaObject =
@@ -172,7 +172,7 @@ proc metacall*(self: gen_qitemdelegate_types.QItemDelegate, param1: cint, param2
   fcQItemDelegate_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qitemdelegate_types.QItemDelegate, s: cstring): string =
-  let v_ms = fcQItemDelegate_tr(s)
+  let v_ms = fcQItemDelegate_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -208,13 +208,13 @@ proc setItemEditorFactory*(self: gen_qitemdelegate_types.QItemDelegate, factory:
   fcQItemDelegate_setItemEditorFactory(self.h, factory.h)
 
 proc tr*(_: type gen_qitemdelegate_types.QItemDelegate, s: cstring, c: cstring): string =
-  let v_ms = fcQItemDelegate_tr2(s, c)
+  let v_ms = fcQItemDelegate_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qitemdelegate_types.QItemDelegate, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQItemDelegate_tr3(s, c, n)
+  let v_ms = fcQItemDelegate_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

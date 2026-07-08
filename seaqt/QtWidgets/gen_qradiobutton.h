@@ -151,15 +151,15 @@ void* QRadioButton_vdata(VirtualQRadioButton* self);
 VirtualQRadioButton* vdata_QRadioButton(void* vdata);
 
 VirtualQRadioButton* QRadioButton_new(const QRadioButton_VTable* vtbl, size_t vdata);
-VirtualQRadioButton* QRadioButton_new2(const QRadioButton_VTable* vtbl, size_t vdata, struct seaqt_string text);
-VirtualQRadioButton* QRadioButton_new3(const QRadioButton_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQRadioButton* QRadioButton_new4(const QRadioButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent);
+VirtualQRadioButton* QRadioButton_new_text(const QRadioButton_VTable* vtbl, size_t vdata, struct seaqt_string text);
+VirtualQRadioButton* QRadioButton_new_parent(const QRadioButton_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQRadioButton* QRadioButton_new_text_parent(const QRadioButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent);
 
 void QRadioButton_virtbase(QRadioButton* src, QAbstractButton** outptr_QAbstractButton);
 QMetaObject* QRadioButton_metaObject(const QRadioButton* self);
 void* QRadioButton_metacast(QRadioButton* self, const char* param1);
 int QRadioButton_metacall(QRadioButton* self, int param1, int param2, void** param3);
-struct seaqt_string QRadioButton_tr(const char* s);
+struct seaqt_string QRadioButton_tr_s(const char* s);
 QSize* QRadioButton_sizeHint(const QRadioButton* self);
 QSize* QRadioButton_minimumSizeHint(const QRadioButton* self);
 bool QRadioButton_event(QRadioButton* self, QEvent* e);
@@ -167,8 +167,8 @@ bool QRadioButton_hitButton(const QRadioButton* self, QPoint* param1);
 void QRadioButton_paintEvent(QRadioButton* self, QPaintEvent* param1);
 void QRadioButton_mouseMoveEvent(QRadioButton* self, QMouseEvent* param1);
 void QRadioButton_initStyleOption(const QRadioButton* self, QStyleOptionButton* button);
-struct seaqt_string QRadioButton_tr2(const char* s, const char* c);
-struct seaqt_string QRadioButton_tr3(const char* s, const char* c, int n);
+struct seaqt_string QRadioButton_tr_s_c(const char* s, const char* c);
+struct seaqt_string QRadioButton_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QRadioButton_virtualbase_metaObject(const VirtualQRadioButton* self);
 void* QRadioButton_virtualbase_metacast(VirtualQRadioButton* self, const char* param1);

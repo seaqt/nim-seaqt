@@ -23,9 +23,9 @@ typedef struct QVariant QVariant;
 #endif
 
 QScrollerProperties* QScrollerProperties_new();
-QScrollerProperties* QScrollerProperties_new2(QScrollerProperties* sp);
+QScrollerProperties* QScrollerProperties_new_from(QScrollerProperties* from);
 
-void QScrollerProperties_operatorAssign(QScrollerProperties* self, QScrollerProperties* sp);
+void QScrollerProperties_operatorAssign(QScrollerProperties* self, QScrollerProperties* from);
 bool QScrollerProperties_operatorEqual(const QScrollerProperties* self, QScrollerProperties* sp);
 bool QScrollerProperties_operatorNotEqual(const QScrollerProperties* self, QScrollerProperties* sp);
 void QScrollerProperties_setDefaultScrollerProperties(QScrollerProperties* sp);

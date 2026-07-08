@@ -44,7 +44,7 @@ void QDesignerFormWindowInterface_virtbase(QDesignerFormWindowInterface* src, QW
 QMetaObject* QDesignerFormWindowInterface_metaObject(const QDesignerFormWindowInterface* self);
 void* QDesignerFormWindowInterface_metacast(QDesignerFormWindowInterface* self, const char* param1);
 int QDesignerFormWindowInterface_metacall(QDesignerFormWindowInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerFormWindowInterface_tr(const char* s);
+struct seaqt_string QDesignerFormWindowInterface_tr_s(const char* s);
 struct seaqt_string QDesignerFormWindowInterface_fileName(const QDesignerFormWindowInterface* self);
 QDir* QDesignerFormWindowInterface_absoluteDir(const QDesignerFormWindowInterface* self);
 struct seaqt_string QDesignerFormWindowInterface_contents(const QDesignerFormWindowInterface* self);
@@ -79,8 +79,8 @@ void QDesignerFormWindowInterface_setMainContainer(QDesignerFormWindowInterface*
 QWidget* QDesignerFormWindowInterface_formContainer(const QDesignerFormWindowInterface* self);
 bool QDesignerFormWindowInterface_isManaged(const QDesignerFormWindowInterface* self, QWidget* widget);
 bool QDesignerFormWindowInterface_isDirty(const QDesignerFormWindowInterface* self);
-QDesignerFormWindowInterface* QDesignerFormWindowInterface_findFormWindow(QWidget* w);
-QDesignerFormWindowInterface* QDesignerFormWindowInterface_findFormWindowWithObj(QObject* obj);
+QDesignerFormWindowInterface* QDesignerFormWindowInterface_findFormWindow_w(QWidget* w);
+QDesignerFormWindowInterface* QDesignerFormWindowInterface_findFormWindow_obj(QObject* obj);
 QUndoStack* QDesignerFormWindowInterface_commandHistory(const QDesignerFormWindowInterface* self);
 void QDesignerFormWindowInterface_beginCommand(QDesignerFormWindowInterface* self, struct seaqt_string description);
 void QDesignerFormWindowInterface_endCommand(QDesignerFormWindowInterface* self);
@@ -98,9 +98,9 @@ void QDesignerFormWindowInterface_clearSelection(QDesignerFormWindowInterface* s
 void QDesignerFormWindowInterface_selectWidget(QDesignerFormWindowInterface* self, QWidget* w, bool select);
 void QDesignerFormWindowInterface_setGrid(QDesignerFormWindowInterface* self, QPoint* grid);
 void QDesignerFormWindowInterface_setFileName(QDesignerFormWindowInterface* self, struct seaqt_string fileName);
-bool QDesignerFormWindowInterface_setContentsWithContents(QDesignerFormWindowInterface* self, struct seaqt_string contents);
+bool QDesignerFormWindowInterface_setContents_contents(QDesignerFormWindowInterface* self, struct seaqt_string contents);
 void QDesignerFormWindowInterface_editWidgets(QDesignerFormWindowInterface* self);
-void QDesignerFormWindowInterface_activateResourceFilePaths(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths);
+void QDesignerFormWindowInterface_activateResourceFilePaths_paths(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths);
 void QDesignerFormWindowInterface_mainContainerChanged(QDesignerFormWindowInterface* self, QWidget* mainContainer);
 void QDesignerFormWindowInterface_connect_mainContainerChanged(QDesignerFormWindowInterface* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t));
 void QDesignerFormWindowInterface_toolChanged(QDesignerFormWindowInterface* self, int toolIndex);
@@ -129,9 +129,9 @@ void QDesignerFormWindowInterface_widgetRemoved(QDesignerFormWindowInterface* se
 void QDesignerFormWindowInterface_connect_widgetRemoved(QDesignerFormWindowInterface* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t));
 void QDesignerFormWindowInterface_objectRemoved(QDesignerFormWindowInterface* self, QObject* o);
 void QDesignerFormWindowInterface_connect_objectRemoved(QDesignerFormWindowInterface* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t));
-struct seaqt_string QDesignerFormWindowInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerFormWindowInterface_tr3(const char* s, const char* c, int n);
-void QDesignerFormWindowInterface_activateResourceFilePaths2(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths, int* errorCount);
+struct seaqt_string QDesignerFormWindowInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerFormWindowInterface_tr_s_c_n(const char* s, const char* c, int n);
+void QDesignerFormWindowInterface_activateResourceFilePaths_paths_errorCount(QDesignerFormWindowInterface* self, struct seaqt_array /* of struct seaqt_string */  paths, int* errorCount);
 
 const QMetaObject* QDesignerFormWindowInterface_staticMetaObject();
 void QDesignerFormWindowInterface_delete(QDesignerFormWindowInterface* self);

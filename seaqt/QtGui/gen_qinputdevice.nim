@@ -88,7 +88,7 @@ type cQInputDevice*{.exportc: "QInputDevice", incompleteStruct.} = object
 proc fcQInputDevice_metaObject(self: pointer): pointer {.importc: "QInputDevice_metaObject".}
 proc fcQInputDevice_metacast(self: pointer, param1: cstring): pointer {.importc: "QInputDevice_metacast".}
 proc fcQInputDevice_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QInputDevice_metacall".}
-proc fcQInputDevice_tr(s: cstring): struct_seaqt_string {.importc: "QInputDevice_tr".}
+proc fcQInputDevice_trS(s: cstring): struct_seaqt_string {.importc: "QInputDevice_tr_s".}
 proc fcQInputDevice_name(self: pointer): struct_seaqt_string {.importc: "QInputDevice_name".}
 proc fcQInputDevice_typeX(self: pointer): cint {.importc: "QInputDevice_type".}
 proc fcQInputDevice_capabilities(self: pointer): cint {.importc: "QInputDevice_capabilities".}
@@ -102,9 +102,9 @@ proc fcQInputDevice_primaryKeyboard(): pointer {.importc: "QInputDevice_primaryK
 proc fcQInputDevice_operatorEqual(self: pointer, other: pointer): bool {.importc: "QInputDevice_operatorEqual".}
 proc fcQInputDevice_availableVirtualGeometryChanged(self: pointer, area: pointer): void {.importc: "QInputDevice_availableVirtualGeometryChanged".}
 proc fcQInputDevice_connect_availableVirtualGeometryChanged(self: pointer, slot: int, callback: proc (slot: int, area: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputDevice_connect_availableVirtualGeometryChanged".}
-proc fcQInputDevice_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QInputDevice_tr2".}
-proc fcQInputDevice_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QInputDevice_tr3".}
-proc fcQInputDevice_primaryKeyboardWithSeatName(seatName: struct_seaqt_string): pointer {.importc: "QInputDevice_primaryKeyboardWithSeatName".}
+proc fcQInputDevice_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QInputDevice_tr_s_c".}
+proc fcQInputDevice_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QInputDevice_tr_s_c_n".}
+proc fcQInputDevice_primaryKeyboardSeatName(seatName: struct_seaqt_string): pointer {.importc: "QInputDevice_primaryKeyboard_seatName".}
 proc fcQInputDevice_vdata(self: pointer): ptr pointer {.importc: "QInputDevice_vdata".}
 proc fvdata_cQInputDevice(self: pointer): pointer {.importc: "vdata_QInputDevice".}
 
@@ -135,10 +135,10 @@ proc fcQInputDevice_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQInputDevice_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QInputDevice_protectedbase_receivers".}
 proc fcQInputDevice_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QInputDevice_protectedbase_isSignalConnected".}
 proc fcQInputDevice_new(vtbl: pointer, vdata: csize_t): ptr cQInputDevice {.importc: "QInputDevice_new".}
-proc fcQInputDevice_new2(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, typeVal: cint): ptr cQInputDevice {.importc: "QInputDevice_new2".}
-proc fcQInputDevice_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQInputDevice {.importc: "QInputDevice_new3".}
-proc fcQInputDevice_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, typeVal: cint, seatName: struct_seaqt_string): ptr cQInputDevice {.importc: "QInputDevice_new4".}
-proc fcQInputDevice_new5(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, typeVal: cint, seatName: struct_seaqt_string, parent: pointer): ptr cQInputDevice {.importc: "QInputDevice_new5".}
+proc fcQInputDevice_new2(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, typeVal: cint): ptr cQInputDevice {.importc: "QInputDevice_new_name_systemId_type".}
+proc fcQInputDevice_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQInputDevice {.importc: "QInputDevice_new_parent".}
+proc fcQInputDevice_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, typeVal: cint, seatName: struct_seaqt_string): ptr cQInputDevice {.importc: "QInputDevice_new_name_systemId_type_seatName".}
+proc fcQInputDevice_new5(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, typeVal: cint, seatName: struct_seaqt_string, parent: pointer): ptr cQInputDevice {.importc: "QInputDevice_new_name_systemId_type_seatName_parent".}
 proc fcQInputDevice_staticMetaObject(): pointer {.importc: "QInputDevice_staticMetaObject".}
 
 proc metaObject*(self: gen_qinputdevice_types.QInputDevice): gen_qobjectdefs_types.QMetaObject =
@@ -151,7 +151,7 @@ proc metacall*(self: gen_qinputdevice_types.QInputDevice, param1: cint, param2: 
   fcQInputDevice_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qinputdevice_types.QInputDevice, s: cstring): string =
-  let v_ms = fcQInputDevice_tr(s)
+  let v_ms = fcQInputDevice_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -231,19 +231,19 @@ proc onAvailableVirtualGeometryChanged*(self: gen_qinputdevice_types.QInputDevic
   fcQInputDevice_connect_availableVirtualGeometryChanged(self.h, cast[int](addr tmp[]), fcQInputDevice_slot_callback_availableVirtualGeometryChanged, fcQInputDevice_slot_callback_availableVirtualGeometryChanged_release)
 
 proc tr*(_: type gen_qinputdevice_types.QInputDevice, s: cstring, c: cstring): string =
-  let v_ms = fcQInputDevice_tr2(s, c)
+  let v_ms = fcQInputDevice_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qinputdevice_types.QInputDevice, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQInputDevice_tr3(s, c, n)
+  let v_ms = fcQInputDevice_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc primaryKeyboard*(_: type gen_qinputdevice_types.QInputDevice, seatName: openArray[char]): gen_qinputdevice_types.QInputDevice =
-  gen_qinputdevice_types.QInputDevice(h: fcQInputDevice_primaryKeyboardWithSeatName(struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))), owned: false)
+  gen_qinputdevice_types.QInputDevice(h: fcQInputDevice_primaryKeyboardSeatName(struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))), owned: false)
 
 type QInputDevicemetaObjectProc* = proc(self: QInputDevice): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QInputDevicemetacastProc* = proc(self: QInputDevice, param1: cstring): pointer {.raises: [], gcsafe.}

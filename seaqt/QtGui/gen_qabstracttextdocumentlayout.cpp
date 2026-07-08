@@ -341,7 +341,7 @@ int QAbstractTextDocumentLayout_metacall(QAbstractTextDocumentLayout* self, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractTextDocumentLayout_tr(const char* s) {
+struct seaqt_string QAbstractTextDocumentLayout_tr_s(const char* s) {
 	QString _ret = QAbstractTextDocumentLayout::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -422,7 +422,7 @@ void QAbstractTextDocumentLayout_registerHandler(QAbstractTextDocumentLayout* se
 	self->registerHandler(static_cast<int>(objectType), component);
 }
 
-void QAbstractTextDocumentLayout_unregisterHandler(QAbstractTextDocumentLayout* self, int objectType) {
+void QAbstractTextDocumentLayout_unregisterHandler_objectType(QAbstractTextDocumentLayout* self, int objectType) {
 	self->unregisterHandler(static_cast<int>(objectType));
 }
 
@@ -497,7 +497,7 @@ void QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentL
 	QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(int)>(&QAbstractTextDocumentLayout::pageCountChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAbstractTextDocumentLayout_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractTextDocumentLayout_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractTextDocumentLayout::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -508,7 +508,7 @@ struct seaqt_string QAbstractTextDocumentLayout_tr2(const char* s, const char* c
 	return _ms;
 }
 
-struct seaqt_string QAbstractTextDocumentLayout_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractTextDocumentLayout_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractTextDocumentLayout::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -519,15 +519,15 @@ struct seaqt_string QAbstractTextDocumentLayout_tr3(const char* s, const char* c
 	return _ms;
 }
 
-void QAbstractTextDocumentLayout_unregisterHandler2(QAbstractTextDocumentLayout* self, int objectType, QObject* component) {
+void QAbstractTextDocumentLayout_unregisterHandler_objectType_component(QAbstractTextDocumentLayout* self, int objectType, QObject* component) {
 	self->unregisterHandler(static_cast<int>(objectType), component);
 }
 
-void QAbstractTextDocumentLayout_updateWithQRectF(QAbstractTextDocumentLayout* self, QRectF* param1) {
+void QAbstractTextDocumentLayout_update_QRectF(QAbstractTextDocumentLayout* self, QRectF* param1) {
 	self->update(*param1);
 }
 
-void QAbstractTextDocumentLayout_connect_updateWithQRectF(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
+void QAbstractTextDocumentLayout_connect_update_QRectF(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QRectF*);
@@ -646,16 +646,16 @@ void QTextObjectInterface_drawObject(QTextObjectInterface* self, QPainter* paint
 	self->drawObject(painter, *rect, doc, static_cast<int>(posInDocument), *format);
 }
 
-void QTextObjectInterface_operatorAssign(QTextObjectInterface* self, QTextObjectInterface* param1) {
-	self->operator=(*param1);
+void QTextObjectInterface_operatorAssign(QTextObjectInterface* self, QTextObjectInterface* from) {
+	self->operator=(*from);
 }
 
 void QTextObjectInterface_delete(QTextObjectInterface* self) {
 	delete self;
 }
 
-QAbstractTextDocumentLayout__Selection* QAbstractTextDocumentLayout__Selection_new(QAbstractTextDocumentLayout__Selection* param1) {
-	return new (std::nothrow) QAbstractTextDocumentLayout__Selection(*param1);
+QAbstractTextDocumentLayout__Selection* QAbstractTextDocumentLayout__Selection_new(QAbstractTextDocumentLayout__Selection* from) {
+	return new (std::nothrow) QAbstractTextDocumentLayout__Selection(*from);
 }
 
 QTextCursor* QAbstractTextDocumentLayout__Selection_cursor(const QAbstractTextDocumentLayout__Selection* self) {
@@ -674,8 +674,8 @@ void QAbstractTextDocumentLayout__Selection_setFormat(QAbstractTextDocumentLayou
 	self->format = *format;
 }
 
-void QAbstractTextDocumentLayout__Selection_operatorAssign(QAbstractTextDocumentLayout__Selection* self, QAbstractTextDocumentLayout__Selection* param1) {
-	self->operator=(*param1);
+void QAbstractTextDocumentLayout__Selection_operatorAssign(QAbstractTextDocumentLayout__Selection* self, QAbstractTextDocumentLayout__Selection* from) {
+	self->operator=(*from);
 }
 
 void QAbstractTextDocumentLayout__Selection_delete(QAbstractTextDocumentLayout__Selection* self) {
@@ -686,8 +686,8 @@ QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintCon
 	return new (std::nothrow) QAbstractTextDocumentLayout__PaintContext();
 }
 
-QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new2(QAbstractTextDocumentLayout__PaintContext* param1) {
-	return new (std::nothrow) QAbstractTextDocumentLayout__PaintContext(*param1);
+QAbstractTextDocumentLayout__PaintContext* QAbstractTextDocumentLayout__PaintContext_new_from(QAbstractTextDocumentLayout__PaintContext* from) {
+	return new (std::nothrow) QAbstractTextDocumentLayout__PaintContext(*from);
 }
 
 int QAbstractTextDocumentLayout__PaintContext_cursorPosition(const QAbstractTextDocumentLayout__PaintContext* self) {
@@ -737,8 +737,8 @@ void QAbstractTextDocumentLayout__PaintContext_setSelections(QAbstractTextDocume
 	self->selections = selections_QList;
 }
 
-void QAbstractTextDocumentLayout__PaintContext_operatorAssign(QAbstractTextDocumentLayout__PaintContext* self, QAbstractTextDocumentLayout__PaintContext* param1) {
-	self->operator=(*param1);
+void QAbstractTextDocumentLayout__PaintContext_operatorAssign(QAbstractTextDocumentLayout__PaintContext* self, QAbstractTextDocumentLayout__PaintContext* from) {
+	self->operator=(*from);
 }
 
 void QAbstractTextDocumentLayout__PaintContext_delete(QAbstractTextDocumentLayout__PaintContext* self) {

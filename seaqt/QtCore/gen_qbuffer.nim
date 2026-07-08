@@ -57,11 +57,11 @@ type cQBuffer*{.exportc: "QBuffer", incompleteStruct.} = object
 proc fcQBuffer_metaObject(self: pointer): pointer {.importc: "QBuffer_metaObject".}
 proc fcQBuffer_metacast(self: pointer, param1: cstring): pointer {.importc: "QBuffer_metacast".}
 proc fcQBuffer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QBuffer_metacall".}
-proc fcQBuffer_tr(s: cstring): struct_seaqt_string {.importc: "QBuffer_tr".}
+proc fcQBuffer_trS(s: cstring): struct_seaqt_string {.importc: "QBuffer_tr_s".}
 proc fcQBuffer_buffer(self: pointer): struct_seaqt_string {.importc: "QBuffer_buffer".}
-proc fcQBuffer_buffer2(self: pointer): struct_seaqt_string {.importc: "QBuffer_buffer2".}
-proc fcQBuffer_setData(self: pointer, data: struct_seaqt_string): void {.importc: "QBuffer_setData".}
-proc fcQBuffer_setData2(self: pointer, data: cstring, len: cint): void {.importc: "QBuffer_setData2".}
+proc fcQBuffer_bufferConst(self: pointer): struct_seaqt_string {.importc: "QBuffer_buffer_const".}
+proc fcQBuffer_setDataData(self: pointer, data: struct_seaqt_string): void {.importc: "QBuffer_setData_data".}
+proc fcQBuffer_setDataDataLen(self: pointer, data: cstring, len: cint): void {.importc: "QBuffer_setData_data_len".}
 proc fcQBuffer_data(self: pointer): struct_seaqt_string {.importc: "QBuffer_data".}
 proc fcQBuffer_open(self: pointer, openMode: cint): bool {.importc: "QBuffer_open".}
 proc fcQBuffer_close(self: pointer): void {.importc: "QBuffer_close".}
@@ -70,8 +70,8 @@ proc fcQBuffer_pos(self: pointer): clonglong {.importc: "QBuffer_pos".}
 proc fcQBuffer_seek(self: pointer, off: clonglong): bool {.importc: "QBuffer_seek".}
 proc fcQBuffer_atEnd(self: pointer): bool {.importc: "QBuffer_atEnd".}
 proc fcQBuffer_canReadLine(self: pointer): bool {.importc: "QBuffer_canReadLine".}
-proc fcQBuffer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QBuffer_tr2".}
-proc fcQBuffer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QBuffer_tr3".}
+proc fcQBuffer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QBuffer_tr_s_c".}
+proc fcQBuffer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QBuffer_tr_s_c_n".}
 proc fcQBuffer_vdata(self: pointer): ptr pointer {.importc: "QBuffer_vdata".}
 proc fvdata_cQBuffer(self: pointer): pointer {.importc: "vdata_QBuffer".}
 
@@ -138,7 +138,7 @@ proc fcQBuffer_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "
 proc fcQBuffer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QBuffer_protectedbase_receivers".}
 proc fcQBuffer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QBuffer_protectedbase_isSignalConnected".}
 proc fcQBuffer_new(vtbl: pointer, vdata: csize_t): ptr cQBuffer {.importc: "QBuffer_new".}
-proc fcQBuffer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQBuffer {.importc: "QBuffer_new2".}
+proc fcQBuffer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQBuffer {.importc: "QBuffer_new_parent".}
 proc fcQBuffer_staticMetaObject(): pointer {.importc: "QBuffer_staticMetaObject".}
 
 proc metaObject*(self: gen_qbuffer_types.QBuffer): gen_qobjectdefs_types.QMetaObject =
@@ -151,7 +151,7 @@ proc metacall*(self: gen_qbuffer_types.QBuffer, param1: cint, param2: cint, para
   fcQBuffer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qbuffer_types.QBuffer, s: cstring): string =
-  let v_ms = fcQBuffer_tr(s)
+  let v_ms = fcQBuffer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -163,16 +163,16 @@ proc buffer*(self: gen_qbuffer_types.QBuffer): seq[byte] =
   vx_ret
 
 proc buffer2*(self: gen_qbuffer_types.QBuffer): seq[byte] =
-  var v_bytearray = fcQBuffer_buffer2(self.h)
+  var v_bytearray = fcQBuffer_bufferConst(self.h)
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc setData*(self: gen_qbuffer_types.QBuffer, data: openArray[byte]): void =
-  fcQBuffer_setData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQBuffer_setDataData(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc setData*(self: gen_qbuffer_types.QBuffer, data: cstring, len: cint): void =
-  fcQBuffer_setData2(self.h, data, len)
+  fcQBuffer_setDataDataLen(self.h, data, len)
 
 proc data*(self: gen_qbuffer_types.QBuffer): seq[byte] =
   var v_bytearray = fcQBuffer_data(self.h)
@@ -202,13 +202,13 @@ proc canReadLine*(self: gen_qbuffer_types.QBuffer): bool =
   fcQBuffer_canReadLine(self.h)
 
 proc tr*(_: type gen_qbuffer_types.QBuffer, s: cstring, c: cstring): string =
-  let v_ms = fcQBuffer_tr2(s, c)
+  let v_ms = fcQBuffer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qbuffer_types.QBuffer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQBuffer_tr3(s, c, n)
+  let v_ms = fcQBuffer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -20,7 +20,7 @@ class QJSNumberCoercion;
 typedef struct QJSNumberCoercion QJSNumberCoercion;
 #endif
 
-QJSNumberCoercion* QJSNumberCoercion_new(QJSNumberCoercion* param1);
+QJSNumberCoercion* QJSNumberCoercion_new(QJSNumberCoercion* from);
 
 bool QJSNumberCoercion_isInteger(double d);
 int QJSNumberCoercion_toInteger(double d);

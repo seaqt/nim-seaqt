@@ -220,7 +220,7 @@ VirtualQAbstractAnimation* QAbstractAnimation_new(const QAbstractAnimation_VTabl
 	return _mem_ ? new (_mem_)VirtualQAbstractAnimation(vtbl) : nullptr;
 }
 
-VirtualQAbstractAnimation* QAbstractAnimation_new2(const QAbstractAnimation_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAbstractAnimation* QAbstractAnimation_new_parent(const QAbstractAnimation_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractAnimation>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractAnimation(vtbl, parent) : nullptr;
 }
@@ -241,7 +241,7 @@ int QAbstractAnimation_metacall(QAbstractAnimation* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractAnimation_tr(const char* s) {
+struct seaqt_string QAbstractAnimation_tr_s(const char* s) {
 	QString _ret = QAbstractAnimation::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -389,7 +389,7 @@ void QAbstractAnimation_setCurrentTime(QAbstractAnimation* self, int msecs) {
 	self->setCurrentTime(static_cast<int>(msecs));
 }
 
-struct seaqt_string QAbstractAnimation_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractAnimation_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractAnimation::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -400,7 +400,7 @@ struct seaqt_string QAbstractAnimation_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractAnimation_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractAnimation_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractAnimation::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -411,7 +411,7 @@ struct seaqt_string QAbstractAnimation_tr3(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-void QAbstractAnimation_startWithPolicy(QAbstractAnimation* self, int policy) {
+void QAbstractAnimation_start_policy(QAbstractAnimation* self, int policy) {
 	self->start(static_cast<QAbstractAnimation::DeletionPolicy>(policy));
 }
 
@@ -695,7 +695,7 @@ VirtualQAnimationDriver* QAnimationDriver_new(const QAnimationDriver_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQAnimationDriver(vtbl) : nullptr;
 }
 
-VirtualQAnimationDriver* QAnimationDriver_new2(const QAnimationDriver_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAnimationDriver* QAnimationDriver_new_parent(const QAnimationDriver_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAnimationDriver>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAnimationDriver(vtbl, parent) : nullptr;
 }
@@ -716,7 +716,7 @@ int QAnimationDriver_metacall(QAnimationDriver* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAnimationDriver_tr(const char* s) {
+struct seaqt_string QAnimationDriver_tr_s(const char* s) {
 	QString _ret = QAnimationDriver::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -778,7 +778,7 @@ void QAnimationDriver_connect_stopped(QAnimationDriver* self, intptr_t slot, voi
 	QAnimationDriver::connect(self, static_cast<void (QAnimationDriver::*)()>(&QAnimationDriver::stopped), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAnimationDriver_tr2(const char* s, const char* c) {
+struct seaqt_string QAnimationDriver_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAnimationDriver::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -789,7 +789,7 @@ struct seaqt_string QAnimationDriver_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAnimationDriver_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAnimationDriver_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAnimationDriver::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

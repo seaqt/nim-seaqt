@@ -57,7 +57,7 @@ proc fcQDesignerCustomWidgetInterface_createWidget(self: pointer, parent: pointe
 proc fcQDesignerCustomWidgetInterface_isInitialized(self: pointer): bool {.importc: "QDesignerCustomWidgetInterface_isInitialized".}
 proc fcQDesignerCustomWidgetInterface_domXml(self: pointer): struct_seaqt_string {.importc: "QDesignerCustomWidgetInterface_domXml".}
 proc fcQDesignerCustomWidgetInterface_codeTemplate(self: pointer): struct_seaqt_string {.importc: "QDesignerCustomWidgetInterface_codeTemplate".}
-proc fcQDesignerCustomWidgetCollectionInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QDesignerCustomWidgetCollectionInterface_operatorAssign".}
+proc fcQDesignerCustomWidgetCollectionInterface_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDesignerCustomWidgetCollectionInterface_operatorAssign".}
 
 proc name*(self: gen_customwidget_types.QDesignerCustomWidgetInterface): string =
   let v_ms = fcQDesignerCustomWidgetInterface_name(self.h)
@@ -113,6 +113,6 @@ proc codeTemplate*(self: gen_customwidget_types.QDesignerCustomWidgetInterface):
   c_free(v_ms.data)
   vx_ret
 
-proc operatorAssign*(self: gen_customwidget_types.QDesignerCustomWidgetCollectionInterface, param1: gen_customwidget_types.QDesignerCustomWidgetCollectionInterface): void =
-  fcQDesignerCustomWidgetCollectionInterface_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_customwidget_types.QDesignerCustomWidgetCollectionInterface, fromVal: gen_customwidget_types.QDesignerCustomWidgetCollectionInterface): void =
+  fcQDesignerCustomWidgetCollectionInterface_operatorAssign(self.h, fromVal.h)
 

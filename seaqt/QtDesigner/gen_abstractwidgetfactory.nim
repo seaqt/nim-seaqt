@@ -57,15 +57,15 @@ type cQDesignerWidgetFactoryInterface*{.exportc: "QDesignerWidgetFactoryInterfac
 proc fcQDesignerWidgetFactoryInterface_metaObject(self: pointer): pointer {.importc: "QDesignerWidgetFactoryInterface_metaObject".}
 proc fcQDesignerWidgetFactoryInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerWidgetFactoryInterface_metacast".}
 proc fcQDesignerWidgetFactoryInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerWidgetFactoryInterface_metacall".}
-proc fcQDesignerWidgetFactoryInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerWidgetFactoryInterface_tr".}
+proc fcQDesignerWidgetFactoryInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerWidgetFactoryInterface_tr_s".}
 proc fcQDesignerWidgetFactoryInterface_containerOfWidget(self: pointer, w: pointer): pointer {.importc: "QDesignerWidgetFactoryInterface_containerOfWidget".}
 proc fcQDesignerWidgetFactoryInterface_widgetOfContainer(self: pointer, w: pointer): pointer {.importc: "QDesignerWidgetFactoryInterface_widgetOfContainer".}
 proc fcQDesignerWidgetFactoryInterface_createWidget(self: pointer, name: struct_seaqt_string, parentWidget: pointer): pointer {.importc: "QDesignerWidgetFactoryInterface_createWidget".}
 proc fcQDesignerWidgetFactoryInterface_createLayout(self: pointer, widget: pointer, layout: pointer, typeVal: cint): pointer {.importc: "QDesignerWidgetFactoryInterface_createLayout".}
 proc fcQDesignerWidgetFactoryInterface_isPassiveInteractor(self: pointer, widget: pointer): bool {.importc: "QDesignerWidgetFactoryInterface_isPassiveInteractor".}
 proc fcQDesignerWidgetFactoryInterface_initialize(self: pointer, objectVal: pointer): void {.importc: "QDesignerWidgetFactoryInterface_initialize".}
-proc fcQDesignerWidgetFactoryInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerWidgetFactoryInterface_tr2".}
-proc fcQDesignerWidgetFactoryInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerWidgetFactoryInterface_tr3".}
+proc fcQDesignerWidgetFactoryInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerWidgetFactoryInterface_tr_s_c".}
+proc fcQDesignerWidgetFactoryInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerWidgetFactoryInterface_tr_s_c_n".}
 proc fcQDesignerWidgetFactoryInterface_protectedbase_sender(self: pointer): pointer {.importc: "QDesignerWidgetFactoryInterface_protectedbase_sender".}
 proc fcQDesignerWidgetFactoryInterface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerWidgetFactoryInterface_protectedbase_senderSignalIndex".}
 proc fcQDesignerWidgetFactoryInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerWidgetFactoryInterface_protectedbase_receivers".}
@@ -82,7 +82,7 @@ proc metacall*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInter
   fcQDesignerWidgetFactoryInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, s: cstring): string =
-  let v_ms = fcQDesignerWidgetFactoryInterface_tr(s)
+  let v_ms = fcQDesignerWidgetFactoryInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -106,13 +106,13 @@ proc initialize*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInt
   fcQDesignerWidgetFactoryInterface_initialize(self.h, objectVal.h)
 
 proc tr*(_: type gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerWidgetFactoryInterface_tr2(s, c)
+  let v_ms = fcQDesignerWidgetFactoryInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerWidgetFactoryInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerWidgetFactoryInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

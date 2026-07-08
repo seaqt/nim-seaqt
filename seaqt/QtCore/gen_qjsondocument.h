@@ -39,15 +39,15 @@ void QJsonParseError_setError(QJsonParseError* self, int error);
 void QJsonParseError_delete(QJsonParseError* self);
 
 QJsonDocument* QJsonDocument_new();
-QJsonDocument* QJsonDocument_new2(QJsonObject* object);
-QJsonDocument* QJsonDocument_new3(QJsonArray* array);
-QJsonDocument* QJsonDocument_new4(QJsonDocument* other);
+QJsonDocument* QJsonDocument_new_object(QJsonObject* object);
+QJsonDocument* QJsonDocument_new_array(QJsonArray* array);
+QJsonDocument* QJsonDocument_new_from(QJsonDocument* from);
 
-void QJsonDocument_operatorAssign(QJsonDocument* self, QJsonDocument* other);
+void QJsonDocument_operatorAssign(QJsonDocument* self, QJsonDocument* from);
 void QJsonDocument_swap(QJsonDocument* self, QJsonDocument* other);
 QJsonDocument* QJsonDocument_fromVariant(QVariant* variant);
 QVariant* QJsonDocument_toVariant(const QJsonDocument* self);
-QJsonDocument* QJsonDocument_fromJson(struct seaqt_string json);
+QJsonDocument* QJsonDocument_fromJson_json(struct seaqt_string json);
 struct seaqt_string QJsonDocument_toJson(const QJsonDocument* self);
 bool QJsonDocument_isEmpty(const QJsonDocument* self);
 bool QJsonDocument_isArray(const QJsonDocument* self);
@@ -56,13 +56,13 @@ QJsonObject* QJsonDocument_object(const QJsonDocument* self);
 QJsonArray* QJsonDocument_array(const QJsonDocument* self);
 void QJsonDocument_setObject(QJsonDocument* self, QJsonObject* object);
 void QJsonDocument_setArray(QJsonDocument* self, QJsonArray* array);
-QJsonValue* QJsonDocument_operatorSubscript(const QJsonDocument* self, struct seaqt_string key);
-QJsonValue* QJsonDocument_operatorSubscriptWithQsizetype(const QJsonDocument* self, ptrdiff_t i);
+QJsonValue* QJsonDocument_operatorSubscript_QString(const QJsonDocument* self, struct seaqt_string key);
+QJsonValue* QJsonDocument_operatorSubscript_qsizetype(const QJsonDocument* self, ptrdiff_t i);
 bool QJsonDocument_operatorEqual(const QJsonDocument* self, QJsonDocument* other);
 bool QJsonDocument_operatorNotEqual(const QJsonDocument* self, QJsonDocument* other);
 bool QJsonDocument_isNull(const QJsonDocument* self);
-QJsonDocument* QJsonDocument_fromJson2(struct seaqt_string json, QJsonParseError* error);
-struct seaqt_string QJsonDocument_toJsonWithFormat(const QJsonDocument* self, int format);
+QJsonDocument* QJsonDocument_fromJson_json_error(struct seaqt_string json, QJsonParseError* error);
+struct seaqt_string QJsonDocument_toJson_format(const QJsonDocument* self, int format);
 
 void QJsonDocument_delete(QJsonDocument* self);
 

@@ -69,9 +69,9 @@ type cQJSEngine*{.exportc: "QJSEngine", incompleteStruct.} = object
 proc fcQJSEngine_metaObject(self: pointer): pointer {.importc: "QJSEngine_metaObject".}
 proc fcQJSEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QJSEngine_metacast".}
 proc fcQJSEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QJSEngine_metacall".}
-proc fcQJSEngine_tr(s: cstring): struct_seaqt_string {.importc: "QJSEngine_tr".}
+proc fcQJSEngine_trS(s: cstring): struct_seaqt_string {.importc: "QJSEngine_tr_s".}
 proc fcQJSEngine_globalObject(self: pointer): pointer {.importc: "QJSEngine_globalObject".}
-proc fcQJSEngine_evaluate(self: pointer, program: struct_seaqt_string): pointer {.importc: "QJSEngine_evaluate".}
+proc fcQJSEngine_evaluateProgram(self: pointer, program: struct_seaqt_string): pointer {.importc: "QJSEngine_evaluate_program".}
 proc fcQJSEngine_importModule(self: pointer, fileName: struct_seaqt_string): pointer {.importc: "QJSEngine_importModule".}
 proc fcQJSEngine_registerModule(self: pointer, moduleName: struct_seaqt_string, value: pointer): bool {.importc: "QJSEngine_registerModule".}
 proc fcQJSEngine_newObject(self: pointer): pointer {.importc: "QJSEngine_newObject".}
@@ -79,31 +79,31 @@ proc fcQJSEngine_newSymbol(self: pointer, name: struct_seaqt_string): pointer {.
 proc fcQJSEngine_newArray(self: pointer): pointer {.importc: "QJSEngine_newArray".}
 proc fcQJSEngine_newQObject(self: pointer, objectVal: pointer): pointer {.importc: "QJSEngine_newQObject".}
 proc fcQJSEngine_newQMetaObject(self: pointer, metaObject: pointer): pointer {.importc: "QJSEngine_newQMetaObject".}
-proc fcQJSEngine_newErrorObject(self: pointer, errorType: cint): pointer {.importc: "QJSEngine_newErrorObject".}
+proc fcQJSEngine_newErrorObjectErrorType(self: pointer, errorType: cint): pointer {.importc: "QJSEngine_newErrorObject_errorType".}
 proc fcQJSEngine_collectGarbage(self: pointer): void {.importc: "QJSEngine_collectGarbage".}
 proc fcQJSEngine_setObjectOwnership(param1: pointer, param2: cint): void {.importc: "QJSEngine_setObjectOwnership".}
 proc fcQJSEngine_objectOwnership(param1: pointer): cint {.importc: "QJSEngine_objectOwnership".}
-proc fcQJSEngine_installExtensions(self: pointer, extensions: cint): void {.importc: "QJSEngine_installExtensions".}
+proc fcQJSEngine_installExtensionsExtensions(self: pointer, extensions: cint): void {.importc: "QJSEngine_installExtensions_extensions".}
 proc fcQJSEngine_setInterrupted(self: pointer, interrupted: bool): void {.importc: "QJSEngine_setInterrupted".}
 proc fcQJSEngine_isInterrupted(self: pointer): bool {.importc: "QJSEngine_isInterrupted".}
-proc fcQJSEngine_throwError(self: pointer, message: struct_seaqt_string): void {.importc: "QJSEngine_throwError".}
-proc fcQJSEngine_throwErrorWithErrorType(self: pointer, errorType: cint): void {.importc: "QJSEngine_throwErrorWithErrorType".}
-proc fcQJSEngine_throwErrorWithError(self: pointer, error: pointer): void {.importc: "QJSEngine_throwErrorWithError".}
+proc fcQJSEngine_throwErrorMessage(self: pointer, message: struct_seaqt_string): void {.importc: "QJSEngine_throwError_message".}
+proc fcQJSEngine_throwErrorErrorType(self: pointer, errorType: cint): void {.importc: "QJSEngine_throwError_errorType".}
+proc fcQJSEngine_throwErrorError(self: pointer, error: pointer): void {.importc: "QJSEngine_throwError_error".}
 proc fcQJSEngine_hasError(self: pointer): bool {.importc: "QJSEngine_hasError".}
 proc fcQJSEngine_catchError(self: pointer): pointer {.importc: "QJSEngine_catchError".}
 proc fcQJSEngine_uiLanguage(self: pointer): struct_seaqt_string {.importc: "QJSEngine_uiLanguage".}
 proc fcQJSEngine_setUiLanguage(self: pointer, language: struct_seaqt_string): void {.importc: "QJSEngine_setUiLanguage".}
 proc fcQJSEngine_uiLanguageChanged(self: pointer): void {.importc: "QJSEngine_uiLanguageChanged".}
 proc fcQJSEngine_connect_uiLanguageChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QJSEngine_connect_uiLanguageChanged".}
-proc fcQJSEngine_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QJSEngine_tr2".}
-proc fcQJSEngine_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QJSEngine_tr3".}
-proc fcQJSEngine_evaluate2(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string): pointer {.importc: "QJSEngine_evaluate2".}
-proc fcQJSEngine_evaluate3(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string, lineNumber: cint): pointer {.importc: "QJSEngine_evaluate3".}
-proc fcQJSEngine_evaluate4(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string, lineNumber: cint, exceptionStackTrace: struct_seaqt_array): pointer {.importc: "QJSEngine_evaluate4".}
-proc fcQJSEngine_newArrayWithLength(self: pointer, length: cuint): pointer {.importc: "QJSEngine_newArrayWithLength".}
-proc fcQJSEngine_newErrorObject2(self: pointer, errorType: cint, message: struct_seaqt_string): pointer {.importc: "QJSEngine_newErrorObject2".}
-proc fcQJSEngine_installExtensions2(self: pointer, extensions: cint, objectVal: pointer): void {.importc: "QJSEngine_installExtensions2".}
-proc fcQJSEngine_throwError2(self: pointer, errorType: cint, message: struct_seaqt_string): void {.importc: "QJSEngine_throwError2".}
+proc fcQJSEngine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QJSEngine_tr_s_c".}
+proc fcQJSEngine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QJSEngine_tr_s_c_n".}
+proc fcQJSEngine_evaluateProgramFileName(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string): pointer {.importc: "QJSEngine_evaluate_program_fileName".}
+proc fcQJSEngine_evaluateProgramFileNameLineNumber(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string, lineNumber: cint): pointer {.importc: "QJSEngine_evaluate_program_fileName_lineNumber".}
+proc fcQJSEngine_evaluateProgramFileNameLineNumberExceptionStackTrace(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string, lineNumber: cint, exceptionStackTrace: struct_seaqt_array): pointer {.importc: "QJSEngine_evaluate_program_fileName_lineNumber_exceptionStackTrace".}
+proc fcQJSEngine_newArrayLength(self: pointer, length: cuint): pointer {.importc: "QJSEngine_newArray_length".}
+proc fcQJSEngine_newErrorObjectErrorTypeMessage(self: pointer, errorType: cint, message: struct_seaqt_string): pointer {.importc: "QJSEngine_newErrorObject_errorType_message".}
+proc fcQJSEngine_installExtensionsExtensionsObject(self: pointer, extensions: cint, objectVal: pointer): void {.importc: "QJSEngine_installExtensions_extensions_object".}
+proc fcQJSEngine_throwErrorErrorTypeMessage(self: pointer, errorType: cint, message: struct_seaqt_string): void {.importc: "QJSEngine_throwError_errorType_message".}
 proc fcQJSEngine_vdata(self: pointer): ptr pointer {.importc: "QJSEngine_vdata".}
 proc fvdata_cQJSEngine(self: pointer): pointer {.importc: "vdata_QJSEngine".}
 
@@ -134,7 +134,7 @@ proc fcQJSEngine_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQJSEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QJSEngine_protectedbase_receivers".}
 proc fcQJSEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QJSEngine_protectedbase_isSignalConnected".}
 proc fcQJSEngine_new(vtbl: pointer, vdata: csize_t): ptr cQJSEngine {.importc: "QJSEngine_new".}
-proc fcQJSEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQJSEngine {.importc: "QJSEngine_new2".}
+proc fcQJSEngine_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQJSEngine {.importc: "QJSEngine_new_parent".}
 proc fcQJSEngine_staticMetaObject(): pointer {.importc: "QJSEngine_staticMetaObject".}
 
 proc metaObject*(self: gen_qjsengine_types.QJSEngine): gen_qobjectdefs_types.QMetaObject =
@@ -147,7 +147,7 @@ proc metacall*(self: gen_qjsengine_types.QJSEngine, param1: cint, param2: cint, 
   fcQJSEngine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qjsengine_types.QJSEngine, s: cstring): string =
-  let v_ms = fcQJSEngine_tr(s)
+  let v_ms = fcQJSEngine_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -156,7 +156,7 @@ proc globalObject*(self: gen_qjsengine_types.QJSEngine): gen_qjsvalue_types.QJSV
   gen_qjsvalue_types.QJSValue(h: fcQJSEngine_globalObject(self.h), owned: true)
 
 proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: openArray[char]): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program)))), owned: true)
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluateProgram(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program)))), owned: true)
 
 proc importModule*(self: gen_qjsengine_types.QJSEngine, fileName: openArray[char]): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSEngine_importModule(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
@@ -180,7 +180,7 @@ proc newQMetaObject*(self: gen_qjsengine_types.QJSEngine, metaObject: gen_qobjec
   gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newQMetaObject(self.h, metaObject.h), owned: true)
 
 proc newErrorObject*(self: gen_qjsengine_types.QJSEngine, errorType: cint): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObject(self.h, cint(errorType)), owned: true)
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObjectErrorType(self.h, cint(errorType)), owned: true)
 
 proc collectGarbage*(self: gen_qjsengine_types.QJSEngine): void =
   fcQJSEngine_collectGarbage(self.h)
@@ -192,7 +192,7 @@ proc objectOwnership*(_: type gen_qjsengine_types.QJSEngine, param1: gen_qobject
   cint(fcQJSEngine_objectOwnership(param1.h))
 
 proc installExtensions*(self: gen_qjsengine_types.QJSEngine, extensions: cint): void =
-  fcQJSEngine_installExtensions(self.h, cint(extensions))
+  fcQJSEngine_installExtensionsExtensions(self.h, cint(extensions))
 
 proc setInterrupted*(self: gen_qjsengine_types.QJSEngine, interrupted: bool): void =
   fcQJSEngine_setInterrupted(self.h, interrupted)
@@ -201,13 +201,13 @@ proc isInterrupted*(self: gen_qjsengine_types.QJSEngine): bool =
   fcQJSEngine_isInterrupted(self.h)
 
 proc throwError*(self: gen_qjsengine_types.QJSEngine, message: openArray[char]): void =
-  fcQJSEngine_throwError(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
+  fcQJSEngine_throwErrorMessage(self.h, struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
 proc throwError*(self: gen_qjsengine_types.QJSEngine, errorType: cint): void =
-  fcQJSEngine_throwErrorWithErrorType(self.h, cint(errorType))
+  fcQJSEngine_throwErrorErrorType(self.h, cint(errorType))
 
 proc throwError*(self: gen_qjsengine_types.QJSEngine, error: gen_qjsvalue_types.QJSValue): void =
-  fcQJSEngine_throwErrorWithError(self.h, error.h)
+  fcQJSEngine_throwErrorError(self.h, error.h)
 
 proc hasError*(self: gen_qjsengine_types.QJSEngine): bool =
   fcQJSEngine_hasError(self.h)
@@ -243,41 +243,41 @@ proc onUiLanguageChanged*(self: gen_qjsengine_types.QJSEngine, slot: QJSEngineui
   fcQJSEngine_connect_uiLanguageChanged(self.h, cast[int](addr tmp[]), fcQJSEngine_slot_callback_uiLanguageChanged, fcQJSEngine_slot_callback_uiLanguageChanged_release)
 
 proc tr*(_: type gen_qjsengine_types.QJSEngine, s: cstring, c: cstring): string =
-  let v_ms = fcQJSEngine_tr2(s, c)
+  let v_ms = fcQJSEngine_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qjsengine_types.QJSEngine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQJSEngine_tr3(s, c, n)
+  let v_ms = fcQJSEngine_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: openArray[char], fileName: openArray[char]): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate2(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluateProgramFileName(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
 
 proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: openArray[char], fileName: openArray[char], lineNumber: cint): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate3(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), lineNumber), owned: true)
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluateProgramFileNameLineNumber(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), lineNumber), owned: true)
 
 proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: openArray[char], fileName: openArray[char], lineNumber: cint, exceptionStackTrace: openArray[string]): gen_qjsvalue_types.QJSValue =
   var exceptionStackTrace_CArray = newSeq[struct_seaqt_string](len(exceptionStackTrace))
   for i in 0..<len(exceptionStackTrace):
     exceptionStackTrace_CArray[i] = struct_seaqt_string(data: if len(exceptionStackTrace[i]) > 0: addr exceptionStackTrace[i][0] else: nil, len: csize_t(len(exceptionStackTrace[i])))
 
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate4(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), lineNumber, struct_seaqt_array(len: csize_t(len(exceptionStackTrace)), data: if len(exceptionStackTrace) == 0: nil else: addr(exceptionStackTrace_CArray[0]))), owned: true)
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluateProgramFileNameLineNumberExceptionStackTrace(self.h, struct_seaqt_string(data: if len(program) > 0: addr program[0] else: nil, len: csize_t(len(program))), struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), lineNumber, struct_seaqt_array(len: csize_t(len(exceptionStackTrace)), data: if len(exceptionStackTrace) == 0: nil else: addr(exceptionStackTrace_CArray[0]))), owned: true)
 
 proc newArray*(self: gen_qjsengine_types.QJSEngine, length: cuint): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newArrayWithLength(self.h, length), owned: true)
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newArrayLength(self.h, length), owned: true)
 
 proc newErrorObject*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: openArray[char]): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObject2(self.h, cint(errorType), struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message)))), owned: true)
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObjectErrorTypeMessage(self.h, cint(errorType), struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message)))), owned: true)
 
 proc installExtensions*(self: gen_qjsengine_types.QJSEngine, extensions: cint, objectVal: gen_qjsvalue_types.QJSValue): void =
-  fcQJSEngine_installExtensions2(self.h, cint(extensions), objectVal.h)
+  fcQJSEngine_installExtensionsExtensionsObject(self.h, cint(extensions), objectVal.h)
 
 proc throwError*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: openArray[char]): void =
-  fcQJSEngine_throwError2(self.h, cint(errorType), struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
+  fcQJSEngine_throwErrorErrorTypeMessage(self.h, cint(errorType), struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))
 
 type QJSEnginemetaObjectProc* = proc(self: QJSEngine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QJSEnginemetacastProc* = proc(self: QJSEngine, param1: cstring): pointer {.raises: [], gcsafe.}

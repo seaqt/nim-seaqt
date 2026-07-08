@@ -172,7 +172,7 @@ VirtualQSignalMapper* QSignalMapper_new(const QSignalMapper_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQSignalMapper(vtbl) : nullptr;
 }
 
-VirtualQSignalMapper* QSignalMapper_new2(const QSignalMapper_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQSignalMapper* QSignalMapper_new_parent(const QSignalMapper_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSignalMapper>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSignalMapper(vtbl, parent) : nullptr;
 }
@@ -193,7 +193,7 @@ int QSignalMapper_metacall(QSignalMapper* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSignalMapper_tr(const char* s) {
+struct seaqt_string QSignalMapper_tr_s(const char* s) {
 	QString _ret = QSignalMapper::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -204,16 +204,16 @@ struct seaqt_string QSignalMapper_tr(const char* s) {
 	return _ms;
 }
 
-void QSignalMapper_setMapping(QSignalMapper* self, QObject* sender, int id) {
+void QSignalMapper_setMapping_sender_id(QSignalMapper* self, QObject* sender, int id) {
 	self->setMapping(sender, static_cast<int>(id));
 }
 
-void QSignalMapper_setMapping2(QSignalMapper* self, QObject* sender, struct seaqt_string text) {
+void QSignalMapper_setMapping_sender_text(QSignalMapper* self, QObject* sender, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	self->setMapping(sender, text_QString);
 }
 
-void QSignalMapper_setMapping3(QSignalMapper* self, QObject* sender, QObject* object) {
+void QSignalMapper_setMapping_sender_object(QSignalMapper* self, QObject* sender, QObject* object) {
 	self->setMapping(sender, object);
 }
 
@@ -221,16 +221,16 @@ void QSignalMapper_removeMappings(QSignalMapper* self, QObject* sender) {
 	self->removeMappings(sender);
 }
 
-QObject* QSignalMapper_mapping(const QSignalMapper* self, int id) {
+QObject* QSignalMapper_mapping_id(const QSignalMapper* self, int id) {
 	return self->mapping(static_cast<int>(id));
 }
 
-QObject* QSignalMapper_mappingWithText(const QSignalMapper* self, struct seaqt_string text) {
+QObject* QSignalMapper_mapping_text(const QSignalMapper* self, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	return self->mapping(text_QString);
 }
 
-QObject* QSignalMapper_mappingWithObject(const QSignalMapper* self, QObject* object) {
+QObject* QSignalMapper_mapping_object(const QSignalMapper* self, QObject* object) {
 	return self->mapping(object);
 }
 
@@ -294,11 +294,11 @@ void QSignalMapper_map(QSignalMapper* self) {
 	self->map();
 }
 
-void QSignalMapper_mapWithSender(QSignalMapper* self, QObject* sender) {
+void QSignalMapper_map_sender(QSignalMapper* self, QObject* sender) {
 	self->map(sender);
 }
 
-struct seaqt_string QSignalMapper_tr2(const char* s, const char* c) {
+struct seaqt_string QSignalMapper_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSignalMapper::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -309,7 +309,7 @@ struct seaqt_string QSignalMapper_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSignalMapper_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSignalMapper_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSignalMapper::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

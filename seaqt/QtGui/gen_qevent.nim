@@ -162,8 +162,8 @@ type cQInputEventVTable {.pure.} = object
 proc fcQInputEvent_virtualbase_clone(self: pointer): pointer {.importc: "QInputEvent_virtualbase_clone".}
 proc fcQInputEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QInputEvent_virtualbase_setTimestamp".}
 proc fcQInputEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QInputEvent_virtualbase_setAccepted".}
-proc fcQInputEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, m_dev: pointer): ptr cQInputEvent {.importc: "QInputEvent_new".}
-proc fcQInputEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, m_dev: pointer, modifiers: cint): ptr cQInputEvent {.importc: "QInputEvent_new2".}
+proc fcQInputEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, m_dev: pointer): ptr cQInputEvent {.importc: "QInputEvent_new_type_m_dev".}
+proc fcQInputEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, m_dev: pointer, modifiers: cint): ptr cQInputEvent {.importc: "QInputEvent_new_type_m_dev_modifiers".}
 proc fcQPointerEvent_clone(self: pointer): pointer {.importc: "QPointerEvent_clone".}
 proc fcQPointerEvent_pointingDevice(self: pointer): pointer {.importc: "QPointerEvent_pointingDevice".}
 proc fcQPointerEvent_pointerType(self: pointer): cint {.importc: "QPointerEvent_pointerType".}
@@ -200,9 +200,9 @@ proc fcQPointerEvent_virtualbase_isBeginEvent(self: pointer): bool {.importc: "Q
 proc fcQPointerEvent_virtualbase_isUpdateEvent(self: pointer): bool {.importc: "QPointerEvent_virtualbase_isUpdateEvent".}
 proc fcQPointerEvent_virtualbase_isEndEvent(self: pointer): bool {.importc: "QPointerEvent_virtualbase_isEndEvent".}
 proc fcQPointerEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QPointerEvent_virtualbase_setAccepted".}
-proc fcQPointerEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer): ptr cQPointerEvent {.importc: "QPointerEvent_new".}
-proc fcQPointerEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, modifiers: cint): ptr cQPointerEvent {.importc: "QPointerEvent_new2".}
-proc fcQPointerEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, modifiers: cint, points: struct_seaqt_array): ptr cQPointerEvent {.importc: "QPointerEvent_new3".}
+proc fcQPointerEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer): ptr cQPointerEvent {.importc: "QPointerEvent_new_type_dev".}
+proc fcQPointerEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, modifiers: cint): ptr cQPointerEvent {.importc: "QPointerEvent_new_type_dev_modifiers".}
+proc fcQPointerEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, modifiers: cint, points: struct_seaqt_array): ptr cQPointerEvent {.importc: "QPointerEvent_new_type_dev_modifiers_points".}
 proc fcQSinglePointEvent_clone(self: pointer): pointer {.importc: "QSinglePointEvent_clone".}
 proc fcQSinglePointEvent_button(self: pointer): cint {.importc: "QSinglePointEvent_button".}
 proc fcQSinglePointEvent_buttons(self: pointer): cint {.importc: "QSinglePointEvent_buttons".}
@@ -242,8 +242,8 @@ proc fcQEnterEvent_virtualbase_isUpdateEvent(self: pointer): bool {.importc: "QE
 proc fcQEnterEvent_virtualbase_isEndEvent(self: pointer): bool {.importc: "QEnterEvent_virtualbase_isEndEvent".}
 proc fcQEnterEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QEnterEvent_virtualbase_setTimestamp".}
 proc fcQEnterEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QEnterEvent_virtualbase_setAccepted".}
-proc fcQEnterEvent_new(vtbl: pointer, vdata: csize_t, localPos: pointer, scenePos: pointer, globalPos: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new".}
-proc fcQEnterEvent_new2(vtbl: pointer, vdata: csize_t, localPos: pointer, scenePos: pointer, globalPos: pointer, device: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new2".}
+proc fcQEnterEvent_new(vtbl: pointer, vdata: csize_t, localPos: pointer, scenePos: pointer, globalPos: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new_localPos_scenePos_globalPos".}
+proc fcQEnterEvent_new2(vtbl: pointer, vdata: csize_t, localPos: pointer, scenePos: pointer, globalPos: pointer, device: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new_localPos_scenePos_globalPos_device".}
 proc fcQMouseEvent_clone(self: pointer): pointer {.importc: "QMouseEvent_clone".}
 proc fcQMouseEvent_pos(self: pointer): pointer {.importc: "QMouseEvent_pos".}
 proc fcQMouseEvent_globalPos(self: pointer): pointer {.importc: "QMouseEvent_globalPos".}
@@ -273,14 +273,14 @@ proc fcQMouseEvent_virtualbase_isUpdateEvent(self: pointer): bool {.importc: "QM
 proc fcQMouseEvent_virtualbase_isEndEvent(self: pointer): bool {.importc: "QMouseEvent_virtualbase_isEndEvent".}
 proc fcQMouseEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QMouseEvent_virtualbase_setTimestamp".}
 proc fcQMouseEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QMouseEvent_virtualbase_setAccepted".}
-proc fcQMouseEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new".}
-proc fcQMouseEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new2".}
-proc fcQMouseEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new3".}
-proc fcQMouseEvent_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, source: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new4".}
-proc fcQMouseEvent_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, button: cint, buttons: cint, modifiers: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new5".}
-proc fcQMouseEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new6".}
-proc fcQMouseEvent_new7(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new7".}
-proc fcQMouseEvent_new8(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, source: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new8".}
+proc fcQMouseEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new_type_localPos_button_buttons_modifiers".}
+proc fcQMouseEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new_type_localPos_globalPos_button_buttons_modifiers".}
+proc fcQMouseEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new_type_localPos_scenePos_globalPos_button_buttons_modifiers".}
+proc fcQMouseEvent_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, source: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new_type_localPos_scenePos_globalPos_button_buttons_modifiers_source".}
+proc fcQMouseEvent_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, button: cint, buttons: cint, modifiers: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new_type_localPos_button_buttons_modifiers_device".}
+proc fcQMouseEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new_type_localPos_globalPos_button_buttons_modifiers_device".}
+proc fcQMouseEvent_new7(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new_type_localPos_scenePos_globalPos_button_buttons_modifiers_device".}
+proc fcQMouseEvent_new8(vtbl: pointer, vdata: csize_t, typeVal: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, button: cint, buttons: cint, modifiers: cint, source: cint, device: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new_type_localPos_scenePos_globalPos_button_buttons_modifiers_source_device".}
 proc fcQHoverEvent_clone(self: pointer): pointer {.importc: "QHoverEvent_clone".}
 proc fcQHoverEvent_pos(self: pointer): pointer {.importc: "QHoverEvent_pos".}
 proc fcQHoverEvent_posF(self: pointer): pointer {.importc: "QHoverEvent_posF".}
@@ -304,12 +304,12 @@ proc fcQHoverEvent_virtualbase_isBeginEvent(self: pointer): bool {.importc: "QHo
 proc fcQHoverEvent_virtualbase_isEndEvent(self: pointer): bool {.importc: "QHoverEvent_virtualbase_isEndEvent".}
 proc fcQHoverEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QHoverEvent_virtualbase_setTimestamp".}
 proc fcQHoverEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QHoverEvent_virtualbase_setAccepted".}
-proc fcQHoverEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, scenePos: pointer, globalPos: pointer, oldPos: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new".}
-proc fcQHoverEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, oldPos: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new2".}
-proc fcQHoverEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, scenePos: pointer, globalPos: pointer, oldPos: pointer, modifiers: cint): ptr cQHoverEvent {.importc: "QHoverEvent_new3".}
-proc fcQHoverEvent_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, scenePos: pointer, globalPos: pointer, oldPos: pointer, modifiers: cint, device: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new4".}
-proc fcQHoverEvent_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, oldPos: pointer, modifiers: cint): ptr cQHoverEvent {.importc: "QHoverEvent_new5".}
-proc fcQHoverEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, oldPos: pointer, modifiers: cint, device: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new6".}
+proc fcQHoverEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, scenePos: pointer, globalPos: pointer, oldPos: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new_type_scenePos_globalPos_oldPos".}
+proc fcQHoverEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, oldPos: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new_type_pos_oldPos".}
+proc fcQHoverEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, scenePos: pointer, globalPos: pointer, oldPos: pointer, modifiers: cint): ptr cQHoverEvent {.importc: "QHoverEvent_new_type_scenePos_globalPos_oldPos_modifiers".}
+proc fcQHoverEvent_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, scenePos: pointer, globalPos: pointer, oldPos: pointer, modifiers: cint, device: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new_type_scenePos_globalPos_oldPos_modifiers_device".}
+proc fcQHoverEvent_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, oldPos: pointer, modifiers: cint): ptr cQHoverEvent {.importc: "QHoverEvent_new_type_pos_oldPos_modifiers".}
+proc fcQHoverEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, pos: pointer, oldPos: pointer, modifiers: cint, device: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new_type_pos_oldPos_modifiers_device".}
 proc fcQWheelEvent_clone(self: pointer): pointer {.importc: "QWheelEvent_clone".}
 proc fcQWheelEvent_pixelDelta(self: pointer): pointer {.importc: "QWheelEvent_pixelDelta".}
 proc fcQWheelEvent_angleDelta(self: pointer): pointer {.importc: "QWheelEvent_angleDelta".}
@@ -338,9 +338,9 @@ proc fcQWheelEvent_virtualbase_isUpdateEvent(self: pointer): bool {.importc: "QW
 proc fcQWheelEvent_virtualbase_isEndEvent(self: pointer): bool {.importc: "QWheelEvent_virtualbase_isEndEvent".}
 proc fcQWheelEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QWheelEvent_virtualbase_setTimestamp".}
 proc fcQWheelEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QWheelEvent_virtualbase_setAccepted".}
-proc fcQWheelEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool): ptr cQWheelEvent {.importc: "QWheelEvent_new".}
-proc fcQWheelEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new2".}
-proc fcQWheelEvent_new3(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint, device: pointer): ptr cQWheelEvent {.importc: "QWheelEvent_new3".}
+proc fcQWheelEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool): ptr cQWheelEvent {.importc: "QWheelEvent_new_pos_globalPos_pixelDelta_angleDelta_buttons_modifiers_phase_inverted".}
+proc fcQWheelEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new_pos_globalPos_pixelDelta_angleDelta_buttons_modifiers_phase_inverted_source".}
+proc fcQWheelEvent_new3(vtbl: pointer, vdata: csize_t, pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint, device: pointer): ptr cQWheelEvent {.importc: "QWheelEvent_new_pos_globalPos_pixelDelta_angleDelta_buttons_modifiers_phase_inverted_source_device".}
 proc fcQWheelEvent_staticMetaObject(): pointer {.importc: "QWheelEvent_staticMetaObject".}
 proc fcQTabletEvent_clone(self: pointer): pointer {.importc: "QTabletEvent_clone".}
 proc fcQTabletEvent_pos(self: pointer): pointer {.importc: "QTabletEvent_pos".}
@@ -405,9 +405,9 @@ proc fcQNativeGestureEvent_virtualbase_isUpdateEvent(self: pointer): bool {.impo
 proc fcQNativeGestureEvent_virtualbase_isEndEvent(self: pointer): bool {.importc: "QNativeGestureEvent_virtualbase_isEndEvent".}
 proc fcQNativeGestureEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QNativeGestureEvent_virtualbase_setTimestamp".}
 proc fcQNativeGestureEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QNativeGestureEvent_virtualbase_setAccepted".}
-proc fcQNativeGestureEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, sequenceId: culonglong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new".}
-proc fcQNativeGestureEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, fingerCount: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, delta: pointer): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new2".}
-proc fcQNativeGestureEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, fingerCount: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, delta: pointer, sequenceId: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new3".}
+proc fcQNativeGestureEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, sequenceId: culonglong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new_type_dev_localPos_scenePos_globalPos_value_sequenceId_intArgument".}
+proc fcQNativeGestureEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, fingerCount: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, delta: pointer): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new_type_dev_fingerCount_localPos_scenePos_globalPos_value_delta".}
+proc fcQNativeGestureEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, dev: pointer, fingerCount: cint, localPos: pointer, scenePos: pointer, globalPos: pointer, value: float64, delta: pointer, sequenceId: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new_type_dev_fingerCount_localPos_scenePos_globalPos_value_delta_sequenceId".}
 proc fcQKeyEvent_clone(self: pointer): pointer {.importc: "QKeyEvent_clone".}
 proc fcQKeyEvent_key(self: pointer): cint {.importc: "QKeyEvent_key".}
 proc fcQKeyEvent_matches(self: pointer, key: cint): bool {.importc: "QKeyEvent_matches".}
@@ -430,15 +430,15 @@ type cQKeyEventVTable {.pure.} = object
 proc fcQKeyEvent_virtualbase_clone(self: pointer): pointer {.importc: "QKeyEvent_virtualbase_clone".}
 proc fcQKeyEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QKeyEvent_virtualbase_setTimestamp".}
 proc fcQKeyEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QKeyEvent_virtualbase_setAccepted".}
-proc fcQKeyEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint): ptr cQKeyEvent {.importc: "QKeyEvent_new".}
-proc fcQKeyEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint): ptr cQKeyEvent {.importc: "QKeyEvent_new2".}
-proc fcQKeyEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, text: struct_seaqt_string): ptr cQKeyEvent {.importc: "QKeyEvent_new3".}
-proc fcQKeyEvent_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, text: struct_seaqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new4".}
-proc fcQKeyEvent_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, text: struct_seaqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new5".}
-proc fcQKeyEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_seaqt_string): ptr cQKeyEvent {.importc: "QKeyEvent_new6".}
-proc fcQKeyEvent_new7(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_seaqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new7".}
-proc fcQKeyEvent_new8(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_seaqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new8".}
-proc fcQKeyEvent_new9(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_seaqt_string, autorep: bool, count: cushort, device: pointer): ptr cQKeyEvent {.importc: "QKeyEvent_new9".}
+proc fcQKeyEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers".}
+proc fcQKeyEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers".}
+proc fcQKeyEvent_new3(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, text: struct_seaqt_string): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers_text".}
+proc fcQKeyEvent_new4(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, text: struct_seaqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers_text_autorep".}
+proc fcQKeyEvent_new5(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, text: struct_seaqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers_text_autorep_count".}
+proc fcQKeyEvent_new6(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_seaqt_string): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers_text".}
+proc fcQKeyEvent_new7(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_seaqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers_text_autorep".}
+proc fcQKeyEvent_new8(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_seaqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers_text_autorep_count".}
+proc fcQKeyEvent_new9(vtbl: pointer, vdata: csize_t, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_seaqt_string, autorep: bool, count: cushort, device: pointer): ptr cQKeyEvent {.importc: "QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers_text_autorep_count_device".}
 proc fcQFocusEvent_clone(self: pointer): pointer {.importc: "QFocusEvent_clone".}
 proc fcQFocusEvent_gotFocus(self: pointer): bool {.importc: "QFocusEvent_gotFocus".}
 proc fcQFocusEvent_lostFocus(self: pointer): bool {.importc: "QFocusEvent_lostFocus".}
@@ -452,8 +452,8 @@ type cQFocusEventVTable {.pure.} = object
   setAccepted*: proc(self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQFocusEvent_virtualbase_clone(self: pointer): pointer {.importc: "QFocusEvent_virtualbase_clone".}
 proc fcQFocusEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QFocusEvent_virtualbase_setAccepted".}
-proc fcQFocusEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new".}
-proc fcQFocusEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, reason: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new2".}
+proc fcQFocusEvent_new(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new_type".}
+proc fcQFocusEvent_new2(vtbl: pointer, vdata: csize_t, typeVal: cint, reason: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new_type_reason".}
 proc fcQPaintEvent_clone(self: pointer): pointer {.importc: "QPaintEvent_clone".}
 proc fcQPaintEvent_rect(self: pointer): pointer {.importc: "QPaintEvent_rect".}
 proc fcQPaintEvent_region(self: pointer): pointer {.importc: "QPaintEvent_region".}
@@ -466,8 +466,8 @@ type cQPaintEventVTable {.pure.} = object
   setAccepted*: proc(self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQPaintEvent_virtualbase_clone(self: pointer): pointer {.importc: "QPaintEvent_virtualbase_clone".}
 proc fcQPaintEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QPaintEvent_virtualbase_setAccepted".}
-proc fcQPaintEvent_new(vtbl: pointer, vdata: csize_t, paintRegion: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new".}
-proc fcQPaintEvent_new2(vtbl: pointer, vdata: csize_t, paintRect: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new2".}
+proc fcQPaintEvent_new(vtbl: pointer, vdata: csize_t, paintRegion: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new_paintRegion".}
+proc fcQPaintEvent_new2(vtbl: pointer, vdata: csize_t, paintRect: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new_paintRect".}
 proc fcQMoveEvent_clone(self: pointer): pointer {.importc: "QMoveEvent_clone".}
 proc fcQMoveEvent_pos(self: pointer): pointer {.importc: "QMoveEvent_pos".}
 proc fcQMoveEvent_oldPos(self: pointer): pointer {.importc: "QMoveEvent_oldPos".}
@@ -581,18 +581,18 @@ type cQContextMenuEventVTable {.pure.} = object
 proc fcQContextMenuEvent_virtualbase_clone(self: pointer): pointer {.importc: "QContextMenuEvent_virtualbase_clone".}
 proc fcQContextMenuEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QContextMenuEvent_virtualbase_setTimestamp".}
 proc fcQContextMenuEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QContextMenuEvent_virtualbase_setAccepted".}
-proc fcQContextMenuEvent_new(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer, globalPos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new".}
-proc fcQContextMenuEvent_new2(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new2".}
-proc fcQContextMenuEvent_new3(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer, globalPos: pointer, modifiers: cint): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new3".}
+proc fcQContextMenuEvent_new(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer, globalPos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new_reason_pos_globalPos".}
+proc fcQContextMenuEvent_new2(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new_reason_pos".}
+proc fcQContextMenuEvent_new3(vtbl: pointer, vdata: csize_t, reason: cint, pos: pointer, globalPos: pointer, modifiers: cint): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new_reason_pos_globalPos_modifiers".}
 proc fcQInputMethodEvent_clone(self: pointer): pointer {.importc: "QInputMethodEvent_clone".}
-proc fcQInputMethodEvent_setCommitString(self: pointer, commitString: struct_seaqt_string): void {.importc: "QInputMethodEvent_setCommitString".}
+proc fcQInputMethodEvent_setCommitStringCommitString(self: pointer, commitString: struct_seaqt_string): void {.importc: "QInputMethodEvent_setCommitString_commitString".}
 proc fcQInputMethodEvent_attributes(self: pointer): struct_seaqt_array {.importc: "QInputMethodEvent_attributes".}
 proc fcQInputMethodEvent_preeditString(self: pointer): struct_seaqt_string {.importc: "QInputMethodEvent_preeditString".}
 proc fcQInputMethodEvent_commitString(self: pointer): struct_seaqt_string {.importc: "QInputMethodEvent_commitString".}
 proc fcQInputMethodEvent_replacementStart(self: pointer): cint {.importc: "QInputMethodEvent_replacementStart".}
 proc fcQInputMethodEvent_replacementLength(self: pointer): cint {.importc: "QInputMethodEvent_replacementLength".}
-proc fcQInputMethodEvent_setCommitString2(self: pointer, commitString: struct_seaqt_string, replaceFrom: cint): void {.importc: "QInputMethodEvent_setCommitString2".}
-proc fcQInputMethodEvent_setCommitString3(self: pointer, commitString: struct_seaqt_string, replaceFrom: cint, replaceLength: cint): void {.importc: "QInputMethodEvent_setCommitString3".}
+proc fcQInputMethodEvent_setCommitStringCommitStringReplaceFrom(self: pointer, commitString: struct_seaqt_string, replaceFrom: cint): void {.importc: "QInputMethodEvent_setCommitString_commitString_replaceFrom".}
+proc fcQInputMethodEvent_setCommitStringCommitStringReplaceFromReplaceLength(self: pointer, commitString: struct_seaqt_string, replaceFrom: cint, replaceLength: cint): void {.importc: "QInputMethodEvent_setCommitString_commitString_replaceFrom_replaceLength".}
 proc fcQInputMethodEvent_vdata(self: pointer): ptr pointer {.importc: "QInputMethodEvent_vdata".}
 proc fvdata_cQInputMethodEvent(self: pointer): pointer {.importc: "vdata_QInputMethodEvent".}
 
@@ -603,7 +603,7 @@ type cQInputMethodEventVTable {.pure.} = object
 proc fcQInputMethodEvent_virtualbase_clone(self: pointer): pointer {.importc: "QInputMethodEvent_virtualbase_clone".}
 proc fcQInputMethodEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QInputMethodEvent_virtualbase_setAccepted".}
 proc fcQInputMethodEvent_new(vtbl: pointer, vdata: csize_t): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new".}
-proc fcQInputMethodEvent_new2(vtbl: pointer, vdata: csize_t, preeditText: struct_seaqt_string, attributes: struct_seaqt_array): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new2".}
+proc fcQInputMethodEvent_new2(vtbl: pointer, vdata: csize_t, preeditText: struct_seaqt_string, attributes: struct_seaqt_array): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new_preeditText_attributes".}
 proc fcQInputMethodQueryEvent_clone(self: pointer): pointer {.importc: "QInputMethodQueryEvent_clone".}
 proc fcQInputMethodQueryEvent_queries(self: pointer): cint {.importc: "QInputMethodQueryEvent_queries".}
 proc fcQInputMethodQueryEvent_setValue(self: pointer, query: cint, value: pointer): void {.importc: "QInputMethodQueryEvent_setValue".}
@@ -642,14 +642,14 @@ type cQDropEventVTable {.pure.} = object
   setAccepted*: proc(self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQDropEvent_virtualbase_clone(self: pointer): pointer {.importc: "QDropEvent_virtualbase_clone".}
 proc fcQDropEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QDropEvent_virtualbase_setAccepted".}
-proc fcQDropEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDropEvent {.importc: "QDropEvent_new".}
-proc fcQDropEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDropEvent {.importc: "QDropEvent_new2".}
+proc fcQDropEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDropEvent {.importc: "QDropEvent_new_pos_actions_data_buttons_modifiers".}
+proc fcQDropEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDropEvent {.importc: "QDropEvent_new_pos_actions_data_buttons_modifiers_type".}
 proc fcQDragMoveEvent_clone(self: pointer): pointer {.importc: "QDragMoveEvent_clone".}
 proc fcQDragMoveEvent_answerRect(self: pointer): pointer {.importc: "QDragMoveEvent_answerRect".}
 proc fcQDragMoveEvent_accept(self: pointer): void {.importc: "QDragMoveEvent_accept".}
 proc fcQDragMoveEvent_ignore(self: pointer): void {.importc: "QDragMoveEvent_ignore".}
-proc fcQDragMoveEvent_acceptWithQRect(self: pointer, r: pointer): void {.importc: "QDragMoveEvent_acceptWithQRect".}
-proc fcQDragMoveEvent_ignoreWithQRect(self: pointer, r: pointer): void {.importc: "QDragMoveEvent_ignoreWithQRect".}
+proc fcQDragMoveEvent_acceptR(self: pointer, r: pointer): void {.importc: "QDragMoveEvent_accept_r".}
+proc fcQDragMoveEvent_ignoreR(self: pointer, r: pointer): void {.importc: "QDragMoveEvent_ignore_r".}
 proc fcQDragMoveEvent_vdata(self: pointer): ptr pointer {.importc: "QDragMoveEvent_vdata".}
 proc fvdata_cQDragMoveEvent(self: pointer): pointer {.importc: "vdata_QDragMoveEvent".}
 
@@ -659,8 +659,8 @@ type cQDragMoveEventVTable {.pure.} = object
   setAccepted*: proc(self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQDragMoveEvent_virtualbase_clone(self: pointer): pointer {.importc: "QDragMoveEvent_virtualbase_clone".}
 proc fcQDragMoveEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QDragMoveEvent_virtualbase_setAccepted".}
-proc fcQDragMoveEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new".}
-proc fcQDragMoveEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new2".}
+proc fcQDragMoveEvent_new(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new_pos_actions_data_buttons_modifiers".}
+proc fcQDragMoveEvent_new2(vtbl: pointer, vdata: csize_t, pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new_pos_actions_data_buttons_modifiers_type".}
 proc fcQDragEnterEvent_clone(self: pointer): pointer {.importc: "QDragEnterEvent_clone".}
 proc fcQDragEnterEvent_vdata(self: pointer): ptr pointer {.importc: "QDragEnterEvent_vdata".}
 proc fvdata_cQDragEnterEvent(self: pointer): pointer {.importc: "vdata_QDragEnterEvent".}
@@ -738,8 +738,8 @@ type cQFileOpenEventVTable {.pure.} = object
   setAccepted*: proc(self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQFileOpenEvent_virtualbase_clone(self: pointer): pointer {.importc: "QFileOpenEvent_virtualbase_clone".}
 proc fcQFileOpenEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QFileOpenEvent_virtualbase_setAccepted".}
-proc fcQFileOpenEvent_new(vtbl: pointer, vdata: csize_t, file: struct_seaqt_string): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new".}
-proc fcQFileOpenEvent_new2(vtbl: pointer, vdata: csize_t, url: pointer): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new2".}
+proc fcQFileOpenEvent_new(vtbl: pointer, vdata: csize_t, file: struct_seaqt_string): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new_file".}
+proc fcQFileOpenEvent_new2(vtbl: pointer, vdata: csize_t, url: pointer): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new_url".}
 proc fcQToolBarChangeEvent_clone(self: pointer): pointer {.importc: "QToolBarChangeEvent_clone".}
 proc fcQToolBarChangeEvent_toggle(self: pointer): bool {.importc: "QToolBarChangeEvent_toggle".}
 proc fcQToolBarChangeEvent_vdata(self: pointer): ptr pointer {.importc: "QToolBarChangeEvent_vdata".}
@@ -765,8 +765,8 @@ type cQShortcutEventVTable {.pure.} = object
   setAccepted*: proc(self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQShortcutEvent_virtualbase_clone(self: pointer): pointer {.importc: "QShortcutEvent_virtualbase_clone".}
 proc fcQShortcutEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QShortcutEvent_virtualbase_setAccepted".}
-proc fcQShortcutEvent_new(vtbl: pointer, vdata: csize_t, key: pointer, id: cint): ptr cQShortcutEvent {.importc: "QShortcutEvent_new".}
-proc fcQShortcutEvent_new2(vtbl: pointer, vdata: csize_t, key: pointer, id: cint, ambiguous: bool): ptr cQShortcutEvent {.importc: "QShortcutEvent_new2".}
+proc fcQShortcutEvent_new(vtbl: pointer, vdata: csize_t, key: pointer, id: cint): ptr cQShortcutEvent {.importc: "QShortcutEvent_new_key_id".}
+proc fcQShortcutEvent_new2(vtbl: pointer, vdata: csize_t, key: pointer, id: cint, ambiguous: bool): ptr cQShortcutEvent {.importc: "QShortcutEvent_new_key_id_ambiguous".}
 proc fcQWindowStateChangeEvent_clone(self: pointer): pointer {.importc: "QWindowStateChangeEvent_clone".}
 proc fcQWindowStateChangeEvent_oldState(self: pointer): cint {.importc: "QWindowStateChangeEvent_oldState".}
 proc fcQWindowStateChangeEvent_isOverride(self: pointer): bool {.importc: "QWindowStateChangeEvent_isOverride".}
@@ -779,8 +779,8 @@ type cQWindowStateChangeEventVTable {.pure.} = object
   setAccepted*: proc(self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQWindowStateChangeEvent_virtualbase_clone(self: pointer): pointer {.importc: "QWindowStateChangeEvent_virtualbase_clone".}
 proc fcQWindowStateChangeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QWindowStateChangeEvent_virtualbase_setAccepted".}
-proc fcQWindowStateChangeEvent_new(vtbl: pointer, vdata: csize_t, oldState: cint): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new".}
-proc fcQWindowStateChangeEvent_new2(vtbl: pointer, vdata: csize_t, oldState: cint, isOverride: bool): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new2".}
+proc fcQWindowStateChangeEvent_new(vtbl: pointer, vdata: csize_t, oldState: cint): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new_oldState".}
+proc fcQWindowStateChangeEvent_new2(vtbl: pointer, vdata: csize_t, oldState: cint, isOverride: bool): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new_oldState_isOverride".}
 proc fcQTouchEvent_clone(self: pointer): pointer {.importc: "QTouchEvent_clone".}
 proc fcQTouchEvent_target(self: pointer): pointer {.importc: "QTouchEvent_target".}
 proc fcQTouchEvent_touchPointStates(self: pointer): cint {.importc: "QTouchEvent_touchPointStates".}
@@ -805,12 +805,12 @@ proc fcQTouchEvent_virtualbase_isUpdateEvent(self: pointer): bool {.importc: "QT
 proc fcQTouchEvent_virtualbase_isEndEvent(self: pointer): bool {.importc: "QTouchEvent_virtualbase_isEndEvent".}
 proc fcQTouchEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong): void {.importc: "QTouchEvent_virtualbase_setTimestamp".}
 proc fcQTouchEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QTouchEvent_virtualbase_setAccepted".}
-proc fcQTouchEvent_new(vtbl: pointer, vdata: csize_t, eventType: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new".}
-proc fcQTouchEvent_new2(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new2".}
-proc fcQTouchEvent_new3(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer): ptr cQTouchEvent {.importc: "QTouchEvent_new3".}
-proc fcQTouchEvent_new4(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new4".}
-proc fcQTouchEvent_new5(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint, touchPoints: struct_seaqt_array): ptr cQTouchEvent {.importc: "QTouchEvent_new5".}
-proc fcQTouchEvent_new6(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint, touchPoints: struct_seaqt_array): ptr cQTouchEvent {.importc: "QTouchEvent_new6".}
+proc fcQTouchEvent_new(vtbl: pointer, vdata: csize_t, eventType: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new_eventType".}
+proc fcQTouchEvent_new2(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new_eventType_device_modifiers_touchPointStates".}
+proc fcQTouchEvent_new3(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer): ptr cQTouchEvent {.importc: "QTouchEvent_new_eventType_device".}
+proc fcQTouchEvent_new4(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new_eventType_device_modifiers".}
+proc fcQTouchEvent_new5(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint, touchPoints: struct_seaqt_array): ptr cQTouchEvent {.importc: "QTouchEvent_new_eventType_device_modifiers_touchPoints".}
+proc fcQTouchEvent_new6(vtbl: pointer, vdata: csize_t, eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint, touchPoints: struct_seaqt_array): ptr cQTouchEvent {.importc: "QTouchEvent_new_eventType_device_modifiers_touchPointStates_touchPoints".}
 proc fcQScrollPrepareEvent_clone(self: pointer): pointer {.importc: "QScrollPrepareEvent_clone".}
 proc fcQScrollPrepareEvent_startPos(self: pointer): pointer {.importc: "QScrollPrepareEvent_startPos".}
 proc fcQScrollPrepareEvent_viewportSize(self: pointer): pointer {.importc: "QScrollPrepareEvent_viewportSize".}
@@ -876,10 +876,10 @@ proc fcQInputMethodEventAttribute_length(self: pointer): cint {.importc: "QInput
 proc fcQInputMethodEventAttribute_setLength(self: pointer, length: cint): void {.importc: "QInputMethodEvent__Attribute_setLength".}
 proc fcQInputMethodEventAttribute_value(self: pointer): pointer {.importc: "QInputMethodEvent__Attribute_value".}
 proc fcQInputMethodEventAttribute_setValue(self: pointer, value: pointer): void {.importc: "QInputMethodEvent__Attribute_setValue".}
-proc fcQInputMethodEventAttribute_operatorAssign(self: pointer, param1: pointer): void {.importc: "QInputMethodEvent__Attribute_operatorAssign".}
-proc fcQInputMethodEventAttribute_new(typ: cint, s: cint, l: cint, val: pointer): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new".}
-proc fcQInputMethodEventAttribute_new2(typ: cint, s: cint, l: cint): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new2".}
-proc fcQInputMethodEventAttribute_new3(param1: pointer): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new3".}
+proc fcQInputMethodEventAttribute_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QInputMethodEvent__Attribute_operatorAssign".}
+proc fcQInputMethodEventAttribute_new(typ: cint, s: cint, l: cint, val: pointer): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new_typ_s_l_val".}
+proc fcQInputMethodEventAttribute_new2(typ: cint, s: cint, l: cint): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new_typ_s_l".}
+proc fcQInputMethodEventAttribute_new3(fromVal: pointer): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new_from".}
 
 proc clone*(self: gen_qevent_types.QInputEvent): gen_qevent_types.QInputEvent =
   gen_qevent_types.QInputEvent(h: fcQInputEvent_clone(self.h), owned: false)
@@ -4571,7 +4571,7 @@ proc clone*(self: gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMe
   gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_clone(self.h), owned: false)
 
 proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char]): void =
-  fcQInputMethodEvent_setCommitString(self.h, struct_seaqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))))
+  fcQInputMethodEvent_setCommitStringCommitString(self.h, struct_seaqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))))
 
 proc attributes*(self: gen_qevent_types.QInputMethodEvent): seq[gen_qevent_types.QInputMethodEventAttribute] =
   var v_ma = fcQInputMethodEvent_attributes(self.h)
@@ -4601,10 +4601,10 @@ proc replacementLength*(self: gen_qevent_types.QInputMethodEvent): cint =
   fcQInputMethodEvent_replacementLength(self.h)
 
 proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char], replaceFrom: cint): void =
-  fcQInputMethodEvent_setCommitString2(self.h, struct_seaqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))), replaceFrom)
+  fcQInputMethodEvent_setCommitStringCommitStringReplaceFrom(self.h, struct_seaqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))), replaceFrom)
 
 proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: openArray[char], replaceFrom: cint, replaceLength: cint): void =
-  fcQInputMethodEvent_setCommitString3(self.h, struct_seaqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))), replaceFrom, replaceLength)
+  fcQInputMethodEvent_setCommitStringCommitStringReplaceFromReplaceLength(self.h, struct_seaqt_string(data: if len(commitString) > 0: addr commitString[0] else: nil, len: csize_t(len(commitString))), replaceFrom, replaceLength)
 
 type QInputMethodEventcloneProc* = proc(self: QInputMethodEvent): gen_qevent_types.QInputMethodEvent {.raises: [], gcsafe.}
 type QInputMethodEventsetAcceptedProc* = proc(self: QInputMethodEvent, accepted: bool): void {.raises: [], gcsafe.}
@@ -4980,10 +4980,10 @@ proc ignore*(self: gen_qevent_types.QDragMoveEvent): void =
   fcQDragMoveEvent_ignore(self.h)
 
 proc accept*(self: gen_qevent_types.QDragMoveEvent, r: gen_qrect_types.QRect): void =
-  fcQDragMoveEvent_acceptWithQRect(self.h, r.h)
+  fcQDragMoveEvent_acceptR(self.h, r.h)
 
 proc ignore*(self: gen_qevent_types.QDragMoveEvent, r: gen_qrect_types.QRect): void =
-  fcQDragMoveEvent_ignoreWithQRect(self.h, r.h)
+  fcQDragMoveEvent_ignoreR(self.h, r.h)
 
 type QDragMoveEventcloneProc* = proc(self: QDragMoveEvent): gen_qevent_types.QDragMoveEvent {.raises: [], gcsafe.}
 type QDragMoveEventsetAcceptedProc* = proc(self: QDragMoveEvent, accepted: bool): void {.raises: [], gcsafe.}
@@ -6782,8 +6782,8 @@ proc value*(self: gen_qevent_types.QInputMethodEventAttribute): gen_qvariant_typ
 proc setValue*(self: gen_qevent_types.QInputMethodEventAttribute, value: gen_qvariant_types.QVariant): void =
   fcQInputMethodEventAttribute_setValue(self.h, value.h)
 
-proc operatorAssign*(self: gen_qevent_types.QInputMethodEventAttribute, param1: gen_qevent_types.QInputMethodEventAttribute): void =
-  fcQInputMethodEventAttribute_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qevent_types.QInputMethodEventAttribute, fromVal: gen_qevent_types.QInputMethodEventAttribute): void =
+  fcQInputMethodEventAttribute_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
     typ: cint, s: cint, l: cint, val: gen_qvariant_types.QVariant): gen_qevent_types.QInputMethodEventAttribute =
@@ -6794,6 +6794,6 @@ proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
   let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new2(cint(typ), s, l), owned: true)
   tmp
 proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
-    param1: gen_qevent_types.QInputMethodEventAttribute): gen_qevent_types.QInputMethodEventAttribute =
-  let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new3(param1.h), owned: true)
+    fromVal: gen_qevent_types.QInputMethodEventAttribute): gen_qevent_types.QInputMethodEventAttribute =
+  let tmp = gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new3(fromVal.h), owned: true)
   tmp

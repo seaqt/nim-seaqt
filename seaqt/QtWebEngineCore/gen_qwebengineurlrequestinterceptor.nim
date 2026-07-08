@@ -57,10 +57,10 @@ type cQWebEngineUrlRequestInterceptor*{.exportc: "QWebEngineUrlRequestIntercepto
 proc fcQWebEngineUrlRequestInterceptor_metaObject(self: pointer): pointer {.importc: "QWebEngineUrlRequestInterceptor_metaObject".}
 proc fcQWebEngineUrlRequestInterceptor_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineUrlRequestInterceptor_metacast".}
 proc fcQWebEngineUrlRequestInterceptor_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineUrlRequestInterceptor_metacall".}
-proc fcQWebEngineUrlRequestInterceptor_tr(s: cstring): struct_seaqt_string {.importc: "QWebEngineUrlRequestInterceptor_tr".}
+proc fcQWebEngineUrlRequestInterceptor_trS(s: cstring): struct_seaqt_string {.importc: "QWebEngineUrlRequestInterceptor_tr_s".}
 proc fcQWebEngineUrlRequestInterceptor_interceptRequest(self: pointer, info: pointer): void {.importc: "QWebEngineUrlRequestInterceptor_interceptRequest".}
-proc fcQWebEngineUrlRequestInterceptor_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineUrlRequestInterceptor_tr2".}
-proc fcQWebEngineUrlRequestInterceptor_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineUrlRequestInterceptor_tr3".}
+proc fcQWebEngineUrlRequestInterceptor_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebEngineUrlRequestInterceptor_tr_s_c".}
+proc fcQWebEngineUrlRequestInterceptor_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebEngineUrlRequestInterceptor_tr_s_c_n".}
 proc fcQWebEngineUrlRequestInterceptor_vdata(self: pointer): ptr pointer {.importc: "QWebEngineUrlRequestInterceptor_vdata".}
 proc fvdata_cQWebEngineUrlRequestInterceptor(self: pointer): pointer {.importc: "vdata_QWebEngineUrlRequestInterceptor".}
 
@@ -92,7 +92,7 @@ proc fcQWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(self: poi
 proc fcQWebEngineUrlRequestInterceptor_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineUrlRequestInterceptor_protectedbase_receivers".}
 proc fcQWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected".}
 proc fcQWebEngineUrlRequestInterceptor_new(vtbl: pointer, vdata: csize_t): ptr cQWebEngineUrlRequestInterceptor {.importc: "QWebEngineUrlRequestInterceptor_new".}
-proc fcQWebEngineUrlRequestInterceptor_new2(vtbl: pointer, vdata: csize_t, p: pointer): ptr cQWebEngineUrlRequestInterceptor {.importc: "QWebEngineUrlRequestInterceptor_new2".}
+proc fcQWebEngineUrlRequestInterceptor_new2(vtbl: pointer, vdata: csize_t, p: pointer): ptr cQWebEngineUrlRequestInterceptor {.importc: "QWebEngineUrlRequestInterceptor_new_p".}
 proc fcQWebEngineUrlRequestInterceptor_staticMetaObject(): pointer {.importc: "QWebEngineUrlRequestInterceptor_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor): gen_qobjectdefs_types.QMetaObject =
@@ -105,7 +105,7 @@ proc metacall*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequ
   fcQWebEngineUrlRequestInterceptor_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, s: cstring): string =
-  let v_ms = fcQWebEngineUrlRequestInterceptor_tr(s)
+  let v_ms = fcQWebEngineUrlRequestInterceptor_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -114,13 +114,13 @@ proc interceptRequest*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngin
   fcQWebEngineUrlRequestInterceptor_interceptRequest(self.h, info.h)
 
 proc tr*(_: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, s: cstring, c: cstring): string =
-  let v_ms = fcQWebEngineUrlRequestInterceptor_tr2(s, c)
+  let v_ms = fcQWebEngineUrlRequestInterceptor_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebEngineUrlRequestInterceptor_tr3(s, c, n)
+  let v_ms = fcQWebEngineUrlRequestInterceptor_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

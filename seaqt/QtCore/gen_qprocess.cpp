@@ -30,16 +30,16 @@ QProcessEnvironment* QProcessEnvironment_new() {
 	return new (std::nothrow) QProcessEnvironment();
 }
 
-QProcessEnvironment* QProcessEnvironment_new2(int param1) {
+QProcessEnvironment* QProcessEnvironment_new_QProcessEnvironment_Initialization(int param1) {
 	return new (std::nothrow) QProcessEnvironment(static_cast<QProcessEnvironment::Initialization>(param1));
 }
 
-QProcessEnvironment* QProcessEnvironment_new3(QProcessEnvironment* other) {
-	return new (std::nothrow) QProcessEnvironment(*other);
+QProcessEnvironment* QProcessEnvironment_new_QProcessEnvironment(QProcessEnvironment* from) {
+	return new (std::nothrow) QProcessEnvironment(*from);
 }
 
-void QProcessEnvironment_operatorAssign(QProcessEnvironment* self, QProcessEnvironment* other) {
-	self->operator=(*other);
+void QProcessEnvironment_operatorAssign(QProcessEnvironment* self, QProcessEnvironment* from) {
+	self->operator=(*from);
 }
 
 void QProcessEnvironment_swap(QProcessEnvironment* self, QProcessEnvironment* other) {
@@ -71,7 +71,7 @@ bool QProcessEnvironment_contains(const QProcessEnvironment* self, struct seaqt_
 	return self->contains(name_QString);
 }
 
-void QProcessEnvironment_insert(QProcessEnvironment* self, struct seaqt_string name, struct seaqt_string value) {
+void QProcessEnvironment_insert_name_value(QProcessEnvironment* self, struct seaqt_string name, struct seaqt_string value) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString value_QString = QString::fromUtf8(value.data, value.len);
 	self->insert(name_QString, value_QString);
@@ -82,7 +82,7 @@ void QProcessEnvironment_remove(QProcessEnvironment* self, struct seaqt_string n
 	self->remove(name_QString);
 }
 
-struct seaqt_string QProcessEnvironment_value(const QProcessEnvironment* self, struct seaqt_string name) {
+struct seaqt_string QProcessEnvironment_value_name(const QProcessEnvironment* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString _ret = self->value(name_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -134,7 +134,7 @@ struct seaqt_array /* of struct seaqt_string */  QProcessEnvironment_keys(const 
 	return _out;
 }
 
-void QProcessEnvironment_insertWithQProcessEnvironment(QProcessEnvironment* self, QProcessEnvironment* e) {
+void QProcessEnvironment_insert_e(QProcessEnvironment* self, QProcessEnvironment* e) {
 	self->insert(*e);
 }
 
@@ -142,7 +142,7 @@ QProcessEnvironment* QProcessEnvironment_systemEnvironment() {
 	return new QProcessEnvironment(QProcessEnvironment::systemEnvironment());
 }
 
-struct seaqt_string QProcessEnvironment_value2(const QProcessEnvironment* self, struct seaqt_string name, struct seaqt_string defaultValue) {
+struct seaqt_string QProcessEnvironment_value_name_defaultValue(const QProcessEnvironment* self, struct seaqt_string name, struct seaqt_string defaultValue) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString defaultValue_QString = QString::fromUtf8(defaultValue.data, defaultValue.len);
 	QString _ret = self->value(name_QString, defaultValue_QString);
@@ -517,7 +517,7 @@ VirtualQProcess* QProcess_new(const QProcess_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQProcess(vtbl) : nullptr;
 }
 
-VirtualQProcess* QProcess_new2(const QProcess_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQProcess* QProcess_new_parent(const QProcess_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQProcess>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQProcess(vtbl, parent) : nullptr;
 }
@@ -538,7 +538,7 @@ int QProcess_metacall(QProcess* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QProcess_tr(const char* s) {
+struct seaqt_string QProcess_tr_s(const char* s) {
 	QString _ret = QProcess::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -549,16 +549,16 @@ struct seaqt_string QProcess_tr(const char* s) {
 	return _ms;
 }
 
-void QProcess_start(QProcess* self, struct seaqt_string program) {
+void QProcess_start_program(QProcess* self, struct seaqt_string program) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	self->start(program_QString);
 }
 
-void QProcess_start2(QProcess* self) {
+void QProcess_start(QProcess* self) {
 	self->start();
 }
 
-void QProcess_startCommand(QProcess* self, struct seaqt_string command) {
+void QProcess_startCommand_command(QProcess* self, struct seaqt_string command) {
 	QString command_QString = QString::fromUtf8(command.data, command.len);
 	self->startCommand(command_QString);
 }
@@ -658,12 +658,12 @@ void QProcess_setStandardInputFile(QProcess* self, struct seaqt_string fileName)
 	self->setStandardInputFile(fileName_QString);
 }
 
-void QProcess_setStandardOutputFile(QProcess* self, struct seaqt_string fileName) {
+void QProcess_setStandardOutputFile_fileName(QProcess* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	self->setStandardOutputFile(fileName_QString);
 }
 
-void QProcess_setStandardErrorFile(QProcess* self, struct seaqt_string fileName) {
+void QProcess_setStandardErrorFile_fileName(QProcess* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	self->setStandardErrorFile(fileName_QString);
 }
@@ -798,12 +798,12 @@ void QProcess_close(QProcess* self) {
 	self->close();
 }
 
-int QProcess_execute(struct seaqt_string program) {
+int QProcess_execute_program(struct seaqt_string program) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	return QProcess::execute(program_QString);
 }
 
-bool QProcess_startDetachedWithProgram(struct seaqt_string program) {
+bool QProcess_startDetached_program(struct seaqt_string program) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	return QProcess::startDetached(program_QString);
 }
@@ -847,11 +847,11 @@ void QProcess_kill(QProcess* self) {
 	self->kill();
 }
 
-void QProcess_finished(QProcess* self, int exitCode) {
+void QProcess_finished_exitCode(QProcess* self, int exitCode) {
 	self->finished(static_cast<int>(exitCode));
 }
 
-void QProcess_connect_finished(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QProcess_connect_finished_exitCode(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -880,7 +880,7 @@ void QProcess_connect_errorOccurred(QProcess* self, intptr_t slot, void (*callba
 	QProcess::connect(self, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::errorOccurred), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QProcess_tr2(const char* s, const char* c) {
+struct seaqt_string QProcess_tr_s_c(const char* s, const char* c) {
 	QString _ret = QProcess::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -891,7 +891,7 @@ struct seaqt_string QProcess_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QProcess_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QProcess_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QProcess::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -902,7 +902,7 @@ struct seaqt_string QProcess_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QProcess_start3(QProcess* self, struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments) {
+void QProcess_start_program_arguments(QProcess* self, struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QStringList arguments_QList;
 	arguments_QList.reserve(arguments.len);
@@ -914,7 +914,7 @@ void QProcess_start3(QProcess* self, struct seaqt_string program, struct seaqt_a
 	self->start(program_QString, arguments_QList);
 }
 
-void QProcess_start4(QProcess* self, struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments, int mode) {
+void QProcess_start_program_arguments_mode(QProcess* self, struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments, int mode) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QStringList arguments_QList;
 	arguments_QList.reserve(arguments.len);
@@ -926,38 +926,38 @@ void QProcess_start4(QProcess* self, struct seaqt_string program, struct seaqt_a
 	self->start(program_QString, arguments_QList, static_cast<QIODeviceBase::OpenMode>(mode));
 }
 
-void QProcess_startWithMode(QProcess* self, int mode) {
+void QProcess_start_mode(QProcess* self, int mode) {
 	self->start(static_cast<QIODeviceBase::OpenMode>(mode));
 }
 
-void QProcess_startCommand2(QProcess* self, struct seaqt_string command, int mode) {
+void QProcess_startCommand_command_mode(QProcess* self, struct seaqt_string command, int mode) {
 	QString command_QString = QString::fromUtf8(command.data, command.len);
 	self->startCommand(command_QString, static_cast<QIODeviceBase::OpenMode>(mode));
 }
 
-bool QProcess_startDetachedWithPid(QProcess* self, long long* pid) {
+bool QProcess_startDetached_pid(QProcess* self, long long* pid) {
 	return self->startDetached(static_cast<qint64*>(pid));
 }
 
-void QProcess_setStandardOutputFile2(QProcess* self, struct seaqt_string fileName, int mode) {
+void QProcess_setStandardOutputFile_fileName_mode(QProcess* self, struct seaqt_string fileName, int mode) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	self->setStandardOutputFile(fileName_QString, static_cast<QIODeviceBase::OpenMode>(mode));
 }
 
-void QProcess_setStandardErrorFile2(QProcess* self, struct seaqt_string fileName, int mode) {
+void QProcess_setStandardErrorFile_fileName_mode(QProcess* self, struct seaqt_string fileName, int mode) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	self->setStandardErrorFile(fileName_QString, static_cast<QIODeviceBase::OpenMode>(mode));
 }
 
-bool QProcess_waitForStartedWithMsecs(QProcess* self, int msecs) {
+bool QProcess_waitForStarted_msecs(QProcess* self, int msecs) {
 	return self->waitForStarted(static_cast<int>(msecs));
 }
 
-bool QProcess_waitForFinishedWithMsecs(QProcess* self, int msecs) {
+bool QProcess_waitForFinished_msecs(QProcess* self, int msecs) {
 	return self->waitForFinished(static_cast<int>(msecs));
 }
 
-int QProcess_execute2(struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments) {
+int QProcess_execute_program_arguments(struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QStringList arguments_QList;
 	arguments_QList.reserve(arguments.len);
@@ -969,7 +969,7 @@ int QProcess_execute2(struct seaqt_string program, struct seaqt_array /* of stru
 	return QProcess::execute(program_QString, arguments_QList);
 }
 
-bool QProcess_startDetached2(struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments) {
+bool QProcess_startDetached_program_arguments(struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QStringList arguments_QList;
 	arguments_QList.reserve(arguments.len);
@@ -981,7 +981,7 @@ bool QProcess_startDetached2(struct seaqt_string program, struct seaqt_array /* 
 	return QProcess::startDetached(program_QString, arguments_QList);
 }
 
-bool QProcess_startDetached3(struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments, struct seaqt_string workingDirectory) {
+bool QProcess_startDetached_program_arguments_workingDirectory(struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments, struct seaqt_string workingDirectory) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QStringList arguments_QList;
 	arguments_QList.reserve(arguments.len);
@@ -994,7 +994,7 @@ bool QProcess_startDetached3(struct seaqt_string program, struct seaqt_array /* 
 	return QProcess::startDetached(program_QString, arguments_QList, workingDirectory_QString);
 }
 
-bool QProcess_startDetached4(struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments, struct seaqt_string workingDirectory, long long* pid) {
+bool QProcess_startDetached_program_arguments_workingDirectory_pid(struct seaqt_string program, struct seaqt_array /* of struct seaqt_string */  arguments, struct seaqt_string workingDirectory, long long* pid) {
 	QString program_QString = QString::fromUtf8(program.data, program.len);
 	QStringList arguments_QList;
 	arguments_QList.reserve(arguments.len);
@@ -1007,11 +1007,11 @@ bool QProcess_startDetached4(struct seaqt_string program, struct seaqt_array /* 
 	return QProcess::startDetached(program_QString, arguments_QList, workingDirectory_QString, static_cast<qint64*>(pid));
 }
 
-void QProcess_finished2(QProcess* self, int exitCode, int exitStatus) {
+void QProcess_finished_exitCode_exitStatus(QProcess* self, int exitCode, int exitStatus) {
 	self->finished(static_cast<int>(exitCode), static_cast<QProcess::ExitStatus>(exitStatus));
 }
 
-void QProcess_connect_finished2(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QProcess_connect_finished_exitCode_exitStatus(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);

@@ -101,15 +101,15 @@ void* QStringListModel_vdata(VirtualQStringListModel* self);
 VirtualQStringListModel* vdata_QStringListModel(void* vdata);
 
 VirtualQStringListModel* QStringListModel_new(const QStringListModel_VTable* vtbl, size_t vdata);
-VirtualQStringListModel* QStringListModel_new2(const QStringListModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings);
-VirtualQStringListModel* QStringListModel_new3(const QStringListModel_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQStringListModel* QStringListModel_new4(const QStringListModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings, QObject* parent);
+VirtualQStringListModel* QStringListModel_new_strings(const QStringListModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings);
+VirtualQStringListModel* QStringListModel_new_parent(const QStringListModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQStringListModel* QStringListModel_new_strings_parent(const QStringListModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings, QObject* parent);
 
 void QStringListModel_virtbase(QStringListModel* src, QAbstractListModel** outptr_QAbstractListModel);
 QMetaObject* QStringListModel_metaObject(const QStringListModel* self);
 void* QStringListModel_metacast(QStringListModel* self, const char* param1);
 int QStringListModel_metacall(QStringListModel* self, int param1, int param2, void** param3);
-struct seaqt_string QStringListModel_tr(const char* s);
+struct seaqt_string QStringListModel_tr_s(const char* s);
 int QStringListModel_rowCount(const QStringListModel* self, QModelIndex* parent);
 QModelIndex* QStringListModel_sibling(const QStringListModel* self, int row, int column, QModelIndex* idx);
 QVariant* QStringListModel_data(const QStringListModel* self, QModelIndex* index, int role);
@@ -125,8 +125,8 @@ void QStringListModel_sort(QStringListModel* self, int column, int order);
 struct seaqt_array /* of struct seaqt_string */  QStringListModel_stringList(const QStringListModel* self);
 void QStringListModel_setStringList(QStringListModel* self, struct seaqt_array /* of struct seaqt_string */  strings);
 int QStringListModel_supportedDropActions(const QStringListModel* self);
-struct seaqt_string QStringListModel_tr2(const char* s, const char* c);
-struct seaqt_string QStringListModel_tr3(const char* s, const char* c, int n);
+struct seaqt_string QStringListModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QStringListModel_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QStringListModel_virtualbase_metaObject(const VirtualQStringListModel* self);
 void* QStringListModel_virtualbase_metacast(VirtualQStringListModel* self, const char* param1);
@@ -173,7 +173,7 @@ void QStringListModel_virtualbase_customEvent(VirtualQStringListModel* self, QEv
 void QStringListModel_virtualbase_connectNotify(VirtualQStringListModel* self, QMetaMethod* signal);
 void QStringListModel_virtualbase_disconnectNotify(VirtualQStringListModel* self, QMetaMethod* signal);
 
-QModelIndex* QStringListModel_protectedbase_createIndex(const VirtualQStringListModel* self, int row, int column);
+QModelIndex* QStringListModel_protectedbase_createIndex_row_column(const VirtualQStringListModel* self, int row, int column);
 void QStringListModel_protectedbase_encodeData(const VirtualQStringListModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QStringListModel_protectedbase_decodeData(VirtualQStringListModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QStringListModel_protectedbase_beginInsertRows(VirtualQStringListModel* self, QModelIndex* parent, int first, int last);

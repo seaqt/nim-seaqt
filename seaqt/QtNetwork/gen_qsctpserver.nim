@@ -61,12 +61,12 @@ type cQSctpServer*{.exportc: "QSctpServer", incompleteStruct.} = object
 proc fcQSctpServer_metaObject(self: pointer): pointer {.importc: "QSctpServer_metaObject".}
 proc fcQSctpServer_metacast(self: pointer, param1: cstring): pointer {.importc: "QSctpServer_metacast".}
 proc fcQSctpServer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSctpServer_metacall".}
-proc fcQSctpServer_tr(s: cstring): struct_seaqt_string {.importc: "QSctpServer_tr".}
+proc fcQSctpServer_trS(s: cstring): struct_seaqt_string {.importc: "QSctpServer_tr_s".}
 proc fcQSctpServer_setMaximumChannelCount(self: pointer, count: cint): void {.importc: "QSctpServer_setMaximumChannelCount".}
 proc fcQSctpServer_maximumChannelCount(self: pointer): cint {.importc: "QSctpServer_maximumChannelCount".}
 proc fcQSctpServer_nextPendingDatagramConnection(self: pointer): pointer {.importc: "QSctpServer_nextPendingDatagramConnection".}
-proc fcQSctpServer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSctpServer_tr2".}
-proc fcQSctpServer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSctpServer_tr3".}
+proc fcQSctpServer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSctpServer_tr_s_c".}
+proc fcQSctpServer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSctpServer_tr_s_c_n".}
 proc fcQSctpServer_vdata(self: pointer): ptr pointer {.importc: "QSctpServer_vdata".}
 proc fvdata_cQSctpServer(self: pointer): pointer {.importc: "vdata_QSctpServer".}
 
@@ -104,7 +104,7 @@ proc fcQSctpServer_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQSctpServer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSctpServer_protectedbase_receivers".}
 proc fcQSctpServer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSctpServer_protectedbase_isSignalConnected".}
 proc fcQSctpServer_new(vtbl: pointer, vdata: csize_t): ptr cQSctpServer {.importc: "QSctpServer_new".}
-proc fcQSctpServer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSctpServer {.importc: "QSctpServer_new2".}
+proc fcQSctpServer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSctpServer {.importc: "QSctpServer_new_parent".}
 proc fcQSctpServer_staticMetaObject(): pointer {.importc: "QSctpServer_staticMetaObject".}
 
 proc metaObject*(self: gen_qsctpserver_types.QSctpServer): gen_qobjectdefs_types.QMetaObject =
@@ -117,7 +117,7 @@ proc metacall*(self: gen_qsctpserver_types.QSctpServer, param1: cint, param2: ci
   fcQSctpServer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsctpserver_types.QSctpServer, s: cstring): string =
-  let v_ms = fcQSctpServer_tr(s)
+  let v_ms = fcQSctpServer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -132,13 +132,13 @@ proc nextPendingDatagramConnection*(self: gen_qsctpserver_types.QSctpServer): ge
   gen_qsctpsocket_types.QSctpSocket(h: fcQSctpServer_nextPendingDatagramConnection(self.h), owned: false)
 
 proc tr*(_: type gen_qsctpserver_types.QSctpServer, s: cstring, c: cstring): string =
-  let v_ms = fcQSctpServer_tr2(s, c)
+  let v_ms = fcQSctpServer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsctpserver_types.QSctpServer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSctpServer_tr3(s, c, n)
+  let v_ms = fcQSctpServer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

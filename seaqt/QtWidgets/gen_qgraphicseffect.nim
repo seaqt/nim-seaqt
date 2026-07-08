@@ -90,7 +90,7 @@ type cQGraphicsOpacityEffect*{.exportc: "QGraphicsOpacityEffect", incompleteStru
 proc fcQGraphicsEffect_metaObject(self: pointer): pointer {.importc: "QGraphicsEffect_metaObject".}
 proc fcQGraphicsEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsEffect_metacast".}
 proc fcQGraphicsEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsEffect_metacall".}
-proc fcQGraphicsEffect_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsEffect_tr".}
+proc fcQGraphicsEffect_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsEffect_tr_s".}
 proc fcQGraphicsEffect_boundingRectFor(self: pointer, sourceRect: pointer): pointer {.importc: "QGraphicsEffect_boundingRectFor".}
 proc fcQGraphicsEffect_boundingRect(self: pointer): pointer {.importc: "QGraphicsEffect_boundingRect".}
 proc fcQGraphicsEffect_isEnabled(self: pointer): bool {.importc: "QGraphicsEffect_isEnabled".}
@@ -98,8 +98,8 @@ proc fcQGraphicsEffect_setEnabled(self: pointer, enable: bool): void {.importc: 
 proc fcQGraphicsEffect_update(self: pointer): void {.importc: "QGraphicsEffect_update".}
 proc fcQGraphicsEffect_enabledChanged(self: pointer, enabled: bool): void {.importc: "QGraphicsEffect_enabledChanged".}
 proc fcQGraphicsEffect_connect_enabledChanged(self: pointer, slot: int, callback: proc (slot: int, enabled: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsEffect_connect_enabledChanged".}
-proc fcQGraphicsEffect_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsEffect_tr2".}
-proc fcQGraphicsEffect_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsEffect_tr3".}
+proc fcQGraphicsEffect_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsEffect_tr_s_c".}
+proc fcQGraphicsEffect_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsEffect_tr_s_c_n".}
 proc fcQGraphicsEffect_vdata(self: pointer): ptr pointer {.importc: "QGraphicsEffect_vdata".}
 proc fvdata_cQGraphicsEffect(self: pointer): pointer {.importc: "vdata_QGraphicsEffect".}
 
@@ -135,21 +135,21 @@ proc fcQGraphicsEffect_protectedbase_sourceIsPixmap(self: pointer): bool {.impor
 proc fcQGraphicsEffect_protectedbase_sourceBoundingRect(self: pointer): pointer {.importc: "QGraphicsEffect_protectedbase_sourceBoundingRect".}
 proc fcQGraphicsEffect_protectedbase_drawSource(self: pointer, painter: pointer): void {.importc: "QGraphicsEffect_protectedbase_drawSource".}
 proc fcQGraphicsEffect_protectedbase_sourcePixmap(self: pointer): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap".}
-proc fcQGraphicsEffect_protectedbase_sourceBoundingRectWithSystem(self: pointer, system: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourceBoundingRectWithSystem".}
-proc fcQGraphicsEffect_protectedbase_sourcePixmapWithSystem(self: pointer, system: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmapWithSystem".}
-proc fcQGraphicsEffect_protectedbase_sourcePixmap2(self: pointer, system: cint, offset: pointer): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap2".}
-proc fcQGraphicsEffect_protectedbase_sourcePixmap3(self: pointer, system: cint, offset: pointer, mode: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap3".}
+proc fcQGraphicsEffect_protectedbase_sourceBoundingRect_system(self: pointer, system: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourceBoundingRect_system".}
+proc fcQGraphicsEffect_protectedbase_sourcePixmap_system(self: pointer, system: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap_system".}
+proc fcQGraphicsEffect_protectedbase_sourcePixmap_system_offset(self: pointer, system: cint, offset: pointer): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap_system_offset".}
+proc fcQGraphicsEffect_protectedbase_sourcePixmap_system_offset_mode(self: pointer, system: cint, offset: pointer, mode: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap_system_offset_mode".}
 proc fcQGraphicsEffect_protectedbase_sender(self: pointer): pointer {.importc: "QGraphicsEffect_protectedbase_sender".}
 proc fcQGraphicsEffect_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QGraphicsEffect_protectedbase_senderSignalIndex".}
 proc fcQGraphicsEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsEffect_protectedbase_receivers".}
 proc fcQGraphicsEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsEffect_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new".}
-proc fcQGraphicsEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new2".}
+proc fcQGraphicsEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new_parent".}
 proc fcQGraphicsEffect_staticMetaObject(): pointer {.importc: "QGraphicsEffect_staticMetaObject".}
 proc fcQGraphicsColorizeEffect_metaObject(self: pointer): pointer {.importc: "QGraphicsColorizeEffect_metaObject".}
 proc fcQGraphicsColorizeEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsColorizeEffect_metacast".}
 proc fcQGraphicsColorizeEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsColorizeEffect_metacall".}
-proc fcQGraphicsColorizeEffect_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsColorizeEffect_tr".}
+proc fcQGraphicsColorizeEffect_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsColorizeEffect_tr_s".}
 proc fcQGraphicsColorizeEffect_color(self: pointer): pointer {.importc: "QGraphicsColorizeEffect_color".}
 proc fcQGraphicsColorizeEffect_strength(self: pointer): float64 {.importc: "QGraphicsColorizeEffect_strength".}
 proc fcQGraphicsColorizeEffect_setColor(self: pointer, c: pointer): void {.importc: "QGraphicsColorizeEffect_setColor".}
@@ -158,8 +158,8 @@ proc fcQGraphicsColorizeEffect_colorChanged(self: pointer, color: pointer): void
 proc fcQGraphicsColorizeEffect_connect_colorChanged(self: pointer, slot: int, callback: proc (slot: int, color: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsColorizeEffect_connect_colorChanged".}
 proc fcQGraphicsColorizeEffect_strengthChanged(self: pointer, strength: float64): void {.importc: "QGraphicsColorizeEffect_strengthChanged".}
 proc fcQGraphicsColorizeEffect_connect_strengthChanged(self: pointer, slot: int, callback: proc (slot: int, strength: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsColorizeEffect_connect_strengthChanged".}
-proc fcQGraphicsColorizeEffect_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsColorizeEffect_tr2".}
-proc fcQGraphicsColorizeEffect_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsColorizeEffect_tr3".}
+proc fcQGraphicsColorizeEffect_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsColorizeEffect_tr_s_c".}
+proc fcQGraphicsColorizeEffect_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsColorizeEffect_tr_s_c_n".}
 proc fcQGraphicsColorizeEffect_vdata(self: pointer): ptr pointer {.importc: "QGraphicsColorizeEffect_vdata".}
 proc fvdata_cQGraphicsColorizeEffect(self: pointer): pointer {.importc: "vdata_QGraphicsColorizeEffect".}
 
@@ -201,12 +201,12 @@ proc fcQGraphicsColorizeEffect_protectedbase_senderSignalIndex(self: pointer): c
 proc fcQGraphicsColorizeEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsColorizeEffect_protectedbase_receivers".}
 proc fcQGraphicsColorizeEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsColorizeEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsColorizeEffect_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new".}
-proc fcQGraphicsColorizeEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new2".}
+proc fcQGraphicsColorizeEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new_parent".}
 proc fcQGraphicsColorizeEffect_staticMetaObject(): pointer {.importc: "QGraphicsColorizeEffect_staticMetaObject".}
 proc fcQGraphicsBlurEffect_metaObject(self: pointer): pointer {.importc: "QGraphicsBlurEffect_metaObject".}
 proc fcQGraphicsBlurEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsBlurEffect_metacast".}
 proc fcQGraphicsBlurEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsBlurEffect_metacall".}
-proc fcQGraphicsBlurEffect_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsBlurEffect_tr".}
+proc fcQGraphicsBlurEffect_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsBlurEffect_tr_s".}
 proc fcQGraphicsBlurEffect_boundingRectFor(self: pointer, rect: pointer): pointer {.importc: "QGraphicsBlurEffect_boundingRectFor".}
 proc fcQGraphicsBlurEffect_blurRadius(self: pointer): float64 {.importc: "QGraphicsBlurEffect_blurRadius".}
 proc fcQGraphicsBlurEffect_blurHints(self: pointer): cint {.importc: "QGraphicsBlurEffect_blurHints".}
@@ -216,8 +216,8 @@ proc fcQGraphicsBlurEffect_blurRadiusChanged(self: pointer, blurRadius: float64)
 proc fcQGraphicsBlurEffect_connect_blurRadiusChanged(self: pointer, slot: int, callback: proc (slot: int, blurRadius: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsBlurEffect_connect_blurRadiusChanged".}
 proc fcQGraphicsBlurEffect_blurHintsChanged(self: pointer, hints: cint): void {.importc: "QGraphicsBlurEffect_blurHintsChanged".}
 proc fcQGraphicsBlurEffect_connect_blurHintsChanged(self: pointer, slot: int, callback: proc (slot: int, hints: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsBlurEffect_connect_blurHintsChanged".}
-proc fcQGraphicsBlurEffect_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsBlurEffect_tr2".}
-proc fcQGraphicsBlurEffect_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsBlurEffect_tr3".}
+proc fcQGraphicsBlurEffect_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsBlurEffect_tr_s_c".}
+proc fcQGraphicsBlurEffect_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsBlurEffect_tr_s_c_n".}
 proc fcQGraphicsBlurEffect_vdata(self: pointer): ptr pointer {.importc: "QGraphicsBlurEffect_vdata".}
 proc fvdata_cQGraphicsBlurEffect(self: pointer): pointer {.importc: "vdata_QGraphicsBlurEffect".}
 
@@ -259,21 +259,21 @@ proc fcQGraphicsBlurEffect_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQGraphicsBlurEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsBlurEffect_protectedbase_receivers".}
 proc fcQGraphicsBlurEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsBlurEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsBlurEffect_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new".}
-proc fcQGraphicsBlurEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new2".}
+proc fcQGraphicsBlurEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new_parent".}
 proc fcQGraphicsBlurEffect_staticMetaObject(): pointer {.importc: "QGraphicsBlurEffect_staticMetaObject".}
 proc fcQGraphicsDropShadowEffect_metaObject(self: pointer): pointer {.importc: "QGraphicsDropShadowEffect_metaObject".}
 proc fcQGraphicsDropShadowEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsDropShadowEffect_metacast".}
 proc fcQGraphicsDropShadowEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsDropShadowEffect_metacall".}
-proc fcQGraphicsDropShadowEffect_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsDropShadowEffect_tr".}
+proc fcQGraphicsDropShadowEffect_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsDropShadowEffect_tr_s".}
 proc fcQGraphicsDropShadowEffect_boundingRectFor(self: pointer, rect: pointer): pointer {.importc: "QGraphicsDropShadowEffect_boundingRectFor".}
 proc fcQGraphicsDropShadowEffect_offset(self: pointer): pointer {.importc: "QGraphicsDropShadowEffect_offset".}
 proc fcQGraphicsDropShadowEffect_xOffset(self: pointer): float64 {.importc: "QGraphicsDropShadowEffect_xOffset".}
 proc fcQGraphicsDropShadowEffect_yOffset(self: pointer): float64 {.importc: "QGraphicsDropShadowEffect_yOffset".}
 proc fcQGraphicsDropShadowEffect_blurRadius(self: pointer): float64 {.importc: "QGraphicsDropShadowEffect_blurRadius".}
 proc fcQGraphicsDropShadowEffect_color(self: pointer): pointer {.importc: "QGraphicsDropShadowEffect_color".}
-proc fcQGraphicsDropShadowEffect_setOffset(self: pointer, ofs: pointer): void {.importc: "QGraphicsDropShadowEffect_setOffset".}
-proc fcQGraphicsDropShadowEffect_setOffset2(self: pointer, dx: float64, dy: float64): void {.importc: "QGraphicsDropShadowEffect_setOffset2".}
-proc fcQGraphicsDropShadowEffect_setOffsetWithQreal(self: pointer, d: float64): void {.importc: "QGraphicsDropShadowEffect_setOffsetWithQreal".}
+proc fcQGraphicsDropShadowEffect_setOffsetOfs(self: pointer, ofs: pointer): void {.importc: "QGraphicsDropShadowEffect_setOffset_ofs".}
+proc fcQGraphicsDropShadowEffect_setOffsetDxDy(self: pointer, dx: float64, dy: float64): void {.importc: "QGraphicsDropShadowEffect_setOffset_dx_dy".}
+proc fcQGraphicsDropShadowEffect_setOffsetD(self: pointer, d: float64): void {.importc: "QGraphicsDropShadowEffect_setOffset_d".}
 proc fcQGraphicsDropShadowEffect_setXOffset(self: pointer, dx: float64): void {.importc: "QGraphicsDropShadowEffect_setXOffset".}
 proc fcQGraphicsDropShadowEffect_setYOffset(self: pointer, dy: float64): void {.importc: "QGraphicsDropShadowEffect_setYOffset".}
 proc fcQGraphicsDropShadowEffect_setBlurRadius(self: pointer, blurRadius: float64): void {.importc: "QGraphicsDropShadowEffect_setBlurRadius".}
@@ -284,8 +284,8 @@ proc fcQGraphicsDropShadowEffect_blurRadiusChanged(self: pointer, blurRadius: fl
 proc fcQGraphicsDropShadowEffect_connect_blurRadiusChanged(self: pointer, slot: int, callback: proc (slot: int, blurRadius: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsDropShadowEffect_connect_blurRadiusChanged".}
 proc fcQGraphicsDropShadowEffect_colorChanged(self: pointer, color: pointer): void {.importc: "QGraphicsDropShadowEffect_colorChanged".}
 proc fcQGraphicsDropShadowEffect_connect_colorChanged(self: pointer, slot: int, callback: proc (slot: int, color: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsDropShadowEffect_connect_colorChanged".}
-proc fcQGraphicsDropShadowEffect_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsDropShadowEffect_tr2".}
-proc fcQGraphicsDropShadowEffect_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsDropShadowEffect_tr3".}
+proc fcQGraphicsDropShadowEffect_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsDropShadowEffect_tr_s_c".}
+proc fcQGraphicsDropShadowEffect_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsDropShadowEffect_tr_s_c_n".}
 proc fcQGraphicsDropShadowEffect_vdata(self: pointer): ptr pointer {.importc: "QGraphicsDropShadowEffect_vdata".}
 proc fvdata_cQGraphicsDropShadowEffect(self: pointer): pointer {.importc: "vdata_QGraphicsDropShadowEffect".}
 
@@ -327,12 +327,12 @@ proc fcQGraphicsDropShadowEffect_protectedbase_senderSignalIndex(self: pointer):
 proc fcQGraphicsDropShadowEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsDropShadowEffect_protectedbase_receivers".}
 proc fcQGraphicsDropShadowEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsDropShadowEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsDropShadowEffect_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new".}
-proc fcQGraphicsDropShadowEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new2".}
+proc fcQGraphicsDropShadowEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new_parent".}
 proc fcQGraphicsDropShadowEffect_staticMetaObject(): pointer {.importc: "QGraphicsDropShadowEffect_staticMetaObject".}
 proc fcQGraphicsOpacityEffect_metaObject(self: pointer): pointer {.importc: "QGraphicsOpacityEffect_metaObject".}
 proc fcQGraphicsOpacityEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsOpacityEffect_metacast".}
 proc fcQGraphicsOpacityEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsOpacityEffect_metacall".}
-proc fcQGraphicsOpacityEffect_tr(s: cstring): struct_seaqt_string {.importc: "QGraphicsOpacityEffect_tr".}
+proc fcQGraphicsOpacityEffect_trS(s: cstring): struct_seaqt_string {.importc: "QGraphicsOpacityEffect_tr_s".}
 proc fcQGraphicsOpacityEffect_opacity(self: pointer): float64 {.importc: "QGraphicsOpacityEffect_opacity".}
 proc fcQGraphicsOpacityEffect_opacityMask(self: pointer): pointer {.importc: "QGraphicsOpacityEffect_opacityMask".}
 proc fcQGraphicsOpacityEffect_setOpacity(self: pointer, opacity: float64): void {.importc: "QGraphicsOpacityEffect_setOpacity".}
@@ -341,8 +341,8 @@ proc fcQGraphicsOpacityEffect_opacityChanged(self: pointer, opacity: float64): v
 proc fcQGraphicsOpacityEffect_connect_opacityChanged(self: pointer, slot: int, callback: proc (slot: int, opacity: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsOpacityEffect_connect_opacityChanged".}
 proc fcQGraphicsOpacityEffect_opacityMaskChanged(self: pointer, mask: pointer): void {.importc: "QGraphicsOpacityEffect_opacityMaskChanged".}
 proc fcQGraphicsOpacityEffect_connect_opacityMaskChanged(self: pointer, slot: int, callback: proc (slot: int, mask: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsOpacityEffect_connect_opacityMaskChanged".}
-proc fcQGraphicsOpacityEffect_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsOpacityEffect_tr2".}
-proc fcQGraphicsOpacityEffect_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsOpacityEffect_tr3".}
+proc fcQGraphicsOpacityEffect_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGraphicsOpacityEffect_tr_s_c".}
+proc fcQGraphicsOpacityEffect_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGraphicsOpacityEffect_tr_s_c_n".}
 proc fcQGraphicsOpacityEffect_vdata(self: pointer): ptr pointer {.importc: "QGraphicsOpacityEffect_vdata".}
 proc fvdata_cQGraphicsOpacityEffect(self: pointer): pointer {.importc: "vdata_QGraphicsOpacityEffect".}
 
@@ -384,7 +384,7 @@ proc fcQGraphicsOpacityEffect_protectedbase_senderSignalIndex(self: pointer): ci
 proc fcQGraphicsOpacityEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsOpacityEffect_protectedbase_receivers".}
 proc fcQGraphicsOpacityEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsOpacityEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsOpacityEffect_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new".}
-proc fcQGraphicsOpacityEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new2".}
+proc fcQGraphicsOpacityEffect_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new_parent".}
 proc fcQGraphicsOpacityEffect_staticMetaObject(): pointer {.importc: "QGraphicsOpacityEffect_staticMetaObject".}
 
 proc metaObject*(self: gen_qgraphicseffect_types.QGraphicsEffect): gen_qobjectdefs_types.QMetaObject =
@@ -397,7 +397,7 @@ proc metacall*(self: gen_qgraphicseffect_types.QGraphicsEffect, param1: cint, pa
   fcQGraphicsEffect_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsEffect, s: cstring): string =
-  let v_ms = fcQGraphicsEffect_tr(s)
+  let v_ms = fcQGraphicsEffect_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -438,13 +438,13 @@ proc onEnabledChanged*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QG
   fcQGraphicsEffect_connect_enabledChanged(self.h, cast[int](addr tmp[]), fcQGraphicsEffect_slot_callback_enabledChanged, fcQGraphicsEffect_slot_callback_enabledChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsEffect, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsEffect_tr2(s, c)
+  let v_ms = fcQGraphicsEffect_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsEffect, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsEffect_tr3(s, c, n)
+  let v_ms = fcQGraphicsEffect_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -734,16 +734,16 @@ proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect): gen_qpixmap
   gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap(self.h), owned: true)
 
 proc sourceBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsEffect, system: cint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsEffect_protectedbase_sourceBoundingRectWithSystem(self.h, cint(system)), owned: true)
+  gen_qrect_types.QRectF(h: fcQGraphicsEffect_protectedbase_sourceBoundingRect_system(self.h, cint(system)), owned: true)
 
 proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect, system: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmapWithSystem(self.h, cint(system)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap_system(self.h, cint(system)), owned: true)
 
 proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect, system: cint, offset: gen_qpoint_types.QPoint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap2(self.h, cint(system), offset.h), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap_system_offset(self.h, cint(system), offset.h), owned: true)
 
 proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect, system: cint, offset: gen_qpoint_types.QPoint, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap3(self.h, cint(system), offset.h, cint(mode)), owned: true)
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap_system_offset_mode(self.h, cint(system), offset.h, cint(mode)), owned: true)
 
 proc sender*(self: gen_qgraphicseffect_types.QGraphicsEffect): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQGraphicsEffect_protectedbase_sender(self.h), owned: false)
@@ -877,7 +877,7 @@ proc metacall*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, param1: 
   fcQGraphicsColorizeEffect_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsColorizeEffect, s: cstring): string =
-  let v_ms = fcQGraphicsColorizeEffect_tr(s)
+  let v_ms = fcQGraphicsColorizeEffect_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -935,13 +935,13 @@ proc onStrengthChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect,
   fcQGraphicsColorizeEffect_connect_strengthChanged(self.h, cast[int](addr tmp[]), fcQGraphicsColorizeEffect_slot_callback_strengthChanged, fcQGraphicsColorizeEffect_slot_callback_strengthChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsColorizeEffect, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsColorizeEffect_tr2(s, c)
+  let v_ms = fcQGraphicsColorizeEffect_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsColorizeEffect, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsColorizeEffect_tr3(s, c, n)
+  let v_ms = fcQGraphicsColorizeEffect_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1365,7 +1365,7 @@ proc metacall*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, param1: cint
   fcQGraphicsBlurEffect_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsBlurEffect, s: cstring): string =
-  let v_ms = fcQGraphicsBlurEffect_tr(s)
+  let v_ms = fcQGraphicsBlurEffect_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1426,13 +1426,13 @@ proc onBlurHintsChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, sl
   fcQGraphicsBlurEffect_connect_blurHintsChanged(self.h, cast[int](addr tmp[]), fcQGraphicsBlurEffect_slot_callback_blurHintsChanged, fcQGraphicsBlurEffect_slot_callback_blurHintsChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsBlurEffect, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsBlurEffect_tr2(s, c)
+  let v_ms = fcQGraphicsBlurEffect_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsBlurEffect, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsBlurEffect_tr3(s, c, n)
+  let v_ms = fcQGraphicsBlurEffect_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1856,7 +1856,7 @@ proc metacall*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, param1
   fcQGraphicsDropShadowEffect_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect, s: cstring): string =
-  let v_ms = fcQGraphicsDropShadowEffect_tr(s)
+  let v_ms = fcQGraphicsDropShadowEffect_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1880,13 +1880,13 @@ proc color*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect): gen_qcol
   gen_qcolor_types.QColor(h: fcQGraphicsDropShadowEffect_color(self.h), owned: true)
 
 proc setOffset*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ofs: gen_qpoint_types.QPointF): void =
-  fcQGraphicsDropShadowEffect_setOffset(self.h, ofs.h)
+  fcQGraphicsDropShadowEffect_setOffsetOfs(self.h, ofs.h)
 
 proc setOffset*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, dx: float64, dy: float64): void =
-  fcQGraphicsDropShadowEffect_setOffset2(self.h, dx, dy)
+  fcQGraphicsDropShadowEffect_setOffsetDxDy(self.h, dx, dy)
 
 proc setOffset*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, d: float64): void =
-  fcQGraphicsDropShadowEffect_setOffsetWithQreal(self.h, d)
+  fcQGraphicsDropShadowEffect_setOffsetD(self.h, d)
 
 proc setXOffset*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, dx: float64): void =
   fcQGraphicsDropShadowEffect_setXOffset(self.h, dx)
@@ -1961,13 +1961,13 @@ proc onColorChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, 
   fcQGraphicsDropShadowEffect_connect_colorChanged(self.h, cast[int](addr tmp[]), fcQGraphicsDropShadowEffect_slot_callback_colorChanged, fcQGraphicsDropShadowEffect_slot_callback_colorChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsDropShadowEffect_tr2(s, c)
+  let v_ms = fcQGraphicsDropShadowEffect_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsDropShadowEffect_tr3(s, c, n)
+  let v_ms = fcQGraphicsDropShadowEffect_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2391,7 +2391,7 @@ proc metacall*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, param1: c
   fcQGraphicsOpacityEffect_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsOpacityEffect, s: cstring): string =
-  let v_ms = fcQGraphicsOpacityEffect_tr(s)
+  let v_ms = fcQGraphicsOpacityEffect_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2449,13 +2449,13 @@ proc onOpacityMaskChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffec
   fcQGraphicsOpacityEffect_connect_opacityMaskChanged(self.h, cast[int](addr tmp[]), fcQGraphicsOpacityEffect_slot_callback_opacityMaskChanged, fcQGraphicsOpacityEffect_slot_callback_opacityMaskChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsOpacityEffect, s: cstring, c: cstring): string =
-  let v_ms = fcQGraphicsOpacityEffect_tr2(s, c)
+  let v_ms = fcQGraphicsOpacityEffect_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsOpacityEffect, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGraphicsOpacityEffect_tr3(s, c, n)
+  let v_ms = fcQGraphicsOpacityEffect_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -264,18 +264,18 @@ VirtualQPropertyAnimation* QPropertyAnimation_new(const QPropertyAnimation_VTabl
 	return _mem_ ? new (_mem_)VirtualQPropertyAnimation(vtbl) : nullptr;
 }
 
-VirtualQPropertyAnimation* QPropertyAnimation_new2(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* target, struct seaqt_string propertyName) {
+VirtualQPropertyAnimation* QPropertyAnimation_new_target_propertyName(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* target, struct seaqt_string propertyName) {
 	QByteArray propertyName_QByteArray(propertyName.data, propertyName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPropertyAnimation>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPropertyAnimation(vtbl, target, propertyName_QByteArray) : nullptr;
 }
 
-VirtualQPropertyAnimation* QPropertyAnimation_new3(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPropertyAnimation* QPropertyAnimation_new_parent(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPropertyAnimation>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPropertyAnimation(vtbl, parent) : nullptr;
 }
 
-VirtualQPropertyAnimation* QPropertyAnimation_new4(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* target, struct seaqt_string propertyName, QObject* parent) {
+VirtualQPropertyAnimation* QPropertyAnimation_new_target_propertyName_parent(const QPropertyAnimation_VTable* vtbl, size_t vdata, QObject* target, struct seaqt_string propertyName, QObject* parent) {
 	QByteArray propertyName_QByteArray(propertyName.data, propertyName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPropertyAnimation>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPropertyAnimation(vtbl, target, propertyName_QByteArray, parent) : nullptr;
@@ -297,7 +297,7 @@ int QPropertyAnimation_metacall(QPropertyAnimation* self, int param1, int param2
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPropertyAnimation_tr(const char* s) {
+struct seaqt_string QPropertyAnimation_tr_s(const char* s) {
 	QString _ret = QPropertyAnimation::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -330,7 +330,7 @@ void QPropertyAnimation_setPropertyName(QPropertyAnimation* self, struct seaqt_s
 	self->setPropertyName(propertyName_QByteArray);
 }
 
-struct seaqt_string QPropertyAnimation_tr2(const char* s, const char* c) {
+struct seaqt_string QPropertyAnimation_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPropertyAnimation::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -341,7 +341,7 @@ struct seaqt_string QPropertyAnimation_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPropertyAnimation_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPropertyAnimation_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPropertyAnimation::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -150,7 +150,7 @@ typedef struct QAbstractItemView_VTable{
 	void (*setSelection)(VirtualQAbstractItemView* self, QRect* rect, int command);
 	QRegion* (*visualRegionForSelection)(const VirtualQAbstractItemView* self, QItemSelection* selection);
 	struct seaqt_array /* of QModelIndex* */  (*selectedIndexes)(const VirtualQAbstractItemView* self);
-	bool (*edit2)(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
+	bool (*edit_index_trigger_event)(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
 	int (*selectionCommand)(const VirtualQAbstractItemView* self, QModelIndex* index, QEvent* event);
 	void (*startDrag)(VirtualQAbstractItemView* self, int supportedActions);
 	void (*initViewItemOption)(const VirtualQAbstractItemView* self, QStyleOptionViewItem* option);
@@ -211,13 +211,13 @@ void* QAbstractItemView_vdata(VirtualQAbstractItemView* self);
 VirtualQAbstractItemView* vdata_QAbstractItemView(void* vdata);
 
 VirtualQAbstractItemView* QAbstractItemView_new(const QAbstractItemView_VTable* vtbl, size_t vdata);
-VirtualQAbstractItemView* QAbstractItemView_new2(const QAbstractItemView_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQAbstractItemView* QAbstractItemView_new_parent(const QAbstractItemView_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QAbstractItemView_virtbase(QAbstractItemView* src, QAbstractScrollArea** outptr_QAbstractScrollArea);
 QMetaObject* QAbstractItemView_metaObject(const QAbstractItemView* self);
 void* QAbstractItemView_metacast(QAbstractItemView* self, const char* param1);
 int QAbstractItemView_metacall(QAbstractItemView* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractItemView_tr(const char* s);
+struct seaqt_string QAbstractItemView_tr_s(const char* s);
 void QAbstractItemView_setModel(QAbstractItemView* self, QAbstractItemModel* model);
 QAbstractItemModel* QAbstractItemView_model(const QAbstractItemView* self);
 void QAbstractItemView_setSelectionModel(QAbstractItemView* self, QItemSelectionModel* selectionModel);
@@ -276,14 +276,14 @@ void QAbstractItemView_setItemDelegateForRow(QAbstractItemView* self, int row, Q
 QAbstractItemDelegate* QAbstractItemView_itemDelegateForRow(const QAbstractItemView* self, int row);
 void QAbstractItemView_setItemDelegateForColumn(QAbstractItemView* self, int column, QAbstractItemDelegate* delegate);
 QAbstractItemDelegate* QAbstractItemView_itemDelegateForColumn(const QAbstractItemView* self, int column);
-QAbstractItemDelegate* QAbstractItemView_itemDelegateWithIndex(const QAbstractItemView* self, QModelIndex* index);
+QAbstractItemDelegate* QAbstractItemView_itemDelegate_index(const QAbstractItemView* self, QModelIndex* index);
 QAbstractItemDelegate* QAbstractItemView_itemDelegateForIndex(const QAbstractItemView* self, QModelIndex* index);
 QVariant* QAbstractItemView_inputMethodQuery(const QAbstractItemView* self, int query);
 void QAbstractItemView_reset(QAbstractItemView* self);
 void QAbstractItemView_setRootIndex(QAbstractItemView* self, QModelIndex* index);
 void QAbstractItemView_doItemsLayout(QAbstractItemView* self);
 void QAbstractItemView_selectAll(QAbstractItemView* self);
-void QAbstractItemView_edit(QAbstractItemView* self, QModelIndex* index);
+void QAbstractItemView_edit_index(QAbstractItemView* self, QModelIndex* index);
 void QAbstractItemView_clearSelection(QAbstractItemView* self);
 void QAbstractItemView_setCurrentIndex(QAbstractItemView* self, QModelIndex* index);
 void QAbstractItemView_scrollToTop(QAbstractItemView* self);
@@ -325,7 +325,7 @@ bool QAbstractItemView_isIndexHidden(const QAbstractItemView* self, QModelIndex*
 void QAbstractItemView_setSelection(QAbstractItemView* self, QRect* rect, int command);
 QRegion* QAbstractItemView_visualRegionForSelection(const QAbstractItemView* self, QItemSelection* selection);
 struct seaqt_array /* of QModelIndex* */  QAbstractItemView_selectedIndexes(const QAbstractItemView* self);
-bool QAbstractItemView_edit2(QAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
+bool QAbstractItemView_edit_index_trigger_event(QAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
 int QAbstractItemView_selectionCommand(const QAbstractItemView* self, QModelIndex* index, QEvent* event);
 void QAbstractItemView_startDrag(QAbstractItemView* self, int supportedActions);
 void QAbstractItemView_initViewItemOption(const QAbstractItemView* self, QStyleOptionViewItem* option);
@@ -348,8 +348,8 @@ void QAbstractItemView_timerEvent(QAbstractItemView* self, QTimerEvent* event);
 void QAbstractItemView_inputMethodEvent(QAbstractItemView* self, QInputMethodEvent* event);
 bool QAbstractItemView_eventFilter(QAbstractItemView* self, QObject* object, QEvent* event);
 QSize* QAbstractItemView_viewportSizeHint(const QAbstractItemView* self);
-struct seaqt_string QAbstractItemView_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractItemView_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAbstractItemView_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractItemView_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractItemView_virtualbase_metaObject(const VirtualQAbstractItemView* self);
 void* QAbstractItemView_virtualbase_metacast(VirtualQAbstractItemView* self, const char* param1);
@@ -390,7 +390,7 @@ bool QAbstractItemView_virtualbase_isIndexHidden(const VirtualQAbstractItemView*
 void QAbstractItemView_virtualbase_setSelection(VirtualQAbstractItemView* self, QRect* rect, int command);
 QRegion* QAbstractItemView_virtualbase_visualRegionForSelection(const VirtualQAbstractItemView* self, QItemSelection* selection);
 struct seaqt_array /* of QModelIndex* */  QAbstractItemView_virtualbase_selectedIndexes(const VirtualQAbstractItemView* self);
-bool QAbstractItemView_virtualbase_edit2(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
+bool QAbstractItemView_virtualbase_edit_index_trigger_event(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
 int QAbstractItemView_virtualbase_selectionCommand(const VirtualQAbstractItemView* self, QModelIndex* index, QEvent* event);
 void QAbstractItemView_virtualbase_startDrag(VirtualQAbstractItemView* self, int supportedActions);
 void QAbstractItemView_virtualbase_initViewItemOption(const VirtualQAbstractItemView* self, QStyleOptionViewItem* option);
@@ -457,7 +457,7 @@ void QAbstractItemView_protectedbase_startAutoScroll(VirtualQAbstractItemView* s
 void QAbstractItemView_protectedbase_stopAutoScroll(VirtualQAbstractItemView* self);
 void QAbstractItemView_protectedbase_doAutoScroll(VirtualQAbstractItemView* self);
 int QAbstractItemView_protectedbase_dropIndicatorPosition(const VirtualQAbstractItemView* self);
-void QAbstractItemView_protectedbase_setViewportMargins(VirtualQAbstractItemView* self, int left, int top, int right, int bottom);
+void QAbstractItemView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQAbstractItemView* self, int left, int top, int right, int bottom);
 QMargins* QAbstractItemView_protectedbase_viewportMargins(const VirtualQAbstractItemView* self);
 void QAbstractItemView_protectedbase_drawFrame(VirtualQAbstractItemView* self, QPainter* param1);
 void QAbstractItemView_protectedbase_updateMicroFocus(VirtualQAbstractItemView* self);

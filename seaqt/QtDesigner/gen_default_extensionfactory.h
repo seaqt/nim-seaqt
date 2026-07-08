@@ -57,18 +57,18 @@ void* QExtensionFactory_vdata(VirtualQExtensionFactory* self);
 VirtualQExtensionFactory* vdata_QExtensionFactory(void* vdata);
 
 VirtualQExtensionFactory* QExtensionFactory_new(const QExtensionFactory_VTable* vtbl, size_t vdata);
-VirtualQExtensionFactory* QExtensionFactory_new2(const QExtensionFactory_VTable* vtbl, size_t vdata, QExtensionManager* parent);
+VirtualQExtensionFactory* QExtensionFactory_new_parent(const QExtensionFactory_VTable* vtbl, size_t vdata, QExtensionManager* parent);
 
 void QExtensionFactory_virtbase(QExtensionFactory* src, QObject** outptr_QObject, QAbstractExtensionFactory** outptr_QAbstractExtensionFactory);
 QMetaObject* QExtensionFactory_metaObject(const QExtensionFactory* self);
 void* QExtensionFactory_metacast(QExtensionFactory* self, const char* param1);
 int QExtensionFactory_metacall(QExtensionFactory* self, int param1, int param2, void** param3);
-struct seaqt_string QExtensionFactory_tr(const char* s);
+struct seaqt_string QExtensionFactory_tr_s(const char* s);
 QObject* QExtensionFactory_extension(const QExtensionFactory* self, QObject* object, struct seaqt_string iid);
 QExtensionManager* QExtensionFactory_extensionManager(const QExtensionFactory* self);
 QObject* QExtensionFactory_createExtension(const QExtensionFactory* self, QObject* object, struct seaqt_string iid, QObject* parent);
-struct seaqt_string QExtensionFactory_tr2(const char* s, const char* c);
-struct seaqt_string QExtensionFactory_tr3(const char* s, const char* c, int n);
+struct seaqt_string QExtensionFactory_tr_s_c(const char* s, const char* c);
+struct seaqt_string QExtensionFactory_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QExtensionFactory_virtualbase_metaObject(const VirtualQExtensionFactory* self);
 void* QExtensionFactory_virtualbase_metacast(VirtualQExtensionFactory* self, const char* param1);

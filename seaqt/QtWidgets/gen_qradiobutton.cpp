@@ -746,18 +746,18 @@ VirtualQRadioButton* QRadioButton_new(const QRadioButton_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQRadioButton(vtbl) : nullptr;
 }
 
-VirtualQRadioButton* QRadioButton_new2(const QRadioButton_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQRadioButton* QRadioButton_new_text(const QRadioButton_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRadioButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRadioButton(vtbl, text_QString) : nullptr;
 }
 
-VirtualQRadioButton* QRadioButton_new3(const QRadioButton_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQRadioButton* QRadioButton_new_parent(const QRadioButton_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRadioButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRadioButton(vtbl, parent) : nullptr;
 }
 
-VirtualQRadioButton* QRadioButton_new4(const QRadioButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
+VirtualQRadioButton* QRadioButton_new_text_parent(const QRadioButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRadioButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQRadioButton(vtbl, text_QString, parent) : nullptr;
@@ -779,7 +779,7 @@ int QRadioButton_metacall(QRadioButton* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QRadioButton_tr(const char* s) {
+struct seaqt_string QRadioButton_tr_s(const char* s) {
 	QString _ret = QRadioButton::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -798,7 +798,7 @@ QSize* QRadioButton_minimumSizeHint(const QRadioButton* self) {
 	return new QSize(self->minimumSizeHint());
 }
 
-struct seaqt_string QRadioButton_tr2(const char* s, const char* c) {
+struct seaqt_string QRadioButton_tr_s_c(const char* s, const char* c) {
 	QString _ret = QRadioButton::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -809,7 +809,7 @@ struct seaqt_string QRadioButton_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QRadioButton_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QRadioButton_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QRadioButton::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

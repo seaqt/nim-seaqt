@@ -85,7 +85,7 @@ type cQPrintPreviewWidget*{.exportc: "QPrintPreviewWidget", incompleteStruct.} =
 proc fcQPrintPreviewWidget_metaObject(self: pointer): pointer {.importc: "QPrintPreviewWidget_metaObject".}
 proc fcQPrintPreviewWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QPrintPreviewWidget_metacast".}
 proc fcQPrintPreviewWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPrintPreviewWidget_metacall".}
-proc fcQPrintPreviewWidget_tr(s: cstring): struct_seaqt_string {.importc: "QPrintPreviewWidget_tr".}
+proc fcQPrintPreviewWidget_trS(s: cstring): struct_seaqt_string {.importc: "QPrintPreviewWidget_tr_s".}
 proc fcQPrintPreviewWidget_zoomFactor(self: pointer): float64 {.importc: "QPrintPreviewWidget_zoomFactor".}
 proc fcQPrintPreviewWidget_orientation(self: pointer): cint {.importc: "QPrintPreviewWidget_orientation".}
 proc fcQPrintPreviewWidget_viewMode(self: pointer): cint {.importc: "QPrintPreviewWidget_viewMode".}
@@ -113,10 +113,10 @@ proc fcQPrintPreviewWidget_paintRequested(self: pointer, printer: pointer): void
 proc fcQPrintPreviewWidget_connect_paintRequested(self: pointer, slot: int, callback: proc (slot: int, printer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPrintPreviewWidget_connect_paintRequested".}
 proc fcQPrintPreviewWidget_previewChanged(self: pointer): void {.importc: "QPrintPreviewWidget_previewChanged".}
 proc fcQPrintPreviewWidget_connect_previewChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPrintPreviewWidget_connect_previewChanged".}
-proc fcQPrintPreviewWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPrintPreviewWidget_tr2".}
-proc fcQPrintPreviewWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPrintPreviewWidget_tr3".}
-proc fcQPrintPreviewWidget_zoomInWithZoom(self: pointer, zoom: float64): void {.importc: "QPrintPreviewWidget_zoomInWithZoom".}
-proc fcQPrintPreviewWidget_zoomOutWithZoom(self: pointer, zoom: float64): void {.importc: "QPrintPreviewWidget_zoomOutWithZoom".}
+proc fcQPrintPreviewWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPrintPreviewWidget_tr_s_c".}
+proc fcQPrintPreviewWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPrintPreviewWidget_tr_s_c_n".}
+proc fcQPrintPreviewWidget_zoomInZoom(self: pointer, zoom: float64): void {.importc: "QPrintPreviewWidget_zoomIn_zoom".}
+proc fcQPrintPreviewWidget_zoomOutZoom(self: pointer, zoom: float64): void {.importc: "QPrintPreviewWidget_zoomOut_zoom".}
 proc fcQPrintPreviewWidget_vdata(self: pointer): ptr pointer {.importc: "QPrintPreviewWidget_vdata".}
 proc fvdata_cQPrintPreviewWidget(self: pointer): pointer {.importc: "vdata_QPrintPreviewWidget".}
 
@@ -231,12 +231,12 @@ proc fcQPrintPreviewWidget_protectedbase_sender(self: pointer): pointer {.import
 proc fcQPrintPreviewWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QPrintPreviewWidget_protectedbase_senderSignalIndex".}
 proc fcQPrintPreviewWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPrintPreviewWidget_protectedbase_receivers".}
 proc fcQPrintPreviewWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPrintPreviewWidget_protectedbase_isSignalConnected".}
-proc fcQPrintPreviewWidget_new(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new".}
-proc fcQPrintPreviewWidget_new2(vtbl: pointer, vdata: csize_t): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new2".}
-proc fcQPrintPreviewWidget_new3(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new3".}
-proc fcQPrintPreviewWidget_new4(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer, flags: cint): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new4".}
-proc fcQPrintPreviewWidget_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new5".}
-proc fcQPrintPreviewWidget_new6(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new6".}
+proc fcQPrintPreviewWidget_new(vtbl: pointer, vdata: csize_t, printer: pointer): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new_printer".}
+proc fcQPrintPreviewWidget_new2(vtbl: pointer, vdata: csize_t): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new".}
+proc fcQPrintPreviewWidget_new3(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new_printer_parent".}
+proc fcQPrintPreviewWidget_new4(vtbl: pointer, vdata: csize_t, printer: pointer, parent: pointer, flags: cint): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new_printer_parent_flags".}
+proc fcQPrintPreviewWidget_new5(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new_parent".}
+proc fcQPrintPreviewWidget_new6(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new_parent_flags".}
 proc fcQPrintPreviewWidget_staticMetaObject(): pointer {.importc: "QPrintPreviewWidget_staticMetaObject".}
 
 proc metaObject*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget): gen_qobjectdefs_types.QMetaObject =
@@ -249,7 +249,7 @@ proc metacall*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, param1: 
   fcQPrintPreviewWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qprintpreviewwidget_types.QPrintPreviewWidget, s: cstring): string =
-  let v_ms = fcQPrintPreviewWidget_tr(s)
+  let v_ms = fcQPrintPreviewWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -362,22 +362,22 @@ proc onPreviewChanged*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, 
   fcQPrintPreviewWidget_connect_previewChanged(self.h, cast[int](addr tmp[]), fcQPrintPreviewWidget_slot_callback_previewChanged, fcQPrintPreviewWidget_slot_callback_previewChanged_release)
 
 proc tr*(_: type gen_qprintpreviewwidget_types.QPrintPreviewWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQPrintPreviewWidget_tr2(s, c)
+  let v_ms = fcQPrintPreviewWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qprintpreviewwidget_types.QPrintPreviewWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPrintPreviewWidget_tr3(s, c, n)
+  let v_ms = fcQPrintPreviewWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc zoomIn*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, zoom: float64): void =
-  fcQPrintPreviewWidget_zoomInWithZoom(self.h, zoom)
+  fcQPrintPreviewWidget_zoomInZoom(self.h, zoom)
 
 proc zoomOut*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, zoom: float64): void =
-  fcQPrintPreviewWidget_zoomOutWithZoom(self.h, zoom)
+  fcQPrintPreviewWidget_zoomOutZoom(self.h, zoom)
 
 type QPrintPreviewWidgetmetaObjectProc* = proc(self: QPrintPreviewWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPrintPreviewWidgetmetacastProc* = proc(self: QPrintPreviewWidget, param1: cstring): pointer {.raises: [], gcsafe.}

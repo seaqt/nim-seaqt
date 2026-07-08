@@ -125,12 +125,12 @@ public:
 
 };
 
-VirtualQInputEvent* QInputEvent_new(const QInputEvent_VTable* vtbl, size_t vdata, int type, QInputDevice* m_dev) {
+VirtualQInputEvent* QInputEvent_new_type_m_dev(const QInputEvent_VTable* vtbl, size_t vdata, int type, QInputDevice* m_dev) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQInputEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQInputEvent(vtbl, static_cast<QEvent::Type>(type), m_dev) : nullptr;
 }
 
-VirtualQInputEvent* QInputEvent_new2(const QInputEvent_VTable* vtbl, size_t vdata, int type, QInputDevice* m_dev, int modifiers) {
+VirtualQInputEvent* QInputEvent_new_type_m_dev_modifiers(const QInputEvent_VTable* vtbl, size_t vdata, int type, QInputDevice* m_dev, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQInputEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQInputEvent(vtbl, static_cast<QEvent::Type>(type), m_dev, static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
@@ -276,17 +276,17 @@ public:
 
 };
 
-VirtualQPointerEvent* QPointerEvent_new(const QPointerEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev) {
+VirtualQPointerEvent* QPointerEvent_new_type_dev(const QPointerEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPointerEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPointerEvent(vtbl, static_cast<QEvent::Type>(type), dev) : nullptr;
 }
 
-VirtualQPointerEvent* QPointerEvent_new2(const QPointerEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, int modifiers) {
+VirtualQPointerEvent* QPointerEvent_new_type_dev_modifiers(const QPointerEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPointerEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPointerEvent(vtbl, static_cast<QEvent::Type>(type), dev, static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQPointerEvent* QPointerEvent_new3(const QPointerEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, int modifiers, struct seaqt_array /* of QEventPoint* */  points) {
+VirtualQPointerEvent* QPointerEvent_new_type_dev_modifiers_points(const QPointerEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, int modifiers, struct seaqt_array /* of QEventPoint* */  points) {
 	QList<QEventPoint> points_QList;
 	points_QList.reserve(points.len);
 	QEventPoint** points_arr = static_cast<QEventPoint**>(points.data);
@@ -565,12 +565,12 @@ public:
 
 };
 
-VirtualQEnterEvent* QEnterEvent_new(const QEnterEvent_VTable* vtbl, size_t vdata, QPointF* localPos, QPointF* scenePos, QPointF* globalPos) {
+VirtualQEnterEvent* QEnterEvent_new_localPos_scenePos_globalPos(const QEnterEvent_VTable* vtbl, size_t vdata, QPointF* localPos, QPointF* scenePos, QPointF* globalPos) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQEnterEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQEnterEvent(vtbl, *localPos, *scenePos, *globalPos) : nullptr;
 }
 
-VirtualQEnterEvent* QEnterEvent_new2(const QEnterEvent_VTable* vtbl, size_t vdata, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, QPointingDevice* device) {
+VirtualQEnterEvent* QEnterEvent_new_localPos_scenePos_globalPos_device(const QEnterEvent_VTable* vtbl, size_t vdata, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQEnterEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQEnterEvent(vtbl, *localPos, *scenePos, *globalPos, device) : nullptr;
 }
@@ -745,42 +745,42 @@ public:
 
 };
 
-VirtualQMouseEvent* QMouseEvent_new(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, int button, int buttons, int modifiers) {
+VirtualQMouseEvent* QMouseEvent_new_type_localPos_button_buttons_modifiers(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, int button, int buttons, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQMouseEvent* QMouseEvent_new2(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* globalPos, int button, int buttons, int modifiers) {
+VirtualQMouseEvent* QMouseEvent_new_type_localPos_globalPos_button_buttons_modifiers(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* globalPos, int button, int buttons, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQMouseEvent* QMouseEvent_new3(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers) {
+VirtualQMouseEvent* QMouseEvent_new_type_localPos_scenePos_globalPos_button_buttons_modifiers(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQMouseEvent* QMouseEvent_new4(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, int source) {
+VirtualQMouseEvent* QMouseEvent_new_type_localPos_scenePos_globalPos_button_buttons_modifiers_source(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, int source) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::MouseEventSource>(source)) : nullptr;
 }
 
-VirtualQMouseEvent* QMouseEvent_new5(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, int button, int buttons, int modifiers, QPointingDevice* device) {
+VirtualQMouseEvent* QMouseEvent_new_type_localPos_button_buttons_modifiers_device(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, int button, int buttons, int modifiers, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device) : nullptr;
 }
 
-VirtualQMouseEvent* QMouseEvent_new6(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* globalPos, int button, int buttons, int modifiers, QPointingDevice* device) {
+VirtualQMouseEvent* QMouseEvent_new_type_localPos_globalPos_button_buttons_modifiers_device(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* globalPos, int button, int buttons, int modifiers, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device) : nullptr;
 }
 
-VirtualQMouseEvent* QMouseEvent_new7(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, QPointingDevice* device) {
+VirtualQMouseEvent* QMouseEvent_new_type_localPos_scenePos_globalPos_button_buttons_modifiers_device(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), device) : nullptr;
 }
 
-VirtualQMouseEvent* QMouseEvent_new8(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, int source, QPointingDevice* device) {
+VirtualQMouseEvent* QMouseEvent_new_type_localPos_scenePos_globalPos_button_buttons_modifiers_source_device(const QMouseEvent_VTable* vtbl, size_t vdata, int type, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, int button, int buttons, int modifiers, int source, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEvent(vtbl, static_cast<QEvent::Type>(type), *localPos, *scenePos, *globalPos, static_cast<Qt::MouseButton>(button), static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::MouseEventSource>(source), device) : nullptr;
 }
@@ -963,32 +963,32 @@ public:
 
 };
 
-VirtualQHoverEvent* QHoverEvent_new(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos) {
+VirtualQHoverEvent* QHoverEvent_new_type_scenePos_globalPos_oldPos(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHoverEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos) : nullptr;
 }
 
-VirtualQHoverEvent* QHoverEvent_new2(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* pos, QPointF* oldPos) {
+VirtualQHoverEvent* QHoverEvent_new_type_pos_oldPos(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* pos, QPointF* oldPos) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHoverEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *pos, *oldPos) : nullptr;
 }
 
-VirtualQHoverEvent* QHoverEvent_new3(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos, int modifiers) {
+VirtualQHoverEvent* QHoverEvent_new_type_scenePos_globalPos_oldPos_modifiers(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHoverEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQHoverEvent* QHoverEvent_new4(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos, int modifiers, QPointingDevice* device) {
+VirtualQHoverEvent* QHoverEvent_new_type_scenePos_globalPos_oldPos_modifiers_device(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* scenePos, QPointF* globalPos, QPointF* oldPos, int modifiers, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHoverEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *scenePos, *globalPos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers), device) : nullptr;
 }
 
-VirtualQHoverEvent* QHoverEvent_new5(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* pos, QPointF* oldPos, int modifiers) {
+VirtualQHoverEvent* QHoverEvent_new_type_pos_oldPos_modifiers(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* pos, QPointF* oldPos, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHoverEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *pos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQHoverEvent* QHoverEvent_new6(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* pos, QPointF* oldPos, int modifiers, QPointingDevice* device) {
+VirtualQHoverEvent* QHoverEvent_new_type_pos_oldPos_modifiers_device(const QHoverEvent_VTable* vtbl, size_t vdata, int type, QPointF* pos, QPointF* oldPos, int modifiers, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHoverEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHoverEvent(vtbl, static_cast<QEvent::Type>(type), *pos, *oldPos, static_cast<Qt::KeyboardModifiers>(modifiers), device) : nullptr;
 }
@@ -1142,17 +1142,17 @@ public:
 
 };
 
-VirtualQWheelEvent* QWheelEvent_new(const QWheelEvent_VTable* vtbl, size_t vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted) {
+VirtualQWheelEvent* QWheelEvent_new_pos_globalPos_pixelDelta_angleDelta_buttons_modifiers_phase_inverted(const QWheelEvent_VTable* vtbl, size_t vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWheelEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWheelEvent(vtbl, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted) : nullptr;
 }
 
-VirtualQWheelEvent* QWheelEvent_new2(const QWheelEvent_VTable* vtbl, size_t vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted, int source) {
+VirtualQWheelEvent* QWheelEvent_new_pos_globalPos_pixelDelta_angleDelta_buttons_modifiers_phase_inverted_source(const QWheelEvent_VTable* vtbl, size_t vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted, int source) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWheelEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWheelEvent(vtbl, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted, static_cast<Qt::MouseEventSource>(source)) : nullptr;
 }
 
-VirtualQWheelEvent* QWheelEvent_new3(const QWheelEvent_VTable* vtbl, size_t vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted, int source, QPointingDevice* device) {
+VirtualQWheelEvent* QWheelEvent_new_pos_globalPos_pixelDelta_angleDelta_buttons_modifiers_phase_inverted_source_device(const QWheelEvent_VTable* vtbl, size_t vdata, QPointF* pos, QPointF* globalPos, QPoint* pixelDelta, QPoint* angleDelta, int buttons, int modifiers, int phase, bool inverted, int source, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWheelEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWheelEvent(vtbl, *pos, *globalPos, *pixelDelta, *angleDelta, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<Qt::ScrollPhase>(phase), inverted, static_cast<Qt::MouseEventSource>(source), device) : nullptr;
 }
@@ -1538,17 +1538,17 @@ public:
 
 };
 
-VirtualQNativeGestureEvent* QNativeGestureEvent_new(const QNativeGestureEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, unsigned long long sequenceId, unsigned long long intArgument) {
+VirtualQNativeGestureEvent* QNativeGestureEvent_new_type_dev_localPos_scenePos_globalPos_value_sequenceId_intArgument(const QNativeGestureEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, unsigned long long sequenceId, unsigned long long intArgument) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNativeGestureEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQNativeGestureEvent(vtbl, static_cast<Qt::NativeGestureType>(type), dev, *localPos, *scenePos, *globalPos, static_cast<qreal>(value), static_cast<quint64>(sequenceId), static_cast<quint64>(intArgument)) : nullptr;
 }
 
-VirtualQNativeGestureEvent* QNativeGestureEvent_new2(const QNativeGestureEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, int fingerCount, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, QPointF* delta) {
+VirtualQNativeGestureEvent* QNativeGestureEvent_new_type_dev_fingerCount_localPos_scenePos_globalPos_value_delta(const QNativeGestureEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, int fingerCount, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, QPointF* delta) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNativeGestureEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQNativeGestureEvent(vtbl, static_cast<Qt::NativeGestureType>(type), dev, static_cast<int>(fingerCount), *localPos, *scenePos, *globalPos, static_cast<qreal>(value), *delta) : nullptr;
 }
 
-VirtualQNativeGestureEvent* QNativeGestureEvent_new3(const QNativeGestureEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, int fingerCount, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, QPointF* delta, unsigned long long sequenceId) {
+VirtualQNativeGestureEvent* QNativeGestureEvent_new_type_dev_fingerCount_localPos_scenePos_globalPos_value_delta_sequenceId(const QNativeGestureEvent_VTable* vtbl, size_t vdata, int type, QPointingDevice* dev, int fingerCount, QPointF* localPos, QPointF* scenePos, QPointF* globalPos, double value, QPointF* delta, unsigned long long sequenceId) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNativeGestureEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQNativeGestureEvent(vtbl, static_cast<Qt::NativeGestureType>(type), dev, static_cast<int>(fingerCount), *localPos, *scenePos, *globalPos, static_cast<qreal>(value), *delta, static_cast<quint64>(sequenceId)) : nullptr;
 }
@@ -1693,53 +1693,53 @@ public:
 
 };
 
-VirtualQKeyEvent* QKeyEvent_new(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQKeyEvent* QKeyEvent_new2(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers)) : nullptr;
 }
 
-VirtualQKeyEvent* QKeyEvent_new3(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, struct seaqt_string text) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers_text(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString) : nullptr;
 }
 
-VirtualQKeyEvent* QKeyEvent_new4(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, struct seaqt_string text, bool autorep) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers_text_autorep(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, struct seaqt_string text, bool autorep) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString, autorep) : nullptr;
 }
 
-VirtualQKeyEvent* QKeyEvent_new5(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, struct seaqt_string text, bool autorep, unsigned short count) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers_text_autorep_count(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, struct seaqt_string text, bool autorep, unsigned short count) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), text_QString, autorep, static_cast<quint16>(count)) : nullptr;
 }
 
-VirtualQKeyEvent* QKeyEvent_new6(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct seaqt_string text) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers_text(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString) : nullptr;
 }
 
-VirtualQKeyEvent* QKeyEvent_new7(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct seaqt_string text, bool autorep) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers_text_autorep(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct seaqt_string text, bool autorep) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep) : nullptr;
 }
 
-VirtualQKeyEvent* QKeyEvent_new8(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct seaqt_string text, bool autorep, unsigned short count) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers_text_autorep_count(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct seaqt_string text, bool autorep, unsigned short count) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep, static_cast<quint16>(count)) : nullptr;
 }
 
-VirtualQKeyEvent* QKeyEvent_new9(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct seaqt_string text, bool autorep, unsigned short count, QInputDevice* device) {
+VirtualQKeyEvent* QKeyEvent_new_type_key_modifiers_nativeScanCode_nativeVirtualKey_nativeModifiers_text_autorep_count_device(const QKeyEvent_VTable* vtbl, size_t vdata, int type, int key, int modifiers, unsigned int nativeScanCode, unsigned int nativeVirtualKey, unsigned int nativeModifiers, struct seaqt_string text, bool autorep, unsigned short count, QInputDevice* device) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<int>(key), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<quint32>(nativeScanCode), static_cast<quint32>(nativeVirtualKey), static_cast<quint32>(nativeModifiers), text_QString, autorep, static_cast<quint16>(count), device) : nullptr;
@@ -1863,12 +1863,12 @@ public:
 
 };
 
-VirtualQFocusEvent* QFocusEvent_new(const QFocusEvent_VTable* vtbl, size_t vdata, int type) {
+VirtualQFocusEvent* QFocusEvent_new_type(const QFocusEvent_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFocusEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFocusEvent(vtbl, static_cast<QEvent::Type>(type)) : nullptr;
 }
 
-VirtualQFocusEvent* QFocusEvent_new2(const QFocusEvent_VTable* vtbl, size_t vdata, int type, int reason) {
+VirtualQFocusEvent* QFocusEvent_new_type_reason(const QFocusEvent_VTable* vtbl, size_t vdata, int type, int reason) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFocusEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFocusEvent(vtbl, static_cast<QEvent::Type>(type), static_cast<Qt::FocusReason>(reason)) : nullptr;
 }
@@ -1948,12 +1948,12 @@ public:
 
 };
 
-VirtualQPaintEvent* QPaintEvent_new(const QPaintEvent_VTable* vtbl, size_t vdata, QRegion* paintRegion) {
+VirtualQPaintEvent* QPaintEvent_new_paintRegion(const QPaintEvent_VTable* vtbl, size_t vdata, QRegion* paintRegion) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPaintEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPaintEvent(vtbl, *paintRegion) : nullptr;
 }
 
-VirtualQPaintEvent* QPaintEvent_new2(const QPaintEvent_VTable* vtbl, size_t vdata, QRect* paintRect) {
+VirtualQPaintEvent* QPaintEvent_new_paintRect(const QPaintEvent_VTable* vtbl, size_t vdata, QRect* paintRect) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPaintEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPaintEvent(vtbl, *paintRect) : nullptr;
 }
@@ -2609,17 +2609,17 @@ public:
 
 };
 
-VirtualQContextMenuEvent* QContextMenuEvent_new(const QContextMenuEvent_VTable* vtbl, size_t vdata, int reason, QPoint* pos, QPoint* globalPos) {
+VirtualQContextMenuEvent* QContextMenuEvent_new_reason_pos_globalPos(const QContextMenuEvent_VTable* vtbl, size_t vdata, int reason, QPoint* pos, QPoint* globalPos) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQContextMenuEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQContextMenuEvent(vtbl, static_cast<QContextMenuEvent::Reason>(reason), *pos, *globalPos) : nullptr;
 }
 
-VirtualQContextMenuEvent* QContextMenuEvent_new2(const QContextMenuEvent_VTable* vtbl, size_t vdata, int reason, QPoint* pos) {
+VirtualQContextMenuEvent* QContextMenuEvent_new_reason_pos(const QContextMenuEvent_VTable* vtbl, size_t vdata, int reason, QPoint* pos) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQContextMenuEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQContextMenuEvent(vtbl, static_cast<QContextMenuEvent::Reason>(reason), *pos) : nullptr;
 }
 
-VirtualQContextMenuEvent* QContextMenuEvent_new3(const QContextMenuEvent_VTable* vtbl, size_t vdata, int reason, QPoint* pos, QPoint* globalPos, int modifiers) {
+VirtualQContextMenuEvent* QContextMenuEvent_new_reason_pos_globalPos_modifiers(const QContextMenuEvent_VTable* vtbl, size_t vdata, int reason, QPoint* pos, QPoint* globalPos, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQContextMenuEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQContextMenuEvent(vtbl, static_cast<QContextMenuEvent::Reason>(reason), *pos, *globalPos, static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
@@ -2729,7 +2729,7 @@ VirtualQInputMethodEvent* QInputMethodEvent_new(const QInputMethodEvent_VTable* 
 	return _mem_ ? new (_mem_)VirtualQInputMethodEvent(vtbl) : nullptr;
 }
 
-VirtualQInputMethodEvent* QInputMethodEvent_new2(const QInputMethodEvent_VTable* vtbl, size_t vdata, struct seaqt_string preeditText, struct seaqt_array /* of QInputMethodEvent__Attribute* */  attributes) {
+VirtualQInputMethodEvent* QInputMethodEvent_new_preeditText_attributes(const QInputMethodEvent_VTable* vtbl, size_t vdata, struct seaqt_string preeditText, struct seaqt_array /* of QInputMethodEvent__Attribute* */  attributes) {
 	QString preeditText_QString = QString::fromUtf8(preeditText.data, preeditText.len);
 	QList<QInputMethodEvent::Attribute> attributes_QList;
 	attributes_QList.reserve(attributes.len);
@@ -2749,7 +2749,7 @@ QInputMethodEvent* QInputMethodEvent_clone(const QInputMethodEvent* self) {
 	return self->clone();
 }
 
-void QInputMethodEvent_setCommitString(QInputMethodEvent* self, struct seaqt_string commitString) {
+void QInputMethodEvent_setCommitString_commitString(QInputMethodEvent* self, struct seaqt_string commitString) {
 	QString commitString_QString = QString::fromUtf8(commitString.data, commitString.len);
 	self->setCommitString(commitString_QString);
 }
@@ -2797,12 +2797,12 @@ int QInputMethodEvent_replacementLength(const QInputMethodEvent* self) {
 	return self->replacementLength();
 }
 
-void QInputMethodEvent_setCommitString2(QInputMethodEvent* self, struct seaqt_string commitString, int replaceFrom) {
+void QInputMethodEvent_setCommitString_commitString_replaceFrom(QInputMethodEvent* self, struct seaqt_string commitString, int replaceFrom) {
 	QString commitString_QString = QString::fromUtf8(commitString.data, commitString.len);
 	self->setCommitString(commitString_QString, static_cast<int>(replaceFrom));
 }
 
-void QInputMethodEvent_setCommitString3(QInputMethodEvent* self, struct seaqt_string commitString, int replaceFrom, int replaceLength) {
+void QInputMethodEvent_setCommitString_commitString_replaceFrom_replaceLength(QInputMethodEvent* self, struct seaqt_string commitString, int replaceFrom, int replaceLength) {
 	QString commitString_QString = QString::fromUtf8(commitString.data, commitString.len);
 	self->setCommitString(commitString_QString, static_cast<int>(replaceFrom), static_cast<int>(replaceLength));
 }
@@ -2940,12 +2940,12 @@ public:
 
 };
 
-VirtualQDropEvent* QDropEvent_new(const QDropEvent_VTable* vtbl, size_t vdata, QPointF* pos, int actions, QMimeData* data, int buttons, int modifiers) {
+VirtualQDropEvent* QDropEvent_new_pos_actions_data_buttons_modifiers(const QDropEvent_VTable* vtbl, size_t vdata, QPointF* pos, int actions, QMimeData* data, int buttons, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDropEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDropEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQDropEvent* QDropEvent_new2(const QDropEvent_VTable* vtbl, size_t vdata, QPointF* pos, int actions, QMimeData* data, int buttons, int modifiers, int type) {
+VirtualQDropEvent* QDropEvent_new_pos_actions_data_buttons_modifiers_type(const QDropEvent_VTable* vtbl, size_t vdata, QPointF* pos, int actions, QMimeData* data, int buttons, int modifiers, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDropEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDropEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEvent::Type>(type)) : nullptr;
 }
@@ -3075,12 +3075,12 @@ public:
 
 };
 
-VirtualQDragMoveEvent* QDragMoveEvent_new(const QDragMoveEvent_VTable* vtbl, size_t vdata, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers) {
+VirtualQDragMoveEvent* QDragMoveEvent_new_pos_actions_data_buttons_modifiers(const QDragMoveEvent_VTable* vtbl, size_t vdata, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDragMoveEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDragMoveEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQDragMoveEvent* QDragMoveEvent_new2(const QDragMoveEvent_VTable* vtbl, size_t vdata, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers, int type) {
+VirtualQDragMoveEvent* QDragMoveEvent_new_pos_actions_data_buttons_modifiers_type(const QDragMoveEvent_VTable* vtbl, size_t vdata, QPoint* pos, int actions, QMimeData* data, int buttons, int modifiers, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDragMoveEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDragMoveEvent(vtbl, *pos, static_cast<Qt::DropActions>(actions), data, static_cast<Qt::MouseButtons>(buttons), static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEvent::Type>(type)) : nullptr;
 }
@@ -3105,11 +3105,11 @@ void QDragMoveEvent_ignore(QDragMoveEvent* self) {
 	self->ignore();
 }
 
-void QDragMoveEvent_acceptWithQRect(QDragMoveEvent* self, QRect* r) {
+void QDragMoveEvent_accept_r(QDragMoveEvent* self, QRect* r) {
 	self->accept(*r);
 }
 
-void QDragMoveEvent_ignoreWithQRect(QDragMoveEvent* self, QRect* r) {
+void QDragMoveEvent_ignore_r(QDragMoveEvent* self, QRect* r) {
 	self->ignore(*r);
 }
 
@@ -3561,13 +3561,13 @@ public:
 
 };
 
-VirtualQFileOpenEvent* QFileOpenEvent_new(const QFileOpenEvent_VTable* vtbl, size_t vdata, struct seaqt_string file) {
+VirtualQFileOpenEvent* QFileOpenEvent_new_file(const QFileOpenEvent_VTable* vtbl, size_t vdata, struct seaqt_string file) {
 	QString file_QString = QString::fromUtf8(file.data, file.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileOpenEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileOpenEvent(vtbl, file_QString) : nullptr;
 }
 
-VirtualQFileOpenEvent* QFileOpenEvent_new2(const QFileOpenEvent_VTable* vtbl, size_t vdata, QUrl* url) {
+VirtualQFileOpenEvent* QFileOpenEvent_new_url(const QFileOpenEvent_VTable* vtbl, size_t vdata, QUrl* url) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileOpenEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileOpenEvent(vtbl, *url) : nullptr;
 }
@@ -3723,12 +3723,12 @@ public:
 
 };
 
-VirtualQShortcutEvent* QShortcutEvent_new(const QShortcutEvent_VTable* vtbl, size_t vdata, QKeySequence* key, int id) {
+VirtualQShortcutEvent* QShortcutEvent_new_key_id(const QShortcutEvent_VTable* vtbl, size_t vdata, QKeySequence* key, int id) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcutEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcutEvent(vtbl, *key, static_cast<int>(id)) : nullptr;
 }
 
-VirtualQShortcutEvent* QShortcutEvent_new2(const QShortcutEvent_VTable* vtbl, size_t vdata, QKeySequence* key, int id, bool ambiguous) {
+VirtualQShortcutEvent* QShortcutEvent_new_key_id_ambiguous(const QShortcutEvent_VTable* vtbl, size_t vdata, QKeySequence* key, int id, bool ambiguous) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQShortcutEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQShortcutEvent(vtbl, *key, static_cast<int>(id), ambiguous) : nullptr;
 }
@@ -3809,12 +3809,12 @@ public:
 
 };
 
-VirtualQWindowStateChangeEvent* QWindowStateChangeEvent_new(const QWindowStateChangeEvent_VTable* vtbl, size_t vdata, int oldState) {
+VirtualQWindowStateChangeEvent* QWindowStateChangeEvent_new_oldState(const QWindowStateChangeEvent_VTable* vtbl, size_t vdata, int oldState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWindowStateChangeEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWindowStateChangeEvent(vtbl, static_cast<Qt::WindowStates>(oldState)) : nullptr;
 }
 
-VirtualQWindowStateChangeEvent* QWindowStateChangeEvent_new2(const QWindowStateChangeEvent_VTable* vtbl, size_t vdata, int oldState, bool isOverride) {
+VirtualQWindowStateChangeEvent* QWindowStateChangeEvent_new_oldState_isOverride(const QWindowStateChangeEvent_VTable* vtbl, size_t vdata, int oldState, bool isOverride) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWindowStateChangeEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQWindowStateChangeEvent(vtbl, static_cast<Qt::WindowStates>(oldState), isOverride) : nullptr;
 }
@@ -3940,27 +3940,27 @@ public:
 
 };
 
-VirtualQTouchEvent* QTouchEvent_new(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType) {
+VirtualQTouchEvent* QTouchEvent_new_eventType(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTouchEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType)) : nullptr;
 }
 
-VirtualQTouchEvent* QTouchEvent_new2(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device, int modifiers, uint8_t touchPointStates) {
+VirtualQTouchEvent* QTouchEvent_new_eventType_device_modifiers_touchPointStates(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device, int modifiers, uint8_t touchPointStates) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTouchEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers), static_cast<QEventPoint::States>(touchPointStates)) : nullptr;
 }
 
-VirtualQTouchEvent* QTouchEvent_new3(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device) {
+VirtualQTouchEvent* QTouchEvent_new_eventType_device(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTouchEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device) : nullptr;
 }
 
-VirtualQTouchEvent* QTouchEvent_new4(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device, int modifiers) {
+VirtualQTouchEvent* QTouchEvent_new_eventType_device_modifiers(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device, int modifiers) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTouchEvent>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers)) : nullptr;
 }
 
-VirtualQTouchEvent* QTouchEvent_new5(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device, int modifiers, struct seaqt_array /* of QEventPoint* */  touchPoints) {
+VirtualQTouchEvent* QTouchEvent_new_eventType_device_modifiers_touchPoints(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device, int modifiers, struct seaqt_array /* of QEventPoint* */  touchPoints) {
 	QList<QEventPoint> touchPoints_QList;
 	touchPoints_QList.reserve(touchPoints.len);
 	QEventPoint** touchPoints_arr = static_cast<QEventPoint**>(touchPoints.data);
@@ -3971,7 +3971,7 @@ VirtualQTouchEvent* QTouchEvent_new5(const QTouchEvent_VTable* vtbl, size_t vdat
 	return _mem_ ? new (_mem_)VirtualQTouchEvent(vtbl, static_cast<QEvent::Type>(eventType), device, static_cast<Qt::KeyboardModifiers>(modifiers), touchPoints_QList) : nullptr;
 }
 
-VirtualQTouchEvent* QTouchEvent_new6(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device, int modifiers, uint8_t touchPointStates, struct seaqt_array /* of QEventPoint* */  touchPoints) {
+VirtualQTouchEvent* QTouchEvent_new_eventType_device_modifiers_touchPointStates_touchPoints(const QTouchEvent_VTable* vtbl, size_t vdata, int eventType, QPointingDevice* device, int modifiers, uint8_t touchPointStates, struct seaqt_array /* of QEventPoint* */  touchPoints) {
 	QList<QEventPoint> touchPoints_QList;
 	touchPoints_QList.reserve(touchPoints.len);
 	QEventPoint** touchPoints_arr = static_cast<QEventPoint**>(touchPoints.data);
@@ -4380,16 +4380,16 @@ void QApplicationStateChangeEvent_delete(QApplicationStateChangeEvent* self) {
 	delete self;
 }
 
-QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new(int typ, int s, int l, QVariant* val) {
+QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new_typ_s_l_val(int typ, int s, int l, QVariant* val) {
 	return new (std::nothrow) QInputMethodEvent__Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l), *val);
 }
 
-QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new2(int typ, int s, int l) {
+QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new_typ_s_l(int typ, int s, int l) {
 	return new (std::nothrow) QInputMethodEvent__Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l));
 }
 
-QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new3(QInputMethodEvent__Attribute* param1) {
-	return new (std::nothrow) QInputMethodEvent__Attribute(*param1);
+QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new_from(QInputMethodEvent__Attribute* from) {
+	return new (std::nothrow) QInputMethodEvent__Attribute(*from);
 }
 
 int QInputMethodEvent__Attribute_type(const QInputMethodEvent__Attribute* self) {
@@ -4425,8 +4425,8 @@ void QInputMethodEvent__Attribute_setValue(QInputMethodEvent__Attribute* self, Q
 	self->value = *value;
 }
 
-void QInputMethodEvent__Attribute_operatorAssign(QInputMethodEvent__Attribute* self, QInputMethodEvent__Attribute* param1) {
-	self->operator=(*param1);
+void QInputMethodEvent__Attribute_operatorAssign(QInputMethodEvent__Attribute* self, QInputMethodEvent__Attribute* from) {
+	self->operator=(*from);
 }
 
 void QInputMethodEvent__Attribute_delete(QInputMethodEvent__Attribute* self) {

@@ -149,16 +149,16 @@ typedef struct QToolBar_VTable{
 void* QToolBar_vdata(VirtualQToolBar* self);
 VirtualQToolBar* vdata_QToolBar(void* vdata);
 
-VirtualQToolBar* QToolBar_new(const QToolBar_VTable* vtbl, size_t vdata, struct seaqt_string title);
-VirtualQToolBar* QToolBar_new2(const QToolBar_VTable* vtbl, size_t vdata);
-VirtualQToolBar* QToolBar_new3(const QToolBar_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent);
-VirtualQToolBar* QToolBar_new4(const QToolBar_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQToolBar* QToolBar_new_title(const QToolBar_VTable* vtbl, size_t vdata, struct seaqt_string title);
+VirtualQToolBar* QToolBar_new(const QToolBar_VTable* vtbl, size_t vdata);
+VirtualQToolBar* QToolBar_new_title_parent(const QToolBar_VTable* vtbl, size_t vdata, struct seaqt_string title, QWidget* parent);
+VirtualQToolBar* QToolBar_new_parent(const QToolBar_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QToolBar_virtbase(QToolBar* src, QWidget** outptr_QWidget);
 QMetaObject* QToolBar_metaObject(const QToolBar* self);
 void* QToolBar_metacast(QToolBar* self, const char* param1);
 int QToolBar_metacall(QToolBar* self, int param1, int param2, void** param3);
-struct seaqt_string QToolBar_tr(const char* s);
+struct seaqt_string QToolBar_tr_s(const char* s);
 void QToolBar_setMovable(QToolBar* self, bool movable);
 bool QToolBar_isMovable(const QToolBar* self);
 void QToolBar_setAllowedAreas(QToolBar* self, int areas);
@@ -172,8 +172,8 @@ QAction* QToolBar_insertSeparator(QToolBar* self, QAction* before);
 QAction* QToolBar_addWidget(QToolBar* self, QWidget* widget);
 QAction* QToolBar_insertWidget(QToolBar* self, QAction* before, QWidget* widget);
 QRect* QToolBar_actionGeometry(const QToolBar* self, QAction* action);
-QAction* QToolBar_actionAt(const QToolBar* self, QPoint* p);
-QAction* QToolBar_actionAt2(const QToolBar* self, int x, int y);
+QAction* QToolBar_actionAt_p(const QToolBar* self, QPoint* p);
+QAction* QToolBar_actionAt_x_y(const QToolBar* self, int x, int y);
 QAction* QToolBar_toggleViewAction(const QToolBar* self);
 QSize* QToolBar_iconSize(const QToolBar* self);
 int QToolBar_toolButtonStyle(const QToolBar* self);
@@ -204,8 +204,8 @@ void QToolBar_changeEvent(QToolBar* self, QEvent* event);
 void QToolBar_paintEvent(QToolBar* self, QPaintEvent* event);
 bool QToolBar_event(QToolBar* self, QEvent* event);
 void QToolBar_initStyleOption(const QToolBar* self, QStyleOptionToolBar* option);
-struct seaqt_string QToolBar_tr2(const char* s, const char* c);
-struct seaqt_string QToolBar_tr3(const char* s, const char* c, int n);
+struct seaqt_string QToolBar_tr_s_c(const char* s, const char* c);
+struct seaqt_string QToolBar_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QToolBar_virtualbase_metaObject(const VirtualQToolBar* self);
 void* QToolBar_virtualbase_metacast(VirtualQToolBar* self, const char* param1);

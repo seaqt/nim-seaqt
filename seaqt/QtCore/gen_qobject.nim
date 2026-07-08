@@ -119,7 +119,7 @@ type cQSignalBlocker*{.exportc: "QSignalBlocker", incompleteStruct.} = object
 proc fcQObject_metaObject(self: pointer): pointer {.importc: "QObject_metaObject".}
 proc fcQObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QObject_metacast".}
 proc fcQObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QObject_metacall".}
-proc fcQObject_tr(s: cstring): struct_seaqt_string {.importc: "QObject_tr".}
+proc fcQObject_trS(s: cstring): struct_seaqt_string {.importc: "QObject_tr_s".}
 proc fcQObject_event(self: pointer, event: pointer): bool {.importc: "QObject_event".}
 proc fcQObject_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QObject_eventFilter".}
 proc fcQObject_objectName(self: pointer): struct_seaqt_string {.importc: "QObject_objectName".}
@@ -131,34 +131,34 @@ proc fcQObject_signalsBlocked(self: pointer): bool {.importc: "QObject_signalsBl
 proc fcQObject_blockSignals(self: pointer, b: bool): bool {.importc: "QObject_blockSignals".}
 proc fcQObject_thread(self: pointer): pointer {.importc: "QObject_thread".}
 proc fcQObject_moveToThread(self: pointer, thread: pointer): void {.importc: "QObject_moveToThread".}
-proc fcQObject_startTimer(self: pointer, interval: cint): cint {.importc: "QObject_startTimer".}
+proc fcQObject_startTimerInterval(self: pointer, interval: cint): cint {.importc: "QObject_startTimer_interval".}
 proc fcQObject_killTimer(self: pointer, id: cint): void {.importc: "QObject_killTimer".}
 proc fcQObject_children(self: pointer): struct_seaqt_array {.importc: "QObject_children".}
 proc fcQObject_setParent(self: pointer, parent: pointer): void {.importc: "QObject_setParent".}
 proc fcQObject_installEventFilter(self: pointer, filterObj: pointer): void {.importc: "QObject_installEventFilter".}
 proc fcQObject_removeEventFilter(self: pointer, obj: pointer): void {.importc: "QObject_removeEventFilter".}
-proc fcQObject_connect(sender: pointer, signal: pointer, receiver: pointer, methodVal: pointer): pointer {.importc: "QObject_connect".}
-proc fcQObject_connect2(self: pointer, sender: pointer, signal: cstring, member: cstring): pointer {.importc: "QObject_connect2".}
-proc fcQObject_disconnect(sender: pointer, signal: pointer, receiver: pointer, member: pointer): bool {.importc: "QObject_disconnect".}
-proc fcQObject_disconnectWithQMetaObjectConnection(param1: pointer): bool {.importc: "QObject_disconnectWithQMetaObjectConnection".}
+proc fcQObject_connectSenderSignalReceiverMethod(sender: pointer, signal: pointer, receiver: pointer, methodVal: pointer): pointer {.importc: "QObject_connect_sender_signal_receiver_method".}
+proc fcQObject_connectSenderSignalMember(self: pointer, sender: pointer, signal: cstring, member: cstring): pointer {.importc: "QObject_connect_sender_signal_member".}
+proc fcQObject_disconnect_QObject_QMetaMethod_QObject_QMetaMethod(sender: pointer, signal: pointer, receiver: pointer, member: pointer): bool {.importc: "QObject_disconnect_QObject_QMetaMethod_QObject_QMetaMethod".}
+proc fcQObject_disconnect_QMetaObject_Connection(param1: pointer): bool {.importc: "QObject_disconnect_QMetaObject_Connection".}
 proc fcQObject_dumpObjectTree(self: pointer): void {.importc: "QObject_dumpObjectTree".}
 proc fcQObject_dumpObjectInfo(self: pointer): void {.importc: "QObject_dumpObjectInfo".}
 proc fcQObject_setProperty(self: pointer, name: cstring, value: pointer): bool {.importc: "QObject_setProperty".}
 proc fcQObject_property(self: pointer, name: cstring): pointer {.importc: "QObject_property".}
 proc fcQObject_dynamicPropertyNames(self: pointer): struct_seaqt_array {.importc: "QObject_dynamicPropertyNames".}
 proc fcQObject_bindingStorage(self: pointer): pointer {.importc: "QObject_bindingStorage".}
-proc fcQObject_bindingStorage2(self: pointer): pointer {.importc: "QObject_bindingStorage2".}
+proc fcQObject_bindingStorageConst(self: pointer): pointer {.importc: "QObject_bindingStorage_const".}
 proc fcQObject_destroyed(self: pointer): void {.importc: "QObject_destroyed".}
 proc fcQObject_connect_destroyed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_destroyed".}
 proc fcQObject_parent(self: pointer): pointer {.importc: "QObject_parent".}
 proc fcQObject_inherits(self: pointer, classname: cstring): bool {.importc: "QObject_inherits".}
-proc fcQObject_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QObject_tr2".}
-proc fcQObject_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QObject_tr3".}
-proc fcQObject_startTimer2(self: pointer, interval: cint, timerType: cint): cint {.importc: "QObject_startTimer2".}
-proc fcQObject_connect3(sender: pointer, signal: pointer, receiver: pointer, methodVal: pointer, typeVal: cint): pointer {.importc: "QObject_connect3".}
-proc fcQObject_connect4(self: pointer, sender: pointer, signal: cstring, member: cstring, typeVal: cint): pointer {.importc: "QObject_connect4".}
-proc fcQObject_destroyedWithQObject(self: pointer, param1: pointer): void {.importc: "QObject_destroyedWithQObject".}
-proc fcQObject_connect_destroyedWithQObject(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_destroyedWithQObject".}
+proc fcQObject_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QObject_tr_s_c".}
+proc fcQObject_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QObject_tr_s_c_n".}
+proc fcQObject_startTimerIntervalTimerType(self: pointer, interval: cint, timerType: cint): cint {.importc: "QObject_startTimer_interval_timerType".}
+proc fcQObject_connectSenderSignalReceiverMethodType(sender: pointer, signal: pointer, receiver: pointer, methodVal: pointer, typeVal: cint): pointer {.importc: "QObject_connect_sender_signal_receiver_method_type".}
+proc fcQObject_connectSenderSignalMemberType(self: pointer, sender: pointer, signal: cstring, member: cstring, typeVal: cint): pointer {.importc: "QObject_connect_sender_signal_member_type".}
+proc fcQObject_destroyed_QObject(self: pointer, param1: pointer): void {.importc: "QObject_destroyed_QObject".}
+proc fcQObject_connect_destroyed_QObject(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_destroyed_QObject".}
 proc fcQObject_vdata(self: pointer): ptr pointer {.importc: "QObject_vdata".}
 proc fvdata_cQObject(self: pointer): pointer {.importc: "vdata_QObject".}
 
@@ -189,12 +189,12 @@ proc fcQObject_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "
 proc fcQObject_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QObject_protectedbase_receivers".}
 proc fcQObject_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QObject_protectedbase_isSignalConnected".}
 proc fcQObject_new(vtbl: pointer, vdata: csize_t): ptr cQObject {.importc: "QObject_new".}
-proc fcQObject_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQObject {.importc: "QObject_new2".}
+proc fcQObject_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQObject {.importc: "QObject_new_parent".}
 proc fcQObject_staticMetaObject(): pointer {.importc: "QObject_staticMetaObject".}
 proc fcQSignalBlocker_reblock(self: pointer): void {.importc: "QSignalBlocker_reblock".}
 proc fcQSignalBlocker_unblock(self: pointer): void {.importc: "QSignalBlocker_unblock".}
-proc fcQSignalBlocker_new(o: pointer): ptr cQSignalBlocker {.importc: "QSignalBlocker_new".}
-proc fcQSignalBlocker_new2(o: pointer): ptr cQSignalBlocker {.importc: "QSignalBlocker_new2".}
+proc fcQSignalBlocker_new(o: pointer): ptr cQSignalBlocker {.importc: "QSignalBlocker_new_pQObject".}
+proc fcQSignalBlocker_new2(o: pointer): ptr cQSignalBlocker {.importc: "QSignalBlocker_new_QObject".}
 
 proc metaObject*(self: gen_qobject_types.QObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQObject_metaObject(self.h), owned: false)
@@ -206,7 +206,7 @@ proc metacall*(self: gen_qobject_types.QObject, param1: cint, param2: cint, para
   fcQObject_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qobject_types.QObject, s: cstring): string =
-  let v_ms = fcQObject_tr(s)
+  let v_ms = fcQObject_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -248,7 +248,7 @@ proc moveToThread*(self: gen_qobject_types.QObject, thread: gen_qthread_types.QT
   fcQObject_moveToThread(self.h, thread.h)
 
 proc startTimer*(self: gen_qobject_types.QObject, interval: cint): cint =
-  fcQObject_startTimer(self.h, interval)
+  fcQObject_startTimerInterval(self.h, interval)
 
 proc killTimer*(self: gen_qobject_types.QObject, id: cint): void =
   fcQObject_killTimer(self.h, id)
@@ -272,16 +272,16 @@ proc removeEventFilter*(self: gen_qobject_types.QObject, obj: gen_qobject_types.
   fcQObject_removeEventFilter(self.h, obj.h)
 
 proc connect*(_: type gen_qobject_types.QObject, sender: gen_qobject_types.QObject, signal: gen_qmetaobject_types.QMetaMethod, receiver: gen_qobject_types.QObject, methodVal: gen_qmetaobject_types.QMetaMethod): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQObject_connect(sender.h, signal.h, receiver.h, methodVal.h), owned: true)
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQObject_connectSenderSignalReceiverMethod(sender.h, signal.h, receiver.h, methodVal.h), owned: true)
 
 proc connect*(self: gen_qobject_types.QObject, sender: gen_qobject_types.QObject, signal: cstring, member: cstring): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQObject_connect2(self.h, sender.h, signal, member), owned: true)
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQObject_connectSenderSignalMember(self.h, sender.h, signal, member), owned: true)
 
 proc disconnect*(_: type gen_qobject_types.QObject, sender: gen_qobject_types.QObject, signal: gen_qmetaobject_types.QMetaMethod, receiver: gen_qobject_types.QObject, member: gen_qmetaobject_types.QMetaMethod): bool =
-  fcQObject_disconnect(sender.h, signal.h, receiver.h, member.h)
+  fcQObject_disconnect_QObject_QMetaMethod_QObject_QMetaMethod(sender.h, signal.h, receiver.h, member.h)
 
 proc disconnect*(_: type gen_qobject_types.QObject, param1: gen_qobjectdefs_types.QMetaObjectConnection): bool =
-  fcQObject_disconnectWithQMetaObjectConnection(param1.h)
+  fcQObject_disconnect_QMetaObject_Connection(param1.h)
 
 proc dumpObjectTree*(self: gen_qobject_types.QObject): void =
   fcQObject_dumpObjectTree(self.h)
@@ -311,7 +311,7 @@ proc bindingStorage*(self: gen_qobject_types.QObject): gen_qbindingstorage_types
   gen_qbindingstorage_types.QBindingStorage(h: fcQObject_bindingStorage(self.h), owned: false)
 
 proc bindingStorage2*(self: gen_qobject_types.QObject): gen_qbindingstorage_types.QBindingStorage =
-  gen_qbindingstorage_types.QBindingStorage(h: fcQObject_bindingStorage2(self.h), owned: false)
+  gen_qbindingstorage_types.QBindingStorage(h: fcQObject_bindingStorageConst(self.h), owned: false)
 
 proc destroyed*(self: gen_qobject_types.QObject): void =
   fcQObject_destroyed(self.h)
@@ -338,45 +338,45 @@ proc inherits*(self: gen_qobject_types.QObject, classname: cstring): bool =
   fcQObject_inherits(self.h, classname)
 
 proc tr*(_: type gen_qobject_types.QObject, s: cstring, c: cstring): string =
-  let v_ms = fcQObject_tr2(s, c)
+  let v_ms = fcQObject_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qobject_types.QObject, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQObject_tr3(s, c, n)
+  let v_ms = fcQObject_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc startTimer*(self: gen_qobject_types.QObject, interval: cint, timerType: cint): cint =
-  fcQObject_startTimer2(self.h, interval, cint(timerType))
+  fcQObject_startTimerIntervalTimerType(self.h, interval, cint(timerType))
 
 proc connect*(_: type gen_qobject_types.QObject, sender: gen_qobject_types.QObject, signal: gen_qmetaobject_types.QMetaMethod, receiver: gen_qobject_types.QObject, methodVal: gen_qmetaobject_types.QMetaMethod, typeVal: cint): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQObject_connect3(sender.h, signal.h, receiver.h, methodVal.h, cint(typeVal)), owned: true)
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQObject_connectSenderSignalReceiverMethodType(sender.h, signal.h, receiver.h, methodVal.h, cint(typeVal)), owned: true)
 
 proc connect*(self: gen_qobject_types.QObject, sender: gen_qobject_types.QObject, signal: cstring, member: cstring, typeVal: cint): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQObject_connect4(self.h, sender.h, signal, member, cint(typeVal)), owned: true)
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQObject_connectSenderSignalMemberType(self.h, sender.h, signal, member, cint(typeVal)), owned: true)
 
 proc destroyed*(self: gen_qobject_types.QObject, param1: gen_qobject_types.QObject): void =
-  fcQObject_destroyedWithQObject(self.h, param1.h)
+  fcQObject_destroyed_QObject(self.h, param1.h)
 
-type QObjectdestroyedWithQObjectSlot* = proc(param1: gen_qobject_types.QObject)
-proc fcQObject_slot_callback_destroyedWithQObject(slot: int, param1: pointer) {.cdecl.} =
-  let nimfunc = cast[ptr QObjectdestroyedWithQObjectSlot](cast[pointer](slot))
+type QObjectdestroyed_QObjectSlot* = proc(param1: gen_qobject_types.QObject)
+proc fcQObject_slot_callback_destroyed_QObject(slot: int, param1: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QObjectdestroyed_QObjectSlot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc fcQObject_slot_callback_destroyedWithQObject_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QObjectdestroyedWithQObjectSlot](cast[pointer](slot))
+proc fcQObject_slot_callback_destroyed_QObject_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QObjectdestroyed_QObjectSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onDestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyedWithQObjectSlot) =
-  var tmp = new QObjectdestroyedWithQObjectSlot
+proc onDestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyed_QObjectSlot) =
+  var tmp = new QObjectdestroyed_QObjectSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQObject_connect_destroyedWithQObject(self.h, cast[int](addr tmp[]), fcQObject_slot_callback_destroyedWithQObject, fcQObject_slot_callback_destroyedWithQObject_release)
+  fcQObject_connect_destroyed_QObject(self.h, cast[int](addr tmp[]), fcQObject_slot_callback_destroyed_QObject, fcQObject_slot_callback_destroyed_QObject_release)
 
 type QObjectmetaObjectProc* = proc(self: QObject): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QObjectmetacastProc* = proc(self: QObject, param1: cstring): pointer {.raises: [], gcsafe.}

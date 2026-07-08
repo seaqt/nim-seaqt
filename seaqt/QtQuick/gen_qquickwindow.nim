@@ -117,7 +117,7 @@ type cQQuickWindowGraphicsStateInfo*{.exportc: "QQuickWindow__GraphicsStateInfo"
 proc fcQQuickWindow_metaObject(self: pointer): pointer {.importc: "QQuickWindow_metaObject".}
 proc fcQQuickWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickWindow_metacast".}
 proc fcQQuickWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickWindow_metacall".}
-proc fcQQuickWindow_tr(s: cstring): struct_seaqt_string {.importc: "QQuickWindow_tr".}
+proc fcQQuickWindow_trS(s: cstring): struct_seaqt_string {.importc: "QQuickWindow_tr_s".}
 proc fcQQuickWindow_contentItem(self: pointer): pointer {.importc: "QQuickWindow_contentItem".}
 proc fcQQuickWindow_activeFocusItem(self: pointer): pointer {.importc: "QQuickWindow_activeFocusItem".}
 proc fcQQuickWindow_focusObject(self: pointer): pointer {.importc: "QQuickWindow_focusObject".}
@@ -130,8 +130,8 @@ proc fcQQuickWindow_beginExternalCommands(self: pointer): void {.importc: "QQuic
 proc fcQQuickWindow_endExternalCommands(self: pointer): void {.importc: "QQuickWindow_endExternalCommands".}
 proc fcQQuickWindow_incubationController(self: pointer): pointer {.importc: "QQuickWindow_incubationController".}
 proc fcQQuickWindow_accessibleRoot(self: pointer): pointer {.importc: "QQuickWindow_accessibleRoot".}
-proc fcQQuickWindow_createTextureFromImage(self: pointer, image: pointer): pointer {.importc: "QQuickWindow_createTextureFromImage".}
-proc fcQQuickWindow_createTextureFromImage2(self: pointer, image: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromImage2".}
+proc fcQQuickWindow_createTextureFromImageImage(self: pointer, image: pointer): pointer {.importc: "QQuickWindow_createTextureFromImage_image".}
+proc fcQQuickWindow_createTextureFromImageImageOptions(self: pointer, image: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromImage_image_options".}
 proc fcQQuickWindow_setColor(self: pointer, color: pointer): void {.importc: "QQuickWindow_setColor".}
 proc fcQQuickWindow_color(self: pointer): pointer {.importc: "QQuickWindow_color".}
 proc fcQQuickWindow_hasDefaultAlphaBuffer(): bool {.importc: "QQuickWindow_hasDefaultAlphaBuffer".}
@@ -195,8 +195,8 @@ proc fcQQuickWindow_afterFrameEnd(self: pointer): void {.importc: "QQuickWindow_
 proc fcQQuickWindow_connect_afterFrameEnd(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickWindow_connect_afterFrameEnd".}
 proc fcQQuickWindow_update(self: pointer): void {.importc: "QQuickWindow_update".}
 proc fcQQuickWindow_releaseResources(self: pointer): void {.importc: "QQuickWindow_releaseResources".}
-proc fcQQuickWindow_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickWindow_tr2".}
-proc fcQQuickWindow_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickWindow_tr3".}
+proc fcQQuickWindow_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickWindow_tr_s_c".}
+proc fcQQuickWindow_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickWindow_tr_s_c_n".}
 proc fcQQuickWindow_vdata(self: pointer): ptr pointer {.importc: "QQuickWindow_vdata".}
 proc fvdata_cQQuickWindow(self: pointer): pointer {.importc: "vdata_QQuickWindow".}
 
@@ -276,8 +276,8 @@ proc fcQQuickWindow_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQQuickWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickWindow_protectedbase_receivers".}
 proc fcQQuickWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickWindow_protectedbase_isSignalConnected".}
 proc fcQQuickWindow_new(vtbl: pointer, vdata: csize_t): ptr cQQuickWindow {.importc: "QQuickWindow_new".}
-proc fcQQuickWindow_new2(vtbl: pointer, vdata: csize_t, renderControl: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new2".}
-proc fcQQuickWindow_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new3".}
+proc fcQQuickWindow_new2(vtbl: pointer, vdata: csize_t, renderControl: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new_renderControl".}
+proc fcQQuickWindow_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new_parent".}
 proc fcQQuickWindow_staticMetaObject(): pointer {.importc: "QQuickWindow_staticMetaObject".}
 proc fcQQuickWindowGraphicsStateInfo_currentFrameSlot(self: pointer): cint {.importc: "QQuickWindow__GraphicsStateInfo_currentFrameSlot".}
 proc fcQQuickWindowGraphicsStateInfo_setCurrentFrameSlot(self: pointer, currentFrameSlot: cint): void {.importc: "QQuickWindow__GraphicsStateInfo_setCurrentFrameSlot".}
@@ -294,7 +294,7 @@ proc metacall*(self: gen_qquickwindow_types.QQuickWindow, param1: cint, param2: 
   fcQQuickWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring): string =
-  let v_ms = fcQQuickWindow_tr(s)
+  let v_ms = fcQQuickWindow_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -336,10 +336,10 @@ proc accessibleRoot*(self: gen_qquickwindow_types.QQuickWindow): gen_qaccessible
   gen_qaccessible_types.QAccessibleInterface(h: fcQQuickWindow_accessibleRoot(self.h), owned: false)
 
 proc createTextureFromImage*(self: gen_qquickwindow_types.QQuickWindow, image: gen_qimage_types.QImage): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromImage(self.h, image.h), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromImageImage(self.h, image.h), owned: false)
 
 proc createTextureFromImage*(self: gen_qquickwindow_types.QQuickWindow, image: gen_qimage_types.QImage, options: cint): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromImage2(self.h, image.h, cint(options)), owned: false)
+  gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromImageImageOptions(self.h, image.h, cint(options)), owned: false)
 
 proc setColor*(self: gen_qquickwindow_types.QQuickWindow, color: gen_qcolor_types.QColor): void =
   fcQQuickWindow_setColor(self.h, color.h)
@@ -759,13 +759,13 @@ proc releaseResources*(self: gen_qquickwindow_types.QQuickWindow): void =
   fcQQuickWindow_releaseResources(self.h)
 
 proc tr*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickWindow_tr2(s, c)
+  let v_ms = fcQQuickWindow_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickWindow_tr3(s, c, n)
+  let v_ms = fcQQuickWindow_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

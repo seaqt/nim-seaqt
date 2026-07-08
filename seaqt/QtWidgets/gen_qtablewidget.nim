@@ -105,7 +105,7 @@ proc fcQTableWidgetSelectionRange_rightColumn(self: pointer): cint {.importc: "Q
 proc fcQTableWidgetSelectionRange_rowCount(self: pointer): cint {.importc: "QTableWidgetSelectionRange_rowCount".}
 proc fcQTableWidgetSelectionRange_columnCount(self: pointer): cint {.importc: "QTableWidgetSelectionRange_columnCount".}
 proc fcQTableWidgetSelectionRange_new(): ptr cQTableWidgetSelectionRange {.importc: "QTableWidgetSelectionRange_new".}
-proc fcQTableWidgetSelectionRange_new2(top: cint, left: cint, bottom: cint, right: cint): ptr cQTableWidgetSelectionRange {.importc: "QTableWidgetSelectionRange_new2".}
+proc fcQTableWidgetSelectionRange_new2(top: cint, left: cint, bottom: cint, right: cint): ptr cQTableWidgetSelectionRange {.importc: "QTableWidgetSelectionRange_new_top_left_bottom_right".}
 proc fcQTableWidgetItem_clone(self: pointer): pointer {.importc: "QTableWidgetItem_clone".}
 proc fcQTableWidgetItem_tableWidget(self: pointer): pointer {.importc: "QTableWidgetItem_tableWidget".}
 proc fcQTableWidgetItem_row(self: pointer): cint {.importc: "QTableWidgetItem_row".}
@@ -127,9 +127,9 @@ proc fcQTableWidgetItem_setWhatsThis(self: pointer, whatsThis: struct_seaqt_stri
 proc fcQTableWidgetItem_font(self: pointer): pointer {.importc: "QTableWidgetItem_font".}
 proc fcQTableWidgetItem_setFont(self: pointer, font: pointer): void {.importc: "QTableWidgetItem_setFont".}
 proc fcQTableWidgetItem_textAlignment(self: pointer): cint {.importc: "QTableWidgetItem_textAlignment".}
-proc fcQTableWidgetItem_setTextAlignment(self: pointer, alignment: cint): void {.importc: "QTableWidgetItem_setTextAlignment".}
-proc fcQTableWidgetItem_setTextAlignmentWithAlignment(self: pointer, alignment: cint): void {.importc: "QTableWidgetItem_setTextAlignmentWithAlignment".}
-proc fcQTableWidgetItem_setTextAlignment2(self: pointer, alignment: cint): void {.importc: "QTableWidgetItem_setTextAlignment2".}
+proc fcQTableWidgetItem_setTextAlignmentInt(self: pointer, alignment: cint): void {.importc: "QTableWidgetItem_setTextAlignment_int".}
+proc fcQTableWidgetItem_setTextAlignment_Qt_AlignmentFlag(self: pointer, alignment: cint): void {.importc: "QTableWidgetItem_setTextAlignment_Qt_AlignmentFlag".}
+proc fcQTableWidgetItem_setTextAlignment_Qt_Alignment(self: pointer, alignment: cint): void {.importc: "QTableWidgetItem_setTextAlignment_Qt_Alignment".}
 proc fcQTableWidgetItem_background(self: pointer): pointer {.importc: "QTableWidgetItem_background".}
 proc fcQTableWidgetItem_setBackground(self: pointer, brush: pointer): void {.importc: "QTableWidgetItem_setBackground".}
 proc fcQTableWidgetItem_foreground(self: pointer): pointer {.importc: "QTableWidgetItem_foreground".}
@@ -143,7 +143,7 @@ proc fcQTableWidgetItem_setData(self: pointer, role: cint, value: pointer): void
 proc fcQTableWidgetItem_operatorLesser(self: pointer, other: pointer): bool {.importc: "QTableWidgetItem_operatorLesser".}
 proc fcQTableWidgetItem_read(self: pointer, inVal: pointer): void {.importc: "QTableWidgetItem_read".}
 proc fcQTableWidgetItem_write(self: pointer, outVal: pointer): void {.importc: "QTableWidgetItem_write".}
-proc fcQTableWidgetItem_operatorAssign(self: pointer, other: pointer): void {.importc: "QTableWidgetItem_operatorAssign".}
+proc fcQTableWidgetItem_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTableWidgetItem_operatorAssign".}
 proc fcQTableWidgetItem_typeX(self: pointer): cint {.importc: "QTableWidgetItem_type".}
 proc fcQTableWidgetItem_vdata(self: pointer): ptr pointer {.importc: "QTableWidgetItem_vdata".}
 proc fvdata_cQTableWidgetItem(self: pointer): pointer {.importc: "vdata_QTableWidgetItem".}
@@ -163,16 +163,16 @@ proc fcQTableWidgetItem_virtualbase_operatorLesser(self: pointer, other: pointer
 proc fcQTableWidgetItem_virtualbase_read(self: pointer, inVal: pointer): void {.importc: "QTableWidgetItem_virtualbase_read".}
 proc fcQTableWidgetItem_virtualbase_write(self: pointer, outVal: pointer): void {.importc: "QTableWidgetItem_virtualbase_write".}
 proc fcQTableWidgetItem_new(vtbl: pointer, vdata: csize_t): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new".}
-proc fcQTableWidgetItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new2".}
-proc fcQTableWidgetItem_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new3".}
-proc fcQTableWidgetItem_new4(vtbl: pointer, vdata: csize_t, other: pointer): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new4".}
-proc fcQTableWidgetItem_new5(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new5".}
-proc fcQTableWidgetItem_new6(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, typeVal: cint): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new6".}
-proc fcQTableWidgetItem_new7(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, typeVal: cint): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new7".}
+proc fcQTableWidgetItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new_text".}
+proc fcQTableWidgetItem_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new_icon_text".}
+proc fcQTableWidgetItem_new4(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new_from".}
+proc fcQTableWidgetItem_new5(vtbl: pointer, vdata: csize_t, typeVal: cint): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new_type".}
+proc fcQTableWidgetItem_new6(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, typeVal: cint): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new_text_type".}
+proc fcQTableWidgetItem_new7(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string, typeVal: cint): ptr cQTableWidgetItem {.importc: "QTableWidgetItem_new_icon_text_type".}
 proc fcQTableWidget_metaObject(self: pointer): pointer {.importc: "QTableWidget_metaObject".}
 proc fcQTableWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QTableWidget_metacast".}
 proc fcQTableWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTableWidget_metacall".}
-proc fcQTableWidget_tr(s: cstring): struct_seaqt_string {.importc: "QTableWidget_tr".}
+proc fcQTableWidget_trS(s: cstring): struct_seaqt_string {.importc: "QTableWidget_tr_s".}
 proc fcQTableWidget_setRowCount(self: pointer, rows: cint): void {.importc: "QTableWidget_setRowCount".}
 proc fcQTableWidget_rowCount(self: pointer): cint {.importc: "QTableWidget_rowCount".}
 proc fcQTableWidget_setColumnCount(self: pointer, columns: cint): void {.importc: "QTableWidget_setColumnCount".}
@@ -196,11 +196,11 @@ proc fcQTableWidget_setHorizontalHeaderLabels(self: pointer, labels: struct_seaq
 proc fcQTableWidget_currentRow(self: pointer): cint {.importc: "QTableWidget_currentRow".}
 proc fcQTableWidget_currentColumn(self: pointer): cint {.importc: "QTableWidget_currentColumn".}
 proc fcQTableWidget_currentItem(self: pointer): pointer {.importc: "QTableWidget_currentItem".}
-proc fcQTableWidget_setCurrentItem(self: pointer, item: pointer): void {.importc: "QTableWidget_setCurrentItem".}
-proc fcQTableWidget_setCurrentItem2(self: pointer, item: pointer, command: cint): void {.importc: "QTableWidget_setCurrentItem2".}
-proc fcQTableWidget_setCurrentCell(self: pointer, row: cint, column: cint): void {.importc: "QTableWidget_setCurrentCell".}
-proc fcQTableWidget_setCurrentCell2(self: pointer, row: cint, column: cint, command: cint): void {.importc: "QTableWidget_setCurrentCell2".}
-proc fcQTableWidget_sortItems(self: pointer, column: cint): void {.importc: "QTableWidget_sortItems".}
+proc fcQTableWidget_setCurrentItemItem(self: pointer, item: pointer): void {.importc: "QTableWidget_setCurrentItem_item".}
+proc fcQTableWidget_setCurrentItemItemCommand(self: pointer, item: pointer, command: cint): void {.importc: "QTableWidget_setCurrentItem_item_command".}
+proc fcQTableWidget_setCurrentCellRowColumn(self: pointer, row: cint, column: cint): void {.importc: "QTableWidget_setCurrentCell_row_column".}
+proc fcQTableWidget_setCurrentCellRowColumnCommand(self: pointer, row: cint, column: cint, command: cint): void {.importc: "QTableWidget_setCurrentCell_row_column_command".}
+proc fcQTableWidget_sortItemsColumn(self: pointer, column: cint): void {.importc: "QTableWidget_sortItems_column".}
 proc fcQTableWidget_setSortingEnabled(self: pointer, enable: bool): void {.importc: "QTableWidget_setSortingEnabled".}
 proc fcQTableWidget_isSortingEnabled(self: pointer): bool {.importc: "QTableWidget_isSortingEnabled".}
 proc fcQTableWidget_editItem(self: pointer, item: pointer): void {.importc: "QTableWidget_editItem".}
@@ -216,12 +216,12 @@ proc fcQTableWidget_selectedItems(self: pointer): struct_seaqt_array {.importc: 
 proc fcQTableWidget_findItems(self: pointer, text: struct_seaqt_string, flags: cint): struct_seaqt_array {.importc: "QTableWidget_findItems".}
 proc fcQTableWidget_visualRow(self: pointer, logicalRow: cint): cint {.importc: "QTableWidget_visualRow".}
 proc fcQTableWidget_visualColumn(self: pointer, logicalColumn: cint): cint {.importc: "QTableWidget_visualColumn".}
-proc fcQTableWidget_itemAt(self: pointer, p: pointer): pointer {.importc: "QTableWidget_itemAt".}
-proc fcQTableWidget_itemAt2(self: pointer, x: cint, y: cint): pointer {.importc: "QTableWidget_itemAt2".}
+proc fcQTableWidget_itemAtP(self: pointer, p: pointer): pointer {.importc: "QTableWidget_itemAt_p".}
+proc fcQTableWidget_itemAtXY(self: pointer, x: cint, y: cint): pointer {.importc: "QTableWidget_itemAt_x_y".}
 proc fcQTableWidget_visualItemRect(self: pointer, item: pointer): pointer {.importc: "QTableWidget_visualItemRect".}
 proc fcQTableWidget_itemPrototype(self: pointer): pointer {.importc: "QTableWidget_itemPrototype".}
 proc fcQTableWidget_setItemPrototype(self: pointer, item: pointer): void {.importc: "QTableWidget_setItemPrototype".}
-proc fcQTableWidget_scrollToItem(self: pointer, item: pointer): void {.importc: "QTableWidget_scrollToItem".}
+proc fcQTableWidget_scrollToItemItem(self: pointer, item: pointer): void {.importc: "QTableWidget_scrollToItem_item".}
 proc fcQTableWidget_insertRow(self: pointer, row: cint): void {.importc: "QTableWidget_insertRow".}
 proc fcQTableWidget_insertColumn(self: pointer, column: cint): void {.importc: "QTableWidget_insertColumn".}
 proc fcQTableWidget_removeRow(self: pointer, row: cint): void {.importc: "QTableWidget_removeRow".}
@@ -258,10 +258,10 @@ proc fcQTableWidget_cellChanged(self: pointer, row: cint, column: cint): void {.
 proc fcQTableWidget_connect_cellChanged(self: pointer, slot: int, callback: proc (slot: int, row: cint, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_cellChanged".}
 proc fcQTableWidget_currentCellChanged(self: pointer, currentRow: cint, currentColumn: cint, previousRow: cint, previousColumn: cint): void {.importc: "QTableWidget_currentCellChanged".}
 proc fcQTableWidget_connect_currentCellChanged(self: pointer, slot: int, callback: proc (slot: int, currentRow: cint, currentColumn: cint, previousRow: cint, previousColumn: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_currentCellChanged".}
-proc fcQTableWidget_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTableWidget_tr2".}
-proc fcQTableWidget_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTableWidget_tr3".}
-proc fcQTableWidget_sortItems2(self: pointer, column: cint, order: cint): void {.importc: "QTableWidget_sortItems2".}
-proc fcQTableWidget_scrollToItem2(self: pointer, item: pointer, hint: cint): void {.importc: "QTableWidget_scrollToItem2".}
+proc fcQTableWidget_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTableWidget_tr_s_c".}
+proc fcQTableWidget_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTableWidget_tr_s_c_n".}
+proc fcQTableWidget_sortItemsColumnOrder(self: pointer, column: cint, order: cint): void {.importc: "QTableWidget_sortItems_column_order".}
+proc fcQTableWidget_scrollToItemItemHint(self: pointer, item: pointer, hint: cint): void {.importc: "QTableWidget_scrollToItem_item_hint".}
 proc fcQTableWidget_vdata(self: pointer): ptr pointer {.importc: "QTableWidget_vdata".}
 proc fvdata_cQTableWidget(self: pointer): pointer {.importc: "vdata_QTableWidget".}
 
@@ -316,7 +316,7 @@ type cQTableWidgetVTable {.pure.} = object
   closeEditor*: proc(self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
   commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
   editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   startDrag*: proc(self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
   focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
@@ -413,7 +413,7 @@ proc fcQTableWidget_virtualbase_horizontalScrollbarValueChanged(self: pointer, v
 proc fcQTableWidget_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void {.importc: "QTableWidget_virtualbase_closeEditor".}
 proc fcQTableWidget_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QTableWidget_virtualbase_commitData".}
 proc fcQTableWidget_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QTableWidget_virtualbase_editorDestroyed".}
-proc fcQTableWidget_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTableWidget_virtualbase_edit2".}
+proc fcQTableWidget_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTableWidget_virtualbase_edit_index_trigger_event".}
 proc fcQTableWidget_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QTableWidget_virtualbase_selectionCommand".}
 proc fcQTableWidget_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QTableWidget_virtualbase_startDrag".}
 proc fcQTableWidget_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QTableWidget_virtualbase_focusNextPrevChild".}
@@ -478,7 +478,7 @@ proc fcQTableWidget_protectedbase_startAutoScroll(self: pointer): void {.importc
 proc fcQTableWidget_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QTableWidget_protectedbase_stopAutoScroll".}
 proc fcQTableWidget_protectedbase_doAutoScroll(self: pointer): void {.importc: "QTableWidget_protectedbase_doAutoScroll".}
 proc fcQTableWidget_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QTableWidget_protectedbase_dropIndicatorPosition".}
-proc fcQTableWidget_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTableWidget_protectedbase_setViewportMargins".}
+proc fcQTableWidget_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTableWidget_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQTableWidget_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QTableWidget_protectedbase_viewportMargins".}
 proc fcQTableWidget_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTableWidget_protectedbase_drawFrame".}
 proc fcQTableWidget_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QTableWidget_protectedbase_updateMicroFocus".}
@@ -491,9 +491,9 @@ proc fcQTableWidget_protectedbase_senderSignalIndex(self: pointer): cint {.impor
 proc fcQTableWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTableWidget_protectedbase_receivers".}
 proc fcQTableWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTableWidget_protectedbase_isSignalConnected".}
 proc fcQTableWidget_new(vtbl: pointer, vdata: csize_t): ptr cQTableWidget {.importc: "QTableWidget_new".}
-proc fcQTableWidget_new2(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint): ptr cQTableWidget {.importc: "QTableWidget_new2".}
-proc fcQTableWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTableWidget {.importc: "QTableWidget_new3".}
-proc fcQTableWidget_new4(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint, parent: pointer): ptr cQTableWidget {.importc: "QTableWidget_new4".}
+proc fcQTableWidget_new2(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint): ptr cQTableWidget {.importc: "QTableWidget_new_rows_columns".}
+proc fcQTableWidget_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTableWidget {.importc: "QTableWidget_new_parent".}
+proc fcQTableWidget_new4(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint, parent: pointer): ptr cQTableWidget {.importc: "QTableWidget_new_rows_columns_parent".}
 proc fcQTableWidget_staticMetaObject(): pointer {.importc: "QTableWidget_staticMetaObject".}
 
 proc topRow*(self: gen_qtablewidget_types.QTableWidgetSelectionRange): cint =
@@ -597,13 +597,13 @@ proc textAlignment*(self: gen_qtablewidget_types.QTableWidgetItem): cint =
   fcQTableWidgetItem_textAlignment(self.h)
 
 proc setTextAlignment*(self: gen_qtablewidget_types.QTableWidgetItem, alignment: cint): void =
-  fcQTableWidgetItem_setTextAlignment(self.h, alignment)
+  fcQTableWidgetItem_setTextAlignmentInt(self.h, alignment)
 
 proc setTextAlignment2*(self: gen_qtablewidget_types.QTableWidgetItem, alignment: cint): void =
-  fcQTableWidgetItem_setTextAlignmentWithAlignment(self.h, cint(alignment))
+  fcQTableWidgetItem_setTextAlignment_Qt_AlignmentFlag(self.h, cint(alignment))
 
 proc setTextAlignment3*(self: gen_qtablewidget_types.QTableWidgetItem, alignment: cint): void =
-  fcQTableWidgetItem_setTextAlignment2(self.h, cint(alignment))
+  fcQTableWidgetItem_setTextAlignment_Qt_Alignment(self.h, cint(alignment))
 
 proc background*(self: gen_qtablewidget_types.QTableWidgetItem): gen_qbrush_types.QBrush =
   gen_qbrush_types.QBrush(h: fcQTableWidgetItem_background(self.h), owned: true)
@@ -644,8 +644,8 @@ proc read*(self: gen_qtablewidget_types.QTableWidgetItem, inVal: gen_qdatastream
 proc write*(self: gen_qtablewidget_types.QTableWidgetItem, outVal: gen_qdatastream_types.QDataStream): void =
   fcQTableWidgetItem_write(self.h, outVal.h)
 
-proc operatorAssign*(self: gen_qtablewidget_types.QTableWidgetItem, other: gen_qtablewidget_types.QTableWidgetItem): void =
-  fcQTableWidgetItem_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qtablewidget_types.QTableWidgetItem, fromVal: gen_qtablewidget_types.QTableWidgetItem): void =
+  fcQTableWidgetItem_operatorAssign(self.h, fromVal.h)
 
 proc typeX*(self: gen_qtablewidget_types.QTableWidgetItem): cint =
   fcQTableWidgetItem_typeX(self.h)
@@ -855,7 +855,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   fcQTableWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    other: gen_qtablewidget_types.QTableWidgetItem,
+    fromVal: gen_qtablewidget_types.QTableWidgetItem,
     vtbl: ref QTableWidgetItemVTable = nil): gen_qtablewidget_types.QTableWidgetItem =
   let vtbl = if vtbl == nil: new QTableWidgetItemVTable else: vtbl
   GC_ref(vtbl)
@@ -874,7 +874,7 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
     vtbl[].vtbl.read = fcQTableWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
     vtbl[].vtbl.write = fcQTableWidgetItem_vtable_callback_write
-  let tmp = gen_qtablewidget_types.QTableWidgetItem(h: fcQTableWidgetItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), other.h), owned: true)
+  let tmp = gen_qtablewidget_types.QTableWidgetItem(h: fcQTableWidgetItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQTableWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
@@ -983,10 +983,10 @@ proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
   inst[].owned = true
 
 proc create*(T: type gen_qtablewidget_types.QTableWidgetItem,
-    other: gen_qtablewidget_types.QTableWidgetItem,
+    fromVal: gen_qtablewidget_types.QTableWidgetItem,
     inst: VirtualQTableWidgetItem) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQTableWidgetItem_new4(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)), other.h)
+  inst[].h = fcQTableWidgetItem_new4(addr(cQTableWidgetItem_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQTableWidgetItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
@@ -1024,7 +1024,7 @@ proc metacall*(self: gen_qtablewidget_types.QTableWidget, param1: cint, param2: 
   fcQTableWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtablewidget_types.QTableWidget, s: cstring): string =
-  let v_ms = fcQTableWidget_tr(s)
+  let v_ms = fcQTableWidget_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -1113,19 +1113,19 @@ proc currentItem*(self: gen_qtablewidget_types.QTableWidget): gen_qtablewidget_t
   gen_qtablewidget_types.QTableWidgetItem(h: fcQTableWidget_currentItem(self.h), owned: false)
 
 proc setCurrentItem*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): void =
-  fcQTableWidget_setCurrentItem(self.h, item.h)
+  fcQTableWidget_setCurrentItemItem(self.h, item.h)
 
 proc setCurrentItem*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem, command: cint): void =
-  fcQTableWidget_setCurrentItem2(self.h, item.h, cint(command))
+  fcQTableWidget_setCurrentItemItemCommand(self.h, item.h, cint(command))
 
 proc setCurrentCell*(self: gen_qtablewidget_types.QTableWidget, row: cint, column: cint): void =
-  fcQTableWidget_setCurrentCell(self.h, row, column)
+  fcQTableWidget_setCurrentCellRowColumn(self.h, row, column)
 
 proc setCurrentCell*(self: gen_qtablewidget_types.QTableWidget, row: cint, column: cint, command: cint): void =
-  fcQTableWidget_setCurrentCell2(self.h, row, column, cint(command))
+  fcQTableWidget_setCurrentCellRowColumnCommand(self.h, row, column, cint(command))
 
 proc sortItems*(self: gen_qtablewidget_types.QTableWidget, column: cint): void =
-  fcQTableWidget_sortItems(self.h, column)
+  fcQTableWidget_sortItemsColumn(self.h, column)
 
 proc setSortingEnabled*(self: gen_qtablewidget_types.QTableWidget, enable: bool): void =
   fcQTableWidget_setSortingEnabled(self.h, enable)
@@ -1191,10 +1191,10 @@ proc visualColumn*(self: gen_qtablewidget_types.QTableWidget, logicalColumn: cin
   fcQTableWidget_visualColumn(self.h, logicalColumn)
 
 proc itemAt*(self: gen_qtablewidget_types.QTableWidget, p: gen_qpoint_types.QPoint): gen_qtablewidget_types.QTableWidgetItem =
-  gen_qtablewidget_types.QTableWidgetItem(h: fcQTableWidget_itemAt(self.h, p.h), owned: false)
+  gen_qtablewidget_types.QTableWidgetItem(h: fcQTableWidget_itemAtP(self.h, p.h), owned: false)
 
 proc itemAt*(self: gen_qtablewidget_types.QTableWidget, x: cint, y: cint): gen_qtablewidget_types.QTableWidgetItem =
-  gen_qtablewidget_types.QTableWidgetItem(h: fcQTableWidget_itemAt2(self.h, x, y), owned: false)
+  gen_qtablewidget_types.QTableWidgetItem(h: fcQTableWidget_itemAtXY(self.h, x, y), owned: false)
 
 proc visualItemRect*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQTableWidget_visualItemRect(self.h, item.h), owned: true)
@@ -1206,7 +1206,7 @@ proc setItemPrototype*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtab
   fcQTableWidget_setItemPrototype(self.h, item.h)
 
 proc scrollToItem*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): void =
-  fcQTableWidget_scrollToItem(self.h, item.h)
+  fcQTableWidget_scrollToItemItem(self.h, item.h)
 
 proc insertRow*(self: gen_qtablewidget_types.QTableWidget, row: cint): void =
   fcQTableWidget_insertRow(self.h, row)
@@ -1545,22 +1545,22 @@ proc onCurrentCellChanged*(self: gen_qtablewidget_types.QTableWidget, slot: QTab
   fcQTableWidget_connect_currentCellChanged(self.h, cast[int](addr tmp[]), fcQTableWidget_slot_callback_currentCellChanged, fcQTableWidget_slot_callback_currentCellChanged_release)
 
 proc tr*(_: type gen_qtablewidget_types.QTableWidget, s: cstring, c: cstring): string =
-  let v_ms = fcQTableWidget_tr2(s, c)
+  let v_ms = fcQTableWidget_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtablewidget_types.QTableWidget, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTableWidget_tr3(s, c, n)
+  let v_ms = fcQTableWidget_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc sortItems*(self: gen_qtablewidget_types.QTableWidget, column: cint, order: cint): void =
-  fcQTableWidget_sortItems2(self.h, column, cint(order))
+  fcQTableWidget_sortItemsColumnOrder(self.h, column, cint(order))
 
 proc scrollToItem*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem, hint: cint): void =
-  fcQTableWidget_scrollToItem2(self.h, item.h, cint(hint))
+  fcQTableWidget_scrollToItemItemHint(self.h, item.h, cint(hint))
 
 type QTableWidgetmetaObjectProc* = proc(self: QTableWidget): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTableWidgetmetacastProc* = proc(self: QTableWidget, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1611,7 +1611,7 @@ type QTableWidgethorizontalScrollbarValueChangedProc* = proc(self: QTableWidget,
 type QTableWidgetcloseEditorProc* = proc(self: QTableWidget, editor: gen_qwidget_types.QWidget, hint: cint): void {.raises: [], gcsafe.}
 type QTableWidgetcommitDataProc* = proc(self: QTableWidget, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QTableWidgeteditorDestroyedProc* = proc(self: QTableWidget, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
-type QTableWidgetedit2Proc* = proc(self: QTableWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTableWidgeteditIndexTriggerEventProc* = proc(self: QTableWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QTableWidgetselectionCommandProc* = proc(self: QTableWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QTableWidgetstartDragProc* = proc(self: QTableWidget, supportedActions: cint): void {.raises: [], gcsafe.}
 type QTableWidgetfocusNextPrevChildProc* = proc(self: QTableWidget, next: bool): bool {.raises: [], gcsafe.}
@@ -1711,7 +1711,7 @@ type QTableWidgetVTable* {.inheritable, pure.} = object
   closeEditor*: QTableWidgetcloseEditorProc
   commitData*: QTableWidgetcommitDataProc
   editorDestroyed*: QTableWidgeteditorDestroyedProc
-  edit2*: QTableWidgetedit2Proc
+  editIndexTriggerEvent*: QTableWidgeteditIndexTriggerEventProc
   selectionCommand*: QTableWidgetselectionCommandProc
   startDrag*: QTableWidgetstartDragProc
   focusNextPrevChild*: QTableWidgetfocusNextPrevChildProc
@@ -1931,7 +1931,7 @@ proc QTableWidgeteditorDestroyed*(self: gen_qtablewidget_types.QTableWidget, edi
   fcQTableWidget_virtualbase_editorDestroyed(self.h, editor.h)
 
 proc QTableWidgetedit*(self: gen_qtablewidget_types.QTableWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQTableWidget_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQTableWidget_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QTableWidgetselectionCommand*(self: gen_qtablewidget_types.QTableWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQTableWidget_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -2450,13 +2450,13 @@ proc fcQTableWidget_vtable_callback_editorDestroyed(self: pointer, editor: point
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
-proc fcQTableWidget_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTableWidget_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTableWidgetVTable](fcQTableWidget_vdata(self)[])
   let self = QTableWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQTableWidget_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -3295,7 +3295,7 @@ proc fcQTableWidget_method_callback_editorDestroyed(self: pointer, editor: point
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   inst.editorDestroyed(slotval1)
 
-proc fcQTableWidget_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQTableWidget_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTableWidget](fcQTableWidget_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -3621,7 +3621,7 @@ proc dropIndicatorPosition*(self: gen_qtablewidget_types.QTableWidget): cint =
   cint(fcQTableWidget_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qtablewidget_types.QTableWidget, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQTableWidget_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQTableWidget_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qtablewidget_types.QTableWidget): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQTableWidget_protectedbase_viewportMargins(self.h), owned: true)
@@ -3761,8 +3761,8 @@ proc create*(T: type gen_qtablewidget_types.QTableWidget,
     vtbl[].vtbl.commitData = fcQTableWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTableWidget_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTableWidget_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTableWidget_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTableWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -3966,8 +3966,8 @@ proc create*(T: type gen_qtablewidget_types.QTableWidget,
     vtbl[].vtbl.commitData = fcQTableWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTableWidget_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTableWidget_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTableWidget_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTableWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -4171,8 +4171,8 @@ proc create*(T: type gen_qtablewidget_types.QTableWidget,
     vtbl[].vtbl.commitData = fcQTableWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTableWidget_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTableWidget_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTableWidget_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTableWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -4376,8 +4376,8 @@ proc create*(T: type gen_qtablewidget_types.QTableWidget,
     vtbl[].vtbl.commitData = fcQTableWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = fcQTableWidget_vtable_callback_editorDestroyed
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQTableWidget_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQTableWidget_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQTableWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -4530,7 +4530,7 @@ const cQTableWidget_mvtbl = cQTableWidgetVTable(
   closeEditor: fcQTableWidget_method_callback_closeEditor,
   commitData: fcQTableWidget_method_callback_commitData,
   editorDestroyed: fcQTableWidget_method_callback_editorDestroyed,
-  edit2: fcQTableWidget_method_callback_edit2,
+  editIndexTriggerEvent: fcQTableWidget_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQTableWidget_method_callback_selectionCommand,
   startDrag: fcQTableWidget_method_callback_startDrag,
   focusNextPrevChild: fcQTableWidget_method_callback_focusNextPrevChild,

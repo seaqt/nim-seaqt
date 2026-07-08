@@ -76,7 +76,7 @@ type cQSystemTrayIcon*{.exportc: "QSystemTrayIcon", incompleteStruct.} = object
 proc fcQSystemTrayIcon_metaObject(self: pointer): pointer {.importc: "QSystemTrayIcon_metaObject".}
 proc fcQSystemTrayIcon_metacast(self: pointer, param1: cstring): pointer {.importc: "QSystemTrayIcon_metacast".}
 proc fcQSystemTrayIcon_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSystemTrayIcon_metacall".}
-proc fcQSystemTrayIcon_tr(s: cstring): struct_seaqt_string {.importc: "QSystemTrayIcon_tr".}
+proc fcQSystemTrayIcon_trS(s: cstring): struct_seaqt_string {.importc: "QSystemTrayIcon_tr_s".}
 proc fcQSystemTrayIcon_setContextMenu(self: pointer, menu: pointer): void {.importc: "QSystemTrayIcon_setContextMenu".}
 proc fcQSystemTrayIcon_contextMenu(self: pointer): pointer {.importc: "QSystemTrayIcon_contextMenu".}
 proc fcQSystemTrayIcon_icon(self: pointer): pointer {.importc: "QSystemTrayIcon_icon".}
@@ -90,17 +90,17 @@ proc fcQSystemTrayIcon_isVisible(self: pointer): bool {.importc: "QSystemTrayIco
 proc fcQSystemTrayIcon_setVisible(self: pointer, visible: bool): void {.importc: "QSystemTrayIcon_setVisible".}
 proc fcQSystemTrayIcon_show(self: pointer): void {.importc: "QSystemTrayIcon_show".}
 proc fcQSystemTrayIcon_hide(self: pointer): void {.importc: "QSystemTrayIcon_hide".}
-proc fcQSystemTrayIcon_showMessage(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string, icon: pointer): void {.importc: "QSystemTrayIcon_showMessage".}
-proc fcQSystemTrayIcon_showMessage2(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string): void {.importc: "QSystemTrayIcon_showMessage2".}
+proc fcQSystemTrayIcon_showMessage_QString_QString_QIcon(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string, icon: pointer): void {.importc: "QSystemTrayIcon_showMessage_QString_QString_QIcon".}
+proc fcQSystemTrayIcon_showMessage_QString_QString(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string): void {.importc: "QSystemTrayIcon_showMessage_QString_QString".}
 proc fcQSystemTrayIcon_activated(self: pointer, reason: cint): void {.importc: "QSystemTrayIcon_activated".}
 proc fcQSystemTrayIcon_connect_activated(self: pointer, slot: int, callback: proc (slot: int, reason: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSystemTrayIcon_connect_activated".}
 proc fcQSystemTrayIcon_messageClicked(self: pointer): void {.importc: "QSystemTrayIcon_messageClicked".}
 proc fcQSystemTrayIcon_connect_messageClicked(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSystemTrayIcon_connect_messageClicked".}
-proc fcQSystemTrayIcon_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSystemTrayIcon_tr2".}
-proc fcQSystemTrayIcon_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSystemTrayIcon_tr3".}
-proc fcQSystemTrayIcon_showMessage3(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string, icon: pointer, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage3".}
-proc fcQSystemTrayIcon_showMessage4(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string, icon: cint): void {.importc: "QSystemTrayIcon_showMessage4".}
-proc fcQSystemTrayIcon_showMessage5(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string, icon: cint, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage5".}
+proc fcQSystemTrayIcon_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSystemTrayIcon_tr_s_c".}
+proc fcQSystemTrayIcon_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSystemTrayIcon_tr_s_c_n".}
+proc fcQSystemTrayIcon_showMessage_QString_QString_QIconInt(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string, icon: pointer, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage_QString_QString_QIcon_int".}
+proc fcQSystemTrayIcon_showMessage_QString_QString_QSystemTrayIcon_MessageIcon(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string, icon: cint): void {.importc: "QSystemTrayIcon_showMessage_QString_QString_QSystemTrayIcon_MessageIcon".}
+proc fcQSystemTrayIcon_showMessage_QString_QString_QSystemTrayIcon_MessageIconInt(self: pointer, title: struct_seaqt_string, msg: struct_seaqt_string, icon: cint, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage_QString_QString_QSystemTrayIcon_MessageIcon_int".}
 proc fcQSystemTrayIcon_vdata(self: pointer): ptr pointer {.importc: "QSystemTrayIcon_vdata".}
 proc fvdata_cQSystemTrayIcon(self: pointer): pointer {.importc: "vdata_QSystemTrayIcon".}
 
@@ -131,9 +131,9 @@ proc fcQSystemTrayIcon_protectedbase_senderSignalIndex(self: pointer): cint {.im
 proc fcQSystemTrayIcon_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSystemTrayIcon_protectedbase_receivers".}
 proc fcQSystemTrayIcon_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSystemTrayIcon_protectedbase_isSignalConnected".}
 proc fcQSystemTrayIcon_new(vtbl: pointer, vdata: csize_t): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new".}
-proc fcQSystemTrayIcon_new2(vtbl: pointer, vdata: csize_t, icon: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new2".}
-proc fcQSystemTrayIcon_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new3".}
-proc fcQSystemTrayIcon_new4(vtbl: pointer, vdata: csize_t, icon: pointer, parent: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new4".}
+proc fcQSystemTrayIcon_new2(vtbl: pointer, vdata: csize_t, icon: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new_icon".}
+proc fcQSystemTrayIcon_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new_parent".}
+proc fcQSystemTrayIcon_new4(vtbl: pointer, vdata: csize_t, icon: pointer, parent: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new_icon_parent".}
 proc fcQSystemTrayIcon_staticMetaObject(): pointer {.importc: "QSystemTrayIcon_staticMetaObject".}
 
 proc metaObject*(self: gen_qsystemtrayicon_types.QSystemTrayIcon): gen_qobjectdefs_types.QMetaObject =
@@ -146,7 +146,7 @@ proc metacall*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cint, pa
   fcQSystemTrayIcon_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, s: cstring): string =
-  let v_ms = fcQSystemTrayIcon_tr(s)
+  let v_ms = fcQSystemTrayIcon_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -194,10 +194,10 @@ proc hide*(self: gen_qsystemtrayicon_types.QSystemTrayIcon): void =
   fcQSystemTrayIcon_hide(self.h)
 
 proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char], icon: gen_qicon_types.QIcon): void =
-  fcQSystemTrayIcon_showMessage(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), icon.h)
+  fcQSystemTrayIcon_showMessage_QString_QString_QIcon(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), icon.h)
 
 proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char]): void =
-  fcQSystemTrayIcon_showMessage2(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
+  fcQSystemTrayIcon_showMessage_QString_QString(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))))
 
 proc activated*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, reason: cint): void =
   fcQSystemTrayIcon_activated(self.h, cint(reason))
@@ -238,25 +238,25 @@ proc onMessageClicked*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QS
   fcQSystemTrayIcon_connect_messageClicked(self.h, cast[int](addr tmp[]), fcQSystemTrayIcon_slot_callback_messageClicked, fcQSystemTrayIcon_slot_callback_messageClicked_release)
 
 proc tr*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, s: cstring, c: cstring): string =
-  let v_ms = fcQSystemTrayIcon_tr2(s, c)
+  let v_ms = fcQSystemTrayIcon_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSystemTrayIcon_tr3(s, c, n)
+  let v_ms = fcQSystemTrayIcon_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char], icon: gen_qicon_types.QIcon, msecs: cint): void =
-  fcQSystemTrayIcon_showMessage3(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), icon.h, msecs)
+  fcQSystemTrayIcon_showMessage_QString_QString_QIconInt(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), icon.h, msecs)
 
 proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char], icon: cint): void =
-  fcQSystemTrayIcon_showMessage4(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), cint(icon))
+  fcQSystemTrayIcon_showMessage_QString_QString_QSystemTrayIcon_MessageIcon(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), cint(icon))
 
 proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: openArray[char], msg: openArray[char], icon: cint, msecs: cint): void =
-  fcQSystemTrayIcon_showMessage5(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), cint(icon), msecs)
+  fcQSystemTrayIcon_showMessage_QString_QString_QSystemTrayIcon_MessageIconInt(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title))), struct_seaqt_string(data: if len(msg) > 0: addr msg[0] else: nil, len: csize_t(len(msg))), cint(icon), msecs)
 
 type QSystemTrayIconmetaObjectProc* = proc(self: QSystemTrayIcon): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSystemTrayIconmetacastProc* = proc(self: QSystemTrayIcon, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -201,17 +201,17 @@ VirtualQHistoryState* QHistoryState_new(const QHistoryState_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQHistoryState(vtbl) : nullptr;
 }
 
-VirtualQHistoryState* QHistoryState_new2(const QHistoryState_VTable* vtbl, size_t vdata, int type) {
+VirtualQHistoryState* QHistoryState_new_type(const QHistoryState_VTable* vtbl, size_t vdata, int type) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHistoryState>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHistoryState(vtbl, static_cast<QHistoryState::HistoryType>(type)) : nullptr;
 }
 
-VirtualQHistoryState* QHistoryState_new3(const QHistoryState_VTable* vtbl, size_t vdata, QState* parent) {
+VirtualQHistoryState* QHistoryState_new_parent(const QHistoryState_VTable* vtbl, size_t vdata, QState* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHistoryState>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHistoryState(vtbl, parent) : nullptr;
 }
 
-VirtualQHistoryState* QHistoryState_new4(const QHistoryState_VTable* vtbl, size_t vdata, int type, QState* parent) {
+VirtualQHistoryState* QHistoryState_new_type_parent(const QHistoryState_VTable* vtbl, size_t vdata, int type, QState* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQHistoryState>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQHistoryState(vtbl, static_cast<QHistoryState::HistoryType>(type), parent) : nullptr;
 }
@@ -232,7 +232,7 @@ int QHistoryState_metacall(QHistoryState* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QHistoryState_tr(const char* s) {
+struct seaqt_string QHistoryState_tr_s(const char* s) {
 	QString _ret = QHistoryState::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -268,7 +268,7 @@ void QHistoryState_setHistoryType(QHistoryState* self, int type) {
 	self->setHistoryType(static_cast<QHistoryState::HistoryType>(type));
 }
 
-struct seaqt_string QHistoryState_tr2(const char* s, const char* c) {
+struct seaqt_string QHistoryState_tr_s_c(const char* s, const char* c) {
 	QString _ret = QHistoryState::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -279,7 +279,7 @@ struct seaqt_string QHistoryState_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QHistoryState_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QHistoryState_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QHistoryState::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

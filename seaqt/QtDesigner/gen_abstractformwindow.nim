@@ -78,7 +78,7 @@ type cQDesignerFormWindowInterface*{.exportc: "QDesignerFormWindowInterface", in
 proc fcQDesignerFormWindowInterface_metaObject(self: pointer): pointer {.importc: "QDesignerFormWindowInterface_metaObject".}
 proc fcQDesignerFormWindowInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerFormWindowInterface_metacast".}
 proc fcQDesignerFormWindowInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerFormWindowInterface_metacall".}
-proc fcQDesignerFormWindowInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowInterface_tr".}
+proc fcQDesignerFormWindowInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowInterface_tr_s".}
 proc fcQDesignerFormWindowInterface_fileName(self: pointer): struct_seaqt_string {.importc: "QDesignerFormWindowInterface_fileName".}
 proc fcQDesignerFormWindowInterface_absoluteDir(self: pointer): pointer {.importc: "QDesignerFormWindowInterface_absoluteDir".}
 proc fcQDesignerFormWindowInterface_contents(self: pointer): struct_seaqt_string {.importc: "QDesignerFormWindowInterface_contents".}
@@ -113,8 +113,8 @@ proc fcQDesignerFormWindowInterface_setMainContainer(self: pointer, mainContaine
 proc fcQDesignerFormWindowInterface_formContainer(self: pointer): pointer {.importc: "QDesignerFormWindowInterface_formContainer".}
 proc fcQDesignerFormWindowInterface_isManaged(self: pointer, widget: pointer): bool {.importc: "QDesignerFormWindowInterface_isManaged".}
 proc fcQDesignerFormWindowInterface_isDirty(self: pointer): bool {.importc: "QDesignerFormWindowInterface_isDirty".}
-proc fcQDesignerFormWindowInterface_findFormWindow(w: pointer): pointer {.importc: "QDesignerFormWindowInterface_findFormWindow".}
-proc fcQDesignerFormWindowInterface_findFormWindowWithObj(obj: pointer): pointer {.importc: "QDesignerFormWindowInterface_findFormWindowWithObj".}
+proc fcQDesignerFormWindowInterface_findFormWindowW(w: pointer): pointer {.importc: "QDesignerFormWindowInterface_findFormWindow_w".}
+proc fcQDesignerFormWindowInterface_findFormWindowObj(obj: pointer): pointer {.importc: "QDesignerFormWindowInterface_findFormWindow_obj".}
 proc fcQDesignerFormWindowInterface_commandHistory(self: pointer): pointer {.importc: "QDesignerFormWindowInterface_commandHistory".}
 proc fcQDesignerFormWindowInterface_beginCommand(self: pointer, description: struct_seaqt_string): void {.importc: "QDesignerFormWindowInterface_beginCommand".}
 proc fcQDesignerFormWindowInterface_endCommand(self: pointer): void {.importc: "QDesignerFormWindowInterface_endCommand".}
@@ -132,9 +132,9 @@ proc fcQDesignerFormWindowInterface_clearSelection(self: pointer, changeProperty
 proc fcQDesignerFormWindowInterface_selectWidget(self: pointer, w: pointer, select: bool): void {.importc: "QDesignerFormWindowInterface_selectWidget".}
 proc fcQDesignerFormWindowInterface_setGrid(self: pointer, grid: pointer): void {.importc: "QDesignerFormWindowInterface_setGrid".}
 proc fcQDesignerFormWindowInterface_setFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QDesignerFormWindowInterface_setFileName".}
-proc fcQDesignerFormWindowInterface_setContentsWithContents(self: pointer, contents: struct_seaqt_string): bool {.importc: "QDesignerFormWindowInterface_setContentsWithContents".}
+proc fcQDesignerFormWindowInterface_setContentsContents(self: pointer, contents: struct_seaqt_string): bool {.importc: "QDesignerFormWindowInterface_setContents_contents".}
 proc fcQDesignerFormWindowInterface_editWidgets(self: pointer): void {.importc: "QDesignerFormWindowInterface_editWidgets".}
-proc fcQDesignerFormWindowInterface_activateResourceFilePaths(self: pointer, paths: struct_seaqt_array): void {.importc: "QDesignerFormWindowInterface_activateResourceFilePaths".}
+proc fcQDesignerFormWindowInterface_activateResourceFilePathsPaths(self: pointer, paths: struct_seaqt_array): void {.importc: "QDesignerFormWindowInterface_activateResourceFilePaths_paths".}
 proc fcQDesignerFormWindowInterface_mainContainerChanged(self: pointer, mainContainer: pointer): void {.importc: "QDesignerFormWindowInterface_mainContainerChanged".}
 proc fcQDesignerFormWindowInterface_connect_mainContainerChanged(self: pointer, slot: int, callback: proc (slot: int, mainContainer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerFormWindowInterface_connect_mainContainerChanged".}
 proc fcQDesignerFormWindowInterface_toolChanged(self: pointer, toolIndex: cint): void {.importc: "QDesignerFormWindowInterface_toolChanged".}
@@ -163,9 +163,9 @@ proc fcQDesignerFormWindowInterface_widgetRemoved(self: pointer, w: pointer): vo
 proc fcQDesignerFormWindowInterface_connect_widgetRemoved(self: pointer, slot: int, callback: proc (slot: int, w: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerFormWindowInterface_connect_widgetRemoved".}
 proc fcQDesignerFormWindowInterface_objectRemoved(self: pointer, o: pointer): void {.importc: "QDesignerFormWindowInterface_objectRemoved".}
 proc fcQDesignerFormWindowInterface_connect_objectRemoved(self: pointer, slot: int, callback: proc (slot: int, o: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerFormWindowInterface_connect_objectRemoved".}
-proc fcQDesignerFormWindowInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowInterface_tr2".}
-proc fcQDesignerFormWindowInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerFormWindowInterface_tr3".}
-proc fcQDesignerFormWindowInterface_activateResourceFilePaths2(self: pointer, paths: struct_seaqt_array, errorCount: ptr cint): void {.importc: "QDesignerFormWindowInterface_activateResourceFilePaths2".}
+proc fcQDesignerFormWindowInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerFormWindowInterface_tr_s_c".}
+proc fcQDesignerFormWindowInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerFormWindowInterface_tr_s_c_n".}
+proc fcQDesignerFormWindowInterface_activateResourceFilePathsPathsErrorCount(self: pointer, paths: struct_seaqt_array, errorCount: ptr cint): void {.importc: "QDesignerFormWindowInterface_activateResourceFilePaths_paths_errorCount".}
 proc fcQDesignerFormWindowInterface_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QDesignerFormWindowInterface_protectedbase_updateMicroFocus".}
 proc fcQDesignerFormWindowInterface_protectedbase_create(self: pointer): void {.importc: "QDesignerFormWindowInterface_protectedbase_create".}
 proc fcQDesignerFormWindowInterface_protectedbase_destroy(self: pointer): void {.importc: "QDesignerFormWindowInterface_protectedbase_destroy".}
@@ -187,7 +187,7 @@ proc metacall*(self: gen_abstractformwindow_types.QDesignerFormWindowInterface, 
   fcQDesignerFormWindowInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractformwindow_types.QDesignerFormWindowInterface, s: cstring): string =
-  let v_ms = fcQDesignerFormWindowInterface_tr(s)
+  let v_ms = fcQDesignerFormWindowInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -344,10 +344,10 @@ proc isDirty*(self: gen_abstractformwindow_types.QDesignerFormWindowInterface): 
   fcQDesignerFormWindowInterface_isDirty(self.h)
 
 proc findFormWindow*(_: type gen_abstractformwindow_types.QDesignerFormWindowInterface, w: gen_qwidget_types.QWidget): gen_abstractformwindow_types.QDesignerFormWindowInterface =
-  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowInterface_findFormWindow(w.h), owned: false)
+  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowInterface_findFormWindowW(w.h), owned: false)
 
 proc findFormWindow*(_: type gen_abstractformwindow_types.QDesignerFormWindowInterface, obj: gen_qobject_types.QObject): gen_abstractformwindow_types.QDesignerFormWindowInterface =
-  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowInterface_findFormWindowWithObj(obj.h), owned: false)
+  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowInterface_findFormWindowObj(obj.h), owned: false)
 
 proc commandHistory*(self: gen_abstractformwindow_types.QDesignerFormWindowInterface): gen_qundostack_types.QUndoStack =
   gen_qundostack_types.QUndoStack(h: fcQDesignerFormWindowInterface_commandHistory(self.h), owned: false)
@@ -414,7 +414,7 @@ proc setFileName*(self: gen_abstractformwindow_types.QDesignerFormWindowInterfac
   fcQDesignerFormWindowInterface_setFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc setContents*(self: gen_abstractformwindow_types.QDesignerFormWindowInterface, contents: openArray[char]): bool =
-  fcQDesignerFormWindowInterface_setContentsWithContents(self.h, struct_seaqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))))
+  fcQDesignerFormWindowInterface_setContentsContents(self.h, struct_seaqt_string(data: if len(contents) > 0: addr contents[0] else: nil, len: csize_t(len(contents))))
 
 proc editWidgets*(self: gen_abstractformwindow_types.QDesignerFormWindowInterface): void =
   fcQDesignerFormWindowInterface_editWidgets(self.h)
@@ -424,7 +424,7 @@ proc activateResourceFilePaths*(self: gen_abstractformwindow_types.QDesignerForm
   for i in 0..<len(paths):
     paths_CArray[i] = struct_seaqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
-  fcQDesignerFormWindowInterface_activateResourceFilePaths(self.h, struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
+  fcQDesignerFormWindowInterface_activateResourceFilePathsPaths(self.h, struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
 proc mainContainerChanged*(self: gen_abstractformwindow_types.QDesignerFormWindowInterface, mainContainer: gen_qwidget_types.QWidget): void =
   fcQDesignerFormWindowInterface_mainContainerChanged(self.h, mainContainer.h)
@@ -702,13 +702,13 @@ proc onObjectRemoved*(self: gen_abstractformwindow_types.QDesignerFormWindowInte
   fcQDesignerFormWindowInterface_connect_objectRemoved(self.h, cast[int](addr tmp[]), fcQDesignerFormWindowInterface_slot_callback_objectRemoved, fcQDesignerFormWindowInterface_slot_callback_objectRemoved_release)
 
 proc tr*(_: type gen_abstractformwindow_types.QDesignerFormWindowInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerFormWindowInterface_tr2(s, c)
+  let v_ms = fcQDesignerFormWindowInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractformwindow_types.QDesignerFormWindowInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerFormWindowInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerFormWindowInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -718,7 +718,7 @@ proc activateResourceFilePaths*(self: gen_abstractformwindow_types.QDesignerForm
   for i in 0..<len(paths):
     paths_CArray[i] = struct_seaqt_string(data: if len(paths[i]) > 0: addr paths[i][0] else: nil, len: csize_t(len(paths[i])))
 
-  fcQDesignerFormWindowInterface_activateResourceFilePaths2(self.h, struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])), errorCount)
+  fcQDesignerFormWindowInterface_activateResourceFilePathsPathsErrorCount(self.h, struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])), errorCount)
 
 proc updateMicroFocus*(self: gen_abstractformwindow_types.QDesignerFormWindowInterface): void =
   fcQDesignerFormWindowInterface_protectedbase_updateMicroFocus(self.h)

@@ -57,14 +57,14 @@ type cQFileSelector*{.exportc: "QFileSelector", incompleteStruct.} = object
 proc fcQFileSelector_metaObject(self: pointer): pointer {.importc: "QFileSelector_metaObject".}
 proc fcQFileSelector_metacast(self: pointer, param1: cstring): pointer {.importc: "QFileSelector_metacast".}
 proc fcQFileSelector_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileSelector_metacall".}
-proc fcQFileSelector_tr(s: cstring): struct_seaqt_string {.importc: "QFileSelector_tr".}
-proc fcQFileSelector_select(self: pointer, filePath: struct_seaqt_string): struct_seaqt_string {.importc: "QFileSelector_select".}
-proc fcQFileSelector_selectWithFilePath(self: pointer, filePath: pointer): pointer {.importc: "QFileSelector_selectWithFilePath".}
+proc fcQFileSelector_trS(s: cstring): struct_seaqt_string {.importc: "QFileSelector_tr_s".}
+proc fcQFileSelector_select_QString(self: pointer, filePath: struct_seaqt_string): struct_seaqt_string {.importc: "QFileSelector_select_QString".}
+proc fcQFileSelector_select_QUrl(self: pointer, filePath: pointer): pointer {.importc: "QFileSelector_select_QUrl".}
 proc fcQFileSelector_extraSelectors(self: pointer): struct_seaqt_array {.importc: "QFileSelector_extraSelectors".}
 proc fcQFileSelector_setExtraSelectors(self: pointer, list: struct_seaqt_array): void {.importc: "QFileSelector_setExtraSelectors".}
 proc fcQFileSelector_allSelectors(self: pointer): struct_seaqt_array {.importc: "QFileSelector_allSelectors".}
-proc fcQFileSelector_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSelector_tr2".}
-proc fcQFileSelector_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSelector_tr3".}
+proc fcQFileSelector_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSelector_tr_s_c".}
+proc fcQFileSelector_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSelector_tr_s_c_n".}
 proc fcQFileSelector_vdata(self: pointer): ptr pointer {.importc: "QFileSelector_vdata".}
 proc fvdata_cQFileSelector(self: pointer): pointer {.importc: "vdata_QFileSelector".}
 
@@ -95,7 +95,7 @@ proc fcQFileSelector_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQFileSelector_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileSelector_protectedbase_receivers".}
 proc fcQFileSelector_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileSelector_protectedbase_isSignalConnected".}
 proc fcQFileSelector_new(vtbl: pointer, vdata: csize_t): ptr cQFileSelector {.importc: "QFileSelector_new".}
-proc fcQFileSelector_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileSelector {.importc: "QFileSelector_new2".}
+proc fcQFileSelector_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileSelector {.importc: "QFileSelector_new_parent".}
 proc fcQFileSelector_staticMetaObject(): pointer {.importc: "QFileSelector_staticMetaObject".}
 
 proc metaObject*(self: gen_qfileselector_types.QFileSelector): gen_qobjectdefs_types.QMetaObject =
@@ -108,19 +108,19 @@ proc metacall*(self: gen_qfileselector_types.QFileSelector, param1: cint, param2
   fcQFileSelector_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfileselector_types.QFileSelector, s: cstring): string =
-  let v_ms = fcQFileSelector_tr(s)
+  let v_ms = fcQFileSelector_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc select*(self: gen_qfileselector_types.QFileSelector, filePath: openArray[char]): string =
-  let v_ms = fcQFileSelector_select(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
+  let v_ms = fcQFileSelector_select_QString(self.h, struct_seaqt_string(data: if len(filePath) > 0: addr filePath[0] else: nil, len: csize_t(len(filePath))))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc select*(self: gen_qfileselector_types.QFileSelector, filePath: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileSelector_selectWithFilePath(self.h, filePath.h), owned: true)
+  gen_qurl_types.QUrl(h: fcQFileSelector_select_QUrl(self.h, filePath.h), owned: true)
 
 proc extraSelectors*(self: gen_qfileselector_types.QFileSelector): seq[string] =
   var v_ma = fcQFileSelector_extraSelectors(self.h)
@@ -154,13 +154,13 @@ proc allSelectors*(self: gen_qfileselector_types.QFileSelector): seq[string] =
   vx_ret
 
 proc tr*(_: type gen_qfileselector_types.QFileSelector, s: cstring, c: cstring): string =
-  let v_ms = fcQFileSelector_tr2(s, c)
+  let v_ms = fcQFileSelector_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qfileselector_types.QFileSelector, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQFileSelector_tr3(s, c, n)
+  let v_ms = fcQFileSelector_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

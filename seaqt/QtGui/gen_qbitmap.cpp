@@ -35,7 +35,7 @@ public:
 	VirtualQBitmap(const QBitmap_VTable* vtbl, int w, int h): QBitmap(w, h), vtbl(vtbl) {}
 	VirtualQBitmap(const QBitmap_VTable* vtbl, const QSize& param1): QBitmap(param1), vtbl(vtbl) {}
 	VirtualQBitmap(const QBitmap_VTable* vtbl, const QString& fileName): QBitmap(fileName), vtbl(vtbl) {}
-	VirtualQBitmap(const QBitmap_VTable* vtbl, const QBitmap& param1): QBitmap(param1), vtbl(vtbl) {}
+	VirtualQBitmap(const QBitmap_VTable* vtbl, const QBitmap& from): QBitmap(from), vtbl(vtbl) {}
 	VirtualQBitmap(const QBitmap_VTable* vtbl, const QString& fileName, const char* format): QBitmap(fileName, format), vtbl(vtbl) {}
 
 	virtual ~VirtualQBitmap() override { if(vtbl->destructor) vtbl->destructor(this); }
@@ -118,33 +118,33 @@ VirtualQBitmap* QBitmap_new(const QBitmap_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQBitmap(vtbl) : nullptr;
 }
 
-VirtualQBitmap* QBitmap_new2(const QBitmap_VTable* vtbl, size_t vdata, QPixmap* param1) {
+VirtualQBitmap* QBitmap_new_QPixmap(const QBitmap_VTable* vtbl, size_t vdata, QPixmap* param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBitmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQBitmap(vtbl, *param1) : nullptr;
 }
 
-VirtualQBitmap* QBitmap_new3(const QBitmap_VTable* vtbl, size_t vdata, int w, int h) {
+VirtualQBitmap* QBitmap_new_int_int(const QBitmap_VTable* vtbl, size_t vdata, int w, int h) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBitmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQBitmap(vtbl, static_cast<int>(w), static_cast<int>(h)) : nullptr;
 }
 
-VirtualQBitmap* QBitmap_new4(const QBitmap_VTable* vtbl, size_t vdata, QSize* param1) {
+VirtualQBitmap* QBitmap_new_QSize(const QBitmap_VTable* vtbl, size_t vdata, QSize* param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBitmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQBitmap(vtbl, *param1) : nullptr;
 }
 
-VirtualQBitmap* QBitmap_new5(const QBitmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
+VirtualQBitmap* QBitmap_new_QString(const QBitmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBitmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQBitmap(vtbl, fileName_QString) : nullptr;
 }
 
-VirtualQBitmap* QBitmap_new6(const QBitmap_VTable* vtbl, size_t vdata, QBitmap* param1) {
+VirtualQBitmap* QBitmap_new_QBitmap(const QBitmap_VTable* vtbl, size_t vdata, QBitmap* from) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBitmap>() + vdata, std::nothrow);
-	return _mem_ ? new (_mem_)VirtualQBitmap(vtbl, *param1) : nullptr;
+	return _mem_ ? new (_mem_)VirtualQBitmap(vtbl, *from) : nullptr;
 }
 
-VirtualQBitmap* QBitmap_new7(const QBitmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format) {
+VirtualQBitmap* QBitmap_new_QString_char(const QBitmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQBitmap>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQBitmap(vtbl, fileName_QString, format) : nullptr;
@@ -154,7 +154,7 @@ void QBitmap_virtbase(QBitmap* src, QPixmap** outptr_QPixmap) {
 	*outptr_QPixmap = static_cast<QPixmap*>(src);
 }
 
-void QBitmap_operatorAssign(QBitmap* self, QPixmap* param1) {
+void QBitmap_operatorAssign_QPixmap(QBitmap* self, QPixmap* param1) {
 	self->operator=(*param1);
 }
 
@@ -170,11 +170,11 @@ void QBitmap_clear(QBitmap* self) {
 	self->clear();
 }
 
-QBitmap* QBitmap_fromImage(QImage* image) {
+QBitmap* QBitmap_fromImage_image(QImage* image) {
 	return new QBitmap(QBitmap::fromImage(*image));
 }
 
-QBitmap* QBitmap_fromData(QSize* size, const unsigned char* bits) {
+QBitmap* QBitmap_fromData_size_bits(QSize* size, const unsigned char* bits) {
 	return new QBitmap(QBitmap::fromData(*size, static_cast<const uchar*>(bits)));
 }
 
@@ -186,15 +186,15 @@ QBitmap* QBitmap_transformed(const QBitmap* self, QTransform* matrix) {
 	return new QBitmap(self->transformed(*matrix));
 }
 
-void QBitmap_operatorAssignWithQBitmap(QBitmap* self, QBitmap* param1) {
-	self->operator=(*param1);
+void QBitmap_operatorAssign_QBitmap(QBitmap* self, QBitmap* from) {
+	self->operator=(*from);
 }
 
-QBitmap* QBitmap_fromImage2(QImage* image, int flags) {
+QBitmap* QBitmap_fromImage_image_flags(QImage* image, int flags) {
 	return new QBitmap(QBitmap::fromImage(*image, static_cast<Qt::ImageConversionFlags>(flags)));
 }
 
-QBitmap* QBitmap_fromData2(QSize* size, const unsigned char* bits, int monoFormat) {
+QBitmap* QBitmap_fromData_size_bits_monoFormat(QSize* size, const unsigned char* bits, int monoFormat) {
 	return new QBitmap(QBitmap::fromData(*size, static_cast<const uchar*>(bits), static_cast<QImage::Format>(monoFormat)));
 }
 

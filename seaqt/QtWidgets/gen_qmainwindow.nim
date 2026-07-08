@@ -90,7 +90,7 @@ type cQMainWindow*{.exportc: "QMainWindow", incompleteStruct.} = object
 proc fcQMainWindow_metaObject(self: pointer): pointer {.importc: "QMainWindow_metaObject".}
 proc fcQMainWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QMainWindow_metacast".}
 proc fcQMainWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMainWindow_metacall".}
-proc fcQMainWindow_tr(s: cstring): struct_seaqt_string {.importc: "QMainWindow_tr".}
+proc fcQMainWindow_trS(s: cstring): struct_seaqt_string {.importc: "QMainWindow_tr_s".}
 proc fcQMainWindow_iconSize(self: pointer): pointer {.importc: "QMainWindow_iconSize".}
 proc fcQMainWindow_setIconSize(self: pointer, iconSize: pointer): void {.importc: "QMainWindow_setIconSize".}
 proc fcQMainWindow_toolButtonStyle(self: pointer): cint {.importc: "QMainWindow_toolButtonStyle".}
@@ -119,17 +119,17 @@ proc fcQMainWindow_setCorner(self: pointer, corner: cint, area: cint): void {.im
 proc fcQMainWindow_corner(self: pointer, corner: cint): cint {.importc: "QMainWindow_corner".}
 proc fcQMainWindow_addToolBarBreak(self: pointer): void {.importc: "QMainWindow_addToolBarBreak".}
 proc fcQMainWindow_insertToolBarBreak(self: pointer, before: pointer): void {.importc: "QMainWindow_insertToolBarBreak".}
-proc fcQMainWindow_addToolBar(self: pointer, area: cint, toolbar: pointer): void {.importc: "QMainWindow_addToolBar".}
-proc fcQMainWindow_addToolBarWithToolbar(self: pointer, toolbar: pointer): void {.importc: "QMainWindow_addToolBarWithToolbar".}
-proc fcQMainWindow_addToolBarWithTitle(self: pointer, title: struct_seaqt_string): pointer {.importc: "QMainWindow_addToolBarWithTitle".}
+proc fcQMainWindow_addToolBarAreaToolbar(self: pointer, area: cint, toolbar: pointer): void {.importc: "QMainWindow_addToolBar_area_toolbar".}
+proc fcQMainWindow_addToolBarToolbar(self: pointer, toolbar: pointer): void {.importc: "QMainWindow_addToolBar_toolbar".}
+proc fcQMainWindow_addToolBarTitle(self: pointer, title: struct_seaqt_string): pointer {.importc: "QMainWindow_addToolBar_title".}
 proc fcQMainWindow_insertToolBar(self: pointer, before: pointer, toolbar: pointer): void {.importc: "QMainWindow_insertToolBar".}
 proc fcQMainWindow_removeToolBar(self: pointer, toolbar: pointer): void {.importc: "QMainWindow_removeToolBar".}
 proc fcQMainWindow_removeToolBarBreak(self: pointer, before: pointer): void {.importc: "QMainWindow_removeToolBarBreak".}
 proc fcQMainWindow_unifiedTitleAndToolBarOnMac(self: pointer): bool {.importc: "QMainWindow_unifiedTitleAndToolBarOnMac".}
 proc fcQMainWindow_toolBarArea(self: pointer, toolbar: pointer): cint {.importc: "QMainWindow_toolBarArea".}
 proc fcQMainWindow_toolBarBreak(self: pointer, toolbar: pointer): bool {.importc: "QMainWindow_toolBarBreak".}
-proc fcQMainWindow_addDockWidget(self: pointer, area: cint, dockwidget: pointer): void {.importc: "QMainWindow_addDockWidget".}
-proc fcQMainWindow_addDockWidget2(self: pointer, area: cint, dockwidget: pointer, orientation: cint): void {.importc: "QMainWindow_addDockWidget2".}
+proc fcQMainWindow_addDockWidgetAreaDockwidget(self: pointer, area: cint, dockwidget: pointer): void {.importc: "QMainWindow_addDockWidget_area_dockwidget".}
+proc fcQMainWindow_addDockWidgetAreaDockwidgetOrientation(self: pointer, area: cint, dockwidget: pointer, orientation: cint): void {.importc: "QMainWindow_addDockWidget_area_dockwidget_orientation".}
 proc fcQMainWindow_splitDockWidget(self: pointer, after: pointer, dockwidget: pointer, orientation: cint): void {.importc: "QMainWindow_splitDockWidget".}
 proc fcQMainWindow_tabifyDockWidget(self: pointer, first: pointer, second: pointer): void {.importc: "QMainWindow_tabifyDockWidget".}
 proc fcQMainWindow_tabifiedDockWidgets(self: pointer, dockwidget: pointer): struct_seaqt_array {.importc: "QMainWindow_tabifiedDockWidgets".}
@@ -138,7 +138,7 @@ proc fcQMainWindow_restoreDockWidget(self: pointer, dockwidget: pointer): bool {
 proc fcQMainWindow_dockWidgetArea(self: pointer, dockwidget: pointer): cint {.importc: "QMainWindow_dockWidgetArea".}
 proc fcQMainWindow_resizeDocks(self: pointer, docks: struct_seaqt_array, sizes: struct_seaqt_array, orientation: cint): void {.importc: "QMainWindow_resizeDocks".}
 proc fcQMainWindow_saveState(self: pointer): struct_seaqt_string {.importc: "QMainWindow_saveState".}
-proc fcQMainWindow_restoreState(self: pointer, state: struct_seaqt_string): bool {.importc: "QMainWindow_restoreState".}
+proc fcQMainWindow_restoreStateState(self: pointer, state: struct_seaqt_string): bool {.importc: "QMainWindow_restoreState_state".}
 proc fcQMainWindow_createPopupMenu(self: pointer): pointer {.importc: "QMainWindow_createPopupMenu".}
 proc fcQMainWindow_setAnimated(self: pointer, enabled: bool): void {.importc: "QMainWindow_setAnimated".}
 proc fcQMainWindow_setDockNestingEnabled(self: pointer, enabled: bool): void {.importc: "QMainWindow_setDockNestingEnabled".}
@@ -149,11 +149,11 @@ proc fcQMainWindow_toolButtonStyleChanged(self: pointer, toolButtonStyle: cint):
 proc fcQMainWindow_connect_toolButtonStyleChanged(self: pointer, slot: int, callback: proc (slot: int, toolButtonStyle: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMainWindow_connect_toolButtonStyleChanged".}
 proc fcQMainWindow_tabifiedDockWidgetActivated(self: pointer, dockWidget: pointer): void {.importc: "QMainWindow_tabifiedDockWidgetActivated".}
 proc fcQMainWindow_connect_tabifiedDockWidgetActivated(self: pointer, slot: int, callback: proc (slot: int, dockWidget: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMainWindow_connect_tabifiedDockWidgetActivated".}
-proc fcQMainWindow_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMainWindow_tr2".}
-proc fcQMainWindow_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMainWindow_tr3".}
-proc fcQMainWindow_addToolBarBreakWithArea(self: pointer, area: cint): void {.importc: "QMainWindow_addToolBarBreakWithArea".}
-proc fcQMainWindow_saveStateWithVersion(self: pointer, version: cint): struct_seaqt_string {.importc: "QMainWindow_saveStateWithVersion".}
-proc fcQMainWindow_restoreState2(self: pointer, state: struct_seaqt_string, version: cint): bool {.importc: "QMainWindow_restoreState2".}
+proc fcQMainWindow_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMainWindow_tr_s_c".}
+proc fcQMainWindow_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMainWindow_tr_s_c_n".}
+proc fcQMainWindow_addToolBarBreakArea(self: pointer, area: cint): void {.importc: "QMainWindow_addToolBarBreak_area".}
+proc fcQMainWindow_saveStateVersion(self: pointer, version: cint): struct_seaqt_string {.importc: "QMainWindow_saveState_version".}
+proc fcQMainWindow_restoreStateStateVersion(self: pointer, state: struct_seaqt_string, version: cint): bool {.importc: "QMainWindow_restoreState_state_version".}
 proc fcQMainWindow_vdata(self: pointer): ptr pointer {.importc: "QMainWindow_vdata".}
 proc fvdata_cQMainWindow(self: pointer): pointer {.importc: "vdata_QMainWindow".}
 
@@ -271,8 +271,8 @@ proc fcQMainWindow_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQMainWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMainWindow_protectedbase_receivers".}
 proc fcQMainWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMainWindow_protectedbase_isSignalConnected".}
 proc fcQMainWindow_new(vtbl: pointer, vdata: csize_t): ptr cQMainWindow {.importc: "QMainWindow_new".}
-proc fcQMainWindow_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMainWindow {.importc: "QMainWindow_new2".}
-proc fcQMainWindow_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQMainWindow {.importc: "QMainWindow_new3".}
+proc fcQMainWindow_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMainWindow {.importc: "QMainWindow_new_parent".}
+proc fcQMainWindow_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQMainWindow {.importc: "QMainWindow_new_parent_flags".}
 proc fcQMainWindow_staticMetaObject(): pointer {.importc: "QMainWindow_staticMetaObject".}
 
 proc metaObject*(self: gen_qmainwindow_types.QMainWindow): gen_qobjectdefs_types.QMetaObject =
@@ -285,7 +285,7 @@ proc metacall*(self: gen_qmainwindow_types.QMainWindow, param1: cint, param2: ci
   fcQMainWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmainwindow_types.QMainWindow, s: cstring): string =
-  let v_ms = fcQMainWindow_tr(s)
+  let v_ms = fcQMainWindow_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -375,13 +375,13 @@ proc insertToolBarBreak*(self: gen_qmainwindow_types.QMainWindow, before: gen_qt
   fcQMainWindow_insertToolBarBreak(self.h, before.h)
 
 proc addToolBar*(self: gen_qmainwindow_types.QMainWindow, area: cint, toolbar: gen_qtoolbar_types.QToolBar): void =
-  fcQMainWindow_addToolBar(self.h, cint(area), toolbar.h)
+  fcQMainWindow_addToolBarAreaToolbar(self.h, cint(area), toolbar.h)
 
 proc addToolBar*(self: gen_qmainwindow_types.QMainWindow, toolbar: gen_qtoolbar_types.QToolBar): void =
-  fcQMainWindow_addToolBarWithToolbar(self.h, toolbar.h)
+  fcQMainWindow_addToolBarToolbar(self.h, toolbar.h)
 
 proc addToolBar*(self: gen_qmainwindow_types.QMainWindow, title: openArray[char]): gen_qtoolbar_types.QToolBar =
-  gen_qtoolbar_types.QToolBar(h: fcQMainWindow_addToolBarWithTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
+  gen_qtoolbar_types.QToolBar(h: fcQMainWindow_addToolBarTitle(self.h, struct_seaqt_string(data: if len(title) > 0: addr title[0] else: nil, len: csize_t(len(title)))), owned: false)
 
 proc insertToolBar*(self: gen_qmainwindow_types.QMainWindow, before: gen_qtoolbar_types.QToolBar, toolbar: gen_qtoolbar_types.QToolBar): void =
   fcQMainWindow_insertToolBar(self.h, before.h, toolbar.h)
@@ -402,10 +402,10 @@ proc toolBarBreak*(self: gen_qmainwindow_types.QMainWindow, toolbar: gen_qtoolba
   fcQMainWindow_toolBarBreak(self.h, toolbar.h)
 
 proc addDockWidget*(self: gen_qmainwindow_types.QMainWindow, area: cint, dockwidget: gen_qdockwidget_types.QDockWidget): void =
-  fcQMainWindow_addDockWidget(self.h, cint(area), dockwidget.h)
+  fcQMainWindow_addDockWidgetAreaDockwidget(self.h, cint(area), dockwidget.h)
 
 proc addDockWidget*(self: gen_qmainwindow_types.QMainWindow, area: cint, dockwidget: gen_qdockwidget_types.QDockWidget, orientation: cint): void =
-  fcQMainWindow_addDockWidget2(self.h, cint(area), dockwidget.h, cint(orientation))
+  fcQMainWindow_addDockWidgetAreaDockwidgetOrientation(self.h, cint(area), dockwidget.h, cint(orientation))
 
 proc splitDockWidget*(self: gen_qmainwindow_types.QMainWindow, after: gen_qdockwidget_types.QDockWidget, dockwidget: gen_qdockwidget_types.QDockWidget, orientation: cint): void =
   fcQMainWindow_splitDockWidget(self.h, after.h, dockwidget.h, cint(orientation))
@@ -449,7 +449,7 @@ proc saveState*(self: gen_qmainwindow_types.QMainWindow): seq[byte] =
   vx_ret
 
 proc restoreState*(self: gen_qmainwindow_types.QMainWindow, state: openArray[byte]): bool =
-  fcQMainWindow_restoreState(self.h, struct_seaqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))))
+  fcQMainWindow_restoreStateState(self.h, struct_seaqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))))
 
 proc createPopupMenu*(self: gen_qmainwindow_types.QMainWindow): gen_qmenu_types.QMenu =
   gen_qmenu_types.QMenu(h: fcQMainWindow_createPopupMenu(self.h), owned: false)
@@ -524,28 +524,28 @@ proc onTabifiedDockWidgetActivated*(self: gen_qmainwindow_types.QMainWindow, slo
   fcQMainWindow_connect_tabifiedDockWidgetActivated(self.h, cast[int](addr tmp[]), fcQMainWindow_slot_callback_tabifiedDockWidgetActivated, fcQMainWindow_slot_callback_tabifiedDockWidgetActivated_release)
 
 proc tr*(_: type gen_qmainwindow_types.QMainWindow, s: cstring, c: cstring): string =
-  let v_ms = fcQMainWindow_tr2(s, c)
+  let v_ms = fcQMainWindow_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmainwindow_types.QMainWindow, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMainWindow_tr3(s, c, n)
+  let v_ms = fcQMainWindow_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addToolBarBreak*(self: gen_qmainwindow_types.QMainWindow, area: cint): void =
-  fcQMainWindow_addToolBarBreakWithArea(self.h, cint(area))
+  fcQMainWindow_addToolBarBreakArea(self.h, cint(area))
 
 proc saveState*(self: gen_qmainwindow_types.QMainWindow, version: cint): seq[byte] =
-  var v_bytearray = fcQMainWindow_saveStateWithVersion(self.h, version)
+  var v_bytearray = fcQMainWindow_saveStateVersion(self.h, version)
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
 proc restoreState*(self: gen_qmainwindow_types.QMainWindow, state: openArray[byte], version: cint): bool =
-  fcQMainWindow_restoreState2(self.h, struct_seaqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))), version)
+  fcQMainWindow_restoreStateStateVersion(self.h, struct_seaqt_string(data: if len(state) > 0: addr state[0] else: nil, len: csize_t(len(state))), version)
 
 type QMainWindowmetaObjectProc* = proc(self: QMainWindow): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QMainWindowmetacastProc* = proc(self: QMainWindow, param1: cstring): pointer {.raises: [], gcsafe.}

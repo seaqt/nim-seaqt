@@ -139,14 +139,14 @@ type cQAbstractSocket*{.exportc: "QAbstractSocket", incompleteStruct.} = object
 proc fcQAbstractSocket_metaObject(self: pointer): pointer {.importc: "QAbstractSocket_metaObject".}
 proc fcQAbstractSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractSocket_metacast".}
 proc fcQAbstractSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractSocket_metacall".}
-proc fcQAbstractSocket_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractSocket_tr".}
+proc fcQAbstractSocket_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractSocket_tr_s".}
 proc fcQAbstractSocket_resume(self: pointer): void {.importc: "QAbstractSocket_resume".}
 proc fcQAbstractSocket_pauseMode(self: pointer): cint {.importc: "QAbstractSocket_pauseMode".}
 proc fcQAbstractSocket_setPauseMode(self: pointer, pauseMode: cint): void {.importc: "QAbstractSocket_setPauseMode".}
-proc fcQAbstractSocket_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QAbstractSocket_bind".}
-proc fcQAbstractSocket_bind2(self: pointer): bool {.importc: "QAbstractSocket_bind2".}
-proc fcQAbstractSocket_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QAbstractSocket_connectToHost".}
-proc fcQAbstractSocket_connectToHost2(self: pointer, address: pointer, port: cushort): void {.importc: "QAbstractSocket_connectToHost2".}
+proc fcQAbstractSocket_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QAbstractSocket_bind_address_port_mode".}
+proc fcQAbstractSocket_bindX(self: pointer): bool {.importc: "QAbstractSocket_bind".}
+proc fcQAbstractSocket_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QAbstractSocket_connectToHost_hostName_port_mode_protocol".}
+proc fcQAbstractSocket_connectToHostAddressPort(self: pointer, address: pointer, port: cushort): void {.importc: "QAbstractSocket_connectToHost_address_port".}
 proc fcQAbstractSocket_disconnectFromHost(self: pointer): void {.importc: "QAbstractSocket_disconnectFromHost".}
 proc fcQAbstractSocket_isValid(self: pointer): bool {.importc: "QAbstractSocket_isValid".}
 proc fcQAbstractSocket_bytesAvailable(self: pointer): clonglong {.importc: "QAbstractSocket_bytesAvailable".}
@@ -189,11 +189,11 @@ proc fcQAbstractSocket_errorOccurred(self: pointer, param1: cint): void {.import
 proc fcQAbstractSocket_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_errorOccurred".}
 proc fcQAbstractSocket_proxyAuthenticationRequired(self: pointer, proxy: pointer, authenticator: pointer): void {.importc: "QAbstractSocket_proxyAuthenticationRequired".}
 proc fcQAbstractSocket_connect_proxyAuthenticationRequired(self: pointer, slot: int, callback: proc (slot: int, proxy: pointer, authenticator: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_proxyAuthenticationRequired".}
-proc fcQAbstractSocket_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSocket_tr2".}
-proc fcQAbstractSocket_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSocket_tr3".}
-proc fcQAbstractSocket_bindWithPort(self: pointer, port: cushort): bool {.importc: "QAbstractSocket_bindWithPort".}
-proc fcQAbstractSocket_bind3(self: pointer, port: cushort, mode: cint): bool {.importc: "QAbstractSocket_bind3".}
-proc fcQAbstractSocket_connectToHost3(self: pointer, address: pointer, port: cushort, mode: cint): void {.importc: "QAbstractSocket_connectToHost3".}
+proc fcQAbstractSocket_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractSocket_tr_s_c".}
+proc fcQAbstractSocket_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractSocket_tr_s_c_n".}
+proc fcQAbstractSocket_bindPort(self: pointer, port: cushort): bool {.importc: "QAbstractSocket_bind_port".}
+proc fcQAbstractSocket_bindPortMode(self: pointer, port: cushort, mode: cint): bool {.importc: "QAbstractSocket_bind_port_mode".}
+proc fcQAbstractSocket_connectToHostAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): void {.importc: "QAbstractSocket_connectToHost_address_port_mode".}
 proc fcQAbstractSocket_vdata(self: pointer): ptr pointer {.importc: "QAbstractSocket_vdata".}
 proc fvdata_cQAbstractSocket(self: pointer): pointer {.importc: "vdata_QAbstractSocket".}
 
@@ -203,8 +203,8 @@ type cQAbstractSocketVTable {.pure.} = object
   metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
   metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
   resume*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
-  bindX*: proc(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl, raises: [], gcsafe.}
-  connectToHost*: proc(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl, raises: [], gcsafe.}
+  bindAddressPortMode*: proc(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  connectToHostHostNamePortModeProtocol*: proc(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl, raises: [], gcsafe.}
   disconnectFromHost*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   bytesAvailable*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
   bytesToWrite*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
@@ -241,8 +241,8 @@ proc fcQAbstractSocket_virtualbase_metaObject(self: pointer): pointer {.importc:
 proc fcQAbstractSocket_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractSocket_virtualbase_metacast".}
 proc fcQAbstractSocket_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractSocket_virtualbase_metacall".}
 proc fcQAbstractSocket_virtualbase_resume(self: pointer): void {.importc: "QAbstractSocket_virtualbase_resume".}
-proc fcQAbstractSocket_virtualbase_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QAbstractSocket_virtualbase_bind".}
-proc fcQAbstractSocket_virtualbase_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QAbstractSocket_virtualbase_connectToHost".}
+proc fcQAbstractSocket_virtualbase_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QAbstractSocket_virtualbase_bind_address_port_mode".}
+proc fcQAbstractSocket_virtualbase_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QAbstractSocket_virtualbase_connectToHost_hostName_port_mode_protocol".}
 proc fcQAbstractSocket_virtualbase_disconnectFromHost(self: pointer): void {.importc: "QAbstractSocket_virtualbase_disconnectFromHost".}
 proc fcQAbstractSocket_virtualbase_bytesAvailable(self: pointer): clonglong {.importc: "QAbstractSocket_virtualbase_bytesAvailable".}
 proc fcQAbstractSocket_virtualbase_bytesToWrite(self: pointer): clonglong {.importc: "QAbstractSocket_virtualbase_bytesToWrite".}
@@ -301,7 +301,7 @@ proc metacall*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint, pa
   fcQAbstractSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring): string =
-  let v_ms = fcQAbstractSocket_tr(s)
+  let v_ms = fcQAbstractSocket_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -316,16 +316,16 @@ proc setPauseMode*(self: gen_qabstractsocket_types.QAbstractSocket, pauseMode: c
   fcQAbstractSocket_setPauseMode(self.h, cint(pauseMode))
 
 proc bindX*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool =
-  fcQAbstractSocket_bindX(self.h, address.h, port, cint(mode))
+  fcQAbstractSocket_bindAddressPortMode(self.h, address.h, port, cint(mode))
 
 proc bindX*(self: gen_qabstractsocket_types.QAbstractSocket): bool =
-  fcQAbstractSocket_bind2(self.h)
+  fcQAbstractSocket_bindX(self.h)
 
 proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
-  fcQAbstractSocket_connectToHost(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+  fcQAbstractSocket_connectToHostHostNamePortModeProtocol(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort): void =
-  fcQAbstractSocket_connectToHost2(self.h, address.h, port)
+  fcQAbstractSocket_connectToHostAddressPort(self.h, address.h, port)
 
 proc disconnectFromHost*(self: gen_qabstractsocket_types.QAbstractSocket): void =
   fcQAbstractSocket_disconnectFromHost(self.h)
@@ -540,32 +540,32 @@ proc onProxyAuthenticationRequired*(self: gen_qabstractsocket_types.QAbstractSoc
   fcQAbstractSocket_connect_proxyAuthenticationRequired(self.h, cast[int](addr tmp[]), fcQAbstractSocket_slot_callback_proxyAuthenticationRequired, fcQAbstractSocket_slot_callback_proxyAuthenticationRequired_release)
 
 proc tr*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractSocket_tr2(s, c)
+  let v_ms = fcQAbstractSocket_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractSocket_tr3(s, c, n)
+  let v_ms = fcQAbstractSocket_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc bindX*(self: gen_qabstractsocket_types.QAbstractSocket, port: cushort): bool =
-  fcQAbstractSocket_bindWithPort(self.h, port)
+  fcQAbstractSocket_bindPort(self.h, port)
 
 proc bindX*(self: gen_qabstractsocket_types.QAbstractSocket, port: cushort, mode: cint): bool =
-  fcQAbstractSocket_bind3(self.h, port, cint(mode))
+  fcQAbstractSocket_bindPortMode(self.h, port, cint(mode))
 
 proc connectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): void =
-  fcQAbstractSocket_connectToHost3(self.h, address.h, port, cint(mode))
+  fcQAbstractSocket_connectToHostAddressPortMode(self.h, address.h, port, cint(mode))
 
 type QAbstractSocketmetaObjectProc* = proc(self: QAbstractSocket): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractSocketmetacastProc* = proc(self: QAbstractSocket, param1: cstring): pointer {.raises: [], gcsafe.}
 type QAbstractSocketmetacallProc* = proc(self: QAbstractSocket, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
 type QAbstractSocketresumeProc* = proc(self: QAbstractSocket): void {.raises: [], gcsafe.}
-type QAbstractSocketbindXProc* = proc(self: QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
-type QAbstractSocketconnectToHostProc* = proc(self: QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QAbstractSocketbindAddressPortModeProc* = proc(self: QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
+type QAbstractSocketconnectToHostHostNamePortModeProtocolProc* = proc(self: QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
 type QAbstractSocketdisconnectFromHostProc* = proc(self: QAbstractSocket): void {.raises: [], gcsafe.}
 type QAbstractSocketbytesAvailableProc* = proc(self: QAbstractSocket): clonglong {.raises: [], gcsafe.}
 type QAbstractSocketbytesToWriteProc* = proc(self: QAbstractSocket): clonglong {.raises: [], gcsafe.}
@@ -605,8 +605,8 @@ type QAbstractSocketVTable* {.inheritable, pure.} = object
   metacast*: QAbstractSocketmetacastProc
   metacall*: QAbstractSocketmetacallProc
   resume*: QAbstractSocketresumeProc
-  bindX*: QAbstractSocketbindXProc
-  connectToHost*: QAbstractSocketconnectToHostProc
+  bindAddressPortMode*: QAbstractSocketbindAddressPortModeProc
+  connectToHostHostNamePortModeProtocol*: QAbstractSocketconnectToHostHostNamePortModeProtocolProc
   disconnectFromHost*: QAbstractSocketdisconnectFromHostProc
   bytesAvailable*: QAbstractSocketbytesAvailableProc
   bytesToWrite*: QAbstractSocketbytesToWriteProc
@@ -653,10 +653,10 @@ proc QAbstractSocketresume*(self: gen_qabstractsocket_types.QAbstractSocket): vo
   fcQAbstractSocket_virtualbase_resume(self.h)
 
 proc QAbstractSocketbindX*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool =
-  fcQAbstractSocket_virtualbase_bindX(self.h, address.h, port, cint(mode))
+  fcQAbstractSocket_virtualbase_bindAddressPortMode(self.h, address.h, port, cint(mode))
 
 proc QAbstractSocketconnectToHost*(self: gen_qabstractsocket_types.QAbstractSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
-  fcQAbstractSocket_virtualbase_connectToHost(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+  fcQAbstractSocket_virtualbase_connectToHostHostNamePortModeProtocol(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc QAbstractSocketdisconnectFromHost*(self: gen_qabstractsocket_types.QAbstractSocket): void =
   fcQAbstractSocket_virtualbase_disconnectFromHost(self.h)
@@ -785,16 +785,16 @@ proc fcQAbstractSocket_vtable_callback_resume(self: pointer): void {.cdecl.} =
   let self = QAbstractSocket(h: self)
   vtbl[].resume(self)
 
-proc fcQAbstractSocket_vtable_callback_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self)[])
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
   let slotval2 = port
   let slotval3 = cint(mode)
-  var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].bindAddressPortMode(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQAbstractSocket_vtable_callback_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+proc fcQAbstractSocket_vtable_callback_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self)[])
   let self = QAbstractSocket(h: self)
   let vhostName_ms = hostName
@@ -804,7 +804,7 @@ proc fcQAbstractSocket_vtable_callback_connectToHost(self: pointer, hostName: st
   let slotval2 = port
   let slotval3 = cint(mode)
   let slotval4 = cint(protocol)
-  vtbl[].connectToHost(self, slotval1, slotval2, slotval3, slotval4)
+  vtbl[].connectToHostHostNamePortModeProtocol(self, slotval1, slotval2, slotval3, slotval4)
 
 proc fcQAbstractSocket_vtable_callback_disconnectFromHost(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSocketVTable](fcQAbstractSocket_vdata(self)[])
@@ -1126,7 +1126,7 @@ proc fcQAbstractSocket_method_callback_resume(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self)[])
   inst.resume()
 
-proc fcQAbstractSocket_method_callback_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
+proc fcQAbstractSocket_method_callback_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self)[])
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
   let slotval2 = port
@@ -1134,7 +1134,7 @@ proc fcQAbstractSocket_method_callback_bindX(self: pointer, address: pointer, po
   var virtualReturn = inst.bindX(slotval1, slotval2, slotval3)
   virtualReturn
 
-proc fcQAbstractSocket_method_callback_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+proc fcQAbstractSocket_method_callback_connectToHostHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
   let inst = cast[VirtualQAbstractSocket](fcQAbstractSocket_vdata(self)[])
   let vhostName_ms = hostName
   let vhostNamex_ret = string.fromBytes(vhostName_ms)
@@ -1383,10 +1383,10 @@ proc create*(T: type gen_qabstractsocket_types.QAbstractSocket,
     vtbl[].vtbl.metacall = fcQAbstractSocket_vtable_callback_metacall
   if not isNil(vtbl[].resume):
     vtbl[].vtbl.resume = fcQAbstractSocket_vtable_callback_resume
-  if not isNil(vtbl[].bindX):
-    vtbl[].vtbl.bindX = fcQAbstractSocket_vtable_callback_bindX
-  if not isNil(vtbl[].connectToHost):
-    vtbl[].vtbl.connectToHost = fcQAbstractSocket_vtable_callback_connectToHost
+  if not isNil(vtbl[].bindAddressPortMode):
+    vtbl[].vtbl.bindAddressPortMode = fcQAbstractSocket_vtable_callback_bindAddressPortMode
+  if not isNil(vtbl[].connectToHostHostNamePortModeProtocol):
+    vtbl[].vtbl.connectToHostHostNamePortModeProtocol = fcQAbstractSocket_vtable_callback_connectToHostHostNamePortModeProtocol
   if not isNil(vtbl[].disconnectFromHost):
     vtbl[].vtbl.disconnectFromHost = fcQAbstractSocket_vtable_callback_disconnectFromHost
   if not isNil(vtbl[].bytesAvailable):
@@ -1464,8 +1464,8 @@ const cQAbstractSocket_mvtbl = cQAbstractSocketVTable(
   metacast: fcQAbstractSocket_method_callback_metacast,
   metacall: fcQAbstractSocket_method_callback_metacall,
   resume: fcQAbstractSocket_method_callback_resume,
-  bindX: fcQAbstractSocket_method_callback_bindX,
-  connectToHost: fcQAbstractSocket_method_callback_connectToHost,
+  bindAddressPortMode: fcQAbstractSocket_method_callback_bindAddressPortMode,
+  connectToHostHostNamePortModeProtocol: fcQAbstractSocket_method_callback_connectToHostHostNamePortModeProtocol,
   disconnectFromHost: fcQAbstractSocket_method_callback_disconnectFromHost,
   bytesAvailable: fcQAbstractSocket_method_callback_bytesAvailable,
   bytesToWrite: fcQAbstractSocket_method_callback_bytesToWrite,

@@ -75,12 +75,12 @@ type cQDesignerActionEditorInterface*{.exportc: "QDesignerActionEditorInterface"
 proc fcQDesignerActionEditorInterface_metaObject(self: pointer): pointer {.importc: "QDesignerActionEditorInterface_metaObject".}
 proc fcQDesignerActionEditorInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerActionEditorInterface_metacast".}
 proc fcQDesignerActionEditorInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerActionEditorInterface_metacall".}
-proc fcQDesignerActionEditorInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerActionEditorInterface_tr".}
+proc fcQDesignerActionEditorInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerActionEditorInterface_tr_s".}
 proc fcQDesignerActionEditorInterface_manageAction(self: pointer, action: pointer): void {.importc: "QDesignerActionEditorInterface_manageAction".}
 proc fcQDesignerActionEditorInterface_unmanageAction(self: pointer, action: pointer): void {.importc: "QDesignerActionEditorInterface_unmanageAction".}
 proc fcQDesignerActionEditorInterface_setFormWindow(self: pointer, formWindow: pointer): void {.importc: "QDesignerActionEditorInterface_setFormWindow".}
-proc fcQDesignerActionEditorInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerActionEditorInterface_tr2".}
-proc fcQDesignerActionEditorInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerActionEditorInterface_tr3".}
+proc fcQDesignerActionEditorInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerActionEditorInterface_tr_s_c".}
+proc fcQDesignerActionEditorInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerActionEditorInterface_tr_s_c_n".}
 proc fcQDesignerActionEditorInterface_vdata(self: pointer): ptr pointer {.importc: "QDesignerActionEditorInterface_vdata".}
 proc fvdata_cQDesignerActionEditorInterface(self: pointer): pointer {.importc: "vdata_QDesignerActionEditorInterface".}
 
@@ -198,8 +198,8 @@ proc fcQDesignerActionEditorInterface_protectedbase_sender(self: pointer): point
 proc fcQDesignerActionEditorInterface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerActionEditorInterface_protectedbase_senderSignalIndex".}
 proc fcQDesignerActionEditorInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerActionEditorInterface_protectedbase_receivers".}
 proc fcQDesignerActionEditorInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerActionEditorInterface_protectedbase_isSignalConnected".}
-proc fcQDesignerActionEditorInterface_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerActionEditorInterface {.importc: "QDesignerActionEditorInterface_new".}
-proc fcQDesignerActionEditorInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerActionEditorInterface {.importc: "QDesignerActionEditorInterface_new2".}
+proc fcQDesignerActionEditorInterface_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerActionEditorInterface {.importc: "QDesignerActionEditorInterface_new_parent".}
+proc fcQDesignerActionEditorInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerActionEditorInterface {.importc: "QDesignerActionEditorInterface_new_parent_flags".}
 proc fcQDesignerActionEditorInterface_staticMetaObject(): pointer {.importc: "QDesignerActionEditorInterface_staticMetaObject".}
 
 proc metaObject*(self: gen_abstractactioneditor_types.QDesignerActionEditorInterface): gen_qobjectdefs_types.QMetaObject =
@@ -212,7 +212,7 @@ proc metacall*(self: gen_abstractactioneditor_types.QDesignerActionEditorInterfa
   fcQDesignerActionEditorInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractactioneditor_types.QDesignerActionEditorInterface, s: cstring): string =
-  let v_ms = fcQDesignerActionEditorInterface_tr(s)
+  let v_ms = fcQDesignerActionEditorInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -227,13 +227,13 @@ proc setFormWindow*(self: gen_abstractactioneditor_types.QDesignerActionEditorIn
   fcQDesignerActionEditorInterface_setFormWindow(self.h, formWindow.h)
 
 proc tr*(_: type gen_abstractactioneditor_types.QDesignerActionEditorInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerActionEditorInterface_tr2(s, c)
+  let v_ms = fcQDesignerActionEditorInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractactioneditor_types.QDesignerActionEditorInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerActionEditorInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerActionEditorInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

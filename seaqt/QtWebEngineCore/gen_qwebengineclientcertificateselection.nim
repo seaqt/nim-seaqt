@@ -45,15 +45,15 @@ export
 
 type cQWebEngineClientCertificateSelection*{.exportc: "QWebEngineClientCertificateSelection", incompleteStruct.} = object
 
-proc fcQWebEngineClientCertificateSelection_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebEngineClientCertificateSelection_operatorAssign".}
+proc fcQWebEngineClientCertificateSelection_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebEngineClientCertificateSelection_operatorAssign".}
 proc fcQWebEngineClientCertificateSelection_host(self: pointer): pointer {.importc: "QWebEngineClientCertificateSelection_host".}
 proc fcQWebEngineClientCertificateSelection_select(self: pointer, certificate: pointer): void {.importc: "QWebEngineClientCertificateSelection_select".}
 proc fcQWebEngineClientCertificateSelection_selectNone(self: pointer): void {.importc: "QWebEngineClientCertificateSelection_selectNone".}
 proc fcQWebEngineClientCertificateSelection_certificates(self: pointer): struct_seaqt_array {.importc: "QWebEngineClientCertificateSelection_certificates".}
-proc fcQWebEngineClientCertificateSelection_new(param1: pointer): ptr cQWebEngineClientCertificateSelection {.importc: "QWebEngineClientCertificateSelection_new".}
+proc fcQWebEngineClientCertificateSelection_new(fromVal: pointer): ptr cQWebEngineClientCertificateSelection {.importc: "QWebEngineClientCertificateSelection_new".}
 
-proc operatorAssign*(self: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection, param1: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection): void =
-  fcQWebEngineClientCertificateSelection_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection, fromVal: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection): void =
+  fcQWebEngineClientCertificateSelection_operatorAssign(self.h, fromVal.h)
 
 proc host*(self: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineClientCertificateSelection_host(self.h), owned: true)
@@ -74,6 +74,6 @@ proc certificates*(self: gen_qwebengineclientcertificateselection_types.QWebEngi
   vx_ret
 
 proc create*(T: type gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection,
-    param1: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection): gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection =
-  let tmp = gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection(h: fcQWebEngineClientCertificateSelection_new(param1.h), owned: true)
+    fromVal: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection): gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection =
+  let tmp = gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection(h: fcQWebEngineClientCertificateSelection_new(fromVal.h), owned: true)
   tmp

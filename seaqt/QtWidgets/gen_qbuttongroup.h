@@ -53,16 +53,16 @@ void* QButtonGroup_vdata(VirtualQButtonGroup* self);
 VirtualQButtonGroup* vdata_QButtonGroup(void* vdata);
 
 VirtualQButtonGroup* QButtonGroup_new(const QButtonGroup_VTable* vtbl, size_t vdata);
-VirtualQButtonGroup* QButtonGroup_new2(const QButtonGroup_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQButtonGroup* QButtonGroup_new_parent(const QButtonGroup_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QButtonGroup_virtbase(QButtonGroup* src, QObject** outptr_QObject);
 QMetaObject* QButtonGroup_metaObject(const QButtonGroup* self);
 void* QButtonGroup_metacast(QButtonGroup* self, const char* param1);
 int QButtonGroup_metacall(QButtonGroup* self, int param1, int param2, void** param3);
-struct seaqt_string QButtonGroup_tr(const char* s);
+struct seaqt_string QButtonGroup_tr_s(const char* s);
 void QButtonGroup_setExclusive(QButtonGroup* self, bool exclusive);
 bool QButtonGroup_exclusive(const QButtonGroup* self);
-void QButtonGroup_addButton(QButtonGroup* self, QAbstractButton* param1);
+void QButtonGroup_addButton_QAbstractButton(QButtonGroup* self, QAbstractButton* param1);
 void QButtonGroup_removeButton(QButtonGroup* self, QAbstractButton* param1);
 struct seaqt_array /* of QAbstractButton* */  QButtonGroup_buttons(const QButtonGroup* self);
 QAbstractButton* QButtonGroup_checkedButton(const QButtonGroup* self);
@@ -86,9 +86,9 @@ void QButtonGroup_idReleased(QButtonGroup* self, int param1);
 void QButtonGroup_connect_idReleased(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QButtonGroup_idToggled(QButtonGroup* self, int param1, bool param2);
 void QButtonGroup_connect_idToggled(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t));
-struct seaqt_string QButtonGroup_tr2(const char* s, const char* c);
-struct seaqt_string QButtonGroup_tr3(const char* s, const char* c, int n);
-void QButtonGroup_addButton2(QButtonGroup* self, QAbstractButton* param1, int id);
+struct seaqt_string QButtonGroup_tr_s_c(const char* s, const char* c);
+struct seaqt_string QButtonGroup_tr_s_c_n(const char* s, const char* c, int n);
+void QButtonGroup_addButton_QAbstractButton_int(QButtonGroup* self, QAbstractButton* param1, int id);
 
 QMetaObject* QButtonGroup_virtualbase_metaObject(const VirtualQButtonGroup* self);
 void* QButtonGroup_virtualbase_metacast(VirtualQButtonGroup* self, const char* param1);

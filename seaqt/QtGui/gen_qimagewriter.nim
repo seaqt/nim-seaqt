@@ -52,7 +52,7 @@ export
 
 type cQImageWriter*{.exportc: "QImageWriter", incompleteStruct.} = object
 
-proc fcQImageWriter_tr(sourceText: cstring): struct_seaqt_string {.importc: "QImageWriter_tr".}
+proc fcQImageWriter_trSourceText(sourceText: cstring): struct_seaqt_string {.importc: "QImageWriter_tr_sourceText".}
 proc fcQImageWriter_setFormat(self: pointer, format: struct_seaqt_string): void {.importc: "QImageWriter_setFormat".}
 proc fcQImageWriter_format(self: pointer): struct_seaqt_string {.importc: "QImageWriter_format".}
 proc fcQImageWriter_setDevice(self: pointer, device: pointer): void {.importc: "QImageWriter_setDevice".}
@@ -81,15 +81,15 @@ proc fcQImageWriter_supportsOption(self: pointer, option: cint): bool {.importc:
 proc fcQImageWriter_supportedImageFormats(): struct_seaqt_array {.importc: "QImageWriter_supportedImageFormats".}
 proc fcQImageWriter_supportedMimeTypes(): struct_seaqt_array {.importc: "QImageWriter_supportedMimeTypes".}
 proc fcQImageWriter_imageFormatsForMimeType(mimeType: struct_seaqt_string): struct_seaqt_array {.importc: "QImageWriter_imageFormatsForMimeType".}
-proc fcQImageWriter_tr2(sourceText: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QImageWriter_tr2".}
-proc fcQImageWriter_tr3(sourceText: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QImageWriter_tr3".}
+proc fcQImageWriter_trSourceTextDisambiguation(sourceText: cstring, disambiguation: cstring): struct_seaqt_string {.importc: "QImageWriter_tr_sourceText_disambiguation".}
+proc fcQImageWriter_trSourceTextDisambiguationN(sourceText: cstring, disambiguation: cstring, n: cint): struct_seaqt_string {.importc: "QImageWriter_tr_sourceText_disambiguation_n".}
 proc fcQImageWriter_new(): ptr cQImageWriter {.importc: "QImageWriter_new".}
-proc fcQImageWriter_new2(device: pointer, format: struct_seaqt_string): ptr cQImageWriter {.importc: "QImageWriter_new2".}
-proc fcQImageWriter_new3(fileName: struct_seaqt_string): ptr cQImageWriter {.importc: "QImageWriter_new3".}
-proc fcQImageWriter_new4(fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQImageWriter {.importc: "QImageWriter_new4".}
+proc fcQImageWriter_new2(device: pointer, format: struct_seaqt_string): ptr cQImageWriter {.importc: "QImageWriter_new_device_format".}
+proc fcQImageWriter_new3(fileName: struct_seaqt_string): ptr cQImageWriter {.importc: "QImageWriter_new_fileName".}
+proc fcQImageWriter_new4(fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQImageWriter {.importc: "QImageWriter_new_fileName_format".}
 
 proc tr*(_: type gen_qimagewriter_types.QImageWriter, sourceText: cstring): string =
-  let v_ms = fcQImageWriter_tr(sourceText)
+  let v_ms = fcQImageWriter_trSourceText(sourceText)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -227,13 +227,13 @@ proc imageFormatsForMimeType*(_: type gen_qimagewriter_types.QImageWriter, mimeT
   vx_ret
 
 proc tr*(_: type gen_qimagewriter_types.QImageWriter, sourceText: cstring, disambiguation: cstring): string =
-  let v_ms = fcQImageWriter_tr2(sourceText, disambiguation)
+  let v_ms = fcQImageWriter_trSourceTextDisambiguation(sourceText, disambiguation)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qimagewriter_types.QImageWriter, sourceText: cstring, disambiguation: cstring, n: cint): string =
-  let v_ms = fcQImageWriter_tr3(sourceText, disambiguation, n)
+  let v_ms = fcQImageWriter_trSourceTextDisambiguationN(sourceText, disambiguation, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

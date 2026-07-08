@@ -68,7 +68,7 @@ type cQTimeLine*{.exportc: "QTimeLine", incompleteStruct.} = object
 proc fcQTimeLine_metaObject(self: pointer): pointer {.importc: "QTimeLine_metaObject".}
 proc fcQTimeLine_metacast(self: pointer, param1: cstring): pointer {.importc: "QTimeLine_metacast".}
 proc fcQTimeLine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTimeLine_metacall".}
-proc fcQTimeLine_tr(s: cstring): struct_seaqt_string {.importc: "QTimeLine_tr".}
+proc fcQTimeLine_trS(s: cstring): struct_seaqt_string {.importc: "QTimeLine_tr_s".}
 proc fcQTimeLine_state(self: pointer): cint {.importc: "QTimeLine_state".}
 proc fcQTimeLine_loopCount(self: pointer): cint {.importc: "QTimeLine_loopCount".}
 proc fcQTimeLine_setLoopCount(self: pointer, count: cint): void {.importc: "QTimeLine_setLoopCount".}
@@ -96,8 +96,8 @@ proc fcQTimeLine_stop(self: pointer): void {.importc: "QTimeLine_stop".}
 proc fcQTimeLine_setPaused(self: pointer, paused: bool): void {.importc: "QTimeLine_setPaused".}
 proc fcQTimeLine_setCurrentTime(self: pointer, msec: cint): void {.importc: "QTimeLine_setCurrentTime".}
 proc fcQTimeLine_toggleDirection(self: pointer): void {.importc: "QTimeLine_toggleDirection".}
-proc fcQTimeLine_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimeLine_tr2".}
-proc fcQTimeLine_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimeLine_tr3".}
+proc fcQTimeLine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimeLine_tr_s_c".}
+proc fcQTimeLine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimeLine_tr_s_c_n".}
 proc fcQTimeLine_vdata(self: pointer): ptr pointer {.importc: "QTimeLine_vdata".}
 proc fvdata_cQTimeLine(self: pointer): pointer {.importc: "vdata_QTimeLine".}
 
@@ -130,8 +130,8 @@ proc fcQTimeLine_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQTimeLine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTimeLine_protectedbase_receivers".}
 proc fcQTimeLine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTimeLine_protectedbase_isSignalConnected".}
 proc fcQTimeLine_new(vtbl: pointer, vdata: csize_t): ptr cQTimeLine {.importc: "QTimeLine_new".}
-proc fcQTimeLine_new2(vtbl: pointer, vdata: csize_t, duration: cint): ptr cQTimeLine {.importc: "QTimeLine_new2".}
-proc fcQTimeLine_new3(vtbl: pointer, vdata: csize_t, duration: cint, parent: pointer): ptr cQTimeLine {.importc: "QTimeLine_new3".}
+proc fcQTimeLine_new2(vtbl: pointer, vdata: csize_t, duration: cint): ptr cQTimeLine {.importc: "QTimeLine_new_duration".}
+proc fcQTimeLine_new3(vtbl: pointer, vdata: csize_t, duration: cint, parent: pointer): ptr cQTimeLine {.importc: "QTimeLine_new_duration_parent".}
 proc fcQTimeLine_staticMetaObject(): pointer {.importc: "QTimeLine_staticMetaObject".}
 
 proc metaObject*(self: gen_qtimeline_types.QTimeLine): gen_qobjectdefs_types.QMetaObject =
@@ -144,7 +144,7 @@ proc metacall*(self: gen_qtimeline_types.QTimeLine, param1: cint, param2: cint, 
   fcQTimeLine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtimeline_types.QTimeLine, s: cstring): string =
-  let v_ms = fcQTimeLine_tr(s)
+  let v_ms = fcQTimeLine_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -231,13 +231,13 @@ proc toggleDirection*(self: gen_qtimeline_types.QTimeLine): void =
   fcQTimeLine_toggleDirection(self.h)
 
 proc tr*(_: type gen_qtimeline_types.QTimeLine, s: cstring, c: cstring): string =
-  let v_ms = fcQTimeLine_tr2(s, c)
+  let v_ms = fcQTimeLine_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qtimeline_types.QTimeLine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQTimeLine_tr3(s, c, n)
+  let v_ms = fcQTimeLine_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -61,15 +61,15 @@ type cQMouseEventTransition*{.exportc: "QMouseEventTransition", incompleteStruct
 proc fcQMouseEventTransition_metaObject(self: pointer): pointer {.importc: "QMouseEventTransition_metaObject".}
 proc fcQMouseEventTransition_metacast(self: pointer, param1: cstring): pointer {.importc: "QMouseEventTransition_metacast".}
 proc fcQMouseEventTransition_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMouseEventTransition_metacall".}
-proc fcQMouseEventTransition_tr(s: cstring): struct_seaqt_string {.importc: "QMouseEventTransition_tr".}
+proc fcQMouseEventTransition_trS(s: cstring): struct_seaqt_string {.importc: "QMouseEventTransition_tr_s".}
 proc fcQMouseEventTransition_button(self: pointer): cint {.importc: "QMouseEventTransition_button".}
 proc fcQMouseEventTransition_setButton(self: pointer, button: cint): void {.importc: "QMouseEventTransition_setButton".}
 proc fcQMouseEventTransition_modifierMask(self: pointer): cint {.importc: "QMouseEventTransition_modifierMask".}
 proc fcQMouseEventTransition_setModifierMask(self: pointer, modifiers: cint): void {.importc: "QMouseEventTransition_setModifierMask".}
 proc fcQMouseEventTransition_hitTestPath(self: pointer): pointer {.importc: "QMouseEventTransition_hitTestPath".}
 proc fcQMouseEventTransition_setHitTestPath(self: pointer, path: pointer): void {.importc: "QMouseEventTransition_setHitTestPath".}
-proc fcQMouseEventTransition_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMouseEventTransition_tr2".}
-proc fcQMouseEventTransition_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMouseEventTransition_tr3".}
+proc fcQMouseEventTransition_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMouseEventTransition_tr_s_c".}
+proc fcQMouseEventTransition_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMouseEventTransition_tr_s_c_n".}
 proc fcQMouseEventTransition_vdata(self: pointer): ptr pointer {.importc: "QMouseEventTransition_vdata".}
 proc fvdata_cQMouseEventTransition(self: pointer): pointer {.importc: "vdata_QMouseEventTransition".}
 
@@ -104,9 +104,9 @@ proc fcQMouseEventTransition_protectedbase_senderSignalIndex(self: pointer): cin
 proc fcQMouseEventTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMouseEventTransition_protectedbase_receivers".}
 proc fcQMouseEventTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMouseEventTransition_protectedbase_isSignalConnected".}
 proc fcQMouseEventTransition_new(vtbl: pointer, vdata: csize_t): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new".}
-proc fcQMouseEventTransition_new2(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, button: cint): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new2".}
-proc fcQMouseEventTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new3".}
-proc fcQMouseEventTransition_new4(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, button: cint, sourceState: pointer): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new4".}
+proc fcQMouseEventTransition_new2(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, button: cint): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new_object_type_button".}
+proc fcQMouseEventTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new_sourceState".}
+proc fcQMouseEventTransition_new4(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, button: cint, sourceState: pointer): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new_object_type_button_sourceState".}
 proc fcQMouseEventTransition_staticMetaObject(): pointer {.importc: "QMouseEventTransition_staticMetaObject".}
 
 proc metaObject*(self: gen_qmouseeventtransition_types.QMouseEventTransition): gen_qobjectdefs_types.QMetaObject =
@@ -119,7 +119,7 @@ proc metacall*(self: gen_qmouseeventtransition_types.QMouseEventTransition, para
   fcQMouseEventTransition_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmouseeventtransition_types.QMouseEventTransition, s: cstring): string =
-  let v_ms = fcQMouseEventTransition_tr(s)
+  let v_ms = fcQMouseEventTransition_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -143,13 +143,13 @@ proc setHitTestPath*(self: gen_qmouseeventtransition_types.QMouseEventTransition
   fcQMouseEventTransition_setHitTestPath(self.h, path.h)
 
 proc tr*(_: type gen_qmouseeventtransition_types.QMouseEventTransition, s: cstring, c: cstring): string =
-  let v_ms = fcQMouseEventTransition_tr2(s, c)
+  let v_ms = fcQMouseEventTransition_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmouseeventtransition_types.QMouseEventTransition, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMouseEventTransition_tr3(s, c, n)
+  let v_ms = fcQMouseEventTransition_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

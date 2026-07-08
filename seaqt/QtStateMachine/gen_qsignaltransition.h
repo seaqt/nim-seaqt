@@ -57,15 +57,15 @@ void* QSignalTransition_vdata(VirtualQSignalTransition* self);
 VirtualQSignalTransition* vdata_QSignalTransition(void* vdata);
 
 VirtualQSignalTransition* QSignalTransition_new(const QSignalTransition_VTable* vtbl, size_t vdata);
-VirtualQSignalTransition* QSignalTransition_new2(const QSignalTransition_VTable* vtbl, size_t vdata, QObject* sender, const char* signal);
-VirtualQSignalTransition* QSignalTransition_new3(const QSignalTransition_VTable* vtbl, size_t vdata, QState* sourceState);
-VirtualQSignalTransition* QSignalTransition_new4(const QSignalTransition_VTable* vtbl, size_t vdata, QObject* sender, const char* signal, QState* sourceState);
+VirtualQSignalTransition* QSignalTransition_new_sender_signal(const QSignalTransition_VTable* vtbl, size_t vdata, QObject* sender, const char* signal);
+VirtualQSignalTransition* QSignalTransition_new_sourceState(const QSignalTransition_VTable* vtbl, size_t vdata, QState* sourceState);
+VirtualQSignalTransition* QSignalTransition_new_sender_signal_sourceState(const QSignalTransition_VTable* vtbl, size_t vdata, QObject* sender, const char* signal, QState* sourceState);
 
 void QSignalTransition_virtbase(QSignalTransition* src, QAbstractTransition** outptr_QAbstractTransition);
 QMetaObject* QSignalTransition_metaObject(const QSignalTransition* self);
 void* QSignalTransition_metacast(QSignalTransition* self, const char* param1);
 int QSignalTransition_metacall(QSignalTransition* self, int param1, int param2, void** param3);
-struct seaqt_string QSignalTransition_tr(const char* s);
+struct seaqt_string QSignalTransition_tr_s(const char* s);
 QObject* QSignalTransition_senderObject(const QSignalTransition* self);
 void QSignalTransition_setSenderObject(QSignalTransition* self, QObject* sender);
 struct seaqt_string QSignalTransition_signal(const QSignalTransition* self);
@@ -73,8 +73,8 @@ void QSignalTransition_setSignal(QSignalTransition* self, struct seaqt_string si
 bool QSignalTransition_eventTest(QSignalTransition* self, QEvent* event);
 void QSignalTransition_onTransition(QSignalTransition* self, QEvent* event);
 bool QSignalTransition_event(QSignalTransition* self, QEvent* e);
-struct seaqt_string QSignalTransition_tr2(const char* s, const char* c);
-struct seaqt_string QSignalTransition_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSignalTransition_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSignalTransition_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSignalTransition_virtualbase_metaObject(const VirtualQSignalTransition* self);
 void* QSignalTransition_virtualbase_metacast(VirtualQSignalTransition* self, const char* param1);

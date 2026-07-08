@@ -55,7 +55,7 @@ type cQIODevice*{.exportc: "QIODevice", incompleteStruct.} = object
 proc fcQIODevice_metaObject(self: pointer): pointer {.importc: "QIODevice_metaObject".}
 proc fcQIODevice_metacast(self: pointer, param1: cstring): pointer {.importc: "QIODevice_metacast".}
 proc fcQIODevice_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIODevice_metacall".}
-proc fcQIODevice_tr(s: cstring): struct_seaqt_string {.importc: "QIODevice_tr".}
+proc fcQIODevice_trS(s: cstring): struct_seaqt_string {.importc: "QIODevice_tr_s".}
 proc fcQIODevice_openMode(self: pointer): cint {.importc: "QIODevice_openMode".}
 proc fcQIODevice_setTextModeEnabled(self: pointer, enabled: bool): void {.importc: "QIODevice_setTextModeEnabled".}
 proc fcQIODevice_isTextModeEnabled(self: pointer): bool {.importc: "QIODevice_isTextModeEnabled".}
@@ -78,21 +78,21 @@ proc fcQIODevice_atEnd(self: pointer): bool {.importc: "QIODevice_atEnd".}
 proc fcQIODevice_reset(self: pointer): bool {.importc: "QIODevice_reset".}
 proc fcQIODevice_bytesAvailable(self: pointer): clonglong {.importc: "QIODevice_bytesAvailable".}
 proc fcQIODevice_bytesToWrite(self: pointer): clonglong {.importc: "QIODevice_bytesToWrite".}
-proc fcQIODevice_read(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QIODevice_read".}
-proc fcQIODevice_readWithMaxlen(self: pointer, maxlen: clonglong): struct_seaqt_string {.importc: "QIODevice_readWithMaxlen".}
+proc fcQIODevice_readDataMaxlen(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QIODevice_read_data_maxlen".}
+proc fcQIODevice_readMaxlen(self: pointer, maxlen: clonglong): struct_seaqt_string {.importc: "QIODevice_read_maxlen".}
 proc fcQIODevice_readAll(self: pointer): struct_seaqt_string {.importc: "QIODevice_readAll".}
-proc fcQIODevice_readLine(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QIODevice_readLine".}
-proc fcQIODevice_readLine2(self: pointer): struct_seaqt_string {.importc: "QIODevice_readLine2".}
+proc fcQIODevice_readLineDataMaxlen(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QIODevice_readLine_data_maxlen".}
+proc fcQIODevice_readLine(self: pointer): struct_seaqt_string {.importc: "QIODevice_readLine".}
 proc fcQIODevice_canReadLine(self: pointer): bool {.importc: "QIODevice_canReadLine".}
 proc fcQIODevice_startTransaction(self: pointer): void {.importc: "QIODevice_startTransaction".}
 proc fcQIODevice_commitTransaction(self: pointer): void {.importc: "QIODevice_commitTransaction".}
 proc fcQIODevice_rollbackTransaction(self: pointer): void {.importc: "QIODevice_rollbackTransaction".}
 proc fcQIODevice_isTransactionStarted(self: pointer): bool {.importc: "QIODevice_isTransactionStarted".}
-proc fcQIODevice_write(self: pointer, data: cstring, len: clonglong): clonglong {.importc: "QIODevice_write".}
-proc fcQIODevice_writeWithData(self: pointer, data: cstring): clonglong {.importc: "QIODevice_writeWithData".}
-proc fcQIODevice_write2(self: pointer, data: struct_seaqt_string): clonglong {.importc: "QIODevice_write2".}
-proc fcQIODevice_peek(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QIODevice_peek".}
-proc fcQIODevice_peekWithMaxlen(self: pointer, maxlen: clonglong): struct_seaqt_string {.importc: "QIODevice_peekWithMaxlen".}
+proc fcQIODevice_writeCharQint64(self: pointer, data: cstring, len: clonglong): clonglong {.importc: "QIODevice_write_char_qint64".}
+proc fcQIODevice_writeChar(self: pointer, data: cstring): clonglong {.importc: "QIODevice_write_char".}
+proc fcQIODevice_write_QByteArray(self: pointer, data: struct_seaqt_string): clonglong {.importc: "QIODevice_write_QByteArray".}
+proc fcQIODevice_peekDataMaxlen(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QIODevice_peek_data_maxlen".}
+proc fcQIODevice_peekMaxlen(self: pointer, maxlen: clonglong): struct_seaqt_string {.importc: "QIODevice_peek_maxlen".}
 proc fcQIODevice_skip(self: pointer, maxSize: clonglong): clonglong {.importc: "QIODevice_skip".}
 proc fcQIODevice_waitForReadyRead(self: pointer, msecs: cint): bool {.importc: "QIODevice_waitForReadyRead".}
 proc fcQIODevice_waitForBytesWritten(self: pointer, msecs: cint): bool {.importc: "QIODevice_waitForBytesWritten".}
@@ -112,9 +112,9 @@ proc fcQIODevice_aboutToClose(self: pointer): void {.importc: "QIODevice_aboutTo
 proc fcQIODevice_connect_aboutToClose(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIODevice_connect_aboutToClose".}
 proc fcQIODevice_readChannelFinished(self: pointer): void {.importc: "QIODevice_readChannelFinished".}
 proc fcQIODevice_connect_readChannelFinished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIODevice_connect_readChannelFinished".}
-proc fcQIODevice_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIODevice_tr2".}
-proc fcQIODevice_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIODevice_tr3".}
-proc fcQIODevice_readLineWithMaxlen(self: pointer, maxlen: clonglong): struct_seaqt_string {.importc: "QIODevice_readLineWithMaxlen".}
+proc fcQIODevice_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QIODevice_tr_s_c".}
+proc fcQIODevice_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QIODevice_tr_s_c_n".}
+proc fcQIODevice_readLineMaxlen(self: pointer, maxlen: clonglong): struct_seaqt_string {.importc: "QIODevice_readLine_maxlen".}
 proc fcQIODevice_vdata(self: pointer): ptr pointer {.importc: "QIODevice_vdata".}
 proc fvdata_cQIODevice(self: pointer): pointer {.importc: "vdata_QIODevice".}
 
@@ -179,7 +179,7 @@ proc fcQIODevice_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQIODevice_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIODevice_protectedbase_receivers".}
 proc fcQIODevice_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIODevice_protectedbase_isSignalConnected".}
 proc fcQIODevice_new(vtbl: pointer, vdata: csize_t): ptr cQIODevice {.importc: "QIODevice_new".}
-proc fcQIODevice_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIODevice {.importc: "QIODevice_new2".}
+proc fcQIODevice_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQIODevice {.importc: "QIODevice_new_parent".}
 proc fcQIODevice_staticMetaObject(): pointer {.importc: "QIODevice_staticMetaObject".}
 
 proc metaObject*(self: gen_qiodevice_types.QIODevice): gen_qobjectdefs_types.QMetaObject =
@@ -192,7 +192,7 @@ proc metacall*(self: gen_qiodevice_types.QIODevice, param1: cint, param2: cint, 
   fcQIODevice_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring): string =
-  let v_ms = fcQIODevice_tr(s)
+  let v_ms = fcQIODevice_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -264,10 +264,10 @@ proc bytesToWrite*(self: gen_qiodevice_types.QIODevice): clonglong =
   fcQIODevice_bytesToWrite(self.h)
 
 proc read*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong): clonglong =
-  fcQIODevice_read(self.h, data, maxlen)
+  fcQIODevice_readDataMaxlen(self.h, data, maxlen)
 
 proc read*(self: gen_qiodevice_types.QIODevice, maxlen: clonglong): seq[byte] =
-  var v_bytearray = fcQIODevice_readWithMaxlen(self.h, maxlen)
+  var v_bytearray = fcQIODevice_readMaxlen(self.h, maxlen)
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -279,10 +279,10 @@ proc readAll*(self: gen_qiodevice_types.QIODevice): seq[byte] =
   vx_ret
 
 proc readLine*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong): clonglong =
-  fcQIODevice_readLine(self.h, data, maxlen)
+  fcQIODevice_readLineDataMaxlen(self.h, data, maxlen)
 
 proc readLine*(self: gen_qiodevice_types.QIODevice): seq[byte] =
-  var v_bytearray = fcQIODevice_readLine2(self.h)
+  var v_bytearray = fcQIODevice_readLine(self.h)
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -303,19 +303,19 @@ proc isTransactionStarted*(self: gen_qiodevice_types.QIODevice): bool =
   fcQIODevice_isTransactionStarted(self.h)
 
 proc write*(self: gen_qiodevice_types.QIODevice, data: cstring, len: clonglong): clonglong =
-  fcQIODevice_write(self.h, data, len)
+  fcQIODevice_writeCharQint64(self.h, data, len)
 
 proc write*(self: gen_qiodevice_types.QIODevice, data: cstring): clonglong =
-  fcQIODevice_writeWithData(self.h, data)
+  fcQIODevice_writeChar(self.h, data)
 
 proc write*(self: gen_qiodevice_types.QIODevice, data: openArray[byte]): clonglong =
-  fcQIODevice_write2(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
+  fcQIODevice_write_QByteArray(self.h, struct_seaqt_string(data: if len(data) > 0: addr data[0] else: nil, len: csize_t(len(data))))
 
 proc peek*(self: gen_qiodevice_types.QIODevice, data: cstring, maxlen: clonglong): clonglong =
-  fcQIODevice_peek(self.h, data, maxlen)
+  fcQIODevice_peekDataMaxlen(self.h, data, maxlen)
 
 proc peek*(self: gen_qiodevice_types.QIODevice, maxlen: clonglong): seq[byte] =
-  var v_bytearray = fcQIODevice_peekWithMaxlen(self.h, maxlen)
+  var v_bytearray = fcQIODevice_peekMaxlen(self.h, maxlen)
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
@@ -461,19 +461,19 @@ proc onReadChannelFinished*(self: gen_qiodevice_types.QIODevice, slot: QIODevice
   fcQIODevice_connect_readChannelFinished(self.h, cast[int](addr tmp[]), fcQIODevice_slot_callback_readChannelFinished, fcQIODevice_slot_callback_readChannelFinished_release)
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring, c: cstring): string =
-  let v_ms = fcQIODevice_tr2(s, c)
+  let v_ms = fcQIODevice_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQIODevice_tr3(s, c, n)
+  let v_ms = fcQIODevice_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc readLine*(self: gen_qiodevice_types.QIODevice, maxlen: clonglong): seq[byte] =
-  var v_bytearray = fcQIODevice_readLineWithMaxlen(self.h, maxlen)
+  var v_bytearray = fcQIODevice_readLineMaxlen(self.h, maxlen)
   var vx_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](v_bytearray.data), 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret

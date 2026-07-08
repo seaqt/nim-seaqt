@@ -80,12 +80,12 @@ proc fcQPointingDeviceUniqueId_fromNumericId(id: clonglong): pointer {.importc: 
 proc fcQPointingDeviceUniqueId_isValid(self: pointer): bool {.importc: "QPointingDeviceUniqueId_isValid".}
 proc fcQPointingDeviceUniqueId_numericId(self: pointer): clonglong {.importc: "QPointingDeviceUniqueId_numericId".}
 proc fcQPointingDeviceUniqueId_new(): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new".}
-proc fcQPointingDeviceUniqueId_new2(param1: pointer): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new2".}
+proc fcQPointingDeviceUniqueId_new2(fromVal: pointer): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new_from".}
 proc fcQPointingDeviceUniqueId_staticMetaObject(): pointer {.importc: "QPointingDeviceUniqueId_staticMetaObject".}
 proc fcQPointingDevice_metaObject(self: pointer): pointer {.importc: "QPointingDevice_metaObject".}
 proc fcQPointingDevice_metacast(self: pointer, param1: cstring): pointer {.importc: "QPointingDevice_metacast".}
 proc fcQPointingDevice_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPointingDevice_metacall".}
-proc fcQPointingDevice_tr(s: cstring): struct_seaqt_string {.importc: "QPointingDevice_tr".}
+proc fcQPointingDevice_trS(s: cstring): struct_seaqt_string {.importc: "QPointingDevice_tr_s".}
 proc fcQPointingDevice_setType(self: pointer, devType: cint): void {.importc: "QPointingDevice_setType".}
 proc fcQPointingDevice_setCapabilities(self: pointer, caps: cint): void {.importc: "QPointingDevice_setCapabilities".}
 proc fcQPointingDevice_setMaximumTouchPoints(self: pointer, c: cint): void {.importc: "QPointingDevice_setMaximumTouchPoints".}
@@ -97,9 +97,9 @@ proc fcQPointingDevice_primaryPointingDevice(): pointer {.importc: "QPointingDev
 proc fcQPointingDevice_operatorEqual(self: pointer, other: pointer): bool {.importc: "QPointingDevice_operatorEqual".}
 proc fcQPointingDevice_grabChanged(self: pointer, grabber: pointer, transition: cint, event: pointer, point: pointer): void {.importc: "QPointingDevice_grabChanged".}
 proc fcQPointingDevice_connect_grabChanged(self: pointer, slot: int, callback: proc (slot: int, grabber: pointer, transition: cint, event: pointer, point: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPointingDevice_connect_grabChanged".}
-proc fcQPointingDevice_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPointingDevice_tr2".}
-proc fcQPointingDevice_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPointingDevice_tr3".}
-proc fcQPointingDevice_primaryPointingDeviceWithSeatName(seatName: struct_seaqt_string): pointer {.importc: "QPointingDevice_primaryPointingDeviceWithSeatName".}
+proc fcQPointingDevice_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPointingDevice_tr_s_c".}
+proc fcQPointingDevice_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPointingDevice_tr_s_c_n".}
+proc fcQPointingDevice_primaryPointingDeviceSeatName(seatName: struct_seaqt_string): pointer {.importc: "QPointingDevice_primaryPointingDevice_seatName".}
 proc fcQPointingDevice_vdata(self: pointer): ptr pointer {.importc: "QPointingDevice_vdata".}
 proc fvdata_cQPointingDevice(self: pointer): pointer {.importc: "vdata_QPointingDevice".}
 
@@ -130,11 +130,11 @@ proc fcQPointingDevice_protectedbase_senderSignalIndex(self: pointer): cint {.im
 proc fcQPointingDevice_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPointingDevice_protectedbase_receivers".}
 proc fcQPointingDevice_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPointingDevice_protectedbase_isSignalConnected".}
 proc fcQPointingDevice_new(vtbl: pointer, vdata: csize_t): ptr cQPointingDevice {.importc: "QPointingDevice_new".}
-proc fcQPointingDevice_new2(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint): ptr cQPointingDevice {.importc: "QPointingDevice_new2".}
-proc fcQPointingDevice_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new3".}
-proc fcQPointingDevice_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: struct_seaqt_string): ptr cQPointingDevice {.importc: "QPointingDevice_new4".}
-proc fcQPointingDevice_new5(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: struct_seaqt_string, uniqueId: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new5".}
-proc fcQPointingDevice_new6(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: struct_seaqt_string, uniqueId: pointer, parent: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new6".}
+proc fcQPointingDevice_new2(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint): ptr cQPointingDevice {.importc: "QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount".}
+proc fcQPointingDevice_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new_parent".}
+proc fcQPointingDevice_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: struct_seaqt_string): ptr cQPointingDevice {.importc: "QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName".}
+proc fcQPointingDevice_new5(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: struct_seaqt_string, uniqueId: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName_uniqueId".}
+proc fcQPointingDevice_new6(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: struct_seaqt_string, uniqueId: pointer, parent: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new_name_systemId_devType_pType_caps_maxPoints_buttonCount_seatName_uniqueId_parent".}
 proc fcQPointingDevice_staticMetaObject(): pointer {.importc: "QPointingDevice_staticMetaObject".}
 
 proc fromNumericId*(_: type gen_qpointingdevice_types.QPointingDeviceUniqueId, id: clonglong): gen_qpointingdevice_types.QPointingDeviceUniqueId =
@@ -150,8 +150,8 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDeviceUniqueId): gen_qpo
   let tmp = gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new(), owned: true)
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDeviceUniqueId,
-    param1: gen_qpointingdevice_types.QPointingDeviceUniqueId): gen_qpointingdevice_types.QPointingDeviceUniqueId =
-  let tmp = gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new2(param1.h), owned: true)
+    fromVal: gen_qpointingdevice_types.QPointingDeviceUniqueId): gen_qpointingdevice_types.QPointingDeviceUniqueId =
+  let tmp = gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpointingdevice_types.QPointingDeviceUniqueId): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPointingDeviceUniqueId_staticMetaObject())
@@ -165,7 +165,7 @@ proc metacall*(self: gen_qpointingdevice_types.QPointingDevice, param1: cint, pa
   fcQPointingDevice_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpointingdevice_types.QPointingDevice, s: cstring): string =
-  let v_ms = fcQPointingDevice_tr(s)
+  let v_ms = fcQPointingDevice_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -224,19 +224,19 @@ proc onGrabChanged*(self: gen_qpointingdevice_types.QPointingDevice, slot: QPoin
   fcQPointingDevice_connect_grabChanged(self.h, cast[int](addr tmp[]), fcQPointingDevice_slot_callback_grabChanged, fcQPointingDevice_slot_callback_grabChanged_release)
 
 proc tr*(_: type gen_qpointingdevice_types.QPointingDevice, s: cstring, c: cstring): string =
-  let v_ms = fcQPointingDevice_tr2(s, c)
+  let v_ms = fcQPointingDevice_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpointingdevice_types.QPointingDevice, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPointingDevice_tr3(s, c, n)
+  let v_ms = fcQPointingDevice_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc primaryPointingDevice*(_: type gen_qpointingdevice_types.QPointingDevice, seatName: openArray[char]): gen_qpointingdevice_types.QPointingDevice =
-  gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_primaryPointingDeviceWithSeatName(struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))), owned: false)
+  gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_primaryPointingDeviceSeatName(struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))), owned: false)
 
 type QPointingDevicemetaObjectProc* = proc(self: QPointingDevice): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPointingDevicemetacastProc* = proc(self: QPointingDevice, param1: cstring): pointer {.raises: [], gcsafe.}

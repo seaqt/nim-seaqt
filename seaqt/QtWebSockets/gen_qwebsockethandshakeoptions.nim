@@ -39,15 +39,15 @@ export gen_qwebsockethandshakeoptions_types
 
 type cQWebSocketHandshakeOptions*{.exportc: "QWebSocketHandshakeOptions", incompleteStruct.} = object
 
-proc fcQWebSocketHandshakeOptions_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebSocketHandshakeOptions_operatorAssign".}
+proc fcQWebSocketHandshakeOptions_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebSocketHandshakeOptions_operatorAssign".}
 proc fcQWebSocketHandshakeOptions_swap(self: pointer, other: pointer): void {.importc: "QWebSocketHandshakeOptions_swap".}
 proc fcQWebSocketHandshakeOptions_subprotocols(self: pointer): struct_seaqt_array {.importc: "QWebSocketHandshakeOptions_subprotocols".}
 proc fcQWebSocketHandshakeOptions_setSubprotocols(self: pointer, protocols: struct_seaqt_array): void {.importc: "QWebSocketHandshakeOptions_setSubprotocols".}
 proc fcQWebSocketHandshakeOptions_new(): ptr cQWebSocketHandshakeOptions {.importc: "QWebSocketHandshakeOptions_new".}
-proc fcQWebSocketHandshakeOptions_new2(other: pointer): ptr cQWebSocketHandshakeOptions {.importc: "QWebSocketHandshakeOptions_new2".}
+proc fcQWebSocketHandshakeOptions_new2(fromVal: pointer): ptr cQWebSocketHandshakeOptions {.importc: "QWebSocketHandshakeOptions_new_from".}
 
-proc operatorAssign*(self: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions, other: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions): void =
-  fcQWebSocketHandshakeOptions_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions, fromVal: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions): void =
+  fcQWebSocketHandshakeOptions_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions, other: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions): void =
   fcQWebSocketHandshakeOptions_swap(self.h, other.h)
@@ -75,6 +75,6 @@ proc create*(T: type gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOpt
   let tmp = gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions(h: fcQWebSocketHandshakeOptions_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions,
-    other: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions): gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions =
-  let tmp = gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions(h: fcQWebSocketHandshakeOptions_new2(other.h), owned: true)
+    fromVal: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions): gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions =
+  let tmp = gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions(h: fcQWebSocketHandshakeOptions_new2(fromVal.h), owned: true)
   tmp

@@ -77,13 +77,13 @@ void* QAbstractItemDelegate_vdata(VirtualQAbstractItemDelegate* self);
 VirtualQAbstractItemDelegate* vdata_QAbstractItemDelegate(void* vdata);
 
 VirtualQAbstractItemDelegate* QAbstractItemDelegate_new(const QAbstractItemDelegate_VTable* vtbl, size_t vdata);
-VirtualQAbstractItemDelegate* QAbstractItemDelegate_new2(const QAbstractItemDelegate_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQAbstractItemDelegate* QAbstractItemDelegate_new_parent(const QAbstractItemDelegate_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QAbstractItemDelegate_virtbase(QAbstractItemDelegate* src, QObject** outptr_QObject);
 QMetaObject* QAbstractItemDelegate_metaObject(const QAbstractItemDelegate* self);
 void* QAbstractItemDelegate_metacast(QAbstractItemDelegate* self, const char* param1);
 int QAbstractItemDelegate_metacall(QAbstractItemDelegate* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractItemDelegate_tr(const char* s);
+struct seaqt_string QAbstractItemDelegate_tr_s(const char* s);
 void QAbstractItemDelegate_paint(const QAbstractItemDelegate* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
 QSize* QAbstractItemDelegate_sizeHint(const QAbstractItemDelegate* self, QStyleOptionViewItem* option, QModelIndex* index);
 QWidget* QAbstractItemDelegate_createEditor(const QAbstractItemDelegate* self, QWidget* parent, QStyleOptionViewItem* option, QModelIndex* index);
@@ -96,14 +96,14 @@ bool QAbstractItemDelegate_helpEvent(QAbstractItemDelegate* self, QHelpEvent* ev
 struct seaqt_array /* of int */  QAbstractItemDelegate_paintingRoles(const QAbstractItemDelegate* self);
 void QAbstractItemDelegate_commitData(QAbstractItemDelegate* self, QWidget* editor);
 void QAbstractItemDelegate_connect_commitData(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t));
-void QAbstractItemDelegate_closeEditor(QAbstractItemDelegate* self, QWidget* editor);
-void QAbstractItemDelegate_connect_closeEditor(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t));
+void QAbstractItemDelegate_closeEditor_editor(QAbstractItemDelegate* self, QWidget* editor);
+void QAbstractItemDelegate_connect_closeEditor_editor(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t));
 void QAbstractItemDelegate_sizeHintChanged(QAbstractItemDelegate* self, QModelIndex* param1);
 void QAbstractItemDelegate_connect_sizeHintChanged(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t));
-struct seaqt_string QAbstractItemDelegate_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractItemDelegate_tr3(const char* s, const char* c, int n);
-void QAbstractItemDelegate_closeEditor2(QAbstractItemDelegate* self, QWidget* editor, int hint);
-void QAbstractItemDelegate_connect_closeEditor2(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t));
+struct seaqt_string QAbstractItemDelegate_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractItemDelegate_tr_s_c_n(const char* s, const char* c, int n);
+void QAbstractItemDelegate_closeEditor_editor_hint(QAbstractItemDelegate* self, QWidget* editor, int hint);
+void QAbstractItemDelegate_connect_closeEditor_editor_hint(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t));
 
 QMetaObject* QAbstractItemDelegate_virtualbase_metaObject(const VirtualQAbstractItemDelegate* self);
 void* QAbstractItemDelegate_virtualbase_metacast(VirtualQAbstractItemDelegate* self, const char* param1);

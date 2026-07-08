@@ -74,7 +74,7 @@ type cQAnimationDriver*{.exportc: "QAnimationDriver", incompleteStruct.} = objec
 proc fcQAbstractAnimation_metaObject(self: pointer): pointer {.importc: "QAbstractAnimation_metaObject".}
 proc fcQAbstractAnimation_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractAnimation_metacast".}
 proc fcQAbstractAnimation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractAnimation_metacall".}
-proc fcQAbstractAnimation_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractAnimation_tr".}
+proc fcQAbstractAnimation_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractAnimation_tr_s".}
 proc fcQAbstractAnimation_state(self: pointer): cint {.importc: "QAbstractAnimation_state".}
 proc fcQAbstractAnimation_group(self: pointer): pointer {.importc: "QAbstractAnimation_group".}
 proc fcQAbstractAnimation_direction(self: pointer): cint {.importc: "QAbstractAnimation_direction".}
@@ -100,9 +100,9 @@ proc fcQAbstractAnimation_resume(self: pointer): void {.importc: "QAbstractAnima
 proc fcQAbstractAnimation_setPaused(self: pointer, paused: bool): void {.importc: "QAbstractAnimation_setPaused".}
 proc fcQAbstractAnimation_stop(self: pointer): void {.importc: "QAbstractAnimation_stop".}
 proc fcQAbstractAnimation_setCurrentTime(self: pointer, msecs: cint): void {.importc: "QAbstractAnimation_setCurrentTime".}
-proc fcQAbstractAnimation_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractAnimation_tr2".}
-proc fcQAbstractAnimation_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractAnimation_tr3".}
-proc fcQAbstractAnimation_startWithPolicy(self: pointer, policy: cint): void {.importc: "QAbstractAnimation_startWithPolicy".}
+proc fcQAbstractAnimation_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractAnimation_tr_s_c".}
+proc fcQAbstractAnimation_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractAnimation_tr_s_c_n".}
+proc fcQAbstractAnimation_startPolicy(self: pointer, policy: cint): void {.importc: "QAbstractAnimation_start_policy".}
 proc fcQAbstractAnimation_vdata(self: pointer): ptr pointer {.importc: "QAbstractAnimation_vdata".}
 proc fvdata_cQAbstractAnimation(self: pointer): pointer {.importc: "vdata_QAbstractAnimation".}
 
@@ -139,12 +139,12 @@ proc fcQAbstractAnimation_protectedbase_senderSignalIndex(self: pointer): cint {
 proc fcQAbstractAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractAnimation_protectedbase_receivers".}
 proc fcQAbstractAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractAnimation_protectedbase_isSignalConnected".}
 proc fcQAbstractAnimation_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractAnimation {.importc: "QAbstractAnimation_new".}
-proc fcQAbstractAnimation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractAnimation {.importc: "QAbstractAnimation_new2".}
+proc fcQAbstractAnimation_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractAnimation {.importc: "QAbstractAnimation_new_parent".}
 proc fcQAbstractAnimation_staticMetaObject(): pointer {.importc: "QAbstractAnimation_staticMetaObject".}
 proc fcQAnimationDriver_metaObject(self: pointer): pointer {.importc: "QAnimationDriver_metaObject".}
 proc fcQAnimationDriver_metacast(self: pointer, param1: cstring): pointer {.importc: "QAnimationDriver_metacast".}
 proc fcQAnimationDriver_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAnimationDriver_metacall".}
-proc fcQAnimationDriver_tr(s: cstring): struct_seaqt_string {.importc: "QAnimationDriver_tr".}
+proc fcQAnimationDriver_trS(s: cstring): struct_seaqt_string {.importc: "QAnimationDriver_tr_s".}
 proc fcQAnimationDriver_advance(self: pointer): void {.importc: "QAnimationDriver_advance".}
 proc fcQAnimationDriver_install(self: pointer): void {.importc: "QAnimationDriver_install".}
 proc fcQAnimationDriver_uninstall(self: pointer): void {.importc: "QAnimationDriver_uninstall".}
@@ -154,8 +154,8 @@ proc fcQAnimationDriver_started(self: pointer): void {.importc: "QAnimationDrive
 proc fcQAnimationDriver_connect_started(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAnimationDriver_connect_started".}
 proc fcQAnimationDriver_stopped(self: pointer): void {.importc: "QAnimationDriver_stopped".}
 proc fcQAnimationDriver_connect_stopped(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAnimationDriver_connect_stopped".}
-proc fcQAnimationDriver_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAnimationDriver_tr2".}
-proc fcQAnimationDriver_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAnimationDriver_tr3".}
+proc fcQAnimationDriver_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAnimationDriver_tr_s_c".}
+proc fcQAnimationDriver_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAnimationDriver_tr_s_c_n".}
 proc fcQAnimationDriver_vdata(self: pointer): ptr pointer {.importc: "QAnimationDriver_vdata".}
 proc fvdata_cQAnimationDriver(self: pointer): pointer {.importc: "vdata_QAnimationDriver".}
 
@@ -195,7 +195,7 @@ proc fcQAnimationDriver_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQAnimationDriver_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAnimationDriver_protectedbase_receivers".}
 proc fcQAnimationDriver_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAnimationDriver_protectedbase_isSignalConnected".}
 proc fcQAnimationDriver_new(vtbl: pointer, vdata: csize_t): ptr cQAnimationDriver {.importc: "QAnimationDriver_new".}
-proc fcQAnimationDriver_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAnimationDriver {.importc: "QAnimationDriver_new2".}
+proc fcQAnimationDriver_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAnimationDriver {.importc: "QAnimationDriver_new_parent".}
 proc fcQAnimationDriver_staticMetaObject(): pointer {.importc: "QAnimationDriver_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractanimation_types.QAbstractAnimation): gen_qobjectdefs_types.QMetaObject =
@@ -208,7 +208,7 @@ proc metacall*(self: gen_qabstractanimation_types.QAbstractAnimation, param1: ci
   fcQAbstractAnimation_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractanimation_types.QAbstractAnimation, s: cstring): string =
-  let v_ms = fcQAbstractAnimation_tr(s)
+  let v_ms = fcQAbstractAnimation_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -345,19 +345,19 @@ proc setCurrentTime*(self: gen_qabstractanimation_types.QAbstractAnimation, msec
   fcQAbstractAnimation_setCurrentTime(self.h, msecs)
 
 proc tr*(_: type gen_qabstractanimation_types.QAbstractAnimation, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractAnimation_tr2(s, c)
+  let v_ms = fcQAbstractAnimation_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractanimation_types.QAbstractAnimation, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractAnimation_tr3(s, c, n)
+  let v_ms = fcQAbstractAnimation_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc start*(self: gen_qabstractanimation_types.QAbstractAnimation, policy: cint): void =
-  fcQAbstractAnimation_startWithPolicy(self.h, cint(policy))
+  fcQAbstractAnimation_startPolicy(self.h, cint(policy))
 
 type QAbstractAnimationmetaObjectProc* = proc(self: QAbstractAnimation): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractAnimationmetacastProc* = proc(self: QAbstractAnimation, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -774,7 +774,7 @@ proc metacall*(self: gen_qabstractanimation_types.QAnimationDriver, param1: cint
   fcQAnimationDriver_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractanimation_types.QAnimationDriver, s: cstring): string =
-  let v_ms = fcQAnimationDriver_tr(s)
+  let v_ms = fcQAnimationDriver_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -831,13 +831,13 @@ proc onStopped*(self: gen_qabstractanimation_types.QAnimationDriver, slot: QAnim
   fcQAnimationDriver_connect_stopped(self.h, cast[int](addr tmp[]), fcQAnimationDriver_slot_callback_stopped, fcQAnimationDriver_slot_callback_stopped_release)
 
 proc tr*(_: type gen_qabstractanimation_types.QAnimationDriver, s: cstring, c: cstring): string =
-  let v_ms = fcQAnimationDriver_tr2(s, c)
+  let v_ms = fcQAnimationDriver_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractanimation_types.QAnimationDriver, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAnimationDriver_tr3(s, c, n)
+  let v_ms = fcQAnimationDriver_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

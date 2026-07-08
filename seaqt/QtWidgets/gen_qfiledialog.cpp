@@ -757,35 +757,35 @@ public:
 	friend bool QFileDialog_protectedbase_isSignalConnected(const VirtualQFileDialog* self, QMetaMethod* signal);
 };
 
-VirtualQFileDialog* QFileDialog_new(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent, int f) {
+VirtualQFileDialog* QFileDialog_new_parent_f(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent, int f) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileDialog(vtbl, parent, static_cast<Qt::WindowFlags>(f)) : nullptr;
 }
 
-VirtualQFileDialog* QFileDialog_new2(const QFileDialog_VTable* vtbl, size_t vdata) {
+VirtualQFileDialog* QFileDialog_new(const QFileDialog_VTable* vtbl, size_t vdata) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileDialog(vtbl) : nullptr;
 }
 
-VirtualQFileDialog* QFileDialog_new3(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQFileDialog* QFileDialog_new_parent(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileDialog(vtbl, parent) : nullptr;
 }
 
-VirtualQFileDialog* QFileDialog_new4(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent, struct seaqt_string caption) {
+VirtualQFileDialog* QFileDialog_new_parent_caption(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileDialog(vtbl, parent, caption_QString) : nullptr;
 }
 
-VirtualQFileDialog* QFileDialog_new5(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent, struct seaqt_string caption, struct seaqt_string directory) {
+VirtualQFileDialog* QFileDialog_new_parent_caption_directory(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent, struct seaqt_string caption, struct seaqt_string directory) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFileDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFileDialog(vtbl, parent, caption_QString, directory_QString) : nullptr;
 }
 
-VirtualQFileDialog* QFileDialog_new6(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent, struct seaqt_string caption, struct seaqt_string directory, struct seaqt_string filter) {
+VirtualQFileDialog* QFileDialog_new_parent_caption_directory_filter(const QFileDialog_VTable* vtbl, size_t vdata, QWidget* parent, struct seaqt_string caption, struct seaqt_string directory, struct seaqt_string filter) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
 	QString filter_QString = QString::fromUtf8(filter.data, filter.len);
@@ -809,7 +809,7 @@ int QFileDialog_metacall(QFileDialog* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFileDialog_tr(const char* s) {
+struct seaqt_string QFileDialog_tr_s(const char* s) {
 	QString _ret = QFileDialog::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -820,12 +820,12 @@ struct seaqt_string QFileDialog_tr(const char* s) {
 	return _ms;
 }
 
-void QFileDialog_setDirectory(QFileDialog* self, struct seaqt_string directory) {
+void QFileDialog_setDirectory_QString(QFileDialog* self, struct seaqt_string directory) {
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
 	self->setDirectory(directory_QString);
 }
 
-void QFileDialog_setDirectoryWithDirectory(QFileDialog* self, QDir* directory) {
+void QFileDialog_setDirectory_QDir(QFileDialog* self, QDir* directory) {
 	self->setDirectory(*directory);
 }
 
@@ -1173,7 +1173,7 @@ QAbstractProxyModel* QFileDialog_proxyModel(const QFileDialog* self) {
 	return self->proxyModel();
 }
 
-void QFileDialog_setOption(QFileDialog* self, int option) {
+void QFileDialog_setOption_option(QFileDialog* self, int option) {
 	self->setOption(static_cast<QFileDialog::Option>(option));
 }
 
@@ -1498,7 +1498,7 @@ void QFileDialog_saveFileContent(struct seaqt_string fileContent, struct seaqt_s
 	QFileDialog::saveFileContent(fileContent_QByteArray, fileNameHint_QString);
 }
 
-struct seaqt_string QFileDialog_tr2(const char* s, const char* c) {
+struct seaqt_string QFileDialog_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFileDialog::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1509,7 +1509,7 @@ struct seaqt_string QFileDialog_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFileDialog_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFileDialog::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1520,11 +1520,11 @@ struct seaqt_string QFileDialog_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QFileDialog_setOption2(QFileDialog* self, int option, bool on) {
+void QFileDialog_setOption_option_on(QFileDialog* self, int option, bool on) {
 	self->setOption(static_cast<QFileDialog::Option>(option), on);
 }
 
-struct seaqt_string QFileDialog_getOpenFileNameWithParent(QWidget* parent) {
+struct seaqt_string QFileDialog_getOpenFileName_parent(QWidget* parent) {
 	QString _ret = QFileDialog::getOpenFileName(parent);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1535,7 +1535,7 @@ struct seaqt_string QFileDialog_getOpenFileNameWithParent(QWidget* parent) {
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getOpenFileName2(QWidget* parent, struct seaqt_string caption) {
+struct seaqt_string QFileDialog_getOpenFileName_parent_caption(QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString _ret = QFileDialog::getOpenFileName(parent, caption_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1547,7 +1547,7 @@ struct seaqt_string QFileDialog_getOpenFileName2(QWidget* parent, struct seaqt_s
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getOpenFileName3(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir) {
+struct seaqt_string QFileDialog_getOpenFileName_parent_caption_dir(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString dir_QString = QString::fromUtf8(dir.data, dir.len);
 	QString _ret = QFileDialog::getOpenFileName(parent, caption_QString, dir_QString);
@@ -1560,7 +1560,7 @@ struct seaqt_string QFileDialog_getOpenFileName3(QWidget* parent, struct seaqt_s
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getOpenFileName4(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir, struct seaqt_string filter) {
+struct seaqt_string QFileDialog_getOpenFileName_parent_caption_dir_filter(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir, struct seaqt_string filter) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString dir_QString = QString::fromUtf8(dir.data, dir.len);
 	QString filter_QString = QString::fromUtf8(filter.data, filter.len);
@@ -1574,27 +1574,27 @@ struct seaqt_string QFileDialog_getOpenFileName4(QWidget* parent, struct seaqt_s
 	return _ms;
 }
 
-QUrl* QFileDialog_getOpenFileUrlWithParent(QWidget* parent) {
+QUrl* QFileDialog_getOpenFileUrl_parent(QWidget* parent) {
 	return new QUrl(QFileDialog::getOpenFileUrl(parent));
 }
 
-QUrl* QFileDialog_getOpenFileUrl2(QWidget* parent, struct seaqt_string caption) {
+QUrl* QFileDialog_getOpenFileUrl_parent_caption(QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	return new QUrl(QFileDialog::getOpenFileUrl(parent, caption_QString));
 }
 
-QUrl* QFileDialog_getOpenFileUrl3(QWidget* parent, struct seaqt_string caption, QUrl* dir) {
+QUrl* QFileDialog_getOpenFileUrl_parent_caption_dir(QWidget* parent, struct seaqt_string caption, QUrl* dir) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	return new QUrl(QFileDialog::getOpenFileUrl(parent, caption_QString, *dir));
 }
 
-QUrl* QFileDialog_getOpenFileUrl4(QWidget* parent, struct seaqt_string caption, QUrl* dir, struct seaqt_string filter) {
+QUrl* QFileDialog_getOpenFileUrl_parent_caption_dir_filter(QWidget* parent, struct seaqt_string caption, QUrl* dir, struct seaqt_string filter) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString filter_QString = QString::fromUtf8(filter.data, filter.len);
 	return new QUrl(QFileDialog::getOpenFileUrl(parent, caption_QString, *dir, filter_QString));
 }
 
-struct seaqt_string QFileDialog_getSaveFileNameWithParent(QWidget* parent) {
+struct seaqt_string QFileDialog_getSaveFileName_parent(QWidget* parent) {
 	QString _ret = QFileDialog::getSaveFileName(parent);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1605,7 +1605,7 @@ struct seaqt_string QFileDialog_getSaveFileNameWithParent(QWidget* parent) {
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getSaveFileName2(QWidget* parent, struct seaqt_string caption) {
+struct seaqt_string QFileDialog_getSaveFileName_parent_caption(QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString _ret = QFileDialog::getSaveFileName(parent, caption_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1617,7 +1617,7 @@ struct seaqt_string QFileDialog_getSaveFileName2(QWidget* parent, struct seaqt_s
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getSaveFileName3(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir) {
+struct seaqt_string QFileDialog_getSaveFileName_parent_caption_dir(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString dir_QString = QString::fromUtf8(dir.data, dir.len);
 	QString _ret = QFileDialog::getSaveFileName(parent, caption_QString, dir_QString);
@@ -1630,7 +1630,7 @@ struct seaqt_string QFileDialog_getSaveFileName3(QWidget* parent, struct seaqt_s
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getSaveFileName4(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir, struct seaqt_string filter) {
+struct seaqt_string QFileDialog_getSaveFileName_parent_caption_dir_filter(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir, struct seaqt_string filter) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString dir_QString = QString::fromUtf8(dir.data, dir.len);
 	QString filter_QString = QString::fromUtf8(filter.data, filter.len);
@@ -1644,27 +1644,27 @@ struct seaqt_string QFileDialog_getSaveFileName4(QWidget* parent, struct seaqt_s
 	return _ms;
 }
 
-QUrl* QFileDialog_getSaveFileUrlWithParent(QWidget* parent) {
+QUrl* QFileDialog_getSaveFileUrl_parent(QWidget* parent) {
 	return new QUrl(QFileDialog::getSaveFileUrl(parent));
 }
 
-QUrl* QFileDialog_getSaveFileUrl2(QWidget* parent, struct seaqt_string caption) {
+QUrl* QFileDialog_getSaveFileUrl_parent_caption(QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	return new QUrl(QFileDialog::getSaveFileUrl(parent, caption_QString));
 }
 
-QUrl* QFileDialog_getSaveFileUrl3(QWidget* parent, struct seaqt_string caption, QUrl* dir) {
+QUrl* QFileDialog_getSaveFileUrl_parent_caption_dir(QWidget* parent, struct seaqt_string caption, QUrl* dir) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	return new QUrl(QFileDialog::getSaveFileUrl(parent, caption_QString, *dir));
 }
 
-QUrl* QFileDialog_getSaveFileUrl4(QWidget* parent, struct seaqt_string caption, QUrl* dir, struct seaqt_string filter) {
+QUrl* QFileDialog_getSaveFileUrl_parent_caption_dir_filter(QWidget* parent, struct seaqt_string caption, QUrl* dir, struct seaqt_string filter) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString filter_QString = QString::fromUtf8(filter.data, filter.len);
 	return new QUrl(QFileDialog::getSaveFileUrl(parent, caption_QString, *dir, filter_QString));
 }
 
-struct seaqt_string QFileDialog_getExistingDirectoryWithParent(QWidget* parent) {
+struct seaqt_string QFileDialog_getExistingDirectory_parent(QWidget* parent) {
 	QString _ret = QFileDialog::getExistingDirectory(parent);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1675,7 +1675,7 @@ struct seaqt_string QFileDialog_getExistingDirectoryWithParent(QWidget* parent) 
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getExistingDirectory2(QWidget* parent, struct seaqt_string caption) {
+struct seaqt_string QFileDialog_getExistingDirectory_parent_caption(QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString _ret = QFileDialog::getExistingDirectory(parent, caption_QString);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1687,7 +1687,7 @@ struct seaqt_string QFileDialog_getExistingDirectory2(QWidget* parent, struct se
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getExistingDirectory3(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir) {
+struct seaqt_string QFileDialog_getExistingDirectory_parent_caption_dir(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString dir_QString = QString::fromUtf8(dir.data, dir.len);
 	QString _ret = QFileDialog::getExistingDirectory(parent, caption_QString, dir_QString);
@@ -1700,7 +1700,7 @@ struct seaqt_string QFileDialog_getExistingDirectory3(QWidget* parent, struct se
 	return _ms;
 }
 
-struct seaqt_string QFileDialog_getExistingDirectory4(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir, int options) {
+struct seaqt_string QFileDialog_getExistingDirectory_parent_caption_dir_options(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir, int options) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString dir_QString = QString::fromUtf8(dir.data, dir.len);
 	QString _ret = QFileDialog::getExistingDirectory(parent, caption_QString, dir_QString, static_cast<QFileDialog::Options>(options));
@@ -1713,26 +1713,26 @@ struct seaqt_string QFileDialog_getExistingDirectory4(QWidget* parent, struct se
 	return _ms;
 }
 
-QUrl* QFileDialog_getExistingDirectoryUrlWithParent(QWidget* parent) {
+QUrl* QFileDialog_getExistingDirectoryUrl_parent(QWidget* parent) {
 	return new QUrl(QFileDialog::getExistingDirectoryUrl(parent));
 }
 
-QUrl* QFileDialog_getExistingDirectoryUrl2(QWidget* parent, struct seaqt_string caption) {
+QUrl* QFileDialog_getExistingDirectoryUrl_parent_caption(QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	return new QUrl(QFileDialog::getExistingDirectoryUrl(parent, caption_QString));
 }
 
-QUrl* QFileDialog_getExistingDirectoryUrl3(QWidget* parent, struct seaqt_string caption, QUrl* dir) {
+QUrl* QFileDialog_getExistingDirectoryUrl_parent_caption_dir(QWidget* parent, struct seaqt_string caption, QUrl* dir) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	return new QUrl(QFileDialog::getExistingDirectoryUrl(parent, caption_QString, *dir));
 }
 
-QUrl* QFileDialog_getExistingDirectoryUrl4(QWidget* parent, struct seaqt_string caption, QUrl* dir, int options) {
+QUrl* QFileDialog_getExistingDirectoryUrl_parent_caption_dir_options(QWidget* parent, struct seaqt_string caption, QUrl* dir, int options) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	return new QUrl(QFileDialog::getExistingDirectoryUrl(parent, caption_QString, *dir, static_cast<QFileDialog::Options>(options)));
 }
 
-QUrl* QFileDialog_getExistingDirectoryUrl5(QWidget* parent, struct seaqt_string caption, QUrl* dir, int options, struct seaqt_array /* of struct seaqt_string */  supportedSchemes) {
+QUrl* QFileDialog_getExistingDirectoryUrl_parent_caption_dir_options_supportedSchemes(QWidget* parent, struct seaqt_string caption, QUrl* dir, int options, struct seaqt_array /* of struct seaqt_string */  supportedSchemes) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QStringList supportedSchemes_QList;
 	supportedSchemes_QList.reserve(supportedSchemes.len);
@@ -1744,7 +1744,7 @@ QUrl* QFileDialog_getExistingDirectoryUrl5(QWidget* parent, struct seaqt_string 
 	return new QUrl(QFileDialog::getExistingDirectoryUrl(parent, caption_QString, *dir, static_cast<QFileDialog::Options>(options), supportedSchemes_QList));
 }
 
-struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNamesWithParent(QWidget* parent) {
+struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames_parent(QWidget* parent) {
 	QStringList _ret = QFileDialog::getOpenFileNames(parent);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
@@ -1764,7 +1764,7 @@ struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNamesWit
 	return _out;
 }
 
-struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames2(QWidget* parent, struct seaqt_string caption) {
+struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames_parent_caption(QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QStringList _ret = QFileDialog::getOpenFileNames(parent, caption_QString);
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -1785,7 +1785,7 @@ struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames2(Q
 	return _out;
 }
 
-struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames3(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir) {
+struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames_parent_caption_dir(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString dir_QString = QString::fromUtf8(dir.data, dir.len);
 	QStringList _ret = QFileDialog::getOpenFileNames(parent, caption_QString, dir_QString);
@@ -1807,7 +1807,7 @@ struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames3(Q
 	return _out;
 }
 
-struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames4(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir, struct seaqt_string filter) {
+struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames_parent_caption_dir_filter(QWidget* parent, struct seaqt_string caption, struct seaqt_string dir, struct seaqt_string filter) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString dir_QString = QString::fromUtf8(dir.data, dir.len);
 	QString filter_QString = QString::fromUtf8(filter.data, filter.len);
@@ -1830,7 +1830,7 @@ struct seaqt_array /* of struct seaqt_string */  QFileDialog_getOpenFileNames4(Q
 	return _out;
 }
 
-struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrlsWithParent(QWidget* parent) {
+struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls_parent(QWidget* parent) {
 	QList<QUrl> _ret = QFileDialog::getOpenFileUrls(parent);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QUrl** _arr = static_cast<QUrl**>(malloc(sizeof(QUrl*) * _ret.length()));
@@ -1843,7 +1843,7 @@ struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrlsWithParent(QWidget
 	return _out;
 }
 
-struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls2(QWidget* parent, struct seaqt_string caption) {
+struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls_parent_caption(QWidget* parent, struct seaqt_string caption) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QList<QUrl> _ret = QFileDialog::getOpenFileUrls(parent, caption_QString);
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -1857,7 +1857,7 @@ struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls2(QWidget* parent,
 	return _out;
 }
 
-struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls3(QWidget* parent, struct seaqt_string caption, QUrl* dir) {
+struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls_parent_caption_dir(QWidget* parent, struct seaqt_string caption, QUrl* dir) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QList<QUrl> _ret = QFileDialog::getOpenFileUrls(parent, caption_QString, *dir);
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -1871,7 +1871,7 @@ struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls3(QWidget* parent,
 	return _out;
 }
 
-struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls4(QWidget* parent, struct seaqt_string caption, QUrl* dir, struct seaqt_string filter) {
+struct seaqt_array /* of QUrl* */  QFileDialog_getOpenFileUrls_parent_caption_dir_filter(QWidget* parent, struct seaqt_string caption, QUrl* dir, struct seaqt_string filter) {
 	QString caption_QString = QString::fromUtf8(caption.data, caption.len);
 	QString filter_QString = QString::fromUtf8(filter.data, filter.len);
 	QList<QUrl> _ret = QFileDialog::getOpenFileUrls(parent, caption_QString, *dir, filter_QString);

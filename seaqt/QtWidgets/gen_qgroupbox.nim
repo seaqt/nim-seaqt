@@ -73,7 +73,7 @@ type cQGroupBox*{.exportc: "QGroupBox", incompleteStruct.} = object
 proc fcQGroupBox_metaObject(self: pointer): pointer {.importc: "QGroupBox_metaObject".}
 proc fcQGroupBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QGroupBox_metacast".}
 proc fcQGroupBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGroupBox_metacall".}
-proc fcQGroupBox_tr(s: cstring): struct_seaqt_string {.importc: "QGroupBox_tr".}
+proc fcQGroupBox_trS(s: cstring): struct_seaqt_string {.importc: "QGroupBox_tr_s".}
 proc fcQGroupBox_title(self: pointer): struct_seaqt_string {.importc: "QGroupBox_title".}
 proc fcQGroupBox_setTitle(self: pointer, title: struct_seaqt_string): void {.importc: "QGroupBox_setTitle".}
 proc fcQGroupBox_alignment(self: pointer): cint {.importc: "QGroupBox_alignment".}
@@ -89,10 +89,10 @@ proc fcQGroupBox_clicked(self: pointer): void {.importc: "QGroupBox_clicked".}
 proc fcQGroupBox_connect_clicked(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGroupBox_connect_clicked".}
 proc fcQGroupBox_toggled(self: pointer, param1: bool): void {.importc: "QGroupBox_toggled".}
 proc fcQGroupBox_connect_toggled(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGroupBox_connect_toggled".}
-proc fcQGroupBox_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGroupBox_tr2".}
-proc fcQGroupBox_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGroupBox_tr3".}
-proc fcQGroupBox_clickedWithChecked(self: pointer, checked: bool): void {.importc: "QGroupBox_clickedWithChecked".}
-proc fcQGroupBox_connect_clickedWithChecked(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGroupBox_connect_clickedWithChecked".}
+proc fcQGroupBox_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGroupBox_tr_s_c".}
+proc fcQGroupBox_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGroupBox_tr_s_c_n".}
+proc fcQGroupBox_clickedChecked(self: pointer, checked: bool): void {.importc: "QGroupBox_clicked_checked".}
+proc fcQGroupBox_connect_clickedChecked(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGroupBox_connect_clicked_checked".}
 proc fcQGroupBox_vdata(self: pointer): ptr pointer {.importc: "QGroupBox_vdata".}
 proc fvdata_cQGroupBox(self: pointer): pointer {.importc: "vdata_QGroupBox".}
 
@@ -210,9 +210,9 @@ proc fcQGroupBox_protectedbase_senderSignalIndex(self: pointer): cint {.importc:
 proc fcQGroupBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGroupBox_protectedbase_receivers".}
 proc fcQGroupBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGroupBox_protectedbase_isSignalConnected".}
 proc fcQGroupBox_new(vtbl: pointer, vdata: csize_t): ptr cQGroupBox {.importc: "QGroupBox_new".}
-proc fcQGroupBox_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): ptr cQGroupBox {.importc: "QGroupBox_new2".}
-proc fcQGroupBox_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGroupBox {.importc: "QGroupBox_new3".}
-proc fcQGroupBox_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQGroupBox {.importc: "QGroupBox_new4".}
+proc fcQGroupBox_new2(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string): ptr cQGroupBox {.importc: "QGroupBox_new_title".}
+proc fcQGroupBox_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGroupBox {.importc: "QGroupBox_new_parent".}
+proc fcQGroupBox_new4(vtbl: pointer, vdata: csize_t, title: struct_seaqt_string, parent: pointer): ptr cQGroupBox {.importc: "QGroupBox_new_title_parent".}
 proc fcQGroupBox_staticMetaObject(): pointer {.importc: "QGroupBox_staticMetaObject".}
 
 proc metaObject*(self: gen_qgroupbox_types.QGroupBox): gen_qobjectdefs_types.QMetaObject =
@@ -225,7 +225,7 @@ proc metacall*(self: gen_qgroupbox_types.QGroupBox, param1: cint, param2: cint, 
   fcQGroupBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgroupbox_types.QGroupBox, s: cstring): string =
-  let v_ms = fcQGroupBox_tr(s)
+  let v_ms = fcQGroupBox_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -305,36 +305,36 @@ proc onToggled*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxtoggledSlot)
   fcQGroupBox_connect_toggled(self.h, cast[int](addr tmp[]), fcQGroupBox_slot_callback_toggled, fcQGroupBox_slot_callback_toggled_release)
 
 proc tr*(_: type gen_qgroupbox_types.QGroupBox, s: cstring, c: cstring): string =
-  let v_ms = fcQGroupBox_tr2(s, c)
+  let v_ms = fcQGroupBox_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgroupbox_types.QGroupBox, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGroupBox_tr3(s, c, n)
+  let v_ms = fcQGroupBox_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc clicked*(self: gen_qgroupbox_types.QGroupBox, checked: bool): void =
-  fcQGroupBox_clickedWithChecked(self.h, checked)
+  fcQGroupBox_clickedChecked(self.h, checked)
 
-type QGroupBoxclickedWithCheckedSlot* = proc(checked: bool)
-proc fcQGroupBox_slot_callback_clickedWithChecked(slot: int, checked: bool) {.cdecl.} =
-  let nimfunc = cast[ptr QGroupBoxclickedWithCheckedSlot](cast[pointer](slot))
+type QGroupBoxclickedCheckedSlot* = proc(checked: bool)
+proc fcQGroupBox_slot_callback_clickedChecked(slot: int, checked: bool) {.cdecl.} =
+  let nimfunc = cast[ptr QGroupBoxclickedCheckedSlot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
-proc fcQGroupBox_slot_callback_clickedWithChecked_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QGroupBoxclickedWithCheckedSlot](cast[pointer](slot))
+proc fcQGroupBox_slot_callback_clickedChecked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGroupBoxclickedCheckedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onClicked*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxclickedWithCheckedSlot) =
-  var tmp = new QGroupBoxclickedWithCheckedSlot
+proc onClicked*(self: gen_qgroupbox_types.QGroupBox, slot: QGroupBoxclickedCheckedSlot) =
+  var tmp = new QGroupBoxclickedCheckedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGroupBox_connect_clickedWithChecked(self.h, cast[int](addr tmp[]), fcQGroupBox_slot_callback_clickedWithChecked, fcQGroupBox_slot_callback_clickedWithChecked_release)
+  fcQGroupBox_connect_clickedChecked(self.h, cast[int](addr tmp[]), fcQGroupBox_slot_callback_clickedChecked, fcQGroupBox_slot_callback_clickedChecked_release)
 
 type QGroupBoxmetaObjectProc* = proc(self: QGroupBox): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QGroupBoxmetacastProc* = proc(self: QGroupBox, param1: cstring): pointer {.raises: [], gcsafe.}

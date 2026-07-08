@@ -27,9 +27,9 @@ typedef struct QPageRanges__Range QPageRanges__Range;
 #endif
 
 QPageRanges* QPageRanges_new();
-QPageRanges* QPageRanges_new2(QPageRanges* other);
+QPageRanges* QPageRanges_new_from(QPageRanges* from);
 
-void QPageRanges_operatorAssign(QPageRanges* self, QPageRanges* other);
+void QPageRanges_operatorAssign(QPageRanges* self, QPageRanges* from);
 void QPageRanges_swap(QPageRanges* self, QPageRanges* other);
 void QPageRanges_addPage(QPageRanges* self, int pageNumber);
 void QPageRanges_addRange(QPageRanges* self, int from, int to);
@@ -46,7 +46,7 @@ void QPageRanges_detach(QPageRanges* self);
 void QPageRanges_delete(QPageRanges* self);
 
 QPageRanges__Range* QPageRanges__Range_new();
-QPageRanges__Range* QPageRanges__Range_new2(QPageRanges__Range* param1);
+QPageRanges__Range* QPageRanges__Range_new_from(QPageRanges__Range* from);
 
 int QPageRanges__Range_from(const QPageRanges__Range* self);
 void QPageRanges__Range_setFrom(QPageRanges__Range* self, int from);

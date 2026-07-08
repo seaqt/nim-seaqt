@@ -59,13 +59,13 @@ type cQUndoGroup*{.exportc: "QUndoGroup", incompleteStruct.} = object
 proc fcQUndoGroup_metaObject(self: pointer): pointer {.importc: "QUndoGroup_metaObject".}
 proc fcQUndoGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QUndoGroup_metacast".}
 proc fcQUndoGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QUndoGroup_metacall".}
-proc fcQUndoGroup_tr(s: cstring): struct_seaqt_string {.importc: "QUndoGroup_tr".}
+proc fcQUndoGroup_trS(s: cstring): struct_seaqt_string {.importc: "QUndoGroup_tr_s".}
 proc fcQUndoGroup_addStack(self: pointer, stack: pointer): void {.importc: "QUndoGroup_addStack".}
 proc fcQUndoGroup_removeStack(self: pointer, stack: pointer): void {.importc: "QUndoGroup_removeStack".}
 proc fcQUndoGroup_stacks(self: pointer): struct_seaqt_array {.importc: "QUndoGroup_stacks".}
 proc fcQUndoGroup_activeStack(self: pointer): pointer {.importc: "QUndoGroup_activeStack".}
-proc fcQUndoGroup_createUndoAction(self: pointer, parent: pointer): pointer {.importc: "QUndoGroup_createUndoAction".}
-proc fcQUndoGroup_createRedoAction(self: pointer, parent: pointer): pointer {.importc: "QUndoGroup_createRedoAction".}
+proc fcQUndoGroup_createUndoActionParent(self: pointer, parent: pointer): pointer {.importc: "QUndoGroup_createUndoAction_parent".}
+proc fcQUndoGroup_createRedoActionParent(self: pointer, parent: pointer): pointer {.importc: "QUndoGroup_createRedoAction_parent".}
 proc fcQUndoGroup_canUndo(self: pointer): bool {.importc: "QUndoGroup_canUndo".}
 proc fcQUndoGroup_canRedo(self: pointer): bool {.importc: "QUndoGroup_canRedo".}
 proc fcQUndoGroup_undoText(self: pointer): struct_seaqt_string {.importc: "QUndoGroup_undoText".}
@@ -88,10 +88,10 @@ proc fcQUndoGroup_undoTextChanged(self: pointer, undoText: struct_seaqt_string):
 proc fcQUndoGroup_connect_undoTextChanged(self: pointer, slot: int, callback: proc (slot: int, undoText: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_undoTextChanged".}
 proc fcQUndoGroup_redoTextChanged(self: pointer, redoText: struct_seaqt_string): void {.importc: "QUndoGroup_redoTextChanged".}
 proc fcQUndoGroup_connect_redoTextChanged(self: pointer, slot: int, callback: proc (slot: int, redoText: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_redoTextChanged".}
-proc fcQUndoGroup_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUndoGroup_tr2".}
-proc fcQUndoGroup_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUndoGroup_tr3".}
-proc fcQUndoGroup_createUndoAction2(self: pointer, parent: pointer, prefix: struct_seaqt_string): pointer {.importc: "QUndoGroup_createUndoAction2".}
-proc fcQUndoGroup_createRedoAction2(self: pointer, parent: pointer, prefix: struct_seaqt_string): pointer {.importc: "QUndoGroup_createRedoAction2".}
+proc fcQUndoGroup_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUndoGroup_tr_s_c".}
+proc fcQUndoGroup_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUndoGroup_tr_s_c_n".}
+proc fcQUndoGroup_createUndoActionParentPrefix(self: pointer, parent: pointer, prefix: struct_seaqt_string): pointer {.importc: "QUndoGroup_createUndoAction_parent_prefix".}
+proc fcQUndoGroup_createRedoActionParentPrefix(self: pointer, parent: pointer, prefix: struct_seaqt_string): pointer {.importc: "QUndoGroup_createRedoAction_parent_prefix".}
 proc fcQUndoGroup_vdata(self: pointer): ptr pointer {.importc: "QUndoGroup_vdata".}
 proc fvdata_cQUndoGroup(self: pointer): pointer {.importc: "vdata_QUndoGroup".}
 
@@ -122,7 +122,7 @@ proc fcQUndoGroup_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQUndoGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QUndoGroup_protectedbase_receivers".}
 proc fcQUndoGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QUndoGroup_protectedbase_isSignalConnected".}
 proc fcQUndoGroup_new(vtbl: pointer, vdata: csize_t): ptr cQUndoGroup {.importc: "QUndoGroup_new".}
-proc fcQUndoGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUndoGroup {.importc: "QUndoGroup_new2".}
+proc fcQUndoGroup_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUndoGroup {.importc: "QUndoGroup_new_parent".}
 proc fcQUndoGroup_staticMetaObject(): pointer {.importc: "QUndoGroup_staticMetaObject".}
 
 proc metaObject*(self: gen_qundogroup_types.QUndoGroup): gen_qobjectdefs_types.QMetaObject =
@@ -135,7 +135,7 @@ proc metacall*(self: gen_qundogroup_types.QUndoGroup, param1: cint, param2: cint
   fcQUndoGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qundogroup_types.QUndoGroup, s: cstring): string =
-  let v_ms = fcQUndoGroup_tr(s)
+  let v_ms = fcQUndoGroup_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -159,10 +159,10 @@ proc activeStack*(self: gen_qundogroup_types.QUndoGroup): gen_qundostack_types.Q
   gen_qundostack_types.QUndoStack(h: fcQUndoGroup_activeStack(self.h), owned: false)
 
 proc createUndoAction*(self: gen_qundogroup_types.QUndoGroup, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoGroup_createUndoAction(self.h, parent.h), owned: false)
+  gen_qaction_types.QAction(h: fcQUndoGroup_createUndoActionParent(self.h, parent.h), owned: false)
 
 proc createRedoAction*(self: gen_qundogroup_types.QUndoGroup, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoGroup_createRedoAction(self.h, parent.h), owned: false)
+  gen_qaction_types.QAction(h: fcQUndoGroup_createRedoActionParent(self.h, parent.h), owned: false)
 
 proc canUndo*(self: gen_qundogroup_types.QUndoGroup): bool =
   fcQUndoGroup_canUndo(self.h)
@@ -341,22 +341,22 @@ proc onRedoTextChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupr
   fcQUndoGroup_connect_redoTextChanged(self.h, cast[int](addr tmp[]), fcQUndoGroup_slot_callback_redoTextChanged, fcQUndoGroup_slot_callback_redoTextChanged_release)
 
 proc tr*(_: type gen_qundogroup_types.QUndoGroup, s: cstring, c: cstring): string =
-  let v_ms = fcQUndoGroup_tr2(s, c)
+  let v_ms = fcQUndoGroup_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qundogroup_types.QUndoGroup, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQUndoGroup_tr3(s, c, n)
+  let v_ms = fcQUndoGroup_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc createUndoAction*(self: gen_qundogroup_types.QUndoGroup, parent: gen_qobject_types.QObject, prefix: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoGroup_createUndoAction2(self.h, parent.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
+  gen_qaction_types.QAction(h: fcQUndoGroup_createUndoActionParentPrefix(self.h, parent.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
 
 proc createRedoAction*(self: gen_qundogroup_types.QUndoGroup, parent: gen_qobject_types.QObject, prefix: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoGroup_createRedoAction2(self.h, parent.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
+  gen_qaction_types.QAction(h: fcQUndoGroup_createRedoActionParentPrefix(self.h, parent.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
 
 type QUndoGroupmetaObjectProc* = proc(self: QUndoGroup): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QUndoGroupmetacastProc* = proc(self: QUndoGroup, param1: cstring): pointer {.raises: [], gcsafe.}

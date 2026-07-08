@@ -179,7 +179,7 @@ VirtualQMediaPlayer* QMediaPlayer_new(const QMediaPlayer_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQMediaPlayer(vtbl) : nullptr;
 }
 
-VirtualQMediaPlayer* QMediaPlayer_new2(const QMediaPlayer_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQMediaPlayer* QMediaPlayer_new_parent(const QMediaPlayer_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMediaPlayer>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMediaPlayer(vtbl, parent) : nullptr;
 }
@@ -200,7 +200,7 @@ int QMediaPlayer_metacall(QMediaPlayer* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMediaPlayer_tr(const char* s) {
+struct seaqt_string QMediaPlayer_tr_s(const char* s) {
 	QString _ret = QMediaPlayer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -407,7 +407,7 @@ void QMediaPlayer_setSource(QMediaPlayer* self, QUrl* source) {
 	self->setSource(*source);
 }
 
-void QMediaPlayer_setSourceDevice(QMediaPlayer* self, QIODevice* device) {
+void QMediaPlayer_setSourceDevice_device(QMediaPlayer* self, QIODevice* device) {
 	self->setSourceDevice(device);
 }
 
@@ -709,7 +709,7 @@ void QMediaPlayer_connect_errorOccurred(QMediaPlayer* self, intptr_t slot, void 
 	QMediaPlayer::connect(self, static_cast<void (QMediaPlayer::*)(QMediaPlayer::Error, const QString&)>(&QMediaPlayer::errorOccurred), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMediaPlayer_tr2(const char* s, const char* c) {
+struct seaqt_string QMediaPlayer_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMediaPlayer::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -720,7 +720,7 @@ struct seaqt_string QMediaPlayer_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMediaPlayer_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMediaPlayer_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMediaPlayer::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -731,7 +731,7 @@ struct seaqt_string QMediaPlayer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QMediaPlayer_setSourceDevice2(QMediaPlayer* self, QIODevice* device, QUrl* sourceUrl) {
+void QMediaPlayer_setSourceDevice_device_sourceUrl(QMediaPlayer* self, QIODevice* device, QUrl* sourceUrl) {
 	self->setSourceDevice(device, *sourceUrl);
 }
 

@@ -29,9 +29,9 @@ typedef struct QNetworkInterface QNetworkInterface;
 #endif
 
 QNetworkAddressEntry* QNetworkAddressEntry_new();
-QNetworkAddressEntry* QNetworkAddressEntry_new2(QNetworkAddressEntry* other);
+QNetworkAddressEntry* QNetworkAddressEntry_new_from(QNetworkAddressEntry* from);
 
-void QNetworkAddressEntry_operatorAssign(QNetworkAddressEntry* self, QNetworkAddressEntry* other);
+void QNetworkAddressEntry_operatorAssign(QNetworkAddressEntry* self, QNetworkAddressEntry* from);
 void QNetworkAddressEntry_swap(QNetworkAddressEntry* self, QNetworkAddressEntry* other);
 bool QNetworkAddressEntry_operatorEqual(const QNetworkAddressEntry* self, QNetworkAddressEntry* other);
 bool QNetworkAddressEntry_operatorNotEqual(const QNetworkAddressEntry* self, QNetworkAddressEntry* other);
@@ -56,9 +56,9 @@ bool QNetworkAddressEntry_isTemporary(const QNetworkAddressEntry* self);
 void QNetworkAddressEntry_delete(QNetworkAddressEntry* self);
 
 QNetworkInterface* QNetworkInterface_new();
-QNetworkInterface* QNetworkInterface_new2(QNetworkInterface* other);
+QNetworkInterface* QNetworkInterface_new_from(QNetworkInterface* from);
 
-void QNetworkInterface_operatorAssign(QNetworkInterface* self, QNetworkInterface* other);
+void QNetworkInterface_operatorAssign(QNetworkInterface* self, QNetworkInterface* from);
 void QNetworkInterface_swap(QNetworkInterface* self, QNetworkInterface* other);
 bool QNetworkInterface_isValid(const QNetworkInterface* self);
 int QNetworkInterface_index(const QNetworkInterface* self);

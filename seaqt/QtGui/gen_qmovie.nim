@@ -78,7 +78,7 @@ type cQMovie*{.exportc: "QMovie", incompleteStruct.} = object
 proc fcQMovie_metaObject(self: pointer): pointer {.importc: "QMovie_metaObject".}
 proc fcQMovie_metacast(self: pointer, param1: cstring): pointer {.importc: "QMovie_metacast".}
 proc fcQMovie_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMovie_metacall".}
-proc fcQMovie_tr(s: cstring): struct_seaqt_string {.importc: "QMovie_tr".}
+proc fcQMovie_trS(s: cstring): struct_seaqt_string {.importc: "QMovie_tr_s".}
 proc fcQMovie_supportedFormats(): struct_seaqt_array {.importc: "QMovie_supportedFormats".}
 proc fcQMovie_setDevice(self: pointer, device: pointer): void {.importc: "QMovie_setDevice".}
 proc fcQMovie_device(self: pointer): pointer {.importc: "QMovie_device".}
@@ -124,8 +124,8 @@ proc fcQMovie_jumpToNextFrame(self: pointer): bool {.importc: "QMovie_jumpToNext
 proc fcQMovie_setPaused(self: pointer, paused: bool): void {.importc: "QMovie_setPaused".}
 proc fcQMovie_stop(self: pointer): void {.importc: "QMovie_stop".}
 proc fcQMovie_setSpeed(self: pointer, percentSpeed: cint): void {.importc: "QMovie_setSpeed".}
-proc fcQMovie_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMovie_tr2".}
-proc fcQMovie_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMovie_tr3".}
+proc fcQMovie_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMovie_tr_s_c".}
+proc fcQMovie_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMovie_tr_s_c_n".}
 proc fcQMovie_vdata(self: pointer): ptr pointer {.importc: "QMovie_vdata".}
 proc fvdata_cQMovie(self: pointer): pointer {.importc: "vdata_QMovie".}
 
@@ -156,13 +156,13 @@ proc fcQMovie_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "Q
 proc fcQMovie_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMovie_protectedbase_receivers".}
 proc fcQMovie_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMovie_protectedbase_isSignalConnected".}
 proc fcQMovie_new(vtbl: pointer, vdata: csize_t): ptr cQMovie {.importc: "QMovie_new".}
-proc fcQMovie_new2(vtbl: pointer, vdata: csize_t, device: pointer): ptr cQMovie {.importc: "QMovie_new2".}
-proc fcQMovie_new3(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQMovie {.importc: "QMovie_new3".}
-proc fcQMovie_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMovie {.importc: "QMovie_new4".}
-proc fcQMovie_new5(vtbl: pointer, vdata: csize_t, device: pointer, format: struct_seaqt_string): ptr cQMovie {.importc: "QMovie_new5".}
-proc fcQMovie_new6(vtbl: pointer, vdata: csize_t, device: pointer, format: struct_seaqt_string, parent: pointer): ptr cQMovie {.importc: "QMovie_new6".}
-proc fcQMovie_new7(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQMovie {.importc: "QMovie_new7".}
-proc fcQMovie_new8(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: struct_seaqt_string, parent: pointer): ptr cQMovie {.importc: "QMovie_new8".}
+proc fcQMovie_new2(vtbl: pointer, vdata: csize_t, device: pointer): ptr cQMovie {.importc: "QMovie_new_device".}
+proc fcQMovie_new3(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string): ptr cQMovie {.importc: "QMovie_new_fileName".}
+proc fcQMovie_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMovie {.importc: "QMovie_new_parent".}
+proc fcQMovie_new5(vtbl: pointer, vdata: csize_t, device: pointer, format: struct_seaqt_string): ptr cQMovie {.importc: "QMovie_new_device_format".}
+proc fcQMovie_new6(vtbl: pointer, vdata: csize_t, device: pointer, format: struct_seaqt_string, parent: pointer): ptr cQMovie {.importc: "QMovie_new_device_format_parent".}
+proc fcQMovie_new7(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQMovie {.importc: "QMovie_new_fileName_format".}
+proc fcQMovie_new8(vtbl: pointer, vdata: csize_t, fileName: struct_seaqt_string, format: struct_seaqt_string, parent: pointer): ptr cQMovie {.importc: "QMovie_new_fileName_format_parent".}
 proc fcQMovie_staticMetaObject(): pointer {.importc: "QMovie_staticMetaObject".}
 
 proc metaObject*(self: gen_qmovie_types.QMovie): gen_qobjectdefs_types.QMetaObject =
@@ -175,7 +175,7 @@ proc metacall*(self: gen_qmovie_types.QMovie, param1: cint, param2: cint, param3
   fcQMovie_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmovie_types.QMovie, s: cstring): string =
-  let v_ms = fcQMovie_tr(s)
+  let v_ms = fcQMovie_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -428,13 +428,13 @@ proc setSpeed*(self: gen_qmovie_types.QMovie, percentSpeed: cint): void =
   fcQMovie_setSpeed(self.h, percentSpeed)
 
 proc tr*(_: type gen_qmovie_types.QMovie, s: cstring, c: cstring): string =
-  let v_ms = fcQMovie_tr2(s, c)
+  let v_ms = fcQMovie_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qmovie_types.QMovie, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQMovie_tr3(s, c, n)
+  let v_ms = fcQMovie_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

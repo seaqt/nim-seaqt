@@ -145,17 +145,17 @@ typedef struct QDesignerObjectInspectorInterface_VTable{
 void* QDesignerObjectInspectorInterface_vdata(VirtualQDesignerObjectInspectorInterface* self);
 VirtualQDesignerObjectInspectorInterface* vdata_QDesignerObjectInspectorInterface(void* vdata);
 
-VirtualQDesignerObjectInspectorInterface* QDesignerObjectInspectorInterface_new(const QDesignerObjectInspectorInterface_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDesignerObjectInspectorInterface* QDesignerObjectInspectorInterface_new2(const QDesignerObjectInspectorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQDesignerObjectInspectorInterface* QDesignerObjectInspectorInterface_new_parent(const QDesignerObjectInspectorInterface_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDesignerObjectInspectorInterface* QDesignerObjectInspectorInterface_new_parent_flags(const QDesignerObjectInspectorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
 
 void QDesignerObjectInspectorInterface_virtbase(QDesignerObjectInspectorInterface* src, QWidget** outptr_QWidget);
 QMetaObject* QDesignerObjectInspectorInterface_metaObject(const QDesignerObjectInspectorInterface* self);
 void* QDesignerObjectInspectorInterface_metacast(QDesignerObjectInspectorInterface* self, const char* param1);
 int QDesignerObjectInspectorInterface_metacall(QDesignerObjectInspectorInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerObjectInspectorInterface_tr(const char* s);
+struct seaqt_string QDesignerObjectInspectorInterface_tr_s(const char* s);
 void QDesignerObjectInspectorInterface_setFormWindow(QDesignerObjectInspectorInterface* self, QDesignerFormWindowInterface* formWindow);
-struct seaqt_string QDesignerObjectInspectorInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerObjectInspectorInterface_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDesignerObjectInspectorInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerObjectInspectorInterface_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDesignerObjectInspectorInterface_virtualbase_metaObject(const VirtualQDesignerObjectInspectorInterface* self);
 void* QDesignerObjectInspectorInterface_virtualbase_metacast(VirtualQDesignerObjectInspectorInterface* self, const char* param1);

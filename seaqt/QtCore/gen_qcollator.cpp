@@ -18,12 +18,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QCollatorSortKey* QCollatorSortKey_new(QCollatorSortKey* other) {
-	return new (std::nothrow) QCollatorSortKey(*other);
+QCollatorSortKey* QCollatorSortKey_new(QCollatorSortKey* from) {
+	return new (std::nothrow) QCollatorSortKey(*from);
 }
 
-void QCollatorSortKey_operatorAssign(QCollatorSortKey* self, QCollatorSortKey* other) {
-	self->operator=(*other);
+void QCollatorSortKey_operatorAssign(QCollatorSortKey* self, QCollatorSortKey* from) {
+	self->operator=(*from);
 }
 
 void QCollatorSortKey_swap(QCollatorSortKey* self, QCollatorSortKey* other) {
@@ -42,16 +42,16 @@ QCollator* QCollator_new() {
 	return new (std::nothrow) QCollator();
 }
 
-QCollator* QCollator_new2(QLocale* locale) {
+QCollator* QCollator_new_locale(QLocale* locale) {
 	return new (std::nothrow) QCollator(*locale);
 }
 
-QCollator* QCollator_new3(QCollator* param1) {
-	return new (std::nothrow) QCollator(*param1);
+QCollator* QCollator_new_from(QCollator* from) {
+	return new (std::nothrow) QCollator(*from);
 }
 
-void QCollator_operatorAssign(QCollator* self, QCollator* param1) {
-	self->operator=(*param1);
+void QCollator_operatorAssign(QCollator* self, QCollator* from) {
+	self->operator=(*from);
 }
 
 void QCollator_swap(QCollator* self, QCollator* other) {
@@ -91,17 +91,17 @@ bool QCollator_ignorePunctuation(const QCollator* self) {
 	return self->ignorePunctuation();
 }
 
-int QCollator_compare(const QCollator* self, struct seaqt_string s1, struct seaqt_string s2) {
+int QCollator_compare_QString_QString(const QCollator* self, struct seaqt_string s1, struct seaqt_string s2) {
 	QString s1_QString = QString::fromUtf8(s1.data, s1.len);
 	QString s2_QString = QString::fromUtf8(s2.data, s2.len);
 	return self->compare(s1_QString, s2_QString);
 }
 
-int QCollator_compare2(const QCollator* self, QChar* s1, ptrdiff_t len1, QChar* s2, ptrdiff_t len2) {
+int QCollator_compare_QChar_qsizetype_QChar_qsizetype(const QCollator* self, QChar* s1, ptrdiff_t len1, QChar* s2, ptrdiff_t len2) {
 	return self->compare(s1, (qsizetype)(len1), s2, (qsizetype)(len2));
 }
 
-bool QCollator_operatorCall(const QCollator* self, struct seaqt_string s1, struct seaqt_string s2) {
+bool QCollator_operatorCall_QString_QString(const QCollator* self, struct seaqt_string s1, struct seaqt_string s2) {
 	QString s1_QString = QString::fromUtf8(s1.data, s1.len);
 	QString s2_QString = QString::fromUtf8(s2.data, s2.len);
 	return self->operator()(s1_QString, s2_QString);

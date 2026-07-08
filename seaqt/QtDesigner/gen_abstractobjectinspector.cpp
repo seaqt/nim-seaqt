@@ -699,12 +699,12 @@ public:
 	friend bool QDesignerObjectInspectorInterface_protectedbase_isSignalConnected(const VirtualQDesignerObjectInspectorInterface* self, QMetaMethod* signal);
 };
 
-VirtualQDesignerObjectInspectorInterface* QDesignerObjectInspectorInterface_new(const QDesignerObjectInspectorInterface_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDesignerObjectInspectorInterface* QDesignerObjectInspectorInterface_new_parent(const QDesignerObjectInspectorInterface_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDesignerObjectInspectorInterface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDesignerObjectInspectorInterface(vtbl, parent) : nullptr;
 }
 
-VirtualQDesignerObjectInspectorInterface* QDesignerObjectInspectorInterface_new2(const QDesignerObjectInspectorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQDesignerObjectInspectorInterface* QDesignerObjectInspectorInterface_new_parent_flags(const QDesignerObjectInspectorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDesignerObjectInspectorInterface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDesignerObjectInspectorInterface(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -725,7 +725,7 @@ int QDesignerObjectInspectorInterface_metacall(QDesignerObjectInspectorInterface
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDesignerObjectInspectorInterface_tr(const char* s) {
+struct seaqt_string QDesignerObjectInspectorInterface_tr_s(const char* s) {
 	QString _ret = QDesignerObjectInspectorInterface::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -740,7 +740,7 @@ void QDesignerObjectInspectorInterface_setFormWindow(QDesignerObjectInspectorInt
 	self->setFormWindow(formWindow);
 }
 
-struct seaqt_string QDesignerObjectInspectorInterface_tr2(const char* s, const char* c) {
+struct seaqt_string QDesignerObjectInspectorInterface_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDesignerObjectInspectorInterface::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -751,7 +751,7 @@ struct seaqt_string QDesignerObjectInspectorInterface_tr2(const char* s, const c
 	return _ms;
 }
 
-struct seaqt_string QDesignerObjectInspectorInterface_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDesignerObjectInspectorInterface_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDesignerObjectInspectorInterface::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

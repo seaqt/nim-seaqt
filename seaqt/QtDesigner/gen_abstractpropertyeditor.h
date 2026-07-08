@@ -148,14 +148,14 @@ typedef struct QDesignerPropertyEditorInterface_VTable{
 void* QDesignerPropertyEditorInterface_vdata(VirtualQDesignerPropertyEditorInterface* self);
 VirtualQDesignerPropertyEditorInterface* vdata_QDesignerPropertyEditorInterface(void* vdata);
 
-VirtualQDesignerPropertyEditorInterface* QDesignerPropertyEditorInterface_new(const QDesignerPropertyEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDesignerPropertyEditorInterface* QDesignerPropertyEditorInterface_new2(const QDesignerPropertyEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQDesignerPropertyEditorInterface* QDesignerPropertyEditorInterface_new_parent(const QDesignerPropertyEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDesignerPropertyEditorInterface* QDesignerPropertyEditorInterface_new_parent_flags(const QDesignerPropertyEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
 
 void QDesignerPropertyEditorInterface_virtbase(QDesignerPropertyEditorInterface* src, QWidget** outptr_QWidget);
 QMetaObject* QDesignerPropertyEditorInterface_metaObject(const QDesignerPropertyEditorInterface* self);
 void* QDesignerPropertyEditorInterface_metacast(QDesignerPropertyEditorInterface* self, const char* param1);
 int QDesignerPropertyEditorInterface_metacall(QDesignerPropertyEditorInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerPropertyEditorInterface_tr(const char* s);
+struct seaqt_string QDesignerPropertyEditorInterface_tr_s(const char* s);
 bool QDesignerPropertyEditorInterface_isReadOnly(const QDesignerPropertyEditorInterface* self);
 QObject* QDesignerPropertyEditorInterface_object(const QDesignerPropertyEditorInterface* self);
 struct seaqt_string QDesignerPropertyEditorInterface_currentPropertyName(const QDesignerPropertyEditorInterface* self);
@@ -164,8 +164,8 @@ void QDesignerPropertyEditorInterface_connect_propertyChanged(QDesignerPropertyE
 void QDesignerPropertyEditorInterface_setObject(QDesignerPropertyEditorInterface* self, QObject* object);
 void QDesignerPropertyEditorInterface_setPropertyValue(QDesignerPropertyEditorInterface* self, struct seaqt_string name, QVariant* value, bool changed);
 void QDesignerPropertyEditorInterface_setReadOnly(QDesignerPropertyEditorInterface* self, bool readOnly);
-struct seaqt_string QDesignerPropertyEditorInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerPropertyEditorInterface_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDesignerPropertyEditorInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerPropertyEditorInterface_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDesignerPropertyEditorInterface_virtualbase_metaObject(const VirtualQDesignerPropertyEditorInterface* self);
 void* QDesignerPropertyEditorInterface_virtualbase_metacast(VirtualQDesignerPropertyEditorInterface* self, const char* param1);

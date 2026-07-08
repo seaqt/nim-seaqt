@@ -104,13 +104,13 @@ void* QPdfBookmarkModel_vdata(VirtualQPdfBookmarkModel* self);
 VirtualQPdfBookmarkModel* vdata_QPdfBookmarkModel(void* vdata);
 
 VirtualQPdfBookmarkModel* QPdfBookmarkModel_new(const QPdfBookmarkModel_VTable* vtbl, size_t vdata);
-VirtualQPdfBookmarkModel* QPdfBookmarkModel_new2(const QPdfBookmarkModel_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQPdfBookmarkModel* QPdfBookmarkModel_new_parent(const QPdfBookmarkModel_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QPdfBookmarkModel_virtbase(QPdfBookmarkModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QPdfBookmarkModel_metaObject(const QPdfBookmarkModel* self);
 void* QPdfBookmarkModel_metacast(QPdfBookmarkModel* self, const char* param1);
 int QPdfBookmarkModel_metacall(QPdfBookmarkModel* self, int param1, int param2, void** param3);
-struct seaqt_string QPdfBookmarkModel_tr(const char* s);
+struct seaqt_string QPdfBookmarkModel_tr_s(const char* s);
 QPdfDocument* QPdfBookmarkModel_document(const QPdfBookmarkModel* self);
 void QPdfBookmarkModel_setDocument(QPdfBookmarkModel* self, QPdfDocument* document);
 QVariant* QPdfBookmarkModel_data(const QPdfBookmarkModel* self, QModelIndex* index, int role);
@@ -121,8 +121,8 @@ int QPdfBookmarkModel_columnCount(const QPdfBookmarkModel* self, QModelIndex* pa
 struct seaqt_map /* of int to struct seaqt_string */  QPdfBookmarkModel_roleNames(const QPdfBookmarkModel* self);
 void QPdfBookmarkModel_documentChanged(QPdfBookmarkModel* self, QPdfDocument* document);
 void QPdfBookmarkModel_connect_documentChanged(QPdfBookmarkModel* self, intptr_t slot, void (*callback)(intptr_t, QPdfDocument*), void (*release)(intptr_t));
-struct seaqt_string QPdfBookmarkModel_tr2(const char* s, const char* c);
-struct seaqt_string QPdfBookmarkModel_tr3(const char* s, const char* c, int n);
+struct seaqt_string QPdfBookmarkModel_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPdfBookmarkModel_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPdfBookmarkModel_virtualbase_metaObject(const VirtualQPdfBookmarkModel* self);
 void* QPdfBookmarkModel_virtualbase_metacast(VirtualQPdfBookmarkModel* self, const char* param1);
@@ -172,7 +172,7 @@ void QPdfBookmarkModel_virtualbase_customEvent(VirtualQPdfBookmarkModel* self, Q
 void QPdfBookmarkModel_virtualbase_connectNotify(VirtualQPdfBookmarkModel* self, QMetaMethod* signal);
 void QPdfBookmarkModel_virtualbase_disconnectNotify(VirtualQPdfBookmarkModel* self, QMetaMethod* signal);
 
-QModelIndex* QPdfBookmarkModel_protectedbase_createIndex(const VirtualQPdfBookmarkModel* self, int row, int column);
+QModelIndex* QPdfBookmarkModel_protectedbase_createIndex_row_column(const VirtualQPdfBookmarkModel* self, int row, int column);
 void QPdfBookmarkModel_protectedbase_encodeData(const VirtualQPdfBookmarkModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 bool QPdfBookmarkModel_protectedbase_decodeData(VirtualQPdfBookmarkModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 void QPdfBookmarkModel_protectedbase_beginInsertRows(VirtualQPdfBookmarkModel* self, QModelIndex* parent, int first, int last);

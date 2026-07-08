@@ -46,8 +46,8 @@ type cQBasicTimer*{.exportc: "QBasicTimer", incompleteStruct.} = object
 proc fcQBasicTimer_swap(self: pointer, other: pointer): void {.importc: "QBasicTimer_swap".}
 proc fcQBasicTimer_isActive(self: pointer): bool {.importc: "QBasicTimer_isActive".}
 proc fcQBasicTimer_timerId(self: pointer): cint {.importc: "QBasicTimer_timerId".}
-proc fcQBasicTimer_start(self: pointer, msec: cint, obj: pointer): void {.importc: "QBasicTimer_start".}
-proc fcQBasicTimer_start2(self: pointer, msec: cint, timerType: cint, obj: pointer): void {.importc: "QBasicTimer_start2".}
+proc fcQBasicTimer_startMsecObj(self: pointer, msec: cint, obj: pointer): void {.importc: "QBasicTimer_start_msec_obj".}
+proc fcQBasicTimer_startMsecTimerTypeObj(self: pointer, msec: cint, timerType: cint, obj: pointer): void {.importc: "QBasicTimer_start_msec_timerType_obj".}
 proc fcQBasicTimer_stop(self: pointer): void {.importc: "QBasicTimer_stop".}
 proc fcQBasicTimer_new(): ptr cQBasicTimer {.importc: "QBasicTimer_new".}
 
@@ -61,10 +61,10 @@ proc timerId*(self: gen_qbasictimer_types.QBasicTimer): cint =
   fcQBasicTimer_timerId(self.h)
 
 proc start*(self: gen_qbasictimer_types.QBasicTimer, msec: cint, obj: gen_qobject_types.QObject): void =
-  fcQBasicTimer_start(self.h, msec, obj.h)
+  fcQBasicTimer_startMsecObj(self.h, msec, obj.h)
 
 proc start*(self: gen_qbasictimer_types.QBasicTimer, msec: cint, timerType: cint, obj: gen_qobject_types.QObject): void =
-  fcQBasicTimer_start2(self.h, msec, cint(timerType), obj.h)
+  fcQBasicTimer_startMsecTimerTypeObj(self.h, msec, cint(timerType), obj.h)
 
 proc stop*(self: gen_qbasictimer_types.QBasicTimer): void =
   fcQBasicTimer_stop(self.h)

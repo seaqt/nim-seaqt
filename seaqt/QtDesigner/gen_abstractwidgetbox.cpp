@@ -851,12 +851,12 @@ VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new(const QDesig
 	return _mem_ ? new (_mem_)VirtualQDesignerWidgetBoxInterface(vtbl) : nullptr;
 }
 
-VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new2(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new_parent(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDesignerWidgetBoxInterface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDesignerWidgetBoxInterface(vtbl, parent) : nullptr;
 }
 
-VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new3(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
+VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new_parent_flags(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQDesignerWidgetBoxInterface>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQDesignerWidgetBoxInterface(vtbl, parent, static_cast<Qt::WindowFlags>(flags)) : nullptr;
 }
@@ -877,7 +877,7 @@ int QDesignerWidgetBoxInterface_metacall(QDesignerWidgetBoxInterface* self, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QDesignerWidgetBoxInterface_tr(const char* s) {
+struct seaqt_string QDesignerWidgetBoxInterface_tr_s(const char* s) {
 	QString _ret = QDesignerWidgetBoxInterface::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -959,7 +959,7 @@ bool QDesignerWidgetBoxInterface_save(QDesignerWidgetBoxInterface* self) {
 	return self->save();
 }
 
-struct seaqt_string QDesignerWidgetBoxInterface_tr2(const char* s, const char* c) {
+struct seaqt_string QDesignerWidgetBoxInterface_tr_s_c(const char* s, const char* c) {
 	QString _ret = QDesignerWidgetBoxInterface::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -970,7 +970,7 @@ struct seaqt_string QDesignerWidgetBoxInterface_tr2(const char* s, const char* c
 	return _ms;
 }
 
-struct seaqt_string QDesignerWidgetBoxInterface_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QDesignerWidgetBoxInterface_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QDesignerWidgetBoxInterface::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1280,37 +1280,37 @@ QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new() {
 	return new (std::nothrow) QDesignerWidgetBoxInterface__Widget();
 }
 
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new2(QDesignerWidgetBoxInterface__Widget* w) {
-	return new (std::nothrow) QDesignerWidgetBoxInterface__Widget(*w);
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_from(QDesignerWidgetBoxInterface__Widget* from) {
+	return new (std::nothrow) QDesignerWidgetBoxInterface__Widget(*from);
 }
 
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new3(struct seaqt_string aname) {
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_aname(struct seaqt_string aname) {
 	QString aname_QString = QString::fromUtf8(aname.data, aname.len);
 	return new (std::nothrow) QDesignerWidgetBoxInterface__Widget(aname_QString);
 }
 
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new4(struct seaqt_string aname, struct seaqt_string xml) {
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_aname_xml(struct seaqt_string aname, struct seaqt_string xml) {
 	QString aname_QString = QString::fromUtf8(aname.data, aname.len);
 	QString xml_QString = QString::fromUtf8(xml.data, xml.len);
 	return new (std::nothrow) QDesignerWidgetBoxInterface__Widget(aname_QString, xml_QString);
 }
 
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new5(struct seaqt_string aname, struct seaqt_string xml, struct seaqt_string icon_name) {
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_aname_xml_icon_name(struct seaqt_string aname, struct seaqt_string xml, struct seaqt_string icon_name) {
 	QString aname_QString = QString::fromUtf8(aname.data, aname.len);
 	QString xml_QString = QString::fromUtf8(xml.data, xml.len);
 	QString icon_name_QString = QString::fromUtf8(icon_name.data, icon_name.len);
 	return new (std::nothrow) QDesignerWidgetBoxInterface__Widget(aname_QString, xml_QString, icon_name_QString);
 }
 
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new6(struct seaqt_string aname, struct seaqt_string xml, struct seaqt_string icon_name, int atype) {
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_aname_xml_icon_name_atype(struct seaqt_string aname, struct seaqt_string xml, struct seaqt_string icon_name, int atype) {
 	QString aname_QString = QString::fromUtf8(aname.data, aname.len);
 	QString xml_QString = QString::fromUtf8(xml.data, xml.len);
 	QString icon_name_QString = QString::fromUtf8(icon_name.data, icon_name.len);
 	return new (std::nothrow) QDesignerWidgetBoxInterface__Widget(aname_QString, xml_QString, icon_name_QString, static_cast<QDesignerWidgetBoxInterface::Widget::Type>(atype));
 }
 
-void QDesignerWidgetBoxInterface__Widget_operatorAssign(QDesignerWidgetBoxInterface__Widget* self, QDesignerWidgetBoxInterface__Widget* w) {
-	self->operator=(*w);
+void QDesignerWidgetBoxInterface__Widget_operatorAssign(QDesignerWidgetBoxInterface__Widget* self, QDesignerWidgetBoxInterface__Widget* from) {
+	self->operator=(*from);
 }
 
 struct seaqt_string QDesignerWidgetBoxInterface__Widget_name(const QDesignerWidgetBoxInterface__Widget* self) {
@@ -1382,16 +1382,16 @@ QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new
 	return new (std::nothrow) QDesignerWidgetBoxInterface__Category();
 }
 
-QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new2(QDesignerWidgetBoxInterface__Category* param1) {
-	return new (std::nothrow) QDesignerWidgetBoxInterface__Category(*param1);
+QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new_from(QDesignerWidgetBoxInterface__Category* from) {
+	return new (std::nothrow) QDesignerWidgetBoxInterface__Category(*from);
 }
 
-QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new3(struct seaqt_string aname) {
+QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new_aname(struct seaqt_string aname) {
 	QString aname_QString = QString::fromUtf8(aname.data, aname.len);
 	return new (std::nothrow) QDesignerWidgetBoxInterface__Category(aname_QString);
 }
 
-QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new4(struct seaqt_string aname, int atype) {
+QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new_aname_atype(struct seaqt_string aname, int atype) {
 	QString aname_QString = QString::fromUtf8(aname.data, aname.len);
 	return new (std::nothrow) QDesignerWidgetBoxInterface__Category(aname_QString, static_cast<QDesignerWidgetBoxInterface::Category::Type>(atype));
 }
@@ -1441,8 +1441,8 @@ bool QDesignerWidgetBoxInterface__Category_isNull(const QDesignerWidgetBoxInterf
 	return self->isNull();
 }
 
-void QDesignerWidgetBoxInterface__Category_operatorAssign(QDesignerWidgetBoxInterface__Category* self, QDesignerWidgetBoxInterface__Category* param1) {
-	self->operator=(*param1);
+void QDesignerWidgetBoxInterface__Category_operatorAssign(QDesignerWidgetBoxInterface__Category* self, QDesignerWidgetBoxInterface__Category* from) {
+	self->operator=(*from);
 }
 
 void QDesignerWidgetBoxInterface__Category_delete(QDesignerWidgetBoxInterface__Category* self) {

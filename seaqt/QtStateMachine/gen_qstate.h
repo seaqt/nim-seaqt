@@ -61,20 +61,20 @@ void* QState_vdata(VirtualQState* self);
 VirtualQState* vdata_QState(void* vdata);
 
 VirtualQState* QState_new(const QState_VTable* vtbl, size_t vdata);
-VirtualQState* QState_new2(const QState_VTable* vtbl, size_t vdata, int childMode);
-VirtualQState* QState_new3(const QState_VTable* vtbl, size_t vdata, QState* parent);
-VirtualQState* QState_new4(const QState_VTable* vtbl, size_t vdata, int childMode, QState* parent);
+VirtualQState* QState_new_childMode(const QState_VTable* vtbl, size_t vdata, int childMode);
+VirtualQState* QState_new_parent(const QState_VTable* vtbl, size_t vdata, QState* parent);
+VirtualQState* QState_new_childMode_parent(const QState_VTable* vtbl, size_t vdata, int childMode, QState* parent);
 
 void QState_virtbase(QState* src, QAbstractState** outptr_QAbstractState);
 QMetaObject* QState_metaObject(const QState* self);
 void* QState_metacast(QState* self, const char* param1);
 int QState_metacall(QState* self, int param1, int param2, void** param3);
-struct seaqt_string QState_tr(const char* s);
+struct seaqt_string QState_tr_s(const char* s);
 QAbstractState* QState_errorState(const QState* self);
 void QState_setErrorState(QState* self, QAbstractState* state);
-void QState_addTransition(QState* self, QAbstractTransition* transition);
-QSignalTransition* QState_addTransition2(QState* self, QObject* sender, const char* signal, QAbstractState* target);
-QAbstractTransition* QState_addTransitionWithTarget(QState* self, QAbstractState* target);
+void QState_addTransition_transition(QState* self, QAbstractTransition* transition);
+QSignalTransition* QState_addTransition_sender_signal_target(QState* self, QObject* sender, const char* signal, QAbstractState* target);
+QAbstractTransition* QState_addTransition_target(QState* self, QAbstractState* target);
 void QState_removeTransition(QState* self, QAbstractTransition* transition);
 struct seaqt_array /* of QAbstractTransition* */  QState_transitions(const QState* self);
 QAbstractState* QState_initialState(const QState* self);
@@ -85,8 +85,8 @@ void QState_assignProperty(QState* self, QObject* object, const char* name, QVar
 void QState_onEntry(QState* self, QEvent* event);
 void QState_onExit(QState* self, QEvent* event);
 bool QState_event(QState* self, QEvent* e);
-struct seaqt_string QState_tr2(const char* s, const char* c);
-struct seaqt_string QState_tr3(const char* s, const char* c, int n);
+struct seaqt_string QState_tr_s_c(const char* s, const char* c);
+struct seaqt_string QState_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QState_virtualbase_metaObject(const VirtualQState* self);
 void* QState_virtualbase_metacast(VirtualQState* self, const char* param1);

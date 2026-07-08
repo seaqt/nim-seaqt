@@ -79,7 +79,7 @@ type cQStateMachineWrappedEvent*{.exportc: "QStateMachine__WrappedEvent", incomp
 proc fcQStateMachine_metaObject(self: pointer): pointer {.importc: "QStateMachine_metaObject".}
 proc fcQStateMachine_metacast(self: pointer, param1: cstring): pointer {.importc: "QStateMachine_metacast".}
 proc fcQStateMachine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStateMachine_metacall".}
-proc fcQStateMachine_tr(s: cstring): struct_seaqt_string {.importc: "QStateMachine_tr".}
+proc fcQStateMachine_trS(s: cstring): struct_seaqt_string {.importc: "QStateMachine_tr_s".}
 proc fcQStateMachine_addState(self: pointer, state: pointer): void {.importc: "QStateMachine_addState".}
 proc fcQStateMachine_removeState(self: pointer, state: pointer): void {.importc: "QStateMachine_removeState".}
 proc fcQStateMachine_error(self: pointer): cint {.importc: "QStateMachine_error".}
@@ -93,8 +93,8 @@ proc fcQStateMachine_defaultAnimations(self: pointer): struct_seaqt_array {.impo
 proc fcQStateMachine_removeDefaultAnimation(self: pointer, animation: pointer): void {.importc: "QStateMachine_removeDefaultAnimation".}
 proc fcQStateMachine_globalRestorePolicy(self: pointer): cint {.importc: "QStateMachine_globalRestorePolicy".}
 proc fcQStateMachine_setGlobalRestorePolicy(self: pointer, restorePolicy: cint): void {.importc: "QStateMachine_setGlobalRestorePolicy".}
-proc fcQStateMachine_postEvent(self: pointer, event: pointer): void {.importc: "QStateMachine_postEvent".}
-proc fcQStateMachine_postDelayedEvent(self: pointer, event: pointer, delay: cint): cint {.importc: "QStateMachine_postDelayedEvent".}
+proc fcQStateMachine_postEventEvent(self: pointer, event: pointer): void {.importc: "QStateMachine_postEvent_event".}
+proc fcQStateMachine_postDelayedEvent_QEventInt(self: pointer, event: pointer, delay: cint): cint {.importc: "QStateMachine_postDelayedEvent_QEvent_int".}
 proc fcQStateMachine_cancelDelayedEvent(self: pointer, id: cint): bool {.importc: "QStateMachine_cancelDelayedEvent".}
 proc fcQStateMachine_configuration(self: pointer): HashSet[pointer] {.importc: "QStateMachine_configuration".}
 proc fcQStateMachine_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QStateMachine_eventFilter".}
@@ -103,9 +103,9 @@ proc fcQStateMachine_stop(self: pointer): void {.importc: "QStateMachine_stop".}
 proc fcQStateMachine_setRunning(self: pointer, running: bool): void {.importc: "QStateMachine_setRunning".}
 proc fcQStateMachine_runningChanged(self: pointer, running: bool): void {.importc: "QStateMachine_runningChanged".}
 proc fcQStateMachine_connect_runningChanged(self: pointer, slot: int, callback: proc (slot: int, running: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStateMachine_connect_runningChanged".}
-proc fcQStateMachine_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStateMachine_tr2".}
-proc fcQStateMachine_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStateMachine_tr3".}
-proc fcQStateMachine_postEvent2(self: pointer, event: pointer, priority: cint): void {.importc: "QStateMachine_postEvent2".}
+proc fcQStateMachine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStateMachine_tr_s_c".}
+proc fcQStateMachine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStateMachine_tr_s_c_n".}
+proc fcQStateMachine_postEventEventPriority(self: pointer, event: pointer, priority: cint): void {.importc: "QStateMachine_postEvent_event_priority".}
 proc fcQStateMachine_vdata(self: pointer): ptr pointer {.importc: "QStateMachine_vdata".}
 proc fvdata_cQStateMachine(self: pointer): pointer {.importc: "vdata_QStateMachine".}
 
@@ -148,14 +148,14 @@ proc fcQStateMachine_protectedbase_senderSignalIndex(self: pointer): cint {.impo
 proc fcQStateMachine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStateMachine_protectedbase_receivers".}
 proc fcQStateMachine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStateMachine_protectedbase_isSignalConnected".}
 proc fcQStateMachine_new(vtbl: pointer, vdata: csize_t): ptr cQStateMachine {.importc: "QStateMachine_new".}
-proc fcQStateMachine_new2(vtbl: pointer, vdata: csize_t, childMode: cint): ptr cQStateMachine {.importc: "QStateMachine_new2".}
-proc fcQStateMachine_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new3".}
-proc fcQStateMachine_new4(vtbl: pointer, vdata: csize_t, childMode: cint, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new4".}
+proc fcQStateMachine_new2(vtbl: pointer, vdata: csize_t, childMode: cint): ptr cQStateMachine {.importc: "QStateMachine_new_childMode".}
+proc fcQStateMachine_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new_parent".}
+proc fcQStateMachine_new4(vtbl: pointer, vdata: csize_t, childMode: cint, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new_childMode_parent".}
 proc fcQStateMachine_staticMetaObject(): pointer {.importc: "QStateMachine_staticMetaObject".}
 proc fcQStateMachineSignalEvent_sender(self: pointer): pointer {.importc: "QStateMachine__SignalEvent_sender".}
 proc fcQStateMachineSignalEvent_signalIndex(self: pointer): cint {.importc: "QStateMachine__SignalEvent_signalIndex".}
 proc fcQStateMachineSignalEvent_arguments(self: pointer): struct_seaqt_array {.importc: "QStateMachine__SignalEvent_arguments".}
-proc fcQStateMachineSignalEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStateMachine__SignalEvent_operatorAssign".}
+proc fcQStateMachineSignalEvent_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStateMachine__SignalEvent_operatorAssign".}
 proc fcQStateMachineSignalEvent_vdata(self: pointer): ptr pointer {.importc: "QStateMachine__SignalEvent_vdata".}
 proc fvdata_cQStateMachineSignalEvent(self: pointer): pointer {.importc: "vdata_QStateMachine__SignalEvent".}
 
@@ -165,11 +165,11 @@ type cQStateMachineSignalEventVTable {.pure.} = object
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQStateMachineSignalEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QStateMachine__SignalEvent_virtualbase_setAccepted".}
 proc fcQStateMachineSignalEvent_virtualbase_clone(self: pointer): pointer {.importc: "QStateMachine__SignalEvent_virtualbase_clone".}
-proc fcQStateMachineSignalEvent_new(vtbl: pointer, vdata: csize_t, sender: pointer, signalIndex: cint, arguments: struct_seaqt_array): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new".}
-proc fcQStateMachineSignalEvent_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new2".}
+proc fcQStateMachineSignalEvent_new(vtbl: pointer, vdata: csize_t, sender: pointer, signalIndex: cint, arguments: struct_seaqt_array): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new_sender_signalIndex_arguments".}
+proc fcQStateMachineSignalEvent_new2(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new_from".}
 proc fcQStateMachineWrappedEvent_objectX(self: pointer): pointer {.importc: "QStateMachine__WrappedEvent_object".}
 proc fcQStateMachineWrappedEvent_event(self: pointer): pointer {.importc: "QStateMachine__WrappedEvent_event".}
-proc fcQStateMachineWrappedEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStateMachine__WrappedEvent_operatorAssign".}
+proc fcQStateMachineWrappedEvent_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStateMachine__WrappedEvent_operatorAssign".}
 proc fcQStateMachineWrappedEvent_vdata(self: pointer): ptr pointer {.importc: "QStateMachine__WrappedEvent_vdata".}
 proc fvdata_cQStateMachineWrappedEvent(self: pointer): pointer {.importc: "vdata_QStateMachine__WrappedEvent".}
 
@@ -179,8 +179,8 @@ type cQStateMachineWrappedEventVTable {.pure.} = object
   clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQStateMachineWrappedEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QStateMachine__WrappedEvent_virtualbase_setAccepted".}
 proc fcQStateMachineWrappedEvent_virtualbase_clone(self: pointer): pointer {.importc: "QStateMachine__WrappedEvent_virtualbase_clone".}
-proc fcQStateMachineWrappedEvent_new(vtbl: pointer, vdata: csize_t, objectVal: pointer, event: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new".}
-proc fcQStateMachineWrappedEvent_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new2".}
+proc fcQStateMachineWrappedEvent_new(vtbl: pointer, vdata: csize_t, objectVal: pointer, event: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new_object_event".}
+proc fcQStateMachineWrappedEvent_new2(vtbl: pointer, vdata: csize_t, fromVal: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new_from".}
 
 proc metaObject*(self: gen_qstatemachine_types.QStateMachine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_metaObject(self.h), owned: false)
@@ -192,7 +192,7 @@ proc metacall*(self: gen_qstatemachine_types.QStateMachine, param1: cint, param2
   fcQStateMachine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstatemachine_types.QStateMachine, s: cstring): string =
-  let v_ms = fcQStateMachine_tr(s)
+  let v_ms = fcQStateMachine_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -246,10 +246,10 @@ proc setGlobalRestorePolicy*(self: gen_qstatemachine_types.QStateMachine, restor
   fcQStateMachine_setGlobalRestorePolicy(self.h, cint(restorePolicy))
 
 proc postEvent*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent): void =
-  fcQStateMachine_postEvent(self.h, event.h)
+  fcQStateMachine_postEventEvent(self.h, event.h)
 
 proc postDelayedEvent*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent, delay: cint): cint =
-  fcQStateMachine_postDelayedEvent(self.h, event.h, delay)
+  fcQStateMachine_postDelayedEvent_QEventInt(self.h, event.h, delay)
 
 proc cancelDelayedEvent*(self: gen_qstatemachine_types.QStateMachine, id: cint): bool =
   fcQStateMachine_cancelDelayedEvent(self.h, id)
@@ -295,19 +295,19 @@ proc onRunningChanged*(self: gen_qstatemachine_types.QStateMachine, slot: QState
   fcQStateMachine_connect_runningChanged(self.h, cast[int](addr tmp[]), fcQStateMachine_slot_callback_runningChanged, fcQStateMachine_slot_callback_runningChanged_release)
 
 proc tr*(_: type gen_qstatemachine_types.QStateMachine, s: cstring, c: cstring): string =
-  let v_ms = fcQStateMachine_tr2(s, c)
+  let v_ms = fcQStateMachine_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstatemachine_types.QStateMachine, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStateMachine_tr3(s, c, n)
+  let v_ms = fcQStateMachine_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc postEvent*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent, priority: cint): void =
-  fcQStateMachine_postEvent2(self.h, event.h, cint(priority))
+  fcQStateMachine_postEventEventPriority(self.h, event.h, cint(priority))
 
 type QStateMachinemetaObjectProc* = proc(self: QStateMachine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QStateMachinemetacastProc* = proc(self: QStateMachine, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -881,8 +881,8 @@ proc arguments*(self: gen_qstatemachine_types.QStateMachineSignalEvent): seq[gen
   c_free(v_ma.data)
   vx_ret
 
-proc operatorAssign*(self: gen_qstatemachine_types.QStateMachineSignalEvent, param1: gen_qstatemachine_types.QStateMachineSignalEvent): void =
-  fcQStateMachineSignalEvent_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstatemachine_types.QStateMachineSignalEvent, fromVal: gen_qstatemachine_types.QStateMachineSignalEvent): void =
+  fcQStateMachineSignalEvent_operatorAssign(self.h, fromVal.h)
 
 type QStateMachineSignalEventsetAcceptedProc* = proc(self: QStateMachineSignalEvent, accepted: bool): void {.raises: [], gcsafe.}
 type QStateMachineSignalEventcloneProc* = proc(self: QStateMachineSignalEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
@@ -956,7 +956,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
   fcQStateMachineSignalEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
-    param1: gen_qstatemachine_types.QStateMachineSignalEvent,
+    fromVal: gen_qstatemachine_types.QStateMachineSignalEvent,
     vtbl: ref QStateMachineSignalEventVTable = nil): gen_qstatemachine_types.QStateMachineSignalEvent =
   let vtbl = if vtbl == nil: new QStateMachineSignalEventVTable else: vtbl
   GC_ref(vtbl)
@@ -967,7 +967,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
     vtbl[].vtbl.setAccepted = fcQStateMachineSignalEvent_vtable_callback_setAccepted
   if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = fcQStateMachineSignalEvent_vtable_callback_clone
-  let tmp = gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQStateMachineSignalEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStateMachineSignalEvent_mvtbl = cQStateMachineSignalEventVTable(
@@ -992,10 +992,10 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
   inst[].owned = true
 
 proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
-    param1: gen_qstatemachine_types.QStateMachineSignalEvent,
+    fromVal: gen_qstatemachine_types.QStateMachineSignalEvent,
     inst: VirtualQStateMachineSignalEvent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQStateMachineSignalEvent_new2(addr(cQStateMachineSignalEvent_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQStateMachineSignalEvent_new2(addr(cQStateMachineSignalEvent_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQStateMachineSignalEvent_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
@@ -1005,8 +1005,8 @@ proc objectX*(self: gen_qstatemachine_types.QStateMachineWrappedEvent): gen_qobj
 proc event*(self: gen_qstatemachine_types.QStateMachineWrappedEvent): gen_qcoreevent_types.QEvent =
   gen_qcoreevent_types.QEvent(h: fcQStateMachineWrappedEvent_event(self.h), owned: false)
 
-proc operatorAssign*(self: gen_qstatemachine_types.QStateMachineWrappedEvent, param1: gen_qstatemachine_types.QStateMachineWrappedEvent): void =
-  fcQStateMachineWrappedEvent_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstatemachine_types.QStateMachineWrappedEvent, fromVal: gen_qstatemachine_types.QStateMachineWrappedEvent): void =
+  fcQStateMachineWrappedEvent_operatorAssign(self.h, fromVal.h)
 
 type QStateMachineWrappedEventsetAcceptedProc* = proc(self: QStateMachineWrappedEvent, accepted: bool): void {.raises: [], gcsafe.}
 type QStateMachineWrappedEventcloneProc* = proc(self: QStateMachineWrappedEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
@@ -1076,7 +1076,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
   fcQStateMachineWrappedEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
-    param1: gen_qstatemachine_types.QStateMachineWrappedEvent,
+    fromVal: gen_qstatemachine_types.QStateMachineWrappedEvent,
     vtbl: ref QStateMachineWrappedEventVTable = nil): gen_qstatemachine_types.QStateMachineWrappedEvent =
   let vtbl = if vtbl == nil: new QStateMachineWrappedEventVTable else: vtbl
   GC_ref(vtbl)
@@ -1087,7 +1087,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
     vtbl[].vtbl.setAccepted = fcQStateMachineWrappedEvent_vtable_callback_setAccepted
   if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = fcQStateMachineWrappedEvent_vtable_callback_clone
-  let tmp = gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
+  let tmp = gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), fromVal.h), owned: true)
   fcQStateMachineWrappedEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStateMachineWrappedEvent_mvtbl = cQStateMachineWrappedEventVTable(
@@ -1108,10 +1108,10 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
   inst[].owned = true
 
 proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
-    param1: gen_qstatemachine_types.QStateMachineWrappedEvent,
+    fromVal: gen_qstatemachine_types.QStateMachineWrappedEvent,
     inst: VirtualQStateMachineWrappedEvent) =
   if inst[].h != nil: delete(move(inst[]))
-  inst[].h = fcQStateMachineWrappedEvent_new2(addr(cQStateMachineWrappedEvent_mvtbl), csize_t(sizeof(pointer)), param1.h)
+  inst[].h = fcQStateMachineWrappedEvent_new2(addr(cQStateMachineWrappedEvent_mvtbl), csize_t(sizeof(pointer)), fromVal.h)
   fcQStateMachineWrappedEvent_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 

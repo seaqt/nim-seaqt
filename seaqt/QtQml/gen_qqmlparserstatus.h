@@ -34,7 +34,7 @@ VirtualQQmlParserStatus* QQmlParserStatus_new(const QQmlParserStatus_VTable* vtb
 
 void QQmlParserStatus_classBegin(QQmlParserStatus* self);
 void QQmlParserStatus_componentComplete(QQmlParserStatus* self);
-void QQmlParserStatus_operatorAssign(QQmlParserStatus* self, QQmlParserStatus* param1);
+void QQmlParserStatus_operatorAssign(QQmlParserStatus* self, QQmlParserStatus* from);
 
 void QQmlParserStatus_virtualbase_classBegin(VirtualQQmlParserStatus* self);
 void QQmlParserStatus_virtualbase_componentComplete(VirtualQQmlParserStatus* self);

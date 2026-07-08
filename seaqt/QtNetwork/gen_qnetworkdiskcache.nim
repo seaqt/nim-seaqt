@@ -61,7 +61,7 @@ type cQNetworkDiskCache*{.exportc: "QNetworkDiskCache", incompleteStruct.} = obj
 proc fcQNetworkDiskCache_metaObject(self: pointer): pointer {.importc: "QNetworkDiskCache_metaObject".}
 proc fcQNetworkDiskCache_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkDiskCache_metacast".}
 proc fcQNetworkDiskCache_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkDiskCache_metacall".}
-proc fcQNetworkDiskCache_tr(s: cstring): struct_seaqt_string {.importc: "QNetworkDiskCache_tr".}
+proc fcQNetworkDiskCache_trS(s: cstring): struct_seaqt_string {.importc: "QNetworkDiskCache_tr_s".}
 proc fcQNetworkDiskCache_cacheDirectory(self: pointer): struct_seaqt_string {.importc: "QNetworkDiskCache_cacheDirectory".}
 proc fcQNetworkDiskCache_setCacheDirectory(self: pointer, cacheDir: struct_seaqt_string): void {.importc: "QNetworkDiskCache_setCacheDirectory".}
 proc fcQNetworkDiskCache_maximumCacheSize(self: pointer): clonglong {.importc: "QNetworkDiskCache_maximumCacheSize".}
@@ -75,8 +75,8 @@ proc fcQNetworkDiskCache_prepare(self: pointer, metaData: pointer): pointer {.im
 proc fcQNetworkDiskCache_insert(self: pointer, device: pointer): void {.importc: "QNetworkDiskCache_insert".}
 proc fcQNetworkDiskCache_fileMetaData(self: pointer, fileName: struct_seaqt_string): pointer {.importc: "QNetworkDiskCache_fileMetaData".}
 proc fcQNetworkDiskCache_clear(self: pointer): void {.importc: "QNetworkDiskCache_clear".}
-proc fcQNetworkDiskCache_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNetworkDiskCache_tr2".}
-proc fcQNetworkDiskCache_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNetworkDiskCache_tr3".}
+proc fcQNetworkDiskCache_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QNetworkDiskCache_tr_s_c".}
+proc fcQNetworkDiskCache_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QNetworkDiskCache_tr_s_c_n".}
 proc fcQNetworkDiskCache_vdata(self: pointer): ptr pointer {.importc: "QNetworkDiskCache_vdata".}
 proc fvdata_cQNetworkDiskCache(self: pointer): pointer {.importc: "vdata_QNetworkDiskCache".}
 
@@ -125,7 +125,7 @@ proc fcQNetworkDiskCache_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQNetworkDiskCache_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkDiskCache_protectedbase_receivers".}
 proc fcQNetworkDiskCache_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkDiskCache_protectedbase_isSignalConnected".}
 proc fcQNetworkDiskCache_new(vtbl: pointer, vdata: csize_t): ptr cQNetworkDiskCache {.importc: "QNetworkDiskCache_new".}
-proc fcQNetworkDiskCache_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQNetworkDiskCache {.importc: "QNetworkDiskCache_new2".}
+proc fcQNetworkDiskCache_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQNetworkDiskCache {.importc: "QNetworkDiskCache_new_parent".}
 proc fcQNetworkDiskCache_staticMetaObject(): pointer {.importc: "QNetworkDiskCache_staticMetaObject".}
 
 proc metaObject*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): gen_qobjectdefs_types.QMetaObject =
@@ -138,7 +138,7 @@ proc metacall*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache, param1: cint
   fcQNetworkDiskCache_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qnetworkdiskcache_types.QNetworkDiskCache, s: cstring): string =
-  let v_ms = fcQNetworkDiskCache_tr(s)
+  let v_ms = fcQNetworkDiskCache_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -186,13 +186,13 @@ proc clear*(self: gen_qnetworkdiskcache_types.QNetworkDiskCache): void =
   fcQNetworkDiskCache_clear(self.h)
 
 proc tr*(_: type gen_qnetworkdiskcache_types.QNetworkDiskCache, s: cstring, c: cstring): string =
-  let v_ms = fcQNetworkDiskCache_tr2(s, c)
+  let v_ms = fcQNetworkDiskCache_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qnetworkdiskcache_types.QNetworkDiskCache, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQNetworkDiskCache_tr3(s, c, n)
+  let v_ms = fcQNetworkDiskCache_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

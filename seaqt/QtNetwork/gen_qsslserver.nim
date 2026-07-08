@@ -67,7 +67,7 @@ type cQSslServer*{.exportc: "QSslServer", incompleteStruct.} = object
 proc fcQSslServer_metaObject(self: pointer): pointer {.importc: "QSslServer_metaObject".}
 proc fcQSslServer_metacast(self: pointer, param1: cstring): pointer {.importc: "QSslServer_metacast".}
 proc fcQSslServer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSslServer_metacall".}
-proc fcQSslServer_tr(s: cstring): struct_seaqt_string {.importc: "QSslServer_tr".}
+proc fcQSslServer_trS(s: cstring): struct_seaqt_string {.importc: "QSslServer_tr_s".}
 proc fcQSslServer_setSslConfiguration(self: pointer, sslConfiguration: pointer): void {.importc: "QSslServer_setSslConfiguration".}
 proc fcQSslServer_sslConfiguration(self: pointer): pointer {.importc: "QSslServer_sslConfiguration".}
 proc fcQSslServer_setHandshakeTimeout(self: pointer, timeout: cint): void {.importc: "QSslServer_setHandshakeTimeout".}
@@ -88,8 +88,8 @@ proc fcQSslServer_handshakeInterruptedOnError(self: pointer, socket: pointer, er
 proc fcQSslServer_connect_handshakeInterruptedOnError(self: pointer, slot: int, callback: proc (slot: int, socket: pointer, error: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSslServer_connect_handshakeInterruptedOnError".}
 proc fcQSslServer_startedEncryptionHandshake(self: pointer, socket: pointer): void {.importc: "QSslServer_startedEncryptionHandshake".}
 proc fcQSslServer_connect_startedEncryptionHandshake(self: pointer, slot: int, callback: proc (slot: int, socket: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSslServer_connect_startedEncryptionHandshake".}
-proc fcQSslServer_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSslServer_tr2".}
-proc fcQSslServer_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSslServer_tr3".}
+proc fcQSslServer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSslServer_tr_s_c".}
+proc fcQSslServer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSslServer_tr_s_c_n".}
 proc fcQSslServer_vdata(self: pointer): ptr pointer {.importc: "QSslServer_vdata".}
 proc fvdata_cQSslServer(self: pointer): pointer {.importc: "vdata_QSslServer".}
 
@@ -127,7 +127,7 @@ proc fcQSslServer_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQSslServer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSslServer_protectedbase_receivers".}
 proc fcQSslServer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSslServer_protectedbase_isSignalConnected".}
 proc fcQSslServer_new(vtbl: pointer, vdata: csize_t): ptr cQSslServer {.importc: "QSslServer_new".}
-proc fcQSslServer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSslServer {.importc: "QSslServer_new2".}
+proc fcQSslServer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSslServer {.importc: "QSslServer_new_parent".}
 proc fcQSslServer_staticMetaObject(): pointer {.importc: "QSslServer_staticMetaObject".}
 
 proc metaObject*(self: gen_qsslserver_types.QSslServer): gen_qobjectdefs_types.QMetaObject =
@@ -140,7 +140,7 @@ proc metacall*(self: gen_qsslserver_types.QSslServer, param1: cint, param2: cint
   fcQSslServer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsslserver_types.QSslServer, s: cstring): string =
-  let v_ms = fcQSslServer_tr(s)
+  let v_ms = fcQSslServer_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -356,13 +356,13 @@ proc onStartedEncryptionHandshake*(self: gen_qsslserver_types.QSslServer, slot: 
   fcQSslServer_connect_startedEncryptionHandshake(self.h, cast[int](addr tmp[]), fcQSslServer_slot_callback_startedEncryptionHandshake, fcQSslServer_slot_callback_startedEncryptionHandshake_release)
 
 proc tr*(_: type gen_qsslserver_types.QSslServer, s: cstring, c: cstring): string =
-  let v_ms = fcQSslServer_tr2(s, c)
+  let v_ms = fcQSslServer_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsslserver_types.QSslServer, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSslServer_tr3(s, c, n)
+  let v_ms = fcQSslServer_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

@@ -58,10 +58,10 @@ type cQQmlPropertyMap*{.exportc: "QQmlPropertyMap", incompleteStruct.} = object
 proc fcQQmlPropertyMap_metaObject(self: pointer): pointer {.importc: "QQmlPropertyMap_metaObject".}
 proc fcQQmlPropertyMap_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlPropertyMap_metacast".}
 proc fcQQmlPropertyMap_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlPropertyMap_metacall".}
-proc fcQQmlPropertyMap_tr(s: cstring): struct_seaqt_string {.importc: "QQmlPropertyMap_tr".}
+proc fcQQmlPropertyMap_trS(s: cstring): struct_seaqt_string {.importc: "QQmlPropertyMap_tr_s".}
 proc fcQQmlPropertyMap_value(self: pointer, key: struct_seaqt_string): pointer {.importc: "QQmlPropertyMap_value".}
-proc fcQQmlPropertyMap_insert(self: pointer, key: struct_seaqt_string, value: pointer): void {.importc: "QQmlPropertyMap_insert".}
-proc fcQQmlPropertyMap_insertWithValues(self: pointer, values: struct_seaqt_map): void {.importc: "QQmlPropertyMap_insertWithValues".}
+proc fcQQmlPropertyMap_insertKeyValue(self: pointer, key: struct_seaqt_string, value: pointer): void {.importc: "QQmlPropertyMap_insert_key_value".}
+proc fcQQmlPropertyMap_insertValues(self: pointer, values: struct_seaqt_map): void {.importc: "QQmlPropertyMap_insert_values".}
 proc fcQQmlPropertyMap_clear(self: pointer, key: struct_seaqt_string): void {.importc: "QQmlPropertyMap_clear".}
 proc fcQQmlPropertyMap_freeze(self: pointer): void {.importc: "QQmlPropertyMap_freeze".}
 proc fcQQmlPropertyMap_keys(self: pointer): struct_seaqt_array {.importc: "QQmlPropertyMap_keys".}
@@ -69,12 +69,12 @@ proc fcQQmlPropertyMap_count(self: pointer): cint {.importc: "QQmlPropertyMap_co
 proc fcQQmlPropertyMap_size(self: pointer): cint {.importc: "QQmlPropertyMap_size".}
 proc fcQQmlPropertyMap_isEmpty(self: pointer): bool {.importc: "QQmlPropertyMap_isEmpty".}
 proc fcQQmlPropertyMap_contains(self: pointer, key: struct_seaqt_string): bool {.importc: "QQmlPropertyMap_contains".}
-proc fcQQmlPropertyMap_operatorSubscript(self: pointer, key: struct_seaqt_string): pointer {.importc: "QQmlPropertyMap_operatorSubscript".}
-proc fcQQmlPropertyMap_operatorSubscriptWithKey(self: pointer, key: struct_seaqt_string): pointer {.importc: "QQmlPropertyMap_operatorSubscriptWithKey".}
+proc fcQQmlPropertyMap_operatorSubscriptCQString(self: pointer, key: struct_seaqt_string): pointer {.importc: "QQmlPropertyMap_operatorSubscript_cQString".}
+proc fcQQmlPropertyMap_operatorSubscriptConstCQString(self: pointer, key: struct_seaqt_string): pointer {.importc: "QQmlPropertyMap_operatorSubscript_const_cQString".}
 proc fcQQmlPropertyMap_valueChanged(self: pointer, key: struct_seaqt_string, value: pointer): void {.importc: "QQmlPropertyMap_valueChanged".}
 proc fcQQmlPropertyMap_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, key: struct_seaqt_string, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlPropertyMap_connect_valueChanged".}
-proc fcQQmlPropertyMap_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlPropertyMap_tr2".}
-proc fcQQmlPropertyMap_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlPropertyMap_tr3".}
+proc fcQQmlPropertyMap_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQmlPropertyMap_tr_s_c".}
+proc fcQQmlPropertyMap_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQmlPropertyMap_tr_s_c_n".}
 proc fcQQmlPropertyMap_vdata(self: pointer): ptr pointer {.importc: "QQmlPropertyMap_vdata".}
 proc fvdata_cQQmlPropertyMap(self: pointer): pointer {.importc: "vdata_QQmlPropertyMap".}
 
@@ -107,7 +107,7 @@ proc fcQQmlPropertyMap_protectedbase_senderSignalIndex(self: pointer): cint {.im
 proc fcQQmlPropertyMap_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlPropertyMap_protectedbase_receivers".}
 proc fcQQmlPropertyMap_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlPropertyMap_protectedbase_isSignalConnected".}
 proc fcQQmlPropertyMap_new(vtbl: pointer, vdata: csize_t): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new".}
-proc fcQQmlPropertyMap_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new2".}
+proc fcQQmlPropertyMap_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new_parent".}
 proc fcQQmlPropertyMap_staticMetaObject(): pointer {.importc: "QQmlPropertyMap_staticMetaObject".}
 
 proc metaObject*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): gen_qobjectdefs_types.QMetaObject =
@@ -120,7 +120,7 @@ proc metacall*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, param1: cint, pa
   fcQQmlPropertyMap_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring): string =
-  let v_ms = fcQQmlPropertyMap_tr(s)
+  let v_ms = fcQQmlPropertyMap_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -129,7 +129,7 @@ proc value*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char
   gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_value(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char], value: gen_qvariant_types.QVariant): void =
-  fcQQmlPropertyMap_insert(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
+  fcQQmlPropertyMap_insertKeyValue(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
 proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, values: Table[string,gen_qvariant_types.QVariant]): void =
   var values_Keys_CArray = newSeq[struct_seaqt_string](len(values))
@@ -143,7 +143,7 @@ proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, values: Table[stri
     values_Values_CArray[values_ctr] = values_v.h
     values_ctr += 1
 
-  fcQQmlPropertyMap_insertWithValues(self.h, struct_seaqt_map(len: csize_t(len(values)),keys: if len(values) == 0: nil else: addr(values_Keys_CArray[0]), values: if len(values) == 0: nil else: addr(values_Values_CArray[0]),))
+  fcQQmlPropertyMap_insertValues(self.h, struct_seaqt_map(len: csize_t(len(values)),keys: if len(values) == 0: nil else: addr(values_Keys_CArray[0]), values: if len(values) == 0: nil else: addr(values_Values_CArray[0]),))
 
 proc clear*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): void =
   fcQQmlPropertyMap_clear(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
@@ -176,10 +176,10 @@ proc contains*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[c
   fcQQmlPropertyMap_contains(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc operatorSubscript*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscript(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
+  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscriptCQString(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc operatorSubscript2*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscriptWithKey(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
+  gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_operatorSubscriptConstCQString(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: true)
 
 proc valueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: openArray[char], value: gen_qvariant_types.QVariant): void =
   fcQQmlPropertyMap_valueChanged(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
@@ -207,13 +207,13 @@ proc onValueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, slot: QQml
   fcQQmlPropertyMap_connect_valueChanged(self.h, cast[int](addr tmp[]), fcQQmlPropertyMap_slot_callback_valueChanged, fcQQmlPropertyMap_slot_callback_valueChanged_release)
 
 proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring, c: cstring): string =
-  let v_ms = fcQQmlPropertyMap_tr2(s, c)
+  let v_ms = fcQQmlPropertyMap_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQmlPropertyMap_tr3(s, c, n)
+  let v_ms = fcQQmlPropertyMap_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

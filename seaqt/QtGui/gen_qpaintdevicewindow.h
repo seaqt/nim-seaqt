@@ -46,16 +46,16 @@ void QPaintDeviceWindow_virtbase(QPaintDeviceWindow* src, QWindow** outptr_QWind
 QMetaObject* QPaintDeviceWindow_metaObject(const QPaintDeviceWindow* self);
 void* QPaintDeviceWindow_metacast(QPaintDeviceWindow* self, const char* param1);
 int QPaintDeviceWindow_metacall(QPaintDeviceWindow* self, int param1, int param2, void** param3);
-struct seaqt_string QPaintDeviceWindow_tr(const char* s);
-void QPaintDeviceWindow_update(QPaintDeviceWindow* self, QRect* rect);
-void QPaintDeviceWindow_updateWithRegion(QPaintDeviceWindow* self, QRegion* region);
-void QPaintDeviceWindow_update2(QPaintDeviceWindow* self);
+struct seaqt_string QPaintDeviceWindow_tr_s(const char* s);
+void QPaintDeviceWindow_update_rect(QPaintDeviceWindow* self, QRect* rect);
+void QPaintDeviceWindow_update_region(QPaintDeviceWindow* self, QRegion* region);
+void QPaintDeviceWindow_update(QPaintDeviceWindow* self);
 void QPaintDeviceWindow_exposeEvent(QPaintDeviceWindow* self, QExposeEvent* param1);
 void QPaintDeviceWindow_paintEvent(QPaintDeviceWindow* self, QPaintEvent* event);
 int QPaintDeviceWindow_metric(const QPaintDeviceWindow* self, int metric);
 bool QPaintDeviceWindow_event(QPaintDeviceWindow* self, QEvent* event);
-struct seaqt_string QPaintDeviceWindow_tr2(const char* s, const char* c);
-struct seaqt_string QPaintDeviceWindow_tr3(const char* s, const char* c, int n);
+struct seaqt_string QPaintDeviceWindow_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPaintDeviceWindow_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QPaintDeviceWindow_staticMetaObject();
 void QPaintDeviceWindow_delete(QPaintDeviceWindow* self);

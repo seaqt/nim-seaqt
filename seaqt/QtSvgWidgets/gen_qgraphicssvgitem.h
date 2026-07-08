@@ -124,15 +124,15 @@ void* QGraphicsSvgItem_vdata(VirtualQGraphicsSvgItem* self);
 VirtualQGraphicsSvgItem* vdata_QGraphicsSvgItem(void* vdata);
 
 VirtualQGraphicsSvgItem* QGraphicsSvgItem_new(const QGraphicsSvgItem_VTable* vtbl, size_t vdata);
-VirtualQGraphicsSvgItem* QGraphicsSvgItem_new2(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, struct seaqt_string fileName);
-VirtualQGraphicsSvgItem* QGraphicsSvgItem_new3(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, QGraphicsItem* parentItem);
-VirtualQGraphicsSvgItem* QGraphicsSvgItem_new4(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, struct seaqt_string fileName, QGraphicsItem* parentItem);
+VirtualQGraphicsSvgItem* QGraphicsSvgItem_new_fileName(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, struct seaqt_string fileName);
+VirtualQGraphicsSvgItem* QGraphicsSvgItem_new_parentItem(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, QGraphicsItem* parentItem);
+VirtualQGraphicsSvgItem* QGraphicsSvgItem_new_fileName_parentItem(const QGraphicsSvgItem_VTable* vtbl, size_t vdata, struct seaqt_string fileName, QGraphicsItem* parentItem);
 
 void QGraphicsSvgItem_virtbase(QGraphicsSvgItem* src, QGraphicsObject** outptr_QGraphicsObject);
 QMetaObject* QGraphicsSvgItem_metaObject(const QGraphicsSvgItem* self);
 void* QGraphicsSvgItem_metacast(QGraphicsSvgItem* self, const char* param1);
 int QGraphicsSvgItem_metacall(QGraphicsSvgItem* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsSvgItem_tr(const char* s);
+struct seaqt_string QGraphicsSvgItem_tr_s(const char* s);
 void QGraphicsSvgItem_setSharedRenderer(QGraphicsSvgItem* self, QSvgRenderer* renderer);
 QSvgRenderer* QGraphicsSvgItem_renderer(const QGraphicsSvgItem* self);
 void QGraphicsSvgItem_setElementId(QGraphicsSvgItem* self, struct seaqt_string id);
@@ -144,8 +144,8 @@ QSize* QGraphicsSvgItem_maximumCacheSize(const QGraphicsSvgItem* self);
 QRectF* QGraphicsSvgItem_boundingRect(const QGraphicsSvgItem* self);
 void QGraphicsSvgItem_paint(QGraphicsSvgItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 int QGraphicsSvgItem_type(const QGraphicsSvgItem* self);
-struct seaqt_string QGraphicsSvgItem_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsSvgItem_tr3(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsSvgItem_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsSvgItem_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsSvgItem_virtualbase_metaObject(const VirtualQGraphicsSvgItem* self);
 void* QGraphicsSvgItem_virtualbase_metacast(VirtualQGraphicsSvgItem* self, const char* param1);

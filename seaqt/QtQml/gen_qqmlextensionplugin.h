@@ -66,19 +66,19 @@ void* QQmlExtensionPlugin_vdata(VirtualQQmlExtensionPlugin* self);
 VirtualQQmlExtensionPlugin* vdata_QQmlExtensionPlugin(void* vdata);
 
 VirtualQQmlExtensionPlugin* QQmlExtensionPlugin_new(const QQmlExtensionPlugin_VTable* vtbl, size_t vdata);
-VirtualQQmlExtensionPlugin* QQmlExtensionPlugin_new2(const QQmlExtensionPlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQQmlExtensionPlugin* QQmlExtensionPlugin_new_parent(const QQmlExtensionPlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QQmlExtensionPlugin_virtbase(QQmlExtensionPlugin* src, QObject** outptr_QObject, QQmlExtensionInterface** outptr_QQmlExtensionInterface);
 QMetaObject* QQmlExtensionPlugin_metaObject(const QQmlExtensionPlugin* self);
 void* QQmlExtensionPlugin_metacast(QQmlExtensionPlugin* self, const char* param1);
 int QQmlExtensionPlugin_metacall(QQmlExtensionPlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QQmlExtensionPlugin_tr(const char* s);
+struct seaqt_string QQmlExtensionPlugin_tr_s(const char* s);
 QUrl* QQmlExtensionPlugin_baseUrl(const QQmlExtensionPlugin* self);
 void QQmlExtensionPlugin_registerTypes(QQmlExtensionPlugin* self, const char* uri);
 void QQmlExtensionPlugin_unregisterTypes(QQmlExtensionPlugin* self);
 void QQmlExtensionPlugin_initializeEngine(QQmlExtensionPlugin* self, QQmlEngine* engine, const char* uri);
-struct seaqt_string QQmlExtensionPlugin_tr2(const char* s, const char* c);
-struct seaqt_string QQmlExtensionPlugin_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQmlExtensionPlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQmlExtensionPlugin_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQmlExtensionPlugin_virtualbase_metaObject(const VirtualQQmlExtensionPlugin* self);
 void* QQmlExtensionPlugin_virtualbase_metacast(VirtualQQmlExtensionPlugin* self, const char* param1);
@@ -122,16 +122,16 @@ void* QQmlEngineExtensionPlugin_vdata(VirtualQQmlEngineExtensionPlugin* self);
 VirtualQQmlEngineExtensionPlugin* vdata_QQmlEngineExtensionPlugin(void* vdata);
 
 VirtualQQmlEngineExtensionPlugin* QQmlEngineExtensionPlugin_new(const QQmlEngineExtensionPlugin_VTable* vtbl, size_t vdata);
-VirtualQQmlEngineExtensionPlugin* QQmlEngineExtensionPlugin_new2(const QQmlEngineExtensionPlugin_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQQmlEngineExtensionPlugin* QQmlEngineExtensionPlugin_new_parent(const QQmlEngineExtensionPlugin_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QQmlEngineExtensionPlugin_virtbase(QQmlEngineExtensionPlugin* src, QObject** outptr_QObject, QQmlEngineExtensionInterface** outptr_QQmlEngineExtensionInterface);
 QMetaObject* QQmlEngineExtensionPlugin_metaObject(const QQmlEngineExtensionPlugin* self);
 void* QQmlEngineExtensionPlugin_metacast(QQmlEngineExtensionPlugin* self, const char* param1);
 int QQmlEngineExtensionPlugin_metacall(QQmlEngineExtensionPlugin* self, int param1, int param2, void** param3);
-struct seaqt_string QQmlEngineExtensionPlugin_tr(const char* s);
+struct seaqt_string QQmlEngineExtensionPlugin_tr_s(const char* s);
 void QQmlEngineExtensionPlugin_initializeEngine(QQmlEngineExtensionPlugin* self, QQmlEngine* engine, const char* uri);
-struct seaqt_string QQmlEngineExtensionPlugin_tr2(const char* s, const char* c);
-struct seaqt_string QQmlEngineExtensionPlugin_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQmlEngineExtensionPlugin_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQmlEngineExtensionPlugin_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQmlEngineExtensionPlugin_virtualbase_metaObject(const VirtualQQmlEngineExtensionPlugin* self);
 void* QQmlEngineExtensionPlugin_virtualbase_metacast(VirtualQQmlEngineExtensionPlugin* self, const char* param1);

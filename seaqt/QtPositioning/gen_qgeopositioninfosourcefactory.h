@@ -33,7 +33,7 @@ typedef struct QVariant QVariant;
 QGeoPositionInfoSource* QGeoPositionInfoSourceFactory_positionInfoSource(QGeoPositionInfoSourceFactory* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters);
 QGeoSatelliteInfoSource* QGeoPositionInfoSourceFactory_satelliteInfoSource(QGeoPositionInfoSourceFactory* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters);
 QGeoAreaMonitorSource* QGeoPositionInfoSourceFactory_areaMonitor(QGeoPositionInfoSourceFactory* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  parameters);
-void QGeoPositionInfoSourceFactory_operatorAssign(QGeoPositionInfoSourceFactory* self, QGeoPositionInfoSourceFactory* param1);
+void QGeoPositionInfoSourceFactory_operatorAssign(QGeoPositionInfoSourceFactory* self, QGeoPositionInfoSourceFactory* from);
 
 void QGeoPositionInfoSourceFactory_delete(QGeoPositionInfoSourceFactory* self);
 

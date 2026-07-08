@@ -57,12 +57,12 @@ type cQWebChannelAbstractTransport*{.exportc: "QWebChannelAbstractTransport", in
 proc fcQWebChannelAbstractTransport_metaObject(self: pointer): pointer {.importc: "QWebChannelAbstractTransport_metaObject".}
 proc fcQWebChannelAbstractTransport_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebChannelAbstractTransport_metacast".}
 proc fcQWebChannelAbstractTransport_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebChannelAbstractTransport_metacall".}
-proc fcQWebChannelAbstractTransport_tr(s: cstring): struct_seaqt_string {.importc: "QWebChannelAbstractTransport_tr".}
+proc fcQWebChannelAbstractTransport_trS(s: cstring): struct_seaqt_string {.importc: "QWebChannelAbstractTransport_tr_s".}
 proc fcQWebChannelAbstractTransport_sendMessage(self: pointer, message: pointer): void {.importc: "QWebChannelAbstractTransport_sendMessage".}
 proc fcQWebChannelAbstractTransport_messageReceived(self: pointer, message: pointer, transport: pointer): void {.importc: "QWebChannelAbstractTransport_messageReceived".}
 proc fcQWebChannelAbstractTransport_connect_messageReceived(self: pointer, slot: int, callback: proc (slot: int, message: pointer, transport: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebChannelAbstractTransport_connect_messageReceived".}
-proc fcQWebChannelAbstractTransport_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebChannelAbstractTransport_tr2".}
-proc fcQWebChannelAbstractTransport_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebChannelAbstractTransport_tr3".}
+proc fcQWebChannelAbstractTransport_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QWebChannelAbstractTransport_tr_s_c".}
+proc fcQWebChannelAbstractTransport_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QWebChannelAbstractTransport_tr_s_c_n".}
 proc fcQWebChannelAbstractTransport_vdata(self: pointer): ptr pointer {.importc: "QWebChannelAbstractTransport_vdata".}
 proc fvdata_cQWebChannelAbstractTransport(self: pointer): pointer {.importc: "vdata_QWebChannelAbstractTransport".}
 
@@ -94,7 +94,7 @@ proc fcQWebChannelAbstractTransport_protectedbase_senderSignalIndex(self: pointe
 proc fcQWebChannelAbstractTransport_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebChannelAbstractTransport_protectedbase_receivers".}
 proc fcQWebChannelAbstractTransport_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebChannelAbstractTransport_protectedbase_isSignalConnected".}
 proc fcQWebChannelAbstractTransport_new(vtbl: pointer, vdata: csize_t): ptr cQWebChannelAbstractTransport {.importc: "QWebChannelAbstractTransport_new".}
-proc fcQWebChannelAbstractTransport_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebChannelAbstractTransport {.importc: "QWebChannelAbstractTransport_new2".}
+proc fcQWebChannelAbstractTransport_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQWebChannelAbstractTransport {.importc: "QWebChannelAbstractTransport_new_parent".}
 proc fcQWebChannelAbstractTransport_staticMetaObject(): pointer {.importc: "QWebChannelAbstractTransport_staticMetaObject".}
 
 proc metaObject*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport): gen_qobjectdefs_types.QMetaObject =
@@ -107,7 +107,7 @@ proc metacall*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractT
   fcQWebChannelAbstractTransport_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, s: cstring): string =
-  let v_ms = fcQWebChannelAbstractTransport_tr(s)
+  let v_ms = fcQWebChannelAbstractTransport_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -138,13 +138,13 @@ proc onMessageReceived*(self: gen_qwebchannelabstracttransport_types.QWebChannel
   fcQWebChannelAbstractTransport_connect_messageReceived(self.h, cast[int](addr tmp[]), fcQWebChannelAbstractTransport_slot_callback_messageReceived, fcQWebChannelAbstractTransport_slot_callback_messageReceived_release)
 
 proc tr*(_: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, s: cstring, c: cstring): string =
-  let v_ms = fcQWebChannelAbstractTransport_tr2(s, c)
+  let v_ms = fcQWebChannelAbstractTransport_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQWebChannelAbstractTransport_tr3(s, c, n)
+  let v_ms = fcQWebChannelAbstractTransport_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

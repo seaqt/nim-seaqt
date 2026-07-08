@@ -29,9 +29,9 @@ typedef struct QUrl QUrl;
 #endif
 
 QPdfLink* QPdfLink_new();
-QPdfLink* QPdfLink_new2(QPdfLink* other);
+QPdfLink* QPdfLink_new_from(QPdfLink* from);
 
-void QPdfLink_operatorAssign(QPdfLink* self, QPdfLink* other);
+void QPdfLink_operatorAssign(QPdfLink* self, QPdfLink* from);
 void QPdfLink_swap(QPdfLink* self, QPdfLink* other);
 bool QPdfLink_isValid(const QPdfLink* self);
 int QPdfLink_page(const QPdfLink* self);
@@ -43,7 +43,7 @@ struct seaqt_string QPdfLink_contextAfter(const QPdfLink* self);
 struct seaqt_array /* of QRectF* */  QPdfLink_rectangles(const QPdfLink* self);
 struct seaqt_string QPdfLink_toString(const QPdfLink* self);
 void QPdfLink_copyToClipboard(const QPdfLink* self);
-void QPdfLink_copyToClipboardWithMode(const QPdfLink* self, int mode);
+void QPdfLink_copyToClipboard_mode(const QPdfLink* self, int mode);
 
 const QMetaObject* QPdfLink_staticMetaObject();
 void QPdfLink_delete(QPdfLink* self);

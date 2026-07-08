@@ -71,16 +71,16 @@ typedef struct QWaveDecoder_VTable{
 void* QWaveDecoder_vdata(VirtualQWaveDecoder* self);
 VirtualQWaveDecoder* vdata_QWaveDecoder(void* vdata);
 
-VirtualQWaveDecoder* QWaveDecoder_new(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device);
-VirtualQWaveDecoder* QWaveDecoder_new2(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QAudioFormat* format);
-VirtualQWaveDecoder* QWaveDecoder_new3(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QObject* parent);
-VirtualQWaveDecoder* QWaveDecoder_new4(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QAudioFormat* format, QObject* parent);
+VirtualQWaveDecoder* QWaveDecoder_new_device(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device);
+VirtualQWaveDecoder* QWaveDecoder_new_device_format(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QAudioFormat* format);
+VirtualQWaveDecoder* QWaveDecoder_new_device_parent(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QObject* parent);
+VirtualQWaveDecoder* QWaveDecoder_new_device_format_parent(const QWaveDecoder_VTable* vtbl, size_t vdata, QIODevice* device, QAudioFormat* format, QObject* parent);
 
 void QWaveDecoder_virtbase(QWaveDecoder* src, QIODevice** outptr_QIODevice);
 QMetaObject* QWaveDecoder_metaObject(const QWaveDecoder* self);
 void* QWaveDecoder_metacast(QWaveDecoder* self, const char* param1);
 int QWaveDecoder_metacall(QWaveDecoder* self, int param1, int param2, void** param3);
-struct seaqt_string QWaveDecoder_tr(const char* s);
+struct seaqt_string QWaveDecoder_tr_s(const char* s);
 QAudioFormat* QWaveDecoder_audioFormat(const QWaveDecoder* self);
 QIODevice* QWaveDecoder_getDevice(QWaveDecoder* self);
 int QWaveDecoder_duration(const QWaveDecoder* self);
@@ -96,8 +96,8 @@ void QWaveDecoder_formatKnown(QWaveDecoder* self);
 void QWaveDecoder_connect_formatKnown(QWaveDecoder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWaveDecoder_parsingError(QWaveDecoder* self);
 void QWaveDecoder_connect_parsingError(QWaveDecoder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QWaveDecoder_tr2(const char* s, const char* c);
-struct seaqt_string QWaveDecoder_tr3(const char* s, const char* c, int n);
+struct seaqt_string QWaveDecoder_tr_s_c(const char* s, const char* c);
+struct seaqt_string QWaveDecoder_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QWaveDecoder_virtualbase_metaObject(const VirtualQWaveDecoder* self);
 void* QWaveDecoder_virtualbase_metacast(VirtualQWaveDecoder* self, const char* param1);

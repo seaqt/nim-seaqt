@@ -80,7 +80,7 @@ export
 
 type cQScrollerProperties*{.exportc: "QScrollerProperties", incompleteStruct.} = object
 
-proc fcQScrollerProperties_operatorAssign(self: pointer, sp: pointer): void {.importc: "QScrollerProperties_operatorAssign".}
+proc fcQScrollerProperties_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QScrollerProperties_operatorAssign".}
 proc fcQScrollerProperties_operatorEqual(self: pointer, sp: pointer): bool {.importc: "QScrollerProperties_operatorEqual".}
 proc fcQScrollerProperties_operatorNotEqual(self: pointer, sp: pointer): bool {.importc: "QScrollerProperties_operatorNotEqual".}
 proc fcQScrollerProperties_setDefaultScrollerProperties(sp: pointer): void {.importc: "QScrollerProperties_setDefaultScrollerProperties".}
@@ -88,10 +88,10 @@ proc fcQScrollerProperties_unsetDefaultScrollerProperties(): void {.importc: "QS
 proc fcQScrollerProperties_scrollMetric(self: pointer, metric: cint): pointer {.importc: "QScrollerProperties_scrollMetric".}
 proc fcQScrollerProperties_setScrollMetric(self: pointer, metric: cint, value: pointer): void {.importc: "QScrollerProperties_setScrollMetric".}
 proc fcQScrollerProperties_new(): ptr cQScrollerProperties {.importc: "QScrollerProperties_new".}
-proc fcQScrollerProperties_new2(sp: pointer): ptr cQScrollerProperties {.importc: "QScrollerProperties_new2".}
+proc fcQScrollerProperties_new2(fromVal: pointer): ptr cQScrollerProperties {.importc: "QScrollerProperties_new_from".}
 
-proc operatorAssign*(self: gen_qscrollerproperties_types.QScrollerProperties, sp: gen_qscrollerproperties_types.QScrollerProperties): void =
-  fcQScrollerProperties_operatorAssign(self.h, sp.h)
+proc operatorAssign*(self: gen_qscrollerproperties_types.QScrollerProperties, fromVal: gen_qscrollerproperties_types.QScrollerProperties): void =
+  fcQScrollerProperties_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qscrollerproperties_types.QScrollerProperties, sp: gen_qscrollerproperties_types.QScrollerProperties): bool =
   fcQScrollerProperties_operatorEqual(self.h, sp.h)
@@ -115,6 +115,6 @@ proc create*(T: type gen_qscrollerproperties_types.QScrollerProperties): gen_qsc
   let tmp = gen_qscrollerproperties_types.QScrollerProperties(h: fcQScrollerProperties_new(), owned: true)
   tmp
 proc create*(T: type gen_qscrollerproperties_types.QScrollerProperties,
-    sp: gen_qscrollerproperties_types.QScrollerProperties): gen_qscrollerproperties_types.QScrollerProperties =
-  let tmp = gen_qscrollerproperties_types.QScrollerProperties(h: fcQScrollerProperties_new2(sp.h), owned: true)
+    fromVal: gen_qscrollerproperties_types.QScrollerProperties): gen_qscrollerproperties_types.QScrollerProperties =
+  let tmp = gen_qscrollerproperties_types.QScrollerProperties(h: fcQScrollerProperties_new2(fromVal.h), owned: true)
   tmp

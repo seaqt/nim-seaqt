@@ -21,13 +21,13 @@ typedef struct QSqlError QSqlError;
 #endif
 
 QSqlError* QSqlError_new();
-QSqlError* QSqlError_new2(QSqlError* other);
-QSqlError* QSqlError_new3(struct seaqt_string driverText);
-QSqlError* QSqlError_new4(struct seaqt_string driverText, struct seaqt_string databaseText);
-QSqlError* QSqlError_new5(struct seaqt_string driverText, struct seaqt_string databaseText, int type);
-QSqlError* QSqlError_new6(struct seaqt_string driverText, struct seaqt_string databaseText, int type, struct seaqt_string errorCode);
+QSqlError* QSqlError_new_from(QSqlError* from);
+QSqlError* QSqlError_new_driverText(struct seaqt_string driverText);
+QSqlError* QSqlError_new_driverText_databaseText(struct seaqt_string driverText, struct seaqt_string databaseText);
+QSqlError* QSqlError_new_driverText_databaseText_type(struct seaqt_string driverText, struct seaqt_string databaseText, int type);
+QSqlError* QSqlError_new_driverText_databaseText_type_errorCode(struct seaqt_string driverText, struct seaqt_string databaseText, int type, struct seaqt_string errorCode);
 
-void QSqlError_operatorAssign(QSqlError* self, QSqlError* other);
+void QSqlError_operatorAssign(QSqlError* self, QSqlError* from);
 bool QSqlError_operatorEqual(const QSqlError* self, QSqlError* other);
 bool QSqlError_operatorNotEqual(const QSqlError* self, QSqlError* other);
 void QSqlError_swap(QSqlError* self, QSqlError* other);

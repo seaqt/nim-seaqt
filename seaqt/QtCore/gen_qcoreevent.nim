@@ -235,7 +235,7 @@ proc fcQEvent_isPointerEvent(self: pointer): bool {.importc: "QEvent_isPointerEv
 proc fcQEvent_isSinglePointEvent(self: pointer): bool {.importc: "QEvent_isSinglePointEvent".}
 proc fcQEvent_registerEventType(): cint {.importc: "QEvent_registerEventType".}
 proc fcQEvent_clone(self: pointer): pointer {.importc: "QEvent_clone".}
-proc fcQEvent_registerEventTypeWithHint(hint: cint): cint {.importc: "QEvent_registerEventTypeWithHint".}
+proc fcQEvent_registerEventTypeHint(hint: cint): cint {.importc: "QEvent_registerEventType_hint".}
 proc fcQEvent_vdata(self: pointer): ptr pointer {.importc: "QEvent_vdata".}
 proc fvdata_cQEvent(self: pointer): pointer {.importc: "vdata_QEvent".}
 
@@ -321,7 +321,7 @@ proc clone*(self: gen_qcoreevent_types.QEvent): gen_qcoreevent_types.QEvent =
   gen_qcoreevent_types.QEvent(h: fcQEvent_clone(self.h), owned: false)
 
 proc registerEventType*(_: type gen_qcoreevent_types.QEvent, hint: cint): cint =
-  fcQEvent_registerEventTypeWithHint(hint)
+  fcQEvent_registerEventTypeHint(hint)
 
 type QEventsetAcceptedProc* = proc(self: QEvent, accepted: bool): void {.raises: [], gcsafe.}
 type QEventcloneProc* = proc(self: QEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}

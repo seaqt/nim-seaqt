@@ -70,14 +70,14 @@ typedef struct QNmeaPositionInfoSource_VTable{
 void* QNmeaPositionInfoSource_vdata(VirtualQNmeaPositionInfoSource* self);
 VirtualQNmeaPositionInfoSource* vdata_QNmeaPositionInfoSource(void* vdata);
 
-VirtualQNmeaPositionInfoSource* QNmeaPositionInfoSource_new(const QNmeaPositionInfoSource_VTable* vtbl, size_t vdata, int updateMode);
-VirtualQNmeaPositionInfoSource* QNmeaPositionInfoSource_new2(const QNmeaPositionInfoSource_VTable* vtbl, size_t vdata, int updateMode, QObject* parent);
+VirtualQNmeaPositionInfoSource* QNmeaPositionInfoSource_new_updateMode(const QNmeaPositionInfoSource_VTable* vtbl, size_t vdata, int updateMode);
+VirtualQNmeaPositionInfoSource* QNmeaPositionInfoSource_new_updateMode_parent(const QNmeaPositionInfoSource_VTable* vtbl, size_t vdata, int updateMode, QObject* parent);
 
 void QNmeaPositionInfoSource_virtbase(QNmeaPositionInfoSource* src, QGeoPositionInfoSource** outptr_QGeoPositionInfoSource);
 QMetaObject* QNmeaPositionInfoSource_metaObject(const QNmeaPositionInfoSource* self);
 void* QNmeaPositionInfoSource_metacast(QNmeaPositionInfoSource* self, const char* param1);
 int QNmeaPositionInfoSource_metacall(QNmeaPositionInfoSource* self, int param1, int param2, void** param3);
-struct seaqt_string QNmeaPositionInfoSource_tr(const char* s);
+struct seaqt_string QNmeaPositionInfoSource_tr_s(const char* s);
 void QNmeaPositionInfoSource_setUserEquivalentRangeError(QNmeaPositionInfoSource* self, double uere);
 double QNmeaPositionInfoSource_userEquivalentRangeError(const QNmeaPositionInfoSource* self);
 int QNmeaPositionInfoSource_updateMode(const QNmeaPositionInfoSource* self);
@@ -92,8 +92,8 @@ void QNmeaPositionInfoSource_startUpdates(QNmeaPositionInfoSource* self);
 void QNmeaPositionInfoSource_stopUpdates(QNmeaPositionInfoSource* self);
 void QNmeaPositionInfoSource_requestUpdate(QNmeaPositionInfoSource* self, int timeout);
 bool QNmeaPositionInfoSource_parsePosInfoFromNmeaData(QNmeaPositionInfoSource* self, const char* data, int size, QGeoPositionInfo* posInfo, bool* hasFix);
-struct seaqt_string QNmeaPositionInfoSource_tr2(const char* s, const char* c);
-struct seaqt_string QNmeaPositionInfoSource_tr3(const char* s, const char* c, int n);
+struct seaqt_string QNmeaPositionInfoSource_tr_s_c(const char* s, const char* c);
+struct seaqt_string QNmeaPositionInfoSource_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QNmeaPositionInfoSource_virtualbase_metaObject(const VirtualQNmeaPositionInfoSource* self);
 void* QNmeaPositionInfoSource_virtualbase_metacast(VirtualQNmeaPositionInfoSource* self, const char* param1);

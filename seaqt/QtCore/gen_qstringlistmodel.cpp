@@ -751,7 +751,7 @@ public:
 	friend void QStringListModel_virtualbase_disconnectNotify(VirtualQStringListModel* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QModelIndex* QStringListModel_protectedbase_createIndex(const VirtualQStringListModel* self, int row, int column);
+	friend QModelIndex* QStringListModel_protectedbase_createIndex_row_column(const VirtualQStringListModel* self, int row, int column);
 	friend void QStringListModel_protectedbase_encodeData(const VirtualQStringListModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QStringListModel_protectedbase_decodeData(VirtualQStringListModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QStringListModel_protectedbase_beginInsertRows(VirtualQStringListModel* self, QModelIndex* parent, int first, int last);
@@ -782,7 +782,7 @@ VirtualQStringListModel* QStringListModel_new(const QStringListModel_VTable* vtb
 	return _mem_ ? new (_mem_)VirtualQStringListModel(vtbl) : nullptr;
 }
 
-VirtualQStringListModel* QStringListModel_new2(const QStringListModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings) {
+VirtualQStringListModel* QStringListModel_new_strings(const QStringListModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings) {
 	QStringList strings_QList;
 	strings_QList.reserve(strings.len);
 	struct seaqt_string* strings_arr = static_cast<struct seaqt_string*>(strings.data);
@@ -794,12 +794,12 @@ VirtualQStringListModel* QStringListModel_new2(const QStringListModel_VTable* vt
 	return _mem_ ? new (_mem_)VirtualQStringListModel(vtbl, strings_QList) : nullptr;
 }
 
-VirtualQStringListModel* QStringListModel_new3(const QStringListModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQStringListModel* QStringListModel_new_parent(const QStringListModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQStringListModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQStringListModel(vtbl, parent) : nullptr;
 }
 
-VirtualQStringListModel* QStringListModel_new4(const QStringListModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings, QObject* parent) {
+VirtualQStringListModel* QStringListModel_new_strings_parent(const QStringListModel_VTable* vtbl, size_t vdata, struct seaqt_array /* of struct seaqt_string */  strings, QObject* parent) {
 	QStringList strings_QList;
 	strings_QList.reserve(strings.len);
 	struct seaqt_string* strings_arr = static_cast<struct seaqt_string*>(strings.data);
@@ -827,7 +827,7 @@ int QStringListModel_metacall(QStringListModel* self, int param1, int param2, vo
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QStringListModel_tr(const char* s) {
+struct seaqt_string QStringListModel_tr_s(const char* s) {
 	QString _ret = QStringListModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -943,7 +943,7 @@ int QStringListModel_supportedDropActions(const QStringListModel* self) {
 	return static_cast<int>(_ret);
 }
 
-struct seaqt_string QStringListModel_tr2(const char* s, const char* c) {
+struct seaqt_string QStringListModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QStringListModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -954,7 +954,7 @@ struct seaqt_string QStringListModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QStringListModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QStringListModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QStringListModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1262,7 +1262,7 @@ void QStringListModel_virtualbase_disconnectNotify(VirtualQStringListModel* self
 	self->QStringListModel::disconnectNotify(*signal);
 }
 
-QModelIndex* QStringListModel_protectedbase_createIndex(const VirtualQStringListModel* self, int row, int column) {
+QModelIndex* QStringListModel_protectedbase_createIndex_row_column(const VirtualQStringListModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

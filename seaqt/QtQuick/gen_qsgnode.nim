@@ -108,11 +108,11 @@ proc fcQSGNode_markDirty(self: pointer, bits: cint): void {.importc: "QSGNode_ma
 proc fcQSGNode_dirtyState(self: pointer): cint {.importc: "QSGNode_dirtyState".}
 proc fcQSGNode_isSubtreeBlocked(self: pointer): bool {.importc: "QSGNode_isSubtreeBlocked".}
 proc fcQSGNode_flags(self: pointer): cint {.importc: "QSGNode_flags".}
-proc fcQSGNode_setFlag(self: pointer, param1: cint): void {.importc: "QSGNode_setFlag".}
-proc fcQSGNode_setFlags(self: pointer, param1: cint): void {.importc: "QSGNode_setFlags".}
+proc fcQSGNode_setFlag_QSGNode_Flag(self: pointer, param1: cint): void {.importc: "QSGNode_setFlag_QSGNode_Flag".}
+proc fcQSGNode_setFlags_QSGNode_Flags(self: pointer, param1: cint): void {.importc: "QSGNode_setFlags_QSGNode_Flags".}
 proc fcQSGNode_preprocess(self: pointer): void {.importc: "QSGNode_preprocess".}
-proc fcQSGNode_setFlag2(self: pointer, param1: cint, param2: bool): void {.importc: "QSGNode_setFlag2".}
-proc fcQSGNode_setFlags2(self: pointer, param1: cint, param2: bool): void {.importc: "QSGNode_setFlags2".}
+proc fcQSGNode_setFlag_QSGNode_FlagBool(self: pointer, param1: cint, param2: bool): void {.importc: "QSGNode_setFlag_QSGNode_Flag_bool".}
+proc fcQSGNode_setFlags_QSGNode_FlagsBool(self: pointer, param1: cint, param2: bool): void {.importc: "QSGNode_setFlags_QSGNode_Flags_bool".}
 proc fcQSGNode_vdata(self: pointer): ptr pointer {.importc: "QSGNode_vdata".}
 proc fvdata_cQSGNode(self: pointer): pointer {.importc: "vdata_QSGNode".}
 
@@ -124,8 +124,8 @@ proc fcQSGNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSG
 proc fcQSGNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGNode_virtualbase_preprocess".}
 proc fcQSGNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGNode {.importc: "QSGNode_new".}
 proc fcQSGBasicGeometryNode_setGeometry(self: pointer, geometry: pointer): void {.importc: "QSGBasicGeometryNode_setGeometry".}
+proc fcQSGBasicGeometryNode_geometryConst(self: pointer): pointer {.importc: "QSGBasicGeometryNode_geometry_const".}
 proc fcQSGBasicGeometryNode_geometry(self: pointer): pointer {.importc: "QSGBasicGeometryNode_geometry".}
-proc fcQSGBasicGeometryNode_geometry2(self: pointer): pointer {.importc: "QSGBasicGeometryNode_geometry2".}
 proc fcQSGBasicGeometryNode_matrix(self: pointer): pointer {.importc: "QSGBasicGeometryNode_matrix".}
 proc fcQSGBasicGeometryNode_clipList(self: pointer): pointer {.importc: "QSGBasicGeometryNode_clipList".}
 proc fcQSGBasicGeometryNode_setRendererMatrix(self: pointer, m: pointer): void {.importc: "QSGBasicGeometryNode_setRendererMatrix".}
@@ -202,7 +202,7 @@ type cQSGOpacityNodeVTable {.pure.} = object
 proc fcQSGOpacityNode_virtualbase_isSubtreeBlocked(self: pointer): bool {.importc: "QSGOpacityNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGOpacityNode_virtualbase_preprocess(self: pointer): void {.importc: "QSGOpacityNode_virtualbase_preprocess".}
 proc fcQSGOpacityNode_new(vtbl: pointer, vdata: csize_t): ptr cQSGOpacityNode {.importc: "QSGOpacityNode_new".}
-proc fcQSGNodeVisitor_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSGNodeVisitor_operatorAssign".}
+proc fcQSGNodeVisitor_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSGNodeVisitor_operatorAssign".}
 
 proc parent*(self: gen_qsgnode_types.QSGNode): gen_qsgnode_types.QSGNode =
   gen_qsgnode_types.QSGNode(h: fcQSGNode_parent(self.h), owned: false)
@@ -265,19 +265,19 @@ proc flags*(self: gen_qsgnode_types.QSGNode): cint =
   cint(fcQSGNode_flags(self.h))
 
 proc setFlag*(self: gen_qsgnode_types.QSGNode, param1: cint): void =
-  fcQSGNode_setFlag(self.h, cint(param1))
+  fcQSGNode_setFlag_QSGNode_Flag(self.h, cint(param1))
 
 proc setFlags*(self: gen_qsgnode_types.QSGNode, param1: cint): void =
-  fcQSGNode_setFlags(self.h, cint(param1))
+  fcQSGNode_setFlags_QSGNode_Flags(self.h, cint(param1))
 
 proc preprocess*(self: gen_qsgnode_types.QSGNode): void =
   fcQSGNode_preprocess(self.h)
 
 proc setFlag*(self: gen_qsgnode_types.QSGNode, param1: cint, param2: bool): void =
-  fcQSGNode_setFlag2(self.h, cint(param1), param2)
+  fcQSGNode_setFlag_QSGNode_FlagBool(self.h, cint(param1), param2)
 
 proc setFlags*(self: gen_qsgnode_types.QSGNode, param1: cint, param2: bool): void =
-  fcQSGNode_setFlags2(self.h, cint(param1), param2)
+  fcQSGNode_setFlags_QSGNode_FlagsBool(self.h, cint(param1), param2)
 
 type QSGNodeisSubtreeBlockedProc* = proc(self: QSGNode): bool {.raises: [], gcsafe.}
 type QSGNodepreprocessProc* = proc(self: QSGNode): void {.raises: [], gcsafe.}
@@ -357,10 +357,10 @@ proc setGeometry*(self: gen_qsgnode_types.QSGBasicGeometryNode, geometry: gen_qs
   fcQSGBasicGeometryNode_setGeometry(self.h, geometry.h)
 
 proc geometry*(self: gen_qsgnode_types.QSGBasicGeometryNode): gen_qsggeometry_types.QSGGeometry =
-  gen_qsggeometry_types.QSGGeometry(h: fcQSGBasicGeometryNode_geometry(self.h), owned: false)
+  gen_qsggeometry_types.QSGGeometry(h: fcQSGBasicGeometryNode_geometryConst(self.h), owned: false)
 
 proc geometry2*(self: gen_qsgnode_types.QSGBasicGeometryNode): gen_qsggeometry_types.QSGGeometry =
-  gen_qsggeometry_types.QSGGeometry(h: fcQSGBasicGeometryNode_geometry2(self.h), owned: false)
+  gen_qsggeometry_types.QSGGeometry(h: fcQSGBasicGeometryNode_geometry(self.h), owned: false)
 
 proc matrix*(self: gen_qsgnode_types.QSGBasicGeometryNode): gen_qmatrix4x4_types.QMatrix4x4 =
   gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGBasicGeometryNode_matrix(self.h), owned: false)
@@ -810,6 +810,6 @@ proc create*(T: type gen_qsgnode_types.QSGOpacityNode,
   fcQSGOpacityNode_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc operatorAssign*(self: gen_qsgnode_types.QSGNodeVisitor, param1: gen_qsgnode_types.QSGNodeVisitor): void =
-  fcQSGNodeVisitor_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qsgnode_types.QSGNodeVisitor, fromVal: gen_qsgnode_types.QSGNodeVisitor): void =
+  fcQSGNodeVisitor_operatorAssign(self.h, fromVal.h)
 

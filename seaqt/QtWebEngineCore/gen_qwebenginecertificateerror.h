@@ -26,9 +26,9 @@ typedef struct QUrl QUrl;
 typedef struct QWebEngineCertificateError QWebEngineCertificateError;
 #endif
 
-QWebEngineCertificateError* QWebEngineCertificateError_new(QWebEngineCertificateError* other);
+QWebEngineCertificateError* QWebEngineCertificateError_new(QWebEngineCertificateError* from);
 
-void QWebEngineCertificateError_operatorAssign(QWebEngineCertificateError* self, QWebEngineCertificateError* other);
+void QWebEngineCertificateError_operatorAssign(QWebEngineCertificateError* self, QWebEngineCertificateError* from);
 int QWebEngineCertificateError_type(const QWebEngineCertificateError* self);
 QUrl* QWebEngineCertificateError_url(const QWebEngineCertificateError* self);
 bool QWebEngineCertificateError_isOverridable(const QWebEngineCertificateError* self);

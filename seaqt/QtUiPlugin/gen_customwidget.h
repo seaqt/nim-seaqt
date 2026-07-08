@@ -40,7 +40,7 @@ struct seaqt_string QDesignerCustomWidgetInterface_codeTemplate(const QDesignerC
 
 void QDesignerCustomWidgetInterface_delete(QDesignerCustomWidgetInterface* self);
 
-void QDesignerCustomWidgetCollectionInterface_operatorAssign(QDesignerCustomWidgetCollectionInterface* self, QDesignerCustomWidgetCollectionInterface* param1);
+void QDesignerCustomWidgetCollectionInterface_operatorAssign(QDesignerCustomWidgetCollectionInterface* self, QDesignerCustomWidgetCollectionInterface* from);
 
 void QDesignerCustomWidgetCollectionInterface_delete(QDesignerCustomWidgetCollectionInterface* self);
 

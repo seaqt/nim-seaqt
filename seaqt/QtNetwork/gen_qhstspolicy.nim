@@ -47,30 +47,30 @@ export
 
 type cQHstsPolicy*{.exportc: "QHstsPolicy", incompleteStruct.} = object
 
-proc fcQHstsPolicy_operatorAssign(self: pointer, rhs: pointer): void {.importc: "QHstsPolicy_operatorAssign".}
+proc fcQHstsPolicy_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QHstsPolicy_operatorAssign".}
 proc fcQHstsPolicy_swap(self: pointer, other: pointer): void {.importc: "QHstsPolicy_swap".}
-proc fcQHstsPolicy_setHost(self: pointer, host: struct_seaqt_string): void {.importc: "QHstsPolicy_setHost".}
+proc fcQHstsPolicy_setHostHost(self: pointer, host: struct_seaqt_string): void {.importc: "QHstsPolicy_setHost_host".}
 proc fcQHstsPolicy_host(self: pointer): struct_seaqt_string {.importc: "QHstsPolicy_host".}
 proc fcQHstsPolicy_setExpiry(self: pointer, expiry: pointer): void {.importc: "QHstsPolicy_setExpiry".}
 proc fcQHstsPolicy_expiry(self: pointer): pointer {.importc: "QHstsPolicy_expiry".}
 proc fcQHstsPolicy_setIncludesSubDomains(self: pointer, includeVal: bool): void {.importc: "QHstsPolicy_setIncludesSubDomains".}
 proc fcQHstsPolicy_includesSubDomains(self: pointer): bool {.importc: "QHstsPolicy_includesSubDomains".}
 proc fcQHstsPolicy_isExpired(self: pointer): bool {.importc: "QHstsPolicy_isExpired".}
-proc fcQHstsPolicy_setHost2(self: pointer, host: struct_seaqt_string, mode: cint): void {.importc: "QHstsPolicy_setHost2".}
-proc fcQHstsPolicy_hostWithOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QHstsPolicy_hostWithOptions".}
+proc fcQHstsPolicy_setHostHostMode(self: pointer, host: struct_seaqt_string, mode: cint): void {.importc: "QHstsPolicy_setHost_host_mode".}
+proc fcQHstsPolicy_hostOptions(self: pointer, options: cint): struct_seaqt_string {.importc: "QHstsPolicy_host_options".}
 proc fcQHstsPolicy_new(): ptr cQHstsPolicy {.importc: "QHstsPolicy_new".}
-proc fcQHstsPolicy_new2(expiry: pointer, flags: cint, host: struct_seaqt_string): ptr cQHstsPolicy {.importc: "QHstsPolicy_new2".}
-proc fcQHstsPolicy_new3(rhs: pointer): ptr cQHstsPolicy {.importc: "QHstsPolicy_new3".}
-proc fcQHstsPolicy_new4(expiry: pointer, flags: cint, host: struct_seaqt_string, mode: cint): ptr cQHstsPolicy {.importc: "QHstsPolicy_new4".}
+proc fcQHstsPolicy_new2(expiry: pointer, flags: cint, host: struct_seaqt_string): ptr cQHstsPolicy {.importc: "QHstsPolicy_new_expiry_flags_host".}
+proc fcQHstsPolicy_new3(fromVal: pointer): ptr cQHstsPolicy {.importc: "QHstsPolicy_new_from".}
+proc fcQHstsPolicy_new4(expiry: pointer, flags: cint, host: struct_seaqt_string, mode: cint): ptr cQHstsPolicy {.importc: "QHstsPolicy_new_expiry_flags_host_mode".}
 
-proc operatorAssign*(self: gen_qhstspolicy_types.QHstsPolicy, rhs: gen_qhstspolicy_types.QHstsPolicy): void =
-  fcQHstsPolicy_operatorAssign(self.h, rhs.h)
+proc operatorAssign*(self: gen_qhstspolicy_types.QHstsPolicy, fromVal: gen_qhstspolicy_types.QHstsPolicy): void =
+  fcQHstsPolicy_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qhstspolicy_types.QHstsPolicy, other: gen_qhstspolicy_types.QHstsPolicy): void =
   fcQHstsPolicy_swap(self.h, other.h)
 
 proc setHost*(self: gen_qhstspolicy_types.QHstsPolicy, host: openArray[char]): void =
-  fcQHstsPolicy_setHost(self.h, struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host))))
+  fcQHstsPolicy_setHostHost(self.h, struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host))))
 
 proc host*(self: gen_qhstspolicy_types.QHstsPolicy): string =
   let v_ms = fcQHstsPolicy_host(self.h)
@@ -94,10 +94,10 @@ proc isExpired*(self: gen_qhstspolicy_types.QHstsPolicy): bool =
   fcQHstsPolicy_isExpired(self.h)
 
 proc setHost*(self: gen_qhstspolicy_types.QHstsPolicy, host: openArray[char], mode: cint): void =
-  fcQHstsPolicy_setHost2(self.h, struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host))), cint(mode))
+  fcQHstsPolicy_setHostHostMode(self.h, struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host))), cint(mode))
 
 proc host*(self: gen_qhstspolicy_types.QHstsPolicy, options: cint): string =
-  let v_ms = fcQHstsPolicy_hostWithOptions(self.h, cint(options))
+  let v_ms = fcQHstsPolicy_hostOptions(self.h, cint(options))
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -110,8 +110,8 @@ proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
   let tmp = gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new2(expiry.h, cint(flags), struct_seaqt_string(data: if len(host) > 0: addr host[0] else: nil, len: csize_t(len(host)))), owned: true)
   tmp
 proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
-    rhs: gen_qhstspolicy_types.QHstsPolicy): gen_qhstspolicy_types.QHstsPolicy =
-  let tmp = gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new3(rhs.h), owned: true)
+    fromVal: gen_qhstspolicy_types.QHstsPolicy): gen_qhstspolicy_types.QHstsPolicy =
+  let tmp = gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new3(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
     expiry: gen_qdatetime_types.QDateTime, flags: cint, host: openArray[char], mode: cint): gen_qhstspolicy_types.QHstsPolicy =

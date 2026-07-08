@@ -160,13 +160,13 @@ void* QPdfView_vdata(VirtualQPdfView* self);
 VirtualQPdfView* vdata_QPdfView(void* vdata);
 
 VirtualQPdfView* QPdfView_new(const QPdfView_VTable* vtbl, size_t vdata);
-VirtualQPdfView* QPdfView_new2(const QPdfView_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQPdfView* QPdfView_new_parent(const QPdfView_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QPdfView_virtbase(QPdfView* src, QAbstractScrollArea** outptr_QAbstractScrollArea);
 QMetaObject* QPdfView_metaObject(const QPdfView* self);
 void* QPdfView_metacast(QPdfView* self, const char* param1);
 int QPdfView_metacall(QPdfView* self, int param1, int param2, void** param3);
-struct seaqt_string QPdfView_tr(const char* s);
+struct seaqt_string QPdfView_tr_s(const char* s);
 void QPdfView_setDocument(QPdfView* self, QPdfDocument* document);
 QPdfDocument* QPdfView_document(const QPdfView* self);
 QPdfPageNavigator* QPdfView_pageNavigator(const QPdfView* self);
@@ -195,8 +195,8 @@ void QPdfView_connect_documentMarginsChanged(QPdfView* self, intptr_t slot, void
 void QPdfView_paintEvent(QPdfView* self, QPaintEvent* event);
 void QPdfView_resizeEvent(QPdfView* self, QResizeEvent* event);
 void QPdfView_scrollContentsBy(QPdfView* self, int dx, int dy);
-struct seaqt_string QPdfView_tr2(const char* s, const char* c);
-struct seaqt_string QPdfView_tr3(const char* s, const char* c, int n);
+struct seaqt_string QPdfView_tr_s_c(const char* s, const char* c);
+struct seaqt_string QPdfView_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QPdfView_virtualbase_metaObject(const VirtualQPdfView* self);
 void* QPdfView_virtualbase_metacast(VirtualQPdfView* self, const char* param1);
@@ -254,7 +254,7 @@ void QPdfView_virtualbase_customEvent(VirtualQPdfView* self, QEvent* event);
 void QPdfView_virtualbase_connectNotify(VirtualQPdfView* self, QMetaMethod* signal);
 void QPdfView_virtualbase_disconnectNotify(VirtualQPdfView* self, QMetaMethod* signal);
 
-void QPdfView_protectedbase_setViewportMargins(VirtualQPdfView* self, int left, int top, int right, int bottom);
+void QPdfView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQPdfView* self, int left, int top, int right, int bottom);
 QMargins* QPdfView_protectedbase_viewportMargins(const VirtualQPdfView* self);
 void QPdfView_protectedbase_drawFrame(VirtualQPdfView* self, QPainter* param1);
 void QPdfView_protectedbase_updateMicroFocus(VirtualQPdfView* self);

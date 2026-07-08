@@ -20,12 +20,12 @@ QWebSocketHandshakeOptions* QWebSocketHandshakeOptions_new() {
 	return new (std::nothrow) QWebSocketHandshakeOptions();
 }
 
-QWebSocketHandshakeOptions* QWebSocketHandshakeOptions_new2(QWebSocketHandshakeOptions* other) {
-	return new (std::nothrow) QWebSocketHandshakeOptions(*other);
+QWebSocketHandshakeOptions* QWebSocketHandshakeOptions_new_from(QWebSocketHandshakeOptions* from) {
+	return new (std::nothrow) QWebSocketHandshakeOptions(*from);
 }
 
-void QWebSocketHandshakeOptions_operatorAssign(QWebSocketHandshakeOptions* self, QWebSocketHandshakeOptions* other) {
-	self->operator=(*other);
+void QWebSocketHandshakeOptions_operatorAssign(QWebSocketHandshakeOptions* self, QWebSocketHandshakeOptions* from) {
+	self->operator=(*from);
 }
 
 void QWebSocketHandshakeOptions_swap(QWebSocketHandshakeOptions* self, QWebSocketHandshakeOptions* other) {

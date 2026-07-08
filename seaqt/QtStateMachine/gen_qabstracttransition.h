@@ -61,13 +61,13 @@ void* QAbstractTransition_vdata(VirtualQAbstractTransition* self);
 VirtualQAbstractTransition* vdata_QAbstractTransition(void* vdata);
 
 VirtualQAbstractTransition* QAbstractTransition_new(const QAbstractTransition_VTable* vtbl, size_t vdata);
-VirtualQAbstractTransition* QAbstractTransition_new2(const QAbstractTransition_VTable* vtbl, size_t vdata, QState* sourceState);
+VirtualQAbstractTransition* QAbstractTransition_new_sourceState(const QAbstractTransition_VTable* vtbl, size_t vdata, QState* sourceState);
 
 void QAbstractTransition_virtbase(QAbstractTransition* src, QObject** outptr_QObject);
 QMetaObject* QAbstractTransition_metaObject(const QAbstractTransition* self);
 void* QAbstractTransition_metacast(QAbstractTransition* self, const char* param1);
 int QAbstractTransition_metacall(QAbstractTransition* self, int param1, int param2, void** param3);
-struct seaqt_string QAbstractTransition_tr(const char* s);
+struct seaqt_string QAbstractTransition_tr_s(const char* s);
 QState* QAbstractTransition_sourceState(const QAbstractTransition* self);
 QAbstractState* QAbstractTransition_targetState(const QAbstractTransition* self);
 void QAbstractTransition_setTargetState(QAbstractTransition* self, QAbstractState* target);
@@ -82,8 +82,8 @@ struct seaqt_array /* of QAbstractAnimation* */  QAbstractTransition_animations(
 bool QAbstractTransition_eventTest(QAbstractTransition* self, QEvent* event);
 void QAbstractTransition_onTransition(QAbstractTransition* self, QEvent* event);
 bool QAbstractTransition_event(QAbstractTransition* self, QEvent* e);
-struct seaqt_string QAbstractTransition_tr2(const char* s, const char* c);
-struct seaqt_string QAbstractTransition_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAbstractTransition_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAbstractTransition_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAbstractTransition_virtualbase_metaObject(const VirtualQAbstractTransition* self);
 void* QAbstractTransition_virtualbase_metacast(VirtualQAbstractTransition* self, const char* param1);

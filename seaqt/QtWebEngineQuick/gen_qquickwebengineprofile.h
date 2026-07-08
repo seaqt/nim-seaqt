@@ -61,13 +61,13 @@ void* QQuickWebEngineProfile_vdata(VirtualQQuickWebEngineProfile* self);
 VirtualQQuickWebEngineProfile* vdata_QQuickWebEngineProfile(void* vdata);
 
 VirtualQQuickWebEngineProfile* QQuickWebEngineProfile_new(const QQuickWebEngineProfile_VTable* vtbl, size_t vdata);
-VirtualQQuickWebEngineProfile* QQuickWebEngineProfile_new2(const QQuickWebEngineProfile_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQQuickWebEngineProfile* QQuickWebEngineProfile_new_parent(const QQuickWebEngineProfile_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QQuickWebEngineProfile_virtbase(QQuickWebEngineProfile* src, QObject** outptr_QObject);
 QMetaObject* QQuickWebEngineProfile_metaObject(const QQuickWebEngineProfile* self);
 void* QQuickWebEngineProfile_metacast(QQuickWebEngineProfile* self, const char* param1);
 int QQuickWebEngineProfile_metacall(QQuickWebEngineProfile* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickWebEngineProfile_tr(const char* s);
+struct seaqt_string QQuickWebEngineProfile_tr_s(const char* s);
 struct seaqt_string QQuickWebEngineProfile_storageName(const QQuickWebEngineProfile* self);
 void QQuickWebEngineProfile_setStorageName(QQuickWebEngineProfile* self, struct seaqt_string name);
 bool QQuickWebEngineProfile_isOffTheRecord(const QQuickWebEngineProfile* self);
@@ -128,8 +128,8 @@ void QQuickWebEngineProfile_downloadPathChanged(QQuickWebEngineProfile* self);
 void QQuickWebEngineProfile_connect_downloadPathChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickWebEngineProfile_presentNotification(QQuickWebEngineProfile* self, QWebEngineNotification* notification);
 void QQuickWebEngineProfile_connect_presentNotification(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineNotification*), void (*release)(intptr_t));
-struct seaqt_string QQuickWebEngineProfile_tr2(const char* s, const char* c);
-struct seaqt_string QQuickWebEngineProfile_tr3(const char* s, const char* c, int n);
+struct seaqt_string QQuickWebEngineProfile_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickWebEngineProfile_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QQuickWebEngineProfile_virtualbase_metaObject(const VirtualQQuickWebEngineProfile* self);
 void* QQuickWebEngineProfile_virtualbase_metacast(VirtualQQuickWebEngineProfile* self, const char* param1);

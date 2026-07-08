@@ -502,27 +502,27 @@ VirtualQQuickView* QQuickView_new(const QQuickView_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQQuickView(vtbl) : nullptr;
 }
 
-VirtualQQuickView* QQuickView_new2(const QQuickView_VTable* vtbl, size_t vdata, QQmlEngine* engine, QWindow* parent) {
+VirtualQQuickView* QQuickView_new_engine_parent(const QQuickView_VTable* vtbl, size_t vdata, QQmlEngine* engine, QWindow* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickView(vtbl, engine, parent) : nullptr;
 }
 
-VirtualQQuickView* QQuickView_new3(const QQuickView_VTable* vtbl, size_t vdata, QUrl* source) {
+VirtualQQuickView* QQuickView_new_source(const QQuickView_VTable* vtbl, size_t vdata, QUrl* source) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickView(vtbl, *source) : nullptr;
 }
 
-VirtualQQuickView* QQuickView_new4(const QQuickView_VTable* vtbl, size_t vdata, QUrl* source, QQuickRenderControl* renderControl) {
+VirtualQQuickView* QQuickView_new_source_renderControl(const QQuickView_VTable* vtbl, size_t vdata, QUrl* source, QQuickRenderControl* renderControl) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickView(vtbl, *source, renderControl) : nullptr;
 }
 
-VirtualQQuickView* QQuickView_new5(const QQuickView_VTable* vtbl, size_t vdata, QWindow* parent) {
+VirtualQQuickView* QQuickView_new_parent(const QQuickView_VTable* vtbl, size_t vdata, QWindow* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickView(vtbl, parent) : nullptr;
 }
 
-VirtualQQuickView* QQuickView_new6(const QQuickView_VTable* vtbl, size_t vdata, QUrl* source, QWindow* parent) {
+VirtualQQuickView* QQuickView_new_source_parent(const QQuickView_VTable* vtbl, size_t vdata, QUrl* source, QWindow* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQQuickView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQQuickView(vtbl, *source, parent) : nullptr;
 }
@@ -543,7 +543,7 @@ int QQuickView_metacall(QQuickView* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QQuickView_tr(const char* s) {
+struct seaqt_string QQuickView_tr_s(const char* s) {
 	QString _ret = QQuickView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -641,7 +641,7 @@ void QQuickView_connect_statusChanged(QQuickView* self, intptr_t slot, void (*ca
 	QQuickView::connect(self, static_cast<void (QQuickView::*)(QQuickView::Status)>(&QQuickView::statusChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QQuickView_tr2(const char* s, const char* c) {
+struct seaqt_string QQuickView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QQuickView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -652,7 +652,7 @@ struct seaqt_string QQuickView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QQuickView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QQuickView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QQuickView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -116,7 +116,7 @@ type cQSqlDriver*{.exportc: "QSqlDriver", incompleteStruct.} = object
 proc fcQSqlDriver_metaObject(self: pointer): pointer {.importc: "QSqlDriver_metaObject".}
 proc fcQSqlDriver_metacast(self: pointer, param1: cstring): pointer {.importc: "QSqlDriver_metacast".}
 proc fcQSqlDriver_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSqlDriver_metacall".}
-proc fcQSqlDriver_tr(s: cstring): struct_seaqt_string {.importc: "QSqlDriver_tr".}
+proc fcQSqlDriver_trS(s: cstring): struct_seaqt_string {.importc: "QSqlDriver_tr_s".}
 proc fcQSqlDriver_isOpen(self: pointer): bool {.importc: "QSqlDriver_isOpen".}
 proc fcQSqlDriver_isOpenError(self: pointer): bool {.importc: "QSqlDriver_isOpenError".}
 proc fcQSqlDriver_beginTransaction(self: pointer): bool {.importc: "QSqlDriver_beginTransaction".}
@@ -146,8 +146,8 @@ proc fcQSqlDriver_maximumIdentifierLength(self: pointer, typeVal: cint): cint {.
 proc fcQSqlDriver_cancelQuery(self: pointer): bool {.importc: "QSqlDriver_cancelQuery".}
 proc fcQSqlDriver_notification(self: pointer, name: struct_seaqt_string, source: cint, payload: pointer): void {.importc: "QSqlDriver_notification".}
 proc fcQSqlDriver_connect_notification(self: pointer, slot: int, callback: proc (slot: int, name: struct_seaqt_string, source: cint, payload: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSqlDriver_connect_notification".}
-proc fcQSqlDriver_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlDriver_tr2".}
-proc fcQSqlDriver_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlDriver_tr3".}
+proc fcQSqlDriver_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSqlDriver_tr_s_c".}
+proc fcQSqlDriver_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSqlDriver_tr_s_c_n".}
 proc fcQSqlDriver_vdata(self: pointer): ptr pointer {.importc: "QSqlDriver_vdata".}
 proc fvdata_cQSqlDriver(self: pointer): pointer {.importc: "vdata_QSqlDriver".}
 
@@ -224,7 +224,7 @@ proc fcQSqlDriver_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQSqlDriver_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSqlDriver_protectedbase_receivers".}
 proc fcQSqlDriver_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSqlDriver_protectedbase_isSignalConnected".}
 proc fcQSqlDriver_new(vtbl: pointer, vdata: csize_t): ptr cQSqlDriver {.importc: "QSqlDriver_new".}
-proc fcQSqlDriver_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlDriver {.importc: "QSqlDriver_new2".}
+proc fcQSqlDriver_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlDriver {.importc: "QSqlDriver_new_parent".}
 proc fcQSqlDriver_staticMetaObject(): pointer {.importc: "QSqlDriver_staticMetaObject".}
 
 proc metaObject*(self: gen_qsqldriver_types.QSqlDriver): gen_qobjectdefs_types.QMetaObject =
@@ -237,7 +237,7 @@ proc metacall*(self: gen_qsqldriver_types.QSqlDriver, param1: cint, param2: cint
   fcQSqlDriver_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring): string =
-  let v_ms = fcQSqlDriver_tr(s)
+  let v_ms = fcQSqlDriver_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -381,13 +381,13 @@ proc onNotification*(self: gen_qsqldriver_types.QSqlDriver, slot: QSqlDrivernoti
   fcQSqlDriver_connect_notification(self.h, cast[int](addr tmp[]), fcQSqlDriver_slot_callback_notification, fcQSqlDriver_slot_callback_notification_release)
 
 proc tr*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring, c: cstring): string =
-  let v_ms = fcQSqlDriver_tr2(s, c)
+  let v_ms = fcQSqlDriver_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsqldriver_types.QSqlDriver, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSqlDriver_tr3(s, c, n)
+  let v_ms = fcQSqlDriver_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

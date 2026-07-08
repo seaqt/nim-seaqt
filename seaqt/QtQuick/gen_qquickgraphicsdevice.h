@@ -21,9 +21,9 @@ typedef struct QQuickGraphicsDevice QQuickGraphicsDevice;
 #endif
 
 QQuickGraphicsDevice* QQuickGraphicsDevice_new();
-QQuickGraphicsDevice* QQuickGraphicsDevice_new2(QQuickGraphicsDevice* other);
+QQuickGraphicsDevice* QQuickGraphicsDevice_new_from(QQuickGraphicsDevice* from);
 
-void QQuickGraphicsDevice_operatorAssign(QQuickGraphicsDevice* self, QQuickGraphicsDevice* other);
+void QQuickGraphicsDevice_operatorAssign(QQuickGraphicsDevice* self, QQuickGraphicsDevice* from);
 bool QQuickGraphicsDevice_isNull(const QQuickGraphicsDevice* self);
 
 void QQuickGraphicsDevice_delete(QQuickGraphicsDevice* self);

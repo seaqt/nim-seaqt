@@ -71,26 +71,26 @@ type cQStatusBar*{.exportc: "QStatusBar", incompleteStruct.} = object
 proc fcQStatusBar_metaObject(self: pointer): pointer {.importc: "QStatusBar_metaObject".}
 proc fcQStatusBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QStatusBar_metacast".}
 proc fcQStatusBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStatusBar_metacall".}
-proc fcQStatusBar_tr(s: cstring): struct_seaqt_string {.importc: "QStatusBar_tr".}
-proc fcQStatusBar_addWidget(self: pointer, widget: pointer): void {.importc: "QStatusBar_addWidget".}
-proc fcQStatusBar_insertWidget(self: pointer, index: cint, widget: pointer): cint {.importc: "QStatusBar_insertWidget".}
-proc fcQStatusBar_addPermanentWidget(self: pointer, widget: pointer): void {.importc: "QStatusBar_addPermanentWidget".}
-proc fcQStatusBar_insertPermanentWidget(self: pointer, index: cint, widget: pointer): cint {.importc: "QStatusBar_insertPermanentWidget".}
+proc fcQStatusBar_trS(s: cstring): struct_seaqt_string {.importc: "QStatusBar_tr_s".}
+proc fcQStatusBar_addWidgetWidget(self: pointer, widget: pointer): void {.importc: "QStatusBar_addWidget_widget".}
+proc fcQStatusBar_insertWidgetIndexWidget(self: pointer, index: cint, widget: pointer): cint {.importc: "QStatusBar_insertWidget_index_widget".}
+proc fcQStatusBar_addPermanentWidgetWidget(self: pointer, widget: pointer): void {.importc: "QStatusBar_addPermanentWidget_widget".}
+proc fcQStatusBar_insertPermanentWidgetIndexWidget(self: pointer, index: cint, widget: pointer): cint {.importc: "QStatusBar_insertPermanentWidget_index_widget".}
 proc fcQStatusBar_removeWidget(self: pointer, widget: pointer): void {.importc: "QStatusBar_removeWidget".}
 proc fcQStatusBar_setSizeGripEnabled(self: pointer, sizeGripEnabled: bool): void {.importc: "QStatusBar_setSizeGripEnabled".}
 proc fcQStatusBar_isSizeGripEnabled(self: pointer): bool {.importc: "QStatusBar_isSizeGripEnabled".}
 proc fcQStatusBar_currentMessage(self: pointer): struct_seaqt_string {.importc: "QStatusBar_currentMessage".}
-proc fcQStatusBar_showMessage(self: pointer, text: struct_seaqt_string): void {.importc: "QStatusBar_showMessage".}
+proc fcQStatusBar_showMessageText(self: pointer, text: struct_seaqt_string): void {.importc: "QStatusBar_showMessage_text".}
 proc fcQStatusBar_clearMessage(self: pointer): void {.importc: "QStatusBar_clearMessage".}
 proc fcQStatusBar_messageChanged(self: pointer, text: struct_seaqt_string): void {.importc: "QStatusBar_messageChanged".}
 proc fcQStatusBar_connect_messageChanged(self: pointer, slot: int, callback: proc (slot: int, text: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStatusBar_connect_messageChanged".}
-proc fcQStatusBar_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStatusBar_tr2".}
-proc fcQStatusBar_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStatusBar_tr3".}
-proc fcQStatusBar_addWidget2(self: pointer, widget: pointer, stretch: cint): void {.importc: "QStatusBar_addWidget2".}
-proc fcQStatusBar_insertWidget2(self: pointer, index: cint, widget: pointer, stretch: cint): cint {.importc: "QStatusBar_insertWidget2".}
-proc fcQStatusBar_addPermanentWidget2(self: pointer, widget: pointer, stretch: cint): void {.importc: "QStatusBar_addPermanentWidget2".}
-proc fcQStatusBar_insertPermanentWidget2(self: pointer, index: cint, widget: pointer, stretch: cint): cint {.importc: "QStatusBar_insertPermanentWidget2".}
-proc fcQStatusBar_showMessage2(self: pointer, text: struct_seaqt_string, timeout: cint): void {.importc: "QStatusBar_showMessage2".}
+proc fcQStatusBar_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QStatusBar_tr_s_c".}
+proc fcQStatusBar_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QStatusBar_tr_s_c_n".}
+proc fcQStatusBar_addWidgetWidgetStretch(self: pointer, widget: pointer, stretch: cint): void {.importc: "QStatusBar_addWidget_widget_stretch".}
+proc fcQStatusBar_insertWidgetIndexWidgetStretch(self: pointer, index: cint, widget: pointer, stretch: cint): cint {.importc: "QStatusBar_insertWidget_index_widget_stretch".}
+proc fcQStatusBar_addPermanentWidgetWidgetStretch(self: pointer, widget: pointer, stretch: cint): void {.importc: "QStatusBar_addPermanentWidget_widget_stretch".}
+proc fcQStatusBar_insertPermanentWidgetIndexWidgetStretch(self: pointer, index: cint, widget: pointer, stretch: cint): cint {.importc: "QStatusBar_insertPermanentWidget_index_widget_stretch".}
+proc fcQStatusBar_showMessageTextTimeout(self: pointer, text: struct_seaqt_string, timeout: cint): void {.importc: "QStatusBar_showMessage_text_timeout".}
 proc fcQStatusBar_vdata(self: pointer): ptr pointer {.importc: "QStatusBar_vdata".}
 proc fvdata_cQStatusBar(self: pointer): pointer {.importc: "vdata_QStatusBar".}
 
@@ -208,7 +208,7 @@ proc fcQStatusBar_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQStatusBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStatusBar_protectedbase_receivers".}
 proc fcQStatusBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStatusBar_protectedbase_isSignalConnected".}
 proc fcQStatusBar_new(vtbl: pointer, vdata: csize_t): ptr cQStatusBar {.importc: "QStatusBar_new".}
-proc fcQStatusBar_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStatusBar {.importc: "QStatusBar_new2".}
+proc fcQStatusBar_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStatusBar {.importc: "QStatusBar_new_parent".}
 proc fcQStatusBar_staticMetaObject(): pointer {.importc: "QStatusBar_staticMetaObject".}
 
 proc metaObject*(self: gen_qstatusbar_types.QStatusBar): gen_qobjectdefs_types.QMetaObject =
@@ -221,22 +221,22 @@ proc metacall*(self: gen_qstatusbar_types.QStatusBar, param1: cint, param2: cint
   fcQStatusBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstatusbar_types.QStatusBar, s: cstring): string =
-  let v_ms = fcQStatusBar_tr(s)
+  let v_ms = fcQStatusBar_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addWidget*(self: gen_qstatusbar_types.QStatusBar, widget: gen_qwidget_types.QWidget): void =
-  fcQStatusBar_addWidget(self.h, widget.h)
+  fcQStatusBar_addWidgetWidget(self.h, widget.h)
 
 proc insertWidget*(self: gen_qstatusbar_types.QStatusBar, index: cint, widget: gen_qwidget_types.QWidget): cint =
-  fcQStatusBar_insertWidget(self.h, index, widget.h)
+  fcQStatusBar_insertWidgetIndexWidget(self.h, index, widget.h)
 
 proc addPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, widget: gen_qwidget_types.QWidget): void =
-  fcQStatusBar_addPermanentWidget(self.h, widget.h)
+  fcQStatusBar_addPermanentWidgetWidget(self.h, widget.h)
 
 proc insertPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, index: cint, widget: gen_qwidget_types.QWidget): cint =
-  fcQStatusBar_insertPermanentWidget(self.h, index, widget.h)
+  fcQStatusBar_insertPermanentWidgetIndexWidget(self.h, index, widget.h)
 
 proc removeWidget*(self: gen_qstatusbar_types.QStatusBar, widget: gen_qwidget_types.QWidget): void =
   fcQStatusBar_removeWidget(self.h, widget.h)
@@ -254,7 +254,7 @@ proc currentMessage*(self: gen_qstatusbar_types.QStatusBar): string =
   vx_ret
 
 proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: openArray[char]): void =
-  fcQStatusBar_showMessage(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+  fcQStatusBar_showMessageText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc clearMessage*(self: gen_qstatusbar_types.QStatusBar): void =
   fcQStatusBar_clearMessage(self.h)
@@ -283,31 +283,31 @@ proc onMessageChanged*(self: gen_qstatusbar_types.QStatusBar, slot: QStatusBarme
   fcQStatusBar_connect_messageChanged(self.h, cast[int](addr tmp[]), fcQStatusBar_slot_callback_messageChanged, fcQStatusBar_slot_callback_messageChanged_release)
 
 proc tr*(_: type gen_qstatusbar_types.QStatusBar, s: cstring, c: cstring): string =
-  let v_ms = fcQStatusBar_tr2(s, c)
+  let v_ms = fcQStatusBar_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qstatusbar_types.QStatusBar, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQStatusBar_tr3(s, c, n)
+  let v_ms = fcQStatusBar_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc addWidget*(self: gen_qstatusbar_types.QStatusBar, widget: gen_qwidget_types.QWidget, stretch: cint): void =
-  fcQStatusBar_addWidget2(self.h, widget.h, stretch)
+  fcQStatusBar_addWidgetWidgetStretch(self.h, widget.h, stretch)
 
 proc insertWidget*(self: gen_qstatusbar_types.QStatusBar, index: cint, widget: gen_qwidget_types.QWidget, stretch: cint): cint =
-  fcQStatusBar_insertWidget2(self.h, index, widget.h, stretch)
+  fcQStatusBar_insertWidgetIndexWidgetStretch(self.h, index, widget.h, stretch)
 
 proc addPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, widget: gen_qwidget_types.QWidget, stretch: cint): void =
-  fcQStatusBar_addPermanentWidget2(self.h, widget.h, stretch)
+  fcQStatusBar_addPermanentWidgetWidgetStretch(self.h, widget.h, stretch)
 
 proc insertPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, index: cint, widget: gen_qwidget_types.QWidget, stretch: cint): cint =
-  fcQStatusBar_insertPermanentWidget2(self.h, index, widget.h, stretch)
+  fcQStatusBar_insertPermanentWidgetIndexWidgetStretch(self.h, index, widget.h, stretch)
 
 proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: openArray[char], timeout: cint): void =
-  fcQStatusBar_showMessage2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), timeout)
+  fcQStatusBar_showMessageTextTimeout(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), timeout)
 
 type QStatusBarmetaObjectProc* = proc(self: QStatusBar): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QStatusBarmetacastProc* = proc(self: QStatusBar, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -88,7 +88,7 @@ int QSGMaterialShader_flags(const QSGMaterialShader* self) {
 	return static_cast<int>(_ret);
 }
 
-void QSGMaterialShader_setFlag(QSGMaterialShader* self, int flags) {
+void QSGMaterialShader_setFlag_flags(QSGMaterialShader* self, int flags) {
 	self->setFlag(static_cast<QSGMaterialShader::Flags>(flags));
 }
 
@@ -100,7 +100,7 @@ int QSGMaterialShader_combinedImageSamplerCount(const QSGMaterialShader* self, i
 	return self->combinedImageSamplerCount(static_cast<int>(binding));
 }
 
-void QSGMaterialShader_setFlag2(QSGMaterialShader* self, int flags, bool on) {
+void QSGMaterialShader_setFlag_flags_on(QSGMaterialShader* self, int flags, bool on) {
 	self->setFlag(static_cast<QSGMaterialShader::Flags>(flags), on);
 }
 

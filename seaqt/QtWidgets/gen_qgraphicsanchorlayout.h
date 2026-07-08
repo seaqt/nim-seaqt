@@ -44,14 +44,14 @@ void QGraphicsAnchor_virtbase(QGraphicsAnchor* src, QObject** outptr_QObject);
 QMetaObject* QGraphicsAnchor_metaObject(const QGraphicsAnchor* self);
 void* QGraphicsAnchor_metacast(QGraphicsAnchor* self, const char* param1);
 int QGraphicsAnchor_metacall(QGraphicsAnchor* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsAnchor_tr(const char* s);
+struct seaqt_string QGraphicsAnchor_tr_s(const char* s);
 void QGraphicsAnchor_setSpacing(QGraphicsAnchor* self, double spacing);
 void QGraphicsAnchor_unsetSpacing(QGraphicsAnchor* self);
 double QGraphicsAnchor_spacing(const QGraphicsAnchor* self);
 void QGraphicsAnchor_setSizePolicy(QGraphicsAnchor* self, int policy);
 int QGraphicsAnchor_sizePolicy(const QGraphicsAnchor* self);
-struct seaqt_string QGraphicsAnchor_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsAnchor_tr3(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsAnchor_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsAnchor_tr_s_c_n(const char* s, const char* c, int n);
 
 const QMetaObject* QGraphicsAnchor_staticMetaObject();
 void QGraphicsAnchor_delete(QGraphicsAnchor* self);
@@ -75,13 +75,13 @@ void* QGraphicsAnchorLayout_vdata(VirtualQGraphicsAnchorLayout* self);
 VirtualQGraphicsAnchorLayout* vdata_QGraphicsAnchorLayout(void* vdata);
 
 VirtualQGraphicsAnchorLayout* QGraphicsAnchorLayout_new(const QGraphicsAnchorLayout_VTable* vtbl, size_t vdata);
-VirtualQGraphicsAnchorLayout* QGraphicsAnchorLayout_new2(const QGraphicsAnchorLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent);
+VirtualQGraphicsAnchorLayout* QGraphicsAnchorLayout_new_parent(const QGraphicsAnchorLayout_VTable* vtbl, size_t vdata, QGraphicsLayoutItem* parent);
 
 void QGraphicsAnchorLayout_virtbase(QGraphicsAnchorLayout* src, QGraphicsLayout** outptr_QGraphicsLayout);
 QGraphicsAnchor* QGraphicsAnchorLayout_addAnchor(QGraphicsAnchorLayout* self, QGraphicsLayoutItem* firstItem, int firstEdge, QGraphicsLayoutItem* secondItem, int secondEdge);
 QGraphicsAnchor* QGraphicsAnchorLayout_anchor(QGraphicsAnchorLayout* self, QGraphicsLayoutItem* firstItem, int firstEdge, QGraphicsLayoutItem* secondItem, int secondEdge);
 void QGraphicsAnchorLayout_addCornerAnchors(QGraphicsAnchorLayout* self, QGraphicsLayoutItem* firstItem, int firstCorner, QGraphicsLayoutItem* secondItem, int secondCorner);
-void QGraphicsAnchorLayout_addAnchors(QGraphicsAnchorLayout* self, QGraphicsLayoutItem* firstItem, QGraphicsLayoutItem* secondItem);
+void QGraphicsAnchorLayout_addAnchors_firstItem_secondItem(QGraphicsAnchorLayout* self, QGraphicsLayoutItem* firstItem, QGraphicsLayoutItem* secondItem);
 void QGraphicsAnchorLayout_setHorizontalSpacing(QGraphicsAnchorLayout* self, double spacing);
 void QGraphicsAnchorLayout_setVerticalSpacing(QGraphicsAnchorLayout* self, double spacing);
 void QGraphicsAnchorLayout_setSpacing(QGraphicsAnchorLayout* self, double spacing);
@@ -93,7 +93,7 @@ int QGraphicsAnchorLayout_count(const QGraphicsAnchorLayout* self);
 QGraphicsLayoutItem* QGraphicsAnchorLayout_itemAt(const QGraphicsAnchorLayout* self, int index);
 void QGraphicsAnchorLayout_invalidate(QGraphicsAnchorLayout* self);
 QSizeF* QGraphicsAnchorLayout_sizeHint(const QGraphicsAnchorLayout* self, int which, QSizeF* constraint);
-void QGraphicsAnchorLayout_addAnchors2(QGraphicsAnchorLayout* self, QGraphicsLayoutItem* firstItem, QGraphicsLayoutItem* secondItem, int orientations);
+void QGraphicsAnchorLayout_addAnchors_firstItem_secondItem_orientations(QGraphicsAnchorLayout* self, QGraphicsLayoutItem* firstItem, QGraphicsLayoutItem* secondItem, int orientations);
 
 void QGraphicsAnchorLayout_virtualbase_removeAt(VirtualQGraphicsAnchorLayout* self, int index);
 void QGraphicsAnchorLayout_virtualbase_setGeometry(VirtualQGraphicsAnchorLayout* self, QRectF* rect);

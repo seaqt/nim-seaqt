@@ -57,7 +57,7 @@ type cQAudioInput*{.exportc: "QAudioInput", incompleteStruct.} = object
 proc fcQAudioInput_metaObject(self: pointer): pointer {.importc: "QAudioInput_metaObject".}
 proc fcQAudioInput_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioInput_metacast".}
 proc fcQAudioInput_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioInput_metacall".}
-proc fcQAudioInput_tr(s: cstring): struct_seaqt_string {.importc: "QAudioInput_tr".}
+proc fcQAudioInput_trS(s: cstring): struct_seaqt_string {.importc: "QAudioInput_tr_s".}
 proc fcQAudioInput_device(self: pointer): pointer {.importc: "QAudioInput_device".}
 proc fcQAudioInput_volume(self: pointer): float32 {.importc: "QAudioInput_volume".}
 proc fcQAudioInput_isMuted(self: pointer): bool {.importc: "QAudioInput_isMuted".}
@@ -70,8 +70,8 @@ proc fcQAudioInput_volumeChanged(self: pointer, volume: float32): void {.importc
 proc fcQAudioInput_connect_volumeChanged(self: pointer, slot: int, callback: proc (slot: int, volume: float32) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInput_connect_volumeChanged".}
 proc fcQAudioInput_mutedChanged(self: pointer, muted: bool): void {.importc: "QAudioInput_mutedChanged".}
 proc fcQAudioInput_connect_mutedChanged(self: pointer, slot: int, callback: proc (slot: int, muted: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInput_connect_mutedChanged".}
-proc fcQAudioInput_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInput_tr2".}
-proc fcQAudioInput_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInput_tr3".}
+proc fcQAudioInput_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAudioInput_tr_s_c".}
+proc fcQAudioInput_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAudioInput_tr_s_c_n".}
 proc fcQAudioInput_vdata(self: pointer): ptr pointer {.importc: "QAudioInput_vdata".}
 proc fvdata_cQAudioInput(self: pointer): pointer {.importc: "vdata_QAudioInput".}
 
@@ -102,9 +102,9 @@ proc fcQAudioInput_protectedbase_senderSignalIndex(self: pointer): cint {.import
 proc fcQAudioInput_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioInput_protectedbase_receivers".}
 proc fcQAudioInput_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioInput_protectedbase_isSignalConnected".}
 proc fcQAudioInput_new(vtbl: pointer, vdata: csize_t): ptr cQAudioInput {.importc: "QAudioInput_new".}
-proc fcQAudioInput_new2(vtbl: pointer, vdata: csize_t, deviceInfo: pointer): ptr cQAudioInput {.importc: "QAudioInput_new2".}
-proc fcQAudioInput_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioInput {.importc: "QAudioInput_new3".}
-proc fcQAudioInput_new4(vtbl: pointer, vdata: csize_t, deviceInfo: pointer, parent: pointer): ptr cQAudioInput {.importc: "QAudioInput_new4".}
+proc fcQAudioInput_new2(vtbl: pointer, vdata: csize_t, deviceInfo: pointer): ptr cQAudioInput {.importc: "QAudioInput_new_deviceInfo".}
+proc fcQAudioInput_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAudioInput {.importc: "QAudioInput_new_parent".}
+proc fcQAudioInput_new4(vtbl: pointer, vdata: csize_t, deviceInfo: pointer, parent: pointer): ptr cQAudioInput {.importc: "QAudioInput_new_deviceInfo_parent".}
 proc fcQAudioInput_staticMetaObject(): pointer {.importc: "QAudioInput_staticMetaObject".}
 
 proc metaObject*(self: gen_qaudioinput_types.QAudioInput): gen_qobjectdefs_types.QMetaObject =
@@ -117,7 +117,7 @@ proc metacall*(self: gen_qaudioinput_types.QAudioInput, param1: cint, param2: ci
   fcQAudioInput_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudioinput_types.QAudioInput, s: cstring): string =
-  let v_ms = fcQAudioInput_tr(s)
+  let v_ms = fcQAudioInput_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -199,13 +199,13 @@ proc onMutedChanged*(self: gen_qaudioinput_types.QAudioInput, slot: QAudioInputm
   fcQAudioInput_connect_mutedChanged(self.h, cast[int](addr tmp[]), fcQAudioInput_slot_callback_mutedChanged, fcQAudioInput_slot_callback_mutedChanged_release)
 
 proc tr*(_: type gen_qaudioinput_types.QAudioInput, s: cstring, c: cstring): string =
-  let v_ms = fcQAudioInput_tr2(s, c)
+  let v_ms = fcQAudioInput_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qaudioinput_types.QAudioInput, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAudioInput_tr3(s, c, n)
+  let v_ms = fcQAudioInput_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

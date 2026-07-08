@@ -24,15 +24,15 @@ typedef struct QStandardPaths QStandardPaths;
 
 struct seaqt_string QStandardPaths_writableLocation(int type);
 struct seaqt_array /* of struct seaqt_string */  QStandardPaths_standardLocations(int type);
-struct seaqt_string QStandardPaths_locate(int type, struct seaqt_string fileName);
-struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll(int type, struct seaqt_string fileName);
+struct seaqt_string QStandardPaths_locate_type_fileName(int type, struct seaqt_string fileName);
+struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll_type_fileName(int type, struct seaqt_string fileName);
 struct seaqt_string QStandardPaths_displayName(int type);
-struct seaqt_string QStandardPaths_findExecutable(struct seaqt_string executableName);
+struct seaqt_string QStandardPaths_findExecutable_executableName(struct seaqt_string executableName);
 void QStandardPaths_setTestModeEnabled(bool testMode);
 bool QStandardPaths_isTestModeEnabled();
-struct seaqt_string QStandardPaths_locate2(int type, struct seaqt_string fileName, int options);
-struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll2(int type, struct seaqt_string fileName, int options);
-struct seaqt_string QStandardPaths_findExecutable2(struct seaqt_string executableName, struct seaqt_array /* of struct seaqt_string */  paths);
+struct seaqt_string QStandardPaths_locate_type_fileName_options(int type, struct seaqt_string fileName, int options);
+struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll_type_fileName_options(int type, struct seaqt_string fileName, int options);
+struct seaqt_string QStandardPaths_findExecutable_executableName_paths(struct seaqt_string executableName, struct seaqt_array /* of struct seaqt_string */  paths);
 
 const QMetaObject* QStandardPaths_staticMetaObject();
 

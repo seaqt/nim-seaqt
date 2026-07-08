@@ -63,13 +63,13 @@ void* QMediaPlayer_vdata(VirtualQMediaPlayer* self);
 VirtualQMediaPlayer* vdata_QMediaPlayer(void* vdata);
 
 VirtualQMediaPlayer* QMediaPlayer_new(const QMediaPlayer_VTable* vtbl, size_t vdata);
-VirtualQMediaPlayer* QMediaPlayer_new2(const QMediaPlayer_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQMediaPlayer* QMediaPlayer_new_parent(const QMediaPlayer_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QMediaPlayer_virtbase(QMediaPlayer* src, QObject** outptr_QObject);
 QMetaObject* QMediaPlayer_metaObject(const QMediaPlayer* self);
 void* QMediaPlayer_metacast(QMediaPlayer* self, const char* param1);
 int QMediaPlayer_metacall(QMediaPlayer* self, int param1, int param2, void** param3);
-struct seaqt_string QMediaPlayer_tr(const char* s);
+struct seaqt_string QMediaPlayer_tr_s(const char* s);
 struct seaqt_array /* of QMediaMetaData* */  QMediaPlayer_audioTracks(const QMediaPlayer* self);
 struct seaqt_array /* of QMediaMetaData* */  QMediaPlayer_videoTracks(const QMediaPlayer* self);
 struct seaqt_array /* of QMediaMetaData* */  QMediaPlayer_subtitleTracks(const QMediaPlayer* self);
@@ -109,7 +109,7 @@ void QMediaPlayer_stop(QMediaPlayer* self);
 void QMediaPlayer_setPosition(QMediaPlayer* self, long long position);
 void QMediaPlayer_setPlaybackRate(QMediaPlayer* self, double rate);
 void QMediaPlayer_setSource(QMediaPlayer* self, QUrl* source);
-void QMediaPlayer_setSourceDevice(QMediaPlayer* self, QIODevice* device);
+void QMediaPlayer_setSourceDevice_device(QMediaPlayer* self, QIODevice* device);
 void QMediaPlayer_sourceChanged(QMediaPlayer* self, QUrl* media);
 void QMediaPlayer_connect_sourceChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t));
 void QMediaPlayer_playbackStateChanged(QMediaPlayer* self, int newState);
@@ -146,9 +146,9 @@ void QMediaPlayer_errorChanged(QMediaPlayer* self);
 void QMediaPlayer_connect_errorChanged(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QMediaPlayer_errorOccurred(QMediaPlayer* self, int error, struct seaqt_string errorString);
 void QMediaPlayer_connect_errorOccurred(QMediaPlayer* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t));
-struct seaqt_string QMediaPlayer_tr2(const char* s, const char* c);
-struct seaqt_string QMediaPlayer_tr3(const char* s, const char* c, int n);
-void QMediaPlayer_setSourceDevice2(QMediaPlayer* self, QIODevice* device, QUrl* sourceUrl);
+struct seaqt_string QMediaPlayer_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMediaPlayer_tr_s_c_n(const char* s, const char* c, int n);
+void QMediaPlayer_setSourceDevice_device_sourceUrl(QMediaPlayer* self, QIODevice* device, QUrl* sourceUrl);
 
 QMetaObject* QMediaPlayer_virtualbase_metaObject(const VirtualQMediaPlayer* self);
 void* QMediaPlayer_virtualbase_metacast(VirtualQMediaPlayer* self, const char* param1);

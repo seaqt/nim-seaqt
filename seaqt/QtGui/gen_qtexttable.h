@@ -53,9 +53,9 @@ typedef struct QTimerEvent QTimerEvent;
 #endif
 
 QTextTableCell* QTextTableCell_new();
-QTextTableCell* QTextTableCell_new2(QTextTableCell* o);
+QTextTableCell* QTextTableCell_new_from(QTextTableCell* from);
 
-void QTextTableCell_operatorAssign(QTextTableCell* self, QTextTableCell* o);
+void QTextTableCell_operatorAssign(QTextTableCell* self, QTextTableCell* from);
 void QTextTableCell_setFormat(QTextTableCell* self, QTextCharFormat* format);
 QTextCharFormat* QTextTableCell_format(const QTextTableCell* self);
 int QTextTableCell_row(const QTextTableCell* self);
@@ -99,7 +99,7 @@ void QTextTable_virtbase(QTextTable* src, QTextFrame** outptr_QTextFrame);
 QMetaObject* QTextTable_metaObject(const QTextTable* self);
 void* QTextTable_metacast(QTextTable* self, const char* param1);
 int QTextTable_metacall(QTextTable* self, int param1, int param2, void** param3);
-struct seaqt_string QTextTable_tr(const char* s);
+struct seaqt_string QTextTable_tr_s(const char* s);
 void QTextTable_resize(QTextTable* self, int rows, int cols);
 void QTextTable_insertRows(QTextTable* self, int pos, int num);
 void QTextTable_insertColumns(QTextTable* self, int pos, int num);
@@ -107,20 +107,20 @@ void QTextTable_appendRows(QTextTable* self, int count);
 void QTextTable_appendColumns(QTextTable* self, int count);
 void QTextTable_removeRows(QTextTable* self, int pos, int num);
 void QTextTable_removeColumns(QTextTable* self, int pos, int num);
-void QTextTable_mergeCells(QTextTable* self, int row, int col, int numRows, int numCols);
-void QTextTable_mergeCellsWithCursor(QTextTable* self, QTextCursor* cursor);
+void QTextTable_mergeCells_row_col_numRows_numCols(QTextTable* self, int row, int col, int numRows, int numCols);
+void QTextTable_mergeCells_cursor(QTextTable* self, QTextCursor* cursor);
 void QTextTable_splitCell(QTextTable* self, int row, int col, int numRows, int numCols);
 int QTextTable_rows(const QTextTable* self);
 int QTextTable_columns(const QTextTable* self);
-QTextTableCell* QTextTable_cellAt(const QTextTable* self, int row, int col);
-QTextTableCell* QTextTable_cellAtWithPosition(const QTextTable* self, int position);
-QTextTableCell* QTextTable_cellAtWithQTextCursor(const QTextTable* self, QTextCursor* c);
+QTextTableCell* QTextTable_cellAt_row_col(const QTextTable* self, int row, int col);
+QTextTableCell* QTextTable_cellAt_position(const QTextTable* self, int position);
+QTextTableCell* QTextTable_cellAt_c(const QTextTable* self, QTextCursor* c);
 QTextCursor* QTextTable_rowStart(const QTextTable* self, QTextCursor* c);
 QTextCursor* QTextTable_rowEnd(const QTextTable* self, QTextCursor* c);
 void QTextTable_setFormat(QTextTable* self, QTextTableFormat* format);
 QTextTableFormat* QTextTable_format(const QTextTable* self);
-struct seaqt_string QTextTable_tr2(const char* s, const char* c);
-struct seaqt_string QTextTable_tr3(const char* s, const char* c, int n);
+struct seaqt_string QTextTable_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTextTable_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTextTable_virtualbase_metaObject(const VirtualQTextTable* self);
 void* QTextTable_virtualbase_metacast(VirtualQTextTable* self, const char* param1);

@@ -161,7 +161,7 @@ type cQAbstractItemView*{.exportc: "QAbstractItemView", incompleteStruct.} = obj
 proc fcQAbstractItemView_metaObject(self: pointer): pointer {.importc: "QAbstractItemView_metaObject".}
 proc fcQAbstractItemView_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractItemView_metacast".}
 proc fcQAbstractItemView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractItemView_metacall".}
-proc fcQAbstractItemView_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractItemView_tr".}
+proc fcQAbstractItemView_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractItemView_tr_s".}
 proc fcQAbstractItemView_setModel(self: pointer, model: pointer): void {.importc: "QAbstractItemView_setModel".}
 proc fcQAbstractItemView_model(self: pointer): pointer {.importc: "QAbstractItemView_model".}
 proc fcQAbstractItemView_setSelectionModel(self: pointer, selectionModel: pointer): void {.importc: "QAbstractItemView_setSelectionModel".}
@@ -220,14 +220,14 @@ proc fcQAbstractItemView_setItemDelegateForRow(self: pointer, row: cint, delegat
 proc fcQAbstractItemView_itemDelegateForRow(self: pointer, row: cint): pointer {.importc: "QAbstractItemView_itemDelegateForRow".}
 proc fcQAbstractItemView_setItemDelegateForColumn(self: pointer, column: cint, delegate: pointer): void {.importc: "QAbstractItemView_setItemDelegateForColumn".}
 proc fcQAbstractItemView_itemDelegateForColumn(self: pointer, column: cint): pointer {.importc: "QAbstractItemView_itemDelegateForColumn".}
-proc fcQAbstractItemView_itemDelegateWithIndex(self: pointer, index: pointer): pointer {.importc: "QAbstractItemView_itemDelegateWithIndex".}
+proc fcQAbstractItemView_itemDelegateIndex(self: pointer, index: pointer): pointer {.importc: "QAbstractItemView_itemDelegate_index".}
 proc fcQAbstractItemView_itemDelegateForIndex(self: pointer, index: pointer): pointer {.importc: "QAbstractItemView_itemDelegateForIndex".}
 proc fcQAbstractItemView_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QAbstractItemView_inputMethodQuery".}
 proc fcQAbstractItemView_reset(self: pointer): void {.importc: "QAbstractItemView_reset".}
 proc fcQAbstractItemView_setRootIndex(self: pointer, index: pointer): void {.importc: "QAbstractItemView_setRootIndex".}
 proc fcQAbstractItemView_doItemsLayout(self: pointer): void {.importc: "QAbstractItemView_doItemsLayout".}
 proc fcQAbstractItemView_selectAll(self: pointer): void {.importc: "QAbstractItemView_selectAll".}
-proc fcQAbstractItemView_edit(self: pointer, index: pointer): void {.importc: "QAbstractItemView_edit".}
+proc fcQAbstractItemView_editIndex(self: pointer, index: pointer): void {.importc: "QAbstractItemView_edit_index".}
 proc fcQAbstractItemView_clearSelection(self: pointer): void {.importc: "QAbstractItemView_clearSelection".}
 proc fcQAbstractItemView_setCurrentIndex(self: pointer, index: pointer): void {.importc: "QAbstractItemView_setCurrentIndex".}
 proc fcQAbstractItemView_scrollToTop(self: pointer): void {.importc: "QAbstractItemView_scrollToTop".}
@@ -247,8 +247,8 @@ proc fcQAbstractItemView_viewportEntered(self: pointer): void {.importc: "QAbstr
 proc fcQAbstractItemView_connect_viewportEntered(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_viewportEntered".}
 proc fcQAbstractItemView_iconSizeChanged(self: pointer, size: pointer): void {.importc: "QAbstractItemView_iconSizeChanged".}
 proc fcQAbstractItemView_connect_iconSizeChanged(self: pointer, slot: int, callback: proc (slot: int, size: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_iconSizeChanged".}
-proc fcQAbstractItemView_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractItemView_tr2".}
-proc fcQAbstractItemView_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractItemView_tr3".}
+proc fcQAbstractItemView_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractItemView_tr_s_c".}
+proc fcQAbstractItemView_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractItemView_tr_s_c_n".}
 proc fcQAbstractItemView_vdata(self: pointer): ptr pointer {.importc: "QAbstractItemView_vdata".}
 proc fvdata_cQAbstractItemView(self: pointer): pointer {.importc: "vdata_QAbstractItemView".}
 
@@ -293,7 +293,7 @@ type cQAbstractItemViewVTable {.pure.} = object
   setSelection*: proc(self: pointer, rect: pointer, command: cint): void {.cdecl, raises: [], gcsafe.}
   visualRegionForSelection*: proc(self: pointer, selection: pointer): pointer {.cdecl, raises: [], gcsafe.}
   selectedIndexes*: proc(self: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  editIndexTriggerEvent*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
   selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
   startDrag*: proc(self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
   initViewItemOption*: proc(self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -378,7 +378,7 @@ proc fcQAbstractItemView_virtualbase_closeEditor(self: pointer, editor: pointer,
 proc fcQAbstractItemView_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QAbstractItemView_virtualbase_commitData".}
 proc fcQAbstractItemView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QAbstractItemView_virtualbase_editorDestroyed".}
 proc fcQAbstractItemView_virtualbase_selectedIndexes(self: pointer): struct_seaqt_array {.importc: "QAbstractItemView_virtualbase_selectedIndexes".}
-proc fcQAbstractItemView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QAbstractItemView_virtualbase_edit2".}
+proc fcQAbstractItemView_virtualbase_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QAbstractItemView_virtualbase_edit_index_trigger_event".}
 proc fcQAbstractItemView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QAbstractItemView_virtualbase_selectionCommand".}
 proc fcQAbstractItemView_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QAbstractItemView_virtualbase_startDrag".}
 proc fcQAbstractItemView_virtualbase_initViewItemOption(self: pointer, option: pointer): void {.importc: "QAbstractItemView_virtualbase_initViewItemOption".}
@@ -444,7 +444,7 @@ proc fcQAbstractItemView_protectedbase_startAutoScroll(self: pointer): void {.im
 proc fcQAbstractItemView_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QAbstractItemView_protectedbase_stopAutoScroll".}
 proc fcQAbstractItemView_protectedbase_doAutoScroll(self: pointer): void {.importc: "QAbstractItemView_protectedbase_doAutoScroll".}
 proc fcQAbstractItemView_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QAbstractItemView_protectedbase_dropIndicatorPosition".}
-proc fcQAbstractItemView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QAbstractItemView_protectedbase_setViewportMargins".}
+proc fcQAbstractItemView_protectedbase_setViewportMargins_left_top_right_bottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QAbstractItemView_protectedbase_setViewportMargins_left_top_right_bottom".}
 proc fcQAbstractItemView_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QAbstractItemView_protectedbase_viewportMargins".}
 proc fcQAbstractItemView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QAbstractItemView_protectedbase_drawFrame".}
 proc fcQAbstractItemView_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QAbstractItemView_protectedbase_updateMicroFocus".}
@@ -457,7 +457,7 @@ proc fcQAbstractItemView_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQAbstractItemView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractItemView_protectedbase_receivers".}
 proc fcQAbstractItemView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractItemView_protectedbase_isSignalConnected".}
 proc fcQAbstractItemView_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractItemView {.importc: "QAbstractItemView_new".}
-proc fcQAbstractItemView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractItemView {.importc: "QAbstractItemView_new2".}
+proc fcQAbstractItemView_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractItemView {.importc: "QAbstractItemView_new_parent".}
 proc fcQAbstractItemView_staticMetaObject(): pointer {.importc: "QAbstractItemView_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractitemview_types.QAbstractItemView): gen_qobjectdefs_types.QMetaObject =
@@ -470,7 +470,7 @@ proc metacall*(self: gen_qabstractitemview_types.QAbstractItemView, param1: cint
   fcQAbstractItemView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractitemview_types.QAbstractItemView, s: cstring): string =
-  let v_ms = fcQAbstractItemView_tr(s)
+  let v_ms = fcQAbstractItemView_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -650,7 +650,7 @@ proc itemDelegateForColumn*(self: gen_qabstractitemview_types.QAbstractItemView,
   gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQAbstractItemView_itemDelegateForColumn(self.h, column), owned: false)
 
 proc itemDelegate*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
-  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQAbstractItemView_itemDelegateWithIndex(self.h, index.h), owned: false)
+  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQAbstractItemView_itemDelegateIndex(self.h, index.h), owned: false)
 
 proc itemDelegateForIndex*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
   gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQAbstractItemView_itemDelegateForIndex(self.h, index.h), owned: false)
@@ -671,7 +671,7 @@ proc selectAll*(self: gen_qabstractitemview_types.QAbstractItemView): void =
   fcQAbstractItemView_selectAll(self.h)
 
 proc edit*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fcQAbstractItemView_edit(self.h, index.h)
+  fcQAbstractItemView_editIndex(self.h, index.h)
 
 proc clearSelection*(self: gen_qabstractitemview_types.QAbstractItemView): void =
   fcQAbstractItemView_clearSelection(self.h)
@@ -827,13 +827,13 @@ proc onIconSizeChanged*(self: gen_qabstractitemview_types.QAbstractItemView, slo
   fcQAbstractItemView_connect_iconSizeChanged(self.h, cast[int](addr tmp[]), fcQAbstractItemView_slot_callback_iconSizeChanged, fcQAbstractItemView_slot_callback_iconSizeChanged_release)
 
 proc tr*(_: type gen_qabstractitemview_types.QAbstractItemView, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractItemView_tr2(s, c)
+  let v_ms = fcQAbstractItemView_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractitemview_types.QAbstractItemView, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractItemView_tr3(s, c, n)
+  let v_ms = fcQAbstractItemView_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -877,7 +877,7 @@ type QAbstractItemViewisIndexHiddenProc* = proc(self: QAbstractItemView, index: 
 type QAbstractItemViewsetSelectionProc* = proc(self: QAbstractItemView, rect: gen_qrect_types.QRect, command: cint): void {.raises: [], gcsafe.}
 type QAbstractItemViewvisualRegionForSelectionProc* = proc(self: QAbstractItemView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.raises: [], gcsafe.}
 type QAbstractItemViewselectedIndexesProc* = proc(self: QAbstractItemView): seq[gen_qabstractitemmodel_types.QModelIndex] {.raises: [], gcsafe.}
-type QAbstractItemViewedit2Proc* = proc(self: QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QAbstractItemVieweditIndexTriggerEventProc* = proc(self: QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
 type QAbstractItemViewselectionCommandProc* = proc(self: QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
 type QAbstractItemViewstartDragProc* = proc(self: QAbstractItemView, supportedActions: cint): void {.raises: [], gcsafe.}
 type QAbstractItemViewinitViewItemOptionProc* = proc(self: QAbstractItemView, option: gen_qstyleoption_types.QStyleOptionViewItem): void {.raises: [], gcsafe.}
@@ -974,7 +974,7 @@ type QAbstractItemViewVTable* {.inheritable, pure.} = object
   setSelection*: QAbstractItemViewsetSelectionProc
   visualRegionForSelection*: QAbstractItemViewvisualRegionForSelectionProc
   selectedIndexes*: QAbstractItemViewselectedIndexesProc
-  edit2*: QAbstractItemViewedit2Proc
+  editIndexTriggerEvent*: QAbstractItemVieweditIndexTriggerEventProc
   selectionCommand*: QAbstractItemViewselectionCommandProc
   startDrag*: QAbstractItemViewstartDragProc
   initViewItemOption*: QAbstractItemViewinitViewItemOptionProc
@@ -1131,7 +1131,7 @@ proc QAbstractItemViewselectedIndexes*(self: gen_qabstractitemview_types.QAbstra
   vx_ret
 
 proc QAbstractItemViewedit*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fcQAbstractItemView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQAbstractItemView_virtualbase_editIndexTriggerEvent(self.h, index.h, cint(trigger), event.h)
 
 proc QAbstractItemViewselectionCommand*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQAbstractItemView_virtualbase_selectionCommand(self.h, index.h, event.h))
@@ -1586,13 +1586,13 @@ proc fcQAbstractItemView_vtable_callback_selectedIndexes(self: pointer): struct_
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc fcQAbstractItemView_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQAbstractItemView_vtable_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemViewVTable](fcQAbstractItemView_vdata(self)[])
   let self = QAbstractItemView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].editIndexTriggerEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQAbstractItemView_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
@@ -2397,7 +2397,7 @@ proc fcQAbstractItemView_method_callback_selectedIndexes(self: pointer): struct_
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc fcQAbstractItemView_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+proc fcQAbstractItemView_method_callback_editIndexTriggerEvent(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractItemView](fcQAbstractItemView_vdata(self)[])
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2745,7 +2745,7 @@ proc dropIndicatorPosition*(self: gen_qabstractitemview_types.QAbstractItemView)
   cint(fcQAbstractItemView_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qabstractitemview_types.QAbstractItemView, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQAbstractItemView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+  fcQAbstractItemView_protectedbase_setViewportMargins_left_top_right_bottom(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qabstractitemview_types.QAbstractItemView): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQAbstractItemView_protectedbase_viewportMargins(self.h), owned: true)
@@ -2865,8 +2865,8 @@ proc create*(T: type gen_qabstractitemview_types.QAbstractItemView,
     vtbl[].vtbl.visualRegionForSelection = fcQAbstractItemView_vtable_callback_visualRegionForSelection
   if not isNil(vtbl[].selectedIndexes):
     vtbl[].vtbl.selectedIndexes = fcQAbstractItemView_vtable_callback_selectedIndexes
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQAbstractItemView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQAbstractItemView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQAbstractItemView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -3064,8 +3064,8 @@ proc create*(T: type gen_qabstractitemview_types.QAbstractItemView,
     vtbl[].vtbl.visualRegionForSelection = fcQAbstractItemView_vtable_callback_visualRegionForSelection
   if not isNil(vtbl[].selectedIndexes):
     vtbl[].vtbl.selectedIndexes = fcQAbstractItemView_vtable_callback_selectedIndexes
-  if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = fcQAbstractItemView_vtable_callback_edit2
+  if not isNil(vtbl[].editIndexTriggerEvent):
+    vtbl[].vtbl.editIndexTriggerEvent = fcQAbstractItemView_vtable_callback_editIndexTriggerEvent
   if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = fcQAbstractItemView_vtable_callback_selectionCommand
   if not isNil(vtbl[].startDrag):
@@ -3222,7 +3222,7 @@ const cQAbstractItemView_mvtbl = cQAbstractItemViewVTable(
   setSelection: fcQAbstractItemView_method_callback_setSelection,
   visualRegionForSelection: fcQAbstractItemView_method_callback_visualRegionForSelection,
   selectedIndexes: fcQAbstractItemView_method_callback_selectedIndexes,
-  edit2: fcQAbstractItemView_method_callback_edit2,
+  editIndexTriggerEvent: fcQAbstractItemView_method_callback_editIndexTriggerEvent,
   selectionCommand: fcQAbstractItemView_method_callback_selectionCommand,
   startDrag: fcQAbstractItemView_method_callback_startDrag,
   initViewItemOption: fcQAbstractItemView_method_callback_initViewItemOption,

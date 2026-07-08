@@ -20,20 +20,20 @@ QCborStreamReader* QCborStreamReader_new() {
 	return new (std::nothrow) QCborStreamReader();
 }
 
-QCborStreamReader* QCborStreamReader_new2(const char* data, ptrdiff_t len) {
+QCborStreamReader* QCborStreamReader_new_char_qsizetype(const char* data, ptrdiff_t len) {
 	return new (std::nothrow) QCborStreamReader(data, (qsizetype)(len));
 }
 
-QCborStreamReader* QCborStreamReader_new3(const unsigned char* data, ptrdiff_t len) {
+QCborStreamReader* QCborStreamReader_new_quint8_qsizetype(const unsigned char* data, ptrdiff_t len) {
 	return new (std::nothrow) QCborStreamReader(static_cast<const quint8*>(data), (qsizetype)(len));
 }
 
-QCborStreamReader* QCborStreamReader_new4(struct seaqt_string data) {
+QCborStreamReader* QCborStreamReader_new_QByteArray(struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new (std::nothrow) QCborStreamReader(data_QByteArray);
 }
 
-QCborStreamReader* QCborStreamReader_new5(QIODevice* device) {
+QCborStreamReader* QCborStreamReader_new_QIODevice(QIODevice* device) {
 	return new (std::nothrow) QCborStreamReader(device);
 }
 
@@ -45,16 +45,16 @@ QIODevice* QCborStreamReader_device(const QCborStreamReader* self) {
 	return self->device();
 }
 
-void QCborStreamReader_addData(QCborStreamReader* self, struct seaqt_string data) {
+void QCborStreamReader_addData_QByteArray(QCborStreamReader* self, struct seaqt_string data) {
 	QByteArray data_QByteArray(data.data, data.len);
 	self->addData(data_QByteArray);
 }
 
-void QCborStreamReader_addData2(QCborStreamReader* self, const char* data, ptrdiff_t len) {
+void QCborStreamReader_addData_char_qsizetype(QCborStreamReader* self, const char* data, ptrdiff_t len) {
 	self->addData(data, (qsizetype)(len));
 }
 
-void QCborStreamReader_addData3(QCborStreamReader* self, const unsigned char* data, ptrdiff_t len) {
+void QCborStreamReader_addData_quint8_qsizetype(QCborStreamReader* self, const unsigned char* data, ptrdiff_t len) {
 	self->addData(static_cast<const quint8*>(data), (qsizetype)(len));
 }
 
@@ -157,7 +157,7 @@ bool QCborStreamReader_isInvalid(const QCborStreamReader* self) {
 	return self->isInvalid();
 }
 
-bool QCborStreamReader_isSimpleTypeWithSt(const QCborStreamReader* self, uint8_t st) {
+bool QCborStreamReader_isSimpleType_st(const QCborStreamReader* self, uint8_t st) {
 	return self->isSimpleType(static_cast<QCborSimpleType>(st));
 }
 
@@ -244,7 +244,7 @@ long long QCborStreamReader_toInteger(const QCborStreamReader* self) {
 	return static_cast<long long>(_ret);
 }
 
-bool QCborStreamReader_nextWithMaxRecursion(QCborStreamReader* self, int maxRecursion) {
+bool QCborStreamReader_next_maxRecursion(QCborStreamReader* self, int maxRecursion) {
 	return self->next(static_cast<int>(maxRecursion));
 }
 

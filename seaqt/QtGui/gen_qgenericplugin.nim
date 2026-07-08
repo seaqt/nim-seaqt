@@ -55,10 +55,10 @@ type cQGenericPlugin*{.exportc: "QGenericPlugin", incompleteStruct.} = object
 proc fcQGenericPlugin_metaObject(self: pointer): pointer {.importc: "QGenericPlugin_metaObject".}
 proc fcQGenericPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QGenericPlugin_metacast".}
 proc fcQGenericPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGenericPlugin_metacall".}
-proc fcQGenericPlugin_tr(s: cstring): struct_seaqt_string {.importc: "QGenericPlugin_tr".}
+proc fcQGenericPlugin_trS(s: cstring): struct_seaqt_string {.importc: "QGenericPlugin_tr_s".}
 proc fcQGenericPlugin_createX(self: pointer, name: struct_seaqt_string, spec: struct_seaqt_string): pointer {.importc: "QGenericPlugin_create".}
-proc fcQGenericPlugin_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGenericPlugin_tr2".}
-proc fcQGenericPlugin_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGenericPlugin_tr3".}
+proc fcQGenericPlugin_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QGenericPlugin_tr_s_c".}
+proc fcQGenericPlugin_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QGenericPlugin_tr_s_c_n".}
 proc fcQGenericPlugin_vdata(self: pointer): ptr pointer {.importc: "QGenericPlugin_vdata".}
 proc fvdata_cQGenericPlugin(self: pointer): pointer {.importc: "vdata_QGenericPlugin".}
 
@@ -90,7 +90,7 @@ proc fcQGenericPlugin_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQGenericPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGenericPlugin_protectedbase_receivers".}
 proc fcQGenericPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGenericPlugin_protectedbase_isSignalConnected".}
 proc fcQGenericPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQGenericPlugin {.importc: "QGenericPlugin_new".}
-proc fcQGenericPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGenericPlugin {.importc: "QGenericPlugin_new2".}
+proc fcQGenericPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGenericPlugin {.importc: "QGenericPlugin_new_parent".}
 proc fcQGenericPlugin_staticMetaObject(): pointer {.importc: "QGenericPlugin_staticMetaObject".}
 
 proc metaObject*(self: gen_qgenericplugin_types.QGenericPlugin): gen_qobjectdefs_types.QMetaObject =
@@ -103,7 +103,7 @@ proc metacall*(self: gen_qgenericplugin_types.QGenericPlugin, param1: cint, para
   fcQGenericPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring): string =
-  let v_ms = fcQGenericPlugin_tr(s)
+  let v_ms = fcQGenericPlugin_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -112,13 +112,13 @@ proc createX*(self: gen_qgenericplugin_types.QGenericPlugin, name: openArray[cha
   gen_qobject_types.QObject(h: fcQGenericPlugin_createX(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), struct_seaqt_string(data: if len(spec) > 0: addr spec[0] else: nil, len: csize_t(len(spec)))), owned: false)
 
 proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring): string =
-  let v_ms = fcQGenericPlugin_tr2(s, c)
+  let v_ms = fcQGenericPlugin_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qgenericplugin_types.QGenericPlugin, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQGenericPlugin_tr3(s, c, n)
+  let v_ms = fcQGenericPlugin_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

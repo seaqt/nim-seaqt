@@ -85,15 +85,15 @@ type cQDtlsClientVerifierGeneratorParameters*{.exportc: "QDtlsClientVerifier__Ge
 proc fcQDtlsClientVerifier_metaObject(self: pointer): pointer {.importc: "QDtlsClientVerifier_metaObject".}
 proc fcQDtlsClientVerifier_metacast(self: pointer, param1: cstring): pointer {.importc: "QDtlsClientVerifier_metacast".}
 proc fcQDtlsClientVerifier_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDtlsClientVerifier_metacall".}
-proc fcQDtlsClientVerifier_tr(s: cstring): struct_seaqt_string {.importc: "QDtlsClientVerifier_tr".}
+proc fcQDtlsClientVerifier_trS(s: cstring): struct_seaqt_string {.importc: "QDtlsClientVerifier_tr_s".}
 proc fcQDtlsClientVerifier_setCookieGeneratorParameters(self: pointer, params: pointer): bool {.importc: "QDtlsClientVerifier_setCookieGeneratorParameters".}
 proc fcQDtlsClientVerifier_cookieGeneratorParameters(self: pointer): pointer {.importc: "QDtlsClientVerifier_cookieGeneratorParameters".}
 proc fcQDtlsClientVerifier_verifyClient(self: pointer, socket: pointer, dgram: struct_seaqt_string, address: pointer, port: cushort): bool {.importc: "QDtlsClientVerifier_verifyClient".}
 proc fcQDtlsClientVerifier_verifiedHello(self: pointer): struct_seaqt_string {.importc: "QDtlsClientVerifier_verifiedHello".}
 proc fcQDtlsClientVerifier_dtlsError(self: pointer): cint {.importc: "QDtlsClientVerifier_dtlsError".}
 proc fcQDtlsClientVerifier_dtlsErrorString(self: pointer): struct_seaqt_string {.importc: "QDtlsClientVerifier_dtlsErrorString".}
-proc fcQDtlsClientVerifier_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDtlsClientVerifier_tr2".}
-proc fcQDtlsClientVerifier_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDtlsClientVerifier_tr3".}
+proc fcQDtlsClientVerifier_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDtlsClientVerifier_tr_s_c".}
+proc fcQDtlsClientVerifier_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDtlsClientVerifier_tr_s_c_n".}
 proc fcQDtlsClientVerifier_vdata(self: pointer): ptr pointer {.importc: "QDtlsClientVerifier_vdata".}
 proc fvdata_cQDtlsClientVerifier(self: pointer): pointer {.importc: "vdata_QDtlsClientVerifier".}
 
@@ -124,13 +124,13 @@ proc fcQDtlsClientVerifier_protectedbase_senderSignalIndex(self: pointer): cint 
 proc fcQDtlsClientVerifier_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDtlsClientVerifier_protectedbase_receivers".}
 proc fcQDtlsClientVerifier_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDtlsClientVerifier_protectedbase_isSignalConnected".}
 proc fcQDtlsClientVerifier_new(vtbl: pointer, vdata: csize_t): ptr cQDtlsClientVerifier {.importc: "QDtlsClientVerifier_new".}
-proc fcQDtlsClientVerifier_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDtlsClientVerifier {.importc: "QDtlsClientVerifier_new2".}
+proc fcQDtlsClientVerifier_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDtlsClientVerifier {.importc: "QDtlsClientVerifier_new_parent".}
 proc fcQDtlsClientVerifier_staticMetaObject(): pointer {.importc: "QDtlsClientVerifier_staticMetaObject".}
 proc fcQDtls_metaObject(self: pointer): pointer {.importc: "QDtls_metaObject".}
 proc fcQDtls_metacast(self: pointer, param1: cstring): pointer {.importc: "QDtls_metacast".}
 proc fcQDtls_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDtls_metacall".}
-proc fcQDtls_tr(s: cstring): struct_seaqt_string {.importc: "QDtls_tr".}
-proc fcQDtls_setPeer(self: pointer, address: pointer, port: cushort): bool {.importc: "QDtls_setPeer".}
+proc fcQDtls_trS(s: cstring): struct_seaqt_string {.importc: "QDtls_tr_s".}
+proc fcQDtls_setPeerAddressPort(self: pointer, address: pointer, port: cushort): bool {.importc: "QDtls_setPeer_address_port".}
 proc fcQDtls_setPeerVerificationName(self: pointer, name: struct_seaqt_string): bool {.importc: "QDtls_setPeerVerificationName".}
 proc fcQDtls_peerAddress(self: pointer): pointer {.importc: "QDtls_peerAddress".}
 proc fcQDtls_peerPort(self: pointer): cushort {.importc: "QDtls_peerPort".}
@@ -143,7 +143,7 @@ proc fcQDtls_cookieGeneratorParameters(self: pointer): pointer {.importc: "QDtls
 proc fcQDtls_setDtlsConfiguration(self: pointer, configuration: pointer): bool {.importc: "QDtls_setDtlsConfiguration".}
 proc fcQDtls_dtlsConfiguration(self: pointer): pointer {.importc: "QDtls_dtlsConfiguration".}
 proc fcQDtls_handshakeState(self: pointer): cint {.importc: "QDtls_handshakeState".}
-proc fcQDtls_doHandshake(self: pointer, socket: pointer): bool {.importc: "QDtls_doHandshake".}
+proc fcQDtls_doHandshakeSocket(self: pointer, socket: pointer): bool {.importc: "QDtls_doHandshake_socket".}
 proc fcQDtls_handleTimeout(self: pointer, socket: pointer): bool {.importc: "QDtls_handleTimeout".}
 proc fcQDtls_resumeHandshake(self: pointer, socket: pointer): bool {.importc: "QDtls_resumeHandshake".}
 proc fcQDtls_abortHandshake(self: pointer, socket: pointer): bool {.importc: "QDtls_abortHandshake".}
@@ -161,10 +161,10 @@ proc fcQDtls_pskRequired(self: pointer, authenticator: pointer): void {.importc:
 proc fcQDtls_connect_pskRequired(self: pointer, slot: int, callback: proc (slot: int, authenticator: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDtls_connect_pskRequired".}
 proc fcQDtls_handshakeTimeout(self: pointer): void {.importc: "QDtls_handshakeTimeout".}
 proc fcQDtls_connect_handshakeTimeout(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDtls_connect_handshakeTimeout".}
-proc fcQDtls_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDtls_tr2".}
-proc fcQDtls_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDtls_tr3".}
-proc fcQDtls_setPeer2(self: pointer, address: pointer, port: cushort, verificationName: struct_seaqt_string): bool {.importc: "QDtls_setPeer2".}
-proc fcQDtls_doHandshake2(self: pointer, socket: pointer, dgram: struct_seaqt_string): bool {.importc: "QDtls_doHandshake2".}
+proc fcQDtls_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDtls_tr_s_c".}
+proc fcQDtls_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDtls_tr_s_c_n".}
+proc fcQDtls_setPeerAddressPortVerificationName(self: pointer, address: pointer, port: cushort, verificationName: struct_seaqt_string): bool {.importc: "QDtls_setPeer_address_port_verificationName".}
+proc fcQDtls_doHandshakeSocketDgram(self: pointer, socket: pointer, dgram: struct_seaqt_string): bool {.importc: "QDtls_doHandshake_socket_dgram".}
 proc fcQDtls_vdata(self: pointer): ptr pointer {.importc: "QDtls_vdata".}
 proc fvdata_cQDtls(self: pointer): pointer {.importc: "vdata_QDtls".}
 
@@ -194,17 +194,17 @@ proc fcQDtls_protectedbase_sender(self: pointer): pointer {.importc: "QDtls_prot
 proc fcQDtls_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDtls_protectedbase_senderSignalIndex".}
 proc fcQDtls_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDtls_protectedbase_receivers".}
 proc fcQDtls_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDtls_protectedbase_isSignalConnected".}
-proc fcQDtls_new(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQDtls {.importc: "QDtls_new".}
-proc fcQDtls_new2(vtbl: pointer, vdata: csize_t, mode: cint, parent: pointer): ptr cQDtls {.importc: "QDtls_new2".}
+proc fcQDtls_new(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQDtls {.importc: "QDtls_new_mode".}
+proc fcQDtls_new2(vtbl: pointer, vdata: csize_t, mode: cint, parent: pointer): ptr cQDtls {.importc: "QDtls_new_mode_parent".}
 proc fcQDtls_staticMetaObject(): pointer {.importc: "QDtls_staticMetaObject".}
 proc fcQDtlsClientVerifierGeneratorParameters_hash(self: pointer): cint {.importc: "QDtlsClientVerifier__GeneratorParameters_hash".}
 proc fcQDtlsClientVerifierGeneratorParameters_setHash(self: pointer, hash: cint): void {.importc: "QDtlsClientVerifier__GeneratorParameters_setHash".}
 proc fcQDtlsClientVerifierGeneratorParameters_secret(self: pointer): struct_seaqt_string {.importc: "QDtlsClientVerifier__GeneratorParameters_secret".}
 proc fcQDtlsClientVerifierGeneratorParameters_setSecret(self: pointer, secret: struct_seaqt_string): void {.importc: "QDtlsClientVerifier__GeneratorParameters_setSecret".}
-proc fcQDtlsClientVerifierGeneratorParameters_operatorAssign(self: pointer, param1: pointer): void {.importc: "QDtlsClientVerifier__GeneratorParameters_operatorAssign".}
+proc fcQDtlsClientVerifierGeneratorParameters_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDtlsClientVerifier__GeneratorParameters_operatorAssign".}
 proc fcQDtlsClientVerifierGeneratorParameters_new(): ptr cQDtlsClientVerifierGeneratorParameters {.importc: "QDtlsClientVerifier__GeneratorParameters_new".}
-proc fcQDtlsClientVerifierGeneratorParameters_new2(a: cint, s: struct_seaqt_string): ptr cQDtlsClientVerifierGeneratorParameters {.importc: "QDtlsClientVerifier__GeneratorParameters_new2".}
-proc fcQDtlsClientVerifierGeneratorParameters_new3(param1: pointer): ptr cQDtlsClientVerifierGeneratorParameters {.importc: "QDtlsClientVerifier__GeneratorParameters_new3".}
+proc fcQDtlsClientVerifierGeneratorParameters_new2(a: cint, s: struct_seaqt_string): ptr cQDtlsClientVerifierGeneratorParameters {.importc: "QDtlsClientVerifier__GeneratorParameters_new_a_s".}
+proc fcQDtlsClientVerifierGeneratorParameters_new3(fromVal: pointer): ptr cQDtlsClientVerifierGeneratorParameters {.importc: "QDtlsClientVerifier__GeneratorParameters_new_from".}
 
 proc metaObject*(self: gen_qdtls_types.QDtlsClientVerifier): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDtlsClientVerifier_metaObject(self.h), owned: false)
@@ -216,7 +216,7 @@ proc metacall*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cint, param2: 
   fcQDtlsClientVerifier_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring): string =
-  let v_ms = fcQDtlsClientVerifier_tr(s)
+  let v_ms = fcQDtlsClientVerifier_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -246,13 +246,13 @@ proc dtlsErrorString*(self: gen_qdtls_types.QDtlsClientVerifier): string =
   vx_ret
 
 proc tr*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring, c: cstring): string =
-  let v_ms = fcQDtlsClientVerifier_tr2(s, c)
+  let v_ms = fcQDtlsClientVerifier_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDtlsClientVerifier_tr3(s, c, n)
+  let v_ms = fcQDtlsClientVerifier_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -584,13 +584,13 @@ proc metacall*(self: gen_qdtls_types.QDtls, param1: cint, param2: cint, param3: 
   fcQDtls_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdtls_types.QDtls, s: cstring): string =
-  let v_ms = fcQDtls_tr(s)
+  let v_ms = fcQDtls_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setPeer*(self: gen_qdtls_types.QDtls, address: gen_qhostaddress_types.QHostAddress, port: cushort): bool =
-  fcQDtls_setPeer(self.h, address.h, port)
+  fcQDtls_setPeerAddressPort(self.h, address.h, port)
 
 proc setPeerVerificationName*(self: gen_qdtls_types.QDtls, name: openArray[char]): bool =
   fcQDtls_setPeerVerificationName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
@@ -632,7 +632,7 @@ proc handshakeState*(self: gen_qdtls_types.QDtls): cint =
   cint(fcQDtls_handshakeState(self.h))
 
 proc doHandshake*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket): bool =
-  fcQDtls_doHandshake(self.h, socket.h)
+  fcQDtls_doHandshakeSocket(self.h, socket.h)
 
 proc handleTimeout*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket): bool =
   fcQDtls_handleTimeout(self.h, socket.h)
@@ -728,22 +728,22 @@ proc onHandshakeTimeout*(self: gen_qdtls_types.QDtls, slot: QDtlshandshakeTimeou
   fcQDtls_connect_handshakeTimeout(self.h, cast[int](addr tmp[]), fcQDtls_slot_callback_handshakeTimeout, fcQDtls_slot_callback_handshakeTimeout_release)
 
 proc tr*(_: type gen_qdtls_types.QDtls, s: cstring, c: cstring): string =
-  let v_ms = fcQDtls_tr2(s, c)
+  let v_ms = fcQDtls_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qdtls_types.QDtls, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDtls_tr3(s, c, n)
+  let v_ms = fcQDtls_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc setPeer*(self: gen_qdtls_types.QDtls, address: gen_qhostaddress_types.QHostAddress, port: cushort, verificationName: openArray[char]): bool =
-  fcQDtls_setPeer2(self.h, address.h, port, struct_seaqt_string(data: if len(verificationName) > 0: addr verificationName[0] else: nil, len: csize_t(len(verificationName))))
+  fcQDtls_setPeerAddressPortVerificationName(self.h, address.h, port, struct_seaqt_string(data: if len(verificationName) > 0: addr verificationName[0] else: nil, len: csize_t(len(verificationName))))
 
 proc doHandshake*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket, dgram: openArray[byte]): bool =
-  fcQDtls_doHandshake2(self.h, socket.h, struct_seaqt_string(data: if len(dgram) > 0: addr dgram[0] else: nil, len: csize_t(len(dgram))))
+  fcQDtls_doHandshakeSocketDgram(self.h, socket.h, struct_seaqt_string(data: if len(dgram) > 0: addr dgram[0] else: nil, len: csize_t(len(dgram))))
 
 type QDtlsmetaObjectProc* = proc(self: QDtls): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QDtlsmetacastProc* = proc(self: QDtls, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1079,8 +1079,8 @@ proc secret*(self: gen_qdtls_types.QDtlsClientVerifierGeneratorParameters): seq[
 proc setSecret*(self: gen_qdtls_types.QDtlsClientVerifierGeneratorParameters, secret: openArray[byte]): void =
   fcQDtlsClientVerifierGeneratorParameters_setSecret(self.h, struct_seaqt_string(data: if len(secret) > 0: addr secret[0] else: nil, len: csize_t(len(secret))))
 
-proc operatorAssign*(self: gen_qdtls_types.QDtlsClientVerifierGeneratorParameters, param1: gen_qdtls_types.QDtlsClientVerifierGeneratorParameters): void =
-  fcQDtlsClientVerifierGeneratorParameters_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qdtls_types.QDtlsClientVerifierGeneratorParameters, fromVal: gen_qdtls_types.QDtlsClientVerifierGeneratorParameters): void =
+  fcQDtlsClientVerifierGeneratorParameters_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qdtls_types.QDtlsClientVerifierGeneratorParameters): gen_qdtls_types.QDtlsClientVerifierGeneratorParameters =
   let tmp = gen_qdtls_types.QDtlsClientVerifierGeneratorParameters(h: fcQDtlsClientVerifierGeneratorParameters_new(), owned: true)
@@ -1090,6 +1090,6 @@ proc create*(T: type gen_qdtls_types.QDtlsClientVerifierGeneratorParameters,
   let tmp = gen_qdtls_types.QDtlsClientVerifierGeneratorParameters(h: fcQDtlsClientVerifierGeneratorParameters_new2(cint(a), struct_seaqt_string(data: if len(s) > 0: addr s[0] else: nil, len: csize_t(len(s)))), owned: true)
   tmp
 proc create*(T: type gen_qdtls_types.QDtlsClientVerifierGeneratorParameters,
-    param1: gen_qdtls_types.QDtlsClientVerifierGeneratorParameters): gen_qdtls_types.QDtlsClientVerifierGeneratorParameters =
-  let tmp = gen_qdtls_types.QDtlsClientVerifierGeneratorParameters(h: fcQDtlsClientVerifierGeneratorParameters_new3(param1.h), owned: true)
+    fromVal: gen_qdtls_types.QDtlsClientVerifierGeneratorParameters): gen_qdtls_types.QDtlsClientVerifierGeneratorParameters =
+  let tmp = gen_qdtls_types.QDtlsClientVerifierGeneratorParameters(h: fcQDtlsClientVerifierGeneratorParameters_new3(fromVal.h), owned: true)
   tmp

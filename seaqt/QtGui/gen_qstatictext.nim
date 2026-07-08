@@ -54,7 +54,7 @@ export
 
 type cQStaticText*{.exportc: "QStaticText", incompleteStruct.} = object
 
-proc fcQStaticText_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStaticText_operatorAssign".}
+proc fcQStaticText_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QStaticText_operatorAssign".}
 proc fcQStaticText_swap(self: pointer, other: pointer): void {.importc: "QStaticText_swap".}
 proc fcQStaticText_setText(self: pointer, text: struct_seaqt_string): void {.importc: "QStaticText_setText".}
 proc fcQStaticText_text(self: pointer): struct_seaqt_string {.importc: "QStaticText_text".}
@@ -70,14 +70,14 @@ proc fcQStaticText_setPerformanceHint(self: pointer, performanceHint: cint): voi
 proc fcQStaticText_performanceHint(self: pointer): cint {.importc: "QStaticText_performanceHint".}
 proc fcQStaticText_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QStaticText_operatorEqual".}
 proc fcQStaticText_operatorNotEqual(self: pointer, param1: pointer): bool {.importc: "QStaticText_operatorNotEqual".}
-proc fcQStaticText_prepareWithMatrix(self: pointer, matrix: pointer): void {.importc: "QStaticText_prepareWithMatrix".}
-proc fcQStaticText_prepare2(self: pointer, matrix: pointer, font: pointer): void {.importc: "QStaticText_prepare2".}
+proc fcQStaticText_prepareMatrix(self: pointer, matrix: pointer): void {.importc: "QStaticText_prepare_matrix".}
+proc fcQStaticText_prepareMatrixFont(self: pointer, matrix: pointer, font: pointer): void {.importc: "QStaticText_prepare_matrix_font".}
 proc fcQStaticText_new(): ptr cQStaticText {.importc: "QStaticText_new".}
-proc fcQStaticText_new2(text: struct_seaqt_string): ptr cQStaticText {.importc: "QStaticText_new2".}
-proc fcQStaticText_new3(other: pointer): ptr cQStaticText {.importc: "QStaticText_new3".}
+proc fcQStaticText_new2(text: struct_seaqt_string): ptr cQStaticText {.importc: "QStaticText_new_text".}
+proc fcQStaticText_new3(fromVal: pointer): ptr cQStaticText {.importc: "QStaticText_new_from".}
 
-proc operatorAssign*(self: gen_qstatictext_types.QStaticText, param1: gen_qstatictext_types.QStaticText): void =
-  fcQStaticText_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qstatictext_types.QStaticText, fromVal: gen_qstatictext_types.QStaticText): void =
+  fcQStaticText_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qstatictext_types.QStaticText, other: gen_qstatictext_types.QStaticText): void =
   fcQStaticText_swap(self.h, other.h)
@@ -128,10 +128,10 @@ proc operatorNotEqual*(self: gen_qstatictext_types.QStaticText, param1: gen_qsta
   fcQStaticText_operatorNotEqual(self.h, param1.h)
 
 proc prepare*(self: gen_qstatictext_types.QStaticText, matrix: gen_qtransform_types.QTransform): void =
-  fcQStaticText_prepareWithMatrix(self.h, matrix.h)
+  fcQStaticText_prepareMatrix(self.h, matrix.h)
 
 proc prepare*(self: gen_qstatictext_types.QStaticText, matrix: gen_qtransform_types.QTransform, font: gen_qfont_types.QFont): void =
-  fcQStaticText_prepare2(self.h, matrix.h, font.h)
+  fcQStaticText_prepareMatrixFont(self.h, matrix.h, font.h)
 
 proc create*(T: type gen_qstatictext_types.QStaticText): gen_qstatictext_types.QStaticText =
   let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new(), owned: true)
@@ -141,6 +141,6 @@ proc create*(T: type gen_qstatictext_types.QStaticText,
   let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new2(struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   tmp
 proc create*(T: type gen_qstatictext_types.QStaticText,
-    other: gen_qstatictext_types.QStaticText): gen_qstatictext_types.QStaticText =
-  let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new3(other.h), owned: true)
+    fromVal: gen_qstatictext_types.QStaticText): gen_qstatictext_types.QStaticText =
+  let tmp = gen_qstatictext_types.QStaticText(h: fcQStaticText_new3(fromVal.h), owned: true)
   tmp

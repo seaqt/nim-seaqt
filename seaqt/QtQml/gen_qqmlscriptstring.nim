@@ -43,7 +43,7 @@ export
 
 type cQQmlScriptString*{.exportc: "QQmlScriptString", incompleteStruct.} = object
 
-proc fcQQmlScriptString_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlScriptString_operatorAssign".}
+proc fcQQmlScriptString_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QQmlScriptString_operatorAssign".}
 proc fcQQmlScriptString_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QQmlScriptString_operatorEqual".}
 proc fcQQmlScriptString_operatorNotEqual(self: pointer, param1: pointer): bool {.importc: "QQmlScriptString_operatorNotEqual".}
 proc fcQQmlScriptString_isEmpty(self: pointer): bool {.importc: "QQmlScriptString_isEmpty".}
@@ -53,11 +53,11 @@ proc fcQQmlScriptString_stringLiteral(self: pointer): struct_seaqt_string {.impo
 proc fcQQmlScriptString_numberLiteral(self: pointer, ok: ptr bool): float64 {.importc: "QQmlScriptString_numberLiteral".}
 proc fcQQmlScriptString_booleanLiteral(self: pointer, ok: ptr bool): bool {.importc: "QQmlScriptString_booleanLiteral".}
 proc fcQQmlScriptString_new(): ptr cQQmlScriptString {.importc: "QQmlScriptString_new".}
-proc fcQQmlScriptString_new2(param1: pointer): ptr cQQmlScriptString {.importc: "QQmlScriptString_new2".}
+proc fcQQmlScriptString_new2(fromVal: pointer): ptr cQQmlScriptString {.importc: "QQmlScriptString_new_from".}
 proc fcQQmlScriptString_staticMetaObject(): pointer {.importc: "QQmlScriptString_staticMetaObject".}
 
-proc operatorAssign*(self: gen_qqmlscriptstring_types.QQmlScriptString, param1: gen_qqmlscriptstring_types.QQmlScriptString): void =
-  fcQQmlScriptString_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qqmlscriptstring_types.QQmlScriptString, fromVal: gen_qqmlscriptstring_types.QQmlScriptString): void =
+  fcQQmlScriptString_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qqmlscriptstring_types.QQmlScriptString, param1: gen_qqmlscriptstring_types.QQmlScriptString): bool =
   fcQQmlScriptString_operatorEqual(self.h, param1.h)
@@ -90,8 +90,8 @@ proc create*(T: type gen_qqmlscriptstring_types.QQmlScriptString): gen_qqmlscrip
   let tmp = gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new(), owned: true)
   tmp
 proc create*(T: type gen_qqmlscriptstring_types.QQmlScriptString,
-    param1: gen_qqmlscriptstring_types.QQmlScriptString): gen_qqmlscriptstring_types.QQmlScriptString =
-  let tmp = gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new2(param1.h), owned: true)
+    fromVal: gen_qqmlscriptstring_types.QQmlScriptString): gen_qqmlscriptstring_types.QQmlScriptString =
+  let tmp = gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qqmlscriptstring_types.QQmlScriptString): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlScriptString_staticMetaObject())

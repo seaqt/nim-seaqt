@@ -77,7 +77,7 @@ type cQQuickWebEngineProfile*{.exportc: "QQuickWebEngineProfile", incompleteStru
 proc fcQQuickWebEngineProfile_metaObject(self: pointer): pointer {.importc: "QQuickWebEngineProfile_metaObject".}
 proc fcQQuickWebEngineProfile_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickWebEngineProfile_metacast".}
 proc fcQQuickWebEngineProfile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickWebEngineProfile_metacall".}
-proc fcQQuickWebEngineProfile_tr(s: cstring): struct_seaqt_string {.importc: "QQuickWebEngineProfile_tr".}
+proc fcQQuickWebEngineProfile_trS(s: cstring): struct_seaqt_string {.importc: "QQuickWebEngineProfile_tr_s".}
 proc fcQQuickWebEngineProfile_storageName(self: pointer): struct_seaqt_string {.importc: "QQuickWebEngineProfile_storageName".}
 proc fcQQuickWebEngineProfile_setStorageName(self: pointer, name: struct_seaqt_string): void {.importc: "QQuickWebEngineProfile_setStorageName".}
 proc fcQQuickWebEngineProfile_isOffTheRecord(self: pointer): bool {.importc: "QQuickWebEngineProfile_isOffTheRecord".}
@@ -138,8 +138,8 @@ proc fcQQuickWebEngineProfile_downloadPathChanged(self: pointer): void {.importc
 proc fcQQuickWebEngineProfile_connect_downloadPathChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickWebEngineProfile_connect_downloadPathChanged".}
 proc fcQQuickWebEngineProfile_presentNotification(self: pointer, notification: pointer): void {.importc: "QQuickWebEngineProfile_presentNotification".}
 proc fcQQuickWebEngineProfile_connect_presentNotification(self: pointer, slot: int, callback: proc (slot: int, notification: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickWebEngineProfile_connect_presentNotification".}
-proc fcQQuickWebEngineProfile_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickWebEngineProfile_tr2".}
-proc fcQQuickWebEngineProfile_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickWebEngineProfile_tr3".}
+proc fcQQuickWebEngineProfile_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickWebEngineProfile_tr_s_c".}
+proc fcQQuickWebEngineProfile_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickWebEngineProfile_tr_s_c_n".}
 proc fcQQuickWebEngineProfile_vdata(self: pointer): ptr pointer {.importc: "QQuickWebEngineProfile_vdata".}
 proc fvdata_cQQuickWebEngineProfile(self: pointer): pointer {.importc: "vdata_QQuickWebEngineProfile".}
 
@@ -170,7 +170,7 @@ proc fcQQuickWebEngineProfile_protectedbase_senderSignalIndex(self: pointer): ci
 proc fcQQuickWebEngineProfile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickWebEngineProfile_protectedbase_receivers".}
 proc fcQQuickWebEngineProfile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickWebEngineProfile_protectedbase_isSignalConnected".}
 proc fcQQuickWebEngineProfile_new(vtbl: pointer, vdata: csize_t): ptr cQQuickWebEngineProfile {.importc: "QQuickWebEngineProfile_new".}
-proc fcQQuickWebEngineProfile_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickWebEngineProfile {.importc: "QQuickWebEngineProfile_new2".}
+proc fcQQuickWebEngineProfile_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQQuickWebEngineProfile {.importc: "QQuickWebEngineProfile_new_parent".}
 proc fcQQuickWebEngineProfile_staticMetaObject(): pointer {.importc: "QQuickWebEngineProfile_staticMetaObject".}
 
 proc metaObject*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile): gen_qobjectdefs_types.QMetaObject =
@@ -183,7 +183,7 @@ proc metacall*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, pa
   fcQQuickWebEngineProfile_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile, s: cstring): string =
-  let v_ms = fcQQuickWebEngineProfile_tr(s)
+  let v_ms = fcQQuickWebEngineProfile_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -558,13 +558,13 @@ proc onPresentNotification*(self: gen_qquickwebengineprofile_types.QQuickWebEngi
   fcQQuickWebEngineProfile_connect_presentNotification(self.h, cast[int](addr tmp[]), fcQQuickWebEngineProfile_slot_callback_presentNotification, fcQQuickWebEngineProfile_slot_callback_presentNotification_release)
 
 proc tr*(_: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile, s: cstring, c: cstring): string =
-  let v_ms = fcQQuickWebEngineProfile_tr2(s, c)
+  let v_ms = fcQQuickWebEngineProfile_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQQuickWebEngineProfile_tr3(s, c, n)
+  let v_ms = fcQQuickWebEngineProfile_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

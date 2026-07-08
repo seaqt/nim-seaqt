@@ -24,12 +24,12 @@ QCameraFormat* QCameraFormat_new() {
 	return new (std::nothrow) QCameraFormat();
 }
 
-QCameraFormat* QCameraFormat_new2(QCameraFormat* other) {
-	return new (std::nothrow) QCameraFormat(*other);
+QCameraFormat* QCameraFormat_new_from(QCameraFormat* from) {
+	return new (std::nothrow) QCameraFormat(*from);
 }
 
-void QCameraFormat_operatorAssign(QCameraFormat* self, QCameraFormat* other) {
-	self->operator=(*other);
+void QCameraFormat_operatorAssign(QCameraFormat* self, QCameraFormat* from) {
+	self->operator=(*from);
 }
 
 int QCameraFormat_pixelFormat(const QCameraFormat* self) {
@@ -70,12 +70,12 @@ QCameraDevice* QCameraDevice_new() {
 	return new (std::nothrow) QCameraDevice();
 }
 
-QCameraDevice* QCameraDevice_new2(QCameraDevice* other) {
-	return new (std::nothrow) QCameraDevice(*other);
+QCameraDevice* QCameraDevice_new_from(QCameraDevice* from) {
+	return new (std::nothrow) QCameraDevice(*from);
 }
 
-void QCameraDevice_operatorAssign(QCameraDevice* self, QCameraDevice* other) {
-	self->operator=(*other);
+void QCameraDevice_operatorAssign(QCameraDevice* self, QCameraDevice* from) {
+	self->operator=(*from);
 }
 
 bool QCameraDevice_operatorEqual(const QCameraDevice* self, QCameraDevice* other) {

@@ -48,7 +48,7 @@ export
 
 type cQGeoAreaMonitorInfo*{.exportc: "QGeoAreaMonitorInfo", incompleteStruct.} = object
 
-proc fcQGeoAreaMonitorInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QGeoAreaMonitorInfo_operatorAssign".}
+proc fcQGeoAreaMonitorInfo_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoAreaMonitorInfo_operatorAssign".}
 proc fcQGeoAreaMonitorInfo_swap(self: pointer, other: pointer): void {.importc: "QGeoAreaMonitorInfo_swap".}
 proc fcQGeoAreaMonitorInfo_name(self: pointer): struct_seaqt_string {.importc: "QGeoAreaMonitorInfo_name".}
 proc fcQGeoAreaMonitorInfo_setName(self: pointer, name: struct_seaqt_string): void {.importc: "QGeoAreaMonitorInfo_setName".}
@@ -64,11 +64,11 @@ proc fcQGeoAreaMonitorInfo_notificationParameters(self: pointer): struct_seaqt_m
 proc fcQGeoAreaMonitorInfo_setNotificationParameters(self: pointer, parameters: struct_seaqt_map): void {.importc: "QGeoAreaMonitorInfo_setNotificationParameters".}
 proc fcQGeoAreaMonitorInfo_detach(self: pointer): void {.importc: "QGeoAreaMonitorInfo_detach".}
 proc fcQGeoAreaMonitorInfo_new(): ptr cQGeoAreaMonitorInfo {.importc: "QGeoAreaMonitorInfo_new".}
-proc fcQGeoAreaMonitorInfo_new2(other: pointer): ptr cQGeoAreaMonitorInfo {.importc: "QGeoAreaMonitorInfo_new2".}
-proc fcQGeoAreaMonitorInfo_new3(name: struct_seaqt_string): ptr cQGeoAreaMonitorInfo {.importc: "QGeoAreaMonitorInfo_new3".}
+proc fcQGeoAreaMonitorInfo_new2(fromVal: pointer): ptr cQGeoAreaMonitorInfo {.importc: "QGeoAreaMonitorInfo_new_from".}
+proc fcQGeoAreaMonitorInfo_new3(name: struct_seaqt_string): ptr cQGeoAreaMonitorInfo {.importc: "QGeoAreaMonitorInfo_new_name".}
 
-proc operatorAssign*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, other: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): void =
-  fcQGeoAreaMonitorInfo_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, fromVal: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): void =
+  fcQGeoAreaMonitorInfo_operatorAssign(self.h, fromVal.h)
 
 proc swap*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, other: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): void =
   fcQGeoAreaMonitorInfo_swap(self.h, other.h)
@@ -148,8 +148,8 @@ proc create*(T: type gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): gen_qge
   let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo,
-    other: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo =
-  let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new2(other.h), owned: true)
+    fromVal: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo =
+  let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo,
     name: openArray[char]): gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo =

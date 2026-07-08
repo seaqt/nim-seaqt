@@ -26,27 +26,27 @@ QImageReader* QImageReader_new() {
 	return new (std::nothrow) QImageReader();
 }
 
-QImageReader* QImageReader_new2(QIODevice* device) {
+QImageReader* QImageReader_new_device(QIODevice* device) {
 	return new (std::nothrow) QImageReader(device);
 }
 
-QImageReader* QImageReader_new3(struct seaqt_string fileName) {
+QImageReader* QImageReader_new_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	return new (std::nothrow) QImageReader(fileName_QString);
 }
 
-QImageReader* QImageReader_new4(QIODevice* device, struct seaqt_string format) {
+QImageReader* QImageReader_new_device_format(QIODevice* device, struct seaqt_string format) {
 	QByteArray format_QByteArray(format.data, format.len);
 	return new (std::nothrow) QImageReader(device, format_QByteArray);
 }
 
-QImageReader* QImageReader_new5(struct seaqt_string fileName, struct seaqt_string format) {
+QImageReader* QImageReader_new_fileName_format(struct seaqt_string fileName, struct seaqt_string format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray format_QByteArray(format.data, format.len);
 	return new (std::nothrow) QImageReader(fileName_QString, format_QByteArray);
 }
 
-struct seaqt_string QImageReader_tr(const char* sourceText) {
+struct seaqt_string QImageReader_tr_sourceText(const char* sourceText) {
 	QString _ret = QImageReader::tr(sourceText);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -244,7 +244,7 @@ QImage* QImageReader_read(QImageReader* self) {
 	return new QImage(self->read());
 }
 
-bool QImageReader_readWithImage(QImageReader* self, QImage* image) {
+bool QImageReader_read_image(QImageReader* self, QImage* image) {
 	return self->read(image);
 }
 
@@ -296,7 +296,7 @@ bool QImageReader_supportsOption(const QImageReader* self, int option) {
 	return self->supportsOption(static_cast<QImageIOHandler::ImageOption>(option));
 }
 
-struct seaqt_string QImageReader_imageFormatWithFileName(struct seaqt_string fileName) {
+struct seaqt_string QImageReader_imageFormat_fileName(struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QByteArray _qb = QImageReader::imageFormat(fileName_QString);
 	struct seaqt_string _ms;
@@ -306,7 +306,7 @@ struct seaqt_string QImageReader_imageFormatWithFileName(struct seaqt_string fil
 	return _ms;
 }
 
-struct seaqt_string QImageReader_imageFormatWithDevice(QIODevice* device) {
+struct seaqt_string QImageReader_imageFormat_device(QIODevice* device) {
 	QByteArray _qb = QImageReader::imageFormat(device);
 	struct seaqt_string _ms;
 	_ms.len = _qb.length();
@@ -378,7 +378,7 @@ void QImageReader_setAllocationLimit(int mbLimit) {
 	QImageReader::setAllocationLimit(static_cast<int>(mbLimit));
 }
 
-struct seaqt_string QImageReader_tr2(const char* sourceText, const char* disambiguation) {
+struct seaqt_string QImageReader_tr_sourceText_disambiguation(const char* sourceText, const char* disambiguation) {
 	QString _ret = QImageReader::tr(sourceText, disambiguation);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -389,7 +389,7 @@ struct seaqt_string QImageReader_tr2(const char* sourceText, const char* disambi
 	return _ms;
 }
 
-struct seaqt_string QImageReader_tr3(const char* sourceText, const char* disambiguation, int n) {
+struct seaqt_string QImageReader_tr_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n) {
 	QString _ret = QImageReader::tr(sourceText, disambiguation, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

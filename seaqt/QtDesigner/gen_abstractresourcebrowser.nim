@@ -71,15 +71,15 @@ type cQDesignerResourceBrowserInterface*{.exportc: "QDesignerResourceBrowserInte
 proc fcQDesignerResourceBrowserInterface_metaObject(self: pointer): pointer {.importc: "QDesignerResourceBrowserInterface_metaObject".}
 proc fcQDesignerResourceBrowserInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerResourceBrowserInterface_metacast".}
 proc fcQDesignerResourceBrowserInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerResourceBrowserInterface_metacall".}
-proc fcQDesignerResourceBrowserInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerResourceBrowserInterface_tr".}
+proc fcQDesignerResourceBrowserInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerResourceBrowserInterface_tr_s".}
 proc fcQDesignerResourceBrowserInterface_setCurrentPath(self: pointer, filePath: struct_seaqt_string): void {.importc: "QDesignerResourceBrowserInterface_setCurrentPath".}
 proc fcQDesignerResourceBrowserInterface_currentPath(self: pointer): struct_seaqt_string {.importc: "QDesignerResourceBrowserInterface_currentPath".}
 proc fcQDesignerResourceBrowserInterface_currentPathChanged(self: pointer, filePath: struct_seaqt_string): void {.importc: "QDesignerResourceBrowserInterface_currentPathChanged".}
 proc fcQDesignerResourceBrowserInterface_connect_currentPathChanged(self: pointer, slot: int, callback: proc (slot: int, filePath: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerResourceBrowserInterface_connect_currentPathChanged".}
 proc fcQDesignerResourceBrowserInterface_pathActivated(self: pointer, filePath: struct_seaqt_string): void {.importc: "QDesignerResourceBrowserInterface_pathActivated".}
 proc fcQDesignerResourceBrowserInterface_connect_pathActivated(self: pointer, slot: int, callback: proc (slot: int, filePath: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerResourceBrowserInterface_connect_pathActivated".}
-proc fcQDesignerResourceBrowserInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerResourceBrowserInterface_tr2".}
-proc fcQDesignerResourceBrowserInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerResourceBrowserInterface_tr3".}
+proc fcQDesignerResourceBrowserInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerResourceBrowserInterface_tr_s_c".}
+proc fcQDesignerResourceBrowserInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerResourceBrowserInterface_tr_s_c_n".}
 proc fcQDesignerResourceBrowserInterface_vdata(self: pointer): ptr pointer {.importc: "QDesignerResourceBrowserInterface_vdata".}
 proc fvdata_cQDesignerResourceBrowserInterface(self: pointer): pointer {.importc: "vdata_QDesignerResourceBrowserInterface".}
 
@@ -197,7 +197,7 @@ proc fcQDesignerResourceBrowserInterface_protectedbase_senderSignalIndex(self: p
 proc fcQDesignerResourceBrowserInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerResourceBrowserInterface_protectedbase_receivers".}
 proc fcQDesignerResourceBrowserInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerResourceBrowserInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerResourceBrowserInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerResourceBrowserInterface {.importc: "QDesignerResourceBrowserInterface_new".}
-proc fcQDesignerResourceBrowserInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerResourceBrowserInterface {.importc: "QDesignerResourceBrowserInterface_new2".}
+proc fcQDesignerResourceBrowserInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerResourceBrowserInterface {.importc: "QDesignerResourceBrowserInterface_new_parent".}
 proc fcQDesignerResourceBrowserInterface_staticMetaObject(): pointer {.importc: "QDesignerResourceBrowserInterface_staticMetaObject".}
 
 proc metaObject*(self: gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface): gen_qobjectdefs_types.QMetaObject =
@@ -210,7 +210,7 @@ proc metacall*(self: gen_abstractresourcebrowser_types.QDesignerResourceBrowserI
   fcQDesignerResourceBrowserInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface, s: cstring): string =
-  let v_ms = fcQDesignerResourceBrowserInterface_tr(s)
+  let v_ms = fcQDesignerResourceBrowserInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -271,13 +271,13 @@ proc onPathActivated*(self: gen_abstractresourcebrowser_types.QDesignerResourceB
   fcQDesignerResourceBrowserInterface_connect_pathActivated(self.h, cast[int](addr tmp[]), fcQDesignerResourceBrowserInterface_slot_callback_pathActivated, fcQDesignerResourceBrowserInterface_slot_callback_pathActivated_release)
 
 proc tr*(_: type gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerResourceBrowserInterface_tr2(s, c)
+  let v_ms = fcQDesignerResourceBrowserInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerResourceBrowserInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerResourceBrowserInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

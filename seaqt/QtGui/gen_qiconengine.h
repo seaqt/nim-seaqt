@@ -52,7 +52,7 @@ typedef struct QIconEngine_VTable{
 	struct seaqt_string (*iconName)(VirtualQIconEngine* self);
 	bool (*isNull)(VirtualQIconEngine* self);
 	QPixmap* (*scaledPixmap)(VirtualQIconEngine* self, QSize* size, int mode, int state, double scale);
-	void (*virtualHook)(VirtualQIconEngine* self, int id, void* data);
+	void (*virtual_hook)(VirtualQIconEngine* self, int id, void* data);
 }QIconEngine_VTable;
 
 void* QIconEngine_vdata(VirtualQIconEngine* self);
@@ -73,7 +73,7 @@ struct seaqt_array /* of QSize* */  QIconEngine_availableSizes(QIconEngine* self
 struct seaqt_string QIconEngine_iconName(QIconEngine* self);
 bool QIconEngine_isNull(QIconEngine* self);
 QPixmap* QIconEngine_scaledPixmap(QIconEngine* self, QSize* size, int mode, int state, double scale);
-void QIconEngine_virtualHook(QIconEngine* self, int id, void* data);
+void QIconEngine_virtual_hook(QIconEngine* self, int id, void* data);
 
 void QIconEngine_virtualbase_paint(VirtualQIconEngine* self, QPainter* painter, QRect* rect, int mode, int state);
 QSize* QIconEngine_virtualbase_actualSize(VirtualQIconEngine* self, QSize* size, int mode, int state);
@@ -88,11 +88,11 @@ struct seaqt_array /* of QSize* */  QIconEngine_virtualbase_availableSizes(Virtu
 struct seaqt_string QIconEngine_virtualbase_iconName(VirtualQIconEngine* self);
 bool QIconEngine_virtualbase_isNull(VirtualQIconEngine* self);
 QPixmap* QIconEngine_virtualbase_scaledPixmap(VirtualQIconEngine* self, QSize* size, int mode, int state, double scale);
-void QIconEngine_virtualbase_virtualHook(VirtualQIconEngine* self, int id, void* data);
+void QIconEngine_virtualbase_virtual_hook(VirtualQIconEngine* self, int id, void* data);
 
 void QIconEngine_delete(QIconEngine* self);
 
-QIconEngine__ScaledPixmapArgument* QIconEngine__ScaledPixmapArgument_new(QIconEngine__ScaledPixmapArgument* param1);
+QIconEngine__ScaledPixmapArgument* QIconEngine__ScaledPixmapArgument_new(QIconEngine__ScaledPixmapArgument* from);
 
 QSize* QIconEngine__ScaledPixmapArgument_size(const QIconEngine__ScaledPixmapArgument* self);
 void QIconEngine__ScaledPixmapArgument_setSize(QIconEngine__ScaledPixmapArgument* self, QSize* size);
@@ -104,7 +104,7 @@ double QIconEngine__ScaledPixmapArgument_scale(const QIconEngine__ScaledPixmapAr
 void QIconEngine__ScaledPixmapArgument_setScale(QIconEngine__ScaledPixmapArgument* self, double scale);
 QPixmap* QIconEngine__ScaledPixmapArgument_pixmap(const QIconEngine__ScaledPixmapArgument* self);
 void QIconEngine__ScaledPixmapArgument_setPixmap(QIconEngine__ScaledPixmapArgument* self, QPixmap* pixmap);
-void QIconEngine__ScaledPixmapArgument_operatorAssign(QIconEngine__ScaledPixmapArgument* self, QIconEngine__ScaledPixmapArgument* param1);
+void QIconEngine__ScaledPixmapArgument_operatorAssign(QIconEngine__ScaledPixmapArgument* self, QIconEngine__ScaledPixmapArgument* from);
 
 void QIconEngine__ScaledPixmapArgument_delete(QIconEngine__ScaledPixmapArgument* self);
 

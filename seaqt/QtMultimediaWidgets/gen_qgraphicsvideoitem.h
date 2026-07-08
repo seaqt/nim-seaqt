@@ -124,13 +124,13 @@ void* QGraphicsVideoItem_vdata(VirtualQGraphicsVideoItem* self);
 VirtualQGraphicsVideoItem* vdata_QGraphicsVideoItem(void* vdata);
 
 VirtualQGraphicsVideoItem* QGraphicsVideoItem_new(const QGraphicsVideoItem_VTable* vtbl, size_t vdata);
-VirtualQGraphicsVideoItem* QGraphicsVideoItem_new2(const QGraphicsVideoItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent);
+VirtualQGraphicsVideoItem* QGraphicsVideoItem_new_parent(const QGraphicsVideoItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent);
 
 void QGraphicsVideoItem_virtbase(QGraphicsVideoItem* src, QGraphicsObject** outptr_QGraphicsObject);
 QMetaObject* QGraphicsVideoItem_metaObject(const QGraphicsVideoItem* self);
 void* QGraphicsVideoItem_metacast(QGraphicsVideoItem* self, const char* param1);
 int QGraphicsVideoItem_metacall(QGraphicsVideoItem* self, int param1, int param2, void** param3);
-struct seaqt_string QGraphicsVideoItem_tr(const char* s);
+struct seaqt_string QGraphicsVideoItem_tr_s(const char* s);
 QVideoSink* QGraphicsVideoItem_videoSink(const QGraphicsVideoItem* self);
 int QGraphicsVideoItem_aspectRatioMode(const QGraphicsVideoItem* self);
 void QGraphicsVideoItem_setAspectRatioMode(QGraphicsVideoItem* self, int mode);
@@ -146,8 +146,8 @@ void QGraphicsVideoItem_nativeSizeChanged(QGraphicsVideoItem* self, QSizeF* size
 void QGraphicsVideoItem_connect_nativeSizeChanged(QGraphicsVideoItem* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t));
 void QGraphicsVideoItem_timerEvent(QGraphicsVideoItem* self, QTimerEvent* event);
 QVariant* QGraphicsVideoItem_itemChange(QGraphicsVideoItem* self, int change, QVariant* value);
-struct seaqt_string QGraphicsVideoItem_tr2(const char* s, const char* c);
-struct seaqt_string QGraphicsVideoItem_tr3(const char* s, const char* c, int n);
+struct seaqt_string QGraphicsVideoItem_tr_s_c(const char* s, const char* c);
+struct seaqt_string QGraphicsVideoItem_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QGraphicsVideoItem_virtualbase_metaObject(const VirtualQGraphicsVideoItem* self);
 void* QGraphicsVideoItem_virtualbase_metacast(VirtualQGraphicsVideoItem* self, const char* param1);

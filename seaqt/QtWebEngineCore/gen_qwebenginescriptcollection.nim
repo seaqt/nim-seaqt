@@ -47,8 +47,8 @@ proc fcQWebEngineScriptCollection_isEmpty(self: pointer): bool {.importc: "QWebE
 proc fcQWebEngineScriptCollection_count(self: pointer): cint {.importc: "QWebEngineScriptCollection_count".}
 proc fcQWebEngineScriptCollection_contains(self: pointer, value: pointer): bool {.importc: "QWebEngineScriptCollection_contains".}
 proc fcQWebEngineScriptCollection_find(self: pointer, name: struct_seaqt_string): struct_seaqt_array {.importc: "QWebEngineScriptCollection_find".}
-proc fcQWebEngineScriptCollection_insert(self: pointer, param1: pointer): void {.importc: "QWebEngineScriptCollection_insert".}
-proc fcQWebEngineScriptCollection_insertWithList(self: pointer, list: struct_seaqt_array): void {.importc: "QWebEngineScriptCollection_insertWithList".}
+proc fcQWebEngineScriptCollection_insert_QWebEngineScript(self: pointer, param1: pointer): void {.importc: "QWebEngineScriptCollection_insert_QWebEngineScript".}
+proc fcQWebEngineScriptCollection_insert_QListOfQWebEngineScript(self: pointer, list: struct_seaqt_array): void {.importc: "QWebEngineScriptCollection_insert_QListOfQWebEngineScript".}
 proc fcQWebEngineScriptCollection_remove(self: pointer, param1: pointer): bool {.importc: "QWebEngineScriptCollection_remove".}
 proc fcQWebEngineScriptCollection_clear(self: pointer): void {.importc: "QWebEngineScriptCollection_clear".}
 proc fcQWebEngineScriptCollection_toList(self: pointer): struct_seaqt_array {.importc: "QWebEngineScriptCollection_toList".}
@@ -72,14 +72,14 @@ proc find*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection
   vx_ret
 
 proc insert*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, param1: gen_qwebenginescript_types.QWebEngineScript): void =
-  fcQWebEngineScriptCollection_insert(self.h, param1.h)
+  fcQWebEngineScriptCollection_insert_QWebEngineScript(self.h, param1.h)
 
 proc insert*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, list: openArray[gen_qwebenginescript_types.QWebEngineScript]): void =
   var list_CArray = newSeq[pointer](len(list))
   for i in 0..<len(list):
     list_CArray[i] = list[i].h
 
-  fcQWebEngineScriptCollection_insertWithList(self.h, struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0])))
+  fcQWebEngineScriptCollection_insert_QListOfQWebEngineScript(self.h, struct_seaqt_array(len: csize_t(len(list)), data: if len(list) == 0: nil else: addr(list_CArray[0])))
 
 proc remove*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, param1: gen_qwebenginescript_types.QWebEngineScript): bool =
   fcQWebEngineScriptCollection_remove(self.h, param1.h)

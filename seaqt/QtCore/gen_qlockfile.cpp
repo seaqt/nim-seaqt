@@ -43,7 +43,7 @@ void QLockFile_unlock(QLockFile* self) {
 	self->unlock();
 }
 
-void QLockFile_setStaleLockTime(QLockFile* self, int staleLockTime) {
+void QLockFile_setStaleLockTime_staleLockTime(QLockFile* self, int staleLockTime) {
 	self->setStaleLockTime(static_cast<int>(staleLockTime));
 }
 
@@ -64,7 +64,7 @@ int QLockFile_error(const QLockFile* self) {
 	return static_cast<int>(_ret);
 }
 
-bool QLockFile_tryLock2(QLockFile* self, int timeout) {
+bool QLockFile_tryLock_int(QLockFile* self, int timeout) {
 	return self->tryLock(static_cast<int>(timeout));
 }
 

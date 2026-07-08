@@ -682,7 +682,7 @@ public:
 	friend void QTableView_virtualbase_editorDestroyed(VirtualQTableView* self, QObject* editor);
 
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (vtbl->edit2 == 0) {
+		if (vtbl->edit_index_trigger_event == 0) {
 			return QTableView::edit(index, trigger, event);
 		}
 
@@ -692,11 +692,11 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit_index_trigger_event(this, sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
-	friend bool QTableView_virtualbase_edit2(VirtualQTableView* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QTableView_virtualbase_edit_index_trigger_event(VirtualQTableView* self, QModelIndex* index, int trigger, QEvent* event);
 
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
@@ -1320,7 +1320,7 @@ public:
 	friend void QTableView_protectedbase_stopAutoScroll(VirtualQTableView* self);
 	friend void QTableView_protectedbase_doAutoScroll(VirtualQTableView* self);
 	friend int QTableView_protectedbase_dropIndicatorPosition(const VirtualQTableView* self);
-	friend void QTableView_protectedbase_setViewportMargins(VirtualQTableView* self, int left, int top, int right, int bottom);
+	friend void QTableView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTableView* self, int left, int top, int right, int bottom);
 	friend QMargins* QTableView_protectedbase_viewportMargins(const VirtualQTableView* self);
 	friend void QTableView_protectedbase_drawFrame(VirtualQTableView* self, QPainter* param1);
 	friend void QTableView_protectedbase_updateMicroFocus(VirtualQTableView* self);
@@ -1339,7 +1339,7 @@ VirtualQTableView* QTableView_new(const QTableView_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQTableView(vtbl) : nullptr;
 }
 
-VirtualQTableView* QTableView_new2(const QTableView_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQTableView* QTableView_new_parent(const QTableView_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTableView>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTableView(vtbl, parent) : nullptr;
 }
@@ -1360,7 +1360,7 @@ int QTableView_metacall(QTableView* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTableView_tr(const char* s) {
+struct seaqt_string QTableView_tr_s(const char* s) {
 	QString _ret = QTableView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1564,7 +1564,7 @@ void QTableView_setShowGrid(QTableView* self, bool show) {
 	self->setShowGrid(show);
 }
 
-struct seaqt_string QTableView_tr2(const char* s, const char* c) {
+struct seaqt_string QTableView_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTableView::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1575,7 +1575,7 @@ struct seaqt_string QTableView_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTableView_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTableView_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTableView::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1826,7 +1826,7 @@ void QTableView_virtualbase_editorDestroyed(VirtualQTableView* self, QObject* ed
 	self->QTableView::editorDestroyed(editor);
 }
 
-bool QTableView_virtualbase_edit2(VirtualQTableView* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QTableView_virtualbase_edit_index_trigger_event(VirtualQTableView* self, QModelIndex* index, int trigger, QEvent* event) {
 
 	return self->QTableView::edit(*index, static_cast<VirtualQTableView::EditTrigger>(trigger), event);
 }
@@ -2148,7 +2148,7 @@ int QTableView_protectedbase_dropIndicatorPosition(const VirtualQTableView* self
 	return static_cast<int>(_ret);
 }
 
-void QTableView_protectedbase_setViewportMargins(VirtualQTableView* self, int left, int top, int right, int bottom) {
+void QTableView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTableView* self, int left, int top, int right, int bottom) {
 	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 

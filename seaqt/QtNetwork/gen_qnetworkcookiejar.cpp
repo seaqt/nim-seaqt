@@ -281,7 +281,7 @@ VirtualQNetworkCookieJar* QNetworkCookieJar_new(const QNetworkCookieJar_VTable* 
 	return _mem_ ? new (_mem_)VirtualQNetworkCookieJar(vtbl) : nullptr;
 }
 
-VirtualQNetworkCookieJar* QNetworkCookieJar_new2(const QNetworkCookieJar_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQNetworkCookieJar* QNetworkCookieJar_new_parent(const QNetworkCookieJar_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNetworkCookieJar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQNetworkCookieJar(vtbl, parent) : nullptr;
 }
@@ -302,7 +302,7 @@ int QNetworkCookieJar_metacall(QNetworkCookieJar* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QNetworkCookieJar_tr(const char* s) {
+struct seaqt_string QNetworkCookieJar_tr_s(const char* s) {
 	QString _ret = QNetworkCookieJar::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -348,7 +348,7 @@ bool QNetworkCookieJar_deleteCookie(QNetworkCookieJar* self, QNetworkCookie* coo
 	return self->deleteCookie(*cookie);
 }
 
-struct seaqt_string QNetworkCookieJar_tr2(const char* s, const char* c) {
+struct seaqt_string QNetworkCookieJar_tr_s_c(const char* s, const char* c) {
 	QString _ret = QNetworkCookieJar::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -359,7 +359,7 @@ struct seaqt_string QNetworkCookieJar_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QNetworkCookieJar_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QNetworkCookieJar_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QNetworkCookieJar::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -18,30 +18,30 @@ QAudioBuffer* QAudioBuffer_new() {
 	return new (std::nothrow) QAudioBuffer();
 }
 
-QAudioBuffer* QAudioBuffer_new2(QAudioBuffer* other) {
-	return new (std::nothrow) QAudioBuffer(*other);
+QAudioBuffer* QAudioBuffer_new_from(QAudioBuffer* from) {
+	return new (std::nothrow) QAudioBuffer(*from);
 }
 
-QAudioBuffer* QAudioBuffer_new3(struct seaqt_string data, QAudioFormat* format) {
+QAudioBuffer* QAudioBuffer_new_data_format(struct seaqt_string data, QAudioFormat* format) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new (std::nothrow) QAudioBuffer(data_QByteArray, *format);
 }
 
-QAudioBuffer* QAudioBuffer_new4(int numFrames, QAudioFormat* format) {
+QAudioBuffer* QAudioBuffer_new_numFrames_format(int numFrames, QAudioFormat* format) {
 	return new (std::nothrow) QAudioBuffer(static_cast<int>(numFrames), *format);
 }
 
-QAudioBuffer* QAudioBuffer_new5(struct seaqt_string data, QAudioFormat* format, long long startTime) {
+QAudioBuffer* QAudioBuffer_new_data_format_startTime(struct seaqt_string data, QAudioFormat* format, long long startTime) {
 	QByteArray data_QByteArray(data.data, data.len);
 	return new (std::nothrow) QAudioBuffer(data_QByteArray, *format, static_cast<qint64>(startTime));
 }
 
-QAudioBuffer* QAudioBuffer_new6(int numFrames, QAudioFormat* format, long long startTime) {
+QAudioBuffer* QAudioBuffer_new_numFrames_format_startTime(int numFrames, QAudioFormat* format, long long startTime) {
 	return new (std::nothrow) QAudioBuffer(static_cast<int>(numFrames), *format, static_cast<qint64>(startTime));
 }
 
-void QAudioBuffer_operatorAssign(QAudioBuffer* self, QAudioBuffer* other) {
-	self->operator=(*other);
+void QAudioBuffer_operatorAssign(QAudioBuffer* self, QAudioBuffer* from) {
+	self->operator=(*from);
 }
 
 void QAudioBuffer_swap(QAudioBuffer* self, QAudioBuffer* other) {

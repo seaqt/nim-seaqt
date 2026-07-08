@@ -755,17 +755,17 @@ VirtualQFontDialog* QFontDialog_new(const QFontDialog_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQFontDialog(vtbl) : nullptr;
 }
 
-VirtualQFontDialog* QFontDialog_new2(const QFontDialog_VTable* vtbl, size_t vdata, QFont* initial) {
+VirtualQFontDialog* QFontDialog_new_initial(const QFontDialog_VTable* vtbl, size_t vdata, QFont* initial) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFontDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFontDialog(vtbl, *initial) : nullptr;
 }
 
-VirtualQFontDialog* QFontDialog_new3(const QFontDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQFontDialog* QFontDialog_new_parent(const QFontDialog_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFontDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFontDialog(vtbl, parent) : nullptr;
 }
 
-VirtualQFontDialog* QFontDialog_new4(const QFontDialog_VTable* vtbl, size_t vdata, QFont* initial, QWidget* parent) {
+VirtualQFontDialog* QFontDialog_new_initial_parent(const QFontDialog_VTable* vtbl, size_t vdata, QFont* initial, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQFontDialog>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQFontDialog(vtbl, *initial, parent) : nullptr;
 }
@@ -786,7 +786,7 @@ int QFontDialog_metacall(QFontDialog* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QFontDialog_tr(const char* s) {
+struct seaqt_string QFontDialog_tr_s(const char* s) {
 	QString _ret = QFontDialog::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -809,7 +809,7 @@ QFont* QFontDialog_selectedFont(const QFontDialog* self) {
 	return new QFont(self->selectedFont());
 }
 
-void QFontDialog_setOption(QFontDialog* self, int option) {
+void QFontDialog_setOption_option(QFontDialog* self, int option) {
 	self->setOption(static_cast<QFontDialog::FontDialogOption>(option));
 }
 
@@ -830,11 +830,11 @@ void QFontDialog_setVisible(QFontDialog* self, bool visible) {
 	self->setVisible(visible);
 }
 
-QFont* QFontDialog_getFont(bool* ok) {
+QFont* QFontDialog_getFont_ok(bool* ok) {
 	return new QFont(QFontDialog::getFont(ok));
 }
 
-QFont* QFontDialog_getFont2(bool* ok, QFont* initial) {
+QFont* QFontDialog_getFont_ok_initial(bool* ok, QFont* initial) {
 	return new QFont(QFontDialog::getFont(ok, *initial));
 }
 
@@ -874,7 +874,7 @@ void QFontDialog_connect_fontSelected(QFontDialog* self, intptr_t slot, void (*c
 	QFontDialog::connect(self, static_cast<void (QFontDialog::*)(const QFont&)>(&QFontDialog::fontSelected), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QFontDialog_tr2(const char* s, const char* c) {
+struct seaqt_string QFontDialog_tr_s_c(const char* s, const char* c) {
 	QString _ret = QFontDialog::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -885,7 +885,7 @@ struct seaqt_string QFontDialog_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QFontDialog_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QFontDialog_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QFontDialog::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -896,24 +896,24 @@ struct seaqt_string QFontDialog_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QFontDialog_setOption2(QFontDialog* self, int option, bool on) {
+void QFontDialog_setOption_option_on(QFontDialog* self, int option, bool on) {
 	self->setOption(static_cast<QFontDialog::FontDialogOption>(option), on);
 }
 
-QFont* QFontDialog_getFont3(bool* ok, QWidget* parent) {
+QFont* QFontDialog_getFont_ok_parent(bool* ok, QWidget* parent) {
 	return new QFont(QFontDialog::getFont(ok, parent));
 }
 
-QFont* QFontDialog_getFont4(bool* ok, QFont* initial, QWidget* parent) {
+QFont* QFontDialog_getFont_ok_initial_parent(bool* ok, QFont* initial, QWidget* parent) {
 	return new QFont(QFontDialog::getFont(ok, *initial, parent));
 }
 
-QFont* QFontDialog_getFont5(bool* ok, QFont* initial, QWidget* parent, struct seaqt_string title) {
+QFont* QFontDialog_getFont_ok_initial_parent_title(bool* ok, QFont* initial, QWidget* parent, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return new QFont(QFontDialog::getFont(ok, *initial, parent, title_QString));
 }
 
-QFont* QFontDialog_getFont6(bool* ok, QFont* initial, QWidget* parent, struct seaqt_string title, int options) {
+QFont* QFontDialog_getFont_ok_initial_parent_title_options(bool* ok, QFont* initial, QWidget* parent, struct seaqt_string title, int options) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return new QFont(QFontDialog::getFont(ok, *initial, parent, title_QString, static_cast<QFontDialog::FontDialogOptions>(options)));
 }

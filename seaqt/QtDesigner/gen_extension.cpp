@@ -22,8 +22,8 @@ QObject* QAbstractExtensionFactory_extension(const QAbstractExtensionFactory* se
 	return self->extension(object, iid_QString);
 }
 
-void QAbstractExtensionFactory_operatorAssign(QAbstractExtensionFactory* self, QAbstractExtensionFactory* param1) {
-	self->operator=(*param1);
+void QAbstractExtensionFactory_operatorAssign(QAbstractExtensionFactory* self, QAbstractExtensionFactory* from) {
+	self->operator=(*from);
 }
 
 void QAbstractExtensionFactory_delete(QAbstractExtensionFactory* self) {
@@ -45,8 +45,8 @@ QObject* QAbstractExtensionManager_extension(const QAbstractExtensionManager* se
 	return self->extension(object, iid_QString);
 }
 
-void QAbstractExtensionManager_operatorAssign(QAbstractExtensionManager* self, QAbstractExtensionManager* param1) {
-	self->operator=(*param1);
+void QAbstractExtensionManager_operatorAssign(QAbstractExtensionManager* self, QAbstractExtensionManager* from) {
+	self->operator=(*from);
 }
 
 void QAbstractExtensionManager_delete(QAbstractExtensionManager* self) {

@@ -149,19 +149,19 @@ typedef struct QDesignerActionEditorInterface_VTable{
 void* QDesignerActionEditorInterface_vdata(VirtualQDesignerActionEditorInterface* self);
 VirtualQDesignerActionEditorInterface* vdata_QDesignerActionEditorInterface(void* vdata);
 
-VirtualQDesignerActionEditorInterface* QDesignerActionEditorInterface_new(const QDesignerActionEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDesignerActionEditorInterface* QDesignerActionEditorInterface_new2(const QDesignerActionEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQDesignerActionEditorInterface* QDesignerActionEditorInterface_new_parent(const QDesignerActionEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDesignerActionEditorInterface* QDesignerActionEditorInterface_new_parent_flags(const QDesignerActionEditorInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
 
 void QDesignerActionEditorInterface_virtbase(QDesignerActionEditorInterface* src, QWidget** outptr_QWidget);
 QMetaObject* QDesignerActionEditorInterface_metaObject(const QDesignerActionEditorInterface* self);
 void* QDesignerActionEditorInterface_metacast(QDesignerActionEditorInterface* self, const char* param1);
 int QDesignerActionEditorInterface_metacall(QDesignerActionEditorInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerActionEditorInterface_tr(const char* s);
+struct seaqt_string QDesignerActionEditorInterface_tr_s(const char* s);
 void QDesignerActionEditorInterface_manageAction(QDesignerActionEditorInterface* self, QAction* action);
 void QDesignerActionEditorInterface_unmanageAction(QDesignerActionEditorInterface* self, QAction* action);
 void QDesignerActionEditorInterface_setFormWindow(QDesignerActionEditorInterface* self, QDesignerFormWindowInterface* formWindow);
-struct seaqt_string QDesignerActionEditorInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerActionEditorInterface_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDesignerActionEditorInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerActionEditorInterface_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDesignerActionEditorInterface_virtualbase_metaObject(const VirtualQDesignerActionEditorInterface* self);
 void* QDesignerActionEditorInterface_virtualbase_metacast(VirtualQDesignerActionEditorInterface* self, const char* param1);

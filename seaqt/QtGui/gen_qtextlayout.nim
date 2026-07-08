@@ -118,13 +118,13 @@ proc fcQTextLayout_lineCount(self: pointer): cint {.importc: "QTextLayout_lineCo
 proc fcQTextLayout_lineAt(self: pointer, i: cint): pointer {.importc: "QTextLayout_lineAt".}
 proc fcQTextLayout_lineForTextPosition(self: pointer, pos: cint): pointer {.importc: "QTextLayout_lineForTextPosition".}
 proc fcQTextLayout_isValidCursorPosition(self: pointer, pos: cint): bool {.importc: "QTextLayout_isValidCursorPosition".}
-proc fcQTextLayout_nextCursorPosition(self: pointer, oldPos: cint): cint {.importc: "QTextLayout_nextCursorPosition".}
-proc fcQTextLayout_previousCursorPosition(self: pointer, oldPos: cint): cint {.importc: "QTextLayout_previousCursorPosition".}
+proc fcQTextLayout_nextCursorPositionOldPos(self: pointer, oldPos: cint): cint {.importc: "QTextLayout_nextCursorPosition_oldPos".}
+proc fcQTextLayout_previousCursorPositionOldPos(self: pointer, oldPos: cint): cint {.importc: "QTextLayout_previousCursorPosition_oldPos".}
 proc fcQTextLayout_leftCursorPosition(self: pointer, oldPos: cint): cint {.importc: "QTextLayout_leftCursorPosition".}
 proc fcQTextLayout_rightCursorPosition(self: pointer, oldPos: cint): cint {.importc: "QTextLayout_rightCursorPosition".}
-proc fcQTextLayout_draw(self: pointer, p: pointer, pos: pointer): void {.importc: "QTextLayout_draw".}
-proc fcQTextLayout_drawCursor(self: pointer, p: pointer, pos: pointer, cursorPosition: cint): void {.importc: "QTextLayout_drawCursor".}
-proc fcQTextLayout_drawCursor2(self: pointer, p: pointer, pos: pointer, cursorPosition: cint, width: cint): void {.importc: "QTextLayout_drawCursor2".}
+proc fcQTextLayout_drawPPos(self: pointer, p: pointer, pos: pointer): void {.importc: "QTextLayout_draw_p_pos".}
+proc fcQTextLayout_drawCursorPPosCursorPosition(self: pointer, p: pointer, pos: pointer, cursorPosition: cint): void {.importc: "QTextLayout_drawCursor_p_pos_cursorPosition".}
+proc fcQTextLayout_drawCursorPPosCursorPositionWidth(self: pointer, p: pointer, pos: pointer, cursorPosition: cint, width: cint): void {.importc: "QTextLayout_drawCursor_p_pos_cursorPosition_width".}
 proc fcQTextLayout_position(self: pointer): pointer {.importc: "QTextLayout_position".}
 proc fcQTextLayout_setPosition(self: pointer, p: pointer): void {.importc: "QTextLayout_setPosition".}
 proc fcQTextLayout_boundingRect(self: pointer): pointer {.importc: "QTextLayout_boundingRect".}
@@ -132,17 +132,17 @@ proc fcQTextLayout_minimumWidth(self: pointer): float64 {.importc: "QTextLayout_
 proc fcQTextLayout_maximumWidth(self: pointer): float64 {.importc: "QTextLayout_maximumWidth".}
 proc fcQTextLayout_glyphRuns(self: pointer): struct_seaqt_array {.importc: "QTextLayout_glyphRuns".}
 proc fcQTextLayout_setFlags(self: pointer, flags: cint): void {.importc: "QTextLayout_setFlags".}
-proc fcQTextLayout_nextCursorPosition2(self: pointer, oldPos: cint, mode: cint): cint {.importc: "QTextLayout_nextCursorPosition2".}
-proc fcQTextLayout_previousCursorPosition2(self: pointer, oldPos: cint, mode: cint): cint {.importc: "QTextLayout_previousCursorPosition2".}
-proc fcQTextLayout_draw2(self: pointer, p: pointer, pos: pointer, selections: struct_seaqt_array): void {.importc: "QTextLayout_draw2".}
-proc fcQTextLayout_draw3(self: pointer, p: pointer, pos: pointer, selections: struct_seaqt_array, clip: pointer): void {.importc: "QTextLayout_draw3".}
-proc fcQTextLayout_glyphRunsWithFrom(self: pointer, fromVal: cint): struct_seaqt_array {.importc: "QTextLayout_glyphRunsWithFrom".}
-proc fcQTextLayout_glyphRuns2(self: pointer, fromVal: cint, length: cint): struct_seaqt_array {.importc: "QTextLayout_glyphRuns2".}
+proc fcQTextLayout_nextCursorPositionOldPosMode(self: pointer, oldPos: cint, mode: cint): cint {.importc: "QTextLayout_nextCursorPosition_oldPos_mode".}
+proc fcQTextLayout_previousCursorPositionOldPosMode(self: pointer, oldPos: cint, mode: cint): cint {.importc: "QTextLayout_previousCursorPosition_oldPos_mode".}
+proc fcQTextLayout_drawPPosSelections(self: pointer, p: pointer, pos: pointer, selections: struct_seaqt_array): void {.importc: "QTextLayout_draw_p_pos_selections".}
+proc fcQTextLayout_drawPPosSelectionsClip(self: pointer, p: pointer, pos: pointer, selections: struct_seaqt_array, clip: pointer): void {.importc: "QTextLayout_draw_p_pos_selections_clip".}
+proc fcQTextLayout_glyphRunsFrom(self: pointer, fromVal: cint): struct_seaqt_array {.importc: "QTextLayout_glyphRuns_from".}
+proc fcQTextLayout_glyphRunsFromLength(self: pointer, fromVal: cint, length: cint): struct_seaqt_array {.importc: "QTextLayout_glyphRuns_from_length".}
 proc fcQTextLayout_new(): ptr cQTextLayout {.importc: "QTextLayout_new".}
-proc fcQTextLayout_new2(text: struct_seaqt_string): ptr cQTextLayout {.importc: "QTextLayout_new2".}
-proc fcQTextLayout_new3(text: struct_seaqt_string, font: pointer): ptr cQTextLayout {.importc: "QTextLayout_new3".}
-proc fcQTextLayout_new4(b: pointer): ptr cQTextLayout {.importc: "QTextLayout_new4".}
-proc fcQTextLayout_new5(text: struct_seaqt_string, font: pointer, paintdevice: pointer): ptr cQTextLayout {.importc: "QTextLayout_new5".}
+proc fcQTextLayout_new2(text: struct_seaqt_string): ptr cQTextLayout {.importc: "QTextLayout_new_text".}
+proc fcQTextLayout_new3(text: struct_seaqt_string, font: pointer): ptr cQTextLayout {.importc: "QTextLayout_new_text_font".}
+proc fcQTextLayout_new4(b: pointer): ptr cQTextLayout {.importc: "QTextLayout_new_b".}
+proc fcQTextLayout_new5(text: struct_seaqt_string, font: pointer, paintdevice: pointer): ptr cQTextLayout {.importc: "QTextLayout_new_text_font_paintdevice".}
 proc fcQTextLine_isValid(self: pointer): bool {.importc: "QTextLine_isValid".}
 proc fcQTextLine_rect(self: pointer): pointer {.importc: "QTextLine_rect".}
 proc fcQTextLine_x(self: pointer): float64 {.importc: "QTextLine_x".}
@@ -157,12 +157,12 @@ proc fcQTextLine_leadingIncluded(self: pointer): bool {.importc: "QTextLine_lead
 proc fcQTextLine_naturalTextWidth(self: pointer): float64 {.importc: "QTextLine_naturalTextWidth".}
 proc fcQTextLine_horizontalAdvance(self: pointer): float64 {.importc: "QTextLine_horizontalAdvance".}
 proc fcQTextLine_naturalTextRect(self: pointer): pointer {.importc: "QTextLine_naturalTextRect".}
-proc fcQTextLine_cursorToX(self: pointer, cursorPos: ptr cint): float64 {.importc: "QTextLine_cursorToX".}
-proc fcQTextLine_cursorToXWithCursorPos(self: pointer, cursorPos: cint): float64 {.importc: "QTextLine_cursorToXWithCursorPos".}
-proc fcQTextLine_xToCursor(self: pointer, x: float64): cint {.importc: "QTextLine_xToCursor".}
+proc fcQTextLine_cursorToXConstPint(self: pointer, cursorPos: ptr cint): float64 {.importc: "QTextLine_cursorToX_const_pint".}
+proc fcQTextLine_cursorToXConstInt(self: pointer, cursorPos: cint): float64 {.importc: "QTextLine_cursorToX_const_int".}
+proc fcQTextLine_xToCursorQreal(self: pointer, x: float64): cint {.importc: "QTextLine_xToCursor_qreal".}
 proc fcQTextLine_setLineWidth(self: pointer, width: float64): void {.importc: "QTextLine_setLineWidth".}
-proc fcQTextLine_setNumColumns(self: pointer, columns: cint): void {.importc: "QTextLine_setNumColumns".}
-proc fcQTextLine_setNumColumns2(self: pointer, columns: cint, alignmentWidth: float64): void {.importc: "QTextLine_setNumColumns2".}
+proc fcQTextLine_setNumColumnsColumns(self: pointer, columns: cint): void {.importc: "QTextLine_setNumColumns_columns".}
+proc fcQTextLine_setNumColumnsColumnsAlignmentWidth(self: pointer, columns: cint, alignmentWidth: float64): void {.importc: "QTextLine_setNumColumns_columns_alignmentWidth".}
 proc fcQTextLine_setPosition(self: pointer, pos: pointer): void {.importc: "QTextLine_setPosition".}
 proc fcQTextLine_position(self: pointer): pointer {.importc: "QTextLine_position".}
 proc fcQTextLine_textStart(self: pointer): cint {.importc: "QTextLine_textStart".}
@@ -170,11 +170,11 @@ proc fcQTextLine_textLength(self: pointer): cint {.importc: "QTextLine_textLengt
 proc fcQTextLine_lineNumber(self: pointer): cint {.importc: "QTextLine_lineNumber".}
 proc fcQTextLine_draw(self: pointer, painter: pointer, position: pointer): void {.importc: "QTextLine_draw".}
 proc fcQTextLine_glyphRuns(self: pointer): struct_seaqt_array {.importc: "QTextLine_glyphRuns".}
-proc fcQTextLine_cursorToX2(self: pointer, cursorPos: ptr cint, edge: cint): float64 {.importc: "QTextLine_cursorToX2".}
-proc fcQTextLine_cursorToX3(self: pointer, cursorPos: cint, edge: cint): float64 {.importc: "QTextLine_cursorToX3".}
-proc fcQTextLine_xToCursor2(self: pointer, x: float64, param2: cint): cint {.importc: "QTextLine_xToCursor2".}
-proc fcQTextLine_glyphRunsWithFrom(self: pointer, fromVal: cint): struct_seaqt_array {.importc: "QTextLine_glyphRunsWithFrom".}
-proc fcQTextLine_glyphRuns2(self: pointer, fromVal: cint, length: cint): struct_seaqt_array {.importc: "QTextLine_glyphRuns2".}
+proc fcQTextLine_cursorToXConstPint_QTextLine_Edge(self: pointer, cursorPos: ptr cint, edge: cint): float64 {.importc: "QTextLine_cursorToX_const_pint_QTextLine_Edge".}
+proc fcQTextLine_cursorToXConstInt_QTextLine_Edge(self: pointer, cursorPos: cint, edge: cint): float64 {.importc: "QTextLine_cursorToX_const_int_QTextLine_Edge".}
+proc fcQTextLine_xToCursorQreal_QTextLine_CursorPosition(self: pointer, x: float64, param2: cint): cint {.importc: "QTextLine_xToCursor_qreal_QTextLine_CursorPosition".}
+proc fcQTextLine_glyphRunsFrom(self: pointer, fromVal: cint): struct_seaqt_array {.importc: "QTextLine_glyphRuns_from".}
+proc fcQTextLine_glyphRunsFromLength(self: pointer, fromVal: cint, length: cint): struct_seaqt_array {.importc: "QTextLine_glyphRuns_from_length".}
 proc fcQTextLine_new(): ptr cQTextLine {.importc: "QTextLine_new".}
 proc fcQTextLayoutFormatRange_start(self: pointer): cint {.importc: "QTextLayout__FormatRange_start".}
 proc fcQTextLayoutFormatRange_setStart(self: pointer, start: cint): void {.importc: "QTextLayout__FormatRange_setStart".}
@@ -182,8 +182,8 @@ proc fcQTextLayoutFormatRange_length(self: pointer): cint {.importc: "QTextLayou
 proc fcQTextLayoutFormatRange_setLength(self: pointer, length: cint): void {.importc: "QTextLayout__FormatRange_setLength".}
 proc fcQTextLayoutFormatRange_format(self: pointer): pointer {.importc: "QTextLayout__FormatRange_format".}
 proc fcQTextLayoutFormatRange_setFormat(self: pointer, format: pointer): void {.importc: "QTextLayout__FormatRange_setFormat".}
-proc fcQTextLayoutFormatRange_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTextLayout__FormatRange_operatorAssign".}
-proc fcQTextLayoutFormatRange_new(param1: pointer): ptr cQTextLayoutFormatRange {.importc: "QTextLayout__FormatRange_new".}
+proc fcQTextLayoutFormatRange_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QTextLayout__FormatRange_operatorAssign".}
+proc fcQTextLayoutFormatRange_new(fromVal: pointer): ptr cQTextLayoutFormatRange {.importc: "QTextLayout__FormatRange_new".}
 
 proc isValid*(self: gen_qtextlayout_types.QTextInlineObject): bool =
   fcQTextInlineObject_isValid(self.h)
@@ -319,10 +319,10 @@ proc isValidCursorPosition*(self: gen_qtextlayout_types.QTextLayout, pos: cint):
   fcQTextLayout_isValidCursorPosition(self.h, pos)
 
 proc nextCursorPosition*(self: gen_qtextlayout_types.QTextLayout, oldPos: cint): cint =
-  fcQTextLayout_nextCursorPosition(self.h, oldPos)
+  fcQTextLayout_nextCursorPositionOldPos(self.h, oldPos)
 
 proc previousCursorPosition*(self: gen_qtextlayout_types.QTextLayout, oldPos: cint): cint =
-  fcQTextLayout_previousCursorPosition(self.h, oldPos)
+  fcQTextLayout_previousCursorPositionOldPos(self.h, oldPos)
 
 proc leftCursorPosition*(self: gen_qtextlayout_types.QTextLayout, oldPos: cint): cint =
   fcQTextLayout_leftCursorPosition(self.h, oldPos)
@@ -331,13 +331,13 @@ proc rightCursorPosition*(self: gen_qtextlayout_types.QTextLayout, oldPos: cint)
   fcQTextLayout_rightCursorPosition(self.h, oldPos)
 
 proc draw*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF): void =
-  fcQTextLayout_draw(self.h, p.h, pos.h)
+  fcQTextLayout_drawPPos(self.h, p.h, pos.h)
 
 proc drawCursor*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF, cursorPosition: cint): void =
-  fcQTextLayout_drawCursor(self.h, p.h, pos.h, cursorPosition)
+  fcQTextLayout_drawCursorPPosCursorPosition(self.h, p.h, pos.h, cursorPosition)
 
 proc drawCursor*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF, cursorPosition: cint, width: cint): void =
-  fcQTextLayout_drawCursor2(self.h, p.h, pos.h, cursorPosition, width)
+  fcQTextLayout_drawCursorPPosCursorPositionWidth(self.h, p.h, pos.h, cursorPosition, width)
 
 proc position*(self: gen_qtextlayout_types.QTextLayout): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQTextLayout_position(self.h), owned: true)
@@ -367,27 +367,27 @@ proc setFlags*(self: gen_qtextlayout_types.QTextLayout, flags: cint): void =
   fcQTextLayout_setFlags(self.h, flags)
 
 proc nextCursorPosition*(self: gen_qtextlayout_types.QTextLayout, oldPos: cint, mode: cint): cint =
-  fcQTextLayout_nextCursorPosition2(self.h, oldPos, cint(mode))
+  fcQTextLayout_nextCursorPositionOldPosMode(self.h, oldPos, cint(mode))
 
 proc previousCursorPosition*(self: gen_qtextlayout_types.QTextLayout, oldPos: cint, mode: cint): cint =
-  fcQTextLayout_previousCursorPosition2(self.h, oldPos, cint(mode))
+  fcQTextLayout_previousCursorPositionOldPosMode(self.h, oldPos, cint(mode))
 
 proc draw*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF, selections: openArray[gen_qtextlayout_types.QTextLayoutFormatRange]): void =
   var selections_CArray = newSeq[pointer](len(selections))
   for i in 0..<len(selections):
     selections_CArray[i] = selections[i].h
 
-  fcQTextLayout_draw2(self.h, p.h, pos.h, struct_seaqt_array(len: csize_t(len(selections)), data: if len(selections) == 0: nil else: addr(selections_CArray[0])))
+  fcQTextLayout_drawPPosSelections(self.h, p.h, pos.h, struct_seaqt_array(len: csize_t(len(selections)), data: if len(selections) == 0: nil else: addr(selections_CArray[0])))
 
 proc draw*(self: gen_qtextlayout_types.QTextLayout, p: gen_qpainter_types.QPainter, pos: gen_qpoint_types.QPointF, selections: openArray[gen_qtextlayout_types.QTextLayoutFormatRange], clip: gen_qrect_types.QRectF): void =
   var selections_CArray = newSeq[pointer](len(selections))
   for i in 0..<len(selections):
     selections_CArray[i] = selections[i].h
 
-  fcQTextLayout_draw3(self.h, p.h, pos.h, struct_seaqt_array(len: csize_t(len(selections)), data: if len(selections) == 0: nil else: addr(selections_CArray[0])), clip.h)
+  fcQTextLayout_drawPPosSelectionsClip(self.h, p.h, pos.h, struct_seaqt_array(len: csize_t(len(selections)), data: if len(selections) == 0: nil else: addr(selections_CArray[0])), clip.h)
 
 proc glyphRuns*(self: gen_qtextlayout_types.QTextLayout, fromVal: cint): seq[gen_qglyphrun_types.QGlyphRun] =
-  var v_ma = fcQTextLayout_glyphRunsWithFrom(self.h, fromVal)
+  var v_ma = fcQTextLayout_glyphRunsFrom(self.h, fromVal)
   var vx_ret = newSeq[gen_qglyphrun_types.QGlyphRun](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -396,7 +396,7 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLayout, fromVal: cint): seq[gen
   vx_ret
 
 proc glyphRuns*(self: gen_qtextlayout_types.QTextLayout, fromVal: cint, length: cint): seq[gen_qglyphrun_types.QGlyphRun] =
-  var v_ma = fcQTextLayout_glyphRuns2(self.h, fromVal, length)
+  var v_ma = fcQTextLayout_glyphRunsFromLength(self.h, fromVal, length)
   var vx_ret = newSeq[gen_qglyphrun_types.QGlyphRun](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -466,22 +466,22 @@ proc naturalTextRect*(self: gen_qtextlayout_types.QTextLine): gen_qrect_types.QR
   gen_qrect_types.QRectF(h: fcQTextLine_naturalTextRect(self.h), owned: true)
 
 proc cursorToX*(self: gen_qtextlayout_types.QTextLine, cursorPos: ptr cint): float64 =
-  fcQTextLine_cursorToX(self.h, cursorPos)
+  fcQTextLine_cursorToXConstPint(self.h, cursorPos)
 
 proc cursorToX*(self: gen_qtextlayout_types.QTextLine, cursorPos: cint): float64 =
-  fcQTextLine_cursorToXWithCursorPos(self.h, cursorPos)
+  fcQTextLine_cursorToXConstInt(self.h, cursorPos)
 
 proc xToCursor*(self: gen_qtextlayout_types.QTextLine, x: float64): cint =
-  fcQTextLine_xToCursor(self.h, x)
+  fcQTextLine_xToCursorQreal(self.h, x)
 
 proc setLineWidth*(self: gen_qtextlayout_types.QTextLine, width: float64): void =
   fcQTextLine_setLineWidth(self.h, width)
 
 proc setNumColumns*(self: gen_qtextlayout_types.QTextLine, columns: cint): void =
-  fcQTextLine_setNumColumns(self.h, columns)
+  fcQTextLine_setNumColumnsColumns(self.h, columns)
 
 proc setNumColumns*(self: gen_qtextlayout_types.QTextLine, columns: cint, alignmentWidth: float64): void =
-  fcQTextLine_setNumColumns2(self.h, columns, alignmentWidth)
+  fcQTextLine_setNumColumnsColumnsAlignmentWidth(self.h, columns, alignmentWidth)
 
 proc setPosition*(self: gen_qtextlayout_types.QTextLine, pos: gen_qpoint_types.QPointF): void =
   fcQTextLine_setPosition(self.h, pos.h)
@@ -511,16 +511,16 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLine): seq[gen_qglyphrun_types.
   vx_ret
 
 proc cursorToX*(self: gen_qtextlayout_types.QTextLine, cursorPos: ptr cint, edge: cint): float64 =
-  fcQTextLine_cursorToX2(self.h, cursorPos, cint(edge))
+  fcQTextLine_cursorToXConstPint_QTextLine_Edge(self.h, cursorPos, cint(edge))
 
 proc cursorToX*(self: gen_qtextlayout_types.QTextLine, cursorPos: cint, edge: cint): float64 =
-  fcQTextLine_cursorToX3(self.h, cursorPos, cint(edge))
+  fcQTextLine_cursorToXConstInt_QTextLine_Edge(self.h, cursorPos, cint(edge))
 
 proc xToCursor*(self: gen_qtextlayout_types.QTextLine, x: float64, param2: cint): cint =
-  fcQTextLine_xToCursor2(self.h, x, cint(param2))
+  fcQTextLine_xToCursorQreal_QTextLine_CursorPosition(self.h, x, cint(param2))
 
 proc glyphRuns*(self: gen_qtextlayout_types.QTextLine, fromVal: cint): seq[gen_qglyphrun_types.QGlyphRun] =
-  var v_ma = fcQTextLine_glyphRunsWithFrom(self.h, fromVal)
+  var v_ma = fcQTextLine_glyphRunsFrom(self.h, fromVal)
   var vx_ret = newSeq[gen_qglyphrun_types.QGlyphRun](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -529,7 +529,7 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLine, fromVal: cint): seq[gen_q
   vx_ret
 
 proc glyphRuns*(self: gen_qtextlayout_types.QTextLine, fromVal: cint, length: cint): seq[gen_qglyphrun_types.QGlyphRun] =
-  var v_ma = fcQTextLine_glyphRuns2(self.h, fromVal, length)
+  var v_ma = fcQTextLine_glyphRunsFromLength(self.h, fromVal, length)
   var vx_ret = newSeq[gen_qglyphrun_types.QGlyphRun](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -558,10 +558,10 @@ proc format*(self: gen_qtextlayout_types.QTextLayoutFormatRange): gen_qtextforma
 proc setFormat*(self: gen_qtextlayout_types.QTextLayoutFormatRange, format: gen_qtextformat_types.QTextCharFormat): void =
   fcQTextLayoutFormatRange_setFormat(self.h, format.h)
 
-proc operatorAssign*(self: gen_qtextlayout_types.QTextLayoutFormatRange, param1: gen_qtextlayout_types.QTextLayoutFormatRange): void =
-  fcQTextLayoutFormatRange_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_qtextlayout_types.QTextLayoutFormatRange, fromVal: gen_qtextlayout_types.QTextLayoutFormatRange): void =
+  fcQTextLayoutFormatRange_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_qtextlayout_types.QTextLayoutFormatRange,
-    param1: gen_qtextlayout_types.QTextLayoutFormatRange): gen_qtextlayout_types.QTextLayoutFormatRange =
-  let tmp = gen_qtextlayout_types.QTextLayoutFormatRange(h: fcQTextLayoutFormatRange_new(param1.h), owned: true)
+    fromVal: gen_qtextlayout_types.QTextLayoutFormatRange): gen_qtextlayout_types.QTextLayoutFormatRange =
+  let tmp = gen_qtextlayout_types.QTextLayoutFormatRange(h: fcQTextLayoutFormatRange_new(fromVal.h), owned: true)
   tmp

@@ -38,8 +38,8 @@ QBindingStorage* QBindingStorage_new();
 bool QBindingStorage_isEmpty(QBindingStorage* self);
 bool QBindingStorage_isValid(const QBindingStorage* self);
 void QBindingStorage_registerDependency(const QBindingStorage* self, QUntypedPropertyData* data);
-void* QBindingStorage_bindingData(const QBindingStorage* self, QUntypedPropertyData* data);
-void* QBindingStorage_bindingData2(QBindingStorage* self, QUntypedPropertyData* data, bool create);
+void* QBindingStorage_bindingData_data(const QBindingStorage* self, QUntypedPropertyData* data);
+void* QBindingStorage_bindingData_data_create(QBindingStorage* self, QUntypedPropertyData* data, bool create);
 
 void QBindingStorage_delete(QBindingStorage* self);
 

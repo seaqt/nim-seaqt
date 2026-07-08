@@ -147,14 +147,14 @@ void* QMdiSubWindow_vdata(VirtualQMdiSubWindow* self);
 VirtualQMdiSubWindow* vdata_QMdiSubWindow(void* vdata);
 
 VirtualQMdiSubWindow* QMdiSubWindow_new(const QMdiSubWindow_VTable* vtbl, size_t vdata);
-VirtualQMdiSubWindow* QMdiSubWindow_new2(const QMdiSubWindow_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQMdiSubWindow* QMdiSubWindow_new3(const QMdiSubWindow_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQMdiSubWindow* QMdiSubWindow_new_parent(const QMdiSubWindow_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQMdiSubWindow* QMdiSubWindow_new_parent_flags(const QMdiSubWindow_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
 
 void QMdiSubWindow_virtbase(QMdiSubWindow* src, QWidget** outptr_QWidget);
 QMetaObject* QMdiSubWindow_metaObject(const QMdiSubWindow* self);
 void* QMdiSubWindow_metacast(QMdiSubWindow* self, const char* param1);
 int QMdiSubWindow_metacall(QMdiSubWindow* self, int param1, int param2, void** param3);
-struct seaqt_string QMdiSubWindow_tr(const char* s);
+struct seaqt_string QMdiSubWindow_tr_s(const char* s);
 QSize* QMdiSubWindow_sizeHint(const QMdiSubWindow* self);
 QSize* QMdiSubWindow_minimumSizeHint(const QMdiSubWindow* self);
 void QMdiSubWindow_setWidget(QMdiSubWindow* self, QWidget* widget);
@@ -162,7 +162,7 @@ QWidget* QMdiSubWindow_widget(const QMdiSubWindow* self);
 QWidget* QMdiSubWindow_maximizedButtonsWidget(const QMdiSubWindow* self);
 QWidget* QMdiSubWindow_maximizedSystemMenuIconWidget(const QMdiSubWindow* self);
 bool QMdiSubWindow_isShaded(const QMdiSubWindow* self);
-void QMdiSubWindow_setOption(QMdiSubWindow* self, int option);
+void QMdiSubWindow_setOption_option(QMdiSubWindow* self, int option);
 bool QMdiSubWindow_testOption(const QMdiSubWindow* self, int param1);
 void QMdiSubWindow_setKeyboardSingleStep(QMdiSubWindow* self, int step);
 int QMdiSubWindow_keyboardSingleStep(const QMdiSubWindow* self);
@@ -197,9 +197,9 @@ void QMdiSubWindow_contextMenuEvent(QMdiSubWindow* self, QContextMenuEvent* cont
 void QMdiSubWindow_focusInEvent(QMdiSubWindow* self, QFocusEvent* focusInEvent);
 void QMdiSubWindow_focusOutEvent(QMdiSubWindow* self, QFocusEvent* focusOutEvent);
 void QMdiSubWindow_childEvent(QMdiSubWindow* self, QChildEvent* childEvent);
-struct seaqt_string QMdiSubWindow_tr2(const char* s, const char* c);
-struct seaqt_string QMdiSubWindow_tr3(const char* s, const char* c, int n);
-void QMdiSubWindow_setOption2(QMdiSubWindow* self, int option, bool on);
+struct seaqt_string QMdiSubWindow_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMdiSubWindow_tr_s_c_n(const char* s, const char* c, int n);
+void QMdiSubWindow_setOption_option_on(QMdiSubWindow* self, int option, bool on);
 
 QMetaObject* QMdiSubWindow_virtualbase_metaObject(const VirtualQMdiSubWindow* self);
 void* QMdiSubWindow_virtualbase_metacast(VirtualQMdiSubWindow* self, const char* param1);

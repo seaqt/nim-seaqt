@@ -41,8 +41,8 @@ QSGMaterialType* QSGMaterial_type(const QSGMaterial* self);
 QSGMaterialShader* QSGMaterial_createShader(const QSGMaterial* self, int renderMode);
 int QSGMaterial_compare(const QSGMaterial* self, QSGMaterial* other);
 int QSGMaterial_flags(const QSGMaterial* self);
-void QSGMaterial_setFlag(QSGMaterial* self, int flags);
-void QSGMaterial_setFlag2(QSGMaterial* self, int flags, bool on);
+void QSGMaterial_setFlag_flags(QSGMaterial* self, int flags);
+void QSGMaterial_setFlag_flags_on(QSGMaterial* self, int flags, bool on);
 
 QSGMaterialType* QSGMaterial_virtualbase_type(const VirtualQSGMaterial* self);
 QSGMaterialShader* QSGMaterial_virtualbase_createShader(const VirtualQSGMaterial* self, int renderMode);

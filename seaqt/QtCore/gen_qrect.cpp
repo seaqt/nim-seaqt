@@ -23,20 +23,20 @@ QRect* QRect_new() {
 	return new (std::nothrow) QRect();
 }
 
-QRect* QRect_new2(QPoint* topleft, QPoint* bottomright) {
+QRect* QRect_new_topleft_bottomright(QPoint* topleft, QPoint* bottomright) {
 	return new (std::nothrow) QRect(*topleft, *bottomright);
 }
 
-QRect* QRect_new3(QPoint* topleft, QSize* size) {
+QRect* QRect_new_topleft_size(QPoint* topleft, QSize* size) {
 	return new (std::nothrow) QRect(*topleft, *size);
 }
 
-QRect* QRect_new4(int left, int top, int width, int height) {
+QRect* QRect_new_left_top_width_height(int left, int top, int width, int height) {
 	return new (std::nothrow) QRect(static_cast<int>(left), static_cast<int>(top), static_cast<int>(width), static_cast<int>(height));
 }
 
-QRect* QRect_new5(QRect* param1) {
-	return new (std::nothrow) QRect(*param1);
+QRect* QRect_new_from(QRect* from) {
+	return new (std::nothrow) QRect(*from);
 }
 
 bool QRect_isNull(const QRect* self) {
@@ -175,19 +175,19 @@ void QRect_moveCenter(QRect* self, QPoint* p) {
 	self->moveCenter(*p);
 }
 
-void QRect_translate(QRect* self, int dx, int dy) {
+void QRect_translate_dx_dy(QRect* self, int dx, int dy) {
 	self->translate(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-void QRect_translateWithQPoint(QRect* self, QPoint* p) {
+void QRect_translate_p(QRect* self, QPoint* p) {
 	self->translate(*p);
 }
 
-QRect* QRect_translated(const QRect* self, int dx, int dy) {
+QRect* QRect_translated_dx_dy(const QRect* self, int dx, int dy) {
 	return new QRect(self->translated(static_cast<int>(dx), static_cast<int>(dy)));
 }
 
-QRect* QRect_translatedWithQPoint(const QRect* self, QPoint* p) {
+QRect* QRect_translated_p(const QRect* self, QPoint* p) {
 	return new QRect(self->translated(*p));
 }
 
@@ -195,11 +195,11 @@ QRect* QRect_transposed(const QRect* self) {
 	return new QRect(self->transposed());
 }
 
-void QRect_moveTo(QRect* self, int x, int t) {
+void QRect_moveTo_x_t(QRect* self, int x, int t) {
 	self->moveTo(static_cast<int>(x), static_cast<int>(t));
 }
 
-void QRect_moveToWithQPoint(QRect* self, QPoint* p) {
+void QRect_moveTo_p(QRect* self, QPoint* p) {
 	self->moveTo(*p);
 }
 
@@ -267,19 +267,19 @@ void QRect_operatorBitwiseAndAssign(QRect* self, QRect* r) {
 	self->operator&=(*r);
 }
 
-bool QRect_contains(const QRect* self, QRect* r) {
+bool QRect_contains_r(const QRect* self, QRect* r) {
 	return self->contains(*r);
 }
 
-bool QRect_containsWithQPoint(const QRect* self, QPoint* p) {
+bool QRect_contains_p(const QRect* self, QPoint* p) {
 	return self->contains(*p);
 }
 
-bool QRect_contains2(const QRect* self, int x, int y) {
+bool QRect_contains_x_y(const QRect* self, int x, int y) {
 	return self->contains(static_cast<int>(x), static_cast<int>(y));
 }
 
-bool QRect_contains3(const QRect* self, int x, int y, bool proper) {
+bool QRect_contains_x_y_proper(const QRect* self, int x, int y, bool proper) {
 	return self->contains(static_cast<int>(x), static_cast<int>(y), proper);
 }
 
@@ -323,15 +323,15 @@ QRectF* QRect_toRectF(const QRect* self) {
 	return new QRectF(self->toRectF());
 }
 
-void QRect_operatorAssign(QRect* self, QRect* param1) {
-	self->operator=(*param1);
+void QRect_operatorAssign(QRect* self, QRect* from) {
+	self->operator=(*from);
 }
 
-bool QRect_contains4(const QRect* self, QRect* r, bool proper) {
+bool QRect_contains_r_proper(const QRect* self, QRect* r, bool proper) {
 	return self->contains(*r, proper);
 }
 
-bool QRect_contains5(const QRect* self, QPoint* p, bool proper) {
+bool QRect_contains_p_proper(const QRect* self, QPoint* p, bool proper) {
 	return self->contains(*p, proper);
 }
 
@@ -343,24 +343,24 @@ QRectF* QRectF_new() {
 	return new (std::nothrow) QRectF();
 }
 
-QRectF* QRectF_new2(QPointF* topleft, QSizeF* size) {
+QRectF* QRectF_new_topleft_size(QPointF* topleft, QSizeF* size) {
 	return new (std::nothrow) QRectF(*topleft, *size);
 }
 
-QRectF* QRectF_new3(QPointF* topleft, QPointF* bottomRight) {
+QRectF* QRectF_new_topleft_bottomRight(QPointF* topleft, QPointF* bottomRight) {
 	return new (std::nothrow) QRectF(*topleft, *bottomRight);
 }
 
-QRectF* QRectF_new4(double left, double top, double width, double height) {
+QRectF* QRectF_new_left_top_width_height(double left, double top, double width, double height) {
 	return new (std::nothrow) QRectF(static_cast<qreal>(left), static_cast<qreal>(top), static_cast<qreal>(width), static_cast<qreal>(height));
 }
 
-QRectF* QRectF_new5(QRect* rect) {
+QRectF* QRectF_new_rect(QRect* rect) {
 	return new (std::nothrow) QRectF(*rect);
 }
 
-QRectF* QRectF_new6(QRectF* param1) {
-	return new (std::nothrow) QRectF(*param1);
+QRectF* QRectF_new_from(QRectF* from) {
+	return new (std::nothrow) QRectF(*from);
 }
 
 bool QRectF_isNull(const QRectF* self) {
@@ -505,19 +505,19 @@ void QRectF_moveCenter(QRectF* self, QPointF* p) {
 	self->moveCenter(*p);
 }
 
-void QRectF_translate(QRectF* self, double dx, double dy) {
+void QRectF_translate_dx_dy(QRectF* self, double dx, double dy) {
 	self->translate(static_cast<qreal>(dx), static_cast<qreal>(dy));
 }
 
-void QRectF_translateWithQPointF(QRectF* self, QPointF* p) {
+void QRectF_translate_p(QRectF* self, QPointF* p) {
 	self->translate(*p);
 }
 
-QRectF* QRectF_translated(const QRectF* self, double dx, double dy) {
+QRectF* QRectF_translated_dx_dy(const QRectF* self, double dx, double dy) {
 	return new QRectF(self->translated(static_cast<qreal>(dx), static_cast<qreal>(dy)));
 }
 
-QRectF* QRectF_translatedWithQPointF(const QRectF* self, QPointF* p) {
+QRectF* QRectF_translated_p(const QRectF* self, QPointF* p) {
 	return new QRectF(self->translated(*p));
 }
 
@@ -525,11 +525,11 @@ QRectF* QRectF_transposed(const QRectF* self) {
 	return new QRectF(self->transposed());
 }
 
-void QRectF_moveTo(QRectF* self, double x, double y) {
+void QRectF_moveTo_x_y(QRectF* self, double x, double y) {
 	self->moveTo(static_cast<qreal>(x), static_cast<qreal>(y));
 }
 
-void QRectF_moveToWithQPointF(QRectF* self, QPointF* p) {
+void QRectF_moveTo_p(QRectF* self, QPointF* p) {
 	self->moveTo(*p);
 }
 
@@ -599,15 +599,15 @@ void QRectF_operatorBitwiseAndAssign(QRectF* self, QRectF* r) {
 	self->operator&=(*r);
 }
 
-bool QRectF_contains(const QRectF* self, QRectF* r) {
+bool QRectF_contains_r(const QRectF* self, QRectF* r) {
 	return self->contains(*r);
 }
 
-bool QRectF_containsWithQPointF(const QRectF* self, QPointF* p) {
+bool QRectF_contains_p(const QRectF* self, QPointF* p) {
 	return self->contains(*p);
 }
 
-bool QRectF_contains2(const QRectF* self, double x, double y) {
+bool QRectF_contains_x_y(const QRectF* self, double x, double y) {
 	return self->contains(static_cast<qreal>(x), static_cast<qreal>(y));
 }
 
@@ -651,8 +651,8 @@ QRect* QRectF_toAlignedRect(const QRectF* self) {
 	return new QRect(self->toAlignedRect());
 }
 
-void QRectF_operatorAssign(QRectF* self, QRectF* param1) {
-	self->operator=(*param1);
+void QRectF_operatorAssign(QRectF* self, QRectF* from) {
+	self->operator=(*from);
 }
 
 void QRectF_delete(QRectF* self) {

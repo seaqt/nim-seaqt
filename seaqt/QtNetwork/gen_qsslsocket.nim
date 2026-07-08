@@ -88,10 +88,10 @@ type cQSslSocket*{.exportc: "QSslSocket", incompleteStruct.} = object
 proc fcQSslSocket_metaObject(self: pointer): pointer {.importc: "QSslSocket_metaObject".}
 proc fcQSslSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QSslSocket_metacast".}
 proc fcQSslSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSslSocket_metacall".}
-proc fcQSslSocket_tr(s: cstring): struct_seaqt_string {.importc: "QSslSocket_tr".}
+proc fcQSslSocket_trS(s: cstring): struct_seaqt_string {.importc: "QSslSocket_tr_s".}
 proc fcQSslSocket_resume(self: pointer): void {.importc: "QSslSocket_resume".}
-proc fcQSslSocket_connectToHostEncrypted(self: pointer, hostName: struct_seaqt_string, port: cushort): void {.importc: "QSslSocket_connectToHostEncrypted".}
-proc fcQSslSocket_connectToHostEncrypted2(self: pointer, hostName: struct_seaqt_string, port: cushort, sslPeerName: struct_seaqt_string): void {.importc: "QSslSocket_connectToHostEncrypted2".}
+proc fcQSslSocket_connectToHostEncryptedHostNamePort(self: pointer, hostName: struct_seaqt_string, port: cushort): void {.importc: "QSslSocket_connectToHostEncrypted_hostName_port".}
+proc fcQSslSocket_connectToHostEncryptedHostNamePortSslPeerName(self: pointer, hostName: struct_seaqt_string, port: cushort, sslPeerName: struct_seaqt_string): void {.importc: "QSslSocket_connectToHostEncrypted_hostName_port_sslPeerName".}
 proc fcQSslSocket_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.importc: "QSslSocket_setSocketDescriptor".}
 proc fcQSslSocket_connectToHost(self: pointer, hostName: struct_seaqt_string, port: cushort, openMode: cint, protocol: cint): void {.importc: "QSslSocket_connectToHost".}
 proc fcQSslSocket_disconnectFromHost(self: pointer): void {.importc: "QSslSocket_disconnectFromHost".}
@@ -119,16 +119,16 @@ proc fcQSslSocket_sslConfiguration(self: pointer): pointer {.importc: "QSslSocke
 proc fcQSslSocket_setSslConfiguration(self: pointer, config: pointer): void {.importc: "QSslSocket_setSslConfiguration".}
 proc fcQSslSocket_setLocalCertificateChain(self: pointer, localChain: struct_seaqt_array): void {.importc: "QSslSocket_setLocalCertificateChain".}
 proc fcQSslSocket_localCertificateChain(self: pointer): struct_seaqt_array {.importc: "QSslSocket_localCertificateChain".}
-proc fcQSslSocket_setLocalCertificate(self: pointer, certificate: pointer): void {.importc: "QSslSocket_setLocalCertificate".}
-proc fcQSslSocket_setLocalCertificateWithFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QSslSocket_setLocalCertificateWithFileName".}
+proc fcQSslSocket_setLocalCertificateCertificate(self: pointer, certificate: pointer): void {.importc: "QSslSocket_setLocalCertificate_certificate".}
+proc fcQSslSocket_setLocalCertificateFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QSslSocket_setLocalCertificate_fileName".}
 proc fcQSslSocket_localCertificate(self: pointer): pointer {.importc: "QSslSocket_localCertificate".}
 proc fcQSslSocket_peerCertificate(self: pointer): pointer {.importc: "QSslSocket_peerCertificate".}
 proc fcQSslSocket_peerCertificateChain(self: pointer): struct_seaqt_array {.importc: "QSslSocket_peerCertificateChain".}
 proc fcQSslSocket_sessionCipher(self: pointer): pointer {.importc: "QSslSocket_sessionCipher".}
 proc fcQSslSocket_sessionProtocol(self: pointer): cint {.importc: "QSslSocket_sessionProtocol".}
 proc fcQSslSocket_ocspResponses(self: pointer): struct_seaqt_array {.importc: "QSslSocket_ocspResponses".}
-proc fcQSslSocket_setPrivateKey(self: pointer, key: pointer): void {.importc: "QSslSocket_setPrivateKey".}
-proc fcQSslSocket_setPrivateKeyWithFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QSslSocket_setPrivateKeyWithFileName".}
+proc fcQSslSocket_setPrivateKeyKey(self: pointer, key: pointer): void {.importc: "QSslSocket_setPrivateKey_key".}
+proc fcQSslSocket_setPrivateKeyFileName(self: pointer, fileName: struct_seaqt_string): void {.importc: "QSslSocket_setPrivateKey_fileName".}
 proc fcQSslSocket_privateKey(self: pointer): pointer {.importc: "QSslSocket_privateKey".}
 proc fcQSslSocket_waitForConnected(self: pointer, msecs: cint): bool {.importc: "QSslSocket_waitForConnected".}
 proc fcQSslSocket_waitForEncrypted(self: pointer): bool {.importc: "QSslSocket_waitForEncrypted".}
@@ -145,16 +145,16 @@ proc fcQSslSocket_availableBackends(): struct_seaqt_array {.importc: "QSslSocket
 proc fcQSslSocket_activeBackend(): struct_seaqt_string {.importc: "QSslSocket_activeBackend".}
 proc fcQSslSocket_setActiveBackend(backendName: struct_seaqt_string): bool {.importc: "QSslSocket_setActiveBackend".}
 proc fcQSslSocket_supportedProtocols(): struct_seaqt_array {.importc: "QSslSocket_supportedProtocols".}
-proc fcQSslSocket_isProtocolSupported(protocol: cint): bool {.importc: "QSslSocket_isProtocolSupported".}
+proc fcQSslSocket_isProtocolSupportedProtocol(protocol: cint): bool {.importc: "QSslSocket_isProtocolSupported_protocol".}
 proc fcQSslSocket_implementedClasses(): struct_seaqt_array {.importc: "QSslSocket_implementedClasses".}
-proc fcQSslSocket_isClassImplemented(cl: cint): bool {.importc: "QSslSocket_isClassImplemented".}
+proc fcQSslSocket_isClassImplementedCl(cl: cint): bool {.importc: "QSslSocket_isClassImplemented_cl".}
 proc fcQSslSocket_supportedFeatures(): struct_seaqt_array {.importc: "QSslSocket_supportedFeatures".}
-proc fcQSslSocket_isFeatureSupported(feat: cint): bool {.importc: "QSslSocket_isFeatureSupported".}
-proc fcQSslSocket_ignoreSslErrors(self: pointer, errors: struct_seaqt_array): void {.importc: "QSslSocket_ignoreSslErrors".}
+proc fcQSslSocket_isFeatureSupportedFeat(feat: cint): bool {.importc: "QSslSocket_isFeatureSupported_feat".}
+proc fcQSslSocket_ignoreSslErrorsErrors(self: pointer, errors: struct_seaqt_array): void {.importc: "QSslSocket_ignoreSslErrors_errors".}
 proc fcQSslSocket_continueInterruptedHandshake(self: pointer): void {.importc: "QSslSocket_continueInterruptedHandshake".}
 proc fcQSslSocket_startClientEncryption(self: pointer): void {.importc: "QSslSocket_startClientEncryption".}
 proc fcQSslSocket_startServerEncryption(self: pointer): void {.importc: "QSslSocket_startServerEncryption".}
-proc fcQSslSocket_ignoreSslErrors2(self: pointer): void {.importc: "QSslSocket_ignoreSslErrors2".}
+proc fcQSslSocket_ignoreSslErrors(self: pointer): void {.importc: "QSslSocket_ignoreSslErrors".}
 proc fcQSslSocket_encrypted(self: pointer): void {.importc: "QSslSocket_encrypted".}
 proc fcQSslSocket_connect_encrypted(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSslSocket_connect_encrypted".}
 proc fcQSslSocket_peerVerifyError(self: pointer, error: pointer): void {.importc: "QSslSocket_peerVerifyError".}
@@ -175,23 +175,23 @@ proc fcQSslSocket_alertReceived(self: pointer, level: cint, typeVal: cint, descr
 proc fcQSslSocket_connect_alertReceived(self: pointer, slot: int, callback: proc (slot: int, level: cint, typeVal: cint, description: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSslSocket_connect_alertReceived".}
 proc fcQSslSocket_handshakeInterruptedOnError(self: pointer, error: pointer): void {.importc: "QSslSocket_handshakeInterruptedOnError".}
 proc fcQSslSocket_connect_handshakeInterruptedOnError(self: pointer, slot: int, callback: proc (slot: int, error: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSslSocket_connect_handshakeInterruptedOnError".}
-proc fcQSslSocket_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSslSocket_tr2".}
-proc fcQSslSocket_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSslSocket_tr3".}
-proc fcQSslSocket_connectToHostEncrypted3(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint): void {.importc: "QSslSocket_connectToHostEncrypted3".}
-proc fcQSslSocket_connectToHostEncrypted4(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QSslSocket_connectToHostEncrypted4".}
-proc fcQSslSocket_connectToHostEncrypted5(self: pointer, hostName: struct_seaqt_string, port: cushort, sslPeerName: struct_seaqt_string, mode: cint): void {.importc: "QSslSocket_connectToHostEncrypted5".}
-proc fcQSslSocket_connectToHostEncrypted6(self: pointer, hostName: struct_seaqt_string, port: cushort, sslPeerName: struct_seaqt_string, mode: cint, protocol: cint): void {.importc: "QSslSocket_connectToHostEncrypted6".}
-proc fcQSslSocket_setLocalCertificate2(self: pointer, fileName: struct_seaqt_string, format: cint): void {.importc: "QSslSocket_setLocalCertificate2".}
-proc fcQSslSocket_setPrivateKey2(self: pointer, fileName: struct_seaqt_string, algorithm: cint): void {.importc: "QSslSocket_setPrivateKey2".}
-proc fcQSslSocket_setPrivateKey3(self: pointer, fileName: struct_seaqt_string, algorithm: cint, format: cint): void {.importc: "QSslSocket_setPrivateKey3".}
-proc fcQSslSocket_setPrivateKey4(self: pointer, fileName: struct_seaqt_string, algorithm: cint, format: cint, passPhrase: struct_seaqt_string): void {.importc: "QSslSocket_setPrivateKey4".}
-proc fcQSslSocket_waitForEncryptedWithMsecs(self: pointer, msecs: cint): bool {.importc: "QSslSocket_waitForEncryptedWithMsecs".}
-proc fcQSslSocket_supportedProtocolsWithBackendName(backendName: struct_seaqt_string): struct_seaqt_array {.importc: "QSslSocket_supportedProtocolsWithBackendName".}
-proc fcQSslSocket_isProtocolSupported2(protocol: cint, backendName: struct_seaqt_string): bool {.importc: "QSslSocket_isProtocolSupported2".}
-proc fcQSslSocket_implementedClassesWithBackendName(backendName: struct_seaqt_string): struct_seaqt_array {.importc: "QSslSocket_implementedClassesWithBackendName".}
-proc fcQSslSocket_isClassImplemented2(cl: cint, backendName: struct_seaqt_string): bool {.importc: "QSslSocket_isClassImplemented2".}
-proc fcQSslSocket_supportedFeaturesWithBackendName(backendName: struct_seaqt_string): struct_seaqt_array {.importc: "QSslSocket_supportedFeaturesWithBackendName".}
-proc fcQSslSocket_isFeatureSupported2(feat: cint, backendName: struct_seaqt_string): bool {.importc: "QSslSocket_isFeatureSupported2".}
+proc fcQSslSocket_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSslSocket_tr_s_c".}
+proc fcQSslSocket_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSslSocket_tr_s_c_n".}
+proc fcQSslSocket_connectToHostEncryptedHostNamePortMode(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint): void {.importc: "QSslSocket_connectToHostEncrypted_hostName_port_mode".}
+proc fcQSslSocket_connectToHostEncryptedHostNamePortModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QSslSocket_connectToHostEncrypted_hostName_port_mode_protocol".}
+proc fcQSslSocket_connectToHostEncryptedHostNamePortSslPeerNameMode(self: pointer, hostName: struct_seaqt_string, port: cushort, sslPeerName: struct_seaqt_string, mode: cint): void {.importc: "QSslSocket_connectToHostEncrypted_hostName_port_sslPeerName_mode".}
+proc fcQSslSocket_connectToHostEncryptedHostNamePortSslPeerNameModeProtocol(self: pointer, hostName: struct_seaqt_string, port: cushort, sslPeerName: struct_seaqt_string, mode: cint, protocol: cint): void {.importc: "QSslSocket_connectToHostEncrypted_hostName_port_sslPeerName_mode_protocol".}
+proc fcQSslSocket_setLocalCertificateFileNameFormat(self: pointer, fileName: struct_seaqt_string, format: cint): void {.importc: "QSslSocket_setLocalCertificate_fileName_format".}
+proc fcQSslSocket_setPrivateKeyFileNameAlgorithm(self: pointer, fileName: struct_seaqt_string, algorithm: cint): void {.importc: "QSslSocket_setPrivateKey_fileName_algorithm".}
+proc fcQSslSocket_setPrivateKeyFileNameAlgorithmFormat(self: pointer, fileName: struct_seaqt_string, algorithm: cint, format: cint): void {.importc: "QSslSocket_setPrivateKey_fileName_algorithm_format".}
+proc fcQSslSocket_setPrivateKeyFileNameAlgorithmFormatPassPhrase(self: pointer, fileName: struct_seaqt_string, algorithm: cint, format: cint, passPhrase: struct_seaqt_string): void {.importc: "QSslSocket_setPrivateKey_fileName_algorithm_format_passPhrase".}
+proc fcQSslSocket_waitForEncryptedMsecs(self: pointer, msecs: cint): bool {.importc: "QSslSocket_waitForEncrypted_msecs".}
+proc fcQSslSocket_supportedProtocolsBackendName(backendName: struct_seaqt_string): struct_seaqt_array {.importc: "QSslSocket_supportedProtocols_backendName".}
+proc fcQSslSocket_isProtocolSupportedProtocolBackendName(protocol: cint, backendName: struct_seaqt_string): bool {.importc: "QSslSocket_isProtocolSupported_protocol_backendName".}
+proc fcQSslSocket_implementedClassesBackendName(backendName: struct_seaqt_string): struct_seaqt_array {.importc: "QSslSocket_implementedClasses_backendName".}
+proc fcQSslSocket_isClassImplementedClBackendName(cl: cint, backendName: struct_seaqt_string): bool {.importc: "QSslSocket_isClassImplemented_cl_backendName".}
+proc fcQSslSocket_supportedFeaturesBackendName(backendName: struct_seaqt_string): struct_seaqt_array {.importc: "QSslSocket_supportedFeatures_backendName".}
+proc fcQSslSocket_isFeatureSupportedFeatBackendName(feat: cint, backendName: struct_seaqt_string): bool {.importc: "QSslSocket_isFeatureSupported_feat_backendName".}
 proc fcQSslSocket_vdata(self: pointer): ptr pointer {.importc: "QSslSocket_vdata".}
 proc fvdata_cQSslSocket(self: pointer): pointer {.importc: "vdata_QSslSocket".}
 
@@ -219,7 +219,7 @@ type cQSslSocketVTable {.pure.} = object
   readData*: proc(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
   skipData*: proc(self: pointer, maxSize: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
   writeData*: proc(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
-  bindX*: proc(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  bindAddressPortMode*: proc(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl, raises: [], gcsafe.}
   socketDescriptor*: proc(self: pointer): uint {.cdecl, raises: [], gcsafe.}
   isSequential*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   readLineData*: proc(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
@@ -257,7 +257,7 @@ proc fcQSslSocket_virtualbase_waitForDisconnected(self: pointer, msecs: cint): b
 proc fcQSslSocket_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QSslSocket_virtualbase_readData".}
 proc fcQSslSocket_virtualbase_skipData(self: pointer, maxSize: clonglong): clonglong {.importc: "QSslSocket_virtualbase_skipData".}
 proc fcQSslSocket_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.importc: "QSslSocket_virtualbase_writeData".}
-proc fcQSslSocket_virtualbase_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QSslSocket_virtualbase_bind".}
+proc fcQSslSocket_virtualbase_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QSslSocket_virtualbase_bind_address_port_mode".}
 proc fcQSslSocket_virtualbase_socketDescriptor(self: pointer): uint {.importc: "QSslSocket_virtualbase_socketDescriptor".}
 proc fcQSslSocket_virtualbase_isSequential(self: pointer): bool {.importc: "QSslSocket_virtualbase_isSequential".}
 proc fcQSslSocket_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QSslSocket_virtualbase_readLineData".}
@@ -287,7 +287,7 @@ proc fcQSslSocket_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQSslSocket_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSslSocket_protectedbase_receivers".}
 proc fcQSslSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSslSocket_protectedbase_isSignalConnected".}
 proc fcQSslSocket_new(vtbl: pointer, vdata: csize_t): ptr cQSslSocket {.importc: "QSslSocket_new".}
-proc fcQSslSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSslSocket {.importc: "QSslSocket_new2".}
+proc fcQSslSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSslSocket {.importc: "QSslSocket_new_parent".}
 proc fcQSslSocket_staticMetaObject(): pointer {.importc: "QSslSocket_staticMetaObject".}
 
 proc metaObject*(self: gen_qsslsocket_types.QSslSocket): gen_qobjectdefs_types.QMetaObject =
@@ -300,7 +300,7 @@ proc metacall*(self: gen_qsslsocket_types.QSslSocket, param1: cint, param2: cint
   fcQSslSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsslsocket_types.QSslSocket, s: cstring): string =
-  let v_ms = fcQSslSocket_tr(s)
+  let v_ms = fcQSslSocket_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -309,10 +309,10 @@ proc resume*(self: gen_qsslsocket_types.QSslSocket): void =
   fcQSslSocket_resume(self.h)
 
 proc connectToHostEncrypted*(self: gen_qsslsocket_types.QSslSocket, hostName: openArray[char], port: cushort): void =
-  fcQSslSocket_connectToHostEncrypted(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port)
+  fcQSslSocket_connectToHostEncryptedHostNamePort(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port)
 
 proc connectToHostEncrypted*(self: gen_qsslsocket_types.QSslSocket, hostName: openArray[char], port: cushort, sslPeerName: openArray[char]): void =
-  fcQSslSocket_connectToHostEncrypted2(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, struct_seaqt_string(data: if len(sslPeerName) > 0: addr sslPeerName[0] else: nil, len: csize_t(len(sslPeerName))))
+  fcQSslSocket_connectToHostEncryptedHostNamePortSslPeerName(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, struct_seaqt_string(data: if len(sslPeerName) > 0: addr sslPeerName[0] else: nil, len: csize_t(len(sslPeerName))))
 
 proc setSocketDescriptor*(self: gen_qsslsocket_types.QSslSocket, socketDescriptor: uint, state: cint, openMode: cint): bool =
   fcQSslSocket_setSocketDescriptor(self.h, socketDescriptor, cint(state), cint(openMode))
@@ -409,10 +409,10 @@ proc localCertificateChain*(self: gen_qsslsocket_types.QSslSocket): seq[gen_qssl
   vx_ret
 
 proc setLocalCertificate*(self: gen_qsslsocket_types.QSslSocket, certificate: gen_qsslcertificate_types.QSslCertificate): void =
-  fcQSslSocket_setLocalCertificate(self.h, certificate.h)
+  fcQSslSocket_setLocalCertificateCertificate(self.h, certificate.h)
 
 proc setLocalCertificate*(self: gen_qsslsocket_types.QSslSocket, fileName: openArray[char]): void =
-  fcQSslSocket_setLocalCertificateWithFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQSslSocket_setLocalCertificateFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc localCertificate*(self: gen_qsslsocket_types.QSslSocket): gen_qsslcertificate_types.QSslCertificate =
   gen_qsslcertificate_types.QSslCertificate(h: fcQSslSocket_localCertificate(self.h), owned: true)
@@ -445,10 +445,10 @@ proc ocspResponses*(self: gen_qsslsocket_types.QSslSocket): seq[gen_qocsprespons
   vx_ret
 
 proc setPrivateKey*(self: gen_qsslsocket_types.QSslSocket, key: gen_qsslkey_types.QSslKey): void =
-  fcQSslSocket_setPrivateKey(self.h, key.h)
+  fcQSslSocket_setPrivateKeyKey(self.h, key.h)
 
 proc setPrivateKey*(self: gen_qsslsocket_types.QSslSocket, fileName: openArray[char]): void =
-  fcQSslSocket_setPrivateKeyWithFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
+  fcQSslSocket_setPrivateKeyFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc privateKey*(self: gen_qsslsocket_types.QSslSocket): gen_qsslkey_types.QSslKey =
   gen_qsslkey_types.QSslKey(h: fcQSslSocket_privateKey(self.h), owned: true)
@@ -529,7 +529,7 @@ proc supportedProtocols*(_: type gen_qsslsocket_types.QSslSocket): seq[cint] =
   vx_ret
 
 proc isProtocolSupported*(_: type gen_qsslsocket_types.QSslSocket, protocol: cint): bool =
-  fcQSslSocket_isProtocolSupported(cint(protocol))
+  fcQSslSocket_isProtocolSupportedProtocol(cint(protocol))
 
 proc implementedClasses*(_: type gen_qsslsocket_types.QSslSocket): seq[cint] =
   var v_ma = fcQSslSocket_implementedClasses()
@@ -541,7 +541,7 @@ proc implementedClasses*(_: type gen_qsslsocket_types.QSslSocket): seq[cint] =
   vx_ret
 
 proc isClassImplemented*(_: type gen_qsslsocket_types.QSslSocket, cl: cint): bool =
-  fcQSslSocket_isClassImplemented(cint(cl))
+  fcQSslSocket_isClassImplementedCl(cint(cl))
 
 proc supportedFeatures*(_: type gen_qsslsocket_types.QSslSocket): seq[cint] =
   var v_ma = fcQSslSocket_supportedFeatures()
@@ -553,14 +553,14 @@ proc supportedFeatures*(_: type gen_qsslsocket_types.QSslSocket): seq[cint] =
   vx_ret
 
 proc isFeatureSupported*(_: type gen_qsslsocket_types.QSslSocket, feat: cint): bool =
-  fcQSslSocket_isFeatureSupported(cint(feat))
+  fcQSslSocket_isFeatureSupportedFeat(cint(feat))
 
 proc ignoreSslErrors*(self: gen_qsslsocket_types.QSslSocket, errors: openArray[gen_qsslerror_types.QSslError]): void =
   var errors_CArray = newSeq[pointer](len(errors))
   for i in 0..<len(errors):
     errors_CArray[i] = errors[i].h
 
-  fcQSslSocket_ignoreSslErrors(self.h, struct_seaqt_array(len: csize_t(len(errors)), data: if len(errors) == 0: nil else: addr(errors_CArray[0])))
+  fcQSslSocket_ignoreSslErrorsErrors(self.h, struct_seaqt_array(len: csize_t(len(errors)), data: if len(errors) == 0: nil else: addr(errors_CArray[0])))
 
 proc continueInterruptedHandshake*(self: gen_qsslsocket_types.QSslSocket): void =
   fcQSslSocket_continueInterruptedHandshake(self.h)
@@ -572,7 +572,7 @@ proc startServerEncryption*(self: gen_qsslsocket_types.QSslSocket): void =
   fcQSslSocket_startServerEncryption(self.h)
 
 proc ignoreSslErrors*(self: gen_qsslsocket_types.QSslSocket): void =
-  fcQSslSocket_ignoreSslErrors2(self.h)
+  fcQSslSocket_ignoreSslErrors(self.h)
 
 proc encrypted*(self: gen_qsslsocket_types.QSslSocket): void =
   fcQSslSocket_encrypted(self.h)
@@ -795,46 +795,46 @@ proc onHandshakeInterruptedOnError*(self: gen_qsslsocket_types.QSslSocket, slot:
   fcQSslSocket_connect_handshakeInterruptedOnError(self.h, cast[int](addr tmp[]), fcQSslSocket_slot_callback_handshakeInterruptedOnError, fcQSslSocket_slot_callback_handshakeInterruptedOnError_release)
 
 proc tr*(_: type gen_qsslsocket_types.QSslSocket, s: cstring, c: cstring): string =
-  let v_ms = fcQSslSocket_tr2(s, c)
+  let v_ms = fcQSslSocket_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsslsocket_types.QSslSocket, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSslSocket_tr3(s, c, n)
+  let v_ms = fcQSslSocket_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc connectToHostEncrypted*(self: gen_qsslsocket_types.QSslSocket, hostName: openArray[char], port: cushort, mode: cint): void =
-  fcQSslSocket_connectToHostEncrypted3(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode))
+  fcQSslSocket_connectToHostEncryptedHostNamePortMode(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode))
 
 proc connectToHostEncrypted*(self: gen_qsslsocket_types.QSslSocket, hostName: openArray[char], port: cushort, mode: cint, protocol: cint): void =
-  fcQSslSocket_connectToHostEncrypted4(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+  fcQSslSocket_connectToHostEncryptedHostNamePortModeProtocol(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
 proc connectToHostEncrypted*(self: gen_qsslsocket_types.QSslSocket, hostName: openArray[char], port: cushort, sslPeerName: openArray[char], mode: cint): void =
-  fcQSslSocket_connectToHostEncrypted5(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, struct_seaqt_string(data: if len(sslPeerName) > 0: addr sslPeerName[0] else: nil, len: csize_t(len(sslPeerName))), cint(mode))
+  fcQSslSocket_connectToHostEncryptedHostNamePortSslPeerNameMode(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, struct_seaqt_string(data: if len(sslPeerName) > 0: addr sslPeerName[0] else: nil, len: csize_t(len(sslPeerName))), cint(mode))
 
 proc connectToHostEncrypted*(self: gen_qsslsocket_types.QSslSocket, hostName: openArray[char], port: cushort, sslPeerName: openArray[char], mode: cint, protocol: cint): void =
-  fcQSslSocket_connectToHostEncrypted6(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, struct_seaqt_string(data: if len(sslPeerName) > 0: addr sslPeerName[0] else: nil, len: csize_t(len(sslPeerName))), cint(mode), cint(protocol))
+  fcQSslSocket_connectToHostEncryptedHostNamePortSslPeerNameModeProtocol(self.h, struct_seaqt_string(data: if len(hostName) > 0: addr hostName[0] else: nil, len: csize_t(len(hostName))), port, struct_seaqt_string(data: if len(sslPeerName) > 0: addr sslPeerName[0] else: nil, len: csize_t(len(sslPeerName))), cint(mode), cint(protocol))
 
 proc setLocalCertificate*(self: gen_qsslsocket_types.QSslSocket, fileName: openArray[char], format: cint): void =
-  fcQSslSocket_setLocalCertificate2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format))
+  fcQSslSocket_setLocalCertificateFileNameFormat(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(format))
 
 proc setPrivateKey*(self: gen_qsslsocket_types.QSslSocket, fileName: openArray[char], algorithm: cint): void =
-  fcQSslSocket_setPrivateKey2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(algorithm))
+  fcQSslSocket_setPrivateKeyFileNameAlgorithm(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(algorithm))
 
 proc setPrivateKey*(self: gen_qsslsocket_types.QSslSocket, fileName: openArray[char], algorithm: cint, format: cint): void =
-  fcQSslSocket_setPrivateKey3(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(algorithm), cint(format))
+  fcQSslSocket_setPrivateKeyFileNameAlgorithmFormat(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(algorithm), cint(format))
 
 proc setPrivateKey*(self: gen_qsslsocket_types.QSslSocket, fileName: openArray[char], algorithm: cint, format: cint, passPhrase: openArray[byte]): void =
-  fcQSslSocket_setPrivateKey4(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(algorithm), cint(format), struct_seaqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
+  fcQSslSocket_setPrivateKeyFileNameAlgorithmFormatPassPhrase(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), cint(algorithm), cint(format), struct_seaqt_string(data: if len(passPhrase) > 0: addr passPhrase[0] else: nil, len: csize_t(len(passPhrase))))
 
 proc waitForEncrypted*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
-  fcQSslSocket_waitForEncryptedWithMsecs(self.h, msecs)
+  fcQSslSocket_waitForEncryptedMsecs(self.h, msecs)
 
 proc supportedProtocols*(_: type gen_qsslsocket_types.QSslSocket, backendName: openArray[char]): seq[cint] =
-  var v_ma = fcQSslSocket_supportedProtocolsWithBackendName(struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
+  var v_ma = fcQSslSocket_supportedProtocolsBackendName(struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -843,10 +843,10 @@ proc supportedProtocols*(_: type gen_qsslsocket_types.QSslSocket, backendName: o
   vx_ret
 
 proc isProtocolSupported*(_: type gen_qsslsocket_types.QSslSocket, protocol: cint, backendName: openArray[char]): bool =
-  fcQSslSocket_isProtocolSupported2(cint(protocol), struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
+  fcQSslSocket_isProtocolSupportedProtocolBackendName(cint(protocol), struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
 
 proc implementedClasses*(_: type gen_qsslsocket_types.QSslSocket, backendName: openArray[char]): seq[cint] =
-  var v_ma = fcQSslSocket_implementedClassesWithBackendName(struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
+  var v_ma = fcQSslSocket_implementedClassesBackendName(struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -855,10 +855,10 @@ proc implementedClasses*(_: type gen_qsslsocket_types.QSslSocket, backendName: o
   vx_ret
 
 proc isClassImplemented*(_: type gen_qsslsocket_types.QSslSocket, cl: cint, backendName: openArray[char]): bool =
-  fcQSslSocket_isClassImplemented2(cint(cl), struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
+  fcQSslSocket_isClassImplementedClBackendName(cint(cl), struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
 
 proc supportedFeatures*(_: type gen_qsslsocket_types.QSslSocket, backendName: openArray[char]): seq[cint] =
-  var v_ma = fcQSslSocket_supportedFeaturesWithBackendName(struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
+  var v_ma = fcQSslSocket_supportedFeaturesBackendName(struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -867,7 +867,7 @@ proc supportedFeatures*(_: type gen_qsslsocket_types.QSslSocket, backendName: op
   vx_ret
 
 proc isFeatureSupported*(_: type gen_qsslsocket_types.QSslSocket, feat: cint, backendName: openArray[char]): bool =
-  fcQSslSocket_isFeatureSupported2(cint(feat), struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
+  fcQSslSocket_isFeatureSupportedFeatBackendName(cint(feat), struct_seaqt_string(data: if len(backendName) > 0: addr backendName[0] else: nil, len: csize_t(len(backendName))))
 
 type QSslSocketmetaObjectProc* = proc(self: QSslSocket): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSslSocketmetacastProc* = proc(self: QSslSocket, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -891,7 +891,7 @@ type QSslSocketwaitForDisconnectedProc* = proc(self: QSslSocket, msecs: cint): b
 type QSslSocketreadDataProc* = proc(self: QSslSocket, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
 type QSslSocketskipDataProc* = proc(self: QSslSocket, maxSize: clonglong): clonglong {.raises: [], gcsafe.}
 type QSslSocketwriteDataProc* = proc(self: QSslSocket, data: cstring, len: clonglong): clonglong {.raises: [], gcsafe.}
-type QSslSocketbindXProc* = proc(self: QSslSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
+type QSslSocketbindAddressPortModeProc* = proc(self: QSslSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
 type QSslSocketsocketDescriptorProc* = proc(self: QSslSocket): uint {.raises: [], gcsafe.}
 type QSslSocketisSequentialProc* = proc(self: QSslSocket): bool {.raises: [], gcsafe.}
 type QSslSocketreadLineDataProc* = proc(self: QSslSocket, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
@@ -932,7 +932,7 @@ type QSslSocketVTable* {.inheritable, pure.} = object
   readData*: QSslSocketreadDataProc
   skipData*: QSslSocketskipDataProc
   writeData*: QSslSocketwriteDataProc
-  bindX*: QSslSocketbindXProc
+  bindAddressPortMode*: QSslSocketbindAddressPortModeProc
   socketDescriptor*: QSslSocketsocketDescriptorProc
   isSequential*: QSslSocketisSequentialProc
   readLineData*: QSslSocketreadLineDataProc
@@ -1016,7 +1016,7 @@ proc QSslSocketwriteData*(self: gen_qsslsocket_types.QSslSocket, data: cstring, 
   fcQSslSocket_virtualbase_writeData(self.h, data, len)
 
 proc QSslSocketbindX*(self: gen_qsslsocket_types.QSslSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool =
-  fcQSslSocket_virtualbase_bindX(self.h, address.h, port, cint(mode))
+  fcQSslSocket_virtualbase_bindAddressPortMode(self.h, address.h, port, cint(mode))
 
 proc QSslSocketsocketDescriptor*(self: gen_qsslsocket_types.QSslSocket): uint =
   fcQSslSocket_virtualbase_socketDescriptor(self.h)
@@ -1223,13 +1223,13 @@ proc fcQSslSocket_vtable_callback_writeData(self: pointer, data: cstring, len: c
   var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
 
-proc fcQSslSocket_vtable_callback_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
+proc fcQSslSocket_vtable_callback_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QSslSocketVTable](fcQSslSocket_vdata(self)[])
   let self = QSslSocket(h: self)
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
   let slotval2 = port
   let slotval3 = cint(mode)
-  var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
+  var virtualReturn = vtbl[].bindAddressPortMode(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQSslSocket_vtable_callback_socketDescriptor(self: pointer): uint {.cdecl.} =
@@ -1546,7 +1546,7 @@ proc fcQSslSocket_method_callback_writeData(self: pointer, data: cstring, len: c
   var virtualReturn = inst.writeData(slotval1, slotval2)
   virtualReturn
 
-proc fcQSslSocket_method_callback_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
+proc fcQSslSocket_method_callback_bindAddressPortMode(self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQSslSocket](fcQSslSocket_vdata(self)[])
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address, owned: false)
   let slotval2 = port
@@ -1727,8 +1727,8 @@ proc create*(T: type gen_qsslsocket_types.QSslSocket,
     vtbl[].vtbl.skipData = fcQSslSocket_vtable_callback_skipData
   if not isNil(vtbl[].writeData):
     vtbl[].vtbl.writeData = fcQSslSocket_vtable_callback_writeData
-  if not isNil(vtbl[].bindX):
-    vtbl[].vtbl.bindX = fcQSslSocket_vtable_callback_bindX
+  if not isNil(vtbl[].bindAddressPortMode):
+    vtbl[].vtbl.bindAddressPortMode = fcQSslSocket_vtable_callback_bindAddressPortMode
   if not isNil(vtbl[].socketDescriptor):
     vtbl[].vtbl.socketDescriptor = fcQSslSocket_vtable_callback_socketDescriptor
   if not isNil(vtbl[].isSequential):
@@ -1814,8 +1814,8 @@ proc create*(T: type gen_qsslsocket_types.QSslSocket,
     vtbl[].vtbl.skipData = fcQSslSocket_vtable_callback_skipData
   if not isNil(vtbl[].writeData):
     vtbl[].vtbl.writeData = fcQSslSocket_vtable_callback_writeData
-  if not isNil(vtbl[].bindX):
-    vtbl[].vtbl.bindX = fcQSslSocket_vtable_callback_bindX
+  if not isNil(vtbl[].bindAddressPortMode):
+    vtbl[].vtbl.bindAddressPortMode = fcQSslSocket_vtable_callback_bindAddressPortMode
   if not isNil(vtbl[].socketDescriptor):
     vtbl[].vtbl.socketDescriptor = fcQSslSocket_vtable_callback_socketDescriptor
   if not isNil(vtbl[].isSequential):
@@ -1877,7 +1877,7 @@ const cQSslSocket_mvtbl = cQSslSocketVTable(
   readData: fcQSslSocket_method_callback_readData,
   skipData: fcQSslSocket_method_callback_skipData,
   writeData: fcQSslSocket_method_callback_writeData,
-  bindX: fcQSslSocket_method_callback_bindX,
+  bindAddressPortMode: fcQSslSocket_method_callback_bindAddressPortMode,
   socketDescriptor: fcQSslSocket_method_callback_socketDescriptor,
   isSequential: fcQSslSocket_method_callback_isSequential,
   readLineData: fcQSslSocket_method_callback_readLineData,

@@ -152,13 +152,13 @@ void* QCalendarWidget_vdata(VirtualQCalendarWidget* self);
 VirtualQCalendarWidget* vdata_QCalendarWidget(void* vdata);
 
 VirtualQCalendarWidget* QCalendarWidget_new(const QCalendarWidget_VTable* vtbl, size_t vdata);
-VirtualQCalendarWidget* QCalendarWidget_new2(const QCalendarWidget_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQCalendarWidget* QCalendarWidget_new_parent(const QCalendarWidget_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QCalendarWidget_virtbase(QCalendarWidget* src, QWidget** outptr_QWidget);
 QMetaObject* QCalendarWidget_metaObject(const QCalendarWidget* self);
 void* QCalendarWidget_metacast(QCalendarWidget* self, const char* param1);
 int QCalendarWidget_metacall(QCalendarWidget* self, int param1, int param2, void** param3);
-struct seaqt_string QCalendarWidget_tr(const char* s);
+struct seaqt_string QCalendarWidget_tr_s(const char* s);
 QSize* QCalendarWidget_sizeHint(const QCalendarWidget* self);
 QSize* QCalendarWidget_minimumSizeHint(const QCalendarWidget* self);
 QDate* QCalendarWidget_selectedDate(const QCalendarWidget* self);
@@ -185,7 +185,7 @@ void QCalendarWidget_setHeaderTextFormat(QCalendarWidget* self, QTextCharFormat*
 QTextCharFormat* QCalendarWidget_weekdayTextFormat(const QCalendarWidget* self, int dayOfWeek);
 void QCalendarWidget_setWeekdayTextFormat(QCalendarWidget* self, int dayOfWeek, QTextCharFormat* format);
 struct seaqt_map /* of QDate* to QTextCharFormat* */  QCalendarWidget_dateTextFormat(const QCalendarWidget* self);
-QTextCharFormat* QCalendarWidget_dateTextFormatWithDate(const QCalendarWidget* self, QDate* date);
+QTextCharFormat* QCalendarWidget_dateTextFormat_date(const QCalendarWidget* self, QDate* date);
 void QCalendarWidget_setDateTextFormat(QCalendarWidget* self, QDate* date, QTextCharFormat* format);
 bool QCalendarWidget_isDateEditEnabled(const QCalendarWidget* self);
 void QCalendarWidget_setDateEditEnabled(QCalendarWidget* self, bool enable);
@@ -216,8 +216,8 @@ void QCalendarWidget_activated(QCalendarWidget* self, QDate* date);
 void QCalendarWidget_connect_activated(QCalendarWidget* self, intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t));
 void QCalendarWidget_currentPageChanged(QCalendarWidget* self, int year, int month);
 void QCalendarWidget_connect_currentPageChanged(QCalendarWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t));
-struct seaqt_string QCalendarWidget_tr2(const char* s, const char* c);
-struct seaqt_string QCalendarWidget_tr3(const char* s, const char* c, int n);
+struct seaqt_string QCalendarWidget_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCalendarWidget_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QCalendarWidget_virtualbase_metaObject(const VirtualQCalendarWidget* self);
 void* QCalendarWidget_virtualbase_metacast(VirtualQCalendarWidget* self, const char* param1);

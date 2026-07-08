@@ -176,7 +176,7 @@ VirtualQAudioDecoder* QAudioDecoder_new(const QAudioDecoder_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQAudioDecoder(vtbl) : nullptr;
 }
 
-VirtualQAudioDecoder* QAudioDecoder_new2(const QAudioDecoder_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAudioDecoder* QAudioDecoder_new_parent(const QAudioDecoder_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAudioDecoder>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAudioDecoder(vtbl, parent) : nullptr;
 }
@@ -197,7 +197,7 @@ int QAudioDecoder_metacall(QAudioDecoder* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAudioDecoder_tr(const char* s) {
+struct seaqt_string QAudioDecoder_tr_s(const char* s) {
 	QString _ret = QAudioDecoder::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -362,11 +362,11 @@ void QAudioDecoder_connect_formatChanged(QAudioDecoder* self, intptr_t slot, voi
 	QAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(const QAudioFormat&)>(&QAudioDecoder::formatChanged), self, local_caller{slot, callback, release});
 }
 
-void QAudioDecoder_errorWithError(QAudioDecoder* self, int error) {
+void QAudioDecoder_error_error(QAudioDecoder* self, int error) {
 	self->error(static_cast<QAudioDecoder::Error>(error));
 }
 
-void QAudioDecoder_connect_errorWithError(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QAudioDecoder_connect_error_error(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -428,7 +428,7 @@ void QAudioDecoder_connect_durationChanged(QAudioDecoder* self, intptr_t slot, v
 	QAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(qint64)>(&QAudioDecoder::durationChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAudioDecoder_tr2(const char* s, const char* c) {
+struct seaqt_string QAudioDecoder_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAudioDecoder::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -439,7 +439,7 @@ struct seaqt_string QAudioDecoder_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAudioDecoder_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAudioDecoder_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAudioDecoder::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

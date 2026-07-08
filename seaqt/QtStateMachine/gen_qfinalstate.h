@@ -57,18 +57,18 @@ void* QFinalState_vdata(VirtualQFinalState* self);
 VirtualQFinalState* vdata_QFinalState(void* vdata);
 
 VirtualQFinalState* QFinalState_new(const QFinalState_VTable* vtbl, size_t vdata);
-VirtualQFinalState* QFinalState_new2(const QFinalState_VTable* vtbl, size_t vdata, QState* parent);
+VirtualQFinalState* QFinalState_new_parent(const QFinalState_VTable* vtbl, size_t vdata, QState* parent);
 
 void QFinalState_virtbase(QFinalState* src, QAbstractState** outptr_QAbstractState);
 QMetaObject* QFinalState_metaObject(const QFinalState* self);
 void* QFinalState_metacast(QFinalState* self, const char* param1);
 int QFinalState_metacall(QFinalState* self, int param1, int param2, void** param3);
-struct seaqt_string QFinalState_tr(const char* s);
+struct seaqt_string QFinalState_tr_s(const char* s);
 void QFinalState_onEntry(QFinalState* self, QEvent* event);
 void QFinalState_onExit(QFinalState* self, QEvent* event);
 bool QFinalState_event(QFinalState* self, QEvent* e);
-struct seaqt_string QFinalState_tr2(const char* s, const char* c);
-struct seaqt_string QFinalState_tr3(const char* s, const char* c, int n);
+struct seaqt_string QFinalState_tr_s_c(const char* s, const char* c);
+struct seaqt_string QFinalState_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QFinalState_virtualbase_metaObject(const VirtualQFinalState* self);
 void* QFinalState_virtualbase_metacast(VirtualQFinalState* self, const char* param1);

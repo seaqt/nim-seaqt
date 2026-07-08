@@ -82,7 +82,7 @@ type cQDesignerWidgetBoxInterfaceCategory*{.exportc: "QDesignerWidgetBoxInterfac
 proc fcQDesignerWidgetBoxInterface_metaObject(self: pointer): pointer {.importc: "QDesignerWidgetBoxInterface_metaObject".}
 proc fcQDesignerWidgetBoxInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerWidgetBoxInterface_metacast".}
 proc fcQDesignerWidgetBoxInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerWidgetBoxInterface_metacall".}
-proc fcQDesignerWidgetBoxInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface_tr".}
+proc fcQDesignerWidgetBoxInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface_tr_s".}
 proc fcQDesignerWidgetBoxInterface_categoryCount(self: pointer): cint {.importc: "QDesignerWidgetBoxInterface_categoryCount".}
 proc fcQDesignerWidgetBoxInterface_category(self: pointer, cat_idx: cint): pointer {.importc: "QDesignerWidgetBoxInterface_category".}
 proc fcQDesignerWidgetBoxInterface_addCategory(self: pointer, cat: pointer): void {.importc: "QDesignerWidgetBoxInterface_addCategory".}
@@ -97,8 +97,8 @@ proc fcQDesignerWidgetBoxInterface_setFileName(self: pointer, file_name: struct_
 proc fcQDesignerWidgetBoxInterface_fileName(self: pointer): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface_fileName".}
 proc fcQDesignerWidgetBoxInterface_load(self: pointer): bool {.importc: "QDesignerWidgetBoxInterface_load".}
 proc fcQDesignerWidgetBoxInterface_save(self: pointer): bool {.importc: "QDesignerWidgetBoxInterface_save".}
-proc fcQDesignerWidgetBoxInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface_tr2".}
-proc fcQDesignerWidgetBoxInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface_tr3".}
+proc fcQDesignerWidgetBoxInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface_tr_s_c".}
+proc fcQDesignerWidgetBoxInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface_tr_s_c_n".}
 proc fcQDesignerWidgetBoxInterface_vdata(self: pointer): ptr pointer {.importc: "QDesignerWidgetBoxInterface_vdata".}
 proc fvdata_cQDesignerWidgetBoxInterface(self: pointer): pointer {.importc: "vdata_QDesignerWidgetBoxInterface".}
 
@@ -227,10 +227,10 @@ proc fcQDesignerWidgetBoxInterface_protectedbase_senderSignalIndex(self: pointer
 proc fcQDesignerWidgetBoxInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerWidgetBoxInterface_protectedbase_receivers".}
 proc fcQDesignerWidgetBoxInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerWidgetBoxInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerWidgetBoxInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerWidgetBoxInterface {.importc: "QDesignerWidgetBoxInterface_new".}
-proc fcQDesignerWidgetBoxInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerWidgetBoxInterface {.importc: "QDesignerWidgetBoxInterface_new2".}
-proc fcQDesignerWidgetBoxInterface_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerWidgetBoxInterface {.importc: "QDesignerWidgetBoxInterface_new3".}
+proc fcQDesignerWidgetBoxInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerWidgetBoxInterface {.importc: "QDesignerWidgetBoxInterface_new_parent".}
+proc fcQDesignerWidgetBoxInterface_new3(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerWidgetBoxInterface {.importc: "QDesignerWidgetBoxInterface_new_parent_flags".}
 proc fcQDesignerWidgetBoxInterface_staticMetaObject(): pointer {.importc: "QDesignerWidgetBoxInterface_staticMetaObject".}
-proc fcQDesignerWidgetBoxInterfaceWidget_operatorAssign(self: pointer, w: pointer): void {.importc: "QDesignerWidgetBoxInterface__Widget_operatorAssign".}
+proc fcQDesignerWidgetBoxInterfaceWidget_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDesignerWidgetBoxInterface__Widget_operatorAssign".}
 proc fcQDesignerWidgetBoxInterfaceWidget_name(self: pointer): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface__Widget_name".}
 proc fcQDesignerWidgetBoxInterfaceWidget_setName(self: pointer, aname: struct_seaqt_string): void {.importc: "QDesignerWidgetBoxInterface__Widget_setName".}
 proc fcQDesignerWidgetBoxInterfaceWidget_domXml(self: pointer): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface__Widget_domXml".}
@@ -241,11 +241,11 @@ proc fcQDesignerWidgetBoxInterfaceWidget_typeX(self: pointer): cint {.importc: "
 proc fcQDesignerWidgetBoxInterfaceWidget_setType(self: pointer, atype: cint): void {.importc: "QDesignerWidgetBoxInterface__Widget_setType".}
 proc fcQDesignerWidgetBoxInterfaceWidget_isNull(self: pointer): bool {.importc: "QDesignerWidgetBoxInterface__Widget_isNull".}
 proc fcQDesignerWidgetBoxInterfaceWidget_new(): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new".}
-proc fcQDesignerWidgetBoxInterfaceWidget_new2(w: pointer): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new2".}
-proc fcQDesignerWidgetBoxInterfaceWidget_new3(aname: struct_seaqt_string): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new3".}
-proc fcQDesignerWidgetBoxInterfaceWidget_new4(aname: struct_seaqt_string, xml: struct_seaqt_string): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new4".}
-proc fcQDesignerWidgetBoxInterfaceWidget_new5(aname: struct_seaqt_string, xml: struct_seaqt_string, icon_name: struct_seaqt_string): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new5".}
-proc fcQDesignerWidgetBoxInterfaceWidget_new6(aname: struct_seaqt_string, xml: struct_seaqt_string, icon_name: struct_seaqt_string, atype: cint): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new6".}
+proc fcQDesignerWidgetBoxInterfaceWidget_new2(fromVal: pointer): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new_from".}
+proc fcQDesignerWidgetBoxInterfaceWidget_new3(aname: struct_seaqt_string): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new_aname".}
+proc fcQDesignerWidgetBoxInterfaceWidget_new4(aname: struct_seaqt_string, xml: struct_seaqt_string): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new_aname_xml".}
+proc fcQDesignerWidgetBoxInterfaceWidget_new5(aname: struct_seaqt_string, xml: struct_seaqt_string, icon_name: struct_seaqt_string): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new_aname_xml_icon_name".}
+proc fcQDesignerWidgetBoxInterfaceWidget_new6(aname: struct_seaqt_string, xml: struct_seaqt_string, icon_name: struct_seaqt_string, atype: cint): ptr cQDesignerWidgetBoxInterfaceWidget {.importc: "QDesignerWidgetBoxInterface__Widget_new_aname_xml_icon_name_atype".}
 proc fcQDesignerWidgetBoxInterfaceCategory_name(self: pointer): struct_seaqt_string {.importc: "QDesignerWidgetBoxInterface__Category_name".}
 proc fcQDesignerWidgetBoxInterfaceCategory_setName(self: pointer, aname: struct_seaqt_string): void {.importc: "QDesignerWidgetBoxInterface__Category_setName".}
 proc fcQDesignerWidgetBoxInterfaceCategory_widgetCount(self: pointer): cint {.importc: "QDesignerWidgetBoxInterface__Category_widgetCount".}
@@ -255,11 +255,11 @@ proc fcQDesignerWidgetBoxInterfaceCategory_addWidget(self: pointer, awidget: poi
 proc fcQDesignerWidgetBoxInterfaceCategory_typeX(self: pointer): cint {.importc: "QDesignerWidgetBoxInterface__Category_type".}
 proc fcQDesignerWidgetBoxInterfaceCategory_setType(self: pointer, atype: cint): void {.importc: "QDesignerWidgetBoxInterface__Category_setType".}
 proc fcQDesignerWidgetBoxInterfaceCategory_isNull(self: pointer): bool {.importc: "QDesignerWidgetBoxInterface__Category_isNull".}
-proc fcQDesignerWidgetBoxInterfaceCategory_operatorAssign(self: pointer, param1: pointer): void {.importc: "QDesignerWidgetBoxInterface__Category_operatorAssign".}
+proc fcQDesignerWidgetBoxInterfaceCategory_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QDesignerWidgetBoxInterface__Category_operatorAssign".}
 proc fcQDesignerWidgetBoxInterfaceCategory_new(): ptr cQDesignerWidgetBoxInterfaceCategory {.importc: "QDesignerWidgetBoxInterface__Category_new".}
-proc fcQDesignerWidgetBoxInterfaceCategory_new2(param1: pointer): ptr cQDesignerWidgetBoxInterfaceCategory {.importc: "QDesignerWidgetBoxInterface__Category_new2".}
-proc fcQDesignerWidgetBoxInterfaceCategory_new3(aname: struct_seaqt_string): ptr cQDesignerWidgetBoxInterfaceCategory {.importc: "QDesignerWidgetBoxInterface__Category_new3".}
-proc fcQDesignerWidgetBoxInterfaceCategory_new4(aname: struct_seaqt_string, atype: cint): ptr cQDesignerWidgetBoxInterfaceCategory {.importc: "QDesignerWidgetBoxInterface__Category_new4".}
+proc fcQDesignerWidgetBoxInterfaceCategory_new2(fromVal: pointer): ptr cQDesignerWidgetBoxInterfaceCategory {.importc: "QDesignerWidgetBoxInterface__Category_new_from".}
+proc fcQDesignerWidgetBoxInterfaceCategory_new3(aname: struct_seaqt_string): ptr cQDesignerWidgetBoxInterfaceCategory {.importc: "QDesignerWidgetBoxInterface__Category_new_aname".}
+proc fcQDesignerWidgetBoxInterfaceCategory_new4(aname: struct_seaqt_string, atype: cint): ptr cQDesignerWidgetBoxInterfaceCategory {.importc: "QDesignerWidgetBoxInterface__Category_new_aname_atype".}
 
 proc metaObject*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetBoxInterface_metaObject(self.h), owned: false)
@@ -271,7 +271,7 @@ proc metacall*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterface, pa
   fcQDesignerWidgetBoxInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterface, s: cstring): string =
-  let v_ms = fcQDesignerWidgetBoxInterface_tr(s)
+  let v_ms = fcQDesignerWidgetBoxInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -326,13 +326,13 @@ proc save*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterface): bool 
   fcQDesignerWidgetBoxInterface_save(self.h)
 
 proc tr*(_: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerWidgetBoxInterface_tr2(s, c)
+  let v_ms = fcQDesignerWidgetBoxInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerWidgetBoxInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerWidgetBoxInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -2100,8 +2100,8 @@ proc create*(T: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterface,
 
 proc staticMetaObject*(_: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetBoxInterface_staticMetaObject())
-proc operatorAssign*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget, w: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget): void =
-  fcQDesignerWidgetBoxInterfaceWidget_operatorAssign(self.h, w.h)
+proc operatorAssign*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget, fromVal: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget): void =
+  fcQDesignerWidgetBoxInterfaceWidget_operatorAssign(self.h, fromVal.h)
 
 proc name*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget): string =
   let v_ms = fcQDesignerWidgetBoxInterfaceWidget_name(self.h)
@@ -2143,8 +2143,8 @@ proc create*(T: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidg
   let tmp = gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget(h: fcQDesignerWidgetBoxInterfaceWidget_new(), owned: true)
   tmp
 proc create*(T: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget,
-    w: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget): gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget =
-  let tmp = gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget(h: fcQDesignerWidgetBoxInterfaceWidget_new2(w.h), owned: true)
+    fromVal: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget): gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget =
+  let tmp = gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget(h: fcQDesignerWidgetBoxInterfaceWidget_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget,
     aname: openArray[char]): gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceWidget =
@@ -2192,15 +2192,15 @@ proc setType*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCateg
 proc isNull*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory): bool =
   fcQDesignerWidgetBoxInterfaceCategory_isNull(self.h)
 
-proc operatorAssign*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory, param1: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory): void =
-  fcQDesignerWidgetBoxInterfaceCategory_operatorAssign(self.h, param1.h)
+proc operatorAssign*(self: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory, fromVal: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory): void =
+  fcQDesignerWidgetBoxInterfaceCategory_operatorAssign(self.h, fromVal.h)
 
 proc create*(T: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory): gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory =
   let tmp = gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory(h: fcQDesignerWidgetBoxInterfaceCategory_new(), owned: true)
   tmp
 proc create*(T: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory,
-    param1: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory): gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory =
-  let tmp = gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory(h: fcQDesignerWidgetBoxInterfaceCategory_new2(param1.h), owned: true)
+    fromVal: gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory): gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory =
+  let tmp = gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory(h: fcQDesignerWidgetBoxInterfaceCategory_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory,
     aname: openArray[char]): gen_abstractwidgetbox_types.QDesignerWidgetBoxInterfaceCategory =

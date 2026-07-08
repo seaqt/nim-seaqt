@@ -30,12 +30,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QWebEngineHistoryItem* QWebEngineHistoryItem_new(QWebEngineHistoryItem* other) {
-	return new (std::nothrow) QWebEngineHistoryItem(*other);
+QWebEngineHistoryItem* QWebEngineHistoryItem_new(QWebEngineHistoryItem* from) {
+	return new (std::nothrow) QWebEngineHistoryItem(*from);
 }
 
-void QWebEngineHistoryItem_operatorAssign(QWebEngineHistoryItem* self, QWebEngineHistoryItem* other) {
-	self->operator=(*other);
+void QWebEngineHistoryItem_operatorAssign(QWebEngineHistoryItem* self, QWebEngineHistoryItem* from) {
+	self->operator=(*from);
 }
 
 QUrl* QWebEngineHistoryItem_originalUrl(const QWebEngineHistoryItem* self) {
@@ -93,7 +93,7 @@ int QWebEngineHistoryModel_metacall(QWebEngineHistoryModel* self, int param1, in
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebEngineHistoryModel_tr(const char* s) {
+struct seaqt_string QWebEngineHistoryModel_tr_s(const char* s) {
 	QString _ret = QWebEngineHistoryModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -139,7 +139,7 @@ void QWebEngineHistoryModel_reset(QWebEngineHistoryModel* self) {
 	self->reset();
 }
 
-struct seaqt_string QWebEngineHistoryModel_tr2(const char* s, const char* c) {
+struct seaqt_string QWebEngineHistoryModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebEngineHistoryModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -150,7 +150,7 @@ struct seaqt_string QWebEngineHistoryModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebEngineHistoryModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebEngineHistoryModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebEngineHistoryModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -178,7 +178,7 @@ int QWebEngineHistory_metacall(QWebEngineHistory* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QWebEngineHistory_tr(const char* s) {
+struct seaqt_string QWebEngineHistory_tr_s(const char* s) {
 	QString _ret = QWebEngineHistory::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -288,7 +288,7 @@ QWebEngineHistoryModel* QWebEngineHistory_forwardItemsModel(const QWebEngineHist
 	return self->forwardItemsModel();
 }
 
-struct seaqt_string QWebEngineHistory_tr2(const char* s, const char* c) {
+struct seaqt_string QWebEngineHistory_tr_s_c(const char* s, const char* c) {
 	QString _ret = QWebEngineHistory::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -299,7 +299,7 @@ struct seaqt_string QWebEngineHistory_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QWebEngineHistory_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QWebEngineHistory_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QWebEngineHistory::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

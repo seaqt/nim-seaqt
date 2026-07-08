@@ -534,7 +534,7 @@ VirtualQGraphicsItem* QGraphicsItem_new(const QGraphicsItem_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQGraphicsItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsItem* QGraphicsItem_new2(const QGraphicsItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsItem* QGraphicsItem_new_parent(const QGraphicsItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsItem(vtbl, parent) : nullptr;
 }
@@ -604,7 +604,7 @@ QGraphicsObject* QGraphicsItem_toGraphicsObject(QGraphicsItem* self) {
 	return self->toGraphicsObject();
 }
 
-QGraphicsObject* QGraphicsItem_toGraphicsObject2(const QGraphicsItem* self) {
+QGraphicsObject* QGraphicsItem_toGraphicsObject_const(const QGraphicsItem* self) {
 	return (QGraphicsObject*) self->toGraphicsObject();
 }
 
@@ -621,7 +621,7 @@ int QGraphicsItem_flags(const QGraphicsItem* self) {
 	return static_cast<int>(_ret);
 }
 
-void QGraphicsItem_setFlag(QGraphicsItem* self, int flag) {
+void QGraphicsItem_setFlag_flag(QGraphicsItem* self, int flag) {
 	self->setFlag(static_cast<QGraphicsItem::GraphicsItemFlag>(flag));
 }
 
@@ -634,7 +634,7 @@ int QGraphicsItem_cacheMode(const QGraphicsItem* self) {
 	return static_cast<int>(_ret);
 }
 
-void QGraphicsItem_setCacheMode(QGraphicsItem* self, int mode) {
+void QGraphicsItem_setCacheMode_mode(QGraphicsItem* self, int mode) {
 	self->setCacheMode(static_cast<QGraphicsItem::CacheMode>(mode));
 }
 
@@ -868,11 +868,11 @@ QPointF* QGraphicsItem_scenePos(const QGraphicsItem* self) {
 	return new QPointF(self->scenePos());
 }
 
-void QGraphicsItem_setPos(QGraphicsItem* self, QPointF* pos) {
+void QGraphicsItem_setPos_pos(QGraphicsItem* self, QPointF* pos) {
 	self->setPos(*pos);
 }
 
-void QGraphicsItem_setPos2(QGraphicsItem* self, double x, double y) {
+void QGraphicsItem_setPos_x_y(QGraphicsItem* self, double x, double y) {
 	self->setPos(static_cast<qreal>(x), static_cast<qreal>(y));
 }
 
@@ -884,7 +884,7 @@ void QGraphicsItem_ensureVisible(QGraphicsItem* self) {
 	self->ensureVisible();
 }
 
-void QGraphicsItem_ensureVisible2(QGraphicsItem* self, double x, double y, double w, double h) {
+void QGraphicsItem_ensureVisible_x_y_w_h(QGraphicsItem* self, double x, double y, double w, double h) {
 	self->ensureVisible(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -900,11 +900,11 @@ QTransform* QGraphicsItem_deviceTransform(const QGraphicsItem* self, QTransform*
 	return new QTransform(self->deviceTransform(*viewportTransform));
 }
 
-QTransform* QGraphicsItem_itemTransform(const QGraphicsItem* self, QGraphicsItem* other) {
+QTransform* QGraphicsItem_itemTransform_other(const QGraphicsItem* self, QGraphicsItem* other) {
 	return new QTransform(self->itemTransform(other));
 }
 
-void QGraphicsItem_setTransform(QGraphicsItem* self, QTransform* matrix) {
+void QGraphicsItem_setTransform_matrix(QGraphicsItem* self, QTransform* matrix) {
 	self->setTransform(*matrix);
 }
 
@@ -957,11 +957,11 @@ QPointF* QGraphicsItem_transformOriginPoint(const QGraphicsItem* self) {
 	return new QPointF(self->transformOriginPoint());
 }
 
-void QGraphicsItem_setTransformOriginPoint(QGraphicsItem* self, QPointF* origin) {
+void QGraphicsItem_setTransformOriginPoint_origin(QGraphicsItem* self, QPointF* origin) {
 	self->setTransformOriginPoint(*origin);
 }
 
-void QGraphicsItem_setTransformOriginPoint2(QGraphicsItem* self, double ax, double ay) {
+void QGraphicsItem_setTransformOriginPoint_ax_ay(QGraphicsItem* self, double ax, double ay) {
 	self->setTransformOriginPoint(static_cast<qreal>(ax), static_cast<qreal>(ay));
 }
 
@@ -1035,7 +1035,7 @@ bool QGraphicsItem_isObscured(const QGraphicsItem* self) {
 	return self->isObscured();
 }
 
-bool QGraphicsItem_isObscured2(const QGraphicsItem* self, double x, double y, double w, double h) {
+bool QGraphicsItem_isObscured_x_y_w_h(const QGraphicsItem* self, double x, double y, double w, double h) {
 	return self->isObscured(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -1068,131 +1068,131 @@ void QGraphicsItem_update(QGraphicsItem* self) {
 	self->update();
 }
 
-void QGraphicsItem_update2(QGraphicsItem* self, double x, double y, double width, double height) {
+void QGraphicsItem_update_x_y_width_height(QGraphicsItem* self, double x, double y, double width, double height) {
 	self->update(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(width), static_cast<qreal>(height));
 }
 
-void QGraphicsItem_scroll(QGraphicsItem* self, double dx, double dy) {
+void QGraphicsItem_scroll_dx_dy(QGraphicsItem* self, double dx, double dy) {
 	self->scroll(static_cast<qreal>(dx), static_cast<qreal>(dy));
 }
 
-QPointF* QGraphicsItem_mapToItem(const QGraphicsItem* self, QGraphicsItem* item, QPointF* point) {
+QPointF* QGraphicsItem_mapToItem_item_point(const QGraphicsItem* self, QGraphicsItem* item, QPointF* point) {
 	return new QPointF(self->mapToItem(item, *point));
 }
 
-QPointF* QGraphicsItem_mapToParent(const QGraphicsItem* self, QPointF* point) {
+QPointF* QGraphicsItem_mapToParent_point(const QGraphicsItem* self, QPointF* point) {
 	return new QPointF(self->mapToParent(*point));
 }
 
-QPointF* QGraphicsItem_mapToScene(const QGraphicsItem* self, QPointF* point) {
+QPointF* QGraphicsItem_mapToScene_point(const QGraphicsItem* self, QPointF* point) {
 	return new QPointF(self->mapToScene(*point));
 }
 
-QRectF* QGraphicsItem_mapRectToItem(const QGraphicsItem* self, QGraphicsItem* item, QRectF* rect) {
+QRectF* QGraphicsItem_mapRectToItem_item_rect(const QGraphicsItem* self, QGraphicsItem* item, QRectF* rect) {
 	return new QRectF(self->mapRectToItem(item, *rect));
 }
 
-QRectF* QGraphicsItem_mapRectToParent(const QGraphicsItem* self, QRectF* rect) {
+QRectF* QGraphicsItem_mapRectToParent_rect(const QGraphicsItem* self, QRectF* rect) {
 	return new QRectF(self->mapRectToParent(*rect));
 }
 
-QRectF* QGraphicsItem_mapRectToScene(const QGraphicsItem* self, QRectF* rect) {
+QRectF* QGraphicsItem_mapRectToScene_rect(const QGraphicsItem* self, QRectF* rect) {
 	return new QRectF(self->mapRectToScene(*rect));
 }
 
-QPainterPath* QGraphicsItem_mapToItem4(const QGraphicsItem* self, QGraphicsItem* item, QPainterPath* path) {
+QPainterPath* QGraphicsItem_mapToItem_item_path(const QGraphicsItem* self, QGraphicsItem* item, QPainterPath* path) {
 	return new QPainterPath(self->mapToItem(item, *path));
 }
 
-QPainterPath* QGraphicsItem_mapToParentWithPath(const QGraphicsItem* self, QPainterPath* path) {
+QPainterPath* QGraphicsItem_mapToParent_path(const QGraphicsItem* self, QPainterPath* path) {
 	return new QPainterPath(self->mapToParent(*path));
 }
 
-QPainterPath* QGraphicsItem_mapToSceneWithPath(const QGraphicsItem* self, QPainterPath* path) {
+QPainterPath* QGraphicsItem_mapToScene_path(const QGraphicsItem* self, QPainterPath* path) {
 	return new QPainterPath(self->mapToScene(*path));
 }
 
-QPointF* QGraphicsItem_mapFromItem(const QGraphicsItem* self, QGraphicsItem* item, QPointF* point) {
+QPointF* QGraphicsItem_mapFromItem_item_point(const QGraphicsItem* self, QGraphicsItem* item, QPointF* point) {
 	return new QPointF(self->mapFromItem(item, *point));
 }
 
-QPointF* QGraphicsItem_mapFromParent(const QGraphicsItem* self, QPointF* point) {
+QPointF* QGraphicsItem_mapFromParent_point(const QGraphicsItem* self, QPointF* point) {
 	return new QPointF(self->mapFromParent(*point));
 }
 
-QPointF* QGraphicsItem_mapFromScene(const QGraphicsItem* self, QPointF* point) {
+QPointF* QGraphicsItem_mapFromScene_point(const QGraphicsItem* self, QPointF* point) {
 	return new QPointF(self->mapFromScene(*point));
 }
 
-QRectF* QGraphicsItem_mapRectFromItem(const QGraphicsItem* self, QGraphicsItem* item, QRectF* rect) {
+QRectF* QGraphicsItem_mapRectFromItem_item_rect(const QGraphicsItem* self, QGraphicsItem* item, QRectF* rect) {
 	return new QRectF(self->mapRectFromItem(item, *rect));
 }
 
-QRectF* QGraphicsItem_mapRectFromParent(const QGraphicsItem* self, QRectF* rect) {
+QRectF* QGraphicsItem_mapRectFromParent_rect(const QGraphicsItem* self, QRectF* rect) {
 	return new QRectF(self->mapRectFromParent(*rect));
 }
 
-QRectF* QGraphicsItem_mapRectFromScene(const QGraphicsItem* self, QRectF* rect) {
+QRectF* QGraphicsItem_mapRectFromScene_rect(const QGraphicsItem* self, QRectF* rect) {
 	return new QRectF(self->mapRectFromScene(*rect));
 }
 
-QPainterPath* QGraphicsItem_mapFromItem4(const QGraphicsItem* self, QGraphicsItem* item, QPainterPath* path) {
+QPainterPath* QGraphicsItem_mapFromItem_item_path(const QGraphicsItem* self, QGraphicsItem* item, QPainterPath* path) {
 	return new QPainterPath(self->mapFromItem(item, *path));
 }
 
-QPainterPath* QGraphicsItem_mapFromParentWithPath(const QGraphicsItem* self, QPainterPath* path) {
+QPainterPath* QGraphicsItem_mapFromParent_path(const QGraphicsItem* self, QPainterPath* path) {
 	return new QPainterPath(self->mapFromParent(*path));
 }
 
-QPainterPath* QGraphicsItem_mapFromSceneWithPath(const QGraphicsItem* self, QPainterPath* path) {
+QPainterPath* QGraphicsItem_mapFromScene_path(const QGraphicsItem* self, QPainterPath* path) {
 	return new QPainterPath(self->mapFromScene(*path));
 }
 
-QPointF* QGraphicsItem_mapToItem5(const QGraphicsItem* self, QGraphicsItem* item, double x, double y) {
+QPointF* QGraphicsItem_mapToItem_item_x_y(const QGraphicsItem* self, QGraphicsItem* item, double x, double y) {
 	return new QPointF(self->mapToItem(item, static_cast<qreal>(x), static_cast<qreal>(y)));
 }
 
-QPointF* QGraphicsItem_mapToParent2(const QGraphicsItem* self, double x, double y) {
+QPointF* QGraphicsItem_mapToParent_x_y(const QGraphicsItem* self, double x, double y) {
 	return new QPointF(self->mapToParent(static_cast<qreal>(x), static_cast<qreal>(y)));
 }
 
-QPointF* QGraphicsItem_mapToScene2(const QGraphicsItem* self, double x, double y) {
+QPointF* QGraphicsItem_mapToScene_x_y(const QGraphicsItem* self, double x, double y) {
 	return new QPointF(self->mapToScene(static_cast<qreal>(x), static_cast<qreal>(y)));
 }
 
-QRectF* QGraphicsItem_mapRectToItem2(const QGraphicsItem* self, QGraphicsItem* item, double x, double y, double w, double h) {
+QRectF* QGraphicsItem_mapRectToItem_item_x_y_w_h(const QGraphicsItem* self, QGraphicsItem* item, double x, double y, double w, double h) {
 	return new QRectF(self->mapRectToItem(item, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h)));
 }
 
-QRectF* QGraphicsItem_mapRectToParent2(const QGraphicsItem* self, double x, double y, double w, double h) {
+QRectF* QGraphicsItem_mapRectToParent_x_y_w_h(const QGraphicsItem* self, double x, double y, double w, double h) {
 	return new QRectF(self->mapRectToParent(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h)));
 }
 
-QRectF* QGraphicsItem_mapRectToScene2(const QGraphicsItem* self, double x, double y, double w, double h) {
+QRectF* QGraphicsItem_mapRectToScene_x_y_w_h(const QGraphicsItem* self, double x, double y, double w, double h) {
 	return new QRectF(self->mapRectToScene(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h)));
 }
 
-QPointF* QGraphicsItem_mapFromItem5(const QGraphicsItem* self, QGraphicsItem* item, double x, double y) {
+QPointF* QGraphicsItem_mapFromItem_item_x_y(const QGraphicsItem* self, QGraphicsItem* item, double x, double y) {
 	return new QPointF(self->mapFromItem(item, static_cast<qreal>(x), static_cast<qreal>(y)));
 }
 
-QPointF* QGraphicsItem_mapFromParent2(const QGraphicsItem* self, double x, double y) {
+QPointF* QGraphicsItem_mapFromParent_x_y(const QGraphicsItem* self, double x, double y) {
 	return new QPointF(self->mapFromParent(static_cast<qreal>(x), static_cast<qreal>(y)));
 }
 
-QPointF* QGraphicsItem_mapFromScene2(const QGraphicsItem* self, double x, double y) {
+QPointF* QGraphicsItem_mapFromScene_x_y(const QGraphicsItem* self, double x, double y) {
 	return new QPointF(self->mapFromScene(static_cast<qreal>(x), static_cast<qreal>(y)));
 }
 
-QRectF* QGraphicsItem_mapRectFromItem2(const QGraphicsItem* self, QGraphicsItem* item, double x, double y, double w, double h) {
+QRectF* QGraphicsItem_mapRectFromItem_item_x_y_w_h(const QGraphicsItem* self, QGraphicsItem* item, double x, double y, double w, double h) {
 	return new QRectF(self->mapRectFromItem(item, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h)));
 }
 
-QRectF* QGraphicsItem_mapRectFromParent2(const QGraphicsItem* self, double x, double y, double w, double h) {
+QRectF* QGraphicsItem_mapRectFromParent_x_y_w_h(const QGraphicsItem* self, double x, double y, double w, double h) {
 	return new QRectF(self->mapRectFromParent(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h)));
 }
 
-QRectF* QGraphicsItem_mapRectFromScene2(const QGraphicsItem* self, double x, double y, double w, double h) {
+QRectF* QGraphicsItem_mapRectFromScene_x_y_w_h(const QGraphicsItem* self, double x, double y, double w, double h) {
 	return new QRectF(self->mapRectFromScene(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h)));
 }
 
@@ -1237,47 +1237,47 @@ void QGraphicsItem_removeSceneEventFilter(QGraphicsItem* self, QGraphicsItem* fi
 	self->removeSceneEventFilter(filterItem);
 }
 
-void QGraphicsItem_setFlag2(QGraphicsItem* self, int flag, bool enabled) {
+void QGraphicsItem_setFlag_flag_enabled(QGraphicsItem* self, int flag, bool enabled) {
 	self->setFlag(static_cast<QGraphicsItem::GraphicsItemFlag>(flag), enabled);
 }
 
-void QGraphicsItem_setCacheMode2(QGraphicsItem* self, int mode, QSize* cacheSize) {
+void QGraphicsItem_setCacheMode_mode_cacheSize(QGraphicsItem* self, int mode, QSize* cacheSize) {
 	self->setCacheMode(static_cast<QGraphicsItem::CacheMode>(mode), *cacheSize);
 }
 
-void QGraphicsItem_setFocusWithFocusReason(QGraphicsItem* self, int focusReason) {
+void QGraphicsItem_setFocus_focusReason(QGraphicsItem* self, int focusReason) {
 	self->setFocus(static_cast<Qt::FocusReason>(focusReason));
 }
 
-void QGraphicsItem_ensureVisibleWithRect(QGraphicsItem* self, QRectF* rect) {
+void QGraphicsItem_ensureVisible_rect(QGraphicsItem* self, QRectF* rect) {
 	self->ensureVisible(*rect);
 }
 
-void QGraphicsItem_ensureVisible3(QGraphicsItem* self, QRectF* rect, int xmargin) {
+void QGraphicsItem_ensureVisible_rect_xmargin(QGraphicsItem* self, QRectF* rect, int xmargin) {
 	self->ensureVisible(*rect, static_cast<int>(xmargin));
 }
 
-void QGraphicsItem_ensureVisible4(QGraphicsItem* self, QRectF* rect, int xmargin, int ymargin) {
+void QGraphicsItem_ensureVisible_rect_xmargin_ymargin(QGraphicsItem* self, QRectF* rect, int xmargin, int ymargin) {
 	self->ensureVisible(*rect, static_cast<int>(xmargin), static_cast<int>(ymargin));
 }
 
-void QGraphicsItem_ensureVisible5(QGraphicsItem* self, double x, double y, double w, double h, int xmargin) {
+void QGraphicsItem_ensureVisible_x_y_w_h_xmargin(QGraphicsItem* self, double x, double y, double w, double h, int xmargin) {
 	self->ensureVisible(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<int>(xmargin));
 }
 
-void QGraphicsItem_ensureVisible6(QGraphicsItem* self, double x, double y, double w, double h, int xmargin, int ymargin) {
+void QGraphicsItem_ensureVisible_x_y_w_h_xmargin_ymargin(QGraphicsItem* self, double x, double y, double w, double h, int xmargin, int ymargin) {
 	self->ensureVisible(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<int>(xmargin), static_cast<int>(ymargin));
 }
 
-QTransform* QGraphicsItem_itemTransform2(const QGraphicsItem* self, QGraphicsItem* other, bool* ok) {
+QTransform* QGraphicsItem_itemTransform_other_ok(const QGraphicsItem* self, QGraphicsItem* other, bool* ok) {
 	return new QTransform(self->itemTransform(other, ok));
 }
 
-void QGraphicsItem_setTransform2(QGraphicsItem* self, QTransform* matrix, bool combine) {
+void QGraphicsItem_setTransform_matrix_combine(QGraphicsItem* self, QTransform* matrix, bool combine) {
 	self->setTransform(*matrix, combine);
 }
 
-struct seaqt_array /* of QGraphicsItem* */  QGraphicsItem_collidingItemsWithMode(const QGraphicsItem* self, int mode) {
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsItem_collidingItems_mode(const QGraphicsItem* self, int mode) {
 	QList<QGraphicsItem *> _ret = self->collidingItems(static_cast<Qt::ItemSelectionMode>(mode));
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
@@ -1290,15 +1290,15 @@ struct seaqt_array /* of QGraphicsItem* */  QGraphicsItem_collidingItemsWithMode
 	return _out;
 }
 
-bool QGraphicsItem_isObscuredWithRect(const QGraphicsItem* self, QRectF* rect) {
+bool QGraphicsItem_isObscured_rect(const QGraphicsItem* self, QRectF* rect) {
 	return self->isObscured(*rect);
 }
 
-void QGraphicsItem_updateWithRect(QGraphicsItem* self, QRectF* rect) {
+void QGraphicsItem_update_rect(QGraphicsItem* self, QRectF* rect) {
 	self->update(*rect);
 }
 
-void QGraphicsItem_scroll2(QGraphicsItem* self, double dx, double dy, QRectF* rect) {
+void QGraphicsItem_scroll_dx_dy_rect(QGraphicsItem* self, double dx, double dy, QRectF* rect) {
 	self->scroll(static_cast<qreal>(dx), static_cast<qreal>(dy), *rect);
 }
 
@@ -2091,7 +2091,7 @@ VirtualQGraphicsObject* QGraphicsObject_new(const QGraphicsObject_VTable* vtbl, 
 	return _mem_ ? new (_mem_)VirtualQGraphicsObject(vtbl) : nullptr;
 }
 
-VirtualQGraphicsObject* QGraphicsObject_new2(const QGraphicsObject_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsObject* QGraphicsObject_new_parent(const QGraphicsObject_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsObject>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsObject(vtbl, parent) : nullptr;
 }
@@ -2113,7 +2113,7 @@ int QGraphicsObject_metacall(QGraphicsObject* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsObject_tr(const char* s) {
+struct seaqt_string QGraphicsObject_tr_s(const char* s) {
 	QString _ret = QGraphicsObject::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2124,7 +2124,7 @@ struct seaqt_string QGraphicsObject_tr(const char* s) {
 	return _ms;
 }
 
-void QGraphicsObject_grabGesture(QGraphicsObject* self, int type) {
+void QGraphicsObject_grabGesture_type(QGraphicsObject* self, int type) {
 	self->grabGesture(static_cast<Qt::GestureType>(type));
 }
 
@@ -2312,7 +2312,7 @@ void QGraphicsObject_connect_heightChanged(QGraphicsObject* self, intptr_t slot,
 	QGraphicsObject::connect(self, static_cast<void (QGraphicsObject::*)()>(&QGraphicsObject::heightChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsObject_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsObject_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsObject::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2323,7 +2323,7 @@ struct seaqt_string QGraphicsObject_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsObject_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsObject_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsObject::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -2334,7 +2334,7 @@ struct seaqt_string QGraphicsObject_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QGraphicsObject_grabGesture2(QGraphicsObject* self, int type, int flags) {
+void QGraphicsObject_grabGesture_type_flags(QGraphicsObject* self, int type, int flags) {
 	self->grabGesture(static_cast<Qt::GestureType>(type), static_cast<Qt::GestureFlags>(flags));
 }
 
@@ -3063,7 +3063,7 @@ VirtualQAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new(const QAbstrac
 	return _mem_ ? new (_mem_)VirtualQAbstractGraphicsShapeItem(vtbl) : nullptr;
 }
 
-VirtualQAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new2(const QAbstractGraphicsShapeItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new_parent(const QAbstractGraphicsShapeItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractGraphicsShapeItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractGraphicsShapeItem(vtbl, parent) : nullptr;
 }
@@ -3761,17 +3761,17 @@ VirtualQGraphicsPathItem* QGraphicsPathItem_new(const QGraphicsPathItem_VTable* 
 	return _mem_ ? new (_mem_)VirtualQGraphicsPathItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsPathItem* QGraphicsPathItem_new2(const QGraphicsPathItem_VTable* vtbl, size_t vdata, QPainterPath* path) {
+VirtualQGraphicsPathItem* QGraphicsPathItem_new_path(const QGraphicsPathItem_VTable* vtbl, size_t vdata, QPainterPath* path) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsPathItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsPathItem(vtbl, *path) : nullptr;
 }
 
-VirtualQGraphicsPathItem* QGraphicsPathItem_new3(const QGraphicsPathItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsPathItem* QGraphicsPathItem_new_parent(const QGraphicsPathItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsPathItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsPathItem(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsPathItem* QGraphicsPathItem_new4(const QGraphicsPathItem_VTable* vtbl, size_t vdata, QPainterPath* path, QGraphicsItem* parent) {
+VirtualQGraphicsPathItem* QGraphicsPathItem_new_path_parent(const QGraphicsPathItem_VTable* vtbl, size_t vdata, QPainterPath* path, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsPathItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsPathItem(vtbl, *path, parent) : nullptr;
 }
@@ -4493,27 +4493,27 @@ VirtualQGraphicsRectItem* QGraphicsRectItem_new(const QGraphicsRectItem_VTable* 
 	return _mem_ ? new (_mem_)VirtualQGraphicsRectItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsRectItem* QGraphicsRectItem_new2(const QGraphicsRectItem_VTable* vtbl, size_t vdata, QRectF* rect) {
+VirtualQGraphicsRectItem* QGraphicsRectItem_new_rect(const QGraphicsRectItem_VTable* vtbl, size_t vdata, QRectF* rect) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsRectItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsRectItem(vtbl, *rect) : nullptr;
 }
 
-VirtualQGraphicsRectItem* QGraphicsRectItem_new3(const QGraphicsRectItem_VTable* vtbl, size_t vdata, double x, double y, double w, double h) {
+VirtualQGraphicsRectItem* QGraphicsRectItem_new_x_y_w_h(const QGraphicsRectItem_VTable* vtbl, size_t vdata, double x, double y, double w, double h) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsRectItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsRectItem(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h)) : nullptr;
 }
 
-VirtualQGraphicsRectItem* QGraphicsRectItem_new4(const QGraphicsRectItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsRectItem* QGraphicsRectItem_new_parent(const QGraphicsRectItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsRectItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsRectItem(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsRectItem* QGraphicsRectItem_new5(const QGraphicsRectItem_VTable* vtbl, size_t vdata, QRectF* rect, QGraphicsItem* parent) {
+VirtualQGraphicsRectItem* QGraphicsRectItem_new_rect_parent(const QGraphicsRectItem_VTable* vtbl, size_t vdata, QRectF* rect, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsRectItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsRectItem(vtbl, *rect, parent) : nullptr;
 }
 
-VirtualQGraphicsRectItem* QGraphicsRectItem_new6(const QGraphicsRectItem_VTable* vtbl, size_t vdata, double x, double y, double w, double h, QGraphicsItem* parent) {
+VirtualQGraphicsRectItem* QGraphicsRectItem_new_x_y_w_h_parent(const QGraphicsRectItem_VTable* vtbl, size_t vdata, double x, double y, double w, double h, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsRectItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsRectItem(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), parent) : nullptr;
 }
@@ -4526,11 +4526,11 @@ QRectF* QGraphicsRectItem_rect(const QGraphicsRectItem* self) {
 	return new QRectF(self->rect());
 }
 
-void QGraphicsRectItem_setRect(QGraphicsRectItem* self, QRectF* rect) {
+void QGraphicsRectItem_setRect_rect(QGraphicsRectItem* self, QRectF* rect) {
 	self->setRect(*rect);
 }
 
-void QGraphicsRectItem_setRect2(QGraphicsRectItem* self, double x, double y, double w, double h) {
+void QGraphicsRectItem_setRect_x_y_w_h(QGraphicsRectItem* self, double x, double y, double w, double h) {
 	self->setRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -5239,27 +5239,27 @@ VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new(const QGraphicsEllipseItem
 	return _mem_ ? new (_mem_)VirtualQGraphicsEllipseItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new2(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, QRectF* rect) {
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new_rect(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, QRectF* rect) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsEllipseItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsEllipseItem(vtbl, *rect) : nullptr;
 }
 
-VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new3(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, double x, double y, double w, double h) {
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new_x_y_w_h(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, double x, double y, double w, double h) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsEllipseItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsEllipseItem(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h)) : nullptr;
 }
 
-VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new4(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new_parent(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsEllipseItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsEllipseItem(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new5(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, QRectF* rect, QGraphicsItem* parent) {
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new_rect_parent(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, QRectF* rect, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsEllipseItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsEllipseItem(vtbl, *rect, parent) : nullptr;
 }
 
-VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new6(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, double x, double y, double w, double h, QGraphicsItem* parent) {
+VirtualQGraphicsEllipseItem* QGraphicsEllipseItem_new_x_y_w_h_parent(const QGraphicsEllipseItem_VTable* vtbl, size_t vdata, double x, double y, double w, double h, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsEllipseItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsEllipseItem(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), parent) : nullptr;
 }
@@ -5272,11 +5272,11 @@ QRectF* QGraphicsEllipseItem_rect(const QGraphicsEllipseItem* self) {
 	return new QRectF(self->rect());
 }
 
-void QGraphicsEllipseItem_setRect(QGraphicsEllipseItem* self, QRectF* rect) {
+void QGraphicsEllipseItem_setRect_rect(QGraphicsEllipseItem* self, QRectF* rect) {
 	self->setRect(*rect);
 }
 
-void QGraphicsEllipseItem_setRect2(QGraphicsEllipseItem* self, double x, double y, double w, double h) {
+void QGraphicsEllipseItem_setRect_x_y_w_h(QGraphicsEllipseItem* self, double x, double y, double w, double h) {
 	self->setRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
 }
 
@@ -5997,7 +5997,7 @@ VirtualQGraphicsPolygonItem* QGraphicsPolygonItem_new(const QGraphicsPolygonItem
 	return _mem_ ? new (_mem_)VirtualQGraphicsPolygonItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsPolygonItem* QGraphicsPolygonItem_new2(const QGraphicsPolygonItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsPolygonItem* QGraphicsPolygonItem_new_parent(const QGraphicsPolygonItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsPolygonItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsPolygonItem(vtbl, parent) : nullptr;
 }
@@ -6720,27 +6720,27 @@ VirtualQGraphicsLineItem* QGraphicsLineItem_new(const QGraphicsLineItem_VTable* 
 	return _mem_ ? new (_mem_)VirtualQGraphicsLineItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsLineItem* QGraphicsLineItem_new2(const QGraphicsLineItem_VTable* vtbl, size_t vdata, QLineF* line) {
+VirtualQGraphicsLineItem* QGraphicsLineItem_new_line(const QGraphicsLineItem_VTable* vtbl, size_t vdata, QLineF* line) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLineItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLineItem(vtbl, *line) : nullptr;
 }
 
-VirtualQGraphicsLineItem* QGraphicsLineItem_new3(const QGraphicsLineItem_VTable* vtbl, size_t vdata, double x1, double y1, double x2, double y2) {
+VirtualQGraphicsLineItem* QGraphicsLineItem_new_x1_y1_x2_y2(const QGraphicsLineItem_VTable* vtbl, size_t vdata, double x1, double y1, double x2, double y2) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLineItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLineItem(vtbl, static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2)) : nullptr;
 }
 
-VirtualQGraphicsLineItem* QGraphicsLineItem_new4(const QGraphicsLineItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsLineItem* QGraphicsLineItem_new_parent(const QGraphicsLineItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLineItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLineItem(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsLineItem* QGraphicsLineItem_new5(const QGraphicsLineItem_VTable* vtbl, size_t vdata, QLineF* line, QGraphicsItem* parent) {
+VirtualQGraphicsLineItem* QGraphicsLineItem_new_line_parent(const QGraphicsLineItem_VTable* vtbl, size_t vdata, QLineF* line, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLineItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLineItem(vtbl, *line, parent) : nullptr;
 }
 
-VirtualQGraphicsLineItem* QGraphicsLineItem_new6(const QGraphicsLineItem_VTable* vtbl, size_t vdata, double x1, double y1, double x2, double y2, QGraphicsItem* parent) {
+VirtualQGraphicsLineItem* QGraphicsLineItem_new_x1_y1_x2_y2_parent(const QGraphicsLineItem_VTable* vtbl, size_t vdata, double x1, double y1, double x2, double y2, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsLineItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsLineItem(vtbl, static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2), parent) : nullptr;
 }
@@ -6761,11 +6761,11 @@ QLineF* QGraphicsLineItem_line(const QGraphicsLineItem* self) {
 	return new QLineF(self->line());
 }
 
-void QGraphicsLineItem_setLine(QGraphicsLineItem* self, QLineF* line) {
+void QGraphicsLineItem_setLine_line(QGraphicsLineItem* self, QLineF* line) {
 	self->setLine(*line);
 }
 
-void QGraphicsLineItem_setLine2(QGraphicsLineItem* self, double x1, double y1, double x2, double y2) {
+void QGraphicsLineItem_setLine_x1_y1_x2_y2(QGraphicsLineItem* self, double x1, double y1, double x2, double y2) {
 	self->setLine(static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2));
 }
 
@@ -7472,17 +7472,17 @@ VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new(const QGraphicsPixmapItem_VT
 	return _mem_ ? new (_mem_)VirtualQGraphicsPixmapItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new2(const QGraphicsPixmapItem_VTable* vtbl, size_t vdata, QPixmap* pixmap) {
+VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new_pixmap(const QGraphicsPixmapItem_VTable* vtbl, size_t vdata, QPixmap* pixmap) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsPixmapItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsPixmapItem(vtbl, *pixmap) : nullptr;
 }
 
-VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new3(const QGraphicsPixmapItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new_parent(const QGraphicsPixmapItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsPixmapItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsPixmapItem(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new4(const QGraphicsPixmapItem_VTable* vtbl, size_t vdata, QPixmap* pixmap, QGraphicsItem* parent) {
+VirtualQGraphicsPixmapItem* QGraphicsPixmapItem_new_pixmap_parent(const QGraphicsPixmapItem_VTable* vtbl, size_t vdata, QPixmap* pixmap, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsPixmapItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsPixmapItem(vtbl, *pixmap, parent) : nullptr;
 }
@@ -7512,11 +7512,11 @@ QPointF* QGraphicsPixmapItem_offset(const QGraphicsPixmapItem* self) {
 	return new QPointF(self->offset());
 }
 
-void QGraphicsPixmapItem_setOffset(QGraphicsPixmapItem* self, QPointF* offset) {
+void QGraphicsPixmapItem_setOffset_offset(QGraphicsPixmapItem* self, QPointF* offset) {
 	self->setOffset(*offset);
 }
 
-void QGraphicsPixmapItem_setOffset2(QGraphicsPixmapItem* self, double x, double y) {
+void QGraphicsPixmapItem_setOffset_x_y(QGraphicsPixmapItem* self, double x, double y) {
 	self->setOffset(static_cast<qreal>(x), static_cast<qreal>(y));
 }
 
@@ -8363,18 +8363,18 @@ VirtualQGraphicsTextItem* QGraphicsTextItem_new(const QGraphicsTextItem_VTable* 
 	return _mem_ ? new (_mem_)VirtualQGraphicsTextItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsTextItem* QGraphicsTextItem_new2(const QGraphicsTextItem_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQGraphicsTextItem* QGraphicsTextItem_new_text(const QGraphicsTextItem_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsTextItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsTextItem(vtbl, text_QString) : nullptr;
 }
 
-VirtualQGraphicsTextItem* QGraphicsTextItem_new3(const QGraphicsTextItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsTextItem* QGraphicsTextItem_new_parent(const QGraphicsTextItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsTextItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsTextItem(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsTextItem* QGraphicsTextItem_new4(const QGraphicsTextItem_VTable* vtbl, size_t vdata, struct seaqt_string text, QGraphicsItem* parent) {
+VirtualQGraphicsTextItem* QGraphicsTextItem_new_text_parent(const QGraphicsTextItem_VTable* vtbl, size_t vdata, struct seaqt_string text, QGraphicsItem* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsTextItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsTextItem(vtbl, text_QString, parent) : nullptr;
@@ -8396,7 +8396,7 @@ int QGraphicsTextItem_metacall(QGraphicsTextItem* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QGraphicsTextItem_tr(const char* s) {
+struct seaqt_string QGraphicsTextItem_tr_s(const char* s) {
 	QString _ret = QGraphicsTextItem::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -8585,7 +8585,7 @@ void QGraphicsTextItem_connect_linkHovered(QGraphicsTextItem* self, intptr_t slo
 	QGraphicsTextItem::connect(self, static_cast<void (QGraphicsTextItem::*)(const QString&)>(&QGraphicsTextItem::linkHovered), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QGraphicsTextItem_tr2(const char* s, const char* c) {
+struct seaqt_string QGraphicsTextItem_tr_s_c(const char* s, const char* c) {
 	QString _ret = QGraphicsTextItem::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -8596,7 +8596,7 @@ struct seaqt_string QGraphicsTextItem_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QGraphicsTextItem_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QGraphicsTextItem_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QGraphicsTextItem::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -9349,18 +9349,18 @@ VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new(const QGraphicsSimpl
 	return _mem_ ? new (_mem_)VirtualQGraphicsSimpleTextItem(vtbl) : nullptr;
 }
 
-VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new2(const QGraphicsSimpleTextItem_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new_text(const QGraphicsSimpleTextItem_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSimpleTextItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSimpleTextItem(vtbl, text_QString) : nullptr;
 }
 
-VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new3(const QGraphicsSimpleTextItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new_parent(const QGraphicsSimpleTextItem_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSimpleTextItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSimpleTextItem(vtbl, parent) : nullptr;
 }
 
-VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new4(const QGraphicsSimpleTextItem_VTable* vtbl, size_t vdata, struct seaqt_string text, QGraphicsItem* parent) {
+VirtualQGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new_text_parent(const QGraphicsSimpleTextItem_VTable* vtbl, size_t vdata, struct seaqt_string text, QGraphicsItem* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsSimpleTextItem>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsSimpleTextItem(vtbl, text_QString, parent) : nullptr;
@@ -10095,7 +10095,7 @@ VirtualQGraphicsItemGroup* QGraphicsItemGroup_new(const QGraphicsItemGroup_VTabl
 	return _mem_ ? new (_mem_)VirtualQGraphicsItemGroup(vtbl) : nullptr;
 }
 
-VirtualQGraphicsItemGroup* QGraphicsItemGroup_new2(const QGraphicsItemGroup_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
+VirtualQGraphicsItemGroup* QGraphicsItemGroup_new_parent(const QGraphicsItemGroup_VTable* vtbl, size_t vdata, QGraphicsItem* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsItemGroup>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQGraphicsItemGroup(vtbl, parent) : nullptr;
 }

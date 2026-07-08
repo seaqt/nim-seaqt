@@ -58,18 +58,18 @@ void* QExtensionManager_vdata(VirtualQExtensionManager* self);
 VirtualQExtensionManager* vdata_QExtensionManager(void* vdata);
 
 VirtualQExtensionManager* QExtensionManager_new(const QExtensionManager_VTable* vtbl, size_t vdata);
-VirtualQExtensionManager* QExtensionManager_new2(const QExtensionManager_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQExtensionManager* QExtensionManager_new_parent(const QExtensionManager_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QExtensionManager_virtbase(QExtensionManager* src, QObject** outptr_QObject, QAbstractExtensionManager** outptr_QAbstractExtensionManager);
 QMetaObject* QExtensionManager_metaObject(const QExtensionManager* self);
 void* QExtensionManager_metacast(QExtensionManager* self, const char* param1);
 int QExtensionManager_metacall(QExtensionManager* self, int param1, int param2, void** param3);
-struct seaqt_string QExtensionManager_tr(const char* s);
+struct seaqt_string QExtensionManager_tr_s(const char* s);
 void QExtensionManager_registerExtensions(QExtensionManager* self, QAbstractExtensionFactory* factory, struct seaqt_string iid);
 void QExtensionManager_unregisterExtensions(QExtensionManager* self, QAbstractExtensionFactory* factory, struct seaqt_string iid);
 QObject* QExtensionManager_extension(const QExtensionManager* self, QObject* object, struct seaqt_string iid);
-struct seaqt_string QExtensionManager_tr2(const char* s, const char* c);
-struct seaqt_string QExtensionManager_tr3(const char* s, const char* c, int n);
+struct seaqt_string QExtensionManager_tr_s_c(const char* s, const char* c);
+struct seaqt_string QExtensionManager_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QExtensionManager_virtualbase_metaObject(const VirtualQExtensionManager* self);
 void* QExtensionManager_virtualbase_metacast(VirtualQExtensionManager* self, const char* param1);

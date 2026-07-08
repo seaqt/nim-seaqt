@@ -61,10 +61,10 @@ proc fcQGeoShape_isEmpty(self: pointer): bool {.importc: "QGeoShape_isEmpty".}
 proc fcQGeoShape_contains(self: pointer, coordinate: pointer): bool {.importc: "QGeoShape_contains".}
 proc fcQGeoShape_boundingGeoRectangle(self: pointer): pointer {.importc: "QGeoShape_boundingGeoRectangle".}
 proc fcQGeoShape_center(self: pointer): pointer {.importc: "QGeoShape_center".}
-proc fcQGeoShape_operatorAssign(self: pointer, other: pointer): void {.importc: "QGeoShape_operatorAssign".}
+proc fcQGeoShape_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QGeoShape_operatorAssign".}
 proc fcQGeoShape_toString(self: pointer): struct_seaqt_string {.importc: "QGeoShape_toString".}
 proc fcQGeoShape_new(): ptr cQGeoShape {.importc: "QGeoShape_new".}
-proc fcQGeoShape_new2(other: pointer): ptr cQGeoShape {.importc: "QGeoShape_new2".}
+proc fcQGeoShape_new2(fromVal: pointer): ptr cQGeoShape {.importc: "QGeoShape_new_from".}
 proc fcQGeoShape_staticMetaObject(): pointer {.importc: "QGeoShape_staticMetaObject".}
 
 proc typeX*(self: gen_qgeoshape_types.QGeoShape): cint =
@@ -85,8 +85,8 @@ proc boundingGeoRectangle*(self: gen_qgeoshape_types.QGeoShape): gen_qgeorectang
 proc center*(self: gen_qgeoshape_types.QGeoShape): gen_qgeocoordinate_types.QGeoCoordinate =
   gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoShape_center(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qgeoshape_types.QGeoShape, other: gen_qgeoshape_types.QGeoShape): void =
-  fcQGeoShape_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qgeoshape_types.QGeoShape, fromVal: gen_qgeoshape_types.QGeoShape): void =
+  fcQGeoShape_operatorAssign(self.h, fromVal.h)
 
 proc toString*(self: gen_qgeoshape_types.QGeoShape): string =
   let v_ms = fcQGeoShape_toString(self.h)
@@ -98,8 +98,8 @@ proc create*(T: type gen_qgeoshape_types.QGeoShape): gen_qgeoshape_types.QGeoSha
   let tmp = gen_qgeoshape_types.QGeoShape(h: fcQGeoShape_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeoshape_types.QGeoShape,
-    other: gen_qgeoshape_types.QGeoShape): gen_qgeoshape_types.QGeoShape =
-  let tmp = gen_qgeoshape_types.QGeoShape(h: fcQGeoShape_new2(other.h), owned: true)
+    fromVal: gen_qgeoshape_types.QGeoShape): gen_qgeoshape_types.QGeoShape =
+  let tmp = gen_qgeoshape_types.QGeoShape(h: fcQGeoShape_new2(fromVal.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qgeoshape_types.QGeoShape): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoShape_staticMetaObject())

@@ -47,7 +47,7 @@ export gen_qsqlerror_types
 
 type cQSqlError*{.exportc: "QSqlError", incompleteStruct.} = object
 
-proc fcQSqlError_operatorAssign(self: pointer, other: pointer): void {.importc: "QSqlError_operatorAssign".}
+proc fcQSqlError_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QSqlError_operatorAssign".}
 proc fcQSqlError_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSqlError_operatorEqual".}
 proc fcQSqlError_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QSqlError_operatorNotEqual".}
 proc fcQSqlError_swap(self: pointer, other: pointer): void {.importc: "QSqlError_swap".}
@@ -58,14 +58,14 @@ proc fcQSqlError_nativeErrorCode(self: pointer): struct_seaqt_string {.importc: 
 proc fcQSqlError_text(self: pointer): struct_seaqt_string {.importc: "QSqlError_text".}
 proc fcQSqlError_isValid(self: pointer): bool {.importc: "QSqlError_isValid".}
 proc fcQSqlError_new(): ptr cQSqlError {.importc: "QSqlError_new".}
-proc fcQSqlError_new2(other: pointer): ptr cQSqlError {.importc: "QSqlError_new2".}
-proc fcQSqlError_new3(driverText: struct_seaqt_string): ptr cQSqlError {.importc: "QSqlError_new3".}
-proc fcQSqlError_new4(driverText: struct_seaqt_string, databaseText: struct_seaqt_string): ptr cQSqlError {.importc: "QSqlError_new4".}
-proc fcQSqlError_new5(driverText: struct_seaqt_string, databaseText: struct_seaqt_string, typeVal: cint): ptr cQSqlError {.importc: "QSqlError_new5".}
-proc fcQSqlError_new6(driverText: struct_seaqt_string, databaseText: struct_seaqt_string, typeVal: cint, errorCode: struct_seaqt_string): ptr cQSqlError {.importc: "QSqlError_new6".}
+proc fcQSqlError_new2(fromVal: pointer): ptr cQSqlError {.importc: "QSqlError_new_from".}
+proc fcQSqlError_new3(driverText: struct_seaqt_string): ptr cQSqlError {.importc: "QSqlError_new_driverText".}
+proc fcQSqlError_new4(driverText: struct_seaqt_string, databaseText: struct_seaqt_string): ptr cQSqlError {.importc: "QSqlError_new_driverText_databaseText".}
+proc fcQSqlError_new5(driverText: struct_seaqt_string, databaseText: struct_seaqt_string, typeVal: cint): ptr cQSqlError {.importc: "QSqlError_new_driverText_databaseText_type".}
+proc fcQSqlError_new6(driverText: struct_seaqt_string, databaseText: struct_seaqt_string, typeVal: cint, errorCode: struct_seaqt_string): ptr cQSqlError {.importc: "QSqlError_new_driverText_databaseText_type_errorCode".}
 
-proc operatorAssign*(self: gen_qsqlerror_types.QSqlError, other: gen_qsqlerror_types.QSqlError): void =
-  fcQSqlError_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qsqlerror_types.QSqlError, fromVal: gen_qsqlerror_types.QSqlError): void =
+  fcQSqlError_operatorAssign(self.h, fromVal.h)
 
 proc operatorEqual*(self: gen_qsqlerror_types.QSqlError, other: gen_qsqlerror_types.QSqlError): bool =
   fcQSqlError_operatorEqual(self.h, other.h)
@@ -110,8 +110,8 @@ proc create*(T: type gen_qsqlerror_types.QSqlError): gen_qsqlerror_types.QSqlErr
   let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new(), owned: true)
   tmp
 proc create*(T: type gen_qsqlerror_types.QSqlError,
-    other: gen_qsqlerror_types.QSqlError): gen_qsqlerror_types.QSqlError =
-  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new2(other.h), owned: true)
+    fromVal: gen_qsqlerror_types.QSqlError): gen_qsqlerror_types.QSqlError =
+  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new2(fromVal.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlerror_types.QSqlError,
     driverText: openArray[char]): gen_qsqlerror_types.QSqlError =

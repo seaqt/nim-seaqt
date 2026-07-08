@@ -55,12 +55,12 @@ type cQSGTextureProvider*{.exportc: "QSGTextureProvider", incompleteStruct.} = o
 proc fcQSGTextureProvider_metaObject(self: pointer): pointer {.importc: "QSGTextureProvider_metaObject".}
 proc fcQSGTextureProvider_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGTextureProvider_metacast".}
 proc fcQSGTextureProvider_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGTextureProvider_metacall".}
-proc fcQSGTextureProvider_tr(s: cstring): struct_seaqt_string {.importc: "QSGTextureProvider_tr".}
+proc fcQSGTextureProvider_trS(s: cstring): struct_seaqt_string {.importc: "QSGTextureProvider_tr_s".}
 proc fcQSGTextureProvider_texture(self: pointer): pointer {.importc: "QSGTextureProvider_texture".}
 proc fcQSGTextureProvider_textureChanged(self: pointer): void {.importc: "QSGTextureProvider_textureChanged".}
 proc fcQSGTextureProvider_connect_textureChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSGTextureProvider_connect_textureChanged".}
-proc fcQSGTextureProvider_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGTextureProvider_tr2".}
-proc fcQSGTextureProvider_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGTextureProvider_tr3".}
+proc fcQSGTextureProvider_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSGTextureProvider_tr_s_c".}
+proc fcQSGTextureProvider_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSGTextureProvider_tr_s_c_n".}
 proc fcQSGTextureProvider_protectedbase_sender(self: pointer): pointer {.importc: "QSGTextureProvider_protectedbase_sender".}
 proc fcQSGTextureProvider_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSGTextureProvider_protectedbase_senderSignalIndex".}
 proc fcQSGTextureProvider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGTextureProvider_protectedbase_receivers".}
@@ -77,7 +77,7 @@ proc metacall*(self: gen_qsgtextureprovider_types.QSGTextureProvider, param1: ci
   fcQSGTextureProvider_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsgtextureprovider_types.QSGTextureProvider, s: cstring): string =
-  let v_ms = fcQSGTextureProvider_tr(s)
+  let v_ms = fcQSGTextureProvider_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -104,13 +104,13 @@ proc onTextureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider, sl
   fcQSGTextureProvider_connect_textureChanged(self.h, cast[int](addr tmp[]), fcQSGTextureProvider_slot_callback_textureChanged, fcQSGTextureProvider_slot_callback_textureChanged_release)
 
 proc tr*(_: type gen_qsgtextureprovider_types.QSGTextureProvider, s: cstring, c: cstring): string =
-  let v_ms = fcQSGTextureProvider_tr2(s, c)
+  let v_ms = fcQSGTextureProvider_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsgtextureprovider_types.QSGTextureProvider, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSGTextureProvider_tr3(s, c, n)
+  let v_ms = fcQSGTextureProvider_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

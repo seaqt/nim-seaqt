@@ -57,12 +57,12 @@ type cQExtensionManager*{.exportc: "QExtensionManager", incompleteStruct.} = obj
 proc fcQExtensionManager_metaObject(self: pointer): pointer {.importc: "QExtensionManager_metaObject".}
 proc fcQExtensionManager_metacast(self: pointer, param1: cstring): pointer {.importc: "QExtensionManager_metacast".}
 proc fcQExtensionManager_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QExtensionManager_metacall".}
-proc fcQExtensionManager_tr(s: cstring): struct_seaqt_string {.importc: "QExtensionManager_tr".}
+proc fcQExtensionManager_trS(s: cstring): struct_seaqt_string {.importc: "QExtensionManager_tr_s".}
 proc fcQExtensionManager_registerExtensions(self: pointer, factory: pointer, iid: struct_seaqt_string): void {.importc: "QExtensionManager_registerExtensions".}
 proc fcQExtensionManager_unregisterExtensions(self: pointer, factory: pointer, iid: struct_seaqt_string): void {.importc: "QExtensionManager_unregisterExtensions".}
 proc fcQExtensionManager_extension(self: pointer, objectVal: pointer, iid: struct_seaqt_string): pointer {.importc: "QExtensionManager_extension".}
-proc fcQExtensionManager_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QExtensionManager_tr2".}
-proc fcQExtensionManager_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QExtensionManager_tr3".}
+proc fcQExtensionManager_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QExtensionManager_tr_s_c".}
+proc fcQExtensionManager_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QExtensionManager_tr_s_c_n".}
 proc fcQExtensionManager_vdata(self: pointer): ptr pointer {.importc: "QExtensionManager_vdata".}
 proc fvdata_cQExtensionManager(self: pointer): pointer {.importc: "vdata_QExtensionManager".}
 
@@ -99,7 +99,7 @@ proc fcQExtensionManager_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQExtensionManager_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QExtensionManager_protectedbase_receivers".}
 proc fcQExtensionManager_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QExtensionManager_protectedbase_isSignalConnected".}
 proc fcQExtensionManager_new(vtbl: pointer, vdata: csize_t): ptr cQExtensionManager {.importc: "QExtensionManager_new".}
-proc fcQExtensionManager_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQExtensionManager {.importc: "QExtensionManager_new2".}
+proc fcQExtensionManager_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQExtensionManager {.importc: "QExtensionManager_new_parent".}
 proc fcQExtensionManager_staticMetaObject(): pointer {.importc: "QExtensionManager_staticMetaObject".}
 
 proc metaObject*(self: gen_qextensionmanager_types.QExtensionManager): gen_qobjectdefs_types.QMetaObject =
@@ -112,7 +112,7 @@ proc metacall*(self: gen_qextensionmanager_types.QExtensionManager, param1: cint
   fcQExtensionManager_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qextensionmanager_types.QExtensionManager, s: cstring): string =
-  let v_ms = fcQExtensionManager_tr(s)
+  let v_ms = fcQExtensionManager_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -127,13 +127,13 @@ proc extension*(self: gen_qextensionmanager_types.QExtensionManager, objectVal: 
   gen_qobject_types.QObject(h: fcQExtensionManager_extension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid)))), owned: false)
 
 proc tr*(_: type gen_qextensionmanager_types.QExtensionManager, s: cstring, c: cstring): string =
-  let v_ms = fcQExtensionManager_tr2(s, c)
+  let v_ms = fcQExtensionManager_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qextensionmanager_types.QExtensionManager, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQExtensionManager_tr3(s, c, n)
+  let v_ms = fcQExtensionManager_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

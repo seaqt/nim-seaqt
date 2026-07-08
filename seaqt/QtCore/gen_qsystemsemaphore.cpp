@@ -15,22 +15,22 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QSystemSemaphore* QSystemSemaphore_new(struct seaqt_string key) {
+QSystemSemaphore* QSystemSemaphore_new_key(struct seaqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	return new (std::nothrow) QSystemSemaphore(key_QString);
 }
 
-QSystemSemaphore* QSystemSemaphore_new2(struct seaqt_string key, int initialValue) {
+QSystemSemaphore* QSystemSemaphore_new_key_initialValue(struct seaqt_string key, int initialValue) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	return new (std::nothrow) QSystemSemaphore(key_QString, static_cast<int>(initialValue));
 }
 
-QSystemSemaphore* QSystemSemaphore_new3(struct seaqt_string key, int initialValue, int mode) {
+QSystemSemaphore* QSystemSemaphore_new_key_initialValue_mode(struct seaqt_string key, int initialValue, int mode) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	return new (std::nothrow) QSystemSemaphore(key_QString, static_cast<int>(initialValue), static_cast<QSystemSemaphore::AccessMode>(mode));
 }
 
-struct seaqt_string QSystemSemaphore_tr(const char* sourceText) {
+struct seaqt_string QSystemSemaphore_tr_sourceText(const char* sourceText) {
 	QString _ret = QSystemSemaphore::tr(sourceText);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -41,7 +41,7 @@ struct seaqt_string QSystemSemaphore_tr(const char* sourceText) {
 	return _ms;
 }
 
-void QSystemSemaphore_setKey(QSystemSemaphore* self, struct seaqt_string key) {
+void QSystemSemaphore_setKey_key(QSystemSemaphore* self, struct seaqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	self->setKey(key_QString);
 }
@@ -81,7 +81,7 @@ struct seaqt_string QSystemSemaphore_errorString(const QSystemSemaphore* self) {
 	return _ms;
 }
 
-struct seaqt_string QSystemSemaphore_tr2(const char* sourceText, const char* disambiguation) {
+struct seaqt_string QSystemSemaphore_tr_sourceText_disambiguation(const char* sourceText, const char* disambiguation) {
 	QString _ret = QSystemSemaphore::tr(sourceText, disambiguation);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -92,7 +92,7 @@ struct seaqt_string QSystemSemaphore_tr2(const char* sourceText, const char* dis
 	return _ms;
 }
 
-struct seaqt_string QSystemSemaphore_tr3(const char* sourceText, const char* disambiguation, int n) {
+struct seaqt_string QSystemSemaphore_tr_sourceText_disambiguation_n(const char* sourceText, const char* disambiguation, int n) {
 	QString _ret = QSystemSemaphore::tr(sourceText, disambiguation, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -103,17 +103,17 @@ struct seaqt_string QSystemSemaphore_tr3(const char* sourceText, const char* dis
 	return _ms;
 }
 
-void QSystemSemaphore_setKey2(QSystemSemaphore* self, struct seaqt_string key, int initialValue) {
+void QSystemSemaphore_setKey_key_initialValue(QSystemSemaphore* self, struct seaqt_string key, int initialValue) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	self->setKey(key_QString, static_cast<int>(initialValue));
 }
 
-void QSystemSemaphore_setKey3(QSystemSemaphore* self, struct seaqt_string key, int initialValue, int mode) {
+void QSystemSemaphore_setKey_key_initialValue_mode(QSystemSemaphore* self, struct seaqt_string key, int initialValue, int mode) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 	self->setKey(key_QString, static_cast<int>(initialValue), static_cast<QSystemSemaphore::AccessMode>(mode));
 }
 
-bool QSystemSemaphore_releaseWithInt(QSystemSemaphore* self, int n) {
+bool QSystemSemaphore_release_n(QSystemSemaphore* self, int n) {
 	return self->release(static_cast<int>(n));
 }
 

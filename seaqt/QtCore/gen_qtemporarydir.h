@@ -21,7 +21,7 @@ typedef struct QTemporaryDir QTemporaryDir;
 #endif
 
 QTemporaryDir* QTemporaryDir_new();
-QTemporaryDir* QTemporaryDir_new2(struct seaqt_string templateName);
+QTemporaryDir* QTemporaryDir_new_templateName(struct seaqt_string templateName);
 
 void QTemporaryDir_swap(QTemporaryDir* self, QTemporaryDir* other);
 bool QTemporaryDir_isValid(const QTemporaryDir* self);

@@ -26,15 +26,15 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QAccessibleWidget* QAccessibleWidget_new(QWidget* o) {
+QAccessibleWidget* QAccessibleWidget_new_o(QWidget* o) {
 	return new (std::nothrow) QAccessibleWidget(o);
 }
 
-QAccessibleWidget* QAccessibleWidget_new2(QWidget* o, int r) {
+QAccessibleWidget* QAccessibleWidget_new_o_r(QWidget* o, int r) {
 	return new (std::nothrow) QAccessibleWidget(o, static_cast<QAccessible::Role>(r));
 }
 
-QAccessibleWidget* QAccessibleWidget_new3(QWidget* o, int r, struct seaqt_string name) {
+QAccessibleWidget* QAccessibleWidget_new_o_r_name(QWidget* o, int r, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return new (std::nothrow) QAccessibleWidget(o, static_cast<QAccessible::Role>(r), name_QString);
 }
@@ -128,7 +128,7 @@ QColor* QAccessibleWidget_backgroundColor(const QAccessibleWidget* self) {
 	return new QColor(self->backgroundColor());
 }
 
-void* QAccessibleWidget_interfaceCast(QAccessibleWidget* self, int t) {
+void* QAccessibleWidget_interface_cast(QAccessibleWidget* self, int t) {
 	return self->interface_cast(static_cast<QAccessible::InterfaceType>(t));
 }
 

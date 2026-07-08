@@ -22,8 +22,8 @@ QGeoShape* QGeoShape_new() {
 	return new (std::nothrow) QGeoShape();
 }
 
-QGeoShape* QGeoShape_new2(QGeoShape* other) {
-	return new (std::nothrow) QGeoShape(*other);
+QGeoShape* QGeoShape_new_from(QGeoShape* from) {
+	return new (std::nothrow) QGeoShape(*from);
 }
 
 int QGeoShape_type(const QGeoShape* self) {
@@ -51,8 +51,8 @@ QGeoCoordinate* QGeoShape_center(const QGeoShape* self) {
 	return new QGeoCoordinate(self->center());
 }
 
-void QGeoShape_operatorAssign(QGeoShape* self, QGeoShape* other) {
-	self->operator=(*other);
+void QGeoShape_operatorAssign(QGeoShape* self, QGeoShape* from) {
+	self->operator=(*from);
 }
 
 struct seaqt_string QGeoShape_toString(const QGeoShape* self) {

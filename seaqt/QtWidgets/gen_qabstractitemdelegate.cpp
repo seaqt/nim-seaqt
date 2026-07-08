@@ -351,7 +351,7 @@ VirtualQAbstractItemDelegate* QAbstractItemDelegate_new(const QAbstractItemDeleg
 	return _mem_ ? new (_mem_)VirtualQAbstractItemDelegate(vtbl) : nullptr;
 }
 
-VirtualQAbstractItemDelegate* QAbstractItemDelegate_new2(const QAbstractItemDelegate_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQAbstractItemDelegate* QAbstractItemDelegate_new_parent(const QAbstractItemDelegate_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQAbstractItemDelegate>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQAbstractItemDelegate(vtbl, parent) : nullptr;
 }
@@ -372,7 +372,7 @@ int QAbstractItemDelegate_metacall(QAbstractItemDelegate* self, int param1, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QAbstractItemDelegate_tr(const char* s) {
+struct seaqt_string QAbstractItemDelegate_tr_s(const char* s) {
 	QString _ret = QAbstractItemDelegate::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -448,11 +448,11 @@ void QAbstractItemDelegate_connect_commitData(QAbstractItemDelegate* self, intpt
 	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*)>(&QAbstractItemDelegate::commitData), self, local_caller{slot, callback, release});
 }
 
-void QAbstractItemDelegate_closeEditor(QAbstractItemDelegate* self, QWidget* editor) {
+void QAbstractItemDelegate_closeEditor_editor(QAbstractItemDelegate* self, QWidget* editor) {
 	self->closeEditor(editor);
 }
 
-void QAbstractItemDelegate_connect_closeEditor(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
+void QAbstractItemDelegate_connect_closeEditor_editor(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QWidget*);
@@ -482,7 +482,7 @@ void QAbstractItemDelegate_connect_sizeHintChanged(QAbstractItemDelegate* self, 
 	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(const QModelIndex&)>(&QAbstractItemDelegate::sizeHintChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QAbstractItemDelegate_tr2(const char* s, const char* c) {
+struct seaqt_string QAbstractItemDelegate_tr_s_c(const char* s, const char* c) {
 	QString _ret = QAbstractItemDelegate::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -493,7 +493,7 @@ struct seaqt_string QAbstractItemDelegate_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QAbstractItemDelegate_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QAbstractItemDelegate_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QAbstractItemDelegate::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -504,11 +504,11 @@ struct seaqt_string QAbstractItemDelegate_tr3(const char* s, const char* c, int 
 	return _ms;
 }
 
-void QAbstractItemDelegate_closeEditor2(QAbstractItemDelegate* self, QWidget* editor, int hint) {
+void QAbstractItemDelegate_closeEditor_editor_hint(QAbstractItemDelegate* self, QWidget* editor, int hint) {
 	self->closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
 }
 
-void QAbstractItemDelegate_connect_closeEditor2(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) {
+void QAbstractItemDelegate_connect_closeEditor_editor_hint(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QWidget*, int);

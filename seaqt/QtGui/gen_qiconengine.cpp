@@ -252,17 +252,17 @@ public:
 	friend QPixmap* QIconEngine_virtualbase_scaledPixmap(VirtualQIconEngine* self, QSize* size, int mode, int state, double scale);
 
 	virtual void virtual_hook(int id, void* data) override {
-		if (vtbl->virtualHook == 0) {
+		if (vtbl->virtual_hook == 0) {
 			QIconEngine::virtual_hook(id, data);
 			return;
 		}
 
 		int sigval1 = id;
 		void* sigval2 = data;
-		vtbl->virtualHook(this, sigval1, sigval2);
+		vtbl->virtual_hook(this, sigval1, sigval2);
 	}
 
-	friend void QIconEngine_virtualbase_virtualHook(VirtualQIconEngine* self, int id, void* data);
+	friend void QIconEngine_virtualbase_virtual_hook(VirtualQIconEngine* self, int id, void* data);
 
 };
 
@@ -347,7 +347,7 @@ QPixmap* QIconEngine_scaledPixmap(QIconEngine* self, QSize* size, int mode, int 
 	return new QPixmap(self->scaledPixmap(*size, static_cast<QIcon::Mode>(mode), static_cast<QIcon::State>(state), static_cast<qreal>(scale)));
 }
 
-void QIconEngine_virtualHook(QIconEngine* self, int id, void* data) {
+void QIconEngine_virtual_hook(QIconEngine* self, int id, void* data) {
 	self->virtual_hook(static_cast<int>(id), data);
 }
 
@@ -433,7 +433,7 @@ QPixmap* QIconEngine_virtualbase_scaledPixmap(VirtualQIconEngine* self, QSize* s
 	return new QPixmap(self->QIconEngine::scaledPixmap(*size, static_cast<QIcon::Mode>(mode), static_cast<QIcon::State>(state), static_cast<qreal>(scale)));
 }
 
-void QIconEngine_virtualbase_virtualHook(VirtualQIconEngine* self, int id, void* data) {
+void QIconEngine_virtualbase_virtual_hook(VirtualQIconEngine* self, int id, void* data) {
 
 	self->QIconEngine::virtual_hook(static_cast<int>(id), data);
 }
@@ -442,8 +442,8 @@ void QIconEngine_delete(QIconEngine* self) {
 	delete self;
 }
 
-QIconEngine__ScaledPixmapArgument* QIconEngine__ScaledPixmapArgument_new(QIconEngine__ScaledPixmapArgument* param1) {
-	return new (std::nothrow) QIconEngine__ScaledPixmapArgument(*param1);
+QIconEngine__ScaledPixmapArgument* QIconEngine__ScaledPixmapArgument_new(QIconEngine__ScaledPixmapArgument* from) {
+	return new (std::nothrow) QIconEngine__ScaledPixmapArgument(*from);
 }
 
 QSize* QIconEngine__ScaledPixmapArgument_size(const QIconEngine__ScaledPixmapArgument* self) {
@@ -489,8 +489,8 @@ void QIconEngine__ScaledPixmapArgument_setPixmap(QIconEngine__ScaledPixmapArgume
 	self->pixmap = *pixmap;
 }
 
-void QIconEngine__ScaledPixmapArgument_operatorAssign(QIconEngine__ScaledPixmapArgument* self, QIconEngine__ScaledPixmapArgument* param1) {
-	self->operator=(*param1);
+void QIconEngine__ScaledPixmapArgument_operatorAssign(QIconEngine__ScaledPixmapArgument* self, QIconEngine__ScaledPixmapArgument* from) {
+	self->operator=(*from);
 }
 
 void QIconEngine__ScaledPixmapArgument_delete(QIconEngine__ScaledPixmapArgument* self) {

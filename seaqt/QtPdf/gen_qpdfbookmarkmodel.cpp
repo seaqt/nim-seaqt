@@ -793,7 +793,7 @@ public:
 	friend void QPdfBookmarkModel_virtualbase_disconnectNotify(VirtualQPdfBookmarkModel* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QModelIndex* QPdfBookmarkModel_protectedbase_createIndex(const VirtualQPdfBookmarkModel* self, int row, int column);
+	friend QModelIndex* QPdfBookmarkModel_protectedbase_createIndex_row_column(const VirtualQPdfBookmarkModel* self, int row, int column);
 	friend void QPdfBookmarkModel_protectedbase_encodeData(const VirtualQPdfBookmarkModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
 	friend bool QPdfBookmarkModel_protectedbase_decodeData(VirtualQPdfBookmarkModel* self, int row, int column, QModelIndex* parent, QDataStream* stream);
 	friend void QPdfBookmarkModel_protectedbase_beginInsertRows(VirtualQPdfBookmarkModel* self, QModelIndex* parent, int first, int last);
@@ -824,7 +824,7 @@ VirtualQPdfBookmarkModel* QPdfBookmarkModel_new(const QPdfBookmarkModel_VTable* 
 	return _mem_ ? new (_mem_)VirtualQPdfBookmarkModel(vtbl) : nullptr;
 }
 
-VirtualQPdfBookmarkModel* QPdfBookmarkModel_new2(const QPdfBookmarkModel_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPdfBookmarkModel* QPdfBookmarkModel_new_parent(const QPdfBookmarkModel_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPdfBookmarkModel>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPdfBookmarkModel(vtbl, parent) : nullptr;
 }
@@ -845,7 +845,7 @@ int QPdfBookmarkModel_metacall(QPdfBookmarkModel* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPdfBookmarkModel_tr(const char* s) {
+struct seaqt_string QPdfBookmarkModel_tr_s(const char* s) {
 	QString _ret = QPdfBookmarkModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -923,7 +923,7 @@ void QPdfBookmarkModel_connect_documentChanged(QPdfBookmarkModel* self, intptr_t
 	QPdfBookmarkModel::connect(self, static_cast<void (QPdfBookmarkModel::*)(QPdfDocument*)>(&QPdfBookmarkModel::documentChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPdfBookmarkModel_tr2(const char* s, const char* c) {
+struct seaqt_string QPdfBookmarkModel_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPdfBookmarkModel::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -934,7 +934,7 @@ struct seaqt_string QPdfBookmarkModel_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfBookmarkModel_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPdfBookmarkModel_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfBookmarkModel::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -1257,7 +1257,7 @@ void QPdfBookmarkModel_virtualbase_disconnectNotify(VirtualQPdfBookmarkModel* se
 	self->QPdfBookmarkModel::disconnectNotify(*signal);
 }
 
-QModelIndex* QPdfBookmarkModel_protectedbase_createIndex(const VirtualQPdfBookmarkModel* self, int row, int column) {
+QModelIndex* QPdfBookmarkModel_protectedbase_createIndex_row_column(const VirtualQPdfBookmarkModel* self, int row, int column) {
 	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 

@@ -149,15 +149,15 @@ void* QSlider_vdata(VirtualQSlider* self);
 VirtualQSlider* vdata_QSlider(void* vdata);
 
 VirtualQSlider* QSlider_new(const QSlider_VTable* vtbl, size_t vdata);
-VirtualQSlider* QSlider_new2(const QSlider_VTable* vtbl, size_t vdata, int orientation);
-VirtualQSlider* QSlider_new3(const QSlider_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQSlider* QSlider_new4(const QSlider_VTable* vtbl, size_t vdata, int orientation, QWidget* parent);
+VirtualQSlider* QSlider_new_orientation(const QSlider_VTable* vtbl, size_t vdata, int orientation);
+VirtualQSlider* QSlider_new_parent(const QSlider_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQSlider* QSlider_new_orientation_parent(const QSlider_VTable* vtbl, size_t vdata, int orientation, QWidget* parent);
 
 void QSlider_virtbase(QSlider* src, QAbstractSlider** outptr_QAbstractSlider);
 QMetaObject* QSlider_metaObject(const QSlider* self);
 void* QSlider_metacast(QSlider* self, const char* param1);
 int QSlider_metacall(QSlider* self, int param1, int param2, void** param3);
-struct seaqt_string QSlider_tr(const char* s);
+struct seaqt_string QSlider_tr_s(const char* s);
 QSize* QSlider_sizeHint(const QSlider* self);
 QSize* QSlider_minimumSizeHint(const QSlider* self);
 void QSlider_setTickPosition(QSlider* self, int position);
@@ -170,8 +170,8 @@ void QSlider_mousePressEvent(QSlider* self, QMouseEvent* ev);
 void QSlider_mouseReleaseEvent(QSlider* self, QMouseEvent* ev);
 void QSlider_mouseMoveEvent(QSlider* self, QMouseEvent* ev);
 void QSlider_initStyleOption(const QSlider* self, QStyleOptionSlider* option);
-struct seaqt_string QSlider_tr2(const char* s, const char* c);
-struct seaqt_string QSlider_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSlider_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSlider_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSlider_virtualbase_metaObject(const VirtualQSlider* self);
 void* QSlider_virtualbase_metacast(VirtualQSlider* self, const char* param1);
@@ -226,7 +226,7 @@ void QSlider_virtualbase_customEvent(VirtualQSlider* self, QEvent* event);
 void QSlider_virtualbase_connectNotify(VirtualQSlider* self, QMetaMethod* signal);
 void QSlider_virtualbase_disconnectNotify(VirtualQSlider* self, QMetaMethod* signal);
 
-void QSlider_protectedbase_setRepeatAction(VirtualQSlider* self, int action);
+void QSlider_protectedbase_setRepeatAction_action(VirtualQSlider* self, int action);
 int QSlider_protectedbase_repeatAction(const VirtualQSlider* self);
 void QSlider_protectedbase_updateMicroFocus(VirtualQSlider* self);
 void QSlider_protectedbase_create(VirtualQSlider* self);

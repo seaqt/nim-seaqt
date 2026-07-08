@@ -115,8 +115,8 @@ void QDesignerCustomWidgetInterface_delete(QDesignerCustomWidgetInterface* self)
 	delete self;
 }
 
-void QDesignerCustomWidgetCollectionInterface_operatorAssign(QDesignerCustomWidgetCollectionInterface* self, QDesignerCustomWidgetCollectionInterface* param1) {
-	self->operator=(*param1);
+void QDesignerCustomWidgetCollectionInterface_operatorAssign(QDesignerCustomWidgetCollectionInterface* self, QDesignerCustomWidgetCollectionInterface* from) {
+	self->operator=(*from);
 }
 
 void QDesignerCustomWidgetCollectionInterface_delete(QDesignerCustomWidgetCollectionInterface* self) {

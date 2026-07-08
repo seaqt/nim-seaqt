@@ -61,13 +61,13 @@ void* QMediaRecorder_vdata(VirtualQMediaRecorder* self);
 VirtualQMediaRecorder* vdata_QMediaRecorder(void* vdata);
 
 VirtualQMediaRecorder* QMediaRecorder_new(const QMediaRecorder_VTable* vtbl, size_t vdata);
-VirtualQMediaRecorder* QMediaRecorder_new2(const QMediaRecorder_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQMediaRecorder* QMediaRecorder_new_parent(const QMediaRecorder_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QMediaRecorder_virtbase(QMediaRecorder* src, QObject** outptr_QObject);
 QMetaObject* QMediaRecorder_metaObject(const QMediaRecorder* self);
 void* QMediaRecorder_metacast(QMediaRecorder* self, const char* param1);
 int QMediaRecorder_metacall(QMediaRecorder* self, int param1, int param2, void** param3);
-struct seaqt_string QMediaRecorder_tr(const char* s);
+struct seaqt_string QMediaRecorder_tr_s(const char* s);
 bool QMediaRecorder_isAvailable(const QMediaRecorder* self);
 QUrl* QMediaRecorder_outputLocation(const QMediaRecorder* self);
 void QMediaRecorder_setOutputLocation(QMediaRecorder* self, QUrl* location);
@@ -83,8 +83,8 @@ void QMediaRecorder_setEncodingMode(QMediaRecorder* self, int encodingMode);
 int QMediaRecorder_quality(const QMediaRecorder* self);
 void QMediaRecorder_setQuality(QMediaRecorder* self, int quality);
 QSize* QMediaRecorder_videoResolution(const QMediaRecorder* self);
-void QMediaRecorder_setVideoResolution(QMediaRecorder* self, QSize* videoResolution);
-void QMediaRecorder_setVideoResolution2(QMediaRecorder* self, int width, int height);
+void QMediaRecorder_setVideoResolution_videoResolution(QMediaRecorder* self, QSize* videoResolution);
+void QMediaRecorder_setVideoResolution_width_height(QMediaRecorder* self, int width, int height);
 double QMediaRecorder_videoFrameRate(const QMediaRecorder* self);
 void QMediaRecorder_setVideoFrameRate(QMediaRecorder* self, double frameRate);
 int QMediaRecorder_videoBitRate(const QMediaRecorder* self);
@@ -134,8 +134,8 @@ void QMediaRecorder_audioChannelCountChanged(QMediaRecorder* self);
 void QMediaRecorder_connect_audioChannelCountChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QMediaRecorder_audioSampleRateChanged(QMediaRecorder* self);
 void QMediaRecorder_connect_audioSampleRateChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QMediaRecorder_tr2(const char* s, const char* c);
-struct seaqt_string QMediaRecorder_tr3(const char* s, const char* c, int n);
+struct seaqt_string QMediaRecorder_tr_s_c(const char* s, const char* c);
+struct seaqt_string QMediaRecorder_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QMediaRecorder_virtualbase_metaObject(const VirtualQMediaRecorder* self);
 void* QMediaRecorder_virtualbase_metacast(VirtualQMediaRecorder* self, const char* param1);

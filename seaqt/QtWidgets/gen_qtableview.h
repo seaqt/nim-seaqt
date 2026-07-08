@@ -159,7 +159,7 @@ typedef struct QTableView_VTable{
 	void (*closeEditor)(VirtualQTableView* self, QWidget* editor, int hint);
 	void (*commitData)(VirtualQTableView* self, QWidget* editor);
 	void (*editorDestroyed)(VirtualQTableView* self, QObject* editor);
-	bool (*edit2)(VirtualQTableView* self, QModelIndex* index, int trigger, QEvent* event);
+	bool (*edit_index_trigger_event)(VirtualQTableView* self, QModelIndex* index, int trigger, QEvent* event);
 	int (*selectionCommand)(const VirtualQTableView* self, QModelIndex* index, QEvent* event);
 	void (*startDrag)(VirtualQTableView* self, int supportedActions);
 	bool (*focusNextPrevChild)(VirtualQTableView* self, bool next);
@@ -215,13 +215,13 @@ void* QTableView_vdata(VirtualQTableView* self);
 VirtualQTableView* vdata_QTableView(void* vdata);
 
 VirtualQTableView* QTableView_new(const QTableView_VTable* vtbl, size_t vdata);
-VirtualQTableView* QTableView_new2(const QTableView_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQTableView* QTableView_new_parent(const QTableView_VTable* vtbl, size_t vdata, QWidget* parent);
 
 void QTableView_virtbase(QTableView* src, QAbstractItemView** outptr_QAbstractItemView);
 QMetaObject* QTableView_metaObject(const QTableView* self);
 void* QTableView_metacast(QTableView* self, const char* param1);
 int QTableView_metacall(QTableView* self, int param1, int param2, void** param3);
-struct seaqt_string QTableView_tr(const char* s);
+struct seaqt_string QTableView_tr_s(const char* s);
 void QTableView_setModel(QTableView* self, QAbstractItemModel* model);
 void QTableView_setRootIndex(QTableView* self, QModelIndex* index);
 void QTableView_setSelectionModel(QTableView* self, QItemSelectionModel* selectionModel);
@@ -289,8 +289,8 @@ void QTableView_horizontalScrollbarAction(QTableView* self, int action);
 bool QTableView_isIndexHidden(const QTableView* self, QModelIndex* index);
 void QTableView_selectionChanged(QTableView* self, QItemSelection* selected, QItemSelection* deselected);
 void QTableView_currentChanged(QTableView* self, QModelIndex* current, QModelIndex* previous);
-struct seaqt_string QTableView_tr2(const char* s, const char* c);
-struct seaqt_string QTableView_tr3(const char* s, const char* c, int n);
+struct seaqt_string QTableView_tr_s_c(const char* s, const char* c);
+struct seaqt_string QTableView_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QTableView_virtualbase_metaObject(const VirtualQTableView* self);
 void* QTableView_virtualbase_metacast(VirtualQTableView* self, const char* param1);
@@ -336,7 +336,7 @@ void QTableView_virtualbase_horizontalScrollbarValueChanged(VirtualQTableView* s
 void QTableView_virtualbase_closeEditor(VirtualQTableView* self, QWidget* editor, int hint);
 void QTableView_virtualbase_commitData(VirtualQTableView* self, QWidget* editor);
 void QTableView_virtualbase_editorDestroyed(VirtualQTableView* self, QObject* editor);
-bool QTableView_virtualbase_edit2(VirtualQTableView* self, QModelIndex* index, int trigger, QEvent* event);
+bool QTableView_virtualbase_edit_index_trigger_event(VirtualQTableView* self, QModelIndex* index, int trigger, QEvent* event);
 int QTableView_virtualbase_selectionCommand(const VirtualQTableView* self, QModelIndex* index, QEvent* event);
 void QTableView_virtualbase_startDrag(VirtualQTableView* self, int supportedActions);
 bool QTableView_virtualbase_focusNextPrevChild(VirtualQTableView* self, bool next);
@@ -404,7 +404,7 @@ void QTableView_protectedbase_startAutoScroll(VirtualQTableView* self);
 void QTableView_protectedbase_stopAutoScroll(VirtualQTableView* self);
 void QTableView_protectedbase_doAutoScroll(VirtualQTableView* self);
 int QTableView_protectedbase_dropIndicatorPosition(const VirtualQTableView* self);
-void QTableView_protectedbase_setViewportMargins(VirtualQTableView* self, int left, int top, int right, int bottom);
+void QTableView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTableView* self, int left, int top, int right, int bottom);
 QMargins* QTableView_protectedbase_viewportMargins(const VirtualQTableView* self);
 void QTableView_protectedbase_drawFrame(VirtualQTableView* self, QPainter* param1);
 void QTableView_protectedbase_updateMicroFocus(VirtualQTableView* self);

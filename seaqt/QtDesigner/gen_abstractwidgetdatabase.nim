@@ -115,7 +115,7 @@ proc fcQDesignerWidgetDataBaseItemInterface_new(vtbl: pointer, vdata: csize_t): 
 proc fcQDesignerWidgetDataBaseInterface_metaObject(self: pointer): pointer {.importc: "QDesignerWidgetDataBaseInterface_metaObject".}
 proc fcQDesignerWidgetDataBaseInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerWidgetDataBaseInterface_metacast".}
 proc fcQDesignerWidgetDataBaseInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerWidgetDataBaseInterface_metacall".}
-proc fcQDesignerWidgetDataBaseInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerWidgetDataBaseInterface_tr".}
+proc fcQDesignerWidgetDataBaseInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerWidgetDataBaseInterface_tr_s".}
 proc fcQDesignerWidgetDataBaseInterface_count(self: pointer): cint {.importc: "QDesignerWidgetDataBaseInterface_count".}
 proc fcQDesignerWidgetDataBaseInterface_item(self: pointer, index: cint): pointer {.importc: "QDesignerWidgetDataBaseInterface_item".}
 proc fcQDesignerWidgetDataBaseInterface_indexOf(self: pointer, item: pointer): cint {.importc: "QDesignerWidgetDataBaseInterface_indexOf".}
@@ -123,14 +123,14 @@ proc fcQDesignerWidgetDataBaseInterface_insert(self: pointer, index: cint, item:
 proc fcQDesignerWidgetDataBaseInterface_append(self: pointer, item: pointer): void {.importc: "QDesignerWidgetDataBaseInterface_append".}
 proc fcQDesignerWidgetDataBaseInterface_indexOfObject(self: pointer, objectVal: pointer, resolveName: bool): cint {.importc: "QDesignerWidgetDataBaseInterface_indexOfObject".}
 proc fcQDesignerWidgetDataBaseInterface_indexOfClassName(self: pointer, className: struct_seaqt_string, resolveName: bool): cint {.importc: "QDesignerWidgetDataBaseInterface_indexOfClassName".}
-proc fcQDesignerWidgetDataBaseInterface_isContainer(self: pointer, objectVal: pointer): bool {.importc: "QDesignerWidgetDataBaseInterface_isContainer".}
-proc fcQDesignerWidgetDataBaseInterface_isCustom(self: pointer, objectVal: pointer): bool {.importc: "QDesignerWidgetDataBaseInterface_isCustom".}
+proc fcQDesignerWidgetDataBaseInterface_isContainerObject(self: pointer, objectVal: pointer): bool {.importc: "QDesignerWidgetDataBaseInterface_isContainer_object".}
+proc fcQDesignerWidgetDataBaseInterface_isCustomObject(self: pointer, objectVal: pointer): bool {.importc: "QDesignerWidgetDataBaseInterface_isCustom_object".}
 proc fcQDesignerWidgetDataBaseInterface_changed(self: pointer): void {.importc: "QDesignerWidgetDataBaseInterface_changed".}
 proc fcQDesignerWidgetDataBaseInterface_connect_changed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesignerWidgetDataBaseInterface_connect_changed".}
-proc fcQDesignerWidgetDataBaseInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerWidgetDataBaseInterface_tr2".}
-proc fcQDesignerWidgetDataBaseInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerWidgetDataBaseInterface_tr3".}
-proc fcQDesignerWidgetDataBaseInterface_isContainer2(self: pointer, objectVal: pointer, resolveName: bool): bool {.importc: "QDesignerWidgetDataBaseInterface_isContainer2".}
-proc fcQDesignerWidgetDataBaseInterface_isCustom2(self: pointer, objectVal: pointer, resolveName: bool): bool {.importc: "QDesignerWidgetDataBaseInterface_isCustom2".}
+proc fcQDesignerWidgetDataBaseInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerWidgetDataBaseInterface_tr_s_c".}
+proc fcQDesignerWidgetDataBaseInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerWidgetDataBaseInterface_tr_s_c_n".}
+proc fcQDesignerWidgetDataBaseInterface_isContainerObjectResolveName(self: pointer, objectVal: pointer, resolveName: bool): bool {.importc: "QDesignerWidgetDataBaseInterface_isContainer_object_resolveName".}
+proc fcQDesignerWidgetDataBaseInterface_isCustomObjectResolveName(self: pointer, objectVal: pointer, resolveName: bool): bool {.importc: "QDesignerWidgetDataBaseInterface_isCustom_object_resolveName".}
 proc fcQDesignerWidgetDataBaseInterface_vdata(self: pointer): ptr pointer {.importc: "QDesignerWidgetDataBaseInterface_vdata".}
 proc fvdata_cQDesignerWidgetDataBaseInterface(self: pointer): pointer {.importc: "vdata_QDesignerWidgetDataBaseInterface".}
 
@@ -175,7 +175,7 @@ proc fcQDesignerWidgetDataBaseInterface_protectedbase_senderSignalIndex(self: po
 proc fcQDesignerWidgetDataBaseInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerWidgetDataBaseInterface_protectedbase_receivers".}
 proc fcQDesignerWidgetDataBaseInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerWidgetDataBaseInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerWidgetDataBaseInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerWidgetDataBaseInterface {.importc: "QDesignerWidgetDataBaseInterface_new".}
-proc fcQDesignerWidgetDataBaseInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerWidgetDataBaseInterface {.importc: "QDesignerWidgetDataBaseInterface_new2".}
+proc fcQDesignerWidgetDataBaseInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerWidgetDataBaseInterface {.importc: "QDesignerWidgetDataBaseInterface_new_parent".}
 proc fcQDesignerWidgetDataBaseInterface_staticMetaObject(): pointer {.importc: "QDesignerWidgetDataBaseInterface_staticMetaObject".}
 
 proc name*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface): string =
@@ -901,7 +901,7 @@ proc metacall*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInt
   fcQDesignerWidgetDataBaseInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, s: cstring): string =
-  let v_ms = fcQDesignerWidgetDataBaseInterface_tr(s)
+  let v_ms = fcQDesignerWidgetDataBaseInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -928,10 +928,10 @@ proc indexOfClassName*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDat
   fcQDesignerWidgetDataBaseInterface_indexOfClassName(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), resolveName)
 
 proc isContainer*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, objectVal: gen_qobject_types.QObject): bool =
-  fcQDesignerWidgetDataBaseInterface_isContainer(self.h, objectVal.h)
+  fcQDesignerWidgetDataBaseInterface_isContainerObject(self.h, objectVal.h)
 
 proc isCustom*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, objectVal: gen_qobject_types.QObject): bool =
-  fcQDesignerWidgetDataBaseInterface_isCustom(self.h, objectVal.h)
+  fcQDesignerWidgetDataBaseInterface_isCustomObject(self.h, objectVal.h)
 
 proc changed*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface): void =
   fcQDesignerWidgetDataBaseInterface_changed(self.h)
@@ -952,22 +952,22 @@ proc onChanged*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseIn
   fcQDesignerWidgetDataBaseInterface_connect_changed(self.h, cast[int](addr tmp[]), fcQDesignerWidgetDataBaseInterface_slot_callback_changed, fcQDesignerWidgetDataBaseInterface_slot_callback_changed_release)
 
 proc tr*(_: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerWidgetDataBaseInterface_tr2(s, c)
+  let v_ms = fcQDesignerWidgetDataBaseInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerWidgetDataBaseInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerWidgetDataBaseInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc isContainer*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, objectVal: gen_qobject_types.QObject, resolveName: bool): bool =
-  fcQDesignerWidgetDataBaseInterface_isContainer2(self.h, objectVal.h, resolveName)
+  fcQDesignerWidgetDataBaseInterface_isContainerObjectResolveName(self.h, objectVal.h, resolveName)
 
 proc isCustom*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, objectVal: gen_qobject_types.QObject, resolveName: bool): bool =
-  fcQDesignerWidgetDataBaseInterface_isCustom2(self.h, objectVal.h, resolveName)
+  fcQDesignerWidgetDataBaseInterface_isCustomObjectResolveName(self.h, objectVal.h, resolveName)
 
 type QDesignerWidgetDataBaseInterfacemetaObjectProc* = proc(self: QDesignerWidgetDataBaseInterface): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QDesignerWidgetDataBaseInterfacemetacastProc* = proc(self: QDesignerWidgetDataBaseInterface, param1: cstring): pointer {.raises: [], gcsafe.}

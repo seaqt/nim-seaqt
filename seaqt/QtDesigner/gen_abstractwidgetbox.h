@@ -170,14 +170,14 @@ void* QDesignerWidgetBoxInterface_vdata(VirtualQDesignerWidgetBoxInterface* self
 VirtualQDesignerWidgetBoxInterface* vdata_QDesignerWidgetBoxInterface(void* vdata);
 
 VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata);
-VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new2(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata, QWidget* parent);
-VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new3(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
+VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new_parent(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata, QWidget* parent);
+VirtualQDesignerWidgetBoxInterface* QDesignerWidgetBoxInterface_new_parent_flags(const QDesignerWidgetBoxInterface_VTable* vtbl, size_t vdata, QWidget* parent, int flags);
 
 void QDesignerWidgetBoxInterface_virtbase(QDesignerWidgetBoxInterface* src, QWidget** outptr_QWidget);
 QMetaObject* QDesignerWidgetBoxInterface_metaObject(const QDesignerWidgetBoxInterface* self);
 void* QDesignerWidgetBoxInterface_metacast(QDesignerWidgetBoxInterface* self, const char* param1);
 int QDesignerWidgetBoxInterface_metacall(QDesignerWidgetBoxInterface* self, int param1, int param2, void** param3);
-struct seaqt_string QDesignerWidgetBoxInterface_tr(const char* s);
+struct seaqt_string QDesignerWidgetBoxInterface_tr_s(const char* s);
 int QDesignerWidgetBoxInterface_categoryCount(const QDesignerWidgetBoxInterface* self);
 QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface_category(const QDesignerWidgetBoxInterface* self, int cat_idx);
 void QDesignerWidgetBoxInterface_addCategory(QDesignerWidgetBoxInterface* self, QDesignerWidgetBoxInterface__Category* cat);
@@ -192,8 +192,8 @@ void QDesignerWidgetBoxInterface_setFileName(QDesignerWidgetBoxInterface* self, 
 struct seaqt_string QDesignerWidgetBoxInterface_fileName(const QDesignerWidgetBoxInterface* self);
 bool QDesignerWidgetBoxInterface_load(QDesignerWidgetBoxInterface* self);
 bool QDesignerWidgetBoxInterface_save(QDesignerWidgetBoxInterface* self);
-struct seaqt_string QDesignerWidgetBoxInterface_tr2(const char* s, const char* c);
-struct seaqt_string QDesignerWidgetBoxInterface_tr3(const char* s, const char* c, int n);
+struct seaqt_string QDesignerWidgetBoxInterface_tr_s_c(const char* s, const char* c);
+struct seaqt_string QDesignerWidgetBoxInterface_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QDesignerWidgetBoxInterface_virtualbase_metaObject(const VirtualQDesignerWidgetBoxInterface* self);
 void* QDesignerWidgetBoxInterface_virtualbase_metacast(VirtualQDesignerWidgetBoxInterface* self, const char* param1);
@@ -273,13 +273,13 @@ const QMetaObject* QDesignerWidgetBoxInterface_staticMetaObject();
 void QDesignerWidgetBoxInterface_delete(QDesignerWidgetBoxInterface* self);
 
 QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new();
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new2(QDesignerWidgetBoxInterface__Widget* w);
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new3(struct seaqt_string aname);
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new4(struct seaqt_string aname, struct seaqt_string xml);
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new5(struct seaqt_string aname, struct seaqt_string xml, struct seaqt_string icon_name);
-QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new6(struct seaqt_string aname, struct seaqt_string xml, struct seaqt_string icon_name, int atype);
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_from(QDesignerWidgetBoxInterface__Widget* from);
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_aname(struct seaqt_string aname);
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_aname_xml(struct seaqt_string aname, struct seaqt_string xml);
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_aname_xml_icon_name(struct seaqt_string aname, struct seaqt_string xml, struct seaqt_string icon_name);
+QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new_aname_xml_icon_name_atype(struct seaqt_string aname, struct seaqt_string xml, struct seaqt_string icon_name, int atype);
 
-void QDesignerWidgetBoxInterface__Widget_operatorAssign(QDesignerWidgetBoxInterface__Widget* self, QDesignerWidgetBoxInterface__Widget* w);
+void QDesignerWidgetBoxInterface__Widget_operatorAssign(QDesignerWidgetBoxInterface__Widget* self, QDesignerWidgetBoxInterface__Widget* from);
 struct seaqt_string QDesignerWidgetBoxInterface__Widget_name(const QDesignerWidgetBoxInterface__Widget* self);
 void QDesignerWidgetBoxInterface__Widget_setName(QDesignerWidgetBoxInterface__Widget* self, struct seaqt_string aname);
 struct seaqt_string QDesignerWidgetBoxInterface__Widget_domXml(const QDesignerWidgetBoxInterface__Widget* self);
@@ -293,9 +293,9 @@ bool QDesignerWidgetBoxInterface__Widget_isNull(const QDesignerWidgetBoxInterfac
 void QDesignerWidgetBoxInterface__Widget_delete(QDesignerWidgetBoxInterface__Widget* self);
 
 QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new();
-QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new2(QDesignerWidgetBoxInterface__Category* param1);
-QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new3(struct seaqt_string aname);
-QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new4(struct seaqt_string aname, int atype);
+QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new_from(QDesignerWidgetBoxInterface__Category* from);
+QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new_aname(struct seaqt_string aname);
+QDesignerWidgetBoxInterface__Category* QDesignerWidgetBoxInterface__Category_new_aname_atype(struct seaqt_string aname, int atype);
 
 struct seaqt_string QDesignerWidgetBoxInterface__Category_name(const QDesignerWidgetBoxInterface__Category* self);
 void QDesignerWidgetBoxInterface__Category_setName(QDesignerWidgetBoxInterface__Category* self, struct seaqt_string aname);
@@ -306,7 +306,7 @@ void QDesignerWidgetBoxInterface__Category_addWidget(QDesignerWidgetBoxInterface
 int QDesignerWidgetBoxInterface__Category_type(const QDesignerWidgetBoxInterface__Category* self);
 void QDesignerWidgetBoxInterface__Category_setType(QDesignerWidgetBoxInterface__Category* self, int atype);
 bool QDesignerWidgetBoxInterface__Category_isNull(const QDesignerWidgetBoxInterface__Category* self);
-void QDesignerWidgetBoxInterface__Category_operatorAssign(QDesignerWidgetBoxInterface__Category* self, QDesignerWidgetBoxInterface__Category* param1);
+void QDesignerWidgetBoxInterface__Category_operatorAssign(QDesignerWidgetBoxInterface__Category* self, QDesignerWidgetBoxInterface__Category* from);
 
 void QDesignerWidgetBoxInterface__Category_delete(QDesignerWidgetBoxInterface__Category* self);
 

@@ -39,8 +39,8 @@ export gen_qrgba64_types
 
 type cQRgba64*{.exportc: "QRgba64", incompleteStruct.} = object
 
-proc fcQRgba64_fromRgba64(c: culonglong): pointer {.importc: "QRgba64_fromRgba64".}
-proc fcQRgba64_fromRgba642(red: cushort, green: cushort, blue: cushort, alpha: cushort): pointer {.importc: "QRgba64_fromRgba642".}
+proc fcQRgba64_fromRgba64C(c: culonglong): pointer {.importc: "QRgba64_fromRgba64_c".}
+proc fcQRgba64_fromRgba64RedGreenBlueAlpha(red: cushort, green: cushort, blue: cushort, alpha: cushort): pointer {.importc: "QRgba64_fromRgba64_red_green_blue_alpha".}
 proc fcQRgba64_fromRgba(red: uint8, green: uint8, blue: uint8, alpha: uint8): pointer {.importc: "QRgba64_fromRgba".}
 proc fcQRgba64_fromArgb32(rgb: cuint): pointer {.importc: "QRgba64_fromArgb32".}
 proc fcQRgba64_isOpaque(self: pointer): bool {.importc: "QRgba64_isOpaque".}
@@ -64,13 +64,13 @@ proc fcQRgba64_unpremultiplied(self: pointer): pointer {.importc: "QRgba64_unpre
 proc fcQRgba64_ToUnsignedLongLong(self: pointer): culonglong {.importc: "QRgba64_ToUnsignedLongLong".}
 proc fcQRgba64_operatorAssign(self: pointer, x_rgba: culonglong): void {.importc: "QRgba64_operatorAssign".}
 proc fcQRgba64_new(): ptr cQRgba64 {.importc: "QRgba64_new".}
-proc fcQRgba64_new2(param1: pointer): ptr cQRgba64 {.importc: "QRgba64_new2".}
+proc fcQRgba64_new2(fromVal: pointer): ptr cQRgba64 {.importc: "QRgba64_new_from".}
 
 proc fromRgba64*(_: type gen_qrgba64_types.QRgba64, c: culonglong): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba64(c), owned: true)
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba64C(c), owned: true)
 
 proc fromRgba64*(_: type gen_qrgba64_types.QRgba64, red: cushort, green: cushort, blue: cushort, alpha: cushort): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba642(red, green, blue, alpha), owned: true)
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba64RedGreenBlueAlpha(red, green, blue, alpha), owned: true)
 
 proc fromRgba*(_: type gen_qrgba64_types.QRgba64, red: uint8, green: uint8, blue: uint8, alpha: uint8): gen_qrgba64_types.QRgba64 =
   gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba(red, green, blue, alpha), owned: true)
@@ -142,6 +142,6 @@ proc create*(T: type gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
   let tmp = gen_qrgba64_types.QRgba64(h: fcQRgba64_new(), owned: true)
   tmp
 proc create*(T: type gen_qrgba64_types.QRgba64,
-    param1: gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
-  let tmp = gen_qrgba64_types.QRgba64(h: fcQRgba64_new2(param1.h), owned: true)
+    fromVal: gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
+  let tmp = gen_qrgba64_types.QRgba64(h: fcQRgba64_new2(fromVal.h), owned: true)
   tmp

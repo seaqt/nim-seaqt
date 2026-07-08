@@ -31,11 +31,11 @@ typedef struct QWidget QWidget;
 void QWhatsThis_enterWhatsThisMode();
 bool QWhatsThis_inWhatsThisMode();
 void QWhatsThis_leaveWhatsThisMode();
-void QWhatsThis_showText(QPoint* pos, struct seaqt_string text);
+void QWhatsThis_showText_pos_text(QPoint* pos, struct seaqt_string text);
 void QWhatsThis_hideText();
 QAction* QWhatsThis_createAction();
-void QWhatsThis_showText2(QPoint* pos, struct seaqt_string text, QWidget* w);
-QAction* QWhatsThis_createActionWithParent(QObject* parent);
+void QWhatsThis_showText_pos_text_w(QPoint* pos, struct seaqt_string text, QWidget* w);
+QAction* QWhatsThis_createAction_parent(QObject* parent);
 
 void QWhatsThis_delete(QWhatsThis* self);
 

@@ -31,17 +31,17 @@ typedef struct QVariant QVariant;
 #endif
 
 QNetworkProxyQuery* QNetworkProxyQuery_new();
-QNetworkProxyQuery* QNetworkProxyQuery_new2(QUrl* requestUrl);
-QNetworkProxyQuery* QNetworkProxyQuery_new3(struct seaqt_string hostname, int port);
-QNetworkProxyQuery* QNetworkProxyQuery_new4(unsigned short bindPort);
-QNetworkProxyQuery* QNetworkProxyQuery_new5(QNetworkProxyQuery* other);
-QNetworkProxyQuery* QNetworkProxyQuery_new6(QUrl* requestUrl, int queryType);
-QNetworkProxyQuery* QNetworkProxyQuery_new7(struct seaqt_string hostname, int port, struct seaqt_string protocolTag);
-QNetworkProxyQuery* QNetworkProxyQuery_new8(struct seaqt_string hostname, int port, struct seaqt_string protocolTag, int queryType);
-QNetworkProxyQuery* QNetworkProxyQuery_new9(unsigned short bindPort, struct seaqt_string protocolTag);
-QNetworkProxyQuery* QNetworkProxyQuery_new10(unsigned short bindPort, struct seaqt_string protocolTag, int queryType);
+QNetworkProxyQuery* QNetworkProxyQuery_new_requestUrl(QUrl* requestUrl);
+QNetworkProxyQuery* QNetworkProxyQuery_new_hostname_port(struct seaqt_string hostname, int port);
+QNetworkProxyQuery* QNetworkProxyQuery_new_bindPort(unsigned short bindPort);
+QNetworkProxyQuery* QNetworkProxyQuery_new_from(QNetworkProxyQuery* from);
+QNetworkProxyQuery* QNetworkProxyQuery_new_requestUrl_queryType(QUrl* requestUrl, int queryType);
+QNetworkProxyQuery* QNetworkProxyQuery_new_hostname_port_protocolTag(struct seaqt_string hostname, int port, struct seaqt_string protocolTag);
+QNetworkProxyQuery* QNetworkProxyQuery_new_hostname_port_protocolTag_queryType(struct seaqt_string hostname, int port, struct seaqt_string protocolTag, int queryType);
+QNetworkProxyQuery* QNetworkProxyQuery_new_bindPort_protocolTag(unsigned short bindPort, struct seaqt_string protocolTag);
+QNetworkProxyQuery* QNetworkProxyQuery_new_bindPort_protocolTag_queryType(unsigned short bindPort, struct seaqt_string protocolTag, int queryType);
 
-void QNetworkProxyQuery_operatorAssign(QNetworkProxyQuery* self, QNetworkProxyQuery* other);
+void QNetworkProxyQuery_operatorAssign(QNetworkProxyQuery* self, QNetworkProxyQuery* from);
 void QNetworkProxyQuery_swap(QNetworkProxyQuery* self, QNetworkProxyQuery* other);
 bool QNetworkProxyQuery_operatorEqual(const QNetworkProxyQuery* self, QNetworkProxyQuery* other);
 bool QNetworkProxyQuery_operatorNotEqual(const QNetworkProxyQuery* self, QNetworkProxyQuery* other);
@@ -62,14 +62,14 @@ const QMetaObject* QNetworkProxyQuery_staticMetaObject();
 void QNetworkProxyQuery_delete(QNetworkProxyQuery* self);
 
 QNetworkProxy* QNetworkProxy_new();
-QNetworkProxy* QNetworkProxy_new2(int type);
-QNetworkProxy* QNetworkProxy_new3(QNetworkProxy* other);
-QNetworkProxy* QNetworkProxy_new4(int type, struct seaqt_string hostName);
-QNetworkProxy* QNetworkProxy_new5(int type, struct seaqt_string hostName, unsigned short port);
-QNetworkProxy* QNetworkProxy_new6(int type, struct seaqt_string hostName, unsigned short port, struct seaqt_string user);
-QNetworkProxy* QNetworkProxy_new7(int type, struct seaqt_string hostName, unsigned short port, struct seaqt_string user, struct seaqt_string password);
+QNetworkProxy* QNetworkProxy_new_type(int type);
+QNetworkProxy* QNetworkProxy_new_from(QNetworkProxy* from);
+QNetworkProxy* QNetworkProxy_new_type_hostName(int type, struct seaqt_string hostName);
+QNetworkProxy* QNetworkProxy_new_type_hostName_port(int type, struct seaqt_string hostName, unsigned short port);
+QNetworkProxy* QNetworkProxy_new_type_hostName_port_user(int type, struct seaqt_string hostName, unsigned short port, struct seaqt_string user);
+QNetworkProxy* QNetworkProxy_new_type_hostName_port_user_password(int type, struct seaqt_string hostName, unsigned short port, struct seaqt_string user, struct seaqt_string password);
 
-void QNetworkProxy_operatorAssign(QNetworkProxy* self, QNetworkProxy* other);
+void QNetworkProxy_operatorAssign(QNetworkProxy* self, QNetworkProxy* from);
 void QNetworkProxy_swap(QNetworkProxy* self, QNetworkProxy* other);
 bool QNetworkProxy_operatorEqual(const QNetworkProxy* self, QNetworkProxy* other);
 bool QNetworkProxy_operatorNotEqual(const QNetworkProxy* self, QNetworkProxy* other);
@@ -115,8 +115,8 @@ void QNetworkProxyFactory_setUseSystemConfiguration(bool enable);
 void QNetworkProxyFactory_setApplicationProxyFactory(QNetworkProxyFactory* factory);
 struct seaqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_proxyForQuery(QNetworkProxyQuery* query);
 struct seaqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_systemProxyForQuery();
-void QNetworkProxyFactory_operatorAssign(QNetworkProxyFactory* self, QNetworkProxyFactory* param1);
-struct seaqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_systemProxyForQueryWithQuery(QNetworkProxyQuery* query);
+void QNetworkProxyFactory_operatorAssign(QNetworkProxyFactory* self, QNetworkProxyFactory* from);
+struct seaqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_systemProxyForQuery_query(QNetworkProxyQuery* query);
 
 struct seaqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_virtualbase_queryProxy(VirtualQNetworkProxyFactory* self, QNetworkProxyQuery* query);
 

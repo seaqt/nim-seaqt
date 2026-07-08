@@ -60,13 +60,13 @@ void* QQuickRenderControl_vdata(VirtualQQuickRenderControl* self);
 VirtualQQuickRenderControl* vdata_QQuickRenderControl(void* vdata);
 
 VirtualQQuickRenderControl* QQuickRenderControl_new(const QQuickRenderControl_VTable* vtbl, size_t vdata);
-VirtualQQuickRenderControl* QQuickRenderControl_new2(const QQuickRenderControl_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQQuickRenderControl* QQuickRenderControl_new_parent(const QQuickRenderControl_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QQuickRenderControl_virtbase(QQuickRenderControl* src, QObject** outptr_QObject);
 QMetaObject* QQuickRenderControl_metaObject(const QQuickRenderControl* self);
 void* QQuickRenderControl_metacast(QQuickRenderControl* self, const char* param1);
 int QQuickRenderControl_metacall(QQuickRenderControl* self, int param1, int param2, void** param3);
-struct seaqt_string QQuickRenderControl_tr(const char* s);
+struct seaqt_string QQuickRenderControl_tr_s(const char* s);
 void QQuickRenderControl_prepareThread(QQuickRenderControl* self, QThread* targetThread);
 void QQuickRenderControl_setSamples(QQuickRenderControl* self, int sampleCount);
 int QQuickRenderControl_samples(const QQuickRenderControl* self);
@@ -77,16 +77,16 @@ void QQuickRenderControl_endFrame(QQuickRenderControl* self);
 void QQuickRenderControl_polishItems(QQuickRenderControl* self);
 bool QQuickRenderControl_sync(QQuickRenderControl* self);
 void QQuickRenderControl_render(QQuickRenderControl* self);
-QWindow* QQuickRenderControl_renderWindowFor(QQuickWindow* win);
+QWindow* QQuickRenderControl_renderWindowFor_win(QQuickWindow* win);
 QWindow* QQuickRenderControl_renderWindow(QQuickRenderControl* self, QPoint* offset);
 QQuickWindow* QQuickRenderControl_window(const QQuickRenderControl* self);
 void QQuickRenderControl_renderRequested(QQuickRenderControl* self);
 void QQuickRenderControl_connect_renderRequested(QQuickRenderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickRenderControl_sceneChanged(QQuickRenderControl* self);
 void QQuickRenderControl_connect_sceneChanged(QQuickRenderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QQuickRenderControl_tr2(const char* s, const char* c);
-struct seaqt_string QQuickRenderControl_tr3(const char* s, const char* c, int n);
-QWindow* QQuickRenderControl_renderWindowFor2(QQuickWindow* win, QPoint* offset);
+struct seaqt_string QQuickRenderControl_tr_s_c(const char* s, const char* c);
+struct seaqt_string QQuickRenderControl_tr_s_c_n(const char* s, const char* c, int n);
+QWindow* QQuickRenderControl_renderWindowFor_win_offset(QQuickWindow* win, QPoint* offset);
 
 QMetaObject* QQuickRenderControl_virtualbase_metaObject(const VirtualQQuickRenderControl* self);
 void* QQuickRenderControl_virtualbase_metacast(VirtualQQuickRenderControl* self, const char* param1);

@@ -12,8 +12,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QPartialOrdering* QPartialOrdering_new(QPartialOrdering* param1) {
-	return new (std::nothrow) QPartialOrdering(*param1);
+QPartialOrdering* QPartialOrdering_new(QPartialOrdering* from) {
+	return new (std::nothrow) QPartialOrdering(*from);
 }
 
 void QPartialOrdering_delete(QPartialOrdering* self) {

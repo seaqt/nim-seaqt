@@ -60,7 +60,7 @@ void QAmbientSound_virtbase(QAmbientSound* src, QObject** outptr_QObject);
 QMetaObject* QAmbientSound_metaObject(const QAmbientSound* self);
 void* QAmbientSound_metacast(QAmbientSound* self, const char* param1);
 int QAmbientSound_metacall(QAmbientSound* self, int param1, int param2, void** param3);
-struct seaqt_string QAmbientSound_tr(const char* s);
+struct seaqt_string QAmbientSound_tr_s(const char* s);
 void QAmbientSound_setSource(QAmbientSound* self, QUrl* url);
 QUrl* QAmbientSound_source(const QAmbientSound* self);
 int QAmbientSound_loops(const QAmbientSound* self);
@@ -81,8 +81,8 @@ void QAmbientSound_connect_volumeChanged(QAmbientSound* self, intptr_t slot, voi
 void QAmbientSound_play(QAmbientSound* self);
 void QAmbientSound_pause(QAmbientSound* self);
 void QAmbientSound_stop(QAmbientSound* self);
-struct seaqt_string QAmbientSound_tr2(const char* s, const char* c);
-struct seaqt_string QAmbientSound_tr3(const char* s, const char* c, int n);
+struct seaqt_string QAmbientSound_tr_s_c(const char* s, const char* c);
+struct seaqt_string QAmbientSound_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QAmbientSound_virtualbase_metaObject(const VirtualQAmbientSound* self);
 void* QAmbientSound_virtualbase_metacast(VirtualQAmbientSound* self, const char* param1);

@@ -76,16 +76,16 @@ typedef struct QSaveFile_VTable{
 void* QSaveFile_vdata(VirtualQSaveFile* self);
 VirtualQSaveFile* vdata_QSaveFile(void* vdata);
 
-VirtualQSaveFile* QSaveFile_new(const QSaveFile_VTable* vtbl, size_t vdata, struct seaqt_string name);
-VirtualQSaveFile* QSaveFile_new2(const QSaveFile_VTable* vtbl, size_t vdata);
-VirtualQSaveFile* QSaveFile_new3(const QSaveFile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent);
-VirtualQSaveFile* QSaveFile_new4(const QSaveFile_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQSaveFile* QSaveFile_new_name(const QSaveFile_VTable* vtbl, size_t vdata, struct seaqt_string name);
+VirtualQSaveFile* QSaveFile_new(const QSaveFile_VTable* vtbl, size_t vdata);
+VirtualQSaveFile* QSaveFile_new_name_parent(const QSaveFile_VTable* vtbl, size_t vdata, struct seaqt_string name, QObject* parent);
+VirtualQSaveFile* QSaveFile_new_parent(const QSaveFile_VTable* vtbl, size_t vdata, QObject* parent);
 
 void QSaveFile_virtbase(QSaveFile* src, QFileDevice** outptr_QFileDevice);
 QMetaObject* QSaveFile_metaObject(const QSaveFile* self);
 void* QSaveFile_metacast(QSaveFile* self, const char* param1);
 int QSaveFile_metacall(QSaveFile* self, int param1, int param2, void** param3);
-struct seaqt_string QSaveFile_tr(const char* s);
+struct seaqt_string QSaveFile_tr_s(const char* s);
 struct seaqt_string QSaveFile_fileName(const QSaveFile* self);
 void QSaveFile_setFileName(QSaveFile* self, struct seaqt_string name);
 bool QSaveFile_open(QSaveFile* self, int flags);
@@ -94,8 +94,8 @@ void QSaveFile_cancelWriting(QSaveFile* self);
 void QSaveFile_setDirectWriteFallback(QSaveFile* self, bool enabled);
 bool QSaveFile_directWriteFallback(const QSaveFile* self);
 long long QSaveFile_writeData(QSaveFile* self, const char* data, long long len);
-struct seaqt_string QSaveFile_tr2(const char* s, const char* c);
-struct seaqt_string QSaveFile_tr3(const char* s, const char* c, int n);
+struct seaqt_string QSaveFile_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSaveFile_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QSaveFile_virtualbase_metaObject(const VirtualQSaveFile* self);
 void* QSaveFile_virtualbase_metacast(VirtualQSaveFile* self, const char* param1);

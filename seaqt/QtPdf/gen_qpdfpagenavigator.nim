@@ -59,15 +59,15 @@ type cQPdfPageNavigator*{.exportc: "QPdfPageNavigator", incompleteStruct.} = obj
 proc fcQPdfPageNavigator_metaObject(self: pointer): pointer {.importc: "QPdfPageNavigator_metaObject".}
 proc fcQPdfPageNavigator_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfPageNavigator_metacast".}
 proc fcQPdfPageNavigator_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfPageNavigator_metacall".}
-proc fcQPdfPageNavigator_tr(s: cstring): struct_seaqt_string {.importc: "QPdfPageNavigator_tr".}
+proc fcQPdfPageNavigator_trS(s: cstring): struct_seaqt_string {.importc: "QPdfPageNavigator_tr_s".}
 proc fcQPdfPageNavigator_currentPage(self: pointer): cint {.importc: "QPdfPageNavigator_currentPage".}
 proc fcQPdfPageNavigator_currentLocation(self: pointer): pointer {.importc: "QPdfPageNavigator_currentLocation".}
 proc fcQPdfPageNavigator_currentZoom(self: pointer): float64 {.importc: "QPdfPageNavigator_currentZoom".}
 proc fcQPdfPageNavigator_backAvailable(self: pointer): bool {.importc: "QPdfPageNavigator_backAvailable".}
 proc fcQPdfPageNavigator_forwardAvailable(self: pointer): bool {.importc: "QPdfPageNavigator_forwardAvailable".}
 proc fcQPdfPageNavigator_clear(self: pointer): void {.importc: "QPdfPageNavigator_clear".}
-proc fcQPdfPageNavigator_jump(self: pointer, destination: pointer): void {.importc: "QPdfPageNavigator_jump".}
-proc fcQPdfPageNavigator_jump2(self: pointer, page: cint, location: pointer): void {.importc: "QPdfPageNavigator_jump2".}
+proc fcQPdfPageNavigator_jumpDestination(self: pointer, destination: pointer): void {.importc: "QPdfPageNavigator_jump_destination".}
+proc fcQPdfPageNavigator_jumpPageLocation(self: pointer, page: cint, location: pointer): void {.importc: "QPdfPageNavigator_jump_page_location".}
 proc fcQPdfPageNavigator_update(self: pointer, page: cint, location: pointer, zoom: float64): void {.importc: "QPdfPageNavigator_update".}
 proc fcQPdfPageNavigator_forward(self: pointer): void {.importc: "QPdfPageNavigator_forward".}
 proc fcQPdfPageNavigator_back(self: pointer): void {.importc: "QPdfPageNavigator_back".}
@@ -83,9 +83,9 @@ proc fcQPdfPageNavigator_forwardAvailableChanged(self: pointer, available: bool)
 proc fcQPdfPageNavigator_connect_forwardAvailableChanged(self: pointer, slot: int, callback: proc (slot: int, available: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfPageNavigator_connect_forwardAvailableChanged".}
 proc fcQPdfPageNavigator_jumped(self: pointer, current: pointer): void {.importc: "QPdfPageNavigator_jumped".}
 proc fcQPdfPageNavigator_connect_jumped(self: pointer, slot: int, callback: proc (slot: int, current: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPdfPageNavigator_connect_jumped".}
-proc fcQPdfPageNavigator_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageNavigator_tr2".}
-proc fcQPdfPageNavigator_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageNavigator_tr3".}
-proc fcQPdfPageNavigator_jump3(self: pointer, page: cint, location: pointer, zoom: float64): void {.importc: "QPdfPageNavigator_jump3".}
+proc fcQPdfPageNavigator_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QPdfPageNavigator_tr_s_c".}
+proc fcQPdfPageNavigator_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QPdfPageNavigator_tr_s_c_n".}
+proc fcQPdfPageNavigator_jumpPageLocationZoom(self: pointer, page: cint, location: pointer, zoom: float64): void {.importc: "QPdfPageNavigator_jump_page_location_zoom".}
 proc fcQPdfPageNavigator_vdata(self: pointer): ptr pointer {.importc: "QPdfPageNavigator_vdata".}
 proc fvdata_cQPdfPageNavigator(self: pointer): pointer {.importc: "vdata_QPdfPageNavigator".}
 
@@ -117,7 +117,7 @@ proc fcQPdfPageNavigator_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQPdfPageNavigator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfPageNavigator_protectedbase_receivers".}
 proc fcQPdfPageNavigator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfPageNavigator_protectedbase_isSignalConnected".}
 proc fcQPdfPageNavigator_new(vtbl: pointer, vdata: csize_t): ptr cQPdfPageNavigator {.importc: "QPdfPageNavigator_new".}
-proc fcQPdfPageNavigator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfPageNavigator {.importc: "QPdfPageNavigator_new2".}
+proc fcQPdfPageNavigator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfPageNavigator {.importc: "QPdfPageNavigator_new_parent".}
 proc fcQPdfPageNavigator_staticMetaObject(): pointer {.importc: "QPdfPageNavigator_staticMetaObject".}
 
 proc metaObject*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): gen_qobjectdefs_types.QMetaObject =
@@ -130,7 +130,7 @@ proc metacall*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, param1: cint
   fcQPdfPageNavigator_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfpagenavigator_types.QPdfPageNavigator, s: cstring): string =
-  let v_ms = fcQPdfPageNavigator_tr(s)
+  let v_ms = fcQPdfPageNavigator_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -154,10 +154,10 @@ proc clear*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): void =
   fcQPdfPageNavigator_clear(self.h)
 
 proc jump*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, destination: gen_qpdflink_types.QPdfLink): void =
-  fcQPdfPageNavigator_jump(self.h, destination.h)
+  fcQPdfPageNavigator_jumpDestination(self.h, destination.h)
 
 proc jump*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, page: cint, location: gen_qpoint_types.QPointF): void =
-  fcQPdfPageNavigator_jump2(self.h, page, location.h)
+  fcQPdfPageNavigator_jumpPageLocation(self.h, page, location.h)
 
 proc update*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, page: cint, location: gen_qpoint_types.QPointF, zoom: float64): void =
   fcQPdfPageNavigator_update(self.h, page, location.h, zoom)
@@ -289,19 +289,19 @@ proc onJumped*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, slot: QPdfPa
   fcQPdfPageNavigator_connect_jumped(self.h, cast[int](addr tmp[]), fcQPdfPageNavigator_slot_callback_jumped, fcQPdfPageNavigator_slot_callback_jumped_release)
 
 proc tr*(_: type gen_qpdfpagenavigator_types.QPdfPageNavigator, s: cstring, c: cstring): string =
-  let v_ms = fcQPdfPageNavigator_tr2(s, c)
+  let v_ms = fcQPdfPageNavigator_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qpdfpagenavigator_types.QPdfPageNavigator, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQPdfPageNavigator_tr3(s, c, n)
+  let v_ms = fcQPdfPageNavigator_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc jump*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, page: cint, location: gen_qpoint_types.QPointF, zoom: float64): void =
-  fcQPdfPageNavigator_jump3(self.h, page, location.h, zoom)
+  fcQPdfPageNavigator_jumpPageLocationZoom(self.h, page, location.h, zoom)
 
 type QPdfPageNavigatormetaObjectProc* = proc(self: QPdfPageNavigator): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPdfPageNavigatormetacastProc* = proc(self: QPdfPageNavigator, param1: cstring): pointer {.raises: [], gcsafe.}

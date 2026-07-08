@@ -750,30 +750,30 @@ VirtualQPushButton* QPushButton_new(const QPushButton_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQPushButton(vtbl) : nullptr;
 }
 
-VirtualQPushButton* QPushButton_new2(const QPushButton_VTable* vtbl, size_t vdata, struct seaqt_string text) {
+VirtualQPushButton* QPushButton_new_text(const QPushButton_VTable* vtbl, size_t vdata, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPushButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPushButton(vtbl, text_QString) : nullptr;
 }
 
-VirtualQPushButton* QPushButton_new3(const QPushButton_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text) {
+VirtualQPushButton* QPushButton_new_icon_text(const QPushButton_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPushButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPushButton(vtbl, *icon, text_QString) : nullptr;
 }
 
-VirtualQPushButton* QPushButton_new4(const QPushButton_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQPushButton* QPushButton_new_parent(const QPushButton_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPushButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPushButton(vtbl, parent) : nullptr;
 }
 
-VirtualQPushButton* QPushButton_new5(const QPushButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
+VirtualQPushButton* QPushButton_new_text_parent(const QPushButton_VTable* vtbl, size_t vdata, struct seaqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPushButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPushButton(vtbl, text_QString, parent) : nullptr;
 }
 
-VirtualQPushButton* QPushButton_new6(const QPushButton_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QWidget* parent) {
+VirtualQPushButton* QPushButton_new_icon_text_parent(const QPushButton_VTable* vtbl, size_t vdata, QIcon* icon, struct seaqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPushButton>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPushButton(vtbl, *icon, text_QString, parent) : nullptr;
@@ -795,7 +795,7 @@ int QPushButton_metacall(QPushButton* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPushButton_tr(const char* s) {
+struct seaqt_string QPushButton_tr_s(const char* s) {
 	QString _ret = QPushButton::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -850,7 +850,7 @@ void QPushButton_showMenu(QPushButton* self) {
 	self->showMenu();
 }
 
-struct seaqt_string QPushButton_tr2(const char* s, const char* c) {
+struct seaqt_string QPushButton_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPushButton::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -861,7 +861,7 @@ struct seaqt_string QPushButton_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPushButton_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPushButton_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPushButton::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -16,12 +16,12 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QCommandLineOption* QCommandLineOption_new(struct seaqt_string name) {
+QCommandLineOption* QCommandLineOption_new_name(struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return new (std::nothrow) QCommandLineOption(name_QString);
 }
 
-QCommandLineOption* QCommandLineOption_new2(struct seaqt_array /* of struct seaqt_string */  names) {
+QCommandLineOption* QCommandLineOption_new_names(struct seaqt_array /* of struct seaqt_string */  names) {
 	QStringList names_QList;
 	names_QList.reserve(names.len);
 	struct seaqt_string* names_arr = static_cast<struct seaqt_string*>(names.data);
@@ -32,13 +32,13 @@ QCommandLineOption* QCommandLineOption_new2(struct seaqt_array /* of struct seaq
 	return new (std::nothrow) QCommandLineOption(names_QList);
 }
 
-QCommandLineOption* QCommandLineOption_new3(struct seaqt_string name, struct seaqt_string description) {
+QCommandLineOption* QCommandLineOption_new_name_description(struct seaqt_string name, struct seaqt_string description) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString description_QString = QString::fromUtf8(description.data, description.len);
 	return new (std::nothrow) QCommandLineOption(name_QString, description_QString);
 }
 
-QCommandLineOption* QCommandLineOption_new4(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description) {
+QCommandLineOption* QCommandLineOption_new_names_description(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description) {
 	QStringList names_QList;
 	names_QList.reserve(names.len);
 	struct seaqt_string* names_arr = static_cast<struct seaqt_string*>(names.data);
@@ -50,18 +50,18 @@ QCommandLineOption* QCommandLineOption_new4(struct seaqt_array /* of struct seaq
 	return new (std::nothrow) QCommandLineOption(names_QList, description_QString);
 }
 
-QCommandLineOption* QCommandLineOption_new5(QCommandLineOption* other) {
-	return new (std::nothrow) QCommandLineOption(*other);
+QCommandLineOption* QCommandLineOption_new_from(QCommandLineOption* from) {
+	return new (std::nothrow) QCommandLineOption(*from);
 }
 
-QCommandLineOption* QCommandLineOption_new6(struct seaqt_string name, struct seaqt_string description, struct seaqt_string valueName) {
+QCommandLineOption* QCommandLineOption_new_name_description_valueName(struct seaqt_string name, struct seaqt_string description, struct seaqt_string valueName) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString description_QString = QString::fromUtf8(description.data, description.len);
 	QString valueName_QString = QString::fromUtf8(valueName.data, valueName.len);
 	return new (std::nothrow) QCommandLineOption(name_QString, description_QString, valueName_QString);
 }
 
-QCommandLineOption* QCommandLineOption_new7(struct seaqt_string name, struct seaqt_string description, struct seaqt_string valueName, struct seaqt_string defaultValue) {
+QCommandLineOption* QCommandLineOption_new_name_description_valueName_defaultValue(struct seaqt_string name, struct seaqt_string description, struct seaqt_string valueName, struct seaqt_string defaultValue) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	QString description_QString = QString::fromUtf8(description.data, description.len);
 	QString valueName_QString = QString::fromUtf8(valueName.data, valueName.len);
@@ -69,7 +69,7 @@ QCommandLineOption* QCommandLineOption_new7(struct seaqt_string name, struct sea
 	return new (std::nothrow) QCommandLineOption(name_QString, description_QString, valueName_QString, defaultValue_QString);
 }
 
-QCommandLineOption* QCommandLineOption_new8(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description, struct seaqt_string valueName) {
+QCommandLineOption* QCommandLineOption_new_names_description_valueName(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description, struct seaqt_string valueName) {
 	QStringList names_QList;
 	names_QList.reserve(names.len);
 	struct seaqt_string* names_arr = static_cast<struct seaqt_string*>(names.data);
@@ -82,7 +82,7 @@ QCommandLineOption* QCommandLineOption_new8(struct seaqt_array /* of struct seaq
 	return new (std::nothrow) QCommandLineOption(names_QList, description_QString, valueName_QString);
 }
 
-QCommandLineOption* QCommandLineOption_new9(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description, struct seaqt_string valueName, struct seaqt_string defaultValue) {
+QCommandLineOption* QCommandLineOption_new_names_description_valueName_defaultValue(struct seaqt_array /* of struct seaqt_string */  names, struct seaqt_string description, struct seaqt_string valueName, struct seaqt_string defaultValue) {
 	QStringList names_QList;
 	names_QList.reserve(names.len);
 	struct seaqt_string* names_arr = static_cast<struct seaqt_string*>(names.data);
@@ -96,8 +96,8 @@ QCommandLineOption* QCommandLineOption_new9(struct seaqt_array /* of struct seaq
 	return new (std::nothrow) QCommandLineOption(names_QList, description_QString, valueName_QString, defaultValue_QString);
 }
 
-void QCommandLineOption_operatorAssign(QCommandLineOption* self, QCommandLineOption* other) {
-	self->operator=(*other);
+void QCommandLineOption_operatorAssign(QCommandLineOption* self, QCommandLineOption* from) {
+	self->operator=(*from);
 }
 
 void QCommandLineOption_swap(QCommandLineOption* self, QCommandLineOption* other) {

@@ -40,18 +40,18 @@ export gen_qwebsocketcorsauthenticator_types
 type cQWebSocketCorsAuthenticator*{.exportc: "QWebSocketCorsAuthenticator", incompleteStruct.} = object
 
 proc fcQWebSocketCorsAuthenticator_swap(self: pointer, other: pointer): void {.importc: "QWebSocketCorsAuthenticator_swap".}
-proc fcQWebSocketCorsAuthenticator_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebSocketCorsAuthenticator_operatorAssign".}
+proc fcQWebSocketCorsAuthenticator_operatorAssign(self: pointer, fromVal: pointer): void {.importc: "QWebSocketCorsAuthenticator_operatorAssign".}
 proc fcQWebSocketCorsAuthenticator_origin(self: pointer): struct_seaqt_string {.importc: "QWebSocketCorsAuthenticator_origin".}
 proc fcQWebSocketCorsAuthenticator_setAllowed(self: pointer, allowed: bool): void {.importc: "QWebSocketCorsAuthenticator_setAllowed".}
 proc fcQWebSocketCorsAuthenticator_allowed(self: pointer): bool {.importc: "QWebSocketCorsAuthenticator_allowed".}
-proc fcQWebSocketCorsAuthenticator_new(origin: struct_seaqt_string): ptr cQWebSocketCorsAuthenticator {.importc: "QWebSocketCorsAuthenticator_new".}
-proc fcQWebSocketCorsAuthenticator_new2(other: pointer): ptr cQWebSocketCorsAuthenticator {.importc: "QWebSocketCorsAuthenticator_new2".}
+proc fcQWebSocketCorsAuthenticator_new(origin: struct_seaqt_string): ptr cQWebSocketCorsAuthenticator {.importc: "QWebSocketCorsAuthenticator_new_origin".}
+proc fcQWebSocketCorsAuthenticator_new2(fromVal: pointer): ptr cQWebSocketCorsAuthenticator {.importc: "QWebSocketCorsAuthenticator_new_from".}
 
 proc swap*(self: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator, other: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator): void =
   fcQWebSocketCorsAuthenticator_swap(self.h, other.h)
 
-proc operatorAssign*(self: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator, other: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator): void =
-  fcQWebSocketCorsAuthenticator_operatorAssign(self.h, other.h)
+proc operatorAssign*(self: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator, fromVal: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator): void =
+  fcQWebSocketCorsAuthenticator_operatorAssign(self.h, fromVal.h)
 
 proc origin*(self: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator): string =
   let v_ms = fcQWebSocketCorsAuthenticator_origin(self.h)
@@ -70,6 +70,6 @@ proc create*(T: type gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthent
   let tmp = gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator(h: fcQWebSocketCorsAuthenticator_new(struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin)))), owned: true)
   tmp
 proc create*(T: type gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator,
-    other: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator): gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator =
-  let tmp = gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator(h: fcQWebSocketCorsAuthenticator_new2(other.h), owned: true)
+    fromVal: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator): gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator =
+  let tmp = gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator(h: fcQWebSocketCorsAuthenticator_new2(fromVal.h), owned: true)
   tmp

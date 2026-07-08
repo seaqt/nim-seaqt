@@ -77,13 +77,13 @@ proc fcQUndoCommand_virtualbase_redo(self: pointer): void {.importc: "QUndoComma
 proc fcQUndoCommand_virtualbase_id(self: pointer): cint {.importc: "QUndoCommand_virtualbase_id".}
 proc fcQUndoCommand_virtualbase_mergeWith(self: pointer, other: pointer): bool {.importc: "QUndoCommand_virtualbase_mergeWith".}
 proc fcQUndoCommand_new(vtbl: pointer, vdata: csize_t): ptr cQUndoCommand {.importc: "QUndoCommand_new".}
-proc fcQUndoCommand_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQUndoCommand {.importc: "QUndoCommand_new2".}
-proc fcQUndoCommand_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUndoCommand {.importc: "QUndoCommand_new3".}
-proc fcQUndoCommand_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQUndoCommand {.importc: "QUndoCommand_new4".}
+proc fcQUndoCommand_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string): ptr cQUndoCommand {.importc: "QUndoCommand_new_text".}
+proc fcQUndoCommand_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUndoCommand {.importc: "QUndoCommand_new_parent".}
+proc fcQUndoCommand_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQUndoCommand {.importc: "QUndoCommand_new_text_parent".}
 proc fcQUndoStack_metaObject(self: pointer): pointer {.importc: "QUndoStack_metaObject".}
 proc fcQUndoStack_metacast(self: pointer, param1: cstring): pointer {.importc: "QUndoStack_metacast".}
 proc fcQUndoStack_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QUndoStack_metacall".}
-proc fcQUndoStack_tr(s: cstring): struct_seaqt_string {.importc: "QUndoStack_tr".}
+proc fcQUndoStack_trS(s: cstring): struct_seaqt_string {.importc: "QUndoStack_tr_s".}
 proc fcQUndoStack_clear(self: pointer): void {.importc: "QUndoStack_clear".}
 proc fcQUndoStack_push(self: pointer, cmd: pointer): void {.importc: "QUndoStack_push".}
 proc fcQUndoStack_canUndo(self: pointer): bool {.importc: "QUndoStack_canUndo".}
@@ -93,8 +93,8 @@ proc fcQUndoStack_redoText(self: pointer): struct_seaqt_string {.importc: "QUndo
 proc fcQUndoStack_count(self: pointer): cint {.importc: "QUndoStack_count".}
 proc fcQUndoStack_index(self: pointer): cint {.importc: "QUndoStack_index".}
 proc fcQUndoStack_text(self: pointer, idx: cint): struct_seaqt_string {.importc: "QUndoStack_text".}
-proc fcQUndoStack_createUndoAction(self: pointer, parent: pointer): pointer {.importc: "QUndoStack_createUndoAction".}
-proc fcQUndoStack_createRedoAction(self: pointer, parent: pointer): pointer {.importc: "QUndoStack_createRedoAction".}
+proc fcQUndoStack_createUndoActionParent(self: pointer, parent: pointer): pointer {.importc: "QUndoStack_createUndoAction_parent".}
+proc fcQUndoStack_createRedoActionParent(self: pointer, parent: pointer): pointer {.importc: "QUndoStack_createRedoAction_parent".}
 proc fcQUndoStack_isActive(self: pointer): bool {.importc: "QUndoStack_isActive".}
 proc fcQUndoStack_isClean(self: pointer): bool {.importc: "QUndoStack_isClean".}
 proc fcQUndoStack_cleanIndex(self: pointer): cint {.importc: "QUndoStack_cleanIndex".}
@@ -121,11 +121,11 @@ proc fcQUndoStack_undoTextChanged(self: pointer, undoText: struct_seaqt_string):
 proc fcQUndoStack_connect_undoTextChanged(self: pointer, slot: int, callback: proc (slot: int, undoText: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoStack_connect_undoTextChanged".}
 proc fcQUndoStack_redoTextChanged(self: pointer, redoText: struct_seaqt_string): void {.importc: "QUndoStack_redoTextChanged".}
 proc fcQUndoStack_connect_redoTextChanged(self: pointer, slot: int, callback: proc (slot: int, redoText: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoStack_connect_redoTextChanged".}
-proc fcQUndoStack_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUndoStack_tr2".}
-proc fcQUndoStack_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUndoStack_tr3".}
-proc fcQUndoStack_createUndoAction2(self: pointer, parent: pointer, prefix: struct_seaqt_string): pointer {.importc: "QUndoStack_createUndoAction2".}
-proc fcQUndoStack_createRedoAction2(self: pointer, parent: pointer, prefix: struct_seaqt_string): pointer {.importc: "QUndoStack_createRedoAction2".}
-proc fcQUndoStack_setActiveWithActive(self: pointer, active: bool): void {.importc: "QUndoStack_setActiveWithActive".}
+proc fcQUndoStack_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QUndoStack_tr_s_c".}
+proc fcQUndoStack_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QUndoStack_tr_s_c_n".}
+proc fcQUndoStack_createUndoActionParentPrefix(self: pointer, parent: pointer, prefix: struct_seaqt_string): pointer {.importc: "QUndoStack_createUndoAction_parent_prefix".}
+proc fcQUndoStack_createRedoActionParentPrefix(self: pointer, parent: pointer, prefix: struct_seaqt_string): pointer {.importc: "QUndoStack_createRedoAction_parent_prefix".}
+proc fcQUndoStack_setActiveActive(self: pointer, active: bool): void {.importc: "QUndoStack_setActive_active".}
 proc fcQUndoStack_vdata(self: pointer): ptr pointer {.importc: "QUndoStack_vdata".}
 proc fvdata_cQUndoStack(self: pointer): pointer {.importc: "vdata_QUndoStack".}
 
@@ -156,7 +156,7 @@ proc fcQUndoStack_protectedbase_senderSignalIndex(self: pointer): cint {.importc
 proc fcQUndoStack_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QUndoStack_protectedbase_receivers".}
 proc fcQUndoStack_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QUndoStack_protectedbase_isSignalConnected".}
 proc fcQUndoStack_new(vtbl: pointer, vdata: csize_t): ptr cQUndoStack {.importc: "QUndoStack_new".}
-proc fcQUndoStack_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUndoStack {.importc: "QUndoStack_new2".}
+proc fcQUndoStack_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUndoStack {.importc: "QUndoStack_new_parent".}
 proc fcQUndoStack_staticMetaObject(): pointer {.importc: "QUndoStack_staticMetaObject".}
 
 proc undo*(self: gen_qundostack_types.QUndoCommand): void =
@@ -405,7 +405,7 @@ proc metacall*(self: gen_qundostack_types.QUndoStack, param1: cint, param2: cint
   fcQUndoStack_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qundostack_types.QUndoStack, s: cstring): string =
-  let v_ms = fcQUndoStack_tr(s)
+  let v_ms = fcQUndoStack_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -447,10 +447,10 @@ proc text*(self: gen_qundostack_types.QUndoStack, idx: cint): string =
   vx_ret
 
 proc createUndoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoStack_createUndoAction(self.h, parent.h), owned: false)
+  gen_qaction_types.QAction(h: fcQUndoStack_createUndoActionParent(self.h, parent.h), owned: false)
 
 proc createRedoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoStack_createRedoAction(self.h, parent.h), owned: false)
+  gen_qaction_types.QAction(h: fcQUndoStack_createRedoActionParent(self.h, parent.h), owned: false)
 
 proc isActive*(self: gen_qundostack_types.QUndoStack): bool =
   fcQUndoStack_isActive(self.h)
@@ -621,25 +621,25 @@ proc onRedoTextChanged*(self: gen_qundostack_types.QUndoStack, slot: QUndoStackr
   fcQUndoStack_connect_redoTextChanged(self.h, cast[int](addr tmp[]), fcQUndoStack_slot_callback_redoTextChanged, fcQUndoStack_slot_callback_redoTextChanged_release)
 
 proc tr*(_: type gen_qundostack_types.QUndoStack, s: cstring, c: cstring): string =
-  let v_ms = fcQUndoStack_tr2(s, c)
+  let v_ms = fcQUndoStack_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qundostack_types.QUndoStack, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQUndoStack_tr3(s, c, n)
+  let v_ms = fcQUndoStack_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc createUndoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject, prefix: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoStack_createUndoAction2(self.h, parent.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
+  gen_qaction_types.QAction(h: fcQUndoStack_createUndoActionParentPrefix(self.h, parent.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
 
 proc createRedoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject, prefix: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoStack_createRedoAction2(self.h, parent.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
+  gen_qaction_types.QAction(h: fcQUndoStack_createRedoActionParentPrefix(self.h, parent.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix)))), owned: false)
 
 proc setActive*(self: gen_qundostack_types.QUndoStack, active: bool): void =
-  fcQUndoStack_setActiveWithActive(self.h, active)
+  fcQUndoStack_setActiveActive(self.h, active)
 
 type QUndoStackmetaObjectProc* = proc(self: QUndoStack): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QUndoStackmetacastProc* = proc(self: QUndoStack, param1: cstring): pointer {.raises: [], gcsafe.}

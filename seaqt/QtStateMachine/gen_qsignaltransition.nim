@@ -59,13 +59,13 @@ type cQSignalTransition*{.exportc: "QSignalTransition", incompleteStruct.} = obj
 proc fcQSignalTransition_metaObject(self: pointer): pointer {.importc: "QSignalTransition_metaObject".}
 proc fcQSignalTransition_metacast(self: pointer, param1: cstring): pointer {.importc: "QSignalTransition_metacast".}
 proc fcQSignalTransition_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSignalTransition_metacall".}
-proc fcQSignalTransition_tr(s: cstring): struct_seaqt_string {.importc: "QSignalTransition_tr".}
+proc fcQSignalTransition_trS(s: cstring): struct_seaqt_string {.importc: "QSignalTransition_tr_s".}
 proc fcQSignalTransition_senderObject(self: pointer): pointer {.importc: "QSignalTransition_senderObject".}
 proc fcQSignalTransition_setSenderObject(self: pointer, sender: pointer): void {.importc: "QSignalTransition_setSenderObject".}
 proc fcQSignalTransition_signal(self: pointer): struct_seaqt_string {.importc: "QSignalTransition_signal".}
 proc fcQSignalTransition_setSignal(self: pointer, signal: struct_seaqt_string): void {.importc: "QSignalTransition_setSignal".}
-proc fcQSignalTransition_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSignalTransition_tr2".}
-proc fcQSignalTransition_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSignalTransition_tr3".}
+proc fcQSignalTransition_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSignalTransition_tr_s_c".}
+proc fcQSignalTransition_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSignalTransition_tr_s_c_n".}
 proc fcQSignalTransition_vdata(self: pointer): ptr pointer {.importc: "QSignalTransition_vdata".}
 proc fvdata_cQSignalTransition(self: pointer): pointer {.importc: "vdata_QSignalTransition".}
 
@@ -100,9 +100,9 @@ proc fcQSignalTransition_protectedbase_senderSignalIndex(self: pointer): cint {.
 proc fcQSignalTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSignalTransition_protectedbase_receivers".}
 proc fcQSignalTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSignalTransition_protectedbase_isSignalConnected".}
 proc fcQSignalTransition_new(vtbl: pointer, vdata: csize_t): ptr cQSignalTransition {.importc: "QSignalTransition_new".}
-proc fcQSignalTransition_new2(vtbl: pointer, vdata: csize_t, sender: pointer, signal: cstring): ptr cQSignalTransition {.importc: "QSignalTransition_new2".}
-proc fcQSignalTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new3".}
-proc fcQSignalTransition_new4(vtbl: pointer, vdata: csize_t, sender: pointer, signal: cstring, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new4".}
+proc fcQSignalTransition_new2(vtbl: pointer, vdata: csize_t, sender: pointer, signal: cstring): ptr cQSignalTransition {.importc: "QSignalTransition_new_sender_signal".}
+proc fcQSignalTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new_sourceState".}
+proc fcQSignalTransition_new4(vtbl: pointer, vdata: csize_t, sender: pointer, signal: cstring, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new_sender_signal_sourceState".}
 proc fcQSignalTransition_staticMetaObject(): pointer {.importc: "QSignalTransition_staticMetaObject".}
 
 proc metaObject*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobjectdefs_types.QMetaObject =
@@ -115,7 +115,7 @@ proc metacall*(self: gen_qsignaltransition_types.QSignalTransition, param1: cint
   fcQSignalTransition_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsignaltransition_types.QSignalTransition, s: cstring): string =
-  let v_ms = fcQSignalTransition_tr(s)
+  let v_ms = fcQSignalTransition_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -136,13 +136,13 @@ proc setSignal*(self: gen_qsignaltransition_types.QSignalTransition, signal: ope
   fcQSignalTransition_setSignal(self.h, struct_seaqt_string(data: if len(signal) > 0: addr signal[0] else: nil, len: csize_t(len(signal))))
 
 proc tr*(_: type gen_qsignaltransition_types.QSignalTransition, s: cstring, c: cstring): string =
-  let v_ms = fcQSignalTransition_tr2(s, c)
+  let v_ms = fcQSignalTransition_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qsignaltransition_types.QSignalTransition, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQSignalTransition_tr3(s, c, n)
+  let v_ms = fcQSignalTransition_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

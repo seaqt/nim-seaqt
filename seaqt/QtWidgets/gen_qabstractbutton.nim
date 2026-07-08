@@ -77,7 +77,7 @@ type cQAbstractButton*{.exportc: "QAbstractButton", incompleteStruct.} = object
 proc fcQAbstractButton_metaObject(self: pointer): pointer {.importc: "QAbstractButton_metaObject".}
 proc fcQAbstractButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractButton_metacast".}
 proc fcQAbstractButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractButton_metacall".}
-proc fcQAbstractButton_tr(s: cstring): struct_seaqt_string {.importc: "QAbstractButton_tr".}
+proc fcQAbstractButton_trS(s: cstring): struct_seaqt_string {.importc: "QAbstractButton_tr_s".}
 proc fcQAbstractButton_setText(self: pointer, text: struct_seaqt_string): void {.importc: "QAbstractButton_setText".}
 proc fcQAbstractButton_text(self: pointer): struct_seaqt_string {.importc: "QAbstractButton_text".}
 proc fcQAbstractButton_setIcon(self: pointer, icon: pointer): void {.importc: "QAbstractButton_setIcon".}
@@ -112,10 +112,10 @@ proc fcQAbstractButton_clicked(self: pointer): void {.importc: "QAbstractButton_
 proc fcQAbstractButton_connect_clicked(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_clicked".}
 proc fcQAbstractButton_toggled(self: pointer, checked: bool): void {.importc: "QAbstractButton_toggled".}
 proc fcQAbstractButton_connect_toggled(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_toggled".}
-proc fcQAbstractButton_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractButton_tr2".}
-proc fcQAbstractButton_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractButton_tr3".}
-proc fcQAbstractButton_clickedWithChecked(self: pointer, checked: bool): void {.importc: "QAbstractButton_clickedWithChecked".}
-proc fcQAbstractButton_connect_clickedWithChecked(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_clickedWithChecked".}
+proc fcQAbstractButton_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractButton_tr_s_c".}
+proc fcQAbstractButton_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractButton_tr_s_c_n".}
+proc fcQAbstractButton_clickedChecked(self: pointer, checked: bool): void {.importc: "QAbstractButton_clicked_checked".}
+proc fcQAbstractButton_connect_clickedChecked(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_clicked_checked".}
 proc fcQAbstractButton_vdata(self: pointer): ptr pointer {.importc: "QAbstractButton_vdata".}
 proc fvdata_cQAbstractButton(self: pointer): pointer {.importc: "vdata_QAbstractButton".}
 
@@ -236,7 +236,7 @@ proc fcQAbstractButton_protectedbase_senderSignalIndex(self: pointer): cint {.im
 proc fcQAbstractButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractButton_protectedbase_receivers".}
 proc fcQAbstractButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractButton_protectedbase_isSignalConnected".}
 proc fcQAbstractButton_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractButton {.importc: "QAbstractButton_new".}
-proc fcQAbstractButton_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractButton {.importc: "QAbstractButton_new2".}
+proc fcQAbstractButton_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractButton {.importc: "QAbstractButton_new_parent".}
 proc fcQAbstractButton_staticMetaObject(): pointer {.importc: "QAbstractButton_staticMetaObject".}
 
 proc metaObject*(self: gen_qabstractbutton_types.QAbstractButton): gen_qobjectdefs_types.QMetaObject =
@@ -249,7 +249,7 @@ proc metacall*(self: gen_qabstractbutton_types.QAbstractButton, param1: cint, pa
   fcQAbstractButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractbutton_types.QAbstractButton, s: cstring): string =
-  let v_ms = fcQAbstractButton_tr(s)
+  let v_ms = fcQAbstractButton_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -410,36 +410,36 @@ proc onToggled*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstract
   fcQAbstractButton_connect_toggled(self.h, cast[int](addr tmp[]), fcQAbstractButton_slot_callback_toggled, fcQAbstractButton_slot_callback_toggled_release)
 
 proc tr*(_: type gen_qabstractbutton_types.QAbstractButton, s: cstring, c: cstring): string =
-  let v_ms = fcQAbstractButton_tr2(s, c)
+  let v_ms = fcQAbstractButton_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qabstractbutton_types.QAbstractButton, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQAbstractButton_tr3(s, c, n)
+  let v_ms = fcQAbstractButton_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc clicked*(self: gen_qabstractbutton_types.QAbstractButton, checked: bool): void =
-  fcQAbstractButton_clickedWithChecked(self.h, checked)
+  fcQAbstractButton_clickedChecked(self.h, checked)
 
-type QAbstractButtonclickedWithCheckedSlot* = proc(checked: bool)
-proc fcQAbstractButton_slot_callback_clickedWithChecked(slot: int, checked: bool) {.cdecl.} =
-  let nimfunc = cast[ptr QAbstractButtonclickedWithCheckedSlot](cast[pointer](slot))
+type QAbstractButtonclickedCheckedSlot* = proc(checked: bool)
+proc fcQAbstractButton_slot_callback_clickedChecked(slot: int, checked: bool) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractButtonclickedCheckedSlot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
-proc fcQAbstractButton_slot_callback_clickedWithChecked_release(slot: int) {.cdecl.} =
-  let nimfunc = cast[ref QAbstractButtonclickedWithCheckedSlot](cast[pointer](slot))
+proc fcQAbstractButton_slot_callback_clickedChecked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractButtonclickedCheckedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
-proc onClicked*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonclickedWithCheckedSlot) =
-  var tmp = new QAbstractButtonclickedWithCheckedSlot
+proc onClicked*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonclickedCheckedSlot) =
+  var tmp = new QAbstractButtonclickedCheckedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_clickedWithChecked(self.h, cast[int](addr tmp[]), fcQAbstractButton_slot_callback_clickedWithChecked, fcQAbstractButton_slot_callback_clickedWithChecked_release)
+  fcQAbstractButton_connect_clickedChecked(self.h, cast[int](addr tmp[]), fcQAbstractButton_slot_callback_clickedChecked, fcQAbstractButton_slot_callback_clickedChecked_release)
 
 type QAbstractButtonmetaObjectProc* = proc(self: QAbstractButton): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractButtonmetacastProc* = proc(self: QAbstractButton, param1: cstring): pointer {.raises: [], gcsafe.}

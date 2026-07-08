@@ -30,7 +30,7 @@ typedef struct QToolTip QToolTip;
 typedef struct QWidget QWidget;
 #endif
 
-void QToolTip_showText(QPoint* pos, struct seaqt_string text);
+void QToolTip_showText_pos_text(QPoint* pos, struct seaqt_string text);
 void QToolTip_hideText();
 bool QToolTip_isVisible();
 struct seaqt_string QToolTip_text();
@@ -38,9 +38,9 @@ QPalette* QToolTip_palette();
 void QToolTip_setPalette(QPalette* palette);
 QFont* QToolTip_font();
 void QToolTip_setFont(QFont* font);
-void QToolTip_showText2(QPoint* pos, struct seaqt_string text, QWidget* w);
-void QToolTip_showText3(QPoint* pos, struct seaqt_string text, QWidget* w, QRect* rect);
-void QToolTip_showText4(QPoint* pos, struct seaqt_string text, QWidget* w, QRect* rect, int msecShowTime);
+void QToolTip_showText_pos_text_w(QPoint* pos, struct seaqt_string text, QWidget* w);
+void QToolTip_showText_pos_text_w_rect(QPoint* pos, struct seaqt_string text, QWidget* w, QRect* rect);
+void QToolTip_showText_pos_text_w_rect_msecShowTime(QPoint* pos, struct seaqt_string text, QWidget* w, QRect* rect, int msecShowTime);
 
 void QToolTip_delete(QToolTip* self);
 

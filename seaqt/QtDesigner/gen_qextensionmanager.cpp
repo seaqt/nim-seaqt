@@ -234,7 +234,7 @@ VirtualQExtensionManager* QExtensionManager_new(const QExtensionManager_VTable* 
 	return _mem_ ? new (_mem_)VirtualQExtensionManager(vtbl) : nullptr;
 }
 
-VirtualQExtensionManager* QExtensionManager_new2(const QExtensionManager_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQExtensionManager* QExtensionManager_new_parent(const QExtensionManager_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQExtensionManager>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQExtensionManager(vtbl, parent) : nullptr;
 }
@@ -256,7 +256,7 @@ int QExtensionManager_metacall(QExtensionManager* self, int param1, int param2, 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QExtensionManager_tr(const char* s) {
+struct seaqt_string QExtensionManager_tr_s(const char* s) {
 	QString _ret = QExtensionManager::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -282,7 +282,7 @@ QObject* QExtensionManager_extension(const QExtensionManager* self, QObject* obj
 	return self->extension(object, iid_QString);
 }
 
-struct seaqt_string QExtensionManager_tr2(const char* s, const char* c) {
+struct seaqt_string QExtensionManager_tr_s_c(const char* s, const char* c) {
 	QString _ret = QExtensionManager::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -293,7 +293,7 @@ struct seaqt_string QExtensionManager_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QExtensionManager_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QExtensionManager_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QExtensionManager::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

@@ -31,22 +31,22 @@ typedef struct QTimeZone__OffsetData QTimeZone__OffsetData;
 #endif
 
 QTimeZone* QTimeZone_new();
-QTimeZone* QTimeZone_new2(struct seaqt_string ianaId);
-QTimeZone* QTimeZone_new3(int offsetSeconds);
-QTimeZone* QTimeZone_new4(struct seaqt_string zoneId, int offsetSeconds, struct seaqt_string name, struct seaqt_string abbreviation);
-QTimeZone* QTimeZone_new5(QTimeZone* other);
-QTimeZone* QTimeZone_new6(struct seaqt_string zoneId, int offsetSeconds, struct seaqt_string name, struct seaqt_string abbreviation, unsigned short territory);
-QTimeZone* QTimeZone_new7(struct seaqt_string zoneId, int offsetSeconds, struct seaqt_string name, struct seaqt_string abbreviation, unsigned short territory, struct seaqt_string comment);
+QTimeZone* QTimeZone_new_ianaId(struct seaqt_string ianaId);
+QTimeZone* QTimeZone_new_offsetSeconds(int offsetSeconds);
+QTimeZone* QTimeZone_new_zoneId_offsetSeconds_name_abbreviation(struct seaqt_string zoneId, int offsetSeconds, struct seaqt_string name, struct seaqt_string abbreviation);
+QTimeZone* QTimeZone_new_from(QTimeZone* from);
+QTimeZone* QTimeZone_new_zoneId_offsetSeconds_name_abbreviation_territory(struct seaqt_string zoneId, int offsetSeconds, struct seaqt_string name, struct seaqt_string abbreviation, unsigned short territory);
+QTimeZone* QTimeZone_new_zoneId_offsetSeconds_name_abbreviation_territory_comment(struct seaqt_string zoneId, int offsetSeconds, struct seaqt_string name, struct seaqt_string abbreviation, unsigned short territory, struct seaqt_string comment);
 
-void QTimeZone_operatorAssign(QTimeZone* self, QTimeZone* other);
+void QTimeZone_operatorAssign(QTimeZone* self, QTimeZone* from);
 void QTimeZone_swap(QTimeZone* self, QTimeZone* other);
 bool QTimeZone_isValid(const QTimeZone* self);
 struct seaqt_string QTimeZone_id(const QTimeZone* self);
 unsigned short QTimeZone_territory(const QTimeZone* self);
 unsigned short QTimeZone_country(const QTimeZone* self);
 struct seaqt_string QTimeZone_comment(const QTimeZone* self);
-struct seaqt_string QTimeZone_displayName(const QTimeZone* self, QDateTime* atDateTime);
-struct seaqt_string QTimeZone_displayNameWithTimeType(const QTimeZone* self, int timeType);
+struct seaqt_string QTimeZone_displayName_atDateTime(const QTimeZone* self, QDateTime* atDateTime);
+struct seaqt_string QTimeZone_displayName_timeType(const QTimeZone* self, int timeType);
 struct seaqt_string QTimeZone_abbreviation(const QTimeZone* self, QDateTime* atDateTime);
 int QTimeZone_offsetFromUtc(const QTimeZone* self, QDateTime* atDateTime);
 int QTimeZone_standardTimeOffset(const QTimeZone* self, QDateTime* atDateTime);
@@ -63,21 +63,21 @@ QTimeZone* QTimeZone_systemTimeZone();
 QTimeZone* QTimeZone_utc();
 bool QTimeZone_isTimeZoneIdAvailable(struct seaqt_string ianaId);
 struct seaqt_array /* of struct seaqt_string */  QTimeZone_availableTimeZoneIds();
-struct seaqt_array /* of struct seaqt_string */  QTimeZone_availableTimeZoneIdsWithTerritory(unsigned short territory);
-struct seaqt_array /* of struct seaqt_string */  QTimeZone_availableTimeZoneIdsWithOffsetSeconds(int offsetSeconds);
+struct seaqt_array /* of struct seaqt_string */  QTimeZone_availableTimeZoneIds_territory(unsigned short territory);
+struct seaqt_array /* of struct seaqt_string */  QTimeZone_availableTimeZoneIds_offsetSeconds(int offsetSeconds);
 struct seaqt_string QTimeZone_ianaIdToWindowsId(struct seaqt_string ianaId);
-struct seaqt_string QTimeZone_windowsIdToDefaultIanaId(struct seaqt_string windowsId);
-struct seaqt_string QTimeZone_windowsIdToDefaultIanaId2(struct seaqt_string windowsId, unsigned short territory);
-struct seaqt_array /* of struct seaqt_string */  QTimeZone_windowsIdToIanaIds(struct seaqt_string windowsId);
-struct seaqt_array /* of struct seaqt_string */  QTimeZone_windowsIdToIanaIds2(struct seaqt_string windowsId, unsigned short territory);
-struct seaqt_string QTimeZone_displayName2(const QTimeZone* self, QDateTime* atDateTime, int nameType);
-struct seaqt_string QTimeZone_displayName3(const QTimeZone* self, QDateTime* atDateTime, int nameType, QLocale* locale);
-struct seaqt_string QTimeZone_displayName4(const QTimeZone* self, int timeType, int nameType);
-struct seaqt_string QTimeZone_displayName5(const QTimeZone* self, int timeType, int nameType, QLocale* locale);
+struct seaqt_string QTimeZone_windowsIdToDefaultIanaId_windowsId(struct seaqt_string windowsId);
+struct seaqt_string QTimeZone_windowsIdToDefaultIanaId_windowsId_territory(struct seaqt_string windowsId, unsigned short territory);
+struct seaqt_array /* of struct seaqt_string */  QTimeZone_windowsIdToIanaIds_windowsId(struct seaqt_string windowsId);
+struct seaqt_array /* of struct seaqt_string */  QTimeZone_windowsIdToIanaIds_windowsId_territory(struct seaqt_string windowsId, unsigned short territory);
+struct seaqt_string QTimeZone_displayName_atDateTime_nameType(const QTimeZone* self, QDateTime* atDateTime, int nameType);
+struct seaqt_string QTimeZone_displayName_atDateTime_nameType_locale(const QTimeZone* self, QDateTime* atDateTime, int nameType, QLocale* locale);
+struct seaqt_string QTimeZone_displayName_timeType_nameType(const QTimeZone* self, int timeType, int nameType);
+struct seaqt_string QTimeZone_displayName_timeType_nameType_locale(const QTimeZone* self, int timeType, int nameType, QLocale* locale);
 
 void QTimeZone_delete(QTimeZone* self);
 
-QTimeZone__OffsetData* QTimeZone__OffsetData_new(QTimeZone__OffsetData* param1);
+QTimeZone__OffsetData* QTimeZone__OffsetData_new(QTimeZone__OffsetData* from);
 
 struct seaqt_string QTimeZone__OffsetData_abbreviation(const QTimeZone__OffsetData* self);
 void QTimeZone__OffsetData_setAbbreviation(QTimeZone__OffsetData* self, struct seaqt_string abbreviation);
@@ -89,7 +89,7 @@ int QTimeZone__OffsetData_standardTimeOffset(const QTimeZone__OffsetData* self);
 void QTimeZone__OffsetData_setStandardTimeOffset(QTimeZone__OffsetData* self, int standardTimeOffset);
 int QTimeZone__OffsetData_daylightTimeOffset(const QTimeZone__OffsetData* self);
 void QTimeZone__OffsetData_setDaylightTimeOffset(QTimeZone__OffsetData* self, int daylightTimeOffset);
-void QTimeZone__OffsetData_operatorAssign(QTimeZone__OffsetData* self, QTimeZone__OffsetData* param1);
+void QTimeZone__OffsetData_operatorAssign(QTimeZone__OffsetData* self, QTimeZone__OffsetData* from);
 
 void QTimeZone__OffsetData_delete(QTimeZone__OffsetData* self);
 

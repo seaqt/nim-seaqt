@@ -35,10 +35,10 @@ typedef struct QQmlTypesExtensionInterface_VTable{
 void* QQmlTypesExtensionInterface_vdata(VirtualQQmlTypesExtensionInterface* self);
 VirtualQQmlTypesExtensionInterface* vdata_QQmlTypesExtensionInterface(void* vdata);
 
-VirtualQQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(const QQmlTypesExtensionInterface_VTable* vtbl, size_t vdata, QQmlTypesExtensionInterface* param1);
+VirtualQQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(const QQmlTypesExtensionInterface_VTable* vtbl, size_t vdata, QQmlTypesExtensionInterface* from);
 
 void QQmlTypesExtensionInterface_registerTypes(QQmlTypesExtensionInterface* self, const char* uri);
-void QQmlTypesExtensionInterface_operatorAssign(QQmlTypesExtensionInterface* self, QQmlTypesExtensionInterface* param1);
+void QQmlTypesExtensionInterface_operatorAssign(QQmlTypesExtensionInterface* self, QQmlTypesExtensionInterface* from);
 
 void QQmlTypesExtensionInterface_virtualbase_registerTypes(VirtualQQmlTypesExtensionInterface* self, const char* uri);
 
@@ -54,11 +54,11 @@ typedef struct QQmlExtensionInterface_VTable{
 void* QQmlExtensionInterface_vdata(VirtualQQmlExtensionInterface* self);
 VirtualQQmlExtensionInterface* vdata_QQmlExtensionInterface(void* vdata);
 
-VirtualQQmlExtensionInterface* QQmlExtensionInterface_new(const QQmlExtensionInterface_VTable* vtbl, size_t vdata, QQmlExtensionInterface* param1);
+VirtualQQmlExtensionInterface* QQmlExtensionInterface_new(const QQmlExtensionInterface_VTable* vtbl, size_t vdata, QQmlExtensionInterface* from);
 
 void QQmlExtensionInterface_virtbase(QQmlExtensionInterface* src, QQmlTypesExtensionInterface** outptr_QQmlTypesExtensionInterface);
 void QQmlExtensionInterface_initializeEngine(QQmlExtensionInterface* self, QQmlEngine* engine, const char* uri);
-void QQmlExtensionInterface_operatorAssign(QQmlExtensionInterface* self, QQmlExtensionInterface* param1);
+void QQmlExtensionInterface_operatorAssign(QQmlExtensionInterface* self, QQmlExtensionInterface* from);
 
 void QQmlExtensionInterface_virtualbase_initializeEngine(VirtualQQmlExtensionInterface* self, QQmlEngine* engine, const char* uri);
 void QQmlExtensionInterface_virtualbase_registerTypes(VirtualQQmlExtensionInterface* self, const char* uri);
@@ -66,7 +66,7 @@ void QQmlExtensionInterface_virtualbase_registerTypes(VirtualQQmlExtensionInterf
 void QQmlExtensionInterface_delete(QQmlExtensionInterface* self);
 
 void QQmlEngineExtensionInterface_initializeEngine(QQmlEngineExtensionInterface* self, QQmlEngine* engine, const char* uri);
-void QQmlEngineExtensionInterface_operatorAssign(QQmlEngineExtensionInterface* self, QQmlEngineExtensionInterface* param1);
+void QQmlEngineExtensionInterface_operatorAssign(QQmlEngineExtensionInterface* self, QQmlEngineExtensionInterface* from);
 
 void QQmlEngineExtensionInterface_delete(QQmlEngineExtensionInterface* self);
 

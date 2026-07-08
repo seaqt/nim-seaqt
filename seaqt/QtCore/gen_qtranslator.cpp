@@ -201,7 +201,7 @@ VirtualQTranslator* QTranslator_new(const QTranslator_VTable* vtbl, size_t vdata
 	return _mem_ ? new (_mem_)VirtualQTranslator(vtbl) : nullptr;
 }
 
-VirtualQTranslator* QTranslator_new2(const QTranslator_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQTranslator* QTranslator_new_parent(const QTranslator_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQTranslator>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQTranslator(vtbl, parent) : nullptr;
 }
@@ -222,7 +222,7 @@ int QTranslator_metacall(QTranslator* self, int param1, int param2, void** param
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QTranslator_tr(const char* s) {
+struct seaqt_string QTranslator_tr_s(const char* s) {
 	QString _ret = QTranslator::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -270,21 +270,21 @@ struct seaqt_string QTranslator_filePath(const QTranslator* self) {
 	return _ms;
 }
 
-bool QTranslator_load(QTranslator* self, struct seaqt_string filename) {
+bool QTranslator_load_filename(QTranslator* self, struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	return self->load(filename_QString);
 }
 
-bool QTranslator_load2(QTranslator* self, QLocale* locale, struct seaqt_string filename) {
+bool QTranslator_load_locale_filename(QTranslator* self, QLocale* locale, struct seaqt_string filename) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	return self->load(*locale, filename_QString);
 }
 
-bool QTranslator_load3(QTranslator* self, const unsigned char* data, int len) {
+bool QTranslator_load_data_len(QTranslator* self, const unsigned char* data, int len) {
 	return self->load(static_cast<const uchar*>(data), static_cast<int>(len));
 }
 
-struct seaqt_string QTranslator_tr2(const char* s, const char* c) {
+struct seaqt_string QTranslator_tr_s_c(const char* s, const char* c) {
 	QString _ret = QTranslator::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -295,7 +295,7 @@ struct seaqt_string QTranslator_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QTranslator_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QTranslator_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QTranslator::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -306,20 +306,20 @@ struct seaqt_string QTranslator_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QTranslator_load4(QTranslator* self, struct seaqt_string filename, struct seaqt_string directory) {
+bool QTranslator_load_filename_directory(QTranslator* self, struct seaqt_string filename, struct seaqt_string directory) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
 	return self->load(filename_QString, directory_QString);
 }
 
-bool QTranslator_load5(QTranslator* self, struct seaqt_string filename, struct seaqt_string directory, struct seaqt_string search_delimiters) {
+bool QTranslator_load_filename_directory_search_delimiters(QTranslator* self, struct seaqt_string filename, struct seaqt_string directory, struct seaqt_string search_delimiters) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
 	QString search_delimiters_QString = QString::fromUtf8(search_delimiters.data, search_delimiters.len);
 	return self->load(filename_QString, directory_QString, search_delimiters_QString);
 }
 
-bool QTranslator_load6(QTranslator* self, struct seaqt_string filename, struct seaqt_string directory, struct seaqt_string search_delimiters, struct seaqt_string suffix) {
+bool QTranslator_load_filename_directory_search_delimiters_suffix(QTranslator* self, struct seaqt_string filename, struct seaqt_string directory, struct seaqt_string search_delimiters, struct seaqt_string suffix) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
 	QString search_delimiters_QString = QString::fromUtf8(search_delimiters.data, search_delimiters.len);
@@ -327,20 +327,20 @@ bool QTranslator_load6(QTranslator* self, struct seaqt_string filename, struct s
 	return self->load(filename_QString, directory_QString, search_delimiters_QString, suffix_QString);
 }
 
-bool QTranslator_load7(QTranslator* self, QLocale* locale, struct seaqt_string filename, struct seaqt_string prefix) {
+bool QTranslator_load_locale_filename_prefix(QTranslator* self, QLocale* locale, struct seaqt_string filename, struct seaqt_string prefix) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
 	return self->load(*locale, filename_QString, prefix_QString);
 }
 
-bool QTranslator_load8(QTranslator* self, QLocale* locale, struct seaqt_string filename, struct seaqt_string prefix, struct seaqt_string directory) {
+bool QTranslator_load_locale_filename_prefix_directory(QTranslator* self, QLocale* locale, struct seaqt_string filename, struct seaqt_string prefix, struct seaqt_string directory) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
 	return self->load(*locale, filename_QString, prefix_QString, directory_QString);
 }
 
-bool QTranslator_load9(QTranslator* self, QLocale* locale, struct seaqt_string filename, struct seaqt_string prefix, struct seaqt_string directory, struct seaqt_string suffix) {
+bool QTranslator_load_locale_filename_prefix_directory_suffix(QTranslator* self, QLocale* locale, struct seaqt_string filename, struct seaqt_string prefix, struct seaqt_string directory, struct seaqt_string suffix) {
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
@@ -348,7 +348,7 @@ bool QTranslator_load9(QTranslator* self, QLocale* locale, struct seaqt_string f
 	return self->load(*locale, filename_QString, prefix_QString, directory_QString, suffix_QString);
 }
 
-bool QTranslator_load10(QTranslator* self, const unsigned char* data, int len, struct seaqt_string directory) {
+bool QTranslator_load_data_len_directory(QTranslator* self, const unsigned char* data, int len, struct seaqt_string directory) {
 	QString directory_QString = QString::fromUtf8(directory.data, directory.len);
 	return self->load(static_cast<const uchar*>(data), static_cast<int>(len), directory_QString);
 }

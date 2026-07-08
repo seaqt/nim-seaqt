@@ -12,8 +12,8 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QJSNumberCoercion* QJSNumberCoercion_new(QJSNumberCoercion* param1) {
-	return new (std::nothrow) QJSNumberCoercion(*param1);
+QJSNumberCoercion* QJSNumberCoercion_new(QJSNumberCoercion* from) {
+	return new (std::nothrow) QJSNumberCoercion(*from);
 }
 
 bool QJSNumberCoercion_isInteger(double d) {

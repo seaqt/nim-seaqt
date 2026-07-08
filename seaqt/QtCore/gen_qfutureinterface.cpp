@@ -22,16 +22,16 @@ QFutureInterfaceBase* QFutureInterfaceBase_new() {
 	return new (std::nothrow) QFutureInterfaceBase();
 }
 
-QFutureInterfaceBase* QFutureInterfaceBase_new2(QFutureInterfaceBase* other) {
-	return new (std::nothrow) QFutureInterfaceBase(*other);
+QFutureInterfaceBase* QFutureInterfaceBase_new_from(QFutureInterfaceBase* from) {
+	return new (std::nothrow) QFutureInterfaceBase(*from);
 }
 
-QFutureInterfaceBase* QFutureInterfaceBase_new3(int initialState) {
+QFutureInterfaceBase* QFutureInterfaceBase_new_initialState(int initialState) {
 	return new (std::nothrow) QFutureInterfaceBase(static_cast<QFutureInterfaceBase::State>(initialState));
 }
 
-void QFutureInterfaceBase_operatorAssign(QFutureInterfaceBase* self, QFutureInterfaceBase* other) {
-	self->operator=(*other);
+void QFutureInterfaceBase_operatorAssign(QFutureInterfaceBase* self, QFutureInterfaceBase* from) {
+	self->operator=(*from);
 }
 
 void QFutureInterfaceBase_reportStarted(QFutureInterfaceBase* self) {

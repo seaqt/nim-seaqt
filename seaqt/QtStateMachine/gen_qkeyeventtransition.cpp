@@ -201,17 +201,17 @@ VirtualQKeyEventTransition* QKeyEventTransition_new(const QKeyEventTransition_VT
 	return _mem_ ? new (_mem_)VirtualQKeyEventTransition(vtbl) : nullptr;
 }
 
-VirtualQKeyEventTransition* QKeyEventTransition_new2(const QKeyEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int key) {
+VirtualQKeyEventTransition* QKeyEventTransition_new_object_type_key(const QKeyEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int key) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEventTransition(vtbl, object, static_cast<QEvent::Type>(type), static_cast<int>(key)) : nullptr;
 }
 
-VirtualQKeyEventTransition* QKeyEventTransition_new3(const QKeyEventTransition_VTable* vtbl, size_t vdata, QState* sourceState) {
+VirtualQKeyEventTransition* QKeyEventTransition_new_sourceState(const QKeyEventTransition_VTable* vtbl, size_t vdata, QState* sourceState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEventTransition(vtbl, sourceState) : nullptr;
 }
 
-VirtualQKeyEventTransition* QKeyEventTransition_new4(const QKeyEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int key, QState* sourceState) {
+VirtualQKeyEventTransition* QKeyEventTransition_new_object_type_key_sourceState(const QKeyEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int key, QState* sourceState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQKeyEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQKeyEventTransition(vtbl, object, static_cast<QEvent::Type>(type), static_cast<int>(key), sourceState) : nullptr;
 }
@@ -232,7 +232,7 @@ int QKeyEventTransition_metacall(QKeyEventTransition* self, int param1, int para
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QKeyEventTransition_tr(const char* s) {
+struct seaqt_string QKeyEventTransition_tr_s(const char* s) {
 	QString _ret = QKeyEventTransition::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -260,7 +260,7 @@ void QKeyEventTransition_setModifierMask(QKeyEventTransition* self, int modifier
 	self->setModifierMask(static_cast<Qt::KeyboardModifiers>(modifiers));
 }
 
-struct seaqt_string QKeyEventTransition_tr2(const char* s, const char* c) {
+struct seaqt_string QKeyEventTransition_tr_s_c(const char* s, const char* c) {
 	QString _ret = QKeyEventTransition::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -271,7 +271,7 @@ struct seaqt_string QKeyEventTransition_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QKeyEventTransition_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QKeyEventTransition_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QKeyEventTransition::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

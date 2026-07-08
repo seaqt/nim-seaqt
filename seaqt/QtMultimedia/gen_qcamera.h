@@ -59,17 +59,17 @@ void* QCamera_vdata(VirtualQCamera* self);
 VirtualQCamera* vdata_QCamera(void* vdata);
 
 VirtualQCamera* QCamera_new(const QCamera_VTable* vtbl, size_t vdata);
-VirtualQCamera* QCamera_new2(const QCamera_VTable* vtbl, size_t vdata, QCameraDevice* cameraDevice);
-VirtualQCamera* QCamera_new3(const QCamera_VTable* vtbl, size_t vdata, int position);
-VirtualQCamera* QCamera_new4(const QCamera_VTable* vtbl, size_t vdata, QObject* parent);
-VirtualQCamera* QCamera_new5(const QCamera_VTable* vtbl, size_t vdata, QCameraDevice* cameraDevice, QObject* parent);
-VirtualQCamera* QCamera_new6(const QCamera_VTable* vtbl, size_t vdata, int position, QObject* parent);
+VirtualQCamera* QCamera_new_cameraDevice(const QCamera_VTable* vtbl, size_t vdata, QCameraDevice* cameraDevice);
+VirtualQCamera* QCamera_new_position(const QCamera_VTable* vtbl, size_t vdata, int position);
+VirtualQCamera* QCamera_new_parent(const QCamera_VTable* vtbl, size_t vdata, QObject* parent);
+VirtualQCamera* QCamera_new_cameraDevice_parent(const QCamera_VTable* vtbl, size_t vdata, QCameraDevice* cameraDevice, QObject* parent);
+VirtualQCamera* QCamera_new_position_parent(const QCamera_VTable* vtbl, size_t vdata, int position, QObject* parent);
 
 void QCamera_virtbase(QCamera* src, QObject** outptr_QObject);
 QMetaObject* QCamera_metaObject(const QCamera* self);
 void* QCamera_metacast(QCamera* self, const char* param1);
 int QCamera_metacall(QCamera* self, int param1, int param2, void** param3);
-struct seaqt_string QCamera_tr(const char* s);
+struct seaqt_string QCamera_tr_s(const char* s);
 bool QCamera_isAvailable(const QCamera* self);
 bool QCamera_isActive(const QCamera* self);
 QMediaCaptureSession* QCamera_captureSession(const QCamera* self);
@@ -181,8 +181,8 @@ void QCamera_saturationChanged(QCamera* self);
 void QCamera_connect_saturationChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QCamera_hueChanged(QCamera* self);
 void QCamera_connect_hueChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
-struct seaqt_string QCamera_tr2(const char* s, const char* c);
-struct seaqt_string QCamera_tr3(const char* s, const char* c, int n);
+struct seaqt_string QCamera_tr_s_c(const char* s, const char* c);
+struct seaqt_string QCamera_tr_s_c_n(const char* s, const char* c, int n);
 
 QMetaObject* QCamera_virtualbase_metaObject(const VirtualQCamera* self);
 void* QCamera_virtualbase_metacast(VirtualQCamera* self, const char* param1);

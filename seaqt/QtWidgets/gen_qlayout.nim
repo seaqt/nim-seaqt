@@ -74,17 +74,17 @@ type cQLayout*{.exportc: "QLayout", incompleteStruct.} = object
 proc fcQLayout_metaObject(self: pointer): pointer {.importc: "QLayout_metaObject".}
 proc fcQLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QLayout_metacast".}
 proc fcQLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLayout_metacall".}
-proc fcQLayout_tr(s: cstring): struct_seaqt_string {.importc: "QLayout_tr".}
+proc fcQLayout_trS(s: cstring): struct_seaqt_string {.importc: "QLayout_tr_s".}
 proc fcQLayout_spacing(self: pointer): cint {.importc: "QLayout_spacing".}
 proc fcQLayout_setSpacing(self: pointer, spacing: cint): void {.importc: "QLayout_setSpacing".}
-proc fcQLayout_setContentsMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QLayout_setContentsMargins".}
-proc fcQLayout_setContentsMarginsWithMargins(self: pointer, margins: pointer): void {.importc: "QLayout_setContentsMarginsWithMargins".}
+proc fcQLayout_setContentsMarginsLeftTopRightBottom(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QLayout_setContentsMargins_left_top_right_bottom".}
+proc fcQLayout_setContentsMarginsMargins(self: pointer, margins: pointer): void {.importc: "QLayout_setContentsMargins_margins".}
 proc fcQLayout_unsetContentsMargins(self: pointer): void {.importc: "QLayout_unsetContentsMargins".}
 proc fcQLayout_getContentsMargins(self: pointer, left: ptr cint, top: ptr cint, right: ptr cint, bottom: ptr cint): void {.importc: "QLayout_getContentsMargins".}
 proc fcQLayout_contentsMargins(self: pointer): pointer {.importc: "QLayout_contentsMargins".}
 proc fcQLayout_contentsRect(self: pointer): pointer {.importc: "QLayout_contentsRect".}
-proc fcQLayout_setAlignment(self: pointer, w: pointer, alignment: cint): bool {.importc: "QLayout_setAlignment".}
-proc fcQLayout_setAlignment2(self: pointer, l: pointer, alignment: cint): bool {.importc: "QLayout_setAlignment2".}
+proc fcQLayout_setAlignmentWAlignment(self: pointer, w: pointer, alignment: cint): bool {.importc: "QLayout_setAlignment_w_alignment".}
+proc fcQLayout_setAlignmentLAlignment(self: pointer, l: pointer, alignment: cint): bool {.importc: "QLayout_setAlignment_l_alignment".}
 proc fcQLayout_setSizeConstraint(self: pointer, sizeConstraint: cint): void {.importc: "QLayout_setSizeConstraint".}
 proc fcQLayout_sizeConstraint(self: pointer): cint {.importc: "QLayout_sizeConstraint".}
 proc fcQLayout_setMenuBar(self: pointer, w: pointer): void {.importc: "QLayout_setMenuBar".}
@@ -104,8 +104,8 @@ proc fcQLayout_maximumSize(self: pointer): pointer {.importc: "QLayout_maximumSi
 proc fcQLayout_setGeometry(self: pointer, geometry: pointer): void {.importc: "QLayout_setGeometry".}
 proc fcQLayout_itemAt(self: pointer, index: cint): pointer {.importc: "QLayout_itemAt".}
 proc fcQLayout_takeAt(self: pointer, index: cint): pointer {.importc: "QLayout_takeAt".}
-proc fcQLayout_indexOf(self: pointer, param1: pointer): cint {.importc: "QLayout_indexOf".}
-proc fcQLayout_indexOfWithQLayoutItem(self: pointer, param1: pointer): cint {.importc: "QLayout_indexOfWithQLayoutItem".}
+proc fcQLayout_indexOf_QWidget(self: pointer, param1: pointer): cint {.importc: "QLayout_indexOf_QWidget".}
+proc fcQLayout_indexOf_QLayoutItem(self: pointer, param1: pointer): cint {.importc: "QLayout_indexOf_QLayoutItem".}
 proc fcQLayout_count(self: pointer): cint {.importc: "QLayout_count".}
 proc fcQLayout_isEmpty(self: pointer): bool {.importc: "QLayout_isEmpty".}
 proc fcQLayout_controlTypes(self: pointer): cint {.importc: "QLayout_controlTypes".}
@@ -119,8 +119,8 @@ proc fcQLayout_layout(self: pointer): pointer {.importc: "QLayout_layout".}
 proc fcQLayout_setEnabled(self: pointer, enabled: bool): void {.importc: "QLayout_setEnabled".}
 proc fcQLayout_isEnabled(self: pointer): bool {.importc: "QLayout_isEnabled".}
 proc fcQLayout_closestAcceptableSize(w: pointer, s: pointer): pointer {.importc: "QLayout_closestAcceptableSize".}
-proc fcQLayout_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLayout_tr2".}
-proc fcQLayout_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLayout_tr3".}
+proc fcQLayout_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QLayout_tr_s_c".}
+proc fcQLayout_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QLayout_tr_s_c_n".}
 proc fcQLayout_vdata(self: pointer): ptr pointer {.importc: "QLayout_vdata".}
 proc fvdata_cQLayout(self: pointer): pointer {.importc: "vdata_QLayout".}
 
@@ -140,8 +140,8 @@ type cQLayoutVTable {.pure.} = object
   setGeometry*: proc(self: pointer, geometry: pointer): void {.cdecl, raises: [], gcsafe.}
   itemAt*: proc(self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
   takeAt*: proc(self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
-  indexOf*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
-  indexOfWithQLayoutItem*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
+  indexOf_QWidget*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
+  indexOf_QLayoutItem*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
   count*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
   isEmpty*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   controlTypes*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
@@ -171,8 +171,8 @@ proc fcQLayout_virtualbase_expandingDirections(self: pointer): cint {.importc: "
 proc fcQLayout_virtualbase_minimumSize(self: pointer): pointer {.importc: "QLayout_virtualbase_minimumSize".}
 proc fcQLayout_virtualbase_maximumSize(self: pointer): pointer {.importc: "QLayout_virtualbase_maximumSize".}
 proc fcQLayout_virtualbase_setGeometry(self: pointer, geometry: pointer): void {.importc: "QLayout_virtualbase_setGeometry".}
-proc fcQLayout_virtualbase_indexOf(self: pointer, param1: pointer): cint {.importc: "QLayout_virtualbase_indexOf".}
-proc fcQLayout_virtualbase_indexOfWithQLayoutItem(self: pointer, param1: pointer): cint {.importc: "QLayout_virtualbase_indexOfWithQLayoutItem".}
+proc fcQLayout_virtualbase_indexOf_QWidget(self: pointer, param1: pointer): cint {.importc: "QLayout_virtualbase_indexOf_QWidget".}
+proc fcQLayout_virtualbase_indexOf_QLayoutItem(self: pointer, param1: pointer): cint {.importc: "QLayout_virtualbase_indexOf_QLayoutItem".}
 proc fcQLayout_virtualbase_isEmpty(self: pointer): bool {.importc: "QLayout_virtualbase_isEmpty".}
 proc fcQLayout_virtualbase_controlTypes(self: pointer): cint {.importc: "QLayout_virtualbase_controlTypes".}
 proc fcQLayout_virtualbase_replaceWidget(self: pointer, fromVal: pointer, to: pointer, options: cint): pointer {.importc: "QLayout_virtualbase_replaceWidget".}
@@ -199,7 +199,7 @@ proc fcQLayout_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "
 proc fcQLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLayout_protectedbase_receivers".}
 proc fcQLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLayout_protectedbase_isSignalConnected".}
 proc fcQLayout_new(vtbl: pointer, vdata: csize_t): ptr cQLayout {.importc: "QLayout_new".}
-proc fcQLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLayout {.importc: "QLayout_new2".}
+proc fcQLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQLayout {.importc: "QLayout_new_parent".}
 proc fcQLayout_staticMetaObject(): pointer {.importc: "QLayout_staticMetaObject".}
 
 proc metaObject*(self: gen_qlayout_types.QLayout): gen_qobjectdefs_types.QMetaObject =
@@ -212,7 +212,7 @@ proc metacall*(self: gen_qlayout_types.QLayout, param1: cint, param2: cint, para
   fcQLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlayout_types.QLayout, s: cstring): string =
-  let v_ms = fcQLayout_tr(s)
+  let v_ms = fcQLayout_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -224,10 +224,10 @@ proc setSpacing*(self: gen_qlayout_types.QLayout, spacing: cint): void =
   fcQLayout_setSpacing(self.h, spacing)
 
 proc setContentsMargins*(self: gen_qlayout_types.QLayout, left: cint, top: cint, right: cint, bottom: cint): void =
-  fcQLayout_setContentsMargins(self.h, left, top, right, bottom)
+  fcQLayout_setContentsMarginsLeftTopRightBottom(self.h, left, top, right, bottom)
 
 proc setContentsMargins*(self: gen_qlayout_types.QLayout, margins: gen_qmargins_types.QMargins): void =
-  fcQLayout_setContentsMarginsWithMargins(self.h, margins.h)
+  fcQLayout_setContentsMarginsMargins(self.h, margins.h)
 
 proc unsetContentsMargins*(self: gen_qlayout_types.QLayout): void =
   fcQLayout_unsetContentsMargins(self.h)
@@ -242,10 +242,10 @@ proc contentsRect*(self: gen_qlayout_types.QLayout): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQLayout_contentsRect(self.h), owned: true)
 
 proc setAlignment*(self: gen_qlayout_types.QLayout, w: gen_qwidget_types.QWidget, alignment: cint): bool =
-  fcQLayout_setAlignment(self.h, w.h, cint(alignment))
+  fcQLayout_setAlignmentWAlignment(self.h, w.h, cint(alignment))
 
 proc setAlignment*(self: gen_qlayout_types.QLayout, l: gen_qlayout_types.QLayout, alignment: cint): bool =
-  fcQLayout_setAlignment2(self.h, l.h, cint(alignment))
+  fcQLayout_setAlignmentLAlignment(self.h, l.h, cint(alignment))
 
 proc setSizeConstraint*(self: gen_qlayout_types.QLayout, sizeConstraint: cint): void =
   fcQLayout_setSizeConstraint(self.h, cint(sizeConstraint))
@@ -305,10 +305,10 @@ proc takeAt*(self: gen_qlayout_types.QLayout, index: cint): gen_qlayoutitem_type
   gen_qlayoutitem_types.QLayoutItem(h: fcQLayout_takeAt(self.h, index), owned: false)
 
 proc indexOf*(self: gen_qlayout_types.QLayout, param1: gen_qwidget_types.QWidget): cint =
-  fcQLayout_indexOf(self.h, param1.h)
+  fcQLayout_indexOf_QWidget(self.h, param1.h)
 
 proc indexOf*(self: gen_qlayout_types.QLayout, param1: gen_qlayoutitem_types.QLayoutItem): cint =
-  fcQLayout_indexOfWithQLayoutItem(self.h, param1.h)
+  fcQLayout_indexOf_QLayoutItem(self.h, param1.h)
 
 proc count*(self: gen_qlayout_types.QLayout): cint =
   fcQLayout_count(self.h)
@@ -350,13 +350,13 @@ proc closestAcceptableSize*(_: type gen_qlayout_types.QLayout, w: gen_qwidget_ty
   gen_qsize_types.QSize(h: fcQLayout_closestAcceptableSize(w.h, s.h), owned: true)
 
 proc tr*(_: type gen_qlayout_types.QLayout, s: cstring, c: cstring): string =
-  let v_ms = fcQLayout_tr2(s, c)
+  let v_ms = fcQLayout_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qlayout_types.QLayout, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQLayout_tr3(s, c, n)
+  let v_ms = fcQLayout_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -375,8 +375,8 @@ type QLayoutmaximumSizeProc* = proc(self: QLayout): gen_qsize_types.QSize {.rais
 type QLayoutsetGeometryProc* = proc(self: QLayout, geometry: gen_qrect_types.QRect): void {.raises: [], gcsafe.}
 type QLayoutitemAtProc* = proc(self: QLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.raises: [], gcsafe.}
 type QLayouttakeAtProc* = proc(self: QLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.raises: [], gcsafe.}
-type QLayoutindexOfProc* = proc(self: QLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
-type QLayoutindexOfWithQLayoutItemProc* = proc(self: QLayout, param1: gen_qlayoutitem_types.QLayoutItem): cint {.raises: [], gcsafe.}
+type QLayoutindexOf_QWidgetProc* = proc(self: QLayout, param1: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QLayoutindexOf_QLayoutItemProc* = proc(self: QLayout, param1: gen_qlayoutitem_types.QLayoutItem): cint {.raises: [], gcsafe.}
 type QLayoutcountProc* = proc(self: QLayout): cint {.raises: [], gcsafe.}
 type QLayoutisEmptyProc* = proc(self: QLayout): bool {.raises: [], gcsafe.}
 type QLayoutcontrolTypesProc* = proc(self: QLayout): cint {.raises: [], gcsafe.}
@@ -412,8 +412,8 @@ type QLayoutVTable* {.inheritable, pure.} = object
   setGeometry*: QLayoutsetGeometryProc
   itemAt*: QLayoutitemAtProc
   takeAt*: QLayouttakeAtProc
-  indexOf*: QLayoutindexOfProc
-  indexOfWithQLayoutItem*: QLayoutindexOfWithQLayoutItemProc
+  indexOf_QWidget*: QLayoutindexOf_QWidgetProc
+  indexOf_QLayoutItem*: QLayoutindexOf_QLayoutItemProc
   count*: QLayoutcountProc
   isEmpty*: QLayoutisEmptyProc
   controlTypes*: QLayoutcontrolTypesProc
@@ -467,10 +467,10 @@ proc QLayoutsetGeometry*(self: gen_qlayout_types.QLayout, geometry: gen_qrect_ty
   fcQLayout_virtualbase_setGeometry(self.h, geometry.h)
 
 proc QLayoutindexOf*(self: gen_qlayout_types.QLayout, param1: gen_qwidget_types.QWidget): cint =
-  fcQLayout_virtualbase_indexOf(self.h, param1.h)
+  fcQLayout_virtualbase_indexOf_QWidget(self.h, param1.h)
 
 proc QLayoutindexOf*(self: gen_qlayout_types.QLayout, param1: gen_qlayoutitem_types.QLayoutItem): cint =
-  fcQLayout_virtualbase_indexOfWithQLayoutItem(self.h, param1.h)
+  fcQLayout_virtualbase_indexOf_QLayoutItem(self.h, param1.h)
 
 proc QLayoutisEmpty*(self: gen_qlayout_types.QLayout): bool =
   fcQLayout_virtualbase_isEmpty(self.h)
@@ -628,18 +628,18 @@ proc fcQLayout_vtable_callback_takeAt(self: pointer, index: cint): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQLayout_vtable_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self)[])
   let self = QLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
-  var virtualReturn = vtbl[].indexOf(self, slotval1)
+  var virtualReturn = vtbl[].indexOf_QWidget(self, slotval1)
   virtualReturn
 
-proc fcQLayout_vtable_callback_indexOfWithQLayoutItem(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQLayout_vtable_callback_indexOf_QLayoutItem(self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self)[])
   let self = QLayout(h: self)
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
-  var virtualReturn = vtbl[].indexOfWithQLayoutItem(self, slotval1)
+  var virtualReturn = vtbl[].indexOf_QLayoutItem(self, slotval1)
   virtualReturn
 
 proc fcQLayout_vtable_callback_count(self: pointer): cint {.cdecl.} =
@@ -938,13 +938,13 @@ proc fcQLayout_method_callback_takeAt(self: pointer, index: cint): pointer {.cde
   virtualReturn.h = nil
   virtualReturn_h
 
-proc fcQLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQLayout_method_callback_indexOf_QWidget(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
   virtualReturn
 
-proc fcQLayout_method_callback_indexOfWithQLayoutItem(self: pointer, param1: pointer): cint {.cdecl.} =
+proc fcQLayout_method_callback_indexOf_QLayoutItem(self: pointer, param1: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQLayout](fcQLayout_vdata(self)[])
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
@@ -1126,10 +1126,10 @@ proc create*(T: type gen_qlayout_types.QLayout,
     vtbl[].vtbl.itemAt = fcQLayout_vtable_callback_itemAt
   if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = fcQLayout_vtable_callback_takeAt
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQLayout_vtable_callback_indexOf
-  if not isNil(vtbl[].indexOfWithQLayoutItem):
-    vtbl[].vtbl.indexOfWithQLayoutItem = fcQLayout_vtable_callback_indexOfWithQLayoutItem
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQLayout_vtable_callback_indexOf_QWidget
+  if not isNil(vtbl[].indexOf_QLayoutItem):
+    vtbl[].vtbl.indexOf_QLayoutItem = fcQLayout_vtable_callback_indexOf_QLayoutItem
   if not isNil(vtbl[].count):
     vtbl[].vtbl.count = fcQLayout_vtable_callback_count
   if not isNil(vtbl[].isEmpty):
@@ -1205,10 +1205,10 @@ proc create*(T: type gen_qlayout_types.QLayout,
     vtbl[].vtbl.itemAt = fcQLayout_vtable_callback_itemAt
   if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = fcQLayout_vtable_callback_takeAt
-  if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = fcQLayout_vtable_callback_indexOf
-  if not isNil(vtbl[].indexOfWithQLayoutItem):
-    vtbl[].vtbl.indexOfWithQLayoutItem = fcQLayout_vtable_callback_indexOfWithQLayoutItem
+  if not isNil(vtbl[].indexOf_QWidget):
+    vtbl[].vtbl.indexOf_QWidget = fcQLayout_vtable_callback_indexOf_QWidget
+  if not isNil(vtbl[].indexOf_QLayoutItem):
+    vtbl[].vtbl.indexOf_QLayoutItem = fcQLayout_vtable_callback_indexOf_QLayoutItem
   if not isNil(vtbl[].count):
     vtbl[].vtbl.count = fcQLayout_vtable_callback_count
   if not isNil(vtbl[].isEmpty):
@@ -1268,8 +1268,8 @@ const cQLayout_mvtbl = cQLayoutVTable(
   setGeometry: fcQLayout_method_callback_setGeometry,
   itemAt: fcQLayout_method_callback_itemAt,
   takeAt: fcQLayout_method_callback_takeAt,
-  indexOf: fcQLayout_method_callback_indexOf,
-  indexOfWithQLayoutItem: fcQLayout_method_callback_indexOfWithQLayoutItem,
+  indexOf_QWidget: fcQLayout_method_callback_indexOf_QWidget,
+  indexOf_QLayoutItem: fcQLayout_method_callback_indexOf_QLayoutItem,
   count: fcQLayout_method_callback_count,
   isEmpty: fcQLayout_method_callback_isEmpty,
   controlTypes: fcQLayout_method_callback_controlTypes,

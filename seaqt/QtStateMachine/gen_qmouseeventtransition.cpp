@@ -202,17 +202,17 @@ VirtualQMouseEventTransition* QMouseEventTransition_new(const QMouseEventTransit
 	return _mem_ ? new (_mem_)VirtualQMouseEventTransition(vtbl) : nullptr;
 }
 
-VirtualQMouseEventTransition* QMouseEventTransition_new2(const QMouseEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int button) {
+VirtualQMouseEventTransition* QMouseEventTransition_new_object_type_button(const QMouseEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int button) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEventTransition(vtbl, object, static_cast<QEvent::Type>(type), static_cast<Qt::MouseButton>(button)) : nullptr;
 }
 
-VirtualQMouseEventTransition* QMouseEventTransition_new3(const QMouseEventTransition_VTable* vtbl, size_t vdata, QState* sourceState) {
+VirtualQMouseEventTransition* QMouseEventTransition_new_sourceState(const QMouseEventTransition_VTable* vtbl, size_t vdata, QState* sourceState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEventTransition(vtbl, sourceState) : nullptr;
 }
 
-VirtualQMouseEventTransition* QMouseEventTransition_new4(const QMouseEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int button, QState* sourceState) {
+VirtualQMouseEventTransition* QMouseEventTransition_new_object_type_button_sourceState(const QMouseEventTransition_VTable* vtbl, size_t vdata, QObject* object, int type, int button, QState* sourceState) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMouseEventTransition>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMouseEventTransition(vtbl, object, static_cast<QEvent::Type>(type), static_cast<Qt::MouseButton>(button), sourceState) : nullptr;
 }
@@ -233,7 +233,7 @@ int QMouseEventTransition_metacall(QMouseEventTransition* self, int param1, int 
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMouseEventTransition_tr(const char* s) {
+struct seaqt_string QMouseEventTransition_tr_s(const char* s) {
 	QString _ret = QMouseEventTransition::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -270,7 +270,7 @@ void QMouseEventTransition_setHitTestPath(QMouseEventTransition* self, QPainterP
 	self->setHitTestPath(*path);
 }
 
-struct seaqt_string QMouseEventTransition_tr2(const char* s, const char* c) {
+struct seaqt_string QMouseEventTransition_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMouseEventTransition::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -281,7 +281,7 @@ struct seaqt_string QMouseEventTransition_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMouseEventTransition_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMouseEventTransition_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMouseEventTransition::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();

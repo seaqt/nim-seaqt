@@ -73,10 +73,10 @@ type cQDesignerObjectInspectorInterface*{.exportc: "QDesignerObjectInspectorInte
 proc fcQDesignerObjectInspectorInterface_metaObject(self: pointer): pointer {.importc: "QDesignerObjectInspectorInterface_metaObject".}
 proc fcQDesignerObjectInspectorInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerObjectInspectorInterface_metacast".}
 proc fcQDesignerObjectInspectorInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerObjectInspectorInterface_metacall".}
-proc fcQDesignerObjectInspectorInterface_tr(s: cstring): struct_seaqt_string {.importc: "QDesignerObjectInspectorInterface_tr".}
+proc fcQDesignerObjectInspectorInterface_trS(s: cstring): struct_seaqt_string {.importc: "QDesignerObjectInspectorInterface_tr_s".}
 proc fcQDesignerObjectInspectorInterface_setFormWindow(self: pointer, formWindow: pointer): void {.importc: "QDesignerObjectInspectorInterface_setFormWindow".}
-proc fcQDesignerObjectInspectorInterface_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerObjectInspectorInterface_tr2".}
-proc fcQDesignerObjectInspectorInterface_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerObjectInspectorInterface_tr3".}
+proc fcQDesignerObjectInspectorInterface_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QDesignerObjectInspectorInterface_tr_s_c".}
+proc fcQDesignerObjectInspectorInterface_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QDesignerObjectInspectorInterface_tr_s_c_n".}
 proc fcQDesignerObjectInspectorInterface_vdata(self: pointer): ptr pointer {.importc: "QDesignerObjectInspectorInterface_vdata".}
 proc fvdata_cQDesignerObjectInspectorInterface(self: pointer): pointer {.importc: "vdata_QDesignerObjectInspectorInterface".}
 
@@ -192,8 +192,8 @@ proc fcQDesignerObjectInspectorInterface_protectedbase_sender(self: pointer): po
 proc fcQDesignerObjectInspectorInterface_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QDesignerObjectInspectorInterface_protectedbase_senderSignalIndex".}
 proc fcQDesignerObjectInspectorInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerObjectInspectorInterface_protectedbase_receivers".}
 proc fcQDesignerObjectInspectorInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerObjectInspectorInterface_protectedbase_isSignalConnected".}
-proc fcQDesignerObjectInspectorInterface_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerObjectInspectorInterface {.importc: "QDesignerObjectInspectorInterface_new".}
-proc fcQDesignerObjectInspectorInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerObjectInspectorInterface {.importc: "QDesignerObjectInspectorInterface_new2".}
+proc fcQDesignerObjectInspectorInterface_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerObjectInspectorInterface {.importc: "QDesignerObjectInspectorInterface_new_parent".}
+proc fcQDesignerObjectInspectorInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerObjectInspectorInterface {.importc: "QDesignerObjectInspectorInterface_new_parent_flags".}
 proc fcQDesignerObjectInspectorInterface_staticMetaObject(): pointer {.importc: "QDesignerObjectInspectorInterface_staticMetaObject".}
 
 proc metaObject*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qobjectdefs_types.QMetaObject =
@@ -206,7 +206,7 @@ proc metacall*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorI
   fcQDesignerObjectInspectorInterface_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, s: cstring): string =
-  let v_ms = fcQDesignerObjectInspectorInterface_tr(s)
+  let v_ms = fcQDesignerObjectInspectorInterface_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -215,13 +215,13 @@ proc setFormWindow*(self: gen_abstractobjectinspector_types.QDesignerObjectInspe
   fcQDesignerObjectInspectorInterface_setFormWindow(self.h, formWindow.h)
 
 proc tr*(_: type gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, s: cstring, c: cstring): string =
-  let v_ms = fcQDesignerObjectInspectorInterface_tr2(s, c)
+  let v_ms = fcQDesignerObjectInspectorInterface_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQDesignerObjectInspectorInterface_tr3(s, c, n)
+  let v_ms = fcQDesignerObjectInspectorInterface_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

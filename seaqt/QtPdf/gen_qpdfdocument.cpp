@@ -181,7 +181,7 @@ VirtualQPdfDocument* QPdfDocument_new(const QPdfDocument_VTable* vtbl, size_t vd
 	return _mem_ ? new (_mem_)VirtualQPdfDocument(vtbl) : nullptr;
 }
 
-VirtualQPdfDocument* QPdfDocument_new2(const QPdfDocument_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQPdfDocument* QPdfDocument_new_parent(const QPdfDocument_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQPdfDocument>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQPdfDocument(vtbl, parent) : nullptr;
 }
@@ -202,7 +202,7 @@ int QPdfDocument_metacall(QPdfDocument* self, int param1, int param2, void** par
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QPdfDocument_tr(const char* s) {
+struct seaqt_string QPdfDocument_tr_s(const char* s) {
 	QString _ret = QPdfDocument::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -213,7 +213,7 @@ struct seaqt_string QPdfDocument_tr(const char* s) {
 	return _ms;
 }
 
-int QPdfDocument_load(QPdfDocument* self, struct seaqt_string fileName) {
+int QPdfDocument_load_fileName(QPdfDocument* self, struct seaqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QPdfDocument::Error _ret = self->load(fileName_QString);
 	return static_cast<int>(_ret);
@@ -224,7 +224,7 @@ int QPdfDocument_status(const QPdfDocument* self) {
 	return static_cast<int>(_ret);
 }
 
-void QPdfDocument_loadWithDevice(QPdfDocument* self, QIODevice* device) {
+void QPdfDocument_load_device(QPdfDocument* self, QIODevice* device) {
 	self->load(device);
 }
 
@@ -280,7 +280,7 @@ QAbstractListModel* QPdfDocument_pageModel(QPdfDocument* self) {
 	return self->pageModel();
 }
 
-QImage* QPdfDocument_render(QPdfDocument* self, int page, QSize* imageSize) {
+QImage* QPdfDocument_render_page_imageSize(QPdfDocument* self, int page, QSize* imageSize) {
 	return new QImage(self->render(static_cast<int>(page), *imageSize));
 }
 
@@ -374,7 +374,7 @@ void QPdfDocument_connect_pageModelChanged(QPdfDocument* self, intptr_t slot, vo
 	QPdfDocument::connect(self, static_cast<void (QPdfDocument::*)()>(&QPdfDocument::pageModelChanged), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QPdfDocument_tr2(const char* s, const char* c) {
+struct seaqt_string QPdfDocument_tr_s_c(const char* s, const char* c) {
 	QString _ret = QPdfDocument::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -385,7 +385,7 @@ struct seaqt_string QPdfDocument_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QPdfDocument_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QPdfDocument_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QPdfDocument::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -396,7 +396,7 @@ struct seaqt_string QPdfDocument_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QImage* QPdfDocument_render2(QPdfDocument* self, int page, QSize* imageSize, QPdfDocumentRenderOptions* options) {
+QImage* QPdfDocument_render_page_imageSize_options(QPdfDocument* self, int page, QSize* imageSize, QPdfDocumentRenderOptions* options) {
 	return new QImage(self->render(static_cast<int>(page), *imageSize, *options));
 }
 

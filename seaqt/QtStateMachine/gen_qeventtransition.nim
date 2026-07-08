@@ -59,13 +59,13 @@ type cQEventTransition*{.exportc: "QEventTransition", incompleteStruct.} = objec
 proc fcQEventTransition_metaObject(self: pointer): pointer {.importc: "QEventTransition_metaObject".}
 proc fcQEventTransition_metacast(self: pointer, param1: cstring): pointer {.importc: "QEventTransition_metacast".}
 proc fcQEventTransition_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QEventTransition_metacall".}
-proc fcQEventTransition_tr(s: cstring): struct_seaqt_string {.importc: "QEventTransition_tr".}
+proc fcQEventTransition_trS(s: cstring): struct_seaqt_string {.importc: "QEventTransition_tr_s".}
 proc fcQEventTransition_eventSource(self: pointer): pointer {.importc: "QEventTransition_eventSource".}
 proc fcQEventTransition_setEventSource(self: pointer, objectVal: pointer): void {.importc: "QEventTransition_setEventSource".}
 proc fcQEventTransition_eventType(self: pointer): cint {.importc: "QEventTransition_eventType".}
 proc fcQEventTransition_setEventType(self: pointer, typeVal: cint): void {.importc: "QEventTransition_setEventType".}
-proc fcQEventTransition_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QEventTransition_tr2".}
-proc fcQEventTransition_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QEventTransition_tr3".}
+proc fcQEventTransition_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QEventTransition_tr_s_c".}
+proc fcQEventTransition_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QEventTransition_tr_s_c_n".}
 proc fcQEventTransition_vdata(self: pointer): ptr pointer {.importc: "QEventTransition_vdata".}
 proc fvdata_cQEventTransition(self: pointer): pointer {.importc: "vdata_QEventTransition".}
 
@@ -100,9 +100,9 @@ proc fcQEventTransition_protectedbase_senderSignalIndex(self: pointer): cint {.i
 proc fcQEventTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QEventTransition_protectedbase_receivers".}
 proc fcQEventTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QEventTransition_protectedbase_isSignalConnected".}
 proc fcQEventTransition_new(vtbl: pointer, vdata: csize_t): ptr cQEventTransition {.importc: "QEventTransition_new".}
-proc fcQEventTransition_new2(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint): ptr cQEventTransition {.importc: "QEventTransition_new2".}
-proc fcQEventTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQEventTransition {.importc: "QEventTransition_new3".}
-proc fcQEventTransition_new4(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, sourceState: pointer): ptr cQEventTransition {.importc: "QEventTransition_new4".}
+proc fcQEventTransition_new2(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint): ptr cQEventTransition {.importc: "QEventTransition_new_object_type".}
+proc fcQEventTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQEventTransition {.importc: "QEventTransition_new_sourceState".}
+proc fcQEventTransition_new4(vtbl: pointer, vdata: csize_t, objectVal: pointer, typeVal: cint, sourceState: pointer): ptr cQEventTransition {.importc: "QEventTransition_new_object_type_sourceState".}
 proc fcQEventTransition_staticMetaObject(): pointer {.importc: "QEventTransition_staticMetaObject".}
 
 proc metaObject*(self: gen_qeventtransition_types.QEventTransition): gen_qobjectdefs_types.QMetaObject =
@@ -115,7 +115,7 @@ proc metacall*(self: gen_qeventtransition_types.QEventTransition, param1: cint, 
   fcQEventTransition_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qeventtransition_types.QEventTransition, s: cstring): string =
-  let v_ms = fcQEventTransition_tr(s)
+  let v_ms = fcQEventTransition_trS(s)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
@@ -133,13 +133,13 @@ proc setEventType*(self: gen_qeventtransition_types.QEventTransition, typeVal: c
   fcQEventTransition_setEventType(self.h, cint(typeVal))
 
 proc tr*(_: type gen_qeventtransition_types.QEventTransition, s: cstring, c: cstring): string =
-  let v_ms = fcQEventTransition_tr2(s, c)
+  let v_ms = fcQEventTransition_trSC(s, c)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
 
 proc tr*(_: type gen_qeventtransition_types.QEventTransition, s: cstring, c: cstring, n: cint): string =
-  let v_ms = fcQEventTransition_tr3(s, c, n)
+  let v_ms = fcQEventTransition_trSCN(s, c, n)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret

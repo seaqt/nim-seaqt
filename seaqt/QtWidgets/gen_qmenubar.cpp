@@ -712,7 +712,7 @@ VirtualQMenuBar* QMenuBar_new(const QMenuBar_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQMenuBar(vtbl) : nullptr;
 }
 
-VirtualQMenuBar* QMenuBar_new2(const QMenuBar_VTable* vtbl, size_t vdata, QWidget* parent) {
+VirtualQMenuBar* QMenuBar_new_parent(const QMenuBar_VTable* vtbl, size_t vdata, QWidget* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQMenuBar>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQMenuBar(vtbl, parent) : nullptr;
 }
@@ -733,7 +733,7 @@ int QMenuBar_metacall(QMenuBar* self, int param1, int param2, void** param3) {
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QMenuBar_tr(const char* s) {
+struct seaqt_string QMenuBar_tr_s(const char* s) {
 	QString _ret = QMenuBar::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -744,16 +744,16 @@ struct seaqt_string QMenuBar_tr(const char* s) {
 	return _ms;
 }
 
-QAction* QMenuBar_addMenu(QMenuBar* self, QMenu* menu) {
+QAction* QMenuBar_addMenu_menu(QMenuBar* self, QMenu* menu) {
 	return self->addMenu(menu);
 }
 
-QMenu* QMenuBar_addMenuWithTitle(QMenuBar* self, struct seaqt_string title) {
+QMenu* QMenuBar_addMenu_title(QMenuBar* self, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return self->addMenu(title_QString);
 }
 
-QMenu* QMenuBar_addMenu2(QMenuBar* self, QIcon* icon, struct seaqt_string title) {
+QMenu* QMenuBar_addMenu_icon_title(QMenuBar* self, QIcon* icon, struct seaqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	return self->addMenu(*icon, title_QString);
 }
@@ -810,7 +810,7 @@ QAction* QMenuBar_actionAt(const QMenuBar* self, QPoint* param1) {
 	return self->actionAt(*param1);
 }
 
-void QMenuBar_setCornerWidget(QMenuBar* self, QWidget* w) {
+void QMenuBar_setCornerWidget_w(QMenuBar* self, QWidget* w) {
 	self->setCornerWidget(w);
 }
 
@@ -862,7 +862,7 @@ void QMenuBar_connect_hovered(QMenuBar* self, intptr_t slot, void (*callback)(in
 	QMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::hovered), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QMenuBar_tr2(const char* s, const char* c) {
+struct seaqt_string QMenuBar_tr_s_c(const char* s, const char* c) {
 	QString _ret = QMenuBar::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -873,7 +873,7 @@ struct seaqt_string QMenuBar_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QMenuBar_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QMenuBar_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QMenuBar::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -884,11 +884,11 @@ struct seaqt_string QMenuBar_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QMenuBar_setCornerWidget2(QMenuBar* self, QWidget* w, int corner) {
+void QMenuBar_setCornerWidget_w_corner(QMenuBar* self, QWidget* w, int corner) {
 	self->setCornerWidget(w, static_cast<Qt::Corner>(corner));
 }
 
-QWidget* QMenuBar_cornerWidgetWithCorner(const QMenuBar* self, int corner) {
+QWidget* QMenuBar_cornerWidget_corner(const QMenuBar* self, int corner) {
 	return self->cornerWidget(static_cast<Qt::Corner>(corner));
 }
 

@@ -27,20 +27,20 @@ typedef struct QFileInfo QFileInfo;
 #endif
 
 QFileInfo* QFileInfo_new();
-QFileInfo* QFileInfo_new2(struct seaqt_string file);
-QFileInfo* QFileInfo_new3(QFileDevice* file);
-QFileInfo* QFileInfo_new4(QDir* dir, struct seaqt_string file);
-QFileInfo* QFileInfo_new5(QFileInfo* fileinfo);
+QFileInfo* QFileInfo_new_QString(struct seaqt_string file);
+QFileInfo* QFileInfo_new_QFileDevice(QFileDevice* file);
+QFileInfo* QFileInfo_new_QDir_QString(QDir* dir, struct seaqt_string file);
+QFileInfo* QFileInfo_new_QFileInfo(QFileInfo* from);
 
-void QFileInfo_operatorAssign(QFileInfo* self, QFileInfo* fileinfo);
+void QFileInfo_operatorAssign(QFileInfo* self, QFileInfo* from);
 void QFileInfo_swap(QFileInfo* self, QFileInfo* other);
 bool QFileInfo_operatorEqual(const QFileInfo* self, QFileInfo* fileinfo);
 bool QFileInfo_operatorNotEqual(const QFileInfo* self, QFileInfo* fileinfo);
-void QFileInfo_setFile(QFileInfo* self, struct seaqt_string file);
-void QFileInfo_setFileWithFile(QFileInfo* self, QFileDevice* file);
-void QFileInfo_setFile2(QFileInfo* self, QDir* dir, struct seaqt_string file);
+void QFileInfo_setFile_QString(QFileInfo* self, struct seaqt_string file);
+void QFileInfo_setFile_QFileDevice(QFileInfo* self, QFileDevice* file);
+void QFileInfo_setFile_QDir_QString(QFileInfo* self, QDir* dir, struct seaqt_string file);
 bool QFileInfo_exists(const QFileInfo* self);
-bool QFileInfo_existsWithFile(struct seaqt_string file);
+bool QFileInfo_exists_file(struct seaqt_string file);
 void QFileInfo_refresh(QFileInfo* self);
 struct seaqt_string QFileInfo_filePath(const QFileInfo* self);
 struct seaqt_string QFileInfo_absoluteFilePath(const QFileInfo* self);

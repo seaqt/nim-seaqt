@@ -178,7 +178,7 @@ VirtualQImageCapture* QImageCapture_new(const QImageCapture_VTable* vtbl, size_t
 	return _mem_ ? new (_mem_)VirtualQImageCapture(vtbl) : nullptr;
 }
 
-VirtualQImageCapture* QImageCapture_new2(const QImageCapture_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQImageCapture* QImageCapture_new_parent(const QImageCapture_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQImageCapture>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQImageCapture(vtbl, parent) : nullptr;
 }
@@ -199,7 +199,7 @@ int QImageCapture_metacall(QImageCapture* self, int param1, int param2, void** p
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QImageCapture_tr(const char* s) {
+struct seaqt_string QImageCapture_tr_s(const char* s) {
 	QString _ret = QImageCapture::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -287,11 +287,11 @@ QSize* QImageCapture_resolution(const QImageCapture* self) {
 	return new QSize(self->resolution());
 }
 
-void QImageCapture_setResolution(QImageCapture* self, QSize* resolution) {
+void QImageCapture_setResolution_resolution(QImageCapture* self, QSize* resolution) {
 	self->setResolution(*resolution);
 }
 
-void QImageCapture_setResolution2(QImageCapture* self, int width, int height) {
+void QImageCapture_setResolution_width_height(QImageCapture* self, int width, int height) {
 	self->setResolution(static_cast<int>(width), static_cast<int>(height));
 }
 
@@ -540,7 +540,7 @@ void QImageCapture_connect_imageSaved(QImageCapture* self, intptr_t slot, void (
 	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QString&)>(&QImageCapture::imageSaved), self, local_caller{slot, callback, release});
 }
 
-struct seaqt_string QImageCapture_tr2(const char* s, const char* c) {
+struct seaqt_string QImageCapture_tr_s_c(const char* s, const char* c) {
 	QString _ret = QImageCapture::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -551,7 +551,7 @@ struct seaqt_string QImageCapture_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QImageCapture_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QImageCapture_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QImageCapture::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -562,7 +562,7 @@ struct seaqt_string QImageCapture_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-int QImageCapture_captureToFileWithLocation(QImageCapture* self, struct seaqt_string location) {
+int QImageCapture_captureToFile_location(QImageCapture* self, struct seaqt_string location) {
 	QString location_QString = QString::fromUtf8(location.data, location.len);
 	return self->captureToFile(location_QString);
 }

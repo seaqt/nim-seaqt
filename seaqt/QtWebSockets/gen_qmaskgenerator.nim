@@ -86,7 +86,7 @@ proc fcQMaskGenerator_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQMaskGenerator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMaskGenerator_protectedbase_receivers".}
 proc fcQMaskGenerator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMaskGenerator_protectedbase_isSignalConnected".}
 proc fcQMaskGenerator_new(vtbl: pointer, vdata: csize_t): ptr cQMaskGenerator {.importc: "QMaskGenerator_new".}
-proc fcQMaskGenerator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMaskGenerator {.importc: "QMaskGenerator_new2".}
+proc fcQMaskGenerator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQMaskGenerator {.importc: "QMaskGenerator_new_parent".}
 
 proc seed*(self: gen_qmaskgenerator_types.QMaskGenerator): bool =
   fcQMaskGenerator_seed(self.h)

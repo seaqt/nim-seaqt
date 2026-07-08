@@ -25,19 +25,19 @@ typedef struct QVideoFrameFormat QVideoFrameFormat;
 #endif
 
 QVideoFrameFormat* QVideoFrameFormat_new();
-QVideoFrameFormat* QVideoFrameFormat_new2(QSize* size, int pixelFormat);
-QVideoFrameFormat* QVideoFrameFormat_new3(QVideoFrameFormat* format);
+QVideoFrameFormat* QVideoFrameFormat_new_size_pixelFormat(QSize* size, int pixelFormat);
+QVideoFrameFormat* QVideoFrameFormat_new_from(QVideoFrameFormat* from);
 
 void QVideoFrameFormat_swap(QVideoFrameFormat* self, QVideoFrameFormat* other);
 void QVideoFrameFormat_detach(QVideoFrameFormat* self);
-void QVideoFrameFormat_operatorAssign(QVideoFrameFormat* self, QVideoFrameFormat* format);
+void QVideoFrameFormat_operatorAssign(QVideoFrameFormat* self, QVideoFrameFormat* from);
 bool QVideoFrameFormat_operatorEqual(const QVideoFrameFormat* self, QVideoFrameFormat* format);
 bool QVideoFrameFormat_operatorNotEqual(const QVideoFrameFormat* self, QVideoFrameFormat* format);
 bool QVideoFrameFormat_isValid(const QVideoFrameFormat* self);
 int QVideoFrameFormat_pixelFormat(const QVideoFrameFormat* self);
 QSize* QVideoFrameFormat_frameSize(const QVideoFrameFormat* self);
-void QVideoFrameFormat_setFrameSize(QVideoFrameFormat* self, QSize* size);
-void QVideoFrameFormat_setFrameSize2(QVideoFrameFormat* self, int width, int height);
+void QVideoFrameFormat_setFrameSize_size(QVideoFrameFormat* self, QSize* size);
+void QVideoFrameFormat_setFrameSize_width_height(QVideoFrameFormat* self, int width, int height);
 int QVideoFrameFormat_frameWidth(const QVideoFrameFormat* self);
 int QVideoFrameFormat_frameHeight(const QVideoFrameFormat* self);
 int QVideoFrameFormat_planeCount(const QVideoFrameFormat* self);

@@ -174,7 +174,7 @@ VirtualQEventLoop* QEventLoop_new(const QEventLoop_VTable* vtbl, size_t vdata) {
 	return _mem_ ? new (_mem_)VirtualQEventLoop(vtbl) : nullptr;
 }
 
-VirtualQEventLoop* QEventLoop_new2(const QEventLoop_VTable* vtbl, size_t vdata, QObject* parent) {
+VirtualQEventLoop* QEventLoop_new_parent(const QEventLoop_VTable* vtbl, size_t vdata, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQEventLoop>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQEventLoop(vtbl, parent) : nullptr;
 }
@@ -195,7 +195,7 @@ int QEventLoop_metacall(QEventLoop* self, int param1, int param2, void** param3)
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QEventLoop_tr(const char* s) {
+struct seaqt_string QEventLoop_tr_s(const char* s) {
 	QString _ret = QEventLoop::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -210,7 +210,7 @@ bool QEventLoop_processEvents(QEventLoop* self) {
 	return self->processEvents();
 }
 
-void QEventLoop_processEvents2(QEventLoop* self, int flags, int maximumTime) {
+void QEventLoop_processEvents_flags_maximumTime(QEventLoop* self, int flags, int maximumTime) {
 	self->processEvents(static_cast<QEventLoop::ProcessEventsFlags>(flags), static_cast<int>(maximumTime));
 }
 
@@ -238,7 +238,7 @@ void QEventLoop_quit(QEventLoop* self) {
 	self->quit();
 }
 
-struct seaqt_string QEventLoop_tr2(const char* s, const char* c) {
+struct seaqt_string QEventLoop_tr_s_c(const char* s, const char* c) {
 	QString _ret = QEventLoop::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -249,7 +249,7 @@ struct seaqt_string QEventLoop_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QEventLoop_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QEventLoop_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QEventLoop::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -260,15 +260,15 @@ struct seaqt_string QEventLoop_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QEventLoop_processEventsWithFlags(QEventLoop* self, int flags) {
+bool QEventLoop_processEvents_flags(QEventLoop* self, int flags) {
 	return self->processEvents(static_cast<QEventLoop::ProcessEventsFlags>(flags));
 }
 
-int QEventLoop_execWithFlags(QEventLoop* self, int flags) {
+int QEventLoop_exec_flags(QEventLoop* self, int flags) {
 	return self->exec(static_cast<QEventLoop::ProcessEventsFlags>(flags));
 }
 
-void QEventLoop_exitWithReturnCode(QEventLoop* self, int returnCode) {
+void QEventLoop_exit_returnCode(QEventLoop* self, int returnCode) {
 	self->exit(static_cast<int>(returnCode));
 }
 
@@ -350,11 +350,11 @@ QEventLoopLocker* QEventLoopLocker_new() {
 	return new (std::nothrow) QEventLoopLocker();
 }
 
-QEventLoopLocker* QEventLoopLocker_new2(QEventLoop* loop) {
+QEventLoopLocker* QEventLoopLocker_new_loop(QEventLoop* loop) {
 	return new (std::nothrow) QEventLoopLocker(loop);
 }
 
-QEventLoopLocker* QEventLoopLocker_new3(QThread* thread) {
+QEventLoopLocker* QEventLoopLocker_new_thread(QThread* thread) {
 	return new (std::nothrow) QEventLoopLocker(thread);
 }
 

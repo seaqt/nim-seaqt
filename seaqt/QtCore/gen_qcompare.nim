@@ -50,9 +50,9 @@ export gen_qcompare_types
 
 type cQPartialOrdering*{.exportc: "QPartialOrdering", incompleteStruct.} = object
 
-proc fcQPartialOrdering_new(param1: pointer): ptr cQPartialOrdering {.importc: "QPartialOrdering_new".}
+proc fcQPartialOrdering_new(fromVal: pointer): ptr cQPartialOrdering {.importc: "QPartialOrdering_new".}
 
 proc create*(T: type gen_qcompare_types.QPartialOrdering,
-    param1: gen_qcompare_types.QPartialOrdering): gen_qcompare_types.QPartialOrdering =
-  let tmp = gen_qcompare_types.QPartialOrdering(h: fcQPartialOrdering_new(param1.h), owned: true)
+    fromVal: gen_qcompare_types.QPartialOrdering): gen_qcompare_types.QPartialOrdering =
+  let tmp = gen_qcompare_types.QPartialOrdering(h: fcQPartialOrdering_new(fromVal.h), owned: true)
   tmp

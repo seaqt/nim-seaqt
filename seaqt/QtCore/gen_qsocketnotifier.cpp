@@ -170,22 +170,22 @@ public:
 	friend bool QSocketNotifier_protectedbase_isSignalConnected(const VirtualQSocketNotifier* self, QMetaMethod* signal);
 };
 
-VirtualQSocketNotifier* QSocketNotifier_new(const QSocketNotifier_VTable* vtbl, size_t vdata, int param1) {
+VirtualQSocketNotifier* QSocketNotifier_new_QSocketNotifier_Type(const QSocketNotifier_VTable* vtbl, size_t vdata, int param1) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSocketNotifier>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSocketNotifier(vtbl, static_cast<QSocketNotifier::Type>(param1)) : nullptr;
 }
 
-VirtualQSocketNotifier* QSocketNotifier_new2(const QSocketNotifier_VTable* vtbl, size_t vdata, intptr_t socket, int param2) {
+VirtualQSocketNotifier* QSocketNotifier_new_qintptr_QSocketNotifier_Type(const QSocketNotifier_VTable* vtbl, size_t vdata, intptr_t socket, int param2) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSocketNotifier>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSocketNotifier(vtbl, (qintptr)(socket), static_cast<QSocketNotifier::Type>(param2)) : nullptr;
 }
 
-VirtualQSocketNotifier* QSocketNotifier_new3(const QSocketNotifier_VTable* vtbl, size_t vdata, int param1, QObject* parent) {
+VirtualQSocketNotifier* QSocketNotifier_new_QSocketNotifier_Type_QObject(const QSocketNotifier_VTable* vtbl, size_t vdata, int param1, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSocketNotifier>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSocketNotifier(vtbl, static_cast<QSocketNotifier::Type>(param1), parent) : nullptr;
 }
 
-VirtualQSocketNotifier* QSocketNotifier_new4(const QSocketNotifier_VTable* vtbl, size_t vdata, intptr_t socket, int param2, QObject* parent) {
+VirtualQSocketNotifier* QSocketNotifier_new_qintptr_QSocketNotifier_Type_QObject(const QSocketNotifier_VTable* vtbl, size_t vdata, intptr_t socket, int param2, QObject* parent) {
 	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSocketNotifier>() + vdata, std::nothrow);
 	return _mem_ ? new (_mem_)VirtualQSocketNotifier(vtbl, (qintptr)(socket), static_cast<QSocketNotifier::Type>(param2), parent) : nullptr;
 }
@@ -206,7 +206,7 @@ int QSocketNotifier_metacall(QSocketNotifier* self, int param1, int param2, void
 	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct seaqt_string QSocketNotifier_tr(const char* s) {
+struct seaqt_string QSocketNotifier_tr_s(const char* s) {
 	QString _ret = QSocketNotifier::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -243,7 +243,7 @@ void QSocketNotifier_setEnabled(QSocketNotifier* self, bool enabled) {
 	self->setEnabled(enabled);
 }
 
-struct seaqt_string QSocketNotifier_tr2(const char* s, const char* c) {
+struct seaqt_string QSocketNotifier_tr_s_c(const char* s, const char* c) {
 	QString _ret = QSocketNotifier::tr(s, c);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -254,7 +254,7 @@ struct seaqt_string QSocketNotifier_tr2(const char* s, const char* c) {
 	return _ms;
 }
 
-struct seaqt_string QSocketNotifier_tr3(const char* s, const char* c, int n) {
+struct seaqt_string QSocketNotifier_tr_s_c_n(const char* s, const char* c, int n) {
 	QString _ret = QSocketNotifier::tr(s, c, static_cast<int>(n));
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
@@ -347,11 +347,11 @@ QSocketDescriptor* QSocketDescriptor_new() {
 #endif
 }
 
-QSocketDescriptor* QSocketDescriptor_new2(QSocketDescriptor* param1) {
-	return new (std::nothrow) QSocketDescriptor(*param1);
+QSocketDescriptor* QSocketDescriptor_new_from(QSocketDescriptor* from) {
+	return new (std::nothrow) QSocketDescriptor(*from);
 }
 
-QSocketDescriptor* QSocketDescriptor_new3(int descriptor) {
+QSocketDescriptor* QSocketDescriptor_new_descriptor(int descriptor) {
 #if defined(Q_OS_LINUX)
 	return new (std::nothrow) QSocketDescriptor(static_cast<QSocketDescriptor::DescriptorType>(descriptor));
 #else
