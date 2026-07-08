@@ -46,7 +46,6 @@ proc fcQWebSocketCorsAuthenticator_setAllowed(self: pointer, allowed: bool): voi
 proc fcQWebSocketCorsAuthenticator_allowed(self: pointer): bool {.importc: "QWebSocketCorsAuthenticator_allowed".}
 proc fcQWebSocketCorsAuthenticator_new(origin: struct_seaqt_string): ptr cQWebSocketCorsAuthenticator {.importc: "QWebSocketCorsAuthenticator_new".}
 proc fcQWebSocketCorsAuthenticator_new2(other: pointer): ptr cQWebSocketCorsAuthenticator {.importc: "QWebSocketCorsAuthenticator_new2".}
-proc fcQWebSocketCorsAuthenticator_delete(self: pointer) {.importc: "QWebSocketCorsAuthenticator_delete".}
 
 proc swap*(self: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator, other: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator): void =
   fcQWebSocketCorsAuthenticator_swap(self.h, other.h)
@@ -68,11 +67,9 @@ proc allowed*(self: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenti
 
 proc create*(T: type gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator,
     origin: openArray[char]): gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator =
-  let tmp = gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator(h: fcQWebSocketCorsAuthenticator_new(struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin)))))
+  let tmp = gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator(h: fcQWebSocketCorsAuthenticator_new(struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin)))), owned: true)
   tmp
 proc create*(T: type gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator,
     other: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator): gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator =
-  let tmp = gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator(h: fcQWebSocketCorsAuthenticator_new2(other.h))
+  let tmp = gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator(h: fcQWebSocketCorsAuthenticator_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qwebsocketcorsauthenticator_types.QWebSocketCorsAuthenticator) =
-  fcQWebSocketCorsAuthenticator_delete(self.h)

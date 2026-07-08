@@ -17,7 +17,7 @@ proc `=sink`(dest: var QDtls, source: QDtls) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QDtlsClientVerifierGeneratorParameters* {.inheritable, pure.} = object
+type QDtlsClientVerifierGeneratorParameters* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

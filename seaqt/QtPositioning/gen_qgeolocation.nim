@@ -63,7 +63,6 @@ proc fcQGeoLocation_setExtendedAttributes(self: pointer, data: struct_seaqt_map)
 proc fcQGeoLocation_isEmpty(self: pointer): bool {.importc: "QGeoLocation_isEmpty".}
 proc fcQGeoLocation_new(): ptr cQGeoLocation {.importc: "QGeoLocation_new".}
 proc fcQGeoLocation_new2(other: pointer): ptr cQGeoLocation {.importc: "QGeoLocation_new2".}
-proc fcQGeoLocation_delete(self: pointer) {.importc: "QGeoLocation_delete".}
 
 proc operatorAssign*(self: gen_qgeolocation_types.QGeoLocation, other: gen_qgeolocation_types.QGeoLocation): void =
   fcQGeoLocation_operatorAssign(self.h, other.h)
@@ -72,19 +71,19 @@ proc swap*(self: gen_qgeolocation_types.QGeoLocation, other: gen_qgeolocation_ty
   fcQGeoLocation_swap(self.h, other.h)
 
 proc address*(self: gen_qgeolocation_types.QGeoLocation): gen_qgeoaddress_types.QGeoAddress =
-  gen_qgeoaddress_types.QGeoAddress(h: fcQGeoLocation_address(self.h))
+  gen_qgeoaddress_types.QGeoAddress(h: fcQGeoLocation_address(self.h), owned: true)
 
 proc setAddress*(self: gen_qgeolocation_types.QGeoLocation, address: gen_qgeoaddress_types.QGeoAddress): void =
   fcQGeoLocation_setAddress(self.h, address.h)
 
 proc coordinate*(self: gen_qgeolocation_types.QGeoLocation): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoLocation_coordinate(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoLocation_coordinate(self.h), owned: true)
 
 proc setCoordinate*(self: gen_qgeolocation_types.QGeoLocation, position: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoLocation_setCoordinate(self.h, position.h)
 
 proc boundingShape*(self: gen_qgeolocation_types.QGeoLocation): gen_qgeoshape_types.QGeoShape =
-  gen_qgeoshape_types.QGeoShape(h: fcQGeoLocation_boundingShape(self.h))
+  gen_qgeoshape_types.QGeoShape(h: fcQGeoLocation_boundingShape(self.h), owned: true)
 
 proc setBoundingShape*(self: gen_qgeolocation_types.QGeoLocation, shape: gen_qgeoshape_types.QGeoShape): void =
   fcQGeoLocation_setBoundingShape(self.h, shape.h)
@@ -100,7 +99,7 @@ proc extendedAttributes*(self: gen_qgeolocation_types.QGeoLocation): Table[strin
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -111,8 +110,11 @@ proc setExtendedAttributes*(self: gen_qgeolocation_types.QGeoLocation, data: Tab
   var data_Keys_CArray = newSeq[struct_seaqt_string](len(data))
   var data_Values_CArray = newSeq[pointer](len(data))
   var data_ctr = 0
-  for data_k, data_v in data:
+  for data_k in data.keys():
     data_Keys_CArray[data_ctr] = struct_seaqt_string(data: if len(data_k) > 0: addr data_k[0] else: nil, len: csize_t(len(data_k)))
+    data_ctr += 1
+  data_ctr = 0
+  for data_v in data.values():
     data_Values_CArray[data_ctr] = data_v.h
     data_ctr += 1
 
@@ -122,11 +124,9 @@ proc isEmpty*(self: gen_qgeolocation_types.QGeoLocation): bool =
   fcQGeoLocation_isEmpty(self.h)
 
 proc create*(T: type gen_qgeolocation_types.QGeoLocation): gen_qgeolocation_types.QGeoLocation =
-  let tmp = gen_qgeolocation_types.QGeoLocation(h: fcQGeoLocation_new())
+  let tmp = gen_qgeolocation_types.QGeoLocation(h: fcQGeoLocation_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeolocation_types.QGeoLocation,
     other: gen_qgeolocation_types.QGeoLocation): gen_qgeolocation_types.QGeoLocation =
-  let tmp = gen_qgeolocation_types.QGeoLocation(h: fcQGeoLocation_new2(other.h))
+  let tmp = gen_qgeolocation_types.QGeoLocation(h: fcQGeoLocation_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qgeolocation_types.QGeoLocation) =
-  fcQGeoLocation_delete(self.h)

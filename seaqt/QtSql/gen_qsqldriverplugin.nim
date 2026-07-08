@@ -94,10 +94,9 @@ proc fcQSqlDriverPlugin_protectedbase_isSignalConnected(self: pointer, signal: p
 proc fcQSqlDriverPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQSqlDriverPlugin {.importc: "QSqlDriverPlugin_new".}
 proc fcQSqlDriverPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSqlDriverPlugin {.importc: "QSqlDriverPlugin_new2".}
 proc fcQSqlDriverPlugin_staticMetaObject(): pointer {.importc: "QSqlDriverPlugin_staticMetaObject".}
-proc fcQSqlDriverPlugin_delete(self: pointer) {.importc: "QSqlDriverPlugin_delete".}
 
 proc metaObject*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSqlDriverPlugin_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSqlDriverPlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin, param1: cstring): pointer =
   fcQSqlDriverPlugin_metacast(self.h, param1)
@@ -112,7 +111,7 @@ proc tr*(_: type gen_qsqldriverplugin_types.QSqlDriverPlugin, s: cstring): strin
   vx_ret
 
 proc createX*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin, key: openArray[char]): gen_qsqldriver_types.QSqlDriver =
-  gen_qsqldriver_types.QSqlDriver(h: fcQSqlDriverPlugin_createX(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))))
+  gen_qsqldriver_types.QSqlDriver(h: fcQSqlDriverPlugin_createX(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc tr*(_: type gen_qsqldriverplugin_types.QSqlDriverPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQSqlDriverPlugin_tr2(s, c)
@@ -137,7 +136,8 @@ type QSqlDriverPluginchildEventProc* = proc(self: QSqlDriverPlugin, event: gen_q
 type QSqlDriverPlugincustomEventProc* = proc(self: QSqlDriverPlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSqlDriverPluginconnectNotifyProc* = proc(self: QSqlDriverPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSqlDriverPlugindisconnectNotifyProc* = proc(self: QSqlDriverPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSqlDriverPluginVTable* = object
+
+type QSqlDriverPluginVTable* {.inheritable, pure.} = object
   vtbl: cQSqlDriverPluginVTable
   metaObject*: QSqlDriverPluginmetaObjectProc
   metacast*: QSqlDriverPluginmetacastProc
@@ -152,7 +152,7 @@ type QSqlDriverPluginVTable* = object
   disconnectNotify*: QSqlDriverPlugindisconnectNotifyProc
 
 proc QSqlDriverPluginmetaObject*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSqlDriverPlugin_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSqlDriverPlugin_virtualbase_metaObject(self.h), owned: false)
 
 proc QSqlDriverPluginmetacast*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin, param1: cstring): pointer =
   fcQSqlDriverPlugin_virtualbase_metacast(self.h, param1)
@@ -186,7 +186,10 @@ proc fcQSqlDriverPlugin_vtable_callback_metaObject(self: pointer): pointer {.cde
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
   let self = QSqlDriverPlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlDriverPlugin_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
@@ -212,51 +215,54 @@ proc fcQSqlDriverPlugin_vtable_callback_createX(self: pointer, key: struct_seaqt
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
   var virtualReturn = vtbl[].createX(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlDriverPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
   let self = QSqlDriverPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQSqlDriverPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
   let self = QSqlDriverPlugin(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQSqlDriverPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
   let self = QSqlDriverPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQSqlDriverPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
   let self = QSqlDriverPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQSqlDriverPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
   let self = QSqlDriverPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQSqlDriverPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
   let self = QSqlDriverPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQSqlDriverPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSqlDriverPluginVTable](fcQSqlDriverPlugin_vdata(self)[])
   let self = QSqlDriverPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSqlDriverPlugin* {.inheritable.} = ref object of QSqlDriverPlugin
@@ -288,7 +294,10 @@ method disconnectNotify*(self: VirtualQSqlDriverPlugin, signal: gen_qmetaobject_
 proc fcQSqlDriverPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlDriverPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
@@ -311,49 +320,52 @@ proc fcQSqlDriverPlugin_method_callback_createX(self: pointer, key: struct_seaqt
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
   var virtualReturn = inst.createX(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSqlDriverPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQSqlDriverPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQSqlDriverPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQSqlDriverPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQSqlDriverPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQSqlDriverPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQSqlDriverPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSqlDriverPlugin](fcQSqlDriverPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSqlDriverPlugin_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSqlDriverPlugin_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin): cint =
   fcQSqlDriverPlugin_protectedbase_senderSignalIndex(self.h)
@@ -393,7 +405,7 @@ proc create*(T: type gen_qsqldriverplugin_types.QSqlDriverPlugin,
     vtbl[].vtbl.connectNotify = fcQSqlDriverPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSqlDriverPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qsqldriverplugin_types.QSqlDriverPlugin(h: fcQSqlDriverPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsqldriverplugin_types.QSqlDriverPlugin(h: fcQSqlDriverPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSqlDriverPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsqldriverplugin_types.QSqlDriverPlugin,
@@ -426,13 +438,14 @@ proc create*(T: type gen_qsqldriverplugin_types.QSqlDriverPlugin,
     vtbl[].vtbl.connectNotify = fcQSqlDriverPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSqlDriverPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qsqldriverplugin_types.QSqlDriverPlugin(h: fcQSqlDriverPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsqldriverplugin_types.QSqlDriverPlugin(h: fcQSqlDriverPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSqlDriverPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSqlDriverPlugin_mvtbl = cQSqlDriverPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSqlDriverPlugin()[])](self.fcQSqlDriverPlugin_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSqlDriverPlugin_method_callback_metaObject,
   metacast: fcQSqlDriverPlugin_method_callback_metacast,
@@ -463,5 +476,3 @@ proc create*(T: type gen_qsqldriverplugin_types.QSqlDriverPlugin,
 
 proc staticMetaObject*(_: type gen_qsqldriverplugin_types.QSqlDriverPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSqlDriverPlugin_staticMetaObject())
-proc delete*(self: gen_qsqldriverplugin_types.QSqlDriverPlugin) =
-  fcQSqlDriverPlugin_delete(self.h)

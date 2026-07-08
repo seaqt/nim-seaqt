@@ -57,9 +57,7 @@ proc fcQDesignerCustomWidgetInterface_createWidget(self: pointer, parent: pointe
 proc fcQDesignerCustomWidgetInterface_isInitialized(self: pointer): bool {.importc: "QDesignerCustomWidgetInterface_isInitialized".}
 proc fcQDesignerCustomWidgetInterface_domXml(self: pointer): struct_seaqt_string {.importc: "QDesignerCustomWidgetInterface_domXml".}
 proc fcQDesignerCustomWidgetInterface_codeTemplate(self: pointer): struct_seaqt_string {.importc: "QDesignerCustomWidgetInterface_codeTemplate".}
-proc fcQDesignerCustomWidgetInterface_delete(self: pointer) {.importc: "QDesignerCustomWidgetInterface_delete".}
 proc fcQDesignerCustomWidgetCollectionInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QDesignerCustomWidgetCollectionInterface_operatorAssign".}
-proc fcQDesignerCustomWidgetCollectionInterface_delete(self: pointer) {.importc: "QDesignerCustomWidgetCollectionInterface_delete".}
 
 proc name*(self: gen_customwidget_types.QDesignerCustomWidgetInterface): string =
   let v_ms = fcQDesignerCustomWidgetInterface_name(self.h)
@@ -92,13 +90,13 @@ proc includeFile*(self: gen_customwidget_types.QDesignerCustomWidgetInterface): 
   vx_ret
 
 proc icon*(self: gen_customwidget_types.QDesignerCustomWidgetInterface): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQDesignerCustomWidgetInterface_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQDesignerCustomWidgetInterface_icon(self.h), owned: true)
 
 proc isContainer*(self: gen_customwidget_types.QDesignerCustomWidgetInterface): bool =
   fcQDesignerCustomWidgetInterface_isContainer(self.h)
 
 proc createWidget*(self: gen_customwidget_types.QDesignerCustomWidgetInterface, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerCustomWidgetInterface_createWidget(self.h, parent.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerCustomWidgetInterface_createWidget(self.h, parent.h), owned: false)
 
 proc isInitialized*(self: gen_customwidget_types.QDesignerCustomWidgetInterface): bool =
   fcQDesignerCustomWidgetInterface_isInitialized(self.h)
@@ -115,10 +113,6 @@ proc codeTemplate*(self: gen_customwidget_types.QDesignerCustomWidgetInterface):
   c_free(v_ms.data)
   vx_ret
 
-proc delete*(self: gen_customwidget_types.QDesignerCustomWidgetInterface) =
-  fcQDesignerCustomWidgetInterface_delete(self.h)
 proc operatorAssign*(self: gen_customwidget_types.QDesignerCustomWidgetCollectionInterface, param1: gen_customwidget_types.QDesignerCustomWidgetCollectionInterface): void =
   fcQDesignerCustomWidgetCollectionInterface_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_customwidget_types.QDesignerCustomWidgetCollectionInterface) =
-  fcQDesignerCustomWidgetCollectionInterface_delete(self.h)

@@ -366,17 +366,15 @@ proc fcQTextEdit_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string):
 proc fcQTextEdit_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTextEdit {.importc: "QTextEdit_new3".}
 proc fcQTextEdit_new4(vtbl: pointer, vdata: csize_t, text: struct_seaqt_string, parent: pointer): ptr cQTextEdit {.importc: "QTextEdit_new4".}
 proc fcQTextEdit_staticMetaObject(): pointer {.importc: "QTextEdit_staticMetaObject".}
-proc fcQTextEdit_delete(self: pointer) {.importc: "QTextEdit_delete".}
 proc fcQTextEditExtraSelection_cursor(self: pointer): pointer {.importc: "QTextEdit__ExtraSelection_cursor".}
 proc fcQTextEditExtraSelection_setCursor(self: pointer, cursor: pointer): void {.importc: "QTextEdit__ExtraSelection_setCursor".}
 proc fcQTextEditExtraSelection_format(self: pointer): pointer {.importc: "QTextEdit__ExtraSelection_format".}
 proc fcQTextEditExtraSelection_setFormat(self: pointer, format: pointer): void {.importc: "QTextEdit__ExtraSelection_setFormat".}
 proc fcQTextEditExtraSelection_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTextEdit__ExtraSelection_operatorAssign".}
 proc fcQTextEditExtraSelection_new(param1: pointer): ptr cQTextEditExtraSelection {.importc: "QTextEdit__ExtraSelection_new".}
-proc fcQTextEditExtraSelection_delete(self: pointer) {.importc: "QTextEdit__ExtraSelection_delete".}
 
 proc metaObject*(self: gen_qtextedit_types.QTextEdit): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTextEdit_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextEdit_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qtextedit_types.QTextEdit, param1: cstring): pointer =
   fcQTextEdit_metacast(self.h, param1)
@@ -394,7 +392,7 @@ proc setDocument*(self: gen_qtextedit_types.QTextEdit, document: gen_qtextdocume
   fcQTextEdit_setDocument(self.h, document.h)
 
 proc document*(self: gen_qtextedit_types.QTextEdit): gen_qtextdocument_types.QTextDocument =
-  gen_qtextdocument_types.QTextDocument(h: fcQTextEdit_document(self.h))
+  gen_qtextdocument_types.QTextDocument(h: fcQTextEdit_document(self.h), owned: false)
 
 proc setPlaceholderText*(self: gen_qtextedit_types.QTextEdit, placeholderText: openArray[char]): void =
   fcQTextEdit_setPlaceholderText(self.h, struct_seaqt_string(data: if len(placeholderText) > 0: addr placeholderText[0] else: nil, len: csize_t(len(placeholderText))))
@@ -409,7 +407,7 @@ proc setTextCursor*(self: gen_qtextedit_types.QTextEdit, cursor: gen_qtextcursor
   fcQTextEdit_setTextCursor(self.h, cursor.h)
 
 proc textCursor*(self: gen_qtextedit_types.QTextEdit): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextEdit_textCursor(self.h))
+  gen_qtextcursor_types.QTextCursor(h: fcQTextEdit_textCursor(self.h), owned: true)
 
 proc isReadOnly*(self: gen_qtextedit_types.QTextEdit): bool =
   fcQTextEdit_isReadOnly(self.h)
@@ -442,13 +440,13 @@ proc fontItalic*(self: gen_qtextedit_types.QTextEdit): bool =
   fcQTextEdit_fontItalic(self.h)
 
 proc textColor*(self: gen_qtextedit_types.QTextEdit): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQTextEdit_textColor(self.h))
+  gen_qcolor_types.QColor(h: fcQTextEdit_textColor(self.h), owned: true)
 
 proc textBackgroundColor*(self: gen_qtextedit_types.QTextEdit): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQTextEdit_textBackgroundColor(self.h))
+  gen_qcolor_types.QColor(h: fcQTextEdit_textBackgroundColor(self.h), owned: true)
 
 proc currentFont*(self: gen_qtextedit_types.QTextEdit): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQTextEdit_currentFont(self.h))
+  gen_qfont_types.QFont(h: fcQTextEdit_currentFont(self.h), owned: true)
 
 proc alignment*(self: gen_qtextedit_types.QTextEdit): cint =
   cint(fcQTextEdit_alignment(self.h))
@@ -460,7 +458,7 @@ proc setCurrentCharFormat*(self: gen_qtextedit_types.QTextEdit, format: gen_qtex
   fcQTextEdit_setCurrentCharFormat(self.h, format.h)
 
 proc currentCharFormat*(self: gen_qtextedit_types.QTextEdit): gen_qtextformat_types.QTextCharFormat =
-  gen_qtextformat_types.QTextCharFormat(h: fcQTextEdit_currentCharFormat(self.h))
+  gen_qtextformat_types.QTextCharFormat(h: fcQTextEdit_currentCharFormat(self.h), owned: true)
 
 proc autoFormatting*(self: gen_qtextedit_types.QTextEdit): cint =
   cint(fcQTextEdit_autoFormatting(self.h))
@@ -535,22 +533,22 @@ proc ensureCursorVisible*(self: gen_qtextedit_types.QTextEdit): void =
   fcQTextEdit_ensureCursorVisible(self.h)
 
 proc loadResource*(self: gen_qtextedit_types.QTextEdit, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextEdit_loadResource(self.h, typeVal, name.h))
+  gen_qvariant_types.QVariant(h: fcQTextEdit_loadResource(self.h, typeVal, name.h), owned: true)
 
 proc createStandardContextMenu*(self: gen_qtextedit_types.QTextEdit): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQTextEdit_createStandardContextMenu(self.h))
+  gen_qmenu_types.QMenu(h: fcQTextEdit_createStandardContextMenu(self.h), owned: false)
 
 proc createStandardContextMenu*(self: gen_qtextedit_types.QTextEdit, position: gen_qpoint_types.QPoint): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQTextEdit_createStandardContextMenuWithPosition(self.h, position.h))
+  gen_qmenu_types.QMenu(h: fcQTextEdit_createStandardContextMenuWithPosition(self.h, position.h), owned: false)
 
 proc cursorForPosition*(self: gen_qtextedit_types.QTextEdit, pos: gen_qpoint_types.QPoint): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextEdit_cursorForPosition(self.h, pos.h))
+  gen_qtextcursor_types.QTextCursor(h: fcQTextEdit_cursorForPosition(self.h, pos.h), owned: true)
 
 proc cursorRect*(self: gen_qtextedit_types.QTextEdit, cursor: gen_qtextcursor_types.QTextCursor): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQTextEdit_cursorRect(self.h, cursor.h))
+  gen_qrect_types.QRect(h: fcQTextEdit_cursorRect(self.h, cursor.h), owned: true)
 
 proc cursorRect*(self: gen_qtextedit_types.QTextEdit): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQTextEdit_cursorRect2(self.h))
+  gen_qrect_types.QRect(h: fcQTextEdit_cursorRect2(self.h), owned: true)
 
 proc anchorAt*(self: gen_qtextedit_types.QTextEdit, pos: gen_qpoint_types.QPoint): string =
   let v_ms = fcQTextEdit_anchorAt(self.h, pos.h)
@@ -594,7 +592,7 @@ proc extraSelections*(self: gen_qtextedit_types.QTextEdit): seq[gen_qtextedit_ty
   var vx_ret = newSeq[gen_qtextedit_types.QTextEditExtraSelection](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qtextedit_types.QTextEditExtraSelection(h: v_outCast[i])
+    vx_ret[i] = gen_qtextedit_types.QTextEditExtraSelection(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -608,10 +606,10 @@ proc print*(self: gen_qtextedit_types.QTextEdit, printer: gen_qpagedpaintdevice_
   fcQTextEdit_print(self.h, printer.h)
 
 proc inputMethodQuery*(self: gen_qtextedit_types.QTextEdit, property: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextEdit_inputMethodQuery(self.h, cint(property)))
+  gen_qvariant_types.QVariant(h: fcQTextEdit_inputMethodQuery(self.h, cint(property)), owned: true)
 
 proc inputMethodQuery*(self: gen_qtextedit_types.QTextEdit, query: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextEdit_inputMethodQuery2(self.h, cint(query), argument.h))
+  gen_qvariant_types.QVariant(h: fcQTextEdit_inputMethodQuery2(self.h, cint(query), argument.h), owned: true)
 
 proc setFontPointSize*(self: gen_qtextedit_types.QTextEdit, s: float64): void =
   fcQTextEdit_setFontPointSize(self.h, s)
@@ -755,7 +753,7 @@ proc currentCharFormatChanged*(self: gen_qtextedit_types.QTextEdit, format: gen_
 type QTextEditcurrentCharFormatChangedSlot* = proc(format: gen_qtextformat_types.QTextCharFormat)
 proc fcQTextEdit_slot_callback_currentCharFormatChanged(slot: int, format: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextEditcurrentCharFormatChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qtextformat_types.QTextCharFormat(h: format)
+  let slotval1 = gen_qtextformat_types.QTextCharFormat(h: format, owned: false)
 
   nimfunc[](slotval1)
 
@@ -918,7 +916,8 @@ type QTextEditchildEventProc* = proc(self: QTextEdit, event: gen_qcoreevent_type
 type QTextEditcustomEventProc* = proc(self: QTextEdit, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTextEditconnectNotifyProc* = proc(self: QTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTextEditdisconnectNotifyProc* = proc(self: QTextEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QTextEditVTable* = object
+
+type QTextEditVTable* {.inheritable, pure.} = object
   vtbl: cQTextEditVTable
   metaObject*: QTextEditmetaObjectProc
   metacast*: QTextEditmetacastProc
@@ -982,7 +981,7 @@ type QTextEditVTable* = object
   disconnectNotify*: QTextEditdisconnectNotifyProc
 
 proc QTextEditmetaObject*(self: gen_qtextedit_types.QTextEdit): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTextEdit_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextEdit_virtualbase_metaObject(self.h), owned: false)
 
 proc QTextEditmetacast*(self: gen_qtextedit_types.QTextEdit, param1: cstring): pointer =
   fcQTextEdit_virtualbase_metacast(self.h, param1)
@@ -991,10 +990,10 @@ proc QTextEditmetacall*(self: gen_qtextedit_types.QTextEdit, param1: cint, param
   fcQTextEdit_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QTextEditloadResource*(self: gen_qtextedit_types.QTextEdit, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextEdit_virtualbase_loadResource(self.h, typeVal, name.h))
+  gen_qvariant_types.QVariant(h: fcQTextEdit_virtualbase_loadResource(self.h, typeVal, name.h), owned: true)
 
 proc QTextEditinputMethodQuery*(self: gen_qtextedit_types.QTextEdit, property: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTextEdit_virtualbase_inputMethodQuery(self.h, cint(property)))
+  gen_qvariant_types.QVariant(h: fcQTextEdit_virtualbase_inputMethodQuery(self.h, cint(property)), owned: true)
 
 proc QTextEditevent*(self: gen_qtextedit_types.QTextEdit, e: gen_qcoreevent_types.QEvent): bool =
   fcQTextEdit_virtualbase_event(self.h, e.h)
@@ -1060,7 +1059,7 @@ proc QTextEditwheelEvent*(self: gen_qtextedit_types.QTextEdit, e: gen_qevent_typ
   fcQTextEdit_virtualbase_wheelEvent(self.h, e.h)
 
 proc QTextEditcreateMimeDataFromSelection*(self: gen_qtextedit_types.QTextEdit): gen_qmimedata_types.QMimeData =
-  gen_qmimedata_types.QMimeData(h: fcQTextEdit_virtualbase_createMimeDataFromSelection(self.h))
+  gen_qmimedata_types.QMimeData(h: fcQTextEdit_virtualbase_createMimeDataFromSelection(self.h), owned: false)
 
 proc QTextEditcanInsertFromMimeData*(self: gen_qtextedit_types.QTextEdit, source: gen_qmimedata_types.QMimeData): bool =
   fcQTextEdit_virtualbase_canInsertFromMimeData(self.h, source.h)
@@ -1078,10 +1077,10 @@ proc QTextEditdoSetTextCursor*(self: gen_qtextedit_types.QTextEdit, cursor: gen_
   fcQTextEdit_virtualbase_doSetTextCursor(self.h, cursor.h)
 
 proc QTextEditminimumSizeHint*(self: gen_qtextedit_types.QTextEdit): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTextEdit_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTextEdit_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QTextEditsizeHint*(self: gen_qtextedit_types.QTextEdit): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTextEdit_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTextEdit_virtualbase_sizeHint(self.h), owned: true)
 
 proc QTextEditsetupViewport*(self: gen_qtextedit_types.QTextEdit, viewport: gen_qwidget_types.QWidget): void =
   fcQTextEdit_virtualbase_setupViewport(self.h, viewport.h)
@@ -1093,7 +1092,7 @@ proc QTextEditviewportEvent*(self: gen_qtextedit_types.QTextEdit, param1: gen_qc
   fcQTextEdit_virtualbase_viewportEvent(self.h, param1.h)
 
 proc QTextEditviewportSizeHint*(self: gen_qtextedit_types.QTextEdit): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTextEdit_virtualbase_viewportSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTextEdit_virtualbase_viewportSizeHint(self.h), owned: true)
 
 proc QTextEditinitStyleOption*(self: gen_qtextedit_types.QTextEdit, option: gen_qstyleoption_types.QStyleOptionFrame): void =
   fcQTextEdit_virtualbase_initStyleOption(self.h, option.h)
@@ -1111,7 +1110,7 @@ proc QTextEdithasHeightForWidth*(self: gen_qtextedit_types.QTextEdit): bool =
   fcQTextEdit_virtualbase_hasHeightForWidth(self.h)
 
 proc QTextEditpaintEngine*(self: gen_qtextedit_types.QTextEdit): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQTextEdit_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQTextEdit_virtualbase_paintEngine(self.h), owned: false)
 
 proc QTextEditenterEvent*(self: gen_qtextedit_types.QTextEdit, event: gen_qevent_types.QEnterEvent): void =
   fcQTextEdit_virtualbase_enterEvent(self.h, event.h)
@@ -1144,10 +1143,10 @@ proc QTextEditinitPainter*(self: gen_qtextedit_types.QTextEdit, painter: gen_qpa
   fcQTextEdit_virtualbase_initPainter(self.h, painter.h)
 
 proc QTextEditredirected*(self: gen_qtextedit_types.QTextEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQTextEdit_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQTextEdit_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QTextEditsharedPainter*(self: gen_qtextedit_types.QTextEdit): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQTextEdit_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQTextEdit_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QTextEditchildEvent*(self: gen_qtextedit_types.QTextEdit, event: gen_qcoreevent_types.QChildEvent): void =
   fcQTextEdit_virtualbase_childEvent(self.h, event.h)
@@ -1166,7 +1165,10 @@ proc fcQTextEdit_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
@@ -1188,76 +1190,82 @@ proc fcQTextEdit_vtable_callback_loadResource(self: pointer, typeVal: cint, name
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   let slotval1 = typeVal
-  let slotval2 = gen_qurl_types.QUrl(h: name)
+  let slotval2 = gen_qurl_types.QUrl(h: name, owned: false)
   var virtualReturn = vtbl[].loadResource(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   let slotval1 = cint(property)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQTextEdit_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: e)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: e)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_mouseDoubleClickEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
@@ -1270,86 +1278,89 @@ proc fcQTextEdit_vtable_callback_focusNextPrevChild(self: pointer, next: bool): 
 proc fcQTextEdit_vtable_callback_contextMenuEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: e)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: e, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_dragEnterEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: e, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: e)
+  let slotval1 = gen_qevent_types.QDropEvent(h: e, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   var virtualReturn = vtbl[].createMimeDataFromSelection(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: source)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   var virtualReturn = vtbl[].canInsertFromMimeData(self, slotval1)
   virtualReturn
 
 proc fcQTextEdit_vtable_callback_insertFromMimeData(self: pointer, source: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: source)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   vtbl[].insertFromMimeData(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
@@ -1362,39 +1373,45 @@ proc fcQTextEdit_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: c
 proc fcQTextEdit_vtable_callback_doSetTextCursor(self: pointer, cursor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor)
+  let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor, owned: false)
   vtbl[].doSetTextCursor(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQTextEdit_vtable_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
@@ -1402,12 +1419,15 @@ proc fcQTextEdit_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdec
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_devType(self: pointer): cint {.cdecl.} =
@@ -1439,48 +1459,51 @@ proc fcQTextEdit_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1505,44 +1528,50 @@ proc fcQTextEdit_vtable_callback_metric(self: pointer, param1: cint): cint {.cde
 proc fcQTextEdit_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQTextEdit_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTextEditVTable](fcQTextEdit_vdata(self)[])
   let self = QTextEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQTextEdit* {.inheritable.} = ref object of QTextEdit
@@ -1672,7 +1701,10 @@ method disconnectNotify*(self: VirtualQTextEdit, signal: gen_qmetaobject_types.Q
 proc fcQTextEdit_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
@@ -1691,65 +1723,71 @@ proc fcQTextEdit_method_callback_metacall(self: pointer, param1: cint, param2: c
 proc fcQTextEdit_method_callback_loadResource(self: pointer, typeVal: cint, name: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   let slotval1 = typeVal
-  let slotval2 = gen_qurl_types.QUrl(h: name)
+  let slotval2 = gen_qurl_types.QUrl(h: name, owned: false)
   var virtualReturn = inst.loadResource(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_inputMethodQuery(self: pointer, property: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   let slotval1 = cint(property)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQTextEdit_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQTextEdit_method_callback_keyPressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQTextEdit_method_callback_keyReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: e, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQTextEdit_method_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: e)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQTextEdit_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: e)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQTextEdit_method_callback_mousePressEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQTextEdit_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQTextEdit_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQTextEdit_method_callback_mouseDoubleClickEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQTextEdit_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
@@ -1760,73 +1798,76 @@ proc fcQTextEdit_method_callback_focusNextPrevChild(self: pointer, next: bool): 
 
 proc fcQTextEdit_method_callback_contextMenuEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: e)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: e, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQTextEdit_method_callback_dragEnterEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: e, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQTextEdit_method_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQTextEdit_method_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQTextEdit_method_callback_dropEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: e)
+  let slotval1 = gen_qevent_types.QDropEvent(h: e, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQTextEdit_method_callback_focusInEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQTextEdit_method_callback_focusOutEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: e, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQTextEdit_method_callback_showEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQTextEdit_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQTextEdit_method_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQTextEdit_method_callback_createMimeDataFromSelection(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   var virtualReturn = inst.createMimeDataFromSelection()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_canInsertFromMimeData(self: pointer, source: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: source)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   var virtualReturn = inst.canInsertFromMimeData(slotval1)
   virtualReturn
 
 proc fcQTextEdit_method_callback_insertFromMimeData(self: pointer, source: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: source)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: source, owned: false)
   inst.insertFromMimeData(slotval1)
 
 proc fcQTextEdit_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQTextEdit_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
@@ -1837,45 +1878,54 @@ proc fcQTextEdit_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: c
 
 proc fcQTextEdit_method_callback_doSetTextCursor(self: pointer, cursor: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor)
+  let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor, owned: false)
   inst.doSetTextCursor(slotval1)
 
 proc fcQTextEdit_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   inst.setupViewport(slotval1)
 
 proc fcQTextEdit_method_callback_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQTextEdit_method_callback_viewportEvent(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
 proc fcQTextEdit_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   var virtualReturn = inst.viewportSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   inst.initStyleOption(slotval1)
 
 proc fcQTextEdit_method_callback_devType(self: pointer): cint {.cdecl.} =
@@ -1902,41 +1952,44 @@ proc fcQTextEdit_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.
 proc fcQTextEdit_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQTextEdit_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQTextEdit_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQTextEdit_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQTextEdit_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQTextEdit_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQTextEdit_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQTextEdit_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1958,38 +2011,44 @@ proc fcQTextEdit_method_callback_metric(self: pointer, param1: cint): cint {.cde
 
 proc fcQTextEdit_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQTextEdit_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTextEdit_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQTextEdit_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQTextEdit_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQTextEdit_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTextEdit](fcQTextEdit_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -2000,7 +2059,7 @@ proc setViewportMargins*(self: gen_qtextedit_types.QTextEdit, left: cint, top: c
   fcQTextEdit_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qtextedit_types.QTextEdit): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQTextEdit_protectedbase_viewportMargins(self.h))
+  gen_qmargins_types.QMargins(h: fcQTextEdit_protectedbase_viewportMargins(self.h), owned: true)
 
 proc drawFrame*(self: gen_qtextedit_types.QTextEdit, param1: gen_qpainter_types.QPainter): void =
   fcQTextEdit_protectedbase_drawFrame(self.h, param1.h)
@@ -2021,7 +2080,7 @@ proc focusPreviousChild*(self: gen_qtextedit_types.QTextEdit): bool =
   fcQTextEdit_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qtextedit_types.QTextEdit): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQTextEdit_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQTextEdit_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qtextedit_types.QTextEdit): cint =
   fcQTextEdit_protectedbase_senderSignalIndex(self.h)
@@ -2159,7 +2218,7 @@ proc create*(T: type gen_qtextedit_types.QTextEdit,
     vtbl[].vtbl.connectNotify = fcQTextEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTextEdit_vtable_callback_disconnectNotify
-  let tmp = gen_qtextedit_types.QTextEdit(h: fcQTextEdit_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qtextedit_types.QTextEdit(h: fcQTextEdit_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQTextEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtextedit_types.QTextEdit,
@@ -2290,7 +2349,7 @@ proc create*(T: type gen_qtextedit_types.QTextEdit,
     vtbl[].vtbl.connectNotify = fcQTextEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTextEdit_vtable_callback_disconnectNotify
-  let tmp = gen_qtextedit_types.QTextEdit(h: fcQTextEdit_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qtextedit_types.QTextEdit(h: fcQTextEdit_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQTextEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtextedit_types.QTextEdit,
@@ -2421,7 +2480,7 @@ proc create*(T: type gen_qtextedit_types.QTextEdit,
     vtbl[].vtbl.connectNotify = fcQTextEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTextEdit_vtable_callback_disconnectNotify
-  let tmp = gen_qtextedit_types.QTextEdit(h: fcQTextEdit_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qtextedit_types.QTextEdit(h: fcQTextEdit_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQTextEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtextedit_types.QTextEdit,
@@ -2552,13 +2611,14 @@ proc create*(T: type gen_qtextedit_types.QTextEdit,
     vtbl[].vtbl.connectNotify = fcQTextEdit_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTextEdit_vtable_callback_disconnectNotify
-  let tmp = gen_qtextedit_types.QTextEdit(h: fcQTextEdit_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h))
+  let tmp = gen_qtextedit_types.QTextEdit(h: fcQTextEdit_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), parent.h), owned: true)
   fcQTextEdit_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQTextEdit_mvtbl = cQTextEditVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQTextEdit()[])](self.fcQTextEdit_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQTextEdit_method_callback_metaObject,
   metacast: fcQTextEdit_method_callback_metacast,
@@ -2654,16 +2714,14 @@ proc create*(T: type gen_qtextedit_types.QTextEdit,
 
 proc staticMetaObject*(_: type gen_qtextedit_types.QTextEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextEdit_staticMetaObject())
-proc delete*(self: gen_qtextedit_types.QTextEdit) =
-  fcQTextEdit_delete(self.h)
 proc cursor*(self: gen_qtextedit_types.QTextEditExtraSelection): gen_qtextcursor_types.QTextCursor =
-  gen_qtextcursor_types.QTextCursor(h: fcQTextEditExtraSelection_cursor(self.h))
+  gen_qtextcursor_types.QTextCursor(h: fcQTextEditExtraSelection_cursor(self.h), owned: true)
 
 proc setCursor*(self: gen_qtextedit_types.QTextEditExtraSelection, cursor: gen_qtextcursor_types.QTextCursor): void =
   fcQTextEditExtraSelection_setCursor(self.h, cursor.h)
 
 proc format*(self: gen_qtextedit_types.QTextEditExtraSelection): gen_qtextformat_types.QTextCharFormat =
-  gen_qtextformat_types.QTextCharFormat(h: fcQTextEditExtraSelection_format(self.h))
+  gen_qtextformat_types.QTextCharFormat(h: fcQTextEditExtraSelection_format(self.h), owned: true)
 
 proc setFormat*(self: gen_qtextedit_types.QTextEditExtraSelection, format: gen_qtextformat_types.QTextCharFormat): void =
   fcQTextEditExtraSelection_setFormat(self.h, format.h)
@@ -2673,7 +2731,5 @@ proc operatorAssign*(self: gen_qtextedit_types.QTextEditExtraSelection, param1: 
 
 proc create*(T: type gen_qtextedit_types.QTextEditExtraSelection,
     param1: gen_qtextedit_types.QTextEditExtraSelection): gen_qtextedit_types.QTextEditExtraSelection =
-  let tmp = gen_qtextedit_types.QTextEditExtraSelection(h: fcQTextEditExtraSelection_new(param1.h))
+  let tmp = gen_qtextedit_types.QTextEditExtraSelection(h: fcQTextEditExtraSelection_new(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qtextedit_types.QTextEditExtraSelection) =
-  fcQTextEditExtraSelection_delete(self.h)

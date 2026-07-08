@@ -60,7 +60,6 @@ proc fcQAuthenticator_isNull(self: pointer): bool {.importc: "QAuthenticator_isN
 proc fcQAuthenticator_detach(self: pointer): void {.importc: "QAuthenticator_detach".}
 proc fcQAuthenticator_new(): ptr cQAuthenticator {.importc: "QAuthenticator_new".}
 proc fcQAuthenticator_new2(other: pointer): ptr cQAuthenticator {.importc: "QAuthenticator_new2".}
-proc fcQAuthenticator_delete(self: pointer) {.importc: "QAuthenticator_delete".}
 
 proc operatorAssign*(self: gen_qauthenticator_types.QAuthenticator, other: gen_qauthenticator_types.QAuthenticator): void =
   fcQAuthenticator_operatorAssign(self.h, other.h)
@@ -99,7 +98,7 @@ proc setRealm*(self: gen_qauthenticator_types.QAuthenticator, realm: openArray[c
   fcQAuthenticator_setRealm(self.h, struct_seaqt_string(data: if len(realm) > 0: addr realm[0] else: nil, len: csize_t(len(realm))))
 
 proc option*(self: gen_qauthenticator_types.QAuthenticator, opt: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAuthenticator_option(self.h, struct_seaqt_string(data: if len(opt) > 0: addr opt[0] else: nil, len: csize_t(len(opt)))))
+  gen_qvariant_types.QVariant(h: fcQAuthenticator_option(self.h, struct_seaqt_string(data: if len(opt) > 0: addr opt[0] else: nil, len: csize_t(len(opt)))), owned: true)
 
 proc options*(self: gen_qauthenticator_types.QAuthenticator): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQAuthenticator_options(self.h)
@@ -112,7 +111,7 @@ proc options*(self: gen_qauthenticator_types.QAuthenticator): Table[string,gen_q
     c_free(vx_hashkey_ms.data)
     var v_entry_Key = vx_hashkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -129,11 +128,9 @@ proc detach*(self: gen_qauthenticator_types.QAuthenticator): void =
   fcQAuthenticator_detach(self.h)
 
 proc create*(T: type gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
-  let tmp = gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new())
+  let tmp = gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new(), owned: true)
   tmp
 proc create*(T: type gen_qauthenticator_types.QAuthenticator,
     other: gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
-  let tmp = gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new2(other.h))
+  let tmp = gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qauthenticator_types.QAuthenticator) =
-  fcQAuthenticator_delete(self.h)

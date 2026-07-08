@@ -1,4 +1,4 @@
-type QRgba64* {.inheritable, pure.} = object
+type QRgba64* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

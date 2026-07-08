@@ -46,10 +46,9 @@ type cQDesignerExtraInfoExtension*{.exportc: "QDesignerExtraInfoExtension", inco
 proc fcQDesignerExtraInfoExtension_widget(self: pointer): pointer {.importc: "QDesignerExtraInfoExtension_widget".}
 proc fcQDesignerExtraInfoExtension_workingDirectory(self: pointer): struct_seaqt_string {.importc: "QDesignerExtraInfoExtension_workingDirectory".}
 proc fcQDesignerExtraInfoExtension_setWorkingDirectory(self: pointer, workingDirectory: struct_seaqt_string): void {.importc: "QDesignerExtraInfoExtension_setWorkingDirectory".}
-proc fcQDesignerExtraInfoExtension_delete(self: pointer) {.importc: "QDesignerExtraInfoExtension_delete".}
 
 proc widget*(self: gen_extrainfo_types.QDesignerExtraInfoExtension): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerExtraInfoExtension_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerExtraInfoExtension_widget(self.h), owned: false)
 
 proc workingDirectory*(self: gen_extrainfo_types.QDesignerExtraInfoExtension): string =
   let v_ms = fcQDesignerExtraInfoExtension_workingDirectory(self.h)
@@ -60,5 +59,3 @@ proc workingDirectory*(self: gen_extrainfo_types.QDesignerExtraInfoExtension): s
 proc setWorkingDirectory*(self: gen_extrainfo_types.QDesignerExtraInfoExtension, workingDirectory: openArray[char]): void =
   fcQDesignerExtraInfoExtension_setWorkingDirectory(self.h, struct_seaqt_string(data: if len(workingDirectory) > 0: addr workingDirectory[0] else: nil, len: csize_t(len(workingDirectory))))
 
-proc delete*(self: gen_extrainfo_types.QDesignerExtraInfoExtension) =
-  fcQDesignerExtraInfoExtension_delete(self.h)

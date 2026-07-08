@@ -1,4 +1,4 @@
-type QDesignerFormWindowCursorInterface* {.inheritable, pure.} = object
+type QDesignerFormWindowCursorInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

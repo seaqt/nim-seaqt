@@ -67,13 +67,12 @@ type cQDesignerContainerExtensionVTable {.pure.} = object
   canRemove*: proc(self: pointer, index: cint): bool {.cdecl, raises: [], gcsafe.}
   remove*: proc(self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerContainerExtension_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerContainerExtension {.importc: "QDesignerContainerExtension_new".}
-proc fcQDesignerContainerExtension_delete(self: pointer) {.importc: "QDesignerContainerExtension_delete".}
 
 proc count*(self: gen_container_types.QDesignerContainerExtension): cint =
   fcQDesignerContainerExtension_count(self.h)
 
 proc widget*(self: gen_container_types.QDesignerContainerExtension, index: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerContainerExtension_widget(self.h, index))
+  gen_qwidget_types.QWidget(h: fcQDesignerContainerExtension_widget(self.h, index), owned: false)
 
 proc currentIndex*(self: gen_container_types.QDesignerContainerExtension): cint =
   fcQDesignerContainerExtension_currentIndex(self.h)
@@ -105,7 +104,8 @@ type QDesignerContainerExtensionaddWidgetProc* = proc(self: QDesignerContainerEx
 type QDesignerContainerExtensioninsertWidgetProc* = proc(self: QDesignerContainerExtension, index: cint, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
 type QDesignerContainerExtensioncanRemoveProc* = proc(self: QDesignerContainerExtension, index: cint): bool {.raises: [], gcsafe.}
 type QDesignerContainerExtensionremoveProc* = proc(self: QDesignerContainerExtension, index: cint): void {.raises: [], gcsafe.}
-type QDesignerContainerExtensionVTable* = object
+
+type QDesignerContainerExtensionVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerContainerExtensionVTable
   count*: QDesignerContainerExtensioncountProc
   widget*: QDesignerContainerExtensionwidgetProc
@@ -129,7 +129,10 @@ proc fcQDesignerContainerExtension_vtable_callback_widget(self: pointer, index: 
   let self = QDesignerContainerExtension(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].widget(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerContainerExtension_vtable_callback_currentIndex(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerContainerExtensionVTable](fcQDesignerContainerExtension_vdata(self)[])
@@ -152,14 +155,14 @@ proc fcQDesignerContainerExtension_vtable_callback_canAddWidget(self: pointer): 
 proc fcQDesignerContainerExtension_vtable_callback_addWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerContainerExtensionVTable](fcQDesignerContainerExtension_vdata(self)[])
   let self = QDesignerContainerExtension(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].addWidget(self, slotval1)
 
 proc fcQDesignerContainerExtension_vtable_callback_insertWidget(self: pointer, index: cint, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerContainerExtensionVTable](fcQDesignerContainerExtension_vdata(self)[])
   let self = QDesignerContainerExtension(h: self)
   let slotval1 = index
-  let slotval2 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].insertWidget(self, slotval1, slotval2)
 
 proc fcQDesignerContainerExtension_vtable_callback_canRemove(self: pointer, index: cint): bool {.cdecl.} =
@@ -206,7 +209,10 @@ proc fcQDesignerContainerExtension_method_callback_widget(self: pointer, index: 
   let inst = cast[VirtualQDesignerContainerExtension](fcQDesignerContainerExtension_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.widget(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerContainerExtension_method_callback_currentIndex(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerContainerExtension](fcQDesignerContainerExtension_vdata(self)[])
@@ -225,13 +231,13 @@ proc fcQDesignerContainerExtension_method_callback_canAddWidget(self: pointer): 
 
 proc fcQDesignerContainerExtension_method_callback_addWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerContainerExtension](fcQDesignerContainerExtension_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.addWidget(slotval1)
 
 proc fcQDesignerContainerExtension_method_callback_insertWidget(self: pointer, index: cint, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerContainerExtension](fcQDesignerContainerExtension_vdata(self)[])
   let slotval1 = index
-  let slotval2 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.insertWidget(slotval1, slotval2)
 
 proc fcQDesignerContainerExtension_method_callback_canRemove(self: pointer, index: cint): bool {.cdecl.} =
@@ -271,13 +277,14 @@ proc create*(T: type gen_container_types.QDesignerContainerExtension,
     vtbl[].vtbl.canRemove = fcQDesignerContainerExtension_vtable_callback_canRemove
   if not isNil(vtbl[].remove):
     vtbl[].vtbl.remove = fcQDesignerContainerExtension_vtable_callback_remove
-  let tmp = gen_container_types.QDesignerContainerExtension(h: fcQDesignerContainerExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_container_types.QDesignerContainerExtension(h: fcQDesignerContainerExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerContainerExtension_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerContainerExtension_mvtbl = cQDesignerContainerExtensionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerContainerExtension()[])](self.fcQDesignerContainerExtension_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   count: fcQDesignerContainerExtension_method_callback_count,
   widget: fcQDesignerContainerExtension_method_callback_widget,
@@ -296,5 +303,3 @@ proc create*(T: type gen_container_types.QDesignerContainerExtension,
   fcQDesignerContainerExtension_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_container_types.QDesignerContainerExtension) =
-  fcQDesignerContainerExtension_delete(self.h)

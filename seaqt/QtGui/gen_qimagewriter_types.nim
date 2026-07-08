@@ -1,4 +1,4 @@
-type QImageWriter* {.inheritable, pure.} = object
+type QImageWriter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

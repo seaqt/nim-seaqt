@@ -75,10 +75,9 @@ proc fcQDesignerFormWindowToolInterface_protectedbase_senderSignalIndex(self: po
 proc fcQDesignerFormWindowToolInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerFormWindowToolInterface_protectedbase_receivers".}
 proc fcQDesignerFormWindowToolInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerFormWindowToolInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerFormWindowToolInterface_staticMetaObject(): pointer {.importc: "QDesignerFormWindowToolInterface_staticMetaObject".}
-proc fcQDesignerFormWindowToolInterface_delete(self: pointer) {.importc: "QDesignerFormWindowToolInterface_delete".}
 
 proc metaObject*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerFormWindowToolInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerFormWindowToolInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface, param1: cstring): pointer =
   fcQDesignerFormWindowToolInterface_metacast(self.h, param1)
@@ -93,13 +92,13 @@ proc tr*(_: type gen_abstractformwindowtool_types.QDesignerFormWindowToolInterfa
   vx_ret
 
 proc formWindow*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface): gen_abstractformwindow_types.QDesignerFormWindowInterface =
-  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowToolInterface_formWindow(self.h))
+  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowToolInterface_formWindow(self.h), owned: false)
 
 proc editor*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerFormWindowToolInterface_editor(self.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerFormWindowToolInterface_editor(self.h), owned: false)
 
 proc action*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowToolInterface_action(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowToolInterface_action(self.h), owned: false)
 
 proc activated*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface): void =
   fcQDesignerFormWindowToolInterface_activated(self.h)
@@ -123,7 +122,7 @@ proc tr*(_: type gen_abstractformwindowtool_types.QDesignerFormWindowToolInterfa
   vx_ret
 
 proc sender*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerFormWindowToolInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerFormWindowToolInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface): cint =
   fcQDesignerFormWindowToolInterface_protectedbase_senderSignalIndex(self.h)
@@ -136,5 +135,3 @@ proc isSignalConnected*(self: gen_abstractformwindowtool_types.QDesignerFormWind
 
 proc staticMetaObject*(_: type gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerFormWindowToolInterface_staticMetaObject())
-proc delete*(self: gen_abstractformwindowtool_types.QDesignerFormWindowToolInterface) =
-  fcQDesignerFormWindowToolInterface_delete(self.h)

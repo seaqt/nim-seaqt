@@ -1,4 +1,4 @@
-type QDesignerMetaDataBaseItemInterface* {.inheritable, pure.} = object
+type QDesignerMetaDataBaseItemInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

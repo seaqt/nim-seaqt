@@ -73,10 +73,9 @@ proc fcQDesignerNewFormWidgetInterface_protectedbase_senderSignalIndex(self: poi
 proc fcQDesignerNewFormWidgetInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerNewFormWidgetInterface_protectedbase_receivers".}
 proc fcQDesignerNewFormWidgetInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerNewFormWidgetInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerNewFormWidgetInterface_staticMetaObject(): pointer {.importc: "QDesignerNewFormWidgetInterface_staticMetaObject".}
-proc fcQDesignerNewFormWidgetInterface_delete(self: pointer) {.importc: "QDesignerNewFormWidgetInterface_delete".}
 
 proc metaObject*(self: gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerNewFormWidgetInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerNewFormWidgetInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface, param1: cstring): pointer =
   fcQDesignerNewFormWidgetInterface_metacast(self.h, param1)
@@ -159,7 +158,7 @@ proc focusPreviousChild*(self: gen_abstractnewformwidget_types.QDesignerNewFormW
   fcQDesignerNewFormWidgetInterface_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerNewFormWidgetInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerNewFormWidgetInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface): cint =
   fcQDesignerNewFormWidgetInterface_protectedbase_senderSignalIndex(self.h)
@@ -172,5 +171,3 @@ proc isSignalConnected*(self: gen_abstractnewformwidget_types.QDesignerNewFormWi
 
 proc staticMetaObject*(_: type gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerNewFormWidgetInterface_staticMetaObject())
-proc delete*(self: gen_abstractnewformwidget_types.QDesignerNewFormWidgetInterface) =
-  fcQDesignerNewFormWidgetInterface_delete(self.h)

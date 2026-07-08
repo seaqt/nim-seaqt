@@ -39,7 +39,4 @@ export gen_qstringbuilder_types
 
 type cQAbstractConcatenable*{.exportc: "QAbstractConcatenable", incompleteStruct.} = object
 
-proc fcQAbstractConcatenable_delete(self: pointer) {.importc: "QAbstractConcatenable_delete".}
 
-proc delete*(self: gen_qstringbuilder_types.QAbstractConcatenable) =
-  fcQAbstractConcatenable_delete(self.h)

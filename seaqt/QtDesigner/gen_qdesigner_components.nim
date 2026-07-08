@@ -40,10 +40,7 @@ export gen_qdesigner_components_types
 type cQDesignerComponents*{.exportc: "QDesignerComponents", incompleteStruct.} = object
 
 proc fcQDesignerComponents_initializeResources(): void {.importc: "QDesignerComponents_initializeResources".}
-proc fcQDesignerComponents_delete(self: pointer) {.importc: "QDesignerComponents_delete".}
 
 proc initializeResources*(_: type gen_qdesigner_components_types.QDesignerComponents): void =
   fcQDesignerComponents_initializeResources()
 
-proc delete*(self: gen_qdesigner_components_types.QDesignerComponents) =
-  fcQDesignerComponents_delete(self.h)

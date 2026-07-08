@@ -55,7 +55,6 @@ proc fcQWebEngineRegisterProtocolHandlerRequest_operatorAssign(self: pointer, pa
 proc fcQWebEngineRegisterProtocolHandlerRequest_new(): ptr cQWebEngineRegisterProtocolHandlerRequest {.importc: "QWebEngineRegisterProtocolHandlerRequest_new".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_new2(param1: pointer): ptr cQWebEngineRegisterProtocolHandlerRequest {.importc: "QWebEngineRegisterProtocolHandlerRequest_new2".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_staticMetaObject(): pointer {.importc: "QWebEngineRegisterProtocolHandlerRequest_staticMetaObject".}
-proc fcQWebEngineRegisterProtocolHandlerRequest_delete(self: pointer) {.importc: "QWebEngineRegisterProtocolHandlerRequest_delete".}
 
 proc accept*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): void =
   fcQWebEngineRegisterProtocolHandlerRequest_accept(self.h)
@@ -64,7 +63,7 @@ proc reject*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngine
   fcQWebEngineRegisterProtocolHandlerRequest_reject(self.h)
 
 proc origin*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineRegisterProtocolHandlerRequest_origin(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineRegisterProtocolHandlerRequest_origin(self.h), owned: true)
 
 proc scheme*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): string =
   let v_ms = fcQWebEngineRegisterProtocolHandlerRequest_scheme(self.h)
@@ -82,13 +81,11 @@ proc operatorAssign*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QW
   fcQWebEngineRegisterProtocolHandlerRequest_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest =
-  let tmp = gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest(h: fcQWebEngineRegisterProtocolHandlerRequest_new())
+  let tmp = gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest(h: fcQWebEngineRegisterProtocolHandlerRequest_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest,
     param1: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest =
-  let tmp = gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest(h: fcQWebEngineRegisterProtocolHandlerRequest_new2(param1.h))
+  let tmp = gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest(h: fcQWebEngineRegisterProtocolHandlerRequest_new2(param1.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineRegisterProtocolHandlerRequest_staticMetaObject())
-proc delete*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest) =
-  fcQWebEngineRegisterProtocolHandlerRequest_delete(self.h)

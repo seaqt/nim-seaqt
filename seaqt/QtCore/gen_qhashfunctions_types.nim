@@ -1,4 +1,4 @@
-type QHashSeed* {.inheritable, pure.} = object
+type QHashSeed* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

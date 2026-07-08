@@ -9,7 +9,7 @@ proc `=sink`(dest: var QEventLoop, source: QEventLoop) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QEventLoopLocker* {.inheritable, pure.} = object
+type QEventLoopLocker* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

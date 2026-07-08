@@ -1,4 +1,4 @@
-type QDesignerTaskMenuExtension* {.inheritable, pure.} = object
+type QDesignerTaskMenuExtension* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

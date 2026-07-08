@@ -1,4 +1,4 @@
-type QTextLength* {.inheritable, pure.} = object
+type QTextLength* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QTextLength) =
   wasMoved(self)
   fcQTextLength_delete(h)
 
-type QTextFormat* {.inheritable, pure.} = object
+type QTextFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

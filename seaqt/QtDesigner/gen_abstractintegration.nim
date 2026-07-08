@@ -118,7 +118,6 @@ proc fcQDesignerIntegrationInterface_protectedbase_senderSignalIndex(self: point
 proc fcQDesignerIntegrationInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerIntegrationInterface_protectedbase_receivers".}
 proc fcQDesignerIntegrationInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerIntegrationInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerIntegrationInterface_staticMetaObject(): pointer {.importc: "QDesignerIntegrationInterface_staticMetaObject".}
-proc fcQDesignerIntegrationInterface_delete(self: pointer) {.importc: "QDesignerIntegrationInterface_delete".}
 proc fcQDesignerIntegration_metaObject(self: pointer): pointer {.importc: "QDesignerIntegration_metaObject".}
 proc fcQDesignerIntegration_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerIntegration_metacast".}
 proc fcQDesignerIntegration_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerIntegration_metacall".}
@@ -150,10 +149,9 @@ proc fcQDesignerIntegration_protectedbase_senderSignalIndex(self: pointer): cint
 proc fcQDesignerIntegration_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerIntegration_protectedbase_receivers".}
 proc fcQDesignerIntegration_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerIntegration_protectedbase_isSignalConnected".}
 proc fcQDesignerIntegration_staticMetaObject(): pointer {.importc: "QDesignerIntegration_staticMetaObject".}
-proc fcQDesignerIntegration_delete(self: pointer) {.importc: "QDesignerIntegration_delete".}
 
 proc metaObject*(self: gen_abstractintegration_types.QDesignerIntegrationInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerIntegrationInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerIntegrationInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, param1: cstring): pointer =
   fcQDesignerIntegrationInterface_metacast(self.h, param1)
@@ -168,10 +166,10 @@ proc tr*(_: type gen_abstractintegration_types.QDesignerIntegrationInterface, s:
   vx_ret
 
 proc containerWindow*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, widget: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerIntegrationInterface_containerWindow(self.h, widget.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerIntegrationInterface_containerWindow(self.h, widget.h), owned: false)
 
 proc createResourceBrowser*(self: gen_abstractintegration_types.QDesignerIntegrationInterface, parent: gen_qwidget_types.QWidget): gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface =
-  gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface(h: fcQDesignerIntegrationInterface_createResourceBrowser(self.h, parent.h))
+  gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface(h: fcQDesignerIntegrationInterface_createResourceBrowser(self.h, parent.h), owned: false)
 
 proc headerSuffix*(self: gen_abstractintegration_types.QDesignerIntegrationInterface): string =
   let v_ms = fcQDesignerIntegrationInterface_headerSuffix(self.h)
@@ -228,14 +226,14 @@ proc propertyChanged*(self: gen_abstractintegration_types.QDesignerIntegrationIn
 type QDesignerIntegrationInterfacepropertyChangedSlot* = proc(formWindow: gen_abstractformwindow_types.QDesignerFormWindowInterface, name: openArray[char], value: gen_qvariant_types.QVariant)
 proc fcQDesignerIntegrationInterface_slot_callback_propertyChanged(slot: int, formWindow: pointer, name: struct_seaqt_string, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDesignerIntegrationInterfacepropertyChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow)
+  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow, owned: false)
 
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
 
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
 
   nimfunc[](slotval1, slotval2, slotval3)
 
@@ -255,9 +253,9 @@ proc objectNameChanged*(self: gen_abstractintegration_types.QDesignerIntegration
 type QDesignerIntegrationInterfaceobjectNameChangedSlot* = proc(formWindow: gen_abstractformwindow_types.QDesignerFormWindowInterface, objectVal: gen_qobject_types.QObject, newName: openArray[char], oldName: openArray[char])
 proc fcQDesignerIntegrationInterface_slot_callback_objectNameChanged(slot: int, formWindow: pointer, objectVal: pointer, newName: struct_seaqt_string, oldName: struct_seaqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QDesignerIntegrationInterfaceobjectNameChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow)
+  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow, owned: false)
 
-  let slotval2 = gen_qobject_types.QObject(h: objectVal)
+  let slotval2 = gen_qobject_types.QObject(h: objectVal, owned: false)
 
   let vnewName_ms = newName
   let vnewNamex_ret = string.fromBytes(vnewName_ms)
@@ -418,7 +416,7 @@ proc tr*(_: type gen_abstractintegration_types.QDesignerIntegrationInterface, s:
   vx_ret
 
 proc sender*(self: gen_abstractintegration_types.QDesignerIntegrationInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerIntegrationInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerIntegrationInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractintegration_types.QDesignerIntegrationInterface): cint =
   fcQDesignerIntegrationInterface_protectedbase_senderSignalIndex(self.h)
@@ -431,10 +429,8 @@ proc isSignalConnected*(self: gen_abstractintegration_types.QDesignerIntegration
 
 proc staticMetaObject*(_: type gen_abstractintegration_types.QDesignerIntegrationInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerIntegrationInterface_staticMetaObject())
-proc delete*(self: gen_abstractintegration_types.QDesignerIntegrationInterface) =
-  fcQDesignerIntegrationInterface_delete(self.h)
 proc metaObject*(self: gen_abstractintegration_types.QDesignerIntegration): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerIntegration_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerIntegration_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractintegration_types.QDesignerIntegration, param1: cstring): pointer =
   fcQDesignerIntegration_metacast(self.h, param1)
@@ -476,10 +472,10 @@ proc setResourceFileWatcherBehaviour*(self: gen_abstractintegration_types.QDesig
   fcQDesignerIntegration_setResourceFileWatcherBehaviour(self.h, cint(behaviour))
 
 proc containerWindow*(self: gen_abstractintegration_types.QDesignerIntegration, widget: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerIntegration_containerWindow(self.h, widget.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerIntegration_containerWindow(self.h, widget.h), owned: false)
 
 proc createResourceBrowser*(self: gen_abstractintegration_types.QDesignerIntegration, parent: gen_qwidget_types.QWidget): gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface =
-  gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface(h: fcQDesignerIntegration_createResourceBrowser(self.h, parent.h))
+  gen_abstractresourcebrowser_types.QDesignerResourceBrowserInterface(h: fcQDesignerIntegration_createResourceBrowser(self.h, parent.h), owned: false)
 
 proc contextHelpId*(self: gen_abstractintegration_types.QDesignerIntegration): string =
   let v_ms = fcQDesignerIntegration_contextHelpId(self.h)
@@ -527,7 +523,7 @@ proc tr*(_: type gen_abstractintegration_types.QDesignerIntegration, s: cstring,
   vx_ret
 
 proc sender*(self: gen_abstractintegration_types.QDesignerIntegration): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerIntegration_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerIntegration_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractintegration_types.QDesignerIntegration): cint =
   fcQDesignerIntegration_protectedbase_senderSignalIndex(self.h)
@@ -540,5 +536,3 @@ proc isSignalConnected*(self: gen_abstractintegration_types.QDesignerIntegration
 
 proc staticMetaObject*(_: type gen_abstractintegration_types.QDesignerIntegration): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerIntegration_staticMetaObject())
-proc delete*(self: gen_abstractintegration_types.QDesignerIntegration) =
-  fcQDesignerIntegration_delete(self.h)

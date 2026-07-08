@@ -186,7 +186,6 @@ proc fcQStandardItem_new2(vtbl: pointer, vdata: csize_t, text: struct_seaqt_stri
 proc fcQStandardItem_new3(vtbl: pointer, vdata: csize_t, icon: pointer, text: struct_seaqt_string): ptr cQStandardItem {.importc: "QStandardItem_new3".}
 proc fcQStandardItem_new4(vtbl: pointer, vdata: csize_t, rows: cint): ptr cQStandardItem {.importc: "QStandardItem_new4".}
 proc fcQStandardItem_new5(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint): ptr cQStandardItem {.importc: "QStandardItem_new5".}
-proc fcQStandardItem_delete(self: pointer) {.importc: "QStandardItem_delete".}
 proc fcQStandardItemModel_metaObject(self: pointer): pointer {.importc: "QStandardItemModel_metaObject".}
 proc fcQStandardItemModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QStandardItemModel_metacast".}
 proc fcQStandardItemModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStandardItemModel_metacall".}
@@ -387,10 +386,9 @@ proc fcQStandardItemModel_new2(vtbl: pointer, vdata: csize_t, rows: cint, column
 proc fcQStandardItemModel_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStandardItemModel {.importc: "QStandardItemModel_new3".}
 proc fcQStandardItemModel_new4(vtbl: pointer, vdata: csize_t, rows: cint, columns: cint, parent: pointer): ptr cQStandardItemModel {.importc: "QStandardItemModel_new4".}
 proc fcQStandardItemModel_staticMetaObject(): pointer {.importc: "QStandardItemModel_staticMetaObject".}
-proc fcQStandardItemModel_delete(self: pointer) {.importc: "QStandardItemModel_delete".}
 
 proc data*(self: gen_qstandarditemmodel_types.QStandardItem, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStandardItem_data(self.h, role))
+  gen_qvariant_types.QVariant(h: fcQStandardItem_data(self.h, role), owned: true)
 
 proc multiData*(self: gen_qstandarditemmodel_types.QStandardItem, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void =
   fcQStandardItem_multiData(self.h, roleDataSpan.h)
@@ -411,7 +409,7 @@ proc setText*(self: gen_qstandarditemmodel_types.QStandardItem, text: openArray[
   fcQStandardItem_setText(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
 
 proc icon*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQStandardItem_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQStandardItem_icon(self.h), owned: true)
 
 proc setIcon*(self: gen_qstandarditemmodel_types.QStandardItem, icon: gen_qicon_types.QIcon): void =
   fcQStandardItem_setIcon(self.h, icon.h)
@@ -444,13 +442,13 @@ proc setWhatsThis*(self: gen_qstandarditemmodel_types.QStandardItem, whatsThis: 
   fcQStandardItem_setWhatsThis(self.h, struct_seaqt_string(data: if len(whatsThis) > 0: addr whatsThis[0] else: nil, len: csize_t(len(whatsThis))))
 
 proc sizeHint*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQStandardItem_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQStandardItem_sizeHint(self.h), owned: true)
 
 proc setSizeHint*(self: gen_qstandarditemmodel_types.QStandardItem, sizeHint: gen_qsize_types.QSize): void =
   fcQStandardItem_setSizeHint(self.h, sizeHint.h)
 
 proc font*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQStandardItem_font(self.h))
+  gen_qfont_types.QFont(h: fcQStandardItem_font(self.h), owned: true)
 
 proc setFont*(self: gen_qstandarditemmodel_types.QStandardItem, font: gen_qfont_types.QFont): void =
   fcQStandardItem_setFont(self.h, font.h)
@@ -462,13 +460,13 @@ proc setTextAlignment*(self: gen_qstandarditemmodel_types.QStandardItem, textAli
   fcQStandardItem_setTextAlignment(self.h, cint(textAlignment))
 
 proc background*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQStandardItem_background(self.h))
+  gen_qbrush_types.QBrush(h: fcQStandardItem_background(self.h), owned: true)
 
 proc setBackground*(self: gen_qstandarditemmodel_types.QStandardItem, brush: gen_qbrush_types.QBrush): void =
   fcQStandardItem_setBackground(self.h, brush.h)
 
 proc foreground*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQStandardItem_foreground(self.h))
+  gen_qbrush_types.QBrush(h: fcQStandardItem_foreground(self.h), owned: true)
 
 proc setForeground*(self: gen_qstandarditemmodel_types.QStandardItem, brush: gen_qbrush_types.QBrush): void =
   fcQStandardItem_setForeground(self.h, brush.h)
@@ -552,7 +550,7 @@ proc setDropEnabled*(self: gen_qstandarditemmodel_types.QStandardItem, dropEnabl
   fcQStandardItem_setDropEnabled(self.h, dropEnabled)
 
 proc parent*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_parent(self.h))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_parent(self.h), owned: false)
 
 proc row*(self: gen_qstandarditemmodel_types.QStandardItem): cint =
   fcQStandardItem_row(self.h)
@@ -561,10 +559,10 @@ proc column*(self: gen_qstandarditemmodel_types.QStandardItem): cint =
   fcQStandardItem_column(self.h)
 
 proc index*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItem_index(self.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItem_index(self.h), owned: true)
 
 proc model*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qstandarditemmodel_types.QStandardItemModel =
-  gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItem_model(self.h))
+  gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItem_model(self.h), owned: false)
 
 proc rowCount*(self: gen_qstandarditemmodel_types.QStandardItem): cint =
   fcQStandardItem_rowCount(self.h)
@@ -582,7 +580,7 @@ proc hasChildren*(self: gen_qstandarditemmodel_types.QStandardItem): bool =
   fcQStandardItem_hasChildren(self.h)
 
 proc child*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_child(self.h, row))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_child(self.h, row), owned: false)
 
 proc setChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, column: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItem_setChild(self.h, row, column, item.h)
@@ -657,14 +655,14 @@ proc appendRow*(self: gen_qstandarditemmodel_types.QStandardItem, item: gen_qsta
   fcQStandardItem_appendRowWithItem(self.h, item.h)
 
 proc takeChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_takeChild(self.h, row))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_takeChild(self.h, row), owned: false)
 
 proc takeRow*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
   var v_ma = fcQStandardItem_takeRow(self.h, row)
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i])
+    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -673,7 +671,7 @@ proc takeColumn*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint)
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i])
+    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -681,7 +679,7 @@ proc sortChildren*(self: gen_qstandarditemmodel_types.QStandardItem, column: cin
   fcQStandardItem_sortChildren(self.h, column)
 
 proc clone*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_clone(self.h))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_clone(self.h), owned: false)
 
 proc typeX*(self: gen_qstandarditemmodel_types.QStandardItem): cint =
   fcQStandardItem_typeX(self.h)
@@ -696,10 +694,10 @@ proc operatorLesser*(self: gen_qstandarditemmodel_types.QStandardItem, other: ge
   fcQStandardItem_operatorLesser(self.h, other.h)
 
 proc child*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_child2(self.h, row, column))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_child2(self.h, row, column), owned: false)
 
 proc takeChild*(self: gen_qstandarditemmodel_types.QStandardItem, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_takeChild2(self.h, row, column))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_takeChild2(self.h, row, column), owned: false)
 
 proc sortChildren*(self: gen_qstandarditemmodel_types.QStandardItem, column: cint, order: cint): void =
   fcQStandardItem_sortChildren2(self.h, column, cint(order))
@@ -712,7 +710,8 @@ type QStandardItemtypeXProc* = proc(self: QStandardItem): cint {.raises: [], gcs
 type QStandardItemreadProc* = proc(self: QStandardItem, inVal: gen_qdatastream_types.QDataStream): void {.raises: [], gcsafe.}
 type QStandardItemwriteProc* = proc(self: QStandardItem, outVal: gen_qdatastream_types.QDataStream): void {.raises: [], gcsafe.}
 type QStandardItemoperatorLesserProc* = proc(self: QStandardItem, other: gen_qstandarditemmodel_types.QStandardItem): bool {.raises: [], gcsafe.}
-type QStandardItemVTable* = object
+
+type QStandardItemVTable* {.inheritable, pure.} = object
   vtbl: cQStandardItemVTable
   data*: QStandardItemdataProc
   multiData*: QStandardItemmultiDataProc
@@ -724,7 +723,7 @@ type QStandardItemVTable* = object
   operatorLesser*: QStandardItemoperatorLesserProc
 
 proc QStandardItemdata*(self: gen_qstandarditemmodel_types.QStandardItem, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStandardItem_virtualbase_data(self.h, role))
+  gen_qvariant_types.QVariant(h: fcQStandardItem_virtualbase_data(self.h, role), owned: true)
 
 proc QStandardItemmultiData*(self: gen_qstandarditemmodel_types.QStandardItem, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void =
   fcQStandardItem_virtualbase_multiData(self.h, roleDataSpan.h)
@@ -733,7 +732,7 @@ proc QStandardItemsetData*(self: gen_qstandarditemmodel_types.QStandardItem, val
   fcQStandardItem_virtualbase_setData(self.h, value.h, role)
 
 proc QStandardItemclone*(self: gen_qstandarditemmodel_types.QStandardItem): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_virtualbase_clone(self.h))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_virtualbase_clone(self.h), owned: false)
 
 proc QStandardItemtypeX*(self: gen_qstandarditemmodel_types.QStandardItem): cint =
   fcQStandardItem_virtualbase_typeX(self.h)
@@ -753,18 +752,21 @@ proc fcQStandardItem_vtable_callback_data(self: pointer, role: cint): pointer {.
   let self = QStandardItem(h: self)
   let slotval1 = role
   var virtualReturn = vtbl[].data(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItem_vtable_callback_multiData(self: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemVTable](fcQStandardItem_vdata(self)[])
   let self = QStandardItem(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   vtbl[].multiData(self, slotval1)
 
 proc fcQStandardItem_vtable_callback_setData(self: pointer, value: pointer, role: cint): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemVTable](fcQStandardItem_vdata(self)[])
   let self = QStandardItem(h: self)
-  let slotval1 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval2 = role
   vtbl[].setData(self, slotval1, slotval2)
 
@@ -772,7 +774,10 @@ proc fcQStandardItem_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStandardItemVTable](fcQStandardItem_vdata(self)[])
   let self = QStandardItem(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItem_vtable_callback_typeX(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStandardItemVTable](fcQStandardItem_vdata(self)[])
@@ -783,19 +788,19 @@ proc fcQStandardItem_vtable_callback_typeX(self: pointer): cint {.cdecl.} =
 proc fcQStandardItem_vtable_callback_read(self: pointer, inVal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemVTable](fcQStandardItem_vdata(self)[])
   let self = QStandardItem(h: self)
-  let slotval1 = gen_qdatastream_types.QDataStream(h: inVal)
+  let slotval1 = gen_qdatastream_types.QDataStream(h: inVal, owned: false)
   vtbl[].read(self, slotval1)
 
 proc fcQStandardItem_vtable_callback_write(self: pointer, outVal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemVTable](fcQStandardItem_vdata(self)[])
   let self = QStandardItem(h: self)
-  let slotval1 = gen_qdatastream_types.QDataStream(h: outVal)
+  let slotval1 = gen_qdatastream_types.QDataStream(h: outVal, owned: false)
   vtbl[].write(self, slotval1)
 
 proc fcQStandardItem_vtable_callback_operatorLesser(self: pointer, other: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemVTable](fcQStandardItem_vdata(self)[])
   let self = QStandardItem(h: self)
-  let slotval1 = gen_qstandarditemmodel_types.QStandardItem(h: other)
+  let slotval1 = gen_qstandarditemmodel_types.QStandardItem(h: other, owned: false)
   var virtualReturn = vtbl[].operatorLesser(self, slotval1)
   virtualReturn
 
@@ -823,23 +828,29 @@ proc fcQStandardItem_method_callback_data(self: pointer, role: cint): pointer {.
   let inst = cast[VirtualQStandardItem](fcQStandardItem_vdata(self)[])
   let slotval1 = role
   var virtualReturn = inst.data(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItem_method_callback_multiData(self: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItem](fcQStandardItem_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   inst.multiData(slotval1)
 
 proc fcQStandardItem_method_callback_setData(self: pointer, value: pointer, role: cint): void {.cdecl.} =
   let inst = cast[VirtualQStandardItem](fcQStandardItem_vdata(self)[])
-  let slotval1 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval2 = role
   inst.setData(slotval1, slotval2)
 
 proc fcQStandardItem_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStandardItem](fcQStandardItem_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStandardItem](fcQStandardItem_vdata(self)[])
@@ -848,17 +859,17 @@ proc fcQStandardItem_method_callback_typeX(self: pointer): cint {.cdecl.} =
 
 proc fcQStandardItem_method_callback_read(self: pointer, inVal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItem](fcQStandardItem_vdata(self)[])
-  let slotval1 = gen_qdatastream_types.QDataStream(h: inVal)
+  let slotval1 = gen_qdatastream_types.QDataStream(h: inVal, owned: false)
   inst.read(slotval1)
 
 proc fcQStandardItem_method_callback_write(self: pointer, outVal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItem](fcQStandardItem_vdata(self)[])
-  let slotval1 = gen_qdatastream_types.QDataStream(h: outVal)
+  let slotval1 = gen_qdatastream_types.QDataStream(h: outVal, owned: false)
   inst.write(slotval1)
 
 proc fcQStandardItem_method_callback_operatorLesser(self: pointer, other: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItem](fcQStandardItem_vdata(self)[])
-  let slotval1 = gen_qstandarditemmodel_types.QStandardItem(h: other)
+  let slotval1 = gen_qstandarditemmodel_types.QStandardItem(h: other, owned: false)
   var virtualReturn = inst.operatorLesser(slotval1)
   virtualReturn
 
@@ -889,7 +900,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
     vtbl[].vtbl.write = fcQStandardItem_vtable_callback_write
   if not isNil(vtbl[].operatorLesser):
     vtbl[].vtbl.operatorLesser = fcQStandardItem_vtable_callback_operatorLesser
-  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQStandardItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
@@ -916,7 +927,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
     vtbl[].vtbl.write = fcQStandardItem_vtable_callback_write
   if not isNil(vtbl[].operatorLesser):
     vtbl[].vtbl.operatorLesser = fcQStandardItem_vtable_callback_operatorLesser
-  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQStandardItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
@@ -943,7 +954,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
     vtbl[].vtbl.write = fcQStandardItem_vtable_callback_write
   if not isNil(vtbl[].operatorLesser):
     vtbl[].vtbl.operatorLesser = fcQStandardItem_vtable_callback_operatorLesser
-  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), icon.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
   fcQStandardItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
@@ -970,7 +981,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
     vtbl[].vtbl.write = fcQStandardItem_vtable_callback_write
   if not isNil(vtbl[].operatorLesser):
     vtbl[].vtbl.operatorLesser = fcQStandardItem_vtable_callback_operatorLesser
-  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rows))
+  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rows), owned: true)
   fcQStandardItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
@@ -997,13 +1008,14 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
     vtbl[].vtbl.write = fcQStandardItem_vtable_callback_write
   if not isNil(vtbl[].operatorLesser):
     vtbl[].vtbl.operatorLesser = fcQStandardItem_vtable_callback_operatorLesser
-  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rows, columns))
+  let tmp = gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItem_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rows, columns), owned: true)
   fcQStandardItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStandardItem_mvtbl = cQStandardItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQStandardItem()[])](self.fcQStandardItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   data: fcQStandardItem_method_callback_data,
   multiData: fcQStandardItem_method_callback_multiData,
@@ -1053,10 +1065,8 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
   fcQStandardItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qstandarditemmodel_types.QStandardItem) =
-  fcQStandardItem_delete(self.h)
 proc metaObject*(self: gen_qstandarditemmodel_types.QStandardItemModel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStandardItemModel_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStandardItemModel_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qstandarditemmodel_types.QStandardItemModel, param1: cstring): pointer =
   fcQStandardItemModel_metacast(self.h, param1)
@@ -1074,8 +1084,11 @@ proc setItemRoleNames*(self: gen_qstandarditemmodel_types.QStandardItemModel, ro
   var roleNames_Keys_CArray = newSeq[cint](len(roleNames))
   var roleNames_Values_CArray = newSeq[struct_seaqt_string](len(roleNames))
   var roleNames_ctr = 0
-  for roleNames_k, roleNames_v in roleNames:
+  for roleNames_k in roleNames.keys():
     roleNames_Keys_CArray[roleNames_ctr] = roleNames_k
+    roleNames_ctr += 1
+  roleNames_ctr = 0
+  for roleNames_v in roleNames.values():
     roleNames_Values_CArray[roleNames_ctr] = struct_seaqt_string(data: if len(roleNames_v) > 0: addr roleNames_v[0] else: nil, len: csize_t(len(roleNames_v)))
     roleNames_ctr += 1
 
@@ -1100,10 +1113,10 @@ proc roleNames*(self: gen_qstandarditemmodel_types.QStandardItemModel): Table[ci
   vx_ret
 
 proc index*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_index(self.h, row, column, parent.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_index(self.h, row, column, parent.h), owned: true)
 
 proc parent*(self: gen_qstandarditemmodel_types.QStandardItemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_parent(self.h, child.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_parent(self.h, child.h), owned: true)
 
 proc rowCount*(self: gen_qstandarditemmodel_types.QStandardItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQStandardItemModel_rowCount(self.h, parent.h)
@@ -1115,7 +1128,7 @@ proc hasChildren*(self: gen_qstandarditemmodel_types.QStandardItemModel, parent:
   fcQStandardItemModel_hasChildren(self.h, parent.h)
 
 proc data*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStandardItemModel_data(self.h, index.h, role))
+  gen_qvariant_types.QVariant(h: fcQStandardItemModel_data(self.h, index.h, role), owned: true)
 
 proc multiData*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void =
   fcQStandardItemModel_multiData(self.h, index.h, roleDataSpan.h)
@@ -1127,7 +1140,7 @@ proc clearItemData*(self: gen_qstandarditemmodel_types.QStandardItemModel, index
   fcQStandardItemModel_clearItemData(self.h, index.h)
 
 proc headerData*(self: gen_qstandarditemmodel_types.QStandardItemModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStandardItemModel_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQStandardItemModel_headerData(self.h, section, cint(orientation), role), owned: true)
 
 proc setHeaderData*(self: gen_qstandarditemmodel_types.QStandardItemModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQStandardItemModel_setHeaderData(self.h, section, cint(orientation), value.h, role)
@@ -1158,7 +1171,7 @@ proc itemData*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: gen
   for i in 0..<v_mm.len:
     var v_entry_Key = v_Keys[i]
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -1169,8 +1182,11 @@ proc setItemData*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: 
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for roles_k, roles_v in roles:
+  for roles_k in roles.keys():
     roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
@@ -1183,13 +1199,13 @@ proc sort*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint, 
   fcQStandardItemModel_sort(self.h, column, cint(order))
 
 proc itemFromIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_itemFromIndex(self.h, index.h))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_itemFromIndex(self.h, index.h), owned: false)
 
 proc indexFromItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, item: gen_qstandarditemmodel_types.QStandardItem): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_indexFromItem(self.h, item.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_indexFromItem(self.h, item.h), owned: true)
 
 proc item*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_item(self.h, row))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_item(self.h, row), owned: false)
 
 proc setItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItemModel_setItem(self.h, row, column, item.h)
@@ -1198,16 +1214,16 @@ proc setItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, 
   fcQStandardItemModel_setItem2(self.h, row, item.h)
 
 proc invisibleRootItem*(self: gen_qstandarditemmodel_types.QStandardItemModel): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_invisibleRootItem(self.h))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_invisibleRootItem(self.h), owned: false)
 
 proc horizontalHeaderItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_horizontalHeaderItem(self.h, column))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_horizontalHeaderItem(self.h, column), owned: false)
 
 proc setHorizontalHeaderItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItemModel_setHorizontalHeaderItem(self.h, column, item.h)
 
 proc verticalHeaderItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_verticalHeaderItem(self.h, row))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_verticalHeaderItem(self.h, row), owned: false)
 
 proc setVerticalHeaderItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItemModel_setVerticalHeaderItem(self.h, row, item.h)
@@ -1273,14 +1289,14 @@ proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column
   fcQStandardItemModel_insertColumnWithColumn(self.h, column)
 
 proc takeItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItem(self.h, row))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItem(self.h, row), owned: false)
 
 proc takeRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
   var v_ma = fcQStandardItemModel_takeRow(self.h, row)
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i])
+    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -1289,18 +1305,18 @@ proc takeColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: 
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i])
+    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc takeHorizontalHeaderItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeHorizontalHeaderItem(self.h, column))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeHorizontalHeaderItem(self.h, column), owned: false)
 
 proc takeVerticalHeaderItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeVerticalHeaderItem(self.h, row))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeVerticalHeaderItem(self.h, row), owned: false)
 
 proc itemPrototype*(self: gen_qstandarditemmodel_types.QStandardItemModel): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_itemPrototype(self.h))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_itemPrototype(self.h), owned: false)
 
 proc setItemPrototype*(self: gen_qstandarditemmodel_types.QStandardItemModel, item: gen_qstandarditemmodel_types.QStandardItem): void =
   fcQStandardItemModel_setItemPrototype(self.h, item.h)
@@ -1310,7 +1326,7 @@ proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: ope
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i])
+    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -1337,7 +1353,7 @@ proc mimeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: o
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
 
-  gen_qmimedata_types.QMimeData(h: fcQStandardItemModel_mimeData(self.h, struct_seaqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
+  gen_qmimedata_types.QMimeData(h: fcQStandardItemModel_mimeData(self.h, struct_seaqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
 proc dropMimeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQStandardItemModel_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
@@ -1348,7 +1364,7 @@ proc itemChanged*(self: gen_qstandarditemmodel_types.QStandardItemModel, item: g
 type QStandardItemModelitemChangedSlot* = proc(item: gen_qstandarditemmodel_types.QStandardItem)
 proc fcQStandardItemModel_slot_callback_itemChanged(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QStandardItemModelitemChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qstandarditemmodel_types.QStandardItem(h: item)
+  let slotval1 = gen_qstandarditemmodel_types.QStandardItem(h: item, owned: false)
 
   nimfunc[](slotval1)
 
@@ -1375,7 +1391,7 @@ proc tr*(_: type gen_qstandarditemmodel_types.QStandardItemModel, s: cstring, c:
   vx_ret
 
 proc item*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_item2(self.h, row, column))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_item2(self.h, row, column), owned: false)
 
 proc insertRow*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQStandardItemModel_insertRow3(self.h, row, parent.h)
@@ -1384,14 +1400,14 @@ proc insertColumn*(self: gen_qstandarditemmodel_types.QStandardItemModel, column
   fcQStandardItemModel_insertColumn2(self.h, column, parent.h)
 
 proc takeItem*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qstandarditemmodel_types.QStandardItem =
-  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItem2(self.h, row, column))
+  gen_qstandarditemmodel_types.QStandardItem(h: fcQStandardItemModel_takeItem2(self.h, row, column), owned: false)
 
 proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: openArray[char], flags: cint): seq[gen_qstandarditemmodel_types.QStandardItem] =
   var v_ma = fcQStandardItemModel_findItems2(self.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(flags))
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i])
+    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -1400,7 +1416,7 @@ proc findItems*(self: gen_qstandarditemmodel_types.QStandardItemModel, text: ope
   var vx_ret = newSeq[gen_qstandarditemmodel_types.QStandardItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i])
+    vx_ret[i] = gen_qstandarditemmodel_types.QStandardItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -1451,7 +1467,8 @@ type QStandardItemModelchildEventProc* = proc(self: QStandardItemModel, event: g
 type QStandardItemModelcustomEventProc* = proc(self: QStandardItemModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStandardItemModelconnectNotifyProc* = proc(self: QStandardItemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QStandardItemModeldisconnectNotifyProc* = proc(self: QStandardItemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QStandardItemModelVTable* = object
+
+type QStandardItemModelVTable* {.inheritable, pure.} = object
   vtbl: cQStandardItemModelVTable
   metaObject*: QStandardItemModelmetaObjectProc
   metacast*: QStandardItemModelmetacastProc
@@ -1502,7 +1519,7 @@ type QStandardItemModelVTable* = object
   disconnectNotify*: QStandardItemModeldisconnectNotifyProc
 
 proc QStandardItemModelmetaObject*(self: gen_qstandarditemmodel_types.QStandardItemModel): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStandardItemModel_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStandardItemModel_virtualbase_metaObject(self.h), owned: false)
 
 proc QStandardItemModelmetacast*(self: gen_qstandarditemmodel_types.QStandardItemModel, param1: cstring): pointer =
   fcQStandardItemModel_virtualbase_metacast(self.h, param1)
@@ -1529,10 +1546,10 @@ proc QStandardItemModelroleNames*(self: gen_qstandarditemmodel_types.QStandardIt
   vx_ret
 
 proc QStandardItemModelindex*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_virtualbase_index(self.h, row, column, parent.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
 
 proc QStandardItemModelparent*(self: gen_qstandarditemmodel_types.QStandardItemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_virtualbase_parent(self.h, child.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_virtualbase_parent(self.h, child.h), owned: true)
 
 proc QStandardItemModelrowCount*(self: gen_qstandarditemmodel_types.QStandardItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQStandardItemModel_virtualbase_rowCount(self.h, parent.h)
@@ -1544,7 +1561,7 @@ proc QStandardItemModelhasChildren*(self: gen_qstandarditemmodel_types.QStandard
   fcQStandardItemModel_virtualbase_hasChildren(self.h, parent.h)
 
 proc QStandardItemModeldata*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStandardItemModel_virtualbase_data(self.h, index.h, role))
+  gen_qvariant_types.QVariant(h: fcQStandardItemModel_virtualbase_data(self.h, index.h, role), owned: true)
 
 proc QStandardItemModelmultiData*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void =
   fcQStandardItemModel_virtualbase_multiData(self.h, index.h, roleDataSpan.h)
@@ -1556,7 +1573,7 @@ proc QStandardItemModelclearItemData*(self: gen_qstandarditemmodel_types.QStanda
   fcQStandardItemModel_virtualbase_clearItemData(self.h, index.h)
 
 proc QStandardItemModelheaderData*(self: gen_qstandarditemmodel_types.QStandardItemModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQStandardItemModel_virtualbase_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQStandardItemModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
 proc QStandardItemModelsetHeaderData*(self: gen_qstandarditemmodel_types.QStandardItemModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQStandardItemModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
@@ -1587,7 +1604,7 @@ proc QStandardItemModelitemData*(self: gen_qstandarditemmodel_types.QStandardIte
   for i in 0..<v_mm.len:
     var v_entry_Key = v_Keys[i]
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -1598,8 +1615,11 @@ proc QStandardItemModelsetItemData*(self: gen_qstandarditemmodel_types.QStandard
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for roles_k, roles_v in roles:
+  for roles_k in roles.keys():
     roles_Keys_CArray[roles_ctr] = roles_k
+    roles_ctr += 1
+  roles_ctr = 0
+  for roles_v in roles.values():
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
@@ -1625,13 +1645,13 @@ proc QStandardItemModelmimeData*(self: gen_qstandarditemmodel_types.QStandardIte
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
 
-  gen_qmimedata_types.QMimeData(h: fcQStandardItemModel_virtualbase_mimeData(self.h, struct_seaqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
+  gen_qmimedata_types.QMimeData(h: fcQStandardItemModel_virtualbase_mimeData(self.h, struct_seaqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
 proc QStandardItemModeldropMimeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQStandardItemModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
 proc QStandardItemModelsibling*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_virtualbase_sibling(self.h, row, column, idx.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
 proc QStandardItemModelcanDropMimeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQStandardItemModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
@@ -1652,19 +1672,19 @@ proc QStandardItemModelcanFetchMore*(self: gen_qstandarditemmodel_types.QStandar
   fcQStandardItemModel_virtualbase_canFetchMore(self.h, parent.h)
 
 proc QStandardItemModelbuddy*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_virtualbase_buddy(self.h, index.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_virtualbase_buddy(self.h, index.h), owned: true)
 
 proc QStandardItemModelmatch*(self: gen_qstandarditemmodel_types.QStandardItemModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQStandardItemModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc QStandardItemModelspan*(self: gen_qstandarditemmodel_types.QStandardItemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQStandardItemModel_virtualbase_span(self.h, index.h))
+  gen_qsize_types.QSize(h: fcQStandardItemModel_virtualbase_span(self.h, index.h), owned: true)
 
 proc QStandardItemModelsubmit*(self: gen_qstandarditemmodel_types.QStandardItemModel): bool =
   fcQStandardItemModel_virtualbase_submit(self.h)
@@ -1701,7 +1721,10 @@ proc fcQStandardItemModel_vtable_callback_metaObject(self: pointer): pointer {.c
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
@@ -1726,8 +1749,11 @@ proc fcQStandardItemModel_vtable_callback_roleNames(self: pointer): struct_seaqt
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_seaqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_seaqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
     var virtualReturn_v_copy = if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil
     if len(virtualReturn_v) > 0: copyMem(virtualReturn_v_copy, addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_seaqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
@@ -1740,58 +1766,67 @@ proc fcQStandardItemModel_vtable_callback_index(self: pointer, row: cint, column
   let self = QStandardItemModel(h: self)
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
   var virtualReturn = vtbl[].parent(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].columnCount(self, slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].hasChildren(self, slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
   var virtualReturn = vtbl[].data(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   vtbl[].multiData(self, slotval1, slotval2)
 
 proc fcQStandardItemModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
   var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
   virtualReturn
@@ -1799,7 +1834,7 @@ proc fcQStandardItemModel_vtable_callback_setData(self: pointer, index: pointer,
 proc fcQStandardItemModel_vtable_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].clearItemData(self, slotval1)
   virtualReturn
 
@@ -1810,14 +1845,17 @@ proc fcQStandardItemModel_vtable_callback_headerData(self: pointer, section: cin
   let slotval2 = cint(orientation)
   let slotval3 = role
   var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
   var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -1827,7 +1865,7 @@ proc fcQStandardItemModel_vtable_callback_insertRows(self: pointer, row: cint, c
   let self = QStandardItemModel(h: self)
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1836,7 +1874,7 @@ proc fcQStandardItemModel_vtable_callback_insertColumns(self: pointer, column: c
   let self = QStandardItemModel(h: self)
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1845,7 +1883,7 @@ proc fcQStandardItemModel_vtable_callback_removeRows(self: pointer, row: cint, c
   let self = QStandardItemModel(h: self)
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1854,14 +1892,14 @@ proc fcQStandardItemModel_vtable_callback_removeColumns(self: pointer, column: c
   let self = QStandardItemModel(h: self)
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQStandardItemModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
 
@@ -1874,14 +1912,20 @@ proc fcQStandardItemModel_vtable_callback_supportedDropActions(self: pointer): c
 proc fcQStandardItemModel_vtable_callback_itemData(self: pointer, index: pointer): struct_seaqt_map {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemData(self, slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
-    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
+    virtualReturn_v.owned = false # TODO move?
+    let virtualReturn_v_h = virtualReturn_v.h
+    virtualReturn_v.h = nil
+    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_h
     virtualReturn_ctr += 1
 
   struct_seaqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
@@ -1889,7 +1933,7 @@ proc fcQStandardItemModel_vtable_callback_itemData(self: pointer, index: pointer
 proc fcQStandardItemModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_seaqt_map): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -1897,7 +1941,7 @@ proc fcQStandardItemModel_vtable_callback_setItemData(self: pointer, index: poin
   for i in 0..<vroles_mm.len:
     var vroles_entry_Key = vroles_Keys[i]
 
-    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
+    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i], owned: true)
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   c_free(vroles_mm.keys)
@@ -1932,20 +1976,23 @@ proc fcQStandardItemModel_vtable_callback_mimeData(self: pointer, indexes: struc
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = vtbl[].mimeData(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -1954,18 +2001,21 @@ proc fcQStandardItemModel_vtable_callback_sibling(self: pointer, row: cint, colu
   let self = QStandardItemModel(h: self)
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -1978,10 +2028,10 @@ proc fcQStandardItemModel_vtable_callback_supportedDragActions(self: pointer): c
 proc fcQStandardItemModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -1989,10 +2039,10 @@ proc fcQStandardItemModel_vtable_callback_moveRows(self: pointer, sourceParent: 
 proc fcQStandardItemModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
@@ -2000,44 +2050,53 @@ proc fcQStandardItemModel_vtable_callback_moveColumns(self: pointer, sourceParen
 proc fcQStandardItemModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
 
 proc fcQStandardItemModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].buddy(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_seaqt_array {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = vtbl[].match(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQStandardItemModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].span(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
@@ -2058,46 +2117,46 @@ proc fcQStandardItemModel_vtable_callback_resetInternalData(self: pointer): void
 proc fcQStandardItemModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQStandardItemModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQStandardItemModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQStandardItemModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQStandardItemModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQStandardItemModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStandardItemModelVTable](fcQStandardItemModel_vdata(self)[])
   let self = QStandardItemModel(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQStandardItemModel* {.inheritable.} = ref object of QStandardItemModel
@@ -2201,7 +2260,10 @@ method disconnectNotify*(self: VirtualQStandardItemModel, signal: gen_qmetaobjec
 proc fcQStandardItemModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
@@ -2223,8 +2285,11 @@ proc fcQStandardItemModel_method_callback_roleNames(self: pointer): struct_seaqt
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_seaqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_seaqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
     var virtualReturn_v_copy = if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil
     if len(virtualReturn_v) > 0: copyMem(virtualReturn_v_copy, addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_seaqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
@@ -2236,58 +2301,67 @@ proc fcQStandardItemModel_method_callback_index(self: pointer, row: cint, column
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.index(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
   var virtualReturn = inst.parent(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.hasChildren(slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
   var virtualReturn = inst.data(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan, owned: true)
   inst.multiData(slotval1, slotval2)
 
 proc fcQStandardItemModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
   var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_clearItemData(self: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.clearItemData(slotval1)
   virtualReturn
 
@@ -2297,13 +2371,16 @@ proc fcQStandardItemModel_method_callback_headerData(self: pointer, section: cin
   let slotval2 = cint(orientation)
   let slotval3 = role
   var virtualReturn = inst.headerData(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
   let slotval1 = section
   let slotval2 = cint(orientation)
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
   var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -2312,7 +2389,7 @@ proc fcQStandardItemModel_method_callback_insertRows(self: pointer, row: cint, c
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -2320,7 +2397,7 @@ proc fcQStandardItemModel_method_callback_insertColumns(self: pointer, column: c
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -2328,7 +2405,7 @@ proc fcQStandardItemModel_method_callback_removeRows(self: pointer, row: cint, c
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -2336,13 +2413,13 @@ proc fcQStandardItemModel_method_callback_removeColumns(self: pointer, column: c
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
   let slotval1 = column
   let slotval2 = count
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
@@ -2353,21 +2430,27 @@ proc fcQStandardItemModel_method_callback_supportedDropActions(self: pointer): c
 
 proc fcQStandardItemModel_method_callback_itemData(self: pointer, index: pointer): struct_seaqt_map {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.itemData(slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturn_k, virtualReturn_v in virtualReturn:
+  for virtualReturn_k in virtualReturn.keys():
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
-    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
+    virtualReturn_ctr += 1
+  virtualReturn_ctr = 0
+  for virtualReturn_v in virtualReturn.mvalues():
+    virtualReturn_v.owned = false # TODO move?
+    let virtualReturn_v_h = virtualReturn_v.h
+    virtualReturn_v.h = nil
+    virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_h
     virtualReturn_ctr += 1
 
   struct_seaqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
 proc fcQStandardItemModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_seaqt_map): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -2375,7 +2458,7 @@ proc fcQStandardItemModel_method_callback_setItemData(self: pointer, index: poin
   for i in 0..<vroles_mm.len:
     var vroles_entry_Key = vroles_Keys[i]
 
-    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
+    var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i], owned: true)
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   c_free(vroles_mm.keys)
@@ -2407,19 +2490,22 @@ proc fcQStandardItemModel_method_callback_mimeData(self: pointer, indexes: struc
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
-    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+    vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = inst.mimeData(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -2427,17 +2513,20 @@ proc fcQStandardItemModel_method_callback_sibling(self: pointer, row: cint, colu
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
   let slotval1 = row
   let slotval2 = column
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
   var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qmimedata_types.QMimeData(h: data)
+  let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
-  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
@@ -2448,60 +2537,69 @@ proc fcQStandardItemModel_method_callback_supportedDragActions(self: pointer): c
 
 proc fcQStandardItemModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
   var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   inst.fetchMore(slotval1)
 
 proc fcQStandardItemModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.buddy(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_seaqt_array {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = inst.match(slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQStandardItemModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.span(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStandardItemModel_method_callback_submit(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
@@ -2518,45 +2616,45 @@ proc fcQStandardItemModel_method_callback_resetInternalData(self: pointer): void
 
 proc fcQStandardItemModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQStandardItemModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQStandardItemModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQStandardItemModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQStandardItemModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQStandardItemModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStandardItemModel](fcQStandardItemModel_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc createIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_protectedbase_createIndex(self.h, row, column))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_protectedbase_createIndex(self.h, row, column), owned: true)
 
 proc encodeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: openArray[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
   var indexes_CArray = newSeq[pointer](len(indexes))
@@ -2629,12 +2727,12 @@ proc persistentIndexList*(self: gen_qstandarditemmodel_types.QStandardItemModel)
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qstandarditemmodel_types.QStandardItemModel): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStandardItemModel_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQStandardItemModel_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel): cint =
   fcQStandardItemModel_protectedbase_senderSignalIndex(self.h)
@@ -2746,7 +2844,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
     vtbl[].vtbl.connectNotify = fcQStandardItemModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStandardItemModel_vtable_callback_disconnectNotify
-  let tmp = gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItemModel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItemModel_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQStandardItemModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
@@ -2851,7 +2949,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
     vtbl[].vtbl.connectNotify = fcQStandardItemModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStandardItemModel_vtable_callback_disconnectNotify
-  let tmp = gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItemModel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rows, columns))
+  let tmp = gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItemModel_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rows, columns), owned: true)
   fcQStandardItemModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
@@ -2956,7 +3054,7 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
     vtbl[].vtbl.connectNotify = fcQStandardItemModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStandardItemModel_vtable_callback_disconnectNotify
-  let tmp = gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItemModel_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItemModel_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQStandardItemModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
@@ -3061,13 +3159,14 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
     vtbl[].vtbl.connectNotify = fcQStandardItemModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStandardItemModel_vtable_callback_disconnectNotify
-  let tmp = gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItemModel_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rows, columns, parent.h))
+  let tmp = gen_qstandarditemmodel_types.QStandardItemModel(h: fcQStandardItemModel_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), rows, columns, parent.h), owned: true)
   fcQStandardItemModel_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStandardItemModel_mvtbl = cQStandardItemModelVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQStandardItemModel()[])](self.fcQStandardItemModel_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQStandardItemModel_method_callback_metaObject,
   metacast: fcQStandardItemModel_method_callback_metacast,
@@ -3150,5 +3249,3 @@ proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
 
 proc staticMetaObject*(_: type gen_qstandarditemmodel_types.QStandardItemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStandardItemModel_staticMetaObject())
-proc delete*(self: gen_qstandarditemmodel_types.QStandardItemModel) =
-  fcQStandardItemModel_delete(self.h)

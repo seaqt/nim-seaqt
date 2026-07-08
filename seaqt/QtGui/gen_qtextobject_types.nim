@@ -25,7 +25,7 @@ proc `=sink`(dest: var QTextFrame, source: QTextFrame) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QTextBlockUserData* {.inheritable, pure.} = object
+type QTextBlockUserData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -49,7 +49,7 @@ proc delete*(self: sink QTextBlockUserData) =
   wasMoved(self)
   fcQTextBlockUserData_delete(h)
 
-type QTextBlock* {.inheritable, pure.} = object
+type QTextBlock* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -69,7 +69,7 @@ proc delete*(self: sink QTextBlock) =
   wasMoved(self)
   fcQTextBlock_delete(h)
 
-type QTextFragment* {.inheritable, pure.} = object
+type QTextFragment* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -89,7 +89,7 @@ proc delete*(self: sink QTextFragment) =
   wasMoved(self)
   fcQTextFragment_delete(h)
 
-type QTextFrameiterator* {.inheritable, pure.} = object
+type QTextFrameiterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -109,7 +109,7 @@ proc delete*(self: sink QTextFrameiterator) =
   wasMoved(self)
   fcQTextFrameiterator_delete(h)
 
-type QTextBlockiterator* {.inheritable, pure.} = object
+type QTextBlockiterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

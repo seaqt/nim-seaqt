@@ -45,7 +45,6 @@ proc fcQWebSocketHandshakeOptions_subprotocols(self: pointer): struct_seaqt_arra
 proc fcQWebSocketHandshakeOptions_setSubprotocols(self: pointer, protocols: struct_seaqt_array): void {.importc: "QWebSocketHandshakeOptions_setSubprotocols".}
 proc fcQWebSocketHandshakeOptions_new(): ptr cQWebSocketHandshakeOptions {.importc: "QWebSocketHandshakeOptions_new".}
 proc fcQWebSocketHandshakeOptions_new2(other: pointer): ptr cQWebSocketHandshakeOptions {.importc: "QWebSocketHandshakeOptions_new2".}
-proc fcQWebSocketHandshakeOptions_delete(self: pointer) {.importc: "QWebSocketHandshakeOptions_delete".}
 
 proc operatorAssign*(self: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions, other: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions): void =
   fcQWebSocketHandshakeOptions_operatorAssign(self.h, other.h)
@@ -73,11 +72,9 @@ proc setSubprotocols*(self: gen_qwebsockethandshakeoptions_types.QWebSocketHands
   fcQWebSocketHandshakeOptions_setSubprotocols(self.h, struct_seaqt_array(len: csize_t(len(protocols)), data: if len(protocols) == 0: nil else: addr(protocols_CArray[0])))
 
 proc create*(T: type gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions): gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions =
-  let tmp = gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions(h: fcQWebSocketHandshakeOptions_new())
+  let tmp = gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions(h: fcQWebSocketHandshakeOptions_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions,
     other: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions): gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions =
-  let tmp = gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions(h: fcQWebSocketHandshakeOptions_new2(other.h))
+  let tmp = gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions(h: fcQWebSocketHandshakeOptions_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qwebsockethandshakeoptions_types.QWebSocketHandshakeOptions) =
-  fcQWebSocketHandshakeOptions_delete(self.h)

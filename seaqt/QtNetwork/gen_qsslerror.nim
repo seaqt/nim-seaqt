@@ -98,7 +98,6 @@ proc fcQSslError_new2(error: cint): ptr cQSslError {.importc: "QSslError_new2".}
 proc fcQSslError_new3(error: cint, certificate: pointer): ptr cQSslError {.importc: "QSslError_new3".}
 proc fcQSslError_new4(other: pointer): ptr cQSslError {.importc: "QSslError_new4".}
 proc fcQSslError_staticMetaObject(): pointer {.importc: "QSslError_staticMetaObject".}
-proc fcQSslError_delete(self: pointer) {.importc: "QSslError_delete".}
 
 proc swap*(self: gen_qsslerror_types.QSslError, other: gen_qsslerror_types.QSslError): void =
   fcQSslError_swap(self.h, other.h)
@@ -122,24 +121,22 @@ proc errorString*(self: gen_qsslerror_types.QSslError): string =
   vx_ret
 
 proc certificate*(self: gen_qsslerror_types.QSslError): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate(h: fcQSslError_certificate(self.h))
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslError_certificate(self.h), owned: true)
 
 proc create*(T: type gen_qsslerror_types.QSslError): gen_qsslerror_types.QSslError =
-  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new())
+  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new(), owned: true)
   tmp
 proc create*(T: type gen_qsslerror_types.QSslError,
     error: cint): gen_qsslerror_types.QSslError =
-  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new2(cint(error)))
+  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new2(cint(error)), owned: true)
   tmp
 proc create*(T: type gen_qsslerror_types.QSslError,
     error: cint, certificate: gen_qsslcertificate_types.QSslCertificate): gen_qsslerror_types.QSslError =
-  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new3(cint(error), certificate.h))
+  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new3(cint(error), certificate.h), owned: true)
   tmp
 proc create*(T: type gen_qsslerror_types.QSslError,
     other: gen_qsslerror_types.QSslError): gen_qsslerror_types.QSslError =
-  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new4(other.h))
+  let tmp = gen_qsslerror_types.QSslError(h: fcQSslError_new4(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qsslerror_types.QSslError): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSslError_staticMetaObject())
-proc delete*(self: gen_qsslerror_types.QSslError) =
-  fcQSslError_delete(self.h)

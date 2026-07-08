@@ -128,7 +128,6 @@ proc fcQFontDatabase_isScalable2(family: struct_seaqt_string, style: struct_seaq
 proc fcQFontDatabase_isFixedPitch2(family: struct_seaqt_string, style: struct_seaqt_string): bool {.importc: "QFontDatabase_isFixedPitch2".}
 proc fcQFontDatabase_new(): ptr cQFontDatabase {.importc: "QFontDatabase_new".}
 proc fcQFontDatabase_staticMetaObject(): pointer {.importc: "QFontDatabase_staticMetaObject".}
-proc fcQFontDatabase_delete(self: pointer) {.importc: "QFontDatabase_delete".}
 
 proc standardSizes*(_: type gen_qfontdatabase_types.QFontDatabase): seq[cint] =
   var v_ma = fcQFontDatabase_standardSizes()
@@ -212,7 +211,7 @@ proc styleString*(_: type gen_qfontdatabase_types.QFontDatabase, fontInfo: gen_q
   vx_ret
 
 proc font*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char], style: openArray[char], pointSize: cint): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFontDatabase_font(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))), pointSize))
+  gen_qfont_types.QFont(h: fcQFontDatabase_font(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))), pointSize), owned: true)
 
 proc isBitmapScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: openArray[char]): bool =
   fcQFontDatabase_isBitmapScalable(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))
@@ -278,7 +277,7 @@ proc removeAllApplicationFonts*(_: type gen_qfontdatabase_types.QFontDatabase): 
   fcQFontDatabase_removeAllApplicationFonts()
 
 proc systemFont*(_: type gen_qfontdatabase_types.QFontDatabase, typeVal: cint): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFontDatabase_systemFont(cint(typeVal)))
+  gen_qfont_types.QFont(h: fcQFontDatabase_systemFont(cint(typeVal)), owned: true)
 
 proc families*(_: type gen_qfontdatabase_types.QFontDatabase, writingSystem: cint): seq[string] =
   var v_ma = fcQFontDatabase_familiesWithWritingSystem(cint(writingSystem))
@@ -314,9 +313,7 @@ proc isFixedPitch*(_: type gen_qfontdatabase_types.QFontDatabase, family: openAr
   fcQFontDatabase_isFixedPitch2(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), struct_seaqt_string(data: if len(style) > 0: addr style[0] else: nil, len: csize_t(len(style))))
 
 proc create*(T: type gen_qfontdatabase_types.QFontDatabase): gen_qfontdatabase_types.QFontDatabase =
-  let tmp = gen_qfontdatabase_types.QFontDatabase(h: fcQFontDatabase_new())
+  let tmp = gen_qfontdatabase_types.QFontDatabase(h: fcQFontDatabase_new(), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qfontdatabase_types.QFontDatabase): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFontDatabase_staticMetaObject())
-proc delete*(self: gen_qfontdatabase_types.QFontDatabase) =
-  fcQFontDatabase_delete(self.h)

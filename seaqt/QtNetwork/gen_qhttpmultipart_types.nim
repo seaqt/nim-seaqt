@@ -1,4 +1,4 @@
-type QHttpPart* {.inheritable, pure.} = object
+type QHttpPart* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

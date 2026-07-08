@@ -59,7 +59,6 @@ type cQDesignerDynamicPropertySheetExtensionVTable {.pure.} = object
   isDynamicProperty*: proc(self: pointer, index: cint): bool {.cdecl, raises: [], gcsafe.}
   canAddDynamicProperty*: proc(self: pointer, propertyName: struct_seaqt_string): bool {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerDynamicPropertySheetExtension_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerDynamicPropertySheetExtension {.importc: "QDesignerDynamicPropertySheetExtension_new".}
-proc fcQDesignerDynamicPropertySheetExtension_delete(self: pointer) {.importc: "QDesignerDynamicPropertySheetExtension_delete".}
 
 proc dynamicPropertiesAllowed*(self: gen_dynamicpropertysheet_types.QDesignerDynamicPropertySheetExtension): bool =
   fcQDesignerDynamicPropertySheetExtension_dynamicPropertiesAllowed(self.h)
@@ -81,7 +80,8 @@ type QDesignerDynamicPropertySheetExtensionaddDynamicPropertyProc* = proc(self: 
 type QDesignerDynamicPropertySheetExtensionremoveDynamicPropertyProc* = proc(self: QDesignerDynamicPropertySheetExtension, index: cint): bool {.raises: [], gcsafe.}
 type QDesignerDynamicPropertySheetExtensionisDynamicPropertyProc* = proc(self: QDesignerDynamicPropertySheetExtension, index: cint): bool {.raises: [], gcsafe.}
 type QDesignerDynamicPropertySheetExtensioncanAddDynamicPropertyProc* = proc(self: QDesignerDynamicPropertySheetExtension, propertyName: openArray[char]): bool {.raises: [], gcsafe.}
-type QDesignerDynamicPropertySheetExtensionVTable* = object
+
+type QDesignerDynamicPropertySheetExtensionVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerDynamicPropertySheetExtensionVTable
   dynamicPropertiesAllowed*: QDesignerDynamicPropertySheetExtensiondynamicPropertiesAllowedProc
   addDynamicProperty*: QDesignerDynamicPropertySheetExtensionaddDynamicPropertyProc
@@ -103,7 +103,7 @@ proc fcQDesignerDynamicPropertySheetExtension_vtable_callback_addDynamicProperty
   let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].addDynamicProperty(self, slotval1, slotval2)
   virtualReturn
 
@@ -156,7 +156,7 @@ proc fcQDesignerDynamicPropertySheetExtension_method_callback_addDynamicProperty
   let vpropertyNamex_ret = string.fromBytes(vpropertyName_ms)
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.addDynamicProperty(slotval1, slotval2)
   virtualReturn
 
@@ -199,13 +199,14 @@ proc create*(T: type gen_dynamicpropertysheet_types.QDesignerDynamicPropertyShee
     vtbl[].vtbl.isDynamicProperty = fcQDesignerDynamicPropertySheetExtension_vtable_callback_isDynamicProperty
   if not isNil(vtbl[].canAddDynamicProperty):
     vtbl[].vtbl.canAddDynamicProperty = fcQDesignerDynamicPropertySheetExtension_vtable_callback_canAddDynamicProperty
-  let tmp = gen_dynamicpropertysheet_types.QDesignerDynamicPropertySheetExtension(h: fcQDesignerDynamicPropertySheetExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_dynamicpropertysheet_types.QDesignerDynamicPropertySheetExtension(h: fcQDesignerDynamicPropertySheetExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerDynamicPropertySheetExtension_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerDynamicPropertySheetExtension_mvtbl = cQDesignerDynamicPropertySheetExtensionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerDynamicPropertySheetExtension()[])](self.fcQDesignerDynamicPropertySheetExtension_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   dynamicPropertiesAllowed: fcQDesignerDynamicPropertySheetExtension_method_callback_dynamicPropertiesAllowed,
   addDynamicProperty: fcQDesignerDynamicPropertySheetExtension_method_callback_addDynamicProperty,
@@ -220,5 +221,3 @@ proc create*(T: type gen_dynamicpropertysheet_types.QDesignerDynamicPropertyShee
   fcQDesignerDynamicPropertySheetExtension_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_dynamicpropertysheet_types.QDesignerDynamicPropertySheetExtension) =
-  fcQDesignerDynamicPropertySheetExtension_delete(self.h)

@@ -70,10 +70,9 @@ proc fcQAbstractState_protectedbase_senderSignalIndex(self: pointer): cint {.imp
 proc fcQAbstractState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractState_protectedbase_receivers".}
 proc fcQAbstractState_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractState_protectedbase_isSignalConnected".}
 proc fcQAbstractState_staticMetaObject(): pointer {.importc: "QAbstractState_staticMetaObject".}
-proc fcQAbstractState_delete(self: pointer) {.importc: "QAbstractState_delete".}
 
 proc metaObject*(self: gen_qabstractstate_types.QAbstractState): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractState_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractState_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractstate_types.QAbstractState, param1: cstring): pointer =
   fcQAbstractState_metacast(self.h, param1)
@@ -88,10 +87,10 @@ proc tr*(_: type gen_qabstractstate_types.QAbstractState, s: cstring): string =
   vx_ret
 
 proc parentState*(self: gen_qabstractstate_types.QAbstractState): gen_qstate_types.QState =
-  gen_qstate_types.QState(h: fcQAbstractState_parentState(self.h))
+  gen_qstate_types.QState(h: fcQAbstractState_parentState(self.h), owned: false)
 
 proc machine*(self: gen_qabstractstate_types.QAbstractState): gen_qstatemachine_types.QStateMachine =
-  gen_qstatemachine_types.QStateMachine(h: fcQAbstractState_machine(self.h))
+  gen_qstatemachine_types.QStateMachine(h: fcQAbstractState_machine(self.h), owned: false)
 
 proc active*(self: gen_qabstractstate_types.QAbstractState): bool =
   fcQAbstractState_active(self.h)
@@ -129,7 +128,7 @@ proc tr*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cstring
   vx_ret
 
 proc sender*(self: gen_qabstractstate_types.QAbstractState): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAbstractState_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAbstractState_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qabstractstate_types.QAbstractState): cint =
   fcQAbstractState_protectedbase_senderSignalIndex(self.h)
@@ -142,5 +141,3 @@ proc isSignalConnected*(self: gen_qabstractstate_types.QAbstractState, signal: g
 
 proc staticMetaObject*(_: type gen_qabstractstate_types.QAbstractState): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractState_staticMetaObject())
-proc delete*(self: gen_qabstractstate_types.QAbstractState) =
-  fcQAbstractState_delete(self.h)

@@ -1,4 +1,4 @@
-type QWebEngineLoadingInfo* {.inheritable, pure.} = object
+type QWebEngineLoadingInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

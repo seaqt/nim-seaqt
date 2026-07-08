@@ -1,4 +1,4 @@
-type QUndoCommand* {.inheritable, pure.} = object
+type QUndoCommand* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

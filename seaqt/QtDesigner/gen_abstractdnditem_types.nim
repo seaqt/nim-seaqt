@@ -1,4 +1,4 @@
-type QDesignerDnDItemInterface* {.inheritable, pure.} = object
+type QDesignerDnDItemInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

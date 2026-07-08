@@ -81,7 +81,6 @@ type cQDesignerPropertySheetExtensionVTable {.pure.} = object
   setChanged*: proc(self: pointer, index: cint, changed: bool): void {.cdecl, raises: [], gcsafe.}
   isEnabled*: proc(self: pointer, index: cint): bool {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerPropertySheetExtension_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerPropertySheetExtension {.importc: "QDesignerPropertySheetExtension_new".}
-proc fcQDesignerPropertySheetExtension_delete(self: pointer) {.importc: "QDesignerPropertySheetExtension_delete".}
 
 proc count*(self: gen_propertysheet_types.QDesignerPropertySheetExtension): cint =
   fcQDesignerPropertySheetExtension_count(self.h)
@@ -123,7 +122,7 @@ proc setAttribute*(self: gen_propertysheet_types.QDesignerPropertySheetExtension
   fcQDesignerPropertySheetExtension_setAttribute(self.h, index, b)
 
 proc property*(self: gen_propertysheet_types.QDesignerPropertySheetExtension, index: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDesignerPropertySheetExtension_property(self.h, index))
+  gen_qvariant_types.QVariant(h: fcQDesignerPropertySheetExtension_property(self.h, index), owned: true)
 
 proc setProperty*(self: gen_propertysheet_types.QDesignerPropertySheetExtension, index: cint, value: gen_qvariant_types.QVariant): void =
   fcQDesignerPropertySheetExtension_setProperty(self.h, index, value.h)
@@ -153,7 +152,8 @@ type QDesignerPropertySheetExtensionsetPropertyProc* = proc(self: QDesignerPrope
 type QDesignerPropertySheetExtensionisChangedProc* = proc(self: QDesignerPropertySheetExtension, index: cint): bool {.raises: [], gcsafe.}
 type QDesignerPropertySheetExtensionsetChangedProc* = proc(self: QDesignerPropertySheetExtension, index: cint, changed: bool): void {.raises: [], gcsafe.}
 type QDesignerPropertySheetExtensionisEnabledProc* = proc(self: QDesignerPropertySheetExtension, index: cint): bool {.raises: [], gcsafe.}
-type QDesignerPropertySheetExtensionVTable* = object
+
+type QDesignerPropertySheetExtensionVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerPropertySheetExtensionVTable
   count*: QDesignerPropertySheetExtensioncountProc
   indexOf*: QDesignerPropertySheetExtensionindexOfProc
@@ -264,13 +264,16 @@ proc fcQDesignerPropertySheetExtension_vtable_callback_property(self: pointer, i
   let self = QDesignerPropertySheetExtension(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].property(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertySheetExtension_vtable_callback_setProperty(self: pointer, index: cint, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertySheetExtensionVTable](fcQDesignerPropertySheetExtension_vdata(self)[])
   let self = QDesignerPropertySheetExtension(h: self)
   let slotval1 = index
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setProperty(self, slotval1, slotval2)
 
 proc fcQDesignerPropertySheetExtension_vtable_callback_isChanged(self: pointer, index: cint): bool {.cdecl.} =
@@ -409,12 +412,15 @@ proc fcQDesignerPropertySheetExtension_method_callback_property(self: pointer, i
   let inst = cast[VirtualQDesignerPropertySheetExtension](fcQDesignerPropertySheetExtension_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.property(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertySheetExtension_method_callback_setProperty(self: pointer, index: cint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertySheetExtension](fcQDesignerPropertySheetExtension_vdata(self)[])
   let slotval1 = index
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setProperty(slotval1, slotval2)
 
 proc fcQDesignerPropertySheetExtension_method_callback_isChanged(self: pointer, index: cint): bool {.cdecl.} =
@@ -475,13 +481,14 @@ proc create*(T: type gen_propertysheet_types.QDesignerPropertySheetExtension,
     vtbl[].vtbl.setChanged = fcQDesignerPropertySheetExtension_vtable_callback_setChanged
   if not isNil(vtbl[].isEnabled):
     vtbl[].vtbl.isEnabled = fcQDesignerPropertySheetExtension_vtable_callback_isEnabled
-  let tmp = gen_propertysheet_types.QDesignerPropertySheetExtension(h: fcQDesignerPropertySheetExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_propertysheet_types.QDesignerPropertySheetExtension(h: fcQDesignerPropertySheetExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerPropertySheetExtension_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerPropertySheetExtension_mvtbl = cQDesignerPropertySheetExtensionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerPropertySheetExtension()[])](self.fcQDesignerPropertySheetExtension_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   count: fcQDesignerPropertySheetExtension_method_callback_count,
   indexOf: fcQDesignerPropertySheetExtension_method_callback_indexOf,
@@ -507,5 +514,3 @@ proc create*(T: type gen_propertysheet_types.QDesignerPropertySheetExtension,
   fcQDesignerPropertySheetExtension_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_propertysheet_types.QDesignerPropertySheetExtension) =
-  fcQDesignerPropertySheetExtension_delete(self.h)

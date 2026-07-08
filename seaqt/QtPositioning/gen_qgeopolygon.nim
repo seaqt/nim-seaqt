@@ -80,7 +80,6 @@ proc fcQGeoPolygon_new2(path: struct_seaqt_array): ptr cQGeoPolygon {.importc: "
 proc fcQGeoPolygon_new3(other: pointer): ptr cQGeoPolygon {.importc: "QGeoPolygon_new3".}
 proc fcQGeoPolygon_new4(other: pointer): ptr cQGeoPolygon {.importc: "QGeoPolygon_new4".}
 proc fcQGeoPolygon_staticMetaObject(): pointer {.importc: "QGeoPolygon_staticMetaObject".}
-proc fcQGeoPolygon_delete(self: pointer) {.importc: "QGeoPolygon_delete".}
 
 proc operatorAssign*(self: gen_qgeopolygon_types.QGeoPolygon, other: gen_qgeopolygon_types.QGeoPolygon): void =
   fcQGeoPolygon_operatorAssign(self.h, other.h)
@@ -97,7 +96,7 @@ proc perimeter*(self: gen_qgeopolygon_types.QGeoPolygon): seq[gen_qgeocoordinate
   var vx_ret = newSeq[gen_qgeocoordinate_types.QGeoCoordinate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgeocoordinate_types.QGeoCoordinate(h: v_outCast[i])
+    vx_ret[i] = gen_qgeocoordinate_types.QGeoCoordinate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -116,7 +115,7 @@ proc hole*(self: gen_qgeopolygon_types.QGeoPolygon, index: int64): seq[gen_qvari
   var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i])
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -125,7 +124,7 @@ proc holePath*(self: gen_qgeopolygon_types.QGeoPolygon, index: int64): seq[gen_q
   var vx_ret = newSeq[gen_qgeocoordinate_types.QGeoCoordinate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgeocoordinate_types.QGeoCoordinate(h: v_outCast[i])
+    vx_ret[i] = gen_qgeocoordinate_types.QGeoCoordinate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -139,7 +138,7 @@ proc translate*(self: gen_qgeopolygon_types.QGeoPolygon, degreesLatitude: float6
   fcQGeoPolygon_translate(self.h, degreesLatitude, degreesLongitude)
 
 proc translated*(self: gen_qgeopolygon_types.QGeoPolygon, degreesLatitude: float64, degreesLongitude: float64): gen_qgeopolygon_types.QGeoPolygon =
-  gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_translated(self.h, degreesLatitude, degreesLongitude))
+  gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_translated(self.h, degreesLatitude, degreesLongitude), owned: true)
 
 proc length*(self: gen_qgeopolygon_types.QGeoPolygon): float64 =
   fcQGeoPolygon_length(self.h)
@@ -157,7 +156,7 @@ proc replaceCoordinate*(self: gen_qgeopolygon_types.QGeoPolygon, index: int64, c
   fcQGeoPolygon_replaceCoordinate(self.h, index, coordinate.h)
 
 proc coordinateAt*(self: gen_qgeopolygon_types.QGeoPolygon, index: int64): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoPolygon_coordinateAt(self.h, index))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoPolygon_coordinateAt(self.h, index), owned: true)
 
 proc containsCoordinate*(self: gen_qgeopolygon_types.QGeoPolygon, coordinate: gen_qgeocoordinate_types.QGeoCoordinate): bool =
   fcQGeoPolygon_containsCoordinate(self.h, coordinate.h)
@@ -181,7 +180,7 @@ proc length*(self: gen_qgeopolygon_types.QGeoPolygon, indexFrom: int64, indexTo:
   fcQGeoPolygon_length2(self.h, indexFrom, indexTo)
 
 proc create*(T: type gen_qgeopolygon_types.QGeoPolygon): gen_qgeopolygon_types.QGeoPolygon =
-  let tmp = gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_new())
+  let tmp = gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeopolygon_types.QGeoPolygon,
     path: openArray[gen_qgeocoordinate_types.QGeoCoordinate]): gen_qgeopolygon_types.QGeoPolygon =
@@ -189,17 +188,15 @@ proc create*(T: type gen_qgeopolygon_types.QGeoPolygon,
   for i in 0..<len(path):
     path_CArray[i] = path[i].h
 
-  let tmp = gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_new2(struct_seaqt_array(len: csize_t(len(path)), data: if len(path) == 0: nil else: addr(path_CArray[0]))))
+  let tmp = gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_new2(struct_seaqt_array(len: csize_t(len(path)), data: if len(path) == 0: nil else: addr(path_CArray[0]))), owned: true)
   tmp
 proc create*(T: type gen_qgeopolygon_types.QGeoPolygon,
     other: gen_qgeopolygon_types.QGeoPolygon): gen_qgeopolygon_types.QGeoPolygon =
-  let tmp = gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_new3(other.h))
+  let tmp = gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qgeopolygon_types.QGeoPolygon,
     other: gen_qgeoshape_types.QGeoShape): gen_qgeopolygon_types.QGeoPolygon =
-  let tmp = gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_new4(other.h))
+  let tmp = gen_qgeopolygon_types.QGeoPolygon(h: fcQGeoPolygon_new4(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qgeopolygon_types.QGeoPolygon): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoPolygon_staticMetaObject())
-proc delete*(self: gen_qgeopolygon_types.QGeoPolygon) =
-  fcQGeoPolygon_delete(self.h)

@@ -1,4 +1,4 @@
-type QPdfDocumentRenderOptions* {.inheritable, pure.} = object
+type QPdfDocumentRenderOptions* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

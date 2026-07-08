@@ -1,4 +1,4 @@
-type QGestureRecognizer* {.inheritable, pure.} = object
+type QGestureRecognizer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QMediaFormat* {.inheritable, pure.} = object
+type QMediaFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

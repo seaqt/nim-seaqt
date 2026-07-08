@@ -1,4 +1,4 @@
-type QDesignerMemberSheetExtension* {.inheritable, pure.} = object
+type QDesignerMemberSheetExtension* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

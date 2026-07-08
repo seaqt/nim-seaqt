@@ -1,4 +1,4 @@
-type QPageRanges* {.inheritable, pure.} = object
+type QPageRanges* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QPageRanges) =
   wasMoved(self)
   fcQPageRanges_delete(h)
 
-type QPageRangesRange* {.inheritable, pure.} = object
+type QPageRangesRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

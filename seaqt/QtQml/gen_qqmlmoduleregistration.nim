@@ -39,7 +39,4 @@ export gen_qqmlmoduleregistration_types
 
 type cQQmlModuleRegistration*{.exportc: "QQmlModuleRegistration", incompleteStruct.} = object
 
-proc fcQQmlModuleRegistration_delete(self: pointer) {.importc: "QQmlModuleRegistration_delete".}
 
-proc delete*(self: gen_qqmlmoduleregistration_types.QQmlModuleRegistration) =
-  fcQQmlModuleRegistration_delete(self.h)

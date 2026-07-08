@@ -79,7 +79,6 @@ proc fcQGeoCoordinate_new2(latitude: float64, longitude: float64): ptr cQGeoCoor
 proc fcQGeoCoordinate_new3(latitude: float64, longitude: float64, altitude: float64): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new3".}
 proc fcQGeoCoordinate_new4(other: pointer): ptr cQGeoCoordinate {.importc: "QGeoCoordinate_new4".}
 proc fcQGeoCoordinate_staticMetaObject(): pointer {.importc: "QGeoCoordinate_staticMetaObject".}
-proc fcQGeoCoordinate_delete(self: pointer) {.importc: "QGeoCoordinate_delete".}
 
 proc operatorAssign*(self: gen_qgeocoordinate_types.QGeoCoordinate, other: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoCoordinate_operatorAssign(self.h, other.h)
@@ -118,7 +117,7 @@ proc azimuthTo*(self: gen_qgeocoordinate_types.QGeoCoordinate, other: gen_qgeoco
   fcQGeoCoordinate_azimuthTo(self.h, other.h)
 
 proc atDistanceAndAzimuth*(self: gen_qgeocoordinate_types.QGeoCoordinate, distance: float64, azimuth: float64): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_atDistanceAndAzimuth(self.h, distance, azimuth))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_atDistanceAndAzimuth(self.h, distance, azimuth), owned: true)
 
 proc toString*(self: gen_qgeocoordinate_types.QGeoCoordinate): string =
   let v_ms = fcQGeoCoordinate_toString(self.h)
@@ -127,7 +126,7 @@ proc toString*(self: gen_qgeocoordinate_types.QGeoCoordinate): string =
   vx_ret
 
 proc atDistanceAndAzimuth*(self: gen_qgeocoordinate_types.QGeoCoordinate, distance: float64, azimuth: float64, distanceUp: float64): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_atDistanceAndAzimuth2(self.h, distance, azimuth, distanceUp))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_atDistanceAndAzimuth2(self.h, distance, azimuth, distanceUp), owned: true)
 
 proc toString*(self: gen_qgeocoordinate_types.QGeoCoordinate, format: cint): string =
   let v_ms = fcQGeoCoordinate_toStringWithFormat(self.h, cint(format))
@@ -136,21 +135,19 @@ proc toString*(self: gen_qgeocoordinate_types.QGeoCoordinate, format: cint): str
   vx_ret
 
 proc create*(T: type gen_qgeocoordinate_types.QGeoCoordinate): gen_qgeocoordinate_types.QGeoCoordinate =
-  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new())
+  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeocoordinate_types.QGeoCoordinate,
     latitude: float64, longitude: float64): gen_qgeocoordinate_types.QGeoCoordinate =
-  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new2(latitude, longitude))
+  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new2(latitude, longitude), owned: true)
   tmp
 proc create*(T: type gen_qgeocoordinate_types.QGeoCoordinate,
     latitude: float64, longitude: float64, altitude: float64): gen_qgeocoordinate_types.QGeoCoordinate =
-  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new3(latitude, longitude, altitude))
+  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new3(latitude, longitude, altitude), owned: true)
   tmp
 proc create*(T: type gen_qgeocoordinate_types.QGeoCoordinate,
     other: gen_qgeocoordinate_types.QGeoCoordinate): gen_qgeocoordinate_types.QGeoCoordinate =
-  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new4(other.h))
+  let tmp = gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoCoordinate_new4(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qgeocoordinate_types.QGeoCoordinate): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoCoordinate_staticMetaObject())
-proc delete*(self: gen_qgeocoordinate_types.QGeoCoordinate) =
-  fcQGeoCoordinate_delete(self.h)

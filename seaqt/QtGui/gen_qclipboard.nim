@@ -109,7 +109,7 @@ proc fcQClipboard_protectedbase_isSignalConnected(self: pointer, signal: pointer
 proc fcQClipboard_staticMetaObject(): pointer {.importc: "QClipboard_staticMetaObject".}
 
 proc metaObject*(self: gen_qclipboard_types.QClipboard): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQClipboard_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQClipboard_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qclipboard_types.QClipboard, param1: cstring): pointer =
   fcQClipboard_metacast(self.h, param1)
@@ -157,16 +157,16 @@ proc setText*(self: gen_qclipboard_types.QClipboard, param1: openArray[char]): v
   fcQClipboard_setText(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))))
 
 proc mimeData*(self: gen_qclipboard_types.QClipboard): gen_qmimedata_types.QMimeData =
-  gen_qmimedata_types.QMimeData(h: fcQClipboard_mimeData(self.h))
+  gen_qmimedata_types.QMimeData(h: fcQClipboard_mimeData(self.h), owned: false)
 
 proc setMimeData*(self: gen_qclipboard_types.QClipboard, data: gen_qmimedata_types.QMimeData): void =
   fcQClipboard_setMimeData(self.h, data.h)
 
 proc image*(self: gen_qclipboard_types.QClipboard): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQClipboard_image(self.h))
+  gen_qimage_types.QImage(h: fcQClipboard_image(self.h), owned: true)
 
 proc pixmap*(self: gen_qclipboard_types.QClipboard): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQClipboard_pixmap(self.h))
+  gen_qpixmap_types.QPixmap(h: fcQClipboard_pixmap(self.h), owned: true)
 
 proc setImage*(self: gen_qclipboard_types.QClipboard, param1: gen_qimage_types.QImage): void =
   fcQClipboard_setImage(self.h, param1.h)
@@ -279,16 +279,16 @@ proc setText*(self: gen_qclipboard_types.QClipboard, param1: openArray[char], mo
   fcQClipboard_setText2(self.h, struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1))), cint(mode))
 
 proc mimeData*(self: gen_qclipboard_types.QClipboard, mode: cint): gen_qmimedata_types.QMimeData =
-  gen_qmimedata_types.QMimeData(h: fcQClipboard_mimeDataWithMode(self.h, cint(mode)))
+  gen_qmimedata_types.QMimeData(h: fcQClipboard_mimeDataWithMode(self.h, cint(mode)), owned: false)
 
 proc setMimeData*(self: gen_qclipboard_types.QClipboard, data: gen_qmimedata_types.QMimeData, mode: cint): void =
   fcQClipboard_setMimeData2(self.h, data.h, cint(mode))
 
 proc image*(self: gen_qclipboard_types.QClipboard, mode: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQClipboard_imageWithMode(self.h, cint(mode)))
+  gen_qimage_types.QImage(h: fcQClipboard_imageWithMode(self.h, cint(mode)), owned: true)
 
 proc pixmap*(self: gen_qclipboard_types.QClipboard, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQClipboard_pixmapWithMode(self.h, cint(mode)))
+  gen_qpixmap_types.QPixmap(h: fcQClipboard_pixmapWithMode(self.h, cint(mode)), owned: true)
 
 proc setImage*(self: gen_qclipboard_types.QClipboard, param1: gen_qimage_types.QImage, mode: cint): void =
   fcQClipboard_setImage2(self.h, param1.h, cint(mode))
@@ -297,7 +297,7 @@ proc setPixmap*(self: gen_qclipboard_types.QClipboard, param1: gen_qpixmap_types
   fcQClipboard_setPixmap2(self.h, param1.h, cint(mode))
 
 proc sender*(self: gen_qclipboard_types.QClipboard): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQClipboard_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQClipboard_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qclipboard_types.QClipboard): cint =
   fcQClipboard_protectedbase_senderSignalIndex(self.h)

@@ -1,4 +1,4 @@
-type QTextDocumentFragment* {.inheritable, pure.} = object
+type QTextDocumentFragment* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

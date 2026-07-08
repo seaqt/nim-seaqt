@@ -54,36 +54,39 @@ type cQDesignerTaskMenuExtensionVTable {.pure.} = object
   taskActions*: proc(self: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerTaskMenuExtension_virtualbase_preferredEditAction(self: pointer): pointer {.importc: "QDesignerTaskMenuExtension_virtualbase_preferredEditAction".}
 proc fcQDesignerTaskMenuExtension_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerTaskMenuExtension {.importc: "QDesignerTaskMenuExtension_new".}
-proc fcQDesignerTaskMenuExtension_delete(self: pointer) {.importc: "QDesignerTaskMenuExtension_delete".}
 
 proc preferredEditAction*(self: gen_taskmenu_types.QDesignerTaskMenuExtension): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerTaskMenuExtension_preferredEditAction(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerTaskMenuExtension_preferredEditAction(self.h), owned: false)
 
 proc taskActions*(self: gen_taskmenu_types.QDesignerTaskMenuExtension): seq[gen_qaction_types.QAction] =
   var v_ma = fcQDesignerTaskMenuExtension_taskActions(self.h)
   var vx_ret = newSeq[gen_qaction_types.QAction](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qaction_types.QAction(h: v_outCast[i])
+    vx_ret[i] = gen_qaction_types.QAction(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 type QDesignerTaskMenuExtensionpreferredEditActionProc* = proc(self: QDesignerTaskMenuExtension): gen_qaction_types.QAction {.raises: [], gcsafe.}
 type QDesignerTaskMenuExtensiontaskActionsProc* = proc(self: QDesignerTaskMenuExtension): seq[gen_qaction_types.QAction] {.raises: [], gcsafe.}
-type QDesignerTaskMenuExtensionVTable* = object
+
+type QDesignerTaskMenuExtensionVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerTaskMenuExtensionVTable
   preferredEditAction*: QDesignerTaskMenuExtensionpreferredEditActionProc
   taskActions*: QDesignerTaskMenuExtensiontaskActionsProc
 
 proc QDesignerTaskMenuExtensionpreferredEditAction*(self: gen_taskmenu_types.QDesignerTaskMenuExtension): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerTaskMenuExtension_virtualbase_preferredEditAction(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerTaskMenuExtension_virtualbase_preferredEditAction(self.h), owned: false)
 
 
 proc fcQDesignerTaskMenuExtension_vtable_callback_preferredEditAction(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerTaskMenuExtensionVTable](fcQDesignerTaskMenuExtension_vdata(self)[])
   let self = QDesignerTaskMenuExtension(h: self)
   var virtualReturn = vtbl[].preferredEditAction(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerTaskMenuExtension_vtable_callback_taskActions(self: pointer): struct_seaqt_array {.cdecl.} =
   let vtbl = cast[ptr QDesignerTaskMenuExtensionVTable](fcQDesignerTaskMenuExtension_vdata(self)[])
@@ -91,7 +94,10 @@ proc fcQDesignerTaskMenuExtension_vtable_callback_taskActions(self: pointer): st
   var virtualReturn = vtbl[].taskActions(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -106,14 +112,20 @@ method taskActions*(self: VirtualQDesignerTaskMenuExtension): seq[gen_qaction_ty
 proc fcQDesignerTaskMenuExtension_method_callback_preferredEditAction(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerTaskMenuExtension](fcQDesignerTaskMenuExtension_vdata(self)[])
   var virtualReturn = inst.preferredEditAction()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerTaskMenuExtension_method_callback_taskActions(self: pointer): struct_seaqt_array {.cdecl.} =
   let inst = cast[VirtualQDesignerTaskMenuExtension](fcQDesignerTaskMenuExtension_vdata(self)[])
   var virtualReturn = inst.taskActions()
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -129,13 +141,14 @@ proc create*(T: type gen_taskmenu_types.QDesignerTaskMenuExtension,
     vtbl[].vtbl.preferredEditAction = fcQDesignerTaskMenuExtension_vtable_callback_preferredEditAction
   if not isNil(vtbl[].taskActions):
     vtbl[].vtbl.taskActions = fcQDesignerTaskMenuExtension_vtable_callback_taskActions
-  let tmp = gen_taskmenu_types.QDesignerTaskMenuExtension(h: fcQDesignerTaskMenuExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_taskmenu_types.QDesignerTaskMenuExtension(h: fcQDesignerTaskMenuExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerTaskMenuExtension_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerTaskMenuExtension_mvtbl = cQDesignerTaskMenuExtensionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerTaskMenuExtension()[])](self.fcQDesignerTaskMenuExtension_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   preferredEditAction: fcQDesignerTaskMenuExtension_method_callback_preferredEditAction,
   taskActions: fcQDesignerTaskMenuExtension_method_callback_taskActions,
@@ -147,5 +160,3 @@ proc create*(T: type gen_taskmenu_types.QDesignerTaskMenuExtension,
   fcQDesignerTaskMenuExtension_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_taskmenu_types.QDesignerTaskMenuExtension) =
-  fcQDesignerTaskMenuExtension_delete(self.h)

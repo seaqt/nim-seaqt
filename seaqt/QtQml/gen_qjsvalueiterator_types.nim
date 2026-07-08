@@ -1,4 +1,4 @@
-type QJSValueIterator* {.inheritable, pure.} = object
+type QJSValueIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QJSManagedValue* {.inheritable, pure.} = object
+type QJSManagedValue* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

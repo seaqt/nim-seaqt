@@ -93,19 +93,18 @@ type cQDesignerLayoutDecorationExtensionVTable {.pure.} = object
   findItemAt2*: proc(self: pointer, row: cint, column: cint): cint {.cdecl, raises: [], gcsafe.}
   adjustIndicator*: proc(self: pointer, pos: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerLayoutDecorationExtension_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerLayoutDecorationExtension {.importc: "QDesignerLayoutDecorationExtension_new".}
-proc fcQDesignerLayoutDecorationExtension_delete(self: pointer) {.importc: "QDesignerLayoutDecorationExtension_delete".}
 
 proc widgets*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension, layout: gen_qlayout_types.QLayout): seq[gen_qwidget_types.QWidget] =
   var v_ma = fcQDesignerLayoutDecorationExtension_widgets(self.h, layout.h)
   var vx_ret = newSeq[gen_qwidget_types.QWidget](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i])
+    vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc itemInfo*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension, index: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQDesignerLayoutDecorationExtension_itemInfo(self.h, index))
+  gen_qrect_types.QRect(h: fcQDesignerLayoutDecorationExtension_itemInfo(self.h, index), owned: true)
 
 proc indexOf*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension, widget: gen_qwidget_types.QWidget): cint =
   fcQDesignerLayoutDecorationExtension_indexOf(self.h, widget.h)
@@ -174,7 +173,8 @@ type QDesignerLayoutDecorationExtensionsimplifyProc* = proc(self: QDesignerLayou
 type QDesignerLayoutDecorationExtensionfindItemAtProc* = proc(self: QDesignerLayoutDecorationExtension, pos: gen_qpoint_types.QPoint): cint {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensionfindItemAt2Proc* = proc(self: QDesignerLayoutDecorationExtension, row: cint, column: cint): cint {.raises: [], gcsafe.}
 type QDesignerLayoutDecorationExtensionadjustIndicatorProc* = proc(self: QDesignerLayoutDecorationExtension, pos: gen_qpoint_types.QPoint, index: cint): void {.raises: [], gcsafe.}
-type QDesignerLayoutDecorationExtensionVTable* = object
+
+type QDesignerLayoutDecorationExtensionVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerLayoutDecorationExtensionVTable
   widgets*: QDesignerLayoutDecorationExtensionwidgetsProc
   itemInfo*: QDesignerLayoutDecorationExtensionitemInfoProc
@@ -196,11 +196,14 @@ type QDesignerLayoutDecorationExtensionVTable* = object
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_widgets(self: pointer, layout: pointer): struct_seaqt_array {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
-  let slotval1 = gen_qlayout_types.QLayout(h: layout)
+  let slotval1 = gen_qlayout_types.QLayout(h: layout, owned: false)
   var virtualReturn = vtbl[].widgets(self, slotval1)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -209,19 +212,22 @@ proc fcQDesignerLayoutDecorationExtension_vtable_callback_itemInfo(self: pointer
   let self = QDesignerLayoutDecorationExtension(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].itemInfo(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_indexOf(self: pointer, widget: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_indexOfWithItem(self: pointer, item: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
-  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item)
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item, owned: false)
   var virtualReturn = vtbl[].indexOfWithItem(self, slotval1)
   virtualReturn
 
@@ -250,7 +256,7 @@ proc fcQDesignerLayoutDecorationExtension_vtable_callback_currentCell(self: poin
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_insertWidget(self: pointer, widget: pointer, cell: struct_seaqt_map): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var vcell_mm = cell
   var vcell_First_CArray = cast[ptr UncheckedArray[cint]](vcell_mm.keys)
   var vcell_Second_CArray = cast[ptr UncheckedArray[cint]](vcell_mm.values)
@@ -266,7 +272,7 @@ proc fcQDesignerLayoutDecorationExtension_vtable_callback_insertWidget(self: poi
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_removeWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].removeWidget(self, slotval1)
 
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_insertRow(self: pointer, row: cint): void {.cdecl.} =
@@ -289,7 +295,7 @@ proc fcQDesignerLayoutDecorationExtension_vtable_callback_simplify(self: pointer
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAt(self: pointer, pos: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: pos)
+  let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = vtbl[].findItemAt(self, slotval1)
   virtualReturn
 
@@ -304,7 +310,7 @@ proc fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAt2(self: poin
 proc fcQDesignerLayoutDecorationExtension_vtable_callback_adjustIndicator(self: pointer, pos: pointer, index: cint): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerLayoutDecorationExtensionVTable](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let self = QDesignerLayoutDecorationExtension(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: pos)
+  let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   let slotval2 = index
   vtbl[].adjustIndicator(self, slotval1, slotval2)
 
@@ -344,11 +350,14 @@ method adjustIndicator*(self: VirtualQDesignerLayoutDecorationExtension, pos: ge
 
 proc fcQDesignerLayoutDecorationExtension_method_callback_widgets(self: pointer, layout: pointer): struct_seaqt_array {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
-  let slotval1 = gen_qlayout_types.QLayout(h: layout)
+  let slotval1 = gen_qlayout_types.QLayout(h: layout, owned: false)
   var virtualReturn = inst.widgets(slotval1)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -356,17 +365,20 @@ proc fcQDesignerLayoutDecorationExtension_method_callback_itemInfo(self: pointer
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.itemInfo(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerLayoutDecorationExtension_method_callback_indexOf(self: pointer, widget: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
   virtualReturn
 
 proc fcQDesignerLayoutDecorationExtension_method_callback_indexOfWithItem(self: pointer, item: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
-  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item)
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: item, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
   virtualReturn
 
@@ -391,7 +403,7 @@ proc fcQDesignerLayoutDecorationExtension_method_callback_currentCell(self: poin
 
 proc fcQDesignerLayoutDecorationExtension_method_callback_insertWidget(self: pointer, widget: pointer, cell: struct_seaqt_map): void {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var vcell_mm = cell
   var vcell_First_CArray = cast[ptr UncheckedArray[cint]](vcell_mm.keys)
   var vcell_Second_CArray = cast[ptr UncheckedArray[cint]](vcell_mm.values)
@@ -406,7 +418,7 @@ proc fcQDesignerLayoutDecorationExtension_method_callback_insertWidget(self: poi
 
 proc fcQDesignerLayoutDecorationExtension_method_callback_removeWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.removeWidget(slotval1)
 
 proc fcQDesignerLayoutDecorationExtension_method_callback_insertRow(self: pointer, row: cint): void {.cdecl.} =
@@ -425,7 +437,7 @@ proc fcQDesignerLayoutDecorationExtension_method_callback_simplify(self: pointer
 
 proc fcQDesignerLayoutDecorationExtension_method_callback_findItemAt(self: pointer, pos: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: pos)
+  let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   var virtualReturn = inst.findItemAt(slotval1)
   virtualReturn
 
@@ -438,7 +450,7 @@ proc fcQDesignerLayoutDecorationExtension_method_callback_findItemAt2(self: poin
 
 proc fcQDesignerLayoutDecorationExtension_method_callback_adjustIndicator(self: pointer, pos: pointer, index: cint): void {.cdecl.} =
   let inst = cast[VirtualQDesignerLayoutDecorationExtension](fcQDesignerLayoutDecorationExtension_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: pos)
+  let slotval1 = gen_qpoint_types.QPoint(h: pos, owned: false)
   let slotval2 = index
   inst.adjustIndicator(slotval1, slotval2)
 
@@ -480,13 +492,14 @@ proc create*(T: type gen_layoutdecoration_types.QDesignerLayoutDecorationExtensi
     vtbl[].vtbl.findItemAt2 = fcQDesignerLayoutDecorationExtension_vtable_callback_findItemAt2
   if not isNil(vtbl[].adjustIndicator):
     vtbl[].vtbl.adjustIndicator = fcQDesignerLayoutDecorationExtension_vtable_callback_adjustIndicator
-  let tmp = gen_layoutdecoration_types.QDesignerLayoutDecorationExtension(h: fcQDesignerLayoutDecorationExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_layoutdecoration_types.QDesignerLayoutDecorationExtension(h: fcQDesignerLayoutDecorationExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerLayoutDecorationExtension_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerLayoutDecorationExtension_mvtbl = cQDesignerLayoutDecorationExtensionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerLayoutDecorationExtension()[])](self.fcQDesignerLayoutDecorationExtension_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   widgets: fcQDesignerLayoutDecorationExtension_method_callback_widgets,
   itemInfo: fcQDesignerLayoutDecorationExtension_method_callback_itemInfo,
@@ -511,5 +524,3 @@ proc create*(T: type gen_layoutdecoration_types.QDesignerLayoutDecorationExtensi
   fcQDesignerLayoutDecorationExtension_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_layoutdecoration_types.QDesignerLayoutDecorationExtension) =
-  fcQDesignerLayoutDecorationExtension_delete(self.h)

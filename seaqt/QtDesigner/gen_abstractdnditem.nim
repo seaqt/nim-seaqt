@@ -55,22 +55,19 @@ proc fcQDesignerDnDItemInterface_decoration(self: pointer): pointer {.importc: "
 proc fcQDesignerDnDItemInterface_hotSpot(self: pointer): pointer {.importc: "QDesignerDnDItemInterface_hotSpot".}
 proc fcQDesignerDnDItemInterface_typeX(self: pointer): cint {.importc: "QDesignerDnDItemInterface_type".}
 proc fcQDesignerDnDItemInterface_source(self: pointer): pointer {.importc: "QDesignerDnDItemInterface_source".}
-proc fcQDesignerDnDItemInterface_delete(self: pointer) {.importc: "QDesignerDnDItemInterface_delete".}
 
 proc widget*(self: gen_abstractdnditem_types.QDesignerDnDItemInterface): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerDnDItemInterface_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerDnDItemInterface_widget(self.h), owned: false)
 
 proc decoration*(self: gen_abstractdnditem_types.QDesignerDnDItemInterface): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerDnDItemInterface_decoration(self.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerDnDItemInterface_decoration(self.h), owned: false)
 
 proc hotSpot*(self: gen_abstractdnditem_types.QDesignerDnDItemInterface): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQDesignerDnDItemInterface_hotSpot(self.h))
+  gen_qpoint_types.QPoint(h: fcQDesignerDnDItemInterface_hotSpot(self.h), owned: true)
 
 proc typeX*(self: gen_abstractdnditem_types.QDesignerDnDItemInterface): cint =
   cint(fcQDesignerDnDItemInterface_typeX(self.h))
 
 proc source*(self: gen_abstractdnditem_types.QDesignerDnDItemInterface): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerDnDItemInterface_source(self.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerDnDItemInterface_source(self.h), owned: false)
 
-proc delete*(self: gen_abstractdnditem_types.QDesignerDnDItemInterface) =
-  fcQDesignerDnDItemInterface_delete(self.h)

@@ -61,7 +61,6 @@ type cQDesignerSettingsInterfaceVTable {.pure.} = object
   value*: proc(self: pointer, key: struct_seaqt_string, defaultValue: pointer): pointer {.cdecl, raises: [], gcsafe.}
   remove*: proc(self: pointer, key: struct_seaqt_string): void {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerSettingsInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerSettingsInterface {.importc: "QDesignerSettingsInterface_new".}
-proc fcQDesignerSettingsInterface_delete(self: pointer) {.importc: "QDesignerSettingsInterface_delete".}
 
 proc beginGroup*(self: gen_abstractsettings_types.QDesignerSettingsInterface, prefix: openArray[char]): void =
   fcQDesignerSettingsInterface_beginGroup(self.h, struct_seaqt_string(data: if len(prefix) > 0: addr prefix[0] else: nil, len: csize_t(len(prefix))))
@@ -76,7 +75,7 @@ proc setValue*(self: gen_abstractsettings_types.QDesignerSettingsInterface, key:
   fcQDesignerSettingsInterface_setValue(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), value.h)
 
 proc value*(self: gen_abstractsettings_types.QDesignerSettingsInterface, key: openArray[char], defaultValue: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDesignerSettingsInterface_value(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), defaultValue.h))
+  gen_qvariant_types.QVariant(h: fcQDesignerSettingsInterface_value(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), defaultValue.h), owned: true)
 
 proc remove*(self: gen_abstractsettings_types.QDesignerSettingsInterface, key: openArray[char]): void =
   fcQDesignerSettingsInterface_remove(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
@@ -87,7 +86,8 @@ type QDesignerSettingsInterfacecontainsProc* = proc(self: QDesignerSettingsInter
 type QDesignerSettingsInterfacesetValueProc* = proc(self: QDesignerSettingsInterface, key: openArray[char], value: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QDesignerSettingsInterfacevalueProc* = proc(self: QDesignerSettingsInterface, key: openArray[char], defaultValue: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
 type QDesignerSettingsInterfaceremoveProc* = proc(self: QDesignerSettingsInterface, key: openArray[char]): void {.raises: [], gcsafe.}
-type QDesignerSettingsInterfaceVTable* = object
+
+type QDesignerSettingsInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerSettingsInterfaceVTable
   beginGroup*: QDesignerSettingsInterfacebeginGroupProc
   endGroup*: QDesignerSettingsInterfaceendGroupProc
@@ -128,7 +128,7 @@ proc fcQDesignerSettingsInterface_vtable_callback_setValue(self: pointer, key: s
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setValue(self, slotval1, slotval2)
 
 proc fcQDesignerSettingsInterface_vtable_callback_value(self: pointer, key: struct_seaqt_string, defaultValue: pointer): pointer {.cdecl.} =
@@ -138,9 +138,12 @@ proc fcQDesignerSettingsInterface_vtable_callback_value(self: pointer, key: stru
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: defaultValue)
+  let slotval2 = gen_qvariant_types.QVariant(h: defaultValue, owned: false)
   var virtualReturn = vtbl[].value(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerSettingsInterface_vtable_callback_remove(self: pointer, key: struct_seaqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerSettingsInterfaceVTable](fcQDesignerSettingsInterface_vdata(self)[])
@@ -194,7 +197,7 @@ proc fcQDesignerSettingsInterface_method_callback_setValue(self: pointer, key: s
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setValue(slotval1, slotval2)
 
 proc fcQDesignerSettingsInterface_method_callback_value(self: pointer, key: struct_seaqt_string, defaultValue: pointer): pointer {.cdecl.} =
@@ -203,9 +206,12 @@ proc fcQDesignerSettingsInterface_method_callback_value(self: pointer, key: stru
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: defaultValue)
+  let slotval2 = gen_qvariant_types.QVariant(h: defaultValue, owned: false)
   var virtualReturn = inst.value(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerSettingsInterface_method_callback_remove(self: pointer, key: struct_seaqt_string): void {.cdecl.} =
   let inst = cast[VirtualQDesignerSettingsInterface](fcQDesignerSettingsInterface_vdata(self)[])
@@ -235,13 +241,14 @@ proc create*(T: type gen_abstractsettings_types.QDesignerSettingsInterface,
     vtbl[].vtbl.value = fcQDesignerSettingsInterface_vtable_callback_value
   if not isNil(vtbl[].remove):
     vtbl[].vtbl.remove = fcQDesignerSettingsInterface_vtable_callback_remove
-  let tmp = gen_abstractsettings_types.QDesignerSettingsInterface(h: fcQDesignerSettingsInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_abstractsettings_types.QDesignerSettingsInterface(h: fcQDesignerSettingsInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerSettingsInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerSettingsInterface_mvtbl = cQDesignerSettingsInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerSettingsInterface()[])](self.fcQDesignerSettingsInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   beginGroup: fcQDesignerSettingsInterface_method_callback_beginGroup,
   endGroup: fcQDesignerSettingsInterface_method_callback_endGroup,
@@ -257,5 +264,3 @@ proc create*(T: type gen_abstractsettings_types.QDesignerSettingsInterface,
   fcQDesignerSettingsInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_abstractsettings_types.QDesignerSettingsInterface) =
-  fcQDesignerSettingsInterface_delete(self.h)

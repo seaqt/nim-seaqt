@@ -1,4 +1,4 @@
-type QSslEllipticCurve* {.inheritable, pure.} = object
+type QSslEllipticCurve* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

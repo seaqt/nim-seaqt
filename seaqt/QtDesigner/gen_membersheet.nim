@@ -73,7 +73,6 @@ type cQDesignerMemberSheetExtensionVTable {.pure.} = object
   parameterTypes*: proc(self: pointer, index: cint): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
   parameterNames*: proc(self: pointer, index: cint): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerMemberSheetExtension_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerMemberSheetExtension {.importc: "QDesignerMemberSheetExtension_new".}
-proc fcQDesignerMemberSheetExtension_delete(self: pointer) {.importc: "QDesignerMemberSheetExtension_delete".}
 
 proc count*(self: gen_membersheet_types.QDesignerMemberSheetExtension): cint =
   fcQDesignerMemberSheetExtension_count(self.h)
@@ -161,7 +160,8 @@ type QDesignerMemberSheetExtensiondeclaredInClassProc* = proc(self: QDesignerMem
 type QDesignerMemberSheetExtensionsignatureProc* = proc(self: QDesignerMemberSheetExtension, index: cint): string {.raises: [], gcsafe.}
 type QDesignerMemberSheetExtensionparameterTypesProc* = proc(self: QDesignerMemberSheetExtension, index: cint): seq[seq[byte]] {.raises: [], gcsafe.}
 type QDesignerMemberSheetExtensionparameterNamesProc* = proc(self: QDesignerMemberSheetExtension, index: cint): seq[seq[byte]] {.raises: [], gcsafe.}
-type QDesignerMemberSheetExtensionVTable* = object
+
+type QDesignerMemberSheetExtensionVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerMemberSheetExtensionVTable
   count*: QDesignerMemberSheetExtensioncountProc
   indexOf*: QDesignerMemberSheetExtensionindexOfProc
@@ -479,13 +479,14 @@ proc create*(T: type gen_membersheet_types.QDesignerMemberSheetExtension,
     vtbl[].vtbl.parameterTypes = fcQDesignerMemberSheetExtension_vtable_callback_parameterTypes
   if not isNil(vtbl[].parameterNames):
     vtbl[].vtbl.parameterNames = fcQDesignerMemberSheetExtension_vtable_callback_parameterNames
-  let tmp = gen_membersheet_types.QDesignerMemberSheetExtension(h: fcQDesignerMemberSheetExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_membersheet_types.QDesignerMemberSheetExtension(h: fcQDesignerMemberSheetExtension_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerMemberSheetExtension_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerMemberSheetExtension_mvtbl = cQDesignerMemberSheetExtensionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerMemberSheetExtension()[])](self.fcQDesignerMemberSheetExtension_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   count: fcQDesignerMemberSheetExtension_method_callback_count,
   indexOf: fcQDesignerMemberSheetExtension_method_callback_indexOf,
@@ -509,5 +510,3 @@ proc create*(T: type gen_membersheet_types.QDesignerMemberSheetExtension,
   fcQDesignerMemberSheetExtension_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_membersheet_types.QDesignerMemberSheetExtension) =
-  fcQDesignerMemberSheetExtension_delete(self.h)

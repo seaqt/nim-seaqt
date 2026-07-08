@@ -128,10 +128,9 @@ proc fcQUiLoader_protectedbase_isSignalConnected(self: pointer, signal: pointer)
 proc fcQUiLoader_new(vtbl: pointer, vdata: csize_t): ptr cQUiLoader {.importc: "QUiLoader_new".}
 proc fcQUiLoader_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUiLoader {.importc: "QUiLoader_new2".}
 proc fcQUiLoader_staticMetaObject(): pointer {.importc: "QUiLoader_staticMetaObject".}
-proc fcQUiLoader_delete(self: pointer) {.importc: "QUiLoader_delete".}
 
 proc metaObject*(self: gen_quiloader_types.QUiLoader): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQUiLoader_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQUiLoader_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_quiloader_types.QUiLoader, param1: cstring): pointer =
   fcQUiLoader_metacast(self.h, param1)
@@ -164,7 +163,7 @@ proc addPluginPath*(self: gen_quiloader_types.QUiLoader, path: openArray[char]):
   fcQUiLoader_addPluginPath(self.h, struct_seaqt_string(data: if len(path) > 0: addr path[0] else: nil, len: csize_t(len(path))))
 
 proc load*(self: gen_quiloader_types.QUiLoader, device: gen_qiodevice_types.QIODevice): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQUiLoader_load(self.h, device.h))
+  gen_qwidget_types.QWidget(h: fcQUiLoader_load(self.h, device.h), owned: false)
 
 proc availableWidgets*(self: gen_quiloader_types.QUiLoader): seq[string] =
   var v_ma = fcQUiLoader_availableWidgets(self.h)
@@ -191,22 +190,22 @@ proc availableLayouts*(self: gen_quiloader_types.QUiLoader): seq[string] =
   vx_ret
 
 proc createWidget*(self: gen_quiloader_types.QUiLoader, className: openArray[char], parent: gen_qwidget_types.QWidget, name: openArray[char]): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQUiLoader_createWidget(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qwidget_types.QWidget(h: fcQUiLoader_createWidget(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc createLayout*(self: gen_quiloader_types.QUiLoader, className: openArray[char], parent: gen_qobject_types.QObject, name: openArray[char]): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQUiLoader_createLayout(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qlayout_types.QLayout(h: fcQUiLoader_createLayout(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc createActionGroup*(self: gen_quiloader_types.QUiLoader, parent: gen_qobject_types.QObject, name: openArray[char]): gen_qactiongroup_types.QActionGroup =
-  gen_qactiongroup_types.QActionGroup(h: fcQUiLoader_createActionGroup(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qactiongroup_types.QActionGroup(h: fcQUiLoader_createActionGroup(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc createAction*(self: gen_quiloader_types.QUiLoader, parent: gen_qobject_types.QObject, name: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUiLoader_createAction(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qaction_types.QAction(h: fcQUiLoader_createAction(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc setWorkingDirectory*(self: gen_quiloader_types.QUiLoader, dir: gen_qdir_types.QDir): void =
   fcQUiLoader_setWorkingDirectory(self.h, dir.h)
 
 proc workingDirectory*(self: gen_quiloader_types.QUiLoader): gen_qdir_types.QDir =
-  gen_qdir_types.QDir(h: fcQUiLoader_workingDirectory(self.h))
+  gen_qdir_types.QDir(h: fcQUiLoader_workingDirectory(self.h), owned: true)
 
 proc setLanguageChangeEnabled*(self: gen_quiloader_types.QUiLoader, enabled: bool): void =
   fcQUiLoader_setLanguageChangeEnabled(self.h, enabled)
@@ -239,7 +238,7 @@ proc tr*(_: type gen_quiloader_types.QUiLoader, s: cstring, c: cstring, n: cint)
   vx_ret
 
 proc load*(self: gen_quiloader_types.QUiLoader, device: gen_qiodevice_types.QIODevice, parentWidget: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQUiLoader_load2(self.h, device.h, parentWidget.h))
+  gen_qwidget_types.QWidget(h: fcQUiLoader_load2(self.h, device.h, parentWidget.h), owned: false)
 
 type QUiLoadermetaObjectProc* = proc(self: QUiLoader): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QUiLoadermetacastProc* = proc(self: QUiLoader, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -255,7 +254,8 @@ type QUiLoaderchildEventProc* = proc(self: QUiLoader, event: gen_qcoreevent_type
 type QUiLoadercustomEventProc* = proc(self: QUiLoader, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QUiLoaderconnectNotifyProc* = proc(self: QUiLoader, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QUiLoaderdisconnectNotifyProc* = proc(self: QUiLoader, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QUiLoaderVTable* = object
+
+type QUiLoaderVTable* {.inheritable, pure.} = object
   vtbl: cQUiLoaderVTable
   metaObject*: QUiLoadermetaObjectProc
   metacast*: QUiLoadermetacastProc
@@ -273,7 +273,7 @@ type QUiLoaderVTable* = object
   disconnectNotify*: QUiLoaderdisconnectNotifyProc
 
 proc QUiLoadermetaObject*(self: gen_quiloader_types.QUiLoader): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQUiLoader_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQUiLoader_virtualbase_metaObject(self.h), owned: false)
 
 proc QUiLoadermetacast*(self: gen_quiloader_types.QUiLoader, param1: cstring): pointer =
   fcQUiLoader_virtualbase_metacast(self.h, param1)
@@ -282,16 +282,16 @@ proc QUiLoadermetacall*(self: gen_quiloader_types.QUiLoader, param1: cint, param
   fcQUiLoader_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QUiLoadercreateWidget*(self: gen_quiloader_types.QUiLoader, className: openArray[char], parent: gen_qwidget_types.QWidget, name: openArray[char]): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQUiLoader_virtualbase_createWidget(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qwidget_types.QWidget(h: fcQUiLoader_virtualbase_createWidget(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc QUiLoadercreateLayout*(self: gen_quiloader_types.QUiLoader, className: openArray[char], parent: gen_qobject_types.QObject, name: openArray[char]): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQUiLoader_virtualbase_createLayout(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qlayout_types.QLayout(h: fcQUiLoader_virtualbase_createLayout(self.h, struct_seaqt_string(data: if len(className) > 0: addr className[0] else: nil, len: csize_t(len(className))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc QUiLoadercreateActionGroup*(self: gen_quiloader_types.QUiLoader, parent: gen_qobject_types.QObject, name: openArray[char]): gen_qactiongroup_types.QActionGroup =
-  gen_qactiongroup_types.QActionGroup(h: fcQUiLoader_virtualbase_createActionGroup(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qactiongroup_types.QActionGroup(h: fcQUiLoader_virtualbase_createActionGroup(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc QUiLoadercreateAction*(self: gen_quiloader_types.QUiLoader, parent: gen_qobject_types.QObject, name: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUiLoader_virtualbase_createAction(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qaction_types.QAction(h: fcQUiLoader_virtualbase_createAction(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc QUiLoaderevent*(self: gen_quiloader_types.QUiLoader, event: gen_qcoreevent_types.QEvent): bool =
   fcQUiLoader_virtualbase_event(self.h, event.h)
@@ -319,7 +319,10 @@ proc fcQUiLoader_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
@@ -344,13 +347,16 @@ proc fcQUiLoader_vtable_callback_createWidget(self: pointer, className: struct_s
   let vclassNamex_ret = string.fromBytes(vclassName_ms)
   c_free(vclassName_ms.data)
   let slotval1 = vclassNamex_ret
-  let slotval2 = gen_qwidget_types.QWidget(h: parent)
+  let slotval2 = gen_qwidget_types.QWidget(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval3 = vnamex_ret
   var virtualReturn = vtbl[].createWidget(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_vtable_callback_createLayout(self: pointer, className: struct_seaqt_string, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
@@ -359,79 +365,88 @@ proc fcQUiLoader_vtable_callback_createLayout(self: pointer, className: struct_s
   let vclassNamex_ret = string.fromBytes(vclassName_ms)
   c_free(vclassName_ms.data)
   let slotval1 = vclassNamex_ret
-  let slotval2 = gen_qobject_types.QObject(h: parent)
+  let slotval2 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval3 = vnamex_ret
   var virtualReturn = vtbl[].createLayout(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_vtable_callback_createActionGroup(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
   var virtualReturn = vtbl[].createActionGroup(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_vtable_callback_createAction(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
   var virtualReturn = vtbl[].createAction(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQUiLoader_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQUiLoader_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQUiLoader_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQUiLoader_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQUiLoader_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQUiLoader_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUiLoaderVTable](fcQUiLoader_vdata(self)[])
   let self = QUiLoader(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQUiLoader* {.inheritable.} = ref object of QUiLoader
@@ -469,7 +484,10 @@ method disconnectNotify*(self: VirtualQUiLoader, signal: gen_qmetaobject_types.Q
 proc fcQUiLoader_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
@@ -491,13 +509,16 @@ proc fcQUiLoader_method_callback_createWidget(self: pointer, className: struct_s
   let vclassNamex_ret = string.fromBytes(vclassName_ms)
   c_free(vclassName_ms.data)
   let slotval1 = vclassNamex_ret
-  let slotval2 = gen_qwidget_types.QWidget(h: parent)
+  let slotval2 = gen_qwidget_types.QWidget(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval3 = vnamex_ret
   var virtualReturn = inst.createWidget(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_method_callback_createLayout(self: pointer, className: struct_seaqt_string, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
@@ -505,75 +526,84 @@ proc fcQUiLoader_method_callback_createLayout(self: pointer, className: struct_s
   let vclassNamex_ret = string.fromBytes(vclassName_ms)
   c_free(vclassName_ms.data)
   let slotval1 = vclassNamex_ret
-  let slotval2 = gen_qobject_types.QObject(h: parent)
+  let slotval2 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval3 = vnamex_ret
   var virtualReturn = inst.createLayout(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_method_callback_createActionGroup(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
   var virtualReturn = inst.createActionGroup(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_method_callback_createAction(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
   var virtualReturn = inst.createAction(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUiLoader_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQUiLoader_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQUiLoader_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQUiLoader_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQUiLoader_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQUiLoader_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQUiLoader_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUiLoader](fcQUiLoader_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_quiloader_types.QUiLoader): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQUiLoader_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQUiLoader_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_quiloader_types.QUiLoader): cint =
   fcQUiLoader_protectedbase_senderSignalIndex(self.h)
@@ -619,7 +649,7 @@ proc create*(T: type gen_quiloader_types.QUiLoader,
     vtbl[].vtbl.connectNotify = fcQUiLoader_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUiLoader_vtable_callback_disconnectNotify
-  let tmp = gen_quiloader_types.QUiLoader(h: fcQUiLoader_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_quiloader_types.QUiLoader(h: fcQUiLoader_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQUiLoader_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_quiloader_types.QUiLoader,
@@ -658,13 +688,14 @@ proc create*(T: type gen_quiloader_types.QUiLoader,
     vtbl[].vtbl.connectNotify = fcQUiLoader_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUiLoader_vtable_callback_disconnectNotify
-  let tmp = gen_quiloader_types.QUiLoader(h: fcQUiLoader_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_quiloader_types.QUiLoader(h: fcQUiLoader_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQUiLoader_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQUiLoader_mvtbl = cQUiLoaderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQUiLoader()[])](self.fcQUiLoader_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQUiLoader_method_callback_metaObject,
   metacast: fcQUiLoader_method_callback_metacast,
@@ -698,5 +729,3 @@ proc create*(T: type gen_quiloader_types.QUiLoader,
 
 proc staticMetaObject*(_: type gen_quiloader_types.QUiLoader): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUiLoader_staticMetaObject())
-proc delete*(self: gen_quiloader_types.QUiLoader) =
-  fcQUiLoader_delete(self.h)

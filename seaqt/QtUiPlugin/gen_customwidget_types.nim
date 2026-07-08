@@ -1,4 +1,4 @@
-type QDesignerCustomWidgetInterface* {.inheritable, pure.} = object
+type QDesignerCustomWidgetInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QDesignerCustomWidgetInterface) =
   wasMoved(self)
   fcQDesignerCustomWidgetInterface_delete(h)
 
-type QDesignerCustomWidgetCollectionInterface* {.inheritable, pure.} = object
+type QDesignerCustomWidgetCollectionInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

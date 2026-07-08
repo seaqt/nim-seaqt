@@ -104,10 +104,9 @@ proc fcQSignalTransition_new2(vtbl: pointer, vdata: csize_t, sender: pointer, si
 proc fcQSignalTransition_new3(vtbl: pointer, vdata: csize_t, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new3".}
 proc fcQSignalTransition_new4(vtbl: pointer, vdata: csize_t, sender: pointer, signal: cstring, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new4".}
 proc fcQSignalTransition_staticMetaObject(): pointer {.importc: "QSignalTransition_staticMetaObject".}
-proc fcQSignalTransition_delete(self: pointer) {.importc: "QSignalTransition_delete".}
 
 proc metaObject*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSignalTransition_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSignalTransition_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsignaltransition_types.QSignalTransition, param1: cstring): pointer =
   fcQSignalTransition_metacast(self.h, param1)
@@ -122,7 +121,7 @@ proc tr*(_: type gen_qsignaltransition_types.QSignalTransition, s: cstring): str
   vx_ret
 
 proc senderObject*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSignalTransition_senderObject(self.h))
+  gen_qobject_types.QObject(h: fcQSignalTransition_senderObject(self.h), owned: false)
 
 proc setSenderObject*(self: gen_qsignaltransition_types.QSignalTransition, sender: gen_qobject_types.QObject): void =
   fcQSignalTransition_setSenderObject(self.h, sender.h)
@@ -160,7 +159,8 @@ type QSignalTransitionchildEventProc* = proc(self: QSignalTransition, event: gen
 type QSignalTransitioncustomEventProc* = proc(self: QSignalTransition, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSignalTransitionconnectNotifyProc* = proc(self: QSignalTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSignalTransitiondisconnectNotifyProc* = proc(self: QSignalTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSignalTransitionVTable* = object
+
+type QSignalTransitionVTable* {.inheritable, pure.} = object
   vtbl: cQSignalTransitionVTable
   metaObject*: QSignalTransitionmetaObjectProc
   metacast*: QSignalTransitionmetacastProc
@@ -176,7 +176,7 @@ type QSignalTransitionVTable* = object
   disconnectNotify*: QSignalTransitiondisconnectNotifyProc
 
 proc QSignalTransitionmetaObject*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSignalTransition_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSignalTransition_virtualbase_metaObject(self.h), owned: false)
 
 proc QSignalTransitionmetacast*(self: gen_qsignaltransition_types.QSignalTransition, param1: cstring): pointer =
   fcQSignalTransition_virtualbase_metacast(self.h, param1)
@@ -216,7 +216,10 @@ proc fcQSignalTransition_vtable_callback_metaObject(self: pointer): pointer {.cd
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSignalTransition_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
@@ -237,59 +240,59 @@ proc fcQSignalTransition_vtable_callback_metacall(self: pointer, param1: cint, p
 proc fcQSignalTransition_vtable_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventTest(self, slotval1)
   virtualReturn
 
 proc fcQSignalTransition_vtable_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onTransition(self, slotval1)
 
 proc fcQSignalTransition_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQSignalTransition_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQSignalTransition_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQSignalTransition_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQSignalTransition_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQSignalTransition_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQSignalTransition_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self)[])
   let self = QSignalTransition(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSignalTransition* {.inheritable.} = ref object of QSignalTransition
@@ -323,7 +326,10 @@ method disconnectNotify*(self: VirtualQSignalTransition, signal: gen_qmetaobject
 proc fcQSignalTransition_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSignalTransition_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
@@ -341,56 +347,56 @@ proc fcQSignalTransition_method_callback_metacall(self: pointer, param1: cint, p
 
 proc fcQSignalTransition_method_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventTest(slotval1)
   virtualReturn
 
 proc fcQSignalTransition_method_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onTransition(slotval1)
 
 proc fcQSignalTransition_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQSignalTransition_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQSignalTransition_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQSignalTransition_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQSignalTransition_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQSignalTransition_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQSignalTransition_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSignalTransition_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSignalTransition_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsignaltransition_types.QSignalTransition): cint =
   fcQSignalTransition_protectedbase_senderSignalIndex(self.h)
@@ -432,7 +438,7 @@ proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     vtbl[].vtbl.connectNotify = fcQSignalTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSignalTransition_vtable_callback_disconnectNotify
-  let tmp = gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSignalTransition_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
@@ -467,7 +473,7 @@ proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     vtbl[].vtbl.connectNotify = fcQSignalTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSignalTransition_vtable_callback_disconnectNotify
-  let tmp = gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sender.h, signal))
+  let tmp = gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sender.h, signal), owned: true)
   fcQSignalTransition_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
@@ -502,7 +508,7 @@ proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     vtbl[].vtbl.connectNotify = fcQSignalTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSignalTransition_vtable_callback_disconnectNotify
-  let tmp = gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sourceState.h))
+  let tmp = gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sourceState.h), owned: true)
   fcQSignalTransition_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
@@ -537,13 +543,14 @@ proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     vtbl[].vtbl.connectNotify = fcQSignalTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSignalTransition_vtable_callback_disconnectNotify
-  let tmp = gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sender.h, signal, sourceState.h))
+  let tmp = gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sender.h, signal, sourceState.h), owned: true)
   fcQSignalTransition_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSignalTransition_mvtbl = cQSignalTransitionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSignalTransition()[])](self.fcQSignalTransition_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSignalTransition_method_callback_metaObject,
   metacast: fcQSignalTransition_method_callback_metacast,
@@ -591,5 +598,3 @@ proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
 
 proc staticMetaObject*(_: type gen_qsignaltransition_types.QSignalTransition): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSignalTransition_staticMetaObject())
-proc delete*(self: gen_qsignaltransition_types.QSignalTransition) =
-  fcQSignalTransition_delete(self.h)

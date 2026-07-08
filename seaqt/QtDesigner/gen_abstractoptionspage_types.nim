@@ -1,4 +1,4 @@
-type QDesignerOptionsPageInterface* {.inheritable, pure.} = object
+type QDesignerOptionsPageInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
