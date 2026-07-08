@@ -171,7 +171,6 @@ int QItemSelectionModel_protectedbase_senderSignalIndex(const VirtualQItemSelect
 int QItemSelectionModel_protectedbase_receivers(const VirtualQItemSelectionModel* self, const char* signal);
 bool QItemSelectionModel_protectedbase_isSignalConnected(const VirtualQItemSelectionModel* self, QMetaMethod* signal);
 
-const QMetaObject* QItemSelectionModel_staticMetaObject();
 void QItemSelectionModel_delete(QItemSelectionModel* self);
 
 QItemSelection* QItemSelection_new();

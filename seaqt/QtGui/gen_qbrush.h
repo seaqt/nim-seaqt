@@ -105,7 +105,6 @@ bool QGradient_operatorEqual(const QGradient* self, QGradient* gradient);
 bool QGradient_operatorNotEqual(const QGradient* self, QGradient* other);
 void QGradient_operatorAssign(QGradient* self, QGradient* from);
 
-const QMetaObject* QGradient_staticMetaObject();
 void QGradient_delete(QGradient* self);
 
 QLinearGradient* QLinearGradient_new();

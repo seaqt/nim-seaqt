@@ -441,16 +441,11 @@ void QQmlComponent_statusChanged(QQmlComponent* self, int param1) {
 }
 
 void QQmlComponent_connect_statusChanged(QQmlComponent* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QQmlComponent::Status param1) {
+	QQmlComponent::connect(self, static_cast<void (QQmlComponent::*)(QQmlComponent::Status)>(&QQmlComponent::statusChanged), self, [callback, release = seaqt::release_callback{slot,release}](QQmlComponent::Status param1) {
 			QQmlComponent::Status param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QQmlComponent::connect(self, static_cast<void (QQmlComponent::*)(QQmlComponent::Status)>(&QQmlComponent::statusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QQmlComponent_progressChanged(QQmlComponent* self, double param1) {
@@ -458,16 +453,11 @@ void QQmlComponent_progressChanged(QQmlComponent* self, double param1) {
 }
 
 void QQmlComponent_connect_progressChanged(QQmlComponent* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal param1) {
+	QQmlComponent::connect(self, static_cast<void (QQmlComponent::*)(qreal)>(&QQmlComponent::progressChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal param1) {
 			qreal param1_ret = param1;
 			double sigval1 = static_cast<double>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QQmlComponent::connect(self, static_cast<void (QQmlComponent::*)(qreal)>(&QQmlComponent::progressChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QQmlComponent_tr_s_c(const char* s, const char* c) {

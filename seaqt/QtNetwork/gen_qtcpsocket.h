@@ -149,7 +149,6 @@ int QTcpSocket_protectedbase_senderSignalIndex(const VirtualQTcpSocket* self);
 int QTcpSocket_protectedbase_receivers(const VirtualQTcpSocket* self, const char* signal);
 bool QTcpSocket_protectedbase_isSignalConnected(const VirtualQTcpSocket* self, QMetaMethod* signal);
 
-const QMetaObject* QTcpSocket_staticMetaObject();
 void QTcpSocket_delete(QTcpSocket* self);
 
 #ifdef __cplusplus

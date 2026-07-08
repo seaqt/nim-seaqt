@@ -48,7 +48,6 @@ struct seaqt_string QImageEncoderControl_tr_s_c_n(const char* s, const char* c, 
 struct seaqt_string QImageEncoderControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QImageEncoderControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QImageEncoderControl_staticMetaObject();
 void QImageEncoderControl_delete(QImageEncoderControl* self);
 
 #ifdef __cplusplus

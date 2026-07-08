@@ -237,7 +237,6 @@ int QSlider_protectedbase_senderSignalIndex(const VirtualQSlider* self);
 int QSlider_protectedbase_receivers(const VirtualQSlider* self, const char* signal);
 bool QSlider_protectedbase_isSignalConnected(const VirtualQSlider* self, QMetaMethod* signal);
 
-const QMetaObject* QSlider_staticMetaObject();
 void QSlider_delete(QSlider* self);
 
 #ifdef __cplusplus

@@ -101,7 +101,10 @@ int QHistoryState_protectedbase_senderSignalIndex(const VirtualQHistoryState* se
 int QHistoryState_protectedbase_receivers(const VirtualQHistoryState* self, const char* signal);
 bool QHistoryState_protectedbase_isSignalConnected(const VirtualQHistoryState* self, QMetaMethod* signal);
 
-const QMetaObject* QHistoryState_staticMetaObject();
+void QHistoryState_connect_defaultTransitionChanged(QHistoryState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QHistoryState_connect_defaultStateChanged(QHistoryState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QHistoryState_connect_historyTypeChanged(QHistoryState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QHistoryState_delete(QHistoryState* self);
 
 #ifdef __cplusplus

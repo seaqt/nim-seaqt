@@ -262,7 +262,6 @@ int QSqlRelationalTableModel_protectedbase_senderSignalIndex(const VirtualQSqlRe
 int QSqlRelationalTableModel_protectedbase_receivers(const VirtualQSqlRelationalTableModel* self, const char* signal);
 bool QSqlRelationalTableModel_protectedbase_isSignalConnected(const VirtualQSqlRelationalTableModel* self, QMetaMethod* signal);
 
-const QMetaObject* QSqlRelationalTableModel_staticMetaObject();
 void QSqlRelationalTableModel_delete(QSqlRelationalTableModel* self);
 
 #ifdef __cplusplus

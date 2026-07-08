@@ -413,14 +413,9 @@ void QMovie_started(QMovie* self) {
 }
 
 void QMovie_connect_started(QMovie* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QMovie::connect(self, static_cast<void (QMovie::*)()>(&QMovie::started), self, local_caller{slot, callback, release});
+	QMovie::connect(self, static_cast<void (QMovie::*)()>(&QMovie::started), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QMovie_resized(QMovie* self, QSize* size) {
@@ -428,17 +423,12 @@ void QMovie_resized(QMovie* self, QSize* size) {
 }
 
 void QMovie_connect_resized(QMovie* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSize*);
-		void operator()(const QSize& size) {
+	QMovie::connect(self, static_cast<void (QMovie::*)(const QSize&)>(&QMovie::resized), self, [callback, release = seaqt::release_callback{slot,release}](const QSize& size) {
 			const QSize& size_ret = size;
 			// Cast returned reference into pointer
 			QSize* sigval1 = const_cast<QSize*>(&size_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMovie::connect(self, static_cast<void (QMovie::*)(const QSize&)>(&QMovie::resized), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMovie_updated(QMovie* self, QRect* rect) {
@@ -446,17 +436,12 @@ void QMovie_updated(QMovie* self, QRect* rect) {
 }
 
 void QMovie_connect_updated(QMovie* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRect*);
-		void operator()(const QRect& rect) {
+	QMovie::connect(self, static_cast<void (QMovie::*)(const QRect&)>(&QMovie::updated), self, [callback, release = seaqt::release_callback{slot,release}](const QRect& rect) {
 			const QRect& rect_ret = rect;
 			// Cast returned reference into pointer
 			QRect* sigval1 = const_cast<QRect*>(&rect_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMovie::connect(self, static_cast<void (QMovie::*)(const QRect&)>(&QMovie::updated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMovie_stateChanged(QMovie* self, int state) {
@@ -464,16 +449,11 @@ void QMovie_stateChanged(QMovie* self, int state) {
 }
 
 void QMovie_connect_stateChanged(QMovie* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMovie::MovieState state) {
+	QMovie::connect(self, static_cast<void (QMovie::*)(QMovie::MovieState)>(&QMovie::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QMovie::MovieState state) {
 			QMovie::MovieState state_ret = state;
 			int sigval1 = static_cast<int>(state_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMovie::connect(self, static_cast<void (QMovie::*)(QMovie::MovieState)>(&QMovie::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMovie_error(QMovie* self, int error) {
@@ -481,16 +461,11 @@ void QMovie_error(QMovie* self, int error) {
 }
 
 void QMovie_connect_error(QMovie* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QImageReader::ImageReaderError error) {
+	QMovie::connect(self, static_cast<void (QMovie::*)(QImageReader::ImageReaderError)>(&QMovie::error), self, [callback, release = seaqt::release_callback{slot,release}](QImageReader::ImageReaderError error) {
 			QImageReader::ImageReaderError error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMovie::connect(self, static_cast<void (QMovie::*)(QImageReader::ImageReaderError)>(&QMovie::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMovie_finished(QMovie* self) {
@@ -498,14 +473,9 @@ void QMovie_finished(QMovie* self) {
 }
 
 void QMovie_connect_finished(QMovie* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QMovie::connect(self, static_cast<void (QMovie::*)()>(&QMovie::finished), self, local_caller{slot, callback, release});
+	QMovie::connect(self, static_cast<void (QMovie::*)()>(&QMovie::finished), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QMovie_frameChanged(QMovie* self, int frameNumber) {
@@ -513,15 +483,10 @@ void QMovie_frameChanged(QMovie* self, int frameNumber) {
 }
 
 void QMovie_connect_frameChanged(QMovie* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int frameNumber) {
+	QMovie::connect(self, static_cast<void (QMovie::*)(int)>(&QMovie::frameChanged), self, [callback, release = seaqt::release_callback{slot,release}](int frameNumber) {
 			int sigval1 = frameNumber;
-			callback(slot, sigval1);
-		}
-	};
-	QMovie::connect(self, static_cast<void (QMovie::*)(int)>(&QMovie::frameChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMovie_start(QMovie* self) {

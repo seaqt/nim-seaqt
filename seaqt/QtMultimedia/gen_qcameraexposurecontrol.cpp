@@ -93,15 +93,10 @@ void QCameraExposureControl_requestedValueChanged(QCameraExposureControl* self, 
 }
 
 void QCameraExposureControl_connect_requestedValueChanged(QCameraExposureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int parameter) {
+	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::requestedValueChanged), self, [callback, release = seaqt::release_callback{slot,release}](int parameter) {
 			int sigval1 = parameter;
-			callback(slot, sigval1);
-		}
-	};
-	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::requestedValueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCameraExposureControl_actualValueChanged(QCameraExposureControl* self, int parameter) {
@@ -109,15 +104,10 @@ void QCameraExposureControl_actualValueChanged(QCameraExposureControl* self, int
 }
 
 void QCameraExposureControl_connect_actualValueChanged(QCameraExposureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int parameter) {
+	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::actualValueChanged), self, [callback, release = seaqt::release_callback{slot,release}](int parameter) {
 			int sigval1 = parameter;
-			callback(slot, sigval1);
-		}
-	};
-	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::actualValueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCameraExposureControl_parameterRangeChanged(QCameraExposureControl* self, int parameter) {
@@ -125,15 +115,10 @@ void QCameraExposureControl_parameterRangeChanged(QCameraExposureControl* self, 
 }
 
 void QCameraExposureControl_connect_parameterRangeChanged(QCameraExposureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int parameter) {
+	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::parameterRangeChanged), self, [callback, release = seaqt::release_callback{slot,release}](int parameter) {
 			int sigval1 = parameter;
-			callback(slot, sigval1);
-		}
-	};
-	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::parameterRangeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QCameraExposureControl_tr_s_c(const char* s, const char* c) {

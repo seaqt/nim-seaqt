@@ -257,7 +257,6 @@ int QDialog_protectedbase_senderSignalIndex(const VirtualQDialog* self);
 int QDialog_protectedbase_receivers(const VirtualQDialog* self, const char* signal);
 bool QDialog_protectedbase_isSignalConnected(const VirtualQDialog* self, QMetaMethod* signal);
 
-const QMetaObject* QDialog_staticMetaObject();
 void QDialog_delete(QDialog* self);
 
 #ifdef __cplusplus

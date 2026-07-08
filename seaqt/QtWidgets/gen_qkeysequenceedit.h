@@ -230,7 +230,6 @@ int QKeySequenceEdit_protectedbase_senderSignalIndex(const VirtualQKeySequenceEd
 int QKeySequenceEdit_protectedbase_receivers(const VirtualQKeySequenceEdit* self, const char* signal);
 bool QKeySequenceEdit_protectedbase_isSignalConnected(const VirtualQKeySequenceEdit* self, QMetaMethod* signal);
 
-const QMetaObject* QKeySequenceEdit_staticMetaObject();
 void QKeySequenceEdit_delete(QKeySequenceEdit* self);
 
 #ifdef __cplusplus

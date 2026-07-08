@@ -117,7 +117,6 @@ int QButtonGroup_protectedbase_senderSignalIndex(const VirtualQButtonGroup* self
 int QButtonGroup_protectedbase_receivers(const VirtualQButtonGroup* self, const char* signal);
 bool QButtonGroup_protectedbase_isSignalConnected(const VirtualQButtonGroup* self, QMetaMethod* signal);
 
-const QMetaObject* QButtonGroup_staticMetaObject();
 void QButtonGroup_delete(QButtonGroup* self);
 
 #ifdef __cplusplus

@@ -234,7 +234,6 @@ int QRadioButton_protectedbase_senderSignalIndex(const VirtualQRadioButton* self
 int QRadioButton_protectedbase_receivers(const VirtualQRadioButton* self, const char* signal);
 bool QRadioButton_protectedbase_isSignalConnected(const VirtualQRadioButton* self, QMetaMethod* signal);
 
-const QMetaObject* QRadioButton_staticMetaObject();
 void QRadioButton_delete(QRadioButton* self);
 
 #ifdef __cplusplus

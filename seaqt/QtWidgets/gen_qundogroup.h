@@ -114,7 +114,6 @@ int QUndoGroup_protectedbase_senderSignalIndex(const VirtualQUndoGroup* self);
 int QUndoGroup_protectedbase_receivers(const VirtualQUndoGroup* self, const char* signal);
 bool QUndoGroup_protectedbase_isSignalConnected(const VirtualQUndoGroup* self, QMetaMethod* signal);
 
-const QMetaObject* QUndoGroup_staticMetaObject();
 void QUndoGroup_delete(QUndoGroup* self);
 
 #ifdef __cplusplus

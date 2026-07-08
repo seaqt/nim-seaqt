@@ -86,16 +86,11 @@ void QAudioRoleControl_audioRoleChanged(QAudioRoleControl* self, int role) {
 }
 
 void QAudioRoleControl_connect_audioRoleChanged(QAudioRoleControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QAudio::Role role) {
+	QAudioRoleControl::connect(self, static_cast<void (QAudioRoleControl::*)(QAudio::Role)>(&QAudioRoleControl::audioRoleChanged), self, [callback, release = seaqt::release_callback{slot,release}](QAudio::Role role) {
 			QAudio::Role role_ret = role;
 			int sigval1 = static_cast<int>(role_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAudioRoleControl::connect(self, static_cast<void (QAudioRoleControl::*)(QAudio::Role)>(&QAudioRoleControl::audioRoleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QAudioRoleControl_tr_s_c(const char* s, const char* c) {

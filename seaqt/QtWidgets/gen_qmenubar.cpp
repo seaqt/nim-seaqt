@@ -837,15 +837,10 @@ void QMenuBar_triggered(QMenuBar* self, QAction* action) {
 }
 
 void QMenuBar_connect_triggered(QMenuBar* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAction*);
-		void operator()(QAction* action) {
+	QMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::triggered), self, [callback, release = seaqt::release_callback{slot,release}](QAction* action) {
 			QAction* sigval1 = action;
-			callback(slot, sigval1);
-		}
-	};
-	QMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::triggered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMenuBar_hovered(QMenuBar* self, QAction* action) {
@@ -853,15 +848,10 @@ void QMenuBar_hovered(QMenuBar* self, QAction* action) {
 }
 
 void QMenuBar_connect_hovered(QMenuBar* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAction*);
-		void operator()(QAction* action) {
+	QMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::hovered), self, [callback, release = seaqt::release_callback{slot,release}](QAction* action) {
 			QAction* sigval1 = action;
-			callback(slot, sigval1);
-		}
-	};
-	QMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::hovered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QMenuBar_tr_s_c(const char* s, const char* c) {

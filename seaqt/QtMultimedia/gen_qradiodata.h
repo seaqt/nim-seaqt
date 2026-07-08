@@ -114,7 +114,6 @@ int QRadioData_protectedbase_senderSignalIndex(const VirtualQRadioData* self);
 int QRadioData_protectedbase_receivers(const VirtualQRadioData* self, const char* signal);
 bool QRadioData_protectedbase_isSignalConnected(const VirtualQRadioData* self, QMetaMethod* signal);
 
-const QMetaObject* QRadioData_staticMetaObject();
 void QRadioData_delete(QRadioData* self);
 
 #ifdef __cplusplus

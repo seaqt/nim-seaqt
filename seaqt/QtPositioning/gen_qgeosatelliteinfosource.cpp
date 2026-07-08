@@ -371,10 +371,7 @@ void QGeoSatelliteInfoSource_satellitesInViewUpdated(QGeoSatelliteInfoSource* se
 }
 
 void QGeoSatelliteInfoSource_connect_satellitesInViewUpdated(QGeoSatelliteInfoSource* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QGeoSatelliteInfo* */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QGeoSatelliteInfo* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QGeoSatelliteInfo* */ );
-		void operator()(const QList<QGeoSatelliteInfo>& satellites) {
+	QGeoSatelliteInfoSource::connect(self, static_cast<void (QGeoSatelliteInfoSource::*)(const QList<QGeoSatelliteInfo>&)>(&QGeoSatelliteInfoSource::satellitesInViewUpdated), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QGeoSatelliteInfo>& satellites) {
 			const QList<QGeoSatelliteInfo>& satellites_ret = satellites;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QGeoSatelliteInfo** satellites_arr = static_cast<QGeoSatelliteInfo**>(malloc(sizeof(QGeoSatelliteInfo*) * satellites_ret.length()));
@@ -385,10 +382,8 @@ void QGeoSatelliteInfoSource_connect_satellitesInViewUpdated(QGeoSatelliteInfoSo
 			satellites_out.len = satellites_ret.length();
 			satellites_out.data = static_cast<void*>(satellites_arr);
 			struct seaqt_array /* of QGeoSatelliteInfo* */  sigval1 = satellites_out;
-			callback(slot, sigval1);
-		}
-	};
-	QGeoSatelliteInfoSource::connect(self, static_cast<void (QGeoSatelliteInfoSource::*)(const QList<QGeoSatelliteInfo>&)>(&QGeoSatelliteInfoSource::satellitesInViewUpdated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGeoSatelliteInfoSource_satellitesInUseUpdated(QGeoSatelliteInfoSource* self, struct seaqt_array /* of QGeoSatelliteInfo* */  satellites) {
@@ -402,10 +397,7 @@ void QGeoSatelliteInfoSource_satellitesInUseUpdated(QGeoSatelliteInfoSource* sel
 }
 
 void QGeoSatelliteInfoSource_connect_satellitesInUseUpdated(QGeoSatelliteInfoSource* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QGeoSatelliteInfo* */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QGeoSatelliteInfo* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QGeoSatelliteInfo* */ );
-		void operator()(const QList<QGeoSatelliteInfo>& satellites) {
+	QGeoSatelliteInfoSource::connect(self, static_cast<void (QGeoSatelliteInfoSource::*)(const QList<QGeoSatelliteInfo>&)>(&QGeoSatelliteInfoSource::satellitesInUseUpdated), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QGeoSatelliteInfo>& satellites) {
 			const QList<QGeoSatelliteInfo>& satellites_ret = satellites;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QGeoSatelliteInfo** satellites_arr = static_cast<QGeoSatelliteInfo**>(malloc(sizeof(QGeoSatelliteInfo*) * satellites_ret.length()));
@@ -416,10 +408,8 @@ void QGeoSatelliteInfoSource_connect_satellitesInUseUpdated(QGeoSatelliteInfoSou
 			satellites_out.len = satellites_ret.length();
 			satellites_out.data = static_cast<void*>(satellites_arr);
 			struct seaqt_array /* of QGeoSatelliteInfo* */  sigval1 = satellites_out;
-			callback(slot, sigval1);
-		}
-	};
-	QGeoSatelliteInfoSource::connect(self, static_cast<void (QGeoSatelliteInfoSource::*)(const QList<QGeoSatelliteInfo>&)>(&QGeoSatelliteInfoSource::satellitesInUseUpdated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGeoSatelliteInfoSource_requestTimeout(QGeoSatelliteInfoSource* self) {
@@ -427,14 +417,9 @@ void QGeoSatelliteInfoSource_requestTimeout(QGeoSatelliteInfoSource* self) {
 }
 
 void QGeoSatelliteInfoSource_connect_requestTimeout(QGeoSatelliteInfoSource* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QGeoSatelliteInfoSource::connect(self, static_cast<void (QGeoSatelliteInfoSource::*)()>(&QGeoSatelliteInfoSource::requestTimeout), self, local_caller{slot, callback, release});
+	QGeoSatelliteInfoSource::connect(self, static_cast<void (QGeoSatelliteInfoSource::*)()>(&QGeoSatelliteInfoSource::requestTimeout), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QGeoSatelliteInfoSource_error_QGeoSatelliteInfoSource_Error(QGeoSatelliteInfoSource* self, int param1) {
@@ -442,16 +427,11 @@ void QGeoSatelliteInfoSource_error_QGeoSatelliteInfoSource_Error(QGeoSatelliteIn
 }
 
 void QGeoSatelliteInfoSource_connect_error_QGeoSatelliteInfoSource_Error(QGeoSatelliteInfoSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QGeoSatelliteInfoSource::Error param1) {
+	QGeoSatelliteInfoSource::connect(self, static_cast<void (QGeoSatelliteInfoSource::*)(QGeoSatelliteInfoSource::Error)>(&QGeoSatelliteInfoSource::error), self, [callback, release = seaqt::release_callback{slot,release}](QGeoSatelliteInfoSource::Error param1) {
 			QGeoSatelliteInfoSource::Error param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGeoSatelliteInfoSource::connect(self, static_cast<void (QGeoSatelliteInfoSource::*)(QGeoSatelliteInfoSource::Error)>(&QGeoSatelliteInfoSource::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QGeoSatelliteInfoSource_tr_s_c(const char* s, const char* c) {

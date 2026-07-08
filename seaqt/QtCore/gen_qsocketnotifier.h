@@ -87,7 +87,8 @@ int QSocketNotifier_protectedbase_senderSignalIndex(const VirtualQSocketNotifier
 int QSocketNotifier_protectedbase_receivers(const VirtualQSocketNotifier* self, const char* signal);
 bool QSocketNotifier_protectedbase_isSignalConnected(const VirtualQSocketNotifier* self, QMetaMethod* signal);
 
-const QMetaObject* QSocketNotifier_staticMetaObject();
+void QSocketNotifier_connect_activated(QSocketNotifier* self, intptr_t slot, void (*callback)(intptr_t, QSocketDescriptor*, int), void (*release)(intptr_t));
+
 void QSocketNotifier_delete(QSocketNotifier* self);
 
 QSocketDescriptor* QSocketDescriptor_new();

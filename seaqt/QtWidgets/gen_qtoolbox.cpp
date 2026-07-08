@@ -875,15 +875,10 @@ void QToolBox_currentChanged(QToolBox* self, int index) {
 }
 
 void QToolBox_connect_currentChanged(QToolBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int index) {
+	QToolBox::connect(self, static_cast<void (QToolBox::*)(int)>(&QToolBox::currentChanged), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
 			int sigval1 = index;
-			callback(slot, sigval1);
-		}
-	};
-	QToolBox::connect(self, static_cast<void (QToolBox::*)(int)>(&QToolBox::currentChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QToolBox_tr_s_c(const char* s, const char* c) {

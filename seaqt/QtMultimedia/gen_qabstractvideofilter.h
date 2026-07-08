@@ -98,7 +98,6 @@ int QAbstractVideoFilter_protectedbase_senderSignalIndex(const VirtualQAbstractV
 int QAbstractVideoFilter_protectedbase_receivers(const VirtualQAbstractVideoFilter* self, const char* signal);
 bool QAbstractVideoFilter_protectedbase_isSignalConnected(const VirtualQAbstractVideoFilter* self, QMetaMethod* signal);
 
-const QMetaObject* QAbstractVideoFilter_staticMetaObject();
 void QAbstractVideoFilter_delete(QAbstractVideoFilter* self);
 
 #ifdef __cplusplus

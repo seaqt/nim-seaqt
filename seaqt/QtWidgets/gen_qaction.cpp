@@ -557,14 +557,9 @@ void QAction_changed(QAction* self) {
 }
 
 void QAction_connect_changed(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAction::connect(self, static_cast<void (QAction::*)()>(&QAction::changed), self, local_caller{slot, callback, release});
+	QAction::connect(self, static_cast<void (QAction::*)()>(&QAction::changed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QAction_triggered(QAction* self) {
@@ -572,14 +567,9 @@ void QAction_triggered(QAction* self) {
 }
 
 void QAction_connect_triggered(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, local_caller{slot, callback, release});
+	QAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QAction_hovered(QAction* self) {
@@ -587,14 +577,9 @@ void QAction_hovered(QAction* self) {
 }
 
 void QAction_connect_hovered(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAction::connect(self, static_cast<void (QAction::*)()>(&QAction::hovered), self, local_caller{slot, callback, release});
+	QAction::connect(self, static_cast<void (QAction::*)()>(&QAction::hovered), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QAction_toggled(QAction* self, bool param1) {
@@ -602,15 +587,10 @@ void QAction_toggled(QAction* self, bool param1) {
 }
 
 void QAction_connect_toggled(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool param1) {
+	QAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::toggled), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
 			bool sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::toggled), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QAction_tr_s_c(const char* s, const char* c) {
@@ -666,15 +646,10 @@ void QAction_triggered_checked(QAction* self, bool checked) {
 }
 
 void QAction_connect_triggered_checked(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool checked) {
+	QAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, [callback, release = seaqt::release_callback{slot,release}](bool checked) {
 			bool sigval1 = checked;
-			callback(slot, sigval1);
-		}
-	};
-	QAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 const QMetaObject* QAction_staticMetaObject() { return &QAction::staticMetaObject; }

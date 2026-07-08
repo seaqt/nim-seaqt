@@ -79,15 +79,10 @@ void QCameraFlashControl_flashReady(QCameraFlashControl* self, bool param1) {
 }
 
 void QCameraFlashControl_connect_flashReady(QCameraFlashControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool param1) {
+	QCameraFlashControl::connect(self, static_cast<void (QCameraFlashControl::*)(bool)>(&QCameraFlashControl::flashReady), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
 			bool sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QCameraFlashControl::connect(self, static_cast<void (QCameraFlashControl::*)(bool)>(&QCameraFlashControl::flashReady), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QCameraFlashControl_tr_s_c(const char* s, const char* c) {

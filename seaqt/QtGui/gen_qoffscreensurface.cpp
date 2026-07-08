@@ -317,15 +317,10 @@ void QOffscreenSurface_screenChanged(QOffscreenSurface* self, QScreen* screen) {
 }
 
 void QOffscreenSurface_connect_screenChanged(QOffscreenSurface* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QScreen*);
-		void operator()(QScreen* screen) {
+	QOffscreenSurface::connect(self, static_cast<void (QOffscreenSurface::*)(QScreen*)>(&QOffscreenSurface::screenChanged), self, [callback, release = seaqt::release_callback{slot,release}](QScreen* screen) {
 			QScreen* sigval1 = screen;
-			callback(slot, sigval1);
-		}
-	};
-	QOffscreenSurface::connect(self, static_cast<void (QOffscreenSurface::*)(QScreen*)>(&QOffscreenSurface::screenChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QOffscreenSurface_tr_s_c(const char* s, const char* c) {

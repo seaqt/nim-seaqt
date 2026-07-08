@@ -612,16 +612,11 @@ void QQuickView_statusChanged(QQuickView* self, int param1) {
 }
 
 void QQuickView_connect_statusChanged(QQuickView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QQuickView::Status param1) {
+	QQuickView::connect(self, static_cast<void (QQuickView::*)(QQuickView::Status)>(&QQuickView::statusChanged), self, [callback, release = seaqt::release_callback{slot,release}](QQuickView::Status param1) {
 			QQuickView::Status param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QQuickView::connect(self, static_cast<void (QQuickView::*)(QQuickView::Status)>(&QQuickView::statusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QQuickView_tr_s_c(const char* s, const char* c) {

@@ -284,7 +284,6 @@ int QLabel_protectedbase_senderSignalIndex(const VirtualQLabel* self);
 int QLabel_protectedbase_receivers(const VirtualQLabel* self, const char* signal);
 bool QLabel_protectedbase_isSignalConnected(const VirtualQLabel* self, QMetaMethod* signal);
 
-const QMetaObject* QLabel_staticMetaObject();
 void QLabel_delete(QLabel* self);
 
 #ifdef __cplusplus

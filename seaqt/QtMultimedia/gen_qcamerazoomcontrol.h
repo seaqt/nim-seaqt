@@ -58,7 +58,6 @@ struct seaqt_string QCameraZoomControl_tr_s_c_n(const char* s, const char* c, in
 struct seaqt_string QCameraZoomControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraZoomControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCameraZoomControl_staticMetaObject();
 void QCameraZoomControl_delete(QCameraZoomControl* self);
 
 #ifdef __cplusplus

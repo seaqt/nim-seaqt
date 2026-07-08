@@ -1053,15 +1053,10 @@ void QWizard_currentIdChanged(QWizard* self, int id) {
 }
 
 void QWizard_connect_currentIdChanged(QWizard* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int id) {
+	QWizard::connect(self, static_cast<void (QWizard::*)(int)>(&QWizard::currentIdChanged), self, [callback, release = seaqt::release_callback{slot,release}](int id) {
 			int sigval1 = id;
-			callback(slot, sigval1);
-		}
-	};
-	QWizard::connect(self, static_cast<void (QWizard::*)(int)>(&QWizard::currentIdChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWizard_helpRequested(QWizard* self) {
@@ -1069,14 +1064,9 @@ void QWizard_helpRequested(QWizard* self) {
 }
 
 void QWizard_connect_helpRequested(QWizard* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QWizard::connect(self, static_cast<void (QWizard::*)()>(&QWizard::helpRequested), self, local_caller{slot, callback, release});
+	QWizard::connect(self, static_cast<void (QWizard::*)()>(&QWizard::helpRequested), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QWizard_customButtonClicked(QWizard* self, int which) {
@@ -1084,15 +1074,10 @@ void QWizard_customButtonClicked(QWizard* self, int which) {
 }
 
 void QWizard_connect_customButtonClicked(QWizard* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int which) {
+	QWizard::connect(self, static_cast<void (QWizard::*)(int)>(&QWizard::customButtonClicked), self, [callback, release = seaqt::release_callback{slot,release}](int which) {
 			int sigval1 = which;
-			callback(slot, sigval1);
-		}
-	};
-	QWizard::connect(self, static_cast<void (QWizard::*)(int)>(&QWizard::customButtonClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWizard_pageAdded(QWizard* self, int id) {
@@ -1100,15 +1085,10 @@ void QWizard_pageAdded(QWizard* self, int id) {
 }
 
 void QWizard_connect_pageAdded(QWizard* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int id) {
+	QWizard::connect(self, static_cast<void (QWizard::*)(int)>(&QWizard::pageAdded), self, [callback, release = seaqt::release_callback{slot,release}](int id) {
 			int sigval1 = id;
-			callback(slot, sigval1);
-		}
-	};
-	QWizard::connect(self, static_cast<void (QWizard::*)(int)>(&QWizard::pageAdded), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWizard_pageRemoved(QWizard* self, int id) {
@@ -1116,15 +1096,10 @@ void QWizard_pageRemoved(QWizard* self, int id) {
 }
 
 void QWizard_connect_pageRemoved(QWizard* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int id) {
+	QWizard::connect(self, static_cast<void (QWizard::*)(int)>(&QWizard::pageRemoved), self, [callback, release = seaqt::release_callback{slot,release}](int id) {
 			int sigval1 = id;
-			callback(slot, sigval1);
-		}
-	};
-	QWizard::connect(self, static_cast<void (QWizard::*)(int)>(&QWizard::pageRemoved), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWizard_back(QWizard* self) {
@@ -2377,14 +2352,9 @@ void QWizardPage_completeChanged(QWizardPage* self) {
 }
 
 void QWizardPage_connect_completeChanged(QWizardPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QWizardPage::connect(self, static_cast<void (QWizardPage::*)()>(&QWizardPage::completeChanged), self, local_caller{slot, callback, release});
+	QWizardPage::connect(self, static_cast<void (QWizardPage::*)()>(&QWizardPage::completeChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QWizardPage_tr_s_c(const char* s, const char* c) {

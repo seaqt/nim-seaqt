@@ -1249,20 +1249,15 @@ void QAbstractItemModel_dataChanged_topLeft_bottomRight(QAbstractItemModel* self
 }
 
 void QAbstractItemModel_connect_dataChanged_topLeft_bottomRight(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*, QModelIndex*);
-		void operator()(const QModelIndex& topLeft, const QModelIndex& bottomRight) {
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QModelIndex&, const QModelIndex&, const QVector<int>&)>(&QAbstractItemModel::dataChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& topLeft, const QModelIndex& bottomRight) {
 			const QModelIndex& topLeft_ret = topLeft;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&topLeft_ret);
 			const QModelIndex& bottomRight_ret = bottomRight;
 			// Cast returned reference into pointer
 			QModelIndex* sigval2 = const_cast<QModelIndex*>(&bottomRight_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QModelIndex&, const QModelIndex&, const QVector<int>&)>(&QAbstractItemModel::dataChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QAbstractItemModel_headerDataChanged(QAbstractItemModel* self, int orientation, int first, int last) {
@@ -1270,18 +1265,13 @@ void QAbstractItemModel_headerDataChanged(QAbstractItemModel* self, int orientat
 }
 
 void QAbstractItemModel_connect_headerDataChanged(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int, int);
-		void operator()(Qt::Orientation orientation, int first, int last) {
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(Qt::Orientation, int, int)>(&QAbstractItemModel::headerDataChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::Orientation orientation, int first, int last) {
 			Qt::Orientation orientation_ret = orientation;
 			int sigval1 = static_cast<int>(orientation_ret);
 			int sigval2 = first;
 			int sigval3 = last;
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(Qt::Orientation, int, int)>(&QAbstractItemModel::headerDataChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 void QAbstractItemModel_layoutChanged(QAbstractItemModel* self) {
@@ -1289,14 +1279,9 @@ void QAbstractItemModel_layoutChanged(QAbstractItemModel* self) {
 }
 
 void QAbstractItemModel_connect_layoutChanged(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutChanged), self, local_caller{slot, callback, release});
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QAbstractItemModel_layoutAboutToBeChanged(QAbstractItemModel* self) {
@@ -1304,14 +1289,9 @@ void QAbstractItemModel_layoutAboutToBeChanged(QAbstractItemModel* self) {
 }
 
 void QAbstractItemModel_connect_layoutAboutToBeChanged(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutAboutToBeChanged), self, local_caller{slot, callback, release});
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutAboutToBeChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 bool QAbstractItemModel_submit(QAbstractItemModel* self) {
@@ -1401,10 +1381,7 @@ void QAbstractItemModel_dataChanged_topLeft_bottomRight_roles(QAbstractItemModel
 }
 
 void QAbstractItemModel_connect_dataChanged_topLeft_bottomRight_roles(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*, QModelIndex*, struct seaqt_array /* of int */ );
-		void operator()(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles) {
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QModelIndex&, const QModelIndex&, const QVector<int>&)>(&QAbstractItemModel::dataChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles) {
 			const QModelIndex& topLeft_ret = topLeft;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&topLeft_ret);
@@ -1421,10 +1398,8 @@ void QAbstractItemModel_connect_dataChanged_topLeft_bottomRight_roles(QAbstractI
 			roles_out.len = roles_ret.length();
 			roles_out.data = static_cast<void*>(roles_arr);
 			struct seaqt_array /* of int */  sigval3 = roles_out;
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QModelIndex&, const QModelIndex&, const QVector<int>&)>(&QAbstractItemModel::dataChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 void QAbstractItemModel_layoutChanged_parents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents) {
@@ -1438,10 +1413,7 @@ void QAbstractItemModel_layoutChanged_parents(QAbstractItemModel* self, struct s
 }
 
 void QAbstractItemModel_connect_layoutChanged_parents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ );
-		void operator()(const QList<QPersistentModelIndex>& parents) {
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QPersistentModelIndex>& parents) {
 			const QList<QPersistentModelIndex>& parents_ret = parents;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QPersistentModelIndex** parents_arr = static_cast<QPersistentModelIndex**>(malloc(sizeof(QPersistentModelIndex*) * parents_ret.length()));
@@ -1452,10 +1424,8 @@ void QAbstractItemModel_connect_layoutChanged_parents(QAbstractItemModel* self, 
 			parents_out.len = parents_ret.length();
 			parents_out.data = static_cast<void*>(parents_arr);
 			struct seaqt_array /* of QPersistentModelIndex* */  sigval1 = parents_out;
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemModel_layoutChanged_parents_hint(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint) {
@@ -1469,10 +1439,7 @@ void QAbstractItemModel_layoutChanged_parents_hint(QAbstractItemModel* self, str
 }
 
 void QAbstractItemModel_connect_layoutChanged_parents_hint(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int);
-		void operator()(const QList<QPersistentModelIndex>& parents, QAbstractItemModel::LayoutChangeHint hint) {
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QPersistentModelIndex>& parents, QAbstractItemModel::LayoutChangeHint hint) {
 			const QList<QPersistentModelIndex>& parents_ret = parents;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QPersistentModelIndex** parents_arr = static_cast<QPersistentModelIndex**>(malloc(sizeof(QPersistentModelIndex*) * parents_ret.length()));
@@ -1485,10 +1452,8 @@ void QAbstractItemModel_connect_layoutChanged_parents_hint(QAbstractItemModel* s
 			struct seaqt_array /* of QPersistentModelIndex* */  sigval1 = parents_out;
 			QAbstractItemModel::LayoutChangeHint hint_ret = hint;
 			int sigval2 = static_cast<int>(hint_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QAbstractItemModel_layoutAboutToBeChanged_parents(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents) {
@@ -1502,10 +1467,7 @@ void QAbstractItemModel_layoutAboutToBeChanged_parents(QAbstractItemModel* self,
 }
 
 void QAbstractItemModel_connect_layoutAboutToBeChanged_parents(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ );
-		void operator()(const QList<QPersistentModelIndex>& parents) {
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutAboutToBeChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QPersistentModelIndex>& parents) {
 			const QList<QPersistentModelIndex>& parents_ret = parents;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QPersistentModelIndex** parents_arr = static_cast<QPersistentModelIndex**>(malloc(sizeof(QPersistentModelIndex*) * parents_ret.length()));
@@ -1516,10 +1478,8 @@ void QAbstractItemModel_connect_layoutAboutToBeChanged_parents(QAbstractItemMode
 			parents_out.len = parents_ret.length();
 			parents_out.data = static_cast<void*>(parents_arr);
 			struct seaqt_array /* of QPersistentModelIndex* */  sigval1 = parents_out;
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutAboutToBeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemModel_layoutAboutToBeChanged_parents_hint(QAbstractItemModel* self, struct seaqt_array /* of QPersistentModelIndex* */  parents, int hint) {
@@ -1533,10 +1493,7 @@ void QAbstractItemModel_layoutAboutToBeChanged_parents_hint(QAbstractItemModel* 
 }
 
 void QAbstractItemModel_connect_layoutAboutToBeChanged_parents_hint(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QPersistentModelIndex* */ , int);
-		void operator()(const QList<QPersistentModelIndex>& parents, QAbstractItemModel::LayoutChangeHint hint) {
+	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutAboutToBeChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QPersistentModelIndex>& parents, QAbstractItemModel::LayoutChangeHint hint) {
 			const QList<QPersistentModelIndex>& parents_ret = parents;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QPersistentModelIndex** parents_arr = static_cast<QPersistentModelIndex**>(malloc(sizeof(QPersistentModelIndex*) * parents_ret.length()));
@@ -1549,10 +1506,168 @@ void QAbstractItemModel_connect_layoutAboutToBeChanged_parents_hint(QAbstractIte
 			struct seaqt_array /* of QPersistentModelIndex* */  sigval1 = parents_out;
 			QAbstractItemModel::LayoutChangeHint hint_ret = hint;
 			int sigval2 = static_cast<int>(hint_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QAbstractItemModel::connect(self, static_cast<void (QAbstractItemModel::*)(const QList<QPersistentModelIndex>&, QAbstractItemModel::LayoutChangeHint)>(&QAbstractItemModel::layoutAboutToBeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QAbstractItemModel_connect_rowsAboutToBeInserted(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::rowsAboutToBeInserted, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int first, int last, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = first;
+			int sigval3 = last;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QAbstractItemModel_connect_rowsInserted(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::rowsInserted, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int first, int last, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = first;
+			int sigval3 = last;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QAbstractItemModel_connect_rowsAboutToBeRemoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::rowsAboutToBeRemoved, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int first, int last, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = first;
+			int sigval3 = last;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QAbstractItemModel_connect_rowsRemoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::rowsRemoved, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int first, int last, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = first;
+			int sigval3 = last;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QAbstractItemModel_connect_columnsAboutToBeInserted(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::columnsAboutToBeInserted, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int first, int last, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = first;
+			int sigval3 = last;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QAbstractItemModel_connect_columnsInserted(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::columnsInserted, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int first, int last, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = first;
+			int sigval3 = last;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QAbstractItemModel_connect_columnsAboutToBeRemoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::columnsAboutToBeRemoved, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int first, int last, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = first;
+			int sigval3 = last;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QAbstractItemModel_connect_columnsRemoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::columnsRemoved, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int first, int last, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = first;
+			int sigval3 = last;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QAbstractItemModel_connect_modelAboutToBeReset(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::modelAboutToBeReset, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QAbstractItemModel_connect_modelReset(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::modelReset, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QAbstractItemModel_connect_rowsAboutToBeMoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int, QModelIndex*, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::rowsAboutToBeMoved, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& sourceParent, int sourceStart, int sourceEnd, const QModelIndex& destinationParent, int destinationRow, auto) {
+			const QModelIndex& sourceParent_ret = sourceParent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceParent_ret);
+			int sigval2 = sourceStart;
+			int sigval3 = sourceEnd;
+			const QModelIndex& destinationParent_ret = destinationParent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval4 = const_cast<QModelIndex*>(&destinationParent_ret);
+			int sigval5 = destinationRow;
+			callback(release.slot, sigval1, sigval2, sigval3, sigval4, sigval5);
+	});
+}
+
+void QAbstractItemModel_connect_rowsMoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int, QModelIndex*, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::rowsMoved, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int start, int end, const QModelIndex& destination, int row, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = start;
+			int sigval3 = end;
+			const QModelIndex& destination_ret = destination;
+			// Cast returned reference into pointer
+			QModelIndex* sigval4 = const_cast<QModelIndex*>(&destination_ret);
+			int sigval5 = row;
+			callback(release.slot, sigval1, sigval2, sigval3, sigval4, sigval5);
+	});
+}
+
+void QAbstractItemModel_connect_columnsAboutToBeMoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int, QModelIndex*, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::columnsAboutToBeMoved, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& sourceParent, int sourceStart, int sourceEnd, const QModelIndex& destinationParent, int destinationColumn, auto) {
+			const QModelIndex& sourceParent_ret = sourceParent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceParent_ret);
+			int sigval2 = sourceStart;
+			int sigval3 = sourceEnd;
+			const QModelIndex& destinationParent_ret = destinationParent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval4 = const_cast<QModelIndex*>(&destinationParent_ret);
+			int sigval5 = destinationColumn;
+			callback(release.slot, sigval1, sigval2, sigval3, sigval4, sigval5);
+	});
+}
+
+void QAbstractItemModel_connect_columnsMoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int, QModelIndex*, int), void (*release)(intptr_t)) {
+	QAbstractItemModel::connect(self, &QAbstractItemModel::columnsMoved, self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& parent, int start, int end, const QModelIndex& destination, int column, auto) {
+			const QModelIndex& parent_ret = parent;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
+			int sigval2 = start;
+			int sigval3 = end;
+			const QModelIndex& destination_ret = destination;
+			// Cast returned reference into pointer
+			QModelIndex* sigval4 = const_cast<QModelIndex*>(&destination_ret);
+			int sigval5 = column;
+			callback(release.slot, sigval1, sigval2, sigval3, sigval4, sigval5);
+	});
 }
 
 const QMetaObject* QAbstractItemModel_staticMetaObject() { return &QAbstractItemModel::staticMetaObject; }

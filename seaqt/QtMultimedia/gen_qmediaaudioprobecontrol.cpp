@@ -63,17 +63,12 @@ void QMediaAudioProbeControl_audioBufferProbed(QMediaAudioProbeControl* self, QA
 }
 
 void QMediaAudioProbeControl_connect_audioBufferProbed(QMediaAudioProbeControl* self, intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAudioBuffer*);
-		void operator()(const QAudioBuffer& buffer) {
+	QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)(const QAudioBuffer&)>(&QMediaAudioProbeControl::audioBufferProbed), self, [callback, release = seaqt::release_callback{slot,release}](const QAudioBuffer& buffer) {
 			const QAudioBuffer& buffer_ret = buffer;
 			// Cast returned reference into pointer
 			QAudioBuffer* sigval1 = const_cast<QAudioBuffer*>(&buffer_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)(const QAudioBuffer&)>(&QMediaAudioProbeControl::audioBufferProbed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaAudioProbeControl_flush(QMediaAudioProbeControl* self) {
@@ -81,14 +76,9 @@ void QMediaAudioProbeControl_flush(QMediaAudioProbeControl* self) {
 }
 
 void QMediaAudioProbeControl_connect_flush(QMediaAudioProbeControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)()>(&QMediaAudioProbeControl::flush), self, local_caller{slot, callback, release});
+	QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)()>(&QMediaAudioProbeControl::flush), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QMediaAudioProbeControl_tr_s_c(const char* s, const char* c) {

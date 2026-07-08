@@ -44,7 +44,6 @@ struct seaqt_string QCameraFeedbackControl_tr_s_c_n(const char* s, const char* c
 struct seaqt_string QCameraFeedbackControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraFeedbackControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCameraFeedbackControl_staticMetaObject();
 void QCameraFeedbackControl_delete(QCameraFeedbackControl* self);
 
 #ifdef __cplusplus

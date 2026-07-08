@@ -189,16 +189,11 @@ void QScroller_stateChanged(QScroller* self, int newstate) {
 }
 
 void QScroller_connect_stateChanged(QScroller* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QScroller::State newstate) {
+	QScroller::connect(self, static_cast<void (QScroller::*)(QScroller::State)>(&QScroller::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QScroller::State newstate) {
 			QScroller::State newstate_ret = newstate;
 			int sigval1 = static_cast<int>(newstate_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScroller::connect(self, static_cast<void (QScroller::*)(QScroller::State)>(&QScroller::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QScroller_scrollerPropertiesChanged(QScroller* self, QScrollerProperties* param1) {
@@ -206,17 +201,12 @@ void QScroller_scrollerPropertiesChanged(QScroller* self, QScrollerProperties* p
 }
 
 void QScroller_connect_scrollerPropertiesChanged(QScroller* self, intptr_t slot, void (*callback)(intptr_t, QScrollerProperties*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScrollerProperties*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QScrollerProperties*);
-		void operator()(const QScrollerProperties& param1) {
+	QScroller::connect(self, static_cast<void (QScroller::*)(const QScrollerProperties&)>(&QScroller::scrollerPropertiesChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QScrollerProperties& param1) {
 			const QScrollerProperties& param1_ret = param1;
 			// Cast returned reference into pointer
 			QScrollerProperties* sigval1 = const_cast<QScrollerProperties*>(&param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScroller::connect(self, static_cast<void (QScroller::*)(const QScrollerProperties&)>(&QScroller::scrollerPropertiesChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QScroller_tr_s_c(const char* s, const char* c) {

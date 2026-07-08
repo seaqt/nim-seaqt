@@ -123,7 +123,6 @@ int QNetworkSession_protectedbase_senderSignalIndex(const VirtualQNetworkSession
 int QNetworkSession_protectedbase_receivers(const VirtualQNetworkSession* self, const char* signal);
 bool QNetworkSession_protectedbase_isSignalConnected(const VirtualQNetworkSession* self, QMetaMethod* signal);
 
-const QMetaObject* QNetworkSession_staticMetaObject();
 void QNetworkSession_delete(QNetworkSession* self);
 
 #ifdef __cplusplus

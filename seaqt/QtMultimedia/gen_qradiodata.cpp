@@ -329,10 +329,7 @@ void QRadioData_stationIdChanged(QRadioData* self, struct seaqt_string stationId
 }
 
 void QRadioData_connect_stationIdChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(QString stationId) {
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::stationIdChanged), self, [callback, release = seaqt::release_callback{slot,release}](QString stationId) {
 			QString stationId_ret = stationId;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray stationId_b = stationId_ret.toUtf8();
@@ -341,10 +338,8 @@ void QRadioData_connect_stationIdChanged(QRadioData* self, intptr_t slot, void (
 			stationId_ms.data = static_cast<char*>(malloc(stationId_ms.len));
 			memcpy(stationId_ms.data, stationId_b.data(), stationId_ms.len);
 			struct seaqt_string sigval1 = stationId_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::stationIdChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioData_programTypeChanged(QRadioData* self, int programType) {
@@ -352,16 +347,11 @@ void QRadioData_programTypeChanged(QRadioData* self, int programType) {
 }
 
 void QRadioData_connect_programTypeChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QRadioData::ProgramType programType) {
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QRadioData::ProgramType)>(&QRadioData::programTypeChanged), self, [callback, release = seaqt::release_callback{slot,release}](QRadioData::ProgramType programType) {
 			QRadioData::ProgramType programType_ret = programType;
 			int sigval1 = static_cast<int>(programType_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QRadioData::connect(self, static_cast<void (QRadioData::*)(QRadioData::ProgramType)>(&QRadioData::programTypeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioData_programTypeNameChanged(QRadioData* self, struct seaqt_string programTypeName) {
@@ -370,10 +360,7 @@ void QRadioData_programTypeNameChanged(QRadioData* self, struct seaqt_string pro
 }
 
 void QRadioData_connect_programTypeNameChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(QString programTypeName) {
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::programTypeNameChanged), self, [callback, release = seaqt::release_callback{slot,release}](QString programTypeName) {
 			QString programTypeName_ret = programTypeName;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray programTypeName_b = programTypeName_ret.toUtf8();
@@ -382,10 +369,8 @@ void QRadioData_connect_programTypeNameChanged(QRadioData* self, intptr_t slot, 
 			programTypeName_ms.data = static_cast<char*>(malloc(programTypeName_ms.len));
 			memcpy(programTypeName_ms.data, programTypeName_b.data(), programTypeName_ms.len);
 			struct seaqt_string sigval1 = programTypeName_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::programTypeNameChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioData_stationNameChanged(QRadioData* self, struct seaqt_string stationName) {
@@ -394,10 +379,7 @@ void QRadioData_stationNameChanged(QRadioData* self, struct seaqt_string station
 }
 
 void QRadioData_connect_stationNameChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(QString stationName) {
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::stationNameChanged), self, [callback, release = seaqt::release_callback{slot,release}](QString stationName) {
 			QString stationName_ret = stationName;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray stationName_b = stationName_ret.toUtf8();
@@ -406,10 +388,8 @@ void QRadioData_connect_stationNameChanged(QRadioData* self, intptr_t slot, void
 			stationName_ms.data = static_cast<char*>(malloc(stationName_ms.len));
 			memcpy(stationName_ms.data, stationName_b.data(), stationName_ms.len);
 			struct seaqt_string sigval1 = stationName_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::stationNameChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioData_radioTextChanged(QRadioData* self, struct seaqt_string radioText) {
@@ -418,10 +398,7 @@ void QRadioData_radioTextChanged(QRadioData* self, struct seaqt_string radioText
 }
 
 void QRadioData_connect_radioTextChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(QString radioText) {
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::radioTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](QString radioText) {
 			QString radioText_ret = radioText;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray radioText_b = radioText_ret.toUtf8();
@@ -430,10 +407,8 @@ void QRadioData_connect_radioTextChanged(QRadioData* self, intptr_t slot, void (
 			radioText_ms.data = static_cast<char*>(malloc(radioText_ms.len));
 			memcpy(radioText_ms.data, radioText_b.data(), radioText_ms.len);
 			struct seaqt_string sigval1 = radioText_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::radioTextChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioData_alternativeFrequenciesEnabledChanged(QRadioData* self, bool enabled) {
@@ -441,15 +416,10 @@ void QRadioData_alternativeFrequenciesEnabledChanged(QRadioData* self, bool enab
 }
 
 void QRadioData_connect_alternativeFrequenciesEnabledChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool enabled) {
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(bool)>(&QRadioData::alternativeFrequenciesEnabledChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool enabled) {
 			bool sigval1 = enabled;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioData::connect(self, static_cast<void (QRadioData::*)(bool)>(&QRadioData::alternativeFrequenciesEnabledChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioData_error_error(QRadioData* self, int error) {
@@ -457,16 +427,11 @@ void QRadioData_error_error(QRadioData* self, int error) {
 }
 
 void QRadioData_connect_error_error(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QRadioData::Error error) {
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QRadioData::Error)>(&QRadioData::error), self, [callback, release = seaqt::release_callback{slot,release}](QRadioData::Error error) {
 			QRadioData::Error error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QRadioData::connect(self, static_cast<void (QRadioData::*)(QRadioData::Error)>(&QRadioData::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QRadioData_tr_s_c(const char* s, const char* c) {

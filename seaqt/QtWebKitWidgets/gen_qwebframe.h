@@ -173,7 +173,6 @@ void QWebFrame_addToJavaScriptWindowObject_name_object_ownership(QWebFrame* self
 void QWebFrame_render_QPainter_QRegion(QWebFrame* self, QPainter* param1, QRegion* clip);
 void QWebFrame_render_QPainter_QWebFrame_RenderLayers_QRegion(QWebFrame* self, QPainter* param1, int layer, QRegion* clip);
 
-const QMetaObject* QWebFrame_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

@@ -44,7 +44,6 @@ struct seaqt_string QCustomAudioRoleControl_tr_s_c_n(const char* s, const char* 
 struct seaqt_string QCustomAudioRoleControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCustomAudioRoleControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCustomAudioRoleControl_staticMetaObject();
 void QCustomAudioRoleControl_delete(QCustomAudioRoleControl* self);
 
 #ifdef __cplusplus

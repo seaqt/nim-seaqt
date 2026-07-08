@@ -109,7 +109,12 @@ int QState_protectedbase_senderSignalIndex(const VirtualQState* self);
 int QState_protectedbase_receivers(const VirtualQState* self, const char* signal);
 bool QState_protectedbase_isSignalConnected(const VirtualQState* self, QMetaMethod* signal);
 
-const QMetaObject* QState_staticMetaObject();
+void QState_connect_finished(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QState_connect_propertiesAssigned(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QState_connect_childModeChanged(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QState_connect_initialStateChanged(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QState_connect_errorStateChanged(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QState_delete(QState* self);
 
 #ifdef __cplusplus

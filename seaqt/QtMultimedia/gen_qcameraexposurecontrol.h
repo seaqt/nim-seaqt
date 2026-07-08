@@ -52,7 +52,6 @@ struct seaqt_string QCameraExposureControl_tr_s_c_n(const char* s, const char* c
 struct seaqt_string QCameraExposureControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraExposureControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCameraExposureControl_staticMetaObject();
 void QCameraExposureControl_delete(QCameraExposureControl* self);
 
 #ifdef __cplusplus

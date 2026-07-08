@@ -84,17 +84,12 @@ void QWebEngineCookieStore_cookieAdded(QWebEngineCookieStore* self, QNetworkCook
 }
 
 void QWebEngineCookieStore_connect_cookieAdded(QWebEngineCookieStore* self, intptr_t slot, void (*callback)(intptr_t, QNetworkCookie*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkCookie*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QNetworkCookie*);
-		void operator()(const QNetworkCookie& cookie) {
+	QWebEngineCookieStore::connect(self, static_cast<void (QWebEngineCookieStore::*)(const QNetworkCookie&)>(&QWebEngineCookieStore::cookieAdded), self, [callback, release = seaqt::release_callback{slot,release}](const QNetworkCookie& cookie) {
 			const QNetworkCookie& cookie_ret = cookie;
 			// Cast returned reference into pointer
 			QNetworkCookie* sigval1 = const_cast<QNetworkCookie*>(&cookie_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWebEngineCookieStore::connect(self, static_cast<void (QWebEngineCookieStore::*)(const QNetworkCookie&)>(&QWebEngineCookieStore::cookieAdded), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWebEngineCookieStore_cookieRemoved(QWebEngineCookieStore* self, QNetworkCookie* cookie) {
@@ -102,17 +97,12 @@ void QWebEngineCookieStore_cookieRemoved(QWebEngineCookieStore* self, QNetworkCo
 }
 
 void QWebEngineCookieStore_connect_cookieRemoved(QWebEngineCookieStore* self, intptr_t slot, void (*callback)(intptr_t, QNetworkCookie*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkCookie*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QNetworkCookie*);
-		void operator()(const QNetworkCookie& cookie) {
+	QWebEngineCookieStore::connect(self, static_cast<void (QWebEngineCookieStore::*)(const QNetworkCookie&)>(&QWebEngineCookieStore::cookieRemoved), self, [callback, release = seaqt::release_callback{slot,release}](const QNetworkCookie& cookie) {
 			const QNetworkCookie& cookie_ret = cookie;
 			// Cast returned reference into pointer
 			QNetworkCookie* sigval1 = const_cast<QNetworkCookie*>(&cookie_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWebEngineCookieStore::connect(self, static_cast<void (QWebEngineCookieStore::*)(const QNetworkCookie&)>(&QWebEngineCookieStore::cookieRemoved), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QWebEngineCookieStore_tr_s_c(const char* s, const char* c) {

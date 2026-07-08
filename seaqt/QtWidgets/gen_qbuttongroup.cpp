@@ -271,15 +271,10 @@ void QButtonGroup_buttonClicked_QAbstractButton(QButtonGroup* self, QAbstractBut
 }
 
 void QButtonGroup_connect_buttonClicked_QAbstractButton(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAbstractButton*);
-		void operator()(QAbstractButton* param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonClicked), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractButton* param1) {
 			QAbstractButton* sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_buttonPressed_QAbstractButton(QButtonGroup* self, QAbstractButton* param1) {
@@ -287,15 +282,10 @@ void QButtonGroup_buttonPressed_QAbstractButton(QButtonGroup* self, QAbstractBut
 }
 
 void QButtonGroup_connect_buttonPressed_QAbstractButton(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAbstractButton*);
-		void operator()(QAbstractButton* param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonPressed), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractButton* param1) {
 			QAbstractButton* sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonPressed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_buttonReleased_QAbstractButton(QButtonGroup* self, QAbstractButton* param1) {
@@ -303,15 +293,10 @@ void QButtonGroup_buttonReleased_QAbstractButton(QButtonGroup* self, QAbstractBu
 }
 
 void QButtonGroup_connect_buttonReleased_QAbstractButton(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAbstractButton*);
-		void operator()(QAbstractButton* param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonReleased), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractButton* param1) {
 			QAbstractButton* sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*)>(&QButtonGroup::buttonReleased), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_buttonToggled_QAbstractButton_bool(QButtonGroup* self, QAbstractButton* param1, bool param2) {
@@ -319,16 +304,11 @@ void QButtonGroup_buttonToggled_QAbstractButton_bool(QButtonGroup* self, QAbstra
 }
 
 void QButtonGroup_connect_buttonToggled_QAbstractButton_bool(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAbstractButton*, bool);
-		void operator()(QAbstractButton* param1, bool param2) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*, bool)>(&QButtonGroup::buttonToggled), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractButton* param1, bool param2) {
 			QAbstractButton* sigval1 = param1;
 			bool sigval2 = param2;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(QAbstractButton*, bool)>(&QButtonGroup::buttonToggled), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QButtonGroup_idClicked(QButtonGroup* self, int param1) {
@@ -336,15 +316,10 @@ void QButtonGroup_idClicked(QButtonGroup* self, int param1) {
 }
 
 void QButtonGroup_connect_idClicked(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idClicked), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_idPressed(QButtonGroup* self, int param1) {
@@ -352,15 +327,10 @@ void QButtonGroup_idPressed(QButtonGroup* self, int param1) {
 }
 
 void QButtonGroup_connect_idPressed(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idPressed), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idPressed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_idReleased(QButtonGroup* self, int param1) {
@@ -368,15 +338,10 @@ void QButtonGroup_idReleased(QButtonGroup* self, int param1) {
 }
 
 void QButtonGroup_connect_idReleased(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idReleased), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idReleased), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_idToggled(QButtonGroup* self, int param1, bool param2) {
@@ -384,16 +349,11 @@ void QButtonGroup_idToggled(QButtonGroup* self, int param1, bool param2) {
 }
 
 void QButtonGroup_connect_idToggled(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, bool);
-		void operator()(int param1, bool param2) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int, bool)>(&QButtonGroup::idToggled), self, [callback, release = seaqt::release_callback{slot,release}](int param1, bool param2) {
 			int sigval1 = param1;
 			bool sigval2 = param2;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int, bool)>(&QButtonGroup::idToggled), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QButtonGroup_buttonClicked_int(QButtonGroup* self, int param1) {
@@ -401,15 +361,10 @@ void QButtonGroup_buttonClicked_int(QButtonGroup* self, int param1) {
 }
 
 void QButtonGroup_connect_buttonClicked_int(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_buttonPressed_int(QButtonGroup* self, int param1) {
@@ -417,15 +372,10 @@ void QButtonGroup_buttonPressed_int(QButtonGroup* self, int param1) {
 }
 
 void QButtonGroup_connect_buttonPressed_int(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonPressed), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonPressed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_buttonReleased_int(QButtonGroup* self, int param1) {
@@ -433,15 +383,10 @@ void QButtonGroup_buttonReleased_int(QButtonGroup* self, int param1) {
 }
 
 void QButtonGroup_connect_buttonReleased_int(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonReleased), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::buttonReleased), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QButtonGroup_buttonToggled_int_bool(QButtonGroup* self, int param1, bool param2) {
@@ -449,16 +394,11 @@ void QButtonGroup_buttonToggled_int_bool(QButtonGroup* self, int param1, bool pa
 }
 
 void QButtonGroup_connect_buttonToggled_int_bool(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, bool);
-		void operator()(int param1, bool param2) {
+	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int, bool)>(&QButtonGroup::buttonToggled), self, [callback, release = seaqt::release_callback{slot,release}](int param1, bool param2) {
 			int sigval1 = param1;
 			bool sigval2 = param2;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QButtonGroup::connect(self, static_cast<void (QButtonGroup::*)(int, bool)>(&QButtonGroup::buttonToggled), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QButtonGroup_tr_s_c(const char* s, const char* c) {

@@ -235,17 +235,12 @@ void QVideoProbe_videoFrameProbed(QVideoProbe* self, QVideoFrame* frame) {
 }
 
 void QVideoProbe_connect_videoFrameProbed(QVideoProbe* self, intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QVideoFrame*);
-		void operator()(const QVideoFrame& frame) {
+	QVideoProbe::connect(self, static_cast<void (QVideoProbe::*)(const QVideoFrame&)>(&QVideoProbe::videoFrameProbed), self, [callback, release = seaqt::release_callback{slot,release}](const QVideoFrame& frame) {
 			const QVideoFrame& frame_ret = frame;
 			// Cast returned reference into pointer
 			QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QVideoProbe::connect(self, static_cast<void (QVideoProbe::*)(const QVideoFrame&)>(&QVideoProbe::videoFrameProbed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QVideoProbe_flush(QVideoProbe* self) {
@@ -253,14 +248,9 @@ void QVideoProbe_flush(QVideoProbe* self) {
 }
 
 void QVideoProbe_connect_flush(QVideoProbe* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QVideoProbe::connect(self, static_cast<void (QVideoProbe::*)()>(&QVideoProbe::flush), self, local_caller{slot, callback, release});
+	QVideoProbe::connect(self, static_cast<void (QVideoProbe::*)()>(&QVideoProbe::flush), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QVideoProbe_tr_s_c(const char* s, const char* c) {

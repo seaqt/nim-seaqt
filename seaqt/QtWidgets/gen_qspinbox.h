@@ -269,7 +269,6 @@ int QSpinBox_protectedbase_senderSignalIndex(const VirtualQSpinBox* self);
 int QSpinBox_protectedbase_receivers(const VirtualQSpinBox* self, const char* signal);
 bool QSpinBox_protectedbase_isSignalConnected(const VirtualQSpinBox* self, QMetaMethod* signal);
 
-const QMetaObject* QSpinBox_staticMetaObject();
 void QSpinBox_delete(QSpinBox* self);
 
 typedef struct VirtualQDoubleSpinBox VirtualQDoubleSpinBox;
@@ -450,7 +449,6 @@ int QDoubleSpinBox_protectedbase_senderSignalIndex(const VirtualQDoubleSpinBox* 
 int QDoubleSpinBox_protectedbase_receivers(const VirtualQDoubleSpinBox* self, const char* signal);
 bool QDoubleSpinBox_protectedbase_isSignalConnected(const VirtualQDoubleSpinBox* self, QMetaMethod* signal);
 
-const QMetaObject* QDoubleSpinBox_staticMetaObject();
 void QDoubleSpinBox_delete(QDoubleSpinBox* self);
 
 #ifdef __cplusplus

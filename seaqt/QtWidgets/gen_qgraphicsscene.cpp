@@ -919,10 +919,7 @@ void QGraphicsScene_changed(QGraphicsScene* self, struct seaqt_array /* of QRect
 }
 
 void QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QRectF* */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QRectF* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QRectF* */ );
-		void operator()(const QList<QRectF>& region) {
+	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QList<QRectF>&)>(&QGraphicsScene::changed), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QRectF>& region) {
 			const QList<QRectF>& region_ret = region;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QRectF** region_arr = static_cast<QRectF**>(malloc(sizeof(QRectF*) * region_ret.length()));
@@ -933,10 +930,8 @@ void QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot, void (*
 			region_out.len = region_ret.length();
 			region_out.data = static_cast<void*>(region_arr);
 			struct seaqt_array /* of QRectF* */  sigval1 = region_out;
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QList<QRectF>&)>(&QGraphicsScene::changed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGraphicsScene_sceneRectChanged(QGraphicsScene* self, QRectF* rect) {
@@ -944,17 +939,12 @@ void QGraphicsScene_sceneRectChanged(QGraphicsScene* self, QRectF* rect) {
 }
 
 void QGraphicsScene_connect_sceneRectChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRectF*);
-		void operator()(const QRectF& rect) {
+	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QRectF&)>(&QGraphicsScene::sceneRectChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QRectF& rect) {
 			const QRectF& rect_ret = rect;
 			// Cast returned reference into pointer
 			QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QRectF&)>(&QGraphicsScene::sceneRectChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGraphicsScene_selectionChanged(QGraphicsScene* self) {
@@ -962,14 +952,9 @@ void QGraphicsScene_selectionChanged(QGraphicsScene* self) {
 }
 
 void QGraphicsScene_connect_selectionChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)()>(&QGraphicsScene::selectionChanged), self, local_caller{slot, callback, release});
+	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)()>(&QGraphicsScene::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QGraphicsScene_focusItemChanged(QGraphicsScene* self, QGraphicsItem* newFocus, QGraphicsItem* oldFocus, int reason) {
@@ -977,18 +962,13 @@ void QGraphicsScene_focusItemChanged(QGraphicsScene* self, QGraphicsItem* newFoc
 }
 
 void QGraphicsScene_connect_focusItemChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, QGraphicsItem*, QGraphicsItem*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QGraphicsItem*, QGraphicsItem*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QGraphicsItem*, QGraphicsItem*, int);
-		void operator()(QGraphicsItem* newFocus, QGraphicsItem* oldFocus, Qt::FocusReason reason) {
+	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(QGraphicsItem*, QGraphicsItem*, Qt::FocusReason)>(&QGraphicsScene::focusItemChanged), self, [callback, release = seaqt::release_callback{slot,release}](QGraphicsItem* newFocus, QGraphicsItem* oldFocus, Qt::FocusReason reason) {
 			QGraphicsItem* sigval1 = newFocus;
 			QGraphicsItem* sigval2 = oldFocus;
 			Qt::FocusReason reason_ret = reason;
 			int sigval3 = static_cast<int>(reason_ret);
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(QGraphicsItem*, QGraphicsItem*, Qt::FocusReason)>(&QGraphicsScene::focusItemChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 struct seaqt_string QGraphicsScene_tr_s_c(const char* s, const char* c) {

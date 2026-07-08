@@ -298,15 +298,10 @@ void QGraphicsEffect_enabledChanged(QGraphicsEffect* self, bool enabled) {
 }
 
 void QGraphicsEffect_connect_enabledChanged(QGraphicsEffect* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool enabled) {
+	QGraphicsEffect::connect(self, static_cast<void (QGraphicsEffect::*)(bool)>(&QGraphicsEffect::enabledChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool enabled) {
 			bool sigval1 = enabled;
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsEffect::connect(self, static_cast<void (QGraphicsEffect::*)(bool)>(&QGraphicsEffect::enabledChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QGraphicsEffect_tr_s_c(const char* s, const char* c) {
@@ -735,17 +730,12 @@ void QGraphicsColorizeEffect_colorChanged(QGraphicsColorizeEffect* self, QColor*
 }
 
 void QGraphicsColorizeEffect_connect_colorChanged(QGraphicsColorizeEffect* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QColor*);
-		void operator()(const QColor& color) {
+	QGraphicsColorizeEffect::connect(self, static_cast<void (QGraphicsColorizeEffect::*)(const QColor&)>(&QGraphicsColorizeEffect::colorChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QColor& color) {
 			const QColor& color_ret = color;
 			// Cast returned reference into pointer
 			QColor* sigval1 = const_cast<QColor*>(&color_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsColorizeEffect::connect(self, static_cast<void (QGraphicsColorizeEffect::*)(const QColor&)>(&QGraphicsColorizeEffect::colorChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGraphicsColorizeEffect_strengthChanged(QGraphicsColorizeEffect* self, double strength) {
@@ -753,16 +743,11 @@ void QGraphicsColorizeEffect_strengthChanged(QGraphicsColorizeEffect* self, doub
 }
 
 void QGraphicsColorizeEffect_connect_strengthChanged(QGraphicsColorizeEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal strength) {
+	QGraphicsColorizeEffect::connect(self, static_cast<void (QGraphicsColorizeEffect::*)(qreal)>(&QGraphicsColorizeEffect::strengthChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal strength) {
 			qreal strength_ret = strength;
 			double sigval1 = static_cast<double>(strength_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsColorizeEffect::connect(self, static_cast<void (QGraphicsColorizeEffect::*)(qreal)>(&QGraphicsColorizeEffect::strengthChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QGraphicsColorizeEffect_tr_s_c(const char* s, const char* c) {
@@ -1185,16 +1170,11 @@ void QGraphicsBlurEffect_blurRadiusChanged(QGraphicsBlurEffect* self, double blu
 }
 
 void QGraphicsBlurEffect_connect_blurRadiusChanged(QGraphicsBlurEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal blurRadius) {
+	QGraphicsBlurEffect::connect(self, static_cast<void (QGraphicsBlurEffect::*)(qreal)>(&QGraphicsBlurEffect::blurRadiusChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal blurRadius) {
 			qreal blurRadius_ret = blurRadius;
 			double sigval1 = static_cast<double>(blurRadius_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsBlurEffect::connect(self, static_cast<void (QGraphicsBlurEffect::*)(qreal)>(&QGraphicsBlurEffect::blurRadiusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGraphicsBlurEffect_blurHintsChanged(QGraphicsBlurEffect* self, int hints) {
@@ -1202,16 +1182,11 @@ void QGraphicsBlurEffect_blurHintsChanged(QGraphicsBlurEffect* self, int hints) 
 }
 
 void QGraphicsBlurEffect_connect_blurHintsChanged(QGraphicsBlurEffect* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QGraphicsBlurEffect::BlurHints hints) {
+	QGraphicsBlurEffect::connect(self, static_cast<void (QGraphicsBlurEffect::*)(QGraphicsBlurEffect::BlurHints)>(&QGraphicsBlurEffect::blurHintsChanged), self, [callback, release = seaqt::release_callback{slot,release}](QGraphicsBlurEffect::BlurHints hints) {
 			QGraphicsBlurEffect::BlurHints hints_ret = hints;
 			int sigval1 = static_cast<int>(hints_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsBlurEffect::connect(self, static_cast<void (QGraphicsBlurEffect::*)(QGraphicsBlurEffect::BlurHints)>(&QGraphicsBlurEffect::blurHintsChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QGraphicsBlurEffect_tr_s_c(const char* s, const char* c) {
@@ -1667,17 +1642,12 @@ void QGraphicsDropShadowEffect_offsetChanged(QGraphicsDropShadowEffect* self, QP
 }
 
 void QGraphicsDropShadowEffect_connect_offsetChanged(QGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPointF*);
-		void operator()(const QPointF& offset) {
+	QGraphicsDropShadowEffect::connect(self, static_cast<void (QGraphicsDropShadowEffect::*)(const QPointF&)>(&QGraphicsDropShadowEffect::offsetChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QPointF& offset) {
 			const QPointF& offset_ret = offset;
 			// Cast returned reference into pointer
 			QPointF* sigval1 = const_cast<QPointF*>(&offset_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsDropShadowEffect::connect(self, static_cast<void (QGraphicsDropShadowEffect::*)(const QPointF&)>(&QGraphicsDropShadowEffect::offsetChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGraphicsDropShadowEffect_blurRadiusChanged(QGraphicsDropShadowEffect* self, double blurRadius) {
@@ -1685,16 +1655,11 @@ void QGraphicsDropShadowEffect_blurRadiusChanged(QGraphicsDropShadowEffect* self
 }
 
 void QGraphicsDropShadowEffect_connect_blurRadiusChanged(QGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal blurRadius) {
+	QGraphicsDropShadowEffect::connect(self, static_cast<void (QGraphicsDropShadowEffect::*)(qreal)>(&QGraphicsDropShadowEffect::blurRadiusChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal blurRadius) {
 			qreal blurRadius_ret = blurRadius;
 			double sigval1 = static_cast<double>(blurRadius_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsDropShadowEffect::connect(self, static_cast<void (QGraphicsDropShadowEffect::*)(qreal)>(&QGraphicsDropShadowEffect::blurRadiusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGraphicsDropShadowEffect_colorChanged(QGraphicsDropShadowEffect* self, QColor* color) {
@@ -1702,17 +1667,12 @@ void QGraphicsDropShadowEffect_colorChanged(QGraphicsDropShadowEffect* self, QCo
 }
 
 void QGraphicsDropShadowEffect_connect_colorChanged(QGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QColor*);
-		void operator()(const QColor& color) {
+	QGraphicsDropShadowEffect::connect(self, static_cast<void (QGraphicsDropShadowEffect::*)(const QColor&)>(&QGraphicsDropShadowEffect::colorChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QColor& color) {
 			const QColor& color_ret = color;
 			// Cast returned reference into pointer
 			QColor* sigval1 = const_cast<QColor*>(&color_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsDropShadowEffect::connect(self, static_cast<void (QGraphicsDropShadowEffect::*)(const QColor&)>(&QGraphicsDropShadowEffect::colorChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QGraphicsDropShadowEffect_tr_s_c(const char* s, const char* c) {
@@ -2130,16 +2090,11 @@ void QGraphicsOpacityEffect_opacityChanged(QGraphicsOpacityEffect* self, double 
 }
 
 void QGraphicsOpacityEffect_connect_opacityChanged(QGraphicsOpacityEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal opacity) {
+	QGraphicsOpacityEffect::connect(self, static_cast<void (QGraphicsOpacityEffect::*)(qreal)>(&QGraphicsOpacityEffect::opacityChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal opacity) {
 			qreal opacity_ret = opacity;
 			double sigval1 = static_cast<double>(opacity_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsOpacityEffect::connect(self, static_cast<void (QGraphicsOpacityEffect::*)(qreal)>(&QGraphicsOpacityEffect::opacityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QGraphicsOpacityEffect_opacityMaskChanged(QGraphicsOpacityEffect* self, QBrush* mask) {
@@ -2147,17 +2102,12 @@ void QGraphicsOpacityEffect_opacityMaskChanged(QGraphicsOpacityEffect* self, QBr
 }
 
 void QGraphicsOpacityEffect_connect_opacityMaskChanged(QGraphicsOpacityEffect* self, intptr_t slot, void (*callback)(intptr_t, QBrush*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QBrush*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QBrush*);
-		void operator()(const QBrush& mask) {
+	QGraphicsOpacityEffect::connect(self, static_cast<void (QGraphicsOpacityEffect::*)(const QBrush&)>(&QGraphicsOpacityEffect::opacityMaskChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QBrush& mask) {
 			const QBrush& mask_ret = mask;
 			// Cast returned reference into pointer
 			QBrush* sigval1 = const_cast<QBrush*>(&mask_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QGraphicsOpacityEffect::connect(self, static_cast<void (QGraphicsOpacityEffect::*)(const QBrush&)>(&QGraphicsOpacityEffect::opacityMaskChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QGraphicsOpacityEffect_tr_s_c(const char* s, const char* c) {

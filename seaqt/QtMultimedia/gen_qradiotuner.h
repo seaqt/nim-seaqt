@@ -149,7 +149,6 @@ int QRadioTuner_protectedbase_senderSignalIndex(const VirtualQRadioTuner* self);
 int QRadioTuner_protectedbase_receivers(const VirtualQRadioTuner* self, const char* signal);
 bool QRadioTuner_protectedbase_isSignalConnected(const VirtualQRadioTuner* self, QMetaMethod* signal);
 
-const QMetaObject* QRadioTuner_staticMetaObject();
 void QRadioTuner_delete(QRadioTuner* self);
 
 #ifdef __cplusplus
