@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlpropertyvaluesource
+export gen_qqmlpropertyvaluesource

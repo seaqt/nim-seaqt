@@ -1,0 +1,1833 @@
+import ./qtwidgets_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+{.compile("gen_qslider.cpp", QtWidgetsCFlags).}
+
+
+type QSliderTickPositionEnum* = distinct cint
+template NoTicks*(_: type QSliderTickPositionEnum): untyped = 0
+template TicksAbove*(_: type QSliderTickPositionEnum): untyped = 1
+template TicksLeft*(_: type QSliderTickPositionEnum): untyped = 1
+template TicksBelow*(_: type QSliderTickPositionEnum): untyped = 2
+template TicksRight*(_: type QSliderTickPositionEnum): untyped = 2
+template TicksBothSides*(_: type QSliderTickPositionEnum): untyped = 3
+
+
+import ./gen_qslider_types
+export gen_qslider_types
+
+import
+  ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
+  ../QtCore/gen_qobjectdefs_types,
+  ../QtCore/gen_qpoint_types,
+  ../QtCore/gen_qsize_types,
+  ../QtCore/gen_qvariant_types,
+  ../QtGui/gen_qevent_types,
+  ../QtGui/gen_qpaintdevice_types,
+  ../QtGui/gen_qpaintengine_types,
+  ../QtGui/gen_qpainter_types,
+  ./gen_qabstractslider,
+  ./gen_qstyleoption_types,
+  ./gen_qwidget_types
+export
+  gen_qcoreevent_types,
+  gen_qmetaobject_types,
+  gen_qobject_types,
+  gen_qobjectdefs_types,
+  gen_qpoint_types,
+  gen_qsize_types,
+  gen_qvariant_types,
+  gen_qevent_types,
+  gen_qpaintdevice_types,
+  gen_qpaintengine_types,
+  gen_qpainter_types,
+  gen_qabstractslider,
+  gen_qstyleoption_types,
+  gen_qwidget_types
+
+type cQSlider*{.exportc: "QSlider", incompleteStruct.} = object
+
+proc fcQSlider_metaObject(self: pointer): pointer {.importc: "QSlider_metaObject".}
+proc fcQSlider_metacast(self: pointer, param1: cstring): pointer {.importc: "QSlider_metacast".}
+proc fcQSlider_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSlider_metacall".}
+proc fcQSlider_tr(s: cstring): struct_seaqt_string {.importc: "QSlider_tr".}
+proc fcQSlider_trUtf8(s: cstring): struct_seaqt_string {.importc: "QSlider_trUtf8".}
+proc fcQSlider_sizeHint(self: pointer): pointer {.importc: "QSlider_sizeHint".}
+proc fcQSlider_minimumSizeHint(self: pointer): pointer {.importc: "QSlider_minimumSizeHint".}
+proc fcQSlider_setTickPosition(self: pointer, position: cint): void {.importc: "QSlider_setTickPosition".}
+proc fcQSlider_tickPosition(self: pointer): cint {.importc: "QSlider_tickPosition".}
+proc fcQSlider_setTickInterval(self: pointer, ti: cint): void {.importc: "QSlider_setTickInterval".}
+proc fcQSlider_tickInterval(self: pointer): cint {.importc: "QSlider_tickInterval".}
+proc fcQSlider_event(self: pointer, event: pointer): bool {.importc: "QSlider_event".}
+proc fcQSlider_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSlider_tr2".}
+proc fcQSlider_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSlider_tr3".}
+proc fcQSlider_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSlider_trUtf82".}
+proc fcQSlider_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSlider_trUtf83".}
+proc fcQSlider_vdata(self: pointer): ptr pointer {.importc: "QSlider_vdata".}
+proc fvdata_cQSlider(self: pointer): pointer {.importc: "vdata_QSlider".}
+
+type cQSliderVTable {.pure.} = object
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  sliderChange*: proc(self: pointer, change: cint): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSlider_virtualbase_metaObject(self: pointer): pointer {.importc: "QSlider_virtualbase_metaObject".}
+proc fcQSlider_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSlider_virtualbase_metacast".}
+proc fcQSlider_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSlider_virtualbase_metacall".}
+proc fcQSlider_virtualbase_sizeHint(self: pointer): pointer {.importc: "QSlider_virtualbase_sizeHint".}
+proc fcQSlider_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QSlider_virtualbase_minimumSizeHint".}
+proc fcQSlider_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QSlider_virtualbase_event".}
+proc fcQSlider_virtualbase_paintEvent(self: pointer, ev: pointer): void {.importc: "QSlider_virtualbase_paintEvent".}
+proc fcQSlider_virtualbase_mousePressEvent(self: pointer, ev: pointer): void {.importc: "QSlider_virtualbase_mousePressEvent".}
+proc fcQSlider_virtualbase_mouseReleaseEvent(self: pointer, ev: pointer): void {.importc: "QSlider_virtualbase_mouseReleaseEvent".}
+proc fcQSlider_virtualbase_mouseMoveEvent(self: pointer, ev: pointer): void {.importc: "QSlider_virtualbase_mouseMoveEvent".}
+proc fcQSlider_virtualbase_sliderChange(self: pointer, change: cint): void {.importc: "QSlider_virtualbase_sliderChange".}
+proc fcQSlider_virtualbase_keyPressEvent(self: pointer, ev: pointer): void {.importc: "QSlider_virtualbase_keyPressEvent".}
+proc fcQSlider_virtualbase_timerEvent(self: pointer, param1: pointer): void {.importc: "QSlider_virtualbase_timerEvent".}
+proc fcQSlider_virtualbase_wheelEvent(self: pointer, e: pointer): void {.importc: "QSlider_virtualbase_wheelEvent".}
+proc fcQSlider_virtualbase_changeEvent(self: pointer, e: pointer): void {.importc: "QSlider_virtualbase_changeEvent".}
+proc fcQSlider_virtualbase_devType(self: pointer): cint {.importc: "QSlider_virtualbase_devType".}
+proc fcQSlider_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QSlider_virtualbase_setVisible".}
+proc fcQSlider_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QSlider_virtualbase_heightForWidth".}
+proc fcQSlider_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QSlider_virtualbase_hasHeightForWidth".}
+proc fcQSlider_virtualbase_paintEngine(self: pointer): pointer {.importc: "QSlider_virtualbase_paintEngine".}
+proc fcQSlider_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_mouseDoubleClickEvent".}
+proc fcQSlider_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_keyReleaseEvent".}
+proc fcQSlider_virtualbase_focusInEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_focusInEvent".}
+proc fcQSlider_virtualbase_focusOutEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_focusOutEvent".}
+proc fcQSlider_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_enterEvent".}
+proc fcQSlider_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_leaveEvent".}
+proc fcQSlider_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_moveEvent".}
+proc fcQSlider_virtualbase_resizeEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_resizeEvent".}
+proc fcQSlider_virtualbase_closeEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_closeEvent".}
+proc fcQSlider_virtualbase_contextMenuEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_contextMenuEvent".}
+proc fcQSlider_virtualbase_tabletEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_tabletEvent".}
+proc fcQSlider_virtualbase_actionEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_actionEvent".}
+proc fcQSlider_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_dragEnterEvent".}
+proc fcQSlider_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_dragMoveEvent".}
+proc fcQSlider_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_dragLeaveEvent".}
+proc fcQSlider_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_dropEvent".}
+proc fcQSlider_virtualbase_showEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_showEvent".}
+proc fcQSlider_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_hideEvent".}
+proc fcQSlider_virtualbase_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QSlider_virtualbase_nativeEvent".}
+proc fcQSlider_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QSlider_virtualbase_metric".}
+proc fcQSlider_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QSlider_virtualbase_initPainter".}
+proc fcQSlider_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QSlider_virtualbase_redirected".}
+proc fcQSlider_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QSlider_virtualbase_sharedPainter".}
+proc fcQSlider_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QSlider_virtualbase_inputMethodEvent".}
+proc fcQSlider_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QSlider_virtualbase_inputMethodQuery".}
+proc fcQSlider_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QSlider_virtualbase_focusNextPrevChild".}
+proc fcQSlider_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QSlider_virtualbase_eventFilter".}
+proc fcQSlider_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_childEvent".}
+proc fcQSlider_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_customEvent".}
+proc fcQSlider_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSlider_virtualbase_connectNotify".}
+proc fcQSlider_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSlider_virtualbase_disconnectNotify".}
+proc fcQSlider_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QSlider_protectedbase_initStyleOption".}
+proc fcQSlider_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QSlider_protectedbase_setRepeatAction".}
+proc fcQSlider_protectedbase_repeatAction(self: pointer): cint {.importc: "QSlider_protectedbase_repeatAction".}
+proc fcQSlider_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QSlider_protectedbase_updateMicroFocus".}
+proc fcQSlider_protectedbase_create(self: pointer): void {.importc: "QSlider_protectedbase_create".}
+proc fcQSlider_protectedbase_destroy(self: pointer): void {.importc: "QSlider_protectedbase_destroy".}
+proc fcQSlider_protectedbase_focusNextChild(self: pointer): bool {.importc: "QSlider_protectedbase_focusNextChild".}
+proc fcQSlider_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QSlider_protectedbase_focusPreviousChild".}
+proc fcQSlider_protectedbase_sender(self: pointer): pointer {.importc: "QSlider_protectedbase_sender".}
+proc fcQSlider_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSlider_protectedbase_senderSignalIndex".}
+proc fcQSlider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSlider_protectedbase_receivers".}
+proc fcQSlider_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSlider_protectedbase_isSignalConnected".}
+proc fcQSlider_new(vtbl: pointer, vdata: csize_t): ptr cQSlider {.importc: "QSlider_new".}
+proc fcQSlider_new2(vtbl: pointer, vdata: csize_t, orientation: cint): ptr cQSlider {.importc: "QSlider_new2".}
+proc fcQSlider_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSlider {.importc: "QSlider_new3".}
+proc fcQSlider_new4(vtbl: pointer, vdata: csize_t, orientation: cint, parent: pointer): ptr cQSlider {.importc: "QSlider_new4".}
+proc fcQSlider_staticMetaObject(): pointer {.importc: "QSlider_staticMetaObject".}
+proc fcQSlider_delete(self: pointer) {.importc: "QSlider_delete".}
+
+proc metaObject*(self: gen_qslider_types.QSlider): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSlider_metaObject(self.h))
+
+proc metacast*(self: gen_qslider_types.QSlider, param1: cstring): pointer =
+  fcQSlider_metacast(self.h, param1)
+
+proc metacall*(self: gen_qslider_types.QSlider, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSlider_metacall(self.h, cint(param1), param2, param3)
+
+proc tr*(_: type gen_qslider_types.QSlider, s: cstring): string =
+  let v_ms = fcQSlider_tr(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qslider_types.QSlider, s: cstring): string =
+  let v_ms = fcQSlider_trUtf8(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc sizeHint*(self: gen_qslider_types.QSlider): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSlider_sizeHint(self.h))
+
+proc minimumSizeHint*(self: gen_qslider_types.QSlider): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSlider_minimumSizeHint(self.h))
+
+proc setTickPosition*(self: gen_qslider_types.QSlider, position: cint): void =
+  fcQSlider_setTickPosition(self.h, cint(position))
+
+proc tickPosition*(self: gen_qslider_types.QSlider): cint =
+  cint(fcQSlider_tickPosition(self.h))
+
+proc setTickInterval*(self: gen_qslider_types.QSlider, ti: cint): void =
+  fcQSlider_setTickInterval(self.h, ti)
+
+proc tickInterval*(self: gen_qslider_types.QSlider): cint =
+  fcQSlider_tickInterval(self.h)
+
+proc event*(self: gen_qslider_types.QSlider, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSlider_event(self.h, event.h)
+
+proc tr*(_: type gen_qslider_types.QSlider, s: cstring, c: cstring): string =
+  let v_ms = fcQSlider_tr2(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tr*(_: type gen_qslider_types.QSlider, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQSlider_tr3(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qslider_types.QSlider, s: cstring, c: cstring): string =
+  let v_ms = fcQSlider_trUtf82(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qslider_types.QSlider, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQSlider_trUtf83(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+type QSlidermetaObjectProc* = proc(self: QSlider): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QSlidermetacastProc* = proc(self: QSlider, param1: cstring): pointer {.raises: [], gcsafe.}
+type QSlidermetacallProc* = proc(self: QSlider, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QSlidersizeHintProc* = proc(self: QSlider): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QSliderminimumSizeHintProc* = proc(self: QSlider): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QSlidereventProc* = proc(self: QSlider, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSliderpaintEventProc* = proc(self: QSlider, ev: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
+type QSlidermousePressEventProc* = proc(self: QSlider, ev: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QSlidermouseReleaseEventProc* = proc(self: QSlider, ev: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QSlidermouseMoveEventProc* = proc(self: QSlider, ev: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QSlidersliderChangeProc* = proc(self: QSlider, change: cint): void {.raises: [], gcsafe.}
+type QSliderkeyPressEventProc* = proc(self: QSlider, ev: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QSlidertimerEventProc* = proc(self: QSlider, param1: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QSliderwheelEventProc* = proc(self: QSlider, e: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QSliderchangeEventProc* = proc(self: QSlider, e: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSliderdevTypeProc* = proc(self: QSlider): cint {.raises: [], gcsafe.}
+type QSlidersetVisibleProc* = proc(self: QSlider, visible: bool): void {.raises: [], gcsafe.}
+type QSliderheightForWidthProc* = proc(self: QSlider, param1: cint): cint {.raises: [], gcsafe.}
+type QSliderhasHeightForWidthProc* = proc(self: QSlider): bool {.raises: [], gcsafe.}
+type QSliderpaintEngineProc* = proc(self: QSlider): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QSlidermouseDoubleClickEventProc* = proc(self: QSlider, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QSliderkeyReleaseEventProc* = proc(self: QSlider, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QSliderfocusInEventProc* = proc(self: QSlider, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QSliderfocusOutEventProc* = proc(self: QSlider, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QSliderenterEventProc* = proc(self: QSlider, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSliderleaveEventProc* = proc(self: QSlider, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSlidermoveEventProc* = proc(self: QSlider, event: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QSliderresizeEventProc* = proc(self: QSlider, event: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QSlidercloseEventProc* = proc(self: QSlider, event: gen_qevent_types.QCloseEvent): void {.raises: [], gcsafe.}
+type QSlidercontextMenuEventProc* = proc(self: QSlider, event: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
+type QSlidertabletEventProc* = proc(self: QSlider, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QSlideractionEventProc* = proc(self: QSlider, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
+type QSliderdragEnterEventProc* = proc(self: QSlider, event: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QSliderdragMoveEventProc* = proc(self: QSlider, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QSliderdragLeaveEventProc* = proc(self: QSlider, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QSliderdropEventProc* = proc(self: QSlider, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QSlidershowEventProc* = proc(self: QSlider, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QSliderhideEventProc* = proc(self: QSlider, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QSlidernativeEventProc* = proc(self: QSlider, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QSlidermetricProc* = proc(self: QSlider, param1: cint): cint {.raises: [], gcsafe.}
+type QSliderinitPainterProc* = proc(self: QSlider, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QSliderredirectedProc* = proc(self: QSlider, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QSlidersharedPainterProc* = proc(self: QSlider): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QSliderinputMethodEventProc* = proc(self: QSlider, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QSliderinputMethodQueryProc* = proc(self: QSlider, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QSliderfocusNextPrevChildProc* = proc(self: QSlider, next: bool): bool {.raises: [], gcsafe.}
+type QSlidereventFilterProc* = proc(self: QSlider, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSliderchildEventProc* = proc(self: QSlider, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QSlidercustomEventProc* = proc(self: QSlider, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSliderconnectNotifyProc* = proc(self: QSlider, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSliderdisconnectNotifyProc* = proc(self: QSlider, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSliderVTable* = object
+  vtbl: cQSliderVTable
+  metaObject*: QSlidermetaObjectProc
+  metacast*: QSlidermetacastProc
+  metacall*: QSlidermetacallProc
+  sizeHint*: QSlidersizeHintProc
+  minimumSizeHint*: QSliderminimumSizeHintProc
+  event*: QSlidereventProc
+  paintEvent*: QSliderpaintEventProc
+  mousePressEvent*: QSlidermousePressEventProc
+  mouseReleaseEvent*: QSlidermouseReleaseEventProc
+  mouseMoveEvent*: QSlidermouseMoveEventProc
+  sliderChange*: QSlidersliderChangeProc
+  keyPressEvent*: QSliderkeyPressEventProc
+  timerEvent*: QSlidertimerEventProc
+  wheelEvent*: QSliderwheelEventProc
+  changeEvent*: QSliderchangeEventProc
+  devType*: QSliderdevTypeProc
+  setVisible*: QSlidersetVisibleProc
+  heightForWidth*: QSliderheightForWidthProc
+  hasHeightForWidth*: QSliderhasHeightForWidthProc
+  paintEngine*: QSliderpaintEngineProc
+  mouseDoubleClickEvent*: QSlidermouseDoubleClickEventProc
+  keyReleaseEvent*: QSliderkeyReleaseEventProc
+  focusInEvent*: QSliderfocusInEventProc
+  focusOutEvent*: QSliderfocusOutEventProc
+  enterEvent*: QSliderenterEventProc
+  leaveEvent*: QSliderleaveEventProc
+  moveEvent*: QSlidermoveEventProc
+  resizeEvent*: QSliderresizeEventProc
+  closeEvent*: QSlidercloseEventProc
+  contextMenuEvent*: QSlidercontextMenuEventProc
+  tabletEvent*: QSlidertabletEventProc
+  actionEvent*: QSlideractionEventProc
+  dragEnterEvent*: QSliderdragEnterEventProc
+  dragMoveEvent*: QSliderdragMoveEventProc
+  dragLeaveEvent*: QSliderdragLeaveEventProc
+  dropEvent*: QSliderdropEventProc
+  showEvent*: QSlidershowEventProc
+  hideEvent*: QSliderhideEventProc
+  nativeEvent*: QSlidernativeEventProc
+  metric*: QSlidermetricProc
+  initPainter*: QSliderinitPainterProc
+  redirected*: QSliderredirectedProc
+  sharedPainter*: QSlidersharedPainterProc
+  inputMethodEvent*: QSliderinputMethodEventProc
+  inputMethodQuery*: QSliderinputMethodQueryProc
+  focusNextPrevChild*: QSliderfocusNextPrevChildProc
+  eventFilter*: QSlidereventFilterProc
+  childEvent*: QSliderchildEventProc
+  customEvent*: QSlidercustomEventProc
+  connectNotify*: QSliderconnectNotifyProc
+  disconnectNotify*: QSliderdisconnectNotifyProc
+
+proc QSlidermetaObject*(self: gen_qslider_types.QSlider): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSlider_virtualbase_metaObject(self.h))
+
+proc QSlidermetacast*(self: gen_qslider_types.QSlider, param1: cstring): pointer =
+  fcQSlider_virtualbase_metacast(self.h, param1)
+
+proc QSlidermetacall*(self: gen_qslider_types.QSlider, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSlider_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+proc QSlidersizeHint*(self: gen_qslider_types.QSlider): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSlider_virtualbase_sizeHint(self.h))
+
+proc QSliderminimumSizeHint*(self: gen_qslider_types.QSlider): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQSlider_virtualbase_minimumSizeHint(self.h))
+
+proc QSliderevent*(self: gen_qslider_types.QSlider, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSlider_virtualbase_event(self.h, event.h)
+
+proc QSliderpaintEvent*(self: gen_qslider_types.QSlider, ev: gen_qevent_types.QPaintEvent): void =
+  fcQSlider_virtualbase_paintEvent(self.h, ev.h)
+
+proc QSlidermousePressEvent*(self: gen_qslider_types.QSlider, ev: gen_qevent_types.QMouseEvent): void =
+  fcQSlider_virtualbase_mousePressEvent(self.h, ev.h)
+
+proc QSlidermouseReleaseEvent*(self: gen_qslider_types.QSlider, ev: gen_qevent_types.QMouseEvent): void =
+  fcQSlider_virtualbase_mouseReleaseEvent(self.h, ev.h)
+
+proc QSlidermouseMoveEvent*(self: gen_qslider_types.QSlider, ev: gen_qevent_types.QMouseEvent): void =
+  fcQSlider_virtualbase_mouseMoveEvent(self.h, ev.h)
+
+proc QSlidersliderChange*(self: gen_qslider_types.QSlider, change: cint): void =
+  fcQSlider_virtualbase_sliderChange(self.h, cint(change))
+
+proc QSliderkeyPressEvent*(self: gen_qslider_types.QSlider, ev: gen_qevent_types.QKeyEvent): void =
+  fcQSlider_virtualbase_keyPressEvent(self.h, ev.h)
+
+proc QSlidertimerEvent*(self: gen_qslider_types.QSlider, param1: gen_qcoreevent_types.QTimerEvent): void =
+  fcQSlider_virtualbase_timerEvent(self.h, param1.h)
+
+proc QSliderwheelEvent*(self: gen_qslider_types.QSlider, e: gen_qevent_types.QWheelEvent): void =
+  fcQSlider_virtualbase_wheelEvent(self.h, e.h)
+
+proc QSliderchangeEvent*(self: gen_qslider_types.QSlider, e: gen_qcoreevent_types.QEvent): void =
+  fcQSlider_virtualbase_changeEvent(self.h, e.h)
+
+proc QSliderdevType*(self: gen_qslider_types.QSlider): cint =
+  fcQSlider_virtualbase_devType(self.h)
+
+proc QSlidersetVisible*(self: gen_qslider_types.QSlider, visible: bool): void =
+  fcQSlider_virtualbase_setVisible(self.h, visible)
+
+proc QSliderheightForWidth*(self: gen_qslider_types.QSlider, param1: cint): cint =
+  fcQSlider_virtualbase_heightForWidth(self.h, param1)
+
+proc QSliderhasHeightForWidth*(self: gen_qslider_types.QSlider): bool =
+  fcQSlider_virtualbase_hasHeightForWidth(self.h)
+
+proc QSliderpaintEngine*(self: gen_qslider_types.QSlider): gen_qpaintengine_types.QPaintEngine =
+  gen_qpaintengine_types.QPaintEngine(h: fcQSlider_virtualbase_paintEngine(self.h))
+
+proc QSlidermouseDoubleClickEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QMouseEvent): void =
+  fcQSlider_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+
+proc QSliderkeyReleaseEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QKeyEvent): void =
+  fcQSlider_virtualbase_keyReleaseEvent(self.h, event.h)
+
+proc QSliderfocusInEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QFocusEvent): void =
+  fcQSlider_virtualbase_focusInEvent(self.h, event.h)
+
+proc QSliderfocusOutEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QFocusEvent): void =
+  fcQSlider_virtualbase_focusOutEvent(self.h, event.h)
+
+proc QSliderenterEvent*(self: gen_qslider_types.QSlider, event: gen_qcoreevent_types.QEvent): void =
+  fcQSlider_virtualbase_enterEvent(self.h, event.h)
+
+proc QSliderleaveEvent*(self: gen_qslider_types.QSlider, event: gen_qcoreevent_types.QEvent): void =
+  fcQSlider_virtualbase_leaveEvent(self.h, event.h)
+
+proc QSlidermoveEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QMoveEvent): void =
+  fcQSlider_virtualbase_moveEvent(self.h, event.h)
+
+proc QSliderresizeEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QResizeEvent): void =
+  fcQSlider_virtualbase_resizeEvent(self.h, event.h)
+
+proc QSlidercloseEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QCloseEvent): void =
+  fcQSlider_virtualbase_closeEvent(self.h, event.h)
+
+proc QSlidercontextMenuEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QContextMenuEvent): void =
+  fcQSlider_virtualbase_contextMenuEvent(self.h, event.h)
+
+proc QSlidertabletEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QTabletEvent): void =
+  fcQSlider_virtualbase_tabletEvent(self.h, event.h)
+
+proc QSlideractionEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QActionEvent): void =
+  fcQSlider_virtualbase_actionEvent(self.h, event.h)
+
+proc QSliderdragEnterEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QDragEnterEvent): void =
+  fcQSlider_virtualbase_dragEnterEvent(self.h, event.h)
+
+proc QSliderdragMoveEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QDragMoveEvent): void =
+  fcQSlider_virtualbase_dragMoveEvent(self.h, event.h)
+
+proc QSliderdragLeaveEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QDragLeaveEvent): void =
+  fcQSlider_virtualbase_dragLeaveEvent(self.h, event.h)
+
+proc QSliderdropEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QDropEvent): void =
+  fcQSlider_virtualbase_dropEvent(self.h, event.h)
+
+proc QSlidershowEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QShowEvent): void =
+  fcQSlider_virtualbase_showEvent(self.h, event.h)
+
+proc QSliderhideEvent*(self: gen_qslider_types.QSlider, event: gen_qevent_types.QHideEvent): void =
+  fcQSlider_virtualbase_hideEvent(self.h, event.h)
+
+proc QSlidernativeEvent*(self: gen_qslider_types.QSlider, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool =
+  fcQSlider_virtualbase_nativeEvent(self.h, struct_seaqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
+
+proc QSlidermetric*(self: gen_qslider_types.QSlider, param1: cint): cint =
+  fcQSlider_virtualbase_metric(self.h, cint(param1))
+
+proc QSliderinitPainter*(self: gen_qslider_types.QSlider, painter: gen_qpainter_types.QPainter): void =
+  fcQSlider_virtualbase_initPainter(self.h, painter.h)
+
+proc QSliderredirected*(self: gen_qslider_types.QSlider, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
+  gen_qpaintdevice_types.QPaintDevice(h: fcQSlider_virtualbase_redirected(self.h, offset.h))
+
+proc QSlidersharedPainter*(self: gen_qslider_types.QSlider): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQSlider_virtualbase_sharedPainter(self.h))
+
+proc QSliderinputMethodEvent*(self: gen_qslider_types.QSlider, param1: gen_qevent_types.QInputMethodEvent): void =
+  fcQSlider_virtualbase_inputMethodEvent(self.h, param1.h)
+
+proc QSliderinputMethodQuery*(self: gen_qslider_types.QSlider, param1: cint): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQSlider_virtualbase_inputMethodQuery(self.h, cint(param1)))
+
+proc QSliderfocusNextPrevChild*(self: gen_qslider_types.QSlider, next: bool): bool =
+  fcQSlider_virtualbase_focusNextPrevChild(self.h, next)
+
+proc QSlidereventFilter*(self: gen_qslider_types.QSlider, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
+  fcQSlider_virtualbase_eventFilter(self.h, watched.h, event.h)
+
+proc QSliderchildEvent*(self: gen_qslider_types.QSlider, event: gen_qcoreevent_types.QChildEvent): void =
+  fcQSlider_virtualbase_childEvent(self.h, event.h)
+
+proc QSlidercustomEvent*(self: gen_qslider_types.QSlider, event: gen_qcoreevent_types.QEvent): void =
+  fcQSlider_virtualbase_customEvent(self.h, event.h)
+
+proc QSliderconnectNotify*(self: gen_qslider_types.QSlider, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSlider_virtualbase_connectNotify(self.h, signal.h)
+
+proc QSliderdisconnectNotify*(self: gen_qslider_types.QSlider, signal: gen_qmetaobject_types.QMetaMethod): void =
+  fcQSlider_virtualbase_disconnectNotify(self.h, signal.h)
+
+
+proc fcQSlider_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
+  virtualReturn.h
+
+proc fcQSlider_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = (param1)
+  var virtualReturn = vtbl[].metacast(self, slotval1)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  var virtualReturn = vtbl[].sizeHint(self)
+  virtualReturn.h
+
+proc fcQSlider_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  var virtualReturn = vtbl[].minimumSizeHint(self)
+  virtualReturn.h
+
+proc fcQSlider_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = vtbl[].event(self, slotval1)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_paintEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: ev)
+  vtbl[].paintEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_mousePressEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  vtbl[].mousePressEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_mouseReleaseEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  vtbl[].mouseReleaseEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_mouseMoveEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  vtbl[].mouseMoveEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_sliderChange(self: pointer, change: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = cint(change)
+  vtbl[].sliderChange(self, slotval1)
+
+proc fcQSlider_vtable_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  vtbl[].keyPressEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  vtbl[].timerEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  vtbl[].wheelEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  vtbl[].changeEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  var virtualReturn = vtbl[].devType(self)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = visible
+  vtbl[].setVisible(self, slotval1)
+
+proc fcQSlider_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = param1
+  var virtualReturn = vtbl[].heightForWidth(self, slotval1)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  var virtualReturn = vtbl[].hasHeightForWidth(self)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
+  virtualReturn.h
+
+proc fcQSlider_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusInEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusOutEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].enterEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].leaveEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  vtbl[].moveEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  vtbl[].resizeEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  vtbl[].closeEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  vtbl[].contextMenuEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  vtbl[].tabletEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  vtbl[].actionEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  vtbl[].showEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  vtbl[].hideEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl[].metric(self, slotval1)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
+
+proc fcQSlider_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  var virtualReturn = vtbl[].redirected(self, slotval1)
+  virtualReturn.h
+
+proc fcQSlider_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
+  virtualReturn.h
+
+proc fcQSlider_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  vtbl[].inputMethodEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
+  virtualReturn.h
+
+proc fcQSlider_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = next
+  var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qobject_types.QObject(h: watched)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
+  virtualReturn
+
+proc fcQSlider_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
+
+proc fcQSlider_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
+
+proc fcQSlider_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSliderVTable](fcQSlider_vdata(self)[])
+  let self = QSlider(h: self)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQSlider* {.inheritable.} = ref object of QSlider
+  vtbl*: cQSliderVTable
+
+method metaObject*(self: VirtualQSlider): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QSlidermetaObject(self[])
+method metacast*(self: VirtualQSlider, param1: cstring): pointer {.base.} =
+  QSlidermetacast(self[], param1)
+method metacall*(self: VirtualQSlider, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSlidermetacall(self[], param1, param2, param3)
+method sizeHint*(self: VirtualQSlider): gen_qsize_types.QSize {.base.} =
+  QSlidersizeHint(self[])
+method minimumSizeHint*(self: VirtualQSlider): gen_qsize_types.QSize {.base.} =
+  QSliderminimumSizeHint(self[])
+method event*(self: VirtualQSlider, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSliderevent(self[], event)
+method paintEvent*(self: VirtualQSlider, ev: gen_qevent_types.QPaintEvent): void {.base.} =
+  QSliderpaintEvent(self[], ev)
+method mousePressEvent*(self: VirtualQSlider, ev: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSlidermousePressEvent(self[], ev)
+method mouseReleaseEvent*(self: VirtualQSlider, ev: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSlidermouseReleaseEvent(self[], ev)
+method mouseMoveEvent*(self: VirtualQSlider, ev: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSlidermouseMoveEvent(self[], ev)
+method sliderChange*(self: VirtualQSlider, change: cint): void {.base.} =
+  QSlidersliderChange(self[], change)
+method keyPressEvent*(self: VirtualQSlider, ev: gen_qevent_types.QKeyEvent): void {.base.} =
+  QSliderkeyPressEvent(self[], ev)
+method timerEvent*(self: VirtualQSlider, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSlidertimerEvent(self[], param1)
+method wheelEvent*(self: VirtualQSlider, e: gen_qevent_types.QWheelEvent): void {.base.} =
+  QSliderwheelEvent(self[], e)
+method changeEvent*(self: VirtualQSlider, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSliderchangeEvent(self[], e)
+method devType*(self: VirtualQSlider): cint {.base.} =
+  QSliderdevType(self[])
+method setVisible*(self: VirtualQSlider, visible: bool): void {.base.} =
+  QSlidersetVisible(self[], visible)
+method heightForWidth*(self: VirtualQSlider, param1: cint): cint {.base.} =
+  QSliderheightForWidth(self[], param1)
+method hasHeightForWidth*(self: VirtualQSlider): bool {.base.} =
+  QSliderhasHeightForWidth(self[])
+method paintEngine*(self: VirtualQSlider): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QSliderpaintEngine(self[])
+method mouseDoubleClickEvent*(self: VirtualQSlider, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QSlidermouseDoubleClickEvent(self[], event)
+method keyReleaseEvent*(self: VirtualQSlider, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QSliderkeyReleaseEvent(self[], event)
+method focusInEvent*(self: VirtualQSlider, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QSliderfocusInEvent(self[], event)
+method focusOutEvent*(self: VirtualQSlider, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QSliderfocusOutEvent(self[], event)
+method enterEvent*(self: VirtualQSlider, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSliderenterEvent(self[], event)
+method leaveEvent*(self: VirtualQSlider, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSliderleaveEvent(self[], event)
+method moveEvent*(self: VirtualQSlider, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QSlidermoveEvent(self[], event)
+method resizeEvent*(self: VirtualQSlider, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QSliderresizeEvent(self[], event)
+method closeEvent*(self: VirtualQSlider, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QSlidercloseEvent(self[], event)
+method contextMenuEvent*(self: VirtualQSlider, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QSlidercontextMenuEvent(self[], event)
+method tabletEvent*(self: VirtualQSlider, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QSlidertabletEvent(self[], event)
+method actionEvent*(self: VirtualQSlider, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QSlideractionEvent(self[], event)
+method dragEnterEvent*(self: VirtualQSlider, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QSliderdragEnterEvent(self[], event)
+method dragMoveEvent*(self: VirtualQSlider, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QSliderdragMoveEvent(self[], event)
+method dragLeaveEvent*(self: VirtualQSlider, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QSliderdragLeaveEvent(self[], event)
+method dropEvent*(self: VirtualQSlider, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QSliderdropEvent(self[], event)
+method showEvent*(self: VirtualQSlider, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QSlidershowEvent(self[], event)
+method hideEvent*(self: VirtualQSlider, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QSliderhideEvent(self[], event)
+method nativeEvent*(self: VirtualQSlider, eventType: openArray[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QSlidernativeEvent(self[], eventType, message, resultVal)
+method metric*(self: VirtualQSlider, param1: cint): cint {.base.} =
+  QSlidermetric(self[], param1)
+method initPainter*(self: VirtualQSlider, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QSliderinitPainter(self[], painter)
+method redirected*(self: VirtualQSlider, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QSliderredirected(self[], offset)
+method sharedPainter*(self: VirtualQSlider): gen_qpainter_types.QPainter {.base.} =
+  QSlidersharedPainter(self[])
+method inputMethodEvent*(self: VirtualQSlider, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QSliderinputMethodEvent(self[], param1)
+method inputMethodQuery*(self: VirtualQSlider, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QSliderinputMethodQuery(self[], param1)
+method focusNextPrevChild*(self: VirtualQSlider, next: bool): bool {.base.} =
+  QSliderfocusNextPrevChild(self[], next)
+method eventFilter*(self: VirtualQSlider, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSlidereventFilter(self[], watched, event)
+method childEvent*(self: VirtualQSlider, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSliderchildEvent(self[], event)
+method customEvent*(self: VirtualQSlider, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSlidercustomEvent(self[], event)
+method connectNotify*(self: VirtualQSlider, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSliderconnectNotify(self[], signal)
+method disconnectNotify*(self: VirtualQSlider, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSliderdisconnectNotify(self[], signal)
+
+proc fcQSlider_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  var virtualReturn = inst.metaObject()
+  virtualReturn.h
+
+proc fcQSlider_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = (param1)
+  var virtualReturn = inst.metacast(slotval1)
+  virtualReturn
+
+proc fcQSlider_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQSlider_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  var virtualReturn = inst.sizeHint()
+  virtualReturn.h
+
+proc fcQSlider_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  var virtualReturn = inst.minimumSizeHint()
+  virtualReturn.h
+
+proc fcQSlider_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = inst.event(slotval1)
+  virtualReturn
+
+proc fcQSlider_method_callback_paintEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QPaintEvent(h: ev)
+  inst.paintEvent(slotval1)
+
+proc fcQSlider_method_callback_mousePressEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  inst.mousePressEvent(slotval1)
+
+proc fcQSlider_method_callback_mouseReleaseEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  inst.mouseReleaseEvent(slotval1)
+
+proc fcQSlider_method_callback_mouseMoveEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  inst.mouseMoveEvent(slotval1)
+
+proc fcQSlider_method_callback_sliderChange(self: pointer, change: cint): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = cint(change)
+  inst.sliderChange(slotval1)
+
+proc fcQSlider_method_callback_keyPressEvent(self: pointer, ev: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  inst.keyPressEvent(slotval1)
+
+proc fcQSlider_method_callback_timerEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  inst.timerEvent(slotval1)
+
+proc fcQSlider_method_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  inst.wheelEvent(slotval1)
+
+proc fcQSlider_method_callback_changeEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  inst.changeEvent(slotval1)
+
+proc fcQSlider_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  var virtualReturn = inst.devType()
+  virtualReturn
+
+proc fcQSlider_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = visible
+  inst.setVisible(slotval1)
+
+proc fcQSlider_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = param1
+  var virtualReturn = inst.heightForWidth(slotval1)
+  virtualReturn
+
+proc fcQSlider_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  var virtualReturn = inst.hasHeightForWidth()
+  virtualReturn
+
+proc fcQSlider_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  var virtualReturn = inst.paintEngine()
+  virtualReturn.h
+
+proc fcQSlider_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  inst.mouseDoubleClickEvent(slotval1)
+
+proc fcQSlider_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  inst.keyReleaseEvent(slotval1)
+
+proc fcQSlider_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  inst.focusInEvent(slotval1)
+
+proc fcQSlider_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  inst.focusOutEvent(slotval1)
+
+proc fcQSlider_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.enterEvent(slotval1)
+
+proc fcQSlider_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.leaveEvent(slotval1)
+
+proc fcQSlider_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  inst.moveEvent(slotval1)
+
+proc fcQSlider_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  inst.resizeEvent(slotval1)
+
+proc fcQSlider_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  inst.closeEvent(slotval1)
+
+proc fcQSlider_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  inst.contextMenuEvent(slotval1)
+
+proc fcQSlider_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  inst.tabletEvent(slotval1)
+
+proc fcQSlider_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  inst.actionEvent(slotval1)
+
+proc fcQSlider_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  inst.dragEnterEvent(slotval1)
+
+proc fcQSlider_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  inst.dragMoveEvent(slotval1)
+
+proc fcQSlider_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  inst.dragLeaveEvent(slotval1)
+
+proc fcQSlider_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  inst.dropEvent(slotval1)
+
+proc fcQSlider_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  inst.showEvent(slotval1)
+
+proc fcQSlider_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  inst.hideEvent(slotval1)
+
+proc fcQSlider_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArray(cast[ptr UncheckedArray[byte]](veventType_bytearray.data), 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+proc fcQSlider_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = cint(param1)
+  var virtualReturn = inst.metric(slotval1)
+  virtualReturn
+
+proc fcQSlider_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  inst.initPainter(slotval1)
+
+proc fcQSlider_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  var virtualReturn = inst.redirected(slotval1)
+  virtualReturn.h
+
+proc fcQSlider_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  var virtualReturn = inst.sharedPainter()
+  virtualReturn.h
+
+proc fcQSlider_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  inst.inputMethodEvent(slotval1)
+
+proc fcQSlider_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = cint(param1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
+  virtualReturn.h
+
+proc fcQSlider_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = next
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
+  virtualReturn
+
+proc fcQSlider_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qobject_types.QObject(h: watched)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+proc fcQSlider_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  inst.childEvent(slotval1)
+
+proc fcQSlider_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  inst.customEvent(slotval1)
+
+proc fcQSlider_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  inst.connectNotify(slotval1)
+
+proc fcQSlider_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSlider](fcQSlider_vdata(self)[])
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  inst.disconnectNotify(slotval1)
+
+
+proc initStyleOption*(self: gen_qslider_types.QSlider, option: gen_qstyleoption_types.QStyleOptionSlider): void =
+  fcQSlider_protectedbase_initStyleOption(self.h, option.h)
+
+proc setRepeatAction*(self: gen_qslider_types.QSlider, action: cint): void =
+  fcQSlider_protectedbase_setRepeatAction(self.h, cint(action))
+
+proc repeatAction*(self: gen_qslider_types.QSlider): cint =
+  cint(fcQSlider_protectedbase_repeatAction(self.h))
+
+proc updateMicroFocus*(self: gen_qslider_types.QSlider): void =
+  fcQSlider_protectedbase_updateMicroFocus(self.h)
+
+proc createX*(self: gen_qslider_types.QSlider): void =
+  fcQSlider_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qslider_types.QSlider): void =
+  fcQSlider_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qslider_types.QSlider): bool =
+  fcQSlider_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qslider_types.QSlider): bool =
+  fcQSlider_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qslider_types.QSlider): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSlider_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qslider_types.QSlider): cint =
+  fcQSlider_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qslider_types.QSlider, signal: cstring): cint =
+  fcQSlider_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qslider_types.QSlider, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSlider_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc create*(T: type gen_qslider_types.QSlider,
+    vtbl: ref QSliderVTable = nil): gen_qslider_types.QSlider =
+  let vtbl = if vtbl == nil: new QSliderVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSliderVTable](fcQSlider_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQSlider_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQSlider_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQSlider_vtable_callback_metacall
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQSlider_vtable_callback_sizeHint
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQSlider_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQSlider_vtable_callback_event
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQSlider_vtable_callback_paintEvent
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQSlider_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQSlider_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQSlider_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].sliderChange):
+    vtbl[].vtbl.sliderChange = fcQSlider_vtable_callback_sliderChange
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQSlider_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQSlider_vtable_callback_timerEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQSlider_vtable_callback_wheelEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQSlider_vtable_callback_changeEvent
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQSlider_vtable_callback_devType
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQSlider_vtable_callback_setVisible
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQSlider_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQSlider_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQSlider_vtable_callback_paintEngine
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQSlider_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQSlider_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQSlider_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQSlider_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQSlider_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQSlider_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQSlider_vtable_callback_moveEvent
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQSlider_vtable_callback_resizeEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQSlider_vtable_callback_closeEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQSlider_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQSlider_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQSlider_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQSlider_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQSlider_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQSlider_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQSlider_vtable_callback_dropEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQSlider_vtable_callback_showEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQSlider_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQSlider_vtable_callback_nativeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQSlider_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQSlider_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQSlider_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQSlider_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQSlider_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQSlider_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQSlider_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQSlider_vtable_callback_eventFilter
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQSlider_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQSlider_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQSlider_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQSlider_vtable_callback_disconnectNotify
+  let tmp = gen_qslider_types.QSlider(h: fcQSlider_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  fcQSlider_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qslider_types.QSlider,
+    orientation: cint,
+    vtbl: ref QSliderVTable = nil): gen_qslider_types.QSlider =
+  let vtbl = if vtbl == nil: new QSliderVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSliderVTable](fcQSlider_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQSlider_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQSlider_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQSlider_vtable_callback_metacall
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQSlider_vtable_callback_sizeHint
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQSlider_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQSlider_vtable_callback_event
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQSlider_vtable_callback_paintEvent
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQSlider_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQSlider_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQSlider_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].sliderChange):
+    vtbl[].vtbl.sliderChange = fcQSlider_vtable_callback_sliderChange
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQSlider_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQSlider_vtable_callback_timerEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQSlider_vtable_callback_wheelEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQSlider_vtable_callback_changeEvent
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQSlider_vtable_callback_devType
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQSlider_vtable_callback_setVisible
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQSlider_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQSlider_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQSlider_vtable_callback_paintEngine
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQSlider_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQSlider_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQSlider_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQSlider_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQSlider_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQSlider_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQSlider_vtable_callback_moveEvent
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQSlider_vtable_callback_resizeEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQSlider_vtable_callback_closeEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQSlider_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQSlider_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQSlider_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQSlider_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQSlider_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQSlider_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQSlider_vtable_callback_dropEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQSlider_vtable_callback_showEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQSlider_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQSlider_vtable_callback_nativeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQSlider_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQSlider_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQSlider_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQSlider_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQSlider_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQSlider_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQSlider_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQSlider_vtable_callback_eventFilter
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQSlider_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQSlider_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQSlider_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQSlider_vtable_callback_disconnectNotify
+  let tmp = gen_qslider_types.QSlider(h: fcQSlider_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(orientation)))
+  fcQSlider_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qslider_types.QSlider,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: ref QSliderVTable = nil): gen_qslider_types.QSlider =
+  let vtbl = if vtbl == nil: new QSliderVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSliderVTable](fcQSlider_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQSlider_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQSlider_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQSlider_vtable_callback_metacall
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQSlider_vtable_callback_sizeHint
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQSlider_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQSlider_vtable_callback_event
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQSlider_vtable_callback_paintEvent
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQSlider_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQSlider_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQSlider_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].sliderChange):
+    vtbl[].vtbl.sliderChange = fcQSlider_vtable_callback_sliderChange
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQSlider_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQSlider_vtable_callback_timerEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQSlider_vtable_callback_wheelEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQSlider_vtable_callback_changeEvent
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQSlider_vtable_callback_devType
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQSlider_vtable_callback_setVisible
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQSlider_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQSlider_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQSlider_vtable_callback_paintEngine
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQSlider_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQSlider_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQSlider_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQSlider_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQSlider_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQSlider_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQSlider_vtable_callback_moveEvent
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQSlider_vtable_callback_resizeEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQSlider_vtable_callback_closeEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQSlider_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQSlider_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQSlider_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQSlider_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQSlider_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQSlider_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQSlider_vtable_callback_dropEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQSlider_vtable_callback_showEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQSlider_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQSlider_vtable_callback_nativeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQSlider_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQSlider_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQSlider_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQSlider_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQSlider_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQSlider_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQSlider_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQSlider_vtable_callback_eventFilter
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQSlider_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQSlider_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQSlider_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQSlider_vtable_callback_disconnectNotify
+  let tmp = gen_qslider_types.QSlider(h: fcQSlider_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  fcQSlider_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+proc create*(T: type gen_qslider_types.QSlider,
+    orientation: cint, parent: gen_qwidget_types.QWidget,
+    vtbl: ref QSliderVTable = nil): gen_qslider_types.QSlider =
+  let vtbl = if vtbl == nil: new QSliderVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSliderVTable](fcQSlider_vdata(self)[])
+    GC_unref(vtbl)
+  if not isNil(vtbl[].metaObject):
+    vtbl[].vtbl.metaObject = fcQSlider_vtable_callback_metaObject
+  if not isNil(vtbl[].metacast):
+    vtbl[].vtbl.metacast = fcQSlider_vtable_callback_metacast
+  if not isNil(vtbl[].metacall):
+    vtbl[].vtbl.metacall = fcQSlider_vtable_callback_metacall
+  if not isNil(vtbl[].sizeHint):
+    vtbl[].vtbl.sizeHint = fcQSlider_vtable_callback_sizeHint
+  if not isNil(vtbl[].minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = fcQSlider_vtable_callback_minimumSizeHint
+  if not isNil(vtbl[].event):
+    vtbl[].vtbl.event = fcQSlider_vtable_callback_event
+  if not isNil(vtbl[].paintEvent):
+    vtbl[].vtbl.paintEvent = fcQSlider_vtable_callback_paintEvent
+  if not isNil(vtbl[].mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = fcQSlider_vtable_callback_mousePressEvent
+  if not isNil(vtbl[].mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = fcQSlider_vtable_callback_mouseReleaseEvent
+  if not isNil(vtbl[].mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = fcQSlider_vtable_callback_mouseMoveEvent
+  if not isNil(vtbl[].sliderChange):
+    vtbl[].vtbl.sliderChange = fcQSlider_vtable_callback_sliderChange
+  if not isNil(vtbl[].keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = fcQSlider_vtable_callback_keyPressEvent
+  if not isNil(vtbl[].timerEvent):
+    vtbl[].vtbl.timerEvent = fcQSlider_vtable_callback_timerEvent
+  if not isNil(vtbl[].wheelEvent):
+    vtbl[].vtbl.wheelEvent = fcQSlider_vtable_callback_wheelEvent
+  if not isNil(vtbl[].changeEvent):
+    vtbl[].vtbl.changeEvent = fcQSlider_vtable_callback_changeEvent
+  if not isNil(vtbl[].devType):
+    vtbl[].vtbl.devType = fcQSlider_vtable_callback_devType
+  if not isNil(vtbl[].setVisible):
+    vtbl[].vtbl.setVisible = fcQSlider_vtable_callback_setVisible
+  if not isNil(vtbl[].heightForWidth):
+    vtbl[].vtbl.heightForWidth = fcQSlider_vtable_callback_heightForWidth
+  if not isNil(vtbl[].hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = fcQSlider_vtable_callback_hasHeightForWidth
+  if not isNil(vtbl[].paintEngine):
+    vtbl[].vtbl.paintEngine = fcQSlider_vtable_callback_paintEngine
+  if not isNil(vtbl[].mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = fcQSlider_vtable_callback_mouseDoubleClickEvent
+  if not isNil(vtbl[].keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = fcQSlider_vtable_callback_keyReleaseEvent
+  if not isNil(vtbl[].focusInEvent):
+    vtbl[].vtbl.focusInEvent = fcQSlider_vtable_callback_focusInEvent
+  if not isNil(vtbl[].focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = fcQSlider_vtable_callback_focusOutEvent
+  if not isNil(vtbl[].enterEvent):
+    vtbl[].vtbl.enterEvent = fcQSlider_vtable_callback_enterEvent
+  if not isNil(vtbl[].leaveEvent):
+    vtbl[].vtbl.leaveEvent = fcQSlider_vtable_callback_leaveEvent
+  if not isNil(vtbl[].moveEvent):
+    vtbl[].vtbl.moveEvent = fcQSlider_vtable_callback_moveEvent
+  if not isNil(vtbl[].resizeEvent):
+    vtbl[].vtbl.resizeEvent = fcQSlider_vtable_callback_resizeEvent
+  if not isNil(vtbl[].closeEvent):
+    vtbl[].vtbl.closeEvent = fcQSlider_vtable_callback_closeEvent
+  if not isNil(vtbl[].contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = fcQSlider_vtable_callback_contextMenuEvent
+  if not isNil(vtbl[].tabletEvent):
+    vtbl[].vtbl.tabletEvent = fcQSlider_vtable_callback_tabletEvent
+  if not isNil(vtbl[].actionEvent):
+    vtbl[].vtbl.actionEvent = fcQSlider_vtable_callback_actionEvent
+  if not isNil(vtbl[].dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = fcQSlider_vtable_callback_dragEnterEvent
+  if not isNil(vtbl[].dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = fcQSlider_vtable_callback_dragMoveEvent
+  if not isNil(vtbl[].dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = fcQSlider_vtable_callback_dragLeaveEvent
+  if not isNil(vtbl[].dropEvent):
+    vtbl[].vtbl.dropEvent = fcQSlider_vtable_callback_dropEvent
+  if not isNil(vtbl[].showEvent):
+    vtbl[].vtbl.showEvent = fcQSlider_vtable_callback_showEvent
+  if not isNil(vtbl[].hideEvent):
+    vtbl[].vtbl.hideEvent = fcQSlider_vtable_callback_hideEvent
+  if not isNil(vtbl[].nativeEvent):
+    vtbl[].vtbl.nativeEvent = fcQSlider_vtable_callback_nativeEvent
+  if not isNil(vtbl[].metric):
+    vtbl[].vtbl.metric = fcQSlider_vtable_callback_metric
+  if not isNil(vtbl[].initPainter):
+    vtbl[].vtbl.initPainter = fcQSlider_vtable_callback_initPainter
+  if not isNil(vtbl[].redirected):
+    vtbl[].vtbl.redirected = fcQSlider_vtable_callback_redirected
+  if not isNil(vtbl[].sharedPainter):
+    vtbl[].vtbl.sharedPainter = fcQSlider_vtable_callback_sharedPainter
+  if not isNil(vtbl[].inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = fcQSlider_vtable_callback_inputMethodEvent
+  if not isNil(vtbl[].inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = fcQSlider_vtable_callback_inputMethodQuery
+  if not isNil(vtbl[].focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = fcQSlider_vtable_callback_focusNextPrevChild
+  if not isNil(vtbl[].eventFilter):
+    vtbl[].vtbl.eventFilter = fcQSlider_vtable_callback_eventFilter
+  if not isNil(vtbl[].childEvent):
+    vtbl[].vtbl.childEvent = fcQSlider_vtable_callback_childEvent
+  if not isNil(vtbl[].customEvent):
+    vtbl[].vtbl.customEvent = fcQSlider_vtable_callback_customEvent
+  if not isNil(vtbl[].connectNotify):
+    vtbl[].vtbl.connectNotify = fcQSlider_vtable_callback_connectNotify
+  if not isNil(vtbl[].disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = fcQSlider_vtable_callback_disconnectNotify
+  let tmp = gen_qslider_types.QSlider(h: fcQSlider_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(orientation), parent.h))
+  fcQSlider_vdata(tmp.h)[] = addr(vtbl[])
+  tmp
+const cQSlider_mvtbl = cQSliderVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQSlider()[])](self.fcQSlider_vdata()[])
+    inst[].h = nil,
+
+  metaObject: fcQSlider_method_callback_metaObject,
+  metacast: fcQSlider_method_callback_metacast,
+  metacall: fcQSlider_method_callback_metacall,
+  sizeHint: fcQSlider_method_callback_sizeHint,
+  minimumSizeHint: fcQSlider_method_callback_minimumSizeHint,
+  event: fcQSlider_method_callback_event,
+  paintEvent: fcQSlider_method_callback_paintEvent,
+  mousePressEvent: fcQSlider_method_callback_mousePressEvent,
+  mouseReleaseEvent: fcQSlider_method_callback_mouseReleaseEvent,
+  mouseMoveEvent: fcQSlider_method_callback_mouseMoveEvent,
+  sliderChange: fcQSlider_method_callback_sliderChange,
+  keyPressEvent: fcQSlider_method_callback_keyPressEvent,
+  timerEvent: fcQSlider_method_callback_timerEvent,
+  wheelEvent: fcQSlider_method_callback_wheelEvent,
+  changeEvent: fcQSlider_method_callback_changeEvent,
+  devType: fcQSlider_method_callback_devType,
+  setVisible: fcQSlider_method_callback_setVisible,
+  heightForWidth: fcQSlider_method_callback_heightForWidth,
+  hasHeightForWidth: fcQSlider_method_callback_hasHeightForWidth,
+  paintEngine: fcQSlider_method_callback_paintEngine,
+  mouseDoubleClickEvent: fcQSlider_method_callback_mouseDoubleClickEvent,
+  keyReleaseEvent: fcQSlider_method_callback_keyReleaseEvent,
+  focusInEvent: fcQSlider_method_callback_focusInEvent,
+  focusOutEvent: fcQSlider_method_callback_focusOutEvent,
+  enterEvent: fcQSlider_method_callback_enterEvent,
+  leaveEvent: fcQSlider_method_callback_leaveEvent,
+  moveEvent: fcQSlider_method_callback_moveEvent,
+  resizeEvent: fcQSlider_method_callback_resizeEvent,
+  closeEvent: fcQSlider_method_callback_closeEvent,
+  contextMenuEvent: fcQSlider_method_callback_contextMenuEvent,
+  tabletEvent: fcQSlider_method_callback_tabletEvent,
+  actionEvent: fcQSlider_method_callback_actionEvent,
+  dragEnterEvent: fcQSlider_method_callback_dragEnterEvent,
+  dragMoveEvent: fcQSlider_method_callback_dragMoveEvent,
+  dragLeaveEvent: fcQSlider_method_callback_dragLeaveEvent,
+  dropEvent: fcQSlider_method_callback_dropEvent,
+  showEvent: fcQSlider_method_callback_showEvent,
+  hideEvent: fcQSlider_method_callback_hideEvent,
+  nativeEvent: fcQSlider_method_callback_nativeEvent,
+  metric: fcQSlider_method_callback_metric,
+  initPainter: fcQSlider_method_callback_initPainter,
+  redirected: fcQSlider_method_callback_redirected,
+  sharedPainter: fcQSlider_method_callback_sharedPainter,
+  inputMethodEvent: fcQSlider_method_callback_inputMethodEvent,
+  inputMethodQuery: fcQSlider_method_callback_inputMethodQuery,
+  focusNextPrevChild: fcQSlider_method_callback_focusNextPrevChild,
+  eventFilter: fcQSlider_method_callback_eventFilter,
+  childEvent: fcQSlider_method_callback_childEvent,
+  customEvent: fcQSlider_method_callback_customEvent,
+  connectNotify: fcQSlider_method_callback_connectNotify,
+  disconnectNotify: fcQSlider_method_callback_disconnectNotify,
+)
+proc create*(T: type gen_qslider_types.QSlider,
+    inst: VirtualQSlider) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSlider_new(addr(cQSlider_mvtbl), csize_t(sizeof(pointer)))
+  fcQSlider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qslider_types.QSlider,
+    orientation: cint,
+    inst: VirtualQSlider) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSlider_new2(addr(cQSlider_mvtbl), csize_t(sizeof(pointer)), cint(orientation))
+  fcQSlider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qslider_types.QSlider,
+    parent: gen_qwidget_types.QWidget,
+    inst: VirtualQSlider) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSlider_new3(addr(cQSlider_mvtbl), csize_t(sizeof(pointer)), parent.h)
+  fcQSlider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc create*(T: type gen_qslider_types.QSlider,
+    orientation: cint, parent: gen_qwidget_types.QWidget,
+    inst: VirtualQSlider) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSlider_new4(addr(cQSlider_mvtbl), csize_t(sizeof(pointer)), cint(orientation), parent.h)
+  fcQSlider_vdata(inst[].h)[] = addr inst[]
+  inst[].owned = true
+
+proc staticMetaObject*(_: type gen_qslider_types.QSlider): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSlider_staticMetaObject())
+proc delete*(self: gen_qslider_types.QSlider) =
+  fcQSlider_delete(self.h)

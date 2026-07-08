@@ -1,0 +1,2 @@
+import ./QtCore/gen_qfactoryinterface
+export gen_qfactoryinterface

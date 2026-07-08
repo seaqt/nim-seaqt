@@ -1,0 +1,244 @@
+#include <QCameraZoomControl>
+#include <QMediaControl>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qcamerazoomcontrol.h>
+#include "gen_qcamerazoomcontrol.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QCameraZoomControl_virtbase(QCameraZoomControl* src, QMediaControl** outptr_QMediaControl) {
+	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
+}
+
+QMetaObject* QCameraZoomControl_metaObject(const QCameraZoomControl* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QCameraZoomControl_metacast(QCameraZoomControl* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QCameraZoomControl_metacall(QCameraZoomControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QCameraZoomControl_tr(const char* s) {
+	QString _ret = QCameraZoomControl::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QCameraZoomControl_trUtf8(const char* s) {
+	QString _ret = QCameraZoomControl::trUtf8(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+double QCameraZoomControl_maximumOpticalZoom(const QCameraZoomControl* self) {
+	qreal _ret = self->maximumOpticalZoom();
+	return static_cast<double>(_ret);
+}
+
+double QCameraZoomControl_maximumDigitalZoom(const QCameraZoomControl* self) {
+	qreal _ret = self->maximumDigitalZoom();
+	return static_cast<double>(_ret);
+}
+
+double QCameraZoomControl_requestedOpticalZoom(const QCameraZoomControl* self) {
+	qreal _ret = self->requestedOpticalZoom();
+	return static_cast<double>(_ret);
+}
+
+double QCameraZoomControl_requestedDigitalZoom(const QCameraZoomControl* self) {
+	qreal _ret = self->requestedDigitalZoom();
+	return static_cast<double>(_ret);
+}
+
+double QCameraZoomControl_currentOpticalZoom(const QCameraZoomControl* self) {
+	qreal _ret = self->currentOpticalZoom();
+	return static_cast<double>(_ret);
+}
+
+double QCameraZoomControl_currentDigitalZoom(const QCameraZoomControl* self) {
+	qreal _ret = self->currentDigitalZoom();
+	return static_cast<double>(_ret);
+}
+
+void QCameraZoomControl_zoomTo(QCameraZoomControl* self, double optical, double digital) {
+	self->zoomTo(static_cast<qreal>(optical), static_cast<qreal>(digital));
+}
+
+void QCameraZoomControl_maximumOpticalZoomChanged(QCameraZoomControl* self, double param1) {
+	self->maximumOpticalZoomChanged(static_cast<qreal>(param1));
+}
+
+void QCameraZoomControl_connect_maximumOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::maximumOpticalZoomChanged), self, local_caller{slot, callback, release});
+}
+
+void QCameraZoomControl_maximumDigitalZoomChanged(QCameraZoomControl* self, double param1) {
+	self->maximumDigitalZoomChanged(static_cast<qreal>(param1));
+}
+
+void QCameraZoomControl_connect_maximumDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::maximumDigitalZoomChanged), self, local_caller{slot, callback, release});
+}
+
+void QCameraZoomControl_requestedOpticalZoomChanged(QCameraZoomControl* self, double opticalZoom) {
+	self->requestedOpticalZoomChanged(static_cast<qreal>(opticalZoom));
+}
+
+void QCameraZoomControl_connect_requestedOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal opticalZoom) {
+			qreal opticalZoom_ret = opticalZoom;
+			double sigval1 = static_cast<double>(opticalZoom_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::requestedOpticalZoomChanged), self, local_caller{slot, callback, release});
+}
+
+void QCameraZoomControl_requestedDigitalZoomChanged(QCameraZoomControl* self, double digitalZoom) {
+	self->requestedDigitalZoomChanged(static_cast<qreal>(digitalZoom));
+}
+
+void QCameraZoomControl_connect_requestedDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal digitalZoom) {
+			qreal digitalZoom_ret = digitalZoom;
+			double sigval1 = static_cast<double>(digitalZoom_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::requestedDigitalZoomChanged), self, local_caller{slot, callback, release});
+}
+
+void QCameraZoomControl_currentOpticalZoomChanged(QCameraZoomControl* self, double opticalZoom) {
+	self->currentOpticalZoomChanged(static_cast<qreal>(opticalZoom));
+}
+
+void QCameraZoomControl_connect_currentOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal opticalZoom) {
+			qreal opticalZoom_ret = opticalZoom;
+			double sigval1 = static_cast<double>(opticalZoom_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::currentOpticalZoomChanged), self, local_caller{slot, callback, release});
+}
+
+void QCameraZoomControl_currentDigitalZoomChanged(QCameraZoomControl* self, double digitalZoom) {
+	self->currentDigitalZoomChanged(static_cast<qreal>(digitalZoom));
+}
+
+void QCameraZoomControl_connect_currentDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal digitalZoom) {
+			qreal digitalZoom_ret = digitalZoom;
+			double sigval1 = static_cast<double>(digitalZoom_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::currentDigitalZoomChanged), self, local_caller{slot, callback, release});
+}
+
+struct seaqt_string QCameraZoomControl_tr2(const char* s, const char* c) {
+	QString _ret = QCameraZoomControl::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QCameraZoomControl_tr3(const char* s, const char* c, int n) {
+	QString _ret = QCameraZoomControl::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QCameraZoomControl_trUtf82(const char* s, const char* c) {
+	QString _ret = QCameraZoomControl::trUtf8(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QCameraZoomControl_trUtf83(const char* s, const char* c, int n) {
+	QString _ret = QCameraZoomControl::trUtf8(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QCameraZoomControl_staticMetaObject() { return &QCameraZoomControl::staticMetaObject; }
+void QCameraZoomControl_delete(QCameraZoomControl* self) {
+	delete self;
+}
+

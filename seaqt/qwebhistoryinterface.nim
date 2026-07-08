@@ -1,0 +1,2 @@
+import ./QtWebKit/gen_qwebhistoryinterface
+export gen_qwebhistoryinterface

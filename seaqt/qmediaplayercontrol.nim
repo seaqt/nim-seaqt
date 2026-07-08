@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediaplayercontrol
+export gen_qmediaplayercontrol

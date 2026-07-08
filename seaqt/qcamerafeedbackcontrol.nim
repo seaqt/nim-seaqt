@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcamerafeedbackcontrol
+export gen_qcamerafeedbackcontrol

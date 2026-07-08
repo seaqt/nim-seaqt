@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquickimageprovider
+export gen_qquickimageprovider

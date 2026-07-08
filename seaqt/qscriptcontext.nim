@@ -1,0 +1,2 @@
+import ./QtScript/gen_qscriptcontext
+export gen_qscriptcontext

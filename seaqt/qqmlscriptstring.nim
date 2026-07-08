@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlscriptstring
+export gen_qqmlscriptstring

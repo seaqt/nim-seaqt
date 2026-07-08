@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qvideoprobe
+export gen_qvideoprobe
