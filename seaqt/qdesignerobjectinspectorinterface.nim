@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractobjectinspector
+export gen_abstractobjectinspector

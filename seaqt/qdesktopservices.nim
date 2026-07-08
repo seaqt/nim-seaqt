@@ -1,0 +1,2 @@
+import ./QtGui/gen_qdesktopservices
+export gen_qdesktopservices

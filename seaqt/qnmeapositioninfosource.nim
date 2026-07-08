@@ -1,0 +1,2 @@
+import ./QtPositioning/gen_qnmeapositioninfosource
+export gen_qnmeapositioninfosource

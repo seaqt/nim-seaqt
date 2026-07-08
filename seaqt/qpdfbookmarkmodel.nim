@@ -1,0 +1,2 @@
+import ./QtPdf/gen_qpdfbookmarkmodel
+export gen_qpdfbookmarkmodel

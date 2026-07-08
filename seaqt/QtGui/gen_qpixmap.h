@@ -1,0 +1,163 @@
+#pragma once
+#ifndef SEAQT_QTGUI_GEN_QPIXMAP_H
+#define SEAQT_QTGUI_GEN_QPIXMAP_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QBitmap;
+class QColor;
+class QIODevice;
+class QImage;
+class QImageReader;
+class QPaintDevice;
+class QPaintEngine;
+class QPainter;
+class QPixmap;
+class QPoint;
+class QRect;
+class QRegion;
+class QSize;
+class QSizeF;
+class QTransform;
+class QVariant;
+#else
+typedef struct QBitmap QBitmap;
+typedef struct QColor QColor;
+typedef struct QIODevice QIODevice;
+typedef struct QImage QImage;
+typedef struct QImageReader QImageReader;
+typedef struct QPaintDevice QPaintDevice;
+typedef struct QPaintEngine QPaintEngine;
+typedef struct QPainter QPainter;
+typedef struct QPixmap QPixmap;
+typedef struct QPoint QPoint;
+typedef struct QRect QRect;
+typedef struct QRegion QRegion;
+typedef struct QSize QSize;
+typedef struct QSizeF QSizeF;
+typedef struct QTransform QTransform;
+typedef struct QVariant QVariant;
+#endif
+
+typedef struct VirtualQPixmap VirtualQPixmap;
+typedef struct QPixmap_VTable{
+	void (*destructor)(VirtualQPixmap* self);
+	int (*devType)(const VirtualQPixmap* self);
+	QPaintEngine* (*paintEngine)(const VirtualQPixmap* self);
+	int (*metric)(const VirtualQPixmap* self, int param1);
+	void (*initPainter)(const VirtualQPixmap* self, QPainter* painter);
+	QPaintDevice* (*redirected)(const VirtualQPixmap* self, QPoint* offset);
+	QPainter* (*sharedPainter)(const VirtualQPixmap* self);
+}QPixmap_VTable;
+
+void* QPixmap_vdata(VirtualQPixmap* self);
+VirtualQPixmap* vdata_QPixmap(void* vdata);
+
+VirtualQPixmap* QPixmap_new(const QPixmap_VTable* vtbl, size_t vdata);
+VirtualQPixmap* QPixmap_new2(const QPixmap_VTable* vtbl, size_t vdata, int w, int h);
+VirtualQPixmap* QPixmap_new3(const QPixmap_VTable* vtbl, size_t vdata, QSize* param1);
+VirtualQPixmap* QPixmap_new4(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName);
+VirtualQPixmap* QPixmap_new5(const QPixmap_VTable* vtbl, size_t vdata, QPixmap* param1);
+VirtualQPixmap* QPixmap_new6(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format);
+VirtualQPixmap* QPixmap_new7(const QPixmap_VTable* vtbl, size_t vdata, struct seaqt_string fileName, const char* format, int flags);
+
+void QPixmap_virtbase(QPixmap* src, QPaintDevice** outptr_QPaintDevice);
+void QPixmap_operatorAssign(QPixmap* self, QPixmap* param1);
+void QPixmap_swap(QPixmap* self, QPixmap* other);
+QVariant* QPixmap_ToQVariant(const QPixmap* self);
+bool QPixmap_isNull(const QPixmap* self);
+int QPixmap_devType(const QPixmap* self);
+int QPixmap_width(const QPixmap* self);
+int QPixmap_height(const QPixmap* self);
+QSize* QPixmap_size(const QPixmap* self);
+QRect* QPixmap_rect(const QPixmap* self);
+int QPixmap_depth(const QPixmap* self);
+int QPixmap_defaultDepth();
+void QPixmap_fill(QPixmap* self);
+QBitmap* QPixmap_mask(const QPixmap* self);
+void QPixmap_setMask(QPixmap* self, QBitmap* mask);
+double QPixmap_devicePixelRatio(const QPixmap* self);
+void QPixmap_setDevicePixelRatio(QPixmap* self, double scaleFactor);
+QSizeF* QPixmap_deviceIndependentSize(const QPixmap* self);
+bool QPixmap_hasAlpha(const QPixmap* self);
+bool QPixmap_hasAlphaChannel(const QPixmap* self);
+QBitmap* QPixmap_createHeuristicMask(const QPixmap* self);
+QBitmap* QPixmap_createMaskFromColor(const QPixmap* self, QColor* maskColor);
+QPixmap* QPixmap_scaled(const QPixmap* self, int w, int h);
+QPixmap* QPixmap_scaledWithQSize(const QPixmap* self, QSize* s);
+QPixmap* QPixmap_scaledToWidth(const QPixmap* self, int w);
+QPixmap* QPixmap_scaledToHeight(const QPixmap* self, int h);
+QPixmap* QPixmap_transformed(const QPixmap* self, QTransform* param1);
+QTransform* QPixmap_trueMatrix(QTransform* m, int w, int h);
+QImage* QPixmap_toImage(const QPixmap* self);
+QPixmap* QPixmap_fromImage(QImage* image);
+QPixmap* QPixmap_fromImageReader(QImageReader* imageReader);
+bool QPixmap_load(QPixmap* self, struct seaqt_string fileName);
+bool QPixmap_loadFromData(QPixmap* self, const unsigned char* buf, unsigned int len);
+bool QPixmap_loadFromDataWithData(QPixmap* self, struct seaqt_string data);
+bool QPixmap_save(const QPixmap* self, struct seaqt_string fileName);
+bool QPixmap_saveWithDevice(const QPixmap* self, QIODevice* device);
+bool QPixmap_convertFromImage(QPixmap* self, QImage* img);
+QPixmap* QPixmap_copy(const QPixmap* self, int x, int y, int width, int height);
+QPixmap* QPixmap_copy2(const QPixmap* self);
+void QPixmap_scroll(QPixmap* self, int dx, int dy, int x, int y, int width, int height);
+void QPixmap_scroll2(QPixmap* self, int dx, int dy, QRect* rect);
+long long QPixmap_cacheKey(const QPixmap* self);
+bool QPixmap_isDetached(const QPixmap* self);
+void QPixmap_detach(QPixmap* self);
+bool QPixmap_isQBitmap(const QPixmap* self);
+QPaintEngine* QPixmap_paintEngine(const QPixmap* self);
+bool QPixmap_operatorNot(const QPixmap* self);
+int QPixmap_metric(const QPixmap* self, int param1);
+void QPixmap_fillWithFillColor(QPixmap* self, QColor* fillColor);
+QBitmap* QPixmap_createHeuristicMaskWithClipTight(const QPixmap* self, bool clipTight);
+QBitmap* QPixmap_createMaskFromColor2(const QPixmap* self, QColor* maskColor, int mode);
+QPixmap* QPixmap_scaled2(const QPixmap* self, int w, int h, int aspectMode);
+QPixmap* QPixmap_scaled3(const QPixmap* self, int w, int h, int aspectMode, int mode);
+QPixmap* QPixmap_scaled4(const QPixmap* self, QSize* s, int aspectMode);
+QPixmap* QPixmap_scaled5(const QPixmap* self, QSize* s, int aspectMode, int mode);
+QPixmap* QPixmap_scaledToWidth2(const QPixmap* self, int w, int mode);
+QPixmap* QPixmap_scaledToHeight2(const QPixmap* self, int h, int mode);
+QPixmap* QPixmap_transformed2(const QPixmap* self, QTransform* param1, int mode);
+QPixmap* QPixmap_fromImage2(QImage* image, int flags);
+QPixmap* QPixmap_fromImageReader2(QImageReader* imageReader, int flags);
+bool QPixmap_load2(QPixmap* self, struct seaqt_string fileName, const char* format);
+bool QPixmap_load3(QPixmap* self, struct seaqt_string fileName, const char* format, int flags);
+bool QPixmap_loadFromData2(QPixmap* self, const unsigned char* buf, unsigned int len, const char* format);
+bool QPixmap_loadFromData3(QPixmap* self, const unsigned char* buf, unsigned int len, const char* format, int flags);
+bool QPixmap_loadFromData4(QPixmap* self, struct seaqt_string data, const char* format);
+bool QPixmap_loadFromData5(QPixmap* self, struct seaqt_string data, const char* format, int flags);
+bool QPixmap_save2(const QPixmap* self, struct seaqt_string fileName, const char* format);
+bool QPixmap_save3(const QPixmap* self, struct seaqt_string fileName, const char* format, int quality);
+bool QPixmap_save4(const QPixmap* self, QIODevice* device, const char* format);
+bool QPixmap_save5(const QPixmap* self, QIODevice* device, const char* format, int quality);
+bool QPixmap_convertFromImage2(QPixmap* self, QImage* img, int flags);
+QPixmap* QPixmap_copyWithRect(const QPixmap* self, QRect* rect);
+void QPixmap_scroll3(QPixmap* self, int dx, int dy, int x, int y, int width, int height, QRegion* exposed);
+void QPixmap_scroll4(QPixmap* self, int dx, int dy, QRect* rect, QRegion* exposed);
+
+int QPixmap_virtualbase_devType(const VirtualQPixmap* self);
+QPaintEngine* QPixmap_virtualbase_paintEngine(const VirtualQPixmap* self);
+int QPixmap_virtualbase_metric(const VirtualQPixmap* self, int param1);
+void QPixmap_virtualbase_initPainter(const VirtualQPixmap* self, QPainter* painter);
+QPaintDevice* QPixmap_virtualbase_redirected(const VirtualQPixmap* self, QPoint* offset);
+QPainter* QPixmap_virtualbase_sharedPainter(const VirtualQPixmap* self);
+
+void QPixmap_delete(QPixmap* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

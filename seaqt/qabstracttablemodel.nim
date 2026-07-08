@@ -1,0 +1,2 @@
+import ./QtCore/gen_qabstractitemmodel
+export gen_qabstractitemmodel

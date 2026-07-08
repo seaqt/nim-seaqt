@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractpropertyeditor
+export gen_abstractpropertyeditor

@@ -1,0 +1,24 @@
+type QPixelFormat* {.inheritable, pure.} = object
+  h*: pointer
+  owned*: bool
+
+import ./qtgui_pkg
+
+{.compile("gen_qpixelformat.cpp", QtGuiCFlags).}
+
+proc fcQPixelFormat_delete(self: pointer) {.importc: "QPixelFormat_delete".}
+proc `=destroy`(self: var QPixelFormat) =
+  if self.owned: fcQPixelFormat_delete(self.h)
+
+proc `=sink`(dest: var QPixelFormat, source: QPixelFormat) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QPixelFormat, source: QPixelFormat) {.error.}
+proc delete*(self: sink QPixelFormat) =
+  let h = self.h
+  wasMoved(self)
+  fcQPixelFormat_delete(h)
+

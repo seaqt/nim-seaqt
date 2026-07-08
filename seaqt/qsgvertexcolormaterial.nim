@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgvertexcolormaterial
+export gen_qsgvertexcolormaterial

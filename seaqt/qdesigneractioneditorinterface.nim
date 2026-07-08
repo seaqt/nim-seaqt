@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractactioneditor
+export gen_abstractactioneditor

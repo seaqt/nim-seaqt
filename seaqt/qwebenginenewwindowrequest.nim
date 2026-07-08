@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginenewwindowrequest
+export gen_qwebenginenewwindowrequest
