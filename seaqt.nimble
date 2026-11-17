@@ -1,4 +1,4 @@
-version = "0.6.8.0"
+version = "0.6.8.3.0"
 license = "MIT"
 author = "seaqt"
 description = "Generator-based bindings for Qt/QML"
