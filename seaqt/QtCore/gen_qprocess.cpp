@@ -1184,32 +1184,32 @@ void QProcess_virtualbase_disconnectNotify(VirtualQProcess* self, QMetaMethod* s
 }
 
 void QProcess_protectedbase_setProcessState(VirtualQProcess* self, int state) {
-	self->setProcessState(static_cast<VirtualQProcess::ProcessState>(state));
+	self->QProcess::setProcessState(static_cast<VirtualQProcess::ProcessState>(state));
 }
 
 void QProcess_protectedbase_setOpenMode(VirtualQProcess* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQProcess::OpenMode>(openMode));
+	self->QProcess::setOpenMode(static_cast<VirtualQProcess::OpenMode>(openMode));
 }
 
 void QProcess_protectedbase_setErrorString(VirtualQProcess* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QProcess::setErrorString(errorString_QString);
 }
 
 QObject* QProcess_protectedbase_sender(const VirtualQProcess* self) {
-	return self->sender();
+	return self->QProcess::sender();
 }
 
 int QProcess_protectedbase_senderSignalIndex(const VirtualQProcess* self) {
-	return self->senderSignalIndex();
+	return self->QProcess::senderSignalIndex();
 }
 
 int QProcess_protectedbase_receivers(const VirtualQProcess* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QProcess::receivers(signal);
 }
 
 bool QProcess_protectedbase_isSignalConnected(const VirtualQProcess* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QProcess::isSignalConnected(*signal);
 }
 
 void QProcess_delete(QProcess* self) {

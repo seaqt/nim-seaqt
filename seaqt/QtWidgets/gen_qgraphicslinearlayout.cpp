@@ -351,15 +351,15 @@ bool QGraphicsLinearLayout_virtualbase_isEmpty(const VirtualQGraphicsLinearLayou
 }
 
 void QGraphicsLinearLayout_protectedbase_addChildLayoutItem(VirtualQGraphicsLinearLayout* self, QGraphicsLayoutItem* layoutItem) {
-	self->addChildLayoutItem(layoutItem);
+	self->QGraphicsLinearLayout::addChildLayoutItem(layoutItem);
 }
 
 void QGraphicsLinearLayout_protectedbase_setGraphicsItem(VirtualQGraphicsLinearLayout* self, QGraphicsItem* item) {
-	self->setGraphicsItem(item);
+	self->QGraphicsLinearLayout::setGraphicsItem(item);
 }
 
 void QGraphicsLinearLayout_protectedbase_setOwnedByLayout(VirtualQGraphicsLinearLayout* self, bool ownedByLayout) {
-	self->setOwnedByLayout(ownedByLayout);
+	self->QGraphicsLinearLayout::setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsLinearLayout_delete(QGraphicsLinearLayout* self) {

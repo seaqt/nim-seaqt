@@ -400,23 +400,23 @@ void QPdfPageNavigator_virtualbase_disconnectNotify(VirtualQPdfPageNavigator* se
 }
 
 QPdfLink* QPdfPageNavigator_protectedbase_currentLink(const VirtualQPdfPageNavigator* self) {
-	return new QPdfLink(self->currentLink());
+	return new QPdfLink(self->QPdfPageNavigator::currentLink());
 }
 
 QObject* QPdfPageNavigator_protectedbase_sender(const VirtualQPdfPageNavigator* self) {
-	return self->sender();
+	return self->QPdfPageNavigator::sender();
 }
 
 int QPdfPageNavigator_protectedbase_senderSignalIndex(const VirtualQPdfPageNavigator* self) {
-	return self->senderSignalIndex();
+	return self->QPdfPageNavigator::senderSignalIndex();
 }
 
 int QPdfPageNavigator_protectedbase_receivers(const VirtualQPdfPageNavigator* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPdfPageNavigator::receivers(signal);
 }
 
 bool QPdfPageNavigator_protectedbase_isSignalConnected(const VirtualQPdfPageNavigator* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPdfPageNavigator::isSignalConnected(*signal);
 }
 
 void QPdfPageNavigator_delete(QPdfPageNavigator* self) {

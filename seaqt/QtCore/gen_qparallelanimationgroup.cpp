@@ -358,19 +358,19 @@ void QParallelAnimationGroup_virtualbase_disconnectNotify(VirtualQParallelAnimat
 }
 
 QObject* QParallelAnimationGroup_protectedbase_sender(const VirtualQParallelAnimationGroup* self) {
-	return self->sender();
+	return self->QParallelAnimationGroup::sender();
 }
 
 int QParallelAnimationGroup_protectedbase_senderSignalIndex(const VirtualQParallelAnimationGroup* self) {
-	return self->senderSignalIndex();
+	return self->QParallelAnimationGroup::senderSignalIndex();
 }
 
 int QParallelAnimationGroup_protectedbase_receivers(const VirtualQParallelAnimationGroup* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QParallelAnimationGroup::receivers(signal);
 }
 
 bool QParallelAnimationGroup_protectedbase_isSignalConnected(const VirtualQParallelAnimationGroup* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QParallelAnimationGroup::isSignalConnected(*signal);
 }
 
 void QParallelAnimationGroup_delete(QParallelAnimationGroup* self) {

@@ -623,28 +623,28 @@ void QWaveDecoder_virtualbase_disconnectNotify(VirtualQWaveDecoder* self, QMetaM
 }
 
 void QWaveDecoder_protectedbase_setOpenMode(VirtualQWaveDecoder* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQWaveDecoder::OpenMode>(openMode));
+	self->QWaveDecoder::setOpenMode(static_cast<VirtualQWaveDecoder::OpenMode>(openMode));
 }
 
 void QWaveDecoder_protectedbase_setErrorString(VirtualQWaveDecoder* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QWaveDecoder::setErrorString(errorString_QString);
 }
 
 QObject* QWaveDecoder_protectedbase_sender(const VirtualQWaveDecoder* self) {
-	return self->sender();
+	return self->QWaveDecoder::sender();
 }
 
 int QWaveDecoder_protectedbase_senderSignalIndex(const VirtualQWaveDecoder* self) {
-	return self->senderSignalIndex();
+	return self->QWaveDecoder::senderSignalIndex();
 }
 
 int QWaveDecoder_protectedbase_receivers(const VirtualQWaveDecoder* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWaveDecoder::receivers(signal);
 }
 
 bool QWaveDecoder_protectedbase_isSignalConnected(const VirtualQWaveDecoder* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWaveDecoder::isSignalConnected(*signal);
 }
 
 void QWaveDecoder_delete(QWaveDecoder* self) {

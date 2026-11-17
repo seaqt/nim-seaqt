@@ -1113,39 +1113,39 @@ void QSplashScreen_virtualbase_disconnectNotify(VirtualQSplashScreen* self, QMet
 }
 
 void QSplashScreen_protectedbase_updateMicroFocus(VirtualQSplashScreen* self) {
-	self->updateMicroFocus();
+	self->QSplashScreen::updateMicroFocus();
 }
 
 void QSplashScreen_protectedbase_create(VirtualQSplashScreen* self) {
-	self->create();
+	self->QSplashScreen::create();
 }
 
 void QSplashScreen_protectedbase_destroy(VirtualQSplashScreen* self) {
-	self->destroy();
+	self->QSplashScreen::destroy();
 }
 
 bool QSplashScreen_protectedbase_focusNextChild(VirtualQSplashScreen* self) {
-	return self->focusNextChild();
+	return self->QSplashScreen::focusNextChild();
 }
 
 bool QSplashScreen_protectedbase_focusPreviousChild(VirtualQSplashScreen* self) {
-	return self->focusPreviousChild();
+	return self->QSplashScreen::focusPreviousChild();
 }
 
 QObject* QSplashScreen_protectedbase_sender(const VirtualQSplashScreen* self) {
-	return self->sender();
+	return self->QSplashScreen::sender();
 }
 
 int QSplashScreen_protectedbase_senderSignalIndex(const VirtualQSplashScreen* self) {
-	return self->senderSignalIndex();
+	return self->QSplashScreen::senderSignalIndex();
 }
 
 int QSplashScreen_protectedbase_receivers(const VirtualQSplashScreen* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSplashScreen::receivers(signal);
 }
 
 bool QSplashScreen_protectedbase_isSignalConnected(const VirtualQSplashScreen* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSplashScreen::isSignalConnected(*signal);
 }
 
 void QSplashScreen_delete(QSplashScreen* self) {

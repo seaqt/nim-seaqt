@@ -365,19 +365,19 @@ void QMediaDevices_virtualbase_disconnectNotify(VirtualQMediaDevices* self, QMet
 }
 
 QObject* QMediaDevices_protectedbase_sender(const VirtualQMediaDevices* self) {
-	return self->sender();
+	return self->QMediaDevices::sender();
 }
 
 int QMediaDevices_protectedbase_senderSignalIndex(const VirtualQMediaDevices* self) {
-	return self->senderSignalIndex();
+	return self->QMediaDevices::senderSignalIndex();
 }
 
 int QMediaDevices_protectedbase_receivers(const VirtualQMediaDevices* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMediaDevices::receivers(signal);
 }
 
 bool QMediaDevices_protectedbase_isSignalConnected(const VirtualQMediaDevices* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMediaDevices::isSignalConnected(*signal);
 }
 
 void QMediaDevices_delete(QMediaDevices* self) {

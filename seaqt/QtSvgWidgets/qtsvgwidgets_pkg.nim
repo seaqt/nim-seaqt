@@ -5,7 +5,7 @@ const
 
   QtSvgWidgetsLibs* = gorge("pkg-config --libs Qt6SvgWidgets")
 
-  QtSvgWidgetsGenVersion* = "6.4.2"
+  QtSvgWidgetsGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtSvgWidgetsBuildVersion* = gorge("pkg-config --modversion Qt6SvgWidgets")

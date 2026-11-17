@@ -1175,43 +1175,43 @@ void QDialog_virtualbase_disconnectNotify(VirtualQDialog* self, QMetaMethod* sig
 }
 
 void QDialog_protectedbase_adjustPosition(VirtualQDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QDialog::adjustPosition(param1);
 }
 
 void QDialog_protectedbase_updateMicroFocus(VirtualQDialog* self) {
-	self->updateMicroFocus();
+	self->QDialog::updateMicroFocus();
 }
 
 void QDialog_protectedbase_create(VirtualQDialog* self) {
-	self->create();
+	self->QDialog::create();
 }
 
 void QDialog_protectedbase_destroy(VirtualQDialog* self) {
-	self->destroy();
+	self->QDialog::destroy();
 }
 
 bool QDialog_protectedbase_focusNextChild(VirtualQDialog* self) {
-	return self->focusNextChild();
+	return self->QDialog::focusNextChild();
 }
 
 bool QDialog_protectedbase_focusPreviousChild(VirtualQDialog* self) {
-	return self->focusPreviousChild();
+	return self->QDialog::focusPreviousChild();
 }
 
 QObject* QDialog_protectedbase_sender(const VirtualQDialog* self) {
-	return self->sender();
+	return self->QDialog::sender();
 }
 
 int QDialog_protectedbase_senderSignalIndex(const VirtualQDialog* self) {
-	return self->senderSignalIndex();
+	return self->QDialog::senderSignalIndex();
 }
 
 int QDialog_protectedbase_receivers(const VirtualQDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDialog::receivers(signal);
 }
 
 bool QDialog_protectedbase_isSignalConnected(const VirtualQDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDialog::isSignalConnected(*signal);
 }
 
 void QDialog_delete(QDialog* self) {

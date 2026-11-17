@@ -497,19 +497,19 @@ void QVariantAnimation_virtualbase_disconnectNotify(VirtualQVariantAnimation* se
 }
 
 QObject* QVariantAnimation_protectedbase_sender(const VirtualQVariantAnimation* self) {
-	return self->sender();
+	return self->QVariantAnimation::sender();
 }
 
 int QVariantAnimation_protectedbase_senderSignalIndex(const VirtualQVariantAnimation* self) {
-	return self->senderSignalIndex();
+	return self->QVariantAnimation::senderSignalIndex();
 }
 
 int QVariantAnimation_protectedbase_receivers(const VirtualQVariantAnimation* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QVariantAnimation::receivers(signal);
 }
 
 bool QVariantAnimation_protectedbase_isSignalConnected(const VirtualQVariantAnimation* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QVariantAnimation::isSignalConnected(*signal);
 }
 
 void QVariantAnimation_delete(QVariantAnimation* self) {

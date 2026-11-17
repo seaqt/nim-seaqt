@@ -401,19 +401,19 @@ void QPointingDevice_virtualbase_disconnectNotify(VirtualQPointingDevice* self, 
 }
 
 QObject* QPointingDevice_protectedbase_sender(const VirtualQPointingDevice* self) {
-	return self->sender();
+	return self->QPointingDevice::sender();
 }
 
 int QPointingDevice_protectedbase_senderSignalIndex(const VirtualQPointingDevice* self) {
-	return self->senderSignalIndex();
+	return self->QPointingDevice::senderSignalIndex();
 }
 
 int QPointingDevice_protectedbase_receivers(const VirtualQPointingDevice* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPointingDevice::receivers(signal);
 }
 
 bool QPointingDevice_protectedbase_isSignalConnected(const VirtualQPointingDevice* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPointingDevice::isSignalConnected(*signal);
 }
 
 void QPointingDevice_delete(QPointingDevice* self) {

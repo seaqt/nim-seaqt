@@ -1086,43 +1086,43 @@ void QStackedWidget_virtualbase_disconnectNotify(VirtualQStackedWidget* self, QM
 }
 
 void QStackedWidget_protectedbase_drawFrame(VirtualQStackedWidget* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QStackedWidget::drawFrame(param1);
 }
 
 void QStackedWidget_protectedbase_updateMicroFocus(VirtualQStackedWidget* self) {
-	self->updateMicroFocus();
+	self->QStackedWidget::updateMicroFocus();
 }
 
 void QStackedWidget_protectedbase_create(VirtualQStackedWidget* self) {
-	self->create();
+	self->QStackedWidget::create();
 }
 
 void QStackedWidget_protectedbase_destroy(VirtualQStackedWidget* self) {
-	self->destroy();
+	self->QStackedWidget::destroy();
 }
 
 bool QStackedWidget_protectedbase_focusNextChild(VirtualQStackedWidget* self) {
-	return self->focusNextChild();
+	return self->QStackedWidget::focusNextChild();
 }
 
 bool QStackedWidget_protectedbase_focusPreviousChild(VirtualQStackedWidget* self) {
-	return self->focusPreviousChild();
+	return self->QStackedWidget::focusPreviousChild();
 }
 
 QObject* QStackedWidget_protectedbase_sender(const VirtualQStackedWidget* self) {
-	return self->sender();
+	return self->QStackedWidget::sender();
 }
 
 int QStackedWidget_protectedbase_senderSignalIndex(const VirtualQStackedWidget* self) {
-	return self->senderSignalIndex();
+	return self->QStackedWidget::senderSignalIndex();
 }
 
 int QStackedWidget_protectedbase_receivers(const VirtualQStackedWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QStackedWidget::receivers(signal);
 }
 
 bool QStackedWidget_protectedbase_isSignalConnected(const VirtualQStackedWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QStackedWidget::isSignalConnected(*signal);
 }
 
 void QStackedWidget_delete(QStackedWidget* self) {

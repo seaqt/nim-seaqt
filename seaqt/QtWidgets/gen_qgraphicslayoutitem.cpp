@@ -302,11 +302,11 @@ bool QGraphicsLayoutItem_virtualbase_isEmpty(const VirtualQGraphicsLayoutItem* s
 }
 
 void QGraphicsLayoutItem_protectedbase_setGraphicsItem(VirtualQGraphicsLayoutItem* self, QGraphicsItem* item) {
-	self->setGraphicsItem(item);
+	self->QGraphicsLayoutItem::setGraphicsItem(item);
 }
 
 void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(VirtualQGraphicsLayoutItem* self, bool ownedByLayout) {
-	self->setOwnedByLayout(ownedByLayout);
+	self->QGraphicsLayoutItem::setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsLayoutItem_delete(QGraphicsLayoutItem* self) {

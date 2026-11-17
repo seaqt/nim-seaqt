@@ -85,7 +85,6 @@ import
   ../QtGui/gen_qevent_types,
   ../QtGui/gen_qmatrix4x4_types,
   ../QtGui/gen_qtransform_types,
-  ../QtQml/gen_qjsvalue_types,
   ./gen_qquickwindow_types,
   ./gen_qsgnode_types,
   ./gen_qsgtextureprovider_types
@@ -102,7 +101,6 @@ export
   gen_qevent_types,
   gen_qmatrix4x4_types,
   gen_qtransform_types,
-  gen_qjsvalue_types,
   gen_qquickwindow_types,
   gen_qsgnode_types,
   gen_qsgtextureprovider_types
@@ -246,7 +244,6 @@ proc fcQQuickItem_grabTouchPoints(self: pointer, ids: struct_seaqt_array): void 
 proc fcQQuickItem_ungrabTouchPoints(self: pointer): void {.importc: "QQuickItem_ungrabTouchPoints".}
 proc fcQQuickItem_keepTouchGrab(self: pointer): bool {.importc: "QQuickItem_keepTouchGrab".}
 proc fcQQuickItem_setKeepTouchGrab(self: pointer, keepTouchGrab: bool): void {.importc: "QQuickItem_setKeepTouchGrab".}
-proc fcQQuickItem_grabToImageCallback(self: pointer, callback: pointer): bool {.importc: "QQuickItem_grabToImage_callback".}
 proc fcQQuickItem_contains(self: pointer, point: pointer): bool {.importc: "QQuickItem_contains".}
 proc fcQQuickItem_containmentMask(self: pointer): pointer {.importc: "QQuickItem_containmentMask".}
 proc fcQQuickItem_setContainmentMask(self: pointer, mask: pointer): void {.importc: "QQuickItem_setContainmentMask".}
@@ -333,7 +330,6 @@ proc fcQQuickItem_connect_paletteCreated(self: pointer, slot: int, callback: pro
 proc fcQQuickItem_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QQuickItem_tr_s_c".}
 proc fcQQuickItem_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QQuickItem_tr_s_c_n".}
 proc fcQQuickItem_setFlagFlagEnabled(self: pointer, flag: cint, enabled: bool): void {.importc: "QQuickItem_setFlag_flag_enabled".}
-proc fcQQuickItem_grabToImageCallbackTargetSize(self: pointer, callback: pointer, targetSize: pointer): bool {.importc: "QQuickItem_grabToImage_callback_targetSize".}
 proc fcQQuickItem_nextItemInFocusChainForward(self: pointer, forward: bool): pointer {.importc: "QQuickItem_nextItemInFocusChain_forward".}
 proc fcQQuickItem_vdata(self: pointer): ptr pointer {.importc: "QQuickItem_vdata".}
 proc fvdata_cQQuickItem(self: pointer): pointer {.importc: "vdata_QQuickItem".}
@@ -1121,9 +1117,6 @@ proc keepTouchGrab*(self: gen_qquickitem_types.QQuickItem): bool =
 proc setKeepTouchGrab*(self: gen_qquickitem_types.QQuickItem, keepTouchGrab: bool): void =
   fcQQuickItem_setKeepTouchGrab(self.h, keepTouchGrab)
 
-proc grabToImage*(self: gen_qquickitem_types.QQuickItem, callback: gen_qjsvalue_types.QJSValue): bool =
-  fcQQuickItem_grabToImageCallback(self.h, callback.h)
-
 proc contains*(self: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): bool =
   fcQQuickItem_contains(self.h, point.h)
 
@@ -1762,9 +1755,6 @@ proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring, n: cin
 
 proc setFlag*(self: gen_qquickitem_types.QQuickItem, flag: cint, enabled: bool): void =
   fcQQuickItem_setFlagFlagEnabled(self.h, cint(flag), enabled)
-
-proc grabToImage*(self: gen_qquickitem_types.QQuickItem, callback: gen_qjsvalue_types.QJSValue, targetSize: gen_qsize_types.QSize): bool =
-  fcQQuickItem_grabToImageCallbackTargetSize(self.h, callback.h, targetSize.h)
 
 proc nextItemInFocusChain*(self: gen_qquickitem_types.QQuickItem, forward: bool): gen_qquickitem_types.QQuickItem =
   gen_qquickitem_types.QQuickItem(h: fcQQuickItem_nextItemInFocusChainForward(self.h, forward), owned: false)

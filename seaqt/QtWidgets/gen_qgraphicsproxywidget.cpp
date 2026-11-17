@@ -1378,47 +1378,47 @@ bool QGraphicsProxyWidget_virtualbase_isEmpty(const VirtualQGraphicsProxyWidget*
 }
 
 QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(VirtualQGraphicsProxyWidget* self, QWidget* param1) {
-	return self->newProxyWidget(param1);
+	return self->QGraphicsProxyWidget::newProxyWidget(param1);
 }
 
 void QGraphicsProxyWidget_protectedbase_updateMicroFocus(VirtualQGraphicsProxyWidget* self) {
-	self->updateMicroFocus();
+	self->QGraphicsProxyWidget::updateMicroFocus();
 }
 
 QObject* QGraphicsProxyWidget_protectedbase_sender(const VirtualQGraphicsProxyWidget* self) {
-	return self->sender();
+	return self->QGraphicsProxyWidget::sender();
 }
 
 int QGraphicsProxyWidget_protectedbase_senderSignalIndex(const VirtualQGraphicsProxyWidget* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsProxyWidget::senderSignalIndex();
 }
 
 int QGraphicsProxyWidget_protectedbase_receivers(const VirtualQGraphicsProxyWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsProxyWidget::receivers(signal);
 }
 
 bool QGraphicsProxyWidget_protectedbase_isSignalConnected(const VirtualQGraphicsProxyWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsProxyWidget::isSignalConnected(*signal);
 }
 
 void QGraphicsProxyWidget_protectedbase_addToIndex(VirtualQGraphicsProxyWidget* self) {
-	self->addToIndex();
+	self->QGraphicsProxyWidget::addToIndex();
 }
 
 void QGraphicsProxyWidget_protectedbase_removeFromIndex(VirtualQGraphicsProxyWidget* self) {
-	self->removeFromIndex();
+	self->QGraphicsProxyWidget::removeFromIndex();
 }
 
 void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(VirtualQGraphicsProxyWidget* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsProxyWidget::prepareGeometryChange();
 }
 
 void QGraphicsProxyWidget_protectedbase_setGraphicsItem(VirtualQGraphicsProxyWidget* self, QGraphicsItem* item) {
-	self->setGraphicsItem(item);
+	self->QGraphicsProxyWidget::setGraphicsItem(item);
 }
 
 void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(VirtualQGraphicsProxyWidget* self, bool ownedByLayout) {
-	self->setOwnedByLayout(ownedByLayout);
+	self->QGraphicsProxyWidget::setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsProxyWidget_delete(QGraphicsProxyWidget* self) {

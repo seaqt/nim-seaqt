@@ -311,11 +311,11 @@ bool QFormBuilder_virtualbase_checkProperty(const VirtualQFormBuilder* self, QOb
 
 bool QFormBuilder_protectedbase_applyPropertyInternally(VirtualQFormBuilder* self, QObject* o, struct seaqt_string propertyName, QVariant* value) {
 		QString propertyName_QString = QString::fromUtf8(propertyName.data, propertyName.len);
-	return self->applyPropertyInternally(o, propertyName_QString, *value);
+	return self->QFormBuilder::applyPropertyInternally(o, propertyName_QString, *value);
 }
 
 void QFormBuilder_protectedbase_reset(VirtualQFormBuilder* self) {
-	self->reset();
+	self->QFormBuilder::reset();
 }
 
 void QFormBuilder_delete(QFormBuilder* self) {

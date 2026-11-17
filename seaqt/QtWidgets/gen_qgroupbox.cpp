@@ -1121,39 +1121,39 @@ void QGroupBox_virtualbase_disconnectNotify(VirtualQGroupBox* self, QMetaMethod*
 }
 
 void QGroupBox_protectedbase_updateMicroFocus(VirtualQGroupBox* self) {
-	self->updateMicroFocus();
+	self->QGroupBox::updateMicroFocus();
 }
 
 void QGroupBox_protectedbase_create(VirtualQGroupBox* self) {
-	self->create();
+	self->QGroupBox::create();
 }
 
 void QGroupBox_protectedbase_destroy(VirtualQGroupBox* self) {
-	self->destroy();
+	self->QGroupBox::destroy();
 }
 
 bool QGroupBox_protectedbase_focusNextChild(VirtualQGroupBox* self) {
-	return self->focusNextChild();
+	return self->QGroupBox::focusNextChild();
 }
 
 bool QGroupBox_protectedbase_focusPreviousChild(VirtualQGroupBox* self) {
-	return self->focusPreviousChild();
+	return self->QGroupBox::focusPreviousChild();
 }
 
 QObject* QGroupBox_protectedbase_sender(const VirtualQGroupBox* self) {
-	return self->sender();
+	return self->QGroupBox::sender();
 }
 
 int QGroupBox_protectedbase_senderSignalIndex(const VirtualQGroupBox* self) {
-	return self->senderSignalIndex();
+	return self->QGroupBox::senderSignalIndex();
 }
 
 int QGroupBox_protectedbase_receivers(const VirtualQGroupBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGroupBox::receivers(signal);
 }
 
 bool QGroupBox_protectedbase_isSignalConnected(const VirtualQGroupBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGroupBox::isSignalConnected(*signal);
 }
 
 void QGroupBox_delete(QGroupBox* self) {

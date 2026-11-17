@@ -845,19 +845,19 @@ void QCamera_virtualbase_disconnectNotify(VirtualQCamera* self, QMetaMethod* sig
 }
 
 QObject* QCamera_protectedbase_sender(const VirtualQCamera* self) {
-	return self->sender();
+	return self->QCamera::sender();
 }
 
 int QCamera_protectedbase_senderSignalIndex(const VirtualQCamera* self) {
-	return self->senderSignalIndex();
+	return self->QCamera::senderSignalIndex();
 }
 
 int QCamera_protectedbase_receivers(const VirtualQCamera* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCamera::receivers(signal);
 }
 
 bool QCamera_protectedbase_isSignalConnected(const VirtualQCamera* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCamera::isSignalConnected(*signal);
 }
 
 void QCamera_delete(QCamera* self) {

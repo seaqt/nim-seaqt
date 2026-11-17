@@ -322,19 +322,19 @@ void QAccessibleBridgePlugin_virtualbase_disconnectNotify(VirtualQAccessibleBrid
 }
 
 QObject* QAccessibleBridgePlugin_protectedbase_sender(const VirtualQAccessibleBridgePlugin* self) {
-	return self->sender();
+	return self->QAccessibleBridgePlugin::sender();
 }
 
 int QAccessibleBridgePlugin_protectedbase_senderSignalIndex(const VirtualQAccessibleBridgePlugin* self) {
-	return self->senderSignalIndex();
+	return self->QAccessibleBridgePlugin::senderSignalIndex();
 }
 
 int QAccessibleBridgePlugin_protectedbase_receivers(const VirtualQAccessibleBridgePlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAccessibleBridgePlugin::receivers(signal);
 }
 
 bool QAccessibleBridgePlugin_protectedbase_isSignalConnected(const VirtualQAccessibleBridgePlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAccessibleBridgePlugin::isSignalConnected(*signal);
 }
 
 void QAccessibleBridgePlugin_delete(QAccessibleBridgePlugin* self) {

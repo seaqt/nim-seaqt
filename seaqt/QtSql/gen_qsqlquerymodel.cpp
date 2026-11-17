@@ -1302,51 +1302,51 @@ void QSqlQueryModel_virtualbase_disconnectNotify(VirtualQSqlQueryModel* self, QM
 }
 
 void QSqlQueryModel_protectedbase_beginInsertRows(VirtualQSqlQueryModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QSqlQueryModel::beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QSqlQueryModel_protectedbase_endInsertRows(VirtualQSqlQueryModel* self) {
-	self->endInsertRows();
+	self->QSqlQueryModel::endInsertRows();
 }
 
 void QSqlQueryModel_protectedbase_beginRemoveRows(VirtualQSqlQueryModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QSqlQueryModel::beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QSqlQueryModel_protectedbase_endRemoveRows(VirtualQSqlQueryModel* self) {
-	self->endRemoveRows();
+	self->QSqlQueryModel::endRemoveRows();
 }
 
 void QSqlQueryModel_protectedbase_beginInsertColumns(VirtualQSqlQueryModel* self, QModelIndex* parent, int first, int last) {
-	self->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QSqlQueryModel::beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QSqlQueryModel_protectedbase_endInsertColumns(VirtualQSqlQueryModel* self) {
-	self->endInsertColumns();
+	self->QSqlQueryModel::endInsertColumns();
 }
 
 void QSqlQueryModel_protectedbase_beginRemoveColumns(VirtualQSqlQueryModel* self, QModelIndex* parent, int first, int last) {
-	self->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QSqlQueryModel::beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QSqlQueryModel_protectedbase_endRemoveColumns(VirtualQSqlQueryModel* self) {
-	self->endRemoveColumns();
+	self->QSqlQueryModel::endRemoveColumns();
 }
 
 void QSqlQueryModel_protectedbase_beginResetModel(VirtualQSqlQueryModel* self) {
-	self->beginResetModel();
+	self->QSqlQueryModel::beginResetModel();
 }
 
 void QSqlQueryModel_protectedbase_endResetModel(VirtualQSqlQueryModel* self) {
-	self->endResetModel();
+	self->QSqlQueryModel::endResetModel();
 }
 
 void QSqlQueryModel_protectedbase_setLastError(VirtualQSqlQueryModel* self, QSqlError* error) {
-	self->setLastError(*error);
+	self->QSqlQueryModel::setLastError(*error);
 }
 
 QModelIndex* QSqlQueryModel_protectedbase_createIndex_row_column(const VirtualQSqlQueryModel* self, int row, int column) {
-	return new QModelIndex(self->createIndex(static_cast<int>(row), static_cast<int>(column)));
+	return new QModelIndex(self->QSqlQueryModel::createIndex(static_cast<int>(row), static_cast<int>(column)));
 }
 
 void QSqlQueryModel_protectedbase_encodeData(const VirtualQSqlQueryModel* self, struct seaqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
@@ -1356,31 +1356,31 @@ void QSqlQueryModel_protectedbase_encodeData(const VirtualQSqlQueryModel* self, 
 		for(size_t i = 0; i < indexes.len; ++i) {
 			indexes_QList.push_back(*(indexes_arr[i]));
 		}
-	self->encodeData(indexes_QList, *stream);
+	self->QSqlQueryModel::encodeData(indexes_QList, *stream);
 }
 
 bool QSqlQueryModel_protectedbase_decodeData(VirtualQSqlQueryModel* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	return self->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
+	return self->QSqlQueryModel::decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 }
 
 bool QSqlQueryModel_protectedbase_beginMoveRows(VirtualQSqlQueryModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	return self->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
+	return self->QSqlQueryModel::beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 }
 
 void QSqlQueryModel_protectedbase_endMoveRows(VirtualQSqlQueryModel* self) {
-	self->endMoveRows();
+	self->QSqlQueryModel::endMoveRows();
 }
 
 bool QSqlQueryModel_protectedbase_beginMoveColumns(VirtualQSqlQueryModel* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	return self->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
+	return self->QSqlQueryModel::beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 }
 
 void QSqlQueryModel_protectedbase_endMoveColumns(VirtualQSqlQueryModel* self) {
-	self->endMoveColumns();
+	self->QSqlQueryModel::endMoveColumns();
 }
 
 void QSqlQueryModel_protectedbase_changePersistentIndex(VirtualQSqlQueryModel* self, QModelIndex* from, QModelIndex* to) {
-	self->changePersistentIndex(*from, *to);
+	self->QSqlQueryModel::changePersistentIndex(*from, *to);
 }
 
 void QSqlQueryModel_protectedbase_changePersistentIndexList(VirtualQSqlQueryModel* self, struct seaqt_array /* of QModelIndex* */  from, struct seaqt_array /* of QModelIndex* */  to) {
@@ -1396,11 +1396,11 @@ void QSqlQueryModel_protectedbase_changePersistentIndexList(VirtualQSqlQueryMode
 		for(size_t i = 0; i < to.len; ++i) {
 			to_QList.push_back(*(to_arr[i]));
 		}
-	self->changePersistentIndexList(from_QList, to_QList);
+	self->QSqlQueryModel::changePersistentIndexList(from_QList, to_QList);
 }
 
 struct seaqt_array /* of QModelIndex* */  QSqlQueryModel_protectedbase_persistentIndexList(const VirtualQSqlQueryModel* self) {
-	QModelIndexList _ret = self->persistentIndexList();
+	QModelIndexList _ret = self->QSqlQueryModel::persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -1413,19 +1413,19 @@ struct seaqt_array /* of QModelIndex* */  QSqlQueryModel_protectedbase_persisten
 }
 
 QObject* QSqlQueryModel_protectedbase_sender(const VirtualQSqlQueryModel* self) {
-	return self->sender();
+	return self->QSqlQueryModel::sender();
 }
 
 int QSqlQueryModel_protectedbase_senderSignalIndex(const VirtualQSqlQueryModel* self) {
-	return self->senderSignalIndex();
+	return self->QSqlQueryModel::senderSignalIndex();
 }
 
 int QSqlQueryModel_protectedbase_receivers(const VirtualQSqlQueryModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSqlQueryModel::receivers(signal);
 }
 
 bool QSqlQueryModel_protectedbase_isSignalConnected(const VirtualQSqlQueryModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSqlQueryModel::isSignalConnected(*signal);
 }
 
 void QSqlQueryModel_delete(QSqlQueryModel* self) {

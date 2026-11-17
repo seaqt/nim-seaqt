@@ -5,7 +5,7 @@ const
 
   QtWebEngineQuickLibs* = gorge("pkg-config --libs Qt6WebEngineQuick")
 
-  QtWebEngineQuickGenVersion* = "6.4.2"
+  QtWebEngineQuickGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtWebEngineQuickBuildVersion* = gorge("pkg-config --modversion Qt6WebEngineQuick")

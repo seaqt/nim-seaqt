@@ -2854,121 +2854,121 @@ void QTableWidget_virtualbase_disconnectNotify(VirtualQTableWidget* self, QMetaM
 }
 
 void QTableWidget_protectedbase_rowMoved(VirtualQTableWidget* self, int row, int oldIndex, int newIndex) {
-	self->rowMoved(static_cast<int>(row), static_cast<int>(oldIndex), static_cast<int>(newIndex));
+	self->QTableWidget::rowMoved(static_cast<int>(row), static_cast<int>(oldIndex), static_cast<int>(newIndex));
 }
 
 void QTableWidget_protectedbase_columnMoved(VirtualQTableWidget* self, int column, int oldIndex, int newIndex) {
-	self->columnMoved(static_cast<int>(column), static_cast<int>(oldIndex), static_cast<int>(newIndex));
+	self->QTableWidget::columnMoved(static_cast<int>(column), static_cast<int>(oldIndex), static_cast<int>(newIndex));
 }
 
 void QTableWidget_protectedbase_rowResized(VirtualQTableWidget* self, int row, int oldHeight, int newHeight) {
-	self->rowResized(static_cast<int>(row), static_cast<int>(oldHeight), static_cast<int>(newHeight));
+	self->QTableWidget::rowResized(static_cast<int>(row), static_cast<int>(oldHeight), static_cast<int>(newHeight));
 }
 
 void QTableWidget_protectedbase_columnResized(VirtualQTableWidget* self, int column, int oldWidth, int newWidth) {
-	self->columnResized(static_cast<int>(column), static_cast<int>(oldWidth), static_cast<int>(newWidth));
+	self->QTableWidget::columnResized(static_cast<int>(column), static_cast<int>(oldWidth), static_cast<int>(newWidth));
 }
 
 void QTableWidget_protectedbase_rowCountChanged(VirtualQTableWidget* self, int oldCount, int newCount) {
-	self->rowCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
+	self->QTableWidget::rowCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
 }
 
 void QTableWidget_protectedbase_columnCountChanged(VirtualQTableWidget* self, int oldCount, int newCount) {
-	self->columnCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
+	self->QTableWidget::columnCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
 }
 
 int QTableWidget_protectedbase_state(const VirtualQTableWidget* self) {
-	VirtualQTableWidget::State _ret = self->state();
+	VirtualQTableWidget::State _ret = self->QTableWidget::state();
 	return static_cast<int>(_ret);
 }
 
 void QTableWidget_protectedbase_setState(VirtualQTableWidget* self, int state) {
-	self->setState(static_cast<VirtualQTableWidget::State>(state));
+	self->QTableWidget::setState(static_cast<VirtualQTableWidget::State>(state));
 }
 
 void QTableWidget_protectedbase_scheduleDelayedItemsLayout(VirtualQTableWidget* self) {
-	self->scheduleDelayedItemsLayout();
+	self->QTableWidget::scheduleDelayedItemsLayout();
 }
 
 void QTableWidget_protectedbase_executeDelayedItemsLayout(VirtualQTableWidget* self) {
-	self->executeDelayedItemsLayout();
+	self->QTableWidget::executeDelayedItemsLayout();
 }
 
 void QTableWidget_protectedbase_setDirtyRegion(VirtualQTableWidget* self, QRegion* region) {
-	self->setDirtyRegion(*region);
+	self->QTableWidget::setDirtyRegion(*region);
 }
 
 void QTableWidget_protectedbase_scrollDirtyRegion(VirtualQTableWidget* self, int dx, int dy) {
-	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
+	self->QTableWidget::scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
 QPoint* QTableWidget_protectedbase_dirtyRegionOffset(const VirtualQTableWidget* self) {
-	return new QPoint(self->dirtyRegionOffset());
+	return new QPoint(self->QTableWidget::dirtyRegionOffset());
 }
 
 void QTableWidget_protectedbase_startAutoScroll(VirtualQTableWidget* self) {
-	self->startAutoScroll();
+	self->QTableWidget::startAutoScroll();
 }
 
 void QTableWidget_protectedbase_stopAutoScroll(VirtualQTableWidget* self) {
-	self->stopAutoScroll();
+	self->QTableWidget::stopAutoScroll();
 }
 
 void QTableWidget_protectedbase_doAutoScroll(VirtualQTableWidget* self) {
-	self->doAutoScroll();
+	self->QTableWidget::doAutoScroll();
 }
 
 int QTableWidget_protectedbase_dropIndicatorPosition(const VirtualQTableWidget* self) {
-	VirtualQTableWidget::DropIndicatorPosition _ret = self->dropIndicatorPosition();
+	VirtualQTableWidget::DropIndicatorPosition _ret = self->QTableWidget::dropIndicatorPosition();
 	return static_cast<int>(_ret);
 }
 
 void QTableWidget_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTableWidget* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QTableWidget::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QTableWidget_protectedbase_viewportMargins(const VirtualQTableWidget* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QTableWidget::viewportMargins());
 }
 
 void QTableWidget_protectedbase_drawFrame(VirtualQTableWidget* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QTableWidget::drawFrame(param1);
 }
 
 void QTableWidget_protectedbase_updateMicroFocus(VirtualQTableWidget* self) {
-	self->updateMicroFocus();
+	self->QTableWidget::updateMicroFocus();
 }
 
 void QTableWidget_protectedbase_create(VirtualQTableWidget* self) {
-	self->create();
+	self->QTableWidget::create();
 }
 
 void QTableWidget_protectedbase_destroy(VirtualQTableWidget* self) {
-	self->destroy();
+	self->QTableWidget::destroy();
 }
 
 bool QTableWidget_protectedbase_focusNextChild(VirtualQTableWidget* self) {
-	return self->focusNextChild();
+	return self->QTableWidget::focusNextChild();
 }
 
 bool QTableWidget_protectedbase_focusPreviousChild(VirtualQTableWidget* self) {
-	return self->focusPreviousChild();
+	return self->QTableWidget::focusPreviousChild();
 }
 
 QObject* QTableWidget_protectedbase_sender(const VirtualQTableWidget* self) {
-	return self->sender();
+	return self->QTableWidget::sender();
 }
 
 int QTableWidget_protectedbase_senderSignalIndex(const VirtualQTableWidget* self) {
-	return self->senderSignalIndex();
+	return self->QTableWidget::senderSignalIndex();
 }
 
 int QTableWidget_protectedbase_receivers(const VirtualQTableWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTableWidget::receivers(signal);
 }
 
 bool QTableWidget_protectedbase_isSignalConnected(const VirtualQTableWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTableWidget::isSignalConnected(*signal);
 }
 
 void QTableWidget_delete(QTableWidget* self) {

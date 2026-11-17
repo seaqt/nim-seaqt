@@ -544,19 +544,19 @@ void QUiLoader_virtualbase_disconnectNotify(VirtualQUiLoader* self, QMetaMethod*
 }
 
 QObject* QUiLoader_protectedbase_sender(const VirtualQUiLoader* self) {
-	return self->sender();
+	return self->QUiLoader::sender();
 }
 
 int QUiLoader_protectedbase_senderSignalIndex(const VirtualQUiLoader* self) {
-	return self->senderSignalIndex();
+	return self->QUiLoader::senderSignalIndex();
 }
 
 int QUiLoader_protectedbase_receivers(const VirtualQUiLoader* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QUiLoader::receivers(signal);
 }
 
 bool QUiLoader_protectedbase_isSignalConnected(const VirtualQUiLoader* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QUiLoader::isSignalConnected(*signal);
 }
 
 void QUiLoader_delete(QUiLoader* self) {

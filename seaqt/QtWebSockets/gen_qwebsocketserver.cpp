@@ -658,19 +658,19 @@ void QWebSocketServer_virtualbase_disconnectNotify(VirtualQWebSocketServer* self
 }
 
 QObject* QWebSocketServer_protectedbase_sender(const VirtualQWebSocketServer* self) {
-	return self->sender();
+	return self->QWebSocketServer::sender();
 }
 
 int QWebSocketServer_protectedbase_senderSignalIndex(const VirtualQWebSocketServer* self) {
-	return self->senderSignalIndex();
+	return self->QWebSocketServer::senderSignalIndex();
 }
 
 int QWebSocketServer_protectedbase_receivers(const VirtualQWebSocketServer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebSocketServer::receivers(signal);
 }
 
 bool QWebSocketServer_protectedbase_isSignalConnected(const VirtualQWebSocketServer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebSocketServer::isSignalConnected(*signal);
 }
 
 void QWebSocketServer_delete(QWebSocketServer* self) {

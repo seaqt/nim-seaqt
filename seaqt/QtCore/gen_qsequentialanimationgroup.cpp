@@ -382,19 +382,19 @@ void QSequentialAnimationGroup_virtualbase_disconnectNotify(VirtualQSequentialAn
 }
 
 QObject* QSequentialAnimationGroup_protectedbase_sender(const VirtualQSequentialAnimationGroup* self) {
-	return self->sender();
+	return self->QSequentialAnimationGroup::sender();
 }
 
 int QSequentialAnimationGroup_protectedbase_senderSignalIndex(const VirtualQSequentialAnimationGroup* self) {
-	return self->senderSignalIndex();
+	return self->QSequentialAnimationGroup::senderSignalIndex();
 }
 
 int QSequentialAnimationGroup_protectedbase_receivers(const VirtualQSequentialAnimationGroup* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSequentialAnimationGroup::receivers(signal);
 }
 
 bool QSequentialAnimationGroup_protectedbase_isSignalConnected(const VirtualQSequentialAnimationGroup* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSequentialAnimationGroup::isSignalConnected(*signal);
 }
 
 void QSequentialAnimationGroup_delete(QSequentialAnimationGroup* self) {

@@ -305,19 +305,19 @@ void QAccessiblePlugin_virtualbase_disconnectNotify(VirtualQAccessiblePlugin* se
 }
 
 QObject* QAccessiblePlugin_protectedbase_sender(const VirtualQAccessiblePlugin* self) {
-	return self->sender();
+	return self->QAccessiblePlugin::sender();
 }
 
 int QAccessiblePlugin_protectedbase_senderSignalIndex(const VirtualQAccessiblePlugin* self) {
-	return self->senderSignalIndex();
+	return self->QAccessiblePlugin::senderSignalIndex();
 }
 
 int QAccessiblePlugin_protectedbase_receivers(const VirtualQAccessiblePlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAccessiblePlugin::receivers(signal);
 }
 
 bool QAccessiblePlugin_protectedbase_isSignalConnected(const VirtualQAccessiblePlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAccessiblePlugin::isSignalConnected(*signal);
 }
 
 void QAccessiblePlugin_delete(QAccessiblePlugin* self) {

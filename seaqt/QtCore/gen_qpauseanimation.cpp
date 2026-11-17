@@ -373,19 +373,19 @@ void QPauseAnimation_virtualbase_disconnectNotify(VirtualQPauseAnimation* self, 
 }
 
 QObject* QPauseAnimation_protectedbase_sender(const VirtualQPauseAnimation* self) {
-	return self->sender();
+	return self->QPauseAnimation::sender();
 }
 
 int QPauseAnimation_protectedbase_senderSignalIndex(const VirtualQPauseAnimation* self) {
-	return self->senderSignalIndex();
+	return self->QPauseAnimation::senderSignalIndex();
 }
 
 int QPauseAnimation_protectedbase_receivers(const VirtualQPauseAnimation* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPauseAnimation::receivers(signal);
 }
 
 bool QPauseAnimation_protectedbase_isSignalConnected(const VirtualQPauseAnimation* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPauseAnimation::isSignalConnected(*signal);
 }
 
 void QPauseAnimation_delete(QPauseAnimation* self) {

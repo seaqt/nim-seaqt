@@ -382,7 +382,7 @@ void QTextList_virtualbase_disconnectNotify(VirtualQTextList* self, QMetaMethod*
 }
 
 struct seaqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(const VirtualQTextList* self) {
-	QList<QTextBlock> _ret = self->blockList();
+	QList<QTextBlock> _ret = self->QTextList::blockList();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QTextBlock** _arr = static_cast<QTextBlock**>(malloc(sizeof(QTextBlock*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -395,19 +395,19 @@ struct seaqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(const
 }
 
 QObject* QTextList_protectedbase_sender(const VirtualQTextList* self) {
-	return self->sender();
+	return self->QTextList::sender();
 }
 
 int QTextList_protectedbase_senderSignalIndex(const VirtualQTextList* self) {
-	return self->senderSignalIndex();
+	return self->QTextList::senderSignalIndex();
 }
 
 int QTextList_protectedbase_receivers(const VirtualQTextList* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTextList::receivers(signal);
 }
 
 bool QTextList_protectedbase_isSignalConnected(const VirtualQTextList* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTextList::isSignalConnected(*signal);
 }
 
 void QTextList_delete(QTextList* self) {

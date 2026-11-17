@@ -370,19 +370,19 @@ void QDrag_virtualbase_disconnectNotify(VirtualQDrag* self, QMetaMethod* signal)
 }
 
 QObject* QDrag_protectedbase_sender(const VirtualQDrag* self) {
-	return self->sender();
+	return self->QDrag::sender();
 }
 
 int QDrag_protectedbase_senderSignalIndex(const VirtualQDrag* self) {
-	return self->senderSignalIndex();
+	return self->QDrag::senderSignalIndex();
 }
 
 int QDrag_protectedbase_receivers(const VirtualQDrag* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDrag::receivers(signal);
 }
 
 bool QDrag_protectedbase_isSignalConnected(const VirtualQDrag* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDrag::isSignalConnected(*signal);
 }
 
 void QDrag_delete(QDrag* self) {

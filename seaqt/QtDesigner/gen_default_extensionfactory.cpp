@@ -346,19 +346,19 @@ void QExtensionFactory_virtualbase_disconnectNotify(VirtualQExtensionFactory* se
 }
 
 QObject* QExtensionFactory_protectedbase_sender(const VirtualQExtensionFactory* self) {
-	return self->sender();
+	return self->QExtensionFactory::sender();
 }
 
 int QExtensionFactory_protectedbase_senderSignalIndex(const VirtualQExtensionFactory* self) {
-	return self->senderSignalIndex();
+	return self->QExtensionFactory::senderSignalIndex();
 }
 
 int QExtensionFactory_protectedbase_receivers(const VirtualQExtensionFactory* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QExtensionFactory::receivers(signal);
 }
 
 bool QExtensionFactory_protectedbase_isSignalConnected(const VirtualQExtensionFactory* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QExtensionFactory::isSignalConnected(*signal);
 }
 
 void QExtensionFactory_delete(QExtensionFactory* self) {

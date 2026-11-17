@@ -460,19 +460,19 @@ void QAbstractAnimation_virtualbase_disconnectNotify(VirtualQAbstractAnimation* 
 }
 
 QObject* QAbstractAnimation_protectedbase_sender(const VirtualQAbstractAnimation* self) {
-	return self->sender();
+	return self->QAbstractAnimation::sender();
 }
 
 int QAbstractAnimation_protectedbase_senderSignalIndex(const VirtualQAbstractAnimation* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractAnimation::senderSignalIndex();
 }
 
 int QAbstractAnimation_protectedbase_receivers(const VirtualQAbstractAnimation* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractAnimation::receivers(signal);
 }
 
 bool QAbstractAnimation_protectedbase_isSignalConnected(const VirtualQAbstractAnimation* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractAnimation::isSignalConnected(*signal);
 }
 
 void QAbstractAnimation_delete(QAbstractAnimation* self) {
@@ -846,23 +846,23 @@ void QAnimationDriver_virtualbase_disconnectNotify(VirtualQAnimationDriver* self
 }
 
 void QAnimationDriver_protectedbase_advanceAnimation(VirtualQAnimationDriver* self) {
-	self->advanceAnimation();
+	self->QAnimationDriver::advanceAnimation();
 }
 
 QObject* QAnimationDriver_protectedbase_sender(const VirtualQAnimationDriver* self) {
-	return self->sender();
+	return self->QAnimationDriver::sender();
 }
 
 int QAnimationDriver_protectedbase_senderSignalIndex(const VirtualQAnimationDriver* self) {
-	return self->senderSignalIndex();
+	return self->QAnimationDriver::senderSignalIndex();
 }
 
 int QAnimationDriver_protectedbase_receivers(const VirtualQAnimationDriver* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAnimationDriver::receivers(signal);
 }
 
 bool QAnimationDriver_protectedbase_isSignalConnected(const VirtualQAnimationDriver* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAnimationDriver::isSignalConnected(*signal);
 }
 
 void QAnimationDriver_delete(QAnimationDriver* self) {

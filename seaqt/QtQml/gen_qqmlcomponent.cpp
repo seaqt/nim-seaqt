@@ -567,11 +567,11 @@ void QQmlComponent_virtualbase_disconnectNotify(VirtualQQmlComponent* self, QMet
 }
 
 QObject* QQmlComponent_protectedbase_createObject(VirtualQQmlComponent* self) {
-	return self->createObject();
+	return self->QQmlComponent::createObject();
 }
 
 QObject* QQmlComponent_protectedbase_createObject_QObject(VirtualQQmlComponent* self, QObject* parent) {
-	return self->createObject(parent);
+	return self->QQmlComponent::createObject(parent);
 }
 
 QObject* QQmlComponent_protectedbase_createObject_QObject_QVariantMap(VirtualQQmlComponent* self, QObject* parent, struct seaqt_map /* of struct seaqt_string to QVariant* */  properties) {
@@ -582,23 +582,23 @@ QObject* QQmlComponent_protectedbase_createObject_QObject_QVariantMap(VirtualQQm
 			QString properties_karr_i_QString = QString::fromUtf8(properties_karr[i].data, properties_karr[i].len);
 			properties_QMap[properties_karr_i_QString] = *(properties_varr[i]);
 		}
-	return self->createObject(parent, properties_QMap);
+	return self->QQmlComponent::createObject(parent, properties_QMap);
 }
 
 QObject* QQmlComponent_protectedbase_sender(const VirtualQQmlComponent* self) {
-	return self->sender();
+	return self->QQmlComponent::sender();
 }
 
 int QQmlComponent_protectedbase_senderSignalIndex(const VirtualQQmlComponent* self) {
-	return self->senderSignalIndex();
+	return self->QQmlComponent::senderSignalIndex();
 }
 
 int QQmlComponent_protectedbase_receivers(const VirtualQQmlComponent* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQmlComponent::receivers(signal);
 }
 
 bool QQmlComponent_protectedbase_isSignalConnected(const VirtualQQmlComponent* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQmlComponent::isSignalConnected(*signal);
 }
 
 void QQmlComponent_delete(QQmlComponent* self) {

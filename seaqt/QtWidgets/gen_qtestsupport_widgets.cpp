@@ -131,13 +131,13 @@ bool QTest__QTouchEventWidgetSequence_virtualbase_commit(VirtualQTestQTouchEvent
 }
 
 QEventPoint* QTest__QTouchEventWidgetSequence_protectedbase_point(VirtualQTestQTouchEventWidgetSequence* self, int touchId) {
-	QEventPoint& _ret = self->point(static_cast<int>(touchId));
+	QEventPoint& _ret = self->QTest::QTouchEventWidgetSequence::point(static_cast<int>(touchId));
 	// Cast returned reference into pointer
 	return &_ret;
 }
 
 QEventPoint* QTest__QTouchEventWidgetSequence_protectedbase_pointOrPreviousPoint(VirtualQTestQTouchEventWidgetSequence* self, int touchId) {
-	QEventPoint& _ret = self->pointOrPreviousPoint(static_cast<int>(touchId));
+	QEventPoint& _ret = self->QTest::QTouchEventWidgetSequence::pointOrPreviousPoint(static_cast<int>(touchId));
 	// Cast returned reference into pointer
 	return &_ret;
 }

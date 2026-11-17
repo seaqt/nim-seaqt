@@ -408,19 +408,19 @@ void QInputDevice_virtualbase_disconnectNotify(VirtualQInputDevice* self, QMetaM
 }
 
 QObject* QInputDevice_protectedbase_sender(const VirtualQInputDevice* self) {
-	return self->sender();
+	return self->QInputDevice::sender();
 }
 
 int QInputDevice_protectedbase_senderSignalIndex(const VirtualQInputDevice* self) {
-	return self->senderSignalIndex();
+	return self->QInputDevice::senderSignalIndex();
 }
 
 int QInputDevice_protectedbase_receivers(const VirtualQInputDevice* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QInputDevice::receivers(signal);
 }
 
 bool QInputDevice_protectedbase_isSignalConnected(const VirtualQInputDevice* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QInputDevice::isSignalConnected(*signal);
 }
 
 void QInputDevice_delete(QInputDevice* self) {

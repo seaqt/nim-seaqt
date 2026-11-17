@@ -47,8 +47,6 @@ proc fcQJSValueIterator_hasNext(self: pointer): bool {.importc: "QJSValueIterato
 proc fcQJSValueIterator_next(self: pointer): bool {.importc: "QJSValueIterator_next".}
 proc fcQJSValueIterator_name(self: pointer): struct_seaqt_string {.importc: "QJSValueIterator_name".}
 proc fcQJSValueIterator_value(self: pointer): pointer {.importc: "QJSValueIterator_value".}
-proc fcQJSValueIterator_operatorAssign(self: pointer, value: pointer): void {.importc: "QJSValueIterator_operatorAssign".}
-proc fcQJSValueIterator_new(value: pointer): ptr cQJSValueIterator {.importc: "QJSValueIterator_new".}
 
 proc hasNext*(self: gen_qjsvalueiterator_types.QJSValueIterator): bool =
   fcQJSValueIterator_hasNext(self.h)
@@ -65,10 +63,3 @@ proc name*(self: gen_qjsvalueiterator_types.QJSValueIterator): string =
 proc value*(self: gen_qjsvalueiterator_types.QJSValueIterator): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSValueIterator_value(self.h), owned: true)
 
-proc operatorAssign*(self: gen_qjsvalueiterator_types.QJSValueIterator, value: gen_qjsvalue_types.QJSValue): void =
-  fcQJSValueIterator_operatorAssign(self.h, value.h)
-
-proc create*(T: type gen_qjsvalueiterator_types.QJSValueIterator,
-    value: gen_qjsvalue_types.QJSValue): gen_qjsvalueiterator_types.QJSValueIterator =
-  let tmp = gen_qjsvalueiterator_types.QJSValueIterator(h: fcQJSValueIterator_new(value.h), owned: true)
-  tmp

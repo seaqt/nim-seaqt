@@ -470,7 +470,7 @@ void QNetworkCookieJar_virtualbase_disconnectNotify(VirtualQNetworkCookieJar* se
 }
 
 struct seaqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(const VirtualQNetworkCookieJar* self) {
-	QList<QNetworkCookie> _ret = self->allCookies();
+	QList<QNetworkCookie> _ret = self->QNetworkCookieJar::allCookies();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QNetworkCookie** _arr = static_cast<QNetworkCookie**>(malloc(sizeof(QNetworkCookie*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -489,23 +489,23 @@ void QNetworkCookieJar_protectedbase_setAllCookies(VirtualQNetworkCookieJar* sel
 		for(size_t i = 0; i < cookieList.len; ++i) {
 			cookieList_QList.push_back(*(cookieList_arr[i]));
 		}
-	self->setAllCookies(cookieList_QList);
+	self->QNetworkCookieJar::setAllCookies(cookieList_QList);
 }
 
 QObject* QNetworkCookieJar_protectedbase_sender(const VirtualQNetworkCookieJar* self) {
-	return self->sender();
+	return self->QNetworkCookieJar::sender();
 }
 
 int QNetworkCookieJar_protectedbase_senderSignalIndex(const VirtualQNetworkCookieJar* self) {
-	return self->senderSignalIndex();
+	return self->QNetworkCookieJar::senderSignalIndex();
 }
 
 int QNetworkCookieJar_protectedbase_receivers(const VirtualQNetworkCookieJar* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QNetworkCookieJar::receivers(signal);
 }
 
 bool QNetworkCookieJar_protectedbase_isSignalConnected(const VirtualQNetworkCookieJar* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QNetworkCookieJar::isSignalConnected(*signal);
 }
 
 void QNetworkCookieJar_delete(QNetworkCookieJar* self) {

@@ -1482,57 +1482,57 @@ void QSslSocket_virtualbase_disconnectNotify(VirtualQSslSocket* self, QMetaMetho
 }
 
 void QSslSocket_protectedbase_setSocketState(VirtualQSslSocket* self, int state) {
-	self->setSocketState(static_cast<VirtualQSslSocket::SocketState>(state));
+	self->QSslSocket::setSocketState(static_cast<VirtualQSslSocket::SocketState>(state));
 }
 
 void QSslSocket_protectedbase_setSocketError(VirtualQSslSocket* self, int socketError) {
-	self->setSocketError(static_cast<VirtualQSslSocket::SocketError>(socketError));
+	self->QSslSocket::setSocketError(static_cast<VirtualQSslSocket::SocketError>(socketError));
 }
 
 void QSslSocket_protectedbase_setLocalPort(VirtualQSslSocket* self, unsigned short port) {
-	self->setLocalPort(static_cast<quint16>(port));
+	self->QSslSocket::setLocalPort(static_cast<quint16>(port));
 }
 
 void QSslSocket_protectedbase_setLocalAddress(VirtualQSslSocket* self, QHostAddress* address) {
-	self->setLocalAddress(*address);
+	self->QSslSocket::setLocalAddress(*address);
 }
 
 void QSslSocket_protectedbase_setPeerPort(VirtualQSslSocket* self, unsigned short port) {
-	self->setPeerPort(static_cast<quint16>(port));
+	self->QSslSocket::setPeerPort(static_cast<quint16>(port));
 }
 
 void QSslSocket_protectedbase_setPeerAddress(VirtualQSslSocket* self, QHostAddress* address) {
-	self->setPeerAddress(*address);
+	self->QSslSocket::setPeerAddress(*address);
 }
 
 void QSslSocket_protectedbase_setPeerName(VirtualQSslSocket* self, struct seaqt_string name) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->setPeerName(name_QString);
+	self->QSslSocket::setPeerName(name_QString);
 }
 
 void QSslSocket_protectedbase_setOpenMode(VirtualQSslSocket* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQSslSocket::OpenMode>(openMode));
+	self->QSslSocket::setOpenMode(static_cast<VirtualQSslSocket::OpenMode>(openMode));
 }
 
 void QSslSocket_protectedbase_setErrorString(VirtualQSslSocket* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QSslSocket::setErrorString(errorString_QString);
 }
 
 QObject* QSslSocket_protectedbase_sender(const VirtualQSslSocket* self) {
-	return self->sender();
+	return self->QSslSocket::sender();
 }
 
 int QSslSocket_protectedbase_senderSignalIndex(const VirtualQSslSocket* self) {
-	return self->senderSignalIndex();
+	return self->QSslSocket::senderSignalIndex();
 }
 
 int QSslSocket_protectedbase_receivers(const VirtualQSslSocket* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSslSocket::receivers(signal);
 }
 
 bool QSslSocket_protectedbase_isSignalConnected(const VirtualQSslSocket* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSslSocket::isSignalConnected(*signal);
 }
 
 void QSslSocket_delete(QSslSocket* self) {

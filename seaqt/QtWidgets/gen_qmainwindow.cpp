@@ -1329,39 +1329,39 @@ void QMainWindow_virtualbase_disconnectNotify(VirtualQMainWindow* self, QMetaMet
 }
 
 void QMainWindow_protectedbase_updateMicroFocus(VirtualQMainWindow* self) {
-	self->updateMicroFocus();
+	self->QMainWindow::updateMicroFocus();
 }
 
 void QMainWindow_protectedbase_create(VirtualQMainWindow* self) {
-	self->create();
+	self->QMainWindow::create();
 }
 
 void QMainWindow_protectedbase_destroy(VirtualQMainWindow* self) {
-	self->destroy();
+	self->QMainWindow::destroy();
 }
 
 bool QMainWindow_protectedbase_focusNextChild(VirtualQMainWindow* self) {
-	return self->focusNextChild();
+	return self->QMainWindow::focusNextChild();
 }
 
 bool QMainWindow_protectedbase_focusPreviousChild(VirtualQMainWindow* self) {
-	return self->focusPreviousChild();
+	return self->QMainWindow::focusPreviousChild();
 }
 
 QObject* QMainWindow_protectedbase_sender(const VirtualQMainWindow* self) {
-	return self->sender();
+	return self->QMainWindow::sender();
 }
 
 int QMainWindow_protectedbase_senderSignalIndex(const VirtualQMainWindow* self) {
-	return self->senderSignalIndex();
+	return self->QMainWindow::senderSignalIndex();
 }
 
 int QMainWindow_protectedbase_receivers(const VirtualQMainWindow* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMainWindow::receivers(signal);
 }
 
 bool QMainWindow_protectedbase_isSignalConnected(const VirtualQMainWindow* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMainWindow::isSignalConnected(*signal);
 }
 
 void QMainWindow_delete(QMainWindow* self) {

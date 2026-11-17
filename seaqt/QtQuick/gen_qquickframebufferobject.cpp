@@ -958,39 +958,39 @@ void QQuickFramebufferObject_virtualbase_disconnectNotify(VirtualQQuickFramebuff
 }
 
 bool QQuickFramebufferObject_protectedbase_isComponentComplete(const VirtualQQuickFramebufferObject* self) {
-	return self->isComponentComplete();
+	return self->QQuickFramebufferObject::isComponentComplete();
 }
 
 void QQuickFramebufferObject_protectedbase_updateInputMethod(VirtualQQuickFramebufferObject* self) {
-	self->updateInputMethod();
+	self->QQuickFramebufferObject::updateInputMethod();
 }
 
 bool QQuickFramebufferObject_protectedbase_widthValid(const VirtualQQuickFramebufferObject* self) {
-	return self->widthValid();
+	return self->QQuickFramebufferObject::widthValid();
 }
 
 bool QQuickFramebufferObject_protectedbase_heightValid(const VirtualQQuickFramebufferObject* self) {
-	return self->heightValid();
+	return self->QQuickFramebufferObject::heightValid();
 }
 
 void QQuickFramebufferObject_protectedbase_setImplicitSize(VirtualQQuickFramebufferObject* self, double param1, double param2) {
-	self->setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
+	self->QQuickFramebufferObject::setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
 }
 
 QObject* QQuickFramebufferObject_protectedbase_sender(const VirtualQQuickFramebufferObject* self) {
-	return self->sender();
+	return self->QQuickFramebufferObject::sender();
 }
 
 int QQuickFramebufferObject_protectedbase_senderSignalIndex(const VirtualQQuickFramebufferObject* self) {
-	return self->senderSignalIndex();
+	return self->QQuickFramebufferObject::senderSignalIndex();
 }
 
 int QQuickFramebufferObject_protectedbase_receivers(const VirtualQQuickFramebufferObject* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickFramebufferObject::receivers(signal);
 }
 
 bool QQuickFramebufferObject_protectedbase_isSignalConnected(const VirtualQQuickFramebufferObject* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickFramebufferObject::isSignalConnected(*signal);
 }
 
 void QQuickFramebufferObject_delete(QQuickFramebufferObject* self) {

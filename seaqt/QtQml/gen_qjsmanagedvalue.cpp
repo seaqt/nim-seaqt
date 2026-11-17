@@ -29,19 +29,15 @@ QJSManagedValue* QJSManagedValue_new() {
 	return new (std::nothrow) QJSManagedValue();
 }
 
-QJSManagedValue* QJSManagedValue_new_QJSValue_QJSEngine(QJSValue* value, QJSEngine* engine) {
+QJSManagedValue* QJSManagedValue_new_value_engine(QJSPrimitiveValue* value, QJSEngine* engine) {
 	return new (std::nothrow) QJSManagedValue(*value, engine);
 }
 
-QJSManagedValue* QJSManagedValue_new_QJSPrimitiveValue_QJSEngine(QJSPrimitiveValue* value, QJSEngine* engine) {
-	return new (std::nothrow) QJSManagedValue(*value, engine);
-}
-
-QJSManagedValue* QJSManagedValue_new_QVariant_QJSEngine(QVariant* variant, QJSEngine* engine) {
+QJSManagedValue* QJSManagedValue_new_variant_engine(QVariant* variant, QJSEngine* engine) {
 	return new (std::nothrow) QJSManagedValue(*variant, engine);
 }
 
-QJSManagedValue* QJSManagedValue_new_QString_QJSEngine(struct seaqt_string string, QJSEngine* engine) {
+QJSManagedValue* QJSManagedValue_new_string_engine(struct seaqt_string string, QJSEngine* engine) {
 	QString string_QString = QString::fromUtf8(string.data, string.len);
 	return new (std::nothrow) QJSManagedValue(string_QString, engine);
 }
@@ -213,11 +209,6 @@ QJSValue* QJSManagedValue_property_name(const QJSManagedValue* self, struct seaq
 	return new QJSValue(self->property(name_QString));
 }
 
-void QJSManagedValue_setProperty_name_value(QJSManagedValue* self, struct seaqt_string name, QJSValue* value) {
-	QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->setProperty(name_QString, *value);
-}
-
 bool QJSManagedValue_deleteProperty_name(QJSManagedValue* self, struct seaqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
 	return self->deleteProperty(name_QString);
@@ -235,20 +226,12 @@ QJSValue* QJSManagedValue_property_arrayIndex(const QJSManagedValue* self, unsig
 	return new QJSValue(self->property(static_cast<quint32>(arrayIndex)));
 }
 
-void QJSManagedValue_setProperty_arrayIndex_value(QJSManagedValue* self, unsigned int arrayIndex, QJSValue* value) {
-	self->setProperty(static_cast<quint32>(arrayIndex), *value);
-}
-
 bool QJSManagedValue_deleteProperty_arrayIndex(QJSManagedValue* self, unsigned int arrayIndex) {
 	return self->deleteProperty(static_cast<quint32>(arrayIndex));
 }
 
 QJSValue* QJSManagedValue_call(const QJSManagedValue* self) {
 	return new QJSValue(self->call());
-}
-
-QJSValue* QJSManagedValue_callWithInstance_instance(const QJSManagedValue* self, QJSValue* instance) {
-	return new QJSValue(self->callWithInstance(*instance));
 }
 
 QJSValue* QJSManagedValue_callAsConstructor(const QJSManagedValue* self) {
@@ -291,16 +274,6 @@ QJSValue* QJSManagedValue_call_arguments(const QJSManagedValue* self, struct sea
 		arguments_QList.push_back(*(arguments_arr[i]));
 	}
 	return new QJSValue(self->call(arguments_QList));
-}
-
-QJSValue* QJSManagedValue_callWithInstance_instance_arguments(const QJSManagedValue* self, QJSValue* instance, struct seaqt_array /* of QJSValue* */  arguments) {
-	QJSValueList arguments_QList;
-	arguments_QList.reserve(arguments.len);
-	QJSValue** arguments_arr = static_cast<QJSValue**>(arguments.data);
-	for(size_t i = 0; i < arguments.len; ++i) {
-		arguments_QList.push_back(*(arguments_arr[i]));
-	}
-	return new QJSValue(self->callWithInstance(*instance, arguments_QList));
 }
 
 QJSValue* QJSManagedValue_callAsConstructor_arguments(const QJSManagedValue* self, struct seaqt_array /* of QJSValue* */  arguments) {

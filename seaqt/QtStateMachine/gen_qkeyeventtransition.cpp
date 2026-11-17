@@ -347,19 +347,19 @@ void QKeyEventTransition_virtualbase_disconnectNotify(VirtualQKeyEventTransition
 }
 
 QObject* QKeyEventTransition_protectedbase_sender(const VirtualQKeyEventTransition* self) {
-	return self->sender();
+	return self->QKeyEventTransition::sender();
 }
 
 int QKeyEventTransition_protectedbase_senderSignalIndex(const VirtualQKeyEventTransition* self) {
-	return self->senderSignalIndex();
+	return self->QKeyEventTransition::senderSignalIndex();
 }
 
 int QKeyEventTransition_protectedbase_receivers(const VirtualQKeyEventTransition* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QKeyEventTransition::receivers(signal);
 }
 
 bool QKeyEventTransition_protectedbase_isSignalConnected(const VirtualQKeyEventTransition* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QKeyEventTransition::isSignalConnected(*signal);
 }
 
 void QKeyEventTransition_delete(QKeyEventTransition* self) {

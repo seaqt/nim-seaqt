@@ -329,59 +329,59 @@ void QSyntaxHighlighter_virtualbase_disconnectNotify(VirtualQSyntaxHighlighter* 
 }
 
 void QSyntaxHighlighter_protectedbase_setFormat_start_count_format(VirtualQSyntaxHighlighter* self, int start, int count, QTextCharFormat* format) {
-	self->setFormat(static_cast<int>(start), static_cast<int>(count), *format);
+	self->QSyntaxHighlighter::setFormat(static_cast<int>(start), static_cast<int>(count), *format);
 }
 
 void QSyntaxHighlighter_protectedbase_setFormat_start_count_color(VirtualQSyntaxHighlighter* self, int start, int count, QColor* color) {
-	self->setFormat(static_cast<int>(start), static_cast<int>(count), *color);
+	self->QSyntaxHighlighter::setFormat(static_cast<int>(start), static_cast<int>(count), *color);
 }
 
 void QSyntaxHighlighter_protectedbase_setFormat_start_count_font(VirtualQSyntaxHighlighter* self, int start, int count, QFont* font) {
-	self->setFormat(static_cast<int>(start), static_cast<int>(count), *font);
+	self->QSyntaxHighlighter::setFormat(static_cast<int>(start), static_cast<int>(count), *font);
 }
 
 QTextCharFormat* QSyntaxHighlighter_protectedbase_format(const VirtualQSyntaxHighlighter* self, int pos) {
-	return new QTextCharFormat(self->format(static_cast<int>(pos)));
+	return new QTextCharFormat(self->QSyntaxHighlighter::format(static_cast<int>(pos)));
 }
 
 int QSyntaxHighlighter_protectedbase_previousBlockState(const VirtualQSyntaxHighlighter* self) {
-	return self->previousBlockState();
+	return self->QSyntaxHighlighter::previousBlockState();
 }
 
 int QSyntaxHighlighter_protectedbase_currentBlockState(const VirtualQSyntaxHighlighter* self) {
-	return self->currentBlockState();
+	return self->QSyntaxHighlighter::currentBlockState();
 }
 
 void QSyntaxHighlighter_protectedbase_setCurrentBlockState(VirtualQSyntaxHighlighter* self, int newState) {
-	self->setCurrentBlockState(static_cast<int>(newState));
+	self->QSyntaxHighlighter::setCurrentBlockState(static_cast<int>(newState));
 }
 
 void QSyntaxHighlighter_protectedbase_setCurrentBlockUserData(VirtualQSyntaxHighlighter* self, QTextBlockUserData* data) {
-	self->setCurrentBlockUserData(data);
+	self->QSyntaxHighlighter::setCurrentBlockUserData(data);
 }
 
 QTextBlockUserData* QSyntaxHighlighter_protectedbase_currentBlockUserData(const VirtualQSyntaxHighlighter* self) {
-	return self->currentBlockUserData();
+	return self->QSyntaxHighlighter::currentBlockUserData();
 }
 
 QTextBlock* QSyntaxHighlighter_protectedbase_currentBlock(const VirtualQSyntaxHighlighter* self) {
-	return new QTextBlock(self->currentBlock());
+	return new QTextBlock(self->QSyntaxHighlighter::currentBlock());
 }
 
 QObject* QSyntaxHighlighter_protectedbase_sender(const VirtualQSyntaxHighlighter* self) {
-	return self->sender();
+	return self->QSyntaxHighlighter::sender();
 }
 
 int QSyntaxHighlighter_protectedbase_senderSignalIndex(const VirtualQSyntaxHighlighter* self) {
-	return self->senderSignalIndex();
+	return self->QSyntaxHighlighter::senderSignalIndex();
 }
 
 int QSyntaxHighlighter_protectedbase_receivers(const VirtualQSyntaxHighlighter* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSyntaxHighlighter::receivers(signal);
 }
 
 bool QSyntaxHighlighter_protectedbase_isSignalConnected(const VirtualQSyntaxHighlighter* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSyntaxHighlighter::isSignalConnected(*signal);
 }
 
 void QSyntaxHighlighter_delete(QSyntaxHighlighter* self) {

@@ -1262,43 +1262,43 @@ void QLabel_virtualbase_disconnectNotify(VirtualQLabel* self, QMetaMethod* signa
 }
 
 void QLabel_protectedbase_drawFrame(VirtualQLabel* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QLabel::drawFrame(param1);
 }
 
 void QLabel_protectedbase_updateMicroFocus(VirtualQLabel* self) {
-	self->updateMicroFocus();
+	self->QLabel::updateMicroFocus();
 }
 
 void QLabel_protectedbase_create(VirtualQLabel* self) {
-	self->create();
+	self->QLabel::create();
 }
 
 void QLabel_protectedbase_destroy(VirtualQLabel* self) {
-	self->destroy();
+	self->QLabel::destroy();
 }
 
 bool QLabel_protectedbase_focusNextChild(VirtualQLabel* self) {
-	return self->focusNextChild();
+	return self->QLabel::focusNextChild();
 }
 
 bool QLabel_protectedbase_focusPreviousChild(VirtualQLabel* self) {
-	return self->focusPreviousChild();
+	return self->QLabel::focusPreviousChild();
 }
 
 QObject* QLabel_protectedbase_sender(const VirtualQLabel* self) {
-	return self->sender();
+	return self->QLabel::sender();
 }
 
 int QLabel_protectedbase_senderSignalIndex(const VirtualQLabel* self) {
-	return self->senderSignalIndex();
+	return self->QLabel::senderSignalIndex();
 }
 
 int QLabel_protectedbase_receivers(const VirtualQLabel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QLabel::receivers(signal);
 }
 
 bool QLabel_protectedbase_isSignalConnected(const VirtualQLabel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QLabel::isSignalConnected(*signal);
 }
 
 void QLabel_delete(QLabel* self) {

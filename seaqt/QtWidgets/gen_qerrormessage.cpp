@@ -1102,43 +1102,43 @@ void QErrorMessage_virtualbase_disconnectNotify(VirtualQErrorMessage* self, QMet
 }
 
 void QErrorMessage_protectedbase_adjustPosition(VirtualQErrorMessage* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QErrorMessage::adjustPosition(param1);
 }
 
 void QErrorMessage_protectedbase_updateMicroFocus(VirtualQErrorMessage* self) {
-	self->updateMicroFocus();
+	self->QErrorMessage::updateMicroFocus();
 }
 
 void QErrorMessage_protectedbase_create(VirtualQErrorMessage* self) {
-	self->create();
+	self->QErrorMessage::create();
 }
 
 void QErrorMessage_protectedbase_destroy(VirtualQErrorMessage* self) {
-	self->destroy();
+	self->QErrorMessage::destroy();
 }
 
 bool QErrorMessage_protectedbase_focusNextChild(VirtualQErrorMessage* self) {
-	return self->focusNextChild();
+	return self->QErrorMessage::focusNextChild();
 }
 
 bool QErrorMessage_protectedbase_focusPreviousChild(VirtualQErrorMessage* self) {
-	return self->focusPreviousChild();
+	return self->QErrorMessage::focusPreviousChild();
 }
 
 QObject* QErrorMessage_protectedbase_sender(const VirtualQErrorMessage* self) {
-	return self->sender();
+	return self->QErrorMessage::sender();
 }
 
 int QErrorMessage_protectedbase_senderSignalIndex(const VirtualQErrorMessage* self) {
-	return self->senderSignalIndex();
+	return self->QErrorMessage::senderSignalIndex();
 }
 
 int QErrorMessage_protectedbase_receivers(const VirtualQErrorMessage* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QErrorMessage::receivers(signal);
 }
 
 bool QErrorMessage_protectedbase_isSignalConnected(const VirtualQErrorMessage* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QErrorMessage::isSignalConnected(*signal);
 }
 
 void QErrorMessage_delete(QErrorMessage* self) {

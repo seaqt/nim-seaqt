@@ -562,19 +562,19 @@ void QImageCapture_virtualbase_disconnectNotify(VirtualQImageCapture* self, QMet
 }
 
 QObject* QImageCapture_protectedbase_sender(const VirtualQImageCapture* self) {
-	return self->sender();
+	return self->QImageCapture::sender();
 }
 
 int QImageCapture_protectedbase_senderSignalIndex(const VirtualQImageCapture* self) {
-	return self->senderSignalIndex();
+	return self->QImageCapture::senderSignalIndex();
 }
 
 int QImageCapture_protectedbase_receivers(const VirtualQImageCapture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QImageCapture::receivers(signal);
 }
 
 bool QImageCapture_protectedbase_isSignalConnected(const VirtualQImageCapture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QImageCapture::isSignalConnected(*signal);
 }
 
 void QImageCapture_delete(QImageCapture* self) {

@@ -622,19 +622,19 @@ void QGeoAreaMonitorSource_virtualbase_disconnectNotify(VirtualQGeoAreaMonitorSo
 }
 
 QObject* QGeoAreaMonitorSource_protectedbase_sender(const VirtualQGeoAreaMonitorSource* self) {
-	return self->sender();
+	return self->QGeoAreaMonitorSource::sender();
 }
 
 int QGeoAreaMonitorSource_protectedbase_senderSignalIndex(const VirtualQGeoAreaMonitorSource* self) {
-	return self->senderSignalIndex();
+	return self->QGeoAreaMonitorSource::senderSignalIndex();
 }
 
 int QGeoAreaMonitorSource_protectedbase_receivers(const VirtualQGeoAreaMonitorSource* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGeoAreaMonitorSource::receivers(signal);
 }
 
 bool QGeoAreaMonitorSource_protectedbase_isSignalConnected(const VirtualQGeoAreaMonitorSource* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGeoAreaMonitorSource::isSignalConnected(*signal);
 }
 
 void QGeoAreaMonitorSource_delete(QGeoAreaMonitorSource* self) {

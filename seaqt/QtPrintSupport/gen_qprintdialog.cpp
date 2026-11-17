@@ -1149,43 +1149,43 @@ void QPrintDialog_virtualbase_disconnectNotify(VirtualQPrintDialog* self, QMetaM
 }
 
 void QPrintDialog_protectedbase_adjustPosition(VirtualQPrintDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QPrintDialog::adjustPosition(param1);
 }
 
 void QPrintDialog_protectedbase_updateMicroFocus(VirtualQPrintDialog* self) {
-	self->updateMicroFocus();
+	self->QPrintDialog::updateMicroFocus();
 }
 
 void QPrintDialog_protectedbase_create(VirtualQPrintDialog* self) {
-	self->create();
+	self->QPrintDialog::create();
 }
 
 void QPrintDialog_protectedbase_destroy(VirtualQPrintDialog* self) {
-	self->destroy();
+	self->QPrintDialog::destroy();
 }
 
 bool QPrintDialog_protectedbase_focusNextChild(VirtualQPrintDialog* self) {
-	return self->focusNextChild();
+	return self->QPrintDialog::focusNextChild();
 }
 
 bool QPrintDialog_protectedbase_focusPreviousChild(VirtualQPrintDialog* self) {
-	return self->focusPreviousChild();
+	return self->QPrintDialog::focusPreviousChild();
 }
 
 QObject* QPrintDialog_protectedbase_sender(const VirtualQPrintDialog* self) {
-	return self->sender();
+	return self->QPrintDialog::sender();
 }
 
 int QPrintDialog_protectedbase_senderSignalIndex(const VirtualQPrintDialog* self) {
-	return self->senderSignalIndex();
+	return self->QPrintDialog::senderSignalIndex();
 }
 
 int QPrintDialog_protectedbase_receivers(const VirtualQPrintDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPrintDialog::receivers(signal);
 }
 
 bool QPrintDialog_protectedbase_isSignalConnected(const VirtualQPrintDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPrintDialog::isSignalConnected(*signal);
 }
 
 void QPrintDialog_delete(QPrintDialog* self) {

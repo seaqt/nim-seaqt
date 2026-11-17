@@ -1471,19 +1471,19 @@ QVariant* QGraphicsItem_virtualbase_extension(const VirtualQGraphicsItem* self, 
 }
 
 void QGraphicsItem_protectedbase_updateMicroFocus(VirtualQGraphicsItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsItem::updateMicroFocus();
 }
 
 void QGraphicsItem_protectedbase_addToIndex(VirtualQGraphicsItem* self) {
-	self->addToIndex();
+	self->QGraphicsItem::addToIndex();
 }
 
 void QGraphicsItem_protectedbase_removeFromIndex(VirtualQGraphicsItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsItem::removeFromIndex();
 }
 
 void QGraphicsItem_protectedbase_prepareGeometryChange(VirtualQGraphicsItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsItem::prepareGeometryChange();
 }
 
 void QGraphicsItem_delete(QGraphicsItem* self) {
@@ -2498,35 +2498,35 @@ QVariant* QGraphicsObject_virtualbase_extension(const VirtualQGraphicsObject* se
 }
 
 void QGraphicsObject_protectedbase_updateMicroFocus(VirtualQGraphicsObject* self) {
-	self->updateMicroFocus();
+	self->QGraphicsObject::updateMicroFocus();
 }
 
 QObject* QGraphicsObject_protectedbase_sender(const VirtualQGraphicsObject* self) {
-	return self->sender();
+	return self->QGraphicsObject::sender();
 }
 
 int QGraphicsObject_protectedbase_senderSignalIndex(const VirtualQGraphicsObject* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsObject::senderSignalIndex();
 }
 
 int QGraphicsObject_protectedbase_receivers(const VirtualQGraphicsObject* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsObject::receivers(signal);
 }
 
 bool QGraphicsObject_protectedbase_isSignalConnected(const VirtualQGraphicsObject* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsObject::isSignalConnected(*signal);
 }
 
 void QGraphicsObject_protectedbase_addToIndex(VirtualQGraphicsObject* self) {
-	self->addToIndex();
+	self->QGraphicsObject::addToIndex();
 }
 
 void QGraphicsObject_protectedbase_removeFromIndex(VirtualQGraphicsObject* self) {
-	self->removeFromIndex();
+	self->QGraphicsObject::removeFromIndex();
 }
 
 void QGraphicsObject_protectedbase_prepareGeometryChange(VirtualQGraphicsObject* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsObject::prepareGeometryChange();
 }
 
 void QGraphicsObject_delete(QGraphicsObject* self) {
@@ -3205,19 +3205,19 @@ QVariant* QAbstractGraphicsShapeItem_virtualbase_extension(const VirtualQAbstrac
 }
 
 void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(VirtualQAbstractGraphicsShapeItem* self) {
-	self->updateMicroFocus();
+	self->QAbstractGraphicsShapeItem::updateMicroFocus();
 }
 
 void QAbstractGraphicsShapeItem_protectedbase_addToIndex(VirtualQAbstractGraphicsShapeItem* self) {
-	self->addToIndex();
+	self->QAbstractGraphicsShapeItem::addToIndex();
 }
 
 void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(VirtualQAbstractGraphicsShapeItem* self) {
-	self->removeFromIndex();
+	self->QAbstractGraphicsShapeItem::removeFromIndex();
 }
 
 void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(VirtualQAbstractGraphicsShapeItem* self) {
-	self->prepareGeometryChange();
+	self->QAbstractGraphicsShapeItem::prepareGeometryChange();
 }
 
 void QAbstractGraphicsShapeItem_delete(QAbstractGraphicsShapeItem* self) {
@@ -3935,19 +3935,19 @@ QVariant* QGraphicsPathItem_virtualbase_itemChange(VirtualQGraphicsPathItem* sel
 }
 
 void QGraphicsPathItem_protectedbase_updateMicroFocus(VirtualQGraphicsPathItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsPathItem::updateMicroFocus();
 }
 
 void QGraphicsPathItem_protectedbase_addToIndex(VirtualQGraphicsPathItem* self) {
-	self->addToIndex();
+	self->QGraphicsPathItem::addToIndex();
 }
 
 void QGraphicsPathItem_protectedbase_removeFromIndex(VirtualQGraphicsPathItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsPathItem::removeFromIndex();
 }
 
 void QGraphicsPathItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPathItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsPathItem::prepareGeometryChange();
 }
 
 void QGraphicsPathItem_delete(QGraphicsPathItem* self) {
@@ -4681,19 +4681,19 @@ QVariant* QGraphicsRectItem_virtualbase_itemChange(VirtualQGraphicsRectItem* sel
 }
 
 void QGraphicsRectItem_protectedbase_updateMicroFocus(VirtualQGraphicsRectItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsRectItem::updateMicroFocus();
 }
 
 void QGraphicsRectItem_protectedbase_addToIndex(VirtualQGraphicsRectItem* self) {
-	self->addToIndex();
+	self->QGraphicsRectItem::addToIndex();
 }
 
 void QGraphicsRectItem_protectedbase_removeFromIndex(VirtualQGraphicsRectItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsRectItem::removeFromIndex();
 }
 
 void QGraphicsRectItem_protectedbase_prepareGeometryChange(VirtualQGraphicsRectItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsRectItem::prepareGeometryChange();
 }
 
 void QGraphicsRectItem_delete(QGraphicsRectItem* self) {
@@ -5443,19 +5443,19 @@ QVariant* QGraphicsEllipseItem_virtualbase_itemChange(VirtualQGraphicsEllipseIte
 }
 
 void QGraphicsEllipseItem_protectedbase_updateMicroFocus(VirtualQGraphicsEllipseItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsEllipseItem::updateMicroFocus();
 }
 
 void QGraphicsEllipseItem_protectedbase_addToIndex(VirtualQGraphicsEllipseItem* self) {
-	self->addToIndex();
+	self->QGraphicsEllipseItem::addToIndex();
 }
 
 void QGraphicsEllipseItem_protectedbase_removeFromIndex(VirtualQGraphicsEllipseItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsEllipseItem::removeFromIndex();
 }
 
 void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(VirtualQGraphicsEllipseItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsEllipseItem::prepareGeometryChange();
 }
 
 void QGraphicsEllipseItem_delete(QGraphicsEllipseItem* self) {
@@ -6162,19 +6162,19 @@ QVariant* QGraphicsPolygonItem_virtualbase_itemChange(VirtualQGraphicsPolygonIte
 }
 
 void QGraphicsPolygonItem_protectedbase_updateMicroFocus(VirtualQGraphicsPolygonItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsPolygonItem::updateMicroFocus();
 }
 
 void QGraphicsPolygonItem_protectedbase_addToIndex(VirtualQGraphicsPolygonItem* self) {
-	self->addToIndex();
+	self->QGraphicsPolygonItem::addToIndex();
 }
 
 void QGraphicsPolygonItem_protectedbase_removeFromIndex(VirtualQGraphicsPolygonItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsPolygonItem::removeFromIndex();
 }
 
 void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPolygonItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsPolygonItem::prepareGeometryChange();
 }
 
 void QGraphicsPolygonItem_delete(QGraphicsPolygonItem* self) {
@@ -6916,19 +6916,19 @@ QVariant* QGraphicsLineItem_virtualbase_itemChange(VirtualQGraphicsLineItem* sel
 }
 
 void QGraphicsLineItem_protectedbase_updateMicroFocus(VirtualQGraphicsLineItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsLineItem::updateMicroFocus();
 }
 
 void QGraphicsLineItem_protectedbase_addToIndex(VirtualQGraphicsLineItem* self) {
-	self->addToIndex();
+	self->QGraphicsLineItem::addToIndex();
 }
 
 void QGraphicsLineItem_protectedbase_removeFromIndex(VirtualQGraphicsLineItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsLineItem::removeFromIndex();
 }
 
 void QGraphicsLineItem_protectedbase_prepareGeometryChange(VirtualQGraphicsLineItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsLineItem::prepareGeometryChange();
 }
 
 void QGraphicsLineItem_delete(QGraphicsLineItem* self) {
@@ -7676,19 +7676,19 @@ QVariant* QGraphicsPixmapItem_virtualbase_itemChange(VirtualQGraphicsPixmapItem*
 }
 
 void QGraphicsPixmapItem_protectedbase_updateMicroFocus(VirtualQGraphicsPixmapItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsPixmapItem::updateMicroFocus();
 }
 
 void QGraphicsPixmapItem_protectedbase_addToIndex(VirtualQGraphicsPixmapItem* self) {
-	self->addToIndex();
+	self->QGraphicsPixmapItem::addToIndex();
 }
 
 void QGraphicsPixmapItem_protectedbase_removeFromIndex(VirtualQGraphicsPixmapItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsPixmapItem::removeFromIndex();
 }
 
 void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(VirtualQGraphicsPixmapItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsPixmapItem::prepareGeometryChange();
 }
 
 void QGraphicsPixmapItem_delete(QGraphicsPixmapItem* self) {
@@ -8767,35 +8767,35 @@ QVariant* QGraphicsTextItem_virtualbase_itemChange(VirtualQGraphicsTextItem* sel
 }
 
 void QGraphicsTextItem_protectedbase_updateMicroFocus(VirtualQGraphicsTextItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsTextItem::updateMicroFocus();
 }
 
 QObject* QGraphicsTextItem_protectedbase_sender(const VirtualQGraphicsTextItem* self) {
-	return self->sender();
+	return self->QGraphicsTextItem::sender();
 }
 
 int QGraphicsTextItem_protectedbase_senderSignalIndex(const VirtualQGraphicsTextItem* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsTextItem::senderSignalIndex();
 }
 
 int QGraphicsTextItem_protectedbase_receivers(const VirtualQGraphicsTextItem* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsTextItem::receivers(signal);
 }
 
 bool QGraphicsTextItem_protectedbase_isSignalConnected(const VirtualQGraphicsTextItem* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsTextItem::isSignalConnected(*signal);
 }
 
 void QGraphicsTextItem_protectedbase_addToIndex(VirtualQGraphicsTextItem* self) {
-	self->addToIndex();
+	self->QGraphicsTextItem::addToIndex();
 }
 
 void QGraphicsTextItem_protectedbase_removeFromIndex(VirtualQGraphicsTextItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsTextItem::removeFromIndex();
 }
 
 void QGraphicsTextItem_protectedbase_prepareGeometryChange(VirtualQGraphicsTextItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsTextItem::prepareGeometryChange();
 }
 
 void QGraphicsTextItem_delete(QGraphicsTextItem* self) {
@@ -9531,19 +9531,19 @@ QVariant* QGraphicsSimpleTextItem_virtualbase_itemChange(VirtualQGraphicsSimpleT
 }
 
 void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(VirtualQGraphicsSimpleTextItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsSimpleTextItem::updateMicroFocus();
 }
 
 void QGraphicsSimpleTextItem_protectedbase_addToIndex(VirtualQGraphicsSimpleTextItem* self) {
-	self->addToIndex();
+	self->QGraphicsSimpleTextItem::addToIndex();
 }
 
 void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(VirtualQGraphicsSimpleTextItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsSimpleTextItem::removeFromIndex();
 }
 
 void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(VirtualQGraphicsSimpleTextItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsSimpleTextItem::prepareGeometryChange();
 }
 
 void QGraphicsSimpleTextItem_delete(QGraphicsSimpleTextItem* self) {
@@ -10241,19 +10241,19 @@ QVariant* QGraphicsItemGroup_virtualbase_extension(const VirtualQGraphicsItemGro
 }
 
 void QGraphicsItemGroup_protectedbase_updateMicroFocus(VirtualQGraphicsItemGroup* self) {
-	self->updateMicroFocus();
+	self->QGraphicsItemGroup::updateMicroFocus();
 }
 
 void QGraphicsItemGroup_protectedbase_addToIndex(VirtualQGraphicsItemGroup* self) {
-	self->addToIndex();
+	self->QGraphicsItemGroup::addToIndex();
 }
 
 void QGraphicsItemGroup_protectedbase_removeFromIndex(VirtualQGraphicsItemGroup* self) {
-	self->removeFromIndex();
+	self->QGraphicsItemGroup::removeFromIndex();
 }
 
 void QGraphicsItemGroup_protectedbase_prepareGeometryChange(VirtualQGraphicsItemGroup* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsItemGroup::prepareGeometryChange();
 }
 
 void QGraphicsItemGroup_delete(QGraphicsItemGroup* self) {

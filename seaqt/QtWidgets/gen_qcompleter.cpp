@@ -646,19 +646,19 @@ void QCompleter_virtualbase_disconnectNotify(VirtualQCompleter* self, QMetaMetho
 }
 
 QObject* QCompleter_protectedbase_sender(const VirtualQCompleter* self) {
-	return self->sender();
+	return self->QCompleter::sender();
 }
 
 int QCompleter_protectedbase_senderSignalIndex(const VirtualQCompleter* self) {
-	return self->senderSignalIndex();
+	return self->QCompleter::senderSignalIndex();
 }
 
 int QCompleter_protectedbase_receivers(const VirtualQCompleter* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCompleter::receivers(signal);
 }
 
 bool QCompleter_protectedbase_isSignalConnected(const VirtualQCompleter* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCompleter::isSignalConnected(*signal);
 }
 
 void QCompleter_delete(QCompleter* self) {

@@ -5,7 +5,7 @@ const
 
   QtWebChannelLibs* = gorge("pkg-config --libs Qt6WebChannel")
 
-  QtWebChannelGenVersion* = "6.4.2"
+  QtWebChannelGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtWebChannelBuildVersion* = gorge("pkg-config --modversion Qt6WebChannel")

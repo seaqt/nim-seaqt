@@ -350,19 +350,19 @@ void QAudioInput_virtualbase_disconnectNotify(VirtualQAudioInput* self, QMetaMet
 }
 
 QObject* QAudioInput_protectedbase_sender(const VirtualQAudioInput* self) {
-	return self->sender();
+	return self->QAudioInput::sender();
 }
 
 int QAudioInput_protectedbase_senderSignalIndex(const VirtualQAudioInput* self) {
-	return self->senderSignalIndex();
+	return self->QAudioInput::senderSignalIndex();
 }
 
 int QAudioInput_protectedbase_receivers(const VirtualQAudioInput* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioInput::receivers(signal);
 }
 
 bool QAudioInput_protectedbase_isSignalConnected(const VirtualQAudioInput* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioInput::isSignalConnected(*signal);
 }
 
 void QAudioInput_delete(QAudioInput* self) {

@@ -586,19 +586,19 @@ QPainter* QPdfWriter_virtualbase_sharedPainter(const VirtualQPdfWriter* self) {
 }
 
 QObject* QPdfWriter_protectedbase_sender(const VirtualQPdfWriter* self) {
-	return self->sender();
+	return self->QPdfWriter::sender();
 }
 
 int QPdfWriter_protectedbase_senderSignalIndex(const VirtualQPdfWriter* self) {
-	return self->senderSignalIndex();
+	return self->QPdfWriter::senderSignalIndex();
 }
 
 int QPdfWriter_protectedbase_receivers(const VirtualQPdfWriter* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPdfWriter::receivers(signal);
 }
 
 bool QPdfWriter_protectedbase_isSignalConnected(const VirtualQPdfWriter* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPdfWriter::isSignalConnected(*signal);
 }
 
 void QPdfWriter_delete(QPdfWriter* self) {

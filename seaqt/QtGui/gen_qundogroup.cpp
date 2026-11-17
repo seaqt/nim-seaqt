@@ -466,19 +466,19 @@ void QUndoGroup_virtualbase_disconnectNotify(VirtualQUndoGroup* self, QMetaMetho
 }
 
 QObject* QUndoGroup_protectedbase_sender(const VirtualQUndoGroup* self) {
-	return self->sender();
+	return self->QUndoGroup::sender();
 }
 
 int QUndoGroup_protectedbase_senderSignalIndex(const VirtualQUndoGroup* self) {
-	return self->senderSignalIndex();
+	return self->QUndoGroup::senderSignalIndex();
 }
 
 int QUndoGroup_protectedbase_receivers(const VirtualQUndoGroup* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QUndoGroup::receivers(signal);
 }
 
 bool QUndoGroup_protectedbase_isSignalConnected(const VirtualQUndoGroup* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QUndoGroup::isSignalConnected(*signal);
 }
 
 void QUndoGroup_delete(QUndoGroup* self) {

@@ -277,11 +277,11 @@ bool QAbstractFormBuilder_virtualbase_checkProperty(const VirtualQAbstractFormBu
 
 bool QAbstractFormBuilder_protectedbase_applyPropertyInternally(VirtualQAbstractFormBuilder* self, QObject* o, struct seaqt_string propertyName, QVariant* value) {
 		QString propertyName_QString = QString::fromUtf8(propertyName.data, propertyName.len);
-	return self->applyPropertyInternally(o, propertyName_QString, *value);
+	return self->QAbstractFormBuilder::applyPropertyInternally(o, propertyName_QString, *value);
 }
 
 void QAbstractFormBuilder_protectedbase_reset(VirtualQAbstractFormBuilder* self) {
-	self->reset();
+	self->QAbstractFormBuilder::reset();
 }
 
 void QAbstractFormBuilder_delete(QAbstractFormBuilder* self) {

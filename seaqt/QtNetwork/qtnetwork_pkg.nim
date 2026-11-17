@@ -5,7 +5,7 @@ const
 
   QtNetworkLibs* = gorge("pkg-config --libs Qt6Network")
 
-  QtNetworkGenVersion* = "6.4.2"
+  QtNetworkGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtNetworkBuildVersion* = gorge("pkg-config --modversion Qt6Network")

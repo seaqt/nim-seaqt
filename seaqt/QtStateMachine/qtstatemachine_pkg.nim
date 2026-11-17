@@ -5,7 +5,7 @@ const
 
   QtStateMachineLibs* = gorge("pkg-config --libs Qt6StateMachine")
 
-  QtStateMachineGenVersion* = "6.4.2"
+  QtStateMachineGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtStateMachineBuildVersion* = gorge("pkg-config --modversion Qt6StateMachine")

@@ -1112,39 +1112,39 @@ void QMdiSubWindow_virtualbase_disconnectNotify(VirtualQMdiSubWindow* self, QMet
 }
 
 void QMdiSubWindow_protectedbase_updateMicroFocus(VirtualQMdiSubWindow* self) {
-	self->updateMicroFocus();
+	self->QMdiSubWindow::updateMicroFocus();
 }
 
 void QMdiSubWindow_protectedbase_create(VirtualQMdiSubWindow* self) {
-	self->create();
+	self->QMdiSubWindow::create();
 }
 
 void QMdiSubWindow_protectedbase_destroy(VirtualQMdiSubWindow* self) {
-	self->destroy();
+	self->QMdiSubWindow::destroy();
 }
 
 bool QMdiSubWindow_protectedbase_focusNextChild(VirtualQMdiSubWindow* self) {
-	return self->focusNextChild();
+	return self->QMdiSubWindow::focusNextChild();
 }
 
 bool QMdiSubWindow_protectedbase_focusPreviousChild(VirtualQMdiSubWindow* self) {
-	return self->focusPreviousChild();
+	return self->QMdiSubWindow::focusPreviousChild();
 }
 
 QObject* QMdiSubWindow_protectedbase_sender(const VirtualQMdiSubWindow* self) {
-	return self->sender();
+	return self->QMdiSubWindow::sender();
 }
 
 int QMdiSubWindow_protectedbase_senderSignalIndex(const VirtualQMdiSubWindow* self) {
-	return self->senderSignalIndex();
+	return self->QMdiSubWindow::senderSignalIndex();
 }
 
 int QMdiSubWindow_protectedbase_receivers(const VirtualQMdiSubWindow* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMdiSubWindow::receivers(signal);
 }
 
 bool QMdiSubWindow_protectedbase_isSignalConnected(const VirtualQMdiSubWindow* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMdiSubWindow::isSignalConnected(*signal);
 }
 
 void QMdiSubWindow_delete(QMdiSubWindow* self) {

@@ -1719,43 +1719,43 @@ void QMessageBox_virtualbase_disconnectNotify(VirtualQMessageBox* self, QMetaMet
 }
 
 void QMessageBox_protectedbase_adjustPosition(VirtualQMessageBox* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QMessageBox::adjustPosition(param1);
 }
 
 void QMessageBox_protectedbase_updateMicroFocus(VirtualQMessageBox* self) {
-	self->updateMicroFocus();
+	self->QMessageBox::updateMicroFocus();
 }
 
 void QMessageBox_protectedbase_create(VirtualQMessageBox* self) {
-	self->create();
+	self->QMessageBox::create();
 }
 
 void QMessageBox_protectedbase_destroy(VirtualQMessageBox* self) {
-	self->destroy();
+	self->QMessageBox::destroy();
 }
 
 bool QMessageBox_protectedbase_focusNextChild(VirtualQMessageBox* self) {
-	return self->focusNextChild();
+	return self->QMessageBox::focusNextChild();
 }
 
 bool QMessageBox_protectedbase_focusPreviousChild(VirtualQMessageBox* self) {
-	return self->focusPreviousChild();
+	return self->QMessageBox::focusPreviousChild();
 }
 
 QObject* QMessageBox_protectedbase_sender(const VirtualQMessageBox* self) {
-	return self->sender();
+	return self->QMessageBox::sender();
 }
 
 int QMessageBox_protectedbase_senderSignalIndex(const VirtualQMessageBox* self) {
-	return self->senderSignalIndex();
+	return self->QMessageBox::senderSignalIndex();
 }
 
 int QMessageBox_protectedbase_receivers(const VirtualQMessageBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMessageBox::receivers(signal);
 }
 
 bool QMessageBox_protectedbase_isSignalConnected(const VirtualQMessageBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMessageBox::isSignalConnected(*signal);
 }
 
 void QMessageBox_delete(QMessageBox* self) {

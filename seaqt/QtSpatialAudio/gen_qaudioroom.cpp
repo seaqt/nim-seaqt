@@ -423,19 +423,19 @@ void QAudioRoom_virtualbase_disconnectNotify(VirtualQAudioRoom* self, QMetaMetho
 }
 
 QObject* QAudioRoom_protectedbase_sender(const VirtualQAudioRoom* self) {
-	return self->sender();
+	return self->QAudioRoom::sender();
 }
 
 int QAudioRoom_protectedbase_senderSignalIndex(const VirtualQAudioRoom* self) {
-	return self->senderSignalIndex();
+	return self->QAudioRoom::senderSignalIndex();
 }
 
 int QAudioRoom_protectedbase_receivers(const VirtualQAudioRoom* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioRoom::receivers(signal);
 }
 
 bool QAudioRoom_protectedbase_isSignalConnected(const VirtualQAudioRoom* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioRoom::isSignalConnected(*signal);
 }
 
 void QAudioRoom_delete(QAudioRoom* self) {

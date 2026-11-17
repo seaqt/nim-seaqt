@@ -420,19 +420,19 @@ void QState_virtualbase_disconnectNotify(VirtualQState* self, QMetaMethod* signa
 }
 
 QObject* QState_protectedbase_sender(const VirtualQState* self) {
-	return self->sender();
+	return self->QState::sender();
 }
 
 int QState_protectedbase_senderSignalIndex(const VirtualQState* self) {
-	return self->senderSignalIndex();
+	return self->QState::senderSignalIndex();
 }
 
 int QState_protectedbase_receivers(const VirtualQState* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QState::receivers(signal);
 }
 
 bool QState_protectedbase_isSignalConnected(const VirtualQState* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QState::isSignalConnected(*signal);
 }
 
 void QState_delete(QState* self) {

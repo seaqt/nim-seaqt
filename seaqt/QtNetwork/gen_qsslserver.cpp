@@ -494,23 +494,23 @@ void QSslServer_virtualbase_disconnectNotify(VirtualQSslServer* self, QMetaMetho
 }
 
 void QSslServer_protectedbase_addPendingConnection(VirtualQSslServer* self, QTcpSocket* socket) {
-	self->addPendingConnection(socket);
+	self->QSslServer::addPendingConnection(socket);
 }
 
 QObject* QSslServer_protectedbase_sender(const VirtualQSslServer* self) {
-	return self->sender();
+	return self->QSslServer::sender();
 }
 
 int QSslServer_protectedbase_senderSignalIndex(const VirtualQSslServer* self) {
-	return self->senderSignalIndex();
+	return self->QSslServer::senderSignalIndex();
 }
 
 int QSslServer_protectedbase_receivers(const VirtualQSslServer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSslServer::receivers(signal);
 }
 
 bool QSslServer_protectedbase_isSignalConnected(const VirtualQSslServer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSslServer::isSignalConnected(*signal);
 }
 
 void QSslServer_delete(QSslServer* self) {

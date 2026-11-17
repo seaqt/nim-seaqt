@@ -852,39 +852,39 @@ QSpacerItem* QBoxLayout_virtualbase_spacerItem(VirtualQBoxLayout* self) {
 }
 
 void QBoxLayout_protectedbase_widgetEvent(VirtualQBoxLayout* self, QEvent* param1) {
-	self->widgetEvent(param1);
+	self->QBoxLayout::widgetEvent(param1);
 }
 
 void QBoxLayout_protectedbase_addChildLayout(VirtualQBoxLayout* self, QLayout* l) {
-	self->addChildLayout(l);
+	self->QBoxLayout::addChildLayout(l);
 }
 
 void QBoxLayout_protectedbase_addChildWidget(VirtualQBoxLayout* self, QWidget* w) {
-	self->addChildWidget(w);
+	self->QBoxLayout::addChildWidget(w);
 }
 
 bool QBoxLayout_protectedbase_adoptLayout(VirtualQBoxLayout* self, QLayout* layout) {
-	return self->adoptLayout(layout);
+	return self->QBoxLayout::adoptLayout(layout);
 }
 
 QRect* QBoxLayout_protectedbase_alignmentRect(const VirtualQBoxLayout* self, QRect* param1) {
-	return new QRect(self->alignmentRect(*param1));
+	return new QRect(self->QBoxLayout::alignmentRect(*param1));
 }
 
 QObject* QBoxLayout_protectedbase_sender(const VirtualQBoxLayout* self) {
-	return self->sender();
+	return self->QBoxLayout::sender();
 }
 
 int QBoxLayout_protectedbase_senderSignalIndex(const VirtualQBoxLayout* self) {
-	return self->senderSignalIndex();
+	return self->QBoxLayout::senderSignalIndex();
 }
 
 int QBoxLayout_protectedbase_receivers(const VirtualQBoxLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QBoxLayout::receivers(signal);
 }
 
 bool QBoxLayout_protectedbase_isSignalConnected(const VirtualQBoxLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QBoxLayout::isSignalConnected(*signal);
 }
 
 void QBoxLayout_delete(QBoxLayout* self) {
@@ -1548,39 +1548,39 @@ QSpacerItem* QHBoxLayout_virtualbase_spacerItem(VirtualQHBoxLayout* self) {
 }
 
 void QHBoxLayout_protectedbase_widgetEvent(VirtualQHBoxLayout* self, QEvent* param1) {
-	self->widgetEvent(param1);
+	self->QHBoxLayout::widgetEvent(param1);
 }
 
 void QHBoxLayout_protectedbase_addChildLayout(VirtualQHBoxLayout* self, QLayout* l) {
-	self->addChildLayout(l);
+	self->QHBoxLayout::addChildLayout(l);
 }
 
 void QHBoxLayout_protectedbase_addChildWidget(VirtualQHBoxLayout* self, QWidget* w) {
-	self->addChildWidget(w);
+	self->QHBoxLayout::addChildWidget(w);
 }
 
 bool QHBoxLayout_protectedbase_adoptLayout(VirtualQHBoxLayout* self, QLayout* layout) {
-	return self->adoptLayout(layout);
+	return self->QHBoxLayout::adoptLayout(layout);
 }
 
 QRect* QHBoxLayout_protectedbase_alignmentRect(const VirtualQHBoxLayout* self, QRect* param1) {
-	return new QRect(self->alignmentRect(*param1));
+	return new QRect(self->QHBoxLayout::alignmentRect(*param1));
 }
 
 QObject* QHBoxLayout_protectedbase_sender(const VirtualQHBoxLayout* self) {
-	return self->sender();
+	return self->QHBoxLayout::sender();
 }
 
 int QHBoxLayout_protectedbase_senderSignalIndex(const VirtualQHBoxLayout* self) {
-	return self->senderSignalIndex();
+	return self->QHBoxLayout::senderSignalIndex();
 }
 
 int QHBoxLayout_protectedbase_receivers(const VirtualQHBoxLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QHBoxLayout::receivers(signal);
 }
 
 bool QHBoxLayout_protectedbase_isSignalConnected(const VirtualQHBoxLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QHBoxLayout::isSignalConnected(*signal);
 }
 
 void QHBoxLayout_delete(QHBoxLayout* self) {
@@ -2244,39 +2244,39 @@ QSpacerItem* QVBoxLayout_virtualbase_spacerItem(VirtualQVBoxLayout* self) {
 }
 
 void QVBoxLayout_protectedbase_widgetEvent(VirtualQVBoxLayout* self, QEvent* param1) {
-	self->widgetEvent(param1);
+	self->QVBoxLayout::widgetEvent(param1);
 }
 
 void QVBoxLayout_protectedbase_addChildLayout(VirtualQVBoxLayout* self, QLayout* l) {
-	self->addChildLayout(l);
+	self->QVBoxLayout::addChildLayout(l);
 }
 
 void QVBoxLayout_protectedbase_addChildWidget(VirtualQVBoxLayout* self, QWidget* w) {
-	self->addChildWidget(w);
+	self->QVBoxLayout::addChildWidget(w);
 }
 
 bool QVBoxLayout_protectedbase_adoptLayout(VirtualQVBoxLayout* self, QLayout* layout) {
-	return self->adoptLayout(layout);
+	return self->QVBoxLayout::adoptLayout(layout);
 }
 
 QRect* QVBoxLayout_protectedbase_alignmentRect(const VirtualQVBoxLayout* self, QRect* param1) {
-	return new QRect(self->alignmentRect(*param1));
+	return new QRect(self->QVBoxLayout::alignmentRect(*param1));
 }
 
 QObject* QVBoxLayout_protectedbase_sender(const VirtualQVBoxLayout* self) {
-	return self->sender();
+	return self->QVBoxLayout::sender();
 }
 
 int QVBoxLayout_protectedbase_senderSignalIndex(const VirtualQVBoxLayout* self) {
-	return self->senderSignalIndex();
+	return self->QVBoxLayout::senderSignalIndex();
 }
 
 int QVBoxLayout_protectedbase_receivers(const VirtualQVBoxLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QVBoxLayout::receivers(signal);
 }
 
 bool QVBoxLayout_protectedbase_isSignalConnected(const VirtualQVBoxLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QVBoxLayout::isSignalConnected(*signal);
 }
 
 void QVBoxLayout_delete(QVBoxLayout* self) {

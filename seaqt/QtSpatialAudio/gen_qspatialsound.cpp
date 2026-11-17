@@ -548,19 +548,19 @@ void QSpatialSound_virtualbase_disconnectNotify(VirtualQSpatialSound* self, QMet
 }
 
 QObject* QSpatialSound_protectedbase_sender(const VirtualQSpatialSound* self) {
-	return self->sender();
+	return self->QSpatialSound::sender();
 }
 
 int QSpatialSound_protectedbase_senderSignalIndex(const VirtualQSpatialSound* self) {
-	return self->senderSignalIndex();
+	return self->QSpatialSound::senderSignalIndex();
 }
 
 int QSpatialSound_protectedbase_receivers(const VirtualQSpatialSound* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSpatialSound::receivers(signal);
 }
 
 bool QSpatialSound_protectedbase_isSignalConnected(const VirtualQSpatialSound* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSpatialSound::isSignalConnected(*signal);
 }
 
 void QSpatialSound_delete(QSpatialSound* self) {

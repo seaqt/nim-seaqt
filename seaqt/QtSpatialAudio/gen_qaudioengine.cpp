@@ -413,19 +413,19 @@ void QAudioEngine_virtualbase_disconnectNotify(VirtualQAudioEngine* self, QMetaM
 }
 
 QObject* QAudioEngine_protectedbase_sender(const VirtualQAudioEngine* self) {
-	return self->sender();
+	return self->QAudioEngine::sender();
 }
 
 int QAudioEngine_protectedbase_senderSignalIndex(const VirtualQAudioEngine* self) {
-	return self->senderSignalIndex();
+	return self->QAudioEngine::senderSignalIndex();
 }
 
 int QAudioEngine_protectedbase_receivers(const VirtualQAudioEngine* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioEngine::receivers(signal);
 }
 
 bool QAudioEngine_protectedbase_isSignalConnected(const VirtualQAudioEngine* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioEngine::isSignalConnected(*signal);
 }
 
 void QAudioEngine_delete(QAudioEngine* self) {

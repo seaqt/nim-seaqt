@@ -1136,43 +1136,43 @@ void QAbstractPrintDialog_virtualbase_disconnectNotify(VirtualQAbstractPrintDial
 }
 
 void QAbstractPrintDialog_protectedbase_adjustPosition(VirtualQAbstractPrintDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QAbstractPrintDialog::adjustPosition(param1);
 }
 
 void QAbstractPrintDialog_protectedbase_updateMicroFocus(VirtualQAbstractPrintDialog* self) {
-	self->updateMicroFocus();
+	self->QAbstractPrintDialog::updateMicroFocus();
 }
 
 void QAbstractPrintDialog_protectedbase_create(VirtualQAbstractPrintDialog* self) {
-	self->create();
+	self->QAbstractPrintDialog::create();
 }
 
 void QAbstractPrintDialog_protectedbase_destroy(VirtualQAbstractPrintDialog* self) {
-	self->destroy();
+	self->QAbstractPrintDialog::destroy();
 }
 
 bool QAbstractPrintDialog_protectedbase_focusNextChild(VirtualQAbstractPrintDialog* self) {
-	return self->focusNextChild();
+	return self->QAbstractPrintDialog::focusNextChild();
 }
 
 bool QAbstractPrintDialog_protectedbase_focusPreviousChild(VirtualQAbstractPrintDialog* self) {
-	return self->focusPreviousChild();
+	return self->QAbstractPrintDialog::focusPreviousChild();
 }
 
 QObject* QAbstractPrintDialog_protectedbase_sender(const VirtualQAbstractPrintDialog* self) {
-	return self->sender();
+	return self->QAbstractPrintDialog::sender();
 }
 
 int QAbstractPrintDialog_protectedbase_senderSignalIndex(const VirtualQAbstractPrintDialog* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractPrintDialog::senderSignalIndex();
 }
 
 int QAbstractPrintDialog_protectedbase_receivers(const VirtualQAbstractPrintDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractPrintDialog::receivers(signal);
 }
 
 bool QAbstractPrintDialog_protectedbase_isSignalConnected(const VirtualQAbstractPrintDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractPrintDialog::isSignalConnected(*signal);
 }
 
 void QAbstractPrintDialog_delete(QAbstractPrintDialog* self) {

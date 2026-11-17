@@ -1085,39 +1085,39 @@ void QDesignerResourceBrowserInterface_virtualbase_disconnectNotify(VirtualQDesi
 }
 
 void QDesignerResourceBrowserInterface_protectedbase_updateMicroFocus(VirtualQDesignerResourceBrowserInterface* self) {
-	self->updateMicroFocus();
+	self->QDesignerResourceBrowserInterface::updateMicroFocus();
 }
 
 void QDesignerResourceBrowserInterface_protectedbase_create(VirtualQDesignerResourceBrowserInterface* self) {
-	self->create();
+	self->QDesignerResourceBrowserInterface::create();
 }
 
 void QDesignerResourceBrowserInterface_protectedbase_destroy(VirtualQDesignerResourceBrowserInterface* self) {
-	self->destroy();
+	self->QDesignerResourceBrowserInterface::destroy();
 }
 
 bool QDesignerResourceBrowserInterface_protectedbase_focusNextChild(VirtualQDesignerResourceBrowserInterface* self) {
-	return self->focusNextChild();
+	return self->QDesignerResourceBrowserInterface::focusNextChild();
 }
 
 bool QDesignerResourceBrowserInterface_protectedbase_focusPreviousChild(VirtualQDesignerResourceBrowserInterface* self) {
-	return self->focusPreviousChild();
+	return self->QDesignerResourceBrowserInterface::focusPreviousChild();
 }
 
 QObject* QDesignerResourceBrowserInterface_protectedbase_sender(const VirtualQDesignerResourceBrowserInterface* self) {
-	return self->sender();
+	return self->QDesignerResourceBrowserInterface::sender();
 }
 
 int QDesignerResourceBrowserInterface_protectedbase_senderSignalIndex(const VirtualQDesignerResourceBrowserInterface* self) {
-	return self->senderSignalIndex();
+	return self->QDesignerResourceBrowserInterface::senderSignalIndex();
 }
 
 int QDesignerResourceBrowserInterface_protectedbase_receivers(const VirtualQDesignerResourceBrowserInterface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDesignerResourceBrowserInterface::receivers(signal);
 }
 
 bool QDesignerResourceBrowserInterface_protectedbase_isSignalConnected(const VirtualQDesignerResourceBrowserInterface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDesignerResourceBrowserInterface::isSignalConnected(*signal);
 }
 
 void QDesignerResourceBrowserInterface_delete(QDesignerResourceBrowserInterface* self) {

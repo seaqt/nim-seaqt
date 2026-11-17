@@ -683,48 +683,48 @@ void QItemDelegate_virtualbase_disconnectNotify(VirtualQItemDelegate* self, QMet
 }
 
 void QItemDelegate_protectedbase_drawBackground(const VirtualQItemDelegate* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index) {
-	self->drawBackground(painter, *option, *index);
+	self->QItemDelegate::drawBackground(painter, *option, *index);
 }
 
 void QItemDelegate_protectedbase_doLayout(const VirtualQItemDelegate* self, QStyleOptionViewItem* option, QRect* checkRect, QRect* iconRect, QRect* textRect, bool hint) {
-	self->doLayout(*option, checkRect, iconRect, textRect, hint);
+	self->QItemDelegate::doLayout(*option, checkRect, iconRect, textRect, hint);
 }
 
 QRect* QItemDelegate_protectedbase_rect(const VirtualQItemDelegate* self, QStyleOptionViewItem* option, QModelIndex* index, int role) {
-	return new QRect(self->rect(*option, *index, static_cast<int>(role)));
+	return new QRect(self->QItemDelegate::rect(*option, *index, static_cast<int>(role)));
 }
 
 QStyleOptionViewItem* QItemDelegate_protectedbase_setOptions(const VirtualQItemDelegate* self, QModelIndex* index, QStyleOptionViewItem* option) {
-	return new QStyleOptionViewItem(self->setOptions(*index, *option));
+	return new QStyleOptionViewItem(self->QItemDelegate::setOptions(*index, *option));
 }
 
 QPixmap* QItemDelegate_protectedbase_decoration(const VirtualQItemDelegate* self, QStyleOptionViewItem* option, QVariant* variant) {
-	return new QPixmap(self->decoration(*option, *variant));
+	return new QPixmap(self->QItemDelegate::decoration(*option, *variant));
 }
 
 QRect* QItemDelegate_protectedbase_doCheck(const VirtualQItemDelegate* self, QStyleOptionViewItem* option, QRect* bounding, QVariant* variant) {
-	return new QRect(self->doCheck(*option, *bounding, *variant));
+	return new QRect(self->QItemDelegate::doCheck(*option, *bounding, *variant));
 }
 
 QRect* QItemDelegate_protectedbase_textRectangle(const VirtualQItemDelegate* self, QPainter* painter, QRect* rect, QFont* font, struct seaqt_string text) {
 		QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new QRect(self->textRectangle(painter, *rect, *font, text_QString));
+	return new QRect(self->QItemDelegate::textRectangle(painter, *rect, *font, text_QString));
 }
 
 QObject* QItemDelegate_protectedbase_sender(const VirtualQItemDelegate* self) {
-	return self->sender();
+	return self->QItemDelegate::sender();
 }
 
 int QItemDelegate_protectedbase_senderSignalIndex(const VirtualQItemDelegate* self) {
-	return self->senderSignalIndex();
+	return self->QItemDelegate::senderSignalIndex();
 }
 
 int QItemDelegate_protectedbase_receivers(const VirtualQItemDelegate* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QItemDelegate::receivers(signal);
 }
 
 bool QItemDelegate_protectedbase_isSignalConnected(const VirtualQItemDelegate* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QItemDelegate::isSignalConnected(*signal);
 }
 
 void QItemDelegate_delete(QItemDelegate* self) {

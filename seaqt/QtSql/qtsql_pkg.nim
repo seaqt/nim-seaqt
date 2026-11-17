@@ -5,7 +5,7 @@ const
 
   QtSqlLibs* = gorge("pkg-config --libs Qt6Sql")
 
-  QtSqlGenVersion* = "6.4.2"
+  QtSqlGenVersion* = "6.4.3"
     ## The version used for generating the bindings
 
   QtSqlBuildVersion* = gorge("pkg-config --modversion Qt6Sql")

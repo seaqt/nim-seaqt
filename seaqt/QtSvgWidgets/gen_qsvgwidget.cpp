@@ -1037,39 +1037,39 @@ void QSvgWidget_virtualbase_disconnectNotify(VirtualQSvgWidget* self, QMetaMetho
 }
 
 void QSvgWidget_protectedbase_updateMicroFocus(VirtualQSvgWidget* self) {
-	self->updateMicroFocus();
+	self->QSvgWidget::updateMicroFocus();
 }
 
 void QSvgWidget_protectedbase_create(VirtualQSvgWidget* self) {
-	self->create();
+	self->QSvgWidget::create();
 }
 
 void QSvgWidget_protectedbase_destroy(VirtualQSvgWidget* self) {
-	self->destroy();
+	self->QSvgWidget::destroy();
 }
 
 bool QSvgWidget_protectedbase_focusNextChild(VirtualQSvgWidget* self) {
-	return self->focusNextChild();
+	return self->QSvgWidget::focusNextChild();
 }
 
 bool QSvgWidget_protectedbase_focusPreviousChild(VirtualQSvgWidget* self) {
-	return self->focusPreviousChild();
+	return self->QSvgWidget::focusPreviousChild();
 }
 
 QObject* QSvgWidget_protectedbase_sender(const VirtualQSvgWidget* self) {
-	return self->sender();
+	return self->QSvgWidget::sender();
 }
 
 int QSvgWidget_protectedbase_senderSignalIndex(const VirtualQSvgWidget* self) {
-	return self->senderSignalIndex();
+	return self->QSvgWidget::senderSignalIndex();
 }
 
 int QSvgWidget_protectedbase_receivers(const VirtualQSvgWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSvgWidget::receivers(signal);
 }
 
 bool QSvgWidget_protectedbase_isSignalConnected(const VirtualQSvgWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSvgWidget::isSignalConnected(*signal);
 }
 
 void QSvgWidget_delete(QSvgWidget* self) {

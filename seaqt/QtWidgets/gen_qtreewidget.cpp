@@ -640,7 +640,7 @@ void QTreeWidgetItem_virtualbase_write(const VirtualQTreeWidgetItem* self, QData
 }
 
 void QTreeWidgetItem_protectedbase_emitDataChanged(VirtualQTreeWidgetItem* self) {
-	self->emitDataChanged();
+	self->QTreeWidgetItem::emitDataChanged();
 }
 
 void QTreeWidgetItem_delete(QTreeWidgetItem* self) {
@@ -2977,129 +2977,129 @@ void QTreeWidget_virtualbase_disconnectNotify(VirtualQTreeWidget* self, QMetaMet
 }
 
 void QTreeWidget_protectedbase_columnResized(VirtualQTreeWidget* self, int column, int oldSize, int newSize) {
-	self->columnResized(static_cast<int>(column), static_cast<int>(oldSize), static_cast<int>(newSize));
+	self->QTreeWidget::columnResized(static_cast<int>(column), static_cast<int>(oldSize), static_cast<int>(newSize));
 }
 
 void QTreeWidget_protectedbase_columnCountChanged(VirtualQTreeWidget* self, int oldCount, int newCount) {
-	self->columnCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
+	self->QTreeWidget::columnCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
 }
 
 void QTreeWidget_protectedbase_columnMoved(VirtualQTreeWidget* self) {
-	self->columnMoved();
+	self->QTreeWidget::columnMoved();
 }
 
 void QTreeWidget_protectedbase_reexpand(VirtualQTreeWidget* self) {
-	self->reexpand();
+	self->QTreeWidget::reexpand();
 }
 
 void QTreeWidget_protectedbase_rowsRemoved(VirtualQTreeWidget* self, QModelIndex* parent, int first, int last) {
-	self->rowsRemoved(*parent, static_cast<int>(first), static_cast<int>(last));
+	self->QTreeWidget::rowsRemoved(*parent, static_cast<int>(first), static_cast<int>(last));
 }
 
 void QTreeWidget_protectedbase_drawTree(const VirtualQTreeWidget* self, QPainter* painter, QRegion* region) {
-	self->drawTree(painter, *region);
+	self->QTreeWidget::drawTree(painter, *region);
 }
 
 int QTreeWidget_protectedbase_indexRowSizeHint(const VirtualQTreeWidget* self, QModelIndex* index) {
-	return self->indexRowSizeHint(*index);
+	return self->QTreeWidget::indexRowSizeHint(*index);
 }
 
 int QTreeWidget_protectedbase_rowHeight(const VirtualQTreeWidget* self, QModelIndex* index) {
-	return self->rowHeight(*index);
+	return self->QTreeWidget::rowHeight(*index);
 }
 
 int QTreeWidget_protectedbase_state(const VirtualQTreeWidget* self) {
-	VirtualQTreeWidget::State _ret = self->state();
+	VirtualQTreeWidget::State _ret = self->QTreeWidget::state();
 	return static_cast<int>(_ret);
 }
 
 void QTreeWidget_protectedbase_setState(VirtualQTreeWidget* self, int state) {
-	self->setState(static_cast<VirtualQTreeWidget::State>(state));
+	self->QTreeWidget::setState(static_cast<VirtualQTreeWidget::State>(state));
 }
 
 void QTreeWidget_protectedbase_scheduleDelayedItemsLayout(VirtualQTreeWidget* self) {
-	self->scheduleDelayedItemsLayout();
+	self->QTreeWidget::scheduleDelayedItemsLayout();
 }
 
 void QTreeWidget_protectedbase_executeDelayedItemsLayout(VirtualQTreeWidget* self) {
-	self->executeDelayedItemsLayout();
+	self->QTreeWidget::executeDelayedItemsLayout();
 }
 
 void QTreeWidget_protectedbase_setDirtyRegion(VirtualQTreeWidget* self, QRegion* region) {
-	self->setDirtyRegion(*region);
+	self->QTreeWidget::setDirtyRegion(*region);
 }
 
 void QTreeWidget_protectedbase_scrollDirtyRegion(VirtualQTreeWidget* self, int dx, int dy) {
-	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
+	self->QTreeWidget::scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
 QPoint* QTreeWidget_protectedbase_dirtyRegionOffset(const VirtualQTreeWidget* self) {
-	return new QPoint(self->dirtyRegionOffset());
+	return new QPoint(self->QTreeWidget::dirtyRegionOffset());
 }
 
 void QTreeWidget_protectedbase_startAutoScroll(VirtualQTreeWidget* self) {
-	self->startAutoScroll();
+	self->QTreeWidget::startAutoScroll();
 }
 
 void QTreeWidget_protectedbase_stopAutoScroll(VirtualQTreeWidget* self) {
-	self->stopAutoScroll();
+	self->QTreeWidget::stopAutoScroll();
 }
 
 void QTreeWidget_protectedbase_doAutoScroll(VirtualQTreeWidget* self) {
-	self->doAutoScroll();
+	self->QTreeWidget::doAutoScroll();
 }
 
 int QTreeWidget_protectedbase_dropIndicatorPosition(const VirtualQTreeWidget* self) {
-	VirtualQTreeWidget::DropIndicatorPosition _ret = self->dropIndicatorPosition();
+	VirtualQTreeWidget::DropIndicatorPosition _ret = self->QTreeWidget::dropIndicatorPosition();
 	return static_cast<int>(_ret);
 }
 
 void QTreeWidget_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQTreeWidget* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QTreeWidget::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QTreeWidget_protectedbase_viewportMargins(const VirtualQTreeWidget* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QTreeWidget::viewportMargins());
 }
 
 void QTreeWidget_protectedbase_drawFrame(VirtualQTreeWidget* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QTreeWidget::drawFrame(param1);
 }
 
 void QTreeWidget_protectedbase_updateMicroFocus(VirtualQTreeWidget* self) {
-	self->updateMicroFocus();
+	self->QTreeWidget::updateMicroFocus();
 }
 
 void QTreeWidget_protectedbase_create(VirtualQTreeWidget* self) {
-	self->create();
+	self->QTreeWidget::create();
 }
 
 void QTreeWidget_protectedbase_destroy(VirtualQTreeWidget* self) {
-	self->destroy();
+	self->QTreeWidget::destroy();
 }
 
 bool QTreeWidget_protectedbase_focusNextChild(VirtualQTreeWidget* self) {
-	return self->focusNextChild();
+	return self->QTreeWidget::focusNextChild();
 }
 
 bool QTreeWidget_protectedbase_focusPreviousChild(VirtualQTreeWidget* self) {
-	return self->focusPreviousChild();
+	return self->QTreeWidget::focusPreviousChild();
 }
 
 QObject* QTreeWidget_protectedbase_sender(const VirtualQTreeWidget* self) {
-	return self->sender();
+	return self->QTreeWidget::sender();
 }
 
 int QTreeWidget_protectedbase_senderSignalIndex(const VirtualQTreeWidget* self) {
-	return self->senderSignalIndex();
+	return self->QTreeWidget::senderSignalIndex();
 }
 
 int QTreeWidget_protectedbase_receivers(const VirtualQTreeWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTreeWidget::receivers(signal);
 }
 
 bool QTreeWidget_protectedbase_isSignalConnected(const VirtualQTreeWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTreeWidget::isSignalConnected(*signal);
 }
 
 void QTreeWidget_delete(QTreeWidget* self) {

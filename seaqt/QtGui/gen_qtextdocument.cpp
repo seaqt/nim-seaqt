@@ -976,19 +976,19 @@ void QTextDocument_virtualbase_disconnectNotify(VirtualQTextDocument* self, QMet
 }
 
 QObject* QTextDocument_protectedbase_sender(const VirtualQTextDocument* self) {
-	return self->sender();
+	return self->QTextDocument::sender();
 }
 
 int QTextDocument_protectedbase_senderSignalIndex(const VirtualQTextDocument* self) {
-	return self->senderSignalIndex();
+	return self->QTextDocument::senderSignalIndex();
 }
 
 int QTextDocument_protectedbase_receivers(const VirtualQTextDocument* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTextDocument::receivers(signal);
 }
 
 bool QTextDocument_protectedbase_isSignalConnected(const VirtualQTextDocument* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTextDocument::isSignalConnected(*signal);
 }
 
 void QTextDocument_delete(QTextDocument* self) {

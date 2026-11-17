@@ -1125,39 +1125,39 @@ void QDesignerPropertyEditorInterface_virtualbase_disconnectNotify(VirtualQDesig
 }
 
 void QDesignerPropertyEditorInterface_protectedbase_updateMicroFocus(VirtualQDesignerPropertyEditorInterface* self) {
-	self->updateMicroFocus();
+	self->QDesignerPropertyEditorInterface::updateMicroFocus();
 }
 
 void QDesignerPropertyEditorInterface_protectedbase_create(VirtualQDesignerPropertyEditorInterface* self) {
-	self->create();
+	self->QDesignerPropertyEditorInterface::create();
 }
 
 void QDesignerPropertyEditorInterface_protectedbase_destroy(VirtualQDesignerPropertyEditorInterface* self) {
-	self->destroy();
+	self->QDesignerPropertyEditorInterface::destroy();
 }
 
 bool QDesignerPropertyEditorInterface_protectedbase_focusNextChild(VirtualQDesignerPropertyEditorInterface* self) {
-	return self->focusNextChild();
+	return self->QDesignerPropertyEditorInterface::focusNextChild();
 }
 
 bool QDesignerPropertyEditorInterface_protectedbase_focusPreviousChild(VirtualQDesignerPropertyEditorInterface* self) {
-	return self->focusPreviousChild();
+	return self->QDesignerPropertyEditorInterface::focusPreviousChild();
 }
 
 QObject* QDesignerPropertyEditorInterface_protectedbase_sender(const VirtualQDesignerPropertyEditorInterface* self) {
-	return self->sender();
+	return self->QDesignerPropertyEditorInterface::sender();
 }
 
 int QDesignerPropertyEditorInterface_protectedbase_senderSignalIndex(const VirtualQDesignerPropertyEditorInterface* self) {
-	return self->senderSignalIndex();
+	return self->QDesignerPropertyEditorInterface::senderSignalIndex();
 }
 
 int QDesignerPropertyEditorInterface_protectedbase_receivers(const VirtualQDesignerPropertyEditorInterface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDesignerPropertyEditorInterface::receivers(signal);
 }
 
 bool QDesignerPropertyEditorInterface_protectedbase_isSignalConnected(const VirtualQDesignerPropertyEditorInterface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDesignerPropertyEditorInterface::isSignalConnected(*signal);
 }
 
 void QDesignerPropertyEditorInterface_delete(QDesignerPropertyEditorInterface* self) {

@@ -1172,39 +1172,39 @@ void QProgressBar_virtualbase_disconnectNotify(VirtualQProgressBar* self, QMetaM
 }
 
 void QProgressBar_protectedbase_updateMicroFocus(VirtualQProgressBar* self) {
-	self->updateMicroFocus();
+	self->QProgressBar::updateMicroFocus();
 }
 
 void QProgressBar_protectedbase_create(VirtualQProgressBar* self) {
-	self->create();
+	self->QProgressBar::create();
 }
 
 void QProgressBar_protectedbase_destroy(VirtualQProgressBar* self) {
-	self->destroy();
+	self->QProgressBar::destroy();
 }
 
 bool QProgressBar_protectedbase_focusNextChild(VirtualQProgressBar* self) {
-	return self->focusNextChild();
+	return self->QProgressBar::focusNextChild();
 }
 
 bool QProgressBar_protectedbase_focusPreviousChild(VirtualQProgressBar* self) {
-	return self->focusPreviousChild();
+	return self->QProgressBar::focusPreviousChild();
 }
 
 QObject* QProgressBar_protectedbase_sender(const VirtualQProgressBar* self) {
-	return self->sender();
+	return self->QProgressBar::sender();
 }
 
 int QProgressBar_protectedbase_senderSignalIndex(const VirtualQProgressBar* self) {
-	return self->senderSignalIndex();
+	return self->QProgressBar::senderSignalIndex();
 }
 
 int QProgressBar_protectedbase_receivers(const VirtualQProgressBar* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QProgressBar::receivers(signal);
 }
 
 bool QProgressBar_protectedbase_isSignalConnected(const VirtualQProgressBar* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QProgressBar::isSignalConnected(*signal);
 }
 
 void QProgressBar_delete(QProgressBar* self) {

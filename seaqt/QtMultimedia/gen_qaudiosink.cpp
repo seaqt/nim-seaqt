@@ -395,19 +395,19 @@ void QAudioSink_virtualbase_disconnectNotify(VirtualQAudioSink* self, QMetaMetho
 }
 
 QObject* QAudioSink_protectedbase_sender(const VirtualQAudioSink* self) {
-	return self->sender();
+	return self->QAudioSink::sender();
 }
 
 int QAudioSink_protectedbase_senderSignalIndex(const VirtualQAudioSink* self) {
-	return self->senderSignalIndex();
+	return self->QAudioSink::senderSignalIndex();
 }
 
 int QAudioSink_protectedbase_receivers(const VirtualQAudioSink* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioSink::receivers(signal);
 }
 
 bool QAudioSink_protectedbase_isSignalConnected(const VirtualQAudioSink* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioSink::isSignalConnected(*signal);
 }
 
 void QAudioSink_delete(QAudioSink* self) {
