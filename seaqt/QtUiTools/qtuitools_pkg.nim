@@ -8,7 +8,12 @@ const
   QtUiToolsGenVersion* = "6.5.3"
     ## The version used for generating the bindings
 
-  QtUiToolsBuildVersion* = gorge("pkg-config --modversion Qt6UiTools")
-    ## The version used when compiling the application
+  QtUiToolsBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6UiTools")
+      if v.len > 0: v else: QtUiToolsGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtUiToolsBuildVersion=x.y.z
 
 {.passl: QtUiToolsLibs}

@@ -8,7 +8,12 @@ const
   QtDesignerGenVersion* = "6.5.3"
     ## The version used for generating the bindings
 
-  QtDesignerBuildVersion* = gorge("pkg-config --modversion Qt6Designer")
-    ## The version used when compiling the application
+  QtDesignerBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6Designer")
+      if v.len > 0: v else: QtDesignerGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtDesignerBuildVersion=x.y.z
 
 {.passl: QtDesignerLibs}

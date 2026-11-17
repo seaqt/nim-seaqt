@@ -8,7 +8,12 @@ const
   QtNetworkGenVersion* = "6.5.3"
     ## The version used for generating the bindings
 
-  QtNetworkBuildVersion* = gorge("pkg-config --modversion Qt6Network")
-    ## The version used when compiling the application
+  QtNetworkBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6Network")
+      if v.len > 0: v else: QtNetworkGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtNetworkBuildVersion=x.y.z
 
 {.passl: QtNetworkLibs}

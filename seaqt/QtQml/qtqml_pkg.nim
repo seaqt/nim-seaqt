@@ -8,7 +8,12 @@ const
   QtQmlGenVersion* = "6.5.3"
     ## The version used for generating the bindings
 
-  QtQmlBuildVersion* = gorge("pkg-config --modversion Qt6Qml")
-    ## The version used when compiling the application
+  QtQmlBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6Qml")
+      if v.len > 0: v else: QtQmlGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtQmlBuildVersion=x.y.z
 
 {.passl: QtQmlLibs}
