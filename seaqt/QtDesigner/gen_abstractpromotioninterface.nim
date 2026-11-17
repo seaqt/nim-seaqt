@@ -46,7 +46,7 @@ type cQDesignerPromotionInterface*{.exportc: "QDesignerPromotionInterface", inco
 type cQDesignerPromotionInterfacePromotedClass*{.exportc: "QDesignerPromotionInterface__PromotedClass", incompleteStruct.} = object
 
 proc fcQDesignerPromotionInterface_promotedClasses(self: pointer): struct_seaqt_array {.importc: "QDesignerPromotionInterface_promotedClasses".}
-proc fcQDesignerPromotionInterface_referencedPromotedClassNames(self: pointer): HashSet[struct_seaqt_string] {.importc: "QDesignerPromotionInterface_referencedPromotedClassNames".}
+proc fcQDesignerPromotionInterface_referencedPromotedClassNames(self: pointer): struct_seaqt_array {.importc: "QDesignerPromotionInterface_referencedPromotedClassNames".}
 proc fcQDesignerPromotionInterface_promotionBaseClasses(self: pointer): struct_seaqt_array {.importc: "QDesignerPromotionInterface_promotionBaseClasses".}
 proc fcQDesignerPromotionInterfacePromotedClass_baseItem(self: pointer): pointer {.importc: "QDesignerPromotionInterface__PromotedClass_baseItem".}
 proc fcQDesignerPromotionInterfacePromotedClass_setBaseItem(self: pointer, baseItem: pointer): void {.importc: "QDesignerPromotionInterface__PromotedClass_setBaseItem".}
@@ -64,13 +64,14 @@ proc promotedClasses*(self: gen_abstractpromotioninterface_types.QDesignerPromot
 
 proc referencedPromotedClassNames*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterface): HashSet[string] =
   var v_ma = fcQDesignerPromotionInterface_referencedPromotedClassNames(self.h)
-  vx_ret: HashSet[string])
-  v_outCast = cast[ptr UncheckedArray[struct_seaqt_string](v_ma.data))
-  for i in 0..<v_ma.len:
+  var vx_ret = initHashSet[string](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[struct_seaqt_string]](v_ma.data)
+  for i in 0 ..< v_ma.len:
     let vx_sv_ms = v_outCast[i]
     let vx_svx_ret = string.fromBytes(vx_sv_ms)
     c_free(vx_sv_ms.data)
     vx_ret.incl vx_svx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc promotionBaseClasses*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterface): seq[gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface] =
