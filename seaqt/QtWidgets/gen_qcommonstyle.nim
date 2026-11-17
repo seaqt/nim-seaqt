@@ -177,10 +177,9 @@ proc fcQCommonStyle_protectedbase_receivers(self: pointer, signal: cstring): cin
 proc fcQCommonStyle_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCommonStyle_protectedbase_isSignalConnected".}
 proc fcQCommonStyle_new(vtbl: pointer, vdata: csize_t): ptr cQCommonStyle {.importc: "QCommonStyle_new".}
 proc fcQCommonStyle_staticMetaObject(): pointer {.importc: "QCommonStyle_staticMetaObject".}
-proc fcQCommonStyle_delete(self: pointer) {.importc: "QCommonStyle_delete".}
 
 proc metaObject*(self: gen_qcommonstyle_types.QCommonStyle): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCommonStyle_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCommonStyle_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcommonstyle_types.QCommonStyle, param1: cstring): pointer =
   fcQCommonStyle_metacast(self.h, param1)
@@ -201,7 +200,7 @@ proc drawControl*(self: gen_qcommonstyle_types.QCommonStyle, element: cint, opt:
   fcQCommonStyle_drawControl(self.h, cint(element), opt.h, p.h, w.h)
 
 proc subElementRect*(self: gen_qcommonstyle_types.QCommonStyle, r: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQCommonStyle_subElementRect(self.h, cint(r), opt.h, widget.h))
+  gen_qrect_types.QRect(h: fcQCommonStyle_subElementRect(self.h, cint(r), opt.h, widget.h), owned: true)
 
 proc drawComplexControl*(self: gen_qcommonstyle_types.QCommonStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, p: gen_qpainter_types.QPainter, w: gen_qwidget_types.QWidget): void =
   fcQCommonStyle_drawComplexControl(self.h, cint(cc), opt.h, p.h, w.h)
@@ -210,10 +209,10 @@ proc hitTestComplexControl*(self: gen_qcommonstyle_types.QCommonStyle, cc: cint,
   cint(fcQCommonStyle_hitTestComplexControl(self.h, cint(cc), opt.h, pt.h, w.h))
 
 proc subControlRect*(self: gen_qcommonstyle_types.QCommonStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, w: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQCommonStyle_subControlRect(self.h, cint(cc), opt.h, cint(sc), w.h))
+  gen_qrect_types.QRect(h: fcQCommonStyle_subControlRect(self.h, cint(cc), opt.h, cint(sc), w.h), owned: true)
 
 proc sizeFromContents*(self: gen_qcommonstyle_types.QCommonStyle, ct: cint, opt: gen_qstyleoption_types.QStyleOption, contentsSize: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCommonStyle_sizeFromContents(self.h, cint(ct), opt.h, contentsSize.h, widget.h))
+  gen_qsize_types.QSize(h: fcQCommonStyle_sizeFromContents(self.h, cint(ct), opt.h, contentsSize.h, widget.h), owned: true)
 
 proc pixelMetric*(self: gen_qcommonstyle_types.QCommonStyle, m: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint =
   fcQCommonStyle_pixelMetric(self.h, cint(m), opt.h, widget.h)
@@ -222,13 +221,13 @@ proc styleHint*(self: gen_qcommonstyle_types.QCommonStyle, sh: cint, opt: gen_qs
   fcQCommonStyle_styleHint(self.h, cint(sh), opt.h, w.h, shret.h)
 
 proc standardIcon*(self: gen_qcommonstyle_types.QCommonStyle, standardIcon: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQCommonStyle_standardIcon(self.h, cint(standardIcon), opt.h, widget.h))
+  gen_qicon_types.QIcon(h: fcQCommonStyle_standardIcon(self.h, cint(standardIcon), opt.h, widget.h), owned: true)
 
 proc standardPixmap*(self: gen_qcommonstyle_types.QCommonStyle, sp: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQCommonStyle_standardPixmap(self.h, cint(sp), opt.h, widget.h))
+  gen_qpixmap_types.QPixmap(h: fcQCommonStyle_standardPixmap(self.h, cint(sp), opt.h, widget.h), owned: true)
 
 proc generatedIconPixmap*(self: gen_qcommonstyle_types.QCommonStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQCommonStyle_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h))
+  gen_qpixmap_types.QPixmap(h: fcQCommonStyle_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h), owned: true)
 
 proc layoutSpacing*(self: gen_qcommonstyle_types.QCommonStyle, control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint =
   fcQCommonStyle_layoutSpacing(self.h, cint(control1), cint(control2), cint(orientation), option.h, widget.h)
@@ -293,7 +292,8 @@ type QCommonStylechildEventProc* = proc(self: QCommonStyle, event: gen_qcoreeven
 type QCommonStylecustomEventProc* = proc(self: QCommonStyle, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QCommonStyleconnectNotifyProc* = proc(self: QCommonStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QCommonStyledisconnectNotifyProc* = proc(self: QCommonStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QCommonStyleVTable* = object
+
+type QCommonStyleVTable* {.inheritable, pure.} = object
   vtbl: cQCommonStyleVTable
   metaObject*: QCommonStylemetaObjectProc
   metacast*: QCommonStylemetacastProc
@@ -330,7 +330,7 @@ type QCommonStyleVTable* = object
   disconnectNotify*: QCommonStyledisconnectNotifyProc
 
 proc QCommonStylemetaObject*(self: gen_qcommonstyle_types.QCommonStyle): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCommonStyle_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCommonStyle_virtualbase_metaObject(self.h), owned: false)
 
 proc QCommonStylemetacast*(self: gen_qcommonstyle_types.QCommonStyle, param1: cstring): pointer =
   fcQCommonStyle_virtualbase_metacast(self.h, param1)
@@ -345,7 +345,7 @@ proc QCommonStyledrawControl*(self: gen_qcommonstyle_types.QCommonStyle, element
   fcQCommonStyle_virtualbase_drawControl(self.h, cint(element), opt.h, p.h, w.h)
 
 proc QCommonStylesubElementRect*(self: gen_qcommonstyle_types.QCommonStyle, r: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_subElementRect(self.h, cint(r), opt.h, widget.h))
+  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_subElementRect(self.h, cint(r), opt.h, widget.h), owned: true)
 
 proc QCommonStyledrawComplexControl*(self: gen_qcommonstyle_types.QCommonStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, p: gen_qpainter_types.QPainter, w: gen_qwidget_types.QWidget): void =
   fcQCommonStyle_virtualbase_drawComplexControl(self.h, cint(cc), opt.h, p.h, w.h)
@@ -354,10 +354,10 @@ proc QCommonStylehitTestComplexControl*(self: gen_qcommonstyle_types.QCommonStyl
   cint(fcQCommonStyle_virtualbase_hitTestComplexControl(self.h, cint(cc), opt.h, pt.h, w.h))
 
 proc QCommonStylesubControlRect*(self: gen_qcommonstyle_types.QCommonStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, w: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_subControlRect(self.h, cint(cc), opt.h, cint(sc), w.h))
+  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_subControlRect(self.h, cint(cc), opt.h, cint(sc), w.h), owned: true)
 
 proc QCommonStylesizeFromContents*(self: gen_qcommonstyle_types.QCommonStyle, ct: cint, opt: gen_qstyleoption_types.QStyleOption, contentsSize: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCommonStyle_virtualbase_sizeFromContents(self.h, cint(ct), opt.h, contentsSize.h, widget.h))
+  gen_qsize_types.QSize(h: fcQCommonStyle_virtualbase_sizeFromContents(self.h, cint(ct), opt.h, contentsSize.h, widget.h), owned: true)
 
 proc QCommonStylepixelMetric*(self: gen_qcommonstyle_types.QCommonStyle, m: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint =
   fcQCommonStyle_virtualbase_pixelMetric(self.h, cint(m), opt.h, widget.h)
@@ -366,13 +366,13 @@ proc QCommonStylestyleHint*(self: gen_qcommonstyle_types.QCommonStyle, sh: cint,
   fcQCommonStyle_virtualbase_styleHint(self.h, cint(sh), opt.h, w.h, shret.h)
 
 proc QCommonStylestandardIcon*(self: gen_qcommonstyle_types.QCommonStyle, standardIcon: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQCommonStyle_virtualbase_standardIcon(self.h, cint(standardIcon), opt.h, widget.h))
+  gen_qicon_types.QIcon(h: fcQCommonStyle_virtualbase_standardIcon(self.h, cint(standardIcon), opt.h, widget.h), owned: true)
 
 proc QCommonStylestandardPixmap*(self: gen_qcommonstyle_types.QCommonStyle, sp: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQCommonStyle_virtualbase_standardPixmap(self.h, cint(sp), opt.h, widget.h))
+  gen_qpixmap_types.QPixmap(h: fcQCommonStyle_virtualbase_standardPixmap(self.h, cint(sp), opt.h, widget.h), owned: true)
 
 proc QCommonStylegeneratedIconPixmap*(self: gen_qcommonstyle_types.QCommonStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQCommonStyle_virtualbase_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h))
+  gen_qpixmap_types.QPixmap(h: fcQCommonStyle_virtualbase_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h), owned: true)
 
 proc QCommonStylelayoutSpacing*(self: gen_qcommonstyle_types.QCommonStyle, control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint =
   fcQCommonStyle_virtualbase_layoutSpacing(self.h, cint(control1), cint(control2), cint(orientation), option.h, widget.h)
@@ -393,10 +393,10 @@ proc QCommonStyleunpolish*(self: gen_qcommonstyle_types.QCommonStyle, applicatio
   fcQCommonStyle_virtualbase_unpolishWithApplication(self.h, application.h)
 
 proc QCommonStyleitemTextRect*(self: gen_qcommonstyle_types.QCommonStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: openArray[char]): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))))
+  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text)))), owned: true)
 
 proc QCommonStyleitemPixmapRect*(self: gen_qcommonstyle_types.QCommonStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_itemPixmapRect(self.h, r.h, flags, pixmap.h))
+  gen_qrect_types.QRect(h: fcQCommonStyle_virtualbase_itemPixmapRect(self.h, r.h, flags, pixmap.h), owned: true)
 
 proc QCommonStyledrawItemText*(self: gen_qcommonstyle_types.QCommonStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
   fcQCommonStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
@@ -405,7 +405,7 @@ proc QCommonStyledrawItemPixmap*(self: gen_qcommonstyle_types.QCommonStyle, pain
   fcQCommonStyle_virtualbase_drawItemPixmap(self.h, painter.h, rect.h, alignment, pixmap.h)
 
 proc QCommonStylestandardPalette*(self: gen_qcommonstyle_types.QCommonStyle): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQCommonStyle_virtualbase_standardPalette(self.h))
+  gen_qpalette_types.QPalette(h: fcQCommonStyle_virtualbase_standardPalette(self.h), owned: true)
 
 proc QCommonStyleevent*(self: gen_qcommonstyle_types.QCommonStyle, event: gen_qcoreevent_types.QEvent): bool =
   fcQCommonStyle_virtualbase_event(self.h, event.h)
@@ -433,7 +433,10 @@ proc fcQCommonStyle_vtable_callback_metaObject(self: pointer): pointer {.cdecl.}
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
@@ -455,45 +458,48 @@ proc fcQCommonStyle_vtable_callback_drawPrimitive(self: pointer, pe: cint, opt: 
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(pe)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qpainter_types.QPainter(h: p)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: p, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   vtbl[].drawPrimitive(self, slotval1, slotval2, slotval3, slotval4)
 
 proc fcQCommonStyle_vtable_callback_drawControl(self: pointer, element: cint, opt: pointer, p: pointer, w: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(element)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qpainter_types.QPainter(h: p)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: p, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   vtbl[].drawControl(self, slotval1, slotval2, slotval3, slotval4)
 
 proc fcQCommonStyle_vtable_callback_subElementRect(self: pointer, r: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(r)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].subElementRect(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_drawComplexControl(self: pointer, cc: cint, opt: pointer, p: pointer, w: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(cc)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt)
-  let slotval3 = gen_qpainter_types.QPainter(h: p)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: p, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   vtbl[].drawComplexControl(self, slotval1, slotval2, slotval3, slotval4)
 
 proc fcQCommonStyle_vtable_callback_hitTestComplexControl(self: pointer, cc: cint, opt: pointer, pt: pointer, w: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(cc)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt)
-  let slotval3 = gen_qpoint_types.QPoint(h: pt)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt, owned: false)
+  let slotval3 = gen_qpoint_types.QPoint(h: pt, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   var virtualReturn = vtbl[].hitTestComplexControl(self, slotval1, slotval2, slotval3, slotval4)
   cint(virtualReturn)
 
@@ -501,28 +507,34 @@ proc fcQCommonStyle_vtable_callback_subControlRect(self: pointer, cc: cint, opt:
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(cc)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt, owned: false)
   let slotval3 = cint(sc)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   var virtualReturn = vtbl[].subControlRect(self, slotval1, slotval2, slotval3, slotval4)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_sizeFromContents(self: pointer, ct: cint, opt: pointer, contentsSize: pointer, widget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(ct)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qsize_types.QSize(h: contentsSize)
-  let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qsize_types.QSize(h: contentsSize, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].sizeFromContents(self, slotval1, slotval2, slotval3, slotval4)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_pixelMetric(self: pointer, m: cint, opt: pointer, widget: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(m)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].pixelMetric(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -530,9 +542,9 @@ proc fcQCommonStyle_vtable_callback_styleHint(self: pointer, sh: cint, opt: poin
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(sh)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: w)
-  let slotval4 = gen_qstyleoption_types.QStyleHintReturn(h: shret)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: w, owned: false)
+  let slotval4 = gen_qstyleoption_types.QStyleHintReturn(h: shret, owned: false)
   var virtualReturn = vtbl[].styleHint(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
@@ -540,28 +552,37 @@ proc fcQCommonStyle_vtable_callback_standardIcon(self: pointer, standardIcon: ci
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(standardIcon)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].standardIcon(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_standardPixmap(self: pointer, sp: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(sp)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].standardPixmap(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   let slotval1 = cint(iconMode)
-  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap)
-  let slotval3 = gen_qstyleoption_types.QStyleOption(h: opt)
+  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
   var virtualReturn = vtbl[].generatedIconPixmap(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_layoutSpacing(self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
@@ -569,46 +590,46 @@ proc fcQCommonStyle_vtable_callback_layoutSpacing(self: pointer, control1: cint,
   let slotval1 = cint(control1)
   let slotval2 = cint(control2)
   let slotval3 = cint(orientation)
-  let slotval4 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval5 = gen_qwidget_types.QWidget(h: widget)
+  let slotval4 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval5 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].layoutSpacing(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc fcQCommonStyle_vtable_callback_polish(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qpalette_types.QPalette(h: param1)
+  let slotval1 = gen_qpalette_types.QPalette(h: param1, owned: false)
   vtbl[].polish(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_polishWithApp(self: pointer, app: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qapplication_types.QApplication(h: app)
+  let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
   vtbl[].polishWithApp(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_polishWithWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].polishWithWidget(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_unpolish(self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].unpolish(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_unpolishWithApplication(self: pointer, application: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qapplication_types.QApplication(h: application)
+  let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   vtbl[].unpolishWithApplication(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm)
-  let slotval2 = gen_qrect_types.QRect(h: r)
+  let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: r, owned: false)
   let slotval3 = flags
   let slotval4 = enabled
   let vtext_ms = text
@@ -616,24 +637,30 @@ proc fcQCommonStyle_vtable_callback_itemTextRect(self: pointer, fm: pointer, r: 
   c_free(vtext_ms.data)
   let slotval5 = vtextx_ret
   var virtualReturn = vtbl[].itemTextRect(self, slotval1, slotval2, slotval3, slotval4, slotval5)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_itemPixmapRect(self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: r)
+  let slotval1 = gen_qrect_types.QRect(h: r, owned: false)
   let slotval2 = flags
-  let slotval3 = gen_qpixmap_types.QPixmap(h: pixmap)
+  let slotval3 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   var virtualReturn = vtbl[].itemPixmapRect(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_seaqt_string, textRole: cint): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval3 = flags
-  let slotval4 = gen_qpalette_types.QPalette(h: pal)
+  let slotval4 = gen_qpalette_types.QPalette(h: pal, owned: false)
   let slotval5 = enabled
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(vtext_ms)
@@ -645,61 +672,64 @@ proc fcQCommonStyle_vtable_callback_drawItemText(self: pointer, painter: pointer
 proc fcQCommonStyle_vtable_callback_drawItemPixmap(self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval3 = alignment
-  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap)
+  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   vtbl[].drawItemPixmap(self, slotval1, slotval2, slotval3, slotval4)
 
 proc fcQCommonStyle_vtable_callback_standardPalette(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
   var virtualReturn = vtbl[].standardPalette(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQCommonStyle_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQCommonStyle_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQCommonStyle_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCommonStyleVTable](fcQCommonStyle_vdata(self)[])
   let self = QCommonStyle(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQCommonStyle* {.inheritable.} = ref object of QCommonStyle
@@ -775,7 +805,10 @@ method disconnectNotify*(self: VirtualQCommonStyle, signal: gen_qmetaobject_type
 proc fcQCommonStyle_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
@@ -794,142 +827,160 @@ proc fcQCommonStyle_method_callback_metacall(self: pointer, param1: cint, param2
 proc fcQCommonStyle_method_callback_drawPrimitive(self: pointer, pe: cint, opt: pointer, p: pointer, w: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(pe)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qpainter_types.QPainter(h: p)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: p, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   inst.drawPrimitive(slotval1, slotval2, slotval3, slotval4)
 
 proc fcQCommonStyle_method_callback_drawControl(self: pointer, element: cint, opt: pointer, p: pointer, w: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(element)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qpainter_types.QPainter(h: p)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: p, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   inst.drawControl(slotval1, slotval2, slotval3, slotval4)
 
 proc fcQCommonStyle_method_callback_subElementRect(self: pointer, r: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(r)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = inst.subElementRect(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_drawComplexControl(self: pointer, cc: cint, opt: pointer, p: pointer, w: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(cc)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt)
-  let slotval3 = gen_qpainter_types.QPainter(h: p)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: p, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   inst.drawComplexControl(slotval1, slotval2, slotval3, slotval4)
 
 proc fcQCommonStyle_method_callback_hitTestComplexControl(self: pointer, cc: cint, opt: pointer, pt: pointer, w: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(cc)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt)
-  let slotval3 = gen_qpoint_types.QPoint(h: pt)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt, owned: false)
+  let slotval3 = gen_qpoint_types.QPoint(h: pt, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   var virtualReturn = inst.hitTestComplexControl(slotval1, slotval2, slotval3, slotval4)
   cint(virtualReturn)
 
 proc fcQCommonStyle_method_callback_subControlRect(self: pointer, cc: cint, opt: pointer, sc: cint, w: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(cc)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt, owned: false)
   let slotval3 = cint(sc)
-  let slotval4 = gen_qwidget_types.QWidget(h: w)
+  let slotval4 = gen_qwidget_types.QWidget(h: w, owned: false)
   var virtualReturn = inst.subControlRect(slotval1, slotval2, slotval3, slotval4)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_sizeFromContents(self: pointer, ct: cint, opt: pointer, contentsSize: pointer, widget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(ct)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qsize_types.QSize(h: contentsSize)
-  let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qsize_types.QSize(h: contentsSize, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = inst.sizeFromContents(slotval1, slotval2, slotval3, slotval4)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_pixelMetric(self: pointer, m: cint, opt: pointer, widget: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(m)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = inst.pixelMetric(slotval1, slotval2, slotval3)
   virtualReturn
 
 proc fcQCommonStyle_method_callback_styleHint(self: pointer, sh: cint, opt: pointer, w: pointer, shret: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(sh)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: w)
-  let slotval4 = gen_qstyleoption_types.QStyleHintReturn(h: shret)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: w, owned: false)
+  let slotval4 = gen_qstyleoption_types.QStyleHintReturn(h: shret, owned: false)
   var virtualReturn = inst.styleHint(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
 proc fcQCommonStyle_method_callback_standardIcon(self: pointer, standardIcon: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(standardIcon)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = inst.standardIcon(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_standardPixmap(self: pointer, sp: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(sp)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = inst.standardPixmap(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(iconMode)
-  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap)
-  let slotval3 = gen_qstyleoption_types.QStyleOption(h: opt)
+  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
   var virtualReturn = inst.generatedIconPixmap(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_layoutSpacing(self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   let slotval1 = cint(control1)
   let slotval2 = cint(control2)
   let slotval3 = cint(orientation)
-  let slotval4 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval5 = gen_qwidget_types.QWidget(h: widget)
+  let slotval4 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval5 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = inst.layoutSpacing(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc fcQCommonStyle_method_callback_polish(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qpalette_types.QPalette(h: param1)
+  let slotval1 = gen_qpalette_types.QPalette(h: param1, owned: false)
   inst.polish(slotval1)
 
 proc fcQCommonStyle_method_callback_polishWithApp(self: pointer, app: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qapplication_types.QApplication(h: app)
+  let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
   inst.polish(slotval1)
 
 proc fcQCommonStyle_method_callback_polishWithWidget(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.polish(slotval1)
 
 proc fcQCommonStyle_method_callback_unpolish(self: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.unpolish(slotval1)
 
 proc fcQCommonStyle_method_callback_unpolishWithApplication(self: pointer, application: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qapplication_types.QApplication(h: application)
+  let slotval1 = gen_qapplication_types.QApplication(h: application, owned: false)
   inst.unpolish(slotval1)
 
 proc fcQCommonStyle_method_callback_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm)
-  let slotval2 = gen_qrect_types.QRect(h: r)
+  let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: r, owned: false)
   let slotval3 = flags
   let slotval4 = enabled
   let vtext_ms = text
@@ -937,22 +988,28 @@ proc fcQCommonStyle_method_callback_itemTextRect(self: pointer, fm: pointer, r: 
   c_free(vtext_ms.data)
   let slotval5 = vtextx_ret
   var virtualReturn = inst.itemTextRect(slotval1, slotval2, slotval3, slotval4, slotval5)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_itemPixmapRect(self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRect(h: r)
+  let slotval1 = gen_qrect_types.QRect(h: r, owned: false)
   let slotval2 = flags
-  let slotval3 = gen_qpixmap_types.QPixmap(h: pixmap)
+  let slotval3 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   var virtualReturn = inst.itemPixmapRect(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_seaqt_string, textRole: cint): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval3 = flags
-  let slotval4 = gen_qpalette_types.QPalette(h: pal)
+  let slotval4 = gen_qpalette_types.QPalette(h: pal, owned: false)
   let slotval5 = enabled
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(vtext_ms)
@@ -963,58 +1020,61 @@ proc fcQCommonStyle_method_callback_drawItemText(self: pointer, painter: pointer
 
 proc fcQCommonStyle_method_callback_drawItemPixmap(self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval3 = alignment
-  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap)
+  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   inst.drawItemPixmap(slotval1, slotval2, slotval3, slotval4)
 
 proc fcQCommonStyle_method_callback_standardPalette(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
   var virtualReturn = inst.standardPalette()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQCommonStyle_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQCommonStyle_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQCommonStyle_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQCommonStyle_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQCommonStyle_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQCommonStyle_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQCommonStyle_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQCommonStyle](fcQCommonStyle_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qcommonstyle_types.QCommonStyle): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCommonStyle_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCommonStyle_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcommonstyle_types.QCommonStyle): cint =
   fcQCommonStyle_protectedbase_senderSignalIndex(self.h)
@@ -1098,13 +1158,14 @@ proc create*(T: type gen_qcommonstyle_types.QCommonStyle,
     vtbl[].vtbl.connectNotify = fcQCommonStyle_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQCommonStyle_vtable_callback_disconnectNotify
-  let tmp = gen_qcommonstyle_types.QCommonStyle(h: fcQCommonStyle_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qcommonstyle_types.QCommonStyle(h: fcQCommonStyle_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQCommonStyle_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQCommonStyle_mvtbl = cQCommonStyleVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQCommonStyle()[])](self.fcQCommonStyle_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQCommonStyle_method_callback_metaObject,
   metacast: fcQCommonStyle_method_callback_metacast,
@@ -1149,5 +1210,3 @@ proc create*(T: type gen_qcommonstyle_types.QCommonStyle,
 
 proc staticMetaObject*(_: type gen_qcommonstyle_types.QCommonStyle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCommonStyle_staticMetaObject())
-proc delete*(self: gen_qcommonstyle_types.QCommonStyle) =
-  fcQCommonStyle_delete(self.h)

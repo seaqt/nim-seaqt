@@ -1,4 +1,4 @@
-type QKeyCombination* {.inheritable, pure.} = object
+type QKeyCombination* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

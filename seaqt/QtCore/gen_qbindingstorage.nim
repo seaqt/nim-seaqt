@@ -50,14 +50,12 @@ proc fcQBindingStatus_currentCompatProperty(self: pointer): pointer {.importc: "
 proc fcQBindingStatus_setCurrentCompatProperty(self: pointer, currentCompatProperty: pointer): void {.importc: "QBindingStatus_setCurrentCompatProperty".}
 proc fcQBindingStatus_threadId(self: pointer): pointer {.importc: "QBindingStatus_threadId".}
 proc fcQBindingStatus_setThreadId(self: pointer, threadId: pointer): void {.importc: "QBindingStatus_setThreadId".}
-proc fcQBindingStatus_delete(self: pointer) {.importc: "QBindingStatus_delete".}
 proc fcQBindingStorage_isEmpty(self: pointer): bool {.importc: "QBindingStorage_isEmpty".}
 proc fcQBindingStorage_isValid(self: pointer): bool {.importc: "QBindingStorage_isValid".}
 proc fcQBindingStorage_registerDependency(self: pointer, data: pointer): void {.importc: "QBindingStorage_registerDependency".}
 proc fcQBindingStorage_bindingData(self: pointer, data: pointer): pointer {.importc: "QBindingStorage_bindingData".}
 proc fcQBindingStorage_bindingData2(self: pointer, data: pointer, createVal: bool): pointer {.importc: "QBindingStorage_bindingData2".}
 proc fcQBindingStorage_new(): ptr cQBindingStorage {.importc: "QBindingStorage_new".}
-proc fcQBindingStorage_delete(self: pointer) {.importc: "QBindingStorage_delete".}
 
 proc currentlyEvaluatingBinding*(self: gen_qbindingstorage_types.QBindingStatus): pointer =
   fcQBindingStatus_currentlyEvaluatingBinding(self.h)
@@ -77,8 +75,6 @@ proc threadId*(self: gen_qbindingstorage_types.QBindingStatus): pointer =
 proc setThreadId*(self: gen_qbindingstorage_types.QBindingStatus, threadId: pointer): void =
   fcQBindingStatus_setThreadId(self.h, threadId)
 
-proc delete*(self: gen_qbindingstorage_types.QBindingStatus) =
-  fcQBindingStatus_delete(self.h)
 proc isEmpty*(self: gen_qbindingstorage_types.QBindingStorage): bool =
   fcQBindingStorage_isEmpty(self.h)
 
@@ -95,7 +91,5 @@ proc bindingData*(self: gen_qbindingstorage_types.QBindingStorage, data: gen_qpr
   fcQBindingStorage_bindingData2(self.h, data.h, createVal)
 
 proc create*(T: type gen_qbindingstorage_types.QBindingStorage): gen_qbindingstorage_types.QBindingStorage =
-  let tmp = gen_qbindingstorage_types.QBindingStorage(h: fcQBindingStorage_new())
+  let tmp = gen_qbindingstorage_types.QBindingStorage(h: fcQBindingStorage_new(), owned: true)
   tmp
-proc delete*(self: gen_qbindingstorage_types.QBindingStorage) =
-  fcQBindingStorage_delete(self.h)

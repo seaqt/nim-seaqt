@@ -46,5 +46,5 @@ proc fcQStringTokenizerBaseBase_new(param1: pointer): ptr cQStringTokenizerBaseB
 
 proc create*(T: type gen_qstringtokenizer_types.QStringTokenizerBaseBase,
     param1: gen_qstringtokenizer_types.QStringTokenizerBaseBase): gen_qstringtokenizer_types.QStringTokenizerBaseBase =
-  let tmp = gen_qstringtokenizer_types.QStringTokenizerBaseBase(h: fcQStringTokenizerBaseBase_new(param1.h))
+  let tmp = gen_qstringtokenizer_types.QStringTokenizerBaseBase(h: fcQStringTokenizerBaseBase_new(param1.h), owned: true)
   tmp

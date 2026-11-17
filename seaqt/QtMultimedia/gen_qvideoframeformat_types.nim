@@ -1,4 +1,4 @@
-type QVideoFrameFormat* {.inheritable, pure.} = object
+type QVideoFrameFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -9,7 +9,7 @@ proc `=sink`(dest: var QSocketNotifier, source: QSocketNotifier) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QSocketDescriptor* {.inheritable, pure.} = object
+type QSocketDescriptor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

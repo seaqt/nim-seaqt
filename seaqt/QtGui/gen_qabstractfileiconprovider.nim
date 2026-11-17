@@ -80,13 +80,12 @@ proc fcQAbstractFileIconProvider_virtualbase_typeX(self: pointer, param1: pointe
 proc fcQAbstractFileIconProvider_virtualbase_setOptions(self: pointer, options: cint): void {.importc: "QAbstractFileIconProvider_virtualbase_setOptions".}
 proc fcQAbstractFileIconProvider_virtualbase_options(self: pointer): cint {.importc: "QAbstractFileIconProvider_virtualbase_options".}
 proc fcQAbstractFileIconProvider_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractFileIconProvider {.importc: "QAbstractFileIconProvider_new".}
-proc fcQAbstractFileIconProvider_delete(self: pointer) {.importc: "QAbstractFileIconProvider_delete".}
 
 proc icon*(self: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider, param1: cint): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQAbstractFileIconProvider_icon(self.h, cint(param1)))
+  gen_qicon_types.QIcon(h: fcQAbstractFileIconProvider_icon(self.h, cint(param1)), owned: true)
 
 proc icon*(self: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider, param1: gen_qfileinfo_types.QFileInfo): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQAbstractFileIconProvider_iconWithQFileInfo(self.h, param1.h))
+  gen_qicon_types.QIcon(h: fcQAbstractFileIconProvider_iconWithQFileInfo(self.h, param1.h), owned: true)
 
 proc typeX*(self: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider, param1: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQAbstractFileIconProvider_typeX(self.h, param1.h)
@@ -105,7 +104,8 @@ type QAbstractFileIconProvidericonWithQFileInfoProc* = proc(self: QAbstractFileI
 type QAbstractFileIconProvidertypeXProc* = proc(self: QAbstractFileIconProvider, param1: gen_qfileinfo_types.QFileInfo): string {.raises: [], gcsafe.}
 type QAbstractFileIconProvidersetOptionsProc* = proc(self: QAbstractFileIconProvider, options: cint): void {.raises: [], gcsafe.}
 type QAbstractFileIconProvideroptionsProc* = proc(self: QAbstractFileIconProvider): cint {.raises: [], gcsafe.}
-type QAbstractFileIconProviderVTable* = object
+
+type QAbstractFileIconProviderVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractFileIconProviderVTable
   icon*: QAbstractFileIconProvidericonProc
   iconWithQFileInfo*: QAbstractFileIconProvidericonWithQFileInfoProc
@@ -114,10 +114,10 @@ type QAbstractFileIconProviderVTable* = object
   options*: QAbstractFileIconProvideroptionsProc
 
 proc QAbstractFileIconProvidericon*(self: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider, param1: cint): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQAbstractFileIconProvider_virtualbase_icon(self.h, cint(param1)))
+  gen_qicon_types.QIcon(h: fcQAbstractFileIconProvider_virtualbase_icon(self.h, cint(param1)), owned: true)
 
 proc QAbstractFileIconProvidericon*(self: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider, param1: gen_qfileinfo_types.QFileInfo): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQAbstractFileIconProvider_virtualbase_iconWithQFileInfo(self.h, param1.h))
+  gen_qicon_types.QIcon(h: fcQAbstractFileIconProvider_virtualbase_iconWithQFileInfo(self.h, param1.h), owned: true)
 
 proc QAbstractFileIconProvidertypeX*(self: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider, param1: gen_qfileinfo_types.QFileInfo): string =
   let v_ms = fcQAbstractFileIconProvider_virtualbase_typeX(self.h, param1.h)
@@ -137,19 +137,25 @@ proc fcQAbstractFileIconProvider_vtable_callback_icon(self: pointer, param1: cin
   let self = QAbstractFileIconProvider(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].icon(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractFileIconProvider_vtable_callback_iconWithQFileInfo(self: pointer, param1: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractFileIconProviderVTable](fcQAbstractFileIconProvider_vdata(self)[])
   let self = QAbstractFileIconProvider(h: self)
-  let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1)
+  let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1, owned: false)
   var virtualReturn = vtbl[].iconWithQFileInfo(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractFileIconProvider_vtable_callback_typeX(self: pointer, param1: pointer): struct_seaqt_string {.cdecl.} =
   let vtbl = cast[ptr QAbstractFileIconProviderVTable](fcQAbstractFileIconProvider_vdata(self)[])
   let self = QAbstractFileIconProvider(h: self)
-  let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1)
+  let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1, owned: false)
   var virtualReturn = vtbl[].typeX(self, slotval1)
   var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
   if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
@@ -185,17 +191,23 @@ proc fcQAbstractFileIconProvider_method_callback_icon(self: pointer, param1: cin
   let inst = cast[VirtualQAbstractFileIconProvider](fcQAbstractFileIconProvider_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.icon(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractFileIconProvider_method_callback_iconWithQFileInfo(self: pointer, param1: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractFileIconProvider](fcQAbstractFileIconProvider_vdata(self)[])
-  let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1)
+  let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1, owned: false)
   var virtualReturn = inst.icon(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractFileIconProvider_method_callback_typeX(self: pointer, param1: pointer): struct_seaqt_string {.cdecl.} =
   let inst = cast[VirtualQAbstractFileIconProvider](fcQAbstractFileIconProvider_vdata(self)[])
-  let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1)
+  let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1, owned: false)
   var virtualReturn = inst.typeX(slotval1)
   var virtualReturn_copy = if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil
   if len(virtualReturn) > 0: copyMem(virtualReturn_copy, addr virtualReturn[0], csize_t(len(virtualReturn)))
@@ -229,13 +241,14 @@ proc create*(T: type gen_qabstractfileiconprovider_types.QAbstractFileIconProvid
     vtbl[].vtbl.setOptions = fcQAbstractFileIconProvider_vtable_callback_setOptions
   if not isNil(vtbl[].options):
     vtbl[].vtbl.options = fcQAbstractFileIconProvider_vtable_callback_options
-  let tmp = gen_qabstractfileiconprovider_types.QAbstractFileIconProvider(h: fcQAbstractFileIconProvider_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qabstractfileiconprovider_types.QAbstractFileIconProvider(h: fcQAbstractFileIconProvider_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQAbstractFileIconProvider_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQAbstractFileIconProvider_mvtbl = cQAbstractFileIconProviderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQAbstractFileIconProvider()[])](self.fcQAbstractFileIconProvider_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   icon: fcQAbstractFileIconProvider_method_callback_icon,
   iconWithQFileInfo: fcQAbstractFileIconProvider_method_callback_iconWithQFileInfo,
@@ -250,5 +263,3 @@ proc create*(T: type gen_qabstractfileiconprovider_types.QAbstractFileIconProvid
   fcQAbstractFileIconProvider_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider) =
-  fcQAbstractFileIconProvider_delete(self.h)

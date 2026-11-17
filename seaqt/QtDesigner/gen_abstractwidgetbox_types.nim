@@ -9,7 +9,7 @@ proc `=sink`(dest: var QDesignerWidgetBoxInterface, source: QDesignerWidgetBoxIn
   dest.h = source.h
   dest.owned = source.owned
 
-type QDesignerWidgetBoxInterfaceWidget* {.inheritable, pure.} = object
+type QDesignerWidgetBoxInterfaceWidget* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -33,7 +33,7 @@ proc delete*(self: sink QDesignerWidgetBoxInterfaceWidget) =
   wasMoved(self)
   fcQDesignerWidgetBoxInterfaceWidget_delete(h)
 
-type QDesignerWidgetBoxInterfaceCategory* {.inheritable, pure.} = object
+type QDesignerWidgetBoxInterfaceCategory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

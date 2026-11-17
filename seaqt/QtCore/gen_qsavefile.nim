@@ -143,10 +143,9 @@ proc fcQSaveFile_new2(vtbl: pointer, vdata: csize_t): ptr cQSaveFile {.importc: 
 proc fcQSaveFile_new3(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new3".}
 proc fcQSaveFile_new4(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new4".}
 proc fcQSaveFile_staticMetaObject(): pointer {.importc: "QSaveFile_staticMetaObject".}
-proc fcQSaveFile_delete(self: pointer) {.importc: "QSaveFile_delete".}
 
 proc metaObject*(self: gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsavefile_types.QSaveFile, param1: cstring): pointer =
   fcQSaveFile_metacast(self.h, param1)
@@ -226,7 +225,8 @@ type QSaveFilechildEventProc* = proc(self: QSaveFile, event: gen_qcoreevent_type
 type QSaveFilecustomEventProc* = proc(self: QSaveFile, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSaveFileconnectNotifyProc* = proc(self: QSaveFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSaveFiledisconnectNotifyProc* = proc(self: QSaveFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSaveFileVTable* = object
+
+type QSaveFileVTable* {.inheritable, pure.} = object
   vtbl: cQSaveFileVTable
   metaObject*: QSaveFilemetaObjectProc
   metacast*: QSaveFilemetacastProc
@@ -260,7 +260,7 @@ type QSaveFileVTable* = object
   disconnectNotify*: QSaveFiledisconnectNotifyProc
 
 proc QSaveFilemetaObject*(self: gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_virtualbase_metaObject(self.h), owned: false)
 
 proc QSaveFilemetacast*(self: gen_qsavefile_types.QSaveFile, param1: cstring): pointer =
   fcQSaveFile_virtualbase_metacast(self.h, param1)
@@ -357,7 +357,10 @@ proc fcQSaveFile_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSaveFile_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
@@ -513,46 +516,46 @@ proc fcQSaveFile_vtable_callback_skipData(self: pointer, maxSize: clonglong): cl
 proc fcQSaveFile_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
   let self = QSaveFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQSaveFile_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
   let self = QSaveFile(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQSaveFile_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
   let self = QSaveFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQSaveFile_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
   let self = QSaveFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQSaveFile_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
   let self = QSaveFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQSaveFile_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
   let self = QSaveFile(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQSaveFile_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self)[])
   let self = QSaveFile(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSaveFile* {.inheritable.} = ref object of QSaveFile
@@ -622,7 +625,10 @@ method disconnectNotify*(self: VirtualQSaveFile, signal: gen_qmetaobject_types.Q
 proc fcQSaveFile_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSaveFile_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
@@ -755,40 +761,40 @@ proc fcQSaveFile_method_callback_skipData(self: pointer, maxSize: clonglong): cl
 
 proc fcQSaveFile_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQSaveFile_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQSaveFile_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQSaveFile_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQSaveFile_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQSaveFile_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQSaveFile_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -799,7 +805,7 @@ proc setErrorString*(self: gen_qsavefile_types.QSaveFile, errorString: openArray
   fcQSaveFile_protectedbase_setErrorString(self.h, struct_seaqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qsavefile_types.QSaveFile): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSaveFile_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSaveFile_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsavefile_types.QSaveFile): cint =
   fcQSaveFile_protectedbase_senderSignalIndex(self.h)
@@ -878,7 +884,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl[].vtbl.connectNotify = fcQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSaveFile_vtable_callback_disconnectNotify
-  let tmp = gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  let tmp = gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   fcQSaveFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsavefile_types.QSaveFile,
@@ -948,7 +954,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl[].vtbl.connectNotify = fcQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSaveFile_vtable_callback_disconnectNotify
-  let tmp = gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSaveFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsavefile_types.QSaveFile,
@@ -1019,7 +1025,7 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl[].vtbl.connectNotify = fcQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSaveFile_vtable_callback_disconnectNotify
-  let tmp = gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h))
+  let tmp = gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parent.h), owned: true)
   fcQSaveFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qsavefile_types.QSaveFile,
@@ -1090,13 +1096,14 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl[].vtbl.connectNotify = fcQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQSaveFile_vtable_callback_disconnectNotify
-  let tmp = gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQSaveFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSaveFile_mvtbl = cQSaveFileVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSaveFile()[])](self.fcQSaveFile_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQSaveFile_method_callback_metaObject,
   metacast: fcQSaveFile_method_callback_metacast,
@@ -1162,5 +1169,3 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
 
 proc staticMetaObject*(_: type gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_staticMetaObject())
-proc delete*(self: gen_qsavefile_types.QSaveFile) =
-  fcQSaveFile_delete(self.h)

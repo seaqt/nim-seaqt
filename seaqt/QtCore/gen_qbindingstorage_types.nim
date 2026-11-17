@@ -1,4 +1,4 @@
-type QBindingStatus* {.inheritable, pure.} = object
+type QBindingStatus* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QBindingStatus) =
   wasMoved(self)
   fcQBindingStatus_delete(h)
 
-type QBindingStorage* {.inheritable, pure.} = object
+type QBindingStorage* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

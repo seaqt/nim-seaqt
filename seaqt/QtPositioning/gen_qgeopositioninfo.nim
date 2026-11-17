@@ -70,7 +70,6 @@ proc fcQGeoPositionInfo_detach(self: pointer): void {.importc: "QGeoPositionInfo
 proc fcQGeoPositionInfo_new(): ptr cQGeoPositionInfo {.importc: "QGeoPositionInfo_new".}
 proc fcQGeoPositionInfo_new2(coordinate: pointer, updateTime: pointer): ptr cQGeoPositionInfo {.importc: "QGeoPositionInfo_new2".}
 proc fcQGeoPositionInfo_new3(other: pointer): ptr cQGeoPositionInfo {.importc: "QGeoPositionInfo_new3".}
-proc fcQGeoPositionInfo_delete(self: pointer) {.importc: "QGeoPositionInfo_delete".}
 
 proc operatorAssign*(self: gen_qgeopositioninfo_types.QGeoPositionInfo, other: gen_qgeopositioninfo_types.QGeoPositionInfo): void =
   fcQGeoPositionInfo_operatorAssign(self.h, other.h)
@@ -85,13 +84,13 @@ proc setTimestamp*(self: gen_qgeopositioninfo_types.QGeoPositionInfo, timestamp:
   fcQGeoPositionInfo_setTimestamp(self.h, timestamp.h)
 
 proc timestamp*(self: gen_qgeopositioninfo_types.QGeoPositionInfo): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQGeoPositionInfo_timestamp(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQGeoPositionInfo_timestamp(self.h), owned: true)
 
 proc setCoordinate*(self: gen_qgeopositioninfo_types.QGeoPositionInfo, coordinate: gen_qgeocoordinate_types.QGeoCoordinate): void =
   fcQGeoPositionInfo_setCoordinate(self.h, coordinate.h)
 
 proc coordinate*(self: gen_qgeopositioninfo_types.QGeoPositionInfo): gen_qgeocoordinate_types.QGeoCoordinate =
-  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoPositionInfo_coordinate(self.h))
+  gen_qgeocoordinate_types.QGeoCoordinate(h: fcQGeoPositionInfo_coordinate(self.h), owned: true)
 
 proc setAttribute*(self: gen_qgeopositioninfo_types.QGeoPositionInfo, attribute: cint, value: float64): void =
   fcQGeoPositionInfo_setAttribute(self.h, cint(attribute), value)
@@ -109,15 +108,13 @@ proc detach*(self: gen_qgeopositioninfo_types.QGeoPositionInfo): void =
   fcQGeoPositionInfo_detach(self.h)
 
 proc create*(T: type gen_qgeopositioninfo_types.QGeoPositionInfo): gen_qgeopositioninfo_types.QGeoPositionInfo =
-  let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new())
+  let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeopositioninfo_types.QGeoPositionInfo,
     coordinate: gen_qgeocoordinate_types.QGeoCoordinate, updateTime: gen_qdatetime_types.QDateTime): gen_qgeopositioninfo_types.QGeoPositionInfo =
-  let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new2(coordinate.h, updateTime.h))
+  let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new2(coordinate.h, updateTime.h), owned: true)
   tmp
 proc create*(T: type gen_qgeopositioninfo_types.QGeoPositionInfo,
     other: gen_qgeopositioninfo_types.QGeoPositionInfo): gen_qgeopositioninfo_types.QGeoPositionInfo =
-  let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new3(other.h))
+  let tmp = gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfo_new3(other.h), owned: true)
   tmp
-proc delete*(self: gen_qgeopositioninfo_types.QGeoPositionInfo) =
-  fcQGeoPositionInfo_delete(self.h)

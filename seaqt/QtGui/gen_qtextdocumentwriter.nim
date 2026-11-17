@@ -60,7 +60,6 @@ proc fcQTextDocumentWriter_new(): ptr cQTextDocumentWriter {.importc: "QTextDocu
 proc fcQTextDocumentWriter_new2(device: pointer, format: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new2".}
 proc fcQTextDocumentWriter_new3(fileName: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new3".}
 proc fcQTextDocumentWriter_new4(fileName: struct_seaqt_string, format: struct_seaqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new4".}
-proc fcQTextDocumentWriter_delete(self: pointer) {.importc: "QTextDocumentWriter_delete".}
 
 proc setFormat*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, format: openArray[byte]): void =
   fcQTextDocumentWriter_setFormat(self.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format))))
@@ -75,7 +74,7 @@ proc setDevice*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, device:
   fcQTextDocumentWriter_setDevice(self.h, device.h)
 
 proc device*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQTextDocumentWriter_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQTextDocumentWriter_device(self.h), owned: false)
 
 proc setFileName*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, fileName: openArray[char]): void =
   fcQTextDocumentWriter_setFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
@@ -105,19 +104,17 @@ proc supportedDocumentFormats*(_: type gen_qtextdocumentwriter_types.QTextDocume
   vx_ret
 
 proc create*(T: type gen_qtextdocumentwriter_types.QTextDocumentWriter): gen_qtextdocumentwriter_types.QTextDocumentWriter =
-  let tmp = gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new())
+  let tmp = gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new(), owned: true)
   tmp
 proc create*(T: type gen_qtextdocumentwriter_types.QTextDocumentWriter,
     device: gen_qiodevice_types.QIODevice, format: openArray[byte]): gen_qtextdocumentwriter_types.QTextDocumentWriter =
-  let tmp = gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new2(device.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))))
+  let tmp = gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new2(device.h, struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
   tmp
 proc create*(T: type gen_qtextdocumentwriter_types.QTextDocumentWriter,
     fileName: openArray[char]): gen_qtextdocumentwriter_types.QTextDocumentWriter =
-  let tmp = gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new3(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))))
+  let tmp = gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new3(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
   tmp
 proc create*(T: type gen_qtextdocumentwriter_types.QTextDocumentWriter,
     fileName: openArray[char], format: openArray[byte]): gen_qtextdocumentwriter_types.QTextDocumentWriter =
-  let tmp = gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new4(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))))
+  let tmp = gen_qtextdocumentwriter_types.QTextDocumentWriter(h: fcQTextDocumentWriter_new4(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), struct_seaqt_string(data: if len(format) > 0: addr format[0] else: nil, len: csize_t(len(format)))), owned: true)
   tmp
-proc delete*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter) =
-  fcQTextDocumentWriter_delete(self.h)

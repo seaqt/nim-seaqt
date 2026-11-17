@@ -82,7 +82,6 @@ proc fcQPointingDeviceUniqueId_numericId(self: pointer): clonglong {.importc: "Q
 proc fcQPointingDeviceUniqueId_new(): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new".}
 proc fcQPointingDeviceUniqueId_new2(param1: pointer): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new2".}
 proc fcQPointingDeviceUniqueId_staticMetaObject(): pointer {.importc: "QPointingDeviceUniqueId_staticMetaObject".}
-proc fcQPointingDeviceUniqueId_delete(self: pointer) {.importc: "QPointingDeviceUniqueId_delete".}
 proc fcQPointingDevice_metaObject(self: pointer): pointer {.importc: "QPointingDevice_metaObject".}
 proc fcQPointingDevice_metacast(self: pointer, param1: cstring): pointer {.importc: "QPointingDevice_metacast".}
 proc fcQPointingDevice_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPointingDevice_metacall".}
@@ -137,10 +136,9 @@ proc fcQPointingDevice_new4(vtbl: pointer, vdata: csize_t, name: struct_seaqt_st
 proc fcQPointingDevice_new5(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: struct_seaqt_string, uniqueId: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new5".}
 proc fcQPointingDevice_new6(vtbl: pointer, vdata: csize_t, name: struct_seaqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint, seatName: struct_seaqt_string, uniqueId: pointer, parent: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new6".}
 proc fcQPointingDevice_staticMetaObject(): pointer {.importc: "QPointingDevice_staticMetaObject".}
-proc fcQPointingDevice_delete(self: pointer) {.importc: "QPointingDevice_delete".}
 
 proc fromNumericId*(_: type gen_qpointingdevice_types.QPointingDeviceUniqueId, id: clonglong): gen_qpointingdevice_types.QPointingDeviceUniqueId =
-  gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_fromNumericId(id))
+  gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_fromNumericId(id), owned: true)
 
 proc isValid*(self: gen_qpointingdevice_types.QPointingDeviceUniqueId): bool =
   fcQPointingDeviceUniqueId_isValid(self.h)
@@ -149,18 +147,16 @@ proc numericId*(self: gen_qpointingdevice_types.QPointingDeviceUniqueId): clongl
   fcQPointingDeviceUniqueId_numericId(self.h)
 
 proc create*(T: type gen_qpointingdevice_types.QPointingDeviceUniqueId): gen_qpointingdevice_types.QPointingDeviceUniqueId =
-  let tmp = gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new())
+  let tmp = gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new(), owned: true)
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDeviceUniqueId,
     param1: gen_qpointingdevice_types.QPointingDeviceUniqueId): gen_qpointingdevice_types.QPointingDeviceUniqueId =
-  let tmp = gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new2(param1.h))
+  let tmp = gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new2(param1.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpointingdevice_types.QPointingDeviceUniqueId): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPointingDeviceUniqueId_staticMetaObject())
-proc delete*(self: gen_qpointingdevice_types.QPointingDeviceUniqueId) =
-  fcQPointingDeviceUniqueId_delete(self.h)
 proc metaObject*(self: gen_qpointingdevice_types.QPointingDevice): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPointingDevice_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPointingDevice_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpointingdevice_types.QPointingDevice, param1: cstring): pointer =
   fcQPointingDevice_metacast(self.h, param1)
@@ -193,10 +189,10 @@ proc buttonCount*(self: gen_qpointingdevice_types.QPointingDevice): cint =
   fcQPointingDevice_buttonCount(self.h)
 
 proc uniqueId*(self: gen_qpointingdevice_types.QPointingDevice): gen_qpointingdevice_types.QPointingDeviceUniqueId =
-  gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDevice_uniqueId(self.h))
+  gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQPointingDevice_uniqueId(self.h), owned: true)
 
 proc primaryPointingDevice*(_: type gen_qpointingdevice_types.QPointingDevice): gen_qpointingdevice_types.QPointingDevice =
-  gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_primaryPointingDevice())
+  gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_primaryPointingDevice(), owned: false)
 
 proc operatorEqual*(self: gen_qpointingdevice_types.QPointingDevice, other: gen_qpointingdevice_types.QPointingDevice): bool =
   fcQPointingDevice_operatorEqual(self.h, other.h)
@@ -207,13 +203,13 @@ proc grabChanged*(self: gen_qpointingdevice_types.QPointingDevice, grabber: gen_
 type QPointingDevicegrabChangedSlot* = proc(grabber: gen_qobject_types.QObject, transition: cint, event: gen_qevent_types.QPointerEvent, point: gen_qeventpoint_types.QEventPoint)
 proc fcQPointingDevice_slot_callback_grabChanged(slot: int, grabber: pointer, transition: cint, event: pointer, point: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPointingDevicegrabChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qobject_types.QObject(h: grabber)
+  let slotval1 = gen_qobject_types.QObject(h: grabber, owned: false)
 
   let slotval2 = cint(transition)
 
-  let slotval3 = gen_qevent_types.QPointerEvent(h: event)
+  let slotval3 = gen_qevent_types.QPointerEvent(h: event, owned: false)
 
-  let slotval4 = gen_qeventpoint_types.QEventPoint(h: point)
+  let slotval4 = gen_qeventpoint_types.QEventPoint(h: point, owned: false)
 
   nimfunc[](slotval1, slotval2, slotval3, slotval4)
 
@@ -240,7 +236,7 @@ proc tr*(_: type gen_qpointingdevice_types.QPointingDevice, s: cstring, c: cstri
   vx_ret
 
 proc primaryPointingDevice*(_: type gen_qpointingdevice_types.QPointingDevice, seatName: openArray[char]): gen_qpointingdevice_types.QPointingDevice =
-  gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_primaryPointingDeviceWithSeatName(struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))))
+  gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_primaryPointingDeviceWithSeatName(struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))), owned: false)
 
 type QPointingDevicemetaObjectProc* = proc(self: QPointingDevice): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QPointingDevicemetacastProc* = proc(self: QPointingDevice, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -252,7 +248,8 @@ type QPointingDevicechildEventProc* = proc(self: QPointingDevice, event: gen_qco
 type QPointingDevicecustomEventProc* = proc(self: QPointingDevice, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPointingDeviceconnectNotifyProc* = proc(self: QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPointingDevicedisconnectNotifyProc* = proc(self: QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QPointingDeviceVTable* = object
+
+type QPointingDeviceVTable* {.inheritable, pure.} = object
   vtbl: cQPointingDeviceVTable
   metaObject*: QPointingDevicemetaObjectProc
   metacast*: QPointingDevicemetacastProc
@@ -266,7 +263,7 @@ type QPointingDeviceVTable* = object
   disconnectNotify*: QPointingDevicedisconnectNotifyProc
 
 proc QPointingDevicemetaObject*(self: gen_qpointingdevice_types.QPointingDevice): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPointingDevice_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPointingDevice_virtualbase_metaObject(self.h), owned: false)
 
 proc QPointingDevicemetacast*(self: gen_qpointingdevice_types.QPointingDevice, param1: cstring): pointer =
   fcQPointingDevice_virtualbase_metacast(self.h, param1)
@@ -300,7 +297,10 @@ proc fcQPointingDevice_vtable_callback_metaObject(self: pointer): pointer {.cdec
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPointingDevice_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
@@ -321,46 +321,46 @@ proc fcQPointingDevice_vtable_callback_metacall(self: pointer, param1: cint, par
 proc fcQPointingDevice_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQPointingDevice_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQPointingDevice_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQPointingDevice_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQPointingDevice_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQPointingDevice_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQPointingDevice_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPointingDeviceVTable](fcQPointingDevice_vdata(self)[])
   let self = QPointingDevice(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQPointingDevice* {.inheritable.} = ref object of QPointingDevice
@@ -390,7 +390,10 @@ method disconnectNotify*(self: VirtualQPointingDevice, signal: gen_qmetaobject_t
 proc fcQPointingDevice_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPointingDevice_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
@@ -408,45 +411,45 @@ proc fcQPointingDevice_method_callback_metacall(self: pointer, param1: cint, par
 
 proc fcQPointingDevice_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQPointingDevice_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQPointingDevice_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQPointingDevice_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQPointingDevice_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQPointingDevice_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQPointingDevice_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPointingDevice](fcQPointingDevice_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qpointingdevice_types.QPointingDevice): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPointingDevice_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPointingDevice_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpointingdevice_types.QPointingDevice): cint =
   fcQPointingDevice_protectedbase_senderSignalIndex(self.h)
@@ -484,7 +487,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
     vtbl[].vtbl.connectNotify = fcQPointingDevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPointingDevice_vtable_callback_disconnectNotify
-  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
@@ -515,7 +518,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
     vtbl[].vtbl.connectNotify = fcQPointingDevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPointingDevice_vtable_callback_disconnectNotify
-  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount))
+  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount), owned: true)
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
@@ -546,7 +549,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
     vtbl[].vtbl.connectNotify = fcQPointingDevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPointingDevice_vtable_callback_disconnectNotify
-  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
@@ -577,7 +580,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
     vtbl[].vtbl.connectNotify = fcQPointingDevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPointingDevice_vtable_callback_disconnectNotify
-  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))))
+  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName)))), owned: true)
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
@@ -608,7 +611,7 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
     vtbl[].vtbl.connectNotify = fcQPointingDevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPointingDevice_vtable_callback_disconnectNotify
-  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))), uniqueId.h))
+  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))), uniqueId.h), owned: true)
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
@@ -639,13 +642,14 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
     vtbl[].vtbl.connectNotify = fcQPointingDevice_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPointingDevice_vtable_callback_disconnectNotify
-  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))), uniqueId.h, parent.h))
+  let tmp = gen_qpointingdevice_types.QPointingDevice(h: fcQPointingDevice_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), systemId, cint(devType), cint(pType), cint(caps), maxPoints, buttonCount, struct_seaqt_string(data: if len(seatName) > 0: addr seatName[0] else: nil, len: csize_t(len(seatName))), uniqueId.h, parent.h), owned: true)
   fcQPointingDevice_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPointingDevice_mvtbl = cQPointingDeviceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPointingDevice()[])](self.fcQPointingDevice_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQPointingDevice_method_callback_metaObject,
   metacast: fcQPointingDevice_method_callback_metacast,
@@ -707,5 +711,3 @@ proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
 
 proc staticMetaObject*(_: type gen_qpointingdevice_types.QPointingDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPointingDevice_staticMetaObject())
-proc delete*(self: gen_qpointingdevice_types.QPointingDevice) =
-  fcQPointingDevice_delete(self.h)

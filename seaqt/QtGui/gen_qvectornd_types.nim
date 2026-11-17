@@ -1,4 +1,4 @@
-type QVector2D* {.inheritable, pure.} = object
+type QVector2D* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QVector2D) =
   wasMoved(self)
   fcQVector2D_delete(h)
 
-type QVector3D* {.inheritable, pure.} = object
+type QVector3D* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QVector3D) =
   wasMoved(self)
   fcQVector3D_delete(h)
 
-type QVector4D* {.inheritable, pure.} = object
+type QVector4D* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

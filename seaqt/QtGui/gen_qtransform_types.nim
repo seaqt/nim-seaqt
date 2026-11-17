@@ -1,4 +1,4 @@
-type QTransform* {.inheritable, pure.} = object
+type QTransform* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

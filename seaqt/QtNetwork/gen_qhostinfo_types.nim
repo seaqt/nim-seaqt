@@ -1,4 +1,4 @@
-type QHostInfo* {.inheritable, pure.} = object
+type QHostInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

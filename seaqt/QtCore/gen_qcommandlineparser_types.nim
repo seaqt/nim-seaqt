@@ -1,4 +1,4 @@
-type QCommandLineParser* {.inheritable, pure.} = object
+type QCommandLineParser* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

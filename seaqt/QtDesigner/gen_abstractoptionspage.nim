@@ -57,7 +57,6 @@ type cQDesignerOptionsPageInterfaceVTable {.pure.} = object
   apply*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   finish*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerOptionsPageInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerOptionsPageInterface {.importc: "QDesignerOptionsPageInterface_new".}
-proc fcQDesignerOptionsPageInterface_delete(self: pointer) {.importc: "QDesignerOptionsPageInterface_delete".}
 
 proc name*(self: gen_abstractoptionspage_types.QDesignerOptionsPageInterface): string =
   let v_ms = fcQDesignerOptionsPageInterface_name(self.h)
@@ -66,7 +65,7 @@ proc name*(self: gen_abstractoptionspage_types.QDesignerOptionsPageInterface): s
   vx_ret
 
 proc createPage*(self: gen_abstractoptionspage_types.QDesignerOptionsPageInterface, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerOptionsPageInterface_createPage(self.h, parent.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerOptionsPageInterface_createPage(self.h, parent.h), owned: false)
 
 proc apply*(self: gen_abstractoptionspage_types.QDesignerOptionsPageInterface): void =
   fcQDesignerOptionsPageInterface_apply(self.h)
@@ -78,7 +77,8 @@ type QDesignerOptionsPageInterfacenameProc* = proc(self: QDesignerOptionsPageInt
 type QDesignerOptionsPageInterfacecreatePageProc* = proc(self: QDesignerOptionsPageInterface, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QDesignerOptionsPageInterfaceapplyProc* = proc(self: QDesignerOptionsPageInterface): void {.raises: [], gcsafe.}
 type QDesignerOptionsPageInterfacefinishProc* = proc(self: QDesignerOptionsPageInterface): void {.raises: [], gcsafe.}
-type QDesignerOptionsPageInterfaceVTable* = object
+
+type QDesignerOptionsPageInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerOptionsPageInterfaceVTable
   name*: QDesignerOptionsPageInterfacenameProc
   createPage*: QDesignerOptionsPageInterfacecreatePageProc
@@ -97,9 +97,12 @@ proc fcQDesignerOptionsPageInterface_vtable_callback_name(self: pointer): struct
 proc fcQDesignerOptionsPageInterface_vtable_callback_createPage(self: pointer, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerOptionsPageInterfaceVTable](fcQDesignerOptionsPageInterface_vdata(self)[])
   let self = QDesignerOptionsPageInterface(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: parent)
+  let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
   var virtualReturn = vtbl[].createPage(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerOptionsPageInterface_vtable_callback_apply(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerOptionsPageInterfaceVTable](fcQDesignerOptionsPageInterface_vdata(self)[])
@@ -132,9 +135,12 @@ proc fcQDesignerOptionsPageInterface_method_callback_name(self: pointer): struct
 
 proc fcQDesignerOptionsPageInterface_method_callback_createPage(self: pointer, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerOptionsPageInterface](fcQDesignerOptionsPageInterface_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: parent)
+  let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
   var virtualReturn = inst.createPage(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerOptionsPageInterface_method_callback_apply(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerOptionsPageInterface](fcQDesignerOptionsPageInterface_vdata(self)[])
@@ -160,13 +166,14 @@ proc create*(T: type gen_abstractoptionspage_types.QDesignerOptionsPageInterface
     vtbl[].vtbl.apply = fcQDesignerOptionsPageInterface_vtable_callback_apply
   if not isNil(vtbl[].finish):
     vtbl[].vtbl.finish = fcQDesignerOptionsPageInterface_vtable_callback_finish
-  let tmp = gen_abstractoptionspage_types.QDesignerOptionsPageInterface(h: fcQDesignerOptionsPageInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_abstractoptionspage_types.QDesignerOptionsPageInterface(h: fcQDesignerOptionsPageInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerOptionsPageInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerOptionsPageInterface_mvtbl = cQDesignerOptionsPageInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerOptionsPageInterface()[])](self.fcQDesignerOptionsPageInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   name: fcQDesignerOptionsPageInterface_method_callback_name,
   createPage: fcQDesignerOptionsPageInterface_method_callback_createPage,
@@ -180,5 +187,3 @@ proc create*(T: type gen_abstractoptionspage_types.QDesignerOptionsPageInterface
   fcQDesignerOptionsPageInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_abstractoptionspage_types.QDesignerOptionsPageInterface) =
-  fcQDesignerOptionsPageInterface_delete(self.h)

@@ -1,4 +1,4 @@
-type QIcon* {.inheritable, pure.} = object
+type QIcon* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

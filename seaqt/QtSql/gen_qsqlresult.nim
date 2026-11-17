@@ -75,10 +75,9 @@ proc fcQSqlResult_protectedbase_hasOutValues(self: pointer): bool {.importc: "QS
 proc fcQSqlResult_protectedbase_bindingSyntax(self: pointer): cint {.importc: "QSqlResult_protectedbase_bindingSyntax".}
 proc fcQSqlResult_protectedbase_numericalPrecisionPolicy(self: pointer): cint {.importc: "QSqlResult_protectedbase_numericalPrecisionPolicy".}
 proc fcQSqlResult_protectedbase_resetBindCount(self: pointer): void {.importc: "QSqlResult_protectedbase_resetBindCount".}
-proc fcQSqlResult_delete(self: pointer) {.importc: "QSqlResult_delete".}
 
 proc handle*(self: gen_qsqlresult_types.QSqlResult): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlResult_handle(self.h))
+  gen_qvariant_types.QVariant(h: fcQSqlResult_handle(self.h), owned: true)
 
 proc at*(self: gen_qsqlresult_types.QSqlResult): cint =
   fcQSqlResult_protectedbase_at(self.h)
@@ -90,7 +89,7 @@ proc lastQuery*(self: gen_qsqlresult_types.QSqlResult): string =
   vx_ret
 
 proc lastError*(self: gen_qsqlresult_types.QSqlResult): gen_qsqlerror_types.QSqlError =
-  gen_qsqlerror_types.QSqlError(h: fcQSqlResult_protectedbase_lastError(self.h))
+  gen_qsqlerror_types.QSqlError(h: fcQSqlResult_protectedbase_lastError(self.h), owned: true)
 
 proc isValid*(self: gen_qsqlresult_types.QSqlResult): bool =
   fcQSqlResult_protectedbase_isValid(self.h)
@@ -105,16 +104,16 @@ proc isForwardOnly*(self: gen_qsqlresult_types.QSqlResult): bool =
   fcQSqlResult_protectedbase_isForwardOnly(self.h)
 
 proc driver*(self: gen_qsqlresult_types.QSqlResult): gen_qsqldriver_types.QSqlDriver =
-  gen_qsqldriver_types.QSqlDriver(h: fcQSqlResult_protectedbase_driver(self.h))
+  gen_qsqldriver_types.QSqlDriver(h: fcQSqlResult_protectedbase_driver(self.h), owned: false)
 
 proc addBindValue*(self: gen_qsqlresult_types.QSqlResult, val: gen_qvariant_types.QVariant, typeVal: cint): void =
   fcQSqlResult_protectedbase_addBindValue(self.h, val.h, cint(typeVal))
 
 proc boundValue*(self: gen_qsqlresult_types.QSqlResult, placeholder: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlResult_protectedbase_boundValue(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))))
+  gen_qvariant_types.QVariant(h: fcQSqlResult_protectedbase_boundValue(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))), owned: true)
 
 proc boundValue*(self: gen_qsqlresult_types.QSqlResult, pos: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlResult_protectedbase_boundValueWithPos(self.h, pos))
+  gen_qvariant_types.QVariant(h: fcQSqlResult_protectedbase_boundValueWithPos(self.h, pos), owned: true)
 
 proc bindValueType*(self: gen_qsqlresult_types.QSqlResult, placeholder: openArray[char]): cint =
   cint(fcQSqlResult_protectedbase_bindValueType(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))))
@@ -130,7 +129,7 @@ proc boundValues*(self: gen_qsqlresult_types.QSqlResult): seq[gen_qvariant_types
   var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i])
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -161,5 +160,3 @@ proc numericalPrecisionPolicy*(self: gen_qsqlresult_types.QSqlResult): cint =
 proc resetBindCount*(self: gen_qsqlresult_types.QSqlResult): void =
   fcQSqlResult_protectedbase_resetBindCount(self.h)
 
-proc delete*(self: gen_qsqlresult_types.QSqlResult) =
-  fcQSqlResult_delete(self.h)

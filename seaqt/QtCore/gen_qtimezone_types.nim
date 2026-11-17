@@ -1,4 +1,4 @@
-type QTimeZone* {.inheritable, pure.} = object
+type QTimeZone* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QTimeZone) =
   wasMoved(self)
   fcQTimeZone_delete(h)
 
-type QTimeZoneOffsetData* {.inheritable, pure.} = object
+type QTimeZoneOffsetData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

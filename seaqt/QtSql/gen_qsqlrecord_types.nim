@@ -1,4 +1,4 @@
-type QSqlRecord* {.inheritable, pure.} = object
+type QSqlRecord* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

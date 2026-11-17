@@ -71,10 +71,9 @@ proc fcQDesignerWidgetFactoryInterface_protectedbase_senderSignalIndex(self: poi
 proc fcQDesignerWidgetFactoryInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerWidgetFactoryInterface_protectedbase_receivers".}
 proc fcQDesignerWidgetFactoryInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerWidgetFactoryInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerWidgetFactoryInterface_staticMetaObject(): pointer {.importc: "QDesignerWidgetFactoryInterface_staticMetaObject".}
-proc fcQDesignerWidgetFactoryInterface_delete(self: pointer) {.importc: "QDesignerWidgetFactoryInterface_delete".}
 
 proc metaObject*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetFactoryInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetFactoryInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, param1: cstring): pointer =
   fcQDesignerWidgetFactoryInterface_metacast(self.h, param1)
@@ -89,16 +88,16 @@ proc tr*(_: type gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface
   vx_ret
 
 proc containerOfWidget*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, w: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerWidgetFactoryInterface_containerOfWidget(self.h, w.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerWidgetFactoryInterface_containerOfWidget(self.h, w.h), owned: false)
 
 proc widgetOfContainer*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, w: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerWidgetFactoryInterface_widgetOfContainer(self.h, w.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerWidgetFactoryInterface_widgetOfContainer(self.h, w.h), owned: false)
 
 proc createWidget*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, name: openArray[char], parentWidget: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerWidgetFactoryInterface_createWidget(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parentWidget.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerWidgetFactoryInterface_createWidget(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), parentWidget.h), owned: false)
 
 proc createLayout*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, widget: gen_qwidget_types.QWidget, layout: gen_qlayout_types.QLayout, typeVal: cint): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQDesignerWidgetFactoryInterface_createLayout(self.h, widget.h, layout.h, typeVal))
+  gen_qlayout_types.QLayout(h: fcQDesignerWidgetFactoryInterface_createLayout(self.h, widget.h, layout.h, typeVal), owned: false)
 
 proc isPassiveInteractor*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface, widget: gen_qwidget_types.QWidget): bool =
   fcQDesignerWidgetFactoryInterface_isPassiveInteractor(self.h, widget.h)
@@ -119,7 +118,7 @@ proc tr*(_: type gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface
   vx_ret
 
 proc sender*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerWidgetFactoryInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerWidgetFactoryInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface): cint =
   fcQDesignerWidgetFactoryInterface_protectedbase_senderSignalIndex(self.h)
@@ -132,5 +131,3 @@ proc isSignalConnected*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFac
 
 proc staticMetaObject*(_: type gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetFactoryInterface_staticMetaObject())
-proc delete*(self: gen_abstractwidgetfactory_types.QDesignerWidgetFactoryInterface) =
-  fcQDesignerWidgetFactoryInterface_delete(self.h)

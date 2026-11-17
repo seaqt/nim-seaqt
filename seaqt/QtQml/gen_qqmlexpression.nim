@@ -124,10 +124,9 @@ proc fcQQmlExpression_new5(vtbl: pointer, vdata: csize_t, param1: pointer, param
 proc fcQQmlExpression_new6(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new6".}
 proc fcQQmlExpression_new7(vtbl: pointer, vdata: csize_t, param1: pointer, param2: pointer, param3: pointer, param4: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new7".}
 proc fcQQmlExpression_staticMetaObject(): pointer {.importc: "QQmlExpression_staticMetaObject".}
-proc fcQQmlExpression_delete(self: pointer) {.importc: "QQmlExpression_delete".}
 
 proc metaObject*(self: gen_qqmlexpression_types.QQmlExpression): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExpression_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExpression_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qqmlexpression_types.QQmlExpression, param1: cstring): pointer =
   fcQQmlExpression_metacast(self.h, param1)
@@ -142,10 +141,10 @@ proc tr*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring): string =
   vx_ret
 
 proc engine*(self: gen_qqmlexpression_types.QQmlExpression): gen_qqmlengine_types.QQmlEngine =
-  gen_qqmlengine_types.QQmlEngine(h: fcQQmlExpression_engine(self.h))
+  gen_qqmlengine_types.QQmlEngine(h: fcQQmlExpression_engine(self.h), owned: false)
 
 proc context*(self: gen_qqmlexpression_types.QQmlExpression): gen_qqmlcontext_types.QQmlContext =
-  gen_qqmlcontext_types.QQmlContext(h: fcQQmlExpression_context(self.h))
+  gen_qqmlcontext_types.QQmlContext(h: fcQQmlExpression_context(self.h), owned: false)
 
 proc expression*(self: gen_qqmlexpression_types.QQmlExpression): string =
   let v_ms = fcQQmlExpression_expression(self.h)
@@ -178,7 +177,7 @@ proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName:
   fcQQmlExpression_setSourceLocation(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), line)
 
 proc scopeObject*(self: gen_qqmlexpression_types.QQmlExpression): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlExpression_scopeObject(self.h))
+  gen_qobject_types.QObject(h: fcQQmlExpression_scopeObject(self.h), owned: false)
 
 proc hasError*(self: gen_qqmlexpression_types.QQmlExpression): bool =
   fcQQmlExpression_hasError(self.h)
@@ -187,10 +186,10 @@ proc clearError*(self: gen_qqmlexpression_types.QQmlExpression): void =
   fcQQmlExpression_clearError(self.h)
 
 proc error*(self: gen_qqmlexpression_types.QQmlExpression): gen_qqmlerror_types.QQmlError =
-  gen_qqmlerror_types.QQmlError(h: fcQQmlExpression_error(self.h))
+  gen_qqmlerror_types.QQmlError(h: fcQQmlExpression_error(self.h), owned: true)
 
 proc evaluate*(self: gen_qqmlexpression_types.QQmlExpression): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlExpression_evaluate(self.h))
+  gen_qvariant_types.QVariant(h: fcQQmlExpression_evaluate(self.h), owned: true)
 
 proc valueChanged*(self: gen_qqmlexpression_types.QQmlExpression): void =
   fcQQmlExpression_valueChanged(self.h)
@@ -226,7 +225,7 @@ proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName:
   fcQQmlExpression_setSourceLocation2(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))), line, column)
 
 proc evaluate*(self: gen_qqmlexpression_types.QQmlExpression, valueIsUndefined: ptr bool): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQmlExpression_evaluateWithValueIsUndefined(self.h, valueIsUndefined))
+  gen_qvariant_types.QVariant(h: fcQQmlExpression_evaluateWithValueIsUndefined(self.h, valueIsUndefined), owned: true)
 
 type QQmlExpressionmetaObjectProc* = proc(self: QQmlExpression): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QQmlExpressionmetacastProc* = proc(self: QQmlExpression, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -238,7 +237,8 @@ type QQmlExpressionchildEventProc* = proc(self: QQmlExpression, event: gen_qcore
 type QQmlExpressioncustomEventProc* = proc(self: QQmlExpression, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQmlExpressionconnectNotifyProc* = proc(self: QQmlExpression, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQmlExpressiondisconnectNotifyProc* = proc(self: QQmlExpression, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QQmlExpressionVTable* = object
+
+type QQmlExpressionVTable* {.inheritable, pure.} = object
   vtbl: cQQmlExpressionVTable
   metaObject*: QQmlExpressionmetaObjectProc
   metacast*: QQmlExpressionmetacastProc
@@ -252,7 +252,7 @@ type QQmlExpressionVTable* = object
   disconnectNotify*: QQmlExpressiondisconnectNotifyProc
 
 proc QQmlExpressionmetaObject*(self: gen_qqmlexpression_types.QQmlExpression): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExpression_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExpression_virtualbase_metaObject(self.h), owned: false)
 
 proc QQmlExpressionmetacast*(self: gen_qqmlexpression_types.QQmlExpression, param1: cstring): pointer =
   fcQQmlExpression_virtualbase_metacast(self.h, param1)
@@ -286,7 +286,10 @@ proc fcQQmlExpression_vtable_callback_metaObject(self: pointer): pointer {.cdecl
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
   let self = QQmlExpression(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlExpression_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
@@ -307,46 +310,46 @@ proc fcQQmlExpression_vtable_callback_metacall(self: pointer, param1: cint, para
 proc fcQQmlExpression_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
   let self = QQmlExpression(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQQmlExpression_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
   let self = QQmlExpression(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQQmlExpression_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
   let self = QQmlExpression(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQQmlExpression_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
   let self = QQmlExpression(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQQmlExpression_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
   let self = QQmlExpression(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQQmlExpression_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
   let self = QQmlExpression(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQQmlExpression_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlExpressionVTable](fcQQmlExpression_vdata(self)[])
   let self = QQmlExpression(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQQmlExpression* {.inheritable.} = ref object of QQmlExpression
@@ -376,7 +379,10 @@ method disconnectNotify*(self: VirtualQQmlExpression, signal: gen_qmetaobject_ty
 proc fcQQmlExpression_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQQmlExpression_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
@@ -394,45 +400,45 @@ proc fcQQmlExpression_method_callback_metacall(self: pointer, param1: cint, para
 
 proc fcQQmlExpression_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQQmlExpression_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQQmlExpression_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQQmlExpression_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQQmlExpression_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQQmlExpression_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQQmlExpression_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQQmlExpression](fcQQmlExpression_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qqmlexpression_types.QQmlExpression): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlExpression_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQmlExpression_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qqmlexpression_types.QQmlExpression): cint =
   fcQQmlExpression_protectedbase_senderSignalIndex(self.h)
@@ -470,7 +476,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     vtbl[].vtbl.connectNotify = fcQQmlExpression_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExpression_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
@@ -501,7 +507,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     vtbl[].vtbl.connectNotify = fcQQmlExpression_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExpression_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h, struct_seaqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3)))))
+  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h, struct_seaqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3)))), owned: true)
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
@@ -532,7 +538,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     vtbl[].vtbl.connectNotify = fcQQmlExpression_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExpression_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
@@ -563,7 +569,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     vtbl[].vtbl.connectNotify = fcQQmlExpression_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExpression_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h, struct_seaqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3))), param4.h))
+  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h, struct_seaqt_string(data: if len(param3) > 0: addr param3[0] else: nil, len: csize_t(len(param3))), param4.h), owned: true)
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
@@ -594,7 +600,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     vtbl[].vtbl.connectNotify = fcQQmlExpression_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExpression_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h))
+  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new5(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h), owned: true)
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
@@ -625,7 +631,7 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     vtbl[].vtbl.connectNotify = fcQQmlExpression_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExpression_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h, param3.h))
+  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new6(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h, param3.h), owned: true)
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
@@ -656,13 +662,14 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     vtbl[].vtbl.connectNotify = fcQQmlExpression_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQQmlExpression_vtable_callback_disconnectNotify
-  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h, param3.h, param4.h))
+  let tmp = gen_qqmlexpression_types.QQmlExpression(h: fcQQmlExpression_new7(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h, param2.h, param3.h, param4.h), owned: true)
   fcQQmlExpression_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQmlExpression_mvtbl = cQQmlExpressionVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQQmlExpression()[])](self.fcQQmlExpression_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQQmlExpression_method_callback_metaObject,
   metacast: fcQQmlExpression_method_callback_metacast,
@@ -732,5 +739,3 @@ proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
 
 proc staticMetaObject*(_: type gen_qqmlexpression_types.QQmlExpression): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlExpression_staticMetaObject())
-proc delete*(self: gen_qqmlexpression_types.QQmlExpression) =
-  fcQQmlExpression_delete(self.h)

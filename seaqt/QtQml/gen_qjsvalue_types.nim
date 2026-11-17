@@ -1,4 +1,4 @@
-type QJSValue* {.inheritable, pure.} = object
+type QJSValue* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QBackingStore* {.inheritable, pure.} = object
+type QBackingStore* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

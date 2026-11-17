@@ -1,4 +1,4 @@
-type QEventPoint* {.inheritable, pure.} = object
+type QEventPoint* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

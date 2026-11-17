@@ -1,4 +1,4 @@
-type QQmlFile* {.inheritable, pure.} = object
+type QQmlFile* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

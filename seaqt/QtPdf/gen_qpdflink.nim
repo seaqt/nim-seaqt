@@ -65,7 +65,6 @@ proc fcQPdfLink_copyToClipboardWithMode(self: pointer, mode: cint): void {.impor
 proc fcQPdfLink_new(): ptr cQPdfLink {.importc: "QPdfLink_new".}
 proc fcQPdfLink_new2(other: pointer): ptr cQPdfLink {.importc: "QPdfLink_new2".}
 proc fcQPdfLink_staticMetaObject(): pointer {.importc: "QPdfLink_staticMetaObject".}
-proc fcQPdfLink_delete(self: pointer) {.importc: "QPdfLink_delete".}
 
 proc operatorAssign*(self: gen_qpdflink_types.QPdfLink, other: gen_qpdflink_types.QPdfLink): void =
   fcQPdfLink_operatorAssign(self.h, other.h)
@@ -80,13 +79,13 @@ proc page*(self: gen_qpdflink_types.QPdfLink): cint =
   fcQPdfLink_page(self.h)
 
 proc location*(self: gen_qpdflink_types.QPdfLink): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQPdfLink_location(self.h))
+  gen_qpoint_types.QPointF(h: fcQPdfLink_location(self.h), owned: true)
 
 proc zoom*(self: gen_qpdflink_types.QPdfLink): float64 =
   fcQPdfLink_zoom(self.h)
 
 proc url*(self: gen_qpdflink_types.QPdfLink): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQPdfLink_url(self.h))
+  gen_qurl_types.QUrl(h: fcQPdfLink_url(self.h), owned: true)
 
 proc contextBefore*(self: gen_qpdflink_types.QPdfLink): string =
   let v_ms = fcQPdfLink_contextBefore(self.h)
@@ -105,7 +104,7 @@ proc rectangles*(self: gen_qpdflink_types.QPdfLink): seq[gen_qrect_types.QRectF]
   var vx_ret = newSeq[gen_qrect_types.QRectF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qrect_types.QRectF(h: v_outCast[i])
+    vx_ret[i] = gen_qrect_types.QRectF(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -122,13 +121,11 @@ proc copyToClipboard*(self: gen_qpdflink_types.QPdfLink, mode: cint): void =
   fcQPdfLink_copyToClipboardWithMode(self.h, cint(mode))
 
 proc create*(T: type gen_qpdflink_types.QPdfLink): gen_qpdflink_types.QPdfLink =
-  let tmp = gen_qpdflink_types.QPdfLink(h: fcQPdfLink_new())
+  let tmp = gen_qpdflink_types.QPdfLink(h: fcQPdfLink_new(), owned: true)
   tmp
 proc create*(T: type gen_qpdflink_types.QPdfLink,
     other: gen_qpdflink_types.QPdfLink): gen_qpdflink_types.QPdfLink =
-  let tmp = gen_qpdflink_types.QPdfLink(h: fcQPdfLink_new2(other.h))
+  let tmp = gen_qpdflink_types.QPdfLink(h: fcQPdfLink_new2(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qpdflink_types.QPdfLink): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfLink_staticMetaObject())
-proc delete*(self: gen_qpdflink_types.QPdfLink) =
-  fcQPdfLink_delete(self.h)

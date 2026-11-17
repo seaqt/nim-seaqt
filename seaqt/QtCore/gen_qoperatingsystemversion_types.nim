@@ -1,4 +1,4 @@
-type QOperatingSystemVersionBase* {.inheritable, pure.} = object
+type QOperatingSystemVersionBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

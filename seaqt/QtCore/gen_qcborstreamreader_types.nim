@@ -1,4 +1,4 @@
-type QCborStreamReader* {.inheritable, pure.} = object
+type QCborStreamReader* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

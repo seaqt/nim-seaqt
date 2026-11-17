@@ -1,4 +1,4 @@
-type QLoggingCategory* {.inheritable, pure.} = object
+type QLoggingCategory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

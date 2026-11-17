@@ -1,4 +1,4 @@
-type QWebEngineFileSystemAccessRequest* {.inheritable, pure.} = object
+type QWebEngineFileSystemAccessRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -85,7 +85,6 @@ proc fcQCryptographicHash_hash(data: struct_seaqt_string, methodVal: cint): stru
 proc fcQCryptographicHash_hashLength(methodVal: cint): cint {.importc: "QCryptographicHash_hashLength".}
 proc fcQCryptographicHash_new(methodVal: cint): ptr cQCryptographicHash {.importc: "QCryptographicHash_new".}
 proc fcQCryptographicHash_staticMetaObject(): pointer {.importc: "QCryptographicHash_staticMetaObject".}
-proc fcQCryptographicHash_delete(self: pointer) {.importc: "QCryptographicHash_delete".}
 
 proc reset*(self: gen_qcryptographichash_types.QCryptographicHash): void =
   fcQCryptographicHash_reset(self.h)
@@ -122,9 +121,7 @@ proc hashLength*(_: type gen_qcryptographichash_types.QCryptographicHash, method
 
 proc create*(T: type gen_qcryptographichash_types.QCryptographicHash,
     methodVal: cint): gen_qcryptographichash_types.QCryptographicHash =
-  let tmp = gen_qcryptographichash_types.QCryptographicHash(h: fcQCryptographicHash_new(cint(methodVal)))
+  let tmp = gen_qcryptographichash_types.QCryptographicHash(h: fcQCryptographicHash_new(cint(methodVal)), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qcryptographichash_types.QCryptographicHash): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCryptographicHash_staticMetaObject())
-proc delete*(self: gen_qcryptographichash_types.QCryptographicHash) =
-  fcQCryptographicHash_delete(self.h)

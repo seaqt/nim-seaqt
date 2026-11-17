@@ -1,4 +1,4 @@
-type QDesignerLayoutDecorationExtension* {.inheritable, pure.} = object
+type QDesignerLayoutDecorationExtension* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

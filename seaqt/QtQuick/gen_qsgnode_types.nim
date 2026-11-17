@@ -1,4 +1,4 @@
-type QSGNode* {.inheritable, pure.} = object
+type QSGNode* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -70,7 +70,7 @@ proc `=sink`(dest: var QSGOpacityNode, source: QSGOpacityNode) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QSGNodeVisitor* {.inheritable, pure.} = object
+type QSGNodeVisitor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

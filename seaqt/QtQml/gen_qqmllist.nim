@@ -75,7 +75,6 @@ proc fcQQmlListReference_new3(o: pointer, property: cstring, engine: pointer): p
 proc fcQQmlListReference_new4(variant: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new4".}
 proc fcQQmlListReference_new5(o: pointer, property: cstring): ptr cQQmlListReference {.importc: "QQmlListReference_new5".}
 proc fcQQmlListReference_new6(param1: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new6".}
-proc fcQQmlListReference_delete(self: pointer) {.importc: "QQmlListReference_delete".}
 
 proc operatorAssign*(self: gen_qqmllist_types.QQmlListReference, param1: gen_qqmllist_types.QQmlListReference): void =
   fcQQmlListReference_operatorAssign(self.h, param1.h)
@@ -84,10 +83,10 @@ proc isValid*(self: gen_qqmllist_types.QQmlListReference): bool =
   fcQQmlListReference_isValid(self.h)
 
 proc objectX*(self: gen_qqmllist_types.QQmlListReference): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlListReference_objectX(self.h))
+  gen_qobject_types.QObject(h: fcQQmlListReference_objectX(self.h), owned: false)
 
 proc listElementType*(self: gen_qqmllist_types.QQmlListReference): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlListReference_listElementType(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlListReference_listElementType(self.h), owned: false)
 
 proc canAppend*(self: gen_qqmllist_types.QQmlListReference): bool =
   fcQQmlListReference_canAppend(self.h)
@@ -117,7 +116,7 @@ proc append*(self: gen_qqmllist_types.QQmlListReference, param1: gen_qobject_typ
   fcQQmlListReference_append(self.h, param1.h)
 
 proc at*(self: gen_qqmllist_types.QQmlListReference, param1: int64): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlListReference_at(self.h, param1))
+  gen_qobject_types.QObject(h: fcQQmlListReference_at(self.h, param1), owned: false)
 
 proc clear*(self: gen_qqmllist_types.QQmlListReference): bool =
   fcQQmlListReference_clear(self.h)
@@ -138,27 +137,25 @@ proc operatorEqual*(self: gen_qqmllist_types.QQmlListReference, other: gen_qqmll
   fcQQmlListReference_operatorEqual(self.h, other.h)
 
 proc create*(T: type gen_qqmllist_types.QQmlListReference): gen_qqmllist_types.QQmlListReference =
-  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new())
+  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new(), owned: true)
   tmp
 proc create*(T: type gen_qqmllist_types.QQmlListReference,
     variant: gen_qvariant_types.QVariant, engine: gen_qqmlengine_types.QQmlEngine): gen_qqmllist_types.QQmlListReference =
-  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new2(variant.h, engine.h))
+  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new2(variant.h, engine.h), owned: true)
   tmp
 proc create*(T: type gen_qqmllist_types.QQmlListReference,
     o: gen_qobject_types.QObject, property: cstring, engine: gen_qqmlengine_types.QQmlEngine): gen_qqmllist_types.QQmlListReference =
-  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new3(o.h, property, engine.h))
+  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new3(o.h, property, engine.h), owned: true)
   tmp
 proc create*(T: type gen_qqmllist_types.QQmlListReference,
     variant: gen_qvariant_types.QVariant): gen_qqmllist_types.QQmlListReference =
-  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new4(variant.h))
+  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new4(variant.h), owned: true)
   tmp
 proc create*(T: type gen_qqmllist_types.QQmlListReference,
     o: gen_qobject_types.QObject, property: cstring): gen_qqmllist_types.QQmlListReference =
-  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new5(o.h, property))
+  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new5(o.h, property), owned: true)
   tmp
 proc create*(T: type gen_qqmllist_types.QQmlListReference,
     param1: gen_qqmllist_types.QQmlListReference): gen_qqmllist_types.QQmlListReference =
-  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new6(param1.h))
+  let tmp = gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new6(param1.h), owned: true)
   tmp
-proc delete*(self: gen_qqmllist_types.QQmlListReference) =
-  fcQQmlListReference_delete(self.h)

@@ -1,4 +1,4 @@
-type QSGGeometry* {.inheritable, pure.} = object
+type QSGGeometry* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QSGGeometry) =
   wasMoved(self)
   fcQSGGeometry_delete(h)
 
-type QSGGeometryAttribute* {.inheritable, pure.} = object
+type QSGGeometryAttribute* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QSGGeometryAttribute) =
   wasMoved(self)
   fcQSGGeometryAttribute_delete(h)
 
-type QSGGeometryAttributeSet* {.inheritable, pure.} = object
+type QSGGeometryAttributeSet* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QSGGeometryAttributeSet) =
   wasMoved(self)
   fcQSGGeometryAttributeSet_delete(h)
 
-type QSGGeometryPoint2D* {.inheritable, pure.} = object
+type QSGGeometryPoint2D* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -82,7 +82,7 @@ proc delete*(self: sink QSGGeometryPoint2D) =
   wasMoved(self)
   fcQSGGeometryPoint2D_delete(h)
 
-type QSGGeometryTexturedPoint2D* {.inheritable, pure.} = object
+type QSGGeometryTexturedPoint2D* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -102,7 +102,7 @@ proc delete*(self: sink QSGGeometryTexturedPoint2D) =
   wasMoved(self)
   fcQSGGeometryTexturedPoint2D_delete(h)
 
-type QSGGeometryColoredPoint2D* {.inheritable, pure.} = object
+type QSGGeometryColoredPoint2D* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

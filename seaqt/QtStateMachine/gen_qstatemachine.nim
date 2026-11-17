@@ -152,7 +152,6 @@ proc fcQStateMachine_new2(vtbl: pointer, vdata: csize_t, childMode: cint): ptr c
 proc fcQStateMachine_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new3".}
 proc fcQStateMachine_new4(vtbl: pointer, vdata: csize_t, childMode: cint, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new4".}
 proc fcQStateMachine_staticMetaObject(): pointer {.importc: "QStateMachine_staticMetaObject".}
-proc fcQStateMachine_delete(self: pointer) {.importc: "QStateMachine_delete".}
 proc fcQStateMachineSignalEvent_sender(self: pointer): pointer {.importc: "QStateMachine__SignalEvent_sender".}
 proc fcQStateMachineSignalEvent_signalIndex(self: pointer): cint {.importc: "QStateMachine__SignalEvent_signalIndex".}
 proc fcQStateMachineSignalEvent_arguments(self: pointer): struct_seaqt_array {.importc: "QStateMachine__SignalEvent_arguments".}
@@ -168,7 +167,6 @@ proc fcQStateMachineSignalEvent_virtualbase_setAccepted(self: pointer, accepted:
 proc fcQStateMachineSignalEvent_virtualbase_clone(self: pointer): pointer {.importc: "QStateMachine__SignalEvent_virtualbase_clone".}
 proc fcQStateMachineSignalEvent_new(vtbl: pointer, vdata: csize_t, sender: pointer, signalIndex: cint, arguments: struct_seaqt_array): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new".}
 proc fcQStateMachineSignalEvent_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new2".}
-proc fcQStateMachineSignalEvent_delete(self: pointer) {.importc: "QStateMachine__SignalEvent_delete".}
 proc fcQStateMachineWrappedEvent_objectX(self: pointer): pointer {.importc: "QStateMachine__WrappedEvent_object".}
 proc fcQStateMachineWrappedEvent_event(self: pointer): pointer {.importc: "QStateMachine__WrappedEvent_event".}
 proc fcQStateMachineWrappedEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStateMachine__WrappedEvent_operatorAssign".}
@@ -183,10 +181,9 @@ proc fcQStateMachineWrappedEvent_virtualbase_setAccepted(self: pointer, accepted
 proc fcQStateMachineWrappedEvent_virtualbase_clone(self: pointer): pointer {.importc: "QStateMachine__WrappedEvent_virtualbase_clone".}
 proc fcQStateMachineWrappedEvent_new(vtbl: pointer, vdata: csize_t, objectVal: pointer, event: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new".}
 proc fcQStateMachineWrappedEvent_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new2".}
-proc fcQStateMachineWrappedEvent_delete(self: pointer) {.importc: "QStateMachine__WrappedEvent_delete".}
 
 proc metaObject*(self: gen_qstatemachine_types.QStateMachine): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qstatemachine_types.QStateMachine, param1: cstring): pointer =
   fcQStateMachine_metacast(self.h, param1)
@@ -235,7 +232,7 @@ proc defaultAnimations*(self: gen_qstatemachine_types.QStateMachine): seq[gen_qa
   var vx_ret = newSeq[gen_qabstractanimation_types.QAbstractAnimation](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractanimation_types.QAbstractAnimation(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractanimation_types.QAbstractAnimation(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -262,7 +259,7 @@ proc configuration*(self: gen_qstatemachine_types.QStateMachine): HashSet[gen_qa
   vx_ret: HashSet[gen_qabstractstate_types.QAbstractState])
   v_outCast = cast[ptr UncheckedArray[pointer](v_ma.data))
   for i in 0..<v_ma.len:
-    vx_ret.incl gen_qabstractstate_types.QAbstractState(h: v_outCast[i])
+    vx_ret.incl gen_qabstractstate_types.QAbstractState(h: v_outCast[i], owned: false)
   vx_ret
 
 proc eventFilter*(self: gen_qstatemachine_types.QStateMachine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
@@ -328,7 +325,8 @@ type QStateMachinechildEventProc* = proc(self: QStateMachine, event: gen_qcoreev
 type QStateMachinecustomEventProc* = proc(self: QStateMachine, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStateMachineconnectNotifyProc* = proc(self: QStateMachine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QStateMachinedisconnectNotifyProc* = proc(self: QStateMachine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QStateMachineVTable* = object
+
+type QStateMachineVTable* {.inheritable, pure.} = object
   vtbl: cQStateMachineVTable
   metaObject*: QStateMachinemetaObjectProc
   metacast*: QStateMachinemetacastProc
@@ -348,7 +346,7 @@ type QStateMachineVTable* = object
   disconnectNotify*: QStateMachinedisconnectNotifyProc
 
 proc QStateMachinemetaObject*(self: gen_qstatemachine_types.QStateMachine): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_virtualbase_metaObject(self.h), owned: false)
 
 proc QStateMachinemetacast*(self: gen_qstatemachine_types.QStateMachine, param1: cstring): pointer =
   fcQStateMachine_virtualbase_metacast(self.h, param1)
@@ -400,7 +398,10 @@ proc fcQStateMachine_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStateMachine_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
@@ -421,82 +422,82 @@ proc fcQStateMachine_vtable_callback_metacall(self: pointer, param1: cint, param
 proc fcQStateMachine_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQStateMachine_vtable_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onEntry(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onExit(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_beginSelectTransitions(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].beginSelectTransitions(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_endSelectTransitions(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].endSelectTransitions(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_beginMicrostep(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].beginMicrostep(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_endMicrostep(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].endMicrostep(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQStateMachine_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQStateMachine_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](fcQStateMachine_vdata(self)[])
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQStateMachine* {.inheritable.} = ref object of QStateMachine
@@ -538,7 +539,10 @@ method disconnectNotify*(self: VirtualQStateMachine, signal: gen_qmetaobject_typ
 proc fcQStateMachine_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQStateMachine_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
@@ -556,75 +560,75 @@ proc fcQStateMachine_method_callback_metacall(self: pointer, param1: cint, param
 
 proc fcQStateMachine_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQStateMachine_method_callback_onEntry(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onEntry(slotval1)
 
 proc fcQStateMachine_method_callback_onExit(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.onExit(slotval1)
 
 proc fcQStateMachine_method_callback_beginSelectTransitions(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.beginSelectTransitions(slotval1)
 
 proc fcQStateMachine_method_callback_endSelectTransitions(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.endSelectTransitions(slotval1)
 
 proc fcQStateMachine_method_callback_beginMicrostep(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.beginMicrostep(slotval1)
 
 proc fcQStateMachine_method_callback_endMicrostep(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.endMicrostep(slotval1)
 
 proc fcQStateMachine_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQStateMachine_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQStateMachine_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQStateMachine_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQStateMachine_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQStateMachine_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQStateMachine](fcQStateMachine_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qstatemachine_types.QStateMachine): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStateMachine_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQStateMachine_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qstatemachine_types.QStateMachine): cint =
   fcQStateMachine_protectedbase_senderSignalIndex(self.h)
@@ -674,7 +678,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachine,
     vtbl[].vtbl.connectNotify = fcQStateMachine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStateMachine_vtable_callback_disconnectNotify
-  let tmp = gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQStateMachine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstatemachine_types.QStateMachine,
@@ -717,7 +721,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachine,
     vtbl[].vtbl.connectNotify = fcQStateMachine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStateMachine_vtable_callback_disconnectNotify
-  let tmp = gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(childMode)))
+  let tmp = gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(childMode)), owned: true)
   fcQStateMachine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstatemachine_types.QStateMachine,
@@ -760,7 +764,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachine,
     vtbl[].vtbl.connectNotify = fcQStateMachine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStateMachine_vtable_callback_disconnectNotify
-  let tmp = gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQStateMachine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstatemachine_types.QStateMachine,
@@ -803,13 +807,14 @@ proc create*(T: type gen_qstatemachine_types.QStateMachine,
     vtbl[].vtbl.connectNotify = fcQStateMachine_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQStateMachine_vtable_callback_disconnectNotify
-  let tmp = gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(childMode), parent.h))
+  let tmp = gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(childMode), parent.h), owned: true)
   fcQStateMachine_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStateMachine_mvtbl = cQStateMachineVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQStateMachine()[])](self.fcQStateMachine_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQStateMachine_method_callback_metaObject,
   metacast: fcQStateMachine_method_callback_metacast,
@@ -861,10 +866,8 @@ proc create*(T: type gen_qstatemachine_types.QStateMachine,
 
 proc staticMetaObject*(_: type gen_qstatemachine_types.QStateMachine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_staticMetaObject())
-proc delete*(self: gen_qstatemachine_types.QStateMachine) =
-  fcQStateMachine_delete(self.h)
 proc sender*(self: gen_qstatemachine_types.QStateMachineSignalEvent): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStateMachineSignalEvent_sender(self.h))
+  gen_qobject_types.QObject(h: fcQStateMachineSignalEvent_sender(self.h), owned: false)
 
 proc signalIndex*(self: gen_qstatemachine_types.QStateMachineSignalEvent): cint =
   fcQStateMachineSignalEvent_signalIndex(self.h)
@@ -874,7 +877,7 @@ proc arguments*(self: gen_qstatemachine_types.QStateMachineSignalEvent): seq[gen
   var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i])
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -883,7 +886,8 @@ proc operatorAssign*(self: gen_qstatemachine_types.QStateMachineSignalEvent, par
 
 type QStateMachineSignalEventsetAcceptedProc* = proc(self: QStateMachineSignalEvent, accepted: bool): void {.raises: [], gcsafe.}
 type QStateMachineSignalEventcloneProc* = proc(self: QStateMachineSignalEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
-type QStateMachineSignalEventVTable* = object
+
+type QStateMachineSignalEventVTable* {.inheritable, pure.} = object
   vtbl: cQStateMachineSignalEventVTable
   setAccepted*: QStateMachineSignalEventsetAcceptedProc
   clone*: QStateMachineSignalEventcloneProc
@@ -892,7 +896,7 @@ proc QStateMachineSignalEventsetAccepted*(self: gen_qstatemachine_types.QStateMa
   fcQStateMachineSignalEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc QStateMachineSignalEventclone*(self: gen_qstatemachine_types.QStateMachineSignalEvent): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fcQStateMachineSignalEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQStateMachineSignalEvent_virtualbase_clone(self.h), owned: false)
 
 
 proc fcQStateMachineSignalEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
@@ -905,7 +909,10 @@ proc fcQStateMachineSignalEvent_vtable_callback_clone(self: pointer): pointer {.
   let vtbl = cast[ptr QStateMachineSignalEventVTable](fcQStateMachineSignalEvent_vdata(self)[])
   let self = QStateMachineSignalEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQStateMachineSignalEvent* {.inheritable.} = ref object of QStateMachineSignalEvent
   vtbl*: cQStateMachineSignalEventVTable
@@ -923,7 +930,10 @@ proc fcQStateMachineSignalEvent_method_callback_setAccepted(self: pointer, accep
 proc fcQStateMachineSignalEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStateMachineSignalEvent](fcQStateMachineSignalEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
@@ -942,7 +952,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
     vtbl[].vtbl.setAccepted = fcQStateMachineSignalEvent_vtable_callback_setAccepted
   if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = fcQStateMachineSignalEvent_vtable_callback_clone
-  let tmp = gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sender.h, signalIndex, struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0]))))
+  let tmp = gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), sender.h, signalIndex, struct_seaqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0]))), owned: true)
   fcQStateMachineSignalEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
@@ -957,13 +967,14 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
     vtbl[].vtbl.setAccepted = fcQStateMachineSignalEvent_vtable_callback_setAccepted
   if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = fcQStateMachineSignalEvent_vtable_callback_clone
-  let tmp = gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQStateMachineSignalEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStateMachineSignalEvent_mvtbl = cQStateMachineSignalEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQStateMachineSignalEvent()[])](self.fcQStateMachineSignalEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   setAccepted: fcQStateMachineSignalEvent_method_callback_setAccepted,
   clone: fcQStateMachineSignalEvent_method_callback_clone,
@@ -988,20 +999,19 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
   fcQStateMachineSignalEvent_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qstatemachine_types.QStateMachineSignalEvent) =
-  fcQStateMachineSignalEvent_delete(self.h)
 proc objectX*(self: gen_qstatemachine_types.QStateMachineWrappedEvent): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStateMachineWrappedEvent_objectX(self.h))
+  gen_qobject_types.QObject(h: fcQStateMachineWrappedEvent_objectX(self.h), owned: false)
 
 proc event*(self: gen_qstatemachine_types.QStateMachineWrappedEvent): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fcQStateMachineWrappedEvent_event(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQStateMachineWrappedEvent_event(self.h), owned: false)
 
 proc operatorAssign*(self: gen_qstatemachine_types.QStateMachineWrappedEvent, param1: gen_qstatemachine_types.QStateMachineWrappedEvent): void =
   fcQStateMachineWrappedEvent_operatorAssign(self.h, param1.h)
 
 type QStateMachineWrappedEventsetAcceptedProc* = proc(self: QStateMachineWrappedEvent, accepted: bool): void {.raises: [], gcsafe.}
 type QStateMachineWrappedEventcloneProc* = proc(self: QStateMachineWrappedEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
-type QStateMachineWrappedEventVTable* = object
+
+type QStateMachineWrappedEventVTable* {.inheritable, pure.} = object
   vtbl: cQStateMachineWrappedEventVTable
   setAccepted*: QStateMachineWrappedEventsetAcceptedProc
   clone*: QStateMachineWrappedEventcloneProc
@@ -1010,7 +1020,7 @@ proc QStateMachineWrappedEventsetAccepted*(self: gen_qstatemachine_types.QStateM
   fcQStateMachineWrappedEvent_virtualbase_setAccepted(self.h, accepted)
 
 proc QStateMachineWrappedEventclone*(self: gen_qstatemachine_types.QStateMachineWrappedEvent): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fcQStateMachineWrappedEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQStateMachineWrappedEvent_virtualbase_clone(self.h), owned: false)
 
 
 proc fcQStateMachineWrappedEvent_vtable_callback_setAccepted(self: pointer, accepted: bool): void {.cdecl.} =
@@ -1023,7 +1033,10 @@ proc fcQStateMachineWrappedEvent_vtable_callback_clone(self: pointer): pointer {
   let vtbl = cast[ptr QStateMachineWrappedEventVTable](fcQStateMachineWrappedEvent_vdata(self)[])
   let self = QStateMachineWrappedEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQStateMachineWrappedEvent* {.inheritable.} = ref object of QStateMachineWrappedEvent
   vtbl*: cQStateMachineWrappedEventVTable
@@ -1041,7 +1054,10 @@ proc fcQStateMachineWrappedEvent_method_callback_setAccepted(self: pointer, acce
 proc fcQStateMachineWrappedEvent_method_callback_clone(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQStateMachineWrappedEvent](fcQStateMachineWrappedEvent_vdata(self)[])
   var virtualReturn = inst.clone()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
@@ -1056,7 +1072,7 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
     vtbl[].vtbl.setAccepted = fcQStateMachineWrappedEvent_vtable_callback_setAccepted
   if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = fcQStateMachineWrappedEvent_vtable_callback_clone
-  let tmp = gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), objectVal.h, event.h))
+  let tmp = gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), objectVal.h, event.h), owned: true)
   fcQStateMachineWrappedEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
@@ -1071,13 +1087,14 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
     vtbl[].vtbl.setAccepted = fcQStateMachineWrappedEvent_vtable_callback_setAccepted
   if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = fcQStateMachineWrappedEvent_vtable_callback_clone
-  let tmp = gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQStateMachineWrappedEvent_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQStateMachineWrappedEvent_mvtbl = cQStateMachineWrappedEventVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQStateMachineWrappedEvent()[])](self.fcQStateMachineWrappedEvent_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   setAccepted: fcQStateMachineWrappedEvent_method_callback_setAccepted,
   clone: fcQStateMachineWrappedEvent_method_callback_clone,
@@ -1098,5 +1115,3 @@ proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
   fcQStateMachineWrappedEvent_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qstatemachine_types.QStateMachineWrappedEvent) =
-  fcQStateMachineWrappedEvent_delete(self.h)

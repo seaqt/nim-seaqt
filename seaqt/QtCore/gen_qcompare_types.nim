@@ -1,4 +1,4 @@
-type QPartialOrdering* {.inheritable, pure.} = object
+type QPartialOrdering* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

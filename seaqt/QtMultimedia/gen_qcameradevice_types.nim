@@ -1,4 +1,4 @@
-type QCameraFormat* {.inheritable, pure.} = object
+type QCameraFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QCameraFormat) =
   wasMoved(self)
   fcQCameraFormat_delete(h)
 
-type QCameraDevice* {.inheritable, pure.} = object
+type QCameraDevice* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

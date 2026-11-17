@@ -1,4 +1,4 @@
-type QScopedPointerPodDeleter* {.inheritable, pure.} = object
+type QScopedPointerPodDeleter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

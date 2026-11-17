@@ -1,4 +1,4 @@
-type QWebEngineClientCertificateSelection* {.inheritable, pure.} = object
+type QWebEngineClientCertificateSelection* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -39,7 +39,4 @@ export gen_qsgmaterialtype_types
 
 type cQSGMaterialType*{.exportc: "QSGMaterialType", incompleteStruct.} = object
 
-proc fcQSGMaterialType_delete(self: pointer) {.importc: "QSGMaterialType_delete".}
 
-proc delete*(self: gen_qsgmaterialtype_types.QSGMaterialType) =
-  fcQSGMaterialType_delete(self.h)

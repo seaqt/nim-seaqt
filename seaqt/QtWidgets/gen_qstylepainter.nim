@@ -72,7 +72,6 @@ proc fcQStylePainter_drawItemText2(self: pointer, r: pointer, flags: cint, pal: 
 proc fcQStylePainter_new(): ptr cQStylePainter {.importc: "QStylePainter_new".}
 proc fcQStylePainter_new2(w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new2".}
 proc fcQStylePainter_new3(pd: pointer, w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new3".}
-proc fcQStylePainter_delete(self: pointer) {.importc: "QStylePainter_delete".}
 
 proc begin*(self: gen_qstylepainter_types.QStylePainter, w: gen_qwidget_types.QWidget): bool =
   fcQStylePainter_begin(self.h, w.h)
@@ -96,21 +95,19 @@ proc drawItemPixmap*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_t
   fcQStylePainter_drawItemPixmap(self.h, r.h, flags, pixmap.h)
 
 proc style*(self: gen_qstylepainter_types.QStylePainter): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQStylePainter_style(self.h))
+  gen_qstyle_types.QStyle(h: fcQStylePainter_style(self.h), owned: false)
 
 proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
   fcQStylePainter_drawItemText2(self.h, r.h, flags, pal.h, enabled, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
 
 proc create*(T: type gen_qstylepainter_types.QStylePainter): gen_qstylepainter_types.QStylePainter =
-  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new())
+  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new(), owned: true)
   tmp
 proc create*(T: type gen_qstylepainter_types.QStylePainter,
     w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
-  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new2(w.h))
+  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new2(w.h), owned: true)
   tmp
 proc create*(T: type gen_qstylepainter_types.QStylePainter,
     pd: gen_qpaintdevice_types.QPaintDevice, w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
-  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new3(pd.h, w.h))
+  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new3(pd.h, w.h), owned: true)
   tmp
-proc delete*(self: gen_qstylepainter_types.QStylePainter) =
-  fcQStylePainter_delete(self.h)

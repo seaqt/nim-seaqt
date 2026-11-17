@@ -141,10 +141,9 @@ proc fcQNmeaSatelliteInfoSource_protectedbase_isSignalConnected(self: pointer, s
 proc fcQNmeaSatelliteInfoSource_new(vtbl: pointer, vdata: csize_t, mode: cint): ptr cQNmeaSatelliteInfoSource {.importc: "QNmeaSatelliteInfoSource_new".}
 proc fcQNmeaSatelliteInfoSource_new2(vtbl: pointer, vdata: csize_t, mode: cint, parent: pointer): ptr cQNmeaSatelliteInfoSource {.importc: "QNmeaSatelliteInfoSource_new2".}
 proc fcQNmeaSatelliteInfoSource_staticMetaObject(): pointer {.importc: "QNmeaSatelliteInfoSource_staticMetaObject".}
-proc fcQNmeaSatelliteInfoSource_delete(self: pointer) {.importc: "QNmeaSatelliteInfoSource_delete".}
 
 proc metaObject*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNmeaSatelliteInfoSource_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNmeaSatelliteInfoSource_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource, param1: cstring): pointer =
   fcQNmeaSatelliteInfoSource_metacast(self.h, param1)
@@ -165,7 +164,7 @@ proc setDevice*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSourc
   fcQNmeaSatelliteInfoSource_setDevice(self.h, source.h)
 
 proc device*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQNmeaSatelliteInfoSource_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQNmeaSatelliteInfoSource_device(self.h), owned: false)
 
 proc setUpdateInterval*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource, msec: cint): void =
   fcQNmeaSatelliteInfoSource_setUpdateInterval(self.h, msec)
@@ -180,7 +179,7 @@ proc setBackendProperty*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatellite
   fcQNmeaSatelliteInfoSource_setBackendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
 proc backendProperty*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource, name: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQNmeaSatelliteInfoSource_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qvariant_types.QVariant(h: fcQNmeaSatelliteInfoSource_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc startUpdates*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): void =
   fcQNmeaSatelliteInfoSource_startUpdates(self.h)
@@ -223,7 +222,8 @@ type QNmeaSatelliteInfoSourcechildEventProc* = proc(self: QNmeaSatelliteInfoSour
 type QNmeaSatelliteInfoSourcecustomEventProc* = proc(self: QNmeaSatelliteInfoSource, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QNmeaSatelliteInfoSourceconnectNotifyProc* = proc(self: QNmeaSatelliteInfoSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QNmeaSatelliteInfoSourcedisconnectNotifyProc* = proc(self: QNmeaSatelliteInfoSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QNmeaSatelliteInfoSourceVTable* = object
+
+type QNmeaSatelliteInfoSourceVTable* {.inheritable, pure.} = object
   vtbl: cQNmeaSatelliteInfoSourceVTable
   metaObject*: QNmeaSatelliteInfoSourcemetaObjectProc
   metacast*: QNmeaSatelliteInfoSourcemetacastProc
@@ -247,7 +247,7 @@ type QNmeaSatelliteInfoSourceVTable* = object
   disconnectNotify*: QNmeaSatelliteInfoSourcedisconnectNotifyProc
 
 proc QNmeaSatelliteInfoSourcemetaObject*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNmeaSatelliteInfoSource_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNmeaSatelliteInfoSource_virtualbase_metaObject(self.h), owned: false)
 
 proc QNmeaSatelliteInfoSourcemetacast*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource, param1: cstring): pointer =
   fcQNmeaSatelliteInfoSource_virtualbase_metacast(self.h, param1)
@@ -268,7 +268,7 @@ proc QNmeaSatelliteInfoSourcesetBackendProperty*(self: gen_qnmeasatelliteinfosou
   fcQNmeaSatelliteInfoSource_virtualbase_setBackendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
 proc QNmeaSatelliteInfoSourcebackendProperty*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource, name: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQNmeaSatelliteInfoSource_virtualbase_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qvariant_types.QVariant(h: fcQNmeaSatelliteInfoSource_virtualbase_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc QNmeaSatelliteInfoSourcestartUpdates*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): void =
   fcQNmeaSatelliteInfoSource_virtualbase_startUpdates(self.h)
@@ -319,7 +319,10 @@ proc fcQNmeaSatelliteInfoSource_vtable_callback_metaObject(self: pointer): point
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
   let self = QNmeaSatelliteInfoSource(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNmeaSatelliteInfoSource_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
@@ -362,7 +365,7 @@ proc fcQNmeaSatelliteInfoSource_vtable_callback_setBackendProperty(self: pointer
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].setBackendProperty(self, slotval1, slotval2)
   virtualReturn
 
@@ -374,7 +377,10 @@ proc fcQNmeaSatelliteInfoSource_vtable_callback_backendProperty(self: pointer, n
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
   var virtualReturn = vtbl[].backendProperty(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNmeaSatelliteInfoSource_vtable_callback_startUpdates(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
@@ -416,7 +422,7 @@ proc fcQNmeaSatelliteInfoSource_vtable_callback_parseSatelliteInfoFromNmea(self:
   var vinfosx_ret = newSeq[gen_qgeosatelliteinfo_types.QGeoSatelliteInfo](int(vinfos_ma.len))
   let vinfos_outCast = cast[ptr UncheckedArray[pointer]](vinfos_ma.data)
   for i in 0 ..< vinfos_ma.len:
-    vinfosx_ret[i] = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: vinfos_outCast[i])
+    vinfosx_ret[i] = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: vinfos_outCast[i], owned: true)
   c_free(vinfos_ma.data)
   let slotval3 = vinfosx_ret
   let slotval4 = system
@@ -426,46 +432,46 @@ proc fcQNmeaSatelliteInfoSource_vtable_callback_parseSatelliteInfoFromNmea(self:
 proc fcQNmeaSatelliteInfoSource_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
   let self = QNmeaSatelliteInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQNmeaSatelliteInfoSource_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
   let self = QNmeaSatelliteInfoSource(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQNmeaSatelliteInfoSource_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
   let self = QNmeaSatelliteInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQNmeaSatelliteInfoSource_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
   let self = QNmeaSatelliteInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQNmeaSatelliteInfoSource_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
   let self = QNmeaSatelliteInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQNmeaSatelliteInfoSource_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
   let self = QNmeaSatelliteInfoSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQNmeaSatelliteInfoSource_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaSatelliteInfoSourceVTable](fcQNmeaSatelliteInfoSource_vdata(self)[])
   let self = QNmeaSatelliteInfoSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQNmeaSatelliteInfoSource* {.inheritable.} = ref object of QNmeaSatelliteInfoSource
@@ -515,7 +521,10 @@ method disconnectNotify*(self: VirtualQNmeaSatelliteInfoSource, signal: gen_qmet
 proc fcQNmeaSatelliteInfoSource_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNmeaSatelliteInfoSource_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
@@ -552,7 +561,7 @@ proc fcQNmeaSatelliteInfoSource_method_callback_setBackendProperty(self: pointer
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.setBackendProperty(slotval1, slotval2)
   virtualReturn
 
@@ -563,7 +572,10 @@ proc fcQNmeaSatelliteInfoSource_method_callback_backendProperty(self: pointer, n
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
   var virtualReturn = inst.backendProperty(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNmeaSatelliteInfoSource_method_callback_startUpdates(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
@@ -600,7 +612,7 @@ proc fcQNmeaSatelliteInfoSource_method_callback_parseSatelliteInfoFromNmea(self:
   var vinfosx_ret = newSeq[gen_qgeosatelliteinfo_types.QGeoSatelliteInfo](int(vinfos_ma.len))
   let vinfos_outCast = cast[ptr UncheckedArray[pointer]](vinfos_ma.data)
   for i in 0 ..< vinfos_ma.len:
-    vinfosx_ret[i] = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: vinfos_outCast[i])
+    vinfosx_ret[i] = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: vinfos_outCast[i], owned: true)
   c_free(vinfos_ma.data)
   let slotval3 = vinfosx_ret
   let slotval4 = system
@@ -609,40 +621,40 @@ proc fcQNmeaSatelliteInfoSource_method_callback_parseSatelliteInfoFromNmea(self:
 
 proc fcQNmeaSatelliteInfoSource_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQNmeaSatelliteInfoSource_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQNmeaSatelliteInfoSource_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQNmeaSatelliteInfoSource_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQNmeaSatelliteInfoSource_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQNmeaSatelliteInfoSource_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQNmeaSatelliteInfoSource_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaSatelliteInfoSource](fcQNmeaSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -650,7 +662,7 @@ proc setError*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource
   fcQNmeaSatelliteInfoSource_protectedbase_setError(self.h, cint(satelliteError))
 
 proc sender*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQNmeaSatelliteInfoSource_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQNmeaSatelliteInfoSource_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): cint =
   fcQNmeaSatelliteInfoSource_protectedbase_senderSignalIndex(self.h)
@@ -709,7 +721,7 @@ proc create*(T: type gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource
     vtbl[].vtbl.connectNotify = fcQNmeaSatelliteInfoSource_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQNmeaSatelliteInfoSource_vtable_callback_disconnectNotify
-  let tmp = gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource(h: fcQNmeaSatelliteInfoSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(mode)))
+  let tmp = gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource(h: fcQNmeaSatelliteInfoSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(mode)), owned: true)
   fcQNmeaSatelliteInfoSource_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource,
@@ -760,13 +772,14 @@ proc create*(T: type gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource
     vtbl[].vtbl.connectNotify = fcQNmeaSatelliteInfoSource_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQNmeaSatelliteInfoSource_vtable_callback_disconnectNotify
-  let tmp = gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource(h: fcQNmeaSatelliteInfoSource_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(mode), parent.h))
+  let tmp = gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource(h: fcQNmeaSatelliteInfoSource_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(mode), parent.h), owned: true)
   fcQNmeaSatelliteInfoSource_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQNmeaSatelliteInfoSource_mvtbl = cQNmeaSatelliteInfoSourceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQNmeaSatelliteInfoSource()[])](self.fcQNmeaSatelliteInfoSource_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQNmeaSatelliteInfoSource_method_callback_metaObject,
   metacast: fcQNmeaSatelliteInfoSource_method_callback_metacast,
@@ -807,5 +820,3 @@ proc create*(T: type gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource
 
 proc staticMetaObject*(_: type gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNmeaSatelliteInfoSource_staticMetaObject())
-proc delete*(self: gen_qnmeasatelliteinfosource_types.QNmeaSatelliteInfoSource) =
-  fcQNmeaSatelliteInfoSource_delete(self.h)

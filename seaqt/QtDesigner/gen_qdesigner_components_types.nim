@@ -1,4 +1,4 @@
-type QDesignerComponents* {.inheritable, pure.} = object
+type QDesignerComponents* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

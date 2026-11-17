@@ -119,10 +119,9 @@ proc fcQPdfPageNavigator_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQPdfPageNavigator_new(vtbl: pointer, vdata: csize_t): ptr cQPdfPageNavigator {.importc: "QPdfPageNavigator_new".}
 proc fcQPdfPageNavigator_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfPageNavigator {.importc: "QPdfPageNavigator_new2".}
 proc fcQPdfPageNavigator_staticMetaObject(): pointer {.importc: "QPdfPageNavigator_staticMetaObject".}
-proc fcQPdfPageNavigator_delete(self: pointer) {.importc: "QPdfPageNavigator_delete".}
 
 proc metaObject*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageNavigator_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageNavigator_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, param1: cstring): pointer =
   fcQPdfPageNavigator_metacast(self.h, param1)
@@ -140,7 +139,7 @@ proc currentPage*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): cint =
   fcQPdfPageNavigator_currentPage(self.h)
 
 proc currentLocation*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQPdfPageNavigator_currentLocation(self.h))
+  gen_qpoint_types.QPointF(h: fcQPdfPageNavigator_currentLocation(self.h), owned: true)
 
 proc currentZoom*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): float64 =
   fcQPdfPageNavigator_currentZoom(self.h)
@@ -195,7 +194,7 @@ proc currentLocationChanged*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator
 type QPdfPageNavigatorcurrentLocationChangedSlot* = proc(location: gen_qpoint_types.QPointF)
 proc fcQPdfPageNavigator_slot_callback_currentLocationChanged(slot: int, location: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPdfPageNavigatorcurrentLocationChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qpoint_types.QPointF(h: location)
+  let slotval1 = gen_qpoint_types.QPointF(h: location, owned: true)
 
   nimfunc[](slotval1)
 
@@ -275,7 +274,7 @@ proc jumped*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, current: gen_q
 type QPdfPageNavigatorjumpedSlot* = proc(current: gen_qpdflink_types.QPdfLink)
 proc fcQPdfPageNavigator_slot_callback_jumped(slot: int, current: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPdfPageNavigatorjumpedSlot](cast[pointer](slot))
-  let slotval1 = gen_qpdflink_types.QPdfLink(h: current)
+  let slotval1 = gen_qpdflink_types.QPdfLink(h: current, owned: true)
 
   nimfunc[](slotval1)
 
@@ -314,7 +313,8 @@ type QPdfPageNavigatorchildEventProc* = proc(self: QPdfPageNavigator, event: gen
 type QPdfPageNavigatorcustomEventProc* = proc(self: QPdfPageNavigator, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPdfPageNavigatorconnectNotifyProc* = proc(self: QPdfPageNavigator, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPdfPageNavigatordisconnectNotifyProc* = proc(self: QPdfPageNavigator, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QPdfPageNavigatorVTable* = object
+
+type QPdfPageNavigatorVTable* {.inheritable, pure.} = object
   vtbl: cQPdfPageNavigatorVTable
   metaObject*: QPdfPageNavigatormetaObjectProc
   metacast*: QPdfPageNavigatormetacastProc
@@ -328,7 +328,7 @@ type QPdfPageNavigatorVTable* = object
   disconnectNotify*: QPdfPageNavigatordisconnectNotifyProc
 
 proc QPdfPageNavigatormetaObject*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageNavigator_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageNavigator_virtualbase_metaObject(self.h), owned: false)
 
 proc QPdfPageNavigatormetacast*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator, param1: cstring): pointer =
   fcQPdfPageNavigator_virtualbase_metacast(self.h, param1)
@@ -362,7 +362,10 @@ proc fcQPdfPageNavigator_vtable_callback_metaObject(self: pointer): pointer {.cd
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
   let self = QPdfPageNavigator(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfPageNavigator_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
@@ -383,46 +386,46 @@ proc fcQPdfPageNavigator_vtable_callback_metacall(self: pointer, param1: cint, p
 proc fcQPdfPageNavigator_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
   let self = QPdfPageNavigator(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQPdfPageNavigator_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
   let self = QPdfPageNavigator(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQPdfPageNavigator_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
   let self = QPdfPageNavigator(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQPdfPageNavigator_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
   let self = QPdfPageNavigator(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQPdfPageNavigator_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
   let self = QPdfPageNavigator(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQPdfPageNavigator_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
   let self = QPdfPageNavigator(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQPdfPageNavigator_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageNavigatorVTable](fcQPdfPageNavigator_vdata(self)[])
   let self = QPdfPageNavigator(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQPdfPageNavigator* {.inheritable.} = ref object of QPdfPageNavigator
@@ -452,7 +455,10 @@ method disconnectNotify*(self: VirtualQPdfPageNavigator, signal: gen_qmetaobject
 proc fcQPdfPageNavigator_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfPageNavigator_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
@@ -470,48 +476,48 @@ proc fcQPdfPageNavigator_method_callback_metacall(self: pointer, param1: cint, p
 
 proc fcQPdfPageNavigator_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQPdfPageNavigator_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQPdfPageNavigator_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQPdfPageNavigator_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQPdfPageNavigator_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQPdfPageNavigator_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQPdfPageNavigator_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageNavigator](fcQPdfPageNavigator_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc currentLink*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): gen_qpdflink_types.QPdfLink =
-  gen_qpdflink_types.QPdfLink(h: fcQPdfPageNavigator_protectedbase_currentLink(self.h))
+  gen_qpdflink_types.QPdfLink(h: fcQPdfPageNavigator_protectedbase_currentLink(self.h), owned: true)
 
 proc sender*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPdfPageNavigator_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPdfPageNavigator_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator): cint =
   fcQPdfPageNavigator_protectedbase_senderSignalIndex(self.h)
@@ -549,7 +555,7 @@ proc create*(T: type gen_qpdfpagenavigator_types.QPdfPageNavigator,
     vtbl[].vtbl.connectNotify = fcQPdfPageNavigator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPdfPageNavigator_vtable_callback_disconnectNotify
-  let tmp = gen_qpdfpagenavigator_types.QPdfPageNavigator(h: fcQPdfPageNavigator_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qpdfpagenavigator_types.QPdfPageNavigator(h: fcQPdfPageNavigator_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQPdfPageNavigator_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpdfpagenavigator_types.QPdfPageNavigator,
@@ -580,13 +586,14 @@ proc create*(T: type gen_qpdfpagenavigator_types.QPdfPageNavigator,
     vtbl[].vtbl.connectNotify = fcQPdfPageNavigator_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPdfPageNavigator_vtable_callback_disconnectNotify
-  let tmp = gen_qpdfpagenavigator_types.QPdfPageNavigator(h: fcQPdfPageNavigator_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qpdfpagenavigator_types.QPdfPageNavigator(h: fcQPdfPageNavigator_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQPdfPageNavigator_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPdfPageNavigator_mvtbl = cQPdfPageNavigatorVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPdfPageNavigator()[])](self.fcQPdfPageNavigator_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQPdfPageNavigator_method_callback_metaObject,
   metacast: fcQPdfPageNavigator_method_callback_metacast,
@@ -616,5 +623,3 @@ proc create*(T: type gen_qpdfpagenavigator_types.QPdfPageNavigator,
 
 proc staticMetaObject*(_: type gen_qpdfpagenavigator_types.QPdfPageNavigator): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageNavigator_staticMetaObject())
-proc delete*(self: gen_qpdfpagenavigator_types.QPdfPageNavigator) =
-  fcQPdfPageNavigator_delete(self.h)

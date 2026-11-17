@@ -196,10 +196,9 @@ proc fcQGuiApplication_protectedbase_isSignalConnected(self: pointer, signal: po
 proc fcQGuiApplication_new(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray): ptr cQGuiApplication {.importc: "QGuiApplication_new".}
 proc fcQGuiApplication_new2(vtbl: pointer, vdata: csize_t, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQGuiApplication {.importc: "QGuiApplication_new2".}
 proc fcQGuiApplication_staticMetaObject(): pointer {.importc: "QGuiApplication_staticMetaObject".}
-proc fcQGuiApplication_delete(self: pointer) {.importc: "QGuiApplication_delete".}
 
 proc metaObject*(self: gen_qguiapplication_types.QGuiApplication): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGuiApplication_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGuiApplication_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qguiapplication_types.QGuiApplication, param1: cstring): pointer =
   fcQGuiApplication_metacast(self.h, param1)
@@ -236,7 +235,7 @@ proc allWindows*(_: type gen_qguiapplication_types.QGuiApplication): seq[gen_qwi
   var vx_ret = newSeq[gen_qwindow_types.QWindow](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwindow_types.QWindow(h: v_outCast[i])
+    vx_ret[i] = gen_qwindow_types.QWindow(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -245,18 +244,18 @@ proc topLevelWindows*(_: type gen_qguiapplication_types.QGuiApplication): seq[ge
   var vx_ret = newSeq[gen_qwindow_types.QWindow](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwindow_types.QWindow(h: v_outCast[i])
+    vx_ret[i] = gen_qwindow_types.QWindow(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc topLevelAt*(_: type gen_qguiapplication_types.QGuiApplication, pos: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQGuiApplication_topLevelAt(pos.h))
+  gen_qwindow_types.QWindow(h: fcQGuiApplication_topLevelAt(pos.h), owned: false)
 
 proc setWindowIcon*(_: type gen_qguiapplication_types.QGuiApplication, icon: gen_qicon_types.QIcon): void =
   fcQGuiApplication_setWindowIcon(icon.h)
 
 proc windowIcon*(_: type gen_qguiapplication_types.QGuiApplication): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQGuiApplication_windowIcon())
+  gen_qicon_types.QIcon(h: fcQGuiApplication_windowIcon(), owned: true)
 
 proc platformName*(_: type gen_qguiapplication_types.QGuiApplication): string =
   let v_ms = fcQGuiApplication_platformName()
@@ -265,34 +264,34 @@ proc platformName*(_: type gen_qguiapplication_types.QGuiApplication): string =
   vx_ret
 
 proc modalWindow*(_: type gen_qguiapplication_types.QGuiApplication): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQGuiApplication_modalWindow())
+  gen_qwindow_types.QWindow(h: fcQGuiApplication_modalWindow(), owned: false)
 
 proc focusWindow*(_: type gen_qguiapplication_types.QGuiApplication): gen_qwindow_types.QWindow =
-  gen_qwindow_types.QWindow(h: fcQGuiApplication_focusWindow())
+  gen_qwindow_types.QWindow(h: fcQGuiApplication_focusWindow(), owned: false)
 
 proc focusObject*(_: type gen_qguiapplication_types.QGuiApplication): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGuiApplication_focusObject())
+  gen_qobject_types.QObject(h: fcQGuiApplication_focusObject(), owned: false)
 
 proc primaryScreen*(_: type gen_qguiapplication_types.QGuiApplication): gen_qscreen_types.QScreen =
-  gen_qscreen_types.QScreen(h: fcQGuiApplication_primaryScreen())
+  gen_qscreen_types.QScreen(h: fcQGuiApplication_primaryScreen(), owned: false)
 
 proc screens*(_: type gen_qguiapplication_types.QGuiApplication): seq[gen_qscreen_types.QScreen] =
   var v_ma = fcQGuiApplication_screens()
   var vx_ret = newSeq[gen_qscreen_types.QScreen](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qscreen_types.QScreen(h: v_outCast[i])
+    vx_ret[i] = gen_qscreen_types.QScreen(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc screenAt*(_: type gen_qguiapplication_types.QGuiApplication, point: gen_qpoint_types.QPoint): gen_qscreen_types.QScreen =
-  gen_qscreen_types.QScreen(h: fcQGuiApplication_screenAt(point.h))
+  gen_qscreen_types.QScreen(h: fcQGuiApplication_screenAt(point.h), owned: false)
 
 proc devicePixelRatio*(self: gen_qguiapplication_types.QGuiApplication): float64 =
   fcQGuiApplication_devicePixelRatio(self.h)
 
 proc overrideCursor*(_: type gen_qguiapplication_types.QGuiApplication): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor(h: fcQGuiApplication_overrideCursor())
+  gen_qcursor_types.QCursor(h: fcQGuiApplication_overrideCursor(), owned: false)
 
 proc setOverrideCursor*(_: type gen_qguiapplication_types.QGuiApplication, overrideCursor: gen_qcursor_types.QCursor): void =
   fcQGuiApplication_setOverrideCursor(overrideCursor.h)
@@ -304,16 +303,16 @@ proc restoreOverrideCursor*(_: type gen_qguiapplication_types.QGuiApplication): 
   fcQGuiApplication_restoreOverrideCursor()
 
 proc font*(_: type gen_qguiapplication_types.QGuiApplication): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQGuiApplication_font())
+  gen_qfont_types.QFont(h: fcQGuiApplication_font(), owned: true)
 
 proc setFont*(_: type gen_qguiapplication_types.QGuiApplication, font: gen_qfont_types.QFont): void =
   fcQGuiApplication_setFont(font.h)
 
 proc clipboard*(_: type gen_qguiapplication_types.QGuiApplication): gen_qclipboard_types.QClipboard =
-  gen_qclipboard_types.QClipboard(h: fcQGuiApplication_clipboard())
+  gen_qclipboard_types.QClipboard(h: fcQGuiApplication_clipboard(), owned: false)
 
 proc palette*(_: type gen_qguiapplication_types.QGuiApplication): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQGuiApplication_palette())
+  gen_qpalette_types.QPalette(h: fcQGuiApplication_palette(), owned: true)
 
 proc setPalette*(_: type gen_qguiapplication_types.QGuiApplication, pal: gen_qpalette_types.QPalette): void =
   fcQGuiApplication_setPalette(pal.h)
@@ -340,7 +339,7 @@ proc isLeftToRight*(_: type gen_qguiapplication_types.QGuiApplication): bool =
   fcQGuiApplication_isLeftToRight()
 
 proc styleHints*(_: type gen_qguiapplication_types.QGuiApplication): gen_qstylehints_types.QStyleHints =
-  gen_qstylehints_types.QStyleHints(h: fcQGuiApplication_styleHints())
+  gen_qstylehints_types.QStyleHints(h: fcQGuiApplication_styleHints(), owned: false)
 
 proc setDesktopSettingsAware*(_: type gen_qguiapplication_types.QGuiApplication, on: bool): void =
   fcQGuiApplication_setDesktopSettingsAware(on)
@@ -349,7 +348,7 @@ proc desktopSettingsAware*(_: type gen_qguiapplication_types.QGuiApplication): b
   fcQGuiApplication_desktopSettingsAware()
 
 proc inputMethod*(_: type gen_qguiapplication_types.QGuiApplication): gen_qinputmethod_types.QInputMethod =
-  gen_qinputmethod_types.QInputMethod(h: fcQGuiApplication_inputMethod())
+  gen_qinputmethod_types.QInputMethod(h: fcQGuiApplication_inputMethod(), owned: false)
 
 proc setQuitOnLastWindowClosed*(_: type gen_qguiapplication_types.QGuiApplication, quit: bool): void =
   fcQGuiApplication_setQuitOnLastWindowClosed(quit)
@@ -417,7 +416,7 @@ proc screenAdded*(self: gen_qguiapplication_types.QGuiApplication, screen: gen_q
 type QGuiApplicationscreenAddedSlot* = proc(screen: gen_qscreen_types.QScreen)
 proc fcQGuiApplication_slot_callback_screenAdded(slot: int, screen: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationscreenAddedSlot](cast[pointer](slot))
-  let slotval1 = gen_qscreen_types.QScreen(h: screen)
+  let slotval1 = gen_qscreen_types.QScreen(h: screen, owned: false)
 
   nimfunc[](slotval1)
 
@@ -437,7 +436,7 @@ proc screenRemoved*(self: gen_qguiapplication_types.QGuiApplication, screen: gen
 type QGuiApplicationscreenRemovedSlot* = proc(screen: gen_qscreen_types.QScreen)
 proc fcQGuiApplication_slot_callback_screenRemoved(slot: int, screen: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationscreenRemovedSlot](cast[pointer](slot))
-  let slotval1 = gen_qscreen_types.QScreen(h: screen)
+  let slotval1 = gen_qscreen_types.QScreen(h: screen, owned: false)
 
   nimfunc[](slotval1)
 
@@ -457,7 +456,7 @@ proc primaryScreenChanged*(self: gen_qguiapplication_types.QGuiApplication, scre
 type QGuiApplicationprimaryScreenChangedSlot* = proc(screen: gen_qscreen_types.QScreen)
 proc fcQGuiApplication_slot_callback_primaryScreenChanged(slot: int, screen: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationprimaryScreenChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qscreen_types.QScreen(h: screen)
+  let slotval1 = gen_qscreen_types.QScreen(h: screen, owned: false)
 
   nimfunc[](slotval1)
 
@@ -495,7 +494,7 @@ proc focusObjectChanged*(self: gen_qguiapplication_types.QGuiApplication, focusO
 type QGuiApplicationfocusObjectChangedSlot* = proc(focusObject: gen_qobject_types.QObject)
 proc fcQGuiApplication_slot_callback_focusObjectChanged(slot: int, focusObject: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationfocusObjectChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qobject_types.QObject(h: focusObject)
+  let slotval1 = gen_qobject_types.QObject(h: focusObject, owned: false)
 
   nimfunc[](slotval1)
 
@@ -515,7 +514,7 @@ proc focusWindowChanged*(self: gen_qguiapplication_types.QGuiApplication, focusW
 type QGuiApplicationfocusWindowChangedSlot* = proc(focusWindow: gen_qwindow_types.QWindow)
 proc fcQGuiApplication_slot_callback_focusWindowChanged(slot: int, focusWindow: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationfocusWindowChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qwindow_types.QWindow(h: focusWindow)
+  let slotval1 = gen_qwindow_types.QWindow(h: focusWindow, owned: false)
 
   nimfunc[](slotval1)
 
@@ -575,7 +574,7 @@ proc commitDataRequest*(self: gen_qguiapplication_types.QGuiApplication, session
 type QGuiApplicationcommitDataRequestSlot* = proc(sessionManager: gen_qsessionmanager_types.QSessionManager)
 proc fcQGuiApplication_slot_callback_commitDataRequest(slot: int, sessionManager: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationcommitDataRequestSlot](cast[pointer](slot))
-  let slotval1 = gen_qsessionmanager_types.QSessionManager(h: sessionManager)
+  let slotval1 = gen_qsessionmanager_types.QSessionManager(h: sessionManager, owned: false)
 
   nimfunc[](slotval1)
 
@@ -595,7 +594,7 @@ proc saveStateRequest*(self: gen_qguiapplication_types.QGuiApplication, sessionM
 type QGuiApplicationsaveStateRequestSlot* = proc(sessionManager: gen_qsessionmanager_types.QSessionManager)
 proc fcQGuiApplication_slot_callback_saveStateRequest(slot: int, sessionManager: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationsaveStateRequestSlot](cast[pointer](slot))
-  let slotval1 = gen_qsessionmanager_types.QSessionManager(h: sessionManager)
+  let slotval1 = gen_qsessionmanager_types.QSessionManager(h: sessionManager, owned: false)
 
   nimfunc[](slotval1)
 
@@ -633,7 +632,7 @@ proc paletteChanged*(self: gen_qguiapplication_types.QGuiApplication, pal: gen_q
 type QGuiApplicationpaletteChangedSlot* = proc(pal: gen_qpalette_types.QPalette)
 proc fcQGuiApplication_slot_callback_paletteChanged(slot: int, pal: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationpaletteChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qpalette_types.QPalette(h: pal)
+  let slotval1 = gen_qpalette_types.QPalette(h: pal, owned: false)
 
   nimfunc[](slotval1)
 
@@ -653,7 +652,7 @@ proc fontChanged*(self: gen_qguiapplication_types.QGuiApplication, font: gen_qfo
 type QGuiApplicationfontChangedSlot* = proc(font: gen_qfont_types.QFont)
 proc fcQGuiApplication_slot_callback_fontChanged(slot: int, font: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGuiApplicationfontChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qfont_types.QFont(h: font)
+  let slotval1 = gen_qfont_types.QFont(h: font, owned: false)
 
   nimfunc[](slotval1)
 
@@ -690,7 +689,8 @@ type QGuiApplicationchildEventProc* = proc(self: QGuiApplication, event: gen_qco
 type QGuiApplicationcustomEventProc* = proc(self: QGuiApplication, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGuiApplicationconnectNotifyProc* = proc(self: QGuiApplication, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGuiApplicationdisconnectNotifyProc* = proc(self: QGuiApplication, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QGuiApplicationVTable* = object
+
+type QGuiApplicationVTable* {.inheritable, pure.} = object
   vtbl: cQGuiApplicationVTable
   metaObject*: QGuiApplicationmetaObjectProc
   metacast*: QGuiApplicationmetacastProc
@@ -705,7 +705,7 @@ type QGuiApplicationVTable* = object
   disconnectNotify*: QGuiApplicationdisconnectNotifyProc
 
 proc QGuiApplicationmetaObject*(self: gen_qguiapplication_types.QGuiApplication): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGuiApplication_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGuiApplication_virtualbase_metaObject(self.h), owned: false)
 
 proc QGuiApplicationmetacast*(self: gen_qguiapplication_types.QGuiApplication, param1: cstring): pointer =
   fcQGuiApplication_virtualbase_metacast(self.h, param1)
@@ -742,7 +742,10 @@ proc fcQGuiApplication_vtable_callback_metaObject(self: pointer): pointer {.cdec
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGuiApplication_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
@@ -763,54 +766,54 @@ proc fcQGuiApplication_vtable_callback_metacall(self: pointer, param1: cint, par
 proc fcQGuiApplication_vtable_callback_notify(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].notify(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQGuiApplication_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQGuiApplication_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQGuiApplication_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQGuiApplication_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQGuiApplication_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQGuiApplication_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQGuiApplication_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGuiApplicationVTable](fcQGuiApplication_vdata(self)[])
   let self = QGuiApplication(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQGuiApplication* {.inheritable.} = ref object of QGuiApplication
@@ -842,7 +845,10 @@ method disconnectNotify*(self: VirtualQGuiApplication, signal: gen_qmetaobject_t
 proc fcQGuiApplication_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGuiApplication_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
@@ -860,47 +866,47 @@ proc fcQGuiApplication_method_callback_metacall(self: pointer, param1: cint, par
 
 proc fcQGuiApplication_method_callback_notify(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = inst.notify(slotval1, slotval2)
   virtualReturn
 
 proc fcQGuiApplication_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQGuiApplication_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQGuiApplication_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQGuiApplication_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQGuiApplication_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQGuiApplication_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQGuiApplication_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGuiApplication](fcQGuiApplication_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -908,7 +914,7 @@ proc resolveInterface*(self: gen_qguiapplication_types.QGuiApplication, name: cs
   fcQGuiApplication_protectedbase_resolveInterface(self.h, name, revision)
 
 proc sender*(self: gen_qguiapplication_types.QGuiApplication): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGuiApplication_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGuiApplication_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qguiapplication_types.QGuiApplication): cint =
   fcQGuiApplication_protectedbase_senderSignalIndex(self.h)
@@ -954,7 +960,7 @@ proc create*(T: type gen_qguiapplication_types.QGuiApplication,
     vtbl[].vtbl.connectNotify = fcQGuiApplication_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQGuiApplication_vtable_callback_disconnectNotify
-  let tmp = gen_qguiapplication_types.QGuiApplication(h: fcQGuiApplication_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), addr argc, argv))
+  let tmp = gen_qguiapplication_types.QGuiApplication(h: fcQGuiApplication_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), addr argc, argv), owned: true)
   fcQGuiApplication_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qguiapplication_types.QGuiApplication,
@@ -993,13 +999,14 @@ proc create*(T: type gen_qguiapplication_types.QGuiApplication,
     vtbl[].vtbl.connectNotify = fcQGuiApplication_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQGuiApplication_vtable_callback_disconnectNotify
-  let tmp = gen_qguiapplication_types.QGuiApplication(h: fcQGuiApplication_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), addr argc, argv, param3))
+  let tmp = gen_qguiapplication_types.QGuiApplication(h: fcQGuiApplication_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), addr argc, argv, param3), owned: true)
   fcQGuiApplication_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGuiApplication_mvtbl = cQGuiApplicationVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGuiApplication()[])](self.fcQGuiApplication_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQGuiApplication_method_callback_metaObject,
   metacast: fcQGuiApplication_method_callback_metacast,
@@ -1042,5 +1049,3 @@ proc create*(T: type gen_qguiapplication_types.QGuiApplication,
 
 proc staticMetaObject*(_: type gen_qguiapplication_types.QGuiApplication): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGuiApplication_staticMetaObject())
-proc delete*(self: gen_qguiapplication_types.QGuiApplication) =
-  fcQGuiApplication_delete(self.h)

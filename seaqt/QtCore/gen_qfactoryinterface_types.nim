@@ -1,4 +1,4 @@
-type QFactoryInterface* {.inheritable, pure.} = object
+type QFactoryInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

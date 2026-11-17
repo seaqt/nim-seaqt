@@ -1,4 +1,4 @@
-type QTemporaryDir* {.inheritable, pure.} = object
+type QTemporaryDir* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

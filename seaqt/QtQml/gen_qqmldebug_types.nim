@@ -1,4 +1,4 @@
-type QQmlDebuggingEnabler* {.inheritable, pure.} = object
+type QQmlDebuggingEnabler* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

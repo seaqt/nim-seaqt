@@ -1,4 +1,4 @@
-type QVariant* {.inheritable, pure.} = object
+type QVariant* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

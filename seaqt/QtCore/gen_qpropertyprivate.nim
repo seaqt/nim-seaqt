@@ -39,7 +39,4 @@ export gen_qpropertyprivate_types
 
 type cQUntypedPropertyData*{.exportc: "QUntypedPropertyData", incompleteStruct.} = object
 
-proc fcQUntypedPropertyData_delete(self: pointer) {.importc: "QUntypedPropertyData_delete".}
 
-proc delete*(self: gen_qpropertyprivate_types.QUntypedPropertyData) =
-  fcQUntypedPropertyData_delete(self.h)

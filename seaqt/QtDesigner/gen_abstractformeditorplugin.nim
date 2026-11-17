@@ -45,13 +45,10 @@ type cQDesignerFormEditorPluginInterface*{.exportc: "QDesignerFormEditorPluginIn
 
 proc fcQDesignerFormEditorPluginInterface_isInitialized(self: pointer): bool {.importc: "QDesignerFormEditorPluginInterface_isInitialized".}
 proc fcQDesignerFormEditorPluginInterface_action(self: pointer): pointer {.importc: "QDesignerFormEditorPluginInterface_action".}
-proc fcQDesignerFormEditorPluginInterface_delete(self: pointer) {.importc: "QDesignerFormEditorPluginInterface_delete".}
 
 proc isInitialized*(self: gen_abstractformeditorplugin_types.QDesignerFormEditorPluginInterface): bool =
   fcQDesignerFormEditorPluginInterface_isInitialized(self.h)
 
 proc action*(self: gen_abstractformeditorplugin_types.QDesignerFormEditorPluginInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormEditorPluginInterface_action(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormEditorPluginInterface_action(self.h), owned: false)
 
-proc delete*(self: gen_abstractformeditorplugin_types.QDesignerFormEditorPluginInterface) =
-  fcQDesignerFormEditorPluginInterface_delete(self.h)

@@ -68,7 +68,6 @@ type cQDesignerMetaDataBaseItemInterfaceVTable {.pure.} = object
   enabled*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
   setEnabled*: proc(self: pointer, b: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerMetaDataBaseItemInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerMetaDataBaseItemInterface {.importc: "QDesignerMetaDataBaseItemInterface_new".}
-proc fcQDesignerMetaDataBaseItemInterface_delete(self: pointer) {.importc: "QDesignerMetaDataBaseItemInterface_delete".}
 proc fcQDesignerMetaDataBaseInterface_metaObject(self: pointer): pointer {.importc: "QDesignerMetaDataBaseInterface_metaObject".}
 proc fcQDesignerMetaDataBaseInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerMetaDataBaseInterface_metacast".}
 proc fcQDesignerMetaDataBaseInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerMetaDataBaseInterface_metacall".}
@@ -86,7 +85,6 @@ proc fcQDesignerMetaDataBaseInterface_protectedbase_senderSignalIndex(self: poin
 proc fcQDesignerMetaDataBaseInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerMetaDataBaseInterface_protectedbase_receivers".}
 proc fcQDesignerMetaDataBaseInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerMetaDataBaseInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerMetaDataBaseInterface_staticMetaObject(): pointer {.importc: "QDesignerMetaDataBaseInterface_staticMetaObject".}
-proc fcQDesignerMetaDataBaseInterface_delete(self: pointer) {.importc: "QDesignerMetaDataBaseInterface_delete".}
 
 proc name*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInterface): string =
   let v_ms = fcQDesignerMetaDataBaseItemInterface_name(self.h)
@@ -102,7 +100,7 @@ proc tabOrder*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInt
   var vx_ret = newSeq[gen_qwidget_types.QWidget](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i])
+    vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -125,7 +123,8 @@ type QDesignerMetaDataBaseItemInterfacetabOrderProc* = proc(self: QDesignerMetaD
 type QDesignerMetaDataBaseItemInterfacesetTabOrderProc* = proc(self: QDesignerMetaDataBaseItemInterface, tabOrder: openArray[gen_qwidget_types.QWidget]): void {.raises: [], gcsafe.}
 type QDesignerMetaDataBaseItemInterfaceenabledProc* = proc(self: QDesignerMetaDataBaseItemInterface): bool {.raises: [], gcsafe.}
 type QDesignerMetaDataBaseItemInterfacesetEnabledProc* = proc(self: QDesignerMetaDataBaseItemInterface, b: bool): void {.raises: [], gcsafe.}
-type QDesignerMetaDataBaseItemInterfaceVTable* = object
+
+type QDesignerMetaDataBaseItemInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerMetaDataBaseItemInterfaceVTable
   name*: QDesignerMetaDataBaseItemInterfacenameProc
   setName*: QDesignerMetaDataBaseItemInterfacesetNameProc
@@ -158,7 +157,10 @@ proc fcQDesignerMetaDataBaseItemInterface_vtable_callback_tabOrder(self: pointer
   var virtualReturn = vtbl[].tabOrder(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -169,7 +171,7 @@ proc fcQDesignerMetaDataBaseItemInterface_vtable_callback_setTabOrder(self: poin
   var vtabOrderx_ret = newSeq[gen_qwidget_types.QWidget](int(vtabOrder_ma.len))
   let vtabOrder_outCast = cast[ptr UncheckedArray[pointer]](vtabOrder_ma.data)
   for i in 0 ..< vtabOrder_ma.len:
-    vtabOrderx_ret[i] = gen_qwidget_types.QWidget(h: vtabOrder_outCast[i])
+    vtabOrderx_ret[i] = gen_qwidget_types.QWidget(h: vtabOrder_outCast[i], owned: false)
   c_free(vtabOrder_ma.data)
   let slotval1 = vtabOrderx_ret
   vtbl[].setTabOrder(self, slotval1)
@@ -222,7 +224,10 @@ proc fcQDesignerMetaDataBaseItemInterface_method_callback_tabOrder(self: pointer
   var virtualReturn = inst.tabOrder()
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -232,7 +237,7 @@ proc fcQDesignerMetaDataBaseItemInterface_method_callback_setTabOrder(self: poin
   var vtabOrderx_ret = newSeq[gen_qwidget_types.QWidget](int(vtabOrder_ma.len))
   let vtabOrder_outCast = cast[ptr UncheckedArray[pointer]](vtabOrder_ma.data)
   for i in 0 ..< vtabOrder_ma.len:
-    vtabOrderx_ret[i] = gen_qwidget_types.QWidget(h: vtabOrder_outCast[i])
+    vtabOrderx_ret[i] = gen_qwidget_types.QWidget(h: vtabOrder_outCast[i], owned: false)
   c_free(vtabOrder_ma.data)
   let slotval1 = vtabOrderx_ret
   inst.setTabOrder(slotval1)
@@ -267,13 +272,14 @@ proc create*(T: type gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInt
     vtbl[].vtbl.enabled = fcQDesignerMetaDataBaseItemInterface_vtable_callback_enabled
   if not isNil(vtbl[].setEnabled):
     vtbl[].vtbl.setEnabled = fcQDesignerMetaDataBaseItemInterface_vtable_callback_setEnabled
-  let tmp = gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInterface(h: fcQDesignerMetaDataBaseItemInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInterface(h: fcQDesignerMetaDataBaseItemInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerMetaDataBaseItemInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerMetaDataBaseItemInterface_mvtbl = cQDesignerMetaDataBaseItemInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerMetaDataBaseItemInterface()[])](self.fcQDesignerMetaDataBaseItemInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   name: fcQDesignerMetaDataBaseItemInterface_method_callback_name,
   setName: fcQDesignerMetaDataBaseItemInterface_method_callback_setName,
@@ -289,10 +295,8 @@ proc create*(T: type gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInt
   fcQDesignerMetaDataBaseItemInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInterface) =
-  fcQDesignerMetaDataBaseItemInterface_delete(self.h)
 proc metaObject*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerMetaDataBaseInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerMetaDataBaseInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface, param1: cstring): pointer =
   fcQDesignerMetaDataBaseInterface_metacast(self.h, param1)
@@ -307,7 +311,7 @@ proc tr*(_: type gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface, 
   vx_ret
 
 proc item*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface, objectVal: gen_qobject_types.QObject): gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInterface =
-  gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInterface(h: fcQDesignerMetaDataBaseInterface_item(self.h, objectVal.h))
+  gen_abstractmetadatabase_types.QDesignerMetaDataBaseItemInterface(h: fcQDesignerMetaDataBaseInterface_item(self.h, objectVal.h), owned: false)
 
 proc add*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface, objectVal: gen_qobject_types.QObject): void =
   fcQDesignerMetaDataBaseInterface_add(self.h, objectVal.h)
@@ -320,7 +324,7 @@ proc objects*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterfac
   var vx_ret = newSeq[gen_qobject_types.QObject](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qobject_types.QObject(h: v_outCast[i])
+    vx_ret[i] = gen_qobject_types.QObject(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -355,7 +359,7 @@ proc tr*(_: type gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface, 
   vx_ret
 
 proc sender*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerMetaDataBaseInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerMetaDataBaseInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface): cint =
   fcQDesignerMetaDataBaseInterface_protectedbase_senderSignalIndex(self.h)
@@ -368,5 +372,3 @@ proc isSignalConnected*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBa
 
 proc staticMetaObject*(_: type gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerMetaDataBaseInterface_staticMetaObject())
-proc delete*(self: gen_abstractmetadatabase_types.QDesignerMetaDataBaseInterface) =
-  fcQDesignerMetaDataBaseInterface_delete(self.h)

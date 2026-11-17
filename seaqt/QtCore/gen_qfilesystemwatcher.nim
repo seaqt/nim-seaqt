@@ -98,10 +98,9 @@ proc fcQFileSystemWatcher_new2(vtbl: pointer, vdata: csize_t, paths: struct_seaq
 proc fcQFileSystemWatcher_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new3".}
 proc fcQFileSystemWatcher_new4(vtbl: pointer, vdata: csize_t, paths: struct_seaqt_array, parent: pointer): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new4".}
 proc fcQFileSystemWatcher_staticMetaObject(): pointer {.importc: "QFileSystemWatcher_staticMetaObject".}
-proc fcQFileSystemWatcher_delete(self: pointer) {.importc: "QFileSystemWatcher_delete".}
 
 proc metaObject*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQFileSystemWatcher_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFileSystemWatcher_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, param1: cstring): pointer =
   fcQFileSystemWatcher_metacast(self.h, param1)
@@ -199,7 +198,8 @@ type QFileSystemWatcherchildEventProc* = proc(self: QFileSystemWatcher, event: g
 type QFileSystemWatchercustomEventProc* = proc(self: QFileSystemWatcher, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFileSystemWatcherconnectNotifyProc* = proc(self: QFileSystemWatcher, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFileSystemWatcherdisconnectNotifyProc* = proc(self: QFileSystemWatcher, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QFileSystemWatcherVTable* = object
+
+type QFileSystemWatcherVTable* {.inheritable, pure.} = object
   vtbl: cQFileSystemWatcherVTable
   metaObject*: QFileSystemWatchermetaObjectProc
   metacast*: QFileSystemWatchermetacastProc
@@ -213,7 +213,7 @@ type QFileSystemWatcherVTable* = object
   disconnectNotify*: QFileSystemWatcherdisconnectNotifyProc
 
 proc QFileSystemWatchermetaObject*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQFileSystemWatcher_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFileSystemWatcher_virtualbase_metaObject(self.h), owned: false)
 
 proc QFileSystemWatchermetacast*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, param1: cstring): pointer =
   fcQFileSystemWatcher_virtualbase_metacast(self.h, param1)
@@ -247,7 +247,10 @@ proc fcQFileSystemWatcher_vtable_callback_metaObject(self: pointer): pointer {.c
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
   let self = QFileSystemWatcher(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFileSystemWatcher_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
@@ -268,46 +271,46 @@ proc fcQFileSystemWatcher_vtable_callback_metacall(self: pointer, param1: cint, 
 proc fcQFileSystemWatcher_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
   let self = QFileSystemWatcher(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQFileSystemWatcher_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
   let self = QFileSystemWatcher(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQFileSystemWatcher_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
   let self = QFileSystemWatcher(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQFileSystemWatcher_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
   let self = QFileSystemWatcher(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQFileSystemWatcher_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
   let self = QFileSystemWatcher(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQFileSystemWatcher_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
   let self = QFileSystemWatcher(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQFileSystemWatcher_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSystemWatcherVTable](fcQFileSystemWatcher_vdata(self)[])
   let self = QFileSystemWatcher(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQFileSystemWatcher* {.inheritable.} = ref object of QFileSystemWatcher
@@ -337,7 +340,10 @@ method disconnectNotify*(self: VirtualQFileSystemWatcher, signal: gen_qmetaobjec
 proc fcQFileSystemWatcher_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFileSystemWatcher_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
@@ -355,45 +361,45 @@ proc fcQFileSystemWatcher_method_callback_metacall(self: pointer, param1: cint, 
 
 proc fcQFileSystemWatcher_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQFileSystemWatcher_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQFileSystemWatcher_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQFileSystemWatcher_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQFileSystemWatcher_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQFileSystemWatcher_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQFileSystemWatcher_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFileSystemWatcher](fcQFileSystemWatcher_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQFileSystemWatcher_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQFileSystemWatcher_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher): cint =
   fcQFileSystemWatcher_protectedbase_senderSignalIndex(self.h)
@@ -431,7 +437,7 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
     vtbl[].vtbl.connectNotify = fcQFileSystemWatcher_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQFileSystemWatcher_vtable_callback_disconnectNotify
-  let tmp = gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQFileSystemWatcher_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
@@ -466,7 +472,7 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
     vtbl[].vtbl.connectNotify = fcQFileSystemWatcher_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQFileSystemWatcher_vtable_callback_disconnectNotify
-  let tmp = gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0]))))
+  let tmp = gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0]))), owned: true)
   fcQFileSystemWatcher_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
@@ -497,7 +503,7 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
     vtbl[].vtbl.connectNotify = fcQFileSystemWatcher_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQFileSystemWatcher_vtable_callback_disconnectNotify
-  let tmp = gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQFileSystemWatcher_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
@@ -532,13 +538,14 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
     vtbl[].vtbl.connectNotify = fcQFileSystemWatcher_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQFileSystemWatcher_vtable_callback_disconnectNotify
-  let tmp = gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])), parent.h))
+  let tmp = gen_qfilesystemwatcher_types.QFileSystemWatcher(h: fcQFileSystemWatcher_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])), parent.h), owned: true)
   fcQFileSystemWatcher_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQFileSystemWatcher_mvtbl = cQFileSystemWatcherVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQFileSystemWatcher()[])](self.fcQFileSystemWatcher_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQFileSystemWatcher_method_callback_metaObject,
   metacast: fcQFileSystemWatcher_method_callback_metacast,
@@ -592,5 +599,3 @@ proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
 
 proc staticMetaObject*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileSystemWatcher_staticMetaObject())
-proc delete*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher) =
-  fcQFileSystemWatcher_delete(self.h)

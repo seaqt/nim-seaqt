@@ -205,10 +205,9 @@ proc fcQDesignerPropertyEditorInterface_protectedbase_isSignalConnected(self: po
 proc fcQDesignerPropertyEditorInterface_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerPropertyEditorInterface {.importc: "QDesignerPropertyEditorInterface_new".}
 proc fcQDesignerPropertyEditorInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerPropertyEditorInterface {.importc: "QDesignerPropertyEditorInterface_new2".}
 proc fcQDesignerPropertyEditorInterface_staticMetaObject(): pointer {.importc: "QDesignerPropertyEditorInterface_staticMetaObject".}
-proc fcQDesignerPropertyEditorInterface_delete(self: pointer) {.importc: "QDesignerPropertyEditorInterface_delete".}
 
 proc metaObject*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerPropertyEditorInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerPropertyEditorInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, param1: cstring): pointer =
   fcQDesignerPropertyEditorInterface_metacast(self.h, param1)
@@ -226,7 +225,7 @@ proc isReadOnly*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorI
   fcQDesignerPropertyEditorInterface_isReadOnly(self.h)
 
 proc objectX*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerPropertyEditorInterface_objectX(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerPropertyEditorInterface_objectX(self.h), owned: false)
 
 proc currentPropertyName*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): string =
   let v_ms = fcQDesignerPropertyEditorInterface_currentPropertyName(self.h)
@@ -245,7 +244,7 @@ proc fcQDesignerPropertyEditorInterface_slot_callback_propertyChanged(slot: int,
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
 
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -336,7 +335,8 @@ type QDesignerPropertyEditorInterfacechildEventProc* = proc(self: QDesignerPrope
 type QDesignerPropertyEditorInterfacecustomEventProc* = proc(self: QDesignerPropertyEditorInterface, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDesignerPropertyEditorInterfaceconnectNotifyProc* = proc(self: QDesignerPropertyEditorInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDesignerPropertyEditorInterfacedisconnectNotifyProc* = proc(self: QDesignerPropertyEditorInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDesignerPropertyEditorInterfaceVTable* = object
+
+type QDesignerPropertyEditorInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerPropertyEditorInterfaceVTable
   metaObject*: QDesignerPropertyEditorInterfacemetaObjectProc
   metacast*: QDesignerPropertyEditorInterfacemetacastProc
@@ -396,7 +396,7 @@ type QDesignerPropertyEditorInterfaceVTable* = object
   disconnectNotify*: QDesignerPropertyEditorInterfacedisconnectNotifyProc
 
 proc QDesignerPropertyEditorInterfacemetaObject*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerPropertyEditorInterface_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerPropertyEditorInterface_virtualbase_metaObject(self.h), owned: false)
 
 proc QDesignerPropertyEditorInterfacemetacast*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, param1: cstring): pointer =
   fcQDesignerPropertyEditorInterface_virtualbase_metacast(self.h, param1)
@@ -411,10 +411,10 @@ proc QDesignerPropertyEditorInterfacesetVisible*(self: gen_abstractpropertyedito
   fcQDesignerPropertyEditorInterface_virtualbase_setVisible(self.h, visible)
 
 proc QDesignerPropertyEditorInterfacesizeHint*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDesignerPropertyEditorInterface_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDesignerPropertyEditorInterface_virtualbase_sizeHint(self.h), owned: true)
 
 proc QDesignerPropertyEditorInterfaceminimumSizeHint*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDesignerPropertyEditorInterface_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDesignerPropertyEditorInterface_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QDesignerPropertyEditorInterfaceheightForWidth*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, param1: cint): cint =
   fcQDesignerPropertyEditorInterface_virtualbase_heightForWidth(self.h, param1)
@@ -423,7 +423,7 @@ proc QDesignerPropertyEditorInterfacehasHeightForWidth*(self: gen_abstractproper
   fcQDesignerPropertyEditorInterface_virtualbase_hasHeightForWidth(self.h)
 
 proc QDesignerPropertyEditorInterfacepaintEngine*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDesignerPropertyEditorInterface_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQDesignerPropertyEditorInterface_virtualbase_paintEngine(self.h), owned: false)
 
 proc QDesignerPropertyEditorInterfaceevent*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, event: gen_qcoreevent_types.QEvent): bool =
   fcQDesignerPropertyEditorInterface_virtualbase_event(self.h, event.h)
@@ -513,16 +513,16 @@ proc QDesignerPropertyEditorInterfaceinitPainter*(self: gen_abstractpropertyedit
   fcQDesignerPropertyEditorInterface_virtualbase_initPainter(self.h, painter.h)
 
 proc QDesignerPropertyEditorInterfaceredirected*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDesignerPropertyEditorInterface_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDesignerPropertyEditorInterface_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QDesignerPropertyEditorInterfacesharedPainter*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDesignerPropertyEditorInterface_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQDesignerPropertyEditorInterface_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QDesignerPropertyEditorInterfaceinputMethodEvent*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQDesignerPropertyEditorInterface_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc QDesignerPropertyEditorInterfaceinputMethodQuery*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDesignerPropertyEditorInterface_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQDesignerPropertyEditorInterface_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QDesignerPropertyEditorInterfacefocusNextPrevChild*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface, next: bool): bool =
   fcQDesignerPropertyEditorInterface_virtualbase_focusNextPrevChild(self.h, next)
@@ -550,7 +550,10 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_metaObject(self: pointer
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
@@ -578,7 +581,10 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_objectX(self: pointer): 
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
   var virtualReturn = vtbl[].objectX(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_currentPropertyName(self: pointer): struct_seaqt_string {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
@@ -591,7 +597,7 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_currentPropertyName(self
 proc fcQDesignerPropertyEditorInterface_vtable_callback_setObject(self: pointer, objectVal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   vtbl[].setObject(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_setPropertyValue(self: pointer, name: struct_seaqt_string, value: pointer, changed: bool): void {.cdecl.} =
@@ -601,7 +607,7 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_setPropertyValue(self: p
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = changed
   vtbl[].setPropertyValue(self, slotval1, slotval2, slotval3)
 
@@ -627,13 +633,19 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_sizeHint(self: pointer):
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
@@ -652,157 +664,160 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_paintEngine(self: pointe
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -820,7 +835,7 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_nativeEvent(self: pointe
 proc fcQDesignerPropertyEditorInterface_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
@@ -833,26 +848,32 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_metric(self: pointer, pa
 proc fcQDesignerPropertyEditorInterface_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
@@ -860,7 +881,10 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_inputMethodQuery(self: p
   let self = QDesignerPropertyEditorInterface(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
@@ -872,39 +896,39 @@ proc fcQDesignerPropertyEditorInterface_vtable_callback_focusNextPrevChild(self:
 proc fcQDesignerPropertyEditorInterface_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQDesignerPropertyEditorInterface_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerPropertyEditorInterfaceVTable](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let self = QDesignerPropertyEditorInterface(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQDesignerPropertyEditorInterface* {.inheritable.} = ref object of QDesignerPropertyEditorInterface
@@ -1026,7 +1050,10 @@ method disconnectNotify*(self: VirtualQDesignerPropertyEditorInterface, signal: 
 proc fcQDesignerPropertyEditorInterface_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
@@ -1050,7 +1077,10 @@ proc fcQDesignerPropertyEditorInterface_method_callback_isReadOnly(self: pointer
 proc fcQDesignerPropertyEditorInterface_method_callback_objectX(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
   var virtualReturn = inst.objectX()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_method_callback_currentPropertyName(self: pointer): struct_seaqt_string {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
@@ -1061,7 +1091,7 @@ proc fcQDesignerPropertyEditorInterface_method_callback_currentPropertyName(self
 
 proc fcQDesignerPropertyEditorInterface_method_callback_setObject(self: pointer, objectVal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   inst.setObject(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_setPropertyValue(self: pointer, name: struct_seaqt_string, value: pointer, changed: bool): void {.cdecl.} =
@@ -1070,7 +1100,7 @@ proc fcQDesignerPropertyEditorInterface_method_callback_setPropertyValue(self: p
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = changed
   inst.setPropertyValue(slotval1, slotval2, slotval3)
 
@@ -1092,12 +1122,18 @@ proc fcQDesignerPropertyEditorInterface_method_callback_setVisible(self: pointer
 proc fcQDesignerPropertyEditorInterface_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
@@ -1113,132 +1149,135 @@ proc fcQDesignerPropertyEditorInterface_method_callback_hasHeightForWidth(self: 
 proc fcQDesignerPropertyEditorInterface_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQDesignerPropertyEditorInterface_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1254,7 +1293,7 @@ proc fcQDesignerPropertyEditorInterface_method_callback_nativeEvent(self: pointe
 
 proc fcQDesignerPropertyEditorInterface_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
@@ -1265,30 +1304,39 @@ proc fcQDesignerPropertyEditorInterface_method_callback_metric(self: pointer, pa
 
 proc fcQDesignerPropertyEditorInterface_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerPropertyEditorInterface_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
@@ -1298,34 +1346,34 @@ proc fcQDesignerPropertyEditorInterface_method_callback_focusNextPrevChild(self:
 
 proc fcQDesignerPropertyEditorInterface_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQDesignerPropertyEditorInterface_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQDesignerPropertyEditorInterface_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerPropertyEditorInterface](fcQDesignerPropertyEditorInterface_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1345,7 +1393,7 @@ proc focusPreviousChild*(self: gen_abstractpropertyeditor_types.QDesignerPropert
   fcQDesignerPropertyEditorInterface_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerPropertyEditorInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerPropertyEditorInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): cint =
   fcQDesignerPropertyEditorInterface_protectedbase_senderSignalIndex(self.h)
@@ -1476,7 +1524,7 @@ proc create*(T: type gen_abstractpropertyeditor_types.QDesignerPropertyEditorInt
     vtbl[].vtbl.connectNotify = fcQDesignerPropertyEditorInterface_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDesignerPropertyEditorInterface_vtable_callback_disconnectNotify
-  let tmp = gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface(h: fcQDesignerPropertyEditorInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface(h: fcQDesignerPropertyEditorInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQDesignerPropertyEditorInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface,
@@ -1599,13 +1647,14 @@ proc create*(T: type gen_abstractpropertyeditor_types.QDesignerPropertyEditorInt
     vtbl[].vtbl.connectNotify = fcQDesignerPropertyEditorInterface_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDesignerPropertyEditorInterface_vtable_callback_disconnectNotify
-  let tmp = gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface(h: fcQDesignerPropertyEditorInterface_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)))
+  let tmp = gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface(h: fcQDesignerPropertyEditorInterface_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)), owned: true)
   fcQDesignerPropertyEditorInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerPropertyEditorInterface_mvtbl = cQDesignerPropertyEditorInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerPropertyEditorInterface()[])](self.fcQDesignerPropertyEditorInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQDesignerPropertyEditorInterface_method_callback_metaObject,
   metacast: fcQDesignerPropertyEditorInterface_method_callback_metacast,
@@ -1682,5 +1731,3 @@ proc create*(T: type gen_abstractpropertyeditor_types.QDesignerPropertyEditorInt
 
 proc staticMetaObject*(_: type gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerPropertyEditorInterface_staticMetaObject())
-proc delete*(self: gen_abstractpropertyeditor_types.QDesignerPropertyEditorInterface) =
-  fcQDesignerPropertyEditorInterface_delete(self.h)

@@ -1,4 +1,4 @@
-type QByteArrayMatcher* {.inheritable, pure.} = object
+type QByteArrayMatcher* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QByteArrayMatcher) =
   wasMoved(self)
   fcQByteArrayMatcher_delete(h)
 
-type QStaticByteArrayMatcherBase* {.inheritable, pure.} = object
+type QStaticByteArrayMatcherBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

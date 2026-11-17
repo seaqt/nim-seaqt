@@ -1,4 +1,4 @@
-type QWebSocketCorsAuthenticator* {.inheritable, pure.} = object
+type QWebSocketCorsAuthenticator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

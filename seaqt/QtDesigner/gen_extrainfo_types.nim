@@ -1,4 +1,4 @@
-type QDesignerExtraInfoExtension* {.inheritable, pure.} = object
+type QDesignerExtraInfoExtension* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

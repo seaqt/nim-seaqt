@@ -1,4 +1,4 @@
-type QPrinterInfo* {.inheritable, pure.} = object
+type QPrinterInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

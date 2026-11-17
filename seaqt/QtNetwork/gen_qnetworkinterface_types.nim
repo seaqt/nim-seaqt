@@ -1,4 +1,4 @@
-type QNetworkAddressEntry* {.inheritable, pure.} = object
+type QNetworkAddressEntry* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QNetworkAddressEntry) =
   wasMoved(self)
   fcQNetworkAddressEntry_delete(h)
 
-type QNetworkInterface* {.inheritable, pure.} = object
+type QNetworkInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

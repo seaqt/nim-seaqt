@@ -1,4 +1,4 @@
-type QUntypedPropertyData* {.inheritable, pure.} = object
+type QUntypedPropertyData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

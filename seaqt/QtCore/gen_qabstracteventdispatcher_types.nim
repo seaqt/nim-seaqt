@@ -9,7 +9,7 @@ proc `=sink`(dest: var QAbstractEventDispatcher, source: QAbstractEventDispatche
   dest.h = source.h
   dest.owned = source.owned
 
-type QAbstractEventDispatcherTimerInfo* {.inheritable, pure.} = object
+type QAbstractEventDispatcherTimerInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

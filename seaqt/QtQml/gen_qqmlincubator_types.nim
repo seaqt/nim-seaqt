@@ -1,4 +1,4 @@
-type QQmlIncubator* {.inheritable, pure.} = object
+type QQmlIncubator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QQmlIncubator) =
   wasMoved(self)
   fcQQmlIncubator_delete(h)
 
-type QQmlIncubationController* {.inheritable, pure.} = object
+type QQmlIncubationController* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

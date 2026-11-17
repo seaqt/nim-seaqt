@@ -1,4 +1,4 @@
-type QMessageAuthenticationCode* {.inheritable, pure.} = object
+type QMessageAuthenticationCode* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

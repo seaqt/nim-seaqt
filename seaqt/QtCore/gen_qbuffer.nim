@@ -140,10 +140,9 @@ proc fcQBuffer_protectedbase_isSignalConnected(self: pointer, signal: pointer): 
 proc fcQBuffer_new(vtbl: pointer, vdata: csize_t): ptr cQBuffer {.importc: "QBuffer_new".}
 proc fcQBuffer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQBuffer {.importc: "QBuffer_new2".}
 proc fcQBuffer_staticMetaObject(): pointer {.importc: "QBuffer_staticMetaObject".}
-proc fcQBuffer_delete(self: pointer) {.importc: "QBuffer_delete".}
 
 proc metaObject*(self: gen_qbuffer_types.QBuffer): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qbuffer_types.QBuffer, param1: cstring): pointer =
   fcQBuffer_metacast(self.h, param1)
@@ -241,7 +240,8 @@ type QBuffereventFilterProc* = proc(self: QBuffer, watched: gen_qobject_types.QO
 type QBuffertimerEventProc* = proc(self: QBuffer, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
 type QBufferchildEventProc* = proc(self: QBuffer, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
 type QBuffercustomEventProc* = proc(self: QBuffer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
-type QBufferVTable* = object
+
+type QBufferVTable* {.inheritable, pure.} = object
   vtbl: cQBufferVTable
   metaObject*: QBuffermetaObjectProc
   metacast*: QBuffermetacastProc
@@ -272,7 +272,7 @@ type QBufferVTable* = object
   customEvent*: QBuffercustomEventProc
 
 proc QBuffermetaObject*(self: gen_qbuffer_types.QBuffer): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_virtualbase_metaObject(self.h), owned: false)
 
 proc QBuffermetacast*(self: gen_qbuffer_types.QBuffer, param1: cstring): pointer =
   fcQBuffer_virtualbase_metacast(self.h, param1)
@@ -357,7 +357,10 @@ proc fcQBuffer_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
   let self = QBuffer(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQBuffer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
@@ -421,13 +424,13 @@ proc fcQBuffer_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
 proc fcQBuffer_vtable_callback_connectNotify(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
   let self = QBuffer(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQBuffer_vtable_callback_disconnectNotify(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
   let self = QBuffer(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc fcQBuffer_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
@@ -502,34 +505,34 @@ proc fcQBuffer_vtable_callback_skipData(self: pointer, maxSize: clonglong): clon
 proc fcQBuffer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
   let self = QBuffer(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQBuffer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
   let self = QBuffer(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQBuffer_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
   let self = QBuffer(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQBuffer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
   let self = QBuffer(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQBuffer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBufferVTable](fcQBuffer_vdata(self)[])
   let self = QBuffer(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 type VirtualQBuffer* {.inheritable.} = ref object of QBuffer
@@ -593,7 +596,10 @@ method customEvent*(self: VirtualQBuffer, event: gen_qcoreevent_types.QEvent): v
 proc fcQBuffer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQBuffer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
@@ -647,12 +653,12 @@ proc fcQBuffer_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
 
 proc fcQBuffer_method_callback_connectNotify(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQBuffer_method_callback_disconnectNotify(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1, owned: false)
   inst.disconnectNotify(slotval1)
 
 proc fcQBuffer_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
@@ -716,30 +722,30 @@ proc fcQBuffer_method_callback_skipData(self: pointer, maxSize: clonglong): clon
 
 proc fcQBuffer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQBuffer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQBuffer_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQBuffer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQBuffer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQBuffer](fcQBuffer_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 
@@ -750,7 +756,7 @@ proc setErrorString*(self: gen_qbuffer_types.QBuffer, errorString: openArray[cha
   fcQBuffer_protectedbase_setErrorString(self.h, struct_seaqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qbuffer_types.QBuffer): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQBuffer_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQBuffer_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qbuffer_types.QBuffer): cint =
   fcQBuffer_protectedbase_senderSignalIndex(self.h)
@@ -822,7 +828,7 @@ proc create*(T: type gen_qbuffer_types.QBuffer,
     vtbl[].vtbl.childEvent = fcQBuffer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = fcQBuffer_vtable_callback_customEvent
-  let tmp = gen_qbuffer_types.QBuffer(h: fcQBuffer_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qbuffer_types.QBuffer(h: fcQBuffer_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQBuffer_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qbuffer_types.QBuffer,
@@ -887,13 +893,14 @@ proc create*(T: type gen_qbuffer_types.QBuffer,
     vtbl[].vtbl.childEvent = fcQBuffer_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = fcQBuffer_vtable_callback_customEvent
-  let tmp = gen_qbuffer_types.QBuffer(h: fcQBuffer_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qbuffer_types.QBuffer(h: fcQBuffer_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQBuffer_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQBuffer_mvtbl = cQBufferVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQBuffer()[])](self.fcQBuffer_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQBuffer_method_callback_metaObject,
   metacast: fcQBuffer_method_callback_metacast,
@@ -940,5 +947,3 @@ proc create*(T: type gen_qbuffer_types.QBuffer,
 
 proc staticMetaObject*(_: type gen_qbuffer_types.QBuffer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_staticMetaObject())
-proc delete*(self: gen_qbuffer_types.QBuffer) =
-  fcQBuffer_delete(self.h)

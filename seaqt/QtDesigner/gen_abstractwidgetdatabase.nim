@@ -112,7 +112,6 @@ type cQDesignerWidgetDataBaseItemInterfaceVTable {.pure.} = object
   setDefaultPropertyValues*: proc(self: pointer, list: struct_seaqt_array): void {.cdecl, raises: [], gcsafe.}
   defaultPropertyValues*: proc(self: pointer): struct_seaqt_array {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerWidgetDataBaseItemInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerWidgetDataBaseItemInterface {.importc: "QDesignerWidgetDataBaseItemInterface_new".}
-proc fcQDesignerWidgetDataBaseItemInterface_delete(self: pointer) {.importc: "QDesignerWidgetDataBaseItemInterface_delete".}
 proc fcQDesignerWidgetDataBaseInterface_metaObject(self: pointer): pointer {.importc: "QDesignerWidgetDataBaseInterface_metaObject".}
 proc fcQDesignerWidgetDataBaseInterface_metacast(self: pointer, param1: cstring): pointer {.importc: "QDesignerWidgetDataBaseInterface_metacast".}
 proc fcQDesignerWidgetDataBaseInterface_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDesignerWidgetDataBaseInterface_metacall".}
@@ -178,7 +177,6 @@ proc fcQDesignerWidgetDataBaseInterface_protectedbase_isSignalConnected(self: po
 proc fcQDesignerWidgetDataBaseInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerWidgetDataBaseInterface {.importc: "QDesignerWidgetDataBaseInterface_new".}
 proc fcQDesignerWidgetDataBaseInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerWidgetDataBaseInterface {.importc: "QDesignerWidgetDataBaseInterface_new2".}
 proc fcQDesignerWidgetDataBaseInterface_staticMetaObject(): pointer {.importc: "QDesignerWidgetDataBaseInterface_staticMetaObject".}
-proc fcQDesignerWidgetDataBaseInterface_delete(self: pointer) {.importc: "QDesignerWidgetDataBaseInterface_delete".}
 
 proc name*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface): string =
   let v_ms = fcQDesignerWidgetDataBaseItemInterface_name(self.h)
@@ -226,7 +224,7 @@ proc setIncludeFile*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataB
   fcQDesignerWidgetDataBaseItemInterface_setIncludeFile(self.h, struct_seaqt_string(data: if len(includeFile) > 0: addr includeFile[0] else: nil, len: csize_t(len(includeFile))))
 
 proc icon*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQDesignerWidgetDataBaseItemInterface_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQDesignerWidgetDataBaseItemInterface_icon(self.h), owned: true)
 
 proc setIcon*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface, icon: gen_qicon_types.QIcon): void =
   fcQDesignerWidgetDataBaseItemInterface_setIcon(self.h, icon.h)
@@ -285,7 +283,7 @@ proc defaultPropertyValues*(self: gen_abstractwidgetdatabase_types.QDesignerWidg
   var vx_ret = newSeq[gen_qvariant_types.QVariant](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i])
+    vx_ret[i] = gen_qvariant_types.QVariant(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -315,7 +313,8 @@ type QDesignerWidgetDataBaseItemInterfaceextendsProc* = proc(self: QDesignerWidg
 type QDesignerWidgetDataBaseItemInterfacesetExtendsProc* = proc(self: QDesignerWidgetDataBaseItemInterface, s: openArray[char]): void {.raises: [], gcsafe.}
 type QDesignerWidgetDataBaseItemInterfacesetDefaultPropertyValuesProc* = proc(self: QDesignerWidgetDataBaseItemInterface, list: openArray[gen_qvariant_types.QVariant]): void {.raises: [], gcsafe.}
 type QDesignerWidgetDataBaseItemInterfacedefaultPropertyValuesProc* = proc(self: QDesignerWidgetDataBaseItemInterface): seq[gen_qvariant_types.QVariant] {.raises: [], gcsafe.}
-type QDesignerWidgetDataBaseItemInterfaceVTable* = object
+
+type QDesignerWidgetDataBaseItemInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerWidgetDataBaseItemInterfaceVTable
   name*: QDesignerWidgetDataBaseItemInterfacenameProc
   setName*: QDesignerWidgetDataBaseItemInterfacesetNameProc
@@ -434,12 +433,15 @@ proc fcQDesignerWidgetDataBaseItemInterface_vtable_callback_icon(self: pointer):
   let vtbl = cast[ptr QDesignerWidgetDataBaseItemInterfaceVTable](fcQDesignerWidgetDataBaseItemInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseItemInterface(h: self)
   var virtualReturn = vtbl[].icon(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerWidgetDataBaseItemInterface_vtable_callback_setIcon(self: pointer, icon: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseItemInterfaceVTable](fcQDesignerWidgetDataBaseItemInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseItemInterface(h: self)
-  let slotval1 = gen_qicon_types.QIcon(h: icon)
+  let slotval1 = gen_qicon_types.QIcon(h: icon, owned: false)
   vtbl[].setIcon(self, slotval1)
 
 proc fcQDesignerWidgetDataBaseItemInterface_vtable_callback_isCompat(self: pointer): bool {.cdecl.} =
@@ -531,7 +533,7 @@ proc fcQDesignerWidgetDataBaseItemInterface_vtable_callback_setDefaultPropertyVa
   var vlistx_ret = newSeq[gen_qvariant_types.QVariant](int(vlist_ma.len))
   let vlist_outCast = cast[ptr UncheckedArray[pointer]](vlist_ma.data)
   for i in 0 ..< vlist_ma.len:
-    vlistx_ret[i] = gen_qvariant_types.QVariant(h: vlist_outCast[i])
+    vlistx_ret[i] = gen_qvariant_types.QVariant(h: vlist_outCast[i], owned: true)
   c_free(vlist_ma.data)
   let slotval1 = vlistx_ret
   vtbl[].setDefaultPropertyValues(self, slotval1)
@@ -542,7 +544,10 @@ proc fcQDesignerWidgetDataBaseItemInterface_vtable_callback_defaultPropertyValue
   var virtualReturn = vtbl[].defaultPropertyValues(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -680,11 +685,14 @@ proc fcQDesignerWidgetDataBaseItemInterface_method_callback_setIncludeFile(self:
 proc fcQDesignerWidgetDataBaseItemInterface_method_callback_icon(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseItemInterface](fcQDesignerWidgetDataBaseItemInterface_vdata(self)[])
   var virtualReturn = inst.icon()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerWidgetDataBaseItemInterface_method_callback_setIcon(self: pointer, icon: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseItemInterface](fcQDesignerWidgetDataBaseItemInterface_vdata(self)[])
-  let slotval1 = gen_qicon_types.QIcon(h: icon)
+  let slotval1 = gen_qicon_types.QIcon(h: icon, owned: false)
   inst.setIcon(slotval1)
 
 proc fcQDesignerWidgetDataBaseItemInterface_method_callback_isCompat(self: pointer): bool {.cdecl.} =
@@ -763,7 +771,7 @@ proc fcQDesignerWidgetDataBaseItemInterface_method_callback_setDefaultPropertyVa
   var vlistx_ret = newSeq[gen_qvariant_types.QVariant](int(vlist_ma.len))
   let vlist_outCast = cast[ptr UncheckedArray[pointer]](vlist_ma.data)
   for i in 0 ..< vlist_ma.len:
-    vlistx_ret[i] = gen_qvariant_types.QVariant(h: vlist_outCast[i])
+    vlistx_ret[i] = gen_qvariant_types.QVariant(h: vlist_outCast[i], owned: true)
   c_free(vlist_ma.data)
   let slotval1 = vlistx_ret
   inst.setDefaultPropertyValues(slotval1)
@@ -773,7 +781,10 @@ proc fcQDesignerWidgetDataBaseItemInterface_method_callback_defaultPropertyValue
   var virtualReturn = inst.defaultPropertyValues()
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -837,13 +848,14 @@ proc create*(T: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseIte
     vtbl[].vtbl.setDefaultPropertyValues = fcQDesignerWidgetDataBaseItemInterface_vtable_callback_setDefaultPropertyValues
   if not isNil(vtbl[].defaultPropertyValues):
     vtbl[].vtbl.defaultPropertyValues = fcQDesignerWidgetDataBaseItemInterface_vtable_callback_defaultPropertyValues
-  let tmp = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerWidgetDataBaseItemInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerWidgetDataBaseItemInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerWidgetDataBaseItemInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerWidgetDataBaseItemInterface_mvtbl = cQDesignerWidgetDataBaseItemInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerWidgetDataBaseItemInterface()[])](self.fcQDesignerWidgetDataBaseItemInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   name: fcQDesignerWidgetDataBaseItemInterface_method_callback_name,
   setName: fcQDesignerWidgetDataBaseItemInterface_method_callback_setName,
@@ -879,10 +891,8 @@ proc create*(T: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseIte
   fcQDesignerWidgetDataBaseItemInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface) =
-  fcQDesignerWidgetDataBaseItemInterface_delete(self.h)
 proc metaObject*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetDataBaseInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetDataBaseInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, param1: cstring): pointer =
   fcQDesignerWidgetDataBaseInterface_metacast(self.h, param1)
@@ -900,7 +910,7 @@ proc count*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterf
   fcQDesignerWidgetDataBaseInterface_count(self.h)
 
 proc item*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, index: cint): gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface =
-  gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerWidgetDataBaseInterface_item(self.h, index))
+  gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerWidgetDataBaseInterface_item(self.h, index), owned: false)
 
 proc indexOf*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, item: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface): cint =
   fcQDesignerWidgetDataBaseInterface_indexOf(self.h, item.h)
@@ -976,7 +986,8 @@ type QDesignerWidgetDataBaseInterfacechildEventProc* = proc(self: QDesignerWidge
 type QDesignerWidgetDataBaseInterfacecustomEventProc* = proc(self: QDesignerWidgetDataBaseInterface, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDesignerWidgetDataBaseInterfaceconnectNotifyProc* = proc(self: QDesignerWidgetDataBaseInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDesignerWidgetDataBaseInterfacedisconnectNotifyProc* = proc(self: QDesignerWidgetDataBaseInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDesignerWidgetDataBaseInterfaceVTable* = object
+
+type QDesignerWidgetDataBaseInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerWidgetDataBaseInterfaceVTable
   metaObject*: QDesignerWidgetDataBaseInterfacemetaObjectProc
   metacast*: QDesignerWidgetDataBaseInterfacemetacastProc
@@ -997,7 +1008,7 @@ type QDesignerWidgetDataBaseInterfaceVTable* = object
   disconnectNotify*: QDesignerWidgetDataBaseInterfacedisconnectNotifyProc
 
 proc QDesignerWidgetDataBaseInterfacemetaObject*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetDataBaseInterface_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetDataBaseInterface_virtualbase_metaObject(self.h), owned: false)
 
 proc QDesignerWidgetDataBaseInterfacemetacast*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, param1: cstring): pointer =
   fcQDesignerWidgetDataBaseInterface_virtualbase_metacast(self.h, param1)
@@ -1009,7 +1020,7 @@ proc QDesignerWidgetDataBaseInterfacecount*(self: gen_abstractwidgetdatabase_typ
   fcQDesignerWidgetDataBaseInterface_virtualbase_count(self.h)
 
 proc QDesignerWidgetDataBaseInterfaceitem*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, index: cint): gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface =
-  gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerWidgetDataBaseInterface_virtualbase_item(self.h, index))
+  gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerWidgetDataBaseInterface_virtualbase_item(self.h, index), owned: false)
 
 proc QDesignerWidgetDataBaseInterfaceindexOf*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface, item: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface): cint =
   fcQDesignerWidgetDataBaseInterface_virtualbase_indexOf(self.h, item.h)
@@ -1052,7 +1063,10 @@ proc fcQDesignerWidgetDataBaseInterface_vtable_callback_metaObject(self: pointer
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
@@ -1081,12 +1095,15 @@ proc fcQDesignerWidgetDataBaseInterface_vtable_callback_item(self: pointer, inde
   let self = QDesignerWidgetDataBaseInterface(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].item(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_indexOf(self: pointer, item: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item)
+  let slotval1 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
@@ -1094,19 +1111,19 @@ proc fcQDesignerWidgetDataBaseInterface_vtable_callback_insert(self: pointer, in
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
   let slotval1 = index
-  let slotval2 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item)
+  let slotval2 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item, owned: false)
   vtbl[].insert(self, slotval1, slotval2)
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_append(self: pointer, item: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item)
+  let slotval1 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item, owned: false)
   vtbl[].append(self, slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_indexOfObject(self: pointer, objectVal: pointer, resolveName: bool): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let slotval2 = resolveName
   var virtualReturn = vtbl[].indexOfObject(self, slotval1, slotval2)
   virtualReturn
@@ -1125,46 +1142,46 @@ proc fcQDesignerWidgetDataBaseInterface_vtable_callback_indexOfClassName(self: p
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerWidgetDataBaseInterfaceVTable](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let self = QDesignerWidgetDataBaseInterface(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQDesignerWidgetDataBaseInterface* {.inheritable.} = ref object of QDesignerWidgetDataBaseInterface
@@ -1208,7 +1225,10 @@ method disconnectNotify*(self: VirtualQDesignerWidgetDataBaseInterface, signal: 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
@@ -1233,28 +1253,31 @@ proc fcQDesignerWidgetDataBaseInterface_method_callback_item(self: pointer, inde
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.item(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_indexOf(self: pointer, item: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item)
+  let slotval1 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item, owned: false)
   var virtualReturn = inst.indexOf(slotval1)
   virtualReturn
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_insert(self: pointer, index: cint, item: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
   let slotval1 = index
-  let slotval2 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item)
+  let slotval2 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item, owned: false)
   inst.insert(slotval1, slotval2)
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_append(self: pointer, item: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item)
+  let slotval1 = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: item, owned: false)
   inst.append(slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_indexOfObject(self: pointer, objectVal: pointer, resolveName: bool): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let slotval2 = resolveName
   var virtualReturn = inst.indexOfObject(slotval1, slotval2)
   virtualReturn
@@ -1271,45 +1294,45 @@ proc fcQDesignerWidgetDataBaseInterface_method_callback_indexOfClassName(self: p
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQDesignerWidgetDataBaseInterface_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerWidgetDataBaseInterface](fcQDesignerWidgetDataBaseInterface_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerWidgetDataBaseInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerWidgetDataBaseInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface): cint =
   fcQDesignerWidgetDataBaseInterface_protectedbase_senderSignalIndex(self.h)
@@ -1361,7 +1384,7 @@ proc create*(T: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInt
     vtbl[].vtbl.connectNotify = fcQDesignerWidgetDataBaseInterface_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDesignerWidgetDataBaseInterface_vtable_callback_disconnectNotify
-  let tmp = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface(h: fcQDesignerWidgetDataBaseInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface(h: fcQDesignerWidgetDataBaseInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerWidgetDataBaseInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface,
@@ -1406,13 +1429,14 @@ proc create*(T: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInt
     vtbl[].vtbl.connectNotify = fcQDesignerWidgetDataBaseInterface_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDesignerWidgetDataBaseInterface_vtable_callback_disconnectNotify
-  let tmp = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface(h: fcQDesignerWidgetDataBaseInterface_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface(h: fcQDesignerWidgetDataBaseInterface_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQDesignerWidgetDataBaseInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerWidgetDataBaseInterface_mvtbl = cQDesignerWidgetDataBaseInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerWidgetDataBaseInterface()[])](self.fcQDesignerWidgetDataBaseInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQDesignerWidgetDataBaseInterface_method_callback_metaObject,
   metacast: fcQDesignerWidgetDataBaseInterface_method_callback_metacast,
@@ -1449,5 +1473,3 @@ proc create*(T: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInt
 
 proc staticMetaObject*(_: type gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerWidgetDataBaseInterface_staticMetaObject())
-proc delete*(self: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseInterface) =
-  fcQDesignerWidgetDataBaseInterface_delete(self.h)

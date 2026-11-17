@@ -171,10 +171,9 @@ proc fcQImageCapture_protectedbase_isSignalConnected(self: pointer, signal: poin
 proc fcQImageCapture_new(vtbl: pointer, vdata: csize_t): ptr cQImageCapture {.importc: "QImageCapture_new".}
 proc fcQImageCapture_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQImageCapture {.importc: "QImageCapture_new2".}
 proc fcQImageCapture_staticMetaObject(): pointer {.importc: "QImageCapture_staticMetaObject".}
-proc fcQImageCapture_delete(self: pointer) {.importc: "QImageCapture_delete".}
 
 proc metaObject*(self: gen_qimagecapture_types.QImageCapture): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQImageCapture_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQImageCapture_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qimagecapture_types.QImageCapture, param1: cstring): pointer =
   fcQImageCapture_metacast(self.h, param1)
@@ -192,7 +191,7 @@ proc isAvailable*(self: gen_qimagecapture_types.QImageCapture): bool =
   fcQImageCapture_isAvailable(self.h)
 
 proc captureSession*(self: gen_qimagecapture_types.QImageCapture): gen_qmediacapturesession_types.QMediaCaptureSession =
-  gen_qmediacapturesession_types.QMediaCaptureSession(h: fcQImageCapture_captureSession(self.h))
+  gen_qmediacapturesession_types.QMediaCaptureSession(h: fcQImageCapture_captureSession(self.h), owned: false)
 
 proc error*(self: gen_qimagecapture_types.QImageCapture): cint =
   cint(fcQImageCapture_error(self.h))
@@ -234,7 +233,7 @@ proc fileFormatDescription*(_: type gen_qimagecapture_types.QImageCapture, c: ci
   vx_ret
 
 proc resolution*(self: gen_qimagecapture_types.QImageCapture): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQImageCapture_resolution(self.h))
+  gen_qsize_types.QSize(h: fcQImageCapture_resolution(self.h), owned: true)
 
 proc setResolution*(self: gen_qimagecapture_types.QImageCapture, resolution: gen_qsize_types.QSize): void =
   fcQImageCapture_setResolution(self.h, resolution.h)
@@ -249,7 +248,7 @@ proc setQuality*(self: gen_qimagecapture_types.QImageCapture, quality: cint): vo
   fcQImageCapture_setQuality(self.h, cint(quality))
 
 proc metaData*(self: gen_qimagecapture_types.QImageCapture): gen_qmediametadata_types.QMediaMetaData =
-  gen_qmediametadata_types.QMediaMetaData(h: fcQImageCapture_metaData(self.h))
+  gen_qmediametadata_types.QMediaMetaData(h: fcQImageCapture_metaData(self.h), owned: true)
 
 proc setMetaData*(self: gen_qimagecapture_types.QImageCapture, metaData: gen_qmediametadata_types.QMediaMetaData): void =
   fcQImageCapture_setMetaData(self.h, metaData.h)
@@ -428,7 +427,7 @@ proc fcQImageCapture_slot_callback_imageCaptured(slot: int, id: cint, preview: p
   let nimfunc = cast[ptr QImageCaptureimageCapturedSlot](cast[pointer](slot))
   let slotval1 = id
 
-  let slotval2 = gen_qimage_types.QImage(h: preview)
+  let slotval2 = gen_qimage_types.QImage(h: preview, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -450,7 +449,7 @@ proc fcQImageCapture_slot_callback_imageMetadataAvailable(slot: int, id: cint, m
   let nimfunc = cast[ptr QImageCaptureimageMetadataAvailableSlot](cast[pointer](slot))
   let slotval1 = id
 
-  let slotval2 = gen_qmediametadata_types.QMediaMetaData(h: metaData)
+  let slotval2 = gen_qmediametadata_types.QMediaMetaData(h: metaData, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -472,7 +471,7 @@ proc fcQImageCapture_slot_callback_imageAvailable(slot: int, id: cint, frame: po
   let nimfunc = cast[ptr QImageCaptureimageAvailableSlot](cast[pointer](slot))
   let slotval1 = id
 
-  let slotval2 = gen_qvideoframe_types.QVideoFrame(h: frame)
+  let slotval2 = gen_qvideoframe_types.QVideoFrame(h: frame, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -536,7 +535,8 @@ type QImageCapturechildEventProc* = proc(self: QImageCapture, event: gen_qcoreev
 type QImageCapturecustomEventProc* = proc(self: QImageCapture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QImageCaptureconnectNotifyProc* = proc(self: QImageCapture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QImageCapturedisconnectNotifyProc* = proc(self: QImageCapture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QImageCaptureVTable* = object
+
+type QImageCaptureVTable* {.inheritable, pure.} = object
   vtbl: cQImageCaptureVTable
   metaObject*: QImageCapturemetaObjectProc
   metacast*: QImageCapturemetacastProc
@@ -550,7 +550,7 @@ type QImageCaptureVTable* = object
   disconnectNotify*: QImageCapturedisconnectNotifyProc
 
 proc QImageCapturemetaObject*(self: gen_qimagecapture_types.QImageCapture): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQImageCapture_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQImageCapture_virtualbase_metaObject(self.h), owned: false)
 
 proc QImageCapturemetacast*(self: gen_qimagecapture_types.QImageCapture, param1: cstring): pointer =
   fcQImageCapture_virtualbase_metacast(self.h, param1)
@@ -584,7 +584,10 @@ proc fcQImageCapture_vtable_callback_metaObject(self: pointer): pointer {.cdecl.
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
   let self = QImageCapture(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageCapture_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
@@ -605,46 +608,46 @@ proc fcQImageCapture_vtable_callback_metacall(self: pointer, param1: cint, param
 proc fcQImageCapture_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
   let self = QImageCapture(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQImageCapture_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
   let self = QImageCapture(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQImageCapture_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
   let self = QImageCapture(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQImageCapture_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
   let self = QImageCapture(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQImageCapture_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
   let self = QImageCapture(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQImageCapture_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
   let self = QImageCapture(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQImageCapture_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QImageCaptureVTable](fcQImageCapture_vdata(self)[])
   let self = QImageCapture(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQImageCapture* {.inheritable.} = ref object of QImageCapture
@@ -674,7 +677,10 @@ method disconnectNotify*(self: VirtualQImageCapture, signal: gen_qmetaobject_typ
 proc fcQImageCapture_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQImageCapture_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
@@ -692,45 +698,45 @@ proc fcQImageCapture_method_callback_metacall(self: pointer, param1: cint, param
 
 proc fcQImageCapture_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQImageCapture_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQImageCapture_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQImageCapture_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQImageCapture_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQImageCapture_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQImageCapture_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQImageCapture](fcQImageCapture_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qimagecapture_types.QImageCapture): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQImageCapture_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQImageCapture_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qimagecapture_types.QImageCapture): cint =
   fcQImageCapture_protectedbase_senderSignalIndex(self.h)
@@ -768,7 +774,7 @@ proc create*(T: type gen_qimagecapture_types.QImageCapture,
     vtbl[].vtbl.connectNotify = fcQImageCapture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQImageCapture_vtable_callback_disconnectNotify
-  let tmp = gen_qimagecapture_types.QImageCapture(h: fcQImageCapture_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qimagecapture_types.QImageCapture(h: fcQImageCapture_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQImageCapture_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qimagecapture_types.QImageCapture,
@@ -799,13 +805,14 @@ proc create*(T: type gen_qimagecapture_types.QImageCapture,
     vtbl[].vtbl.connectNotify = fcQImageCapture_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQImageCapture_vtable_callback_disconnectNotify
-  let tmp = gen_qimagecapture_types.QImageCapture(h: fcQImageCapture_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qimagecapture_types.QImageCapture(h: fcQImageCapture_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQImageCapture_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQImageCapture_mvtbl = cQImageCaptureVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQImageCapture()[])](self.fcQImageCapture_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQImageCapture_method_callback_metaObject,
   metacast: fcQImageCapture_method_callback_metacast,
@@ -835,5 +842,3 @@ proc create*(T: type gen_qimagecapture_types.QImageCapture,
 
 proc staticMetaObject*(_: type gen_qimagecapture_types.QImageCapture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQImageCapture_staticMetaObject())
-proc delete*(self: gen_qimagecapture_types.QImageCapture) =
-  fcQImageCapture_delete(self.h)

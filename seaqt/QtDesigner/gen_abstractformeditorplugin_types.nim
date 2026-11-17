@@ -1,4 +1,4 @@
-type QDesignerFormEditorPluginInterface* {.inheritable, pure.} = object
+type QDesignerFormEditorPluginInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

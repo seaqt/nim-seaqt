@@ -54,7 +54,6 @@ type cQSqlDatabase*{.exportc: "QSqlDatabase", incompleteStruct.} = object
 
 proc fcQSqlDriverCreatorBase_createObject(self: pointer): pointer {.importc: "QSqlDriverCreatorBase_createObject".}
 proc fcQSqlDriverCreatorBase_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSqlDriverCreatorBase_operatorAssign".}
-proc fcQSqlDriverCreatorBase_delete(self: pointer) {.importc: "QSqlDriverCreatorBase_delete".}
 proc fcQSqlDatabase_operatorAssign(self: pointer, other: pointer): void {.importc: "QSqlDatabase_operatorAssign".}
 proc fcQSqlDatabase_open(self: pointer): bool {.importc: "QSqlDatabase_open".}
 proc fcQSqlDatabase_open2(self: pointer, user: struct_seaqt_string, password: struct_seaqt_string): bool {.importc: "QSqlDatabase_open2".}
@@ -108,16 +107,13 @@ proc fcQSqlDatabase_database2(connectionName: struct_seaqt_string, open: bool): 
 proc fcQSqlDatabase_containsWithConnectionName(connectionName: struct_seaqt_string): bool {.importc: "QSqlDatabase_containsWithConnectionName".}
 proc fcQSqlDatabase_new(): ptr cQSqlDatabase {.importc: "QSqlDatabase_new".}
 proc fcQSqlDatabase_new2(other: pointer): ptr cQSqlDatabase {.importc: "QSqlDatabase_new2".}
-proc fcQSqlDatabase_delete(self: pointer) {.importc: "QSqlDatabase_delete".}
 
 proc createObject*(self: gen_qsqldatabase_types.QSqlDriverCreatorBase): gen_qsqldriver_types.QSqlDriver =
-  gen_qsqldriver_types.QSqlDriver(h: fcQSqlDriverCreatorBase_createObject(self.h))
+  gen_qsqldriver_types.QSqlDriver(h: fcQSqlDriverCreatorBase_createObject(self.h), owned: false)
 
 proc operatorAssign*(self: gen_qsqldatabase_types.QSqlDriverCreatorBase, param1: gen_qsqldatabase_types.QSqlDriverCreatorBase): void =
   fcQSqlDriverCreatorBase_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qsqldatabase_types.QSqlDriverCreatorBase) =
-  fcQSqlDriverCreatorBase_delete(self.h)
 proc operatorAssign*(self: gen_qsqldatabase_types.QSqlDatabase, other: gen_qsqldatabase_types.QSqlDatabase): void =
   fcQSqlDatabase_operatorAssign(self.h, other.h)
 
@@ -149,16 +145,16 @@ proc tables*(self: gen_qsqldatabase_types.QSqlDatabase): seq[string] =
   vx_ret
 
 proc primaryIndex*(self: gen_qsqldatabase_types.QSqlDatabase, tablename: openArray[char]): gen_qsqlindex_types.QSqlIndex =
-  gen_qsqlindex_types.QSqlIndex(h: fcQSqlDatabase_primaryIndex(self.h, struct_seaqt_string(data: if len(tablename) > 0: addr tablename[0] else: nil, len: csize_t(len(tablename)))))
+  gen_qsqlindex_types.QSqlIndex(h: fcQSqlDatabase_primaryIndex(self.h, struct_seaqt_string(data: if len(tablename) > 0: addr tablename[0] else: nil, len: csize_t(len(tablename)))), owned: true)
 
 proc record*(self: gen_qsqldatabase_types.QSqlDatabase, tablename: openArray[char]): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlDatabase_record(self.h, struct_seaqt_string(data: if len(tablename) > 0: addr tablename[0] else: nil, len: csize_t(len(tablename)))))
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlDatabase_record(self.h, struct_seaqt_string(data: if len(tablename) > 0: addr tablename[0] else: nil, len: csize_t(len(tablename)))), owned: true)
 
 proc exec*(self: gen_qsqldatabase_types.QSqlDatabase): gen_qsqlquery_types.QSqlQuery =
-  gen_qsqlquery_types.QSqlQuery(h: fcQSqlDatabase_exec(self.h))
+  gen_qsqlquery_types.QSqlQuery(h: fcQSqlDatabase_exec(self.h), owned: true)
 
 proc lastError*(self: gen_qsqldatabase_types.QSqlDatabase): gen_qsqlerror_types.QSqlError =
-  gen_qsqlerror_types.QSqlError(h: fcQSqlDatabase_lastError(self.h))
+  gen_qsqlerror_types.QSqlError(h: fcQSqlDatabase_lastError(self.h), owned: true)
 
 proc isValid*(self: gen_qsqldatabase_types.QSqlDatabase): bool =
   fcQSqlDatabase_isValid(self.h)
@@ -242,22 +238,22 @@ proc numericalPrecisionPolicy*(self: gen_qsqldatabase_types.QSqlDatabase): cint 
   cint(fcQSqlDatabase_numericalPrecisionPolicy(self.h))
 
 proc driver*(self: gen_qsqldatabase_types.QSqlDatabase): gen_qsqldriver_types.QSqlDriver =
-  gen_qsqldriver_types.QSqlDriver(h: fcQSqlDatabase_driver(self.h))
+  gen_qsqldriver_types.QSqlDriver(h: fcQSqlDatabase_driver(self.h), owned: false)
 
 proc addDatabase*(_: type gen_qsqldatabase_types.QSqlDatabase, typeVal: openArray[char]): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_addDatabase(struct_seaqt_string(data: if len(typeVal) > 0: addr typeVal[0] else: nil, len: csize_t(len(typeVal)))))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_addDatabase(struct_seaqt_string(data: if len(typeVal) > 0: addr typeVal[0] else: nil, len: csize_t(len(typeVal)))), owned: true)
 
 proc addDatabase*(_: type gen_qsqldatabase_types.QSqlDatabase, driver: gen_qsqldriver_types.QSqlDriver): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_addDatabaseWithDriver(driver.h))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_addDatabaseWithDriver(driver.h), owned: true)
 
 proc cloneDatabase*(_: type gen_qsqldatabase_types.QSqlDatabase, other: gen_qsqldatabase_types.QSqlDatabase, connectionName: openArray[char]): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_cloneDatabase(other.h, struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_cloneDatabase(other.h, struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))), owned: true)
 
 proc cloneDatabase*(_: type gen_qsqldatabase_types.QSqlDatabase, other: openArray[char], connectionName: openArray[char]): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_cloneDatabase2(struct_seaqt_string(data: if len(other) > 0: addr other[0] else: nil, len: csize_t(len(other))), struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_cloneDatabase2(struct_seaqt_string(data: if len(other) > 0: addr other[0] else: nil, len: csize_t(len(other))), struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))), owned: true)
 
 proc database*(_: type gen_qsqldatabase_types.QSqlDatabase): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_database())
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_database(), owned: true)
 
 proc removeDatabase*(_: type gen_qsqldatabase_types.QSqlDatabase, connectionName: openArray[char]): void =
   fcQSqlDatabase_removeDatabase(struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName))))
@@ -308,32 +304,30 @@ proc tables*(self: gen_qsqldatabase_types.QSqlDatabase, typeVal: cint): seq[stri
   vx_ret
 
 proc exec*(self: gen_qsqldatabase_types.QSqlDatabase, query: openArray[char]): gen_qsqlquery_types.QSqlQuery =
-  gen_qsqlquery_types.QSqlQuery(h: fcQSqlDatabase_execWithQuery(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query)))))
+  gen_qsqlquery_types.QSqlQuery(h: fcQSqlDatabase_execWithQuery(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query)))), owned: true)
 
 proc setConnectOptions*(self: gen_qsqldatabase_types.QSqlDatabase, options: openArray[char]): void =
   fcQSqlDatabase_setConnectOptionsWithOptions(self.h, struct_seaqt_string(data: if len(options) > 0: addr options[0] else: nil, len: csize_t(len(options))))
 
 proc addDatabase*(_: type gen_qsqldatabase_types.QSqlDatabase, typeVal: openArray[char], connectionName: openArray[char]): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_addDatabase2(struct_seaqt_string(data: if len(typeVal) > 0: addr typeVal[0] else: nil, len: csize_t(len(typeVal))), struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_addDatabase2(struct_seaqt_string(data: if len(typeVal) > 0: addr typeVal[0] else: nil, len: csize_t(len(typeVal))), struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))), owned: true)
 
 proc addDatabase*(_: type gen_qsqldatabase_types.QSqlDatabase, driver: gen_qsqldriver_types.QSqlDriver, connectionName: openArray[char]): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_addDatabase3(driver.h, struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_addDatabase3(driver.h, struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))), owned: true)
 
 proc database*(_: type gen_qsqldatabase_types.QSqlDatabase, connectionName: openArray[char]): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_databaseWithConnectionName(struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_databaseWithConnectionName(struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName)))), owned: true)
 
 proc database*(_: type gen_qsqldatabase_types.QSqlDatabase, connectionName: openArray[char], open: bool): gen_qsqldatabase_types.QSqlDatabase =
-  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_database2(struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName))), open))
+  gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_database2(struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName))), open), owned: true)
 
 proc contains*(_: type gen_qsqldatabase_types.QSqlDatabase, connectionName: openArray[char]): bool =
   fcQSqlDatabase_containsWithConnectionName(struct_seaqt_string(data: if len(connectionName) > 0: addr connectionName[0] else: nil, len: csize_t(len(connectionName))))
 
 proc create*(T: type gen_qsqldatabase_types.QSqlDatabase): gen_qsqldatabase_types.QSqlDatabase =
-  let tmp = gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_new())
+  let tmp = gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_new(), owned: true)
   tmp
 proc create*(T: type gen_qsqldatabase_types.QSqlDatabase,
     other: gen_qsqldatabase_types.QSqlDatabase): gen_qsqldatabase_types.QSqlDatabase =
-  let tmp = gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_new2(other.h))
+  let tmp = gen_qsqldatabase_types.QSqlDatabase(h: fcQSqlDatabase_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qsqldatabase_types.QSqlDatabase) =
-  fcQSqlDatabase_delete(self.h)

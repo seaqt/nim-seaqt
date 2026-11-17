@@ -1,4 +1,4 @@
-type QAbstractConcatenable* {.inheritable, pure.} = object
+type QAbstractConcatenable* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

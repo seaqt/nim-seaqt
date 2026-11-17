@@ -321,7 +321,7 @@ proc `=sink`(dest: var QApplicationStateChangeEvent, source: QApplicationStateCh
   dest.h = source.h
   dest.owned = source.owned
 
-type QInputMethodEventAttribute* {.inheritable, pure.} = object
+type QInputMethodEventAttribute* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

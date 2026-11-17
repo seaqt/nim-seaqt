@@ -1,4 +1,4 @@
-type QWebEngineCertificateError* {.inheritable, pure.} = object
+type QWebEngineCertificateError* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

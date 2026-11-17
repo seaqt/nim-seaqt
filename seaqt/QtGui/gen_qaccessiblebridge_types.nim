@@ -1,4 +1,4 @@
-type QAccessibleBridge* {.inheritable, pure.} = object
+type QAccessibleBridge* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

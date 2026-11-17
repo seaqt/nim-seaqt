@@ -114,14 +114,12 @@ proc fcQVideoFrame_paint(self: pointer, painter: pointer, rect: pointer, options
 proc fcQVideoFrame_new(): ptr cQVideoFrame {.importc: "QVideoFrame_new".}
 proc fcQVideoFrame_new2(format: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new2".}
 proc fcQVideoFrame_new3(other: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new3".}
-proc fcQVideoFrame_delete(self: pointer) {.importc: "QVideoFrame_delete".}
 proc fcQVideoFramePaintOptions_backgroundColor(self: pointer): pointer {.importc: "QVideoFrame__PaintOptions_backgroundColor".}
 proc fcQVideoFramePaintOptions_setBackgroundColor(self: pointer, backgroundColor: pointer): void {.importc: "QVideoFrame__PaintOptions_setBackgroundColor".}
 proc fcQVideoFramePaintOptions_aspectRatioMode(self: pointer): cint {.importc: "QVideoFrame__PaintOptions_aspectRatioMode".}
 proc fcQVideoFramePaintOptions_setAspectRatioMode(self: pointer, aspectRatioMode: cint): void {.importc: "QVideoFrame__PaintOptions_setAspectRatioMode".}
 proc fcQVideoFramePaintOptions_paintFlags(self: pointer): cint {.importc: "QVideoFrame__PaintOptions_paintFlags".}
 proc fcQVideoFramePaintOptions_setPaintFlags(self: pointer, paintFlags: cint): void {.importc: "QVideoFrame__PaintOptions_setPaintFlags".}
-proc fcQVideoFramePaintOptions_delete(self: pointer) {.importc: "QVideoFrame__PaintOptions_delete".}
 
 proc swap*(self: gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): void =
   fcQVideoFrame_swap(self.h, other.h)
@@ -142,13 +140,13 @@ proc pixelFormat*(self: gen_qvideoframe_types.QVideoFrame): cint =
   cint(fcQVideoFrame_pixelFormat(self.h))
 
 proc surfaceFormat*(self: gen_qvideoframe_types.QVideoFrame): gen_qvideoframeformat_types.QVideoFrameFormat =
-  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrame_surfaceFormat(self.h))
+  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrame_surfaceFormat(self.h), owned: true)
 
 proc handleType*(self: gen_qvideoframe_types.QVideoFrame): cint =
   cint(fcQVideoFrame_handleType(self.h))
 
 proc size*(self: gen_qvideoframe_types.QVideoFrame): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVideoFrame_size(self.h))
+  gen_qsize_types.QSize(h: fcQVideoFrame_size(self.h), owned: true)
 
 proc width*(self: gen_qvideoframe_types.QVideoFrame): cint =
   fcQVideoFrame_width(self.h)
@@ -214,7 +212,7 @@ proc mirrored*(self: gen_qvideoframe_types.QVideoFrame): bool =
   fcQVideoFrame_mirrored(self.h)
 
 proc toImage*(self: gen_qvideoframe_types.QVideoFrame): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQVideoFrame_toImage(self.h))
+  gen_qimage_types.QImage(h: fcQVideoFrame_toImage(self.h), owned: true)
 
 proc subtitleText*(self: gen_qvideoframe_types.QVideoFrame): string =
   let v_ms = fcQVideoFrame_subtitleText(self.h)
@@ -229,20 +227,18 @@ proc paint*(self: gen_qvideoframe_types.QVideoFrame, painter: gen_qpainter_types
   fcQVideoFrame_paint(self.h, painter.h, rect.h, options.h)
 
 proc create*(T: type gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
-  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new())
+  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new(), owned: true)
   tmp
 proc create*(T: type gen_qvideoframe_types.QVideoFrame,
     format: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframe_types.QVideoFrame =
-  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new2(format.h))
+  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new2(format.h), owned: true)
   tmp
 proc create*(T: type gen_qvideoframe_types.QVideoFrame,
     other: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
-  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new3(other.h))
+  let tmp = gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new3(other.h), owned: true)
   tmp
-proc delete*(self: gen_qvideoframe_types.QVideoFrame) =
-  fcQVideoFrame_delete(self.h)
 proc backgroundColor*(self: gen_qvideoframe_types.QVideoFramePaintOptions): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQVideoFramePaintOptions_backgroundColor(self.h))
+  gen_qcolor_types.QColor(h: fcQVideoFramePaintOptions_backgroundColor(self.h), owned: true)
 
 proc setBackgroundColor*(self: gen_qvideoframe_types.QVideoFramePaintOptions, backgroundColor: gen_qcolor_types.QColor): void =
   fcQVideoFramePaintOptions_setBackgroundColor(self.h, backgroundColor.h)
@@ -259,5 +255,3 @@ proc paintFlags*(self: gen_qvideoframe_types.QVideoFramePaintOptions): cint =
 proc setPaintFlags*(self: gen_qvideoframe_types.QVideoFramePaintOptions, paintFlags: cint): void =
   fcQVideoFramePaintOptions_setPaintFlags(self.h, cint(paintFlags))
 
-proc delete*(self: gen_qvideoframe_types.QVideoFramePaintOptions) =
-  fcQVideoFramePaintOptions_delete(self.h)

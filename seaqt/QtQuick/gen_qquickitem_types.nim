@@ -18,7 +18,7 @@ proc `=sink`(dest: var QQuickItem, source: QQuickItem) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QQuickItemItemChangeData* {.inheritable, pure.} = object
+type QQuickItemItemChangeData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QQuickItemItemChangeData) =
   wasMoved(self)
   fcQQuickItemItemChangeData_delete(h)
 
-type QQuickItemUpdatePaintNodeData* {.inheritable, pure.} = object
+type QQuickItemUpdatePaintNodeData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -90,7 +90,6 @@ proc fcQFormBuilder_virtualbase_checkProperty(self: pointer, obj: pointer, prop:
 proc fcQFormBuilder_protectedbase_applyPropertyInternally(self: pointer, o: pointer, propertyName: struct_seaqt_string, value: pointer): bool {.importc: "QFormBuilder_protectedbase_applyPropertyInternally".}
 proc fcQFormBuilder_protectedbase_reset(self: pointer): void {.importc: "QFormBuilder_protectedbase_reset".}
 proc fcQFormBuilder_new(vtbl: pointer, vdata: csize_t): ptr cQFormBuilder {.importc: "QFormBuilder_new".}
-proc fcQFormBuilder_delete(self: pointer) {.importc: "QFormBuilder_delete".}
 
 proc pluginPaths*(self: gen_formbuilder_types.QFormBuilder): seq[string] =
   var v_ma = fcQFormBuilder_pluginPaths(self.h)
@@ -126,7 +125,8 @@ type QFormBuilderaddMenuActionProc* = proc(self: QFormBuilder, action: gen_qacti
 type QFormBuildercreateActionProc* = proc(self: QFormBuilder, parent: gen_qobject_types.QObject, name: openArray[char]): gen_qaction_types.QAction {.raises: [], gcsafe.}
 type QFormBuildercreateActionGroupProc* = proc(self: QFormBuilder, parent: gen_qobject_types.QObject, name: openArray[char]): gen_qactiongroup_types.QActionGroup {.raises: [], gcsafe.}
 type QFormBuildercheckPropertyProc* = proc(self: QFormBuilder, obj: gen_qobject_types.QObject, prop: openArray[char]): bool {.raises: [], gcsafe.}
-type QFormBuilderVTable* = object
+
+type QFormBuilderVTable* {.inheritable, pure.} = object
   vtbl: cQFormBuilderVTable
   createWidget*: QFormBuildercreateWidgetProc
   createLayout*: QFormBuildercreateLayoutProc
@@ -139,16 +139,16 @@ type QFormBuilderVTable* = object
   checkProperty*: QFormBuildercheckPropertyProc
 
 proc QFormBuildercreateWidget*(self: gen_formbuilder_types.QFormBuilder, widgetName: openArray[char], parentWidget: gen_qwidget_types.QWidget, name: openArray[char]): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQFormBuilder_virtualbase_createWidget(self.h, struct_seaqt_string(data: if len(widgetName) > 0: addr widgetName[0] else: nil, len: csize_t(len(widgetName))), parentWidget.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qwidget_types.QWidget(h: fcQFormBuilder_virtualbase_createWidget(self.h, struct_seaqt_string(data: if len(widgetName) > 0: addr widgetName[0] else: nil, len: csize_t(len(widgetName))), parentWidget.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc QFormBuildercreateLayout*(self: gen_formbuilder_types.QFormBuilder, layoutName: openArray[char], parent: gen_qobject_types.QObject, name: openArray[char]): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQFormBuilder_virtualbase_createLayout(self.h, struct_seaqt_string(data: if len(layoutName) > 0: addr layoutName[0] else: nil, len: csize_t(len(layoutName))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qlayout_types.QLayout(h: fcQFormBuilder_virtualbase_createLayout(self.h, struct_seaqt_string(data: if len(layoutName) > 0: addr layoutName[0] else: nil, len: csize_t(len(layoutName))), parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc QFormBuilderupdateCustomWidgets*(self: gen_formbuilder_types.QFormBuilder): void =
   fcQFormBuilder_virtualbase_updateCustomWidgets(self.h)
 
 proc QFormBuilderload*(self: gen_formbuilder_types.QFormBuilder, dev: gen_qiodevice_types.QIODevice, parentWidget: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQFormBuilder_virtualbase_load(self.h, dev.h, parentWidget.h))
+  gen_qwidget_types.QWidget(h: fcQFormBuilder_virtualbase_load(self.h, dev.h, parentWidget.h), owned: false)
 
 proc QFormBuildersave*(self: gen_formbuilder_types.QFormBuilder, dev: gen_qiodevice_types.QIODevice, widget: gen_qwidget_types.QWidget): void =
   fcQFormBuilder_virtualbase_save(self.h, dev.h, widget.h)
@@ -157,10 +157,10 @@ proc QFormBuilderaddMenuAction*(self: gen_formbuilder_types.QFormBuilder, action
   fcQFormBuilder_virtualbase_addMenuAction(self.h, action.h)
 
 proc QFormBuildercreateAction*(self: gen_formbuilder_types.QFormBuilder, parent: gen_qobject_types.QObject, name: openArray[char]): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQFormBuilder_virtualbase_createAction(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qaction_types.QAction(h: fcQFormBuilder_virtualbase_createAction(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc QFormBuildercreateActionGroup*(self: gen_formbuilder_types.QFormBuilder, parent: gen_qobject_types.QObject, name: openArray[char]): gen_qactiongroup_types.QActionGroup =
-  gen_qactiongroup_types.QActionGroup(h: fcQFormBuilder_virtualbase_createActionGroup(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qactiongroup_types.QActionGroup(h: fcQFormBuilder_virtualbase_createActionGroup(self.h, parent.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: false)
 
 proc QFormBuildercheckProperty*(self: gen_formbuilder_types.QFormBuilder, obj: gen_qobject_types.QObject, prop: openArray[char]): bool =
   fcQFormBuilder_virtualbase_checkProperty(self.h, obj.h, struct_seaqt_string(data: if len(prop) > 0: addr prop[0] else: nil, len: csize_t(len(prop))))
@@ -173,13 +173,16 @@ proc fcQFormBuilder_vtable_callback_createWidget(self: pointer, widgetName: stru
   let vwidgetNamex_ret = string.fromBytes(vwidgetName_ms)
   c_free(vwidgetName_ms.data)
   let slotval1 = vwidgetNamex_ret
-  let slotval2 = gen_qwidget_types.QWidget(h: parentWidget)
+  let slotval2 = gen_qwidget_types.QWidget(h: parentWidget, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval3 = vnamex_ret
   var virtualReturn = vtbl[].createWidget(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_vtable_callback_createLayout(self: pointer, layoutName: struct_seaqt_string, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormBuilderVTable](fcQFormBuilder_vdata(self)[])
@@ -188,13 +191,16 @@ proc fcQFormBuilder_vtable_callback_createLayout(self: pointer, layoutName: stru
   let vlayoutNamex_ret = string.fromBytes(vlayoutName_ms)
   c_free(vlayoutName_ms.data)
   let slotval1 = vlayoutNamex_ret
-  let slotval2 = gen_qobject_types.QObject(h: parent)
+  let slotval2 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval3 = vnamex_ret
   var virtualReturn = vtbl[].createLayout(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_vtable_callback_updateCustomWidgets(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormBuilderVTable](fcQFormBuilder_vdata(self)[])
@@ -204,50 +210,59 @@ proc fcQFormBuilder_vtable_callback_updateCustomWidgets(self: pointer): void {.c
 proc fcQFormBuilder_vtable_callback_load(self: pointer, dev: pointer, parentWidget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormBuilderVTable](fcQFormBuilder_vdata(self)[])
   let self = QFormBuilder(h: self)
-  let slotval1 = gen_qiodevice_types.QIODevice(h: dev)
-  let slotval2 = gen_qwidget_types.QWidget(h: parentWidget)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: dev, owned: false)
+  let slotval2 = gen_qwidget_types.QWidget(h: parentWidget, owned: false)
   var virtualReturn = vtbl[].load(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_vtable_callback_save(self: pointer, dev: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormBuilderVTable](fcQFormBuilder_vdata(self)[])
   let self = QFormBuilder(h: self)
-  let slotval1 = gen_qiodevice_types.QIODevice(h: dev)
-  let slotval2 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: dev, owned: false)
+  let slotval2 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].save(self, slotval1, slotval2)
 
 proc fcQFormBuilder_vtable_callback_addMenuAction(self: pointer, action: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFormBuilderVTable](fcQFormBuilder_vdata(self)[])
   let self = QFormBuilder(h: self)
-  let slotval1 = gen_qaction_types.QAction(h: action)
+  let slotval1 = gen_qaction_types.QAction(h: action, owned: false)
   vtbl[].addMenuAction(self, slotval1)
 
 proc fcQFormBuilder_vtable_callback_createAction(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormBuilderVTable](fcQFormBuilder_vdata(self)[])
   let self = QFormBuilder(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
   var virtualReturn = vtbl[].createAction(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_vtable_callback_createActionGroup(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QFormBuilderVTable](fcQFormBuilder_vdata(self)[])
   let self = QFormBuilder(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
   var virtualReturn = vtbl[].createActionGroup(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_vtable_callback_checkProperty(self: pointer, obj: pointer, prop: struct_seaqt_string): bool {.cdecl.} =
   let vtbl = cast[ptr QFormBuilderVTable](fcQFormBuilder_vdata(self)[])
   let self = QFormBuilder(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: obj)
+  let slotval1 = gen_qobject_types.QObject(h: obj, owned: false)
   let vprop_ms = prop
   let vpropx_ret = string.fromBytes(vprop_ms)
   c_free(vprop_ms.data)
@@ -283,13 +298,16 @@ proc fcQFormBuilder_method_callback_createWidget(self: pointer, widgetName: stru
   let vwidgetNamex_ret = string.fromBytes(vwidgetName_ms)
   c_free(vwidgetName_ms.data)
   let slotval1 = vwidgetNamex_ret
-  let slotval2 = gen_qwidget_types.QWidget(h: parentWidget)
+  let slotval2 = gen_qwidget_types.QWidget(h: parentWidget, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval3 = vnamex_ret
   var virtualReturn = inst.createWidget(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_method_callback_createLayout(self: pointer, layoutName: struct_seaqt_string, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQFormBuilder](fcQFormBuilder_vdata(self)[])
@@ -297,13 +315,16 @@ proc fcQFormBuilder_method_callback_createLayout(self: pointer, layoutName: stru
   let vlayoutNamex_ret = string.fromBytes(vlayoutName_ms)
   c_free(vlayoutName_ms.data)
   let slotval1 = vlayoutNamex_ret
-  let slotval2 = gen_qobject_types.QObject(h: parent)
+  let slotval2 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval3 = vnamex_ret
   var virtualReturn = inst.createLayout(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_method_callback_updateCustomWidgets(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormBuilder](fcQFormBuilder_vdata(self)[])
@@ -311,45 +332,54 @@ proc fcQFormBuilder_method_callback_updateCustomWidgets(self: pointer): void {.c
 
 proc fcQFormBuilder_method_callback_load(self: pointer, dev: pointer, parentWidget: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQFormBuilder](fcQFormBuilder_vdata(self)[])
-  let slotval1 = gen_qiodevice_types.QIODevice(h: dev)
-  let slotval2 = gen_qwidget_types.QWidget(h: parentWidget)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: dev, owned: false)
+  let slotval2 = gen_qwidget_types.QWidget(h: parentWidget, owned: false)
   var virtualReturn = inst.load(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_method_callback_save(self: pointer, dev: pointer, widget: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormBuilder](fcQFormBuilder_vdata(self)[])
-  let slotval1 = gen_qiodevice_types.QIODevice(h: dev)
-  let slotval2 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qiodevice_types.QIODevice(h: dev, owned: false)
+  let slotval2 = gen_qwidget_types.QWidget(h: widget, owned: false)
   inst.save(slotval1, slotval2)
 
 proc fcQFormBuilder_method_callback_addMenuAction(self: pointer, action: pointer): void {.cdecl.} =
   let inst = cast[VirtualQFormBuilder](fcQFormBuilder_vdata(self)[])
-  let slotval1 = gen_qaction_types.QAction(h: action)
+  let slotval1 = gen_qaction_types.QAction(h: action, owned: false)
   inst.addMenuAction(slotval1)
 
 proc fcQFormBuilder_method_callback_createAction(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQFormBuilder](fcQFormBuilder_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
   var virtualReturn = inst.createAction(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_method_callback_createActionGroup(self: pointer, parent: pointer, name: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQFormBuilder](fcQFormBuilder_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: parent)
+  let slotval1 = gen_qobject_types.QObject(h: parent, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
   var virtualReturn = inst.createActionGroup(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQFormBuilder_method_callback_checkProperty(self: pointer, obj: pointer, prop: struct_seaqt_string): bool {.cdecl.} =
   let inst = cast[VirtualQFormBuilder](fcQFormBuilder_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: obj)
+  let slotval1 = gen_qobject_types.QObject(h: obj, owned: false)
   let vprop_ms = prop
   let vpropx_ret = string.fromBytes(vprop_ms)
   c_free(vprop_ms.data)
@@ -389,13 +419,14 @@ proc create*(T: type gen_formbuilder_types.QFormBuilder,
     vtbl[].vtbl.createActionGroup = fcQFormBuilder_vtable_callback_createActionGroup
   if not isNil(vtbl[].checkProperty):
     vtbl[].vtbl.checkProperty = fcQFormBuilder_vtable_callback_checkProperty
-  let tmp = gen_formbuilder_types.QFormBuilder(h: fcQFormBuilder_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_formbuilder_types.QFormBuilder(h: fcQFormBuilder_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQFormBuilder_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQFormBuilder_mvtbl = cQFormBuilderVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQFormBuilder()[])](self.fcQFormBuilder_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   createWidget: fcQFormBuilder_method_callback_createWidget,
   createLayout: fcQFormBuilder_method_callback_createLayout,
@@ -414,5 +445,3 @@ proc create*(T: type gen_formbuilder_types.QFormBuilder,
   fcQFormBuilder_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_formbuilder_types.QFormBuilder) =
-  fcQFormBuilder_delete(self.h)

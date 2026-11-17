@@ -1,4 +1,4 @@
-type QStringConverter* {.inheritable, pure.} = object
+type QStringConverter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

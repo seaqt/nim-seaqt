@@ -1,4 +1,4 @@
-type QPrintEngine* {.inheritable, pure.} = object
+type QPrintEngine* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

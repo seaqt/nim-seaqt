@@ -45,7 +45,6 @@ type cQStyleFactory*{.exportc: "QStyleFactory", incompleteStruct.} = object
 
 proc fcQStyleFactory_keys(): struct_seaqt_array {.importc: "QStyleFactory_keys".}
 proc fcQStyleFactory_createX(param1: struct_seaqt_string): pointer {.importc: "QStyleFactory_create".}
-proc fcQStyleFactory_delete(self: pointer) {.importc: "QStyleFactory_delete".}
 
 proc keys*(_: type gen_qstylefactory_types.QStyleFactory): seq[string] =
   var v_ma = fcQStyleFactory_keys()
@@ -60,7 +59,5 @@ proc keys*(_: type gen_qstylefactory_types.QStyleFactory): seq[string] =
   vx_ret
 
 proc createX*(_: type gen_qstylefactory_types.QStyleFactory, param1: openArray[char]): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQStyleFactory_createX(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))))
+  gen_qstyle_types.QStyle(h: fcQStyleFactory_createX(struct_seaqt_string(data: if len(param1) > 0: addr param1[0] else: nil, len: csize_t(len(param1)))), owned: false)
 
-proc delete*(self: gen_qstylefactory_types.QStyleFactory) =
-  fcQStyleFactory_delete(self.h)

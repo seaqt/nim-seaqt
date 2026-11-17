@@ -140,10 +140,9 @@ proc fcQDesignerFormWindowManagerInterface_protectedbase_senderSignalIndex(self:
 proc fcQDesignerFormWindowManagerInterface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesignerFormWindowManagerInterface_protectedbase_receivers".}
 proc fcQDesignerFormWindowManagerInterface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesignerFormWindowManagerInterface_protectedbase_isSignalConnected".}
 proc fcQDesignerFormWindowManagerInterface_staticMetaObject(): pointer {.importc: "QDesignerFormWindowManagerInterface_staticMetaObject".}
-proc fcQDesignerFormWindowManagerInterface_delete(self: pointer) {.importc: "QDesignerFormWindowManagerInterface_delete".}
 
 proc metaObject*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerFormWindowManagerInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerFormWindowManagerInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, param1: cstring): pointer =
   fcQDesignerFormWindowManagerInterface_metacast(self.h, param1)
@@ -158,76 +157,76 @@ proc tr*(_: type gen_abstractformwindowmanager_types.QDesignerFormWindowManagerI
   vx_ret
 
 proc action*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, action: cint): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_action(self.h, cint(action)))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_action(self.h, cint(action)), owned: false)
 
 proc actionGroup*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, actionGroup: cint): gen_qactiongroup_types.QActionGroup =
-  gen_qactiongroup_types.QActionGroup(h: fcQDesignerFormWindowManagerInterface_actionGroup(self.h, cint(actionGroup)))
+  gen_qactiongroup_types.QActionGroup(h: fcQDesignerFormWindowManagerInterface_actionGroup(self.h, cint(actionGroup)), owned: false)
 
 proc actionCut*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionCut(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionCut(self.h), owned: false)
 
 proc actionCopy*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionCopy(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionCopy(self.h), owned: false)
 
 proc actionPaste*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionPaste(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionPaste(self.h), owned: false)
 
 proc actionDelete*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionDelete(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionDelete(self.h), owned: false)
 
 proc actionSelectAll*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionSelectAll(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionSelectAll(self.h), owned: false)
 
 proc actionLower*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionLower(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionLower(self.h), owned: false)
 
 proc actionRaise*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionRaise(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionRaise(self.h), owned: false)
 
 proc actionUndo*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionUndo(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionUndo(self.h), owned: false)
 
 proc actionRedo*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionRedo(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionRedo(self.h), owned: false)
 
 proc actionHorizontalLayout*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionHorizontalLayout(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionHorizontalLayout(self.h), owned: false)
 
 proc actionVerticalLayout*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionVerticalLayout(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionVerticalLayout(self.h), owned: false)
 
 proc actionSplitHorizontal*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionSplitHorizontal(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionSplitHorizontal(self.h), owned: false)
 
 proc actionSplitVertical*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionSplitVertical(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionSplitVertical(self.h), owned: false)
 
 proc actionGridLayout*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionGridLayout(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionGridLayout(self.h), owned: false)
 
 proc actionFormLayout*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionFormLayout(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionFormLayout(self.h), owned: false)
 
 proc actionBreakLayout*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionBreakLayout(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionBreakLayout(self.h), owned: false)
 
 proc actionAdjustSize*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionAdjustSize(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionAdjustSize(self.h), owned: false)
 
 proc actionSimplifyLayout*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionSimplifyLayout(self.h))
+  gen_qaction_types.QAction(h: fcQDesignerFormWindowManagerInterface_actionSimplifyLayout(self.h), owned: false)
 
 proc activeFormWindow*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_abstractformwindow_types.QDesignerFormWindowInterface =
-  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowManagerInterface_activeFormWindow(self.h))
+  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowManagerInterface_activeFormWindow(self.h), owned: false)
 
 proc formWindowCount*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): cint =
   fcQDesignerFormWindowManagerInterface_formWindowCount(self.h)
 
 proc formWindow*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, index: cint): gen_abstractformwindow_types.QDesignerFormWindowInterface =
-  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowManagerInterface_formWindow(self.h, index))
+  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowManagerInterface_formWindow(self.h, index), owned: false)
 
 proc createFormWindow*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, parentWidget: gen_qwidget_types.QWidget, flags: cint): gen_abstractformwindow_types.QDesignerFormWindowInterface =
-  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowManagerInterface_createFormWindow(self.h, parentWidget.h, cint(flags)))
+  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowManagerInterface_createFormWindow(self.h, parentWidget.h, cint(flags)), owned: false)
 
 proc dragItems*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, item_list: openArray[gen_abstractdnditem_types.QDesignerDnDItemInterface]): void =
   var item_list_CArray = newSeq[pointer](len(item_list))
@@ -237,7 +236,7 @@ proc dragItems*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowMan
   fcQDesignerFormWindowManagerInterface_dragItems(self.h, struct_seaqt_array(len: csize_t(len(item_list)), data: if len(item_list) == 0: nil else: addr(item_list_CArray[0])))
 
 proc createPreviewPixmap*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQDesignerFormWindowManagerInterface_createPreviewPixmap(self.h))
+  gen_qpixmap_types.QPixmap(h: fcQDesignerFormWindowManagerInterface_createPreviewPixmap(self.h), owned: true)
 
 proc formWindowAdded*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface, formWindow: gen_abstractformwindow_types.QDesignerFormWindowInterface): void =
   fcQDesignerFormWindowManagerInterface_formWindowAdded(self.h, formWindow.h)
@@ -245,7 +244,7 @@ proc formWindowAdded*(self: gen_abstractformwindowmanager_types.QDesignerFormWin
 type QDesignerFormWindowManagerInterfaceformWindowAddedSlot* = proc(formWindow: gen_abstractformwindow_types.QDesignerFormWindowInterface)
 proc fcQDesignerFormWindowManagerInterface_slot_callback_formWindowAdded(slot: int, formWindow: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDesignerFormWindowManagerInterfaceformWindowAddedSlot](cast[pointer](slot))
-  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow)
+  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow, owned: false)
 
   nimfunc[](slotval1)
 
@@ -265,7 +264,7 @@ proc formWindowRemoved*(self: gen_abstractformwindowmanager_types.QDesignerFormW
 type QDesignerFormWindowManagerInterfaceformWindowRemovedSlot* = proc(formWindow: gen_abstractformwindow_types.QDesignerFormWindowInterface)
 proc fcQDesignerFormWindowManagerInterface_slot_callback_formWindowRemoved(slot: int, formWindow: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDesignerFormWindowManagerInterfaceformWindowRemovedSlot](cast[pointer](slot))
-  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow)
+  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow, owned: false)
 
   nimfunc[](slotval1)
 
@@ -285,7 +284,7 @@ proc activeFormWindowChanged*(self: gen_abstractformwindowmanager_types.QDesigne
 type QDesignerFormWindowManagerInterfaceactiveFormWindowChangedSlot* = proc(formWindow: gen_abstractformwindow_types.QDesignerFormWindowInterface)
 proc fcQDesignerFormWindowManagerInterface_slot_callback_activeFormWindowChanged(slot: int, formWindow: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDesignerFormWindowManagerInterfaceactiveFormWindowChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow)
+  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow, owned: false)
 
   nimfunc[](slotval1)
 
@@ -305,7 +304,7 @@ proc formWindowSettingsChanged*(self: gen_abstractformwindowmanager_types.QDesig
 type QDesignerFormWindowManagerInterfaceformWindowSettingsChangedSlot* = proc(fw: gen_abstractformwindow_types.QDesignerFormWindowInterface)
 proc fcQDesignerFormWindowManagerInterface_slot_callback_formWindowSettingsChanged(slot: int, fw: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDesignerFormWindowManagerInterfaceformWindowSettingsChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fw)
+  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fw, owned: false)
 
   nimfunc[](slotval1)
 
@@ -350,7 +349,7 @@ proc tr*(_: type gen_abstractformwindowmanager_types.QDesignerFormWindowManagerI
   vx_ret
 
 proc sender*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerFormWindowManagerInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerFormWindowManagerInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): cint =
   fcQDesignerFormWindowManagerInterface_protectedbase_senderSignalIndex(self.h)
@@ -363,5 +362,3 @@ proc isSignalConnected*(self: gen_abstractformwindowmanager_types.QDesignerFormW
 
 proc staticMetaObject*(_: type gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerFormWindowManagerInterface_staticMetaObject())
-proc delete*(self: gen_abstractformwindowmanager_types.QDesignerFormWindowManagerInterface) =
-  fcQDesignerFormWindowManagerInterface_delete(self.h)

@@ -1,4 +1,4 @@
-type QElapsedTimer* {.inheritable, pure.} = object
+type QElapsedTimer* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QTestQTouchEventSequence* {.inheritable, pure.} = object
+type QTestQTouchEventSequence* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

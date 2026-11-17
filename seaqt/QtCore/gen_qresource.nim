@@ -77,7 +77,6 @@ proc fcQResource_protectedbase_children(self: pointer): struct_seaqt_array {.imp
 proc fcQResource_new(): ptr cQResource {.importc: "QResource_new".}
 proc fcQResource_new2(file: struct_seaqt_string): ptr cQResource {.importc: "QResource_new2".}
 proc fcQResource_new3(file: struct_seaqt_string, locale: pointer): ptr cQResource {.importc: "QResource_new3".}
-proc fcQResource_delete(self: pointer) {.importc: "QResource_delete".}
 
 proc setFileName*(self: gen_qresource_types.QResource, file: openArray[char]): void =
   fcQResource_setFileName(self.h, struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))))
@@ -98,7 +97,7 @@ proc setLocale*(self: gen_qresource_types.QResource, locale: gen_qlocale_types.Q
   fcQResource_setLocale(self.h, locale.h)
 
 proc locale*(self: gen_qresource_types.QResource): gen_qlocale_types.QLocale =
-  gen_qlocale_types.QLocale(h: fcQResource_locale(self.h))
+  gen_qlocale_types.QLocale(h: fcQResource_locale(self.h), owned: true)
 
 proc isValid*(self: gen_qresource_types.QResource): bool =
   fcQResource_isValid(self.h)
@@ -122,7 +121,7 @@ proc uncompressedData*(self: gen_qresource_types.QResource): seq[byte] =
   vx_ret
 
 proc lastModified*(self: gen_qresource_types.QResource): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQResource_lastModified(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQResource_lastModified(self.h), owned: true)
 
 proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: openArray[char]): bool =
   fcQResource_registerResource(struct_seaqt_string(data: if len(rccFilename) > 0: addr rccFilename[0] else: nil, len: csize_t(len(rccFilename))))
@@ -167,15 +166,13 @@ proc children*(self: gen_qresource_types.QResource): seq[string] =
   vx_ret
 
 proc create*(T: type gen_qresource_types.QResource): gen_qresource_types.QResource =
-  let tmp = gen_qresource_types.QResource(h: fcQResource_new())
+  let tmp = gen_qresource_types.QResource(h: fcQResource_new(), owned: true)
   tmp
 proc create*(T: type gen_qresource_types.QResource,
     file: openArray[char]): gen_qresource_types.QResource =
-  let tmp = gen_qresource_types.QResource(h: fcQResource_new2(struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))))
+  let tmp = gen_qresource_types.QResource(h: fcQResource_new2(struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file)))), owned: true)
   tmp
 proc create*(T: type gen_qresource_types.QResource,
     file: openArray[char], locale: gen_qlocale_types.QLocale): gen_qresource_types.QResource =
-  let tmp = gen_qresource_types.QResource(h: fcQResource_new3(struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))), locale.h))
+  let tmp = gen_qresource_types.QResource(h: fcQResource_new3(struct_seaqt_string(data: if len(file) > 0: addr file[0] else: nil, len: csize_t(len(file))), locale.h), owned: true)
   tmp
-proc delete*(self: gen_qresource_types.QResource) =
-  fcQResource_delete(self.h)

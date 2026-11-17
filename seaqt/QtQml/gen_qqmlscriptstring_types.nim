@@ -1,4 +1,4 @@
-type QQmlScriptString* {.inheritable, pure.} = object
+type QQmlScriptString* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

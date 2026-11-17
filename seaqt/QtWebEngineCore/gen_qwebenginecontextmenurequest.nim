@@ -126,10 +126,9 @@ proc fcQWebEngineContextMenuRequest_protectedbase_senderSignalIndex(self: pointe
 proc fcQWebEngineContextMenuRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineContextMenuRequest_protectedbase_receivers".}
 proc fcQWebEngineContextMenuRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineContextMenuRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineContextMenuRequest_staticMetaObject(): pointer {.importc: "QWebEngineContextMenuRequest_staticMetaObject".}
-proc fcQWebEngineContextMenuRequest_delete(self: pointer) {.importc: "QWebEngineContextMenuRequest_delete".}
 
 proc metaObject*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuRequest_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuRequest_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, param1: cstring): pointer =
   fcQWebEngineContextMenuRequest_metacast(self.h, param1)
@@ -144,7 +143,7 @@ proc tr*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuReq
   vx_ret
 
 proc position*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWebEngineContextMenuRequest_position(self.h))
+  gen_qpoint_types.QPoint(h: fcQWebEngineContextMenuRequest_position(self.h), owned: true)
 
 proc selectedText*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): string =
   let v_ms = fcQWebEngineContextMenuRequest_selectedText(self.h)
@@ -159,10 +158,10 @@ proc linkText*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMen
   vx_ret
 
 proc linkUrl*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineContextMenuRequest_linkUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineContextMenuRequest_linkUrl(self.h), owned: true)
 
 proc mediaUrl*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineContextMenuRequest_mediaUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineContextMenuRequest_mediaUrl(self.h), owned: true)
 
 proc mediaType*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): cint =
   cint(fcQWebEngineContextMenuRequest_mediaType(self.h))
@@ -213,7 +212,7 @@ proc tr*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuReq
   vx_ret
 
 proc sender*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebEngineContextMenuRequest_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebEngineContextMenuRequest_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): cint =
   fcQWebEngineContextMenuRequest_protectedbase_senderSignalIndex(self.h)
@@ -226,5 +225,3 @@ proc isSignalConnected*(self: gen_qwebenginecontextmenurequest_types.QWebEngineC
 
 proc staticMetaObject*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuRequest_staticMetaObject())
-proc delete*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest) =
-  fcQWebEngineContextMenuRequest_delete(self.h)

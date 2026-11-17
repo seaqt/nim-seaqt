@@ -1,4 +1,4 @@
-type QDesignerPromotionInterface* {.inheritable, pure.} = object
+type QDesignerPromotionInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QDesignerPromotionInterface) =
   wasMoved(self)
   fcQDesignerPromotionInterface_delete(h)
 
-type QDesignerPromotionInterfacePromotedClass* {.inheritable, pure.} = object
+type QDesignerPromotionInterfacePromotedClass* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

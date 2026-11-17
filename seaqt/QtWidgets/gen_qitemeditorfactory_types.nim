@@ -1,4 +1,4 @@
-type QItemEditorCreatorBase* {.inheritable, pure.} = object
+type QItemEditorCreatorBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QItemEditorCreatorBase) =
   wasMoved(self)
   fcQItemEditorCreatorBase_delete(h)
 
-type QItemEditorFactory* {.inheritable, pure.} = object
+type QItemEditorFactory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

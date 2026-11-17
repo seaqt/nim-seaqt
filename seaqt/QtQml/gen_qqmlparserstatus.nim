@@ -50,7 +50,6 @@ type cQQmlParserStatusVTable {.pure.} = object
   classBegin*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
   componentComplete*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
 proc fcQQmlParserStatus_new(vtbl: pointer, vdata: csize_t): ptr cQQmlParserStatus {.importc: "QQmlParserStatus_new".}
-proc fcQQmlParserStatus_delete(self: pointer) {.importc: "QQmlParserStatus_delete".}
 
 proc classBegin*(self: gen_qqmlparserstatus_types.QQmlParserStatus): void =
   fcQQmlParserStatus_classBegin(self.h)
@@ -63,7 +62,8 @@ proc operatorAssign*(self: gen_qqmlparserstatus_types.QQmlParserStatus, param1: 
 
 type QQmlParserStatusclassBeginProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
 type QQmlParserStatuscomponentCompleteProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
-type QQmlParserStatusVTable* = object
+
+type QQmlParserStatusVTable* {.inheritable, pure.} = object
   vtbl: cQQmlParserStatusVTable
   classBegin*: QQmlParserStatusclassBeginProc
   componentComplete*: QQmlParserStatuscomponentCompleteProc
@@ -107,13 +107,14 @@ proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus,
     vtbl[].vtbl.classBegin = fcQQmlParserStatus_vtable_callback_classBegin
   if not isNil(vtbl[].componentComplete):
     vtbl[].vtbl.componentComplete = fcQQmlParserStatus_vtable_callback_componentComplete
-  let tmp = gen_qqmlparserstatus_types.QQmlParserStatus(h: fcQQmlParserStatus_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qqmlparserstatus_types.QQmlParserStatus(h: fcQQmlParserStatus_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQQmlParserStatus_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQQmlParserStatus_mvtbl = cQQmlParserStatusVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQQmlParserStatus()[])](self.fcQQmlParserStatus_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   classBegin: fcQQmlParserStatus_method_callback_classBegin,
   componentComplete: fcQQmlParserStatus_method_callback_componentComplete,
@@ -125,5 +126,3 @@ proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus,
   fcQQmlParserStatus_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qqmlparserstatus_types.QQmlParserStatus) =
-  fcQQmlParserStatus_delete(self.h)

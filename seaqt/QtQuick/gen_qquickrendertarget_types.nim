@@ -1,4 +1,4 @@
-type QQuickRenderTarget* {.inheritable, pure.} = object
+type QQuickRenderTarget* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

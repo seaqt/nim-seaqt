@@ -1,4 +1,4 @@
-type QQmlPropertyValueSource* {.inheritable, pure.} = object
+type QQmlPropertyValueSource* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

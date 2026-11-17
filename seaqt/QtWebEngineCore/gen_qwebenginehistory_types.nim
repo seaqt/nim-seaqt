@@ -1,4 +1,4 @@
-type QWebEngineHistoryItem* {.inheritable, pure.} = object
+type QWebEngineHistoryItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

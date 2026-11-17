@@ -1,4 +1,4 @@
-type QColorTransform* {.inheritable, pure.} = object
+type QColorTransform* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

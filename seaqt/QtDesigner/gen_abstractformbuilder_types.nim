@@ -1,4 +1,4 @@
-type QAbstractFormBuilder* {.inheritable, pure.} = object
+type QAbstractFormBuilder* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

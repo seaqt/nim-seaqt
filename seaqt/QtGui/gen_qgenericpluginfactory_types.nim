@@ -1,4 +1,4 @@
-type QGenericPluginFactory* {.inheritable, pure.} = object
+type QGenericPluginFactory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

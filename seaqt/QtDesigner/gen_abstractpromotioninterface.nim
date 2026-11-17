@@ -48,19 +48,17 @@ type cQDesignerPromotionInterfacePromotedClass*{.exportc: "QDesignerPromotionInt
 proc fcQDesignerPromotionInterface_promotedClasses(self: pointer): struct_seaqt_array {.importc: "QDesignerPromotionInterface_promotedClasses".}
 proc fcQDesignerPromotionInterface_referencedPromotedClassNames(self: pointer): HashSet[struct_seaqt_string] {.importc: "QDesignerPromotionInterface_referencedPromotedClassNames".}
 proc fcQDesignerPromotionInterface_promotionBaseClasses(self: pointer): struct_seaqt_array {.importc: "QDesignerPromotionInterface_promotionBaseClasses".}
-proc fcQDesignerPromotionInterface_delete(self: pointer) {.importc: "QDesignerPromotionInterface_delete".}
 proc fcQDesignerPromotionInterfacePromotedClass_baseItem(self: pointer): pointer {.importc: "QDesignerPromotionInterface__PromotedClass_baseItem".}
 proc fcQDesignerPromotionInterfacePromotedClass_setBaseItem(self: pointer, baseItem: pointer): void {.importc: "QDesignerPromotionInterface__PromotedClass_setBaseItem".}
 proc fcQDesignerPromotionInterfacePromotedClass_promotedItem(self: pointer): pointer {.importc: "QDesignerPromotionInterface__PromotedClass_promotedItem".}
 proc fcQDesignerPromotionInterfacePromotedClass_setPromotedItem(self: pointer, promotedItem: pointer): void {.importc: "QDesignerPromotionInterface__PromotedClass_setPromotedItem".}
-proc fcQDesignerPromotionInterfacePromotedClass_delete(self: pointer) {.importc: "QDesignerPromotionInterface__PromotedClass_delete".}
 
 proc promotedClasses*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterface): seq[gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass] =
   var v_ma = fcQDesignerPromotionInterface_promotedClasses(self.h)
   var vx_ret = newSeq[gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass(h: v_outCast[i])
+    vx_ret[i] = gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -80,23 +78,19 @@ proc promotionBaseClasses*(self: gen_abstractpromotioninterface_types.QDesignerP
   var vx_ret = newSeq[gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: v_outCast[i])
+    vx_ret[i] = gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
-proc delete*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterface) =
-  fcQDesignerPromotionInterface_delete(self.h)
 proc baseItem*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass): gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface =
-  gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerPromotionInterfacePromotedClass_baseItem(self.h))
+  gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerPromotionInterfacePromotedClass_baseItem(self.h), owned: false)
 
 proc setBaseItem*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass, baseItem: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface): void =
   fcQDesignerPromotionInterfacePromotedClass_setBaseItem(self.h, baseItem.h)
 
 proc promotedItem*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass): gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface =
-  gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerPromotionInterfacePromotedClass_promotedItem(self.h))
+  gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface(h: fcQDesignerPromotionInterfacePromotedClass_promotedItem(self.h), owned: false)
 
 proc setPromotedItem*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass, promotedItem: gen_abstractwidgetdatabase_types.QDesignerWidgetDataBaseItemInterface): void =
   fcQDesignerPromotionInterfacePromotedClass_setPromotedItem(self.h, promotedItem.h)
 
-proc delete*(self: gen_abstractpromotioninterface_types.QDesignerPromotionInterfacePromotedClass) =
-  fcQDesignerPromotionInterfacePromotedClass_delete(self.h)

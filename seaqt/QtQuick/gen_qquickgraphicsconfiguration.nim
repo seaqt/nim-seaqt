@@ -47,7 +47,6 @@ proc fcQQuickGraphicsConfiguration_setDepthBufferFor2D(self: pointer, enable: bo
 proc fcQQuickGraphicsConfiguration_isDepthBufferEnabledFor2D(self: pointer): bool {.importc: "QQuickGraphicsConfiguration_isDepthBufferEnabledFor2D".}
 proc fcQQuickGraphicsConfiguration_new(): ptr cQQuickGraphicsConfiguration {.importc: "QQuickGraphicsConfiguration_new".}
 proc fcQQuickGraphicsConfiguration_new2(other: pointer): ptr cQQuickGraphicsConfiguration {.importc: "QQuickGraphicsConfiguration_new2".}
-proc fcQQuickGraphicsConfiguration_delete(self: pointer) {.importc: "QQuickGraphicsConfiguration_delete".}
 
 proc operatorAssign*(self: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration, other: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): void =
   fcQQuickGraphicsConfiguration_operatorAssign(self.h, other.h)
@@ -90,11 +89,9 @@ proc isDepthBufferEnabledFor2D*(self: gen_qquickgraphicsconfiguration_types.QQui
   fcQQuickGraphicsConfiguration_isDepthBufferEnabledFor2D(self.h)
 
 proc create*(T: type gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration =
-  let tmp = gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration(h: fcQQuickGraphicsConfiguration_new())
+  let tmp = gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration(h: fcQQuickGraphicsConfiguration_new(), owned: true)
   tmp
 proc create*(T: type gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration,
     other: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration): gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration =
-  let tmp = gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration(h: fcQQuickGraphicsConfiguration_new2(other.h))
+  let tmp = gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration(h: fcQQuickGraphicsConfiguration_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qquickgraphicsconfiguration_types.QQuickGraphicsConfiguration) =
-  fcQQuickGraphicsConfiguration_delete(self.h)

@@ -98,10 +98,9 @@ proc fcQExtensionFactory_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQExtensionFactory_new(vtbl: pointer, vdata: csize_t): ptr cQExtensionFactory {.importc: "QExtensionFactory_new".}
 proc fcQExtensionFactory_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQExtensionFactory {.importc: "QExtensionFactory_new2".}
 proc fcQExtensionFactory_staticMetaObject(): pointer {.importc: "QExtensionFactory_staticMetaObject".}
-proc fcQExtensionFactory_delete(self: pointer) {.importc: "QExtensionFactory_delete".}
 
 proc metaObject*(self: gen_default_extensionfactory_types.QExtensionFactory): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQExtensionFactory_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQExtensionFactory_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_default_extensionfactory_types.QExtensionFactory, param1: cstring): pointer =
   fcQExtensionFactory_metacast(self.h, param1)
@@ -116,10 +115,10 @@ proc tr*(_: type gen_default_extensionfactory_types.QExtensionFactory, s: cstrin
   vx_ret
 
 proc extension*(self: gen_default_extensionfactory_types.QExtensionFactory, objectVal: gen_qobject_types.QObject, iid: openArray[char]): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQExtensionFactory_extension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid)))))
+  gen_qobject_types.QObject(h: fcQExtensionFactory_extension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid)))), owned: false)
 
 proc extensionManager*(self: gen_default_extensionfactory_types.QExtensionFactory): gen_qextensionmanager_types.QExtensionManager =
-  gen_qextensionmanager_types.QExtensionManager(h: fcQExtensionFactory_extensionManager(self.h))
+  gen_qextensionmanager_types.QExtensionManager(h: fcQExtensionFactory_extensionManager(self.h), owned: false)
 
 proc tr*(_: type gen_default_extensionfactory_types.QExtensionFactory, s: cstring, c: cstring): string =
   let v_ms = fcQExtensionFactory_tr2(s, c)
@@ -145,7 +144,8 @@ type QExtensionFactorychildEventProc* = proc(self: QExtensionFactory, event: gen
 type QExtensionFactorycustomEventProc* = proc(self: QExtensionFactory, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QExtensionFactoryconnectNotifyProc* = proc(self: QExtensionFactory, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QExtensionFactorydisconnectNotifyProc* = proc(self: QExtensionFactory, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QExtensionFactoryVTable* = object
+
+type QExtensionFactoryVTable* {.inheritable, pure.} = object
   vtbl: cQExtensionFactoryVTable
   metaObject*: QExtensionFactorymetaObjectProc
   metacast*: QExtensionFactorymetacastProc
@@ -161,7 +161,7 @@ type QExtensionFactoryVTable* = object
   disconnectNotify*: QExtensionFactorydisconnectNotifyProc
 
 proc QExtensionFactorymetaObject*(self: gen_default_extensionfactory_types.QExtensionFactory): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQExtensionFactory_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQExtensionFactory_virtualbase_metaObject(self.h), owned: false)
 
 proc QExtensionFactorymetacast*(self: gen_default_extensionfactory_types.QExtensionFactory, param1: cstring): pointer =
   fcQExtensionFactory_virtualbase_metacast(self.h, param1)
@@ -170,10 +170,10 @@ proc QExtensionFactorymetacall*(self: gen_default_extensionfactory_types.QExtens
   fcQExtensionFactory_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QExtensionFactoryextension*(self: gen_default_extensionfactory_types.QExtensionFactory, objectVal: gen_qobject_types.QObject, iid: openArray[char]): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQExtensionFactory_virtualbase_extension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid)))))
+  gen_qobject_types.QObject(h: fcQExtensionFactory_virtualbase_extension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid)))), owned: false)
 
 proc QExtensionFactorycreateExtension*(self: gen_default_extensionfactory_types.QExtensionFactory, objectVal: gen_qobject_types.QObject, iid: openArray[char], parent: gen_qobject_types.QObject): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQExtensionFactory_virtualbase_createExtension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid))), parent.h))
+  gen_qobject_types.QObject(h: fcQExtensionFactory_virtualbase_createExtension(self.h, objectVal.h, struct_seaqt_string(data: if len(iid) > 0: addr iid[0] else: nil, len: csize_t(len(iid))), parent.h), owned: false)
 
 proc QExtensionFactoryevent*(self: gen_default_extensionfactory_types.QExtensionFactory, event: gen_qcoreevent_types.QEvent): bool =
   fcQExtensionFactory_virtualbase_event(self.h, event.h)
@@ -201,7 +201,10 @@ proc fcQExtensionFactory_vtable_callback_metaObject(self: pointer): pointer {.cd
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQExtensionFactory_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
@@ -222,69 +225,75 @@ proc fcQExtensionFactory_vtable_callback_metacall(self: pointer, param1: cint, p
 proc fcQExtensionFactory_vtable_callback_extension(self: pointer, objectVal: pointer, iid: struct_seaqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let viid_ms = iid
   let viidx_ret = string.fromBytes(viid_ms)
   c_free(viid_ms.data)
   let slotval2 = viidx_ret
   var virtualReturn = vtbl[].extension(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQExtensionFactory_vtable_callback_createExtension(self: pointer, objectVal: pointer, iid: struct_seaqt_string, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let viid_ms = iid
   let viidx_ret = string.fromBytes(viid_ms)
   c_free(viid_ms.data)
   let slotval2 = viidx_ret
-  let slotval3 = gen_qobject_types.QObject(h: parent)
+  let slotval3 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = vtbl[].createExtension(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQExtensionFactory_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQExtensionFactory_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQExtensionFactory_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQExtensionFactory_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQExtensionFactory_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQExtensionFactory_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQExtensionFactory_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QExtensionFactoryVTable](fcQExtensionFactory_vdata(self)[])
   let self = QExtensionFactory(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQExtensionFactory* {.inheritable.} = ref object of QExtensionFactory
@@ -318,7 +327,10 @@ method disconnectNotify*(self: VirtualQExtensionFactory, signal: gen_qmetaobject
 proc fcQExtensionFactory_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQExtensionFactory_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
@@ -336,66 +348,72 @@ proc fcQExtensionFactory_method_callback_metacall(self: pointer, param1: cint, p
 
 proc fcQExtensionFactory_method_callback_extension(self: pointer, objectVal: pointer, iid: struct_seaqt_string): pointer {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let viid_ms = iid
   let viidx_ret = string.fromBytes(viid_ms)
   c_free(viid_ms.data)
   let slotval2 = viidx_ret
   var virtualReturn = inst.extension(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQExtensionFactory_method_callback_createExtension(self: pointer, objectVal: pointer, iid: struct_seaqt_string, parent: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let viid_ms = iid
   let viidx_ret = string.fromBytes(viid_ms)
   c_free(viid_ms.data)
   let slotval2 = viidx_ret
-  let slotval3 = gen_qobject_types.QObject(h: parent)
+  let slotval3 = gen_qobject_types.QObject(h: parent, owned: false)
   var virtualReturn = inst.createExtension(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQExtensionFactory_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQExtensionFactory_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQExtensionFactory_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQExtensionFactory_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQExtensionFactory_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQExtensionFactory_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQExtensionFactory_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQExtensionFactory](fcQExtensionFactory_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_default_extensionfactory_types.QExtensionFactory): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQExtensionFactory_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQExtensionFactory_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_default_extensionfactory_types.QExtensionFactory): cint =
   fcQExtensionFactory_protectedbase_senderSignalIndex(self.h)
@@ -437,7 +455,7 @@ proc create*(T: type gen_default_extensionfactory_types.QExtensionFactory,
     vtbl[].vtbl.connectNotify = fcQExtensionFactory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQExtensionFactory_vtable_callback_disconnectNotify
-  let tmp = gen_default_extensionfactory_types.QExtensionFactory(h: fcQExtensionFactory_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_default_extensionfactory_types.QExtensionFactory(h: fcQExtensionFactory_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQExtensionFactory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_default_extensionfactory_types.QExtensionFactory,
@@ -472,13 +490,14 @@ proc create*(T: type gen_default_extensionfactory_types.QExtensionFactory,
     vtbl[].vtbl.connectNotify = fcQExtensionFactory_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQExtensionFactory_vtable_callback_disconnectNotify
-  let tmp = gen_default_extensionfactory_types.QExtensionFactory(h: fcQExtensionFactory_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_default_extensionfactory_types.QExtensionFactory(h: fcQExtensionFactory_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQExtensionFactory_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQExtensionFactory_mvtbl = cQExtensionFactoryVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQExtensionFactory()[])](self.fcQExtensionFactory_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQExtensionFactory_method_callback_metaObject,
   metacast: fcQExtensionFactory_method_callback_metacast,
@@ -510,5 +529,3 @@ proc create*(T: type gen_default_extensionfactory_types.QExtensionFactory,
 
 proc staticMetaObject*(_: type gen_default_extensionfactory_types.QExtensionFactory): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQExtensionFactory_staticMetaObject())
-proc delete*(self: gen_default_extensionfactory_types.QExtensionFactory) =
-  fcQExtensionFactory_delete(self.h)

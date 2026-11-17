@@ -1,4 +1,4 @@
-type QTextDocumentWriter* {.inheritable, pure.} = object
+type QTextDocumentWriter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

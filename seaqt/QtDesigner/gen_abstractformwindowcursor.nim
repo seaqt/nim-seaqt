@@ -97,10 +97,9 @@ type cQDesignerFormWindowCursorInterfaceVTable {.pure.} = object
   setWidgetProperty*: proc(self: pointer, widget: pointer, name: struct_seaqt_string, value: pointer): void {.cdecl, raises: [], gcsafe.}
   resetWidgetProperty*: proc(self: pointer, widget: pointer, name: struct_seaqt_string): void {.cdecl, raises: [], gcsafe.}
 proc fcQDesignerFormWindowCursorInterface_new(vtbl: pointer, vdata: csize_t): ptr cQDesignerFormWindowCursorInterface {.importc: "QDesignerFormWindowCursorInterface_new".}
-proc fcQDesignerFormWindowCursorInterface_delete(self: pointer) {.importc: "QDesignerFormWindowCursorInterface_delete".}
 
 proc formWindow*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface): gen_abstractformwindow_types.QDesignerFormWindowInterface =
-  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowCursorInterface_formWindow(self.h))
+  gen_abstractformwindow_types.QDesignerFormWindowInterface(h: fcQDesignerFormWindowCursorInterface_formWindow(self.h), owned: false)
 
 proc movePosition*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface, op: cint, mode: cint): bool =
   fcQDesignerFormWindowCursorInterface_movePosition(self.h, cint(op), cint(mode))
@@ -112,13 +111,13 @@ proc setPosition*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCu
   fcQDesignerFormWindowCursorInterface_setPosition(self.h, pos, cint(mode))
 
 proc current*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerFormWindowCursorInterface_current(self.h))
+  gen_qwidget_types.QWidget(h: fcQDesignerFormWindowCursorInterface_current(self.h), owned: false)
 
 proc widgetCount*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface): cint =
   fcQDesignerFormWindowCursorInterface_widgetCount(self.h)
 
 proc widget*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface, index: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerFormWindowCursorInterface_widget(self.h, index))
+  gen_qwidget_types.QWidget(h: fcQDesignerFormWindowCursorInterface_widget(self.h, index), owned: false)
 
 proc hasSelection*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface): bool =
   fcQDesignerFormWindowCursorInterface_hasSelection(self.h)
@@ -127,7 +126,7 @@ proc selectedWidgetCount*(self: gen_abstractformwindowcursor_types.QDesignerForm
   fcQDesignerFormWindowCursorInterface_selectedWidgetCount(self.h)
 
 proc selectedWidget*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface, index: cint): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQDesignerFormWindowCursorInterface_selectedWidget(self.h, index))
+  gen_qwidget_types.QWidget(h: fcQDesignerFormWindowCursorInterface_selectedWidget(self.h, index), owned: false)
 
 proc setProperty*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface, name: openArray[char], value: gen_qvariant_types.QVariant): void =
   fcQDesignerFormWindowCursorInterface_setProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
@@ -154,7 +153,8 @@ type QDesignerFormWindowCursorInterfaceselectedWidgetProc* = proc(self: QDesigne
 type QDesignerFormWindowCursorInterfacesetPropertyProc* = proc(self: QDesignerFormWindowCursorInterface, name: openArray[char], value: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QDesignerFormWindowCursorInterfacesetWidgetPropertyProc* = proc(self: QDesignerFormWindowCursorInterface, widget: gen_qwidget_types.QWidget, name: openArray[char], value: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
 type QDesignerFormWindowCursorInterfaceresetWidgetPropertyProc* = proc(self: QDesignerFormWindowCursorInterface, widget: gen_qwidget_types.QWidget, name: openArray[char]): void {.raises: [], gcsafe.}
-type QDesignerFormWindowCursorInterfaceVTable* = object
+
+type QDesignerFormWindowCursorInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerFormWindowCursorInterfaceVTable
   formWindow*: QDesignerFormWindowCursorInterfaceformWindowProc
   movePosition*: QDesignerFormWindowCursorInterfacemovePositionProc
@@ -175,7 +175,10 @@ proc fcQDesignerFormWindowCursorInterface_vtable_callback_formWindow(self: point
   let vtbl = cast[ptr QDesignerFormWindowCursorInterfaceVTable](fcQDesignerFormWindowCursorInterface_vdata(self)[])
   let self = QDesignerFormWindowCursorInterface(h: self)
   var virtualReturn = vtbl[].formWindow(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerFormWindowCursorInterface_vtable_callback_movePosition(self: pointer, op: cint, mode: cint): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerFormWindowCursorInterfaceVTable](fcQDesignerFormWindowCursorInterface_vdata(self)[])
@@ -202,7 +205,10 @@ proc fcQDesignerFormWindowCursorInterface_vtable_callback_current(self: pointer)
   let vtbl = cast[ptr QDesignerFormWindowCursorInterfaceVTable](fcQDesignerFormWindowCursorInterface_vdata(self)[])
   let self = QDesignerFormWindowCursorInterface(h: self)
   var virtualReturn = vtbl[].current(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerFormWindowCursorInterface_vtable_callback_widgetCount(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerFormWindowCursorInterfaceVTable](fcQDesignerFormWindowCursorInterface_vdata(self)[])
@@ -215,7 +221,10 @@ proc fcQDesignerFormWindowCursorInterface_vtable_callback_widget(self: pointer, 
   let self = QDesignerFormWindowCursorInterface(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].widget(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerFormWindowCursorInterface_vtable_callback_hasSelection(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerFormWindowCursorInterfaceVTable](fcQDesignerFormWindowCursorInterface_vdata(self)[])
@@ -234,7 +243,10 @@ proc fcQDesignerFormWindowCursorInterface_vtable_callback_selectedWidget(self: p
   let self = QDesignerFormWindowCursorInterface(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].selectedWidget(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerFormWindowCursorInterface_vtable_callback_setProperty(self: pointer, name: struct_seaqt_string, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerFormWindowCursorInterfaceVTable](fcQDesignerFormWindowCursorInterface_vdata(self)[])
@@ -243,24 +255,24 @@ proc fcQDesignerFormWindowCursorInterface_vtable_callback_setProperty(self: poin
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setProperty(self, slotval1, slotval2)
 
 proc fcQDesignerFormWindowCursorInterface_vtable_callback_setWidgetProperty(self: pointer, widget: pointer, name: struct_seaqt_string, value: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerFormWindowCursorInterfaceVTable](fcQDesignerFormWindowCursorInterface_vdata(self)[])
   let self = QDesignerFormWindowCursorInterface(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setWidgetProperty(self, slotval1, slotval2, slotval3)
 
 proc fcQDesignerFormWindowCursorInterface_vtable_callback_resetWidgetProperty(self: pointer, widget: pointer, name: struct_seaqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerFormWindowCursorInterfaceVTable](fcQDesignerFormWindowCursorInterface_vdata(self)[])
   let self = QDesignerFormWindowCursorInterface(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
@@ -300,7 +312,10 @@ method resetWidgetProperty*(self: VirtualQDesignerFormWindowCursorInterface, wid
 proc fcQDesignerFormWindowCursorInterface_method_callback_formWindow(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
   var virtualReturn = inst.formWindow()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerFormWindowCursorInterface_method_callback_movePosition(self: pointer, op: cint, mode: cint): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
@@ -323,7 +338,10 @@ proc fcQDesignerFormWindowCursorInterface_method_callback_setPosition(self: poin
 proc fcQDesignerFormWindowCursorInterface_method_callback_current(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
   var virtualReturn = inst.current()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerFormWindowCursorInterface_method_callback_widgetCount(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
@@ -334,7 +352,10 @@ proc fcQDesignerFormWindowCursorInterface_method_callback_widget(self: pointer, 
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.widget(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerFormWindowCursorInterface_method_callback_hasSelection(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
@@ -350,7 +371,10 @@ proc fcQDesignerFormWindowCursorInterface_method_callback_selectedWidget(self: p
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
   let slotval1 = index
   var virtualReturn = inst.selectedWidget(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerFormWindowCursorInterface_method_callback_setProperty(self: pointer, name: struct_seaqt_string, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
@@ -358,22 +382,22 @@ proc fcQDesignerFormWindowCursorInterface_method_callback_setProperty(self: poin
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setProperty(slotval1, slotval2)
 
 proc fcQDesignerFormWindowCursorInterface_method_callback_setWidgetProperty(self: pointer, widget: pointer, name: struct_seaqt_string, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval2 = vnamex_ret
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setWidgetProperty(slotval1, slotval2, slotval3)
 
 proc fcQDesignerFormWindowCursorInterface_method_callback_resetWidgetProperty(self: pointer, widget: pointer, name: struct_seaqt_string): void {.cdecl.} =
   let inst = cast[VirtualQDesignerFormWindowCursorInterface](fcQDesignerFormWindowCursorInterface_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   let vname_ms = name
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
@@ -414,13 +438,14 @@ proc create*(T: type gen_abstractformwindowcursor_types.QDesignerFormWindowCurso
     vtbl[].vtbl.setWidgetProperty = fcQDesignerFormWindowCursorInterface_vtable_callback_setWidgetProperty
   if not isNil(vtbl[].resetWidgetProperty):
     vtbl[].vtbl.resetWidgetProperty = fcQDesignerFormWindowCursorInterface_vtable_callback_resetWidgetProperty
-  let tmp = gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface(h: fcQDesignerFormWindowCursorInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface(h: fcQDesignerFormWindowCursorInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQDesignerFormWindowCursorInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerFormWindowCursorInterface_mvtbl = cQDesignerFormWindowCursorInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerFormWindowCursorInterface()[])](self.fcQDesignerFormWindowCursorInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   formWindow: fcQDesignerFormWindowCursorInterface_method_callback_formWindow,
   movePosition: fcQDesignerFormWindowCursorInterface_method_callback_movePosition,
@@ -443,5 +468,3 @@ proc create*(T: type gen_abstractformwindowcursor_types.QDesignerFormWindowCurso
   fcQDesignerFormWindowCursorInterface_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_abstractformwindowcursor_types.QDesignerFormWindowCursorInterface) =
-  fcQDesignerFormWindowCursorInterface_delete(self.h)

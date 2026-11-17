@@ -1,4 +1,4 @@
-type QDesignerWidgetDataBaseItemInterface* {.inheritable, pure.} = object
+type QDesignerWidgetDataBaseItemInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

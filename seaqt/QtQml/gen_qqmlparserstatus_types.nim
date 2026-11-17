@@ -1,4 +1,4 @@
-type QQmlParserStatus* {.inheritable, pure.} = object
+type QQmlParserStatus* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

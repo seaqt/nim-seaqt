@@ -1,4 +1,4 @@
-type QCborStreamWriter* {.inheritable, pure.} = object
+type QCborStreamWriter* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

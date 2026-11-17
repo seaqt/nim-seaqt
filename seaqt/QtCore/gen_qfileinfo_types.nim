@@ -1,4 +1,4 @@
-type QFileInfo* {.inheritable, pure.} = object
+type QFileInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

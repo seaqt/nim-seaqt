@@ -57,7 +57,6 @@ proc fcQLockFile_removeStaleLockFile(self: pointer): bool {.importc: "QLockFile_
 proc fcQLockFile_error(self: pointer): cint {.importc: "QLockFile_error".}
 proc fcQLockFile_tryLock2(self: pointer, timeout: cint): bool {.importc: "QLockFile_tryLock2".}
 proc fcQLockFile_new(fileName: struct_seaqt_string): ptr cQLockFile {.importc: "QLockFile_new".}
-proc fcQLockFile_delete(self: pointer) {.importc: "QLockFile_delete".}
 
 proc fileName*(self: gen_qlockfile_types.QLockFile): string =
   let v_ms = fcQLockFile_fileName(self.h)
@@ -94,7 +93,5 @@ proc tryLock*(self: gen_qlockfile_types.QLockFile, timeout: cint): bool =
 
 proc create*(T: type gen_qlockfile_types.QLockFile,
     fileName: openArray[char]): gen_qlockfile_types.QLockFile =
-  let tmp = gen_qlockfile_types.QLockFile(h: fcQLockFile_new(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))))
+  let tmp = gen_qlockfile_types.QLockFile(h: fcQLockFile_new(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: true)
   tmp
-proc delete*(self: gen_qlockfile_types.QLockFile) =
-  fcQLockFile_delete(self.h)

@@ -1,4 +1,4 @@
-type QSharedData* {.inheritable, pure.} = object
+type QSharedData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QSharedData) =
   wasMoved(self)
   fcQSharedData_delete(h)
 
-type QAdoptSharedDataTag* {.inheritable, pure.} = object
+type QAdoptSharedDataTag* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -47,13 +47,13 @@ type cQAbstractNativeEventFilterVTable {.pure.} = object
   destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
   nativeEventFilter*: proc(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl, raises: [], gcsafe.}
 proc fcQAbstractNativeEventFilter_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractNativeEventFilter {.importc: "QAbstractNativeEventFilter_new".}
-proc fcQAbstractNativeEventFilter_delete(self: pointer) {.importc: "QAbstractNativeEventFilter_delete".}
 
 proc nativeEventFilter*(self: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool =
   fcQAbstractNativeEventFilter_nativeEventFilter(self.h, struct_seaqt_string(data: if len(eventType) > 0: addr eventType[0] else: nil, len: csize_t(len(eventType))), message, resultVal)
 
 type QAbstractNativeEventFilternativeEventFilterProc* = proc(self: QAbstractNativeEventFilter, eventType: openArray[byte], message: pointer, resultVal: ptr uint): bool {.raises: [], gcsafe.}
-type QAbstractNativeEventFilterVTable* = object
+
+type QAbstractNativeEventFilterVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractNativeEventFilterVTable
   nativeEventFilter*: QAbstractNativeEventFilternativeEventFilterProc
 
@@ -97,13 +97,14 @@ proc create*(T: type gen_qabstractnativeeventfilter_types.QAbstractNativeEventFi
     GC_unref(vtbl)
   if not isNil(vtbl[].nativeEventFilter):
     vtbl[].vtbl.nativeEventFilter = fcQAbstractNativeEventFilter_vtable_callback_nativeEventFilter
-  let tmp = gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter(h: fcQAbstractNativeEventFilter_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter(h: fcQAbstractNativeEventFilter_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQAbstractNativeEventFilter_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQAbstractNativeEventFilter_mvtbl = cQAbstractNativeEventFilterVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQAbstractNativeEventFilter()[])](self.fcQAbstractNativeEventFilter_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   nativeEventFilter: fcQAbstractNativeEventFilter_method_callback_nativeEventFilter,
 )
@@ -114,5 +115,3 @@ proc create*(T: type gen_qabstractnativeeventfilter_types.QAbstractNativeEventFi
   fcQAbstractNativeEventFilter_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter) =
-  fcQAbstractNativeEventFilter_delete(self.h)

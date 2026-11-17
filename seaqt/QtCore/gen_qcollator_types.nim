@@ -1,4 +1,4 @@
-type QCollatorSortKey* {.inheritable, pure.} = object
+type QCollatorSortKey* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QCollatorSortKey) =
   wasMoved(self)
   fcQCollatorSortKey_delete(h)
 
-type QCollator* {.inheritable, pure.} = object
+type QCollator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

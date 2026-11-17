@@ -1,4 +1,4 @@
-type QImageIOHandler* {.inheritable, pure.} = object
+type QImageIOHandler* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

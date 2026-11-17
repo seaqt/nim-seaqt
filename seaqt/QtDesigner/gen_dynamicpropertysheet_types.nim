@@ -1,4 +1,4 @@
-type QDesignerDynamicPropertySheetExtension* {.inheritable, pure.} = object
+type QDesignerDynamicPropertySheetExtension* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

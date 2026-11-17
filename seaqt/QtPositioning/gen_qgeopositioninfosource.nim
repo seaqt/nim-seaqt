@@ -149,10 +149,9 @@ proc fcQGeoPositionInfoSource_protectedbase_receivers(self: pointer, signal: cst
 proc fcQGeoPositionInfoSource_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGeoPositionInfoSource_protectedbase_isSignalConnected".}
 proc fcQGeoPositionInfoSource_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGeoPositionInfoSource {.importc: "QGeoPositionInfoSource_new".}
 proc fcQGeoPositionInfoSource_staticMetaObject(): pointer {.importc: "QGeoPositionInfoSource_staticMetaObject".}
-proc fcQGeoPositionInfoSource_delete(self: pointer) {.importc: "QGeoPositionInfoSource_delete".}
 
 proc metaObject*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGeoPositionInfoSource_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGeoPositionInfoSource_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource, param1: cstring): pointer =
   fcQGeoPositionInfoSource_metacast(self.h, param1)
@@ -179,7 +178,7 @@ proc preferredPositioningMethods*(self: gen_qgeopositioninfosource_types.QGeoPos
   cint(fcQGeoPositionInfoSource_preferredPositioningMethods(self.h))
 
 proc lastKnownPosition*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource, fromSatellitePositioningMethodsOnly: bool): gen_qgeopositioninfo_types.QGeoPositionInfo =
-  gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfoSource_lastKnownPosition(self.h, fromSatellitePositioningMethodsOnly))
+  gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQGeoPositionInfoSource_lastKnownPosition(self.h, fromSatellitePositioningMethodsOnly), owned: true)
 
 proc supportedPositioningMethods*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource): cint =
   cint(fcQGeoPositionInfoSource_supportedPositioningMethods(self.h))
@@ -197,35 +196,41 @@ proc setBackendProperty*(self: gen_qgeopositioninfosource_types.QGeoPositionInfo
   fcQGeoPositionInfoSource_setBackendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
 proc backendProperty*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource, name: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGeoPositionInfoSource_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qvariant_types.QVariant(h: fcQGeoPositionInfoSource_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc createDefaultSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createDefaultSource(parent.h))
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createDefaultSource(parent.h), owned: false)
 
 proc createDefaultSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, parameters: Table[string,gen_qvariant_types.QVariant], parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
   var parameters_Values_CArray = newSeq[pointer](len(parameters))
   var parameters_ctr = 0
-  for parameters_k, parameters_v in parameters:
+  for parameters_k in parameters.keys():
     parameters_Keys_CArray[parameters_ctr] = struct_seaqt_string(data: if len(parameters_k) > 0: addr parameters_k[0] else: nil, len: csize_t(len(parameters_k)))
+    parameters_ctr += 1
+  parameters_ctr = 0
+  for parameters_v in parameters.values():
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createDefaultSource2(struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h))
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createDefaultSource2(struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, sourceName: openArray[char], parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createSource(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h))
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createSource(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource, sourceName: openArray[char], parameters: Table[string,gen_qvariant_types.QVariant], parent: gen_qobject_types.QObject): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
   var parameters_Values_CArray = newSeq[pointer](len(parameters))
   var parameters_ctr = 0
-  for parameters_k, parameters_v in parameters:
+  for parameters_k in parameters.keys():
     parameters_Keys_CArray[parameters_ctr] = struct_seaqt_string(data: if len(parameters_k) > 0: addr parameters_k[0] else: nil, len: csize_t(len(parameters_k)))
+    parameters_ctr += 1
+  parameters_ctr = 0
+  for parameters_v in parameters.values():
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createSource2(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h))
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_createSource2(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
 
 proc availableSources*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource): seq[string] =
   var v_ma = fcQGeoPositionInfoSource_availableSources()
@@ -257,7 +262,7 @@ proc positionUpdated*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSou
 type QGeoPositionInfoSourcepositionUpdatedSlot* = proc(update: gen_qgeopositioninfo_types.QGeoPositionInfo)
 proc fcQGeoPositionInfoSource_slot_callback_positionUpdated(slot: int, update: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGeoPositionInfoSourcepositionUpdatedSlot](cast[pointer](slot))
-  let slotval1 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: update)
+  let slotval1 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: update, owned: false)
 
   nimfunc[](slotval1)
 
@@ -342,7 +347,8 @@ type QGeoPositionInfoSourcechildEventProc* = proc(self: QGeoPositionInfoSource, 
 type QGeoPositionInfoSourcecustomEventProc* = proc(self: QGeoPositionInfoSource, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGeoPositionInfoSourceconnectNotifyProc* = proc(self: QGeoPositionInfoSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGeoPositionInfoSourcedisconnectNotifyProc* = proc(self: QGeoPositionInfoSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QGeoPositionInfoSourceVTable* = object
+
+type QGeoPositionInfoSourceVTable* {.inheritable, pure.} = object
   vtbl: cQGeoPositionInfoSourceVTable
   metaObject*: QGeoPositionInfoSourcemetaObjectProc
   metacast*: QGeoPositionInfoSourcemetacastProc
@@ -367,7 +373,7 @@ type QGeoPositionInfoSourceVTable* = object
   disconnectNotify*: QGeoPositionInfoSourcedisconnectNotifyProc
 
 proc QGeoPositionInfoSourcemetaObject*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGeoPositionInfoSource_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGeoPositionInfoSource_virtualbase_metaObject(self.h), owned: false)
 
 proc QGeoPositionInfoSourcemetacast*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource, param1: cstring): pointer =
   fcQGeoPositionInfoSource_virtualbase_metacast(self.h, param1)
@@ -385,7 +391,7 @@ proc QGeoPositionInfoSourcesetBackendProperty*(self: gen_qgeopositioninfosource_
   fcQGeoPositionInfoSource_virtualbase_setBackendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
 proc QGeoPositionInfoSourcebackendProperty*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource, name: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGeoPositionInfoSource_virtualbase_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qvariant_types.QVariant(h: fcQGeoPositionInfoSource_virtualbase_backendProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc QGeoPositionInfoSourceevent*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource, event: gen_qcoreevent_types.QEvent): bool =
   fcQGeoPositionInfoSource_virtualbase_event(self.h, event.h)
@@ -413,7 +419,10 @@ proc fcQGeoPositionInfoSource_vtable_callback_metaObject(self: pointer): pointer
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
   let self = QGeoPositionInfoSource(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSource_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
@@ -448,7 +457,10 @@ proc fcQGeoPositionInfoSource_vtable_callback_lastKnownPosition(self: pointer, f
   let self = QGeoPositionInfoSource(h: self)
   let slotval1 = fromSatellitePositioningMethodsOnly
   var virtualReturn = vtbl[].lastKnownPosition(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSource_vtable_callback_supportedPositioningMethods(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
@@ -469,7 +481,7 @@ proc fcQGeoPositionInfoSource_vtable_callback_setBackendProperty(self: pointer, 
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = vtbl[].setBackendProperty(self, slotval1, slotval2)
   virtualReturn
 
@@ -481,7 +493,10 @@ proc fcQGeoPositionInfoSource_vtable_callback_backendProperty(self: pointer, nam
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
   var virtualReturn = vtbl[].backendProperty(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSource_vtable_callback_error(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
@@ -508,46 +523,46 @@ proc fcQGeoPositionInfoSource_vtable_callback_requestUpdate(self: pointer, timeo
 proc fcQGeoPositionInfoSource_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
   let self = QGeoPositionInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQGeoPositionInfoSource_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
   let self = QGeoPositionInfoSource(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQGeoPositionInfoSource_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
   let self = QGeoPositionInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQGeoPositionInfoSource_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
   let self = QGeoPositionInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQGeoPositionInfoSource_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
   let self = QGeoPositionInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQGeoPositionInfoSource_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
   let self = QGeoPositionInfoSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQGeoPositionInfoSource_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoPositionInfoSourceVTable](fcQGeoPositionInfoSource_vdata(self)[])
   let self = QGeoPositionInfoSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQGeoPositionInfoSource* {.inheritable.} = ref object of QGeoPositionInfoSource
@@ -599,7 +614,10 @@ method disconnectNotify*(self: VirtualQGeoPositionInfoSource, signal: gen_qmetao
 proc fcQGeoPositionInfoSource_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSource_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
@@ -629,7 +647,10 @@ proc fcQGeoPositionInfoSource_method_callback_lastKnownPosition(self: pointer, f
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
   let slotval1 = fromSatellitePositioningMethodsOnly
   var virtualReturn = inst.lastKnownPosition(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSource_method_callback_supportedPositioningMethods(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
@@ -647,7 +668,7 @@ proc fcQGeoPositionInfoSource_method_callback_setBackendProperty(self: pointer, 
   let vnamex_ret = string.fromBytes(vname_ms)
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   var virtualReturn = inst.setBackendProperty(slotval1, slotval2)
   virtualReturn
 
@@ -658,7 +679,10 @@ proc fcQGeoPositionInfoSource_method_callback_backendProperty(self: pointer, nam
   c_free(vname_ms.data)
   let slotval1 = vnamex_ret
   var virtualReturn = inst.backendProperty(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoPositionInfoSource_method_callback_error(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
@@ -680,45 +704,45 @@ proc fcQGeoPositionInfoSource_method_callback_requestUpdate(self: pointer, timeo
 
 proc fcQGeoPositionInfoSource_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQGeoPositionInfoSource_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQGeoPositionInfoSource_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQGeoPositionInfoSource_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQGeoPositionInfoSource_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQGeoPositionInfoSource_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQGeoPositionInfoSource_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoPositionInfoSource](fcQGeoPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGeoPositionInfoSource_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGeoPositionInfoSource_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource): cint =
   fcQGeoPositionInfoSource_protectedbase_senderSignalIndex(self.h)
@@ -779,13 +803,14 @@ proc create*(T: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource,
     vtbl[].vtbl.connectNotify = fcQGeoPositionInfoSource_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQGeoPositionInfoSource_vtable_callback_disconnectNotify
-  let tmp = gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoPositionInfoSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGeoPositionInfoSource_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGeoPositionInfoSource_mvtbl = cQGeoPositionInfoSourceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGeoPositionInfoSource()[])](self.fcQGeoPositionInfoSource_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQGeoPositionInfoSource_method_callback_metaObject,
   metacast: fcQGeoPositionInfoSource_method_callback_metacast,
@@ -819,5 +844,3 @@ proc create*(T: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource,
 
 proc staticMetaObject*(_: type gen_qgeopositioninfosource_types.QGeoPositionInfoSource): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoPositionInfoSource_staticMetaObject())
-proc delete*(self: gen_qgeopositioninfosource_types.QGeoPositionInfoSource) =
-  fcQGeoPositionInfoSource_delete(self.h)

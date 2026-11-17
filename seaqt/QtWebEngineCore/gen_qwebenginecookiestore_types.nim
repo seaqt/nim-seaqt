@@ -9,7 +9,7 @@ proc `=sink`(dest: var QWebEngineCookieStore, source: QWebEngineCookieStore) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QWebEngineCookieStoreFilterRequest* {.inheritable, pure.} = object
+type QWebEngineCookieStoreFilterRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

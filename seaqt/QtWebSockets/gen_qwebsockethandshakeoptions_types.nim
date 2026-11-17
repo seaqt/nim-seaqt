@@ -1,4 +1,4 @@
-type QWebSocketHandshakeOptions* {.inheritable, pure.} = object
+type QWebSocketHandshakeOptions* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

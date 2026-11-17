@@ -9,7 +9,7 @@ proc `=sink`(dest: var QFormLayout, source: QFormLayout) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QFormLayoutTakeRowResult* {.inheritable, pure.} = object
+type QFormLayoutTakeRowResult* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

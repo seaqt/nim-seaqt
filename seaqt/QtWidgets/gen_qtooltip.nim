@@ -62,7 +62,6 @@ proc fcQToolTip_setFont(font: pointer): void {.importc: "QToolTip_setFont".}
 proc fcQToolTip_showText2(pos: pointer, text: struct_seaqt_string, w: pointer): void {.importc: "QToolTip_showText2".}
 proc fcQToolTip_showText3(pos: pointer, text: struct_seaqt_string, w: pointer, rect: pointer): void {.importc: "QToolTip_showText3".}
 proc fcQToolTip_showText4(pos: pointer, text: struct_seaqt_string, w: pointer, rect: pointer, msecShowTime: cint): void {.importc: "QToolTip_showText4".}
-proc fcQToolTip_delete(self: pointer) {.importc: "QToolTip_delete".}
 
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char]): void =
   fcQToolTip_showText(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
@@ -80,13 +79,13 @@ proc text*(_: type gen_qtooltip_types.QToolTip): string =
   vx_ret
 
 proc palette*(_: type gen_qtooltip_types.QToolTip): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQToolTip_palette())
+  gen_qpalette_types.QPalette(h: fcQToolTip_palette(), owned: true)
 
 proc setPalette*(_: type gen_qtooltip_types.QToolTip, palette: gen_qpalette_types.QPalette): void =
   fcQToolTip_setPalette(palette.h)
 
 proc font*(_: type gen_qtooltip_types.QToolTip): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQToolTip_font())
+  gen_qfont_types.QFont(h: fcQToolTip_font(), owned: true)
 
 proc setFont*(_: type gen_qtooltip_types.QToolTip, font: gen_qfont_types.QFont): void =
   fcQToolTip_setFont(font.h)
@@ -100,5 +99,3 @@ proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: openArray[char], w: gen_qwidget_types.QWidget, rect: gen_qrect_types.QRect, msecShowTime: cint): void =
   fcQToolTip_showText4(pos.h, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), w.h, rect.h, msecShowTime)
 
-proc delete*(self: gen_qtooltip_types.QToolTip) =
-  fcQToolTip_delete(self.h)

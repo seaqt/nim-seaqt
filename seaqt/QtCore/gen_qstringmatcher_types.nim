@@ -1,4 +1,4 @@
-type QStringMatcher* {.inheritable, pure.} = object
+type QStringMatcher* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

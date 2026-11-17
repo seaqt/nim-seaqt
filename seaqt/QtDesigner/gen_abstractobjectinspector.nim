@@ -195,10 +195,9 @@ proc fcQDesignerObjectInspectorInterface_protectedbase_isSignalConnected(self: p
 proc fcQDesignerObjectInspectorInterface_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQDesignerObjectInspectorInterface {.importc: "QDesignerObjectInspectorInterface_new".}
 proc fcQDesignerObjectInspectorInterface_new2(vtbl: pointer, vdata: csize_t, parent: pointer, flags: cint): ptr cQDesignerObjectInspectorInterface {.importc: "QDesignerObjectInspectorInterface_new2".}
 proc fcQDesignerObjectInspectorInterface_staticMetaObject(): pointer {.importc: "QDesignerObjectInspectorInterface_staticMetaObject".}
-proc fcQDesignerObjectInspectorInterface_delete(self: pointer) {.importc: "QDesignerObjectInspectorInterface_delete".}
 
 proc metaObject*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerObjectInspectorInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerObjectInspectorInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, param1: cstring): pointer =
   fcQDesignerObjectInspectorInterface_metacast(self.h, param1)
@@ -278,7 +277,8 @@ type QDesignerObjectInspectorInterfacechildEventProc* = proc(self: QDesignerObje
 type QDesignerObjectInspectorInterfacecustomEventProc* = proc(self: QDesignerObjectInspectorInterface, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDesignerObjectInspectorInterfaceconnectNotifyProc* = proc(self: QDesignerObjectInspectorInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDesignerObjectInspectorInterfacedisconnectNotifyProc* = proc(self: QDesignerObjectInspectorInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDesignerObjectInspectorInterfaceVTable* = object
+
+type QDesignerObjectInspectorInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQDesignerObjectInspectorInterfaceVTable
   metaObject*: QDesignerObjectInspectorInterfacemetaObjectProc
   metacast*: QDesignerObjectInspectorInterfacemetacastProc
@@ -333,7 +333,7 @@ type QDesignerObjectInspectorInterfaceVTable* = object
   disconnectNotify*: QDesignerObjectInspectorInterfacedisconnectNotifyProc
 
 proc QDesignerObjectInspectorInterfacemetaObject*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerObjectInspectorInterface_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDesignerObjectInspectorInterface_virtualbase_metaObject(self.h), owned: false)
 
 proc QDesignerObjectInspectorInterfacemetacast*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, param1: cstring): pointer =
   fcQDesignerObjectInspectorInterface_virtualbase_metacast(self.h, param1)
@@ -348,10 +348,10 @@ proc QDesignerObjectInspectorInterfacesetVisible*(self: gen_abstractobjectinspec
   fcQDesignerObjectInspectorInterface_virtualbase_setVisible(self.h, visible)
 
 proc QDesignerObjectInspectorInterfacesizeHint*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDesignerObjectInspectorInterface_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDesignerObjectInspectorInterface_virtualbase_sizeHint(self.h), owned: true)
 
 proc QDesignerObjectInspectorInterfaceminimumSizeHint*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDesignerObjectInspectorInterface_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDesignerObjectInspectorInterface_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc QDesignerObjectInspectorInterfaceheightForWidth*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, param1: cint): cint =
   fcQDesignerObjectInspectorInterface_virtualbase_heightForWidth(self.h, param1)
@@ -360,7 +360,7 @@ proc QDesignerObjectInspectorInterfacehasHeightForWidth*(self: gen_abstractobjec
   fcQDesignerObjectInspectorInterface_virtualbase_hasHeightForWidth(self.h)
 
 proc QDesignerObjectInspectorInterfacepaintEngine*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDesignerObjectInspectorInterface_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQDesignerObjectInspectorInterface_virtualbase_paintEngine(self.h), owned: false)
 
 proc QDesignerObjectInspectorInterfaceevent*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, event: gen_qcoreevent_types.QEvent): bool =
   fcQDesignerObjectInspectorInterface_virtualbase_event(self.h, event.h)
@@ -450,16 +450,16 @@ proc QDesignerObjectInspectorInterfaceinitPainter*(self: gen_abstractobjectinspe
   fcQDesignerObjectInspectorInterface_virtualbase_initPainter(self.h, painter.h)
 
 proc QDesignerObjectInspectorInterfaceredirected*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDesignerObjectInspectorInterface_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDesignerObjectInspectorInterface_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc QDesignerObjectInspectorInterfacesharedPainter*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDesignerObjectInspectorInterface_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQDesignerObjectInspectorInterface_virtualbase_sharedPainter(self.h), owned: false)
 
 proc QDesignerObjectInspectorInterfaceinputMethodEvent*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQDesignerObjectInspectorInterface_virtualbase_inputMethodEvent(self.h, param1.h)
 
 proc QDesignerObjectInspectorInterfaceinputMethodQuery*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDesignerObjectInspectorInterface_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQDesignerObjectInspectorInterface_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc QDesignerObjectInspectorInterfacefocusNextPrevChild*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface, next: bool): bool =
   fcQDesignerObjectInspectorInterface_virtualbase_focusNextPrevChild(self.h, next)
@@ -487,7 +487,10 @@ proc fcQDesignerObjectInspectorInterface_vtable_callback_metaObject(self: pointe
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
@@ -508,7 +511,7 @@ proc fcQDesignerObjectInspectorInterface_vtable_callback_metacall(self: pointer,
 proc fcQDesignerObjectInspectorInterface_vtable_callback_setFormWindow(self: pointer, formWindow: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow)
+  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow, owned: false)
   vtbl[].setFormWindow(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_devType(self: pointer): cint {.cdecl.} =
@@ -527,13 +530,19 @@ proc fcQDesignerObjectInspectorInterface_vtable_callback_sizeHint(self: pointer)
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
@@ -552,157 +561,160 @@ proc fcQDesignerObjectInspectorInterface_vtable_callback_paintEngine(self: point
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -720,7 +732,7 @@ proc fcQDesignerObjectInspectorInterface_vtable_callback_nativeEvent(self: point
 proc fcQDesignerObjectInspectorInterface_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
@@ -733,26 +745,32 @@ proc fcQDesignerObjectInspectorInterface_vtable_callback_metric(self: pointer, p
 proc fcQDesignerObjectInspectorInterface_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
@@ -760,7 +778,10 @@ proc fcQDesignerObjectInspectorInterface_vtable_callback_inputMethodQuery(self: 
   let self = QDesignerObjectInspectorInterface(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
@@ -772,39 +793,39 @@ proc fcQDesignerObjectInspectorInterface_vtable_callback_focusNextPrevChild(self
 proc fcQDesignerObjectInspectorInterface_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQDesignerObjectInspectorInterface_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDesignerObjectInspectorInterfaceVTable](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let self = QDesignerObjectInspectorInterface(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQDesignerObjectInspectorInterface* {.inheritable.} = ref object of QDesignerObjectInspectorInterface
@@ -916,7 +937,10 @@ method disconnectNotify*(self: VirtualQDesignerObjectInspectorInterface, signal:
 proc fcQDesignerObjectInspectorInterface_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
@@ -934,7 +958,7 @@ proc fcQDesignerObjectInspectorInterface_method_callback_metacall(self: pointer,
 
 proc fcQDesignerObjectInspectorInterface_method_callback_setFormWindow(self: pointer, formWindow: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow)
+  let slotval1 = gen_abstractformwindow_types.QDesignerFormWindowInterface(h: formWindow, owned: false)
   inst.setFormWindow(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_devType(self: pointer): cint {.cdecl.} =
@@ -950,12 +974,18 @@ proc fcQDesignerObjectInspectorInterface_method_callback_setVisible(self: pointe
 proc fcQDesignerObjectInspectorInterface_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
   var virtualReturn = inst.minimumSizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
@@ -971,132 +1001,135 @@ proc fcQDesignerObjectInspectorInterface_method_callback_hasHeightForWidth(self:
 proc fcQDesignerObjectInspectorInterface_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
   var virtualReturn = inst.paintEngine()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQDesignerObjectInspectorInterface_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mousePressEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseReleaseEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseDoubleClickEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   inst.mouseMoveEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   inst.wheelEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyPressEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   inst.keyReleaseEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusInEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   inst.focusOutEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   inst.enterEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.leaveEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_paintEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   inst.paintEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   inst.moveEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   inst.resizeEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   inst.closeEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_contextMenuEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   inst.contextMenuEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   inst.tabletEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   inst.actionEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   inst.dragEnterEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_dragMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   inst.dragMoveEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_dragLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   inst.dragLeaveEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   inst.dropEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   inst.showEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   inst.hideEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_nativeEvent(self: pointer, eventType: struct_seaqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
@@ -1112,7 +1145,7 @@ proc fcQDesignerObjectInspectorInterface_method_callback_nativeEvent(self: point
 
 proc fcQDesignerObjectInspectorInterface_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   inst.changeEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
@@ -1123,30 +1156,39 @@ proc fcQDesignerObjectInspectorInterface_method_callback_metric(self: pointer, p
 
 proc fcQDesignerObjectInspectorInterface_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   inst.initPainter(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = inst.redirected(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
   var virtualReturn = inst.sharedPainter()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   inst.inputMethodEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_inputMethodQuery(self: pointer, param1: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
   let slotval1 = cint(param1)
   var virtualReturn = inst.inputMethodQuery(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQDesignerObjectInspectorInterface_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
@@ -1156,34 +1198,34 @@ proc fcQDesignerObjectInspectorInterface_method_callback_focusNextPrevChild(self
 
 proc fcQDesignerObjectInspectorInterface_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQDesignerObjectInspectorInterface_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQDesignerObjectInspectorInterface_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQDesignerObjectInspectorInterface](fcQDesignerObjectInspectorInterface_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1203,7 +1245,7 @@ proc focusPreviousChild*(self: gen_abstractobjectinspector_types.QDesignerObject
   fcQDesignerObjectInspectorInterface_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDesignerObjectInspectorInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDesignerObjectInspectorInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): cint =
   fcQDesignerObjectInspectorInterface_protectedbase_senderSignalIndex(self.h)
@@ -1324,7 +1366,7 @@ proc create*(T: type gen_abstractobjectinspector_types.QDesignerObjectInspectorI
     vtbl[].vtbl.connectNotify = fcQDesignerObjectInspectorInterface_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDesignerObjectInspectorInterface_vtable_callback_disconnectNotify
-  let tmp = gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface(h: fcQDesignerObjectInspectorInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface(h: fcQDesignerObjectInspectorInterface_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQDesignerObjectInspectorInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface,
@@ -1437,13 +1479,14 @@ proc create*(T: type gen_abstractobjectinspector_types.QDesignerObjectInspectorI
     vtbl[].vtbl.connectNotify = fcQDesignerObjectInspectorInterface_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQDesignerObjectInspectorInterface_vtable_callback_disconnectNotify
-  let tmp = gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface(h: fcQDesignerObjectInspectorInterface_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)))
+  let tmp = gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface(h: fcQDesignerObjectInspectorInterface_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h, cint(flags)), owned: true)
   fcQDesignerObjectInspectorInterface_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQDesignerObjectInspectorInterface_mvtbl = cQDesignerObjectInspectorInterfaceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQDesignerObjectInspectorInterface()[])](self.fcQDesignerObjectInspectorInterface_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQDesignerObjectInspectorInterface_method_callback_metaObject,
   metacast: fcQDesignerObjectInspectorInterface_method_callback_metacast,
@@ -1515,5 +1558,3 @@ proc create*(T: type gen_abstractobjectinspector_types.QDesignerObjectInspectorI
 
 proc staticMetaObject*(_: type gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDesignerObjectInspectorInterface_staticMetaObject())
-proc delete*(self: gen_abstractobjectinspector_types.QDesignerObjectInspectorInterface) =
-  fcQDesignerObjectInspectorInterface_delete(self.h)

@@ -1,4 +1,4 @@
-type QLockFile* {.inheritable, pure.} = object
+type QLockFile* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

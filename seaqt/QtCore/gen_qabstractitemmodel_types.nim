@@ -1,4 +1,4 @@
-type QModelRoleData* {.inheritable, pure.} = object
+type QModelRoleData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QModelRoleData) =
   wasMoved(self)
   fcQModelRoleData_delete(h)
 
-type QModelRoleDataSpan* {.inheritable, pure.} = object
+type QModelRoleDataSpan* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QModelRoleDataSpan) =
   wasMoved(self)
   fcQModelRoleDataSpan_delete(h)
 
-type QModelIndex* {.inheritable, pure.} = object
+type QModelIndex* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QModelIndex) =
   wasMoved(self)
   fcQModelIndex_delete(h)
 
-type QPersistentModelIndex* {.inheritable, pure.} = object
+type QPersistentModelIndex* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

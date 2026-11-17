@@ -1,4 +1,4 @@
-type QQuickGraphicsConfiguration* {.inheritable, pure.} = object
+type QQuickGraphicsConfiguration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -70,13 +70,12 @@ proc fcQCborStreamWriter_startMapWithCount(self: pointer, count: culonglong): vo
 proc fcQCborStreamWriter_endMap(self: pointer): bool {.importc: "QCborStreamWriter_endMap".}
 proc fcQCborStreamWriter_append5(self: pointer, str: cstring, size: int64): void {.importc: "QCborStreamWriter_append5".}
 proc fcQCborStreamWriter_new(device: pointer): ptr cQCborStreamWriter {.importc: "QCborStreamWriter_new".}
-proc fcQCborStreamWriter_delete(self: pointer) {.importc: "QCborStreamWriter_delete".}
 
 proc setDevice*(self: gen_qcborstreamwriter_types.QCborStreamWriter, device: gen_qiodevice_types.QIODevice): void =
   fcQCborStreamWriter_setDevice(self.h, device.h)
 
 proc device*(self: gen_qcborstreamwriter_types.QCborStreamWriter): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQCborStreamWriter_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQCborStreamWriter_device(self.h), owned: false)
 
 proc append*(self: gen_qcborstreamwriter_types.QCborStreamWriter, u: culonglong): void =
   fcQCborStreamWriter_append(self.h, u)
@@ -152,7 +151,5 @@ proc append*(self: gen_qcborstreamwriter_types.QCborStreamWriter, str: cstring, 
 
 proc create*(T: type gen_qcborstreamwriter_types.QCborStreamWriter,
     device: gen_qiodevice_types.QIODevice): gen_qcborstreamwriter_types.QCborStreamWriter =
-  let tmp = gen_qcborstreamwriter_types.QCborStreamWriter(h: fcQCborStreamWriter_new(device.h))
+  let tmp = gen_qcborstreamwriter_types.QCborStreamWriter(h: fcQCborStreamWriter_new(device.h), owned: true)
   tmp
-proc delete*(self: gen_qcborstreamwriter_types.QCborStreamWriter) =
-  fcQCborStreamWriter_delete(self.h)

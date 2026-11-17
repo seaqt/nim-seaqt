@@ -1,4 +1,4 @@
-type QRegion* {.inheritable, pure.} = object
+type QRegion* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
