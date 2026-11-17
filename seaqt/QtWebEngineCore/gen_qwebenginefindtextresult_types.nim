@@ -1,4 +1,4 @@
-type QWebEngineFindTextResult* {.inheritable, pure.} = object
+type QWebEngineFindTextResult* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

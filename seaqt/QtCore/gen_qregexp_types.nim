@@ -1,4 +1,4 @@
-type QRegExp* {.inheritable, pure.} = object
+type QRegExp* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

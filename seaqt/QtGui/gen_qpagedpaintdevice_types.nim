@@ -9,7 +9,7 @@ proc `=sink`(dest: var QPagedPaintDevice, source: QPagedPaintDevice) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QPagedPaintDeviceMargins* {.inheritable, pure.} = object
+type QPagedPaintDeviceMargins* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

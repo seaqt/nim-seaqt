@@ -1,4 +1,4 @@
-type QAudioEncoderSettings* {.inheritable, pure.} = object
+type QAudioEncoderSettings* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QAudioEncoderSettings) =
   wasMoved(self)
   fcQAudioEncoderSettings_delete(h)
 
-type QVideoEncoderSettings* {.inheritable, pure.} = object
+type QVideoEncoderSettings* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QVideoEncoderSettings) =
   wasMoved(self)
   fcQVideoEncoderSettings_delete(h)
 
-type QImageEncoderSettings* {.inheritable, pure.} = object
+type QImageEncoderSettings* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

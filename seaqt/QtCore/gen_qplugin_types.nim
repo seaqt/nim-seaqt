@@ -1,4 +1,4 @@
-type QStaticPlugin* {.inheritable, pure.} = object
+type QStaticPlugin* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

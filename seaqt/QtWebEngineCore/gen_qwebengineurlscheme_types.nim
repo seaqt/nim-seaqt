@@ -1,4 +1,4 @@
-type QWebEngineUrlScheme* {.inheritable, pure.} = object
+type QWebEngineUrlScheme* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

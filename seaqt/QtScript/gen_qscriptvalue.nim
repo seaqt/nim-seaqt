@@ -164,13 +164,12 @@ proc fcQScriptValue_new13(value: cuint): ptr cQScriptValue {.importc: "QScriptVa
 proc fcQScriptValue_new14(value: float64): ptr cQScriptValue {.importc: "QScriptValue_new14".}
 proc fcQScriptValue_new15(value: struct_seaqt_string): ptr cQScriptValue {.importc: "QScriptValue_new15".}
 proc fcQScriptValue_new16(value: cstring): ptr cQScriptValue {.importc: "QScriptValue_new16".}
-proc fcQScriptValue_delete(self: pointer) {.importc: "QScriptValue_delete".}
 
 proc operatorAssign*(self: gen_qscriptvalue_types.QScriptValue, other: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValue_operatorAssign(self.h, other.h)
 
 proc engine*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptengine_types.QScriptEngine =
-  gen_qscriptengine_types.QScriptEngine(h: fcQScriptValue_engine(self.h))
+  gen_qscriptengine_types.QScriptEngine(h: fcQScriptValue_engine(self.h), owned: false)
 
 proc isValid*(self: gen_qscriptvalue_types.QScriptValue): bool =
   fcQScriptValue_isValid(self.h)
@@ -248,22 +247,22 @@ proc toUInt16*(self: gen_qscriptvalue_types.QScriptValue): cushort =
   fcQScriptValue_toUInt16(self.h)
 
 proc toVariant*(self: gen_qscriptvalue_types.QScriptValue): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQScriptValue_toVariant(self.h))
+  gen_qvariant_types.QVariant(h: fcQScriptValue_toVariant(self.h), owned: true)
 
 proc toQObject*(self: gen_qscriptvalue_types.QScriptValue): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQScriptValue_toQObject(self.h))
+  gen_qobject_types.QObject(h: fcQScriptValue_toQObject(self.h), owned: false)
 
 proc toQMetaObject*(self: gen_qscriptvalue_types.QScriptValue): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQScriptValue_toQMetaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQScriptValue_toQMetaObject(self.h), owned: false)
 
 proc toObject*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_toObject(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_toObject(self.h), owned: true)
 
 proc toDateTime*(self: gen_qscriptvalue_types.QScriptValue): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQScriptValue_toDateTime(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQScriptValue_toDateTime(self.h), owned: true)
 
 proc toRegExp*(self: gen_qscriptvalue_types.QScriptValue): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQScriptValue_toRegExp(self.h))
+  gen_qregexp_types.QRegExp(h: fcQScriptValue_toRegExp(self.h), owned: true)
 
 proc instanceOf*(self: gen_qscriptvalue_types.QScriptValue, other: gen_qscriptvalue_types.QScriptValue): bool =
   fcQScriptValue_instanceOf(self.h, other.h)
@@ -278,31 +277,31 @@ proc strictlyEquals*(self: gen_qscriptvalue_types.QScriptValue, other: gen_qscri
   fcQScriptValue_strictlyEquals(self.h, other.h)
 
 proc prototype*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_prototype(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_prototype(self.h), owned: true)
 
 proc setPrototype*(self: gen_qscriptvalue_types.QScriptValue, prototype: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValue_setPrototype(self.h, prototype.h)
 
 proc scope*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_scope(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_scope(self.h), owned: true)
 
 proc setScope*(self: gen_qscriptvalue_types.QScriptValue, scope: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValue_setScope(self.h, scope.h)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char], value: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValue_setProperty(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, arrayIndex: cuint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_propertyWithArrayIndex(self.h, arrayIndex))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_propertyWithArrayIndex(self.h, arrayIndex), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, arrayIndex: cuint, value: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValue_setProperty2(self.h, arrayIndex, value.h)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_propertyWithName(self.h, name.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_propertyWithName(self.h, name.h), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, value: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValue_setProperty3(self.h, name.h, value.h)
@@ -314,25 +313,25 @@ proc propertyFlags*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscript
   cint(fcQScriptValue_propertyFlagsWithName(self.h, name.h))
 
 proc call*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call(self.h), owned: true)
 
 proc call*(self: gen_qscriptvalue_types.QScriptValue, thisObject: gen_qscriptvalue_types.QScriptValue, arguments: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call2(self.h, thisObject.h, arguments.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call2(self.h, thisObject.h, arguments.h), owned: true)
 
 proc construct*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_construct(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_construct(self.h), owned: true)
 
 proc construct*(self: gen_qscriptvalue_types.QScriptValue, arguments: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_constructWithArguments(self.h, arguments.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_constructWithArguments(self.h, arguments.h), owned: true)
 
 proc data*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_data(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_data(self.h), owned: true)
 
 proc setData*(self: gen_qscriptvalue_types.QScriptValue, data: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValue_setData(self.h, data.h)
 
 proc scriptClass*(self: gen_qscriptvalue_types.QScriptValue): gen_qscriptclass_types.QScriptClass =
-  gen_qscriptclass_types.QScriptClass(h: fcQScriptValue_scriptClass(self.h))
+  gen_qscriptclass_types.QScriptClass(h: fcQScriptValue_scriptClass(self.h), owned: false)
 
 proc setScriptClass*(self: gen_qscriptvalue_types.QScriptValue, scriptClass: gen_qscriptclass_types.QScriptClass): void =
   fcQScriptValue_setScriptClass(self.h, scriptClass.h)
@@ -341,19 +340,19 @@ proc objectId*(self: gen_qscriptvalue_types.QScriptValue): clonglong =
   fcQScriptValue_objectId(self.h)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char], mode: ptr cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), mode))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property2(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), mode), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, name: openArray[char], value: gen_qscriptvalue_types.QScriptValue, flags: ptr cint): void =
   fcQScriptValue_setProperty4(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))), value.h, flags)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, arrayIndex: cuint, mode: ptr cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property3(self.h, arrayIndex, mode))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property3(self.h, arrayIndex, mode), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, arrayIndex: cuint, value: gen_qscriptvalue_types.QScriptValue, flags: ptr cint): void =
   fcQScriptValue_setProperty5(self.h, arrayIndex, value.h, flags)
 
 proc property*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, mode: ptr cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property4(self.h, name.h, mode))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_property4(self.h, name.h, mode), owned: true)
 
 proc setProperty*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscriptstring_types.QScriptString, value: gen_qscriptvalue_types.QScriptValue, flags: ptr cint): void =
   fcQScriptValue_setProperty6(self.h, name.h, value.h, flags)
@@ -365,84 +364,82 @@ proc propertyFlags*(self: gen_qscriptvalue_types.QScriptValue, name: gen_qscript
   cint(fcQScriptValue_propertyFlags3(self.h, name.h, mode))
 
 proc call*(self: gen_qscriptvalue_types.QScriptValue, thisObject: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_callWithThisObject(self.h, thisObject.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_callWithThisObject(self.h, thisObject.h), owned: true)
 
 proc call*(self: gen_qscriptvalue_types.QScriptValue, thisObject: gen_qscriptvalue_types.QScriptValue, args: openArray[gen_qscriptvalue_types.QScriptValue]): gen_qscriptvalue_types.QScriptValue =
   var args_CArray = newSeq[pointer](len(args))
   for i in 0..<len(args):
     args_CArray[i] = args[i].h
 
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call3(self.h, thisObject.h, struct_seaqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_call3(self.h, thisObject.h, struct_seaqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))), owned: true)
 
 proc construct*(self: gen_qscriptvalue_types.QScriptValue, args: openArray[gen_qscriptvalue_types.QScriptValue]): gen_qscriptvalue_types.QScriptValue =
   var args_CArray = newSeq[pointer](len(args))
   for i in 0..<len(args):
     args_CArray[i] = args[i].h
 
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_constructWithArgs(self.h, struct_seaqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_constructWithArgs(self.h, struct_seaqt_array(len: csize_t(len(args)), data: if len(args) == 0: nil else: addr(args_CArray[0]))), owned: true)
 
 proc create*(T: type gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new())
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new(), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     other: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new2(other.h))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new2(other.h), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     engine: gen_qscriptengine_types.QScriptEngine, val: cint): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new3(engine.h, cint(val)))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new3(engine.h, cint(val)), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     engine: gen_qscriptengine_types.QScriptEngine, val: bool): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new4(engine.h, val))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new4(engine.h, val), owned: true)
   tmp
 proc create2*(T: type gen_qscriptvalue_types.QScriptValue,
     engine: gen_qscriptengine_types.QScriptEngine, val: cint): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new5(engine.h, val))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new5(engine.h, val), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     engine: gen_qscriptengine_types.QScriptEngine, val: cuint): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new6(engine.h, val))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new6(engine.h, val), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     engine: gen_qscriptengine_types.QScriptEngine, val: float64): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new7(engine.h, val))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new7(engine.h, val), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     engine: gen_qscriptengine_types.QScriptEngine, val: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new8(engine.h, struct_seaqt_string(data: if len(val) > 0: addr val[0] else: nil, len: csize_t(len(val)))))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new8(engine.h, struct_seaqt_string(data: if len(val) > 0: addr val[0] else: nil, len: csize_t(len(val)))), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     engine: gen_qscriptengine_types.QScriptEngine, val: cstring): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new9(engine.h, val))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new9(engine.h, val), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     value: cint): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new10(cint(value)))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new10(cint(value)), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     value: bool): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new11(value))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new11(value), owned: true)
   tmp
 proc create2*(T: type gen_qscriptvalue_types.QScriptValue,
     value: cint): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new12(value))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new12(value), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     value: cuint): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new13(value))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new13(value), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     value: float64): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new14(value))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new14(value), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     value: openArray[char]): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new15(struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new15(struct_seaqt_string(data: if len(value) > 0: addr value[0] else: nil, len: csize_t(len(value)))), owned: true)
   tmp
 proc create*(T: type gen_qscriptvalue_types.QScriptValue,
     value: cstring): gen_qscriptvalue_types.QScriptValue =
-  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new16(value))
+  let tmp = gen_qscriptvalue_types.QScriptValue(h: fcQScriptValue_new16(value), owned: true)
   tmp
-proc delete*(self: gen_qscriptvalue_types.QScriptValue) =
-  fcQScriptValue_delete(self.h)

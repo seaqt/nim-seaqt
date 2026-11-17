@@ -49,7 +49,6 @@ proc fcQScriptString_ToQString(self: pointer): struct_seaqt_string {.importc: "Q
 proc fcQScriptString_toArrayIndexWithOk(self: pointer, ok: ptr bool): cuint {.importc: "QScriptString_toArrayIndexWithOk".}
 proc fcQScriptString_new(): ptr cQScriptString {.importc: "QScriptString_new".}
 proc fcQScriptString_new2(other: pointer): ptr cQScriptString {.importc: "QScriptString_new2".}
-proc fcQScriptString_delete(self: pointer) {.importc: "QScriptString_delete".}
 
 proc operatorAssign*(self: gen_qscriptstring_types.QScriptString, other: gen_qscriptstring_types.QScriptString): void =
   fcQScriptString_operatorAssign(self.h, other.h)
@@ -82,11 +81,9 @@ proc toArrayIndex*(self: gen_qscriptstring_types.QScriptString, ok: ptr bool): c
   fcQScriptString_toArrayIndexWithOk(self.h, ok)
 
 proc create*(T: type gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
-  let tmp = gen_qscriptstring_types.QScriptString(h: fcQScriptString_new())
+  let tmp = gen_qscriptstring_types.QScriptString(h: fcQScriptString_new(), owned: true)
   tmp
 proc create*(T: type gen_qscriptstring_types.QScriptString,
     other: gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
-  let tmp = gen_qscriptstring_types.QScriptString(h: fcQScriptString_new2(other.h))
+  let tmp = gen_qscriptstring_types.QScriptString(h: fcQScriptString_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qscriptstring_types.QScriptString) =
-  fcQScriptString_delete(self.h)

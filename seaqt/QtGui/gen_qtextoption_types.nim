@@ -1,4 +1,4 @@
-type QTextOption* {.inheritable, pure.} = object
+type QTextOption* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QTextOption) =
   wasMoved(self)
   fcQTextOption_delete(h)
 
-type QTextOptionTab* {.inheritable, pure.} = object
+type QTextOptionTab* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

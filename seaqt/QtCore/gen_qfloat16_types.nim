@@ -1,4 +1,4 @@
-type qfloat16* {.inheritable, pure.} = object
+type qfloat16* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

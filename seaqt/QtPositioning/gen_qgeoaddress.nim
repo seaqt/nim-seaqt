@@ -65,7 +65,6 @@ proc fcQGeoAddress_clear(self: pointer): void {.importc: "QGeoAddress_clear".}
 proc fcQGeoAddress_isTextGenerated(self: pointer): bool {.importc: "QGeoAddress_isTextGenerated".}
 proc fcQGeoAddress_new(): ptr cQGeoAddress {.importc: "QGeoAddress_new".}
 proc fcQGeoAddress_new2(other: pointer): ptr cQGeoAddress {.importc: "QGeoAddress_new2".}
-proc fcQGeoAddress_delete(self: pointer) {.importc: "QGeoAddress_delete".}
 
 proc operatorAssign*(self: gen_qgeoaddress_types.QGeoAddress, other: gen_qgeoaddress_types.QGeoAddress): void =
   fcQGeoAddress_operatorAssign(self.h, other.h)
@@ -167,11 +166,9 @@ proc isTextGenerated*(self: gen_qgeoaddress_types.QGeoAddress): bool =
   fcQGeoAddress_isTextGenerated(self.h)
 
 proc create*(T: type gen_qgeoaddress_types.QGeoAddress): gen_qgeoaddress_types.QGeoAddress =
-  let tmp = gen_qgeoaddress_types.QGeoAddress(h: fcQGeoAddress_new())
+  let tmp = gen_qgeoaddress_types.QGeoAddress(h: fcQGeoAddress_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeoaddress_types.QGeoAddress,
     other: gen_qgeoaddress_types.QGeoAddress): gen_qgeoaddress_types.QGeoAddress =
-  let tmp = gen_qgeoaddress_types.QGeoAddress(h: fcQGeoAddress_new2(other.h))
+  let tmp = gen_qgeoaddress_types.QGeoAddress(h: fcQGeoAddress_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qgeoaddress_types.QGeoAddress) =
-  fcQGeoAddress_delete(self.h)

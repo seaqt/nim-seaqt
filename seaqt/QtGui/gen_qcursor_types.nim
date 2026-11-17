@@ -1,4 +1,4 @@
-type QCursor* {.inheritable, pure.} = object
+type QCursor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

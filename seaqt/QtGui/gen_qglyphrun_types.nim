@@ -1,4 +1,4 @@
-type QGlyphRun* {.inheritable, pure.} = object
+type QGlyphRun* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

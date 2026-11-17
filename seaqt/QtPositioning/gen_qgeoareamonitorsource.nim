@@ -144,10 +144,9 @@ proc fcQGeoAreaMonitorSource_protectedbase_receivers(self: pointer, signal: cstr
 proc fcQGeoAreaMonitorSource_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGeoAreaMonitorSource_protectedbase_isSignalConnected".}
 proc fcQGeoAreaMonitorSource_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGeoAreaMonitorSource {.importc: "QGeoAreaMonitorSource_new".}
 proc fcQGeoAreaMonitorSource_staticMetaObject(): pointer {.importc: "QGeoAreaMonitorSource_staticMetaObject".}
-proc fcQGeoAreaMonitorSource_delete(self: pointer) {.importc: "QGeoAreaMonitorSource_delete".}
 
 proc metaObject*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGeoAreaMonitorSource_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGeoAreaMonitorSource_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, param1: cstring): pointer =
   fcQGeoAreaMonitorSource_metacast(self.h, param1)
@@ -168,10 +167,10 @@ proc trUtf8*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, s: c
   vx_ret
 
 proc createDefaultSource*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, parent: gen_qobject_types.QObject): gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource =
-  gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoAreaMonitorSource_createDefaultSource(parent.h))
+  gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoAreaMonitorSource_createDefaultSource(parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, sourceName: openArray[char], parent: gen_qobject_types.QObject): gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource =
-  gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoAreaMonitorSource_createSource(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h))
+  gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoAreaMonitorSource_createSource(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h), owned: false)
 
 proc availableSources*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): seq[string] =
   var v_ma = fcQGeoAreaMonitorSource_availableSources()
@@ -189,7 +188,7 @@ proc setPositionInfoSource*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonito
   fcQGeoAreaMonitorSource_setPositionInfoSource(self.h, source.h)
 
 proc positionInfoSource*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoAreaMonitorSource_positionInfoSource(self.h))
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoAreaMonitorSource_positionInfoSource(self.h), owned: false)
 
 proc sourceName*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): string =
   let v_ms = fcQGeoAreaMonitorSource_sourceName(self.h)
@@ -217,7 +216,7 @@ proc activeMonitors*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource
   var vx_ret = newSeq[gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: v_outCast[i])
+    vx_ret[i] = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -226,7 +225,7 @@ proc activeMonitors*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource
   var vx_ret = newSeq[gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: v_outCast[i])
+    vx_ret[i] = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -236,9 +235,9 @@ proc areaEntered*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, m
 type QGeoAreaMonitorSourceareaEnteredSlot* = proc(monitor: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, update: gen_qgeopositioninfo_types.QGeoPositionInfo)
 proc fcQGeoAreaMonitorSource_slot_callback_areaEntered(slot: int, monitor: pointer, update: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGeoAreaMonitorSourceareaEnteredSlot](cast[pointer](slot))
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
 
-  let slotval2 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: update)
+  let slotval2 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: update, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -258,9 +257,9 @@ proc areaExited*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, mo
 type QGeoAreaMonitorSourceareaExitedSlot* = proc(monitor: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, update: gen_qgeopositioninfo_types.QGeoPositionInfo)
 proc fcQGeoAreaMonitorSource_slot_callback_areaExited(slot: int, monitor: pointer, update: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGeoAreaMonitorSourceareaExitedSlot](cast[pointer](slot))
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
 
-  let slotval2 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: update)
+  let slotval2 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: update, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -280,7 +279,7 @@ proc monitorExpired*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource
 type QGeoAreaMonitorSourcemonitorExpiredSlot* = proc(monitor: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo)
 proc fcQGeoAreaMonitorSource_slot_callback_monitorExpired(slot: int, monitor: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGeoAreaMonitorSourcemonitorExpiredSlot](cast[pointer](slot))
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
 
   nimfunc[](slotval1)
 
@@ -357,7 +356,8 @@ type QGeoAreaMonitorSourcechildEventProc* = proc(self: QGeoAreaMonitorSource, ev
 type QGeoAreaMonitorSourcecustomEventProc* = proc(self: QGeoAreaMonitorSource, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGeoAreaMonitorSourceconnectNotifyProc* = proc(self: QGeoAreaMonitorSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGeoAreaMonitorSourcedisconnectNotifyProc* = proc(self: QGeoAreaMonitorSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QGeoAreaMonitorSourceVTable* = object
+
+type QGeoAreaMonitorSourceVTable* {.inheritable, pure.} = object
   vtbl: cQGeoAreaMonitorSourceVTable
   metaObject*: QGeoAreaMonitorSourcemetaObjectProc
   metacast*: QGeoAreaMonitorSourcemetacastProc
@@ -380,7 +380,7 @@ type QGeoAreaMonitorSourceVTable* = object
   disconnectNotify*: QGeoAreaMonitorSourcedisconnectNotifyProc
 
 proc QGeoAreaMonitorSourcemetaObject*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGeoAreaMonitorSource_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGeoAreaMonitorSource_virtualbase_metaObject(self.h), owned: false)
 
 proc QGeoAreaMonitorSourcemetacast*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, param1: cstring): pointer =
   fcQGeoAreaMonitorSource_virtualbase_metacast(self.h, param1)
@@ -392,7 +392,7 @@ proc QGeoAreaMonitorSourcesetPositionInfoSource*(self: gen_qgeoareamonitorsource
   fcQGeoAreaMonitorSource_virtualbase_setPositionInfoSource(self.h, source.h)
 
 proc QGeoAreaMonitorSourcepositionInfoSource*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): gen_qgeopositioninfosource_types.QGeoPositionInfoSource =
-  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoAreaMonitorSource_virtualbase_positionInfoSource(self.h))
+  gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: fcQGeoAreaMonitorSource_virtualbase_positionInfoSource(self.h), owned: false)
 
 proc QGeoAreaMonitorSourceevent*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource, event: gen_qcoreevent_types.QEvent): bool =
   fcQGeoAreaMonitorSource_virtualbase_event(self.h, event.h)
@@ -420,7 +420,10 @@ proc fcQGeoAreaMonitorSource_vtable_callback_metaObject(self: pointer): pointer 
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoAreaMonitorSource_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
@@ -441,14 +444,17 @@ proc fcQGeoAreaMonitorSource_vtable_callback_metacall(self: pointer, param1: cin
 proc fcQGeoAreaMonitorSource_vtable_callback_setPositionInfoSource(self: pointer, source: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: source)
+  let slotval1 = gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: source, owned: false)
   vtbl[].setPositionInfoSource(self, slotval1)
 
 proc fcQGeoAreaMonitorSource_vtable_callback_positionInfoSource(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
   var virtualReturn = vtbl[].positionInfoSource(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoAreaMonitorSource_vtable_callback_error(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
@@ -465,21 +471,21 @@ proc fcQGeoAreaMonitorSource_vtable_callback_supportedAreaMonitorFeatures(self: 
 proc fcQGeoAreaMonitorSource_vtable_callback_startMonitoring(self: pointer, monitor: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
   var virtualReturn = vtbl[].startMonitoring(self, slotval1)
   virtualReturn
 
 proc fcQGeoAreaMonitorSource_vtable_callback_stopMonitoring(self: pointer, monitor: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
   var virtualReturn = vtbl[].stopMonitoring(self, slotval1)
   virtualReturn
 
 proc fcQGeoAreaMonitorSource_vtable_callback_requestUpdate(self: pointer, monitor: pointer, signal: cstring): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
   let slotval2 = (signal)
   var virtualReturn = vtbl[].requestUpdate(self, slotval1, slotval2)
   virtualReturn
@@ -490,64 +496,70 @@ proc fcQGeoAreaMonitorSource_vtable_callback_activeMonitors(self: pointer): stru
   var virtualReturn = vtbl[].activeMonitors(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQGeoAreaMonitorSource_vtable_callback_activeMonitorsWithLookupArea(self: pointer, lookupArea: pointer): struct_seaqt_array {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qgeoshape_types.QGeoShape(h: lookupArea)
+  let slotval1 = gen_qgeoshape_types.QGeoShape(h: lookupArea, owned: false)
   var virtualReturn = vtbl[].activeMonitorsWithLookupArea(self, slotval1)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQGeoAreaMonitorSource_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQGeoAreaMonitorSource_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQGeoAreaMonitorSource_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQGeoAreaMonitorSource_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQGeoAreaMonitorSource_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQGeoAreaMonitorSource_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQGeoAreaMonitorSource_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoAreaMonitorSourceVTable](fcQGeoAreaMonitorSource_vdata(self)[])
   let self = QGeoAreaMonitorSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQGeoAreaMonitorSource* {.inheritable.} = ref object of QGeoAreaMonitorSource
@@ -595,7 +607,10 @@ method disconnectNotify*(self: VirtualQGeoAreaMonitorSource, signal: gen_qmetaob
 proc fcQGeoAreaMonitorSource_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoAreaMonitorSource_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
@@ -613,13 +628,16 @@ proc fcQGeoAreaMonitorSource_method_callback_metacall(self: pointer, param1: cin
 
 proc fcQGeoAreaMonitorSource_method_callback_setPositionInfoSource(self: pointer, source: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: source)
+  let slotval1 = gen_qgeopositioninfosource_types.QGeoPositionInfoSource(h: source, owned: false)
   inst.setPositionInfoSource(slotval1)
 
 proc fcQGeoAreaMonitorSource_method_callback_positionInfoSource(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
   var virtualReturn = inst.positionInfoSource()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoAreaMonitorSource_method_callback_error(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
@@ -633,19 +651,19 @@ proc fcQGeoAreaMonitorSource_method_callback_supportedAreaMonitorFeatures(self: 
 
 proc fcQGeoAreaMonitorSource_method_callback_startMonitoring(self: pointer, monitor: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
   var virtualReturn = inst.startMonitoring(slotval1)
   virtualReturn
 
 proc fcQGeoAreaMonitorSource_method_callback_stopMonitoring(self: pointer, monitor: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
   var virtualReturn = inst.stopMonitoring(slotval1)
   virtualReturn
 
 proc fcQGeoAreaMonitorSource_method_callback_requestUpdate(self: pointer, monitor: pointer, signal: cstring): bool {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor)
+  let slotval1 = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: monitor, owned: false)
   let slotval2 = (signal)
   var virtualReturn = inst.requestUpdate(slotval1, slotval2)
   virtualReturn
@@ -655,61 +673,67 @@ proc fcQGeoAreaMonitorSource_method_callback_activeMonitors(self: pointer): stru
   var virtualReturn = inst.activeMonitors()
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQGeoAreaMonitorSource_method_callback_activeMonitorsWithLookupArea(self: pointer, lookupArea: pointer): struct_seaqt_array {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qgeoshape_types.QGeoShape(h: lookupArea)
+  let slotval1 = gen_qgeoshape_types.QGeoShape(h: lookupArea, owned: false)
   var virtualReturn = inst.activeMonitors(slotval1)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_seaqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
 proc fcQGeoAreaMonitorSource_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQGeoAreaMonitorSource_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQGeoAreaMonitorSource_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQGeoAreaMonitorSource_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQGeoAreaMonitorSource_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQGeoAreaMonitorSource_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQGeoAreaMonitorSource_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoAreaMonitorSource](fcQGeoAreaMonitorSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGeoAreaMonitorSource_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGeoAreaMonitorSource_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): cint =
   fcQGeoAreaMonitorSource_protectedbase_senderSignalIndex(self.h)
@@ -766,13 +790,14 @@ proc create*(T: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource,
     vtbl[].vtbl.connectNotify = fcQGeoAreaMonitorSource_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQGeoAreaMonitorSource_vtable_callback_disconnectNotify
-  let tmp = gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoAreaMonitorSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource(h: fcQGeoAreaMonitorSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGeoAreaMonitorSource_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGeoAreaMonitorSource_mvtbl = cQGeoAreaMonitorSourceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGeoAreaMonitorSource()[])](self.fcQGeoAreaMonitorSource_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQGeoAreaMonitorSource_method_callback_metaObject,
   metacast: fcQGeoAreaMonitorSource_method_callback_metacast,
@@ -804,5 +829,3 @@ proc create*(T: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource,
 
 proc staticMetaObject*(_: type gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoAreaMonitorSource_staticMetaObject())
-proc delete*(self: gen_qgeoareamonitorsource_types.QGeoAreaMonitorSource) =
-  fcQGeoAreaMonitorSource_delete(self.h)

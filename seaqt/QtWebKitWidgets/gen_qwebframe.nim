@@ -113,7 +113,6 @@ proc fcQWebHitTestResult_element(self: pointer): pointer {.importc: "QWebHitTest
 proc fcQWebHitTestResult_frame(self: pointer): pointer {.importc: "QWebHitTestResult_frame".}
 proc fcQWebHitTestResult_new(): ptr cQWebHitTestResult {.importc: "QWebHitTestResult_new".}
 proc fcQWebHitTestResult_new2(other: pointer): ptr cQWebHitTestResult {.importc: "QWebHitTestResult_new2".}
-proc fcQWebHitTestResult_delete(self: pointer) {.importc: "QWebHitTestResult_delete".}
 proc fcQWebFrame_metaObject(self: pointer): pointer {.importc: "QWebFrame_metaObject".}
 proc fcQWebFrame_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebFrame_metacast".}
 proc fcQWebFrame_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebFrame_metacall".}
@@ -212,13 +211,13 @@ proc isNull*(self: gen_qwebframe_types.QWebHitTestResult): bool =
   fcQWebHitTestResult_isNull(self.h)
 
 proc pos*(self: gen_qwebframe_types.QWebHitTestResult): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWebHitTestResult_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQWebHitTestResult_pos(self.h), owned: true)
 
 proc boundingRect*(self: gen_qwebframe_types.QWebHitTestResult): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWebHitTestResult_boundingRect(self.h))
+  gen_qrect_types.QRect(h: fcQWebHitTestResult_boundingRect(self.h), owned: true)
 
 proc enclosingBlockElement*(self: gen_qwebframe_types.QWebHitTestResult): gen_qwebelement_types.QWebElement =
-  gen_qwebelement_types.QWebElement(h: fcQWebHitTestResult_enclosingBlockElement(self.h))
+  gen_qwebelement_types.QWebElement(h: fcQWebHitTestResult_enclosingBlockElement(self.h), owned: true)
 
 proc title*(self: gen_qwebframe_types.QWebHitTestResult): string =
   let v_ms = fcQWebHitTestResult_title(self.h)
@@ -233,10 +232,10 @@ proc linkText*(self: gen_qwebframe_types.QWebHitTestResult): string =
   vx_ret
 
 proc linkUrl*(self: gen_qwebframe_types.QWebHitTestResult): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebHitTestResult_linkUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebHitTestResult_linkUrl(self.h), owned: true)
 
 proc linkTitle*(self: gen_qwebframe_types.QWebHitTestResult): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebHitTestResult_linkTitle(self.h))
+  gen_qurl_types.QUrl(h: fcQWebHitTestResult_linkTitle(self.h), owned: true)
 
 proc linkTitleString*(self: gen_qwebframe_types.QWebHitTestResult): string =
   let v_ms = fcQWebHitTestResult_linkTitleString(self.h)
@@ -245,10 +244,10 @@ proc linkTitleString*(self: gen_qwebframe_types.QWebHitTestResult): string =
   vx_ret
 
 proc linkTargetFrame*(self: gen_qwebframe_types.QWebHitTestResult): gen_qwebframe_types.QWebFrame =
-  gen_qwebframe_types.QWebFrame(h: fcQWebHitTestResult_linkTargetFrame(self.h))
+  gen_qwebframe_types.QWebFrame(h: fcQWebHitTestResult_linkTargetFrame(self.h), owned: false)
 
 proc linkElement*(self: gen_qwebframe_types.QWebHitTestResult): gen_qwebelement_types.QWebElement =
-  gen_qwebelement_types.QWebElement(h: fcQWebHitTestResult_linkElement(self.h))
+  gen_qwebelement_types.QWebElement(h: fcQWebHitTestResult_linkElement(self.h), owned: true)
 
 proc alternateText*(self: gen_qwebframe_types.QWebHitTestResult): string =
   let v_ms = fcQWebHitTestResult_alternateText(self.h)
@@ -257,13 +256,13 @@ proc alternateText*(self: gen_qwebframe_types.QWebHitTestResult): string =
   vx_ret
 
 proc imageUrl*(self: gen_qwebframe_types.QWebHitTestResult): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebHitTestResult_imageUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebHitTestResult_imageUrl(self.h), owned: true)
 
 proc pixmap*(self: gen_qwebframe_types.QWebHitTestResult): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQWebHitTestResult_pixmap(self.h))
+  gen_qpixmap_types.QPixmap(h: fcQWebHitTestResult_pixmap(self.h), owned: true)
 
 proc mediaUrl*(self: gen_qwebframe_types.QWebHitTestResult): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebHitTestResult_mediaUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebHitTestResult_mediaUrl(self.h), owned: true)
 
 proc isContentEditable*(self: gen_qwebframe_types.QWebHitTestResult): bool =
   fcQWebHitTestResult_isContentEditable(self.h)
@@ -272,22 +271,20 @@ proc isContentSelected*(self: gen_qwebframe_types.QWebHitTestResult): bool =
   fcQWebHitTestResult_isContentSelected(self.h)
 
 proc element*(self: gen_qwebframe_types.QWebHitTestResult): gen_qwebelement_types.QWebElement =
-  gen_qwebelement_types.QWebElement(h: fcQWebHitTestResult_element(self.h))
+  gen_qwebelement_types.QWebElement(h: fcQWebHitTestResult_element(self.h), owned: true)
 
 proc frame*(self: gen_qwebframe_types.QWebHitTestResult): gen_qwebframe_types.QWebFrame =
-  gen_qwebframe_types.QWebFrame(h: fcQWebHitTestResult_frame(self.h))
+  gen_qwebframe_types.QWebFrame(h: fcQWebHitTestResult_frame(self.h), owned: false)
 
 proc create*(T: type gen_qwebframe_types.QWebHitTestResult): gen_qwebframe_types.QWebHitTestResult =
-  let tmp = gen_qwebframe_types.QWebHitTestResult(h: fcQWebHitTestResult_new())
+  let tmp = gen_qwebframe_types.QWebHitTestResult(h: fcQWebHitTestResult_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebframe_types.QWebHitTestResult,
     other: gen_qwebframe_types.QWebHitTestResult): gen_qwebframe_types.QWebHitTestResult =
-  let tmp = gen_qwebframe_types.QWebHitTestResult(h: fcQWebHitTestResult_new2(other.h))
+  let tmp = gen_qwebframe_types.QWebHitTestResult(h: fcQWebHitTestResult_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qwebframe_types.QWebHitTestResult) =
-  fcQWebHitTestResult_delete(self.h)
 proc metaObject*(self: gen_qwebframe_types.QWebFrame): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebFrame_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebFrame_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebframe_types.QWebFrame, param1: cstring): pointer =
   fcQWebFrame_metacast(self.h, param1)
@@ -308,7 +305,7 @@ proc trUtf8*(_: type gen_qwebframe_types.QWebFrame, s: cstring): string =
   vx_ret
 
 proc page*(self: gen_qwebframe_types.QWebFrame): gen_qwebpage_types.QWebPage =
-  gen_qwebpage_types.QWebPage(h: fcQWebFrame_page(self.h))
+  gen_qwebpage_types.QWebPage(h: fcQWebFrame_page(self.h), owned: false)
 
 proc load*(self: gen_qwebframe_types.QWebFrame, url: gen_qurl_types.QUrl): void =
   fcQWebFrame_load(self.h, url.h)
@@ -347,16 +344,16 @@ proc setUrl*(self: gen_qwebframe_types.QWebFrame, url: gen_qurl_types.QUrl): voi
   fcQWebFrame_setUrl(self.h, url.h)
 
 proc url*(self: gen_qwebframe_types.QWebFrame): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebFrame_url(self.h))
+  gen_qurl_types.QUrl(h: fcQWebFrame_url(self.h), owned: true)
 
 proc requestedUrl*(self: gen_qwebframe_types.QWebFrame): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebFrame_requestedUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebFrame_requestedUrl(self.h), owned: true)
 
 proc baseUrl*(self: gen_qwebframe_types.QWebFrame): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebFrame_baseUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebFrame_baseUrl(self.h), owned: true)
 
 proc icon*(self: gen_qwebframe_types.QWebFrame): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQWebFrame_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQWebFrame_icon(self.h), owned: true)
 
 proc frameName*(self: gen_qwebframe_types.QWebFrame): string =
   let v_ms = fcQWebFrame_frameName(self.h)
@@ -365,14 +362,14 @@ proc frameName*(self: gen_qwebframe_types.QWebFrame): string =
   vx_ret
 
 proc parentFrame*(self: gen_qwebframe_types.QWebFrame): gen_qwebframe_types.QWebFrame =
-  gen_qwebframe_types.QWebFrame(h: fcQWebFrame_parentFrame(self.h))
+  gen_qwebframe_types.QWebFrame(h: fcQWebFrame_parentFrame(self.h), owned: false)
 
 proc childFrames*(self: gen_qwebframe_types.QWebFrame): seq[gen_qwebframe_types.QWebFrame] =
   var v_ma = fcQWebFrame_childFrames(self.h)
   var vx_ret = newSeq[gen_qwebframe_types.QWebFrame](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebframe_types.QWebFrame(h: v_outCast[i])
+    vx_ret[i] = gen_qwebframe_types.QWebFrame(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -395,13 +392,13 @@ proc scrollBarMaximum*(self: gen_qwebframe_types.QWebFrame, orientation: cint): 
   fcQWebFrame_scrollBarMaximum(self.h, cint(orientation))
 
 proc scrollBarGeometry*(self: gen_qwebframe_types.QWebFrame, orientation: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWebFrame_scrollBarGeometry(self.h, cint(orientation)))
+  gen_qrect_types.QRect(h: fcQWebFrame_scrollBarGeometry(self.h, cint(orientation)), owned: true)
 
 proc scroll*(self: gen_qwebframe_types.QWebFrame, param1: cint, param2: cint): void =
   fcQWebFrame_scroll(self.h, param1, param2)
 
 proc scrollPosition*(self: gen_qwebframe_types.QWebFrame): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWebFrame_scrollPosition(self.h))
+  gen_qpoint_types.QPoint(h: fcQWebFrame_scrollPosition(self.h), owned: true)
 
 proc setScrollPosition*(self: gen_qwebframe_types.QWebFrame, pos: gen_qpoint_types.QPoint): void =
   fcQWebFrame_setScrollPosition(self.h, pos.h)
@@ -434,37 +431,37 @@ proc setFocus*(self: gen_qwebframe_types.QWebFrame): void =
   fcQWebFrame_setFocus(self.h)
 
 proc pos*(self: gen_qwebframe_types.QWebFrame): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWebFrame_pos(self.h))
+  gen_qpoint_types.QPoint(h: fcQWebFrame_pos(self.h), owned: true)
 
 proc geometry*(self: gen_qwebframe_types.QWebFrame): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWebFrame_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQWebFrame_geometry(self.h), owned: true)
 
 proc contentsSize*(self: gen_qwebframe_types.QWebFrame): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWebFrame_contentsSize(self.h))
+  gen_qsize_types.QSize(h: fcQWebFrame_contentsSize(self.h), owned: true)
 
 proc documentElement*(self: gen_qwebframe_types.QWebFrame): gen_qwebelement_types.QWebElement =
-  gen_qwebelement_types.QWebElement(h: fcQWebFrame_documentElement(self.h))
+  gen_qwebelement_types.QWebElement(h: fcQWebFrame_documentElement(self.h), owned: true)
 
 proc ownerElement*(self: gen_qwebframe_types.QWebFrame): gen_qwebelement_types.QWebElement =
-  gen_qwebelement_types.QWebElement(h: fcQWebFrame_ownerElement(self.h))
+  gen_qwebelement_types.QWebElement(h: fcQWebFrame_ownerElement(self.h), owned: true)
 
 proc findAllElements*(self: gen_qwebframe_types.QWebFrame, selectorQuery: openArray[char]): gen_qwebelement_types.QWebElementCollection =
-  gen_qwebelement_types.QWebElementCollection(h: fcQWebFrame_findAllElements(self.h, struct_seaqt_string(data: if len(selectorQuery) > 0: addr selectorQuery[0] else: nil, len: csize_t(len(selectorQuery)))))
+  gen_qwebelement_types.QWebElementCollection(h: fcQWebFrame_findAllElements(self.h, struct_seaqt_string(data: if len(selectorQuery) > 0: addr selectorQuery[0] else: nil, len: csize_t(len(selectorQuery)))), owned: true)
 
 proc findFirstElement*(self: gen_qwebframe_types.QWebFrame, selectorQuery: openArray[char]): gen_qwebelement_types.QWebElement =
-  gen_qwebelement_types.QWebElement(h: fcQWebFrame_findFirstElement(self.h, struct_seaqt_string(data: if len(selectorQuery) > 0: addr selectorQuery[0] else: nil, len: csize_t(len(selectorQuery)))))
+  gen_qwebelement_types.QWebElement(h: fcQWebFrame_findFirstElement(self.h, struct_seaqt_string(data: if len(selectorQuery) > 0: addr selectorQuery[0] else: nil, len: csize_t(len(selectorQuery)))), owned: true)
 
 proc hitTestContent*(self: gen_qwebframe_types.QWebFrame, pos: gen_qpoint_types.QPoint): gen_qwebframe_types.QWebHitTestResult =
-  gen_qwebframe_types.QWebHitTestResult(h: fcQWebFrame_hitTestContent(self.h, pos.h))
+  gen_qwebframe_types.QWebHitTestResult(h: fcQWebFrame_hitTestContent(self.h, pos.h), owned: true)
 
 proc event*(self: gen_qwebframe_types.QWebFrame, param1: gen_qcoreevent_types.QEvent): bool =
   fcQWebFrame_event(self.h, param1.h)
 
 proc securityOrigin*(self: gen_qwebframe_types.QWebFrame): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
-  gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebFrame_securityOrigin(self.h))
+  gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebFrame_securityOrigin(self.h), owned: true)
 
 proc evaluateJavaScript*(self: gen_qwebframe_types.QWebFrame, scriptSource: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQWebFrame_evaluateJavaScript(self.h, struct_seaqt_string(data: if len(scriptSource) > 0: addr scriptSource[0] else: nil, len: csize_t(len(scriptSource)))))
+  gen_qvariant_types.QVariant(h: fcQWebFrame_evaluateJavaScript(self.h, struct_seaqt_string(data: if len(scriptSource) > 0: addr scriptSource[0] else: nil, len: csize_t(len(scriptSource)))), owned: true)
 
 proc print*(self: gen_qwebframe_types.QWebFrame, printer: gen_qprinter_types.QPrinter): void =
   fcQWebFrame_print(self.h, printer.h)
@@ -534,7 +531,7 @@ proc urlChanged*(self: gen_qwebframe_types.QWebFrame, url: gen_qurl_types.QUrl):
 type QWebFrameurlChangedSlot* = proc(url: gen_qurl_types.QUrl)
 proc fcQWebFrame_slot_callback_urlChanged(slot: int, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebFrameurlChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
 
   nimfunc[](slotval1)
 
@@ -590,7 +587,7 @@ proc contentsSizeChanged*(self: gen_qwebframe_types.QWebFrame, size: gen_qsize_t
 type QWebFramecontentsSizeChangedSlot* = proc(size: gen_qsize_types.QSize)
 proc fcQWebFrame_slot_callback_contentsSizeChanged(slot: int, size: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebFramecontentsSizeChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qsize_types.QSize(h: size)
+  let slotval1 = gen_qsize_types.QSize(h: size, owned: false)
 
   nimfunc[](slotval1)
 
@@ -709,7 +706,7 @@ proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPa
   fcQWebFrame_render4(self.h, param1.h, cint(layer), clip.h)
 
 proc sender*(self: gen_qwebframe_types.QWebFrame): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebFrame_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebFrame_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebframe_types.QWebFrame): cint =
   fcQWebFrame_protectedbase_senderSignalIndex(self.h)

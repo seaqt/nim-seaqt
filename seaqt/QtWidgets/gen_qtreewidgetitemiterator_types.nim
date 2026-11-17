@@ -1,4 +1,4 @@
-type QTreeWidgetItemIterator* {.inheritable, pure.} = object
+type QTreeWidgetItemIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QPixelFormat* {.inheritable, pure.} = object
+type QPixelFormat* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

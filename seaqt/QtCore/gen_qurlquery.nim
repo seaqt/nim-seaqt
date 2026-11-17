@@ -77,7 +77,6 @@ proc fcQUrlQuery_new(): ptr cQUrlQuery {.importc: "QUrlQuery_new".}
 proc fcQUrlQuery_new2(url: pointer): ptr cQUrlQuery {.importc: "QUrlQuery_new2".}
 proc fcQUrlQuery_new3(queryString: struct_seaqt_string): ptr cQUrlQuery {.importc: "QUrlQuery_new3".}
 proc fcQUrlQuery_new4(other: pointer): ptr cQUrlQuery {.importc: "QUrlQuery_new4".}
-proc fcQUrlQuery_delete(self: pointer) {.importc: "QUrlQuery_delete".}
 
 proc operatorAssign*(self: gen_qurlquery_types.QUrlQuery, other: gen_qurlquery_types.QUrlQuery): void =
   fcQUrlQuery_operatorAssign(self.h, other.h)
@@ -119,10 +118,10 @@ proc setQueryDelimiters*(self: gen_qurlquery_types.QUrlQuery, valueDelimiter: ge
   fcQUrlQuery_setQueryDelimiters(self.h, valueDelimiter.h, pairDelimiter.h)
 
 proc queryValueDelimiter*(self: gen_qurlquery_types.QUrlQuery): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQUrlQuery_queryValueDelimiter(self.h))
+  gen_qchar_types.QChar(h: fcQUrlQuery_queryValueDelimiter(self.h), owned: true)
 
 proc queryPairDelimiter*(self: gen_qurlquery_types.QUrlQuery): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQUrlQuery_queryPairDelimiter(self.h))
+  gen_qchar_types.QChar(h: fcQUrlQuery_queryPairDelimiter(self.h), owned: true)
 
 proc setQueryItems*(self: gen_qurlquery_types.QUrlQuery, query: openArray[tuple[first: string, second: string]]): void =
   var query_CArray = newSeq[struct_seaqt_map](len(query))
@@ -190,10 +189,10 @@ proc removeAllQueryItems*(self: gen_qurlquery_types.QUrlQuery, key: openArray[ch
   fcQUrlQuery_removeAllQueryItems(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))))
 
 proc defaultQueryValueDelimiter*(_: type gen_qurlquery_types.QUrlQuery): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryValueDelimiter())
+  gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryValueDelimiter(), owned: true)
 
 proc defaultQueryPairDelimiter*(_: type gen_qurlquery_types.QUrlQuery): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryPairDelimiter())
+  gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryPairDelimiter(), owned: true)
 
 proc query*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): string =
   let v_ms = fcQUrlQuery_queryWithEncoding(self.h, cint(encoding))
@@ -250,19 +249,17 @@ proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: openArray[cha
   vx_ret
 
 proc create*(T: type gen_qurlquery_types.QUrlQuery): gen_qurlquery_types.QUrlQuery =
-  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new())
+  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new(), owned: true)
   tmp
 proc create*(T: type gen_qurlquery_types.QUrlQuery,
     url: gen_qurl_types.QUrl): gen_qurlquery_types.QUrlQuery =
-  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new2(url.h))
+  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new2(url.h), owned: true)
   tmp
 proc create*(T: type gen_qurlquery_types.QUrlQuery,
     queryString: openArray[char]): gen_qurlquery_types.QUrlQuery =
-  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new3(struct_seaqt_string(data: if len(queryString) > 0: addr queryString[0] else: nil, len: csize_t(len(queryString)))))
+  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new3(struct_seaqt_string(data: if len(queryString) > 0: addr queryString[0] else: nil, len: csize_t(len(queryString)))), owned: true)
   tmp
 proc create*(T: type gen_qurlquery_types.QUrlQuery,
     other: gen_qurlquery_types.QUrlQuery): gen_qurlquery_types.QUrlQuery =
-  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new4(other.h))
+  let tmp = gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new4(other.h), owned: true)
   tmp
-proc delete*(self: gen_qurlquery_types.QUrlQuery) =
-  fcQUrlQuery_delete(self.h)

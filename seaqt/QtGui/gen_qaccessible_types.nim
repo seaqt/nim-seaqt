@@ -1,4 +1,4 @@
-type QAccessible* {.inheritable, pure.} = object
+type QAccessible* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,11 +22,11 @@ proc delete*(self: sink QAccessible) =
   wasMoved(self)
   fcQAccessible_delete(h)
 
-type QAccessibleInterface* {.inheritable, pure.} = object
+type QAccessibleInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
-type QAccessibleTextInterface* {.inheritable, pure.} = object
+type QAccessibleTextInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -46,7 +46,7 @@ proc delete*(self: sink QAccessibleTextInterface) =
   wasMoved(self)
   fcQAccessibleTextInterface_delete(h)
 
-type QAccessibleEditableTextInterface* {.inheritable, pure.} = object
+type QAccessibleEditableTextInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -66,7 +66,7 @@ proc delete*(self: sink QAccessibleEditableTextInterface) =
   wasMoved(self)
   fcQAccessibleEditableTextInterface_delete(h)
 
-type QAccessibleValueInterface* {.inheritable, pure.} = object
+type QAccessibleValueInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -86,7 +86,7 @@ proc delete*(self: sink QAccessibleValueInterface) =
   wasMoved(self)
   fcQAccessibleValueInterface_delete(h)
 
-type QAccessibleTableCellInterface* {.inheritable, pure.} = object
+type QAccessibleTableCellInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -106,7 +106,7 @@ proc delete*(self: sink QAccessibleTableCellInterface) =
   wasMoved(self)
   fcQAccessibleTableCellInterface_delete(h)
 
-type QAccessibleTableInterface* {.inheritable, pure.} = object
+type QAccessibleTableInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -126,7 +126,7 @@ proc delete*(self: sink QAccessibleTableInterface) =
   wasMoved(self)
   fcQAccessibleTableInterface_delete(h)
 
-type QAccessibleActionInterface* {.inheritable, pure.} = object
+type QAccessibleActionInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -146,7 +146,7 @@ proc delete*(self: sink QAccessibleActionInterface) =
   wasMoved(self)
   fcQAccessibleActionInterface_delete(h)
 
-type QAccessibleImageInterface* {.inheritable, pure.} = object
+type QAccessibleImageInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -166,7 +166,7 @@ proc delete*(self: sink QAccessibleImageInterface) =
   wasMoved(self)
   fcQAccessibleImageInterface_delete(h)
 
-type QAccessibleEvent* {.inheritable, pure.} = object
+type QAccessibleEvent* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -250,7 +250,7 @@ proc `=sink`(dest: var QAccessibleTableModelChangeEvent, source: QAccessibleTabl
   dest.h = source.h
   dest.owned = source.owned
 
-type QAccessibleState* {.inheritable, pure.} = object
+type QAccessibleState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -270,7 +270,7 @@ proc delete*(self: sink QAccessibleState) =
   wasMoved(self)
   fcQAccessibleState_delete(h)
 
-type QAccessibleActivationObserver* {.inheritable, pure.} = object
+type QAccessibleActivationObserver* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

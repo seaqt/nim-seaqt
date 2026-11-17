@@ -1,4 +1,4 @@
-type QSslPreSharedKeyAuthenticator* {.inheritable, pure.} = object
+type QSslPreSharedKeyAuthenticator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

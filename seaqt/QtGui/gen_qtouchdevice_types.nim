@@ -1,4 +1,4 @@
-type QTouchDevice* {.inheritable, pure.} = object
+type QTouchDevice* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

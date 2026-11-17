@@ -17,7 +17,7 @@ proc `=sink`(dest: var QSGDynamicTexture, source: QSGDynamicTexture) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QSGTextureNativeTexture* {.inheritable, pure.} = object
+type QSGTextureNativeTexture* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

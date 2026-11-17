@@ -110,7 +110,6 @@ proc fcQSqlQuery_new3(db: pointer): ptr cQSqlQuery {.importc: "QSqlQuery_new3".}
 proc fcQSqlQuery_new4(other: pointer): ptr cQSqlQuery {.importc: "QSqlQuery_new4".}
 proc fcQSqlQuery_new5(query: struct_seaqt_string): ptr cQSqlQuery {.importc: "QSqlQuery_new5".}
 proc fcQSqlQuery_new6(query: struct_seaqt_string, db: pointer): ptr cQSqlQuery {.importc: "QSqlQuery_new6".}
-proc fcQSqlQuery_delete(self: pointer) {.importc: "QSqlQuery_delete".}
 
 proc operatorAssign*(self: gen_qsqlquery_types.QSqlQuery, other: gen_qsqlquery_types.QSqlQuery): void =
   fcQSqlQuery_operatorAssign(self.h, other.h)
@@ -140,7 +139,7 @@ proc numRowsAffected*(self: gen_qsqlquery_types.QSqlQuery): cint =
   fcQSqlQuery_numRowsAffected(self.h)
 
 proc lastError*(self: gen_qsqlquery_types.QSqlQuery): gen_qsqlerror_types.QSqlError =
-  gen_qsqlerror_types.QSqlError(h: fcQSqlQuery_lastError(self.h))
+  gen_qsqlerror_types.QSqlError(h: fcQSqlQuery_lastError(self.h), owned: true)
 
 proc isSelect*(self: gen_qsqlquery_types.QSqlQuery): bool =
   fcQSqlQuery_isSelect(self.h)
@@ -149,16 +148,16 @@ proc size*(self: gen_qsqlquery_types.QSqlQuery): cint =
   fcQSqlQuery_size(self.h)
 
 proc driver*(self: gen_qsqlquery_types.QSqlQuery): gen_qsqldriver_types.QSqlDriver =
-  gen_qsqldriver_types.QSqlDriver(h: fcQSqlQuery_driver(self.h))
+  gen_qsqldriver_types.QSqlDriver(h: fcQSqlQuery_driver(self.h), owned: false)
 
 proc resultX*(self: gen_qsqlquery_types.QSqlQuery): gen_qsqlresult_types.QSqlResult =
-  gen_qsqlresult_types.QSqlResult(h: fcQSqlQuery_resultX(self.h))
+  gen_qsqlresult_types.QSqlResult(h: fcQSqlQuery_resultX(self.h), owned: false)
 
 proc isForwardOnly*(self: gen_qsqlquery_types.QSqlQuery): bool =
   fcQSqlQuery_isForwardOnly(self.h)
 
 proc record*(self: gen_qsqlquery_types.QSqlQuery): gen_qsqlrecord_types.QSqlRecord =
-  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlQuery_record(self.h))
+  gen_qsqlrecord_types.QSqlRecord(h: fcQSqlQuery_record(self.h), owned: true)
 
 proc setForwardOnly*(self: gen_qsqlquery_types.QSqlQuery, forward: bool): void =
   fcQSqlQuery_setForwardOnly(self.h, forward)
@@ -167,10 +166,10 @@ proc exec*(self: gen_qsqlquery_types.QSqlQuery, query: openArray[char]): bool =
   fcQSqlQuery_exec(self.h, struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))))
 
 proc value*(self: gen_qsqlquery_types.QSqlQuery, i: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlQuery_value(self.h, i))
+  gen_qvariant_types.QVariant(h: fcQSqlQuery_value(self.h, i), owned: true)
 
 proc value*(self: gen_qsqlquery_types.QSqlQuery, name: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlQuery_valueWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qvariant_types.QVariant(h: fcQSqlQuery_valueWithName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc setNumericalPrecisionPolicy*(self: gen_qsqlquery_types.QSqlQuery, precisionPolicy: cint): void =
   fcQSqlQuery_setNumericalPrecisionPolicy(self.h, cint(precisionPolicy))
@@ -215,10 +214,10 @@ proc addBindValue*(self: gen_qsqlquery_types.QSqlQuery, val: gen_qvariant_types.
   fcQSqlQuery_addBindValue(self.h, val.h)
 
 proc boundValue*(self: gen_qsqlquery_types.QSqlQuery, placeholder: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlQuery_boundValue(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))))
+  gen_qvariant_types.QVariant(h: fcQSqlQuery_boundValue(self.h, struct_seaqt_string(data: if len(placeholder) > 0: addr placeholder[0] else: nil, len: csize_t(len(placeholder)))), owned: true)
 
 proc boundValue*(self: gen_qsqlquery_types.QSqlQuery, pos: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlQuery_boundValueWithPos(self.h, pos))
+  gen_qvariant_types.QVariant(h: fcQSqlQuery_boundValueWithPos(self.h, pos), owned: true)
 
 proc boundValues*(self: gen_qsqlquery_types.QSqlQuery): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQSqlQuery_boundValues(self.h)
@@ -231,7 +230,7 @@ proc boundValues*(self: gen_qsqlquery_types.QSqlQuery): Table[string,gen_qvarian
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -245,7 +244,7 @@ proc executedQuery*(self: gen_qsqlquery_types.QSqlQuery): string =
   vx_ret
 
 proc lastInsertId*(self: gen_qsqlquery_types.QSqlQuery): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlQuery_lastInsertId(self.h))
+  gen_qvariant_types.QVariant(h: fcQSqlQuery_lastInsertId(self.h), owned: true)
 
 proc finish*(self: gen_qsqlquery_types.QSqlQuery): void =
   fcQSqlQuery_finish(self.h)
@@ -270,26 +269,24 @@ proc addBindValue*(self: gen_qsqlquery_types.QSqlQuery, val: gen_qvariant_types.
 
 proc create*(T: type gen_qsqlquery_types.QSqlQuery,
     r: gen_qsqlresult_types.QSqlResult): gen_qsqlquery_types.QSqlQuery =
-  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new(r.h))
+  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new(r.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlquery_types.QSqlQuery): gen_qsqlquery_types.QSqlQuery =
-  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new2())
+  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new2(), owned: true)
   tmp
 proc create*(T: type gen_qsqlquery_types.QSqlQuery,
     db: gen_qsqldatabase_types.QSqlDatabase): gen_qsqlquery_types.QSqlQuery =
-  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new3(db.h))
+  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new3(db.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlquery_types.QSqlQuery,
     other: gen_qsqlquery_types.QSqlQuery): gen_qsqlquery_types.QSqlQuery =
-  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new4(other.h))
+  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new4(other.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlquery_types.QSqlQuery,
     query: openArray[char]): gen_qsqlquery_types.QSqlQuery =
-  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new5(struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query)))))
+  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new5(struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query)))), owned: true)
   tmp
 proc create*(T: type gen_qsqlquery_types.QSqlQuery,
     query: openArray[char], db: gen_qsqldatabase_types.QSqlDatabase): gen_qsqlquery_types.QSqlQuery =
-  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new6(struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))), db.h))
+  let tmp = gen_qsqlquery_types.QSqlQuery(h: fcQSqlQuery_new6(struct_seaqt_string(data: if len(query) > 0: addr query[0] else: nil, len: csize_t(len(query))), db.h), owned: true)
   tmp
-proc delete*(self: gen_qsqlquery_types.QSqlQuery) =
-  fcQSqlQuery_delete(self.h)

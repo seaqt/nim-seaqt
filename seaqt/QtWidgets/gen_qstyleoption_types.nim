@@ -1,4 +1,4 @@
-type QStyleOption* {.inheritable, pure.} = object
+type QStyleOption* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -214,7 +214,7 @@ proc `=sink`(dest: var QStyleOptionGraphicsItem, source: QStyleOptionGraphicsIte
   dest.h = source.h
   dest.owned = source.owned
 
-type QStyleHintReturn* {.inheritable, pure.} = object
+type QStyleHintReturn* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

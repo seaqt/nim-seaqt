@@ -1,4 +1,4 @@
-type QQmlImageProviderBase* {.inheritable, pure.} = object
+type QQmlImageProviderBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

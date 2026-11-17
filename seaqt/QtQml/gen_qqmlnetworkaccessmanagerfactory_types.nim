@@ -1,4 +1,4 @@
-type QQmlNetworkAccessManagerFactory* {.inheritable, pure.} = object
+type QQmlNetworkAccessManagerFactory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

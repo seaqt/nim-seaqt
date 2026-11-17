@@ -1,4 +1,4 @@
-type QToolTip* {.inheritable, pure.} = object
+type QToolTip* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

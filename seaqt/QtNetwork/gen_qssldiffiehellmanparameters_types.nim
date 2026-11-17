@@ -1,4 +1,4 @@
-type QSslDiffieHellmanParameters* {.inheritable, pure.} = object
+type QSslDiffieHellmanParameters* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

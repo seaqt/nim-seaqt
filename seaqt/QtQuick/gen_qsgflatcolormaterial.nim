@@ -69,19 +69,18 @@ proc fcQSGFlatColorMaterial_virtualbase_typeX(self: pointer): pointer {.importc:
 proc fcQSGFlatColorMaterial_virtualbase_createShader(self: pointer): pointer {.importc: "QSGFlatColorMaterial_virtualbase_createShader".}
 proc fcQSGFlatColorMaterial_virtualbase_compare(self: pointer, other: pointer): cint {.importc: "QSGFlatColorMaterial_virtualbase_compare".}
 proc fcQSGFlatColorMaterial_new(vtbl: pointer, vdata: csize_t): ptr cQSGFlatColorMaterial {.importc: "QSGFlatColorMaterial_new".}
-proc fcQSGFlatColorMaterial_delete(self: pointer) {.importc: "QSGFlatColorMaterial_delete".}
 
 proc typeX*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial): gen_qsgmaterialtype_types.QSGMaterialType =
-  gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGFlatColorMaterial_typeX(self.h))
+  gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGFlatColorMaterial_typeX(self.h), owned: false)
 
 proc createShader*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial): gen_qsgmaterialshader_types.QSGMaterialShader =
-  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGFlatColorMaterial_createShader(self.h))
+  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGFlatColorMaterial_createShader(self.h), owned: false)
 
 proc setColor*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial, color: gen_qcolor_types.QColor): void =
   fcQSGFlatColorMaterial_setColor(self.h, color.h)
 
 proc color*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQSGFlatColorMaterial_color(self.h))
+  gen_qcolor_types.QColor(h: fcQSGFlatColorMaterial_color(self.h), owned: false)
 
 proc compare*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint =
   fcQSGFlatColorMaterial_compare(self.h, other.h)
@@ -89,17 +88,18 @@ proc compare*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial, other: 
 type QSGFlatColorMaterialtypeXProc* = proc(self: QSGFlatColorMaterial): gen_qsgmaterialtype_types.QSGMaterialType {.raises: [], gcsafe.}
 type QSGFlatColorMaterialcreateShaderProc* = proc(self: QSGFlatColorMaterial): gen_qsgmaterialshader_types.QSGMaterialShader {.raises: [], gcsafe.}
 type QSGFlatColorMaterialcompareProc* = proc(self: QSGFlatColorMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint {.raises: [], gcsafe.}
-type QSGFlatColorMaterialVTable* = object
+
+type QSGFlatColorMaterialVTable* {.inheritable, pure.} = object
   vtbl: cQSGFlatColorMaterialVTable
   typeX*: QSGFlatColorMaterialtypeXProc
   createShader*: QSGFlatColorMaterialcreateShaderProc
   compare*: QSGFlatColorMaterialcompareProc
 
 proc QSGFlatColorMaterialtypeX*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial): gen_qsgmaterialtype_types.QSGMaterialType =
-  gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGFlatColorMaterial_virtualbase_typeX(self.h))
+  gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGFlatColorMaterial_virtualbase_typeX(self.h), owned: false)
 
 proc QSGFlatColorMaterialcreateShader*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial): gen_qsgmaterialshader_types.QSGMaterialShader =
-  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGFlatColorMaterial_virtualbase_createShader(self.h))
+  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGFlatColorMaterial_virtualbase_createShader(self.h), owned: false)
 
 proc QSGFlatColorMaterialcompare*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint =
   fcQSGFlatColorMaterial_virtualbase_compare(self.h, other.h)
@@ -109,18 +109,24 @@ proc fcQSGFlatColorMaterial_vtable_callback_typeX(self: pointer): pointer {.cdec
   let vtbl = cast[ptr QSGFlatColorMaterialVTable](fcQSGFlatColorMaterial_vdata(self)[])
   let self = QSGFlatColorMaterial(h: self)
   var virtualReturn = vtbl[].typeX(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGFlatColorMaterial_vtable_callback_createShader(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGFlatColorMaterialVTable](fcQSGFlatColorMaterial_vdata(self)[])
   let self = QSGFlatColorMaterial(h: self)
   var virtualReturn = vtbl[].createShader(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGFlatColorMaterial_vtable_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSGFlatColorMaterialVTable](fcQSGFlatColorMaterial_vdata(self)[])
   let self = QSGFlatColorMaterial(h: self)
-  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other)
+  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other, owned: false)
   var virtualReturn = vtbl[].compare(self, slotval1)
   virtualReturn
 
@@ -137,16 +143,22 @@ method compare*(self: VirtualQSGFlatColorMaterial, other: gen_qsgmaterial_types.
 proc fcQSGFlatColorMaterial_method_callback_typeX(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGFlatColorMaterial](fcQSGFlatColorMaterial_vdata(self)[])
   var virtualReturn = inst.typeX()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGFlatColorMaterial_method_callback_createShader(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSGFlatColorMaterial](fcQSGFlatColorMaterial_vdata(self)[])
   var virtualReturn = inst.createShader()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSGFlatColorMaterial_method_callback_compare(self: pointer, other: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSGFlatColorMaterial](fcQSGFlatColorMaterial_vdata(self)[])
-  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other)
+  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other, owned: false)
   var virtualReturn = inst.compare(slotval1)
   virtualReturn
 
@@ -164,13 +176,14 @@ proc create*(T: type gen_qsgflatcolormaterial_types.QSGFlatColorMaterial,
     vtbl[].vtbl.createShader = fcQSGFlatColorMaterial_vtable_callback_createShader
   if not isNil(vtbl[].compare):
     vtbl[].vtbl.compare = fcQSGFlatColorMaterial_vtable_callback_compare
-  let tmp = gen_qsgflatcolormaterial_types.QSGFlatColorMaterial(h: fcQSGFlatColorMaterial_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qsgflatcolormaterial_types.QSGFlatColorMaterial(h: fcQSGFlatColorMaterial_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQSGFlatColorMaterial_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSGFlatColorMaterial_mvtbl = cQSGFlatColorMaterialVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSGFlatColorMaterial()[])](self.fcQSGFlatColorMaterial_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   typeX: fcQSGFlatColorMaterial_method_callback_typeX,
   createShader: fcQSGFlatColorMaterial_method_callback_createShader,
@@ -183,5 +196,3 @@ proc create*(T: type gen_qsgflatcolormaterial_types.QSGFlatColorMaterial,
   fcQSGFlatColorMaterial_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qsgflatcolormaterial_types.QSGFlatColorMaterial) =
-  fcQSGFlatColorMaterial_delete(self.h)

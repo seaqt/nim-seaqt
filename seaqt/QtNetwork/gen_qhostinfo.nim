@@ -68,7 +68,6 @@ proc fcQHostInfo_localDomainName(): struct_seaqt_string {.importc: "QHostInfo_lo
 proc fcQHostInfo_new(): ptr cQHostInfo {.importc: "QHostInfo_new".}
 proc fcQHostInfo_new2(d: pointer): ptr cQHostInfo {.importc: "QHostInfo_new2".}
 proc fcQHostInfo_new3(lookupId: cint): ptr cQHostInfo {.importc: "QHostInfo_new3".}
-proc fcQHostInfo_delete(self: pointer) {.importc: "QHostInfo_delete".}
 
 proc operatorAssign*(self: gen_qhostinfo_types.QHostInfo, d: gen_qhostinfo_types.QHostInfo): void =
   fcQHostInfo_operatorAssign(self.h, d.h)
@@ -90,7 +89,7 @@ proc addresses*(self: gen_qhostinfo_types.QHostInfo): seq[gen_qhostaddress_types
   var vx_ret = newSeq[gen_qhostaddress_types.QHostAddress](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qhostaddress_types.QHostAddress(h: v_outCast[i])
+    vx_ret[i] = gen_qhostaddress_types.QHostAddress(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -126,7 +125,7 @@ proc abortHostLookup*(_: type gen_qhostinfo_types.QHostInfo, lookupId: cint): vo
   fcQHostInfo_abortHostLookup(lookupId)
 
 proc fromName*(_: type gen_qhostinfo_types.QHostInfo, name: openArray[char]): gen_qhostinfo_types.QHostInfo =
-  gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_fromName(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_fromName(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc localHostName*(_: type gen_qhostinfo_types.QHostInfo): string =
   let v_ms = fcQHostInfo_localHostName()
@@ -141,15 +140,13 @@ proc localDomainName*(_: type gen_qhostinfo_types.QHostInfo): string =
   vx_ret
 
 proc create*(T: type gen_qhostinfo_types.QHostInfo): gen_qhostinfo_types.QHostInfo =
-  let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new())
+  let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qhostinfo_types.QHostInfo,
     d: gen_qhostinfo_types.QHostInfo): gen_qhostinfo_types.QHostInfo =
-  let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new2(d.h))
+  let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new2(d.h), owned: true)
   tmp
 proc create*(T: type gen_qhostinfo_types.QHostInfo,
     lookupId: cint): gen_qhostinfo_types.QHostInfo =
-  let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new3(lookupId))
+  let tmp = gen_qhostinfo_types.QHostInfo(h: fcQHostInfo_new3(lookupId), owned: true)
   tmp
-proc delete*(self: gen_qhostinfo_types.QHostInfo) =
-  fcQHostInfo_delete(self.h)

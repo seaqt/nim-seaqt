@@ -58,7 +58,6 @@ proc fcQCameraInfo_new(): ptr cQCameraInfo {.importc: "QCameraInfo_new".}
 proc fcQCameraInfo_new2(camera: pointer): ptr cQCameraInfo {.importc: "QCameraInfo_new2".}
 proc fcQCameraInfo_new3(other: pointer): ptr cQCameraInfo {.importc: "QCameraInfo_new3".}
 proc fcQCameraInfo_new4(name: struct_seaqt_string): ptr cQCameraInfo {.importc: "QCameraInfo_new4".}
-proc fcQCameraInfo_delete(self: pointer) {.importc: "QCameraInfo_delete".}
 
 proc operatorAssign*(self: gen_qcamerainfo_types.QCameraInfo, other: gen_qcamerainfo_types.QCameraInfo): void =
   fcQCameraInfo_operatorAssign(self.h, other.h)
@@ -91,14 +90,14 @@ proc orientation*(self: gen_qcamerainfo_types.QCameraInfo): cint =
   fcQCameraInfo_orientation(self.h)
 
 proc defaultCamera*(_: type gen_qcamerainfo_types.QCameraInfo): gen_qcamerainfo_types.QCameraInfo =
-  gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_defaultCamera())
+  gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_defaultCamera(), owned: true)
 
 proc availableCameras*(_: type gen_qcamerainfo_types.QCameraInfo): seq[gen_qcamerainfo_types.QCameraInfo] =
   var v_ma = fcQCameraInfo_availableCameras()
   var vx_ret = newSeq[gen_qcamerainfo_types.QCameraInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qcamerainfo_types.QCameraInfo(h: v_outCast[i])
+    vx_ret[i] = gen_qcamerainfo_types.QCameraInfo(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -107,24 +106,22 @@ proc availableCameras*(_: type gen_qcamerainfo_types.QCameraInfo, position: cint
   var vx_ret = newSeq[gen_qcamerainfo_types.QCameraInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qcamerainfo_types.QCameraInfo(h: v_outCast[i])
+    vx_ret[i] = gen_qcamerainfo_types.QCameraInfo(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qcamerainfo_types.QCameraInfo): gen_qcamerainfo_types.QCameraInfo =
-  let tmp = gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new())
+  let tmp = gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qcamerainfo_types.QCameraInfo,
     camera: gen_qcamera_types.QCamera): gen_qcamerainfo_types.QCameraInfo =
-  let tmp = gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new2(camera.h))
+  let tmp = gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new2(camera.h), owned: true)
   tmp
 proc create*(T: type gen_qcamerainfo_types.QCameraInfo,
     other: gen_qcamerainfo_types.QCameraInfo): gen_qcamerainfo_types.QCameraInfo =
-  let tmp = gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new3(other.h))
+  let tmp = gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qcamerainfo_types.QCameraInfo,
     name: openArray[byte]): gen_qcamerainfo_types.QCameraInfo =
-  let tmp = gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new4(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  let tmp = gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new4(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
-proc delete*(self: gen_qcamerainfo_types.QCameraInfo) =
-  fcQCameraInfo_delete(self.h)

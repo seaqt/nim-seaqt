@@ -132,10 +132,9 @@ proc fcQNmeaPositionInfoSource_protectedbase_isSignalConnected(self: pointer, si
 proc fcQNmeaPositionInfoSource_new(vtbl: pointer, vdata: csize_t, updateMode: cint): ptr cQNmeaPositionInfoSource {.importc: "QNmeaPositionInfoSource_new".}
 proc fcQNmeaPositionInfoSource_new2(vtbl: pointer, vdata: csize_t, updateMode: cint, parent: pointer): ptr cQNmeaPositionInfoSource {.importc: "QNmeaPositionInfoSource_new2".}
 proc fcQNmeaPositionInfoSource_staticMetaObject(): pointer {.importc: "QNmeaPositionInfoSource_staticMetaObject".}
-proc fcQNmeaPositionInfoSource_delete(self: pointer) {.importc: "QNmeaPositionInfoSource_delete".}
 
 proc metaObject*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNmeaPositionInfoSource_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNmeaPositionInfoSource_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, param1: cstring): pointer =
   fcQNmeaPositionInfoSource_metacast(self.h, param1)
@@ -168,13 +167,13 @@ proc setDevice*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource,
   fcQNmeaPositionInfoSource_setDevice(self.h, source.h)
 
 proc device*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQNmeaPositionInfoSource_device(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQNmeaPositionInfoSource_device(self.h), owned: false)
 
 proc setUpdateInterval*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, msec: cint): void =
   fcQNmeaPositionInfoSource_setUpdateInterval(self.h, msec)
 
 proc lastKnownPosition*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): gen_qgeopositioninfo_types.QGeoPositionInfo =
-  gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQNmeaPositionInfoSource_lastKnownPosition(self.h))
+  gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQNmeaPositionInfoSource_lastKnownPosition(self.h), owned: true)
 
 proc supportedPositioningMethods*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): cint =
   cint(fcQNmeaPositionInfoSource_supportedPositioningMethods(self.h))
@@ -219,7 +218,7 @@ proc trUtf8*(_: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, 
   vx_ret
 
 proc lastKnownPosition*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, fromSatellitePositioningMethodsOnly: bool): gen_qgeopositioninfo_types.QGeoPositionInfo =
-  gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQNmeaPositionInfoSource_lastKnownPositionWithFromSatellitePositioningMethodsOnly(self.h, fromSatellitePositioningMethodsOnly))
+  gen_qgeopositioninfo_types.QGeoPositionInfo(h: fcQNmeaPositionInfoSource_lastKnownPositionWithFromSatellitePositioningMethodsOnly(self.h, fromSatellitePositioningMethodsOnly), owned: true)
 
 proc requestUpdate*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, timeout: cint): void =
   fcQNmeaPositionInfoSource_requestUpdateWithTimeout(self.h, timeout)
@@ -244,7 +243,8 @@ type QNmeaPositionInfoSourcechildEventProc* = proc(self: QNmeaPositionInfoSource
 type QNmeaPositionInfoSourcecustomEventProc* = proc(self: QNmeaPositionInfoSource, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QNmeaPositionInfoSourceconnectNotifyProc* = proc(self: QNmeaPositionInfoSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QNmeaPositionInfoSourcedisconnectNotifyProc* = proc(self: QNmeaPositionInfoSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QNmeaPositionInfoSourceVTable* = object
+
+type QNmeaPositionInfoSourceVTable* {.inheritable, pure.} = object
   vtbl: cQNmeaPositionInfoSourceVTable
   metaObject*: QNmeaPositionInfoSourcemetaObjectProc
   metacast*: QNmeaPositionInfoSourcemetacastProc
@@ -268,7 +268,7 @@ type QNmeaPositionInfoSourceVTable* = object
   disconnectNotify*: QNmeaPositionInfoSourcedisconnectNotifyProc
 
 proc QNmeaPositionInfoSourcemetaObject*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNmeaPositionInfoSource_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNmeaPositionInfoSource_virtualbase_metaObject(self.h), owned: false)
 
 proc QNmeaPositionInfoSourcemetacast*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource, param1: cstring): pointer =
   fcQNmeaPositionInfoSource_virtualbase_metacast(self.h, param1)
@@ -311,7 +311,10 @@ proc fcQNmeaPositionInfoSource_vtable_callback_metaObject(self: pointer): pointe
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
   let self = QNmeaPositionInfoSource(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNmeaPositionInfoSource_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
@@ -334,7 +337,7 @@ proc fcQNmeaPositionInfoSource_vtable_callback_parsePosInfoFromNmeaData(self: po
   let self = QNmeaPositionInfoSource(h: self)
   let slotval1 = (data)
   let slotval2 = size
-  let slotval3 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: posInfo)
+  let slotval3 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: posInfo, owned: false)
   let slotval4 = hasFix
   var virtualReturn = vtbl[].parsePosInfoFromNmeaData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -356,7 +359,10 @@ proc fcQNmeaPositionInfoSource_vtable_callback_lastKnownPosition(self: pointer, 
   let self = QNmeaPositionInfoSource(h: self)
   let slotval1 = fromSatellitePositioningMethodsOnly
   var virtualReturn = vtbl[].lastKnownPosition(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNmeaPositionInfoSource_vtable_callback_supportedPositioningMethods(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
@@ -395,46 +401,46 @@ proc fcQNmeaPositionInfoSource_vtable_callback_requestUpdate(self: pointer, time
 proc fcQNmeaPositionInfoSource_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
   let self = QNmeaPositionInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQNmeaPositionInfoSource_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
   let self = QNmeaPositionInfoSource(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQNmeaPositionInfoSource_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
   let self = QNmeaPositionInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQNmeaPositionInfoSource_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
   let self = QNmeaPositionInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQNmeaPositionInfoSource_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
   let self = QNmeaPositionInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQNmeaPositionInfoSource_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
   let self = QNmeaPositionInfoSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQNmeaPositionInfoSource_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNmeaPositionInfoSourceVTable](fcQNmeaPositionInfoSource_vdata(self)[])
   let self = QNmeaPositionInfoSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQNmeaPositionInfoSource* {.inheritable.} = ref object of QNmeaPositionInfoSource
@@ -484,7 +490,10 @@ method disconnectNotify*(self: VirtualQNmeaPositionInfoSource, signal: gen_qmeta
 proc fcQNmeaPositionInfoSource_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNmeaPositionInfoSource_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
@@ -504,7 +513,7 @@ proc fcQNmeaPositionInfoSource_method_callback_parsePosInfoFromNmeaData(self: po
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
   let slotval1 = (data)
   let slotval2 = size
-  let slotval3 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: posInfo)
+  let slotval3 = gen_qgeopositioninfo_types.QGeoPositionInfo(h: posInfo, owned: false)
   let slotval4 = hasFix
   var virtualReturn = inst.parsePosInfoFromNmeaData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
@@ -523,7 +532,10 @@ proc fcQNmeaPositionInfoSource_method_callback_lastKnownPosition(self: pointer, 
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
   let slotval1 = fromSatellitePositioningMethodsOnly
   var virtualReturn = inst.lastKnownPosition(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQNmeaPositionInfoSource_method_callback_supportedPositioningMethods(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
@@ -555,45 +567,45 @@ proc fcQNmeaPositionInfoSource_method_callback_requestUpdate(self: pointer, time
 
 proc fcQNmeaPositionInfoSource_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQNmeaPositionInfoSource_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQNmeaPositionInfoSource_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQNmeaPositionInfoSource_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQNmeaPositionInfoSource_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQNmeaPositionInfoSource_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQNmeaPositionInfoSource_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQNmeaPositionInfoSource](fcQNmeaPositionInfoSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQNmeaPositionInfoSource_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQNmeaPositionInfoSource_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): cint =
   fcQNmeaPositionInfoSource_protectedbase_senderSignalIndex(self.h)
@@ -652,7 +664,7 @@ proc create*(T: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource,
     vtbl[].vtbl.connectNotify = fcQNmeaPositionInfoSource_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQNmeaPositionInfoSource_vtable_callback_disconnectNotify
-  let tmp = gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource(h: fcQNmeaPositionInfoSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(updateMode)))
+  let tmp = gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource(h: fcQNmeaPositionInfoSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(updateMode)), owned: true)
   fcQNmeaPositionInfoSource_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource,
@@ -703,13 +715,14 @@ proc create*(T: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource,
     vtbl[].vtbl.connectNotify = fcQNmeaPositionInfoSource_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQNmeaPositionInfoSource_vtable_callback_disconnectNotify
-  let tmp = gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource(h: fcQNmeaPositionInfoSource_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(updateMode), parent.h))
+  let tmp = gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource(h: fcQNmeaPositionInfoSource_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(updateMode), parent.h), owned: true)
   fcQNmeaPositionInfoSource_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQNmeaPositionInfoSource_mvtbl = cQNmeaPositionInfoSourceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQNmeaPositionInfoSource()[])](self.fcQNmeaPositionInfoSource_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQNmeaPositionInfoSource_method_callback_metaObject,
   metacast: fcQNmeaPositionInfoSource_method_callback_metacast,
@@ -750,5 +763,3 @@ proc create*(T: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource,
 
 proc staticMetaObject*(_: type gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNmeaPositionInfoSource_staticMetaObject())
-proc delete*(self: gen_qnmeapositioninfosource_types.QNmeaPositionInfoSource) =
-  fcQNmeaPositionInfoSource_delete(self.h)

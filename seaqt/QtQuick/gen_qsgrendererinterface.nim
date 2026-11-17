@@ -96,7 +96,6 @@ proc fcQSGRendererInterface_shaderCompilationType(self: pointer): cint {.importc
 proc fcQSGRendererInterface_shaderSourceType(self: pointer): cint {.importc: "QSGRendererInterface_shaderSourceType".}
 proc fcQSGRendererInterface_isApiRhiBased(api: cint): bool {.importc: "QSGRendererInterface_isApiRhiBased".}
 proc fcQSGRendererInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSGRendererInterface_operatorAssign".}
-proc fcQSGRendererInterface_delete(self: pointer) {.importc: "QSGRendererInterface_delete".}
 
 proc graphicsApi*(self: gen_qsgrendererinterface_types.QSGRendererInterface): cint =
   cint(fcQSGRendererInterface_graphicsApi(self.h))
@@ -122,5 +121,3 @@ proc isApiRhiBased*(_: type gen_qsgrendererinterface_types.QSGRendererInterface,
 proc operatorAssign*(self: gen_qsgrendererinterface_types.QSGRendererInterface, param1: gen_qsgrendererinterface_types.QSGRendererInterface): void =
   fcQSGRendererInterface_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qsgrendererinterface_types.QSGRendererInterface) =
-  fcQSGRendererInterface_delete(self.h)

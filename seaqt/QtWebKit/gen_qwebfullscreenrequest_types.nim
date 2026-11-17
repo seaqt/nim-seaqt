@@ -1,4 +1,4 @@
-type QWebFullScreenRequest* {.inheritable, pure.} = object
+type QWebFullScreenRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

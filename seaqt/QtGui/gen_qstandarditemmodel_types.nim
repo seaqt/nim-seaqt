@@ -1,4 +1,4 @@
-type QStandardItem* {.inheritable, pure.} = object
+type QStandardItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

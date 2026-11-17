@@ -70,10 +70,9 @@ proc fcQMediaContainerControl_protectedbase_senderSignalIndex(self: pointer): ci
 proc fcQMediaContainerControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaContainerControl_protectedbase_receivers".}
 proc fcQMediaContainerControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaContainerControl_protectedbase_isSignalConnected".}
 proc fcQMediaContainerControl_staticMetaObject(): pointer {.importc: "QMediaContainerControl_staticMetaObject".}
-proc fcQMediaContainerControl_delete(self: pointer) {.importc: "QMediaContainerControl_delete".}
 
 proc metaObject*(self: gen_qmediacontainercontrol_types.QMediaContainerControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaContainerControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaContainerControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, param1: cstring): pointer =
   fcQMediaContainerControl_metacast(self.h, param1)
@@ -145,7 +144,7 @@ proc trUtf8*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s:
   vx_ret
 
 proc sender*(self: gen_qmediacontainercontrol_types.QMediaContainerControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaContainerControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaContainerControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediacontainercontrol_types.QMediaContainerControl): cint =
   fcQMediaContainerControl_protectedbase_senderSignalIndex(self.h)
@@ -158,5 +157,3 @@ proc isSignalConnected*(self: gen_qmediacontainercontrol_types.QMediaContainerCo
 
 proc staticMetaObject*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaContainerControl_staticMetaObject())
-proc delete*(self: gen_qmediacontainercontrol_types.QMediaContainerControl) =
-  fcQMediaContainerControl_delete(self.h)

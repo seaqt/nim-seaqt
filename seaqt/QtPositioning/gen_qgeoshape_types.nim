@@ -1,4 +1,4 @@
-type QGeoShape* {.inheritable, pure.} = object
+type QGeoShape* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

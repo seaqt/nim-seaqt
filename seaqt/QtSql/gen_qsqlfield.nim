@@ -85,7 +85,6 @@ proc fcQSqlField_new2(fieldName: struct_seaqt_string, typeVal: cint, tableName: 
 proc fcQSqlField_new3(other: pointer): ptr cQSqlField {.importc: "QSqlField_new3".}
 proc fcQSqlField_new4(fieldName: struct_seaqt_string): ptr cQSqlField {.importc: "QSqlField_new4".}
 proc fcQSqlField_new5(fieldName: struct_seaqt_string, typeVal: cint): ptr cQSqlField {.importc: "QSqlField_new5".}
-proc fcQSqlField_delete(self: pointer) {.importc: "QSqlField_delete".}
 
 proc operatorAssign*(self: gen_qsqlfield_types.QSqlField, other: gen_qsqlfield_types.QSqlField): void =
   fcQSqlField_operatorAssign(self.h, other.h)
@@ -100,7 +99,7 @@ proc setValue*(self: gen_qsqlfield_types.QSqlField, value: gen_qvariant_types.QV
   fcQSqlField_setValue(self.h, value.h)
 
 proc value*(self: gen_qsqlfield_types.QSqlField): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlField_value(self.h))
+  gen_qvariant_types.QVariant(h: fcQSqlField_value(self.h), owned: true)
 
 proc setName*(self: gen_qsqlfield_types.QSqlField, name: openArray[char]): void =
   fcQSqlField_setName(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
@@ -175,7 +174,7 @@ proc precision*(self: gen_qsqlfield_types.QSqlField): cint =
   fcQSqlField_precision(self.h)
 
 proc defaultValue*(self: gen_qsqlfield_types.QSqlField): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSqlField_defaultValue(self.h))
+  gen_qvariant_types.QVariant(h: fcQSqlField_defaultValue(self.h), owned: true)
 
 proc typeID*(self: gen_qsqlfield_types.QSqlField): cint =
   fcQSqlField_typeID(self.h)
@@ -187,23 +186,21 @@ proc isValid*(self: gen_qsqlfield_types.QSqlField): bool =
   fcQSqlField_isValid(self.h)
 
 proc create*(T: type gen_qsqlfield_types.QSqlField): gen_qsqlfield_types.QSqlField =
-  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new())
+  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new(), owned: true)
   tmp
 proc create*(T: type gen_qsqlfield_types.QSqlField,
     fieldName: openArray[char], typeVal: cint, tableName: openArray[char]): gen_qsqlfield_types.QSqlField =
-  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new2(struct_seaqt_string(data: if len(fieldName) > 0: addr fieldName[0] else: nil, len: csize_t(len(fieldName))), cint(typeVal), struct_seaqt_string(data: if len(tableName) > 0: addr tableName[0] else: nil, len: csize_t(len(tableName)))))
+  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new2(struct_seaqt_string(data: if len(fieldName) > 0: addr fieldName[0] else: nil, len: csize_t(len(fieldName))), cint(typeVal), struct_seaqt_string(data: if len(tableName) > 0: addr tableName[0] else: nil, len: csize_t(len(tableName)))), owned: true)
   tmp
 proc create*(T: type gen_qsqlfield_types.QSqlField,
     other: gen_qsqlfield_types.QSqlField): gen_qsqlfield_types.QSqlField =
-  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new3(other.h))
+  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlfield_types.QSqlField,
     fieldName: openArray[char]): gen_qsqlfield_types.QSqlField =
-  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new4(struct_seaqt_string(data: if len(fieldName) > 0: addr fieldName[0] else: nil, len: csize_t(len(fieldName)))))
+  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new4(struct_seaqt_string(data: if len(fieldName) > 0: addr fieldName[0] else: nil, len: csize_t(len(fieldName)))), owned: true)
   tmp
 proc create*(T: type gen_qsqlfield_types.QSqlField,
     fieldName: openArray[char], typeVal: cint): gen_qsqlfield_types.QSqlField =
-  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new5(struct_seaqt_string(data: if len(fieldName) > 0: addr fieldName[0] else: nil, len: csize_t(len(fieldName))), cint(typeVal)))
+  let tmp = gen_qsqlfield_types.QSqlField(h: fcQSqlField_new5(struct_seaqt_string(data: if len(fieldName) > 0: addr fieldName[0] else: nil, len: csize_t(len(fieldName))), cint(typeVal)), owned: true)
   tmp
-proc delete*(self: gen_qsqlfield_types.QSqlField) =
-  fcQSqlField_delete(self.h)

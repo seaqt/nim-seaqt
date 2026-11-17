@@ -1,4 +1,4 @@
-type QUuid* {.inheritable, pure.} = object
+type QUuid* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -9,7 +9,7 @@ proc `=sink`(dest: var QQmlContext, source: QQmlContext) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QQmlContextPropertyPair* {.inheritable, pure.} = object
+type QQmlContextPropertyPair* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

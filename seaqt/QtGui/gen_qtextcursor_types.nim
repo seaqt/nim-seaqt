@@ -1,4 +1,4 @@
-type QTextCursor* {.inheritable, pure.} = object
+type QTextCursor* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QQmlTypesExtensionInterface* {.inheritable, pure.} = object
+type QQmlTypesExtensionInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -30,7 +30,7 @@ proc `=sink`(dest: var QQmlExtensionInterface, source: QQmlExtensionInterface) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QQmlEngineExtensionInterface* {.inheritable, pure.} = object
+type QQmlEngineExtensionInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

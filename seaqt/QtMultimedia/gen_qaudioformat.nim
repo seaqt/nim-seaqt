@@ -76,7 +76,6 @@ proc fcQAudioFormat_durationForFrames(self: pointer, frameCount: cint): clonglon
 proc fcQAudioFormat_bytesPerFrame(self: pointer): cint {.importc: "QAudioFormat_bytesPerFrame".}
 proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
 proc fcQAudioFormat_new2(other: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
-proc fcQAudioFormat_delete(self: pointer) {.importc: "QAudioFormat_delete".}
 
 proc operatorAssign*(self: gen_qaudioformat_types.QAudioFormat, other: gen_qaudioformat_types.QAudioFormat): void =
   fcQAudioFormat_operatorAssign(self.h, other.h)
@@ -151,11 +150,9 @@ proc bytesPerFrame*(self: gen_qaudioformat_types.QAudioFormat): cint =
   fcQAudioFormat_bytesPerFrame(self.h)
 
 proc create*(T: type gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new())
+  let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new(), owned: true)
   tmp
 proc create*(T: type gen_qaudioformat_types.QAudioFormat,
     other: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(other.h))
+  let tmp = gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qaudioformat_types.QAudioFormat) =
-  fcQAudioFormat_delete(self.h)

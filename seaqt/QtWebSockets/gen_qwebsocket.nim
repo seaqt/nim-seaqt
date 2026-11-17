@@ -193,10 +193,9 @@ proc fcQWebSocket_new2(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_strin
 proc fcQWebSocket_new3(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_string, version: cint): ptr cQWebSocket {.importc: "QWebSocket_new3".}
 proc fcQWebSocket_new4(vtbl: pointer, vdata: csize_t, origin: struct_seaqt_string, version: cint, parent: pointer): ptr cQWebSocket {.importc: "QWebSocket_new4".}
 proc fcQWebSocket_staticMetaObject(): pointer {.importc: "QWebSocket_staticMetaObject".}
-proc fcQWebSocket_delete(self: pointer) {.importc: "QWebSocket_delete".}
 
 proc metaObject*(self: gen_qwebsocket_types.QWebSocket): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebSocket_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebSocket_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebsocket_types.QWebSocket, param1: cstring): pointer =
   fcQWebSocket_metacast(self.h, param1)
@@ -235,7 +234,7 @@ proc isValid*(self: gen_qwebsocket_types.QWebSocket): bool =
   fcQWebSocket_isValid(self.h)
 
 proc localAddress*(self: gen_qwebsocket_types.QWebSocket): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQWebSocket_localAddress(self.h))
+  gen_qhostaddress_types.QHostAddress(h: fcQWebSocket_localAddress(self.h), owned: true)
 
 proc localPort*(self: gen_qwebsocket_types.QWebSocket): cushort =
   fcQWebSocket_localPort(self.h)
@@ -244,7 +243,7 @@ proc pauseMode*(self: gen_qwebsocket_types.QWebSocket): cint =
   cint(fcQWebSocket_pauseMode(self.h))
 
 proc peerAddress*(self: gen_qwebsocket_types.QWebSocket): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQWebSocket_peerAddress(self.h))
+  gen_qhostaddress_types.QHostAddress(h: fcQWebSocket_peerAddress(self.h), owned: true)
 
 proc peerName*(self: gen_qwebsocket_types.QWebSocket): string =
   let v_ms = fcQWebSocket_peerName(self.h)
@@ -256,7 +255,7 @@ proc peerPort*(self: gen_qwebsocket_types.QWebSocket): cushort =
   fcQWebSocket_peerPort(self.h)
 
 proc proxy*(self: gen_qwebsocket_types.QWebSocket): gen_qnetworkproxy_types.QNetworkProxy =
-  gen_qnetworkproxy_types.QNetworkProxy(h: fcQWebSocket_proxy(self.h))
+  gen_qnetworkproxy_types.QNetworkProxy(h: fcQWebSocket_proxy(self.h), owned: true)
 
 proc setProxy*(self: gen_qwebsocket_types.QWebSocket, networkProxy: gen_qnetworkproxy_types.QNetworkProxy): void =
   fcQWebSocket_setProxy(self.h, networkProxy.h)
@@ -265,7 +264,7 @@ proc setMaskGenerator*(self: gen_qwebsocket_types.QWebSocket, maskGenerator: gen
   fcQWebSocket_setMaskGenerator(self.h, maskGenerator.h)
 
 proc maskGenerator*(self: gen_qwebsocket_types.QWebSocket): gen_qmaskgenerator_types.QMaskGenerator =
-  gen_qmaskgenerator_types.QMaskGenerator(h: fcQWebSocket_maskGenerator(self.h))
+  gen_qmaskgenerator_types.QMaskGenerator(h: fcQWebSocket_maskGenerator(self.h), owned: false)
 
 proc readBufferSize*(self: gen_qwebsocket_types.QWebSocket): clonglong =
   fcQWebSocket_readBufferSize(self.h)
@@ -292,10 +291,10 @@ proc resourceName*(self: gen_qwebsocket_types.QWebSocket): string =
   vx_ret
 
 proc requestUrl*(self: gen_qwebsocket_types.QWebSocket): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebSocket_requestUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebSocket_requestUrl(self.h), owned: true)
 
 proc request*(self: gen_qwebsocket_types.QWebSocket): gen_qnetworkrequest_types.QNetworkRequest =
-  gen_qnetworkrequest_types.QNetworkRequest(h: fcQWebSocket_request(self.h))
+  gen_qnetworkrequest_types.QNetworkRequest(h: fcQWebSocket_request(self.h), owned: true)
 
 proc origin*(self: gen_qwebsocket_types.QWebSocket): string =
   let v_ms = fcQWebSocket_origin(self.h)
@@ -329,7 +328,7 @@ proc setSslConfiguration*(self: gen_qwebsocket_types.QWebSocket, sslConfiguratio
   fcQWebSocket_setSslConfiguration(self.h, sslConfiguration.h)
 
 proc sslConfiguration*(self: gen_qwebsocket_types.QWebSocket): gen_qsslconfiguration_types.QSslConfiguration =
-  gen_qsslconfiguration_types.QSslConfiguration(h: fcQWebSocket_sslConfiguration(self.h))
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQWebSocket_sslConfiguration(self.h), owned: true)
 
 proc bytesToWrite*(self: gen_qwebsocket_types.QWebSocket): clonglong =
   fcQWebSocket_bytesToWrite(self.h)
@@ -456,9 +455,9 @@ proc proxyAuthenticationRequired*(self: gen_qwebsocket_types.QWebSocket, proxy: 
 type QWebSocketproxyAuthenticationRequiredSlot* = proc(proxy: gen_qnetworkproxy_types.QNetworkProxy, pAuthenticator: gen_qauthenticator_types.QAuthenticator)
 proc fcQWebSocket_slot_callback_proxyAuthenticationRequired(slot: int, proxy: pointer, pAuthenticator: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebSocketproxyAuthenticationRequiredSlot](cast[pointer](slot))
-  let slotval1 = gen_qnetworkproxy_types.QNetworkProxy(h: proxy)
+  let slotval1 = gen_qnetworkproxy_types.QNetworkProxy(h: proxy, owned: false)
 
-  let slotval2 = gen_qauthenticator_types.QAuthenticator(h: pAuthenticator)
+  let slotval2 = gen_qauthenticator_types.QAuthenticator(h: pAuthenticator, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -665,7 +664,7 @@ proc fcQWebSocket_slot_callback_sslErrors(slot: int, errors: struct_seaqt_array)
   var verrorsx_ret = newSeq[gen_qsslerror_types.QSslError](int(verrors_ma.len))
   let verrors_outCast = cast[ptr UncheckedArray[pointer]](verrors_ma.data)
   for i in 0 ..< verrors_ma.len:
-    verrorsx_ret[i] = gen_qsslerror_types.QSslError(h: verrors_outCast[i])
+    verrorsx_ret[i] = gen_qsslerror_types.QSslError(h: verrors_outCast[i], owned: true)
   c_free(verrors_ma.data)
   let slotval1 = verrorsx_ret
 
@@ -687,7 +686,7 @@ proc preSharedKeyAuthenticationRequired*(self: gen_qwebsocket_types.QWebSocket, 
 type QWebSocketpreSharedKeyAuthenticationRequiredSlot* = proc(authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator)
 proc fcQWebSocket_slot_callback_preSharedKeyAuthenticationRequired(slot: int, authenticator: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebSocketpreSharedKeyAuthenticationRequiredSlot](cast[pointer](slot))
-  let slotval1 = gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: authenticator)
+  let slotval1 = gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: authenticator, owned: false)
 
   nimfunc[](slotval1)
 
@@ -744,7 +743,8 @@ type QWebSocketchildEventProc* = proc(self: QWebSocket, event: gen_qcoreevent_ty
 type QWebSocketcustomEventProc* = proc(self: QWebSocket, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebSocketconnectNotifyProc* = proc(self: QWebSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebSocketdisconnectNotifyProc* = proc(self: QWebSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QWebSocketVTable* = object
+
+type QWebSocketVTable* {.inheritable, pure.} = object
   vtbl: cQWebSocketVTable
   metaObject*: QWebSocketmetaObjectProc
   metacast*: QWebSocketmetacastProc
@@ -758,7 +758,7 @@ type QWebSocketVTable* = object
   disconnectNotify*: QWebSocketdisconnectNotifyProc
 
 proc QWebSocketmetaObject*(self: gen_qwebsocket_types.QWebSocket): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebSocket_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebSocket_virtualbase_metaObject(self.h), owned: false)
 
 proc QWebSocketmetacast*(self: gen_qwebsocket_types.QWebSocket, param1: cstring): pointer =
   fcQWebSocket_virtualbase_metacast(self.h, param1)
@@ -792,7 +792,10 @@ proc fcQWebSocket_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
   let self = QWebSocket(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWebSocket_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
@@ -813,46 +816,46 @@ proc fcQWebSocket_vtable_callback_metacall(self: pointer, param1: cint, param2: 
 proc fcQWebSocket_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
   let self = QWebSocket(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQWebSocket_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
   let self = QWebSocket(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQWebSocket_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
   let self = QWebSocket(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQWebSocket_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
   let self = QWebSocket(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQWebSocket_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
   let self = QWebSocket(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQWebSocket_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
   let self = QWebSocket(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQWebSocket_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebSocketVTable](fcQWebSocket_vdata(self)[])
   let self = QWebSocket(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQWebSocket* {.inheritable.} = ref object of QWebSocket
@@ -882,7 +885,10 @@ method disconnectNotify*(self: VirtualQWebSocket, signal: gen_qmetaobject_types.
 proc fcQWebSocket_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWebSocket_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
@@ -900,45 +906,45 @@ proc fcQWebSocket_method_callback_metacall(self: pointer, param1: cint, param2: 
 
 proc fcQWebSocket_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQWebSocket_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQWebSocket_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQWebSocket_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQWebSocket_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQWebSocket_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQWebSocket_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWebSocket](fcQWebSocket_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qwebsocket_types.QWebSocket): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebSocket_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebSocket_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebsocket_types.QWebSocket): cint =
   fcQWebSocket_protectedbase_senderSignalIndex(self.h)
@@ -976,7 +982,7 @@ proc create*(T: type gen_qwebsocket_types.QWebSocket,
     vtbl[].vtbl.connectNotify = fcQWebSocket_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWebSocket_vtable_callback_disconnectNotify
-  let tmp = gen_qwebsocket_types.QWebSocket(h: fcQWebSocket_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qwebsocket_types.QWebSocket(h: fcQWebSocket_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQWebSocket_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwebsocket_types.QWebSocket,
@@ -1007,7 +1013,7 @@ proc create*(T: type gen_qwebsocket_types.QWebSocket,
     vtbl[].vtbl.connectNotify = fcQWebSocket_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWebSocket_vtable_callback_disconnectNotify
-  let tmp = gen_qwebsocket_types.QWebSocket(h: fcQWebSocket_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin)))))
+  let tmp = gen_qwebsocket_types.QWebSocket(h: fcQWebSocket_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin)))), owned: true)
   fcQWebSocket_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwebsocket_types.QWebSocket,
@@ -1038,7 +1044,7 @@ proc create*(T: type gen_qwebsocket_types.QWebSocket,
     vtbl[].vtbl.connectNotify = fcQWebSocket_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWebSocket_vtable_callback_disconnectNotify
-  let tmp = gen_qwebsocket_types.QWebSocket(h: fcQWebSocket_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin))), cint(version)))
+  let tmp = gen_qwebsocket_types.QWebSocket(h: fcQWebSocket_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin))), cint(version)), owned: true)
   fcQWebSocket_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qwebsocket_types.QWebSocket,
@@ -1069,13 +1075,14 @@ proc create*(T: type gen_qwebsocket_types.QWebSocket,
     vtbl[].vtbl.connectNotify = fcQWebSocket_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQWebSocket_vtable_callback_disconnectNotify
-  let tmp = gen_qwebsocket_types.QWebSocket(h: fcQWebSocket_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin))), cint(version), parent.h))
+  let tmp = gen_qwebsocket_types.QWebSocket(h: fcQWebSocket_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(origin) > 0: addr origin[0] else: nil, len: csize_t(len(origin))), cint(version), parent.h), owned: true)
   fcQWebSocket_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQWebSocket_mvtbl = cQWebSocketVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQWebSocket()[])](self.fcQWebSocket_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQWebSocket_method_callback_metaObject,
   metacast: fcQWebSocket_method_callback_metacast,
@@ -1121,5 +1128,3 @@ proc create*(T: type gen_qwebsocket_types.QWebSocket,
 
 proc staticMetaObject*(_: type gen_qwebsocket_types.QWebSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebSocket_staticMetaObject())
-proc delete*(self: gen_qwebsocket_types.QWebSocket) =
-  fcQWebSocket_delete(self.h)

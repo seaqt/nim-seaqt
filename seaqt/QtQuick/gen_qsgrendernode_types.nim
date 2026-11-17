@@ -9,7 +9,7 @@ proc `=sink`(dest: var QSGRenderNode, source: QSGRenderNode) =
   dest.h = source.h
   dest.owned = source.owned
 
-type QSGRenderNodeRenderState* {.inheritable, pure.} = object
+type QSGRenderNodeRenderState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -208,7 +208,6 @@ proc fcQMetaType_createWithCopy(self: pointer, copy: pointer): pointer {.importc
 proc fcQMetaType_construct2(self: pointer, where: pointer, copy: pointer): pointer {.importc: "QMetaType_construct2".}
 proc fcQMetaType_new(): ptr cQMetaType {.importc: "QMetaType_new".}
 proc fcQMetaType_new2(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new2".}
-proc fcQMetaType_delete(self: pointer) {.importc: "QMetaType_delete".}
 
 proc unregisterType*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): bool =
   fcQMetaType_unregisterType(typeVal)
@@ -235,7 +234,7 @@ proc typeFlags*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): cint =
   cint(fcQMetaType_typeFlags(typeVal))
 
 proc metaObjectForType*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObjectForType(typeVal))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObjectForType(typeVal), owned: false)
 
 proc isRegistered*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): bool =
   fcQMetaType_isRegistered(typeVal)
@@ -274,7 +273,7 @@ proc flags*(self: gen_qmetatype_types.QMetaType): cint =
   cint(fcQMetaType_flags(self.h))
 
 proc metaObject*(self: gen_qmetatype_types.QMetaType): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObject(self.h), owned: false)
 
 proc name*(self: gen_qmetatype_types.QMetaType): seq[byte] =
   var v_bytearray = fcQMetaType_name(self.h)
@@ -325,11 +324,9 @@ proc construct*(self: gen_qmetatype_types.QMetaType, where: pointer, copy: point
   fcQMetaType_construct2(self.h, where, copy)
 
 proc create*(T: type gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
-  let tmp = gen_qmetatype_types.QMetaType(h: fcQMetaType_new())
+  let tmp = gen_qmetatype_types.QMetaType(h: fcQMetaType_new(), owned: true)
   tmp
 proc create*(T: type gen_qmetatype_types.QMetaType,
     typeVal: cint): gen_qmetatype_types.QMetaType =
-  let tmp = gen_qmetatype_types.QMetaType(h: fcQMetaType_new2(typeVal))
+  let tmp = gen_qmetatype_types.QMetaType(h: fcQMetaType_new2(typeVal), owned: true)
   tmp
-proc delete*(self: gen_qmetatype_types.QMetaType) =
-  fcQMetaType_delete(self.h)

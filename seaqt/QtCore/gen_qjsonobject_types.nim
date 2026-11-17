@@ -1,4 +1,4 @@
-type QJsonObject* {.inheritable, pure.} = object
+type QJsonObject* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QJsonObject) =
   wasMoved(self)
   fcQJsonObject_delete(h)
 
-type QJsonObjectiterator* {.inheritable, pure.} = object
+type QJsonObjectiterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QJsonObjectiterator) =
   wasMoved(self)
   fcQJsonObjectiterator_delete(h)
 
-type QJsonObjectconst_iterator* {.inheritable, pure.} = object
+type QJsonObjectconst_iterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

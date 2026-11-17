@@ -1,4 +1,4 @@
-type QMediaServiceProviderHint* {.inheritable, pure.} = object
+type QMediaServiceProviderHint* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QMediaServiceProviderHint) =
   wasMoved(self)
   fcQMediaServiceProviderHint_delete(h)
 
-type QMediaServiceProviderFactoryInterface* {.inheritable, pure.} = object
+type QMediaServiceProviderFactoryInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QMediaServiceProviderFactoryInterface) =
   wasMoved(self)
   fcQMediaServiceProviderFactoryInterface_delete(h)
 
-type QMediaServiceSupportedFormatsInterface* {.inheritable, pure.} = object
+type QMediaServiceSupportedFormatsInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QMediaServiceSupportedFormatsInterface) =
   wasMoved(self)
   fcQMediaServiceSupportedFormatsInterface_delete(h)
 
-type QMediaServiceSupportedDevicesInterface* {.inheritable, pure.} = object
+type QMediaServiceSupportedDevicesInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -82,7 +82,7 @@ proc delete*(self: sink QMediaServiceSupportedDevicesInterface) =
   wasMoved(self)
   fcQMediaServiceSupportedDevicesInterface_delete(h)
 
-type QMediaServiceDefaultDeviceInterface* {.inheritable, pure.} = object
+type QMediaServiceDefaultDeviceInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -102,7 +102,7 @@ proc delete*(self: sink QMediaServiceDefaultDeviceInterface) =
   wasMoved(self)
   fcQMediaServiceDefaultDeviceInterface_delete(h)
 
-type QMediaServiceCameraInfoInterface* {.inheritable, pure.} = object
+type QMediaServiceCameraInfoInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -122,7 +122,7 @@ proc delete*(self: sink QMediaServiceCameraInfoInterface) =
   wasMoved(self)
   fcQMediaServiceCameraInfoInterface_delete(h)
 
-type QMediaServiceFeaturesInterface* {.inheritable, pure.} = object
+type QMediaServiceFeaturesInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

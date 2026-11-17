@@ -61,7 +61,6 @@ proc fcQSqlIndex_new(): ptr cQSqlIndex {.importc: "QSqlIndex_new".}
 proc fcQSqlIndex_new2(other: pointer): ptr cQSqlIndex {.importc: "QSqlIndex_new2".}
 proc fcQSqlIndex_new3(cursorName: struct_seaqt_string): ptr cQSqlIndex {.importc: "QSqlIndex_new3".}
 proc fcQSqlIndex_new4(cursorName: struct_seaqt_string, name: struct_seaqt_string): ptr cQSqlIndex {.importc: "QSqlIndex_new4".}
-proc fcQSqlIndex_delete(self: pointer) {.importc: "QSqlIndex_delete".}
 
 proc operatorAssign*(self: gen_qsqlindex_types.QSqlIndex, other: gen_qsqlindex_types.QSqlIndex): void =
   fcQSqlIndex_operatorAssign(self.h, other.h)
@@ -97,19 +96,17 @@ proc setDescending*(self: gen_qsqlindex_types.QSqlIndex, i: cint, desc: bool): v
   fcQSqlIndex_setDescending(self.h, i, desc)
 
 proc create*(T: type gen_qsqlindex_types.QSqlIndex): gen_qsqlindex_types.QSqlIndex =
-  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new())
+  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new(), owned: true)
   tmp
 proc create*(T: type gen_qsqlindex_types.QSqlIndex,
     other: gen_qsqlindex_types.QSqlIndex): gen_qsqlindex_types.QSqlIndex =
-  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new2(other.h))
+  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new2(other.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlindex_types.QSqlIndex,
     cursorName: openArray[char]): gen_qsqlindex_types.QSqlIndex =
-  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new3(struct_seaqt_string(data: if len(cursorName) > 0: addr cursorName[0] else: nil, len: csize_t(len(cursorName)))))
+  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new3(struct_seaqt_string(data: if len(cursorName) > 0: addr cursorName[0] else: nil, len: csize_t(len(cursorName)))), owned: true)
   tmp
 proc create*(T: type gen_qsqlindex_types.QSqlIndex,
     cursorName: openArray[char], name: openArray[char]): gen_qsqlindex_types.QSqlIndex =
-  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new4(struct_seaqt_string(data: if len(cursorName) > 0: addr cursorName[0] else: nil, len: csize_t(len(cursorName))), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  let tmp = gen_qsqlindex_types.QSqlIndex(h: fcQSqlIndex_new4(struct_seaqt_string(data: if len(cursorName) > 0: addr cursorName[0] else: nil, len: csize_t(len(cursorName))), struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
-proc delete*(self: gen_qsqlindex_types.QSqlIndex) =
-  fcQSqlIndex_delete(self.h)

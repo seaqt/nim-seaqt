@@ -103,7 +103,6 @@ proc fcQLayoutItem_virtualbase_controlTypes(self: pointer): cint {.importc: "QLa
 proc fcQLayoutItem_new(vtbl: pointer, vdata: csize_t): ptr cQLayoutItem {.importc: "QLayoutItem_new".}
 proc fcQLayoutItem_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQLayoutItem {.importc: "QLayoutItem_new2".}
 proc fcQLayoutItem_new3(vtbl: pointer, vdata: csize_t, alignment: cint): ptr cQLayoutItem {.importc: "QLayoutItem_new3".}
-proc fcQLayoutItem_delete(self: pointer) {.importc: "QLayoutItem_delete".}
 proc fcQSpacerItem_changeSize(self: pointer, w: cint, h: cint): void {.importc: "QSpacerItem_changeSize".}
 proc fcQSpacerItem_sizeHint(self: pointer): pointer {.importc: "QSpacerItem_sizeHint".}
 proc fcQSpacerItem_minimumSize(self: pointer): pointer {.importc: "QSpacerItem_minimumSize".}
@@ -156,7 +155,6 @@ proc fcQSpacerItem_new(vtbl: pointer, vdata: csize_t, w: cint, h: cint): ptr cQS
 proc fcQSpacerItem_new2(vtbl: pointer, vdata: csize_t, param1: pointer): ptr cQSpacerItem {.importc: "QSpacerItem_new2".}
 proc fcQSpacerItem_new3(vtbl: pointer, vdata: csize_t, w: cint, h: cint, hData: cint): ptr cQSpacerItem {.importc: "QSpacerItem_new3".}
 proc fcQSpacerItem_new4(vtbl: pointer, vdata: csize_t, w: cint, h: cint, hData: cint, vData: cint): ptr cQSpacerItem {.importc: "QSpacerItem_new4".}
-proc fcQSpacerItem_delete(self: pointer) {.importc: "QSpacerItem_delete".}
 proc fcQWidgetItem_sizeHint(self: pointer): pointer {.importc: "QWidgetItem_sizeHint".}
 proc fcQWidgetItem_minimumSize(self: pointer): pointer {.importc: "QWidgetItem_minimumSize".}
 proc fcQWidgetItem_maximumSize(self: pointer): pointer {.importc: "QWidgetItem_maximumSize".}
@@ -204,7 +202,6 @@ proc fcQWidgetItem_virtualbase_invalidate(self: pointer): void {.importc: "QWidg
 proc fcQWidgetItem_virtualbase_layout(self: pointer): pointer {.importc: "QWidgetItem_virtualbase_layout".}
 proc fcQWidgetItem_virtualbase_spacerItem(self: pointer): pointer {.importc: "QWidgetItem_virtualbase_spacerItem".}
 proc fcQWidgetItem_new(vtbl: pointer, vdata: csize_t, w: pointer): ptr cQWidgetItem {.importc: "QWidgetItem_new".}
-proc fcQWidgetItem_delete(self: pointer) {.importc: "QWidgetItem_delete".}
 proc fcQWidgetItemV2_sizeHint(self: pointer): pointer {.importc: "QWidgetItemV2_sizeHint".}
 proc fcQWidgetItemV2_minimumSize(self: pointer): pointer {.importc: "QWidgetItemV2_minimumSize".}
 proc fcQWidgetItemV2_maximumSize(self: pointer): pointer {.importc: "QWidgetItemV2_maximumSize".}
@@ -245,16 +242,15 @@ proc fcQWidgetItemV2_virtualbase_invalidate(self: pointer): void {.importc: "QWi
 proc fcQWidgetItemV2_virtualbase_layout(self: pointer): pointer {.importc: "QWidgetItemV2_virtualbase_layout".}
 proc fcQWidgetItemV2_virtualbase_spacerItem(self: pointer): pointer {.importc: "QWidgetItemV2_virtualbase_spacerItem".}
 proc fcQWidgetItemV2_new(vtbl: pointer, vdata: csize_t, widget: pointer): ptr cQWidgetItemV2 {.importc: "QWidgetItemV2_new".}
-proc fcQWidgetItemV2_delete(self: pointer) {.importc: "QWidgetItemV2_delete".}
 
 proc sizeHint*(self: gen_qlayoutitem_types.QLayoutItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLayoutItem_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLayoutItem_sizeHint(self.h), owned: true)
 
 proc minimumSize*(self: gen_qlayoutitem_types.QLayoutItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLayoutItem_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQLayoutItem_minimumSize(self.h), owned: true)
 
 proc maximumSize*(self: gen_qlayoutitem_types.QLayoutItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLayoutItem_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQLayoutItem_maximumSize(self.h), owned: true)
 
 proc expandingDirections*(self: gen_qlayoutitem_types.QLayoutItem): cint =
   cint(fcQLayoutItem_expandingDirections(self.h))
@@ -263,7 +259,7 @@ proc setGeometry*(self: gen_qlayoutitem_types.QLayoutItem, geometry: gen_qrect_t
   fcQLayoutItem_setGeometry(self.h, geometry.h)
 
 proc geometry*(self: gen_qlayoutitem_types.QLayoutItem): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQLayoutItem_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQLayoutItem_geometry(self.h), owned: true)
 
 proc isEmpty*(self: gen_qlayoutitem_types.QLayoutItem): bool =
   fcQLayoutItem_isEmpty(self.h)
@@ -281,13 +277,13 @@ proc invalidate*(self: gen_qlayoutitem_types.QLayoutItem): void =
   fcQLayoutItem_invalidate(self.h)
 
 proc widget*(self: gen_qlayoutitem_types.QLayoutItem): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQLayoutItem_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQLayoutItem_widget(self.h), owned: false)
 
 proc layout*(self: gen_qlayoutitem_types.QLayoutItem): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQLayoutItem_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQLayoutItem_layout(self.h), owned: false)
 
 proc spacerItem*(self: gen_qlayoutitem_types.QLayoutItem): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQLayoutItem_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQLayoutItem_spacerItem(self.h), owned: false)
 
 proc alignment*(self: gen_qlayoutitem_types.QLayoutItem): cint =
   cint(fcQLayoutItem_alignment(self.h))
@@ -316,7 +312,8 @@ type QLayoutItemwidgetProc* = proc(self: QLayoutItem): gen_qwidget_types.QWidget
 type QLayoutItemlayoutProc* = proc(self: QLayoutItem): gen_qlayout_types.QLayout {.raises: [], gcsafe.}
 type QLayoutItemspacerItemProc* = proc(self: QLayoutItem): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
 type QLayoutItemcontrolTypesProc* = proc(self: QLayoutItem): cint {.raises: [], gcsafe.}
-type QLayoutItemVTable* = object
+
+type QLayoutItemVTable* {.inheritable, pure.} = object
   vtbl: cQLayoutItemVTable
   sizeHint*: QLayoutItemsizeHintProc
   minimumSize*: QLayoutItemminimumSizeProc
@@ -347,13 +344,13 @@ proc QLayoutIteminvalidate*(self: gen_qlayoutitem_types.QLayoutItem): void =
   fcQLayoutItem_virtualbase_invalidate(self.h)
 
 proc QLayoutItemwidget*(self: gen_qlayoutitem_types.QLayoutItem): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQLayoutItem_virtualbase_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQLayoutItem_virtualbase_widget(self.h), owned: false)
 
 proc QLayoutItemlayout*(self: gen_qlayoutitem_types.QLayoutItem): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQLayoutItem_virtualbase_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQLayoutItem_virtualbase_layout(self.h), owned: false)
 
 proc QLayoutItemspacerItem*(self: gen_qlayoutitem_types.QLayoutItem): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQLayoutItem_virtualbase_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQLayoutItem_virtualbase_spacerItem(self.h), owned: false)
 
 proc QLayoutItemcontrolTypes*(self: gen_qlayoutitem_types.QLayoutItem): cint =
   cint(fcQLayoutItem_virtualbase_controlTypes(self.h))
@@ -363,19 +360,28 @@ proc fcQLayoutItem_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
   let self = QLayoutItem(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
   let self = QLayoutItem(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
   let self = QLayoutItem(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_vtable_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
@@ -386,14 +392,17 @@ proc fcQLayoutItem_vtable_callback_expandingDirections(self: pointer): cint {.cd
 proc fcQLayoutItem_vtable_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
   let self = QLayoutItem(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc fcQLayoutItem_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
   let self = QLayoutItem(h: self)
   var virtualReturn = vtbl[].geometry(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
@@ -430,19 +439,28 @@ proc fcQLayoutItem_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
   let self = QLayoutItem(h: self)
   var virtualReturn = vtbl[].widget(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
   let self = QLayoutItem(h: self)
   var virtualReturn = vtbl[].layout(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
   let self = QLayoutItem(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_vtable_callback_controlTypes(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QLayoutItemVTable](fcQLayoutItem_vdata(self)[])
@@ -487,17 +505,26 @@ method controlTypes*(self: VirtualQLayoutItem): cint {.base.} =
 proc fcQLayoutItem_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
   var virtualReturn = inst.minimumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
   var virtualReturn = inst.maximumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_method_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
@@ -506,13 +533,16 @@ proc fcQLayoutItem_method_callback_expandingDirections(self: pointer): cint {.cd
 
 proc fcQLayoutItem_method_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   inst.setGeometry(slotval1)
 
 proc fcQLayoutItem_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
   var virtualReturn = inst.geometry()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
@@ -543,17 +573,26 @@ proc fcQLayoutItem_method_callback_invalidate(self: pointer): void {.cdecl.} =
 proc fcQLayoutItem_method_callback_widget(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
   var virtualReturn = inst.widget()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_method_callback_layout(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
   var virtualReturn = inst.layout()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
   var virtualReturn = inst.spacerItem()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQLayoutItem_method_callback_controlTypes(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQLayoutItem](fcQLayoutItem_vdata(self)[])
@@ -598,7 +637,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
     vtbl[].vtbl.spacerItem = fcQLayoutItem_vtable_callback_spacerItem
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQLayoutItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QLayoutItem(h: fcQLayoutItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qlayoutitem_types.QLayoutItem(h: fcQLayoutItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQLayoutItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
@@ -639,7 +678,7 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
     vtbl[].vtbl.spacerItem = fcQLayoutItem_vtable_callback_spacerItem
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQLayoutItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QLayoutItem(h: fcQLayoutItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qlayoutitem_types.QLayoutItem(h: fcQLayoutItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQLayoutItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
@@ -680,13 +719,14 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
     vtbl[].vtbl.spacerItem = fcQLayoutItem_vtable_callback_spacerItem
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQLayoutItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QLayoutItem(h: fcQLayoutItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(alignment)))
+  let tmp = gen_qlayoutitem_types.QLayoutItem(h: fcQLayoutItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), cint(alignment)), owned: true)
   fcQLayoutItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQLayoutItem_mvtbl = cQLayoutItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQLayoutItem()[])](self.fcQLayoutItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   sizeHint: fcQLayoutItem_method_callback_sizeHint,
   minimumSize: fcQLayoutItem_method_callback_minimumSize,
@@ -727,19 +767,17 @@ proc create*(T: type gen_qlayoutitem_types.QLayoutItem,
   fcQLayoutItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qlayoutitem_types.QLayoutItem) =
-  fcQLayoutItem_delete(self.h)
 proc changeSize*(self: gen_qlayoutitem_types.QSpacerItem, w: cint, h: cint): void =
   fcQSpacerItem_changeSize(self.h, w, h)
 
 proc sizeHint*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSpacerItem_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQSpacerItem_sizeHint(self.h), owned: true)
 
 proc minimumSize*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSpacerItem_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQSpacerItem_minimumSize(self.h), owned: true)
 
 proc maximumSize*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSpacerItem_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQSpacerItem_maximumSize(self.h), owned: true)
 
 proc expandingDirections*(self: gen_qlayoutitem_types.QSpacerItem): cint =
   cint(fcQSpacerItem_expandingDirections(self.h))
@@ -751,13 +789,13 @@ proc setGeometry*(self: gen_qlayoutitem_types.QSpacerItem, geometry: gen_qrect_t
   fcQSpacerItem_setGeometry(self.h, geometry.h)
 
 proc geometry*(self: gen_qlayoutitem_types.QSpacerItem): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQSpacerItem_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQSpacerItem_geometry(self.h), owned: true)
 
 proc spacerItem*(self: gen_qlayoutitem_types.QSpacerItem): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_spacerItem(self.h), owned: false)
 
 proc sizePolicy*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsizepolicy_types.QSizePolicy =
-  gen_qsizepolicy_types.QSizePolicy(h: fcQSpacerItem_sizePolicy(self.h))
+  gen_qsizepolicy_types.QSizePolicy(h: fcQSpacerItem_sizePolicy(self.h), owned: true)
 
 proc operatorAssign*(self: gen_qlayoutitem_types.QSpacerItem, param1: gen_qlayoutitem_types.QSpacerItem): void =
   fcQSpacerItem_operatorAssign(self.h, param1.h)
@@ -783,7 +821,8 @@ type QSpacerIteminvalidateProc* = proc(self: QSpacerItem): void {.raises: [], gc
 type QSpacerItemwidgetProc* = proc(self: QSpacerItem): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QSpacerItemlayoutProc* = proc(self: QSpacerItem): gen_qlayout_types.QLayout {.raises: [], gcsafe.}
 type QSpacerItemcontrolTypesProc* = proc(self: QSpacerItem): cint {.raises: [], gcsafe.}
-type QSpacerItemVTable* = object
+
+type QSpacerItemVTable* {.inheritable, pure.} = object
   vtbl: cQSpacerItemVTable
   sizeHint*: QSpacerItemsizeHintProc
   minimumSize*: QSpacerItemminimumSizeProc
@@ -802,13 +841,13 @@ type QSpacerItemVTable* = object
   controlTypes*: QSpacerItemcontrolTypesProc
 
 proc QSpacerItemsizeHint*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSpacerItem_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQSpacerItem_virtualbase_sizeHint(self.h), owned: true)
 
 proc QSpacerItemminimumSize*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSpacerItem_virtualbase_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQSpacerItem_virtualbase_minimumSize(self.h), owned: true)
 
 proc QSpacerItemmaximumSize*(self: gen_qlayoutitem_types.QSpacerItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSpacerItem_virtualbase_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQSpacerItem_virtualbase_maximumSize(self.h), owned: true)
 
 proc QSpacerItemexpandingDirections*(self: gen_qlayoutitem_types.QSpacerItem): cint =
   cint(fcQSpacerItem_virtualbase_expandingDirections(self.h))
@@ -820,10 +859,10 @@ proc QSpacerItemsetGeometry*(self: gen_qlayoutitem_types.QSpacerItem, geometry: 
   fcQSpacerItem_virtualbase_setGeometry(self.h, geometry.h)
 
 proc QSpacerItemgeometry*(self: gen_qlayoutitem_types.QSpacerItem): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQSpacerItem_virtualbase_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQSpacerItem_virtualbase_geometry(self.h), owned: true)
 
 proc QSpacerItemspacerItem*(self: gen_qlayoutitem_types.QSpacerItem): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_virtualbase_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_virtualbase_spacerItem(self.h), owned: false)
 
 proc QSpacerItemhasHeightForWidth*(self: gen_qlayoutitem_types.QSpacerItem): bool =
   fcQSpacerItem_virtualbase_hasHeightForWidth(self.h)
@@ -838,10 +877,10 @@ proc QSpacerIteminvalidate*(self: gen_qlayoutitem_types.QSpacerItem): void =
   fcQSpacerItem_virtualbase_invalidate(self.h)
 
 proc QSpacerItemwidget*(self: gen_qlayoutitem_types.QSpacerItem): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQSpacerItem_virtualbase_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQSpacerItem_virtualbase_widget(self.h), owned: false)
 
 proc QSpacerItemlayout*(self: gen_qlayoutitem_types.QSpacerItem): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQSpacerItem_virtualbase_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQSpacerItem_virtualbase_layout(self.h), owned: false)
 
 proc QSpacerItemcontrolTypes*(self: gen_qlayoutitem_types.QSpacerItem): cint =
   cint(fcQSpacerItem_virtualbase_controlTypes(self.h))
@@ -851,19 +890,28 @@ proc fcQSpacerItem_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
   let self = QSpacerItem(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
   let self = QSpacerItem(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
   let self = QSpacerItem(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_vtable_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
@@ -880,20 +928,26 @@ proc fcQSpacerItem_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
 proc fcQSpacerItem_vtable_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
   let self = QSpacerItem(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc fcQSpacerItem_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
   let self = QSpacerItem(h: self)
   var virtualReturn = vtbl[].geometry(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
   let self = QSpacerItem(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
@@ -924,13 +978,19 @@ proc fcQSpacerItem_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
   let self = QSpacerItem(h: self)
   var virtualReturn = vtbl[].widget(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
   let self = QSpacerItem(h: self)
   var virtualReturn = vtbl[].layout(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_vtable_callback_controlTypes(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSpacerItemVTable](fcQSpacerItem_vdata(self)[])
@@ -975,17 +1035,26 @@ method controlTypes*(self: VirtualQSpacerItem): cint {.base.} =
 proc fcQSpacerItem_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
   var virtualReturn = inst.minimumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
   var virtualReturn = inst.maximumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_method_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
@@ -999,18 +1068,24 @@ proc fcQSpacerItem_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
 
 proc fcQSpacerItem_method_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   inst.setGeometry(slotval1)
 
 proc fcQSpacerItem_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
   var virtualReturn = inst.geometry()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
   var virtualReturn = inst.spacerItem()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
@@ -1036,12 +1111,18 @@ proc fcQSpacerItem_method_callback_invalidate(self: pointer): void {.cdecl.} =
 proc fcQSpacerItem_method_callback_widget(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
   var virtualReturn = inst.widget()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_method_callback_layout(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
   var virtualReturn = inst.layout()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQSpacerItem_method_callback_controlTypes(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQSpacerItem](fcQSpacerItem_vdata(self)[])
@@ -1087,7 +1168,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
     vtbl[].vtbl.layout = fcQSpacerItem_vtable_callback_layout
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQSpacerItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), w, h))
+  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), w, h), owned: true)
   fcQSpacerItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
@@ -1128,7 +1209,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
     vtbl[].vtbl.layout = fcQSpacerItem_vtable_callback_layout
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQSpacerItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h))
+  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), param1.h), owned: true)
   fcQSpacerItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
@@ -1169,7 +1250,7 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
     vtbl[].vtbl.layout = fcQSpacerItem_vtable_callback_layout
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQSpacerItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), w, h, cint(hData)))
+  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), w, h, cint(hData)), owned: true)
   fcQSpacerItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
@@ -1210,13 +1291,14 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
     vtbl[].vtbl.layout = fcQSpacerItem_vtable_callback_layout
   if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = fcQSpacerItem_vtable_callback_controlTypes
-  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), w, h, cint(hData), cint(vData)))
+  let tmp = gen_qlayoutitem_types.QSpacerItem(h: fcQSpacerItem_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), w, h, cint(hData), cint(vData)), owned: true)
   fcQSpacerItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQSpacerItem_mvtbl = cQSpacerItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQSpacerItem()[])](self.fcQSpacerItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   sizeHint: fcQSpacerItem_method_callback_sizeHint,
   minimumSize: fcQSpacerItem_method_callback_minimumSize,
@@ -1266,16 +1348,14 @@ proc create*(T: type gen_qlayoutitem_types.QSpacerItem,
   fcQSpacerItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qlayoutitem_types.QSpacerItem) =
-  fcQSpacerItem_delete(self.h)
 proc sizeHint*(self: gen_qlayoutitem_types.QWidgetItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItem_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItem_sizeHint(self.h), owned: true)
 
 proc minimumSize*(self: gen_qlayoutitem_types.QWidgetItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItem_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItem_minimumSize(self.h), owned: true)
 
 proc maximumSize*(self: gen_qlayoutitem_types.QWidgetItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItem_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItem_maximumSize(self.h), owned: true)
 
 proc expandingDirections*(self: gen_qlayoutitem_types.QWidgetItem): cint =
   cint(fcQWidgetItem_expandingDirections(self.h))
@@ -1287,10 +1367,10 @@ proc setGeometry*(self: gen_qlayoutitem_types.QWidgetItem, geometry: gen_qrect_t
   fcQWidgetItem_setGeometry(self.h, geometry.h)
 
 proc geometry*(self: gen_qlayoutitem_types.QWidgetItem): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWidgetItem_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQWidgetItem_geometry(self.h), owned: true)
 
 proc widget*(self: gen_qlayoutitem_types.QWidgetItem): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidgetItem_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQWidgetItem_widget(self.h), owned: false)
 
 proc hasHeightForWidth*(self: gen_qlayoutitem_types.QWidgetItem): bool =
   fcQWidgetItem_hasHeightForWidth(self.h)
@@ -1316,7 +1396,8 @@ type QWidgetItemminimumHeightForWidthProc* = proc(self: QWidgetItem, param1: cin
 type QWidgetIteminvalidateProc* = proc(self: QWidgetItem): void {.raises: [], gcsafe.}
 type QWidgetItemlayoutProc* = proc(self: QWidgetItem): gen_qlayout_types.QLayout {.raises: [], gcsafe.}
 type QWidgetItemspacerItemProc* = proc(self: QWidgetItem): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
-type QWidgetItemVTable* = object
+
+type QWidgetItemVTable* {.inheritable, pure.} = object
   vtbl: cQWidgetItemVTable
   sizeHint*: QWidgetItemsizeHintProc
   minimumSize*: QWidgetItemminimumSizeProc
@@ -1335,13 +1416,13 @@ type QWidgetItemVTable* = object
   spacerItem*: QWidgetItemspacerItemProc
 
 proc QWidgetItemsizeHint*(self: gen_qlayoutitem_types.QWidgetItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItem_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItem_virtualbase_sizeHint(self.h), owned: true)
 
 proc QWidgetItemminimumSize*(self: gen_qlayoutitem_types.QWidgetItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItem_virtualbase_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItem_virtualbase_minimumSize(self.h), owned: true)
 
 proc QWidgetItemmaximumSize*(self: gen_qlayoutitem_types.QWidgetItem): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItem_virtualbase_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItem_virtualbase_maximumSize(self.h), owned: true)
 
 proc QWidgetItemexpandingDirections*(self: gen_qlayoutitem_types.QWidgetItem): cint =
   cint(fcQWidgetItem_virtualbase_expandingDirections(self.h))
@@ -1353,10 +1434,10 @@ proc QWidgetItemsetGeometry*(self: gen_qlayoutitem_types.QWidgetItem, geometry: 
   fcQWidgetItem_virtualbase_setGeometry(self.h, geometry.h)
 
 proc QWidgetItemgeometry*(self: gen_qlayoutitem_types.QWidgetItem): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWidgetItem_virtualbase_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQWidgetItem_virtualbase_geometry(self.h), owned: true)
 
 proc QWidgetItemwidget*(self: gen_qlayoutitem_types.QWidgetItem): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidgetItem_virtualbase_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQWidgetItem_virtualbase_widget(self.h), owned: false)
 
 proc QWidgetItemhasHeightForWidth*(self: gen_qlayoutitem_types.QWidgetItem): bool =
   fcQWidgetItem_virtualbase_hasHeightForWidth(self.h)
@@ -1374,29 +1455,38 @@ proc QWidgetIteminvalidate*(self: gen_qlayoutitem_types.QWidgetItem): void =
   fcQWidgetItem_virtualbase_invalidate(self.h)
 
 proc QWidgetItemlayout*(self: gen_qlayoutitem_types.QWidgetItem): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQWidgetItem_virtualbase_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQWidgetItem_virtualbase_layout(self.h), owned: false)
 
 proc QWidgetItemspacerItem*(self: gen_qlayoutitem_types.QWidgetItem): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQWidgetItem_virtualbase_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQWidgetItem_virtualbase_spacerItem(self.h), owned: false)
 
 
 proc fcQWidgetItem_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
   let self = QWidgetItem(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
   let self = QWidgetItem(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
   let self = QWidgetItem(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_vtable_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
@@ -1413,20 +1503,26 @@ proc fcQWidgetItem_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
 proc fcQWidgetItem_vtable_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
   let self = QWidgetItem(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc fcQWidgetItem_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
   let self = QWidgetItem(h: self)
   var virtualReturn = vtbl[].geometry(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
   let self = QWidgetItem(h: self)
   var virtualReturn = vtbl[].widget(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
@@ -1463,13 +1559,19 @@ proc fcQWidgetItem_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
   let self = QWidgetItem(h: self)
   var virtualReturn = vtbl[].layout(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemVTable](fcQWidgetItem_vdata(self)[])
   let self = QWidgetItem(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQWidgetItem* {.inheritable.} = ref object of QWidgetItem
   vtbl*: cQWidgetItemVTable
@@ -1508,17 +1610,26 @@ method spacerItem*(self: VirtualQWidgetItem): gen_qlayoutitem_types.QSpacerItem 
 proc fcQWidgetItem_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
   var virtualReturn = inst.minimumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
   var virtualReturn = inst.maximumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_method_callback_expandingDirections(self: pointer): cint {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
@@ -1532,18 +1643,24 @@ proc fcQWidgetItem_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
 
 proc fcQWidgetItem_method_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   inst.setGeometry(slotval1)
 
 proc fcQWidgetItem_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
   var virtualReturn = inst.geometry()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_method_callback_widget(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
   var virtualReturn = inst.widget()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
@@ -1574,12 +1691,18 @@ proc fcQWidgetItem_method_callback_invalidate(self: pointer): void {.cdecl.} =
 proc fcQWidgetItem_method_callback_layout(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
   var virtualReturn = inst.layout()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItem_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItem](fcQWidgetItem_vdata(self)[])
   var virtualReturn = inst.spacerItem()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qlayoutitem_types.QWidgetItem,
@@ -1620,13 +1743,14 @@ proc create*(T: type gen_qlayoutitem_types.QWidgetItem,
     vtbl[].vtbl.layout = fcQWidgetItem_vtable_callback_layout
   if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = fcQWidgetItem_vtable_callback_spacerItem
-  let tmp = gen_qlayoutitem_types.QWidgetItem(h: fcQWidgetItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), w.h))
+  let tmp = gen_qlayoutitem_types.QWidgetItem(h: fcQWidgetItem_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), w.h), owned: true)
   fcQWidgetItem_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQWidgetItem_mvtbl = cQWidgetItemVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQWidgetItem()[])](self.fcQWidgetItem_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   sizeHint: fcQWidgetItem_method_callback_sizeHint,
   minimumSize: fcQWidgetItem_method_callback_minimumSize,
@@ -1652,16 +1776,14 @@ proc create*(T: type gen_qlayoutitem_types.QWidgetItem,
   fcQWidgetItem_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qlayoutitem_types.QWidgetItem) =
-  fcQWidgetItem_delete(self.h)
 proc sizeHint*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItemV2_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItemV2_sizeHint(self.h), owned: true)
 
 proc minimumSize*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItemV2_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItemV2_minimumSize(self.h), owned: true)
 
 proc maximumSize*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItemV2_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItemV2_maximumSize(self.h), owned: true)
 
 proc heightForWidth*(self: gen_qlayoutitem_types.QWidgetItemV2, width: cint): cint =
   fcQWidgetItemV2_heightForWidth(self.h, width)
@@ -1681,7 +1803,8 @@ type QWidgetItemV2minimumHeightForWidthProc* = proc(self: QWidgetItemV2, param1:
 type QWidgetItemV2invalidateProc* = proc(self: QWidgetItemV2): void {.raises: [], gcsafe.}
 type QWidgetItemV2layoutProc* = proc(self: QWidgetItemV2): gen_qlayout_types.QLayout {.raises: [], gcsafe.}
 type QWidgetItemV2spacerItemProc* = proc(self: QWidgetItemV2): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
-type QWidgetItemV2VTable* = object
+
+type QWidgetItemV2VTable* {.inheritable, pure.} = object
   vtbl: cQWidgetItemV2VTable
   sizeHint*: QWidgetItemV2sizeHintProc
   minimumSize*: QWidgetItemV2minimumSizeProc
@@ -1700,13 +1823,13 @@ type QWidgetItemV2VTable* = object
   spacerItem*: QWidgetItemV2spacerItemProc
 
 proc QWidgetItemV2sizeHint*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItemV2_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItemV2_virtualbase_sizeHint(self.h), owned: true)
 
 proc QWidgetItemV2minimumSize*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItemV2_virtualbase_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItemV2_virtualbase_minimumSize(self.h), owned: true)
 
 proc QWidgetItemV2maximumSize*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWidgetItemV2_virtualbase_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQWidgetItemV2_virtualbase_maximumSize(self.h), owned: true)
 
 proc QWidgetItemV2heightForWidth*(self: gen_qlayoutitem_types.QWidgetItemV2, width: cint): cint =
   fcQWidgetItemV2_virtualbase_heightForWidth(self.h, width)
@@ -1721,10 +1844,10 @@ proc QWidgetItemV2setGeometry*(self: gen_qlayoutitem_types.QWidgetItemV2, geomet
   fcQWidgetItemV2_virtualbase_setGeometry(self.h, geometry.h)
 
 proc QWidgetItemV2geometry*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWidgetItemV2_virtualbase_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQWidgetItemV2_virtualbase_geometry(self.h), owned: true)
 
 proc QWidgetItemV2widget*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidgetItemV2_virtualbase_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQWidgetItemV2_virtualbase_widget(self.h), owned: false)
 
 proc QWidgetItemV2hasHeightForWidth*(self: gen_qlayoutitem_types.QWidgetItemV2): bool =
   fcQWidgetItemV2_virtualbase_hasHeightForWidth(self.h)
@@ -1739,29 +1862,38 @@ proc QWidgetItemV2invalidate*(self: gen_qlayoutitem_types.QWidgetItemV2): void =
   fcQWidgetItemV2_virtualbase_invalidate(self.h)
 
 proc QWidgetItemV2layout*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQWidgetItemV2_virtualbase_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQWidgetItemV2_virtualbase_layout(self.h), owned: false)
 
 proc QWidgetItemV2spacerItem*(self: gen_qlayoutitem_types.QWidgetItemV2): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQWidgetItemV2_virtualbase_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQWidgetItemV2_virtualbase_spacerItem(self.h), owned: false)
 
 
 proc fcQWidgetItemV2_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
   let self = QWidgetItemV2(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
   let self = QWidgetItemV2(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
   let self = QWidgetItemV2(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_vtable_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
@@ -1785,20 +1917,26 @@ proc fcQWidgetItemV2_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
 proc fcQWidgetItemV2_vtable_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
   let self = QWidgetItemV2(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc fcQWidgetItemV2_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
   let self = QWidgetItemV2(h: self)
   var virtualReturn = vtbl[].geometry(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
   let self = QWidgetItemV2(h: self)
   var virtualReturn = vtbl[].widget(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
@@ -1828,13 +1966,19 @@ proc fcQWidgetItemV2_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
   let self = QWidgetItemV2(h: self)
   var virtualReturn = vtbl[].layout(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetItemV2VTable](fcQWidgetItemV2_vdata(self)[])
   let self = QWidgetItemV2(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQWidgetItemV2* {.inheritable.} = ref object of QWidgetItemV2
   vtbl*: cQWidgetItemV2VTable
@@ -1873,17 +2017,26 @@ method spacerItem*(self: VirtualQWidgetItemV2): gen_qlayoutitem_types.QSpacerIte
 proc fcQWidgetItemV2_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
   var virtualReturn = inst.sizeHint()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
   var virtualReturn = inst.minimumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
   var virtualReturn = inst.maximumSize()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_method_callback_heightForWidth(self: pointer, width: cint): cint {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
@@ -1903,18 +2056,24 @@ proc fcQWidgetItemV2_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
 
 proc fcQWidgetItemV2_method_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   inst.setGeometry(slotval1)
 
 proc fcQWidgetItemV2_method_callback_geometry(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
   var virtualReturn = inst.geometry()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_method_callback_widget(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
   var virtualReturn = inst.widget()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
@@ -1939,12 +2098,18 @@ proc fcQWidgetItemV2_method_callback_invalidate(self: pointer): void {.cdecl.} =
 proc fcQWidgetItemV2_method_callback_layout(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
   var virtualReturn = inst.layout()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQWidgetItemV2_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQWidgetItemV2](fcQWidgetItemV2_vdata(self)[])
   var virtualReturn = inst.spacerItem()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc create*(T: type gen_qlayoutitem_types.QWidgetItemV2,
@@ -1985,13 +2150,14 @@ proc create*(T: type gen_qlayoutitem_types.QWidgetItemV2,
     vtbl[].vtbl.layout = fcQWidgetItemV2_vtable_callback_layout
   if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = fcQWidgetItemV2_vtable_callback_spacerItem
-  let tmp = gen_qlayoutitem_types.QWidgetItemV2(h: fcQWidgetItemV2_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), widget.h))
+  let tmp = gen_qlayoutitem_types.QWidgetItemV2(h: fcQWidgetItemV2_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), widget.h), owned: true)
   fcQWidgetItemV2_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQWidgetItemV2_mvtbl = cQWidgetItemV2VTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQWidgetItemV2()[])](self.fcQWidgetItemV2_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   sizeHint: fcQWidgetItemV2_method_callback_sizeHint,
   minimumSize: fcQWidgetItemV2_method_callback_minimumSize,
@@ -2017,5 +2183,3 @@ proc create*(T: type gen_qlayoutitem_types.QWidgetItemV2,
   fcQWidgetItemV2_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qlayoutitem_types.QWidgetItemV2) =
-  fcQWidgetItemV2_delete(self.h)

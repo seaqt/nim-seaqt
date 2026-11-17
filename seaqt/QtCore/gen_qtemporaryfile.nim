@@ -150,10 +150,9 @@ proc fcQTemporaryFile_new2(vtbl: pointer, vdata: csize_t, templateName: struct_s
 proc fcQTemporaryFile_new3(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new3".}
 proc fcQTemporaryFile_new4(vtbl: pointer, vdata: csize_t, templateName: struct_seaqt_string, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new4".}
 proc fcQTemporaryFile_staticMetaObject(): pointer {.importc: "QTemporaryFile_staticMetaObject".}
-proc fcQTemporaryFile_delete(self: pointer) {.importc: "QTemporaryFile_delete".}
 
 proc metaObject*(self: gen_qtemporaryfile_types.QTemporaryFile): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cstring): pointer =
   fcQTemporaryFile_metacast(self.h, param1)
@@ -201,16 +200,16 @@ proc rename*(self: gen_qtemporaryfile_types.QTemporaryFile, newName: openArray[c
   fcQTemporaryFile_rename(self.h, struct_seaqt_string(data: if len(newName) > 0: addr newName[0] else: nil, len: csize_t(len(newName))))
 
 proc createLocalFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, fileName: openArray[char]): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFile(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFile(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: false)
 
 proc createLocalFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, file: gen_qfile_types.QFile): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFileWithFile(file.h))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFileWithFile(file.h), owned: false)
 
 proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, fileName: openArray[char]): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFile(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFile(struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName)))), owned: false)
 
 proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, file: gen_qfile_types.QFile): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFileWithFile(file.h))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFileWithFile(file.h), owned: false)
 
 proc tr*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring, c: cstring): string =
   let v_ms = fcQTemporaryFile_tr2(s, c)
@@ -266,7 +265,8 @@ type QTemporaryFilechildEventProc* = proc(self: QTemporaryFile, event: gen_qcore
 type QTemporaryFilecustomEventProc* = proc(self: QTemporaryFile, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTemporaryFileconnectNotifyProc* = proc(self: QTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTemporaryFiledisconnectNotifyProc* = proc(self: QTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QTemporaryFileVTable* = object
+
+type QTemporaryFileVTable* {.inheritable, pure.} = object
   vtbl: cQTemporaryFileVTable
   metaObject*: QTemporaryFilemetaObjectProc
   metacast*: QTemporaryFilemetacastProc
@@ -300,7 +300,7 @@ type QTemporaryFileVTable* = object
   disconnectNotify*: QTemporaryFiledisconnectNotifyProc
 
 proc QTemporaryFilemetaObject*(self: gen_qtemporaryfile_types.QTemporaryFile): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_virtualbase_metaObject(self.h), owned: false)
 
 proc QTemporaryFilemetacast*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cstring): pointer =
   fcQTemporaryFile_virtualbase_metacast(self.h, param1)
@@ -397,7 +397,10 @@ proc fcQTemporaryFile_vtable_callback_metaObject(self: pointer): pointer {.cdecl
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTemporaryFile_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
@@ -551,46 +554,46 @@ proc fcQTemporaryFile_vtable_callback_waitForBytesWritten(self: pointer, msecs: 
 proc fcQTemporaryFile_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQTemporaryFile_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQTemporaryFile_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQTemporaryFile_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQTemporaryFile_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQTemporaryFile_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQTemporaryFile_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](fcQTemporaryFile_vdata(self)[])
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQTemporaryFile* {.inheritable.} = ref object of QTemporaryFile
@@ -660,7 +663,10 @@ method disconnectNotify*(self: VirtualQTemporaryFile, signal: gen_qmetaobject_ty
 proc fcQTemporaryFile_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQTemporaryFile_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
@@ -791,40 +797,40 @@ proc fcQTemporaryFile_method_callback_waitForBytesWritten(self: pointer, msecs: 
 
 proc fcQTemporaryFile_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQTemporaryFile_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQTemporaryFile_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQTemporaryFile_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQTemporaryFile_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQTemporaryFile_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQTemporaryFile_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQTemporaryFile](fcQTemporaryFile_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -835,7 +841,7 @@ proc setErrorString*(self: gen_qtemporaryfile_types.QTemporaryFile, errorString:
   fcQTemporaryFile_protectedbase_setErrorString(self.h, struct_seaqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qtemporaryfile_types.QTemporaryFile): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQTemporaryFile_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQTemporaryFile_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qtemporaryfile_types.QTemporaryFile): cint =
   fcQTemporaryFile_protectedbase_senderSignalIndex(self.h)
@@ -913,7 +919,7 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl[].vtbl.connectNotify = fcQTemporaryFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTemporaryFile_vtable_callback_disconnectNotify
-  let tmp = gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQTemporaryFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
@@ -984,7 +990,7 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl[].vtbl.connectNotify = fcQTemporaryFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTemporaryFile_vtable_callback_disconnectNotify
-  let tmp = gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName)))))
+  let tmp = gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName)))), owned: true)
   fcQTemporaryFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
@@ -1055,7 +1061,7 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl[].vtbl.connectNotify = fcQTemporaryFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTemporaryFile_vtable_callback_disconnectNotify
-  let tmp = gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new3(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQTemporaryFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
@@ -1126,13 +1132,14 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl[].vtbl.connectNotify = fcQTemporaryFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQTemporaryFile_vtable_callback_disconnectNotify
-  let tmp = gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName))), parent.h))
+  let tmp = gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new4(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), struct_seaqt_string(data: if len(templateName) > 0: addr templateName[0] else: nil, len: csize_t(len(templateName))), parent.h), owned: true)
   fcQTemporaryFile_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQTemporaryFile_mvtbl = cQTemporaryFileVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQTemporaryFile()[])](self.fcQTemporaryFile_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQTemporaryFile_method_callback_metaObject,
   metacast: fcQTemporaryFile_method_callback_metacast,
@@ -1198,5 +1205,3 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
 
 proc staticMetaObject*(_: type gen_qtemporaryfile_types.QTemporaryFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_staticMetaObject())
-proc delete*(self: gen_qtemporaryfile_types.QTemporaryFile) =
-  fcQTemporaryFile_delete(self.h)

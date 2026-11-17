@@ -1,4 +1,4 @@
-type QMediaBindableInterface* {.inheritable, pure.} = object
+type QMediaBindableInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

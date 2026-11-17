@@ -69,7 +69,6 @@ proc fcQSqlError_new4(driverText: struct_seaqt_string): ptr cQSqlError {.importc
 proc fcQSqlError_new5(driverText: struct_seaqt_string, databaseText: struct_seaqt_string): ptr cQSqlError {.importc: "QSqlError_new5".}
 proc fcQSqlError_new6(driverText: struct_seaqt_string, databaseText: struct_seaqt_string, typeVal: cint): ptr cQSqlError {.importc: "QSqlError_new6".}
 proc fcQSqlError_new7(driverText: struct_seaqt_string, databaseText: struct_seaqt_string, typeVal: cint, errorCode: struct_seaqt_string): ptr cQSqlError {.importc: "QSqlError_new7".}
-proc fcQSqlError_delete(self: pointer) {.importc: "QSqlError_delete".}
 
 proc operatorAssign*(self: gen_qsqlerror_types.QSqlError, other: gen_qsqlerror_types.QSqlError): void =
   fcQSqlError_operatorAssign(self.h, other.h)
@@ -130,30 +129,28 @@ proc setNumber*(self: gen_qsqlerror_types.QSqlError, number: cint): void =
 
 proc create*(T: type gen_qsqlerror_types.QSqlError,
     driverText: openArray[char], databaseText: openArray[char], typeVal: cint, number: cint): gen_qsqlerror_types.QSqlError =
-  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText))), struct_seaqt_string(data: if len(databaseText) > 0: addr databaseText[0] else: nil, len: csize_t(len(databaseText))), cint(typeVal), number))
+  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText))), struct_seaqt_string(data: if len(databaseText) > 0: addr databaseText[0] else: nil, len: csize_t(len(databaseText))), cint(typeVal), number), owned: true)
   tmp
 proc create*(T: type gen_qsqlerror_types.QSqlError): gen_qsqlerror_types.QSqlError =
-  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new2())
+  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new2(), owned: true)
   tmp
 proc create*(T: type gen_qsqlerror_types.QSqlError,
     other: gen_qsqlerror_types.QSqlError): gen_qsqlerror_types.QSqlError =
-  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new3(other.h))
+  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new3(other.h), owned: true)
   tmp
 proc create*(T: type gen_qsqlerror_types.QSqlError,
     driverText: openArray[char]): gen_qsqlerror_types.QSqlError =
-  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new4(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText)))))
+  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new4(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText)))), owned: true)
   tmp
 proc create*(T: type gen_qsqlerror_types.QSqlError,
     driverText: openArray[char], databaseText: openArray[char]): gen_qsqlerror_types.QSqlError =
-  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new5(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText))), struct_seaqt_string(data: if len(databaseText) > 0: addr databaseText[0] else: nil, len: csize_t(len(databaseText)))))
+  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new5(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText))), struct_seaqt_string(data: if len(databaseText) > 0: addr databaseText[0] else: nil, len: csize_t(len(databaseText)))), owned: true)
   tmp
 proc create*(T: type gen_qsqlerror_types.QSqlError,
     driverText: openArray[char], databaseText: openArray[char], typeVal: cint): gen_qsqlerror_types.QSqlError =
-  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new6(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText))), struct_seaqt_string(data: if len(databaseText) > 0: addr databaseText[0] else: nil, len: csize_t(len(databaseText))), cint(typeVal)))
+  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new6(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText))), struct_seaqt_string(data: if len(databaseText) > 0: addr databaseText[0] else: nil, len: csize_t(len(databaseText))), cint(typeVal)), owned: true)
   tmp
 proc create*(T: type gen_qsqlerror_types.QSqlError,
     driverText: openArray[char], databaseText: openArray[char], typeVal: cint, errorCode: openArray[char]): gen_qsqlerror_types.QSqlError =
-  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new7(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText))), struct_seaqt_string(data: if len(databaseText) > 0: addr databaseText[0] else: nil, len: csize_t(len(databaseText))), cint(typeVal), struct_seaqt_string(data: if len(errorCode) > 0: addr errorCode[0] else: nil, len: csize_t(len(errorCode)))))
+  let tmp = gen_qsqlerror_types.QSqlError(h: fcQSqlError_new7(struct_seaqt_string(data: if len(driverText) > 0: addr driverText[0] else: nil, len: csize_t(len(driverText))), struct_seaqt_string(data: if len(databaseText) > 0: addr databaseText[0] else: nil, len: csize_t(len(databaseText))), cint(typeVal), struct_seaqt_string(data: if len(errorCode) > 0: addr errorCode[0] else: nil, len: csize_t(len(errorCode)))), owned: true)
   tmp
-proc delete*(self: gen_qsqlerror_types.QSqlError) =
-  fcQSqlError_delete(self.h)

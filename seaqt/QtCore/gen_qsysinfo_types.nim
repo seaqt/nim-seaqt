@@ -1,4 +1,4 @@
-type QSysInfo* {.inheritable, pure.} = object
+type QSysInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

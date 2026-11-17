@@ -1,4 +1,4 @@
-type QNetworkCacheMetaData* {.inheritable, pure.} = object
+type QNetworkCacheMetaData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

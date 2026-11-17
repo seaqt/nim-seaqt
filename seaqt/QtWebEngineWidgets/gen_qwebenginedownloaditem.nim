@@ -151,10 +151,9 @@ proc fcQWebEngineDownloadItem_protectedbase_senderSignalIndex(self: pointer): ci
 proc fcQWebEngineDownloadItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineDownloadItem_protectedbase_receivers".}
 proc fcQWebEngineDownloadItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineDownloadItem_protectedbase_isSignalConnected".}
 proc fcQWebEngineDownloadItem_staticMetaObject(): pointer {.importc: "QWebEngineDownloadItem_staticMetaObject".}
-proc fcQWebEngineDownloadItem_delete(self: pointer) {.importc: "QWebEngineDownloadItem_delete".}
 
 proc metaObject*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadItem_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadItem_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, param1: cstring): pointer =
   fcQWebEngineDownloadItem_metacast(self.h, param1)
@@ -187,7 +186,7 @@ proc receivedBytes*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadIte
   fcQWebEngineDownloadItem_receivedBytes(self.h)
 
 proc url*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineDownloadItem_url(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineDownloadItem_url(self.h), owned: true)
 
 proc mimeType*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem): string =
   let v_ms = fcQWebEngineDownloadItem_mimeType(self.h)
@@ -256,7 +255,7 @@ proc setDownloadFileName*(self: gen_qwebenginedownloaditem_types.QWebEngineDownl
   fcQWebEngineDownloadItem_setDownloadFileName(self.h, struct_seaqt_string(data: if len(fileName) > 0: addr fileName[0] else: nil, len: csize_t(len(fileName))))
 
 proc page*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem): gen_qwebenginepage_types.QWebEnginePage =
-  gen_qwebenginepage_types.QWebEnginePage(h: fcQWebEngineDownloadItem_page(self.h))
+  gen_qwebenginepage_types.QWebEnginePage(h: fcQWebEngineDownloadItem_page(self.h), owned: false)
 
 proc accept*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem): void =
   fcQWebEngineDownloadItem_accept(self.h)
@@ -375,7 +374,7 @@ proc trUtf8*(_: type gen_qwebenginedownloaditem_types.QWebEngineDownloadItem, s:
   vx_ret
 
 proc sender*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebEngineDownloadItem_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebEngineDownloadItem_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem): cint =
   fcQWebEngineDownloadItem_protectedbase_senderSignalIndex(self.h)
@@ -388,5 +387,3 @@ proc isSignalConnected*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloa
 
 proc staticMetaObject*(_: type gen_qwebenginedownloaditem_types.QWebEngineDownloadItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadItem_staticMetaObject())
-proc delete*(self: gen_qwebenginedownloaditem_types.QWebEngineDownloadItem) =
-  fcQWebEngineDownloadItem_delete(self.h)

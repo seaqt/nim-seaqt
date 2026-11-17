@@ -1,4 +1,4 @@
-type QWebEngineContextMenuData* {.inheritable, pure.} = object
+type QWebEngineContextMenuData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

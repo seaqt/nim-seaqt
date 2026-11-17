@@ -1,4 +1,4 @@
-type QCameraFocusZone* {.inheritable, pure.} = object
+type QCameraFocusZone* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

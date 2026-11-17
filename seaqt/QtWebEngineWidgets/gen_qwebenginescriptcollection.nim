@@ -54,7 +54,6 @@ proc fcQWebEngineScriptCollection_insertWithList(self: pointer, list: struct_sea
 proc fcQWebEngineScriptCollection_remove(self: pointer, param1: pointer): bool {.importc: "QWebEngineScriptCollection_remove".}
 proc fcQWebEngineScriptCollection_clear(self: pointer): void {.importc: "QWebEngineScriptCollection_clear".}
 proc fcQWebEngineScriptCollection_toList(self: pointer): struct_seaqt_array {.importc: "QWebEngineScriptCollection_toList".}
-proc fcQWebEngineScriptCollection_delete(self: pointer) {.importc: "QWebEngineScriptCollection_delete".}
 
 proc isEmpty*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection): bool =
   fcQWebEngineScriptCollection_isEmpty(self.h)
@@ -69,14 +68,14 @@ proc contains*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollec
   fcQWebEngineScriptCollection_contains(self.h, value.h)
 
 proc findScript*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, name: openArray[char]): gen_qwebenginescript_types.QWebEngineScript =
-  gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScriptCollection_findScript(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  gen_qwebenginescript_types.QWebEngineScript(h: fcQWebEngineScriptCollection_findScript(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
 
 proc findScripts*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, name: openArray[char]): seq[gen_qwebenginescript_types.QWebEngineScript] =
   var v_ma = fcQWebEngineScriptCollection_findScripts(self.h, struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name))))
   var vx_ret = newSeq[gen_qwebenginescript_types.QWebEngineScript](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i])
+    vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -101,9 +100,7 @@ proc toList*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollecti
   var vx_ret = newSeq[gen_qwebenginescript_types.QWebEngineScript](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i])
+    vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
-proc delete*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection) =
-  fcQWebEngineScriptCollection_delete(self.h)

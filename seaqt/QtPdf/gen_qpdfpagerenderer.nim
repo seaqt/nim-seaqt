@@ -118,10 +118,9 @@ proc fcQPdfPageRenderer_protectedbase_isSignalConnected(self: pointer, signal: p
 proc fcQPdfPageRenderer_new(vtbl: pointer, vdata: csize_t): ptr cQPdfPageRenderer {.importc: "QPdfPageRenderer_new".}
 proc fcQPdfPageRenderer_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQPdfPageRenderer {.importc: "QPdfPageRenderer_new2".}
 proc fcQPdfPageRenderer_staticMetaObject(): pointer {.importc: "QPdfPageRenderer_staticMetaObject".}
-proc fcQPdfPageRenderer_delete(self: pointer) {.importc: "QPdfPageRenderer_delete".}
 
 proc metaObject*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageRenderer_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageRenderer_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, param1: cstring): pointer =
   fcQPdfPageRenderer_metacast(self.h, param1)
@@ -148,7 +147,7 @@ proc setRenderMode*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, mode: cin
   fcQPdfPageRenderer_setRenderMode(self.h, cint(mode))
 
 proc document*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer): gen_qpdfdocument_types.QPdfDocument =
-  gen_qpdfdocument_types.QPdfDocument(h: fcQPdfPageRenderer_document(self.h))
+  gen_qpdfdocument_types.QPdfDocument(h: fcQPdfPageRenderer_document(self.h), owned: false)
 
 proc setDocument*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, document: gen_qpdfdocument_types.QPdfDocument): void =
   fcQPdfPageRenderer_setDocument(self.h, document.h)
@@ -162,7 +161,7 @@ proc documentChanged*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, documen
 type QPdfPageRendererdocumentChangedSlot* = proc(document: gen_qpdfdocument_types.QPdfDocument)
 proc fcQPdfPageRenderer_slot_callback_documentChanged(slot: int, document: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPdfPageRendererdocumentChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qpdfdocument_types.QPdfDocument(h: document)
+  let slotval1 = gen_qpdfdocument_types.QPdfDocument(h: document, owned: false)
 
   nimfunc[](slotval1)
 
@@ -204,11 +203,11 @@ proc fcQPdfPageRenderer_slot_callback_pageRendered(slot: int, pageNumber: cint, 
   let nimfunc = cast[ptr QPdfPageRendererpageRenderedSlot](cast[pointer](slot))
   let slotval1 = pageNumber
 
-  let slotval2 = gen_qsize_types.QSize(h: imageSize)
+  let slotval2 = gen_qsize_types.QSize(h: imageSize, owned: true)
 
-  let slotval3 = gen_qimage_types.QImage(h: image)
+  let slotval3 = gen_qimage_types.QImage(h: image, owned: false)
 
-  let slotval4 = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: options)
+  let slotval4 = gen_qpdfdocumentrenderoptions_types.QPdfDocumentRenderOptions(h: options, owned: true)
 
   let slotval5 = requestId
 
@@ -261,7 +260,8 @@ type QPdfPageRendererchildEventProc* = proc(self: QPdfPageRenderer, event: gen_q
 type QPdfPageRenderercustomEventProc* = proc(self: QPdfPageRenderer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPdfPageRendererconnectNotifyProc* = proc(self: QPdfPageRenderer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPdfPageRendererdisconnectNotifyProc* = proc(self: QPdfPageRenderer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QPdfPageRendererVTable* = object
+
+type QPdfPageRendererVTable* {.inheritable, pure.} = object
   vtbl: cQPdfPageRendererVTable
   metaObject*: QPdfPageRenderermetaObjectProc
   metacast*: QPdfPageRenderermetacastProc
@@ -275,7 +275,7 @@ type QPdfPageRendererVTable* = object
   disconnectNotify*: QPdfPageRendererdisconnectNotifyProc
 
 proc QPdfPageRenderermetaObject*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageRenderer_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageRenderer_virtualbase_metaObject(self.h), owned: false)
 
 proc QPdfPageRenderermetacast*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer, param1: cstring): pointer =
   fcQPdfPageRenderer_virtualbase_metacast(self.h, param1)
@@ -309,7 +309,10 @@ proc fcQPdfPageRenderer_vtable_callback_metaObject(self: pointer): pointer {.cde
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
   let self = QPdfPageRenderer(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfPageRenderer_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
@@ -330,46 +333,46 @@ proc fcQPdfPageRenderer_vtable_callback_metacall(self: pointer, param1: cint, pa
 proc fcQPdfPageRenderer_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
   let self = QPdfPageRenderer(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQPdfPageRenderer_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
   let self = QPdfPageRenderer(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQPdfPageRenderer_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
   let self = QPdfPageRenderer(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQPdfPageRenderer_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
   let self = QPdfPageRenderer(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQPdfPageRenderer_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
   let self = QPdfPageRenderer(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQPdfPageRenderer_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
   let self = QPdfPageRenderer(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQPdfPageRenderer_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfPageRendererVTable](fcQPdfPageRenderer_vdata(self)[])
   let self = QPdfPageRenderer(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQPdfPageRenderer* {.inheritable.} = ref object of QPdfPageRenderer
@@ -399,7 +402,10 @@ method disconnectNotify*(self: VirtualQPdfPageRenderer, signal: gen_qmetaobject_
 proc fcQPdfPageRenderer_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQPdfPageRenderer_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
@@ -417,45 +423,45 @@ proc fcQPdfPageRenderer_method_callback_metacall(self: pointer, param1: cint, pa
 
 proc fcQPdfPageRenderer_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQPdfPageRenderer_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQPdfPageRenderer_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQPdfPageRenderer_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQPdfPageRenderer_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQPdfPageRenderer_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQPdfPageRenderer_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQPdfPageRenderer](fcQPdfPageRenderer_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPdfPageRenderer_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPdfPageRenderer_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer): cint =
   fcQPdfPageRenderer_protectedbase_senderSignalIndex(self.h)
@@ -493,7 +499,7 @@ proc create*(T: type gen_qpdfpagerenderer_types.QPdfPageRenderer,
     vtbl[].vtbl.connectNotify = fcQPdfPageRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPdfPageRenderer_vtable_callback_disconnectNotify
-  let tmp = gen_qpdfpagerenderer_types.QPdfPageRenderer(h: fcQPdfPageRenderer_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qpdfpagerenderer_types.QPdfPageRenderer(h: fcQPdfPageRenderer_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQPdfPageRenderer_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qpdfpagerenderer_types.QPdfPageRenderer,
@@ -524,13 +530,14 @@ proc create*(T: type gen_qpdfpagerenderer_types.QPdfPageRenderer,
     vtbl[].vtbl.connectNotify = fcQPdfPageRenderer_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQPdfPageRenderer_vtable_callback_disconnectNotify
-  let tmp = gen_qpdfpagerenderer_types.QPdfPageRenderer(h: fcQPdfPageRenderer_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qpdfpagerenderer_types.QPdfPageRenderer(h: fcQPdfPageRenderer_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQPdfPageRenderer_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQPdfPageRenderer_mvtbl = cQPdfPageRendererVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQPdfPageRenderer()[])](self.fcQPdfPageRenderer_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQPdfPageRenderer_method_callback_metaObject,
   metacast: fcQPdfPageRenderer_method_callback_metacast,
@@ -560,5 +567,3 @@ proc create*(T: type gen_qpdfpagerenderer_types.QPdfPageRenderer,
 
 proc staticMetaObject*(_: type gen_qpdfpagerenderer_types.QPdfPageRenderer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfPageRenderer_staticMetaObject())
-proc delete*(self: gen_qpdfpagerenderer_types.QPdfPageRenderer) =
-  fcQPdfPageRenderer_delete(self.h)

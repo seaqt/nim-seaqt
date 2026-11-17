@@ -1,4 +1,4 @@
-type QMetaType* {.inheritable, pure.} = object
+type QMetaType* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

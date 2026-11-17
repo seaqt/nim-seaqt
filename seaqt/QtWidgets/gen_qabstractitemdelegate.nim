@@ -154,10 +154,9 @@ proc fcQAbstractItemDelegate_protectedbase_isSignalConnected(self: pointer, sign
 proc fcQAbstractItemDelegate_new(vtbl: pointer, vdata: csize_t): ptr cQAbstractItemDelegate {.importc: "QAbstractItemDelegate_new".}
 proc fcQAbstractItemDelegate_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQAbstractItemDelegate {.importc: "QAbstractItemDelegate_new2".}
 proc fcQAbstractItemDelegate_staticMetaObject(): pointer {.importc: "QAbstractItemDelegate_staticMetaObject".}
-proc fcQAbstractItemDelegate_delete(self: pointer) {.importc: "QAbstractItemDelegate_delete".}
 
 proc metaObject*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemDelegate_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemDelegate_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, param1: cstring): pointer =
   fcQAbstractItemDelegate_metacast(self.h, param1)
@@ -181,10 +180,10 @@ proc paint*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, painter
   fcQAbstractItemDelegate_paint(self.h, painter.h, option.h, index.h)
 
 proc sizeHint*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQAbstractItemDelegate_sizeHint(self.h, option.h, index.h))
+  gen_qsize_types.QSize(h: fcQAbstractItemDelegate_sizeHint(self.h, option.h, index.h), owned: true)
 
 proc createEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, parent: gen_qwidget_types.QWidget, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQAbstractItemDelegate_createEditor(self.h, parent.h, option.h, index.h))
+  gen_qwidget_types.QWidget(h: fcQAbstractItemDelegate_createEditor(self.h, parent.h, option.h, index.h), owned: false)
 
 proc destroyEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, editor: gen_qwidget_types.QWidget, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractItemDelegate_destroyEditor(self.h, editor.h, index.h)
@@ -225,7 +224,7 @@ proc commitData*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, ed
 type QAbstractItemDelegatecommitDataSlot* = proc(editor: gen_qwidget_types.QWidget)
 proc fcQAbstractItemDelegate_slot_callback_commitData(slot: int, editor: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemDelegatecommitDataSlot](cast[pointer](slot))
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
 
   nimfunc[](slotval1)
 
@@ -245,7 +244,7 @@ proc closeEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, e
 type QAbstractItemDelegatecloseEditorSlot* = proc(editor: gen_qwidget_types.QWidget)
 proc fcQAbstractItemDelegate_slot_callback_closeEditor(slot: int, editor: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemDelegatecloseEditorSlot](cast[pointer](slot))
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
 
   nimfunc[](slotval1)
 
@@ -265,7 +264,7 @@ proc sizeHintChanged*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegat
 type QAbstractItemDelegatesizeHintChangedSlot* = proc(param1: gen_qabstractitemmodel_types.QModelIndex)
 proc fcQAbstractItemDelegate_slot_callback_sizeHintChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemDelegatesizeHintChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: param1)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
@@ -309,7 +308,7 @@ proc closeEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, e
 type QAbstractItemDelegatecloseEditor2Slot* = proc(editor: gen_qwidget_types.QWidget, hint: cint)
 proc fcQAbstractItemDelegate_slot_callback_closeEditor2(slot: int, editor: pointer, hint: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemDelegatecloseEditor2Slot](cast[pointer](slot))
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
 
   let slotval2 = cint(hint)
 
@@ -345,7 +344,8 @@ type QAbstractItemDelegatechildEventProc* = proc(self: QAbstractItemDelegate, ev
 type QAbstractItemDelegatecustomEventProc* = proc(self: QAbstractItemDelegate, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAbstractItemDelegateconnectNotifyProc* = proc(self: QAbstractItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAbstractItemDelegatedisconnectNotifyProc* = proc(self: QAbstractItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QAbstractItemDelegateVTable* = object
+
+type QAbstractItemDelegateVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractItemDelegateVTable
   metaObject*: QAbstractItemDelegatemetaObjectProc
   metacast*: QAbstractItemDelegatemetacastProc
@@ -369,7 +369,7 @@ type QAbstractItemDelegateVTable* = object
   disconnectNotify*: QAbstractItemDelegatedisconnectNotifyProc
 
 proc QAbstractItemDelegatemetaObject*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemDelegate_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemDelegate_virtualbase_metaObject(self.h), owned: false)
 
 proc QAbstractItemDelegatemetacast*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, param1: cstring): pointer =
   fcQAbstractItemDelegate_virtualbase_metacast(self.h, param1)
@@ -378,7 +378,7 @@ proc QAbstractItemDelegatemetacall*(self: gen_qabstractitemdelegate_types.QAbstr
   fcQAbstractItemDelegate_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
 proc QAbstractItemDelegatecreateEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, parent: gen_qwidget_types.QWidget, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQAbstractItemDelegate_virtualbase_createEditor(self.h, parent.h, option.h, index.h))
+  gen_qwidget_types.QWidget(h: fcQAbstractItemDelegate_virtualbase_createEditor(self.h, parent.h, option.h, index.h), owned: false)
 
 proc QAbstractItemDelegatedestroyEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, editor: gen_qwidget_types.QWidget, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractItemDelegate_virtualbase_destroyEditor(self.h, editor.h, index.h)
@@ -433,7 +433,10 @@ proc fcQAbstractItemDelegate_vtable_callback_metaObject(self: pointer): pointer 
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractItemDelegate_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
@@ -454,75 +457,81 @@ proc fcQAbstractItemDelegate_vtable_callback_metacall(self: pointer, param1: cin
 proc fcQAbstractItemDelegate_vtable_callback_paint(self: pointer, painter: pointer, option: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc fcQAbstractItemDelegate_vtable_callback_sizeHint(self: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractItemDelegate_vtable_callback_createEditor(self: pointer, parent: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: parent)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].createEditor(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractItemDelegate_vtable_callback_destroyEditor(self: pointer, editor: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].destroyEditor(self, slotval1, slotval2)
 
 proc fcQAbstractItemDelegate_vtable_callback_setEditorData(self: pointer, editor: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setEditorData(self, slotval1, slotval2)
 
 proc fcQAbstractItemDelegate_vtable_callback_setModelData(self: pointer, editor: pointer, model: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setModelData(self, slotval1, slotval2, slotval3)
 
 proc fcQAbstractItemDelegate_vtable_callback_updateEditorGeometry(self: pointer, editor: pointer, option: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].updateEditorGeometry(self, slotval1, slotval2, slotval3)
 
 proc fcQAbstractItemDelegate_vtable_callback_editorEvent(self: pointer, event: pointer, model: pointer, option: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
-  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].editorEvent(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
 proc fcQAbstractItemDelegate_vtable_callback_helpEvent(self: pointer, event: pointer, view: pointer, option: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qevent_types.QHelpEvent(h: event)
-  let slotval2 = gen_qabstractitemview_types.QAbstractItemView(h: view)
-  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qevent_types.QHelpEvent(h: event, owned: false)
+  let slotval2 = gen_qabstractitemview_types.QAbstractItemView(h: view, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].helpEvent(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
@@ -539,46 +548,46 @@ proc fcQAbstractItemDelegate_vtable_callback_paintingRoles(self: pointer): struc
 proc fcQAbstractItemDelegate_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQAbstractItemDelegate_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQAbstractItemDelegate_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQAbstractItemDelegate_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQAbstractItemDelegate_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQAbstractItemDelegate_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQAbstractItemDelegate_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](fcQAbstractItemDelegate_vdata(self)[])
   let self = QAbstractItemDelegate(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAbstractItemDelegate* {.inheritable.} = ref object of QAbstractItemDelegate
@@ -628,7 +637,10 @@ method disconnectNotify*(self: VirtualQAbstractItemDelegate, signal: gen_qmetaob
 proc fcQAbstractItemDelegate_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractItemDelegate_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
@@ -646,67 +658,73 @@ proc fcQAbstractItemDelegate_method_callback_metacall(self: pointer, param1: cin
 
 proc fcQAbstractItemDelegate_method_callback_paint(self: pointer, painter: pointer, option: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.paint(slotval1, slotval2, slotval3)
 
 proc fcQAbstractItemDelegate_method_callback_sizeHint(self: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.sizeHint(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractItemDelegate_method_callback_createEditor(self: pointer, parent: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: parent)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.createEditor(slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQAbstractItemDelegate_method_callback_destroyEditor(self: pointer, editor: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.destroyEditor(slotval1, slotval2)
 
 proc fcQAbstractItemDelegate_method_callback_setEditorData(self: pointer, editor: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.setEditorData(slotval1, slotval2)
 
 proc fcQAbstractItemDelegate_method_callback_setModelData(self: pointer, editor: pointer, model: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.setModelData(slotval1, slotval2, slotval3)
 
 proc fcQAbstractItemDelegate_method_callback_updateEditorGeometry(self: pointer, editor: pointer, option: pointer, index: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   inst.updateEditorGeometry(slotval1, slotval2, slotval3)
 
 proc fcQAbstractItemDelegate_method_callback_editorEvent(self: pointer, event: pointer, model: pointer, option: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
-  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.editorEvent(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
 proc fcQAbstractItemDelegate_method_callback_helpEvent(self: pointer, event: pointer, view: pointer, option: pointer, index: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qevent_types.QHelpEvent(h: event)
-  let slotval2 = gen_qabstractitemview_types.QAbstractItemView(h: view)
-  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qevent_types.QHelpEvent(h: event, owned: false)
+  let slotval2 = gen_qabstractitemview_types.QAbstractItemView(h: view, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = inst.helpEvent(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
@@ -721,45 +739,45 @@ proc fcQAbstractItemDelegate_method_callback_paintingRoles(self: pointer): struc
 
 proc fcQAbstractItemDelegate_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQAbstractItemDelegate_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQAbstractItemDelegate_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQAbstractItemDelegate_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQAbstractItemDelegate_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQAbstractItemDelegate_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQAbstractItemDelegate_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQAbstractItemDelegate](fcQAbstractItemDelegate_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAbstractItemDelegate_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAbstractItemDelegate_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate): cint =
   fcQAbstractItemDelegate_protectedbase_senderSignalIndex(self.h)
@@ -817,7 +835,7 @@ proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
     vtbl[].vtbl.connectNotify = fcQAbstractItemDelegate_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAbstractItemDelegate_vtable_callback_disconnectNotify
-  let tmp = gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQAbstractItemDelegate_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQAbstractItemDelegate_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQAbstractItemDelegate_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
@@ -868,13 +886,14 @@ proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
     vtbl[].vtbl.connectNotify = fcQAbstractItemDelegate_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQAbstractItemDelegate_vtable_callback_disconnectNotify
-  let tmp = gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQAbstractItemDelegate_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQAbstractItemDelegate_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQAbstractItemDelegate_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQAbstractItemDelegate_mvtbl = cQAbstractItemDelegateVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQAbstractItemDelegate()[])](self.fcQAbstractItemDelegate_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQAbstractItemDelegate_method_callback_metaObject,
   metacast: fcQAbstractItemDelegate_method_callback_metacast,
@@ -914,5 +933,3 @@ proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
 
 proc staticMetaObject*(_: type gen_qabstractitemdelegate_types.QAbstractItemDelegate): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemDelegate_staticMetaObject())
-proc delete*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate) =
-  fcQAbstractItemDelegate_delete(self.h)

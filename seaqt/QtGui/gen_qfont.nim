@@ -239,7 +239,6 @@ proc fcQFont_new6(family: struct_seaqt_string, pointSize: cint): ptr cQFont {.im
 proc fcQFont_new7(family: struct_seaqt_string, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new7".}
 proc fcQFont_new8(family: struct_seaqt_string, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new8".}
 proc fcQFont_staticMetaObject(): pointer {.importc: "QFont_staticMetaObject".}
-proc fcQFont_delete(self: pointer) {.importc: "QFont_delete".}
 
 proc swap*(self: gen_qfont_types.QFont, other: gen_qfont_types.QFont): void =
   fcQFont_swap(self.h, other.h)
@@ -420,7 +419,7 @@ proc operatorLesser*(self: gen_qfont_types.QFont, param1: gen_qfont_types.QFont)
   fcQFont_operatorLesser(self.h, param1.h)
 
 proc ToQVariant*(self: gen_qfont_types.QFont): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQFont_ToQVariant(self.h))
+  gen_qvariant_types.QVariant(h: fcQFont_ToQVariant(self.h), owned: true)
 
 proc isCopyOf*(self: gen_qfont_types.QFont, param1: gen_qfont_types.QFont): bool =
   fcQFont_isCopyOf(self.h, param1.h)
@@ -520,7 +519,7 @@ proc lastResortFont*(self: gen_qfont_types.QFont): string =
   vx_ret
 
 proc resolve*(self: gen_qfont_types.QFont, param1: gen_qfont_types.QFont): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQFont_resolve(self.h, param1.h))
+  gen_qfont_types.QFont(h: fcQFont_resolve(self.h, param1.h), owned: true)
 
 proc resolve*(self: gen_qfont_types.QFont): cuint =
   fcQFont_resolve2(self.h)
@@ -532,37 +531,35 @@ proc setStyleHint*(self: gen_qfont_types.QFont, param1: cint, param2: cint): voi
   fcQFont_setStyleHint2(self.h, cint(param1), cint(param2))
 
 proc create*(T: type gen_qfont_types.QFont): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new())
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new(), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
     family: openArray[char]): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new2(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family)))))
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new2(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family)))), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
     font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new3(font.h, pd.h))
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new3(font.h, pd.h), owned: true)
   tmp
 proc create2*(T: type gen_qfont_types.QFont,
     font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new4(font.h, pd.h))
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new4(font.h, pd.h), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
     font: gen_qfont_types.QFont): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new5(font.h))
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new5(font.h), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
     family: openArray[char], pointSize: cint): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new6(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize))
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new6(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
     family: openArray[char], pointSize: cint, weight: cint): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new7(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize, weight))
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new7(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize, weight), owned: true)
   tmp
 proc create*(T: type gen_qfont_types.QFont,
     family: openArray[char], pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
-  let tmp = gen_qfont_types.QFont(h: fcQFont_new8(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize, weight, italic))
+  let tmp = gen_qfont_types.QFont(h: fcQFont_new8(struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))), pointSize, weight, italic), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qfont_types.QFont): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFont_staticMetaObject())
-proc delete*(self: gen_qfont_types.QFont) =
-  fcQFont_delete(self.h)

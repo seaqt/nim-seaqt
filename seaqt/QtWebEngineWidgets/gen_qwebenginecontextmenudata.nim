@@ -98,7 +98,6 @@ proc fcQWebEngineContextMenuData_editFlags(self: pointer): cint {.importc: "QWeb
 proc fcQWebEngineContextMenuData_new(): ptr cQWebEngineContextMenuData {.importc: "QWebEngineContextMenuData_new".}
 proc fcQWebEngineContextMenuData_new2(other: pointer): ptr cQWebEngineContextMenuData {.importc: "QWebEngineContextMenuData_new2".}
 proc fcQWebEngineContextMenuData_staticMetaObject(): pointer {.importc: "QWebEngineContextMenuData_staticMetaObject".}
-proc fcQWebEngineContextMenuData_delete(self: pointer) {.importc: "QWebEngineContextMenuData_delete".}
 
 proc operatorAssign*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData, other: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): void =
   fcQWebEngineContextMenuData_operatorAssign(self.h, other.h)
@@ -107,7 +106,7 @@ proc isValid*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuDat
   fcQWebEngineContextMenuData_isValid(self.h)
 
 proc position*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQWebEngineContextMenuData_position(self.h))
+  gen_qpoint_types.QPoint(h: fcQWebEngineContextMenuData_position(self.h), owned: true)
 
 proc selectedText*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): string =
   let v_ms = fcQWebEngineContextMenuData_selectedText(self.h)
@@ -122,10 +121,10 @@ proc linkText*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuDa
   vx_ret
 
 proc linkUrl*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineContextMenuData_linkUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineContextMenuData_linkUrl(self.h), owned: true)
 
 proc mediaUrl*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineContextMenuData_mediaUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineContextMenuData_mediaUrl(self.h), owned: true)
 
 proc mediaType*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): cint =
   cint(fcQWebEngineContextMenuData_mediaType(self.h))
@@ -158,13 +157,11 @@ proc editFlags*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuD
   cint(fcQWebEngineContextMenuData_editFlags(self.h))
 
 proc create*(T: type gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData =
-  let tmp = gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData(h: fcQWebEngineContextMenuData_new())
+  let tmp = gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData(h: fcQWebEngineContextMenuData_new(), owned: true)
   tmp
 proc create*(T: type gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData,
     other: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData =
-  let tmp = gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData(h: fcQWebEngineContextMenuData_new2(other.h))
+  let tmp = gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData(h: fcQWebEngineContextMenuData_new2(other.h), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuData_staticMetaObject())
-proc delete*(self: gen_qwebenginecontextmenudata_types.QWebEngineContextMenuData) =
-  fcQWebEngineContextMenuData_delete(self.h)

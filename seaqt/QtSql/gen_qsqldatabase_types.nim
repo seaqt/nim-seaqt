@@ -1,4 +1,4 @@
-type QSqlDriverCreatorBase* {.inheritable, pure.} = object
+type QSqlDriverCreatorBase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QSqlDriverCreatorBase) =
   wasMoved(self)
   fcQSqlDriverCreatorBase_delete(h)
 
-type QSqlDatabase* {.inheritable, pure.} = object
+type QSqlDatabase* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

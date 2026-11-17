@@ -1,4 +1,4 @@
-type QSGMaterialRhiShaderRenderState* {.inheritable, pure.} = object
+type QSGMaterialRhiShaderRenderState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QSGMaterialRhiShaderRenderState) =
   wasMoved(self)
   fcQSGMaterialRhiShaderRenderState_delete(h)
 
-type QSGMaterialRhiShaderGraphicsPipelineState* {.inheritable, pure.} = object
+type QSGMaterialRhiShaderGraphicsPipelineState* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

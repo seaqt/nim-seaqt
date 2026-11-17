@@ -90,7 +90,6 @@ proc fcQGraphicsLayout_protectedbase_setGraphicsItem(self: pointer, item: pointe
 proc fcQGraphicsLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsLayout_new(vtbl: pointer, vdata: csize_t): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new".}
 proc fcQGraphicsLayout_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new2".}
-proc fcQGraphicsLayout_delete(self: pointer) {.importc: "QGraphicsLayout_delete".}
 
 proc setContentsMargins*(self: gen_qgraphicslayout_types.QGraphicsLayout, left: float64, top: float64, right: float64, bottom: float64): void =
   fcQGraphicsLayout_setContentsMargins(self.h, left, top, right, bottom)
@@ -117,7 +116,7 @@ proc count*(self: gen_qgraphicslayout_types.QGraphicsLayout): cint =
   fcQGraphicsLayout_count(self.h)
 
 proc itemAt*(self: gen_qgraphicslayout_types.QGraphicsLayout, i: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLayout_itemAt(self.h, i))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLayout_itemAt(self.h, i), owned: false)
 
 proc removeAt*(self: gen_qgraphicslayout_types.QGraphicsLayout, index: cint): void =
   fcQGraphicsLayout_removeAt(self.h, index)
@@ -137,7 +136,8 @@ type QGraphicsLayoutitemAtProc* = proc(self: QGraphicsLayout, i: cint): gen_qgra
 type QGraphicsLayoutremoveAtProc* = proc(self: QGraphicsLayout, index: cint): void {.raises: [], gcsafe.}
 type QGraphicsLayoutsetGeometryProc* = proc(self: QGraphicsLayout, rect: gen_qrect_types.QRectF): void {.raises: [], gcsafe.}
 type QGraphicsLayoutsizeHintProc* = proc(self: QGraphicsLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.raises: [], gcsafe.}
-type QGraphicsLayoutVTable* = object
+
+type QGraphicsLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsLayoutVTable
   getContentsMargins*: QGraphicsLayoutgetContentsMarginsProc
   invalidate*: QGraphicsLayoutinvalidateProc
@@ -187,7 +187,7 @@ proc fcQGraphicsLayout_vtable_callback_updateGeometry(self: pointer): void {.cde
 proc fcQGraphicsLayout_vtable_callback_widgetEvent(self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutVTable](fcQGraphicsLayout_vdata(self)[])
   let self = QGraphicsLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].widgetEvent(self, slotval1)
 
 proc fcQGraphicsLayout_vtable_callback_count(self: pointer): cint {.cdecl.} =
@@ -201,7 +201,10 @@ proc fcQGraphicsLayout_vtable_callback_itemAt(self: pointer, i: cint): pointer {
   let self = QGraphicsLayout(h: self)
   let slotval1 = i
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsLayout_vtable_callback_removeAt(self: pointer, index: cint): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutVTable](fcQGraphicsLayout_vdata(self)[])
@@ -212,16 +215,19 @@ proc fcQGraphicsLayout_vtable_callback_removeAt(self: pointer, index: cint): voi
 proc fcQGraphicsLayout_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutVTable](fcQGraphicsLayout_vdata(self)[])
   let self = QGraphicsLayout(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc fcQGraphicsLayout_vtable_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutVTable](fcQGraphicsLayout_vdata(self)[])
   let self = QGraphicsLayout(h: self)
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 type VirtualQGraphicsLayout* {.inheritable.} = ref object of QGraphicsLayout
   vtbl*: cQGraphicsLayoutVTable
@@ -263,7 +269,7 @@ proc fcQGraphicsLayout_method_callback_updateGeometry(self: pointer): void {.cde
 
 proc fcQGraphicsLayout_method_callback_widgetEvent(self: pointer, e: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayout](fcQGraphicsLayout_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   inst.widgetEvent(slotval1)
 
 proc fcQGraphicsLayout_method_callback_count(self: pointer): cint {.cdecl.} =
@@ -275,7 +281,10 @@ proc fcQGraphicsLayout_method_callback_itemAt(self: pointer, i: cint): pointer {
   let inst = cast[VirtualQGraphicsLayout](fcQGraphicsLayout_vdata(self)[])
   let slotval1 = i
   var virtualReturn = inst.itemAt(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGraphicsLayout_method_callback_removeAt(self: pointer, index: cint): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayout](fcQGraphicsLayout_vdata(self)[])
@@ -284,15 +293,18 @@ proc fcQGraphicsLayout_method_callback_removeAt(self: pointer, index: cint): voi
 
 proc fcQGraphicsLayout_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayout](fcQGraphicsLayout_vdata(self)[])
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   inst.setGeometry(slotval1)
 
 proc fcQGraphicsLayout_method_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGraphicsLayout](fcQGraphicsLayout_vdata(self)[])
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = inst.sizeHint(slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 
 proc addChildLayoutItem*(self: gen_qgraphicslayout_types.QGraphicsLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
@@ -329,7 +341,7 @@ proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
     vtbl[].vtbl.setGeometry = fcQGraphicsLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = fcQGraphicsLayout_vtable_callback_sizeHint
-  let tmp = gen_qgraphicslayout_types.QGraphicsLayout(h: fcQGraphicsLayout_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qgraphicslayout_types.QGraphicsLayout(h: fcQGraphicsLayout_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQGraphicsLayout_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
@@ -358,13 +370,14 @@ proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
     vtbl[].vtbl.setGeometry = fcQGraphicsLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = fcQGraphicsLayout_vtable_callback_sizeHint
-  let tmp = gen_qgraphicslayout_types.QGraphicsLayout(h: fcQGraphicsLayout_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgraphicslayout_types.QGraphicsLayout(h: fcQGraphicsLayout_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGraphicsLayout_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGraphicsLayout_mvtbl = cQGraphicsLayoutVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGraphicsLayout()[])](self.fcQGraphicsLayout_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   getContentsMargins: fcQGraphicsLayout_method_callback_getContentsMargins,
   invalidate: fcQGraphicsLayout_method_callback_invalidate,
@@ -391,5 +404,3 @@ proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
   fcQGraphicsLayout_vdata(inst[].h)[] = addr inst[]
   inst[].owned = true
 
-proc delete*(self: gen_qgraphicslayout_types.QGraphicsLayout) =
-  fcQGraphicsLayout_delete(self.h)

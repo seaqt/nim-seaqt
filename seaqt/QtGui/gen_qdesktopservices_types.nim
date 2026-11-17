@@ -1,4 +1,4 @@
-type QDesktopServices* {.inheritable, pure.} = object
+type QDesktopServices* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

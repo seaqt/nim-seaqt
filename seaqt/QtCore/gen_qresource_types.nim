@@ -1,4 +1,4 @@
-type QResource* {.inheritable, pure.} = object
+type QResource* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

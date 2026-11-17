@@ -1,4 +1,4 @@
-type QPageSize* {.inheritable, pure.} = object
+type QPageSize* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

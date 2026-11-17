@@ -1,4 +1,4 @@
-type QCborArray* {.inheritable, pure.} = object
+type QCborArray* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QCborArray) =
   wasMoved(self)
   fcQCborArray_delete(h)
 
-type QCborArrayIterator* {.inheritable, pure.} = object
+type QCborArrayIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QCborArrayIterator) =
   wasMoved(self)
   fcQCborArrayIterator_delete(h)
 
-type QCborArrayConstIterator* {.inheritable, pure.} = object
+type QCborArrayConstIterator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

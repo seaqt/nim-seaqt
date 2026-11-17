@@ -1,4 +1,4 @@
-type QPixmapCache* {.inheritable, pure.} = object
+type QPixmapCache* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QPixmapCache) =
   wasMoved(self)
   fcQPixmapCache_delete(h)
 
-type QPixmapCacheKey* {.inheritable, pure.} = object
+type QPixmapCacheKey* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

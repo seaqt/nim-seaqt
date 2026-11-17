@@ -132,10 +132,9 @@ proc fcQGeoSatelliteInfoSource_protectedbase_receivers(self: pointer, signal: cs
 proc fcQGeoSatelliteInfoSource_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGeoSatelliteInfoSource_protectedbase_isSignalConnected".}
 proc fcQGeoSatelliteInfoSource_new(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQGeoSatelliteInfoSource {.importc: "QGeoSatelliteInfoSource_new".}
 proc fcQGeoSatelliteInfoSource_staticMetaObject(): pointer {.importc: "QGeoSatelliteInfoSource_staticMetaObject".}
-proc fcQGeoSatelliteInfoSource_delete(self: pointer) {.importc: "QGeoSatelliteInfoSource_delete".}
 
 proc metaObject*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGeoSatelliteInfoSource_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGeoSatelliteInfoSource_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, param1: cstring): pointer =
   fcQGeoSatelliteInfoSource_metacast(self.h, param1)
@@ -156,32 +155,38 @@ proc trUtf8*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, 
   vx_ret
 
 proc createDefaultSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createDefaultSource(parent.h))
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createDefaultSource(parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, sourceName: openArray[char], parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createSource(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h))
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createSource(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), parent.h), owned: false)
 
 proc createDefaultSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, parameters: Table[string,gen_qvariant_types.QVariant], parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
   var parameters_Values_CArray = newSeq[pointer](len(parameters))
   var parameters_ctr = 0
-  for parameters_k, parameters_v in parameters:
+  for parameters_k in parameters.keys():
     parameters_Keys_CArray[parameters_ctr] = struct_seaqt_string(data: if len(parameters_k) > 0: addr parameters_k[0] else: nil, len: csize_t(len(parameters_k)))
+    parameters_ctr += 1
+  parameters_ctr = 0
+  for parameters_v in parameters.values():
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createDefaultSource2(struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h))
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createDefaultSource2(struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
 
 proc createSource*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, sourceName: openArray[char], parameters: Table[string,gen_qvariant_types.QVariant], parent: gen_qobject_types.QObject): gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource =
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
   var parameters_Values_CArray = newSeq[pointer](len(parameters))
   var parameters_ctr = 0
-  for parameters_k, parameters_v in parameters:
+  for parameters_k in parameters.keys():
     parameters_Keys_CArray[parameters_ctr] = struct_seaqt_string(data: if len(parameters_k) > 0: addr parameters_k[0] else: nil, len: csize_t(len(parameters_k)))
+    parameters_ctr += 1
+  parameters_ctr = 0
+  for parameters_v in parameters.values():
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
-  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createSource2(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h))
+  gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_createSource2(struct_seaqt_string(data: if len(sourceName) > 0: addr sourceName[0] else: nil, len: csize_t(len(sourceName))), struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),), parent.h), owned: false)
 
 proc availableSources*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource): seq[string] =
   var v_ma = fcQGeoSatelliteInfoSource_availableSources()
@@ -236,7 +241,7 @@ proc fcQGeoSatelliteInfoSource_slot_callback_satellitesInViewUpdated(slot: int, 
   var vsatellitesx_ret = newSeq[gen_qgeosatelliteinfo_types.QGeoSatelliteInfo](int(vsatellites_ma.len))
   let vsatellites_outCast = cast[ptr UncheckedArray[pointer]](vsatellites_ma.data)
   for i in 0 ..< vsatellites_ma.len:
-    vsatellitesx_ret[i] = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: vsatellites_outCast[i])
+    vsatellitesx_ret[i] = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: vsatellites_outCast[i], owned: true)
   c_free(vsatellites_ma.data)
   let slotval1 = vsatellitesx_ret
 
@@ -266,7 +271,7 @@ proc fcQGeoSatelliteInfoSource_slot_callback_satellitesInUseUpdated(slot: int, s
   var vsatellitesx_ret = newSeq[gen_qgeosatelliteinfo_types.QGeoSatelliteInfo](int(vsatellites_ma.len))
   let vsatellites_outCast = cast[ptr UncheckedArray[pointer]](vsatellites_ma.data)
   for i in 0 ..< vsatellites_ma.len:
-    vsatellitesx_ret[i] = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: vsatellites_outCast[i])
+    vsatellitesx_ret[i] = gen_qgeosatelliteinfo_types.QGeoSatelliteInfo(h: vsatellites_outCast[i], owned: true)
   c_free(vsatellites_ma.data)
   let slotval1 = vsatellitesx_ret
 
@@ -360,7 +365,8 @@ type QGeoSatelliteInfoSourcechildEventProc* = proc(self: QGeoSatelliteInfoSource
 type QGeoSatelliteInfoSourcecustomEventProc* = proc(self: QGeoSatelliteInfoSource, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGeoSatelliteInfoSourceconnectNotifyProc* = proc(self: QGeoSatelliteInfoSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGeoSatelliteInfoSourcedisconnectNotifyProc* = proc(self: QGeoSatelliteInfoSource, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QGeoSatelliteInfoSourceVTable* = object
+
+type QGeoSatelliteInfoSourceVTable* {.inheritable, pure.} = object
   vtbl: cQGeoSatelliteInfoSourceVTable
   metaObject*: QGeoSatelliteInfoSourcemetaObjectProc
   metacast*: QGeoSatelliteInfoSourcemetacastProc
@@ -380,7 +386,7 @@ type QGeoSatelliteInfoSourceVTable* = object
   disconnectNotify*: QGeoSatelliteInfoSourcedisconnectNotifyProc
 
 proc QGeoSatelliteInfoSourcemetaObject*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGeoSatelliteInfoSource_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGeoSatelliteInfoSource_virtualbase_metaObject(self.h), owned: false)
 
 proc QGeoSatelliteInfoSourcemetacast*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource, param1: cstring): pointer =
   fcQGeoSatelliteInfoSource_virtualbase_metacast(self.h, param1)
@@ -417,7 +423,10 @@ proc fcQGeoSatelliteInfoSource_vtable_callback_metaObject(self: pointer): pointe
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
   let self = QGeoSatelliteInfoSource(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoSatelliteInfoSource_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
@@ -472,46 +481,46 @@ proc fcQGeoSatelliteInfoSource_vtable_callback_requestUpdate(self: pointer, time
 proc fcQGeoSatelliteInfoSource_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
   let self = QGeoSatelliteInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQGeoSatelliteInfoSource_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
   let self = QGeoSatelliteInfoSource(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQGeoSatelliteInfoSource_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
   let self = QGeoSatelliteInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQGeoSatelliteInfoSource_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
   let self = QGeoSatelliteInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQGeoSatelliteInfoSource_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
   let self = QGeoSatelliteInfoSource(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQGeoSatelliteInfoSource_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
   let self = QGeoSatelliteInfoSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQGeoSatelliteInfoSource_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGeoSatelliteInfoSourceVTable](fcQGeoSatelliteInfoSource_vdata(self)[])
   let self = QGeoSatelliteInfoSource(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQGeoSatelliteInfoSource* {.inheritable.} = ref object of QGeoSatelliteInfoSource
@@ -553,7 +562,10 @@ method disconnectNotify*(self: VirtualQGeoSatelliteInfoSource, signal: gen_qmeta
 proc fcQGeoSatelliteInfoSource_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQGeoSatelliteInfoSource_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
@@ -599,45 +611,45 @@ proc fcQGeoSatelliteInfoSource_method_callback_requestUpdate(self: pointer, time
 
 proc fcQGeoSatelliteInfoSource_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQGeoSatelliteInfoSource_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQGeoSatelliteInfoSource_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQGeoSatelliteInfoSource_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQGeoSatelliteInfoSource_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQGeoSatelliteInfoSource_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQGeoSatelliteInfoSource_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQGeoSatelliteInfoSource](fcQGeoSatelliteInfoSource_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGeoSatelliteInfoSource_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGeoSatelliteInfoSource_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource): cint =
   fcQGeoSatelliteInfoSource_protectedbase_senderSignalIndex(self.h)
@@ -688,13 +700,14 @@ proc create*(T: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource,
     vtbl[].vtbl.connectNotify = fcQGeoSatelliteInfoSource_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQGeoSatelliteInfoSource_vtable_callback_disconnectNotify
-  let tmp = gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource(h: fcQGeoSatelliteInfoSource_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQGeoSatelliteInfoSource_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQGeoSatelliteInfoSource_mvtbl = cQGeoSatelliteInfoSourceVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQGeoSatelliteInfoSource()[])](self.fcQGeoSatelliteInfoSource_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQGeoSatelliteInfoSource_method_callback_metaObject,
   metacast: fcQGeoSatelliteInfoSource_method_callback_metacast,
@@ -723,5 +736,3 @@ proc create*(T: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource,
 
 proc staticMetaObject*(_: type gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGeoSatelliteInfoSource_staticMetaObject())
-proc delete*(self: gen_qgeosatelliteinfosource_types.QGeoSatelliteInfoSource) =
-  fcQGeoSatelliteInfoSource_delete(self.h)

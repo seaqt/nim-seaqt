@@ -67,14 +67,13 @@ proc fcQWebSecurityOrigin_databases(self: pointer): struct_seaqt_array {.importc
 proc fcQWebSecurityOrigin_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebSecurityOrigin_operatorAssign".}
 proc fcQWebSecurityOrigin_new(url: pointer): ptr cQWebSecurityOrigin {.importc: "QWebSecurityOrigin_new".}
 proc fcQWebSecurityOrigin_new2(other: pointer): ptr cQWebSecurityOrigin {.importc: "QWebSecurityOrigin_new2".}
-proc fcQWebSecurityOrigin_delete(self: pointer) {.importc: "QWebSecurityOrigin_delete".}
 
 proc allOrigins*(_: type gen_qwebsecurityorigin_types.QWebSecurityOrigin): seq[gen_qwebsecurityorigin_types.QWebSecurityOrigin] =
   var v_ma = fcQWebSecurityOrigin_allOrigins()
   var vx_ret = newSeq[gen_qwebsecurityorigin_types.QWebSecurityOrigin](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: v_outCast[i])
+    vx_ret[i] = gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -134,7 +133,7 @@ proc databases*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin): seq[gen_
   var vx_ret = newSeq[gen_qwebdatabase_types.QWebDatabase](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebdatabase_types.QWebDatabase(h: v_outCast[i])
+    vx_ret[i] = gen_qwebdatabase_types.QWebDatabase(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -143,11 +142,9 @@ proc operatorAssign*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, othe
 
 proc create*(T: type gen_qwebsecurityorigin_types.QWebSecurityOrigin,
     url: gen_qurl_types.QUrl): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
-  let tmp = gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebSecurityOrigin_new(url.h))
+  let tmp = gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebSecurityOrigin_new(url.h), owned: true)
   tmp
 proc create*(T: type gen_qwebsecurityorigin_types.QWebSecurityOrigin,
     other: gen_qwebsecurityorigin_types.QWebSecurityOrigin): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
-  let tmp = gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebSecurityOrigin_new2(other.h))
+  let tmp = gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebSecurityOrigin_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin) =
-  fcQWebSecurityOrigin_delete(self.h)

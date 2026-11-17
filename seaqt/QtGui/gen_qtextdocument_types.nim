@@ -1,4 +1,4 @@
-type QAbstractUndoItem* {.inheritable, pure.} = object
+type QAbstractUndoItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

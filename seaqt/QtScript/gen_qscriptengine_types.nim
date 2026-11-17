@@ -1,4 +1,4 @@
-type QScriptSyntaxCheckResult* {.inheritable, pure.} = object
+type QScriptSyntaxCheckResult* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

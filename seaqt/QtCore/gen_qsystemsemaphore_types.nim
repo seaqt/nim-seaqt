@@ -1,4 +1,4 @@
-type QSystemSemaphore* {.inheritable, pure.} = object
+type QSystemSemaphore* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

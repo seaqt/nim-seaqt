@@ -1,4 +1,4 @@
-type QPainterPath* {.inheritable, pure.} = object
+type QPainterPath* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QPainterPath) =
   wasMoved(self)
   fcQPainterPath_delete(h)
 
-type QPainterPathStroker* {.inheritable, pure.} = object
+type QPainterPathStroker* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QPainterPathStroker) =
   wasMoved(self)
   fcQPainterPathStroker_delete(h)
 
-type QPainterPathElement* {.inheritable, pure.} = object
+type QPainterPathElement* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

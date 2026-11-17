@@ -180,10 +180,9 @@ proc fcQUdpSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer
 proc fcQUdpSocket_new(vtbl: pointer, vdata: csize_t): ptr cQUdpSocket {.importc: "QUdpSocket_new".}
 proc fcQUdpSocket_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQUdpSocket {.importc: "QUdpSocket_new2".}
 proc fcQUdpSocket_staticMetaObject(): pointer {.importc: "QUdpSocket_staticMetaObject".}
-proc fcQUdpSocket_delete(self: pointer) {.importc: "QUdpSocket_delete".}
 
 proc metaObject*(self: gen_qudpsocket_types.QUdpSocket): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQUdpSocket_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQUdpSocket_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qudpsocket_types.QUdpSocket, param1: cstring): pointer =
   fcQUdpSocket_metacast(self.h, param1)
@@ -216,7 +215,7 @@ proc leaveMulticastGroup*(self: gen_qudpsocket_types.QUdpSocket, groupAddress: g
   fcQUdpSocket_leaveMulticastGroup2(self.h, groupAddress.h, iface.h)
 
 proc multicastInterface*(self: gen_qudpsocket_types.QUdpSocket): gen_qnetworkinterface_types.QNetworkInterface =
-  gen_qnetworkinterface_types.QNetworkInterface(h: fcQUdpSocket_multicastInterface(self.h))
+  gen_qnetworkinterface_types.QNetworkInterface(h: fcQUdpSocket_multicastInterface(self.h), owned: true)
 
 proc setMulticastInterface*(self: gen_qudpsocket_types.QUdpSocket, iface: gen_qnetworkinterface_types.QNetworkInterface): void =
   fcQUdpSocket_setMulticastInterface(self.h, iface.h)
@@ -228,7 +227,7 @@ proc pendingDatagramSize*(self: gen_qudpsocket_types.QUdpSocket): clonglong =
   fcQUdpSocket_pendingDatagramSize(self.h)
 
 proc receiveDatagram*(self: gen_qudpsocket_types.QUdpSocket): gen_qnetworkdatagram_types.QNetworkDatagram =
-  gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQUdpSocket_receiveDatagram(self.h))
+  gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQUdpSocket_receiveDatagram(self.h), owned: true)
 
 proc readDatagram*(self: gen_qudpsocket_types.QUdpSocket, data: cstring, maxlen: clonglong): clonglong =
   fcQUdpSocket_readDatagram(self.h, data, maxlen)
@@ -267,7 +266,7 @@ proc trUtf8*(_: type gen_qudpsocket_types.QUdpSocket, s: cstring, c: cstring, n:
   vx_ret
 
 proc receiveDatagram*(self: gen_qudpsocket_types.QUdpSocket, maxSize: clonglong): gen_qnetworkdatagram_types.QNetworkDatagram =
-  gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQUdpSocket_receiveDatagramWithMaxSize(self.h, maxSize))
+  gen_qnetworkdatagram_types.QNetworkDatagram(h: fcQUdpSocket_receiveDatagramWithMaxSize(self.h, maxSize), owned: true)
 
 proc readDatagram*(self: gen_qudpsocket_types.QUdpSocket, data: cstring, maxlen: clonglong, host: gen_qhostaddress_types.QHostAddress): clonglong =
   fcQUdpSocket_readDatagram2(self.h, data, maxlen, host.h)
@@ -311,7 +310,8 @@ type QUdpSocketchildEventProc* = proc(self: QUdpSocket, event: gen_qcoreevent_ty
 type QUdpSocketcustomEventProc* = proc(self: QUdpSocket, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QUdpSocketconnectNotifyProc* = proc(self: QUdpSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QUdpSocketdisconnectNotifyProc* = proc(self: QUdpSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QUdpSocketVTable* = object
+
+type QUdpSocketVTable* {.inheritable, pure.} = object
   vtbl: cQUdpSocketVTable
   metaObject*: QUdpSocketmetaObjectProc
   metacast*: QUdpSocketmetacastProc
@@ -351,7 +351,7 @@ type QUdpSocketVTable* = object
   disconnectNotify*: QUdpSocketdisconnectNotifyProc
 
 proc QUdpSocketmetaObject*(self: gen_qudpsocket_types.QUdpSocket): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQUdpSocket_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQUdpSocket_virtualbase_metaObject(self.h), owned: false)
 
 proc QUdpSocketmetacast*(self: gen_qudpsocket_types.QUdpSocket, param1: cstring): pointer =
   fcQUdpSocket_virtualbase_metacast(self.h, param1)
@@ -390,7 +390,7 @@ proc QUdpSocketsetSocketOption*(self: gen_qudpsocket_types.QUdpSocket, option: c
   fcQUdpSocket_virtualbase_setSocketOption(self.h, cint(option), value.h)
 
 proc QUdpSocketsocketOption*(self: gen_qudpsocket_types.QUdpSocket, option: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQUdpSocket_virtualbase_socketOption(self.h, cint(option)))
+  gen_qvariant_types.QVariant(h: fcQUdpSocket_virtualbase_socketOption(self.h, cint(option)), owned: true)
 
 proc QUdpSocketclose*(self: gen_qudpsocket_types.QUdpSocket): void =
   fcQUdpSocket_virtualbase_close(self.h)
@@ -463,7 +463,10 @@ proc fcQUdpSocket_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUdpSocket_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
@@ -546,7 +549,7 @@ proc fcQUdpSocket_vtable_callback_setSocketOption(self: pointer, option: cint, v
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
   let slotval1 = cint(option)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   vtbl[].setSocketOption(self, slotval1, slotval2)
 
 proc fcQUdpSocket_vtable_callback_socketOption(self: pointer, option: cint): pointer {.cdecl.} =
@@ -554,7 +557,10 @@ proc fcQUdpSocket_vtable_callback_socketOption(self: pointer, option: cint): poi
   let self = QUdpSocket(h: self)
   let slotval1 = cint(option)
   var virtualReturn = vtbl[].socketOption(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUdpSocket_vtable_callback_close(self: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
@@ -660,46 +666,46 @@ proc fcQUdpSocket_vtable_callback_reset(self: pointer): bool {.cdecl.} =
 proc fcQUdpSocket_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQUdpSocket_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQUdpSocket_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQUdpSocket_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQUdpSocket_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQUdpSocket_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQUdpSocket_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUdpSocketVTable](fcQUdpSocket_vdata(self)[])
   let self = QUdpSocket(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQUdpSocket* {.inheritable.} = ref object of QUdpSocket
@@ -781,7 +787,10 @@ method disconnectNotify*(self: VirtualQUdpSocket, signal: gen_qmetaobject_types.
 proc fcQUdpSocket_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUdpSocket_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
@@ -852,14 +861,17 @@ proc fcQUdpSocket_method_callback_setSocketDescriptor(self: pointer, socketDescr
 proc fcQUdpSocket_method_callback_setSocketOption(self: pointer, option: cint, value: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
   let slotval1 = cint(option)
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   inst.setSocketOption(slotval1, slotval2)
 
 proc fcQUdpSocket_method_callback_socketOption(self: pointer, option: cint): pointer {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
   let slotval1 = cint(option)
   var virtualReturn = inst.socketOption(slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQUdpSocket_method_callback_close(self: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
@@ -949,40 +961,40 @@ proc fcQUdpSocket_method_callback_reset(self: pointer): bool {.cdecl.} =
 
 proc fcQUdpSocket_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQUdpSocket_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQUdpSocket_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQUdpSocket_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQUdpSocket_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQUdpSocket_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQUdpSocket_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQUdpSocket](fcQUdpSocket_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
@@ -1014,7 +1026,7 @@ proc setErrorString*(self: gen_qudpsocket_types.QUdpSocket, errorString: openArr
   fcQUdpSocket_protectedbase_setErrorString(self.h, struct_seaqt_string(data: if len(errorString) > 0: addr errorString[0] else: nil, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qudpsocket_types.QUdpSocket): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQUdpSocket_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQUdpSocket_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qudpsocket_types.QUdpSocket): cint =
   fcQUdpSocket_protectedbase_senderSignalIndex(self.h)
@@ -1104,7 +1116,7 @@ proc create*(T: type gen_qudpsocket_types.QUdpSocket,
     vtbl[].vtbl.connectNotify = fcQUdpSocket_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUdpSocket_vtable_callback_disconnectNotify
-  let tmp = gen_qudpsocket_types.QUdpSocket(h: fcQUdpSocket_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qudpsocket_types.QUdpSocket(h: fcQUdpSocket_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQUdpSocket_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qudpsocket_types.QUdpSocket,
@@ -1187,13 +1199,14 @@ proc create*(T: type gen_qudpsocket_types.QUdpSocket,
     vtbl[].vtbl.connectNotify = fcQUdpSocket_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQUdpSocket_vtable_callback_disconnectNotify
-  let tmp = gen_qudpsocket_types.QUdpSocket(h: fcQUdpSocket_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qudpsocket_types.QUdpSocket(h: fcQUdpSocket_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQUdpSocket_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQUdpSocket_mvtbl = cQUdpSocketVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQUdpSocket()[])](self.fcQUdpSocket_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQUdpSocket_method_callback_metaObject,
   metacast: fcQUdpSocket_method_callback_metacast,
@@ -1249,5 +1262,3 @@ proc create*(T: type gen_qudpsocket_types.QUdpSocket,
 
 proc staticMetaObject*(_: type gen_qudpsocket_types.QUdpSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUdpSocket_staticMetaObject())
-proc delete*(self: gen_qudpsocket_types.QUdpSocket) =
-  fcQUdpSocket_delete(self.h)

@@ -1,4 +1,4 @@
-type QTableWidgetSelectionRange* {.inheritable, pure.} = object
+type QTableWidgetSelectionRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QTableWidgetSelectionRange) =
   wasMoved(self)
   fcQTableWidgetSelectionRange_delete(h)
 
-type QTableWidgetItem* {.inheritable, pure.} = object
+type QTableWidgetItem* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

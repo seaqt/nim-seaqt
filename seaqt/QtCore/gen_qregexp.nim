@@ -95,7 +95,6 @@ proc fcQRegExp_new2(pattern: struct_seaqt_string): ptr cQRegExp {.importc: "QReg
 proc fcQRegExp_new3(rx: pointer): ptr cQRegExp {.importc: "QRegExp_new3".}
 proc fcQRegExp_new4(pattern: struct_seaqt_string, cs: cint): ptr cQRegExp {.importc: "QRegExp_new4".}
 proc fcQRegExp_new5(pattern: struct_seaqt_string, cs: cint, syntax: cint): ptr cQRegExp {.importc: "QRegExp_new5".}
-proc fcQRegExp_delete(self: pointer) {.importc: "QRegExp_delete".}
 
 proc operatorAssign*(self: gen_qregexp_types.QRegExp, rx: gen_qregexp_types.QRegExp): void =
   fcQRegExp_operatorAssign(self.h, rx.h)
@@ -248,23 +247,21 @@ proc pos2*(self: gen_qregexp_types.QRegExp, nth: cint): cint =
   fcQRegExp_pos3(self.h, nth)
 
 proc create*(T: type gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
-  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new())
+  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new(), owned: true)
   tmp
 proc create*(T: type gen_qregexp_types.QRegExp,
     pattern: openArray[char]): gen_qregexp_types.QRegExp =
-  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new2(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))))
+  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new2(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern)))), owned: true)
   tmp
 proc create*(T: type gen_qregexp_types.QRegExp,
     rx: gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
-  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new3(rx.h))
+  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new3(rx.h), owned: true)
   tmp
 proc create*(T: type gen_qregexp_types.QRegExp,
     pattern: openArray[char], cs: cint): gen_qregexp_types.QRegExp =
-  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new4(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs)))
+  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new4(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs)), owned: true)
   tmp
 proc create*(T: type gen_qregexp_types.QRegExp,
     pattern: openArray[char], cs: cint, syntax: cint): gen_qregexp_types.QRegExp =
-  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new5(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs), cint(syntax)))
+  let tmp = gen_qregexp_types.QRegExp(h: fcQRegExp_new5(struct_seaqt_string(data: if len(pattern) > 0: addr pattern[0] else: nil, len: csize_t(len(pattern))), cint(cs), cint(syntax)), owned: true)
   tmp
-proc delete*(self: gen_qregexp_types.QRegExp) =
-  fcQRegExp_delete(self.h)

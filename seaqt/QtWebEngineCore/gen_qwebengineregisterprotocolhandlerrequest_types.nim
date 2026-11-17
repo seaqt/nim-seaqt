@@ -1,4 +1,4 @@
-type QWebEngineRegisterProtocolHandlerRequest* {.inheritable, pure.} = object
+type QWebEngineRegisterProtocolHandlerRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

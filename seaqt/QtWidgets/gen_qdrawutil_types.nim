@@ -1,4 +1,4 @@
-type QTileRules* {.inheritable, pure.} = object
+type QTileRules* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

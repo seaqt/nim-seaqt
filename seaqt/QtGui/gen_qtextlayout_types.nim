@@ -1,4 +1,4 @@
-type QTextInlineObject* {.inheritable, pure.} = object
+type QTextInlineObject* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QTextInlineObject) =
   wasMoved(self)
   fcQTextInlineObject_delete(h)
 
-type QTextLayout* {.inheritable, pure.} = object
+type QTextLayout* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QTextLayout) =
   wasMoved(self)
   fcQTextLayout_delete(h)
 
-type QTextLine* {.inheritable, pure.} = object
+type QTextLine* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -62,7 +62,7 @@ proc delete*(self: sink QTextLine) =
   wasMoved(self)
   fcQTextLine_delete(h)
 
-type QTextLayoutFormatRange* {.inheritable, pure.} = object
+type QTextLayoutFormatRange* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

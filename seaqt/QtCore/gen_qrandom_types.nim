@@ -1,4 +1,4 @@
-type QRandomGenerator* {.inheritable, pure.} = object
+type QRandomGenerator* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

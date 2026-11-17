@@ -66,7 +66,6 @@ proc fcQGeoAreaMonitorInfo_setNotificationParameters(self: pointer, parameters: 
 proc fcQGeoAreaMonitorInfo_new(): ptr cQGeoAreaMonitorInfo {.importc: "QGeoAreaMonitorInfo_new".}
 proc fcQGeoAreaMonitorInfo_new2(other: pointer): ptr cQGeoAreaMonitorInfo {.importc: "QGeoAreaMonitorInfo_new2".}
 proc fcQGeoAreaMonitorInfo_new3(name: struct_seaqt_string): ptr cQGeoAreaMonitorInfo {.importc: "QGeoAreaMonitorInfo_new3".}
-proc fcQGeoAreaMonitorInfo_delete(self: pointer) {.importc: "QGeoAreaMonitorInfo_delete".}
 
 proc operatorAssign*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, other: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): void =
   fcQGeoAreaMonitorInfo_operatorAssign(self.h, other.h)
@@ -96,13 +95,13 @@ proc isValid*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): bool =
   fcQGeoAreaMonitorInfo_isValid(self.h)
 
 proc area*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): gen_qgeoshape_types.QGeoShape =
-  gen_qgeoshape_types.QGeoShape(h: fcQGeoAreaMonitorInfo_area(self.h))
+  gen_qgeoshape_types.QGeoShape(h: fcQGeoAreaMonitorInfo_area(self.h), owned: true)
 
 proc setArea*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, newShape: gen_qgeoshape_types.QGeoShape): void =
   fcQGeoAreaMonitorInfo_setArea(self.h, newShape.h)
 
 proc expiration*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQGeoAreaMonitorInfo_expiration(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQGeoAreaMonitorInfo_expiration(self.h), owned: true)
 
 proc setExpiration*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo, expiry: gen_qdatetime_types.QDateTime): void =
   fcQGeoAreaMonitorInfo_setExpiration(self.h, expiry.h)
@@ -124,7 +123,7 @@ proc notificationParameters*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitor
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -135,23 +134,24 @@ proc setNotificationParameters*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMoni
   var parameters_Keys_CArray = newSeq[struct_seaqt_string](len(parameters))
   var parameters_Values_CArray = newSeq[pointer](len(parameters))
   var parameters_ctr = 0
-  for parameters_k, parameters_v in parameters:
+  for parameters_k in parameters.keys():
     parameters_Keys_CArray[parameters_ctr] = struct_seaqt_string(data: if len(parameters_k) > 0: addr parameters_k[0] else: nil, len: csize_t(len(parameters_k)))
+    parameters_ctr += 1
+  parameters_ctr = 0
+  for parameters_v in parameters.values():
     parameters_Values_CArray[parameters_ctr] = parameters_v.h
     parameters_ctr += 1
 
   fcQGeoAreaMonitorInfo_setNotificationParameters(self.h, struct_seaqt_map(len: csize_t(len(parameters)),keys: if len(parameters) == 0: nil else: addr(parameters_Keys_CArray[0]), values: if len(parameters) == 0: nil else: addr(parameters_Values_CArray[0]),))
 
 proc create*(T: type gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo =
-  let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new())
+  let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new(), owned: true)
   tmp
 proc create*(T: type gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo,
     other: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo): gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo =
-  let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new2(other.h))
+  let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new2(other.h), owned: true)
   tmp
 proc create*(T: type gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo,
     name: openArray[char]): gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo =
-  let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new3(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))))
+  let tmp = gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo(h: fcQGeoAreaMonitorInfo_new3(struct_seaqt_string(data: if len(name) > 0: addr name[0] else: nil, len: csize_t(len(name)))), owned: true)
   tmp
-proc delete*(self: gen_qgeoareamonitorinfo_types.QGeoAreaMonitorInfo) =
-  fcQGeoAreaMonitorInfo_delete(self.h)

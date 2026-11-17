@@ -70,7 +70,6 @@ proc fcQAudioEncoderSettings_setEncodingOption(self: pointer, option: struct_sea
 proc fcQAudioEncoderSettings_setEncodingOptions(self: pointer, options: struct_seaqt_map): void {.importc: "QAudioEncoderSettings_setEncodingOptions".}
 proc fcQAudioEncoderSettings_new(): ptr cQAudioEncoderSettings {.importc: "QAudioEncoderSettings_new".}
 proc fcQAudioEncoderSettings_new2(other: pointer): ptr cQAudioEncoderSettings {.importc: "QAudioEncoderSettings_new2".}
-proc fcQAudioEncoderSettings_delete(self: pointer) {.importc: "QAudioEncoderSettings_delete".}
 proc fcQVideoEncoderSettings_operatorAssign(self: pointer, other: pointer): void {.importc: "QVideoEncoderSettings_operatorAssign".}
 proc fcQVideoEncoderSettings_operatorEqual(self: pointer, other: pointer): bool {.importc: "QVideoEncoderSettings_operatorEqual".}
 proc fcQVideoEncoderSettings_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QVideoEncoderSettings_operatorNotEqual".}
@@ -94,7 +93,6 @@ proc fcQVideoEncoderSettings_setEncodingOption(self: pointer, option: struct_sea
 proc fcQVideoEncoderSettings_setEncodingOptions(self: pointer, options: struct_seaqt_map): void {.importc: "QVideoEncoderSettings_setEncodingOptions".}
 proc fcQVideoEncoderSettings_new(): ptr cQVideoEncoderSettings {.importc: "QVideoEncoderSettings_new".}
 proc fcQVideoEncoderSettings_new2(other: pointer): ptr cQVideoEncoderSettings {.importc: "QVideoEncoderSettings_new2".}
-proc fcQVideoEncoderSettings_delete(self: pointer) {.importc: "QVideoEncoderSettings_delete".}
 proc fcQImageEncoderSettings_operatorAssign(self: pointer, other: pointer): void {.importc: "QImageEncoderSettings_operatorAssign".}
 proc fcQImageEncoderSettings_operatorEqual(self: pointer, other: pointer): bool {.importc: "QImageEncoderSettings_operatorEqual".}
 proc fcQImageEncoderSettings_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QImageEncoderSettings_operatorNotEqual".}
@@ -112,7 +110,6 @@ proc fcQImageEncoderSettings_setEncodingOption(self: pointer, option: struct_sea
 proc fcQImageEncoderSettings_setEncodingOptions(self: pointer, options: struct_seaqt_map): void {.importc: "QImageEncoderSettings_setEncodingOptions".}
 proc fcQImageEncoderSettings_new(): ptr cQImageEncoderSettings {.importc: "QImageEncoderSettings_new".}
 proc fcQImageEncoderSettings_new2(other: pointer): ptr cQImageEncoderSettings {.importc: "QImageEncoderSettings_new2".}
-proc fcQImageEncoderSettings_delete(self: pointer) {.importc: "QImageEncoderSettings_delete".}
 
 proc operatorAssign*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, other: gen_qmediaencodersettings_types.QAudioEncoderSettings): void =
   fcQAudioEncoderSettings_operatorAssign(self.h, other.h)
@@ -166,7 +163,7 @@ proc setQuality*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, qu
   fcQAudioEncoderSettings_setQuality(self.h, cint(quality))
 
 proc encodingOption*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, option: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAudioEncoderSettings_encodingOption(self.h, struct_seaqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))))
+  gen_qvariant_types.QVariant(h: fcQAudioEncoderSettings_encodingOption(self.h, struct_seaqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))), owned: true)
 
 proc encodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQAudioEncoderSettings_encodingOptions(self.h)
@@ -179,7 +176,7 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSetting
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -193,22 +190,23 @@ proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSett
   var options_Keys_CArray = newSeq[struct_seaqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
-  for options_k, options_v in options:
+  for options_k in options.keys():
     options_Keys_CArray[options_ctr] = struct_seaqt_string(data: if len(options_k) > 0: addr options_k[0] else: nil, len: csize_t(len(options_k)))
+    options_ctr += 1
+  options_ctr = 0
+  for options_v in options.values():
     options_Values_CArray[options_ctr] = options_v.h
     options_ctr += 1
 
   fcQAudioEncoderSettings_setEncodingOptions(self.h, struct_seaqt_map(len: csize_t(len(options)),keys: if len(options) == 0: nil else: addr(options_Keys_CArray[0]), values: if len(options) == 0: nil else: addr(options_Values_CArray[0]),))
 
 proc create*(T: type gen_qmediaencodersettings_types.QAudioEncoderSettings): gen_qmediaencodersettings_types.QAudioEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettings_new())
+  let tmp = gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettings_new(), owned: true)
   tmp
 proc create*(T: type gen_qmediaencodersettings_types.QAudioEncoderSettings,
     other: gen_qmediaencodersettings_types.QAudioEncoderSettings): gen_qmediaencodersettings_types.QAudioEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettings_new2(other.h))
+  let tmp = gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettings_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings) =
-  fcQAudioEncoderSettings_delete(self.h)
 proc operatorAssign*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, other: gen_qmediaencodersettings_types.QVideoEncoderSettings): void =
   fcQVideoEncoderSettings_operatorAssign(self.h, other.h)
 
@@ -237,7 +235,7 @@ proc setCodec*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, code
   fcQVideoEncoderSettings_setCodec(self.h, struct_seaqt_string(data: if len(codec) > 0: addr codec[0] else: nil, len: csize_t(len(codec))))
 
 proc resolution*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVideoEncoderSettings_resolution(self.h))
+  gen_qsize_types.QSize(h: fcQVideoEncoderSettings_resolution(self.h), owned: true)
 
 proc setResolution*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, resolution: gen_qsize_types.QSize): void =
   fcQVideoEncoderSettings_setResolution(self.h, resolution.h)
@@ -264,7 +262,7 @@ proc setQuality*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, qu
   fcQVideoEncoderSettings_setQuality(self.h, cint(quality))
 
 proc encodingOption*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, option: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVideoEncoderSettings_encodingOption(self.h, struct_seaqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))))
+  gen_qvariant_types.QVariant(h: fcQVideoEncoderSettings_encodingOption(self.h, struct_seaqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))), owned: true)
 
 proc encodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQVideoEncoderSettings_encodingOptions(self.h)
@@ -277,7 +275,7 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSetting
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -291,22 +289,23 @@ proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSett
   var options_Keys_CArray = newSeq[struct_seaqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
-  for options_k, options_v in options:
+  for options_k in options.keys():
     options_Keys_CArray[options_ctr] = struct_seaqt_string(data: if len(options_k) > 0: addr options_k[0] else: nil, len: csize_t(len(options_k)))
+    options_ctr += 1
+  options_ctr = 0
+  for options_v in options.values():
     options_Values_CArray[options_ctr] = options_v.h
     options_ctr += 1
 
   fcQVideoEncoderSettings_setEncodingOptions(self.h, struct_seaqt_map(len: csize_t(len(options)),keys: if len(options) == 0: nil else: addr(options_Keys_CArray[0]), values: if len(options) == 0: nil else: addr(options_Values_CArray[0]),))
 
 proc create*(T: type gen_qmediaencodersettings_types.QVideoEncoderSettings): gen_qmediaencodersettings_types.QVideoEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QVideoEncoderSettings(h: fcQVideoEncoderSettings_new())
+  let tmp = gen_qmediaencodersettings_types.QVideoEncoderSettings(h: fcQVideoEncoderSettings_new(), owned: true)
   tmp
 proc create*(T: type gen_qmediaencodersettings_types.QVideoEncoderSettings,
     other: gen_qmediaencodersettings_types.QVideoEncoderSettings): gen_qmediaencodersettings_types.QVideoEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QVideoEncoderSettings(h: fcQVideoEncoderSettings_new2(other.h))
+  let tmp = gen_qmediaencodersettings_types.QVideoEncoderSettings(h: fcQVideoEncoderSettings_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings) =
-  fcQVideoEncoderSettings_delete(self.h)
 proc operatorAssign*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, other: gen_qmediaencodersettings_types.QImageEncoderSettings): void =
   fcQImageEncoderSettings_operatorAssign(self.h, other.h)
 
@@ -329,7 +328,7 @@ proc setCodec*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, code
   fcQImageEncoderSettings_setCodec(self.h, struct_seaqt_string(data: if len(codec) > 0: addr codec[0] else: nil, len: csize_t(len(codec))))
 
 proc resolution*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQImageEncoderSettings_resolution(self.h))
+  gen_qsize_types.QSize(h: fcQImageEncoderSettings_resolution(self.h), owned: true)
 
 proc setResolution*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, resolution: gen_qsize_types.QSize): void =
   fcQImageEncoderSettings_setResolution(self.h, resolution.h)
@@ -344,7 +343,7 @@ proc setQuality*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, qu
   fcQImageEncoderSettings_setQuality(self.h, cint(quality))
 
 proc encodingOption*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, option: openArray[char]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQImageEncoderSettings_encodingOption(self.h, struct_seaqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))))
+  gen_qvariant_types.QVariant(h: fcQImageEncoderSettings_encodingOption(self.h, struct_seaqt_string(data: if len(option) > 0: addr option[0] else: nil, len: csize_t(len(option)))), owned: true)
 
 proc encodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSettings): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQImageEncoderSettings_encodingOptions(self.h)
@@ -357,7 +356,7 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSetting
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -371,19 +370,20 @@ proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSett
   var options_Keys_CArray = newSeq[struct_seaqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
-  for options_k, options_v in options:
+  for options_k in options.keys():
     options_Keys_CArray[options_ctr] = struct_seaqt_string(data: if len(options_k) > 0: addr options_k[0] else: nil, len: csize_t(len(options_k)))
+    options_ctr += 1
+  options_ctr = 0
+  for options_v in options.values():
     options_Values_CArray[options_ctr] = options_v.h
     options_ctr += 1
 
   fcQImageEncoderSettings_setEncodingOptions(self.h, struct_seaqt_map(len: csize_t(len(options)),keys: if len(options) == 0: nil else: addr(options_Keys_CArray[0]), values: if len(options) == 0: nil else: addr(options_Values_CArray[0]),))
 
 proc create*(T: type gen_qmediaencodersettings_types.QImageEncoderSettings): gen_qmediaencodersettings_types.QImageEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderSettings_new())
+  let tmp = gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderSettings_new(), owned: true)
   tmp
 proc create*(T: type gen_qmediaencodersettings_types.QImageEncoderSettings,
     other: gen_qmediaencodersettings_types.QImageEncoderSettings): gen_qmediaencodersettings_types.QImageEncoderSettings =
-  let tmp = gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderSettings_new2(other.h))
+  let tmp = gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderSettings_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qmediaencodersettings_types.QImageEncoderSettings) =
-  fcQImageEncoderSettings_delete(self.h)

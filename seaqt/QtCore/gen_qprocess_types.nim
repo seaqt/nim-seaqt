@@ -1,4 +1,4 @@
-type QProcessEnvironment* {.inheritable, pure.} = object
+type QProcessEnvironment* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

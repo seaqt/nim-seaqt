@@ -1,4 +1,4 @@
-type QStringDataPtr* {.inheritable, pure.} = object
+type QStringDataPtr* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

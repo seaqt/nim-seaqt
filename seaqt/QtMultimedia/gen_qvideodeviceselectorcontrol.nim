@@ -78,10 +78,9 @@ proc fcQVideoDeviceSelectorControl_protectedbase_senderSignalIndex(self: pointer
 proc fcQVideoDeviceSelectorControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoDeviceSelectorControl_protectedbase_receivers".}
 proc fcQVideoDeviceSelectorControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoDeviceSelectorControl_protectedbase_isSignalConnected".}
 proc fcQVideoDeviceSelectorControl_staticMetaObject(): pointer {.importc: "QVideoDeviceSelectorControl_staticMetaObject".}
-proc fcQVideoDeviceSelectorControl_delete(self: pointer) {.importc: "QVideoDeviceSelectorControl_delete".}
 
 proc metaObject*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQVideoDeviceSelectorControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoDeviceSelectorControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, param1: cstring): pointer =
   fcQVideoDeviceSelectorControl_metacast(self.h, param1)
@@ -211,7 +210,7 @@ proc trUtf8*(_: type gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorC
   vx_ret
 
 proc sender*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQVideoDeviceSelectorControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQVideoDeviceSelectorControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl): cint =
   fcQVideoDeviceSelectorControl_protectedbase_senderSignalIndex(self.h)
@@ -224,5 +223,3 @@ proc isSignalConnected*(self: gen_qvideodeviceselectorcontrol_types.QVideoDevice
 
 proc staticMetaObject*(_: type gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoDeviceSelectorControl_staticMetaObject())
-proc delete*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl) =
-  fcQVideoDeviceSelectorControl_delete(self.h)

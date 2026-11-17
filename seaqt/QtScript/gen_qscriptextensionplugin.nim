@@ -102,10 +102,9 @@ proc fcQScriptExtensionPlugin_protectedbase_isSignalConnected(self: pointer, sig
 proc fcQScriptExtensionPlugin_new(vtbl: pointer, vdata: csize_t): ptr cQScriptExtensionPlugin {.importc: "QScriptExtensionPlugin_new".}
 proc fcQScriptExtensionPlugin_new2(vtbl: pointer, vdata: csize_t, parent: pointer): ptr cQScriptExtensionPlugin {.importc: "QScriptExtensionPlugin_new2".}
 proc fcQScriptExtensionPlugin_staticMetaObject(): pointer {.importc: "QScriptExtensionPlugin_staticMetaObject".}
-proc fcQScriptExtensionPlugin_delete(self: pointer) {.importc: "QScriptExtensionPlugin_delete".}
 
 proc metaObject*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQScriptExtensionPlugin_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQScriptExtensionPlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, param1: cstring): pointer =
   fcQScriptExtensionPlugin_metacast(self.h, param1)
@@ -141,7 +140,7 @@ proc initialize*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, 
   fcQScriptExtensionPlugin_initialize(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), engine.h)
 
 proc setupPackage*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, key: openArray[char], engine: gen_qscriptengine_types.QScriptEngine): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptExtensionPlugin_setupPackage(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), engine.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptExtensionPlugin_setupPackage(self.h, struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), engine.h), owned: true)
 
 proc tr*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s: cstring, c: cstring): string =
   let v_ms = fcQScriptExtensionPlugin_tr2(s, c)
@@ -179,7 +178,8 @@ type QScriptExtensionPluginchildEventProc* = proc(self: QScriptExtensionPlugin, 
 type QScriptExtensionPlugincustomEventProc* = proc(self: QScriptExtensionPlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QScriptExtensionPluginconnectNotifyProc* = proc(self: QScriptExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QScriptExtensionPlugindisconnectNotifyProc* = proc(self: QScriptExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QScriptExtensionPluginVTable* = object
+
+type QScriptExtensionPluginVTable* {.inheritable, pure.} = object
   vtbl: cQScriptExtensionPluginVTable
   metaObject*: QScriptExtensionPluginmetaObjectProc
   metacast*: QScriptExtensionPluginmetacastProc
@@ -195,7 +195,7 @@ type QScriptExtensionPluginVTable* = object
   disconnectNotify*: QScriptExtensionPlugindisconnectNotifyProc
 
 proc QScriptExtensionPluginmetaObject*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQScriptExtensionPlugin_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQScriptExtensionPlugin_virtualbase_metaObject(self.h), owned: false)
 
 proc QScriptExtensionPluginmetacast*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, param1: cstring): pointer =
   fcQScriptExtensionPlugin_virtualbase_metacast(self.h, param1)
@@ -229,7 +229,10 @@ proc fcQScriptExtensionPlugin_vtable_callback_metaObject(self: pointer): pointer
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
   let self = QScriptExtensionPlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScriptExtensionPlugin_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
@@ -266,52 +269,52 @@ proc fcQScriptExtensionPlugin_vtable_callback_initialize(self: pointer, key: str
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine)
+  let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine, owned: false)
   vtbl[].initialize(self, slotval1, slotval2)
 
 proc fcQScriptExtensionPlugin_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
   let self = QScriptExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
 proc fcQScriptExtensionPlugin_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
   let self = QScriptExtensionPlugin(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc fcQScriptExtensionPlugin_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
   let self = QScriptExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc fcQScriptExtensionPlugin_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
   let self = QScriptExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc fcQScriptExtensionPlugin_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
   let self = QScriptExtensionPlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc fcQScriptExtensionPlugin_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
   let self = QScriptExtensionPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc fcQScriptExtensionPlugin_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScriptExtensionPluginVTable](fcQScriptExtensionPlugin_vdata(self)[])
   let self = QScriptExtensionPlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQScriptExtensionPlugin* {.inheritable.} = ref object of QScriptExtensionPlugin
@@ -345,7 +348,10 @@ method disconnectNotify*(self: VirtualQScriptExtensionPlugin, signal: gen_qmetao
 proc fcQScriptExtensionPlugin_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
   var virtualReturn = inst.metaObject()
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc fcQScriptExtensionPlugin_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
@@ -378,50 +384,50 @@ proc fcQScriptExtensionPlugin_method_callback_initialize(self: pointer, key: str
   let vkeyx_ret = string.fromBytes(vkey_ms)
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine)
+  let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine, owned: false)
   inst.initialize(slotval1, slotval2)
 
 proc fcQScriptExtensionPlugin_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 proc fcQScriptExtensionPlugin_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 proc fcQScriptExtensionPlugin_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   inst.timerEvent(slotval1)
 
 proc fcQScriptExtensionPlugin_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   inst.childEvent(slotval1)
 
 proc fcQScriptExtensionPlugin_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   inst.customEvent(slotval1)
 
 proc fcQScriptExtensionPlugin_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.connectNotify(slotval1)
 
 proc fcQScriptExtensionPlugin_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
   let inst = cast[VirtualQScriptExtensionPlugin](fcQScriptExtensionPlugin_vdata(self)[])
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   inst.disconnectNotify(slotval1)
 
 
 proc sender*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQScriptExtensionPlugin_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQScriptExtensionPlugin_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin): cint =
   fcQScriptExtensionPlugin_protectedbase_senderSignalIndex(self.h)
@@ -463,7 +469,7 @@ proc create*(T: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin,
     vtbl[].vtbl.connectNotify = fcQScriptExtensionPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQScriptExtensionPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qscriptextensionplugin_types.QScriptExtensionPlugin(h: fcQScriptExtensionPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))))
+  let tmp = gen_qscriptextensionplugin_types.QScriptExtensionPlugin(h: fcQScriptExtensionPlugin_new(addr(vtbl[].vtbl), csize_t(sizeof(pointer))), owned: true)
   fcQScriptExtensionPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 proc create*(T: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin,
@@ -498,13 +504,14 @@ proc create*(T: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin,
     vtbl[].vtbl.connectNotify = fcQScriptExtensionPlugin_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = fcQScriptExtensionPlugin_vtable_callback_disconnectNotify
-  let tmp = gen_qscriptextensionplugin_types.QScriptExtensionPlugin(h: fcQScriptExtensionPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h))
+  let tmp = gen_qscriptextensionplugin_types.QScriptExtensionPlugin(h: fcQScriptExtensionPlugin_new2(addr(vtbl[].vtbl), csize_t(sizeof(pointer)), parent.h), owned: true)
   fcQScriptExtensionPlugin_vdata(tmp.h)[] = addr(vtbl[])
   tmp
 const cQScriptExtensionPlugin_mvtbl = cQScriptExtensionPluginVTable(
   destructor: proc(self: pointer) {.cdecl.} =
     let inst = cast[ptr typeof(VirtualQScriptExtensionPlugin()[])](self.fcQScriptExtensionPlugin_vdata()[])
-    inst[].h = nil,
+    inst[].h = nil
+    inst[].owned = false,
 
   metaObject: fcQScriptExtensionPlugin_method_callback_metaObject,
   metacast: fcQScriptExtensionPlugin_method_callback_metacast,
@@ -536,5 +543,3 @@ proc create*(T: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin,
 
 proc staticMetaObject*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScriptExtensionPlugin_staticMetaObject())
-proc delete*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin) =
-  fcQScriptExtensionPlugin_delete(self.h)

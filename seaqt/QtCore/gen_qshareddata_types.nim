@@ -1,4 +1,4 @@
-type QSharedData* {.inheritable, pure.} = object
+type QSharedData* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

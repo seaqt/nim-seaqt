@@ -90,7 +90,6 @@ proc fcQCommandLineParser_trUtf83(sourceText: cstring, disambiguation: cstring, 
 proc fcQCommandLineParser_addPositionalArgument2(self: pointer, name: struct_seaqt_string, description: struct_seaqt_string, syntax: struct_seaqt_string): void {.importc: "QCommandLineParser_addPositionalArgument2".}
 proc fcQCommandLineParser_showHelpWithExitCode(self: pointer, exitCode: cint): void {.importc: "QCommandLineParser_showHelpWithExitCode".}
 proc fcQCommandLineParser_new(): ptr cQCommandLineParser {.importc: "QCommandLineParser_new".}
-proc fcQCommandLineParser_delete(self: pointer) {.importc: "QCommandLineParser_delete".}
 
 proc tr*(_: type gen_qcommandlineparser_types.QCommandLineParser, sourceText: cstring): string =
   let v_ms = fcQCommandLineParser_tr(sourceText)
@@ -121,10 +120,10 @@ proc addOptions*(self: gen_qcommandlineparser_types.QCommandLineParser, options:
   fcQCommandLineParser_addOptions(self.h, struct_seaqt_array(len: csize_t(len(options)), data: if len(options) == 0: nil else: addr(options_CArray[0])))
 
 proc addVersionOption*(self: gen_qcommandlineparser_types.QCommandLineParser): gen_qcommandlineoption_types.QCommandLineOption =
-  gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineParser_addVersionOption(self.h))
+  gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineParser_addVersionOption(self.h), owned: true)
 
 proc addHelpOption*(self: gen_qcommandlineparser_types.QCommandLineParser): gen_qcommandlineoption_types.QCommandLineOption =
-  gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineParser_addHelpOption(self.h))
+  gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineParser_addHelpOption(self.h), owned: true)
 
 proc setApplicationDescription*(self: gen_qcommandlineparser_types.QCommandLineParser, description: openArray[char]): void =
   fcQCommandLineParser_setApplicationDescription(self.h, struct_seaqt_string(data: if len(description) > 0: addr description[0] else: nil, len: csize_t(len(description))))
@@ -285,7 +284,5 @@ proc showHelp*(self: gen_qcommandlineparser_types.QCommandLineParser, exitCode: 
   fcQCommandLineParser_showHelpWithExitCode(self.h, exitCode)
 
 proc create*(T: type gen_qcommandlineparser_types.QCommandLineParser): gen_qcommandlineparser_types.QCommandLineParser =
-  let tmp = gen_qcommandlineparser_types.QCommandLineParser(h: fcQCommandLineParser_new())
+  let tmp = gen_qcommandlineparser_types.QCommandLineParser(h: fcQCommandLineParser_new(), owned: true)
   tmp
-proc delete*(self: gen_qcommandlineparser_types.QCommandLineParser) =
-  fcQCommandLineParser_delete(self.h)

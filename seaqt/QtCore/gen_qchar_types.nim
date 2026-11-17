@@ -1,4 +1,4 @@
-type QLatin1Char* {.inheritable, pure.} = object
+type QLatin1Char* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QLatin1Char) =
   wasMoved(self)
   fcQLatin1Char_delete(h)
 
-type QChar* {.inheritable, pure.} = object
+type QChar* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

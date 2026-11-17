@@ -1,4 +1,4 @@
-type QWebEngineHttpRequest* {.inheritable, pure.} = object
+type QWebEngineHttpRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

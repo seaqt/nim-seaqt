@@ -1,4 +1,4 @@
-type QStyleFactory* {.inheritable, pure.} = object
+type QStyleFactory* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

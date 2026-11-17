@@ -1,4 +1,4 @@
-type QIconEngine* {.inheritable, pure.} = object
+type QIconEngine* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -22,7 +22,7 @@ proc delete*(self: sink QIconEngine) =
   wasMoved(self)
   fcQIconEngine_delete(h)
 
-type QIconEngineAvailableSizesArgument* {.inheritable, pure.} = object
+type QIconEngineAvailableSizesArgument* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -42,7 +42,7 @@ proc delete*(self: sink QIconEngineAvailableSizesArgument) =
   wasMoved(self)
   fcQIconEngineAvailableSizesArgument_delete(h)
 
-type QIconEngineScaledPixmapArgument* {.inheritable, pure.} = object
+type QIconEngineScaledPixmapArgument* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

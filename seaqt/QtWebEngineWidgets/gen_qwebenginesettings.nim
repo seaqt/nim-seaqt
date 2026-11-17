@@ -117,10 +117,10 @@ proc fcQWebEngineSettings_setUnknownUrlSchemePolicy(self: pointer, policy: cint)
 proc fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self: pointer): void {.importc: "QWebEngineSettings_resetUnknownUrlSchemePolicy".}
 
 proc globalSettings*(_: type gen_qwebenginesettings_types.QWebEngineSettings): gen_qwebenginesettings_types.QWebEngineSettings =
-  gen_qwebenginesettings_types.QWebEngineSettings(h: fcQWebEngineSettings_globalSettings())
+  gen_qwebenginesettings_types.QWebEngineSettings(h: fcQWebEngineSettings_globalSettings(), owned: false)
 
 proc defaultSettings*(_: type gen_qwebenginesettings_types.QWebEngineSettings): gen_qwebenginesettings_types.QWebEngineSettings =
-  gen_qwebenginesettings_types.QWebEngineSettings(h: fcQWebEngineSettings_defaultSettings())
+  gen_qwebenginesettings_types.QWebEngineSettings(h: fcQWebEngineSettings_defaultSettings(), owned: false)
 
 proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: openArray[char]): void =
   fcQWebEngineSettings_setFontFamily(self.h, cint(which), struct_seaqt_string(data: if len(family) > 0: addr family[0] else: nil, len: csize_t(len(family))))

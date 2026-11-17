@@ -69,14 +69,13 @@ proc fcQTouchDevice_setCapabilities(self: pointer, caps: cint): void {.importc: 
 proc fcQTouchDevice_setMaximumTouchPoints(self: pointer, max: cint): void {.importc: "QTouchDevice_setMaximumTouchPoints".}
 proc fcQTouchDevice_new(): ptr cQTouchDevice {.importc: "QTouchDevice_new".}
 proc fcQTouchDevice_staticMetaObject(): pointer {.importc: "QTouchDevice_staticMetaObject".}
-proc fcQTouchDevice_delete(self: pointer) {.importc: "QTouchDevice_delete".}
 
 proc devices*(_: type gen_qtouchdevice_types.QTouchDevice): seq[gen_qtouchdevice_types.QTouchDevice] =
   var v_ma = fcQTouchDevice_devices()
   var vx_ret = newSeq[gen_qtouchdevice_types.QTouchDevice](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qtouchdevice_types.QTouchDevice(h: v_outCast[i])
+    vx_ret[i] = gen_qtouchdevice_types.QTouchDevice(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -108,9 +107,7 @@ proc setMaximumTouchPoints*(self: gen_qtouchdevice_types.QTouchDevice, max: cint
   fcQTouchDevice_setMaximumTouchPoints(self.h, max)
 
 proc create*(T: type gen_qtouchdevice_types.QTouchDevice): gen_qtouchdevice_types.QTouchDevice =
-  let tmp = gen_qtouchdevice_types.QTouchDevice(h: fcQTouchDevice_new())
+  let tmp = gen_qtouchdevice_types.QTouchDevice(h: fcQTouchDevice_new(), owned: true)
   tmp
 proc staticMetaObject*(_: type gen_qtouchdevice_types.QTouchDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTouchDevice_staticMetaObject())
-proc delete*(self: gen_qtouchdevice_types.QTouchDevice) =
-  fcQTouchDevice_delete(self.h)

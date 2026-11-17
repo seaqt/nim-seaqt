@@ -56,7 +56,6 @@ proc fcQPixmapCache_replace(key: pointer, pixmap: pointer): bool {.importc: "QPi
 proc fcQPixmapCache_remove(key: struct_seaqt_string): void {.importc: "QPixmapCache_remove".}
 proc fcQPixmapCache_removeWithKey(key: pointer): void {.importc: "QPixmapCache_removeWithKey".}
 proc fcQPixmapCache_clear(): void {.importc: "QPixmapCache_clear".}
-proc fcQPixmapCache_delete(self: pointer) {.importc: "QPixmapCache_delete".}
 proc fcQPixmapCacheKey_operatorEqual(self: pointer, key: pointer): bool {.importc: "QPixmapCache__Key_operatorEqual".}
 proc fcQPixmapCacheKey_operatorNotEqual(self: pointer, key: pointer): bool {.importc: "QPixmapCache__Key_operatorNotEqual".}
 proc fcQPixmapCacheKey_operatorAssign(self: pointer, other: pointer): void {.importc: "QPixmapCache__Key_operatorAssign".}
@@ -64,7 +63,6 @@ proc fcQPixmapCacheKey_swap(self: pointer, other: pointer): void {.importc: "QPi
 proc fcQPixmapCacheKey_isValid(self: pointer): bool {.importc: "QPixmapCache__Key_isValid".}
 proc fcQPixmapCacheKey_new(): ptr cQPixmapCacheKey {.importc: "QPixmapCache__Key_new".}
 proc fcQPixmapCacheKey_new2(other: pointer): ptr cQPixmapCacheKey {.importc: "QPixmapCache__Key_new2".}
-proc fcQPixmapCacheKey_delete(self: pointer) {.importc: "QPixmapCache__Key_delete".}
 
 proc cacheLimit*(_: type gen_qpixmapcache_types.QPixmapCache): cint =
   fcQPixmapCache_cacheLimit()
@@ -73,7 +71,7 @@ proc setCacheLimit*(_: type gen_qpixmapcache_types.QPixmapCache, cacheLimit: cin
   fcQPixmapCache_setCacheLimit(cacheLimit)
 
 proc find*(_: type gen_qpixmapcache_types.QPixmapCache, key: openArray[char]): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQPixmapCache_find(struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))))
+  gen_qpixmap_types.QPixmap(h: fcQPixmapCache_find(struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key)))), owned: false)
 
 proc find*(_: type gen_qpixmapcache_types.QPixmapCache, key: openArray[char], pixmap: gen_qpixmap_types.QPixmap): bool =
   fcQPixmapCache_find2(struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), pixmap.h)
@@ -88,7 +86,7 @@ proc insert*(_: type gen_qpixmapcache_types.QPixmapCache, key: openArray[char], 
   fcQPixmapCache_insert(struct_seaqt_string(data: if len(key) > 0: addr key[0] else: nil, len: csize_t(len(key))), pixmap.h)
 
 proc insert*(_: type gen_qpixmapcache_types.QPixmapCache, pixmap: gen_qpixmap_types.QPixmap): gen_qpixmapcache_types.QPixmapCacheKey =
-  gen_qpixmapcache_types.QPixmapCacheKey(h: fcQPixmapCache_insertWithPixmap(pixmap.h))
+  gen_qpixmapcache_types.QPixmapCacheKey(h: fcQPixmapCache_insertWithPixmap(pixmap.h), owned: true)
 
 proc replace*(_: type gen_qpixmapcache_types.QPixmapCache, key: gen_qpixmapcache_types.QPixmapCacheKey, pixmap: gen_qpixmap_types.QPixmap): bool =
   fcQPixmapCache_replace(key.h, pixmap.h)
@@ -102,8 +100,6 @@ proc remove*(_: type gen_qpixmapcache_types.QPixmapCache, key: gen_qpixmapcache_
 proc clear*(_: type gen_qpixmapcache_types.QPixmapCache): void =
   fcQPixmapCache_clear()
 
-proc delete*(self: gen_qpixmapcache_types.QPixmapCache) =
-  fcQPixmapCache_delete(self.h)
 proc operatorEqual*(self: gen_qpixmapcache_types.QPixmapCacheKey, key: gen_qpixmapcache_types.QPixmapCacheKey): bool =
   fcQPixmapCacheKey_operatorEqual(self.h, key.h)
 
@@ -120,11 +116,9 @@ proc isValid*(self: gen_qpixmapcache_types.QPixmapCacheKey): bool =
   fcQPixmapCacheKey_isValid(self.h)
 
 proc create*(T: type gen_qpixmapcache_types.QPixmapCacheKey): gen_qpixmapcache_types.QPixmapCacheKey =
-  let tmp = gen_qpixmapcache_types.QPixmapCacheKey(h: fcQPixmapCacheKey_new())
+  let tmp = gen_qpixmapcache_types.QPixmapCacheKey(h: fcQPixmapCacheKey_new(), owned: true)
   tmp
 proc create*(T: type gen_qpixmapcache_types.QPixmapCacheKey,
     other: gen_qpixmapcache_types.QPixmapCacheKey): gen_qpixmapcache_types.QPixmapCacheKey =
-  let tmp = gen_qpixmapcache_types.QPixmapCacheKey(h: fcQPixmapCacheKey_new2(other.h))
+  let tmp = gen_qpixmapcache_types.QPixmapCacheKey(h: fcQPixmapCacheKey_new2(other.h), owned: true)
   tmp
-proc delete*(self: gen_qpixmapcache_types.QPixmapCacheKey) =
-  fcQPixmapCacheKey_delete(self.h)

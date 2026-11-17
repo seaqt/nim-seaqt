@@ -63,7 +63,6 @@ proc fcQWebHistoryItem_isValid(self: pointer): bool {.importc: "QWebHistoryItem_
 proc fcQWebHistoryItem_toMap(self: pointer): struct_seaqt_map {.importc: "QWebHistoryItem_toMap".}
 proc fcQWebHistoryItem_loadFromMap(self: pointer, map: struct_seaqt_map): void {.importc: "QWebHistoryItem_loadFromMap".}
 proc fcQWebHistoryItem_new(other: pointer): ptr cQWebHistoryItem {.importc: "QWebHistoryItem_new".}
-proc fcQWebHistoryItem_delete(self: pointer) {.importc: "QWebHistoryItem_delete".}
 proc fcQWebHistory_clear(self: pointer): void {.importc: "QWebHistory_clear".}
 proc fcQWebHistory_items(self: pointer): struct_seaqt_array {.importc: "QWebHistory_items".}
 proc fcQWebHistory_backItems(self: pointer, maxItems: cint): struct_seaqt_array {.importc: "QWebHistory_backItems".}
@@ -88,10 +87,10 @@ proc operatorAssign*(self: gen_qwebhistory_types.QWebHistoryItem, other: gen_qwe
   fcQWebHistoryItem_operatorAssign(self.h, other.h)
 
 proc originalUrl*(self: gen_qwebhistory_types.QWebHistoryItem): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebHistoryItem_originalUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebHistoryItem_originalUrl(self.h), owned: true)
 
 proc url*(self: gen_qwebhistory_types.QWebHistoryItem): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebHistoryItem_url(self.h))
+  gen_qurl_types.QUrl(h: fcQWebHistoryItem_url(self.h), owned: true)
 
 proc title*(self: gen_qwebhistory_types.QWebHistoryItem): string =
   let v_ms = fcQWebHistoryItem_title(self.h)
@@ -100,13 +99,13 @@ proc title*(self: gen_qwebhistory_types.QWebHistoryItem): string =
   vx_ret
 
 proc lastVisited*(self: gen_qwebhistory_types.QWebHistoryItem): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQWebHistoryItem_lastVisited(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQWebHistoryItem_lastVisited(self.h), owned: true)
 
 proc icon*(self: gen_qwebhistory_types.QWebHistoryItem): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQWebHistoryItem_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQWebHistoryItem_icon(self.h), owned: true)
 
 proc userData*(self: gen_qwebhistory_types.QWebHistoryItem): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQWebHistoryItem_userData(self.h))
+  gen_qvariant_types.QVariant(h: fcQWebHistoryItem_userData(self.h), owned: true)
 
 proc setUserData*(self: gen_qwebhistory_types.QWebHistoryItem, userData: gen_qvariant_types.QVariant): void =
   fcQWebHistoryItem_setUserData(self.h, userData.h)
@@ -125,7 +124,7 @@ proc toMap*(self: gen_qwebhistory_types.QWebHistoryItem): Table[string,gen_qvari
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -136,8 +135,11 @@ proc loadFromMap*(self: gen_qwebhistory_types.QWebHistoryItem, map: Table[string
   var map_Keys_CArray = newSeq[struct_seaqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for map_k, map_v in map:
+  for map_k in map.keys():
     map_Keys_CArray[map_ctr] = struct_seaqt_string(data: if len(map_k) > 0: addr map_k[0] else: nil, len: csize_t(len(map_k)))
+    map_ctr += 1
+  map_ctr = 0
+  for map_v in map.values():
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1
 
@@ -145,10 +147,8 @@ proc loadFromMap*(self: gen_qwebhistory_types.QWebHistoryItem, map: Table[string
 
 proc create*(T: type gen_qwebhistory_types.QWebHistoryItem,
     other: gen_qwebhistory_types.QWebHistoryItem): gen_qwebhistory_types.QWebHistoryItem =
-  let tmp = gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistoryItem_new(other.h))
+  let tmp = gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistoryItem_new(other.h), owned: true)
   tmp
-proc delete*(self: gen_qwebhistory_types.QWebHistoryItem) =
-  fcQWebHistoryItem_delete(self.h)
 proc clear*(self: gen_qwebhistory_types.QWebHistory): void =
   fcQWebHistory_clear(self.h)
 
@@ -157,7 +157,7 @@ proc items*(self: gen_qwebhistory_types.QWebHistory): seq[gen_qwebhistory_types.
   var vx_ret = newSeq[gen_qwebhistory_types.QWebHistoryItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebhistory_types.QWebHistoryItem(h: v_outCast[i])
+    vx_ret[i] = gen_qwebhistory_types.QWebHistoryItem(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -166,7 +166,7 @@ proc backItems*(self: gen_qwebhistory_types.QWebHistory, maxItems: cint): seq[ge
   var vx_ret = newSeq[gen_qwebhistory_types.QWebHistoryItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebhistory_types.QWebHistoryItem(h: v_outCast[i])
+    vx_ret[i] = gen_qwebhistory_types.QWebHistoryItem(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -175,7 +175,7 @@ proc forwardItems*(self: gen_qwebhistory_types.QWebHistory, maxItems: cint): seq
   var vx_ret = newSeq[gen_qwebhistory_types.QWebHistoryItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebhistory_types.QWebHistoryItem(h: v_outCast[i])
+    vx_ret[i] = gen_qwebhistory_types.QWebHistoryItem(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -195,16 +195,16 @@ proc goToItem*(self: gen_qwebhistory_types.QWebHistory, item: gen_qwebhistory_ty
   fcQWebHistory_goToItem(self.h, item.h)
 
 proc backItem*(self: gen_qwebhistory_types.QWebHistory): gen_qwebhistory_types.QWebHistoryItem =
-  gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistory_backItem(self.h))
+  gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistory_backItem(self.h), owned: true)
 
 proc currentItem*(self: gen_qwebhistory_types.QWebHistory): gen_qwebhistory_types.QWebHistoryItem =
-  gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistory_currentItem(self.h))
+  gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistory_currentItem(self.h), owned: true)
 
 proc forwardItem*(self: gen_qwebhistory_types.QWebHistory): gen_qwebhistory_types.QWebHistoryItem =
-  gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistory_forwardItem(self.h))
+  gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistory_forwardItem(self.h), owned: true)
 
 proc itemAt*(self: gen_qwebhistory_types.QWebHistory, i: cint): gen_qwebhistory_types.QWebHistoryItem =
-  gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistory_itemAt(self.h, i))
+  gen_qwebhistory_types.QWebHistoryItem(h: fcQWebHistory_itemAt(self.h, i), owned: true)
 
 proc currentItemIndex*(self: gen_qwebhistory_types.QWebHistory): cint =
   fcQWebHistory_currentItemIndex(self.h)
@@ -229,7 +229,7 @@ proc toMap*(self: gen_qwebhistory_types.QWebHistory): Table[string,gen_qvariant_
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -240,8 +240,11 @@ proc loadFromMap*(self: gen_qwebhistory_types.QWebHistory, map: Table[string,gen
   var map_Keys_CArray = newSeq[struct_seaqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for map_k, map_v in map:
+  for map_k in map.keys():
     map_Keys_CArray[map_ctr] = struct_seaqt_string(data: if len(map_k) > 0: addr map_k[0] else: nil, len: csize_t(len(map_k)))
+    map_ctr += 1
+  map_ctr = 0
+  for map_v in map.values():
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1
 

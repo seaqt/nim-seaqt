@@ -48,16 +48,15 @@ proc fcQLinkedListData_setSize(self: pointer, size: cint): void {.importc: "QLin
 proc fcQLinkedListData_sharable(self: pointer): cuint {.importc: "QLinkedListData_sharable".}
 proc fcQLinkedListData_setSharable(self: pointer, sharable: cuint): void {.importc: "QLinkedListData_setSharable".}
 proc fcQLinkedListData_new(): ptr cQLinkedListData {.importc: "QLinkedListData_new".}
-proc fcQLinkedListData_delete(self: pointer) {.importc: "QLinkedListData_delete".}
 
 proc n*(self: gen_qlinkedlist_types.QLinkedListData): gen_qlinkedlist_types.QLinkedListData =
-  gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_n(self.h))
+  gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_n(self.h), owned: false)
 
 proc setN*(self: gen_qlinkedlist_types.QLinkedListData, n: gen_qlinkedlist_types.QLinkedListData): void =
   fcQLinkedListData_setN(self.h, n.h)
 
 proc p*(self: gen_qlinkedlist_types.QLinkedListData): gen_qlinkedlist_types.QLinkedListData =
-  gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_p(self.h))
+  gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_p(self.h), owned: false)
 
 proc setP*(self: gen_qlinkedlist_types.QLinkedListData, p: gen_qlinkedlist_types.QLinkedListData): void =
   fcQLinkedListData_setP(self.h, p.h)
@@ -75,7 +74,5 @@ proc setSharable*(self: gen_qlinkedlist_types.QLinkedListData, sharable: cuint):
   fcQLinkedListData_setSharable(self.h, sharable)
 
 proc create*(T: type gen_qlinkedlist_types.QLinkedListData): gen_qlinkedlist_types.QLinkedListData =
-  let tmp = gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_new())
+  let tmp = gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_new(), owned: true)
   tmp
-proc delete*(self: gen_qlinkedlist_types.QLinkedListData) =
-  fcQLinkedListData_delete(self.h)

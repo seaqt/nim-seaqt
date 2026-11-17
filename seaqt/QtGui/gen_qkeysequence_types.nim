@@ -1,4 +1,4 @@
-type QKeySequence* {.inheritable, pure.} = object
+type QKeySequence* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

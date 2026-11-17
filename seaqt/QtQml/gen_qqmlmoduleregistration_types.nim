@@ -1,4 +1,4 @@
-type QQmlModuleRegistration* {.inheritable, pure.} = object
+type QQmlModuleRegistration* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

@@ -1,4 +1,4 @@
-type QUrl* {.inheritable, pure.} = object
+type QUrl* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

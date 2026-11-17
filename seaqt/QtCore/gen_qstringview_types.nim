@@ -1,4 +1,4 @@
-type QStringView* {.inheritable, pure.} = object
+type QStringView* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

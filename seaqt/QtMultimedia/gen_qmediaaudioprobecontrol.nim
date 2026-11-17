@@ -72,10 +72,9 @@ proc fcQMediaAudioProbeControl_protectedbase_senderSignalIndex(self: pointer): c
 proc fcQMediaAudioProbeControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaAudioProbeControl_protectedbase_receivers".}
 proc fcQMediaAudioProbeControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaAudioProbeControl_protectedbase_isSignalConnected".}
 proc fcQMediaAudioProbeControl_staticMetaObject(): pointer {.importc: "QMediaAudioProbeControl_staticMetaObject".}
-proc fcQMediaAudioProbeControl_delete(self: pointer) {.importc: "QMediaAudioProbeControl_delete".}
 
 proc metaObject*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaAudioProbeControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaAudioProbeControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, param1: cstring): pointer =
   fcQMediaAudioProbeControl_metacast(self.h, param1)
@@ -101,7 +100,7 @@ proc audioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbe
 type QMediaAudioProbeControlaudioBufferProbedSlot* = proc(buffer: gen_qaudiobuffer_types.QAudioBuffer)
 proc fcQMediaAudioProbeControl_slot_callback_audioBufferProbed(slot: int, buffer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaAudioProbeControlaudioBufferProbedSlot](cast[pointer](slot))
-  let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer)
+  let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer, owned: false)
 
   nimfunc[](slotval1)
 
@@ -158,7 +157,7 @@ proc trUtf8*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, 
   vx_ret
 
 proc sender*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaAudioProbeControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaAudioProbeControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): cint =
   fcQMediaAudioProbeControl_protectedbase_senderSignalIndex(self.h)
@@ -171,5 +170,3 @@ proc isSignalConnected*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbe
 
 proc staticMetaObject*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaAudioProbeControl_staticMetaObject())
-proc delete*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl) =
-  fcQMediaAudioProbeControl_delete(self.h)

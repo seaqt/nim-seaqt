@@ -72,10 +72,9 @@ proc fcQMediaNetworkAccessControl_protectedbase_senderSignalIndex(self: pointer)
 proc fcQMediaNetworkAccessControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaNetworkAccessControl_protectedbase_receivers".}
 proc fcQMediaNetworkAccessControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaNetworkAccessControl_protectedbase_isSignalConnected".}
 proc fcQMediaNetworkAccessControl_staticMetaObject(): pointer {.importc: "QMediaNetworkAccessControl_staticMetaObject".}
-proc fcQMediaNetworkAccessControl_delete(self: pointer) {.importc: "QMediaNetworkAccessControl_delete".}
 
 proc metaObject*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaNetworkAccessControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaNetworkAccessControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, param1: cstring): pointer =
   fcQMediaNetworkAccessControl_metacast(self.h, param1)
@@ -103,7 +102,7 @@ proc setConfigurations*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetwork
   fcQMediaNetworkAccessControl_setConfigurations(self.h, struct_seaqt_array(len: csize_t(len(configuration)), data: if len(configuration) == 0: nil else: addr(configuration_CArray[0])))
 
 proc currentConfiguration*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl): gen_qnetworkconfiguration_types.QNetworkConfiguration =
-  gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQMediaNetworkAccessControl_currentConfiguration(self.h))
+  gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQMediaNetworkAccessControl_currentConfiguration(self.h), owned: true)
 
 proc configurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, configuration: gen_qnetworkconfiguration_types.QNetworkConfiguration): void =
   fcQMediaNetworkAccessControl_configurationChanged(self.h, configuration.h)
@@ -111,7 +110,7 @@ proc configurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetw
 type QMediaNetworkAccessControlconfigurationChangedSlot* = proc(configuration: gen_qnetworkconfiguration_types.QNetworkConfiguration)
 proc fcQMediaNetworkAccessControl_slot_callback_configurationChanged(slot: int, configuration: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaNetworkAccessControlconfigurationChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: configuration)
+  let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: configuration, owned: false)
 
   nimfunc[](slotval1)
 
@@ -150,7 +149,7 @@ proc trUtf8*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessCon
   vx_ret
 
 proc sender*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaNetworkAccessControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaNetworkAccessControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl): cint =
   fcQMediaNetworkAccessControl_protectedbase_senderSignalIndex(self.h)
@@ -163,5 +162,3 @@ proc isSignalConnected*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetwork
 
 proc staticMetaObject*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaNetworkAccessControl_staticMetaObject())
-proc delete*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl) =
-  fcQMediaNetworkAccessControl_delete(self.h)

@@ -1,4 +1,4 @@
-type QMatrix4x4* {.inheritable, pure.} = object
+type QMatrix4x4* {.inheritable.} = object
   h*: pointer
   owned*: bool
 

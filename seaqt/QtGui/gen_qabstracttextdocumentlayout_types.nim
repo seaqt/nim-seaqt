@@ -9,7 +9,7 @@ proc `=sink`(dest: var QAbstractTextDocumentLayout, source: QAbstractTextDocumen
   dest.h = source.h
   dest.owned = source.owned
 
-type QTextObjectInterface* {.inheritable, pure.} = object
+type QTextObjectInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -33,7 +33,7 @@ proc delete*(self: sink QTextObjectInterface) =
   wasMoved(self)
   fcQTextObjectInterface_delete(h)
 
-type QAbstractTextDocumentLayoutSelection* {.inheritable, pure.} = object
+type QAbstractTextDocumentLayoutSelection* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
@@ -53,7 +53,7 @@ proc delete*(self: sink QAbstractTextDocumentLayoutSelection) =
   wasMoved(self)
   fcQAbstractTextDocumentLayoutSelection_delete(h)
 
-type QAbstractTextDocumentLayoutPaintContext* {.inheritable, pure.} = object
+type QAbstractTextDocumentLayoutPaintContext* {.inheritable.} = object
   h*: pointer
   owned*: bool
 
