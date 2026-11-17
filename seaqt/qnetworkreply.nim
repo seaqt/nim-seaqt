@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qnetworkreply
+export gen_qnetworkreply

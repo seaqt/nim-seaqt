@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgtexturematerial
+export gen_qsgtexturematerial

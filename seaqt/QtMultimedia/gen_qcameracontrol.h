@@ -1,0 +1,64 @@
+#pragma once
+#ifndef SEAQT_QTMULTIMEDIA_GEN_QCAMERACONTROL_H
+#define SEAQT_QTMULTIMEDIA_GEN_QCAMERACONTROL_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QCameraControl;
+class QMediaControl;
+class QMetaMethod;
+class QMetaObject;
+class QObject;
+#else
+typedef struct QCameraControl QCameraControl;
+typedef struct QMediaControl QMediaControl;
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QObject QObject;
+#endif
+
+void QCameraControl_virtbase(QCameraControl* src, QMediaControl** outptr_QMediaControl);
+QMetaObject* QCameraControl_metaObject(const QCameraControl* self);
+void* QCameraControl_metacast(QCameraControl* self, const char* param1);
+int QCameraControl_metacall(QCameraControl* self, int param1, int param2, void** param3);
+struct seaqt_string QCameraControl_tr(const char* s);
+struct seaqt_string QCameraControl_trUtf8(const char* s);
+int QCameraControl_state(const QCameraControl* self);
+void QCameraControl_setState(QCameraControl* self, int state);
+int QCameraControl_status(const QCameraControl* self);
+int QCameraControl_captureMode(const QCameraControl* self);
+void QCameraControl_setCaptureMode(QCameraControl* self, int captureMode);
+bool QCameraControl_isCaptureModeSupported(const QCameraControl* self, int mode);
+bool QCameraControl_canChangeProperty(const QCameraControl* self, int changeType, int status);
+void QCameraControl_stateChanged(QCameraControl* self, int param1);
+void QCameraControl_connect_stateChanged(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QCameraControl_statusChanged(QCameraControl* self, int param1);
+void QCameraControl_connect_statusChanged(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QCameraControl_error(QCameraControl* self, int error, struct seaqt_string errorString);
+void QCameraControl_connect_error(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t));
+void QCameraControl_captureModeChanged(QCameraControl* self, int mode);
+void QCameraControl_connect_captureModeChanged(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+struct seaqt_string QCameraControl_tr2(const char* s, const char* c);
+struct seaqt_string QCameraControl_tr3(const char* s, const char* c, int n);
+struct seaqt_string QCameraControl_trUtf82(const char* s, const char* c);
+struct seaqt_string QCameraControl_trUtf83(const char* s, const char* c, int n);
+
+const QMetaObject* QCameraControl_staticMetaObject();
+void QCameraControl_delete(QCameraControl* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

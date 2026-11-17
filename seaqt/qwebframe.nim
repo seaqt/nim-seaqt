@@ -1,0 +1,2 @@
+import ./QtWebKitWidgets/gen_qwebframe
+export gen_qwebframe

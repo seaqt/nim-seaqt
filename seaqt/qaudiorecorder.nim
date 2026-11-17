@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudiorecorder
+export gen_qaudiorecorder

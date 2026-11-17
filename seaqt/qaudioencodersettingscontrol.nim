@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudioencodersettingscontrol
+export gen_qaudioencodersettingscontrol

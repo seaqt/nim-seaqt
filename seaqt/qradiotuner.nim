@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qradiotuner
+export gen_qradiotuner

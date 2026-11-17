@@ -1,0 +1,2 @@
+import ./QtWebKit/gen_qwebfullscreenrequest
+export gen_qwebfullscreenrequest

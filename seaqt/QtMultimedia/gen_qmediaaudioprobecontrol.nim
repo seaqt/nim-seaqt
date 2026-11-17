@@ -1,0 +1,175 @@
+import ./qtmultimedia_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+{.compile("gen_qmediaaudioprobecontrol.cpp", QtMultimediaCFlags).}
+
+
+import ./gen_qmediaaudioprobecontrol_types
+export gen_qmediaaudioprobecontrol_types
+
+import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
+  ../QtCore/gen_qobjectdefs_types,
+  ./gen_qaudiobuffer_types,
+  ./gen_qmediacontrol
+export
+  gen_qmetaobject_types,
+  gen_qobject_types,
+  gen_qobjectdefs_types,
+  gen_qaudiobuffer_types,
+  gen_qmediacontrol
+
+type cQMediaAudioProbeControl*{.exportc: "QMediaAudioProbeControl", incompleteStruct.} = object
+
+proc fcQMediaAudioProbeControl_metaObject(self: pointer): pointer {.importc: "QMediaAudioProbeControl_metaObject".}
+proc fcQMediaAudioProbeControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaAudioProbeControl_metacast".}
+proc fcQMediaAudioProbeControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaAudioProbeControl_metacall".}
+proc fcQMediaAudioProbeControl_tr(s: cstring): struct_seaqt_string {.importc: "QMediaAudioProbeControl_tr".}
+proc fcQMediaAudioProbeControl_trUtf8(s: cstring): struct_seaqt_string {.importc: "QMediaAudioProbeControl_trUtf8".}
+proc fcQMediaAudioProbeControl_audioBufferProbed(self: pointer, buffer: pointer): void {.importc: "QMediaAudioProbeControl_audioBufferProbed".}
+proc fcQMediaAudioProbeControl_connect_audioBufferProbed(self: pointer, slot: int, callback: proc (slot: int, buffer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaAudioProbeControl_connect_audioBufferProbed".}
+proc fcQMediaAudioProbeControl_flush(self: pointer): void {.importc: "QMediaAudioProbeControl_flush".}
+proc fcQMediaAudioProbeControl_connect_flush(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaAudioProbeControl_connect_flush".}
+proc fcQMediaAudioProbeControl_tr2(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaAudioProbeControl_tr2".}
+proc fcQMediaAudioProbeControl_tr3(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaAudioProbeControl_tr3".}
+proc fcQMediaAudioProbeControl_trUtf82(s: cstring, c: cstring): struct_seaqt_string {.importc: "QMediaAudioProbeControl_trUtf82".}
+proc fcQMediaAudioProbeControl_trUtf83(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QMediaAudioProbeControl_trUtf83".}
+proc fcQMediaAudioProbeControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaAudioProbeControl_protectedbase_sender".}
+proc fcQMediaAudioProbeControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaAudioProbeControl_protectedbase_senderSignalIndex".}
+proc fcQMediaAudioProbeControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaAudioProbeControl_protectedbase_receivers".}
+proc fcQMediaAudioProbeControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaAudioProbeControl_protectedbase_isSignalConnected".}
+proc fcQMediaAudioProbeControl_staticMetaObject(): pointer {.importc: "QMediaAudioProbeControl_staticMetaObject".}
+proc fcQMediaAudioProbeControl_delete(self: pointer) {.importc: "QMediaAudioProbeControl_delete".}
+
+proc metaObject*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaAudioProbeControl_metaObject(self.h))
+
+proc metacast*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, param1: cstring): pointer =
+  fcQMediaAudioProbeControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaAudioProbeControl_metacall(self.h, cint(param1), param2, param3)
+
+proc tr*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring): string =
+  let v_ms = fcQMediaAudioProbeControl_tr(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring): string =
+  let v_ms = fcQMediaAudioProbeControl_trUtf8(s)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc audioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, buffer: gen_qaudiobuffer_types.QAudioBuffer): void =
+  fcQMediaAudioProbeControl_audioBufferProbed(self.h, buffer.h)
+
+type QMediaAudioProbeControlaudioBufferProbedSlot* = proc(buffer: gen_qaudiobuffer_types.QAudioBuffer)
+proc fcQMediaAudioProbeControl_slot_callback_audioBufferProbed(slot: int, buffer: pointer) {.cdecl.} =
+  let nimfunc = cast[ptr QMediaAudioProbeControlaudioBufferProbedSlot](cast[pointer](slot))
+  let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer)
+
+  nimfunc[](slotval1)
+
+proc fcQMediaAudioProbeControl_slot_callback_audioBufferProbed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaAudioProbeControlaudioBufferProbedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onAudioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, slot: QMediaAudioProbeControlaudioBufferProbedSlot) =
+  var tmp = new QMediaAudioProbeControlaudioBufferProbedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMediaAudioProbeControl_connect_audioBufferProbed(self.h, cast[int](addr tmp[]), fcQMediaAudioProbeControl_slot_callback_audioBufferProbed, fcQMediaAudioProbeControl_slot_callback_audioBufferProbed_release)
+
+proc flush*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): void =
+  fcQMediaAudioProbeControl_flush(self.h)
+
+type QMediaAudioProbeControlflushSlot* = proc()
+proc fcQMediaAudioProbeControl_slot_callback_flush(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QMediaAudioProbeControlflushSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQMediaAudioProbeControl_slot_callback_flush_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaAudioProbeControlflushSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onFlush*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, slot: QMediaAudioProbeControlflushSlot) =
+  var tmp = new QMediaAudioProbeControlflushSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMediaAudioProbeControl_connect_flush(self.h, cast[int](addr tmp[]), fcQMediaAudioProbeControl_slot_callback_flush, fcQMediaAudioProbeControl_slot_callback_flush_release)
+
+proc tr*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring, c: cstring): string =
+  let v_ms = fcQMediaAudioProbeControl_tr2(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc tr*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQMediaAudioProbeControl_tr3(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring, c: cstring): string =
+  let v_ms = fcQMediaAudioProbeControl_trUtf82(s, c)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc trUtf8*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring, c: cstring, n: cint): string =
+  let v_ms = fcQMediaAudioProbeControl_trUtf83(s, c, n)
+  let vx_ret = string.fromBytes(v_ms)
+  c_free(v_ms.data)
+  vx_ret
+
+proc sender*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaAudioProbeControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): cint =
+  fcQMediaAudioProbeControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, signal: cstring): cint =
+  fcQMediaAudioProbeControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaAudioProbeControl_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc staticMetaObject*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaAudioProbeControl_staticMetaObject())
+proc delete*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl) =
+  fcQMediaAudioProbeControl_delete(self.h)

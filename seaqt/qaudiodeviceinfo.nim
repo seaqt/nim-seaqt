@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudiodeviceinfo
+export gen_qaudiodeviceinfo

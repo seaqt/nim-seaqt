@@ -1,0 +1,2 @@
+import ./QtMultimediaWidgets/gen_qgraphicsvideoitem
+export gen_qgraphicsvideoitem

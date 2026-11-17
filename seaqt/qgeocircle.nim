@@ -1,0 +1,2 @@
+import ./QtPositioning/gen_qgeocircle
+export gen_qgeocircle

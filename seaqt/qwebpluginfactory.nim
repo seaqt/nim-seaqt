@@ -1,0 +1,2 @@
+import ./QtWebKit/gen_qwebpluginfactory
+export gen_qwebpluginfactory

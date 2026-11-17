@@ -1,0 +1,2 @@
+import ./QtWebEngineWidgets/gen_qwebenginedownloaditem
+export gen_qwebenginedownloaditem

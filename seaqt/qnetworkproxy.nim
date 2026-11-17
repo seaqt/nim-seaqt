@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qnetworkproxy
+export gen_qnetworkproxy

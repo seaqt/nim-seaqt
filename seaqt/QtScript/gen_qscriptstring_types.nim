@@ -1,0 +1,24 @@
+type QScriptString* {.inheritable, pure.} = object
+  h*: pointer
+  owned*: bool
+
+import ./qtscript_pkg
+
+{.compile("gen_qscriptstring.cpp", QtScriptCFlags).}
+
+proc fcQScriptString_delete(self: pointer) {.importc: "QScriptString_delete".}
+proc `=destroy`(self: var QScriptString) =
+  if self.owned: fcQScriptString_delete(self.h)
+
+proc `=sink`(dest: var QScriptString, source: QScriptString) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QScriptString, source: QScriptString) {.error.}
+proc delete*(self: sink QScriptString) =
+  let h = self.h
+  wasMoved(self)
+  fcQScriptString_delete(h)
+

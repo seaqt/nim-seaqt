@@ -1,0 +1,2 @@
+import ./QtSvg/gen_qgraphicssvgitem
+export gen_qgraphicssvgitem

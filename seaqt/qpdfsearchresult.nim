@@ -1,0 +1,2 @@
+import ./QtPdf/gen_qpdfsearchresult
+export gen_qpdfsearchresult

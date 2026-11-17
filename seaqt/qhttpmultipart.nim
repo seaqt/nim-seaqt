@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qhttpmultipart
+export gen_qhttpmultipart

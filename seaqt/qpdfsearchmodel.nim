@@ -1,0 +1,2 @@
+import ./QtPdf/gen_qpdfsearchmodel
+export gen_qpdfsearchmodel

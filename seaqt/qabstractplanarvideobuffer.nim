@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qabstractvideobuffer
+export gen_qabstractvideobuffer

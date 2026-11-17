@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qvideosurfaceformat
+export gen_qvideosurfaceformat

@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgmaterialtype
+export gen_qsgmaterialtype

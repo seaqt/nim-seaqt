@@ -1,0 +1,599 @@
+#include <QChildEvent>
+#include <QEvent>
+#include <QMediaBindableInterface>
+#include <QMediaObject>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QRadioData>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <qradiodata.h>
+#include "gen_qradiodata.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQRadioData final : public QRadioData {
+	const QRadioData_VTable* vtbl;
+public:
+	friend void* QRadioData_vdata(VirtualQRadioData* self);
+	friend VirtualQRadioData* vdata_QRadioData(void* vdata);
+
+	VirtualQRadioData(const QRadioData_VTable* vtbl, QMediaObject* mediaObject): QRadioData(mediaObject), vtbl(vtbl) {}
+	VirtualQRadioData(const QRadioData_VTable* vtbl, QMediaObject* mediaObject, QObject* parent): QRadioData(mediaObject, parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQRadioData() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QRadioData::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QRadioData_virtualbase_metaObject(const VirtualQRadioData* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QRadioData::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QRadioData_virtualbase_metacast(VirtualQRadioData* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QRadioData::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QRadioData_virtualbase_metacall(VirtualQRadioData* self, int param1, int param2, void** param3);
+
+	virtual QMediaObject* mediaObject() const override {
+		if (vtbl->mediaObject == 0) {
+			return QRadioData::mediaObject();
+		}
+
+		QMediaObject* callback_return_value = vtbl->mediaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMediaObject* QRadioData_virtualbase_mediaObject(const VirtualQRadioData* self);
+
+	virtual bool setMediaObject(QMediaObject* mediaObject) override {
+		if (vtbl->setMediaObject == 0) {
+			return QRadioData::setMediaObject(mediaObject);
+		}
+
+		QMediaObject* sigval1 = mediaObject;
+		bool callback_return_value = vtbl->setMediaObject(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QRadioData_virtualbase_setMediaObject(VirtualQRadioData* self, QMediaObject* mediaObject);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QRadioData::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QRadioData_virtualbase_event(VirtualQRadioData* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QRadioData::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QRadioData_virtualbase_eventFilter(VirtualQRadioData* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QRadioData::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QRadioData_virtualbase_timerEvent(VirtualQRadioData* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QRadioData::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QRadioData_virtualbase_childEvent(VirtualQRadioData* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QRadioData::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QRadioData_virtualbase_customEvent(VirtualQRadioData* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QRadioData::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QRadioData_virtualbase_connectNotify(VirtualQRadioData* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QRadioData::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QRadioData_virtualbase_disconnectNotify(VirtualQRadioData* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QRadioData_protectedbase_sender(const VirtualQRadioData* self);
+	friend int QRadioData_protectedbase_senderSignalIndex(const VirtualQRadioData* self);
+	friend int QRadioData_protectedbase_receivers(const VirtualQRadioData* self, const char* signal);
+	friend bool QRadioData_protectedbase_isSignalConnected(const VirtualQRadioData* self, QMetaMethod* signal);
+};
+
+VirtualQRadioData* QRadioData_new(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRadioData>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQRadioData(vtbl, mediaObject) : nullptr;
+}
+
+VirtualQRadioData* QRadioData_new2(const QRadioData_VTable* vtbl, size_t vdata, QMediaObject* mediaObject, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQRadioData>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQRadioData(vtbl, mediaObject, parent) : nullptr;
+}
+
+void QRadioData_virtbase(QRadioData* src, QObject** outptr_QObject, QMediaBindableInterface** outptr_QMediaBindableInterface) {
+	*outptr_QObject = static_cast<QObject*>(src);
+	*outptr_QMediaBindableInterface = static_cast<QMediaBindableInterface*>(src);
+}
+
+QMetaObject* QRadioData_metaObject(const QRadioData* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QRadioData_metacast(QRadioData* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QRadioData_metacall(QRadioData* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QRadioData_tr(const char* s) {
+	QString _ret = QRadioData::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioData_trUtf8(const char* s) {
+	QString _ret = QRadioData::trUtf8(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QRadioData_availability(const QRadioData* self) {
+	QMultimedia::AvailabilityStatus _ret = self->availability();
+	return static_cast<int>(_ret);
+}
+
+QMediaObject* QRadioData_mediaObject(const QRadioData* self) {
+	return self->mediaObject();
+}
+
+struct seaqt_string QRadioData_stationId(const QRadioData* self) {
+	QString _ret = self->stationId();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+int QRadioData_programType(const QRadioData* self) {
+	QRadioData::ProgramType _ret = self->programType();
+	return static_cast<int>(_ret);
+}
+
+struct seaqt_string QRadioData_programTypeName(const QRadioData* self) {
+	QString _ret = self->programTypeName();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioData_stationName(const QRadioData* self) {
+	QString _ret = self->stationName();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioData_radioText(const QRadioData* self) {
+	QString _ret = self->radioText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QRadioData_isAlternativeFrequenciesEnabled(const QRadioData* self) {
+	return self->isAlternativeFrequenciesEnabled();
+}
+
+int QRadioData_error(const QRadioData* self) {
+	QRadioData::Error _ret = self->error();
+	return static_cast<int>(_ret);
+}
+
+struct seaqt_string QRadioData_errorString(const QRadioData* self) {
+	QString _ret = self->errorString();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QRadioData_setAlternativeFrequenciesEnabled(QRadioData* self, bool enabled) {
+	self->setAlternativeFrequenciesEnabled(enabled);
+}
+
+void QRadioData_stationIdChanged(QRadioData* self, struct seaqt_string stationId) {
+	QString stationId_QString = QString::fromUtf8(stationId.data, stationId.len);
+	self->stationIdChanged(stationId_QString);
+}
+
+void QRadioData_connect_stationIdChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct seaqt_string);
+		void operator()(QString stationId) {
+			QString stationId_ret = stationId;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray stationId_b = stationId_ret.toUtf8();
+			struct seaqt_string stationId_ms;
+			stationId_ms.len = stationId_b.length();
+			stationId_ms.data = static_cast<char*>(malloc(stationId_ms.len));
+			memcpy(stationId_ms.data, stationId_b.data(), stationId_ms.len);
+			struct seaqt_string sigval1 = stationId_ms;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::stationIdChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioData_programTypeChanged(QRadioData* self, int programType) {
+	self->programTypeChanged(static_cast<QRadioData::ProgramType>(programType));
+}
+
+void QRadioData_connect_programTypeChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QRadioData::ProgramType programType) {
+			QRadioData::ProgramType programType_ret = programType;
+			int sigval1 = static_cast<int>(programType_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QRadioData::ProgramType)>(&QRadioData::programTypeChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioData_programTypeNameChanged(QRadioData* self, struct seaqt_string programTypeName) {
+	QString programTypeName_QString = QString::fromUtf8(programTypeName.data, programTypeName.len);
+	self->programTypeNameChanged(programTypeName_QString);
+}
+
+void QRadioData_connect_programTypeNameChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct seaqt_string);
+		void operator()(QString programTypeName) {
+			QString programTypeName_ret = programTypeName;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray programTypeName_b = programTypeName_ret.toUtf8();
+			struct seaqt_string programTypeName_ms;
+			programTypeName_ms.len = programTypeName_b.length();
+			programTypeName_ms.data = static_cast<char*>(malloc(programTypeName_ms.len));
+			memcpy(programTypeName_ms.data, programTypeName_b.data(), programTypeName_ms.len);
+			struct seaqt_string sigval1 = programTypeName_ms;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::programTypeNameChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioData_stationNameChanged(QRadioData* self, struct seaqt_string stationName) {
+	QString stationName_QString = QString::fromUtf8(stationName.data, stationName.len);
+	self->stationNameChanged(stationName_QString);
+}
+
+void QRadioData_connect_stationNameChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct seaqt_string);
+		void operator()(QString stationName) {
+			QString stationName_ret = stationName;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray stationName_b = stationName_ret.toUtf8();
+			struct seaqt_string stationName_ms;
+			stationName_ms.len = stationName_b.length();
+			stationName_ms.data = static_cast<char*>(malloc(stationName_ms.len));
+			memcpy(stationName_ms.data, stationName_b.data(), stationName_ms.len);
+			struct seaqt_string sigval1 = stationName_ms;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::stationNameChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioData_radioTextChanged(QRadioData* self, struct seaqt_string radioText) {
+	QString radioText_QString = QString::fromUtf8(radioText.data, radioText.len);
+	self->radioTextChanged(radioText_QString);
+}
+
+void QRadioData_connect_radioTextChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct seaqt_string);
+		void operator()(QString radioText) {
+			QString radioText_ret = radioText;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray radioText_b = radioText_ret.toUtf8();
+			struct seaqt_string radioText_ms;
+			radioText_ms.len = radioText_b.length();
+			radioText_ms.data = static_cast<char*>(malloc(radioText_ms.len));
+			memcpy(radioText_ms.data, radioText_b.data(), radioText_ms.len);
+			struct seaqt_string sigval1 = radioText_ms;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QString)>(&QRadioData::radioTextChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioData_alternativeFrequenciesEnabledChanged(QRadioData* self, bool enabled) {
+	self->alternativeFrequenciesEnabledChanged(enabled);
+}
+
+void QRadioData_connect_alternativeFrequenciesEnabledChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool enabled) {
+			bool sigval1 = enabled;
+			callback(slot, sigval1);
+		}
+	};
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(bool)>(&QRadioData::alternativeFrequenciesEnabledChanged), self, local_caller{slot, callback, release});
+}
+
+void QRadioData_errorWithError(QRadioData* self, int error) {
+	self->error(static_cast<QRadioData::Error>(error));
+}
+
+void QRadioData_connect_errorWithError(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QRadioData::Error error) {
+			QRadioData::Error error_ret = error;
+			int sigval1 = static_cast<int>(error_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QRadioData::connect(self, static_cast<void (QRadioData::*)(QRadioData::Error)>(&QRadioData::error), self, local_caller{slot, callback, release});
+}
+
+struct seaqt_string QRadioData_tr2(const char* s, const char* c) {
+	QString _ret = QRadioData::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioData_tr3(const char* s, const char* c, int n) {
+	QString _ret = QRadioData::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioData_trUtf82(const char* s, const char* c) {
+	QString _ret = QRadioData::trUtf8(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QRadioData_trUtf83(const char* s, const char* c, int n) {
+	QString _ret = QRadioData::trUtf8(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QRadioData_staticMetaObject() { return &QRadioData::staticMetaObject; }
+void* QRadioData_vdata(VirtualQRadioData* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQRadioData>()); }
+VirtualQRadioData* vdata_QRadioData(void* vdata) { return reinterpret_cast<VirtualQRadioData*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQRadioData>()); }
+
+QMetaObject* QRadioData_virtualbase_metaObject(const VirtualQRadioData* self) {
+
+	return (QMetaObject*) self->QRadioData::metaObject();
+}
+
+void* QRadioData_virtualbase_metacast(VirtualQRadioData* self, const char* param1) {
+
+	return self->QRadioData::qt_metacast(param1);
+}
+
+int QRadioData_virtualbase_metacall(VirtualQRadioData* self, int param1, int param2, void** param3) {
+
+	return self->QRadioData::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+QMediaObject* QRadioData_virtualbase_mediaObject(const VirtualQRadioData* self) {
+
+	return self->QRadioData::mediaObject();
+}
+
+bool QRadioData_virtualbase_setMediaObject(VirtualQRadioData* self, QMediaObject* mediaObject) {
+
+	return self->QRadioData::setMediaObject(mediaObject);
+}
+
+bool QRadioData_virtualbase_event(VirtualQRadioData* self, QEvent* event) {
+
+	return self->QRadioData::event(event);
+}
+
+bool QRadioData_virtualbase_eventFilter(VirtualQRadioData* self, QObject* watched, QEvent* event) {
+
+	return self->QRadioData::eventFilter(watched, event);
+}
+
+void QRadioData_virtualbase_timerEvent(VirtualQRadioData* self, QTimerEvent* event) {
+
+	self->QRadioData::timerEvent(event);
+}
+
+void QRadioData_virtualbase_childEvent(VirtualQRadioData* self, QChildEvent* event) {
+
+	self->QRadioData::childEvent(event);
+}
+
+void QRadioData_virtualbase_customEvent(VirtualQRadioData* self, QEvent* event) {
+
+	self->QRadioData::customEvent(event);
+}
+
+void QRadioData_virtualbase_connectNotify(VirtualQRadioData* self, QMetaMethod* signal) {
+
+	self->QRadioData::connectNotify(*signal);
+}
+
+void QRadioData_virtualbase_disconnectNotify(VirtualQRadioData* self, QMetaMethod* signal) {
+
+	self->QRadioData::disconnectNotify(*signal);
+}
+
+QObject* QRadioData_protectedbase_sender(const VirtualQRadioData* self) {
+	return self->sender();
+}
+
+int QRadioData_protectedbase_senderSignalIndex(const VirtualQRadioData* self) {
+	return self->senderSignalIndex();
+}
+
+int QRadioData_protectedbase_receivers(const VirtualQRadioData* self, const char* signal) {
+	return self->receivers(signal);
+}
+
+bool QRadioData_protectedbase_isSignalConnected(const VirtualQRadioData* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
+}
+
+void QRadioData_delete(QRadioData* self) {
+	delete self;
+}
+

@@ -1,0 +1,2 @@
+import ./QtSql/gen_qsqldriverplugin
+export gen_qsqldriverplugin

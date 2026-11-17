@@ -1,0 +1,2 @@
+import ./QtGui/gen_qaccessibleobject
+export gen_qaccessibleobject

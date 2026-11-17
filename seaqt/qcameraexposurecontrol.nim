@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcameraexposurecontrol
+export gen_qcameraexposurecontrol

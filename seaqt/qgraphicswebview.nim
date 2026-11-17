@@ -1,0 +1,2 @@
+import ./QtWebKitWidgets/gen_qgraphicswebview
+export gen_qgraphicswebview

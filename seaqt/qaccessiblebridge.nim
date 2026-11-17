@@ -1,0 +1,2 @@
+import ./QtGui/gen_qaccessiblebridge
+export gen_qaccessiblebridge

@@ -1,0 +1,2 @@
+import ./QtGui/gen_qsessionmanager
+export gen_qsessionmanager

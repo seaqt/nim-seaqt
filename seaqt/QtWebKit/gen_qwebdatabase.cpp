@@ -1,0 +1,85 @@
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QWebDatabase>
+#include <QWebSecurityOrigin>
+#include <qwebdatabase.h>
+#include "gen_qwebdatabase.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QWebDatabase* QWebDatabase_new(QWebDatabase* other) {
+	return new (std::nothrow) QWebDatabase(*other);
+}
+
+void QWebDatabase_operatorAssign(QWebDatabase* self, QWebDatabase* other) {
+	self->operator=(*other);
+}
+
+struct seaqt_string QWebDatabase_name(const QWebDatabase* self) {
+	QString _ret = self->name();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebDatabase_displayName(const QWebDatabase* self) {
+	QString _ret = self->displayName();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+long long QWebDatabase_expectedSize(const QWebDatabase* self) {
+	qint64 _ret = self->expectedSize();
+	return static_cast<long long>(_ret);
+}
+
+long long QWebDatabase_size(const QWebDatabase* self) {
+	qint64 _ret = self->size();
+	return static_cast<long long>(_ret);
+}
+
+struct seaqt_string QWebDatabase_fileName(const QWebDatabase* self) {
+	QString _ret = self->fileName();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QWebSecurityOrigin* QWebDatabase_origin(const QWebDatabase* self) {
+	return new QWebSecurityOrigin(self->origin());
+}
+
+void QWebDatabase_removeDatabase(QWebDatabase* param1) {
+	QWebDatabase::removeDatabase(*param1);
+}
+
+void QWebDatabase_removeAllDatabases() {
+	QWebDatabase::removeAllDatabases();
+}
+
+void QWebDatabase_delete(QWebDatabase* self) {
+	delete self;
+}
+

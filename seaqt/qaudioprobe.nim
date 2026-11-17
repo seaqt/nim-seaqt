@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudioprobe
+export gen_qaudioprobe

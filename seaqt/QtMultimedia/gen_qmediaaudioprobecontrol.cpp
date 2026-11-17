@@ -1,0 +1,142 @@
+#include <QAudioBuffer>
+#include <QMediaAudioProbeControl>
+#include <QMediaControl>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qmediaaudioprobecontrol.h>
+#include "gen_qmediaaudioprobecontrol.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+void QMediaAudioProbeControl_virtbase(QMediaAudioProbeControl* src, QMediaControl** outptr_QMediaControl) {
+	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
+}
+
+QMetaObject* QMediaAudioProbeControl_metaObject(const QMediaAudioProbeControl* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QMediaAudioProbeControl_metacast(QMediaAudioProbeControl* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QMediaAudioProbeControl_metacall(QMediaAudioProbeControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QMediaAudioProbeControl_tr(const char* s) {
+	QString _ret = QMediaAudioProbeControl::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QMediaAudioProbeControl_trUtf8(const char* s) {
+	QString _ret = QMediaAudioProbeControl::trUtf8(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QMediaAudioProbeControl_audioBufferProbed(QMediaAudioProbeControl* self, QAudioBuffer* buffer) {
+	self->audioBufferProbed(*buffer);
+}
+
+void QMediaAudioProbeControl_connect_audioBufferProbed(QMediaAudioProbeControl* self, intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAudioBuffer*);
+		void operator()(const QAudioBuffer& buffer) {
+			const QAudioBuffer& buffer_ret = buffer;
+			// Cast returned reference into pointer
+			QAudioBuffer* sigval1 = const_cast<QAudioBuffer*>(&buffer_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)(const QAudioBuffer&)>(&QMediaAudioProbeControl::audioBufferProbed), self, local_caller{slot, callback, release});
+}
+
+void QMediaAudioProbeControl_flush(QMediaAudioProbeControl* self) {
+	self->flush();
+}
+
+void QMediaAudioProbeControl_connect_flush(QMediaAudioProbeControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)()>(&QMediaAudioProbeControl::flush), self, local_caller{slot, callback, release});
+}
+
+struct seaqt_string QMediaAudioProbeControl_tr2(const char* s, const char* c) {
+	QString _ret = QMediaAudioProbeControl::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QMediaAudioProbeControl_tr3(const char* s, const char* c, int n) {
+	QString _ret = QMediaAudioProbeControl::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QMediaAudioProbeControl_trUtf82(const char* s, const char* c) {
+	QString _ret = QMediaAudioProbeControl::trUtf8(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QMediaAudioProbeControl_trUtf83(const char* s, const char* c, int n) {
+	QString _ret = QMediaAudioProbeControl::trUtf8(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QMediaAudioProbeControl_staticMetaObject() { return &QMediaAudioProbeControl::staticMetaObject; }
+void QMediaAudioProbeControl_delete(QMediaAudioProbeControl* self) {
+	delete self;
+}
+

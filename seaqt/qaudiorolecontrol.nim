@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudiorolecontrol
+export gen_qaudiorolecontrol

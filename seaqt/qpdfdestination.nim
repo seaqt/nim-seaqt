@@ -1,0 +1,2 @@
+import ./QtPdf/gen_qpdfdestination
+export gen_qpdfdestination

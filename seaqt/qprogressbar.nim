@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qprogressbar
+export gen_qprogressbar

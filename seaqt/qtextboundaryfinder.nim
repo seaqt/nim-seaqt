@@ -1,0 +1,2 @@
+import ./QtCore/gen_qtextboundaryfinder
+export gen_qtextboundaryfinder

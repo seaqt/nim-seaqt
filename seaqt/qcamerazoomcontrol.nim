@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcamerazoomcontrol
+export gen_qcamerazoomcontrol
