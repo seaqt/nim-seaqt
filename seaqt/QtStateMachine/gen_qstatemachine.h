@@ -142,7 +142,9 @@ int QStateMachine_protectedbase_senderSignalIndex(const VirtualQStateMachine* se
 int QStateMachine_protectedbase_receivers(const VirtualQStateMachine* self, const char* signal);
 bool QStateMachine_protectedbase_isSignalConnected(const VirtualQStateMachine* self, QMetaMethod* signal);
 
-const QMetaObject* QStateMachine_staticMetaObject();
+void QStateMachine_connect_started(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QStateMachine_connect_stopped(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QStateMachine_delete(QStateMachine* self);
 
 typedef struct VirtualQStateMachineSignalEvent VirtualQStateMachineSignalEvent;

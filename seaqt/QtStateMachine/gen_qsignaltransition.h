@@ -94,7 +94,9 @@ int QSignalTransition_protectedbase_senderSignalIndex(const VirtualQSignalTransi
 int QSignalTransition_protectedbase_receivers(const VirtualQSignalTransition* self, const char* signal);
 bool QSignalTransition_protectedbase_isSignalConnected(const VirtualQSignalTransition* self, QMetaMethod* signal);
 
-const QMetaObject* QSignalTransition_staticMetaObject();
+void QSignalTransition_connect_senderObjectChanged(QSignalTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QSignalTransition_connect_signalChanged(QSignalTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QSignalTransition_delete(QSignalTransition* self);
 
 #ifdef __cplusplus

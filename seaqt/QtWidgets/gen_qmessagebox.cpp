@@ -1166,15 +1166,10 @@ void QMessageBox_buttonClicked(QMessageBox* self, QAbstractButton* button) {
 }
 
 void QMessageBox_connect_buttonClicked(QMessageBox* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAbstractButton*);
-		void operator()(QAbstractButton* button) {
+	QMessageBox::connect(self, static_cast<void (QMessageBox::*)(QAbstractButton*)>(&QMessageBox::buttonClicked), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractButton* button) {
 			QAbstractButton* sigval1 = button;
-			callback(slot, sigval1);
-		}
-	};
-	QMessageBox::connect(self, static_cast<void (QMessageBox::*)(QAbstractButton*)>(&QMessageBox::buttonClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QMessageBox_tr_s_c(const char* s, const char* c) {

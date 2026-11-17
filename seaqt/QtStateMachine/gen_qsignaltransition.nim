@@ -66,6 +66,8 @@ proc fcQSignalTransition_signal(self: pointer): struct_seaqt_string {.importc: "
 proc fcQSignalTransition_setSignal(self: pointer, signal: struct_seaqt_string): void {.importc: "QSignalTransition_setSignal".}
 proc fcQSignalTransition_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSignalTransition_tr_s_c".}
 proc fcQSignalTransition_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSignalTransition_tr_s_c_n".}
+proc fcQSignalTransition_connect_senderObjectChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalTransition_connect_senderObjectChanged".}
+proc fcQSignalTransition_connect_signalChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSignalTransition_connect_signalChanged".}
 proc fcQSignalTransition_vdata(self: pointer): ptr pointer {.importc: "QSignalTransition_vdata".}
 proc fvdata_cQSignalTransition(self: pointer): pointer {.importc: "vdata_QSignalTransition".}
 
@@ -146,6 +148,36 @@ proc tr*(_: type gen_qsignaltransition_types.QSignalTransition, s: cstring, c: c
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QSignalTransitionsenderObjectChangedSlot* = proc()
+proc fcQSignalTransition_slot_callback_senderObjectChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QSignalTransitionsenderObjectChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQSignalTransition_slot_callback_senderObjectChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSignalTransitionsenderObjectChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onSenderObjectChanged*(self: gen_qsignaltransition_types.QSignalTransition, slot: QSignalTransitionsenderObjectChangedSlot) =
+  var tmp = new QSignalTransitionsenderObjectChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSignalTransition_connect_senderObjectChanged(self.h, cast[int](addr tmp[]), fcQSignalTransition_slot_callback_senderObjectChanged, fcQSignalTransition_slot_callback_senderObjectChanged_release)
+
+type QSignalTransitionsignalChangedSlot* = proc()
+proc fcQSignalTransition_slot_callback_signalChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QSignalTransitionsignalChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQSignalTransition_slot_callback_signalChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSignalTransitionsignalChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onSignalChanged*(self: gen_qsignaltransition_types.QSignalTransition, slot: QSignalTransitionsignalChangedSlot) =
+  var tmp = new QSignalTransitionsignalChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSignalTransition_connect_signalChanged(self.h, cast[int](addr tmp[]), fcQSignalTransition_slot_callback_signalChanged, fcQSignalTransition_slot_callback_signalChanged_release)
 
 type QSignalTransitionmetaObjectProc* = proc(self: QSignalTransition): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSignalTransitionmetacastProc* = proc(self: QSignalTransition, param1: cstring): pointer {.raises: [], gcsafe.}

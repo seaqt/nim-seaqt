@@ -782,10 +782,7 @@ void QStatusBar_messageChanged(QStatusBar* self, struct seaqt_string text) {
 }
 
 void QStatusBar_connect_messageChanged(QStatusBar* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& text) {
+	QStatusBar::connect(self, static_cast<void (QStatusBar::*)(const QString&)>(&QStatusBar::messageChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& text) {
 			const QString text_ret = text;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray text_b = text_ret.toUtf8();
@@ -794,10 +791,8 @@ void QStatusBar_connect_messageChanged(QStatusBar* self, intptr_t slot, void (*c
 			text_ms.data = static_cast<char*>(malloc(text_ms.len));
 			memcpy(text_ms.data, text_b.data(), text_ms.len);
 			struct seaqt_string sigval1 = text_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QStatusBar::connect(self, static_cast<void (QStatusBar::*)(const QString&)>(&QStatusBar::messageChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QStatusBar_tr_s_c(const char* s, const char* c) {

@@ -916,15 +916,10 @@ void QMdiArea_subWindowActivated(QMdiArea* self, QMdiSubWindow* param1) {
 }
 
 void QMdiArea_connect_subWindowActivated(QMdiArea* self, intptr_t slot, void (*callback)(intptr_t, QMdiSubWindow*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QMdiSubWindow*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QMdiSubWindow*);
-		void operator()(QMdiSubWindow* param1) {
+	QMdiArea::connect(self, static_cast<void (QMdiArea::*)(QMdiSubWindow*)>(&QMdiArea::subWindowActivated), self, [callback, release = seaqt::release_callback{slot,release}](QMdiSubWindow* param1) {
 			QMdiSubWindow* sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QMdiArea::connect(self, static_cast<void (QMdiArea::*)(QMdiSubWindow*)>(&QMdiArea::subWindowActivated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMdiArea_setActiveSubWindow(QMdiArea* self, QMdiSubWindow* window) {

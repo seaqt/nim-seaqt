@@ -630,14 +630,9 @@ void QIODevice_readyRead(QIODevice* self) {
 }
 
 void QIODevice_connect_readyRead(QIODevice* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QIODevice::connect(self, static_cast<void (QIODevice::*)()>(&QIODevice::readyRead), self, local_caller{slot, callback, release});
+	QIODevice::connect(self, static_cast<void (QIODevice::*)()>(&QIODevice::readyRead), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QIODevice_channelReadyRead(QIODevice* self, int channel) {
@@ -645,15 +640,10 @@ void QIODevice_channelReadyRead(QIODevice* self, int channel) {
 }
 
 void QIODevice_connect_channelReadyRead(QIODevice* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int channel) {
+	QIODevice::connect(self, static_cast<void (QIODevice::*)(int)>(&QIODevice::channelReadyRead), self, [callback, release = seaqt::release_callback{slot,release}](int channel) {
 			int sigval1 = channel;
-			callback(slot, sigval1);
-		}
-	};
-	QIODevice::connect(self, static_cast<void (QIODevice::*)(int)>(&QIODevice::channelReadyRead), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QIODevice_bytesWritten(QIODevice* self, long long bytes) {
@@ -661,16 +651,11 @@ void QIODevice_bytesWritten(QIODevice* self, long long bytes) {
 }
 
 void QIODevice_connect_bytesWritten(QIODevice* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, long long);
-		void operator()(qint64 bytes) {
+	QIODevice::connect(self, static_cast<void (QIODevice::*)(qint64)>(&QIODevice::bytesWritten), self, [callback, release = seaqt::release_callback{slot,release}](qint64 bytes) {
 			qint64 bytes_ret = bytes;
 			long long sigval1 = static_cast<long long>(bytes_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QIODevice::connect(self, static_cast<void (QIODevice::*)(qint64)>(&QIODevice::bytesWritten), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QIODevice_channelBytesWritten(QIODevice* self, int channel, long long bytes) {
@@ -678,17 +663,12 @@ void QIODevice_channelBytesWritten(QIODevice* self, int channel, long long bytes
 }
 
 void QIODevice_connect_channelBytesWritten(QIODevice* self, intptr_t slot, void (*callback)(intptr_t, int, long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, long long);
-		void operator()(int channel, qint64 bytes) {
+	QIODevice::connect(self, static_cast<void (QIODevice::*)(int, qint64)>(&QIODevice::channelBytesWritten), self, [callback, release = seaqt::release_callback{slot,release}](int channel, qint64 bytes) {
 			int sigval1 = channel;
 			qint64 bytes_ret = bytes;
 			long long sigval2 = static_cast<long long>(bytes_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QIODevice::connect(self, static_cast<void (QIODevice::*)(int, qint64)>(&QIODevice::channelBytesWritten), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QIODevice_aboutToClose(QIODevice* self) {
@@ -696,14 +676,9 @@ void QIODevice_aboutToClose(QIODevice* self) {
 }
 
 void QIODevice_connect_aboutToClose(QIODevice* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QIODevice::connect(self, static_cast<void (QIODevice::*)()>(&QIODevice::aboutToClose), self, local_caller{slot, callback, release});
+	QIODevice::connect(self, static_cast<void (QIODevice::*)()>(&QIODevice::aboutToClose), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QIODevice_readChannelFinished(QIODevice* self) {
@@ -711,14 +686,9 @@ void QIODevice_readChannelFinished(QIODevice* self) {
 }
 
 void QIODevice_connect_readChannelFinished(QIODevice* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QIODevice::connect(self, static_cast<void (QIODevice::*)()>(&QIODevice::readChannelFinished), self, local_caller{slot, callback, release});
+	QIODevice::connect(self, static_cast<void (QIODevice::*)()>(&QIODevice::readChannelFinished), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QIODevice_tr_s_c(const char* s, const char* c) {

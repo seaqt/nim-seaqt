@@ -127,7 +127,6 @@ int QGeoPositionInfoSource_protectedbase_senderSignalIndex(const VirtualQGeoPosi
 int QGeoPositionInfoSource_protectedbase_receivers(const VirtualQGeoPositionInfoSource* self, const char* signal);
 bool QGeoPositionInfoSource_protectedbase_isSignalConnected(const VirtualQGeoPositionInfoSource* self, QMetaMethod* signal);
 
-const QMetaObject* QGeoPositionInfoSource_staticMetaObject();
 void QGeoPositionInfoSource_delete(QGeoPositionInfoSource* self);
 
 #ifdef __cplusplus

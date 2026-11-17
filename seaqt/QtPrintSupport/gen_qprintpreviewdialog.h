@@ -238,7 +238,6 @@ int QPrintPreviewDialog_protectedbase_senderSignalIndex(const VirtualQPrintPrevi
 int QPrintPreviewDialog_protectedbase_receivers(const VirtualQPrintPreviewDialog* self, const char* signal);
 bool QPrintPreviewDialog_protectedbase_isSignalConnected(const VirtualQPrintPreviewDialog* self, QMetaMethod* signal);
 
-const QMetaObject* QPrintPreviewDialog_staticMetaObject();
 void QPrintPreviewDialog_delete(QPrintPreviewDialog* self);
 
 #ifdef __cplusplus

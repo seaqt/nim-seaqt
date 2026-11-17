@@ -234,7 +234,6 @@ int QDesignerPropertyEditorInterface_protectedbase_senderSignalIndex(const Virtu
 int QDesignerPropertyEditorInterface_protectedbase_receivers(const VirtualQDesignerPropertyEditorInterface* self, const char* signal);
 bool QDesignerPropertyEditorInterface_protectedbase_isSignalConnected(const VirtualQDesignerPropertyEditorInterface* self, QMetaMethod* signal);
 
-const QMetaObject* QDesignerPropertyEditorInterface_staticMetaObject();
 void QDesignerPropertyEditorInterface_delete(QDesignerPropertyEditorInterface* self);
 
 #ifdef __cplusplus

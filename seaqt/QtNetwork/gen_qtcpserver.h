@@ -119,7 +119,8 @@ int QTcpServer_protectedbase_senderSignalIndex(const VirtualQTcpServer* self);
 int QTcpServer_protectedbase_receivers(const VirtualQTcpServer* self, const char* signal);
 bool QTcpServer_protectedbase_isSignalConnected(const VirtualQTcpServer* self, QMetaMethod* signal);
 
-const QMetaObject* QTcpServer_staticMetaObject();
+void QTcpServer_connect_pendingConnectionAvailable(QTcpServer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QTcpServer_delete(QTcpServer* self);
 
 #ifdef __cplusplus

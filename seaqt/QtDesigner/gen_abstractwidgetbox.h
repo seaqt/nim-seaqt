@@ -269,7 +269,6 @@ int QDesignerWidgetBoxInterface_protectedbase_senderSignalIndex(const VirtualQDe
 int QDesignerWidgetBoxInterface_protectedbase_receivers(const VirtualQDesignerWidgetBoxInterface* self, const char* signal);
 bool QDesignerWidgetBoxInterface_protectedbase_isSignalConnected(const VirtualQDesignerWidgetBoxInterface* self, QMetaMethod* signal);
 
-const QMetaObject* QDesignerWidgetBoxInterface_staticMetaObject();
 void QDesignerWidgetBoxInterface_delete(QDesignerWidgetBoxInterface* self);
 
 QDesignerWidgetBoxInterface__Widget* QDesignerWidgetBoxInterface__Widget_new();

@@ -414,15 +414,10 @@ void QStateMachine_runningChanged(QStateMachine* self, bool running) {
 }
 
 void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool running) {
+	QStateMachine::connect(self, static_cast<void (QStateMachine::*)(bool)>(&QStateMachine::runningChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool running) {
 			bool sigval1 = running;
-			callback(slot, sigval1);
-		}
-	};
-	QStateMachine::connect(self, static_cast<void (QStateMachine::*)(bool)>(&QStateMachine::runningChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QStateMachine_tr_s_c(const char* s, const char* c) {
@@ -449,6 +444,18 @@ struct seaqt_string QStateMachine_tr_s_c_n(const char* s, const char* c, int n) 
 
 void QStateMachine_postEvent_event_priority(QStateMachine* self, QEvent* event, int priority) {
 	self->postEvent(event, static_cast<QStateMachine::EventPriority>(priority));
+}
+
+void QStateMachine_connect_started(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QStateMachine::connect(self, &QStateMachine::started, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QStateMachine_connect_stopped(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QStateMachine::connect(self, &QStateMachine::stopped, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
 }
 
 const QMetaObject* QStateMachine_staticMetaObject() { return &QStateMachine::staticMetaObject; }

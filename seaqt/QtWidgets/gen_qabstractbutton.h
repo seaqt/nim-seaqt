@@ -276,7 +276,6 @@ int QAbstractButton_protectedbase_senderSignalIndex(const VirtualQAbstractButton
 int QAbstractButton_protectedbase_receivers(const VirtualQAbstractButton* self, const char* signal);
 bool QAbstractButton_protectedbase_isSignalConnected(const VirtualQAbstractButton* self, QMetaMethod* signal);
 
-const QMetaObject* QAbstractButton_staticMetaObject();
 void QAbstractButton_delete(QAbstractButton* self);
 
 #ifdef __cplusplus

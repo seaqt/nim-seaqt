@@ -247,7 +247,6 @@ int QGroupBox_protectedbase_senderSignalIndex(const VirtualQGroupBox* self);
 int QGroupBox_protectedbase_receivers(const VirtualQGroupBox* self, const char* signal);
 bool QGroupBox_protectedbase_isSignalConnected(const VirtualQGroupBox* self, QMetaMethod* signal);
 
-const QMetaObject* QGroupBox_staticMetaObject();
 void QGroupBox_delete(QGroupBox* self);
 
 #ifdef __cplusplus

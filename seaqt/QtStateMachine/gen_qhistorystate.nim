@@ -75,6 +75,9 @@ proc fcQHistoryState_historyType(self: pointer): cint {.importc: "QHistoryState_
 proc fcQHistoryState_setHistoryType(self: pointer, typeVal: cint): void {.importc: "QHistoryState_setHistoryType".}
 proc fcQHistoryState_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QHistoryState_tr_s_c".}
 proc fcQHistoryState_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QHistoryState_tr_s_c_n".}
+proc fcQHistoryState_connect_defaultTransitionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QHistoryState_connect_defaultTransitionChanged".}
+proc fcQHistoryState_connect_defaultStateChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QHistoryState_connect_defaultStateChanged".}
+proc fcQHistoryState_connect_historyTypeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QHistoryState_connect_historyTypeChanged".}
 proc fcQHistoryState_vdata(self: pointer): ptr pointer {.importc: "QHistoryState_vdata".}
 proc fvdata_cQHistoryState(self: pointer): pointer {.importc: "vdata_QHistoryState".}
 
@@ -158,6 +161,51 @@ proc tr*(_: type gen_qhistorystate_types.QHistoryState, s: cstring, c: cstring, 
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QHistoryStatedefaultTransitionChangedSlot* = proc()
+proc fcQHistoryState_slot_callback_defaultTransitionChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QHistoryStatedefaultTransitionChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQHistoryState_slot_callback_defaultTransitionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QHistoryStatedefaultTransitionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onDefaultTransitionChanged*(self: gen_qhistorystate_types.QHistoryState, slot: QHistoryStatedefaultTransitionChangedSlot) =
+  var tmp = new QHistoryStatedefaultTransitionChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHistoryState_connect_defaultTransitionChanged(self.h, cast[int](addr tmp[]), fcQHistoryState_slot_callback_defaultTransitionChanged, fcQHistoryState_slot_callback_defaultTransitionChanged_release)
+
+type QHistoryStatedefaultStateChangedSlot* = proc()
+proc fcQHistoryState_slot_callback_defaultStateChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QHistoryStatedefaultStateChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQHistoryState_slot_callback_defaultStateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QHistoryStatedefaultStateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onDefaultStateChanged*(self: gen_qhistorystate_types.QHistoryState, slot: QHistoryStatedefaultStateChangedSlot) =
+  var tmp = new QHistoryStatedefaultStateChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHistoryState_connect_defaultStateChanged(self.h, cast[int](addr tmp[]), fcQHistoryState_slot_callback_defaultStateChanged, fcQHistoryState_slot_callback_defaultStateChanged_release)
+
+type QHistoryStatehistoryTypeChangedSlot* = proc()
+proc fcQHistoryState_slot_callback_historyTypeChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QHistoryStatehistoryTypeChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQHistoryState_slot_callback_historyTypeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QHistoryStatehistoryTypeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onHistoryTypeChanged*(self: gen_qhistorystate_types.QHistoryState, slot: QHistoryStatehistoryTypeChangedSlot) =
+  var tmp = new QHistoryStatehistoryTypeChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHistoryState_connect_historyTypeChanged(self.h, cast[int](addr tmp[]), fcQHistoryState_slot_callback_historyTypeChanged, fcQHistoryState_slot_callback_historyTypeChanged_release)
 
 type QHistoryStatemetaObjectProc* = proc(self: QHistoryState): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QHistoryStatemetacastProc* = proc(self: QHistoryState, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -144,7 +144,6 @@ int QSpatialSound_protectedbase_senderSignalIndex(const VirtualQSpatialSound* se
 int QSpatialSound_protectedbase_receivers(const VirtualQSpatialSound* self, const char* signal);
 bool QSpatialSound_protectedbase_isSignalConnected(const VirtualQSpatialSound* self, QMetaMethod* signal);
 
-const QMetaObject* QSpatialSound_staticMetaObject();
 void QSpatialSound_delete(QSpatialSound* self);
 
 #ifdef __cplusplus

@@ -826,15 +826,10 @@ void QPrintPreviewDialog_paintRequested(QPrintPreviewDialog* self, QPrinter* pri
 }
 
 void QPrintPreviewDialog_connect_paintRequested(QPrintPreviewDialog* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPrinter*);
-		void operator()(QPrinter* printer) {
+	QPrintPreviewDialog::connect(self, static_cast<void (QPrintPreviewDialog::*)(QPrinter*)>(&QPrintPreviewDialog::paintRequested), self, [callback, release = seaqt::release_callback{slot,release}](QPrinter* printer) {
 			QPrinter* sigval1 = printer;
-			callback(slot, sigval1);
-		}
-	};
-	QPrintPreviewDialog::connect(self, static_cast<void (QPrintPreviewDialog::*)(QPrinter*)>(&QPrintPreviewDialog::paintRequested), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QPrintPreviewDialog_tr_s_c(const char* s, const char* c) {

@@ -140,7 +140,6 @@ int QMovie_protectedbase_senderSignalIndex(const VirtualQMovie* self);
 int QMovie_protectedbase_receivers(const VirtualQMovie* self, const char* signal);
 bool QMovie_protectedbase_isSignalConnected(const VirtualQMovie* self, QMetaMethod* signal);
 
-const QMetaObject* QMovie_staticMetaObject();
 void QMovie_delete(QMovie* self);
 
 #ifdef __cplusplus

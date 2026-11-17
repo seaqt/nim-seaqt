@@ -34,7 +34,6 @@ struct seaqt_string QStandardPaths_locate_type_fileName_options(int type, struct
 struct seaqt_array /* of struct seaqt_string */  QStandardPaths_locateAll_type_fileName_options(int type, struct seaqt_string fileName, int options);
 struct seaqt_string QStandardPaths_findExecutable_executableName_paths(struct seaqt_string executableName, struct seaqt_array /* of struct seaqt_string */  paths);
 
-const QMetaObject* QStandardPaths_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

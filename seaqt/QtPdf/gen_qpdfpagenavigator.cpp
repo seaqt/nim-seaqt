@@ -257,15 +257,10 @@ void QPdfPageNavigator_currentPageChanged(QPdfPageNavigator* self, int page) {
 }
 
 void QPdfPageNavigator_connect_currentPageChanged(QPdfPageNavigator* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int page) {
+	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(int)>(&QPdfPageNavigator::currentPageChanged), self, [callback, release = seaqt::release_callback{slot,release}](int page) {
 			int sigval1 = page;
-			callback(slot, sigval1);
-		}
-	};
-	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(int)>(&QPdfPageNavigator::currentPageChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfPageNavigator_currentLocationChanged(QPdfPageNavigator* self, QPointF* location) {
@@ -273,15 +268,10 @@ void QPdfPageNavigator_currentLocationChanged(QPdfPageNavigator* self, QPointF* 
 }
 
 void QPdfPageNavigator_connect_currentLocationChanged(QPdfPageNavigator* self, intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPointF*);
-		void operator()(QPointF location) {
+	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(QPointF)>(&QPdfPageNavigator::currentLocationChanged), self, [callback, release = seaqt::release_callback{slot,release}](QPointF location) {
 			QPointF* sigval1 = new QPointF(location);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(QPointF)>(&QPdfPageNavigator::currentLocationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfPageNavigator_currentZoomChanged(QPdfPageNavigator* self, double zoom) {
@@ -289,16 +279,11 @@ void QPdfPageNavigator_currentZoomChanged(QPdfPageNavigator* self, double zoom) 
 }
 
 void QPdfPageNavigator_connect_currentZoomChanged(QPdfPageNavigator* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal zoom) {
+	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(qreal)>(&QPdfPageNavigator::currentZoomChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal zoom) {
 			qreal zoom_ret = zoom;
 			double sigval1 = static_cast<double>(zoom_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(qreal)>(&QPdfPageNavigator::currentZoomChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfPageNavigator_backAvailableChanged(QPdfPageNavigator* self, bool available) {
@@ -306,15 +291,10 @@ void QPdfPageNavigator_backAvailableChanged(QPdfPageNavigator* self, bool availa
 }
 
 void QPdfPageNavigator_connect_backAvailableChanged(QPdfPageNavigator* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool available) {
+	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(bool)>(&QPdfPageNavigator::backAvailableChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool available) {
 			bool sigval1 = available;
-			callback(slot, sigval1);
-		}
-	};
-	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(bool)>(&QPdfPageNavigator::backAvailableChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfPageNavigator_forwardAvailableChanged(QPdfPageNavigator* self, bool available) {
@@ -322,15 +302,10 @@ void QPdfPageNavigator_forwardAvailableChanged(QPdfPageNavigator* self, bool ava
 }
 
 void QPdfPageNavigator_connect_forwardAvailableChanged(QPdfPageNavigator* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool available) {
+	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(bool)>(&QPdfPageNavigator::forwardAvailableChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool available) {
 			bool sigval1 = available;
-			callback(slot, sigval1);
-		}
-	};
-	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(bool)>(&QPdfPageNavigator::forwardAvailableChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfPageNavigator_jumped(QPdfPageNavigator* self, QPdfLink* current) {
@@ -338,15 +313,10 @@ void QPdfPageNavigator_jumped(QPdfPageNavigator* self, QPdfLink* current) {
 }
 
 void QPdfPageNavigator_connect_jumped(QPdfPageNavigator* self, intptr_t slot, void (*callback)(intptr_t, QPdfLink*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPdfLink*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPdfLink*);
-		void operator()(QPdfLink current) {
+	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(QPdfLink)>(&QPdfPageNavigator::jumped), self, [callback, release = seaqt::release_callback{slot,release}](QPdfLink current) {
 			QPdfLink* sigval1 = new QPdfLink(current);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfPageNavigator::connect(self, static_cast<void (QPdfPageNavigator::*)(QPdfLink)>(&QPdfPageNavigator::jumped), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QPdfPageNavigator_tr_s_c(const char* s, const char* c) {

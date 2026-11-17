@@ -58,7 +58,6 @@ void QNetworkProxyQuery_setProtocolTag(QNetworkProxyQuery* self, struct seaqt_st
 QUrl* QNetworkProxyQuery_url(const QNetworkProxyQuery* self);
 void QNetworkProxyQuery_setUrl(QNetworkProxyQuery* self, QUrl* url);
 
-const QMetaObject* QNetworkProxyQuery_staticMetaObject();
 void QNetworkProxyQuery_delete(QNetworkProxyQuery* self);
 
 QNetworkProxy* QNetworkProxy_new();

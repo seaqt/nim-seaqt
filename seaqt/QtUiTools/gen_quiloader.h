@@ -115,7 +115,6 @@ int QUiLoader_protectedbase_senderSignalIndex(const VirtualQUiLoader* self);
 int QUiLoader_protectedbase_receivers(const VirtualQUiLoader* self, const char* signal);
 bool QUiLoader_protectedbase_isSignalConnected(const VirtualQUiLoader* self, QMetaMethod* signal);
 
-const QMetaObject* QUiLoader_staticMetaObject();
 void QUiLoader_delete(QUiLoader* self);
 
 #ifdef __cplusplus

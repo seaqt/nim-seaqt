@@ -546,7 +546,6 @@ int QTableWidget_protectedbase_senderSignalIndex(const VirtualQTableWidget* self
 int QTableWidget_protectedbase_receivers(const VirtualQTableWidget* self, const char* signal);
 bool QTableWidget_protectedbase_isSignalConnected(const VirtualQTableWidget* self, QMetaMethod* signal);
 
-const QMetaObject* QTableWidget_staticMetaObject();
 void QTableWidget_delete(QTableWidget* self);
 
 #ifdef __cplusplus

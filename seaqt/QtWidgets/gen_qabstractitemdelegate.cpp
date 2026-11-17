@@ -437,15 +437,10 @@ void QAbstractItemDelegate_commitData(QAbstractItemDelegate* self, QWidget* edit
 }
 
 void QAbstractItemDelegate_connect_commitData(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QWidget*);
-		void operator()(QWidget* editor) {
+	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*)>(&QAbstractItemDelegate::commitData), self, [callback, release = seaqt::release_callback{slot,release}](QWidget* editor) {
 			QWidget* sigval1 = editor;
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*)>(&QAbstractItemDelegate::commitData), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemDelegate_closeEditor_editor(QAbstractItemDelegate* self, QWidget* editor) {
@@ -453,15 +448,10 @@ void QAbstractItemDelegate_closeEditor_editor(QAbstractItemDelegate* self, QWidg
 }
 
 void QAbstractItemDelegate_connect_closeEditor_editor(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QWidget*);
-		void operator()(QWidget* editor) {
+	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, [callback, release = seaqt::release_callback{slot,release}](QWidget* editor) {
 			QWidget* sigval1 = editor;
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractItemDelegate_sizeHintChanged(QAbstractItemDelegate* self, QModelIndex* param1) {
@@ -469,17 +459,12 @@ void QAbstractItemDelegate_sizeHintChanged(QAbstractItemDelegate* self, QModelIn
 }
 
 void QAbstractItemDelegate_connect_sizeHintChanged(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& param1) {
+	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(const QModelIndex&)>(&QAbstractItemDelegate::sizeHintChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& param1) {
 			const QModelIndex& param1_ret = param1;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(const QModelIndex&)>(&QAbstractItemDelegate::sizeHintChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QAbstractItemDelegate_tr_s_c(const char* s, const char* c) {
@@ -509,17 +494,12 @@ void QAbstractItemDelegate_closeEditor_editor_hint(QAbstractItemDelegate* self, 
 }
 
 void QAbstractItemDelegate_connect_closeEditor_editor_hint(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QWidget*, int);
-		void operator()(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) {
+	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, [callback, release = seaqt::release_callback{slot,release}](QWidget* editor, QAbstractItemDelegate::EndEditHint hint) {
 			QWidget* sigval1 = editor;
 			QAbstractItemDelegate::EndEditHint hint_ret = hint;
 			int sigval2 = static_cast<int>(hint_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 const QMetaObject* QAbstractItemDelegate_staticMetaObject() { return &QAbstractItemDelegate::staticMetaObject; }

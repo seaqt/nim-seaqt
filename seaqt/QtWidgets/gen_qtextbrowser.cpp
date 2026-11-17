@@ -1047,15 +1047,10 @@ void QTextBrowser_backwardAvailable(QTextBrowser* self, bool param1) {
 }
 
 void QTextBrowser_connect_backwardAvailable(QTextBrowser* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool param1) {
+	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(bool)>(&QTextBrowser::backwardAvailable), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
 			bool sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(bool)>(&QTextBrowser::backwardAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTextBrowser_forwardAvailable(QTextBrowser* self, bool param1) {
@@ -1063,15 +1058,10 @@ void QTextBrowser_forwardAvailable(QTextBrowser* self, bool param1) {
 }
 
 void QTextBrowser_connect_forwardAvailable(QTextBrowser* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool param1) {
+	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(bool)>(&QTextBrowser::forwardAvailable), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
 			bool sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(bool)>(&QTextBrowser::forwardAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTextBrowser_historyChanged(QTextBrowser* self) {
@@ -1079,14 +1069,9 @@ void QTextBrowser_historyChanged(QTextBrowser* self) {
 }
 
 void QTextBrowser_connect_historyChanged(QTextBrowser* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)()>(&QTextBrowser::historyChanged), self, local_caller{slot, callback, release});
+	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)()>(&QTextBrowser::historyChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QTextBrowser_sourceChanged(QTextBrowser* self, QUrl* param1) {
@@ -1094,17 +1079,12 @@ void QTextBrowser_sourceChanged(QTextBrowser* self, QUrl* param1) {
 }
 
 void QTextBrowser_connect_sourceChanged(QTextBrowser* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& param1) {
+	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(const QUrl&)>(&QTextBrowser::sourceChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& param1) {
 			const QUrl& param1_ret = param1;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(const QUrl&)>(&QTextBrowser::sourceChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTextBrowser_highlighted(QTextBrowser* self, QUrl* param1) {
@@ -1112,17 +1092,12 @@ void QTextBrowser_highlighted(QTextBrowser* self, QUrl* param1) {
 }
 
 void QTextBrowser_connect_highlighted(QTextBrowser* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& param1) {
+	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(const QUrl&)>(&QTextBrowser::highlighted), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& param1) {
 			const QUrl& param1_ret = param1;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(const QUrl&)>(&QTextBrowser::highlighted), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTextBrowser_anchorClicked(QTextBrowser* self, QUrl* param1) {
@@ -1130,17 +1105,12 @@ void QTextBrowser_anchorClicked(QTextBrowser* self, QUrl* param1) {
 }
 
 void QTextBrowser_connect_anchorClicked(QTextBrowser* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& param1) {
+	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(const QUrl&)>(&QTextBrowser::anchorClicked), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& param1) {
 			const QUrl& param1_ret = param1;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QTextBrowser::connect(self, static_cast<void (QTextBrowser::*)(const QUrl&)>(&QTextBrowser::anchorClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QTextBrowser_tr_s_c(const char* s, const char* c) {

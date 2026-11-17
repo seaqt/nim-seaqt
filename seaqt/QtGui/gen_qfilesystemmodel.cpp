@@ -866,10 +866,7 @@ void QFileSystemModel_rootPathChanged(QFileSystemModel* self, struct seaqt_strin
 }
 
 void QFileSystemModel_connect_rootPathChanged(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& newPath) {
+	QFileSystemModel::connect(self, static_cast<void (QFileSystemModel::*)(const QString&)>(&QFileSystemModel::rootPathChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& newPath) {
 			const QString newPath_ret = newPath;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray newPath_b = newPath_ret.toUtf8();
@@ -878,10 +875,8 @@ void QFileSystemModel_connect_rootPathChanged(QFileSystemModel* self, intptr_t s
 			newPath_ms.data = static_cast<char*>(malloc(newPath_ms.len));
 			memcpy(newPath_ms.data, newPath_b.data(), newPath_ms.len);
 			struct seaqt_string sigval1 = newPath_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QFileSystemModel::connect(self, static_cast<void (QFileSystemModel::*)(const QString&)>(&QFileSystemModel::rootPathChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QFileSystemModel_fileRenamed(QFileSystemModel* self, struct seaqt_string path, struct seaqt_string oldName, struct seaqt_string newName) {
@@ -892,10 +887,7 @@ void QFileSystemModel_fileRenamed(QFileSystemModel* self, struct seaqt_string pa
 }
 
 void QFileSystemModel_connect_fileRenamed(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, struct seaqt_string, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, struct seaqt_string, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string, struct seaqt_string, struct seaqt_string);
-		void operator()(const QString& path, const QString& oldName, const QString& newName) {
+	QFileSystemModel::connect(self, static_cast<void (QFileSystemModel::*)(const QString&, const QString&, const QString&)>(&QFileSystemModel::fileRenamed), self, [callback, release = seaqt::release_callback{slot,release}](const QString& path, const QString& oldName, const QString& newName) {
 			const QString path_ret = path;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray path_b = path_ret.toUtf8();
@@ -920,10 +912,8 @@ void QFileSystemModel_connect_fileRenamed(QFileSystemModel* self, intptr_t slot,
 			newName_ms.data = static_cast<char*>(malloc(newName_ms.len));
 			memcpy(newName_ms.data, newName_b.data(), newName_ms.len);
 			struct seaqt_string sigval3 = newName_ms;
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QFileSystemModel::connect(self, static_cast<void (QFileSystemModel::*)(const QString&, const QString&, const QString&)>(&QFileSystemModel::fileRenamed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 void QFileSystemModel_directoryLoaded(QFileSystemModel* self, struct seaqt_string path) {
@@ -932,10 +922,7 @@ void QFileSystemModel_directoryLoaded(QFileSystemModel* self, struct seaqt_strin
 }
 
 void QFileSystemModel_connect_directoryLoaded(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& path) {
+	QFileSystemModel::connect(self, static_cast<void (QFileSystemModel::*)(const QString&)>(&QFileSystemModel::directoryLoaded), self, [callback, release = seaqt::release_callback{slot,release}](const QString& path) {
 			const QString path_ret = path;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray path_b = path_ret.toUtf8();
@@ -944,10 +931,8 @@ void QFileSystemModel_connect_directoryLoaded(QFileSystemModel* self, intptr_t s
 			path_ms.data = static_cast<char*>(malloc(path_ms.len));
 			memcpy(path_ms.data, path_b.data(), path_ms.len);
 			struct seaqt_string sigval1 = path_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QFileSystemModel::connect(self, static_cast<void (QFileSystemModel::*)(const QString&)>(&QFileSystemModel::directoryLoaded), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 QModelIndex* QFileSystemModel_index_row_column_parent(const QFileSystemModel* self, int row, int column, QModelIndex* parent) {

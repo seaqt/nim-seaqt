@@ -1253,15 +1253,10 @@ void QSortFilterProxyModel_dynamicSortFilterChanged(QSortFilterProxyModel* self,
 }
 
 void QSortFilterProxyModel_connect_dynamicSortFilterChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool dynamicSortFilter) {
+	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::dynamicSortFilterChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool dynamicSortFilter) {
 			bool sigval1 = dynamicSortFilter;
-			callback(slot, sigval1);
-		}
-	};
-	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::dynamicSortFilterChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSortFilterProxyModel_filterCaseSensitivityChanged(QSortFilterProxyModel* self, int filterCaseSensitivity) {
@@ -1269,16 +1264,11 @@ void QSortFilterProxyModel_filterCaseSensitivityChanged(QSortFilterProxyModel* s
 }
 
 void QSortFilterProxyModel_connect_filterCaseSensitivityChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::CaseSensitivity filterCaseSensitivity) {
+	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(Qt::CaseSensitivity)>(&QSortFilterProxyModel::filterCaseSensitivityChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::CaseSensitivity filterCaseSensitivity) {
 			Qt::CaseSensitivity filterCaseSensitivity_ret = filterCaseSensitivity;
 			int sigval1 = static_cast<int>(filterCaseSensitivity_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(Qt::CaseSensitivity)>(&QSortFilterProxyModel::filterCaseSensitivityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSortFilterProxyModel_sortCaseSensitivityChanged(QSortFilterProxyModel* self, int sortCaseSensitivity) {
@@ -1286,16 +1276,11 @@ void QSortFilterProxyModel_sortCaseSensitivityChanged(QSortFilterProxyModel* sel
 }
 
 void QSortFilterProxyModel_connect_sortCaseSensitivityChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::CaseSensitivity sortCaseSensitivity) {
+	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(Qt::CaseSensitivity)>(&QSortFilterProxyModel::sortCaseSensitivityChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::CaseSensitivity sortCaseSensitivity) {
 			Qt::CaseSensitivity sortCaseSensitivity_ret = sortCaseSensitivity;
 			int sigval1 = static_cast<int>(sortCaseSensitivity_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(Qt::CaseSensitivity)>(&QSortFilterProxyModel::sortCaseSensitivityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSortFilterProxyModel_sortLocaleAwareChanged(QSortFilterProxyModel* self, bool sortLocaleAware) {
@@ -1303,15 +1288,10 @@ void QSortFilterProxyModel_sortLocaleAwareChanged(QSortFilterProxyModel* self, b
 }
 
 void QSortFilterProxyModel_connect_sortLocaleAwareChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool sortLocaleAware) {
+	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::sortLocaleAwareChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool sortLocaleAware) {
 			bool sigval1 = sortLocaleAware;
-			callback(slot, sigval1);
-		}
-	};
-	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::sortLocaleAwareChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSortFilterProxyModel_sortRoleChanged(QSortFilterProxyModel* self, int sortRole) {
@@ -1319,15 +1299,10 @@ void QSortFilterProxyModel_sortRoleChanged(QSortFilterProxyModel* self, int sort
 }
 
 void QSortFilterProxyModel_connect_sortRoleChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int sortRole) {
+	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(int)>(&QSortFilterProxyModel::sortRoleChanged), self, [callback, release = seaqt::release_callback{slot,release}](int sortRole) {
 			int sigval1 = sortRole;
-			callback(slot, sigval1);
-		}
-	};
-	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(int)>(&QSortFilterProxyModel::sortRoleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSortFilterProxyModel_filterRoleChanged(QSortFilterProxyModel* self, int filterRole) {
@@ -1335,15 +1310,10 @@ void QSortFilterProxyModel_filterRoleChanged(QSortFilterProxyModel* self, int fi
 }
 
 void QSortFilterProxyModel_connect_filterRoleChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int filterRole) {
+	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(int)>(&QSortFilterProxyModel::filterRoleChanged), self, [callback, release = seaqt::release_callback{slot,release}](int filterRole) {
 			int sigval1 = filterRole;
-			callback(slot, sigval1);
-		}
-	};
-	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(int)>(&QSortFilterProxyModel::filterRoleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSortFilterProxyModel_recursiveFilteringEnabledChanged(QSortFilterProxyModel* self, bool recursiveFilteringEnabled) {
@@ -1351,15 +1321,10 @@ void QSortFilterProxyModel_recursiveFilteringEnabledChanged(QSortFilterProxyMode
 }
 
 void QSortFilterProxyModel_connect_recursiveFilteringEnabledChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool recursiveFilteringEnabled) {
+	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::recursiveFilteringEnabledChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool recursiveFilteringEnabled) {
 			bool sigval1 = recursiveFilteringEnabled;
-			callback(slot, sigval1);
-		}
-	};
-	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::recursiveFilteringEnabledChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSortFilterProxyModel_autoAcceptChildRowsChanged(QSortFilterProxyModel* self, bool autoAcceptChildRows) {
@@ -1367,15 +1332,10 @@ void QSortFilterProxyModel_autoAcceptChildRowsChanged(QSortFilterProxyModel* sel
 }
 
 void QSortFilterProxyModel_connect_autoAcceptChildRowsChanged(QSortFilterProxyModel* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool autoAcceptChildRows) {
+	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::autoAcceptChildRowsChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool autoAcceptChildRows) {
 			bool sigval1 = autoAcceptChildRows;
-			callback(slot, sigval1);
-		}
-	};
-	QSortFilterProxyModel::connect(self, static_cast<void (QSortFilterProxyModel::*)(bool)>(&QSortFilterProxyModel::autoAcceptChildRowsChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QSortFilterProxyModel_tr_s_c(const char* s, const char* c) {

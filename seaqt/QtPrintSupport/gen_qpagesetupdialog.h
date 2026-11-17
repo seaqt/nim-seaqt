@@ -234,7 +234,6 @@ int QPageSetupDialog_protectedbase_senderSignalIndex(const VirtualQPageSetupDial
 int QPageSetupDialog_protectedbase_receivers(const VirtualQPageSetupDialog* self, const char* signal);
 bool QPageSetupDialog_protectedbase_isSignalConnected(const VirtualQPageSetupDialog* self, QMetaMethod* signal);
 
-const QMetaObject* QPageSetupDialog_staticMetaObject();
 void QPageSetupDialog_delete(QPageSetupDialog* self);
 
 #ifdef __cplusplus

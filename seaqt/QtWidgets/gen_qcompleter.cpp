@@ -473,10 +473,7 @@ void QCompleter_activated_text(QCompleter* self, struct seaqt_string text) {
 }
 
 void QCompleter_connect_activated_text(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& text) {
+	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::activated), self, [callback, release = seaqt::release_callback{slot,release}](const QString& text) {
 			const QString text_ret = text;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray text_b = text_ret.toUtf8();
@@ -485,10 +482,8 @@ void QCompleter_connect_activated_text(QCompleter* self, intptr_t slot, void (*c
 			text_ms.data = static_cast<char*>(malloc(text_ms.len));
 			memcpy(text_ms.data, text_b.data(), text_ms.len);
 			struct seaqt_string sigval1 = text_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::activated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCompleter_activated_index(QCompleter* self, QModelIndex* index) {
@@ -496,17 +491,12 @@ void QCompleter_activated_index(QCompleter* self, QModelIndex* index) {
 }
 
 void QCompleter_connect_activated_index(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::activated), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::activated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCompleter_highlighted_text(QCompleter* self, struct seaqt_string text) {
@@ -515,10 +505,7 @@ void QCompleter_highlighted_text(QCompleter* self, struct seaqt_string text) {
 }
 
 void QCompleter_connect_highlighted_text(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& text) {
+	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::highlighted), self, [callback, release = seaqt::release_callback{slot,release}](const QString& text) {
 			const QString text_ret = text;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray text_b = text_ret.toUtf8();
@@ -527,10 +514,8 @@ void QCompleter_connect_highlighted_text(QCompleter* self, intptr_t slot, void (
 			text_ms.data = static_cast<char*>(malloc(text_ms.len));
 			memcpy(text_ms.data, text_b.data(), text_ms.len);
 			struct seaqt_string sigval1 = text_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::highlighted), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCompleter_highlighted_index(QCompleter* self, QModelIndex* index) {
@@ -538,17 +523,12 @@ void QCompleter_highlighted_index(QCompleter* self, QModelIndex* index) {
 }
 
 void QCompleter_connect_highlighted_index(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::highlighted), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::highlighted), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QCompleter_tr_s_c(const char* s, const char* c) {

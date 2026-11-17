@@ -43,7 +43,6 @@ void QWebEngineNavigationRequest_connect_actionChanged(QWebEngineNavigationReque
 struct seaqt_string QWebEngineNavigationRequest_tr_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineNavigationRequest_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebEngineNavigationRequest_staticMetaObject();
 void QWebEngineNavigationRequest_delete(QWebEngineNavigationRequest* self);
 
 #ifdef __cplusplus

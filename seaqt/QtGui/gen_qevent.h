@@ -234,7 +234,6 @@ bool QSinglePointEvent_isEndEvent(const QSinglePointEvent* self);
 QObject* QSinglePointEvent_exclusivePointGrabber(const QSinglePointEvent* self);
 void QSinglePointEvent_setExclusivePointGrabber(QSinglePointEvent* self, QObject* exclusiveGrabber);
 
-const QMetaObject* QSinglePointEvent_staticMetaObject();
 void QSinglePointEvent_delete(QSinglePointEvent* self);
 
 typedef struct VirtualQEnterEvent VirtualQEnterEvent;
@@ -397,7 +396,6 @@ bool QWheelEvent_virtualbase_isEndEvent(const VirtualQWheelEvent* self);
 void QWheelEvent_virtualbase_setTimestamp(VirtualQWheelEvent* self, unsigned long long timestamp);
 void QWheelEvent_virtualbase_setAccepted(VirtualQWheelEvent* self, bool accepted);
 
-const QMetaObject* QWheelEvent_staticMetaObject();
 void QWheelEvent_delete(QWheelEvent* self);
 
 typedef struct VirtualQTabletEvent VirtualQTabletEvent;

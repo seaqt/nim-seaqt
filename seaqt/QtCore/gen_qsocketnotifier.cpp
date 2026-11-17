@@ -265,6 +265,15 @@ struct seaqt_string QSocketNotifier_tr_s_c_n(const char* s, const char* c, int n
 	return _ms;
 }
 
+void QSocketNotifier_connect_activated(QSocketNotifier* self, intptr_t slot, void (*callback)(intptr_t, QSocketDescriptor*, int), void (*release)(intptr_t)) {
+	QSocketNotifier::connect(self, &QSocketNotifier::activated, self, [callback, release = seaqt::release_callback{slot,release}](QSocketDescriptor socket, QSocketNotifier::Type activationEvent, auto) {
+			QSocketDescriptor* sigval1 = new QSocketDescriptor(socket);
+			QSocketNotifier::Type activationEvent_ret = activationEvent;
+			int sigval2 = static_cast<int>(activationEvent_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
 const QMetaObject* QSocketNotifier_staticMetaObject() { return &QSocketNotifier::staticMetaObject; }
 void* QSocketNotifier_vdata(VirtualQSocketNotifier* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSocketNotifier>()); }
 VirtualQSocketNotifier* vdata_QSocketNotifier(void* vdata) { return reinterpret_cast<VirtualQSocketNotifier*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSocketNotifier>()); }

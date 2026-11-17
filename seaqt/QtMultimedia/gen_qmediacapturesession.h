@@ -115,7 +115,6 @@ int QMediaCaptureSession_protectedbase_senderSignalIndex(const VirtualQMediaCapt
 int QMediaCaptureSession_protectedbase_receivers(const VirtualQMediaCaptureSession* self, const char* signal);
 bool QMediaCaptureSession_protectedbase_isSignalConnected(const VirtualQMediaCaptureSession* self, QMetaMethod* signal);
 
-const QMetaObject* QMediaCaptureSession_staticMetaObject();
 void QMediaCaptureSession_delete(QMediaCaptureSession* self);
 
 #ifdef __cplusplus

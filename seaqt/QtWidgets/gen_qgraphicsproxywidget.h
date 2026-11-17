@@ -287,7 +287,6 @@ void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(VirtualQGraphicsPr
 void QGraphicsProxyWidget_protectedbase_setGraphicsItem(VirtualQGraphicsProxyWidget* self, QGraphicsItem* item);
 void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(VirtualQGraphicsProxyWidget* self, bool ownedByLayout);
 
-const QMetaObject* QGraphicsProxyWidget_staticMetaObject();
 void QGraphicsProxyWidget_delete(QGraphicsProxyWidget* self);
 
 #ifdef __cplusplus

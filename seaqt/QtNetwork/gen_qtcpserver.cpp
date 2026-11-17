@@ -338,14 +338,9 @@ void QTcpServer_newConnection(QTcpServer* self) {
 }
 
 void QTcpServer_connect_newConnection(QTcpServer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QTcpServer::connect(self, static_cast<void (QTcpServer::*)()>(&QTcpServer::newConnection), self, local_caller{slot, callback, release});
+	QTcpServer::connect(self, static_cast<void (QTcpServer::*)()>(&QTcpServer::newConnection), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QTcpServer_acceptError(QTcpServer* self, int socketError) {
@@ -353,16 +348,11 @@ void QTcpServer_acceptError(QTcpServer* self, int socketError) {
 }
 
 void QTcpServer_connect_acceptError(QTcpServer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QAbstractSocket::SocketError socketError) {
+	QTcpServer::connect(self, static_cast<void (QTcpServer::*)(QAbstractSocket::SocketError)>(&QTcpServer::acceptError), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractSocket::SocketError socketError) {
 			QAbstractSocket::SocketError socketError_ret = socketError;
 			int sigval1 = static_cast<int>(socketError_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QTcpServer::connect(self, static_cast<void (QTcpServer::*)(QAbstractSocket::SocketError)>(&QTcpServer::acceptError), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QTcpServer_tr_s_c(const char* s, const char* c) {
@@ -401,6 +391,12 @@ bool QTcpServer_waitForNewConnection_msec(QTcpServer* self, int msec) {
 
 bool QTcpServer_waitForNewConnection_msec_timedOut(QTcpServer* self, int msec, bool* timedOut) {
 	return self->waitForNewConnection(static_cast<int>(msec), timedOut);
+}
+
+void QTcpServer_connect_pendingConnectionAvailable(QTcpServer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QTcpServer::connect(self, &QTcpServer::pendingConnectionAvailable, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
 }
 
 const QMetaObject* QTcpServer_staticMetaObject() { return &QTcpServer::staticMetaObject; }

@@ -245,7 +245,6 @@ int QFontComboBox_protectedbase_senderSignalIndex(const VirtualQFontComboBox* se
 int QFontComboBox_protectedbase_receivers(const VirtualQFontComboBox* self, const char* signal);
 bool QFontComboBox_protectedbase_isSignalConnected(const VirtualQFontComboBox* self, QMetaMethod* signal);
 
-const QMetaObject* QFontComboBox_staticMetaObject();
 void QFontComboBox_delete(QFontComboBox* self);
 
 #ifdef __cplusplus

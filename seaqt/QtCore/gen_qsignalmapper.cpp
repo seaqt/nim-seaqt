@@ -239,15 +239,10 @@ void QSignalMapper_mappedInt(QSignalMapper* self, int param1) {
 }
 
 void QSignalMapper_connect_mappedInt(QSignalMapper* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QSignalMapper::connect(self, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mappedInt), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QSignalMapper::connect(self, static_cast<void (QSignalMapper::*)(int)>(&QSignalMapper::mappedInt), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSignalMapper_mappedString(QSignalMapper* self, struct seaqt_string param1) {
@@ -256,10 +251,7 @@ void QSignalMapper_mappedString(QSignalMapper* self, struct seaqt_string param1)
 }
 
 void QSignalMapper_connect_mappedString(QSignalMapper* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& param1) {
+	QSignalMapper::connect(self, static_cast<void (QSignalMapper::*)(const QString&)>(&QSignalMapper::mappedString), self, [callback, release = seaqt::release_callback{slot,release}](const QString& param1) {
 			const QString param1_ret = param1;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray param1_b = param1_ret.toUtf8();
@@ -268,10 +260,8 @@ void QSignalMapper_connect_mappedString(QSignalMapper* self, intptr_t slot, void
 			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
 			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
 			struct seaqt_string sigval1 = param1_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QSignalMapper::connect(self, static_cast<void (QSignalMapper::*)(const QString&)>(&QSignalMapper::mappedString), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSignalMapper_mappedObject(QSignalMapper* self, QObject* param1) {
@@ -279,15 +269,10 @@ void QSignalMapper_mappedObject(QSignalMapper* self, QObject* param1) {
 }
 
 void QSignalMapper_connect_mappedObject(QSignalMapper* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QObject*);
-		void operator()(QObject* param1) {
+	QSignalMapper::connect(self, static_cast<void (QSignalMapper::*)(QObject*)>(&QSignalMapper::mappedObject), self, [callback, release = seaqt::release_callback{slot,release}](QObject* param1) {
 			QObject* sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QSignalMapper::connect(self, static_cast<void (QSignalMapper::*)(QObject*)>(&QSignalMapper::mappedObject), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSignalMapper_map(QSignalMapper* self) {

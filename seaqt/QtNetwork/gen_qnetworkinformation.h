@@ -54,7 +54,6 @@ void QNetworkInformation_connect_isMeteredChanged(QNetworkInformation* self, int
 struct seaqt_string QNetworkInformation_tr_s_c(const char* s, const char* c);
 struct seaqt_string QNetworkInformation_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QNetworkInformation_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

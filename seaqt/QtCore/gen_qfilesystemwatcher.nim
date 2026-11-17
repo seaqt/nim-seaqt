@@ -64,6 +64,8 @@ proc fcQFileSystemWatcher_files(self: pointer): struct_seaqt_array {.importc: "Q
 proc fcQFileSystemWatcher_directories(self: pointer): struct_seaqt_array {.importc: "QFileSystemWatcher_directories".}
 proc fcQFileSystemWatcher_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QFileSystemWatcher_tr_s_c".}
 proc fcQFileSystemWatcher_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QFileSystemWatcher_tr_s_c_n".}
+proc fcQFileSystemWatcher_connect_fileChanged(self: pointer, slot: int, callback: proc (slot: int, path: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileSystemWatcher_connect_fileChanged".}
+proc fcQFileSystemWatcher_connect_directoryChanged(self: pointer, slot: int, callback: proc (slot: int, path: struct_seaqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileSystemWatcher_connect_directoryChanged".}
 proc fcQFileSystemWatcher_vdata(self: pointer): ptr pointer {.importc: "QFileSystemWatcher_vdata".}
 proc fvdata_cQFileSystemWatcher(self: pointer): pointer {.importc: "vdata_QFileSystemWatcher".}
 
@@ -187,6 +189,46 @@ proc tr*(_: type gen_qfilesystemwatcher_types.QFileSystemWatcher, s: cstring, c:
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QFileSystemWatcherfileChangedSlot* = proc(path: openArray[char])
+proc fcQFileSystemWatcher_slot_callback_fileChanged(slot: int, path: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QFileSystemWatcherfileChangedSlot](cast[pointer](slot))
+  let vpath_ms = path
+  let vpathx_ret = string.fromBytes(vpath_ms)
+  c_free(vpath_ms.data)
+  let slotval1 = vpathx_ret
+
+  nimfunc[](slotval1)
+
+proc fcQFileSystemWatcher_slot_callback_fileChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QFileSystemWatcherfileChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onFileChanged*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, slot: QFileSystemWatcherfileChangedSlot) =
+  var tmp = new QFileSystemWatcherfileChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFileSystemWatcher_connect_fileChanged(self.h, cast[int](addr tmp[]), fcQFileSystemWatcher_slot_callback_fileChanged, fcQFileSystemWatcher_slot_callback_fileChanged_release)
+
+type QFileSystemWatcherdirectoryChangedSlot* = proc(path: openArray[char])
+proc fcQFileSystemWatcher_slot_callback_directoryChanged(slot: int, path: struct_seaqt_string) {.cdecl.} =
+  let nimfunc = cast[ptr QFileSystemWatcherdirectoryChangedSlot](cast[pointer](slot))
+  let vpath_ms = path
+  let vpathx_ret = string.fromBytes(vpath_ms)
+  c_free(vpath_ms.data)
+  let slotval1 = vpathx_ret
+
+  nimfunc[](slotval1)
+
+proc fcQFileSystemWatcher_slot_callback_directoryChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QFileSystemWatcherdirectoryChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onDirectoryChanged*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, slot: QFileSystemWatcherdirectoryChangedSlot) =
+  var tmp = new QFileSystemWatcherdirectoryChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFileSystemWatcher_connect_directoryChanged(self.h, cast[int](addr tmp[]), fcQFileSystemWatcher_slot_callback_directoryChanged, fcQFileSystemWatcher_slot_callback_directoryChanged_release)
 
 type QFileSystemWatchermetaObjectProc* = proc(self: QFileSystemWatcher): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QFileSystemWatchermetacastProc* = proc(self: QFileSystemWatcher, param1: cstring): pointer {.raises: [], gcsafe.}

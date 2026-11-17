@@ -317,7 +317,6 @@ int QWebEngineView_protectedbase_senderSignalIndex(const VirtualQWebEngineView* 
 int QWebEngineView_protectedbase_receivers(const VirtualQWebEngineView* self, const char* signal);
 bool QWebEngineView_protectedbase_isSignalConnected(const VirtualQWebEngineView* self, QMetaMethod* signal);
 
-const QMetaObject* QWebEngineView_staticMetaObject();
 void QWebEngineView_delete(QWebEngineView* self);
 
 #ifdef __cplusplus

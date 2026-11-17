@@ -290,6 +290,24 @@ struct seaqt_string QHistoryState_tr_s_c_n(const char* s, const char* c, int n) 
 	return _ms;
 }
 
+void QHistoryState_connect_defaultTransitionChanged(QHistoryState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QHistoryState::connect(self, &QHistoryState::defaultTransitionChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QHistoryState_connect_defaultStateChanged(QHistoryState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QHistoryState::connect(self, &QHistoryState::defaultStateChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QHistoryState_connect_historyTypeChanged(QHistoryState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QHistoryState::connect(self, &QHistoryState::historyTypeChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
 const QMetaObject* QHistoryState_staticMetaObject() { return &QHistoryState::staticMetaObject; }
 void* QHistoryState_vdata(VirtualQHistoryState* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQHistoryState>()); }
 VirtualQHistoryState* vdata_QHistoryState(void* vdata) { return reinterpret_cast<VirtualQHistoryState*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQHistoryState>()); }

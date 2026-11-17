@@ -70,7 +70,6 @@ struct seaqt_map /* tuple of QHostAddress* and int */  QHostAddress_parseSubnet(
 unsigned int QHostAddress_toIPv4Address_ok(const QHostAddress* self, bool* ok);
 bool QHostAddress_isEqual_address_mode(const QHostAddress* self, QHostAddress* address, int mode);
 
-const QMetaObject* QHostAddress_staticMetaObject();
 void QHostAddress_delete(QHostAddress* self);
 
 #ifdef __cplusplus

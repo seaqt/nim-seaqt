@@ -182,7 +182,6 @@ int QRasterWindow_protectedbase_senderSignalIndex(const VirtualQRasterWindow* se
 int QRasterWindow_protectedbase_receivers(const VirtualQRasterWindow* self, const char* signal);
 bool QRasterWindow_protectedbase_isSignalConnected(const VirtualQRasterWindow* self, QMetaMethod* signal);
 
-const QMetaObject* QRasterWindow_staticMetaObject();
 void QRasterWindow_delete(QRasterWindow* self);
 
 #ifdef __cplusplus

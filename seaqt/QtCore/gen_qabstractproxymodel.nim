@@ -101,6 +101,7 @@ proc fcQAbstractProxyModel_supportedDropActions(self: pointer): cint {.importc: 
 proc fcQAbstractProxyModel_roleNames(self: pointer): struct_seaqt_map {.importc: "QAbstractProxyModel_roleNames".}
 proc fcQAbstractProxyModel_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractProxyModel_tr_s_c".}
 proc fcQAbstractProxyModel_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractProxyModel_tr_s_c_n".}
+proc fcQAbstractProxyModel_connect_sourceModelChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractProxyModel_connect_sourceModelChanged".}
 proc fcQAbstractProxyModel_vdata(self: pointer): ptr pointer {.importc: "QAbstractProxyModel_vdata".}
 proc fvdata_cQAbstractProxyModel(self: pointer): pointer {.importc: "vdata_QAbstractProxyModel".}
 
@@ -400,6 +401,21 @@ proc tr*(_: type gen_qabstractproxymodel_types.QAbstractProxyModel, s: cstring, 
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QAbstractProxyModelsourceModelChangedSlot* = proc()
+proc fcQAbstractProxyModel_slot_callback_sourceModelChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractProxyModelsourceModelChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQAbstractProxyModel_slot_callback_sourceModelChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractProxyModelsourceModelChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onSourceModelChanged*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, slot: QAbstractProxyModelsourceModelChangedSlot) =
+  var tmp = new QAbstractProxyModelsourceModelChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractProxyModel_connect_sourceModelChanged(self.h, cast[int](addr tmp[]), fcQAbstractProxyModel_slot_callback_sourceModelChanged, fcQAbstractProxyModel_slot_callback_sourceModelChanged_release)
 
 type QAbstractProxyModelmetaObjectProc* = proc(self: QAbstractProxyModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractProxyModelmetacastProc* = proc(self: QAbstractProxyModel, param1: cstring): pointer {.raises: [], gcsafe.}

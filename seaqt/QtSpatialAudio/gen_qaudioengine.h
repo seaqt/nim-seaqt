@@ -108,7 +108,6 @@ int QAudioEngine_protectedbase_senderSignalIndex(const VirtualQAudioEngine* self
 int QAudioEngine_protectedbase_receivers(const VirtualQAudioEngine* self, const char* signal);
 bool QAudioEngine_protectedbase_isSignalConnected(const VirtualQAudioEngine* self, QMetaMethod* signal);
 
-const QMetaObject* QAudioEngine_staticMetaObject();
 void QAudioEngine_delete(QAudioEngine* self);
 
 #ifdef __cplusplus

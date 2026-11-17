@@ -997,17 +997,12 @@ void QMainWindow_iconSizeChanged(QMainWindow* self, QSize* iconSize) {
 }
 
 void QMainWindow_connect_iconSizeChanged(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSize*);
-		void operator()(const QSize& iconSize) {
+	QMainWindow::connect(self, static_cast<void (QMainWindow::*)(const QSize&)>(&QMainWindow::iconSizeChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QSize& iconSize) {
 			const QSize& iconSize_ret = iconSize;
 			// Cast returned reference into pointer
 			QSize* sigval1 = const_cast<QSize*>(&iconSize_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMainWindow::connect(self, static_cast<void (QMainWindow::*)(const QSize&)>(&QMainWindow::iconSizeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMainWindow_toolButtonStyleChanged(QMainWindow* self, int toolButtonStyle) {
@@ -1015,16 +1010,11 @@ void QMainWindow_toolButtonStyleChanged(QMainWindow* self, int toolButtonStyle) 
 }
 
 void QMainWindow_connect_toolButtonStyleChanged(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::ToolButtonStyle toolButtonStyle) {
+	QMainWindow::connect(self, static_cast<void (QMainWindow::*)(Qt::ToolButtonStyle)>(&QMainWindow::toolButtonStyleChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::ToolButtonStyle toolButtonStyle) {
 			Qt::ToolButtonStyle toolButtonStyle_ret = toolButtonStyle;
 			int sigval1 = static_cast<int>(toolButtonStyle_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMainWindow::connect(self, static_cast<void (QMainWindow::*)(Qt::ToolButtonStyle)>(&QMainWindow::toolButtonStyleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMainWindow_tabifiedDockWidgetActivated(QMainWindow* self, QDockWidget* dockWidget) {
@@ -1032,15 +1022,10 @@ void QMainWindow_tabifiedDockWidgetActivated(QMainWindow* self, QDockWidget* doc
 }
 
 void QMainWindow_connect_tabifiedDockWidgetActivated(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, QDockWidget*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDockWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QDockWidget*);
-		void operator()(QDockWidget* dockWidget) {
+	QMainWindow::connect(self, static_cast<void (QMainWindow::*)(QDockWidget*)>(&QMainWindow::tabifiedDockWidgetActivated), self, [callback, release = seaqt::release_callback{slot,release}](QDockWidget* dockWidget) {
 			QDockWidget* sigval1 = dockWidget;
-			callback(slot, sigval1);
-		}
-	};
-	QMainWindow::connect(self, static_cast<void (QMainWindow::*)(QDockWidget*)>(&QMainWindow::tabifiedDockWidgetActivated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QMainWindow_tr_s_c(const char* s, const char* c) {

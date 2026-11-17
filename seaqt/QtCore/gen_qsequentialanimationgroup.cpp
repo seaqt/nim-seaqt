@@ -279,15 +279,10 @@ void QSequentialAnimationGroup_currentAnimationChanged(QSequentialAnimationGroup
 }
 
 void QSequentialAnimationGroup_connect_currentAnimationChanged(QSequentialAnimationGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractAnimation*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractAnimation*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAbstractAnimation*);
-		void operator()(QAbstractAnimation* current) {
+	QSequentialAnimationGroup::connect(self, static_cast<void (QSequentialAnimationGroup::*)(QAbstractAnimation*)>(&QSequentialAnimationGroup::currentAnimationChanged), self, [callback, release = seaqt::release_callback{slot,release}](QAbstractAnimation* current) {
 			QAbstractAnimation* sigval1 = current;
-			callback(slot, sigval1);
-		}
-	};
-	QSequentialAnimationGroup::connect(self, static_cast<void (QSequentialAnimationGroup::*)(QAbstractAnimation*)>(&QSequentialAnimationGroup::currentAnimationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QSequentialAnimationGroup_tr_s_c(const char* s, const char* c) {

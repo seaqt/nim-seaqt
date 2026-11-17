@@ -947,10 +947,7 @@ void QLabel_linkActivated(QLabel* self, struct seaqt_string link) {
 }
 
 void QLabel_connect_linkActivated(QLabel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& link) {
+	QLabel::connect(self, static_cast<void (QLabel::*)(const QString&)>(&QLabel::linkActivated), self, [callback, release = seaqt::release_callback{slot,release}](const QString& link) {
 			const QString link_ret = link;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray link_b = link_ret.toUtf8();
@@ -959,10 +956,8 @@ void QLabel_connect_linkActivated(QLabel* self, intptr_t slot, void (*callback)(
 			link_ms.data = static_cast<char*>(malloc(link_ms.len));
 			memcpy(link_ms.data, link_b.data(), link_ms.len);
 			struct seaqt_string sigval1 = link_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QLabel::connect(self, static_cast<void (QLabel::*)(const QString&)>(&QLabel::linkActivated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QLabel_linkHovered(QLabel* self, struct seaqt_string link) {
@@ -971,10 +966,7 @@ void QLabel_linkHovered(QLabel* self, struct seaqt_string link) {
 }
 
 void QLabel_connect_linkHovered(QLabel* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& link) {
+	QLabel::connect(self, static_cast<void (QLabel::*)(const QString&)>(&QLabel::linkHovered), self, [callback, release = seaqt::release_callback{slot,release}](const QString& link) {
 			const QString link_ret = link;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray link_b = link_ret.toUtf8();
@@ -983,10 +975,8 @@ void QLabel_connect_linkHovered(QLabel* self, intptr_t slot, void (*callback)(in
 			link_ms.data = static_cast<char*>(malloc(link_ms.len));
 			memcpy(link_ms.data, link_b.data(), link_ms.len);
 			struct seaqt_string sigval1 = link_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QLabel::connect(self, static_cast<void (QLabel::*)(const QString&)>(&QLabel::linkHovered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QLabel_tr_s_c(const char* s, const char* c) {

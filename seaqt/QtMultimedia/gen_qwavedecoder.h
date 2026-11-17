@@ -132,7 +132,6 @@ int QWaveDecoder_protectedbase_senderSignalIndex(const VirtualQWaveDecoder* self
 int QWaveDecoder_protectedbase_receivers(const VirtualQWaveDecoder* self, const char* signal);
 bool QWaveDecoder_protectedbase_isSignalConnected(const VirtualQWaveDecoder* self, QMetaMethod* signal);
 
-const QMetaObject* QWaveDecoder_staticMetaObject();
 void QWaveDecoder_delete(QWaveDecoder* self);
 
 #ifdef __cplusplus

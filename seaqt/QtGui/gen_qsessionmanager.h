@@ -50,7 +50,6 @@ void QSessionManager_requestPhase2(QSessionManager* self);
 struct seaqt_string QSessionManager_tr_s_c(const char* s, const char* c);
 struct seaqt_string QSessionManager_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QSessionManager_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

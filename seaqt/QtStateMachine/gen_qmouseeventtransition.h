@@ -99,7 +99,6 @@ int QMouseEventTransition_protectedbase_senderSignalIndex(const VirtualQMouseEve
 int QMouseEventTransition_protectedbase_receivers(const VirtualQMouseEventTransition* self, const char* signal);
 bool QMouseEventTransition_protectedbase_isSignalConnected(const VirtualQMouseEventTransition* self, QMetaMethod* signal);
 
-const QMetaObject* QMouseEventTransition_staticMetaObject();
 void QMouseEventTransition_delete(QMouseEventTransition* self);
 
 #ifdef __cplusplus

@@ -114,7 +114,6 @@ int QAudioRoom_protectedbase_senderSignalIndex(const VirtualQAudioRoom* self);
 int QAudioRoom_protectedbase_receivers(const VirtualQAudioRoom* self, const char* signal);
 bool QAudioRoom_protectedbase_isSignalConnected(const VirtualQAudioRoom* self, QMetaMethod* signal);
 
-const QMetaObject* QAudioRoom_staticMetaObject();
 void QAudioRoom_delete(QAudioRoom* self);
 
 #ifdef __cplusplus

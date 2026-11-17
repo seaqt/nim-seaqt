@@ -40,7 +40,6 @@ void QWebEngineUrlScheme_setFlags(QWebEngineUrlScheme* self, int newValue);
 void QWebEngineUrlScheme_registerScheme(QWebEngineUrlScheme* scheme);
 QWebEngineUrlScheme* QWebEngineUrlScheme_schemeByName(struct seaqt_string name);
 
-const QMetaObject* QWebEngineUrlScheme_staticMetaObject();
 void QWebEngineUrlScheme_delete(QWebEngineUrlScheme* self);
 
 #ifdef __cplusplus

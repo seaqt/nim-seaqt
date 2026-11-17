@@ -158,7 +158,6 @@ struct seaqt_string QCborValue_toCbor_opt(const QCborValue* self, int opt);
 void QCborValue_toCbor_writer_opt(const QCborValue* self, QCborStreamWriter* writer, int opt);
 struct seaqt_string QCborValue_toDiagnosticNotation_opts(const QCborValue* self, int opts);
 
-const QMetaObject* QCborValue_staticMetaObject();
 void QCborValue_delete(QCborValue* self);
 
 QCborValueConstRef* QCborValueConstRef_new(QCborValueConstRef* from);

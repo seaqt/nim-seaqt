@@ -45,7 +45,6 @@ void QWebEngineNewWindowRequest_openIn(QWebEngineNewWindowRequest* self, QWebEng
 struct seaqt_string QWebEngineNewWindowRequest_tr_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineNewWindowRequest_tr_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebEngineNewWindowRequest_staticMetaObject();
 void QWebEngineNewWindowRequest_delete(QWebEngineNewWindowRequest* self);
 
 #ifdef __cplusplus

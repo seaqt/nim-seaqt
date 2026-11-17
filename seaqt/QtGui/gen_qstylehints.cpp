@@ -189,15 +189,10 @@ void QStyleHints_cursorFlashTimeChanged(QStyleHints* self, int cursorFlashTime) 
 }
 
 void QStyleHints_connect_cursorFlashTimeChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int cursorFlashTime) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::cursorFlashTimeChanged), self, [callback, release = seaqt::release_callback{slot,release}](int cursorFlashTime) {
 			int sigval1 = cursorFlashTime;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::cursorFlashTimeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_keyboardInputIntervalChanged(QStyleHints* self, int keyboardInputInterval) {
@@ -205,15 +200,10 @@ void QStyleHints_keyboardInputIntervalChanged(QStyleHints* self, int keyboardInp
 }
 
 void QStyleHints_connect_keyboardInputIntervalChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int keyboardInputInterval) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::keyboardInputIntervalChanged), self, [callback, release = seaqt::release_callback{slot,release}](int keyboardInputInterval) {
 			int sigval1 = keyboardInputInterval;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::keyboardInputIntervalChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_mouseDoubleClickIntervalChanged(QStyleHints* self, int mouseDoubleClickInterval) {
@@ -221,15 +211,10 @@ void QStyleHints_mouseDoubleClickIntervalChanged(QStyleHints* self, int mouseDou
 }
 
 void QStyleHints_connect_mouseDoubleClickIntervalChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int mouseDoubleClickInterval) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseDoubleClickIntervalChanged), self, [callback, release = seaqt::release_callback{slot,release}](int mouseDoubleClickInterval) {
 			int sigval1 = mouseDoubleClickInterval;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseDoubleClickIntervalChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_mousePressAndHoldIntervalChanged(QStyleHints* self, int mousePressAndHoldInterval) {
@@ -237,15 +222,10 @@ void QStyleHints_mousePressAndHoldIntervalChanged(QStyleHints* self, int mousePr
 }
 
 void QStyleHints_connect_mousePressAndHoldIntervalChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int mousePressAndHoldInterval) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mousePressAndHoldIntervalChanged), self, [callback, release = seaqt::release_callback{slot,release}](int mousePressAndHoldInterval) {
 			int sigval1 = mousePressAndHoldInterval;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mousePressAndHoldIntervalChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_startDragDistanceChanged(QStyleHints* self, int startDragDistance) {
@@ -253,15 +233,10 @@ void QStyleHints_startDragDistanceChanged(QStyleHints* self, int startDragDistan
 }
 
 void QStyleHints_connect_startDragDistanceChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int startDragDistance) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragDistanceChanged), self, [callback, release = seaqt::release_callback{slot,release}](int startDragDistance) {
 			int sigval1 = startDragDistance;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragDistanceChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_startDragTimeChanged(QStyleHints* self, int startDragTime) {
@@ -269,15 +244,10 @@ void QStyleHints_startDragTimeChanged(QStyleHints* self, int startDragTime) {
 }
 
 void QStyleHints_connect_startDragTimeChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int startDragTime) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragTimeChanged), self, [callback, release = seaqt::release_callback{slot,release}](int startDragTime) {
 			int sigval1 = startDragTime;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragTimeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_tabFocusBehaviorChanged(QStyleHints* self, int tabFocusBehavior) {
@@ -285,16 +255,11 @@ void QStyleHints_tabFocusBehaviorChanged(QStyleHints* self, int tabFocusBehavior
 }
 
 void QStyleHints_connect_tabFocusBehaviorChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::TabFocusBehavior tabFocusBehavior) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(Qt::TabFocusBehavior)>(&QStyleHints::tabFocusBehaviorChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::TabFocusBehavior tabFocusBehavior) {
 			Qt::TabFocusBehavior tabFocusBehavior_ret = tabFocusBehavior;
 			int sigval1 = static_cast<int>(tabFocusBehavior_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(Qt::TabFocusBehavior)>(&QStyleHints::tabFocusBehaviorChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_useHoverEffectsChanged(QStyleHints* self, bool useHoverEffects) {
@@ -302,15 +267,10 @@ void QStyleHints_useHoverEffectsChanged(QStyleHints* self, bool useHoverEffects)
 }
 
 void QStyleHints_connect_useHoverEffectsChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool useHoverEffects) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::useHoverEffectsChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool useHoverEffects) {
 			bool sigval1 = useHoverEffects;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::useHoverEffectsChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_showShortcutsInContextMenusChanged(QStyleHints* self, bool param1) {
@@ -318,15 +278,10 @@ void QStyleHints_showShortcutsInContextMenusChanged(QStyleHints* self, bool para
 }
 
 void QStyleHints_connect_showShortcutsInContextMenusChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool param1) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::showShortcutsInContextMenusChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
 			bool sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::showShortcutsInContextMenusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_wheelScrollLinesChanged(QStyleHints* self, int scrollLines) {
@@ -334,15 +289,10 @@ void QStyleHints_wheelScrollLinesChanged(QStyleHints* self, int scrollLines) {
 }
 
 void QStyleHints_connect_wheelScrollLinesChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int scrollLines) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::wheelScrollLinesChanged), self, [callback, release = seaqt::release_callback{slot,release}](int scrollLines) {
 			int sigval1 = scrollLines;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::wheelScrollLinesChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QStyleHints_mouseQuickSelectionThresholdChanged(QStyleHints* self, int threshold) {
@@ -350,15 +300,10 @@ void QStyleHints_mouseQuickSelectionThresholdChanged(QStyleHints* self, int thre
 }
 
 void QStyleHints_connect_mouseQuickSelectionThresholdChanged(QStyleHints* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int threshold) {
+	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseQuickSelectionThresholdChanged), self, [callback, release = seaqt::release_callback{slot,release}](int threshold) {
 			int sigval1 = threshold;
-			callback(slot, sigval1);
-		}
-	};
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseQuickSelectionThresholdChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QStyleHints_tr_s_c(const char* s, const char* c) {

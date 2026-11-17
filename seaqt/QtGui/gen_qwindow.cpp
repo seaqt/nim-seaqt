@@ -1001,15 +1001,10 @@ void QWindow_screenChanged(QWindow* self, QScreen* screen) {
 }
 
 void QWindow_connect_screenChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QScreen*);
-		void operator()(QScreen* screen) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(QScreen*)>(&QWindow::screenChanged), self, [callback, release = seaqt::release_callback{slot,release}](QScreen* screen) {
 			QScreen* sigval1 = screen;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(QScreen*)>(&QWindow::screenChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_modalityChanged(QWindow* self, int modality) {
@@ -1017,16 +1012,11 @@ void QWindow_modalityChanged(QWindow* self, int modality) {
 }
 
 void QWindow_connect_modalityChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::WindowModality modality) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(Qt::WindowModality)>(&QWindow::modalityChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::WindowModality modality) {
 			Qt::WindowModality modality_ret = modality;
 			int sigval1 = static_cast<int>(modality_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(Qt::WindowModality)>(&QWindow::modalityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_windowStateChanged(QWindow* self, int windowState) {
@@ -1034,16 +1024,11 @@ void QWindow_windowStateChanged(QWindow* self, int windowState) {
 }
 
 void QWindow_connect_windowStateChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::WindowState windowState) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(Qt::WindowState)>(&QWindow::windowStateChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::WindowState windowState) {
 			Qt::WindowState windowState_ret = windowState;
 			int sigval1 = static_cast<int>(windowState_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(Qt::WindowState)>(&QWindow::windowStateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_windowTitleChanged(QWindow* self, struct seaqt_string title) {
@@ -1052,10 +1037,7 @@ void QWindow_windowTitleChanged(QWindow* self, struct seaqt_string title) {
 }
 
 void QWindow_connect_windowTitleChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& title) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(const QString&)>(&QWindow::windowTitleChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& title) {
 			const QString title_ret = title;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray title_b = title_ret.toUtf8();
@@ -1064,10 +1046,8 @@ void QWindow_connect_windowTitleChanged(QWindow* self, intptr_t slot, void (*cal
 			title_ms.data = static_cast<char*>(malloc(title_ms.len));
 			memcpy(title_ms.data, title_b.data(), title_ms.len);
 			struct seaqt_string sigval1 = title_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(const QString&)>(&QWindow::windowTitleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_xChanged(QWindow* self, int arg) {
@@ -1075,15 +1055,10 @@ void QWindow_xChanged(QWindow* self, int arg) {
 }
 
 void QWindow_connect_xChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::xChanged), self, [callback, release = seaqt::release_callback{slot,release}](int arg) {
 			int sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::xChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_yChanged(QWindow* self, int arg) {
@@ -1091,15 +1066,10 @@ void QWindow_yChanged(QWindow* self, int arg) {
 }
 
 void QWindow_connect_yChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::yChanged), self, [callback, release = seaqt::release_callback{slot,release}](int arg) {
 			int sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::yChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_widthChanged(QWindow* self, int arg) {
@@ -1107,15 +1077,10 @@ void QWindow_widthChanged(QWindow* self, int arg) {
 }
 
 void QWindow_connect_widthChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::widthChanged), self, [callback, release = seaqt::release_callback{slot,release}](int arg) {
 			int sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::widthChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_heightChanged(QWindow* self, int arg) {
@@ -1123,15 +1088,10 @@ void QWindow_heightChanged(QWindow* self, int arg) {
 }
 
 void QWindow_connect_heightChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::heightChanged), self, [callback, release = seaqt::release_callback{slot,release}](int arg) {
 			int sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::heightChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_minimumWidthChanged(QWindow* self, int arg) {
@@ -1139,15 +1099,10 @@ void QWindow_minimumWidthChanged(QWindow* self, int arg) {
 }
 
 void QWindow_connect_minimumWidthChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::minimumWidthChanged), self, [callback, release = seaqt::release_callback{slot,release}](int arg) {
 			int sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::minimumWidthChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_minimumHeightChanged(QWindow* self, int arg) {
@@ -1155,15 +1110,10 @@ void QWindow_minimumHeightChanged(QWindow* self, int arg) {
 }
 
 void QWindow_connect_minimumHeightChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::minimumHeightChanged), self, [callback, release = seaqt::release_callback{slot,release}](int arg) {
 			int sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::minimumHeightChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_maximumWidthChanged(QWindow* self, int arg) {
@@ -1171,15 +1121,10 @@ void QWindow_maximumWidthChanged(QWindow* self, int arg) {
 }
 
 void QWindow_connect_maximumWidthChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::maximumWidthChanged), self, [callback, release = seaqt::release_callback{slot,release}](int arg) {
 			int sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::maximumWidthChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_maximumHeightChanged(QWindow* self, int arg) {
@@ -1187,15 +1132,10 @@ void QWindow_maximumHeightChanged(QWindow* self, int arg) {
 }
 
 void QWindow_connect_maximumHeightChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::maximumHeightChanged), self, [callback, release = seaqt::release_callback{slot,release}](int arg) {
 			int sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(int)>(&QWindow::maximumHeightChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_visibleChanged(QWindow* self, bool arg) {
@@ -1203,15 +1143,10 @@ void QWindow_visibleChanged(QWindow* self, bool arg) {
 }
 
 void QWindow_connect_visibleChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool arg) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(bool)>(&QWindow::visibleChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool arg) {
 			bool sigval1 = arg;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(bool)>(&QWindow::visibleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_visibilityChanged(QWindow* self, int visibility) {
@@ -1219,16 +1154,11 @@ void QWindow_visibilityChanged(QWindow* self, int visibility) {
 }
 
 void QWindow_connect_visibilityChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QWindow::Visibility visibility) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(QWindow::Visibility)>(&QWindow::visibilityChanged), self, [callback, release = seaqt::release_callback{slot,release}](QWindow::Visibility visibility) {
 			QWindow::Visibility visibility_ret = visibility;
 			int sigval1 = static_cast<int>(visibility_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(QWindow::Visibility)>(&QWindow::visibilityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_activeChanged(QWindow* self) {
@@ -1236,14 +1166,9 @@ void QWindow_activeChanged(QWindow* self) {
 }
 
 void QWindow_connect_activeChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)()>(&QWindow::activeChanged), self, local_caller{slot, callback, release});
+	QWindow::connect(self, static_cast<void (QWindow::*)()>(&QWindow::activeChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QWindow_contentOrientationChanged(QWindow* self, int orientation) {
@@ -1251,16 +1176,11 @@ void QWindow_contentOrientationChanged(QWindow* self, int orientation) {
 }
 
 void QWindow_connect_contentOrientationChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(Qt::ScreenOrientation orientation) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(Qt::ScreenOrientation)>(&QWindow::contentOrientationChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::ScreenOrientation orientation) {
 			Qt::ScreenOrientation orientation_ret = orientation;
 			int sigval1 = static_cast<int>(orientation_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(Qt::ScreenOrientation)>(&QWindow::contentOrientationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_focusObjectChanged(QWindow* self, QObject* object) {
@@ -1268,15 +1188,10 @@ void QWindow_focusObjectChanged(QWindow* self, QObject* object) {
 }
 
 void QWindow_connect_focusObjectChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QObject*);
-		void operator()(QObject* object) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(QObject*)>(&QWindow::focusObjectChanged), self, [callback, release = seaqt::release_callback{slot,release}](QObject* object) {
 			QObject* sigval1 = object;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(QObject*)>(&QWindow::focusObjectChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_opacityChanged(QWindow* self, double opacity) {
@@ -1284,16 +1199,11 @@ void QWindow_opacityChanged(QWindow* self, double opacity) {
 }
 
 void QWindow_connect_opacityChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal opacity) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(qreal)>(&QWindow::opacityChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal opacity) {
 			qreal opacity_ret = opacity;
 			double sigval1 = static_cast<double>(opacity_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(qreal)>(&QWindow::opacityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWindow_transientParentChanged(QWindow* self, QWindow* transientParent) {
@@ -1301,15 +1211,10 @@ void QWindow_transientParentChanged(QWindow* self, QWindow* transientParent) {
 }
 
 void QWindow_connect_transientParentChanged(QWindow* self, intptr_t slot, void (*callback)(intptr_t, QWindow*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWindow*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QWindow*);
-		void operator()(QWindow* transientParent) {
+	QWindow::connect(self, static_cast<void (QWindow::*)(QWindow*)>(&QWindow::transientParentChanged), self, [callback, release = seaqt::release_callback{slot,release}](QWindow* transientParent) {
 			QWindow* sigval1 = transientParent;
-			callback(slot, sigval1);
-		}
-	};
-	QWindow::connect(self, static_cast<void (QWindow::*)(QWindow*)>(&QWindow::transientParentChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QWindow_tr_s_c(const char* s, const char* c) {

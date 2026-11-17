@@ -82,6 +82,9 @@ proc fcQAbstractTransition_removeAnimation(self: pointer, animation: pointer): v
 proc fcQAbstractTransition_animations(self: pointer): struct_seaqt_array {.importc: "QAbstractTransition_animations".}
 proc fcQAbstractTransition_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QAbstractTransition_tr_s_c".}
 proc fcQAbstractTransition_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QAbstractTransition_tr_s_c_n".}
+proc fcQAbstractTransition_connect_triggered(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractTransition_connect_triggered".}
+proc fcQAbstractTransition_connect_targetStateChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractTransition_connect_targetStateChanged".}
+proc fcQAbstractTransition_connect_targetStatesChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractTransition_connect_targetStatesChanged".}
 proc fcQAbstractTransition_vdata(self: pointer): ptr pointer {.importc: "QAbstractTransition_vdata".}
 proc fvdata_cQAbstractTransition(self: pointer): pointer {.importc: "vdata_QAbstractTransition".}
 
@@ -192,6 +195,51 @@ proc tr*(_: type gen_qabstracttransition_types.QAbstractTransition, s: cstring, 
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QAbstractTransitiontriggeredSlot* = proc()
+proc fcQAbstractTransition_slot_callback_triggered(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractTransitiontriggeredSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQAbstractTransition_slot_callback_triggered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractTransitiontriggeredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onTriggered*(self: gen_qabstracttransition_types.QAbstractTransition, slot: QAbstractTransitiontriggeredSlot) =
+  var tmp = new QAbstractTransitiontriggeredSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTransition_connect_triggered(self.h, cast[int](addr tmp[]), fcQAbstractTransition_slot_callback_triggered, fcQAbstractTransition_slot_callback_triggered_release)
+
+type QAbstractTransitiontargetStateChangedSlot* = proc()
+proc fcQAbstractTransition_slot_callback_targetStateChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractTransitiontargetStateChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQAbstractTransition_slot_callback_targetStateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractTransitiontargetStateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onTargetStateChanged*(self: gen_qabstracttransition_types.QAbstractTransition, slot: QAbstractTransitiontargetStateChangedSlot) =
+  var tmp = new QAbstractTransitiontargetStateChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTransition_connect_targetStateChanged(self.h, cast[int](addr tmp[]), fcQAbstractTransition_slot_callback_targetStateChanged, fcQAbstractTransition_slot_callback_targetStateChanged_release)
+
+type QAbstractTransitiontargetStatesChangedSlot* = proc()
+proc fcQAbstractTransition_slot_callback_targetStatesChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractTransitiontargetStatesChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQAbstractTransition_slot_callback_targetStatesChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractTransitiontargetStatesChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onTargetStatesChanged*(self: gen_qabstracttransition_types.QAbstractTransition, slot: QAbstractTransitiontargetStatesChangedSlot) =
+  var tmp = new QAbstractTransitiontargetStatesChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTransition_connect_targetStatesChanged(self.h, cast[int](addr tmp[]), fcQAbstractTransition_slot_callback_targetStatesChanged, fcQAbstractTransition_slot_callback_targetStatesChanged_release)
 
 type QAbstractTransitionmetaObjectProc* = proc(self: QAbstractTransition): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractTransitionmetacastProc* = proc(self: QAbstractTransition, param1: cstring): pointer {.raises: [], gcsafe.}

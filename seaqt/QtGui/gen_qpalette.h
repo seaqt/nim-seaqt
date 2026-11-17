@@ -80,7 +80,6 @@ QPalette* QPalette_resolve(const QPalette* self, QPalette* other);
 unsigned long long QPalette_resolveMask(const QPalette* self);
 void QPalette_setResolveMask(QPalette* self, unsigned long long mask);
 
-const QMetaObject* QPalette_staticMetaObject();
 void QPalette_delete(QPalette* self);
 
 #ifdef __cplusplus

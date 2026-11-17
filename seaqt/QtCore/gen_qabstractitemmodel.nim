@@ -214,6 +214,20 @@ proc fcQAbstractItemModel_layoutAboutToBeChangedParents(self: pointer, parents: 
 proc fcQAbstractItemModel_connect_layoutAboutToBeChangedParents(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged_parents".}
 proc fcQAbstractItemModel_layoutAboutToBeChangedParentsHint(self: pointer, parents: struct_seaqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged_parents_hint".}
 proc fcQAbstractItemModel_connect_layoutAboutToBeChangedParentsHint(self: pointer, slot: int, callback: proc (slot: int, parents: struct_seaqt_array, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged_parents_hint".}
+proc fcQAbstractItemModel_connect_rowsAboutToBeInserted(self: pointer, slot: int, callback: proc (slot: int, parent: pointer, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_rowsAboutToBeInserted".}
+proc fcQAbstractItemModel_connect_rowsInserted(self: pointer, slot: int, callback: proc (slot: int, parent: pointer, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_rowsInserted".}
+proc fcQAbstractItemModel_connect_rowsAboutToBeRemoved(self: pointer, slot: int, callback: proc (slot: int, parent: pointer, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_rowsAboutToBeRemoved".}
+proc fcQAbstractItemModel_connect_rowsRemoved(self: pointer, slot: int, callback: proc (slot: int, parent: pointer, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_rowsRemoved".}
+proc fcQAbstractItemModel_connect_columnsAboutToBeInserted(self: pointer, slot: int, callback: proc (slot: int, parent: pointer, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_columnsAboutToBeInserted".}
+proc fcQAbstractItemModel_connect_columnsInserted(self: pointer, slot: int, callback: proc (slot: int, parent: pointer, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_columnsInserted".}
+proc fcQAbstractItemModel_connect_columnsAboutToBeRemoved(self: pointer, slot: int, callback: proc (slot: int, parent: pointer, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_columnsAboutToBeRemoved".}
+proc fcQAbstractItemModel_connect_columnsRemoved(self: pointer, slot: int, callback: proc (slot: int, parent: pointer, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_columnsRemoved".}
+proc fcQAbstractItemModel_connect_modelAboutToBeReset(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_modelAboutToBeReset".}
+proc fcQAbstractItemModel_connect_modelReset(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_modelReset".}
+proc fcQAbstractItemModel_connect_rowsAboutToBeMoved(self: pointer, slot: int, callback: proc (slot: int, sourceParent: pointer, sourceStart: cint, sourceEnd: cint, destinationParent: pointer, destinationRow: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_rowsAboutToBeMoved".}
+proc fcQAbstractItemModel_connect_rowsMoved(self: pointer, slot: int, callback: proc (slot: int, sourceParent: pointer, sourceStart: cint, sourceEnd: cint, destinationParent: pointer, destinationRow: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_rowsMoved".}
+proc fcQAbstractItemModel_connect_columnsAboutToBeMoved(self: pointer, slot: int, callback: proc (slot: int, sourceParent: pointer, sourceStart: cint, sourceEnd: cint, destinationParent: pointer, destinationColumn: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_columnsAboutToBeMoved".}
+proc fcQAbstractItemModel_connect_columnsMoved(self: pointer, slot: int, callback: proc (slot: int, sourceParent: pointer, sourceStart: cint, sourceEnd: cint, destinationParent: pointer, destinationColumn: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_columnsMoved".}
 proc fcQAbstractItemModel_vdata(self: pointer): ptr pointer {.importc: "QAbstractItemModel_vdata".}
 proc fvdata_cQAbstractItemModel(self: pointer): pointer {.importc: "vdata_QAbstractItemModel".}
 
@@ -1265,6 +1279,304 @@ proc onLayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemM
   tmp[] = slot
   GC_ref(tmp)
   fcQAbstractItemModel_connect_layoutAboutToBeChangedParentsHint(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParentsHint, fcQAbstractItemModel_slot_callback_layoutAboutToBeChangedParentsHint_release)
+
+type QAbstractItemModelrowsAboutToBeInsertedSlot* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint)
+proc fcQAbstractItemModel_slot_callback_rowsAboutToBeInserted(slot: int, parent: pointer, first: cint, last: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelrowsAboutToBeInsertedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+
+  let slotval2 = first
+
+  let slotval3 = last
+
+  nimfunc[](slotval1, slotval2, slotval3)
+
+proc fcQAbstractItemModel_slot_callback_rowsAboutToBeInserted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelrowsAboutToBeInsertedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onRowsAboutToBeInserted*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelrowsAboutToBeInsertedSlot) =
+  var tmp = new QAbstractItemModelrowsAboutToBeInsertedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_rowsAboutToBeInserted(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_rowsAboutToBeInserted, fcQAbstractItemModel_slot_callback_rowsAboutToBeInserted_release)
+
+type QAbstractItemModelrowsInsertedSlot* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint)
+proc fcQAbstractItemModel_slot_callback_rowsInserted(slot: int, parent: pointer, first: cint, last: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelrowsInsertedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+
+  let slotval2 = first
+
+  let slotval3 = last
+
+  nimfunc[](slotval1, slotval2, slotval3)
+
+proc fcQAbstractItemModel_slot_callback_rowsInserted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelrowsInsertedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onRowsInserted*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelrowsInsertedSlot) =
+  var tmp = new QAbstractItemModelrowsInsertedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_rowsInserted(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_rowsInserted, fcQAbstractItemModel_slot_callback_rowsInserted_release)
+
+type QAbstractItemModelrowsAboutToBeRemovedSlot* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint)
+proc fcQAbstractItemModel_slot_callback_rowsAboutToBeRemoved(slot: int, parent: pointer, first: cint, last: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelrowsAboutToBeRemovedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+
+  let slotval2 = first
+
+  let slotval3 = last
+
+  nimfunc[](slotval1, slotval2, slotval3)
+
+proc fcQAbstractItemModel_slot_callback_rowsAboutToBeRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelrowsAboutToBeRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onRowsAboutToBeRemoved*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelrowsAboutToBeRemovedSlot) =
+  var tmp = new QAbstractItemModelrowsAboutToBeRemovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_rowsAboutToBeRemoved(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_rowsAboutToBeRemoved, fcQAbstractItemModel_slot_callback_rowsAboutToBeRemoved_release)
+
+type QAbstractItemModelrowsRemovedSlot* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint)
+proc fcQAbstractItemModel_slot_callback_rowsRemoved(slot: int, parent: pointer, first: cint, last: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelrowsRemovedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+
+  let slotval2 = first
+
+  let slotval3 = last
+
+  nimfunc[](slotval1, slotval2, slotval3)
+
+proc fcQAbstractItemModel_slot_callback_rowsRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelrowsRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onRowsRemoved*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelrowsRemovedSlot) =
+  var tmp = new QAbstractItemModelrowsRemovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_rowsRemoved(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_rowsRemoved, fcQAbstractItemModel_slot_callback_rowsRemoved_release)
+
+type QAbstractItemModelcolumnsAboutToBeInsertedSlot* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint)
+proc fcQAbstractItemModel_slot_callback_columnsAboutToBeInserted(slot: int, parent: pointer, first: cint, last: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelcolumnsAboutToBeInsertedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+
+  let slotval2 = first
+
+  let slotval3 = last
+
+  nimfunc[](slotval1, slotval2, slotval3)
+
+proc fcQAbstractItemModel_slot_callback_columnsAboutToBeInserted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelcolumnsAboutToBeInsertedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onColumnsAboutToBeInserted*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelcolumnsAboutToBeInsertedSlot) =
+  var tmp = new QAbstractItemModelcolumnsAboutToBeInsertedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_columnsAboutToBeInserted(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_columnsAboutToBeInserted, fcQAbstractItemModel_slot_callback_columnsAboutToBeInserted_release)
+
+type QAbstractItemModelcolumnsInsertedSlot* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint)
+proc fcQAbstractItemModel_slot_callback_columnsInserted(slot: int, parent: pointer, first: cint, last: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelcolumnsInsertedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+
+  let slotval2 = first
+
+  let slotval3 = last
+
+  nimfunc[](slotval1, slotval2, slotval3)
+
+proc fcQAbstractItemModel_slot_callback_columnsInserted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelcolumnsInsertedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onColumnsInserted*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelcolumnsInsertedSlot) =
+  var tmp = new QAbstractItemModelcolumnsInsertedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_columnsInserted(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_columnsInserted, fcQAbstractItemModel_slot_callback_columnsInserted_release)
+
+type QAbstractItemModelcolumnsAboutToBeRemovedSlot* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint)
+proc fcQAbstractItemModel_slot_callback_columnsAboutToBeRemoved(slot: int, parent: pointer, first: cint, last: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelcolumnsAboutToBeRemovedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+
+  let slotval2 = first
+
+  let slotval3 = last
+
+  nimfunc[](slotval1, slotval2, slotval3)
+
+proc fcQAbstractItemModel_slot_callback_columnsAboutToBeRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelcolumnsAboutToBeRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onColumnsAboutToBeRemoved*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelcolumnsAboutToBeRemovedSlot) =
+  var tmp = new QAbstractItemModelcolumnsAboutToBeRemovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_columnsAboutToBeRemoved(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_columnsAboutToBeRemoved, fcQAbstractItemModel_slot_callback_columnsAboutToBeRemoved_release)
+
+type QAbstractItemModelcolumnsRemovedSlot* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint)
+proc fcQAbstractItemModel_slot_callback_columnsRemoved(slot: int, parent: pointer, first: cint, last: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelcolumnsRemovedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+
+  let slotval2 = first
+
+  let slotval3 = last
+
+  nimfunc[](slotval1, slotval2, slotval3)
+
+proc fcQAbstractItemModel_slot_callback_columnsRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelcolumnsRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onColumnsRemoved*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelcolumnsRemovedSlot) =
+  var tmp = new QAbstractItemModelcolumnsRemovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_columnsRemoved(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_columnsRemoved, fcQAbstractItemModel_slot_callback_columnsRemoved_release)
+
+type QAbstractItemModelmodelAboutToBeResetSlot* = proc()
+proc fcQAbstractItemModel_slot_callback_modelAboutToBeReset(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelmodelAboutToBeResetSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQAbstractItemModel_slot_callback_modelAboutToBeReset_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelmodelAboutToBeResetSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onModelAboutToBeReset*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelmodelAboutToBeResetSlot) =
+  var tmp = new QAbstractItemModelmodelAboutToBeResetSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_modelAboutToBeReset(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_modelAboutToBeReset, fcQAbstractItemModel_slot_callback_modelAboutToBeReset_release)
+
+type QAbstractItemModelmodelResetSlot* = proc()
+proc fcQAbstractItemModel_slot_callback_modelReset(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelmodelResetSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQAbstractItemModel_slot_callback_modelReset_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelmodelResetSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onModelReset*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelmodelResetSlot) =
+  var tmp = new QAbstractItemModelmodelResetSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_modelReset(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_modelReset, fcQAbstractItemModel_slot_callback_modelReset_release)
+
+type QAbstractItemModelrowsAboutToBeMovedSlot* = proc(sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceStart: cint, sourceEnd: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint)
+proc fcQAbstractItemModel_slot_callback_rowsAboutToBeMoved(slot: int, sourceParent: pointer, sourceStart: cint, sourceEnd: cint, destinationParent: pointer, destinationRow: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelrowsAboutToBeMovedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
+
+  let slotval2 = sourceStart
+
+  let slotval3 = sourceEnd
+
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
+
+  let slotval5 = destinationRow
+
+  nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5)
+
+proc fcQAbstractItemModel_slot_callback_rowsAboutToBeMoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelrowsAboutToBeMovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onRowsAboutToBeMoved*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelrowsAboutToBeMovedSlot) =
+  var tmp = new QAbstractItemModelrowsAboutToBeMovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_rowsAboutToBeMoved(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_rowsAboutToBeMoved, fcQAbstractItemModel_slot_callback_rowsAboutToBeMoved_release)
+
+type QAbstractItemModelrowsMovedSlot* = proc(sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceStart: cint, sourceEnd: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint)
+proc fcQAbstractItemModel_slot_callback_rowsMoved(slot: int, sourceParent: pointer, sourceStart: cint, sourceEnd: cint, destinationParent: pointer, destinationRow: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelrowsMovedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
+
+  let slotval2 = sourceStart
+
+  let slotval3 = sourceEnd
+
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
+
+  let slotval5 = destinationRow
+
+  nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5)
+
+proc fcQAbstractItemModel_slot_callback_rowsMoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelrowsMovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onRowsMoved*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelrowsMovedSlot) =
+  var tmp = new QAbstractItemModelrowsMovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_rowsMoved(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_rowsMoved, fcQAbstractItemModel_slot_callback_rowsMoved_release)
+
+type QAbstractItemModelcolumnsAboutToBeMovedSlot* = proc(sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceStart: cint, sourceEnd: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint)
+proc fcQAbstractItemModel_slot_callback_columnsAboutToBeMoved(slot: int, sourceParent: pointer, sourceStart: cint, sourceEnd: cint, destinationParent: pointer, destinationColumn: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelcolumnsAboutToBeMovedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
+
+  let slotval2 = sourceStart
+
+  let slotval3 = sourceEnd
+
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
+
+  let slotval5 = destinationColumn
+
+  nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5)
+
+proc fcQAbstractItemModel_slot_callback_columnsAboutToBeMoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelcolumnsAboutToBeMovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onColumnsAboutToBeMoved*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelcolumnsAboutToBeMovedSlot) =
+  var tmp = new QAbstractItemModelcolumnsAboutToBeMovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_columnsAboutToBeMoved(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_columnsAboutToBeMoved, fcQAbstractItemModel_slot_callback_columnsAboutToBeMoved_release)
+
+type QAbstractItemModelcolumnsMovedSlot* = proc(sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceStart: cint, sourceEnd: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint)
+proc fcQAbstractItemModel_slot_callback_columnsMoved(slot: int, sourceParent: pointer, sourceStart: cint, sourceEnd: cint, destinationParent: pointer, destinationColumn: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QAbstractItemModelcolumnsMovedSlot](cast[pointer](slot))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
+
+  let slotval2 = sourceStart
+
+  let slotval3 = sourceEnd
+
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
+
+  let slotval5 = destinationColumn
+
+  nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5)
+
+proc fcQAbstractItemModel_slot_callback_columnsMoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelcolumnsMovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onColumnsMoved*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelcolumnsMovedSlot) =
+  var tmp = new QAbstractItemModelcolumnsMovedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_connect_columnsMoved(self.h, cast[int](addr tmp[]), fcQAbstractItemModel_slot_callback_columnsMoved, fcQAbstractItemModel_slot_callback_columnsMoved_release)
 
 type QAbstractItemModelmetaObjectProc* = proc(self: QAbstractItemModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractItemModelmetacastProc* = proc(self: QAbstractItemModel, param1: cstring): pointer {.raises: [], gcsafe.}

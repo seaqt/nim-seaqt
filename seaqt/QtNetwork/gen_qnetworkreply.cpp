@@ -209,14 +209,9 @@ void QNetworkReply_socketStartedConnecting(QNetworkReply* self) {
 }
 
 void QNetworkReply_connect_socketStartedConnecting(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::socketStartedConnecting), self, local_caller{slot, callback, release});
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::socketStartedConnecting), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkReply_requestSent(QNetworkReply* self) {
@@ -224,14 +219,9 @@ void QNetworkReply_requestSent(QNetworkReply* self) {
 }
 
 void QNetworkReply_connect_requestSent(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::requestSent), self, local_caller{slot, callback, release});
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::requestSent), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkReply_metaDataChanged(QNetworkReply* self) {
@@ -239,14 +229,9 @@ void QNetworkReply_metaDataChanged(QNetworkReply* self) {
 }
 
 void QNetworkReply_connect_metaDataChanged(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::metaDataChanged), self, local_caller{slot, callback, release});
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::metaDataChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkReply_finished(QNetworkReply* self) {
@@ -254,14 +239,9 @@ void QNetworkReply_finished(QNetworkReply* self) {
 }
 
 void QNetworkReply_connect_finished(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::finished), self, local_caller{slot, callback, release});
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::finished), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkReply_errorOccurred(QNetworkReply* self, int param1) {
@@ -269,16 +249,11 @@ void QNetworkReply_errorOccurred(QNetworkReply* self, int param1) {
 }
 
 void QNetworkReply_connect_errorOccurred(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QNetworkReply::NetworkError param1) {
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::errorOccurred), self, [callback, release = seaqt::release_callback{slot,release}](QNetworkReply::NetworkError param1) {
 			QNetworkReply::NetworkError param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::errorOccurred), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QNetworkReply_encrypted(QNetworkReply* self) {
@@ -286,14 +261,9 @@ void QNetworkReply_encrypted(QNetworkReply* self) {
 }
 
 void QNetworkReply_connect_encrypted(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::encrypted), self, local_caller{slot, callback, release});
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::encrypted), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkReply_sslErrors(QNetworkReply* self, struct seaqt_array /* of QSslError* */  errors) {
@@ -307,10 +277,7 @@ void QNetworkReply_sslErrors(QNetworkReply* self, struct seaqt_array /* of QSslE
 }
 
 void QNetworkReply_connect_sslErrors(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QSslError* */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QSslError* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QSslError* */ );
-		void operator()(const QList<QSslError>& errors) {
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(const QList<QSslError>&)>(&QNetworkReply::sslErrors), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QSslError>& errors) {
 			const QList<QSslError>& errors_ret = errors;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QSslError** errors_arr = static_cast<QSslError**>(malloc(sizeof(QSslError*) * errors_ret.length()));
@@ -321,10 +288,8 @@ void QNetworkReply_connect_sslErrors(QNetworkReply* self, intptr_t slot, void (*
 			errors_out.len = errors_ret.length();
 			errors_out.data = static_cast<void*>(errors_arr);
 			struct seaqt_array /* of QSslError* */  sigval1 = errors_out;
-			callback(slot, sigval1);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(const QList<QSslError>&)>(&QNetworkReply::sslErrors), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QNetworkReply_preSharedKeyAuthenticationRequired(QNetworkReply* self, QSslPreSharedKeyAuthenticator* authenticator) {
@@ -332,15 +297,10 @@ void QNetworkReply_preSharedKeyAuthenticationRequired(QNetworkReply* self, QSslP
 }
 
 void QNetworkReply_connect_preSharedKeyAuthenticationRequired(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*);
-		void operator()(QSslPreSharedKeyAuthenticator* authenticator) {
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(QSslPreSharedKeyAuthenticator*)>(&QNetworkReply::preSharedKeyAuthenticationRequired), self, [callback, release = seaqt::release_callback{slot,release}](QSslPreSharedKeyAuthenticator* authenticator) {
 			QSslPreSharedKeyAuthenticator* sigval1 = authenticator;
-			callback(slot, sigval1);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(QSslPreSharedKeyAuthenticator*)>(&QNetworkReply::preSharedKeyAuthenticationRequired), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QNetworkReply_redirected(QNetworkReply* self, QUrl* url) {
@@ -348,17 +308,12 @@ void QNetworkReply_redirected(QNetworkReply* self, QUrl* url) {
 }
 
 void QNetworkReply_connect_redirected(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& url) {
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(const QUrl&)>(&QNetworkReply::redirected), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& url) {
 			const QUrl& url_ret = url;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(const QUrl&)>(&QNetworkReply::redirected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QNetworkReply_redirectAllowed(QNetworkReply* self) {
@@ -366,14 +321,9 @@ void QNetworkReply_redirectAllowed(QNetworkReply* self) {
 }
 
 void QNetworkReply_connect_redirectAllowed(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::redirectAllowed), self, local_caller{slot, callback, release});
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)()>(&QNetworkReply::redirectAllowed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkReply_uploadProgress(QNetworkReply* self, long long bytesSent, long long bytesTotal) {
@@ -381,18 +331,13 @@ void QNetworkReply_uploadProgress(QNetworkReply* self, long long bytesSent, long
 }
 
 void QNetworkReply_connect_uploadProgress(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t, long long, long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, long long, long long);
-		void operator()(qint64 bytesSent, qint64 bytesTotal) {
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(qint64, qint64)>(&QNetworkReply::uploadProgress), self, [callback, release = seaqt::release_callback{slot,release}](qint64 bytesSent, qint64 bytesTotal) {
 			qint64 bytesSent_ret = bytesSent;
 			long long sigval1 = static_cast<long long>(bytesSent_ret);
 			qint64 bytesTotal_ret = bytesTotal;
 			long long sigval2 = static_cast<long long>(bytesTotal_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(qint64, qint64)>(&QNetworkReply::uploadProgress), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QNetworkReply_downloadProgress(QNetworkReply* self, long long bytesReceived, long long bytesTotal) {
@@ -400,18 +345,13 @@ void QNetworkReply_downloadProgress(QNetworkReply* self, long long bytesReceived
 }
 
 void QNetworkReply_connect_downloadProgress(QNetworkReply* self, intptr_t slot, void (*callback)(intptr_t, long long, long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, long long, long long);
-		void operator()(qint64 bytesReceived, qint64 bytesTotal) {
+	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(qint64, qint64)>(&QNetworkReply::downloadProgress), self, [callback, release = seaqt::release_callback{slot,release}](qint64 bytesReceived, qint64 bytesTotal) {
 			qint64 bytesReceived_ret = bytesReceived;
 			long long sigval1 = static_cast<long long>(bytesReceived_ret);
 			qint64 bytesTotal_ret = bytesTotal;
 			long long sigval2 = static_cast<long long>(bytesTotal_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QNetworkReply::connect(self, static_cast<void (QNetworkReply::*)(qint64, qint64)>(&QNetworkReply::downloadProgress), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QNetworkReply_tr_s_c(const char* s, const char* c) {

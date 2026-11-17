@@ -163,7 +163,6 @@ int QStackedLayout_protectedbase_senderSignalIndex(const VirtualQStackedLayout* 
 int QStackedLayout_protectedbase_receivers(const VirtualQStackedLayout* self, const char* signal);
 bool QStackedLayout_protectedbase_isSignalConnected(const VirtualQStackedLayout* self, QMetaMethod* signal);
 
-const QMetaObject* QStackedLayout_staticMetaObject();
 void QStackedLayout_delete(QStackedLayout* self);
 
 #ifdef __cplusplus

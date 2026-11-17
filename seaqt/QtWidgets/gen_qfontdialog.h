@@ -253,7 +253,6 @@ int QFontDialog_protectedbase_senderSignalIndex(const VirtualQFontDialog* self);
 int QFontDialog_protectedbase_receivers(const VirtualQFontDialog* self, const char* signal);
 bool QFontDialog_protectedbase_isSignalConnected(const VirtualQFontDialog* self, QMetaMethod* signal);
 
-const QMetaObject* QFontDialog_staticMetaObject();
 void QFontDialog_delete(QFontDialog* self);
 
 #ifdef __cplusplus

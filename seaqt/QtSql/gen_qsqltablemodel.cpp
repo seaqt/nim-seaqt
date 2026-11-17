@@ -1207,18 +1207,13 @@ void QSqlTableModel_primeInsert(QSqlTableModel* self, int row, QSqlRecord* recor
 }
 
 void QSqlTableModel_connect_primeInsert(QSqlTableModel* self, intptr_t slot, void (*callback)(intptr_t, int, QSqlRecord*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, QSqlRecord*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, QSqlRecord*);
-		void operator()(int row, QSqlRecord& record) {
+	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(int, QSqlRecord&)>(&QSqlTableModel::primeInsert), self, [callback, release = seaqt::release_callback{slot,release}](int row, QSqlRecord& record) {
 			int sigval1 = row;
 			QSqlRecord& record_ret = record;
 			// Cast returned reference into pointer
 			QSqlRecord* sigval2 = &record_ret;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(int, QSqlRecord&)>(&QSqlTableModel::primeInsert), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QSqlTableModel_beforeInsert(QSqlTableModel* self, QSqlRecord* record) {
@@ -1226,17 +1221,12 @@ void QSqlTableModel_beforeInsert(QSqlTableModel* self, QSqlRecord* record) {
 }
 
 void QSqlTableModel_connect_beforeInsert(QSqlTableModel* self, intptr_t slot, void (*callback)(intptr_t, QSqlRecord*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSqlRecord*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSqlRecord*);
-		void operator()(QSqlRecord& record) {
+	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(QSqlRecord&)>(&QSqlTableModel::beforeInsert), self, [callback, release = seaqt::release_callback{slot,release}](QSqlRecord& record) {
 			QSqlRecord& record_ret = record;
 			// Cast returned reference into pointer
 			QSqlRecord* sigval1 = &record_ret;
-			callback(slot, sigval1);
-		}
-	};
-	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(QSqlRecord&)>(&QSqlTableModel::beforeInsert), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSqlTableModel_beforeUpdate(QSqlTableModel* self, int row, QSqlRecord* record) {
@@ -1244,18 +1234,13 @@ void QSqlTableModel_beforeUpdate(QSqlTableModel* self, int row, QSqlRecord* reco
 }
 
 void QSqlTableModel_connect_beforeUpdate(QSqlTableModel* self, intptr_t slot, void (*callback)(intptr_t, int, QSqlRecord*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, QSqlRecord*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, QSqlRecord*);
-		void operator()(int row, QSqlRecord& record) {
+	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(int, QSqlRecord&)>(&QSqlTableModel::beforeUpdate), self, [callback, release = seaqt::release_callback{slot,release}](int row, QSqlRecord& record) {
 			int sigval1 = row;
 			QSqlRecord& record_ret = record;
 			// Cast returned reference into pointer
 			QSqlRecord* sigval2 = &record_ret;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(int, QSqlRecord&)>(&QSqlTableModel::beforeUpdate), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QSqlTableModel_beforeDelete(QSqlTableModel* self, int row) {
@@ -1263,15 +1248,10 @@ void QSqlTableModel_beforeDelete(QSqlTableModel* self, int row) {
 }
 
 void QSqlTableModel_connect_beforeDelete(QSqlTableModel* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int row) {
+	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(int)>(&QSqlTableModel::beforeDelete), self, [callback, release = seaqt::release_callback{slot,release}](int row) {
 			int sigval1 = row;
-			callback(slot, sigval1);
-		}
-	};
-	QSqlTableModel::connect(self, static_cast<void (QSqlTableModel::*)(int)>(&QSqlTableModel::beforeDelete), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QSqlTableModel_tr_s_c(const char* s, const char* c) {

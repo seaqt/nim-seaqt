@@ -237,7 +237,6 @@ int QStatusBar_protectedbase_senderSignalIndex(const VirtualQStatusBar* self);
 int QStatusBar_protectedbase_receivers(const VirtualQStatusBar* self, const char* signal);
 bool QStatusBar_protectedbase_isSignalConnected(const VirtualQStatusBar* self, QMetaMethod* signal);
 
-const QMetaObject* QStatusBar_staticMetaObject();
 void QStatusBar_delete(QStatusBar* self);
 
 #ifdef __cplusplus

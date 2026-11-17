@@ -275,6 +275,12 @@ struct seaqt_string QTimer_tr_s_c_n(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+void QTimer_connect_timeout(QTimer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QTimer::connect(self, &QTimer::timeout, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
 const QMetaObject* QTimer_staticMetaObject() { return &QTimer::staticMetaObject; }
 void* QTimer_vdata(VirtualQTimer* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQTimer>()); }
 VirtualQTimer* vdata_QTimer(void* vdata) { return reinterpret_cast<VirtualQTimer*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQTimer>()); }

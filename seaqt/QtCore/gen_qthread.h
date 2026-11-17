@@ -113,7 +113,9 @@ int QThread_protectedbase_senderSignalIndex(const VirtualQThread* self);
 int QThread_protectedbase_receivers(const VirtualQThread* self, const char* signal);
 bool QThread_protectedbase_isSignalConnected(const VirtualQThread* self, QMetaMethod* signal);
 
-const QMetaObject* QThread_staticMetaObject();
+void QThread_connect_started(QThread* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QThread_connect_finished(QThread* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QThread_delete(QThread* self);
 
 #ifdef __cplusplus

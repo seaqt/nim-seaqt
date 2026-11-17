@@ -45,7 +45,6 @@ struct seaqt_string QPdfLink_toString(const QPdfLink* self);
 void QPdfLink_copyToClipboard(const QPdfLink* self);
 void QPdfLink_copyToClipboard_mode(const QPdfLink* self, int mode);
 
-const QMetaObject* QPdfLink_staticMetaObject();
 void QPdfLink_delete(QPdfLink* self);
 
 #ifdef __cplusplus

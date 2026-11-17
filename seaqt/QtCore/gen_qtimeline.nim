@@ -98,6 +98,10 @@ proc fcQTimeLine_setCurrentTime(self: pointer, msec: cint): void {.importc: "QTi
 proc fcQTimeLine_toggleDirection(self: pointer): void {.importc: "QTimeLine_toggleDirection".}
 proc fcQTimeLine_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimeLine_tr_s_c".}
 proc fcQTimeLine_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimeLine_tr_s_c_n".}
+proc fcQTimeLine_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, x: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTimeLine_connect_valueChanged".}
+proc fcQTimeLine_connect_frameChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTimeLine_connect_frameChanged".}
+proc fcQTimeLine_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, newState: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTimeLine_connect_stateChanged".}
+proc fcQTimeLine_connect_finished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTimeLine_connect_finished".}
 proc fcQTimeLine_vdata(self: pointer): ptr pointer {.importc: "QTimeLine_vdata".}
 proc fvdata_cQTimeLine(self: pointer): pointer {.importc: "vdata_QTimeLine".}
 
@@ -241,6 +245,72 @@ proc tr*(_: type gen_qtimeline_types.QTimeLine, s: cstring, c: cstring, n: cint)
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QTimeLinevalueChangedSlot* = proc(x: float64)
+proc fcQTimeLine_slot_callback_valueChanged(slot: int, x: float64) {.cdecl.} =
+  let nimfunc = cast[ptr QTimeLinevalueChangedSlot](cast[pointer](slot))
+  let slotval1 = x
+
+  nimfunc[](slotval1)
+
+proc fcQTimeLine_slot_callback_valueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTimeLinevalueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onValueChanged*(self: gen_qtimeline_types.QTimeLine, slot: QTimeLinevalueChangedSlot) =
+  var tmp = new QTimeLinevalueChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTimeLine_connect_valueChanged(self.h, cast[int](addr tmp[]), fcQTimeLine_slot_callback_valueChanged, fcQTimeLine_slot_callback_valueChanged_release)
+
+type QTimeLineframeChangedSlot* = proc(param1: cint)
+proc fcQTimeLine_slot_callback_frameChanged(slot: int, param1: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QTimeLineframeChangedSlot](cast[pointer](slot))
+  let slotval1 = param1
+
+  nimfunc[](slotval1)
+
+proc fcQTimeLine_slot_callback_frameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTimeLineframeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onFrameChanged*(self: gen_qtimeline_types.QTimeLine, slot: QTimeLineframeChangedSlot) =
+  var tmp = new QTimeLineframeChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTimeLine_connect_frameChanged(self.h, cast[int](addr tmp[]), fcQTimeLine_slot_callback_frameChanged, fcQTimeLine_slot_callback_frameChanged_release)
+
+type QTimeLinestateChangedSlot* = proc(newState: cint)
+proc fcQTimeLine_slot_callback_stateChanged(slot: int, newState: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QTimeLinestateChangedSlot](cast[pointer](slot))
+  let slotval1 = cint(newState)
+
+  nimfunc[](slotval1)
+
+proc fcQTimeLine_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTimeLinestateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onStateChanged*(self: gen_qtimeline_types.QTimeLine, slot: QTimeLinestateChangedSlot) =
+  var tmp = new QTimeLinestateChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTimeLine_connect_stateChanged(self.h, cast[int](addr tmp[]), fcQTimeLine_slot_callback_stateChanged, fcQTimeLine_slot_callback_stateChanged_release)
+
+type QTimeLinefinishedSlot* = proc()
+proc fcQTimeLine_slot_callback_finished(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QTimeLinefinishedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQTimeLine_slot_callback_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTimeLinefinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onFinished*(self: gen_qtimeline_types.QTimeLine, slot: QTimeLinefinishedSlot) =
+  var tmp = new QTimeLinefinishedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTimeLine_connect_finished(self.h, cast[int](addr tmp[]), fcQTimeLine_slot_callback_finished, fcQTimeLine_slot_callback_finished_release)
 
 type QTimeLinemetaObjectProc* = proc(self: QTimeLine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTimeLinemetacastProc* = proc(self: QTimeLine, param1: cstring): pointer {.raises: [], gcsafe.}

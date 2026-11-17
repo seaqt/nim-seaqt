@@ -871,15 +871,10 @@ void QProgressBar_valueChanged(QProgressBar* self, int value) {
 }
 
 void QProgressBar_connect_valueChanged(QProgressBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int value) {
+	QProgressBar::connect(self, static_cast<void (QProgressBar::*)(int)>(&QProgressBar::valueChanged), self, [callback, release = seaqt::release_callback{slot,release}](int value) {
 			int sigval1 = value;
-			callback(slot, sigval1);
-		}
-	};
-	QProgressBar::connect(self, static_cast<void (QProgressBar::*)(int)>(&QProgressBar::valueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QProgressBar_tr_s_c(const char* s, const char* c) {

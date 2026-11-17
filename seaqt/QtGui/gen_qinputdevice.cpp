@@ -320,15 +320,10 @@ void QInputDevice_availableVirtualGeometryChanged(QInputDevice* self, QRect* are
 }
 
 void QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRect*);
-		void operator()(QRect area) {
+	QInputDevice::connect(self, static_cast<void (QInputDevice::*)(QRect)>(&QInputDevice::availableVirtualGeometryChanged), self, [callback, release = seaqt::release_callback{slot,release}](QRect area) {
 			QRect* sigval1 = new QRect(area);
-			callback(slot, sigval1);
-		}
-	};
-	QInputDevice::connect(self, static_cast<void (QInputDevice::*)(QRect)>(&QInputDevice::availableVirtualGeometryChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QInputDevice_tr_s_c(const char* s, const char* c) {

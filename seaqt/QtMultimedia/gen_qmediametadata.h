@@ -38,7 +38,6 @@ struct seaqt_string QMediaMetaData_stringValue(const QMediaMetaData* self, int k
 struct seaqt_string QMediaMetaData_metaDataKeyToString(int k);
 void QMediaMetaData_operatorAssign(QMediaMetaData* self, QMediaMetaData* from);
 
-const QMetaObject* QMediaMetaData_staticMetaObject();
 void QMediaMetaData_delete(QMediaMetaData* self);
 
 #ifdef __cplusplus

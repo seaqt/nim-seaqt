@@ -852,15 +852,10 @@ void QPrintPreviewWidget_paintRequested(QPrintPreviewWidget* self, QPrinter* pri
 }
 
 void QPrintPreviewWidget_connect_paintRequested(QPrintPreviewWidget* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPrinter*);
-		void operator()(QPrinter* printer) {
+	QPrintPreviewWidget::connect(self, static_cast<void (QPrintPreviewWidget::*)(QPrinter*)>(&QPrintPreviewWidget::paintRequested), self, [callback, release = seaqt::release_callback{slot,release}](QPrinter* printer) {
 			QPrinter* sigval1 = printer;
-			callback(slot, sigval1);
-		}
-	};
-	QPrintPreviewWidget::connect(self, static_cast<void (QPrintPreviewWidget::*)(QPrinter*)>(&QPrintPreviewWidget::paintRequested), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPrintPreviewWidget_previewChanged(QPrintPreviewWidget* self) {
@@ -868,14 +863,9 @@ void QPrintPreviewWidget_previewChanged(QPrintPreviewWidget* self) {
 }
 
 void QPrintPreviewWidget_connect_previewChanged(QPrintPreviewWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QPrintPreviewWidget::connect(self, static_cast<void (QPrintPreviewWidget::*)()>(&QPrintPreviewWidget::previewChanged), self, local_caller{slot, callback, release});
+	QPrintPreviewWidget::connect(self, static_cast<void (QPrintPreviewWidget::*)()>(&QPrintPreviewWidget::previewChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QPrintPreviewWidget_tr_s_c(const char* s, const char* c) {

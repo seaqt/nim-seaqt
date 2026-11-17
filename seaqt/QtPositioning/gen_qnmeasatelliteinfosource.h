@@ -119,7 +119,6 @@ int QNmeaSatelliteInfoSource_protectedbase_senderSignalIndex(const VirtualQNmeaS
 int QNmeaSatelliteInfoSource_protectedbase_receivers(const VirtualQNmeaSatelliteInfoSource* self, const char* signal);
 bool QNmeaSatelliteInfoSource_protectedbase_isSignalConnected(const VirtualQNmeaSatelliteInfoSource* self, QMetaMethod* signal);
 
-const QMetaObject* QNmeaSatelliteInfoSource_staticMetaObject();
 void QNmeaSatelliteInfoSource_delete(QNmeaSatelliteInfoSource* self);
 
 #ifdef __cplusplus

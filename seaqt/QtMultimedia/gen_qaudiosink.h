@@ -106,7 +106,6 @@ int QAudioSink_protectedbase_senderSignalIndex(const VirtualQAudioSink* self);
 int QAudioSink_protectedbase_receivers(const VirtualQAudioSink* self, const char* signal);
 bool QAudioSink_protectedbase_isSignalConnected(const VirtualQAudioSink* self, QMetaMethod* signal);
 
-const QMetaObject* QAudioSink_staticMetaObject();
 void QAudioSink_delete(QAudioSink* self);
 
 #ifdef __cplusplus
