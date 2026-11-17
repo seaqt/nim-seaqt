@@ -8,7 +8,12 @@ const
   QtGuiGenVersion* = "5.15.8"
     ## The version used for generating the bindings
 
-  QtGuiBuildVersion* = gorge("pkg-config --modversion Qt5Gui")
-    ## The version used when compiling the application
+  QtGuiBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt5Gui")
+      if v.len > 0: v else: QtGuiGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtGuiBuildVersion=x.y.z
 
 {.passl: QtGuiLibs}

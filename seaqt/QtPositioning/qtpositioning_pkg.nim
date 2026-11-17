@@ -8,7 +8,12 @@ const
   QtPositioningGenVersion* = "5.15.8"
     ## The version used for generating the bindings
 
-  QtPositioningBuildVersion* = gorge("pkg-config --modversion Qt5Positioning")
-    ## The version used when compiling the application
+  QtPositioningBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt5Positioning")
+      if v.len > 0: v else: QtPositioningGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtPositioningBuildVersion=x.y.z
 
 {.passl: QtPositioningLibs}

@@ -8,7 +8,12 @@ const
   QtWebKitWidgetsGenVersion* = "5.212.0"
     ## The version used for generating the bindings
 
-  QtWebKitWidgetsBuildVersion* = gorge("pkg-config --modversion Qt5WebKitWidgets")
-    ## The version used when compiling the application
+  QtWebKitWidgetsBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt5WebKitWidgets")
+      if v.len > 0: v else: QtWebKitWidgetsGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtWebKitWidgetsBuildVersion=x.y.z
 
 {.passl: QtWebKitWidgetsLibs}

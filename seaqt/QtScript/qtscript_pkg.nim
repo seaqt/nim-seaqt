@@ -8,7 +8,12 @@ const
   QtScriptGenVersion* = "5.15.8"
     ## The version used for generating the bindings
 
-  QtScriptBuildVersion* = gorge("pkg-config --modversion Qt5Script")
-    ## The version used when compiling the application
+  QtScriptBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt5Script")
+      if v.len > 0: v else: QtScriptGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtScriptBuildVersion=x.y.z
 
 {.passl: QtScriptLibs}

@@ -8,7 +8,12 @@ const
   QtSvgGenVersion* = "5.15.8"
     ## The version used for generating the bindings
 
-  QtSvgBuildVersion* = gorge("pkg-config --modversion Qt5Svg")
-    ## The version used when compiling the application
+  QtSvgBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt5Svg")
+      if v.len > 0: v else: QtSvgGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtSvgBuildVersion=x.y.z
 
 {.passl: QtSvgLibs}
