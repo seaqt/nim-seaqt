@@ -8,7 +8,12 @@ const
   QtPdfWidgetsGenVersion* = "6.11.1"
     ## The version used for generating the bindings
 
-  QtPdfWidgetsBuildVersion* = gorge("pkg-config --modversion Qt6PdfWidgets")
-    ## The version used when compiling the application
+  QtPdfWidgetsBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6PdfWidgets")
+      if v.len > 0: v else: QtPdfWidgetsGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtPdfWidgetsBuildVersion=x.y.z
 
 {.passl: QtPdfWidgetsLibs}

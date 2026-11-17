@@ -8,7 +8,12 @@ const
   QtSpatialAudioGenVersion* = "6.11.1"
     ## The version used for generating the bindings
 
-  QtSpatialAudioBuildVersion* = gorge("pkg-config --modversion Qt6SpatialAudio")
-    ## The version used when compiling the application
+  QtSpatialAudioBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6SpatialAudio")
+      if v.len > 0: v else: QtSpatialAudioGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtSpatialAudioBuildVersion=x.y.z
 
 {.passl: QtSpatialAudioLibs}
