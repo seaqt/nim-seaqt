@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qremoteobjectregistry
+export gen_qremoteobjectregistry

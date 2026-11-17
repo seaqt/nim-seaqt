@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qconnectionfactories
+export gen_qconnectionfactories

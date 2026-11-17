@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qtremoteobjectglobal
+export gen_qtremoteobjectglobal

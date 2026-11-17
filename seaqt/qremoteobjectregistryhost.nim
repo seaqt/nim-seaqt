@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qremoteobjectnode
+export gen_qremoteobjectnode
