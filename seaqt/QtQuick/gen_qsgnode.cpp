@@ -1,0 +1,608 @@
+#include <QMatrix4x4>
+#include <QRectF>
+#include <QSGBasicGeometryNode>
+#include <QSGClipNode>
+#include <QSGGeometry>
+#include <QSGGeometryNode>
+#include <QSGNode>
+#include <QSGNodeVisitor>
+#include <QSGOpacityNode>
+#include <QSGRootNode>
+#include <QSGTransformNode>
+#include <qsgnode.h>
+#include "gen_qsgnode.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQSGNode final : public QSGNode {
+	const QSGNode_VTable* vtbl;
+public:
+	friend void* QSGNode_vdata(VirtualQSGNode* self);
+	friend VirtualQSGNode* vdata_QSGNode(void* vdata);
+
+	VirtualQSGNode(const QSGNode_VTable* vtbl): QSGNode(), vtbl(vtbl) {}
+
+	virtual ~VirtualQSGNode() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual bool isSubtreeBlocked() const override {
+		if (vtbl->isSubtreeBlocked == 0) {
+			return QSGNode::isSubtreeBlocked();
+		}
+
+		bool callback_return_value = vtbl->isSubtreeBlocked(this);
+		return callback_return_value;
+	}
+
+	friend bool QSGNode_virtualbase_isSubtreeBlocked(const VirtualQSGNode* self);
+
+	virtual void preprocess() override {
+		if (vtbl->preprocess == 0) {
+			QSGNode::preprocess();
+			return;
+		}
+
+		vtbl->preprocess(this);
+	}
+
+	friend void QSGNode_virtualbase_preprocess(VirtualQSGNode* self);
+
+};
+
+VirtualQSGNode* QSGNode_new(const QSGNode_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGNode>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQSGNode(vtbl) : nullptr;
+}
+
+QSGNode* QSGNode_parent(const QSGNode* self) {
+	return self->parent();
+}
+
+void QSGNode_removeChildNode(QSGNode* self, QSGNode* node) {
+	self->removeChildNode(node);
+}
+
+void QSGNode_removeAllChildNodes(QSGNode* self) {
+	self->removeAllChildNodes();
+}
+
+void QSGNode_prependChildNode(QSGNode* self, QSGNode* node) {
+	self->prependChildNode(node);
+}
+
+void QSGNode_appendChildNode(QSGNode* self, QSGNode* node) {
+	self->appendChildNode(node);
+}
+
+void QSGNode_insertChildNodeBefore(QSGNode* self, QSGNode* node, QSGNode* before) {
+	self->insertChildNodeBefore(node, before);
+}
+
+void QSGNode_insertChildNodeAfter(QSGNode* self, QSGNode* node, QSGNode* after) {
+	self->insertChildNodeAfter(node, after);
+}
+
+void QSGNode_reparentChildNodesTo(QSGNode* self, QSGNode* newParent) {
+	self->reparentChildNodesTo(newParent);
+}
+
+int QSGNode_childCount(const QSGNode* self) {
+	return self->childCount();
+}
+
+QSGNode* QSGNode_childAtIndex(const QSGNode* self, int i) {
+	return self->childAtIndex(static_cast<int>(i));
+}
+
+QSGNode* QSGNode_firstChild(const QSGNode* self) {
+	return self->firstChild();
+}
+
+QSGNode* QSGNode_lastChild(const QSGNode* self) {
+	return self->lastChild();
+}
+
+QSGNode* QSGNode_nextSibling(const QSGNode* self) {
+	return self->nextSibling();
+}
+
+QSGNode* QSGNode_previousSibling(const QSGNode* self) {
+	return self->previousSibling();
+}
+
+int QSGNode_type(const QSGNode* self) {
+	QSGNode::NodeType _ret = self->type();
+	return static_cast<int>(_ret);
+}
+
+void QSGNode_clearDirty(QSGNode* self) {
+	self->clearDirty();
+}
+
+void QSGNode_markDirty(QSGNode* self, int bits) {
+	self->markDirty(static_cast<QSGNode::DirtyState>(bits));
+}
+
+int QSGNode_dirtyState(const QSGNode* self) {
+	QSGNode::DirtyState _ret = self->dirtyState();
+	return static_cast<int>(_ret);
+}
+
+bool QSGNode_isSubtreeBlocked(const QSGNode* self) {
+	return self->isSubtreeBlocked();
+}
+
+int QSGNode_flags(const QSGNode* self) {
+	QSGNode::Flags _ret = self->flags();
+	return static_cast<int>(_ret);
+}
+
+void QSGNode_setFlag_QSGNode_Flag(QSGNode* self, int param1) {
+	self->setFlag(static_cast<QSGNode::Flag>(param1));
+}
+
+void QSGNode_setFlags_QSGNode_Flags(QSGNode* self, int param1) {
+	self->setFlags(static_cast<QSGNode::Flags>(param1));
+}
+
+void QSGNode_preprocess(QSGNode* self) {
+	self->preprocess();
+}
+
+void QSGNode_setFlag_QSGNode_Flag_bool(QSGNode* self, int param1, bool param2) {
+	self->setFlag(static_cast<QSGNode::Flag>(param1), param2);
+}
+
+void QSGNode_setFlags_QSGNode_Flags_bool(QSGNode* self, int param1, bool param2) {
+	self->setFlags(static_cast<QSGNode::Flags>(param1), param2);
+}
+
+void* QSGNode_vdata(VirtualQSGNode* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGNode>()); }
+VirtualQSGNode* vdata_QSGNode(void* vdata) { return reinterpret_cast<VirtualQSGNode*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGNode>()); }
+
+bool QSGNode_virtualbase_isSubtreeBlocked(const VirtualQSGNode* self) {
+
+	return self->QSGNode::isSubtreeBlocked();
+}
+
+void QSGNode_virtualbase_preprocess(VirtualQSGNode* self) {
+
+	self->QSGNode::preprocess();
+}
+
+void QSGNode_delete(QSGNode* self) {
+	delete self;
+}
+
+void QSGBasicGeometryNode_virtbase(QSGBasicGeometryNode* src, QSGNode** outptr_QSGNode) {
+	*outptr_QSGNode = static_cast<QSGNode*>(src);
+}
+
+void QSGBasicGeometryNode_setGeometry(QSGBasicGeometryNode* self, QSGGeometry* geometry) {
+	self->setGeometry(geometry);
+}
+
+QSGGeometry* QSGBasicGeometryNode_geometry_const(const QSGBasicGeometryNode* self) {
+	return (QSGGeometry*) self->geometry();
+}
+
+QSGGeometry* QSGBasicGeometryNode_geometry(QSGBasicGeometryNode* self) {
+	return self->geometry();
+}
+
+QMatrix4x4* QSGBasicGeometryNode_matrix(const QSGBasicGeometryNode* self) {
+	return (QMatrix4x4*) self->matrix();
+}
+
+QSGClipNode* QSGBasicGeometryNode_clipList(const QSGBasicGeometryNode* self) {
+	return (QSGClipNode*) self->clipList();
+}
+
+void QSGBasicGeometryNode_setRendererMatrix(QSGBasicGeometryNode* self, QMatrix4x4* m) {
+	self->setRendererMatrix(m);
+}
+
+void QSGBasicGeometryNode_setRendererClipList(QSGBasicGeometryNode* self, QSGClipNode* c) {
+	self->setRendererClipList(c);
+}
+
+void QSGBasicGeometryNode_delete(QSGBasicGeometryNode* self) {
+	delete self;
+}
+
+class VirtualQSGGeometryNode final : public QSGGeometryNode {
+	const QSGGeometryNode_VTable* vtbl;
+public:
+	friend void* QSGGeometryNode_vdata(VirtualQSGGeometryNode* self);
+	friend VirtualQSGGeometryNode* vdata_QSGGeometryNode(void* vdata);
+
+	VirtualQSGGeometryNode(const QSGGeometryNode_VTable* vtbl): QSGGeometryNode(), vtbl(vtbl) {}
+
+	virtual ~VirtualQSGGeometryNode() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual bool isSubtreeBlocked() const override {
+		if (vtbl->isSubtreeBlocked == 0) {
+			return QSGGeometryNode::isSubtreeBlocked();
+		}
+
+		bool callback_return_value = vtbl->isSubtreeBlocked(this);
+		return callback_return_value;
+	}
+
+	friend bool QSGGeometryNode_virtualbase_isSubtreeBlocked(const VirtualQSGGeometryNode* self);
+
+	virtual void preprocess() override {
+		if (vtbl->preprocess == 0) {
+			QSGGeometryNode::preprocess();
+			return;
+		}
+
+		vtbl->preprocess(this);
+	}
+
+	friend void QSGGeometryNode_virtualbase_preprocess(VirtualQSGGeometryNode* self);
+
+};
+
+VirtualQSGGeometryNode* QSGGeometryNode_new(const QSGGeometryNode_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGGeometryNode>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQSGGeometryNode(vtbl) : nullptr;
+}
+
+void QSGGeometryNode_virtbase(QSGGeometryNode* src, QSGBasicGeometryNode** outptr_QSGBasicGeometryNode) {
+	*outptr_QSGBasicGeometryNode = static_cast<QSGBasicGeometryNode*>(src);
+}
+
+void QSGGeometryNode_setRenderOrder(QSGGeometryNode* self, int order) {
+	self->setRenderOrder(static_cast<int>(order));
+}
+
+int QSGGeometryNode_renderOrder(const QSGGeometryNode* self) {
+	return self->renderOrder();
+}
+
+void QSGGeometryNode_setInheritedOpacity(QSGGeometryNode* self, double opacity) {
+	self->setInheritedOpacity(static_cast<qreal>(opacity));
+}
+
+double QSGGeometryNode_inheritedOpacity(const QSGGeometryNode* self) {
+	qreal _ret = self->inheritedOpacity();
+	return static_cast<double>(_ret);
+}
+
+void* QSGGeometryNode_vdata(VirtualQSGGeometryNode* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGGeometryNode>()); }
+VirtualQSGGeometryNode* vdata_QSGGeometryNode(void* vdata) { return reinterpret_cast<VirtualQSGGeometryNode*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGGeometryNode>()); }
+
+bool QSGGeometryNode_virtualbase_isSubtreeBlocked(const VirtualQSGGeometryNode* self) {
+
+	return self->QSGGeometryNode::isSubtreeBlocked();
+}
+
+void QSGGeometryNode_virtualbase_preprocess(VirtualQSGGeometryNode* self) {
+
+	self->QSGGeometryNode::preprocess();
+}
+
+void QSGGeometryNode_delete(QSGGeometryNode* self) {
+	delete self;
+}
+
+class VirtualQSGClipNode final : public QSGClipNode {
+	const QSGClipNode_VTable* vtbl;
+public:
+	friend void* QSGClipNode_vdata(VirtualQSGClipNode* self);
+	friend VirtualQSGClipNode* vdata_QSGClipNode(void* vdata);
+
+	VirtualQSGClipNode(const QSGClipNode_VTable* vtbl): QSGClipNode(), vtbl(vtbl) {}
+
+	virtual ~VirtualQSGClipNode() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual bool isSubtreeBlocked() const override {
+		if (vtbl->isSubtreeBlocked == 0) {
+			return QSGClipNode::isSubtreeBlocked();
+		}
+
+		bool callback_return_value = vtbl->isSubtreeBlocked(this);
+		return callback_return_value;
+	}
+
+	friend bool QSGClipNode_virtualbase_isSubtreeBlocked(const VirtualQSGClipNode* self);
+
+	virtual void preprocess() override {
+		if (vtbl->preprocess == 0) {
+			QSGClipNode::preprocess();
+			return;
+		}
+
+		vtbl->preprocess(this);
+	}
+
+	friend void QSGClipNode_virtualbase_preprocess(VirtualQSGClipNode* self);
+
+};
+
+VirtualQSGClipNode* QSGClipNode_new(const QSGClipNode_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGClipNode>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQSGClipNode(vtbl) : nullptr;
+}
+
+void QSGClipNode_virtbase(QSGClipNode* src, QSGBasicGeometryNode** outptr_QSGBasicGeometryNode) {
+	*outptr_QSGBasicGeometryNode = static_cast<QSGBasicGeometryNode*>(src);
+}
+
+void QSGClipNode_setIsRectangular(QSGClipNode* self, bool rectHint) {
+	self->setIsRectangular(rectHint);
+}
+
+bool QSGClipNode_isRectangular(const QSGClipNode* self) {
+	return self->isRectangular();
+}
+
+void QSGClipNode_setClipRect(QSGClipNode* self, QRectF* clipRect) {
+	self->setClipRect(*clipRect);
+}
+
+QRectF* QSGClipNode_clipRect(const QSGClipNode* self) {
+	return new QRectF(self->clipRect());
+}
+
+void* QSGClipNode_vdata(VirtualQSGClipNode* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGClipNode>()); }
+VirtualQSGClipNode* vdata_QSGClipNode(void* vdata) { return reinterpret_cast<VirtualQSGClipNode*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGClipNode>()); }
+
+bool QSGClipNode_virtualbase_isSubtreeBlocked(const VirtualQSGClipNode* self) {
+
+	return self->QSGClipNode::isSubtreeBlocked();
+}
+
+void QSGClipNode_virtualbase_preprocess(VirtualQSGClipNode* self) {
+
+	self->QSGClipNode::preprocess();
+}
+
+void QSGClipNode_delete(QSGClipNode* self) {
+	delete self;
+}
+
+class VirtualQSGTransformNode final : public QSGTransformNode {
+	const QSGTransformNode_VTable* vtbl;
+public:
+	friend void* QSGTransformNode_vdata(VirtualQSGTransformNode* self);
+	friend VirtualQSGTransformNode* vdata_QSGTransformNode(void* vdata);
+
+	VirtualQSGTransformNode(const QSGTransformNode_VTable* vtbl): QSGTransformNode(), vtbl(vtbl) {}
+
+	virtual ~VirtualQSGTransformNode() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual bool isSubtreeBlocked() const override {
+		if (vtbl->isSubtreeBlocked == 0) {
+			return QSGTransformNode::isSubtreeBlocked();
+		}
+
+		bool callback_return_value = vtbl->isSubtreeBlocked(this);
+		return callback_return_value;
+	}
+
+	friend bool QSGTransformNode_virtualbase_isSubtreeBlocked(const VirtualQSGTransformNode* self);
+
+	virtual void preprocess() override {
+		if (vtbl->preprocess == 0) {
+			QSGTransformNode::preprocess();
+			return;
+		}
+
+		vtbl->preprocess(this);
+	}
+
+	friend void QSGTransformNode_virtualbase_preprocess(VirtualQSGTransformNode* self);
+
+};
+
+VirtualQSGTransformNode* QSGTransformNode_new(const QSGTransformNode_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGTransformNode>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQSGTransformNode(vtbl) : nullptr;
+}
+
+void QSGTransformNode_virtbase(QSGTransformNode* src, QSGNode** outptr_QSGNode) {
+	*outptr_QSGNode = static_cast<QSGNode*>(src);
+}
+
+void QSGTransformNode_setMatrix(QSGTransformNode* self, QMatrix4x4* matrix) {
+	self->setMatrix(*matrix);
+}
+
+QMatrix4x4* QSGTransformNode_matrix(const QSGTransformNode* self) {
+	const QMatrix4x4& _ret = self->matrix();
+	// Cast returned reference into pointer
+	return const_cast<QMatrix4x4*>(&_ret);
+}
+
+void QSGTransformNode_setCombinedMatrix(QSGTransformNode* self, QMatrix4x4* matrix) {
+	self->setCombinedMatrix(*matrix);
+}
+
+QMatrix4x4* QSGTransformNode_combinedMatrix(const QSGTransformNode* self) {
+	const QMatrix4x4& _ret = self->combinedMatrix();
+	// Cast returned reference into pointer
+	return const_cast<QMatrix4x4*>(&_ret);
+}
+
+void* QSGTransformNode_vdata(VirtualQSGTransformNode* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGTransformNode>()); }
+VirtualQSGTransformNode* vdata_QSGTransformNode(void* vdata) { return reinterpret_cast<VirtualQSGTransformNode*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGTransformNode>()); }
+
+bool QSGTransformNode_virtualbase_isSubtreeBlocked(const VirtualQSGTransformNode* self) {
+
+	return self->QSGTransformNode::isSubtreeBlocked();
+}
+
+void QSGTransformNode_virtualbase_preprocess(VirtualQSGTransformNode* self) {
+
+	self->QSGTransformNode::preprocess();
+}
+
+void QSGTransformNode_delete(QSGTransformNode* self) {
+	delete self;
+}
+
+class VirtualQSGRootNode final : public QSGRootNode {
+	const QSGRootNode_VTable* vtbl;
+public:
+	friend void* QSGRootNode_vdata(VirtualQSGRootNode* self);
+	friend VirtualQSGRootNode* vdata_QSGRootNode(void* vdata);
+
+	VirtualQSGRootNode(const QSGRootNode_VTable* vtbl): QSGRootNode(), vtbl(vtbl) {}
+
+	virtual ~VirtualQSGRootNode() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual bool isSubtreeBlocked() const override {
+		if (vtbl->isSubtreeBlocked == 0) {
+			return QSGRootNode::isSubtreeBlocked();
+		}
+
+		bool callback_return_value = vtbl->isSubtreeBlocked(this);
+		return callback_return_value;
+	}
+
+	friend bool QSGRootNode_virtualbase_isSubtreeBlocked(const VirtualQSGRootNode* self);
+
+	virtual void preprocess() override {
+		if (vtbl->preprocess == 0) {
+			QSGRootNode::preprocess();
+			return;
+		}
+
+		vtbl->preprocess(this);
+	}
+
+	friend void QSGRootNode_virtualbase_preprocess(VirtualQSGRootNode* self);
+
+};
+
+VirtualQSGRootNode* QSGRootNode_new(const QSGRootNode_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGRootNode>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQSGRootNode(vtbl) : nullptr;
+}
+
+void QSGRootNode_virtbase(QSGRootNode* src, QSGNode** outptr_QSGNode) {
+	*outptr_QSGNode = static_cast<QSGNode*>(src);
+}
+
+void* QSGRootNode_vdata(VirtualQSGRootNode* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGRootNode>()); }
+VirtualQSGRootNode* vdata_QSGRootNode(void* vdata) { return reinterpret_cast<VirtualQSGRootNode*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGRootNode>()); }
+
+bool QSGRootNode_virtualbase_isSubtreeBlocked(const VirtualQSGRootNode* self) {
+
+	return self->QSGRootNode::isSubtreeBlocked();
+}
+
+void QSGRootNode_virtualbase_preprocess(VirtualQSGRootNode* self) {
+
+	self->QSGRootNode::preprocess();
+}
+
+void QSGRootNode_delete(QSGRootNode* self) {
+	delete self;
+}
+
+class VirtualQSGOpacityNode final : public QSGOpacityNode {
+	const QSGOpacityNode_VTable* vtbl;
+public:
+	friend void* QSGOpacityNode_vdata(VirtualQSGOpacityNode* self);
+	friend VirtualQSGOpacityNode* vdata_QSGOpacityNode(void* vdata);
+
+	VirtualQSGOpacityNode(const QSGOpacityNode_VTable* vtbl): QSGOpacityNode(), vtbl(vtbl) {}
+
+	virtual ~VirtualQSGOpacityNode() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual bool isSubtreeBlocked() const override {
+		if (vtbl->isSubtreeBlocked == 0) {
+			return QSGOpacityNode::isSubtreeBlocked();
+		}
+
+		bool callback_return_value = vtbl->isSubtreeBlocked(this);
+		return callback_return_value;
+	}
+
+	friend bool QSGOpacityNode_virtualbase_isSubtreeBlocked(const VirtualQSGOpacityNode* self);
+
+	virtual void preprocess() override {
+		if (vtbl->preprocess == 0) {
+			QSGOpacityNode::preprocess();
+			return;
+		}
+
+		vtbl->preprocess(this);
+	}
+
+	friend void QSGOpacityNode_virtualbase_preprocess(VirtualQSGOpacityNode* self);
+
+};
+
+VirtualQSGOpacityNode* QSGOpacityNode_new(const QSGOpacityNode_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQSGOpacityNode>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQSGOpacityNode(vtbl) : nullptr;
+}
+
+void QSGOpacityNode_virtbase(QSGOpacityNode* src, QSGNode** outptr_QSGNode) {
+	*outptr_QSGNode = static_cast<QSGNode*>(src);
+}
+
+void QSGOpacityNode_setOpacity(QSGOpacityNode* self, double opacity) {
+	self->setOpacity(static_cast<qreal>(opacity));
+}
+
+double QSGOpacityNode_opacity(const QSGOpacityNode* self) {
+	qreal _ret = self->opacity();
+	return static_cast<double>(_ret);
+}
+
+void QSGOpacityNode_setCombinedOpacity(QSGOpacityNode* self, double opacity) {
+	self->setCombinedOpacity(static_cast<qreal>(opacity));
+}
+
+double QSGOpacityNode_combinedOpacity(const QSGOpacityNode* self) {
+	qreal _ret = self->combinedOpacity();
+	return static_cast<double>(_ret);
+}
+
+bool QSGOpacityNode_isSubtreeBlocked(const QSGOpacityNode* self) {
+	return self->isSubtreeBlocked();
+}
+
+void* QSGOpacityNode_vdata(VirtualQSGOpacityNode* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQSGOpacityNode>()); }
+VirtualQSGOpacityNode* vdata_QSGOpacityNode(void* vdata) { return reinterpret_cast<VirtualQSGOpacityNode*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQSGOpacityNode>()); }
+
+bool QSGOpacityNode_virtualbase_isSubtreeBlocked(const VirtualQSGOpacityNode* self) {
+
+	return self->QSGOpacityNode::isSubtreeBlocked();
+}
+
+void QSGOpacityNode_virtualbase_preprocess(VirtualQSGOpacityNode* self) {
+
+	self->QSGOpacityNode::preprocess();
+}
+
+void QSGOpacityNode_delete(QSGOpacityNode* self) {
+	delete self;
+}
+
+void QSGNodeVisitor_operatorAssign(QSGNodeVisitor* self, QSGNodeVisitor* from) {
+	self->operator=(*from);
+}
+
+void QSGNodeVisitor_delete(QSGNodeVisitor* self) {
+	delete self;
+}
+

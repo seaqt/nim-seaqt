@@ -1,0 +1,2 @@
+import ./QtQml/gen_qjsmanagedvalue
+export gen_qjsmanagedvalue

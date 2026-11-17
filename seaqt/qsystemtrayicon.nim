@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qsystemtrayicon
+export gen_qsystemtrayicon

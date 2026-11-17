@@ -1,0 +1,75 @@
+#pragma once
+#ifndef SEAQT_QTGUI_GEN_QKEYSEQUENCE_H
+#define SEAQT_QTGUI_GEN_QKEYSEQUENCE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QKeyCombination;
+class QKeySequence;
+class QMetaObject;
+class QVariant;
+#else
+typedef struct QKeyCombination QKeyCombination;
+typedef struct QKeySequence QKeySequence;
+typedef struct QMetaObject QMetaObject;
+typedef struct QVariant QVariant;
+#endif
+
+QKeySequence* QKeySequence_new();
+QKeySequence* QKeySequence_new_QString(struct seaqt_string key);
+QKeySequence* QKeySequence_new_int(int k1);
+QKeySequence* QKeySequence_new_QKeyCombination(QKeyCombination* k1);
+QKeySequence* QKeySequence_new_QKeySequence(QKeySequence* from);
+QKeySequence* QKeySequence_new_QKeySequence_StandardKey(int key);
+QKeySequence* QKeySequence_new_QString_QKeySequence_SequenceFormat(struct seaqt_string key, int format);
+QKeySequence* QKeySequence_new_int_int(int k1, int k2);
+QKeySequence* QKeySequence_new_int_int_int(int k1, int k2, int k3);
+QKeySequence* QKeySequence_new_int_int_int_int(int k1, int k2, int k3, int k4);
+QKeySequence* QKeySequence_new_QKeyCombination_QKeyCombination(QKeyCombination* k1, QKeyCombination* k2);
+QKeySequence* QKeySequence_new_QKeyCombination_QKeyCombination_QKeyCombination(QKeyCombination* k1, QKeyCombination* k2, QKeyCombination* k3);
+QKeySequence* QKeySequence_new_QKeyCombination_QKeyCombination_QKeyCombination_QKeyCombination(QKeyCombination* k1, QKeyCombination* k2, QKeyCombination* k3, QKeyCombination* k4);
+
+int QKeySequence_count(const QKeySequence* self);
+bool QKeySequence_isEmpty(const QKeySequence* self);
+struct seaqt_string QKeySequence_toString(const QKeySequence* self);
+QKeySequence* QKeySequence_fromString_str(struct seaqt_string str);
+struct seaqt_array /* of QKeySequence* */  QKeySequence_listFromString_str(struct seaqt_string str);
+struct seaqt_string QKeySequence_listToString_list(struct seaqt_array /* of QKeySequence* */  list);
+int QKeySequence_matches(const QKeySequence* self, QKeySequence* seq);
+QKeySequence* QKeySequence_mnemonic(struct seaqt_string text);
+struct seaqt_array /* of QKeySequence* */  QKeySequence_keyBindings(int key);
+QVariant* QKeySequence_ToQVariant(const QKeySequence* self);
+QKeyCombination* QKeySequence_operatorSubscript(const QKeySequence* self, unsigned int i);
+void QKeySequence_operatorAssign(QKeySequence* self, QKeySequence* from);
+void QKeySequence_swap(QKeySequence* self, QKeySequence* other);
+bool QKeySequence_operatorEqual(const QKeySequence* self, QKeySequence* other);
+bool QKeySequence_operatorNotEqual(const QKeySequence* self, QKeySequence* other);
+bool QKeySequence_operatorLesser(const QKeySequence* self, QKeySequence* ks);
+bool QKeySequence_operatorGreater(const QKeySequence* self, QKeySequence* other);
+bool QKeySequence_operatorLesserOrEqual(const QKeySequence* self, QKeySequence* other);
+bool QKeySequence_operatorGreaterOrEqual(const QKeySequence* self, QKeySequence* other);
+bool QKeySequence_isDetached(const QKeySequence* self);
+struct seaqt_string QKeySequence_toString_format(const QKeySequence* self, int format);
+QKeySequence* QKeySequence_fromString_str_format(struct seaqt_string str, int format);
+struct seaqt_array /* of QKeySequence* */  QKeySequence_listFromString_str_format(struct seaqt_string str, int format);
+struct seaqt_string QKeySequence_listToString_list_format(struct seaqt_array /* of QKeySequence* */  list, int format);
+
+const QMetaObject* QKeySequence_staticMetaObject();
+void QKeySequence_delete(QKeySequence* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

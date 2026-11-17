@@ -1,0 +1,1402 @@
+#include <QAction>
+#include <QAuthenticator>
+#include <QByteArray>
+#include <QChildEvent>
+#include <QColor>
+#include <QEvent>
+#include <QIcon>
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QPageLayout>
+#include <QPageRanges>
+#include <QPointF>
+#include <QRect>
+#include <QSizeF>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <QUrl>
+#include <QWebChannel>
+#include <QWebEngineCertificateError>
+#include <QWebEngineClientCertificateSelection>
+#include <QWebEngineDesktopMediaRequest>
+#include <QWebEngineFileSystemAccessRequest>
+#include <QWebEngineFindTextResult>
+#include <QWebEngineFrame>
+#include <QWebEngineFullScreenRequest>
+#include <QWebEngineHistory>
+#include <QWebEngineHttpRequest>
+#include <QWebEngineLoadingInfo>
+#include <QWebEngineNavigationRequest>
+#include <QWebEngineNewWindowRequest>
+#include <QWebEnginePage>
+#include <QWebEnginePermission>
+#include <QWebEngineProfile>
+#include <QWebEngineRegisterProtocolHandlerRequest>
+#include <QWebEngineScriptCollection>
+#include <QWebEngineSettings>
+#include <QWebEngineUrlRequestInterceptor>
+#include <QWebEngineWebAuthUxRequest>
+#include <qwebenginepage.h>
+#include "gen_qwebenginepage.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQWebEnginePage final : public QWebEnginePage {
+	const QWebEnginePage_VTable* vtbl;
+public:
+	friend void* QWebEnginePage_vdata(VirtualQWebEnginePage* self);
+	friend VirtualQWebEnginePage* vdata_QWebEnginePage(void* vdata);
+
+	VirtualQWebEnginePage(const QWebEnginePage_VTable* vtbl): QWebEnginePage(), vtbl(vtbl) {}
+	VirtualQWebEnginePage(const QWebEnginePage_VTable* vtbl, QWebEngineProfile* profile): QWebEnginePage(profile), vtbl(vtbl) {}
+	VirtualQWebEnginePage(const QWebEnginePage_VTable* vtbl, QObject* parent): QWebEnginePage(parent), vtbl(vtbl) {}
+	VirtualQWebEnginePage(const QWebEnginePage_VTable* vtbl, QWebEngineProfile* profile, QObject* parent): QWebEnginePage(profile, parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQWebEnginePage() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QWebEnginePage::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QWebEnginePage_virtualbase_metaObject(const VirtualQWebEnginePage* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QWebEnginePage::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QWebEnginePage_virtualbase_metacast(VirtualQWebEnginePage* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QWebEnginePage::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QWebEnginePage_virtualbase_metacall(VirtualQWebEnginePage* self, int param1, int param2, void** param3);
+
+	virtual void triggerAction(QWebEnginePage::WebAction action, bool checked) override {
+		if (vtbl->triggerAction == 0) {
+			QWebEnginePage::triggerAction(action, checked);
+			return;
+		}
+
+		QWebEnginePage::WebAction action_ret = action;
+		int sigval1 = static_cast<int>(action_ret);
+		bool sigval2 = checked;
+		vtbl->triggerAction(this, sigval1, sigval2);
+	}
+
+	friend void QWebEnginePage_virtualbase_triggerAction(VirtualQWebEnginePage* self, int action, bool checked);
+
+	virtual bool event(QEvent* param1) override {
+		if (vtbl->event == 0) {
+			return QWebEnginePage::event(param1);
+		}
+
+		QEvent* sigval1 = param1;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QWebEnginePage_virtualbase_event(VirtualQWebEnginePage* self, QEvent* param1);
+
+	virtual QWebEnginePage* createWindow(QWebEnginePage::WebWindowType type) override {
+		if (vtbl->createWindow == 0) {
+			return QWebEnginePage::createWindow(type);
+		}
+
+		QWebEnginePage::WebWindowType type_ret = type;
+		int sigval1 = static_cast<int>(type_ret);
+		QWebEnginePage* callback_return_value = vtbl->createWindow(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend QWebEnginePage* QWebEnginePage_virtualbase_createWindow(VirtualQWebEnginePage* self, int type);
+
+	virtual QStringList chooseFiles(QWebEnginePage::FileSelectionMode mode, const QStringList& oldFiles, const QStringList& acceptedMimeTypes) override {
+		if (vtbl->chooseFiles == 0) {
+			return QWebEnginePage::chooseFiles(mode, oldFiles, acceptedMimeTypes);
+		}
+
+		QWebEnginePage::FileSelectionMode mode_ret = mode;
+		int sigval1 = static_cast<int>(mode_ret);
+		const QStringList& oldFiles_ret = oldFiles;
+		// Convert QList<> from C++ memory to manually-managed C memory
+		struct seaqt_string* oldFiles_arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * oldFiles_ret.length()));
+		for (size_t i = 0, e = oldFiles_ret.length(); i < e; ++i) {
+			QString oldFiles_lv_ret = oldFiles_ret[i];
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray oldFiles_lv_b = oldFiles_lv_ret.toUtf8();
+			struct seaqt_string oldFiles_lv_ms;
+			oldFiles_lv_ms.len = oldFiles_lv_b.length();
+			oldFiles_lv_ms.data = static_cast<char*>(malloc(oldFiles_lv_ms.len));
+			memcpy(oldFiles_lv_ms.data, oldFiles_lv_b.data(), oldFiles_lv_ms.len);
+			oldFiles_arr[i] = oldFiles_lv_ms;
+		}
+		struct seaqt_array oldFiles_out;
+		oldFiles_out.len = oldFiles_ret.length();
+		oldFiles_out.data = static_cast<void*>(oldFiles_arr);
+		struct seaqt_array /* of struct seaqt_string */  sigval2 = oldFiles_out;
+		const QStringList& acceptedMimeTypes_ret = acceptedMimeTypes;
+		// Convert QList<> from C++ memory to manually-managed C memory
+		struct seaqt_string* acceptedMimeTypes_arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * acceptedMimeTypes_ret.length()));
+		for (size_t i = 0, e = acceptedMimeTypes_ret.length(); i < e; ++i) {
+			QString acceptedMimeTypes_lv_ret = acceptedMimeTypes_ret[i];
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray acceptedMimeTypes_lv_b = acceptedMimeTypes_lv_ret.toUtf8();
+			struct seaqt_string acceptedMimeTypes_lv_ms;
+			acceptedMimeTypes_lv_ms.len = acceptedMimeTypes_lv_b.length();
+			acceptedMimeTypes_lv_ms.data = static_cast<char*>(malloc(acceptedMimeTypes_lv_ms.len));
+			memcpy(acceptedMimeTypes_lv_ms.data, acceptedMimeTypes_lv_b.data(), acceptedMimeTypes_lv_ms.len);
+			acceptedMimeTypes_arr[i] = acceptedMimeTypes_lv_ms;
+		}
+		struct seaqt_array acceptedMimeTypes_out;
+		acceptedMimeTypes_out.len = acceptedMimeTypes_ret.length();
+		acceptedMimeTypes_out.data = static_cast<void*>(acceptedMimeTypes_arr);
+		struct seaqt_array /* of struct seaqt_string */  sigval3 = acceptedMimeTypes_out;
+		struct seaqt_array /* of struct seaqt_string */  callback_return_value = vtbl->chooseFiles(this, sigval1, sigval2, sigval3);
+		QStringList callback_return_value_QList;
+		callback_return_value_QList.reserve(callback_return_value.len);
+		struct seaqt_string* callback_return_value_arr = static_cast<struct seaqt_string*>(callback_return_value.data);
+		for(size_t i = 0; i < callback_return_value.len; ++i) {
+			QString callback_return_value_arr_i_QString = QString::fromUtf8(callback_return_value_arr[i].data, callback_return_value_arr[i].len);
+			free(callback_return_value_arr[i].data);
+			callback_return_value_QList.push_back(callback_return_value_arr_i_QString);
+		}
+		free(callback_return_value.data);
+		return callback_return_value_QList;
+	}
+
+	friend struct seaqt_array /* of struct seaqt_string */  QWebEnginePage_virtualbase_chooseFiles(VirtualQWebEnginePage* self, int mode, struct seaqt_array /* of struct seaqt_string */  oldFiles, struct seaqt_array /* of struct seaqt_string */  acceptedMimeTypes);
+
+	virtual void javaScriptAlert(const QUrl& securityOrigin, const QString& msg) override {
+		if (vtbl->javaScriptAlert == 0) {
+			QWebEnginePage::javaScriptAlert(securityOrigin, msg);
+			return;
+		}
+
+		const QUrl& securityOrigin_ret = securityOrigin;
+		// Cast returned reference into pointer
+		QUrl* sigval1 = const_cast<QUrl*>(&securityOrigin_ret);
+		const QString msg_ret = msg;
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray msg_b = msg_ret.toUtf8();
+		struct seaqt_string msg_ms;
+		msg_ms.len = msg_b.length();
+		msg_ms.data = static_cast<char*>(malloc(msg_ms.len));
+		memcpy(msg_ms.data, msg_b.data(), msg_ms.len);
+		struct seaqt_string sigval2 = msg_ms;
+		vtbl->javaScriptAlert(this, sigval1, sigval2);
+	}
+
+	friend void QWebEnginePage_virtualbase_javaScriptAlert(VirtualQWebEnginePage* self, QUrl* securityOrigin, struct seaqt_string msg);
+
+	virtual bool javaScriptConfirm(const QUrl& securityOrigin, const QString& msg) override {
+		if (vtbl->javaScriptConfirm == 0) {
+			return QWebEnginePage::javaScriptConfirm(securityOrigin, msg);
+		}
+
+		const QUrl& securityOrigin_ret = securityOrigin;
+		// Cast returned reference into pointer
+		QUrl* sigval1 = const_cast<QUrl*>(&securityOrigin_ret);
+		const QString msg_ret = msg;
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray msg_b = msg_ret.toUtf8();
+		struct seaqt_string msg_ms;
+		msg_ms.len = msg_b.length();
+		msg_ms.data = static_cast<char*>(malloc(msg_ms.len));
+		memcpy(msg_ms.data, msg_b.data(), msg_ms.len);
+		struct seaqt_string sigval2 = msg_ms;
+		bool callback_return_value = vtbl->javaScriptConfirm(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QWebEnginePage_virtualbase_javaScriptConfirm(VirtualQWebEnginePage* self, QUrl* securityOrigin, struct seaqt_string msg);
+
+	virtual void javaScriptConsoleMessage(QWebEnginePage::JavaScriptConsoleMessageLevel level, const QString& message, int lineNumber, const QString& sourceID) override {
+		if (vtbl->javaScriptConsoleMessage == 0) {
+			QWebEnginePage::javaScriptConsoleMessage(level, message, lineNumber, sourceID);
+			return;
+		}
+
+		QWebEnginePage::JavaScriptConsoleMessageLevel level_ret = level;
+		int sigval1 = static_cast<int>(level_ret);
+		const QString message_ret = message;
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray message_b = message_ret.toUtf8();
+		struct seaqt_string message_ms;
+		message_ms.len = message_b.length();
+		message_ms.data = static_cast<char*>(malloc(message_ms.len));
+		memcpy(message_ms.data, message_b.data(), message_ms.len);
+		struct seaqt_string sigval2 = message_ms;
+		int sigval3 = lineNumber;
+		const QString sourceID_ret = sourceID;
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray sourceID_b = sourceID_ret.toUtf8();
+		struct seaqt_string sourceID_ms;
+		sourceID_ms.len = sourceID_b.length();
+		sourceID_ms.data = static_cast<char*>(malloc(sourceID_ms.len));
+		memcpy(sourceID_ms.data, sourceID_b.data(), sourceID_ms.len);
+		struct seaqt_string sigval4 = sourceID_ms;
+		vtbl->javaScriptConsoleMessage(this, sigval1, sigval2, sigval3, sigval4);
+	}
+
+	friend void QWebEnginePage_virtualbase_javaScriptConsoleMessage(VirtualQWebEnginePage* self, int level, struct seaqt_string message, int lineNumber, struct seaqt_string sourceID);
+
+	virtual bool acceptNavigationRequest(const QUrl& url, QWebEnginePage::NavigationType type, bool isMainFrame) override {
+		if (vtbl->acceptNavigationRequest == 0) {
+			return QWebEnginePage::acceptNavigationRequest(url, type, isMainFrame);
+		}
+
+		const QUrl& url_ret = url;
+		// Cast returned reference into pointer
+		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+		QWebEnginePage::NavigationType type_ret = type;
+		int sigval2 = static_cast<int>(type_ret);
+		bool sigval3 = isMainFrame;
+		bool callback_return_value = vtbl->acceptNavigationRequest(this, sigval1, sigval2, sigval3);
+		return callback_return_value;
+	}
+
+	friend bool QWebEnginePage_virtualbase_acceptNavigationRequest(VirtualQWebEnginePage* self, QUrl* url, int type, bool isMainFrame);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QWebEnginePage::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QWebEnginePage_virtualbase_eventFilter(VirtualQWebEnginePage* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QWebEnginePage::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QWebEnginePage_virtualbase_timerEvent(VirtualQWebEnginePage* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QWebEnginePage::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QWebEnginePage_virtualbase_childEvent(VirtualQWebEnginePage* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QWebEnginePage::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QWebEnginePage_virtualbase_customEvent(VirtualQWebEnginePage* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QWebEnginePage::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QWebEnginePage_virtualbase_connectNotify(VirtualQWebEnginePage* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QWebEnginePage::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QWebEnginePage_virtualbase_disconnectNotify(VirtualQWebEnginePage* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QWebEnginePage_protectedbase_sender(const VirtualQWebEnginePage* self);
+	friend int QWebEnginePage_protectedbase_senderSignalIndex(const VirtualQWebEnginePage* self);
+	friend int QWebEnginePage_protectedbase_receivers(const VirtualQWebEnginePage* self, const char* signal);
+	friend bool QWebEnginePage_protectedbase_isSignalConnected(const VirtualQWebEnginePage* self, QMetaMethod* signal);
+};
+
+VirtualQWebEnginePage* QWebEnginePage_new(const QWebEnginePage_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEnginePage>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQWebEnginePage(vtbl) : nullptr;
+}
+
+VirtualQWebEnginePage* QWebEnginePage_new_profile(const QWebEnginePage_VTable* vtbl, size_t vdata, QWebEngineProfile* profile) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEnginePage>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQWebEnginePage(vtbl, profile) : nullptr;
+}
+
+VirtualQWebEnginePage* QWebEnginePage_new_parent(const QWebEnginePage_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEnginePage>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQWebEnginePage(vtbl, parent) : nullptr;
+}
+
+VirtualQWebEnginePage* QWebEnginePage_new_profile_parent(const QWebEnginePage_VTable* vtbl, size_t vdata, QWebEngineProfile* profile, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQWebEnginePage>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQWebEnginePage(vtbl, profile, parent) : nullptr;
+}
+
+void QWebEnginePage_virtbase(QWebEnginePage* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QWebEnginePage_metaObject(const QWebEnginePage* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QWebEnginePage_metacast(QWebEnginePage* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QWebEnginePage_metacall(QWebEnginePage* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QWebEnginePage_tr_s(const char* s) {
+	QString _ret = QWebEnginePage::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QWebEngineHistory* QWebEnginePage_history(const QWebEnginePage* self) {
+	return self->history();
+}
+
+bool QWebEnginePage_hasSelection(const QWebEnginePage* self) {
+	return self->hasSelection();
+}
+
+struct seaqt_string QWebEnginePage_selectedText(const QWebEnginePage* self) {
+	QString _ret = self->selectedText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QWebEngineProfile* QWebEnginePage_profile(const QWebEnginePage* self) {
+	return self->profile();
+}
+
+QAction* QWebEnginePage_action(const QWebEnginePage* self, int action) {
+	return self->action(static_cast<QWebEnginePage::WebAction>(action));
+}
+
+void QWebEnginePage_triggerAction(QWebEnginePage* self, int action, bool checked) {
+	self->triggerAction(static_cast<QWebEnginePage::WebAction>(action), checked);
+}
+
+void QWebEnginePage_replaceMisspelledWord(QWebEnginePage* self, struct seaqt_string replacement) {
+	QString replacement_QString = QString::fromUtf8(replacement.data, replacement.len);
+	self->replaceMisspelledWord(replacement_QString);
+}
+
+bool QWebEnginePage_event(QWebEnginePage* self, QEvent* param1) {
+	return self->event(param1);
+}
+
+void QWebEnginePage_findText_subString(QWebEnginePage* self, struct seaqt_string subString) {
+	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
+	self->findText(subString_QString);
+}
+
+bool QWebEnginePage_isLoading(const QWebEnginePage* self) {
+	return self->isLoading();
+}
+
+void QWebEnginePage_load_url(QWebEnginePage* self, QUrl* url) {
+	self->load(*url);
+}
+
+void QWebEnginePage_load_request(QWebEnginePage* self, QWebEngineHttpRequest* request) {
+	self->load(*request);
+}
+
+void QWebEnginePage_download_url(QWebEnginePage* self, QUrl* url) {
+	self->download(*url);
+}
+
+void QWebEnginePage_setHtml_html(QWebEnginePage* self, struct seaqt_string html) {
+	QString html_QString = QString::fromUtf8(html.data, html.len);
+	self->setHtml(html_QString);
+}
+
+void QWebEnginePage_setContent_data(QWebEnginePage* self, struct seaqt_string data) {
+	QByteArray data_QByteArray(data.data, data.len);
+	self->setContent(data_QByteArray);
+}
+
+struct seaqt_string QWebEnginePage_title(const QWebEnginePage* self) {
+	QString _ret = self->title();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QWebEnginePage_setUrl(QWebEnginePage* self, QUrl* url) {
+	self->setUrl(*url);
+}
+
+QUrl* QWebEnginePage_url(const QWebEnginePage* self) {
+	return new QUrl(self->url());
+}
+
+QUrl* QWebEnginePage_requestedUrl(const QWebEnginePage* self) {
+	return new QUrl(self->requestedUrl());
+}
+
+QUrl* QWebEnginePage_iconUrl(const QWebEnginePage* self) {
+	return new QUrl(self->iconUrl());
+}
+
+QIcon* QWebEnginePage_icon(const QWebEnginePage* self) {
+	return new QIcon(self->icon());
+}
+
+double QWebEnginePage_zoomFactor(const QWebEnginePage* self) {
+	qreal _ret = self->zoomFactor();
+	return static_cast<double>(_ret);
+}
+
+void QWebEnginePage_setZoomFactor(QWebEnginePage* self, double factor) {
+	self->setZoomFactor(static_cast<qreal>(factor));
+}
+
+QPointF* QWebEnginePage_scrollPosition(const QWebEnginePage* self) {
+	return new QPointF(self->scrollPosition());
+}
+
+QSizeF* QWebEnginePage_contentsSize(const QWebEnginePage* self) {
+	return new QSizeF(self->contentsSize());
+}
+
+void QWebEnginePage_runJavaScript_scriptSource(QWebEnginePage* self, struct seaqt_string scriptSource) {
+	QString scriptSource_QString = QString::fromUtf8(scriptSource.data, scriptSource.len);
+	self->runJavaScript(scriptSource_QString);
+}
+
+QWebEngineScriptCollection* QWebEnginePage_scripts(QWebEnginePage* self) {
+	QWebEngineScriptCollection& _ret = self->scripts();
+	// Cast returned reference into pointer
+	return &_ret;
+}
+
+QWebEngineSettings* QWebEnginePage_settings(const QWebEnginePage* self) {
+	return self->settings();
+}
+
+QWebChannel* QWebEnginePage_webChannel(const QWebEnginePage* self) {
+	return self->webChannel();
+}
+
+void QWebEnginePage_setWebChannel_QWebChannel(QWebEnginePage* self, QWebChannel* param1) {
+	self->setWebChannel(param1);
+}
+
+QColor* QWebEnginePage_backgroundColor(const QWebEnginePage* self) {
+	return new QColor(self->backgroundColor());
+}
+
+void QWebEnginePage_setBackgroundColor(QWebEnginePage* self, QColor* color) {
+	self->setBackgroundColor(*color);
+}
+
+void QWebEnginePage_save_filePath(const QWebEnginePage* self, struct seaqt_string filePath) {
+	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
+	self->save(filePath_QString);
+}
+
+bool QWebEnginePage_isAudioMuted(const QWebEnginePage* self) {
+	return self->isAudioMuted();
+}
+
+void QWebEnginePage_setAudioMuted(QWebEnginePage* self, bool muted) {
+	self->setAudioMuted(muted);
+}
+
+bool QWebEnginePage_recentlyAudible(const QWebEnginePage* self) {
+	return self->recentlyAudible();
+}
+
+long long QWebEnginePage_renderProcessPid(const QWebEnginePage* self) {
+	qint64 _ret = self->renderProcessPid();
+	return static_cast<long long>(_ret);
+}
+
+void QWebEnginePage_printToPdf_filePath(QWebEnginePage* self, struct seaqt_string filePath) {
+	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
+	self->printToPdf(filePath_QString);
+}
+
+void QWebEnginePage_setInspectedPage(QWebEnginePage* self, QWebEnginePage* page) {
+	self->setInspectedPage(page);
+}
+
+QWebEnginePage* QWebEnginePage_inspectedPage(const QWebEnginePage* self) {
+	return self->inspectedPage();
+}
+
+void QWebEnginePage_setDevToolsPage(QWebEnginePage* self, QWebEnginePage* page) {
+	self->setDevToolsPage(page);
+}
+
+QWebEnginePage* QWebEnginePage_devToolsPage(const QWebEnginePage* self) {
+	return self->devToolsPage();
+}
+
+struct seaqt_string QWebEnginePage_devToolsId(const QWebEnginePage* self) {
+	QString _ret = self->devToolsId();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QWebEnginePage_setUrlRequestInterceptor(QWebEnginePage* self, QWebEngineUrlRequestInterceptor* interceptor) {
+	self->setUrlRequestInterceptor(interceptor);
+}
+
+int QWebEnginePage_lifecycleState(const QWebEnginePage* self) {
+	QWebEnginePage::LifecycleState _ret = self->lifecycleState();
+	return static_cast<int>(_ret);
+}
+
+void QWebEnginePage_setLifecycleState(QWebEnginePage* self, int state) {
+	self->setLifecycleState(static_cast<QWebEnginePage::LifecycleState>(state));
+}
+
+int QWebEnginePage_recommendedState(const QWebEnginePage* self) {
+	QWebEnginePage::LifecycleState _ret = self->recommendedState();
+	return static_cast<int>(_ret);
+}
+
+bool QWebEnginePage_isVisible(const QWebEnginePage* self) {
+	return self->isVisible();
+}
+
+void QWebEnginePage_setVisible(QWebEnginePage* self, bool visible) {
+	self->setVisible(visible);
+}
+
+QWebEngineFrame* QWebEnginePage_mainFrame(QWebEnginePage* self) {
+	return new QWebEngineFrame(self->mainFrame());
+}
+
+void QWebEnginePage_acceptAsNewWindow(QWebEnginePage* self, QWebEngineNewWindowRequest* request) {
+	self->acceptAsNewWindow(*request);
+}
+
+void QWebEnginePage_loadStarted(QWebEnginePage* self) {
+	self->loadStarted();
+}
+
+void QWebEnginePage_connect_loadStarted(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)()>(&QWebEnginePage::loadStarted), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QWebEnginePage_loadProgress(QWebEnginePage* self, int progress) {
+	self->loadProgress(static_cast<int>(progress));
+}
+
+void QWebEnginePage_connect_loadProgress(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(int)>(&QWebEnginePage::loadProgress), self, [callback, release = seaqt::release_callback{slot,release}](int progress) {
+			int sigval1 = progress;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_loadFinished(QWebEnginePage* self, bool ok) {
+	self->loadFinished(ok);
+}
+
+void QWebEnginePage_connect_loadFinished(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(bool)>(&QWebEnginePage::loadFinished), self, [callback, release = seaqt::release_callback{slot,release}](bool ok) {
+			bool sigval1 = ok;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_loadingChanged(QWebEnginePage* self, QWebEngineLoadingInfo* loadingInfo) {
+	self->loadingChanged(*loadingInfo);
+}
+
+void QWebEnginePage_connect_loadingChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineLoadingInfo*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QWebEngineLoadingInfo&)>(&QWebEnginePage::loadingChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QWebEngineLoadingInfo& loadingInfo) {
+			const QWebEngineLoadingInfo& loadingInfo_ret = loadingInfo;
+			// Cast returned reference into pointer
+			QWebEngineLoadingInfo* sigval1 = const_cast<QWebEngineLoadingInfo*>(&loadingInfo_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_linkHovered(QWebEnginePage* self, struct seaqt_string url) {
+	QString url_QString = QString::fromUtf8(url.data, url.len);
+	self->linkHovered(url_QString);
+}
+
+void QWebEnginePage_connect_linkHovered(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QString&)>(&QWebEnginePage::linkHovered), self, [callback, release = seaqt::release_callback{slot,release}](const QString& url) {
+			const QString url_ret = url;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray url_b = url_ret.toUtf8();
+			struct seaqt_string url_ms;
+			url_ms.len = url_b.length();
+			url_ms.data = static_cast<char*>(malloc(url_ms.len));
+			memcpy(url_ms.data, url_b.data(), url_ms.len);
+			struct seaqt_string sigval1 = url_ms;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_selectionChanged(QWebEnginePage* self) {
+	self->selectionChanged();
+}
+
+void QWebEnginePage_connect_selectionChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)()>(&QWebEnginePage::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QWebEnginePage_geometryChangeRequested(QWebEnginePage* self, QRect* geom) {
+	self->geometryChangeRequested(*geom);
+}
+
+void QWebEnginePage_connect_geometryChangeRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QRect&)>(&QWebEnginePage::geometryChangeRequested), self, [callback, release = seaqt::release_callback{slot,release}](const QRect& geom) {
+			const QRect& geom_ret = geom;
+			// Cast returned reference into pointer
+			QRect* sigval1 = const_cast<QRect*>(&geom_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_windowCloseRequested(QWebEnginePage* self) {
+	self->windowCloseRequested();
+}
+
+void QWebEnginePage_connect_windowCloseRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)()>(&QWebEnginePage::windowCloseRequested), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QWebEnginePage_featurePermissionRequested(QWebEnginePage* self, QUrl* securityOrigin, int feature) {
+	self->featurePermissionRequested(*securityOrigin, static_cast<QWebEnginePage::Feature>(feature));
+}
+
+void QWebEnginePage_connect_featurePermissionRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QUrl*, int), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QUrl&, QWebEnginePage::Feature)>(&QWebEnginePage::featurePermissionRequested), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& securityOrigin, QWebEnginePage::Feature feature) {
+			const QUrl& securityOrigin_ret = securityOrigin;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&securityOrigin_ret);
+			QWebEnginePage::Feature feature_ret = feature;
+			int sigval2 = static_cast<int>(feature_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QWebEnginePage_featurePermissionRequestCanceled(QWebEnginePage* self, QUrl* securityOrigin, int feature) {
+	self->featurePermissionRequestCanceled(*securityOrigin, static_cast<QWebEnginePage::Feature>(feature));
+}
+
+void QWebEnginePage_connect_featurePermissionRequestCanceled(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QUrl*, int), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QUrl&, QWebEnginePage::Feature)>(&QWebEnginePage::featurePermissionRequestCanceled), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& securityOrigin, QWebEnginePage::Feature feature) {
+			const QUrl& securityOrigin_ret = securityOrigin;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&securityOrigin_ret);
+			QWebEnginePage::Feature feature_ret = feature;
+			int sigval2 = static_cast<int>(feature_ret);
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QWebEnginePage_fullScreenRequested(QWebEnginePage* self, QWebEngineFullScreenRequest* fullScreenRequest) {
+	self->fullScreenRequested(*fullScreenRequest);
+}
+
+void QWebEnginePage_connect_fullScreenRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineFullScreenRequest*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEngineFullScreenRequest)>(&QWebEnginePage::fullScreenRequested), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineFullScreenRequest fullScreenRequest) {
+			QWebEngineFullScreenRequest* sigval1 = new QWebEngineFullScreenRequest(fullScreenRequest);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_permissionRequested(QWebEnginePage* self, QWebEnginePermission* permissionRequest) {
+	self->permissionRequested(*permissionRequest);
+}
+
+void QWebEnginePage_connect_permissionRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEnginePermission*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEnginePermission)>(&QWebEnginePage::permissionRequested), self, [callback, release = seaqt::release_callback{slot,release}](QWebEnginePermission permissionRequest) {
+			QWebEnginePermission* sigval1 = new QWebEnginePermission(permissionRequest);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_registerProtocolHandlerRequested(QWebEnginePage* self, QWebEngineRegisterProtocolHandlerRequest* request) {
+	self->registerProtocolHandlerRequested(*request);
+}
+
+void QWebEnginePage_connect_registerProtocolHandlerRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineRegisterProtocolHandlerRequest*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEngineRegisterProtocolHandlerRequest)>(&QWebEnginePage::registerProtocolHandlerRequested), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineRegisterProtocolHandlerRequest request) {
+			QWebEngineRegisterProtocolHandlerRequest* sigval1 = new QWebEngineRegisterProtocolHandlerRequest(request);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_fileSystemAccessRequested(QWebEnginePage* self, QWebEngineFileSystemAccessRequest* request) {
+	self->fileSystemAccessRequested(*request);
+}
+
+void QWebEnginePage_connect_fileSystemAccessRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineFileSystemAccessRequest*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEngineFileSystemAccessRequest)>(&QWebEnginePage::fileSystemAccessRequested), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineFileSystemAccessRequest request) {
+			QWebEngineFileSystemAccessRequest* sigval1 = new QWebEngineFileSystemAccessRequest(request);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_selectClientCertificate(QWebEnginePage* self, QWebEngineClientCertificateSelection* clientCertSelection) {
+	self->selectClientCertificate(*clientCertSelection);
+}
+
+void QWebEnginePage_connect_selectClientCertificate(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineClientCertificateSelection*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEngineClientCertificateSelection)>(&QWebEnginePage::selectClientCertificate), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineClientCertificateSelection clientCertSelection) {
+			QWebEngineClientCertificateSelection* sigval1 = new QWebEngineClientCertificateSelection(clientCertSelection);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_authenticationRequired(QWebEnginePage* self, QUrl* requestUrl, QAuthenticator* authenticator) {
+	self->authenticationRequired(*requestUrl, authenticator);
+}
+
+void QWebEnginePage_connect_authenticationRequired(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QUrl*, QAuthenticator*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QUrl&, QAuthenticator*)>(&QWebEnginePage::authenticationRequired), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& requestUrl, QAuthenticator* authenticator) {
+			const QUrl& requestUrl_ret = requestUrl;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&requestUrl_ret);
+			QAuthenticator* sigval2 = authenticator;
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QWebEnginePage_proxyAuthenticationRequired(QWebEnginePage* self, QUrl* requestUrl, QAuthenticator* authenticator, struct seaqt_string proxyHost) {
+	QString proxyHost_QString = QString::fromUtf8(proxyHost.data, proxyHost.len);
+	self->proxyAuthenticationRequired(*requestUrl, authenticator, proxyHost_QString);
+}
+
+void QWebEnginePage_connect_proxyAuthenticationRequired(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QUrl*, QAuthenticator*, struct seaqt_string), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QUrl&, QAuthenticator*, const QString&)>(&QWebEnginePage::proxyAuthenticationRequired), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& requestUrl, QAuthenticator* authenticator, const QString& proxyHost) {
+			const QUrl& requestUrl_ret = requestUrl;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&requestUrl_ret);
+			QAuthenticator* sigval2 = authenticator;
+			const QString proxyHost_ret = proxyHost;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray proxyHost_b = proxyHost_ret.toUtf8();
+			struct seaqt_string proxyHost_ms;
+			proxyHost_ms.len = proxyHost_b.length();
+			proxyHost_ms.data = static_cast<char*>(malloc(proxyHost_ms.len));
+			memcpy(proxyHost_ms.data, proxyHost_b.data(), proxyHost_ms.len);
+			struct seaqt_string sigval3 = proxyHost_ms;
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+void QWebEnginePage_renderProcessTerminated(QWebEnginePage* self, int terminationStatus, int exitCode) {
+	self->renderProcessTerminated(static_cast<QWebEnginePage::RenderProcessTerminationStatus>(terminationStatus), static_cast<int>(exitCode));
+}
+
+void QWebEnginePage_connect_renderProcessTerminated(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEnginePage::RenderProcessTerminationStatus, int)>(&QWebEnginePage::renderProcessTerminated), self, [callback, release = seaqt::release_callback{slot,release}](QWebEnginePage::RenderProcessTerminationStatus terminationStatus, int exitCode) {
+			QWebEnginePage::RenderProcessTerminationStatus terminationStatus_ret = terminationStatus;
+			int sigval1 = static_cast<int>(terminationStatus_ret);
+			int sigval2 = exitCode;
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QWebEnginePage_desktopMediaRequested(QWebEnginePage* self, QWebEngineDesktopMediaRequest* request) {
+	self->desktopMediaRequested(*request);
+}
+
+void QWebEnginePage_connect_desktopMediaRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDesktopMediaRequest*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QWebEngineDesktopMediaRequest&)>(&QWebEnginePage::desktopMediaRequested), self, [callback, release = seaqt::release_callback{slot,release}](const QWebEngineDesktopMediaRequest& request) {
+			const QWebEngineDesktopMediaRequest& request_ret = request;
+			// Cast returned reference into pointer
+			QWebEngineDesktopMediaRequest* sigval1 = const_cast<QWebEngineDesktopMediaRequest*>(&request_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_certificateError(QWebEnginePage* self, QWebEngineCertificateError* certificateError) {
+	self->certificateError(*certificateError);
+}
+
+void QWebEnginePage_connect_certificateError(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineCertificateError*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QWebEngineCertificateError&)>(&QWebEnginePage::certificateError), self, [callback, release = seaqt::release_callback{slot,release}](const QWebEngineCertificateError& certificateError) {
+			const QWebEngineCertificateError& certificateError_ret = certificateError;
+			// Cast returned reference into pointer
+			QWebEngineCertificateError* sigval1 = const_cast<QWebEngineCertificateError*>(&certificateError_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_navigationRequested(QWebEnginePage* self, QWebEngineNavigationRequest* request) {
+	self->navigationRequested(*request);
+}
+
+void QWebEnginePage_connect_navigationRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineNavigationRequest*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEngineNavigationRequest&)>(&QWebEnginePage::navigationRequested), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineNavigationRequest& request) {
+			QWebEngineNavigationRequest& request_ret = request;
+			// Cast returned reference into pointer
+			QWebEngineNavigationRequest* sigval1 = &request_ret;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_newWindowRequested(QWebEnginePage* self, QWebEngineNewWindowRequest* request) {
+	self->newWindowRequested(*request);
+}
+
+void QWebEnginePage_connect_newWindowRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineNewWindowRequest*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEngineNewWindowRequest&)>(&QWebEnginePage::newWindowRequested), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineNewWindowRequest& request) {
+			QWebEngineNewWindowRequest& request_ret = request;
+			// Cast returned reference into pointer
+			QWebEngineNewWindowRequest* sigval1 = &request_ret;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_titleChanged(QWebEnginePage* self, struct seaqt_string title) {
+	QString title_QString = QString::fromUtf8(title.data, title.len);
+	self->titleChanged(title_QString);
+}
+
+void QWebEnginePage_connect_titleChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QString&)>(&QWebEnginePage::titleChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& title) {
+			const QString title_ret = title;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray title_b = title_ret.toUtf8();
+			struct seaqt_string title_ms;
+			title_ms.len = title_b.length();
+			title_ms.data = static_cast<char*>(malloc(title_ms.len));
+			memcpy(title_ms.data, title_b.data(), title_ms.len);
+			struct seaqt_string sigval1 = title_ms;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_urlChanged(QWebEnginePage* self, QUrl* url) {
+	self->urlChanged(*url);
+}
+
+void QWebEnginePage_connect_urlChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QUrl&)>(&QWebEnginePage::urlChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& url) {
+			const QUrl& url_ret = url;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_iconUrlChanged(QWebEnginePage* self, QUrl* url) {
+	self->iconUrlChanged(*url);
+}
+
+void QWebEnginePage_connect_iconUrlChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QUrl&)>(&QWebEnginePage::iconUrlChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& url) {
+			const QUrl& url_ret = url;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_iconChanged(QWebEnginePage* self, QIcon* icon) {
+	self->iconChanged(*icon);
+}
+
+void QWebEnginePage_connect_iconChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QIcon*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QIcon&)>(&QWebEnginePage::iconChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QIcon& icon) {
+			const QIcon& icon_ret = icon;
+			// Cast returned reference into pointer
+			QIcon* sigval1 = const_cast<QIcon*>(&icon_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_zoomFactorChanged(QWebEnginePage* self, double factor) {
+	self->zoomFactorChanged(static_cast<qreal>(factor));
+}
+
+void QWebEnginePage_connect_zoomFactorChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(qreal)>(&QWebEnginePage::zoomFactorChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal factor) {
+			qreal factor_ret = factor;
+			double sigval1 = static_cast<double>(factor_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_scrollPositionChanged(QWebEnginePage* self, QPointF* position) {
+	self->scrollPositionChanged(*position);
+}
+
+void QWebEnginePage_connect_scrollPositionChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QPointF&)>(&QWebEnginePage::scrollPositionChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QPointF& position) {
+			const QPointF& position_ret = position;
+			// Cast returned reference into pointer
+			QPointF* sigval1 = const_cast<QPointF*>(&position_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_contentsSizeChanged(QWebEnginePage* self, QSizeF* size) {
+	self->contentsSizeChanged(*size);
+}
+
+void QWebEnginePage_connect_contentsSizeChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QSizeF&)>(&QWebEnginePage::contentsSizeChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QSizeF& size) {
+			const QSizeF& size_ret = size;
+			// Cast returned reference into pointer
+			QSizeF* sigval1 = const_cast<QSizeF*>(&size_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_audioMutedChanged(QWebEnginePage* self, bool muted) {
+	self->audioMutedChanged(muted);
+}
+
+void QWebEnginePage_connect_audioMutedChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(bool)>(&QWebEnginePage::audioMutedChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool muted) {
+			bool sigval1 = muted;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_recentlyAudibleChanged(QWebEnginePage* self, bool recentlyAudible) {
+	self->recentlyAudibleChanged(recentlyAudible);
+}
+
+void QWebEnginePage_connect_recentlyAudibleChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(bool)>(&QWebEnginePage::recentlyAudibleChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool recentlyAudible) {
+			bool sigval1 = recentlyAudible;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_renderProcessPidChanged(QWebEnginePage* self, long long pid) {
+	self->renderProcessPidChanged(static_cast<qint64>(pid));
+}
+
+void QWebEnginePage_connect_renderProcessPidChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(qint64)>(&QWebEnginePage::renderProcessPidChanged), self, [callback, release = seaqt::release_callback{slot,release}](qint64 pid) {
+			qint64 pid_ret = pid;
+			long long sigval1 = static_cast<long long>(pid_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_pdfPrintingFinished(QWebEnginePage* self, struct seaqt_string filePath, bool success) {
+	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
+	self->pdfPrintingFinished(filePath_QString, success);
+}
+
+void QWebEnginePage_connect_pdfPrintingFinished(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, bool), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QString&, bool)>(&QWebEnginePage::pdfPrintingFinished), self, [callback, release = seaqt::release_callback{slot,release}](const QString& filePath, bool success) {
+			const QString filePath_ret = filePath;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray filePath_b = filePath_ret.toUtf8();
+			struct seaqt_string filePath_ms;
+			filePath_ms.len = filePath_b.length();
+			filePath_ms.data = static_cast<char*>(malloc(filePath_ms.len));
+			memcpy(filePath_ms.data, filePath_b.data(), filePath_ms.len);
+			struct seaqt_string sigval1 = filePath_ms;
+			bool sigval2 = success;
+			callback(release.slot, sigval1, sigval2);
+	});
+}
+
+void QWebEnginePage_printRequested(QWebEnginePage* self) {
+	self->printRequested();
+}
+
+void QWebEnginePage_connect_printRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)()>(&QWebEnginePage::printRequested), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QWebEnginePage_printRequestedByFrame(QWebEnginePage* self, QWebEngineFrame* frame) {
+	self->printRequestedByFrame(*frame);
+}
+
+void QWebEnginePage_connect_printRequestedByFrame(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineFrame*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEngineFrame)>(&QWebEnginePage::printRequestedByFrame), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineFrame frame) {
+			QWebEngineFrame* sigval1 = new QWebEngineFrame(frame);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_visibleChanged(QWebEnginePage* self, bool visible) {
+	self->visibleChanged(visible);
+}
+
+void QWebEnginePage_connect_visibleChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(bool)>(&QWebEnginePage::visibleChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool visible) {
+			bool sigval1 = visible;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_lifecycleStateChanged(QWebEnginePage* self, int state) {
+	self->lifecycleStateChanged(static_cast<QWebEnginePage::LifecycleState>(state));
+}
+
+void QWebEnginePage_connect_lifecycleStateChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEnginePage::LifecycleState)>(&QWebEnginePage::lifecycleStateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QWebEnginePage::LifecycleState state) {
+			QWebEnginePage::LifecycleState state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_recommendedStateChanged(QWebEnginePage* self, int state) {
+	self->recommendedStateChanged(static_cast<QWebEnginePage::LifecycleState>(state));
+}
+
+void QWebEnginePage_connect_recommendedStateChanged(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEnginePage::LifecycleState)>(&QWebEnginePage::recommendedStateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QWebEnginePage::LifecycleState state) {
+			QWebEnginePage::LifecycleState state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage_findTextFinished(QWebEnginePage* self, QWebEngineFindTextResult* result) {
+	self->findTextFinished(*result);
+}
+
+void QWebEnginePage_connect_findTextFinished(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineFindTextResult*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(const QWebEngineFindTextResult&)>(&QWebEnginePage::findTextFinished), self, [callback, release = seaqt::release_callback{slot,release}](const QWebEngineFindTextResult& result) {
+			const QWebEngineFindTextResult& result_ret = result;
+			// Cast returned reference into pointer
+			QWebEngineFindTextResult* sigval1 = const_cast<QWebEngineFindTextResult*>(&result_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QWebEnginePage__q_aboutToDelete(QWebEnginePage* self) {
+	self->_q_aboutToDelete();
+}
+
+void QWebEnginePage_connect__q_aboutToDelete(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)()>(&QWebEnginePage::_q_aboutToDelete), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QWebEnginePage_webAuthUxRequested(QWebEnginePage* self, QWebEngineWebAuthUxRequest* request) {
+	self->webAuthUxRequested(request);
+}
+
+void QWebEnginePage_connect_webAuthUxRequested(QWebEnginePage* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineWebAuthUxRequest*), void (*release)(intptr_t)) {
+	QWebEnginePage::connect(self, static_cast<void (QWebEnginePage::*)(QWebEngineWebAuthUxRequest*)>(&QWebEnginePage::webAuthUxRequested), self, [callback, release = seaqt::release_callback{slot,release}](QWebEngineWebAuthUxRequest* request) {
+			QWebEngineWebAuthUxRequest* sigval1 = request;
+			callback(release.slot, sigval1);
+	});
+}
+
+struct seaqt_string QWebEnginePage_tr_s_c(const char* s, const char* c) {
+	QString _ret = QWebEnginePage::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QWebEnginePage_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QWebEnginePage::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QWebEnginePage_findText_subString_options(QWebEnginePage* self, struct seaqt_string subString, int options) {
+	QString subString_QString = QString::fromUtf8(subString.data, subString.len);
+	self->findText(subString_QString, static_cast<QWebEnginePage::FindFlags>(options));
+}
+
+void QWebEnginePage_download_url_filename(QWebEnginePage* self, QUrl* url, struct seaqt_string filename) {
+	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
+	self->download(*url, filename_QString);
+}
+
+void QWebEnginePage_setHtml_html_baseUrl(QWebEnginePage* self, struct seaqt_string html, QUrl* baseUrl) {
+	QString html_QString = QString::fromUtf8(html.data, html.len);
+	self->setHtml(html_QString, *baseUrl);
+}
+
+void QWebEnginePage_setContent_data_mimeType(QWebEnginePage* self, struct seaqt_string data, struct seaqt_string mimeType) {
+	QByteArray data_QByteArray(data.data, data.len);
+	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
+	self->setContent(data_QByteArray, mimeType_QString);
+}
+
+void QWebEnginePage_setContent_data_mimeType_baseUrl(QWebEnginePage* self, struct seaqt_string data, struct seaqt_string mimeType, QUrl* baseUrl) {
+	QByteArray data_QByteArray(data.data, data.len);
+	QString mimeType_QString = QString::fromUtf8(mimeType.data, mimeType.len);
+	self->setContent(data_QByteArray, mimeType_QString, *baseUrl);
+}
+
+void QWebEnginePage_runJavaScript_scriptSource_worldId(QWebEnginePage* self, struct seaqt_string scriptSource, unsigned int worldId) {
+	QString scriptSource_QString = QString::fromUtf8(scriptSource.data, scriptSource.len);
+	self->runJavaScript(scriptSource_QString, static_cast<quint32>(worldId));
+}
+
+void QWebEnginePage_setWebChannel_QWebChannel_quint32(QWebEnginePage* self, QWebChannel* param1, unsigned int worldId) {
+	self->setWebChannel(param1, static_cast<quint32>(worldId));
+}
+
+void QWebEnginePage_save_filePath_format(const QWebEnginePage* self, struct seaqt_string filePath, int format) {
+	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
+	self->save(filePath_QString, static_cast<QWebEngineDownloadRequest::SavePageFormat>(format));
+}
+
+void QWebEnginePage_printToPdf_filePath_layout(QWebEnginePage* self, struct seaqt_string filePath, QPageLayout* layout) {
+	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
+	self->printToPdf(filePath_QString, *layout);
+}
+
+void QWebEnginePage_printToPdf_filePath_layout_ranges(QWebEnginePage* self, struct seaqt_string filePath, QPageLayout* layout, QPageRanges* ranges) {
+	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
+	self->printToPdf(filePath_QString, *layout, *ranges);
+}
+
+const QMetaObject* QWebEnginePage_staticMetaObject() { return &QWebEnginePage::staticMetaObject; }
+void* QWebEnginePage_vdata(VirtualQWebEnginePage* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQWebEnginePage>()); }
+VirtualQWebEnginePage* vdata_QWebEnginePage(void* vdata) { return reinterpret_cast<VirtualQWebEnginePage*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQWebEnginePage>()); }
+
+QMetaObject* QWebEnginePage_virtualbase_metaObject(const VirtualQWebEnginePage* self) {
+
+	return (QMetaObject*) self->QWebEnginePage::metaObject();
+}
+
+void* QWebEnginePage_virtualbase_metacast(VirtualQWebEnginePage* self, const char* param1) {
+
+	return self->QWebEnginePage::qt_metacast(param1);
+}
+
+int QWebEnginePage_virtualbase_metacall(VirtualQWebEnginePage* self, int param1, int param2, void** param3) {
+
+	return self->QWebEnginePage::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+void QWebEnginePage_virtualbase_triggerAction(VirtualQWebEnginePage* self, int action, bool checked) {
+
+	self->QWebEnginePage::triggerAction(static_cast<VirtualQWebEnginePage::WebAction>(action), checked);
+}
+
+bool QWebEnginePage_virtualbase_event(VirtualQWebEnginePage* self, QEvent* param1) {
+
+	return self->QWebEnginePage::event(param1);
+}
+
+QWebEnginePage* QWebEnginePage_virtualbase_createWindow(VirtualQWebEnginePage* self, int type) {
+
+	return self->QWebEnginePage::createWindow(static_cast<VirtualQWebEnginePage::WebWindowType>(type));
+}
+
+struct seaqt_array /* of struct seaqt_string */  QWebEnginePage_virtualbase_chooseFiles(VirtualQWebEnginePage* self, int mode, struct seaqt_array /* of struct seaqt_string */  oldFiles, struct seaqt_array /* of struct seaqt_string */  acceptedMimeTypes) {
+	QStringList oldFiles_QList;
+	oldFiles_QList.reserve(oldFiles.len);
+	struct seaqt_string* oldFiles_arr = static_cast<struct seaqt_string*>(oldFiles.data);
+	for(size_t i = 0; i < oldFiles.len; ++i) {
+		QString oldFiles_arr_i_QString = QString::fromUtf8(oldFiles_arr[i].data, oldFiles_arr[i].len);
+		oldFiles_QList.push_back(oldFiles_arr_i_QString);
+	}
+	QStringList acceptedMimeTypes_QList;
+	acceptedMimeTypes_QList.reserve(acceptedMimeTypes.len);
+	struct seaqt_string* acceptedMimeTypes_arr = static_cast<struct seaqt_string*>(acceptedMimeTypes.data);
+	for(size_t i = 0; i < acceptedMimeTypes.len; ++i) {
+		QString acceptedMimeTypes_arr_i_QString = QString::fromUtf8(acceptedMimeTypes_arr[i].data, acceptedMimeTypes_arr[i].len);
+		acceptedMimeTypes_QList.push_back(acceptedMimeTypes_arr_i_QString);
+	}
+
+	QStringList _ret = self->QWebEnginePage::chooseFiles(static_cast<VirtualQWebEnginePage::FileSelectionMode>(mode), oldFiles_QList, acceptedMimeTypes_QList);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	struct seaqt_string* _arr = static_cast<struct seaqt_string*>(malloc(sizeof(struct seaqt_string) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		QString _lv_ret = _ret[i];
+		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+		QByteArray _lv_b = _lv_ret.toUtf8();
+		struct seaqt_string _lv_ms;
+		_lv_ms.len = _lv_b.length();
+		_lv_ms.data = static_cast<char*>(malloc(_lv_ms.len));
+		memcpy(_lv_ms.data, _lv_b.data(), _lv_ms.len);
+		_arr[i] = _lv_ms;
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QWebEnginePage_virtualbase_javaScriptAlert(VirtualQWebEnginePage* self, QUrl* securityOrigin, struct seaqt_string msg) {
+	QString msg_QString = QString::fromUtf8(msg.data, msg.len);
+
+	self->QWebEnginePage::javaScriptAlert(*securityOrigin, msg_QString);
+}
+
+bool QWebEnginePage_virtualbase_javaScriptConfirm(VirtualQWebEnginePage* self, QUrl* securityOrigin, struct seaqt_string msg) {
+	QString msg_QString = QString::fromUtf8(msg.data, msg.len);
+
+	return self->QWebEnginePage::javaScriptConfirm(*securityOrigin, msg_QString);
+}
+
+void QWebEnginePage_virtualbase_javaScriptConsoleMessage(VirtualQWebEnginePage* self, int level, struct seaqt_string message, int lineNumber, struct seaqt_string sourceID) {
+	QString message_QString = QString::fromUtf8(message.data, message.len);
+	QString sourceID_QString = QString::fromUtf8(sourceID.data, sourceID.len);
+
+	self->QWebEnginePage::javaScriptConsoleMessage(static_cast<VirtualQWebEnginePage::JavaScriptConsoleMessageLevel>(level), message_QString, static_cast<int>(lineNumber), sourceID_QString);
+}
+
+bool QWebEnginePage_virtualbase_acceptNavigationRequest(VirtualQWebEnginePage* self, QUrl* url, int type, bool isMainFrame) {
+
+	return self->QWebEnginePage::acceptNavigationRequest(*url, static_cast<VirtualQWebEnginePage::NavigationType>(type), isMainFrame);
+}
+
+bool QWebEnginePage_virtualbase_eventFilter(VirtualQWebEnginePage* self, QObject* watched, QEvent* event) {
+
+	return self->QWebEnginePage::eventFilter(watched, event);
+}
+
+void QWebEnginePage_virtualbase_timerEvent(VirtualQWebEnginePage* self, QTimerEvent* event) {
+
+	self->QWebEnginePage::timerEvent(event);
+}
+
+void QWebEnginePage_virtualbase_childEvent(VirtualQWebEnginePage* self, QChildEvent* event) {
+
+	self->QWebEnginePage::childEvent(event);
+}
+
+void QWebEnginePage_virtualbase_customEvent(VirtualQWebEnginePage* self, QEvent* event) {
+
+	self->QWebEnginePage::customEvent(event);
+}
+
+void QWebEnginePage_virtualbase_connectNotify(VirtualQWebEnginePage* self, QMetaMethod* signal) {
+
+	self->QWebEnginePage::connectNotify(*signal);
+}
+
+void QWebEnginePage_virtualbase_disconnectNotify(VirtualQWebEnginePage* self, QMetaMethod* signal) {
+
+	self->QWebEnginePage::disconnectNotify(*signal);
+}
+
+QObject* QWebEnginePage_protectedbase_sender(const VirtualQWebEnginePage* self) {
+	return self->QWebEnginePage::sender();
+}
+
+int QWebEnginePage_protectedbase_senderSignalIndex(const VirtualQWebEnginePage* self) {
+	return self->QWebEnginePage::senderSignalIndex();
+}
+
+int QWebEnginePage_protectedbase_receivers(const VirtualQWebEnginePage* self, const char* signal) {
+	return self->QWebEnginePage::receivers(signal);
+}
+
+bool QWebEnginePage_protectedbase_isSignalConnected(const VirtualQWebEnginePage* self, QMetaMethod* signal) {
+	return self->QWebEnginePage::isSignalConnected(*signal);
+}
+
+void QWebEnginePage_delete(QWebEnginePage* self) {
+	delete self;
+}
+

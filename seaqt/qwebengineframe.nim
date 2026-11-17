@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineframe
+export gen_qwebengineframe

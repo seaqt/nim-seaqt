@@ -1,0 +1,2 @@
+import ./QtCore/gen_qbytearraymatcher
+export gen_qbytearraymatcher

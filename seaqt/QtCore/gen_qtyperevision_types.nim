@@ -1,0 +1,24 @@
+type QTypeRevision* {.inheritable.} = object
+  h*: pointer
+  owned*: bool
+
+import ./qtcore_pkg
+
+{.compile("gen_qtyperevision.cpp", QtCoreCFlags).}
+
+proc fcQTypeRevision_delete(self: pointer) {.importc: "QTypeRevision_delete".}
+proc `=destroy`(self: var QTypeRevision) =
+  if self.owned: fcQTypeRevision_delete(self.h)
+
+proc `=sink`(dest: var QTypeRevision, source: QTypeRevision) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QTypeRevision, source: QTypeRevision) {.error.}
+proc delete*(self: sink QTypeRevision) =
+  let h = self.h
+  wasMoved(self)
+  fcQTypeRevision_delete(h)
+

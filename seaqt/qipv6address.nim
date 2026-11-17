@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qhostaddress
+export gen_qhostaddress

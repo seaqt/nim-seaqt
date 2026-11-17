@@ -1,0 +1,1423 @@
+#include <QBrush>
+#include <QChildEvent>
+#include <QEvent>
+#include <QFocusEvent>
+#include <QFont>
+#include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
+#include <QGraphicsItemGroup>
+#include <QGraphicsLineItem>
+#include <QGraphicsPathItem>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsProxyWidget>
+#include <QGraphicsRectItem>
+#include <QGraphicsScene>
+#include <QGraphicsSceneContextMenuEvent>
+#include <QGraphicsSceneDragDropEvent>
+#include <QGraphicsSceneHelpEvent>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsSceneWheelEvent>
+#include <QGraphicsSimpleTextItem>
+#include <QGraphicsTextItem>
+#include <QGraphicsView>
+#include <QGraphicsWidget>
+#include <QInputMethodEvent>
+#include <QKeyEvent>
+#include <QLineF>
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QPainter>
+#include <QPainterPath>
+#include <QPalette>
+#include <QPen>
+#include <QPixmap>
+#include <QPointF>
+#include <QRectF>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QStyle>
+#include <QTimerEvent>
+#include <QTransform>
+#include <QVariant>
+#include <QWidget>
+#include <qgraphicsscene.h>
+#include "gen_qgraphicsscene.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQGraphicsScene final : public QGraphicsScene {
+	const QGraphicsScene_VTable* vtbl;
+public:
+	friend void* QGraphicsScene_vdata(VirtualQGraphicsScene* self);
+	friend VirtualQGraphicsScene* vdata_QGraphicsScene(void* vdata);
+
+	VirtualQGraphicsScene(const QGraphicsScene_VTable* vtbl): QGraphicsScene(), vtbl(vtbl) {}
+	VirtualQGraphicsScene(const QGraphicsScene_VTable* vtbl, const QRectF& sceneRect): QGraphicsScene(sceneRect), vtbl(vtbl) {}
+	VirtualQGraphicsScene(const QGraphicsScene_VTable* vtbl, qreal x, qreal y, qreal width, qreal height): QGraphicsScene(x, y, width, height), vtbl(vtbl) {}
+	VirtualQGraphicsScene(const QGraphicsScene_VTable* vtbl, QObject* parent): QGraphicsScene(parent), vtbl(vtbl) {}
+	VirtualQGraphicsScene(const QGraphicsScene_VTable* vtbl, const QRectF& sceneRect, QObject* parent): QGraphicsScene(sceneRect, parent), vtbl(vtbl) {}
+	VirtualQGraphicsScene(const QGraphicsScene_VTable* vtbl, qreal x, qreal y, qreal width, qreal height, QObject* parent): QGraphicsScene(x, y, width, height, parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQGraphicsScene() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QGraphicsScene::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QGraphicsScene_virtualbase_metaObject(const VirtualQGraphicsScene* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QGraphicsScene::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QGraphicsScene_virtualbase_metacast(VirtualQGraphicsScene* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QGraphicsScene::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QGraphicsScene_virtualbase_metacall(VirtualQGraphicsScene* self, int param1, int param2, void** param3);
+
+	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
+		if (vtbl->inputMethodQuery == 0) {
+			return QGraphicsScene::inputMethodQuery(query);
+		}
+
+		Qt::InputMethodQuery query_ret = query;
+		int sigval1 = static_cast<int>(query_ret);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QVariant* QGraphicsScene_virtualbase_inputMethodQuery(const VirtualQGraphicsScene* self, int query);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QGraphicsScene::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QGraphicsScene_virtualbase_event(VirtualQGraphicsScene* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QGraphicsScene::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QGraphicsScene_virtualbase_eventFilter(VirtualQGraphicsScene* self, QObject* watched, QEvent* event);
+
+	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
+		if (vtbl->contextMenuEvent == 0) {
+			QGraphicsScene::contextMenuEvent(event);
+			return;
+		}
+
+		QGraphicsSceneContextMenuEvent* sigval1 = event;
+		vtbl->contextMenuEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_contextMenuEvent(VirtualQGraphicsScene* self, QGraphicsSceneContextMenuEvent* event);
+
+	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
+		if (vtbl->dragEnterEvent == 0) {
+			QGraphicsScene::dragEnterEvent(event);
+			return;
+		}
+
+		QGraphicsSceneDragDropEvent* sigval1 = event;
+		vtbl->dragEnterEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_dragEnterEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+
+	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
+		if (vtbl->dragMoveEvent == 0) {
+			QGraphicsScene::dragMoveEvent(event);
+			return;
+		}
+
+		QGraphicsSceneDragDropEvent* sigval1 = event;
+		vtbl->dragMoveEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_dragMoveEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+
+	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
+		if (vtbl->dragLeaveEvent == 0) {
+			QGraphicsScene::dragLeaveEvent(event);
+			return;
+		}
+
+		QGraphicsSceneDragDropEvent* sigval1 = event;
+		vtbl->dragLeaveEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_dragLeaveEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+
+	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
+		if (vtbl->dropEvent == 0) {
+			QGraphicsScene::dropEvent(event);
+			return;
+		}
+
+		QGraphicsSceneDragDropEvent* sigval1 = event;
+		vtbl->dropEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_dropEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event);
+
+	virtual void focusInEvent(QFocusEvent* event) override {
+		if (vtbl->focusInEvent == 0) {
+			QGraphicsScene::focusInEvent(event);
+			return;
+		}
+
+		QFocusEvent* sigval1 = event;
+		vtbl->focusInEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_focusInEvent(VirtualQGraphicsScene* self, QFocusEvent* event);
+
+	virtual void focusOutEvent(QFocusEvent* event) override {
+		if (vtbl->focusOutEvent == 0) {
+			QGraphicsScene::focusOutEvent(event);
+			return;
+		}
+
+		QFocusEvent* sigval1 = event;
+		vtbl->focusOutEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_focusOutEvent(VirtualQGraphicsScene* self, QFocusEvent* event);
+
+	virtual void helpEvent(QGraphicsSceneHelpEvent* event) override {
+		if (vtbl->helpEvent == 0) {
+			QGraphicsScene::helpEvent(event);
+			return;
+		}
+
+		QGraphicsSceneHelpEvent* sigval1 = event;
+		vtbl->helpEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_helpEvent(VirtualQGraphicsScene* self, QGraphicsSceneHelpEvent* event);
+
+	virtual void keyPressEvent(QKeyEvent* event) override {
+		if (vtbl->keyPressEvent == 0) {
+			QGraphicsScene::keyPressEvent(event);
+			return;
+		}
+
+		QKeyEvent* sigval1 = event;
+		vtbl->keyPressEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_keyPressEvent(VirtualQGraphicsScene* self, QKeyEvent* event);
+
+	virtual void keyReleaseEvent(QKeyEvent* event) override {
+		if (vtbl->keyReleaseEvent == 0) {
+			QGraphicsScene::keyReleaseEvent(event);
+			return;
+		}
+
+		QKeyEvent* sigval1 = event;
+		vtbl->keyReleaseEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_keyReleaseEvent(VirtualQGraphicsScene* self, QKeyEvent* event);
+
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
+		if (vtbl->mousePressEvent == 0) {
+			QGraphicsScene::mousePressEvent(event);
+			return;
+		}
+
+		QGraphicsSceneMouseEvent* sigval1 = event;
+		vtbl->mousePressEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_mousePressEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+
+	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
+		if (vtbl->mouseMoveEvent == 0) {
+			QGraphicsScene::mouseMoveEvent(event);
+			return;
+		}
+
+		QGraphicsSceneMouseEvent* sigval1 = event;
+		vtbl->mouseMoveEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_mouseMoveEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
+		if (vtbl->mouseReleaseEvent == 0) {
+			QGraphicsScene::mouseReleaseEvent(event);
+			return;
+		}
+
+		QGraphicsSceneMouseEvent* sigval1 = event;
+		vtbl->mouseReleaseEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_mouseReleaseEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+
+	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
+		if (vtbl->mouseDoubleClickEvent == 0) {
+			QGraphicsScene::mouseDoubleClickEvent(event);
+			return;
+		}
+
+		QGraphicsSceneMouseEvent* sigval1 = event;
+		vtbl->mouseDoubleClickEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event);
+
+	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
+		if (vtbl->wheelEvent == 0) {
+			QGraphicsScene::wheelEvent(event);
+			return;
+		}
+
+		QGraphicsSceneWheelEvent* sigval1 = event;
+		vtbl->wheelEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_wheelEvent(VirtualQGraphicsScene* self, QGraphicsSceneWheelEvent* event);
+
+	virtual void inputMethodEvent(QInputMethodEvent* event) override {
+		if (vtbl->inputMethodEvent == 0) {
+			QGraphicsScene::inputMethodEvent(event);
+			return;
+		}
+
+		QInputMethodEvent* sigval1 = event;
+		vtbl->inputMethodEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_inputMethodEvent(VirtualQGraphicsScene* self, QInputMethodEvent* event);
+
+	virtual void drawBackground(QPainter* painter, const QRectF& rect) override {
+		if (vtbl->drawBackground == 0) {
+			QGraphicsScene::drawBackground(painter, rect);
+			return;
+		}
+
+		QPainter* sigval1 = painter;
+		const QRectF& rect_ret = rect;
+		// Cast returned reference into pointer
+		QRectF* sigval2 = const_cast<QRectF*>(&rect_ret);
+		vtbl->drawBackground(this, sigval1, sigval2);
+	}
+
+	friend void QGraphicsScene_virtualbase_drawBackground(VirtualQGraphicsScene* self, QPainter* painter, QRectF* rect);
+
+	virtual void drawForeground(QPainter* painter, const QRectF& rect) override {
+		if (vtbl->drawForeground == 0) {
+			QGraphicsScene::drawForeground(painter, rect);
+			return;
+		}
+
+		QPainter* sigval1 = painter;
+		const QRectF& rect_ret = rect;
+		// Cast returned reference into pointer
+		QRectF* sigval2 = const_cast<QRectF*>(&rect_ret);
+		vtbl->drawForeground(this, sigval1, sigval2);
+	}
+
+	friend void QGraphicsScene_virtualbase_drawForeground(VirtualQGraphicsScene* self, QPainter* painter, QRectF* rect);
+
+	virtual bool focusNextPrevChild(bool next) override {
+		if (vtbl->focusNextPrevChild == 0) {
+			return QGraphicsScene::focusNextPrevChild(next);
+		}
+
+		bool sigval1 = next;
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QGraphicsScene_virtualbase_focusNextPrevChild(VirtualQGraphicsScene* self, bool next);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QGraphicsScene::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_timerEvent(VirtualQGraphicsScene* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QGraphicsScene::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_childEvent(VirtualQGraphicsScene* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QGraphicsScene::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_customEvent(VirtualQGraphicsScene* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QGraphicsScene::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_connectNotify(VirtualQGraphicsScene* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QGraphicsScene::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QGraphicsScene_virtualbase_disconnectNotify(VirtualQGraphicsScene* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QGraphicsScene_protectedbase_sender(const VirtualQGraphicsScene* self);
+	friend int QGraphicsScene_protectedbase_senderSignalIndex(const VirtualQGraphicsScene* self);
+	friend int QGraphicsScene_protectedbase_receivers(const VirtualQGraphicsScene* self, const char* signal);
+	friend bool QGraphicsScene_protectedbase_isSignalConnected(const VirtualQGraphicsScene* self, QMetaMethod* signal);
+};
+
+VirtualQGraphicsScene* QGraphicsScene_new(const QGraphicsScene_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsScene>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQGraphicsScene(vtbl) : nullptr;
+}
+
+VirtualQGraphicsScene* QGraphicsScene_new_sceneRect(const QGraphicsScene_VTable* vtbl, size_t vdata, QRectF* sceneRect) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsScene>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQGraphicsScene(vtbl, *sceneRect) : nullptr;
+}
+
+VirtualQGraphicsScene* QGraphicsScene_new_x_y_width_height(const QGraphicsScene_VTable* vtbl, size_t vdata, double x, double y, double width, double height) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsScene>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQGraphicsScene(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(width), static_cast<qreal>(height)) : nullptr;
+}
+
+VirtualQGraphicsScene* QGraphicsScene_new_parent(const QGraphicsScene_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsScene>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQGraphicsScene(vtbl, parent) : nullptr;
+}
+
+VirtualQGraphicsScene* QGraphicsScene_new_sceneRect_parent(const QGraphicsScene_VTable* vtbl, size_t vdata, QRectF* sceneRect, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsScene>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQGraphicsScene(vtbl, *sceneRect, parent) : nullptr;
+}
+
+VirtualQGraphicsScene* QGraphicsScene_new_x_y_width_height_parent(const QGraphicsScene_VTable* vtbl, size_t vdata, double x, double y, double width, double height, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQGraphicsScene>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQGraphicsScene(vtbl, static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(width), static_cast<qreal>(height), parent) : nullptr;
+}
+
+void QGraphicsScene_virtbase(QGraphicsScene* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QGraphicsScene_metaObject(const QGraphicsScene* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QGraphicsScene_metacast(QGraphicsScene* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QGraphicsScene_metacall(QGraphicsScene* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QGraphicsScene_tr_s(const char* s) {
+	QString _ret = QGraphicsScene::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QRectF* QGraphicsScene_sceneRect(const QGraphicsScene* self) {
+	return new QRectF(self->sceneRect());
+}
+
+double QGraphicsScene_width(const QGraphicsScene* self) {
+	qreal _ret = self->width();
+	return static_cast<double>(_ret);
+}
+
+double QGraphicsScene_height(const QGraphicsScene* self) {
+	qreal _ret = self->height();
+	return static_cast<double>(_ret);
+}
+
+void QGraphicsScene_setSceneRect_rect(QGraphicsScene* self, QRectF* rect) {
+	self->setSceneRect(*rect);
+}
+
+void QGraphicsScene_setSceneRect_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h) {
+	self->setSceneRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
+}
+
+void QGraphicsScene_render_painter(QGraphicsScene* self, QPainter* painter) {
+	self->render(painter);
+}
+
+int QGraphicsScene_itemIndexMethod(const QGraphicsScene* self) {
+	QGraphicsScene::ItemIndexMethod _ret = self->itemIndexMethod();
+	return static_cast<int>(_ret);
+}
+
+void QGraphicsScene_setItemIndexMethod(QGraphicsScene* self, int method) {
+	self->setItemIndexMethod(static_cast<QGraphicsScene::ItemIndexMethod>(method));
+}
+
+int QGraphicsScene_bspTreeDepth(const QGraphicsScene* self) {
+	return self->bspTreeDepth();
+}
+
+void QGraphicsScene_setBspTreeDepth(QGraphicsScene* self, int depth) {
+	self->setBspTreeDepth(static_cast<int>(depth));
+}
+
+QRectF* QGraphicsScene_itemsBoundingRect(const QGraphicsScene* self) {
+	return new QRectF(self->itemsBoundingRect());
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items(const QGraphicsScene* self) {
+	QList<QGraphicsItem *> _ret = self->items();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_pos(const QGraphicsScene* self, QPointF* pos) {
+	QList<QGraphicsItem *> _ret = self->items(*pos);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_rect(const QGraphicsScene* self, QRectF* rect) {
+	QList<QGraphicsItem *> _ret = self->items(*rect);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_path(const QGraphicsScene* self, QPainterPath* path) {
+	QList<QGraphicsItem *> _ret = self->items(*path);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_x_y_w_h_mode_order(const QGraphicsScene* self, double x, double y, double w, double h, int mode, int order) {
+	QList<QGraphicsItem *> _ret = self->items(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_collidingItems_item(const QGraphicsScene* self, QGraphicsItem* item) {
+	QList<QGraphicsItem *> _ret = self->collidingItems(item);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+QGraphicsItem* QGraphicsScene_itemAt_pos_deviceTransform(const QGraphicsScene* self, QPointF* pos, QTransform* deviceTransform) {
+	return self->itemAt(*pos, *deviceTransform);
+}
+
+QGraphicsItem* QGraphicsScene_itemAt_x_y_deviceTransform(const QGraphicsScene* self, double x, double y, QTransform* deviceTransform) {
+	return self->itemAt(static_cast<qreal>(x), static_cast<qreal>(y), *deviceTransform);
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_selectedItems(const QGraphicsScene* self) {
+	QList<QGraphicsItem *> _ret = self->selectedItems();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+QPainterPath* QGraphicsScene_selectionArea(const QGraphicsScene* self) {
+	return new QPainterPath(self->selectionArea());
+}
+
+void QGraphicsScene_setSelectionArea_path_deviceTransform(QGraphicsScene* self, QPainterPath* path, QTransform* deviceTransform) {
+	self->setSelectionArea(*path, *deviceTransform);
+}
+
+void QGraphicsScene_setSelectionArea_path(QGraphicsScene* self, QPainterPath* path) {
+	self->setSelectionArea(*path);
+}
+
+QGraphicsItemGroup* QGraphicsScene_createItemGroup(QGraphicsScene* self, struct seaqt_array /* of QGraphicsItem* */  items) {
+	QList<QGraphicsItem *> items_QList;
+	items_QList.reserve(items.len);
+	QGraphicsItem** items_arr = static_cast<QGraphicsItem**>(items.data);
+	for(size_t i = 0; i < items.len; ++i) {
+		items_QList.push_back(items_arr[i]);
+	}
+	return self->createItemGroup(items_QList);
+}
+
+void QGraphicsScene_destroyItemGroup(QGraphicsScene* self, QGraphicsItemGroup* group) {
+	self->destroyItemGroup(group);
+}
+
+void QGraphicsScene_addItem(QGraphicsScene* self, QGraphicsItem* item) {
+	self->addItem(item);
+}
+
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_rect(QGraphicsScene* self, QRectF* rect) {
+	return self->addEllipse(*rect);
+}
+
+QGraphicsLineItem* QGraphicsScene_addLine_line(QGraphicsScene* self, QLineF* line) {
+	return self->addLine(*line);
+}
+
+QGraphicsPathItem* QGraphicsScene_addPath_path(QGraphicsScene* self, QPainterPath* path) {
+	return self->addPath(*path);
+}
+
+QGraphicsPixmapItem* QGraphicsScene_addPixmap(QGraphicsScene* self, QPixmap* pixmap) {
+	return self->addPixmap(*pixmap);
+}
+
+QGraphicsRectItem* QGraphicsScene_addRect_rect(QGraphicsScene* self, QRectF* rect) {
+	return self->addRect(*rect);
+}
+
+QGraphicsTextItem* QGraphicsScene_addText_text(QGraphicsScene* self, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return self->addText(text_QString);
+}
+
+QGraphicsSimpleTextItem* QGraphicsScene_addSimpleText_text(QGraphicsScene* self, struct seaqt_string text) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return self->addSimpleText(text_QString);
+}
+
+QGraphicsProxyWidget* QGraphicsScene_addWidget_widget(QGraphicsScene* self, QWidget* widget) {
+	return self->addWidget(widget);
+}
+
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h) {
+	return self->addEllipse(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
+}
+
+QGraphicsLineItem* QGraphicsScene_addLine_x1_y1_x2_y2(QGraphicsScene* self, double x1, double y1, double x2, double y2) {
+	return self->addLine(static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2));
+}
+
+QGraphicsRectItem* QGraphicsScene_addRect_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h) {
+	return self->addRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
+}
+
+void QGraphicsScene_removeItem(QGraphicsScene* self, QGraphicsItem* item) {
+	self->removeItem(item);
+}
+
+QGraphicsItem* QGraphicsScene_focusItem(const QGraphicsScene* self) {
+	return self->focusItem();
+}
+
+void QGraphicsScene_setFocusItem_item(QGraphicsScene* self, QGraphicsItem* item) {
+	self->setFocusItem(item);
+}
+
+bool QGraphicsScene_hasFocus(const QGraphicsScene* self) {
+	return self->hasFocus();
+}
+
+void QGraphicsScene_setFocus(QGraphicsScene* self) {
+	self->setFocus();
+}
+
+void QGraphicsScene_clearFocus(QGraphicsScene* self) {
+	self->clearFocus();
+}
+
+void QGraphicsScene_setStickyFocus(QGraphicsScene* self, bool enabled) {
+	self->setStickyFocus(enabled);
+}
+
+bool QGraphicsScene_stickyFocus(const QGraphicsScene* self) {
+	return self->stickyFocus();
+}
+
+QGraphicsItem* QGraphicsScene_mouseGrabberItem(const QGraphicsScene* self) {
+	return self->mouseGrabberItem();
+}
+
+QBrush* QGraphicsScene_backgroundBrush(const QGraphicsScene* self) {
+	return new QBrush(self->backgroundBrush());
+}
+
+void QGraphicsScene_setBackgroundBrush(QGraphicsScene* self, QBrush* brush) {
+	self->setBackgroundBrush(*brush);
+}
+
+QBrush* QGraphicsScene_foregroundBrush(const QGraphicsScene* self) {
+	return new QBrush(self->foregroundBrush());
+}
+
+void QGraphicsScene_setForegroundBrush(QGraphicsScene* self, QBrush* brush) {
+	self->setForegroundBrush(*brush);
+}
+
+QVariant* QGraphicsScene_inputMethodQuery(const QGraphicsScene* self, int query) {
+	return new QVariant(self->inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
+}
+
+struct seaqt_array /* of QGraphicsView* */  QGraphicsScene_views(const QGraphicsScene* self) {
+	QList<QGraphicsView *> _ret = self->views();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsView** _arr = static_cast<QGraphicsView**>(malloc(sizeof(QGraphicsView*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QGraphicsScene_update_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h) {
+	self->update(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
+}
+
+void QGraphicsScene_invalidate_x_y_w_h(QGraphicsScene* self, double x, double y, double w, double h) {
+	self->invalidate(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h));
+}
+
+QStyle* QGraphicsScene_style(const QGraphicsScene* self) {
+	return self->style();
+}
+
+void QGraphicsScene_setStyle(QGraphicsScene* self, QStyle* style) {
+	self->setStyle(style);
+}
+
+QFont* QGraphicsScene_font(const QGraphicsScene* self) {
+	return new QFont(self->font());
+}
+
+void QGraphicsScene_setFont(QGraphicsScene* self, QFont* font) {
+	self->setFont(*font);
+}
+
+QPalette* QGraphicsScene_palette(const QGraphicsScene* self) {
+	return new QPalette(self->palette());
+}
+
+void QGraphicsScene_setPalette(QGraphicsScene* self, QPalette* palette) {
+	self->setPalette(*palette);
+}
+
+bool QGraphicsScene_isActive(const QGraphicsScene* self) {
+	return self->isActive();
+}
+
+QGraphicsItem* QGraphicsScene_activePanel(const QGraphicsScene* self) {
+	return self->activePanel();
+}
+
+void QGraphicsScene_setActivePanel(QGraphicsScene* self, QGraphicsItem* item) {
+	self->setActivePanel(item);
+}
+
+QGraphicsWidget* QGraphicsScene_activeWindow(const QGraphicsScene* self) {
+	return self->activeWindow();
+}
+
+void QGraphicsScene_setActiveWindow(QGraphicsScene* self, QGraphicsWidget* widget) {
+	self->setActiveWindow(widget);
+}
+
+bool QGraphicsScene_sendEvent(QGraphicsScene* self, QGraphicsItem* item, QEvent* event) {
+	return self->sendEvent(item, event);
+}
+
+double QGraphicsScene_minimumRenderSize(const QGraphicsScene* self) {
+	qreal _ret = self->minimumRenderSize();
+	return static_cast<double>(_ret);
+}
+
+void QGraphicsScene_setMinimumRenderSize(QGraphicsScene* self, double minSize) {
+	self->setMinimumRenderSize(static_cast<qreal>(minSize));
+}
+
+bool QGraphicsScene_focusOnTouch(const QGraphicsScene* self) {
+	return self->focusOnTouch();
+}
+
+void QGraphicsScene_setFocusOnTouch(QGraphicsScene* self, bool enabled) {
+	self->setFocusOnTouch(enabled);
+}
+
+void QGraphicsScene_update(QGraphicsScene* self) {
+	self->update();
+}
+
+void QGraphicsScene_invalidate(QGraphicsScene* self) {
+	self->invalidate();
+}
+
+void QGraphicsScene_advance(QGraphicsScene* self) {
+	self->advance();
+}
+
+void QGraphicsScene_clearSelection(QGraphicsScene* self) {
+	self->clearSelection();
+}
+
+void QGraphicsScene_clear(QGraphicsScene* self) {
+	self->clear();
+}
+
+void QGraphicsScene_changed(QGraphicsScene* self, struct seaqt_array /* of QRectF* */  region) {
+	QList<QRectF> region_QList;
+	region_QList.reserve(region.len);
+	QRectF** region_arr = static_cast<QRectF**>(region.data);
+	for(size_t i = 0; i < region.len; ++i) {
+		region_QList.push_back(*(region_arr[i]));
+	}
+	self->changed(region_QList);
+}
+
+void QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QRectF* */ ), void (*release)(intptr_t)) {
+	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QList<QRectF>&)>(&QGraphicsScene::changed), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QRectF>& region) {
+			const QList<QRectF>& region_ret = region;
+			// Convert QList<> from C++ memory to manually-managed C memory
+			QRectF** region_arr = static_cast<QRectF**>(malloc(sizeof(QRectF*) * region_ret.length()));
+			for (size_t i = 0, e = region_ret.length(); i < e; ++i) {
+				region_arr[i] = new QRectF(region_ret[i]);
+			}
+			struct seaqt_array region_out;
+			region_out.len = region_ret.length();
+			region_out.data = static_cast<void*>(region_arr);
+			struct seaqt_array /* of QRectF* */  sigval1 = region_out;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QGraphicsScene_sceneRectChanged(QGraphicsScene* self, QRectF* rect) {
+	self->sceneRectChanged(*rect);
+}
+
+void QGraphicsScene_connect_sceneRectChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
+	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QRectF&)>(&QGraphicsScene::sceneRectChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QRectF& rect) {
+			const QRectF& rect_ret = rect;
+			// Cast returned reference into pointer
+			QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
+			callback(release.slot, sigval1);
+	});
+}
+
+void QGraphicsScene_selectionChanged(QGraphicsScene* self) {
+	self->selectionChanged();
+}
+
+void QGraphicsScene_connect_selectionChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)()>(&QGraphicsScene::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+void QGraphicsScene_focusItemChanged(QGraphicsScene* self, QGraphicsItem* newFocus, QGraphicsItem* oldFocus, int reason) {
+	self->focusItemChanged(newFocus, oldFocus, static_cast<Qt::FocusReason>(reason));
+}
+
+void QGraphicsScene_connect_focusItemChanged(QGraphicsScene* self, intptr_t slot, void (*callback)(intptr_t, QGraphicsItem*, QGraphicsItem*, int), void (*release)(intptr_t)) {
+	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(QGraphicsItem*, QGraphicsItem*, Qt::FocusReason)>(&QGraphicsScene::focusItemChanged), self, [callback, release = seaqt::release_callback{slot,release}](QGraphicsItem* newFocus, QGraphicsItem* oldFocus, Qt::FocusReason reason) {
+			QGraphicsItem* sigval1 = newFocus;
+			QGraphicsItem* sigval2 = oldFocus;
+			Qt::FocusReason reason_ret = reason;
+			int sigval3 = static_cast<int>(reason_ret);
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
+}
+
+struct seaqt_string QGraphicsScene_tr_s_c(const char* s, const char* c) {
+	QString _ret = QGraphicsScene::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QGraphicsScene_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QGraphicsScene::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QGraphicsScene_render_painter_target(QGraphicsScene* self, QPainter* painter, QRectF* target) {
+	self->render(painter, *target);
+}
+
+void QGraphicsScene_render_painter_target_source(QGraphicsScene* self, QPainter* painter, QRectF* target, QRectF* source) {
+	self->render(painter, *target, *source);
+}
+
+void QGraphicsScene_render_painter_target_source_aspectRatioMode(QGraphicsScene* self, QPainter* painter, QRectF* target, QRectF* source, int aspectRatioMode) {
+	self->render(painter, *target, *source, static_cast<Qt::AspectRatioMode>(aspectRatioMode));
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_order(const QGraphicsScene* self, int order) {
+	QList<QGraphicsItem *> _ret = self->items(static_cast<Qt::SortOrder>(order));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_pos_mode(const QGraphicsScene* self, QPointF* pos, int mode) {
+	QList<QGraphicsItem *> _ret = self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_pos_mode_order(const QGraphicsScene* self, QPointF* pos, int mode, int order) {
+	QList<QGraphicsItem *> _ret = self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_pos_mode_order_deviceTransform(const QGraphicsScene* self, QPointF* pos, int mode, int order, QTransform* deviceTransform) {
+	QList<QGraphicsItem *> _ret = self->items(*pos, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_rect_mode(const QGraphicsScene* self, QRectF* rect, int mode) {
+	QList<QGraphicsItem *> _ret = self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_rect_mode_order(const QGraphicsScene* self, QRectF* rect, int mode, int order) {
+	QList<QGraphicsItem *> _ret = self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_rect_mode_order_deviceTransform(const QGraphicsScene* self, QRectF* rect, int mode, int order, QTransform* deviceTransform) {
+	QList<QGraphicsItem *> _ret = self->items(*rect, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_path_mode(const QGraphicsScene* self, QPainterPath* path, int mode) {
+	QList<QGraphicsItem *> _ret = self->items(*path, static_cast<Qt::ItemSelectionMode>(mode));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_path_mode_order(const QGraphicsScene* self, QPainterPath* path, int mode, int order) {
+	QList<QGraphicsItem *> _ret = self->items(*path, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_path_mode_order_deviceTransform(const QGraphicsScene* self, QPainterPath* path, int mode, int order, QTransform* deviceTransform) {
+	QList<QGraphicsItem *> _ret = self->items(*path, static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_items_x_y_w_h_mode_order_deviceTransform(const QGraphicsScene* self, double x, double y, double w, double h, int mode, int order, QTransform* deviceTransform) {
+	QList<QGraphicsItem *> _ret = self->items(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<Qt::ItemSelectionMode>(mode), static_cast<Qt::SortOrder>(order), *deviceTransform);
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+struct seaqt_array /* of QGraphicsItem* */  QGraphicsScene_collidingItems_item_mode(const QGraphicsScene* self, QGraphicsItem* item, int mode) {
+	QList<QGraphicsItem *> _ret = self->collidingItems(item, static_cast<Qt::ItemSelectionMode>(mode));
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QGraphicsItem** _arr = static_cast<QGraphicsItem**>(malloc(sizeof(QGraphicsItem*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+void QGraphicsScene_setSelectionArea_path_selectionOperation(QGraphicsScene* self, QPainterPath* path, int selectionOperation) {
+	self->setSelectionArea(*path, static_cast<Qt::ItemSelectionOperation>(selectionOperation));
+}
+
+void QGraphicsScene_setSelectionArea_path_selectionOperation_mode(QGraphicsScene* self, QPainterPath* path, int selectionOperation, int mode) {
+	self->setSelectionArea(*path, static_cast<Qt::ItemSelectionOperation>(selectionOperation), static_cast<Qt::ItemSelectionMode>(mode));
+}
+
+void QGraphicsScene_setSelectionArea_path_selectionOperation_mode_deviceTransform(QGraphicsScene* self, QPainterPath* path, int selectionOperation, int mode, QTransform* deviceTransform) {
+	self->setSelectionArea(*path, static_cast<Qt::ItemSelectionOperation>(selectionOperation), static_cast<Qt::ItemSelectionMode>(mode), *deviceTransform);
+}
+
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_rect_pen(QGraphicsScene* self, QRectF* rect, QPen* pen) {
+	return self->addEllipse(*rect, *pen);
+}
+
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_rect_pen_brush(QGraphicsScene* self, QRectF* rect, QPen* pen, QBrush* brush) {
+	return self->addEllipse(*rect, *pen, *brush);
+}
+
+QGraphicsLineItem* QGraphicsScene_addLine_line_pen(QGraphicsScene* self, QLineF* line, QPen* pen) {
+	return self->addLine(*line, *pen);
+}
+
+QGraphicsPathItem* QGraphicsScene_addPath_path_pen(QGraphicsScene* self, QPainterPath* path, QPen* pen) {
+	return self->addPath(*path, *pen);
+}
+
+QGraphicsPathItem* QGraphicsScene_addPath_path_pen_brush(QGraphicsScene* self, QPainterPath* path, QPen* pen, QBrush* brush) {
+	return self->addPath(*path, *pen, *brush);
+}
+
+QGraphicsRectItem* QGraphicsScene_addRect_rect_pen(QGraphicsScene* self, QRectF* rect, QPen* pen) {
+	return self->addRect(*rect, *pen);
+}
+
+QGraphicsRectItem* QGraphicsScene_addRect_rect_pen_brush(QGraphicsScene* self, QRectF* rect, QPen* pen, QBrush* brush) {
+	return self->addRect(*rect, *pen, *brush);
+}
+
+QGraphicsTextItem* QGraphicsScene_addText_text_font(QGraphicsScene* self, struct seaqt_string text, QFont* font) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return self->addText(text_QString, *font);
+}
+
+QGraphicsSimpleTextItem* QGraphicsScene_addSimpleText_text_font(QGraphicsScene* self, struct seaqt_string text, QFont* font) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return self->addSimpleText(text_QString, *font);
+}
+
+QGraphicsProxyWidget* QGraphicsScene_addWidget_widget_wFlags(QGraphicsScene* self, QWidget* widget, int wFlags) {
+	return self->addWidget(widget, static_cast<Qt::WindowFlags>(wFlags));
+}
+
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_x_y_w_h_pen(QGraphicsScene* self, double x, double y, double w, double h, QPen* pen) {
+	return self->addEllipse(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), *pen);
+}
+
+QGraphicsEllipseItem* QGraphicsScene_addEllipse_x_y_w_h_pen_brush(QGraphicsScene* self, double x, double y, double w, double h, QPen* pen, QBrush* brush) {
+	return self->addEllipse(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), *pen, *brush);
+}
+
+QGraphicsLineItem* QGraphicsScene_addLine_x1_y1_x2_y2_pen(QGraphicsScene* self, double x1, double y1, double x2, double y2, QPen* pen) {
+	return self->addLine(static_cast<qreal>(x1), static_cast<qreal>(y1), static_cast<qreal>(x2), static_cast<qreal>(y2), *pen);
+}
+
+QGraphicsRectItem* QGraphicsScene_addRect_x_y_w_h_pen(QGraphicsScene* self, double x, double y, double w, double h, QPen* pen) {
+	return self->addRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), *pen);
+}
+
+QGraphicsRectItem* QGraphicsScene_addRect_x_y_w_h_pen_brush(QGraphicsScene* self, double x, double y, double w, double h, QPen* pen, QBrush* brush) {
+	return self->addRect(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), *pen, *brush);
+}
+
+void QGraphicsScene_setFocusItem_item_focusReason(QGraphicsScene* self, QGraphicsItem* item, int focusReason) {
+	self->setFocusItem(item, static_cast<Qt::FocusReason>(focusReason));
+}
+
+void QGraphicsScene_setFocus_focusReason(QGraphicsScene* self, int focusReason) {
+	self->setFocus(static_cast<Qt::FocusReason>(focusReason));
+}
+
+void QGraphicsScene_invalidate_x_y_w_h_layers(QGraphicsScene* self, double x, double y, double w, double h, int layers) {
+	self->invalidate(static_cast<qreal>(x), static_cast<qreal>(y), static_cast<qreal>(w), static_cast<qreal>(h), static_cast<QGraphicsScene::SceneLayers>(layers));
+}
+
+void QGraphicsScene_update_rect(QGraphicsScene* self, QRectF* rect) {
+	self->update(*rect);
+}
+
+void QGraphicsScene_invalidate_rect(QGraphicsScene* self, QRectF* rect) {
+	self->invalidate(*rect);
+}
+
+void QGraphicsScene_invalidate_rect_layers(QGraphicsScene* self, QRectF* rect, int layers) {
+	self->invalidate(*rect, static_cast<QGraphicsScene::SceneLayers>(layers));
+}
+
+const QMetaObject* QGraphicsScene_staticMetaObject() { return &QGraphicsScene::staticMetaObject; }
+void* QGraphicsScene_vdata(VirtualQGraphicsScene* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQGraphicsScene>()); }
+VirtualQGraphicsScene* vdata_QGraphicsScene(void* vdata) { return reinterpret_cast<VirtualQGraphicsScene*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQGraphicsScene>()); }
+
+QMetaObject* QGraphicsScene_virtualbase_metaObject(const VirtualQGraphicsScene* self) {
+
+	return (QMetaObject*) self->QGraphicsScene::metaObject();
+}
+
+void* QGraphicsScene_virtualbase_metacast(VirtualQGraphicsScene* self, const char* param1) {
+
+	return self->QGraphicsScene::qt_metacast(param1);
+}
+
+int QGraphicsScene_virtualbase_metacall(VirtualQGraphicsScene* self, int param1, int param2, void** param3) {
+
+	return self->QGraphicsScene::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+QVariant* QGraphicsScene_virtualbase_inputMethodQuery(const VirtualQGraphicsScene* self, int query) {
+
+	return new QVariant(self->QGraphicsScene::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
+}
+
+bool QGraphicsScene_virtualbase_event(VirtualQGraphicsScene* self, QEvent* event) {
+
+	return self->QGraphicsScene::event(event);
+}
+
+bool QGraphicsScene_virtualbase_eventFilter(VirtualQGraphicsScene* self, QObject* watched, QEvent* event) {
+
+	return self->QGraphicsScene::eventFilter(watched, event);
+}
+
+void QGraphicsScene_virtualbase_contextMenuEvent(VirtualQGraphicsScene* self, QGraphicsSceneContextMenuEvent* event) {
+
+	self->QGraphicsScene::contextMenuEvent(event);
+}
+
+void QGraphicsScene_virtualbase_dragEnterEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event) {
+
+	self->QGraphicsScene::dragEnterEvent(event);
+}
+
+void QGraphicsScene_virtualbase_dragMoveEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event) {
+
+	self->QGraphicsScene::dragMoveEvent(event);
+}
+
+void QGraphicsScene_virtualbase_dragLeaveEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event) {
+
+	self->QGraphicsScene::dragLeaveEvent(event);
+}
+
+void QGraphicsScene_virtualbase_dropEvent(VirtualQGraphicsScene* self, QGraphicsSceneDragDropEvent* event) {
+
+	self->QGraphicsScene::dropEvent(event);
+}
+
+void QGraphicsScene_virtualbase_focusInEvent(VirtualQGraphicsScene* self, QFocusEvent* event) {
+
+	self->QGraphicsScene::focusInEvent(event);
+}
+
+void QGraphicsScene_virtualbase_focusOutEvent(VirtualQGraphicsScene* self, QFocusEvent* event) {
+
+	self->QGraphicsScene::focusOutEvent(event);
+}
+
+void QGraphicsScene_virtualbase_helpEvent(VirtualQGraphicsScene* self, QGraphicsSceneHelpEvent* event) {
+
+	self->QGraphicsScene::helpEvent(event);
+}
+
+void QGraphicsScene_virtualbase_keyPressEvent(VirtualQGraphicsScene* self, QKeyEvent* event) {
+
+	self->QGraphicsScene::keyPressEvent(event);
+}
+
+void QGraphicsScene_virtualbase_keyReleaseEvent(VirtualQGraphicsScene* self, QKeyEvent* event) {
+
+	self->QGraphicsScene::keyReleaseEvent(event);
+}
+
+void QGraphicsScene_virtualbase_mousePressEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event) {
+
+	self->QGraphicsScene::mousePressEvent(event);
+}
+
+void QGraphicsScene_virtualbase_mouseMoveEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event) {
+
+	self->QGraphicsScene::mouseMoveEvent(event);
+}
+
+void QGraphicsScene_virtualbase_mouseReleaseEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event) {
+
+	self->QGraphicsScene::mouseReleaseEvent(event);
+}
+
+void QGraphicsScene_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsScene* self, QGraphicsSceneMouseEvent* event) {
+
+	self->QGraphicsScene::mouseDoubleClickEvent(event);
+}
+
+void QGraphicsScene_virtualbase_wheelEvent(VirtualQGraphicsScene* self, QGraphicsSceneWheelEvent* event) {
+
+	self->QGraphicsScene::wheelEvent(event);
+}
+
+void QGraphicsScene_virtualbase_inputMethodEvent(VirtualQGraphicsScene* self, QInputMethodEvent* event) {
+
+	self->QGraphicsScene::inputMethodEvent(event);
+}
+
+void QGraphicsScene_virtualbase_drawBackground(VirtualQGraphicsScene* self, QPainter* painter, QRectF* rect) {
+
+	self->QGraphicsScene::drawBackground(painter, *rect);
+}
+
+void QGraphicsScene_virtualbase_drawForeground(VirtualQGraphicsScene* self, QPainter* painter, QRectF* rect) {
+
+	self->QGraphicsScene::drawForeground(painter, *rect);
+}
+
+bool QGraphicsScene_virtualbase_focusNextPrevChild(VirtualQGraphicsScene* self, bool next) {
+
+	return self->QGraphicsScene::focusNextPrevChild(next);
+}
+
+void QGraphicsScene_virtualbase_timerEvent(VirtualQGraphicsScene* self, QTimerEvent* event) {
+
+	self->QGraphicsScene::timerEvent(event);
+}
+
+void QGraphicsScene_virtualbase_childEvent(VirtualQGraphicsScene* self, QChildEvent* event) {
+
+	self->QGraphicsScene::childEvent(event);
+}
+
+void QGraphicsScene_virtualbase_customEvent(VirtualQGraphicsScene* self, QEvent* event) {
+
+	self->QGraphicsScene::customEvent(event);
+}
+
+void QGraphicsScene_virtualbase_connectNotify(VirtualQGraphicsScene* self, QMetaMethod* signal) {
+
+	self->QGraphicsScene::connectNotify(*signal);
+}
+
+void QGraphicsScene_virtualbase_disconnectNotify(VirtualQGraphicsScene* self, QMetaMethod* signal) {
+
+	self->QGraphicsScene::disconnectNotify(*signal);
+}
+
+QObject* QGraphicsScene_protectedbase_sender(const VirtualQGraphicsScene* self) {
+	return self->QGraphicsScene::sender();
+}
+
+int QGraphicsScene_protectedbase_senderSignalIndex(const VirtualQGraphicsScene* self) {
+	return self->QGraphicsScene::senderSignalIndex();
+}
+
+int QGraphicsScene_protectedbase_receivers(const VirtualQGraphicsScene* self, const char* signal) {
+	return self->QGraphicsScene::receivers(signal);
+}
+
+bool QGraphicsScene_protectedbase_isSignalConnected(const VirtualQGraphicsScene* self, QMetaMethod* signal) {
+	return self->QGraphicsScene::isSignalConnected(*signal);
+}
+
+void QGraphicsScene_delete(QGraphicsScene* self) {
+	delete self;
+}
+

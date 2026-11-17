@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquickrhiitem
+export gen_qquickrhiitem

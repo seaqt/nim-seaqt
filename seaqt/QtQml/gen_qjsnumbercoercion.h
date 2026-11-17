@@ -1,0 +1,39 @@
+#pragma once
+#ifndef SEAQT_QTQML_GEN_QJSNUMBERCOERCION_H
+#define SEAQT_QTQML_GEN_QJSNUMBERCOERCION_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QJSNumberCoercion;
+#else
+typedef struct QJSNumberCoercion QJSNumberCoercion;
+#endif
+
+QJSNumberCoercion* QJSNumberCoercion_new(QJSNumberCoercion* from);
+
+bool QJSNumberCoercion_isInteger(double d);
+bool QJSNumberCoercion_isArrayIndex_double(double d);
+bool QJSNumberCoercion_isArrayIndex_qint64(long long i);
+bool QJSNumberCoercion_isArrayIndex_quint64(unsigned long long i);
+int QJSNumberCoercion_toInteger(double d);
+bool QJSNumberCoercion_equals(double lhs, double rhs);
+double QJSNumberCoercion_roundTowards0(double d);
+
+void QJSNumberCoercion_delete(QJSNumberCoercion* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

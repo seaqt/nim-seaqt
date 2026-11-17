@@ -1,0 +1,2 @@
+import ./QtWebChannel/gen_qwebchannelabstracttransport
+export gen_qwebchannelabstracttransport

@@ -1,0 +1,57 @@
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QWebSocketCorsAuthenticator>
+#include <qwebsocketcorsauthenticator.h>
+#include "gen_qwebsocketcorsauthenticator.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new_origin(struct seaqt_string origin) {
+	QString origin_QString = QString::fromUtf8(origin.data, origin.len);
+	return new (std::nothrow) QWebSocketCorsAuthenticator(origin_QString);
+}
+
+QWebSocketCorsAuthenticator* QWebSocketCorsAuthenticator_new_from(QWebSocketCorsAuthenticator* from) {
+	return new (std::nothrow) QWebSocketCorsAuthenticator(*from);
+}
+
+void QWebSocketCorsAuthenticator_swap(QWebSocketCorsAuthenticator* self, QWebSocketCorsAuthenticator* other) {
+	self->swap(*other);
+}
+
+void QWebSocketCorsAuthenticator_operatorAssign(QWebSocketCorsAuthenticator* self, QWebSocketCorsAuthenticator* from) {
+	self->operator=(*from);
+}
+
+struct seaqt_string QWebSocketCorsAuthenticator_origin(const QWebSocketCorsAuthenticator* self) {
+	QString _ret = self->origin();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QWebSocketCorsAuthenticator_setAllowed(QWebSocketCorsAuthenticator* self, bool allowed) {
+	self->setAllowed(allowed);
+}
+
+bool QWebSocketCorsAuthenticator_allowed(const QWebSocketCorsAuthenticator* self) {
+	return self->allowed();
+}
+
+void QWebSocketCorsAuthenticator_delete(QWebSocketCorsAuthenticator* self) {
+	delete self;
+}
+

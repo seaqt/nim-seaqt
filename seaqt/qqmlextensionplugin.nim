@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlextensionplugin
+export gen_qqmlextensionplugin

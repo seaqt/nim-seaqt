@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractformbuilder
+export gen_abstractformbuilder

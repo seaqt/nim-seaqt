@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qnetworkdiskcache
+export gen_qnetworkdiskcache

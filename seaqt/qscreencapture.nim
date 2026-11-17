@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qscreencapture
+export gen_qscreencapture

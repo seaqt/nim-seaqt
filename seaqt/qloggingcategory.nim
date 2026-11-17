@@ -1,0 +1,2 @@
+import ./QtCore/gen_qloggingcategory
+export gen_qloggingcategory

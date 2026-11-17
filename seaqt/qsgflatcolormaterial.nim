@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgflatcolormaterial
+export gen_qsgflatcolormaterial
