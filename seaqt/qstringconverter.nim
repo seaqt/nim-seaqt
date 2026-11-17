@@ -1,0 +1,2 @@
+import ./QtCore/gen_qstringconverter_base
+export gen_qstringconverter_base

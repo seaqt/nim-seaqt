@@ -1,0 +1,2 @@
+import ./QtPrintSupport/gen_qabstractprintdialog
+export gen_qabstractprintdialog

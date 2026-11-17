@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginepage
+export gen_qwebenginepage

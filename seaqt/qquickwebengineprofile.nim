@@ -1,0 +1,2 @@
+import ./QtWebEngineQuick/gen_qquickwebengineprofile
+export gen_qquickwebengineprofile

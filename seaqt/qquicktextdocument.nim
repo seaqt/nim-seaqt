@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquicktextdocument
+export gen_qquicktextdocument

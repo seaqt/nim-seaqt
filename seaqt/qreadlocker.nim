@@ -1,0 +1,2 @@
+import ./QtCore/gen_qreadwritelock
+export gen_qreadwritelock

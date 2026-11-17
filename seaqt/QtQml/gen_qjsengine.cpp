@@ -1,0 +1,446 @@
+#include <QChildEvent>
+#include <QEvent>
+#include <QJSEngine>
+#include <QJSValue>
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <qjsengine.h>
+#include "gen_qjsengine.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQJSEngine final : public QJSEngine {
+	const QJSEngine_VTable* vtbl;
+public:
+	friend void* QJSEngine_vdata(VirtualQJSEngine* self);
+	friend VirtualQJSEngine* vdata_QJSEngine(void* vdata);
+
+	VirtualQJSEngine(const QJSEngine_VTable* vtbl): QJSEngine(), vtbl(vtbl) {}
+	VirtualQJSEngine(const QJSEngine_VTable* vtbl, QObject* parent): QJSEngine(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQJSEngine() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QJSEngine::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QJSEngine_virtualbase_metaObject(const VirtualQJSEngine* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QJSEngine::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QJSEngine_virtualbase_metacast(VirtualQJSEngine* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QJSEngine::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QJSEngine_virtualbase_metacall(VirtualQJSEngine* self, int param1, int param2, void** param3);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QJSEngine::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QJSEngine_virtualbase_event(VirtualQJSEngine* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QJSEngine::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QJSEngine_virtualbase_eventFilter(VirtualQJSEngine* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QJSEngine::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QJSEngine_virtualbase_timerEvent(VirtualQJSEngine* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QJSEngine::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QJSEngine_virtualbase_childEvent(VirtualQJSEngine* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QJSEngine::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QJSEngine_virtualbase_customEvent(VirtualQJSEngine* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QJSEngine::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QJSEngine_virtualbase_connectNotify(VirtualQJSEngine* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QJSEngine::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QJSEngine_virtualbase_disconnectNotify(VirtualQJSEngine* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QJSEngine_protectedbase_sender(const VirtualQJSEngine* self);
+	friend int QJSEngine_protectedbase_senderSignalIndex(const VirtualQJSEngine* self);
+	friend int QJSEngine_protectedbase_receivers(const VirtualQJSEngine* self, const char* signal);
+	friend bool QJSEngine_protectedbase_isSignalConnected(const VirtualQJSEngine* self, QMetaMethod* signal);
+};
+
+VirtualQJSEngine* QJSEngine_new(const QJSEngine_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQJSEngine>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQJSEngine(vtbl) : nullptr;
+}
+
+VirtualQJSEngine* QJSEngine_new_parent(const QJSEngine_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQJSEngine>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQJSEngine(vtbl, parent) : nullptr;
+}
+
+void QJSEngine_virtbase(QJSEngine* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QJSEngine_metaObject(const QJSEngine* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QJSEngine_metacast(QJSEngine* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QJSEngine_metacall(QJSEngine* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QJSEngine_tr_s(const char* s) {
+	QString _ret = QJSEngine::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QJSValue* QJSEngine_globalObject(const QJSEngine* self) {
+	return new QJSValue(self->globalObject());
+}
+
+QJSValue* QJSEngine_evaluate_program(QJSEngine* self, struct seaqt_string program) {
+	QString program_QString = QString::fromUtf8(program.data, program.len);
+	return new QJSValue(self->evaluate(program_QString));
+}
+
+QJSValue* QJSEngine_importModule(QJSEngine* self, struct seaqt_string fileName) {
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	return new QJSValue(self->importModule(fileName_QString));
+}
+
+QJSValue* QJSEngine_newObject(QJSEngine* self) {
+	return new QJSValue(self->newObject());
+}
+
+QJSValue* QJSEngine_newSymbol(QJSEngine* self, struct seaqt_string name) {
+	QString name_QString = QString::fromUtf8(name.data, name.len);
+	return new QJSValue(self->newSymbol(name_QString));
+}
+
+QJSValue* QJSEngine_newArray(QJSEngine* self) {
+	return new QJSValue(self->newArray());
+}
+
+QJSValue* QJSEngine_newQObject(QJSEngine* self, QObject* object) {
+	return new QJSValue(self->newQObject(object));
+}
+
+QJSValue* QJSEngine_newQMetaObject(QJSEngine* self, QMetaObject* metaObject) {
+	return new QJSValue(self->newQMetaObject(metaObject));
+}
+
+QJSValue* QJSEngine_newErrorObject_errorType(QJSEngine* self, int errorType) {
+	return new QJSValue(self->newErrorObject(static_cast<QJSValue::ErrorType>(errorType)));
+}
+
+void QJSEngine_collectGarbage(QJSEngine* self) {
+	self->collectGarbage();
+}
+
+void QJSEngine_setObjectOwnership(QObject* param1, int param2) {
+	QJSEngine::setObjectOwnership(param1, static_cast<QJSEngine::ObjectOwnership>(param2));
+}
+
+int QJSEngine_objectOwnership(QObject* param1) {
+	QJSEngine::ObjectOwnership _ret = QJSEngine::objectOwnership(param1);
+	return static_cast<int>(_ret);
+}
+
+void QJSEngine_setInterrupted(QJSEngine* self, bool interrupted) {
+	self->setInterrupted(interrupted);
+}
+
+bool QJSEngine_isInterrupted(const QJSEngine* self) {
+	return self->isInterrupted();
+}
+
+void QJSEngine_throwError_message(QJSEngine* self, struct seaqt_string message) {
+	QString message_QString = QString::fromUtf8(message.data, message.len);
+	self->throwError(message_QString);
+}
+
+void QJSEngine_throwError_errorType(QJSEngine* self, int errorType) {
+	self->throwError(static_cast<QJSValue::ErrorType>(errorType));
+}
+
+bool QJSEngine_hasError(const QJSEngine* self) {
+	return self->hasError();
+}
+
+QJSValue* QJSEngine_catchError(QJSEngine* self) {
+	return new QJSValue(self->catchError());
+}
+
+struct seaqt_string QJSEngine_uiLanguage(const QJSEngine* self) {
+	QString _ret = self->uiLanguage();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QJSEngine_setUiLanguage(QJSEngine* self, struct seaqt_string language) {
+	QString language_QString = QString::fromUtf8(language.data, language.len);
+	self->setUiLanguage(language_QString);
+}
+
+void QJSEngine_uiLanguageChanged(QJSEngine* self) {
+	self->uiLanguageChanged();
+}
+
+void QJSEngine_connect_uiLanguageChanged(QJSEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QJSEngine::connect(self, static_cast<void (QJSEngine::*)()>(&QJSEngine::uiLanguageChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
+}
+
+struct seaqt_string QJSEngine_tr_s_c(const char* s, const char* c) {
+	QString _ret = QJSEngine::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QJSEngine_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QJSEngine::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QJSValue* QJSEngine_evaluate_program_fileName(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName) {
+	QString program_QString = QString::fromUtf8(program.data, program.len);
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	return new QJSValue(self->evaluate(program_QString, fileName_QString));
+}
+
+QJSValue* QJSEngine_evaluate_program_fileName_lineNumber(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber) {
+	QString program_QString = QString::fromUtf8(program.data, program.len);
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	return new QJSValue(self->evaluate(program_QString, fileName_QString, static_cast<int>(lineNumber)));
+}
+
+QJSValue* QJSEngine_evaluate_program_fileName_lineNumber_exceptionStackTrace(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber, struct seaqt_array /* of struct seaqt_string */  exceptionStackTrace) {
+	QString program_QString = QString::fromUtf8(program.data, program.len);
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	QStringList exceptionStackTrace_QList;
+	exceptionStackTrace_QList.reserve(exceptionStackTrace.len);
+	struct seaqt_string* exceptionStackTrace_arr = static_cast<struct seaqt_string*>(exceptionStackTrace.data);
+	for(size_t i = 0; i < exceptionStackTrace.len; ++i) {
+		QString exceptionStackTrace_arr_i_QString = QString::fromUtf8(exceptionStackTrace_arr[i].data, exceptionStackTrace_arr[i].len);
+		exceptionStackTrace_QList.push_back(exceptionStackTrace_arr_i_QString);
+	}
+	return new QJSValue(self->evaluate(program_QString, fileName_QString, static_cast<int>(lineNumber), &exceptionStackTrace_QList));
+}
+
+QJSValue* QJSEngine_newArray_length(QJSEngine* self, unsigned int length) {
+	return new QJSValue(self->newArray(static_cast<uint>(length)));
+}
+
+QJSValue* QJSEngine_newErrorObject_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message) {
+	QString message_QString = QString::fromUtf8(message.data, message.len);
+	return new QJSValue(self->newErrorObject(static_cast<QJSValue::ErrorType>(errorType), message_QString));
+}
+
+void QJSEngine_throwError_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message) {
+	QString message_QString = QString::fromUtf8(message.data, message.len);
+	self->throwError(static_cast<QJSValue::ErrorType>(errorType), message_QString);
+}
+
+const QMetaObject* QJSEngine_staticMetaObject() { return &QJSEngine::staticMetaObject; }
+void* QJSEngine_vdata(VirtualQJSEngine* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQJSEngine>()); }
+VirtualQJSEngine* vdata_QJSEngine(void* vdata) { return reinterpret_cast<VirtualQJSEngine*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQJSEngine>()); }
+
+QMetaObject* QJSEngine_virtualbase_metaObject(const VirtualQJSEngine* self) {
+
+	return (QMetaObject*) self->QJSEngine::metaObject();
+}
+
+void* QJSEngine_virtualbase_metacast(VirtualQJSEngine* self, const char* param1) {
+
+	return self->QJSEngine::qt_metacast(param1);
+}
+
+int QJSEngine_virtualbase_metacall(VirtualQJSEngine* self, int param1, int param2, void** param3) {
+
+	return self->QJSEngine::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+bool QJSEngine_virtualbase_event(VirtualQJSEngine* self, QEvent* event) {
+
+	return self->QJSEngine::event(event);
+}
+
+bool QJSEngine_virtualbase_eventFilter(VirtualQJSEngine* self, QObject* watched, QEvent* event) {
+
+	return self->QJSEngine::eventFilter(watched, event);
+}
+
+void QJSEngine_virtualbase_timerEvent(VirtualQJSEngine* self, QTimerEvent* event) {
+
+	self->QJSEngine::timerEvent(event);
+}
+
+void QJSEngine_virtualbase_childEvent(VirtualQJSEngine* self, QChildEvent* event) {
+
+	self->QJSEngine::childEvent(event);
+}
+
+void QJSEngine_virtualbase_customEvent(VirtualQJSEngine* self, QEvent* event) {
+
+	self->QJSEngine::customEvent(event);
+}
+
+void QJSEngine_virtualbase_connectNotify(VirtualQJSEngine* self, QMetaMethod* signal) {
+
+	self->QJSEngine::connectNotify(*signal);
+}
+
+void QJSEngine_virtualbase_disconnectNotify(VirtualQJSEngine* self, QMetaMethod* signal) {
+
+	self->QJSEngine::disconnectNotify(*signal);
+}
+
+QObject* QJSEngine_protectedbase_sender(const VirtualQJSEngine* self) {
+	return self->QJSEngine::sender();
+}
+
+int QJSEngine_protectedbase_senderSignalIndex(const VirtualQJSEngine* self) {
+	return self->QJSEngine::senderSignalIndex();
+}
+
+int QJSEngine_protectedbase_receivers(const VirtualQJSEngine* self, const char* signal) {
+	return self->QJSEngine::receivers(signal);
+}
+
+bool QJSEngine_protectedbase_isSignalConnected(const VirtualQJSEngine* self, QMetaMethod* signal) {
+	return self->QJSEngine::isSignalConnected(*signal);
+}
+
+void QJSEngine_delete(QJSEngine* self) {
+	delete self;
+}
+

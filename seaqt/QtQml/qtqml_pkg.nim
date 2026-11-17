@@ -1,0 +1,14 @@
+const
+  QtQmlCFlags* =
+    gorge("pkg-config --cflags Qt6Qml") &
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
+
+  QtQmlLibs* = gorge("pkg-config --libs Qt6Qml")
+
+  QtQmlGenVersion* = "6.5.3"
+    ## The version used for generating the bindings
+
+  QtQmlBuildVersion* = gorge("pkg-config --modversion Qt6Qml")
+    ## The version used when compiling the application
+
+{.passl: QtQmlLibs}

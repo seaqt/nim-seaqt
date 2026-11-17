@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractintegration
+export gen_abstractintegration

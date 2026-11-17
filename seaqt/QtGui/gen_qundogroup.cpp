@@ -1,0 +1,487 @@
+#include <QAction>
+#include <QChildEvent>
+#include <QEvent>
+#include <QList>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <QUndoGroup>
+#include <QUndoStack>
+#include <qundogroup.h>
+#include "gen_qundogroup.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQUndoGroup final : public QUndoGroup {
+	const QUndoGroup_VTable* vtbl;
+public:
+	friend void* QUndoGroup_vdata(VirtualQUndoGroup* self);
+	friend VirtualQUndoGroup* vdata_QUndoGroup(void* vdata);
+
+	VirtualQUndoGroup(const QUndoGroup_VTable* vtbl): QUndoGroup(), vtbl(vtbl) {}
+	VirtualQUndoGroup(const QUndoGroup_VTable* vtbl, QObject* parent): QUndoGroup(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQUndoGroup() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QUndoGroup::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QUndoGroup_virtualbase_metaObject(const VirtualQUndoGroup* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QUndoGroup::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QUndoGroup_virtualbase_metacast(VirtualQUndoGroup* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QUndoGroup::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QUndoGroup_virtualbase_metacall(VirtualQUndoGroup* self, int param1, int param2, void** param3);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QUndoGroup::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QUndoGroup_virtualbase_event(VirtualQUndoGroup* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QUndoGroup::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QUndoGroup_virtualbase_eventFilter(VirtualQUndoGroup* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QUndoGroup::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QUndoGroup_virtualbase_timerEvent(VirtualQUndoGroup* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QUndoGroup::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QUndoGroup_virtualbase_childEvent(VirtualQUndoGroup* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QUndoGroup::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QUndoGroup_virtualbase_customEvent(VirtualQUndoGroup* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QUndoGroup::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QUndoGroup_virtualbase_connectNotify(VirtualQUndoGroup* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QUndoGroup::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QUndoGroup_virtualbase_disconnectNotify(VirtualQUndoGroup* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QUndoGroup_protectedbase_sender(const VirtualQUndoGroup* self);
+	friend int QUndoGroup_protectedbase_senderSignalIndex(const VirtualQUndoGroup* self);
+	friend int QUndoGroup_protectedbase_receivers(const VirtualQUndoGroup* self, const char* signal);
+	friend bool QUndoGroup_protectedbase_isSignalConnected(const VirtualQUndoGroup* self, QMetaMethod* signal);
+};
+
+VirtualQUndoGroup* QUndoGroup_new(const QUndoGroup_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUndoGroup>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQUndoGroup(vtbl) : nullptr;
+}
+
+VirtualQUndoGroup* QUndoGroup_new_parent(const QUndoGroup_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQUndoGroup>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQUndoGroup(vtbl, parent) : nullptr;
+}
+
+void QUndoGroup_virtbase(QUndoGroup* src, QObject** outptr_QObject) {
+	*outptr_QObject = static_cast<QObject*>(src);
+}
+
+QMetaObject* QUndoGroup_metaObject(const QUndoGroup* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QUndoGroup_metacast(QUndoGroup* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QUndoGroup_metacall(QUndoGroup* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QUndoGroup_tr_s(const char* s) {
+	QString _ret = QUndoGroup::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QUndoGroup_addStack(QUndoGroup* self, QUndoStack* stack) {
+	self->addStack(stack);
+}
+
+void QUndoGroup_removeStack(QUndoGroup* self, QUndoStack* stack) {
+	self->removeStack(stack);
+}
+
+struct seaqt_array /* of QUndoStack* */  QUndoGroup_stacks(const QUndoGroup* self) {
+	QList<QUndoStack *> _ret = self->stacks();
+	// Convert QList<> from C++ memory to manually-managed C memory
+	QUndoStack** _arr = static_cast<QUndoStack**>(malloc(sizeof(QUndoStack*) * _ret.length()));
+	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
+		_arr[i] = _ret[i];
+	}
+	struct seaqt_array _out;
+	_out.len = _ret.length();
+	_out.data = static_cast<void*>(_arr);
+	return _out;
+}
+
+QUndoStack* QUndoGroup_activeStack(const QUndoGroup* self) {
+	return self->activeStack();
+}
+
+QAction* QUndoGroup_createUndoAction_parent(const QUndoGroup* self, QObject* parent) {
+	return self->createUndoAction(parent);
+}
+
+QAction* QUndoGroup_createRedoAction_parent(const QUndoGroup* self, QObject* parent) {
+	return self->createRedoAction(parent);
+}
+
+bool QUndoGroup_canUndo(const QUndoGroup* self) {
+	return self->canUndo();
+}
+
+bool QUndoGroup_canRedo(const QUndoGroup* self) {
+	return self->canRedo();
+}
+
+struct seaqt_string QUndoGroup_undoText(const QUndoGroup* self) {
+	QString _ret = self->undoText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QUndoGroup_redoText(const QUndoGroup* self) {
+	QString _ret = self->redoText();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+bool QUndoGroup_isClean(const QUndoGroup* self) {
+	return self->isClean();
+}
+
+void QUndoGroup_undo(QUndoGroup* self) {
+	self->undo();
+}
+
+void QUndoGroup_redo(QUndoGroup* self) {
+	self->redo();
+}
+
+void QUndoGroup_setActiveStack(QUndoGroup* self, QUndoStack* stack) {
+	self->setActiveStack(stack);
+}
+
+void QUndoGroup_activeStackChanged(QUndoGroup* self, QUndoStack* stack) {
+	self->activeStackChanged(stack);
+}
+
+void QUndoGroup_connect_activeStackChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, QUndoStack*), void (*release)(intptr_t)) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(QUndoStack*)>(&QUndoGroup::activeStackChanged), self, [callback, release = seaqt::release_callback{slot,release}](QUndoStack* stack) {
+			QUndoStack* sigval1 = stack;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QUndoGroup_indexChanged(QUndoGroup* self, int idx) {
+	self->indexChanged(static_cast<int>(idx));
+}
+
+void QUndoGroup_connect_indexChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(int)>(&QUndoGroup::indexChanged), self, [callback, release = seaqt::release_callback{slot,release}](int idx) {
+			int sigval1 = idx;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QUndoGroup_cleanChanged(QUndoGroup* self, bool clean) {
+	self->cleanChanged(clean);
+}
+
+void QUndoGroup_connect_cleanChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::cleanChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool clean) {
+			bool sigval1 = clean;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QUndoGroup_canUndoChanged(QUndoGroup* self, bool canUndo) {
+	self->canUndoChanged(canUndo);
+}
+
+void QUndoGroup_connect_canUndoChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::canUndoChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool canUndo) {
+			bool sigval1 = canUndo;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QUndoGroup_canRedoChanged(QUndoGroup* self, bool canRedo) {
+	self->canRedoChanged(canRedo);
+}
+
+void QUndoGroup_connect_canRedoChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::canRedoChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool canRedo) {
+			bool sigval1 = canRedo;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QUndoGroup_undoTextChanged(QUndoGroup* self, struct seaqt_string undoText) {
+	QString undoText_QString = QString::fromUtf8(undoText.data, undoText.len);
+	self->undoTextChanged(undoText_QString);
+}
+
+void QUndoGroup_connect_undoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(const QString&)>(&QUndoGroup::undoTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& undoText) {
+			const QString undoText_ret = undoText;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray undoText_b = undoText_ret.toUtf8();
+			struct seaqt_string undoText_ms;
+			undoText_ms.len = undoText_b.length();
+			undoText_ms.data = static_cast<char*>(malloc(undoText_ms.len));
+			memcpy(undoText_ms.data, undoText_b.data(), undoText_ms.len);
+			struct seaqt_string sigval1 = undoText_ms;
+			callback(release.slot, sigval1);
+	});
+}
+
+void QUndoGroup_redoTextChanged(QUndoGroup* self, struct seaqt_string redoText) {
+	QString redoText_QString = QString::fromUtf8(redoText.data, redoText.len);
+	self->redoTextChanged(redoText_QString);
+}
+
+void QUndoGroup_connect_redoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(const QString&)>(&QUndoGroup::redoTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& redoText) {
+			const QString redoText_ret = redoText;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray redoText_b = redoText_ret.toUtf8();
+			struct seaqt_string redoText_ms;
+			redoText_ms.len = redoText_b.length();
+			redoText_ms.data = static_cast<char*>(malloc(redoText_ms.len));
+			memcpy(redoText_ms.data, redoText_b.data(), redoText_ms.len);
+			struct seaqt_string sigval1 = redoText_ms;
+			callback(release.slot, sigval1);
+	});
+}
+
+struct seaqt_string QUndoGroup_tr_s_c(const char* s, const char* c) {
+	QString _ret = QUndoGroup::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QUndoGroup_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QUndoGroup::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+QAction* QUndoGroup_createUndoAction_parent_prefix(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix) {
+	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
+	return self->createUndoAction(parent, prefix_QString);
+}
+
+QAction* QUndoGroup_createRedoAction_parent_prefix(const QUndoGroup* self, QObject* parent, struct seaqt_string prefix) {
+	QString prefix_QString = QString::fromUtf8(prefix.data, prefix.len);
+	return self->createRedoAction(parent, prefix_QString);
+}
+
+const QMetaObject* QUndoGroup_staticMetaObject() { return &QUndoGroup::staticMetaObject; }
+void* QUndoGroup_vdata(VirtualQUndoGroup* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQUndoGroup>()); }
+VirtualQUndoGroup* vdata_QUndoGroup(void* vdata) { return reinterpret_cast<VirtualQUndoGroup*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQUndoGroup>()); }
+
+QMetaObject* QUndoGroup_virtualbase_metaObject(const VirtualQUndoGroup* self) {
+
+	return (QMetaObject*) self->QUndoGroup::metaObject();
+}
+
+void* QUndoGroup_virtualbase_metacast(VirtualQUndoGroup* self, const char* param1) {
+
+	return self->QUndoGroup::qt_metacast(param1);
+}
+
+int QUndoGroup_virtualbase_metacall(VirtualQUndoGroup* self, int param1, int param2, void** param3) {
+
+	return self->QUndoGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+bool QUndoGroup_virtualbase_event(VirtualQUndoGroup* self, QEvent* event) {
+
+	return self->QUndoGroup::event(event);
+}
+
+bool QUndoGroup_virtualbase_eventFilter(VirtualQUndoGroup* self, QObject* watched, QEvent* event) {
+
+	return self->QUndoGroup::eventFilter(watched, event);
+}
+
+void QUndoGroup_virtualbase_timerEvent(VirtualQUndoGroup* self, QTimerEvent* event) {
+
+	self->QUndoGroup::timerEvent(event);
+}
+
+void QUndoGroup_virtualbase_childEvent(VirtualQUndoGroup* self, QChildEvent* event) {
+
+	self->QUndoGroup::childEvent(event);
+}
+
+void QUndoGroup_virtualbase_customEvent(VirtualQUndoGroup* self, QEvent* event) {
+
+	self->QUndoGroup::customEvent(event);
+}
+
+void QUndoGroup_virtualbase_connectNotify(VirtualQUndoGroup* self, QMetaMethod* signal) {
+
+	self->QUndoGroup::connectNotify(*signal);
+}
+
+void QUndoGroup_virtualbase_disconnectNotify(VirtualQUndoGroup* self, QMetaMethod* signal) {
+
+	self->QUndoGroup::disconnectNotify(*signal);
+}
+
+QObject* QUndoGroup_protectedbase_sender(const VirtualQUndoGroup* self) {
+	return self->QUndoGroup::sender();
+}
+
+int QUndoGroup_protectedbase_senderSignalIndex(const VirtualQUndoGroup* self) {
+	return self->QUndoGroup::senderSignalIndex();
+}
+
+int QUndoGroup_protectedbase_receivers(const VirtualQUndoGroup* self, const char* signal) {
+	return self->QUndoGroup::receivers(signal);
+}
+
+bool QUndoGroup_protectedbase_isSignalConnected(const VirtualQUndoGroup* self, QMetaMethod* signal) {
+	return self->QUndoGroup::isSignalConnected(*signal);
+}
+
+void QUndoGroup_delete(QUndoGroup* self) {
+	delete self;
+}
+

@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qstyleplugin
+export gen_qstyleplugin

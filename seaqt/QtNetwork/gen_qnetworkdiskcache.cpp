@@ -1,0 +1,533 @@
+#include <QAbstractNetworkCache>
+#include <QChildEvent>
+#include <QEvent>
+#include <QIODevice>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QNetworkCacheMetaData>
+#include <QNetworkDiskCache>
+#include <QObject>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <QTimerEvent>
+#include <QUrl>
+#include <qnetworkdiskcache.h>
+#include "gen_qnetworkdiskcache.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+class VirtualQNetworkDiskCache final : public QNetworkDiskCache {
+	const QNetworkDiskCache_VTable* vtbl;
+public:
+	friend void* QNetworkDiskCache_vdata(VirtualQNetworkDiskCache* self);
+	friend VirtualQNetworkDiskCache* vdata_QNetworkDiskCache(void* vdata);
+
+	VirtualQNetworkDiskCache(const QNetworkDiskCache_VTable* vtbl): QNetworkDiskCache(), vtbl(vtbl) {}
+	VirtualQNetworkDiskCache(const QNetworkDiskCache_VTable* vtbl, QObject* parent): QNetworkDiskCache(parent), vtbl(vtbl) {}
+
+	virtual ~VirtualQNetworkDiskCache() override { if(vtbl->destructor) vtbl->destructor(this); }
+
+	void operator delete(void* p) { ::operator delete(p); }
+	virtual const QMetaObject* metaObject() const override {
+		if (vtbl->metaObject == 0) {
+			return QNetworkDiskCache::metaObject();
+		}
+
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QNetworkDiskCache_virtualbase_metaObject(const VirtualQNetworkDiskCache* self);
+
+	virtual void* qt_metacast(const char* param1) override {
+		if (vtbl->metacast == 0) {
+			return QNetworkDiskCache::qt_metacast(param1);
+		}
+
+		const char* sigval1 = (const char*) param1;
+		void* callback_return_value = vtbl->metacast(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend void* QNetworkDiskCache_virtualbase_metacast(VirtualQNetworkDiskCache* self, const char* param1);
+
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (vtbl->metacall == 0) {
+			return QNetworkDiskCache::qt_metacall(param1, param2, param3);
+		}
+
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QNetworkDiskCache_virtualbase_metacall(VirtualQNetworkDiskCache* self, int param1, int param2, void** param3);
+
+	virtual qint64 cacheSize() const override {
+		if (vtbl->cacheSize == 0) {
+			return QNetworkDiskCache::cacheSize();
+		}
+
+		long long callback_return_value = vtbl->cacheSize(this);
+		return static_cast<qint64>(callback_return_value);
+	}
+
+	friend long long QNetworkDiskCache_virtualbase_cacheSize(const VirtualQNetworkDiskCache* self);
+
+	virtual QNetworkCacheMetaData metaData(const QUrl& url) override {
+		if (vtbl->metaData == 0) {
+			return QNetworkDiskCache::metaData(url);
+		}
+
+		const QUrl& url_ret = url;
+		// Cast returned reference into pointer
+		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+		QNetworkCacheMetaData* callback_return_value = vtbl->metaData(this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
+		return callback_return_value_Value;
+	}
+
+	friend QNetworkCacheMetaData* QNetworkDiskCache_virtualbase_metaData(VirtualQNetworkDiskCache* self, QUrl* url);
+
+	virtual void updateMetaData(const QNetworkCacheMetaData& metaData) override {
+		if (vtbl->updateMetaData == 0) {
+			QNetworkDiskCache::updateMetaData(metaData);
+			return;
+		}
+
+		const QNetworkCacheMetaData& metaData_ret = metaData;
+		// Cast returned reference into pointer
+		QNetworkCacheMetaData* sigval1 = const_cast<QNetworkCacheMetaData*>(&metaData_ret);
+		vtbl->updateMetaData(this, sigval1);
+	}
+
+	friend void QNetworkDiskCache_virtualbase_updateMetaData(VirtualQNetworkDiskCache* self, QNetworkCacheMetaData* metaData);
+
+	virtual QIODevice* data(const QUrl& url) override {
+		if (vtbl->data == 0) {
+			return QNetworkDiskCache::data(url);
+		}
+
+		const QUrl& url_ret = url;
+		// Cast returned reference into pointer
+		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+		QIODevice* callback_return_value = vtbl->data(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend QIODevice* QNetworkDiskCache_virtualbase_data(VirtualQNetworkDiskCache* self, QUrl* url);
+
+	virtual bool remove(const QUrl& url) override {
+		if (vtbl->remove == 0) {
+			return QNetworkDiskCache::remove(url);
+		}
+
+		const QUrl& url_ret = url;
+		// Cast returned reference into pointer
+		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+		bool callback_return_value = vtbl->remove(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QNetworkDiskCache_virtualbase_remove(VirtualQNetworkDiskCache* self, QUrl* url);
+
+	virtual QIODevice* prepare(const QNetworkCacheMetaData& metaData) override {
+		if (vtbl->prepare == 0) {
+			return QNetworkDiskCache::prepare(metaData);
+		}
+
+		const QNetworkCacheMetaData& metaData_ret = metaData;
+		// Cast returned reference into pointer
+		QNetworkCacheMetaData* sigval1 = const_cast<QNetworkCacheMetaData*>(&metaData_ret);
+		QIODevice* callback_return_value = vtbl->prepare(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend QIODevice* QNetworkDiskCache_virtualbase_prepare(VirtualQNetworkDiskCache* self, QNetworkCacheMetaData* metaData);
+
+	virtual void insert(QIODevice* device) override {
+		if (vtbl->insert == 0) {
+			QNetworkDiskCache::insert(device);
+			return;
+		}
+
+		QIODevice* sigval1 = device;
+		vtbl->insert(this, sigval1);
+	}
+
+	friend void QNetworkDiskCache_virtualbase_insert(VirtualQNetworkDiskCache* self, QIODevice* device);
+
+	virtual void clear() override {
+		if (vtbl->clear == 0) {
+			QNetworkDiskCache::clear();
+			return;
+		}
+
+		vtbl->clear(this);
+	}
+
+	friend void QNetworkDiskCache_virtualbase_clear(VirtualQNetworkDiskCache* self);
+
+	virtual qint64 expire() override {
+		if (vtbl->expire == 0) {
+			return QNetworkDiskCache::expire();
+		}
+
+		long long callback_return_value = vtbl->expire(this);
+		return static_cast<qint64>(callback_return_value);
+	}
+
+	friend long long QNetworkDiskCache_virtualbase_expire(VirtualQNetworkDiskCache* self);
+
+	virtual bool event(QEvent* event) override {
+		if (vtbl->event == 0) {
+			return QNetworkDiskCache::event(event);
+		}
+
+		QEvent* sigval1 = event;
+		bool callback_return_value = vtbl->event(this, sigval1);
+		return callback_return_value;
+	}
+
+	friend bool QNetworkDiskCache_virtualbase_event(VirtualQNetworkDiskCache* self, QEvent* event);
+
+	virtual bool eventFilter(QObject* watched, QEvent* event) override {
+		if (vtbl->eventFilter == 0) {
+			return QNetworkDiskCache::eventFilter(watched, event);
+		}
+
+		QObject* sigval1 = watched;
+		QEvent* sigval2 = event;
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
+		return callback_return_value;
+	}
+
+	friend bool QNetworkDiskCache_virtualbase_eventFilter(VirtualQNetworkDiskCache* self, QObject* watched, QEvent* event);
+
+	virtual void timerEvent(QTimerEvent* event) override {
+		if (vtbl->timerEvent == 0) {
+			QNetworkDiskCache::timerEvent(event);
+			return;
+		}
+
+		QTimerEvent* sigval1 = event;
+		vtbl->timerEvent(this, sigval1);
+	}
+
+	friend void QNetworkDiskCache_virtualbase_timerEvent(VirtualQNetworkDiskCache* self, QTimerEvent* event);
+
+	virtual void childEvent(QChildEvent* event) override {
+		if (vtbl->childEvent == 0) {
+			QNetworkDiskCache::childEvent(event);
+			return;
+		}
+
+		QChildEvent* sigval1 = event;
+		vtbl->childEvent(this, sigval1);
+	}
+
+	friend void QNetworkDiskCache_virtualbase_childEvent(VirtualQNetworkDiskCache* self, QChildEvent* event);
+
+	virtual void customEvent(QEvent* event) override {
+		if (vtbl->customEvent == 0) {
+			QNetworkDiskCache::customEvent(event);
+			return;
+		}
+
+		QEvent* sigval1 = event;
+		vtbl->customEvent(this, sigval1);
+	}
+
+	friend void QNetworkDiskCache_virtualbase_customEvent(VirtualQNetworkDiskCache* self, QEvent* event);
+
+	virtual void connectNotify(const QMetaMethod& signal) override {
+		if (vtbl->connectNotify == 0) {
+			QNetworkDiskCache::connectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->connectNotify(this, sigval1);
+	}
+
+	friend void QNetworkDiskCache_virtualbase_connectNotify(VirtualQNetworkDiskCache* self, QMetaMethod* signal);
+
+	virtual void disconnectNotify(const QMetaMethod& signal) override {
+		if (vtbl->disconnectNotify == 0) {
+			QNetworkDiskCache::disconnectNotify(signal);
+			return;
+		}
+
+		const QMetaMethod& signal_ret = signal;
+		// Cast returned reference into pointer
+		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
+		vtbl->disconnectNotify(this, sigval1);
+	}
+
+	friend void QNetworkDiskCache_virtualbase_disconnectNotify(VirtualQNetworkDiskCache* self, QMetaMethod* signal);
+
+	// Wrappers to allow calling protected methods:
+	friend QObject* QNetworkDiskCache_protectedbase_sender(const VirtualQNetworkDiskCache* self);
+	friend int QNetworkDiskCache_protectedbase_senderSignalIndex(const VirtualQNetworkDiskCache* self);
+	friend int QNetworkDiskCache_protectedbase_receivers(const VirtualQNetworkDiskCache* self, const char* signal);
+	friend bool QNetworkDiskCache_protectedbase_isSignalConnected(const VirtualQNetworkDiskCache* self, QMetaMethod* signal);
+};
+
+VirtualQNetworkDiskCache* QNetworkDiskCache_new(const QNetworkDiskCache_VTable* vtbl, size_t vdata) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNetworkDiskCache>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQNetworkDiskCache(vtbl) : nullptr;
+}
+
+VirtualQNetworkDiskCache* QNetworkDiskCache_new_parent(const QNetworkDiskCache_VTable* vtbl, size_t vdata, QObject* parent) {
+	void* _mem_ = ::operator new(seaqt_aligned_sizeof<VirtualQNetworkDiskCache>() + vdata, std::nothrow);
+	return _mem_ ? new (_mem_)VirtualQNetworkDiskCache(vtbl, parent) : nullptr;
+}
+
+void QNetworkDiskCache_virtbase(QNetworkDiskCache* src, QAbstractNetworkCache** outptr_QAbstractNetworkCache) {
+	*outptr_QAbstractNetworkCache = static_cast<QAbstractNetworkCache*>(src);
+}
+
+QMetaObject* QNetworkDiskCache_metaObject(const QNetworkDiskCache* self) {
+	return (QMetaObject*) self->metaObject();
+}
+
+void* QNetworkDiskCache_metacast(QNetworkDiskCache* self, const char* param1) {
+	return self->qt_metacast(param1);
+}
+
+int QNetworkDiskCache_metacall(QNetworkDiskCache* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+struct seaqt_string QNetworkDiskCache_tr_s(const char* s) {
+	QString _ret = QNetworkDiskCache::tr(s);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QNetworkDiskCache_cacheDirectory(const QNetworkDiskCache* self) {
+	QString _ret = self->cacheDirectory();
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+void QNetworkDiskCache_setCacheDirectory(QNetworkDiskCache* self, struct seaqt_string cacheDir) {
+	QString cacheDir_QString = QString::fromUtf8(cacheDir.data, cacheDir.len);
+	self->setCacheDirectory(cacheDir_QString);
+}
+
+long long QNetworkDiskCache_maximumCacheSize(const QNetworkDiskCache* self) {
+	qint64 _ret = self->maximumCacheSize();
+	return static_cast<long long>(_ret);
+}
+
+void QNetworkDiskCache_setMaximumCacheSize(QNetworkDiskCache* self, long long size) {
+	self->setMaximumCacheSize(static_cast<qint64>(size));
+}
+
+long long QNetworkDiskCache_cacheSize(const QNetworkDiskCache* self) {
+	qint64 _ret = self->cacheSize();
+	return static_cast<long long>(_ret);
+}
+
+QNetworkCacheMetaData* QNetworkDiskCache_metaData(QNetworkDiskCache* self, QUrl* url) {
+	return new QNetworkCacheMetaData(self->metaData(*url));
+}
+
+void QNetworkDiskCache_updateMetaData(QNetworkDiskCache* self, QNetworkCacheMetaData* metaData) {
+	self->updateMetaData(*metaData);
+}
+
+QIODevice* QNetworkDiskCache_data(QNetworkDiskCache* self, QUrl* url) {
+	return self->data(*url);
+}
+
+bool QNetworkDiskCache_remove(QNetworkDiskCache* self, QUrl* url) {
+	return self->remove(*url);
+}
+
+QIODevice* QNetworkDiskCache_prepare(QNetworkDiskCache* self, QNetworkCacheMetaData* metaData) {
+	return self->prepare(*metaData);
+}
+
+void QNetworkDiskCache_insert(QNetworkDiskCache* self, QIODevice* device) {
+	self->insert(device);
+}
+
+QNetworkCacheMetaData* QNetworkDiskCache_fileMetaData(const QNetworkDiskCache* self, struct seaqt_string fileName) {
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	return new QNetworkCacheMetaData(self->fileMetaData(fileName_QString));
+}
+
+void QNetworkDiskCache_clear(QNetworkDiskCache* self) {
+	self->clear();
+}
+
+struct seaqt_string QNetworkDiskCache_tr_s_c(const char* s, const char* c) {
+	QString _ret = QNetworkDiskCache::tr(s, c);
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+struct seaqt_string QNetworkDiskCache_tr_s_c_n(const char* s, const char* c, int n) {
+	QString _ret = QNetworkDiskCache::tr(s, c, static_cast<int>(n));
+	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+	QByteArray _b = _ret.toUtf8();
+	struct seaqt_string _ms;
+	_ms.len = _b.length();
+	_ms.data = static_cast<char*>(malloc(_ms.len));
+	memcpy(_ms.data, _b.data(), _ms.len);
+	return _ms;
+}
+
+const QMetaObject* QNetworkDiskCache_staticMetaObject() { return &QNetworkDiskCache::staticMetaObject; }
+void* QNetworkDiskCache_vdata(VirtualQNetworkDiskCache* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQNetworkDiskCache>()); }
+VirtualQNetworkDiskCache* vdata_QNetworkDiskCache(void* vdata) { return reinterpret_cast<VirtualQNetworkDiskCache*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQNetworkDiskCache>()); }
+
+QMetaObject* QNetworkDiskCache_virtualbase_metaObject(const VirtualQNetworkDiskCache* self) {
+
+	return (QMetaObject*) self->QNetworkDiskCache::metaObject();
+}
+
+void* QNetworkDiskCache_virtualbase_metacast(VirtualQNetworkDiskCache* self, const char* param1) {
+
+	return self->QNetworkDiskCache::qt_metacast(param1);
+}
+
+int QNetworkDiskCache_virtualbase_metacall(VirtualQNetworkDiskCache* self, int param1, int param2, void** param3) {
+
+	return self->QNetworkDiskCache::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+long long QNetworkDiskCache_virtualbase_cacheSize(const VirtualQNetworkDiskCache* self) {
+
+	qint64 _ret = self->QNetworkDiskCache::cacheSize();
+	return static_cast<long long>(_ret);
+}
+
+QNetworkCacheMetaData* QNetworkDiskCache_virtualbase_metaData(VirtualQNetworkDiskCache* self, QUrl* url) {
+
+	return new QNetworkCacheMetaData(self->QNetworkDiskCache::metaData(*url));
+}
+
+void QNetworkDiskCache_virtualbase_updateMetaData(VirtualQNetworkDiskCache* self, QNetworkCacheMetaData* metaData) {
+
+	self->QNetworkDiskCache::updateMetaData(*metaData);
+}
+
+QIODevice* QNetworkDiskCache_virtualbase_data(VirtualQNetworkDiskCache* self, QUrl* url) {
+
+	return self->QNetworkDiskCache::data(*url);
+}
+
+bool QNetworkDiskCache_virtualbase_remove(VirtualQNetworkDiskCache* self, QUrl* url) {
+
+	return self->QNetworkDiskCache::remove(*url);
+}
+
+QIODevice* QNetworkDiskCache_virtualbase_prepare(VirtualQNetworkDiskCache* self, QNetworkCacheMetaData* metaData) {
+
+	return self->QNetworkDiskCache::prepare(*metaData);
+}
+
+void QNetworkDiskCache_virtualbase_insert(VirtualQNetworkDiskCache* self, QIODevice* device) {
+
+	self->QNetworkDiskCache::insert(device);
+}
+
+void QNetworkDiskCache_virtualbase_clear(VirtualQNetworkDiskCache* self) {
+
+	self->QNetworkDiskCache::clear();
+}
+
+long long QNetworkDiskCache_virtualbase_expire(VirtualQNetworkDiskCache* self) {
+
+	qint64 _ret = self->QNetworkDiskCache::expire();
+	return static_cast<long long>(_ret);
+}
+
+bool QNetworkDiskCache_virtualbase_event(VirtualQNetworkDiskCache* self, QEvent* event) {
+
+	return self->QNetworkDiskCache::event(event);
+}
+
+bool QNetworkDiskCache_virtualbase_eventFilter(VirtualQNetworkDiskCache* self, QObject* watched, QEvent* event) {
+
+	return self->QNetworkDiskCache::eventFilter(watched, event);
+}
+
+void QNetworkDiskCache_virtualbase_timerEvent(VirtualQNetworkDiskCache* self, QTimerEvent* event) {
+
+	self->QNetworkDiskCache::timerEvent(event);
+}
+
+void QNetworkDiskCache_virtualbase_childEvent(VirtualQNetworkDiskCache* self, QChildEvent* event) {
+
+	self->QNetworkDiskCache::childEvent(event);
+}
+
+void QNetworkDiskCache_virtualbase_customEvent(VirtualQNetworkDiskCache* self, QEvent* event) {
+
+	self->QNetworkDiskCache::customEvent(event);
+}
+
+void QNetworkDiskCache_virtualbase_connectNotify(VirtualQNetworkDiskCache* self, QMetaMethod* signal) {
+
+	self->QNetworkDiskCache::connectNotify(*signal);
+}
+
+void QNetworkDiskCache_virtualbase_disconnectNotify(VirtualQNetworkDiskCache* self, QMetaMethod* signal) {
+
+	self->QNetworkDiskCache::disconnectNotify(*signal);
+}
+
+QObject* QNetworkDiskCache_protectedbase_sender(const VirtualQNetworkDiskCache* self) {
+	return self->QNetworkDiskCache::sender();
+}
+
+int QNetworkDiskCache_protectedbase_senderSignalIndex(const VirtualQNetworkDiskCache* self) {
+	return self->QNetworkDiskCache::senderSignalIndex();
+}
+
+int QNetworkDiskCache_protectedbase_receivers(const VirtualQNetworkDiskCache* self, const char* signal) {
+	return self->QNetworkDiskCache::receivers(signal);
+}
+
+bool QNetworkDiskCache_protectedbase_isSignalConnected(const VirtualQNetworkDiskCache* self, QMetaMethod* signal) {
+	return self->QNetworkDiskCache::isSignalConnected(*signal);
+}
+
+void QNetworkDiskCache_delete(QNetworkDiskCache* self) {
+	delete self;
+}
+

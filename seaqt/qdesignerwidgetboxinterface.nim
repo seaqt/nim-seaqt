@@ -1,0 +1,2 @@
+import ./QtDesigner/gen_abstractwidgetbox
+export gen_abstractwidgetbox

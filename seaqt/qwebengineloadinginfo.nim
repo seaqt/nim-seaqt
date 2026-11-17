@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineloadinginfo
+export gen_qwebengineloadinginfo

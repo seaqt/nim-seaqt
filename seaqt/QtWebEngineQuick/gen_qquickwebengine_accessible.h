@@ -1,0 +1,69 @@
+#pragma once
+#ifndef SEAQT_QTWEBENGINEQUICK_GEN_QQUICKWEBENGINE_ACCESSIBLE_H
+#define SEAQT_QTWEBENGINEQUICK_GEN_QQUICKWEBENGINE_ACCESSIBLE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+#if defined(WORKAROUND_INNER_CLASS_DEFINITION_QAccessible__State)
+typedef QAccessible::State QAccessible__State;
+#else
+class QAccessible__State;
+#endif
+class QAccessibleInterface;
+class QAccessibleObject;
+class QQuickWebEngineViewAccessible;
+#if defined(WORKAROUND_INNER_CLASS_DEFINITION_QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible)
+typedef QtWebEngineCore::RenderWidgetHostViewQtDelegateQuickAccessible QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible;
+#else
+class QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible;
+#endif
+#else
+typedef struct QAccessible__State QAccessible__State;
+typedef struct QAccessibleInterface QAccessibleInterface;
+typedef struct QAccessibleObject QAccessibleObject;
+typedef struct QQuickWebEngineViewAccessible QQuickWebEngineViewAccessible;
+typedef struct QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible;
+#endif
+
+void QQuickWebEngineViewAccessible_virtbase(QQuickWebEngineViewAccessible* src, QAccessibleObject** outptr_QAccessibleObject);
+bool QQuickWebEngineViewAccessible_isValid(const QQuickWebEngineViewAccessible* self);
+QAccessibleInterface* QQuickWebEngineViewAccessible_parent(const QQuickWebEngineViewAccessible* self);
+QAccessibleInterface* QQuickWebEngineViewAccessible_focusChild(const QQuickWebEngineViewAccessible* self);
+int QQuickWebEngineViewAccessible_childCount(const QQuickWebEngineViewAccessible* self);
+QAccessibleInterface* QQuickWebEngineViewAccessible_child(const QQuickWebEngineViewAccessible* self, int index);
+int QQuickWebEngineViewAccessible_indexOfChild(const QQuickWebEngineViewAccessible* self, QAccessibleInterface* param1);
+struct seaqt_string QQuickWebEngineViewAccessible_text(const QQuickWebEngineViewAccessible* self, int param1);
+int QQuickWebEngineViewAccessible_role(const QQuickWebEngineViewAccessible* self);
+QAccessible__State* QQuickWebEngineViewAccessible_state(const QQuickWebEngineViewAccessible* self);
+
+void QQuickWebEngineViewAccessible_delete(QQuickWebEngineViewAccessible* self);
+
+void QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_virtbase(QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* src, QAccessibleObject** outptr_QAccessibleObject);
+bool QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_isValid(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self);
+QAccessibleInterface* QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_parent(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self);
+struct seaqt_string QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_text(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self, int t);
+int QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_role(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self);
+QAccessible__State* QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_state(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self);
+QAccessibleInterface* QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_focusChild(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self);
+int QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_childCount(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self);
+QAccessibleInterface* QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_child(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self, int index);
+int QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_indexOfChild(const QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self, QAccessibleInterface* param1);
+
+void QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible_delete(QtWebEngineCore__RenderWidgetHostViewQtDelegateQuickAccessible* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

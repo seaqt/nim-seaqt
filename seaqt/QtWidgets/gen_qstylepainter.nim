@@ -1,0 +1,113 @@
+import ./qtwidgets_pkg
+
+{.push raises: [].}
+
+from system/ansi_c import c_free, c_malloc
+
+type
+  struct_seaqt_string {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_array {.used.} = object
+    len: csize_t
+    data: pointer
+
+  struct_seaqt_map {.used.} = object
+    len: csize_t
+    keys: pointer
+    values: pointer
+
+  miqt_uintptr_t {.importc: "uintptr_t", header: "stdint.h", used.} = uint
+  miqt_intptr_t {.importc: "intptr_t", header: "stdint.h", used.} = int
+
+func fromBytes(T: type string, v: struct_seaqt_string): string {.used.} =
+  if v.len > 0:
+    let len = cast[int](v.len)
+    result = newStringUninit(len)
+    when nimvm:
+      let d = cast[ptr UncheckedArray[char]](v.data)
+      for i in 0..<len:
+        result[i] = d[i]
+    else:
+      copyMem(addr result[0], v.data, len)
+
+
+{.compile("gen_qstylepainter.cpp", QtWidgetsCFlags).}
+
+
+import ./gen_qstylepainter_types
+export gen_qstylepainter_types
+
+import
+  ../QtCore/gen_qrect_types,
+  ../QtGui/gen_qpaintdevice_types,
+  ../QtGui/gen_qpainter,
+  ../QtGui/gen_qpalette_types,
+  ../QtGui/gen_qpixmap_types,
+  ./gen_qstyle_types,
+  ./gen_qstyleoption_types,
+  ./gen_qwidget_types
+export
+  gen_qrect_types,
+  gen_qpaintdevice_types,
+  gen_qpainter,
+  gen_qpalette_types,
+  gen_qpixmap_types,
+  gen_qstyle_types,
+  gen_qstyleoption_types,
+  gen_qwidget_types
+
+type cQStylePainter*{.exportc: "QStylePainter", incompleteStruct.} = object
+
+proc fcQStylePainter_beginW(self: pointer, w: pointer): bool {.importc: "QStylePainter_begin_w".}
+proc fcQStylePainter_beginPdW(self: pointer, pd: pointer, w: pointer): bool {.importc: "QStylePainter_begin_pd_w".}
+proc fcQStylePainter_drawPrimitive(self: pointer, pe: cint, opt: pointer): void {.importc: "QStylePainter_drawPrimitive".}
+proc fcQStylePainter_drawControl(self: pointer, ce: cint, opt: pointer): void {.importc: "QStylePainter_drawControl".}
+proc fcQStylePainter_drawComplexControl(self: pointer, cc: cint, opt: pointer): void {.importc: "QStylePainter_drawComplexControl".}
+proc fcQStylePainter_drawItemTextRFlagsPalEnabledText(self: pointer, r: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_seaqt_string): void {.importc: "QStylePainter_drawItemText_r_flags_pal_enabled_text".}
+proc fcQStylePainter_drawItemPixmap(self: pointer, r: pointer, flags: cint, pixmap: pointer): void {.importc: "QStylePainter_drawItemPixmap".}
+proc fcQStylePainter_style(self: pointer): pointer {.importc: "QStylePainter_style".}
+proc fcQStylePainter_drawItemTextRFlagsPalEnabledTextTextRole(self: pointer, r: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_seaqt_string, textRole: cint): void {.importc: "QStylePainter_drawItemText_r_flags_pal_enabled_text_textRole".}
+proc fcQStylePainter_new(): ptr cQStylePainter {.importc: "QStylePainter_new".}
+proc fcQStylePainter_new2(w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new_w".}
+proc fcQStylePainter_new3(pd: pointer, w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new_pd_w".}
+
+proc begin*(self: gen_qstylepainter_types.QStylePainter, w: gen_qwidget_types.QWidget): bool =
+  fcQStylePainter_beginW(self.h, w.h)
+
+proc begin*(self: gen_qstylepainter_types.QStylePainter, pd: gen_qpaintdevice_types.QPaintDevice, w: gen_qwidget_types.QWidget): bool =
+  fcQStylePainter_beginPdW(self.h, pd.h, w.h)
+
+proc drawPrimitive*(self: gen_qstylepainter_types.QStylePainter, pe: cint, opt: gen_qstyleoption_types.QStyleOption): void =
+  fcQStylePainter_drawPrimitive(self.h, cint(pe), opt.h)
+
+proc drawControl*(self: gen_qstylepainter_types.QStylePainter, ce: cint, opt: gen_qstyleoption_types.QStyleOption): void =
+  fcQStylePainter_drawControl(self.h, cint(ce), opt.h)
+
+proc drawComplexControl*(self: gen_qstylepainter_types.QStylePainter, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex): void =
+  fcQStylePainter_drawComplexControl(self.h, cint(cc), opt.h)
+
+proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char]): void =
+  fcQStylePainter_drawItemTextRFlagsPalEnabledText(self.h, r.h, flags, pal.h, enabled, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))))
+
+proc drawItemPixmap*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): void =
+  fcQStylePainter_drawItemPixmap(self.h, r.h, flags, pixmap.h)
+
+proc style*(self: gen_qstylepainter_types.QStylePainter): gen_qstyle_types.QStyle =
+  gen_qstyle_types.QStyle(h: fcQStylePainter_style(self.h), owned: false)
+
+proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: openArray[char], textRole: cint): void =
+  fcQStylePainter_drawItemTextRFlagsPalEnabledTextTextRole(self.h, r.h, flags, pal.h, enabled, struct_seaqt_string(data: if len(text) > 0: addr text[0] else: nil, len: csize_t(len(text))), cint(textRole))
+
+proc create*(T: type gen_qstylepainter_types.QStylePainter): gen_qstylepainter_types.QStylePainter =
+  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new(), owned: true)
+  tmp
+proc create*(T: type gen_qstylepainter_types.QStylePainter,
+    w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
+  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new2(w.h), owned: true)
+  tmp
+proc create*(T: type gen_qstylepainter_types.QStylePainter,
+    pd: gen_qpaintdevice_types.QPaintDevice, w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
+  let tmp = gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new3(pd.h, w.h), owned: true)
+  tmp

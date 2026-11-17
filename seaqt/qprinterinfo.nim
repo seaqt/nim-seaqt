@@ -1,0 +1,2 @@
+import ./QtPrintSupport/gen_qprinterinfo
+export gen_qprinterinfo

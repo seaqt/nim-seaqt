@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qsoundeffect
+export gen_qsoundeffect

@@ -1,0 +1,2 @@
+import ./QtWebEngineQuick/gen_qquickwebengine_accessible
+export gen_qquickwebengine_accessible

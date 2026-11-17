@@ -1,0 +1,2 @@
+import ./QtCore/gen_qcryptographichash
+export gen_qcryptographichash

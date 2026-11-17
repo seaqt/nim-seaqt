@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginenavigationrequest
+export gen_qwebenginenavigationrequest

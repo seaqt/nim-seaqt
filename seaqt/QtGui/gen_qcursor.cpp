@@ -1,0 +1,128 @@
+#include <QBitmap>
+#include <QCursor>
+#include <QPixmap>
+#include <QPoint>
+#include <QScreen>
+#include <QVariant>
+#include <qcursor.h>
+#include "gen_qcursor.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QCursor* QCursor_new() {
+	return new (std::nothrow) QCursor();
+}
+
+QCursor* QCursor_new_shape(int shape) {
+	return new (std::nothrow) QCursor(static_cast<Qt::CursorShape>(shape));
+}
+
+QCursor* QCursor_new_bitmap_mask(QBitmap* bitmap, QBitmap* mask) {
+	return new (std::nothrow) QCursor(*bitmap, *mask);
+}
+
+QCursor* QCursor_new_pixmap(QPixmap* pixmap) {
+	return new (std::nothrow) QCursor(*pixmap);
+}
+
+QCursor* QCursor_new_from(QCursor* from) {
+	return new (std::nothrow) QCursor(*from);
+}
+
+QCursor* QCursor_new_bitmap_mask_hotX(QBitmap* bitmap, QBitmap* mask, int hotX) {
+	return new (std::nothrow) QCursor(*bitmap, *mask, static_cast<int>(hotX));
+}
+
+QCursor* QCursor_new_bitmap_mask_hotX_hotY(QBitmap* bitmap, QBitmap* mask, int hotX, int hotY) {
+	return new (std::nothrow) QCursor(*bitmap, *mask, static_cast<int>(hotX), static_cast<int>(hotY));
+}
+
+QCursor* QCursor_new_pixmap_hotX(QPixmap* pixmap, int hotX) {
+	return new (std::nothrow) QCursor(*pixmap, static_cast<int>(hotX));
+}
+
+QCursor* QCursor_new_pixmap_hotX_hotY(QPixmap* pixmap, int hotX, int hotY) {
+	return new (std::nothrow) QCursor(*pixmap, static_cast<int>(hotX), static_cast<int>(hotY));
+}
+
+void QCursor_operatorAssign(QCursor* self, QCursor* from) {
+	self->operator=(*from);
+}
+
+void QCursor_swap(QCursor* self, QCursor* other) {
+	self->swap(*other);
+}
+
+QVariant* QCursor_ToQVariant(const QCursor* self) {
+	return new QVariant(self->operator QVariant());
+}
+
+int QCursor_shape(const QCursor* self) {
+	Qt::CursorShape _ret = self->shape();
+	return static_cast<int>(_ret);
+}
+
+void QCursor_setShape(QCursor* self, int newShape) {
+	self->setShape(static_cast<Qt::CursorShape>(newShape));
+}
+
+QBitmap* QCursor_bitmap_Qt_ReturnByValueConstant(const QCursor* self, int param1) {
+	return new QBitmap(self->bitmap(static_cast<Qt::ReturnByValueConstant>(param1)));
+}
+
+QBitmap* QCursor_mask_Qt_ReturnByValueConstant(const QCursor* self, int param1) {
+	return new QBitmap(self->mask(static_cast<Qt::ReturnByValueConstant>(param1)));
+}
+
+QBitmap* QCursor_bitmap(const QCursor* self) {
+	return new QBitmap(self->bitmap());
+}
+
+QBitmap* QCursor_mask(const QCursor* self) {
+	return new QBitmap(self->mask());
+}
+
+QPixmap* QCursor_pixmap(const QCursor* self) {
+	return new QPixmap(self->pixmap());
+}
+
+QPoint* QCursor_hotSpot(const QCursor* self) {
+	return new QPoint(self->hotSpot());
+}
+
+QPoint* QCursor_pos() {
+	return new QPoint(QCursor::pos());
+}
+
+QPoint* QCursor_pos_screen(QScreen* screen) {
+	return new QPoint(QCursor::pos(screen));
+}
+
+void QCursor_setPos_x_y(int x, int y) {
+	QCursor::setPos(static_cast<int>(x), static_cast<int>(y));
+}
+
+void QCursor_setPos_screen_x_y(QScreen* screen, int x, int y) {
+	QCursor::setPos(screen, static_cast<int>(x), static_cast<int>(y));
+}
+
+void QCursor_setPos_p(QPoint* p) {
+	QCursor::setPos(*p);
+}
+
+void QCursor_setPos_screen_p(QScreen* screen, QPoint* p) {
+	QCursor::setPos(screen, *p);
+}
+
+void QCursor_delete(QCursor* self) {
+	delete self;
+}
+

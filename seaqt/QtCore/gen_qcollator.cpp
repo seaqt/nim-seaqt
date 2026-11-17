@@ -1,0 +1,118 @@
+#include <QChar>
+#include <QCollator>
+#include <QCollatorSortKey>
+#include <QLocale>
+#include <QString>
+#include <QByteArray>
+#include <cstring>
+#include <qcollator.h>
+#include "gen_qcollator.h"
+
+#ifndef SEAQT_ALIGNED_SIZEOF
+#define SEAQT_ALIGNED_SIZEOF 1
+#include <cstddef>
+template<typename T>
+static constexpr std::size_t seaqt_aligned_sizeof() {
+	constexpr auto alignment = sizeof(std::max_align_t);
+	return (sizeof(T) + alignment - 1) & ~(alignment - 1);
+}
+#endif
+
+QCollatorSortKey* QCollatorSortKey_new(QCollatorSortKey* from) {
+	return new (std::nothrow) QCollatorSortKey(*from);
+}
+
+void QCollatorSortKey_operatorAssign(QCollatorSortKey* self, QCollatorSortKey* from) {
+	self->operator=(*from);
+}
+
+void QCollatorSortKey_swap(QCollatorSortKey* self, QCollatorSortKey* other) {
+	self->swap(*other);
+}
+
+int QCollatorSortKey_compare(const QCollatorSortKey* self, QCollatorSortKey* key) {
+	return self->compare(*key);
+}
+
+void QCollatorSortKey_delete(QCollatorSortKey* self) {
+	delete self;
+}
+
+QCollator* QCollator_new() {
+	return new (std::nothrow) QCollator();
+}
+
+QCollator* QCollator_new_locale(QLocale* locale) {
+	return new (std::nothrow) QCollator(*locale);
+}
+
+QCollator* QCollator_new_from(QCollator* from) {
+	return new (std::nothrow) QCollator(*from);
+}
+
+void QCollator_operatorAssign(QCollator* self, QCollator* from) {
+	self->operator=(*from);
+}
+
+void QCollator_swap(QCollator* self, QCollator* other) {
+	self->swap(*other);
+}
+
+void QCollator_setLocale(QCollator* self, QLocale* locale) {
+	self->setLocale(*locale);
+}
+
+QLocale* QCollator_locale(const QCollator* self) {
+	return new QLocale(self->locale());
+}
+
+int QCollator_caseSensitivity(const QCollator* self) {
+	Qt::CaseSensitivity _ret = self->caseSensitivity();
+	return static_cast<int>(_ret);
+}
+
+void QCollator_setCaseSensitivity(QCollator* self, int cs) {
+	self->setCaseSensitivity(static_cast<Qt::CaseSensitivity>(cs));
+}
+
+void QCollator_setNumericMode(QCollator* self, bool on) {
+	self->setNumericMode(on);
+}
+
+bool QCollator_numericMode(const QCollator* self) {
+	return self->numericMode();
+}
+
+void QCollator_setIgnorePunctuation(QCollator* self, bool on) {
+	self->setIgnorePunctuation(on);
+}
+
+bool QCollator_ignorePunctuation(const QCollator* self) {
+	return self->ignorePunctuation();
+}
+
+int QCollator_compare_QString_QString(const QCollator* self, struct seaqt_string s1, struct seaqt_string s2) {
+	QString s1_QString = QString::fromUtf8(s1.data, s1.len);
+	QString s2_QString = QString::fromUtf8(s2.data, s2.len);
+	return self->compare(s1_QString, s2_QString);
+}
+
+int QCollator_compare_QChar_qsizetype_QChar_qsizetype(const QCollator* self, QChar* s1, ptrdiff_t len1, QChar* s2, ptrdiff_t len2) {
+	return self->compare(s1, (qsizetype)(len1), s2, (qsizetype)(len2));
+}
+
+bool QCollator_operatorCall_QString_QString(const QCollator* self, struct seaqt_string s1, struct seaqt_string s2) {
+	QString s1_QString = QString::fromUtf8(s1.data, s1.len);
+	QString s2_QString = QString::fromUtf8(s2.data, s2.len);
+	return self->operator()(s1_QString, s2_QString);
+}
+
+QCollatorSortKey* QCollator_sortKey(const QCollator* self, struct seaqt_string string) {
+	QString string_QString = QString::fromUtf8(string.data, string.len);
+	return new QCollatorSortKey(self->sortKey(string_QString));
+}
+
+void QCollator_delete(QCollator* self) {
+	delete self;
+}
+

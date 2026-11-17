@@ -1,0 +1,2 @@
+import ./QtPrintSupport/gen_qprintdialog
+export gen_qprintdialog

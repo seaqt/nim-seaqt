@@ -1,0 +1,14 @@
+const
+  QtWebChannelCFlags* =
+    gorge("pkg-config --cflags Qt6WebChannel") &
+    (when defined(gcc) or defined(llvm): " -fPIC" else: "")
+
+  QtWebChannelLibs* = gorge("pkg-config --libs Qt6WebChannel")
+
+  QtWebChannelGenVersion* = "6.5.3"
+    ## The version used for generating the bindings
+
+  QtWebChannelBuildVersion* = gorge("pkg-config --modversion Qt6WebChannel")
+    ## The version used when compiling the application
+
+{.passl: QtWebChannelLibs}

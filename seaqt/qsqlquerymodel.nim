@@ -1,0 +1,2 @@
+import ./QtSql/gen_qsqlquerymodel
+export gen_qsqlquerymodel

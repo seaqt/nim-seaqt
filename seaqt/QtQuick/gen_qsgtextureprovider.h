@@ -1,0 +1,49 @@
+#pragma once
+#ifndef SEAQT_QTQUICK_GEN_QSGTEXTUREPROVIDER_H
+#define SEAQT_QTQUICK_GEN_QSGTEXTUREPROVIDER_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt-runtime.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QMetaMethod;
+class QMetaObject;
+class QObject;
+class QSGTexture;
+class QSGTextureProvider;
+#else
+typedef struct QMetaMethod QMetaMethod;
+typedef struct QMetaObject QMetaObject;
+typedef struct QObject QObject;
+typedef struct QSGTexture QSGTexture;
+typedef struct QSGTextureProvider QSGTextureProvider;
+#endif
+
+void QSGTextureProvider_virtbase(QSGTextureProvider* src, QObject** outptr_QObject);
+QMetaObject* QSGTextureProvider_metaObject(const QSGTextureProvider* self);
+void* QSGTextureProvider_metacast(QSGTextureProvider* self, const char* param1);
+int QSGTextureProvider_metacall(QSGTextureProvider* self, int param1, int param2, void** param3);
+struct seaqt_string QSGTextureProvider_tr_s(const char* s);
+QSGTexture* QSGTextureProvider_texture(const QSGTextureProvider* self);
+void QSGTextureProvider_textureChanged(QSGTextureProvider* self);
+void QSGTextureProvider_connect_textureChanged(QSGTextureProvider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+struct seaqt_string QSGTextureProvider_tr_s_c(const char* s, const char* c);
+struct seaqt_string QSGTextureProvider_tr_s_c_n(const char* s, const char* c, int n);
+
+const QMetaObject* QSGTextureProvider_staticMetaObject();
+void QSGTextureProvider_delete(QSGTextureProvider* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

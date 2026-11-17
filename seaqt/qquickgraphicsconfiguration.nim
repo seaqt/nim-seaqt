@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquickgraphicsconfiguration
+export gen_qquickgraphicsconfiguration

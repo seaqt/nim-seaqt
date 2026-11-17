@@ -1,0 +1,2 @@
+import ./QtStateMachine/gen_qhistorystate
+export gen_qhistorystate
