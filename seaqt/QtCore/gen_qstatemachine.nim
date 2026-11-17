@@ -97,7 +97,7 @@ proc fcQStateMachine_setGlobalRestorePolicy(self: pointer, restorePolicy: cint):
 proc fcQStateMachine_postEventEvent(self: pointer, event: pointer): void {.importc: "QStateMachine_postEvent_event".}
 proc fcQStateMachine_postDelayedEvent_QEventInt(self: pointer, event: pointer, delay: cint): cint {.importc: "QStateMachine_postDelayedEvent_QEvent_int".}
 proc fcQStateMachine_cancelDelayedEvent(self: pointer, id: cint): bool {.importc: "QStateMachine_cancelDelayedEvent".}
-proc fcQStateMachine_configuration(self: pointer): HashSet[pointer] {.importc: "QStateMachine_configuration".}
+proc fcQStateMachine_configuration(self: pointer): struct_seaqt_array {.importc: "QStateMachine_configuration".}
 proc fcQStateMachine_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QStateMachine_eventFilter".}
 proc fcQStateMachine_start(self: pointer): void {.importc: "QStateMachine_start".}
 proc fcQStateMachine_stop(self: pointer): void {.importc: "QStateMachine_stop".}
@@ -249,10 +249,11 @@ proc cancelDelayedEvent*(self: gen_qstatemachine_types.QStateMachine, id: cint):
 
 proc configuration*(self: gen_qstatemachine_types.QStateMachine): HashSet[gen_qabstractstate_types.QAbstractState] =
   var v_ma = fcQStateMachine_configuration(self.h)
-  vx_ret: HashSet[gen_qabstractstate_types.QAbstractState])
-  v_outCast = cast[ptr UncheckedArray[pointer](v_ma.data))
-  for i in 0..<v_ma.len:
+  var vx_ret = initHashSet[gen_qabstractstate_types.QAbstractState](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
     vx_ret.incl gen_qabstractstate_types.QAbstractState(h: v_outCast[i], owned: false)
+  c_free(v_ma.data)
   vx_ret
 
 proc eventFilter*(self: gen_qstatemachine_types.QStateMachine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
