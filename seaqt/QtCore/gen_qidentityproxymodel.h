@@ -219,6 +219,7 @@ int QIdentityProxyModel_protectedbase_senderSignalIndex(const VirtualQIdentityPr
 int QIdentityProxyModel_protectedbase_receivers(const VirtualQIdentityProxyModel* self, const char* signal);
 bool QIdentityProxyModel_protectedbase_isSignalConnected(const VirtualQIdentityProxyModel* self, QMetaMethod* signal);
 
+const QMetaObject* QIdentityProxyModel_staticMetaObject();
 void QIdentityProxyModel_delete(QIdentityProxyModel* self);
 
 #ifdef __cplusplus

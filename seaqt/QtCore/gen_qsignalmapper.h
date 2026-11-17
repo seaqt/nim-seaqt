@@ -92,6 +92,7 @@ int QSignalMapper_protectedbase_senderSignalIndex(const VirtualQSignalMapper* se
 int QSignalMapper_protectedbase_receivers(const VirtualQSignalMapper* self, const char* signal);
 bool QSignalMapper_protectedbase_isSignalConnected(const VirtualQSignalMapper* self, QMetaMethod* signal);
 
+const QMetaObject* QSignalMapper_staticMetaObject();
 void QSignalMapper_delete(QSignalMapper* self);
 
 #ifdef __cplusplus

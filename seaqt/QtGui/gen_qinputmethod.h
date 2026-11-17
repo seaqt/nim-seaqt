@@ -78,6 +78,7 @@ void QInputMethod_connect_inputDirectionChanged(QInputMethod* self, intptr_t slo
 struct seaqt_string QInputMethod_tr_s_c(const char* s, const char* c);
 struct seaqt_string QInputMethod_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QInputMethod_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

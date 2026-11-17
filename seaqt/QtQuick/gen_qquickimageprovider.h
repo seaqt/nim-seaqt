@@ -107,6 +107,7 @@ int QQuickTextureFactory_protectedbase_senderSignalIndex(const VirtualQQuickText
 int QQuickTextureFactory_protectedbase_receivers(const VirtualQQuickTextureFactory* self, const char* signal);
 bool QQuickTextureFactory_protectedbase_isSignalConnected(const VirtualQQuickTextureFactory* self, QMetaMethod* signal);
 
+const QMetaObject* QQuickTextureFactory_staticMetaObject();
 void QQuickTextureFactory_delete(QQuickTextureFactory* self);
 
 typedef struct VirtualQQuickImageResponse VirtualQQuickImageResponse;
@@ -164,6 +165,7 @@ int QQuickImageResponse_protectedbase_senderSignalIndex(const VirtualQQuickImage
 int QQuickImageResponse_protectedbase_receivers(const VirtualQQuickImageResponse* self, const char* signal);
 bool QQuickImageResponse_protectedbase_isSignalConnected(const VirtualQQuickImageResponse* self, QMetaMethod* signal);
 
+const QMetaObject* QQuickImageResponse_staticMetaObject();
 void QQuickImageResponse_delete(QQuickImageResponse* self);
 
 typedef struct VirtualQQuickImageProvider VirtualQQuickImageProvider;
@@ -226,6 +228,7 @@ int QQuickImageProvider_protectedbase_senderSignalIndex(const VirtualQQuickImage
 int QQuickImageProvider_protectedbase_receivers(const VirtualQQuickImageProvider* self, const char* signal);
 bool QQuickImageProvider_protectedbase_isSignalConnected(const VirtualQQuickImageProvider* self, QMetaMethod* signal);
 
+const QMetaObject* QQuickImageProvider_staticMetaObject();
 void QQuickImageProvider_delete(QQuickImageProvider* self);
 
 typedef struct VirtualQQuickAsyncImageProvider VirtualQQuickAsyncImageProvider;

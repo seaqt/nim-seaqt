@@ -64,6 +64,7 @@ QVariant* QColorSpace_ToQVariant(const QColorSpace* self);
 void QColorSpace_setTransferFunction_transferFunction_gamma(QColorSpace* self, int transferFunction, float gamma);
 QColorSpace* QColorSpace_withTransferFunction_transferFunction_gamma(const QColorSpace* self, int transferFunction, float gamma);
 
+const QMetaObject* QColorSpace_staticMetaObject();
 void QColorSpace_delete(QColorSpace* self);
 
 #ifdef __cplusplus

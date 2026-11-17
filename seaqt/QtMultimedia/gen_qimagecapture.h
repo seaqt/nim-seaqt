@@ -132,6 +132,7 @@ int QImageCapture_protectedbase_senderSignalIndex(const VirtualQImageCapture* se
 int QImageCapture_protectedbase_receivers(const VirtualQImageCapture* self, const char* signal);
 bool QImageCapture_protectedbase_isSignalConnected(const VirtualQImageCapture* self, QMetaMethod* signal);
 
+const QMetaObject* QImageCapture_staticMetaObject();
 void QImageCapture_delete(QImageCapture* self);
 
 #ifdef __cplusplus

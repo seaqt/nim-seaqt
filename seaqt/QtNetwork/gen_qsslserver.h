@@ -117,6 +117,7 @@ int QSslServer_protectedbase_senderSignalIndex(const VirtualQSslServer* self);
 int QSslServer_protectedbase_receivers(const VirtualQSslServer* self, const char* signal);
 bool QSslServer_protectedbase_isSignalConnected(const VirtualQSslServer* self, QMetaMethod* signal);
 
+const QMetaObject* QSslServer_staticMetaObject();
 void QSslServer_delete(QSslServer* self);
 
 #ifdef __cplusplus

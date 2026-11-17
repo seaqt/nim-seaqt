@@ -299,6 +299,7 @@ QRectF* QPainter_boundingRect_QRectF_QString_QTextOption(QPainter* self, QRectF*
 void QPainter_setRenderHint_hint_on(QPainter* self, int hint, bool on);
 void QPainter_setRenderHints_hints_on(QPainter* self, int hints, bool on);
 
+const QMetaObject* QPainter_staticMetaObject();
 void QPainter_delete(QPainter* self);
 
 double QPainter__PixmapFragment_x(const QPainter__PixmapFragment* self);

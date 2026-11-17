@@ -257,6 +257,7 @@ int QFileSystemModel_protectedbase_senderSignalIndex(const VirtualQFileSystemMod
 int QFileSystemModel_protectedbase_receivers(const VirtualQFileSystemModel* self, const char* signal);
 bool QFileSystemModel_protectedbase_isSignalConnected(const VirtualQFileSystemModel* self, QMetaMethod* signal);
 
+const QMetaObject* QFileSystemModel_staticMetaObject();
 void QFileSystemModel_delete(QFileSystemModel* self);
 
 #ifdef __cplusplus

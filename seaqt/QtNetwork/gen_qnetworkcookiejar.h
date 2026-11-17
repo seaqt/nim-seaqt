@@ -101,6 +101,7 @@ int QNetworkCookieJar_protectedbase_senderSignalIndex(const VirtualQNetworkCooki
 int QNetworkCookieJar_protectedbase_receivers(const VirtualQNetworkCookieJar* self, const char* signal);
 bool QNetworkCookieJar_protectedbase_isSignalConnected(const VirtualQNetworkCookieJar* self, QMetaMethod* signal);
 
+const QMetaObject* QNetworkCookieJar_staticMetaObject();
 void QNetworkCookieJar_delete(QNetworkCookieJar* self);
 
 #ifdef __cplusplus

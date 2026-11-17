@@ -85,6 +85,7 @@ int QQmlFileSelector_protectedbase_senderSignalIndex(const VirtualQQmlFileSelect
 int QQmlFileSelector_protectedbase_receivers(const VirtualQQmlFileSelector* self, const char* signal);
 bool QQmlFileSelector_protectedbase_isSignalConnected(const VirtualQQmlFileSelector* self, QMetaMethod* signal);
 
+const QMetaObject* QQmlFileSelector_staticMetaObject();
 void QQmlFileSelector_delete(QQmlFileSelector* self);
 
 #ifdef __cplusplus

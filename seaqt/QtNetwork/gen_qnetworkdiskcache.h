@@ -117,6 +117,7 @@ int QNetworkDiskCache_protectedbase_senderSignalIndex(const VirtualQNetworkDiskC
 int QNetworkDiskCache_protectedbase_receivers(const VirtualQNetworkDiskCache* self, const char* signal);
 bool QNetworkDiskCache_protectedbase_isSignalConnected(const VirtualQNetworkDiskCache* self, QMetaMethod* signal);
 
+const QMetaObject* QNetworkDiskCache_staticMetaObject();
 void QNetworkDiskCache_delete(QNetworkDiskCache* self);
 
 #ifdef __cplusplus

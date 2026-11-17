@@ -119,6 +119,7 @@ int QAudioDecoder_protectedbase_senderSignalIndex(const VirtualQAudioDecoder* se
 int QAudioDecoder_protectedbase_receivers(const VirtualQAudioDecoder* self, const char* signal);
 bool QAudioDecoder_protectedbase_isSignalConnected(const VirtualQAudioDecoder* self, QMetaMethod* signal);
 
+const QMetaObject* QAudioDecoder_staticMetaObject();
 void QAudioDecoder_delete(QAudioDecoder* self);
 
 #ifdef __cplusplus

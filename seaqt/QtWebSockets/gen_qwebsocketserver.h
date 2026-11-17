@@ -152,6 +152,7 @@ int QWebSocketServer_protectedbase_senderSignalIndex(const VirtualQWebSocketServ
 int QWebSocketServer_protectedbase_receivers(const VirtualQWebSocketServer* self, const char* signal);
 bool QWebSocketServer_protectedbase_isSignalConnected(const VirtualQWebSocketServer* self, QMetaMethod* signal);
 
+const QMetaObject* QWebSocketServer_staticMetaObject();
 void QWebSocketServer_delete(QWebSocketServer* self);
 
 #ifdef __cplusplus

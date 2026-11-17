@@ -96,6 +96,7 @@ int QInputDevice_protectedbase_senderSignalIndex(const VirtualQInputDevice* self
 int QInputDevice_protectedbase_receivers(const VirtualQInputDevice* self, const char* signal);
 bool QInputDevice_protectedbase_isSignalConnected(const VirtualQInputDevice* self, QMetaMethod* signal);
 
+const QMetaObject* QInputDevice_staticMetaObject();
 void QInputDevice_delete(QInputDevice* self);
 
 #ifdef __cplusplus

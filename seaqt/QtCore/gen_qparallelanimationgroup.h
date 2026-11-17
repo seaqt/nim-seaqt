@@ -94,6 +94,7 @@ int QParallelAnimationGroup_protectedbase_senderSignalIndex(const VirtualQParall
 int QParallelAnimationGroup_protectedbase_receivers(const VirtualQParallelAnimationGroup* self, const char* signal);
 bool QParallelAnimationGroup_protectedbase_isSignalConnected(const VirtualQParallelAnimationGroup* self, QMetaMethod* signal);
 
+const QMetaObject* QParallelAnimationGroup_staticMetaObject();
 void QParallelAnimationGroup_delete(QParallelAnimationGroup* self);
 
 #ifdef __cplusplus

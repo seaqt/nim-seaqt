@@ -121,6 +121,7 @@ int QSvgRenderer_protectedbase_senderSignalIndex(const VirtualQSvgRenderer* self
 int QSvgRenderer_protectedbase_receivers(const VirtualQSvgRenderer* self, const char* signal);
 bool QSvgRenderer_protectedbase_isSignalConnected(const VirtualQSvgRenderer* self, QMetaMethod* signal);
 
+const QMetaObject* QSvgRenderer_staticMetaObject();
 void QSvgRenderer_delete(QSvgRenderer* self);
 
 #ifdef __cplusplus

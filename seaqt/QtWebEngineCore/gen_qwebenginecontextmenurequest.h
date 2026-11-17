@@ -51,6 +51,7 @@ int QWebEngineContextMenuRequest_editFlags(const QWebEngineContextMenuRequest* s
 struct seaqt_string QWebEngineContextMenuRequest_tr_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineContextMenuRequest_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QWebEngineContextMenuRequest_staticMetaObject();
 void QWebEngineContextMenuRequest_delete(QWebEngineContextMenuRequest* self);
 
 #ifdef __cplusplus

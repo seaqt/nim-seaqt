@@ -82,6 +82,7 @@ int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(const Virtua
 int QWebEngineUrlRequestInterceptor_protectedbase_receivers(const VirtualQWebEngineUrlRequestInterceptor* self, const char* signal);
 bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(const VirtualQWebEngineUrlRequestInterceptor* self, QMetaMethod* signal);
 
+const QMetaObject* QWebEngineUrlRequestInterceptor_staticMetaObject();
 void QWebEngineUrlRequestInterceptor_delete(QWebEngineUrlRequestInterceptor* self);
 
 #ifdef __cplusplus

@@ -116,6 +116,7 @@ bool QThread_protectedbase_isSignalConnected(const VirtualQThread* self, QMetaMe
 void QThread_connect_started(QThread* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QThread_connect_finished(QThread* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QThread_staticMetaObject();
 void QThread_delete(QThread* self);
 
 #ifdef __cplusplus

@@ -99,6 +99,7 @@ int QQmlExtensionPlugin_protectedbase_senderSignalIndex(const VirtualQQmlExtensi
 int QQmlExtensionPlugin_protectedbase_receivers(const VirtualQQmlExtensionPlugin* self, const char* signal);
 bool QQmlExtensionPlugin_protectedbase_isSignalConnected(const VirtualQQmlExtensionPlugin* self, QMetaMethod* signal);
 
+const QMetaObject* QQmlExtensionPlugin_staticMetaObject();
 void QQmlExtensionPlugin_delete(QQmlExtensionPlugin* self);
 
 typedef struct VirtualQQmlEngineExtensionPlugin VirtualQQmlEngineExtensionPlugin;
@@ -149,6 +150,7 @@ int QQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(const VirtualQQmlE
 int QQmlEngineExtensionPlugin_protectedbase_receivers(const VirtualQQmlEngineExtensionPlugin* self, const char* signal);
 bool QQmlEngineExtensionPlugin_protectedbase_isSignalConnected(const VirtualQQmlEngineExtensionPlugin* self, QMetaMethod* signal);
 
+const QMetaObject* QQmlEngineExtensionPlugin_staticMetaObject();
 void QQmlEngineExtensionPlugin_delete(QQmlEngineExtensionPlugin* self);
 
 #ifdef __cplusplus

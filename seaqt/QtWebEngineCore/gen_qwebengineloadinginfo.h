@@ -34,6 +34,7 @@ struct seaqt_string QWebEngineLoadingInfo_errorString(const QWebEngineLoadingInf
 int QWebEngineLoadingInfo_errorDomain(const QWebEngineLoadingInfo* self);
 int QWebEngineLoadingInfo_errorCode(const QWebEngineLoadingInfo* self);
 
+const QMetaObject* QWebEngineLoadingInfo_staticMetaObject();
 void QWebEngineLoadingInfo_delete(QWebEngineLoadingInfo* self);
 
 #ifdef __cplusplus

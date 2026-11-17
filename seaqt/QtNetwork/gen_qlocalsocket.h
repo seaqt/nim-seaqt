@@ -162,6 +162,7 @@ int QLocalSocket_protectedbase_senderSignalIndex(const VirtualQLocalSocket* self
 int QLocalSocket_protectedbase_receivers(const VirtualQLocalSocket* self, const char* signal);
 bool QLocalSocket_protectedbase_isSignalConnected(const VirtualQLocalSocket* self, QMetaMethod* signal);
 
+const QMetaObject* QLocalSocket_staticMetaObject();
 void QLocalSocket_delete(QLocalSocket* self);
 
 #ifdef __cplusplus

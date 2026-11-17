@@ -290,6 +290,7 @@ int QQuickWindow_protectedbase_senderSignalIndex(const VirtualQQuickWindow* self
 int QQuickWindow_protectedbase_receivers(const VirtualQQuickWindow* self, const char* signal);
 bool QQuickWindow_protectedbase_isSignalConnected(const VirtualQQuickWindow* self, QMetaMethod* signal);
 
+const QMetaObject* QQuickWindow_staticMetaObject();
 void QQuickWindow_delete(QQuickWindow* self);
 
 int QQuickWindow__GraphicsStateInfo_currentFrameSlot(const QQuickWindow__GraphicsStateInfo* self);

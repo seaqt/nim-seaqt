@@ -240,6 +240,7 @@ int QCommandLinkButton_protectedbase_senderSignalIndex(const VirtualQCommandLink
 int QCommandLinkButton_protectedbase_receivers(const VirtualQCommandLinkButton* self, const char* signal);
 bool QCommandLinkButton_protectedbase_isSignalConnected(const VirtualQCommandLinkButton* self, QMetaMethod* signal);
 
+const QMetaObject* QCommandLinkButton_staticMetaObject();
 void QCommandLinkButton_delete(QCommandLinkButton* self);
 
 #ifdef __cplusplus

@@ -300,6 +300,7 @@ int QWizard_protectedbase_senderSignalIndex(const VirtualQWizard* self);
 int QWizard_protectedbase_receivers(const VirtualQWizard* self, const char* signal);
 bool QWizard_protectedbase_isSignalConnected(const VirtualQWizard* self, QMetaMethod* signal);
 
+const QMetaObject* QWizard_staticMetaObject();
 void QWizard_delete(QWizard* self);
 
 typedef struct VirtualQWizardPage VirtualQWizardPage;
@@ -467,6 +468,7 @@ int QWizardPage_protectedbase_senderSignalIndex(const VirtualQWizardPage* self);
 int QWizardPage_protectedbase_receivers(const VirtualQWizardPage* self, const char* signal);
 bool QWizardPage_protectedbase_isSignalConnected(const VirtualQWizardPage* self, QMetaMethod* signal);
 
+const QMetaObject* QWizardPage_staticMetaObject();
 void QWizardPage_delete(QWizardPage* self);
 
 #ifdef __cplusplus

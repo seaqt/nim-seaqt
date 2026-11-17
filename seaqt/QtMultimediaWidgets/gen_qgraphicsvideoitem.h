@@ -204,6 +204,7 @@ void QGraphicsVideoItem_protectedbase_addToIndex(VirtualQGraphicsVideoItem* self
 void QGraphicsVideoItem_protectedbase_removeFromIndex(VirtualQGraphicsVideoItem* self);
 void QGraphicsVideoItem_protectedbase_prepareGeometryChange(VirtualQGraphicsVideoItem* self);
 
+const QMetaObject* QGraphicsVideoItem_staticMetaObject();
 void QGraphicsVideoItem_delete(QGraphicsVideoItem* self);
 
 #ifdef __cplusplus

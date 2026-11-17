@@ -58,6 +58,7 @@ void QNetworkCookie_normalize(QNetworkCookie* self, QUrl* url);
 struct seaqt_array /* of QNetworkCookie* */  QNetworkCookie_parseCookies(struct seaqt_string cookieString);
 struct seaqt_string QNetworkCookie_toRawForm_form(const QNetworkCookie* self, int form);
 
+const QMetaObject* QNetworkCookie_staticMetaObject();
 void QNetworkCookie_delete(QNetworkCookie* self);
 
 #ifdef __cplusplus

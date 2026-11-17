@@ -79,6 +79,7 @@ void QDesignerIntegrationInterface_updateCustomWidgetPlugins(QDesignerIntegratio
 struct seaqt_string QDesignerIntegrationInterface_tr_s_c(const char* s, const char* c);
 struct seaqt_string QDesignerIntegrationInterface_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QDesignerIntegrationInterface_staticMetaObject();
 void QDesignerIntegrationInterface_delete(QDesignerIntegrationInterface* self);
 
 void QDesignerIntegration_virtbase(QDesignerIntegration* src, QDesignerIntegrationInterface** outptr_QDesignerIntegrationInterface);
@@ -109,6 +110,7 @@ void QDesignerIntegration_updateCustomWidgetPlugins(QDesignerIntegration* self);
 struct seaqt_string QDesignerIntegration_tr_s_c(const char* s, const char* c);
 struct seaqt_string QDesignerIntegration_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QDesignerIntegration_staticMetaObject();
 void QDesignerIntegration_delete(QDesignerIntegration* self);
 
 #ifdef __cplusplus

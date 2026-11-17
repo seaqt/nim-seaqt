@@ -247,6 +247,7 @@ int QLCDNumber_protectedbase_senderSignalIndex(const VirtualQLCDNumber* self);
 int QLCDNumber_protectedbase_receivers(const VirtualQLCDNumber* self, const char* signal);
 bool QLCDNumber_protectedbase_isSignalConnected(const VirtualQLCDNumber* self, QMetaMethod* signal);
 
+const QMetaObject* QLCDNumber_staticMetaObject();
 void QLCDNumber_delete(QLCDNumber* self);
 
 #ifdef __cplusplus

@@ -260,6 +260,7 @@ int QToolButton_protectedbase_senderSignalIndex(const VirtualQToolButton* self);
 int QToolButton_protectedbase_receivers(const VirtualQToolButton* self, const char* signal);
 bool QToolButton_protectedbase_isSignalConnected(const VirtualQToolButton* self, QMetaMethod* signal);
 
+const QMetaObject* QToolButton_staticMetaObject();
 void QToolButton_delete(QToolButton* self);
 
 #ifdef __cplusplus

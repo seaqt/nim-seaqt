@@ -35,6 +35,7 @@ struct seaqt_string QCryptographicHash_resultView(const QCryptographicHash* self
 struct seaqt_string QCryptographicHash_hash(struct seaqt_string data, int method);
 int QCryptographicHash_hashLength(int method);
 
+const QMetaObject* QCryptographicHash_staticMetaObject();
 void QCryptographicHash_delete(QCryptographicHash* self);
 
 #ifdef __cplusplus

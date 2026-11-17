@@ -347,6 +347,7 @@ int QWindow_protectedbase_senderSignalIndex(const VirtualQWindow* self);
 int QWindow_protectedbase_receivers(const VirtualQWindow* self, const char* signal);
 bool QWindow_protectedbase_isSignalConnected(const VirtualQWindow* self, QMetaMethod* signal);
 
+const QMetaObject* QWindow_staticMetaObject();
 void QWindow_delete(QWindow* self);
 
 #ifdef __cplusplus

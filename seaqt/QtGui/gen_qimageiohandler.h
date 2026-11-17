@@ -154,6 +154,7 @@ int QImageIOPlugin_protectedbase_senderSignalIndex(const VirtualQImageIOPlugin* 
 int QImageIOPlugin_protectedbase_receivers(const VirtualQImageIOPlugin* self, const char* signal);
 bool QImageIOPlugin_protectedbase_isSignalConnected(const VirtualQImageIOPlugin* self, QMetaMethod* signal);
 
+const QMetaObject* QImageIOPlugin_staticMetaObject();
 void QImageIOPlugin_delete(QImageIOPlugin* self);
 
 #ifdef __cplusplus

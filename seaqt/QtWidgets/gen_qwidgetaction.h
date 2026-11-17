@@ -93,6 +93,7 @@ int QWidgetAction_protectedbase_senderSignalIndex(const VirtualQWidgetAction* se
 int QWidgetAction_protectedbase_receivers(const VirtualQWidgetAction* self, const char* signal);
 bool QWidgetAction_protectedbase_isSignalConnected(const VirtualQWidgetAction* self, QMetaMethod* signal);
 
+const QMetaObject* QWidgetAction_staticMetaObject();
 void QWidgetAction_delete(QWidgetAction* self);
 
 #ifdef __cplusplus

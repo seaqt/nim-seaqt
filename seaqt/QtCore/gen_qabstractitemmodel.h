@@ -356,6 +356,7 @@ void QAbstractItemModel_connect_rowsMoved(QAbstractItemModel* self, intptr_t slo
 void QAbstractItemModel_connect_columnsAboutToBeMoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int, QModelIndex*, int), void (*release)(intptr_t));
 void QAbstractItemModel_connect_columnsMoved(QAbstractItemModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, int, int, QModelIndex*, int), void (*release)(intptr_t));
 
+const QMetaObject* QAbstractItemModel_staticMetaObject();
 void QAbstractItemModel_delete(QAbstractItemModel* self);
 
 typedef struct VirtualQAbstractTableModel VirtualQAbstractTableModel;
@@ -497,6 +498,7 @@ int QAbstractTableModel_protectedbase_senderSignalIndex(const VirtualQAbstractTa
 int QAbstractTableModel_protectedbase_receivers(const VirtualQAbstractTableModel* self, const char* signal);
 bool QAbstractTableModel_protectedbase_isSignalConnected(const VirtualQAbstractTableModel* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractTableModel_staticMetaObject();
 void QAbstractTableModel_delete(QAbstractTableModel* self);
 
 typedef struct VirtualQAbstractListModel VirtualQAbstractListModel;
@@ -636,6 +638,7 @@ int QAbstractListModel_protectedbase_senderSignalIndex(const VirtualQAbstractLis
 int QAbstractListModel_protectedbase_receivers(const VirtualQAbstractListModel* self, const char* signal);
 bool QAbstractListModel_protectedbase_isSignalConnected(const VirtualQAbstractListModel* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractListModel_staticMetaObject();
 void QAbstractListModel_delete(QAbstractListModel* self);
 
 #ifdef __cplusplus

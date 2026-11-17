@@ -137,6 +137,7 @@ int QStyledItemDelegate_protectedbase_senderSignalIndex(const VirtualQStyledItem
 int QStyledItemDelegate_protectedbase_receivers(const VirtualQStyledItemDelegate* self, const char* signal);
 bool QStyledItemDelegate_protectedbase_isSignalConnected(const VirtualQStyledItemDelegate* self, QMetaMethod* signal);
 
+const QMetaObject* QStyledItemDelegate_staticMetaObject();
 void QStyledItemDelegate_delete(QStyledItemDelegate* self);
 
 #ifdef __cplusplus

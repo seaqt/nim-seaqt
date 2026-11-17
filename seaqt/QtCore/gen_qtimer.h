@@ -92,6 +92,7 @@ bool QTimer_protectedbase_isSignalConnected(const VirtualQTimer* self, QMetaMeth
 
 void QTimer_connect_timeout(QTimer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QTimer_staticMetaObject();
 void QTimer_delete(QTimer* self);
 
 #ifdef __cplusplus

@@ -76,6 +76,7 @@ void QDesignerMetaDataBaseInterface_connect_changed(QDesignerMetaDataBaseInterfa
 struct seaqt_string QDesignerMetaDataBaseInterface_tr_s_c(const char* s, const char* c);
 struct seaqt_string QDesignerMetaDataBaseInterface_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QDesignerMetaDataBaseInterface_staticMetaObject();
 void QDesignerMetaDataBaseInterface_delete(QDesignerMetaDataBaseInterface* self);
 
 #ifdef __cplusplus

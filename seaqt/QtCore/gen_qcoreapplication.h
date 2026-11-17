@@ -150,6 +150,7 @@ bool QCoreApplication_protectedbase_isSignalConnected(const VirtualQCoreApplicat
 
 void QCoreApplication_connect_aboutToQuit(QCoreApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QCoreApplication_staticMetaObject();
 void QCoreApplication_delete(QCoreApplication* self);
 
 #ifdef __cplusplus

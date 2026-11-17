@@ -156,6 +156,7 @@ int QItemDelegate_protectedbase_senderSignalIndex(const VirtualQItemDelegate* se
 int QItemDelegate_protectedbase_receivers(const VirtualQItemDelegate* self, const char* signal);
 bool QItemDelegate_protectedbase_isSignalConnected(const VirtualQItemDelegate* self, QMetaMethod* signal);
 
+const QMetaObject* QItemDelegate_staticMetaObject();
 void QItemDelegate_delete(QItemDelegate* self);
 
 #ifdef __cplusplus

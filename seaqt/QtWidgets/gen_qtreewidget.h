@@ -552,6 +552,7 @@ int QTreeWidget_protectedbase_senderSignalIndex(const VirtualQTreeWidget* self);
 int QTreeWidget_protectedbase_receivers(const VirtualQTreeWidget* self, const char* signal);
 bool QTreeWidget_protectedbase_isSignalConnected(const VirtualQTreeWidget* self, QMetaMethod* signal);
 
+const QMetaObject* QTreeWidget_staticMetaObject();
 void QTreeWidget_delete(QTreeWidget* self);
 
 #ifdef __cplusplus

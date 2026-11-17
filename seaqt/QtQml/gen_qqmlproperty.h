@@ -79,6 +79,7 @@ int QQmlProperty_index(const QQmlProperty* self);
 QMetaProperty* QQmlProperty_property(const QQmlProperty* self);
 QMetaMethod* QQmlProperty_method(const QQmlProperty* self);
 
+const QMetaObject* QQmlProperty_staticMetaObject();
 void QQmlProperty_delete(QQmlProperty* self);
 
 #ifdef __cplusplus

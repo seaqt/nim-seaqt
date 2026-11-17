@@ -187,6 +187,7 @@ int QLayout_protectedbase_senderSignalIndex(const VirtualQLayout* self);
 int QLayout_protectedbase_receivers(const VirtualQLayout* self, const char* signal);
 bool QLayout_protectedbase_isSignalConnected(const VirtualQLayout* self, QMetaMethod* signal);
 
+const QMetaObject* QLayout_staticMetaObject();
 void QLayout_delete(QLayout* self);
 
 #ifdef __cplusplus

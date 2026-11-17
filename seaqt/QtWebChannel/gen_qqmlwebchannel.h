@@ -84,6 +84,7 @@ int QQmlWebChannel_protectedbase_senderSignalIndex(const VirtualQQmlWebChannel* 
 int QQmlWebChannel_protectedbase_receivers(const VirtualQQmlWebChannel* self, const char* signal);
 bool QQmlWebChannel_protectedbase_isSignalConnected(const VirtualQQmlWebChannel* self, QMetaMethod* signal);
 
+const QMetaObject* QQmlWebChannel_staticMetaObject();
 void QQmlWebChannel_delete(QQmlWebChannel* self);
 
 #ifdef __cplusplus

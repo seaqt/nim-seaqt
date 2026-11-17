@@ -219,6 +219,7 @@ int QDesignerObjectInspectorInterface_protectedbase_senderSignalIndex(const Virt
 int QDesignerObjectInspectorInterface_protectedbase_receivers(const VirtualQDesignerObjectInspectorInterface* self, const char* signal);
 bool QDesignerObjectInspectorInterface_protectedbase_isSignalConnected(const VirtualQDesignerObjectInspectorInterface* self, QMetaMethod* signal);
 
+const QMetaObject* QDesignerObjectInspectorInterface_staticMetaObject();
 void QDesignerObjectInspectorInterface_delete(QDesignerObjectInspectorInterface* self);
 
 #ifdef __cplusplus

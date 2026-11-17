@@ -79,6 +79,7 @@ void QWebEngineDownloadRequest_connect_downloadFileNameChanged(QWebEngineDownloa
 struct seaqt_string QWebEngineDownloadRequest_tr_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineDownloadRequest_tr_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QWebEngineDownloadRequest_staticMetaObject();
 void QWebEngineDownloadRequest_delete(QWebEngineDownloadRequest* self);
 
 #ifdef __cplusplus

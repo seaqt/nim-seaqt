@@ -93,6 +93,7 @@ int QAudioOutput_protectedbase_senderSignalIndex(const VirtualQAudioOutput* self
 int QAudioOutput_protectedbase_receivers(const VirtualQAudioOutput* self, const char* signal);
 bool QAudioOutput_protectedbase_isSignalConnected(const VirtualQAudioOutput* self, QMetaMethod* signal);
 
+const QMetaObject* QAudioOutput_staticMetaObject();
 void QAudioOutput_delete(QAudioOutput* self);
 
 #ifdef __cplusplus

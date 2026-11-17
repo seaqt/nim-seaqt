@@ -239,6 +239,7 @@ int QAbstractPrintDialog_protectedbase_senderSignalIndex(const VirtualQAbstractP
 int QAbstractPrintDialog_protectedbase_receivers(const VirtualQAbstractPrintDialog* self, const char* signal);
 bool QAbstractPrintDialog_protectedbase_isSignalConnected(const VirtualQAbstractPrintDialog* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractPrintDialog_staticMetaObject();
 void QAbstractPrintDialog_delete(QAbstractPrintDialog* self);
 
 #ifdef __cplusplus
