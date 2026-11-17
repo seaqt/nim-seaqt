@@ -2308,59 +2308,59 @@ void QWidget_virtualbase_disconnectNotify(VirtualQWidget* self, QMetaMethod* sig
 }
 
 void QWidget_protectedbase_updateMicroFocus(VirtualQWidget* self) {
-	self->updateMicroFocus();
+	self->QWidget::updateMicroFocus();
 }
 
 void QWidget_protectedbase_create(VirtualQWidget* self) {
-	self->create();
+	self->QWidget::create();
 }
 
 void QWidget_protectedbase_destroy(VirtualQWidget* self) {
-	self->destroy();
+	self->QWidget::destroy();
 }
 
 bool QWidget_protectedbase_focusNextChild(VirtualQWidget* self) {
-	return self->focusNextChild();
+	return self->QWidget::focusNextChild();
 }
 
 bool QWidget_protectedbase_focusPreviousChild(VirtualQWidget* self) {
-	return self->focusPreviousChild();
+	return self->QWidget::focusPreviousChild();
 }
 
 void QWidget_protectedbase_create_WId(VirtualQWidget* self, uintptr_t param1) {
-	self->create(static_cast<WId>(param1));
+	self->QWidget::create(static_cast<WId>(param1));
 }
 
 void QWidget_protectedbase_create_WId_bool(VirtualQWidget* self, uintptr_t param1, bool initializeWindow) {
-	self->create(static_cast<WId>(param1), initializeWindow);
+	self->QWidget::create(static_cast<WId>(param1), initializeWindow);
 }
 
 void QWidget_protectedbase_create_WId_bool_bool(VirtualQWidget* self, uintptr_t param1, bool initializeWindow, bool destroyOldWindow) {
-	self->create(static_cast<WId>(param1), initializeWindow, destroyOldWindow);
+	self->QWidget::create(static_cast<WId>(param1), initializeWindow, destroyOldWindow);
 }
 
 void QWidget_protectedbase_destroy_destroyWindow(VirtualQWidget* self, bool destroyWindow) {
-	self->destroy(destroyWindow);
+	self->QWidget::destroy(destroyWindow);
 }
 
 void QWidget_protectedbase_destroy_destroyWindow_destroySubWindows(VirtualQWidget* self, bool destroyWindow, bool destroySubWindows) {
-	self->destroy(destroyWindow, destroySubWindows);
+	self->QWidget::destroy(destroyWindow, destroySubWindows);
 }
 
 QObject* QWidget_protectedbase_sender(const VirtualQWidget* self) {
-	return self->sender();
+	return self->QWidget::sender();
 }
 
 int QWidget_protectedbase_senderSignalIndex(const VirtualQWidget* self) {
-	return self->senderSignalIndex();
+	return self->QWidget::senderSignalIndex();
 }
 
 int QWidget_protectedbase_receivers(const VirtualQWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWidget::receivers(signal);
 }
 
 bool QWidget_protectedbase_isSignalConnected(const VirtualQWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWidget::isSignalConnected(*signal);
 }
 
 void QWidget_delete(QWidget* self) {

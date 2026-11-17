@@ -1289,55 +1289,55 @@ void QMdiArea_virtualbase_disconnectNotify(VirtualQMdiArea* self, QMetaMethod* s
 }
 
 void QMdiArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQMdiArea* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QMdiArea::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QMdiArea_protectedbase_viewportMargins(const VirtualQMdiArea* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QMdiArea::viewportMargins());
 }
 
 void QMdiArea_protectedbase_drawFrame(VirtualQMdiArea* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QMdiArea::drawFrame(param1);
 }
 
 void QMdiArea_protectedbase_initStyleOption(const VirtualQMdiArea* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QMdiArea::initStyleOption(option);
 }
 
 void QMdiArea_protectedbase_updateMicroFocus(VirtualQMdiArea* self) {
-	self->updateMicroFocus();
+	self->QMdiArea::updateMicroFocus();
 }
 
 void QMdiArea_protectedbase_create(VirtualQMdiArea* self) {
-	self->create();
+	self->QMdiArea::create();
 }
 
 void QMdiArea_protectedbase_destroy(VirtualQMdiArea* self) {
-	self->destroy();
+	self->QMdiArea::destroy();
 }
 
 bool QMdiArea_protectedbase_focusNextChild(VirtualQMdiArea* self) {
-	return self->focusNextChild();
+	return self->QMdiArea::focusNextChild();
 }
 
 bool QMdiArea_protectedbase_focusPreviousChild(VirtualQMdiArea* self) {
-	return self->focusPreviousChild();
+	return self->QMdiArea::focusPreviousChild();
 }
 
 QObject* QMdiArea_protectedbase_sender(const VirtualQMdiArea* self) {
-	return self->sender();
+	return self->QMdiArea::sender();
 }
 
 int QMdiArea_protectedbase_senderSignalIndex(const VirtualQMdiArea* self) {
-	return self->senderSignalIndex();
+	return self->QMdiArea::senderSignalIndex();
 }
 
 int QMdiArea_protectedbase_receivers(const VirtualQMdiArea* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMdiArea::receivers(signal);
 }
 
 bool QMdiArea_protectedbase_isSignalConnected(const VirtualQMdiArea* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMdiArea::isSignalConnected(*signal);
 }
 
 void QMdiArea_delete(QMdiArea* self) {

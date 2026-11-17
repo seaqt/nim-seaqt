@@ -1099,52 +1099,52 @@ void QSlider_virtualbase_disconnectNotify(VirtualQSlider* self, QMetaMethod* sig
 }
 
 void QSlider_protectedbase_initStyleOption(const VirtualQSlider* self, QStyleOptionSlider* option) {
-	self->initStyleOption(option);
+	self->QSlider::initStyleOption(option);
 }
 
 void QSlider_protectedbase_setRepeatAction_action(VirtualQSlider* self, int action) {
-	self->setRepeatAction(static_cast<VirtualQSlider::SliderAction>(action));
+	self->QSlider::setRepeatAction(static_cast<VirtualQSlider::SliderAction>(action));
 }
 
 int QSlider_protectedbase_repeatAction(const VirtualQSlider* self) {
-	VirtualQSlider::SliderAction _ret = self->repeatAction();
+	VirtualQSlider::SliderAction _ret = self->QSlider::repeatAction();
 	return static_cast<int>(_ret);
 }
 
 void QSlider_protectedbase_updateMicroFocus(VirtualQSlider* self) {
-	self->updateMicroFocus();
+	self->QSlider::updateMicroFocus();
 }
 
 void QSlider_protectedbase_create(VirtualQSlider* self) {
-	self->create();
+	self->QSlider::create();
 }
 
 void QSlider_protectedbase_destroy(VirtualQSlider* self) {
-	self->destroy();
+	self->QSlider::destroy();
 }
 
 bool QSlider_protectedbase_focusNextChild(VirtualQSlider* self) {
-	return self->focusNextChild();
+	return self->QSlider::focusNextChild();
 }
 
 bool QSlider_protectedbase_focusPreviousChild(VirtualQSlider* self) {
-	return self->focusPreviousChild();
+	return self->QSlider::focusPreviousChild();
 }
 
 QObject* QSlider_protectedbase_sender(const VirtualQSlider* self) {
-	return self->sender();
+	return self->QSlider::sender();
 }
 
 int QSlider_protectedbase_senderSignalIndex(const VirtualQSlider* self) {
-	return self->senderSignalIndex();
+	return self->QSlider::senderSignalIndex();
 }
 
 int QSlider_protectedbase_receivers(const VirtualQSlider* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSlider::receivers(signal);
 }
 
 bool QSlider_protectedbase_isSignalConnected(const VirtualQSlider* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSlider::isSignalConnected(*signal);
 }
 
 void QSlider_delete(QSlider* self) {

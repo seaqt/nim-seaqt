@@ -898,19 +898,19 @@ void QMediaRecorder_virtualbase_disconnectNotify(VirtualQMediaRecorder* self, QM
 }
 
 QObject* QMediaRecorder_protectedbase_sender(const VirtualQMediaRecorder* self) {
-	return self->sender();
+	return self->QMediaRecorder::sender();
 }
 
 int QMediaRecorder_protectedbase_senderSignalIndex(const VirtualQMediaRecorder* self) {
-	return self->senderSignalIndex();
+	return self->QMediaRecorder::senderSignalIndex();
 }
 
 int QMediaRecorder_protectedbase_receivers(const VirtualQMediaRecorder* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMediaRecorder::receivers(signal);
 }
 
 bool QMediaRecorder_protectedbase_isSignalConnected(const VirtualQMediaRecorder* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMediaRecorder::isSignalConnected(*signal);
 }
 
 void QMediaRecorder_delete(QMediaRecorder* self) {

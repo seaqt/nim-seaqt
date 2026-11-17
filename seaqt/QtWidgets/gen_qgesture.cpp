@@ -358,19 +358,19 @@ void QGesture_virtualbase_disconnectNotify(VirtualQGesture* self, QMetaMethod* s
 }
 
 QObject* QGesture_protectedbase_sender(const VirtualQGesture* self) {
-	return self->sender();
+	return self->QGesture::sender();
 }
 
 int QGesture_protectedbase_senderSignalIndex(const VirtualQGesture* self) {
-	return self->senderSignalIndex();
+	return self->QGesture::senderSignalIndex();
 }
 
 int QGesture_protectedbase_receivers(const VirtualQGesture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGesture::receivers(signal);
 }
 
 bool QGesture_protectedbase_isSignalConnected(const VirtualQGesture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGesture::isSignalConnected(*signal);
 }
 
 void QGesture_delete(QGesture* self) {
@@ -699,19 +699,19 @@ void QPanGesture_virtualbase_disconnectNotify(VirtualQPanGesture* self, QMetaMet
 }
 
 QObject* QPanGesture_protectedbase_sender(const VirtualQPanGesture* self) {
-	return self->sender();
+	return self->QPanGesture::sender();
 }
 
 int QPanGesture_protectedbase_senderSignalIndex(const VirtualQPanGesture* self) {
-	return self->senderSignalIndex();
+	return self->QPanGesture::senderSignalIndex();
 }
 
 int QPanGesture_protectedbase_receivers(const VirtualQPanGesture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPanGesture::receivers(signal);
 }
 
 bool QPanGesture_protectedbase_isSignalConnected(const VirtualQPanGesture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPanGesture::isSignalConnected(*signal);
 }
 
 void QPanGesture_delete(QPanGesture* self) {
@@ -1107,19 +1107,19 @@ void QPinchGesture_virtualbase_disconnectNotify(VirtualQPinchGesture* self, QMet
 }
 
 QObject* QPinchGesture_protectedbase_sender(const VirtualQPinchGesture* self) {
-	return self->sender();
+	return self->QPinchGesture::sender();
 }
 
 int QPinchGesture_protectedbase_senderSignalIndex(const VirtualQPinchGesture* self) {
-	return self->senderSignalIndex();
+	return self->QPinchGesture::senderSignalIndex();
 }
 
 int QPinchGesture_protectedbase_receivers(const VirtualQPinchGesture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPinchGesture::receivers(signal);
 }
 
 bool QPinchGesture_protectedbase_isSignalConnected(const VirtualQPinchGesture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPinchGesture::isSignalConnected(*signal);
 }
 
 void QPinchGesture_delete(QPinchGesture* self) {
@@ -1438,19 +1438,19 @@ void QSwipeGesture_virtualbase_disconnectNotify(VirtualQSwipeGesture* self, QMet
 }
 
 QObject* QSwipeGesture_protectedbase_sender(const VirtualQSwipeGesture* self) {
-	return self->sender();
+	return self->QSwipeGesture::sender();
 }
 
 int QSwipeGesture_protectedbase_senderSignalIndex(const VirtualQSwipeGesture* self) {
-	return self->senderSignalIndex();
+	return self->QSwipeGesture::senderSignalIndex();
 }
 
 int QSwipeGesture_protectedbase_receivers(const VirtualQSwipeGesture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSwipeGesture::receivers(signal);
 }
 
 bool QSwipeGesture_protectedbase_isSignalConnected(const VirtualQSwipeGesture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSwipeGesture::isSignalConnected(*signal);
 }
 
 void QSwipeGesture_delete(QSwipeGesture* self) {
@@ -1758,19 +1758,19 @@ void QTapGesture_virtualbase_disconnectNotify(VirtualQTapGesture* self, QMetaMet
 }
 
 QObject* QTapGesture_protectedbase_sender(const VirtualQTapGesture* self) {
-	return self->sender();
+	return self->QTapGesture::sender();
 }
 
 int QTapGesture_protectedbase_senderSignalIndex(const VirtualQTapGesture* self) {
-	return self->senderSignalIndex();
+	return self->QTapGesture::senderSignalIndex();
 }
 
 int QTapGesture_protectedbase_receivers(const VirtualQTapGesture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTapGesture::receivers(signal);
 }
 
 bool QTapGesture_protectedbase_isSignalConnected(const VirtualQTapGesture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTapGesture::isSignalConnected(*signal);
 }
 
 void QTapGesture_delete(QTapGesture* self) {
@@ -2086,19 +2086,19 @@ void QTapAndHoldGesture_virtualbase_disconnectNotify(VirtualQTapAndHoldGesture* 
 }
 
 QObject* QTapAndHoldGesture_protectedbase_sender(const VirtualQTapAndHoldGesture* self) {
-	return self->sender();
+	return self->QTapAndHoldGesture::sender();
 }
 
 int QTapAndHoldGesture_protectedbase_senderSignalIndex(const VirtualQTapAndHoldGesture* self) {
-	return self->senderSignalIndex();
+	return self->QTapAndHoldGesture::senderSignalIndex();
 }
 
 int QTapAndHoldGesture_protectedbase_receivers(const VirtualQTapAndHoldGesture* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTapAndHoldGesture::receivers(signal);
 }
 
 bool QTapAndHoldGesture_protectedbase_isSignalConnected(const VirtualQTapAndHoldGesture* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTapAndHoldGesture::isSignalConnected(*signal);
 }
 
 void QTapAndHoldGesture_delete(QTapAndHoldGesture* self) {

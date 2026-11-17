@@ -1083,39 +1083,39 @@ void QKeySequenceEdit_virtualbase_disconnectNotify(VirtualQKeySequenceEdit* self
 }
 
 void QKeySequenceEdit_protectedbase_updateMicroFocus(VirtualQKeySequenceEdit* self) {
-	self->updateMicroFocus();
+	self->QKeySequenceEdit::updateMicroFocus();
 }
 
 void QKeySequenceEdit_protectedbase_create(VirtualQKeySequenceEdit* self) {
-	self->create();
+	self->QKeySequenceEdit::create();
 }
 
 void QKeySequenceEdit_protectedbase_destroy(VirtualQKeySequenceEdit* self) {
-	self->destroy();
+	self->QKeySequenceEdit::destroy();
 }
 
 bool QKeySequenceEdit_protectedbase_focusNextChild(VirtualQKeySequenceEdit* self) {
-	return self->focusNextChild();
+	return self->QKeySequenceEdit::focusNextChild();
 }
 
 bool QKeySequenceEdit_protectedbase_focusPreviousChild(VirtualQKeySequenceEdit* self) {
-	return self->focusPreviousChild();
+	return self->QKeySequenceEdit::focusPreviousChild();
 }
 
 QObject* QKeySequenceEdit_protectedbase_sender(const VirtualQKeySequenceEdit* self) {
-	return self->sender();
+	return self->QKeySequenceEdit::sender();
 }
 
 int QKeySequenceEdit_protectedbase_senderSignalIndex(const VirtualQKeySequenceEdit* self) {
-	return self->senderSignalIndex();
+	return self->QKeySequenceEdit::senderSignalIndex();
 }
 
 int QKeySequenceEdit_protectedbase_receivers(const VirtualQKeySequenceEdit* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QKeySequenceEdit::receivers(signal);
 }
 
 bool QKeySequenceEdit_protectedbase_isSignalConnected(const VirtualQKeySequenceEdit* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QKeySequenceEdit::isSignalConnected(*signal);
 }
 
 void QKeySequenceEdit_delete(QKeySequenceEdit* self) {

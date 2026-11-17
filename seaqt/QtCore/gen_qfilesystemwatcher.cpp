@@ -473,19 +473,19 @@ void QFileSystemWatcher_virtualbase_disconnectNotify(VirtualQFileSystemWatcher* 
 }
 
 QObject* QFileSystemWatcher_protectedbase_sender(const VirtualQFileSystemWatcher* self) {
-	return self->sender();
+	return self->QFileSystemWatcher::sender();
 }
 
 int QFileSystemWatcher_protectedbase_senderSignalIndex(const VirtualQFileSystemWatcher* self) {
-	return self->senderSignalIndex();
+	return self->QFileSystemWatcher::senderSignalIndex();
 }
 
 int QFileSystemWatcher_protectedbase_receivers(const VirtualQFileSystemWatcher* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFileSystemWatcher::receivers(signal);
 }
 
 bool QFileSystemWatcher_protectedbase_isSignalConnected(const VirtualQFileSystemWatcher* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFileSystemWatcher::isSignalConnected(*signal);
 }
 
 void QFileSystemWatcher_delete(QFileSystemWatcher* self) {

@@ -1128,19 +1128,19 @@ void QSqlDriver_virtualbase_disconnectNotify(VirtualQSqlDriver* self, QMetaMetho
 }
 
 QObject* QSqlDriver_protectedbase_sender(const VirtualQSqlDriver* self) {
-	return self->sender();
+	return self->QSqlDriver::sender();
 }
 
 int QSqlDriver_protectedbase_senderSignalIndex(const VirtualQSqlDriver* self) {
-	return self->senderSignalIndex();
+	return self->QSqlDriver::senderSignalIndex();
 }
 
 int QSqlDriver_protectedbase_receivers(const VirtualQSqlDriver* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSqlDriver::receivers(signal);
 }
 
 bool QSqlDriver_protectedbase_isSignalConnected(const VirtualQSqlDriver* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSqlDriver::isSignalConnected(*signal);
 }
 
 void QSqlDriver_delete(QSqlDriver* self) {

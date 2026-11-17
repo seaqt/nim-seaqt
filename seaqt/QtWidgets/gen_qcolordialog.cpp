@@ -1256,43 +1256,43 @@ void QColorDialog_virtualbase_disconnectNotify(VirtualQColorDialog* self, QMetaM
 }
 
 void QColorDialog_protectedbase_adjustPosition(VirtualQColorDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QColorDialog::adjustPosition(param1);
 }
 
 void QColorDialog_protectedbase_updateMicroFocus(VirtualQColorDialog* self) {
-	self->updateMicroFocus();
+	self->QColorDialog::updateMicroFocus();
 }
 
 void QColorDialog_protectedbase_create(VirtualQColorDialog* self) {
-	self->create();
+	self->QColorDialog::create();
 }
 
 void QColorDialog_protectedbase_destroy(VirtualQColorDialog* self) {
-	self->destroy();
+	self->QColorDialog::destroy();
 }
 
 bool QColorDialog_protectedbase_focusNextChild(VirtualQColorDialog* self) {
-	return self->focusNextChild();
+	return self->QColorDialog::focusNextChild();
 }
 
 bool QColorDialog_protectedbase_focusPreviousChild(VirtualQColorDialog* self) {
-	return self->focusPreviousChild();
+	return self->QColorDialog::focusPreviousChild();
 }
 
 QObject* QColorDialog_protectedbase_sender(const VirtualQColorDialog* self) {
-	return self->sender();
+	return self->QColorDialog::sender();
 }
 
 int QColorDialog_protectedbase_senderSignalIndex(const VirtualQColorDialog* self) {
-	return self->senderSignalIndex();
+	return self->QColorDialog::senderSignalIndex();
 }
 
 int QColorDialog_protectedbase_receivers(const VirtualQColorDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QColorDialog::receivers(signal);
 }
 
 bool QColorDialog_protectedbase_isSignalConnected(const VirtualQColorDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QColorDialog::isSignalConnected(*signal);
 }
 
 void QColorDialog_delete(QColorDialog* self) {

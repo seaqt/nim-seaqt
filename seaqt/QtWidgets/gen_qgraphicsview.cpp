@@ -1664,55 +1664,55 @@ void QGraphicsView_virtualbase_disconnectNotify(VirtualQGraphicsView* self, QMet
 }
 
 void QGraphicsView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQGraphicsView* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QGraphicsView::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QGraphicsView_protectedbase_viewportMargins(const VirtualQGraphicsView* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QGraphicsView::viewportMargins());
 }
 
 void QGraphicsView_protectedbase_drawFrame(VirtualQGraphicsView* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QGraphicsView::drawFrame(param1);
 }
 
 void QGraphicsView_protectedbase_initStyleOption(const VirtualQGraphicsView* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QGraphicsView::initStyleOption(option);
 }
 
 void QGraphicsView_protectedbase_updateMicroFocus(VirtualQGraphicsView* self) {
-	self->updateMicroFocus();
+	self->QGraphicsView::updateMicroFocus();
 }
 
 void QGraphicsView_protectedbase_create(VirtualQGraphicsView* self) {
-	self->create();
+	self->QGraphicsView::create();
 }
 
 void QGraphicsView_protectedbase_destroy(VirtualQGraphicsView* self) {
-	self->destroy();
+	self->QGraphicsView::destroy();
 }
 
 bool QGraphicsView_protectedbase_focusNextChild(VirtualQGraphicsView* self) {
-	return self->focusNextChild();
+	return self->QGraphicsView::focusNextChild();
 }
 
 bool QGraphicsView_protectedbase_focusPreviousChild(VirtualQGraphicsView* self) {
-	return self->focusPreviousChild();
+	return self->QGraphicsView::focusPreviousChild();
 }
 
 QObject* QGraphicsView_protectedbase_sender(const VirtualQGraphicsView* self) {
-	return self->sender();
+	return self->QGraphicsView::sender();
 }
 
 int QGraphicsView_protectedbase_senderSignalIndex(const VirtualQGraphicsView* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsView::senderSignalIndex();
 }
 
 int QGraphicsView_protectedbase_receivers(const VirtualQGraphicsView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsView::receivers(signal);
 }
 
 bool QGraphicsView_protectedbase_isSignalConnected(const VirtualQGraphicsView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsView::isSignalConnected(*signal);
 }
 
 void QGraphicsView_delete(QGraphicsView* self) {

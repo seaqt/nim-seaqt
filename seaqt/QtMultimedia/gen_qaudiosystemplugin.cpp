@@ -462,19 +462,19 @@ void QAudioSystemPlugin_virtualbase_disconnectNotify(VirtualQAudioSystemPlugin* 
 }
 
 QObject* QAudioSystemPlugin_protectedbase_sender(const VirtualQAudioSystemPlugin* self) {
-	return self->sender();
+	return self->QAudioSystemPlugin::sender();
 }
 
 int QAudioSystemPlugin_protectedbase_senderSignalIndex(const VirtualQAudioSystemPlugin* self) {
-	return self->senderSignalIndex();
+	return self->QAudioSystemPlugin::senderSignalIndex();
 }
 
 int QAudioSystemPlugin_protectedbase_receivers(const VirtualQAudioSystemPlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioSystemPlugin::receivers(signal);
 }
 
 bool QAudioSystemPlugin_protectedbase_isSignalConnected(const VirtualQAudioSystemPlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioSystemPlugin::isSignalConnected(*signal);
 }
 
 void QAudioSystemPlugin_delete(QAudioSystemPlugin* self) {

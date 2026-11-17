@@ -365,19 +365,19 @@ void QWebHistoryInterface_virtualbase_disconnectNotify(VirtualQWebHistoryInterfa
 }
 
 QObject* QWebHistoryInterface_protectedbase_sender(const VirtualQWebHistoryInterface* self) {
-	return self->sender();
+	return self->QWebHistoryInterface::sender();
 }
 
 int QWebHistoryInterface_protectedbase_senderSignalIndex(const VirtualQWebHistoryInterface* self) {
-	return self->senderSignalIndex();
+	return self->QWebHistoryInterface::senderSignalIndex();
 }
 
 int QWebHistoryInterface_protectedbase_receivers(const VirtualQWebHistoryInterface* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebHistoryInterface::receivers(signal);
 }
 
 bool QWebHistoryInterface_protectedbase_isSignalConnected(const VirtualQWebHistoryInterface* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebHistoryInterface::isSignalConnected(*signal);
 }
 
 void QWebHistoryInterface_delete(QWebHistoryInterface* self) {

@@ -337,19 +337,19 @@ void QSqlDriverPlugin_virtualbase_disconnectNotify(VirtualQSqlDriverPlugin* self
 }
 
 QObject* QSqlDriverPlugin_protectedbase_sender(const VirtualQSqlDriverPlugin* self) {
-	return self->sender();
+	return self->QSqlDriverPlugin::sender();
 }
 
 int QSqlDriverPlugin_protectedbase_senderSignalIndex(const VirtualQSqlDriverPlugin* self) {
-	return self->senderSignalIndex();
+	return self->QSqlDriverPlugin::senderSignalIndex();
 }
 
 int QSqlDriverPlugin_protectedbase_receivers(const VirtualQSqlDriverPlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSqlDriverPlugin::receivers(signal);
 }
 
 bool QSqlDriverPlugin_protectedbase_isSignalConnected(const VirtualQSqlDriverPlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSqlDriverPlugin::isSignalConnected(*signal);
 }
 
 void QSqlDriverPlugin_delete(QSqlDriverPlugin* self) {

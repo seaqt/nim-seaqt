@@ -886,19 +886,19 @@ void QStyle_virtualbase_disconnectNotify(VirtualQStyle* self, QMetaMethod* signa
 }
 
 QObject* QStyle_protectedbase_sender(const VirtualQStyle* self) {
-	return self->sender();
+	return self->QStyle::sender();
 }
 
 int QStyle_protectedbase_senderSignalIndex(const VirtualQStyle* self) {
-	return self->senderSignalIndex();
+	return self->QStyle::senderSignalIndex();
 }
 
 int QStyle_protectedbase_receivers(const VirtualQStyle* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QStyle::receivers(signal);
 }
 
 bool QStyle_protectedbase_isSignalConnected(const VirtualQStyle* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QStyle::isSignalConnected(*signal);
 }
 
 void QStyle_delete(QStyle* self) {

@@ -513,19 +513,19 @@ void QSoundEffect_virtualbase_disconnectNotify(VirtualQSoundEffect* self, QMetaM
 }
 
 QObject* QSoundEffect_protectedbase_sender(const VirtualQSoundEffect* self) {
-	return self->sender();
+	return self->QSoundEffect::sender();
 }
 
 int QSoundEffect_protectedbase_senderSignalIndex(const VirtualQSoundEffect* self) {
-	return self->senderSignalIndex();
+	return self->QSoundEffect::senderSignalIndex();
 }
 
 int QSoundEffect_protectedbase_receivers(const VirtualQSoundEffect* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSoundEffect::receivers(signal);
 }
 
 bool QSoundEffect_protectedbase_isSignalConnected(const VirtualQSoundEffect* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSoundEffect::isSignalConnected(*signal);
 }
 
 void QSoundEffect_delete(QSoundEffect* self) {

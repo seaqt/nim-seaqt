@@ -362,19 +362,19 @@ void QDtlsClientVerifier_virtualbase_disconnectNotify(VirtualQDtlsClientVerifier
 }
 
 QObject* QDtlsClientVerifier_protectedbase_sender(const VirtualQDtlsClientVerifier* self) {
-	return self->sender();
+	return self->QDtlsClientVerifier::sender();
 }
 
 int QDtlsClientVerifier_protectedbase_senderSignalIndex(const VirtualQDtlsClientVerifier* self) {
-	return self->senderSignalIndex();
+	return self->QDtlsClientVerifier::senderSignalIndex();
 }
 
 int QDtlsClientVerifier_protectedbase_receivers(const VirtualQDtlsClientVerifier* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDtlsClientVerifier::receivers(signal);
 }
 
 bool QDtlsClientVerifier_protectedbase_isSignalConnected(const VirtualQDtlsClientVerifier* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDtlsClientVerifier::isSignalConnected(*signal);
 }
 
 void QDtlsClientVerifier_delete(QDtlsClientVerifier* self) {
@@ -857,19 +857,19 @@ void QDtls_virtualbase_disconnectNotify(VirtualQDtls* self, QMetaMethod* signal)
 }
 
 QObject* QDtls_protectedbase_sender(const VirtualQDtls* self) {
-	return self->sender();
+	return self->QDtls::sender();
 }
 
 int QDtls_protectedbase_senderSignalIndex(const VirtualQDtls* self) {
-	return self->senderSignalIndex();
+	return self->QDtls::senderSignalIndex();
 }
 
 int QDtls_protectedbase_receivers(const VirtualQDtls* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDtls::receivers(signal);
 }
 
 bool QDtls_protectedbase_isSignalConnected(const VirtualQDtls* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDtls::isSignalConnected(*signal);
 }
 
 void QDtls_delete(QDtls* self) {

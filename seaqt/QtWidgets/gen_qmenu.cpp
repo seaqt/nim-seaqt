@@ -1312,47 +1312,47 @@ void QMenu_virtualbase_disconnectNotify(VirtualQMenu* self, QMetaMethod* signal)
 }
 
 int QMenu_protectedbase_columnCount(const VirtualQMenu* self) {
-	return self->columnCount();
+	return self->QMenu::columnCount();
 }
 
 void QMenu_protectedbase_initStyleOption(const VirtualQMenu* self, QStyleOptionMenuItem* option, QAction* action) {
-	self->initStyleOption(option, action);
+	self->QMenu::initStyleOption(option, action);
 }
 
 void QMenu_protectedbase_updateMicroFocus(VirtualQMenu* self) {
-	self->updateMicroFocus();
+	self->QMenu::updateMicroFocus();
 }
 
 void QMenu_protectedbase_create(VirtualQMenu* self) {
-	self->create();
+	self->QMenu::create();
 }
 
 void QMenu_protectedbase_destroy(VirtualQMenu* self) {
-	self->destroy();
+	self->QMenu::destroy();
 }
 
 bool QMenu_protectedbase_focusNextChild(VirtualQMenu* self) {
-	return self->focusNextChild();
+	return self->QMenu::focusNextChild();
 }
 
 bool QMenu_protectedbase_focusPreviousChild(VirtualQMenu* self) {
-	return self->focusPreviousChild();
+	return self->QMenu::focusPreviousChild();
 }
 
 QObject* QMenu_protectedbase_sender(const VirtualQMenu* self) {
-	return self->sender();
+	return self->QMenu::sender();
 }
 
 int QMenu_protectedbase_senderSignalIndex(const VirtualQMenu* self) {
-	return self->senderSignalIndex();
+	return self->QMenu::senderSignalIndex();
 }
 
 int QMenu_protectedbase_receivers(const VirtualQMenu* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMenu::receivers(signal);
 }
 
 bool QMenu_protectedbase_isSignalConnected(const VirtualQMenu* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMenu::isSignalConnected(*signal);
 }
 
 void QMenu_delete(QMenu* self) {

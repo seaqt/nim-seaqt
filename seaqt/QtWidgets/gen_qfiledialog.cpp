@@ -2185,43 +2185,43 @@ void QFileDialog_virtualbase_disconnectNotify(VirtualQFileDialog* self, QMetaMet
 }
 
 void QFileDialog_protectedbase_adjustPosition(VirtualQFileDialog* self, QWidget* param1) {
-	self->adjustPosition(param1);
+	self->QFileDialog::adjustPosition(param1);
 }
 
 void QFileDialog_protectedbase_updateMicroFocus(VirtualQFileDialog* self) {
-	self->updateMicroFocus();
+	self->QFileDialog::updateMicroFocus();
 }
 
 void QFileDialog_protectedbase_create(VirtualQFileDialog* self) {
-	self->create();
+	self->QFileDialog::create();
 }
 
 void QFileDialog_protectedbase_destroy(VirtualQFileDialog* self) {
-	self->destroy();
+	self->QFileDialog::destroy();
 }
 
 bool QFileDialog_protectedbase_focusNextChild(VirtualQFileDialog* self) {
-	return self->focusNextChild();
+	return self->QFileDialog::focusNextChild();
 }
 
 bool QFileDialog_protectedbase_focusPreviousChild(VirtualQFileDialog* self) {
-	return self->focusPreviousChild();
+	return self->QFileDialog::focusPreviousChild();
 }
 
 QObject* QFileDialog_protectedbase_sender(const VirtualQFileDialog* self) {
-	return self->sender();
+	return self->QFileDialog::sender();
 }
 
 int QFileDialog_protectedbase_senderSignalIndex(const VirtualQFileDialog* self) {
-	return self->senderSignalIndex();
+	return self->QFileDialog::senderSignalIndex();
 }
 
 int QFileDialog_protectedbase_receivers(const VirtualQFileDialog* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFileDialog::receivers(signal);
 }
 
 bool QFileDialog_protectedbase_isSignalConnected(const VirtualQFileDialog* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFileDialog::isSignalConnected(*signal);
 }
 
 void QFileDialog_delete(QFileDialog* self) {

@@ -488,19 +488,19 @@ void QTimeLine_virtualbase_disconnectNotify(VirtualQTimeLine* self, QMetaMethod*
 }
 
 QObject* QTimeLine_protectedbase_sender(const VirtualQTimeLine* self) {
-	return self->sender();
+	return self->QTimeLine::sender();
 }
 
 int QTimeLine_protectedbase_senderSignalIndex(const VirtualQTimeLine* self) {
-	return self->senderSignalIndex();
+	return self->QTimeLine::senderSignalIndex();
 }
 
 int QTimeLine_protectedbase_receivers(const VirtualQTimeLine* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTimeLine::receivers(signal);
 }
 
 bool QTimeLine_protectedbase_isSignalConnected(const VirtualQTimeLine* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTimeLine::isSignalConnected(*signal);
 }
 
 void QTimeLine_delete(QTimeLine* self) {

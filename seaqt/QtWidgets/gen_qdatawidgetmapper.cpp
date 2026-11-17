@@ -459,19 +459,19 @@ void QDataWidgetMapper_virtualbase_disconnectNotify(VirtualQDataWidgetMapper* se
 }
 
 QObject* QDataWidgetMapper_protectedbase_sender(const VirtualQDataWidgetMapper* self) {
-	return self->sender();
+	return self->QDataWidgetMapper::sender();
 }
 
 int QDataWidgetMapper_protectedbase_senderSignalIndex(const VirtualQDataWidgetMapper* self) {
-	return self->senderSignalIndex();
+	return self->QDataWidgetMapper::senderSignalIndex();
 }
 
 int QDataWidgetMapper_protectedbase_receivers(const VirtualQDataWidgetMapper* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDataWidgetMapper::receivers(signal);
 }
 
 bool QDataWidgetMapper_protectedbase_isSignalConnected(const VirtualQDataWidgetMapper* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDataWidgetMapper::isSignalConnected(*signal);
 }
 
 void QDataWidgetMapper_delete(QDataWidgetMapper* self) {

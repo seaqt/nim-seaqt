@@ -787,23 +787,23 @@ void QItemSelectionModel_virtualbase_disconnectNotify(VirtualQItemSelectionModel
 }
 
 void QItemSelectionModel_protectedbase_emitSelectionChanged(VirtualQItemSelectionModel* self, QItemSelection* newSelection, QItemSelection* oldSelection) {
-	self->emitSelectionChanged(*newSelection, *oldSelection);
+	self->QItemSelectionModel::emitSelectionChanged(*newSelection, *oldSelection);
 }
 
 QObject* QItemSelectionModel_protectedbase_sender(const VirtualQItemSelectionModel* self) {
-	return self->sender();
+	return self->QItemSelectionModel::sender();
 }
 
 int QItemSelectionModel_protectedbase_senderSignalIndex(const VirtualQItemSelectionModel* self) {
-	return self->senderSignalIndex();
+	return self->QItemSelectionModel::senderSignalIndex();
 }
 
 int QItemSelectionModel_protectedbase_receivers(const VirtualQItemSelectionModel* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QItemSelectionModel::receivers(signal);
 }
 
 bool QItemSelectionModel_protectedbase_isSignalConnected(const VirtualQItemSelectionModel* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QItemSelectionModel::isSignalConnected(*signal);
 }
 
 void QItemSelectionModel_delete(QItemSelectionModel* self) {

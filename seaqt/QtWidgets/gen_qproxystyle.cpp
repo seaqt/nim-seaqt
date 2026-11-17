@@ -955,19 +955,19 @@ void QProxyStyle_virtualbase_disconnectNotify(VirtualQProxyStyle* self, QMetaMet
 }
 
 QObject* QProxyStyle_protectedbase_sender(const VirtualQProxyStyle* self) {
-	return self->sender();
+	return self->QProxyStyle::sender();
 }
 
 int QProxyStyle_protectedbase_senderSignalIndex(const VirtualQProxyStyle* self) {
-	return self->senderSignalIndex();
+	return self->QProxyStyle::senderSignalIndex();
 }
 
 int QProxyStyle_protectedbase_receivers(const VirtualQProxyStyle* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QProxyStyle::receivers(signal);
 }
 
 bool QProxyStyle_protectedbase_isSignalConnected(const VirtualQProxyStyle* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QProxyStyle::isSignalConnected(*signal);
 }
 
 void QProxyStyle_delete(QProxyStyle* self) {

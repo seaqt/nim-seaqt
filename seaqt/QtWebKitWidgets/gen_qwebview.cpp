@@ -1379,39 +1379,39 @@ void QWebView_virtualbase_disconnectNotify(VirtualQWebView* self, QMetaMethod* s
 }
 
 void QWebView_protectedbase_updateMicroFocus(VirtualQWebView* self) {
-	self->updateMicroFocus();
+	self->QWebView::updateMicroFocus();
 }
 
 void QWebView_protectedbase_create(VirtualQWebView* self) {
-	self->create();
+	self->QWebView::create();
 }
 
 void QWebView_protectedbase_destroy(VirtualQWebView* self) {
-	self->destroy();
+	self->QWebView::destroy();
 }
 
 bool QWebView_protectedbase_focusNextChild(VirtualQWebView* self) {
-	return self->focusNextChild();
+	return self->QWebView::focusNextChild();
 }
 
 bool QWebView_protectedbase_focusPreviousChild(VirtualQWebView* self) {
-	return self->focusPreviousChild();
+	return self->QWebView::focusPreviousChild();
 }
 
 QObject* QWebView_protectedbase_sender(const VirtualQWebView* self) {
-	return self->sender();
+	return self->QWebView::sender();
 }
 
 int QWebView_protectedbase_senderSignalIndex(const VirtualQWebView* self) {
-	return self->senderSignalIndex();
+	return self->QWebView::senderSignalIndex();
 }
 
 int QWebView_protectedbase_receivers(const VirtualQWebView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebView::receivers(signal);
 }
 
 bool QWebView_protectedbase_isSignalConnected(const VirtualQWebView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebView::isSignalConnected(*signal);
 }
 
 void QWebView_delete(QWebView* self) {

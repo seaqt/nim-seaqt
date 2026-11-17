@@ -567,19 +567,19 @@ void QGraphicsItemAnimation_virtualbase_disconnectNotify(VirtualQGraphicsItemAni
 }
 
 QObject* QGraphicsItemAnimation_protectedbase_sender(const VirtualQGraphicsItemAnimation* self) {
-	return self->sender();
+	return self->QGraphicsItemAnimation::sender();
 }
 
 int QGraphicsItemAnimation_protectedbase_senderSignalIndex(const VirtualQGraphicsItemAnimation* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsItemAnimation::senderSignalIndex();
 }
 
 int QGraphicsItemAnimation_protectedbase_receivers(const VirtualQGraphicsItemAnimation* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsItemAnimation::receivers(signal);
 }
 
 bool QGraphicsItemAnimation_protectedbase_isSignalConnected(const VirtualQGraphicsItemAnimation* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsItemAnimation::isSignalConnected(*signal);
 }
 
 void QGraphicsItemAnimation_delete(QGraphicsItemAnimation* self) {

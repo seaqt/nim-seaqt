@@ -385,19 +385,19 @@ void QQuickTextureFactory_virtualbase_disconnectNotify(VirtualQQuickTextureFacto
 }
 
 QObject* QQuickTextureFactory_protectedbase_sender(const VirtualQQuickTextureFactory* self) {
-	return self->sender();
+	return self->QQuickTextureFactory::sender();
 }
 
 int QQuickTextureFactory_protectedbase_senderSignalIndex(const VirtualQQuickTextureFactory* self) {
-	return self->senderSignalIndex();
+	return self->QQuickTextureFactory::senderSignalIndex();
 }
 
 int QQuickTextureFactory_protectedbase_receivers(const VirtualQQuickTextureFactory* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickTextureFactory::receivers(signal);
 }
 
 bool QQuickTextureFactory_protectedbase_isSignalConnected(const VirtualQQuickTextureFactory* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickTextureFactory::isSignalConnected(*signal);
 }
 
 void QQuickTextureFactory_delete(QQuickTextureFactory* self) {
@@ -770,19 +770,19 @@ void QQuickImageResponse_virtualbase_disconnectNotify(VirtualQQuickImageResponse
 }
 
 QObject* QQuickImageResponse_protectedbase_sender(const VirtualQQuickImageResponse* self) {
-	return self->sender();
+	return self->QQuickImageResponse::sender();
 }
 
 int QQuickImageResponse_protectedbase_senderSignalIndex(const VirtualQQuickImageResponse* self) {
-	return self->senderSignalIndex();
+	return self->QQuickImageResponse::senderSignalIndex();
 }
 
 int QQuickImageResponse_protectedbase_receivers(const VirtualQQuickImageResponse* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickImageResponse::receivers(signal);
 }
 
 bool QQuickImageResponse_protectedbase_isSignalConnected(const VirtualQQuickImageResponse* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickImageResponse::isSignalConnected(*signal);
 }
 
 void QQuickImageResponse_delete(QQuickImageResponse* self) {

@@ -2192,117 +2192,117 @@ void QAbstractItemView_virtualbase_disconnectNotify(VirtualQAbstractItemView* se
 }
 
 void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(VirtualQAbstractItemView* self, int steps) {
-	self->setHorizontalStepsPerItem(static_cast<int>(steps));
+	self->QAbstractItemView::setHorizontalStepsPerItem(static_cast<int>(steps));
 }
 
 int QAbstractItemView_protectedbase_horizontalStepsPerItem(const VirtualQAbstractItemView* self) {
-	return self->horizontalStepsPerItem();
+	return self->QAbstractItemView::horizontalStepsPerItem();
 }
 
 void QAbstractItemView_protectedbase_setVerticalStepsPerItem(VirtualQAbstractItemView* self, int steps) {
-	self->setVerticalStepsPerItem(static_cast<int>(steps));
+	self->QAbstractItemView::setVerticalStepsPerItem(static_cast<int>(steps));
 }
 
 int QAbstractItemView_protectedbase_verticalStepsPerItem(const VirtualQAbstractItemView* self) {
-	return self->verticalStepsPerItem();
+	return self->QAbstractItemView::verticalStepsPerItem();
 }
 
 int QAbstractItemView_protectedbase_state(const VirtualQAbstractItemView* self) {
-	VirtualQAbstractItemView::State _ret = self->state();
+	VirtualQAbstractItemView::State _ret = self->QAbstractItemView::state();
 	return static_cast<int>(_ret);
 }
 
 void QAbstractItemView_protectedbase_setState(VirtualQAbstractItemView* self, int state) {
-	self->setState(static_cast<VirtualQAbstractItemView::State>(state));
+	self->QAbstractItemView::setState(static_cast<VirtualQAbstractItemView::State>(state));
 }
 
 void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(VirtualQAbstractItemView* self) {
-	self->scheduleDelayedItemsLayout();
+	self->QAbstractItemView::scheduleDelayedItemsLayout();
 }
 
 void QAbstractItemView_protectedbase_executeDelayedItemsLayout(VirtualQAbstractItemView* self) {
-	self->executeDelayedItemsLayout();
+	self->QAbstractItemView::executeDelayedItemsLayout();
 }
 
 void QAbstractItemView_protectedbase_setDirtyRegion(VirtualQAbstractItemView* self, QRegion* region) {
-	self->setDirtyRegion(*region);
+	self->QAbstractItemView::setDirtyRegion(*region);
 }
 
 void QAbstractItemView_protectedbase_scrollDirtyRegion(VirtualQAbstractItemView* self, int dx, int dy) {
-	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
+	self->QAbstractItemView::scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
 QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(const VirtualQAbstractItemView* self) {
-	return new QPoint(self->dirtyRegionOffset());
+	return new QPoint(self->QAbstractItemView::dirtyRegionOffset());
 }
 
 void QAbstractItemView_protectedbase_startAutoScroll(VirtualQAbstractItemView* self) {
-	self->startAutoScroll();
+	self->QAbstractItemView::startAutoScroll();
 }
 
 void QAbstractItemView_protectedbase_stopAutoScroll(VirtualQAbstractItemView* self) {
-	self->stopAutoScroll();
+	self->QAbstractItemView::stopAutoScroll();
 }
 
 void QAbstractItemView_protectedbase_doAutoScroll(VirtualQAbstractItemView* self) {
-	self->doAutoScroll();
+	self->QAbstractItemView::doAutoScroll();
 }
 
 int QAbstractItemView_protectedbase_dropIndicatorPosition(const VirtualQAbstractItemView* self) {
-	VirtualQAbstractItemView::DropIndicatorPosition _ret = self->dropIndicatorPosition();
+	VirtualQAbstractItemView::DropIndicatorPosition _ret = self->QAbstractItemView::dropIndicatorPosition();
 	return static_cast<int>(_ret);
 }
 
 void QAbstractItemView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQAbstractItemView* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QAbstractItemView::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QAbstractItemView_protectedbase_viewportMargins(const VirtualQAbstractItemView* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QAbstractItemView::viewportMargins());
 }
 
 void QAbstractItemView_protectedbase_drawFrame(VirtualQAbstractItemView* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QAbstractItemView::drawFrame(param1);
 }
 
 void QAbstractItemView_protectedbase_initStyleOption(const VirtualQAbstractItemView* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QAbstractItemView::initStyleOption(option);
 }
 
 void QAbstractItemView_protectedbase_updateMicroFocus(VirtualQAbstractItemView* self) {
-	self->updateMicroFocus();
+	self->QAbstractItemView::updateMicroFocus();
 }
 
 void QAbstractItemView_protectedbase_create(VirtualQAbstractItemView* self) {
-	self->create();
+	self->QAbstractItemView::create();
 }
 
 void QAbstractItemView_protectedbase_destroy(VirtualQAbstractItemView* self) {
-	self->destroy();
+	self->QAbstractItemView::destroy();
 }
 
 bool QAbstractItemView_protectedbase_focusNextChild(VirtualQAbstractItemView* self) {
-	return self->focusNextChild();
+	return self->QAbstractItemView::focusNextChild();
 }
 
 bool QAbstractItemView_protectedbase_focusPreviousChild(VirtualQAbstractItemView* self) {
-	return self->focusPreviousChild();
+	return self->QAbstractItemView::focusPreviousChild();
 }
 
 QObject* QAbstractItemView_protectedbase_sender(const VirtualQAbstractItemView* self) {
-	return self->sender();
+	return self->QAbstractItemView::sender();
 }
 
 int QAbstractItemView_protectedbase_senderSignalIndex(const VirtualQAbstractItemView* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractItemView::senderSignalIndex();
 }
 
 int QAbstractItemView_protectedbase_receivers(const VirtualQAbstractItemView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractItemView::receivers(signal);
 }
 
 bool QAbstractItemView_protectedbase_isSignalConnected(const VirtualQAbstractItemView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractItemView::isSignalConnected(*signal);
 }
 
 void QAbstractItemView_delete(QAbstractItemView* self) {

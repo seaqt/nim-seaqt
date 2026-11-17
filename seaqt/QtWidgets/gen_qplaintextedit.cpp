@@ -1708,79 +1708,79 @@ void QPlainTextEdit_virtualbase_disconnectNotify(VirtualQPlainTextEdit* self, QM
 }
 
 QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(const VirtualQPlainTextEdit* self) {
-	return new QTextBlock(self->firstVisibleBlock());
+	return new QTextBlock(self->QPlainTextEdit::firstVisibleBlock());
 }
 
 QPointF* QPlainTextEdit_protectedbase_contentOffset(const VirtualQPlainTextEdit* self) {
-	return new QPointF(self->contentOffset());
+	return new QPointF(self->QPlainTextEdit::contentOffset());
 }
 
 QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(const VirtualQPlainTextEdit* self, QTextBlock* block) {
-	return new QRectF(self->blockBoundingRect(*block));
+	return new QRectF(self->QPlainTextEdit::blockBoundingRect(*block));
 }
 
 QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(const VirtualQPlainTextEdit* self, QTextBlock* block) {
-	return new QRectF(self->blockBoundingGeometry(*block));
+	return new QRectF(self->QPlainTextEdit::blockBoundingGeometry(*block));
 }
 
 QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(const VirtualQPlainTextEdit* self) {
-	return new QAbstractTextDocumentLayout::PaintContext(self->getPaintContext());
+	return new QAbstractTextDocumentLayout::PaintContext(self->QPlainTextEdit::getPaintContext());
 }
 
 void QPlainTextEdit_protectedbase_zoomInF(VirtualQPlainTextEdit* self, float range) {
-	self->zoomInF(static_cast<float>(range));
+	self->QPlainTextEdit::zoomInF(static_cast<float>(range));
 }
 
 void QPlainTextEdit_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQPlainTextEdit* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QPlainTextEdit::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QPlainTextEdit_protectedbase_viewportMargins(const VirtualQPlainTextEdit* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QPlainTextEdit::viewportMargins());
 }
 
 void QPlainTextEdit_protectedbase_drawFrame(VirtualQPlainTextEdit* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QPlainTextEdit::drawFrame(param1);
 }
 
 void QPlainTextEdit_protectedbase_initStyleOption(const VirtualQPlainTextEdit* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QPlainTextEdit::initStyleOption(option);
 }
 
 void QPlainTextEdit_protectedbase_updateMicroFocus(VirtualQPlainTextEdit* self) {
-	self->updateMicroFocus();
+	self->QPlainTextEdit::updateMicroFocus();
 }
 
 void QPlainTextEdit_protectedbase_create(VirtualQPlainTextEdit* self) {
-	self->create();
+	self->QPlainTextEdit::create();
 }
 
 void QPlainTextEdit_protectedbase_destroy(VirtualQPlainTextEdit* self) {
-	self->destroy();
+	self->QPlainTextEdit::destroy();
 }
 
 bool QPlainTextEdit_protectedbase_focusNextChild(VirtualQPlainTextEdit* self) {
-	return self->focusNextChild();
+	return self->QPlainTextEdit::focusNextChild();
 }
 
 bool QPlainTextEdit_protectedbase_focusPreviousChild(VirtualQPlainTextEdit* self) {
-	return self->focusPreviousChild();
+	return self->QPlainTextEdit::focusPreviousChild();
 }
 
 QObject* QPlainTextEdit_protectedbase_sender(const VirtualQPlainTextEdit* self) {
-	return self->sender();
+	return self->QPlainTextEdit::sender();
 }
 
 int QPlainTextEdit_protectedbase_senderSignalIndex(const VirtualQPlainTextEdit* self) {
-	return self->senderSignalIndex();
+	return self->QPlainTextEdit::senderSignalIndex();
 }
 
 int QPlainTextEdit_protectedbase_receivers(const VirtualQPlainTextEdit* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPlainTextEdit::receivers(signal);
 }
 
 bool QPlainTextEdit_protectedbase_isSignalConnected(const VirtualQPlainTextEdit* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPlainTextEdit::isSignalConnected(*signal);
 }
 
 void QPlainTextEdit_delete(QPlainTextEdit* self) {
@@ -2317,27 +2317,27 @@ void QPlainTextDocumentLayout_virtualbase_disconnectNotify(VirtualQPlainTextDocu
 }
 
 int QPlainTextDocumentLayout_protectedbase_formatIndex(VirtualQPlainTextDocumentLayout* self, int pos) {
-	return self->formatIndex(static_cast<int>(pos));
+	return self->QPlainTextDocumentLayout::formatIndex(static_cast<int>(pos));
 }
 
 QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(VirtualQPlainTextDocumentLayout* self, int pos) {
-	return new QTextCharFormat(self->format(static_cast<int>(pos)));
+	return new QTextCharFormat(self->QPlainTextDocumentLayout::format(static_cast<int>(pos)));
 }
 
 QObject* QPlainTextDocumentLayout_protectedbase_sender(const VirtualQPlainTextDocumentLayout* self) {
-	return self->sender();
+	return self->QPlainTextDocumentLayout::sender();
 }
 
 int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQPlainTextDocumentLayout* self) {
-	return self->senderSignalIndex();
+	return self->QPlainTextDocumentLayout::senderSignalIndex();
 }
 
 int QPlainTextDocumentLayout_protectedbase_receivers(const VirtualQPlainTextDocumentLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPlainTextDocumentLayout::receivers(signal);
 }
 
 bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQPlainTextDocumentLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPlainTextDocumentLayout::isSignalConnected(*signal);
 }
 
 void QPlainTextDocumentLayout_delete(QPlainTextDocumentLayout* self) {

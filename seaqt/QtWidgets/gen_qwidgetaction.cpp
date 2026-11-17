@@ -362,7 +362,7 @@ void QWidgetAction_virtualbase_disconnectNotify(VirtualQWidgetAction* self, QMet
 }
 
 struct seaqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets(const VirtualQWidgetAction* self) {
-	QList<QWidget *> _ret = self->createdWidgets();
+	QList<QWidget *> _ret = self->QWidgetAction::createdWidgets();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QWidget** _arr = static_cast<QWidget**>(malloc(sizeof(QWidget*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -375,19 +375,19 @@ struct seaqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets
 }
 
 QObject* QWidgetAction_protectedbase_sender(const VirtualQWidgetAction* self) {
-	return self->sender();
+	return self->QWidgetAction::sender();
 }
 
 int QWidgetAction_protectedbase_senderSignalIndex(const VirtualQWidgetAction* self) {
-	return self->senderSignalIndex();
+	return self->QWidgetAction::senderSignalIndex();
 }
 
 int QWidgetAction_protectedbase_receivers(const VirtualQWidgetAction* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWidgetAction::receivers(signal);
 }
 
 bool QWidgetAction_protectedbase_isSignalConnected(const VirtualQWidgetAction* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWidgetAction::isSignalConnected(*signal);
 }
 
 void QWidgetAction_delete(QWidgetAction* self) {

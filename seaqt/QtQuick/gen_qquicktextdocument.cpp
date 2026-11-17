@@ -314,19 +314,19 @@ void QQuickTextDocument_virtualbase_disconnectNotify(VirtualQQuickTextDocument* 
 }
 
 QObject* QQuickTextDocument_protectedbase_sender(const VirtualQQuickTextDocument* self) {
-	return self->sender();
+	return self->QQuickTextDocument::sender();
 }
 
 int QQuickTextDocument_protectedbase_senderSignalIndex(const VirtualQQuickTextDocument* self) {
-	return self->senderSignalIndex();
+	return self->QQuickTextDocument::senderSignalIndex();
 }
 
 int QQuickTextDocument_protectedbase_receivers(const VirtualQQuickTextDocument* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickTextDocument::receivers(signal);
 }
 
 bool QQuickTextDocument_protectedbase_isSignalConnected(const VirtualQQuickTextDocument* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickTextDocument::isSignalConnected(*signal);
 }
 
 void QQuickTextDocument_delete(QQuickTextDocument* self) {

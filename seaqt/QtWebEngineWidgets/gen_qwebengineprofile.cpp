@@ -594,19 +594,19 @@ void QWebEngineProfile_virtualbase_disconnectNotify(VirtualQWebEngineProfile* se
 }
 
 QObject* QWebEngineProfile_protectedbase_sender(const VirtualQWebEngineProfile* self) {
-	return self->sender();
+	return self->QWebEngineProfile::sender();
 }
 
 int QWebEngineProfile_protectedbase_senderSignalIndex(const VirtualQWebEngineProfile* self) {
-	return self->senderSignalIndex();
+	return self->QWebEngineProfile::senderSignalIndex();
 }
 
 int QWebEngineProfile_protectedbase_receivers(const VirtualQWebEngineProfile* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebEngineProfile::receivers(signal);
 }
 
 bool QWebEngineProfile_protectedbase_isSignalConnected(const VirtualQWebEngineProfile* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebEngineProfile::isSignalConnected(*signal);
 }
 
 void QWebEngineProfile_delete(QWebEngineProfile* self) {

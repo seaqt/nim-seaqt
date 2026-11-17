@@ -1095,52 +1095,52 @@ void QDial_virtualbase_disconnectNotify(VirtualQDial* self, QMetaMethod* signal)
 }
 
 void QDial_protectedbase_initStyleOption(const VirtualQDial* self, QStyleOptionSlider* option) {
-	self->initStyleOption(option);
+	self->QDial::initStyleOption(option);
 }
 
 void QDial_protectedbase_setRepeatAction_action(VirtualQDial* self, int action) {
-	self->setRepeatAction(static_cast<VirtualQDial::SliderAction>(action));
+	self->QDial::setRepeatAction(static_cast<VirtualQDial::SliderAction>(action));
 }
 
 int QDial_protectedbase_repeatAction(const VirtualQDial* self) {
-	VirtualQDial::SliderAction _ret = self->repeatAction();
+	VirtualQDial::SliderAction _ret = self->QDial::repeatAction();
 	return static_cast<int>(_ret);
 }
 
 void QDial_protectedbase_updateMicroFocus(VirtualQDial* self) {
-	self->updateMicroFocus();
+	self->QDial::updateMicroFocus();
 }
 
 void QDial_protectedbase_create(VirtualQDial* self) {
-	self->create();
+	self->QDial::create();
 }
 
 void QDial_protectedbase_destroy(VirtualQDial* self) {
-	self->destroy();
+	self->QDial::destroy();
 }
 
 bool QDial_protectedbase_focusNextChild(VirtualQDial* self) {
-	return self->focusNextChild();
+	return self->QDial::focusNextChild();
 }
 
 bool QDial_protectedbase_focusPreviousChild(VirtualQDial* self) {
-	return self->focusPreviousChild();
+	return self->QDial::focusPreviousChild();
 }
 
 QObject* QDial_protectedbase_sender(const VirtualQDial* self) {
-	return self->sender();
+	return self->QDial::sender();
 }
 
 int QDial_protectedbase_senderSignalIndex(const VirtualQDial* self) {
-	return self->senderSignalIndex();
+	return self->QDial::senderSignalIndex();
 }
 
 int QDial_protectedbase_receivers(const VirtualQDial* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDial::receivers(signal);
 }
 
 bool QDial_protectedbase_isSignalConnected(const VirtualQDial* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDial::isSignalConnected(*signal);
 }
 
 void QDial_delete(QDial* self) {

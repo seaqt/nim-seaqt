@@ -661,19 +661,19 @@ void QScriptEngine_virtualbase_disconnectNotify(VirtualQScriptEngine* self, QMet
 }
 
 QObject* QScriptEngine_protectedbase_sender(const VirtualQScriptEngine* self) {
-	return self->sender();
+	return self->QScriptEngine::sender();
 }
 
 int QScriptEngine_protectedbase_senderSignalIndex(const VirtualQScriptEngine* self) {
-	return self->senderSignalIndex();
+	return self->QScriptEngine::senderSignalIndex();
 }
 
 int QScriptEngine_protectedbase_receivers(const VirtualQScriptEngine* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QScriptEngine::receivers(signal);
 }
 
 bool QScriptEngine_protectedbase_isSignalConnected(const VirtualQScriptEngine* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QScriptEngine::isSignalConnected(*signal);
 }
 
 void QScriptEngine_delete(QScriptEngine* self) {

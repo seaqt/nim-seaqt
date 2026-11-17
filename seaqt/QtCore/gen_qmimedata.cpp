@@ -548,19 +548,19 @@ void QMimeData_virtualbase_disconnectNotify(VirtualQMimeData* self, QMetaMethod*
 }
 
 QObject* QMimeData_protectedbase_sender(const VirtualQMimeData* self) {
-	return self->sender();
+	return self->QMimeData::sender();
 }
 
 int QMimeData_protectedbase_senderSignalIndex(const VirtualQMimeData* self) {
-	return self->senderSignalIndex();
+	return self->QMimeData::senderSignalIndex();
 }
 
 int QMimeData_protectedbase_receivers(const VirtualQMimeData* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMimeData::receivers(signal);
 }
 
 bool QMimeData_protectedbase_isSignalConnected(const VirtualQMimeData* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMimeData::isSignalConnected(*signal);
 }
 
 void QMimeData_delete(QMimeData* self) {

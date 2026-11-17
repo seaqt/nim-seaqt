@@ -1125,47 +1125,47 @@ void QStatusBar_virtualbase_disconnectNotify(VirtualQStatusBar* self, QMetaMetho
 }
 
 void QStatusBar_protectedbase_reformat(VirtualQStatusBar* self) {
-	self->reformat();
+	self->QStatusBar::reformat();
 }
 
 void QStatusBar_protectedbase_hideOrShow(VirtualQStatusBar* self) {
-	self->hideOrShow();
+	self->QStatusBar::hideOrShow();
 }
 
 void QStatusBar_protectedbase_updateMicroFocus(VirtualQStatusBar* self) {
-	self->updateMicroFocus();
+	self->QStatusBar::updateMicroFocus();
 }
 
 void QStatusBar_protectedbase_create(VirtualQStatusBar* self) {
-	self->create();
+	self->QStatusBar::create();
 }
 
 void QStatusBar_protectedbase_destroy(VirtualQStatusBar* self) {
-	self->destroy();
+	self->QStatusBar::destroy();
 }
 
 bool QStatusBar_protectedbase_focusNextChild(VirtualQStatusBar* self) {
-	return self->focusNextChild();
+	return self->QStatusBar::focusNextChild();
 }
 
 bool QStatusBar_protectedbase_focusPreviousChild(VirtualQStatusBar* self) {
-	return self->focusPreviousChild();
+	return self->QStatusBar::focusPreviousChild();
 }
 
 QObject* QStatusBar_protectedbase_sender(const VirtualQStatusBar* self) {
-	return self->sender();
+	return self->QStatusBar::sender();
 }
 
 int QStatusBar_protectedbase_senderSignalIndex(const VirtualQStatusBar* self) {
-	return self->senderSignalIndex();
+	return self->QStatusBar::senderSignalIndex();
 }
 
 int QStatusBar_protectedbase_receivers(const VirtualQStatusBar* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QStatusBar::receivers(signal);
 }
 
 bool QStatusBar_protectedbase_isSignalConnected(const VirtualQStatusBar* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QStatusBar::isSignalConnected(*signal);
 }
 
 void QStatusBar_delete(QStatusBar* self) {

@@ -652,19 +652,19 @@ void QSettings_virtualbase_disconnectNotify(VirtualQSettings* self, QMetaMethod*
 }
 
 QObject* QSettings_protectedbase_sender(const VirtualQSettings* self) {
-	return self->sender();
+	return self->QSettings::sender();
 }
 
 int QSettings_protectedbase_senderSignalIndex(const VirtualQSettings* self) {
-	return self->senderSignalIndex();
+	return self->QSettings::senderSignalIndex();
 }
 
 int QSettings_protectedbase_receivers(const VirtualQSettings* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSettings::receivers(signal);
 }
 
 bool QSettings_protectedbase_isSignalConnected(const VirtualQSettings* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSettings::isSignalConnected(*signal);
 }
 
 void QSettings_delete(QSettings* self) {

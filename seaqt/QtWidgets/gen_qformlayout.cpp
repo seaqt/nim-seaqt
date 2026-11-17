@@ -874,39 +874,39 @@ QSpacerItem* QFormLayout_virtualbase_spacerItem(VirtualQFormLayout* self) {
 }
 
 void QFormLayout_protectedbase_widgetEvent(VirtualQFormLayout* self, QEvent* param1) {
-	self->widgetEvent(param1);
+	self->QFormLayout::widgetEvent(param1);
 }
 
 void QFormLayout_protectedbase_addChildLayout(VirtualQFormLayout* self, QLayout* l) {
-	self->addChildLayout(l);
+	self->QFormLayout::addChildLayout(l);
 }
 
 void QFormLayout_protectedbase_addChildWidget(VirtualQFormLayout* self, QWidget* w) {
-	self->addChildWidget(w);
+	self->QFormLayout::addChildWidget(w);
 }
 
 bool QFormLayout_protectedbase_adoptLayout(VirtualQFormLayout* self, QLayout* layout) {
-	return self->adoptLayout(layout);
+	return self->QFormLayout::adoptLayout(layout);
 }
 
 QRect* QFormLayout_protectedbase_alignmentRect(const VirtualQFormLayout* self, QRect* param1) {
-	return new QRect(self->alignmentRect(*param1));
+	return new QRect(self->QFormLayout::alignmentRect(*param1));
 }
 
 QObject* QFormLayout_protectedbase_sender(const VirtualQFormLayout* self) {
-	return self->sender();
+	return self->QFormLayout::sender();
 }
 
 int QFormLayout_protectedbase_senderSignalIndex(const VirtualQFormLayout* self) {
-	return self->senderSignalIndex();
+	return self->QFormLayout::senderSignalIndex();
 }
 
 int QFormLayout_protectedbase_receivers(const VirtualQFormLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFormLayout::receivers(signal);
 }
 
 bool QFormLayout_protectedbase_isSignalConnected(const VirtualQFormLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFormLayout::isSignalConnected(*signal);
 }
 
 void QFormLayout_delete(QFormLayout* self) {

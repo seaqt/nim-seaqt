@@ -1214,59 +1214,59 @@ void QSplitter_virtualbase_disconnectNotify(VirtualQSplitter* self, QMetaMethod*
 }
 
 void QSplitter_protectedbase_moveSplitter(VirtualQSplitter* self, int pos, int index) {
-	self->moveSplitter(static_cast<int>(pos), static_cast<int>(index));
+	self->QSplitter::moveSplitter(static_cast<int>(pos), static_cast<int>(index));
 }
 
 void QSplitter_protectedbase_setRubberBand(VirtualQSplitter* self, int position) {
-	self->setRubberBand(static_cast<int>(position));
+	self->QSplitter::setRubberBand(static_cast<int>(position));
 }
 
 int QSplitter_protectedbase_closestLegalPosition(VirtualQSplitter* self, int param1, int param2) {
-	return self->closestLegalPosition(static_cast<int>(param1), static_cast<int>(param2));
+	return self->QSplitter::closestLegalPosition(static_cast<int>(param1), static_cast<int>(param2));
 }
 
 void QSplitter_protectedbase_drawFrame(VirtualQSplitter* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QSplitter::drawFrame(param1);
 }
 
 void QSplitter_protectedbase_initStyleOption(const VirtualQSplitter* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QSplitter::initStyleOption(option);
 }
 
 void QSplitter_protectedbase_updateMicroFocus(VirtualQSplitter* self) {
-	self->updateMicroFocus();
+	self->QSplitter::updateMicroFocus();
 }
 
 void QSplitter_protectedbase_create(VirtualQSplitter* self) {
-	self->create();
+	self->QSplitter::create();
 }
 
 void QSplitter_protectedbase_destroy(VirtualQSplitter* self) {
-	self->destroy();
+	self->QSplitter::destroy();
 }
 
 bool QSplitter_protectedbase_focusNextChild(VirtualQSplitter* self) {
-	return self->focusNextChild();
+	return self->QSplitter::focusNextChild();
 }
 
 bool QSplitter_protectedbase_focusPreviousChild(VirtualQSplitter* self) {
-	return self->focusPreviousChild();
+	return self->QSplitter::focusPreviousChild();
 }
 
 QObject* QSplitter_protectedbase_sender(const VirtualQSplitter* self) {
-	return self->sender();
+	return self->QSplitter::sender();
 }
 
 int QSplitter_protectedbase_senderSignalIndex(const VirtualQSplitter* self) {
-	return self->senderSignalIndex();
+	return self->QSplitter::senderSignalIndex();
 }
 
 int QSplitter_protectedbase_receivers(const VirtualQSplitter* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSplitter::receivers(signal);
 }
 
 bool QSplitter_protectedbase_isSignalConnected(const VirtualQSplitter* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSplitter::isSignalConnected(*signal);
 }
 
 void QSplitter_delete(QSplitter* self) {
@@ -2278,47 +2278,47 @@ void QSplitterHandle_virtualbase_disconnectNotify(VirtualQSplitterHandle* self, 
 }
 
 void QSplitterHandle_protectedbase_moveSplitter(VirtualQSplitterHandle* self, int p) {
-	self->moveSplitter(static_cast<int>(p));
+	self->QSplitterHandle::moveSplitter(static_cast<int>(p));
 }
 
 int QSplitterHandle_protectedbase_closestLegalPosition(VirtualQSplitterHandle* self, int p) {
-	return self->closestLegalPosition(static_cast<int>(p));
+	return self->QSplitterHandle::closestLegalPosition(static_cast<int>(p));
 }
 
 void QSplitterHandle_protectedbase_updateMicroFocus(VirtualQSplitterHandle* self) {
-	self->updateMicroFocus();
+	self->QSplitterHandle::updateMicroFocus();
 }
 
 void QSplitterHandle_protectedbase_create(VirtualQSplitterHandle* self) {
-	self->create();
+	self->QSplitterHandle::create();
 }
 
 void QSplitterHandle_protectedbase_destroy(VirtualQSplitterHandle* self) {
-	self->destroy();
+	self->QSplitterHandle::destroy();
 }
 
 bool QSplitterHandle_protectedbase_focusNextChild(VirtualQSplitterHandle* self) {
-	return self->focusNextChild();
+	return self->QSplitterHandle::focusNextChild();
 }
 
 bool QSplitterHandle_protectedbase_focusPreviousChild(VirtualQSplitterHandle* self) {
-	return self->focusPreviousChild();
+	return self->QSplitterHandle::focusPreviousChild();
 }
 
 QObject* QSplitterHandle_protectedbase_sender(const VirtualQSplitterHandle* self) {
-	return self->sender();
+	return self->QSplitterHandle::sender();
 }
 
 int QSplitterHandle_protectedbase_senderSignalIndex(const VirtualQSplitterHandle* self) {
-	return self->senderSignalIndex();
+	return self->QSplitterHandle::senderSignalIndex();
 }
 
 int QSplitterHandle_protectedbase_receivers(const VirtualQSplitterHandle* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSplitterHandle::receivers(signal);
 }
 
 bool QSplitterHandle_protectedbase_isSignalConnected(const VirtualQSplitterHandle* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSplitterHandle::isSignalConnected(*signal);
 }
 
 void QSplitterHandle_delete(QSplitterHandle* self) {

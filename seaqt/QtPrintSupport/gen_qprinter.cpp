@@ -615,11 +615,11 @@ QPainter* QPrinter_virtualbase_sharedPainter(const VirtualQPrinter* self) {
 }
 
 void QPrinter_protectedbase_setEngines(VirtualQPrinter* self, QPrintEngine* printEngine, QPaintEngine* paintEngine) {
-	self->setEngines(printEngine, paintEngine);
+	self->QPrinter::setEngines(printEngine, paintEngine);
 }
 
 QPageLayout* QPrinter_protectedbase_devicePageLayout_const(const VirtualQPrinter* self) {
-	return new QPageLayout(self->devicePageLayout());
+	return new QPageLayout(self->QPrinter::devicePageLayout());
 }
 
 void QPrinter_delete(QPrinter* self) {

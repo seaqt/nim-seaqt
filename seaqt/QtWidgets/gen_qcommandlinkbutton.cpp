@@ -1136,43 +1136,43 @@ void QCommandLinkButton_virtualbase_disconnectNotify(VirtualQCommandLinkButton* 
 }
 
 void QCommandLinkButton_protectedbase_initStyleOption(const VirtualQCommandLinkButton* self, QStyleOptionButton* option) {
-	self->initStyleOption(option);
+	self->QCommandLinkButton::initStyleOption(option);
 }
 
 void QCommandLinkButton_protectedbase_updateMicroFocus(VirtualQCommandLinkButton* self) {
-	self->updateMicroFocus();
+	self->QCommandLinkButton::updateMicroFocus();
 }
 
 void QCommandLinkButton_protectedbase_create(VirtualQCommandLinkButton* self) {
-	self->create();
+	self->QCommandLinkButton::create();
 }
 
 void QCommandLinkButton_protectedbase_destroy(VirtualQCommandLinkButton* self) {
-	self->destroy();
+	self->QCommandLinkButton::destroy();
 }
 
 bool QCommandLinkButton_protectedbase_focusNextChild(VirtualQCommandLinkButton* self) {
-	return self->focusNextChild();
+	return self->QCommandLinkButton::focusNextChild();
 }
 
 bool QCommandLinkButton_protectedbase_focusPreviousChild(VirtualQCommandLinkButton* self) {
-	return self->focusPreviousChild();
+	return self->QCommandLinkButton::focusPreviousChild();
 }
 
 QObject* QCommandLinkButton_protectedbase_sender(const VirtualQCommandLinkButton* self) {
-	return self->sender();
+	return self->QCommandLinkButton::sender();
 }
 
 int QCommandLinkButton_protectedbase_senderSignalIndex(const VirtualQCommandLinkButton* self) {
-	return self->senderSignalIndex();
+	return self->QCommandLinkButton::senderSignalIndex();
 }
 
 int QCommandLinkButton_protectedbase_receivers(const VirtualQCommandLinkButton* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCommandLinkButton::receivers(signal);
 }
 
 bool QCommandLinkButton_protectedbase_isSignalConnected(const VirtualQCommandLinkButton* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCommandLinkButton::isSignalConnected(*signal);
 }
 
 void QCommandLinkButton_delete(QCommandLinkButton* self) {

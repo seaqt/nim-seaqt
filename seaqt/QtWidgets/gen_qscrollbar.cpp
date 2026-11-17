@@ -1078,52 +1078,52 @@ void QScrollBar_virtualbase_disconnectNotify(VirtualQScrollBar* self, QMetaMetho
 }
 
 void QScrollBar_protectedbase_initStyleOption(const VirtualQScrollBar* self, QStyleOptionSlider* option) {
-	self->initStyleOption(option);
+	self->QScrollBar::initStyleOption(option);
 }
 
 void QScrollBar_protectedbase_setRepeatAction_action(VirtualQScrollBar* self, int action) {
-	self->setRepeatAction(static_cast<VirtualQScrollBar::SliderAction>(action));
+	self->QScrollBar::setRepeatAction(static_cast<VirtualQScrollBar::SliderAction>(action));
 }
 
 int QScrollBar_protectedbase_repeatAction(const VirtualQScrollBar* self) {
-	VirtualQScrollBar::SliderAction _ret = self->repeatAction();
+	VirtualQScrollBar::SliderAction _ret = self->QScrollBar::repeatAction();
 	return static_cast<int>(_ret);
 }
 
 void QScrollBar_protectedbase_updateMicroFocus(VirtualQScrollBar* self) {
-	self->updateMicroFocus();
+	self->QScrollBar::updateMicroFocus();
 }
 
 void QScrollBar_protectedbase_create(VirtualQScrollBar* self) {
-	self->create();
+	self->QScrollBar::create();
 }
 
 void QScrollBar_protectedbase_destroy(VirtualQScrollBar* self) {
-	self->destroy();
+	self->QScrollBar::destroy();
 }
 
 bool QScrollBar_protectedbase_focusNextChild(VirtualQScrollBar* self) {
-	return self->focusNextChild();
+	return self->QScrollBar::focusNextChild();
 }
 
 bool QScrollBar_protectedbase_focusPreviousChild(VirtualQScrollBar* self) {
-	return self->focusPreviousChild();
+	return self->QScrollBar::focusPreviousChild();
 }
 
 QObject* QScrollBar_protectedbase_sender(const VirtualQScrollBar* self) {
-	return self->sender();
+	return self->QScrollBar::sender();
 }
 
 int QScrollBar_protectedbase_senderSignalIndex(const VirtualQScrollBar* self) {
-	return self->senderSignalIndex();
+	return self->QScrollBar::senderSignalIndex();
 }
 
 int QScrollBar_protectedbase_receivers(const VirtualQScrollBar* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QScrollBar::receivers(signal);
 }
 
 bool QScrollBar_protectedbase_isSignalConnected(const VirtualQScrollBar* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QScrollBar::isSignalConnected(*signal);
 }
 
 void QScrollBar_delete(QScrollBar* self) {

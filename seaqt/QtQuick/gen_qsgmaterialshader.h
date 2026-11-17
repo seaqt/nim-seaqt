@@ -17,7 +17,6 @@ extern "C" {
 #ifdef __cplusplus
 class QMatrix4x4;
 class QRect;
-class QSGMaterial;
 class QSGMaterialShader;
 #if defined(WORKAROUND_INNER_CLASS_DEFINITION_QSGMaterialShader__RenderState)
 typedef QSGMaterialShader::RenderState QSGMaterialShader__RenderState;
@@ -27,7 +26,6 @@ class QSGMaterialShader__RenderState;
 #else
 typedef struct QMatrix4x4 QMatrix4x4;
 typedef struct QRect QRect;
-typedef struct QSGMaterial QSGMaterial;
 typedef struct QSGMaterialShader QSGMaterialShader;
 typedef struct QSGMaterialShader__RenderState QSGMaterialShader__RenderState;
 #endif
@@ -37,7 +35,6 @@ typedef struct QSGMaterialShader_VTable{
 	void (*destructor)(VirtualQSGMaterialShader* self);
 	void (*activate)(VirtualQSGMaterialShader* self);
 	void (*deactivate)(VirtualQSGMaterialShader* self);
-	void (*updateState)(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 	const char** (*attributeNames)(const VirtualQSGMaterialShader* self);
 	void (*compile)(VirtualQSGMaterialShader* self);
 	void (*initialize)(VirtualQSGMaterialShader* self);
@@ -52,7 +49,6 @@ VirtualQSGMaterialShader* QSGMaterialShader_new(const QSGMaterialShader_VTable* 
 
 void QSGMaterialShader_activate(QSGMaterialShader* self);
 void QSGMaterialShader_deactivate(QSGMaterialShader* self);
-void QSGMaterialShader_updateState(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 const char** QSGMaterialShader_attributeNames(const QSGMaterialShader* self);
 void QSGMaterialShader_compile(QSGMaterialShader* self);
 void QSGMaterialShader_initialize(QSGMaterialShader* self);
@@ -61,7 +57,6 @@ const char* QSGMaterialShader_fragmentShader(const QSGMaterialShader* self);
 
 void QSGMaterialShader_virtualbase_activate(VirtualQSGMaterialShader* self);
 void QSGMaterialShader_virtualbase_deactivate(VirtualQSGMaterialShader* self);
-void QSGMaterialShader_virtualbase_updateState(VirtualQSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 const char** QSGMaterialShader_virtualbase_attributeNames(const VirtualQSGMaterialShader* self);
 void QSGMaterialShader_virtualbase_compile(VirtualQSGMaterialShader* self);
 void QSGMaterialShader_virtualbase_initialize(VirtualQSGMaterialShader* self);

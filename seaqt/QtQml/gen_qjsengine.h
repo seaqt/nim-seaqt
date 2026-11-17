@@ -70,8 +70,6 @@ QJSValue* QJSEngine_newQObject(QJSEngine* self, QObject* object);
 QJSValue* QJSEngine_newQMetaObject(QJSEngine* self, QMetaObject* metaObject);
 QJSValue* QJSEngine_newErrorObject_errorType(QJSEngine* self, int errorType);
 void QJSEngine_collectGarbage(QJSEngine* self);
-void QJSEngine_installTranslatorFunctions(QJSEngine* self);
-void QJSEngine_installExtensions_extensions(QJSEngine* self, int extensions);
 void QJSEngine_setInterrupted(QJSEngine* self, bool interrupted);
 bool QJSEngine_isInterrupted(const QJSEngine* self);
 void QJSEngine_throwError_message(QJSEngine* self, struct seaqt_string message);
@@ -88,8 +86,6 @@ QJSValue* QJSEngine_evaluate_program_fileName(QJSEngine* self, struct seaqt_stri
 QJSValue* QJSEngine_evaluate_program_fileName_lineNumber(QJSEngine* self, struct seaqt_string program, struct seaqt_string fileName, int lineNumber);
 QJSValue* QJSEngine_newArray_length(QJSEngine* self, unsigned int length);
 QJSValue* QJSEngine_newErrorObject_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message);
-void QJSEngine_installTranslatorFunctions_object(QJSEngine* self, QJSValue* object);
-void QJSEngine_installExtensions_extensions_object(QJSEngine* self, int extensions, QJSValue* object);
 void QJSEngine_throwError_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message);
 
 QMetaObject* QJSEngine_virtualbase_metaObject(const VirtualQJSEngine* self);

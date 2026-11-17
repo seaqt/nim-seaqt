@@ -75,8 +75,6 @@ proc fcQJSEngine_newQObject(self: pointer, objectVal: pointer): pointer {.import
 proc fcQJSEngine_newQMetaObject(self: pointer, metaObject: pointer): pointer {.importc: "QJSEngine_newQMetaObject".}
 proc fcQJSEngine_newErrorObjectErrorType(self: pointer, errorType: cint): pointer {.importc: "QJSEngine_newErrorObject_errorType".}
 proc fcQJSEngine_collectGarbage(self: pointer): void {.importc: "QJSEngine_collectGarbage".}
-proc fcQJSEngine_installTranslatorFunctions(self: pointer): void {.importc: "QJSEngine_installTranslatorFunctions".}
-proc fcQJSEngine_installExtensionsExtensions(self: pointer, extensions: cint): void {.importc: "QJSEngine_installExtensions_extensions".}
 proc fcQJSEngine_setInterrupted(self: pointer, interrupted: bool): void {.importc: "QJSEngine_setInterrupted".}
 proc fcQJSEngine_isInterrupted(self: pointer): bool {.importc: "QJSEngine_isInterrupted".}
 proc fcQJSEngine_throwErrorMessage(self: pointer, message: struct_seaqt_string): void {.importc: "QJSEngine_throwError_message".}
@@ -93,8 +91,6 @@ proc fcQJSEngine_evaluateProgramFileName(self: pointer, program: struct_seaqt_st
 proc fcQJSEngine_evaluateProgramFileNameLineNumber(self: pointer, program: struct_seaqt_string, fileName: struct_seaqt_string, lineNumber: cint): pointer {.importc: "QJSEngine_evaluate_program_fileName_lineNumber".}
 proc fcQJSEngine_newArrayLength(self: pointer, length: cuint): pointer {.importc: "QJSEngine_newArray_length".}
 proc fcQJSEngine_newErrorObjectErrorTypeMessage(self: pointer, errorType: cint, message: struct_seaqt_string): pointer {.importc: "QJSEngine_newErrorObject_errorType_message".}
-proc fcQJSEngine_installTranslatorFunctionsObject(self: pointer, objectVal: pointer): void {.importc: "QJSEngine_installTranslatorFunctions_object".}
-proc fcQJSEngine_installExtensionsExtensionsObject(self: pointer, extensions: cint, objectVal: pointer): void {.importc: "QJSEngine_installExtensions_extensions_object".}
 proc fcQJSEngine_throwErrorErrorTypeMessage(self: pointer, errorType: cint, message: struct_seaqt_string): void {.importc: "QJSEngine_throwError_errorType_message".}
 proc fcQJSEngine_vdata(self: pointer): ptr pointer {.importc: "QJSEngine_vdata".}
 proc fvdata_cQJSEngine(self: pointer): pointer {.importc: "vdata_QJSEngine".}
@@ -177,12 +173,6 @@ proc newErrorObject*(self: gen_qjsengine_types.QJSEngine, errorType: cint): gen_
 proc collectGarbage*(self: gen_qjsengine_types.QJSEngine): void =
   fcQJSEngine_collectGarbage(self.h)
 
-proc installTranslatorFunctions*(self: gen_qjsengine_types.QJSEngine): void =
-  fcQJSEngine_installTranslatorFunctions(self.h)
-
-proc installExtensions*(self: gen_qjsengine_types.QJSEngine, extensions: cint): void =
-  fcQJSEngine_installExtensionsExtensions(self.h, cint(extensions))
-
 proc setInterrupted*(self: gen_qjsengine_types.QJSEngine, interrupted: bool): void =
   fcQJSEngine_setInterrupted(self.h, interrupted)
 
@@ -257,12 +247,6 @@ proc newArray*(self: gen_qjsengine_types.QJSEngine, length: cuint): gen_qjsvalue
 
 proc newErrorObject*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: openArray[char]): gen_qjsvalue_types.QJSValue =
   gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObjectErrorTypeMessage(self.h, cint(errorType), struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message)))), owned: true)
-
-proc installTranslatorFunctions*(self: gen_qjsengine_types.QJSEngine, objectVal: gen_qjsvalue_types.QJSValue): void =
-  fcQJSEngine_installTranslatorFunctionsObject(self.h, objectVal.h)
-
-proc installExtensions*(self: gen_qjsengine_types.QJSEngine, extensions: cint, objectVal: gen_qjsvalue_types.QJSValue): void =
-  fcQJSEngine_installExtensionsExtensionsObject(self.h, cint(extensions), objectVal.h)
 
 proc throwError*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: openArray[char]): void =
   fcQJSEngine_throwErrorErrorTypeMessage(self.h, cint(errorType), struct_seaqt_string(data: if len(message) > 0: addr message[0] else: nil, len: csize_t(len(message))))

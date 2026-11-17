@@ -504,19 +504,19 @@ void QButtonGroup_virtualbase_disconnectNotify(VirtualQButtonGroup* self, QMetaM
 }
 
 QObject* QButtonGroup_protectedbase_sender(const VirtualQButtonGroup* self) {
-	return self->sender();
+	return self->QButtonGroup::sender();
 }
 
 int QButtonGroup_protectedbase_senderSignalIndex(const VirtualQButtonGroup* self) {
-	return self->senderSignalIndex();
+	return self->QButtonGroup::senderSignalIndex();
 }
 
 int QButtonGroup_protectedbase_receivers(const VirtualQButtonGroup* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QButtonGroup::receivers(signal);
 }
 
 bool QButtonGroup_protectedbase_isSignalConnected(const VirtualQButtonGroup* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QButtonGroup::isSignalConnected(*signal);
 }
 
 void QButtonGroup_delete(QButtonGroup* self) {

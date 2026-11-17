@@ -360,19 +360,19 @@ void QEventLoop_virtualbase_disconnectNotify(VirtualQEventLoop* self, QMetaMetho
 }
 
 QObject* QEventLoop_protectedbase_sender(const VirtualQEventLoop* self) {
-	return self->sender();
+	return self->QEventLoop::sender();
 }
 
 int QEventLoop_protectedbase_senderSignalIndex(const VirtualQEventLoop* self) {
-	return self->senderSignalIndex();
+	return self->QEventLoop::senderSignalIndex();
 }
 
 int QEventLoop_protectedbase_receivers(const VirtualQEventLoop* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QEventLoop::receivers(signal);
 }
 
 bool QEventLoop_protectedbase_isSignalConnected(const VirtualQEventLoop* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QEventLoop::isSignalConnected(*signal);
 }
 
 void QEventLoop_delete(QEventLoop* self) {

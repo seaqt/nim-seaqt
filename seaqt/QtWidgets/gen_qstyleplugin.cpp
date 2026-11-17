@@ -337,19 +337,19 @@ void QStylePlugin_virtualbase_disconnectNotify(VirtualQStylePlugin* self, QMetaM
 }
 
 QObject* QStylePlugin_protectedbase_sender(const VirtualQStylePlugin* self) {
-	return self->sender();
+	return self->QStylePlugin::sender();
 }
 
 int QStylePlugin_protectedbase_senderSignalIndex(const VirtualQStylePlugin* self) {
-	return self->senderSignalIndex();
+	return self->QStylePlugin::senderSignalIndex();
 }
 
 int QStylePlugin_protectedbase_receivers(const VirtualQStylePlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QStylePlugin::receivers(signal);
 }
 
 bool QStylePlugin_protectedbase_isSignalConnected(const VirtualQStylePlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QStylePlugin::isSignalConnected(*signal);
 }
 
 void QStylePlugin_delete(QStylePlugin* self) {

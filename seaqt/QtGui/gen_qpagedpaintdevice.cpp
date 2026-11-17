@@ -261,11 +261,11 @@ QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const VirtualQPagedPaintDe
 }
 
 QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout_const(const VirtualQPagedPaintDevice* self) {
-	return new QPageLayout(self->devicePageLayout());
+	return new QPageLayout(self->QPagedPaintDevice::devicePageLayout());
 }
 
 QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(VirtualQPagedPaintDevice* self) {
-	QPageLayout& _ret = self->devicePageLayout();
+	QPageLayout& _ret = self->QPagedPaintDevice::devicePageLayout();
 	// Cast returned reference into pointer
 	return &_ret;
 }

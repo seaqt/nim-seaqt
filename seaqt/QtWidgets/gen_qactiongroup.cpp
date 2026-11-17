@@ -405,19 +405,19 @@ void QActionGroup_virtualbase_disconnectNotify(VirtualQActionGroup* self, QMetaM
 }
 
 QObject* QActionGroup_protectedbase_sender(const VirtualQActionGroup* self) {
-	return self->sender();
+	return self->QActionGroup::sender();
 }
 
 int QActionGroup_protectedbase_senderSignalIndex(const VirtualQActionGroup* self) {
-	return self->senderSignalIndex();
+	return self->QActionGroup::senderSignalIndex();
 }
 
 int QActionGroup_protectedbase_receivers(const VirtualQActionGroup* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QActionGroup::receivers(signal);
 }
 
 bool QActionGroup_protectedbase_isSignalConnected(const VirtualQActionGroup* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QActionGroup::isSignalConnected(*signal);
 }
 
 void QActionGroup_delete(QActionGroup* self) {

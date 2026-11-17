@@ -237,15 +237,15 @@ void QGraphicsLayout_virtualbase_setGeometry(VirtualQGraphicsLayout* self, QRect
 }
 
 void QGraphicsLayout_protectedbase_addChildLayoutItem(VirtualQGraphicsLayout* self, QGraphicsLayoutItem* layoutItem) {
-	self->addChildLayoutItem(layoutItem);
+	self->QGraphicsLayout::addChildLayoutItem(layoutItem);
 }
 
 void QGraphicsLayout_protectedbase_setGraphicsItem(VirtualQGraphicsLayout* self, QGraphicsItem* item) {
-	self->setGraphicsItem(item);
+	self->QGraphicsLayout::setGraphicsItem(item);
 }
 
 void QGraphicsLayout_protectedbase_setOwnedByLayout(VirtualQGraphicsLayout* self, bool ownedByLayout) {
-	self->setOwnedByLayout(ownedByLayout);
+	self->QGraphicsLayout::setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsLayout_delete(QGraphicsLayout* self) {

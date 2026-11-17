@@ -360,19 +360,19 @@ void QAbstractVideoFilter_virtualbase_disconnectNotify(VirtualQAbstractVideoFilt
 }
 
 QObject* QAbstractVideoFilter_protectedbase_sender(const VirtualQAbstractVideoFilter* self) {
-	return self->sender();
+	return self->QAbstractVideoFilter::sender();
 }
 
 int QAbstractVideoFilter_protectedbase_senderSignalIndex(const VirtualQAbstractVideoFilter* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractVideoFilter::senderSignalIndex();
 }
 
 int QAbstractVideoFilter_protectedbase_receivers(const VirtualQAbstractVideoFilter* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractVideoFilter::receivers(signal);
 }
 
 bool QAbstractVideoFilter_protectedbase_isSignalConnected(const VirtualQAbstractVideoFilter* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractVideoFilter::isSignalConnected(*signal);
 }
 
 void QAbstractVideoFilter_delete(QAbstractVideoFilter* self) {

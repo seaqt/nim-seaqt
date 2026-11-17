@@ -917,28 +917,28 @@ void QMediaPlayer_virtualbase_disconnectNotify(VirtualQMediaPlayer* self, QMetaM
 
 void QMediaPlayer_protectedbase_addPropertyWatch(VirtualQMediaPlayer* self, struct seaqt_string name) {
 		QByteArray name_QByteArray(name.data, name.len);
-	self->addPropertyWatch(name_QByteArray);
+	self->QMediaPlayer::addPropertyWatch(name_QByteArray);
 }
 
 void QMediaPlayer_protectedbase_removePropertyWatch(VirtualQMediaPlayer* self, struct seaqt_string name) {
 		QByteArray name_QByteArray(name.data, name.len);
-	self->removePropertyWatch(name_QByteArray);
+	self->QMediaPlayer::removePropertyWatch(name_QByteArray);
 }
 
 QObject* QMediaPlayer_protectedbase_sender(const VirtualQMediaPlayer* self) {
-	return self->sender();
+	return self->QMediaPlayer::sender();
 }
 
 int QMediaPlayer_protectedbase_senderSignalIndex(const VirtualQMediaPlayer* self) {
-	return self->senderSignalIndex();
+	return self->QMediaPlayer::senderSignalIndex();
 }
 
 int QMediaPlayer_protectedbase_receivers(const VirtualQMediaPlayer* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMediaPlayer::receivers(signal);
 }
 
 bool QMediaPlayer_protectedbase_isSignalConnected(const VirtualQMediaPlayer* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMediaPlayer::isSignalConnected(*signal);
 }
 
 void QMediaPlayer_delete(QMediaPlayer* self) {

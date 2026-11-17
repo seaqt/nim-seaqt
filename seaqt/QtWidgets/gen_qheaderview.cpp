@@ -2325,145 +2325,145 @@ void QHeaderView_virtualbase_disconnectNotify(VirtualQHeaderView* self, QMetaMet
 }
 
 void QHeaderView_protectedbase_updateSection(VirtualQHeaderView* self, int logicalIndex) {
-	self->updateSection(static_cast<int>(logicalIndex));
+	self->QHeaderView::updateSection(static_cast<int>(logicalIndex));
 }
 
 void QHeaderView_protectedbase_resizeSections(VirtualQHeaderView* self) {
-	self->resizeSections();
+	self->QHeaderView::resizeSections();
 }
 
 void QHeaderView_protectedbase_sectionsInserted(VirtualQHeaderView* self, QModelIndex* parent, int logicalFirst, int logicalLast) {
-	self->sectionsInserted(*parent, static_cast<int>(logicalFirst), static_cast<int>(logicalLast));
+	self->QHeaderView::sectionsInserted(*parent, static_cast<int>(logicalFirst), static_cast<int>(logicalLast));
 }
 
 void QHeaderView_protectedbase_sectionsAboutToBeRemoved(VirtualQHeaderView* self, QModelIndex* parent, int logicalFirst, int logicalLast) {
-	self->sectionsAboutToBeRemoved(*parent, static_cast<int>(logicalFirst), static_cast<int>(logicalLast));
+	self->QHeaderView::sectionsAboutToBeRemoved(*parent, static_cast<int>(logicalFirst), static_cast<int>(logicalLast));
 }
 
 void QHeaderView_protectedbase_initialize(VirtualQHeaderView* self) {
-	self->initialize();
+	self->QHeaderView::initialize();
 }
 
 void QHeaderView_protectedbase_initializeSections(VirtualQHeaderView* self) {
-	self->initializeSections();
+	self->QHeaderView::initializeSections();
 }
 
 void QHeaderView_protectedbase_initializeSections_start_end(VirtualQHeaderView* self, int start, int end) {
-	self->initializeSections(static_cast<int>(start), static_cast<int>(end));
+	self->QHeaderView::initializeSections(static_cast<int>(start), static_cast<int>(end));
 }
 
 void QHeaderView_protectedbase_initStyleOption(const VirtualQHeaderView* self, QStyleOptionHeader* option) {
-	self->initStyleOption(option);
+	self->QHeaderView::initStyleOption(option);
 }
 
 void QHeaderView_protectedbase_setHorizontalStepsPerItem(VirtualQHeaderView* self, int steps) {
-	self->setHorizontalStepsPerItem(static_cast<int>(steps));
+	self->QHeaderView::setHorizontalStepsPerItem(static_cast<int>(steps));
 }
 
 int QHeaderView_protectedbase_horizontalStepsPerItem(const VirtualQHeaderView* self) {
-	return self->horizontalStepsPerItem();
+	return self->QHeaderView::horizontalStepsPerItem();
 }
 
 void QHeaderView_protectedbase_setVerticalStepsPerItem(VirtualQHeaderView* self, int steps) {
-	self->setVerticalStepsPerItem(static_cast<int>(steps));
+	self->QHeaderView::setVerticalStepsPerItem(static_cast<int>(steps));
 }
 
 int QHeaderView_protectedbase_verticalStepsPerItem(const VirtualQHeaderView* self) {
-	return self->verticalStepsPerItem();
+	return self->QHeaderView::verticalStepsPerItem();
 }
 
 int QHeaderView_protectedbase_state(const VirtualQHeaderView* self) {
-	VirtualQHeaderView::State _ret = self->state();
+	VirtualQHeaderView::State _ret = self->QHeaderView::state();
 	return static_cast<int>(_ret);
 }
 
 void QHeaderView_protectedbase_setState(VirtualQHeaderView* self, int state) {
-	self->setState(static_cast<VirtualQHeaderView::State>(state));
+	self->QHeaderView::setState(static_cast<VirtualQHeaderView::State>(state));
 }
 
 void QHeaderView_protectedbase_scheduleDelayedItemsLayout(VirtualQHeaderView* self) {
-	self->scheduleDelayedItemsLayout();
+	self->QHeaderView::scheduleDelayedItemsLayout();
 }
 
 void QHeaderView_protectedbase_executeDelayedItemsLayout(VirtualQHeaderView* self) {
-	self->executeDelayedItemsLayout();
+	self->QHeaderView::executeDelayedItemsLayout();
 }
 
 void QHeaderView_protectedbase_setDirtyRegion(VirtualQHeaderView* self, QRegion* region) {
-	self->setDirtyRegion(*region);
+	self->QHeaderView::setDirtyRegion(*region);
 }
 
 void QHeaderView_protectedbase_scrollDirtyRegion(VirtualQHeaderView* self, int dx, int dy) {
-	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
+	self->QHeaderView::scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
 QPoint* QHeaderView_protectedbase_dirtyRegionOffset(const VirtualQHeaderView* self) {
-	return new QPoint(self->dirtyRegionOffset());
+	return new QPoint(self->QHeaderView::dirtyRegionOffset());
 }
 
 void QHeaderView_protectedbase_startAutoScroll(VirtualQHeaderView* self) {
-	self->startAutoScroll();
+	self->QHeaderView::startAutoScroll();
 }
 
 void QHeaderView_protectedbase_stopAutoScroll(VirtualQHeaderView* self) {
-	self->stopAutoScroll();
+	self->QHeaderView::stopAutoScroll();
 }
 
 void QHeaderView_protectedbase_doAutoScroll(VirtualQHeaderView* self) {
-	self->doAutoScroll();
+	self->QHeaderView::doAutoScroll();
 }
 
 int QHeaderView_protectedbase_dropIndicatorPosition(const VirtualQHeaderView* self) {
-	VirtualQHeaderView::DropIndicatorPosition _ret = self->dropIndicatorPosition();
+	VirtualQHeaderView::DropIndicatorPosition _ret = self->QHeaderView::dropIndicatorPosition();
 	return static_cast<int>(_ret);
 }
 
 void QHeaderView_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQHeaderView* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QHeaderView::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QHeaderView_protectedbase_viewportMargins(const VirtualQHeaderView* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QHeaderView::viewportMargins());
 }
 
 void QHeaderView_protectedbase_drawFrame(VirtualQHeaderView* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QHeaderView::drawFrame(param1);
 }
 
 void QHeaderView_protectedbase_updateMicroFocus(VirtualQHeaderView* self) {
-	self->updateMicroFocus();
+	self->QHeaderView::updateMicroFocus();
 }
 
 void QHeaderView_protectedbase_create(VirtualQHeaderView* self) {
-	self->create();
+	self->QHeaderView::create();
 }
 
 void QHeaderView_protectedbase_destroy(VirtualQHeaderView* self) {
-	self->destroy();
+	self->QHeaderView::destroy();
 }
 
 bool QHeaderView_protectedbase_focusNextChild(VirtualQHeaderView* self) {
-	return self->focusNextChild();
+	return self->QHeaderView::focusNextChild();
 }
 
 bool QHeaderView_protectedbase_focusPreviousChild(VirtualQHeaderView* self) {
-	return self->focusPreviousChild();
+	return self->QHeaderView::focusPreviousChild();
 }
 
 QObject* QHeaderView_protectedbase_sender(const VirtualQHeaderView* self) {
-	return self->sender();
+	return self->QHeaderView::sender();
 }
 
 int QHeaderView_protectedbase_senderSignalIndex(const VirtualQHeaderView* self) {
-	return self->senderSignalIndex();
+	return self->QHeaderView::senderSignalIndex();
 }
 
 int QHeaderView_protectedbase_receivers(const VirtualQHeaderView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QHeaderView::receivers(signal);
 }
 
 bool QHeaderView_protectedbase_isSignalConnected(const VirtualQHeaderView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QHeaderView::isSignalConnected(*signal);
 }
 
 void QHeaderView_delete(QHeaderView* self) {

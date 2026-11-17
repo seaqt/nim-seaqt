@@ -545,19 +545,19 @@ void QNetworkDiskCache_virtualbase_disconnectNotify(VirtualQNetworkDiskCache* se
 }
 
 QObject* QNetworkDiskCache_protectedbase_sender(const VirtualQNetworkDiskCache* self) {
-	return self->sender();
+	return self->QNetworkDiskCache::sender();
 }
 
 int QNetworkDiskCache_protectedbase_senderSignalIndex(const VirtualQNetworkDiskCache* self) {
-	return self->senderSignalIndex();
+	return self->QNetworkDiskCache::senderSignalIndex();
 }
 
 int QNetworkDiskCache_protectedbase_receivers(const VirtualQNetworkDiskCache* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QNetworkDiskCache::receivers(signal);
 }
 
 bool QNetworkDiskCache_protectedbase_isSignalConnected(const VirtualQNetworkDiskCache* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QNetworkDiskCache::isSignalConnected(*signal);
 }
 
 void QNetworkDiskCache_delete(QNetworkDiskCache* self) {

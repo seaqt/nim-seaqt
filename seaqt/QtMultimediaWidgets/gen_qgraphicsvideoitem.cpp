@@ -1057,35 +1057,35 @@ QVariant* QGraphicsVideoItem_virtualbase_extension(const VirtualQGraphicsVideoIt
 }
 
 void QGraphicsVideoItem_protectedbase_updateMicroFocus(VirtualQGraphicsVideoItem* self) {
-	self->updateMicroFocus();
+	self->QGraphicsVideoItem::updateMicroFocus();
 }
 
 QObject* QGraphicsVideoItem_protectedbase_sender(const VirtualQGraphicsVideoItem* self) {
-	return self->sender();
+	return self->QGraphicsVideoItem::sender();
 }
 
 int QGraphicsVideoItem_protectedbase_senderSignalIndex(const VirtualQGraphicsVideoItem* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsVideoItem::senderSignalIndex();
 }
 
 int QGraphicsVideoItem_protectedbase_receivers(const VirtualQGraphicsVideoItem* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsVideoItem::receivers(signal);
 }
 
 bool QGraphicsVideoItem_protectedbase_isSignalConnected(const VirtualQGraphicsVideoItem* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsVideoItem::isSignalConnected(*signal);
 }
 
 void QGraphicsVideoItem_protectedbase_addToIndex(VirtualQGraphicsVideoItem* self) {
-	self->addToIndex();
+	self->QGraphicsVideoItem::addToIndex();
 }
 
 void QGraphicsVideoItem_protectedbase_removeFromIndex(VirtualQGraphicsVideoItem* self) {
-	self->removeFromIndex();
+	self->QGraphicsVideoItem::removeFromIndex();
 }
 
 void QGraphicsVideoItem_protectedbase_prepareGeometryChange(VirtualQGraphicsVideoItem* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsVideoItem::prepareGeometryChange();
 }
 
 void QGraphicsVideoItem_delete(QGraphicsVideoItem* self) {

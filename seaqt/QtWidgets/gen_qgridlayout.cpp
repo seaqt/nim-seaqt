@@ -854,39 +854,39 @@ QSpacerItem* QGridLayout_virtualbase_spacerItem(VirtualQGridLayout* self) {
 }
 
 void QGridLayout_protectedbase_widgetEvent(VirtualQGridLayout* self, QEvent* param1) {
-	self->widgetEvent(param1);
+	self->QGridLayout::widgetEvent(param1);
 }
 
 void QGridLayout_protectedbase_addChildLayout(VirtualQGridLayout* self, QLayout* l) {
-	self->addChildLayout(l);
+	self->QGridLayout::addChildLayout(l);
 }
 
 void QGridLayout_protectedbase_addChildWidget(VirtualQGridLayout* self, QWidget* w) {
-	self->addChildWidget(w);
+	self->QGridLayout::addChildWidget(w);
 }
 
 bool QGridLayout_protectedbase_adoptLayout(VirtualQGridLayout* self, QLayout* layout) {
-	return self->adoptLayout(layout);
+	return self->QGridLayout::adoptLayout(layout);
 }
 
 QRect* QGridLayout_protectedbase_alignmentRect(const VirtualQGridLayout* self, QRect* param1) {
-	return new QRect(self->alignmentRect(*param1));
+	return new QRect(self->QGridLayout::alignmentRect(*param1));
 }
 
 QObject* QGridLayout_protectedbase_sender(const VirtualQGridLayout* self) {
-	return self->sender();
+	return self->QGridLayout::sender();
 }
 
 int QGridLayout_protectedbase_senderSignalIndex(const VirtualQGridLayout* self) {
-	return self->senderSignalIndex();
+	return self->QGridLayout::senderSignalIndex();
 }
 
 int QGridLayout_protectedbase_receivers(const VirtualQGridLayout* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGridLayout::receivers(signal);
 }
 
 bool QGridLayout_protectedbase_isSignalConnected(const VirtualQGridLayout* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGridLayout::isSignalConnected(*signal);
 }
 
 void QGridLayout_delete(QGridLayout* self) {

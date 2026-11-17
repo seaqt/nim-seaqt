@@ -422,19 +422,19 @@ void QLibrary_virtualbase_disconnectNotify(VirtualQLibrary* self, QMetaMethod* s
 }
 
 QObject* QLibrary_protectedbase_sender(const VirtualQLibrary* self) {
-	return self->sender();
+	return self->QLibrary::sender();
 }
 
 int QLibrary_protectedbase_senderSignalIndex(const VirtualQLibrary* self) {
-	return self->senderSignalIndex();
+	return self->QLibrary::senderSignalIndex();
 }
 
 int QLibrary_protectedbase_receivers(const VirtualQLibrary* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QLibrary::receivers(signal);
 }
 
 bool QLibrary_protectedbase_isSignalConnected(const VirtualQLibrary* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QLibrary::isSignalConnected(*signal);
 }
 
 void QLibrary_delete(QLibrary* self) {

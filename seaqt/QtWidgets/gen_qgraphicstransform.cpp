@@ -332,23 +332,23 @@ void QGraphicsTransform_virtualbase_disconnectNotify(VirtualQGraphicsTransform* 
 }
 
 void QGraphicsTransform_protectedbase_update(VirtualQGraphicsTransform* self) {
-	self->update();
+	self->QGraphicsTransform::update();
 }
 
 QObject* QGraphicsTransform_protectedbase_sender(const VirtualQGraphicsTransform* self) {
-	return self->sender();
+	return self->QGraphicsTransform::sender();
 }
 
 int QGraphicsTransform_protectedbase_senderSignalIndex(const VirtualQGraphicsTransform* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsTransform::senderSignalIndex();
 }
 
 int QGraphicsTransform_protectedbase_receivers(const VirtualQGraphicsTransform* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsTransform::receivers(signal);
 }
 
 bool QGraphicsTransform_protectedbase_isSignalConnected(const VirtualQGraphicsTransform* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsTransform::isSignalConnected(*signal);
 }
 
 void QGraphicsTransform_delete(QGraphicsTransform* self) {
@@ -755,23 +755,23 @@ void QGraphicsScale_virtualbase_disconnectNotify(VirtualQGraphicsScale* self, QM
 }
 
 void QGraphicsScale_protectedbase_update(VirtualQGraphicsScale* self) {
-	self->update();
+	self->QGraphicsScale::update();
 }
 
 QObject* QGraphicsScale_protectedbase_sender(const VirtualQGraphicsScale* self) {
-	return self->sender();
+	return self->QGraphicsScale::sender();
 }
 
 int QGraphicsScale_protectedbase_senderSignalIndex(const VirtualQGraphicsScale* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsScale::senderSignalIndex();
 }
 
 int QGraphicsScale_protectedbase_receivers(const VirtualQGraphicsScale* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsScale::receivers(signal);
 }
 
 bool QGraphicsScale_protectedbase_isSignalConnected(const VirtualQGraphicsScale* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsScale::isSignalConnected(*signal);
 }
 
 void QGraphicsScale_delete(QGraphicsScale* self) {
@@ -1152,23 +1152,23 @@ void QGraphicsRotation_virtualbase_disconnectNotify(VirtualQGraphicsRotation* se
 }
 
 void QGraphicsRotation_protectedbase_update(VirtualQGraphicsRotation* self) {
-	self->update();
+	self->QGraphicsRotation::update();
 }
 
 QObject* QGraphicsRotation_protectedbase_sender(const VirtualQGraphicsRotation* self) {
-	return self->sender();
+	return self->QGraphicsRotation::sender();
 }
 
 int QGraphicsRotation_protectedbase_senderSignalIndex(const VirtualQGraphicsRotation* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsRotation::senderSignalIndex();
 }
 
 int QGraphicsRotation_protectedbase_receivers(const VirtualQGraphicsRotation* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsRotation::receivers(signal);
 }
 
 bool QGraphicsRotation_protectedbase_isSignalConnected(const VirtualQGraphicsRotation* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsRotation::isSignalConnected(*signal);
 }
 
 void QGraphicsRotation_delete(QGraphicsRotation* self) {

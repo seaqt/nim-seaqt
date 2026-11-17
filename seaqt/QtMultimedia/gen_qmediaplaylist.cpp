@@ -636,19 +636,19 @@ void QMediaPlaylist_virtualbase_disconnectNotify(VirtualQMediaPlaylist* self, QM
 }
 
 QObject* QMediaPlaylist_protectedbase_sender(const VirtualQMediaPlaylist* self) {
-	return self->sender();
+	return self->QMediaPlaylist::sender();
 }
 
 int QMediaPlaylist_protectedbase_senderSignalIndex(const VirtualQMediaPlaylist* self) {
-	return self->senderSignalIndex();
+	return self->QMediaPlaylist::senderSignalIndex();
 }
 
 int QMediaPlaylist_protectedbase_receivers(const VirtualQMediaPlaylist* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMediaPlaylist::receivers(signal);
 }
 
 bool QMediaPlaylist_protectedbase_isSignalConnected(const VirtualQMediaPlaylist* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMediaPlaylist::isSignalConnected(*signal);
 }
 
 void QMediaPlaylist_delete(QMediaPlaylist* self) {

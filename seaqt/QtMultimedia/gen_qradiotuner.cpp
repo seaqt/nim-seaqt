@@ -676,28 +676,28 @@ void QRadioTuner_virtualbase_disconnectNotify(VirtualQRadioTuner* self, QMetaMet
 
 void QRadioTuner_protectedbase_addPropertyWatch(VirtualQRadioTuner* self, struct seaqt_string name) {
 		QByteArray name_QByteArray(name.data, name.len);
-	self->addPropertyWatch(name_QByteArray);
+	self->QRadioTuner::addPropertyWatch(name_QByteArray);
 }
 
 void QRadioTuner_protectedbase_removePropertyWatch(VirtualQRadioTuner* self, struct seaqt_string name) {
 		QByteArray name_QByteArray(name.data, name.len);
-	self->removePropertyWatch(name_QByteArray);
+	self->QRadioTuner::removePropertyWatch(name_QByteArray);
 }
 
 QObject* QRadioTuner_protectedbase_sender(const VirtualQRadioTuner* self) {
-	return self->sender();
+	return self->QRadioTuner::sender();
 }
 
 int QRadioTuner_protectedbase_senderSignalIndex(const VirtualQRadioTuner* self) {
-	return self->senderSignalIndex();
+	return self->QRadioTuner::senderSignalIndex();
 }
 
 int QRadioTuner_protectedbase_receivers(const VirtualQRadioTuner* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QRadioTuner::receivers(signal);
 }
 
 bool QRadioTuner_protectedbase_isSignalConnected(const VirtualQRadioTuner* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QRadioTuner::isSignalConnected(*signal);
 }
 
 void QRadioTuner_delete(QRadioTuner* self) {

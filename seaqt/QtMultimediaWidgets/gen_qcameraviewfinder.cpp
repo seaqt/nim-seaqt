@@ -1075,39 +1075,39 @@ void QCameraViewfinder_virtualbase_disconnectNotify(VirtualQCameraViewfinder* se
 }
 
 void QCameraViewfinder_protectedbase_updateMicroFocus(VirtualQCameraViewfinder* self) {
-	self->updateMicroFocus();
+	self->QCameraViewfinder::updateMicroFocus();
 }
 
 void QCameraViewfinder_protectedbase_create(VirtualQCameraViewfinder* self) {
-	self->create();
+	self->QCameraViewfinder::create();
 }
 
 void QCameraViewfinder_protectedbase_destroy(VirtualQCameraViewfinder* self) {
-	self->destroy();
+	self->QCameraViewfinder::destroy();
 }
 
 bool QCameraViewfinder_protectedbase_focusNextChild(VirtualQCameraViewfinder* self) {
-	return self->focusNextChild();
+	return self->QCameraViewfinder::focusNextChild();
 }
 
 bool QCameraViewfinder_protectedbase_focusPreviousChild(VirtualQCameraViewfinder* self) {
-	return self->focusPreviousChild();
+	return self->QCameraViewfinder::focusPreviousChild();
 }
 
 QObject* QCameraViewfinder_protectedbase_sender(const VirtualQCameraViewfinder* self) {
-	return self->sender();
+	return self->QCameraViewfinder::sender();
 }
 
 int QCameraViewfinder_protectedbase_senderSignalIndex(const VirtualQCameraViewfinder* self) {
-	return self->senderSignalIndex();
+	return self->QCameraViewfinder::senderSignalIndex();
 }
 
 int QCameraViewfinder_protectedbase_receivers(const VirtualQCameraViewfinder* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QCameraViewfinder::receivers(signal);
 }
 
 bool QCameraViewfinder_protectedbase_isSignalConnected(const VirtualQCameraViewfinder* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QCameraViewfinder::isSignalConnected(*signal);
 }
 
 void QCameraViewfinder_delete(QCameraViewfinder* self) {

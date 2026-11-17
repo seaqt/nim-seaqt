@@ -470,19 +470,19 @@ void QPropertyAnimation_virtualbase_disconnectNotify(VirtualQPropertyAnimation* 
 }
 
 QObject* QPropertyAnimation_protectedbase_sender(const VirtualQPropertyAnimation* self) {
-	return self->sender();
+	return self->QPropertyAnimation::sender();
 }
 
 int QPropertyAnimation_protectedbase_senderSignalIndex(const VirtualQPropertyAnimation* self) {
-	return self->senderSignalIndex();
+	return self->QPropertyAnimation::senderSignalIndex();
 }
 
 int QPropertyAnimation_protectedbase_receivers(const VirtualQPropertyAnimation* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPropertyAnimation::receivers(signal);
 }
 
 bool QPropertyAnimation_protectedbase_isSignalConnected(const VirtualQPropertyAnimation* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPropertyAnimation::isSignalConnected(*signal);
 }
 
 void QPropertyAnimation_delete(QPropertyAnimation* self) {

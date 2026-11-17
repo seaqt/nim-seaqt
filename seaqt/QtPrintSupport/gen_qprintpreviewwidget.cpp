@@ -1185,39 +1185,39 @@ void QPrintPreviewWidget_virtualbase_disconnectNotify(VirtualQPrintPreviewWidget
 }
 
 void QPrintPreviewWidget_protectedbase_updateMicroFocus(VirtualQPrintPreviewWidget* self) {
-	self->updateMicroFocus();
+	self->QPrintPreviewWidget::updateMicroFocus();
 }
 
 void QPrintPreviewWidget_protectedbase_create(VirtualQPrintPreviewWidget* self) {
-	self->create();
+	self->QPrintPreviewWidget::create();
 }
 
 void QPrintPreviewWidget_protectedbase_destroy(VirtualQPrintPreviewWidget* self) {
-	self->destroy();
+	self->QPrintPreviewWidget::destroy();
 }
 
 bool QPrintPreviewWidget_protectedbase_focusNextChild(VirtualQPrintPreviewWidget* self) {
-	return self->focusNextChild();
+	return self->QPrintPreviewWidget::focusNextChild();
 }
 
 bool QPrintPreviewWidget_protectedbase_focusPreviousChild(VirtualQPrintPreviewWidget* self) {
-	return self->focusPreviousChild();
+	return self->QPrintPreviewWidget::focusPreviousChild();
 }
 
 QObject* QPrintPreviewWidget_protectedbase_sender(const VirtualQPrintPreviewWidget* self) {
-	return self->sender();
+	return self->QPrintPreviewWidget::sender();
 }
 
 int QPrintPreviewWidget_protectedbase_senderSignalIndex(const VirtualQPrintPreviewWidget* self) {
-	return self->senderSignalIndex();
+	return self->QPrintPreviewWidget::senderSignalIndex();
 }
 
 int QPrintPreviewWidget_protectedbase_receivers(const VirtualQPrintPreviewWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPrintPreviewWidget::receivers(signal);
 }
 
 bool QPrintPreviewWidget_protectedbase_isSignalConnected(const VirtualQPrintPreviewWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPrintPreviewWidget::isSignalConnected(*signal);
 }
 
 void QPrintPreviewWidget_delete(QPrintPreviewWidget* self) {

@@ -1174,55 +1174,55 @@ void QScrollArea_virtualbase_disconnectNotify(VirtualQScrollArea* self, QMetaMet
 }
 
 void QScrollArea_protectedbase_setViewportMargins_left_top_right_bottom(VirtualQScrollArea* self, int left, int top, int right, int bottom) {
-	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
+	self->QScrollArea::setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
 QMargins* QScrollArea_protectedbase_viewportMargins(const VirtualQScrollArea* self) {
-	return new QMargins(self->viewportMargins());
+	return new QMargins(self->QScrollArea::viewportMargins());
 }
 
 void QScrollArea_protectedbase_drawFrame(VirtualQScrollArea* self, QPainter* param1) {
-	self->drawFrame(param1);
+	self->QScrollArea::drawFrame(param1);
 }
 
 void QScrollArea_protectedbase_initStyleOption(const VirtualQScrollArea* self, QStyleOptionFrame* option) {
-	self->initStyleOption(option);
+	self->QScrollArea::initStyleOption(option);
 }
 
 void QScrollArea_protectedbase_updateMicroFocus(VirtualQScrollArea* self) {
-	self->updateMicroFocus();
+	self->QScrollArea::updateMicroFocus();
 }
 
 void QScrollArea_protectedbase_create(VirtualQScrollArea* self) {
-	self->create();
+	self->QScrollArea::create();
 }
 
 void QScrollArea_protectedbase_destroy(VirtualQScrollArea* self) {
-	self->destroy();
+	self->QScrollArea::destroy();
 }
 
 bool QScrollArea_protectedbase_focusNextChild(VirtualQScrollArea* self) {
-	return self->focusNextChild();
+	return self->QScrollArea::focusNextChild();
 }
 
 bool QScrollArea_protectedbase_focusPreviousChild(VirtualQScrollArea* self) {
-	return self->focusPreviousChild();
+	return self->QScrollArea::focusPreviousChild();
 }
 
 QObject* QScrollArea_protectedbase_sender(const VirtualQScrollArea* self) {
-	return self->sender();
+	return self->QScrollArea::sender();
 }
 
 int QScrollArea_protectedbase_senderSignalIndex(const VirtualQScrollArea* self) {
-	return self->senderSignalIndex();
+	return self->QScrollArea::senderSignalIndex();
 }
 
 int QScrollArea_protectedbase_receivers(const VirtualQScrollArea* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QScrollArea::receivers(signal);
 }
 
 bool QScrollArea_protectedbase_isSignalConnected(const VirtualQScrollArea* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QScrollArea::isSignalConnected(*signal);
 }
 
 void QScrollArea_delete(QScrollArea* self) {

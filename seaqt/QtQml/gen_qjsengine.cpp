@@ -254,14 +254,6 @@ void QJSEngine_collectGarbage(QJSEngine* self) {
 	self->collectGarbage();
 }
 
-void QJSEngine_installTranslatorFunctions(QJSEngine* self) {
-	self->installTranslatorFunctions();
-}
-
-void QJSEngine_installExtensions_extensions(QJSEngine* self, int extensions) {
-	self->installExtensions(static_cast<QJSEngine::Extensions>(extensions));
-}
-
 void QJSEngine_setInterrupted(QJSEngine* self, bool interrupted) {
 	self->setInterrupted(interrupted);
 }
@@ -370,14 +362,6 @@ QJSValue* QJSEngine_newErrorObject_errorType_message(QJSEngine* self, int errorT
 	return new QJSValue(self->newErrorObject(static_cast<QJSValue::ErrorType>(errorType), message_QString));
 }
 
-void QJSEngine_installTranslatorFunctions_object(QJSEngine* self, QJSValue* object) {
-	self->installTranslatorFunctions(*object);
-}
-
-void QJSEngine_installExtensions_extensions_object(QJSEngine* self, int extensions, QJSValue* object) {
-	self->installExtensions(static_cast<QJSEngine::Extensions>(extensions), *object);
-}
-
 void QJSEngine_throwError_errorType_message(QJSEngine* self, int errorType, struct seaqt_string message) {
 	QString message_QString = QString::fromUtf8(message.data, message.len);
 	self->throwError(static_cast<QJSValue::ErrorType>(errorType), message_QString);
@@ -438,19 +422,19 @@ void QJSEngine_virtualbase_disconnectNotify(VirtualQJSEngine* self, QMetaMethod*
 }
 
 QObject* QJSEngine_protectedbase_sender(const VirtualQJSEngine* self) {
-	return self->sender();
+	return self->QJSEngine::sender();
 }
 
 int QJSEngine_protectedbase_senderSignalIndex(const VirtualQJSEngine* self) {
-	return self->senderSignalIndex();
+	return self->QJSEngine::senderSignalIndex();
 }
 
 int QJSEngine_protectedbase_receivers(const VirtualQJSEngine* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QJSEngine::receivers(signal);
 }
 
 bool QJSEngine_protectedbase_isSignalConnected(const VirtualQJSEngine* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QJSEngine::isSignalConnected(*signal);
 }
 
 void QJSEngine_delete(QJSEngine* self) {

@@ -345,19 +345,19 @@ void QGenericPlugin_virtualbase_disconnectNotify(VirtualQGenericPlugin* self, QM
 }
 
 QObject* QGenericPlugin_protectedbase_sender(const VirtualQGenericPlugin* self) {
-	return self->sender();
+	return self->QGenericPlugin::sender();
 }
 
 int QGenericPlugin_protectedbase_senderSignalIndex(const VirtualQGenericPlugin* self) {
-	return self->senderSignalIndex();
+	return self->QGenericPlugin::senderSignalIndex();
 }
 
 int QGenericPlugin_protectedbase_receivers(const VirtualQGenericPlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGenericPlugin::receivers(signal);
 }
 
 bool QGenericPlugin_protectedbase_isSignalConnected(const VirtualQGenericPlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGenericPlugin::isSignalConnected(*signal);
 }
 
 void QGenericPlugin_delete(QGenericPlugin* self) {

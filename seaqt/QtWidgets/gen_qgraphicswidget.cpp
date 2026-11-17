@@ -1671,43 +1671,43 @@ QVariant* QGraphicsWidget_virtualbase_extension(const VirtualQGraphicsWidget* se
 }
 
 void QGraphicsWidget_protectedbase_updateMicroFocus(VirtualQGraphicsWidget* self) {
-	self->updateMicroFocus();
+	self->QGraphicsWidget::updateMicroFocus();
 }
 
 QObject* QGraphicsWidget_protectedbase_sender(const VirtualQGraphicsWidget* self) {
-	return self->sender();
+	return self->QGraphicsWidget::sender();
 }
 
 int QGraphicsWidget_protectedbase_senderSignalIndex(const VirtualQGraphicsWidget* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsWidget::senderSignalIndex();
 }
 
 int QGraphicsWidget_protectedbase_receivers(const VirtualQGraphicsWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsWidget::receivers(signal);
 }
 
 bool QGraphicsWidget_protectedbase_isSignalConnected(const VirtualQGraphicsWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsWidget::isSignalConnected(*signal);
 }
 
 void QGraphicsWidget_protectedbase_addToIndex(VirtualQGraphicsWidget* self) {
-	self->addToIndex();
+	self->QGraphicsWidget::addToIndex();
 }
 
 void QGraphicsWidget_protectedbase_removeFromIndex(VirtualQGraphicsWidget* self) {
-	self->removeFromIndex();
+	self->QGraphicsWidget::removeFromIndex();
 }
 
 void QGraphicsWidget_protectedbase_prepareGeometryChange(VirtualQGraphicsWidget* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsWidget::prepareGeometryChange();
 }
 
 void QGraphicsWidget_protectedbase_setGraphicsItem(VirtualQGraphicsWidget* self, QGraphicsItem* item) {
-	self->setGraphicsItem(item);
+	self->QGraphicsWidget::setGraphicsItem(item);
 }
 
 void QGraphicsWidget_protectedbase_setOwnedByLayout(VirtualQGraphicsWidget* self, bool ownedByLayout) {
-	self->setOwnedByLayout(ownedByLayout);
+	self->QGraphicsWidget::setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsWidget_delete(QGraphicsWidget* self) {

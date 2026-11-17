@@ -1096,57 +1096,57 @@ void QAbstractSocket_virtualbase_disconnectNotify(VirtualQAbstractSocket* self, 
 }
 
 void QAbstractSocket_protectedbase_setSocketState(VirtualQAbstractSocket* self, int state) {
-	self->setSocketState(static_cast<VirtualQAbstractSocket::SocketState>(state));
+	self->QAbstractSocket::setSocketState(static_cast<VirtualQAbstractSocket::SocketState>(state));
 }
 
 void QAbstractSocket_protectedbase_setSocketError(VirtualQAbstractSocket* self, int socketError) {
-	self->setSocketError(static_cast<VirtualQAbstractSocket::SocketError>(socketError));
+	self->QAbstractSocket::setSocketError(static_cast<VirtualQAbstractSocket::SocketError>(socketError));
 }
 
 void QAbstractSocket_protectedbase_setLocalPort(VirtualQAbstractSocket* self, unsigned short port) {
-	self->setLocalPort(static_cast<quint16>(port));
+	self->QAbstractSocket::setLocalPort(static_cast<quint16>(port));
 }
 
 void QAbstractSocket_protectedbase_setLocalAddress(VirtualQAbstractSocket* self, QHostAddress* address) {
-	self->setLocalAddress(*address);
+	self->QAbstractSocket::setLocalAddress(*address);
 }
 
 void QAbstractSocket_protectedbase_setPeerPort(VirtualQAbstractSocket* self, unsigned short port) {
-	self->setPeerPort(static_cast<quint16>(port));
+	self->QAbstractSocket::setPeerPort(static_cast<quint16>(port));
 }
 
 void QAbstractSocket_protectedbase_setPeerAddress(VirtualQAbstractSocket* self, QHostAddress* address) {
-	self->setPeerAddress(*address);
+	self->QAbstractSocket::setPeerAddress(*address);
 }
 
 void QAbstractSocket_protectedbase_setPeerName(VirtualQAbstractSocket* self, struct seaqt_string name) {
 		QString name_QString = QString::fromUtf8(name.data, name.len);
-	self->setPeerName(name_QString);
+	self->QAbstractSocket::setPeerName(name_QString);
 }
 
 void QAbstractSocket_protectedbase_setOpenMode(VirtualQAbstractSocket* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQAbstractSocket::OpenMode>(openMode));
+	self->QAbstractSocket::setOpenMode(static_cast<VirtualQAbstractSocket::OpenMode>(openMode));
 }
 
 void QAbstractSocket_protectedbase_setErrorString(VirtualQAbstractSocket* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QAbstractSocket::setErrorString(errorString_QString);
 }
 
 QObject* QAbstractSocket_protectedbase_sender(const VirtualQAbstractSocket* self) {
-	return self->sender();
+	return self->QAbstractSocket::sender();
 }
 
 int QAbstractSocket_protectedbase_senderSignalIndex(const VirtualQAbstractSocket* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractSocket::senderSignalIndex();
 }
 
 int QAbstractSocket_protectedbase_receivers(const VirtualQAbstractSocket* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractSocket::receivers(signal);
 }
 
 bool QAbstractSocket_protectedbase_isSignalConnected(const VirtualQAbstractSocket* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractSocket::isSignalConnected(*signal);
 }
 
 void QAbstractSocket_delete(QAbstractSocket* self) {

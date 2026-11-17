@@ -608,19 +608,19 @@ void QMovie_virtualbase_disconnectNotify(VirtualQMovie* self, QMetaMethod* signa
 }
 
 QObject* QMovie_protectedbase_sender(const VirtualQMovie* self) {
-	return self->sender();
+	return self->QMovie::sender();
 }
 
 int QMovie_protectedbase_senderSignalIndex(const VirtualQMovie* self) {
-	return self->senderSignalIndex();
+	return self->QMovie::senderSignalIndex();
 }
 
 int QMovie_protectedbase_receivers(const VirtualQMovie* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMovie::receivers(signal);
 }
 
 bool QMovie_protectedbase_isSignalConnected(const VirtualQMovie* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMovie::isSignalConnected(*signal);
 }
 
 void QMovie_delete(QMovie* self) {

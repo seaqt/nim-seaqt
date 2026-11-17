@@ -426,19 +426,19 @@ void QSharedMemory_virtualbase_disconnectNotify(VirtualQSharedMemory* self, QMet
 }
 
 QObject* QSharedMemory_protectedbase_sender(const VirtualQSharedMemory* self) {
-	return self->sender();
+	return self->QSharedMemory::sender();
 }
 
 int QSharedMemory_protectedbase_senderSignalIndex(const VirtualQSharedMemory* self) {
-	return self->senderSignalIndex();
+	return self->QSharedMemory::senderSignalIndex();
 }
 
 int QSharedMemory_protectedbase_receivers(const VirtualQSharedMemory* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSharedMemory::receivers(signal);
 }
 
 bool QSharedMemory_protectedbase_isSignalConnected(const VirtualQSharedMemory* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSharedMemory::isSignalConnected(*signal);
 }
 
 void QSharedMemory_delete(QSharedMemory* self) {

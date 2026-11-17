@@ -830,19 +830,19 @@ void QQuickView_virtualbase_disconnectNotify(VirtualQQuickView* self, QMetaMetho
 }
 
 QObject* QQuickView_protectedbase_sender(const VirtualQQuickView* self) {
-	return self->sender();
+	return self->QQuickView::sender();
 }
 
 int QQuickView_protectedbase_senderSignalIndex(const VirtualQQuickView* self) {
-	return self->senderSignalIndex();
+	return self->QQuickView::senderSignalIndex();
 }
 
 int QQuickView_protectedbase_receivers(const VirtualQQuickView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQuickView::receivers(signal);
 }
 
 bool QQuickView_protectedbase_isSignalConnected(const VirtualQQuickView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQuickView::isSignalConnected(*signal);
 }
 
 void QQuickView_delete(QQuickView* self) {

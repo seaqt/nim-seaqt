@@ -399,19 +399,19 @@ void QQmlContext_virtualbase_disconnectNotify(VirtualQQmlContext* self, QMetaMet
 }
 
 QObject* QQmlContext_protectedbase_sender(const VirtualQQmlContext* self) {
-	return self->sender();
+	return self->QQmlContext::sender();
 }
 
 int QQmlContext_protectedbase_senderSignalIndex(const VirtualQQmlContext* self) {
-	return self->senderSignalIndex();
+	return self->QQmlContext::senderSignalIndex();
 }
 
 int QQmlContext_protectedbase_receivers(const VirtualQQmlContext* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QQmlContext::receivers(signal);
 }
 
 bool QQmlContext_protectedbase_isSignalConnected(const VirtualQQmlContext* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QQmlContext::isSignalConnected(*signal);
 }
 
 void QQmlContext_delete(QQmlContext* self) {

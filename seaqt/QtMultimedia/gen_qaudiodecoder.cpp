@@ -615,28 +615,28 @@ void QAudioDecoder_virtualbase_disconnectNotify(VirtualQAudioDecoder* self, QMet
 
 void QAudioDecoder_protectedbase_addPropertyWatch(VirtualQAudioDecoder* self, struct seaqt_string name) {
 		QByteArray name_QByteArray(name.data, name.len);
-	self->addPropertyWatch(name_QByteArray);
+	self->QAudioDecoder::addPropertyWatch(name_QByteArray);
 }
 
 void QAudioDecoder_protectedbase_removePropertyWatch(VirtualQAudioDecoder* self, struct seaqt_string name) {
 		QByteArray name_QByteArray(name.data, name.len);
-	self->removePropertyWatch(name_QByteArray);
+	self->QAudioDecoder::removePropertyWatch(name_QByteArray);
 }
 
 QObject* QAudioDecoder_protectedbase_sender(const VirtualQAudioDecoder* self) {
-	return self->sender();
+	return self->QAudioDecoder::sender();
 }
 
 int QAudioDecoder_protectedbase_senderSignalIndex(const VirtualQAudioDecoder* self) {
-	return self->senderSignalIndex();
+	return self->QAudioDecoder::senderSignalIndex();
 }
 
 int QAudioDecoder_protectedbase_receivers(const VirtualQAudioDecoder* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAudioDecoder::receivers(signal);
 }
 
 bool QAudioDecoder_protectedbase_isSignalConnected(const VirtualQAudioDecoder* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAudioDecoder::isSignalConnected(*signal);
 }
 
 void QAudioDecoder_delete(QAudioDecoder* self) {

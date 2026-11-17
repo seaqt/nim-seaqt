@@ -421,19 +421,19 @@ void QPictureFormatPlugin_virtualbase_disconnectNotify(VirtualQPictureFormatPlug
 }
 
 QObject* QPictureFormatPlugin_protectedbase_sender(const VirtualQPictureFormatPlugin* self) {
-	return self->sender();
+	return self->QPictureFormatPlugin::sender();
 }
 
 int QPictureFormatPlugin_protectedbase_senderSignalIndex(const VirtualQPictureFormatPlugin* self) {
-	return self->senderSignalIndex();
+	return self->QPictureFormatPlugin::senderSignalIndex();
 }
 
 int QPictureFormatPlugin_protectedbase_receivers(const VirtualQPictureFormatPlugin* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPictureFormatPlugin::receivers(signal);
 }
 
 bool QPictureFormatPlugin_protectedbase_isSignalConnected(const VirtualQPictureFormatPlugin* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPictureFormatPlugin::isSignalConnected(*signal);
 }
 
 void QPictureFormatPlugin_delete(QPictureFormatPlugin* self) {

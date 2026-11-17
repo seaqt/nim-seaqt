@@ -414,19 +414,19 @@ void QPluginLoader_virtualbase_disconnectNotify(VirtualQPluginLoader* self, QMet
 }
 
 QObject* QPluginLoader_protectedbase_sender(const VirtualQPluginLoader* self) {
-	return self->sender();
+	return self->QPluginLoader::sender();
 }
 
 int QPluginLoader_protectedbase_senderSignalIndex(const VirtualQPluginLoader* self) {
-	return self->senderSignalIndex();
+	return self->QPluginLoader::senderSignalIndex();
 }
 
 int QPluginLoader_protectedbase_receivers(const VirtualQPluginLoader* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QPluginLoader::receivers(signal);
 }
 
 bool QPluginLoader_protectedbase_isSignalConnected(const VirtualQPluginLoader* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QPluginLoader::isSignalConnected(*signal);
 }
 
 void QPluginLoader_delete(QPluginLoader* self) {

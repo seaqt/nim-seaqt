@@ -344,19 +344,19 @@ void QWebChannelAbstractTransport_virtualbase_disconnectNotify(VirtualQWebChanne
 }
 
 QObject* QWebChannelAbstractTransport_protectedbase_sender(const VirtualQWebChannelAbstractTransport* self) {
-	return self->sender();
+	return self->QWebChannelAbstractTransport::sender();
 }
 
 int QWebChannelAbstractTransport_protectedbase_senderSignalIndex(const VirtualQWebChannelAbstractTransport* self) {
-	return self->senderSignalIndex();
+	return self->QWebChannelAbstractTransport::senderSignalIndex();
 }
 
 int QWebChannelAbstractTransport_protectedbase_receivers(const VirtualQWebChannelAbstractTransport* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QWebChannelAbstractTransport::receivers(signal);
 }
 
 bool QWebChannelAbstractTransport_protectedbase_isSignalConnected(const VirtualQWebChannelAbstractTransport* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QWebChannelAbstractTransport::isSignalConnected(*signal);
 }
 
 void QWebChannelAbstractTransport_delete(QWebChannelAbstractTransport* self) {

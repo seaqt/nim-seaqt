@@ -543,19 +543,19 @@ void QRadioData_virtualbase_disconnectNotify(VirtualQRadioData* self, QMetaMetho
 }
 
 QObject* QRadioData_protectedbase_sender(const VirtualQRadioData* self) {
-	return self->sender();
+	return self->QRadioData::sender();
 }
 
 int QRadioData_protectedbase_senderSignalIndex(const VirtualQRadioData* self) {
-	return self->senderSignalIndex();
+	return self->QRadioData::senderSignalIndex();
 }
 
 int QRadioData_protectedbase_receivers(const VirtualQRadioData* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QRadioData::receivers(signal);
 }
 
 bool QRadioData_protectedbase_isSignalConnected(const VirtualQRadioData* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QRadioData::isSignalConnected(*signal);
 }
 
 void QRadioData_delete(QRadioData* self) {

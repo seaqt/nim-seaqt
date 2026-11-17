@@ -1114,43 +1114,43 @@ void QFontComboBox_virtualbase_disconnectNotify(VirtualQFontComboBox* self, QMet
 }
 
 void QFontComboBox_protectedbase_initStyleOption(const VirtualQFontComboBox* self, QStyleOptionComboBox* option) {
-	self->initStyleOption(option);
+	self->QFontComboBox::initStyleOption(option);
 }
 
 void QFontComboBox_protectedbase_updateMicroFocus(VirtualQFontComboBox* self) {
-	self->updateMicroFocus();
+	self->QFontComboBox::updateMicroFocus();
 }
 
 void QFontComboBox_protectedbase_create(VirtualQFontComboBox* self) {
-	self->create();
+	self->QFontComboBox::create();
 }
 
 void QFontComboBox_protectedbase_destroy(VirtualQFontComboBox* self) {
-	self->destroy();
+	self->QFontComboBox::destroy();
 }
 
 bool QFontComboBox_protectedbase_focusNextChild(VirtualQFontComboBox* self) {
-	return self->focusNextChild();
+	return self->QFontComboBox::focusNextChild();
 }
 
 bool QFontComboBox_protectedbase_focusPreviousChild(VirtualQFontComboBox* self) {
-	return self->focusPreviousChild();
+	return self->QFontComboBox::focusPreviousChild();
 }
 
 QObject* QFontComboBox_protectedbase_sender(const VirtualQFontComboBox* self) {
-	return self->sender();
+	return self->QFontComboBox::sender();
 }
 
 int QFontComboBox_protectedbase_senderSignalIndex(const VirtualQFontComboBox* self) {
-	return self->senderSignalIndex();
+	return self->QFontComboBox::senderSignalIndex();
 }
 
 int QFontComboBox_protectedbase_receivers(const VirtualQFontComboBox* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QFontComboBox::receivers(signal);
 }
 
 bool QFontComboBox_protectedbase_isSignalConnected(const VirtualQFontComboBox* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QFontComboBox::isSignalConnected(*signal);
 }
 
 void QFontComboBox_delete(QFontComboBox* self) {

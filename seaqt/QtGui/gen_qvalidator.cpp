@@ -393,19 +393,19 @@ void QValidator_virtualbase_disconnectNotify(VirtualQValidator* self, QMetaMetho
 }
 
 QObject* QValidator_protectedbase_sender(const VirtualQValidator* self) {
-	return self->sender();
+	return self->QValidator::sender();
 }
 
 int QValidator_protectedbase_senderSignalIndex(const VirtualQValidator* self) {
-	return self->senderSignalIndex();
+	return self->QValidator::senderSignalIndex();
 }
 
 int QValidator_protectedbase_receivers(const VirtualQValidator* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QValidator::receivers(signal);
 }
 
 bool QValidator_protectedbase_isSignalConnected(const VirtualQValidator* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QValidator::isSignalConnected(*signal);
 }
 
 void QValidator_delete(QValidator* self) {
@@ -840,19 +840,19 @@ void QIntValidator_virtualbase_disconnectNotify(VirtualQIntValidator* self, QMet
 }
 
 QObject* QIntValidator_protectedbase_sender(const VirtualQIntValidator* self) {
-	return self->sender();
+	return self->QIntValidator::sender();
 }
 
 int QIntValidator_protectedbase_senderSignalIndex(const VirtualQIntValidator* self) {
-	return self->senderSignalIndex();
+	return self->QIntValidator::senderSignalIndex();
 }
 
 int QIntValidator_protectedbase_receivers(const VirtualQIntValidator* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QIntValidator::receivers(signal);
 }
 
 bool QIntValidator_protectedbase_isSignalConnected(const VirtualQIntValidator* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QIntValidator::isSignalConnected(*signal);
 }
 
 void QIntValidator_delete(QIntValidator* self) {
@@ -1323,19 +1323,19 @@ void QDoubleValidator_virtualbase_disconnectNotify(VirtualQDoubleValidator* self
 }
 
 QObject* QDoubleValidator_protectedbase_sender(const VirtualQDoubleValidator* self) {
-	return self->sender();
+	return self->QDoubleValidator::sender();
 }
 
 int QDoubleValidator_protectedbase_senderSignalIndex(const VirtualQDoubleValidator* self) {
-	return self->senderSignalIndex();
+	return self->QDoubleValidator::senderSignalIndex();
 }
 
 int QDoubleValidator_protectedbase_receivers(const VirtualQDoubleValidator* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDoubleValidator::receivers(signal);
 }
 
 bool QDoubleValidator_protectedbase_isSignalConnected(const VirtualQDoubleValidator* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDoubleValidator::isSignalConnected(*signal);
 }
 
 void QDoubleValidator_delete(QDoubleValidator* self) {
@@ -1728,19 +1728,19 @@ void QRegExpValidator_virtualbase_disconnectNotify(VirtualQRegExpValidator* self
 }
 
 QObject* QRegExpValidator_protectedbase_sender(const VirtualQRegExpValidator* self) {
-	return self->sender();
+	return self->QRegExpValidator::sender();
 }
 
 int QRegExpValidator_protectedbase_senderSignalIndex(const VirtualQRegExpValidator* self) {
-	return self->senderSignalIndex();
+	return self->QRegExpValidator::senderSignalIndex();
 }
 
 int QRegExpValidator_protectedbase_receivers(const VirtualQRegExpValidator* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QRegExpValidator::receivers(signal);
 }
 
 bool QRegExpValidator_protectedbase_isSignalConnected(const VirtualQRegExpValidator* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QRegExpValidator::isSignalConnected(*signal);
 }
 
 void QRegExpValidator_delete(QRegExpValidator* self) {
@@ -2131,19 +2131,19 @@ void QRegularExpressionValidator_virtualbase_disconnectNotify(VirtualQRegularExp
 }
 
 QObject* QRegularExpressionValidator_protectedbase_sender(const VirtualQRegularExpressionValidator* self) {
-	return self->sender();
+	return self->QRegularExpressionValidator::sender();
 }
 
 int QRegularExpressionValidator_protectedbase_senderSignalIndex(const VirtualQRegularExpressionValidator* self) {
-	return self->senderSignalIndex();
+	return self->QRegularExpressionValidator::senderSignalIndex();
 }
 
 int QRegularExpressionValidator_protectedbase_receivers(const VirtualQRegularExpressionValidator* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QRegularExpressionValidator::receivers(signal);
 }
 
 bool QRegularExpressionValidator_protectedbase_isSignalConnected(const VirtualQRegularExpressionValidator* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QRegularExpressionValidator::isSignalConnected(*signal);
 }
 
 void QRegularExpressionValidator_delete(QRegularExpressionValidator* self) {

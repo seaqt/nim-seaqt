@@ -259,19 +259,19 @@ void QMaskGenerator_virtualbase_disconnectNotify(VirtualQMaskGenerator* self, QM
 }
 
 QObject* QMaskGenerator_protectedbase_sender(const VirtualQMaskGenerator* self) {
-	return self->sender();
+	return self->QMaskGenerator::sender();
 }
 
 int QMaskGenerator_protectedbase_senderSignalIndex(const VirtualQMaskGenerator* self) {
-	return self->senderSignalIndex();
+	return self->QMaskGenerator::senderSignalIndex();
 }
 
 int QMaskGenerator_protectedbase_receivers(const VirtualQMaskGenerator* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QMaskGenerator::receivers(signal);
 }
 
 bool QMaskGenerator_protectedbase_isSignalConnected(const VirtualQMaskGenerator* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QMaskGenerator::isSignalConnected(*signal);
 }
 
 void QMaskGenerator_delete(QMaskGenerator* self) {

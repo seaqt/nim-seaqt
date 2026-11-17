@@ -356,19 +356,19 @@ void QSound_virtualbase_disconnectNotify(VirtualQSound* self, QMetaMethod* signa
 }
 
 QObject* QSound_protectedbase_sender(const VirtualQSound* self) {
-	return self->sender();
+	return self->QSound::sender();
 }
 
 int QSound_protectedbase_senderSignalIndex(const VirtualQSound* self) {
-	return self->senderSignalIndex();
+	return self->QSound::senderSignalIndex();
 }
 
 int QSound_protectedbase_receivers(const VirtualQSound* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QSound::receivers(signal);
 }
 
 bool QSound_protectedbase_isSignalConnected(const VirtualQSound* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QSound::isSignalConnected(*signal);
 }
 
 void QSound_delete(QSound* self) {

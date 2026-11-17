@@ -1249,39 +1249,39 @@ void QAbstractButton_virtualbase_disconnectNotify(VirtualQAbstractButton* self, 
 }
 
 void QAbstractButton_protectedbase_updateMicroFocus(VirtualQAbstractButton* self) {
-	self->updateMicroFocus();
+	self->QAbstractButton::updateMicroFocus();
 }
 
 void QAbstractButton_protectedbase_create(VirtualQAbstractButton* self) {
-	self->create();
+	self->QAbstractButton::create();
 }
 
 void QAbstractButton_protectedbase_destroy(VirtualQAbstractButton* self) {
-	self->destroy();
+	self->QAbstractButton::destroy();
 }
 
 bool QAbstractButton_protectedbase_focusNextChild(VirtualQAbstractButton* self) {
-	return self->focusNextChild();
+	return self->QAbstractButton::focusNextChild();
 }
 
 bool QAbstractButton_protectedbase_focusPreviousChild(VirtualQAbstractButton* self) {
-	return self->focusPreviousChild();
+	return self->QAbstractButton::focusPreviousChild();
 }
 
 QObject* QAbstractButton_protectedbase_sender(const VirtualQAbstractButton* self) {
-	return self->sender();
+	return self->QAbstractButton::sender();
 }
 
 int QAbstractButton_protectedbase_senderSignalIndex(const VirtualQAbstractButton* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractButton::senderSignalIndex();
 }
 
 int QAbstractButton_protectedbase_receivers(const VirtualQAbstractButton* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractButton::receivers(signal);
 }
 
 bool QAbstractButton_protectedbase_isSignalConnected(const VirtualQAbstractButton* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractButton::isSignalConnected(*signal);
 }
 
 void QAbstractButton_delete(QAbstractButton* self) {

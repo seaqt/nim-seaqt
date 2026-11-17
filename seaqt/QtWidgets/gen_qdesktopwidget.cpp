@@ -1141,39 +1141,39 @@ void QDesktopWidget_virtualbase_disconnectNotify(VirtualQDesktopWidget* self, QM
 }
 
 void QDesktopWidget_protectedbase_updateMicroFocus(VirtualQDesktopWidget* self) {
-	self->updateMicroFocus();
+	self->QDesktopWidget::updateMicroFocus();
 }
 
 void QDesktopWidget_protectedbase_create(VirtualQDesktopWidget* self) {
-	self->create();
+	self->QDesktopWidget::create();
 }
 
 void QDesktopWidget_protectedbase_destroy(VirtualQDesktopWidget* self) {
-	self->destroy();
+	self->QDesktopWidget::destroy();
 }
 
 bool QDesktopWidget_protectedbase_focusNextChild(VirtualQDesktopWidget* self) {
-	return self->focusNextChild();
+	return self->QDesktopWidget::focusNextChild();
 }
 
 bool QDesktopWidget_protectedbase_focusPreviousChild(VirtualQDesktopWidget* self) {
-	return self->focusPreviousChild();
+	return self->QDesktopWidget::focusPreviousChild();
 }
 
 QObject* QDesktopWidget_protectedbase_sender(const VirtualQDesktopWidget* self) {
-	return self->sender();
+	return self->QDesktopWidget::sender();
 }
 
 int QDesktopWidget_protectedbase_senderSignalIndex(const VirtualQDesktopWidget* self) {
-	return self->senderSignalIndex();
+	return self->QDesktopWidget::senderSignalIndex();
 }
 
 int QDesktopWidget_protectedbase_receivers(const VirtualQDesktopWidget* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QDesktopWidget::receivers(signal);
 }
 
 bool QDesktopWidget_protectedbase_isSignalConnected(const VirtualQDesktopWidget* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QDesktopWidget::isSignalConnected(*signal);
 }
 
 void QDesktopWidget_delete(QDesktopWidget* self) {

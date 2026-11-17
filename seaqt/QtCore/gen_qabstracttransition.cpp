@@ -425,19 +425,19 @@ void QAbstractTransition_virtualbase_disconnectNotify(VirtualQAbstractTransition
 }
 
 QObject* QAbstractTransition_protectedbase_sender(const VirtualQAbstractTransition* self) {
-	return self->sender();
+	return self->QAbstractTransition::sender();
 }
 
 int QAbstractTransition_protectedbase_senderSignalIndex(const VirtualQAbstractTransition* self) {
-	return self->senderSignalIndex();
+	return self->QAbstractTransition::senderSignalIndex();
 }
 
 int QAbstractTransition_protectedbase_receivers(const VirtualQAbstractTransition* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QAbstractTransition::receivers(signal);
 }
 
 bool QAbstractTransition_protectedbase_isSignalConnected(const VirtualQAbstractTransition* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QAbstractTransition::isSignalConnected(*signal);
 }
 
 void QAbstractTransition_delete(QAbstractTransition* self) {

@@ -751,28 +751,28 @@ void QTemporaryFile_virtualbase_disconnectNotify(VirtualQTemporaryFile* self, QM
 }
 
 void QTemporaryFile_protectedbase_setOpenMode(VirtualQTemporaryFile* self, int openMode) {
-	self->setOpenMode(static_cast<VirtualQTemporaryFile::OpenMode>(openMode));
+	self->QTemporaryFile::setOpenMode(static_cast<VirtualQTemporaryFile::OpenMode>(openMode));
 }
 
 void QTemporaryFile_protectedbase_setErrorString(VirtualQTemporaryFile* self, struct seaqt_string errorString) {
 		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-	self->setErrorString(errorString_QString);
+	self->QTemporaryFile::setErrorString(errorString_QString);
 }
 
 QObject* QTemporaryFile_protectedbase_sender(const VirtualQTemporaryFile* self) {
-	return self->sender();
+	return self->QTemporaryFile::sender();
 }
 
 int QTemporaryFile_protectedbase_senderSignalIndex(const VirtualQTemporaryFile* self) {
-	return self->senderSignalIndex();
+	return self->QTemporaryFile::senderSignalIndex();
 }
 
 int QTemporaryFile_protectedbase_receivers(const VirtualQTemporaryFile* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QTemporaryFile::receivers(signal);
 }
 
 bool QTemporaryFile_protectedbase_isSignalConnected(const VirtualQTemporaryFile* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QTemporaryFile::isSignalConnected(*signal);
 }
 
 void QTemporaryFile_delete(QTemporaryFile* self) {

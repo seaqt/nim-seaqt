@@ -1669,43 +1669,43 @@ QVariant* QGraphicsWebView_virtualbase_extension(const VirtualQGraphicsWebView* 
 }
 
 void QGraphicsWebView_protectedbase_updateMicroFocus(VirtualQGraphicsWebView* self) {
-	self->updateMicroFocus();
+	self->QGraphicsWebView::updateMicroFocus();
 }
 
 QObject* QGraphicsWebView_protectedbase_sender(const VirtualQGraphicsWebView* self) {
-	return self->sender();
+	return self->QGraphicsWebView::sender();
 }
 
 int QGraphicsWebView_protectedbase_senderSignalIndex(const VirtualQGraphicsWebView* self) {
-	return self->senderSignalIndex();
+	return self->QGraphicsWebView::senderSignalIndex();
 }
 
 int QGraphicsWebView_protectedbase_receivers(const VirtualQGraphicsWebView* self, const char* signal) {
-	return self->receivers(signal);
+	return self->QGraphicsWebView::receivers(signal);
 }
 
 bool QGraphicsWebView_protectedbase_isSignalConnected(const VirtualQGraphicsWebView* self, QMetaMethod* signal) {
-	return self->isSignalConnected(*signal);
+	return self->QGraphicsWebView::isSignalConnected(*signal);
 }
 
 void QGraphicsWebView_protectedbase_addToIndex(VirtualQGraphicsWebView* self) {
-	self->addToIndex();
+	self->QGraphicsWebView::addToIndex();
 }
 
 void QGraphicsWebView_protectedbase_removeFromIndex(VirtualQGraphicsWebView* self) {
-	self->removeFromIndex();
+	self->QGraphicsWebView::removeFromIndex();
 }
 
 void QGraphicsWebView_protectedbase_prepareGeometryChange(VirtualQGraphicsWebView* self) {
-	self->prepareGeometryChange();
+	self->QGraphicsWebView::prepareGeometryChange();
 }
 
 void QGraphicsWebView_protectedbase_setGraphicsItem(VirtualQGraphicsWebView* self, QGraphicsItem* item) {
-	self->setGraphicsItem(item);
+	self->QGraphicsWebView::setGraphicsItem(item);
 }
 
 void QGraphicsWebView_protectedbase_setOwnedByLayout(VirtualQGraphicsWebView* self, bool ownedByLayout) {
-	self->setOwnedByLayout(ownedByLayout);
+	self->QGraphicsWebView::setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsWebView_delete(QGraphicsWebView* self) {

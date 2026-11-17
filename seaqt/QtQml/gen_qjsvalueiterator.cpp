@@ -16,10 +16,6 @@ static constexpr std::size_t seaqt_aligned_sizeof() {
 }
 #endif
 
-QJSValueIterator* QJSValueIterator_new(QJSValue* value) {
-	return new (std::nothrow) QJSValueIterator(*value);
-}
-
 bool QJSValueIterator_hasNext(const QJSValueIterator* self) {
 	return self->hasNext();
 }
@@ -41,10 +37,6 @@ struct seaqt_string QJSValueIterator_name(const QJSValueIterator* self) {
 
 QJSValue* QJSValueIterator_value(const QJSValueIterator* self) {
 	return new QJSValue(self->value());
-}
-
-void QJSValueIterator_operatorAssign(QJSValueIterator* self, QJSValue* value) {
-	self->operator=(*value);
 }
 
 void QJSValueIterator_delete(QJSValueIterator* self) {

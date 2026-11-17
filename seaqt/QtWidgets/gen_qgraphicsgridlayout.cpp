@@ -420,15 +420,15 @@ void QGraphicsGridLayout_virtualbase_widgetEvent(VirtualQGraphicsGridLayout* sel
 }
 
 void QGraphicsGridLayout_protectedbase_addChildLayoutItem(VirtualQGraphicsGridLayout* self, QGraphicsLayoutItem* layoutItem) {
-	self->addChildLayoutItem(layoutItem);
+	self->QGraphicsGridLayout::addChildLayoutItem(layoutItem);
 }
 
 void QGraphicsGridLayout_protectedbase_setGraphicsItem(VirtualQGraphicsGridLayout* self, QGraphicsItem* item) {
-	self->setGraphicsItem(item);
+	self->QGraphicsGridLayout::setGraphicsItem(item);
 }
 
 void QGraphicsGridLayout_protectedbase_setOwnedByLayout(VirtualQGraphicsGridLayout* self, bool ownedByLayout) {
-	self->setOwnedByLayout(ownedByLayout);
+	self->QGraphicsGridLayout::setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsGridLayout_delete(QGraphicsGridLayout* self) {
