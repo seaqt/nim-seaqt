@@ -8,7 +8,12 @@ const
   QtMultimediaWidgetsGenVersion* = "6.8.3"
     ## The version used for generating the bindings
 
-  QtMultimediaWidgetsBuildVersion* = gorge("pkg-config --modversion Qt6MultimediaWidgets")
-    ## The version used when compiling the application
+  QtMultimediaWidgetsBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6MultimediaWidgets")
+      if v.len > 0: v else: QtMultimediaWidgetsGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtMultimediaWidgetsBuildVersion=x.y.z
 
 {.passl: QtMultimediaWidgetsLibs}

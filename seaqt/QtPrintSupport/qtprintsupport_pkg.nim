@@ -8,7 +8,12 @@ const
   QtPrintSupportGenVersion* = "6.8.3"
     ## The version used for generating the bindings
 
-  QtPrintSupportBuildVersion* = gorge("pkg-config --modversion Qt6PrintSupport")
-    ## The version used when compiling the application
+  QtPrintSupportBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6PrintSupport")
+      if v.len > 0: v else: QtPrintSupportGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtPrintSupportBuildVersion=x.y.z
 
 {.passl: QtPrintSupportLibs}

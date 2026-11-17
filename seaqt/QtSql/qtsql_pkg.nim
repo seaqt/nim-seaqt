@@ -8,7 +8,12 @@ const
   QtSqlGenVersion* = "6.8.3"
     ## The version used for generating the bindings
 
-  QtSqlBuildVersion* = gorge("pkg-config --modversion Qt6Sql")
-    ## The version used when compiling the application
+  QtSqlBuildVersion* {.strdefine.} =
+    block:
+      const v = gorge("pkg-config --modversion Qt6Sql")
+      if v.len > 0: v else: QtSqlGenVersion
+    ## The version used when compiling the application - nim check and
+    ## nimsuggest do not run gorge and fall back to the generation version;
+    ## override with -d:QtSqlBuildVersion=x.y.z
 
 {.passl: QtSqlLibs}
