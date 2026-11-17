@@ -924,14 +924,9 @@ void QWebView_loadStarted(QWebView* self) {
 }
 
 void QWebView_connect_loadStarted(QWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)()>(&QWebView::loadStarted), self, local_caller{slot, callback, release});
+	QWebView::connect(self, static_cast<void (QWebView::*)()>(&QWebView::loadStarted), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QWebView_loadProgress(QWebView* self, int progress) {
@@ -939,15 +934,10 @@ void QWebView_loadProgress(QWebView* self, int progress) {
 }
 
 void QWebView_connect_loadProgress(QWebView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int progress) {
+	QWebView::connect(self, static_cast<void (QWebView::*)(int)>(&QWebView::loadProgress), self, [callback, release = seaqt::release_callback{slot,release}](int progress) {
 			int sigval1 = progress;
-			callback(slot, sigval1);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)(int)>(&QWebView::loadProgress), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWebView_loadFinished(QWebView* self, bool param1) {
@@ -955,15 +945,10 @@ void QWebView_loadFinished(QWebView* self, bool param1) {
 }
 
 void QWebView_connect_loadFinished(QWebView* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool param1) {
+	QWebView::connect(self, static_cast<void (QWebView::*)(bool)>(&QWebView::loadFinished), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
 			bool sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)(bool)>(&QWebView::loadFinished), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWebView_titleChanged(QWebView* self, struct seaqt_string title) {
@@ -972,10 +957,7 @@ void QWebView_titleChanged(QWebView* self, struct seaqt_string title) {
 }
 
 void QWebView_connect_titleChanged(QWebView* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& title) {
+	QWebView::connect(self, static_cast<void (QWebView::*)(const QString&)>(&QWebView::titleChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& title) {
 			const QString title_ret = title;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray title_b = title_ret.toUtf8();
@@ -984,10 +966,8 @@ void QWebView_connect_titleChanged(QWebView* self, intptr_t slot, void (*callbac
 			title_ms.data = static_cast<char*>(malloc(title_ms.len));
 			memcpy(title_ms.data, title_b.data(), title_ms.len);
 			struct seaqt_string sigval1 = title_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)(const QString&)>(&QWebView::titleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWebView_statusBarMessage(QWebView* self, struct seaqt_string text) {
@@ -996,10 +976,7 @@ void QWebView_statusBarMessage(QWebView* self, struct seaqt_string text) {
 }
 
 void QWebView_connect_statusBarMessage(QWebView* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& text) {
+	QWebView::connect(self, static_cast<void (QWebView::*)(const QString&)>(&QWebView::statusBarMessage), self, [callback, release = seaqt::release_callback{slot,release}](const QString& text) {
 			const QString text_ret = text;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray text_b = text_ret.toUtf8();
@@ -1008,10 +985,8 @@ void QWebView_connect_statusBarMessage(QWebView* self, intptr_t slot, void (*cal
 			text_ms.data = static_cast<char*>(malloc(text_ms.len));
 			memcpy(text_ms.data, text_b.data(), text_ms.len);
 			struct seaqt_string sigval1 = text_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)(const QString&)>(&QWebView::statusBarMessage), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWebView_linkClicked(QWebView* self, QUrl* param1) {
@@ -1019,17 +994,12 @@ void QWebView_linkClicked(QWebView* self, QUrl* param1) {
 }
 
 void QWebView_connect_linkClicked(QWebView* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& param1) {
+	QWebView::connect(self, static_cast<void (QWebView::*)(const QUrl&)>(&QWebView::linkClicked), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& param1) {
 			const QUrl& param1_ret = param1;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)(const QUrl&)>(&QWebView::linkClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QWebView_selectionChanged(QWebView* self) {
@@ -1037,14 +1007,9 @@ void QWebView_selectionChanged(QWebView* self) {
 }
 
 void QWebView_connect_selectionChanged(QWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)()>(&QWebView::selectionChanged), self, local_caller{slot, callback, release});
+	QWebView::connect(self, static_cast<void (QWebView::*)()>(&QWebView::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QWebView_iconChanged(QWebView* self) {
@@ -1052,14 +1017,9 @@ void QWebView_iconChanged(QWebView* self) {
 }
 
 void QWebView_connect_iconChanged(QWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)()>(&QWebView::iconChanged), self, local_caller{slot, callback, release});
+	QWebView::connect(self, static_cast<void (QWebView::*)()>(&QWebView::iconChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QWebView_urlChanged(QWebView* self, QUrl* param1) {
@@ -1067,17 +1027,12 @@ void QWebView_urlChanged(QWebView* self, QUrl* param1) {
 }
 
 void QWebView_connect_urlChanged(QWebView* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& param1) {
+	QWebView::connect(self, static_cast<void (QWebView::*)(const QUrl&)>(&QWebView::urlChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& param1) {
 			const QUrl& param1_ret = param1;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QWebView::connect(self, static_cast<void (QWebView::*)(const QUrl&)>(&QWebView::urlChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QWebView_tr_s_c(const char* s, const char* c) {

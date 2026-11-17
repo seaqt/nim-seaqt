@@ -218,7 +218,11 @@ int QProcess_protectedbase_senderSignalIndex(const VirtualQProcess* self);
 int QProcess_protectedbase_receivers(const VirtualQProcess* self, const char* signal);
 bool QProcess_protectedbase_isSignalConnected(const VirtualQProcess* self, QMetaMethod* signal);
 
-const QMetaObject* QProcess_staticMetaObject();
+void QProcess_connect_started(QProcess* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QProcess_connect_stateChanged(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QProcess_connect_readyReadStandardOutput(QProcess* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QProcess_connect_readyReadStandardError(QProcess* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QProcess_delete(QProcess* self);
 
 #ifdef __cplusplus

@@ -84,16 +84,11 @@ void QMediaGaplessPlaybackControl_crossfadeTimeChanged(QMediaGaplessPlaybackCont
 }
 
 void QMediaGaplessPlaybackControl_connect_crossfadeTimeChanged(QMediaGaplessPlaybackControl* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal crossfadeTime) {
+	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)(qreal)>(&QMediaGaplessPlaybackControl::crossfadeTimeChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal crossfadeTime) {
 			qreal crossfadeTime_ret = crossfadeTime;
 			double sigval1 = static_cast<double>(crossfadeTime_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)(qreal)>(&QMediaGaplessPlaybackControl::crossfadeTimeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaGaplessPlaybackControl_nextMediaChanged(QMediaGaplessPlaybackControl* self, QMediaContent* media) {
@@ -101,17 +96,12 @@ void QMediaGaplessPlaybackControl_nextMediaChanged(QMediaGaplessPlaybackControl*
 }
 
 void QMediaGaplessPlaybackControl_connect_nextMediaChanged(QMediaGaplessPlaybackControl* self, intptr_t slot, void (*callback)(intptr_t, QMediaContent*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QMediaContent*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QMediaContent*);
-		void operator()(const QMediaContent& media) {
+	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)(const QMediaContent&)>(&QMediaGaplessPlaybackControl::nextMediaChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QMediaContent& media) {
 			const QMediaContent& media_ret = media;
 			// Cast returned reference into pointer
 			QMediaContent* sigval1 = const_cast<QMediaContent*>(&media_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)(const QMediaContent&)>(&QMediaGaplessPlaybackControl::nextMediaChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaGaplessPlaybackControl_advancedToNextMedia(QMediaGaplessPlaybackControl* self) {
@@ -119,14 +109,9 @@ void QMediaGaplessPlaybackControl_advancedToNextMedia(QMediaGaplessPlaybackContr
 }
 
 void QMediaGaplessPlaybackControl_connect_advancedToNextMedia(QMediaGaplessPlaybackControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)()>(&QMediaGaplessPlaybackControl::advancedToNextMedia), self, local_caller{slot, callback, release});
+	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)()>(&QMediaGaplessPlaybackControl::advancedToNextMedia), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QMediaGaplessPlaybackControl_tr_s_c(const char* s, const char* c) {

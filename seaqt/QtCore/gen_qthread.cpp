@@ -388,6 +388,18 @@ bool QThread_wait_deadline(QThread* self, QDeadlineTimer* deadline) {
 	return self->wait(*deadline);
 }
 
+void QThread_connect_started(QThread* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QThread::connect(self, &QThread::started, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QThread_connect_finished(QThread* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QThread::connect(self, &QThread::finished, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
 const QMetaObject* QThread_staticMetaObject() { return &QThread::staticMetaObject; }
 void* QThread_vdata(VirtualQThread* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQThread>()); }
 VirtualQThread* vdata_QThread(void* vdata) { return reinterpret_cast<VirtualQThread*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQThread>()); }

@@ -88,7 +88,9 @@ int QFileSystemWatcher_protectedbase_senderSignalIndex(const VirtualQFileSystemW
 int QFileSystemWatcher_protectedbase_receivers(const VirtualQFileSystemWatcher* self, const char* signal);
 bool QFileSystemWatcher_protectedbase_isSignalConnected(const VirtualQFileSystemWatcher* self, QMetaMethod* signal);
 
-const QMetaObject* QFileSystemWatcher_staticMetaObject();
+void QFileSystemWatcher_connect_fileChanged(QFileSystemWatcher* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
+void QFileSystemWatcher_connect_directoryChanged(QFileSystemWatcher* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t));
+
 void QFileSystemWatcher_delete(QFileSystemWatcher* self);
 
 #ifdef __cplusplus

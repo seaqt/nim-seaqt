@@ -102,7 +102,6 @@ int QActionGroup_protectedbase_senderSignalIndex(const VirtualQActionGroup* self
 int QActionGroup_protectedbase_receivers(const VirtualQActionGroup* self, const char* signal);
 bool QActionGroup_protectedbase_isSignalConnected(const VirtualQActionGroup* self, QMetaMethod* signal);
 
-const QMetaObject* QActionGroup_staticMetaObject();
 void QActionGroup_delete(QActionGroup* self);
 
 #ifdef __cplusplus

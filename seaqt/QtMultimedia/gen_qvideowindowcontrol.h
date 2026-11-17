@@ -73,7 +73,6 @@ struct seaqt_string QVideoWindowControl_tr_s_c_n(const char* s, const char* c, i
 struct seaqt_string QVideoWindowControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QVideoWindowControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QVideoWindowControl_staticMetaObject();
 void QVideoWindowControl_delete(QVideoWindowControl* self);
 
 #ifdef __cplusplus

@@ -327,7 +327,6 @@ void QPainter_setRenderHints_hints_on(QPainter* self, int hints, bool on);
 void QPainter_setRedirected_device_replacement_offset(QPaintDevice* device, QPaintDevice* replacement, QPoint* offset);
 QPaintDevice* QPainter_redirected_device_offset(QPaintDevice* device, QPoint* offset);
 
-const QMetaObject* QPainter_staticMetaObject();
 void QPainter_delete(QPainter* self);
 
 double QPainter__PixmapFragment_x(const QPainter__PixmapFragment* self);

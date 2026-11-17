@@ -307,16 +307,11 @@ void QSystemTrayIcon_activated(QSystemTrayIcon* self, int reason) {
 }
 
 void QSystemTrayIcon_connect_activated(QSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QSystemTrayIcon::ActivationReason reason) {
+	QSystemTrayIcon::connect(self, static_cast<void (QSystemTrayIcon::*)(QSystemTrayIcon::ActivationReason)>(&QSystemTrayIcon::activated), self, [callback, release = seaqt::release_callback{slot,release}](QSystemTrayIcon::ActivationReason reason) {
 			QSystemTrayIcon::ActivationReason reason_ret = reason;
 			int sigval1 = static_cast<int>(reason_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QSystemTrayIcon::connect(self, static_cast<void (QSystemTrayIcon::*)(QSystemTrayIcon::ActivationReason)>(&QSystemTrayIcon::activated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSystemTrayIcon_messageClicked(QSystemTrayIcon* self) {
@@ -324,14 +319,9 @@ void QSystemTrayIcon_messageClicked(QSystemTrayIcon* self) {
 }
 
 void QSystemTrayIcon_connect_messageClicked(QSystemTrayIcon* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QSystemTrayIcon::connect(self, static_cast<void (QSystemTrayIcon::*)()>(&QSystemTrayIcon::messageClicked), self, local_caller{slot, callback, release});
+	QSystemTrayIcon::connect(self, static_cast<void (QSystemTrayIcon::*)()>(&QSystemTrayIcon::messageClicked), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QSystemTrayIcon_tr_s_c(const char* s, const char* c) {

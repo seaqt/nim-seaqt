@@ -349,15 +349,10 @@ void QDataWidgetMapper_currentIndexChanged(QDataWidgetMapper* self, int index) {
 }
 
 void QDataWidgetMapper_connect_currentIndexChanged(QDataWidgetMapper* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int index) {
+	QDataWidgetMapper::connect(self, static_cast<void (QDataWidgetMapper::*)(int)>(&QDataWidgetMapper::currentIndexChanged), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
 			int sigval1 = index;
-			callback(slot, sigval1);
-		}
-	};
-	QDataWidgetMapper::connect(self, static_cast<void (QDataWidgetMapper::*)(int)>(&QDataWidgetMapper::currentIndexChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QDataWidgetMapper_tr_s_c(const char* s, const char* c) {

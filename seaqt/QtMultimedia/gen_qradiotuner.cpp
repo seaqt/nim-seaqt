@@ -418,16 +418,11 @@ void QRadioTuner_stateChanged(QRadioTuner* self, int state) {
 }
 
 void QRadioTuner_connect_stateChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QRadioTuner::State state) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::State)>(&QRadioTuner::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QRadioTuner::State state) {
 			QRadioTuner::State state_ret = state;
 			int sigval1 = static_cast<int>(state_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::State)>(&QRadioTuner::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_bandChanged(QRadioTuner* self, int band) {
@@ -435,16 +430,11 @@ void QRadioTuner_bandChanged(QRadioTuner* self, int band) {
 }
 
 void QRadioTuner_connect_bandChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QRadioTuner::Band band) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::Band)>(&QRadioTuner::bandChanged), self, [callback, release = seaqt::release_callback{slot,release}](QRadioTuner::Band band) {
 			QRadioTuner::Band band_ret = band;
 			int sigval1 = static_cast<int>(band_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::Band)>(&QRadioTuner::bandChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_frequencyChanged(QRadioTuner* self, int frequency) {
@@ -452,15 +442,10 @@ void QRadioTuner_frequencyChanged(QRadioTuner* self, int frequency) {
 }
 
 void QRadioTuner_connect_frequencyChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int frequency) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::frequencyChanged), self, [callback, release = seaqt::release_callback{slot,release}](int frequency) {
 			int sigval1 = frequency;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::frequencyChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_stereoStatusChanged(QRadioTuner* self, bool stereo) {
@@ -468,15 +453,10 @@ void QRadioTuner_stereoStatusChanged(QRadioTuner* self, bool stereo) {
 }
 
 void QRadioTuner_connect_stereoStatusChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool stereo) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::stereoStatusChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool stereo) {
 			bool sigval1 = stereo;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::stereoStatusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_searchingChanged(QRadioTuner* self, bool searching) {
@@ -484,15 +464,10 @@ void QRadioTuner_searchingChanged(QRadioTuner* self, bool searching) {
 }
 
 void QRadioTuner_connect_searchingChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool searching) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::searchingChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool searching) {
 			bool sigval1 = searching;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::searchingChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_signalStrengthChanged(QRadioTuner* self, int signalStrength) {
@@ -500,15 +475,10 @@ void QRadioTuner_signalStrengthChanged(QRadioTuner* self, int signalStrength) {
 }
 
 void QRadioTuner_connect_signalStrengthChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int signalStrength) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::signalStrengthChanged), self, [callback, release = seaqt::release_callback{slot,release}](int signalStrength) {
 			int sigval1 = signalStrength;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::signalStrengthChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_volumeChanged(QRadioTuner* self, int volume) {
@@ -516,15 +486,10 @@ void QRadioTuner_volumeChanged(QRadioTuner* self, int volume) {
 }
 
 void QRadioTuner_connect_volumeChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int volume) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::volumeChanged), self, [callback, release = seaqt::release_callback{slot,release}](int volume) {
 			int sigval1 = volume;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::volumeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_mutedChanged(QRadioTuner* self, bool muted) {
@@ -532,15 +497,10 @@ void QRadioTuner_mutedChanged(QRadioTuner* self, bool muted) {
 }
 
 void QRadioTuner_connect_mutedChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool muted) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::mutedChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool muted) {
 			bool sigval1 = muted;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::mutedChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_stationFound(QRadioTuner* self, int frequency, struct seaqt_string stationId) {
@@ -549,10 +509,7 @@ void QRadioTuner_stationFound(QRadioTuner* self, int frequency, struct seaqt_str
 }
 
 void QRadioTuner_connect_stationFound(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, struct seaqt_string);
-		void operator()(int frequency, QString stationId) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int, QString)>(&QRadioTuner::stationFound), self, [callback, release = seaqt::release_callback{slot,release}](int frequency, QString stationId) {
 			int sigval1 = frequency;
 			QString stationId_ret = stationId;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -562,10 +519,8 @@ void QRadioTuner_connect_stationFound(QRadioTuner* self, intptr_t slot, void (*c
 			stationId_ms.data = static_cast<char*>(malloc(stationId_ms.len));
 			memcpy(stationId_ms.data, stationId_b.data(), stationId_ms.len);
 			struct seaqt_string sigval2 = stationId_ms;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int, QString)>(&QRadioTuner::stationFound), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QRadioTuner_antennaConnectedChanged(QRadioTuner* self, bool connectionStatus) {
@@ -573,15 +528,10 @@ void QRadioTuner_antennaConnectedChanged(QRadioTuner* self, bool connectionStatu
 }
 
 void QRadioTuner_connect_antennaConnectedChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool connectionStatus) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::antennaConnectedChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool connectionStatus) {
 			bool sigval1 = connectionStatus;
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::antennaConnectedChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QRadioTuner_error_error(QRadioTuner* self, int error) {
@@ -589,16 +539,11 @@ void QRadioTuner_error_error(QRadioTuner* self, int error) {
 }
 
 void QRadioTuner_connect_error_error(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QRadioTuner::Error error) {
+	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::Error)>(&QRadioTuner::error), self, [callback, release = seaqt::release_callback{slot,release}](QRadioTuner::Error error) {
 			QRadioTuner::Error error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::Error)>(&QRadioTuner::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QRadioTuner_tr_s_c(const char* s, const char* c) {

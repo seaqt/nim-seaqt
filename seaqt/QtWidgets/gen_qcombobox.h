@@ -354,7 +354,6 @@ int QComboBox_protectedbase_senderSignalIndex(const VirtualQComboBox* self);
 int QComboBox_protectedbase_receivers(const VirtualQComboBox* self, const char* signal);
 bool QComboBox_protectedbase_isSignalConnected(const VirtualQComboBox* self, QMetaMethod* signal);
 
-const QMetaObject* QComboBox_staticMetaObject();
 void QComboBox_delete(QComboBox* self);
 
 #ifdef __cplusplus

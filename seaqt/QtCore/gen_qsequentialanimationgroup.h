@@ -104,7 +104,6 @@ int QSequentialAnimationGroup_protectedbase_senderSignalIndex(const VirtualQSequ
 int QSequentialAnimationGroup_protectedbase_receivers(const VirtualQSequentialAnimationGroup* self, const char* signal);
 bool QSequentialAnimationGroup_protectedbase_isSignalConnected(const VirtualQSequentialAnimationGroup* self, QMetaMethod* signal);
 
-const QMetaObject* QSequentialAnimationGroup_staticMetaObject();
 void QSequentialAnimationGroup_delete(QSequentialAnimationGroup* self);
 
 #ifdef __cplusplus

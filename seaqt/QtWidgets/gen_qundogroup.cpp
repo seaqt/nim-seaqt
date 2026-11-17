@@ -302,15 +302,10 @@ void QUndoGroup_activeStackChanged(QUndoGroup* self, QUndoStack* stack) {
 }
 
 void QUndoGroup_connect_activeStackChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, QUndoStack*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUndoStack*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUndoStack*);
-		void operator()(QUndoStack* stack) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(QUndoStack*)>(&QUndoGroup::activeStackChanged), self, [callback, release = seaqt::release_callback{slot,release}](QUndoStack* stack) {
 			QUndoStack* sigval1 = stack;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(QUndoStack*)>(&QUndoGroup::activeStackChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoGroup_indexChanged(QUndoGroup* self, int idx) {
@@ -318,15 +313,10 @@ void QUndoGroup_indexChanged(QUndoGroup* self, int idx) {
 }
 
 void QUndoGroup_connect_indexChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int idx) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(int)>(&QUndoGroup::indexChanged), self, [callback, release = seaqt::release_callback{slot,release}](int idx) {
 			int sigval1 = idx;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(int)>(&QUndoGroup::indexChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoGroup_cleanChanged(QUndoGroup* self, bool clean) {
@@ -334,15 +324,10 @@ void QUndoGroup_cleanChanged(QUndoGroup* self, bool clean) {
 }
 
 void QUndoGroup_connect_cleanChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool clean) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::cleanChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool clean) {
 			bool sigval1 = clean;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::cleanChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoGroup_canUndoChanged(QUndoGroup* self, bool canUndo) {
@@ -350,15 +335,10 @@ void QUndoGroup_canUndoChanged(QUndoGroup* self, bool canUndo) {
 }
 
 void QUndoGroup_connect_canUndoChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool canUndo) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::canUndoChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool canUndo) {
 			bool sigval1 = canUndo;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::canUndoChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoGroup_canRedoChanged(QUndoGroup* self, bool canRedo) {
@@ -366,15 +346,10 @@ void QUndoGroup_canRedoChanged(QUndoGroup* self, bool canRedo) {
 }
 
 void QUndoGroup_connect_canRedoChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool canRedo) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::canRedoChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool canRedo) {
 			bool sigval1 = canRedo;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(bool)>(&QUndoGroup::canRedoChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoGroup_undoTextChanged(QUndoGroup* self, struct seaqt_string undoText) {
@@ -383,10 +358,7 @@ void QUndoGroup_undoTextChanged(QUndoGroup* self, struct seaqt_string undoText) 
 }
 
 void QUndoGroup_connect_undoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& undoText) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(const QString&)>(&QUndoGroup::undoTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& undoText) {
 			const QString undoText_ret = undoText;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray undoText_b = undoText_ret.toUtf8();
@@ -395,10 +367,8 @@ void QUndoGroup_connect_undoTextChanged(QUndoGroup* self, intptr_t slot, void (*
 			undoText_ms.data = static_cast<char*>(malloc(undoText_ms.len));
 			memcpy(undoText_ms.data, undoText_b.data(), undoText_ms.len);
 			struct seaqt_string sigval1 = undoText_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(const QString&)>(&QUndoGroup::undoTextChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoGroup_redoTextChanged(QUndoGroup* self, struct seaqt_string redoText) {
@@ -407,10 +377,7 @@ void QUndoGroup_redoTextChanged(QUndoGroup* self, struct seaqt_string redoText) 
 }
 
 void QUndoGroup_connect_redoTextChanged(QUndoGroup* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& redoText) {
+	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(const QString&)>(&QUndoGroup::redoTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& redoText) {
 			const QString redoText_ret = redoText;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray redoText_b = redoText_ret.toUtf8();
@@ -419,10 +386,8 @@ void QUndoGroup_connect_redoTextChanged(QUndoGroup* self, intptr_t slot, void (*
 			redoText_ms.data = static_cast<char*>(malloc(redoText_ms.len));
 			memcpy(redoText_ms.data, redoText_b.data(), redoText_ms.len);
 			struct seaqt_string sigval1 = redoText_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoGroup::connect(self, static_cast<void (QUndoGroup::*)(const QString&)>(&QUndoGroup::redoTextChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QUndoGroup_tr_s_c(const char* s, const char* c) {

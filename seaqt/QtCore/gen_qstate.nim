@@ -91,6 +91,11 @@ proc fcQState_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSta
 proc fcQState_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QState_tr_s_c_n".}
 proc fcQState_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QState_trUtf8_s_c".}
 proc fcQState_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QState_trUtf8_s_c_n".}
+proc fcQState_connect_finished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QState_connect_finished".}
+proc fcQState_connect_propertiesAssigned(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QState_connect_propertiesAssigned".}
+proc fcQState_connect_childModeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QState_connect_childModeChanged".}
+proc fcQState_connect_initialStateChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QState_connect_initialStateChanged".}
+proc fcQState_connect_errorStateChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QState_connect_errorStateChanged".}
 proc fcQState_vdata(self: pointer): ptr pointer {.importc: "QState_vdata".}
 proc fvdata_cQState(self: pointer): pointer {.importc: "vdata_QState".}
 
@@ -216,6 +221,81 @@ proc trUtf8*(_: type gen_qstate_types.QState, s: cstring, c: cstring, n: cint): 
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QStatefinishedSlot* = proc()
+proc fcQState_slot_callback_finished(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QStatefinishedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQState_slot_callback_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStatefinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onFinished*(self: gen_qstate_types.QState, slot: QStatefinishedSlot) =
+  var tmp = new QStatefinishedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQState_connect_finished(self.h, cast[int](addr tmp[]), fcQState_slot_callback_finished, fcQState_slot_callback_finished_release)
+
+type QStatepropertiesAssignedSlot* = proc()
+proc fcQState_slot_callback_propertiesAssigned(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QStatepropertiesAssignedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQState_slot_callback_propertiesAssigned_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStatepropertiesAssignedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onPropertiesAssigned*(self: gen_qstate_types.QState, slot: QStatepropertiesAssignedSlot) =
+  var tmp = new QStatepropertiesAssignedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQState_connect_propertiesAssigned(self.h, cast[int](addr tmp[]), fcQState_slot_callback_propertiesAssigned, fcQState_slot_callback_propertiesAssigned_release)
+
+type QStatechildModeChangedSlot* = proc()
+proc fcQState_slot_callback_childModeChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QStatechildModeChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQState_slot_callback_childModeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStatechildModeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onChildModeChanged*(self: gen_qstate_types.QState, slot: QStatechildModeChangedSlot) =
+  var tmp = new QStatechildModeChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQState_connect_childModeChanged(self.h, cast[int](addr tmp[]), fcQState_slot_callback_childModeChanged, fcQState_slot_callback_childModeChanged_release)
+
+type QStateinitialStateChangedSlot* = proc()
+proc fcQState_slot_callback_initialStateChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QStateinitialStateChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQState_slot_callback_initialStateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStateinitialStateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onInitialStateChanged*(self: gen_qstate_types.QState, slot: QStateinitialStateChangedSlot) =
+  var tmp = new QStateinitialStateChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQState_connect_initialStateChanged(self.h, cast[int](addr tmp[]), fcQState_slot_callback_initialStateChanged, fcQState_slot_callback_initialStateChanged_release)
+
+type QStateerrorStateChangedSlot* = proc()
+proc fcQState_slot_callback_errorStateChanged(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QStateerrorStateChangedSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQState_slot_callback_errorStateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStateerrorStateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onErrorStateChanged*(self: gen_qstate_types.QState, slot: QStateerrorStateChangedSlot) =
+  var tmp = new QStateerrorStateChangedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQState_connect_errorStateChanged(self.h, cast[int](addr tmp[]), fcQState_slot_callback_errorStateChanged, fcQState_slot_callback_errorStateChanged_release)
 
 type QStatemetaObjectProc* = proc(self: QState): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QStatemetacastProc* = proc(self: QState, param1: cstring): pointer {.raises: [], gcsafe.}

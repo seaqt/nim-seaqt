@@ -183,7 +183,6 @@ int QProxyStyle_protectedbase_senderSignalIndex(const VirtualQProxyStyle* self);
 int QProxyStyle_protectedbase_receivers(const VirtualQProxyStyle* self, const char* signal);
 bool QProxyStyle_protectedbase_isSignalConnected(const VirtualQProxyStyle* self, QMetaMethod* signal);
 
-const QMetaObject* QProxyStyle_staticMetaObject();
 void QProxyStyle_delete(QProxyStyle* self);
 
 #ifdef __cplusplus

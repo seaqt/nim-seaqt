@@ -464,7 +464,6 @@ int QHeaderView_protectedbase_senderSignalIndex(const VirtualQHeaderView* self);
 int QHeaderView_protectedbase_receivers(const VirtualQHeaderView* self, const char* signal);
 bool QHeaderView_protectedbase_isSignalConnected(const VirtualQHeaderView* self, QMetaMethod* signal);
 
-const QMetaObject* QHeaderView_staticMetaObject();
 void QHeaderView_delete(QHeaderView* self);
 
 #ifdef __cplusplus

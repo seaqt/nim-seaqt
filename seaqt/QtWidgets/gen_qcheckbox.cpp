@@ -818,15 +818,10 @@ void QCheckBox_stateChanged(QCheckBox* self, int param1) {
 }
 
 void QCheckBox_connect_stateChanged(QCheckBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int param1) {
+	QCheckBox::connect(self, static_cast<void (QCheckBox::*)(int)>(&QCheckBox::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](int param1) {
 			int sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QCheckBox::connect(self, static_cast<void (QCheckBox::*)(int)>(&QCheckBox::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QCheckBox_tr_s_c(const char* s, const char* c) {

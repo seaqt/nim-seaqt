@@ -141,7 +141,6 @@ int QWebEngineProfile_protectedbase_senderSignalIndex(const VirtualQWebEnginePro
 int QWebEngineProfile_protectedbase_receivers(const VirtualQWebEngineProfile* self, const char* signal);
 bool QWebEngineProfile_protectedbase_isSignalConnected(const VirtualQWebEngineProfile* self, QMetaMethod* signal);
 
-const QMetaObject* QWebEngineProfile_staticMetaObject();
 void QWebEngineProfile_delete(QWebEngineProfile* self);
 
 #ifdef __cplusplus

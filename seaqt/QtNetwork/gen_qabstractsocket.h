@@ -212,7 +212,6 @@ int QAbstractSocket_protectedbase_senderSignalIndex(const VirtualQAbstractSocket
 int QAbstractSocket_protectedbase_receivers(const VirtualQAbstractSocket* self, const char* signal);
 bool QAbstractSocket_protectedbase_isSignalConnected(const VirtualQAbstractSocket* self, QMetaMethod* signal);
 
-const QMetaObject* QAbstractSocket_staticMetaObject();
 void QAbstractSocket_delete(QAbstractSocket* self);
 
 #ifdef __cplusplus

@@ -116,15 +116,10 @@ void QVideoWidgetControl_fullScreenChanged(QVideoWidgetControl* self, bool fullS
 }
 
 void QVideoWidgetControl_connect_fullScreenChanged(QVideoWidgetControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool fullScreen) {
+	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(bool)>(&QVideoWidgetControl::fullScreenChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool fullScreen) {
 			bool sigval1 = fullScreen;
-			callback(slot, sigval1);
-		}
-	};
-	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(bool)>(&QVideoWidgetControl::fullScreenChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QVideoWidgetControl_brightnessChanged(QVideoWidgetControl* self, int brightness) {
@@ -132,15 +127,10 @@ void QVideoWidgetControl_brightnessChanged(QVideoWidgetControl* self, int bright
 }
 
 void QVideoWidgetControl_connect_brightnessChanged(QVideoWidgetControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int brightness) {
+	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(int)>(&QVideoWidgetControl::brightnessChanged), self, [callback, release = seaqt::release_callback{slot,release}](int brightness) {
 			int sigval1 = brightness;
-			callback(slot, sigval1);
-		}
-	};
-	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(int)>(&QVideoWidgetControl::brightnessChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QVideoWidgetControl_contrastChanged(QVideoWidgetControl* self, int contrast) {
@@ -148,15 +138,10 @@ void QVideoWidgetControl_contrastChanged(QVideoWidgetControl* self, int contrast
 }
 
 void QVideoWidgetControl_connect_contrastChanged(QVideoWidgetControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int contrast) {
+	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(int)>(&QVideoWidgetControl::contrastChanged), self, [callback, release = seaqt::release_callback{slot,release}](int contrast) {
 			int sigval1 = contrast;
-			callback(slot, sigval1);
-		}
-	};
-	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(int)>(&QVideoWidgetControl::contrastChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QVideoWidgetControl_hueChanged(QVideoWidgetControl* self, int hue) {
@@ -164,15 +149,10 @@ void QVideoWidgetControl_hueChanged(QVideoWidgetControl* self, int hue) {
 }
 
 void QVideoWidgetControl_connect_hueChanged(QVideoWidgetControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int hue) {
+	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(int)>(&QVideoWidgetControl::hueChanged), self, [callback, release = seaqt::release_callback{slot,release}](int hue) {
 			int sigval1 = hue;
-			callback(slot, sigval1);
-		}
-	};
-	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(int)>(&QVideoWidgetControl::hueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QVideoWidgetControl_saturationChanged(QVideoWidgetControl* self, int saturation) {
@@ -180,15 +160,10 @@ void QVideoWidgetControl_saturationChanged(QVideoWidgetControl* self, int satura
 }
 
 void QVideoWidgetControl_connect_saturationChanged(QVideoWidgetControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int saturation) {
+	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(int)>(&QVideoWidgetControl::saturationChanged), self, [callback, release = seaqt::release_callback{slot,release}](int saturation) {
 			int sigval1 = saturation;
-			callback(slot, sigval1);
-		}
-	};
-	QVideoWidgetControl::connect(self, static_cast<void (QVideoWidgetControl::*)(int)>(&QVideoWidgetControl::saturationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QVideoWidgetControl_tr_s_c(const char* s, const char* c) {

@@ -45,7 +45,6 @@ struct seaqt_string QMediaNetworkAccessControl_tr_s_c_n(const char* s, const cha
 struct seaqt_string QMediaNetworkAccessControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMediaNetworkAccessControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QMediaNetworkAccessControl_staticMetaObject();
 void QMediaNetworkAccessControl_delete(QMediaNetworkAccessControl* self);
 
 #ifdef __cplusplus

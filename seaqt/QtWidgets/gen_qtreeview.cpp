@@ -1618,17 +1618,12 @@ void QTreeView_expanded(QTreeView* self, QModelIndex* index) {
 }
 
 void QTreeView_connect_expanded(QTreeView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QTreeView::connect(self, static_cast<void (QTreeView::*)(const QModelIndex&)>(&QTreeView::expanded), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QTreeView::connect(self, static_cast<void (QTreeView::*)(const QModelIndex&)>(&QTreeView::expanded), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTreeView_collapsed(QTreeView* self, QModelIndex* index) {
@@ -1636,17 +1631,12 @@ void QTreeView_collapsed(QTreeView* self, QModelIndex* index) {
 }
 
 void QTreeView_connect_collapsed(QTreeView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QModelIndex*);
-		void operator()(const QModelIndex& index) {
+	QTreeView::connect(self, static_cast<void (QTreeView::*)(const QModelIndex&)>(&QTreeView::collapsed), self, [callback, release = seaqt::release_callback{slot,release}](const QModelIndex& index) {
 			const QModelIndex& index_ret = index;
 			// Cast returned reference into pointer
 			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QTreeView::connect(self, static_cast<void (QTreeView::*)(const QModelIndex&)>(&QTreeView::collapsed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTreeView_hideColumn(QTreeView* self, int column) {

@@ -51,7 +51,6 @@ struct seaqt_string QVideoDeviceSelectorControl_tr_s_c_n(const char* s, const ch
 struct seaqt_string QVideoDeviceSelectorControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QVideoDeviceSelectorControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QVideoDeviceSelectorControl_staticMetaObject();
 void QVideoDeviceSelectorControl_delete(QVideoDeviceSelectorControl* self);
 
 #ifdef __cplusplus

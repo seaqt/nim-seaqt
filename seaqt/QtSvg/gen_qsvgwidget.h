@@ -224,7 +224,6 @@ int QSvgWidget_protectedbase_senderSignalIndex(const VirtualQSvgWidget* self);
 int QSvgWidget_protectedbase_receivers(const VirtualQSvgWidget* self, const char* signal);
 bool QSvgWidget_protectedbase_isSignalConnected(const VirtualQSvgWidget* self, QMetaMethod* signal);
 
-const QMetaObject* QSvgWidget_staticMetaObject();
 void QSvgWidget_delete(QSvgWidget* self);
 
 #ifdef __cplusplus

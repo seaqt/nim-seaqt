@@ -106,7 +106,10 @@ int QAbstractTransition_protectedbase_senderSignalIndex(const VirtualQAbstractTr
 int QAbstractTransition_protectedbase_receivers(const VirtualQAbstractTransition* self, const char* signal);
 bool QAbstractTransition_protectedbase_isSignalConnected(const VirtualQAbstractTransition* self, QMetaMethod* signal);
 
-const QMetaObject* QAbstractTransition_staticMetaObject();
+void QAbstractTransition_connect_triggered(QAbstractTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAbstractTransition_connect_targetStateChanged(QAbstractTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAbstractTransition_connect_targetStatesChanged(QAbstractTransition* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QAbstractTransition_delete(QAbstractTransition* self);
 
 #ifdef __cplusplus

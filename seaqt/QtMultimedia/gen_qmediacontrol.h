@@ -37,7 +37,6 @@ struct seaqt_string QMediaControl_tr_s_c_n(const char* s, const char* c, int n);
 struct seaqt_string QMediaControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMediaControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QMediaControl_staticMetaObject();
 void QMediaControl_delete(QMediaControl* self);
 
 #ifdef __cplusplus

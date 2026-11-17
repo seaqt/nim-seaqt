@@ -69,6 +69,7 @@ proc fcQSocketNotifier_trSC(s: cstring, c: cstring): struct_seaqt_string {.impor
 proc fcQSocketNotifier_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSocketNotifier_tr_s_c_n".}
 proc fcQSocketNotifier_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QSocketNotifier_trUtf8_s_c".}
 proc fcQSocketNotifier_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QSocketNotifier_trUtf8_s_c_n".}
+proc fcQSocketNotifier_connect_activated(self: pointer, slot: int, callback: proc (slot: int, socket: pointer, activationEvent: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSocketNotifier_connect_activated".}
 proc fcQSocketNotifier_vdata(self: pointer): ptr pointer {.importc: "QSocketNotifier_vdata".}
 proc fvdata_cQSocketNotifier(self: pointer): pointer {.importc: "vdata_QSocketNotifier".}
 
@@ -163,6 +164,25 @@ proc trUtf8*(_: type gen_qsocketnotifier_types.QSocketNotifier, s: cstring, c: c
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QSocketNotifieractivatedSlot* = proc(socket: gen_qsocketnotifier_types.QSocketDescriptor, activationEvent: cint)
+proc fcQSocketNotifier_slot_callback_activated(slot: int, socket: pointer, activationEvent: cint) {.cdecl.} =
+  let nimfunc = cast[ptr QSocketNotifieractivatedSlot](cast[pointer](slot))
+  let slotval1 = gen_qsocketnotifier_types.QSocketDescriptor(h: socket, owned: true)
+
+  let slotval2 = cint(activationEvent)
+
+  nimfunc[](slotval1, slotval2)
+
+proc fcQSocketNotifier_slot_callback_activated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSocketNotifieractivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onActivated*(self: gen_qsocketnotifier_types.QSocketNotifier, slot: QSocketNotifieractivatedSlot) =
+  var tmp = new QSocketNotifieractivatedSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSocketNotifier_connect_activated(self.h, cast[int](addr tmp[]), fcQSocketNotifier_slot_callback_activated, fcQSocketNotifier_slot_callback_activated_release)
 
 type QSocketNotifiermetaObjectProc* = proc(self: QSocketNotifier): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSocketNotifiermetacastProc* = proc(self: QSocketNotifier, param1: cstring): pointer {.raises: [], gcsafe.}

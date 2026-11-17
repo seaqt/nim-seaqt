@@ -75,7 +75,6 @@ struct seaqt_string QWebEngineDownloadItem_tr_s_c_n(const char* s, const char* c
 struct seaqt_string QWebEngineDownloadItem_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineDownloadItem_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebEngineDownloadItem_staticMetaObject();
 void QWebEngineDownloadItem_delete(QWebEngineDownloadItem* self);
 
 #ifdef __cplusplus

@@ -812,18 +812,13 @@ void QMdiSubWindow_windowStateChanged(QMdiSubWindow* self, int oldState, int new
 }
 
 void QMdiSubWindow_connect_windowStateChanged(QMdiSubWindow* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int);
-		void operator()(Qt::WindowStates oldState, Qt::WindowStates newState) {
+	QMdiSubWindow::connect(self, static_cast<void (QMdiSubWindow::*)(Qt::WindowStates, Qt::WindowStates)>(&QMdiSubWindow::windowStateChanged), self, [callback, release = seaqt::release_callback{slot,release}](Qt::WindowStates oldState, Qt::WindowStates newState) {
 			Qt::WindowStates oldState_ret = oldState;
 			int sigval1 = static_cast<int>(oldState_ret);
 			Qt::WindowStates newState_ret = newState;
 			int sigval2 = static_cast<int>(newState_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QMdiSubWindow::connect(self, static_cast<void (QMdiSubWindow::*)(Qt::WindowStates, Qt::WindowStates)>(&QMdiSubWindow::windowStateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QMdiSubWindow_aboutToActivate(QMdiSubWindow* self) {
@@ -831,14 +826,9 @@ void QMdiSubWindow_aboutToActivate(QMdiSubWindow* self) {
 }
 
 void QMdiSubWindow_connect_aboutToActivate(QMdiSubWindow* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QMdiSubWindow::connect(self, static_cast<void (QMdiSubWindow::*)()>(&QMdiSubWindow::aboutToActivate), self, local_caller{slot, callback, release});
+	QMdiSubWindow::connect(self, static_cast<void (QMdiSubWindow::*)()>(&QMdiSubWindow::aboutToActivate), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QMdiSubWindow_showSystemMenu(QMdiSubWindow* self) {

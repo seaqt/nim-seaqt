@@ -58,7 +58,6 @@ struct seaqt_string QWebEngineCookieStore_trUtf8_s_c_n(const char* s, const char
 void QWebEngineCookieStore_setCookie_cookie_origin(QWebEngineCookieStore* self, QNetworkCookie* cookie, QUrl* origin);
 void QWebEngineCookieStore_deleteCookie_cookie_origin(QWebEngineCookieStore* self, QNetworkCookie* cookie, QUrl* origin);
 
-const QMetaObject* QWebEngineCookieStore_staticMetaObject();
 void QWebEngineCookieStore_delete(QWebEngineCookieStore* self);
 
 QWebEngineCookieStore__FilterRequest* QWebEngineCookieStore__FilterRequest_new(QWebEngineCookieStore__FilterRequest* from);

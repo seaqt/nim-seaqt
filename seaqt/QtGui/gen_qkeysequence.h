@@ -59,7 +59,6 @@ QKeySequence* QKeySequence_fromString_str_format(struct seaqt_string str, int fo
 struct seaqt_array /* of QKeySequence* */  QKeySequence_listFromString_str_format(struct seaqt_string str, int format);
 struct seaqt_string QKeySequence_listToString_list_format(struct seaqt_array /* of QKeySequence* */  list, int format);
 
-const QMetaObject* QKeySequence_staticMetaObject();
 void QKeySequence_delete(QKeySequence* self);
 
 #ifdef __cplusplus

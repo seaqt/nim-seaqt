@@ -87,15 +87,10 @@ void QCameraImageCaptureControl_readyForCaptureChanged(QCameraImageCaptureContro
 }
 
 void QCameraImageCaptureControl_connect_readyForCaptureChanged(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool ready) {
+	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(bool)>(&QCameraImageCaptureControl::readyForCaptureChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool ready) {
 			bool sigval1 = ready;
-			callback(slot, sigval1);
-		}
-	};
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(bool)>(&QCameraImageCaptureControl::readyForCaptureChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCameraImageCaptureControl_imageExposed(QCameraImageCaptureControl* self, int requestId) {
@@ -103,15 +98,10 @@ void QCameraImageCaptureControl_imageExposed(QCameraImageCaptureControl* self, i
 }
 
 void QCameraImageCaptureControl_connect_imageExposed(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int requestId) {
+	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int)>(&QCameraImageCaptureControl::imageExposed), self, [callback, release = seaqt::release_callback{slot,release}](int requestId) {
 			int sigval1 = requestId;
-			callback(slot, sigval1);
-		}
-	};
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int)>(&QCameraImageCaptureControl::imageExposed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCameraImageCaptureControl_imageCaptured(QCameraImageCaptureControl* self, int requestId, QImage* preview) {
@@ -119,18 +109,13 @@ void QCameraImageCaptureControl_imageCaptured(QCameraImageCaptureControl* self, 
 }
 
 void QCameraImageCaptureControl_connect_imageCaptured(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, int, QImage*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, QImage*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, QImage*);
-		void operator()(int requestId, const QImage& preview) {
+	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QImage&)>(&QCameraImageCaptureControl::imageCaptured), self, [callback, release = seaqt::release_callback{slot,release}](int requestId, const QImage& preview) {
 			int sigval1 = requestId;
 			const QImage& preview_ret = preview;
 			// Cast returned reference into pointer
 			QImage* sigval2 = const_cast<QImage*>(&preview_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QImage&)>(&QCameraImageCaptureControl::imageCaptured), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QCameraImageCaptureControl_imageMetadataAvailable(QCameraImageCaptureControl* self, int id, struct seaqt_string key, QVariant* value) {
@@ -139,10 +124,7 @@ void QCameraImageCaptureControl_imageMetadataAvailable(QCameraImageCaptureContro
 }
 
 void QCameraImageCaptureControl_connect_imageMetadataAvailable(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string, QVariant*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, struct seaqt_string, QVariant*);
-		void operator()(int id, const QString& key, const QVariant& value) {
+	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QString&, const QVariant&)>(&QCameraImageCaptureControl::imageMetadataAvailable), self, [callback, release = seaqt::release_callback{slot,release}](int id, const QString& key, const QVariant& value) {
 			int sigval1 = id;
 			const QString key_ret = key;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -155,10 +137,8 @@ void QCameraImageCaptureControl_connect_imageMetadataAvailable(QCameraImageCaptu
 			const QVariant& value_ret = value;
 			// Cast returned reference into pointer
 			QVariant* sigval3 = const_cast<QVariant*>(&value_ret);
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QString&, const QVariant&)>(&QCameraImageCaptureControl::imageMetadataAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 void QCameraImageCaptureControl_imageAvailable(QCameraImageCaptureControl* self, int requestId, QVideoFrame* buffer) {
@@ -166,18 +146,13 @@ void QCameraImageCaptureControl_imageAvailable(QCameraImageCaptureControl* self,
 }
 
 void QCameraImageCaptureControl_connect_imageAvailable(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, int, QVideoFrame*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, QVideoFrame*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, QVideoFrame*);
-		void operator()(int requestId, const QVideoFrame& buffer) {
+	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QVideoFrame&)>(&QCameraImageCaptureControl::imageAvailable), self, [callback, release = seaqt::release_callback{slot,release}](int requestId, const QVideoFrame& buffer) {
 			int sigval1 = requestId;
 			const QVideoFrame& buffer_ret = buffer;
 			// Cast returned reference into pointer
 			QVideoFrame* sigval2 = const_cast<QVideoFrame*>(&buffer_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QVideoFrame&)>(&QCameraImageCaptureControl::imageAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QCameraImageCaptureControl_imageSaved(QCameraImageCaptureControl* self, int requestId, struct seaqt_string fileName) {
@@ -186,10 +161,7 @@ void QCameraImageCaptureControl_imageSaved(QCameraImageCaptureControl* self, int
 }
 
 void QCameraImageCaptureControl_connect_imageSaved(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, struct seaqt_string);
-		void operator()(int requestId, const QString& fileName) {
+	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QString&)>(&QCameraImageCaptureControl::imageSaved), self, [callback, release = seaqt::release_callback{slot,release}](int requestId, const QString& fileName) {
 			int sigval1 = requestId;
 			const QString fileName_ret = fileName;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -199,10 +171,8 @@ void QCameraImageCaptureControl_connect_imageSaved(QCameraImageCaptureControl* s
 			fileName_ms.data = static_cast<char*>(malloc(fileName_ms.len));
 			memcpy(fileName_ms.data, fileName_b.data(), fileName_ms.len);
 			struct seaqt_string sigval2 = fileName_ms;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QString&)>(&QCameraImageCaptureControl::imageSaved), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QCameraImageCaptureControl_error(QCameraImageCaptureControl* self, int id, int error, struct seaqt_string errorString) {
@@ -211,10 +181,7 @@ void QCameraImageCaptureControl_error(QCameraImageCaptureControl* self, int id, 
 }
 
 void QCameraImageCaptureControl_connect_error(QCameraImageCaptureControl* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int, struct seaqt_string);
-		void operator()(int id, int error, const QString& errorString) {
+	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, int, const QString&)>(&QCameraImageCaptureControl::error), self, [callback, release = seaqt::release_callback{slot,release}](int id, int error, const QString& errorString) {
 			int sigval1 = id;
 			int sigval2 = error;
 			const QString errorString_ret = errorString;
@@ -225,10 +192,8 @@ void QCameraImageCaptureControl_connect_error(QCameraImageCaptureControl* self, 
 			errorString_ms.data = static_cast<char*>(malloc(errorString_ms.len));
 			memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
 			struct seaqt_string sigval3 = errorString_ms;
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, int, const QString&)>(&QCameraImageCaptureControl::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 struct seaqt_string QCameraImageCaptureControl_tr_s_c(const char* s, const char* c) {

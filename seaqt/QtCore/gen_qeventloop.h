@@ -95,7 +95,6 @@ int QEventLoop_protectedbase_senderSignalIndex(const VirtualQEventLoop* self);
 int QEventLoop_protectedbase_receivers(const VirtualQEventLoop* self, const char* signal);
 bool QEventLoop_protectedbase_isSignalConnected(const VirtualQEventLoop* self, QMetaMethod* signal);
 
-const QMetaObject* QEventLoop_staticMetaObject();
 void QEventLoop_delete(QEventLoop* self);
 
 QEventLoopLocker* QEventLoopLocker_new();

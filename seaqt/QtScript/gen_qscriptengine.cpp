@@ -506,17 +506,12 @@ void QScriptEngine_signalHandlerException(QScriptEngine* self, QScriptValue* exc
 }
 
 void QScriptEngine_connect_signalHandlerException(QScriptEngine* self, intptr_t slot, void (*callback)(intptr_t, QScriptValue*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScriptValue*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QScriptValue*);
-		void operator()(const QScriptValue& exception) {
+	QScriptEngine::connect(self, static_cast<void (QScriptEngine::*)(const QScriptValue&)>(&QScriptEngine::signalHandlerException), self, [callback, release = seaqt::release_callback{slot,release}](const QScriptValue& exception) {
 			const QScriptValue& exception_ret = exception;
 			// Cast returned reference into pointer
 			QScriptValue* sigval1 = const_cast<QScriptValue*>(&exception_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QScriptEngine::connect(self, static_cast<void (QScriptEngine::*)(const QScriptValue&)>(&QScriptEngine::signalHandlerException), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QScriptEngine_tr_s_c(const char* s, const char* c) {

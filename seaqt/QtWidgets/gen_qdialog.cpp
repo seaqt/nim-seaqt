@@ -852,15 +852,10 @@ void QDialog_finished(QDialog* self, int result) {
 }
 
 void QDialog_connect_finished(QDialog* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int result) {
+	QDialog::connect(self, static_cast<void (QDialog::*)(int)>(&QDialog::finished), self, [callback, release = seaqt::release_callback{slot,release}](int result) {
 			int sigval1 = result;
-			callback(slot, sigval1);
-		}
-	};
-	QDialog::connect(self, static_cast<void (QDialog::*)(int)>(&QDialog::finished), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QDialog_accepted(QDialog* self) {
@@ -868,14 +863,9 @@ void QDialog_accepted(QDialog* self) {
 }
 
 void QDialog_connect_accepted(QDialog* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QDialog::connect(self, static_cast<void (QDialog::*)()>(&QDialog::accepted), self, local_caller{slot, callback, release});
+	QDialog::connect(self, static_cast<void (QDialog::*)()>(&QDialog::accepted), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QDialog_rejected(QDialog* self) {
@@ -883,14 +873,9 @@ void QDialog_rejected(QDialog* self) {
 }
 
 void QDialog_connect_rejected(QDialog* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QDialog::connect(self, static_cast<void (QDialog::*)()>(&QDialog::rejected), self, local_caller{slot, callback, release});
+	QDialog::connect(self, static_cast<void (QDialog::*)()>(&QDialog::rejected), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QDialog_open(QDialog* self) {

@@ -115,7 +115,11 @@ int QTimeLine_protectedbase_senderSignalIndex(const VirtualQTimeLine* self);
 int QTimeLine_protectedbase_receivers(const VirtualQTimeLine* self, const char* signal);
 bool QTimeLine_protectedbase_isSignalConnected(const VirtualQTimeLine* self, QMetaMethod* signal);
 
-const QMetaObject* QTimeLine_staticMetaObject();
+void QTimeLine_connect_valueChanged(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t));
+void QTimeLine_connect_frameChanged(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QTimeLine_connect_stateChanged(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QTimeLine_connect_finished(QTimeLine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+
 void QTimeLine_delete(QTimeLine* self);
 
 #ifdef __cplusplus

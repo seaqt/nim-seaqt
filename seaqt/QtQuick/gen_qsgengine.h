@@ -106,7 +106,6 @@ int QSGEngine_protectedbase_senderSignalIndex(const VirtualQSGEngine* self);
 int QSGEngine_protectedbase_receivers(const VirtualQSGEngine* self, const char* signal);
 bool QSGEngine_protectedbase_isSignalConnected(const VirtualQSGEngine* self, QMetaMethod* signal);
 
-const QMetaObject* QSGEngine_staticMetaObject();
 void QSGEngine_delete(QSGEngine* self);
 
 #ifdef __cplusplus

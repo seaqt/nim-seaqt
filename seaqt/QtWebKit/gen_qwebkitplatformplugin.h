@@ -88,7 +88,6 @@ struct seaqt_string QWebSelectMethod_tr_s_c_n(const char* s, const char* c, int 
 struct seaqt_string QWebSelectMethod_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QWebSelectMethod_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebSelectMethod_staticMetaObject();
 void QWebSelectMethod_delete(QWebSelectMethod* self);
 
 struct seaqt_string QWebNotificationData_title(const QWebNotificationData* self);
@@ -115,7 +114,6 @@ struct seaqt_string QWebNotificationPresenter_tr_s_c_n(const char* s, const char
 struct seaqt_string QWebNotificationPresenter_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QWebNotificationPresenter_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebNotificationPresenter_staticMetaObject();
 void QWebNotificationPresenter_delete(QWebNotificationPresenter* self);
 
 void QWebHapticFeedbackPlayer_virtbase(QWebHapticFeedbackPlayer* src, QObject** outptr_QObject);
@@ -130,7 +128,6 @@ struct seaqt_string QWebHapticFeedbackPlayer_tr_s_c_n(const char* s, const char*
 struct seaqt_string QWebHapticFeedbackPlayer_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QWebHapticFeedbackPlayer_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebHapticFeedbackPlayer_staticMetaObject();
 void QWebHapticFeedbackPlayer_delete(QWebHapticFeedbackPlayer* self);
 
 void QWebTouchModifier_virtbase(QWebTouchModifier* src, QObject** outptr_QObject);
@@ -145,7 +142,6 @@ struct seaqt_string QWebTouchModifier_tr_s_c_n(const char* s, const char* c, int
 struct seaqt_string QWebTouchModifier_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QWebTouchModifier_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebTouchModifier_staticMetaObject();
 void QWebTouchModifier_delete(QWebTouchModifier* self);
 
 void QWebSpellChecker_virtbase(QWebSpellChecker* src, QObject** outptr_QObject);
@@ -169,7 +165,6 @@ struct seaqt_string QWebSpellChecker_tr_s_c_n(const char* s, const char* c, int 
 struct seaqt_string QWebSpellChecker_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QWebSpellChecker_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebSpellChecker_staticMetaObject();
 void QWebSpellChecker_delete(QWebSpellChecker* self);
 
 bool QWebKitPlatformPlugin_supportsExtension(const QWebKitPlatformPlugin* self, int param1);

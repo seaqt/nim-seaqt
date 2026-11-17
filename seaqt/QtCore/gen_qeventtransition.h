@@ -97,7 +97,6 @@ int QEventTransition_protectedbase_senderSignalIndex(const VirtualQEventTransiti
 int QEventTransition_protectedbase_receivers(const VirtualQEventTransition* self, const char* signal);
 bool QEventTransition_protectedbase_isSignalConnected(const VirtualQEventTransition* self, QMetaMethod* signal);
 
-const QMetaObject* QEventTransition_staticMetaObject();
 void QEventTransition_delete(QEventTransition* self);
 
 #ifdef __cplusplus

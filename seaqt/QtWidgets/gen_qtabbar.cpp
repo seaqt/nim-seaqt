@@ -1075,15 +1075,10 @@ void QTabBar_currentChanged(QTabBar* self, int index) {
 }
 
 void QTabBar_connect_currentChanged(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int index) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::currentChanged), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
 			int sigval1 = index;
-			callback(slot, sigval1);
-		}
-	};
-	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::currentChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTabBar_tabCloseRequested(QTabBar* self, int index) {
@@ -1091,15 +1086,10 @@ void QTabBar_tabCloseRequested(QTabBar* self, int index) {
 }
 
 void QTabBar_connect_tabCloseRequested(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int index) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabCloseRequested), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
 			int sigval1 = index;
-			callback(slot, sigval1);
-		}
-	};
-	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabCloseRequested), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTabBar_tabMoved(QTabBar* self, int from, int to) {
@@ -1107,16 +1097,11 @@ void QTabBar_tabMoved(QTabBar* self, int from, int to) {
 }
 
 void QTabBar_connect_tabMoved(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int);
-		void operator()(int from, int to) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int, int)>(&QTabBar::tabMoved), self, [callback, release = seaqt::release_callback{slot,release}](int from, int to) {
 			int sigval1 = from;
 			int sigval2 = to;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QTabBar::connect(self, static_cast<void (QTabBar::*)(int, int)>(&QTabBar::tabMoved), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QTabBar_tabBarClicked(QTabBar* self, int index) {
@@ -1124,15 +1109,10 @@ void QTabBar_tabBarClicked(QTabBar* self, int index) {
 }
 
 void QTabBar_connect_tabBarClicked(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int index) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabBarClicked), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
 			int sigval1 = index;
-			callback(slot, sigval1);
-		}
-	};
-	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabBarClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTabBar_tabBarDoubleClicked(QTabBar* self, int index) {
@@ -1140,15 +1120,10 @@ void QTabBar_tabBarDoubleClicked(QTabBar* self, int index) {
 }
 
 void QTabBar_connect_tabBarDoubleClicked(QTabBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int index) {
+	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabBarDoubleClicked), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
 			int sigval1 = index;
-			callback(slot, sigval1);
-		}
-	};
-	QTabBar::connect(self, static_cast<void (QTabBar::*)(int)>(&QTabBar::tabBarDoubleClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QTabBar_tr_s_c(const char* s, const char* c) {

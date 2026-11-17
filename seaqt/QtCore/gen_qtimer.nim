@@ -73,6 +73,7 @@ proc fcQTimer_trSC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTim
 proc fcQTimer_trSCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimer_tr_s_c_n".}
 proc fcQTimer_trUtf8SC(s: cstring, c: cstring): struct_seaqt_string {.importc: "QTimer_trUtf8_s_c".}
 proc fcQTimer_trUtf8SCN(s: cstring, c: cstring, n: cint): struct_seaqt_string {.importc: "QTimer_trUtf8_s_c_n".}
+proc fcQTimer_connect_timeout(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTimer_connect_timeout".}
 proc fcQTimer_vdata(self: pointer): ptr pointer {.importc: "QTimer_vdata".}
 proc fvdata_cQTimer(self: pointer): pointer {.importc: "vdata_QTimer".}
 
@@ -186,6 +187,21 @@ proc trUtf8*(_: type gen_qtimer_types.QTimer, s: cstring, c: cstring, n: cint): 
   let vx_ret = string.fromBytes(v_ms)
   c_free(v_ms.data)
   vx_ret
+
+type QTimertimeoutSlot* = proc()
+proc fcQTimer_slot_callback_timeout(slot: int) {.cdecl.} =
+  let nimfunc = cast[ptr QTimertimeoutSlot](cast[pointer](slot))
+  nimfunc[]()
+
+proc fcQTimer_slot_callback_timeout_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTimertimeoutSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
+proc onTimeout*(self: gen_qtimer_types.QTimer, slot: QTimertimeoutSlot) =
+  var tmp = new QTimertimeoutSlot
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTimer_connect_timeout(self.h, cast[int](addr tmp[]), fcQTimer_slot_callback_timeout, fcQTimer_slot_callback_timeout_release)
 
 type QTimermetaObjectProc* = proc(self: QTimer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QTimermetacastProc* = proc(self: QTimer, param1: cstring): pointer {.raises: [], gcsafe.}

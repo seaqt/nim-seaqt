@@ -854,15 +854,10 @@ void QAbstractSlider_valueChanged(QAbstractSlider* self, int value) {
 }
 
 void QAbstractSlider_connect_valueChanged(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int value) {
+	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int)>(&QAbstractSlider::valueChanged), self, [callback, release = seaqt::release_callback{slot,release}](int value) {
 			int sigval1 = value;
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int)>(&QAbstractSlider::valueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractSlider_sliderPressed(QAbstractSlider* self) {
@@ -870,14 +865,9 @@ void QAbstractSlider_sliderPressed(QAbstractSlider* self) {
 }
 
 void QAbstractSlider_connect_sliderPressed(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)()>(&QAbstractSlider::sliderPressed), self, local_caller{slot, callback, release});
+	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)()>(&QAbstractSlider::sliderPressed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QAbstractSlider_sliderMoved(QAbstractSlider* self, int position) {
@@ -885,15 +875,10 @@ void QAbstractSlider_sliderMoved(QAbstractSlider* self, int position) {
 }
 
 void QAbstractSlider_connect_sliderMoved(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int position) {
+	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int)>(&QAbstractSlider::sliderMoved), self, [callback, release = seaqt::release_callback{slot,release}](int position) {
 			int sigval1 = position;
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int)>(&QAbstractSlider::sliderMoved), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractSlider_sliderReleased(QAbstractSlider* self) {
@@ -901,14 +886,9 @@ void QAbstractSlider_sliderReleased(QAbstractSlider* self) {
 }
 
 void QAbstractSlider_connect_sliderReleased(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)()>(&QAbstractSlider::sliderReleased), self, local_caller{slot, callback, release});
+	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)()>(&QAbstractSlider::sliderReleased), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QAbstractSlider_rangeChanged(QAbstractSlider* self, int min, int max) {
@@ -916,16 +896,11 @@ void QAbstractSlider_rangeChanged(QAbstractSlider* self, int min, int max) {
 }
 
 void QAbstractSlider_connect_rangeChanged(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int);
-		void operator()(int min, int max) {
+	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int, int)>(&QAbstractSlider::rangeChanged), self, [callback, release = seaqt::release_callback{slot,release}](int min, int max) {
 			int sigval1 = min;
 			int sigval2 = max;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int, int)>(&QAbstractSlider::rangeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QAbstractSlider_actionTriggered(QAbstractSlider* self, int action) {
@@ -933,15 +908,10 @@ void QAbstractSlider_actionTriggered(QAbstractSlider* self, int action) {
 }
 
 void QAbstractSlider_connect_actionTriggered(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int action) {
+	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int)>(&QAbstractSlider::actionTriggered), self, [callback, release = seaqt::release_callback{slot,release}](int action) {
 			int sigval1 = action;
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractSlider::connect(self, static_cast<void (QAbstractSlider::*)(int)>(&QAbstractSlider::actionTriggered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QAbstractSlider_tr_s_c(const char* s, const char* c) {

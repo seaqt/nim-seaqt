@@ -325,7 +325,6 @@ int QDateTimeEdit_protectedbase_senderSignalIndex(const VirtualQDateTimeEdit* se
 int QDateTimeEdit_protectedbase_receivers(const VirtualQDateTimeEdit* self, const char* signal);
 bool QDateTimeEdit_protectedbase_isSignalConnected(const VirtualQDateTimeEdit* self, QMetaMethod* signal);
 
-const QMetaObject* QDateTimeEdit_staticMetaObject();
 void QDateTimeEdit_delete(QDateTimeEdit* self);
 
 typedef struct VirtualQTimeEdit VirtualQTimeEdit;
@@ -482,7 +481,6 @@ int QTimeEdit_protectedbase_senderSignalIndex(const VirtualQTimeEdit* self);
 int QTimeEdit_protectedbase_receivers(const VirtualQTimeEdit* self, const char* signal);
 bool QTimeEdit_protectedbase_isSignalConnected(const VirtualQTimeEdit* self, QMetaMethod* signal);
 
-const QMetaObject* QTimeEdit_staticMetaObject();
 void QTimeEdit_delete(QTimeEdit* self);
 
 typedef struct VirtualQDateEdit VirtualQDateEdit;
@@ -639,7 +637,6 @@ int QDateEdit_protectedbase_senderSignalIndex(const VirtualQDateEdit* self);
 int QDateEdit_protectedbase_receivers(const VirtualQDateEdit* self, const char* signal);
 bool QDateEdit_protectedbase_isSignalConnected(const VirtualQDateEdit* self, QMetaMethod* signal);
 
-const QMetaObject* QDateEdit_staticMetaObject();
 void QDateEdit_delete(QDateEdit* self);
 
 #ifdef __cplusplus

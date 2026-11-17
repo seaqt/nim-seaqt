@@ -225,7 +225,6 @@ int QSizeGrip_protectedbase_senderSignalIndex(const VirtualQSizeGrip* self);
 int QSizeGrip_protectedbase_receivers(const VirtualQSizeGrip* self, const char* signal);
 bool QSizeGrip_protectedbase_isSignalConnected(const VirtualQSizeGrip* self, QMetaMethod* signal);
 
-const QMetaObject* QSizeGrip_staticMetaObject();
 void QSizeGrip_delete(QSizeGrip* self);
 
 #ifdef __cplusplus

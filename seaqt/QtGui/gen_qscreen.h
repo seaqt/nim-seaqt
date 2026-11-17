@@ -106,7 +106,6 @@ QPixmap* QScreen_grabWindow_window_x_y(QScreen* self, uintptr_t window, int x, i
 QPixmap* QScreen_grabWindow_window_x_y_w(QScreen* self, uintptr_t window, int x, int y, int w);
 QPixmap* QScreen_grabWindow_window_x_y_w_h(QScreen* self, uintptr_t window, int x, int y, int w, int h);
 
-const QMetaObject* QScreen_staticMetaObject();
 void QScreen_delete(QScreen* self);
 
 #ifdef __cplusplus

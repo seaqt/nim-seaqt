@@ -253,7 +253,6 @@ int QQuickPaintedItem_protectedbase_senderSignalIndex(const VirtualQQuickPainted
 int QQuickPaintedItem_protectedbase_receivers(const VirtualQQuickPaintedItem* self, const char* signal);
 bool QQuickPaintedItem_protectedbase_isSignalConnected(const VirtualQQuickPaintedItem* self, QMetaMethod* signal);
 
-const QMetaObject* QQuickPaintedItem_staticMetaObject();
 void QQuickPaintedItem_delete(QQuickPaintedItem* self);
 
 #ifdef __cplusplus

@@ -513,15 +513,10 @@ void QUndoStack_indexChanged(QUndoStack* self, int idx) {
 }
 
 void QUndoStack_connect_indexChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int idx) {
+	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(int)>(&QUndoStack::indexChanged), self, [callback, release = seaqt::release_callback{slot,release}](int idx) {
 			int sigval1 = idx;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(int)>(&QUndoStack::indexChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoStack_cleanChanged(QUndoStack* self, bool clean) {
@@ -529,15 +524,10 @@ void QUndoStack_cleanChanged(QUndoStack* self, bool clean) {
 }
 
 void QUndoStack_connect_cleanChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool clean) {
+	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::cleanChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool clean) {
 			bool sigval1 = clean;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::cleanChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoStack_canUndoChanged(QUndoStack* self, bool canUndo) {
@@ -545,15 +535,10 @@ void QUndoStack_canUndoChanged(QUndoStack* self, bool canUndo) {
 }
 
 void QUndoStack_connect_canUndoChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool canUndo) {
+	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::canUndoChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool canUndo) {
 			bool sigval1 = canUndo;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::canUndoChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoStack_canRedoChanged(QUndoStack* self, bool canRedo) {
@@ -561,15 +546,10 @@ void QUndoStack_canRedoChanged(QUndoStack* self, bool canRedo) {
 }
 
 void QUndoStack_connect_canRedoChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool canRedo) {
+	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::canRedoChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool canRedo) {
 			bool sigval1 = canRedo;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::canRedoChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoStack_undoTextChanged(QUndoStack* self, struct seaqt_string undoText) {
@@ -578,10 +558,7 @@ void QUndoStack_undoTextChanged(QUndoStack* self, struct seaqt_string undoText) 
 }
 
 void QUndoStack_connect_undoTextChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& undoText) {
+	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::undoTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& undoText) {
 			const QString undoText_ret = undoText;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray undoText_b = undoText_ret.toUtf8();
@@ -590,10 +567,8 @@ void QUndoStack_connect_undoTextChanged(QUndoStack* self, intptr_t slot, void (*
 			undoText_ms.data = static_cast<char*>(malloc(undoText_ms.len));
 			memcpy(undoText_ms.data, undoText_b.data(), undoText_ms.len);
 			struct seaqt_string sigval1 = undoText_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::undoTextChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QUndoStack_redoTextChanged(QUndoStack* self, struct seaqt_string redoText) {
@@ -602,10 +577,7 @@ void QUndoStack_redoTextChanged(QUndoStack* self, struct seaqt_string redoText) 
 }
 
 void QUndoStack_connect_redoTextChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& redoText) {
+	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::redoTextChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& redoText) {
 			const QString redoText_ret = redoText;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray redoText_b = redoText_ret.toUtf8();
@@ -614,10 +586,8 @@ void QUndoStack_connect_redoTextChanged(QUndoStack* self, intptr_t slot, void (*
 			redoText_ms.data = static_cast<char*>(malloc(redoText_ms.len));
 			memcpy(redoText_ms.data, redoText_b.data(), redoText_ms.len);
 			struct seaqt_string sigval1 = redoText_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::redoTextChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QUndoStack_tr_s_c(const char* s, const char* c) {

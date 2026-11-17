@@ -141,7 +141,6 @@ int QQmlEngine_protectedbase_senderSignalIndex(const VirtualQQmlEngine* self);
 int QQmlEngine_protectedbase_receivers(const VirtualQQmlEngine* self, const char* signal);
 bool QQmlEngine_protectedbase_isSignalConnected(const VirtualQQmlEngine* self, QMetaMethod* signal);
 
-const QMetaObject* QQmlEngine_staticMetaObject();
 void QQmlEngine_delete(QQmlEngine* self);
 
 #ifdef __cplusplus

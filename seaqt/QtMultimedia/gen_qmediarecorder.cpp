@@ -546,16 +546,11 @@ void QMediaRecorder_stateChanged(QMediaRecorder* self, int state) {
 }
 
 void QMediaRecorder_connect_stateChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMediaRecorder::State state) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::State)>(&QMediaRecorder::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QMediaRecorder::State state) {
 			QMediaRecorder::State state_ret = state;
 			int sigval1 = static_cast<int>(state_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::State)>(&QMediaRecorder::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_statusChanged(QMediaRecorder* self, int status) {
@@ -563,16 +558,11 @@ void QMediaRecorder_statusChanged(QMediaRecorder* self, int status) {
 }
 
 void QMediaRecorder_connect_statusChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMediaRecorder::Status status) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::Status)>(&QMediaRecorder::statusChanged), self, [callback, release = seaqt::release_callback{slot,release}](QMediaRecorder::Status status) {
 			QMediaRecorder::Status status_ret = status;
 			int sigval1 = static_cast<int>(status_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::Status)>(&QMediaRecorder::statusChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_durationChanged(QMediaRecorder* self, long long duration) {
@@ -580,16 +570,11 @@ void QMediaRecorder_durationChanged(QMediaRecorder* self, long long duration) {
 }
 
 void QMediaRecorder_connect_durationChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, long long);
-		void operator()(qint64 duration) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(qint64)>(&QMediaRecorder::durationChanged), self, [callback, release = seaqt::release_callback{slot,release}](qint64 duration) {
 			qint64 duration_ret = duration;
 			long long sigval1 = static_cast<long long>(duration_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(qint64)>(&QMediaRecorder::durationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_mutedChanged(QMediaRecorder* self, bool muted) {
@@ -597,15 +582,10 @@ void QMediaRecorder_mutedChanged(QMediaRecorder* self, bool muted) {
 }
 
 void QMediaRecorder_connect_mutedChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool muted) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::mutedChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool muted) {
 			bool sigval1 = muted;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::mutedChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_volumeChanged(QMediaRecorder* self, double volume) {
@@ -613,16 +593,11 @@ void QMediaRecorder_volumeChanged(QMediaRecorder* self, double volume) {
 }
 
 void QMediaRecorder_connect_volumeChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal volume) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(qreal)>(&QMediaRecorder::volumeChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal volume) {
 			qreal volume_ret = volume;
 			double sigval1 = static_cast<double>(volume_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(qreal)>(&QMediaRecorder::volumeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_actualLocationChanged(QMediaRecorder* self, QUrl* location) {
@@ -630,17 +605,12 @@ void QMediaRecorder_actualLocationChanged(QMediaRecorder* self, QUrl* location) 
 }
 
 void QMediaRecorder_connect_actualLocationChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QUrl*);
-		void operator()(const QUrl& location) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(const QUrl&)>(&QMediaRecorder::actualLocationChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QUrl& location) {
 			const QUrl& location_ret = location;
 			// Cast returned reference into pointer
 			QUrl* sigval1 = const_cast<QUrl*>(&location_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(const QUrl&)>(&QMediaRecorder::actualLocationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_error_error(QMediaRecorder* self, int error) {
@@ -648,16 +618,11 @@ void QMediaRecorder_error_error(QMediaRecorder* self, int error) {
 }
 
 void QMediaRecorder_connect_error_error(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMediaRecorder::Error error) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::Error)>(&QMediaRecorder::error), self, [callback, release = seaqt::release_callback{slot,release}](QMediaRecorder::Error error) {
 			QMediaRecorder::Error error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::Error)>(&QMediaRecorder::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_metaDataAvailableChanged(QMediaRecorder* self, bool available) {
@@ -665,15 +630,10 @@ void QMediaRecorder_metaDataAvailableChanged(QMediaRecorder* self, bool availabl
 }
 
 void QMediaRecorder_connect_metaDataAvailableChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool available) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::metaDataAvailableChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool available) {
 			bool sigval1 = available;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::metaDataAvailableChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_metaDataWritableChanged(QMediaRecorder* self, bool writable) {
@@ -681,15 +641,10 @@ void QMediaRecorder_metaDataWritableChanged(QMediaRecorder* self, bool writable)
 }
 
 void QMediaRecorder_connect_metaDataWritableChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool writable) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::metaDataWritableChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool writable) {
 			bool sigval1 = writable;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::metaDataWritableChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_metaDataChanged(QMediaRecorder* self) {
@@ -697,14 +652,9 @@ void QMediaRecorder_metaDataChanged(QMediaRecorder* self) {
 }
 
 void QMediaRecorder_connect_metaDataChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::metaDataChanged), self, local_caller{slot, callback, release});
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::metaDataChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QMediaRecorder_metaDataChanged_key_value(QMediaRecorder* self, struct seaqt_string key, QVariant* value) {
@@ -713,10 +663,7 @@ void QMediaRecorder_metaDataChanged_key_value(QMediaRecorder* self, struct seaqt
 }
 
 void QMediaRecorder_connect_metaDataChanged_key_value(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string, QVariant*);
-		void operator()(const QString& key, const QVariant& value) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(const QString&, const QVariant&)>(&QMediaRecorder::metaDataChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& key, const QVariant& value) {
 			const QString key_ret = key;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray key_b = key_ret.toUtf8();
@@ -728,10 +675,8 @@ void QMediaRecorder_connect_metaDataChanged_key_value(QMediaRecorder* self, intp
 			const QVariant& value_ret = value;
 			// Cast returned reference into pointer
 			QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(const QString&, const QVariant&)>(&QMediaRecorder::metaDataChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QMediaRecorder_availabilityChanged_available(QMediaRecorder* self, bool available) {
@@ -739,15 +684,10 @@ void QMediaRecorder_availabilityChanged_available(QMediaRecorder* self, bool ava
 }
 
 void QMediaRecorder_connect_availabilityChanged_available(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool available) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::availabilityChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool available) {
 			bool sigval1 = available;
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(bool)>(&QMediaRecorder::availabilityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QMediaRecorder_availabilityChanged_availability(QMediaRecorder* self, int availability) {
@@ -755,16 +695,11 @@ void QMediaRecorder_availabilityChanged_availability(QMediaRecorder* self, int a
 }
 
 void QMediaRecorder_connect_availabilityChanged_availability(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMultimedia::AvailabilityStatus availability) {
+	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMultimedia::AvailabilityStatus)>(&QMediaRecorder::availabilityChanged), self, [callback, release = seaqt::release_callback{slot,release}](QMultimedia::AvailabilityStatus availability) {
 			QMultimedia::AvailabilityStatus availability_ret = availability;
 			int sigval1 = static_cast<int>(availability_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMultimedia::AvailabilityStatus)>(&QMediaRecorder::availabilityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QMediaRecorder_tr_s_c(const char* s, const char* c) {

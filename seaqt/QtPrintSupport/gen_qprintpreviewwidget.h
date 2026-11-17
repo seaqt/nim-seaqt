@@ -250,7 +250,6 @@ int QPrintPreviewWidget_protectedbase_senderSignalIndex(const VirtualQPrintPrevi
 int QPrintPreviewWidget_protectedbase_receivers(const VirtualQPrintPreviewWidget* self, const char* signal);
 bool QPrintPreviewWidget_protectedbase_isSignalConnected(const VirtualQPrintPreviewWidget* self, QMetaMethod* signal);
 
-const QMetaObject* QPrintPreviewWidget_staticMetaObject();
 void QPrintPreviewWidget_delete(QPrintPreviewWidget* self);
 
 #ifdef __cplusplus

@@ -304,18 +304,13 @@ void QQmlApplicationEngine_objectCreated(QQmlApplicationEngine* self, QObject* o
 }
 
 void QQmlApplicationEngine_connect_objectCreated(QQmlApplicationEngine* self, intptr_t slot, void (*callback)(intptr_t, QObject*, QUrl*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QObject*, QUrl*);
-		void operator()(QObject* object, const QUrl& url) {
+	QQmlApplicationEngine::connect(self, static_cast<void (QQmlApplicationEngine::*)(QObject*, const QUrl&)>(&QQmlApplicationEngine::objectCreated), self, [callback, release = seaqt::release_callback{slot,release}](QObject* object, const QUrl& url) {
 			QObject* sigval1 = object;
 			const QUrl& url_ret = url;
 			// Cast returned reference into pointer
 			QUrl* sigval2 = const_cast<QUrl*>(&url_ret);
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QQmlApplicationEngine::connect(self, static_cast<void (QQmlApplicationEngine::*)(QObject*, const QUrl&)>(&QQmlApplicationEngine::objectCreated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QQmlApplicationEngine_tr_s_c(const char* s, const char* c) {

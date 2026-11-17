@@ -88,7 +88,6 @@ int QSound_protectedbase_senderSignalIndex(const VirtualQSound* self);
 int QSound_protectedbase_receivers(const VirtualQSound* self, const char* signal);
 bool QSound_protectedbase_isSignalConnected(const VirtualQSound* self, QMetaMethod* signal);
 
-const QMetaObject* QSound_staticMetaObject();
 void QSound_delete(QSound* self);
 
 #ifdef __cplusplus

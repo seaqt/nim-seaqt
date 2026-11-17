@@ -68,7 +68,6 @@ struct seaqt_string QCalendar_standaloneMonthName_locale_month_year_format(const
 struct seaqt_string QCalendar_weekDayName_locale_day_format(const QCalendar* self, QLocale* locale, int day, int format);
 struct seaqt_string QCalendar_standaloneWeekDayName_locale_day_format(const QCalendar* self, QLocale* locale, int day, int format);
 
-const QMetaObject* QCalendar_staticMetaObject();
 void QCalendar_delete(QCalendar* self);
 
 QCalendar__YearMonthDay* QCalendar__YearMonthDay_new();

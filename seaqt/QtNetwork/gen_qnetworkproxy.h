@@ -70,7 +70,6 @@ void QNetworkProxyQuery_setUrl(QNetworkProxyQuery* self, QUrl* url);
 QNetworkConfiguration* QNetworkProxyQuery_networkConfiguration(const QNetworkProxyQuery* self);
 void QNetworkProxyQuery_setNetworkConfiguration(QNetworkProxyQuery* self, QNetworkConfiguration* networkConfiguration);
 
-const QMetaObject* QNetworkProxyQuery_staticMetaObject();
 void QNetworkProxyQuery_delete(QNetworkProxyQuery* self);
 
 QNetworkProxy* QNetworkProxy_new();

@@ -336,7 +336,6 @@ int QLineEdit_protectedbase_senderSignalIndex(const VirtualQLineEdit* self);
 int QLineEdit_protectedbase_receivers(const VirtualQLineEdit* self, const char* signal);
 bool QLineEdit_protectedbase_isSignalConnected(const VirtualQLineEdit* self, QMetaMethod* signal);
 
-const QMetaObject* QLineEdit_staticMetaObject();
 void QLineEdit_delete(QLineEdit* self);
 
 #ifdef __cplusplus

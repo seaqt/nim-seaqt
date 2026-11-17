@@ -60,7 +60,6 @@ struct seaqt_string QPaintDeviceWindow_tr_s_c_n(const char* s, const char* c, in
 struct seaqt_string QPaintDeviceWindow_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QPaintDeviceWindow_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QPaintDeviceWindow_staticMetaObject();
 void QPaintDeviceWindow_delete(QPaintDeviceWindow* self);
 
 #ifdef __cplusplus

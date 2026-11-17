@@ -48,7 +48,6 @@ struct seaqt_string QAudioInputSelectorControl_tr_s_c_n(const char* s, const cha
 struct seaqt_string QAudioInputSelectorControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QAudioInputSelectorControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QAudioInputSelectorControl_staticMetaObject();
 void QAudioInputSelectorControl_delete(QAudioInputSelectorControl* self);
 
 #ifdef __cplusplus

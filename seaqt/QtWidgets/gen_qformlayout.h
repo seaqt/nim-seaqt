@@ -193,7 +193,6 @@ int QFormLayout_protectedbase_senderSignalIndex(const VirtualQFormLayout* self);
 int QFormLayout_protectedbase_receivers(const VirtualQFormLayout* self, const char* signal);
 bool QFormLayout_protectedbase_isSignalConnected(const VirtualQFormLayout* self, QMetaMethod* signal);
 
-const QMetaObject* QFormLayout_staticMetaObject();
 void QFormLayout_delete(QFormLayout* self);
 
 QLayoutItem* QFormLayout__TakeRowResult_labelItem(const QFormLayout__TakeRowResult* self);

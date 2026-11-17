@@ -318,16 +318,11 @@ void QNetworkSession_stateChanged(QNetworkSession* self, int param1) {
 }
 
 void QNetworkSession_connect_stateChanged(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QNetworkSession::State param1) {
+	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::State)>(&QNetworkSession::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QNetworkSession::State param1) {
 			QNetworkSession::State param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::State)>(&QNetworkSession::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QNetworkSession_opened(QNetworkSession* self) {
@@ -335,14 +330,9 @@ void QNetworkSession_opened(QNetworkSession* self) {
 }
 
 void QNetworkSession_connect_opened(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::opened), self, local_caller{slot, callback, release});
+	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::opened), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkSession_closed(QNetworkSession* self) {
@@ -350,14 +340,9 @@ void QNetworkSession_closed(QNetworkSession* self) {
 }
 
 void QNetworkSession_connect_closed(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::closed), self, local_caller{slot, callback, release});
+	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::closed), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkSession_error_QNetworkSession_SessionError(QNetworkSession* self, int param1) {
@@ -365,16 +350,11 @@ void QNetworkSession_error_QNetworkSession_SessionError(QNetworkSession* self, i
 }
 
 void QNetworkSession_connect_error_QNetworkSession_SessionError(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QNetworkSession::SessionError param1) {
+	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::SessionError)>(&QNetworkSession::error), self, [callback, release = seaqt::release_callback{slot,release}](QNetworkSession::SessionError param1) {
 			QNetworkSession::SessionError param1_ret = param1;
 			int sigval1 = static_cast<int>(param1_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::SessionError)>(&QNetworkSession::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QNetworkSession_preferredConfigurationChanged(QNetworkSession* self, QNetworkConfiguration* config, bool isSeamless) {
@@ -382,18 +362,13 @@ void QNetworkSession_preferredConfigurationChanged(QNetworkSession* self, QNetwo
 }
 
 void QNetworkSession_connect_preferredConfigurationChanged(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, QNetworkConfiguration*, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkConfiguration*, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QNetworkConfiguration*, bool);
-		void operator()(const QNetworkConfiguration& config, bool isSeamless) {
+	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(const QNetworkConfiguration&, bool)>(&QNetworkSession::preferredConfigurationChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QNetworkConfiguration& config, bool isSeamless) {
 			const QNetworkConfiguration& config_ret = config;
 			// Cast returned reference into pointer
 			QNetworkConfiguration* sigval1 = const_cast<QNetworkConfiguration*>(&config_ret);
 			bool sigval2 = isSeamless;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(const QNetworkConfiguration&, bool)>(&QNetworkSession::preferredConfigurationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QNetworkSession_newConfigurationActivated(QNetworkSession* self) {
@@ -401,14 +376,9 @@ void QNetworkSession_newConfigurationActivated(QNetworkSession* self) {
 }
 
 void QNetworkSession_connect_newConfigurationActivated(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::newConfigurationActivated), self, local_caller{slot, callback, release});
+	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::newConfigurationActivated), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QNetworkSession_usagePoliciesChanged(QNetworkSession* self, int usagePolicies) {
@@ -416,16 +386,11 @@ void QNetworkSession_usagePoliciesChanged(QNetworkSession* self, int usagePolici
 }
 
 void QNetworkSession_connect_usagePoliciesChanged(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QNetworkSession::UsagePolicies usagePolicies) {
+	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::UsagePolicies)>(&QNetworkSession::usagePoliciesChanged), self, [callback, release = seaqt::release_callback{slot,release}](QNetworkSession::UsagePolicies usagePolicies) {
 			QNetworkSession::UsagePolicies usagePolicies_ret = usagePolicies;
 			int sigval1 = static_cast<int>(usagePolicies_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::UsagePolicies)>(&QNetworkSession::usagePoliciesChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QNetworkSession_tr_s_c(const char* s, const char* c) {

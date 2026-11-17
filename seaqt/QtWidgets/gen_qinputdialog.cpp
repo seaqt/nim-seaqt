@@ -1100,10 +1100,7 @@ void QInputDialog_textValueChanged(QInputDialog* self, struct seaqt_string text)
 }
 
 void QInputDialog_connect_textValueChanged(QInputDialog* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& text) {
+	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(const QString&)>(&QInputDialog::textValueChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& text) {
 			const QString text_ret = text;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray text_b = text_ret.toUtf8();
@@ -1112,10 +1109,8 @@ void QInputDialog_connect_textValueChanged(QInputDialog* self, intptr_t slot, vo
 			text_ms.data = static_cast<char*>(malloc(text_ms.len));
 			memcpy(text_ms.data, text_b.data(), text_ms.len);
 			struct seaqt_string sigval1 = text_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(const QString&)>(&QInputDialog::textValueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QInputDialog_textValueSelected(QInputDialog* self, struct seaqt_string text) {
@@ -1124,10 +1119,7 @@ void QInputDialog_textValueSelected(QInputDialog* self, struct seaqt_string text
 }
 
 void QInputDialog_connect_textValueSelected(QInputDialog* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& text) {
+	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(const QString&)>(&QInputDialog::textValueSelected), self, [callback, release = seaqt::release_callback{slot,release}](const QString& text) {
 			const QString text_ret = text;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray text_b = text_ret.toUtf8();
@@ -1136,10 +1128,8 @@ void QInputDialog_connect_textValueSelected(QInputDialog* self, intptr_t slot, v
 			text_ms.data = static_cast<char*>(malloc(text_ms.len));
 			memcpy(text_ms.data, text_b.data(), text_ms.len);
 			struct seaqt_string sigval1 = text_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(const QString&)>(&QInputDialog::textValueSelected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QInputDialog_intValueChanged(QInputDialog* self, int value) {
@@ -1147,15 +1137,10 @@ void QInputDialog_intValueChanged(QInputDialog* self, int value) {
 }
 
 void QInputDialog_connect_intValueChanged(QInputDialog* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int value) {
+	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(int)>(&QInputDialog::intValueChanged), self, [callback, release = seaqt::release_callback{slot,release}](int value) {
 			int sigval1 = value;
-			callback(slot, sigval1);
-		}
-	};
-	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(int)>(&QInputDialog::intValueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QInputDialog_intValueSelected(QInputDialog* self, int value) {
@@ -1163,15 +1148,10 @@ void QInputDialog_intValueSelected(QInputDialog* self, int value) {
 }
 
 void QInputDialog_connect_intValueSelected(QInputDialog* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int value) {
+	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(int)>(&QInputDialog::intValueSelected), self, [callback, release = seaqt::release_callback{slot,release}](int value) {
 			int sigval1 = value;
-			callback(slot, sigval1);
-		}
-	};
-	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(int)>(&QInputDialog::intValueSelected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QInputDialog_doubleValueChanged(QInputDialog* self, double value) {
@@ -1179,15 +1159,10 @@ void QInputDialog_doubleValueChanged(QInputDialog* self, double value) {
 }
 
 void QInputDialog_connect_doubleValueChanged(QInputDialog* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(double value) {
+	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(double)>(&QInputDialog::doubleValueChanged), self, [callback, release = seaqt::release_callback{slot,release}](double value) {
 			double sigval1 = value;
-			callback(slot, sigval1);
-		}
-	};
-	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(double)>(&QInputDialog::doubleValueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QInputDialog_doubleValueSelected(QInputDialog* self, double value) {
@@ -1195,15 +1170,10 @@ void QInputDialog_doubleValueSelected(QInputDialog* self, double value) {
 }
 
 void QInputDialog_connect_doubleValueSelected(QInputDialog* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(double value) {
+	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(double)>(&QInputDialog::doubleValueSelected), self, [callback, release = seaqt::release_callback{slot,release}](double value) {
 			double sigval1 = value;
-			callback(slot, sigval1);
-		}
-	};
-	QInputDialog::connect(self, static_cast<void (QInputDialog::*)(double)>(&QInputDialog::doubleValueSelected), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QInputDialog_done(QInputDialog* self, int result) {

@@ -169,7 +169,6 @@ int QUdpSocket_protectedbase_senderSignalIndex(const VirtualQUdpSocket* self);
 int QUdpSocket_protectedbase_receivers(const VirtualQUdpSocket* self, const char* signal);
 bool QUdpSocket_protectedbase_isSignalConnected(const VirtualQUdpSocket* self, QMetaMethod* signal);
 
-const QMetaObject* QUdpSocket_staticMetaObject();
 void QUdpSocket_delete(QUdpSocket* self);
 
 #ifdef __cplusplus

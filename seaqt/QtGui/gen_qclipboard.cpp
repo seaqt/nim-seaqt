@@ -140,16 +140,11 @@ void QClipboard_changed(QClipboard* self, int mode) {
 }
 
 void QClipboard_connect_changed(QClipboard* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QClipboard::Mode mode) {
+	QClipboard::connect(self, static_cast<void (QClipboard::*)(QClipboard::Mode)>(&QClipboard::changed), self, [callback, release = seaqt::release_callback{slot,release}](QClipboard::Mode mode) {
 			QClipboard::Mode mode_ret = mode;
 			int sigval1 = static_cast<int>(mode_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QClipboard::connect(self, static_cast<void (QClipboard::*)(QClipboard::Mode)>(&QClipboard::changed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QClipboard_selectionChanged(QClipboard* self) {
@@ -157,14 +152,9 @@ void QClipboard_selectionChanged(QClipboard* self) {
 }
 
 void QClipboard_connect_selectionChanged(QClipboard* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::selectionChanged), self, local_caller{slot, callback, release});
+	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QClipboard_findBufferChanged(QClipboard* self) {
@@ -172,14 +162,9 @@ void QClipboard_findBufferChanged(QClipboard* self) {
 }
 
 void QClipboard_connect_findBufferChanged(QClipboard* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::findBufferChanged), self, local_caller{slot, callback, release});
+	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::findBufferChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QClipboard_dataChanged(QClipboard* self) {
@@ -187,14 +172,9 @@ void QClipboard_dataChanged(QClipboard* self) {
 }
 
 void QClipboard_connect_dataChanged(QClipboard* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::dataChanged), self, local_caller{slot, callback, release});
+	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::dataChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QClipboard_tr_s_c(const char* s, const char* c) {

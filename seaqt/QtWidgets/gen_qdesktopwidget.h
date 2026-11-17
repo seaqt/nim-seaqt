@@ -242,7 +242,6 @@ int QDesktopWidget_protectedbase_senderSignalIndex(const VirtualQDesktopWidget* 
 int QDesktopWidget_protectedbase_receivers(const VirtualQDesktopWidget* self, const char* signal);
 bool QDesktopWidget_protectedbase_isSignalConnected(const VirtualQDesktopWidget* self, QMetaMethod* signal);
 
-const QMetaObject* QDesktopWidget_staticMetaObject();
 void QDesktopWidget_delete(QDesktopWidget* self);
 
 #ifdef __cplusplus

@@ -358,6 +358,36 @@ struct seaqt_string QState_trUtf8_s_c_n(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+void QState_connect_finished(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QState::connect(self, &QState::finished, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QState_connect_propertiesAssigned(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QState::connect(self, &QState::propertiesAssigned, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QState_connect_childModeChanged(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QState::connect(self, &QState::childModeChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QState_connect_initialStateChanged(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QState::connect(self, &QState::initialStateChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
+void QState_connect_errorStateChanged(QState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	QState::connect(self, &QState::errorStateChanged, self, [callback, release = seaqt::release_callback{slot,release}](auto) {
+			callback(release.slot);
+	});
+}
+
 const QMetaObject* QState_staticMetaObject() { return &QState::staticMetaObject; }
 void* QState_vdata(VirtualQState* self) { return reinterpret_cast<void*>(reinterpret_cast<char*>(self) + seaqt_aligned_sizeof<VirtualQState>()); }
 VirtualQState* vdata_QState(void* vdata) { return reinterpret_cast<VirtualQState*>(reinterpret_cast<char*>(vdata) - seaqt_aligned_sizeof<VirtualQState>()); }

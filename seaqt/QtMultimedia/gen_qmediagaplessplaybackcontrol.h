@@ -52,7 +52,6 @@ struct seaqt_string QMediaGaplessPlaybackControl_tr_s_c_n(const char* s, const c
 struct seaqt_string QMediaGaplessPlaybackControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMediaGaplessPlaybackControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QMediaGaplessPlaybackControl_staticMetaObject();
 void QMediaGaplessPlaybackControl_delete(QMediaGaplessPlaybackControl* self);
 
 #ifdef __cplusplus

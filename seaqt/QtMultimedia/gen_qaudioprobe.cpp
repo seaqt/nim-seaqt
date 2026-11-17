@@ -235,17 +235,12 @@ void QAudioProbe_audioBufferProbed(QAudioProbe* self, QAudioBuffer* buffer) {
 }
 
 void QAudioProbe_connect_audioBufferProbed(QAudioProbe* self, intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QAudioBuffer*);
-		void operator()(const QAudioBuffer& buffer) {
+	QAudioProbe::connect(self, static_cast<void (QAudioProbe::*)(const QAudioBuffer&)>(&QAudioProbe::audioBufferProbed), self, [callback, release = seaqt::release_callback{slot,release}](const QAudioBuffer& buffer) {
 			const QAudioBuffer& buffer_ret = buffer;
 			// Cast returned reference into pointer
 			QAudioBuffer* sigval1 = const_cast<QAudioBuffer*>(&buffer_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAudioProbe::connect(self, static_cast<void (QAudioProbe::*)(const QAudioBuffer&)>(&QAudioProbe::audioBufferProbed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAudioProbe_flush(QAudioProbe* self) {
@@ -253,14 +248,9 @@ void QAudioProbe_flush(QAudioProbe* self) {
 }
 
 void QAudioProbe_connect_flush(QAudioProbe* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAudioProbe::connect(self, static_cast<void (QAudioProbe::*)()>(&QAudioProbe::flush), self, local_caller{slot, callback, release});
+	QAudioProbe::connect(self, static_cast<void (QAudioProbe::*)()>(&QAudioProbe::flush), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QAudioProbe_tr_s_c(const char* s, const char* c) {

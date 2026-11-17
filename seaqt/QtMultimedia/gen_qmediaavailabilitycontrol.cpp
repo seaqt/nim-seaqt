@@ -67,16 +67,11 @@ void QMediaAvailabilityControl_availabilityChanged(QMediaAvailabilityControl* se
 }
 
 void QMediaAvailabilityControl_connect_availabilityChanged(QMediaAvailabilityControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QMultimedia::AvailabilityStatus availability) {
+	QMediaAvailabilityControl::connect(self, static_cast<void (QMediaAvailabilityControl::*)(QMultimedia::AvailabilityStatus)>(&QMediaAvailabilityControl::availabilityChanged), self, [callback, release = seaqt::release_callback{slot,release}](QMultimedia::AvailabilityStatus availability) {
 			QMultimedia::AvailabilityStatus availability_ret = availability;
 			int sigval1 = static_cast<int>(availability_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QMediaAvailabilityControl::connect(self, static_cast<void (QMediaAvailabilityControl::*)(QMultimedia::AvailabilityStatus)>(&QMediaAvailabilityControl::availabilityChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QMediaAvailabilityControl_tr_s_c(const char* s, const char* c) {

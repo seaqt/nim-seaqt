@@ -955,14 +955,9 @@ void QCalendarWidget_selectionChanged(QCalendarWidget* self) {
 }
 
 void QCalendarWidget_connect_selectionChanged(QCalendarWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QCalendarWidget::connect(self, static_cast<void (QCalendarWidget::*)()>(&QCalendarWidget::selectionChanged), self, local_caller{slot, callback, release});
+	QCalendarWidget::connect(self, static_cast<void (QCalendarWidget::*)()>(&QCalendarWidget::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QCalendarWidget_clicked(QCalendarWidget* self, QDate* date) {
@@ -970,17 +965,12 @@ void QCalendarWidget_clicked(QCalendarWidget* self, QDate* date) {
 }
 
 void QCalendarWidget_connect_clicked(QCalendarWidget* self, intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QDate*);
-		void operator()(const QDate& date) {
+	QCalendarWidget::connect(self, static_cast<void (QCalendarWidget::*)(const QDate&)>(&QCalendarWidget::clicked), self, [callback, release = seaqt::release_callback{slot,release}](const QDate& date) {
 			const QDate& date_ret = date;
 			// Cast returned reference into pointer
 			QDate* sigval1 = const_cast<QDate*>(&date_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCalendarWidget::connect(self, static_cast<void (QCalendarWidget::*)(const QDate&)>(&QCalendarWidget::clicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCalendarWidget_activated(QCalendarWidget* self, QDate* date) {
@@ -988,17 +978,12 @@ void QCalendarWidget_activated(QCalendarWidget* self, QDate* date) {
 }
 
 void QCalendarWidget_connect_activated(QCalendarWidget* self, intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDate*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QDate*);
-		void operator()(const QDate& date) {
+	QCalendarWidget::connect(self, static_cast<void (QCalendarWidget::*)(const QDate&)>(&QCalendarWidget::activated), self, [callback, release = seaqt::release_callback{slot,release}](const QDate& date) {
 			const QDate& date_ret = date;
 			// Cast returned reference into pointer
 			QDate* sigval1 = const_cast<QDate*>(&date_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QCalendarWidget::connect(self, static_cast<void (QCalendarWidget::*)(const QDate&)>(&QCalendarWidget::activated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QCalendarWidget_currentPageChanged(QCalendarWidget* self, int year, int month) {
@@ -1006,16 +991,11 @@ void QCalendarWidget_currentPageChanged(QCalendarWidget* self, int year, int mon
 }
 
 void QCalendarWidget_connect_currentPageChanged(QCalendarWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, int);
-		void operator()(int year, int month) {
+	QCalendarWidget::connect(self, static_cast<void (QCalendarWidget::*)(int, int)>(&QCalendarWidget::currentPageChanged), self, [callback, release = seaqt::release_callback{slot,release}](int year, int month) {
 			int sigval1 = year;
 			int sigval2 = month;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QCalendarWidget::connect(self, static_cast<void (QCalendarWidget::*)(int, int)>(&QCalendarWidget::currentPageChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 struct seaqt_string QCalendarWidget_tr_s_c(const char* s, const char* c) {

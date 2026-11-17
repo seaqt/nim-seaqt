@@ -536,14 +536,9 @@ void QLocalSocket_connected(QLocalSocket* self) {
 }
 
 void QLocalSocket_connect_connected(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)()>(&QLocalSocket::connected), self, local_caller{slot, callback, release});
+	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)()>(&QLocalSocket::connected), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QLocalSocket_disconnected(QLocalSocket* self) {
@@ -551,14 +546,9 @@ void QLocalSocket_disconnected(QLocalSocket* self) {
 }
 
 void QLocalSocket_connect_disconnected(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)()>(&QLocalSocket::disconnected), self, local_caller{slot, callback, release});
+	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)()>(&QLocalSocket::disconnected), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QLocalSocket_error_socketError(QLocalSocket* self, int socketError) {
@@ -566,16 +556,11 @@ void QLocalSocket_error_socketError(QLocalSocket* self, int socketError) {
 }
 
 void QLocalSocket_connect_error_socketError(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QLocalSocket::LocalSocketError socketError) {
+	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)(QLocalSocket::LocalSocketError)>(&QLocalSocket::error), self, [callback, release = seaqt::release_callback{slot,release}](QLocalSocket::LocalSocketError socketError) {
 			QLocalSocket::LocalSocketError socketError_ret = socketError;
 			int sigval1 = static_cast<int>(socketError_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)(QLocalSocket::LocalSocketError)>(&QLocalSocket::error), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QLocalSocket_errorOccurred(QLocalSocket* self, int socketError) {
@@ -583,16 +568,11 @@ void QLocalSocket_errorOccurred(QLocalSocket* self, int socketError) {
 }
 
 void QLocalSocket_connect_errorOccurred(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QLocalSocket::LocalSocketError socketError) {
+	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)(QLocalSocket::LocalSocketError)>(&QLocalSocket::errorOccurred), self, [callback, release = seaqt::release_callback{slot,release}](QLocalSocket::LocalSocketError socketError) {
 			QLocalSocket::LocalSocketError socketError_ret = socketError;
 			int sigval1 = static_cast<int>(socketError_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)(QLocalSocket::LocalSocketError)>(&QLocalSocket::errorOccurred), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QLocalSocket_stateChanged(QLocalSocket* self, int socketState) {
@@ -600,16 +580,11 @@ void QLocalSocket_stateChanged(QLocalSocket* self, int socketState) {
 }
 
 void QLocalSocket_connect_stateChanged(QLocalSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QLocalSocket::LocalSocketState socketState) {
+	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)(QLocalSocket::LocalSocketState)>(&QLocalSocket::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QLocalSocket::LocalSocketState socketState) {
 			QLocalSocket::LocalSocketState socketState_ret = socketState;
 			int sigval1 = static_cast<int>(socketState_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QLocalSocket::connect(self, static_cast<void (QLocalSocket::*)(QLocalSocket::LocalSocketState)>(&QLocalSocket::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QLocalSocket_tr_s_c(const char* s, const char* c) {

@@ -73,7 +73,6 @@ struct seaqt_string QSGAbstractRenderer_tr_s_c_n(const char* s, const char* c, i
 struct seaqt_string QSGAbstractRenderer_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QSGAbstractRenderer_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QSGAbstractRenderer_staticMetaObject();
 void QSGAbstractRenderer_delete(QSGAbstractRenderer* self);
 
 #ifdef __cplusplus

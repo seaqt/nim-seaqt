@@ -83,7 +83,6 @@ struct seaqt_string QCameraFocus_tr_s_c_n(const char* s, const char* c, int n);
 struct seaqt_string QCameraFocus_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraFocus_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCameraFocus_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

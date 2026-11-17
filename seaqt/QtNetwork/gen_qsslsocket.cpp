@@ -1068,14 +1068,9 @@ void QSslSocket_encrypted(QSslSocket* self) {
 }
 
 void QSslSocket_connect_encrypted(QSslSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QSslSocket::connect(self, static_cast<void (QSslSocket::*)()>(&QSslSocket::encrypted), self, local_caller{slot, callback, release});
+	QSslSocket::connect(self, static_cast<void (QSslSocket::*)()>(&QSslSocket::encrypted), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QSslSocket_peerVerifyError(QSslSocket* self, QSslError* error) {
@@ -1083,17 +1078,12 @@ void QSslSocket_peerVerifyError(QSslSocket* self, QSslError* error) {
 }
 
 void QSslSocket_connect_peerVerifyError(QSslSocket* self, intptr_t slot, void (*callback)(intptr_t, QSslError*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslError*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSslError*);
-		void operator()(const QSslError& error) {
+	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(const QSslError&)>(&QSslSocket::peerVerifyError), self, [callback, release = seaqt::release_callback{slot,release}](const QSslError& error) {
 			const QSslError& error_ret = error;
 			// Cast returned reference into pointer
 			QSslError* sigval1 = const_cast<QSslError*>(&error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(const QSslError&)>(&QSslSocket::peerVerifyError), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSslSocket_sslErrors_errors(QSslSocket* self, struct seaqt_array /* of QSslError* */  errors) {
@@ -1107,10 +1097,7 @@ void QSslSocket_sslErrors_errors(QSslSocket* self, struct seaqt_array /* of QSsl
 }
 
 void QSslSocket_connect_sslErrors_errors(QSslSocket* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QSslError* */ ), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_array /* of QSslError* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_array /* of QSslError* */ );
-		void operator()(const QList<QSslError>& errors) {
+	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(const QList<QSslError>&)>(&QSslSocket::sslErrors), self, [callback, release = seaqt::release_callback{slot,release}](const QList<QSslError>& errors) {
 			const QList<QSslError>& errors_ret = errors;
 			// Convert QList<> from C++ memory to manually-managed C memory
 			QSslError** errors_arr = static_cast<QSslError**>(malloc(sizeof(QSslError*) * errors_ret.length()));
@@ -1121,10 +1108,8 @@ void QSslSocket_connect_sslErrors_errors(QSslSocket* self, intptr_t slot, void (
 			errors_out.len = errors_ret.length();
 			errors_out.data = static_cast<void*>(errors_arr);
 			struct seaqt_array /* of QSslError* */  sigval1 = errors_out;
-			callback(slot, sigval1);
-		}
-	};
-	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(const QList<QSslError>&)>(&QSslSocket::sslErrors), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSslSocket_modeChanged(QSslSocket* self, int newMode) {
@@ -1132,16 +1117,11 @@ void QSslSocket_modeChanged(QSslSocket* self, int newMode) {
 }
 
 void QSslSocket_connect_modeChanged(QSslSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QSslSocket::SslMode newMode) {
+	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(QSslSocket::SslMode)>(&QSslSocket::modeChanged), self, [callback, release = seaqt::release_callback{slot,release}](QSslSocket::SslMode newMode) {
 			QSslSocket::SslMode newMode_ret = newMode;
 			int sigval1 = static_cast<int>(newMode_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(QSslSocket::SslMode)>(&QSslSocket::modeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSslSocket_encryptedBytesWritten(QSslSocket* self, long long totalBytes) {
@@ -1149,16 +1129,11 @@ void QSslSocket_encryptedBytesWritten(QSslSocket* self, long long totalBytes) {
 }
 
 void QSslSocket_connect_encryptedBytesWritten(QSslSocket* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, long long);
-		void operator()(qint64 totalBytes) {
+	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(qint64)>(&QSslSocket::encryptedBytesWritten), self, [callback, release = seaqt::release_callback{slot,release}](qint64 totalBytes) {
 			qint64 totalBytes_ret = totalBytes;
 			long long sigval1 = static_cast<long long>(totalBytes_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(qint64)>(&QSslSocket::encryptedBytesWritten), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSslSocket_preSharedKeyAuthenticationRequired(QSslSocket* self, QSslPreSharedKeyAuthenticator* authenticator) {
@@ -1166,15 +1141,10 @@ void QSslSocket_preSharedKeyAuthenticationRequired(QSslSocket* self, QSslPreShar
 }
 
 void QSslSocket_connect_preSharedKeyAuthenticationRequired(QSslSocket* self, intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QSslPreSharedKeyAuthenticator*);
-		void operator()(QSslPreSharedKeyAuthenticator* authenticator) {
+	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(QSslPreSharedKeyAuthenticator*)>(&QSslSocket::preSharedKeyAuthenticationRequired), self, [callback, release = seaqt::release_callback{slot,release}](QSslPreSharedKeyAuthenticator* authenticator) {
 			QSslPreSharedKeyAuthenticator* sigval1 = authenticator;
-			callback(slot, sigval1);
-		}
-	};
-	QSslSocket::connect(self, static_cast<void (QSslSocket::*)(QSslPreSharedKeyAuthenticator*)>(&QSslSocket::preSharedKeyAuthenticationRequired), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QSslSocket_newSessionTicketReceived(QSslSocket* self) {
@@ -1182,14 +1152,9 @@ void QSslSocket_newSessionTicketReceived(QSslSocket* self) {
 }
 
 void QSslSocket_connect_newSessionTicketReceived(QSslSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QSslSocket::connect(self, static_cast<void (QSslSocket::*)()>(&QSslSocket::newSessionTicketReceived), self, local_caller{slot, callback, release});
+	QSslSocket::connect(self, static_cast<void (QSslSocket::*)()>(&QSslSocket::newSessionTicketReceived), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QSslSocket_tr_s_c(const char* s, const char* c) {

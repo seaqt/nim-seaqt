@@ -855,15 +855,10 @@ void QPdfView_documentChanged(QPdfView* self, QPdfDocument* document) {
 }
 
 void QPdfView_connect_documentChanged(QPdfView* self, intptr_t slot, void (*callback)(intptr_t, QPdfDocument*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPdfDocument*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPdfDocument*);
-		void operator()(QPdfDocument* document) {
+	QPdfView::connect(self, static_cast<void (QPdfView::*)(QPdfDocument*)>(&QPdfView::documentChanged), self, [callback, release = seaqt::release_callback{slot,release}](QPdfDocument* document) {
 			QPdfDocument* sigval1 = document;
-			callback(slot, sigval1);
-		}
-	};
-	QPdfView::connect(self, static_cast<void (QPdfView::*)(QPdfDocument*)>(&QPdfView::documentChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfView_pageModeChanged(QPdfView* self, int pageMode) {
@@ -871,16 +866,11 @@ void QPdfView_pageModeChanged(QPdfView* self, int pageMode) {
 }
 
 void QPdfView_connect_pageModeChanged(QPdfView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QPdfView::PageMode pageMode) {
+	QPdfView::connect(self, static_cast<void (QPdfView::*)(QPdfView::PageMode)>(&QPdfView::pageModeChanged), self, [callback, release = seaqt::release_callback{slot,release}](QPdfView::PageMode pageMode) {
 			QPdfView::PageMode pageMode_ret = pageMode;
 			int sigval1 = static_cast<int>(pageMode_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfView::connect(self, static_cast<void (QPdfView::*)(QPdfView::PageMode)>(&QPdfView::pageModeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfView_zoomModeChanged(QPdfView* self, int zoomMode) {
@@ -888,16 +878,11 @@ void QPdfView_zoomModeChanged(QPdfView* self, int zoomMode) {
 }
 
 void QPdfView_connect_zoomModeChanged(QPdfView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QPdfView::ZoomMode zoomMode) {
+	QPdfView::connect(self, static_cast<void (QPdfView::*)(QPdfView::ZoomMode)>(&QPdfView::zoomModeChanged), self, [callback, release = seaqt::release_callback{slot,release}](QPdfView::ZoomMode zoomMode) {
 			QPdfView::ZoomMode zoomMode_ret = zoomMode;
 			int sigval1 = static_cast<int>(zoomMode_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfView::connect(self, static_cast<void (QPdfView::*)(QPdfView::ZoomMode)>(&QPdfView::zoomModeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfView_zoomFactorChanged(QPdfView* self, double zoomFactor) {
@@ -905,16 +890,11 @@ void QPdfView_zoomFactorChanged(QPdfView* self, double zoomFactor) {
 }
 
 void QPdfView_connect_zoomFactorChanged(QPdfView* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, double);
-		void operator()(qreal zoomFactor) {
+	QPdfView::connect(self, static_cast<void (QPdfView::*)(qreal)>(&QPdfView::zoomFactorChanged), self, [callback, release = seaqt::release_callback{slot,release}](qreal zoomFactor) {
 			qreal zoomFactor_ret = zoomFactor;
 			double sigval1 = static_cast<double>(zoomFactor_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfView::connect(self, static_cast<void (QPdfView::*)(qreal)>(&QPdfView::zoomFactorChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfView_pageSpacingChanged(QPdfView* self, int pageSpacing) {
@@ -922,15 +902,10 @@ void QPdfView_pageSpacingChanged(QPdfView* self, int pageSpacing) {
 }
 
 void QPdfView_connect_pageSpacingChanged(QPdfView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int pageSpacing) {
+	QPdfView::connect(self, static_cast<void (QPdfView::*)(int)>(&QPdfView::pageSpacingChanged), self, [callback, release = seaqt::release_callback{slot,release}](int pageSpacing) {
 			int sigval1 = pageSpacing;
-			callback(slot, sigval1);
-		}
-	};
-	QPdfView::connect(self, static_cast<void (QPdfView::*)(int)>(&QPdfView::pageSpacingChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfView_documentMarginsChanged(QPdfView* self, QMargins* documentMargins) {
@@ -938,15 +913,10 @@ void QPdfView_documentMarginsChanged(QPdfView* self, QMargins* documentMargins) 
 }
 
 void QPdfView_connect_documentMarginsChanged(QPdfView* self, intptr_t slot, void (*callback)(intptr_t, QMargins*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QMargins*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QMargins*);
-		void operator()(QMargins documentMargins) {
+	QPdfView::connect(self, static_cast<void (QPdfView::*)(QMargins)>(&QPdfView::documentMarginsChanged), self, [callback, release = seaqt::release_callback{slot,release}](QMargins documentMargins) {
 			QMargins* sigval1 = new QMargins(documentMargins);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfView::connect(self, static_cast<void (QPdfView::*)(QMargins)>(&QPdfView::documentMarginsChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QPdfView_tr_s_c(const char* s, const char* c) {

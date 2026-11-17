@@ -47,7 +47,6 @@ struct seaqt_string QWebEngineUrlRequestJob_tr_s_c_n(const char* s, const char* 
 struct seaqt_string QWebEngineUrlRequestJob_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QWebEngineUrlRequestJob_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QWebEngineUrlRequestJob_staticMetaObject();
 void QWebEngineUrlRequestJob_delete(QWebEngineUrlRequestJob* self);
 
 #ifdef __cplusplus

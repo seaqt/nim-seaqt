@@ -339,7 +339,6 @@ int QMessageBox_protectedbase_senderSignalIndex(const VirtualQMessageBox* self);
 int QMessageBox_protectedbase_receivers(const VirtualQMessageBox* self, const char* signal);
 bool QMessageBox_protectedbase_isSignalConnected(const VirtualQMessageBox* self, QMetaMethod* signal);
 
-const QMetaObject* QMessageBox_staticMetaObject();
 void QMessageBox_delete(QMessageBox* self);
 
 #ifdef __cplusplus

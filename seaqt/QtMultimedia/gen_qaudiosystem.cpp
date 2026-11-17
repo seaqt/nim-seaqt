@@ -360,16 +360,11 @@ void QAbstractAudioOutput_errorChanged(QAbstractAudioOutput* self, int error) {
 }
 
 void QAbstractAudioOutput_connect_errorChanged(QAbstractAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QAudio::Error error) {
+	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)(QAudio::Error)>(&QAbstractAudioOutput::errorChanged), self, [callback, release = seaqt::release_callback{slot,release}](QAudio::Error error) {
 			QAudio::Error error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)(QAudio::Error)>(&QAbstractAudioOutput::errorChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractAudioOutput_stateChanged(QAbstractAudioOutput* self, int state) {
@@ -377,16 +372,11 @@ void QAbstractAudioOutput_stateChanged(QAbstractAudioOutput* self, int state) {
 }
 
 void QAbstractAudioOutput_connect_stateChanged(QAbstractAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QAudio::State state) {
+	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)(QAudio::State)>(&QAbstractAudioOutput::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QAudio::State state) {
 			QAudio::State state_ret = state;
 			int sigval1 = static_cast<int>(state_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)(QAudio::State)>(&QAbstractAudioOutput::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractAudioOutput_notify(QAbstractAudioOutput* self) {
@@ -394,14 +384,9 @@ void QAbstractAudioOutput_notify(QAbstractAudioOutput* self) {
 }
 
 void QAbstractAudioOutput_connect_notify(QAbstractAudioOutput* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)()>(&QAbstractAudioOutput::notify), self, local_caller{slot, callback, release});
+	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)()>(&QAbstractAudioOutput::notify), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QAbstractAudioOutput_tr_s_c(const char* s, const char* c) {
@@ -581,16 +566,11 @@ void QAbstractAudioInput_errorChanged(QAbstractAudioInput* self, int error) {
 }
 
 void QAbstractAudioInput_connect_errorChanged(QAbstractAudioInput* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QAudio::Error error) {
+	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)(QAudio::Error)>(&QAbstractAudioInput::errorChanged), self, [callback, release = seaqt::release_callback{slot,release}](QAudio::Error error) {
 			QAudio::Error error_ret = error;
 			int sigval1 = static_cast<int>(error_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)(QAudio::Error)>(&QAbstractAudioInput::errorChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractAudioInput_stateChanged(QAbstractAudioInput* self, int state) {
@@ -598,16 +578,11 @@ void QAbstractAudioInput_stateChanged(QAbstractAudioInput* self, int state) {
 }
 
 void QAbstractAudioInput_connect_stateChanged(QAbstractAudioInput* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QAudio::State state) {
+	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)(QAudio::State)>(&QAbstractAudioInput::stateChanged), self, [callback, release = seaqt::release_callback{slot,release}](QAudio::State state) {
 			QAudio::State state_ret = state;
 			int sigval1 = static_cast<int>(state_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)(QAudio::State)>(&QAbstractAudioInput::stateChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QAbstractAudioInput_notify(QAbstractAudioInput* self) {
@@ -615,14 +590,9 @@ void QAbstractAudioInput_notify(QAbstractAudioInput* self) {
 }
 
 void QAbstractAudioInput_connect_notify(QAbstractAudioInput* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)()>(&QAbstractAudioInput::notify), self, local_caller{slot, callback, release});
+	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)()>(&QAbstractAudioInput::notify), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QAbstractAudioInput_tr_s_c(const char* s, const char* c) {

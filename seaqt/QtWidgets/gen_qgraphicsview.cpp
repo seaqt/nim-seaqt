@@ -1215,17 +1215,12 @@ void QGraphicsView_rubberBandChanged(QGraphicsView* self, QRect* viewportRect, Q
 }
 
 void QGraphicsView_connect_rubberBandChanged(QGraphicsView* self, intptr_t slot, void (*callback)(intptr_t, QRect*, QPointF*, QPointF*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*, QPointF*, QPointF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRect*, QPointF*, QPointF*);
-		void operator()(QRect viewportRect, QPointF fromScenePoint, QPointF toScenePoint) {
+	QGraphicsView::connect(self, static_cast<void (QGraphicsView::*)(QRect, QPointF, QPointF)>(&QGraphicsView::rubberBandChanged), self, [callback, release = seaqt::release_callback{slot,release}](QRect viewportRect, QPointF fromScenePoint, QPointF toScenePoint) {
 			QRect* sigval1 = new QRect(viewportRect);
 			QPointF* sigval2 = new QPointF(fromScenePoint);
 			QPointF* sigval3 = new QPointF(toScenePoint);
-			callback(slot, sigval1, sigval2, sigval3);
-		}
-	};
-	QGraphicsView::connect(self, static_cast<void (QGraphicsView::*)(QRect, QPointF, QPointF)>(&QGraphicsView::rubberBandChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3);
+	});
 }
 
 struct seaqt_string QGraphicsView_tr_s_c(const char* s, const char* c) {

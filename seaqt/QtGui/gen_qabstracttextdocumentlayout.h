@@ -172,7 +172,6 @@ int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const VirtualQAb
 int QAbstractTextDocumentLayout_protectedbase_receivers(const VirtualQAbstractTextDocumentLayout* self, const char* signal);
 bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const VirtualQAbstractTextDocumentLayout* self, QMetaMethod* signal);
 
-const QMetaObject* QAbstractTextDocumentLayout_staticMetaObject();
 void QAbstractTextDocumentLayout_delete(QAbstractTextDocumentLayout* self);
 
 QSizeF* QTextObjectInterface_intrinsicSize(QTextObjectInterface* self, QTextDocument* doc, int posInDocument, QTextFormat* format);

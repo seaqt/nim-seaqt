@@ -62,7 +62,6 @@ struct seaqt_string QRadioDataControl_tr_s_c_n(const char* s, const char* c, int
 struct seaqt_string QRadioDataControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QRadioDataControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QRadioDataControl_staticMetaObject();
 void QRadioDataControl_delete(QRadioDataControl* self);
 
 #ifdef __cplusplus

@@ -100,7 +100,6 @@ int QSharedMemory_protectedbase_senderSignalIndex(const VirtualQSharedMemory* se
 int QSharedMemory_protectedbase_receivers(const VirtualQSharedMemory* self, const char* signal);
 bool QSharedMemory_protectedbase_isSignalConnected(const VirtualQSharedMemory* self, QMetaMethod* signal);
 
-const QMetaObject* QSharedMemory_staticMetaObject();
 void QSharedMemory_delete(QSharedMemory* self);
 
 #ifdef __cplusplus

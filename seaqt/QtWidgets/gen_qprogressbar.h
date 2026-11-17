@@ -248,7 +248,6 @@ int QProgressBar_protectedbase_senderSignalIndex(const VirtualQProgressBar* self
 int QProgressBar_protectedbase_receivers(const VirtualQProgressBar* self, const char* signal);
 bool QProgressBar_protectedbase_isSignalConnected(const VirtualQProgressBar* self, QMetaMethod* signal);
 
-const QMetaObject* QProgressBar_staticMetaObject();
 void QProgressBar_delete(QProgressBar* self);
 
 #ifdef __cplusplus

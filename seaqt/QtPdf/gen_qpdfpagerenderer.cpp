@@ -246,15 +246,10 @@ void QPdfPageRenderer_documentChanged(QPdfPageRenderer* self, QPdfDocument* docu
 }
 
 void QPdfPageRenderer_connect_documentChanged(QPdfPageRenderer* self, intptr_t slot, void (*callback)(intptr_t, QPdfDocument*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPdfDocument*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QPdfDocument*);
-		void operator()(QPdfDocument* document) {
+	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(QPdfDocument*)>(&QPdfPageRenderer::documentChanged), self, [callback, release = seaqt::release_callback{slot,release}](QPdfDocument* document) {
 			QPdfDocument* sigval1 = document;
-			callback(slot, sigval1);
-		}
-	};
-	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(QPdfDocument*)>(&QPdfPageRenderer::documentChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfPageRenderer_renderModeChanged(QPdfPageRenderer* self, int renderMode) {
@@ -262,16 +257,11 @@ void QPdfPageRenderer_renderModeChanged(QPdfPageRenderer* self, int renderMode) 
 }
 
 void QPdfPageRenderer_connect_renderModeChanged(QPdfPageRenderer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(QPdfPageRenderer::RenderMode renderMode) {
+	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(QPdfPageRenderer::RenderMode)>(&QPdfPageRenderer::renderModeChanged), self, [callback, release = seaqt::release_callback{slot,release}](QPdfPageRenderer::RenderMode renderMode) {
 			QPdfPageRenderer::RenderMode renderMode_ret = renderMode;
 			int sigval1 = static_cast<int>(renderMode_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(QPdfPageRenderer::RenderMode)>(&QPdfPageRenderer::renderModeChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPdfPageRenderer_pageRendered(QPdfPageRenderer* self, int pageNumber, QSize* imageSize, QImage* image, QPdfDocumentRenderOptions* options, unsigned long long requestId) {
@@ -279,10 +269,7 @@ void QPdfPageRenderer_pageRendered(QPdfPageRenderer* self, int pageNumber, QSize
 }
 
 void QPdfPageRenderer_connect_pageRendered(QPdfPageRenderer* self, intptr_t slot, void (*callback)(intptr_t, int, QSize*, QImage*, QPdfDocumentRenderOptions*, unsigned long long), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, QSize*, QImage*, QPdfDocumentRenderOptions*, unsigned long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int, QSize*, QImage*, QPdfDocumentRenderOptions*, unsigned long long);
-		void operator()(int pageNumber, QSize imageSize, const QImage& image, QPdfDocumentRenderOptions options, quint64 requestId) {
+	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(int, QSize, const QImage&, QPdfDocumentRenderOptions, quint64)>(&QPdfPageRenderer::pageRendered), self, [callback, release = seaqt::release_callback{slot,release}](int pageNumber, QSize imageSize, const QImage& image, QPdfDocumentRenderOptions options, quint64 requestId) {
 			int sigval1 = pageNumber;
 			QSize* sigval2 = new QSize(imageSize);
 			const QImage& image_ret = image;
@@ -291,10 +278,8 @@ void QPdfPageRenderer_connect_pageRendered(QPdfPageRenderer* self, intptr_t slot
 			QPdfDocumentRenderOptions* sigval4 = new QPdfDocumentRenderOptions(options);
 			quint64 requestId_ret = requestId;
 			unsigned long long sigval5 = static_cast<unsigned long long>(requestId_ret);
-			callback(slot, sigval1, sigval2, sigval3, sigval4, sigval5);
-		}
-	};
-	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(int, QSize, const QImage&, QPdfDocumentRenderOptions, quint64)>(&QPdfPageRenderer::pageRendered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2, sigval3, sigval4, sigval5);
+	});
 }
 
 struct seaqt_string QPdfPageRenderer_tr_s_c(const char* s, const char* c) {

@@ -227,7 +227,6 @@ int QCameraViewfinder_protectedbase_senderSignalIndex(const VirtualQCameraViewfi
 int QCameraViewfinder_protectedbase_receivers(const VirtualQCameraViewfinder* self, const char* signal);
 bool QCameraViewfinder_protectedbase_isSignalConnected(const VirtualQCameraViewfinder* self, QMetaMethod* signal);
 
-const QMetaObject* QCameraViewfinder_staticMetaObject();
 void QCameraViewfinder_delete(QCameraViewfinder* self);
 
 #ifdef __cplusplus

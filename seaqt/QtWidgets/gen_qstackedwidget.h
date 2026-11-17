@@ -236,7 +236,6 @@ int QStackedWidget_protectedbase_senderSignalIndex(const VirtualQStackedWidget* 
 int QStackedWidget_protectedbase_receivers(const VirtualQStackedWidget* self, const char* signal);
 bool QStackedWidget_protectedbase_isSignalConnected(const VirtualQStackedWidget* self, QMetaMethod* signal);
 
-const QMetaObject* QStackedWidget_staticMetaObject();
 void QStackedWidget_delete(QStackedWidget* self);
 
 #ifdef __cplusplus

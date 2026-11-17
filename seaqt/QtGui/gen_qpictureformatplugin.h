@@ -91,7 +91,6 @@ int QPictureFormatPlugin_protectedbase_senderSignalIndex(const VirtualQPictureFo
 int QPictureFormatPlugin_protectedbase_receivers(const VirtualQPictureFormatPlugin* self, const char* signal);
 bool QPictureFormatPlugin_protectedbase_isSignalConnected(const VirtualQPictureFormatPlugin* self, QMetaMethod* signal);
 
-const QMetaObject* QPictureFormatPlugin_staticMetaObject();
 void QPictureFormatPlugin_delete(QPictureFormatPlugin* self);
 
 #ifdef __cplusplus

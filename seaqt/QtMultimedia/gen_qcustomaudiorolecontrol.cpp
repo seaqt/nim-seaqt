@@ -100,10 +100,7 @@ void QCustomAudioRoleControl_customAudioRoleChanged(QCustomAudioRoleControl* sel
 }
 
 void QCustomAudioRoleControl_connect_customAudioRoleChanged(QCustomAudioRoleControl* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& role) {
+	QCustomAudioRoleControl::connect(self, static_cast<void (QCustomAudioRoleControl::*)(const QString&)>(&QCustomAudioRoleControl::customAudioRoleChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& role) {
 			const QString role_ret = role;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray role_b = role_ret.toUtf8();
@@ -112,10 +109,8 @@ void QCustomAudioRoleControl_connect_customAudioRoleChanged(QCustomAudioRoleCont
 			role_ms.data = static_cast<char*>(malloc(role_ms.len));
 			memcpy(role_ms.data, role_b.data(), role_ms.len);
 			struct seaqt_string sigval1 = role_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QCustomAudioRoleControl::connect(self, static_cast<void (QCustomAudioRoleControl::*)(const QString&)>(&QCustomAudioRoleControl::customAudioRoleChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QCustomAudioRoleControl_tr_s_c(const char* s, const char* c) {

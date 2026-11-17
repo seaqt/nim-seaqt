@@ -1244,14 +1244,9 @@ void QPlainTextEdit_textChanged(QPlainTextEdit* self) {
 }
 
 void QPlainTextEdit_connect_textChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)()>(&QPlainTextEdit::textChanged), self, local_caller{slot, callback, release});
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)()>(&QPlainTextEdit::textChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QPlainTextEdit_undoAvailable(QPlainTextEdit* self, bool b) {
@@ -1259,15 +1254,10 @@ void QPlainTextEdit_undoAvailable(QPlainTextEdit* self, bool b) {
 }
 
 void QPlainTextEdit_connect_undoAvailable(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool b) {
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(bool)>(&QPlainTextEdit::undoAvailable), self, [callback, release = seaqt::release_callback{slot,release}](bool b) {
 			bool sigval1 = b;
-			callback(slot, sigval1);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(bool)>(&QPlainTextEdit::undoAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPlainTextEdit_redoAvailable(QPlainTextEdit* self, bool b) {
@@ -1275,15 +1265,10 @@ void QPlainTextEdit_redoAvailable(QPlainTextEdit* self, bool b) {
 }
 
 void QPlainTextEdit_connect_redoAvailable(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool b) {
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(bool)>(&QPlainTextEdit::redoAvailable), self, [callback, release = seaqt::release_callback{slot,release}](bool b) {
 			bool sigval1 = b;
-			callback(slot, sigval1);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(bool)>(&QPlainTextEdit::redoAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPlainTextEdit_copyAvailable(QPlainTextEdit* self, bool b) {
@@ -1291,15 +1276,10 @@ void QPlainTextEdit_copyAvailable(QPlainTextEdit* self, bool b) {
 }
 
 void QPlainTextEdit_connect_copyAvailable(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool b) {
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(bool)>(&QPlainTextEdit::copyAvailable), self, [callback, release = seaqt::release_callback{slot,release}](bool b) {
 			bool sigval1 = b;
-			callback(slot, sigval1);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(bool)>(&QPlainTextEdit::copyAvailable), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPlainTextEdit_selectionChanged(QPlainTextEdit* self) {
@@ -1307,14 +1287,9 @@ void QPlainTextEdit_selectionChanged(QPlainTextEdit* self) {
 }
 
 void QPlainTextEdit_connect_selectionChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)()>(&QPlainTextEdit::selectionChanged), self, local_caller{slot, callback, release});
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)()>(&QPlainTextEdit::selectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QPlainTextEdit_cursorPositionChanged(QPlainTextEdit* self) {
@@ -1322,14 +1297,9 @@ void QPlainTextEdit_cursorPositionChanged(QPlainTextEdit* self) {
 }
 
 void QPlainTextEdit_connect_cursorPositionChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)()>(&QPlainTextEdit::cursorPositionChanged), self, local_caller{slot, callback, release});
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)()>(&QPlainTextEdit::cursorPositionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 void QPlainTextEdit_updateRequest(QPlainTextEdit* self, QRect* rect, int dy) {
@@ -1337,18 +1307,13 @@ void QPlainTextEdit_updateRequest(QPlainTextEdit* self, QRect* rect, int dy) {
 }
 
 void QPlainTextEdit_connect_updateRequest(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, QRect*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRect*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QRect*, int);
-		void operator()(const QRect& rect, int dy) {
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(const QRect&, int)>(&QPlainTextEdit::updateRequest), self, [callback, release = seaqt::release_callback{slot,release}](const QRect& rect, int dy) {
 			const QRect& rect_ret = rect;
 			// Cast returned reference into pointer
 			QRect* sigval1 = const_cast<QRect*>(&rect_ret);
 			int sigval2 = dy;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(const QRect&, int)>(&QPlainTextEdit::updateRequest), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QPlainTextEdit_blockCountChanged(QPlainTextEdit* self, int newBlockCount) {
@@ -1356,15 +1321,10 @@ void QPlainTextEdit_blockCountChanged(QPlainTextEdit* self, int newBlockCount) {
 }
 
 void QPlainTextEdit_connect_blockCountChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int newBlockCount) {
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(int)>(&QPlainTextEdit::blockCountChanged), self, [callback, release = seaqt::release_callback{slot,release}](int newBlockCount) {
 			int sigval1 = newBlockCount;
-			callback(slot, sigval1);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(int)>(&QPlainTextEdit::blockCountChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QPlainTextEdit_modificationChanged(QPlainTextEdit* self, bool param1) {
@@ -1372,15 +1332,10 @@ void QPlainTextEdit_modificationChanged(QPlainTextEdit* self, bool param1) {
 }
 
 void QPlainTextEdit_connect_modificationChanged(QPlainTextEdit* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, bool);
-		void operator()(bool param1) {
+	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(bool)>(&QPlainTextEdit::modificationChanged), self, [callback, release = seaqt::release_callback{slot,release}](bool param1) {
 			bool sigval1 = param1;
-			callback(slot, sigval1);
-		}
-	};
-	QPlainTextEdit::connect(self, static_cast<void (QPlainTextEdit::*)(bool)>(&QPlainTextEdit::modificationChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QPlainTextEdit_tr_s_c(const char* s, const char* c) {

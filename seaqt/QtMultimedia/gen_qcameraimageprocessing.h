@@ -56,7 +56,6 @@ struct seaqt_string QCameraImageProcessing_tr_s_c_n(const char* s, const char* c
 struct seaqt_string QCameraImageProcessing_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraImageProcessing_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCameraImageProcessing_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

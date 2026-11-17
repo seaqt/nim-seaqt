@@ -563,7 +563,6 @@ void QGraphicsObject_protectedbase_addToIndex(VirtualQGraphicsObject* self);
 void QGraphicsObject_protectedbase_removeFromIndex(VirtualQGraphicsObject* self);
 void QGraphicsObject_protectedbase_prepareGeometryChange(VirtualQGraphicsObject* self);
 
-const QMetaObject* QGraphicsObject_staticMetaObject();
 void QGraphicsObject_delete(QGraphicsObject* self);
 
 typedef struct VirtualQAbstractGraphicsShapeItem VirtualQAbstractGraphicsShapeItem;
@@ -1491,7 +1490,6 @@ void QGraphicsTextItem_protectedbase_addToIndex(VirtualQGraphicsTextItem* self);
 void QGraphicsTextItem_protectedbase_removeFromIndex(VirtualQGraphicsTextItem* self);
 void QGraphicsTextItem_protectedbase_prepareGeometryChange(VirtualQGraphicsTextItem* self);
 
-const QMetaObject* QGraphicsTextItem_staticMetaObject();
 void QGraphicsTextItem_delete(QGraphicsTextItem* self);
 
 typedef struct VirtualQGraphicsSimpleTextItem VirtualQGraphicsSimpleTextItem;

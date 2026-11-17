@@ -393,17 +393,12 @@ void QVariantAnimation_valueChanged(QVariantAnimation* self, QVariant* value) {
 }
 
 void QVariantAnimation_connect_valueChanged(QVariantAnimation* self, intptr_t slot, void (*callback)(intptr_t, QVariant*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QVariant*);
-		void operator()(const QVariant& value) {
+	QVariantAnimation::connect(self, static_cast<void (QVariantAnimation::*)(const QVariant&)>(&QVariantAnimation::valueChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QVariant& value) {
 			const QVariant& value_ret = value;
 			// Cast returned reference into pointer
 			QVariant* sigval1 = const_cast<QVariant*>(&value_ret);
-			callback(slot, sigval1);
-		}
-	};
-	QVariantAnimation::connect(self, static_cast<void (QVariantAnimation::*)(const QVariant&)>(&QVariantAnimation::valueChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 struct seaqt_string QVariantAnimation_tr_s_c(const char* s, const char* c) {

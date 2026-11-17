@@ -2293,16 +2293,11 @@ void QTreeWidget_itemPressed(QTreeWidget* self, QTreeWidgetItem* item, int colum
 }
 
 void QTreeWidget_connect_itemPressed(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*, int);
-		void operator()(QTreeWidgetItem* item, int column) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemPressed), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* item, int column) {
 			QTreeWidgetItem* sigval1 = item;
 			int sigval2 = column;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemPressed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QTreeWidget_itemClicked(QTreeWidget* self, QTreeWidgetItem* item, int column) {
@@ -2310,16 +2305,11 @@ void QTreeWidget_itemClicked(QTreeWidget* self, QTreeWidgetItem* item, int colum
 }
 
 void QTreeWidget_connect_itemClicked(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*, int);
-		void operator()(QTreeWidgetItem* item, int column) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemClicked), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* item, int column) {
 			QTreeWidgetItem* sigval1 = item;
 			int sigval2 = column;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QTreeWidget_itemDoubleClicked(QTreeWidget* self, QTreeWidgetItem* item, int column) {
@@ -2327,16 +2317,11 @@ void QTreeWidget_itemDoubleClicked(QTreeWidget* self, QTreeWidgetItem* item, int
 }
 
 void QTreeWidget_connect_itemDoubleClicked(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*, int);
-		void operator()(QTreeWidgetItem* item, int column) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemDoubleClicked), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* item, int column) {
 			QTreeWidgetItem* sigval1 = item;
 			int sigval2 = column;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemDoubleClicked), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QTreeWidget_itemActivated(QTreeWidget* self, QTreeWidgetItem* item, int column) {
@@ -2344,16 +2329,11 @@ void QTreeWidget_itemActivated(QTreeWidget* self, QTreeWidgetItem* item, int col
 }
 
 void QTreeWidget_connect_itemActivated(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*, int);
-		void operator()(QTreeWidgetItem* item, int column) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemActivated), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* item, int column) {
 			QTreeWidgetItem* sigval1 = item;
 			int sigval2 = column;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemActivated), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QTreeWidget_itemEntered(QTreeWidget* self, QTreeWidgetItem* item, int column) {
@@ -2361,16 +2341,11 @@ void QTreeWidget_itemEntered(QTreeWidget* self, QTreeWidgetItem* item, int colum
 }
 
 void QTreeWidget_connect_itemEntered(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*, int);
-		void operator()(QTreeWidgetItem* item, int column) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemEntered), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* item, int column) {
 			QTreeWidgetItem* sigval1 = item;
 			int sigval2 = column;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemEntered), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QTreeWidget_itemChanged(QTreeWidget* self, QTreeWidgetItem* item, int column) {
@@ -2378,16 +2353,11 @@ void QTreeWidget_itemChanged(QTreeWidget* self, QTreeWidgetItem* item, int colum
 }
 
 void QTreeWidget_connect_itemChanged(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*, int);
-		void operator()(QTreeWidgetItem* item, int column) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemChanged), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* item, int column) {
 			QTreeWidgetItem* sigval1 = item;
 			int sigval2 = column;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, int)>(&QTreeWidget::itemChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QTreeWidget_itemExpanded(QTreeWidget* self, QTreeWidgetItem* item) {
@@ -2395,15 +2365,10 @@ void QTreeWidget_itemExpanded(QTreeWidget* self, QTreeWidgetItem* item) {
 }
 
 void QTreeWidget_connect_itemExpanded(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*);
-		void operator()(QTreeWidgetItem* item) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*)>(&QTreeWidget::itemExpanded), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* item) {
 			QTreeWidgetItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*)>(&QTreeWidget::itemExpanded), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTreeWidget_itemCollapsed(QTreeWidget* self, QTreeWidgetItem* item) {
@@ -2411,15 +2376,10 @@ void QTreeWidget_itemCollapsed(QTreeWidget* self, QTreeWidgetItem* item) {
 }
 
 void QTreeWidget_connect_itemCollapsed(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*);
-		void operator()(QTreeWidgetItem* item) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*)>(&QTreeWidget::itemCollapsed), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* item) {
 			QTreeWidgetItem* sigval1 = item;
-			callback(slot, sigval1);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*)>(&QTreeWidget::itemCollapsed), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QTreeWidget_currentItemChanged(QTreeWidget* self, QTreeWidgetItem* current, QTreeWidgetItem* previous) {
@@ -2427,16 +2387,11 @@ void QTreeWidget_currentItemChanged(QTreeWidget* self, QTreeWidgetItem* current,
 }
 
 void QTreeWidget_connect_currentItemChanged(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, QTreeWidgetItem*), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTreeWidgetItem*, QTreeWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, QTreeWidgetItem*, QTreeWidgetItem*);
-		void operator()(QTreeWidgetItem* current, QTreeWidgetItem* previous) {
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, QTreeWidgetItem*)>(&QTreeWidget::currentItemChanged), self, [callback, release = seaqt::release_callback{slot,release}](QTreeWidgetItem* current, QTreeWidgetItem* previous) {
 			QTreeWidgetItem* sigval1 = current;
 			QTreeWidgetItem* sigval2 = previous;
-			callback(slot, sigval1, sigval2);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)(QTreeWidgetItem*, QTreeWidgetItem*)>(&QTreeWidget::currentItemChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1, sigval2);
+	});
 }
 
 void QTreeWidget_itemSelectionChanged(QTreeWidget* self) {
@@ -2444,14 +2399,9 @@ void QTreeWidget_itemSelectionChanged(QTreeWidget* self) {
 }
 
 void QTreeWidget_connect_itemSelectionChanged(QTreeWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)()>(&QTreeWidget::itemSelectionChanged), self, local_caller{slot, callback, release});
+	QTreeWidget::connect(self, static_cast<void (QTreeWidget::*)()>(&QTreeWidget::itemSelectionChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QTreeWidget_tr_s_c(const char* s, const char* c) {

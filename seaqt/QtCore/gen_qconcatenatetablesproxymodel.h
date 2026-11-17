@@ -201,7 +201,6 @@ int QConcatenateTablesProxyModel_protectedbase_senderSignalIndex(const VirtualQC
 int QConcatenateTablesProxyModel_protectedbase_receivers(const VirtualQConcatenateTablesProxyModel* self, const char* signal);
 bool QConcatenateTablesProxyModel_protectedbase_isSignalConnected(const VirtualQConcatenateTablesProxyModel* self, QMetaMethod* signal);
 
-const QMetaObject* QConcatenateTablesProxyModel_staticMetaObject();
 void QConcatenateTablesProxyModel_delete(QConcatenateTablesProxyModel* self);
 
 #ifdef __cplusplus

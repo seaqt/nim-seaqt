@@ -44,7 +44,6 @@ struct seaqt_string QCameraCaptureDestinationControl_tr_s_c_n(const char* s, con
 struct seaqt_string QCameraCaptureDestinationControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraCaptureDestinationControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCameraCaptureDestinationControl_staticMetaObject();
 void QCameraCaptureDestinationControl_delete(QCameraCaptureDestinationControl* self);
 
 #ifdef __cplusplus

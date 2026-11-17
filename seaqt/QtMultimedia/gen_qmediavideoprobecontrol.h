@@ -45,7 +45,6 @@ struct seaqt_string QMediaVideoProbeControl_tr_s_c_n(const char* s, const char* 
 struct seaqt_string QMediaVideoProbeControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMediaVideoProbeControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QMediaVideoProbeControl_staticMetaObject();
 void QMediaVideoProbeControl_delete(QMediaVideoProbeControl* self);
 
 #ifdef __cplusplus

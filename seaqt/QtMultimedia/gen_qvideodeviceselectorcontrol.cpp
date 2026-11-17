@@ -100,15 +100,10 @@ void QVideoDeviceSelectorControl_selectedDeviceChanged_index(QVideoDeviceSelecto
 }
 
 void QVideoDeviceSelectorControl_connect_selectedDeviceChanged_index(QVideoDeviceSelectorControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, int);
-		void operator()(int index) {
+	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)(int)>(&QVideoDeviceSelectorControl::selectedDeviceChanged), self, [callback, release = seaqt::release_callback{slot,release}](int index) {
 			int sigval1 = index;
-			callback(slot, sigval1);
-		}
-	};
-	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)(int)>(&QVideoDeviceSelectorControl::selectedDeviceChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QVideoDeviceSelectorControl_selectedDeviceChanged_name(QVideoDeviceSelectorControl* self, struct seaqt_string name) {
@@ -117,10 +112,7 @@ void QVideoDeviceSelectorControl_selectedDeviceChanged_name(QVideoDeviceSelector
 }
 
 void QVideoDeviceSelectorControl_connect_selectedDeviceChanged_name(QVideoDeviceSelectorControl* self, intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct seaqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t, struct seaqt_string);
-		void operator()(const QString& name) {
+	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)(const QString&)>(&QVideoDeviceSelectorControl::selectedDeviceChanged), self, [callback, release = seaqt::release_callback{slot,release}](const QString& name) {
 			const QString name_ret = name;
 			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 			QByteArray name_b = name_ret.toUtf8();
@@ -129,10 +121,8 @@ void QVideoDeviceSelectorControl_connect_selectedDeviceChanged_name(QVideoDevice
 			name_ms.data = static_cast<char*>(malloc(name_ms.len));
 			memcpy(name_ms.data, name_b.data(), name_ms.len);
 			struct seaqt_string sigval1 = name_ms;
-			callback(slot, sigval1);
-		}
-	};
-	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)(const QString&)>(&QVideoDeviceSelectorControl::selectedDeviceChanged), self, local_caller{slot, callback, release});
+			callback(release.slot, sigval1);
+	});
 }
 
 void QVideoDeviceSelectorControl_devicesChanged(QVideoDeviceSelectorControl* self) {
@@ -140,14 +130,9 @@ void QVideoDeviceSelectorControl_devicesChanged(QVideoDeviceSelectorControl* sel
 }
 
 void QVideoDeviceSelectorControl_connect_devicesChanged(QVideoDeviceSelectorControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)()>(&QVideoDeviceSelectorControl::devicesChanged), self, local_caller{slot, callback, release});
+	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)()>(&QVideoDeviceSelectorControl::devicesChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QVideoDeviceSelectorControl_tr_s_c(const char* s, const char* c) {

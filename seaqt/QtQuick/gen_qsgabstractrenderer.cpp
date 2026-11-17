@@ -145,14 +145,9 @@ void QSGAbstractRenderer_sceneGraphChanged(QSGAbstractRenderer* self) {
 }
 
 void QSGAbstractRenderer_connect_sceneGraphChanged(QSGAbstractRenderer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
-	struct local_caller : seaqt::caller {
-		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
-		void (*callback)(intptr_t);
-		void operator()() {
-			callback(slot);
-		}
-	};
-	QSGAbstractRenderer::connect(self, static_cast<void (QSGAbstractRenderer::*)()>(&QSGAbstractRenderer::sceneGraphChanged), self, local_caller{slot, callback, release});
+	QSGAbstractRenderer::connect(self, static_cast<void (QSGAbstractRenderer::*)()>(&QSGAbstractRenderer::sceneGraphChanged), self, [callback, release = seaqt::release_callback{slot,release}]() {
+			callback(release.slot);
+	});
 }
 
 struct seaqt_string QSGAbstractRenderer_tr_s_c(const char* s, const char* c) {

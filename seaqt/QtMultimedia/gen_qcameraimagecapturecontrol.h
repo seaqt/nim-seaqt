@@ -64,7 +64,6 @@ struct seaqt_string QCameraImageCaptureControl_tr_s_c_n(const char* s, const cha
 struct seaqt_string QCameraImageCaptureControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraImageCaptureControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
-const QMetaObject* QCameraImageCaptureControl_staticMetaObject();
 void QCameraImageCaptureControl_delete(QCameraImageCaptureControl* self);
 
 #ifdef __cplusplus
