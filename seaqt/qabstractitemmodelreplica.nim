@@ -1,0 +1,2 @@
+import ./QtRemoteObjects/gen_qremoteobjectabstractitemmodelreplica
+export gen_qremoteobjectabstractitemmodelreplica
