@@ -93,6 +93,7 @@ int QVideoProbe_protectedbase_senderSignalIndex(const VirtualQVideoProbe* self);
 int QVideoProbe_protectedbase_receivers(const VirtualQVideoProbe* self, const char* signal);
 bool QVideoProbe_protectedbase_isSignalConnected(const VirtualQVideoProbe* self, QMetaMethod* signal);
 
+const QMetaObject* QVideoProbe_staticMetaObject();
 void QVideoProbe_delete(QVideoProbe* self);
 
 #ifdef __cplusplus

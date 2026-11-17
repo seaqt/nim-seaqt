@@ -214,6 +214,7 @@ int QSqlQueryModel_protectedbase_senderSignalIndex(const VirtualQSqlQueryModel* 
 int QSqlQueryModel_protectedbase_receivers(const VirtualQSqlQueryModel* self, const char* signal);
 bool QSqlQueryModel_protectedbase_isSignalConnected(const VirtualQSqlQueryModel* self, QMetaMethod* signal);
 
+const QMetaObject* QSqlQueryModel_staticMetaObject();
 void QSqlQueryModel_delete(QSqlQueryModel* self);
 
 #ifdef __cplusplus

@@ -318,6 +318,7 @@ int QTabBar_protectedbase_senderSignalIndex(const VirtualQTabBar* self);
 int QTabBar_protectedbase_receivers(const VirtualQTabBar* self, const char* signal);
 bool QTabBar_protectedbase_isSignalConnected(const VirtualQTabBar* self, QMetaMethod* signal);
 
+const QMetaObject* QTabBar_staticMetaObject();
 void QTabBar_delete(QTabBar* self);
 
 #ifdef __cplusplus

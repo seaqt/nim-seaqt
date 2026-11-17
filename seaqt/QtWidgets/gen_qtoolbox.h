@@ -255,6 +255,7 @@ int QToolBox_protectedbase_senderSignalIndex(const VirtualQToolBox* self);
 int QToolBox_protectedbase_receivers(const VirtualQToolBox* self, const char* signal);
 bool QToolBox_protectedbase_isSignalConnected(const VirtualQToolBox* self, QMetaMethod* signal);
 
+const QMetaObject* QToolBox_staticMetaObject();
 void QToolBox_delete(QToolBox* self);
 
 #ifdef __cplusplus

@@ -41,6 +41,7 @@ struct seaqt_string QCameraInfoControl_tr_s_c_n(const char* s, const char* c, in
 struct seaqt_string QCameraInfoControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraInfoControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QCameraInfoControl_staticMetaObject();
 void QCameraInfoControl_delete(QCameraInfoControl* self);
 
 #ifdef __cplusplus

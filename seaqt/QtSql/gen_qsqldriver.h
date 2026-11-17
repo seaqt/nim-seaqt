@@ -173,6 +173,7 @@ int QSqlDriver_protectedbase_senderSignalIndex(const VirtualQSqlDriver* self);
 int QSqlDriver_protectedbase_receivers(const VirtualQSqlDriver* self, const char* signal);
 bool QSqlDriver_protectedbase_isSignalConnected(const VirtualQSqlDriver* self, QMetaMethod* signal);
 
+const QMetaObject* QSqlDriver_staticMetaObject();
 void QSqlDriver_delete(QSqlDriver* self);
 
 #ifdef __cplusplus

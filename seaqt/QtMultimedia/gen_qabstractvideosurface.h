@@ -118,6 +118,7 @@ int QAbstractVideoSurface_protectedbase_senderSignalIndex(const VirtualQAbstract
 int QAbstractVideoSurface_protectedbase_receivers(const VirtualQAbstractVideoSurface* self, const char* signal);
 bool QAbstractVideoSurface_protectedbase_isSignalConnected(const VirtualQAbstractVideoSurface* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractVideoSurface_staticMetaObject();
 void QAbstractVideoSurface_delete(QAbstractVideoSurface* self);
 
 #ifdef __cplusplus

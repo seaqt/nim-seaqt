@@ -95,6 +95,7 @@ struct seaqt_string QMediaPlayerControl_tr_s_c_n(const char* s, const char* c, i
 struct seaqt_string QMediaPlayerControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMediaPlayerControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QMediaPlayerControl_staticMetaObject();
 void QMediaPlayerControl_delete(QMediaPlayerControl* self);
 
 #ifdef __cplusplus

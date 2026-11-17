@@ -285,6 +285,7 @@ int QAbstractSpinBox_protectedbase_senderSignalIndex(const VirtualQAbstractSpinB
 int QAbstractSpinBox_protectedbase_receivers(const VirtualQAbstractSpinBox* self, const char* signal);
 bool QAbstractSpinBox_protectedbase_isSignalConnected(const VirtualQAbstractSpinBox* self, QMetaMethod* signal);
 
+const QMetaObject* QAbstractSpinBox_staticMetaObject();
 void QAbstractSpinBox_delete(QAbstractSpinBox* self);
 
 #ifdef __cplusplus

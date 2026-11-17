@@ -193,6 +193,7 @@ int QStringListModel_protectedbase_senderSignalIndex(const VirtualQStringListMod
 int QStringListModel_protectedbase_receivers(const VirtualQStringListModel* self, const char* signal);
 bool QStringListModel_protectedbase_isSignalConnected(const VirtualQStringListModel* self, QMetaMethod* signal);
 
+const QMetaObject* QStringListModel_staticMetaObject();
 void QStringListModel_delete(QStringListModel* self);
 
 #ifdef __cplusplus

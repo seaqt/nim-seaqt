@@ -60,6 +60,7 @@ struct seaqt_string QCameraFocusControl_tr_s_c_n(const char* s, const char* c, i
 struct seaqt_string QCameraFocusControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraFocusControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QCameraFocusControl_staticMetaObject();
 void QCameraFocusControl_delete(QCameraFocusControl* self);
 
 #ifdef __cplusplus

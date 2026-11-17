@@ -45,6 +45,7 @@ struct seaqt_string QCameraLocksControl_tr_s_c_n(const char* s, const char* c, i
 struct seaqt_string QCameraLocksControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraLocksControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QCameraLocksControl_staticMetaObject();
 void QCameraLocksControl_delete(QCameraLocksControl* self);
 
 #ifdef __cplusplus

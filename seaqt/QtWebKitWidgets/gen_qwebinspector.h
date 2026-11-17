@@ -225,6 +225,7 @@ int QWebInspector_protectedbase_senderSignalIndex(const VirtualQWebInspector* se
 int QWebInspector_protectedbase_receivers(const VirtualQWebInspector* self, const char* signal);
 bool QWebInspector_protectedbase_isSignalConnected(const VirtualQWebInspector* self, QMetaMethod* signal);
 
+const QMetaObject* QWebInspector_staticMetaObject();
 void QWebInspector_delete(QWebInspector* self);
 
 #ifdef __cplusplus

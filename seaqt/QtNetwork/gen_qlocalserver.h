@@ -110,6 +110,7 @@ int QLocalServer_protectedbase_senderSignalIndex(const VirtualQLocalServer* self
 int QLocalServer_protectedbase_receivers(const VirtualQLocalServer* self, const char* signal);
 bool QLocalServer_protectedbase_isSignalConnected(const VirtualQLocalServer* self, QMetaMethod* signal);
 
+const QMetaObject* QLocalServer_staticMetaObject();
 void QLocalServer_delete(QLocalServer* self);
 
 #ifdef __cplusplus

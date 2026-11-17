@@ -174,6 +174,7 @@ int QIODevice_protectedbase_senderSignalIndex(const VirtualQIODevice* self);
 int QIODevice_protectedbase_receivers(const VirtualQIODevice* self, const char* signal);
 bool QIODevice_protectedbase_isSignalConnected(const VirtualQIODevice* self, QMetaMethod* signal);
 
+const QMetaObject* QIODevice_staticMetaObject();
 void QIODevice_delete(QIODevice* self);
 
 #ifdef __cplusplus

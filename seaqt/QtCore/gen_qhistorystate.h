@@ -105,6 +105,7 @@ void QHistoryState_connect_defaultTransitionChanged(QHistoryState* self, intptr_
 void QHistoryState_connect_defaultStateChanged(QHistoryState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QHistoryState_connect_historyTypeChanged(QHistoryState* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QHistoryState_staticMetaObject();
 void QHistoryState_delete(QHistoryState* self);
 
 #ifdef __cplusplus

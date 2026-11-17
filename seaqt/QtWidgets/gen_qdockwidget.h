@@ -250,6 +250,7 @@ int QDockWidget_protectedbase_senderSignalIndex(const VirtualQDockWidget* self);
 int QDockWidget_protectedbase_receivers(const VirtualQDockWidget* self, const char* signal);
 bool QDockWidget_protectedbase_isSignalConnected(const VirtualQDockWidget* self, QMetaMethod* signal);
 
+const QMetaObject* QDockWidget_staticMetaObject();
 void QDockWidget_delete(QDockWidget* self);
 
 #ifdef __cplusplus

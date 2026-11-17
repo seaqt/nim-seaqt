@@ -45,6 +45,7 @@ struct seaqt_string QCameraImageProcessingControl_tr_s_c_n(const char* s, const 
 struct seaqt_string QCameraImageProcessingControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraImageProcessingControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QCameraImageProcessingControl_staticMetaObject();
 void QCameraImageProcessingControl_delete(QCameraImageProcessingControl* self);
 
 #ifdef __cplusplus

@@ -98,6 +98,7 @@ int QKeyEventTransition_protectedbase_senderSignalIndex(const VirtualQKeyEventTr
 int QKeyEventTransition_protectedbase_receivers(const VirtualQKeyEventTransition* self, const char* signal);
 bool QKeyEventTransition_protectedbase_isSignalConnected(const VirtualQKeyEventTransition* self, QMetaMethod* signal);
 
+const QMetaObject* QKeyEventTransition_staticMetaObject();
 void QKeyEventTransition_delete(QKeyEventTransition* self);
 
 #ifdef __cplusplus

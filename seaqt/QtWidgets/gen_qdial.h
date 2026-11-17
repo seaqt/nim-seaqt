@@ -240,6 +240,7 @@ int QDial_protectedbase_senderSignalIndex(const VirtualQDial* self);
 int QDial_protectedbase_receivers(const VirtualQDial* self, const char* signal);
 bool QDial_protectedbase_isSignalConnected(const VirtualQDial* self, QMetaMethod* signal);
 
+const QMetaObject* QDial_staticMetaObject();
 void QDial_delete(QDial* self);
 
 #ifdef __cplusplus

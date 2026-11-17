@@ -83,6 +83,7 @@ double QCborStreamReader_toDouble(const QCborStreamReader* self);
 long long QCborStreamReader_toInteger(const QCborStreamReader* self);
 bool QCborStreamReader_next_maxRecursion(QCborStreamReader* self, int maxRecursion);
 
+const QMetaObject* QCborStreamReader_staticMetaObject();
 void QCborStreamReader_delete(QCborStreamReader* self);
 
 #ifdef __cplusplus

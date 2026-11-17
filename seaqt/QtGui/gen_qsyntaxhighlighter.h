@@ -109,6 +109,7 @@ int QSyntaxHighlighter_protectedbase_senderSignalIndex(const VirtualQSyntaxHighl
 int QSyntaxHighlighter_protectedbase_receivers(const VirtualQSyntaxHighlighter* self, const char* signal);
 bool QSyntaxHighlighter_protectedbase_isSignalConnected(const VirtualQSyntaxHighlighter* self, QMetaMethod* signal);
 
+const QMetaObject* QSyntaxHighlighter_staticMetaObject();
 void QSyntaxHighlighter_delete(QSyntaxHighlighter* self);
 
 #ifdef __cplusplus

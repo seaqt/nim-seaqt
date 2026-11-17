@@ -223,6 +223,7 @@ bool QAbstractProxyModel_protectedbase_isSignalConnected(const VirtualQAbstractP
 
 void QAbstractProxyModel_connect_sourceModelChanged(QAbstractProxyModel* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 
+const QMetaObject* QAbstractProxyModel_staticMetaObject();
 void QAbstractProxyModel_delete(QAbstractProxyModel* self);
 
 #ifdef __cplusplus

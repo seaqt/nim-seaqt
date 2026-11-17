@@ -99,6 +99,7 @@ int QAudioRecorder_protectedbase_senderSignalIndex(const VirtualQAudioRecorder* 
 int QAudioRecorder_protectedbase_receivers(const VirtualQAudioRecorder* self, const char* signal);
 bool QAudioRecorder_protectedbase_isSignalConnected(const VirtualQAudioRecorder* self, QMetaMethod* signal);
 
+const QMetaObject* QAudioRecorder_staticMetaObject();
 void QAudioRecorder_delete(QAudioRecorder* self);
 
 #ifdef __cplusplus

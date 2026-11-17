@@ -85,6 +85,7 @@ int QStylePlugin_protectedbase_senderSignalIndex(const VirtualQStylePlugin* self
 int QStylePlugin_protectedbase_receivers(const VirtualQStylePlugin* self, const char* signal);
 bool QStylePlugin_protectedbase_isSignalConnected(const VirtualQStylePlugin* self, QMetaMethod* signal);
 
+const QMetaObject* QStylePlugin_staticMetaObject();
 void QStylePlugin_delete(QStylePlugin* self);
 
 #ifdef __cplusplus

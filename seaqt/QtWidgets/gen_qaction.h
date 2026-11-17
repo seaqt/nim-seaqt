@@ -168,6 +168,7 @@ int QAction_protectedbase_senderSignalIndex(const VirtualQAction* self);
 int QAction_protectedbase_receivers(const VirtualQAction* self, const char* signal);
 bool QAction_protectedbase_isSignalConnected(const VirtualQAction* self, QMetaMethod* signal);
 
+const QMetaObject* QAction_staticMetaObject();
 void QAction_delete(QAction* self);
 
 #ifdef __cplusplus

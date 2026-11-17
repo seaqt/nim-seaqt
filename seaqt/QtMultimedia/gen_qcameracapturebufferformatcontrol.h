@@ -44,6 +44,7 @@ struct seaqt_string QCameraCaptureBufferFormatControl_tr_s_c_n(const char* s, co
 struct seaqt_string QCameraCaptureBufferFormatControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QCameraCaptureBufferFormatControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QCameraCaptureBufferFormatControl_staticMetaObject();
 void QCameraCaptureBufferFormatControl_delete(QCameraCaptureBufferFormatControl* self);
 
 #ifdef __cplusplus

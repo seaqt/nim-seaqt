@@ -200,6 +200,7 @@ int QQuickView_protectedbase_senderSignalIndex(const VirtualQQuickView* self);
 int QQuickView_protectedbase_receivers(const VirtualQQuickView* self, const char* signal);
 bool QQuickView_protectedbase_isSignalConnected(const VirtualQQuickView* self, QMetaMethod* signal);
 
+const QMetaObject* QQuickView_staticMetaObject();
 void QQuickView_delete(QQuickView* self);
 
 #ifdef __cplusplus

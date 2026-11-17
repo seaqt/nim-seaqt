@@ -54,6 +54,7 @@ struct seaqt_string QMetaDataWriterControl_tr_s_c_n(const char* s, const char* c
 struct seaqt_string QMetaDataWriterControl_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QMetaDataWriterControl_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QMetaDataWriterControl_staticMetaObject();
 void QMetaDataWriterControl_delete(QMetaDataWriterControl* self);
 
 #ifdef __cplusplus

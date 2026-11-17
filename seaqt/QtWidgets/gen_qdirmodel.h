@@ -229,6 +229,7 @@ int QDirModel_protectedbase_senderSignalIndex(const VirtualQDirModel* self);
 int QDirModel_protectedbase_receivers(const VirtualQDirModel* self, const char* signal);
 bool QDirModel_protectedbase_isSignalConnected(const VirtualQDirModel* self, QMetaMethod* signal);
 
+const QMetaObject* QDirModel_staticMetaObject();
 void QDirModel_delete(QDirModel* self);
 
 #ifdef __cplusplus

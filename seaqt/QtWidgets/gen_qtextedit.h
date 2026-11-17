@@ -419,6 +419,7 @@ int QTextEdit_protectedbase_senderSignalIndex(const VirtualQTextEdit* self);
 int QTextEdit_protectedbase_receivers(const VirtualQTextEdit* self, const char* signal);
 bool QTextEdit_protectedbase_isSignalConnected(const VirtualQTextEdit* self, QMetaMethod* signal);
 
+const QMetaObject* QTextEdit_staticMetaObject();
 void QTextEdit_delete(QTextEdit* self);
 
 QTextEdit__ExtraSelection* QTextEdit__ExtraSelection_new(QTextEdit__ExtraSelection* from);

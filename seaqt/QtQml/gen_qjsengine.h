@@ -108,6 +108,7 @@ int QJSEngine_protectedbase_senderSignalIndex(const VirtualQJSEngine* self);
 int QJSEngine_protectedbase_receivers(const VirtualQJSEngine* self, const char* signal);
 bool QJSEngine_protectedbase_isSignalConnected(const VirtualQJSEngine* self, QMetaMethod* signal);
 
+const QMetaObject* QJSEngine_staticMetaObject();
 void QJSEngine_delete(QJSEngine* self);
 
 #ifdef __cplusplus

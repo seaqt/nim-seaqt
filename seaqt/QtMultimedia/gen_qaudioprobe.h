@@ -93,6 +93,7 @@ int QAudioProbe_protectedbase_senderSignalIndex(const VirtualQAudioProbe* self);
 int QAudioProbe_protectedbase_receivers(const VirtualQAudioProbe* self, const char* signal);
 bool QAudioProbe_protectedbase_isSignalConnected(const VirtualQAudioProbe* self, QMetaMethod* signal);
 
+const QMetaObject* QAudioProbe_staticMetaObject();
 void QAudioProbe_delete(QAudioProbe* self);
 
 #ifdef __cplusplus

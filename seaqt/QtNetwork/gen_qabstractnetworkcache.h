@@ -78,6 +78,7 @@ struct seaqt_string QAbstractNetworkCache_tr_s_c_n(const char* s, const char* c,
 struct seaqt_string QAbstractNetworkCache_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QAbstractNetworkCache_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QAbstractNetworkCache_staticMetaObject();
 void QAbstractNetworkCache_delete(QAbstractNetworkCache* self);
 
 #ifdef __cplusplus

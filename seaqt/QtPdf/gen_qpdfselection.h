@@ -36,6 +36,7 @@ int QPdfSelection_endIndex(const QPdfSelection* self);
 void QPdfSelection_copyToClipboard(const QPdfSelection* self);
 void QPdfSelection_copyToClipboard_mode(const QPdfSelection* self, int mode);
 
+const QMetaObject* QPdfSelection_staticMetaObject();
 void QPdfSelection_delete(QPdfSelection* self);
 
 #ifdef __cplusplus

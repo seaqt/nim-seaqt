@@ -43,6 +43,7 @@ struct seaqt_array /* of struct seaqt_string */  QWebEngineContextMenuData_spell
 int QWebEngineContextMenuData_mediaFlags(const QWebEngineContextMenuData* self);
 int QWebEngineContextMenuData_editFlags(const QWebEngineContextMenuData* self);
 
+const QMetaObject* QWebEngineContextMenuData_staticMetaObject();
 void QWebEngineContextMenuData_delete(QWebEngineContextMenuData* self);
 
 #ifdef __cplusplus

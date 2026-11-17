@@ -88,6 +88,7 @@ int QWebHistoryInterface_protectedbase_senderSignalIndex(const VirtualQWebHistor
 int QWebHistoryInterface_protectedbase_receivers(const VirtualQWebHistoryInterface* self, const char* signal);
 bool QWebHistoryInterface_protectedbase_isSignalConnected(const VirtualQWebHistoryInterface* self, QMetaMethod* signal);
 
+const QMetaObject* QWebHistoryInterface_staticMetaObject();
 void QWebHistoryInterface_delete(QWebHistoryInterface* self);
 
 #ifdef __cplusplus

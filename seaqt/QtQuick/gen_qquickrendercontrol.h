@@ -105,6 +105,7 @@ int QQuickRenderControl_protectedbase_senderSignalIndex(const VirtualQQuickRende
 int QQuickRenderControl_protectedbase_receivers(const VirtualQQuickRenderControl* self, const char* signal);
 bool QQuickRenderControl_protectedbase_isSignalConnected(const VirtualQQuickRenderControl* self, QMetaMethod* signal);
 
+const QMetaObject* QQuickRenderControl_staticMetaObject();
 void QQuickRenderControl_delete(QQuickRenderControl* self);
 
 #ifdef __cplusplus

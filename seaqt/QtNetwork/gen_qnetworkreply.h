@@ -101,6 +101,7 @@ struct seaqt_string QNetworkReply_tr_s_c_n(const char* s, const char* c, int n);
 struct seaqt_string QNetworkReply_trUtf8_s_c(const char* s, const char* c);
 struct seaqt_string QNetworkReply_trUtf8_s_c_n(const char* s, const char* c, int n);
 
+const QMetaObject* QNetworkReply_staticMetaObject();
 void QNetworkReply_delete(QNetworkReply* self);
 
 #ifdef __cplusplus

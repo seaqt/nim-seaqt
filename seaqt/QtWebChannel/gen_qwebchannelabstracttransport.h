@@ -87,6 +87,7 @@ int QWebChannelAbstractTransport_protectedbase_senderSignalIndex(const VirtualQW
 int QWebChannelAbstractTransport_protectedbase_receivers(const VirtualQWebChannelAbstractTransport* self, const char* signal);
 bool QWebChannelAbstractTransport_protectedbase_isSignalConnected(const VirtualQWebChannelAbstractTransport* self, QMetaMethod* signal);
 
+const QMetaObject* QWebChannelAbstractTransport_staticMetaObject();
 void QWebChannelAbstractTransport_delete(QWebChannelAbstractTransport* self);
 
 #ifdef __cplusplus

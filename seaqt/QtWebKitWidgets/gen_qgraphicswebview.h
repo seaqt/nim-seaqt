@@ -343,6 +343,7 @@ void QGraphicsWebView_protectedbase_prepareGeometryChange(VirtualQGraphicsWebVie
 void QGraphicsWebView_protectedbase_setGraphicsItem(VirtualQGraphicsWebView* self, QGraphicsItem* item);
 void QGraphicsWebView_protectedbase_setOwnedByLayout(VirtualQGraphicsWebView* self, bool ownedByLayout);
 
+const QMetaObject* QGraphicsWebView_staticMetaObject();
 void QGraphicsWebView_delete(QGraphicsWebView* self);
 
 #ifdef __cplusplus

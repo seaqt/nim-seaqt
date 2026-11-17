@@ -33,6 +33,7 @@ bool QSurface_supportsOpenGL(const QSurface* self);
 QSize* QSurface_size(const QSurface* self);
 void QSurface_operatorAssign(QSurface* self, QSurface* from);
 
+const QMetaObject* QSurface_staticMetaObject();
 void QSurface_delete(QSurface* self);
 
 #ifdef __cplusplus

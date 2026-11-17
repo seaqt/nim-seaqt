@@ -239,6 +239,7 @@ int QFrame_protectedbase_senderSignalIndex(const VirtualQFrame* self);
 int QFrame_protectedbase_receivers(const VirtualQFrame* self, const char* signal);
 bool QFrame_protectedbase_isSignalConnected(const VirtualQFrame* self, QMetaMethod* signal);
 
+const QMetaObject* QFrame_staticMetaObject();
 void QFrame_delete(QFrame* self);
 
 #ifdef __cplusplus

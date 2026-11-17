@@ -139,6 +139,7 @@ int QCameraImageCapture_protectedbase_senderSignalIndex(const VirtualQCameraImag
 int QCameraImageCapture_protectedbase_receivers(const VirtualQCameraImageCapture* self, const char* signal);
 bool QCameraImageCapture_protectedbase_isSignalConnected(const VirtualQCameraImageCapture* self, QMetaMethod* signal);
 
+const QMetaObject* QCameraImageCapture_staticMetaObject();
 void QCameraImageCapture_delete(QCameraImageCapture* self);
 
 #ifdef __cplusplus

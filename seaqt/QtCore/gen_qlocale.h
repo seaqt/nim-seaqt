@@ -181,6 +181,7 @@ struct seaqt_string QLocale_formattedDataSize_const_qint64_int(const QLocale* se
 struct seaqt_string QLocale_formattedDataSize_const_qint64_int_QLocale_DataSizeFormats(const QLocale* self, long long bytes, int precision, int format);
 struct seaqt_string QLocale_quoteString_QString_QLocale_QuotationStyle(const QLocale* self, struct seaqt_string str, int style);
 
+const QMetaObject* QLocale_staticMetaObject();
 void QLocale_delete(QLocale* self);
 
 #ifdef __cplusplus
